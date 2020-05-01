@@ -12,7 +12,7 @@ pages:
     paths:
       - node_modules/
   script:
-    - npm run generate
+    - npm run build
   artifacts:
     paths:
       - dist
