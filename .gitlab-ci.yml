@@ -18,8 +18,8 @@ before_script:
   ## without extra base64 encoding.
   ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
   ##
-  - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDjRQoqvSAXJ1XVNBEyvmIMBMV+mfm6fY1pu1+uXRVChFDNh2STQFMJjqH78PDRPeqLa9Ma1sR9fG97jznNTwPIt8hU6yYs8w84Y16LQMCf5ex0C5ZES3qb5Ty2DQ/hciIylpQExguZ8YAxa7UqwmX6bkGw08Vs03uOaLbGcCA5a/CIPHn2MgaYWKuRkM18knpESSg1ixbdVdAIFuz3+H8kbtoRZedcbQQAlx7NPl0xaUHCRiea5du64Z7/SPEEGKHNgh6nZTCXNI02SFbF0BkhCNdNrbyOTZ2CluGS9fNz8TVLa0IA04vQzaFAPbUoUpXskHaEZnghJljfim1GJbhtGjDOfJoQnxjaATMI/dfqzUC88E4r7yS+EDJC6IQkNSMdqHmRt5UNx4O0215VNAEDcPdTwGhEme2MJEMlddFDMY2m9sBu6p4MRDh+1PjMCNV9qtz+y65w1ZvFJFTydQ/ScuhmGCfXa5zuhlqrnxPQp6BivX5UrtkFyDH7jEfzLOzDOpe/VnpsYz5s0mLr8VJU9KNR/i76B+WM/8ZsmW4DooCvWtfyVLyiur3z1ZBiw5ei9mdxao2cQC24f95OhfzkL7YH4R11R41FkBydY8c29TSaBVoIkSUrsMeh+5okGvTF9u6x1vbpbb6g6UYHtq/BUnGNsW9KjtoOUzFkYj9aUQ== gitlab"
-  - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDjRQoqvSAXJ1XVNBEyvmIMBMV+mfm6fY1pu1+uXRVChFDNh2STQFMJjqH78PDRPeqLa9Ma1sR9fG97jznNTwPIt8hU6yYs8w84Y16LQMCf5ex0C5ZES3qb5Ty2DQ/hciIylpQExguZ8YAxa7UqwmX6bkGw08Vs03uOaLbGcCA5a/CIPHn2MgaYWKuRkM18knpESSg1ixbdVdAIFuz3+H8kbtoRZedcbQQAlx7NPl0xaUHCRiea5du64Z7/SPEEGKHNgh6nZTCXNI02SFbF0BkhCNdNrbyOTZ2CluGS9fNz8TVLa0IA04vQzaFAPbUoUpXskHaEZnghJljfim1GJbhtGjDOfJoQnxjaATMI/dfqzUC88E4r7yS+EDJC6IQkNSMdqHmRt5UNx4O0215VNAEDcPdTwGhEme2MJEMlddFDMY2m9sBu6p4MRDh+1PjMCNV9qtz+y65w1ZvFJFTydQ/ScuhmGCfXa5zuhlqrnxPQp6BivX5UrtkFyDH7jEfzLOzDOpe/VnpsYz5s0mLr8VJU9KNR/i76B+WM/8ZsmW4DooCvWtfyVLyiur3z1ZBiw5ei9mdxao2cQC24f95OhfzkL7YH4R11R41FkBydY8c29TSaBVoIkSUrsMeh+5okGvTF9u6x1vbpbb6g6UYHtq/BUnGNsW9KjtoOUzFkYj9aUQ== gitlab" | tr -d '\r' | ssh-add -
+  - echo "$SSH_PRIVATE_KEY"
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
 
   ##
   ## Create the SSH directory and give it the right permissions
