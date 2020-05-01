@@ -1,14 +1,21 @@
-before_script:
-  - mkdir -p ~/.ssh
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-  - chmod 600 ~/.ssh/id_rsa
-  - ssh-keyscan -H '159.65.241.57' >> ~/.ssh/known_hosts
-stages:
-  - deploy
+image: node:6.10-alpine
 
-deploy_to_dokku:
-stage: deploy
-script:
-  - git checkout master
-  - git pull
-  - git-push dokku@159.65.241.57:template-nuxt-app
+before_script:
+  - npm install
+
+stages:
+  - pages
+
+pages:
+  stage: pages
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - npm run generate
+  artifacts:
+    paths:
+      - dist
+  only:
+    - master
+  # - git-push dokku@159.65.241.57:template-nuxt-app
