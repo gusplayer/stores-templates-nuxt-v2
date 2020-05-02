@@ -11,10 +11,10 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
    ** Customize the progress-bar color
@@ -23,25 +23,28 @@ export default {
   /*
    ** Global CSS
    */
+
   css: [
     'element-ui/lib/theme-chalk/index.css',
     '~/assets/css/main.css',
     'swiper/dist/css/swiper.css',
-    'aos/dist/aos.css'
+    'aos/dist/aos.css',
+    'core-components-npm/dist/ko.css',
   ],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '@/plugins/aos.js', ssr: false },
-    '~/plugins/element',
     '~/plugins/components',
+    '~/plugins/element',
+    // '~/plugins/firebase',
     '~/plugins/mixinCommonMethods',
     '~/plugins/cloudinary',
     '~/plugins/material-icons',
+    { src: '@/plugins/aos.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
-    { src: '~/plugins/swiper.js', ssr: false },
-    { src: '~/plugins/vue-carrusel.js', ssr: false }
+    { src: './plugins/swiper.js', ssr: false },
+    { src: '~/plugins/vue-carrusel.js', ssr: false },
   ],
   /*
    ** Nuxt.js dev-modules
@@ -53,7 +56,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
   ],
   /*
    ** Axios module configuration
@@ -67,6 +70,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  }
+    extend(config, ctx) {},
+  },
 }

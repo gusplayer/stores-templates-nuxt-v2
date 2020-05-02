@@ -8,20 +8,16 @@
         <router-link :to="`/listadoproductos`" class="card product-card">
           <div class="item">Productos</div>
         </router-link>
-        <!-- <router-link :to="`/detalleproducto`" class="card product-card">
+        <router-link :to="`/detalleproducto`" class="card product-card">
           <div class="item">Detalle de productos</div>
-        </router-link> -->
+        </router-link>
         <router-link :to="`/contacto`" class="card product-card">
           <div class="item">Contacto</div>
         </router-link>
         <router-link :to="`/constructor`" class="card product-card">
           <div class="item">constructor</div>
         </router-link>
-        <el-select
-          @change="getDataTienda()"
-          v-model="currentStoreData"
-          placeholder="Tiendas"
-        >
+        <el-select @change="getDataTienda()" v-model="currentStoreData" placeholder="Tiendas">
           <el-option
             v-for="item in stores"
             :key="item.value"
@@ -33,20 +29,7 @@
 
       <div class="linea" />
       <nuxt />
-      <!-- <KoBanner2
-        :dataStore="dataStore"
-        :Settings="getSettingsCSS.length ? getSettingsCSS : []"
-        :fullProducts="
-          nameCurrentComponent.includes('ProductList') ? fullProducts : ''
-        "
-      ></KoBanner2> -->
-      <KoNewsletter1
-        :dataStore="dataStore"
-        :Settings="getSettingsCSS"
-        :fullProducts="
-          nameCurrentComponent.includes('ProductList') ? fullProducts : ''
-        "
-      ></KoNewsletter1>
+
       <KoFooter1
         :dataStore="dataStore"
         :currentSettingsFooter="getSettingsCSS"
