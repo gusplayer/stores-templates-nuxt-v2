@@ -13,24 +13,24 @@ deploy_prod:
 
     # - git config --add remote.dokku.fetch +refs/heads/*:refs/remotes/dokku/*
     # verifica se seu container atual possui ssh, caso contrário instala
-    # - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    #  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     # inicia o ssh-agent em background
-    # - eval $(ssh-agent -s)
+    #  - eval $(ssh-agent -s)
     # cria a pasta de ssh
     # - mkdir -p ~/.ssh
     # cria o arquivo de ssh config para ignorar o passo de verificar se é pra adicionar a atual ssh ao arquivo de known_hosts
-    # - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    # - chmod 400 ~/.ssh/
+    #  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    #  - chmod 400 ~/.ssh/
     # Cria o arquivo de chave pública
-    # - touch ~/.ssh/id_rsa.pub
+    #  - touch ~/.ssh/id_rsa.pub
     # copia o conteudo da chave pública do gitlab CI para o arquivo criado
-    # - echo "$PUBLIC_KEY" >> ~/.ssh/id_rsa.pub
+    #  - echo "$PUBLIC_KEY" >> ~/.ssh/id_rsa.pub
     # inclui a chave privada
-    # - ssh-add <(echo "$PRIVATE_KEY")
+    #  - ssh-add <(echo "$PRIVATE_KEY")
     # faz o push no droplet para que o deploy seja realmente iniciado
     - git remote add dokku dokku@159.65.241.57:nuxt-app
     # - git push dokku master
-    - git push dokku@159.65.241.57:nuxt-app HEAD:master
+    - git push dokku master
   # define em quais branches essa tarefa deverá ser executada
   only:
     - master

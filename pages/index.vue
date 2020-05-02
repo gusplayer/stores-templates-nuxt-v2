@@ -1,31 +1,64 @@
 <template>
   <div class="wrapper-container">
     <div class="container">
-      <h1 class="text">Componentes</h1>
-      <button @click="leer">Mostrar</button>
-      <div v-if="estado">
-        <!-- <div
-          :is="componentFile"
-          :dataStore="dataStore"
-          :Settings="getSettingsCSS"
-          :fullProducts="
-            nameCurrentComponent.includes('ProductList') ? fullProducts : ''
-          "
-        ></div>-->
-        <KoSeparator1
-          :is="componentFile"
-          :dataStore="dataStore"
-          :Settings="getSettingsCSS"
-          :fullProducts="
-            nameCurrentComponent.includes('ProductList') ? fullProducts : ''
-          "
-        ></KoSeparator1>
+      <div class="header">
+        <router-link :to="`/`" class="card product-card">
+          <div class="item">Inicio</div>
+        </router-link>
+        <router-link :to="`/listadoproductos`" class="card product-card">
+          <div class="item">Productos</div>
+        </router-link>
+        <!-- <router-link :to="`/detalleproducto`" class="card product-card">
+          <div class="item">Detalle de productos</div>
+        </router-link> -->
+        <router-link :to="`/contacto`" class="card product-card">
+          <div class="item">Contacto</div>
+        </router-link>
+        <router-link :to="`/constructor`" class="card product-card">
+          <div class="item">constructor</div>
+        </router-link>
+        <el-select
+          @change="getDataTienda()"
+          v-model="currentStoreData"
+          placeholder="Tiendas"
+        >
+          <el-option
+            v-for="item in stores"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
       </div>
+
+      <div class="linea" />
+      <nuxt />
+      <!-- <KoBanner2
+        :dataStore="dataStore"
+        :Settings="getSettingsCSS.length ? getSettingsCSS : []"
+        :fullProducts="
+          nameCurrentComponent.includes('ProductList') ? fullProducts : ''
+        "
+      ></KoBanner2> -->
+      <KoNewsletter1
+        :dataStore="dataStore"
+        :Settings="getSettingsCSS"
+        :fullProducts="
+          nameCurrentComponent.includes('ProductList') ? fullProducts : ''
+        "
+      ></KoNewsletter1>
+      <KoFooter1
+        :dataStore="dataStore"
+        :currentSettingsFooter="getSettingsCSS"
+        :fullProducts="
+          nameCurrentComponent.includes('ProductList') ? fullProducts : ''
+        "
+      ></KoFooter1>
     </div>
   </div>
 </template>
 <script>
-import API from '../components/constructor/api'
+import API from '../components/conctructor/api'
 
 export default {
   async mounted() {
@@ -34,47 +67,34 @@ export default {
     this.$store.dispatch('GET_STORELAYOUT')
     this.tiposComponentes = await API.getTipoComponente()
     this.listadoComponentes = await API.getReferenciasComponente()
+    if (this.token.length) {
+      this.$store.dispatch('GET_SETTINGS_COMPONENT', 96)
+    }
   },
   data() {
     return {
       estado: false,
       selectedComponent: true,
-      fileTipos: { name: 'separators' },
-      SettingsComponentes: '',
-      nameCurrentComponent: 'Ko-Separator-1'
+      nameCurrentComponent: 'ProductList',
+      currentStoreData: '',
+      stores: [
+        { value: 1, label: 'Topalxe' },
+        { value: 347, label: 'Ohlala' },
+        { value: 364, label: "Ace Delivery's" },
+        { value: 1108, label: 'Familia Comepasto' },
+        { value: 889, label: 'Perfecta' },
+        { value: 605, label: 'Origen SP' },
+        { value: 582, label: 'Tu Tienda' },
+        { value: 1100, label: 'Macrobrand' },
+        { value: 1559, label: 'Sticker Hipster' },
+        { value: 1429, label: 'boom Store Colombia' },
+        { value: 1359, label: 'Señora pepa' }
+      ]
     }
   },
   computed: {
-    componentFile() {
-      if (this.selectedComponent) {
-        // console.log(this.fileTipos.name.toLowerCase())
-        if ('headers' == this.fileTipos.name.toLowerCase()) {
-          this.SettingsComponentes = 'headers'
-        }
-        if (
-          'banners' == this.fileTipos.name.toLowerCase() ||
-          'contents' == this.fileTipos.name.toLowerCase() ||
-          'separators' == this.fileTipos.name.toLowerCase() ||
-          'videos' == this.fileTipos.name.toLowerCase() ||
-          'carts' == this.fileTipos.name.toLowerCase() ||
-          'productdetails' == this.fileTipos.name.toLowerCase() ||
-          'newsletter' == this.fileTipos.name.toLowerCase() ||
-          'contacts' == this.fileTipos.name.toLowerCase() ||
-          'productlist' == this.fileTipos.name.toLowerCase()
-        ) {
-          this.SettingsComponentes = 'general'
-        }
-        if ('footers' == this.fileTipos.name.toLowerCase()) {
-          this.SettingsComponentes = 'footers'
-        }
-
-        return () =>
-          import(
-            `../../../core-components-npm/src/components/${this.fileTipos.name.toLowerCase()}/${
-              this.nameCurrentComponent
-            }`
-          )
-      }
+    token() {
+      return this.$store.state.accessToken
     },
     dataStore() {
       return this.$store.state.dataStore
@@ -87,13 +107,8 @@ export default {
     }
   },
   methods: {
-    leer() {
-      if (this.estado == false) {
-        this.estado = true
-        this.$store.dispatch('GET_SETTINGS_COMPONENT', 91)
-      } else {
-        this.estado = false
-      }
+    getDataTienda() {
+      this.$store.dispatch('GET_DATA_TIENDA_BY_ID', this.currentStoreData)
     }
   },
   watch: {
@@ -122,5 +137,41 @@ export default {
 }
 .text {
   color: black;
+}
+.btn {
+  font-size: 15px;
+  font-weight: bold;
+  color: #4429b4;
+  border: 1.5px solid #4429b4;
+  background: transparent;
+  border-radius: 10px;
+  padding: 5px 10px;
+  width: 160px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  text-decoration: none;
+  text-align: center;
+}
+.linea {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 2px;
+  background: #4429b4;
+}
+.btn:hover {
+  color: #00dd8d;
+  border: 1.5px solid #00dd8d;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1300px;
+  padding: 20px 30px;
 }
 </style>
