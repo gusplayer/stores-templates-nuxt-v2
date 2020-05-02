@@ -8,15 +8,15 @@
         <router-link :to="`/listadoproductos`" class="card product-card">
           <div class="item">Productos</div>
         </router-link>
-        <router-link :to="`/detalleproducto`" class="card product-card">
+        <!-- <router-link :to="`/detalleproducto`" class="card product-card">
           <div class="item">Detalle de productos</div>
-        </router-link>
+        </router-link>-->
         <router-link :to="`/contacto`" class="card product-card">
           <div class="item">Contacto</div>
         </router-link>
-        <router-link :to="`/constructor`" class="card product-card">
+        <!-- <router-link :to="`/constructor`" class="card product-card">
           <div class="item">constructor</div>
-        </router-link>
+        </router-link>-->
         <el-select @change="getDataTienda()" v-model="currentStoreData" placeholder="Tiendas">
           <el-option
             v-for="item in stores"
@@ -26,10 +26,8 @@
           ></el-option>
         </el-select>
       </div>
-
       <div class="linea" />
       <nuxt />
-
       <KoFooter1
         :dataStore="dataStore"
         :currentSettingsFooter="getSettingsCSS"
@@ -41,7 +39,7 @@
   </div>
 </template>
 <script>
-import API from '../components/conctructor/api'
+import API from '../components/constructor/api'
 
 export default {
   async mounted() {
