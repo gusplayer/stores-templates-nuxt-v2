@@ -1,6 +1,9 @@
 <template>
   <div class="wrapper-container">
     <div class="container">
+      <router-link :to="`/`" class="card product-card">
+        <div class="item">Inicio</div>
+      </router-link>
       <p>Listdo de productos</p>
       <br />
       <KoProductList1

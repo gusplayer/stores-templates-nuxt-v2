@@ -1,6 +1,9 @@
 <template>
   <div class="wrapper-container">
     <div class="container">
+      <router-link :to="`/`" class="card product-card">
+        <div class="item">Inicio</div>
+      </router-link>
       <p>Contacto</p>
       <br />
       <KoContact1
@@ -14,7 +17,7 @@
   </div>
 </template>
 <script>
-import API from '../components/conctructor/'
+import API from '../components/constructor/api'
 
 export default {
   created() {
