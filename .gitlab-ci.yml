@@ -9,8 +9,8 @@ deploy_prod:
   # definição de comandos necessários para essa tarefa
   script:
     # adiciona a aplicação do dokku e seus branches no arquivo de configuração do git
-    - git config --add remote.dokku.url dokku@159.65.241.57:nuxt-app
-    - git config --add remote.dokku.fetch +refs/heads/*:refs/remotes/dokku/*
+    - git remote add dokku dokku@159.65.241.57:nuxt-app
+    # - git config --add remote.dokku.fetch +refs/heads/*:refs/remotes/dokku/*
     # verifica se seu container atual possui ssh, caso contrário instala
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     # inicia o ssh-agent em background
