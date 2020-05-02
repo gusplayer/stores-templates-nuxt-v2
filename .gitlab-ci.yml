@@ -30,7 +30,7 @@ deploy_prod:
     # faz o push no droplet para que o deploy seja realmente iniciado
     - git remote add dokku dokku@159.65.241.57:nuxt-app
     # - git push dokku master
-    - git-push dokku@159.65.241.57:nuxt-app
+    - git push dokku@159.65.241.57:nuxt-app
   # define em quais branches essa tarefa deverá ser executada
   only:
     - master
