@@ -37,7 +37,6 @@ export default {
   plugins: [
     '~/plugins/components',
     '~/plugins/element',
-    // '~/plugins/firebase',
     '~/plugins/mixinCommonMethods',
     '~/plugins/cloudinary',
     '~/plugins/material-icons',
