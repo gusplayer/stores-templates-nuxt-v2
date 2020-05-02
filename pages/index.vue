@@ -17,7 +17,11 @@
         <!-- <router-link :to="`/constructor`" class="card product-card">
           <div class="item">constructor</div>
         </router-link>-->
-        <el-select @change="getDataTienda()" v-model="currentStoreData" placeholder="Tiendas">
+        <el-select
+          @change="getDataTienda()"
+          v-model="currentStoreData"
+          placeholder="Tiendas"
+        >
           <el-option
             v-for="item in stores"
             :key="item.value"

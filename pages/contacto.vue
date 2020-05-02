@@ -34,7 +34,7 @@ export default {
     return {
       estado: false,
       selectedComponent: true,
-      nameCurrentComponent: 'ProductList',
+      nameCurrentComponent: 'ProductList'
     }
   },
   computed: {
@@ -46,14 +46,14 @@ export default {
     },
     getSettingsCSS() {
       return this.$store.getters.getSettingsCSS
-    },
+    }
   },
   methods: {},
   watch: {
     name(value) {
       return value
-    },
-  },
+    }
+  }
 }
 </script>
 
