@@ -2,7 +2,7 @@ import Vue from 'vue'
 import 'vue-material-design-icons/styles.css'
 import MenuIcon from 'vue-material-design-icons/Menu.vue'
 
-import Facebook from 'vue-material-design-icons/facebook.vue'
+import Facebook from 'vue-material-design-icons/Facebook.vue'
 import Twitter from 'vue-material-design-icons/Twitter.vue'
 import Google from 'vue-material-design-icons/Googleplus.vue'
 import Instagram from 'vue-material-design-icons/Instagram.vue'
