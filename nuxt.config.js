@@ -28,7 +28,7 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css',
     '~/assets/css/main.css',
-    'swiper/dist/css/swiper.css',
+    //'swiper/dist/css/swiper.css',
     'aos/dist/aos.css',
     // 'core-components-npm/dist/ko.css',
   ],
