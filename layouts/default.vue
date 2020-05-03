@@ -4,6 +4,23 @@
   </div>
 </template>
 
+<script>
+export default {
+  async asyncData({ params }) {
+    const slug = params.slug // When calling /abc the slug will be "abc"
+    return { slug }
+  },
+
+  //identificar tienda por URL
+  //  url = bistro.com
+  //  IdTienda = 3420
+  //  APi Productos = tiendas
+  //  Api diseño [color, logo, banner]
+  //id
+  //template: [editor, template1, template2,]
+}
+</script>
+
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
