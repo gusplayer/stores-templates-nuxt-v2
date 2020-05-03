@@ -36,7 +36,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/components',
+    // '~/plugins/components',
     '~/plugins/element',
     '~/plugins/mixinCommonMethods',
     '~/plugins/cloudinary',

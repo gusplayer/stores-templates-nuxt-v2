@@ -6,18 +6,18 @@
       </router-link>
       <p>Listdo de productos</p>
       <br />
-      <KoProductList1
+      <!-- <KoProductList1
         :dataStore="dataStore"
         :Settings="getSettingsCSS"
         :fullProducts="
           nameCurrentComponent.includes('ProductList') ? fullProducts : ''
         "
-      ></KoProductList1>
+      ></KoProductList1> -->
     </div>
   </div>
 </template>
 <script>
-import API from '../components/constructor/api'
+// import API from '../components/constructor/api'
 
 export default {
   created() {
@@ -34,7 +34,7 @@ export default {
     return {
       estado: false,
       selectedComponent: true,
-      nameCurrentComponent: 'ProductList'
+      nameCurrentComponent: 'ProductList',
     }
   },
   computed: {
@@ -46,14 +46,14 @@ export default {
     },
     getSettingsCSS() {
       return this.$store.getters.getSettingsCSS
-    }
+    },
   },
   methods: {},
   watch: {
     name(value) {
       return value
-    }
-  }
+    },
+  },
 }
 </script>
 
