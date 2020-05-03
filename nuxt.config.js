@@ -5,7 +5,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    // title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -15,7 +15,23 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        href:
+          'https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap',
+        rel: 'stylesheet',
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap',
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap',
+      },
+    ],
   },
   /*
    ** Customize the progress-bar color
@@ -28,7 +44,7 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css',
     '~/assets/css/main.css',
-    //'swiper/dist/css/swiper.css',
+    // 'swiper/dist/css/swiper.css',
     'aos/dist/aos.css',
     'core-components-npm/dist/ko.css',
   ],
@@ -36,14 +52,14 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/components',
+    '~/plugins/core-components-npm',
     '~/plugins/element',
     '~/plugins/mixinCommonMethods',
     '~/plugins/cloudinary',
-    // '~/plugins/material-icons',
+    '~/plugins/material-icons',
     { src: '@/plugins/aos.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
-    { src: './plugins/swiper.js', ssr: false },
+    // { src: '~/plugins/vue-awesome-swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
   ],
   /*
