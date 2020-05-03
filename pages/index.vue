@@ -3,7 +3,7 @@
     <div class="container">
       <div class="header">
         <router-link :to="`/`" class="card product-card">
-          <div class="item">Inicio</div>
+          <div class="item">Inicio-test</div>
         </router-link>
         <router-link :to="`/listadoproductos`" class="card product-card">
           <div class="item">Productos</div>
@@ -32,13 +32,13 @@
       </div>
       <div class="linea" />
       <nuxt />
-      <!-- <KoFooter1
+      <KoFooter1
         :dataStore="dataStore"
         :currentSettingsFooter="getSettingsCSS"
         :fullProducts="
           nameCurrentComponent.includes('ProductList') ? fullProducts : ''
         "
-      ></KoFooter1> -->
+      ></KoFooter1>
     </div>
   </div>
 </template>
@@ -73,8 +73,8 @@ export default {
         { value: 1100, label: 'Macrobrand' },
         { value: 1559, label: 'Sticker Hipster' },
         { value: 1429, label: 'boom Store Colombia' },
-        { value: 1359, label: 'Señora pepa' }
-      ]
+        { value: 1359, label: 'Señora pepa' },
+      ],
     }
   },
   computed: {
@@ -89,18 +89,18 @@ export default {
     },
     getSettingsCSS() {
       return this.$store.getters.getSettingsCSS
-    }
+    },
   },
   methods: {
     getDataTienda() {
       this.$store.dispatch('GET_DATA_TIENDA_BY_ID', this.currentStoreData)
-    }
+    },
   },
   watch: {
     name(value) {
       return value
-    }
-  }
+    },
+  },
 }
 </script>
 

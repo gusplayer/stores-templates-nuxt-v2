@@ -30,13 +30,13 @@ export default {
     '~/assets/css/main.css',
     //'swiper/dist/css/swiper.css',
     'aos/dist/aos.css',
-    // 'core-components-npm/dist/ko.css',
+    'core-components-npm/dist/ko.css',
   ],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    // '~/plugins/components',
+    '~/plugins/components',
     '~/plugins/element',
     '~/plugins/mixinCommonMethods',
     '~/plugins/cloudinary',
