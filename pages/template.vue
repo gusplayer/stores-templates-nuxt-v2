@@ -12,14 +12,14 @@
             nameCurrentComponent.includes('ProductList') ? fullProducts : ''
           "
         ></div>-->
-        <!-- <KoSeparator1
+        <KoSeparator1
           :is="componentFile"
           :dataStore="dataStore"
           :Settings="getSettingsCSS"
           :fullProducts="
             nameCurrentComponent.includes('ProductList') ? fullProducts : ''
           "
-        ></KoSeparator1> -->
+        ></KoSeparator1>
       </div>
     </div>
   </div>
