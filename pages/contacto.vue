@@ -6,13 +6,13 @@
       </router-link>
       <p>Contacto</p>
       <br />
-      <KoContact1
+      <!-- <KoContact1
         :dataStore="dataStore"
         :Settings="getSettingsCSS"
         :fullProducts="
           nameCurrentComponent.includes('ProductList') ? fullProducts : ''
         "
-      ></KoContact1>
+      ></KoContact1> -->
     </div>
   </div>
 </template>

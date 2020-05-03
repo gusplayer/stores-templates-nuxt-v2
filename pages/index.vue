@@ -32,13 +32,13 @@
       </div>
       <div class="linea" />
       <nuxt />
-      <KoFooter1
+      <!-- <KoFooter1
         :dataStore="dataStore"
         :currentSettingsFooter="getSettingsCSS"
         :fullProducts="
           nameCurrentComponent.includes('ProductList') ? fullProducts : ''
         "
-      ></KoFooter1>
+      ></KoFooter1> -->
     </div>
   </div>
 </template>
