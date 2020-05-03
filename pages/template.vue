@@ -12,20 +12,20 @@
             nameCurrentComponent.includes('ProductList') ? fullProducts : ''
           "
         ></div>-->
-        <KoSeparator1
+        <!-- <KoSeparator1
           :is="componentFile"
           :dataStore="dataStore"
           :Settings="getSettingsCSS"
           :fullProducts="
             nameCurrentComponent.includes('ProductList') ? fullProducts : ''
           "
-        ></KoSeparator1>
+        ></KoSeparator1> -->
       </div>
     </div>
   </div>
 </template>
 <script>
-import API from '../components/constructor/api'
+// import API from '../components/constructor/api'
 
 export default {
   async mounted() {
@@ -41,7 +41,7 @@ export default {
       selectedComponent: true,
       fileTipos: { name: 'separators' },
       SettingsComponentes: '',
-      nameCurrentComponent: 'Ko-Separator-1'
+      nameCurrentComponent: 'Ko-Separator-1',
     }
   },
   computed: {
@@ -84,7 +84,7 @@ export default {
     },
     getSettingsCSS() {
       return this.$store.getters.getSettingsCSS
-    }
+    },
   },
   methods: {
     leer() {
@@ -94,13 +94,13 @@ export default {
       } else {
         this.estado = false
       }
-    }
+    },
   },
   watch: {
     name(value) {
       return value
-    }
-  }
+    },
+  },
 }
 </script>
 
