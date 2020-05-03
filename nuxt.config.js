@@ -64,12 +64,12 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
-  resolve: {
-    root: [
-      path.resolve('.'),
-      path.resolve('../komercia-components/src/components'),
-    ],
-  },
+  // resolve: {
+  //   root: [
+  //     path.resolve('.'),
+  //     path.resolve('../komercia-components/src/components'),
+  //   ],
+  // },
   /*
    ** Build configuration
    */
