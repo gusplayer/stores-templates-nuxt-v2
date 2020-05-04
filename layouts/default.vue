@@ -16,10 +16,27 @@ export default {
     let full = window.location.host
     //window.location.host is subdomain.domain.com
     let parts = full.split('.')
-    let sub = parts[0]
+    let subdoman = parts[0]
     console.log(sub)
+    let arrayStores
 
-    let arrayStores = ['1', '1900', '3151', '347', '364', '1359', '1100']
+    if (subdoman == 'topalxe') {
+      arrayStores = 1
+    }
+    if (subdoman == 'perfecta') {
+      arrayStores = 889
+    }
+    if (subdoman == 'ohlala') {
+      arrayStores = 347
+    }
+    if (subdoman == 'macrobrand') {
+      arrayStores = 1100
+    }
+    if (subdoman == 'tutienda') {
+      arrayStores = 582
+    }
+
+    // let arrayStores = ['1', '1900', '3151', '347', '364', '1359', '1100']
     // let arrayStores = [
     //   { value: 1, label: 'Topalxe' },
     //   { value: 347, label: 'Ohlala' },
@@ -33,11 +50,11 @@ export default {
     //   { value: 1429, label: 'boom Store Colombia' },
     //   { value: 1359, label: 'Señora pepa' },
     // ]
-    const randomElement =
-      arrayStores[Math.floor(Math.random() * arrayStores.length)]
+    // const randomElement =
+    //   arrayStores[Math.floor(Math.random() * arrayStores.length)]
     // const randomElement = 1900
     this.$store.dispatch('GET_DATA')
-    this.$store.dispatch('GET_DATA_TIENDA_BY_ID', randomElement)
+    this.$store.dispatch('GET_DATA_TIENDA_BY_ID', arrayStores)
     await this.$store.dispatch('GET_LOGIN')
     // this.$store.dispatch('GET_STORELAYOUT')
     // this.tiposComponentes = await API.getTipoComponente()
