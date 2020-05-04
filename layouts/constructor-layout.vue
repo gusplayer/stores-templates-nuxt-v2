@@ -8,7 +8,7 @@
 <script>
 export default {
   mounted() {
-    this.$store.dispatch('GET_SHOPPING_CART')
+    // this.$store.dispatch('GET_SHOPPING_CART')
   },
 }
 </script>

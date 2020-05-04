@@ -23,6 +23,11 @@
         ></KoCart1> -->
       </div>
     </div>
+    <div>
+      <!-- <router-link :to="`/constructorK`" class="card product-card">
+        <div class="item">constructor</div>
+      </router-link> -->
+    </div>
   </div>
 </template>
 <script>

@@ -1,15 +1,15 @@
 <template lang="html">
   <div class="home">
-    <!-- <KoConstructor></KoConstructor> -->
+    <KoConstructor></KoConstructor>
   </div>
 </template>
 
 <script>
-// import KoConstructor from '../components/constructor/constructor'
+import KoConstructor from '../components/constructor/constructor'
 
 export default {
   components: {
-    // KoConstructor,
+    KoConstructor,
   },
 }
 </script>
