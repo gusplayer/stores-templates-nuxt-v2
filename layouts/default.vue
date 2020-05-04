@@ -20,7 +20,7 @@ export default {
     let sub = parts[0]
     console.log(sub)
 
-    let arrayStores = ['1', '1900', '3151', '347', '364', '1359']
+    let arrayStores = ['1', '1900', '3151', '347', '364', '1359', '1100']
     // let arrayStores = [
     //   { value: 1, label: 'Topalxe' },
     //   { value: 347, label: 'Ohlala' },
