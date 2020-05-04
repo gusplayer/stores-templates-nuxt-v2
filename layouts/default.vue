@@ -10,46 +10,45 @@
 </template>
 
 <script>
+import API from '../components/constructor/_api/api'
+
 export default {
-  async asyncData({ params }) {
-    const slug = params.slug // When calling /abc the slug will be "abc"
-    return { slug }
+  async mounted() {
+    let full = window.location.host
+    //window.location.host is subdomain.domain.com
+    let parts = full.split('.')
+    let sub = parts[0]
+    console.log(sub)
+
+    let arrayStores = ['1', '1900', '3151', '347', '364', '1359']
+    // let arrayStores = [
+    //   { value: 1, label: 'Topalxe' },
+    //   { value: 347, label: 'Ohlala' },
+    //   { value: 364, label: "Ace Delivery's" },
+    //   { value: 1108, label: 'Familia Comepasto' },
+    //   { value: 889, label: 'Perfecta' },
+    //   { value: 605, label: 'Origen SP' },
+    //   { value: 582, label: 'Tu Tienda' },
+    //   { value: 1100, label: 'Macrobrand' },
+    //   { value: 1559, label: 'Sticker Hipster' },
+    //   { value: 1429, label: 'boom Store Colombia' },
+    //   { value: 1359, label: 'Señora pepa' },
+    // ]
+    const randomElement =
+      arrayStores[Math.floor(Math.random() * arrayStores.length)]
+    // const randomElement = 1900
+    this.$store.dispatch('GET_DATA')
+    this.$store.dispatch('GET_DATA_TIENDA_BY_ID', randomElement)
+    await this.$store.dispatch('GET_LOGIN')
+    this.$store.dispatch('GET_STORELAYOUT')
+    this.tiposComponentes = await API.getTipoComponente()
+    this.listadoComponentes = await API.getReferenciasComponente()
+    // if (this.token.length) {
+    //   this.$store.dispatch('GET_SETTINGS_COMPONENT', 96)
+    // }
   },
-
-  //identificar tienda por URL
-  //  url = bistro.com
-  //  IdTienda = 3420
-  //  APi Productos = tiendas
-  //  Api diseño [color, logo, banner]
-  //id
-  //template: [editor, template1, template2,]
-}
-</script>
-
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-
-export default {
   // components: { kFooter, KHeader,  },
-  mounted() {},
+
   head() {
     let tienda = this.$store.state.dataStore.tienda
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
