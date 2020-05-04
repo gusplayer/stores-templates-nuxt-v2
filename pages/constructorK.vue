@@ -8,6 +8,7 @@
 import KoConstructor from '../components/constructor/constructor'
 
 export default {
+  layout: 'constructor-layout',
   components: {
     KoConstructor,
   },
