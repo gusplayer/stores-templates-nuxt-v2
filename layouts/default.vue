@@ -1,17 +1,20 @@
 <template>
   <div>
-    <div>
-      <!-- <KHeader /> -->
-      <nuxt />
-      <!-- <kFooter /> -->
-    </div>
+    <KHeader2 />
+    <nuxt />
+    <KFooter1 />
   </div>
 </template>
 
 <script>
-import API from '../components/constructor/_api/api'
+import KHeader2 from '../components/template/header'
+import KFooter1 from '../components/template/footer'
 
 export default {
+  components: {
+    KHeader2,
+    KFooter1,
+  },
   async mounted() {
     let full = window.location.host
     //window.location.host is subdomain.domain.com
@@ -35,36 +38,11 @@ export default {
     if (subdomain == 'tutienda') {
       arrayStores = 582
     }
-
-    // let arrayStores = ['1', '1900', '3151', '347', '364', '1359', '1100']
-    // let arrayStores = [
-    //   { value: 1, label: 'Topalxe' },
-    //   { value: 347, label: 'Ohlala' },
-    //   { value: 364, label: "Ace Delivery's" },
-    //   { value: 1108, label: 'Familia Comepasto' },
-    //   { value: 889, label: 'Perfecta' },
-    //   { value: 605, label: 'Origen SP' },
-    //   { value: 582, label: 'Tu Tienda' },
-    //   { value: 1100, label: 'Macrobrand' },
-    //   { value: 1559, label: 'Sticker Hipster' },
-    //   { value: 1429, label: 'boom Store Colombia' },
-    //   { value: 1359, label: 'Señora pepa' },
-    // ]
-    // const randomElement =
-    //   arrayStores[Math.floor(Math.random() * arrayStores.length)]
-    // const randomElement = 1900
-    this.$store.dispatch('GET_DATA')
+    // this.$store.dispatch('GET_DATA')
     this.$store.dispatch('GET_DATA_TIENDA_BY_ID', arrayStores)
     await this.$store.dispatch('GET_LOGIN')
     // this.$store.dispatch('GET_STORELAYOUT')
-    // this.tiposComponentes = await API.getTipoComponente()
-    // this.listadoComponentes = await API.getReferenciasComponente()
-    // if (this.token.length) {
-    //   this.$store.dispatch('GET_SETTINGS_COMPONENT', 96)
-    // }
   },
-  // components: { kFooter, KHeader,  },
-
   head() {
     let tienda = this.$store.state.dataStore.tienda
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion

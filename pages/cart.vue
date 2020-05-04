@@ -1,15 +1,18 @@
 <template lang="html">
   <div class="home">
-    <KoProductList />
+    <KoCart />
   </div>
 </template>
 
 <script>
-import KoProductList from '../components/template/listadoproductos'
+import KoCart from '../components/template/carrito'
 
 export default {
   components: {
-    KoProductList,
+    KoCart,
+  },
+  mounted() {
+    this.$store.dispatch('GET_SHOPPING_CART')
   },
 }
 </script>

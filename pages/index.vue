@@ -1,100 +1,41 @@
 <template>
-  <div class="wrapper-container">
-    <div class="container">
-      <div class="header">
-        <router-link :to="`/`" class="card product-card">
-          <div class="item">Inicio</div>
-        </router-link>
-        <!-- <router-link :to="`/constructorK`" class="card product-card">
-          <div class="item">constructor</div>
-        </router-link>-->
-        <!-- <el-select @change="getDataTienda()" v-model="currentStoreData" placeholder="Tiendas">
-          <el-option
-            v-for="item in stores"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select> -->
+  <div>
+    <div class="wrapper-container" v-if="this.estado">
+      <div class="container">
+        <div class="header">
+          <router-link :to="`/`" class="card product-card">
+            <div class="item">Inicio</div>
+          </router-link>
+          <router-link :to="`/constructorK`" class="card product-card">
+            <div class="item">constructor</div>
+          </router-link>
+        </div>
+        <div class="linea" />
+        <nuxt />
+        <!-- <KoCart1
+          :dataStore="dataStore"
+          :currentSettingsHeader="getSettingsCSS"
+          :currentSettingsFooter="getSettingsCSS"
+          :Settings="getSettingsCSS"
+          :fullProducts="
+            nameCurrentComponent.includes('ProductList') ? fullProducts : ''
+          "
+        ></KoCart1> -->
       </div>
-      <div class="linea" />
-      <nuxt />
-      <KoFooter1
-        :dataStore="dataStore"
-        :currentSettingsFooter="getSettingsCSS"
-        :fullProducts="
-          nameCurrentComponent.includes('ProductList') ? fullProducts : ''
-        "
-      ></KoFooter1>
-      <KoProductList1
-        :dataStore="dataStore"
-        :Settings="getSettingsCSS"
-        :fullProducts="
-          nameCurrentComponent.includes('ProductList') ? fullProducts : ''
-        "
-      ></KoProductList1>
     </div>
   </div>
 </template>
 <script>
-import API from '../components/constructor/_api/api'
-
+// import template1 from './template1'
 export default {
-  async mounted() {
-    // this.$store.dispatch('GET_DATA')
-    // await this.$store.dispatch('GET_LOGIN')
-    this.$store.dispatch('GET_STORELAYOUT')
-    this.tiposComponentes = await API.getTipoComponente()
-    this.listadoComponentes = await API.getReferenciasComponente()
-    if (this.token.length) {
-      this.$store.dispatch('GET_SETTINGS_COMPONENT', 96)
-    }
-  },
   data() {
     return {
       estado: false,
-      selectedComponent: true,
-      nameCurrentComponent: 'ProductList',
-      currentStoreData: '',
-      stores: [
-        { value: 1, label: 'Topalxe' },
-        { value: 347, label: 'Ohlala' },
-        { value: 364, label: "Ace Delivery's" },
-        { value: 1108, label: 'Familia Comepasto' },
-        { value: 889, label: 'Perfecta' },
-        { value: 605, label: 'Origen SP' },
-        { value: 582, label: 'Tu Tienda' },
-        { value: 1100, label: 'Macrobrand' },
-        { value: 1559, label: 'Sticker Hipster' },
-        { value: 1429, label: 'boom Store Colombia' },
-        { value: 1359, label: 'Señora pepa' },
-      ],
     }
   },
-  computed: {
-    token() {
-      return this.$store.state.accessToken
-    },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
-    getSettingsCSS() {
-      return this.$store.getters.getSettingsCSS
-    },
-  },
-  methods: {
-    getDataTienda() {
-      this.$store.dispatch('GET_DATA_TIENDA_BY_ID', this.currentStoreData)
-    },
-  },
-  watch: {
-    name(value) {
-      return value
-    },
-  },
+  computed: {},
+  methods: {},
+  watch: {},
 }
 </script>
 
