@@ -8,14 +8,14 @@
         <!-- <router-link :to="`/constructorK`" class="card product-card">
           <div class="item">constructor</div>
         </router-link>-->
-        <el-select @change="getDataTienda()" v-model="currentStoreData" placeholder="Tiendas">
+        <!-- <el-select @change="getDataTienda()" v-model="currentStoreData" placeholder="Tiendas">
           <el-option
             v-for="item in stores"
             :key="item.value"
             :label="item.label"
             :value="item.value"
           ></el-option>
-        </el-select>
+        </el-select> -->
       </div>
       <div class="linea" />
       <nuxt />
@@ -26,6 +26,13 @@
           nameCurrentComponent.includes('ProductList') ? fullProducts : ''
         "
       ></KoFooter1>
+      <KoProductList1
+        :dataStore="dataStore"
+        :Settings="getSettingsCSS"
+        :fullProducts="
+          nameCurrentComponent.includes('ProductList') ? fullProducts : ''
+        "
+      ></KoProductList1>
     </div>
   </div>
 </template>

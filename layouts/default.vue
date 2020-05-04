@@ -16,23 +16,23 @@ export default {
     let full = window.location.host
     //window.location.host is subdomain.domain.com
     let parts = full.split('.')
-    let subdoman = parts[0]
-    console.log(sub)
+    let subdomain = parts[0]
+    console.log(subdomain)
     let arrayStores
 
-    if (subdoman == 'topalxe') {
+    if (subdomain == 'topalxe') {
       arrayStores = 1
     }
-    if (subdoman == 'perfecta') {
+    if (subdomain == 'perfecta') {
       arrayStores = 889
     }
-    if (subdoman == 'ohlala') {
+    if (subdomain == 'ohlala') {
       arrayStores = 347
     }
-    if (subdoman == 'macrobrand') {
+    if (subdomain == 'macrobrand') {
       arrayStores = 1100
     }
-    if (subdoman == 'tutienda') {
+    if (subdomain == 'tutienda') {
       arrayStores = 582
     }
 
