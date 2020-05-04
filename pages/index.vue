@@ -5,14 +5,10 @@
         <router-link :to="`/`" class="card product-card">
           <div class="item">Inicio</div>
         </router-link>
-        <router-link :to="`/constructorK`" class="card product-card">
+        <!-- <router-link :to="`/constructorK`" class="card product-card">
           <div class="item">constructor</div>
-        </router-link>
-        <el-select
-          @change="getDataTienda()"
-          v-model="currentStoreData"
-          placeholder="Tiendas"
-        >
+        </router-link>-->
+        <el-select @change="getDataTienda()" v-model="currentStoreData" placeholder="Tiendas">
           <el-option
             v-for="item in stores"
             :key="item.value"
@@ -22,7 +18,6 @@
         </el-select>
       </div>
       <div class="linea" />
-
       <nuxt />
       <KoFooter1
         :dataStore="dataStore"
@@ -39,8 +34,8 @@ import API from '../components/constructor/_api/api'
 
 export default {
   async mounted() {
-    //this.$store.dispatch('GET_DATA')
-    await this.$store.dispatch('GET_LOGIN')
+    // this.$store.dispatch('GET_DATA')
+    // await this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_STORELAYOUT')
     this.tiposComponentes = await API.getTipoComponente()
     this.listadoComponentes = await API.getReferenciasComponente()

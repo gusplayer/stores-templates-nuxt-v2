@@ -24,14 +24,14 @@ Vue.component('menu-icon', MenuIcon)
 
 Vue.component('facebook-icon', Facebook)
 Vue.component('twitter-icon', Twitter)
-Vue.component('google-icon', Google)
+// Vue.component('google-icon', Google)
 Vue.component('instagram-icon', Instagram)
 Vue.component('youtube-icon', Youtube)
 Vue.component('whatsapp-icon', Whatsapp)
 
-Vue.component('cart-icon', Cart)
+// Vue.component('cart-icon', Cart)
 Vue.component('menu-icon', Menu)
-Vue.component('close-icon', Close)
+// Vue.component('close-icon', Close)
 Vue.component('window-close-icon', WindowClose)
 Vue.component('delete-icon', Delete)
 

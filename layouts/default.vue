@@ -2,7 +2,6 @@
   <div>
     <div>
       <!-- <KHeader /> -->
-
       <nuxt />
       <!-- <kFooter /> -->
     </div>
@@ -40,9 +39,9 @@ export default {
     this.$store.dispatch('GET_DATA')
     this.$store.dispatch('GET_DATA_TIENDA_BY_ID', randomElement)
     await this.$store.dispatch('GET_LOGIN')
-    this.$store.dispatch('GET_STORELAYOUT')
-    this.tiposComponentes = await API.getTipoComponente()
-    this.listadoComponentes = await API.getReferenciasComponente()
+    // this.$store.dispatch('GET_STORELAYOUT')
+    // this.tiposComponentes = await API.getTipoComponente()
+    // this.listadoComponentes = await API.getReferenciasComponente()
     // if (this.token.length) {
     //   this.$store.dispatch('GET_SETTINGS_COMPONENT', 96)
     // }
