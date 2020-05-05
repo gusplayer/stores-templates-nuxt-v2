@@ -40,9 +40,7 @@
                               (ref = false)
                             )
                           "
-                        >
-                          {{ categoria.nombre_categoria_producto }}
-                        </p>
+                        >{{ categoria.nombre_categoria_producto }}</p>
                         <div
                           :style="indexCategory == index ? '' : 'display: none'"
                           class="content-item-subcategorie"
@@ -57,15 +55,10 @@
                             "
                             :key="subcategory.id"
                           >
-                            <p class="item-subcategorie">
-                              {{ subcategory.nombre_subcategoria }}
-                            </p>
+                            <p class="item-subcategorie">{{ subcategory.nombre_subcategoria }}</p>
                           </li>
                         </div>
-                        <div
-                          :class="{ popover: sub == index }"
-                          v-if="sub == index"
-                        ></div>
+                        <div :class="{ popover: sub == index }" v-if="sub == index"></div>
                       </label>
                     </li>
                   </ul>
@@ -82,11 +75,7 @@
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
-            <div
-              v-for="product in filterProduct"
-              :key="product.id"
-              class="content-products"
-            >
+            <div v-for="product in filterProduct" :key="product.id" class="content-products">
               <KoProductCard1 :product="product"></KoProductCard1>
             </div>
           </div>
@@ -306,7 +295,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_1);
+  /* background: var(--background_color_1); */
   background: #eef1f4;
   box-sizing: border-box;
 }
@@ -336,7 +325,7 @@ export default {
   font-style: normal;
   line-height: 1.24;
   letter-spacing: -0.4px;
-  color: var(--color_text);
+  color: var(--purple);
 }
 .content-item {
   display: flex;
@@ -373,7 +362,7 @@ export default {
   font-size: 16px;
   font-weight: bold;
   line-height: 1.4;
-  color: var(--color_subtext);
+  color: var(--grey);
   align-self: flex-end;
   cursor: pointer;
   margin-right: 2px;
@@ -387,7 +376,7 @@ export default {
   max-width: 205px;
   width: 100%;
   border-radius: 10px;
-  background-color: var(--background_color_2);
+  background-color: var(--white);
 }
 .a-container {
   width: 205px;
@@ -396,8 +385,8 @@ export default {
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  color: var(--color_subtext);
-  background-color: var(--background_color_2);
+  color: var(--purple);
+  background-color: var(--white);
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -ms-transition: all 0.2s ease;
@@ -409,20 +398,20 @@ export default {
 .item-categoria {
   cursor: pointer;
   padding: 0px 10px 0px 20px;
-  background-color: var(--background_color_2);
+  background-color: var(--white);
 }
 .item-categoria-active {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
+  background: var(--grey);
+  color: var(--black);
 }
 
 .item-categoria:hover {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
+  background: var(--grey);
+  color: var(--black);
 }
 /*////// subcategoria //////*/
 .content-item-subcategorie {
-  background: var(--color_background_hover);
+  background: var(--grey);
   padding-right: 10px;
   padding-left: 40px;
 }
@@ -432,12 +421,12 @@ export default {
   user-select: none;
 }
 .item-subcategorie-active {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
+  background: var(--greylite);
+  color: var(--white);
 }
 .item-subcategorie:hover {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
+  background: var(--greylite);
+  color: var(--white);
 }
 
 /* ///////productos/////////// */
@@ -447,7 +436,7 @@ export default {
 }
 .content-products:hover,
 .content-products:focus {
-  box-shadow: 0px 0px 2px 1px var(--color_border);
+  box-shadow: 0px 0px 2px 1px var(--green);
   border-radius: 10px;
 }
 .content-item-productos {
@@ -475,7 +464,7 @@ export default {
 .header-icon-menu {
   font-size: 30px;
   cursor: pointer;
-  color: var(--color_subtext);
+  color: var(--grey);
 }
 .header-icon-close {
   font-size: 30px;
@@ -493,19 +482,19 @@ export default {
   padding: 10px 35px 10px 15px;
   box-sizing: border-box;
   font-size: 14px;
-  color: var(--color_subtext);
+  color: var(--grey);
   border: solid 2px #afafaf;
-  border-radius: var(--radius_btn);
+  border-radius: 25px;
   background-color: transparent;
 }
 .top-input-search input::placeholder {
-  color: var(--color_subtext);
+  color: var(--grey);
   opacity: 0.7;
 }
 .top-input-search input:focus,
 .top-input-search input:active {
   border: solid 2px #afafaf;
-  border-radius: var(--radius_btn);
+  border-radius: 25px;
   outline: 0;
 }
 .top-input-search i.icon-search {
@@ -513,7 +502,7 @@ export default {
   top: 9px;
   right: 15px;
   z-index: 2;
-  color: var(--color_subtext);
+  color: var(--grey);
   font-weight: bold;
 }
 .top-input-search .response {
@@ -522,9 +511,9 @@ export default {
   height: 32px;
   line-height: 30px;
   font-size: 12px;
-  color: var(--color_subtext);
+  color: var(--grey);
   border: solid 2px #d8d8d8;
-  border-radius: var(--radius_btn);
+  border-radius: 25px;
   background-color: transparent;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -536,20 +525,20 @@ export default {
 /* //////paginacion//////// */
 .pagination-medium {
   margin-top: 10px;
-  background: var(--background_color_1);
+  background: #eef1f4;
 }
 .pagination {
   font-size: 18px;
-  color: var(--color_text);
+  color: var(--purple);
 }
 .el-pager li.active,
 .el-pager li.hover,
 .el-pager li.focus {
-  color: var(--color_text);
+  color: var(--purple);
 }
 .popover {
   width: 300px;
-  background: var(--background_color_1);
+  background: #eef1f4;
   position: absolute;
   right: -240px;
   top: 0;
@@ -725,6 +714,11 @@ export default {
   .grid-products {
     grid-template-columns: repeat(1, minmax(250px, 2fr));
     grid-gap: 10px;
+  }
+  .title {
+    font-size: 35px;
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
 }
 </style>

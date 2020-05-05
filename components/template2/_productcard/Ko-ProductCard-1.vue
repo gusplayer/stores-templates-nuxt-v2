@@ -13,20 +13,17 @@
         <!-- <p class="card-info-2">Envío gratis !</p> -->
       </div>
       <div class="wrapper-text">
-        <p class="card-text" v-if="this.product.nombre.length >= 20">
-          {{ `${this.product.nombre.slice(0, 20)}...` }}
-        </p>
-        <p class="card-text" v-else>
-          {{ `${this.product.nombre.slice(0, 20)}` }}
-        </p>
+        <p
+          class="card-text"
+          v-if="this.product.nombre.length >= 20"
+        >{{ `${this.product.nombre.slice(0, 20)}...` }}</p>
+        <p class="card-text" v-else>{{ `${this.product.nombre.slice(0, 20)}` }}</p>
         <!-- <div class="wrapper-price">
           <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
           <p class="card-descuento">-50%</p>
         </div>-->
         <div class="separador-descuento"></div>
-        <p class="card-price-2" v-if="this.product.precio > 0">
-          $ {{ this.product.precio }}
-        </p>
+        <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
         <div v-else class="separador"></div>
       </div>
       <div class="wrapper-text-mobil">
@@ -36,9 +33,7 @@
             <!-- <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
             <p class="card-descuento">-50%</p>-->
           </div>
-          <p class="card-price-2" v-if="this.product.precio > 0">
-            $ {{ this.product.precio }}
-          </p>
+          <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
           <div v-else class="separador"></div>
         </div>
       </div>
@@ -67,9 +62,6 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-card {
-  --btnhover: #000000;
-}
 .separador {
   margin: 30px;
 }
@@ -81,19 +73,19 @@ div.wrapper-card {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_2);
-  background-color: white;
+  /* background: var(--background_color_2); */
+  background: white;
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
 }
 .container {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
-  height: 360px;
+  /* height: 360px; */
   border-radius: 10px;
 }
 
@@ -129,7 +121,7 @@ div.wrapper-card {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  max-width: 100%;
+  width: 100%;
   height: 265px;
   top: 0px;
   /* margin-top: 0px;
@@ -161,7 +153,7 @@ div.wrapper-card {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: 2px;
-  color: var(--color_text);
+  color: var(--purple);
   /* font-family: rocketfont, sans-serif; */
   font-weight: 300;
   /* font-size: 1rem; */
@@ -198,30 +190,35 @@ div.wrapper-card {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  color: var(--grey);
   margin-top: 5px;
 }
 .content-button {
-  display: initial;
+  display: flex;
   margin-top: 5px;
+  width: 100%;
+  justify-content: center;
+  align-self: center;
 }
 .btn {
-  color: var(--color_text_btn);
-  border-radius: var(--radius_btn);
-  border: solid 2px var(--color_border_btn);
-  background-color: var(--color_background_btn);
+  color: white;
+  border-radius: 25px;
+  border: solid 2px var(--black);
+  background-color: var(--black);
   padding: 8px 14px;
   font-size: 14px;
   width: 120px;
   font-weight: bold;
   cursor: pointer;
-  margin-left: 20px;
   margin-bottom: 20px;
   cursor: pointer;
   transition: all 200ms ease-in;
 }
 .btn:hover {
-  background-color: var(--btnhover);
+  background-color: var(--grey);
+  border: solid 2px var(--grey);
+
+  color: black;
 }
 @media (max-width: 750px) {
   .content-button {

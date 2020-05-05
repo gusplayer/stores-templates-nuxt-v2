@@ -2,6 +2,7 @@
   <div>
     <KoHeader1 :dataStore="dataStore" />
     <!-- <nuxt /> -->
+    <kBanner :dataStore="dataStore" />
     <KProductList :dataStore="dataStore" :fullProducts="fullProducts"></KProductList>
     <KFooter1 :dataStore="dataStore" />
   </div>
@@ -11,13 +12,16 @@
 import KoHeader1 from '../components/template2/Ko-Header-1'
 import KFooter1 from '../components/template2/Ko-Footer-1'
 import KProductList from '../components/template2/Ko-ProductList-1'
+import kBanner from '../components/template2/ko-Banner-1'
+
 
 
 export default {
   components: {
     KoHeader1,
     KFooter1,
-    KProductList
+    KProductList,
+    kBanner
   },
   mounted() {
     this.$store.dispatch('GET_LOGIN')
@@ -173,6 +177,8 @@ export default {
   --black: #000000;
   --white: #ffffff;
   --grey: #949393;
+  --greylite: #c2bfbf;
+
   --radius_btn: 25px;
 }
 * {
