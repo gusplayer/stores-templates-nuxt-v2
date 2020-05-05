@@ -1,34 +1,27 @@
 <template>
   <div>
-    <div v-if="this.estado">
-      <KHeader2 />
-      <nuxt />
-      <KFooter1 />
-    </div>
-    <div v-else>
-      <Ktemplate2 />
-    </div>
+    <KoHeader1 :dataStore="dataStore" />
+    <!-- <nuxt /> -->
+    <KProductList :dataStore="dataStore" :fullProducts="fullProducts"></KProductList>
+    <KFooter1 :dataStore="dataStore" />
   </div>
 </template>
 
 <script>
-import KHeader2 from '../components/template/header'
-import KFooter1 from '../components/template/footer'
-import Ktemplate2 from './template2-layout'
+import KoHeader1 from '../components/template2/Ko-Header-1'
+import KFooter1 from '../components/template2/Ko-Footer-1'
+import KProductList from '../components/template2/Ko-ProductList-1'
 
 
 export default {
   components: {
-    KHeader2,
+    KoHeader1,
     KFooter1,
-    Ktemplate2
+    KProductList
   },
-  data() {
-    return {
-      estado:false
-    };
-  },
-  async mounted() {
+  mounted() {
+    this.$store.dispatch('GET_LOGIN')
+
     let full = window.location.host
     //window.location.host is subdomain.domain.com
     let parts = full.split('.')
@@ -51,9 +44,10 @@ export default {
     if (subdomain == 'tutienda') {
       arrayStores = 582
     }
+    
     // this.$store.dispatch('GET_DATA')
     this.$store.dispatch('GET_DATA_TIENDA_BY_ID', arrayStores)
-    await this.$store.dispatch('GET_LOGIN')
+    this.$store.dispatch('GET_SHOPPING_CART')
     // this.$store.dispatch('GET_STORELAYOUT')
   },
   head() {
@@ -150,7 +144,7 @@ export default {
         },
       ],
       link: [
-        { rel: "icon", type: "image/x-icon", href: `https://api2.komercia.co/logos/${tienda.logo}` },
+      { rel: "icon", type: "image/x-icon", href: `https://api2.komercia.co/logos/${tienda.logo}` },
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
@@ -158,17 +152,28 @@ export default {
       ],
     }
   },
+  computed: {    
+    dataStore() {
+      return this.$store.state.dataStore
+    },    
+    fullProducts() {
+      return this.$store.getters['products/filterProducts']
+    },
+  },
 }
 </script>
 
 <style>
 :root {
+  --blue: #1250d4;
   --purple: #4429b4;
   --green: #00dd8d;
   --magenta: #c52675;
   --yellow: #f2b931;
-  --color_text: #0c0c0c;
-  --color_background: #fff;
+  --black: #000000;
+  --white: #ffffff;
+  --grey: #949393;
+  --radius_btn: 25px;
 }
 * {
   margin: 0px;

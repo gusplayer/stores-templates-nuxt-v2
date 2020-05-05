@@ -1,0 +1,875 @@
+<template>
+  <div class="wrapper-cart" ref="color">
+    <div class="contenedor" v-if="this.productsCart.length">
+      <ul class="products_list">
+        <li v-for="(product, index) in productsCart" :key="index" class="wrapper_item">
+          <div class="content_product_items">
+            <div class="wrapper_item_photo">
+              <img :src="setFoto(product)" class="products_item_photo" :alt="product.nombre" />
+            </div>
+            <div class="products_item_name">
+              <p class="text-name">{{ product.nombre | capitalize }}</p>
+            </div>
+            <div class="products_item_details">
+              <span>
+                <p class="text-tittle">Variante:</p>
+                <ul class="item_info_combinations">
+                  <p
+                    v-for="(item, items) in product.combinacion"
+                    :key="items"
+                    class="text-result"
+                  >{{ item }}</p>
+                </ul>
+              </span>
+              <div class="wrapper_quantity">
+                <p class="text-tittle">Cantidad:</p>
+                <div class="content_items_quantity">
+                  <div class="quantity">
+                    <button class="quantity_remove" v-on:click="removeQuantity(product)">
+                      <menos-icon class="icon" />
+                    </button>
+                    <p class="quantity_value">{{ product.cantidad }}</p>
+                    <button class="quantity_add" v-on:click="addQuantity(product)">
+                      <mas-icon class="icon" />
+                    </button>
+                  </div>
+                  <div class="container-alert" v-if="product.cantidad == product.limitQuantity">
+                    <span class="alert">
+                      última Unidad!
+                      <div class="arrow"></div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content_price">
+              <div>
+                <p class="text-tittle">Precio:</p>
+                <p class="text-result">{{ product.precio | currency }}</p>
+              </div>
+              <div>
+                <p class="text-tittle">Total:</p>
+                <p class="text-result">{{ (product.precio * product.cantidad) | currency }}</p>
+              </div>
+            </div>
+            <div class="content_icon">
+              <a v-on:click="deleteItemCart(index)">
+                <window-close-icon class="cart-icon" />
+              </a>
+            </div>
+          </div>
+        </li>
+        <div class="line"></div>
+      </ul>
+      <ul class="products_list_resposive">
+        <li v-for="(product, index) in productsCart" :key="index" class="wrapper_item">
+          <div class="content_details">
+            <div class="wrapper_item_photo">
+              <img :src="setFoto(product)" class="products_item_photo" :alt="product.nombre" />
+            </div>
+            <div class="content_items_details">
+              <div>
+                <div class="wrapper_producto_tittle">
+                  <p class="text-name">{{ product.nombre }}</p>
+                </div>
+                <div>
+                  <div class="content_price">
+                    <div>
+                      <p class="text-tittle">Precio:</p>
+                      <p class="text-result">{{ product.precio | currency }}</p>
+                    </div>
+                  </div>
+                  <div class="content_variant" v-if="product.combinacion">
+                    <p class="text-tittle">Variante:</p>
+                    <ul class="item_info_combinations">
+                      <p
+                        v-for="(item, items) in product.combinacion"
+                        :key="items"
+                        class="text-result"
+                      >{{ item }}</p>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="content_icon">
+                  <a v-on:click="deleteItemCart(index)">
+                    <window-close-icon class="cart-icon" />
+                  </a>
+                </div>
+                <div class="products_item_details">
+                  <div class="wrapper_quantity">
+                    <div class="container-alert" v-if="product.cantidad == product.limitQuantity">
+                      <span class="alert">
+                        última Unidad!
+                        <div class="arrow"></div>
+                      </span>
+                    </div>
+                    <div class="quantity">
+                      <button class="quantity_remove" v-on:click="removeQuantity(product)">
+                        <menos-icon class="icon" />
+                      </button>
+                      <p class="quantity_value">{{ product.cantidad }}</p>
+                      <button class="quantity_add" v-on:click="addQuantity(product)">
+                        <mas-icon class="icon" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <div class="line"></div>
+      </ul>
+      <div class="wrapper_cart_summary">
+        <div class="content_cart_summary">
+          <div class="content_tittle">
+            <p class="text">RESUMEN</p>
+          </div>
+          <div class="cart_summary_body">
+            <span class="cart_summary_items">
+              <p class="cart_summary_tittle">Subtotal:</p>
+              <p class="cart_summary_price">{{ totalCart | currency }}</p>
+            </span>
+            <span class="order_total">
+              <span class="order_total_domicile">
+                <p class="cart_summary_tittle">Costo domicilio:</p>
+                <details
+                  v-if="
+                    rangosByCiudad.envio_metodo === 'precio_ciudad' &&
+                      shippingCities.length > 0 &&
+                      getFreeShipping == false
+                  "
+                >
+                  <summary class="cart_summary_price">Valor por Ciudad</summary>
+                  <ol class="scroll_cart_summary_items_cities">
+                    <li
+                      v-for="(ciudad, index) in rangosByCiudad.rangos"
+                      :key="ciudad.id"
+                      class="cart_summary_items_cities"
+                    >
+                      <b>
+                        {{
+                        shippingCities[index].nombre_ciu === "Sin especificar"
+                        ? "Resto del país"
+                        : shippingCities[index].nombre_ciu
+                        }}:
+                      </b>
+                      {{ ciudad.price | currency }}
+                    </li>
+                  </ol>
+                </details>
+                <p v-else-if="shipping && getFreeShipping == false">{{ shipping | currency }}</p>
+                <p
+                  class="cart_summary_price"
+                  v-if="
+                    rangosByCiudad.envio_metodo === 'gratis' ||
+                      getFreeShipping == true
+                  "
+                >No tiene costo de envió</p>
+              </span>
+            </span>
+            <div class="line"></div>
+
+            <div class="wrapper_btn">
+              <span class="cart_summary_items">
+                <p class="cart_summary_tittle">Total a pagar:</p>
+                <p class="cart_summary_price">
+                  {{
+                  (totalCart + (getFreeShipping ? 0 : shipping)) | currency
+                  }}
+                </p>
+              </span>
+              <button ref="colorBtn" class="btn1" @click="GoPayments">Finalizar compra</button>
+              <button ref="colorBtn" class="btn2">Seguir comprando</button>
+            </div>
+            <div class="wrapper_btn_responsive">
+              <span class="cart_summary_items">
+                <p class="cart_summary_tittle">Total a pagar:</p>
+                <p class="cart_summary_price">
+                  {{
+                  (totalCart + (getFreeShipping ? 0 : shipping)) | currency
+                  }}
+                </p>
+              </span>
+              <div class="content-btn">
+                <button ref="colorBtn" class="btn2">Seguir comprando</button>
+                <button ref="colorBtn2" class="btn1" @click="GoPayments">Finalizar compra</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="contenedor-vacio">
+      <div class="wrapper_photo">
+        <img :src="img" class="photo" />
+      </div>
+      <p>Tu carrito de compras ahora está vacío.</p>
+      <button ref="colorBtn" class="btn3">Agregar productos</button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Ko-Cart-1",
+  props: {
+    dataStore: Object,
+  },
+  mounted() {
+    this.$store.commit("UPDATE_CONTENTCART");
+    this.$store.dispatch("GET_CITIES");
+    if (this.rangosByCiudad.envio_metodo === "precio_ciudad") {
+      this.filterCities();
+    }
+  },
+  data() {
+    return {
+      img:
+        "https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png",
+
+      envioProducto: "",
+      layoutLogin: true,
+      shippingCities: [],
+      rangosByCiudades: []
+    };
+  },
+  computed: {
+    dataStore() {
+      return this.$store.state.dataStore
+    },  
+    totalCart() {
+      return this.$store.state.totalCart;
+    },
+    productsCart() {
+      return this.$store.state.productsCart;
+    },
+    orderComponent() {
+      return this.$store.state.orderComponent;
+    },
+    getFreeShipping() {
+      let free = true;
+      this.productsCart.filter(product => {
+        if (product.envio_gratis == 0) {
+          free = false;
+        }
+      });
+      return free;
+    },
+    rangosByCiudad() {
+      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores);
+      return this.rangosByCiudades;
+    },
+    cities() {
+      return this.$store.state.cities;
+    },
+    shipping() {
+      if (this.$store.state.envios.estado) {
+        let shipping = JSON.parse(this.$store.state.envios.valores);
+        switch (shipping.envio_metodo) {
+          case "gratis":
+            return 0;
+            break;
+          case "tarifa_plana":
+            return shipping.valor;
+            break;
+          case "precio_ciudad":
+            let result = shipping.rangos.find(rango => {
+              if (
+                this.totalCart >= rango.inicial &&
+                this.totalCart <= rango.final
+              ) {
+                return rango;
+              }
+            });
+            if (result) {
+              return result.precio;
+            } else {
+              return 0;
+            }
+            break;
+          default:
+            return 0;
+        }
+      } else {
+        return 0;
+      }
+    },
+  },
+  methods: {
+    addQuantity(product, index) {
+      if (product.limitQuantity > product.cantidad) {
+        product.cantidad++;
+        this.$store.commit("UPDATE_CONTENTCART");
+        this.$store.commit("CALCULATE_TOTALCART");
+      }
+    },
+    removeQuantity(product, index) {
+      if (product.cantidad >= 2) {
+        product.cantidad--;
+        this.$store.commit("UPDATE_CONTENTCART");
+        this.$store.commit("CALCULATE_TOTALCART");
+      }
+    },
+    setFoto(product) {
+      if (product.placeholder) {
+        return require(`../../assets/${product.foto}`);
+      } else {
+        return product.foto_cloudinary;
+      }
+    },
+    deleteItemCart(i) {
+      this.$store.state.productsCart.splice(i, 1);
+      this.$store.commit("UPDATE_CONTENTCART");
+    },
+    GoPayments() {
+      let json = {
+        products: this.$store.state.productsCart,
+        tienda: {
+          id: this.$store.state.tienda.id_tienda,
+          nombre: this.$store.state.tienda.nombre,
+          logo: this.$store.state.tienda.logo,
+          location: window.location.href
+        },
+        tipo: 0,
+        total: this.$store.state.totalCart,
+        estado: 0,
+        direccion_entrega: 0
+      };
+      json = JSON.stringify(json);
+      if (this.$store.state.productsCart.length != 0) {
+        location.href = `https://checkout.komercia.co/?params=${json}`;
+      }
+    },
+    filterCities() {
+      if (
+        this.rangosByCiudad.envio_metodo === "precio_ciudad" &&
+        this.cities.length > 0
+      ) {
+        this.rangosByCiudad.rangos.forEach((rango, index) => {
+          this.cities.filter(city => {
+            if (city.id === this.rangosByCiudad.rangos[index].id) {
+              this.shippingCities.push(city);
+            }
+          });
+        });
+      }
+    },
+  },
+  watch: {
+    rangosByCiudad() {
+      this.filterCities();
+    },
+    cities() {
+      this.filterCities();
+    },
+  },
+  filters: {
+    currency(value) {
+      if (value) {
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+      }
+    },
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase();
+        return value.replace(/^\w|\s\w/g, l => l.toUpperCase());
+      }
+    }
+  }
+};
+</script>
+
+<style scoped>
+div.wrapper-cart {
+  --btnhover: #000000;
+  --btnhover2: #000000;
+}
+.wrapper-cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: var(--background_color_1);
+  box-sizing: border-box;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+.contenedor {
+  display: flex;
+  width: 100%;
+  max-width: 1300px;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px 30px 20px;
+}
+.line {
+  border-top: 1px solid var(--color_border);
+  width: 100%;
+}
+.products_list {
+  width: 100%;
+  display: grid;
+  margin-right: 10px;
+}
+.wrapper_item {
+  width: 100%;
+  display: flex;
+  background-color: var(--background_color_1);
+  padding: 20px 0px;
+  border-top: 1px solid var(--color_border);
+}
+.content_product_items {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.wrapper_item_photo {
+  position: relative;
+  max-width: 150px;
+  max-height: 150px;
+}
+.products_item_photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+.products_item_name {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 2;
+  margin-left: 10px;
+}
+.text-name {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--color_text);
+}
+.products_item_details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  flex: 2;
+}
+.wrapper_quantity {
+  display: flex;
+  flex-direction: column;
+}
+.text-result {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color_text);
+}
+.text-tittle {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color_subtext);
+}
+.content_items_quantity {
+  display: flex;
+  flex-direction: row;
+}
+.quantity {
+  display: flex;
+  flex-direction: row;
+}
+.quantity_remove {
+  border: 2px var(--color_border);
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-style: solid;
+  background: var(--background_color_1);
+  height: 38px;
+  width: 3em;
+}
+.quantity_value {
+  font-size: 1em;
+  color: var(--color_text);
+  border: 2px var(--color_border);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-style: solid none solid none;
+  background: var(--background_color_1);
+  height: 38px;
+  width: 2.5em;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.quantity_add {
+  border: 2px var(--color_border);
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-style: solid;
+  background: var(--background_color_1);
+  height: 38px;
+  width: 3em;
+}
+.icon {
+  font-size: 16px;
+  color: var(--color_border);
+}
+.container-alert {
+  background-color: rgb(250, 232, 75);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: black;
+  margin-left: 10px;
+}
+.alert {
+  text-align: center;
+  padding: 5px 5px;
+  text-transform: capitalize;
+}
+.content_price {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1;
+}
+.content_icon {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  justify-content: flex-end;
+}
+.cart-icon {
+  font-size: 23px;
+  color: var(--color_text);
+  cursor: pointer;
+  margin-right: 10px;
+}
+.cart-icon:hover {
+  font-size: 24px;
+  color: #160b4b;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.cart-icon > .material-design-icon__svg {
+  bottom: 0em;
+}
+.wrapper_cart_summary {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  border-bottom: 1px solid var(--colorBorder);
+  margin-top: 5px;
+}
+.content_cart_summary {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.content_tittle {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  width: 100%;
+}
+.cart_summary_body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 145px;
+}
+.cart_summary_items {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+.text {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--color_text);
+}
+.cart_summary_tittle {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color_subtext);
+}
+.scroll_cart_summary_items_cities {
+  overflow-y: auto;
+  height: 150px;
+}
+::-webkit-scrollbar {
+  background: var(--background_color_1);
+  width: 14px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px var(--color_border);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(125deg, #ffffff, var(--color_text));
+  border-radius: 10px;
+}
+.cart_summary_price {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color_text);
+}
+.cart_summary_items_cities {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color_text);
+}
+.order_total_domicile,
+.order_total_net {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+.wrapper_btn {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.btn1 {
+  border-radius: var(--radius_btn);
+  color: var(--color_text_btn);
+  border: solid 2px var(--color_border_btn);
+  background-color: var(--color_background_btn);
+  padding: 8px 12px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 200ms ease-in;
+}
+.btn1:hover {
+  background-color: var(--btnhover);
+}
+.btn2 {
+  border-radius: var(--radius_btn);
+  color: var(--color_background_btn_2);
+  border: solid 2px var(--color_background_btn_2);
+  background-color: transparent;
+  padding: 8px 12px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 200ms ease-in;
+}
+.btn2:hover {
+  color: var(--btnhover2);
+  border: solid 2px var(--btnhover2);
+  background-color: transparent;
+}
+.contenedor-vacio {
+  display: flex;
+  width: 100%;
+  max-width: 1300px;
+  flex-direction: column;
+  align-items: center;
+  padding: 130px 20px;
+  justify-content: center;
+}
+.btn3 {
+  border-radius: var(--radius_btn);
+  color: var(--color_background_btn_2);
+  border: solid 2px var(--color_background_btn_2);
+  background-color: transparent;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 200ms ease-in;
+}
+.btn3:hover {
+  color: var(--btnhover2);
+  border: solid 2px var(--btnhover2);
+  background-color: transparent;
+}
+.products_list_resposive {
+  display: none;
+}
+.wrapper_btn_responsive {
+  display: none;
+}
+.wrapper_photo {
+  position: relative;
+  max-width: 600px;
+  max-height: 600px;
+}
+.photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+@media (max-width: 500px) {
+  .contenedor {
+    padding: 10px 10px;
+  }
+  .products_list_resposive {
+    width: 100%;
+    display: grid;
+  }
+  .products_list {
+    display: none;
+  }
+  .wrapper_item {
+    padding: 10px 5px;
+  }
+  .content_details {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  .wrapper_item_photo {
+    position: relative;
+    max-width: 90px;
+    max-height: 90px;
+  }
+  .products_item_photo {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+  }
+  .content_items_details {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+  }
+  .content_items_details > div:nth-child(1) {
+    width: 100%;
+    flex: 2;
+  }
+  .content_items_details > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    flex: 1;
+  }
+  .wrapper_producto_tittle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 10px;
+  }
+  .content_price {
+    margin-left: 10px;
+    align-items: flex-start;
+  }
+  .text-name,
+  .text-tittle,
+  .text-result {
+    font-size: 13px;
+  }
+  .content_variant {
+    align-items: flex-start;
+    margin-left: 10px;
+  }
+  .item_info_combinations {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .products_item_details {
+    flex: 1;
+  }
+  .wrapper_quantity {
+    margin-top: 5px;
+  }
+  .content_cart_summary {
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .cart_summary_body {
+    margin-left: 0px;
+  }
+  .cart_summary_items {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .cart_summary_tittle {
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  .cart_summary_price {
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  .btn {
+    margin-top: 5px;
+  }
+  .line {
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  .quantity_remove {
+    height: 34px;
+    width: 2.8em;
+  }
+  .quantity_value {
+    height: 34px;
+    width: 2.3em;
+  }
+  .quantity_add {
+    height: 34px;
+    width: 2.8em;
+  }
+  .container-alert {
+    font-size: 12px;
+    margin-left: 0px;
+  }
+  .alert {
+    text-align: center;
+    padding: 2px 2px;
+    text-transform: capitalize;
+  }
+  .wrapper_btn {
+    display: none;
+  }
+  .wrapper_btn_responsive {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 30px 20px rgba(96, 125, 139, 0.068);
+    background-color: var(--background_color_1);
+    z-index: 99999999;
+    flex-direction: column;
+    padding: 5px 10px;
+  }
+  .content-btn {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+  }
+  .content-btn > button:nth-child(2) {
+    margin-left: 8px;
+  }
+}
+</style>

@@ -201,12 +201,12 @@ export default {
           this.SettingsComponentes = 'footers'
         }
 
-        // return () =>
-        //   import(
-        //     `../../../core-components-npm/src/components/${this.fileTipos.name.toLowerCase()}/${
-        //       this.nameCurrentComponent
-        //     }`
-        //   )
+        return () =>
+          import(
+            `../../../core-components-npm/src/components/${this.fileTipos.name.toLowerCase()}/${
+              this.nameCurrentComponent
+            }`
+          )
       }
     },
     dataStore() {
