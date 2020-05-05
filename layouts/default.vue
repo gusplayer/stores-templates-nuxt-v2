@@ -44,7 +44,7 @@ export default {
     if (subdomain == 'ohlala') {
       arrayStores = 347
     }
-    if (subdomain == 'Restaurante cultura') {
+    if (subdomain == 'cultura') {
       arrayStores = 802
     }
     if (subdomain == 'tutienda') {
