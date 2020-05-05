@@ -16,17 +16,16 @@ import KHeader2 from '../components/template/header'
 import KFooter1 from '../components/template/footer'
 import Ktemplate2 from './template2-layout'
 
-
 export default {
   components: {
     KHeader2,
     KFooter1,
-    Ktemplate2
+    Ktemplate2,
   },
   data() {
     return {
-      estado:false
-    };
+      estado: false,
+    }
   },
   async mounted() {
     let full = window.location.host
@@ -45,8 +44,8 @@ export default {
     if (subdomain == 'ohlala') {
       arrayStores = 347
     }
-    if (subdomain == 'macrobrand') {
-      arrayStores = 1100
+    if (subdomain == 'Restaurante cultura') {
+      arrayStores = 802
     }
     if (subdomain == 'tutienda') {
       arrayStores = 582
@@ -150,7 +149,11 @@ export default {
         },
       ],
       link: [
-        { rel: "icon", type: "image/x-icon", href: `https://api2.komercia.co/logos/${tienda.logo}` },
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: `https://api2.komercia.co/logos/${tienda.logo}`,
+        },
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/icon?family=Material+Icons',

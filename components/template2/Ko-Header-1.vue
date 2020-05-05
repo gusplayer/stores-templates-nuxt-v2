@@ -4,7 +4,10 @@
       <KoOrder />
       <div class="header-content-logo">
         <nuxt-link to="/" class="wrapper-logo">
-          <img :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`" class="header-logo" />
+          <img
+            :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+            class="header-logo"
+          />
         </nuxt-link>
       </div>
       <div class="header-content-items">
@@ -15,9 +18,7 @@
         >
           <!-- <p class="header-text-center">{{ item.nombre }}</p> -->
           <nuxt-link :to="item.path" class="header-text-center">
-            {{
-            item.name
-            }}
+            {{ item.name }}
           </nuxt-link>
         </div>
       </div>
@@ -28,16 +29,22 @@
       <div class="header-item-menu" @click="drawerMenu = true">
         <menu-icon class="header-icon-menu nav-bar" />
       </div>
-      <div class="toggle-sidebar" v-show="drawerMenu" @click="drawerMenu = !drawerMenu"></div>
-      <el-drawer :visible.sync="drawerMenu" :direction="direction" class="responsive">
+      <div
+        class="toggle-sidebar"
+        v-show="drawerMenu"
+        @click="drawerMenu = !drawerMenu"
+      ></div>
+      <el-drawer
+        :visible.sync="drawerMenu"
+        :direction="direction"
+        class="responsive"
+      >
         <div id="sidebar">
           <div class="sidebar-container">
             <div class="header-content-logo-navbar">
               <div class="wrapper-logo">
                 <img
-                  :src="
-                    `https://api2.komercia.co/logos/${dataStore.tienda.logo}`
-                  "
+                  :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
                   class="header-logo"
                 />
               </div>
@@ -48,12 +55,13 @@
             <ul>
               <li>
                 <div>
-                  <div v-for="(item, index) in secciones" :key="`${index}${item.nombre}`">
+                  <div
+                    v-for="(item, index) in secciones"
+                    :key="`${index}${item.nombre}`"
+                  >
                     <li>
                       <nuxt-link :to="item.path" class="header-text-center">
-                        {{
-                        item.name
-                        }}
+                        {{ item.name }}
                       </nuxt-link>
                     </li>
                   </div>
@@ -68,77 +76,77 @@
 </template>
 
 <script>
-import KoOrder from "./_order1/order1";
+import KoOrder from './_order1/order1'
 
 export default {
   components: {
-    KoOrder
+    KoOrder,
   },
-  name: "Ko-Header-2",
+  name: 'Ko-Header-2',
   props: {
     dataStore: Object,
   },
   data() {
     return {
       drawerMenu: false,
-      direction: "rtl",
+      direction: 'rtl',
       links: [
         {
-          nombre: "Facebook",
-          icon: "facebook-icon",
-          link: this.dataStore.tienda.red_facebook
+          nombre: 'Facebook',
+          icon: 'facebook-icon',
+          link: this.dataStore.tienda.red_facebook,
         },
         {
-          nombre: "Twitter",
-          icon: "twitter-icon",
-          link: this.dataStore.tienda.red_twitter
+          nombre: 'Twitter',
+          icon: 'twitter-icon',
+          link: this.dataStore.tienda.red_twitter,
         },
         {
-          nombre: "Instagram",
-          icon: "instagram-icon",
-          link: this.dataStore.tienda.red_instagram
+          nombre: 'Instagram',
+          icon: 'instagram-icon',
+          link: this.dataStore.tienda.red_instagram,
         },
         {
-          nombre: "Youtube",
-          icon: "youtube-icon",
-          link: this.dataStore.tienda.red_youtube
-        }
+          nombre: 'Youtube',
+          icon: 'youtube-icon',
+          link: this.dataStore.tienda.red_youtube,
+        },
       ],
       secciones: [
         {
-          name: "Inicio",
-          path: "/"
+          name: 'Inicio',
+          path: '/',
         },
         {
-          name: "Carrito",
-          path: "/_Ko-Header-1"
+          name: 'Carrito',
+          path: '/_Ko-Header-1',
         },
         {
-          name: "Contacto",
-          path: "/contacto"
-        }
-      ]
-    };
+          name: 'Contacto',
+          path: '/contacto',
+        },
+      ],
+    }
   },
   computed: {
     productsCart() {
-      return this.$store.state.productsCart.length;
+      return this.$store.state.productsCart.length
     },
   },
   methods: {
     openOrder() {
-      this.$store.state.openOrder = true;
-    }
+      this.$store.state.openOrder = true
+    },
   },
   watch: {
-    "dataStore.tienda"() {
-      this.links[0].link = this.dataStore.tienda.red_facebook;
-      this.links[1].link = this.dataStore.tienda.red_twitter;
-      this.links[2].link = this.dataStore.tienda.red_instagram;
-      this.links[3].link = this.dataStore.tienda.red_youtube;
-    }
-  }
-};
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+    },
+  },
+}
 </script>
 
 <style scoped>
@@ -171,8 +179,8 @@ export default {
 }
 
 .header-logo {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: 50px;
   object-fit: contain;
   object-position: left;
 }

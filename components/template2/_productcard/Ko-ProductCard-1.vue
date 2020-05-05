@@ -1,23 +1,32 @@
 <template>
   <div class="wrapper-card">
     <div class="container">
-      <div class="wrapper-logo">
-        <img :src="`${this.product.foto_cloudinary}`" class="logo" />
+      <div class="wrapper-image">
+        <Image-cloudinary
+          :src="`${this.product.foto_cloudinary}`"
+          :width="300"
+          class="image-producto"
+          alt="product image"
+        />
+        <!-- <img :src="`${this.product.foto_cloudinary}`" class="image-producto" /> -->
         <!-- <p class="card-info-1">Agotado !</p> -->
         <!-- <p class="card-info-2">Envío gratis !</p> -->
       </div>
       <div class="wrapper-text">
-        <p
-          class="card-text"
-          v-if="this.product.nombre.length >= 20"
-        >{{ `${this.product.nombre.slice(0, 20)}...` }}</p>
-        <p class="card-text" v-else>{{ `${this.product.nombre.slice(0, 20)}` }}</p>
+        <p class="card-text" v-if="this.product.nombre.length >= 20">
+          {{ `${this.product.nombre.slice(0, 20)}...` }}
+        </p>
+        <p class="card-text" v-else>
+          {{ `${this.product.nombre.slice(0, 20)}` }}
+        </p>
         <!-- <div class="wrapper-price">
           <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
           <p class="card-descuento">-50%</p>
         </div>-->
         <div class="separador-descuento"></div>
-        <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
+        <p class="card-price-2" v-if="this.product.precio > 0">
+          $ {{ this.product.precio }}
+        </p>
         <div v-else class="separador"></div>
       </div>
       <div class="wrapper-text-mobil">
@@ -27,7 +36,9 @@
             <!-- <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
             <p class="card-descuento">-50%</p>-->
           </div>
-          <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
+          <p class="card-price-2" v-if="this.product.precio > 0">
+            $ {{ this.product.precio }}
+          </p>
           <div v-else class="separador"></div>
         </div>
       </div>
@@ -46,21 +57,13 @@
 
 <script>
 export default {
-  name: "Ko-ProductCard-1",
-  props: { product: Object},
-  mounted() {
-    
-  },
-  computed: {
-   
-  },
-  methods: {
-    
-  },
-  watch: {
-   
-  },
-};
+  name: 'Ko-ProductCard-1',
+  props: { product: Object },
+  mounted() {},
+  computed: {},
+  methods: {},
+  watch: {},
+}
 </script>
 
 <style scoped>
@@ -79,31 +82,29 @@ div.wrapper-card {
   align-items: center;
   width: 100%;
   background: var(--background_color_2);
+  background-color: white;
   box-sizing: border-box;
   border-radius: 10px;
+  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
+  margin-bottom: 10px;
 }
 .container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
   flex-direction: column;
   width: 100%;
-  height: 400px;
+  height: 360px;
   border-radius: 10px;
 }
-.wrapper-logo {
-  position: relative;
-  max-width: 100%;
-  height: 265px;
-}
+
 .card-info-1 {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #e71f77;
-  padding: 1px 4px;
-  border-radius: 5px;
+  /* background: #e71f77;
+  padding: 1px 4px; */
+  border-radius: 8px;
   color: white;
   font-size: 12px;
   top: 228px;
@@ -123,12 +124,25 @@ div.wrapper-card {
   top: 250px;
   right: 0px;
 }
-.logo {
+.wrapper-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  max-width: 100%;
+  height: 265px;
+  top: 0px;
+  /* margin-top: 0px;
+  padding-top: 0px; */
+}
+.image-producto {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px 10px 0px 0px;
+  object-fit: contain;
+  /* object-position: center; */
+  /* align-self: center; */
+  /* border-radius: 10px 10px 0px 0px; */
+  overflow: hidden;
   /* box-shadow: 0 0 10px 0.2px var(--color_icon); */
 }
 .wrapper-text {
@@ -148,6 +162,9 @@ div.wrapper-card {
   line-height: 1.4;
   letter-spacing: 2px;
   color: var(--color_text);
+  /* font-family: rocketfont, sans-serif; */
+  font-weight: 300;
+  /* font-size: 1rem; */
 }
 .wrapper-price {
   display: flex;

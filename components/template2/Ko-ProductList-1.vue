@@ -2,14 +2,14 @@
   <div class="wrapper-productlist">
     <div class="container">
       <div class="content-title">
-        <p class="title">Catálogo</p>
+        <p class="title">Productos</p>
       </div>
       <div class="top-right">
         <div class="content-item-top">
           <ul>
             <li class="dropdown">
               <div class="content-filtrar">
-                <a class="dropbtn">CATEGORÍA</a>
+                <a class="dropbtn">Categorías</a>
                 <Flechadown class="header-icon-menu" />
               </div>
               <div class="dropdown-content">
@@ -40,7 +40,9 @@
                               (ref = false)
                             )
                           "
-                        >{{ categoria.nombre_categoria_producto }}</p>
+                        >
+                          {{ categoria.nombre_categoria_producto }}
+                        </p>
                         <div
                           :style="indexCategory == index ? '' : 'display: none'"
                           class="content-item-subcategorie"
@@ -55,10 +57,15 @@
                             "
                             :key="subcategory.id"
                           >
-                            <p class="item-subcategorie">{{ subcategory.nombre_subcategoria }}</p>
+                            <p class="item-subcategorie">
+                              {{ subcategory.nombre_subcategoria }}
+                            </p>
                           </li>
                         </div>
-                        <div :class="{ popover: sub == index }" v-if="sub == index"></div>
+                        <div
+                          :class="{ popover: sub == index }"
+                          v-if="sub == index"
+                        ></div>
                       </label>
                     </li>
                   </ul>
@@ -75,7 +82,11 @@
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
-            <div v-for="product in filterProduct" :key="product.id" class="content-products">
+            <div
+              v-for="product in filterProduct"
+              :key="product.id"
+              class="content-products"
+            >
               <KoProductCard1 :product="product"></KoProductCard1>
             </div>
           </div>
@@ -97,196 +108,196 @@
 </template>
 
 <script>
-import KoProductCard1 from "./_productcard/Ko-ProductCard-1";
+import KoProductCard1 from './_productcard/Ko-ProductCard-1'
 export default {
   components: {
-    KoProductCard1
+    KoProductCard1,
   },
   props: {
     dataStore: Object,
     fullProducts: {},
   },
-  name: "Ko-ProductList-3",
+  name: 'Ko-ProductList-3',
   mounted() {
-    this.$store.commit("products/SET_FILTER", this.$route.query);
-    if (this.$store.getters["products/filterProducts"]) {
-      this.products = this.$store.getters["products/filterProducts"];
-      let maxTMP = 0;
-      this.products.forEach(product => {
+    this.$store.commit('products/SET_FILTER', this.$route.query)
+    if (this.$store.getters['products/filterProducts']) {
+      this.products = this.$store.getters['products/filterProducts']
+      let maxTMP = 0
+      this.products.forEach((product) => {
         if (maxTMP <= product.precio) {
-          this.price[1] = product.precio;
-          this.range.max = parseInt(product.precio);
-          maxTMP = product.precio;
+          this.price[1] = product.precio
+          this.range.max = parseInt(product.precio)
+          maxTMP = product.precio
         }
-      });
+      })
     }
   },
   data() {
     return {
       drawerleft: false,
-      directionleft: "ltr",
+      directionleft: 'ltr',
       add: true,
-      search: "",
+      search: '',
       productsCategory: [],
       price: [0, 1000000],
       range: {
-        max: 0
+        max: 0,
       },
       currentPage: 1,
       sub: -1,
       show: false,
-      value: "",
-      valuesub: "",
-      selectSubcategory: "",
-      nameCategory: "",
+      value: '',
+      valuesub: '',
+      selectSubcategory: '',
+      nameCategory: '',
       selectedSubcategories: [],
       toggleCategories: true,
       indexCategory: 0,
-      indexSelect: "",
-      indexSelect2: ""
-    };
+      indexSelect: '',
+      indexSelect2: '',
+    }
   },
   watch: {
     fullProducts(value) {
-      this.products = value;
-      let maxTMP = 0;
-      value.forEach(product => {
+      this.products = value
+      let maxTMP = 0
+      value.forEach((product) => {
         if (maxTMP <= product.precio) {
-          this.price[1] = product.precio;
-          this.range.max = parseInt(product.precio);
-          maxTMP = product.precio;
+          this.price[1] = product.precio
+          this.range.max = parseInt(product.precio)
+          maxTMP = product.precio
         }
-      });
+      })
     },
     search(value) {
-      this.Searchproduct(value);
+      this.Searchproduct(value)
     },
     currentPage() {
-      let timerTimeout = null;
+      let timerTimeout = null
       timerTimeout = setTimeout(() => {
-        timerTimeout = null;
-        window.scrollTo(0, 0);
-      }, 250);
-    }
+        timerTimeout = null
+        window.scrollTo(0, 0)
+      }, 250)
+    },
   },
   computed: {
     selectedCard() {
-      return this.dataStore.selectedCard;
+      return this.dataStore.selectedCard
     },
     products: {
       get() {
-        return this.dataStore.productos;
+        return this.dataStore.productos
       },
       set(value) {
-        this.dataStore.productos = value;
-      }
+        this.dataStore.productos = value
+      },
     },
     categorias() {
-      return this.dataStore.categorias;
+      return this.dataStore.categorias
     },
     subcategories() {
-      return this.dataStore.subcategorias;
+      return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 40 - 40;
-      const final = initial + 40;
+      const initial = this.currentPage * 40 - 40
+      const final = initial + 40
       return this.fullProducts
-        .filter(product => product.categoria == this.select)
-        .slice(initial, final);
+        .filter((product) => product.categoria == this.select)
+        .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 40 - 40;
-      const final = initial + 40;
-      return this.products.slice(initial, final);
+      const initial = this.currentPage * 40 - 40
+      const final = initial + 40
+      return this.products.slice(initial, final)
     },
     selectedCategory() {
-      return this.$store.state.products.payload;
+      return this.$store.state.products.payload
     },
     selectedType() {
-      return this.$store.state.products.type;
-    }
+      return this.$store.state.products.type
+    },
   },
   methods: {
     back() {
-      this.clear();
-      this.toggleCategories = true;
-      this.nameCategory = "";
+      this.clear()
+      this.toggleCategories = true
+      this.nameCategory = ''
     },
     Allcategories() {
-      this.$store.commit("products/FILTER_BY", {
-        type: "all",
-        data: ""
-      });
-      this.currentPage = 1;
+      this.$store.commit('products/FILTER_BY', {
+        type: 'all',
+        data: '',
+      })
+      this.currentPage = 1
     },
     Searchproduct(search) {
       if (search.length) {
-        this.$store.commit("products/FILTER_BY", {
-          type: "search",
-          data: search
-        });
+        this.$store.commit('products/FILTER_BY', {
+          type: 'search',
+          data: search,
+        })
       } else {
-        this.$store.commit("products/FILTER_BY", {
-          type: "all",
-          data: ""
-        });
+        this.$store.commit('products/FILTER_BY', {
+          type: 'all',
+          data: '',
+        })
       }
-      this.currentPage = 1;
+      this.currentPage = 1
     },
     addClass() {
-      this.add = !this.add;
+      this.add = !this.add
     },
     mouseOver(index) {
-      this.sub = index;
-      this.show = true;
+      this.sub = index
+      this.show = true
     },
     mouseLeave() {
-      this.sub = -1;
-      this.show = false;
+      this.sub = -1
+      this.show = false
     },
     Sendsubcategory(value) {
-      this.indexSelect2 = value;
-      this.addClass();
-      this.selectSubcategory = value;
-      this.$store.commit("products/FILTER_BY", {
-        type: "subcategory",
-        data: value
-      });
+      this.indexSelect2 = value
+      this.addClass()
+      this.selectSubcategory = value
+      this.$store.commit('products/FILTER_BY', {
+        type: 'subcategory',
+        data: value,
+      })
     },
     sendCategory(value, categoria, index, ref) {
-      this.indexSelect = index;
-      this.currentPage = 1;
-      this.nameCategory = value.nombre_categoria_producto;
-      this.indexCategory = index;
-      this.selectedSubcategories = [];
-      this.subcategories.find(subcategoria => {
+      this.indexSelect = index
+      this.currentPage = 1
+      this.nameCategory = value.nombre_categoria_producto
+      this.indexCategory = index
+      this.selectedSubcategories = []
+      this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
-          this.toggleCategories = false;
-          this.selectedSubcategories.push(subcategoria);
+          this.toggleCategories = false
+          this.selectedSubcategories.push(subcategoria)
         }
-      });
+      })
       if (this.selectedSubcategories.length === 0) {
-        this.addClass();
+        this.addClass()
       }
       if (ref) {
-        this.addClass();
+        this.addClass()
       }
-      this.$store.commit("products/FILTER_BY", {
-        type: "category",
-        data: value.nombre_categoria_producto
-      });
+      this.$store.commit('products/FILTER_BY', {
+        type: 'category',
+        data: value.nombre_categoria_producto,
+      })
     },
     clear() {
-      this.$store.commit("products/FILTER_BY", {
-        type: "all",
-        data: ""
-      });
-      this.$emit("clear");
-      this.addClass();
-      this.nameCategory = "";
-    }
-  }
-};
+      this.$store.commit('products/FILTER_BY', {
+        type: 'all',
+        data: '',
+      })
+      this.$emit('clear')
+      this.addClass()
+      this.nameCategory = ''
+    },
+  },
+}
 </script>
 
 <style scoped>
@@ -296,6 +307,7 @@ export default {
   align-items: center;
   width: 100%;
   background: var(--background_color_1);
+  background: #eef1f4;
   box-sizing: border-box;
 }
 .container {
