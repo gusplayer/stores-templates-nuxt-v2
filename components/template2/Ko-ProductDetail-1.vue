@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-productDetail">
-    <div class="loading" v-if="loading">Cargando</div>
+    <div v-if="loading" v-loading="loading"></div>
     <div class="container-productDetail" v-else>
       <div class="section">
         <div class="wrapper-left">

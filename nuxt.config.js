@@ -97,13 +97,4 @@ export default {
       }
     },
   },
-  router: {
-    routes: [
-      {
-        name: 'detalle',
-        path: '/template2/:slug',
-        component: 'pages/template2/detalle.vue',
-      },
-    ],
-  },
 }
