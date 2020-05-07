@@ -2,10 +2,18 @@
   <div class="wrapper-cart" ref="color">
     <div class="contenedor" v-if="this.productsCart.length">
       <ul class="products_list">
-        <li v-for="(product, index) in productsCart" :key="index" class="wrapper_item">
+        <li
+          v-for="(product, index) in productsCart"
+          :key="index"
+          class="wrapper_item"
+        >
           <div class="content_product_items">
             <div class="wrapper_item_photo">
-              <img :src="setFoto(product)" class="products_item_photo" :alt="product.nombre" />
+              <img
+                :src="setFoto(product)"
+                class="products_item_photo"
+                :alt="product.nombre"
+              />
             </div>
             <div class="products_item_name">
               <p class="text-name">{{ product.nombre | capitalize }}</p>
@@ -18,22 +26,33 @@
                     v-for="(item, items) in product.combinacion"
                     :key="items"
                     class="text-result"
-                  >{{ item }}</p>
+                  >
+                    {{ item }}
+                  </p>
                 </ul>
               </span>
               <div class="wrapper_quantity">
                 <p class="text-tittle">Cantidad:</p>
                 <div class="content_items_quantity">
                   <div class="quantity">
-                    <button class="quantity_remove" v-on:click="removeQuantity(product)">
+                    <button
+                      class="quantity_remove"
+                      v-on:click="removeQuantity(product)"
+                    >
                       <menos-icon class="icon" />
                     </button>
                     <p class="quantity_value">{{ product.cantidad }}</p>
-                    <button class="quantity_add" v-on:click="addQuantity(product)">
+                    <button
+                      class="quantity_add"
+                      v-on:click="addQuantity(product)"
+                    >
                       <mas-icon class="icon" />
                     </button>
                   </div>
-                  <div class="container-alert" v-if="product.cantidad == product.limitQuantity">
+                  <div
+                    class="container-alert"
+                    v-if="product.cantidad == product.limitQuantity"
+                  >
                     <span class="alert">
                       última Unidad!
                       <div class="arrow"></div>
@@ -49,7 +68,9 @@
               </div>
               <div>
                 <p class="text-tittle">Total:</p>
-                <p class="text-result">{{ (product.precio * product.cantidad) | currency }}</p>
+                <p class="text-result">
+                  {{ (product.precio * product.cantidad) | currency }}
+                </p>
               </div>
             </div>
             <div class="content_icon">
@@ -62,10 +83,18 @@
         <div class="line"></div>
       </ul>
       <ul class="products_list_resposive">
-        <li v-for="(product, index) in productsCart" :key="index" class="wrapper_item">
+        <li
+          v-for="(product, index) in productsCart"
+          :key="index"
+          class="wrapper_item"
+        >
           <div class="content_details">
             <div class="wrapper_item_photo">
-              <img :src="setFoto(product)" class="products_item_photo" :alt="product.nombre" />
+              <img
+                :src="setFoto(product)"
+                class="products_item_photo"
+                :alt="product.nombre"
+              />
             </div>
             <div class="content_items_details">
               <div>
@@ -86,7 +115,9 @@
                         v-for="(item, items) in product.combinacion"
                         :key="items"
                         class="text-result"
-                      >{{ item }}</p>
+                      >
+                        {{ item }}
+                      </p>
                     </ul>
                   </div>
                 </div>
@@ -99,18 +130,27 @@
                 </div>
                 <div class="products_item_details">
                   <div class="wrapper_quantity">
-                    <div class="container-alert" v-if="product.cantidad == product.limitQuantity">
+                    <div
+                      class="container-alert"
+                      v-if="product.cantidad == product.limitQuantity"
+                    >
                       <span class="alert">
                         última Unidad!
                         <div class="arrow"></div>
                       </span>
                     </div>
                     <div class="quantity">
-                      <button class="quantity_remove" v-on:click="removeQuantity(product)">
+                      <button
+                        class="quantity_remove"
+                        v-on:click="removeQuantity(product)"
+                      >
                         <menos-icon class="icon" />
                       </button>
                       <p class="quantity_value">{{ product.cantidad }}</p>
-                      <button class="quantity_add" v-on:click="addQuantity(product)">
+                      <button
+                        class="quantity_add"
+                        v-on:click="addQuantity(product)"
+                      >
                         <mas-icon class="icon" />
                       </button>
                     </div>
@@ -138,8 +178,8 @@
                 <details
                   v-if="
                     rangosByCiudad.envio_metodo === 'precio_ciudad' &&
-                      shippingCities.length > 0 &&
-                      getFreeShipping == false
+                    shippingCities.length > 0 &&
+                    getFreeShipping == false
                   "
                 >
                   <summary class="cart_summary_price">Valor por Ciudad</summary>
@@ -151,23 +191,27 @@
                     >
                       <b>
                         {{
-                        shippingCities[index].nombre_ciu === "Sin especificar"
-                        ? "Resto del país"
-                        : shippingCities[index].nombre_ciu
+                          shippingCities[index].nombre_ciu === 'Sin especificar'
+                            ? 'Resto del país'
+                            : shippingCities[index].nombre_ciu
                         }}:
                       </b>
                       {{ ciudad.price | currency }}
                     </li>
                   </ol>
                 </details>
-                <p v-else-if="shipping && getFreeShipping == false">{{ shipping | currency }}</p>
+                <p v-else-if="shipping && getFreeShipping == false">
+                  {{ shipping | currency }}
+                </p>
                 <p
                   class="cart_summary_price"
                   v-if="
                     rangosByCiudad.envio_metodo === 'gratis' ||
-                      getFreeShipping == true
+                    getFreeShipping == true
                   "
-                >No tiene costo de envió</p>
+                >
+                  No tiene costo de envió
+                </p>
               </span>
             </span>
             <div class="line"></div>
@@ -177,11 +221,13 @@
                 <p class="cart_summary_tittle">Total a pagar:</p>
                 <p class="cart_summary_price">
                   {{
-                  (totalCart + (getFreeShipping ? 0 : shipping)) | currency
+                    (totalCart + (getFreeShipping ? 0 : shipping)) | currency
                   }}
                 </p>
               </span>
-              <button ref="colorBtn" class="btn1" @click="GoPayments">Finalizar compra</button>
+              <button ref="colorBtn" class="btn1" @click="GoPayments">
+                Finalizar compra
+              </button>
               <button ref="colorBtn" class="btn2">Seguir comprando</button>
             </div>
             <div class="wrapper_btn_responsive">
@@ -189,13 +235,15 @@
                 <p class="cart_summary_tittle">Total a pagar:</p>
                 <p class="cart_summary_price">
                   {{
-                  (totalCart + (getFreeShipping ? 0 : shipping)) | currency
+                    (totalCart + (getFreeShipping ? 0 : shipping)) | currency
                   }}
                 </p>
               </span>
               <div class="content-btn">
                 <button ref="colorBtn" class="btn2">Seguir comprando</button>
-                <button ref="colorBtn2" class="btn1" @click="GoPayments">Finalizar compra</button>
+                <button ref="colorBtn2" class="btn1" @click="GoPayments">
+                  Finalizar compra
+                </button>
               </div>
             </div>
           </div>
@@ -214,115 +262,112 @@
 
 <script>
 export default {
-  name: "Ko-Cart-1",
-  props: {
-    dataStore: Object,
-  },
+  name: 'Ko-Cart-1',
   mounted() {
-    this.$store.commit("UPDATE_CONTENTCART");
-    this.$store.dispatch("GET_CITIES");
-    if (this.rangosByCiudad.envio_metodo === "precio_ciudad") {
-      this.filterCities();
+    this.$store.commit('UPDATE_CONTENTCART')
+    this.$store.dispatch('GET_CITIES')
+    if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
+      this.filterCities()
     }
   },
   data() {
     return {
       img:
-        "https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png",
+        'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
 
-      envioProducto: "",
+      envioProducto: '',
       layoutLogin: true,
       shippingCities: [],
-      rangosByCiudades: []
-    };
+      rangosByCiudades: [],
+    }
   },
   computed: {
     dataStore() {
       return this.$store.state.dataStore
-    },  
+    },
     totalCart() {
-      return this.$store.state.totalCart;
+      return this.$store.state.totalCart
     },
     productsCart() {
-      return this.$store.state.productsCart;
+      return this.$store.state.productsCart
     },
     orderComponent() {
-      return this.$store.state.orderComponent;
+      return this.$store.state.orderComponent
     },
     getFreeShipping() {
-      let free = true;
-      this.productsCart.filter(product => {
+      let free = true
+      this.productsCart.filter((product) => {
         if (product.envio_gratis == 0) {
-          free = false;
+          free = false
         }
-      });
-      return free;
+      })
+      return free
     },
     rangosByCiudad() {
-      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores);
-      return this.rangosByCiudades;
+      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
+      return this.rangosByCiudades
     },
     cities() {
-      return this.$store.state.cities;
+      return this.$store.state.cities
     },
     shipping() {
       if (this.$store.state.envios.estado) {
-        let shipping = JSON.parse(this.$store.state.envios.valores);
+        let shipping = JSON.parse(this.$store.state.envios.valores)
         switch (shipping.envio_metodo) {
-          case "gratis":
-            return 0;
-            break;
-          case "tarifa_plana":
-            return shipping.valor;
-            break;
-          case "precio_ciudad":
-            let result = shipping.rangos.find(rango => {
+          case 'gratis':
+            return 0
+            break
+          case 'tarifa_plana':
+            return shipping.valor
+            break
+          case 'precio_ciudad':
+            let result = shipping.rangos.find((rango) => {
               if (
                 this.totalCart >= rango.inicial &&
                 this.totalCart <= rango.final
               ) {
-                return rango;
+                return rango
               }
-            });
+            })
             if (result) {
-              return result.precio;
+              return result.precio
             } else {
-              return 0;
+              return 0
             }
-            break;
+            break
           default:
-            return 0;
+            return 0
         }
       } else {
-        return 0;
+        return 0
       }
     },
   },
   methods: {
     addQuantity(product, index) {
       if (product.limitQuantity > product.cantidad) {
-        product.cantidad++;
-        this.$store.commit("UPDATE_CONTENTCART");
-        this.$store.commit("CALCULATE_TOTALCART");
+        product.cantidad++
+        this.$store.commit('UPDATE_CONTENTCART')
+        this.$store.commit('CALCULATE_TOTALCART')
       }
     },
     removeQuantity(product, index) {
       if (product.cantidad >= 2) {
-        product.cantidad--;
-        this.$store.commit("UPDATE_CONTENTCART");
-        this.$store.commit("CALCULATE_TOTALCART");
+        product.cantidad--
+        this.$store.commit('UPDATE_CONTENTCART')
+        this.$store.commit('CALCULATE_TOTALCART')
       }
     },
     setFoto(product) {
       if (product.placeholder) {
-        return require(`../../assets/${product.foto}`);
+        return require(`../../assets/${product.foto}`)
       } else {
-        return product.foto_cloudinary;
+        return product.foto_cloudinary
       }
     },
     deleteItemCart(i) {
-      this.$store.state.productsCart.splice(i, 1);
-      this.$store.commit("UPDATE_CONTENTCART");
+      this.$store.state.productsCart.splice(i, 1)
+      this.$store.commit('UPDATE_CONTENTCART')
     },
     GoPayments() {
       let json = {
@@ -331,55 +376,55 @@ export default {
           id: this.$store.state.tienda.id_tienda,
           nombre: this.$store.state.tienda.nombre,
           logo: this.$store.state.tienda.logo,
-          location: window.location.href
+          location: window.location.href,
         },
         tipo: 0,
         total: this.$store.state.totalCart,
         estado: 0,
-        direccion_entrega: 0
-      };
-      json = JSON.stringify(json);
+        direccion_entrega: 0,
+      }
+      json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
-        location.href = `https://checkout.komercia.co/?params=${json}`;
+        location.href = `https://checkout.komercia.co/?params=${json}`
       }
     },
     filterCities() {
       if (
-        this.rangosByCiudad.envio_metodo === "precio_ciudad" &&
+        this.rangosByCiudad.envio_metodo === 'precio_ciudad' &&
         this.cities.length > 0
       ) {
         this.rangosByCiudad.rangos.forEach((rango, index) => {
-          this.cities.filter(city => {
+          this.cities.filter((city) => {
             if (city.id === this.rangosByCiudad.rangos[index].id) {
-              this.shippingCities.push(city);
+              this.shippingCities.push(city)
             }
-          });
-        });
+          })
+        })
       }
     },
   },
   watch: {
     rangosByCiudad() {
-      this.filterCities();
+      this.filterCities()
     },
     cities() {
-      this.filterCities();
+      this.filterCities()
     },
   },
   filters: {
     currency(value) {
       if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
     },
     capitalize(value) {
       if (value) {
-        value = value.toLowerCase();
-        return value.replace(/^\w|\s\w/g, l => l.toUpperCase());
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style scoped>
@@ -392,7 +437,7 @@ div.wrapper-cart {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_1);
+  background: #eef1f4;
   box-sizing: border-box;
   flex-direction: column;
   padding-bottom: 10px;
@@ -485,7 +530,7 @@ div.wrapper-cart {
   border-bottom-left-radius: 50px;
   border-style: solid;
   background: var(--background_color_1);
-  height: 38px;
+  height: 40px;
   width: 3em;
 }
 .quantity_value {
@@ -496,7 +541,7 @@ div.wrapper-cart {
   padding-right: 10px;
   border-style: solid none solid none;
   background: var(--background_color_1);
-  height: 38px;
+  height: 34px;
   width: 2.5em;
   justify-content: center;
   display: flex;
@@ -508,7 +553,7 @@ div.wrapper-cart {
   border-bottom-right-radius: 50px;
   border-style: solid;
   background: var(--background_color_1);
-  height: 38px;
+  height: 40px;
   width: 3em;
 }
 .icon {

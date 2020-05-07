@@ -25,9 +25,14 @@
                       <p>{{ product.cantidad }} und</p>
                     </div>
                     <div class="price">
-                      <p>{{ (product.precio * product.cantidad) | currency }}</p>
+                      <p>
+                        {{ (product.precio * product.cantidad) | currency }}
+                      </p>
                     </div>
-                    <delete-icon class="material-icons delete" v-on:click="deleteItemCart(index)"></delete-icon>
+                    <delete-icon
+                      class="material-icons delete"
+                      v-on:click="deleteItemCart(index)"
+                    ></delete-icon>
                   </li>
                 </ul>
               </div>
@@ -36,30 +41,56 @@
                   <span class="order_total_domicile">
                     <p>Costo domicilio</p>
                     <details
-                      v-if="rangosByCiudad.envio_metodo === 'precio_ciudad' && shippingCities.length > 0 && getFreeShipping == false"
+                      v-if="
+                        rangosByCiudad.envio_metodo === 'precio_ciudad' &&
+                        shippingCities.length > 0 &&
+                        getFreeShipping == false
+                      "
                     >
                       <summary class="text-color">Valor por Ciudad:</summary>
                       <section>
                         <ol class="scroll_cart_summary_items_cities">
-                          <li v-for="(ciudad, index) in rangosByCiudad.rangos" :key="ciudad.id">
-                            <b>{{shippingCities[index].nombre_ciu === 'Sin especificar' ? 'Resto del país': shippingCities[index].nombre_ciu}}:</b>
-                            {{ciudad.price | currency}}
+                          <li
+                            v-for="(ciudad, index) in rangosByCiudad.rangos"
+                            :key="ciudad.id"
+                          >
+                            <b
+                              >{{
+                                shippingCities[index].nombre_ciu ===
+                                'Sin especificar'
+                                  ? 'Resto del país'
+                                  : shippingCities[index].nombre_ciu
+                              }}:</b
+                            >
+                            {{ ciudad.price | currency }}
                           </li>
                         </ol>
                       </section>
                     </details>
-                    <p v-else-if="shipping && getFreeShipping == false">{{ shipping | currency }}</p>
+                    <p v-else-if="shipping && getFreeShipping == false">
+                      {{ shipping | currency }}
+                    </p>
                     <p
                       class="without_shipping_cost"
-                      v-if="rangosByCiudad.envio_metodo === 'gratis' || getFreeShipping == true"
-                    >No tiene costo de envió</p>
+                      v-if="
+                        rangosByCiudad.envio_metodo === 'gratis' ||
+                        getFreeShipping == true
+                      "
+                    >
+                      No tiene costo de envió
+                    </p>
                   </span>
                   <span class="order_total_net">
                     <p>Total a pagar</p>
-                    <p>{{ (totalCart + (getFreeShipping? 0 : shipping)) | currency }}</p>
+                    <p>
+                      {{
+                        (totalCart + (getFreeShipping ? 0 : shipping))
+                          | currency
+                      }}
+                    </p>
                   </span>
                 </div>
-                <button
+                <!-- <button
                   class="p_button"
                   @click="createQuotation"
                   v-if="userData.id && isQuotation()"
@@ -69,16 +100,20 @@
                   @click="toggleLayout"
                   v-else-if="isQuotation()"
                 >Iniciar sesión</button>
-                <button class="p_button" @click="GoPayments" v-else>Finalizar compra</button>
+                <button class="p_button" @click="GoPayments" v-else>Finalizar compra</button> -->
               </template>
               <template v-else c>
                 <div class="wrapper_photo">
                   <img :src="img" class="photo" />
                 </div>
-                <p class="text-cart-empty">Tu carrito de compras ahora está vacío.</p>
+                <p class="text-cart-empty">
+                  Tu carrito de compras ahora está vacío.
+                </p>
               </template>
               <br />
-              <button class="continue_shopping" @click="closeOrder">Seguir comprando</button>
+              <button class="continue_shopping" @click="closeOrder">
+                Seguir comprando
+              </button>
             </div>
           </template>
         </transition>
@@ -88,115 +123,112 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "koOrder1",
-  props: {
-  
-  },
+  name: 'koOrder1',
+  props: {},
   mounted() {
-    this.$store.commit("UPDATE_CONTENTCART");
-    this.$store.dispatch("GET_CITIES");
-    if (this.rangosByCiudad.envio_metodo === "precio_ciudad") {
-      this.filterCities();
+    this.$store.commit('UPDATE_CONTENTCART')
+    this.$store.dispatch('GET_CITIES')
+    if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
+      this.filterCities()
     }
   },
   data() {
     return {
       img:
-        "https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png",
+        'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
 
-      
       shippingCities: [],
-      rangosByCiudades: []
-    };
+      rangosByCiudades: [],
+    }
   },
   computed: {
     configHttp() {
-      return this.$store.state.configHttp;
+      return this.$store.state.configHttp
     },
     userData() {
-      return this.$store.state.userData;
+      return this.$store.state.userData
     },
     openOrder() {
-      return this.$store.state.openOrder;
+      return this.$store.state.openOrder
     },
     totalCart() {
-      return this.$store.state.totalCart;
+      return this.$store.state.totalCart
     },
     productsCart() {
-      return this.$store.state.productsCart;
+      return this.$store.state.productsCart
     },
     getFreeShipping() {
-      let free = true;
-      this.productsCart.filter(product => {
+      let free = true
+      this.productsCart.filter((product) => {
         if (product.envio_gratis == 0) {
-          free = false;
+          free = false
         }
-      });
-      return free;
+      })
+      return free
     },
     rangosByCiudad() {
-      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores);
-      return this.rangosByCiudades;
+      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
+      return this.rangosByCiudades
     },
     cities() {
-      return this.$store.state.cities;
+      return this.$store.state.cities
     },
     shipping() {
       if (this.$store.state.envios.estado) {
-        let shipping = JSON.parse(this.$store.state.envios.valores);
+        let shipping = JSON.parse(this.$store.state.envios.valores)
         switch (shipping.envio_metodo) {
-          case "gratis":
-            return 0;
-            break;
-          case "tarifa_plana":
-            return shipping.valor;
-            break;
-          case "precio_ciudad":
-            let result = shipping.rangos.find(rango => {
+          case 'gratis':
+            return 0
+            break
+          case 'tarifa_plana':
+            return shipping.valor
+            break
+          case 'precio_ciudad':
+            let result = shipping.rangos.find((rango) => {
               if (
                 this.totalCart >= rango.inicial &&
                 this.totalCart <= rango.final
               ) {
-                return rango;
+                return rango
               }
-            });
+            })
             if (result) {
-              return result.precio;
+              return result.precio
             } else {
-              return 0;
+              return 0
             }
-            break;
+            break
           default:
-            return 0;
+            return 0
         }
       } else {
-        return 0;
+        return 0
       }
-    }
+    },
   },
   methods: {
     isQuotation() {
-      let result = false;
-      this.productsCart.forEach(product => {
-        if (product.precio === 0) result = true;
-      });
-      return result;
+      let result = false
+      this.productsCart.forEach((product) => {
+        if (product.precio === 0) result = true
+      })
+      return result
     },
     deleteItemCart(i) {
-      this.$store.commit("DELETEITEMCART", i);
-      this.$store.commit("UPDATE_CONTENTCART");
+      this.$store.commit('DELETEITEMCART', i)
+      this.$store.commit('UPDATE_CONTENTCART')
     },
     closeOrder(event) {
-      const element = event.target.className;
+      const element = event.target.className
       if (
-        element === "order" ||
-        element === "order_header_close" ||
-        element === "continue_shopping"
+        element === 'order' ||
+        element === 'order_header_close' ||
+        element === 'continue_shopping'
       ) {
-        this.$store.commit("SET_OPENORDER", false);
+        this.$store.commit('SET_OPENORDER', false)
       }
     },
     GoPayments() {
@@ -206,16 +238,16 @@ export default {
           id: this.$store.state.tienda.id_tienda,
           nombre: this.$store.state.tienda.nombre,
           logo: this.$store.state.tienda.logo,
-          location: window.location.href
+          location: window.location.href,
         },
         tipo: 0,
         total: this.$store.state.totalCart,
         estado: 0,
-        direccion_entrega: 0
-      };
-      json = JSON.stringify(json);
+        direccion_entrega: 0,
+      }
+      json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
-        location.href = `https://checkout.komercia.co/?params=${json}`;
+        location.href = `https://checkout.komercia.co/?params=${json}`
       }
     },
     async createQuotation() {
@@ -226,60 +258,60 @@ export default {
         total: this.$store.state.totalCart,
         estado: 0,
         direccion_entrega: 0,
-        metodo_pago: "7",
+        metodo_pago: '7',
         costo_envio: this.shipping || 0,
-        usuario: this.userData.id
-      };
+        usuario: this.userData.id,
+      }
       const response = await axios.post(
         `https://api2.komercia.co/api/usuario/orden`,
         quotation,
         this.configHttp
-      );
-      this.$store.state.openOrder = false;
-      this.$store.state.productsCart = [];
-      this.$store.commit("UPDATE_CONTENTCART");
+      )
+      this.$store.state.openOrder = false
+      this.$store.state.productsCart = []
+      this.$store.commit('UPDATE_CONTENTCART')
       this.$notify.success({
-        title: "Hemos recibido tu cotización!",
-        message: "Pronto te enviaremos la información a tu correo electrónico."
-      });
+        title: 'Hemos recibido tu cotización!',
+        message: 'Pronto te enviaremos la información a tu correo electrónico.',
+      })
     },
     filterCities() {
       if (
-        this.rangosByCiudad.envio_metodo === "precio_ciudad" &&
+        this.rangosByCiudad.envio_metodo === 'precio_ciudad' &&
         this.cities.length > 0
       ) {
         this.rangosByCiudad.rangos.forEach((rango, index) => {
-          this.cities.filter(city => {
+          this.cities.filter((city) => {
             if (city.id === this.rangosByCiudad.rangos[index].id) {
-              this.shippingCities.push(city);
+              this.shippingCities.push(city)
             }
-          });
-        });
+          })
+        })
       }
-    }
+    },
   },
   watch: {
     rangosByCiudad() {
-      this.filterCities();
+      this.filterCities()
     },
     cities() {
-      this.filterCities();
-    }
+      this.filterCities()
+    },
   },
   filters: {
     currency(value) {
       if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
     },
     capitalize(value) {
       if (value) {
-        value = value.toLowerCase();
-        return value.replace(/^\w|\s\w/g, l => l.toUpperCase());
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style scoped>

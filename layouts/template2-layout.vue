@@ -1,9 +1,7 @@
 <template>
   <div>
     <KoHeader1 :dataStore="dataStore" />
-    <!-- <nuxt /> -->
-    <kBanner :dataStore="dataStore" />
-    <KProductList :dataStore="dataStore" :fullProducts="fullProducts"></KProductList>
+    <nuxt />
     <KFooter1 :dataStore="dataStore" />
   </div>
 </template>
@@ -11,21 +9,14 @@
 <script>
 import KoHeader1 from '../components/template2/Ko-Header-1'
 import KFooter1 from '../components/template2/Ko-Footer-1'
-import KProductList from '../components/template2/Ko-ProductList-1'
-import kBanner from '../components/template2/ko-Banner-1'
-
-
 
 export default {
   components: {
     KoHeader1,
     KFooter1,
-    KProductList,
-    kBanner
   },
   mounted() {
     this.$store.dispatch('GET_LOGIN')
-
     let full = window.location.host
     //window.location.host is subdomain.domain.com
     let parts = full.split('.')
@@ -48,7 +39,7 @@ export default {
     if (subdomain == 'tutienda') {
       arrayStores = 582
     }
-    
+
     // this.$store.dispatch('GET_DATA')
     this.$store.dispatch('GET_DATA_TIENDA_BY_ID', arrayStores)
     this.$store.dispatch('GET_SHOPPING_CART')
@@ -148,7 +139,11 @@ export default {
         },
       ],
       link: [
-      { rel: "icon", type: "image/x-icon", href: `https://api2.komercia.co/logos/${tienda.logo}` },
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: `https://api2.komercia.co/logos/${tienda.logo}`,
+        },
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
@@ -156,10 +151,10 @@ export default {
       ],
     }
   },
-  computed: {    
+  computed: {
     dataStore() {
       return this.$store.state.dataStore
-    },    
+    },
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },

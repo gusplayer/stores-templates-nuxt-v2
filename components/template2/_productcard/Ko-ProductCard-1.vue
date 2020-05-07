@@ -13,17 +13,20 @@
         <!-- <p class="card-info-2">Envío gratis !</p> -->
       </div>
       <div class="wrapper-text">
-        <p
-          class="card-text"
-          v-if="this.product.nombre.length >= 20"
-        >{{ `${this.product.nombre.slice(0, 20)}...` }}</p>
-        <p class="card-text" v-else>{{ `${this.product.nombre.slice(0, 20)}` }}</p>
+        <p class="card-text" v-if="this.product.nombre.length >= 20">
+          {{ `${this.product.nombre.slice(0, 20)}...` }}
+        </p>
+        <p class="card-text" v-else>
+          {{ `${this.product.nombre.slice(0, 20)}` }}
+        </p>
         <!-- <div class="wrapper-price">
           <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
           <p class="card-descuento">-50%</p>
         </div>-->
         <div class="separador-descuento"></div>
-        <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
+        <p class="card-price-2" v-if="this.product.precio > 0">
+          $ {{ this.product.precio }}
+        </p>
         <div v-else class="separador"></div>
       </div>
       <div class="wrapper-text-mobil">
@@ -33,18 +36,24 @@
             <!-- <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
             <p class="card-descuento">-50%</p>-->
           </div>
-          <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
+          <p class="card-price-2" v-if="this.product.precio > 0">
+            $ {{ this.product.precio }}
+          </p>
           <div v-else class="separador"></div>
         </div>
       </div>
       <div class="content-button">
-        <button ref="colorBtn" class="btn">Comprar</button>
-        <!-- <router-link
-          :to="`/productos/${this.product.slug}`"
+        <!-- <button ref="colorBtn" class="btn">Comprar</button> -->
+        <!-- :to="`/template2/${this.product.slug}`, params: { id:idPost }" -->
+        <router-link
+          :to="{
+            path: `/template2/${product.slug}`,
+            params: { slug: product.slug },
+          }"
           ref="colorBtn"
           class="btn"
           >Comprar</router-link
-        >-->
+        >
       </div>
     </div>
   </div>
@@ -54,10 +63,6 @@
 export default {
   name: 'Ko-ProductCard-1',
   props: { product: Object },
-  mounted() {},
-  computed: {},
-  methods: {},
-  watch: {},
 }
 </script>
 
@@ -213,6 +218,8 @@ export default {
   margin-bottom: 20px;
   cursor: pointer;
   transition: all 200ms ease-in;
+  text-decoration: none;
+  text-align: center;
 }
 .btn:hover {
   background-color: var(--grey);

@@ -178,5 +178,6 @@ export default {
   padding: 0px;
   font-family: 'Poppins';
   outline: none;
+  list-style: none;
 }
 </style>

@@ -1,5 +1,3 @@
-const path = require('path')
-
 export default {
   mode: 'universal',
   /*
@@ -44,8 +42,7 @@ export default {
 
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    '~/assets/css/main.css',
-    // 'swiper/dist/css/swiper.css',
+    'swiper/dist/css/swiper.css',
     'aos/dist/aos.css',
     'core-components-npm/dist/ko.css',
   ],
@@ -60,7 +57,7 @@ export default {
     '~/plugins/material-icons',
     { src: '@/plugins/aos.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
-    // { src: '~/plugins/vue-awesome-swiper.js', ssr: false },
+    { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
   ],
   /*
@@ -99,5 +96,14 @@ export default {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
     },
+  },
+  router: {
+    routes: [
+      {
+        name: 'detalle',
+        path: '/template2/:slug',
+        component: 'pages/template2/detalle.vue',
+      },
+    ],
   },
 }

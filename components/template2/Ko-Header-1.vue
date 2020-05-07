@@ -17,9 +17,9 @@
           class="header-buttons"
         >
           <!-- <p class="header-text-center">{{ item.nombre }}</p> -->
-          <nuxt-link :to="item.path" class="header-text-center">
-            {{ item.name }}
-          </nuxt-link>
+          <nuxt-link :to="item.path" class="header-text-center">{{
+            item.name
+          }}</nuxt-link>
         </div>
       </div>
       <div class="header-content-cart" @click="openOrder">
@@ -60,9 +60,9 @@
                     :key="`${index}${item.nombre}`"
                   >
                     <li>
-                      <nuxt-link :to="item.path" class="header-text-center">
-                        {{ item.name }}
-                      </nuxt-link>
+                      <nuxt-link :to="item.path" class="header-text-center">{{
+                        item.name
+                      }}</nuxt-link>
                     </li>
                   </div>
                 </div>
@@ -115,15 +115,15 @@ export default {
       secciones: [
         {
           name: 'Inicio',
-          path: '/',
+          path: '/template2/home',
         },
         {
           name: 'Carrito',
-          path: '/_Ko-Header-1',
+          path: '/template2/cart',
         },
         {
           name: 'Contacto',
-          path: '/contacto',
+          path: '/template2/contacto',
         },
       ],
     }
@@ -157,6 +157,9 @@ export default {
   width: 100%;
   background: var(--white);
   box-sizing: border-box;
+  /* position: fixed;
+  top: 0;
+  z-index: 99; */
 }
 .header {
   display: flex;
@@ -201,6 +204,7 @@ export default {
   color: var(--purple);
   margin-right: 20px;
   cursor: pointer;
+  text-decoration: none;
 }
 .header-text-center:hover {
   font-size: 16px;

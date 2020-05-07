@@ -4,7 +4,10 @@
       <div>
         <div class="left-logo">
           <div class="wrapper-logo">
-            <img :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`" class="logo" />
+            <img
+              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+              class="logo"
+            />
           </div>
           <p>Productos de alta calidad hechos a mano.</p>
         </div>
@@ -14,13 +17,19 @@
           <p class="text-top-bold">Secciones</p>
           <br />
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-            <p class="text-top">{{ item.name}}</p>
+            <nuxt-link :to="item.path" class="text-top">{{
+              item.name
+            }}</nuxt-link>
           </div>
         </div>
         <div>
           <p class="text-top-bold">Síguenos</p>
           <br />
-          <div v-for="(item, index) in links" :key="`${index}${item.nombre}`" class="text-icon">
+          <div
+            v-for="(item, index) in links"
+            :key="`${index}${item.nombre}`"
+            class="text-icon"
+          >
             <div v-if="item.link" :is="item.icon" class="icon" />
             <a v-if="item.link" :href="item.link">{{ item.nombre }}</a>
           </div>
@@ -40,14 +49,19 @@
               placeholder="Tu correo electrónico"
               required
             />
-            <button ref="colorBtn" class="btn" @click="submitNewsletter">Enviar</button>
+            <button ref="colorBtn" class="btn" @click="submitNewsletter">
+              Enviar
+            </button>
           </form>
         </div>
       </div>
       <div class="items-mobil">
         <div class="item-mobil-top">
           <div class="left-logo-mobil">
-            <img :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`" class="logo" />
+            <img
+              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+              class="logo"
+            />
             <div
               class="items-iconos"
               v-for="(item, index) in links"
@@ -72,8 +86,11 @@
           </form>
         </div>
         <div v-if="currentViews.length" class="item-mobil-center">
-          <div v-for="(item, index) in currentViews" :key="`${index}${item.name}`">
-            <p class="text-mobil">{{ item.name}}</p>
+          <div
+            v-for="(item, index) in currentViews"
+            :key="`${index}${item.name}`"
+          >
+            <p class="text-mobil">{{ item.name }}</p>
           </div>
         </div>
       </div>
@@ -95,79 +112,75 @@
 
 <script>
 export default {
-  name: "Ko-Footer-1",
+  name: 'Ko-Footer-1',
   props: {
     dataStore: Object,
   },
   data() {
     return {
       logo: null,
-      email: "",
-      message: "",
+      email: '',
+      message: '',
       secciones: [],
       links: [
         {
-          nombre: "Facebook",
-          icon: "facebook-icon",
-          link: this.dataStore.tienda.red_facebook
+          nombre: 'Facebook',
+          icon: 'facebook-icon',
+          link: this.dataStore.tienda.red_facebook,
         },
         {
-          nombre: "Twitter",
-          icon: "twitter-icon",
-          link: this.dataStore.tienda.red_twitter
+          nombre: 'Twitter',
+          icon: 'twitter-icon',
+          link: this.dataStore.tienda.red_twitter,
         },
         {
-          nombre: "Instagram",
-          icon: "instagram-icon",
-          link: this.dataStore.tienda.red_instagram
+          nombre: 'Instagram',
+          icon: 'instagram-icon',
+          link: this.dataStore.tienda.red_instagram,
         },
         {
-          nombre: "Youtube",
-          icon: "youtube-icon",
-          link: this.dataStore.tienda.red_youtube
-        }
+          nombre: 'Youtube',
+          icon: 'youtube-icon',
+          link: this.dataStore.tienda.red_youtube,
+        },
       ],
       secciones: [
         {
-          name: "Inicio",
-          path: "/"
+          name: 'Inicio',
+          path: '/template2/home',
         },
         {
-          name: "Productos",
-          path: "/productos"
+          name: 'Carrito',
+          path: '/template2/cart',
         },
         {
-          name: "Carrito",
-          path: "/cart"
+          name: 'Contacto',
+          path: '/template2/contacto',
         },
-        {
-          name: "Contacto",
-          path: "/contacto"
-        }
       ],
-      currentViews: []
-    };
+      currentViews: [],
+    }
   },
-  methods: {    
+  methods: {
     submitNewsletter() {
       if (this.email) {
         const json = {
           email: this.email,
-          tienda: this.$store.state.id
-        };
-        axios.post(`https://api2.komercia.co/api/tienda/suscriptor`, json);
+          tienda: this.$store.state.id,
+        }
+        axios.post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
       }
     },
   },
   watch: {
-    "dataStore.tienda"() {
-      this.links[0].link = this.dataStore.tienda.red_facebook;
-      this.links[1].link = this.dataStore.tienda.red_twitter;
-      this.links[2].link = this.dataStore.tienda.red_instagram;
-      this.links[3].link = this.dataStore.tienda.red_youtube;
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
     },
-  }
-};
+  },
+}
 </script>
 
 <style scoped>
@@ -272,6 +285,7 @@ export default {
   color: var(--purple);
   margin-top: 5px;
   cursor: pointer;
+  text-decoration: none;
 }
 .text-top:hover {
   color: var(--green);
@@ -331,6 +345,7 @@ export default {
   color: var(--purple);
   margin-top: 5px;
   margin-left: 7px;
+  text-decoration: none;
 }
 .text-icon a:hover {
   color: var(--green);
