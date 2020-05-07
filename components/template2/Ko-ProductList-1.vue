@@ -9,7 +9,13 @@
           <ul>
             <li class="dropdown">
               <div class="content-filtrar">
-                <a class="dropbtn">Categorías</a>
+                <a class="dropbtn">Categorías </a>
+                <a class="dropbtn2" v-if="this.nameCategory">
+                  - {{ this.nameCategory }}</a
+                >
+                <a class="dropbtn2" v-if="this.nameSubCategory">
+                  - {{ this.nameSubCategory }}
+                </a>
                 <Flechadown class="header-icon-menu" />
               </div>
               <div class="dropdown-content">
@@ -40,7 +46,9 @@
                               (ref = false)
                             )
                           "
-                        >{{ categoria.nombre_categoria_producto }}</p>
+                        >
+                          {{ categoria.nombre_categoria_producto }}
+                        </p>
                         <div
                           :style="indexCategory == index ? '' : 'display: none'"
                           class="content-item-subcategorie"
@@ -55,10 +63,15 @@
                             "
                             :key="subcategory.id"
                           >
-                            <p class="item-subcategorie">{{ subcategory.nombre_subcategoria }}</p>
+                            <p class="item-subcategorie">
+                              {{ subcategory.nombre_subcategoria }}
+                            </p>
                           </li>
                         </div>
-                        <div :class="{ popover: sub == index }" v-if="sub == index"></div>
+                        <div
+                          :class="{ popover: sub == index }"
+                          v-if="sub == index"
+                        ></div>
                       </label>
                     </li>
                   </ul>
@@ -75,8 +88,15 @@
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
-            <div v-for="product in filterProduct" :key="product.id" class="content-products">
-              <KoProductCard1 :product="product"></KoProductCard1>
+            <div
+              v-for="product in filterProduct"
+              :key="product.id"
+              class="content-products"
+            >
+              <KoProductCard1
+                :product="product"
+                data-aos="zoom-in"
+              ></KoProductCard1>
             </div>
           </div>
           <div class="pagination-medium">
@@ -139,6 +159,7 @@ export default {
       valuesub: '',
       selectSubcategory: '',
       nameCategory: '',
+      nameSubCategory: '',
       selectedSubcategories: [],
       toggleCategories: true,
       indexCategory: 0,
@@ -170,9 +191,6 @@ export default {
     },
   },
   computed: {
-    selectedCard() {
-      return this.dataStore.selectedCard
-    },
     products: {
       get() {
         return this.dataStore.productos
@@ -248,6 +266,10 @@ export default {
       this.indexSelect2 = value
       this.addClass()
       this.selectSubcategory = value
+      let filtradoCategoria = this.subcategories.find(
+        (element) => element.id == value
+      )
+      this.nameSubCategory = filtradoCategoria.nombre_subcategoria
       this.$store.commit('products/FILTER_BY', {
         type: 'subcategory',
         data: value,
@@ -290,13 +312,15 @@ export default {
 </script>
 
 <style scoped>
+div.wrapper-productlist {
+  --background_color_1: #f2f4f7;
+}
 .wrapper-productlist {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background: var(--background_color_1); */
-  background: #eef1f4;
+  background: var(--background_color_1);
   box-sizing: border-box;
 }
 .container {
@@ -317,7 +341,6 @@ export default {
   justify-content: space-between;
   flex-direction: row;
 }
-
 .title {
   font-size: 38px;
   font-weight: bold;
@@ -325,7 +348,7 @@ export default {
   font-style: normal;
   line-height: 1.24;
   letter-spacing: -0.4px;
-  color: var(--purple);
+  color: var(--color_text);
 }
 .content-item {
   display: flex;
@@ -346,6 +369,28 @@ export default {
   display: flex;
   flex-direction: row;
 }
+.dropbtn {
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+  color: var(--color_subtext);
+  align-self: flex-end;
+  cursor: pointer;
+  margin-right: 2px;
+}
+.dropbtn2 {
+  display: initial;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+  color: var(--color_subtext);
+  opacity: 0.4;
+  align-self: flex-end;
+  margin-right: 2px;
+  margin-left: 5px;
+}
 .dropdown-content {
   display: none;
   position: absolute;
@@ -357,16 +402,7 @@ export default {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-.dropbtn {
-  background: transparent;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: var(--grey);
-  align-self: flex-end;
-  cursor: pointer;
-  margin-right: 2px;
-}
+
 /* ///////categorias//////////// */
 .content-item-catalogo {
   display: flex;
@@ -376,7 +412,7 @@ export default {
   max-width: 205px;
   width: 100%;
   border-radius: 10px;
-  background-color: var(--white);
+  background-color: var(--background_color_2);
 }
 .a-container {
   width: 205px;
@@ -385,8 +421,8 @@ export default {
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  color: var(--purple);
-  background-color: var(--white);
+  color: var(--color_subtext);
+  background-color: var(--background_color_2);
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -ms-transition: all 0.2s ease;
@@ -398,20 +434,20 @@ export default {
 .item-categoria {
   cursor: pointer;
   padding: 0px 10px 0px 20px;
-  background-color: var(--white);
+  background-color: var(--background_color_2);
 }
 .item-categoria-active {
-  background: var(--grey);
-  color: var(--black);
+  background: var(--color_background_hover);
+  color: var(--color_hover_text);
 }
 
 .item-categoria:hover {
-  background: var(--grey);
-  color: var(--black);
+  background: var(--color_background_hover);
+  color: var(--color_hover_text);
 }
 /*////// subcategoria //////*/
 .content-item-subcategorie {
-  background: var(--grey);
+  background: var(--color_background_hover);
   padding-right: 10px;
   padding-left: 40px;
 }
@@ -421,12 +457,12 @@ export default {
   user-select: none;
 }
 .item-subcategorie-active {
-  background: var(--greylite);
-  color: var(--white);
+  background: var(--color_background_hover);
+  color: var(--color_hover_text);
 }
 .item-subcategorie:hover {
-  background: var(--greylite);
-  color: var(--white);
+  background: var(--color_background_hover);
+  color: var(--color_hover_text);
 }
 
 /* ///////productos/////////// */
@@ -436,7 +472,7 @@ export default {
 }
 .content-products:hover,
 .content-products:focus {
-  box-shadow: 0px 0px 2px 1px var(--green);
+  box-shadow: 0px 0px 2px 1px var(--color_border);
   border-radius: 10px;
 }
 .content-item-productos {
@@ -464,7 +500,7 @@ export default {
 .header-icon-menu {
   font-size: 30px;
   cursor: pointer;
-  color: var(--grey);
+  color: var(--color_subtext);
 }
 .header-icon-close {
   font-size: 30px;
@@ -482,19 +518,19 @@ export default {
   padding: 10px 35px 10px 15px;
   box-sizing: border-box;
   font-size: 14px;
-  color: var(--grey);
+  color: var(--color_subtext);
   border: solid 2px #afafaf;
-  border-radius: 25px;
+  border-radius: var(--radius_btn);
   background-color: transparent;
 }
 .top-input-search input::placeholder {
-  color: var(--grey);
+  color: var(--color_subtext);
   opacity: 0.7;
 }
 .top-input-search input:focus,
 .top-input-search input:active {
   border: solid 2px #afafaf;
-  border-radius: 25px;
+  border-radius: var(--radius_btn);
   outline: 0;
 }
 .top-input-search i.icon-search {
@@ -502,7 +538,7 @@ export default {
   top: 9px;
   right: 15px;
   z-index: 2;
-  color: var(--grey);
+  color: var(--color_subtext);
   font-weight: bold;
 }
 .top-input-search .response {
@@ -511,9 +547,9 @@ export default {
   height: 32px;
   line-height: 30px;
   font-size: 12px;
-  color: var(--grey);
+  color: var(--color_subtext);
   border: solid 2px #d8d8d8;
-  border-radius: 25px;
+  border-radius: var(--radius_btn);
   background-color: transparent;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -525,20 +561,20 @@ export default {
 /* //////paginacion//////// */
 .pagination-medium {
   margin-top: 10px;
-  background: #eef1f4;
+  background: var(--background_color_1);
 }
 .pagination {
   font-size: 18px;
-  color: var(--purple);
+  color: var(--color_text);
 }
 .el-pager li.active,
 .el-pager li.hover,
 .el-pager li.focus {
-  color: var(--purple);
+  color: var(--color_text);
 }
 .popover {
   width: 300px;
-  background: #eef1f4;
+  background: var(--background_color_1);
   position: absolute;
   right: -240px;
   top: 0;
@@ -676,6 +712,9 @@ export default {
 }
 @media (max-width: 590px) {
   /* ///////productos/////////// */
+  .dropbtn2 {
+    display: none;
+  }
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 25px;
@@ -714,11 +753,6 @@ export default {
   .grid-products {
     grid-template-columns: repeat(1, minmax(250px, 2fr));
     grid-gap: 10px;
-  }
-  .title {
-    font-size: 35px;
-    margin-top: 10px;
-    margin-bottom: 5px;
   }
 }
 </style>

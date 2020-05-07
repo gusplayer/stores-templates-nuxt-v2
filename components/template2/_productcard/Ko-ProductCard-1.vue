@@ -44,7 +44,7 @@
       </div>
       <div class="content-button">
         <!-- <button ref="colorBtn" class="btn">Comprar</button> -->
-        <!-- :to="`/template2/${this.product.slug}`, params: { id:idPost }" -->
+
         <router-link
           :to="{
             path: `/template2/${product.slug}`,
@@ -78,8 +78,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background: var(--background_color_2); */
-  background: white;
+  background: var(--background_color_2);
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
@@ -99,8 +98,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: #e71f77;
-  padding: 1px 4px; */
+  background: #e71f77;
+  padding: 1px 4px;
   border-radius: 8px;
   color: white;
   font-size: 12px;
@@ -158,7 +157,8 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: 2px;
-  color: var(--purple);
+  color: var(--color_text);
+
   /* font-family: rocketfont, sans-serif; */
   font-weight: 300;
   /* font-size: 1rem; */
@@ -195,7 +195,7 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--grey);
+  color: var(--color_subtext);
   margin-top: 5px;
 }
 .content-button {
@@ -206,10 +206,10 @@ export default {
   align-self: center;
 }
 .btn {
-  color: white;
-  border-radius: 25px;
-  border: solid 2px var(--black);
-  background-color: var(--black);
+  color: var(--color_text_btn);
+  border-radius: var(--radius_btn);
+  border: solid 2px var(--color_border_btn);
+  background-color: var(--color_background_btn);
   padding: 8px 14px;
   font-size: 14px;
   width: 120px;
@@ -222,10 +222,9 @@ export default {
   text-align: center;
 }
 .btn:hover {
-  background-color: var(--grey);
-  border: solid 2px var(--grey);
-
-  color: black;
+  color: white;
+  background-color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 @media (max-width: 750px) {
   .content-button {

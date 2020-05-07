@@ -6,6 +6,7 @@
           v-for="(product, index) in productsCart"
           :key="index"
           class="wrapper_item"
+          data-aos="zoom-in"
         >
           <div class="content_product_items">
             <div class="wrapper_item_photo">
@@ -228,7 +229,10 @@
               <button ref="colorBtn" class="btn1" @click="GoPayments">
                 Finalizar compra
               </button>
-              <button ref="colorBtn" class="btn2">Seguir comprando</button>
+              <!-- <button ref="colorBtn" class="btn2">Seguir comprando</button> -->
+              <nuxt-link to="/template2/home" class="btn2"
+                >Seguir comprando</nuxt-link
+              >
             </div>
             <div class="wrapper_btn_responsive">
               <span class="cart_summary_items">
@@ -429,15 +433,15 @@ export default {
 
 <style scoped>
 div.wrapper-cart {
-  --btnhover: #000000;
-  --btnhover2: #000000;
+  --background_color_1: #f2f4f7;
 }
+
 .wrapper-cart {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: #eef1f4;
+  background: var(--background_color_1);
   box-sizing: border-box;
   flex-direction: column;
   padding-bottom: 10px;
@@ -530,8 +534,9 @@ div.wrapper-cart {
   border-bottom-left-radius: 50px;
   border-style: solid;
   background: var(--background_color_1);
-  height: 40px;
+  height: 41px;
   width: 3em;
+  box-sizing: border-box;
 }
 .quantity_value {
   font-size: 1em;
@@ -541,11 +546,12 @@ div.wrapper-cart {
   padding-right: 10px;
   border-style: solid none solid none;
   background: var(--background_color_1);
-  height: 34px;
+  height: 41px;
   width: 2.5em;
   justify-content: center;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 .quantity_add {
   border: 2px var(--color_border);
@@ -553,12 +559,17 @@ div.wrapper-cart {
   border-bottom-right-radius: 50px;
   border-style: solid;
   background: var(--background_color_1);
-  height: 40px;
+  height: 41px;
   width: 3em;
+  box-sizing: border-box;
 }
 .icon {
   font-size: 16px;
   color: var(--color_border);
+  transition: all 200ms ease-in;
+}
+.icon:hover {
+  color: var(--color_text);
 }
 .container-alert {
   background-color: rgb(250, 232, 75);
@@ -596,9 +607,7 @@ div.wrapper-cart {
 }
 .cart-icon:hover {
   font-size: 24px;
-  color: #160b4b;
-  cursor: pointer;
-  margin-right: 10px;
+  color: var(--color_subtext);
 }
 .cart-icon > .material-design-icon__svg {
   bottom: 0em;
@@ -698,6 +707,7 @@ div.wrapper-cart {
   transition: all 200ms ease-in;
 }
 .btn1:hover {
+  border: solid 2px var(--btnhover);
   background-color: var(--btnhover);
 }
 .btn2 {
@@ -705,7 +715,8 @@ div.wrapper-cart {
   color: var(--color_background_btn_2);
   border: solid 2px var(--color_background_btn_2);
   background-color: transparent;
-  padding: 8px 12px;
+  padding: 8px 0px;
+  text-align: center;
   width: 100%;
   font-size: 14px;
   font-weight: bold;
@@ -872,15 +883,15 @@ div.wrapper-cart {
     margin-bottom: 3px;
   }
   .quantity_remove {
-    height: 34px;
+    height: 41px;
     width: 2.8em;
   }
   .quantity_value {
-    height: 34px;
+    height: 41px;
     width: 2.3em;
   }
   .quantity_add {
-    height: 34px;
+    height: 41px;
     width: 2.8em;
   }
   .container-alert {

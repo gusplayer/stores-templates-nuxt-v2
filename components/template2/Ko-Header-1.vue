@@ -3,7 +3,7 @@
     <div class="header">
       <KoOrder />
       <div class="header-content-logo">
-        <nuxt-link to="/" class="wrapper-logo">
+        <nuxt-link to="/template2/home" class="wrapper-logo">
           <img
             :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
             class="header-logo"
@@ -155,11 +155,8 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--white);
+  background: var(--background_color_1);
   box-sizing: border-box;
-  /* position: fixed;
-  top: 0;
-  z-index: 99; */
 }
 .header {
   display: flex;
@@ -176,14 +173,14 @@ export default {
   align-items: center;
 }
 .wrapper-logo {
-  max-width: 120px;
+  max-width: var(--logo_width);
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
 .header-logo {
-  width: auto;
-  height: 50px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: left;
 }
@@ -201,15 +198,14 @@ export default {
 .header-text-center {
   font-size: 16px;
   font-weight: normal;
-  color: var(--purple);
+  color: var(--color_text);
   margin-right: 20px;
   cursor: pointer;
-  text-decoration: none;
 }
 .header-text-center:hover {
   font-size: 16px;
   font-weight: normal;
-  color: var(--green);
+  color: var(--color_hover_text);
   margin-right: 20px;
   cursor: pointer;
 }
@@ -221,7 +217,7 @@ export default {
   max-width: 35px;
   width: 100%;
   height: 35px;
-  border: var(--green) 2px solid;
+  border: var(--color_shopping_cart) 2px solid;
   border-radius: 50%;
   padding-bottom: 3px;
   margin-left: 20px;
@@ -232,9 +228,9 @@ export default {
   position: absolute;
   right: -5px;
   top: -5px;
-  color: var(--white);
-  background-color: var(--green);
-  border: var(--green) 1px;
+  color: var(--background_color_1);
+  background-color: var(--color_shopping_cart);
+  border: var(--color_shopping_cart) 1px;
   border-radius: 10px;
   line-height: 1;
   display: flex;
@@ -244,11 +240,11 @@ export default {
 }
 .header-icon-cart {
   font-size: 20px;
-  color: var(--green);
+  color: var(--color_icon);
   cursor: pointer;
 }
 .header-icon-cart:hover {
-  color: var(--magenta);
+  color: var(--color_hover_text);
 }
 
 .header-item-menu {
@@ -309,7 +305,7 @@ export default {
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: var(--purple);
+    color: var(--color_text);
   }
   .header-icon-menu > .material-design-icon__svg {
     bottom: 0em;
@@ -322,7 +318,7 @@ export default {
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: var(--purple);
+    color: var(--color_text);
   }
   .nav-bar > .material-design-icon__svg {
     bottom: 0px;
@@ -346,7 +342,7 @@ export default {
   #sidebar ul li {
     font-size: 16px;
     font-weight: normal;
-    color: var(--purple);
+    color: var(--color_text);
     list-style: none;
     margin: 20px 0px;
   }

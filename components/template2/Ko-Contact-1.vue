@@ -196,6 +196,10 @@ export default {
 </script>
 
 <style scoped>
+div.wrapper-contact {
+  --background_color_1: #f2f4f7;
+}
+
 .wrapper-contact {
   display: flex;
   justify-content: center;
@@ -212,7 +216,7 @@ export default {
   justify-content: center;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 30px 10px;
+  padding: 30px 30px;
 }
 .contact > div {
   flex: 1;
@@ -448,6 +452,8 @@ export default {
   transition: all 200ms ease-in;
 }
 .btn:hover {
+  color: white;
+  border: solid 2px var(--btnhover);
   background-color: var(--btnhover);
 }
 

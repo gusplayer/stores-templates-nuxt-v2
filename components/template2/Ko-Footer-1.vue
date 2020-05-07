@@ -3,12 +3,12 @@
     <div class="contenedor">
       <div>
         <div class="left-logo">
-          <div class="wrapper-logo">
+          <nuxt-link to="/template2/home" class="wrapper-logo">
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="logo"
             />
-          </div>
+          </nuxt-link>
           <p>Productos de alta calidad hechos a mano.</p>
         </div>
       </div>
@@ -189,7 +189,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--white);
+  background: var(--background_color_1);
   box-sizing: border-box;
   flex-direction: column;
   padding-bottom: 10px;
@@ -234,11 +234,11 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--grey);
+  color: var(--color_subtext);
   margin-top: 10px;
 }
 .wrapper-logo {
-  max-width: 120px;
+  max-width: var(--logo_width);
 }
 .logo {
   width: 100%;
@@ -250,11 +250,11 @@ export default {
   opacity: 0.7;
 }
 .separator {
-  background: var(--green);
   height: 1.1px;
   width: 400px;
   opacity: 0.5;
-  border: solid 1px var(--green);
+  border: solid 1px var(--color_icon);
+  background: var(--color_icon);
   margin-bottom: 10px;
 }
 .under-footer {
@@ -273,7 +273,7 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--purple);
+  color: var(--color_text);
 }
 .text-top {
   font-size: 18px;
@@ -282,13 +282,12 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--purple);
+  color: var(--color_text);
   margin-top: 5px;
   cursor: pointer;
-  text-decoration: none;
 }
 .text-top:hover {
-  color: var(--green);
+  color: var(--color_icon);
 }
 
 .text-top-bold {
@@ -297,7 +296,7 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--purple);
+  color: var(--color_text);
   font-weight: bold;
 }
 .text-light {
@@ -307,7 +306,7 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--grey);
+  color: var(--color_subtext);
 }
 .input-text {
   font-size: 14px;
@@ -316,14 +315,14 @@ export default {
   font-style: normal;
   line-height: 1.57;
   letter-spacing: normal;
-  color: var(--grey);
+  color: var(--color_subtext);
   border: solid 2px #afafaf;
   border-radius: var(--radius_btn);
   background-color: transparent;
   padding: 4px 14px;
 }
 .input-text::placeholder {
-  color: var(--grey);
+  color: var(--color_subtext);
   opacity: 0.7;
 }
 .input-text:focus,
@@ -342,13 +341,12 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--purple);
+  color: var(--color_text);
   margin-top: 5px;
   margin-left: 7px;
-  text-decoration: none;
 }
 .text-icon a:hover {
-  color: var(--green);
+  color: var(--color_icon);
 }
 .input-content {
   display: flex;
@@ -362,23 +360,24 @@ export default {
 }
 .icon {
   font-size: 19px;
-  color: var(--green);
+  color: var(--color_icon);
 }
 .btn {
   border-radius: var(--radius_btn);
-  color: var(--white);
-  border: solid 2px var(--black);
-  background-color: var(--black);
+  color: var(--color_text_btn);
+  border: solid 2px var(--color_border_btn);
+  background-color: var(--color_background_btn);
   margin-left: 3%;
   padding: 4px 14px;
+  font-weight: bold;
   width: 100%;
   cursor: pointer;
   transition: all 200ms ease-in;
 }
 .btn:hover {
-  color: var(--black);
-  border: solid 2px var(--grey);
-  background-color: var(--grey);
+  color: white;
+  background-color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 .items-mobil {
   display: none;
@@ -442,7 +441,7 @@ export default {
     font-style: normal;
     line-height: 1.4;
     letter-spacing: normal;
-    color: var(--purple);
+    color: var(--color_text);
     text-align: center;
   }
   .items-mobil {
@@ -474,7 +473,7 @@ export default {
     font-style: normal;
     line-height: 1.4;
     letter-spacing: normal;
-    color: var(--purple);
+    color: var(--color_text);
     margin-top: 10px;
   }
   .item-mobil-top {
@@ -497,7 +496,7 @@ export default {
     font-style: normal;
     line-height: 1.4;
     letter-spacing: normal;
-    color: var(--purple);
+    color: var(--color_text);
     margin-top: 20px;
     text-align: center;
   }
@@ -521,14 +520,14 @@ export default {
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: var(--green);
+    color: var(--color_icon);
     margin-left: 7px;
   }
   .btn {
     border-radius: var(--radius_btn);
-    color: var(--white);
-    border: solid 2px var(--black);
-    background-color: var(--black);
+    color: var(--color_text_btn);
+    border: solid 2px var(--color_border_btn);
+    background-color: var(--color_background_btn);
     margin-top: 10px;
     padding: 8px 14px;
     margin-left: 0px;

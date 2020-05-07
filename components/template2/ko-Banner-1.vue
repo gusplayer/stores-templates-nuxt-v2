@@ -6,7 +6,7 @@
         <img
           src="https://ep01.epimg.net/elcomidista/imagenes/2019/11/28/articulo/1574897584_677912_1574946142_media_normal.jpg"
           class="header-logo"
-          data-aos="fade-right"
+          data-aos="zoom-in"
         />
       </div>
     </div>
@@ -20,11 +20,11 @@ export default {
   },
   data() {
     return {}
-  },  
+  },
   computed: {
-    banner(){
+    banner() {
       return this.dataStore.banners[0].ruta_banner
-    }
+    },
   },
   methods: {},
 }

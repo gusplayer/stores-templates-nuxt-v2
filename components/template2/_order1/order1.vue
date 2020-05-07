@@ -111,7 +111,14 @@
                 </p>
               </template>
               <br />
-              <button class="continue_shopping" @click="closeOrder">
+              <button
+                v-if="productsCart.length"
+                class="continue_shopping"
+                @click="GoPayments"
+              >
+                Finalizar compra
+              </button>
+              <button class="continue_shopping2" @click="closeOrder">
                 Seguir comprando
               </button>
             </div>
@@ -332,7 +339,7 @@ export default {
   max-width: 400px;
   width: 100%;
   height: 100vh;
-  background-color: var(--white);
+  background-color: var(--background_color_1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -359,7 +366,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--purple);
+  border-bottom: 1px solid var(--background_color_2);
   padding: 10px 10%;
   flex: none;
 }
@@ -367,7 +374,7 @@ export default {
   padding: 5px 12px;
   border-radius: 10px;
   border: 1px solid white;
-  background-color: var(--purple);
+  background-color: var(--color_shopping_cart);
   cursor: pointer;
   outline: none;
   flex: none;
@@ -375,7 +382,7 @@ export default {
   transition: all ease 0.3s;
 }
 .order_header_close:hover {
-  background-color: var(--green);
+  background-color: var(--color_hover_text);
 }
 .order--wrapper {
   display: grid;
@@ -394,7 +401,7 @@ export default {
   border-radius: 10px;
 }
 .order_products_list::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #ffffff, var(--magenta));
+  background: linear-gradient(125deg, #ffffff, var(--color_shopping_cart));
   border-radius: 10px;
 }
 .order_products_list_item {
@@ -423,7 +430,7 @@ export default {
   font-size: 14px;
 }
 .price {
-  color: var(--magenta);
+  color: var(--color_shopping_cart);
   font-size: 16px;
 }
 .order_products_list_item .material-icons.delete {
@@ -432,7 +439,7 @@ export default {
   transition: 0.3s;
 }
 .order_products_list_item:hover .material-icons.delete {
-  color: initial;
+  color: var(--color_hover_text);
 }
 .order_beforefreeshipping {
   text-align: center;
@@ -483,7 +490,7 @@ export default {
   border-radius: 10px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #ffffff, var(--magenta));
+  background: linear-gradient(125deg, #ffffff, var(--color_shopping_cart));
   border-radius: 10px;
 }
 .without_shipping_cost {
@@ -499,7 +506,7 @@ export default {
   width: 80%;
   height: 40px;
   border-style: none;
-  background: var(--magenta);
+  background: var(--color_shopping_cart);
   border-radius: 25px;
   display: inline-block;
   padding: 0 20px;
@@ -515,14 +522,42 @@ export default {
   opacity: 0.8;
 }
 .continue_shopping {
+  margin-top: 20px;
   justify-self: center;
-  width: 80%;
-  height: 36px;
   border-style: none;
   background-color: transparent;
-  padding: 0 20px;
-  color: var(--black);
-  border: 2px solid var(--black);
+  padding: 8px 10px;
+  width: 100%;
+  max-width: 280px;
+  border-radius: var(--radius_btn);
+  color: var(--color_text_btn);
+  border: solid 2px var(--color_border_btn);
+  background-color: var(--color_background_btn);
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+  flex: none;
+  transition: all ease 0.3s;
+}
+.continue_shopping:hover {
+  border: solid 2px var(--btnhover);
+  background-color: var(--btnhover);
+}
+
+.continue_shopping2 {
+  margin-top: 20px;
+  font-weight: bold;
+  justify-self: center;
+  border-style: none;
+  background-color: transparent;
+  padding: 8px 10px;
+  width: 100%;
+  max-width: 280px;
+  color: var(--color_shopping_cart);
+  border: 2px solid var(--color_shopping_cart);
   border-radius: 25px;
   font-size: 14px;
   letter-spacing: 1px;
@@ -531,10 +566,9 @@ export default {
   flex: none;
   transition: all ease 0.3s;
 }
-.continue_shopping:hover {
-  color: var(--green);
-  border: 2px solid var(--green);
-  opacity: 0.8;
+.continue_shopping2:hover {
+  color: var(--color_hover_text);
+  border: 2px solid var(--color_hover_text);
 }
 .wrapper_photo {
   position: relative;

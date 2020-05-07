@@ -100,6 +100,14 @@
                   <button class="quantity_add" v-on:click="addQuantity()">
                     <mas-icon class="icon" />
                   </button>
+                  <div
+                    class="container-alerta"
+                    v-if="this.maxQuantityValue == this.quantityValue"
+                  >
+                    <span class="alerta">
+                      última Unidad!
+                    </span>
+                  </div>
                 </div>
                 <div class="item-info-product">
                   <div v-if="data.info.garantia" class="content_buy_action">
@@ -168,7 +176,6 @@
               >
                 <span class="alert">
                   última Unidad!
-                  <div class="arrow"></div>
                 </span>
               </div>
             </transition>
@@ -597,7 +604,7 @@ export default {
 
 <style scoped>
 div.wrapper-productDetail {
-  --btnhover: #000000;
+  --background_color_1: #f2f4f7;
 }
 .wrapper-productDetail {
   display: flex;
@@ -816,6 +823,8 @@ i.close {
   transition: all 200ms ease-in;
 }
 .btn:hover {
+  color: white;
+  border: solid 2px var(--btnhover);
   background-color: var(--btnhover);
 }
 .quantity {
@@ -836,7 +845,7 @@ i.close {
   border-bottom-left-radius: 50px;
   border-style: solid;
   background: transparent;
-  height: 40px;
+  height: 41px;
   width: 3em;
 }
 .quantity_value {
@@ -847,7 +856,7 @@ i.close {
   padding-right: 10px;
   border-style: solid none solid none;
   background: transparent;
-  height: 34px;
+  height: 41px;
   width: 3em;
   justify-content: center;
   display: flex;
@@ -859,12 +868,16 @@ i.close {
   border-bottom-right-radius: 50px;
   border-style: solid;
   background: transparent;
-  height: 40px;
+  height: 41px;
   width: 3em;
 }
 .icon {
   font-size: 16px;
   color: var(--color_border);
+  transition: all 200ms ease-in;
+}
+.icon:hover {
+  color: var(--color_text);
 }
 .features {
   width: 100%;
@@ -873,6 +886,23 @@ i.close {
 }
 .responsive-purchase {
   display: none;
+}
+.container-alerta {
+  margin-left: 3px;
+  width: 120px;
+  background-color: rgb(250, 232, 75);
+  border: 1px solid rgb(230, 213, 66);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: black;
+}
+.alerta {
+  text-align: center;
+  padding: 5px 5px;
+  text-transform: capitalize;
 }
 @media (max-width: 1250px) {
   .photo_main {

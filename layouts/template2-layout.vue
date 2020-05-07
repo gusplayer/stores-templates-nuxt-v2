@@ -163,19 +163,6 @@ export default {
 </script>
 
 <style>
-:root {
-  --blue: #1250d4;
-  --purple: #4429b4;
-  --green: #00dd8d;
-  --magenta: #c52675;
-  --yellow: #f2b931;
-  --black: #000000;
-  --white: #ffffff;
-  --grey: #949393;
-  --greylite: #c2bfbf;
-
-  --radius_btn: 25px;
-}
 * {
   margin: 0px;
   padding: 0px;
