@@ -61,9 +61,7 @@
             </p>
             <!-- <p class="text-promocion" v-show="salesData.precio">${{ salesData.precio | currency }}</p> -->
             <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">
-                ${{ salesData.precio | currency }}
-              </p>
+              <p class="text-precio" v-show="salesData.precio">${{ salesData.precio | currency }}</p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
             <div
@@ -75,17 +73,12 @@
             <div>
               <div v-for="(variant, index) in data.variantes" :key="index">
                 <label class="text-variant">{{ variant.nombre }}:</label>
-                <selectGroup
-                  v-model="prueba"
-                  :index="index"
-                  :variantes="data.variantes"
-                >
+                <selectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
-                    >{{ item.option }}</option
-                  >
+                  >{{ item.option }}</option>
                 </selectGroup>
               </div>
             </div>
@@ -100,13 +93,8 @@
                   <button class="quantity_add" v-on:click="addQuantity()">
                     <mas-icon class="icon" />
                   </button>
-                  <div
-                    class="container-alerta"
-                    v-if="this.maxQuantityValue == this.quantityValue"
-                  >
-                    <span class="alerta">
-                      última Unidad!
-                    </span>
+                  <div class="container-alerta" v-if="this.maxQuantityValue == this.quantityValue">
+                    <span class="alerta">última Unidad!</span>
                   </div>
                 </div>
                 <div class="item-info-product">
@@ -135,9 +123,7 @@
                       class="btn"
                       v-if="!spent"
                       v-on:click="addShoppingCart"
-                    >
-                      Comprar
-                    </button>
+                    >Comprar</button>
                     <ko-whatsapp
                       v-if="whatsapp"
                       class="whatsapp"
@@ -152,11 +138,7 @@
       </div>
       <div class="section">
         <div class="features">
-          <ko-description
-            :dataStore="dataStore"
-            :data="data"
-            :envio="envio"
-          ></ko-description>
+          <ko-description :dataStore="dataStore" :data="data" :envio="envio"></ko-description>
         </div>
       </div>
       <div class="responsive-purchase">
@@ -170,13 +152,8 @@
               <mas-icon class="icon" />
             </button>
             <transition name="slide-fade">
-              <div
-                class="container-alert"
-                v-show="quantityValue == maxQuantityValue"
-              >
-                <span class="alert">
-                  última Unidad!
-                </span>
+              <div class="container-alert" v-show="quantityValue == maxQuantityValue">
+                <span class="alert">última Unidad!</span>
               </div>
             </transition>
           </div>
@@ -190,14 +167,8 @@
                 ref="color2"
                 v-if="!spent"
                 v-on:click="addShoppingCart"
-              >
-                Comprar
-              </button>
-              <ko-whatsapp
-                v-if="whatsapp"
-                class="whatsapp"
-                @click.native="redirectWhatsapp()"
-              />
+              >Comprar</button>
+              <ko-whatsapp v-if="whatsapp" class="whatsapp" @click.native="redirectWhatsapp()" />
             </div>
           </div>
         </div>
@@ -466,17 +437,10 @@ export default {
       }
     },
     setMiniPhoto(photo) {
-      if (photo === 'placeholder1.svg') {
-        return require(`../../assets/${photo}`)
-      }
       return photo
     },
     selectedPhoto(photo) {
-      if (photo === 'placeholder1.svg') {
-        this.selectPhotoUrl = require(`../../assets/${photo}`)
-      } else {
-        this.selectPhotoUrl = photo
-      }
+      this.selectPhotoUrl = photo
       this.existYoutube = false
     },
     videoYoutube(url) {

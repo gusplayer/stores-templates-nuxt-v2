@@ -11,13 +11,13 @@ export const state = () => ({
     headers: {
       'content-type': 'application/json',
       Authorization: `Bearer `,
-      'Access-Control-Allow-Origin': '*'
-    }
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   isLoading: false,
   authData: '',
   userData: {
-    id: 0
+    id: 0,
   },
   storeLayoutKey: '',
   storeLayout: {
@@ -27,37 +27,37 @@ export const state = () => ({
         active: true,
         components: [],
         value: 'home',
-        exception: ['products', 'carts']
+        exception: ['products', 'carts'],
       },
       {
         name: 'Productos',
         active: true,
         components: [],
         value: 'products',
-        exception: ['products', 'carts', 'contacts']
+        exception: ['products', 'carts', 'contacts'],
       },
       {
         name: 'Detalle del producto',
         active: true,
         components: [],
         value: 'product_details',
-        only: ['products']
+        only: ['products'],
       },
       {
         name: 'Carrito',
         active: true,
         components: [],
         value: 'cart',
-        only: ['carts']
+        only: ['carts'],
       },
       {
         name: 'Contacto',
         active: true,
         components: [],
         value: 'contact',
-        only: ['contacts']
-      }
-    ]
+        only: ['contacts'],
+      },
+    ],
   },
   productsCart: [],
   totalCart: 0,
@@ -67,8 +67,8 @@ export const state = () => ({
   envios: {
     valores: {
       envio_metodo: 'gratis',
-      valor: 0
-    }
+      valor: 0,
+    },
   },
   settingData: {},
   tienda: {},
@@ -81,11 +81,11 @@ export const state = () => ({
   geolocalizacion: [],
   openOrder: false,
   mediospago: {
-    epayco: false
+    epayco: false,
   },
   politicas: {
     garantia: '',
-    datos: ''
+    datos: '',
   },
   whatsapp: '',
   totalCart: 0,
@@ -110,14 +110,14 @@ export const state = () => ({
       'content-type': 'application/json',
       Authorization: '',
       'Access-Control-Allow-Origin': '*',
-      Access: 'application/json'
-    }
+      Access: 'application/json',
+    },
   },
   baseComponents: {},
   SettingsValues: {},
   valuesCSS: {},
   propertiesComponent: {},
-  pagination: {}
+  pagination: {},
 })
 
 export const mutations = {
@@ -142,7 +142,7 @@ export const mutations = {
   SET_DETALLEPRODUCTO: (state, payload) => {
     state.detalleProducto = payload
   },
-  SET_BEFORECOMBINATION: state => {
+  SET_BEFORECOMBINATION: (state) => {
     state.beforeCombination = []
   },
   SET_OPENORDER: (state, value) => {
@@ -153,8 +153,8 @@ export const mutations = {
       headers: {
         'content-type': 'application/json',
         Authorization: `Bearer ${value || process.env.TOKEN}`,
-        'Access-Control-Allow-Origin': '*'
-      }
+        'Access-Control-Allow-Origin': '*',
+      },
     }
   },
   SET_SHOPPING_CART(state, value) {
@@ -166,7 +166,7 @@ export const mutations = {
       if (a.nombre > b.nombre) return 1
       return 0
     })
-    state.productsData.map(product => {
+    state.productsData.map((product) => {
       if (product.variantes.length) {
         try {
           product.combinaciones = JSON.parse(
@@ -177,7 +177,7 @@ export const mutations = {
         }
         if (product.combinaciones.length) {
           const arrPrices = product.combinaciones.map(
-            combinacion => combinacion.precio
+            (combinacion) => combinacion.precio
           )
           product.precio = Math.min(...arrPrices)
         }
@@ -189,11 +189,11 @@ export const mutations = {
     state.subcategorias = state.dataStore.subcategorias
     state.geolocalizacion = state.dataStore.geolocalizacion
     state.mediospago = state.dataStore.medios_pago || {
-      epayco: false
+      epayco: false,
     }
     state.politicas = state.dataStore.politicas || {
       garantia: '',
-      datos: ''
+      datos: '',
     }
     state.tienda = state.dataStore.tienda
     state.envios = state.dataStore.medios_envio
@@ -210,17 +210,17 @@ export const mutations = {
       'content-type': 'application/json',
       Authorization: `Bearer ${state.authData || ''}`,
       'Access-Control-Allow-Origin': '*',
-      Accept: 'application/json'
+      Accept: 'application/json',
     }
     axios({
       method: 'get',
       url: 'https://api2.komercia.co/api/user',
-      headers
-    }).then(response => {
+      headers,
+    }).then((response) => {
       state.userData = response.data.data
     })
   },
-  SET_FAVICON: state => {
+  SET_FAVICON: (state) => {
     const link =
       document.querySelector("link[rel*='icon']") ||
       document.createElement('link')
@@ -232,13 +232,13 @@ export const mutations = {
   UPDATE_CONTENTCART(state) {
     state.totalCart = 0
     localStorage.setItem('ShoppingCart', JSON.stringify(state.productsCart))
-    state.productsCart.forEach(product => {
+    state.productsCart.forEach((product) => {
       state.totalCart += product.precio * product.cantidad
     })
   },
   CALCULATE_TOTALCART(state) {
     state.totalCart = 0
-    state.productsCart.forEach(product => {
+    state.productsCart.forEach((product) => {
       state.totalCart += product.precio * product.cantidad
     })
   },
@@ -252,7 +252,7 @@ export const mutations = {
   SET_CITIES: (state, payload) => {
     state.cities = payload
   },
-  SET_STORELAYOUT: state => {
+  SET_STORELAYOUT: (state) => {
     // const link = document.createElement('link')
     // link.href = `https://fonts.googleapis.com/css?family=${
     //   state.storeLayout.setting.font
@@ -284,7 +284,7 @@ export const mutations = {
   },
   SET_PRODUCT_INFO: (state, value) => {
     state.productInfo = value
-  }
+  },
 }
 export const actions = {
   GET_LOGIN({ state, commit, dispatch }) {
@@ -295,7 +295,7 @@ export const actions = {
         { token: state.token },
         state.configAxios
       )
-      .then(async response => {
+      .then(async (response) => {
         state.idStore = await response.data.store
         commit('SET_ACCESSTOKEN', await response.data.access_token)
         // dispatch("GET_TYPES_COMPONENTS");
@@ -306,22 +306,32 @@ export const actions = {
       })
   },
   async nuxtServerInit({ commit, dispatch }, { req, route }) {
+    let full = req.headers.host
+    let parts = full.split('.')
+    let subdomain = parts[0]
+    // console.log(subdomain)
+
     const id = await axios.post(
       `https://api2.komercia.co/api/tienda/info/by/url`,
-      { name: 'topalxe.komercia.co/' }
+      { name: `${subdomain}.komercia.co/` }
     )
     await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
 
+    // console.log(route.path);
+
     const idSlug = route.path.split('-')
+    // console.log(idSlug)
+
     const producto = await axios.get(
+      // `https://templates.komercia.co/api/producto/bolso-refraction-sp-24812`
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
     )
 
-    const storeLayout = await axios.get(
-      `https://komercia-2c50b.firebaseio.com/stores/${id.data.data.id}.json?auth=NbJcMDHW4Ueg4x67y5hHmxbZF3fhsyneVfQBpSFn`
-    )
-    commit('STOREDB', { storeLayout, producto })
-    commit('SELECT_CARD', storeLayout.data.setting.card || 'koProductCard1')
+    // const storeLayout = await axios.get(
+    //   `https://komercia-2c50b.firebaseio.com/stores/${id.data.data.id}.json?auth=NbJcMDHW4Ueg4x67y5hHmxbZF3fhsyneVfQBpSFn`
+    // )
+    // commit('STOREDB', { storeLayout, producto })
+    // commit('SELECT_CARD', storeLayout.data.setting.card || 'koProductCard1')
   },
   async GET_DATA_TIENDA_BY_ID({ commit }, idTienda) {
     const response = await axios.get(
@@ -335,9 +345,11 @@ export const actions = {
     commit('SET_DATA')
   },
   GET_CITIES({ commit }) {
-    this.$axios.$get(`https://api2.komercia.co/api/ciudades`).then(response => {
-      commit('SET_CITIES', response.data)
-    })
+    this.$axios
+      .$get(`https://api2.komercia.co/api/ciudades`)
+      .then((response) => {
+        commit('SET_CITIES', response.data)
+      })
   },
   GET_STORELAYOUT({ commit, state }) {
     if (process.client) {
@@ -346,7 +358,7 @@ export const actions = {
       link.rel = 'stylesheet'
       document.getElementsByTagName('head')[0].appendChild(link)
       document.documentElement.style.fontFamily = state.storeLayout.setting.font
-      state.storeLayout.setting.colors.forEach(color => {
+      state.storeLayout.setting.colors.forEach((color) => {
         document.documentElement.style.setProperty(color.var, color.hex)
       })
       document.documentElement.style.setProperty(
@@ -362,11 +374,11 @@ export const actions = {
         `${state.urlComponents}/api/components/settings/reference/${value}`,
         {
           headers: {
-            Authorization: `Bearer ${state.accessToken}`
-          }
+            Authorization: `Bearer ${state.accessToken}`,
+          },
         }
       )
-      .then(response => {
+      .then((response) => {
         commit('SET_SETTINGS_COMPONENT', response.data.data)
         state.baseComponents = response.data.data
         if (state.baseComponents.settings_base.length) {
@@ -386,7 +398,7 @@ export const actions = {
           alert('No tiene settings')
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error)
       })
   },
@@ -394,10 +406,10 @@ export const actions = {
     axios
       .get(`${state.urlComponents}/api/views`, {
         headers: {
-          Authorization: `Bearer ${state.accessToken}`
-        }
+          Authorization: `Bearer ${state.accessToken}`,
+        },
       })
-      .then(response => {
+      .then((response) => {
         commit('SET_VIEWS', response.data.data)
       })
   },
@@ -410,13 +422,13 @@ export const actions = {
       .get(`${state.urlComponents}/api/components/type/${id}/settings`, {
         headers: {
           'content-type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
+          'Access-Control-Allow-Origin': '*',
+        },
       })
-      .then(response => {
+      .then((response) => {
         commit('SET_SETTINGS_BY_COMPONENT', response.data.data)
       })
-      .catch(e => {
+      .catch((e) => {
         state.errorSettingsByComponent = e.response.data.mensaje
         commit('SET_SETTINGS_BY_COMPONENT', '')
       })
@@ -426,10 +438,10 @@ export const actions = {
       .get(`${state.urlComponents}/api/components/properties/all`, {
         headers: {
           'content-type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
+          'Access-Control-Allow-Origin': '*',
+        },
       })
-      .then(response => {
+      .then((response) => {
         commit('SET_PROPERTIES', response.data.data)
       })
   },
@@ -446,19 +458,19 @@ export const actions = {
       .get(`${state.urlTempleate}/api/producto/${id}`, {
         headers: {
           'content-type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
+          'Access-Control-Allow-Origin': '*',
+        },
       })
-      .then(response => {
+      .then((response) => {
         commit('SET_PRODUCT_INFO', response.data)
       })
-  }
+  },
 }
 export const getters = {
   getSettingsCSS: (state, getters) => {
     if (state.SettingsValues.length) {
       state.valuesCSS = []
-      state.SettingsValues.map(item => {
+      state.SettingsValues.map((item) => {
         state.valuesCSS.push(getters.setSettingsCSS({ ...item }))
       })
       return state.valuesCSS
@@ -468,10 +480,10 @@ export const getters = {
     state.valuesCSS = { ...state.SettingsValues }
     return getters.setSettingsCSS(state.valuesCSS)
   },
-  setSettingsCSS: state => obj => {
+  setSettingsCSS: (state) => (obj) => {
     let keys = Object.keys(obj)
     if (obj) {
-      keys.map(key => {
+      keys.map((key) => {
         if (key !== `--${key}`) {
           Object.defineProperty(
             obj,
@@ -485,5 +497,5 @@ export const getters = {
     } else {
       return 'Objecto invalido'
     }
-  }
+  },
 }

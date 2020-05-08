@@ -13,20 +13,17 @@
         <!-- <p class="card-info-2">Envío gratis !</p> -->
       </div>
       <div class="wrapper-text">
-        <p class="card-text" v-if="this.product.nombre.length >= 20">
-          {{ `${this.product.nombre.slice(0, 20)}...` }}
-        </p>
-        <p class="card-text" v-else>
-          {{ `${this.product.nombre.slice(0, 20)}` }}
-        </p>
+        <p
+          class="card-text"
+          v-if="this.product.nombre.length >= 20"
+        >{{ `${this.product.nombre.slice(0, 20)}...` }}</p>
+        <p class="card-text" v-else>{{ `${this.product.nombre.slice(0, 20)}` }}</p>
         <!-- <div class="wrapper-price">
           <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
           <p class="card-descuento">-50%</p>
         </div>-->
         <div class="separador-descuento"></div>
-        <p class="card-price-2" v-if="this.product.precio > 0">
-          $ {{ this.product.precio }}
-        </p>
+        <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
         <div v-else class="separador"></div>
       </div>
       <div class="wrapper-text-mobil">
@@ -36,9 +33,7 @@
             <!-- <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
             <p class="card-descuento">-50%</p>-->
           </div>
-          <p class="card-price-2" v-if="this.product.precio > 0">
-            $ {{ this.product.precio }}
-          </p>
+          <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
           <div v-else class="separador"></div>
         </div>
       </div>
@@ -47,13 +42,12 @@
 
         <router-link
           :to="{
-            path: `/template2/${product.slug}`,
+            path: `/template2/productos/${product.slug}`,
             params: { slug: product.slug },
           }"
           ref="colorBtn"
           class="btn"
-          >Comprar</router-link
-        >
+        >Comprar</router-link>
       </div>
     </div>
   </div>
