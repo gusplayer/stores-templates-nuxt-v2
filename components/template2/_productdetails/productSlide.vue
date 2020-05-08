@@ -53,11 +53,7 @@ export default {
   },
   methods: {
     setPhoto(photo) {
-      if (photo === 'placeholder1.svg') {
-        return require(`../../../assets/${photo}`)
-      } else {
-        return photo
-      }
+      return photo       
     },
     changeSlide() {
       this.swiper.slidePrev(500, false)
