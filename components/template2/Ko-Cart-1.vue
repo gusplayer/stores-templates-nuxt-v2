@@ -259,6 +259,9 @@ export default {
           free = false
         }
       })
+      if (this.rangosByCiudad.envio_metodo === "precio_ciudad") {
+        free = false;
+      }
       return free
     },
     rangosByCiudad() {
@@ -317,7 +320,7 @@ export default {
       }
     },
     setFoto(product) {
-     return product.foto_cloudinary      
+      return product.foto_cloudinary      
     },
     deleteItemCart(i) {
       this.$store.state.productsCart.splice(i, 1)

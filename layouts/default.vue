@@ -18,7 +18,6 @@ export default {
   mounted() {
     this.$store.dispatch('GET_LOGIN')         
     // this.$store.dispatch('GET_DATA')    
-    this.$store.dispatch('GET_SHOPPING_CART')
     // this.$store.dispatch('GET_STORELAYOUT')
   },
   head() {
@@ -131,9 +130,6 @@ export default {
     dataStore() {
       return this.$store.state.dataStore
     },
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
   },
 }
 </script>
@@ -170,8 +166,8 @@ export default {
   --radius_btn: 25px;
 }
 * {
-  /* margin: 0px;
-  padding: 0px; */
+  margin: 0px;
+  padding: 0px;
   font-family: 'Poppins';
   /* outline: none; */
   list-style: none;

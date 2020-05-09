@@ -25,14 +25,9 @@
                       <p>{{ product.cantidad }} und</p>
                     </div>
                     <div class="price">
-                      <p>
-                        {{ (product.precio * product.cantidad) | currency }}
-                      </p>
+                      <p>{{ (product.precio * product.cantidad) | currency }}</p>
                     </div>
-                    <delete-icon
-                      class="material-icons delete"
-                      v-on:click="deleteItemCart(index)"
-                    ></delete-icon>
+                    <delete-icon class="material-icons delete" v-on:click="deleteItemCart(index)"></delete-icon>
                   </li>
                 </ul>
               </div>
@@ -50,42 +45,35 @@
                       <summary class="text-color">Valor por Ciudad:</summary>
                       <section>
                         <ol class="scroll_cart_summary_items_cities">
-                          <li
-                            v-for="(ciudad, index) in rangosByCiudad.rangos"
-                            :key="ciudad.id"
-                          >
-                            <b
-                              >{{
-                                shippingCities[index].nombre_ciu ===
-                                'Sin especificar'
-                                  ? 'Resto del país'
-                                  : shippingCities[index].nombre_ciu
-                              }}:</b
-                            >
+                          <li v-for="(ciudad, index) in rangosByCiudad.rangos" :key="ciudad.id">
+                            <b>
+                              {{
+                              shippingCities[index].nombre_ciu ===
+                              'Sin especificar'
+                              ? 'Resto del país'
+                              : shippingCities[index].nombre_ciu
+                              }}:
+                            </b>
                             {{ ciudad.price | currency }}
                           </li>
                         </ol>
                       </section>
                     </details>
-                    <p v-else-if="shipping && getFreeShipping == false">
-                      {{ shipping | currency }}
-                    </p>
+                    <p v-else-if="shipping && getFreeShipping == false">{{ shipping | currency }}</p>
                     <p
                       class="without_shipping_cost"
                       v-if="
                         rangosByCiudad.envio_metodo === 'gratis' ||
                         getFreeShipping == true
                       "
-                    >
-                      No tiene costo de envió
-                    </p>
+                    >No tiene costo de envió</p>
                   </span>
                   <span class="order_total_net">
                     <p>Total a pagar</p>
                     <p>
                       {{
-                        (totalCart + (getFreeShipping ? 0 : shipping))
-                          | currency
+                      (totalCart + (getFreeShipping ? 0 : shipping))
+                      | currency
                       }}
                     </p>
                   </span>
@@ -100,27 +88,21 @@
                   @click="toggleLayout"
                   v-else-if="isQuotation()"
                 >Iniciar sesión</button>
-                <button class="p_button" @click="GoPayments" v-else>Finalizar compra</button> -->
+                <button class="p_button" @click="GoPayments" v-else>Finalizar compra</button>-->
               </template>
               <template v-else c>
                 <div class="wrapper_photo">
                   <img :src="img" class="photo" />
                 </div>
-                <p class="text-cart-empty">
-                  Tu carrito de compras ahora está vacío.
-                </p>
+                <p class="text-cart-empty">Tu carrito de compras ahora está vacío.</p>
               </template>
               <br />
               <button
                 v-if="productsCart.length"
                 class="continue_shopping"
                 @click="GoPayments"
-              >
-                Finalizar compra
-              </button>
-              <button class="continue_shopping2" @click="closeOrder">
-                Seguir comprando
-              </button>
+              >Finalizar compra</button>
+              <button class="continue_shopping2" @click="closeOrder">Seguir comprando</button>
             </div>
           </template>
         </transition>
@@ -174,6 +156,9 @@ export default {
           free = false
         }
       })
+      if (this.rangosByCiudad.envio_metodo === "precio_ciudad") {
+        free = false;
+      }
       return free
     },
     rangosByCiudad() {

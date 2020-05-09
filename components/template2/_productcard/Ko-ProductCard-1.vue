@@ -9,21 +9,28 @@
           alt="product image"
         />
         <!-- <img :src="`${this.product.foto_cloudinary}`" class="image-producto" /> -->
-        <!-- <p class="card-info-1">Agotado !</p> -->
-        <!-- <p class="card-info-2">Envío gratis !</p> -->
+        <p class="card-info-1" v-if="spent == true && spent2 == true">
+          Agotado !
+        </p>
+        <p class="card-info-2" v-if="getFreeShipping == false">
+          Envío gratis !
+        </p>
       </div>
       <div class="wrapper-text">
-        <p
-          class="card-text"
-          v-if="this.product.nombre.length >= 20"
-        >{{ `${this.product.nombre.slice(0, 20)}...` }}</p>
-        <p class="card-text" v-else>{{ `${this.product.nombre.slice(0, 20)}` }}</p>
+        <p class="card-text" v-if="this.product.nombre.length >= 20">
+          {{ `${this.product.nombre.slice(0, 20)}...` }}
+        </p>
+        <p class="card-text" v-else>
+          {{ `${this.product.nombre.slice(0, 20)}` }}
+        </p>
         <!-- <div class="wrapper-price">
           <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
           <p class="card-descuento">-50%</p>
         </div>-->
         <div class="separador-descuento"></div>
-        <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
+        <p class="card-price-2" v-if="this.product.precio > 0">
+          $ {{ this.product.precio }}
+        </p>
         <div v-else class="separador"></div>
       </div>
       <div class="wrapper-text-mobil">
@@ -33,7 +40,9 @@
             <!-- <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
             <p class="card-descuento">-50%</p>-->
           </div>
-          <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
+          <p class="card-price-2" v-if="this.product.precio > 0">
+            $ {{ this.product.precio }}
+          </p>
           <div v-else class="separador"></div>
         </div>
       </div>
@@ -47,7 +56,8 @@
           }"
           ref="colorBtn"
           class="btn"
-        >Comprar</router-link>
+          >Comprar</router-link
+        >
       </div>
     </div>
   </div>
@@ -57,6 +67,44 @@
 export default {
   name: 'Ko-ProductCard-1',
   props: { product: Object },
+  data() {
+    return {
+      spent: false,
+      spent2: false,
+    }
+  },
+  mounted() {
+    this.getStockProduct()
+  },
+  computed: {
+    getFreeShipping() {
+      let free = true
+      if (this.rangosByCiudad.envio_metodo === 'gratis') {
+        free = false
+      }
+      return free
+    },
+    rangosByCiudad() {
+      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
+      return this.rangosByCiudades
+    },
+  },
+  methods: {
+    getStockProduct() {
+      if (this.product.stock == 0) {
+        this.spent = true
+      }
+      if (this.product.combinaciones.length) {
+        let pp = this.product.combinaciones.map((item, index) => {
+          if (item.unidades == 0) {
+            this.spent2 = true
+          }
+        })
+      } else {
+        this.spent2 = true
+      }
+    },
+  },
 }
 </script>
 
@@ -85,6 +133,7 @@ export default {
   width: 100%;
   /* height: 360px; */
   border-radius: 10px;
+  position: relative;
 }
 
 .card-info-1 {
@@ -99,6 +148,7 @@ export default {
   font-size: 12px;
   top: 228px;
   right: 0px;
+  z-index: 999;
 }
 .card-info-2 {
   position: absolute;
@@ -113,6 +163,7 @@ export default {
   font-weight: bold;
   top: 250px;
   right: 0px;
+  z-index: 999;
 }
 .wrapper-image {
   display: flex;
