@@ -1,34 +1,52 @@
 <template>
   <figure class="zoom" :style="setBackground(photo)" v-on:mousemove="zoom">
-    <image-cloudinary :src="photo" class="photo_main" :width="1000" />
+    <!-- <image-cloudinary :src="photo" class="photo_main" :width="1000" /> -->
+    <cld-image
+      cloudName="komercia-store"
+      :publicId="getIdCloudinary(photo)"
+      width="300"
+      crop="scale"
+      class="photo_main"
+    >
+      <cld-transformation
+        height="300"
+        width="300"
+        crop="lpad"
+        quality="auto"
+        background="auto:border"
+      />
+    </cld-image>
   </figure>
 </template>
 
 <script>
 export default {
   props: { Settings: Object },
-  props: ["photo"],
+  props: ['photo'],
   methods: {
     zoom(e) {
-      const zoomer = e.currentTarget;
-      let offsetX, offsetY;
+      const zoomer = e.currentTarget
+      let offsetX, offsetY
       if (e.offsetY) {
-        e.offsetY ? (offsetY = e.offsetY) : (offsetX = e.touches[0].pageY);
+        e.offsetY ? (offsetY = e.offsetY) : (offsetX = e.touches[0].pageY)
       }
       if (e.offsetX) {
-        e.offsetX ? (offsetX = e.offsetX) : (offsetX = e.touches[0].pageX);
+        e.offsetX ? (offsetX = e.offsetX) : (offsetX = e.touches[0].pageX)
       }
-      const x = (offsetX / zoomer.offsetWidth) * 100;
-      const y = (offsetY / zoomer.offsetHeight) * 100;
-      zoomer.style.backgroundPosition = `${x}% ${y}%`;
+      const x = (offsetX / zoomer.offsetWidth) * 100
+      const y = (offsetY / zoomer.offsetHeight) * 100
+      zoomer.style.backgroundPosition = `${x}% ${y}%`
     },
     setBackground(p) {
-      return `background-image: url('${this.$ImageCloudinary(p, {
-        width: 1000
-      })}')`;
-    }
-  }
-};
+      return `background-image: url('${
+        (p,
+        {
+          width: 1000,
+        })
+      }')`
+    },
+  },
+}
 </script>
 
 <style scoped>

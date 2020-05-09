@@ -2,7 +2,22 @@
   <swiper :options="swiperOption" ref="mySwiper">
     <!-- slides -->
     <swiper-slide>
-      <image-cloudinary class="photo" :src="setPhoto(photo)" />
+      <!-- <image-cloudinary class="photo" :src="setPhoto(photo)" /> -->
+      <cld-image
+        cloudName="komercia-store"
+        :publicId="getIdCloudinary(setPhoto(photo))"
+        width="300"
+        crop="scale"
+        class="photo"
+      >
+        <cld-transformation
+          height="300"
+          width="300"
+          crop="lpad"
+          quality="auto"
+          background="auto:border"
+        />
+      </cld-image>
     </swiper-slide>
     <swiper-slide v-for="photo in photos" :key="photo.id">
       <img class="photo" :src="setPhoto(photo.foto_cloudinary)" />
@@ -53,7 +68,7 @@ export default {
   },
   methods: {
     setPhoto(photo) {
-      return photo       
+      return photo
     },
     changeSlide() {
       this.swiper.slidePrev(500, false)

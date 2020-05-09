@@ -247,6 +247,7 @@ export default {
   width: 100%;
   padding: 0px 20px;
   align-items: center;
+  margin-bottom: 15px;
   justify-content: space-between;
 }
 .card-text {
@@ -257,7 +258,7 @@ export default {
   letter-spacing: 1.2px;
   color: var(--color_text);
   /* font-family: rocketfont, sans-serif; */
-  font-weight: 600;
+  font-weight: 400;
   /* font-size: 1rem; */
 }
 .content-name-product {
@@ -265,7 +266,8 @@ export default {
   /* background-color: #35dd8d; */
   width: 100%;
   padding: 0px 20px;
-  /* margin-bottom: 5px; */
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .wrapper-price {

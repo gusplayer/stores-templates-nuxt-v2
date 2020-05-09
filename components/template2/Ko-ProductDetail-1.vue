@@ -6,7 +6,26 @@
         <div class="wrapper-left">
           <div class="photos">
             <div class="photos_selected">
-              <image-cloudinary
+              <cld-image
+                cloudName="komercia-store"
+                :publicId="getIdCloudinary(data.detalle.foto_cloudinary)"
+                width="300"
+                crop="scale"
+                class="img"
+                v-on:mouseover.native="
+                  selectedPhoto(data.detalle.foto_cloudinary)
+                "
+              >
+                <cld-transformation
+                  height="300"
+                  width="300"
+                  crop="lpad"
+                  quality="auto"
+                  background="auto:border"
+                />
+              </cld-image>
+
+              <!-- <image-cloudinary
                 :src="setMiniPhoto(data.detalle.foto_cloudinary)"
                 v-on:mouseover.native="
                   selectedPhoto(data.detalle.foto_cloudinary)
@@ -19,7 +38,7 @@
                 v-for="(foto, itemsfoto) in data.fotos"
                 class="img"
                 :key="itemsfoto"
-              />
+              /> -->
               <img
                 v-if="idYoutube"
                 :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
@@ -61,7 +80,9 @@
             </p>
             <!-- <p class="text-promocion" v-show="salesData.precio">${{ salesData.precio | currency }}</p> -->
             <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">${{ salesData.precio | currency }}</p>
+              <p class="text-precio" v-show="salesData.precio">
+                ${{ salesData.precio | currency }}
+              </p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
             <div
@@ -78,7 +99,8 @@
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
-                  >{{ item.option }}</option>
+                    >{{ item.option }}</option
+                  >
                 </selectGroup>
               </div>
             </div>
@@ -93,7 +115,10 @@
                   <button class="quantity_add" v-on:click="addQuantity()">
                     <mas-icon class="icon" />
                   </button>
-                  <div class="container-alerta" v-if="this.maxQuantityValue == this.quantityValue">
+                  <div
+                    class="container-alerta"
+                    v-if="this.maxQuantityValue == this.quantityValue"
+                  >
                     <span class="alerta">última Unidad!</span>
                   </div>
                 </div>
@@ -123,7 +148,9 @@
                       class="btn"
                       v-if="!spent"
                       v-on:click="addShoppingCart"
-                    >Comprar</button>
+                    >
+                      Comprar
+                    </button>
                     <ko-whatsapp
                       v-if="whatsapp"
                       class="whatsapp"
@@ -138,7 +165,11 @@
       </div>
       <div class="section">
         <div class="features">
-          <ko-description :dataStore="dataStore" :data="data" :envio="envio"></ko-description>
+          <ko-description
+            :dataStore="dataStore"
+            :data="data"
+            :envio="envio"
+          ></ko-description>
         </div>
       </div>
       <div class="responsive-purchase">
@@ -152,7 +183,10 @@
               <mas-icon class="icon" />
             </button>
             <transition name="slide-fade">
-              <div class="container-alert" v-show="quantityValue == maxQuantityValue">
+              <div
+                class="container-alert"
+                v-show="quantityValue == maxQuantityValue"
+              >
                 <span class="alert">última Unidad!</span>
               </div>
             </transition>
@@ -167,8 +201,14 @@
                 ref="color2"
                 v-if="!spent"
                 v-on:click="addShoppingCart"
-              >Comprar</button>
-              <ko-whatsapp v-if="whatsapp" class="whatsapp" @click.native="redirectWhatsapp()" />
+              >
+                Comprar
+              </button>
+              <ko-whatsapp
+                v-if="whatsapp"
+                class="whatsapp"
+                @click.native="redirectWhatsapp()"
+              />
             </div>
           </div>
         </div>
@@ -652,7 +692,7 @@ img {
   width: 100%;
   flex-direction: column;
   padding-bottom: 10px;
-  border-left: 1px solid var(--color_border);
+  border-left: 1px solid rgba(21, 20, 57, 0.16);
 }
 .content-right {
   margin-left: 20px;
@@ -846,7 +886,7 @@ i.close {
 .features {
   width: 100%;
   display: flex;
-  border-top: 1px solid var(--color_border);
+  border-top: 1px solid rgba(21, 20, 57, 0.16);
 }
 .responsive-purchase {
   display: none;
