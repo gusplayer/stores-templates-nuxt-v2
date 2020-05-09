@@ -1,4 +1,9 @@
 import Vue from 'vue'
-import ImageCloudinary from 'image-cloudinary';
+import ImageCloudinary, { CldImage, CldTransformation } from 'cloudinary-vue'
 
-Vue.use(ImageCloudinary)
+Vue.use(ImageCloudinary, {
+  configuration: {
+    cloudname: 'komercia-store',
+    components: [CldImage, CldTransformation],
+  },
+})

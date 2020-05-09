@@ -48,12 +48,12 @@ export default {
 .wrapper-logo {
   /* max-width: 1300px; */
   width: 100%;
-  height: 450px;
+  height: 350px;
   position: relative;
 }
 .header-logo {
   width: 100%;
-  height: 100%;
+  max-height: 350px;
   object-fit: cover;
   object-position: center;
   position: absolute;

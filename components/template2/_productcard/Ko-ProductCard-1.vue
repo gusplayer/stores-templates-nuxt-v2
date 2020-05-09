@@ -2,30 +2,72 @@
   <div class="wrapper-card">
     <div class="container">
       <div class="wrapper-image">
-        <Image-cloudinary
+        <cld-image
+          cloudName="komercia-store"
+          :publicId="getIdCloudinary(this.product.foto_cloudinary)"
+          width="300"
+          crop="scale"
+          class="product-image"
+        >
+          <cld-transformation
+            height="300"
+            width="300"
+            crop="lpad"
+            quality="auto"
+            background="auto:border"
+          />
+          <!-- <cld-transformation v-if="soldOut" effect="grayscale" />
+          <cld-transformation
+            v-if="soldOut"
+            overlay="agotado"
+            gravity="north_west"
+            opacity="60"
+          /> -->
+        </cld-image>
+        <!-- <Image-cloudinary
           :src="`${this.product.foto_cloudinary}`"
           :width="300"
           class="image-producto"
           alt="product image"
-        />
+        /> -->
         <!-- <img :src="`${this.product.foto_cloudinary}`" class="image-producto" /> -->
         <!-- <p class="card-info-1">Agotado !</p> -->
         <!-- <p class="card-info-2">Envío gratis !</p> -->
       </div>
       <div class="wrapper-text">
-        <p
-          class="card-text"
-          v-if="this.product.nombre.length >= 20"
-        >{{ `${this.product.nombre.slice(0, 20)}...` }}</p>
-        <p class="card-text" v-else>{{ `${this.product.nombre.slice(0, 20)}` }}</p>
+        <div class="content-name-product">
+          <p class="card-text" v-if="this.product.nombre.length >= 25">
+            {{ `${this.product.nombre.slice(0, 25)}...` }}
+          </p>
+          <p class="card-text" v-else>
+            {{ `${this.product.nombre.slice(0, 25)}` }}
+          </p>
+        </div>
         <!-- <div class="wrapper-price">
           <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
           <p class="card-descuento">-50%</p>
         </div>-->
-        <div class="separador-descuento"></div>
-        <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
-        <div v-else class="separador"></div>
+        <!-- <div class="separador-descuento"></div> -->
+        <div class="content-text-price">
+          <p class="card-price-2" v-if="this.product.precio > 0">
+            {{ currency(this.product.precio) }}
+          </p>
+
+          <!-- <div class="content-button"> -->
+          <router-link
+            :to="{
+              path: `/template2/productos/${product.slug}`,
+              params: { slug: product.slug },
+            }"
+            ref="colorBtn"
+            class="btn"
+            >Comprar</router-link
+          >
+          <!-- </div> -->
+        </div>
+        <!-- <div v-else class="separador"></div> -->
       </div>
+
       <div class="wrapper-text-mobil">
         <p class="card-text">{{ `${this.product.nombre.slice(0, 20)}...` }}</p>
         <div class="content-price">
@@ -33,12 +75,14 @@
             <!-- <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
             <p class="card-descuento">-50%</p>-->
           </div>
-          <p class="card-price-2" v-if="this.product.precio > 0">$ {{ this.product.precio }}</p>
+          <p class="card-price-2" v-if="this.product.precio > 0">
+            {{ currency(this.product.precio) }}
+          </p>
           <div v-else class="separador"></div>
         </div>
       </div>
-      <div class="content-button">
-        <!-- <button ref="colorBtn" class="btn">Comprar</button> -->
+
+      <!-- <div class="content-button">
 
         <router-link
           :to="{
@@ -47,14 +91,16 @@
           }"
           ref="colorBtn"
           class="btn"
-        >Comprar</router-link>
-      </div>
+          >Comprar</router-link
+        >
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  // mixins: [getIdCloudinary],
   name: 'Ko-ProductCard-1',
   props: { product: Object },
 }
@@ -73,10 +119,12 @@ export default {
   align-items: center;
   width: 100%;
   background: var(--background_color_2);
+  background: white;
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
+  margin-bottom: 10px;
 }
 .container {
   display: flex;
@@ -85,6 +133,7 @@ export default {
   width: 100%;
   /* height: 360px; */
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .card-info-1 {
@@ -120,12 +169,13 @@ export default {
   justify-content: center;
   overflow: hidden;
   width: 100%;
-  height: 265px;
-  top: 0px;
+  height: 300px;
+
   /* margin-top: 0px;
   padding-top: 0px; */
 }
-.image-producto {
+
+.product-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -137,26 +187,40 @@ export default {
 }
 .wrapper-text {
   display: initial;
-  margin-top: 10px;
+  margin-top: 5px;
   text-align: center;
   width: 100%;
 }
 .wrapper-text-mobil {
   display: none;
 }
+.content-text-price {
+  display: flex;
+  /* background-color: #35dd8d; */
+  width: 100%;
+  padding: 0px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
 .card-text {
   font-size: 14px;
-  font-weight: bold;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.4;
-  letter-spacing: 2px;
+  line-height: 1;
+  letter-spacing: 1.2px;
   color: var(--color_text);
-
   /* font-family: rocketfont, sans-serif; */
-  font-weight: 300;
+  font-weight: 600;
   /* font-size: 1rem; */
 }
+.content-name-product {
+  display: flex;
+  /* background-color: #35dd8d; */
+  width: 100%;
+  padding: 0px 20px;
+  /* margin-bottom: 5px; */
+}
+
 .wrapper-price {
   display: flex;
   flex-direction: row;
@@ -183,37 +247,40 @@ export default {
   padding: 0px 5px;
 }
 .card-price-2 {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: '500';
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
   color: var(--color_subtext);
-  margin-top: 5px;
+  color: black;
 }
 .content-button {
   display: flex;
-  margin-top: 5px;
-  width: 100%;
-  justify-content: center;
+  /* width: 100%; */
+  /* justify-content: center; */
   align-self: center;
 }
 .btn {
   color: var(--color_text_btn);
-  border-radius: var(--radius_btn);
-  border: solid 2px var(--color_border_btn);
-  background-color: var(--color_background_btn);
+  /* border-radius: var(--radius_btn); */
+  /* border: solid 1px var(--color_border_btn); */
+  background-color: gray;
+  /* background-color: var(--color_text); */
+  color: white;
   padding: 8px 14px;
   font-size: 14px;
   width: 120px;
+  height: 40px;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   cursor: pointer;
   transition: all 200ms ease-in;
   text-decoration: none;
   text-align: center;
+  border-radius: 5px;
 }
 .btn:hover {
   color: white;

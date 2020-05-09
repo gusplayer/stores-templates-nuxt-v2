@@ -180,7 +180,7 @@ export default {
 
 .header-logo {
   width: 100%;
-  height: 100%;
+  max-height: 65px;
   object-fit: contain;
   object-position: left;
 }

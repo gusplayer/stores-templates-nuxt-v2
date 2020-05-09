@@ -349,6 +349,8 @@ div.wrapper-productlist {
   line-height: 1.24;
   letter-spacing: -0.4px;
   color: var(--color_text);
+  margin-bottom: 0px;
+  margin-top: 10px;
 }
 .content-item {
   display: flex;
@@ -494,7 +496,7 @@ div.wrapper-productlist {
 
 .top-right {
   width: 100%;
-  padding-top: 10px;
+  padding-top: 0px;
   padding-bottom: 15px;
 }
 .header-icon-menu {

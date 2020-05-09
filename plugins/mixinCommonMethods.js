@@ -1,41 +1,19 @@
 import Vue from 'vue'
 
 Vue.mixin({
-	methods: {
-		ImageCloudinary(src, { width, height }) {
-			if (src.includes("https://res.cloudinary.com/komercia-store/image/upload")) {
-				let urlFirst = "https://res.cloudinary.com/komercia-store/image/upload/";
-				let urlLast = src.replace(
-					"https://res.cloudinary.com/komercia-store/image/upload",
-					""
-				);
-				let w = "";
-				let h = "";
-				if (width) {
-					w = `,w_${width}`;
-				}
-				if (height) {
-					h = `,h_${height}`;
-				}
-				return `${urlFirst}q_auto,c_scale,f_auto${w}${h}${urlLast}`;
-			} else if (src.includes("https://res.cloudinary.com/komercia/image/upload")) {
-				let urlFirst = "https://res.cloudinary.com/komercia/image/upload/";
-				let urlLast = src.replace(
-					"https://res.cloudinary.com/komercia/image/upload",
-					""
-				);
-				let w = "";
-				let h = "";
-				if (width) {
-					w = `,w_${width}`;
-				}
-				if (height) {
-					h = `,h_${height}`;
-				}
-				return `${urlFirst}q_auto,c_scale,f_auto${w}${h}${urlLast}`;
-			} else {
-				return src;
-			}
-		}
-	}
+  methods: {
+    getIdCloudinary(url) {
+      let str = url
+      let arr = str.split('/')
+      let newArr = arr.splice(arr.length - 4, arr.length)
+      let id = newArr.join('/')
+      return id
+    },
+    currency(value) {
+      if (value) {
+        return `$ ${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+      }
+      return 'Producto sin precio'
+    },
+  },
 })
