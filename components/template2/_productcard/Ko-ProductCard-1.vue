@@ -31,8 +31,12 @@
           alt="product image"
         /> -->
         <!-- <img :src="`${this.product.foto_cloudinary}`" class="image-producto" /> -->
-        <!-- <p class="card-info-1">Agotado !</p> -->
-        <!-- <p class="card-info-2">Envío gratis !</p> -->
+        <p class="card-info-1" v-if="spent == true && spent2 == true">
+          Agotado !
+        </p>
+        <p class="card-info-2" v-if="getFreeShipping == false">
+          Envío gratis !
+        </p>
       </div>
       <div class="wrapper-text">
         <div class="content-name-product">
@@ -43,6 +47,7 @@
             {{ `${this.product.nombre.slice(0, 25)}` }}
           </p>
         </div>
+
         <!-- <div class="wrapper-price">
           <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
           <p class="card-descuento">-50%</p>
@@ -93,6 +98,7 @@
           class="btn"
           >Comprar</router-link
         >
+
       </div> -->
     </div>
   </div>
@@ -103,6 +109,44 @@ export default {
   // mixins: [getIdCloudinary],
   name: 'Ko-ProductCard-1',
   props: { product: Object },
+  data() {
+    return {
+      spent: false,
+      spent2: false,
+    }
+  },
+  mounted() {
+    this.getStockProduct()
+  },
+  computed: {
+    getFreeShipping() {
+      let free = true
+      if (this.rangosByCiudad.envio_metodo === 'gratis') {
+        free = false
+      }
+      return free
+    },
+    rangosByCiudad() {
+      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
+      return this.rangosByCiudades
+    },
+  },
+  methods: {
+    getStockProduct() {
+      if (this.product.stock == 0) {
+        this.spent = true
+      }
+      if (this.product.combinaciones.length) {
+        let pp = this.product.combinaciones.map((item, index) => {
+          if (item.unidades == 0) {
+            this.spent2 = true
+          }
+        })
+      } else {
+        this.spent2 = true
+      }
+    },
+  },
 }
 </script>
 
@@ -134,6 +178,7 @@ export default {
   /* height: 360px; */
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
 
 .card-info-1 {
@@ -148,6 +193,7 @@ export default {
   font-size: 12px;
   top: 228px;
   right: 0px;
+  z-index: 999;
 }
 .card-info-2 {
   position: absolute;
@@ -162,6 +208,7 @@ export default {
   font-weight: bold;
   top: 250px;
   right: 0px;
+  z-index: 999;
 }
 .wrapper-image {
   display: flex;

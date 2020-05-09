@@ -18,23 +18,33 @@
 <script>
 export default {
   props: ['options', 'label', 'value', 'index', 'variantes'],
+  mounted(){
+    this.saveOption();
+  },
   data() {
-    return {}
+    return {
+    }
   },
   methods: {
     updateValue() {
       this.$emit('input', this.$refs.format.value)
+
       if (this.$refs.format.value) {
         let variante = this.variantes[this.index].valores.filter((item) => {
-          return item.option == this.$refs.format.value
+          return item.option == this.$refs.format.value  
+          console.log(item);
+                  
         })
         this.$store.state.beforeCombination.splice(
           this.index,
           1,
           variante[0].option
-        )
-      }
+        )        
+      }      
     },
+    saveOption(){       
+      this.$store.state.beforeCombination.splice(this.index, 1, this.variantes[0].valores[0].option);
+    }
   },
 }
 </script>

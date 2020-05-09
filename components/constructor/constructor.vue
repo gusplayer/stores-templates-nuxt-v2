@@ -14,11 +14,7 @@
       <div v-else class="menu-login-user">
         <p class="label">Tipo de Componentes</p>
 
-        <el-select
-          style="width: 100%;"
-          v-model="valueTipos"
-          placeholder="Categoria"
-        >
+        <el-select style="width: 100%;" v-model="valueTipos" placeholder="Categoria">
           <el-option
             v-for="item in tiposComponentes"
             :key="item.id"
@@ -49,16 +45,9 @@
           class="button"
           type="primary"
           v-on:click="onPressSelectComponent"
-          >Seleccionar</el-button
-        >
+        >Seleccionar</el-button>
         <br />
-        <el-button
-          v-if="editar"
-          class="button"
-          type="warning"
-          v-on:click="onPressEdit()"
-          >Editar</el-button
-        >
+        <el-button v-if="editar" class="button" type="warning" v-on:click="onPressEdit()">Editar</el-button>
         <div v-if="getSettingsCSS.length">
           <optionsItems v-if="editar"></optionsItems>
         </div>
@@ -69,11 +58,7 @@
     </div>
     <div class="right-container">
       <div class="rigth-head">
-        <el-select
-          @change="getDataTienda()"
-          v-model="currentStoreData"
-          placeholder="Tiendas"
-        >
+        <el-select @change="getDataTienda()" v-model="currentStoreData" placeholder="Tiendas">
           <el-option
             v-for="item in stores"
             :key="item.value"
@@ -81,28 +66,23 @@
             :value="item.value"
           ></el-option>
         </el-select>
-        <h1 style="font-size: 20px;" @click="ocutlarlateral()">
-          {{ this.nameCurrentComponent }}
-        </h1>
+        <h1 style="font-size: 20px;" @click="ocutlarlateral()">{{ this.nameCurrentComponent }}</h1>
         <div class="header-buttons">
           <el-button
             class="button-new-component hidden"
             @click="dialogForm()"
             type="primary"
-            >Nuevo Componente</el-button
-          >
+          >Nuevo Componente</el-button>
           <el-button
             @click="removeComponent()"
             class="button-new-component hidden"
             type="danger"
-            >Eliminar</el-button
-          >
+          >Eliminar</el-button>
           <el-button
             @click="ocutlarlateral()"
             class="button-new-component hidden"
             type="danger"
-            >Ocultar</el-button
-          >
+          >Ocultar</el-button>
         </div>
       </div>
       <!-- probar para banner -->
@@ -125,11 +105,7 @@
         <!-- <componenteP :currentSettingsHeader="currentSettingsHeader"></componenteP> -->
       </div>
     </div>
-    <el-dialog
-      width="85%"
-      :visible.sync="dialogFormVisible"
-      @close="setComponent()"
-    >
+    <el-dialog width="85%" :visible.sync="dialogFormVisible" @close="setComponent()">
       <div
         :is="componente"
         @upDialogFormVisible="upDialogFormVisible"
@@ -225,12 +201,12 @@ export default {
           this.SettingsComponentes = 'footers'
         }
 
-        // return () =>
-        //   import(
-        //     `../../../core-components-npm/src/components/${this.fileTipos.name.toLowerCase()}/${
-        //       this.nameCurrentComponent
-        //     }`
-        //   )
+        return () =>
+          import(
+            `../../../core-components-npm/src/components/${this.fileTipos.name.toLowerCase()}/${
+              this.nameCurrentComponent
+            }`
+          )
       }
     },
     dataStore() {
