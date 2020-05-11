@@ -61,12 +61,7 @@ export default {
 
 @media (max-width: 770px) {
   .wrapper-logo {
-    height: 280px;
-  }
-}
-@media (max-width: 400px) {
-  .wrapper-logo {
-    height: 138px;
+    height: 200px;
   }
 }
 </style>

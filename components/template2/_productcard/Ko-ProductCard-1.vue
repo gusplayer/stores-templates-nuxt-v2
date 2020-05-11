@@ -16,21 +16,7 @@
             quality="auto"
             background="auto:border"
           />
-          <!-- <cld-transformation v-if="soldOut" effect="grayscale" />
-          <cld-transformation
-            v-if="soldOut"
-            overlay="agotado"
-            gravity="north_west"
-            opacity="60"
-          /> -->
         </cld-image>
-        <!-- <Image-cloudinary
-          :src="`${this.product.foto_cloudinary}`"
-          :width="300"
-          class="image-producto"
-          alt="product image"
-        /> -->
-        <!-- <img :src="`${this.product.foto_cloudinary}`" class="image-producto" /> -->
         <p class="card-info-1" v-if="spent == true && spent2 == true">
           Agotado !
         </p>
@@ -38,6 +24,38 @@
           Envío gratis !
         </p>
       </div>
+
+      <div class="wrapper-image-mobile">
+        <router-link
+          :to="{
+            path: `/template2/productos/${product.slug}`,
+            params: { slug: product.slug },
+          }"
+        >
+          <cld-image
+            cloudName="komercia-store"
+            :publicId="getIdCloudinary(this.product.foto_cloudinary)"
+            height="160"
+            crop="lpad"
+            class="product-image"
+          >
+            <cld-transformation
+              height="200"
+              width="200"
+              crop="lpad"
+              quality="auto"
+              background="auto:border"
+            />
+          </cld-image>
+          <p class="card-info-1" v-if="spent == true && spent2 == true">
+            Agotado !
+          </p>
+          <p class="card-info-2" v-if="getFreeShipping == false">
+            Envío gratis !
+          </p>
+        </router-link>
+      </div>
+
       <div class="wrapper-text">
         <div class="content-name-product">
           <p class="card-text" v-if="this.product.nombre.length >= 25">
@@ -73,11 +91,13 @@
         <!-- <div v-else class="separador"></div> -->
       </div>
 
-      <div class="wrapper-text-mobil">
-        <p class="card-text">{{ `${this.product.nombre.slice(0, 20)}...` }}</p>
+      <div class="wrapper-text-mobile">
+        <p class="card-text">{{ `${this.product.nombre.slice(0, 28)}` }}</p>
+
         <div class="content-price">
           <div class="wrapper-price">
             <!-- <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
+      
             <p class="card-descuento">-50%</p>-->
           </div>
           <p class="card-price-2" v-if="this.product.precio > 0">
@@ -121,6 +141,7 @@ export default {
   computed: {
     getFreeShipping() {
       let free = true
+
       if (this.rangosByCiudad.envio_metodo === 'gratis') {
         free = false
       }
@@ -238,7 +259,7 @@ export default {
   text-align: center;
   width: 100%;
 }
-.wrapper-text-mobil {
+.wrapper-text-mobile {
   display: none;
 }
 .content-text-price {
@@ -336,6 +357,9 @@ export default {
   background-color: var(--btnhover);
   border: solid 2px var(--btnhover);
 }
+.wrapper-image-mobile {
+  display: none;
+}
 @media (max-width: 750px) {
   .content-button {
     display: flex;
@@ -374,6 +398,45 @@ export default {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
+  }
+
+  .wrapper-image {
+    display: none;
+  }
+  .wrapper-text-mobile {
+    display: flex;
+    height: 90px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  .wrapper-image-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    height: 180px;
+
+    /* margin-top: 0px;
+  padding-top: 0px; */
+  }
+  .image-transform-responsive {
+    width: 20px;
+  }
+  .product-image {
+    height: 200px;
+    width: 100%;
+    object-fit: contain;
+    overflow: hidden;
+  }
+  .card-info-2 {
+    top: 170px;
+  }
+  .card-info-1 {
+    top: 150px;
   }
 }
 </style>
