@@ -3,7 +3,7 @@
     <div class="header">
       <KoOrder />
       <div class="header-content-logo">
-        <nuxt-link to="/template2/home" class="wrapper-logo">
+        <nuxt-link to="/" class="wrapper-logo">
           <img
             :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
             class="header-logo"
@@ -115,16 +115,16 @@ export default {
       secciones: [
         {
           name: 'Inicio',
-          path: '/template2/home',
+          path: '/',
         },
         // {
         //   name: 'Carrito',
-        //   path: '/template2/cart',
+        //   path: '/template1/cart',
         // },
-        // {
-        //   name: 'Contacto',
-        //   path: '/template2/contacto',
-        // },
+        {
+          name: 'Contacto',
+          path: '/template1/contacto',
+        },
       ],
     }
   },

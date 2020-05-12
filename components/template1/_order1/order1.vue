@@ -110,26 +110,27 @@
                   Tu carrito de compras ahora está vacío.
                 </p>
               </template>
-              <br />
-              <button
-                v-if="productsCart.length"
-                class="continue_shopping"
-                @click="GoPayments"
-              >
-                Finalizar compra
-              </button>
-              <button class="continue_shopping2" @click="closeOrder">
-                Seguir comprando
-              </button>
-              <nuxt-link
-                to="/template2/cart"
-                class="continue_shopping2"
-                @click="closeOrder"
-              >
-                <p style="text-align: center;">
-                  Ir al carrito
-                </p>
-              </nuxt-link>
+              <div class="content-button">
+                <button
+                  v-if="productsCart.length"
+                  class="continue_shopping"
+                  @click="GoPayments"
+                >
+                  Finalizar compra
+                </button>
+                <button class="continue_shopping2" @click="closeOrder">
+                  Seguir comprando
+                </button>
+                <nuxt-link
+                  to="/template1/cart"
+                  class="continue_shopping2"
+                  @click="closeOrder"
+                >
+                  <p style="text-align: center;">
+                    Ir al carrito
+                  </p>
+                </nuxt-link>
+              </div>
             </div>
           </template>
         </transition>
@@ -343,7 +344,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 3;
+  z-index: 5;
 }
 .order_content {
   position: absolute;
@@ -379,7 +380,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--background_color_2);
-  padding: 10px 10%;
+  padding: 10px 5px;
   flex: none;
 }
 .order_header_close {
@@ -398,6 +399,7 @@ export default {
 }
 .order--wrapper {
   display: grid;
+  overflow-y: auto;
 }
 .order_products_list {
   height: 380px;
@@ -421,7 +423,7 @@ export default {
   align-items: center;
   justify-content: space-around;
   border-bottom: 1px solid var(--background_color_2);
-  padding: 10px;
+  padding: 0px 5px;
 }
 .order_products_list_item .photo {
   width: 50px;
@@ -471,7 +473,7 @@ export default {
 }
 .order_total {
   border-top: 1px solid var(--background_color_2);
-  padding: 0 10%;
+  padding: 0 5px;
   margin-bottom: 10px;
 }
 .order_total_domicile,
@@ -534,7 +536,7 @@ export default {
   opacity: 0.8;
 }
 .continue_shopping {
-  margin-top: 20px;
+  margin-top: 10px;
   justify-self: center;
   border-style: none;
   background-color: transparent;
@@ -560,7 +562,7 @@ export default {
 }
 
 .continue_shopping2 {
-  margin-top: 20px;
+  margin-top: 10px;
   font-weight: bold;
   justify-self: center;
   border-style: none;
@@ -617,5 +619,11 @@ export default {
   /* transform: translateX(200px); */
   margin-left: 150px;
   opacity: 0;
+}
+.content-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 </style>

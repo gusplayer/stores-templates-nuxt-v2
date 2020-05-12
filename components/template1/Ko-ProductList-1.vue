@@ -727,8 +727,11 @@ div.wrapper-productlist {
 }
 @media (max-width: 450px) {
   .grid-products {
-    grid-template-columns: repeat(1, minmax(250px, 1fr));
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
     /* grid-gap: 32px; */
+  }
+  .content-item-productos {
+    padding: 5px;
   }
 }
 </style>

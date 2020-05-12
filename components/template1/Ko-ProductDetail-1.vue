@@ -259,7 +259,6 @@ export default {
   },
   components: { selectGroup, koWhatsapp, koDescription, productSlide },
   // created() {
-
   // },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -346,6 +345,7 @@ export default {
       if (product.length) {
         return product[0].id
       }
+
       return this.productsData[0].id
     },
     mobileCheck() {
@@ -553,7 +553,7 @@ export default {
         this.$store.state.productsCart.push(product)
       }
       this.$store.commit('UPDATE_CONTENTCART')
-      this.$router.push('/template2/home')
+      this.$router.push('/')
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
     },

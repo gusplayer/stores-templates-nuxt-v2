@@ -55,7 +55,7 @@
             </div>
             <router-link
               :to="{
-                path: `/template2/productos/${product.slug}`,
+                path: `/template1/productos/${product.slug}`,
                 params: { slug: product.slug },
               }"
               class="btn"
@@ -64,10 +64,7 @@
           </div>
           <div class="content-text-price2" v-else>
             <router-link
-              :to="{
-                path: `/template2/productos/${product.slug}`,
-                params: { slug: product.slug },
-              }"
+              :to="{ path: `/template1/productos/${product.slug}` }"
               class="btn"
               >Comprar</router-link
             >
@@ -77,7 +74,7 @@
 
       <router-link
         :to="{
-          path: `/template2/productos/${product.slug}`,
+          path: `/template1/productos/${product.slug}`,
           params: { slug: product.slug },
         }"
         class="wrapper-movil"
@@ -195,6 +192,9 @@ export default {
 </script>
 
 <style scoped>
+div.wrapper-card {
+  --color_subtext: #000;
+}
 .separador {
   margin: 30px;
 }
@@ -234,7 +234,7 @@ export default {
   font-size: 12px;
   top: 228px;
   right: 0px;
-  z-index: 999;
+  z-index: 2;
 }
 .card-info-2 {
   position: absolute;
@@ -249,7 +249,7 @@ export default {
   font-weight: bold;
   top: 250px;
   right: 0px;
-  z-index: 999;
+  z-index: 2;
 }
 .wrapper-image {
   display: flex;
@@ -421,6 +421,12 @@ export default {
   .separator-movil {
     width: 100%;
     margin-bottom: 25px;
+  }
+}
+@media (max-width: 450px) {
+  .container {
+    width: 100%;
+    max-width: 200px;
   }
 }
 </style>

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import KoContact from '../../components/template2/Ko-Contact-1'
+import KoContact from '../../components/template1/Ko-Contact-1'
 
 export default {
   components: {

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import KoHeader1 from '../components/template2/Ko-Header-1'
-import KFooter1 from '../components/template2/Ko-Footer-1'
+import KoHeader1 from '../components/template1/Ko-Header-1'
+import KFooter1 from '../components/template1/Ko-Footer-1'
 
 export default {
   components: {

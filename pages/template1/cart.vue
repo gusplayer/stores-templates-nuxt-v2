@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import KoCart from '../../components/template2/Ko-Cart-1'
+import KoCart from '../../components/template1/Ko-Cart-1'
 
 export default {
   components: {

@@ -10,7 +10,11 @@
         >
           <div class="content_product_items">
             <div class="wrapper_item_photo">
-              <img :src="setFoto(product)" class="products_item_photo" :alt="product.nombre" />
+              <img
+                :src="setFoto(product)"
+                class="products_item_photo"
+                :alt="product.nombre"
+              />
             </div>
             <div class="products_item_name">
               <p class="text-name">{{ product.nombre | capitalize }}</p>
@@ -23,22 +27,33 @@
                     v-for="(item, items) in product.combinacion"
                     :key="items"
                     class="text-result"
-                  >{{ item }}</p>
+                  >
+                    {{ item }}
+                  </p>
                 </ul>
               </span>
               <div class="wrapper_quantity">
                 <p class="text-tittle">Cantidad:</p>
                 <div class="content_items_quantity">
                   <div class="quantity">
-                    <button class="quantity_remove" v-on:click="removeQuantity(product)">
+                    <button
+                      class="quantity_remove"
+                      v-on:click="removeQuantity(product)"
+                    >
                       <menos-icon class="icon" />
                     </button>
                     <p class="quantity_value">{{ product.cantidad }}</p>
-                    <button class="quantity_add" v-on:click="addQuantity(product)">
+                    <button
+                      class="quantity_add"
+                      v-on:click="addQuantity(product)"
+                    >
                       <mas-icon class="icon" />
                     </button>
                   </div>
-                  <div class="container-alert" v-if="product.cantidad == product.limitQuantity">
+                  <div
+                    class="container-alert"
+                    v-if="product.cantidad == product.limitQuantity"
+                  >
                     <span class="alert">
                       última Unidad!
                       <div class="arrow"></div>
@@ -54,7 +69,9 @@
               </div>
               <div>
                 <p class="text-tittle">Total:</p>
-                <p class="text-result">{{ (product.precio * product.cantidad) | currency }}</p>
+                <p class="text-result">
+                  {{ (product.precio * product.cantidad) | currency }}
+                </p>
               </div>
             </div>
             <div class="content_icon">
@@ -67,10 +84,18 @@
         <div class="line"></div>
       </ul>
       <ul class="products_list_resposive">
-        <li v-for="(product, index) in productsCart" :key="index" class="wrapper_item">
+        <li
+          v-for="(product, index) in productsCart"
+          :key="index"
+          class="wrapper_item"
+        >
           <div class="content_details">
             <div class="wrapper_item_photo">
-              <img :src="setFoto(product)" class="products_item_photo" :alt="product.nombre" />
+              <img
+                :src="setFoto(product)"
+                class="products_item_photo"
+                :alt="product.nombre"
+              />
             </div>
             <div class="content_items_details">
               <div>
@@ -91,7 +116,9 @@
                         v-for="(item, items) in product.combinacion"
                         :key="items"
                         class="text-result"
-                      >{{ item }}</p>
+                      >
+                        {{ item }}
+                      </p>
                     </ul>
                   </div>
                 </div>
@@ -104,18 +131,27 @@
                 </div>
                 <div class="products_item_details">
                   <div class="wrapper_quantity">
-                    <div class="container-alert" v-if="product.cantidad == product.limitQuantity">
+                    <div
+                      class="container-alert"
+                      v-if="product.cantidad == product.limitQuantity"
+                    >
                       <span class="alert">
                         última Unidad!
                         <div class="arrow"></div>
                       </span>
                     </div>
                     <div class="quantity">
-                      <button class="quantity_remove" v-on:click="removeQuantity(product)">
+                      <button
+                        class="quantity_remove"
+                        v-on:click="removeQuantity(product)"
+                      >
                         <menos-icon class="icon" />
                       </button>
                       <p class="quantity_value">{{ product.cantidad }}</p>
-                      <button class="quantity_add" v-on:click="addQuantity(product)">
+                      <button
+                        class="quantity_add"
+                        v-on:click="addQuantity(product)"
+                      >
                         <mas-icon class="icon" />
                       </button>
                     </div>
@@ -156,23 +192,27 @@
                     >
                       <b>
                         {{
-                        shippingCities[index].nombre_ciu === 'Sin especificar'
-                        ? 'Resto del país'
-                        : shippingCities[index].nombre_ciu
+                          shippingCities[index].nombre_ciu === 'Sin especificar'
+                            ? 'Resto del país'
+                            : shippingCities[index].nombre_ciu
                         }}:
                       </b>
                       {{ ciudad.price | currency }}
                     </li>
                   </ol>
                 </details>
-                <p v-else-if="shipping && getFreeShipping == false">{{ shipping | currency }}</p>
+                <p v-else-if="shipping && getFreeShipping == false">
+                  {{ shipping | currency }}
+                </p>
                 <p
                   class="cart_summary_price"
                   v-if="
                     rangosByCiudad.envio_metodo === 'gratis' ||
                     getFreeShipping == true
                   "
-                >No tiene costo de envió</p>
+                >
+                  No tiene costo de envió
+                </p>
               </span>
             </span>
             <div class="line"></div>
@@ -182,26 +222,32 @@
                 <p class="cart_summary_tittle">Total a pagar:</p>
                 <p class="cart_summary_price">
                   {{
-                  (totalCart + (getFreeShipping ? 0 : shipping)) | currency
+                    (totalCart + (getFreeShipping ? 0 : shipping)) | currency
                   }}
                 </p>
               </span>
-              <button ref="colorBtn" class="btn1" @click="GoPayments">Finalizar compra</button>
+              <button ref="colorBtn" class="btn1" @click="GoPayments">
+                Finalizar compra
+              </button>
               <!-- <button ref="colorBtn" class="btn2">Seguir comprando</button> -->
-              <nuxt-link to="/template2/home" class="btn2">Seguir comprando</nuxt-link>
+              <nuxt-link to="/template1/home" class="btn2"
+                >Seguir comprando</nuxt-link
+              >
             </div>
             <div class="wrapper_btn_responsive">
               <span class="cart_summary_items">
                 <p class="cart_summary_tittle">Total a pagar:</p>
                 <p class="cart_summary_price">
                   {{
-                  (totalCart + (getFreeShipping ? 0 : shipping)) | currency
+                    (totalCart + (getFreeShipping ? 0 : shipping)) | currency
                   }}
                 </p>
               </span>
               <div class="content-btn">
                 <button ref="colorBtn" class="btn2">Seguir comprando</button>
-                <button ref="colorBtn2" class="btn1" @click="GoPayments">Finalizar compra</button>
+                <button ref="colorBtn2" class="btn1" @click="GoPayments">
+                  Finalizar compra
+                </button>
               </div>
             </div>
           </div>
@@ -259,8 +305,8 @@ export default {
           free = false
         }
       })
-      if (this.rangosByCiudad.envio_metodo === "precio_ciudad") {
-        free = false;
+      if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
+        free = false
       }
       return free
     },
@@ -320,7 +366,7 @@ export default {
       }
     },
     setFoto(product) {
-      return product.foto_cloudinary      
+      return product.foto_cloudinary
     },
     deleteItemCart(i) {
       this.$store.state.productsCart.splice(i, 1)
