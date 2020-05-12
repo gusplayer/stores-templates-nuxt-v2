@@ -414,6 +414,7 @@ div.wrapper-contact {
 .input-text:focus,
 .input-text:active {
   outline: 0;
+  border: solid 2px var(--color_border_btn);
 }
 .input-text-rectangule {
   font-size: 14px;
@@ -436,6 +437,7 @@ div.wrapper-contact {
 .input-text-rectangule:focus,
 .input-text-rectangule:active {
   outline: 0;
+  border: solid 2px var(--color_border_btn);
 }
 .btn {
   color: var(--color_text_btn);

@@ -328,6 +328,7 @@ export default {
 .input-text:focus,
 .input-text:active {
   outline: 0;
+  border: solid 2px var(--color_border_btn);
 }
 .text-icon {
   display: flex;

@@ -95,7 +95,7 @@
             >
               <KoProductCard1
                 :product="product"
-                data-aos="zoom-in"
+                data-aos="fade-up"
               ></KoProductCard1>
             </div>
           </div>
@@ -107,6 +107,7 @@
                 :page-size="40"
                 :current-page.sync="currentPage"
                 class="pagination"
+                data-aos="fade-up"
               ></el-pagination>
             </div>
           </div>
@@ -531,8 +532,8 @@ div.wrapper-productlist {
 }
 .top-input-search input:focus,
 .top-input-search input:active {
-  border: solid 2px #afafaf;
   border-radius: var(--radius_btn);
+  border: solid 2px var(--color_border_btn);
   outline: 0;
 }
 .top-input-search i.icon-search {
@@ -689,7 +690,7 @@ div.wrapper-productlist {
   /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-gap: 10px;
+    grid-gap: 20px;
   }
 }
 
@@ -722,6 +723,12 @@ div.wrapper-productlist {
   }
   .top-right {
     padding: 0px 15px;
+  }
+}
+@media (max-width: 450px) {
+  .grid-products {
+    grid-template-columns: repeat(1, minmax(250px, 1fr));
+    /* grid-gap: 32px; */
   }
 }
 </style>

@@ -16,8 +16,8 @@ export default {
     KFooter1,
   },
   mounted() {
-    this.$store.dispatch('GET_LOGIN')         
-    // this.$store.dispatch('GET_DATA')    
+    this.$store.dispatch('GET_LOGIN')
+    // this.$store.dispatch('GET_DATA')
     // this.$store.dispatch('GET_STORELAYOUT')
   },
   head() {

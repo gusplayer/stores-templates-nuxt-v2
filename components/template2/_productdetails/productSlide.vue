@@ -1,18 +1,19 @@
 <template>
   <swiper :options="swiperOption" ref="mySwiper">
-    <!-- slides -->
     <swiper-slide>
-      <!-- <image-cloudinary class="photo" :src="setPhoto(photo)" /> -->
       <cld-image
         cloudName="komercia-store"
         :publicId="getIdCloudinary(setPhoto(photo))"
-        width="300"
+        dpr="auto"
+        responsive="width"
+        width="350"
+        height="400"
         crop="scale"
         class="photo"
       >
         <cld-transformation
-          height="300"
-          width="300"
+          width="350"
+          height="400"
           crop="lpad"
           quality="auto"
           background="auto:border"
@@ -36,7 +37,6 @@
         ></iframe>
       </div>
     </swiper-slide>
-    <!-- Optional controls -->
     <div class="swiper-pagination" slot="pagination"></div>
   </swiper>
 </template>
@@ -79,7 +79,7 @@ export default {
 
 <style scoped>
 .swiper-container {
-  max-width: 100%;
+  width: 100%;
   overflow: hidden;
   height: 400px;
 }

@@ -1,125 +1,138 @@
 <template>
   <div class="wrapper-card">
     <div class="container">
-      <div class="wrapper-image">
-        <cld-image
-          cloudName="komercia-store"
-          :publicId="getIdCloudinary(this.product.foto_cloudinary)"
-          width="300"
-          crop="scale"
-          class="product-image"
-        >
-          <cld-transformation
-            height="300"
-            width="300"
-            crop="lpad"
-            quality="auto"
-            background="auto:border"
-          />
-        </cld-image>
-        <p class="card-info-1" v-if="spent == true && spent2 == true">
-          Agotado !
-        </p>
-        <p class="card-info-2" v-if="getFreeShipping == false">
-          Envío gratis !
-        </p>
-      </div>
-
-      <div class="wrapper-image-mobile">
-        <router-link
-          :to="{
-            path: `/template2/productos/${product.slug}`,
-            params: { slug: product.slug },
-          }"
-        >
+      <div class="wrapper">
+        <div class="wrapper-image">
           <cld-image
             cloudName="komercia-store"
             :publicId="getIdCloudinary(this.product.foto_cloudinary)"
-            height="160"
-            crop="lpad"
+            height="300"
+            dpr="auto"
+            responsive="width"
+            width="auto"
             class="product-image"
           >
             <cld-transformation
-              height="200"
-              width="200"
+              height="300"
+              width="300"
               crop="lpad"
               quality="auto"
               background="auto:border"
             />
+            <cld-transformation v-if="soldOut" effect="grayscale" />
           </cld-image>
-          <p class="card-info-1" v-if="spent == true && spent2 == true">
+          <p class="card-info-1" v-if="soldOut">
             Agotado !
           </p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
           </p>
-        </router-link>
-      </div>
-
-      <div class="wrapper-text">
-        <div class="content-name-product">
-          <p class="card-text" v-if="this.product.nombre.length >= 25">
-            {{ `${this.product.nombre.slice(0, 25)}...` }}
-          </p>
-          <p class="card-text" v-else>
-            {{ `${this.product.nombre.slice(0, 25)}` }}
-          </p>
         </div>
-
-        <!-- <div class="wrapper-price">
-          <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
-          <p class="card-descuento">-50%</p>
-        </div>-->
-        <!-- <div class="separador-descuento"></div> -->
-        <div class="content-text-price">
-          <p class="card-price-2" v-if="this.product.precio > 0">
-            {{ currency(this.product.precio) }}
-          </p>
-
-          <!-- <div class="content-button"> -->
-          <router-link
-            :to="{
-              path: `/template2/productos/${product.slug}`,
-              params: { slug: product.slug },
-            }"
-            ref="colorBtn"
-            class="btn"
-            >Comprar</router-link
-          >
-          <!-- </div> -->
-        </div>
-        <!-- <div v-else class="separador"></div> -->
-      </div>
-
-      <div class="wrapper-text-mobile">
-        <p class="card-text">{{ `${this.product.nombre.slice(0, 28)}` }}</p>
-
-        <div class="content-price">
-          <div class="wrapper-price">
-            <!-- <p class="card-price-1" v-if="this.product.precio>0">$ {{ this.product.precio }}</p>
-      
-            <p class="card-descuento">-50%</p>-->
+        <div class="wrapper-text">
+          <div class="content-name-product">
+            <p class="card-text" v-if="this.product.nombre.length >= 25">
+              {{ `${this.product.nombre.slice(0, 25)}...` }}
+            </p>
+            <p class="card-text" v-else>
+              {{ `${this.product.nombre.slice(0, 25)}` }}
+            </p>
           </div>
-          <p class="card-price-2" v-if="this.product.precio > 0">
-            {{ currency(this.product.precio) }}
-          </p>
-          <div v-else class="separador"></div>
+
+          <div class="content-text-price" v-if="this.product.precio">
+            <div class="wrapper-price">
+              <div>
+                <!-- <p class="card-price-1" v-if="this.product.precio > 0">
+                $ {{ this.product.precio }}
+              </p> -->
+                <p
+                  class="card-price-2"
+                  v-if="this.product.precio > 0 || this.product.precio"
+                >
+                  {{ currency(this.product.precio) }}
+                </p>
+              </div>
+              <!-- <p class="card-descuento">-50%</p> -->
+            </div>
+            <router-link
+              :to="{
+                path: `/template2/productos/${product.slug}`,
+                params: { slug: product.slug },
+              }"
+              class="btn"
+              >Comprar</router-link
+            >
+          </div>
+          <div class="content-text-price2" v-else>
+            <router-link
+              :to="{
+                path: `/template2/productos/${product.slug}`,
+                params: { slug: product.slug },
+              }"
+              class="btn"
+              >Comprar</router-link
+            >
+          </div>
         </div>
       </div>
 
-      <!-- <div class="content-button">
-
-        <router-link
-          :to="{
-            path: `/template2/productos/${product.slug}`,
-            params: { slug: product.slug },
-          }"
-          ref="colorBtn"
-          class="btn"
-          >Comprar</router-link
-        >
-
-      </div> -->
+      <router-link
+        :to="{
+          path: `/template2/productos/${product.slug}`,
+          params: { slug: product.slug },
+        }"
+        class="wrapper-movil"
+      >
+        <div class="wrapper-image">
+          <cld-image
+            cloudName="komercia-store"
+            :publicId="getIdCloudinary(this.product.foto_cloudinary)"
+            height="300"
+            dpr="auto"
+            responsive="width"
+            width="auto"
+            class="product-image"
+          >
+            <cld-transformation
+              height="300"
+              width="300"
+              crop="lpad"
+              quality="auto"
+              background="auto:border"
+            />
+            <cld-transformation v-if="soldOut" effect="grayscale" />
+          </cld-image>
+          <p class="card-info-1" v-if="soldOut">
+            Agotado !
+          </p>
+          <p class="card-info-2" v-if="getFreeShipping == false">
+            Envío gratis !
+          </p>
+        </div>
+        <div class="wrapper-text">
+          <div class="content-name-product-movil">
+            <p class="card-text-movil" v-if="this.product.nombre.length >= 25">
+              {{ `${this.product.nombre.slice(0, 25)}...` }}
+            </p>
+            <p class="card-text-movil" v-else>
+              {{ `${this.product.nombre.slice(0, 25)}` }}
+            </p>
+          </div>
+          <div class="content-text-price-movil" v-if="this.product.precio">
+            <div class="wrapper-price">
+              <div>
+                <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
+                  $ {{ this.product.precio }}
+                </p> -->
+                <p class="card-price-2" v-if="this.product.precio > 0">
+                  {{ currency(this.product.precio) }}
+                </p>
+              </div>
+              <!-- <p class="card-descuento">-50%</p> -->
+            </div>
+          </div>
+          <div class="separator-movil" v-else></div>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -130,18 +143,11 @@ export default {
   name: 'Ko-ProductCard-1',
   props: { product: Object },
   data() {
-    return {
-      spent: false,
-      spent2: false,
-    }
-  },
-  mounted() {
-    this.getStockProduct()
+    return {}
   },
   computed: {
     getFreeShipping() {
       let free = true
-
       if (this.rangosByCiudad.envio_metodo === 'gratis') {
         free = false
       }
@@ -151,23 +157,40 @@ export default {
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },
-  },
-  methods: {
-    getStockProduct() {
-      if (this.product.stock == 0) {
-        this.spent = true
-      }
-      if (this.product.combinaciones.length) {
-        let pp = this.product.combinaciones.map((item, index) => {
-          if (item.unidades == 0) {
-            this.spent2 = true
+    soldOut() {
+      if (
+        this.product.con_variante &&
+        this.product.variantes[0].variantes !== '[object Object]'
+      ) {
+        const arrCombinations = this.product.variantes
+        let inventario = 0
+        if (
+          arrCombinations.length &&
+          arrCombinations[0].variantes !== '[object Object]'
+        ) {
+          if (
+            arrCombinations[0].combinaciones.length &&
+            arrCombinations[0].combinaciones.length
+          ) {
+            if (
+              JSON.parse(arrCombinations[0].combinaciones[0].combinaciones)
+                .length
+            ) {
+              JSON.parse(
+                arrCombinations[0].combinaciones[0].combinaciones
+              ).forEach((item) => {
+                inventario += parseInt(item.unidades)
+              })
+            }
           }
-        })
+        }
+        return !inventario
       } else {
-        this.spent2 = true
+        return !this.product.stock
       }
     },
   },
+  methods: {},
 }
 </script>
 
@@ -183,20 +206,17 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_2);
+  /* background: var(--background_color_2); */
   background: white;
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
-  padding-bottom: 0px;
-  margin-bottom: 10px;
 }
 .container {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
-  /* height: 360px; */
   border-radius: 10px;
   overflow: hidden;
   position: relative;
@@ -209,7 +229,7 @@ export default {
   align-items: center;
   background: #e71f77;
   padding: 1px 4px;
-  border-radius: 8px;
+  border-radius: var(--radius_btn);
   color: white;
   font-size: 12px;
   top: 228px;
@@ -223,7 +243,7 @@ export default {
   align-items: center;
   background: #35dd8d;
   padding: 1px 4px;
-  border-radius: 5px;
+  border-radius: var(--radius_btn);
   color: black;
   font-size: 12px;
   font-weight: bold;
@@ -238,38 +258,33 @@ export default {
   overflow: hidden;
   width: 100%;
   height: 300px;
-
-  /* margin-top: 0px;
-  padding-top: 0px; */
 }
-
 .product-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* object-position: center; */
-  /* align-self: center; */
-  /* border-radius: 10px 10px 0px 0px; */
   overflow: hidden;
-  /* box-shadow: 0 0 10px 0.2px var(--color_icon); */
 }
 .wrapper-text {
   display: initial;
   margin-top: 5px;
-  text-align: center;
   width: 100%;
-}
-.wrapper-text-mobile {
-  display: none;
 }
 .content-text-price {
   display: flex;
-  /* background-color: #35dd8d; */
   width: 100%;
   padding: 0px 20px;
   align-items: center;
   margin-bottom: 15px;
   justify-content: space-between;
+}
+.content-text-price2 {
+  display: flex;
+  width: 100%;
+  padding: 0px 20px;
+  align-items: center;
+  margin-bottom: 15px;
+  justify-content: center;
 }
 .card-text {
   font-size: 14px;
@@ -278,26 +293,21 @@ export default {
   line-height: 1;
   letter-spacing: 1.2px;
   color: var(--color_text);
-  /* font-family: rocketfont, sans-serif; */
   font-weight: 400;
-  /* font-size: 1rem; */
 }
 .content-name-product {
   display: flex;
-  /* background-color: #35dd8d; */
   width: 100%;
   padding: 0px 20px;
   margin-bottom: 20px;
   margin-top: 10px;
 }
-
 .wrapper-price {
   display: flex;
   flex-direction: row;
   justify-content: center;
-}
-.wrapper-price > p:nth-child(2) {
-  margin-left: 5px;
+  align-items: center;
+  height: 47px;
 }
 .card-price-1 {
   font-size: 12px;
@@ -308,13 +318,20 @@ export default {
   letter-spacing: normal;
   color: rgba(55, 4, 4, 0.61);
   text-decoration: line-through;
+  text-align: left;
 }
 .card-descuento {
   font-size: 12px;
   color: white;
   background: #fe5858;
   border-radius: 3px;
-  padding: 0px 5px;
+  padding: 0px 4px;
+  display: flex;
+  justify-content: center;
+  align-self: flex-end;
+  position: relative;
+  top: -8px;
+  margin-left: 5px;
 }
 .card-price-2 {
   font-size: 22px;
@@ -324,20 +341,13 @@ export default {
   line-height: 1.4;
   letter-spacing: normal;
   color: var(--color_subtext);
-  color: black;
-}
-.content-button {
-  display: flex;
-  /* width: 100%; */
-  /* justify-content: center; */
-  align-self: center;
+  text-align: left;
 }
 .btn {
   color: var(--color_text_btn);
-  /* border-radius: var(--radius_btn); */
-  /* border: solid 1px var(--color_border_btn); */
-  background-color: gray;
-  /* background-color: var(--color_text); */
+  border-radius: var(--radius_btn);
+  border: solid 1px var(--color_text);
+  background-color: var(--color_text);
   color: white;
   padding: 8px 14px;
   font-size: 14px;
@@ -350,93 +360,67 @@ export default {
   transition: all 200ms ease-in;
   text-decoration: none;
   text-align: center;
-  border-radius: 5px;
 }
 .btn:hover {
   color: white;
   background-color: var(--btnhover);
-  border: solid 2px var(--btnhover);
+  border: solid 1px var(--btnhover);
 }
-.wrapper-image-mobile {
+.wrapper {
+  display: initial;
+}
+.wrapper-movil {
   display: none;
 }
-@media (max-width: 750px) {
-  .content-button {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-  }
-  .btn {
-    width: 95%;
-    margin-left: 0px;
-    margin-bottom: 10px;
-  }
-  .wrapper-text {
+@media (max-width: 768px) {
+  .wrapper {
     display: none;
   }
-  .wrapper-text-mobil {
+  .wrapper-movil {
     display: initial;
+  }
+  .content-name-product-movil {
+    display: flex;
+    width: 100%;
+    padding: 0px 20px;
+    margin-bottom: 20px;
     margin-top: 10px;
-    margin-left: 10px;
-    justify-content: space-between;
-    width: 100%;
-  }
-  .wrapper-price {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-  }
-  .card-descuento {
-    font-size: 12px;
-    color: white;
-    background: #fe5858;
-    border-radius: 3px;
-    padding: 0px 5px;
-    width: 45px;
-  }
-  .content-price {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-  }
-
-  .wrapper-image {
-    display: none;
-  }
-  .wrapper-text-mobile {
-    display: flex;
-    height: 90px;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 10px;
-    margin-top: 5px;
-  }
-  .wrapper-image-mobile {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    width: 100%;
-    height: 180px;
+  }
+  .card-text-movil {
+    font-size: 14px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 1.2px;
+    color: var(--color_text);
+    font-weight: 400;
+    text-align: center;
+  }
 
-    /* margin-top: 0px;
-  padding-top: 0px; */
-  }
-  .image-transform-responsive {
-    width: 20px;
-  }
-  .product-image {
-    height: 200px;
+  .content-text-price-movil {
+    display: flex;
     width: 100%;
-    object-fit: contain;
-    overflow: hidden;
+    padding: 0px 20px;
+    align-items: center;
+    margin-bottom: 15px;
+    justify-content: center;
   }
-  .card-info-2 {
-    top: 170px;
+  .card-price-1-movil {
+    font-size: 12px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.4;
+    letter-spacing: normal;
+    color: rgba(55, 4, 4, 0.61);
+    text-decoration: line-through;
+    text-align: center;
   }
-  .card-info-1 {
-    top: 150px;
+  .separator-movil {
+    width: 100%;
+    margin-bottom: 25px;
   }
 }
 </style>

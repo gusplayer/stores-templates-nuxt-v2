@@ -179,6 +179,9 @@ export default {
 </script>
 
 <style scoped>
+div.description {
+  --color_border: rgba(21, 20, 57, 0.541);
+}
 .description {
   display: flex;
   width: 100%;

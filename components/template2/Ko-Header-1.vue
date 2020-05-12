@@ -117,14 +117,14 @@ export default {
           name: 'Inicio',
           path: '/template2/home',
         },
-        {
-          name: 'Carrito',
-          path: '/template2/cart',
-        },
-        {
-          name: 'Contacto',
-          path: '/template2/contacto',
-        },
+        // {
+        //   name: 'Carrito',
+        //   path: '/template2/cart',
+        // },
+        // {
+        //   name: 'Contacto',
+        //   path: '/template2/contacto',
+        // },
       ],
     }
   },

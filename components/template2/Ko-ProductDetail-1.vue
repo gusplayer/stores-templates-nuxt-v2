@@ -9,52 +9,77 @@
               <cld-image
                 cloudName="komercia-store"
                 :publicId="getIdCloudinary(data.detalle.foto_cloudinary)"
-                width="300"
+                width="100"
                 crop="scale"
-                class="img"
                 v-on:mouseover.native="
                   selectedPhoto(data.detalle.foto_cloudinary)
                 "
+                class="img"
               >
                 <cld-transformation
-                  height="300"
-                  width="300"
+                  height="100"
+                  width="100"
+                  radius="5"
+                  crop="lpad"
+                  quality="auto"
+                  background="auto:border"
+                />
+              </cld-image>
+              <cld-image
+                cloudName="komercia-store"
+                width="100"
+                crop="scale"
+                v-for="(foto, itemsfoto) in data.fotos"
+                :key="itemsfoto"
+                v-on:mouseover.native="selectedPhoto(foto.foto_cloudinary)"
+                :publicId="getIdCloudinary(foto.foto_cloudinary)"
+                class="img"
+              >
+                <cld-transformation
+                  height="100"
+                  width="100"
+                  radius="5"
                   crop="lpad"
                   quality="auto"
                   background="auto:border"
                 />
               </cld-image>
 
-              <!-- <image-cloudinary
-                :src="setMiniPhoto(data.detalle.foto_cloudinary)"
-                v-on:mouseover.native="
-                  selectedPhoto(data.detalle.foto_cloudinary)
-                "
-                class="img"
-              />
-              <image-cloudinary
-                :src="setMiniPhoto(foto.foto_cloudinary)"
-                v-on:mouseover.native="selectedPhoto(foto.foto_cloudinary)"
-                v-for="(foto, itemsfoto) in data.fotos"
-                class="img"
-                :key="itemsfoto"
-              /> -->
               <img
                 v-if="idYoutube"
                 :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
                 v-show="idYoutube"
                 v-on:mouseover="existYoutube = true"
-                class="img"
+                class="video"
               />
             </div>
           </div>
           <div class="wrapper-photo_main">
-            <zoomed
+            <div
               v-if="data.detalle.foto !== 'placeholder1.svg'"
               v-show="!existYoutube"
-              :photo="selectPhotoUrl"
               class="photo_main"
-            ></zoomed>
+            >
+              <cld-image
+                cloudName="komercia-store"
+                :publicId="getIdCloudinary(selectPhotoUrl)"
+                dpr="auto"
+                responsive="width"
+                width="645"
+                height="430"
+                crop="scale"
+                class="photo_main"
+              >
+                <cld-transformation
+                  width="645"
+                  height="430"
+                  radius="5"
+                  crop="lpad"
+                  quality="auto"
+                  background="auto:border"
+                />
+              </cld-image>
+            </div>
             <img :src="selectPhotoUrl" v-else class="photo_main" />
             <iframe
               v-show="existYoutube"
@@ -86,10 +111,13 @@
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
             <div
-              class="text-desc"
+              class="content-text-desc"
               v-if="data.info.descripcion && data.info.descripcion.length > 12"
             >
-              <div v-html="`${data.info.descripcion.slice(0, 99)}`"></div>
+              <p
+                class="text-desc"
+                v-html="`${data.info.descripcion.slice(0, 99)}`"
+              ></p>
             </div>
             <div>
               <div v-for="(variant, index) in data.variantes" :key="index">
@@ -115,6 +143,7 @@
                   <button class="quantity_add" v-on:click="addQuantity()">
                     <mas-icon class="icon" />
                   </button>
+
                   <div
                     class="container-alerta"
                     v-if="this.maxQuantityValue == this.quantityValue"
@@ -219,7 +248,6 @@
 
 <script>
 import axios from 'axios'
-import zoomed from './_productdetails/zoomed.vue'
 import productSlide from './_productdetails/productSlide.vue'
 import selectGroup from './_productdetails/selectGroup'
 import koWhatsapp from './_productdetails/whatsapp'
@@ -229,7 +257,7 @@ export default {
   props: {
     dataStore: Object,
   },
-  components: { zoomed, selectGroup, koWhatsapp, koDescription, productSlide },
+  components: { selectGroup, koWhatsapp, koDescription, productSlide },
   // created() {
 
   // },
@@ -662,20 +690,25 @@ div.wrapper-productDetail {
   justify-content: stretch;
 }
 .img {
-  width: 90px;
-  height: 70px;
+  cursor: pointer;
+}
+img {
+  vertical-align: top;
+}
+.video {
+  width: 100px;
+  height: 100px;
   border-radius: 5px;
   margin-bottom: 10px;
   object-fit: cover;
   object-position: center;
 }
-img {
-  vertical-align: top;
-}
 .wrapper-photo_main {
   position: relative;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 650px;
+  height: 450px;
+  min-height: 450px;
+  width: 100%;
 }
 .photo_main {
   max-width: 100%;
@@ -745,11 +778,19 @@ i.close {
   padding: 0px 5px;
   margin-top: 10px;
 }
+.content-text-desc {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .text-desc {
+  text-decoration-color: currentcolor;
+  text-decoration-style: solid;
+  text-decoration-line: none;
   font-size: 14px;
   font-weight: normal;
   color: var(--color_subtext);
-  margin-top: 10px;
+  line-height: 1.5;
+  text-decoration: none;
 }
 .text-variant {
   font-size: 14px;
@@ -835,6 +876,7 @@ i.close {
   display: flex;
   flex-direction: row;
   margin-top: 10px;
+  position: relative;
 }
 .text-quantity {
   font-size: 14px;
@@ -892,7 +934,9 @@ i.close {
   display: none;
 }
 .container-alerta {
-  margin-left: 3px;
+  position: absolute;
+  bottom: -35px;
+  left: 78px;
   width: 120px;
   background-color: rgb(250, 232, 75);
   border: 1px solid rgb(230, 213, 66);
@@ -908,6 +952,7 @@ i.close {
   padding: 5px 5px;
   text-transform: capitalize;
 }
+
 @media (max-width: 1250px) {
   .photo_main {
     width: 600px;

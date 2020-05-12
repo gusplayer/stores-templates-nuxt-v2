@@ -53,15 +53,18 @@ export default {
 }
 .header-logo {
   width: 100%;
-  max-height: 350px;
+  height: 100%;
+  max-height: 330px;
   object-fit: cover;
   object-position: center;
   position: absolute;
 }
-
-@media (max-width: 770px) {
+@media (max-width: 450px) {
   .wrapper-logo {
-    height: 200px;
+    height: 230px;
+  }
+  .header-logo {
+    max-height: 230px;
   }
 }
 </style>
