@@ -1,10 +1,6 @@
 <template>
   <div class="wrapper-footer" ref="background">
-    <div
-      class="contenedor"
-      data-aos="fade-up"
-      data-aos-anchor-placement="center-bottom"
-    >
+    <div class="contenedor">
       <div>
         <div class="left-logo">
           <nuxt-link to="/" class="wrapper-logo">
@@ -207,7 +203,7 @@ div.wrapper-footer {
   max-width: 1300px;
   flex-direction: row;
   align-items: center;
-  padding: 40px 30px 0px;
+  padding: 60px 30px 10px;
   justify-content: space-between;
 }
 .contenedor > div:nth-child(1) {

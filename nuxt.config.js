@@ -32,16 +32,11 @@ export default {
       },
     ],
   },
-  /*
-   ** Customize the progress-bar color
-   */
   loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
 
   css: [
     'element-ui/lib/theme-chalk/index.css',
+    '~/assets/element-pagination.css',
     'swiper/dist/css/swiper.css',
     'aos/dist/aos.css',
     'core-components-npm/dist/ko.css',

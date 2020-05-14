@@ -96,6 +96,7 @@
           <div class="pagination-medium">
             <div class="product_pagination" v-if="products.length > 40">
               <el-pagination
+                background
                 layout="prev, pager, next"
                 :total="products.length"
                 :page-size="40"

@@ -1,9 +1,11 @@
 <template>
-  <div class="wrapper_newsletter" >
+  <div class="wrapper_newsletter">
     <div class="contenedor">
       <div class="content-title">
         <p class="subtext">SUSCRIBÉTE</p>
-        <p class="title">Suscribéte a nuestro boletín para enviarte promociones.</p>
+        <p class="title">
+          Suscribéte a nuestro boletín para enviarte promociones.
+        </p>
       </div>
       <form class="content-button">
         <input
@@ -13,7 +15,9 @@
           placeholder="Correo electrónico"
           required
         />
-        <button ref="colorBtn" class="btn" @click="submitNewsletter">Subscríbete</button>
+        <button ref="colorBtn" class="btn" @click="submitNewsletter">
+          Subscríbete
+        </button>
       </form>
     </div>
   </div>
@@ -21,42 +25,37 @@
 
 <script>
 export default {
-  name: "Ko-Newsletter-1",
+  name: 'Ko-Newsletter-1',
   props: {
-    dataStore: Object
+    dataStore: Object,
   },
-  mounted() {
-
-  },
+  mounted() {},
   data() {
     return {
-      email: ""
-    };
+      email: '',
+    }
   },
-  computed: {
-   
-  },
+  computed: {},
   methods: {
     submitNewsletter() {
       if (this.email) {
         const json = {
           email: this.email,
-          tienda: this.$store.state.id
-        };
-        axios.post(`https://api2.komercia.co/api/tienda/suscriptor`, json);
+          tienda: this.$store.state.id,
+        }
+        axios.post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
       }
     },
-    
   },
-  watch: {
-    
-  }
-};
+  watch: {},
+}
 </script>
 
 <style scoped>
 div.wrapper_newsletter {
-  --btnhover: #000000;
+  --background_color_1: #2f1893;
+  --color_text: #fff;
+  --color_subtext: #fff;
 }
 .wrapper_newsletter {
   display: flex;
@@ -120,6 +119,7 @@ div.wrapper_newsletter {
 .input-text:focus,
 .input-text:active {
   outline: 0;
+  border: solid 2px var(--color_border_btn);
 }
 .btn {
   color: var(--color_text_btn);
@@ -137,6 +137,7 @@ div.wrapper_newsletter {
 }
 .btn:hover {
   background-color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 @media (max-width: 600px) {
   .title {
