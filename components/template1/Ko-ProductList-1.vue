@@ -10,12 +10,6 @@
             <li class="dropdown">
               <div class="content-filtrar">
                 <a class="dropbtn">Categorías </a>
-                <a class="dropbtn2" v-if="this.nameCategory">
-                  - {{ this.nameCategory }}</a
-                >
-                <a class="dropbtn2" v-if="this.nameSubCategory">
-                  - {{ this.nameSubCategory }}
-                </a>
                 <Flechadown class="header-icon-menu" />
               </div>
               <div class="dropdown-content">

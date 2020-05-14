@@ -1,7 +1,13 @@
 <template>
   <div class="wrapper-card">
     <div class="container">
-      <div class="wrapper">
+      <router-link
+        :to="{
+          path: `/template1/productos/${product.slug}`,
+          params: { slug: product.slug },
+        }"
+        class="wrapper"
+      >
         <div class="wrapper-image">
           <cld-image
             cloudName="komercia-store"
@@ -70,8 +76,7 @@
             >
           </div>
         </div>
-      </div>
-
+      </router-link>
       <router-link
         :to="{
           path: `/template1/productos/${product.slug}`,

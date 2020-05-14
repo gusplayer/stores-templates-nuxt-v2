@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-contact">
-    <div class="contact">
+    <div class="contact" data-aos="zoom-in">
       <div class="contact-content">
         <div>
           <p class="contact-text-title">Contáctanos</p>

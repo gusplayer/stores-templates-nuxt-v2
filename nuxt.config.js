@@ -97,4 +97,15 @@ export default {
       }
     },
   },
+  // router: {
+  //   extendRoutes(routes, resolve) {
+  //     routes.push(
+  //       {
+  //         name: 'Home',
+  //         path: '/',
+  //         component: resolve(__dirname, './pages/home.vue'),
+  //       },
+  //     )
+  //   },
+  // },
 }

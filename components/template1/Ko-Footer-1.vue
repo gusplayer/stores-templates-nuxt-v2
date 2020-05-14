@@ -1,6 +1,10 @@
 <template>
   <div class="wrapper-footer" ref="background">
-    <div class="contenedor">
+    <div
+      class="contenedor"
+      data-aos="fade-up"
+      data-aos-anchor-placement="center-bottom"
+    >
       <div>
         <div class="left-logo">
           <nuxt-link to="/" class="wrapper-logo">

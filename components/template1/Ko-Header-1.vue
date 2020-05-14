@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-header">
-    <div class="header">
+    <div class="header" data-aos="fade-down" data-aos-duration="500">
       <KoOrder />
       <div class="header-content-logo">
         <nuxt-link to="/" class="wrapper-logo">
