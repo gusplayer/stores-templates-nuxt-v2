@@ -197,6 +197,8 @@ div.description {
   flex-direction: column;
   margin-right: 25px;
   padding-bottom: 10px;
+  /* max-width: 809.33px; */
+  overflow: hidden;
 }
 .right {
   flex: 1;
