@@ -323,6 +323,7 @@ div.wrapper-footer {
   border-radius: var(--radius_btn);
   background-color: transparent;
   padding: 4px 14px;
+  min-height: 41px;
 }
 .input-text::placeholder {
   color: var(--color_subtext);

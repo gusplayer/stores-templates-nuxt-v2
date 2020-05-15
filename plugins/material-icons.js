@@ -38,7 +38,7 @@ Vue.component('delete-icon', Delete)
 Vue.component('phone-icon', Phone)
 Vue.component('email-icon', Email)
 Vue.component('Flechadown', FlechaDown)
-Vue.component('Cart', CartArrowDown)
+Vue.component('cartArrowDown', CartArrowDown)
 
 Vue.component('menos-icon', menos)
 Vue.component('mas-icon', mas)

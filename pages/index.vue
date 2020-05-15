@@ -11,11 +11,6 @@ export default {
   components: {
     KoTemplate,
   },
-  computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-  },
 }
 </script>
 

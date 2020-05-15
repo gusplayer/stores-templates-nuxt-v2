@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-contact">
-    <div class="contact" data-aos="zoom-in">
+    <div class="contact">
       <div class="contact-content">
         <div>
           <p class="contact-text-title">Contáctanos</p>
@@ -429,6 +429,9 @@ div.wrapper-contact {
   background-color: transparent;
   padding: 4px 14px;
   width: 100%;
+  max-width: 440px;
+  max-height: 140px;
+  min-height: 41px;
 }
 .input-text-rectangule::placeholder {
   color: var(--color_subtext);

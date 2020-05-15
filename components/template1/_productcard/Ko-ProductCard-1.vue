@@ -1,14 +1,14 @@
 <template>
   <div class="wrapper-card">
     <div class="container">
-      <router-link
-        :to="{
-          path: `/template1/productos/${product.slug}`,
-          params: { slug: product.slug },
-        }"
-        class="wrapper"
-      >
-        <div class="wrapper-image">
+      <div class="wrapper">
+        <router-link
+          :to="{
+            path: `/template1/productos/${product.slug}`,
+            params: { slug: product.slug },
+          }"
+          class="wrapper-image"
+        >
           <cld-image
             cloudName="komercia-store"
             :publicId="getIdCloudinary(this.product.foto_cloudinary)"
@@ -33,7 +33,7 @@
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
           </p>
-        </div>
+        </router-link>
         <div class="wrapper-text">
           <div class="content-name-product">
             <p class="card-text" v-if="this.product.nombre.length >= 25">
@@ -59,14 +59,21 @@
               </div>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
-            <router-link
-              :to="{
-                path: `/template1/productos/${product.slug}`,
-                params: { slug: product.slug },
-              }"
-              class="btn"
-              >Comprar</router-link
-            >
+            <div>
+              <router-link
+                :to="{
+                  path: `/template1/productos/${product.slug}`,
+                  params: { slug: product.slug },
+                }"
+                class="btn"
+                >Comprar</router-link
+              >
+              <cartArrowDown
+                v-if="!this.estadoCart && !soldOut"
+                class="card-icon-cart"
+                v-on:click="addShoppingCart"
+              />
+            </div>
           </div>
           <div class="content-text-price2" v-else>
             <router-link
@@ -74,9 +81,14 @@
               class="btn"
               >Comprar</router-link
             >
+            <cartArrowDown
+              v-if="!this.estadoCart && !soldOut"
+              class="card-icon-cart"
+              v-on:click="addShoppingCart"
+            />
           </div>
         </div>
-      </router-link>
+      </div>
       <router-link
         :to="{
           path: `/template1/productos/${product.slug}`,
@@ -140,12 +152,25 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   // mixins: [getIdCloudinary],
   name: 'Ko-ProductCard-1',
   props: { product: Object },
+  mounted() {
+    this.idSlug = this.product.id
+  },
   data() {
-    return {}
+    return {
+      estadoCart: false,
+      idSlug: '',
+      maxQuantityValue: 1,
+      productIndexCart: null,
+      productCart: {},
+      salesData: null,
+      spent: false,
+    }
   },
   computed: {
     getFreeShipping() {
@@ -191,8 +216,81 @@ export default {
         return !this.product.stock
       }
     },
+    getCombinaciones() {
+      if (
+        this.product.con_variante &&
+        this.product.variantes[0].variantes !== '[object Object]'
+      ) {
+        this.estadoCart = true
+      }
+    },
   },
-  methods: {},
+  methods: {
+    getDataProduct() {
+      this.salesData = {
+        precio: this.product.precio,
+        unidades: this.product.stock,
+        sku: this.product.sku,
+        estado: true,
+      }
+      this.maxQuantityValue = this.product.stock
+      for (const [
+        index,
+        productCart,
+      ] of this.$store.state.productsCart.entries()) {
+        if (this.product.id == productCart.id) {
+          this.productIndexCart = index
+          this.productCart = productCart
+          this.maxQuantityValue = this.product.stock - productCart.cantidad
+        }
+      }
+      if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
+        this.spent = true
+      }
+    },
+    addShoppingCart() {
+      if (this.product) {
+        this.getDataProduct()
+        if (this.product.id == this.idSlug) {
+          let product = {
+            id: this.product.id,
+            precio: this.product.precio,
+            cantidad: 1,
+            foto_cloudinary: this.product.foto_cloudinary,
+            nombre: this.product.nombre,
+            combinacion: '',
+          }
+          if (this.salesData) {
+            product.limitQuantity = this.product.stock
+          } else {
+            product.limitQuantity = this.product.stock
+          }
+          if (typeof this.productIndexCart === 'number') {
+            const mutableProduct = this.$store.state.productsCart[
+              this.productIndexCart
+            ]
+            mutableProduct.cantidad += 1
+            this.$store.state.productsCart.splice(
+              this.productIndexCart,
+              1,
+              mutableProduct
+            )
+          } else {
+            this.$store.state.productsCart.push(product)
+          }
+          this.$store.commit('UPDATE_CONTENTCART')
+          // this.$router.push('/')
+          this.$store.state.openOrder = true
+          this.$store.state.orderComponent = true
+        }
+      }
+    },
+  },
+  watch: {
+    getCombinaciones(value) {
+      return value
+    },
+  },
 }
 </script>
 
@@ -286,7 +384,6 @@ div.wrapper-card {
 .content-text-price2 {
   display: flex;
   width: 100%;
-  padding: 0px 20px;
   align-items: center;
   margin-bottom: 15px;
   justify-content: center;
@@ -376,6 +473,15 @@ div.wrapper-card {
 }
 .wrapper-movil {
   display: none;
+}
+.card-icon-cart {
+  font-size: 20px;
+  color: var(--color_text);
+  margin-left: 4px;
+  cursor: pointer;
+}
+.card-icon-cart:hover {
+  color: var(--btnhover);
 }
 @media (max-width: 768px) {
   .wrapper {

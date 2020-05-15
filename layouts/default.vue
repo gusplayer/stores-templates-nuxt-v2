@@ -17,8 +17,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch('GET_LOGIN')
-    // this.$store.dispatch('GET_DATA')
-    // this.$store.dispatch('GET_STORELAYOUT')
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
