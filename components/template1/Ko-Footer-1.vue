@@ -41,18 +41,34 @@
             nuevos productos.
           </p>
           <br />
-          <form class="input-content">
-            <input
-              class="input-text"
-              type="email"
-              v-model="email"
-              placeholder="Tu correo electrónico"
-              required
-            />
-            <button ref="colorBtn" class="btn" @click="submitNewsletter">
+          <div class="input-content">
+            <ValidationProvider
+              ref="validate"
+              name="email"
+              rules="required|email"
+              class="content-input-error"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  name="email"
+                  class="input-text"
+                  type="email"
+                  placeholder="Correo electrónico"
+                  v-model="email"
+                  @keyup.enter="toSubscribe"
+                />
+                <span
+                  v-show="errors[0] || register"
+                  class="text-error"
+                  :style="register ? 'color:green' : ''"
+                  >{{ errors[0] || register }}</span
+                >
+              </template>
+            </ValidationProvider>
+            <button ref="colorBtn" class="btn" @click="toSubscribe">
               Enviar
             </button>
-          </form>
+          </div>
         </div>
       </div>
       <div class="items-mobil">
@@ -74,16 +90,32 @@
           <div class="text-center">
             <p>Suscríbite a nuestras promociones</p>
           </div>
-          <form class="input-content">
-            <input
-              class="input-text"
-              v-model="email"
-              type="email"
-              placeholder="Tu correo electrónico"
-              required
-            />
-            <button class="btn" @click="submitNewsletter">Enviar</button>
-          </form>
+          <div class="input-content">
+            <ValidationProvider
+              ref="validate"
+              name="email"
+              rules="required|email"
+              class="content-input-error"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  name="email"
+                  class="input-text"
+                  type="email"
+                  placeholder="Correo electrónico"
+                  v-model="email"
+                  @keyup.enter="toSubscribe"
+                />
+                <span
+                  v-show="errors[0] || register"
+                  class="text-error"
+                  :style="register ? 'color:green' : ''"
+                  >{{ errors[0] || register }}</span
+                >
+              </template>
+            </ValidationProvider>
+            <button class="btn" @click="toSubscribe">Enviar</button>
+          </div>
         </div>
         <div v-if="currentViews.length" class="item-mobil-center">
           <div
@@ -111,17 +143,23 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   name: 'Ko-Footer-1',
   props: {
     dataStore: Object,
   },
+  components: {
+    ValidationObserver,
+    ValidationProvider,
+  },
   data() {
     return {
       logo: null,
       email: '',
-      message: '',
-      secciones: [],
+      toSubscribeResponse: false,
+      register: '',
       links: [
         {
           nombre: 'Facebook',
@@ -161,15 +199,38 @@ export default {
       currentViews: [],
     }
   },
+  destroyed() {
+    this.nombre = ''
+    this.email = ''
+    this.numberphone = ''
+    this.comment = ''
+  },
   methods: {
-    submitNewsletter() {
-      if (this.email) {
-        const json = {
-          email: this.email,
-          tienda: this.$store.state.id,
-        }
-        axios.post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
-      }
+    toSubscribe() {
+      this.$refs.validate
+        .validate()
+        .then((response) => {
+          if (response) {
+            this.toSubscribeResponse = false
+            const params = {
+              correo: this.email,
+              tienda: this.dataStore.tienda.id_tienda,
+            }
+            axios
+              .post('https://templates.komercia.co/api/suscriptores', params)
+              .then((result) => {
+                this.register = 'Tu correo ha sido registrado'
+                this.email = ''
+                this.toSubscribeResponse = true
+              })
+              .catch(
+                (result) => (this.register = 'Tu correo ya esta registrado')
+              )
+          }
+        })
+        .catch((e) => {
+          console.log(e)
+        })
     },
   },
   watch: {
@@ -324,6 +385,7 @@ div.wrapper-footer {
   background-color: transparent;
   padding: 4px 14px;
   min-height: 41px;
+  width: 100%;
 }
 .input-text::placeholder {
   color: var(--color_subtext);
@@ -333,6 +395,12 @@ div.wrapper-footer {
 .input-text:active {
   outline: 0;
   border: solid 2px var(--color_border_btn);
+}
+.text-error {
+  font-size: 12px;
+  color: #cb2027;
+  width: 100%;
+  margin-left: 10px;
 }
 .text-icon {
   display: flex;
@@ -376,6 +444,8 @@ div.wrapper-footer {
   padding: 4px 14px;
   font-weight: bold;
   width: 100%;
+  min-height: 41px;
+  max-height: 41px;
   cursor: pointer;
   transition: all 200ms ease-in;
 }

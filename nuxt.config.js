@@ -50,6 +50,7 @@ export default {
     '~/plugins/mixinCommonMethods',
     '~/plugins/cloudinary',
     '~/plugins/material-icons',
+    '~plugins/validate.js',
     { src: '@/plugins/aos.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
@@ -86,6 +87,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'

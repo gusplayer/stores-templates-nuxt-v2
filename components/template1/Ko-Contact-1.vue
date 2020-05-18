@@ -66,44 +66,74 @@
             Envíanos un mensaje y pronto estaremos en contacto.
           </p>
         </div>
-        <form class="contact-content-rigth">
+        <ValidationObserver
+          ref="observer"
+          tag="form"
+          class="contact-content-rigth"
+        >
           <p>NOMBRE</p>
-          <input
-            class="input-text"
-            type="text"
-            v-model="nombre"
-            placeholder="Escribe tu nombre"
-            required
-          />
+          <validation-provider name="nombre" rules="required">
+            <template slot-scope="{ errors }">
+              <input
+                name="nombre"
+                type="text"
+                v-model="nombre"
+                class="input-text"
+                placeholder="Escribe tu nombre"
+              />
+              <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
+            </template>
+          </validation-provider>
           <P>E-MAIL</P>
-          <input
-            class="input-text"
-            type="email"
-            v-model="email"
-            placeholder="Tu correo"
-            required
-          />
+          <validation-provider name="email" rules="required|email">
+            <template slot-scope="{ errors }">
+              <input
+                name="email"
+                type="email"
+                v-model="email"
+                placeholder="Tu correo"
+                class="input-text"
+              />
+              <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
+            </template>
+          </validation-provider>
           <P>MENSAJE</P>
-          <textarea
-            class="input-text-rectangule"
-            v-model="comment"
-            placeholder="Escribe aquí tu mensaje"
-            required
-          />
+          <validation-provider name="comentario" rules="required">
+            <template slot-scope="{ errors }">
+              <textarea
+                class="input-text-rectangule"
+                name="comentario"
+                placeholder="Escribe aquí tu mensaje"
+                v-model="comment"
+              ></textarea>
+              <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
+            </template>
+          </validation-provider>
           <P>TELÉFONO</P>
           <div class="input-content">
-            <input
-              class="input-text"
-              type="number"
-              v-model="numberphone"
-              placeholder="Tu teléfono"
-              required
-            />
-            <button ref="colorBtn" class="btn" v-on:click="submitContact">
+            <validation-provider name="celular" rules="required|num">
+              <template slot-scope="{ errors }">
+                <input
+                  class="input-text"
+                  name="celular"
+                  type="number"
+                  placeholder="Tu teléfono"
+                  v-model="numberphone"
+                />
+                <span class="text-error" v-show="errors[0]">{{
+                  errors[0]
+                }}</span>
+              </template>
+            </validation-provider>
+            <button
+              ref="colorBtn"
+              class="btn"
+              v-on:click.prevent="submitContact"
+            >
               Enviar
             </button>
           </div>
-        </form>
+        </ValidationObserver>
       </div>
     </div>
   </div>
@@ -111,10 +141,15 @@
 
 <script>
 import axios from 'axios'
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   name: 'Ko-Contact-1',
   props: {
     dataStore: Object,
+  },
+  components: {
+    ValidationObserver,
+    ValidationProvider,
   },
   data() {
     return {
@@ -122,6 +157,11 @@ export default {
       email: '',
       numberphone: '',
       comment: '',
+      messageFull: '',
+      message: {
+        text: '',
+        open: false,
+      },
       links: [
         {
           nombre: 'Facebook',
@@ -160,24 +200,34 @@ export default {
       ],
     }
   },
-  computed: {},
+  destroyed() {
+    this.nombre = ''
+    this.email = ''
+    this.numberphone = ''
+    this.comment = ''
+  },
   methods: {
     submitContact() {
-      const json = {
-        nombre: this.nombre,
-        correo: this.email,
-        celular: this.numberphone,
-        comentario: this.comment,
-        tienda: this.$store.state.id,
-      }
-      axios
-        .post(`https://templates.komercia.co/api/mensaje-contacto`, json)
+      this.$refs.observer
+        .validate()
         .then((response) => {
-          this.nombre = ''
-          this.email = ''
-          this.numberphone = ''
-          this.comment = ''
-          this.$store.state.id = ''
+          if (response) {
+            const json = {
+              nombre: this.nombre,
+              correo: this.email,
+              celular: this.numberphone,
+              comentario: this.comment,
+              tienda: this.dataStore.tienda.id_tienda,
+            }
+            axios
+              .post(`https://templates.komercia.co/api/mensaje-contacto`, json)
+              .then((response) => {
+                this.$message.success('Comentario enviado!')
+              })
+          }
+        })
+        .catch((e) => {
+          this.$message.error('error')
         })
     },
   },
@@ -333,7 +383,6 @@ div.wrapper-contact {
 .icon {
   font-size: 17px;
 }
-
 .contact-text-sub {
   font-size: 22px;
   font-weight: 600;
@@ -411,6 +460,12 @@ div.wrapper-contact {
   color: var(--color_subtext);
   opacity: 0.7;
 }
+.input-text:-internal-autofill-selected {
+  -webkit-appearance: menulist-button;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: -internal-light-dark-color(black, white) !important;
+}
 .input-text:focus,
 .input-text:active {
   outline: 0;
@@ -437,10 +492,17 @@ div.wrapper-contact {
   color: var(--color_subtext);
   opacity: 0.7;
 }
+
 .input-text-rectangule:focus,
 .input-text-rectangule:active {
   outline: 0;
   border: solid 2px var(--color_border_btn);
+}
+.text-error {
+  font-size: 12px;
+  color: #cb2027;
+  width: 100%;
+  margin-left: 10px;
 }
 .btn {
   color: var(--color_text_btn);
@@ -450,6 +512,8 @@ div.wrapper-contact {
   padding: 8px 14px;
   font-size: 14px;
   width: 50%;
+  max-height: 41px;
+  min-height: 41px;
   font-weight: bold;
   cursor: pointer;
   margin-left: 20px;

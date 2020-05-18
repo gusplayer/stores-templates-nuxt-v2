@@ -7,44 +7,81 @@
           Suscribéte a nuestro boletín para enviarte promociones.
         </p>
       </div>
-      <form class="content-button">
-        <input
-          class="input-text"
-          type="email"
-          v-model="email"
-          placeholder="Correo electrónico"
-          required
-        />
+      <div class="content-button">
+        <ValidationProvider
+          ref="validate"
+          name="email"
+          rules="required|email"
+          class="content-input-error"
+        >
+          <template slot-scope="{ errors }">
+            <input
+              name="email"
+              class="input-text"
+              type="email"
+              placeholder="Correo electrónico"
+              v-model="email"
+            />
+            <span
+              v-show="errors[0] || register"
+              class="text-error"
+              :style="register ? 'color:green' : ''"
+              >{{ errors[0] || register }}</span
+            >
+          </template>
+        </ValidationProvider>
         <button ref="colorBtn" class="btn" @click="submitNewsletter">
           Subscríbete
         </button>
-      </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   name: 'Ko-Newsletter-1',
   props: {
     dataStore: Object,
   },
+  components: {
+    ValidationObserver,
+    ValidationProvider,
+  },
   mounted() {},
   data() {
     return {
-      email: '',
+      email: null,
+      register: '',
     }
   },
-  computed: {},
+  destroyed() {
+    this.nombre = ''
+    this.email = ''
+    this.numberphone = ''
+    this.comment = ''
+  },
   methods: {
     submitNewsletter() {
-      if (this.email) {
-        const json = {
-          email: this.email,
-          tienda: this.$store.state.id,
-        }
-        axios.post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
-      }
+      this.$refs.validate
+        .validate()
+        .then((response) => {
+          if (response.valid) {
+            const json = {
+              email: this.email,
+              tienda: this.dataStore.tienda.id_tienda,
+            }
+            axios
+              .post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
+              .then((res) => (this.register = 'Tu correo ha sido registrado'))
+              .catch((res) => (this.register = 'Tu correo ya esta registrado'))
+          }
+        })
+        .catch((e) => {
+          console.log(e)
+        })
     },
   },
   watch: {},
@@ -121,6 +158,16 @@ div.wrapper_newsletter {
   outline: 0;
   border: solid 2px var(--color_border_btn);
 }
+.content-input-error {
+  display: flex;
+  flex-direction: column;
+}
+.text-error {
+  font-size: 12px;
+  color: #cb2027;
+  width: 100%;
+  margin-left: 10px;
+}
 .btn {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
@@ -133,6 +180,8 @@ div.wrapper_newsletter {
   cursor: pointer;
   margin-left: 20px;
   cursor: pointer;
+  min-height: 50px;
+  max-height: 50px;
   transition: all 200ms ease-in;
 }
 .btn:hover {
