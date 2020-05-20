@@ -573,18 +573,11 @@ export default {
     },
     beforeCombination(value) {
       const combinationSelected = JSON.stringify(value)
-
-      // &&
-      //   this.data.detalle.variantes[0].variantes !== '[object Object]' &&
-      //   this.data.detalle.con_variante > 0
       if (this.data.combinaciones) {
-        console.log('entra  1')
         if (
           this.data.combinaciones.combinaciones !== '[object Object]' &&
           this.data.detalle.con_variante > 0
         ) {
-          console.log('entra  2')
-
           const combinaciones = JSON.parse(
             this.data.combinaciones.combinaciones
           )

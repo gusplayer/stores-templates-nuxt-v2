@@ -268,7 +268,7 @@
 export default {
   name: 'Ko-Cart-1',
   mounted() {
-    this.$store.commit('UPDATE_CONTENTCART')
+    //   this.$store.commit('UPDATE_CONTENTCART')
     this.$store.dispatch('GET_CITIES')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
       this.filterCities()

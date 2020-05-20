@@ -155,7 +155,8 @@ export default {
   name: 'koOrder1',
   props: {},
   mounted() {
-    this.$store.commit('UPDATE_CONTENTCART')
+    //   this.$store.commit('UPDATE_CONTENTCART')
+
     this.$store.dispatch('GET_CITIES')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
       this.filterCities()
