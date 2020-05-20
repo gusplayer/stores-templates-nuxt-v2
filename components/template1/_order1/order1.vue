@@ -21,6 +21,16 @@
                     </div>
                     <div class="name">
                       <p>{{ product.nombre | capitalize }}</p>
+                      <div v-if="product.combinacion">
+                        <div
+                          v-for="(productCombinacion,
+                          index2) in product.combinacion"
+                          :key="index2"
+                        >
+                          <p>{{ productCombinacion | capitalize }}</p>
+                        </div>
+                      </div>
+
                       <p>{{ product.precio | currency }}</p>
                       <p>{{ product.cantidad }} und</p>
                     </div>
@@ -443,6 +453,7 @@ export default {
   color: var(--color_text);
   font-size: 14px;
 }
+
 .price {
   color: var(--color_shopping_cart);
   font-size: 16px;

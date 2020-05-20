@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="home">
-    <KoProductDetail :dataStore="dataStore" />
+    <KoProductDetail />
   </div>
 </template>
 
@@ -11,11 +11,6 @@ export default {
   name: 'detalle',
   components: {
     KoProductDetail,
-  },
-  computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
   },
 }
 </script>

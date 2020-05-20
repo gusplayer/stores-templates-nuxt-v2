@@ -470,6 +470,7 @@ div.wrapper-card {
 }
 .wrapper {
   display: initial;
+  width: 100%;
 }
 .wrapper-movil {
   display: none;

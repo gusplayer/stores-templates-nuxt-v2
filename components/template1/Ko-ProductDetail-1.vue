@@ -119,7 +119,7 @@
                 v-html="`${data.info.descripcion.slice(0, 99)}`"
               ></p>
             </div>
-            <div>
+            <div v-if="this.data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
                 <label class="text-variant">{{ variant.nombre }}:</label>
                 <selectGroup :index="index" :variantes="data.variantes">
@@ -158,7 +158,7 @@
                   </div>
                   <div v-if="data.info.inventario" class="content_buy_action">
                     <p class="text-unidades">Unidades disponibles:</p>
-                    <p class="text-garantia">{{ data.info.inventario }}</p>
+                    <p class="text-garantia">{{ salesData.unidades }}</p>
                   </div>
 
                   <div class="content_buy_action">
@@ -254,12 +254,7 @@ import koWhatsapp from './_productdetails/whatsapp'
 import koDescription from './_productdetails/descriptionProduct.vue'
 export default {
   name: 'koProduct1',
-  props: {
-    dataStore: Object,
-  },
   components: { selectGroup, koWhatsapp, koDescription, productSlide },
-  // created() {
-  // },
   mounted() {
     this.$store.state.beforeCombination = []
     if (this.dataStore.productos.length) {
@@ -293,6 +288,9 @@ export default {
     }
   },
   computed: {
+    dataStore() {
+      return this.$store.state.dataStore
+    },
     productsData() {
       return this.dataStore.productos
     },
@@ -575,44 +573,56 @@ export default {
     },
     beforeCombination(value) {
       const combinationSelected = JSON.stringify(value)
-      if (this.data.combinaciones && this.data.combinaciones.combinaciones) {
-        const combinaciones = JSON.parse(this.data.combinaciones.combinaciones)
-        const result = combinaciones.find(
-          (combinacion) =>
-            JSON.stringify(combinacion.combinacion) == combinationSelected
-        )
-        this.productCart = []
-        this.productIndexCart = null
 
-        for (const [
-          index,
-          productCart,
-        ] of this.$store.state.productsCart.entries()) {
-          if (
-            this.data.detalle.id == productCart.id &&
-            JSON.stringify(productCart.combinacion) ==
-              JSON.stringify(result.combinacion)
-          ) {
-            this.productIndexCart = index
-            this.productCart = productCart
-          }
-        }
-        if (result) {
-          this.spent = false
-          this.maxQuantityValue = result.unidades
+      // &&
+      //   this.data.detalle.variantes[0].variantes !== '[object Object]' &&
+      //   this.data.detalle.con_variante > 0
+      if (this.data.combinaciones) {
+        console.log('entra  1')
+        if (
+          this.data.combinaciones.combinaciones !== '[object Object]' &&
+          this.data.detalle.con_variante > 0
+        ) {
+          console.log('entra  2')
 
-          if (result.unidades == 0) {
-            this.spent = true
-          }
-          if (this.productCart.cantidad) {
-            this.maxQuantityValue =
-              parseInt(result.unidades) - this.productCart.cantidad
-            if (this.maxQuantityValue <= 0) {
-              this.spent = true
+          const combinaciones = JSON.parse(
+            this.data.combinaciones.combinaciones
+          )
+          const result = combinaciones.find(
+            (combinacion) =>
+              JSON.stringify(combinacion.combinacion) == combinationSelected
+          )
+          this.productCart = []
+          this.productIndexCart = null
+          for (const [
+            index,
+            productCart,
+          ] of this.$store.state.productsCart.entries()) {
+            if (
+              this.data.detalle.id == productCart.id &&
+              JSON.stringify(productCart.combinacion) ==
+                JSON.stringify(result.combinacion)
+            ) {
+              this.productIndexCart = index
+              this.productCart = productCart
             }
           }
-          this.salesData = result
-          this.quantityValue = 1
+          if (result) {
+            this.spent = false
+            this.maxQuantityValue = result.unidades
+            if (result.unidades == 0) {
+              this.spent = true
+            }
+            if (this.productCart.cantidad) {
+              this.maxQuantityValue =
+                parseInt(result.unidades) - this.productCart.cantidad
+              if (this.maxQuantityValue <= 0) {
+                this.spent = true
+              }
+            }
+            this.salesData = result
+            this.quantityValue = 1
+          }
         }
       }
     },

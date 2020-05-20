@@ -8,7 +8,7 @@
         @change="updateValue()"
         :style="value == -1 || !value ? 'color: rgba(21, 20, 57, 0.4);' : ''"
       >
-        <option selected disabled>Seleccionar opción</option>
+        <option disabled>Seleccionar opción</option>
         <slot></slot>
       </select>
     </div>
@@ -18,12 +18,11 @@
 <script>
 export default {
   props: ['options', 'label', 'value', 'index', 'variantes'],
-  mounted(){
-    this.saveOption();
+  mounted() {
+    this.saveOption()
   },
   data() {
-    return {
-    }
+    return {}
   },
   methods: {
     updateValue() {
@@ -31,20 +30,22 @@ export default {
 
       if (this.$refs.format.value) {
         let variante = this.variantes[this.index].valores.filter((item) => {
-          return item.option == this.$refs.format.value  
-          console.log(item);
-                  
+          return item.option == this.$refs.format.value
         })
         this.$store.state.beforeCombination.splice(
           this.index,
           1,
           variante[0].option
-        )        
-      }      
+        )
+      }
     },
-    saveOption(){       
-      this.$store.state.beforeCombination.splice(this.index, 1, this.variantes[0].valores[0].option);
-    }
+    saveOption() {
+      this.$store.state.beforeCombination.splice(
+        this.index,
+        1,
+        this.variantes[0].valores[0].option
+      )
+    },
   },
 }
 </script>
