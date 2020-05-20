@@ -189,6 +189,7 @@ export default {
         this.product.con_variante &&
         this.product.variantes[0].variantes !== '[object Object]'
       ) {
+        this.estadoCart = true
         const arrCombinations = this.product.variantes
         let inventario = 0
         if (
@@ -214,14 +215,6 @@ export default {
         return !inventario
       } else {
         return !this.product.stock
-      }
-    },
-    getCombinaciones() {
-      if (
-        this.product.con_variante &&
-        this.product.variantes[0].variantes !== '[object Object]'
-      ) {
-        this.estadoCart = true
       }
     },
   },

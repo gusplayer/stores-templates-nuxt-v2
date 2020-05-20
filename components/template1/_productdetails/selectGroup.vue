@@ -27,7 +27,6 @@ export default {
   methods: {
     updateValue() {
       this.$emit('input', this.$refs.format.value)
-
       if (this.$refs.format.value) {
         let variante = this.variantes[this.index].valores.filter((item) => {
           return item.option == this.$refs.format.value
@@ -43,7 +42,7 @@ export default {
       this.$store.state.beforeCombination.splice(
         this.index,
         1,
-        this.variantes[0].valores[0].option
+        this.variantes[this.index].valores[0].option
       )
     },
   },

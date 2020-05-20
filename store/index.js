@@ -175,13 +175,12 @@ export const mutations = {
         } catch (err) {
           // console.warn(product.id)
         }
-        if (product.combinaciones.length) {
+        if (product.combinaciones.length && product.con_variante > 0) {
           const arrPrices = product.combinaciones.map(
             (combinacion) => combinacion.precio
           )
           product.precio = Math.min(...arrPrices)
         }
-        // product.variantes = product.variantes[0].variantes
       }
     })
     state.products.fullProducts = state.productsData

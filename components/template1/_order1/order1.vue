@@ -30,7 +30,6 @@
                           <p>{{ productCombinacion | capitalize }}</p>
                         </div>
                       </div>
-
                       <p>{{ product.precio | currency }}</p>
                       <p>{{ product.cantidad }} und</p>
                     </div>
