@@ -259,7 +259,10 @@
         <img :src="img" class="photo" />
       </div>
       <p>Tu carrito de compras ahora está vacío.</p>
-      <button ref="colorBtn" class="btn3">Agregar productos</button>
+
+      <nuxt-link to="/">
+        <button ref="colorBtn" class="btn3">Agregar productos</button>
+      </nuxt-link>
     </div>
   </div>
 </template>

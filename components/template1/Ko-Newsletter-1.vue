@@ -75,8 +75,17 @@ export default {
             }
             axios
               .post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
-              .then((res) => (this.register = 'Tu correo ha sido registrado'))
-              .catch((res) => (this.register = 'Tu correo ya esta registrado'))
+              .then((res) => {
+                this.register = 'Tu correo ha sido registrado'
+                this.$message.success('Comentario enviado!')
+                this.email = ''
+              })
+              .catch(
+                (res) => (
+                  (this.register = 'Tu correo ya esta registrado'),
+                  this.$message.error('Tu correo ya esta registrado')
+                )
+              )
           }
         })
         .catch((e) => {

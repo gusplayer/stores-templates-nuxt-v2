@@ -99,17 +99,6 @@
                     </p>
                   </span>
                 </div>
-                <!-- <button
-                  class="p_button"
-                  @click="createQuotation"
-                  v-if="userData.id && isQuotation()"
-                >Cotizar</button>
-                <button
-                  class="p_button"
-                  @click="toggleLayout"
-                  v-else-if="isQuotation()"
-                >Iniciar sesión</button>
-                <button class="p_button" @click="GoPayments" v-else>Finalizar compra</button>-->
               </template>
               <template v-else>
                 <div class="wrapper_photo">
@@ -127,17 +116,20 @@
                 >
                   Finalizar compra
                 </button>
-                <button class="continue_shopping2" @click="closeOrder">
-                  Seguir comprando
-                </button>
+                <nuxt-link class="conten-btn" to="/" @click="closeOrder">
+                  <button class="continue_shopping2">
+                    Seguir comprando
+                  </button>
+                </nuxt-link>
+
                 <nuxt-link
                   to="/template1/cart"
-                  class="continue_shopping2"
+                  class="conten-btn"
                   @click="closeOrder"
                 >
-                  <p style="text-align: center;">
+                  <button class="continue_shopping2">
                     Ir al carrito
-                  </p>
+                  </button>
                 </nuxt-link>
               </div>
             </div>
@@ -253,10 +245,12 @@ export default {
     },
     closeOrder(event) {
       const element = event.target.className
+
       if (
         element === 'order' ||
         element === 'order_header_close' ||
-        element === 'continue_shopping'
+        element === 'continue_shopping' ||
+        element === 'continue_shopping2'
       ) {
         this.$store.commit('SET_OPENORDER', false)
       }
@@ -571,7 +565,11 @@ export default {
   border: solid 2px var(--btnhover);
   background-color: var(--btnhover);
 }
-
+.conten-btn {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
 .continue_shopping2 {
   margin-top: 10px;
   font-weight: bold;

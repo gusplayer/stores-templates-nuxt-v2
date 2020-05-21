@@ -172,5 +172,6 @@ export default {
   list-style: none;
   text-decoration: none;
   box-sizing: border-box;
+  outline: none !important;
 }
 </style>

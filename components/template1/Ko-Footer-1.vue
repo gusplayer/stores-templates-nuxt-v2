@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="top-footer">
-        <div class="top-footer-item">
+        <div>
           <p class="text-top-bold">Secciones</p>
           <br />
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
@@ -85,6 +85,17 @@
               v-if="item.link"
             >
               <div class="icon" :is="item.icon" />
+            </div>
+          </div>
+          <br />
+          <div class="footer-item-secciones">
+            <div
+              v-for="(item, index) in secciones"
+              :key="`${index}${item.name}`"
+            >
+              <nuxt-link :to="item.path" class="text-top">{{
+                item.name
+              }}</nuxt-link>
             </div>
           </div>
           <div class="text-center">
@@ -220,11 +231,15 @@ export default {
               .post('https://templates.komercia.co/api/suscriptores', params)
               .then((result) => {
                 this.register = 'Tu correo ha sido registrado'
+                this.$message.success('Tu suscripción esta activa')
                 this.email = ''
                 this.toSubscribeResponse = true
               })
               .catch(
-                (result) => (this.register = 'Tu correo ya esta registrado')
+                (result) => (
+                  (this.register = 'Tu correo ya esta registrado'),
+                  this.$message.success('Tu correo ya esta registrado')
+                )
               )
           }
         })
@@ -540,7 +555,13 @@ div.wrapper-footer {
   .item-mobil-center > div:nth-child(8) {
     text-align: right;
   }
-
+  .footer-item-secciones {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 15px;
+  }
   .text-mobil {
     font-size: 16px;
     font-weight: normal;

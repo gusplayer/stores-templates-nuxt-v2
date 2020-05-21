@@ -89,26 +89,26 @@
           </div>
         </div>
       </div>
-      <router-link
-        :to="{
-          path: `/template1/productos/${product.slug}`,
-          params: { slug: product.slug },
-        }"
-        class="wrapper-movil"
-      >
-        <div class="wrapper-image">
+      <div class="wrapper-movil">
+        <router-link
+          :to="{
+            path: `/template1/productos/${product.slug}`,
+            params: { slug: product.slug },
+          }"
+          class="wrapper-image"
+        >
           <cld-image
             cloudName="komercia-store"
             :publicId="getIdCloudinary(this.product.foto_cloudinary)"
-            height="300"
             dpr="auto"
             responsive="width"
             width="auto"
+            height="auto"
             class="product-image"
           >
             <cld-transformation
-              height="300"
-              width="300"
+              width="172"
+              height="200"
               crop="lpad"
               quality="auto"
               background="auto:border"
@@ -121,7 +121,7 @@
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
           </p>
-        </div>
+        </router-link>
         <div class="wrapper-text">
           <div class="content-name-product-movil">
             <p class="card-text-movil" v-if="this.product.nombre.length >= 25">
@@ -131,7 +131,33 @@
               {{ `${this.product.nombre.slice(0, 25)}` }}
             </p>
           </div>
-          <div class="content-text-price-movil" v-if="this.product.precio">
+          <div
+            class="content-text-price-movil-cart"
+            v-if="this.product.precio && !this.estadoCart"
+          >
+            <div class="wrapper-price">
+              <div>
+                <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
+                  $ {{ this.product.precio }}
+                </p> -->
+                <p class="card-price-2" v-if="this.product.precio > 0">
+                  {{ currency(this.product.precio) }}
+                </p>
+              </div>
+              <!-- <p class="card-descuento">-50%</p> -->
+            </div>
+            <div>
+              <cartArrowDown
+                v-if="!this.estadoCart && !soldOut"
+                class="card-icon-cart"
+                v-on:click="addShoppingCart"
+              />
+            </div>
+          </div>
+          <div
+            class="content-text-price-movil"
+            v-else-if="this.product.precio && this.estadoCart"
+          >
             <div class="wrapper-price">
               <div>
                 <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
@@ -144,9 +170,17 @@
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
           </div>
-          <div class="separator-movil" v-else></div>
+          <div class="separator-movil" v-else>
+            <div class="content-card">
+              <cartArrowDown
+                v-if="!this.estadoCart && !soldOut"
+                class="card-icon-cart"
+                v-on:click="addShoppingCart"
+              />
+            </div>
+          </div>
         </div>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -353,7 +387,7 @@ div.wrapper-card {
   justify-content: center;
   overflow: hidden;
   width: 100%;
-  height: 300px;
+  max-height: 300px;
 }
 .product-image {
   width: 100%;
@@ -488,10 +522,10 @@ div.wrapper-card {
     display: flex;
     width: 100%;
     padding: 0px 20px;
-    margin-bottom: 20px;
     margin-top: 10px;
     justify-content: center;
     align-items: center;
+    height: 40px;
   }
   .card-text-movil {
     font-size: 14px;
@@ -503,14 +537,19 @@ div.wrapper-card {
     font-weight: 400;
     text-align: center;
   }
-
   .content-text-price-movil {
     display: flex;
     width: 100%;
     padding: 0px 20px;
     align-items: center;
-    margin-bottom: 15px;
     justify-content: center;
+  }
+  .content-text-price-movil-cart {
+    display: flex;
+    width: 100%;
+    padding: 0px 20px;
+    align-items: center;
+    justify-content: space-between;
   }
   .card-price-1-movil {
     font-size: 12px;
@@ -525,13 +564,44 @@ div.wrapper-card {
   }
   .separator-movil {
     width: 100%;
-    margin-bottom: 25px;
+    height: 40px;
+  }
+  .content-card {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+  .wrapper-image {
+    min-height: 301px;
+  }
+  .card-info-1 {
+    font-size: 15px;
+    top: 208px;
+  }
+  .card-info-2 {
+    font-size: 15px;
+    top: 235px;
   }
 }
 @media (max-width: 450px) {
   .container {
     width: 100%;
     max-width: 200px;
+  }
+  .card-price-2 {
+    font-size: 16px;
+  }
+  .card-info-1 {
+    font-size: 12px;
+    top: 145px;
+  }
+  .card-info-2 {
+    font-size: 12px;
+    top: 168px;
+  }
+  .wrapper-image {
+    min-height: 201px;
   }
 }
 </style>

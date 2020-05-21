@@ -15,7 +15,8 @@ import {
   Row,
   Col,
   ColorPicker,
-  Loading
+  Loading,
+  Message,
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/es'
 import locale from 'element-ui/lib/locale'
@@ -38,3 +39,5 @@ Vue.use(ColorPicker)
 
 locale.use(lang)
 Vue.use(Loading.directive)
+
+Vue.prototype.$message = Message
