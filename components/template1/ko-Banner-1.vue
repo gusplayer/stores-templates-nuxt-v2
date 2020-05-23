@@ -1,18 +1,19 @@
 <template>
   <div class="wrapper-banner">
     <div class="header-content-logo">
-      <div class="wrapper-logo">
-        <!-- <img :src="`${this.banner}`" class="header-logo" data-aos="fade-right" /> -->
+      <div class="wrapper-logo" v-if="this.banner">
         <img
-          src="https://ep01.epimg.net/elcomidista/imagenes/2019/11/28/articulo/1574897584_677912_1574946142_media_normal.jpg"
+          :src="`${this.banner.banner}`"
           class="header-logo"
-          data-aos="zoom-in"
+          alt="Banner tienda"
         />
-        <!-- <img
-          src="https://www.bbccerveceria.com/sites/all/themes/custom/ab_bbc/logo.png"
+      </div>
+      <div class="wrapper-logo wrapper-logo-background" style="" v-else>
+        <img
+          src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto,w_1600/v1590167391/komerciaAcademico/7_eviapt.png"
           class="header-logo"
-          data-aos="zoom-in"
-        /> -->
+          alt="Banner tienda"
+        />
       </div>
     </div>
   </div>
@@ -28,7 +29,7 @@ export default {
   },
   computed: {
     banner() {
-      return this.dataStore.banners[0].ruta_banner
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {},
@@ -46,30 +47,51 @@ export default {
 .header-content-logo {
   display: flex;
   justify-content: center;
-  /* max-width: 1300px; */
   width: 100%;
   align-items: center;
 }
 .wrapper-logo {
-  /* max-width: 1300px; */
   width: 100%;
   height: 350px;
   position: relative;
 }
+.wrapper-logo-background {
+  background: var(--purple);
+  min-height: 400px;
+  /* max-height: 420px; */
+}
 .header-logo {
   width: 100%;
   height: 100%;
-  max-height: 330px;
-  object-fit: cover;
+  object-fit: hover;
   object-position: center;
   position: absolute;
+}
+@media (max-width: 1300px) {
+  .wrapper-logo-background {
+    min-height: 200px;
+    max-height: 350px;
+  }
+}
+@media (max-width: 1100px) {
+  .wrapper-logo-background {
+    min-height: 200px;
+    max-height: 250px;
+  }
+}
+@media (max-width: 770px) {
+  .wrapper-logo-background {
+    min-height: 120px;
+    max-height: 180px;
+  }
 }
 @media (max-width: 450px) {
   .wrapper-logo {
     height: 230px;
   }
-  .header-logo {
-    max-height: 230px;
+  .wrapper-logo-background {
+    min-height: 90px;
+    max-height: 100px;
   }
 }
 </style>

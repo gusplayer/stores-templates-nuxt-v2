@@ -156,7 +156,7 @@
                     <p class="text-unidades">Garantía:</p>
                     <span class="text-garantia">{{ data.info.garantia }}</span>
                   </div>
-                  <div v-if="data.info.inventario" class="content_buy_action">
+                  <div v-if="salesData.unidades" class="content_buy_action">
                     <p class="text-unidades">Unidades disponibles:</p>
                     <p class="text-garantia">{{ salesData.unidades }}</p>
                   </div>

@@ -118,6 +118,9 @@ export const state = () => ({
   valuesCSS: {},
   propertiesComponent: {},
   pagination: {},
+  settingByTemplate: '',
+  category_producto_header: '',
+  subcategory_producto_header: '',
 })
 
 export const mutations = {
@@ -132,6 +135,12 @@ export const mutations = {
   },
   SET_PAGINATION(state, value) {
     state.pagination = value
+  },
+  SET_CATEGORY_PRODCUTRO(state, value) {
+    state.category_producto_header = value
+  },
+  SET_SUBCATEGORY_PRODCUTRO(state, value) {
+    state.subcategory_producto_header = value
   },
   DELETEITEMCART: (state, index) => {
     state.productsCart.splice(index, 1)
@@ -251,6 +260,9 @@ export const mutations = {
   SET_CITIES: (state, payload) => {
     state.cities = payload
   },
+  SET_SETTINGS_BY_TEMPLATE: (state, payload) => {
+    state.settingByTemplate = payload
+  },
   SET_STORELAYOUT: (state) => {
     // const link = document.createElement('link')
     // link.href = `https://fonts.googleapis.com/css?family=${
@@ -348,6 +360,13 @@ export const actions = {
       .$get(`https://api2.komercia.co/api/ciudades`)
       .then((response) => {
         commit('SET_CITIES', response.data)
+      })
+  },
+  GET_SETTINGS_BY_TEMPLATE({ commit }, id) {
+    this.$axios
+      .$get(`https://api2.komercia.co/api/template/5/settings/${id}`)
+      .then((response) => {
+        commit('SET_SETTINGS_BY_TEMPLATE', response.data)
       })
   },
   GET_STORELAYOUT({ commit, state }) {

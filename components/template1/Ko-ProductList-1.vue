@@ -4,7 +4,32 @@
       <div class="content-title">
         <p class="title">Productos</p>
       </div>
-      <div class="top-right">
+      <div class="content-items-categorias">
+        <div class="content-items-categorias-text">
+          <p class="text-categorias">Categorias</p>
+          <p
+            class="text-categorias-select"
+            v-if="this.nameCategoryHeader"
+            @click="breadcrumbsSendCategory(nameCategoryHeader)"
+          >
+            / {{ this.nameCategoryHeader }}
+          </p>
+          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
+            / {{ this.nameSubCategoryHeader }}
+          </p>
+        </div>
+        <div class="search">
+          <div>
+            <input
+              v-model="search"
+              type="text"
+              placeholder="Buscar . . ."
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="top-right">
         <div class="content-item-top">
           <ul>
             <li class="dropdown">
@@ -13,13 +38,12 @@
                 <Flechadown class="header-icon-menu" />
               </div>
               <div class="dropdown-content">
-                <!-- catálogo  -->
                 <div class="content-item-catalogo">
                   <ul class="a-container">
                     <li @click="clear">
                       <p class="item-categoria">Todos</p>
                     </li>
-                    <!-- item -->
+
                     <li
                       @mouseover="mouseOver(index)"
                       @mouseleave="mouseLeave"
@@ -73,12 +97,18 @@
               </div>
             </li>
           </ul>
-          <div class="top-input-search">
-            <input v-model="search" type="email" placeholder="Buscar" />
-            <i class="icon-search"></i>
+          <div class="search">
+            <div>
+              <input
+                v-model="search"
+                type="text"
+                placeholder="Buscar . . ."
+                required
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
@@ -163,29 +193,7 @@ export default {
       indexSelect2: '',
     }
   },
-  watch: {
-    fullProducts(value) {
-      this.products = value
-      let maxTMP = 0
-      value.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
-    },
-    search(value) {
-      this.Searchproduct(value)
-    },
-    currentPage() {
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollTo(0, 0)
-      }, 250)
-    },
-  },
+
   computed: {
     products: {
       get() {
@@ -218,6 +226,15 @@ export default {
     },
     selectedType() {
       return this.$store.state.products.type
+    },
+    heightHeader() {
+      return this.$refs.header.offsetHeight
+    },
+    nameCategoryHeader() {
+      return this.$store.state.category_producto_header
+    },
+    nameSubCategoryHeader() {
+      return this.$store.state.subcategory_producto_header
     },
   },
   methods: {
@@ -294,6 +311,18 @@ export default {
         data: value.nombre_categoria_producto,
       })
     },
+    breadcrumbsSendCategory(value) {
+      let filtradoCategorias = this.categorias.find((element) => {
+        if (element.nombre_categoria_producto == value) {
+          return element
+        }
+      })
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('products/FILTER_BY', {
+        type: 'category',
+        data: filtradoCategorias.nombre_categoria_producto,
+      })
+    },
     clear() {
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
@@ -302,6 +331,35 @@ export default {
       this.$emit('clear')
       this.addClass()
       this.nameCategory = ''
+    },
+  },
+  watch: {
+    fullProducts(value) {
+      this.products = value
+      let maxTMP = 0
+      value.forEach((product) => {
+        if (maxTMP <= product.precio) {
+          this.price[1] = product.precio
+          this.range.max = parseInt(product.precio)
+          maxTMP = product.precio
+        }
+      })
+    },
+    search(value) {
+      this.Searchproduct(value)
+    },
+    currentPage() {
+      let timerTimeout = null
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null
+        window.scrollTo(0, 0)
+      }, 250)
+    },
+    nameCategoryHeader(value) {
+      return value
+    },
+    nameSubCategoryHeader(value) {
+      return value
     },
   },
 }
@@ -330,12 +388,8 @@ div.wrapper-productlist {
 .content-title {
   width: 100%;
   display: flex;
-}
-.content-item-top {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .title {
   font-size: 38px;
@@ -345,8 +399,14 @@ div.wrapper-productlist {
   line-height: 1.24;
   letter-spacing: -0.4px;
   color: var(--color_text);
-  margin-bottom: 0px;
+  margin-bottom: 20px;
   margin-top: 10px;
+}
+.content-item-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
 .content-item {
   display: flex;
@@ -377,17 +437,38 @@ div.wrapper-productlist {
   cursor: pointer;
   margin-right: 2px;
 }
-.dropbtn2 {
-  display: initial;
+.content-items-categorias {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+  height: 40px;
+}
+.content-items-categorias-text {
+  display: flex;
+  flex-direction: row;
+}
+.text-categorias {
   background: transparent;
   font-size: 16px;
   font-weight: bold;
   line-height: 1.4;
   color: var(--color_subtext);
-  opacity: 0.4;
+  align-self: flex-end;
+  margin-right: 2px;
+}
+.text-categorias-select {
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+  color: var(--color_subtext);
   align-self: flex-end;
   margin-right: 2px;
   margin-left: 5px;
+  cursor: pointer;
+  opacity: 0.6;
 }
 .dropdown-content {
   display: none;
@@ -579,7 +660,51 @@ div.wrapper-productlist {
   z-index: 99;
   box-sizing: border-box;
 }
-
+/* search */
+.search {
+  margin-right: 15px;
+}
+.search > div {
+  display: inline-block;
+  position: relative;
+}
+.search > div:after {
+  content: '';
+  background: var(--color_text);
+  width: 2px;
+  height: 10px;
+  position: absolute;
+  top: 18px;
+  right: -3px;
+  transform: rotate(135deg);
+}
+.search > div > input {
+  color: var(--color_text);
+  font-size: 16px;
+  background: transparent;
+  width: 15px;
+  height: 15px;
+  padding: 8px;
+  border: 1.7px solid var(--color_text);
+  outline: none;
+  border-radius: 35px;
+  transition: width 0.5s;
+}
+.search > div > input::placeholder {
+  color: var(--color_text);
+  opacity: 1;
+}
+.search > div > input::-ms-placeholder {
+  color: var(--color_text);
+}
+.search > div > input::-ms-input-placeholder {
+  color: var(--color_text);
+}
+.search > div > input:focus,
+.search > div > input:valid {
+  width: 200px;
+  height: 35px;
+}
 @media (max-width: 1350px) {
   /* ///////productos/////////// */
   .content-item-catalogo {
