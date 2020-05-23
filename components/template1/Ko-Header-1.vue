@@ -1,10 +1,10 @@
 <template>
-  <div class="header-container">
+  <div class="header-container" ref="tamañoHeader">
     <div class="wrapper-header" ref="header">
       <div class="header">
         <KoOrder />
         <div class="header-content-logo">
-          <nuxt-link to="/" class="wrapper-logo">
+          <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
@@ -93,7 +93,11 @@
         </el-drawer>
       </div>
     </div>
-    <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
+    <div
+      class="menu-container"
+      :class="showMenu ? 'animated' : 'hidden'"
+      ref="tamañoHeader2"
+    >
       <div id="menu-collapse">
         <div class="menu-grid">
           <li @click="clear">
@@ -157,6 +161,16 @@ export default {
   },
   mounted() {
     this.toggle = true
+    let element = document.getElementById('tamaño-img')
+    let elementStyle = window.getComputedStyle(element)
+    this.$refs.tamañoHeader.style.setProperty(
+      '--heightlogo',
+      elementStyle.height
+    )
+    this.$refs.tamañoHeader2.style.setProperty(
+      '--heightlogo',
+      elementStyle.height
+    )
   },
   data() {
     return {
@@ -207,10 +221,10 @@ export default {
           name: 'Inicio',
           path: '/',
         },
-        {
-          name: 'Catálogo',
-          path: '/',
-        },
+        // {
+        //   name: 'Catálogo',
+        //   path: '/',
+        // },
         {
           name: 'Carrito',
           path: '/template1/cart',
@@ -369,12 +383,12 @@ export default {
 
 <style scoped>
 div.header-container {
-  /* --logo_width: 60px; */
+  --heightlogo: auto;
 }
 .header-container {
   width: 100%;
   overflow: hidden;
-  /* height: 79px; */
+  height: var(--heightlogo);
 }
 .menu-container {
   width: 100%;
@@ -388,12 +402,11 @@ div.header-container {
   z-index: 3;
 }
 .hidden {
-  display: none;
   top: auto;
 }
 .animated {
   opacity: 1;
-  /* top: 79px; */
+  top: var(--heightlogo);
 }
 .wrapper-header {
   display: flex;
@@ -402,9 +415,9 @@ div.header-container {
   width: 100%;
   background: var(--background_color_1);
   flex-direction: column;
-  /* position: fixed;
+  position: fixed;
   top: 0px;
-  z-index: 3; */
+  z-index: 3;
 }
 .header {
   display: flex;
@@ -692,6 +705,7 @@ div.header-container {
 }
 /* search */
 .search {
+  display: initial;
   margin-right: 15px;
 }
 .search > div {
@@ -815,6 +829,11 @@ div.header-container {
     display: initial;
   }
   .menu-container {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .search {
     display: none;
   }
 }

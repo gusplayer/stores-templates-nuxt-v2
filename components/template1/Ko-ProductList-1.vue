@@ -6,7 +6,7 @@
       </div>
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
-          <p class="text-categorias">Categorias</p>
+          <p class="text-categorias" @click="clear">Categorias</p>
           <p
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <!-- <div class="top-right">
+      <div class="top-right">
         <div class="content-item-top">
           <ul>
             <li class="dropdown">
@@ -108,7 +108,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
@@ -324,6 +324,7 @@ export default {
       })
     },
     clear() {
+      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
         data: '',
@@ -457,6 +458,7 @@ div.wrapper-productlist {
   color: var(--color_subtext);
   align-self: flex-end;
   margin-right: 2px;
+  cursor: pointer;
 }
 .text-categorias-select {
   background: transparent;
@@ -572,9 +574,10 @@ div.wrapper-productlist {
 /* //////buscador ///////// */
 
 .top-right {
-  width: 100%;
+  display: none;
+  /* width: 100%;
   padding-top: 0px;
-  padding-bottom: 15px;
+  padding-bottom: 15px; */
 }
 .header-icon-menu {
   font-size: 30px;
@@ -832,19 +835,29 @@ div.wrapper-productlist {
   .dropbtn {
     margin-left: 5px;
   }
-
-  .top-right {
+  /* .top-right {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-  }
+    padding: 0px 15px;
+
+  } */
   .content-title {
     padding: 0px 15px;
   }
+}
+@media (max-width: 700px) {
   .top-right {
-    padding: 0px 15px;
+    display: initial;
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 15px;
+  }
+  .content-items-categorias {
+    display: none;
   }
 }
+
 @media (max-width: 450px) {
   .grid-products {
     grid-template-columns: repeat(2, minmax(160px, 1fr));
