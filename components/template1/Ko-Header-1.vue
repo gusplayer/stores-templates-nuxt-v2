@@ -403,6 +403,7 @@ div.header-container {
 }
 .hidden {
   top: auto;
+  display: none;
 }
 .animated {
   opacity: 1;
