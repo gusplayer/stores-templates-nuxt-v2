@@ -10,6 +10,44 @@
           <template>
             <div class="order--wrapper">
               <div class="order_products">
+                <!-- <ul class="checkout_summary_products_list">
+                  <li
+                    class="checkout_summary_products__item"
+                    v-for="(product, index) in productsCart"
+                    :key="index"
+                  >
+                    <figure class="checkout_summary__item_photo">
+                      <img :src="product.foto_cloudinary" alt />
+                    </figure>
+                    <div class="nombre_producto">
+                      <p class="nombre_producto_text">
+                        {{ product.nombre | capitalize }}
+                      </p>
+                      <span class="unidades">
+                        <b>Cantidad:</b>
+                        {{ product.cantidad }}
+                        <b>X {{ product.precio | currency }}</b>
+                      </span>
+                      <br />
+                      <div
+                        class="producto_variantes"
+                        v-if="product.combinacion"
+                      >
+                        <el-tag
+                          class="producto-variantes-el-tag"
+                          v-for="(variants, index) in product.combinacion"
+                          :key="index"
+                        >
+                          {{ variants | capitalize }}
+                        </el-tag>
+                      </div>
+                    </div>
+                    <p class="pricing_products">
+                      {{ (product.precio * product.cantidad) | formatCurrency }}
+                    </p>
+                  </li>
+                </ul> -->
+
                 <ul class="order_products_list">
                   <li
                     class="order_products_list_item"
@@ -20,18 +58,24 @@
                       <img :src="product.foto_cloudinary" />
                     </div>
                     <div class="name">
-                      <p>{{ product.nombre | capitalize }}</p>
+                      <p class="order-text" style="font-weight: bold;">
+                        {{ product.nombre | capitalize }}
+                      </p>
+                      <span>
+                        <b class="unidades">Cantidad: {{ product.cantidad }}</b>
+                        <b class="unidades"
+                          >X {{ product.precio | currency }}</b
+                        >
+                      </span>
                       <div v-if="product.combinacion">
-                        <div
+                        <el-tag
                           v-for="(productCombinacion,
                           index2) in product.combinacion"
                           :key="index2"
                         >
-                          <p>{{ productCombinacion | capitalize }}</p>
-                        </div>
+                          {{ productCombinacion | capitalize }}
+                        </el-tag>
                       </div>
-                      <p>{{ product.precio | currency }}</p>
-                      <p>{{ product.cantidad }} und</p>
                     </div>
                     <div class="price">
                       <p>
@@ -408,6 +452,7 @@ export default {
 .order_products_list {
   height: 380px;
   overflow-y: auto;
+  overflow-x: hidden;
   list-style: none;
 }
 .order_products_list::-webkit-scrollbar {
@@ -428,6 +473,20 @@ export default {
   justify-content: space-around;
   border-bottom: 1px solid var(--background_color_2);
   padding: 0px 5px;
+  overflow-x: auto;
+}
+.order_products_list_item::-webkit-scrollbar {
+  background: var(--background_color_1);
+  width: 6px;
+  max-height: 8px;
+}
+.order_products_list_item::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px var(--background_color_2);
+  border-radius: 10px;
+}
+.order_products_list_item::-webkit-scrollbar-thumb {
+  background: linear-gradient(125deg, #ffffff, var(--color_shopping_cart));
+  border-radius: 10px;
 }
 .order_products_list_item .photo {
   width: 50px;
@@ -443,11 +502,34 @@ export default {
   max-width: 180px;
   width: 100%;
 }
-.order_products_list_item .name p {
+.order-text {
   color: var(--color_text);
   font-size: 14px;
 }
+.unidades {
+  color: var(--color_text);
+  font-size: 13px;
+  font-weight: 500;
+}
 
+.order-combincacion {
+  width: 100%;
+  max-width: 180px;
+  column-count: 2;
+  column-gap: 5px;
+  column-fill: initial;
+}
+.order-combincacion-uni {
+  border-radius: 10px;
+  border: 1px solid white;
+  background-color: var(--color_shopping_cart);
+  color: #fff;
+}
+.order-combincacion-text {
+  text-align: center;
+  color: white;
+  font-size: 10px;
+}
 .price {
   color: var(--color_shopping_cart);
   font-size: 16px;

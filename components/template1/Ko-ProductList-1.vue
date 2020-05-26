@@ -18,7 +18,7 @@
             / {{ this.nameSubCategoryHeader }}
           </p>
         </div>
-        <div class="search">
+        <!-- <div class="search">
           <div>
             <input
               v-model="search"
@@ -27,7 +27,7 @@
               required
             />
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="top-right">
         <div class="content-item-top">
@@ -122,6 +122,14 @@
                 data-aos="fade-up"
               ></KoProductCard1>
             </div>
+          </div>
+          <div
+            v-if="(this.fullProducts.length == 0)"
+            class="content-products-empty"
+          >
+            <p>
+              No se encontraron productos relacionados.
+            </p>
           </div>
           <div class="pagination-medium">
             <div class="product_pagination" v-if="products.length > 40">
@@ -570,6 +578,19 @@ div.wrapper-productlist {
   grid-template-columns: repeat(4, minmax(250px, 2fr));
   grid-gap: 25px;
   box-sizing: border-box;
+}
+.content-products-empty {
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content-products-empty p {
+  font-size: 18px;
+  opacity: 0.6;
+  font-weight: bold;
+  color: var(--color_subtext);
 }
 /* //////buscador ///////// */
 

@@ -1,18 +1,18 @@
 <template>
   <div class="wrapper-footer" ref="background">
     <div class="contenedor">
-      <div>
-        <div class="left-logo">
-          <nuxt-link to="/" class="wrapper-logo">
-            <img
-              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-              class="logo"
-            />
-          </nuxt-link>
-          <p>Productos de alta calidad hechos a mano.</p>
-        </div>
-      </div>
       <div class="top-footer">
+        <div class="wrapper-logo">
+          <div class="left-logo">
+            <nuxt-link to="/" class="content-logo">
+              <img
+                :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+                class="logo"
+              />
+            </nuxt-link>
+            <p class="text-light">Productos de alta calidad hechos a mano.</p>
+          </div>
+        </div>
         <div>
           <p class="text-top-bold">Secciones</p>
           <br />
@@ -139,16 +139,92 @@
       </div>
     </div>
     <div class="under-footer">
+      <div class="contenedor-term-con" v-if="dataStore.politicas">
+        <label class="modal-btn" for="modal-toggle">Condiciones legales</label>
+      </div>
       <div class="separator"></div>
       <p>Desarrollado por Komercia Latam</p>
-      <img
-        src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
-        class="logo2"
-      />
-      <!-- <img
-        src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png"
-        class="logo2"
-      />-->
+      <a href="https://komercia.co/">
+        <img
+          src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
+          class="logo2"
+        />
+      </a>
+    </div>
+    <div class="modal-container">
+      <input type="checkbox" id="modal-toggle" />
+      <label class="modal-backdrop" for="modal-toggle"></label>
+      <div class="modal-content">
+        <div class="header-modal">
+          <p class="text-top-bold">Condiciones legales</p>
+          <label class="modal-close-btn" for="modal-toggle">
+            <close-icon class="close-icon-modal" />
+          </label>
+        </div>
+        <div class="tabs">
+          <div class="tab" v-if="this.dataStore.politicas.cambio">
+            <input
+              type="radio"
+              id="rd1"
+              name="rd"
+              style="visibility: hidden;"
+            />
+            <label class="tab-label" for="rd1">Política de cambio</label>
+            <div class="tab-content">
+              <div v-html="this.dataStore.politicas.cambio"></div>
+            </div>
+          </div>
+          <div class="tab" v-if="this.dataStore.politicas.datos">
+            <input
+              type="radio"
+              id="rd2"
+              name="rd"
+              style="visibility: hidden;"
+            />
+            <label class="tab-label" for="rd2"
+              >Políticas de tratamiento de datos</label
+            >
+            <div class="tab-content">
+              <div v-html="this.dataStore.politicas.datos"></div>
+            </div>
+          </div>
+          <div class="tab" v-if="this.dataStore.politicas.devolucion">
+            <input
+              type="radio"
+              id="rd3"
+              name="rd"
+              style="visibility: hidden;"
+            />
+            <label class="tab-label" for="rd3"
+              >Politica de devoluciones / retracto</label
+            >
+            <div class="tab-content">
+              <div v-html="this.dataStore.politicas.devolucion"></div>
+            </div>
+          </div>
+          <div class="tab" v-if="this.dataStore.politicas.garantia">
+            <input
+              type="radio"
+              id="rd4"
+              name="rd"
+              style="visibility: hidden;"
+            />
+            <label class="tab-label" for="rd4">Politica de garantia</label>
+            <div class="tab-content">
+              <div v-html="this.dataStore.politicas.garantia"></div>
+            </div>
+          </div>
+          <div class="tab">
+            <input
+              type="radio"
+              id="rd5"
+              name="rd"
+              style="visibility: hidden;"
+            />
+            <label for="rd5" class="tab-close">Cerrar todo</label>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -167,6 +243,7 @@ export default {
   },
   data() {
     return {
+      outerVisible: false,
       logo: null,
       email: '',
       toSubscribeResponse: false,
@@ -261,7 +338,7 @@ export default {
 
 <style scoped>
 div.wrapper-footer {
-  --logo_width: 60px;
+  --logo_width: 70px;
 }
 .wrapper-footer {
   display: flex;
@@ -274,41 +351,38 @@ div.wrapper-footer {
   padding-bottom: 10px;
 }
 .contenedor {
-  display: flex;
   width: 100%;
   max-width: 1300px;
-  flex-direction: row;
-  align-items: center;
   padding: 60px 30px 10px;
-  justify-content: space-between;
-}
-.contenedor > div:nth-child(1) {
-  flex: 2;
-  margin-right: 90px;
+  display: flex;
+  align-self: center;
 }
 .top-footer {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
 }
 .top-footer > div {
   flex: 1;
-  margin-right: 10px;
 }
-.top-footer > div:nth-child(3) {
+.top-footer > div:nth-child(1) {
   flex: 2;
-  margin-right: 10px;
+}
+.top-footer > div:nth-child(4) {
+  flex: 2;
+}
+.wrapper-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .left-logo {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: -30px;
 }
-.left-logo p {
-  font-size: 16px;
-  font-weight: normal;
+.text-light {
+  font-size: 15px;
+  font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
@@ -316,7 +390,7 @@ div.wrapper-footer {
   color: var(--color_subtext);
   margin-top: 10px;
 }
-.wrapper-logo {
+.content-logo {
   max-width: var(--logo_width);
 }
 .logo {
@@ -324,36 +398,7 @@ div.wrapper-footer {
   object-fit: contain;
   object-position: center;
 }
-.logo2 {
-  width: 100px;
-  opacity: 0.7;
-}
-.separator {
-  height: 1.1px;
-  width: 400px;
-  opacity: 0.5;
-  border: solid 1px var(--color_icon);
-  background: var(--color_icon);
-  margin-bottom: 10px;
-}
-.under-footer {
-  display: flex;
-  width: 100%;
-  margin-top: 40px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1300px;
-}
-.under-footer p {
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  color: var(--color_text);
-}
+
 .text-top {
   font-size: 18px;
   font-weight: 500;
@@ -378,15 +423,7 @@ div.wrapper-footer {
   color: var(--color_text);
   font-weight: bold;
 }
-.text-light {
-  font-size: 15px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  color: var(--color_subtext);
-}
+
 .input-text {
   font-size: 14px;
   font-weight: 300;
@@ -472,40 +509,215 @@ div.wrapper-footer {
 .items-mobil {
   display: none;
 }
+.under-footer {
+  display: flex;
+  width: 100%;
+  margin-top: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1300px;
+}
+.separator {
+  height: 1.1px;
+  width: 100%;
+  max-width: 400px;
+  opacity: 0.5;
+  border: solid 1px var(--color_icon);
+  background: var(--color_icon);
+  margin-bottom: 10px;
+}
+.under-footer p {
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--color_text);
+}
+.contenedor-term-con {
+  width: 100%;
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.contenedor-term-con label {
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--color_subtext);
+  cursor: pointer;
+}
+.logo2 {
+  width: 100px;
+  opacity: 0.7;
+}
+.content-btn-legal {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.content-btn-legal > button {
+  max-width: 120px;
+}
+.content-text-legal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.tabs {
+  overflow: hidden;
+}
+.tab {
+  width: 100%;
+  color: var(--color_text);
+  overflow: hidden;
+}
+.tab-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  background: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.tab-label:hover {
+  background: white;
+}
+.tab-label::after {
+  content: '\276F';
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  transition: all 0.35s;
+}
+.tab-content {
+  max-height: 0;
+  padding: 0 1em;
+  color: var(--color_subtext);
+  background: rgba(231, 231, 231, 0.74);
+  transition: all 0.35s;
+}
+.tab-close {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em;
+  font-size: 12px;
+  background: white;
+  cursor: pointer;
+}
+.tab-close:hover {
+  background: white;
+}
+input:checked + .tab-label {
+  background: white;
+}
+input:checked + .tab-label::after {
+  transform: rotate(90deg);
+}
+input:checked ~ .tab-content {
+  max-height: 100vh;
+  padding: 1em;
+}
+#modal-toggle {
+  display: none;
+}
+.modal-content,
+.modal-backdrop {
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  position: fixed;
+  z-index: -1;
+  overflow: hidden;
+  cursor: pointer;
+}
+.modal-backdrop {
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+}
+#modal-toggle:checked ~ .modal-backdrop {
+  opacity: 1;
+  z-index: 15;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#modal-toggle:checked ~ .modal-content {
+  opacity: 1;
+  z-index: 15;
+  background-color: #fff;
+  overflow: auto;
+  pointer-events: auto;
+  cursor: auto;
+  border-radius: var(--radius_btn);
+}
+.modal-content {
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  max-width: 900px;
+}
+.header-modal {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-close-btn {
+  position: absolute;
+  display: inline-block;
+  cursor: pointer;
+  right: 10px;
+}
+.close-icon-modal {
+  font-size: 30px;
+  color: var(--color_background_btn);
+}
+.close-icon-modal:hover {
+  color: var(--btnhover);
+}
+.modal-close-btn svg {
+  transition: 0.2s;
+}
+.modal-close-btn:hover svg {
+  transform: rotate(90deg);
+}
 
 @media (max-width: 768px) {
-  /* For tablets */
-  .contenedor {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+  .top-footer > div {
+    margin-right: 30px;
   }
-  .contenedor > div:nth-child(1) {
-    flex: 2;
+  .top-footer > div:nth-child(4) {
     margin-right: 0px;
-  }
-  .left-logo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
   .top-footer {
     margin-top: 23px;
   }
-  .items-mobil {
-    display: none;
-  }
 }
 @media (max-width: 600px) {
-  /* For mobile phones */
-  .contenedor {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+  #modal-toggle:checked ~ .modal-backdrop {
+    opacity: 0;
+  }
+  .modal-content {
+    width: 100vw;
+    height: 100%;
+    top: 0;
+    left: 0;
   }
   .left-logo {
     display: none;
@@ -514,7 +726,7 @@ div.wrapper-footer {
     display: none;
   }
   .separator {
-    display: none;
+    max-width: 300px;
   }
   .logo {
     width: 141px;

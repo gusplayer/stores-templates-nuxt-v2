@@ -165,7 +165,7 @@ export default {
 
   --color_border: rgba(21, 20, 57, 0.541);
 
-  --logo_width: 120px;
+  --logo_width: 100px;
   --radius_btn: 25px;
 }
 * {

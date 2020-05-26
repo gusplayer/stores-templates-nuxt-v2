@@ -26,7 +26,7 @@
         <cart-icon class="header-icon-cart" />
         <span class="num-items">{{ productsCart }}</span>
       </div>
-      <div class="header-item-menu" @click="drawerMenu = true">
+      <div class="header-item-menu" @click="drawerMenu">
         <menu-icon class="header-icon-menu nav-bar" />
       </div>
       <div
@@ -48,7 +48,7 @@
                   class="header-logo"
                 />
               </div>
-              <span @click="drawerMenu = false">
+              <span @click="!drawerMenu">
                 <window-close-icon class="header-icon-menu" />
               </span>
             </div>

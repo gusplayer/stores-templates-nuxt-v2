@@ -17,6 +17,7 @@ import {
   ColorPicker,
   Loading,
   Message,
+  Tag,
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/es'
 import locale from 'element-ui/lib/locale'
@@ -36,6 +37,7 @@ Vue.use(Alert)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(ColorPicker)
+Vue.use(Tag)
 
 locale.use(lang)
 Vue.use(Loading.directive)

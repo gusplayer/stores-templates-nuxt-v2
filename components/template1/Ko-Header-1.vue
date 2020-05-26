@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container" ref="tamañoHeader">
+  <div class="header-container">
     <div class="wrapper-header" ref="header">
       <div class="header">
         <KoOrder />
@@ -50,54 +50,13 @@
             <span class="num-items">{{ productsCart }}</span>
           </div>
         </div>
-        <div class="header-item-menu" @click="drawer = true">
+        <div class="header-item-menu" @click="openMenulateral">
           <menu-icon class="header-icon-menu nav-bar" />
         </div>
-        <div
-          class="toggle-sidebar"
-          v-show="drawer"
-          @click="drawer = !drawer"
-        ></div>
-        <el-drawer
-          :visible.sync="drawer"
-          :direction="direction"
-          class="responsive"
-        >
-          <div id="sidebar">
-            <div class="sidebar-container">
-              <div class="header-content-logo-navbar">
-                <div class="wrapper-logo">
-                  <img
-                    :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-                    class="header-logo"
-                  />
-                </div>
-                <span @click="drawer = false">
-                  <window-close-icon class="header-icon-menu" />
-                </span>
-              </div>
-              <ul>
-                <li>
-                  <div
-                    v-for="(item, index) in seccionesCart"
-                    :key="`${index}${item.name}`"
-                  >
-                    <li @click="openMenu(item.name)">
-                      <nuxt-link :to="item.path">{{ item.name }}</nuxt-link>
-                    </li>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </el-drawer>
+        <KoMenu :seccionesCart="seccionesCart" class="responsive" />
       </div>
     </div>
-    <div
-      class="menu-container"
-      :class="showMenu ? 'animated' : 'hidden'"
-      ref="tamañoHeader2"
-    >
+    <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
       <div id="menu-collapse">
         <div class="menu-grid">
           <li @click="clear">
@@ -150,10 +109,12 @@
 
 <script>
 import KoOrder from './_order1/order1'
+import KoMenu from './_order1/openMenu'
 
 export default {
   components: {
     KoOrder,
+    KoMenu,
   },
   name: 'Ko-Header-1',
   props: {
@@ -161,16 +122,6 @@ export default {
   },
   mounted() {
     this.toggle = true
-    let element = document.getElementById('tamaño-img')
-    let elementStyle = window.getComputedStyle(element)
-    this.$refs.tamañoHeader.style.setProperty(
-      '--heightlogo',
-      elementStyle.height
-    )
-    this.$refs.tamañoHeader2.style.setProperty(
-      '--heightlogo',
-      elementStyle.height
-    )
   },
   data() {
     return {
@@ -270,6 +221,10 @@ export default {
       this.showMenu = false
       this.$store.state.openOrder = true
     },
+    openMenulateral() {
+      this.showMenu = false
+      this.$store.state.openMenulateral = true
+    },
     openMenu(name) {
       var intro = document.getElementById('menu-collapse')
       if (name == 'Catálogo') {
@@ -302,6 +257,7 @@ export default {
       this.currentPage = 1
     },
     Sendsubcategory(value) {
+      this.showMenu = false
       this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
@@ -323,6 +279,7 @@ export default {
       })
     },
     sendCategory(value, categoria, ref) {
+      this.showMenu = false
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
@@ -383,7 +340,7 @@ export default {
 
 <style scoped>
 div.header-container {
-  --heightlogo: auto;
+  --heightlogo: 120px;
 }
 .header-container {
   width: 100%;
@@ -427,13 +384,10 @@ div.header-container {
   justify-content: space-between;
   width: 100%;
   max-width: 1300px;
+  min-height: 120px;
   padding: 0 30px 0;
 }
-.header-content-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 #menu-collapse {
   display: none;
   flex-direction: row;
@@ -447,7 +401,10 @@ div.header-container {
   column-count: 3;
   column-gap: 30px;
   column-fill: initial;
-  width: 80%;
+  width: 100%;
+  max-width: 1300px;
+  max-height: 700px;
+  overflow-y: auto;
 }
 .subcategoria {
   font-weight: 400;
@@ -484,14 +441,22 @@ div.header-container {
 .subcategoria li:last-child {
   margin-bottom: 10px;
 }
+.header-content-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 120px;
+}
 .wrapper-logo {
-  max-width: var(--logo_width);
+  width: var(--logo_width);
+  max-height: 120px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 .header-logo {
   width: 100%;
   height: 100%;
+  max-height: 110px;
   object-fit: contain;
   object-position: left;
 }
@@ -595,42 +560,7 @@ div.header-container {
 .header-item-menu {
   display: none;
 }
-#sidebar {
-  display: none;
-}
-.sidebar-container {
-  position: relative;
-  min-height: 100%;
-  padding-right: 30px;
-  padding-bottom: 30px;
-  padding-left: 30px;
-}
-.toggle-sidebar {
-  display: none;
-  background-color: rgba(7, 14, 27, 0.473);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.sidebar-container {
-  position: relative;
-  min-height: 100%;
-  padding-right: 30px;
-  padding-bottom: 30px;
-  padding-left: 30px;
-}
-.sidebar-container ul {
-  padding-top: 10px;
-  font-family: 'Poppins', sans-serif;
-}
-.header-content-logo-navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #dfe3e8;
-}
+
 .responsive {
   display: none;
 }
@@ -755,9 +685,6 @@ div.header-container {
   .product-img-container {
     display: none;
   }
-  .menu-grid {
-    width: 100%;
-  }
 }
 @media (max-width: 700px) {
   .header-buttons {
@@ -801,31 +728,7 @@ div.header-container {
     height: 24px;
   }
   /* menu lateral */
-  #sidebar {
-    display: initial;
-    position: fixed;
-    max-width: 350px;
-    width: 100%;
-    height: 100vh;
-    background: var(--background_color_1);
-    right: 0px;
-    top: 0;
-    left: unset;
-  }
-  #sidebar.active {
-    right: -200px;
-  }
-  #sidebar ul li {
-    font-size: 16px;
-    font-weight: normal;
-    color: var(--color_text);
-    list-style: none;
-    margin: 20px 0px;
-    text-align: unset;
-  }
-  .toggle-sidebar {
-    display: initial;
-  }
+
   .responsive {
     display: initial;
   }

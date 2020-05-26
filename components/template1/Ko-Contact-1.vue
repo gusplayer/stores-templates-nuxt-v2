@@ -557,11 +557,7 @@ div.wrapper-contact {
     margin-top: 20px;
   }
   .input-content {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
   }
   .btn {
     color: var(--color_text_btn);

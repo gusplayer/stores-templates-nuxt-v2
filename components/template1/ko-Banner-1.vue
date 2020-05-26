@@ -1,17 +1,20 @@
 <template>
   <div class="wrapper-banner">
     <div class="header-content-logo">
-      <div class="wrapper-logo" v-if="this.banner">
+      <div class="wrapper-banner" v-if="this.banner">
         <img
           :src="`${this.banner.banner}`"
-          class="header-logo"
+          class="banner"
           alt="Banner tienda"
         />
       </div>
-      <div class="wrapper-logo wrapper-logo-background" style="" v-else>
+      <div
+        class="wrapper-banner wrapper-logo-background"
+        v-if="this.banner == null"
+      >
         <img
           src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto,w_1600/v1590167391/komerciaAcademico/7_eviapt.png"
-          class="header-logo"
+          class="banner"
           alt="Banner tienda"
         />
       </div>
@@ -50,48 +53,19 @@ export default {
   width: 100%;
   align-items: center;
 }
-.wrapper-logo {
+.wrapper-banner {
   width: 100%;
-  height: 350px;
-  position: relative;
+  /* height: 350px; */
+}
+.banner {
+  width: 100%;
+  height: 100%;
+  object-fit: hover;
+  object-position: center;
 }
 .wrapper-logo-background {
   background: var(--purple);
   min-height: 400px;
   /* max-height: 420px; */
-}
-.header-logo {
-  width: 100%;
-  height: 100%;
-  object-fit: hover;
-  object-position: center;
-  position: absolute;
-}
-@media (max-width: 1300px) {
-  .wrapper-logo-background {
-    min-height: 200px;
-    max-height: 350px;
-  }
-}
-@media (max-width: 1100px) {
-  .wrapper-logo-background {
-    min-height: 200px;
-    max-height: 250px;
-  }
-}
-@media (max-width: 770px) {
-  .wrapper-logo-background {
-    min-height: 120px;
-    max-height: 180px;
-  }
-}
-@media (max-width: 450px) {
-  .wrapper-logo {
-    height: 230px;
-  }
-  .wrapper-logo-background {
-    min-height: 90px;
-    max-height: 100px;
-  }
 }
 </style>
