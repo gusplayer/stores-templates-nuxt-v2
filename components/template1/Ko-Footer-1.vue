@@ -151,7 +151,7 @@
         />
       </a>
     </div>
-    <div class="modal-container">
+    <div class="modal-container" v-if="dataStore.politicas">
       <input type="checkbox" id="modal-toggle" />
       <label class="modal-backdrop" for="modal-toggle"></label>
       <div class="modal-content">
@@ -214,14 +214,38 @@
               <div v-html="this.dataStore.politicas.garantia"></div>
             </div>
           </div>
-          <div class="tab">
+          <div class="tab" v-if="this.dataStore.politicas.envios">
             <input
               type="radio"
               id="rd5"
               name="rd"
               style="visibility: hidden;"
             />
-            <label for="rd5" class="tab-close">Cerrar todo</label>
+            <label class="tab-label" for="rd5">Politica de envios</label>
+            <div class="tab-content">
+              <div v-html="this.dataStore.politicas.envios"></div>
+            </div>
+          </div>
+          <div class="tab" v-if="this.dataStore.politicas.pagos">
+            <input
+              type="radio"
+              id="rd6"
+              name="rd"
+              style="visibility: hidden;"
+            />
+            <label class="tab-label" for="rd6">Politica de envios</label>
+            <div class="tab-content">
+              <div v-html="this.dataStore.politicas.pagos"></div>
+            </div>
+          </div>
+          <div class="tab">
+            <input
+              type="radio"
+              id="rd8"
+              name="rd"
+              style="visibility: hidden;"
+            />
+            <label for="rd8" class="tab-close">Cerrar todo</label>
           </div>
         </div>
       </div>
