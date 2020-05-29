@@ -8,16 +8,6 @@
           alt="Banner tienda"
         />
       </div>
-      <div
-        class="wrapper-banner wrapper-logo-background"
-        v-if="this.banner == null"
-      >
-        <img
-          src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto,w_1600/v1590167391/komerciaAcademico/7_eviapt.png"
-          class="banner"
-          alt="Banner tienda"
-        />
-      </div>
     </div>
   </div>
 </template>
