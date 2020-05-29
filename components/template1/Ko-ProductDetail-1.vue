@@ -103,14 +103,14 @@
             <p class="text-marca">
               <strong>{{ data.info.marca }}</strong>
             </p>
-            <p class="text-promocion" v-show="salesData.precio">
+            <!-- <p class="text-promocion" v-show="salesData.precio">
               ${{ salesData.precio | currency }}
-            </p>
+            </p> -->
             <div class="wrapper-price">
               <p class="text-precio" v-show="salesData.precio">
                 ${{ salesData.precio | currency }}
               </p>
-              <p class="card-descuento">-50%</p>
+              <!-- <p class="card-descuento">-50%</p> -->
             </div>
             <div
               class="content-text-desc"
