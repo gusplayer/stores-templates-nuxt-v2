@@ -8,7 +8,6 @@
 import KoProductDetail from '../../../components/template1/Ko-ProductDetail-1'
 
 export default {
-  name: 'detalle',
   components: {
     KoProductDetail,
   },

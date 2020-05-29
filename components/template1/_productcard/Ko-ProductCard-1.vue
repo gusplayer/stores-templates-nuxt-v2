@@ -3,7 +3,7 @@
     <div class="container">
       <div class="wrapper">
         <router-link
-          :to="{ path: `/template1/productos/${product.slug}` }"
+          :to="{ path: `/template1/productos/` + product.slug }"
           class="wrapper-image"
         >
           <cld-image
@@ -58,7 +58,7 @@
             </div>
             <div>
               <router-link
-                :to="{ path: `/template1/productos/${product.slug}` }"
+                :to="{ path: `/template1/productos/` + product.slug }"
                 class="btn"
                 >Comprar</router-link
               >
@@ -71,7 +71,7 @@
           </div>
           <div class="content-text-price2" v-else>
             <router-link
-              :to="{ path: `/template1/productos/${product.slug}` }"
+              :to="{ path: `/template1/productos/` + product.slug }"
               class="btn"
               >Comprar</router-link
             >
@@ -85,7 +85,7 @@
       </div>
       <div class="wrapper-movil">
         <router-link
-          :to="{ path: `/template1/productos/${product.slug}` }"
+          :to="{ path: `/template1/productos/` + product.slug }"
           class="wrapper-image"
         >
           <cld-image

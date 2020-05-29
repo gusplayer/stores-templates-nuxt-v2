@@ -239,7 +239,7 @@ export default {
     closeMenu() {
       this.showMenu = false
       this.$router.push({
-        path: `/template1/productos/${this.product[0].slug}`,
+        path: `/template1/productos/` + this.product[0].slug,
       })
     },
     Searchproduct(search) {
@@ -311,6 +311,7 @@ export default {
       this.nameCategory = ''
     },
     clear() {
+      this.showMenu = false
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',

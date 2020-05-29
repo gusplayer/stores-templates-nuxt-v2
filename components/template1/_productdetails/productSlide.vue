@@ -1,50 +1,54 @@
 <template>
-  <swiper :options="swiperOption" ref="mySwiper">
-    <swiper-slide>
-      <cld-image
-        cloudName="komercia-store"
-        :publicId="getIdCloudinary(setPhoto(photo))"
-        dpr="auto"
-        responsive="width"
-        width="350"
-        height="400"
-        crop="scale"
-        class="photo"
-      >
-        <cld-transformation
+  <div
+    v-swiper:mySwiper="swiperOption"
+    @someSwiperEvent="callback"
+    ref="mySwiper"
+  >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <cld-image
+          cloudName="komercia-store"
+          :publicId="getIdCloudinary(setPhoto(photo))"
+          dpr="auto"
+          responsive="width"
           width="350"
           height="400"
-          crop="lpad"
-          quality="auto"
-          background="auto:border"
-        />
-      </cld-image>
-    </swiper-slide>
-    <swiper-slide v-for="photo in photos" :key="photo.id">
-      <img class="photo" :src="setPhoto(photo.foto_cloudinary)" />
-    </swiper-slide>
-    <swiper-slide v-if="idYoutube && idYoutube !== ''">
-      <div class="youtube">
-        <button class="youtube__action_back" @click="changeSlide()">
-          <i class="material-icons">keyboard_backspace</i>
-        </button>
-        <iframe
-          style="max-width: 375px; width: 100%;"
-          height="400"
-          :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
+          crop="scale"
+          class="photo"
+        >
+          <cld-transformation
+            width="350"
+            height="400"
+            crop="lpad"
+            quality="auto"
+            background="auto:border"
+          />
+        </cld-image>
       </div>
-    </swiper-slide>
+      <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
+        <img class="photo" :src="setPhoto(photo.foto_cloudinary)" />
+      </div>
+      <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">
+        <div class="youtube">
+          <button class="youtube__action_back" @click="changeSlide()">
+            <i class="material-icons">keyboard_backspace</i>
+          </button>
+          <iframe
+            style="max-width: 375px; width: 100%;"
+            height="400"
+            :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
     <div class="swiper-pagination" slot="pagination"></div>
-  </swiper>
+  </div>
 </template>
 
 <script>
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
-  components: { swiper, swiperSlide },
   name: 'carrousel',
   props: ['photos', 'photo', 'idYoutube'],
   data() {
@@ -58,6 +62,8 @@ export default {
         paginationClickable: true,
         grabCursor: true,
         autoplay: 2500,
+
+        banners: ['/1.jpg', '/2.jpg', '/3.jpg'],
       },
     }
   },
