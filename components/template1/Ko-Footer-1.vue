@@ -312,10 +312,7 @@ export default {
     }
   },
   destroyed() {
-    this.nombre = ''
     this.email = ''
-    this.numberphone = ''
-    this.comment = ''
   },
   methods: {
     toSubscribe() {

@@ -249,13 +249,12 @@ export default {
 div.wrapper-contact {
   --background_color_1: #f2f4f7;
 }
-
 .wrapper-contact {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: #eef1f4;
+  background: var(--background_color_1);
   box-sizing: border-box;
 }
 .contact {

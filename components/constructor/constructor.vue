@@ -29,7 +29,6 @@
         <br />
         <br />
         <p v-if="valueTipos" class="label">Seleccionar componente</p>
-
         <el-select
           v-if="valueTipos"
           v-model="nameCurrentComponent"
@@ -43,7 +42,6 @@
             :value="item.name"
           ></el-option>
         </el-select>
-
         <el-button
           v-if="nameCurrentComponent"
           class="button"
@@ -163,9 +161,10 @@ export default {
     optionsItems,
   },
   async mounted() {
+    this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_DATA')
     // this.$store.dispatch('GET_STORELAYOUT')
-    await this.$store.dispatch('GET_LOGIN')
+
     this.tiposComponentes = await API.getTipoComponente()
     this.listadoComponentes = await API.getReferenciasComponente()
   },
@@ -204,7 +203,6 @@ export default {
   computed: {
     componentFile() {
       if (this.selectedComponent) {
-        // console.log(this.fileTipos.name.toLowerCase())
         if ('headers' == this.fileTipos.name.toLowerCase()) {
           this.SettingsComponentes = 'headers'
         }

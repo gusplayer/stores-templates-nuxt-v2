@@ -20,18 +20,17 @@
               <p class="text-name">{{ product.nombre | capitalize }}</p>
             </div>
             <div class="products_item_details">
-              <span>
+              <div class="content_variant">
                 <p class="text-tittle">Variante:</p>
-                <ul class="item_info_combinations">
-                  <p
-                    v-for="(item, items) in product.combinacion"
-                    :key="items"
-                    class="text-result"
-                  >
-                    {{ item }}
-                  </p>
-                </ul>
-              </span>
+                <el-tag
+                  v-for="(item, items) in product.combinacion"
+                  :key="items"
+                  class="text-variant"
+                  style="margin-top: 3px;"
+                >
+                  {{ item }}
+                </el-tag>
+              </div>
               <div class="wrapper_quantity">
                 <p class="text-tittle">Cantidad:</p>
                 <div class="content_items_quantity">
@@ -111,15 +110,14 @@
                   </div>
                   <div class="content_variant" v-if="product.combinacion">
                     <p class="text-tittle">Variante:</p>
-                    <ul class="item_info_combinations">
-                      <p
-                        v-for="(item, items) in product.combinacion"
-                        :key="items"
-                        class="text-result"
-                      >
-                        {{ item }}
-                      </p>
-                    </ul>
+                    <el-tag
+                      v-for="(item, items) in product.combinacion"
+                      :key="items"
+                      class="text-variant"
+                      style="margin-top: 3px;"
+                    >
+                      {{ item }}
+                    </el-tag>
                   </div>
                 </div>
               </div>
@@ -512,6 +510,15 @@ div.wrapper-cart {
   display: flex;
   flex-direction: column;
 }
+.content_variant {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+.text-variant {
+  font-size: 12px;
+  color: var(--color_text);
+}
 .text-result {
   font-size: 14px;
   font-weight: bold;
@@ -838,15 +845,7 @@ div.wrapper-cart {
   .text-result {
     font-size: 13px;
   }
-  .content_variant {
-    align-items: flex-start;
-    margin-left: 10px;
-  }
-  .item_info_combinations {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
+
   .products_item_details {
     flex: 1;
   }
