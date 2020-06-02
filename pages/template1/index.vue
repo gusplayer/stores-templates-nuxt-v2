@@ -18,7 +18,6 @@ export default {
   components: {
     kBanner,
     KProductList,
-
     KNewsletter,
   },
   computed: {
