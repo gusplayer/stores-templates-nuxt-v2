@@ -72,6 +72,10 @@ export default {
   googleAnalytics: {
     id: 'UA-92934137-1',
   },
+  debug: {
+    enabled: true,
+    sendHitTask: true,
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
