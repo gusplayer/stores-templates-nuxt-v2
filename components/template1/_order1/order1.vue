@@ -153,8 +153,11 @@
                 </p>
               </template>
               <div class="content-button">
+                <p class="Quotation-message" v-if="isQuotation()">
+                  Contacte con la tienda para saber los precios de los productos
+                </p>
                 <button
-                  v-if="productsCart.length"
+                  v-if="productsCart.length && !isQuotation()"
                   class="continue_shopping"
                   @click="GoPayments"
                 >
@@ -165,7 +168,6 @@
                     Seguir comprando
                   </button>
                 </nuxt-link>
-
                 <nuxt-link
                   to="/template1/cart"
                   class="conten-btn"
@@ -621,6 +623,22 @@ export default {
 }
 .p_button:hover {
   opacity: 0.8;
+}
+.Quotation-message {
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  border-style: none;
+  background-color: transparent;
+  padding: 8px 10px;
+  width: 100%;
+  max-width: 280px;
+  color: var(--color_text);
+  border-radius: 25px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  outline: none;
+  flex: none;
 }
 .continue_shopping {
   margin-top: 10px;

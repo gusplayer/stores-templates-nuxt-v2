@@ -214,7 +214,11 @@
               </span>
             </span>
             <div class="line"></div>
-
+            <div class="message-responsive">
+              <p class="Quotation-message" v-if="isQuotation()">
+                Contacte con la tienda para saber los precios de los productos
+              </p>
+            </div>
             <div class="wrapper_btn">
               <span class="cart_summary_items">
                 <p class="cart_summary_tittle">Total a pagar:</p>
@@ -224,10 +228,17 @@
                   }}
                 </p>
               </span>
-              <button ref="colorBtn" class="btn1" @click="GoPayments">
+              <p class="Quotation-message" v-if="isQuotation()">
+                Contacte con la tienda para saber los precios de los productos
+              </p>
+              <button
+                ref="colorBtn"
+                class="btn1"
+                @click="GoPayments"
+                v-if="!isQuotation()"
+              >
                 Finalizar compra
               </button>
-              <!-- <button ref="colorBtn" class="btn2">Seguir comprando</button> -->
               <nuxt-link to="/template1/home" class="btn2"
                 >Seguir comprando</nuxt-link
               >
@@ -243,7 +254,12 @@
               </span>
               <div class="content-btn">
                 <button ref="colorBtn" class="btn2">Seguir comprando</button>
-                <button ref="colorBtn2" class="btn1" @click="GoPayments">
+                <button
+                  ref="colorBtn2"
+                  class="btn1"
+                  @click="GoPayments"
+                  v-if="!isQuotation()"
+                >
                   Finalizar compra
                 </button>
               </div>
@@ -352,6 +368,13 @@ export default {
     },
   },
   methods: {
+    isQuotation() {
+      let result = false
+      this.productsCart.forEach((product) => {
+        if (product.precio === 0) result = true
+      })
+      return result
+    },
     addQuantity(product, index) {
       if (product.limitQuantity > product.cantidad) {
         product.cantidad++
@@ -702,6 +725,19 @@ div.wrapper-cart {
   flex-direction: column;
   justify-content: space-between;
 }
+.message-responsive {
+  display: none;
+}
+.Quotation-message {
+  color: var(--color_text_btn);
+  padding: 8px 12px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: center;
+}
 .btn1 {
   border-radius: var(--radius_btn);
   color: var(--color_text_btn);
@@ -927,6 +963,9 @@ div.wrapper-cart {
   }
   .content-btn > button:nth-child(2) {
     margin-left: 8px;
+  }
+  .message-responsive {
+    display: initial;
   }
 }
 </style>
