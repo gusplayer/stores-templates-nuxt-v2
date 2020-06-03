@@ -201,7 +201,6 @@ export default {
       indexSelect2: '',
     }
   },
-
   computed: {
     products: {
       get() {

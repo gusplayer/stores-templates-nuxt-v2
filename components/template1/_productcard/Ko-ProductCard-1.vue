@@ -114,19 +114,25 @@
           </p>
         </router-link>
         <div class="wrapper-text">
-          <div class="content-name-product-movil">
+          <router-link
+            :to="{ path: `/template1/productos/` + product.slug }"
+            class="content-name-product-movil"
+          >
             <p class="card-text-movil" v-if="this.product.nombre.length >= 25">
               {{ `${this.product.nombre.slice(0, 25)}...` }}
             </p>
             <p class="card-text-movil" v-else>
               {{ `${this.product.nombre.slice(0, 25)}` }}
             </p>
-          </div>
+          </router-link>
           <div
             class="content-text-price-movil-cart"
             v-if="this.product.precio && !this.estadoCart"
           >
-            <div class="wrapper-price">
+            <router-link
+              :to="{ path: `/template1/productos/` + product.slug }"
+              class="wrapper-price"
+            >
               <div>
                 <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
@@ -136,7 +142,7 @@
                 </p>
               </div>
               <!-- <p class="card-descuento">-50%</p> -->
-            </div>
+            </router-link>
             <div>
               <cartArrowDown
                 v-if="!this.estadoCart && !soldOut"
@@ -145,7 +151,8 @@
               />
             </div>
           </div>
-          <div
+          <router-link
+            :to="{ path: `/template1/productos/` + product.slug }"
             class="content-text-price-movil"
             v-else-if="this.product.precio && this.estadoCart"
           >
@@ -160,7 +167,7 @@
               </div>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
-          </div>
+          </router-link>
           <div class="separator-movil" v-else>
             <div class="content-card">
               <cartArrowDown
