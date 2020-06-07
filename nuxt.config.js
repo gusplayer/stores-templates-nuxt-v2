@@ -66,12 +66,12 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/google-analytics',
+    // '@nuxtjs/google-analytics',
     ['@nuxtjs/google-tag-manager', { id: 'GTM-KGB4QPR', pageTracking: true }],
   ],
-  googleAnalytics: {
-    id: 'UA-92934137-1',
-  },
+  // googleAnalytics: {
+  //   id: 'UA-92934137-1',
+  // },
   debug: {
     enabled: true,
     sendHitTask: true,
