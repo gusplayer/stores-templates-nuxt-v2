@@ -324,12 +324,35 @@ export const actions = {
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
-    // console.log(subdomain)
+    console.log(parts[1])
 
-    const id = await axios.post(
-      `https://api2.komercia.co/api/tienda/info/by/url`,
-      { name: `${subdomain}.komercia.co/` }
-    )
+    let id = 0
+
+    if (parts[1] == 'komercia') {
+      id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+        name: `${subdomain}.komercia.co/`,
+      })
+    } else {
+      // id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+      //   name: `${subdomain}.komercia.co/`,
+      // })
+      id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+        name: `http://${full}`,
+      })
+    }
+
+    console.log(id)
+
+    //Localhost
+    // const id = await axios.post(
+    //   `https://api2.komercia.co/api/tienda/info/by/url`,
+    //   { name: `${subdomain}.komercia.co/` }
+    // )
+    // const id = await axios.post(
+    //   `https://api2.komercia.co/api/tienda/info/by/url`,
+    //   { name: `http://${full}` }
+    // )
+
     await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
 
     // console.log(route.path);
