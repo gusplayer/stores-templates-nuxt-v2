@@ -10,44 +10,6 @@
           <template>
             <div class="order--wrapper">
               <div class="order_products">
-                <!-- <ul class="checkout_summary_products_list">
-                  <li
-                    class="checkout_summary_products__item"
-                    v-for="(product, index) in productsCart"
-                    :key="index"
-                  >
-                    <figure class="checkout_summary__item_photo">
-                      <img :src="product.foto_cloudinary" alt />
-                    </figure>
-                    <div class="nombre_producto">
-                      <p class="nombre_producto_text">
-                        {{ product.nombre | capitalize }}
-                      </p>
-                      <span class="unidades">
-                        <b>Cantidad:</b>
-                        {{ product.cantidad }}
-                        <b>X {{ product.precio | currency }}</b>
-                      </span>
-                      <br />
-                      <div
-                        class="producto_variantes"
-                        v-if="product.combinacion"
-                      >
-                        <el-tag
-                          class="producto-variantes-el-tag"
-                          v-for="(variants, index) in product.combinacion"
-                          :key="index"
-                        >
-                          {{ variants | capitalize }}
-                        </el-tag>
-                      </div>
-                    </div>
-                    <p class="pricing_products">
-                      {{ (product.precio * product.cantidad) | formatCurrency }}
-                    </p>
-                  </li>
-                </ul> -->
-
                 <ul class="order_products_list">
                   <li
                     class="order_products_list_item"
@@ -193,8 +155,6 @@ export default {
   name: 'koOrder1',
   props: {},
   mounted() {
-    //   this.$store.commit('UPDATE_CONTENTCART')
-
     this.$store.dispatch('GET_CITIES')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
       this.filterCities()

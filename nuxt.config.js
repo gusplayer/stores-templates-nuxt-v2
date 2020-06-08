@@ -57,10 +57,7 @@ export default {
     { src: '~/plugins/vue-carrusel.js', ssr: false },
     { src: '~plugins/google-analytics.js', ssr: false },
   ],
-  // buildModules: ['@nuxtjs/google-analytics'],
-  // googleAnalytics: {
-  //   id: 'UA-92934137-1',
-  // },
+  buildModules: [],
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',

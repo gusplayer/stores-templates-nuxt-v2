@@ -6,7 +6,7 @@
       </div>
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
-          <p class="text-categorias" @click="clear">Categorias</p>
+          <p class="text-categorias" @click="clear">Categorías</p>
           <p
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
@@ -132,12 +132,12 @@
             </p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 40">
+            <div class="product_pagination" v-if="products.length > 24">
               <el-pagination
                 background
                 layout="prev, pager, next"
                 :total="products.length"
-                :page-size="40"
+                :page-size="24"
                 :current-page.sync="currentPage"
                 class="pagination"
                 data-aos="fade-up"
@@ -217,15 +217,15 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 40 - 40
-      const final = initial + 40
+      const initial = this.currentPage * 24 - 24
+      const final = initial + 24
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 40 - 40
-      const final = initial + 40
+      const initial = this.currentPage * 24 - 24
+      const final = initial + 24
       return this.products.slice(initial, final)
     },
     selectedCategory() {

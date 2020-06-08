@@ -58,38 +58,43 @@
     </div>
     <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
       <div id="menu-collapse">
-        <div class="menu-grid">
+        <div>
           <li @click="clear">
             <p class="name-category-all">Todos los productos</p>
           </li>
-          <div
-            class="container-category"
-            v-for="categoria in categorias"
-            :key="categoria.id"
-          >
-            <ul class="name-category">
-              <li>
-                <p
-                  @click="sendCategory(categoria, categoria.id, (ref = false))"
-                >
-                  {{ categoria.nombre_categoria_producto }}
-                </p>
-              </li>
-              <ul class="subcategoria">
-                <template>
-                  <div v-for="(subcategory, key) in subcategories" :key="key">
-                    <li
-                      v-if="subcategory.categoria == categoria.id"
-                      @click="Sendsubcategory(subcategory.id)"
-                    >
-                      {{ subcategory.nombre_subcategoria }}
-                    </li>
-                  </div>
-                </template>
+          <div class="menu-grid">
+            <div
+              class="container-category"
+              v-for="categoria in categorias"
+              :key="categoria.id"
+            >
+              <ul class="name-category">
+                <li>
+                  <p
+                    @click="
+                      sendCategory(categoria, categoria.id, (ref = false))
+                    "
+                  >
+                    {{ categoria.nombre_categoria_producto }}
+                  </p>
+                </li>
+                <ul class="subcategoria">
+                  <template>
+                    <div v-for="(subcategory, key) in subcategories" :key="key">
+                      <li
+                        v-if="subcategory.categoria == categoria.id"
+                        @click="Sendsubcategory(subcategory.id)"
+                      >
+                        {{ subcategory.nombre_subcategoria }}
+                      </li>
+                    </div>
+                  </template>
+                </ul>
               </ul>
-            </ul>
+            </div>
           </div>
         </div>
+
         <div class="product-img-container" v-if="product.length">
           <div class="card-container">
             <div class="img-logo" v-if="product[0]">
@@ -159,7 +164,7 @@ export default {
           path: '/',
         },
         {
-          name: 'Catálogo',
+          name: 'Categorías',
           icon: 'Flechadown',
         },
         {
@@ -227,7 +232,7 @@ export default {
     },
     openMenu(name) {
       var intro = document.getElementById('menu-collapse')
-      if (name == 'Catálogo') {
+      if (name == 'Categorías') {
         this.showMenu = !this.showMenu
       }
       if (this.showMenu == false) {
@@ -257,6 +262,9 @@ export default {
       this.currentPage = 1
     },
     Sendsubcategory(value) {
+      this.$router.push({
+        path: `/`,
+      })
       this.showMenu = false
       this.addClass()
       this.selectSubcategory = value
@@ -279,6 +287,9 @@ export default {
       })
     },
     sendCategory(value, categoria, ref) {
+      this.$router.push({
+        path: `/`,
+      })
       this.showMenu = false
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
@@ -311,6 +322,9 @@ export default {
       this.nameCategory = ''
     },
     clear() {
+      this.$router.push({
+        path: `/`,
+      })
       this.showMenu = false
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
@@ -388,10 +402,10 @@ div.header-container {
   min-height: 120px;
   padding: 0 30px 0;
 }
-
 #menu-collapse {
   display: none;
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
   max-width: 1300px;
   padding: 30px 30px 30px 20px;
@@ -399,13 +413,26 @@ div.header-container {
   margin: 0 auto;
 }
 .menu-grid {
-  column-count: 3;
-  column-gap: 30px;
-  column-fill: initial;
+  flex: 2;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1000px;
   max-height: 700px;
+  margin-right: 1px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
   overflow-y: auto;
+}
+.menu-grid::-webkit-scrollbar {
+  background: var(--background_color_1);
+  width: 8px;
+}
+.menu-grid::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+.menu-grid::-webkit-scrollbar-thumb {
+  background: linear-gradient(125deg, #ffffff, var(--color_shopping_cart));
+  border-radius: 10px;
 }
 .subcategoria {
   font-weight: 400;
@@ -490,7 +517,6 @@ div.header-container {
   font-size: 16px;
   font-weight: normal;
   color: var(--color_text);
-  /* margin-right: 20px; */
   cursor: pointer;
 }
 .header-text-center-icon:hover {
@@ -561,7 +587,6 @@ div.header-container {
 .header-item-menu {
   display: none;
 }
-
 .responsive {
   display: none;
 }
@@ -574,15 +599,22 @@ div.header-container {
   padding-left: 10px;
 }
 .product-img-container {
-  width: 30%;
-  height: 100%;
+  flex: 1;
+  max-width: 250px;
+}
+.card-container {
+  width: 100%;
+  height: 265px;
+  border-radius: 10px;
+  box-shadow: 0 0 22px 3px #efeeeeb3;
+  margin: 0 auto;
+  position: relative;
 }
 .img-logo {
-  /* width: 100%; */
   height: 265px;
   max-width: 250px;
   width: 100%;
-  position: absolute;
+  position: relative;
 }
 .logo {
   height: 100%;
@@ -591,18 +623,9 @@ div.header-container {
   width: 100%;
   object-fit: cover;
 }
-.card-container {
-  border-radius: 10px;
-  box-shadow: 0 0 22px 3px #efeeeeb3;
-  max-width: 250px;
-  width: 100%;
-  height: 265px;
-  margin: 0 auto;
-}
 .btn-container {
-  margin-top: 10px;
-  position: relative;
-  top: 75%;
+  position: absolute;
+  bottom: 12px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -619,7 +642,6 @@ div.header-container {
   height: 40px;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 0px;
   cursor: pointer;
   transition: all 200ms ease-in;
   text-decoration: none;
@@ -633,7 +655,6 @@ div.header-container {
 .card-container:hover,
 .content-products:focus {
   box-shadow: 0px 0px 2px 1px var(--color_border);
-  border-radius: 10px;
 }
 /* search */
 .search {
