@@ -31,15 +31,13 @@ export default ({ app }) => {
    ** Set the current page
    */
   ga('create', 'UA-92934137-1', 'auto')
-  /*
-   ** Every time the route changes (fired on initialization too)
-   */
+
   app.router.afterEach((to, from) => {
     /*
      ** We tell Google Analytics to add a `pageview`
      */
-    let full = req.headers.host
-    ga('set', 'page', full, to.fullPath)
+
+    ga('set', 'page', to.fullPath)
     ga('send', 'pageview')
   })
 }
