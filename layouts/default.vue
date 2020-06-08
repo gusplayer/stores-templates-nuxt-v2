@@ -3,12 +3,8 @@
     <KoHeader1 :dataStore="dataStore" />
     <nuxt />
     <KFooter1 :dataStore="dataStore" />
-    <div class="wrapper-whatsapp">
-      <koWhatsapp
-        v-if="dataStore.tienda.whatsapp"
-        class="button-whatsapp"
-        @click.native="redirectWhatsapp()"
-      />
+    <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
+      <koWhatsapp class="button-whatsapp" @click.native="redirectWhatsapp()" />
     </div>
   </div>
 </template>
