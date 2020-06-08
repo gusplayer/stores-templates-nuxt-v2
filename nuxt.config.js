@@ -59,19 +59,16 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [],
-  /*
-   ** Nuxt.js modules
-   */
+  buildModules: ['@nuxtjs/google-analytics'],
+  googleAnalytics: {
+    id: 'UA-92934137-1',
+  },
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    // '@nuxtjs/google-analytics',
     ['@nuxtjs/google-tag-manager', { id: 'GTM-KGB4QPR', pageTracking: true }],
   ],
-  // googleAnalytics: {
-  //   id: 'UA-92934137-1',
-  // },
+
   debug: {
     enabled: true,
     sendHitTask: true,
