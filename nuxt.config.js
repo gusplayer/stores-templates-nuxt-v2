@@ -55,14 +55,12 @@ export default {
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
+    { src: '~plugins/google-analytics.js', ssr: false },
   ],
-  /*
-   ** Nuxt.js dev-modules
-   */
-  buildModules: ['@nuxtjs/google-analytics'],
-  googleAnalytics: {
-    id: 'UA-92934137-1',
-  },
+  // buildModules: ['@nuxtjs/google-analytics'],
+  // googleAnalytics: {
+  //   id: 'UA-92934137-1',
+  // },
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
