@@ -122,6 +122,103 @@ export const state = () => ({
   settingByTemplate: '',
   category_producto_header: '',
   subcategory_producto_header: '',
+  settingBytemplatePrueba: {
+    notificaciones: {
+      texto: 'Promoción',
+      colorFondo: '#2f1893',
+      colorTexto: '#ffffff',
+      urlRedirect: '/',
+    },
+    banners: [
+      {
+        imagen: '',
+        urlRedirect: {
+          tipo: '',
+          url: 'interna/externa ',
+        },
+      },
+    ],
+    settings: {
+      '--background_color_1': '#fff',
+      '--background_color_2': '#e4e4e4',
+      '--background_header_footer': '#fff',
+      '--color_background_hover': '#cccccc',
+      '--color_text': '#1e0e62',
+      '--color_hover_text': '#C52675',
+      '--color_subtext': 'rgba(21, 20, 57, 0.541)',
+      '--color_shopping_cart': '#25DAC5',
+      '--color_icon': '#25DAC5',
+      '--color_text_btn': '#000',
+      '--color_background_btn': '#25DAC5',
+      '--color_background_btn_2': '#000',
+      '--color_border': 'rgba(21, 20, 57, 0.541)',
+      '--logo_width': '100px',
+      '--radius_btn': '25px',
+    },
+    sedes: [
+      {
+        imagen: '',
+        titulo: '',
+        descripcion: '',
+        urlRedirect: '',
+        ciudad: '',
+      },
+      {
+        imagen: '',
+        titulo: '',
+        descripcion: '',
+        urlRedirect: '',
+        ciudad: '',
+      },
+    ],
+    favoritos: [
+      {
+        order: 1,
+        id: 1,
+        titulo: 'Favoritos',
+        productos: [
+          {
+            idProducto: 30028,
+          },
+          {
+            idProducto: 30031,
+          },
+          {
+            idProducto: 30032,
+          },
+          {
+            idProducto: 30033,
+          },
+          {
+            idProducto: 30035,
+          },
+        ],
+      },
+      {
+        order: 2,
+        id: 2,
+        titulo: 'Productos',
+        productos: [
+          {
+            idProducto: 29907,
+          },
+          {
+            idProducto: 18202,
+          },
+          {
+            idProducto: 29908,
+          },
+          {
+            idProducto: 18345,
+          },
+          {
+            idProducto: 18348,
+          },
+        ],
+      },
+    ],
+  },
+  analytics_tagmanager: '',
 })
 
 export const mutations = {
@@ -264,8 +361,11 @@ export const mutations = {
   SET_CITIES: (state, payload) => {
     state.cities = payload
   },
-  SET_SETTINGS_BY_TEMPLATE: (state, payload) => {
-    state.settingByTemplate = payload
+  SET_SETTINGS_BY_TEMPLATE: (state, value) => {
+    state.settingByTemplate = value
+  },
+  SET_ANALITICS_TAGMANAGER: (state, value) => {
+    state.analytics_tagmanager = value
   },
   SET_STORELAYOUT: (state) => {
     // const link = document.createElement('link')
@@ -394,6 +494,13 @@ export const actions = {
       .$get(`https://api2.komercia.co/api/template/5/settings/${id}`)
       .then((response) => {
         commit('SET_SETTINGS_BY_TEMPLATE', response.data)
+      })
+  },
+  GET_ANALITICS_TAGMANAGER({ commit }, id) {
+    this.$axios
+      .$get(`https://api2.komercia.co/api/apis/tienda/${id}`)
+      .then((response) => {
+        commit('SET_ANALITICS_TAGMANAGER', response.data)
       })
   },
   GET_STORELAYOUT({ commit, state }) {

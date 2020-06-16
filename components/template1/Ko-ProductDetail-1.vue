@@ -55,13 +55,10 @@
             </div>
           </div>
           <div class="wrapper-photo_main">
-            <div
-              v-if="data.detalle.foto !== 'placeholder1.svg'"
-              v-show="!existYoutube"
-              class="photo_main"
-            >
+            <div v-if="active" v-show="!existYoutube" class="photo_main">
               <cld-image
                 cloudName="komercia-store"
+                v-on:mouseover.native="active = !active"
                 :publicId="getIdCloudinary(selectPhotoUrl)"
                 dpr="auto"
                 responsive="width"
@@ -80,7 +77,27 @@
                 />
               </cld-image>
             </div>
-            <img :src="selectPhotoUrl" v-else class="photo_main" />
+            <div v-if="!active" v-show="!existYoutube" class="photo_main">
+              <cld-image
+                cloudName="komercia-store"
+                v-on:mouseleave.native="active = !active"
+                :publicId="getIdCloudinary(selectPhotoUrl)"
+                dpr="auto"
+                responsive="width"
+                width="645"
+                height="430"
+                gravity="face"
+                crop="crop"
+                class="photo_main"
+              >
+                <cld-transformation
+                  radius="5"
+                  quality="auto"
+                  background="auto:border"
+                />
+              </cld-image>
+            </div>
+
             <iframe
               v-show="existYoutube"
               :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
@@ -254,9 +271,15 @@ import productSlide from './_productdetails/productSlide.vue'
 import selectGroup from './_productdetails/selectGroup'
 import koWhatsapp from './_productdetails/whatsapp'
 import koDescription from './_productdetails/descriptionProduct.vue'
+
 export default {
   name: 'koProduct1',
-  components: { koWhatsapp, selectGroup, koDescription, productSlide },
+  components: {
+    koWhatsapp,
+    selectGroup,
+    koDescription,
+    productSlide,
+  },
   mounted() {
     this.$store.state.beforeCombination = []
     if (this.dataStore.productos.length) {
@@ -288,6 +311,7 @@ export default {
         titulo: '',
         desc: '',
       },
+      active: true,
     }
   },
   computed: {
@@ -742,6 +766,7 @@ img {
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
+  cursor: zoom-in;
 }
 .wrapper-right {
   flex: 1;
@@ -1038,7 +1063,9 @@ i.close {
 
 @media (max-width: 725px) {
   .container-productDetail {
-    padding: 10px 0px;
+    padding: 10px 5px;
+    align-items: center;
+    justify-content: center;
   }
   .section {
     flex-direction: column;
@@ -1075,9 +1102,6 @@ i.close {
   .content_card-info {
     display: none;
   }
-  .section {
-    margin: 0;
-  }
   .responsive-purchase {
     display: flex;
     position: fixed;
@@ -1087,7 +1111,7 @@ i.close {
     box-sizing: border-box;
     box-shadow: 0 0 30px 50px rgba(96, 125, 139, 0.096);
     background: var(--background_color_1);
-    z-index: 99999999;
+    z-index: 3;
   }
   .ko-input {
     display: flex;

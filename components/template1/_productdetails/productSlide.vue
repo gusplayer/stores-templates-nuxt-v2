@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-swiper:mySwiper="swiperOption"
-    @someSwiperEvent="callback"
-    ref="mySwiper"
-  >
+  <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <cld-image

@@ -45,7 +45,6 @@ export default {
 }
 .wrapper-banner {
   width: 100%;
-  /* height: 350px; */
 }
 .banner {
   width: 100%;
@@ -56,6 +55,5 @@ export default {
 .wrapper-logo-background {
   background: var(--purple);
   min-height: 400px;
-  /* max-height: 420px; */
 }
 </style>

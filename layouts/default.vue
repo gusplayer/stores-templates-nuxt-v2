@@ -1,6 +1,7 @@
 <template>
   <div style="">
     <KoHeader1 :dataStore="dataStore" />
+    <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
     <nuxt />
     <KFooter1 :dataStore="dataStore" />
     <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
@@ -10,6 +11,7 @@
 </template>
 
 <script>
+import KoNotificacion from '../components/template1/Ko-Notificacion-1'
 import KoHeader1 from '../components/template1/Ko-Header-1'
 import KFooter1 from '../components/template1/Ko-Footer-1'
 import koWhatsapp from '../components/template1/_productdetails/whatsapp'
@@ -19,12 +21,17 @@ export default {
     KoHeader1,
     KFooter1,
     koWhatsapp,
+    KoNotificacion,
   },
   mounted() {
     this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch(
       'GET_SETTINGS_BY_TEMPLATE',
+      this.$store.state.dataStore.tienda.id_tienda
+    )
+    this.$store.dispatch(
+      'GET_ANALITICS_TAGMANAGER',
       this.$store.state.dataStore.tienda.id_tienda
     )
   },
@@ -120,6 +127,34 @@ export default {
           src:
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
+        {
+          hid: 'gtm-script1',
+          src: `https://www.googletagmanager.com/gtag/js?id=${this.analytics_tagmanager.analytics}`,
+          defer: true,
+        },
+        {
+          hid: 'gtm-script2',
+          innerHTML: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', ${this.analytics_tagmanager.analytics});
+        `,
+          type: 'text/javascript',
+          charset: 'utf-8',
+        },
+        {
+          hid: 'gtm-script3',
+          innerHTML: `
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script',${this.analytics_tagmanager.tag_manager});
+        `,
+          type: 'text/javascript',
+          charset: 'utf-8',
+        },
       ],
       link: [
         {
@@ -137,6 +172,12 @@ export default {
   computed: {
     dataStore() {
       return this.$store.state.dataStore
+    },
+    settingBytemplatePrueba() {
+      return this.$store.state.settingBytemplatePrueba
+    },
+    analytics_tagmanager() {
+      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {

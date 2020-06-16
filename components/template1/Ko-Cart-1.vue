@@ -952,7 +952,7 @@ div.wrapper-cart {
     box-sizing: border-box;
     box-shadow: 0 0 30px 20px rgba(96, 125, 139, 0.068);
     background-color: var(--background_color_1);
-    z-index: 99999999;
+    z-index: 3;
     flex-direction: column;
     padding: 5px 10px;
   }

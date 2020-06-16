@@ -1,10 +1,14 @@
 <template>
   <div class="description">
-    <div class="left" v-if="!activeClass">
-      <h3 class="text-desc">Descripción</h3>
-      <div class="content-text-desc" v-html="data.info.descripcion"></div>
+    <div class="left">
+      <h3 class="text-desc" v-if="!activeClass">Descripción</h3>
+      <div
+        class="content-text-desc"
+        v-if="!activeClass"
+        v-html="data.info.descripcion"
+      ></div>
     </div>
-    <div class="right" :class="{ stage: activeClass }">
+    <div class="right">
       <div class="payments section">
         <div class="content">
           <h3 class="title-section">Opciones de pago</h3>
@@ -197,7 +201,6 @@ div.description {
   flex-direction: column;
   margin-right: 25px;
   padding-bottom: 10px;
-  /* max-width: 809.33px; */
   overflow: hidden;
 }
 .right {
@@ -311,9 +314,12 @@ li p {
     display: flex;
     width: 100%;
     flex-direction: column;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-right: 0px;
+    margin-left: 0px;
     margin-bottom: 20px;
+  }
+  .section {
+    margin-left: 0px;
   }
   .left {
     margin-right: 0px;
@@ -324,19 +330,16 @@ li p {
     border-left: 0px;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .description {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    margin-right: 5px;
-    margin-left: 5px;
     margin-bottom: 20px;
   }
   .left {
     margin-right: 0px;
-    padding-bottom: 0px;
+    padding-bottom: 10px;
     flex: 1;
+    padding-right: 5px;
+    padding-left: 5px;
   }
   .right {
     border-left: 0px;
@@ -344,6 +347,8 @@ li p {
   .payments {
     border-top: 1px solid var(--color_border);
     margin-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
   }
   .section {
     margin-left: 0px;
@@ -353,6 +358,8 @@ li p {
   .deliverys {
     margin-top: 10px;
     margin-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
   }
 }
 </style>

@@ -14,6 +14,7 @@
             responsive="width"
             width="auto"
             class="product-image"
+            loading="lazy"
           >
             <cld-transformation
               height="300"
@@ -96,6 +97,7 @@
             width="auto"
             height="auto"
             class="product-image"
+            loading="lazy"
           >
             <cld-transformation
               width="172"

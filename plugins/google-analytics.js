@@ -20,6 +20,7 @@ export default ({ app }) => {
     'ga'
   )
   ga('create', 'UA-92934137-1', 'auto')
+
   app.router.afterEach((to, from) => {
     ga('set', 'page', to.fullPath)
     ga('send', 'pageview')

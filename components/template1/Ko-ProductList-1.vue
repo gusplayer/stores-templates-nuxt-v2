@@ -140,7 +140,6 @@
                 :page-size="24"
                 :current-page.sync="currentPage"
                 class="pagination"
-                data-aos="fade-up"
               ></el-pagination>
             </div>
           </div>
@@ -727,36 +726,6 @@ div.wrapper-productlist {
 .search > div > input:valid {
   width: 200px;
   height: 35px;
-}
-@media (max-width: 1350px) {
-  /* ///////productos/////////// */
-  .content-item-catalogo {
-    margin-right: 0px;
-  }
-  .grid-products {
-    grid-template-columns: repeat(4, minmax(245px, 2fr));
-    grid-gap: 20px;
-  }
-}
-@media (max-width: 1320px) {
-  /* ///////productos/////////// */
-  .content-item-catalogo {
-    margin-right: 0px;
-  }
-  .grid-products {
-    grid-template-columns: repeat(4, minmax(240px, 2fr));
-    grid-gap: 19px;
-  }
-}
-@media (max-width: 1300px) {
-  /* ///////productos/////////// */
-  .content-item-catalogo {
-    margin-right: 0px;
-  }
-  .grid-products {
-    grid-template-columns: repeat(4, minmax(240px, 2fr));
-    grid-gap: 18px;
-  }
 }
 @media (max-width: 1290px) {
   /* ///////productos/////////// */

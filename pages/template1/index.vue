@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="home">
     <kBanner :dataStore="dataStore" />
+    <!-- <KProductFavoritos /> -->
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
@@ -11,6 +12,7 @@
 
 <script>
 import kBanner from '../../components/template1/ko-Banner-1'
+import KProductFavoritos from '../../components/template1/Ko-ProductFavoritos-1'
 import KProductList from '../../components/template1/Ko-ProductList-1'
 import KNewsletter from '../../components/template1/Ko-Newsletter-1'
 
@@ -19,6 +21,7 @@ export default {
     kBanner,
     KProductList,
     KNewsletter,
+    KProductFavoritos,
   },
   computed: {
     dataStore() {

@@ -63,7 +63,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 5;
+  z-index: 6;
 }
 .order_content {
   position: absolute;
