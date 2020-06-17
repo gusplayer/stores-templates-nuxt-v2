@@ -128,32 +128,7 @@ export default {
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
         {
-          hid: 'gtm-script1',
           src: `https://www.googletagmanager.com/gtag/js?id=${this.analytics_tagmanager.analytics}`,
-          defer: true,
-        },
-        {
-          hid: 'gtm-script2',
-          innerHTML: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', ${this.analytics_tagmanager.analytics});
-        `,
-          type: 'text/javascript',
-          charset: 'utf-8',
-        },
-        {
-          hid: 'gtm-script3',
-          innerHTML: `
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script',${this.analytics_tagmanager.tag_manager});
-        `,
-          type: 'text/javascript',
-          charset: 'utf-8',
         },
       ],
       link: [

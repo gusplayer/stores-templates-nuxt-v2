@@ -55,29 +55,29 @@ export default {
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
-    { src: '~/plugins/google-analytics.js', ssr: false },
+    // { src: '~/plugins/google-analytics.js', ssr: false },
   ],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [],
+  buildModules: ['@nuxtjs/google-analytics'],
+  googleAnalytics: {
+    id: 'UA-92934137-1',
+  },
+  debug: {
+    enabled: true,
+    sendHitTask: true,
+  },
   /*
    ** Nuxt.js modules
    */
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    // '@nuxtjs/google-analytics',
+
     ['@nuxtjs/google-tag-manager', { id: 'GTM-KGB4QPR', pageTracking: true }],
   ],
-  // googleAnalytics: {
-  //   id: 'UA-92934137-1',
-  //   ssr: false,
-  // },
-  debug: {
-    enabled: true,
-    sendHitTask: true,
-  },
+
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
