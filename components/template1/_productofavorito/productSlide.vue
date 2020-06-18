@@ -40,7 +40,11 @@ export default {
         slidesPerView: 4,
         spaceBetween: 22,
         grabCursor: true,
-        autoplay: 500,
+        slidesPerView: 'auto',
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
         breakpoints: {
           1250: {
             slidesPerView: 3,

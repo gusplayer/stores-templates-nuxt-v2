@@ -58,29 +58,35 @@
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
             <div>
+              <div
+                v-if="!this.estadoCart && !soldOut"
+                v-on:click="addShoppingCart"
+                class="btn"
+              >
+                <cartArrowDown class="card-icon-cart" />Agregar
+              </div>
               <router-link
                 :to="{ path: `/template1/productos/` + product.slug }"
+                v-else
                 class="btn"
                 >Comprar</router-link
               >
-              <cartArrowDown
-                v-if="!this.estadoCart && !soldOut"
-                class="card-icon-cart"
-                v-on:click="addShoppingCart"
-              />
             </div>
           </div>
           <div class="content-text-price2" v-else>
+            <div
+              v-if="!this.estadoCart && !soldOut"
+              v-on:click="addShoppingCart"
+              class="btn"
+            >
+              <cartArrowDown class="card-icon-cart" />Agregar
+            </div>
             <router-link
               :to="{ path: `/template1/productos/` + product.slug }"
+              v-else
               class="btn"
               >Comprar</router-link
             >
-            <cartArrowDown
-              v-if="!this.estadoCart && !soldOut"
-              class="card-icon-cart"
-              v-on:click="addShoppingCart"
-            />
           </div>
         </div>
       </div>
@@ -148,7 +154,7 @@
             <div>
               <cartArrowDown
                 v-if="!this.estadoCart && !soldOut"
-                class="card-icon-cart"
+                class="card-icon-cart-movil"
                 v-on:click="addShoppingCart"
               />
             </div>
@@ -174,7 +180,7 @@
             <div class="content-card">
               <cartArrowDown
                 v-if="!this.estadoCart && !soldOut"
-                class="card-icon-cart"
+                class="card-icon-cart-movil"
                 v-on:click="addShoppingCart"
               />
             </div>
@@ -324,6 +330,7 @@ export default {
 <style scoped>
 div.wrapper-card {
   --color_subtext: #000;
+  --color_text_btn: #fff;
 }
 .separador {
   margin: 30px;
@@ -477,21 +484,20 @@ div.wrapper-card {
   border-radius: var(--radius_btn);
   border: solid 1px var(--color_text);
   background-color: var(--color_text);
-  color: white;
   padding: 8px 14px;
   font-size: 14px;
   width: 120px;
   height: 40px;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 0px;
-  cursor: pointer;
   transition: all 200ms ease-in;
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-self: center;
   text-align: center;
 }
 .btn:hover {
-  color: white;
   background-color: var(--btnhover);
   border: solid 1px var(--btnhover);
 }
@@ -502,13 +508,22 @@ div.wrapper-card {
 .wrapper-movil {
   display: none;
 }
+
 .card-icon-cart {
   font-size: 20px;
-  color: var(--color_text);
-  margin-left: 4px;
+  color: var(--color_text_btn);
+  margin-right: 4px;
   cursor: pointer;
+  bottom: 0.125em;
 }
-.card-icon-cart:hover {
+.card-icon-cart-movil {
+  font-size: 20px;
+  color: var(--color_text);
+  margin-right: 4px;
+  cursor: pointer;
+  bottom: 0.125em;
+}
+.card-icon-cart-movil:hover {
   color: var(--btnhover);
 }
 @media (max-width: 768px) {

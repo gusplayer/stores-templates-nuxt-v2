@@ -8,7 +8,7 @@
           dpr="auto"
           responsive="width"
           width="350"
-          height="400"
+          height="375"
           crop="scale"
           class="photo"
         >
@@ -31,7 +31,7 @@
           </button>
           <iframe
             style="max-width: 375px; width: 100%;"
-            height="400"
+            height="375"
             :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
             frameborder="0"
             allowfullscreen
@@ -50,6 +50,7 @@ export default {
   data() {
     return {
       swiperOption: {
+        slidesPerView: 'auto',
         direction: 'horizontal',
         pagination: {
           el: '.swiper-pagination',
@@ -57,9 +58,10 @@ export default {
         setWrapperSize: true,
         paginationClickable: true,
         grabCursor: true,
-        autoplay: 2500,
-
-        banners: ['/1.jpg', '/2.jpg', '/3.jpg'],
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
       },
     }
   },
@@ -83,7 +85,7 @@ export default {
 .swiper-container {
   width: 100%;
   overflow: hidden;
-  height: 400px;
+  height: 375px;
 }
 .swiper-slide {
   height: 100%;

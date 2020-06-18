@@ -129,7 +129,7 @@
               </p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
-            <div
+            <!-- <div
               class="content-text-desc"
               v-if="data.info.descripcion && data.info.descripcion.length > 12"
             >
@@ -137,6 +137,14 @@
                 class="text-desc"
                 v-html="`${data.info.descripcion.slice(0, 99)}`"
               ></p>
+            </div> -->
+            <div class="content_buy_action">
+              <div v-if="envio.titulo == 'Envío gratis'">
+                <p class="card-info-2">Envío gratis !</p>
+              </div>
+              <div class="content_card-info">
+                <p class="card-info-1" v-if="spent">Agotado !</p>
+              </div>
             </div>
             <div v-if="this.data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
@@ -175,21 +183,10 @@
                     <p class="text-unidades">Garantía:</p>
                     <span class="text-garantia">{{ data.info.garantia }}</span>
                   </div>
-                  <div v-if="salesData.unidades" class="content_buy_action">
+                  <!-- <div v-if="salesData.unidades" class="content_buy_action">
                     <p class="text-unidades">Unidades disponibles:</p>
                     <p class="text-garantia">{{ salesData.unidades }}</p>
-                  </div>
-
-                  <div class="content_buy_action">
-                    <div class="content_buy_price">
-                      <div v-if="envio.titulo == 'Envío gratis'">
-                        <p class="card-info-2">Envío gratis !</p>
-                      </div>
-                    </div>
-                    <div class="content_card-info">
-                      <p class="card-info-1" v-if="spent">Agotado !</p>
-                    </div>
-                  </div>
+                  </div> -->
                   <div class="content-button">
                     <button
                       ref="colorBtn"
@@ -199,11 +196,11 @@
                     >
                       Comprar
                     </button>
-                    <ko-whatsapp
+                    <!-- <ko-whatsapp
                       v-if="whatsapp"
                       class="whatsapp"
                       @click.native="redirectWhatsapp()"
-                    />
+                    /> -->
                   </div>
                 </div>
               </div>
@@ -239,25 +236,18 @@
               </div>
             </transition>
           </div>
-          <div class="wrapper_buy_action">
+          <div style="width: 100%; margin-left: 10px;">
             <div class="content_buy_action-responsive" v-if="spent">
               <p class="card-info-1-res">Agotado !</p>
             </div>
-            <div class="content-button-responsive">
-              <button
-                class="btn-responsive"
-                ref="color2"
-                v-if="!spent"
-                v-on:click="addShoppingCart"
-              >
-                Comprar
-              </button>
-              <ko-whatsapp
-                v-if="whatsapp"
-                class="whatsapp"
-                @click.native="redirectWhatsapp()"
-              />
-            </div>
+            <button
+              class="btn-responsive"
+              ref="color2"
+              v-if="!spent"
+              v-on:click="addShoppingCart"
+            >
+              <cartArrowDown class="card-icon-cart" />Agregar
+            </button>
           </div>
         </div>
       </div>
@@ -788,6 +778,7 @@ i.close {
 .text-name {
   font-weight: bold;
   font-size: 25px;
+  line-height: 24px;
   color: var(--color_text);
 }
 .text-marca {
@@ -795,7 +786,7 @@ i.close {
   font-stretch: semi-condensed;
   font-style: normal;
   color: var(--color_subtext);
-  margin-top: -6px;
+  /* margin-top: -6px; */
 }
 .text-promocion {
   font-size: 14px;
@@ -809,7 +800,6 @@ i.close {
   flex-direction: row;
   justify-content: left;
   align-items: flex-start;
-  margin-top: -10px;
 }
 .wrapper-price > p:nth-child(2) {
   margin-left: 5px;
@@ -876,7 +866,7 @@ i.close {
   color: white;
   font-size: 12px;
   margin-left: 10px;
-  margin-top: 15px;
+  margin-bottom: 10px;
 }
 .card-info-2 {
   display: flex;
@@ -888,7 +878,7 @@ i.close {
   color: black;
   font-size: 12px;
   font-weight: bold;
-  margin-top: 15px;
+  margin-bottom: 10px;
 }
 .item-info-product {
   margin-top: 10px;
@@ -936,9 +926,9 @@ i.close {
 }
 .quantity_remove {
   border: 2px var(--color_border);
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  border-style: solid;
+  border-top-left-radius: var(--radius_btn);
+  border-bottom-left-radius: var(--radius_btn);
+  border-style: solid none solid solid;
   background: transparent;
   height: 41px;
   width: 3em;
@@ -959,9 +949,9 @@ i.close {
 }
 .quantity_add {
   border: 2px var(--color_border);
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-  border-style: solid;
+  border-top-right-radius: var(--radius_btn);
+  border-bottom-right-radius: var(--radius_btn);
+  border-style: solid solid solid none;
   background: transparent;
   height: 41px;
   width: 3em;
@@ -1056,21 +1046,20 @@ i.close {
     display: flex;
     max-width: 360px;
     overflow: hidden;
-    height: 400px;
+    height: 380px;
     width: 100%;
   }
 }
 
 @media (max-width: 725px) {
   .container-productDetail {
-    padding: 10px 5px;
+    padding: 0px 5px;
     align-items: center;
     justify-content: center;
   }
   .section {
     flex-direction: column;
   }
-
   .wrapper-right {
     padding-bottom: 2px;
     border-left: 0px;
@@ -1103,22 +1092,21 @@ i.close {
     display: none;
   }
   .responsive-purchase {
-    display: flex;
+    display: initial;
     position: fixed;
     bottom: 0;
     right: 0;
     width: 100%;
-    box-sizing: border-box;
     box-shadow: 0 0 30px 50px rgba(96, 125, 139, 0.096);
     background: var(--background_color_1);
-    z-index: 3;
+    z-index: 2;
   }
   .ko-input {
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    margin: 5px;
+    padding: 5px;
   }
   .quantity-resposive {
     display: flex;
@@ -1132,10 +1120,10 @@ i.close {
     align-self: center;
   }
   .quantity_remove {
-    border: 2px var(--color_border);
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-    border-style: solid;
+    border: 1px var(--color_border);
+    border-top-left-radius: var(--radius_btn);
+    border-bottom-left-radius: var(--radius_btn);
+    border-style: solid none solid solid;
     background: transparent;
     height: 38px;
     width: 3em;
@@ -1143,7 +1131,7 @@ i.close {
   .quantity_value {
     font-size: 1em;
     color: var(--color_text);
-    border: 2px var(--color_border);
+    border: 1px var(--color_border);
     padding-left: 10px;
     padding-right: 10px;
     border-style: solid none solid none;
@@ -1155,23 +1143,16 @@ i.close {
     align-items: center;
   }
   .quantity_add {
-    border: 2px var(--color_border);
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    border-style: solid;
+    border: 1px var(--color_border);
+    border-top-right-radius: var(--radius_btn);
+    border-bottom-right-radius: var(--radius_btn);
+    border-style: solid solid solid none;
     background: transparent;
     height: 38px;
     width: 3em;
   }
   .icon {
     font-size: 16px;
-  }
-  .wrapper_buy_action {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    margin-left: 10px;
-    justify-content: space-between;
   }
   .content_buy_action-responsive {
     display: flex;
@@ -1182,31 +1163,26 @@ i.close {
     justify-content: center;
     align-items: center;
     background: #e71f77;
-    padding: 1px 4px;
-    border-radius: 5px;
+    padding: 6px 10px;
+    border-radius: var(--radius_btn);
     color: white;
-    font-size: 12px;
+    font-size: 16px;
     width: 100%;
-  }
-  .content-button-responsive {
-    display: flex;
-    flex-direction: row;
-  }
-  .whatsapp {
-    fill: #27d367;
-    width: 40px;
-    cursor: pointer;
-    margin-left: 10px;
   }
   .btn-responsive {
     border-radius: var(--radius_btn);
     color: var(--color_text_btn);
-    border: solid 2px var(--color_border_btn);
+    border: solid 0px var(--color_border_btn);
     background-color: var(--color_background_btn);
     padding: 6px 10px;
-    width: 185px;
+    width: 100%;
     font-size: 16px;
-    font-weight: bold;
+  }
+  .card-icon-cart {
+    font-size: 20px;
+    color: var(--color_text_btn);
+    margin-right: 4px;
+    cursor: pointer;
   }
   .container-alert {
     position: absolute;
@@ -1230,12 +1206,22 @@ i.close {
 }
 
 @media (max-width: 600px) {
+  .container-productDetail {
+    padding: 0px;
+  }
+  .wrapper-left {
+    padding-bottom: 0px;
+  }
   .wrapper-right {
     margin-bottom: 15px;
   }
   .content-right {
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  .text-name {
+    font-weight: 500;
+    font-size: 20px;
   }
 }
 </style>

@@ -734,6 +734,9 @@ input:checked ~ .tab-content {
   #modal-toggle:checked ~ .modal-backdrop {
     opacity: 0;
   }
+  .contenedor {
+    padding: 20px 30px 10px;
+  }
   .modal-content {
     width: 100vw;
     height: 100%;
@@ -756,6 +759,9 @@ input:checked ~ .tab-content {
   .logo2 {
     width: 100px;
     opacity: 0.7;
+  }
+  .under-footer {
+    margin-bottom: 28px;
   }
   .under-footer p {
     font-size: 16px;

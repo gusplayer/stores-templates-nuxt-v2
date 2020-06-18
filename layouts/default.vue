@@ -237,8 +237,8 @@ export default {
 
   --color_border: rgba(21, 20, 57, 0.541);
 
-  --logo_width: 100px;
-  --radius_btn: 25px;
+  --logo_width: 120px;
+  --radius_btn: 5px;
 }
 * {
   margin: 0px;
@@ -270,7 +270,13 @@ export default {
 }
 .button-whatsapp {
   fill: white;
-  width: 40px;
+  width: 30px;
   transition: all 200ms ease-in;
+}
+@media (max-width: 400px) {
+  .wrapper-whatsapp {
+    bottom: 60px;
+    right: 20px;
+  }
 }
 </style>

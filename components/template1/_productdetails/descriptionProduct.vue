@@ -124,12 +124,12 @@
           <p class="description-method">El valor del envío no tiene costo</p>
         </div>
       </div>
-      <div class="line"></div>
-      <div class="deliverys section">
+      <!-- <div class="line"></div> -->
+      <!-- <div class="deliverys section">
         <div class="content">
           <h3 class="title-section">Opciones de garantía</h3>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -183,9 +183,6 @@ export default {
 </script>
 
 <style scoped>
-div.description {
-  --color_border: rgba(21, 20, 57, 0.541);
-}
 .description {
   display: flex;
   width: 100%;
@@ -331,15 +328,19 @@ li p {
   }
 }
 @media (max-width: 700px) {
+  .content-text-desc {
+    width: 100%;
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
   .description {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
   .left {
-    margin-right: 0px;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     flex: 1;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
   }
   .right {
     border-left: 0px;
@@ -347,8 +348,8 @@ li p {
   .payments {
     border-top: 1px solid var(--color_border);
     margin-bottom: 10px;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
   }
   .section {
     margin-left: 0px;
@@ -358,8 +359,8 @@ li p {
   .deliverys {
     margin-top: 10px;
     margin-bottom: 10px;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
   }
 }
 </style>

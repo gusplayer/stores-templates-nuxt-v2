@@ -55,23 +55,22 @@ export default {
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
-    // { src: '~/plugins/google-analytics.js', ssr: false },
+    { src: '~/plugins/google-analytics.js', ssr: false },
   ],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [
-    [
-      '@nuxtjs/google-analytics',
-      {
-        id: 'UA-92934137-1',
-      },
-    ],
-  ],
-  debug: {
-    enabled: true,
-    sendHitTask: true,
-  },
+  // buildModules: [
+  //   [
+  //     '@nuxtjs/google-analytics',
+  //     {
+  //       id: 'UA-92934137-1',
+  //     },
+  //   ],
+  // ],
+  // debug: {
+  //   enabled: true,
+  // },
   /*
    ** Nuxt.js modules
    */
@@ -95,9 +94,6 @@ export default {
    ** Build configuration
    */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {

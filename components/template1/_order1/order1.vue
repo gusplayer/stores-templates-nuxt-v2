@@ -3,8 +3,10 @@
     <div class="order" @click="closeOrder" v-show="openOrder">
       <div class="order_content">
         <div class="order_header">
-          <h3>Tu Orden</h3>
-          <button @click="closeOrder" class="order_header_close">Cerrar</button>
+          <h3>Tu orden</h3>
+          <button @click="closeOrder" class="order_header_close">
+            <window-close-icon />
+          </button>
         </div>
         <transition name="slide">
           <template>
@@ -256,7 +258,8 @@ export default {
         element === 'order' ||
         element === 'order_header_close' ||
         element === 'continue_shopping' ||
-        element === 'continue_shopping2'
+        element === 'continue_shopping2' ||
+        element.animVal === 'material-design-icon__svg'
       ) {
         this.$store.commit('SET_OPENORDER', false)
       }
@@ -394,8 +397,9 @@ export default {
   flex: none;
 }
 .order_header_close {
-  padding: 5px 12px;
-  border-radius: 10px;
+  font-size: 20px;
+  padding: 0px 5px;
+  border-radius: 25px;
   border: 1px solid white;
   background-color: var(--color_shopping_cart);
   cursor: pointer;
@@ -564,26 +568,6 @@ export default {
   color: var(--color_text);
   font-weight: bold;
 }
-.p_button {
-  justify-self: center;
-  width: 80%;
-  height: 40px;
-  border-style: none;
-  background: var(--color_shopping_cart);
-  border-radius: 25px;
-  display: inline-block;
-  padding: 0 20px;
-  color: var(--color_text);
-  font-size: 14px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  outline: none;
-  flex: none;
-  transition: 0.3s;
-}
-.p_button:hover {
-  opacity: 0.8;
-}
 .Quotation-message {
   margin-top: 10px;
   text-align: center;
@@ -594,7 +578,6 @@ export default {
   width: 100%;
   max-width: 280px;
   color: var(--color_text);
-  border-radius: 25px;
   font-size: 14px;
   letter-spacing: 1px;
   outline: none;
@@ -612,7 +595,6 @@ export default {
   color: var(--color_text_btn);
   border: solid 2px var(--color_border_btn);
   background-color: var(--color_background_btn);
-  border-radius: 25px;
   font-size: 14px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -641,7 +623,6 @@ export default {
   max-width: 280px;
   color: var(--color_shopping_cart);
   border: 2px solid var(--color_shopping_cart);
-  border-radius: 25px;
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;

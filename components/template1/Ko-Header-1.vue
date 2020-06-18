@@ -473,18 +473,16 @@ div.header-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 120px;
 }
 .wrapper-logo {
   width: var(--logo_width);
-  max-height: 120px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  /* max-height: 120px; */
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
 }
 .header-logo {
   width: 100%;
-  height: 100%;
-  max-height: 110px;
+  max-height: 115px;
   object-fit: contain;
   object-position: left;
 }

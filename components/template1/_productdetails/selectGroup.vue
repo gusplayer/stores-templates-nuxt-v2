@@ -74,7 +74,7 @@ select::-ms-expand {
   background: transparent;
   overflow: hidden;
   border: 2px solid var(--color_border);
-  border-radius: 100px;
+  border-radius: var(--radius_btn);
 }
 select {
   flex: 1;

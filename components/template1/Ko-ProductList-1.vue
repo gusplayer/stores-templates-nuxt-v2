@@ -406,7 +406,7 @@ div.wrapper-productlist {
   line-height: 1.24;
   letter-spacing: -0.4px;
   color: var(--color_text);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 10px;
 }
 .content-item-top {
@@ -449,7 +449,7 @@ div.wrapper-productlist {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
   height: 40px;
 }
 .content-items-categorias-text {
@@ -484,7 +484,7 @@ div.wrapper-productlist {
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 8px 20px 1px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 2;
 }
 .dropdown:hover .dropdown-content {
   display: block;
@@ -816,6 +816,7 @@ div.wrapper-productlist {
   }
   .title {
     font-size: 25px;
+    margin-top: 20px;
   }
   .grid-products {
     grid-template-columns: repeat(2, minmax(10px, 2fr));
