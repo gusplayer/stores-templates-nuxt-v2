@@ -48,7 +48,7 @@ div.wrapper-swipper {
   justify-content: center;
   align-items: flex-start;
   max-width: 1300px;
-  padding: 20px 10px;
+  padding: 10px;
 }
 .content-title {
   width: 100%;
@@ -65,12 +65,14 @@ div.wrapper-swipper {
   line-height: 1.24;
   letter-spacing: -0.4px;
   color: var(--color_text);
-  margin-bottom: 20px;
   margin-top: 10px;
 }
 @media (max-width: 770px) {
   .swiper-container {
     padding: 20px 8px;
+  }
+  .title {
+    font-size: 25px;
   }
 }
 @media (max-width: 380px) {

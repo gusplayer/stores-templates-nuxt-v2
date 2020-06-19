@@ -235,7 +235,7 @@ export default {
   --color_background_btn_2: #000;
   --btnhover2: #c52675;
 
-  --color_border: rgba(21, 20, 57, 0.541);
+  --color_border: rgba(110, 110, 133, 0.342);
 
   --logo_width: 120px;
   --radius_btn: 5px;

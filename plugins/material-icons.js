@@ -15,10 +15,12 @@ import Phone from 'vue-material-design-icons/Phone.vue'
 import Email from 'vue-material-design-icons/Email.vue'
 import Whatsapp from 'vue-material-design-icons/Whatsapp.vue'
 import FlechaDown from 'vue-material-design-icons/ChevronDown.vue'
+import FlechaUp from 'vue-material-design-icons/ChevronUp.vue'
 import CartArrowDown from 'vue-material-design-icons/CartArrowDown.vue'
 import mas from 'vue-material-design-icons/Plus.vue'
 import menos from 'vue-material-design-icons/Minus.vue'
 import Delete from 'vue-material-design-icons/DeleteForever.vue'
+import Search from 'vue-material-design-icons/Magnify.vue'
 
 Vue.component('menu-icon', MenuIcon)
 
@@ -34,10 +36,12 @@ Vue.component('menu-icon', Menu)
 Vue.component('close-icon', Close)
 Vue.component('window-close-icon', WindowClose)
 Vue.component('delete-icon', Delete)
+Vue.component('search-icon', Search)
 
 Vue.component('phone-icon', Phone)
 Vue.component('email-icon', Email)
-Vue.component('Flechadown', FlechaDown)
+Vue.component('Flechadown-icon', FlechaDown)
+Vue.component('FlechaUp-icon', FlechaUp)
 Vue.component('cartArrowDown', CartArrowDown)
 
 Vue.component('menos-icon', menos)

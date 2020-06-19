@@ -35,7 +35,7 @@
             <li class="dropdown">
               <div class="content-filtrar">
                 <a class="dropbtn">Categorías </a>
-                <Flechadown class="header-icon-menu" />
+                <Flechadown-icon class="header-icon-menu" />
               </div>
               <div class="dropdown-content">
                 <div class="content-item-catalogo">
@@ -389,7 +389,7 @@ div.wrapper-productlist {
   justify-content: center;
   width: 100%;
   max-width: 1300px;
-  padding: 30px 20px 0;
+  padding: 0px 20px;
   flex-direction: column;
 }
 .content-title {
@@ -837,14 +837,15 @@ div.wrapper-productlist {
   }
 }
 @media (max-width: 700px) {
-  .top-right {
+  /* .top-right {
     display: initial;
     width: 100%;
     padding-top: 0px;
     padding-bottom: 15px;
-  }
+  } */
   .content-items-categorias {
-    display: none;
+    margin-left: 5px;
+    margin-bottom: 0px;
   }
 }
 

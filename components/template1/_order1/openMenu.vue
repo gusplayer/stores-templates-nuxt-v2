@@ -1,27 +1,67 @@
 <template>
   <transition name="fade">
-    <div class="order" @click="openMenulateral" v-show="openMenu">
+    <div class="order" @click="closeOrder" v-show="openMenu">
       <div class="order_content">
         <div class="order_header">
-          <div class="wrapper-logo">
+          <nuxt-link to="/" class="wrapper-logo">
             <img
               :src="`https://api2.komercia.co/logos/${logoImg}`"
               class="header-logo"
             />
-          </div>
-          <button @click="openMenulateral" class="order_header_close">
-            Cerrar
+          </nuxt-link>
+          <button @click="closed" class="order_header_close">
+            <window-close-icon class="close" />
           </button>
         </div>
         <template>
-          <div
-            v-for="(item, index) in seccionesCart"
-            :key="`${index}${item.name}`"
-            class="content-secciones"
-          >
-            <li class="text">
-              <nuxt-link :to="item.path">{{ item.name }}</nuxt-link>
+          <div class="wrapper-category-all">
+            <li @click="clear">
+              <p class="name-category-all">Todos los productos</p>
             </li>
+            <div
+              v-for="categoria in categorias"
+              :key="categoria.id"
+              class="contenedor-modulos"
+            >
+              <BaseAccordian>
+                <template v-slot:categorias>
+                  <li
+                    class="close text-categoria"
+                    @click="
+                      sendCategory(
+                        categoria,
+                        categoria.id,
+                        index,
+                        (ref = false)
+                      )
+                    "
+                    :class="
+                      categoria.id == indexSelect ? 'text-categoria-active' : ''
+                    "
+                  >
+                    {{ categoria.nombre_categoria_producto }}
+                  </li>
+                </template>
+                <template v-slot:subcategorias
+                  ><template>
+                    <div v-for="(subcategory, key) in subcategories" :key="key">
+                      <li
+                        v-if="subcategory.categoria == categoria.id"
+                        @click="Sendsubcategory(subcategory.id)"
+                        class="close text-subcategoria"
+                        :class="
+                          subcategory.id == indexSelect2
+                            ? 'text-subcategoria-active'
+                            : ''
+                        "
+                      >
+                        {{ subcategory.nombre_subcategoria }}
+                      </li>
+                    </div>
+                  </template></template
+                >
+              </BaseAccordian>
+            </div>
           </div>
         </template>
       </div>
@@ -30,9 +70,27 @@
 </template>
 
 <script>
+import BaseAccordian from './_BaseAccordion'
 export default {
   name: 'KoMenu',
-  props: { seccionesCart: {} },
+  props: {
+    dataStore: Object,
+  },
+  components: {
+    BaseAccordian,
+  },
+  data() {
+    return {
+      add: true,
+      selectSubcategory: '',
+      nameCategory: '',
+      nameSubCategory: '',
+      selectedSubcategories: [],
+      toggleCategories: true,
+      indexSelect: '',
+      indexSelect2: '',
+    }
+  },
   computed: {
     logoImg() {
       return this.$store.state.dataStore.tienda.logo
@@ -40,13 +98,99 @@ export default {
     openMenu() {
       return this.$store.state.openMenulateral
     },
+    categorias() {
+      return this.dataStore.categorias
+    },
+    subcategories() {
+      return this.dataStore.subcategorias
+    },
   },
   methods: {
-    openMenulateral(event) {
+    closed() {
+      this.$store.commit('SET_OPENORDERMENU', false)
+    },
+    closeOrder(event) {
       const element = event.target.className
-      if (element === 'order' || element === 'order_header_close') {
+      if (
+        element === 'order' ||
+        element === 'order_header_close' ||
+        element === 'header-logo' ||
+        element === 'name-category-all' ||
+        element === 'close'
+      ) {
         this.$store.commit('SET_OPENORDERMENU', false)
       }
+    },
+    Sendsubcategory(value) {
+      this.indexSelect2 = value
+      this.$router.push({
+        path: `/`,
+      })
+      this.$store.commit('SET_OPENORDERMENU', false)
+      this.addClass()
+      this.selectSubcategory = value
+      let filtradoSubCategoria = this.subcategories.find(
+        (element) => element.id == value
+      )
+
+      let filtradoCategorias = this.categorias.find(
+        (element) => element.id == filtradoSubCategoria.categoria
+      )
+      this.$store.commit(
+        'SET_CATEGORY_PRODCUTRO',
+        filtradoCategorias.nombre_categoria_producto
+      )
+      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$store.commit('products/FILTER_BY', {
+        type: 'subcategory',
+        data: value,
+      })
+    },
+    sendCategory(value, categoria, ref) {
+      this.indexSelect = categoria
+      this.$router.push({
+        path: `/`,
+      })
+      this.$store.commit('SET_OPENORDERMENU', false)
+      this.currentPage = 1
+      this.nameCategory = value.nombre_categoria_producto
+      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.selectedSubcategories = []
+      this.subcategories.find((subcategoria) => {
+        if (subcategoria.categoria === categoria) {
+          this.toggleCategories = false
+          this.selectedSubcategories.push(subcategoria)
+        }
+      })
+      if (this.selectedSubcategories.length === 0) {
+        this.addClass()
+      }
+      if (ref) {
+        this.addClass()
+      }
+      this.$store.commit('products/FILTER_BY', {
+        type: 'category',
+        data: value.nombre_categoria_producto,
+      })
+    },
+    addClass() {
+      this.add = !this.add
+    },
+    clear() {
+      this.$router.push({
+        path: `/`,
+      })
+      this.showMenu = false
+      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('products/FILTER_BY', {
+        type: 'all',
+        data: '',
+      })
+      this.$emit('clear')
+      this.addClass()
+      this.nameCategory = ''
     },
   },
   watch: {},
@@ -98,7 +242,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--background_color_2);
+  border-bottom: 1px solid var(--color_border);
   padding: 10px 5px;
   flex: none;
 }
@@ -114,8 +258,9 @@ export default {
   object-position: left;
 }
 .order_header_close {
-  padding: 5px 12px;
-  border-radius: 10px;
+  font-size: 20px;
+  padding: 0px 5px;
+  border-radius: 25px;
   border: 1px solid white;
   background-color: var(--color_shopping_cart);
   cursor: pointer;
@@ -127,21 +272,34 @@ export default {
 .order_header_close:hover {
   background-color: var(--color_hover_text);
 }
-.content-secciones {
-  width: 100%;
+.wrapper-category-all {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 10px;
+  width: 100%;
+  overflow-x: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
 }
-.text {
+.name-category-all {
   font-size: 16px;
-  font-weight: normal;
   color: var(--color_text);
-  cursor: pointer;
+  margin-bottom: 5px;
 }
-.text:hover {
+.text-categoria {
+  width: 100%;
+  font-size: 16px;
+  color: var(--color_text);
+}
+.text-subcategoria {
+  width: 100%;
+  font-size: 16px;
+  color: var(--color_subtext);
+}
+.text-categoria-active {
+  color: var(--color_hover_text);
+}
+.text-subcategoria-active {
   color: var(--color_hover_text);
 }
 </style>

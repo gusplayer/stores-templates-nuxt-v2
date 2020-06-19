@@ -253,7 +253,6 @@ export default {
     },
     closeOrder(event) {
       const element = event.target.className
-
       if (
         element === 'order' ||
         element === 'order_header_close' ||

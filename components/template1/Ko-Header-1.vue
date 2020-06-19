@@ -35,14 +35,9 @@
           </div>
         </div>
         <div class="search">
-          <div>
-            <input
-              v-model="search"
-              type="text"
-              placeholder=" Buscar . . ."
-              required
-            />
-          </div>
+          <form id="demo-2">
+            <input type="search" placeholder="¿Qué buscas?" v-model="search" />
+          </form>
         </div>
         <div class="header-content-icon">
           <div class="header-content-cart" @click="openOrder">
@@ -53,7 +48,12 @@
         <div class="header-item-menu" @click="openMenulateral">
           <menu-icon class="header-icon-menu nav-bar" />
         </div>
-        <KoMenu :seccionesCart="seccionesCart" class="responsive" />
+        <KoMenu :dataStore="dataStore" class="responsive" />
+      </div>
+      <div class="search-movil" id="navbar">
+        <form id="demo-1">
+          <input v-model="search" type="search" placeholder="¿Qué buscas?" />
+        </form>
       </div>
     </div>
     <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
@@ -127,12 +127,21 @@ export default {
   },
   mounted() {
     this.toggle = true
+    var prevScrollpos = window.pageYOffset
+    window.onscroll = function () {
+      var currentScrollPos = window.pageYOffset
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById('navbar').style.left = '0px'
+      } else {
+        document.getElementById('navbar').style.left = '-400px'
+      }
+      prevScrollpos = currentScrollPos
+    }
   },
   data() {
     return {
       search: '',
       toggle: false,
-      indexCategory: 0,
       drawer: false,
       direction: 'rtl',
       showMenu: false,
@@ -165,7 +174,7 @@ export default {
         },
         {
           name: 'Categorías',
-          icon: 'Flechadown',
+          icon: 'Flechadown-icon',
         },
         {
           name: 'Contacto',
@@ -198,7 +207,6 @@ export default {
       nameSubCategory: '',
       selectedSubcategories: [],
       toggleCategories: true,
-      indexCategory: 0,
     }
   },
   computed: {
@@ -316,16 +324,11 @@ export default {
     addClass() {
       this.add = !this.add
     },
-    back() {
-      this.clear()
-      this.toggleCategories = true
-      this.nameCategory = ''
-    },
     clear() {
       this.$router.push({
         path: `/`,
       })
-      this.showMenu = false
+      this.$store.commit('SET_OPENORDERMENU', false)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
@@ -356,11 +359,13 @@ export default {
 <style scoped>
 div.header-container {
   --heightlogo: 120px;
+  --background_color_2: #f2f4f7;
 }
 .header-container {
   width: 100%;
   overflow: hidden;
-  height: var(--heightlogo);
+  height: calc(var(--heightlogo) + 25px);
+  background: var(--background_color_2);
 }
 .menu-container {
   width: 100%;
@@ -388,6 +393,7 @@ div.header-container {
   width: 100%;
   background: var(--background_color_1);
   flex-direction: column;
+  transition: all ease 1s;
   position: fixed;
   top: 0px;
   z-index: 3;
@@ -655,50 +661,96 @@ div.header-container {
   box-shadow: 0px 0px 2px 1px var(--color_border);
 }
 /* search */
-.search {
-  display: initial;
-  margin-right: 15px;
-}
-.search > div {
-  display: inline-block;
-  position: relative;
-}
-.search > div:after {
-  content: '';
-  background: var(--color_text);
-  width: 2px;
-  height: 10px;
-  position: absolute;
-  top: 18px;
-  right: -3px;
-  transform: rotate(135deg);
-}
-.search > div > input {
-  color: var(--color_text);
-  font-size: 16px;
-  background: transparent;
-  width: 15px;
-  height: 15px;
-  padding: 8px;
-  border: 1.7px solid var(--color_text);
+input {
   outline: none;
-  border-radius: 35px;
-  transition: width 0.5s;
 }
-.search > div > input::placeholder {
+input[type='search'] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  font-family: inherit;
+  font-size: 100%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+  display: none;
+}
+input[type='search'] {
+  background: #fff
+    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
+    7px center;
+  border: solid 2px var(--color_shopping_cart);
+  padding: 4px 7px;
+  width: 35px;
+  -webkit-border-radius: 10em;
+  -moz-border-radius: 10em;
+  border-radius: 10em;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#demo-1 input[type='search'] {
+  background: #fff
+    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
+    7px center;
+  border: solid 2px var(--color_shopping_cart);
+  padding: 2px 4px 4px 38px;
+  width: 120px;
+  -webkit-border-radius: 10em;
+  -moz-border-radius: 10em;
+  border-radius: 10em;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#demo-1 input[type='search']:focus {
+  width: 100%;
+  max-width: 300px;
+  background-color: #fff;
+  border-color: var(--color_hover_text);
+  -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+  -moz-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+  box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+}
+input[type='search']:focus {
+  width: 360px;
+  background-color: #fff;
+  border-color: var(--color_hover_text);
+  -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+  -moz-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+  box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+}
+
+input:-moz-placeholder {
   color: var(--color_text);
-  opacity: 1;
 }
-.search > div > input::-ms-placeholder {
+input::-webkit-input-placeholder {
   color: var(--color_text);
 }
-.search > div > input::-ms-input-placeholder {
-  color: var(--color_text);
+/* Demo 2 */
+#demo-2 input[type='search'] {
+  width: 15px;
+  padding-left: 10px;
+  color: transparent;
+  cursor: pointer;
 }
-.search > div > input:focus,
-.search > div > input:valid {
-  width: 200px;
-  height: 35px;
+#demo-2 input[type='search']:hover {
+  background-color: #fff;
+}
+#demo-2 input[type='search']:focus {
+  width: 160px;
+  padding-left: 32px;
+  color: var(--color_text);
+  background-color: #fff;
+  cursor: auto;
+}
+#demo-2 input:-moz-placeholder {
+  color: transparent;
+}
+#demo-2 input::-webkit-input-placeholder {
+  color: transparent;
+}
+.search-movil {
+  display: none;
 }
 
 @media (max-width: 900px) {
@@ -759,6 +811,17 @@ div.header-container {
 @media (max-width: 500px) {
   .search {
     display: none;
+  }
+  .search-movil {
+    width: 100%;
+    /* background: var(--background_color_1); */
+    display: flex;
+    position: fixed;
+    padding: 0px 5px;
+    -webkit-transition: all 0.8s;
+    -moz-transition: all 0.8s;
+    transition: all 0.8s;
+    top: 120px;
   }
 }
 </style>
