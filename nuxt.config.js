@@ -77,7 +77,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    ['@nuxtjs/google-tag-manager', { id: 'GTM-KGB4QPR', pageTracking: true }],
+    // ['@nuxtjs/google-tag-manager', { id: 'GTM-KGB4QPR', pageTracking: true }],
   ],
   /*
    ** Axios module configuration
