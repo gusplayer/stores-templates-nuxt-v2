@@ -364,7 +364,7 @@ div.header-container {
 .header-container {
   width: 100%;
   overflow: hidden;
-  height: calc(var(--heightlogo) + 25px);
+  height: calc(var(--heightlogo) + 0px);
   background: var(--background_color_2);
 }
 .menu-container {
@@ -809,6 +809,9 @@ input::-webkit-input-placeholder {
   }
 }
 @media (max-width: 500px) {
+  .header-container {
+    height: calc(var(--heightlogo) + 25px);
+  }
   .search {
     display: none;
   }
