@@ -90,14 +90,9 @@ export default {
   //     path.resolve('../core-components-npm/src/components'),
   //   ],
   // },
-  // build: {
-  //   extend(config, ctx) {
-  //     if (ctx.isDev) {
-  //       config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-  //     }
-  //   },
-  // },
+
   build: {
+    publicPath: '.nuxt/dist/client/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {
