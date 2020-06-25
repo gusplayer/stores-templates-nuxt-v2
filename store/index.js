@@ -424,10 +424,8 @@ export const actions = {
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
-    // console.log(parts[1])
 
     let id = 582
-
     // if (parts[1] == 'komercia' || parts[1] == 'localhost:3000') {
     //   id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
     //     name: `${subdomain}.komercia.co/`,
@@ -448,8 +446,7 @@ export const actions = {
     //   `https://api2.komercia.co/api/tienda/info/by/url`,
     //   { name: `http://${full}` }
     // )
-
-    await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
+    await dispatch('GET_DATA_TIENDA_BY_ID', id)
 
     // console.log(route.path);
 
