@@ -55,7 +55,7 @@ export default {
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
-    { src: '~/plugins/google-analytics.js', ssr: false },
+    // { src: '~/plugins/google-analytics.js', ssr: false },
   ],
   /*
    ** Nuxt.js dev-modules
@@ -90,31 +90,14 @@ export default {
   //     path.resolve('../core-components-npm/src/components'),
   //   ],
   // },
-
   buildDir: '_nuxt',
   build: {
     publicPath: '/_nuxt/dist/',
+    transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/,
-          options: {
-            fix: true,
-          },
-        })
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
     },
   },
-  // build: {
-  //   publicPath: '/_nuxt/dist/',
-  //   transpile: ['vee-validate/dist/rules'],
-  //   extend(config, ctx) {
-  //     if (ctx.isDev) {
-  //       config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-  //     }
-  //   },
-  // },
 }
