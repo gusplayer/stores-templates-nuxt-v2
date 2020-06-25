@@ -12,18 +12,18 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_workbox_e8744570 from 'nuxt_plugin_workbox_e8744570' // Source: ./workbox.js (mode: 'client')
-import nuxt_plugin_axios_7649832c from 'nuxt_plugin_axios_7649832c' // Source: ./axios.js (mode: 'all')
-import nuxt_plugin_corecomponentsnpm_428ce86c from 'nuxt_plugin_corecomponentsnpm_428ce86c' // Source: ../plugins/core-components-npm (mode: 'all')
-import nuxt_plugin_element_f89b5a74 from 'nuxt_plugin_element_f89b5a74' // Source: ../plugins/element (mode: 'all')
-import nuxt_plugin_mixinCommonMethods_b0161b88 from 'nuxt_plugin_mixinCommonMethods_b0161b88' // Source: ../plugins/mixinCommonMethods (mode: 'all')
-import nuxt_plugin_cloudinary_781c9a04 from 'nuxt_plugin_cloudinary_781c9a04' // Source: ../plugins/cloudinary (mode: 'all')
-import nuxt_plugin_materialicons_5694302c from 'nuxt_plugin_materialicons_5694302c' // Source: ../plugins/material-icons (mode: 'all')
-import nuxt_plugin_validate_4442dcea from 'nuxt_plugin_validate_4442dcea' // Source: ../plugins/validate.js (mode: 'all')
-import nuxt_plugin_aos_2279b4c6 from 'nuxt_plugin_aos_2279b4c6' // Source: ../plugins/aos.js (mode: 'client')
-import nuxt_plugin_fuse_6e95fa80 from 'nuxt_plugin_fuse_6e95fa80' // Source: ../plugins/fuse.js (mode: 'client')
-import nuxt_plugin_swiper_68e7f06e from 'nuxt_plugin_swiper_68e7f06e' // Source: ../plugins/swiper.js (mode: 'client')
-import nuxt_plugin_vuecarrusel_74d92192 from 'nuxt_plugin_vuecarrusel_74d92192' // Source: ../plugins/vue-carrusel.js (mode: 'client')
+import nuxt_plugin_workbox_16373e4e from 'nuxt_plugin_workbox_16373e4e' // Source: .\\workbox.js (mode: 'client')
+import nuxt_plugin_axios_6ce9249c from 'nuxt_plugin_axios_6ce9249c' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_corecomponentsnpm_428ce86c from 'nuxt_plugin_corecomponentsnpm_428ce86c' // Source: ..\\plugins\\core-components-npm (mode: 'all')
+import nuxt_plugin_element_f89b5a74 from 'nuxt_plugin_element_f89b5a74' // Source: ..\\plugins\\element (mode: 'all')
+import nuxt_plugin_mixinCommonMethods_b0161b88 from 'nuxt_plugin_mixinCommonMethods_b0161b88' // Source: ..\\plugins\\mixinCommonMethods (mode: 'all')
+import nuxt_plugin_cloudinary_781c9a04 from 'nuxt_plugin_cloudinary_781c9a04' // Source: ..\\plugins\\cloudinary (mode: 'all')
+import nuxt_plugin_materialicons_5694302c from 'nuxt_plugin_materialicons_5694302c' // Source: ..\\plugins\\material-icons (mode: 'all')
+import nuxt_plugin_validate_4442dcea from 'nuxt_plugin_validate_4442dcea' // Source: ..\\plugins\\validate.js (mode: 'all')
+import nuxt_plugin_aos_2279b4c6 from 'nuxt_plugin_aos_2279b4c6' // Source: ..\\plugins\\aos.js (mode: 'client')
+import nuxt_plugin_fuse_6e95fa80 from 'nuxt_plugin_fuse_6e95fa80' // Source: ..\\plugins\\fuse.js (mode: 'client')
+import nuxt_plugin_swiper_68e7f06e from 'nuxt_plugin_swiper_68e7f06e' // Source: ..\\plugins\\swiper.js (mode: 'client')
+import nuxt_plugin_vuecarrusel_74d92192 from 'nuxt_plugin_vuecarrusel_74d92192' // Source: ..\\plugins\\vue-carrusel.js (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -185,12 +185,12 @@ async function createApp (ssrContext) {
 
   // Plugin execution
 
-  if (process.client && typeof nuxt_plugin_workbox_e8744570 === 'function') {
-    await nuxt_plugin_workbox_e8744570(app.context, inject)
+  if (process.client && typeof nuxt_plugin_workbox_16373e4e === 'function') {
+    await nuxt_plugin_workbox_16373e4e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_7649832c === 'function') {
-    await nuxt_plugin_axios_7649832c(app.context, inject)
+  if (typeof nuxt_plugin_axios_6ce9249c === 'function') {
+    await nuxt_plugin_axios_6ce9249c(app.context, inject)
   }
 
   if (typeof nuxt_plugin_corecomponentsnpm_428ce86c === 'function') {

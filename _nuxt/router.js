@@ -3,13 +3,13 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _79d419e9 = () => interopDefault(import('../pages/template1/index.vue' /* webpackChunkName: "pages/template1/index" */))
-const _b314ef32 = () => interopDefault(import('../pages/constructor/constructorK.vue' /* webpackChunkName: "pages/constructor/constructorK" */))
-const _47df3a59 = () => interopDefault(import('../pages/template1/cart.vue' /* webpackChunkName: "pages/template1/cart" */))
-const _e4ae90f0 = () => interopDefault(import('../pages/template1/contacto.vue' /* webpackChunkName: "pages/template1/contacto" */))
-const _4f51ec36 = () => interopDefault(import('../pages/template1/productos/_slug.vue' /* webpackChunkName: "pages/template1/productos/_slug" */))
-const _2e4f2280 = () => interopDefault(import('../pages/productos/_slug/index.vue' /* webpackChunkName: "pages/productos/_slug/index" */))
-const _1a061bc1 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _843a52e8 = () => interopDefault(import('..\\pages\\template1\\index.vue' /* webpackChunkName: "pages_template1_index" */))
+const _1fad706c = () => interopDefault(import('..\\pages\\constructor\\constructorK.vue' /* webpackChunkName: "pages_constructor_constructorK" */))
+const _1884dd56 = () => interopDefault(import('..\\pages\\template1\\cart.vue' /* webpackChunkName: "pages_template1_cart" */))
+const _7c9a9405 = () => interopDefault(import('..\\pages\\template1\\contacto.vue' /* webpackChunkName: "pages_template1_contacto" */))
+const _b5819966 = () => interopDefault(import('..\\pages\\template1\\productos\\_slug.vue' /* webpackChunkName: "pages_template1_productos__slug" */))
+const _4e46984c = () => interopDefault(import('..\\pages\\productos\\_slug\\index.vue' /* webpackChunkName: "pages_productos__slug_index" */))
+const _22530111 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -29,31 +29,31 @@ export const routerOptions = {
 
   routes: [{
     path: "/template1",
-    component: _79d419e9,
+    component: _843a52e8,
     name: "template1"
   }, {
     path: "/constructor/constructorK",
-    component: _b314ef32,
+    component: _1fad706c,
     name: "constructor-constructorK"
   }, {
     path: "/template1/cart",
-    component: _47df3a59,
+    component: _1884dd56,
     name: "template1-cart"
   }, {
     path: "/template1/contacto",
-    component: _e4ae90f0,
+    component: _7c9a9405,
     name: "template1-contacto"
   }, {
     path: "/template1/productos/:slug?",
-    component: _4f51ec36,
+    component: _b5819966,
     name: "template1-productos-slug"
   }, {
     path: "/productos/:slug?",
-    component: _2e4f2280,
+    component: _4e46984c,
     name: "productos-slug"
   }, {
     path: "/",
-    component: _1a061bc1,
+    component: _22530111,
     name: "index"
   }],
 

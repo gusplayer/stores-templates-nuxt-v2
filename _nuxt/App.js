@@ -10,18 +10,18 @@ import {
 
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '../node_modules/element-ui/lib/theme-chalk/index.css'
+import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
 
-import '../assets/element-pagination.css'
+import '..\\assets\\element-pagination.css'
 
-import '../node_modules/swiper/dist/css/swiper.css'
+import '..\\node_modules\\swiper\\dist\\css\\swiper.css'
 
-import '../node_modules/aos/dist/aos.css'
+import '..\\node_modules\\aos\\dist\\aos.css'
 
-import '../node_modules/core-components-npm/dist/ko.css'
+import '..\\node_modules\\core-components-npm\\dist\\ko.css'
 
-import _8b6b8a5a from '../layouts/constructor-layout.vue'
-import _6f6c098b from '../layouts/default.vue'
+import _8b6b8a5a from '..\\layouts\\constructor-layout.vue'
+import _6f6c098b from '..\\layouts\\default.vue'
 
 const layouts = { "_constructor-layout": sanitizeComponent(_8b6b8a5a),"_default": sanitizeComponent(_6f6c098b) }
 
