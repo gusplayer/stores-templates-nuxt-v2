@@ -92,7 +92,7 @@ export default {
   // },
   buildDir: '_nuxt',
   build: {
-    publicPath: '_nuxt/dist/client/',
+    // publicPath: '_nuxt/dist/client/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {
