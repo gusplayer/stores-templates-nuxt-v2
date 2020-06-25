@@ -68,9 +68,9 @@ export default {
   //     },
   //   ],
   // ],
-  // debug: {
-  //   enabled: true,
-  // },
+  debug: {
+    enabled: true,
+  },
   /*
    ** Nuxt.js modules
    */
@@ -90,10 +90,10 @@ export default {
   //     path.resolve('../core-components-npm/src/components'),
   //   ],
   // },
-  /*
-   ** Build configuration
-   */
+
+  buildDir: '_nuxt',
   build: {
+    publicPath: '/_nuxt/dist/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {

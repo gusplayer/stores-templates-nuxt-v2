@@ -193,7 +193,6 @@
 
 <script>
 import axios from 'axios'
-
 export default {
   // mixins: [getIdCloudinary],
   name: 'Ko-ProductCard-1',

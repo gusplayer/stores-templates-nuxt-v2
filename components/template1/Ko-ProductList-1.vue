@@ -117,10 +117,7 @@
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard1
-                :product="product"
-                data-aos="fade-up"
-              ></KoProductCard1>
+              <KoProductCard1 :product="product"></KoProductCard1>
             </div>
           </div>
           <div
