@@ -90,9 +90,9 @@ export default {
   //     path.resolve('../core-components-npm/src/components'),
   //   ],
   // },
-  buildDir: '_nuxt',
+  // buildDir: '_nuxt',
   build: {
-    publicPath: '/_nuxt/dist/',
+    // publicPath: '/_nuxt/dist/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {
