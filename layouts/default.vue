@@ -1,5 +1,5 @@
 <template>
-  <div style="">
+  <div style>
     <KoHeader1 :dataStore="dataStore" />
     <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
     <nuxt />
@@ -62,7 +62,7 @@ export default {
           name: 'url',
           content: tienda.dominio
             ? tienda.dominio
-            : `http://${tienda.subdominio}.komercia.co`,
+            : `https://${tienda.subdominio}.komercia.co`,
         },
         { hid: 'language', name: 'language', content: 'ES' },
         { hid: 'author', name: 'author', content: 'Komercia' },
@@ -91,7 +91,7 @@ export default {
           name: 'og:url',
           content: tienda.dominio
             ? tienda.dominio
-            : `http://${tienda.subdominio}.komercia.co`,
+            : `https://${tienda.subdominio}.komercia.co`,
         },
         {
           hid: 'og:image',

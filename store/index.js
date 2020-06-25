@@ -437,7 +437,7 @@ export const actions = {
       //   name: `${subdomain}.komercia.co/`,
       // })
       id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
-        name: `http://${full}`,
+        name: `https://${full}`,
       })
     }
 

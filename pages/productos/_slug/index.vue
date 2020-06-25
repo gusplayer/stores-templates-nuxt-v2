@@ -45,7 +45,7 @@ export default {
             name: 'url',
             content: tienda.dominio
               ? `${tienda.dominio}/${path}`
-              : `http://${tienda.subdominio}.komercia.co${path}`,
+              : `https://${tienda.subdominio}.komercia.co${path}`,
           },
           { hid: 'author', name: 'author', content: 'Komercia' },
           { hid: 'robots', name: 'robots', content: 'index,follow' },
@@ -73,7 +73,7 @@ export default {
             name: 'og:url',
             content: tienda.dominio
               ? `${tienda.dominio}/${path}`
-              : `http://${tienda.subdominio}.komercia.co${path}`,
+              : `https://${tienda.subdominio}.komercia.co${path}`,
           },
           {
             hid: 'og:image',
