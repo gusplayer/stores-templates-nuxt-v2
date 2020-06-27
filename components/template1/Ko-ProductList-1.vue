@@ -580,6 +580,7 @@ div.wrapper-productlist {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 .content-products-empty p {
   font-size: 18px;

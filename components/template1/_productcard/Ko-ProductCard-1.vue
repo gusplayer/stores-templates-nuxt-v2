@@ -41,13 +41,12 @@
               {{ `${this.product.nombre.slice(0, 25)}` }}
             </p>
           </div>
-
           <div class="content-text-price" v-if="this.product.precio">
             <div class="wrapper-price">
               <div>
                 <!-- <p class="card-price-1" v-if="this.product.precio > 0">
-                $ {{ this.product.precio }}
-              </p> -->
+                  $ {{ this.product.precio }}
+                </p> -->
                 <p
                   class="card-price-2"
                   v-if="this.product.precio > 0 || this.product.precio"
@@ -436,6 +435,8 @@ div.wrapper-card {
   padding: 0px 20px;
   margin-bottom: 20px;
   margin-top: 10px;
+  justify-content: center;
+  align-items: center;
 }
 .wrapper-price {
   display: flex;
@@ -453,7 +454,7 @@ div.wrapper-card {
   letter-spacing: normal;
   color: rgba(55, 4, 4, 0.61);
   text-decoration: line-through;
-  text-align: left;
+  text-align: center;
 }
 .card-descuento {
   font-size: 12px;

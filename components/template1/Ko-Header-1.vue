@@ -51,7 +51,7 @@
         <KoMenu :dataStore="dataStore" class="responsive" />
       </div>
       <div class="search-movil" id="navbar">
-        <form id="demo-1">
+        <form id="demo-1" style="width: 100%;">
           <input v-model="search" type="search" placeholder="¿Qué buscas?" />
         </form>
       </div>
@@ -94,7 +94,6 @@
             </div>
           </div>
         </div>
-
         <div class="product-img-container" v-if="product.length">
           <div class="card-container">
             <div class="img-logo" v-if="product[0]">
@@ -127,13 +126,16 @@ export default {
   },
   mounted() {
     this.toggle = true
+
     var prevScrollpos = window.pageYOffset
     window.onscroll = function () {
       var currentScrollPos = window.pageYOffset
       if (prevScrollpos > currentScrollPos) {
         document.getElementById('navbar').style.left = '0px'
+        document.getElementById('navbar').style.opacity = '1'
       } else {
         document.getElementById('navbar').style.left = '-400px'
+        document.getElementById('navbar').style.opacity = '0'
       }
       prevScrollpos = currentScrollPos
     }
@@ -364,7 +366,7 @@ div.header-container {
 .header-container {
   width: 100%;
   overflow: hidden;
-  height: calc(var(--heightlogo) + 0px);
+  height: var(--heightlogo);
   background: var(--background_color_2);
 }
 .menu-container {
@@ -482,9 +484,6 @@ div.header-container {
 }
 .wrapper-logo {
   width: var(--logo_width);
-  /* max-height: 120px; */
-  /* padding-top: 10px;
-  padding-bottom: 10px; */
 }
 .header-logo {
   width: 100%;
@@ -694,32 +693,25 @@ input[type='search'] {
     7px center;
   border: solid 2px var(--color_shopping_cart);
   padding: 2px 4px 4px 38px;
-  width: 120px;
-  -webkit-border-radius: 10em;
-  -moz-border-radius: 10em;
-  border-radius: 10em;
+  width: 100%;
+  -webkit-border-radius: var(--radius_btn);
+  -moz-border-radius: var(--radius_btn);
+  border-radius: var(--radius_btn);
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
+  box-sizing: border-box;
 }
 #demo-1 input[type='search']:focus {
   width: 100%;
-  max-width: 300px;
   background-color: #fff;
   border-color: var(--color_hover_text);
-  -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
-  -moz-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
-  box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+  box-sizing: border-box;
 }
 input[type='search']:focus {
-  width: 360px;
   background-color: #fff;
   border-color: var(--color_hover_text);
-  -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
-  -moz-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
-  box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
 }
-
 input:-moz-placeholder {
   color: var(--color_text);
 }
@@ -810,7 +802,7 @@ input::-webkit-input-placeholder {
 }
 @media (max-width: 500px) {
   .header-container {
-    height: calc(var(--heightlogo) + 25px);
+    height: var(--heightlogo);
   }
   .search {
     display: none;

@@ -90,25 +90,15 @@ export default {
   //     path.resolve('../core-components-npm/src/components'),
   //   ],
   // },
-  // buildDir: '_nuxt',
   build: {
-    // publicPath: '_nuxt/dist/client/',
     transpile: ['vee-validate/dist/rules'],
-    // extend(config, ctx) {
-    //   if (ctx.isDev) {
-    //     config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-    //   }
-    // },
-    build: {
-      extend(config, { isDev, isClient }) {
-        config.module.rules.push({
-          test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-          loader: 'file-loader',
-        })
-        if (isDev) {
-          config.mode = 'development'
-        }
-      },
+    extend(config, ctx) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+      }
     },
+  },
+  router: {
+    base: '/',
   },
 }

@@ -865,7 +865,6 @@ i.close {
   border-radius: 5px;
   color: white;
   font-size: 12px;
-  margin-left: 10px;
   margin-bottom: 10px;
 }
 .card-info-2 {
@@ -876,6 +875,7 @@ i.close {
   padding: 1px 4px;
   border-radius: 5px;
   color: black;
+  margin-right: 10px;
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 10px;
@@ -1162,7 +1162,8 @@ i.close {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #e71f77;
+    /* background: #e71f77; */
+    background: gray;
     padding: 6px 10px;
     border-radius: var(--radius_btn);
     color: white;
