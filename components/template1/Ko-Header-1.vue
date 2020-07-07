@@ -345,7 +345,7 @@ div.header-container {
   transition: all ease 0.6s;
   position: fixed;
   height: auto;
-  z-index: 3;
+  z-index: 4;
 }
 .hidden {
   top: auto;
@@ -353,7 +353,7 @@ div.header-container {
 }
 .animated {
   opacity: 1;
-  top: var(--heightlogo);
+  top: 120px;
 }
 .wrapper-header {
   display: flex;
@@ -365,7 +365,7 @@ div.header-container {
   transition: all ease 1s;
   position: fixed;
   top: 0px;
-  z-index: 3;
+  z-index: 4;
 }
 .header {
   display: flex;

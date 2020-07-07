@@ -1,8 +1,8 @@
 {
   "name": "template-nuxt-dokku",
   "version": "1.0.0",
-  "description": "My legendary Nuxt.js project",
-  "author": "Gustavo Moreno",
+  "description": "Templates komercia",
+  "author": "Miguel Moreno",
   "private": true,
   "scripts": {
     "dev": "nuxt",
