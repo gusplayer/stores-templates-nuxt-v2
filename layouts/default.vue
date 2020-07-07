@@ -258,10 +258,10 @@ export default {
   justify-content: center;
   align-items: center;
   background: #00bb2d;
-  border-radius: 15px;
+  border-radius: 25px;
   z-index: 2;
-  bottom: 60px;
-  right: 40px;
+  bottom: 50px;
+  right: 30px;
   cursor: pointer;
   transition: all 200ms ease-in;
 }
@@ -270,11 +270,11 @@ export default {
 }
 .button-whatsapp {
   fill: white;
-  width: 36px;
+  width: 34px;
 }
 @media (max-width: 400px) {
   .wrapper-whatsapp {
-    bottom: 60px;
+    bottom: 40px;
     right: 20px;
   }
 }

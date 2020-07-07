@@ -1,7 +1,11 @@
 <template>
   <div class="wrapper-card">
     <div class="container">
-      <div class="wrapper">
+      <div
+        class="wrapper"
+        v-on:mouseenter="active = false"
+        v-on:mouseleave="active = true"
+      >
         <router-link
           :to="{ path: `/template1/productos/` + product.slug }"
           class="wrapper-image"
@@ -41,38 +45,26 @@
               {{ `${this.product.nombre.slice(0, 25)}` }}
             </p>
           </div>
-          <div class="content-text-price" v-if="this.product.precio">
-            <div class="wrapper-price">
-              <div>
-                <!-- <p class="card-price-1" v-if="this.product.precio > 0">
-                  $ {{ this.product.precio }}
-                </p> -->
-                <p
-                  class="card-price-2"
-                  v-if="this.product.precio > 0 || this.product.precio"
-                >
-                  {{ currency(this.product.precio) }}
-                </p>
+          <div v-if="active">
+            <div class="content-text-price" v-if="this.product.precio">
+              <div class="wrapper-price">
+                <div>
+                  <!-- <p class="card-price-1" v-if="this.product.precio > 0">
+                    $ {{ this.product.precio }}
+                  </p> -->
+                  <p
+                    class="card-price-2"
+                    v-if="this.product.precio > 0 || this.product.precio"
+                  >
+                    {{ currency(this.product.precio) }}
+                  </p>
+                </div>
+                <!-- <p class="card-descuento">-50%</p> -->
               </div>
-              <!-- <p class="card-descuento">-50%</p> -->
             </div>
-            <div>
-              <div
-                v-if="!this.estadoCart && !soldOut"
-                v-on:click="addShoppingCart"
-                class="btn"
-              >
-                <cartArrowDown class="card-icon-cart" />Agregar
-              </div>
-              <router-link
-                :to="{ path: `/template1/productos/` + product.slug }"
-                v-else
-                class="btn"
-                >Comprar</router-link
-              >
-            </div>
+            <div class="content-text-price2" v-else></div>
           </div>
-          <div class="content-text-price2" v-else>
+          <div class="content-text-price2" v-if="!active">
             <div
               v-if="!this.estadoCart && !soldOut"
               v-on:click="addShoppingCart"
@@ -150,13 +142,11 @@
               </div>
               <!-- <p class="card-descuento">-50%</p> -->
             </router-link>
-            <div>
-              <cartArrowDown
-                v-if="!this.estadoCart && !soldOut"
-                class="card-icon-cart-movil"
-                v-on:click="addShoppingCart"
-              />
-            </div>
+            <cartArrowDown
+              v-if="!this.estadoCart && !soldOut"
+              class="card-icon-cart-movil"
+              v-on:click="addShoppingCart"
+            />
           </div>
           <router-link
             :to="{ path: `/template1/productos/` + product.slug }"
@@ -208,6 +198,7 @@ export default {
       productCart: {},
       salesData: null,
       spent: false,
+      active: true,
     }
   },
   computed: {
@@ -408,14 +399,14 @@ div.wrapper-card {
 .content-text-price {
   display: flex;
   width: 100%;
-  padding: 0px 20px;
   align-items: center;
   margin-bottom: 15px;
-  justify-content: space-between;
+  justify-content: center;
 }
 .content-text-price2 {
   display: flex;
   width: 100%;
+  height: 47px;
   align-items: center;
   margin-bottom: 15px;
   justify-content: center;
@@ -564,7 +555,7 @@ div.wrapper-card {
     width: 100%;
     padding: 0px 20px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
   }
   .card-price-1-movil {
     font-size: 12px;

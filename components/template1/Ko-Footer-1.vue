@@ -71,9 +71,9 @@
           </div>
         </div>
       </div>
-      <div class="items-mobil">
-        <div class="item-mobil-top">
-          <div class="left-logo-mobil">
+      <div class="items-movil">
+        <div class="item-movil-top">
+          <div class="left-logo-movil">
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="logo"
@@ -128,12 +128,12 @@
             <button class="btn" @click="toSubscribe">Enviar</button>
           </div>
         </div>
-        <div v-if="currentViews.length" class="item-mobil-center">
+        <div v-if="currentViews.length" class="item-movil-center">
           <div
             v-for="(item, index) in currentViews"
             :key="`${index}${item.name}`"
           >
-            <p class="text-mobil">{{ item.name }}</p>
+            <p class="text-movil">{{ item.name }}</p>
           </div>
         </div>
       </div>
@@ -527,7 +527,7 @@ div.wrapper-footer {
   background-color: var(--btnhover);
   border: solid 2px var(--btnhover);
 }
-.items-mobil {
+.items-movil {
   display: none;
 }
 .under-footer {
@@ -773,14 +773,14 @@ input:checked ~ .tab-content {
     color: var(--color_text);
     text-align: center;
   }
-  .items-mobil {
+  .items-movil {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
   }
-  .item-mobil-center {
+  .item-movil-center {
     width: 100%;
     margin-top: 30px;
     display: grid;
@@ -788,10 +788,10 @@ input:checked ~ .tab-content {
     grid-column-gap: 30px;
     grid-row-gap: 15px;
   }
-  .item-mobil-center > div:nth-child(2),
-  .item-mobil-center > div:nth-child(4),
-  .item-mobil-center > div:nth-child(6),
-  .item-mobil-center > div:nth-child(8) {
+  .item-movil-center > div:nth-child(2),
+  .item-movil-center > div:nth-child(4),
+  .item-movil-center > div:nth-child(6),
+  .item-movil-center > div:nth-child(8) {
     text-align: right;
   }
   .footer-item-secciones {
@@ -801,7 +801,7 @@ input:checked ~ .tab-content {
     grid-column-gap: 30px;
     grid-row-gap: 15px;
   }
-  .text-mobil {
+  .text-movil {
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -811,14 +811,14 @@ input:checked ~ .tab-content {
     color: var(--color_text);
     margin-top: 10px;
   }
-  .item-mobil-top {
+  .item-movil-top {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
   }
-  .left-logo-mobil {
+  .left-logo-movil {
     display: flex;
     width: 100%;
     flex-direction: row;
