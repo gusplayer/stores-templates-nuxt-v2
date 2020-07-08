@@ -19,7 +19,6 @@ import {
 import { createApp, NuxtError } from './index.js'
 import fetchMixin from './mixins/fetch.client'
 import NuxtLink from './components/nuxt-link.client.js' // should be included after ./index.js
-import './jsonp'
 
 // Fetch mixin
 if (!Vue.__nuxt__fetch__mixin__) {
@@ -423,15 +422,7 @@ async function render (to, from, next) {
 
       // Call asyncData(context)
       if (hasAsyncData) {
-          let promise
-
-          if (this.isPreview) {
-            promise = promisify(Component.options.asyncData, app.context)
-          } else {
-              promise = this.fetchPayload(to.path)
-                .then(payload => payload.data[i])
-                .catch(_err => promisify(Component.options.asyncData, app.context)) // Fallback
-          }
+        const promise = promisify(Component.options.asyncData, app.context)
 
         promise.then((asyncDataResult) => {
           applyAsyncData(Component, asyncDataResult)
@@ -443,18 +434,8 @@ async function render (to, from, next) {
         promises.push(promise)
       }
 
-      // Replay store mutations, catching to avoid error page on SPA fallback
-      promises.push(this.fetchPayload(to.path).then(payload => {
-        payload.mutations.forEach(m => { this.$store.commit(m[0], m[1]) })
-      }).catch(err => null))
-
       // Check disabled page loading
       this.$loading.manual = Component.options.loading === false
-
-        if (!this.isPreview) {
-          // Catching the error here for letting the SPA fallback and normal fetch behaviour
-          promises.push(this.fetchPayload(to.path).catch(err => null))
-        }
 
       // Call fetch(context)
       if (hasFetch) {
@@ -601,14 +582,6 @@ async function mountApp (__app) {
 
   // Create Vue instance
   const _app = new Vue(app)
-
-  // Load page chunk
-  if (!NUXT.data && NUXT.serverRendered) {
-    try {
-      const payload = await _app.fetchPayload(_app.context.route.path)
-      Object.assign(NUXT, payload)
-    } catch (err) {}
-  }
 
   // Load layout
   const layout = NUXT.layout || 'default'
