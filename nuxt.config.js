@@ -106,5 +106,5 @@ export default {
   router: {
     base: '/',
   },
-  serverMiddleware: isServerlessEnvironment ? [] : ['~/api/index.js'],
+  // serverMiddleware: isServerlessEnvironment ? [] : ['~/api/index.js'],
 }
