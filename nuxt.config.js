@@ -93,7 +93,7 @@ export default {
   //     path.resolve('../core-components-npm/src/components'),
   //   ],
   // },
-  buildDir: '.nuxt/dist/client/'
+  buildDir: '.nuxt/dist/client/',
   build: {
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
