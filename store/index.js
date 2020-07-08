@@ -437,7 +437,8 @@ export const actions = {
         name: `https://${full}`,
       })
     }
-    await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
+    // await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
+    await dispatch('GET_DATA_TIENDA_BY_ID', '582')
 
     // console.log(route.path);
 
