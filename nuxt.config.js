@@ -57,7 +57,7 @@ export default {
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
-    { src: '~/plugins/amplify.js', mode: 'client' },
+    // { src: '~/plugins/amplify.js', mode: 'client' },
     // { src: '~/plugins/google-analytics.js', ssr: false },
   ],
   /*
