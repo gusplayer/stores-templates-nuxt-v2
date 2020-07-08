@@ -251,17 +251,17 @@ export default {
   outline: none !important;
 }
 .wrapper-whatsapp {
-  width: 52px;
-  height: 52px;
+  width: 60px;
+  height: 60px;
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #00bb2d;
-  border-radius: 15px;
+  border-radius: 50px;
   z-index: 2;
-  bottom: 60px;
-  right: 40px;
+  bottom: 50px;
+  right: 10px;
   cursor: pointer;
   transition: all 200ms ease-in;
 }
@@ -270,12 +270,12 @@ export default {
 }
 .button-whatsapp {
   fill: white;
-  width: 36px;
+  width: 38px;
 }
 @media (max-width: 400px) {
   .wrapper-whatsapp {
-    bottom: 60px;
-    right: 20px;
+    bottom: 40px;
+    right: 10px;
   }
 }
 </style>

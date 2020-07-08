@@ -247,13 +247,11 @@ export default {
   flex: none;
 }
 .wrapper-logo {
-  max-width: var(--logo_width);
-  padding-top: 10px;
-  padding-bottom: 10px;
+  width: var(--logo_width);
 }
 .header-logo {
   width: 100%;
-  height: 100%;
+  max-height: 115px;
   object-fit: contain;
   object-position: left;
 }

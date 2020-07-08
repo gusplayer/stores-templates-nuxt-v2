@@ -50,11 +50,6 @@
         </div>
         <KoMenu :dataStore="dataStore" class="responsive" />
       </div>
-      <div class="search-movil" id="navbar">
-        <form id="demo-1" style="width: 100%;">
-          <input v-model="search" type="search" placeholder="¿Qué buscas?" />
-        </form>
-      </div>
     </div>
     <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
       <div id="menu-collapse">
@@ -126,19 +121,6 @@ export default {
   },
   mounted() {
     this.toggle = true
-
-    var prevScrollpos = window.pageYOffset
-    window.onscroll = function () {
-      var currentScrollPos = window.pageYOffset
-      if (prevScrollpos > currentScrollPos) {
-        document.getElementById('navbar').style.left = '0px'
-        document.getElementById('navbar').style.opacity = '1'
-      } else {
-        document.getElementById('navbar').style.left = '-400px'
-        document.getElementById('navbar').style.opacity = '0'
-      }
-      prevScrollpos = currentScrollPos
-    }
   },
   data() {
     return {
@@ -257,20 +239,6 @@ export default {
         path: `/template1/productos/` + this.product[0].slug,
       })
     },
-    Searchproduct(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
-    },
     Sendsubcategory(value) {
       this.$router.push({
         path: `/`,
@@ -360,13 +328,12 @@ export default {
 
 <style scoped>
 div.header-container {
-  --heightlogo: 120px;
   --background_color_2: #f2f4f7;
 }
 .header-container {
   width: 100%;
   overflow: hidden;
-  height: var(--heightlogo);
+  height: 120px;
   background: var(--background_color_2);
 }
 .menu-container {
@@ -378,7 +345,7 @@ div.header-container {
   transition: all ease 0.6s;
   position: fixed;
   height: auto;
-  z-index: 3;
+  z-index: 4;
 }
 .hidden {
   top: auto;
@@ -386,7 +353,7 @@ div.header-container {
 }
 .animated {
   opacity: 1;
-  top: var(--heightlogo);
+  top: 120px;
 }
 .wrapper-header {
   display: flex;
@@ -398,7 +365,7 @@ div.header-container {
   transition: all ease 1s;
   position: fixed;
   top: 0px;
-  z-index: 3;
+  z-index: 4;
 }
 .header {
   display: flex;
@@ -741,10 +708,6 @@ input::-webkit-input-placeholder {
 #demo-2 input::-webkit-input-placeholder {
   color: transparent;
 }
-.search-movil {
-  display: none;
-}
-
 @media (max-width: 900px) {
   .product-img-container {
     display: none;
@@ -801,22 +764,8 @@ input::-webkit-input-placeholder {
   }
 }
 @media (max-width: 500px) {
-  .header-container {
-    height: var(--heightlogo);
-  }
   .search {
     display: none;
-  }
-  .search-movil {
-    width: 100%;
-    /* background: var(--background_color_1); */
-    display: flex;
-    position: fixed;
-    padding: 0px 5px;
-    -webkit-transition: all 0.8s;
-    -moz-transition: all 0.8s;
-    transition: all 0.8s;
-    top: 120px;
   }
 }
 </style>
