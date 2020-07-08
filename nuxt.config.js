@@ -1,3 +1,4 @@
+const isServerlessEnvironment = process.env.ON_VERCEL == 'true'
 export default {
   // mode: 'universal',
   mode: 'universal',
@@ -105,4 +106,5 @@ export default {
   router: {
     base: '/',
   },
+  serverMiddleware: isServerlessEnvironment ? [] : ['~/api/index.js'],
 }
