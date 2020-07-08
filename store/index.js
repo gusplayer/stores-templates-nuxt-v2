@@ -433,9 +433,6 @@ export const actions = {
         name: `${subdomain}.komercia.co/`,
       })
     } else {
-      // id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
-      //   name: `${subdomain}.komercia.co/`,
-      // })
       id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
         name: `https://${full}`,
       })
@@ -448,7 +445,6 @@ export const actions = {
     // console.log(idSlug)
 
     const producto = await axios.get(
-      // `https://templates.komercia.co/api/producto/bolso-refraction-sp-24812`
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
     )
 
