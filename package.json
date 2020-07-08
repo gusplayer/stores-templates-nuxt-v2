@@ -10,7 +10,8 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "deploy": "pm2 start npm --name temaplate-nuxt-dokku -- start",
-    "deploy2": "nuxt build && nuxt export"
+    "deploy2": "nuxt build && nuxt export",
+    "now-build": "nuxt generate"
   },
   "dependencies": {
     "@aws-amplify/cli": "^4.23.0",
@@ -36,6 +37,7 @@
     "fuse.js": "^3.4.5",
     "image-cloudinary": "^1.2.4",
     "js-cookie": "^2.2.1",
+    "now": "^19.1.1",
     "nuxt": "^2.13.1",
     "vee-validate": "^3.3.0",
     "vue-awesome-swiper": "^3.1.3",

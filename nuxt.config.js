@@ -1,4 +1,4 @@
-const isServerlessEnvironment = process.env.ON_VERCEL == 'true'
+// const isServerlessEnvironment = process.env.ON_VERCEL == 'true'
 export default {
   // mode: 'universal',
   mode: 'universal',
