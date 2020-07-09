@@ -10,8 +10,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "deploy": "pm2 start npm --name temaplate-nuxt-dokku -- start",
-    "deploy2": "nuxt build && nuxt export",
-    "now-build": "nuxt generate"
+    "deploy2": "nuxt build && nuxt export"
   },
   "dependencies": {
     "@aws-amplify/cli": "^4.23.0",
