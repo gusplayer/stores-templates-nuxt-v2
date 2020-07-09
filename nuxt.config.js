@@ -1,8 +1,5 @@
-// const isServerlessEnvironment = process.env.ON_VERCEL == 'true'
 export default {
-  // mode: 'universal',
   mode: 'universal',
-  // target: 'static',
   /*
    ** Headers of the page
    */
@@ -58,7 +55,6 @@ export default {
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
-    // { src: '~/plugins/amplify.js', mode: 'client' },
     // { src: '~/plugins/google-analytics.js', ssr: false },
   ],
   /*
@@ -94,7 +90,6 @@ export default {
   //     path.resolve('../core-components-npm/src/components'),
   //   ],
   // },
-  // buildDir: '/',
   build: {
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
@@ -106,5 +101,4 @@ export default {
   router: {
     base: '/',
   },
-  // serverMiddleware: isServerlessEnvironment ? [] : ['~/api/index.js'],
 }
