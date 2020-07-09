@@ -8,8 +8,6 @@
     "dev": "nuxt",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy": "pm2 start npm --name temaplate-nuxt-dokku -- start",
-    "deploy2": "nuxt build && nuxt export",
     "build": "nuxt build"
   },
   "dependencies": {
