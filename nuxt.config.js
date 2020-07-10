@@ -99,6 +99,8 @@ export default {
   //   },
   // },
   build: {
+    publicPath: '/_nuxt/client/',
+
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
@@ -112,6 +114,6 @@ export default {
     },
   },
   router: {
-    base: '/',
+    base: '/app/',
   },
 }
