@@ -36,10 +36,10 @@ export default {
     )
   },
   head() {
-    let full = req.headers.host
-    let parts = full.split('.')
-    let subdomain = parts[0]
-    console.log(full)
+    // let full = req.headers.host
+    // let parts = full.split('.')
+    // let subdomain = parts[0]
+    // console.log(full)
 
     let tienda = this.$store.state.dataStore.tienda
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
