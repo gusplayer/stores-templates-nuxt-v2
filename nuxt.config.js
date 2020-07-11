@@ -99,7 +99,7 @@ export default {
   //   },
   // },
   build: {
-    publicPath: '/_nuxt/client/',
+    // publicPath: '/_nuxt/client/',
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

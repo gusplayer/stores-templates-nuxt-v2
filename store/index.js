@@ -424,7 +424,7 @@ export const actions = {
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
-    // console.log(parts[1])
+    console.log(full)
 
     let id = 0
 
@@ -437,8 +437,8 @@ export const actions = {
         name: `https://${full}`,
       })
     }
-    await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
-    // await dispatch('GET_DATA_TIENDA_BY_ID', '582')
+    //   await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
+    await dispatch('GET_DATA_TIENDA_BY_ID', '582')
 
     // console.log(route.path);
 
