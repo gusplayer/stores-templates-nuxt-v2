@@ -14,25 +14,25 @@ export const state = () => ({
     distance: 100,
     maxPatternLength: 32,
     minMatchCharLength: 1,
-    keys: ['nombre']
-  }
+    keys: ['nombre'],
+  },
 })
 
 export const getters = {
-  filterProducts: state => {
+  filterProducts: (state) => {
     if (state.type === 'search') {
       return new Fuse(state.fullProducts, state.options).search(state.payload)
     } else if (state.type === 'subcategory') {
       return state.fullProducts.filter(
-        product => product.subcategoria === state.payload
+        (product) => product.subcategoria === state.payload
       )
     } else if (state.type === 'category') {
       return state.fullProducts.filter(
-        product => product.categoria === state.payload
+        (product) => product.categoria === state.payload
       )
     }
     return state.fullProducts
-  }
+  },
 }
 export const mutations = {
   SET_FILTER: (state, query) => {
@@ -51,7 +51,7 @@ export const mutations = {
   FILTER_BY: (state, { type, data }) => {
     state.type = type
     state.payload = data
-  }
+  },
 }
 
 export const actions = {}

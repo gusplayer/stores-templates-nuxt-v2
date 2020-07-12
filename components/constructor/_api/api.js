@@ -11,13 +11,13 @@ class Api {
     const tipoComponentes = await axios
       .get(`${BASE_API}api/components/types`, {
         headers: {
-          Authorization: `Bearer ${this.ACCESS_TOKEN}`
-        }
+          Authorization: `Bearer ${this.ACCESS_TOKEN}`,
+        },
       })
-      .then(response => {
+      .then((response) => {
         return response.data.data
       })
-      .catch(error => error)
+      .catch((error) => error)
     return tipoComponentes
   }
 
@@ -26,13 +26,13 @@ class Api {
     const componentes = await axios
       .get(`${BASE_API}api/components/references/${idTipo}`, {
         headers: {
-          Authorization: `Bearer ${this.ACCESS_TOKEN}`
-        }
+          Authorization: `Bearer ${this.ACCESS_TOKEN}`,
+        },
       })
-      .then(response => {
+      .then((response) => {
         return response.data.data
       })
-      .catch(error => error)
+      .catch((error) => error)
     return componentes
   }
 }

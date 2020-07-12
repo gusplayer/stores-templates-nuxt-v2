@@ -1,14 +1,19 @@
 <template>
   <div class="wrapper-input">
-    <h4 v-if="label" class="title-input">{{label}}</h4>
+    <h4 v-if="label" class="title-input">{{ label }}</h4>
     <el-tooltip
       :disabled="hover ? false : true"
       class="item"
       effect="light"
       :content="hover"
-      :placement="tooltip > 6 ?'bottom':'top'"
+      :placement="tooltip > 6 ? 'bottom' : 'top'"
     >
-      <el-color-picker ref="inputColor" v-model="colorPicker" show-alpha color-format="hsl"></el-color-picker>
+      <el-color-picker
+        ref="inputColor"
+        v-model="colorPicker"
+        show-alpha
+        color-format="hsl"
+      ></el-color-picker>
     </el-tooltip>
   </div>
 </template>
@@ -18,11 +23,11 @@ export default {
   props: {
     value: {
       type: String,
-      required: true
+      required: true,
     },
     label: String,
     hover: String,
-    tooltip: Number
+    tooltip: Number,
   },
   computed: {
     colorPicker: {
@@ -31,9 +36,9 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 
