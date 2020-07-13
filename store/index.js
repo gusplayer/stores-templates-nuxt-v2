@@ -426,7 +426,7 @@ export const actions = {
   },
 
   async nuxtServerInit({ commit, dispatch }, { req, route }) {
-    console.log(route.fullPath)
+    console.log(req.url)
     // let reqServer = req
     let full = req.headers.host
     let parts = full.split('.')
@@ -445,7 +445,7 @@ export const actions = {
     }
     //await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
     await dispatch('GET_DATA_TIENDA_BY_ID', '582')
-    await dispatch('GET_SERVER_PATH', route.fullPath)
+    await dispatch('GET_SERVER_PATH', req.url)
 
     const idSlug = route.path.split('-')
     const producto = await axios.get(
