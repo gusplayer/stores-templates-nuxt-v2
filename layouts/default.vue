@@ -35,6 +35,7 @@ export default {
       this.$store.state.dataStore.tienda.id_tienda
     )
     console.log("ruta completa " + this.fullPathServer)
+
   },
   head() {
 

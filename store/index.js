@@ -15,7 +15,7 @@ export const state = () => ({
     },
   },
   isLoading: false,
-  fullPathServer: 'sindata',
+  fullPathServer: '',
   authData: '',
   userData: {
     id: 0,
@@ -426,7 +426,7 @@ export const actions = {
   },
 
   async nuxtServerInit({ commit, dispatch }, { req, route }) {
-    console.log(req.headers)
+    console.log(route.fullPath)
     // let reqServer = req
     let full = req.headers.host
     let parts = full.split('.')
@@ -445,7 +445,7 @@ export const actions = {
     }
     //await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
     await dispatch('GET_DATA_TIENDA_BY_ID', '582')
-    // dispatch('GET_SERVER_PATH', reqServer)
+    await dispatch('GET_SERVER_PATH', route.fullPath)
 
     const idSlug = route.path.split('-')
     const producto = await axios.get(
