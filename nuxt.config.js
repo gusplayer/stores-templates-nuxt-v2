@@ -98,7 +98,7 @@ export default {
   //     }
   //   },
   // },
-  buildDir: '_nuxt',
+  // buildDir: '_nuxt',
   build: {
     publicPath: '/_nuxt/client/',
     // transpile: ['vue-instantsearch', 'instantsearch.js/es'],
