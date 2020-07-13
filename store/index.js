@@ -443,7 +443,7 @@ export const actions = {
     }
     //await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
     await dispatch('GET_DATA_TIENDA_BY_ID', '582')
-    dispatch('GET_SERVER_PATH', 'melissa2')
+    dispatch('GET_SERVER_PATH', full)
 
     const idSlug = route.path.split('-')
     const producto = await axios.get(
