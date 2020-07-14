@@ -650,6 +650,20 @@ input:checked ~ .tab-content {
 #modal-toggle {
   display: none;
 }
+.modal-content::-webkit-scrollbar {
+  background: var(--background_color_1);
+  width: 10px;
+  border-top-right-radius: var(--radius_btn);
+  border-bottom-right-radius: var(--radius_btn);
+}
+.modal-content::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px var(--background_color_2);
+  border-radius: 10px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(125deg, #aee7e7, var(--color_shopping_cart));
+  border-radius: 10px;
+}
 .modal-content,
 .modal-backdrop {
   opacity: 0;
