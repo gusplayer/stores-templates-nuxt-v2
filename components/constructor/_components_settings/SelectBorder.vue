@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper-select">
-    <h4 class="title-input">{{label}}</h4>
+    <h4 class="title-input">{{ label }}</h4>
     <div class="select">
       <select
         name="format"
         ref="format"
         @change="updateValue()"
-        :style="value == -1 || !value ?'color: rgba(21, 20, 57, 0.4);':'' "
+        :style="value == -1 || !value ? 'color: rgba(21, 20, 57, 0.4);' : ''"
       >
         <option selected disabled>Seleccionar opción</option>
         <slot></slot>
@@ -26,8 +26,8 @@ export default {
   methods: {
     updateValue() {
       this.$emit('input', +this.$refs.format.value)
-    }
-  }
+    },
+  },
 }
 </script>
 

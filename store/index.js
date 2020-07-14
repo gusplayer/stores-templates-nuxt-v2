@@ -15,6 +15,7 @@ export const state = () => ({
     },
   },
   isLoading: false,
+  fullPathServer: '',
   authData: '',
   userData: {
     id: 0,
@@ -400,6 +401,9 @@ export const mutations = {
   SET_PRODUCT_INFO: (state, value) => {
     state.productInfo = value
   },
+  SET_SERVER_PATH(state, value) {
+    state.fullPathServer = value
+  },
 }
 export const actions = {
   GET_LOGIN({ state, commit, dispatch }) {
@@ -420,11 +424,12 @@ export const actions = {
         // dispatch("GET_DATASTORE");
       })
   },
+
   async nuxtServerInit({ commit, dispatch }, { req, route }) {
+    // let reqServer = req
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
-    // console.log(parts[1])
 
     let id = 0
 
@@ -433,22 +438,16 @@ export const actions = {
         name: `${subdomain}.komercia.co/`,
       })
     } else {
-      // id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
-      //   name: `${subdomain}.komercia.co/`,
-      // })
       id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
         name: `https://${full}`,
       })
     }
     await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
-
-    // console.log(route.path);
+    //await dispatch('GET_DATA_TIENDA_BY_ID', '582')
+    await dispatch('GET_SERVER_PATH', full)
 
     const idSlug = route.path.split('-')
-    // console.log(idSlug)
-
     const producto = await axios.get(
-      // `https://templates.komercia.co/api/producto/bolso-refraction-sp-24812`
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
     )
 
@@ -457,6 +456,11 @@ export const actions = {
     // )
     // commit('STOREDB', { storeLayout, producto })
     // commit('SELECT_CARD', storeLayout.data.setting.card || 'koProductCard1')
+  },
+  GET_SERVER_PATH({ state, commit }, value) {
+    console.log('my value ' + value)
+    commit('SET_SERVER_PATH', value)
+    // state.fullPathServer = value
   },
   async GET_DATA_TIENDA_BY_ID({ commit }, idTienda) {
     const response = await axios.get(
@@ -476,6 +480,7 @@ export const actions = {
         commit('SET_CITIES', response.data)
       })
   },
+
   GET_SETTINGS_BY_TEMPLATE({ commit }, id) {
     this.$axios
       .$get(`https://api2.komercia.co/api/template/5/settings/${id}`)

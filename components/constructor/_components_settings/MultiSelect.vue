@@ -1,6 +1,6 @@
 <template>
   <div class="checkbox-select">
-    <h4 class="title-input">{{label}}</h4>
+    <h4 class="title-input">{{ label }}</h4>
     <div
       class="checkbox-select__trigger"
       :class="{ isActive: activeTrigger }"
@@ -13,7 +13,11 @@
         />
       </svg>
     </div>
-    <div id="dropdown" class="checkbox-select__dropdown" :class="{ activeSearch: showLoader }">
+    <div
+      id="dropdown"
+      class="checkbox-select__dropdown"
+      :class="{ activeSearch: showLoader }"
+    >
       <div class="checkbox-select__search-wrapp">
         <input
           type="text"
@@ -25,10 +29,17 @@
       </div>
       <div class="checkbox-select__col">
         <div class="checkbox-select__select-all" v-model="selectAll">
-          <label for="selectAll">{{selectAllText}}</label>
-          <input type="checkbox" id="selectAll" @click="selectAll" v-model="allSelected" />
+          <label for="selectAll">{{ selectAllText }}</label>
+          <input
+            type="checkbox"
+            id="selectAll"
+            @click="selectAll"
+            v-model="allSelected"
+          />
         </div>
-        <div class="checkbox-select__info">{{checkedFilters.length}} Seleccionados</div>
+        <div class="checkbox-select__info">
+          {{ checkedFilters.length }} Seleccionados
+        </div>
       </div>
       <ul class="checkbox-select__filters-wrapp">
         <li v-for="(filter, index) in filteredList">
@@ -40,7 +51,7 @@
               :value="filter.id"
               type="checkbox"
             />
-            <label :for="index">{{filter.nombre_categoria_producto}}</label>
+            <label :for="index">{{ filter.nombre_categoria_producto }}</label>
           </div>
         </li>
       </ul>
@@ -51,7 +62,7 @@
 <script>
 export default {
   props: ['label'],
-  created: function() {
+  created: function () {
     // const customScroll = new SimpleBar(document.getElementById("customScroll"));
   },
   data() {
@@ -68,7 +79,7 @@ export default {
         'Guest suite',
         'Hostel',
         'Loft',
-        'Villa'
+        'Villa',
       ],
       search: '',
       checkedFilters: [],
@@ -76,7 +87,7 @@ export default {
       selectAllText: 'Marcar Todo',
       activeTrigger: false,
       dropdown: false,
-      showLoader: false
+      showLoader: false,
     }
   },
   computed: {
@@ -84,15 +95,15 @@ export default {
       return this.$store.state.categories
     },
     filteredList() {
-      return this.categories.filter(item => {
+      return this.categories.filter((item) => {
         return item.nombre_categoria_producto
           .toLowerCase()
           .includes(this.search.toLowerCase())
       })
-    }
+    },
   },
   methods: {
-    selectAll: function() {
+    selectAll: function () {
       this.checkedFilters = []
       this.selectAllText =
         this.selectAllText == 'Marcar Todo' ? 'Limpiar Todo' : 'Marcar Todo'
@@ -104,7 +115,7 @@ export default {
         }
       }
     },
-    showDropdown: function() {
+    showDropdown: function () {
       if (this.dropdown == false) {
         this.dropdown = true
         this.activeTrigger = true
@@ -113,12 +124,12 @@ export default {
           0.55,
           {
             autoAlpha: 0,
-            y: -10
+            y: -10,
           },
           {
             autoAlpha: 1,
             y: 0,
-            ease: Power2.easeOut
+            ease: Power2.easeOut,
           }
         )
       } else {
@@ -127,11 +138,11 @@ export default {
         TweenMax.to('#dropdown', 0.2, {
           autoAlpha: 0,
           y: -10,
-          ease: Power2.easeOut
+          ease: Power2.easeOut,
         })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
