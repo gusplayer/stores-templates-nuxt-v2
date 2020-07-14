@@ -65,18 +65,22 @@
             <div class="content-text-price2" v-else></div>
           </div>
           <div class="content-text-price2" v-if="!active">
-            <div
-              v-if="!this.estadoCart && !soldOut"
-              v-on:click="addShoppingCart"
-              class="btn"
-            >
-              <cartArrowDown class="card-icon-cart" />Agregar
+            <div class="content-soldOut" v-if="!this.estadoCart && !soldOut">
+              <router-link
+                :to="{ path: `/template1/productos/` + product.slug }"
+                class="btn"
+                >Ver más</router-link
+              >
+              <div v-on:click="addShoppingCart" class="btn">
+                <cartArrowDown class="card-icon-cart" />Agregar
+              </div>
             </div>
+
             <router-link
               :to="{ path: `/template1/productos/` + product.slug }"
               v-else
               class="btn"
-              >Comprar</router-link
+              >Ver más</router-link
             >
           </div>
         </div>
@@ -410,6 +414,12 @@ div.wrapper-card {
   align-items: center;
   margin-bottom: 15px;
   justify-content: center;
+}
+.content-soldOut {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .card-text {
   font-size: 14px;

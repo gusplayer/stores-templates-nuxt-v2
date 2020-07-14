@@ -262,7 +262,6 @@ div.wrapper-contact {
   flex-direction: row;
   width: 100%;
   max-width: 1300px;
-  justify-content: center;
   align-items: center;
   justify-content: space-between;
   padding: 30px 30px;
