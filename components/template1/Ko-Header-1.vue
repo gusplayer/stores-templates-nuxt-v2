@@ -295,6 +295,7 @@ export default {
       this.add = !this.add
     },
     clear() {
+      this.showMenu = false
       this.$router.push({
         path: `/`,
       })
@@ -307,6 +308,20 @@ export default {
       this.$emit('clear')
       this.addClass()
       this.nameCategory = ''
+    },
+    Searchproduct(search) {
+      if (search.length) {
+        this.$store.commit('products/FILTER_BY', {
+          type: 'search',
+          data: search,
+        })
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: 'all',
+          data: '',
+        })
+      }
+      this.currentPage = 1
     },
   },
   watch: {

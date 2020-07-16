@@ -34,12 +34,9 @@ export default {
       'GET_ANALITICS_TAGMANAGER',
       this.$store.state.dataStore.tienda.id_tienda
     )
-    console.log("ruta completa " + this.fullPathServer)
-
+    console.log('ruta completa ' + this.fullPathServer)
   },
   head() {
-
-
     let tienda = this.$store.state.dataStore.tienda
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
@@ -152,8 +149,8 @@ export default {
     dataStore() {
       return this.$store.state.dataStore
     },
-      fullPathServer() {
-          return this.$store.state.fullPathServer
+    fullPathServer() {
+      return this.$store.state.fullPathServer
     },
     settingBytemplatePrueba() {
       return this.$store.state.settingBytemplatePrueba

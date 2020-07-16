@@ -82,15 +82,10 @@ export default {
 </script>
 
 <style scoped>
-.swiper-container {
-  width: 100%;
-  overflow: hidden;
-  height: 375px;
+.swiper-wrapper {
 }
 .swiper-slide {
   height: 100%;
-  text-align: center;
-  font-size: 18px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -103,14 +98,15 @@ export default {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-
-  width: 375px;
+  max-width: 350px;
+  width: 100%;
 }
 .swiper-slide .photo {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   margin: 0 auto;
+  object-position: center;
 }
 .photos .responsive .swiper-pagination-bullet {
   background-color: rgba(255, 255, 255, 0.5);

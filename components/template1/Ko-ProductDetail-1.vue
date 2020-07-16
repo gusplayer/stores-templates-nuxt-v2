@@ -1044,9 +1044,10 @@ i.close {
   }
   .photos_responsive {
     display: flex;
-    max-width: 360px;
+    box-sizing: border-box;
+    max-width: 400px;
     overflow: hidden;
-    height: 380px;
+    height: 375px;
     width: 100%;
   }
 }
