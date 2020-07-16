@@ -101,8 +101,8 @@
             loading="lazy"
           >
             <cld-transformation
-              width="600"
-              height="600"
+              width="500"
+              height="500"
               crop="lpad"
               quality="auto"
               background="auto:border"
@@ -351,7 +351,6 @@ div.wrapper-card {
   overflow: hidden;
   position: relative;
 }
-
 .card-info-1 {
   position: absolute;
   display: flex;
@@ -387,7 +386,7 @@ div.wrapper-card {
   justify-content: center;
   overflow: hidden;
   width: 100%;
-  max-height: 300px;
+  /* max-height: 300px; */
 }
 .product-image {
   width: 100%;
@@ -589,7 +588,7 @@ div.wrapper-card {
     align-self: center;
   }
   .wrapper-image {
-    min-height: 301px;
+    /* min-height: 301px; */
   }
   .card-info-1 {
     font-size: 15px;
@@ -617,7 +616,7 @@ div.wrapper-card {
     top: 168px;
   }
   .wrapper-image {
-    min-height: 201px;
+    /* min-height: 201px; */
   }
 }
 </style>

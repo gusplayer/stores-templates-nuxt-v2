@@ -700,7 +700,7 @@ div.wrapper-cart {
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #ffffff, var(--color_text));
+  background: linear-gradient(125deg, #e6e6e6, var(--color_text));
   border-radius: 10px;
 }
 .cart_summary_price {

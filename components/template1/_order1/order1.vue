@@ -429,7 +429,7 @@ export default {
   border-radius: 10px;
 }
 .order_products_list::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #ffffff, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
   border-radius: 10px;
 }
 .order_products_list_item {
@@ -450,7 +450,7 @@ export default {
   border-radius: 10px;
 }
 .order_products_list_item::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #ffffff, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
   border-radius: 10px;
 }
 .order_products_list_item .photo {
@@ -556,7 +556,7 @@ export default {
   border-radius: 10px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #ffffff, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
   border-radius: 10px;
 }
 .without_shipping_cost {

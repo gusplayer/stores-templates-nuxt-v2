@@ -107,6 +107,15 @@
 </template>
 
 <script>
+window.addEventListener(
+  'keypress',
+  function (event) {
+    if (event.keyCode == 13) {
+      event.preventDefault()
+    }
+  },
+  false
+)
 import KoOrder from './_order1/order1'
 import KoMenu from './_order1/openMenu'
 
@@ -347,14 +356,14 @@ div.header-container {
 }
 .header-container {
   width: 100%;
-  height: 81px;
+  height: 91px;
   overflow: hidden;
   background: var(--background_color_2);
 }
 .menu-container {
   width: 100%;
   background: var(--background_color_1);
-  top: 81px;
+  top: 91px;
   display: flex;
   transition: all ease 0.6s;
   position: fixed;
@@ -386,7 +395,7 @@ div.header-container {
   justify-content: space-between;
   width: 100%;
   max-width: 1300px;
-  padding: 0 30px 0;
+  padding: 10px 30px 0;
 }
 #menu-collapse {
   display: none;
@@ -417,7 +426,7 @@ div.header-container {
   border-radius: 10px;
 }
 .menu-grid::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #ffffff, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
   border-radius: 10px;
 }
 .subcategoria {
@@ -722,7 +731,7 @@ input::-webkit-input-placeholder {
 }
 @media (max-width: 900px) {
   .header {
-    padding: 0 20px 0;
+    padding: 10px 20px 0;
   }
   .product-img-container {
     display: none;
@@ -783,7 +792,7 @@ input::-webkit-input-placeholder {
     display: none;
   }
   .header {
-    padding: 0 15px 0;
+    padding: 10px 15px 0;
   }
 }
 </style>
