@@ -734,6 +734,9 @@ input:checked ~ .tab-content {
 }
 
 @media (max-width: 768px) {
+  .contenedor {
+    padding: 60px 20px 10px;
+  }
   .top-footer > div {
     margin-right: 30px;
   }
@@ -749,8 +752,9 @@ input:checked ~ .tab-content {
     opacity: 0;
   }
   .contenedor {
-    padding: 20px 30px 10px;
+    padding: 20px 15px 10px;
   }
+
   .modal-content {
     width: 100vw;
     height: 100%;

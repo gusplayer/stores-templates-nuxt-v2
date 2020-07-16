@@ -721,6 +721,9 @@ input::-webkit-input-placeholder {
   color: transparent;
 }
 @media (max-width: 900px) {
+  .header {
+    padding: 0 20px 0;
+  }
   .product-img-container {
     display: none;
   }
@@ -778,6 +781,9 @@ input::-webkit-input-placeholder {
 @media (max-width: 500px) {
   .search {
     display: none;
+  }
+  .header {
+    padding: 0 15px 0;
   }
 }
 </style>
