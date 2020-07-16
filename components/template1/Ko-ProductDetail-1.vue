@@ -17,8 +17,8 @@
                 class="img"
               >
                 <cld-transformation
-                  height="100"
-                  width="100"
+                  height="400"
+                  width="400"
                   radius="5"
                   crop="lpad"
                   quality="auto"
@@ -36,8 +36,8 @@
                 class="img"
               >
                 <cld-transformation
-                  height="100"
-                  width="100"
+                  height="400"
+                  width="300"
                   radius="5"
                   crop="lpad"
                   quality="auto"

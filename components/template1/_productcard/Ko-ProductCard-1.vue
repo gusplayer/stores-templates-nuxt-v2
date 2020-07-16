@@ -21,8 +21,8 @@
             loading="lazy"
           >
             <cld-transformation
-              height="300"
-              width="300"
+              height="700"
+              width="700"
               crop="lpad"
               quality="auto"
               background="auto:border"
@@ -101,8 +101,8 @@
             loading="lazy"
           >
             <cld-transformation
-              width="172"
-              height="200"
+              width="600"
+              height="600"
               crop="lpad"
               quality="auto"
               background="auto:border"

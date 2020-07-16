@@ -347,28 +347,25 @@ div.header-container {
 }
 .header-container {
   width: 100%;
+  height: 81px;
   overflow: hidden;
-  height: 120px;
   background: var(--background_color_2);
 }
 .menu-container {
   width: 100%;
   background: var(--background_color_1);
-  top: 79px;
+  top: 81px;
   display: flex;
-  opacity: 0;
   transition: all ease 0.6s;
   position: fixed;
   height: auto;
   z-index: 4;
 }
 .hidden {
-  top: auto;
   display: none;
 }
 .animated {
   opacity: 1;
-  top: 120px;
 }
 .wrapper-header {
   display: flex;
@@ -389,7 +386,6 @@ div.header-container {
   justify-content: space-between;
   width: 100%;
   max-width: 1300px;
-  min-height: 120px;
   padding: 0 30px 0;
 }
 #menu-collapse {
@@ -463,13 +459,14 @@ div.header-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2px 0px;
 }
 .wrapper-logo {
-  width: var(--logo_width);
+  width: 100%;
 }
 .header-logo {
-  width: 100%;
-  max-height: 115px;
+  /* width: 100%; */
+  max-height: 70px;
   object-fit: contain;
   object-position: left;
 }
