@@ -107,15 +107,6 @@
 </template>
 
 <script>
-window.addEventListener(
-  'keypress',
-  function (event) {
-    if (event.keyCode == 13) {
-      event.preventDefault()
-    }
-  },
-  false
-)
 import KoOrder from './_order1/order1'
 import KoMenu from './_order1/openMenu'
 
