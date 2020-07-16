@@ -36,12 +36,12 @@ export default {
       if (prevScrollpos > currentScrollPos) {
         // document.getElementById('navbar').style.left = '0px'
         document.getElementById('navbar').style.zIndex = '3'
-        document.getElementById('navbar').style.top = '122px'
+        document.getElementById('navbar').style.top = '81px'
         // document.getElementById('navbar').style.opacity = '1'
       } else {
         // document.getElementById('navbar').style.left = '-400px'
         document.getElementById('navbar').style.zIndex = '0'
-        document.getElementById('navbar').style.top = '80px'
+        document.getElementById('navbar').style.top = '0px'
         // document.getElementById('navbar').style.opacity = '0'
       }
       prevScrollpos = currentScrollPos
