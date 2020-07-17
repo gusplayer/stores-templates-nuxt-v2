@@ -29,9 +29,7 @@
             />
             <cld-transformation v-if="soldOut" effect="grayscale" />
           </cld-image>
-          <p class="card-info-1" v-if="soldOut">
-            Agotado !
-          </p>
+          <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
           </p>
@@ -51,7 +49,7 @@
                 <div>
                   <!-- <p class="card-price-1" v-if="this.product.precio > 0">
                     $ {{ this.product.precio }}
-                  </p> -->
+                  </p>-->
                   <p
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
@@ -65,7 +63,10 @@
             <div class="content-text-price2" v-else></div>
           </div>
           <div class="content-text-price2" v-if="!active">
-            <div class="content-soldOut" v-if="!this.estadoCart && !soldOut">
+            <div
+              class="content-soldOut"
+              v-if="!this.estadoCart && !soldOut && !spent"
+            >
               <router-link
                 :to="{ path: `/template1/productos/` + product.slug }"
                 class="btn"
@@ -109,9 +110,7 @@
             />
             <cld-transformation v-if="soldOut" effect="grayscale" />
           </cld-image>
-          <p class="card-info-1" v-if="soldOut">
-            Agotado !
-          </p>
+          <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
           </p>
@@ -128,10 +127,7 @@
               {{ `${this.product.nombre.slice(0, 25)}` }}
             </p>
           </router-link>
-          <div
-            class="content-text-price-movil-cart"
-            v-if="this.product.precio && !this.estadoCart"
-          >
+          <div class="content-text-price-movil-cart" v-if="this.product.precio">
             <router-link
               :to="{ path: `/template1/productos/` + product.slug }"
               class="wrapper-price"
@@ -139,40 +135,23 @@
               <div>
                 <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
-                </p> -->
+                </p>-->
                 <p class="card-price-2" v-if="this.product.precio > 0">
                   {{ currency(this.product.precio) }}
                 </p>
               </div>
               <!-- <p class="card-descuento">-50%</p> -->
             </router-link>
-            <cartArrowDown
-              v-if="!this.estadoCart && !soldOut"
-              class="card-icon-cart-movil"
-              v-on:click="addShoppingCart"
-            />
-          </div>
-          <router-link
-            :to="{ path: `/template1/productos/` + product.slug }"
-            class="content-text-price-movil"
-            v-else-if="this.product.precio && this.estadoCart"
-          >
-            <div class="wrapper-price">
-              <div>
-                <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
-                  $ {{ this.product.precio }}
-                </p> -->
-                <p class="card-price-2" v-if="this.product.precio > 0">
-                  {{ currency(this.product.precio) }}
-                </p>
-              </div>
-              <!-- <p class="card-descuento">-50%</p> -->
-            </div>
-          </router-link>
-          <div class="separator-movil" v-else>
-            <div class="content-card">
+            <div v-if="!this.estadoCart && !soldOut && !spent">
               <cartArrowDown
-                v-if="!this.estadoCart && !soldOut"
+                class="card-icon-cart-movil"
+                v-on:click="addShoppingCart"
+              />
+            </div>
+          </div>
+          <div class="separator-movil" v-else>
+            <div v-if="!this.estadoCart && !soldOut && !spent">
+              <cartArrowDown
                 class="card-icon-cart-movil"
                 v-on:click="addShoppingCart"
               />
@@ -197,7 +176,7 @@ export default {
     return {
       estadoCart: false,
       idSlug: '',
-      maxQuantityValue: 1,
+      maxQuantityValue: 0,
       productIndexCart: null,
       productCart: {},
       salesData: null,
@@ -206,6 +185,9 @@ export default {
     }
   },
   computed: {
+    productsCarts() {
+      return this.$store.state.productsCart
+    },
     getFreeShipping() {
       let free = true
       if (this.rangosByCiudad.envio_metodo === 'gratis') {
@@ -260,17 +242,18 @@ export default {
         estado: true,
       }
       this.maxQuantityValue = this.product.stock
-      for (const [
-        index,
-        productCart,
-      ] of this.$store.state.productsCart.entries()) {
-        if (this.product.id == productCart.id) {
+      this.productsCarts.find((productCart, index) => {
+        if (productCart.id == this.product.id) {
           this.productIndexCart = index
           this.productCart = productCart
           this.maxQuantityValue = this.product.stock - productCart.cantidad
         }
-      }
-      if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
+      })
+      if (
+        this.salesData.unidades == 0 ||
+        this.maxQuantityValue <= 0 ||
+        this.maxQuantityValue == 0
+      ) {
         this.spent = true
       }
     },
@@ -291,6 +274,7 @@ export default {
           } else {
             product.limitQuantity = this.product.stock
           }
+
           if (typeof this.productIndexCart === 'number') {
             const mutableProduct = this.$store.state.productsCart[
               this.productIndexCart
@@ -313,8 +297,8 @@ export default {
     },
   },
   watch: {
-    getCombinaciones(value) {
-      return value
+    productsCarts(value) {
+      this.getDataProduct()
     },
   },
 }
@@ -580,8 +564,6 @@ div.wrapper-card {
   .separator-movil {
     width: 100%;
     height: 40px;
-  }
-  .content-card {
     margin-top: 5px;
     display: flex;
     justify-content: center;
