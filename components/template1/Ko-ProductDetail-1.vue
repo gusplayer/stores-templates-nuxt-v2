@@ -1061,6 +1061,11 @@ i.close {
   .section {
     flex-direction: column;
   }
+  .wrapper-left {
+    margin-right: 0px;
+    justify-content: center;
+    align-items: center;
+  }
   .wrapper-right {
     padding-bottom: 2px;
     border-left: 0px;

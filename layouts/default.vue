@@ -30,11 +30,11 @@ export default {
       'GET_SETTINGS_BY_TEMPLATE',
       this.$store.state.dataStore.tienda.id_tienda
     )
-    this.$store.dispatch(
-      'GET_ANALITICS_TAGMANAGER',
-      this.$store.state.dataStore.tienda.id_tienda
-    )
-    console.log('ruta completa ' + this.fullPathServer)
+    // this.$store.dispatch(
+    //   'GET_ANALYTICS_TAGMANAGER',
+    //   this.$store.state.dataStore.tienda.id_tienda
+    // )
+    // console.log('ruta completa ' + this.fullPathServer)
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
@@ -128,9 +128,9 @@ export default {
           src:
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
-        {
-          src: `https://www.googletagmanager.com/gtag/js?id=${this.analytics_tagmanager.analytics}`,
-        },
+        // {
+        //   src: `https://www.googletagmanager.com/gtag/js?id=${this.analytics_tagmanager.analytics}`,
+        // },
       ],
       link: [
         {
@@ -155,9 +155,9 @@ export default {
     settingBytemplatePrueba() {
       return this.$store.state.settingBytemplatePrueba
     },
-    analytics_tagmanager() {
-      return this.$store.state.analytics_tagmanager
-    },
+    // analytics_tagmanager() {
+    //   return this.$store.state.analytics_tagmanager
+    // },
   },
   methods: {
     mobileCheck() {

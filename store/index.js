@@ -365,7 +365,7 @@ export const mutations = {
   SET_SETTINGS_BY_TEMPLATE: (state, value) => {
     state.settingByTemplate = value
   },
-  SET_ANALITICS_TAGMANAGER: (state, value) => {
+  SET_ANALYTICS_TAGMANAGER: (state, value) => {
     state.analytics_tagmanager = value
   },
   SET_STORELAYOUT: (state) => {
@@ -488,7 +488,7 @@ export const actions = {
         commit('SET_SETTINGS_BY_TEMPLATE', response.data)
       })
   },
-  GET_ANALITICS_TAGMANAGER({ commit }, id) {
+  GET_ANALYTICS_TAGMANAGER({ commit }, id) {
     this.$axios
       .$get(`https://api2.komercia.co/api/apis/tienda/${id}`)
       .then((response) => {
