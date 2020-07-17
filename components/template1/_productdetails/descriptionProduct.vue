@@ -51,7 +51,7 @@
             </p>
             <img
               class="logo-pasarela"
-              src="http://template.komercia.co/template3/img/mercadopago.png"
+              src="../../../assets/img/mercadopago.png"
               alt="logo mercado pago"
             />
             <img

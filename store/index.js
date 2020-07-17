@@ -458,7 +458,7 @@ export const actions = {
     // commit('SELECT_CARD', storeLayout.data.setting.card || 'koProductCard1')
   },
   GET_SERVER_PATH({ state, commit }, value) {
-    console.log('my value ' + value)
+    // console.log('my value ' + value)
     commit('SET_SERVER_PATH', value)
     // state.fullPathServer = value
   },

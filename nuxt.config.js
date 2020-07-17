@@ -55,7 +55,6 @@ export default {
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
-    // { src: '~/plugins/google-analytics.js', ssr: false },
   ],
   /*
    ** Nuxt.js dev-modules
@@ -84,21 +83,6 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
-  // resolve: {
-  //   root: [
-  //     path.resolve('.'),
-  //     path.resolve('../core-components-npm/src/components'),
-  //   ],
-  // },
-  // build: {
-  //   transpile: ['vee-validate/dist/rules'],
-  //   extend(config, ctx) {
-  //     if (ctx.isDev) {
-  //       config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-  //     }
-  //   },
-  // },
-  // buildDir: '_nuxt',
   build: {
     publicPath: '/_nuxt/client/',
     // transpile: ['vue-instantsearch', 'instantsearch.js/es'],
@@ -109,21 +93,6 @@ export default {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
-
-      // extend(config, ctx) {
-      // }
-      // Run ESLint on save
-      // if (ctx.isDev && ctx.isClient) {
-      //   config.module.rules.push({
-      //     enforce: 'pre',
-      //     test: /\.(js|vue)$/,
-      //     loader: 'eslint-loader',
-      //     exclude: /(node_modules)/,
-      //     options: {
-      //       fix: true,
-      //     },
-      //   })
-      // }
     },
   },
   router: {

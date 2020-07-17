@@ -5,15 +5,14 @@
         <cld-image
           cloudName="komercia-store"
           :publicId="getIdCloudinary(setPhoto(photo))"
-          dpr="auto"
           responsive="width"
-          width="350"
-          height="375"
+          dpr="auto"
+          width="375"
           crop="scale"
           class="photo"
         >
           <cld-transformation
-            width="350"
+            width="400"
             height="400"
             crop="lpad"
             quality="auto"
@@ -98,7 +97,7 @@ export default {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-  max-width: 350px;
+  max-width: 360px;
   width: 100%;
 }
 .swiper-slide .photo {
