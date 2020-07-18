@@ -55,16 +55,8 @@
               </div>
               <div v-if="productsCart.length" class="content-remove-cart">
                 <p class="remove-cart" @click="remove = !remove">
-                  Borrar todos los articulos del carrito
+                  Limpiar carrito de compras
                 </p>
-                <div class="content-btn-remove" v-if="remove">
-                  <button @click="remove = !remove" class="btn-remover-no">
-                    No
-                  </button>
-                  <button class="btn-remover-yes" @click="removeCartItems">
-                    Si
-                  </button>
-                </div>
               </div>
               <template v-if="productsCart.length">
                 <div class="order_total">
@@ -158,6 +150,21 @@
             </div>
           </template>
         </transition>
+      </div>
+      <div class="wrapper-items-remove" v-if="remove">
+        <div class="content-items-remove">
+          <p class="text-remove">
+            ¿Realmente quiere eliminar todos los productos del carrito?
+          </p>
+          <div class="content-btn-remove">
+            <button @click="remove = !remove" class="btn-remover-no">
+              No
+            </button>
+            <button class="btn-remover-yes" @click="removeCartItems">
+              Si
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </transition>
@@ -266,6 +273,8 @@ export default {
       this.$store.commit('UPDATE_CONTENTCART')
     },
     removeCartItems() {
+      this.remove = false
+      location.reload(true)
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     },
@@ -559,14 +568,43 @@ export default {
 .remove-cart:hover {
   color: var(--btnhover);
 }
+.wrapper-items-remove {
+  position: absolute;
+  height: calc(100vh);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+.content-items-remove {
+  width: 100%;
+  margin: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+.text-remove {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: var(--color_text);
+  font-weight: 300;
+  font-size: 16px;
+}
 .content-btn-remove {
   width: 100%;
-  padding: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border-bottom: 1px solid var(--background_color_2);
+  margin-bottom: 20px;
 }
 .btn-remover-yes {
   font-weight: bold;

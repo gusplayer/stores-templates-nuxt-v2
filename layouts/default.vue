@@ -38,7 +38,6 @@ export default {
       this.$store.commit('UPDATE_CONTENTCART')
     }
 
-    // https://stillnew.komercia.store/?clearCart=true
     // this.$store.dispatch(
     //   'GET_ANALYTICS_TAGMANAGER',
     //   this.$store.state.dataStore.tienda.id_tienda
