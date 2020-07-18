@@ -55,7 +55,7 @@
               </div>
               <div v-if="productsCart.length" class="content-remove-cart">
                 <p class="remove-cart" @click="remove = !remove">
-                  Limpiar carrito de compras
+                  Vaciar carrito de compras
                 </p>
               </div>
               <template v-if="productsCart.length">
