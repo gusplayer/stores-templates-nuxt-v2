@@ -30,6 +30,15 @@ export default {
       'GET_SETTINGS_BY_TEMPLATE',
       this.$store.state.dataStore.tienda.id_tienda
     )
+
+    let domain = this.$route.fullPath
+    if (domain == '/?clearCart=true') {
+      // console.log(domain, 'borrar carrito')
+      this.$store.commit('DELETEALLITEMSCART')
+      this.$store.commit('UPDATE_CONTENTCART')
+    }
+
+    // https://stillnew.komercia.store/?clearCart=true
     // this.$store.dispatch(
     //   'GET_ANALYTICS_TAGMANAGER',
     //   this.$store.state.dataStore.tienda.id_tienda

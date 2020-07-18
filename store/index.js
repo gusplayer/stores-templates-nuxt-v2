@@ -244,6 +244,9 @@ export const mutations = {
   DELETEITEMCART: (state, index) => {
     state.productsCart.splice(index, 1)
   },
+  DELETEALLITEMSCART: (state, index) => {
+    state.productsCart = []
+  },
   SET_SAVEOPTION: (state, payload) => {
     state.beforeCombination.splice(payload.index, 1, payload.option.option)
   },

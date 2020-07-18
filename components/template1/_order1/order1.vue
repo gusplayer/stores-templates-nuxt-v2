@@ -53,6 +53,19 @@
                   </li>
                 </ul>
               </div>
+              <div v-if="productsCart.length" class="content-remove-cart">
+                <p class="remove-cart" @click="remove = !remove">
+                  Borrar todos los articulos del carrito
+                </p>
+                <div class="content-btn-remove" v-if="remove">
+                  <button @click="remove = !remove" class="btn-remover-no">
+                    No
+                  </button>
+                  <button class="btn-remover-yes" @click="removeCartItems">
+                    Si
+                  </button>
+                </div>
+              </div>
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
@@ -169,6 +182,7 @@ export default {
 
       shippingCities: [],
       rangosByCiudades: [],
+      remove: false,
     }
   },
   computed: {
@@ -249,6 +263,10 @@ export default {
     },
     deleteItemCart(i) {
       this.$store.commit('DELETEITEMCART', i)
+      this.$store.commit('UPDATE_CONTENTCART')
+    },
+    removeCartItems() {
+      this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     },
     closeOrder(event) {
@@ -522,6 +540,72 @@ export default {
 .order_freeshipping p,
 .order_freeshipping p strong {
   color: var(--color_text);
+}
+.content-remove-cart {
+  width: 100%;
+  padding: 0 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.remove-cart {
+  color: var(--color_text);
+  font-weight: 300;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+.remove-cart:hover {
+  color: var(--btnhover);
+}
+.content-btn-remove {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid var(--background_color_2);
+}
+.btn-remover-yes {
+  font-weight: bold;
+  border-style: none;
+  background-color: var(--color_shopping_cart);
+  padding: 4px 10px;
+  width: 100%;
+  max-width: 70px;
+  color: var(--color_text_btn);
+  border: 2px solid var(--color_shopping_cart);
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+  transition: all ease 0.3s;
+}
+.btn-remover-yes:hover {
+  background-color: var(--btnhover);
+  color: var(--color_text_btn);
+  border: 2px solid var(--btnhover);
+}
+.btn-remover-no {
+  font-weight: bold;
+  border-style: none;
+  background-color: transparent;
+  padding: 4px 10px;
+  width: 100%;
+  max-width: 80px;
+  color: var(--btnhover);
+  border: 2px solid var(--btnhover);
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+  transition: all ease 0.3s;
+}
+.btn-remover-no:hover {
+  color: var(--color_shopping_cart);
+  border: 2px solid var(--color_shopping_cart);
 }
 .order_total {
   border-top: 1px solid var(--background_color_2);
