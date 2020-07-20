@@ -2,21 +2,22 @@
   <div class="wrapper-productlist">
     <div class="container">
       <div class="content-title">
-        <p class="title">Productos</p>
+        <!-- <p class="title">Productos</p> -->
       </div>
+      <br />
+
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
-          <p class="text-categorias" @click="clear">Categorías</p>
+          <p class="text-categorias" @click="clear">Catálogo</p>
           <p
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >
-            / {{ this.nameCategoryHeader }}
-          </p>
-          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            / {{ this.nameSubCategoryHeader }}
-          </p>
+          >/ {{ this.nameCategoryHeader }}</p>
+          <p
+            class="text-categorias-select"
+            v-if="this.nameSubCategoryHeader"
+          >/ {{ this.nameSubCategoryHeader }}</p>
         </div>
         <!-- <div class="search">
           <div>
@@ -27,14 +28,14 @@
               required
             />
           </div>
-        </div> -->
+        </div>-->
       </div>
       <div class="top-right">
         <div class="content-item-top">
           <ul>
             <li class="dropdown">
               <div class="content-filtrar">
-                <a class="dropbtn">Categorías </a>
+                <a class="dropbtn">Categorías</a>
                 <Flechadown-icon class="header-icon-menu" />
               </div>
               <div class="dropdown-content">
@@ -64,9 +65,7 @@
                               (ref = false)
                             )
                           "
-                        >
-                          {{ categoria.nombre_categoria_producto }}
-                        </p>
+                        >{{ categoria.nombre_categoria_producto }}</p>
                         <div
                           :style="indexCategory == index ? '' : 'display: none'"
                           class="content-item-subcategorie"
@@ -81,15 +80,10 @@
                             "
                             :key="subcategory.id"
                           >
-                            <p class="item-subcategorie">
-                              {{ subcategory.nombre_subcategoria }}
-                            </p>
+                            <p class="item-subcategorie">{{ subcategory.nombre_subcategoria }}</p>
                           </li>
                         </div>
-                        <div
-                          :class="{ popover: sub == index }"
-                          v-if="sub == index"
-                        ></div>
+                        <div :class="{ popover: sub == index }" v-if="sub == index"></div>
                       </label>
                     </li>
                   </ul>
@@ -99,12 +93,7 @@
           </ul>
           <div class="search">
             <div>
-              <input
-                v-model="search"
-                type="text"
-                placeholder="Buscar . . ."
-                required
-              />
+              <input v-model="search" type="text" placeholder="Buscar . . ." required />
             </div>
           </div>
         </div>
@@ -112,21 +101,12 @@
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
-            <div
-              v-for="product in filterProduct"
-              :key="product.id"
-              class="content-products"
-            >
+            <div v-for="product in filterProduct" :key="product.id" class="content-products">
               <KoProductCard1 :product="product"></KoProductCard1>
             </div>
           </div>
-          <div
-            v-if="(this.fullProducts.length == 0)"
-            class="content-products-empty"
-          >
-            <p>
-              No se encontraron productos relacionados.
-            </p>
+          <div v-if="(this.fullProducts.length == 0)" class="content-products-empty">
+            <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
             <div class="product_pagination" v-if="products.length > 24">

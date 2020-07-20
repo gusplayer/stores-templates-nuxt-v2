@@ -3,7 +3,7 @@
     <div class="container">
       <div class="wrapper" v-on:mouseenter="active = false" v-on:mouseleave="active = true">
         <router-link :to="{ path: `/template1/productos/` + product.slug }" class="wrapper-image">
-          <img :src="idCloudinary(this.product.foto_cloudinary, 700, 700)" class="product-image" />
+          <img :src="idCloudinary(this.product.foto_cloudinary, 400, 400)" class="product-image" />
           <!-- <cld-image
             cloudName="komercia-store"
             :publicId="getIdCloudinary(this.product.foto_cloudinary)"
@@ -30,9 +30,9 @@
           <div class="content-name-product">
             <p
               class="card-text"
-              v-if="this.product.nombre.length >= 25"
-            >{{ `${this.product.nombre.slice(0, 25)}...` }}</p>
-            <p class="card-text" v-else>{{ `${this.product.nombre.slice(0, 25)}` }}</p>
+              v-if="this.product.nombre.length >= 55"
+            >{{ `${this.product.nombre.slice(0, 55)}...` }}</p>
+            <p class="card-text" v-else>{{ `${this.product.nombre.slice(0, 55)}` }}</p>
           </div>
           <div v-if="active">
             <div class="content-text-price" v-if="this.product.precio">
@@ -72,6 +72,7 @@
       </div>
       <div class="wrapper-movil">
         <router-link :to="{ path: `/template1/productos/` + product.slug }" class="wrapper-image">
+          <img :src="idCloudinary(this.product.foto_cloudinary, 200, 200)" class="product-image" />
           <!-- <cld-image
             cloudName="komercia-store"
             :publicId="getIdCloudinary(this.product.foto_cloudinary)"
@@ -101,9 +102,9 @@
           >
             <p
               class="card-text-movil"
-              v-if="this.product.nombre.length >= 25"
-            >{{ `${this.product.nombre.slice(0, 25)}...` }}</p>
-            <p class="card-text-movil" v-else>{{ `${this.product.nombre.slice(0, 25)}` }}</p>
+              v-if="this.product.nombre.length >= 33"
+            >{{ `${this.product.nombre.slice(0, 33)}..` }}</p>
+            <p class="card-text-movil" v-else>{{ `${this.product.nombre.slice(0, 34)}` }}</p>
           </router-link>
           <div class="content-text-price-movil-cart" v-if="this.product.precio">
             <router-link
@@ -347,8 +348,9 @@ div.wrapper-card {
 }
 .product-image {
   width: 100%;
-  height: 260px;
-  object-fit: contain;
+  height: 298.5px;
+  /* object-fit: contain; */
+  object-fit: cover;
   overflow: hidden;
 }
 .wrapper-text {
@@ -381,16 +383,18 @@ div.wrapper-card {
   font-size: 14px;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1;
-  letter-spacing: 1.2px;
+  line-height: 1.3;
+  text-align: center;
+  /* letter-spacing: 1px; */
   color: var(--color_text);
   font-weight: 400;
 }
 .content-name-product {
   display: flex;
   width: 100%;
+  height: 40px;
   padding: 0px 20px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   margin-top: 10px;
   justify-content: center;
   align-items: center;
@@ -493,18 +497,18 @@ div.wrapper-card {
   .content-name-product-movil {
     display: flex;
     width: 100%;
-    padding: 0px 20px;
+    padding: 0px 10px;
     margin-top: 10px;
     justify-content: center;
     align-items: center;
-    height: 40px;
+    height: 30px;
   }
   .card-text-movil {
-    font-size: 14px;
+    font-size: 13px;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1;
-    letter-spacing: 1.2px;
+    line-height: 1.3;
+    letter-spacing: 0.2px;
     color: var(--color_text);
     font-weight: 400;
     text-align: center;
@@ -552,6 +556,13 @@ div.wrapper-card {
   .card-info-2 {
     font-size: 15px;
     top: 235px;
+  }
+  .product-image {
+    width: 100%;
+    height: 160px;
+    /* object-fit: contain; */
+    object-fit: cover;
+    overflow: hidden;
   }
 }
 @media (max-width: 450px) {

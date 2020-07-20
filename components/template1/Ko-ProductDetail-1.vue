@@ -6,7 +6,21 @@
         <div class="wrapper-left">
           <div class="photos">
             <div class="photos_selected">
-              <cld-image
+              <img
+                @mouseover.native="
+                  selectedPhoto(data.detalle.foto_cloudinary)
+                "
+                class="img-list"
+                :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
+              />
+              <img
+                v-for="(foto, itemsfoto) in data.fotos"
+                :key="itemsfoto"
+                @mouseover.native="selectedPhoto(foto.foto_cloudinary)"
+                class="img-list"
+                :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
+              />
+              <!-- <cld-image
                 cloudName="komercia-store"
                 :publicId="getIdCloudinary(data.detalle.foto_cloudinary)"
                 width="100"
@@ -43,7 +57,7 @@
                   quality="auto"
                   background="auto:border"
                 />
-              </cld-image>
+              </cld-image>-->
 
               <img
                 v-if="idYoutube"
@@ -56,7 +70,13 @@
           </div>
           <div class="wrapper-photo_main">
             <div v-if="active" v-show="!existYoutube" class="photo_main">
-              <cld-image
+              <img
+                class="photo_main"
+                v-on:mouseover.native="active = !active"
+                :src="idCloudinary(selectPhotoUrl, 645, 430)"
+              />
+
+              <!-- <cld-image
                 cloudName="komercia-store"
                 v-on:mouseover.native="active = !active"
                 :publicId="getIdCloudinary(selectPhotoUrl)"
@@ -75,7 +95,7 @@
                   quality="auto"
                   background="auto:border"
                 />
-              </cld-image>
+              </cld-image>-->
             </div>
             <div v-if="!active" v-show="!existYoutube" class="photo_main">
               <cld-image
@@ -84,8 +104,8 @@
                 :publicId="getIdCloudinary(selectPhotoUrl)"
                 dpr="auto"
                 responsive="width"
-                width="645"
-                height="430"
+                width="845"
+                height="400"
                 gravity="face"
                 crop="crop"
                 class="photo_main"
@@ -237,8 +257,11 @@ import productSlide from './_productdetails/productSlide.vue'
 import selectGroup from './_productdetails/selectGroup'
 import koWhatsapp from './_productdetails/whatsapp'
 import koDescription from './_productdetails/descriptionProduct.vue'
+import idCloudinary from '../../mixins/idCloudinary'
+
 
 export default {
+  mixins: [idCloudinary],
   name: 'koProduct1',
   components: {
     koWhatsapp,
@@ -703,12 +726,16 @@ div.wrapper-productDetail {
   flex-direction: column;
   justify-content: stretch;
 }
-.img {
+.img-list {
   cursor: pointer;
-}
-img {
   vertical-align: top;
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
+
 .video {
   width: 100px;
   height: 100px;
@@ -1025,6 +1052,7 @@ i.close {
     display: flex;
     box-sizing: border-box;
     overflow: hidden;
+    margin-bottom: 10px;
   }
 }
 
