@@ -241,14 +241,13 @@ export default {
             cantidad: 1,
             foto_cloudinary: this.product.foto_cloudinary,
             nombre: this.product.nombre,
-            combinacion: '',
+            combinacion: undefined,
           }
           if (this.salesData) {
             product.limitQuantity = this.product.stock
           } else {
             product.limitQuantity = this.product.stock
           }
-
           if (typeof this.productIndexCart === 'number') {
             const mutableProduct = this.$store.state.productsCart[
               this.productIndexCart
