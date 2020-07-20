@@ -90,11 +90,7 @@
                 crop="crop"
                 class="photo_main"
               >
-                <cld-transformation
-                  radius="5"
-                  quality="auto"
-                  background="auto:border"
-                />
+                <cld-transformation radius="5" quality="auto" background="auto:border" />
               </cld-image>
             </div>
 
@@ -122,11 +118,9 @@
             </p>
             <!-- <p class="text-promocion" v-show="salesData.precio">
               ${{ salesData.precio | currency }}
-            </p> -->
+            </p>-->
             <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">
-                ${{ salesData.precio | currency }}
-              </p>
+              <p class="text-precio" v-show="salesData.precio">${{ salesData.precio | currency }}</p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
             <!-- <div
@@ -137,7 +131,7 @@
                 class="text-desc"
                 v-html="`${data.info.descripcion.slice(0, 99)}`"
               ></p>
-            </div> -->
+            </div>-->
             <div class="content_buy_action">
               <div v-if="envio.titulo == 'Envío gratis'">
                 <p class="card-info-2">Envío gratis !</p>
@@ -154,8 +148,7 @@
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
-                    >{{ item.option }}</option
-                  >
+                  >{{ item.option }}</option>
                 </selectGroup>
               </div>
             </div>
@@ -171,10 +164,7 @@
                     <mas-icon class="icon" />
                   </button>
 
-                  <div
-                    class="container-alerta"
-                    v-if="this.maxQuantityValue == this.quantityValue"
-                  >
+                  <div class="container-alerta" v-if="this.maxQuantityValue == this.quantityValue">
                     <span class="alerta">última Unidad!</span>
                   </div>
                 </div>
@@ -186,21 +176,19 @@
                   <!-- <div v-if="salesData.unidades" class="content_buy_action">
                     <p class="text-unidades">Unidades disponibles:</p>
                     <p class="text-garantia">{{ salesData.unidades }}</p>
-                  </div> -->
+                  </div>-->
                   <div class="content-button">
                     <button
                       ref="colorBtn"
                       class="btn"
                       v-if="!spent"
                       v-on:click="addShoppingCart"
-                    >
-                      Comprar
-                    </button>
+                    >Comprar</button>
                     <!-- <ko-whatsapp
                       v-if="whatsapp"
                       class="whatsapp"
                       @click.native="redirectWhatsapp()"
-                    /> -->
+                    />-->
                   </div>
                 </div>
               </div>
@@ -210,11 +198,7 @@
       </div>
       <div class="section">
         <div class="features">
-          <ko-description
-            :dataStore="dataStore"
-            :data="data"
-            :envio="envio"
-          ></ko-description>
+          <ko-description :dataStore="dataStore" :data="data" :envio="envio"></ko-description>
         </div>
       </div>
       <div class="responsive-purchase">
@@ -228,10 +212,7 @@
               <mas-icon class="icon" />
             </button>
             <transition name="slide-fade">
-              <div
-                class="container-alert"
-                v-show="quantityValue == maxQuantityValue"
-              >
+              <div class="container-alert" v-show="quantityValue == maxQuantityValue">
                 <span class="alert">última Unidad!</span>
               </div>
             </transition>
@@ -240,12 +221,7 @@
             <div class="content_buy_action-responsive" v-if="spent">
               <p class="card-info-1-res">Agotado !</p>
             </div>
-            <button
-              class="btn-responsive"
-              ref="color2"
-              v-if="!spent"
-              v-on:click="addShoppingCart"
-            >
+            <button class="btn-responsive" ref="color2" v-if="!spent" v-on:click="addShoppingCart">
               <cartArrowDown class="card-icon-cart" />Agregar
             </button>
           </div>

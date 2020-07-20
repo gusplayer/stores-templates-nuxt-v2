@@ -1,16 +1,10 @@
 <template>
   <div class="wrapper-card">
     <div class="container">
-      <div
-        class="wrapper"
-        v-on:mouseenter="active = false"
-        v-on:mouseleave="active = true"
-      >
-        <router-link
-          :to="{ path: `/template1/productos/` + product.slug }"
-          class="wrapper-image"
-        >
-          <cld-image
+      <div class="wrapper" v-on:mouseenter="active = false" v-on:mouseleave="active = true">
+        <router-link :to="{ path: `/template1/productos/` + product.slug }" class="wrapper-image">
+          <img :src="idCloudinary(this.product.foto_cloudinary, 700, 700)" class="product-image" />
+          <!-- <cld-image
             cloudName="komercia-store"
             :publicId="getIdCloudinary(this.product.foto_cloudinary)"
             height="300"
@@ -28,20 +22,17 @@
               background="auto:border"
             />
             <cld-transformation v-if="soldOut" effect="grayscale" />
-          </cld-image>
+          </cld-image>-->
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
-          <p class="card-info-2" v-if="getFreeShipping == false">
-            Envío gratis !
-          </p>
+          <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis !</p>
         </router-link>
         <div class="wrapper-text">
           <div class="content-name-product">
-            <p class="card-text" v-if="this.product.nombre.length >= 25">
-              {{ `${this.product.nombre.slice(0, 25)}...` }}
-            </p>
-            <p class="card-text" v-else>
-              {{ `${this.product.nombre.slice(0, 25)}` }}
-            </p>
+            <p
+              class="card-text"
+              v-if="this.product.nombre.length >= 25"
+            >{{ `${this.product.nombre.slice(0, 25)}...` }}</p>
+            <p class="card-text" v-else>{{ `${this.product.nombre.slice(0, 25)}` }}</p>
           </div>
           <div v-if="active">
             <div class="content-text-price" v-if="this.product.precio">
@@ -53,9 +44,7 @@
                   <p
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
-                  >
-                    {{ currency(this.product.precio) }}
-                  </p>
+                  >{{ currency(this.product.precio) }}</p>
                 </div>
                 <!-- <p class="card-descuento">-50%</p> -->
               </div>
@@ -63,15 +52,11 @@
             <div class="content-text-price2" v-else></div>
           </div>
           <div class="content-text-price2" v-if="!active">
-            <div
-              class="content-soldOut"
-              v-if="!this.estadoCart && !soldOut && !spent"
-            >
+            <div class="content-soldOut" v-if="!this.estadoCart && !soldOut && !spent">
               <router-link
                 :to="{ path: `/template1/productos/` + product.slug }"
                 class="btn"
-                >Ver más</router-link
-              >
+              >Ver más</router-link>
               <div v-on:click="addShoppingCart" class="btn">
                 <cartArrowDown class="card-icon-cart" />Agregar
               </div>
@@ -81,17 +66,13 @@
               :to="{ path: `/template1/productos/` + product.slug }"
               v-else
               class="btn"
-              >Ver más</router-link
-            >
+            >Ver más</router-link>
           </div>
         </div>
       </div>
       <div class="wrapper-movil">
-        <router-link
-          :to="{ path: `/template1/productos/` + product.slug }"
-          class="wrapper-image"
-        >
-          <cld-image
+        <router-link :to="{ path: `/template1/productos/` + product.slug }" class="wrapper-image">
+          <!-- <cld-image
             cloudName="komercia-store"
             :publicId="getIdCloudinary(this.product.foto_cloudinary)"
             dpr="auto"
@@ -109,23 +90,20 @@
               background="auto:border"
             />
             <cld-transformation v-if="soldOut" effect="grayscale" />
-          </cld-image>
+          </cld-image>-->
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
-          <p class="card-info-2" v-if="getFreeShipping == false">
-            Envío gratis !
-          </p>
+          <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis !</p>
         </router-link>
         <div class="wrapper-text">
           <router-link
             :to="{ path: `/template1/productos/` + product.slug }"
             class="content-name-product-movil"
           >
-            <p class="card-text-movil" v-if="this.product.nombre.length >= 25">
-              {{ `${this.product.nombre.slice(0, 25)}...` }}
-            </p>
-            <p class="card-text-movil" v-else>
-              {{ `${this.product.nombre.slice(0, 25)}` }}
-            </p>
+            <p
+              class="card-text-movil"
+              v-if="this.product.nombre.length >= 25"
+            >{{ `${this.product.nombre.slice(0, 25)}...` }}</p>
+            <p class="card-text-movil" v-else>{{ `${this.product.nombre.slice(0, 25)}` }}</p>
           </router-link>
           <div class="content-text-price-movil-cart" v-if="this.product.precio">
             <router-link
@@ -136,25 +114,20 @@
                 <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
                 </p>-->
-                <p class="card-price-2" v-if="this.product.precio > 0">
-                  {{ currency(this.product.precio) }}
-                </p>
+                <p
+                  class="card-price-2"
+                  v-if="this.product.precio > 0"
+                >{{ currency(this.product.precio) }}</p>
               </div>
               <!-- <p class="card-descuento">-50%</p> -->
             </router-link>
             <div v-if="!this.estadoCart && !soldOut && !spent">
-              <cartArrowDown
-                class="card-icon-cart-movil"
-                v-on:click="addShoppingCart"
-              />
+              <cartArrowDown class="card-icon-cart-movil" v-on:click="addShoppingCart" />
             </div>
           </div>
           <div class="separator-movil" v-else>
             <div v-if="!this.estadoCart && !soldOut && !spent">
-              <cartArrowDown
-                class="card-icon-cart-movil"
-                v-on:click="addShoppingCart"
-              />
+              <cartArrowDown class="card-icon-cart-movil" v-on:click="addShoppingCart" />
             </div>
           </div>
         </div>
@@ -165,8 +138,9 @@
 
 <script>
 import axios from 'axios'
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  // mixins: [getIdCloudinary],
+  mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',
   props: { product: Object },
   mounted() {
@@ -374,7 +348,7 @@ div.wrapper-card {
 }
 .product-image {
   width: 100%;
-  height: 100%;
+  height: 260px;
   object-fit: contain;
   overflow: hidden;
 }

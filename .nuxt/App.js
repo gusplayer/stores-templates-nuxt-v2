@@ -29,8 +29,7 @@ export default {
       domProps: {
         id: '__layout'
       },
-
-          key: this.layoutName
+      key: this.layoutName
     }, [layoutEl])
 
     const transitionEl = h('transition', {
