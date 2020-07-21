@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="home">
     <KoTemplate />
-    <component :dataStore="dataStore" :is="indexTemplate" />
+    <component :is="indexTemplate" />
   </div>
 </template>
 
@@ -11,27 +11,26 @@ import KoTemplate6 from './template6/index'
 
 export default {
   components: {
-    KoTemplate5, KoTemplate6
+    KoTemplate5,
+    KoTemplate6,
   },
-  computed:{
+  computed: {
     template() {
       return this.$store.state.template
     },
-    indexTemplate(){
-    let headerComponent = ""
-    switch (this.template) {
-    case 4:
-     headerComponent = "KoTemplate5";
-      break;
-    case 3:
-      headerComponent = "KoTemplate6";
-      break;
-    }
-    return headerComponent
+    indexTemplate() {
+      let headerComponent = ''
+      switch (this.template) {
+        case 4:
+          headerComponent = 'KoTemplate5'
+          break
+        case 3:
+          headerComponent = 'KoTemplate6'
+          break
+      }
+      return headerComponent
     },
   },
-
-  
 }
 </script>
 

@@ -3,12 +3,14 @@
     <div class="order" @click="closeOrder" v-show="openMenuRight">
       <div class="order_content">
         <div class="order_header">
-          <nuxt-link to="/" class="wrapper-logo">
-            <img
-              :src="`https://api2.komercia.co/logos/${logoImg}`"
-              class="header-logo"
-            />
-          </nuxt-link>
+          <div class="header-content-logo">
+            <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
+              <img
+                :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+                class="header-logo"
+              />
+            </nuxt-link>
+          </div>
           <button @click="closed" class="order_header_close">
             <window-close-icon class="close" />
           </button>
@@ -251,12 +253,18 @@ export default {
     padding: 10px 5px;
     flex: none;
   }
+  .header-content-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 0px;
+  }
   .wrapper-logo {
-    width: var(--logo_width);
+    width: 100%;
   }
   .header-logo {
-    width: 100%;
-    max-height: 115px;
+    /* width: 100%; */
+    max-height: 70px;
     object-fit: contain;
     object-position: left;
   }

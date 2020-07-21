@@ -317,7 +317,7 @@ export default {
   background: #00bb2d;
   border-radius: 50px;
   z-index: 2;
-  bottom: 50px;
+  bottom: 60px;
   right: 10px;
   cursor: pointer;
   transition: all 200ms ease-in;
@@ -331,7 +331,7 @@ export default {
 }
 @media (max-width: 400px) {
   .wrapper-whatsapp {
-    bottom: 40px;
+    bottom: 50px;
     right: 10px;
   }
 }
