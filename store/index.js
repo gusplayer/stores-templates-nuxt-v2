@@ -17,6 +17,7 @@ export const state = () => ({
   isLoading: false,
   fullPathServer: '',
   authData: '',
+  template: '',
   userData: {
     id: 0,
   },
@@ -407,6 +408,9 @@ export const mutations = {
   SET_SERVER_PATH(state, value) {
     state.fullPathServer = value
   },
+  SET_TEMPLATE_STORE(state, value) {
+    state.template = value
+  },
 }
 export const actions = {
   GET_LOGIN({ state, commit, dispatch }) {
@@ -420,16 +424,11 @@ export const actions = {
       .then(async (response) => {
         state.idStore = await response.data.store
         commit('SET_ACCESSTOKEN', await response.data.access_token)
-        // dispatch("GET_TYPES_COMPONENTS");
-        // dispatch("GET_COMPONENTS_BY_REFERENCE");
         dispatch('GET_VIEWS')
-        // dispatch("GET_COMPONENTS_BASE");
-        // dispatch("GET_DATASTORE");
       })
   },
 
   async nuxtServerInit({ commit, dispatch }, { req, route }) {
-    // let reqServer = req
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
@@ -445,9 +444,9 @@ export const actions = {
         name: `https://${full}`,
       })
     }
+
     await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
-    //await dispatch('GET_DATA_TIENDA_BY_ID', '582')
-    await dispatch('GET_SERVER_PATH', full)
+    await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
 
     const idSlug = route.path.split('-')
     const producto = await axios.get(
@@ -461,9 +460,10 @@ export const actions = {
     // commit('SELECT_CARD', storeLayout.data.setting.card || 'koProductCard1')
   },
   GET_SERVER_PATH({ state, commit }, value) {
-    // console.log('my value ' + value)
     commit('SET_SERVER_PATH', value)
-    // state.fullPathServer = value
+  },
+  GET_TEMPLATE_STORE({ state, commit }, value) {
+    commit('SET_TEMPLATE_STORE', value)
   },
   async GET_DATA_TIENDA_BY_ID({ commit }, idTienda) {
     const response = await axios.get(
@@ -484,9 +484,11 @@ export const actions = {
       })
   },
 
-  GET_SETTINGS_BY_TEMPLATE({ commit }, id) {
+  GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
+    let template = store.template
+    let id = store.id_tienda
     this.$axios
-      .$get(`https://api2.komercia.co/api/template/5/settings/${id}`)
+      .$get(`https://api2.komercia.co/api/template/${template}/settings/${id}`)
       .then((response) => {
         commit('SET_SETTINGS_BY_TEMPLATE', response.data)
       })

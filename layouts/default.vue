@@ -1,6 +1,7 @@
 <template>
-  <div style>
-    <KoHeader1 :dataStore="dataStore" />
+  <div :style="fontStyle">
+    <component :dataStore="dataStore" :is="headerTemplate" />
+    <!-- <KoHeader1 :dataStore="dataStore" /> -->
     <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
     <nuxt />
     <KFooter1 :dataStore="dataStore" />
@@ -12,13 +13,15 @@
 
 <script>
 import KoNotificacion from '../components/template1/Ko-Notificacion-1'
-import KoHeader1 from '../components/template1/Ko-Header-1'
-import KFooter1 from '../components/template1/Ko-Footer-1'
+import KoHeader1 from '../components/headers/header1/Ko-Header-1'
+import KoHeader2 from '../components/headers/header2/Ko-Header-2'
+import KFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import koWhatsapp from '../components/template1/_productdetails/whatsapp'
 
 export default {
   components: {
     KoHeader1,
+    KoHeader2,
     KFooter1,
     koWhatsapp,
     KoNotificacion,
@@ -28,7 +31,8 @@ export default {
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch(
       'GET_SETTINGS_BY_TEMPLATE',
-      this.$store.state.dataStore.tienda.id_tienda
+      this.$store.state.dataStore.tienda,
+      // this.$store.state.dataStore.tienda.id_tienda
     )
 
     let domain = this.$route.fullPath
@@ -154,6 +158,9 @@ export default {
     }
   },
   computed: {
+    template() {
+      return this.$store.state.template
+    },
     dataStore() {
       return this.$store.state.dataStore
     },
@@ -163,6 +170,38 @@ export default {
     settingBytemplatePrueba() {
       return this.$store.state.settingBytemplatePrueba
     },
+    headerTemplate(){
+    let headerComponent = ""
+    switch (this.template) {
+    case 3:
+     headerComponent = "KoHeader1";
+      break;
+    case 4:
+      headerComponent = "KoHeader2";
+      break;
+    }
+    return headerComponent
+    },
+
+    footerTemplate(){
+    let headerComponent = ""
+    switch (this.template) {
+    case 1:
+     headerComponent = "KoHeader1";
+      break;
+    case 3:
+      headerComponent = "KoHeader2";
+      break;
+    }
+    return headerComponent
+    },
+
+    fontStyle () {
+      return {
+        '--font-style': 'Poppins'
+      }
+    }
+
     // analytics_tagmanager() {
     //   return this.$store.state.analytics_tagmanager
     // },
@@ -255,7 +294,8 @@ export default {
 * {
   margin: 0px;
   padding: 0px;
-  font-family: 'Poppins';
+  /* font-family: 'Poppins'; */
+  font-family: var(--font-style);
   /* outline: none; */
   list-style: none;
   text-decoration: none;

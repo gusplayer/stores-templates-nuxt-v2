@@ -30,6 +30,21 @@ export default {
         href:
           'https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap',
       },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Cabin:wght@400;600&display=swap',
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap',
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap',
+      },
     ],
   },
   loading: { color: '#fff' },

@@ -7,7 +7,7 @@
           <div class="photos">
             <div class="photos_selected">
               <img
-                @mouseover.native="
+                @click="
                   selectedPhoto(data.detalle.foto_cloudinary)
                 "
                 class="img-list"
@@ -16,48 +16,10 @@
               <img
                 v-for="(foto, itemsfoto) in data.fotos"
                 :key="itemsfoto"
-                @mouseover.native="selectedPhoto(foto.foto_cloudinary)"
+                @click="selectedPhoto(foto.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
               />
-              <!-- <cld-image
-                cloudName="komercia-store"
-                :publicId="getIdCloudinary(data.detalle.foto_cloudinary)"
-                width="100"
-                crop="scale"
-                v-on:mouseover.native="
-                  selectedPhoto(data.detalle.foto_cloudinary)
-                "
-                class="img"
-              >
-                <cld-transformation
-                  height="400"
-                  width="400"
-                  radius="5"
-                  crop="lpad"
-                  quality="auto"
-                  background="auto:border"
-                />
-              </cld-image>
-              <cld-image
-                cloudName="komercia-store"
-                width="100"
-                crop="scale"
-                v-for="(foto, itemsfoto) in data.fotos"
-                :key="itemsfoto"
-                v-on:mouseover.native="selectedPhoto(foto.foto_cloudinary)"
-                :publicId="getIdCloudinary(foto.foto_cloudinary)"
-                class="img"
-              >
-                <cld-transformation
-                  height="400"
-                  width="300"
-                  radius="5"
-                  crop="lpad"
-                  quality="auto"
-                  background="auto:border"
-                />
-              </cld-image>-->
 
               <img
                 v-if="idYoutube"
@@ -75,27 +37,6 @@
                 v-on:mouseover.native="active = !active"
                 :src="idCloudinary(selectPhotoUrl, 645, 430)"
               />
-
-              <!-- <cld-image
-                cloudName="komercia-store"
-                v-on:mouseover.native="active = !active"
-                :publicId="getIdCloudinary(selectPhotoUrl)"
-                dpr="auto"
-                responsive="width"
-                width="645"
-                height="430"
-                crop="scale"
-                class="photo_main"
-              >
-                <cld-transformation
-                  width="645"
-                  height="430"
-                  radius="5"
-                  crop="lpad"
-                  quality="auto"
-                  background="auto:border"
-                />
-              </cld-image>-->
             </div>
             <div v-if="!active" v-show="!existYoutube" class="photo_main">
               <cld-image

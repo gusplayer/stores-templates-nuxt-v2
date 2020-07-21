@@ -5,10 +5,7 @@
         <div class="wrapper-logo">
           <div class="left-logo">
             <nuxt-link to="/" class="content-logo">
-              <img
-                :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-                class="logo"
-              />
+              <img :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`" class="logo" />
             </nuxt-link>
             <p class="text-light">Productos de alta calidad hechos a mano.</p>
           </div>
@@ -17,19 +14,17 @@
           <p class="text-top-bold">Secciones</p>
           <br />
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-            <nuxt-link :to="item.path" class="text-top">{{
+            <nuxt-link :to="item.path" class="text-top">
+              {{
               item.name
-            }}</nuxt-link>
+              }}
+            </nuxt-link>
           </div>
         </div>
         <div>
           <p class="text-top-bold">Síguenos</p>
           <br />
-          <div
-            v-for="(item, index) in links"
-            :key="`${index}${item.nombre}`"
-            class="text-icon"
-          >
+          <div v-for="(item, index) in links" :key="`${index}${item.nombre}`" class="text-icon">
             <div v-if="item.link" :is="item.icon" class="icon" />
             <a v-if="item.link" :href="item.link">{{ item.nombre }}</a>
           </div>
@@ -61,23 +56,17 @@
                   v-show="errors[0] || register"
                   class="text-error"
                   :style="register ? 'color:green' : ''"
-                  >{{ errors[0] || register }}</span
-                >
+                >{{ errors[0] || register }}</span>
               </template>
             </ValidationProvider>
-            <button ref="colorBtn" class="btn" @click="toSubscribe">
-              Enviar
-            </button>
+            <button ref="colorBtn" class="btn" @click="toSubscribe">Enviar</button>
           </div>
         </div>
       </div>
       <div class="items-movil">
         <div class="item-movil-top">
           <div class="left-logo-movil">
-            <img
-              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-              class="logo"
-            />
+            <img :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`" class="logo" />
             <div
               class="items-iconos"
               v-for="(item, index) in links"
@@ -89,13 +78,12 @@
           </div>
           <br />
           <div class="footer-item-secciones">
-            <div
-              v-for="(item, index) in secciones"
-              :key="`${index}${item.name}`"
-            >
-              <nuxt-link :to="item.path" class="text-top">{{
+            <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
+              <nuxt-link :to="item.path" class="text-top">
+                {{
                 item.name
-              }}</nuxt-link>
+                }}
+              </nuxt-link>
             </div>
           </div>
           <div class="text-center">
@@ -121,18 +109,14 @@
                   v-show="errors[0] || register"
                   class="text-error"
                   :style="register ? 'color:green' : ''"
-                  >{{ errors[0] || register }}</span
-                >
+                >{{ errors[0] || register }}</span>
               </template>
             </ValidationProvider>
             <button class="btn" @click="toSubscribe">Enviar</button>
           </div>
         </div>
         <div v-if="currentViews.length" class="item-movil-center">
-          <div
-            v-for="(item, index) in currentViews"
-            :key="`${index}${item.name}`"
-          >
+          <div v-for="(item, index) in currentViews" :key="`${index}${item.name}`">
             <p class="text-movil">{{ item.name }}</p>
           </div>
         </div>
@@ -163,88 +147,49 @@
         </div>
         <div class="tabs">
           <div class="tab" v-if="this.dataStore.politicas.cambio">
-            <input
-              type="radio"
-              id="rd1"
-              name="rd"
-              style="visibility: hidden;"
-            />
+            <input type="radio" id="rd1" name="rd" style="visibility: hidden;" />
             <label class="tab-label" for="rd1">Política de cambio</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.cambio"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.datos">
-            <input
-              type="radio"
-              id="rd2"
-              name="rd"
-              style="visibility: hidden;"
-            />
-            <label class="tab-label" for="rd2"
-              >Políticas de tratamiento de datos</label
-            >
+            <input type="radio" id="rd2" name="rd" style="visibility: hidden;" />
+            <label class="tab-label" for="rd2">Políticas de tratamiento de datos</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.datos"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.devolucion">
-            <input
-              type="radio"
-              id="rd3"
-              name="rd"
-              style="visibility: hidden;"
-            />
-            <label class="tab-label" for="rd3"
-              >Politica de devoluciones / retracto</label
-            >
+            <input type="radio" id="rd3" name="rd" style="visibility: hidden;" />
+            <label class="tab-label" for="rd3">Politica de devoluciones / retracto</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.devolucion"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.garantia">
-            <input
-              type="radio"
-              id="rd4"
-              name="rd"
-              style="visibility: hidden;"
-            />
+            <input type="radio" id="rd4" name="rd" style="visibility: hidden;" />
             <label class="tab-label" for="rd4">Politica de garantia</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.garantia"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.envios">
-            <input
-              type="radio"
-              id="rd5"
-              name="rd"
-              style="visibility: hidden;"
-            />
+            <input type="radio" id="rd5" name="rd" style="visibility: hidden;" />
             <label class="tab-label" for="rd5">Politica de envios</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.envios"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.pagos">
-            <input
-              type="radio"
-              id="rd6"
-              name="rd"
-              style="visibility: hidden;"
-            />
+            <input type="radio" id="rd6" name="rd" style="visibility: hidden;" />
             <label class="tab-label" for="rd6">Politica de envios</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.pagos"></div>
             </div>
           </div>
           <div class="tab">
-            <input
-              type="radio"
-              id="rd8"
-              name="rd"
-              style="visibility: hidden;"
-            />
+            <input type="radio" id="rd8" name="rd" style="visibility: hidden;" />
             <label for="rd8" class="tab-close">Cerrar todo</label>
           </div>
         </div>
@@ -301,11 +246,11 @@ export default {
         },
         {
           name: 'Carrito',
-          path: '/template1/cart',
+          path: '/cart',
         },
         {
           name: 'Contacto',
-          path: '/template1/contacto',
+          path: '/contacto',
         },
       ],
       currentViews: [],

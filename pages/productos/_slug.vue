@@ -1,15 +1,15 @@
 <template lang="html">
   <div class="home">
-    <KoTemplate />
+    <KoProductDetail />
   </div>
 </template>
 
 <script>
-import KoTemplate from './template5/index'
+import KoProductDetail from '../../components/template1/Ko-ProductDetail-1'
 
 export default {
   components: {
-    KoTemplate,
+    KoProductDetail,
   },
 }
 </script>

@@ -2,27 +2,9 @@
   <div class="wrapper-card">
     <div class="container">
       <div class="wrapper" v-on:mouseenter="active = false" v-on:mouseleave="active = true">
-        <router-link :to="{ path: `/template1/productos/` + product.slug }" class="wrapper-image">
+        <router-link :to="{ path: `/productos/` + product.slug }" class="wrapper-image">
           <img :src="idCloudinary(this.product.foto_cloudinary, 400, 400)" class="product-image" />
-          <!-- <cld-image
-            cloudName="komercia-store"
-            :publicId="getIdCloudinary(this.product.foto_cloudinary)"
-            height="300"
-            dpr="auto"
-            responsive="width"
-            width="auto"
-            class="product-image"
-            loading="lazy"
-          >
-            <cld-transformation
-              height="700"
-              width="700"
-              crop="lpad"
-              quality="auto"
-              background="auto:border"
-            />
-            <cld-transformation v-if="soldOut" effect="grayscale" />
-          </cld-image>-->
+
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis !</p>
         </router-link>
@@ -53,51 +35,26 @@
           </div>
           <div class="content-text-price2" v-if="!active">
             <div class="content-soldOut" v-if="!this.estadoCart && !soldOut && !spent">
-              <router-link
-                :to="{ path: `/template1/productos/` + product.slug }"
-                class="btn"
-              >Ver más</router-link>
+              <router-link :to="{ path: `/productos/` + product.slug }" class="btn">Ver más</router-link>
               <div v-on:click="addShoppingCart" class="btn">
                 <cartArrowDown class="card-icon-cart" />Agregar
               </div>
             </div>
 
-            <router-link
-              :to="{ path: `/template1/productos/` + product.slug }"
-              v-else
-              class="btn"
-            >Ver más</router-link>
+            <router-link :to="{ path: `/productos/` + product.slug }" v-else class="btn">Ver más</router-link>
           </div>
         </div>
       </div>
       <div class="wrapper-movil">
-        <router-link :to="{ path: `/template1/productos/` + product.slug }" class="wrapper-image">
+        <router-link :to="{ path: `/productos/` + product.slug }" class="wrapper-image">
           <img :src="idCloudinary(this.product.foto_cloudinary, 200, 200)" class="product-image" />
-          <!-- <cld-image
-            cloudName="komercia-store"
-            :publicId="getIdCloudinary(this.product.foto_cloudinary)"
-            dpr="auto"
-            responsive="width"
-            width="auto"
-            height="auto"
-            class="product-image"
-            loading="lazy"
-          >
-            <cld-transformation
-              width="500"
-              height="500"
-              crop="lpad"
-              quality="auto"
-              background="auto:border"
-            />
-            <cld-transformation v-if="soldOut" effect="grayscale" />
-          </cld-image>-->
+
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis !</p>
         </router-link>
         <div class="wrapper-text">
           <router-link
-            :to="{ path: `/template1/productos/` + product.slug }"
+            :to="{ path: `/productos/` + product.slug }"
             class="content-name-product-movil"
           >
             <p
@@ -107,10 +64,7 @@
             <p class="card-text-movil" v-else>{{ `${this.product.nombre.slice(0, 34)}` }}</p>
           </router-link>
           <div class="content-text-price-movil-cart" v-if="this.product.precio">
-            <router-link
-              :to="{ path: `/template1/productos/` + product.slug }"
-              class="wrapper-price"
-            >
+            <router-link :to="{ path: `/productos/` + product.slug }" class="wrapper-price">
               <div>
                 <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}

@@ -18,16 +18,8 @@
             class="header-buttons"
           >
             <div @click="openMenu(item.name)">
-              <nuxt-link
-                :to="item.path"
-                v-if="item.path"
-                class="header-text-center"
-                >{{ item.name }}</nuxt-link
-              >
-              <div
-                v-else
-                style="margin-right: 20px; display: flex; flex-direction: row;"
-              >
+              <nuxt-link :to="item.path" v-if="item.path" class="header-text-center">{{ item.name }}</nuxt-link>
+              <div v-else style="margin-right: 20px; display: flex; flex-direction: row;">
                 <p class="header-text-center-icon">{{ item.name }}</p>
                 <div class="header-text-center-icon" :is="item.icon" />
               </div>
@@ -58,20 +50,14 @@
             <p class="name-category-all">Todos los productos</p>
           </li>
           <div class="menu-grid">
-            <div
-              class="container-category"
-              v-for="categoria in categorias"
-              :key="categoria.id"
-            >
+            <div class="container-category" v-for="categoria in categorias" :key="categoria.id">
               <ul class="name-category">
                 <li>
                   <p
                     @click="
                       sendCategory(categoria, categoria.id, (ref = false))
                     "
-                  >
-                    {{ categoria.nombre_categoria_producto }}
-                  </p>
+                  >{{ categoria.nombre_categoria_producto }}</p>
                 </li>
                 <ul class="subcategoria">
                   <template>
@@ -79,9 +65,7 @@
                       <li
                         v-if="subcategory.categoria == categoria.id"
                         @click="Sendsubcategory(subcategory.id)"
-                      >
-                        {{ subcategory.nombre_subcategoria }}
-                      </li>
+                      >{{ subcategory.nombre_subcategoria }}</li>
                     </div>
                   </template>
                 </ul>
@@ -95,9 +79,7 @@
               <img :src="product[0].foto_cloudinary" class="logo" />
             </div>
             <div class="btn-container">
-              <button @click="closeMenu()" class="btn">
-                Comprar
-              </button>
+              <button @click="closeMenu()" class="btn">Comprar</button>
             </div>
           </div>
         </div>
@@ -162,7 +144,7 @@ export default {
         },
         {
           name: 'Contacto',
-          path: '/template1/contacto',
+          path: '/contacto',
         },
       ],
       seccionesCart: [
@@ -176,11 +158,11 @@ export default {
         // },
         {
           name: 'Carrito',
-          path: '/template1/cart',
+          path: '/cart',
         },
         {
           name: 'Contacto',
-          path: '/template1/contacto',
+          path: '/contacto',
         },
       ],
       cat: [],
@@ -349,7 +331,7 @@ div.header-container {
   width: 100%;
   height: 91px;
   overflow: hidden;
-  background: var(--background_color_2);
+  background: var(--background_color_1);
 }
 .menu-container {
   width: 100%;
