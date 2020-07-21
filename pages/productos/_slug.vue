@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import KoProductDetail from '../../components/template1/Ko-ProductDetail-1'
+import KoProductDetail from '../../components/template5/Ko-ProductDetail-1'
 
 export default {
   components: {

@@ -7,9 +7,7 @@
           <div class="photos">
             <div class="photos_selected">
               <img
-                @click="
-                  selectedPhoto(data.detalle.foto_cloudinary)
-                "
+                @click="selectedPhoto(data.detalle.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
               />
@@ -51,7 +49,11 @@
                 crop="crop"
                 class="photo_main"
               >
-                <cld-transformation radius="5" quality="auto" background="auto:border" />
+                <cld-transformation
+                  radius="5"
+                  quality="auto"
+                  background="auto:border"
+                />
               </cld-image>
             </div>
 
@@ -81,7 +83,9 @@
               ${{ salesData.precio | currency }}
             </p>-->
             <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">${{ salesData.precio | currency }}</p>
+              <p class="text-precio" v-show="salesData.precio">
+                ${{ salesData.precio | currency }}
+              </p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
             <!-- <div
@@ -109,7 +113,8 @@
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
-                  >{{ item.option }}</option>
+                    >{{ item.option }}</option
+                  >
                 </selectGroup>
               </div>
             </div>
@@ -125,7 +130,10 @@
                     <mas-icon class="icon" />
                   </button>
 
-                  <div class="container-alerta" v-if="this.maxQuantityValue == this.quantityValue">
+                  <div
+                    class="container-alerta"
+                    v-if="this.maxQuantityValue == this.quantityValue"
+                  >
                     <span class="alerta">última Unidad!</span>
                   </div>
                 </div>
@@ -144,7 +152,9 @@
                       class="btn"
                       v-if="!spent"
                       v-on:click="addShoppingCart"
-                    >Comprar</button>
+                    >
+                      Comprar
+                    </button>
                     <!-- <ko-whatsapp
                       v-if="whatsapp"
                       class="whatsapp"
@@ -159,7 +169,11 @@
       </div>
       <div class="section">
         <div class="features">
-          <ko-description :dataStore="dataStore" :data="data" :envio="envio"></ko-description>
+          <ko-description
+            :dataStore="dataStore"
+            :data="data"
+            :envio="envio"
+          ></ko-description>
         </div>
       </div>
       <div class="responsive-purchase">
@@ -173,7 +187,10 @@
               <mas-icon class="icon" />
             </button>
             <transition name="slide-fade">
-              <div class="container-alert" v-show="quantityValue == maxQuantityValue">
+              <div
+                class="container-alert"
+                v-show="quantityValue == maxQuantityValue"
+              >
                 <span class="alert">última Unidad!</span>
               </div>
             </transition>
@@ -182,7 +199,12 @@
             <div class="content_buy_action-responsive" v-if="spent">
               <p class="card-info-1-res">Agotado !</p>
             </div>
-            <button class="btn-responsive" ref="color2" v-if="!spent" v-on:click="addShoppingCart">
+            <button
+              class="btn-responsive"
+              ref="color2"
+              v-if="!spent"
+              v-on:click="addShoppingCart"
+            >
               <cartArrowDown class="card-icon-cart" />Agregar
             </button>
           </div>
@@ -194,18 +216,15 @@
 
 <script>
 import axios from 'axios'
-import productSlide from './_productdetails/productSlide.vue'
+import productSlide from './_productdetails/productSlide'
 import selectGroup from './_productdetails/selectGroup'
-import koWhatsapp from './_productdetails/whatsapp'
 import koDescription from './_productdetails/descriptionProduct.vue'
 import idCloudinary from '../../mixins/idCloudinary'
-
 
 export default {
   mixins: [idCloudinary],
   name: 'koProduct1',
   components: {
-    koWhatsapp,
     selectGroup,
     koDescription,
     productSlide,

@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import kBanner from '../../components/template1/ko-Banner-1'
-import KProductFavoritos from '../../components/template1/Ko-ProductFavoritos-1'
-import KProductList from '../../components/template1/Ko-ProductList-1'
-import KNewsletter from '../../components/template1/Ko-Newsletter-1'
+import kBanner from '../../components/template5/ko-Banner-1'
+import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
+import KProductList from '../../components/template5/Ko-ProductList-1'
+import KNewsletter from '../../components/template5/Ko-Newsletter-1'
 
 export default {
   components: {

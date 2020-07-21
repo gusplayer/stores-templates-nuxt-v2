@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import KoNotificacion from '../components/template1/Ko-Notificacion-1'
+import KoNotificacion from '../components/template5/Ko-Notificacion-1'
 import KoHeader1 from '../components/headers/header1/Ko-Header-1'
 import KoHeader2 from '../components/headers/header2/Ko-Header-2'
 import KoHeader3 from '../components/headers/header3/Ko-Header-3'
