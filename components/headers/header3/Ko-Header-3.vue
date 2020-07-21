@@ -34,7 +34,11 @@
           <menu-icon class="header-icon-menu nav-bar" />
         </div>
         <KoMenuRight class="responsive" :dataStore="dataStore" />
-        <KoMenuLeft class="responsiveLeft" :dataStore="dataStore" />
+        <KoMenuLeft
+          class="responsiveLeft"
+          :dataStore="dataStore"
+          :showMenu="showMenu"
+        />
       </div>
     </div>
   </div>
@@ -57,9 +61,18 @@ export default {
   },
   mounted() {
     this.toggle = true
+    let domain = this.$route.fullPath
+    if (domain == '/') {
+      console.log('Entro')
+      this.showMenu = true
+    } else {
+      this.showMenu = false
+      console.log('No')
+    }
   },
   data() {
     return {
+      showMenu: false,
       search: '',
       toggle: false,
       drawer: false,
@@ -185,6 +198,14 @@ export default {
     },
     search(value) {
       this.Searchproduct(value)
+    },
+    $route(to, from) {
+      let domain = this.$route.fullPath
+      if (domain == '/') {
+        this.showMenu = true
+      } else {
+        this.showMenu = false
+      }
     },
   },
 }

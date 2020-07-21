@@ -63,4 +63,7 @@ export default {
   font-size: 22px;
   color: var(--color_text);
 }
+.icon:hover {
+  color: var(--color_hover_text);
+}
 </style>

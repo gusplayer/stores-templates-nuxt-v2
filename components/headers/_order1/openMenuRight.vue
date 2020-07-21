@@ -112,7 +112,7 @@ export default {
     closeOrder(event) {
       const element = event.target.className
       if (
-        element === 'order' ||
+        element === 'order responsive' ||
         element === 'order_header_close' ||
         element === 'header-logo' ||
         element === 'name-category-all' ||

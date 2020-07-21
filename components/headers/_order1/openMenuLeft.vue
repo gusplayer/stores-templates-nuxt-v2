@@ -14,7 +14,7 @@
           </button>
         </div>
         <template>
-          <div class="wrapper-category-all">
+          <div class="wrapper-category-all" v-if="showMenu">
             <li @click="clear">
               <p class="name-category-all">Todos los productos</p>
             </li>
@@ -63,6 +63,17 @@
               </BaseAccordian>
             </div>
           </div>
+          <div v-else class="wrapper-secciones">
+            <div
+              v-for="(item, index) in secciones"
+              :key="`${index}${item.name}`"
+              @click="closed"
+            >
+              <nuxt-link :to="item.path" class="text-secciones">
+                {{ item.name }}
+              </nuxt-link>
+            </div>
+          </div>
         </template>
       </div>
     </div>
@@ -75,10 +86,12 @@ export default {
   name: 'KoMenuLeft',
   props: {
     dataStore: Object,
+    showMenu: Boolean,
   },
   components: {
     BaseAccordian,
   },
+  mounted() {},
   data() {
     return {
       add: true,
@@ -89,6 +102,20 @@ export default {
       toggleCategories: true,
       indexSelect: '',
       indexSelect2: '',
+      secciones: [
+        {
+          name: 'Inicio',
+          path: '/',
+        },
+        {
+          name: 'Carrito',
+          path: '/cart',
+        },
+        {
+          name: 'Contacto',
+          path: '/contacto',
+        },
+      ],
     }
   },
   computed: {
@@ -112,7 +139,7 @@ export default {
     closeOrder(event) {
       const element = event.target.className
       if (
-        element === 'order' ||
+        element === 'order responsiveLeft' ||
         element === 'order_header_close' ||
         element === 'header-logo' ||
         element === 'name-category-all' ||
@@ -284,20 +311,45 @@ export default {
   color: var(--color_text);
   margin-bottom: 5px;
 }
+.name-category-all:hover {
+  color: var(--color_hover_text);
+}
 .text-categoria {
   width: 100%;
   font-size: 16px;
   color: var(--color_text);
+}
+.text-categoria:hover {
+  color: var(--color_hover_text);
 }
 .text-subcategoria {
   width: 100%;
   font-size: 16px;
   color: var(--color_subtext);
 }
+.text-subcategoria:hover {
+  color: var(--color_hover_text);
+}
 .text-categoria-active {
   color: var(--color_hover_text);
 }
 .text-subcategoria-active {
+  color: var(--color_hover_text);
+}
+.wrapper-secciones {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.text-secciones {
+  font-size: 16px;
+  color: var(--color_text);
+  margin-bottom: 10px;
+}
+.text-secciones:hover {
   color: var(--color_hover_text);
 }
 </style>
