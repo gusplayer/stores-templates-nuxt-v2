@@ -82,7 +82,8 @@ export const state = () => ({
   subcategorias: [],
   geolocalizacion: [],
   openOrder: false,
-  openMenulateral: false,
+  openMenulateralRight: false,
+  openMenulateralLeft: false,
   mediospago: {
     epayco: false,
   },
@@ -260,8 +261,11 @@ export const mutations = {
   SET_OPENORDER: (state, value) => {
     state.openOrder = value
   },
-  SET_OPENORDERMENU: (state, value) => {
-    state.openMenulateral = value
+  SET_OPENORDERMENURIGTH: (state, value) => {
+    state.openMenulateralRight = value
+  },
+  SET_OPENORDERMENULEFT: (state, value) => {
+    state.openMenulateralLeft = value
   },
   SET_TOKEN(state, value) {
     state.configHttp = {

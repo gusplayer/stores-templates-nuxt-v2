@@ -137,11 +137,7 @@
                     Seguir comprando
                   </button>
                 </nuxt-link>
-                <nuxt-link
-                  to="/template1/cart"
-                  class="conten-btn"
-                  @click="closeOrder"
-                >
+                <nuxt-link to="/cart" class="conten-btn" @click="closeOrder">
                   <button class="continue_shopping2">
                     Ir al carrito
                   </button>

@@ -18,10 +18,27 @@
             class="header-buttons"
           >
             <div @click="openMenu(item.name)">
-              <nuxt-link :to="item.path" v-if="item.path" class="header-text-center">{{ item.name }}</nuxt-link>
-              <div v-else style="margin-right: 20px; display: flex; flex-direction: row;">
+              <nuxt-link
+                :to="item.path"
+                v-if="item.path"
+                class="header-text-center"
+                >{{ item.name }}</nuxt-link
+              >
+              <div
+                v-else
+                style="margin-right: 20px; display: flex; flex-direction: row;"
+              >
                 <p class="header-text-center-icon">{{ item.name }}</p>
-                <div class="header-text-center-icon" :is="item.icon" />
+                <div
+                  class="header-text-center-icon"
+                  v-if="showMenu == false"
+                  :is="item.iconOpen"
+                />
+                <div
+                  class="header-text-center-icon"
+                  v-if="showMenu == true"
+                  :is="item.iconClose"
+                />
               </div>
             </div>
           </div>
@@ -50,14 +67,20 @@
             <p class="name-category-all">Todos los productos</p>
           </li>
           <div class="menu-grid">
-            <div class="container-category" v-for="categoria in categorias" :key="categoria.id">
+            <div
+              class="container-category"
+              v-for="categoria in categorias"
+              :key="categoria.id"
+            >
               <ul class="name-category">
                 <li>
                   <p
                     @click="
                       sendCategory(categoria, categoria.id, (ref = false))
                     "
-                  >{{ categoria.nombre_categoria_producto }}</p>
+                  >
+                    {{ categoria.nombre_categoria_producto }}
+                  </p>
                 </li>
                 <ul class="subcategoria">
                   <template>
@@ -65,7 +88,9 @@
                       <li
                         v-if="subcategory.categoria == categoria.id"
                         @click="Sendsubcategory(subcategory.id)"
-                      >{{ subcategory.nombre_subcategoria }}</li>
+                      >
+                        {{ subcategory.nombre_subcategoria }}
+                      </li>
                     </div>
                   </template>
                 </ul>
@@ -89,8 +114,8 @@
 </template>
 
 <script>
-import KoOrder from './_order1/order1'
-import KoMenu from './_order1/openMenu'
+import KoOrder from '../_order1/order1'
+import KoMenu from '../_order1/openMenuRight'
 
 export default {
   components: {
@@ -140,7 +165,8 @@ export default {
         },
         {
           name: 'Categorías',
-          icon: 'Flechadown-icon',
+          iconOpen: 'Flechadown-icon',
+          iconClose: 'FlechaUp-icon',
         },
         {
           name: 'Contacto',
@@ -202,7 +228,7 @@ export default {
     },
     openMenulateral() {
       this.showMenu = false
-      this.$store.state.openMenulateral = true
+      this.$store.state.openMenulateralRight = true
     },
     openMenu(name) {
       var intro = document.getElementById('menu-collapse')
@@ -218,7 +244,7 @@ export default {
     closeMenu() {
       this.showMenu = false
       this.$router.push({
-        path: `/template1/productos/` + this.product[0].slug,
+        path: `/productos/` + this.product[0].slug,
       })
     },
     Sendsubcategory(value) {
@@ -281,7 +307,7 @@ export default {
       this.$router.push({
         path: `/`,
       })
-      this.$store.commit('SET_OPENORDERMENU', false)
+      this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
@@ -456,7 +482,6 @@ div.header-container {
   display: flex;
   flex: 1;
   margin-left: 10px;
-  justify-content: center;
   align-self: center;
   justify-content: flex-end;
   position: relative;
@@ -606,7 +631,6 @@ div.header-container {
   height: 40px;
   font-weight: bold;
   cursor: pointer;
-  cursor: pointer;
   transition: all 200ms ease-in;
   text-decoration: none;
   text-align: center;
@@ -635,7 +659,7 @@ input::-webkit-search-cancel-button {
   display: none;
 }
 input[type='search'] {
-  background: #fff
+  background: transparent
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
   border: solid 2px var(--color_shopping_cart);
@@ -648,27 +672,6 @@ input[type='search'] {
   -moz-transition: all 0.5s;
   transition: all 0.5s;
 }
-#demo-1 input[type='search'] {
-  background: #fff
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
-  border: solid 2px var(--color_shopping_cart);
-  padding: 2px 4px 4px 38px;
-  width: 100%;
-  -webkit-border-radius: var(--radius_btn);
-  -moz-border-radius: var(--radius_btn);
-  border-radius: var(--radius_btn);
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
-  box-sizing: border-box;
-}
-#demo-1 input[type='search']:focus {
-  width: 100%;
-  background-color: #fff;
-  border-color: var(--color_hover_text);
-  box-sizing: border-box;
-}
 input[type='search']:focus {
   background-color: #fff;
   border-color: var(--color_hover_text);
@@ -679,7 +682,6 @@ input:-moz-placeholder {
 input::-webkit-input-placeholder {
   color: var(--color_text);
 }
-/* Demo 2 */
 #demo-2 input[type='search'] {
   width: 15px;
   padding-left: 10px;
@@ -751,8 +753,6 @@ input::-webkit-input-placeholder {
     width: 24px;
     height: 24px;
   }
-  /* menu lateral */
-
   .responsive {
     display: initial;
   }

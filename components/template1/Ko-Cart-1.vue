@@ -239,9 +239,7 @@
               >
                 Finalizar compra
               </button>
-              <nuxt-link to="/template1/home" class="btn2"
-                >Seguir comprando</nuxt-link
-              >
+              <nuxt-link to="/" class="btn2">Seguir comprando</nuxt-link>
             </div>
             <div class="wrapper_btn_responsive">
               <span class="cart_summary_items">

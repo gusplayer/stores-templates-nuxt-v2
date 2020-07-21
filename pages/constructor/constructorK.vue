@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="home">
-    <!-- <KoConstructor></KoConstructor> -->
+    <KoConstructor></KoConstructor>
   </div>
 </template>
 

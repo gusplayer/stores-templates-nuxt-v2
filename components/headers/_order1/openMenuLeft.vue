@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="order" @click="closeOrder" v-show="openMenu">
+    <div class="order" @click="closeOrder" v-show="openMenuLeft">
       <div class="order_content">
         <div class="order_header">
           <nuxt-link to="/" class="wrapper-logo">
@@ -72,7 +72,7 @@
 <script>
 import BaseAccordian from './_BaseAccordion'
 export default {
-  name: 'KoMenu',
+  name: 'KoMenuLeft',
   props: {
     dataStore: Object,
   },
@@ -95,8 +95,8 @@ export default {
     logoImg() {
       return this.$store.state.dataStore.tienda.logo
     },
-    openMenu() {
-      return this.$store.state.openMenulateral
+    openMenuLeft() {
+      return this.$store.state.openMenulateralLeft
     },
     categorias() {
       return this.dataStore.categorias
@@ -107,7 +107,7 @@ export default {
   },
   methods: {
     closed() {
-      this.$store.commit('SET_OPENORDERMENU', false)
+      this.$store.commit('SET_OPENORDERMENULEFT', false)
     },
     closeOrder(event) {
       const element = event.target.className
@@ -118,7 +118,7 @@ export default {
         element === 'name-category-all' ||
         element === 'close'
       ) {
-        this.$store.commit('SET_OPENORDERMENU', false)
+        this.$store.commit('SET_OPENORDERMENULEFT', false)
       }
     },
     Sendsubcategory(value) {
@@ -126,7 +126,7 @@ export default {
       this.$router.push({
         path: `/`,
       })
-      this.$store.commit('SET_OPENORDERMENU', false)
+      this.$store.commit('SET_OPENORDERMENULEFT', false)
       this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
@@ -152,7 +152,7 @@ export default {
       this.$router.push({
         path: `/`,
       })
-      this.$store.commit('SET_OPENORDERMENU', false)
+      this.$store.commit('SET_OPENORDERMENULEFT', false)
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
@@ -183,6 +183,7 @@ export default {
         path: `/`,
       })
       this.showMenu = false
+      this.$store.commit('SET_OPENORDERMENULEFT', false)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
@@ -193,7 +194,6 @@ export default {
       this.nameCategory = ''
     },
   },
-  watch: {},
 }
 </script>
 
@@ -211,7 +211,7 @@ export default {
 }
 .order_content {
   position: absolute;
-  right: 0px;
+  left: 0px;
   max-width: 400px;
   width: 100%;
   height: 100vh;
@@ -228,10 +228,10 @@ export default {
 }
 @keyframes dispatch {
   0% {
-    right: -400px;
+    left: -400px;
   }
   100% {
-    right: 0px;
+    left: 0px;
   }
 }
 .order_content > div {

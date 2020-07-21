@@ -15,6 +15,7 @@
 import KoNotificacion from '../components/template1/Ko-Notificacion-1'
 import KoHeader1 from '../components/headers/header1/Ko-Header-1'
 import KoHeader2 from '../components/headers/header2/Ko-Header-2'
+import KoHeader3 from '../components/headers/header3/Ko-Header-3'
 import KFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import koWhatsapp from '../components/template1/_productdetails/whatsapp'
 
@@ -22,6 +23,7 @@ export default {
   components: {
     KoHeader1,
     KoHeader2,
+    KoHeader3,
     KFooter1,
     koWhatsapp,
     KoNotificacion,
@@ -31,7 +33,7 @@ export default {
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch(
       'GET_SETTINGS_BY_TEMPLATE',
-      this.$store.state.dataStore.tienda,
+      this.$store.state.dataStore.tienda
       // this.$store.state.dataStore.tienda.id_tienda
     )
 
@@ -170,37 +172,40 @@ export default {
     settingBytemplatePrueba() {
       return this.$store.state.settingBytemplatePrueba
     },
-    headerTemplate(){
-    let headerComponent = ""
-    switch (this.template) {
-    case 3:
-     headerComponent = "KoHeader1";
-      break;
-    case 4:
-      headerComponent = "KoHeader2";
-      break;
-    }
-    return headerComponent
-    },
-
-    footerTemplate(){
-    let headerComponent = ""
-    switch (this.template) {
-    case 1:
-     headerComponent = "KoHeader1";
-      break;
-    case 3:
-      headerComponent = "KoHeader2";
-      break;
-    }
-    return headerComponent
-    },
-
-    fontStyle () {
-      return {
-        '--font-style': 'Poppins'
+    headerTemplate() {
+      let headerComponent = ''
+      switch (this.template) {
+        case 3:
+          headerComponent = 'KoHeader3'
+          break
+        case 4:
+          headerComponent = 'KoHeader2'
+          break
+        case 5:
+          headerComponent = 'KoHeader1'
+          break
       }
-    }
+      return headerComponent
+    },
+
+    footerTemplate() {
+      let headerComponent = ''
+      switch (this.template) {
+        case 1:
+          headerComponent = 'KoHeader1'
+          break
+        case 3:
+          headerComponent = 'KoHeader2'
+          break
+      }
+      return headerComponent
+    },
+
+    fontStyle() {
+      return {
+        '--font-style': 'Poppins',
+      }
+    },
 
     // analytics_tagmanager() {
     //   return this.$store.state.analytics_tagmanager
