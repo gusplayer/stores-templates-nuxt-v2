@@ -17,7 +17,7 @@ import KoHeader1 from '../components/headers/header1/Ko-Header-1'
 import KoHeader2 from '../components/headers/header2/Ko-Header-2'
 import KoHeader3 from '../components/headers/header3/Ko-Header-3'
 import KFooter1 from '../components/footers/footer1/Ko-Footer-1'
-import koWhatsapp from '../components/template1/_productdetails/whatsapp'
+import koWhatsapp from '../components/whatsapp/whatsapp'
 
 export default {
   components: {
