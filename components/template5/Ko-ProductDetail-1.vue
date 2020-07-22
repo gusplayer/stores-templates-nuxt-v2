@@ -32,31 +32,17 @@
             <div v-if="active" v-show="!existYoutube" class="photo_main">
               <img
                 class="photo_main"
-                v-on:mouseover.native="active = !active"
+                v-on:mouseover="active = !active"
                 :src="idCloudinary(selectPhotoUrl, 645, 430)"
               />
             </div>
             <div v-if="!active" v-show="!existYoutube" class="photo_main">
-              <cld-image
-                cloudName="komercia-store"
-                v-on:mouseleave.native="active = !active"
-                :publicId="getIdCloudinary(selectPhotoUrl)"
-                dpr="auto"
-                responsive="width"
-                width="845"
-                height="400"
-                gravity="face"
-                crop="crop"
-                class="photo_main"
-              >
-                <cld-transformation
-                  radius="5"
-                  quality="auto"
-                  background="auto:border"
-                />
-              </cld-image>
+              <img
+                class="photo_main_zoom"
+                v-on:mouseleave="active = !active"
+                :src="idCloudinary(selectPhotoUrl, 645, 430)"
+              />
             </div>
-
             <iframe
               v-show="existYoutube"
               :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
@@ -695,7 +681,6 @@ div.wrapper-productDetail {
   border-radius: 6px;
   margin-bottom: 10px;
 }
-
 .video {
   width: 100px;
   height: 100px;
@@ -712,14 +697,27 @@ div.wrapper-productDetail {
   width: 100%;
 }
 .photo_main {
-  max-width: 100%;
+  max-width: 645px;
   max-height: 430px;
-  width: 645px;
+  width: 100%;
   height: 430px;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
+}
+.photo_main_zoom {
+  max-width: 645px;
+  max-height: 430px;
+  width: 100%;
+  height: 430px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 10px;
   cursor: zoom-in;
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
 }
 .wrapper-right {
   flex: 1;

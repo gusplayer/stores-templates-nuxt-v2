@@ -13,10 +13,10 @@
             v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
           >
-            / {{ this.nameCategoryHeader }}
+            - {{ this.nameCategoryHeader }}
           </p>
           <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            / {{ this.nameSubCategoryHeader }}
+            - {{ this.nameSubCategoryHeader }}
           </p>
         </div>
       </div>
@@ -317,6 +317,7 @@ export default {
     },
     clear() {
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
         data: '',
@@ -653,11 +654,12 @@ div.wrapper-productlist {
 /* //////paginacion//////// */
 .pagination-medium {
   margin-top: 10px;
-  background: var(--background_color_1);
+  background: transparent;
 }
 .pagination {
   font-size: 18px;
   color: var(--color_text);
+  background: transparent;
 }
 .el-pager li.active,
 .el-pager li.hover,
@@ -666,7 +668,7 @@ div.wrapper-productlist {
 }
 .popover {
   width: 300px;
-  background: var(--background_color_1);
+  background: transparent;
   position: absolute;
   right: -240px;
   top: 0;

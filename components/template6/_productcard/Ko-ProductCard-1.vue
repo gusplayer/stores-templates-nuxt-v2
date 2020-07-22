@@ -295,7 +295,7 @@ div.wrapper-card {
   /* background: var(--background_color_2); */
   background: white;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
 }
 .container {

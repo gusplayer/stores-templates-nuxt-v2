@@ -1,119 +1,60 @@
 <template>
   <div class="wrapper-productlist">
     <div class="container">
-      <div class="content-title">
-        <!-- <p class="title">Productos</p> -->
-      </div>
-      <br />
-
-      <div class="content-items-categorias">
-        <div class="content-items-categorias-text">
-          <p class="text-categorias" @click="clear">Catálogo</p>
-          <p
-            class="text-categorias-select"
-            v-if="this.nameCategoryHeader"
-            @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >
-            / {{ this.nameCategoryHeader }}
-          </p>
-          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            / {{ this.nameSubCategoryHeader }}
-          </p>
-        </div>
-        <!-- <div class="search">
-          <div>
-            <input
-              v-model="search"
-              type="text"
-              placeholder="Buscar . . ."
-              required
-            />
-          </div>
-        </div>-->
-      </div>
-      <div class="top-right">
-        <div class="content-item-top">
-          <ul>
-            <li class="dropdown">
-              <div class="content-filtrar">
-                <a class="dropbtn">Categorías</a>
-                <Flechadown-icon class="header-icon-menu" />
-              </div>
-              <div class="dropdown-content">
-                <div class="content-item-catalogo">
-                  <ul class="a-container">
-                    <li @click="clear">
-                      <p class="item-categoria">Todos</p>
-                    </li>
-
-                    <li
-                      @mouseover="mouseOver(index)"
-                      @mouseleave="mouseLeave"
-                      v-for="(categoria, index) in categorias"
-                      :key="categoria.id"
-                    >
-                      <label>
-                        <p
-                          class="item-categoria"
-                          :class="
-                            index == indexSelect ? 'item-categoria-active' : ''
-                          "
-                          @click="
-                            sendCategory(
-                              categoria,
-                              categoria.id,
-                              index,
-                              (ref = false)
-                            )
-                          "
-                        >
-                          {{ categoria.nombre_categoria_producto }}
-                        </p>
-                        <div
-                          :style="indexCategory == index ? '' : 'display: none'"
-                          class="content-item-subcategorie"
-                        >
-                          <li
-                            v-for="subcategory in selectedSubcategories"
-                            @click="Sendsubcategory(subcategory.id)"
-                            :class="
-                              subcategory.id == indexSelect2
-                                ? 'item-subcategorie-active'
-                                : ''
-                            "
-                            :key="subcategory.id"
-                          >
-                            <p class="item-subcategorie">
-                              {{ subcategory.nombre_subcategoria }}
-                            </p>
-                          </li>
-                        </div>
-                        <div
-                          :class="{ popover: sub == index }"
-                          v-if="sub == index"
-                        ></div>
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <div class="search">
-            <div>
-              <input
-                v-model="search"
-                type="text"
-                placeholder="Buscar . . ."
-                required
-              />
-            </div>
-          </div>
-        </div>
+      <div class="content-items-categorias-text">
+        <p class="text-categorias" @click="clear">Catálogo</p>
+        <p
+          class="text-categorias-select"
+          v-if="this.nameCategoryHeader"
+          @click="breadcrumbsSendCategory(nameCategoryHeader)"
+        >
+          - {{ this.nameCategoryHeader }}
+        </p>
+        <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
+          - {{ this.nameSubCategoryHeader }}
+        </p>
       </div>
       <div class="content-item">
-        <div>
-          <h1>Hola</h1>
+        <div class="wrapper-filter">
+          <div
+            v-for="categoria in categorias"
+            :key="categoria.id"
+            class="content-categoria"
+          >
+            <BaseAccordian>
+              <template v-slot:categorias>
+                <li
+                  class="text-categoria"
+                  @click="
+                    sendCategory(categoria, categoria.id, index, (ref = false))
+                  "
+                  :class="
+                    categoria.id == indexSelect ? 'text-categoria-active' : ''
+                  "
+                >
+                  {{ categoria.nombre_categoria_producto }}
+                </li>
+              </template>
+              <template v-slot:subcategorias
+                ><template>
+                  <div v-for="(subcategory, key) in subcategories" :key="key">
+                    <li
+                      v-if="subcategory.categoria == categoria.id"
+                      @click="Sendsubcategory(subcategory.id)"
+                      class="text-subcategoria"
+                      :class="
+                        subcategory.id == indexSelect2
+                          ? 'text-subcategoria-active'
+                          : ''
+                      "
+                    >
+                      {{ subcategory.nombre_subcategoria }}
+                    </li>
+                  </div>
+                </template></template
+              >
+            </BaseAccordian>
+          </div>
         </div>
         <div class="content-item-productos">
           <div class="grid-products">
@@ -151,10 +92,12 @@
 
 <script>
 import KoProductCard1 from './_productcard/Ko-ProductCard-1'
+import BaseAccordian from '../headers/_order1/_AccordionList'
 
 export default {
   components: {
     KoProductCard1,
+    BaseAccordian,
   },
   props: {
     dataStore: Object,
@@ -177,8 +120,6 @@ export default {
   },
   data() {
     return {
-      drawerleft: false,
-      directionleft: 'ltr',
       add: true,
       search: '',
       productsCategory: [],
@@ -286,20 +227,30 @@ export default {
       this.indexSelect2 = value
       this.addClass()
       this.selectSubcategory = value
-      let filtradoCategoria = this.subcategories.find(
+      let filtradoSubCategoria = this.subcategories.find(
         (element) => element.id == value
       )
-      this.nameSubCategory = filtradoCategoria.nombre_subcategoria
+
+      let filtradoCategorias = this.categorias.find(
+        (element) => element.id == filtradoSubCategoria.categoria
+      )
+      this.$store.commit(
+        'SET_CATEGORY_PRODCUTRO',
+        filtradoCategorias.nombre_categoria_producto
+      )
+      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
         type: 'subcategory',
         data: value,
       })
     },
     sendCategory(value, categoria, index, ref) {
-      this.indexSelect = index
+      this.indexSelect = categoria
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
-      this.indexCategory = index
+      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -332,6 +283,7 @@ export default {
     },
     clear() {
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
         data: '',
@@ -375,88 +327,63 @@ export default {
 
 <style scoped>
 div.wrapper-productlist {
-  --background_color_1: #f2f4f7;
+  --background_color_1: #eeeeee;
 }
 .wrapper-productlist {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  /* background: var(--background_color_1); */
-  background: #eeeeee;
+  background: var(--background_color_1);
   box-sizing: border-box;
 }
 .container {
-  display: flex;
-  justify-content: center;
   width: 100%;
   max-width: 1300px;
-  padding: 0px 20px;
-  flex-direction: column;
-}
-.content-title {
-  width: 100%;
+  padding: 40px 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-.title {
-  font-size: 38px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.24;
-  letter-spacing: -0.4px;
-  color: var(--color_text);
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-.content-item-top {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  flex-direction: column;
 }
 .content-item {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  margin-bottom: 40px;
 }
 .content-item > div:nth-child(1) {
+  max-width: 300px;
   flex: 1;
 }
 .content-item > div:nth-child(2) {
   flex: 2;
 }
-
-/* /////////////////filtro categorías///////////// */
-.content-filtrar {
-  display: flex;
-  flex-direction: row;
+/* categorias */
+.content-categoria {
+  width: 100%;
+  padding-right: 20px;
 }
-.dropbtn {
-  background: transparent;
+.text-categoria {
+  width: 100%;
   font-size: 16px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: var(--color_subtext);
-  align-self: flex-end;
-  cursor: pointer;
-  margin-right: 2px;
+  color: var(--color_text);
 }
-.content-items-categorias {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  height: 40px;
+.text-subcategoria {
+  width: 100%;
+  font-size: 16px;
+  color: var(--color_subtext);
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+.text-categoria-active {
+  color: var(--color_hover_text);
+}
+.text-subcategoria-active {
+  color: var(--color_hover_text);
 }
 .content-items-categorias-text {
   display: flex;
   flex-direction: row;
+  margin-bottom: 15px;
 }
 .text-categorias {
   background: transparent;
@@ -484,82 +411,6 @@ div.wrapper-productlist {
   display: flex;
   align-self: flex-start;
 }
-.dropdown-content {
-  display: none;
-  position: absolute;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0px 8px 20px 1px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* ///////categorias//////////// */
-.content-item-catalogo {
-  display: flex;
-  align-self: baseline;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  max-width: 205px;
-  width: 100%;
-  border-radius: 10px;
-  background-color: var(--background_color_2);
-}
-.a-container {
-  width: 205px;
-  display: block;
-  position: relative;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  color: var(--color_subtext);
-  background-color: var(--background_color_2);
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-  align-items: center;
-  justify-content: center;
-}
-.item-categoria {
-  cursor: pointer;
-  padding: 0px 10px 0px 20px;
-  background-color: var(--background_color_2);
-}
-.item-categoria-active {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-
-.item-categoria:hover {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-/*////// subcategoria //////*/
-.content-item-subcategorie {
-  background: var(--color_background_hover);
-  padding-right: 10px;
-  padding-left: 40px;
-}
-.item-subcategorie {
-  font-size: 13px;
-  cursor: pointer;
-  user-select: none;
-}
-.item-subcategorie-active {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-.item-subcategorie:hover {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-
-/* ///////productos/////////// */
-
 .content-products {
   border-radius: 10px;
 }
@@ -597,83 +448,23 @@ div.wrapper-productlist {
   font-weight: bold;
   color: var(--color_subtext);
 }
-/* //////buscador ///////// */
-
-.top-right {
-  display: none;
-  /* width: 100%;
-  padding-top: 0px;
-  padding-bottom: 15px; */
-}
-.header-icon-menu {
-  font-size: 30px;
-  cursor: pointer;
-  color: var(--color_subtext);
-}
-.header-icon-close {
-  font-size: 30px;
-  color: rgba(21, 20, 57, 0.808);
-  margin-left: 22px;
-}
-.top-input-search {
-  position: relative;
-  display: grid;
-  align-content: start;
-  justify-content: flex-end;
-}
-.top-input-search input {
+.wrapper-filter {
   width: 100%;
-  padding: 10px 35px 10px 15px;
-  box-sizing: border-box;
-  font-size: 14px;
-  color: var(--color_subtext);
-  border: solid 2px #afafaf;
-  border-radius: var(--radius_btn);
-  background-color: transparent;
-}
-.top-input-search input::placeholder {
-  color: var(--color_subtext);
-  opacity: 0.7;
-}
-.top-input-search input:focus,
-.top-input-search input:active {
-  border-radius: var(--radius_btn);
-  border: solid 2px var(--color_border_btn);
-  outline: 0;
-}
-.top-input-search i.icon-search {
-  position: absolute;
-  top: 9px;
-  right: 15px;
-  z-index: 2;
-  color: var(--color_subtext);
-  font-weight: bold;
-}
-.top-input-search .response {
-  justify-self: start;
-  padding: 0 10px;
-  height: 32px;
-  line-height: 30px;
-  font-size: 12px;
-  color: var(--color_subtext);
-  border: solid 2px #d8d8d8;
-  border-radius: var(--radius_btn);
-  background-color: transparent;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  white-space: nowrap;
-  height: 28px;
-  line-height: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 /* //////paginacion//////// */
 .pagination-medium {
   margin-top: 10px;
-  background: var(--background_color_1);
+  background: transparent;
 }
 .pagination {
   font-size: 18px;
   color: var(--color_text);
+  background-color: transparent;
 }
 .el-pager li.active,
 .el-pager li.hover,
@@ -682,7 +473,7 @@ div.wrapper-productlist {
 }
 .popover {
   width: 300px;
-  background: var(--background_color_1);
+  background: transparent;
   position: absolute;
   right: -240px;
   top: 0;
@@ -735,78 +526,66 @@ div.wrapper-productlist {
   height: 35px;
 }
 @media (max-width: 1290px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 15px;
   }
 }
 @media (max-width: 1265px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 10px;
   }
 }
 @media (max-width: 1250px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(250px, 2fr));
     grid-gap: 25px;
   }
 }
 @media (max-width: 1060px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(250px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 1050px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 1020px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 15px;
   }
 }
 @media (max-width: 1010px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 10px;
   }
 }
 @media (max-width: 1000px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 25px;
   }
 }
-
 @media (max-width: 790px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 780px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 16px;
   }
 }
 @media (max-width: 775px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 20px;
@@ -814,52 +593,37 @@ div.wrapper-productlist {
 }
 
 @media (max-width: 770px) {
-  /* ///////productos/////////// */
   .container {
     padding: 0px;
   }
-  .content-item-productos {
-    padding: 15px;
+  .content-items-categorias-text {
+    padding: 20px 10px 10px 10px;
   }
-  .title {
-    font-size: 25px;
-    margin-top: 20px;
+  .content-item-productos {
+    padding: 0px 15px;
   }
   .grid-products {
     grid-template-columns: repeat(2, minmax(10px, 2fr));
-    /* grid-gap: 32px; */
   }
-  .dropbtn {
-    margin-left: 5px;
+  .wrapper-filter {
+    padding-left: 10px;
   }
-  /* .top-right {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0px 15px;
-
-  } */
-  .content-title {
-    padding: 0px 15px;
+  .content-categoria {
+    padding-right: 0px;
   }
 }
 @media (max-width: 700px) {
-  /* .top-right {
-    display: initial;
-    width: 100%;
-    padding-top: 0px;
-    padding-bottom: 15px;
-  } */
   .content-items-categorias {
     margin-left: 5px;
     margin-bottom: 0px;
   }
+  .wrapper-filter {
+    display: none;
+  }
 }
-
 @media (max-width: 450px) {
   .grid-products {
     grid-template-columns: repeat(2, minmax(160px, 1fr));
-    /* grid-gap: 32px; */
   }
   .content-item-productos {
     padding: 5px;

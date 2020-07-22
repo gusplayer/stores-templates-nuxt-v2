@@ -20,15 +20,10 @@
             <li @click="clear">
               <p class="name-category-all">Todos los productos</p>
             </li>
-            <div
-              v-for="categoria in categorias"
-              :key="categoria.id"
-              class="contenedor-modulos"
-            >
+            <div v-for="categoria in categorias" :key="categoria.id">
               <BaseAccordian>
                 <template v-slot:categorias>
                   <li
-                    class="close text-categoria"
                     @click="
                       sendCategory(
                         categoria,
@@ -270,7 +265,7 @@ export default {
   }
   .order_header_close {
     font-size: 20px;
-    padding: 0px 3px;
+    padding: 0px 2px;
     border-radius: 25px;
     border: 1px solid white;
     background-color: var(--color_shopping_cart);
