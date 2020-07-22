@@ -13,11 +13,12 @@
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >/ {{ this.nameCategoryHeader }}</p>
-          <p
-            class="text-categorias-select"
-            v-if="this.nameSubCategoryHeader"
-          >/ {{ this.nameSubCategoryHeader }}</p>
+          >
+            / {{ this.nameCategoryHeader }}
+          </p>
+          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
+            / {{ this.nameSubCategoryHeader }}
+          </p>
         </div>
         <!-- <div class="search">
           <div>
@@ -65,7 +66,9 @@
                               (ref = false)
                             )
                           "
-                        >{{ categoria.nombre_categoria_producto }}</p>
+                        >
+                          {{ categoria.nombre_categoria_producto }}
+                        </p>
                         <div
                           :style="indexCategory == index ? '' : 'display: none'"
                           class="content-item-subcategorie"
@@ -80,10 +83,15 @@
                             "
                             :key="subcategory.id"
                           >
-                            <p class="item-subcategorie">{{ subcategory.nombre_subcategoria }}</p>
+                            <p class="item-subcategorie">
+                              {{ subcategory.nombre_subcategoria }}
+                            </p>
                           </li>
                         </div>
-                        <div :class="{ popover: sub == index }" v-if="sub == index"></div>
+                        <div
+                          :class="{ popover: sub == index }"
+                          v-if="sub == index"
+                        ></div>
                       </label>
                     </li>
                   </ul>
@@ -93,7 +101,12 @@
           </ul>
           <div class="search">
             <div>
-              <input v-model="search" type="text" placeholder="Buscar . . ." required />
+              <input
+                v-model="search"
+                type="text"
+                placeholder="Buscar . . ."
+                required
+              />
             </div>
           </div>
         </div>
@@ -104,11 +117,18 @@
         </div>
         <div class="content-item-productos">
           <div class="grid-products">
-            <div v-for="product in filterProduct" :key="product.id" class="content-products">
+            <div
+              v-for="product in filterProduct"
+              :key="product.id"
+              class="content-products"
+            >
               <KoProductCard1 :product="product"></KoProductCard1>
             </div>
           </div>
-          <div v-if="(this.fullProducts.length == 0)" class="content-products-empty">
+          <div
+            v-if="(this.fullProducts.length == 0)"
+            class="content-products-empty"
+          >
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
@@ -131,6 +151,7 @@
 
 <script>
 import KoProductCard1 from './_productcard/Ko-ProductCard-1'
+
 export default {
   components: {
     KoProductCard1,
@@ -446,6 +467,8 @@ div.wrapper-productlist {
   align-self: flex-end;
   margin-right: 2px;
   cursor: pointer;
+  display: flex;
+  align-self: flex-start;
 }
 .text-categorias-select {
   background: transparent;
@@ -458,6 +481,8 @@ div.wrapper-productlist {
   margin-left: 5px;
   cursor: pointer;
   opacity: 0.6;
+  display: flex;
+  align-self: flex-start;
 }
 .dropdown-content {
   display: none;

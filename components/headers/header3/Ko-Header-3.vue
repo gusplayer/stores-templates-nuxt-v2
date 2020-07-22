@@ -63,11 +63,9 @@ export default {
     this.toggle = true
     let domain = this.$route.fullPath
     if (domain == '/') {
-      console.log('Entro')
       this.showMenu = true
     } else {
       this.showMenu = false
-      console.log('No')
     }
   },
   data() {
@@ -381,7 +379,7 @@ input[type='search'] {
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
   border: solid 2px var(--color_shopping_cart);
-  padding: 4px 7px;
+  padding: 3px 7px;
   width: 35px;
   -webkit-border-radius: 10em;
   -moz-border-radius: 10em;

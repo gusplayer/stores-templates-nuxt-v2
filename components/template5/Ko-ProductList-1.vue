@@ -5,7 +5,6 @@
         <!-- <p class="title">Productos</p> -->
       </div>
       <br />
-
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
           <p class="text-categorias" @click="clear">Catálogo</p>
@@ -20,16 +19,6 @@
             / {{ this.nameSubCategoryHeader }}
           </p>
         </div>
-        <!-- <div class="search">
-          <div>
-            <input
-              v-model="search"
-              type="text"
-              placeholder="Buscar . . ."
-              required
-            />
-          </div>
-        </div>-->
       </div>
       <div class="top-right">
         <div class="content-item-top">
