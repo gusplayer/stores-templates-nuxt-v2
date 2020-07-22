@@ -10,15 +10,6 @@
         <p class="title-menu">{{ dataStore.tienda.nombre }}</p>
         <img src="../../../assets/img/verify-wp.png" class="verify-icon" />
 
-        <!-- <div class="header-content-logo">
-          <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
-            <img
-              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-              class="header-logo"
-            />
-          </nuxt-link>
-        </div>-->
-
         <div class="header-content-items">
           <div
             v-for="(item, index) in secciones"
@@ -169,7 +160,7 @@ export default {
       secciones: [
         {
           name: 'Inicio',
-          path: '/',
+          path: '/wa',
         },
         {
           name: 'Categorías',
