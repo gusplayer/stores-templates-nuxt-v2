@@ -14,6 +14,7 @@
             :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
             class="product-image"
           />
+
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
@@ -80,6 +81,7 @@
             :src="idCloudinary(this.product.foto_cloudinary, 200, 200)"
             class="product-image"
           />
+
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
@@ -344,7 +346,7 @@ div.wrapper-card {
 }
 .product-image {
   width: 100%;
-  height: 298.5px;
+  /* height: 298.5px; */
   /* object-fit: contain; */
   object-fit: cover;
   overflow: hidden;
@@ -483,12 +485,29 @@ div.wrapper-card {
 .card-icon-cart-movil:hover {
   color: var(--btnhover);
 }
+@media (max-width: 1000px) {
+  .card-info-1 {
+    top: 340px;
+  }
+  .card-info-2 {
+    top: 365px;
+  }
+}
+@media (max-width: 800px) {
+  .card-info-1 {
+    top: 280px;
+  }
+  .card-info-2 {
+    top: 305px;
+  }
+}
 @media (max-width: 768px) {
   .wrapper {
     display: none;
   }
   .wrapper-movil {
     display: initial;
+    width: 100%;
   }
   .content-name-product-movil {
     display: flex;
@@ -547,18 +566,25 @@ div.wrapper-card {
   }
   .card-info-1 {
     font-size: 15px;
-    top: 80px;
+    top: 230px;
   }
   .card-info-2 {
     font-size: 15px;
-    top: 109px;
+    top: 260px;
   }
   .product-image {
     width: 100%;
-    height: 160px;
-    /* object-fit: contain; */
-    object-fit: cover;
+    object-fit: contain;
+    /* object-fit: cover; */
     overflow: hidden;
+  }
+}
+@media (max-width: 530px) {
+  .card-info-1 {
+    top: 150px;
+  }
+  .card-info-2 {
+    top: 180px;
   }
 }
 @media (max-width: 450px) {
@@ -576,9 +602,6 @@ div.wrapper-card {
   .card-info-2 {
     font-size: 12px;
     top: 128px;
-  }
-  .wrapper-image {
-    /* min-height: 201px; */
   }
 }
 </style>
