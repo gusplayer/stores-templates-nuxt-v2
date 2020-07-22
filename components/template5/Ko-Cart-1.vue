@@ -775,10 +775,11 @@ div.wrapper-cart {
 .contenedor-vacio {
   display: flex;
   width: 100%;
+  height: calc(100vh - 345px - 88px);
   max-width: 1300px;
   flex-direction: column;
   align-items: center;
-  padding: 130px 20px;
+  padding: 40px 20px;
   justify-content: center;
 }
 .btn3 {

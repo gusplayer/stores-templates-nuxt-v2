@@ -167,7 +167,6 @@ export default {
       return this.$store.state.settingBytemplatePrueba
     },
 
-
     fontStyle() {
       return {
         '--font-style': 'Roboto',
@@ -265,17 +264,7 @@ export default {
   --logo_width: 120px;
   --radius_btn: 5px;
 }
-* {
-  margin: 0px;
-  padding: 0px;
-  /* font-family: 'Poppins'; */
-  font-family: var(--font-style);
-  /* outline: none; */
-  list-style: none;
-  text-decoration: none;
-  box-sizing: border-box;
-  outline: none !important;
-}
+
 .wrapper-whatsapp {
   width: 60px;
   height: 60px;

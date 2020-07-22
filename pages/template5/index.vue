@@ -23,6 +23,7 @@ import KProductList from '../../components/template5/Ko-ProductList-1'
 import KNewsletter from '../../components/template5/Ko-Newsletter-1'
 
 export default {
+  layout: 'default',
   components: {
     kBanner,
     KProductList,

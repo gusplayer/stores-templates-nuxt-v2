@@ -3,8 +3,11 @@
     <div class="wrapper-header" ref="header">
       <div class="header">
         <KoOrder />
-        <img :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`" class="header-logo" />
-        <p class="title-menu">{{dataStore.tienda.nombre}}</p>
+        <img
+          :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+          class="header-logo"
+        />
+        <p class="title-menu">{{ dataStore.tienda.nombre }}</p>
         <img src="../../../assets/img/verify-wp.png" class="verify-icon" />
 
         <!-- <div class="header-content-logo">
@@ -23,11 +26,27 @@
             class="header-buttons"
           >
             <div @click="openMenu(item.name)">
-              <nuxt-link :to="item.path" v-if="item.path" class="header-text-center">{{ item.name }}</nuxt-link>
-              <div v-else style="margin-right: 20px; display: flex; flex-direction: row;">
+              <nuxt-link
+                :to="item.path"
+                v-if="item.path"
+                class="header-text-center"
+                >{{ item.name }}</nuxt-link
+              >
+              <div
+                v-else
+                style="margin-right: 20px; display: flex; flex-direction: row;"
+              >
                 <p class="header-text-center-icon">{{ item.name }}</p>
-                <div class="header-text-center-icon" v-if="showMenu == false" :is="item.iconOpen" />
-                <div class="header-text-center-icon" v-if="showMenu == true" :is="item.iconClose" />
+                <div
+                  class="header-text-center-icon"
+                  v-if="showMenu == false"
+                  :is="item.iconOpen"
+                />
+                <div
+                  class="header-text-center-icon"
+                  v-if="showMenu == true"
+                  :is="item.iconClose"
+                />
               </div>
             </div>
           </div>
@@ -56,14 +75,20 @@
             <p class="name-category-all">Todos los productos</p>
           </li>
           <div class="menu-grid">
-            <div class="container-category" v-for="categoria in categorias" :key="categoria.id">
+            <div
+              class="container-category"
+              v-for="categoria in categorias"
+              :key="categoria.id"
+            >
               <ul class="name-category">
                 <li>
                   <p
                     @click="
                       sendCategory(categoria, categoria.id, (ref = false))
                     "
-                  >{{ categoria.nombre_categoria_producto }}</p>
+                  >
+                    {{ categoria.nombre_categoria_producto }}
+                  </p>
                 </li>
                 <ul class="subcategoria">
                   <template>
@@ -71,7 +96,9 @@
                       <li
                         v-if="subcategory.categoria == categoria.id"
                         @click="Sendsubcategory(subcategory.id)"
-                      >{{ subcategory.nombre_subcategoria }}</li>
+                      >
+                        {{ subcategory.nombre_subcategoria }}
+                      </li>
                     </div>
                   </template>
                 </ul>

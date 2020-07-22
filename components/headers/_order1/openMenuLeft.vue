@@ -293,7 +293,7 @@ export default {
 }
 .order_header_close {
   font-size: 20px;
-  padding: 0px 5px;
+  padding: 0px 3px;
   border-radius: 25px;
   border: 1px solid white;
   background-color: var(--color_shopping_cart);

@@ -30,8 +30,8 @@ export default {
 .wrapper {
   width: 100%;
   padding: 5px 0px;
-  background: white;
-  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.08);
+  background: transparent;
+  /* box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.08); */
 }
 .accordion {
   width: 100%;

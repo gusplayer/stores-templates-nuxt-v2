@@ -37,12 +37,12 @@ export default {
       if (prevScrollpos > currentScrollPos) {
         // document.getElementById('navbar').style.left = '0px'
         document.getElementById('navbar').style.zIndex = '3'
-        document.getElementById('navbar').style.top = '91px'
+        document.getElementById('navbar').style.top = '53px'
         // document.getElementById('navbar').style.opacity = '1'
       } else {
         // document.getElementById('navbar').style.left = '-400px'
         document.getElementById('navbar').style.zIndex = '0'
-        document.getElementById('navbar').style.top = '55px'
+        document.getElementById('navbar').style.top = '0px'
         // document.getElementById('navbar').style.opacity = '0'
       }
       prevScrollpos = currentScrollPos
@@ -161,7 +161,7 @@ input::-webkit-input-placeholder {
   .space-search {
     display: flex;
     width: 100%;
-    height: 37px;
+    /* height: 2px; */
   }
   .search-movil {
     width: 100%;
@@ -171,7 +171,7 @@ input::-webkit-input-placeholder {
     -webkit-transition: all 0.8s;
     -moz-transition: all 0.8s;
     transition: all 0.8s;
-    top: 91px;
+    top: 53px;
     z-index: 3;
   }
 }

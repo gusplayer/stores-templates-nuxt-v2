@@ -355,14 +355,14 @@ div.header-container {
 }
 .header-container {
   width: 100%;
-  height: 91px;
+  height: 88px;
   overflow: hidden;
   background: var(--background_color_1);
 }
 .menu-container {
   width: 100%;
   background: var(--background_color_1);
-  top: 91px;
+  top: 88px;
   display: flex;
   transition: all ease 0.6s;
   position: fixed;
@@ -663,7 +663,7 @@ input[type='search'] {
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
   border: solid 2px var(--color_shopping_cart);
-  padding: 3px 7px;
+  padding: 7px 8px;
   width: 35px;
   -webkit-border-radius: 10em;
   -moz-border-radius: 10em;

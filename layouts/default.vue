@@ -176,13 +176,13 @@ export default {
       let headerComponent = ''
       switch (this.template) {
         case 5:
-          headerComponent = 'KoHeader3'
+          headerComponent = 'KoHeader1'
           break
         case 6:
           headerComponent = 'KoHeader2'
           break
         case 7:
-          headerComponent = 'KoHeader1'
+          headerComponent = 'KoHeader3'
           break
       }
       return headerComponent
@@ -301,7 +301,7 @@ export default {
   padding: 0px;
   /* font-family: 'Poppins'; */
   font-family: var(--font-style);
-  /* outline: none; */
+  outline: none;
   list-style: none;
   text-decoration: none;
   box-sizing: border-box;
