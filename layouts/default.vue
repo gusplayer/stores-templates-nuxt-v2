@@ -175,24 +175,14 @@ export default {
     headerTemplate() {
       let headerComponent = ''
       switch (this.template) {
-<<<<<<< HEAD
         case 5:
           headerComponent = 'KoHeader3'
-=======
-        case 3:
-          headerComponent = 'KoHeader1'
->>>>>>> 66232e8de3b6d12872a20ba565c9dfb8352d4970
           break
         case 6:
           headerComponent = 'KoHeader2'
           break
-<<<<<<< HEAD
         case 7:
           headerComponent = 'KoHeader1'
-=======
-        case 5:
-          headerComponent = 'KoHeader3'
->>>>>>> 66232e8de3b6d12872a20ba565c9dfb8352d4970
           break
       }
       return headerComponent
