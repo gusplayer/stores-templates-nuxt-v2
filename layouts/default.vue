@@ -176,13 +176,13 @@ export default {
       let headerComponent = ''
       switch (this.template) {
         case 3:
-          headerComponent = 'KoHeader3'
+          headerComponent = 'KoHeader1'
           break
         case 4:
           headerComponent = 'KoHeader2'
           break
         case 5:
-          headerComponent = 'KoHeader1'
+          headerComponent = 'KoHeader3'
           break
       }
       return headerComponent
