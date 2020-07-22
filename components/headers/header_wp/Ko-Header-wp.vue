@@ -370,7 +370,7 @@ div.header-container {
 .menu-container {
   width: 100%;
   background: var(--background_color_1);
-  top: 91px;
+  top: 50px;
   display: flex;
   transition: all ease 0.6s;
   position: fixed;

@@ -232,39 +232,6 @@ export default {
 </script>
 
 <style>
-:root {
-  --purple: #4429b4;
-  --green: #00dd8d;
-  --magenta: #c52675;
-  --yellow: #f2b931;
-
-  /* --background_color_1: #fff; #128C7E */
-  --background_color_1: #128c7e;
-
-  --background_color_2: #e4e4e4;
-  --color_background_hover: #cccccc;
-
-  --color_text: #1e0e62;
-  --color_hover_text: #c52675;
-  --color_subtext: rgba(21, 20, 57, 0.541);
-
-  --color_shopping_cart: #25dac5;
-  --color_icon: #25dac5;
-
-  --color_text_btn: #000;
-  --color_border_btn: #25dac5;
-  --color_background_btn: #25dac5;
-  --btnhover: #c52675;
-
-  --color_background_btn_2: #000;
-  --btnhover2: #c52675;
-
-  --color_border: rgba(110, 110, 133, 0.342);
-
-  --logo_width: 120px;
-  --radius_btn: 5px;
-}
-
 .wrapper-whatsapp {
   width: 60px;
   height: 60px;
