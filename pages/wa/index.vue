@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="home">
-    <div class="space-search"></div>
-    <div class="search-movil" id="navbar">
+    <!-- <div class="space-search"></div> -->
+    <!-- <div class="search-movil" id="navbar">
       <form id="demo-1" style="width: 100%;">
         <input v-model="search" type="search" placeholder="¿Qué buscas?" />
       </form>
-    </div>
+    </div> -->
     <!-- <kBanner :dataStore="dataStore" /> -->
     <!-- <KProductFavoritos /> -->
     <KProductList
@@ -23,6 +23,7 @@ import KProductList from '../../components/whatsapp/Ko-ProductList-1'
 // import KNewsletter from '../../components/template5/Ko-Newsletter-1'
 
 export default {
+  layout: 'wa',
   components: {
     kBanner,
     KProductList,

@@ -13,12 +13,11 @@
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >
-            / {{ this.nameCategoryHeader }}
-          </p>
-          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            / {{ this.nameSubCategoryHeader }}
-          </p>
+          >/ {{ this.nameCategoryHeader }}</p>
+          <p
+            class="text-categorias-select"
+            v-if="this.nameSubCategoryHeader"
+          >/ {{ this.nameSubCategoryHeader }}</p>
         </div>
         <!-- <div class="search">
           <div>
@@ -66,9 +65,7 @@
                               (ref = false)
                             )
                           "
-                        >
-                          {{ categoria.nombre_categoria_producto }}
-                        </p>
+                        >{{ categoria.nombre_categoria_producto }}</p>
                         <div
                           :style="indexCategory == index ? '' : 'display: none'"
                           class="content-item-subcategorie"
@@ -83,15 +80,10 @@
                             "
                             :key="subcategory.id"
                           >
-                            <p class="item-subcategorie">
-                              {{ subcategory.nombre_subcategoria }}
-                            </p>
+                            <p class="item-subcategorie">{{ subcategory.nombre_subcategoria }}</p>
                           </li>
                         </div>
-                        <div
-                          :class="{ popover: sub == index }"
-                          v-if="sub == index"
-                        ></div>
+                        <div :class="{ popover: sub == index }" v-if="sub == index"></div>
                       </label>
                     </li>
                   </ul>
@@ -101,12 +93,7 @@
           </ul>
           <div class="search">
             <div>
-              <input
-                v-model="search"
-                type="text"
-                placeholder="Buscar . . ."
-                required
-              />
+              <input v-model="search" type="text" placeholder="Buscar . . ." required />
             </div>
           </div>
         </div>
@@ -114,18 +101,11 @@
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
-            <div
-              v-for="product in filterProduct"
-              :key="product.id"
-              class="content-products"
-            >
+            <div v-for="product in filterProduct" :key="product.id" class="content-products">
               <KoProductCard1 :product="product"></KoProductCard1>
             </div>
           </div>
-          <div
-            v-if="(this.fullProducts.length == 0)"
-            class="content-products-empty"
-          >
+          <div v-if="(this.fullProducts.length == 0)" class="content-products-empty">
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
@@ -213,15 +193,15 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 24 - 24
-      const final = initial + 24
+      const initial = this.currentPage * 16 - 16
+      const final = initial + 16
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 24 - 24
-      const final = initial + 24
+      const initial = this.currentPage * 16 - 16
+      const final = initial + 16
       return this.products.slice(initial, final)
     },
     selectedCategory() {
@@ -372,6 +352,11 @@ export default {
 <style scoped>
 div.wrapper-productlist {
   --background_color_1: #f2f4f7;
+  background-image: url('../../assets/img/wp_background.png');
+  background-color: #cccccc;
+  background-position: center; /* Center the image */
+  background-repeat: repeat; /* Do not repeat the image */
+  background-size: contain;
 }
 .wrapper-productlist {
   display: flex;

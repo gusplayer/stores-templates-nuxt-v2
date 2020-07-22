@@ -3,14 +3,19 @@
     <div class="wrapper-header" ref="header">
       <div class="header">
         <KoOrder />
-        <div class="header-content-logo">
+        <img :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`" class="header-logo" />
+        <p class="title-menu">{{dataStore.tienda.nombre}}</p>
+        <img src="../../../assets/img/verify-wp.png" class="verify-icon" />
+
+        <!-- <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
             />
           </nuxt-link>
-        </div>
+        </div>-->
+
         <div class="header-content-items">
           <div
             v-for="(item, index) in secciones"
@@ -18,36 +23,20 @@
             class="header-buttons"
           >
             <div @click="openMenu(item.name)">
-              <nuxt-link
-                :to="item.path"
-                v-if="item.path"
-                class="header-text-center"
-                >{{ item.name }}</nuxt-link
-              >
-              <div
-                v-else
-                style="margin-right: 20px; display: flex; flex-direction: row;"
-              >
+              <nuxt-link :to="item.path" v-if="item.path" class="header-text-center">{{ item.name }}</nuxt-link>
+              <div v-else style="margin-right: 20px; display: flex; flex-direction: row;">
                 <p class="header-text-center-icon">{{ item.name }}</p>
-                <div
-                  class="header-text-center-icon"
-                  v-if="showMenu == false"
-                  :is="item.iconOpen"
-                />
-                <div
-                  class="header-text-center-icon"
-                  v-if="showMenu == true"
-                  :is="item.iconClose"
-                />
+                <div class="header-text-center-icon" v-if="showMenu == false" :is="item.iconOpen" />
+                <div class="header-text-center-icon" v-if="showMenu == true" :is="item.iconClose" />
               </div>
             </div>
           </div>
         </div>
-        <div class="search">
+        <!-- <div class="search">
           <form id="demo-2">
             <input type="search" placeholder="¿Qué buscas?" v-model="search" />
           </form>
-        </div>
+        </div>-->
         <div class="header-content-icon">
           <div class="header-content-cart" @click="openOrder">
             <cart-icon class="header-icon-cart" />
@@ -67,20 +56,14 @@
             <p class="name-category-all">Todos los productos</p>
           </li>
           <div class="menu-grid">
-            <div
-              class="container-category"
-              v-for="categoria in categorias"
-              :key="categoria.id"
-            >
+            <div class="container-category" v-for="categoria in categorias" :key="categoria.id">
               <ul class="name-category">
                 <li>
                   <p
                     @click="
                       sendCategory(categoria, categoria.id, (ref = false))
                     "
-                  >
-                    {{ categoria.nombre_categoria_producto }}
-                  </p>
+                  >{{ categoria.nombre_categoria_producto }}</p>
                 </li>
                 <ul class="subcategoria">
                   <template>
@@ -88,9 +71,7 @@
                       <li
                         v-if="subcategory.categoria == categoria.id"
                         @click="Sendsubcategory(subcategory.id)"
-                      >
-                        {{ subcategory.nombre_subcategoria }}
-                      </li>
+                      >{{ subcategory.nombre_subcategoria }}</li>
                     </div>
                   </template>
                 </ul>
@@ -114,8 +95,8 @@
 </template>
 
 <script>
-import KoOrder from '../_order1/order1'
-import KoMenu from '../_order1/openMenuRight'
+import KoOrder from './_order1/order1'
+import KoMenu from './_order1/openMenuRight'
 
 export default {
   components: {
@@ -355,7 +336,7 @@ div.header-container {
 }
 .header-container {
   width: 100%;
-  height: 91px;
+  height: 50px;
   overflow: hidden;
   background: var(--background_color_1);
 }
@@ -374,6 +355,11 @@ div.header-container {
 }
 .animated {
   opacity: 1;
+}
+.title-menu {
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
 }
 .wrapper-header {
   display: flex;
@@ -474,9 +460,17 @@ div.header-container {
 }
 .header-logo {
   /* width: 100%; */
-  max-height: 70px;
+  height: 30px;
+  width: 30px;
   object-fit: contain;
-  object-position: left;
+  object-position: center;
+  border-radius: 45px;
+  margin-right: 8px;
+  background-color: white;
+}
+.verify-icon {
+  margin-left: 4px;
+  width: 13px;
 }
 .header-content-items {
   display: flex;
@@ -543,9 +537,9 @@ div.header-container {
   box-sizing: border-box;
   width: 35px;
   height: 35px;
-  border: var(--color_shopping_cart) 2px solid;
-  border-radius: 50%;
-  padding-bottom: 3px;
+  /* border: var(--color_shopping_cart) 2px solid; */
+  /* border-radius: 50%; */
+  /* padding-bottom: 3px; */
   margin-left: 20px;
   position: relative;
   cursor: pointer;
@@ -567,8 +561,9 @@ div.header-container {
   font-weight: bold;
 }
 .header-icon-cart {
-  font-size: 20px;
-  color: var(--color_icon);
+  font-size: 22px;
+  /* color: var(--color_icon); */
+  color: white;
 }
 .header-icon-cart:hover {
   color: var(--color_hover_text);
@@ -734,6 +729,7 @@ input::-webkit-input-placeholder {
     line-height: normal;
     letter-spacing: normal;
     color: var(--color_text);
+    color: white;
   }
   .header-icon-menu > .material-design-icon__svg {
     bottom: 0em;
@@ -747,6 +743,7 @@ input::-webkit-input-placeholder {
     line-height: normal;
     letter-spacing: normal;
     color: var(--color_text);
+    color: #fff;
   }
   .nav-bar > .material-design-icon__svg {
     bottom: 0px;
