@@ -7,12 +7,12 @@ const _7475a39b = () => interopDefault(import('../pages/cart.vue' /* webpackChun
 const _4a84afca = () => interopDefault(import('../pages/contacto.vue' /* webpackChunkName: "pages/contacto" */))
 const _5f542ada = () => interopDefault(import('../pages/template5/index.vue' /* webpackChunkName: "pages/template5/index" */))
 const _653a9d54 = () => interopDefault(import('../pages/template6/index.vue' /* webpackChunkName: "pages/template6/index" */))
+const _b5c84470 = () => interopDefault(import('../pages/wa/index.vue' /* webpackChunkName: "pages/wa/index" */))
 const _573b7d81 = () => interopDefault(import('../pages/constructor/constructorK.vue' /* webpackChunkName: "pages/constructor/constructorK" */))
 const _52ebac6f = () => interopDefault(import('../pages/template5/cart.vue' /* webpackChunkName: "pages/template5/cart" */))
 const _7a622e9e = () => interopDefault(import('../pages/template5/contacto.vue' /* webpackChunkName: "pages/template5/contacto" */))
 const _2abcb93a = () => interopDefault(import('../pages/productos/_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
 const _3fea4e32 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
-const _224d0f6e = () => interopDefault(import('../pages/_productos_DELETE/_slug/index.vue' /* webpackChunkName: "pages/_productos_DELETE/_slug/index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -47,6 +47,10 @@ export const routerOptions = {
     component: _653a9d54,
     name: "template6"
   }, {
+    path: "/wa",
+    component: _b5c84470,
+    name: "wa"
+  }, {
     path: "/constructor/constructorK",
     component: _573b7d81,
     name: "constructor-constructorK"
@@ -66,10 +70,6 @@ export const routerOptions = {
     path: "/",
     component: _3fea4e32,
     name: "index"
-  }, {
-    path: "/:productos_DELETE/:slug?",
-    component: _224d0f6e,
-    name: "productos_DELETE-slug"
   }],
 
   fallback: false

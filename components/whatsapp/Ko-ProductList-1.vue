@@ -13,11 +13,12 @@
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >/ {{ this.nameCategoryHeader }}</p>
-          <p
-            class="text-categorias-select"
-            v-if="this.nameSubCategoryHeader"
-          >/ {{ this.nameSubCategoryHeader }}</p>
+          >
+            / {{ this.nameCategoryHeader }}
+          </p>
+          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
+            / {{ this.nameSubCategoryHeader }}
+          </p>
         </div>
         <!-- <div class="search">
           <div>
@@ -65,7 +66,9 @@
                               (ref = false)
                             )
                           "
-                        >{{ categoria.nombre_categoria_producto }}</p>
+                        >
+                          {{ categoria.nombre_categoria_producto }}
+                        </p>
                         <div
                           :style="indexCategory == index ? '' : 'display: none'"
                           class="content-item-subcategorie"
@@ -80,10 +83,15 @@
                             "
                             :key="subcategory.id"
                           >
-                            <p class="item-subcategorie">{{ subcategory.nombre_subcategoria }}</p>
+                            <p class="item-subcategorie">
+                              {{ subcategory.nombre_subcategoria }}
+                            </p>
                           </li>
                         </div>
-                        <div :class="{ popover: sub == index }" v-if="sub == index"></div>
+                        <div
+                          :class="{ popover: sub == index }"
+                          v-if="sub == index"
+                        ></div>
                       </label>
                     </li>
                   </ul>
@@ -93,22 +101,31 @@
           </ul>
           <div class="search">
             <div>
-              <input v-model="search" type="text" placeholder="Buscar . . ." required />
+              <input
+                v-model="search"
+                type="text"
+                placeholder="Buscar . . ."
+                required
+              />
             </div>
           </div>
         </div>
       </div>
       <div class="content-item">
-        <div>
-          <h1>Hola</h1>
-        </div>
         <div class="content-item-productos">
           <div class="grid-products">
-            <div v-for="product in filterProduct" :key="product.id" class="content-products">
+            <div
+              v-for="product in filterProduct"
+              :key="product.id"
+              class="content-products"
+            >
               <KoProductCard1 :product="product"></KoProductCard1>
             </div>
           </div>
-          <div v-if="(this.fullProducts.length == 0)" class="content-products-empty">
+          <div
+            v-if="(this.fullProducts.length == 0)"
+            class="content-products-empty"
+          >
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
@@ -139,7 +156,7 @@ export default {
     dataStore: Object,
     fullProducts: {},
   },
-  name: 'Ko-ProductList-1',
+  name: 'Ko-ProductList-3',
   mounted() {
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
@@ -203,8 +220,8 @@ export default {
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 9 - 9
-      const final = initial + 9
+      const initial = this.currentPage * 24 - 24
+      const final = initial + 24
       return this.products.slice(initial, final)
     },
     selectedCategory() {
@@ -361,8 +378,7 @@ div.wrapper-productlist {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background: var(--background_color_1); */
-  background: #eeeeee;
+  background: var(--background_color_1);
   box-sizing: border-box;
 }
 .container {
@@ -446,6 +462,8 @@ div.wrapper-productlist {
   align-self: flex-end;
   margin-right: 2px;
   cursor: pointer;
+  display: flex;
+  align-self: flex-start;
 }
 .text-categorias-select {
   background: transparent;
@@ -458,6 +476,8 @@ div.wrapper-productlist {
   margin-left: 5px;
   cursor: pointer;
   opacity: 0.6;
+  display: flex;
+  align-self: flex-start;
 }
 .dropdown-content {
   display: none;
@@ -554,7 +574,7 @@ div.wrapper-productlist {
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(250px, 2fr));
+  grid-template-columns: repeat(4, minmax(250px, 2fr));
   grid-gap: 25px;
   box-sizing: border-box;
 }
@@ -712,14 +732,14 @@ div.wrapper-productlist {
 @media (max-width: 1290px) {
   /* ///////productos/////////// */
   .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
+    grid-template-columns: repeat(4, minmax(240px, 2fr));
     grid-gap: 15px;
   }
 }
 @media (max-width: 1265px) {
   /* ///////productos/////////// */
   .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
+    grid-template-columns: repeat(4, minmax(240px, 2fr));
     grid-gap: 10px;
   }
 }

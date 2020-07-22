@@ -251,7 +251,7 @@ div.wrapper-card {
   /* background: var(--background_color_2); */
   background: white;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
 }
 .container {
@@ -338,10 +338,9 @@ div.wrapper-card {
   font-stretch: normal;
   font-style: normal;
   line-height: 1.3;
-  text-align: start;
+  text-align: center;
   /* letter-spacing: 1px; */
-  /* color: var(--color_text); */
-  color: #333;
+  color: var(--color_text);
   font-weight: 400;
 }
 .content-name-product {
@@ -368,8 +367,7 @@ div.wrapper-card {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: rgba(55, 4, 4, 0.61); */
-  color: #333;
+  color: rgba(55, 4, 4, 0.61);
   text-decoration: line-through;
   text-align: center;
 }
@@ -393,8 +391,7 @@ div.wrapper-card {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: #333;
+  color: var(--color_subtext);
   text-align: left;
 }
 .btn {

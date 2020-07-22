@@ -1,0 +1,225 @@
+<template>
+  <div class="wrapper_newsletter">
+    <div class="contenedor">
+      <div class="content-title">
+        <p class="subtext">SUSCRIBÉTE</p>
+        <p class="title">
+          Suscribéte a nuestro boletín para enviarte promociones.
+        </p>
+      </div>
+      <div class="content-button">
+        <ValidationProvider
+          ref="validate"
+          name="email"
+          rules="required|email"
+          class="content-input-error"
+        >
+          <template slot-scope="{ errors }">
+            <input
+              name="email"
+              class="input-text"
+              type="email"
+              placeholder="Correo electrónico"
+              v-model="email"
+            />
+            <span
+              v-show="errors[0] || register"
+              class="text-error"
+              :style="register ? 'color:green' : ''"
+              >{{ errors[0] || register }}</span
+            >
+          </template>
+        </ValidationProvider>
+        <button ref="colorBtn" class="btn" @click="submitNewsletter">
+          Subscríbete
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
+export default {
+  name: 'Ko-Newsletter-1',
+  props: {
+    dataStore: Object,
+  },
+  components: {
+    ValidationObserver,
+    ValidationProvider,
+  },
+  mounted() {},
+  data() {
+    return {
+      email: null,
+      register: '',
+    }
+  },
+  destroyed() {
+    this.email = ''
+  },
+  methods: {
+    submitNewsletter() {
+      this.$refs.validate
+        .validate()
+        .then((response) => {
+          if (response.valid) {
+            const json = {
+              email: this.email,
+              tienda: this.dataStore.tienda.id_tienda,
+            }
+            axios
+              .post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
+              .then((res) => {
+                this.register = 'Tu correo ha sido registrado'
+                this.$message.success('Comentario enviado!')
+                this.email = ''
+              })
+              .catch(
+                (res) => (
+                  (this.register = 'Tu correo ya esta registrado'),
+                  this.$message.error('Tu correo ya esta registrado')
+                )
+              )
+          }
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    },
+  },
+  watch: {},
+}
+</script>
+
+<style scoped>
+div.wrapper_newsletter {
+  --background_color_1: #2f1893;
+  --color_text: #fff;
+  --color_subtext: #fff;
+}
+.wrapper_newsletter {
+  display: flex;
+  width: 100%;
+  background-color: var(--background_color_1);
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.contenedor {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1300px;
+  padding: 60px 20px 60px 20px;
+}
+.content-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+  flex-direction: column;
+}
+.title {
+  font-size: 38px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.24;
+  letter-spacing: -0.4px;
+  color: var(--color_text);
+  text-align: center;
+  width: 600px;
+}
+.subtext {
+  text-align: center;
+  color: var(--color_subtext);
+  font-size: 14px;
+  font-weight: bold;
+}
+.content-button {
+  display: flex;
+  padding-bottom: 10px;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+.input-text {
+  font-size: 14px;
+  color: var(--color_subtext);
+  border: solid 2px #afafaf;
+  border-radius: var(--radius_btn);
+  background-color: transparent;
+  padding: 12px 14px;
+  width: 360px;
+}
+.input-text::placeholder {
+  color: var(--color_subtext);
+  opacity: 0.7;
+}
+.input-text:focus,
+.input-text:active {
+  outline: 0;
+  border: solid 2px var(--color_border_btn);
+}
+.content-input-error {
+  display: flex;
+  flex-direction: column;
+}
+.text-error {
+  font-size: 12px;
+  color: #cb2027;
+  width: 100%;
+  margin-left: 10px;
+}
+.btn {
+  color: var(--color_text_btn);
+  border-radius: var(--radius_btn);
+  border: solid 2px var(--color_border_btn);
+  background-color: var(--color_background_btn);
+  padding: 8px 14px;
+  font-size: 14px;
+  width: 220px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 20px;
+  cursor: pointer;
+  min-height: 50px;
+  max-height: 50px;
+  transition: all 200ms ease-in;
+}
+.btn:hover {
+  background-color: var(--btnhover);
+  border: solid 2px var(--btnhover);
+}
+@media (max-width: 600px) {
+  .title {
+    width: 100%;
+    max-width: 550px;
+  }
+}
+@media (max-width: 500px) {
+  .contenedor {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 1300px;
+    padding: 40px 10px 30px 10px;
+  }
+  .title {
+    font-size: 30px;
+  }
+  .subtext {
+    font-size: 12px;
+  }
+  .input-text {
+    width: 190px;
+  }
+  .btn {
+    width: 110px;
+    margin-left: 10px;
+  }
+}
+</style>
