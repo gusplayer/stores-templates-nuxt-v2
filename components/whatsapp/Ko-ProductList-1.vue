@@ -112,9 +112,6 @@
         </div>
       </div>
       <div class="content-item">
-        <div>
-          <h1>Hola</h1>
-        </div>
         <div class="content-item-productos">
           <div class="grid-products">
             <div
@@ -151,7 +148,6 @@
 
 <script>
 import KoProductCard1 from './_productcard/Ko-ProductCard-1'
-
 export default {
   components: {
     KoProductCard1,
@@ -160,7 +156,7 @@ export default {
     dataStore: Object,
     fullProducts: {},
   },
-  name: 'Ko-ProductList-1',
+  name: 'Ko-ProductList-3',
   mounted() {
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
@@ -224,8 +220,8 @@ export default {
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 9 - 9
-      const final = initial + 9
+      const initial = this.currentPage * 24 - 24
+      const final = initial + 24
       return this.products.slice(initial, final)
     },
     selectedCategory() {
@@ -382,8 +378,7 @@ div.wrapper-productlist {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background: var(--background_color_1); */
-  background: #eeeeee;
+  background: var(--background_color_1);
   box-sizing: border-box;
 }
 .container {
@@ -579,7 +574,7 @@ div.wrapper-productlist {
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(250px, 2fr));
+  grid-template-columns: repeat(4, minmax(250px, 2fr));
   grid-gap: 25px;
   box-sizing: border-box;
 }
@@ -737,14 +732,14 @@ div.wrapper-productlist {
 @media (max-width: 1290px) {
   /* ///////productos/////////// */
   .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
+    grid-template-columns: repeat(4, minmax(240px, 2fr));
     grid-gap: 15px;
   }
 }
 @media (max-width: 1265px) {
   /* ///////productos/////////// */
   .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
+    grid-template-columns: repeat(4, minmax(240px, 2fr));
     grid-gap: 10px;
   }
 }

@@ -1,33 +1,20 @@
 <template>
   <div class="wrapper-card">
     <div class="container">
-      <div
-        class="wrapper"
-        v-on:mouseenter="active = false"
-        v-on:mouseleave="active = true"
-      >
-        <router-link
-          :to="{ path: `/productos/` + product.slug }"
-          class="wrapper-image"
-        >
-          <img
-            :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
-            class="product-image"
-          />
+      <div class="wrapper" v-on:mouseenter="active = false" v-on:mouseleave="active = true">
+        <router-link :to="{ path: `/productos/` + product.slug }" class="wrapper-image">
+          <img :src="idCloudinary(this.product.foto_cloudinary, 400, 400)" class="product-image" />
 
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
-          <p class="card-info-2" v-if="getFreeShipping == false">
-            Envío gratis !
-          </p>
+          <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis !</p>
         </router-link>
         <div class="wrapper-text">
           <div class="content-name-product">
-            <p class="card-text" v-if="this.product.nombre.length >= 55">
-              {{ `${this.product.nombre.slice(0, 55)}...` }}
-            </p>
-            <p class="card-text" v-else>
-              {{ `${this.product.nombre.slice(0, 55)}` }}
-            </p>
+            <p
+              class="card-text"
+              v-if="this.product.nombre.length >= 55"
+            >{{ `${this.product.nombre.slice(0, 55)}...` }}</p>
+            <p class="card-text" v-else>{{ `${this.product.nombre.slice(0, 55)}` }}</p>
           </div>
           <div v-if="active">
             <div class="content-text-price" v-if="this.product.precio">
@@ -39,9 +26,7 @@
                   <p
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
-                  >
-                    {{ currency(this.product.precio) }}
-                  </p>
+                  >{{ currency(this.product.precio) }}</p>
                 </div>
                 <!-- <p class="card-descuento">-50%</p> -->
               </div>
@@ -49,84 +34,55 @@
             <div class="content-text-price2" v-else></div>
           </div>
           <div class="content-text-price2" v-if="!active">
-            <div
-              class="content-soldOut"
-              v-if="!this.estadoCart && !soldOut && !spent"
-            >
-              <router-link
-                :to="{ path: `/productos/` + product.slug }"
-                class="btn"
-                >Ver más</router-link
-              >
+            <div class="content-soldOut" v-if="!this.estadoCart && !soldOut && !spent">
+              <router-link :to="{ path: `/productos/` + product.slug }" class="btn">Ver más</router-link>
               <div v-on:click="addShoppingCart" class="btn">
                 <cartArrowDown class="card-icon-cart" />Agregar
               </div>
             </div>
 
-            <router-link
-              :to="{ path: `/productos/` + product.slug }"
-              v-else
-              class="btn"
-              >Ver más</router-link
-            >
+            <router-link :to="{ path: `/productos/` + product.slug }" v-else class="btn">Ver más</router-link>
           </div>
         </div>
       </div>
       <div class="wrapper-movil">
-        <router-link
-          :to="{ path: `/productos/` + product.slug }"
-          class="wrapper-image"
-        >
-          <img
-            :src="idCloudinary(this.product.foto_cloudinary, 200, 200)"
-            class="product-image"
-          />
+        <router-link :to="{ path: `/productos/` + product.slug }" class="wrapper-image">
+          <img :src="idCloudinary(this.product.foto_cloudinary, 200, 200)" class="product-image" />
 
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
-          <p class="card-info-2" v-if="getFreeShipping == false">
-            Envío gratis !
-          </p>
+          <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis !</p>
         </router-link>
         <div class="wrapper-text">
           <router-link
             :to="{ path: `/productos/` + product.slug }"
             class="content-name-product-movil"
           >
-            <p class="card-text-movil" v-if="this.product.nombre.length >= 33">
-              {{ `${this.product.nombre.slice(0, 33)}..` }}
-            </p>
-            <p class="card-text-movil" v-else>
-              {{ `${this.product.nombre.slice(0, 34)}` }}
-            </p>
+            <p
+              class="card-text-movil"
+              v-if="this.product.nombre.length >= 33"
+            >{{ `${this.product.nombre.slice(0, 33)}..` }}</p>
+            <p class="card-text-movil" v-else>{{ `${this.product.nombre.slice(0, 34)}` }}</p>
           </router-link>
           <div class="content-text-price-movil-cart" v-if="this.product.precio">
-            <router-link
-              :to="{ path: `/productos/` + product.slug }"
-              class="wrapper-price"
-            >
+            <router-link :to="{ path: `/productos/` + product.slug }" class="wrapper-price">
               <div>
                 <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
                 </p>-->
-                <p class="card-price-2" v-if="this.product.precio > 0">
-                  {{ currency(this.product.precio) }}
-                </p>
+                <p
+                  class="card-price-2"
+                  v-if="this.product.precio > 0"
+                >{{ currency(this.product.precio) }}</p>
               </div>
               <!-- <p class="card-descuento">-50%</p> -->
             </router-link>
             <div v-if="!this.estadoCart && !soldOut && !spent">
-              <cartArrowDown
-                class="card-icon-cart-movil"
-                v-on:click="addShoppingCart"
-              />
+              <cartArrowDown class="card-icon-cart-movil" v-on:click="addShoppingCart" />
             </div>
           </div>
           <div class="separator-movil" v-else>
             <div v-if="!this.estadoCart && !soldOut && !spent">
-              <cartArrowDown
-                class="card-icon-cart-movil"
-                v-on:click="addShoppingCart"
-              />
+              <cartArrowDown class="card-icon-cart-movil" v-on:click="addShoppingCart" />
             </div>
           </div>
         </div>
@@ -295,7 +251,7 @@ div.wrapper-card {
   /* background: var(--background_color_2); */
   background: white;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
 }
 .container {
@@ -346,7 +302,7 @@ div.wrapper-card {
 }
 .product-image {
   width: 100%;
-  /* height: 298.5px; */
+  height: 298.5px;
   /* object-fit: contain; */
   object-fit: cover;
   overflow: hidden;
@@ -382,10 +338,9 @@ div.wrapper-card {
   font-stretch: normal;
   font-style: normal;
   line-height: 1.3;
-  text-align: start;
+  text-align: center;
   /* letter-spacing: 1px; */
-  /* color: var(--color_text); */
-  color: #333;
+  color: var(--color_text);
   font-weight: 400;
 }
 .content-name-product {
@@ -412,8 +367,7 @@ div.wrapper-card {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: rgba(55, 4, 4, 0.61); */
-  color: #333;
+  color: rgba(55, 4, 4, 0.61);
   text-decoration: line-through;
   text-align: center;
 }
@@ -437,8 +391,7 @@ div.wrapper-card {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: #333;
+  color: var(--color_subtext);
   text-align: left;
 }
 .btn {
@@ -488,29 +441,12 @@ div.wrapper-card {
 .card-icon-cart-movil:hover {
   color: var(--btnhover);
 }
-@media (max-width: 1000px) {
-  .card-info-1 {
-    top: 340px;
-  }
-  .card-info-2 {
-    top: 365px;
-  }
-}
-@media (max-width: 800px) {
-  .card-info-1 {
-    top: 280px;
-  }
-  .card-info-2 {
-    top: 305px;
-  }
-}
 @media (max-width: 768px) {
   .wrapper {
     display: none;
   }
   .wrapper-movil {
     display: initial;
-    width: 100%;
   }
   .content-name-product-movil {
     display: flex;
@@ -569,25 +505,18 @@ div.wrapper-card {
   }
   .card-info-1 {
     font-size: 15px;
-    top: 230px;
+    top: 208px;
   }
   .card-info-2 {
     font-size: 15px;
-    top: 260px;
+    top: 235px;
   }
   .product-image {
     width: 100%;
-    object-fit: contain;
-    /* object-fit: cover; */
+    height: 160px;
+    /* object-fit: contain; */
+    object-fit: cover;
     overflow: hidden;
-  }
-}
-@media (max-width: 530px) {
-  .card-info-1 {
-    top: 150px;
-  }
-  .card-info-2 {
-    top: 180px;
   }
 }
 @media (max-width: 450px) {
@@ -600,11 +529,14 @@ div.wrapper-card {
   }
   .card-info-1 {
     font-size: 12px;
-    top: 105px;
+    top: 145px;
   }
   .card-info-2 {
     font-size: 12px;
-    top: 128px;
+    top: 168px;
+  }
+  .wrapper-image {
+    /* min-height: 201px; */
   }
 }
 </style>

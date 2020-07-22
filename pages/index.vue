@@ -20,10 +20,12 @@ export default {
     indexTemplate() {
       let headerComponent = ''
       switch (this.template) {
-        case 3:
+
+        case 5:
           headerComponent = 'KoTemplate5'
           break
-        case 4:
+        case 6:
+
           headerComponent = 'KoTemplate6'
           break
       }

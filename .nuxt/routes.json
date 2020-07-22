@@ -3,70 +3,60 @@
     "name": "cart",
     "path": "/cart",
     "component": "/Projects/template-nuxt-dokku/pages/cart.vue",
-    "chunkName": "pages/cart",
-    "_name": "_7475a39b"
+    "chunkName": "pages/cart"
   },
   {
     "name": "contacto",
     "path": "/contacto",
     "component": "/Projects/template-nuxt-dokku/pages/contacto.vue",
-    "chunkName": "pages/contacto",
-    "_name": "_4a84afca"
+    "chunkName": "pages/contacto"
   },
   {
     "name": "template5",
     "path": "/template5",
     "component": "/Projects/template-nuxt-dokku/pages/template5/index.vue",
-    "chunkName": "pages/template5/index",
-    "_name": "_5f542ada"
+    "chunkName": "pages/template5/index"
   },
   {
     "name": "template6",
     "path": "/template6",
     "component": "/Projects/template-nuxt-dokku/pages/template6/index.vue",
-    "chunkName": "pages/template6/index",
-    "_name": "_653a9d54"
+    "chunkName": "pages/template6/index"
+  },
+  {
+    "name": "wa",
+    "path": "/wa",
+    "component": "/Projects/template-nuxt-dokku/pages/wa/index.vue",
+    "chunkName": "pages/wa/index"
   },
   {
     "name": "constructor-constructorK",
     "path": "/constructor/constructorK",
     "component": "/Projects/template-nuxt-dokku/pages/constructor/constructorK.vue",
-    "chunkName": "pages/constructor/constructorK",
-    "_name": "_573b7d81"
+    "chunkName": "pages/constructor/constructorK"
   },
   {
     "name": "template5-cart",
     "path": "/template5/cart",
     "component": "/Projects/template-nuxt-dokku/pages/template5/cart.vue",
-    "chunkName": "pages/template5/cart",
-    "_name": "_52ebac6f"
+    "chunkName": "pages/template5/cart"
   },
   {
     "name": "template5-contacto",
     "path": "/template5/contacto",
     "component": "/Projects/template-nuxt-dokku/pages/template5/contacto.vue",
-    "chunkName": "pages/template5/contacto",
-    "_name": "_7a622e9e"
+    "chunkName": "pages/template5/contacto"
   },
   {
     "name": "productos-slug",
     "path": "/productos/:slug?",
     "component": "/Projects/template-nuxt-dokku/pages/productos/_slug.vue",
-    "chunkName": "pages/productos/_slug",
-    "_name": "_2abcb93a"
+    "chunkName": "pages/productos/_slug"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Projects/template-nuxt-dokku/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_3fea4e32"
-  },
-  {
-    "name": "productos_DELETE-slug",
-    "path": "/:productos_DELETE/:slug?",
-    "component": "/Projects/template-nuxt-dokku/pages/_productos_DELETE/_slug/index.vue",
-    "chunkName": "pages/_productos_DELETE/_slug/index",
-    "_name": "_224d0f6e"
+    "chunkName": "pages/index"
   }
 ]

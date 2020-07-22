@@ -272,7 +272,9 @@ export default {
   --magenta: #c52675;
   --yellow: #f2b931;
 
-  --background_color_1: #fff;
+  /* --background_color_1: #fff; #128C7E */
+  --background_color_1: #128c7e;
+
   --background_color_2: #e4e4e4;
   --color_background_hover: #cccccc;
 
