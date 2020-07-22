@@ -19,7 +19,7 @@
             <div class="header-icon" v-if="item.link" :is="item.icon" />
           </div>
         </div>
-        <div class="search">
+        <div class="search" v-if="showMenu">
           <form id="demo-2">
             <input type="search" placeholder="¿Qué buscas?" v-model="search" />
           </form>

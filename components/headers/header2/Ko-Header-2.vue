@@ -48,7 +48,7 @@
             <div class="header-icon" v-if="item.link" :is="item.icon" />
           </div>
         </div>
-        <div class="search">
+        <div class="search" v-if="showSearch">
           <form id="demo-2">
             <input type="search" placeholder="¿Qué buscas?" v-model="search" />
           </form>
@@ -133,6 +133,12 @@ export default {
   },
   mounted() {
     this.toggle = true
+    let domain = this.$route.fullPath
+    if (domain == '/') {
+      this.showSearch = true
+    } else {
+      this.showSearch = false
+    }
   },
   data() {
     return {
@@ -141,6 +147,7 @@ export default {
       drawer: false,
       direction: 'rtl',
       showMenu: false,
+      showSearch: false,
       links: [
         {
           nombre: 'Facebook',
@@ -349,6 +356,14 @@ export default {
     },
     search(value) {
       this.Searchproduct(value)
+    },
+    $route(to, from) {
+      let domain = this.$route.fullPath
+      if (domain == '/') {
+        this.showSearch = true
+      } else {
+        this.showSearch = false
+      }
     },
   },
 }
