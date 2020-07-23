@@ -55,6 +55,15 @@
               >
             </BaseAccordian>
           </div>
+          <!-- <div class="filtrado-precios">
+            <p class="text-categorias">Precios</p>
+            <p class="text-categoria-precios" @click="SendpriceFalling()">
+              Menor precio
+            </p>
+            <p class="text-categoria-precios" @click="SendPriceUpward()">
+              Mayor precio
+            </p>
+          </div> -->
         </div>
         <div class="content-item-productos">
           <div class="grid-products">
@@ -292,6 +301,8 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
+    SendpriceFalling() {},
+    SendPriceUpward() {},
   },
   watch: {
     fullProducts(value) {
@@ -410,6 +421,21 @@ div.wrapper-productlist {
   opacity: 0.6;
   display: flex;
   align-self: flex-start;
+}
+.filtrado-precios {
+  padding: 10px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+.filtrado-precios > p {
+  margin-bottom: 10px;
+}
+.text-categoria-precios {
+  width: 100%;
+  font-size: 16px;
+  color: var(--color_text);
 }
 .content-products {
   border-radius: 10px;

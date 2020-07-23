@@ -21,15 +21,7 @@
           </p>
         </router-link>
         <div class="wrapper-text">
-          <div class="content-name-product">
-            <p class="card-text" v-if="this.product.nombre.length >= 55">
-              {{ `${this.product.nombre.slice(0, 55)}...` }}
-            </p>
-            <p class="card-text" v-else>
-              {{ `${this.product.nombre.slice(0, 55)}` }}
-            </p>
-          </div>
-          <div v-if="active">
+          <div>
             <div class="content-text-price" v-if="this.product.precio">
               <div class="wrapper-price">
                 <div>
@@ -47,6 +39,15 @@
               </div>
             </div>
             <div class="content-text-price2" v-else></div>
+          </div>
+
+          <div class="content-name-product" v-if="active">
+            <p class="card-text" v-if="this.product.nombre.length >= 55">
+              {{ `${this.product.nombre.slice(0, 55)}...` }}
+            </p>
+            <p class="card-text" v-else>
+              {{ `${this.product.nombre.slice(0, 55)}` }}
+            </p>
           </div>
           <div class="content-text-price2" v-if="!active">
             <div
@@ -296,7 +297,12 @@ div.wrapper-card {
   background: white;
   box-sizing: border-box;
   border-radius: 10px;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.288),
+    0 -1px 2px 0 rgba(0, 0, 0, 0.288);
+}
+.wrapper-card:hover {
+  -webkit-box-shadow: 0px 12px 21px 6px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 12px 21px 6px rgba(0, 0, 0, 0.35);
 }
 .container {
   display: flex;
@@ -317,7 +323,7 @@ div.wrapper-card {
   border-radius: var(--radius_btn);
   color: white;
   font-size: 12px;
-  top: 228px;
+  top: 60%;
   right: 0px;
   z-index: 2;
 }
@@ -332,7 +338,7 @@ div.wrapper-card {
   color: black;
   font-size: 12px;
   font-weight: bold;
-  top: 250px;
+  top: 65%;
   right: 0px;
   z-index: 2;
 }
@@ -342,7 +348,6 @@ div.wrapper-card {
   justify-content: center;
   overflow: hidden;
   width: 100%;
-  /* max-height: 300px; */
 }
 .product-image {
   width: 100%;
@@ -360,7 +365,7 @@ div.wrapper-card {
   display: flex;
   width: 100%;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 4px;
   justify-content: center;
 }
 .content-text-price2 {
@@ -368,7 +373,7 @@ div.wrapper-card {
   width: 100%;
   height: 47px;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 4px;
   justify-content: center;
 }
 .content-soldOut {
@@ -431,7 +436,7 @@ div.wrapper-card {
   margin-left: 5px;
 }
 .card-price-2 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: '500';
   font-stretch: normal;
   font-style: normal;
@@ -488,22 +493,7 @@ div.wrapper-card {
 .card-icon-cart-movil:hover {
   color: var(--btnhover);
 }
-@media (max-width: 1000px) {
-  .card-info-1 {
-    top: 340px;
-  }
-  .card-info-2 {
-    top: 365px;
-  }
-}
-@media (max-width: 800px) {
-  .card-info-1 {
-    top: 280px;
-  }
-  .card-info-2 {
-    top: 305px;
-  }
-}
+
 @media (max-width: 768px) {
   .wrapper {
     display: none;
@@ -564,32 +554,19 @@ div.wrapper-card {
     justify-content: center;
     align-self: center;
   }
-  .wrapper-image {
-    /* min-height: 301px; */
-  }
-  .card-info-1 {
-    font-size: 15px;
-    top: 230px;
-  }
-  .card-info-2 {
-    font-size: 15px;
-    top: 260px;
-  }
   .product-image {
     width: 100%;
     object-fit: contain;
-    /* object-fit: cover; */
     overflow: hidden;
   }
-}
-@media (max-width: 530px) {
   .card-info-1 {
-    top: 150px;
+    top: 55%;
   }
   .card-info-2 {
-    top: 180px;
+    top: 60%;
   }
 }
+
 @media (max-width: 450px) {
   .container {
     width: 100%;
@@ -599,12 +576,12 @@ div.wrapper-card {
     font-size: 16px;
   }
   .card-info-1 {
+    top: 52%;
     font-size: 12px;
-    top: 105px;
   }
   .card-info-2 {
+    top: 60%;
     font-size: 12px;
-    top: 128px;
   }
 }
 </style>

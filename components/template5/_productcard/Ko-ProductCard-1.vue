@@ -317,7 +317,7 @@ div.wrapper-card {
   border-radius: var(--radius_btn);
   color: white;
   font-size: 12px;
-  top: 228px;
+  top: 60%;
   right: 0px;
   z-index: 2;
 }
@@ -332,7 +332,7 @@ div.wrapper-card {
   color: black;
   font-size: 12px;
   font-weight: bold;
-  top: 250px;
+  top: 65%;
   right: 0px;
   z-index: 2;
 }
@@ -485,22 +485,6 @@ div.wrapper-card {
 .card-icon-cart-movil:hover {
   color: var(--btnhover);
 }
-@media (max-width: 1000px) {
-  .card-info-1 {
-    top: 340px;
-  }
-  .card-info-2 {
-    top: 365px;
-  }
-}
-@media (max-width: 800px) {
-  .card-info-1 {
-    top: 280px;
-  }
-  .card-info-2 {
-    top: 305px;
-  }
-}
 @media (max-width: 768px) {
   .wrapper {
     display: none;
@@ -565,12 +549,10 @@ div.wrapper-card {
     /* min-height: 301px; */
   }
   .card-info-1 {
-    font-size: 15px;
-    top: 230px;
+    top: 55%;
   }
   .card-info-2 {
-    font-size: 15px;
-    top: 260px;
+    top: 60%;
   }
   .product-image {
     width: 100%;
@@ -579,14 +561,7 @@ div.wrapper-card {
     overflow: hidden;
   }
 }
-@media (max-width: 530px) {
-  .card-info-1 {
-    top: 150px;
-  }
-  .card-info-2 {
-    top: 180px;
-  }
-}
+
 @media (max-width: 450px) {
   .container {
     width: 100%;
@@ -596,12 +571,12 @@ div.wrapper-card {
     font-size: 16px;
   }
   .card-info-1 {
+    top: 52%;
     font-size: 12px;
-    top: 105px;
   }
   .card-info-2 {
+    top: 60%;
     font-size: 12px;
-    top: 128px;
   }
 }
 </style>
