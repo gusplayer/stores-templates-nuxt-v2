@@ -8,7 +8,9 @@ import Google from 'vue-material-design-icons/GooglePlus.vue'
 import Instagram from 'vue-material-design-icons/Instagram.vue'
 import Youtube from 'vue-material-design-icons/Youtube.vue'
 import Cart from 'vue-material-design-icons/CartOutline.vue'
+import CartShop from 'vue-material-design-icons/ShoppingOutline.vue'
 import Menu from 'vue-material-design-icons/Menu.vue'
+import MenuDots from 'vue-material-design-icons/DotsVertical.vue'
 import Close from 'vue-material-design-icons/CloseCircle.vue'
 import WindowClose from 'vue-material-design-icons/WindowClose.vue'
 import Phone from 'vue-material-design-icons/Phone.vue'
@@ -21,6 +23,7 @@ import mas from 'vue-material-design-icons/Plus.vue'
 import menos from 'vue-material-design-icons/Minus.vue'
 import Delete from 'vue-material-design-icons/DeleteForever.vue'
 import Search from 'vue-material-design-icons/Magnify.vue'
+import Circle from 'vue-material-design-icons/CircleMedium.vue'
 
 Vue.component('menu-icon', MenuIcon)
 
@@ -32,7 +35,9 @@ Vue.component('youtube-icon', Youtube)
 Vue.component('whatsapp-icon', Whatsapp)
 
 Vue.component('cart-icon', Cart)
+Vue.component('cartShop-icon', CartShop)
 Vue.component('menu-icon', Menu)
+Vue.component('menuDots-icon', MenuDots)
 Vue.component('close-icon', Close)
 Vue.component('window-close-icon', WindowClose)
 Vue.component('delete-icon', Delete)
@@ -46,3 +51,4 @@ Vue.component('cartArrowDown', CartArrowDown)
 
 Vue.component('menos-icon', menos)
 Vue.component('mas-icon', mas)
+Vue.component('circle-icon', Circle)

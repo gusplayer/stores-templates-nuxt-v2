@@ -87,7 +87,7 @@ export default {
 <style scoped>
 .header-container {
   width: 100%;
-  height: 50px;
+  height: 46px;
   overflow: hidden;
   background: var(--background_color_1);
 }

@@ -1,121 +1,39 @@
 <template>
   <div class="wrapper-footer" ref="background">
     <div class="contenedor">
-      <div class="top-footer">
-        <div class="wrapper-logo">
-          <div class="left-logo">
-            <nuxt-link to="/" class="content-logo">
-              <img
-                :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-                class="logo"
-              />
-            </nuxt-link>
-            <div
-              v-html="this.dataStore.tienda.descripcion"
-              class="text-light"
-            ></div>
-          </div>
-        </div>
-        <div>
-          <p class="text-top-bold">Secciones</p>
-          <br />
-          <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-            <nuxt-link :to="item.path" class="text-top">
-              {{ item.name }}
-            </nuxt-link>
-          </div>
-        </div>
-        <div>
-          <p class="text-top-bold">Suscríbete</p>
-          <p class="text-light">
-            Registra tu correo para recibir información sobre promociones y
-            nuevos productos.
-          </p>
-          <br />
-          <div class="input-content">
-            <ValidationProvider
-              ref="validate"
-              name="email"
-              rules="required|email"
-              class="content-input-error"
-            >
-              <template slot-scope="{ errors }">
-                <input
-                  name="email"
-                  class="input-text"
-                  type="email"
-                  placeholder="Correo electrónico"
-                  v-model="email"
-                  @keyup.enter="toSubscribe"
-                />
-                <span
-                  v-show="errors[0] || register"
-                  class="text-error"
-                  :style="register ? 'color:green' : ''"
-                  >{{ errors[0] || register }}</span
-                >
-              </template>
-            </ValidationProvider>
-            <button ref="colorBtn" class="btn" @click="toSubscribe">
-              Enviar
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="items-movil">
-        <div class="item-movil-top">
-          <div class="left-logo-movil">
-            <img
-              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-              class="logo"
-            />
-            <div
-              v-for="(item, index) in secciones"
-              :key="`${index}${item.name}`"
-            >
-              <nuxt-link :to="item.path" class="text-top">
-                {{ item.name }}
-              </nuxt-link>
-            </div>
-          </div>
-          <br />
-          <div class="text-center">
-            <p>Suscríbite a nuestras promociones</p>
-          </div>
-          <div class="input-content">
-            <ValidationProvider
-              ref="validate"
-              name="email"
-              rules="required|email"
-              class="content-input-error"
-            >
-              <template slot-scope="{ errors }">
-                <input
-                  name="email"
-                  class="input-text"
-                  type="email"
-                  placeholder="Correo electrónico"
-                  v-model="email"
-                  @keyup.enter="toSubscribe"
-                />
-                <span
-                  v-show="errors[0] || register"
-                  class="text-error"
-                  :style="register ? 'color:green' : ''"
-                  >{{ errors[0] || register }}</span
-                >
-              </template>
-            </ValidationProvider>
-            <button class="btn" @click="toSubscribe">Enviar</button>
-          </div>
-        </div>
-        <div v-if="currentViews.length" class="item-movil-center">
-          <div
-            v-for="(item, index) in currentViews"
-            :key="`${index}${item.name}`"
+      <div class="content-top">
+        <p class="text-top-bold">Suscríbete</p>
+        <p class="text-light">
+          Registra tu correo para recibir información sobre promociones y nuevos
+          productos.
+        </p>
+        <br />
+        <div class="input-content">
+          <ValidationProvider
+            ref="validate"
+            name="email"
+            rules="required|email"
           >
-            <p class="text-movil">{{ item.name }}</p>
-          </div>
+            <template slot-scope="{ errors }">
+              <input
+                name="email"
+                class="input-text"
+                type="email"
+                placeholder="Correo electrónico"
+                v-model="email"
+                @keyup.enter="toSubscribe"
+              />
+              <span
+                v-show="errors[0] || register"
+                class="text-error"
+                :style="register ? 'color:green' : ''"
+                >{{ errors[0] || register }}</span
+              >
+            </template>
+          </ValidationProvider>
+          <button ref="colorBtn" class="btn" @click="toSubscribe">
+            Enviar
+          </button>
         </div>
       </div>
     </div>
@@ -327,32 +245,26 @@ export default {
 .contenedor {
   width: 100%;
   max-width: 1300px;
-  padding: 60px 30px 10px;
+  padding: 30px 30px 10px;
   display: flex;
   align-self: center;
+  border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
 }
-.top-footer {
+.content-top {
   width: 100%;
   display: flex;
-  flex-direction: row;
-}
-.top-footer > div {
-  flex: 1;
-}
-.top-footer > div:nth-child(1) {
-  flex: 2;
-}
-.top-footer > div:nth-child(3) {
-  flex: 2;
-}
-.wrapper-logo {
-  display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
 }
-.left-logo {
-  display: flex;
-  flex-direction: column;
+.text-top-bold {
+  font-size: 18px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--color_text);
+  font-weight: bold;
 }
 .text-light {
   font-size: 15px;
@@ -364,40 +276,18 @@ export default {
   color: var(--color_subtext);
   margin-top: 10px;
 }
-.content-logo {
-  max-width: var(--logo_width);
+.input-content {
   width: 100%;
+  max-width: 550px;
+  display: flex;
+  flex-direction: row;
 }
-.logo {
-  max-height: 70px;
-  object-fit: contain;
-  object-position: left;
+.input-content :nth-child(1) {
+  flex: 2;
 }
-.text-top {
-  font-size: 18px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  color: var(--color_text);
-  margin-top: 5px;
-  cursor: pointer;
+.input-content :nth-child(2) {
+  flex: 0.5;
 }
-.text-top:hover {
-  color: var(--color_icon);
-}
-
-.text-top-bold {
-  font-size: 18px;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  color: var(--color_text);
-  font-weight: bold;
-}
-
 .input-text {
   font-size: 14px;
   font-weight: 300;
@@ -428,39 +318,6 @@ export default {
   width: 100%;
   margin-left: 10px;
 }
-.text-icon {
-  display: flex;
-  flex-direction: row;
-}
-
-.text-icon a {
-  font-size: 18px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  color: var(--color_text);
-  margin-top: 5px;
-  margin-left: 7px;
-}
-.text-icon a:hover {
-  color: var(--color_icon);
-}
-.input-content {
-  display: flex;
-  flex-direction: row;
-}
-.input-content :nth-child(1) {
-  flex: 2;
-}
-.input-content :nth-child(2) {
-  flex: 0.5;
-}
-.icon {
-  font-size: 19px;
-  color: var(--color_icon);
-}
 .btn {
   border-radius: var(--radius_btn);
   color: var(--color_text_btn);
@@ -480,13 +337,10 @@ export default {
   background-color: var(--btnhover);
   border: solid 2px var(--btnhover);
 }
-.items-movil {
-  display: none;
-}
 .under-footer {
   display: flex;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 20px;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -690,15 +544,6 @@ input:checked ~ .tab-content {
   .contenedor {
     padding: 60px 20px 10px;
   }
-  .top-footer > div {
-    margin-right: 30px;
-  }
-  .top-footer > div:nth-child(3) {
-    margin-right: 0px;
-  }
-  .top-footer {
-    margin-top: 23px;
-  }
 }
 @media (max-width: 600px) {
   #modal-toggle:checked ~ .modal-backdrop {
@@ -714,12 +559,7 @@ input:checked ~ .tab-content {
     top: 0;
     left: 0;
   }
-  .left-logo {
-    display: none;
-  }
-  .top-footer {
-    display: none;
-  }
+
   .separator {
     max-width: 300px;
   }
@@ -744,13 +584,7 @@ input:checked ~ .tab-content {
     color: var(--color_text);
     text-align: center;
   }
-  .items-movil {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
+
   .item-movil-center {
     width: 100%;
     margin-top: 30px;
@@ -789,13 +623,7 @@ input:checked ~ .tab-content {
     align-items: center;
     justify-content: space-between;
   }
-  .left-logo-movil {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
+
   .text-center p {
     font-size: 17px;
     font-stretch: normal;
