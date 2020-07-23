@@ -1,34 +1,19 @@
 <template lang="html">
   <div class="home">
-    <!-- <div class="space-search"></div> -->
-    <!-- <div class="search-movil" id="navbar">
-      <form id="demo-1" style="width: 100%;">
-        <input v-model="search" type="search" placeholder="¿Qué buscas?" />
-      </form>
-    </div> -->
-    <!-- <kBanner :dataStore="dataStore" /> -->
-    <!-- <KProductFavoritos /> -->
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
     ></KProductList>
-    <!-- <KNewsletter :dataStore="dataStore" /> -->
   </div>
 </template>
 
 <script>
-import kBanner from '../../components/whatsapp/ko-Banner-1'
-import KProductFavoritos from '../../components/whatsapp/Ko-ProductFavoritos-1'
 import KProductList from '../../components/whatsapp/Ko-ProductList-1'
-// import KNewsletter from '../../components/template5/Ko-Newsletter-1'
 
 export default {
-  layout: 'wa',
+  layout: 'ig',
   components: {
-    kBanner,
     KProductList,
-    // KNewsletter,
-    KProductFavoritos,
   },
   mounted() {
     var prevScrollpos = window.pageYOffset

@@ -1,24 +1,22 @@
 <template>
-  <div :style="themeStyleWa">
-    <KoHeaderWp :dataStore="dataStore" />
-    <!-- <KoHeader1 :dataStore="dataStore" /> -->
-    <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
+  <div :style="themeStyleIg">
+    <KoHeaderIg :dataStore="dataStore" />
     <nuxt />
     <KFooter1 :dataStore="dataStore" />
-    <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
+    <!-- <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
       <koWhatsapp class="button-whatsapp" @click.native="redirectWhatsapp()" />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import KoHeaderWp from '../components/headers/header_wp/Ko-Header-wp'
+import KoHeaderIg from '../components/headers/header_ig/Ko-Header-ig'
 import KFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 
 export default {
   components: {
-    KoHeaderWp,
+    KoHeaderIg,
     KFooter1,
     koWhatsapp,
   },
@@ -30,10 +28,8 @@ export default {
       this.$store.state.dataStore.tienda
       // this.$store.state.dataStore.tienda.id_tienda
     )
-
     let domain = this.$route.fullPath
     if (domain == '/?clearCart=true') {
-      // console.log(domain, 'borrar carrito')
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
@@ -166,17 +162,16 @@ export default {
     settingBytemplatePrueba() {
       return this.$store.state.settingBytemplatePrueba
     },
-
-    themeStyleWa() {
+    themeStyleIg() {
       return {
-        '--font-style': 'Roboto',
+        '--font-style': 'Poppins',
 
         '--purple': ' #4429b4',
         '--green': '#00dd8d',
         '--magenta': '#c52675',
         '--yellow': '#f2b931',
 
-        '--background_color_1': '#128c7e',
+        '--background_color_1': '#ce1ebf',
 
         '--background_color_2': '#e4e4e4',
         '--color_background_hover': '#cccccc',
