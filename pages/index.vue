@@ -21,7 +21,7 @@ export default {
       let headerComponent = ''
       switch (this.template) {
         case 3:
-          headerComponent = 'KoTemplate6'
+          headerComponent = 'KoTemplate5'
           break
         case 5:
           headerComponent = 'KoTemplate5'
