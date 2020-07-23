@@ -13,6 +13,13 @@
           <nuxt-link to="/ig">
             <p class="title-menu">{{ dataStore.tienda.nombre }}</p>
           </nuxt-link>
+          <a
+            v-if="this.dataStore.tienda.red_instagram"
+            :href="this.dataStore.tienda.red_instagram"
+            target="_black"
+            class="header-text-center"
+            ><instagram-icon class="icon" />Seguir</a
+          >
         </div>
         <div class="headerRight">
           <div class="header-content-icon">
@@ -49,13 +56,7 @@ export default {
   },
   data() {
     return {
-      links: [
-        {
-          nombre: 'Instagram',
-          icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
-        },
-      ],
+      links: [],
     }
   },
   computed: {
@@ -71,14 +72,6 @@ export default {
     openMenulateral() {
       this.showMenu = false
       this.$store.state.openMenulateralRight = true
-    },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
     },
   },
 }
@@ -143,6 +136,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
 }
 .headerRight {
   width: 100%;
@@ -238,7 +232,6 @@ export default {
   background-color: white;
   cursor: pointer;
 }
-
 .header-content-items {
   display: flex;
   flex: 1;
@@ -255,22 +248,11 @@ export default {
 .header-text-center {
   font-size: 16px;
   font-weight: normal;
-  color: var(--color_text);
-  margin-right: 20px;
+  color: var(--color_icon);
+  margin-left: 15px;
   cursor: pointer;
 }
-.header-text-center:hover {
-  color: var(--color_hover_text);
-}
-.header-text-center-icon {
-  font-size: 16px;
-  font-weight: normal;
-  color: var(--color_text);
-  cursor: pointer;
-}
-.header-text-center-icon:hover {
-  color: var(--color_hover_text);
-}
+
 .header-content-icon {
   display: flex;
   flex-direction: row;
@@ -414,6 +396,9 @@ export default {
 .content-products:focus {
   box-shadow: 0px 0px 2px 1px var(--color_border);
 }
+.icon {
+  margin-right: 3px;
+}
 
 @media (max-width: 900px) {
   .header {
@@ -443,6 +428,20 @@ export default {
   }
   .headerRight {
     flex: 0;
+  }
+  .title-menu {
+    font-size: 25px;
+  }
+  .header-text-center {
+    font-size: 14px;
+  }
+}
+@media (max-width: 360px) {
+  .title-menu {
+    font-size: 23px;
+  }
+  .header-text-center {
+    font-size: 12px;
   }
 }
 </style>

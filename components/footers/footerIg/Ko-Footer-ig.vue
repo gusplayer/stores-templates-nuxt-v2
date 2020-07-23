@@ -241,6 +241,7 @@ export default {
   box-sizing: border-box;
   flex-direction: column;
   padding-bottom: 10px;
+  border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
 }
 .contenedor {
   width: 100%;
@@ -248,7 +249,6 @@ export default {
   padding: 30px 30px 10px;
   display: flex;
   align-self: center;
-  border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
 }
 .content-top {
   width: 100%;

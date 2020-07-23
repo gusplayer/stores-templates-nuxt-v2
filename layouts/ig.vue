@@ -177,19 +177,19 @@ export default {
         '--color_background_hover': '#cccccc',
 
         '--color_text': '#000',
-        '--color_hover_text': '#c52675',
+        '--color_hover_text': '#25dac5',
         '--color_subtext': 'rgba(21, 20, 57, 0.541)',
 
-        '--color_shopping_cart': '#25dac5',
-        '--color_icon': '#25dac5',
+        '--color_shopping_cart': '#3aacf7',
+        '--color_icon': '#3aacf7',
 
-        '--color_text_btn': '#000',
-        '--color_border_btn': '#25dac5',
-        '--color_background_btn': '#25dac5',
-        '--btnhover': '#c52675',
+        '--color_text_btn': '#fff',
+        '--color_border_btn': '#000000',
+        '--color_background_btn': '#000000',
+        '--btnhover': '#25dac5',
 
         '--color_background_btn_2': ' #000',
-        '--btnhover2': '#c52675',
+        '--btnhover2': '#25dac5',
 
         '--color_border': 'rgba(110, 110, 133, 0.342)',
 

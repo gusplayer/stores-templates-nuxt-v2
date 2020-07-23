@@ -435,7 +435,7 @@ div.wrapper-card {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  color: var(--color_icon);
   text-align: left;
 }
 .btn {
@@ -603,5 +603,6 @@ div.wrapper-card {
     font-size: 12px;
     top: 128px;
   }
+  
 }
 </style>

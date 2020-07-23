@@ -788,5 +788,8 @@ input::-webkit-input-placeholder {
   .header {
     padding: 10px 15px 0;
   }
+  .header-logo {
+    max-width: 230px;
+  }
 }
 </style>
