@@ -449,7 +449,7 @@ div.wrapper-productlist {
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
 }
 .grid-products {
