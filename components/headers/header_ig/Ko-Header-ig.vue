@@ -1,112 +1,31 @@
 <template>
   <div class="header-container">
-    <div class="wrapper-header" ref="header">
+    <div class="wrapper-header">
       <div class="header">
         <KoOrder />
-        <img
-          :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-          class="header-logo"
-        />
-        <p class="title-menu">{{ dataStore.tienda.nombre }}</p>
-        <img src="../../../assets/img/verify-wp.png" class="verify-icon" />
-
-        <div class="header-content-items">
-          <div
-            v-for="(item, index) in secciones"
-            :key="`${index}${item.name}`"
-            class="header-buttons"
-          >
-            <div @click="openMenu(item.name)">
-              <nuxt-link
-                :to="item.path"
-                v-if="item.path"
-                class="header-text-center"
-                >{{ item.name }}</nuxt-link
-              >
-              <div
-                v-else
-                style="margin-right: 20px; display: flex; flex-direction: row;"
-              >
-                <p class="header-text-center-icon">{{ item.name }}</p>
-                <div
-                  class="header-text-center-icon"
-                  v-if="showMenu == false"
-                  :is="item.iconOpen"
-                />
-                <div
-                  class="header-text-center-icon"
-                  v-if="showMenu == true"
-                  :is="item.iconClose"
-                />
-              </div>
+        <div class="headerLeft">
+          <nuxt-link to="/ig">
+            <img
+              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+              class="header-logo"
+            />
+          </nuxt-link>
+          <nuxt-link to="/ig">
+            <p class="title-menu">{{ dataStore.tienda.nombre }}</p>
+          </nuxt-link>
+        </div>
+        <div class="headerRight">
+          <div class="header-content-icon">
+            <div class="header-content-cart" @click="openOrder">
+              <cartShop-icon class="header-icon-cart" />
+              <span class="num-items">{{ productsCart }}</span>
             </div>
           </div>
-        </div>
-        <!-- <div class="search">
-          <form id="demo-2">
-            <input type="search" placeholder="¿Qué buscas?" v-model="search" />
-          </form>
-        </div>-->
-        <div class="header-content-icon">
-          <div class="header-content-cart" @click="openOrder">
-            <cart-icon class="header-icon-cart" />
-            <span class="num-items">{{ productsCart }}</span>
+          <div class="header-item-menu" @click="openMenulateral">
+            <menuDots-icon class="header-icon-menu" />
           </div>
-        </div>
-        <div class="header-item-menu" @click="openMenulateral">
-          <menu-icon class="header-icon-menu nav-bar" />
         </div>
         <KoMenu :dataStore="dataStore" class="responsive" />
-      </div>
-    </div>
-    <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
-      <div id="menu-collapse">
-        <div>
-          <li @click="clear">
-            <p class="name-category-all">Todos los productos</p>
-          </li>
-          <div class="menu-grid">
-            <div
-              class="container-category"
-              v-for="categoria in categorias"
-              :key="categoria.id"
-            >
-              <ul class="name-category">
-                <li>
-                  <p
-                    @click="
-                      sendCategory(categoria, categoria.id, (ref = false))
-                    "
-                  >
-                    {{ categoria.nombre_categoria_producto }}
-                  </p>
-                </li>
-                <ul class="subcategoria">
-                  <template>
-                    <div v-for="(subcategory, key) in subcategories" :key="key">
-                      <li
-                        v-if="subcategory.categoria == categoria.id"
-                        @click="Sendsubcategory(subcategory.id)"
-                      >
-                        {{ subcategory.nombre_subcategoria }}
-                      </li>
-                    </div>
-                  </template>
-                </ul>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="product-img-container" v-if="product.length">
-          <div class="card-container">
-            <div class="img-logo" v-if="product[0]">
-              <img :src="product[0].foto_cloudinary" class="logo" />
-            </div>
-            <div class="btn-container">
-              <button @click="closeMenu()" class="btn">Comprar</button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -130,94 +49,18 @@ export default {
   },
   data() {
     return {
-      search: '',
-      toggle: false,
-      drawer: false,
-      direction: 'rtl',
-      showMenu: false,
       links: [
-        {
-          nombre: 'Facebook',
-          icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
-        },
-        {
-          nombre: 'Twitter',
-          icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
-        },
         {
           nombre: 'Instagram',
           icon: 'instagram-icon',
           link: this.dataStore.tienda.red_instagram,
         },
-        {
-          nombre: 'Youtube',
-          icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
-        },
       ],
-      secciones: [
-        {
-          name: 'Inicio',
-          path: '/wa',
-        },
-        {
-          name: 'Categorías',
-          iconOpen: 'Flechadown-icon',
-          iconClose: 'FlechaUp-icon',
-        },
-        {
-          name: 'Contacto',
-          path: '/contacto',
-        },
-      ],
-      seccionesCart: [
-        {
-          name: 'Inicio',
-          path: '/',
-        },
-        // {
-        //   name: 'Catálogo',
-        //   path: '/',
-        // },
-        {
-          name: 'Carrito',
-          path: '/cart',
-        },
-        {
-          name: 'Contacto',
-          path: '/contacto',
-        },
-      ],
-      cat: [],
-      suma: '',
-      add: true,
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      toggleCategories: true,
     }
   },
   computed: {
     productsCart() {
       return this.$store.state.productsCart.length
-    },
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    product() {
-      return this.dataStore.productos
-    },
-    topHeader() {
-      return this.$refs.header.offsetTop
-    },
-    heightHeader() {
-      return this.$refs.header.offsetHeight
     },
   },
   methods: {
@@ -229,107 +72,6 @@ export default {
       this.showMenu = false
       this.$store.state.openMenulateralRight = true
     },
-    openMenu(name) {
-      var intro = document.getElementById('menu-collapse')
-      if (name == 'Categorías') {
-        this.showMenu = !this.showMenu
-      }
-      if (this.showMenu == false) {
-        intro.style.display = 'none'
-      } else {
-        intro.style.display = 'flex'
-      }
-    },
-    closeMenu() {
-      this.showMenu = false
-      this.$router.push({
-        path: `/productos/` + this.product[0].slug,
-      })
-    },
-    Sendsubcategory(value) {
-      this.$router.push({
-        path: `/`,
-      })
-      this.showMenu = false
-      this.addClass()
-      this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.id == value
-      )
-
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
-      )
-      this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
-        filtradoCategorias.nombre_categoria_producto
-      )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
-      this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
-        data: value,
-      })
-    },
-    sendCategory(value, categoria, ref) {
-      this.$router.push({
-        path: `/`,
-      })
-      this.showMenu = false
-      this.currentPage = 1
-      this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
-        }
-      })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: value.nombre_categoria_producto,
-      })
-    },
-    addClass() {
-      this.add = !this.add
-    },
-    clear() {
-      this.showMenu = false
-      this.$router.push({
-        path: `/`,
-      })
-      this.$store.commit('SET_OPENORDERMENURIGTH', false)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: 'all',
-        data: '',
-      })
-      this.$emit('clear')
-      this.addClass()
-      this.nameCategory = ''
-    },
-    Searchproduct(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
-    },
   },
   watch: {
     'dataStore.tienda'() {
@@ -338,20 +80,11 @@ export default {
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
     },
-    '$refs.header'() {
-      this.suma = this.topHeader + this.heightHeader
-    },
-    search(value) {
-      this.Searchproduct(value)
-    },
   },
 }
 </script>
 
 <style scoped>
-div.header-container {
-  --background_color_2: #f2f4f7;
-}
 .header-container {
   width: 100%;
   height: 50px;
@@ -375,10 +108,13 @@ div.header-container {
   opacity: 1;
 }
 .title-menu {
-  color: white;
-  font-size: 16px;
-  font-weight: 800;
+  color: var(--color_text);
+  font-size: 26px;
+  font-weight: 300;
+  cursor: pointer;
+  font-family: 'instagram';
 }
+
 .wrapper-header {
   display: flex;
   justify-content: center;
@@ -390,6 +126,7 @@ div.header-container {
   position: fixed;
   top: 0px;
   z-index: 4;
+  border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
 }
 .header {
   display: flex;
@@ -400,6 +137,20 @@ div.header-container {
   max-width: 1300px;
   padding: 10px 30px 0;
 }
+.headerLeft {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.headerRight {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
 #menu-collapse {
   display: none;
   flex-direction: row;
@@ -407,7 +158,7 @@ div.header-container {
   width: 100%;
   max-width: 1300px;
   padding: 30px 30px 30px 20px;
-  border-top: 1px solid #aba4a466;
+
   margin: 0 auto;
 }
 .menu-grid {
@@ -485,15 +236,12 @@ div.header-container {
   border-radius: 45px;
   margin-right: 8px;
   background-color: white;
+  cursor: pointer;
 }
-.verify-icon {
-  margin-left: 4px;
-  width: 13px;
-}
+
 .header-content-items {
   display: flex;
   flex: 1;
-  margin-left: 10px;
   align-self: center;
   justify-content: flex-end;
   position: relative;
@@ -542,7 +290,7 @@ div.header-container {
   line-height: normal;
   letter-spacing: normal;
   color: var(--color_icon);
-  margin-left: 7px;
+  margin-left: 5px;
   cursor: pointer;
 }
 .header-icon:hover {
@@ -567,30 +315,39 @@ div.header-container {
   position: absolute;
   right: -5px;
   top: -5px;
-  color: var(--background_color_1);
-  background-color: var(--color_shopping_cart);
-  border: var(--color_shopping_cart) 1px;
+  color: var(--color_text);
+  background-color: transparent;
+  border: var(--color_shopping_cart) 1px solid;
   border-radius: 10px;
   line-height: 1;
   display: flex;
-  padding: 3px;
+  padding: 3px 4px;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
 }
 .header-icon-cart {
   font-size: 22px;
-  /* color: var(--color_icon); */
-  color: white;
+  color: var(--color_icon);
 }
 .header-icon-cart:hover {
   color: var(--color_hover_text);
 }
 .header-item-menu {
-  display: none;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 10px;
 }
-.responsive {
-  display: none;
+.header-icon-menu {
+  font-size: 30px;
+  color: var(--color_text);
+  cursor: pointer;
+  position: relative;
+  top: -3px;
+}
+.header-icon-menu > .material-design-icon__svg {
+  bottom: 0em;
 }
 .container-category {
   display: inline-block;
@@ -657,66 +414,7 @@ div.header-container {
 .content-products:focus {
   box-shadow: 0px 0px 2px 1px var(--color_border);
 }
-/* search */
-input {
-  outline: none;
-}
-input[type='search'] {
-  -webkit-appearance: textfield;
-  -webkit-box-sizing: content-box;
-  font-family: inherit;
-  font-size: 100%;
-}
-input::-webkit-search-decoration,
-input::-webkit-search-cancel-button {
-  display: none;
-}
-input[type='search'] {
-  background: transparent
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
-  border: solid 2px var(--color_shopping_cart);
-  padding: 4px 7px;
-  width: 35px;
-  -webkit-border-radius: 10em;
-  -moz-border-radius: 10em;
-  border-radius: 10em;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
-}
-input[type='search']:focus {
-  background-color: #fff;
-  border-color: var(--color_hover_text);
-}
-input:-moz-placeholder {
-  color: var(--color_text);
-}
-input::-webkit-input-placeholder {
-  color: var(--color_text);
-}
-#demo-2 input[type='search'] {
-  width: 15px;
-  padding-left: 10px;
-  color: transparent;
-  cursor: pointer;
-}
-#demo-2 input[type='search']:hover {
-  background-color: #fff;
-}
-#demo-2 input[type='search']:focus {
-  width: 160px;
-  padding-left: 32px;
-  color: var(--color_text);
-  background-color: #fff;
-  cursor: auto;
-}
-#demo-2 input:-moz-placeholder {
-  color: transparent;
-}
-#demo-2 input::-webkit-input-placeholder {
-  color: transparent;
-}
+
 @media (max-width: 900px) {
   .header {
     padding: 10px 20px 0;
@@ -732,55 +430,19 @@ input::-webkit-input-placeholder {
   .header-items-icons {
     display: none;
   }
-  .header-item-menu {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 20px;
-  }
-  .header-icon-menu {
-    font-size: 30px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: var(--color_text);
-    color: white;
-  }
-  .header-icon-menu > .material-design-icon__svg {
-    bottom: 0em;
-  }
-  .nav-bar {
-    width: 24px;
-    height: 24px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: var(--color_text);
-    color: #fff;
-  }
-  .nav-bar > .material-design-icon__svg {
-    bottom: 0px;
-    width: 24px;
-    height: 24px;
-  }
-  .responsive {
-    display: initial;
-  }
   .menu-container {
     display: none;
   }
 }
 @media (max-width: 500px) {
-  .search {
-    display: none;
-  }
   .header {
     padding: 10px 15px 0;
+  }
+  .headerLeft {
+    flex: 1;
+  }
+  .headerRight {
+    flex: 0;
   }
 }
 </style>

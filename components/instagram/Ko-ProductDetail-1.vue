@@ -496,7 +496,7 @@ export default {
         this.$store.state.productsCart.push(product)
       }
       this.$store.commit('UPDATE_CONTENTCART')
-      this.$router.push('/')
+      this.$router.push('/ig')
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
     },

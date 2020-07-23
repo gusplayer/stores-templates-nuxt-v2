@@ -1,13 +1,13 @@
 <template>
   <div class="header-container">
-    <div class="wrapper-header" ref="header">
+    <div class="wrapper-header">
       <div class="header">
         <KoOrder />
         <div class="header-items-icon-menu" @click="openMenulateralLeft">
           <menu-icon class="header-icon-menu nav-bar" />
         </div>
         <div class="header-content-logo">
-          <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
+          <nuxt-link to="/" class="wrapper-logo">
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
@@ -112,26 +112,7 @@ export default {
           path: '/contacto',
         },
       ],
-      seccionesCart: [
-        {
-          name: 'Inicio',
-          path: '/',
-        },
-        // {
-        //   name: 'Catálogo',
-        //   path: '/',
-        // },
-        {
-          name: 'Carrito',
-          path: '/cart',
-        },
-        {
-          name: 'Contacto',
-          path: '/contacto',
-        },
-      ],
       cat: [],
-      suma: '',
       add: true,
       selectSubcategory: '',
       nameCategory: '',
@@ -152,12 +133,6 @@ export default {
     },
     product() {
       return this.dataStore.productos
-    },
-    topHeader() {
-      return this.$refs.header.offsetTop
-    },
-    heightHeader() {
-      return this.$refs.header.offsetHeight
     },
   },
   methods: {

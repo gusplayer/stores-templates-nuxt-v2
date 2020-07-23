@@ -132,16 +132,16 @@
                 >
                   Finalizar compra
                 </button>
-                <nuxt-link class="conten-btn" to="/" @click="closeOrder">
+                <nuxt-link class="conten-btn" to="/ig" @click="closeOrder">
                   <button class="continue_shopping2">
                     Seguir comprando
                   </button>
                 </nuxt-link>
-                <nuxt-link to="/cart" class="conten-btn" @click="closeOrder">
+                <!-- <nuxt-link to="/cart" class="conten-btn" @click="closeOrder">
                   <button class="continue_shopping2">
                     Ir al carrito
                   </button>
-                </nuxt-link>
+                </nuxt-link> -->
               </div>
             </div>
           </template>

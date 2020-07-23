@@ -5,7 +5,6 @@
         <!-- <p class="title">Productos</p> -->
       </div>
       <br />
-
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
           <p class="text-categorias" @click="clear">Catálogo</p>
@@ -14,22 +13,12 @@
             v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
           >
-            / {{ this.nameCategoryHeader }}
+            - {{ this.nameCategoryHeader }}
           </p>
           <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            / {{ this.nameSubCategoryHeader }}
+            - {{ this.nameSubCategoryHeader }}
           </p>
         </div>
-        <!-- <div class="search">
-          <div>
-            <input
-              v-model="search"
-              type="text"
-              placeholder="Buscar . . ."
-              required
-            />
-          </div>
-        </div>-->
       </div>
       <div class="top-right">
         <div class="content-item-top">
@@ -213,15 +202,15 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 24 - 24
+      const final = initial + 24
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 24 - 24
+      const final = initial + 24
       return this.products.slice(initial, final)
     },
     selectedCategory() {
@@ -328,6 +317,7 @@ export default {
     },
     clear() {
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
         data: '',
@@ -372,11 +362,6 @@ export default {
 <style scoped>
 div.wrapper-productlist {
   --background_color_1: #f2f4f7;
-  background-image: url('../../assets/img/wp_background.png');
-  background-color: #cccccc;
-  background-position: center; /* Center the image */
-  background-repeat: repeat; /* Do not repeat the image */
-  background-size: contain;
 }
 .wrapper-productlist {
   display: flex;

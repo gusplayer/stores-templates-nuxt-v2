@@ -2,7 +2,7 @@
   <div :style="themeStyleIg">
     <KoHeaderIg :dataStore="dataStore" />
     <nuxt />
-    <KFooter1 :dataStore="dataStore" />
+    <KFooterIg :dataStore="dataStore" />
     <!-- <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
       <koWhatsapp class="button-whatsapp" @click.native="redirectWhatsapp()" />
     </div> -->
@@ -11,13 +11,13 @@
 
 <script>
 import KoHeaderIg from '../components/headers/header_ig/Ko-Header-ig'
-import KFooter1 from '../components/footers/footer1/Ko-Footer-1'
+import KFooterIg from '../components/footers/footerIg/Ko-Footer-ig'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 
 export default {
   components: {
     KoHeaderIg,
-    KFooter1,
+    KFooterIg,
     koWhatsapp,
   },
   mounted() {
@@ -164,19 +164,19 @@ export default {
     },
     themeStyleIg() {
       return {
-        '--font-style': 'Poppins',
+        '--font-style': 'Helvetica',
 
         '--purple': ' #4429b4',
         '--green': '#00dd8d',
         '--magenta': '#c52675',
         '--yellow': '#f2b931',
 
-        '--background_color_1': '#ce1ebf',
+        '--background_color_1': '#fff',
 
         '--background_color_2': '#e4e4e4',
         '--color_background_hover': '#cccccc',
 
-        '--color_text': '#1e0e62',
+        '--color_text': '#000',
         '--color_hover_text': '#c52675',
         '--color_subtext': 'rgba(21, 20, 57, 0.541)',
 
@@ -257,6 +257,10 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: 'instagram';
+  src: url('../assets/font/instagram.ttf');
+}
 .wrapper-whatsapp {
   width: 60px;
   height: 60px;

@@ -4,11 +4,14 @@
       <div class="order_content">
         <div class="order_header">
           <div class="header-content-logo">
-            <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
+            <nuxt-link to="/ig">
               <img
                 :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
                 class="header-logo"
               />
+            </nuxt-link>
+            <nuxt-link to="/ig">
+              <p class="title-menu">{{ dataStore.tienda.nombre }}</p>
             </nuxt-link>
           </div>
           <button @click="closed" class="order_header_close">
@@ -17,6 +20,15 @@
         </div>
         <template>
           <div class="wrapper-category-all">
+            <div class="search" v-if="showSearch">
+              <form id="demo-1">
+                <input
+                  type="search"
+                  placeholder="¿Qué buscas?"
+                  v-model="search"
+                />
+              </form>
+            </div>
             <li @click="clear">
               <p class="name-category-all">Todos los productos</p>
             </li>
@@ -81,8 +93,18 @@ export default {
   components: {
     BaseAccordian,
   },
+  mounted() {
+    let domain = this.$route.fullPath
+    if (domain == '/ig') {
+      this.showSearch = true
+    } else {
+      this.showSearch = false
+    }
+  },
   data() {
     return {
+      search: '',
+      showSearch: false,
       add: true,
       selectSubcategory: '',
       nameCategory: '',
@@ -126,7 +148,7 @@ export default {
     Sendsubcategory(value) {
       this.indexSelect2 = value
       this.$router.push({
-        path: `/`,
+        path: `/ig`,
       })
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.addClass()
@@ -152,7 +174,7 @@ export default {
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
       this.$router.push({
-        path: `/`,
+        path: `/ig`,
       })
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.currentPage = 1
@@ -182,7 +204,7 @@ export default {
     },
     clear() {
       this.$router.push({
-        path: `/`,
+        path: `/ig`,
       })
       this.showMenu = false
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
@@ -195,123 +217,217 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
+    Searchproduct(search) {
+      if (search.length) {
+        this.$store.commit('products/FILTER_BY', {
+          type: 'search',
+          data: search,
+        })
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: 'all',
+          data: '',
+        })
+      }
+      this.currentPage = 1
+    },
   },
-  watch: {},
+  watch: {
+    search(value) {
+      this.Searchproduct(value)
+    },
+    $route(to, from) {
+      let domain = this.$route.fullPath
+      if (domain == '/ig') {
+        this.showSearch = true
+      } else {
+        this.showSearch = false
+      }
+    },
+  },
 }
 </script>
 
 <style scoped>
 .order {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 6;
+}
+.order_content {
+  position: absolute;
+  right: 0px;
+  max-width: 400px;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--background_color_1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: none;
+  overflow: auto;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  animation: dispatch 0.2s linear 1;
+  overflow: hidden;
+}
+@keyframes dispatch {
+  0% {
+    right: -400px;
+  }
+  100% {
+    right: 0px;
+  }
+}
+.order_content > div {
+  width: 100%;
+  box-sizing: border-box;
+}
+.order_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  padding: 10px 5px;
+  flex: none;
+}
+.header-content-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 0px;
+}
+.header-logo {
+  /* width: 100%; */
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 45px;
+  margin-right: 8px;
+  background-color: white;
+  cursor: pointer;
+}
+.title-menu {
+  color: var(--color_text);
+  font-size: 26px;
+  font-weight: 300;
+  cursor: pointer;
+  font-family: 'instagram';
+}
+.order_header_close {
+  font-size: 20px;
+  padding: 0px 2px;
+  border-radius: 25px;
+  border: 1px solid white;
+  background-color: var(--color_shopping_cart);
+  cursor: pointer;
+  outline: none;
+  flex: none;
+  color: #fff;
+  transition: all ease 0.3s;
+}
+.order_header_close:hover {
+  background-color: var(--color_hover_text);
+}
+.wrapper-category-all {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+}
+.name-category-all {
+  font-size: 16px;
+  color: var(--color_text);
+  margin-bottom: 5px;
+}
+.text-categoria {
+  width: 100%;
+  font-size: 16px;
+  color: var(--color_text);
+}
+.text-subcategoria {
+  width: 100%;
+  font-size: 16px;
+  color: var(--color_subtext);
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+.text-categoria-active {
+  color: var(--color_hover_text);
+}
+.text-subcategoria-active {
+  color: var(--color_hover_text);
+}
+/* search */
+input {
+  outline: none;
+}
+input[type='search'] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  font-family: inherit;
+  font-size: 100%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
   display: none;
 }
-@media (max-width: 700px) {
-  .order {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: flex-end;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 6;
-  }
-  .order_content {
-    position: absolute;
-    right: 0px;
-    max-width: 400px;
-    width: 100%;
-    height: 100vh;
-    background-color: var(--background_color_1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: none;
-    overflow: auto;
-    box-sizing: border-box;
-    padding-bottom: 10px;
-    animation: dispatch 0.2s linear 1;
-    overflow: hidden;
-  }
-  @keyframes dispatch {
-    0% {
-      right: -400px;
-    }
-    100% {
-      right: 0px;
-    }
-  }
-  .order_content > div {
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .order_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--color_border);
-    padding: 10px 5px;
-    flex: none;
-  }
-  .header-content-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2px 0px;
-  }
-  .wrapper-logo {
-    width: 100%;
-  }
-  .header-logo {
-    /* width: 100%; */
-    max-height: 70px;
-    object-fit: contain;
-    object-position: left;
-  }
-  .order_header_close {
-    font-size: 20px;
-    padding: 0px 2px;
-    border-radius: 25px;
-    border: 1px solid white;
-    background-color: var(--color_shopping_cart);
-    cursor: pointer;
-    outline: none;
-    flex: none;
-    color: #fff;
-    transition: all ease 0.3s;
-  }
-  .order_header_close:hover {
-    background-color: var(--color_hover_text);
-  }
-  .wrapper-category-all {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    overflow-x: auto;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 10px;
-  }
-  .name-category-all {
-    font-size: 16px;
-    color: var(--color_text);
-    margin-bottom: 5px;
-  }
-  .text-categoria {
-    width: 100%;
-    font-size: 16px;
-    color: var(--color_text);
-  }
-  .text-subcategoria {
-    width: 100%;
-    font-size: 16px;
-    color: var(--color_subtext);
-  }
-  .text-categoria-active {
-    color: var(--color_hover_text);
-  }
-  .text-subcategoria-active {
-    color: var(--color_hover_text);
-  }
+input[type='search'] {
+  background: #fff
+    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
+    7px center;
+  border: solid 2px var(--color_shopping_cart);
+  padding: 4px 7px;
+  width: 35px;
+  -webkit-border-radius: 10em;
+  -moz-border-radius: 10em;
+  border-radius: 10em;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#demo-1 input[type='search'] {
+  background: #fff
+    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
+    7px center;
+  border: solid 2px var(--color_shopping_cart);
+  padding: 2px 4px 4px 38px;
+  width: 100%;
+  -webkit-border-radius: var(--radius_btn);
+  -moz-border-radius: var(--radius_btn);
+  border-radius: var(--radius_btn);
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+  box-sizing: border-box;
+}
+#demo-1 input[type='search']:focus {
+  width: 100%;
+  background-color: #fff;
+  border-color: var(--color_hover_text);
+  box-sizing: border-box;
+}
+input[type='search']:focus {
+  background-color: #fff;
+  border-color: var(--color_hover_text);
+}
+input:-moz-placeholder {
+  color: var(--color_text);
+}
+input::-webkit-input-placeholder {
+  color: var(--color_text);
+}
+.search {
+  margin-bottom: 10px;
 }
 </style>

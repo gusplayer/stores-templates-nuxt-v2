@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import KProductList from '../../components/whatsapp/Ko-ProductList-1'
+import KProductList from '../../components/instagram/Ko-ProductList-1'
 
 export default {
   layout: 'ig',

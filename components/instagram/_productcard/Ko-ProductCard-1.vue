@@ -7,7 +7,7 @@
         v-on:mouseleave="active = true"
       >
         <router-link
-          :to="{ path: `/productos/` + product.slug }"
+          :to="{ path: `ig/productos/` + product.slug }"
           class="wrapper-image"
         >
           <img
@@ -54,7 +54,7 @@
               v-if="!this.estadoCart && !soldOut && !spent"
             >
               <router-link
-                :to="{ path: `/productos/` + product.slug }"
+                :to="{ path: `ig/productos/` + product.slug }"
                 class="btn"
                 >Ver más</router-link
               >
@@ -64,7 +64,7 @@
             </div>
 
             <router-link
-              :to="{ path: `/productos/` + product.slug }"
+              :to="{ path: `ig/productos/` + product.slug }"
               v-else
               class="btn"
               >Ver más</router-link
@@ -74,7 +74,7 @@
       </div>
       <div class="wrapper-movil">
         <router-link
-          :to="{ path: `/productos/` + product.slug }"
+          :to="{ path: `ig/productos/` + product.slug }"
           class="wrapper-image"
         >
           <img
@@ -89,7 +89,7 @@
         </router-link>
         <div class="wrapper-text">
           <router-link
-            :to="{ path: `/productos/` + product.slug }"
+            :to="{ path: `ig/productos/` + product.slug }"
             class="content-name-product-movil"
           >
             <p class="card-text-movil" v-if="this.product.nombre.length >= 33">
@@ -101,7 +101,7 @@
           </router-link>
           <div class="content-text-price-movil-cart" v-if="this.product.precio">
             <router-link
-              :to="{ path: `/productos/` + product.slug }"
+              :to="{ path: `ig/productos/` + product.slug }"
               class="wrapper-price"
             >
               <div>
