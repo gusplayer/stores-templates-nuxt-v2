@@ -35,6 +35,14 @@
             Enviar
           </button>
         </div>
+        <div class="content-top-items">
+          <p class="text-top-bold">Secciones</p>
+          <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
+            <nuxt-link :to="item.path" class="text-top">
+              {{ item.name }}
+            </nuxt-link>
+          </div>
+        </div>
       </div>
     </div>
     <div class="under-footer">
@@ -257,6 +265,28 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.content-top-items {
+  width: 100%;
+  max-width: 550px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.text-top {
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--color_text);
+  cursor: pointer;
+}
+.text-top:hover {
+  color: var(--color_icon);
+}
+
 .text-top-bold {
   font-size: 18px;
   font-stretch: normal;
