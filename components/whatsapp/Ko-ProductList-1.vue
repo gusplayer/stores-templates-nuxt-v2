@@ -129,12 +129,12 @@
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 24">
+            <div class="product_pagination" v-if="products.length > 16">
               <el-pagination
                 background
                 layout="prev, pager, next"
                 :total="products.length"
-                :page-size="24"
+                :page-size="16"
                 :current-page.sync="currentPage"
                 class="pagination"
               ></el-pagination>

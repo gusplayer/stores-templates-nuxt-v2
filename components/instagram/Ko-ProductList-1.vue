@@ -118,12 +118,12 @@
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 24">
+            <div class="product_pagination" v-if="products.length > 16">
               <el-pagination
                 background
                 layout="prev, pager, next"
                 :total="products.length"
-                :page-size="24"
+                :page-size="16"
                 :current-page.sync="currentPage"
                 class="pagination"
               ></el-pagination>
@@ -202,15 +202,15 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 24 - 24
-      const final = initial + 24
+      const initial = this.currentPage * 16 - 16
+      const final = initial + 16
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 24 - 24
-      const final = initial + 24
+      const initial = this.currentPage * 16 - 16
+      const final = initial + 16
       return this.products.slice(initial, final)
     },
     selectedCategory() {
