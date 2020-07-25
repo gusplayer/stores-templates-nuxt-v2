@@ -69,22 +69,34 @@
                         getFreeShipping == false
                       "
                     >
-                      <summary class="text-color">Valor por Ciudad:</summary>
+                      <summary
+                        class="text-color"
+                        style="
+                          display: flex;
+                          justify-content: flex-end;
+                          align-items: center;
+                          margin-right: 10px;
+                        "
+                        >Valor por Ciudad:</summary
+                      >
                       <section>
                         <ol class="scroll_cart_summary_items_cities">
                           <li
                             v-for="(ciudad, index) in rangosByCiudad.rangos"
                             :key="ciudad.id"
                           >
-                            <b>
-                              {{
-                                shippingCities[index].nombre_ciu ===
-                                'Sin especificar'
-                                  ? 'Resto del país'
-                                  : shippingCities[index].nombre_ciu
-                              }}:
-                            </b>
-                            {{ ciudad.price | currency }}
+                            <div v-if="ciudad.price > 0">
+                              <b>
+                                {{
+                                  shippingCities[index].nombre_ciu ===
+                                  'Sin especificar'
+                                    ? 'Resto del país'
+                                    : shippingCities[index].nombre_ciu
+                                }}:
+                              </b>
+
+                              {{ ciudad.price | currency }}
+                            </div>
                           </li>
                         </ol>
                       </section>
@@ -694,6 +706,12 @@ export default {
   color: var(--color_text);
   overflow-y: auto;
   max-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.scroll_cart_summary_items_cities li {
+  margin-right: 5px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar {
   background: var(--background_color_1);

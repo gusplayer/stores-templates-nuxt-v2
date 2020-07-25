@@ -188,14 +188,17 @@
                       :key="ciudad.id"
                       class="cart_summary_items_cities"
                     >
-                      <b>
-                        {{
-                          shippingCities[index].nombre_ciu === 'Sin especificar'
-                            ? 'Resto del país'
-                            : shippingCities[index].nombre_ciu
-                        }}:
-                      </b>
-                      {{ ciudad.price | currency }}
+                      <div v-if="ciudad.price > 0">
+                        <b>
+                          {{
+                            shippingCities[index].nombre_ciu ===
+                            'Sin especificar'
+                              ? 'Resto del país'
+                              : shippingCities[index].nombre_ciu
+                          }}:
+                        </b>
+                        {{ ciudad.price | currency }}
+                      </div>
                     </li>
                   </ol>
                 </details>
