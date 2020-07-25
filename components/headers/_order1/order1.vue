@@ -61,7 +61,7 @@
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
-                    <p>Costo domicilio</p>
+                    <p style="font-weight: bold;">Costo domicilio</p>
                     <details
                       v-if="
                         rangosByCiudad.envio_metodo === 'precio_ciudad' &&
@@ -89,6 +89,36 @@
                         </ol>
                       </section>
                     </details>
+                    <div
+                      v-else-if="
+                        rangosByCiudad.envio_metodo === 'tarifa_plana' &&
+                        shipping > 0 &&
+                        getFreeShipping == true
+                      "
+                    >
+                      <li class="text-color">
+                        Tarifa plana: {{ rangosByCiudades.valor | currency }}
+                      </li>
+                    </div>
+                    <div
+                      v-else-if="
+                        rangosByCiudad.envio_metodo === 'precio' &&
+                        getFreeShipping == true
+                      "
+                    >
+                      <section>
+                        <ol class="scroll_cart_summary_items_cities">
+                          <li
+                            v-for="(ciudad,
+                            indexRangos) in rangosByCiudad.rangos"
+                            :key="indexRangos"
+                          >
+                            <b> {{ ciudad.inicial }} - {{ ciudad.final }}: </b>
+                            {{ ciudad.precio | currency }}
+                          </li>
+                        </ol>
+                      </section>
+                    </div>
                     <p v-else-if="shipping && getFreeShipping == false">
                       {{ shipping | currency }}
                     </p>
@@ -96,10 +126,10 @@
                       class="without_shipping_cost"
                       v-if="
                         rangosByCiudad.envio_metodo === 'gratis' ||
-                        getFreeShipping == true
+                        (shippingCities.length <= 0 && getFreeShipping == false)
                       "
                     >
-                      No tiene costo de envió
+                      Envío gratis en toda la tienda
                     </p>
                   </span>
                   <span class="order_total_net">

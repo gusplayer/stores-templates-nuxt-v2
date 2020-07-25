@@ -199,6 +199,36 @@
                     </li>
                   </ol>
                 </details>
+                <div
+                  v-else-if="
+                    rangosByCiudad.envio_metodo === 'tarifa_plana' &&
+                    shipping > 0 &&
+                    getFreeShipping == true
+                  "
+                >
+                  <li class="cart_summary_price">
+                    Tarifa plana: {{ rangosByCiudades.valor | currency }}
+                  </li>
+                </div>
+                <div
+                  v-else-if="
+                    rangosByCiudad.envio_metodo === 'precio' &&
+                    getFreeShipping == true
+                  "
+                >
+                  <section>
+                    <ol class="scroll_cart_summary_items_cities">
+                      <li
+                        v-for="(ciudad, indexRangos) in rangosByCiudad.rangos"
+                        :key="indexRangos"
+                        class="cart_summary_price"
+                      >
+                        <b> {{ ciudad.inicial }} - {{ ciudad.final }}: </b>
+                        {{ ciudad.precio | currency }}
+                      </li>
+                    </ol>
+                  </section>
+                </div>
                 <p v-else-if="shipping && getFreeShipping == false">
                   {{ shipping | currency }}
                 </p>
@@ -206,10 +236,10 @@
                   class="cart_summary_price"
                   v-if="
                     rangosByCiudad.envio_metodo === 'gratis' ||
-                    getFreeShipping == true
+                    (shippingCities.length <= 0 && getFreeShipping == false)
                   "
                 >
-                  No tiene costo de envió
+                  Envío gratis en toda la tienda
                 </p>
               </span>
             </span>
@@ -687,7 +717,8 @@ div.wrapper-cart {
 }
 .scroll_cart_summary_items_cities {
   overflow-y: auto;
-  height: 150px;
+  height: 100%;
+  max-height: 150px;
 }
 ::-webkit-scrollbar {
   background: var(--background_color_1);
