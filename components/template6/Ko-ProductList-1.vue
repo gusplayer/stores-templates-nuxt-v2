@@ -55,7 +55,7 @@
               >
             </BaseAccordian>
           </div>
-          <!-- <div class="filtrado-precios">
+          <div class="filtrado-precios">
             <p class="text-categorias">Precios</p>
             <p class="text-categoria-precios" @click="SendpriceFalling()">
               Menor precio
@@ -63,7 +63,7 @@
             <p class="text-categoria-precios" @click="SendPriceUpward()">
               Mayor precio
             </p>
-          </div> -->
+          </div>
         </div>
         <div class="content-item-productos">
           <div class="grid-products">
@@ -125,6 +125,16 @@ export default {
           maxTMP = product.precio
         }
       })
+    }
+    let domain = this.$route.fullPath
+    let searchCategory = domain.slice(0, [11])
+    let searchSubCategory = domain.slice(0, [14])
+    if (searchCategory === '/?category=') {
+      this.sendCategoryUrl(domain)
+    } else if (searchSubCategory === '/?subcategory=') {
+      this.SendsubcategoryUrl(domain)
+    } else if (domain == '/') {
+      this.Allcategories()
     }
   },
   data() {
@@ -301,8 +311,68 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
-    SendpriceFalling() {},
-    SendPriceUpward() {},
+    sendCategoryUrl(value) {
+      let category = value.replace('/?category=', '')
+      let UrlCategory = category.replace(/-/g, ' ')
+      let urlFiltrada = decodeURIComponent(UrlCategory)
+      this.$store.commit('products/FILTER_BY', {
+        type: 'category',
+        data: urlFiltrada,
+      })
+      if (this.$store.getters['products/filterProducts'].length) {
+        this.$store.commit('SET_CATEGORY_PRODCUTRO', urlFiltrada)
+      } else {
+        this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      }
+    },
+    SendsubcategoryUrl(value) {
+      let subcategory = value.replace('/?subcategory=', '')
+      let UrlSubCategory = subcategory.replace(/-/g, ' ')
+      let urlFiltrada = decodeURIComponent(UrlSubCategory)
+
+      this.selectSubcategory = urlFiltrada
+
+      let filtradoSubCategoria = this.subcategories.find(
+        (element) => element.nombre_subcategoria == urlFiltrada
+      )
+      if (filtradoSubCategoria) {
+        let filtradoCategorias = this.categorias.find(
+          (element) => element.id == filtradoSubCategoria.categoria
+        )
+        this.$store.commit('products/FILTER_BY', {
+          type: 'subcategory',
+          data: filtradoSubCategoria.id,
+        })
+        if (this.$store.getters['products/filterProducts'].length) {
+          this.$store.commit(
+            'SET_CATEGORY_PRODCUTRO',
+            filtradoCategorias.nombre_categoria_producto
+          )
+          this.$store.commit(
+            'SET_SUBCATEGORY_PRODCUTRO',
+            filtradoSubCategoria.nombre_subcategoria
+          )
+        } else {
+          this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+          this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+        }
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: 'subcategory',
+          data: '',
+        })
+      }
+    },
+    SendpriceFalling() {
+      this.products = this.products.sort(function (prev, next) {
+        return prev.precio - next.precio
+      })
+    },
+    SendPriceUpward() {
+      this.products = this.products.sort(function (prev, next) {
+        return next.precio - prev.precio
+      })
+    },
   },
   watch: {
     fullProducts(value) {
@@ -331,6 +401,18 @@ export default {
     },
     nameSubCategoryHeader(value) {
       return value
+    },
+    $route(to, from) {
+      let domain = this.$route.fullPath
+      let searchCategory = domain.slice(0, [11])
+      let searchSubCategory = domain.slice(0, [14])
+      if (searchCategory === '/?category=') {
+        this.sendCategoryUrl(domain)
+      } else if (searchSubCategory === '/?subcategory=') {
+        this.SendsubcategoryUrl(domain)
+      } else if (domain == '/') {
+        this.Allcategories()
+      }
     },
   },
 }

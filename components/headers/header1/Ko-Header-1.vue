@@ -129,7 +129,13 @@ export default {
   mounted() {
     this.toggle = true
     let domain = this.$route.fullPath
+    let searchCategory = domain.slice(0, [11])
+    let searchSubCategory = domain.slice(0, [14])
     if (domain == '/') {
+      this.showSearch = true
+    } else if (searchCategory === '/?category=') {
+      this.showSearch = true
+    } else if (searchSubCategory === '/?subcategory=') {
       this.showSearch = true
     } else {
       this.showSearch = false
@@ -327,7 +333,13 @@ export default {
     },
     $route(to, from) {
       let domain = this.$route.fullPath
+      let searchCategory = domain.slice(0, [11])
+      let searchSubCategory = domain.slice(0, [14])
       if (domain == '/') {
+        this.showSearch = true
+      } else if (searchCategory === '/?category=') {
+        this.showSearch = true
+      } else if (searchSubCategory === '/?subcategory=') {
         this.showSearch = true
       } else {
         this.showSearch = false

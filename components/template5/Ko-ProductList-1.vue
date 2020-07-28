@@ -159,6 +159,16 @@ export default {
         }
       })
     }
+    let domain = this.$route.fullPath
+    let searchCategory = domain.slice(0, [11])
+    let searchSubCategory = domain.slice(0, [14])
+    if (searchCategory === '/?category=') {
+      this.sendCategoryUrl(domain)
+    } else if (searchSubCategory === '/?subcategory=') {
+      this.SendsubcategoryUrl(domain)
+    } else if (domain == '/') {
+      this.Allcategories()
+    }
   },
   data() {
     return {
@@ -326,6 +336,59 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
+    sendCategoryUrl(value) {
+      let category = value.replace('/?category=', '')
+      let UrlCategory = category.replace(/-/g, ' ')
+      let urlFiltrada = decodeURIComponent(UrlCategory)
+      this.$store.commit('products/FILTER_BY', {
+        type: 'category',
+        data: urlFiltrada,
+      })
+      if (this.$store.getters['products/filterProducts'].length) {
+        this.$store.commit('SET_CATEGORY_PRODCUTRO', urlFiltrada)
+      } else {
+        this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      }
+    },
+    SendsubcategoryUrl(value) {
+      let subcategory = value.replace('/?subcategory=', '')
+      let UrlSubCategory = subcategory.replace(/-/g, ' ')
+      let urlFiltrada = decodeURIComponent(UrlSubCategory)
+
+      this.selectSubcategory = urlFiltrada
+
+      let filtradoSubCategoria = this.subcategories.find(
+        (element) => element.nombre_subcategoria == urlFiltrada
+      )
+      if (filtradoSubCategoria) {
+        let filtradoCategorias = this.categorias.find(
+          (element) => element.id == filtradoSubCategoria.categoria
+        )
+
+        this.$store.commit('products/FILTER_BY', {
+          type: 'subcategory',
+          data: filtradoSubCategoria.id,
+        })
+        if (this.$store.getters['products/filterProducts'].length) {
+          this.$store.commit(
+            'SET_CATEGORY_PRODCUTRO',
+            filtradoCategorias.nombre_categoria_producto
+          )
+          this.$store.commit(
+            'SET_SUBCATEGORY_PRODCUTRO',
+            filtradoSubCategoria.nombre_subcategoria
+          )
+        } else {
+          this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+          this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+        }
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: 'subcategory',
+          data: '',
+        })
+      }
+    },
   },
   watch: {
     fullProducts(value) {
@@ -354,6 +417,18 @@ export default {
     },
     nameSubCategoryHeader(value) {
       return value
+    },
+    $route(to, from) {
+      let domain = this.$route.fullPath
+      let searchCategory = domain.slice(0, [11])
+      let searchSubCategory = domain.slice(0, [14])
+      if (searchCategory === '/?category=') {
+        this.sendCategoryUrl(domain)
+      } else if (searchSubCategory === '/?subcategory=') {
+        this.SendsubcategoryUrl(domain)
+      } else if (domain == '/') {
+        this.Allcategories()
+      }
     },
   },
 }
