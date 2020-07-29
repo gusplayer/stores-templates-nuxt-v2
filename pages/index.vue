@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="home">
+    
     <component :is="indexTemplate" />
   </div>
 </template>

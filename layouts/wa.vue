@@ -1,26 +1,27 @@
 <template>
   <div :style="themeStyleWa">
-    <KoHeaderWp :dataStore="dataStore" />
-    <!-- <KoHeader1 :dataStore="dataStore" /> -->
+    <!-- <KoHeaderWp :dataStore="dataStore" />
+    <Categories :dataStore="dataStore" />-->
     <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
     <nuxt />
-    <KFooter1 :dataStore="dataStore" />
-    <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
+    <!-- <KFooter1 :dataStore="dataStore" /> -->
+    <!-- <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
       <koWhatsapp class="button-whatsapp" @click.native="redirectWhatsapp()" />
-    </div>
+    </div>-->
   </div>
 </template>
 
 <script>
-import KoHeaderWp from '../components/headers/header_wp/Ko-Header-wp'
-import KFooter1 from '../components/footers/footer1/Ko-Footer-1'
-import koWhatsapp from '../components/whatsapp/whatsapp'
+import KoHeaderWp from '../components/whatsapp/Header'
+import KFooter1 from '../components/whatsapp/Footer'
+import Categories from '../components/whatsapp/Categories'
+// import koWhatsapp from '../components/whatsapp/whatsapp'
 
 export default {
   components: {
     KoHeaderWp,
     KFooter1,
-    koWhatsapp,
+    Categories,
   },
   mounted() {
     this.$store.dispatch('GET_LOGIN')
@@ -169,7 +170,7 @@ export default {
 
     themeStyleWa() {
       return {
-        '--font-style': 'Roboto',
+        '--font-style': 'Poppins',
 
         '--purple': ' #4429b4',
         '--green': '#00dd8d',

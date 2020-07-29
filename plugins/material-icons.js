@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import 'vue-material-design-icons/styles.css'
 import MenuIcon from 'vue-material-design-icons/Menu.vue'
-
 import Facebook from 'vue-material-design-icons/Facebook.vue'
 import Twitter from 'vue-material-design-icons/Twitter.vue'
 import Google from 'vue-material-design-icons/GooglePlus.vue'
@@ -24,6 +23,7 @@ import menos from 'vue-material-design-icons/Minus.vue'
 import Delete from 'vue-material-design-icons/DeleteForever.vue'
 import Search from 'vue-material-design-icons/Magnify.vue'
 import Circle from 'vue-material-design-icons/CircleMedium.vue'
+import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 
 Vue.component('menu-icon', MenuIcon)
 
@@ -52,3 +52,5 @@ Vue.component('cartArrowDown', CartArrowDown)
 Vue.component('menos-icon', menos)
 Vue.component('mas-icon', mas)
 Vue.component('circle-icon', Circle)
+
+Vue.component('arrow-left-icon', ArrowLeft)
