@@ -1,39 +1,27 @@
 <template>
   <div class="wrapper-productlist">
-    <div class="container">
+    <!-- <div class="container">
       <div class="content-title">
-        <!-- <p class="title">Productos</p> -->
       </div>
       <br />
 
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
-          <p class="text-categorias" @click="clear">Catálogo</p>
           <p
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >
-            / {{ this.nameCategoryHeader }}
-          </p>
-          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            / {{ this.nameSubCategoryHeader }}
-          </p>
+          >/ {{ this.nameCategoryHeader }}</p>
+          <p
+            class="text-categorias-select"
+            v-if="this.nameSubCategoryHeader"
+          >/ {{ this.nameSubCategoryHeader }}</p>
         </div>
-        <!-- <div class="search">
-          <div>
-            <input
-              v-model="search"
-              type="text"
-              placeholder="Buscar . . ."
-              required
-            />
-          </div>
-        </div>-->
-      </div>
+    
+      </div> -->
       <div class="top-right">
         <div class="content-item-top">
-          <ul>
+          <!-- <ul>
             <li class="dropdown">
               <div class="content-filtrar">
                 <a class="dropbtn">Categorías</a>
@@ -66,9 +54,7 @@
                               (ref = false)
                             )
                           "
-                        >
-                          {{ categoria.nombre_categoria_producto }}
-                        </p>
+                        >{{ categoria.nombre_categoria_producto }}</p>
                         <div
                           :style="indexCategory == index ? '' : 'display: none'"
                           class="content-item-subcategorie"
@@ -83,49 +69,32 @@
                             "
                             :key="subcategory.id"
                           >
-                            <p class="item-subcategorie">
-                              {{ subcategory.nombre_subcategoria }}
-                            </p>
+                            <p class="item-subcategorie">{{ subcategory.nombre_subcategoria }}</p>
                           </li>
                         </div>
-                        <div
-                          :class="{ popover: sub == index }"
-                          v-if="sub == index"
-                        ></div>
+                        <div :class="{ popover: sub == index }" v-if="sub == index"></div>
                       </label>
                     </li>
                   </ul>
                 </div>
               </div>
             </li>
-          </ul>
-          <div class="search">
+          </ul>-->
+          <!-- <div class="search">
             <div>
-              <input
-                v-model="search"
-                type="text"
-                placeholder="Buscar . . ."
-                required
-              />
+              <input v-model="search" type="text" placeholder="Buscar . . ." required />
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
-      <div class="content-item">
+      <!-- <div class="content-item"> -->
         <div class="content-item-productos">
-          <div class="grid-products">
-            <div
-              v-for="product in filterProduct"
-              :key="product.id"
-              class="content-products"
-            >
+          <div class="flex-products">
+            <div v-for="product in filterProduct" :key="product.id" class="content-products">
               <KoProductCard1 :product="product"></KoProductCard1>
             </div>
           </div>
-          <div
-            v-if="(this.fullProducts.length == 0)"
-            class="content-products-empty"
-          >
+          <div v-if="(this.fullProducts.length == 0)" class="content-products-empty">
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
@@ -141,7 +110,7 @@
             </div>
           </div>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -372,8 +341,9 @@ export default {
 <style scoped>
 div.wrapper-productlist {
   --background_color_1: #f2f4f7;
-  background-image: url('../../assets/img/wp_background.png');
-  background-color: #cccccc;
+  /* background-image: url('../../assets/img/wp_background.png'); */
+  background-color: #ece5dd;
+  background-color: #FAFAF8;
   background-position: center; /* Center the image */
   background-repeat: repeat; /* Do not repeat the image */
   background-size: contain;
@@ -575,13 +545,15 @@ div.wrapper-productlist {
   justify-content: center;
   flex-direction: column;
 }
-.grid-products {
+.flex-products {
   width: 100%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(250px, 2fr));
-  grid-gap: 25px;
+  /* display: grid;
+  grid-template-columns: repeat(4, minmax(250px, 2fr)); */
+  /* grid-gap: 25px; */
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 .content-products-empty {
   width: 100%;
@@ -600,7 +572,9 @@ div.wrapper-productlist {
 /* //////buscador ///////// */
 
 .top-right {
-  display: none;
+  position: sticky;
+  top: 0;
+  /* display: none; */
   /* width: 100%;
   padding-top: 0px;
   padding-bottom: 15px; */
@@ -669,6 +643,7 @@ div.wrapper-productlist {
 /* //////paginacion//////// */
 .pagination-medium {
   margin-top: 10px;
+  margin-bottom: 80px;
   background: transparent;
 }
 .pagination {
@@ -814,7 +789,7 @@ div.wrapper-productlist {
   }
 }
 
-@media (max-width: 770px) {
+@media (max-width: 700px) {
   /* ///////productos/////////// */
   .container {
     padding: 0px;
@@ -844,13 +819,9 @@ div.wrapper-productlist {
     padding: 0px 15px;
   }
 }
+/* }
 @media (max-width: 700px) {
-  /* .top-right {
-    display: initial;
-    width: 100%;
-    padding-top: 0px;
-    padding-bottom: 15px;
-  } */
+
   .content-items-categorias {
     margin-left: 5px;
     margin-bottom: 0px;
@@ -860,10 +831,10 @@ div.wrapper-productlist {
 @media (max-width: 450px) {
   .grid-products {
     grid-template-columns: repeat(2, minmax(160px, 1fr));
-    /* grid-gap: 32px; */
+
   }
   .content-item-productos {
     padding: 5px;
   }
-}
+} */
 </style>
