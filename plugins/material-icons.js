@@ -25,6 +25,8 @@ import Delete from 'vue-material-design-icons/DeleteForever.vue'
 import Search from 'vue-material-design-icons/Magnify.vue'
 import Circle from 'vue-material-design-icons/CircleMedium.vue'
 
+
+
 Vue.component('menu-icon', MenuIcon)
 
 Vue.component('facebook-icon', Facebook)
@@ -52,3 +54,5 @@ Vue.component('cartArrowDown', CartArrowDown)
 Vue.component('menos-icon', menos)
 Vue.component('mas-icon', mas)
 Vue.component('circle-icon', Circle)
+
+
