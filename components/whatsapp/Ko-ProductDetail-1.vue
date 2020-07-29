@@ -2,6 +2,9 @@
   <div class="wrapper-productDetail">
     <div v-if="loading" v-loading="loading"></div>
     <div class="container-productDetail" v-else>
+      <router-link to="/wa" class="wrapper-back">
+        <arrow-left-icon class="arrow-back" />
+      </router-link>
       <div class="section">
         <div class="wrapper-left">
           <div class="photos">
@@ -9,14 +12,14 @@
               <img
                 @click="selectedPhoto(data.detalle.foto_cloudinary)"
                 class="img-list"
-                :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
+                :src="idCloudinary(data.detalle.foto_cloudinary, 300, 300)"
               />
               <img
                 v-for="(foto, itemsfoto) in data.fotos"
                 :key="itemsfoto"
                 @click="selectedPhoto(foto.foto_cloudinary)"
                 class="img-list"
-                :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
+                :src="idCloudinary(foto.foto_cloudinary, 260, 260)"
               />
 
               <img
@@ -29,14 +32,14 @@
             </div>
           </div>
           <div class="wrapper-photo_main">
-            <div v-if="active" v-show="!existYoutube" class="photo_main">
+            <!-- <div v-if="active" v-show="!existYoutube" class="photo_main">
               <img
                 class="photo_main"
                 v-on:mouseover.native="active = !active"
                 :src="idCloudinary(selectPhotoUrl, 645, 430)"
               />
-            </div>
-            <div v-if="!active" v-show="!existYoutube" class="photo_main">
+            </div>-->
+            <!-- <div v-if="!active" v-show="!existYoutube" class="photo_main">
               <cld-image
                 cloudName="komercia-store"
                 v-on:mouseleave.native="active = !active"
@@ -49,13 +52,9 @@
                 crop="crop"
                 class="photo_main"
               >
-                <cld-transformation
-                  radius="5"
-                  quality="auto"
-                  background="auto:border"
-                />
+                <cld-transformation radius="5" quality="auto" background="auto:border" />
               </cld-image>
-            </div>
+            </div>-->
 
             <iframe
               v-show="existYoutube"
@@ -76,18 +75,17 @@
         <div class="wrapper-right">
           <div class="content-right">
             <p class="text-name">{{ data.detalle.nombre }}</p>
-            <p class="text-marca">
-              <strong>{{ data.info.marca }}</strong>
-            </p>
+
             <!-- <p class="text-promocion" v-show="salesData.precio">
               ${{ salesData.precio | currency }}
             </p>-->
             <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">
-                ${{ salesData.precio | currency }}
-              </p>
+              <p class="text-precio" v-show="salesData.precio">$ {{ salesData.precio | currency }}</p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
+            <p class="text-marca">
+              <strong>{{ data.info.marca }}</strong>
+            </p>
             <!-- <div
               class="content-text-desc"
               v-if="data.info.descripcion && data.info.descripcion.length > 12"
@@ -105,7 +103,7 @@
                 <p class="card-info-1" v-if="spent">Agotado !</p>
               </div>
             </div>
-            <div v-if="this.data.detalle.con_variante > 0">
+            <!-- <div v-if="this.data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
                 <label class="text-variant">{{ variant.nombre }}:</label>
                 <selectGroup :index="index" :variantes="data.variantes">
@@ -113,12 +111,11 @@
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
-                    >{{ item.option }}</option
-                  >
+                  >{{ item.option }}</option>
                 </selectGroup>
               </div>
-            </div>
-            <div :class="{ disabled: !salesData.estado }">
+            </div>-->
+            <!-- <div :class="{ disabled: !salesData.estado }">
               <div>
                 <div class="quantity">
                   <p class="text-quantity">Cantidad:</p>
@@ -130,53 +127,32 @@
                     <mas-icon class="icon" />
                   </button>
 
-                  <div
-                    class="container-alerta"
-                    v-if="this.maxQuantityValue == this.quantityValue"
-                  >
+                  <div class="container-alerta" v-if="this.maxQuantityValue == this.quantityValue">
                     <span class="alerta">última Unidad!</span>
                   </div>
                 </div>
                 <div class="item-info-product">
-                  <div v-if="data.info.garantia" class="content_buy_action">
-                    <p class="text-unidades">Garantía:</p>
-                    <span class="text-garantia">{{ data.info.garantia }}</span>
-                  </div>
-                  <!-- <div v-if="salesData.unidades" class="content_buy_action">
-                    <p class="text-unidades">Unidades disponibles:</p>
-                    <p class="text-garantia">{{ salesData.unidades }}</p>
-                  </div>-->
                   <div class="content-button">
                     <button
                       ref="colorBtn"
                       class="btn"
                       v-if="!spent"
                       v-on:click="addShoppingCart"
-                    >
-                      Comprar
-                    </button>
-                    <!-- <ko-whatsapp
-                      v-if="whatsapp"
-                      class="whatsapp"
-                      @click.native="redirectWhatsapp()"
-                    />-->
+                    >Comprar</button>
+                   
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>
-      <div class="section">
+      <!-- <div class="section">
         <div class="features">
-          <ko-description
-            :dataStore="dataStore"
-            :data="data"
-            :envio="envio"
-          ></ko-description>
+          <ko-description :dataStore="dataStore" :data="data" :envio="envio"></ko-description>
         </div>
-      </div>
-      <div class="responsive-purchase">
+      </div>-->
+      <!-- <div class="responsive-purchase">
         <div class="ko-input">
           <div class="quantity-resposive">
             <button class="quantity_remove" v-on:click="removeQuantity()">
@@ -187,10 +163,7 @@
               <mas-icon class="icon" />
             </button>
             <transition name="slide-fade">
-              <div
-                class="container-alert"
-                v-show="quantityValue == maxQuantityValue"
-              >
+              <div class="container-alert" v-show="quantityValue == maxQuantityValue">
                 <span class="alert">última Unidad!</span>
               </div>
             </transition>
@@ -199,18 +172,14 @@
             <div class="content_buy_action-responsive" v-if="spent">
               <p class="card-info-1-res">Agotado !</p>
             </div>
-            <button
-              class="btn-responsive"
-              ref="color2"
-              v-if="!spent"
-              v-on:click="addShoppingCart"
-            >
+            <button class="btn-responsive" ref="color2" v-if="!spent" v-on:click="addShoppingCart">
               <cartArrowDown class="card-icon-cart" />Agregar
             </button>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
+    <KFooter />
   </div>
 </template>
 
@@ -220,6 +189,7 @@ import productSlide from './_productdetails/productSlide'
 import selectGroup from './_productdetails/selectGroup'
 import koDescription from './_productdetails/descriptionProduct.vue'
 import idCloudinary from '../../mixins/idCloudinary'
+import KFooter from './Footer-Detail'
 
 export default {
   mixins: [idCloudinary],
@@ -228,6 +198,7 @@ export default {
     selectGroup,
     koDescription,
     productSlide,
+    KFooter,
   },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -633,14 +604,31 @@ export default {
 
 <style scoped>
 div.wrapper-productDetail {
-  --background_color_1: #f2f4f7;
+  /* --background_color_1: #f2f4f7; */
+  background-color: transparent;
 }
+
 .wrapper-productDetail {
   display: flex;
   width: 100%;
   background: var(--background_color_1);
   justify-content: center;
   align-items: center;
+  background-color: transparent;
+}
+.arrow-back {
+  color: #4c4c4c;
+  font-size: 24px;
+  z-index: 100;
+}
+.wrapper-back {
+  display: flex;
+  align-items: center;
+  align-items: flex-start;
+  height: 40px;
+  width: 100%;
+  z-index: 100;
+  padding: 0px 10px;
 }
 .container-productDetail {
   display: flex;
@@ -672,6 +660,7 @@ div.wrapper-productDetail {
   flex-direction: row;
   margin-right: 25px;
   padding-bottom: 10px;
+  margin-top: -40px;
 }
 .photos_responsive {
   display: none;
@@ -740,9 +729,9 @@ i.close {
 }
 .text-name {
   font-weight: bold;
-  font-size: 25px;
-  line-height: 24px;
-  color: var(--color_text);
+  font-size: 22px;
+  /* line-height: 24px; */
+  color: black;
 }
 .text-marca {
   font-size: 10px;
@@ -1016,7 +1005,7 @@ i.close {
   }
 }
 
-@media (max-width: 725px) {
+@media (max-width: 900px) {
   .container-productDetail {
     padding: 0px 5px;
     align-items: center;
@@ -1063,7 +1052,7 @@ i.close {
   }
   .responsive-purchase {
     display: initial;
-    position: fixed;
+
     bottom: 0;
     right: 0;
     width: 100%;
@@ -1176,7 +1165,7 @@ i.close {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .container-productDetail {
     padding: 0px;
   }
@@ -1191,8 +1180,16 @@ i.close {
     margin-right: 15px;
   }
   .text-name {
-    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
     font-size: 20px;
+  }
+  .text-precio {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: 6px;
+    color: black;
   }
 }
 </style>

@@ -1,34 +1,30 @@
 <template lang="html">
   <div class="home">
-    <!-- <div class="space-search"></div> -->
-    <!-- <div class="search-movil" id="navbar">
-      <form id="demo-1" style="width: 100%;">
-        <input v-model="search" type="search" placeholder="¿Qué buscas?" />
-      </form>
-    </div> -->
-    <!-- <kBanner :dataStore="dataStore" /> -->
-    <!-- <KProductFavoritos /> -->
+      <KoHeaderWp :dataStore="dataStore" />
+    <Categories :dataStore="dataStore" style="position: sticky" />
+
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
     ></KProductList>
-    <!-- <KNewsletter :dataStore="dataStore" /> -->
+        <KFooter1  />
   </div>
 </template>
 
 <script>
-import kBanner from '../../components/whatsapp/ko-Banner-1'
-import KProductFavoritos from '../../components/whatsapp/Ko-ProductFavoritos-1'
 import KProductList from '../../components/whatsapp/Ko-ProductList-1'
-// import KNewsletter from '../../components/template5/Ko-Newsletter-1'
+import KoHeaderWp from '../../components/whatsapp/Header'
+import KFooter1 from '../../components/whatsapp/Footer'
+import Categories from '../../components/whatsapp/Categories'
 
 export default {
   layout: 'wa',
   components: {
-    kBanner,
     KProductList,
+    KoHeaderWp,
+    Categories,
+    KFooter1,
     // KNewsletter,
-    KProductFavoritos,
   },
   mounted() {
     var prevScrollpos = window.pageYOffset
@@ -157,7 +153,7 @@ input::-webkit-input-placeholder {
 .space-search {
   display: none;
 }
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   .space-search {
     display: flex;
     width: 100%;
