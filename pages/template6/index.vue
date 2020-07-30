@@ -3,7 +3,12 @@
     <div class="space-search"></div>
     <div class="search-movil" id="navbar">
       <form id="demo-1" style="width: 100%;">
-        <input v-model="search" type="search" placeholder="¿Qué buscas?" />
+        <input
+          v-model="search"
+          type="search"
+          placeholder="¿Qué buscas?"
+          @keyup.enter="getSearch(search)"
+        />
       </form>
     </div>
     <kBanner :dataStore="dataStore" />
@@ -47,6 +52,11 @@ export default {
       }
       prevScrollpos = currentScrollPos
     }
+    let domain = this.$route.fullPath
+    let search = domain.slice(0, [9])
+    if (search === '/?search=') {
+      this.setSearch(domain)
+    }
   },
   data() {
     return {
@@ -63,6 +73,10 @@ export default {
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },
+
+    fullPathServer() {
+      return this.$store.state.fullPathServer
+    },
   },
   methods: {
     Searchproduct(search) {
@@ -78,6 +92,30 @@ export default {
         })
       }
       this.currentPage = 1
+    },
+    getSearch(value) {
+      if (value) {
+        location.href = this.fullPathServer + '?search=' + value
+      } else {
+        location.href = this.fullPathServer + '?search=' + '?'
+      }
+    },
+    setSearch(value) {
+      let category = value.replace('/?search=', '')
+      let UrlCategory = category.replace(/-/g, ' ')
+      let urlFiltrada = decodeURIComponent(UrlCategory)
+      this.search = urlFiltrada
+      // if (urlFiltrada.length) {
+      //   this.$store.commit('products/FILTER_BY', {
+      //     type: 'search',
+      //     data: urlFiltrada,
+      //   })
+      // } else {
+      //   this.$store.commit('products/FILTER_BY', {
+      //     type: 'all',
+      //     data: '',
+      //   })
+      // }
     },
   },
   watch: {

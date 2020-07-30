@@ -1,6 +1,5 @@
 <template lang="html">
   <div class="home">
-    
     <component :is="indexTemplate" />
   </div>
 </template>
@@ -19,19 +18,19 @@ export default {
       return this.$store.state.template
     },
     indexTemplate() {
-      let headerComponent = ''
+      let productListComponent = ''
       switch (this.template) {
         case 3:
-          headerComponent = 'KoTemplate5'
+          productListComponent = 'KoTemplate5'
           break
         case 5:
-          headerComponent = 'KoTemplate5'
+          productListComponent = 'KoTemplate5'
           break
         case 6:
-          headerComponent = 'KoTemplate6'
+          productListComponent = 'KoTemplate6'
           break
       }
-      return headerComponent
+      return productListComponent
     },
   },
 }

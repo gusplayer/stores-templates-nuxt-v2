@@ -19,9 +19,14 @@
             <div class="header-icon" v-if="item.link" :is="item.icon" />
           </div>
         </div>
-        <div class="search" v-if="showMenu">
+        <div class="search" v-if="showSearch">
           <form id="demo-2">
-            <input type="search" placeholder="¿Qué buscas?" v-model="search" />
+            <input
+              type="search"
+              placeholder="¿Qué buscas?"
+              v-model="search"
+              @keyup.enter="getSearch(search)"
+            />
           </form>
         </div>
         <div class="header-content-icon">
@@ -37,7 +42,7 @@
         <KoMenuLeft
           class="responsiveLeft"
           :dataStore="dataStore"
-          :showMenu="showMenu"
+          :showMenu="showSearch"
         />
       </div>
     </div>
@@ -64,11 +69,15 @@ export default {
     let domain = this.$route.fullPath
     let searchCategory = domain.slice(0, [11])
     let searchSubCategory = domain.slice(0, [14])
+    let search = domain.slice(0, [9])
     if (domain == '/') {
       this.showSearch = true
     } else if (searchCategory === '/?category=') {
       this.showSearch = true
     } else if (searchSubCategory === '/?subcategory=') {
+      this.showSearch = true
+    } else if (search === '/?search=') {
+      this.setSearch(domain)
       this.showSearch = true
     } else {
       this.showSearch = false
@@ -81,6 +90,7 @@ export default {
       toggle: false,
       drawer: false,
       direction: 'rtl',
+      showSearch: false,
       links: [
         {
           nombre: 'Facebook',
@@ -140,6 +150,9 @@ export default {
     product() {
       return this.dataStore.productos
     },
+    fullPathServer() {
+      return this.$store.state.fullPathServer
+    },
   },
   methods: {
     openOrder() {
@@ -167,6 +180,30 @@ export default {
       }
       this.currentPage = 1
     },
+    getSearch(value) {
+      if (value) {
+        location.href = this.fullPathServer + '?search=' + value
+      } else {
+        location.href = this.fullPathServer + '?search=' + ''
+      }
+    },
+    setSearch(value) {
+      let category = value.replace('/?search=', '')
+      let UrlCategory = category.replace(/-/g, ' ')
+      let urlFiltrada = decodeURIComponent(UrlCategory)
+      this.search = urlFiltrada
+      // if (urlFiltrada.length) {
+      //   this.$store.commit('products/FILTER_BY', {
+      //     type: 'search',
+      //     data: urlFiltrada,
+      //   })
+      // } else {
+      //   this.$store.commit('products/FILTER_BY', {
+      //     type: 'all',
+      //     data: '',
+      //   })
+      // }
+    },
   },
   watch: {
     'dataStore.tienda'() {
@@ -182,11 +219,15 @@ export default {
       let domain = this.$route.fullPath
       let searchCategory = domain.slice(0, [11])
       let searchSubCategory = domain.slice(0, [14])
+      let search = domain.slice(0, [9])
       if (domain == '/') {
         this.showSearch = true
       } else if (searchCategory === '/?category=') {
         this.showSearch = true
       } else if (searchSubCategory === '/?subcategory=') {
+        this.showSearch = true
+      } else if (search === '/?search=') {
+        this.setSearch(domain)
         this.showSearch = true
       } else {
         this.showSearch = false
@@ -348,6 +389,7 @@ div.header-container {
   display: flex;
 }
 /* search */
+
 input {
   outline: none;
 }
