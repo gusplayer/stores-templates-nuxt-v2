@@ -97,7 +97,7 @@ export default {
       if (value) {
         location.href = this.fullPathServer + '?search=' + value
       } else {
-        location.href = this.fullPathServer + '?search=' + '?'
+        location.href = this.fullPathServer + '?search=' + ''
       }
     },
     setSearch(value) {
