@@ -10,16 +10,18 @@
                 class="logo"
               />
             </nuxt-link>
-            <div
-              v-if="this.dataStore.tienda.descripcion.length >= 150"
-              v-html="`${this.dataStore.tienda.descripcion.slice(0, 150)}...`"
-              class="text-light"
-            ></div>
-            <div
-              v-else
-              v-html="`${this.dataStore.tienda.descripcion.slice(0, 150)}`"
-              class="text-light"
-            ></div>
+            <div v-if="this.dataStore.tienda.descripcion">
+              <div
+                v-if="this.dataStore.tienda.descripcion.length >= 150"
+                v-html="`${this.dataStore.tienda.descripcion.slice(0, 150)}...`"
+                class="text-light"
+              ></div>
+              <div
+                v-else
+                v-html="`${this.dataStore.tienda.descripcion.slice(0, 150)}`"
+                class="text-light"
+              ></div>
+            </div>
           </div>
         </div>
         <div>
