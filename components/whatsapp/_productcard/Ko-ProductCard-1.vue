@@ -2,18 +2,15 @@
   <div class="container">
     <div class="wrapper-movil">
       <router-link :to="{ path: `/wa/` + product.slug }" class="wrapper-image">
-        <img :src="idCloudinary(this.product.foto_cloudinary, 150, 150)" class="product-image" />
-
-        <p class="card-info-1" v-if="soldOut">Agotado !</p>
-        <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis !</p>
+        <img :src="idCloudinary(this.product.foto_cloudinary, 250, 250)" class="product-image" />
       </router-link>
       <div class="wrapper-text">
         <router-link :to="{ path: `/wa/` + product.slug }" class="content-name-product-movil">
           <p
             class="card-text-movil"
-            v-if="this.product.nombre.length >= 33"
-          >{{ `${this.product.nombre.slice(0, 33)}..` }}</p>
-          <p class="card-text-movil" v-else>{{ `${this.product.nombre.slice(0, 34)}` }}</p>
+            v-if="this.product.nombre.length >= 55"
+          >{{ `${this.product.nombre.slice(0, 55)}..` }}</p>
+          <p class="card-text-movil" v-else>{{ `${this.product.nombre.slice(0, 55)}` }}</p>
         </router-link>
         <div class="content-text-price-movil-cart" v-if="this.product.precio">
           <router-link :to="{ path: `/wa/` + product.slug }" class="wrapper-price">
@@ -28,6 +25,8 @@
             </div>
             <!-- <p class="card-descuento">-50%</p> -->
           </router-link>
+          <p class="card-info-1" v-if="soldOut">Agotado !</p>
+          <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis !</p>
           <div v-if="!this.estadoCart && !soldOut && !spent">
             <cartArrowDown class="card-icon-cart-movil" v-on:click="addShoppingCart" />
           </div>
@@ -187,7 +186,7 @@ export default {
 <style scoped>
 .separator {
   /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
-  border: 0.8px solid #c1bfbf45;
+  border: 0.8px solid #ededed8a;
 }
 .container {
   display: flex;
@@ -204,12 +203,12 @@ export default {
   width: 90px;
   height: 90px;
   border-radius: 8px;
-  overflow: hidden;
 }
 .product-image {
   width: 90px;
   height: 90px;
   object-fit: contain;
+  border-radius: 8px;
 }
 .wrapper-text {
   margin-left: 18px;
@@ -220,8 +219,33 @@ export default {
   font-size: 15px;
 }
 .text-price {
-  color: #4c4c4c;
+  color: #6c6c6c;
+  font-size: 14px;
+  font-weight: 500;
+}
+.card-info-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e71f77;
+  padding: 1px 4px;
+  border-radius: var(--radius_btn);
+  color: white;
   font-size: 12px;
-  font-weight: 900;
+  width: fit-content;
+  margin-top: 5px;
+}
+.card-info-2 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #35dd8d;
+  padding: 1px 4px;
+  border-radius: var(--radius_btn);
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+  width: fit-content;
 }
 </style>
