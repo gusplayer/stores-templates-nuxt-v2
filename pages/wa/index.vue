@@ -1,30 +1,23 @@
 <template lang="html">
   <div class="home">
-      <KoHeaderWp :dataStore="dataStore" />
-    <Categories :dataStore="dataStore" style="position: sticky" />
-
+    
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
-    ></KProductList>
-        <KFooter1  />
+    / >
+    <KFooter1  />
   </div>
 </template>
 
 <script>
 import KProductList from '../../components/whatsapp/Ko-ProductList-1'
-import KoHeaderWp from '../../components/whatsapp/Header'
 import KFooter1 from '../../components/whatsapp/Footer'
-import Categories from '../../components/whatsapp/Categories'
 
 export default {
   layout: 'wa',
   components: {
     KProductList,
-    KoHeaderWp,
-    Categories,
     KFooter1,
-    // KNewsletter,
   },
   mounted() {
     var prevScrollpos = window.pageYOffset

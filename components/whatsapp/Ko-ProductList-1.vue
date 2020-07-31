@@ -533,11 +533,11 @@ div.wrapper-productlist {
 .content-products {
   border-radius: 10px;
 }
-.content-products:hover,
+/* .content-products:hover,
 .content-products:focus {
   box-shadow: 0px 0px 2px 1px var(--color_border);
   border-radius: 10px;
-}
+} */
 .content-item-productos {
   display: flex;
   width: 100%;

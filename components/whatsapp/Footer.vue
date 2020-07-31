@@ -1,5 +1,6 @@
 <template>
   <div class="main-container">
+    <KoOrder />
     <div class="product-link" @click="openOrder">
       <p class="unidades">{{productsCart.length }} producto</p>
       <p class="carrito">Ver carrito</p>
@@ -11,7 +12,11 @@
 </template>
 
 <script>
+import KoOrder from './_order1/order1'
 export default {
+  components: {
+    KoOrder,
+  },
   data() {
     return {
       saleAmount: 0,
@@ -19,6 +24,7 @@ export default {
   },
   methods: {
     openOrder() {
+      console.log('open cart')
       this.$store.state.openOrder = true
     },
   },
