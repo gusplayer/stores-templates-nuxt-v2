@@ -8,6 +8,30 @@
     <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
       <koWhatsapp class="button-whatsapp" @click.native="redirectWhatsapp()" />
     </div>
+    <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
+      <div class="content-cookie">
+        <p class="title">
+          Utilizamos cookies, solo para rastrear las visitas a nuestro sitio
+          web, no almacenamos detalles personales.
+        </p>
+        <div class="wrapper-btn">
+          <div class="content-btn">
+            <button class="btn-accept" @click="acceptCookies()">
+              Acepto cookies
+            </button>
+            <button class="btn-decline" @click="declineCookies()">
+              Cancelar cookies
+            </button>
+          </div>
+          <a
+            class="_link"
+            href="http://www.allaboutcookies.org/"
+            target="_blank"
+            >¿Qué son las cookies?</a
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,6 +53,7 @@ export default {
     KoNotificacion,
   },
   mounted() {
+    this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch(
@@ -160,6 +185,9 @@ export default {
     }
   },
   computed: {
+    dataCookies() {
+      return this.$store.state.dataCookies
+    },
     template() {
       return this.$store.state.template
     },
@@ -190,7 +218,6 @@ export default {
       }
       return headerComponent
     },
-
     footerTemplate() {
       let headerComponent = ''
       switch (this.template) {
@@ -264,6 +291,17 @@ export default {
         }
       }
     },
+    acceptCookies() {
+      document.getElementById('modalCookies').style.bottom = '-135px'
+      document.cookie =
+        'Komercia' +
+        encodeURIComponent('acepto lectura de cookies') +
+        '; expires=Thu, 18 Dec 2013 12:00:00 UTC;' +
+        'path=/'
+    },
+    declineCookies() {
+      document.getElementById('modalCookies').style.bottom = '-135px'
+    },
   },
 }
 </script>
@@ -323,7 +361,7 @@ export default {
   bottom: 60px;
   right: 10px;
   cursor: pointer;
-  transition: all 200ms ease-in;
+  transition: all 300ms ease-in;
 }
 .wrapper-whatsapp:hover {
   background: #2ac04e;
@@ -331,6 +369,105 @@ export default {
 .button-whatsapp {
   fill: white;
   width: 38px;
+}
+.wrapper-cookie {
+  z-index: 3;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0px;
+  background: transparent;
+  transition: all 200ms ease-in;
+}
+.content-cookie {
+  padding: 10px;
+  width: 100%;
+  max-width: 1300px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #53585ee5;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-box-shadow: 3px 3px 28px 3px rgba(0, 0, 0, 0.46);
+  box-shadow: 3px 3px 28px 3px rgba(0, 0, 0, 0.46);
+}
+.title {
+  font-size: 16px;
+  color: white;
+}
+.wrapper-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.content-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.btn-accept {
+  width: 129px;
+  border-radius: 5px;
+  color: black;
+  border: solid 2px #25dac5;
+  background-color: #25dac5;
+  padding: 4px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+.btn-accept:hover {
+  color: white;
+  border: solid 2px rgb(25, 26, 27);
+  background-color: rgb(25, 26, 27);
+}
+.btn-decline {
+  width: 140px;
+  margin-left: 10px;
+  border-radius: 5px;
+  color: white;
+  border: solid 2px rgb(25, 26, 27);
+  background-color: rgb(25, 26, 27);
+  padding: 4px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+.btn-decline:hover {
+  border: solid 2px rgb(25, 26, 27);
+  background-color: rgb(25, 26, 27);
+}
+._link {
+  width: 119px;
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #41aaf0;
+  text-decoration: none;
+}
+._link:hover {
+  color: #2c85c0;
+}
+@media (max-width: 700px) {
+  .content-cookie {
+    flex-direction: column;
+  }
+  .title {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .wrapper-btn {
+    flex-direction: column;
+  }
+  ._link {
+    margin-top: 5px;
+    margin-left: 0px;
+  }
 }
 @media (max-width: 400px) {
   .wrapper-whatsapp {

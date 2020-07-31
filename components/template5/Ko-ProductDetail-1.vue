@@ -37,10 +37,9 @@
               />
             </div>
             <div v-if="!active" v-show="!existYoutube" class="photo_main">
-              <img
-                class="photo_main_zoom"
+              <zoom
                 v-on:mouseleave="active = !active"
-                :src="idCloudinary(selectPhotoUrl, 645, 430)"
+                :photo="selectPhotoUrl"
               />
             </div>
             <iframe
@@ -206,6 +205,7 @@ import productSlide from './_productdetails/productSlide'
 import selectGroup from './_productdetails/selectGroup'
 import koDescription from './_productdetails/descriptionProduct.vue'
 import idCloudinary from '../../mixins/idCloudinary'
+import zoom from './_productdetails/zoomImg'
 
 export default {
   mixins: [idCloudinary],
@@ -214,6 +214,7 @@ export default {
     selectGroup,
     koDescription,
     productSlide,
+    zoom,
   },
   mounted() {
     this.$store.state.beforeCombination = []

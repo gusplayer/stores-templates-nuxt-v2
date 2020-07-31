@@ -4,6 +4,7 @@ import axios from 'axios'
 // import { stat } from "fs";
 
 // const idStore = 605
+import getCookie from '../utils/getCookie'
 
 export const state = () => ({
   urlHttp: 'https://api2.komercia.co',
@@ -222,6 +223,7 @@ export const state = () => ({
     ],
   },
   analytics_tagmanager: '',
+  dataCookies: false,
 })
 
 export const mutations = {
@@ -418,7 +420,7 @@ export const mutations = {
 }
 export const actions = {
   GET_LOGIN({ state, commit, dispatch }) {
-    // const token = getCookie("authData");
+    // const token = getCookie('authData')
     axios
       .post(
         `${state.urlComponents}/api/login`,
@@ -430,6 +432,13 @@ export const actions = {
         commit('SET_ACCESSTOKEN', await response.data.access_token)
         dispatch('GET_VIEWS')
       })
+  },
+  GET_COOKIES({ state }) {
+    const cookies = getCookie('Komercia')
+    console.log(cookies)
+    if (cookies) {
+      state.dataCookies = true
+    }
   },
 
   async nuxtServerInit({ commit, dispatch }, { req, route }) {

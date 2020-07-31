@@ -11,7 +11,7 @@
           class="wrapper-image"
         >
           <img
-            :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
+            :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image"
           />
 
@@ -78,7 +78,7 @@
           class="wrapper-image"
         >
           <img
-            :src="idCloudinary(this.product.foto_cloudinary, 200, 200)"
+            :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
             class="product-image"
           />
 
@@ -342,12 +342,10 @@ div.wrapper-card {
   justify-content: center;
   overflow: hidden;
   width: 100%;
-  /* max-height: 300px; */
+  max-height: 300px;
 }
 .product-image {
   width: 100%;
-  /* height: 298.5px; */
-  /* object-fit: contain; */
   object-fit: cover;
   overflow: hidden;
 }
