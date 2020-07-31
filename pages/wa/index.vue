@@ -1,11 +1,7 @@
 <template lang="html">
   <div class="home">
-    
-    <KProductList
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
-    / >
-    <KFooter1  />
+    <KProductList :dataStore="dataStore" :fullProducts="fullProducts" />
+    <KFooter1 />
   </div>
 </template>
 
