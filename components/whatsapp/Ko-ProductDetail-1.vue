@@ -12,14 +12,14 @@
               <img
                 @click="selectedPhoto(data.detalle.foto_cloudinary)"
                 class="img-list"
-                :src="idCloudinary(data.detalle.foto_cloudinary, 300, 300)"
+                :src="idCloudinary(data.detalle.foto_cloudinary, 500, 500)"
               />
               <img
                 v-for="(foto, itemsfoto) in data.fotos"
                 :key="itemsfoto"
                 @click="selectedPhoto(foto.foto_cloudinary)"
                 class="img-list"
-                :src="idCloudinary(foto.foto_cloudinary, 260, 260)"
+                :src="idCloudinary(foto.foto_cloudinary, 500, 500)"
               />
 
               <img
@@ -618,7 +618,7 @@ div.wrapper-productDetail {
 }
 .arrow-back {
   color: #4c4c4c;
-  font-size: 24px;
+  font-size: 28px;
   z-index: 100;
 }
 .wrapper-back {
@@ -646,7 +646,7 @@ div.wrapper-productDetail {
 }
 .wrapper-category {
   display: flex;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 .text-category {
   font-size: 14px;

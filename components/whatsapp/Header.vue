@@ -49,6 +49,9 @@ export default {
   padding: 10px;
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 9;
 }
 .image-portada {
   width: 100%;

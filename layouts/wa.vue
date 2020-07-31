@@ -1,7 +1,8 @@
 <template>
   <div :style="themeStyleWa">
-    <!-- <KoHeaderWp :dataStore="dataStore" />
-    <Categories :dataStore="dataStore" />-->
+    <!-- <KoHeaderTest /> -->
+    <KoHeaderWp :dataStore="dataStore" />
+    <Categories :dataStore="dataStore" />
     <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
     <nuxt />
     <!-- <KFooter1 :dataStore="dataStore" /> -->
@@ -15,6 +16,7 @@
 import KoHeaderWp from '../components/whatsapp/Header'
 import KFooter1 from '../components/whatsapp/Footer'
 import Categories from '../components/whatsapp/Categories'
+// import KoHeaderTest from '../components/headers/header_wp/Ko-Header-wp'
 // import koWhatsapp from '../components/whatsapp/whatsapp'
 
 export default {
@@ -22,6 +24,7 @@ export default {
     KoHeaderWp,
     KFooter1,
     Categories,
+    // KoHeaderTest,
   },
   mounted() {
     this.$store.dispatch('GET_LOGIN')

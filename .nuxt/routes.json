@@ -3,105 +3,90 @@
     "name": "cart",
     "path": "/cart",
     "component": "/Projects/template-nuxt-dokku/pages/cart.vue",
-    "chunkName": "pages/cart",
-    "_name": "_7475a39b"
+    "chunkName": "pages/cart"
   },
   {
     "name": "contacto",
     "path": "/contacto",
     "component": "/Projects/template-nuxt-dokku/pages/contacto.vue",
-    "chunkName": "pages/contacto",
-    "_name": "_4a84afca"
+    "chunkName": "pages/contacto"
   },
   {
     "name": "ig",
     "path": "/ig",
     "component": "/Projects/template-nuxt-dokku/pages/ig/index.vue",
-    "chunkName": "pages/ig/index",
-    "_name": "_927df9c8"
+    "chunkName": "pages/ig/index"
   },
   {
     "name": "template5",
     "path": "/template5",
     "component": "/Projects/template-nuxt-dokku/pages/template5/index.vue",
-    "chunkName": "pages/template5/index",
-    "_name": "_5f542ada"
+    "chunkName": "pages/template5/index"
   },
   {
     "name": "template6",
     "path": "/template6",
     "component": "/Projects/template-nuxt-dokku/pages/template6/index.vue",
-    "chunkName": "pages/template6/index",
-    "_name": "_653a9d54"
+    "chunkName": "pages/template6/index"
   },
   {
     "name": "wa",
     "path": "/wa",
     "component": "/Projects/template-nuxt-dokku/pages/wa/index.vue",
-    "chunkName": "pages/wa/index",
-    "_name": "_b5c84470"
+    "chunkName": "pages/wa/index"
   },
   {
     "name": "constructor-constructorK",
     "path": "/constructor/constructorK",
     "component": "/Projects/template-nuxt-dokku/pages/constructor/constructorK.vue",
-    "chunkName": "pages/constructor/constructorK",
-    "_name": "_573b7d81"
+    "chunkName": "pages/constructor/constructorK"
   },
   {
     "name": "ig-contacto",
     "path": "/ig/contacto",
     "component": "/Projects/template-nuxt-dokku/pages/ig/contacto.vue",
-    "chunkName": "pages/ig/contacto",
-    "_name": "_f9834516"
+    "chunkName": "pages/ig/contacto"
   },
   {
     "name": "template5-cart",
     "path": "/template5/cart",
     "component": "/Projects/template-nuxt-dokku/pages/template5/cart.vue",
-    "chunkName": "pages/template5/cart",
-    "_name": "_52ebac6f"
+    "chunkName": "pages/template5/cart"
   },
   {
     "name": "template5-contacto",
     "path": "/template5/contacto",
     "component": "/Projects/template-nuxt-dokku/pages/template5/contacto.vue",
-    "chunkName": "pages/template5/contacto",
-    "_name": "_7a622e9e"
+    "chunkName": "pages/template5/contacto"
   },
   {
     "name": "wa-cart",
     "path": "/wa/cart",
     "component": "/Projects/template-nuxt-dokku/pages/wa/cart.vue",
-    "chunkName": "pages/wa/cart",
-    "_name": "_12a002cc"
+    "chunkName": "pages/wa/cart"
   },
   {
     "name": "ig-productos-slug",
     "path": "/ig/productos/:slug?",
     "component": "/Projects/template-nuxt-dokku/pages/ig/productos/_slug.vue",
-    "chunkName": "pages/ig/productos/_slug",
-    "_name": "_a2f76150"
+    "chunkName": "pages/ig/productos/_slug"
   },
   {
     "name": "productos-slug",
     "path": "/productos/:slug?",
     "component": "/Projects/template-nuxt-dokku/pages/productos/_slug.vue",
-    "chunkName": "pages/productos/_slug",
-    "_name": "_2abcb93a"
+    "chunkName": "pages/productos/_slug"
   },
   {
     "name": "wa-slug",
     "path": "/wa/:slug",
     "component": "/Projects/template-nuxt-dokku/pages/wa/_slug.vue",
-    "chunkName": "pages/wa/_slug",
-    "_name": "_b9358700"
+    "chunkName": "pages/wa/_slug"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Projects/template-nuxt-dokku/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_3fea4e32"
+    "chunkName": "pages/index"
   }
 ]
