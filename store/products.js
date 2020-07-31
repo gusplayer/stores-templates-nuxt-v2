@@ -22,17 +22,17 @@ export const state = () => ({
 export const getters = {
   filterProducts: (state) => {
     if (state.type === 'search') {
-      // return new Fuse(state.fullProducts, state.options).search(state.payload)
-      let result = []
-      const fuse = new Fuse(state.fullProducts, state.options).search(
-        state.payload
-      )
-      fuse.find((element) => {
-        if (element.item) {
-          result.push(element.item)
-        }
-      })
-      return result
+      return new Fuse(state.fullProducts, state.options).search(state.payload)
+      // let result = []
+      // const fuse = new Fuse(state.fullProducts, state.options).search(
+      //   state.payload
+      // )
+      // fuse.find((element) => {
+      //   if (element.item) {
+      //     result.push(element.item)
+      //   }
+      // })
+      // return result
     } else if (state.type === 'subcategory') {
       return state.fullProducts.filter(
         (product) => product.subcategoria === state.payload
