@@ -73,7 +73,6 @@
                         class="text-color"
                         style="
                           display: flex;
-                          justify-content: flex-end;
                           align-items: center;
                           margin-right: 10px;
                         "
@@ -708,7 +707,7 @@ export default {
   max-height: 150px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  max-width: 170px;
 }
 .scroll_cart_summary_items_cities li {
   margin-right: 5px;

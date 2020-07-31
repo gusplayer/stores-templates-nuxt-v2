@@ -73,7 +73,6 @@
                         class="text-color"
                         style="
                           display: flex;
-                          justify-content: flex-end;
                           align-items: center;
                           margin-right: 10px;
                         "
@@ -706,6 +705,9 @@ export default {
   color: var(--color_text);
   overflow-y: auto;
   max-height: 150px;
+  display: flex;
+  flex-direction: column;
+  max-width: 170px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar {
   background: var(--background_color_1);
