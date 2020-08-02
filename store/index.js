@@ -445,7 +445,6 @@ export const actions = {
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
-    console.log(full)
 
     let id = 0
 
@@ -478,6 +477,7 @@ export const actions = {
 
     await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
     await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
+    await dispatch('GET_SERVER_PATH', full)
 
     const idSlug = route.path.split('-')
     const producto = await axios.get(

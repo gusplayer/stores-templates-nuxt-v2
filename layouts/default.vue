@@ -56,6 +56,7 @@ export default {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')
+    this.$store.dispatch('  GET_SERVER_PATH')
     this.$store.dispatch(
       'GET_SETTINGS_BY_TEMPLATE',
       this.$store.state.dataStore.tienda
@@ -73,7 +74,7 @@ export default {
     //   'GET_ANALYTICS_TAGMANAGER',
     //   this.$store.state.dataStore.tienda.id_tienda
     // )
-    // console.log('ruta completa ' + this.fullPathServer)
+    console.log('ruta completa ' + this.fullPathServer)
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
