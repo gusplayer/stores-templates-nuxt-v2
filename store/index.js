@@ -445,6 +445,7 @@ export const actions = {
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
+    console.log(full)
 
     let id = 0
 
@@ -464,7 +465,7 @@ export const actions = {
         id = await axios.post(
           `https://api2.komercia.co/api/tienda/info/by/url`,
           {
-            name: `https://www.${full}`,
+            name: `https://www${full}`,
           }
         )
       }
