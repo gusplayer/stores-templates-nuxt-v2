@@ -453,10 +453,28 @@ export const actions = {
         name: `${subdomain}.komercia.co/`,
       })
     } else {
-      id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
-        name: `https://${full}`,
-      })
+      if (parts[0] == 'wwww')
+        id = await axios.post(
+          `https://api2.komercia.co/api/tienda/info/by/url`,
+          {
+            name: `https://${full}`,
+          }
+        )
+      else {
+        id = await axios.post(
+          `https://api2.komercia.co/api/tienda/info/by/url`,
+          {
+            name: `https://www.${full}`,
+          }
+        )
+      }
     }
+
+    // else {
+    //   id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+    //     name: `https://${full}`,
+    //   })
+    // }
 
     await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
     await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
