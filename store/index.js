@@ -454,27 +454,26 @@ export const actions = {
         name: `${subdomain}.komercia.co/`,
       })
     } else {
-      if (parts[0] == 'wwww')
-        id = await axios.post(
-          `https://api2.komercia.co/api/tienda/info/by/url`,
-          {
-            name: `https://${full}`,
-          }
-        )
-      else {
-        id = await axios.post(
-          `https://api2.komercia.co/api/tienda/info/by/url`,
-          {
-            name: `https://www${full}`,
-          }
-        )
-      }
+      id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+        name: `https://${full}`,
+      })
     }
-
-    // else {
-    //   id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
-    //     name: `https://${full}`,
-    //   })
+    // } else {
+    //   if (parts[0] == 'wwww')
+    //     id = await axios.post(
+    //       `https://api2.komercia.co/api/tienda/info/by/url`,
+    //       {
+    //         name: `https://${full}`,
+    //       }
+    //     )
+    //   else {
+    //     id = await axios.post(
+    //       `https://api2.komercia.co/api/tienda/info/by/url`,
+    //       {
+    //         name: `https://www${full}`,
+    //       }
+    //     )
+    //   }
     // }
 
     await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
