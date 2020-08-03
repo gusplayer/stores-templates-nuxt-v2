@@ -24,8 +24,10 @@ import Delete from 'vue-material-design-icons/DeleteForever.vue'
 import Search from 'vue-material-design-icons/Magnify.vue'
 import Circle from 'vue-material-design-icons/CircleMedium.vue'
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
+import Account from 'vue-material-design-icons/AccountBoxOutline.vue'
 
 Vue.component('menu-icon', MenuIcon)
+Vue.component('account-icon', Account)
 
 Vue.component('facebook-icon', Facebook)
 Vue.component('twitter-icon', Twitter)

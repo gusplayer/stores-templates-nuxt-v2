@@ -42,7 +42,9 @@
             class="text-icon"
           >
             <div v-if="item.link" :is="item.icon" class="icon" />
-            <a v-if="item.link" :href="item.link">{{ item.nombre }}</a>
+            <a v-if="item.link" :href="item.link" target="_blank">{{
+              item.nombre
+            }}</a>
           </div>
         </div>
         <div>
@@ -95,7 +97,9 @@
               :key="`${index}${item.icon}`"
               v-if="item.link"
             >
-              <div class="icon" :is="item.icon" />
+              <a v-if="item.link" :href="item.link" target="_blank"
+                ><div class="icon" :is="item.icon"
+              /></a>
             </div>
           </div>
           <br />

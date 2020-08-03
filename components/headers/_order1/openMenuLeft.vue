@@ -70,9 +70,10 @@
               v-for="(item, index) in secciones"
               :key="`${index}${item.name}`"
               @click="closed"
-              style="margin-bottom: 10px;"
+              style="margin-bottom: 20px;"
             >
               <nuxt-link :to="item.path" class="text-secciones">
+                <div v-if="item.path" :is="item.icon" class="icon" />
                 {{ item.name }}
               </nuxt-link>
             </div>
@@ -109,14 +110,17 @@ export default {
         {
           name: 'Inicio',
           path: '/',
+          icon: 'menu-icon',
         },
         {
           name: 'Carrito',
           path: '/cart',
+          icon: 'cart-icon',
         },
         {
           name: 'Contacto',
           path: '/contacto',
+          icon: 'account-icon',
         },
       ],
     }
