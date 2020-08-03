@@ -11,8 +11,8 @@
     <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
       <div class="content-cookie">
         <p class="title">
-          Utilizamos cookies, solo para rastrear las visitas a nuestro sitio
-          web, no almacenamos detalles personales.
+          Este sitio web utiliza cookies para su funcionar correctamente y
+          brindarte una mejor experiencia.
         </p>
         <div class="wrapper-btn">
           <div class="content-btn">
@@ -293,11 +293,9 @@ export default {
     },
     acceptCookies() {
       document.getElementById('modalCookies').style.bottom = '-135px'
-      document.cookie =
-        'Komercia' +
-        encodeURIComponent('acepto lectura de cookies') +
-        '; expires=Thu, 18 Dec 2013 12:00:00 UTC;' +
-        'path=/'
+      let parametro = '1'
+
+      document.cookie = `prueba = ${parametro}; domain = komercia.co; expires=Thu, 01 Dec 2050 00:00:00 UTC;`
     },
     declineCookies() {
       document.getElementById('modalCookies').style.bottom = '-135px'
@@ -453,16 +451,19 @@ export default {
 ._link:hover {
   color: #2c85c0;
 }
+@media (max-width: 768px) {
+  .wrapper-btn {
+    flex-direction: column;
+  }
+}
 @media (max-width: 700px) {
   .content-cookie {
     flex-direction: column;
   }
   .title {
+    font-size: 14px;
     margin-bottom: 10px;
     text-align: center;
-  }
-  .wrapper-btn {
-    flex-direction: column;
   }
   ._link {
     margin-top: 5px;
