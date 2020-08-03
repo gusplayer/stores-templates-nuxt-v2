@@ -457,9 +457,27 @@ export const actions = {
         name: `https://${full}`,
       })
     }
+    // } else {
+    //   if (parts[0] == 'wwww')
+    //     id = await axios.post(
+    //       `https://api2.komercia.co/api/tienda/info/by/url`,
+    //       {
+    //         name: `https://${full}`,
+    //       }
+    //     )
+    //   else {
+    //     id = await axios.post(
+    //       `https://api2.komercia.co/api/tienda/info/by/url`,
+    //       {
+    //         name: `https://www${full}`,
+    //       }
+    //     )
+    //   }
+    // }
 
     await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
     await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
+    await dispatch('GET_SERVER_PATH', full)
 
     const idSlug = route.path.split('-')
     const producto = await axios.get(
