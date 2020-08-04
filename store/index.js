@@ -434,7 +434,7 @@ export const actions = {
       })
   },
   GET_COOKIES({ state }) {
-    const cookies = getCookie('Komercia')
+    const cookies = getCookie('authCookies')
     if (cookies == 1) {
       state.dataCookies = true
     }
