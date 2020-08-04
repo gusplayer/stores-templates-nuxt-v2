@@ -12,5 +12,5 @@ export default (cname) => {
     }
   }
   return process.env.TOKEN
-  // return 'prueba'
+  // return '1'
 }

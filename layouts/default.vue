@@ -56,25 +56,22 @@ export default {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')
-    this.$store.dispatch('  GET_SERVER_PATH')
+    this.$store.dispatch('GET_SERVER_PATH')
     this.$store.dispatch(
       'GET_SETTINGS_BY_TEMPLATE',
       this.$store.state.dataStore.tienda
       // this.$store.state.dataStore.tienda.id_tienda
     )
-
     let domain = this.$route.fullPath
     if (domain == '/?clearCart=true') {
-      // console.log(domain, 'borrar carrito')
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
-
     // this.$store.dispatch(
     //   'GET_ANALYTICS_TAGMANAGER',
     //   this.$store.state.dataStore.tienda.id_tienda
     // )
-    console.log('ruta completa ' + this.fullPathServer)
+    // console.log('ruta completa ' + this.fullPathServer)
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
@@ -295,7 +292,6 @@ export default {
     acceptCookies() {
       document.getElementById('modalCookies').style.bottom = '-135px'
       let parametro = '1'
-
       document.cookie = `prueba = ${parametro}; domain = komercia.co; expires=Thu, 01 Dec 2050 00:00:00 UTC;`
     },
     declineCookies() {

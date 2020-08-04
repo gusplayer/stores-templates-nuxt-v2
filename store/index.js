@@ -435,19 +435,15 @@ export const actions = {
   },
   GET_COOKIES({ state }) {
     const cookies = getCookie('Komercia')
-    console.log(cookies)
-    if (cookies) {
+    if (cookies == 1) {
       state.dataCookies = true
     }
   },
-
   async nuxtServerInit({ commit, dispatch }, { req, route }) {
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
-
     let id = 0
-
     if (parts[1] == 'komercia' || parts[1] == 'localhost:3000') {
       id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
         name: `${subdomain}.komercia.co/`,
@@ -457,38 +453,13 @@ export const actions = {
         name: `https://${full}`,
       })
     }
-    // } else {
-    //   if (parts[0] == 'wwww')
-    //     id = await axios.post(
-    //       `https://api2.komercia.co/api/tienda/info/by/url`,
-    //       {
-    //         name: `https://${full}`,
-    //       }
-    //     )
-    //   else {
-    //     id = await axios.post(
-    //       `https://api2.komercia.co/api/tienda/info/by/url`,
-    //       {
-    //         name: `https://www${full}`,
-    //       }
-    //     )
-    //   }
-    // }
-
     await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
     await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
     await dispatch('GET_SERVER_PATH', full)
-
     const idSlug = route.path.split('-')
     const producto = await axios.get(
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
     )
-
-    // const storeLayout = await axios.get(
-    //   `https://komercia-2c50b.firebaseio.com/stores/${id.data.data.id}.json?auth=NbJcMDHW4Ueg4x67y5hHmxbZF3fhsyneVfQBpSFn`
-    // )
-    // commit('STOREDB', { storeLayout, producto })
-    // commit('SELECT_CARD', storeLayout.data.setting.card || 'koProductCard1')
   },
   GET_SERVER_PATH({ state, commit }, value) {
     commit('SET_SERVER_PATH', value)
