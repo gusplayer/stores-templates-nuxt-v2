@@ -52,6 +52,7 @@ export default {
       }
       prevScrollpos = currentScrollPos
     }
+
     let domain = this.$route.fullPath
     let search = domain.slice(0, [9])
     if (search === '/?search=') {
@@ -94,9 +95,9 @@ export default {
     },
     getSearch(value) {
       if (value) {
-        location.href = this.fullPathServer + '?search=' + value
+        location.href = '?search=' + value
       } else {
-        location.href = this.fullPathServer + '?search=' + ''
+        location.href = '?search=' + ''
       }
     },
     setSearch(value) {
