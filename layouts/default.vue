@@ -291,8 +291,7 @@ export default {
     },
     acceptCookies() {
       document.getElementById('modalCookies').style.bottom = '-135px'
-      let parametro = '1'
-      document.cookie = `prueba = ${parametro}; domain = komercia.co; expires=Thu, 01 Dec 2050 00:00:00 UTC;`
+      document.cookie = `authCookies = 1; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;`
     },
     declineCookies() {
       document.getElementById('modalCookies').style.bottom = '-135px'
