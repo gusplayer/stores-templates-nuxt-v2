@@ -36,4 +36,10 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+@media (max-width: 800px) {
+  .contenedor {
+    height: 350px;
+  }
+}
 </style>
