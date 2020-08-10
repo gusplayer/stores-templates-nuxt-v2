@@ -264,11 +264,14 @@
               <p class="Quotation-message" v-if="isQuotation()">
                 Contacte con la tienda para saber los precios de los productos
               </p>
+              <p class="Quotation-message" v-if="dataStore.tienda.estado == 0">
+                Tienda cerrada
+              </p>
               <button
                 ref="colorBtn"
                 class="btn1"
                 @click="GoPayments"
-                v-if="!isQuotation()"
+                v-if="!isQuotation() && dataStore.tienda.estado == 1"
               >
                 Finalizar compra
               </button>

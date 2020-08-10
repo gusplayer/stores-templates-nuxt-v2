@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="wrapper-header">
       <div class="header">
-        <KoOrder />
+        <KoOrder :dataStore="dataStore" />
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
             <img

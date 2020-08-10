@@ -32,6 +32,21 @@
         </div>
       </div>
     </div>
+    <div
+      class="wrapper-notificacion"
+      id="modalNotificacion"
+      v-if="dataStore.tienda.estado == 0"
+    >
+      <div class="content-notificacion">
+        <p class="title-noti">TIENDA CERRADA</p>
+        <p class="subtitle-noti">
+          Disculpa, no podrá realizar compras por el momento, desea continuar
+        </p>
+        <button class="btn-acceptM" @click="acceptClose()">
+          Aceptar
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -296,6 +311,10 @@ export default {
     declineCookies() {
       document.getElementById('modalCookies').style.bottom = '-135px'
     },
+    acceptClose() {
+      document.getElementById('modalNotificacion').style.zIndex = '-2'
+      document.getElementById('modalNotificacion').style.opacity = '0'
+    },
   },
 }
 </script>
@@ -446,6 +465,60 @@ export default {
 }
 ._link:hover {
   color: #2c85c0;
+}
+.wrapper-notificacion {
+  top: 0;
+  opacity: 1;
+  z-index: 9999;
+  width: 100%;
+  height: calc(100vh);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  transition: all 200ms ease-in;
+}
+.content-notificacion {
+  padding: 15px;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #2c2e30fd;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
+  box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
+}
+.title-noti {
+  font-size: 25px;
+  font-weight: bold;
+  color: rgb(219, 16, 16);
+  margin-bottom: 10px;
+}
+.subtitle-noti {
+  font-size: 14px;
+  color: white;
+  margin-bottom: 10px;
+}
+.btn-acceptM {
+  width: 129px;
+  border-radius: 5px;
+  color: white;
+  border: solid 2px #da2525;
+  background-color: #da2525;
+  padding: 4px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+.btn-acceptM:hover {
+  color: white;
+  border: solid 2px rgb(25, 26, 27);
+  background-color: rgb(25, 26, 27);
 }
 @media (max-width: 768px) {
   .wrapper-btn {

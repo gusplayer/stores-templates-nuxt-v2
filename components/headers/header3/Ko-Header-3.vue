@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="wrapper-header">
       <div class="header">
-        <KoOrder />
+        <KoOrder :dataStore="dataStore" />
         <div class="header-items-icon-menu" @click="openMenulateralLeft">
           <menu-icon class="header-icon-menu nav-bar" />
         </div>

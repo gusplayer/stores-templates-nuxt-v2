@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-banner">
-    <div class="header-content-logo">
-      <div class="wrapper-banner" v-if="this.banner">
+    <div class="header-content-logo" v-if="this.banner">
+      <div class="wrapper-banner" v-if="this.banner.banner">
         <img
           :src="`${this.banner.banner}`"
           class="banner"
@@ -14,18 +14,12 @@
 
 <script>
 export default {
-  props: {
-    dataStore: Object,
-  },
-  data() {
-    return {}
-  },
+  name: 'Ko-Banner-1',
   computed: {
     banner() {
       return this.$store.state.settingByTemplate
     },
   },
-  methods: {},
 }
 </script>
 

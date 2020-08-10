@@ -11,7 +11,8 @@
         />
       </form>
     </div>
-    <kBanner :dataStore="dataStore" />
+    <kBanner />
+    <KComponent360 />
     <!-- <KProductFavoritos /> -->
     <KProductList
       :dataStore="dataStore"
@@ -26,7 +27,7 @@ import kBanner from '../../components/template5/ko-Banner-1'
 import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
 import KProductList from '../../components/template5/Ko-ProductList-1'
 import KNewsletter from '../../components/template5/Ko-Newsletter-1'
-
+import KComponent360 from '../../components/template5/Ko-Content360-1'
 export default {
   layout: 'default',
   components: {
@@ -34,6 +35,7 @@ export default {
     KProductList,
     KNewsletter,
     KProductFavoritos,
+    KComponent360,
   },
   mounted() {
     var prevScrollpos = window.pageYOffset

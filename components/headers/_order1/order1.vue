@@ -166,8 +166,18 @@
                 <p class="Quotation-message" v-if="isQuotation()">
                   Contacte con la tienda para saber los precios de los productos
                 </p>
+                <p
+                  class="Quotation-message"
+                  v-if="dataStore.tienda.estado == 0"
+                >
+                  Tienda cerrada
+                </p>
                 <button
-                  v-if="productsCart.length && !isQuotation()"
+                  v-if="
+                    productsCart.length &&
+                    !isQuotation() &&
+                    dataStore.tienda.estado == 1
+                  "
                   class="continue_shopping"
                   @click="GoPayments"
                 >
@@ -212,7 +222,9 @@ import axios from 'axios'
 
 export default {
   name: 'koOrder1',
-  props: {},
+  props: {
+    dataStore: Object,
+  },
   mounted() {
     this.$store.dispatch('GET_CITIES')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
