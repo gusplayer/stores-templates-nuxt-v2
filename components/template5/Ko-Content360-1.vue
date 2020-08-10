@@ -27,7 +27,6 @@ export default {
 <style scoped>
 .wrapper_content360 {
   width: 100%;
-  /* background-color: var(--background_color_1); */
 }
 .contenedor {
   width: 100%;
@@ -36,12 +35,5 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 0px 60px 0px;
-}
-
-@media (max-width: 800px) {
-  .contenedor {
-    padding: 0px 0px 10px 0px;
-  }
 }
 </style>
