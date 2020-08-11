@@ -83,12 +83,10 @@
               :key="categoria.id"
             >
               <ul class="name-category">
-                <li>
-                  <p
-                    @click="
-                      sendCategory(categoria, categoria.id, (ref = false))
-                    "
-                  >
+                <li
+                  @click="sendCategory(categoria, categoria.id, (ref = false))"
+                >
+                  <p>
                     {{ categoria.nombre_categoria_producto }}
                   </p>
                 </li>
@@ -448,7 +446,7 @@ div.header-container {
   justify-content: space-between;
   width: 100%;
   max-width: 1300px;
-  padding: 30px 30px 30px 20px;
+  padding: 10px 30px 10px 20px;
   border-top: 1px solid #aba4a466;
   margin: 0 auto;
 }
@@ -460,7 +458,8 @@ div.header-container {
   margin-right: 1px;
   display: grid;
   grid-template-columns: auto auto auto auto;
-  grid-gap: 10px;
+  grid-row-gap: 0;
+  grid-column-gap: 13px;
   overflow-y: auto;
 }
 .menu-grid::-webkit-scrollbar {
@@ -474,40 +473,37 @@ div.header-container {
   background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
   border-radius: 10px;
 }
-.subcategoria {
-  font-weight: 400;
-}
-.subcategoria li:hover {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-  border-radius: 10px;
-}
-.name-category li:hover {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-  border-radius: 10px;
-}
-.name-category {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--color_text);
-  cursor: pointer;
-  padding: 2px 0px 2px 10px;
-  list-style: disc;
-}
 .name-category-all {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   color: var(--color_text);
   cursor: pointer;
-  padding: 2px 0px 2px 10px;
-  list-style: disc;
+  padding: 10px 0px;
 }
 .name-category-all:hover {
   color: var(--btnhover);
 }
-.subcategoria li:last-child {
-  margin-bottom: 10px;
+.name-category {
+  color: var(--color_text);
+  cursor: pointer;
+}
+.name-category li {
+  font-weight: bold;
+  padding: 10px 0px;
+  font-size: 16px;
+}
+.name-category li:hover {
+  color: var(--color_hover_text);
+}
+.subcategoria li {
+  padding: 0px;
+  margin-bottom: 8px;
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 100;
+}
+.subcategoria li:hover {
+  color: var(--color_hover_text);
 }
 .header-content-logo {
   display: flex;
@@ -630,9 +626,6 @@ div.header-container {
   display: inline-block;
   padding-bottom: 10px;
   width: 100%;
-}
-.subcategoria li {
-  padding-left: 10px;
 }
 .product-img-container {
   flex: 1;

@@ -82,10 +82,7 @@ export default {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
-    // this.$store.dispatch(
-    //   'GET_ANALYTICS_TAGMANAGER',
-    //   this.$store.state.dataStore.tienda.id_tienda
-    // )
+
     // console.log('ruta completa ' + this.fullPathServer)
   },
   head() {
@@ -180,9 +177,6 @@ export default {
           src:
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
-        // {
-        //   src: `https://www.googletagmanager.com/gtag/js?id=${this.analytics_tagmanager.analytics}`,
-        // },
       ],
       link: [
         {

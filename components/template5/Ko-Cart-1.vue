@@ -319,11 +319,12 @@
 export default {
   name: 'Ko-Cart-1',
   mounted() {
-    //   this.$store.commit('UPDATE_CONTENTCART')
+    this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch('GET_CITIES')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
       this.filterCities()
     }
+    this.$store.commit('CALCULATE_TOTALCART')
   },
   data() {
     return {
@@ -728,7 +729,7 @@ div.wrapper-cart {
 }
 ::-webkit-scrollbar {
   background: var(--background_color_1);
-  width: 14px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 10px var(--color_border);
@@ -853,6 +854,36 @@ div.wrapper-cart {
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
+}
+details {
+  color: #333;
+  font-size: 13px;
+  align-self: center;
+  flex: 1;
+  margin-left: 30px;
+}
+details summary {
+  outline: none;
+  cursor: pointer;
+  text-align: right;
+  font-size: 14px;
+  font-weight: bold;
+}
+details ol {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+}
+details ol li div {
+  padding: 2px 4px;
+  display: flex;
+  justify-content: space-between;
+}
+details ol li:nth-child(even) {
+  background-color: rgba(102, 102, 102, 0.1);
+}
+details[open] summary ~ * {
+  animation: sweep 0.5s ease-in-out;
 }
 @media (max-width: 500px) {
   .contenedor {

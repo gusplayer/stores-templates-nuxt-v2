@@ -7,7 +7,6 @@ import axios from 'axios'
 import getCookie from '../utils/getCookie'
 
 export const state = () => ({
-  urlHttp: 'https://api2.komercia.co',
   configHttp: {
     headers: {
       'content-type': 'application/json',
@@ -63,7 +62,6 @@ export const state = () => ({
     ],
   },
   productsCart: [],
-  totalCart: 0,
   selectedCard: 'koProductCard2',
   beforeCombination: [],
   togglePayment: false,
@@ -375,7 +373,7 @@ export const mutations = {
   SET_SETTINGS_BY_TEMPLATE: (state, value) => {
     state.settingByTemplate = value
   },
-  SET_ANALYTICS_TAGMANAGER: (state, value) => {
+  SET_ANALITICS_TAGMANAGER: (state, value) => {
     state.analytics_tagmanager = value
   },
   SET_STORELAYOUT: (state) => {
@@ -456,6 +454,7 @@ export const actions = {
     await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
     await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
     await dispatch('GET_SERVER_PATH', full)
+    await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
     const idSlug = route.path.split('-')
     const producto = await axios.get(
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
@@ -485,7 +484,6 @@ export const actions = {
         commit('SET_CITIES', response.data)
       })
   },
-
   GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
     let template = store.template
     let id = store.id_tienda

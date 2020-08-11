@@ -140,6 +140,14 @@
                     >
                       Comprar
                     </button>
+                    <button
+                      disabled
+                      class="btn-disabled"
+                      v-if="spent"
+                      v-on:click="addShoppingCart"
+                    >
+                      Agotado !
+                    </button>
                     <!-- <ko-whatsapp
                       v-if="whatsapp"
                       class="whatsapp"
@@ -861,8 +869,8 @@ i.close {
   color: var(--color_text_btn);
   border: solid 2px var(--color_border_btn);
   background-color: var(--color_background_btn);
-  padding: 4px 14px;
-  width: 120px;
+  padding: 6px 14px;
+  width: 238px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
@@ -872,6 +880,16 @@ i.close {
   color: white;
   border: solid 2px var(--btnhover);
   background-color: var(--btnhover);
+}
+.btn-disabled {
+  border-radius: var(--radius_btn);
+  color: white;
+  border: solid 2px gray;
+  background-color: gray;
+  padding: 6px 14px;
+  width: 238px;
+  font-size: 16px;
+  font-weight: bold;
 }
 .quantity {
   display: flex;
@@ -883,7 +901,7 @@ i.close {
   font-size: 14px;
   font-weight: bold;
   color: var(--color_subtext);
-  margin-right: 5px;
+  margin-right: 15px;
   align-self: center;
 }
 .quantity_remove {
@@ -893,7 +911,7 @@ i.close {
   border-style: solid none solid solid;
   background: transparent;
   height: 41px;
-  width: 3em;
+  width: 55px;
 }
 .quantity_value {
   font-size: 1em;
@@ -904,7 +922,7 @@ i.close {
   border-style: solid none solid none;
   background: transparent;
   height: 41px;
-  width: 3em;
+  width: 55px;
   justify-content: center;
   display: flex;
   align-items: center;
@@ -916,7 +934,7 @@ i.close {
   border-style: solid solid solid none;
   background: transparent;
   height: 41px;
-  width: 3em;
+  width: 55px;
 }
 .icon {
   font-size: 16px;
