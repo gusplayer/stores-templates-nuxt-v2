@@ -224,7 +224,7 @@ export default {
   },
   methods: {
     openOrder() {
-      this.$gtm.trackEvent({
+      this.$gtm.push({
         event: 'OpenCart',
         category: 'Calculator',
         action: 'click',
