@@ -74,7 +74,6 @@ export default {
     KoNotificacion,
   },
   mounted() {
-    console.log(this.analytics)
     this.$store.dispatch('GET_COOKIES')
     // this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')

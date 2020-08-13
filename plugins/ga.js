@@ -5,10 +5,10 @@ export default ({ app, store }) => {
    */
   let analytics =
     store.state.analytics_tagmanager &&
-    store.state.analytics_tagmanager.tag_manager
-      ? store.state.analytics_tagmanager.tag_manager
+    store.state.analytics_tagmanager.analytics
+      ? store.state.analytics_tagmanager.analytics
       : ''
-  console.log(analytics)
+  // console.log(analytics)
   if (process.env.NODE_ENV !== 'production')
     return /*
      ** Include Google Analytics Script

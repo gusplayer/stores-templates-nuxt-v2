@@ -65,31 +65,17 @@ export default {
     '~/plugins/cloudinary',
     '~/plugins/material-icons',
     '~plugins/validate.js',
+    '~/plugins/gtm',
     { src: '@/plugins/aos.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
     { src: '~plugins/ga.js', mode: 'client' },
+    // { src: '~/plugins/gtm', mode: 'client' },
   ],
-  buildModules: ['@nuxtjs/google-analytics'],
-  googleAnalytics: {
-    id: 'UA-175264108-1', // Uso de respaldo
-  },
-  gtm: {
-    id: 'GTM-KGB4QPR', // Uso de respaldo
-  },
-  // publicRuntimeConfig: {
-  //   googleAnalytics: {
-  //     id: process.env.GOOGLE_ANALYTICS_ID,
-  //   },
-  //   gtm: {
-  //     id: process.env.GOOGLE_TAG_MANAGER_ID,
-  //   },
-  // },
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
   debug: {
     enabled: true,
-    sendHitTask: true,
   },
   axios: {},
   build: {
