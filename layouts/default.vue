@@ -108,6 +108,12 @@ export default {
         ? this.$store.state.settingByTemplate.tipo_letra
         : 'Roboto'
 
+    let tidio =
+      this.$store.state.analytics_tagmanager &&
+      this.$store.state.analytics_tagmanager.tidio_user
+        ? this.$store.state.analytics_tagmanager.tidio_user
+        : ''
+
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
     return {
@@ -198,6 +204,9 @@ export default {
           src:
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
+        {
+          src: `https://code.tidio.co/${tidio}.js`,
+        },
       ],
       link: [
         {
@@ -264,6 +273,9 @@ export default {
     },
     settingsTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    analytics_tagmanager() {
+      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {
