@@ -68,10 +68,7 @@ export default {
     { src: '~plugins/ga.js', mode: 'client' },
     { src: '~/plugins/gtm', mode: 'client' },
   ],
-  buildModules: ['@nuxtjs/google-analytics'],
-  googleAnalytics: {
-    id: 'UA-92934137-1',
-  },
+
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
   debug: {
     enabled: true,

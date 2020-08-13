@@ -224,6 +224,7 @@ export default {
   },
   methods: {
     openOrder() {
+      this.$gtm.push({ event: 'openCart' })
       this.showMenu = false
       this.$store.state.openOrder = true
     },

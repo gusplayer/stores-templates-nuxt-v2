@@ -450,9 +450,11 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 .btn-accept {
-  width: 129px;
+  max-height: 29px;
+  width: 140px;
   border-radius: 5px;
   color: black;
   border: solid 2px #25dac5;
@@ -468,7 +470,8 @@ export default {
   background-color: rgb(25, 26, 27);
 }
 .btn-decline {
-  width: 140px;
+  max-height: 29px;
+  width: 160px;
   margin-left: 10px;
   border-radius: 5px;
   color: white;
@@ -484,7 +487,7 @@ export default {
   background-color: rgb(25, 26, 27);
 }
 ._link {
-  width: 119px;
+  width: 149px;
   margin-left: 10px;
   font-size: 12px;
   font-weight: bold;
