@@ -3,7 +3,7 @@ export default ({ app, store }) => {
   /*
    ** Only run on client-side and only in production mode
    */
-  console.log(store.state.fullPathServer)
+
   let analytics =
     store.state.analytics_tagmanager &&
     store.state.analytics_tagmanager.analytics
@@ -37,7 +37,7 @@ export default ({ app, store }) => {
    ** Set the current page
    */
   ga('create', analytics, 'auto')
-  ga('create', 'UA-92934137-1', 'auto', clientTracker)
+  ga('create', 'UA-92934137-1', 'auto', 'clientTracker')
 
   /*
    ** Every time the route changes (fired on initialization too)
