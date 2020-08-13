@@ -417,27 +417,27 @@ export const mutations = {
   },
 }
 export const actions = {
-  GET_LOGIN({ state, commit, dispatch }) {
-    // const token = getCookie('authData')
-    axios
-      .post(
-        `${state.urlComponents}/api/login`,
-        { token: state.token },
-        state.configAxios
-      )
-      .then(async (response) => {
-        state.idStore = await response.data.store
-        commit('SET_ACCESSTOKEN', await response.data.access_token)
-        dispatch('GET_VIEWS')
-      })
-  },
+  // GET_LOGIN({ state, commit, dispatch }) {
+  //   // const token = getCookie('authData')
+  //   axios
+  //     .post(
+  //       `${state.urlComponents}/api/login`,
+  //       { token: state.token },
+  //       state.configAxios
+  //     )
+  //     .then(async (response) => {
+  //       state.idStore = await response.data.store
+  //       commit('SET_ACCESSTOKEN', await response.data.access_token)
+  //       dispatch('GET_VIEWS')
+  //     })
+  // },
   GET_COOKIES({ state }) {
     const cookies = getCookie('authCookies')
     if (cookies == 1) {
       state.dataCookies = true
     }
   },
-  async nuxtServerInit({ commit, dispatch }, { req, route }) {
+  async nuxtServerInit({ commit, dispatch, state }, { req, route }) {
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
@@ -455,6 +455,7 @@ export const actions = {
     await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
     await dispatch('GET_SERVER_PATH', full)
     await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
+    await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
     const idSlug = route.path.split('-')
     const producto = await axios.get(
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`

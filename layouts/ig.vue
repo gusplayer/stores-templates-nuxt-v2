@@ -21,7 +21,7 @@ export default {
     koWhatsapp,
   },
   mounted() {
-    this.$store.dispatch('GET_LOGIN')
+    // this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch(
       'GET_SETTINGS_BY_TEMPLATE',

@@ -1,5 +1,9 @@
 export default {
   mode: 'universal',
+
+  /*
+   ** Headers of the page
+   */
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -11,37 +15,38 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [
-      {
-        href:
-          'https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap',
-        rel: 'stylesheet',
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap',
-      },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap',
-      },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css2?family=Cabin:wght@400;600&display=swap',
-      },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap',
-      },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap',
-      },
-    ],
+    // link: [
+    //   // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    //   {
+    //     href:
+    //       'https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap',
+    //     rel: 'stylesheet',
+    //   },
+    //   {
+    //     rel: 'stylesheet',
+    //     href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap',
+    //   },
+    //   {
+    //     rel: 'stylesheet',
+    //     href:
+    //       'https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap',
+    //   },
+    //   {
+    //     rel: 'stylesheet',
+    //     href:
+    //       'https://fonts.googleapis.com/css2?family=Cabin:wght@400;600&display=swap',
+    //   },
+    //   {
+    //     rel: 'stylesheet',
+    //     href:
+    //       'https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap',
+    //   },
+    //   {
+    //     rel: 'stylesheet',
+    //     href:
+    //       'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap',
+    //   },
+    // ],
   },
   loading: { color: '#fff' },
 
@@ -64,6 +69,7 @@ export default {
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
+    { src: '~plugins/ga.js', mode: 'client' },
   ],
   buildModules: ['@nuxtjs/google-analytics'],
   googleAnalytics: {
