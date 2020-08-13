@@ -483,14 +483,11 @@ export default {
 .order_header_close {
   font-size: 30px;
   color: black;
-  transition: 0.3s;
   cursor: pointer;
 }
 .order_header_close:hover {
-  transform: rotate(90deg);
   color: gray;
 }
-
 .order--wrapper {
   display: grid;
   overflow-y: auto;

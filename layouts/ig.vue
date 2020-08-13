@@ -3,9 +3,6 @@
     <KoHeaderIg :dataStore="dataStore" />
     <nuxt />
     <KFooterIg :dataStore="dataStore" />
-    <!-- <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
-      <koWhatsapp class="button-whatsapp" @click.native="redirectWhatsapp()" />
-    </div> -->
   </div>
 </template>
 
@@ -260,33 +257,5 @@ export default {
 @font-face {
   font-family: 'instagram';
   src: url('../assets/font/instagram.ttf');
-}
-.wrapper-whatsapp {
-  width: 60px;
-  height: 60px;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #00bb2d;
-  border-radius: 50px;
-  z-index: 2;
-  bottom: 60px;
-  right: 10px;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.wrapper-whatsapp:hover {
-  background: #2ac04e;
-}
-.button-whatsapp {
-  fill: white;
-  width: 38px;
-}
-@media (max-width: 400px) {
-  .wrapper-whatsapp {
-    bottom: 50px;
-    right: 10px;
-  }
 }
 </style>
