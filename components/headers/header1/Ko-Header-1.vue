@@ -224,7 +224,11 @@ export default {
   },
   methods: {
     openOrder() {
-      this.$gtm.push({ event: 'openCart' })
+      this.$gtm.push({
+        event: 'openCart',
+        action: 'click',
+        label: 'Purchase_tutienda',
+      })
       this.showMenu = false
       this.$store.state.openOrder = true
     },
