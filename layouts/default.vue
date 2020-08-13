@@ -44,10 +44,11 @@
       v-if="dataStore.tienda.estado == 0"
     >
       <div class="content-notificacion">
-        <p class="title-noti">TIENDA CERRADA</p>
-        <p class="subtitle-noti">
-          Disculpa, no podrá realizar compras por el momento, desea continuar
+        <koTiendaCerrada />
+        <p class="text-noti">
+          Disculpa, no podrá realizar compras por el momento,
         </p>
+        <p class="subtitle-noti">¿Deseas continuar?</p>
         <button class="btn-acceptM" @click="acceptClose()">
           Aceptar
         </button>
@@ -63,6 +64,7 @@ import KoHeader2 from '../components/headers/header2/Ko-Header-2'
 import KoHeader3 from '../components/headers/header3/Ko-Header-3'
 import KFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import koWhatsapp from '../components/whatsapp/whatsapp'
+import koTiendaCerrada from '../assets/img/tiendaCerrada'
 
 export default {
   components: {
@@ -72,6 +74,7 @@ export default {
     KFooter1,
     koWhatsapp,
     KoNotificacion,
+    koTiendaCerrada,
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES')
@@ -431,9 +434,9 @@ export default {
   transition: all 200ms ease-in;
 }
 .content-notificacion {
-  padding: 15px;
+  padding: 30px 20px;
   width: 100%;
-  max-width: 320px;
+  max-width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -444,32 +447,33 @@ export default {
   -webkit-box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
   box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
 }
-.title-noti {
-  font-size: 25px;
-  font-weight: bold;
-  color: var(--purple);
-  margin-bottom: 10px;
+.text-noti {
+  margin-top: 15px;
+  letter-spacing: 0px;
+  font-size: 16px;
+  color: rgb(75, 75, 75);
+  width: 160px;
 }
 .subtitle-noti {
-  font-size: 14px;
-  color: black;
-  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 17px;
+  color: #ff314d;
+  margin-bottom: 15px;
 }
 .btn-acceptM {
-  width: 129px;
+  width: 110px;
   border-radius: 5px;
   color: white;
-  border: solid 2px var(--purple);
-  background-color: var(--purple);
+  border: solid 2px black;
+  background-color: black;
   padding: 4px 14px;
   font-size: 14px;
   cursor: pointer;
   transition: all 200ms ease-in;
 }
 .btn-acceptM:hover {
-  color: var(--purple);
-  border: solid 2px var(--green);
-  background-color: var(--green);
+  border: solid 2px gray;
+  background-color: gray;
 }
 @media (max-width: 768px) {
   .wrapper-btn {
