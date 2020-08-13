@@ -818,6 +818,7 @@ export default {
   max-width: 340px;
   color: var(--color_shopping_cart);
   border: 2px solid var(--color_shopping_cart);
+  border-radius: var(--radius_btn);
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
