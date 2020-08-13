@@ -1,5 +1,11 @@
 <template>
-  <div :style="fontStyle">
+  <div
+    :style="{
+      '--font-style': settingsTemplate.tipo_letra
+        ? settingsTemplate.tipo_letra
+        : 'Roboto',
+    }"
+  >
     <component :dataStore="dataStore" :is="headerTemplate" />
     <!-- <KoHeader1 :dataStore="dataStore" /> -->
     <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
@@ -69,14 +75,14 @@ export default {
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES')
-    this.$store.dispatch('GET_LOGIN')
+    // this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch('GET_SERVER_PATH')
-    this.$store.dispatch(
-      'GET_SETTINGS_BY_TEMPLATE',
-      this.$store.state.dataStore.tienda
-      // this.$store.state.dataStore.tienda.id_tienda
-    )
+    // this.$store.dispatch(
+    //   'GET_SETTINGS_BY_TEMPLATE',
+    //   this.$store.state.dataStore.tienda
+    //   // this.$store.state.dataStore.tienda.id_tienda
+    // )
     let domain = this.$route.fullPath
     if (domain == '/?clearCart=true') {
       this.$store.commit('DELETEALLITEMSCART')
@@ -87,6 +93,7 @@ export default {
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
+    let { tipo_letra } = this.$store.state.settingByTemplate
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
     return {
@@ -188,6 +195,12 @@ export default {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         },
+        {
+          href: `https://fonts.googleapis.com/css?family=${
+            tipo_letra ? tipo_letra : 'Roboto'
+          }:400,700&display=swap`,
+          rel: 'stylesheet',
+        },
       ],
     }
   },
@@ -237,16 +250,9 @@ export default {
       }
       return headerComponent
     },
-
-    fontStyle() {
-      return {
-        '--font-style': 'Roboto',
-      }
+    settingsTemplate() {
+      return this.$store.state.settingByTemplate
     },
-
-    // analytics_tagmanager() {
-    //   return this.$store.state.analytics_tagmanager
-    // },
   },
   methods: {
     mobileCheck() {
