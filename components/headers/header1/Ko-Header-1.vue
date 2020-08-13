@@ -290,7 +290,7 @@ export default {
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
-      location.href = '?subcategory=' + this.nameSubCategory
+
       this.$store.commit('products/FILTER_BY', {
         type: 'subcategory',
         data: value,
@@ -305,7 +305,6 @@ export default {
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-      location.href = '?category=' + this.nameCategory
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
