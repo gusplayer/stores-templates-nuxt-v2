@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="order" @click="closed" v-show="openMenuRight">
+    <div class="order" @click="closeOrder" v-show="openMenuRight">
       <div class="order_content">
         <div class="order_header">
           <div class="header-content-logo">
@@ -147,7 +147,7 @@ export default {
       this.$router.push({
         path: `/`,
       })
-      this.$store.commit('SET_OPENORDERMENURIGTH', true)
+      // this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)

@@ -1,9 +1,11 @@
 <template>
   <div
     :style="{
-      '--font-style': settingsTemplate.tipo_letra
-        ? settingsTemplate.tipo_letra
-        : 'Roboto',
+      '--font-style':
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate.tipo_letra
+          ? this.$store.state.settingByTemplate.tipo_letra
+          : 'Roboto',
     }"
   >
     <component :dataStore="dataStore" :is="headerTemplate" />
@@ -100,7 +102,12 @@ export default {
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
-    let { tipo_letra } = this.$store.state.settingByTemplate
+    let tipo_letra =
+      this.$store.state.settingByTemplate &&
+      this.$store.state.settingByTemplate.tipo_letra
+        ? this.$store.state.settingByTemplate.tipo_letra
+        : 'Roboto'
+
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
     return {
@@ -203,9 +210,7 @@ export default {
           href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         },
         {
-          href: `https://fonts.googleapis.com/css?family=${
-            tipo_letra ? tipo_letra : 'Roboto'
-          }:400,700&display=swap`,
+          href: `https://fonts.googleapis.com/css?family=${tipo_letra}:400,700&display=swap`,
           rel: 'stylesheet',
         },
       ],

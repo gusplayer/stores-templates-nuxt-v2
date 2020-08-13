@@ -36,8 +36,8 @@
       <div class="content-checkbox">
         <input type="checkbox" id="checkbox" v-model="checked" />
         <p class="text-checkbox">
-          Acepto recibir emails e información de Komercia, bajo sus Políticas de
-          datos personales
+          Acepto recibir email e información de {{ dataStore.tienda.nombre }},
+          bajo las políticas de datos personales
         </p>
       </div>
     </div>
