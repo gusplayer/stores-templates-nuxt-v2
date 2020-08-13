@@ -8,10 +8,10 @@
           v-if="this.nameCategoryHeader"
           @click="breadcrumbsSendCategory(nameCategoryHeader)"
         >
-          - {{ this.nameCategoryHeader }}
+          > {{ this.nameCategoryHeader }}
         </p>
         <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-          - {{ this.nameSubCategoryHeader }}
+          > {{ this.nameSubCategoryHeader }}
         </p>
       </div>
       <div class="content-item">

@@ -1,8 +1,5 @@
 export default {
   mode: 'universal',
-  /*
-   ** Headers of the page
-   */
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -15,7 +12,6 @@ export default {
       },
     ],
     link: [
-      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         href:
           'https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap',
@@ -56,9 +52,7 @@ export default {
     'aos/dist/aos.css',
     'core-components-npm/dist/ko.css',
   ],
-  /*
-   ** Plugins to load before mounting the App
-   */
+
   plugins: [
     '~/plugins/core-components-npm',
     '~/plugins/element',
@@ -71,38 +65,29 @@ export default {
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
   ],
-  /*
-   ** Nuxt.js dev-modules
-   */
-  // buildModules: [
-  //   [
-  //     '@nuxtjs/google-analytics',
-  //     {
-  //       id: 'UA-92934137-1',
-  //     },
-  //   ],
-  // ],
+  buildModules: ['@nuxtjs/google-analytics'],
+  googleAnalytics: {
+    id: 'UA-175264108-1', // Uso de respaldo
+  },
+  gtm: {
+    id: 'GTM-KGB4QPR', // Uso de respaldo
+  },
+  // publicRuntimeConfig: {
+  //   googleAnalytics: {
+  //     id: process.env.GOOGLE_ANALYTICS_ID,
+  //   },
+  //   gtm: {
+  //     id: process.env.GOOGLE_TAG_MANAGER_ID,
+  //   },
+  // },
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
   debug: {
     enabled: true,
+    sendHitTask: true,
   },
-  /*
-   ** Nuxt.js modules
-   */
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    // ['@nuxtjs/google-tag-manager', { id: 'GTM-KGB4QPR', pageTracking: true }],
-  ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
   axios: {},
   build: {
     publicPath: '/_nuxt/client/',
-    // transpile: ['vue-instantsearch', 'instantsearch.js/es'],
-
-    //transpile: [new RegExp('.*@babel/runtime/helpers/esm/.*', 'ig')]
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {

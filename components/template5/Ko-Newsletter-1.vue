@@ -1,12 +1,11 @@
 <template>
   <div class="wrapper_newsletter">
     <div class="contenedor">
-      <div class="content-title">
-        <p class="subtext">SUSCRIBÉTE</p>
-        <p class="title">
-          Suscribéte a nuestro boletín para enviarte promociones.
-        </p>
-      </div>
+      <p class="subtext">SUSCRIBÉTE</p>
+      <p class="title">
+        Suscribéte a nuestro boletín para enviarte promociones.
+      </p>
+
       <div class="content-button">
         <ValidationProvider
           ref="validate"
@@ -34,6 +33,13 @@
           Subscríbete
         </button>
       </div>
+      <div class="content-checkbox">
+        <input type="checkbox" id="checkbox" v-model="checked" />
+        <p class="text-checkbox">
+          Acepto recibir emails e información de Komercia, bajo sus Políticas de
+          datos personales
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +61,7 @@ export default {
     return {
       email: null,
       register: '',
+      checked: false,
     }
   },
   destroyed() {
@@ -62,32 +69,34 @@ export default {
   },
   methods: {
     submitNewsletter() {
-      this.$refs.validate
-        .validate()
-        .then((response) => {
-          if (response.valid) {
-            const json = {
-              email: this.email,
-              tienda: this.dataStore.tienda.id_tienda,
-            }
-            axios
-              .post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
-              .then((res) => {
-                this.register = 'Tu correo ha sido registrado'
-                this.$message.success('Comentario enviado!')
-                this.email = ''
-              })
-              .catch(
-                (res) => (
-                  (this.register = 'Tu correo ya esta registrado'),
-                  this.$message.error('Tu correo ya esta registrado')
+      if (this.checked == true) {
+        this.$refs.validate
+          .validate()
+          .then((response) => {
+            if (response.valid) {
+              const json = {
+                email: this.email,
+                tienda: this.dataStore.tienda.id_tienda,
+              }
+              axios
+                .post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
+                .then((res) => {
+                  this.register = 'Tu correo ha sido registrado'
+                  this.$message.success('Comentario enviado!')
+                  this.email = ''
+                })
+                .catch(
+                  (res) => (
+                    (this.register = 'Tu correo ya esta registrado'),
+                    this.$message.error('Tu correo ya esta registrado')
+                  )
                 )
-              )
-          }
-        })
-        .catch((e) => {
-          console.log(e)
-        })
+            }
+          })
+          .catch((e) => {
+            console.log(e)
+          })
+      }
     },
   },
   watch: {},
@@ -110,17 +119,18 @@ div.wrapper_newsletter {
 }
 .contenedor {
   width: 100%;
-  height: 100%;
-  margin: 0 auto;
   max-width: 1300px;
   padding: 60px 20px 60px 20px;
-}
-.content-title {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 50px;
   flex-direction: column;
+}
+.subtext {
+  text-align: center;
+  color: var(--color_subtext);
+  font-size: 14px;
+  font-weight: bold;
 }
 .title {
   font-size: 38px;
@@ -132,12 +142,7 @@ div.wrapper_newsletter {
   color: var(--color_text);
   text-align: center;
   width: 600px;
-}
-.subtext {
-  text-align: center;
-  color: var(--color_subtext);
-  font-size: 14px;
-  font-weight: bold;
+  padding-bottom: 50px;
 }
 .content-button {
   display: flex;
@@ -154,6 +159,7 @@ div.wrapper_newsletter {
   background-color: transparent;
   padding: 12px 14px;
   width: 360px;
+  height: 100%;
 }
 .input-text::placeholder {
   color: var(--color_subtext);
@@ -194,6 +200,17 @@ div.wrapper_newsletter {
   background-color: var(--btnhover);
   border: solid 2px var(--btnhover);
 }
+.content-checkbox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.text-checkbox {
+  margin-left: 5px;
+  font-size: 12px;
+  color: white;
+}
 @media (max-width: 600px) {
   .title {
     width: 100%;
@@ -202,10 +219,6 @@ div.wrapper_newsletter {
 }
 @media (max-width: 500px) {
   .contenedor {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    max-width: 1300px;
     padding: 40px 10px 30px 10px;
   }
   .title {
@@ -218,7 +231,7 @@ div.wrapper_newsletter {
     width: 190px;
   }
   .btn {
-    width: 110px;
+    width: 100px;
     margin-left: 10px;
   }
 }

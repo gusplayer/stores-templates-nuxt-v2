@@ -4,9 +4,9 @@
       <div class="order_content">
         <div class="order_header">
           <h3>Tu orden</h3>
-          <button @click="closeOrder" class="order_header_close">
+          <label @click="closeOrder" class="order_header_close">
             <window-close-icon />
-          </button>
+          </label>
         </div>
         <transition name="slide">
           <template>
@@ -474,7 +474,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--background_color_2);
-  padding: 10px 40px;
+  padding: 10px 30px;
   flex: none;
 }
 .order_header_close {
@@ -482,7 +482,7 @@ export default {
   padding: 0px 2px;
   border-radius: 25px;
   border: 1px solid white;
-  background-color: var(--color_shopping_cart);
+  background-color: black;
   cursor: pointer;
   outline: none;
   flex: none;
@@ -490,7 +490,13 @@ export default {
   transition: all ease 0.3s;
 }
 .order_header_close:hover {
-  background-color: var(--color_hover_text);
+  background-color: gray;
+}
+.order_header_close svg {
+  transition: 0.2s;
+}
+.order_header_close:hover svg {
+  transform: rotate(90deg);
 }
 .order--wrapper {
   display: grid;
@@ -526,7 +532,7 @@ export default {
   align-items: center;
   justify-content: space-around;
   border-bottom: 1px solid var(--background_color_2);
-  padding: 10px 5px;
+  padding: 10px 30px;
   overflow-x: auto;
 }
 .order_products_list_item::-webkit-scrollbar {
@@ -590,6 +596,7 @@ export default {
   font-size: 16px;
 }
 .order_products_list_item .material-icons.delete {
+  height: 17px;
   cursor: pointer;
   color: var(--color_icon);
   transition: 0.3s;
@@ -639,7 +646,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
 }
