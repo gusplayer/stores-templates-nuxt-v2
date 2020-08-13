@@ -225,7 +225,7 @@ export default {
   methods: {
     openOrder() {
       this.$gtm.trackEvent({
-        event: fbq('track', 'Purchase_bbcparque93'),
+        event: 'OpenCart',
         category: 'Calculator',
         action: 'click',
         label: 'Purchase_bbcparque93',
