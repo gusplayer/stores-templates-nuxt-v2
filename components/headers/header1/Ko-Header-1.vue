@@ -224,10 +224,13 @@ export default {
   },
   methods: {
     openOrder() {
-      this.$gtm.push({
-        event: 'openCart',
+      this.$gtm.trackEvent({
+        event: fbq('track', 'Purchase_bbcparque93'),
+        category: 'Calculator',
         action: 'click',
-        label: 'Purchase_tutienda',
+        label: 'Purchase_bbcparque93',
+        value: 5000,
+        noninteraction: false, // Optional
       })
       this.showMenu = false
       this.$store.state.openOrder = true
@@ -237,7 +240,6 @@ export default {
       this.$store.state.openMenulateralRight = true
     },
     openMenu(name) {
-      console.log(name)
       var intro = document.getElementById('menu-collapse')
       if (name == 'Categorías') {
         this.showMenu = !this.showMenu
