@@ -25,12 +25,7 @@
                 <template v-slot:categorias>
                   <li
                     @click="
-                      sendCategory(
-                        categoria,
-                        categoria.id,
-                        index,
-                        (ref = false)
-                      )
+                      sendCategory(categoria, categoria.id, (ref = false))
                     "
                     :class="
                       categoria.id == indexSelect ? 'text-categoria-active' : ''
@@ -152,7 +147,7 @@ export default {
       this.$router.push({
         path: `/`,
       })
-      this.$store.commit('SET_OPENORDERMENURIGTH', false)
+      this.$store.commit('SET_OPENORDERMENURIGTH', true)
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)

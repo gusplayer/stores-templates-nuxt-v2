@@ -226,11 +226,8 @@ export default {
     openOrder() {
       this.$gtm.push({
         event: 'OpenCart',
-        category: 'Calculator',
         action: 'click',
-        label: 'Purchase_bbcparque93',
-        value: 5000,
-        noninteraction: false, // Optional
+        label: 'Purchase_tutienda',
       })
       this.showMenu = false
       this.$store.state.openOrder = true
