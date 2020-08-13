@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="wrapper-header">
       <div class="header">
-        <KoOrder />
+        <KoOrder :dataStore="dataStore" />
         <div class="headerLeft">
           <nuxt-link to="/ig">
             <img

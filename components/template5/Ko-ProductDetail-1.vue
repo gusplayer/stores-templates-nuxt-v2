@@ -896,6 +896,8 @@ i.close {
   flex-direction: row;
   margin-top: 10px;
   position: relative;
+  box-sizing: border-box;
+  max-width: 240px;
 }
 .text-quantity {
   font-size: 14px;

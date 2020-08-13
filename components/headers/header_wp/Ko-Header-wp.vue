@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="wrapper-header" ref="header">
       <div class="header">
-        <KoOrder />
+        <KoOrder :dataStore="dataStore" />
         <img
           :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
           class="header-logo"

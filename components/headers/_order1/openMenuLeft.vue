@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="order" @click="closeOrder" v-show="openMenuLeft">
+    <div class="order" @click="closed" v-show="openMenuLeft">
       <div class="order_content">
         <div class="order_header">
           <div class="header-content-logo">
@@ -11,9 +11,9 @@
               />
             </nuxt-link>
           </div>
-          <button @click="closed" class="order_header_close">
-            <window-close-icon class="close" />
-          </button>
+          <label @click="closed" class="order_header_close">
+            <close-icon />
+          </label>
         </div>
         <template>
           <div class="wrapper-category-all" v-if="showMenu">
@@ -146,11 +146,14 @@ export default {
     closeOrder(event) {
       const element = event.target.className
       if (
-        element === 'order responsiveLeft' ||
+        element === 'order' ||
         element === 'order_header_close' ||
-        element === 'header-logo' ||
-        element === 'name-category-all' ||
-        element === 'close'
+        element === 'continue_shopping' ||
+        element === 'continue_shopping2' ||
+        element.animVal === 'material-design-icon__svg' ||
+        element.baseVal === 'material-design-icon__svg' ||
+        element.animVal === '' ||
+        element.baseVal === ''
       ) {
         this.$store.commit('SET_OPENORDERMENULEFT', false)
       }
@@ -277,46 +280,39 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--color_border);
-  padding: 10px 5px;
+  padding: 5px 30px;
   flex: none;
 }
 .header-content-logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px 0px;
 }
 .wrapper-logo {
   width: 100%;
 }
 .header-logo {
   /* width: 100%; */
-  max-height: 70px;
+  max-height: 60px;
   object-fit: contain;
   object-position: left;
 }
 .order_header_close {
-  font-size: 20px;
-  padding: 0px 2px;
-  border-radius: 25px;
-  border: 1px solid white;
-  background-color: var(--color_shopping_cart);
+  font-size: 30px;
+  color: black;
+  transition: 0.3s;
   cursor: pointer;
-  outline: none;
-  flex: none;
-  color: #fff;
-  transition: all ease 0.3s;
 }
 .order_header_close:hover {
-  background-color: var(--color_hover_text);
+  transform: rotate(90deg);
+  color: gray;
 }
 .wrapper-category-all {
   display: flex;
   flex-direction: column;
   width: 100%;
   overflow-x: auto;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px 30px;
   margin-top: 10px;
 }
 .name-category-all {

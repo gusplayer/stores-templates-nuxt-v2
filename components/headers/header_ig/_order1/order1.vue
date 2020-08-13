@@ -4,9 +4,9 @@
       <div class="order_content">
         <div class="order_header">
           <h3>Tu orden</h3>
-          <button @click="closeOrder" class="order_header_close">
-            <window-close-icon />
-          </button>
+          <label @click="closeOrder" class="order_header_close">
+            <close-icon />
+          </label>
         </div>
         <transition name="slide">
           <template>
@@ -19,7 +19,9 @@
                     :key="index"
                   >
                     <div class="photo">
-                      <img :src="product.foto_cloudinary" />
+                      <img
+                        :src="idCloudinary(product.foto_cloudinary, 100, 100)"
+                      />
                     </div>
                     <div class="name">
                       <p class="order-text" style="font-weight: bold;">
@@ -46,10 +48,10 @@
                         {{ (product.precio * product.cantidad) | currency }}
                       </p>
                     </div>
-                    <delete-icon
+                    <window-close-icon
                       class="material-icons delete"
                       v-on:click="deleteItemCart(index)"
-                    ></delete-icon>
+                    />
                   </li>
                 </ul>
               </div>
@@ -61,7 +63,9 @@
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
-                    <p style="font-weight: bold;">Costo domicilio</p>
+                    <p style="font-weight: bold; font-size: 16px;">
+                      Costo domicilio
+                    </p>
                     <details
                       v-if="
                         rangosByCiudad.envio_metodo === 'precio_ciudad' &&
@@ -69,15 +73,7 @@
                         getFreeShipping == false
                       "
                     >
-                      <summary
-                        class="text-color"
-                        style="
-                          display: flex;
-                          align-items: center;
-                          margin-right: 10px;
-                        "
-                        >Valor por Ciudad:</summary
-                      >
+                      <summary class="text-color">Valor por Ciudad:</summary>
                       <section>
                         <ol class="scroll_cart_summary_items_cities">
                           <li
@@ -93,7 +89,6 @@
                                     : shippingCities[index].nombre_ciu
                                 }}:
                               </b>
-
                               {{ ciudad.price | currency }}
                             </div>
                           </li>
@@ -111,12 +106,13 @@
                         Tarifa plana: {{ rangosByCiudades.valor | currency }}
                       </li>
                     </div>
-                    <div
+                    <details
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'precio' &&
                         getFreeShipping == true
                       "
                     >
+                      <summary class="text-color">Tarifa por precio:</summary>
                       <section>
                         <ol class="scroll_cart_summary_items_cities">
                           <li
@@ -124,12 +120,16 @@
                             indexRangos) in rangosByCiudad.rangos"
                             :key="indexRangos"
                           >
-                            <b> {{ ciudad.inicial }} - {{ ciudad.final }}: </b>
-                            {{ ciudad.precio | currency }}
+                            <div>
+                              <b>
+                                {{ ciudad.inicial }} - {{ ciudad.final }}:
+                              </b>
+                              {{ ciudad.precio | currency }}
+                            </div>
                           </li>
                         </ol>
                       </section>
-                    </div>
+                    </details>
                     <p v-else-if="shipping && getFreeShipping == false">
                       {{ shipping | currency }}
                     </p>
@@ -155,19 +155,31 @@
                 </div>
               </template>
               <template v-else>
-                <div class="wrapper_photo">
-                  <img :src="img" class="photo" />
+                <div class="order_products_list-empty">
+                  <div class="wrapper_photo">
+                    <img :src="img" class="photo" />
+                  </div>
+                  <p class="text-cart-empty">
+                    Tu carrito de compras ahora está vacío.
+                  </p>
                 </div>
-                <p class="text-cart-empty">
-                  Tu carrito de compras ahora está vacío.
-                </p>
               </template>
               <div class="content-button">
                 <p class="Quotation-message" v-if="isQuotation()">
                   Contacte con la tienda para saber los precios de los productos
                 </p>
+                <p
+                  class="Quotation-message"
+                  v-if="dataStore.tienda.estado == 0"
+                >
+                  Tienda cerrada
+                </p>
                 <button
-                  v-if="productsCart.length && !isQuotation()"
+                  v-if="
+                    productsCart.length &&
+                    !isQuotation() &&
+                    dataStore.tienda.estado == 1
+                  "
                   class="continue_shopping"
                   @click="GoPayments"
                 >
@@ -178,11 +190,6 @@
                     Seguir comprando
                   </button>
                 </nuxt-link>
-                <!-- <nuxt-link to="/cart" class="conten-btn" @click="closeOrder">
-                  <button class="continue_shopping2">
-                    Ir al carrito
-                  </button>
-                </nuxt-link> -->
               </div>
             </div>
           </template>
@@ -209,10 +216,14 @@
 
 <script>
 import axios from 'axios'
+import idCloudinary from '../../../../mixins/idCloudinary'
 
 export default {
+  mixins: [idCloudinary],
   name: 'koOrder1',
-  props: {},
+  props: {
+    dataStore: Object,
+  },
   mounted() {
     this.$store.dispatch('GET_CITIES')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
@@ -322,7 +333,10 @@ export default {
         element === 'order_header_close' ||
         element === 'continue_shopping' ||
         element === 'continue_shopping2' ||
-        element.animVal === 'material-design-icon__svg'
+        element.animVal === 'material-design-icon__svg' ||
+        element.baseVal === 'material-design-icon__svg' ||
+        element.animVal === '' ||
+        element.baseVal === ''
       ) {
         this.$store.commit('SET_OPENORDER', false)
       }
@@ -456,30 +470,33 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--background_color_2);
-  padding: 10px 5px;
+  padding: 10px 30px;
   flex: none;
 }
 .order_header_close {
-  font-size: 20px;
-  padding: 0px 2px;
-  border-radius: 25px;
-  border: 1px solid white;
-  background-color: var(--color_shopping_cart);
+  font-size: 30px;
+  color: black;
+  transition: 0.3s;
   cursor: pointer;
-  outline: none;
-  flex: none;
-  color: #fff;
-  transition: all ease 0.3s;
 }
 .order_header_close:hover {
-  background-color: var(--color_hover_text);
+  transform: rotate(90deg);
+  color: gray;
 }
+
 .order--wrapper {
   display: grid;
   overflow-y: auto;
 }
-.order_products_list {
+.order_products_list-empty {
   height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.order_products_list {
+  max-height: 380px;
   overflow-y: auto;
   overflow-x: hidden;
   list-style: none;
@@ -501,7 +518,7 @@ export default {
   align-items: center;
   justify-content: space-around;
   border-bottom: 1px solid var(--background_color_2);
-  padding: 0px 5px;
+  padding: 10px 30px;
   overflow-x: auto;
 }
 .order_products_list_item::-webkit-scrollbar {
@@ -528,7 +545,7 @@ export default {
   max-height: 50px;
 }
 .order_products_list_item .name {
-  max-width: 180px;
+  max-width: 190px;
   width: 100%;
 }
 .order-text {
@@ -560,10 +577,12 @@ export default {
   font-size: 10px;
 }
 .price {
+  min-width: 60px;
   color: var(--color_shopping_cart);
   font-size: 16px;
 }
 .order_products_list_item .material-icons.delete {
+  height: 17px;
   cursor: pointer;
   color: var(--color_icon);
   transition: 0.3s;
@@ -589,7 +608,7 @@ export default {
 }
 .content-remove-cart {
   width: 100%;
-  padding: 0 5px;
+  padding: 10px 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -613,7 +632,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
 }
@@ -684,14 +702,13 @@ export default {
 }
 .order_total {
   border-top: 1px solid var(--background_color_2);
-  padding: 0 5px;
-  margin-bottom: 10px;
+  padding: 0 30px;
 }
 .order_total_domicile,
 .order_total_net {
   display: flex;
   justify-content: space-between;
-  margin: 5px 0;
+  margin: 15px 0;
 }
 .order_total_domicile p {
   color: var(--color_text);
@@ -707,7 +724,10 @@ export default {
   max-height: 150px;
   display: flex;
   flex-direction: column;
-  max-width: 170px;
+  max-width: 230px;
+}
+.scroll_cart_summary_items_cities li {
+  margin-right: 5px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar {
   background: var(--background_color_1);
@@ -751,7 +771,7 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
-  max-width: 280px;
+  max-width: 340px;
   border-radius: var(--radius_btn);
   color: var(--color_text_btn);
   border: solid 2px var(--color_border_btn);
@@ -781,9 +801,10 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
-  max-width: 280px;
+  max-width: 340px;
   color: var(--color_shopping_cart);
   border: 2px solid var(--color_shopping_cart);
+  border-radius: var(--radius_btn);
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -803,7 +824,6 @@ export default {
 }
 .photo {
   width: 120px;
-  height: 120px;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
@@ -836,5 +856,35 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+details {
+  color: #333;
+  font-size: 13px;
+  align-self: center;
+  flex: 1;
+  margin-left: 30px;
+}
+details summary {
+  outline: none;
+  cursor: pointer;
+  text-align: right;
+  font-size: 14px;
+  font-weight: bold;
+}
+details ol {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+}
+details ol li div {
+  padding: 2px 4px;
+  display: flex;
+  justify-content: space-between;
+}
+details ol li:nth-child(even) {
+  background-color: rgba(102, 102, 102, 0.1);
+}
+details[open] summary ~ * {
+  animation: sweep 0.5s ease-in-out;
 }
 </style>

@@ -5,7 +5,7 @@
         <div class="order_header">
           <h3>Tu orden</h3>
           <label @click="closeOrder" class="order_header_close">
-            <window-close-icon />
+            <close-icon />
           </label>
         </div>
         <transition name="slide">
@@ -340,7 +340,10 @@ export default {
         element === 'order_header_close' ||
         element === 'continue_shopping' ||
         element === 'continue_shopping2' ||
-        element.animVal === 'material-design-icon__svg'
+        element.animVal === 'material-design-icon__svg' ||
+        element.baseVal === 'material-design-icon__svg' ||
+        element.animVal === '' ||
+        element.baseVal === ''
       ) {
         this.$store.commit('SET_OPENORDER', false)
       }
@@ -478,26 +481,16 @@ export default {
   flex: none;
 }
 .order_header_close {
-  font-size: 20px;
-  padding: 0px 2px;
-  border-radius: 25px;
-  border: 1px solid white;
-  background-color: black;
+  font-size: 30px;
+  color: black;
+  transition: 0.3s;
   cursor: pointer;
-  outline: none;
-  flex: none;
-  color: #fff;
-  transition: all ease 0.3s;
 }
 .order_header_close:hover {
-  background-color: gray;
-}
-.order_header_close svg {
-  transition: 0.2s;
-}
-.order_header_close:hover svg {
   transform: rotate(90deg);
+  color: gray;
 }
+
 .order--wrapper {
   display: grid;
   overflow-y: auto;
@@ -652,6 +645,7 @@ export default {
 .content-items-remove {
   width: 100%;
   margin: 15px;
+
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -660,8 +654,7 @@ export default {
   background: white;
 }
 .text-remove {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding: 20px;
   text-align: center;
   color: var(--color_text);
   font-weight: 300;
@@ -673,7 +666,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 .btn-remover-yes {
   font-weight: bold;

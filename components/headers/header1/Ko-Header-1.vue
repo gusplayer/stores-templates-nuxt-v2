@@ -1,6 +1,6 @@
 <template>
   <div class="header-container">
-    <div class="wrapper-header">
+    <div class="wrapper-header" @click="closeMenuCategory">
       <div class="header">
         <KoOrder :dataStore="dataStore" />
         <div class="header-content-logo">
@@ -43,16 +43,19 @@
             </div>
           </div>
         </div>
-        <div class="search" v-if="showSearch">
-          <form id="demo-2">
-            <input
-              type="search"
-              placeholder="¿Qué buscas?"
-              v-model="search"
-              @keyup.enter="getSearch(search)"
-            />
-          </form>
+        <div class="prueba" v-if="showSearch">
+          <div class="search">
+            <form id="demo-2">
+              <input
+                type="search"
+                placeholder="¿Qué buscas?"
+                v-model="search"
+                @keyup.enter="getSearch(search)"
+              />
+            </form>
+          </div>
         </div>
+
         <div class="header-content-icon">
           <div class="header-content-cart" @click="openOrder">
             <cart-icon class="header-icon-cart" />
@@ -229,9 +232,28 @@ export default {
       this.$store.state.openMenulateralRight = true
     },
     openMenu(name) {
+      console.log(name)
       var intro = document.getElementById('menu-collapse')
       if (name == 'Categorías') {
         this.showMenu = !this.showMenu
+      }
+      if (this.showMenu == false) {
+        intro.style.display = 'none'
+      } else {
+        intro.style.display = 'flex'
+      }
+    },
+    closeMenuCategory() {
+      var intro = document.getElementById('menu-collapse')
+      const element = event.target.className
+      if (
+        element === 'wrapper-header' ||
+        element === 'header' ||
+        element === 'header-content-items' ||
+        element === 'header-content-logo' ||
+        element === 'header-logo'
+      ) {
+        this.showMenu = false
       }
       if (this.showMenu == false) {
         intro.style.display = 'none'
@@ -677,6 +699,7 @@ div.header-container {
   box-shadow: 0px 0px 2px 1px var(--color_border);
 }
 /* search */
+
 input {
   outline: none;
 }
@@ -695,7 +718,7 @@ input[type='search'] {
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
   border: solid 2px var(--color_shopping_cart);
-  padding: 7px 8px;
+  padding: 6px 6px;
   width: 35px;
   -webkit-border-radius: 10em;
   -moz-border-radius: 10em;
@@ -715,10 +738,13 @@ input::-webkit-input-placeholder {
   color: var(--color_text);
 }
 #demo-2 input[type='search'] {
-  width: 15px;
+  /* width: 15px; */
+  width: 35px;
+  height: 35px;
   padding-left: 10px;
   color: transparent;
   cursor: pointer;
+  box-sizing: border-box;
 }
 #demo-2 input[type='search']:hover {
   background-color: #fff;

@@ -154,6 +154,7 @@ input[type='search'] {
   border: solid 2px var(--color_border);
   padding: 4px 7px;
   width: 35px;
+  max-height: 36px;
   -webkit-border-radius: 10em;
   -moz-border-radius: 10em;
   border-radius: 10em;

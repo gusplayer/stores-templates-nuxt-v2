@@ -101,6 +101,7 @@ input[type='search'] {
   border: solid 2px var(--color_shopping_cart);
   padding: 4px 7px;
   width: 35px;
+  max-height: 36px;
   -webkit-border-radius: 10em;
   -moz-border-radius: 10em;
   border-radius: 10em;
@@ -113,7 +114,7 @@ input[type='search'] {
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
   border: solid 2px var(--color_shopping_cart);
-  padding: 2px 4px 4px 38px;
+  padding: 6px 4px 7px 38px;
   width: 100%;
   -webkit-border-radius: var(--radius_btn);
   -moz-border-radius: var(--radius_btn);

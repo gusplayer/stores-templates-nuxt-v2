@@ -1,9 +1,6 @@
 export default {
   mode: 'universal',
 
-  /*
-   ** Headers of the page
-   */
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -65,13 +62,12 @@ export default {
     '~/plugins/cloudinary',
     '~/plugins/material-icons',
     '~plugins/validate.js',
-    '~/plugins/gtm',
     { src: '@/plugins/aos.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
     { src: '~plugins/ga.js', mode: 'client' },
-    // { src: '~/plugins/gtm', mode: 'client' },
+    { src: '~/plugins/gtm', mode: 'client' },
   ],
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
   debug: {
