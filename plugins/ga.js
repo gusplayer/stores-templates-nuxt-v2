@@ -46,11 +46,11 @@ export default ({ app, store }) => {
      ** We tell Google Analytics to add a `pageview`
      */
     ga('set', 'page', to.fullPath)
-    // ga('send', 'pageview')
+    ga('send', 'pageview')
     // ga('clientTracker.send', 'pageview')
-    ga('send', 'pageview', {
-      page: location.host + location.pathname,
-    })
+    // ga('send', 'pageview', {
+    //   page: location.host + location.pathname,
+    // })
     ga('clientTracker.send', 'pageview', {
       page: location.host + location.pathname,
     })
