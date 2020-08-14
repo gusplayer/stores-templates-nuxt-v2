@@ -51,10 +51,10 @@ export default ({ app, store }) => {
     // ga('send', 'pageview')
     // ga('clientTracker.send', 'pageview')
     ga('send', 'pageview', {
-      page: location.pathname + '||<? echo $url ?>',
+      'page': location.pathname + '||<? echo $url ?>',
     })
     ga('clientTracker.send', 'pageview', {
-      page: location.pathname + '||<? echo $url ?>',
+      'page': location.pathname + '||<? echo $url ?>',,
     })
   })
 }
