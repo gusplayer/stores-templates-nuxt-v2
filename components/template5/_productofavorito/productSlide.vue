@@ -3,7 +3,7 @@
     <div class="swiper-wrapper">
       <div
         class="swiper-slide"
-        v-for="(product, index) in this.dataProduct"
+        v-for="(product, index) in this.products"
         :key="index"
       >
         <KoProductCard1 :product="product"></KoProductCard1>
@@ -17,17 +17,13 @@
 import KoProductCard1 from '../_productcard/Ko-ProductCard-1'
 
 export default {
-  name: 'carrousel',
+  name: 'productSlide-productFavorito',
   components: {
     KoProductCard1,
   },
   props: {
     products: {},
   },
-  mounted() {
-    this.getDataProduct()
-  },
-
   data() {
     return {
       swiperOption: {
@@ -79,34 +75,16 @@ export default {
           },
         },
       },
-      dataProduct: [],
     }
   },
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    settingBytemplatePrueba() {
-      return this.$store.state.settingBytemplatePrueba.favoritos
-    },
-    dataStore() {
-      return this.$store.state.dataStore.productos
-    },
   },
   methods: {
     changeSlide() {
-      this.swiper.slidePrev(500, false)
-    },
-    getDataProduct() {
-      let tempProduct
-      const product = this.products.filter((id, index) => {
-        this.dataStore.filter((product, index) => {
-          if (id.idProducto == product.id) {
-            tempProduct = product
-            this.dataProduct.push(tempProduct)
-          }
-        })
-      })
+      this.swiper.slidePrev(700, false)
     },
   },
 }

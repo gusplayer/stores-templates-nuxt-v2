@@ -225,7 +225,7 @@ import idCloudinary from '../../../mixins/idCloudinary'
 
 export default {
   mixins: [idCloudinary],
-  name: 'koOrder1',
+  name: 'koOrder1-cart',
   props: {
     dataStore: Object,
   },

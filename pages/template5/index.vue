@@ -13,7 +13,7 @@
     </div>
     <kBanner />
     <KComponent360 />
-    <!-- <KProductFavoritos /> -->
+    <KProductFavoritos />
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"

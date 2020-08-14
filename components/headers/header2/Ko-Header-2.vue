@@ -130,7 +130,7 @@ export default {
     KoOrder,
     KoMenu,
   },
-  name: 'Ko-Header-1',
+  name: 'Ko-Header-2',
   props: {
     dataStore: Object,
   },

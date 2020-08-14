@@ -14,6 +14,7 @@
 </template>
 <script>
 export default {
+  name: 'BaseAccordion-header',
   data: function () {
     return {
       show: false,

@@ -136,6 +136,7 @@
 
 <script>
 export default {
+  name: 'descriptionProduct',
   props: {
     dataStore: Object,
     data: {},

@@ -1,38 +1,36 @@
 <template>
-  <div class="wrapper-swipper" v-if="settingBytemplatePrueba">
-    <div
-      class="swiper-container"
-      v-for="(item, index) in settingBytemplatePrueba"
-      :key="index"
-    >
-      <div class="content-title">
-        <p class="title">{{ item.titulo }}</p>
-      </div>
-      <KoSwipper :products="item.productos"></KoSwipper>
+  <div class="wrapper-ProductFavoritos" v-if="dataProductFavorite.length">
+    <div class="content-title-ProductFavoritos">
+      <p class="title-ProductFavoritos">Favoritos</p>
     </div>
+    <KoSwipper :products="dataProductFavorite"></KoSwipper>
   </div>
 </template>
 
 <script>
 import KoSwipper from './_productofavorito/productSlide'
 export default {
-  name: 'carrousel',
+  name: 'Ko-ProductFavoritos-1',
+
   components: {
     KoSwipper,
   },
+  mounted() {},
   computed: {
-    settingBytemplatePrueba() {
-      return this.$store.state.settingBytemplatePrueba.favoritos
+    dataProductFavorite() {
+      return this.$store.state.dataStore.productos.filter(
+        (product) => product.favorito === 1
+      )
     },
   },
 }
 </script>
 
 <style scoped>
-div.wrapper-swipper {
+div.wrapper-ProductFavoritos {
   --background_color_1: #f2f4f7;
 }
-.wrapper-swipper {
+.wrapper-ProductFavoritos {
   display: flex;
   width: 100%;
   background-color: var(--background_color_1);
@@ -40,6 +38,7 @@ div.wrapper-swipper {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  padding-top: 20px;
 }
 .swiper-container {
   width: 100%;
@@ -48,16 +47,16 @@ div.wrapper-swipper {
   justify-content: center;
   align-items: flex-start;
   max-width: 1300px;
-  padding: 10px;
+  padding: 10px 20px;
 }
-.content-title {
+.content-title-ProductFavoritos {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
 }
-.title {
+.title-ProductFavoritos {
   font-size: 38px;
   font-weight: bold;
   font-stretch: normal;
@@ -71,13 +70,16 @@ div.wrapper-swipper {
   .swiper-container {
     padding: 20px 8px;
   }
-  .title {
-    font-size: 25px;
+  .title-ProductFavoritos {
+    font-size: 28px;
   }
 }
 @media (max-width: 380px) {
   .swiper-container {
     padding: 20px 5px;
+  }
+  .title-ProductFavoritos {
+    font-size: 25px;
   }
 }
 </style>

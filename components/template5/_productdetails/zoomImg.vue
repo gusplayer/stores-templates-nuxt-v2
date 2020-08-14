@@ -12,7 +12,7 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
-
+  name: 'zoomImg-details',
   props: ['photo'],
   methods: {
     zoom(e) {

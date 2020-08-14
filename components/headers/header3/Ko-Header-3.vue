@@ -60,7 +60,7 @@ export default {
     KoMenuRight,
     KoMenuLeft,
   },
-  name: 'Ko-Header-1',
+  name: 'Ko-Header-3',
   props: {
     dataStore: Object,
   },

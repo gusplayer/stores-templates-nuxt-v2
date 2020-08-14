@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  name: 'selectGroup-details',
   props: ['options', 'label', 'value', 'index', 'variantes'],
   mounted() {
     this.saveOption()

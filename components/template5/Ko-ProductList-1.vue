@@ -145,7 +145,7 @@ export default {
     dataStore: Object,
     fullProducts: {},
   },
-  name: 'Ko-ProductList-3',
+  name: 'Ko-ProductList-1',
   mounted() {
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {

@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  name: 'carrousel',
+  name: 'productSlide-details',
   props: ['photos', 'photo', 'idYoutube'],
   data() {
     return {

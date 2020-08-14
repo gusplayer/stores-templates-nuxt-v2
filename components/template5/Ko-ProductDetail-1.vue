@@ -217,7 +217,7 @@ import zoom from './_productdetails/zoomImg'
 
 export default {
   mixins: [idCloudinary],
-  name: 'koProduct1',
+  name: 'Ko-ProductDetail-1',
   components: {
     selectGroup,
     koDescription,
