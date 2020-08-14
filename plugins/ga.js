@@ -3,6 +3,7 @@ export default ({ app, store }) => {
   /*
    ** Only run on client-side and only in production mode
    */
+
   let analytics =
     store.state.analytics_tagmanager &&
     store.state.analytics_tagmanager.analytics
@@ -48,10 +49,10 @@ export default ({ app, store }) => {
     // ga('send', 'pageview')
     // ga('clientTracker.send', 'pageview')
     ga('send', 'pageview', {
-      page: location.host,
+      page: location.host + location.pathname,
     })
     ga('clientTracker.send', 'pageview', {
-      page: location.host,
+      page: location.host + location.pathname,
     })
   })
 }
