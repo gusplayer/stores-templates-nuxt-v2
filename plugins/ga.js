@@ -3,7 +3,6 @@ export default ({ app, store }) => {
   /*
    ** Only run on client-side and only in production mode
    */
-
   let analytics =
     store.state.analytics_tagmanager &&
     store.state.analytics_tagmanager.analytics
@@ -38,7 +37,6 @@ export default ({ app, store }) => {
    */
   ga('create', analytics, 'auto')
   ga('create', 'UA-92934137-1', 'auto', 'clientTracker')
-
   /*
    ** Every time the route changes (fired on initialization too)
    */
@@ -46,15 +44,14 @@ export default ({ app, store }) => {
     /*
      ** We tell Google Analytics to add a `pageview`
      */
-
     ga('set', 'page', to.fullPath)
     // ga('send', 'pageview')
     // ga('clientTracker.send', 'pageview')
     ga('send', 'pageview', {
-      page: location.pathname + '||<? echo $url ?>',
+      page: location.host,
     })
     ga('clientTracker.send', 'pageview', {
-      page: location.pathname + '||<? echo $url ?>',
+      page: location.host,
     })
   })
 }
