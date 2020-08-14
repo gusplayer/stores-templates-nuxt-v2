@@ -520,7 +520,7 @@ div.wrapper-productlist {
 }
 .text-categorias {
   background: transparent;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 1.4;
   color: var(--color_subtext);
@@ -537,6 +537,7 @@ div.wrapper-productlist {
   line-height: 1.4;
   color: var(--color_subtext);
   align-self: flex-end;
+  margin-top: 2px;
   margin-right: 2px;
   margin-left: 5px;
   cursor: pointer;
@@ -893,13 +894,9 @@ div.wrapper-productlist {
   .dropbtn {
     margin-left: 5px;
   }
-  /* .top-right {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0px 15px;
-
-  } */
+  .text-categorias {
+    padding: 0 10px;
+  }
   .content-title {
     padding: 0px 15px;
   }

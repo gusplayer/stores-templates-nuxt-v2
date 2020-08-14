@@ -327,7 +327,6 @@ export default {
             this.selectedPhoto(response.data.detalle.foto_cloudinary)
             this.videoYoutube(response.data.info.video)
             this.data = response.data
-            this.setOptionEnvio()
             this.salesData = {
               precio: this.data.detalle.precio,
               unidades: this.data.info.inventario,
@@ -335,6 +334,7 @@ export default {
               estado: true,
             }
             this.maxQuantityValue = this.data.info.inventario
+            this.setOptionEnvio()
             for (const [
               index,
               productCart,
@@ -395,34 +395,43 @@ export default {
       this.$store.state.togglePayment = !this.$store.state.togglePayment
     },
     setOptionEnvio() {
-      this.data.envioproducto = JSON.parse(this.envios.valores)
-      switch (this.data.envioproducto.envio_metodo) {
-        case 'gratis':
+      if (this.data.detalle) {
+        if (this.data.detalle.envio_gratis == 1) {
           this.envio = {
             titulo: 'Envío gratis',
             desc: 'Disfruta de este obsequio por parte de la tienda.',
           }
-          break
-        case 'tarifa_plana':
-          this.envio = {
-            titulo: 'Tarifa plana',
-            desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.envios.valores.valor}`,
+        } else {
+          this.data.envioproducto = JSON.parse(this.envios.valores)
+          switch (this.data.envioproducto.envio_metodo) {
+            case 'gratis':
+              this.envio = {
+                titulo: 'Envío gratis',
+                desc: 'Disfruta de este obsequio por parte de la tienda.',
+              }
+              break
+            case 'tarifa_plana':
+              this.envio = {
+                titulo: 'Tarifa plana',
+                desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.envios.valores.valor}`,
+              }
+              break
+            case 'precio':
+              this.envio = {
+                titulo: 'Tarifa por precio',
+                desc:
+                  'Segun la suma del costo de tus productos te cobraran el envio',
+              }
+              break
+            case 'peso':
+              this.envio = {
+                titulo: 'Tarifa por peso',
+                desc: '',
+              }
+              break
+            default:
           }
-          break
-        case 'precio':
-          this.envio = {
-            titulo: 'Tarifa por precio',
-            desc:
-              'Segun la suma del costo de tus productos te cobraran el envio',
-          }
-          break
-        case 'peso':
-          this.envio = {
-            titulo: 'Tarifa por peso',
-            desc: '',
-          }
-          break
-        default:
+        }
       }
     },
     quantity(productCart) {
@@ -471,6 +480,7 @@ export default {
         foto_cloudinary: this.data.detalle.foto_cloudinary,
         nombre: this.data.detalle.nombre,
         combinacion: this.salesData.combinacion,
+        envio_gratis: this.data.detalle.envio_gratis,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades

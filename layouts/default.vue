@@ -97,7 +97,6 @@ export default {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
-
     // console.log('ruta completa ' + this.fullPathServer)
   },
   head() {
@@ -113,7 +112,6 @@ export default {
       this.$store.state.analytics_tagmanager.tidio_user
         ? this.$store.state.analytics_tagmanager.tidio_user
         : ''
-
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
     return {

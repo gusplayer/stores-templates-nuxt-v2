@@ -10,6 +10,12 @@
       </div>
     </div>
     <div class="swiper-pagination" slot="pagination"></div>
+    <div class="swiper-button-prev btn">
+      <FlechaLeft-icon class="btn-icon" />
+    </div>
+    <div class="swiper-button-next btn">
+      <FlechaRight-icon class="btn-icon" />
+    </div>
   </div>
 </template>
 
@@ -74,6 +80,10 @@ export default {
             spaceBetween: 10,
           },
         },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
       },
     }
   },
@@ -93,14 +103,33 @@ export default {
 <style scoped>
 .swiper-wrapper {
   width: 100%;
+  position: relative;
 }
 .swiper-slide {
   width: 100%;
 }
 .swiper-pagination-bullet {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(15, 15, 15, 0.5);
 }
 .swiper-pagination-bullet-active {
   background-color: #fff;
+}
+.btn {
+  border-radius: 25px;
+  padding: 0px 22px;
+  background: black;
+  cursor: pointer;
+}
+.btn-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+  color: white;
+  bottom: 0.125em;
+}
+.btn-icon:hover {
+  color: var(--color_icon);
 }
 </style>

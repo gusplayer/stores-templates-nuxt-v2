@@ -174,6 +174,9 @@ export default {
     },
     getFreeShipping() {
       let free = true
+      // if (this.rangosByCiudad.envio_metodo === 'gratis' && this.product.envio_gratic == 1) {
+      //   free = false
+      // }
       if (this.rangosByCiudad.envio_metodo === 'gratis') {
         free = false
       }
@@ -252,6 +255,7 @@ export default {
             foto_cloudinary: this.product.foto_cloudinary,
             nombre: this.product.nombre,
             combinacion: undefined,
+            // envio_gratis: this.dataDetalle.envio_gratis,
           }
           if (this.salesData) {
             product.limitQuantity = this.product.stock
@@ -583,10 +587,10 @@ div.wrapper-card {
 }
 @media (max-width: 580px) {
   .card-info-1 {
-    top: 75%;
+    top: 81%;
   }
   .card-info-2 {
-    top: 86%;
+    top: 91%;
   }
 }
 @media (max-width: 450px) {

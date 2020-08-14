@@ -17,6 +17,8 @@ import Email from 'vue-material-design-icons/Email.vue'
 import Whatsapp from 'vue-material-design-icons/Whatsapp.vue'
 import FlechaDown from 'vue-material-design-icons/ChevronDown.vue'
 import FlechaUp from 'vue-material-design-icons/ChevronUp.vue'
+import FlechaLeft from 'vue-material-design-icons/ChevronLeft.vue'
+import FlechaRight from 'vue-material-design-icons/ChevronRight.vue'
 import CartArrowDown from 'vue-material-design-icons/CartArrowDown.vue'
 import mas from 'vue-material-design-icons/Plus.vue'
 import menos from 'vue-material-design-icons/Minus.vue'
@@ -49,6 +51,8 @@ Vue.component('phone-icon', Phone)
 Vue.component('email-icon', Email)
 Vue.component('Flechadown-icon', FlechaDown)
 Vue.component('FlechaUp-icon', FlechaUp)
+Vue.component('FlechaLeft-icon', FlechaLeft)
+Vue.component('FlechaRight-icon', FlechaRight)
 Vue.component('cartArrowDown', CartArrowDown)
 
 Vue.component('menos-icon', menos)

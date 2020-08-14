@@ -51,35 +51,31 @@ div.wrapper-ProductFavoritos {
 }
 .content-title-ProductFavoritos {
   width: 100%;
+  max-width: 1300px;
+  padding: 10px 20px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  margin-bottom: 10px;
 }
 .title-ProductFavoritos {
-  font-size: 38px;
+  background: transparent;
+  font-size: 18px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.24;
-  letter-spacing: -0.4px;
-  color: var(--color_text);
-  margin-top: 10px;
+  line-height: 1.4;
+  color: var(--color_subtext);
+  cursor: pointer;
 }
 @media (max-width: 770px) {
   .swiper-container {
     padding: 20px 8px;
   }
-  .title-ProductFavoritos {
-    font-size: 28px;
+  .content-title-ProductFavoritos {
+    padding: 10px 10px;
   }
 }
 @media (max-width: 380px) {
   .swiper-container {
     padding: 20px 5px;
-  }
-  .title-ProductFavoritos {
-    font-size: 25px;
   }
 }
 </style>

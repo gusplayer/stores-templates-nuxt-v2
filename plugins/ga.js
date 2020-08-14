@@ -9,7 +9,6 @@ export default ({ app, store }) => {
     store.state.analytics_tagmanager.analytics
       ? store.state.analytics_tagmanager.analytics
       : ''
-  // console.log(analytics)
   if (process.env.NODE_ENV !== 'production')
     return /*
      ** Include Google Analytics Script
