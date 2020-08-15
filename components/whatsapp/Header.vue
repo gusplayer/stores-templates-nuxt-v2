@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 .header-container {
-  height: 120px;
+  height: 140px;
   width: 100%;
   background: #fff;
   top: 0;
@@ -89,19 +89,22 @@ export default {
 }
 .contain-image {
   overflow: hidden;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   margin-top: -10px;
   left: 20px;
   background-color: #fff;
-  border-radius: 45px;
+  border-radius: 8px;
   position: absolute;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+  box-shadow: 0 0 2px rgba(52, 58, 67, 0.1), 0 5px 10px rgba(52, 58, 67, 0.08),
+    0 15px 35px rgba(52, 58, 67, 0.08);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .header-logo {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
+  padding: 8px;
   object-fit: contain;
 }
 </style>

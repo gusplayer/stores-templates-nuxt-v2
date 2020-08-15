@@ -442,7 +442,11 @@ export const actions = {
     let parts = full.split('.')
     let subdomain = parts[0]
     let id = 0
-    if (parts[1] == 'komercia' || parts[1] == 'localhost:3000') {
+    if (
+      parts[1] == 'komercia' ||
+      parts[1] == 'localhost:3000' ||
+      parts[1] == 'unicentrovillavicencio'
+    ) {
       id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
         name: `${subdomain}.komercia.co/`,
       })
