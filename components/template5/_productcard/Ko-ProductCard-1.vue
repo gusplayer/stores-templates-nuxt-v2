@@ -174,10 +174,9 @@ export default {
     },
     getFreeShipping() {
       let free = true
-      // if (this.rangosByCiudad.envio_metodo === 'gratis' && this.product.envio_gratic == 1) {
-      //   free = false
-      // }
-      if (this.rangosByCiudad.envio_metodo === 'gratis') {
+      if (this.product.envio_gratis == 1) {
+        free = false
+      } else if (this.rangosByCiudad.envio_metodo === 'gratis') {
         free = false
       }
       return free
@@ -255,7 +254,7 @@ export default {
             foto_cloudinary: this.product.foto_cloudinary,
             nombre: this.product.nombre,
             combinacion: undefined,
-            // envio_gratis: this.dataDetalle.envio_gratis,
+            envio_gratis: this.product.envio_gratis,
           }
           if (this.salesData) {
             product.limitQuantity = this.product.stock

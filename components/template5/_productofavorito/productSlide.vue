@@ -34,6 +34,7 @@ export default {
     return {
       swiperOption: {
         direction: 'horizontal',
+        loop: true,
         pagination: {
           el: '.swiper-pagination',
         },
