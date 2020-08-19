@@ -1,155 +1,15 @@
 <template>
-  <div class="wrapper-footer" ref="background">
+  <div class="wrapper-footer">
     <div class="contenedor">
-      <div class="top-footer">
-        <div class="wrapper-logo">
-          <div class="left-logo">
-            <nuxt-link to="/" class="content-logo">
-              <img
-                :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-                class="logo"
-              />
-            </nuxt-link>
-            <!-- <div v-if="this.dataStore.tienda.descripcion">
-              <div
-                v-if="this.dataStore.tienda.descripcion.length >= 150"
-                v-html="`${this.dataStore.tienda.descripcion.slice(0, 150)}...`"
-                class="text-light"
-              ></div>
-              <div
-                v-else
-                v-html="`${this.dataStore.tienda.descripcion.slice(0, 150)}`"
-                class="text-light"
-              ></div>
-            </div> -->
-          </div>
-        </div>
-        <div>
-          <p class="text-top-bold">Secciones</p>
-          <br />
-          <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-            <nuxt-link :to="item.path" class="text-top">
-              {{ item.name }}
-            </nuxt-link>
-          </div>
-        </div>
-        <div>
-          <p class="text-top-bold">Síguenos</p>
-          <br />
-          <div
-            v-for="(item, index) in links"
-            :key="`${index}${item.nombre}`"
-            class="text-icon"
-          >
-            <div v-if="item.link" :is="item.icon" class="icon" />
-            <a v-if="item.link" :href="item.link" target="_blank">{{
-              item.nombre
-            }}</a>
-          </div>
-        </div>
-        <div>
-          <p class="text-top-bold">Suscríbete</p>
-          <p class="text-light">
-            Registra tu correo para recibir información sobre promociones y
-            nuevos productos.
-          </p>
-          <br />
-          <div class="input-content">
-            <ValidationProvider
-              ref="validate"
-              name="email"
-              rules="required|email"
-              class="content-input-error"
-            >
-              <template slot-scope="{ errors }">
-                <input
-                  name="email"
-                  class="input-text"
-                  type="email"
-                  placeholder="Correo electrónico"
-                  v-model="email"
-                  @keyup.enter="toSubscribe"
-                />
-                <span
-                  v-show="errors[0] || register"
-                  class="text-error"
-                  :style="register ? 'color:green' : ''"
-                  >{{ errors[0] || register }}</span
-                >
-              </template>
-            </ValidationProvider>
-            <button ref="colorBtn" class="btn" @click="toSubscribe">
-              Enviar
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="items-movil">
-        <div class="item-movil-top">
-          <div class="left-logo-movil">
-            <img
-              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-              class="logo"
-            />
-            <div
-              class="items-iconos"
-              v-for="(item, index) in links"
-              :key="`${index}${item.icon}`"
-              v-if="item.link"
-            >
-              <a v-if="item.link" :href="item.link" target="_blank"
-                ><div class="icon" :is="item.icon"
-              /></a>
-            </div>
-          </div>
-          <br />
-          <div class="footer-item-secciones">
-            <div
-              v-for="(item, index) in secciones"
-              :key="`${index}${item.name}`"
-            >
-              <nuxt-link :to="item.path" class="text-top">
-                {{ item.name }}
-              </nuxt-link>
-            </div>
-          </div>
-          <div class="text-center">
-            <p>Suscríbite a nuestras promociones</p>
-          </div>
-          <div class="input-content">
-            <ValidationProvider
-              ref="validate"
-              name="email"
-              rules="required|email"
-              class="content-input-error"
-            >
-              <template slot-scope="{ errors }">
-                <input
-                  name="email"
-                  class="input-text"
-                  type="email"
-                  placeholder="Correo electrónico"
-                  v-model="email"
-                  @keyup.enter="toSubscribe"
-                />
-                <span
-                  v-show="errors[0] || register"
-                  class="text-error"
-                  :style="register ? 'color:green' : ''"
-                  >{{ errors[0] || register }}</span
-                >
-              </template>
-            </ValidationProvider>
-            <button class="btn" @click="toSubscribe">Enviar</button>
-          </div>
-        </div>
-        <div v-if="currentViews.length" class="item-movil-center">
-          <div
-            v-for="(item, index) in currentViews"
-            :key="`${index}${item.name}`"
-          >
-            <p class="text-movil">{{ item.name }}</p>
-          </div>
+      <div class="content-items-iconos">
+        <div
+          v-for="(item, index) in links"
+          :key="`${index}${item.icon}`"
+          v-if="item.link"
+        >
+          <a v-if="item.link" :href="item.link" target="_blank"
+            ><div class="icon" :is="item.icon"
+          /></a>
         </div>
       </div>
     </div>
@@ -226,24 +86,13 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   name: 'Ko-Footer-1',
   props: {
     dataStore: Object,
   },
-  components: {
-    ValidationObserver,
-    ValidationProvider,
-  },
   data() {
     return {
-      outerVisible: false,
-      logo: null,
-      email: '',
-      toSubscribeResponse: false,
-      register: '',
       links: [
         {
           nombre: 'Facebook',
@@ -266,58 +115,10 @@ export default {
           link: this.dataStore.tienda.red_youtube,
         },
       ],
-      secciones: [
-        {
-          name: 'Inicio',
-          path: '/',
-        },
-        {
-          name: 'Carrito',
-          path: '/cart',
-        },
-        {
-          name: 'Contacto',
-          path: '/contacto',
-        },
-      ],
-      currentViews: [],
     }
   },
-  destroyed() {
-    this.email = ''
-  },
-  methods: {
-    toSubscribe() {
-      this.$refs.validate
-        .validate()
-        .then((response) => {
-          if (response) {
-            this.toSubscribeResponse = false
-            const params = {
-              correo: this.email,
-              tienda: this.dataStore.tienda.id_tienda,
-            }
-            axios
-              .post('https://templates.komercia.co/api/suscriptores', params)
-              .then((result) => {
-                this.register = 'Tu correo ha sido registrado'
-                this.$message.success('Tu suscripción esta activa')
-                this.email = ''
-                this.toSubscribeResponse = true
-              })
-              .catch(
-                (result) => (
-                  (this.register = 'Tu correo ya esta registrado'),
-                  this.$message.success('Tu correo ya esta registrado')
-                )
-              )
-          }
-        })
-        .catch((e) => {
-          console.log(e)
-        })
-    },
-  },
+
+  methods: {},
   watch: {
     'dataStore.tienda'() {
       this.links[0].link = this.dataStore.tienda.red_facebook
@@ -331,10 +132,10 @@ export default {
 
 <style scoped>
 .wrapper-footer {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   background: var(--background_color_1);
   box-sizing: border-box;
   flex-direction: column;
@@ -343,67 +144,27 @@ export default {
 .contenedor {
   width: 100%;
   max-width: 1300px;
-  padding: 60px 30px 10px;
+  padding: 40px 30px 20px;
   display: flex;
-  align-self: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.top-footer {
+.content-items-iconos {
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
-.top-footer > div {
-  flex: 1;
-}
-.top-footer > div:nth-child(1) {
-  flex: 2;
-}
-.top-footer > div:nth-child(4) {
-  flex: 2;
-}
-.wrapper-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.left-logo {
-  display: flex;
-  flex-direction: column;
-}
-.text-light {
-  font-size: 15px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  color: var(--color_subtext);
-  margin-top: 10px;
-}
-.content-logo {
-  max-width: var(--logo_width);
-  width: 100%;
-}
-.logo {
-  max-height: 70px;
-  object-fit: contain;
-  object-position: left;
-}
-.text-top {
-  font-size: 18px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  color: var(--color_text);
-  margin-top: 5px;
-  cursor: pointer;
-}
-.text-top:hover {
+.icon {
+  margin-right: 10px;
+  font-size: 30px;
   color: var(--color_icon);
 }
-
+.icon:hover {
+  color: var(--color_hover_text);
+}
 .text-top-bold {
   font-size: 18px;
   font-stretch: normal;
@@ -413,109 +174,13 @@ export default {
   color: var(--color_text);
   font-weight: bold;
 }
-
-.input-text {
-  font-size: 14px;
-  font-weight: 300;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.57;
-  letter-spacing: normal;
-  color: var(--color_subtext);
-  border: solid 2px #afafaf;
-  border-radius: var(--radius_btn);
-  background-color: transparent;
-  padding: 4px 14px;
-  min-height: 41px;
-  width: 100%;
-}
-.input-text::placeholder {
-  color: var(--color_subtext);
-  opacity: 0.7;
-}
-.input-text:focus,
-.input-text:active {
-  outline: 0;
-  border: solid 2px var(--color_border_btn);
-}
-.text-error {
-  font-size: 12px;
-  color: #cb2027;
-  width: 100%;
-  margin-left: 10px;
-}
-.text-icon {
-  display: flex;
-  flex-direction: row;
-}
-
-.text-icon a {
-  font-size: 18px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  color: var(--color_text);
-  margin-top: 5px;
-  margin-left: 7px;
-}
-.text-icon a:hover {
-  color: var(--color_icon);
-}
-.input-content {
-  display: flex;
-  flex-direction: row;
-}
-.input-content :nth-child(1) {
-  flex: 2;
-}
-.input-content :nth-child(2) {
-  flex: 0.5;
-}
-.icon {
-  font-size: 19px;
-  color: var(--color_icon);
-}
-.btn {
-  border-radius: var(--radius_btn);
-  color: var(--color_text_btn);
-  border: solid 2px var(--color_border_btn);
-  background-color: var(--color_background_btn);
-  margin-left: 3%;
-  padding: 4px 14px;
-  font-weight: bold;
-  width: 100%;
-  min-height: 41px;
-  max-height: 41px;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.btn:hover {
-  color: white;
-  background-color: var(--btnhover);
-  border: solid 2px var(--btnhover);
-}
-.items-movil {
-  display: none;
-}
 .under-footer {
   display: flex;
   width: 100%;
-  margin-top: 40px;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   max-width: 1300px;
-}
-.separator {
-  height: 1.1px;
-  width: 100%;
-  max-width: 400px;
-  opacity: 0.5;
-  border: solid 1px var(--color_icon);
-  background: var(--color_icon);
-  margin-bottom: 10px;
 }
 .under-footer p {
   font-size: 12px;
@@ -544,23 +209,18 @@ export default {
   color: var(--color_subtext);
   cursor: pointer;
 }
+.separator {
+  height: 1.1px;
+  width: 100%;
+  max-width: 400px;
+  opacity: 0.5;
+  border: solid 1px var(--color_icon);
+  background: var(--color_icon);
+  margin-bottom: 10px;
+}
 .logo2 {
   width: 100px;
   opacity: 0.7;
-}
-.content-btn-legal {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
-.content-btn-legal > button {
-  max-width: 120px;
-}
-.content-text-legal {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 }
 #modal-toggle {
   display: none;
@@ -684,7 +344,6 @@ export default {
   color: black;
   margin: 1em;
 }
-
 .tab input:checked ~ .tab-content {
   max-height: 100vh;
 }
@@ -717,15 +376,6 @@ export default {
   .contenedor {
     padding: 60px 20px 10px;
   }
-  .top-footer > div {
-    margin-right: 30px;
-  }
-  .top-footer > div:nth-child(4) {
-    margin-right: 0px;
-  }
-  .top-footer {
-    margin-top: 23px;
-  }
 }
 @media (max-width: 600px) {
   #modal-toggle:checked ~ .modal-backdrop {
@@ -734,136 +384,21 @@ export default {
   .contenedor {
     padding: 20px 15px 10px;
   }
-
   .modal-content {
     width: 100vw;
     height: 100%;
     top: 0;
     left: 0;
   }
-  .left-logo {
-    display: none;
-  }
-  .top-footer {
-    display: none;
-  }
   .separator {
     max-width: 300px;
-  }
-  .logo {
-    width: 141px;
-    height: 70px;
-  }
-  .logo2 {
-    width: 100px;
-    opacity: 0.7;
   }
   .under-footer {
     margin-bottom: 28px;
   }
   .under-footer p {
     font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.4;
-    letter-spacing: normal;
-    color: var(--color_text);
     text-align: center;
-  }
-  .items-movil {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .item-movil-center {
-    width: 100%;
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 15px;
-  }
-  .item-movil-center > div:nth-child(2),
-  .item-movil-center > div:nth-child(4),
-  .item-movil-center > div:nth-child(6),
-  .item-movil-center > div:nth-child(8) {
-    text-align: right;
-  }
-  .footer-item-secciones {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 15px;
-  }
-  .text-movil {
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.4;
-    letter-spacing: normal;
-    color: var(--color_text);
-    margin-top: 10px;
-  }
-  .item-movil-top {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .left-logo-movil {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .text-center p {
-    font-size: 17px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.4;
-    letter-spacing: normal;
-    color: var(--color_text);
-    margin-top: 20px;
-    text-align: center;
-  }
-  .input-content {
-    display: flex;
-    flex-direction: column;
-    margin-top: 25px;
-    width: 100%;
-  }
-
-  .items-icons {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  .icon {
-    font-size: 18px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: var(--color_icon);
-    margin-left: 7px;
-  }
-  .btn {
-    border-radius: var(--radius_btn);
-    color: var(--color_text_btn);
-    border: solid 2px var(--color_border_btn);
-    background-color: var(--color_background_btn);
-    margin-top: 10px;
-    padding: 8px 14px;
-    margin-left: 0px;
   }
 }
 </style>

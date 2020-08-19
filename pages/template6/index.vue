@@ -12,12 +12,12 @@
       </form>
     </div>
     <kBanner :dataStore="dataStore" />
-    <!-- <KProductFavoritos /> -->
+    <KProductFavoritos />
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
     ></KProductList>
-    <!-- <KNewsletter :dataStore="dataStore" /> -->
+    <kBannerFooter />
   </div>
 </template>
 
@@ -25,15 +25,15 @@
 import kBanner from '../../components/template5/ko-Banner-1'
 import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
 import KProductList from '../../components/template6/Ko-ProductList-1'
-// import KNewsletter from '../../components/template5/Ko-Newsletter-1'
+import kBannerFooter from '../../components/template5/ko-BannerFooter-1'
 
 export default {
   layout: 'default',
   components: {
     kBanner,
     KProductList,
-    // KNewsletter,
     KProductFavoritos,
+    kBannerFooter,
   },
   mounted() {
     var prevScrollpos = window.pageYOffset

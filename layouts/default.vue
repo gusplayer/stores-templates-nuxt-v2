@@ -9,10 +9,8 @@
     }"
   >
     <component :dataStore="dataStore" :is="headerTemplate" />
-    <!-- <KoHeader1 :dataStore="dataStore" /> -->
-    <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
     <nuxt />
-    <KFooter1 :dataStore="dataStore" />
+    <component :dataStore="dataStore" :is="footerTemplate" />
     <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
       <div @click="redirectWhatsapp()">
         <koWhatsapp class="button-whatsapp" /><span
@@ -64,11 +62,11 @@
 </template>
 
 <script>
-import KoNotificacion from '../components/template5/Ko-Notificacion-1'
 import KoHeader1 from '../components/headers/header1/Ko-Header-1'
 import KoHeader2 from '../components/headers/header2/Ko-Header-2'
 import KoHeader3 from '../components/headers/header3/Ko-Header-3'
-import KFooter1 from '../components/footers/footer1/Ko-Footer-1'
+import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
+import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
 
@@ -77,9 +75,9 @@ export default {
     KoHeader1,
     KoHeader2,
     KoHeader3,
-    KFooter1,
+    KoFooter1,
+    KoFooter2,
     koWhatsapp,
-    KoNotificacion,
     koTiendaCerrada,
   },
   mounted() {
@@ -97,7 +95,6 @@ export default {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
-    // console.log('ruta completa ' + this.fullPathServer)
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
@@ -233,9 +230,6 @@ export default {
     dataStore() {
       return this.$store.state.dataStore
     },
-    fullPathServer() {
-      return this.$store.state.fullPathServer
-    },
     settingBytemplatePrueba() {
       return this.$store.state.settingBytemplatePrueba
     },
@@ -258,16 +252,22 @@ export default {
       return headerComponent
     },
     footerTemplate() {
-      let headerComponent = ''
+      let footerComponent = ''
       switch (this.template) {
+        case 3:
+          footerComponent = 'KoFooter1'
+          break
         case 5:
-          headerComponent = 'KoHeader1'
+          footerComponent = 'KoFooter1'
           break
         case 6:
-          headerComponent = 'KoHeader2'
+          footerComponent = 'KoFooter2'
+          break
+        case 7:
+          footerComponent = 'KoFooter2'
           break
       }
-      return headerComponent
+      return footerComponent
     },
     settingsTemplate() {
       return this.$store.state.settingByTemplate
@@ -326,7 +326,6 @@ export default {
         }
       }
     },
-
     acceptCookies() {
       document.getElementById('modalCookies').style.bottom = '-135px'
       document.cookie = `authCookies = 1; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;`
@@ -376,7 +375,6 @@ export default {
 * {
   margin: 0px;
   padding: 0px;
-  /* font-family: 'Poppins'; */
   font-family: var(--font-style);
   outline: none;
   list-style: none;
@@ -421,11 +419,9 @@ export default {
   transition: all 0.5s ease-in-out;
   text-align: center;
 }
-
 .button-whatsapp:hover {
   transform: rotate(360deg);
 }
-
 .wrapper-cookie {
   z-index: 3;
   position: fixed;

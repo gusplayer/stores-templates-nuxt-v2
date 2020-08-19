@@ -10,16 +10,18 @@
                 class="logo"
               />
             </nuxt-link>
-            <div
-              v-if="this.dataStore.tienda.descripcion.length >= 150"
-              v-html="`${this.dataStore.tienda.descripcion.slice(0, 150)}...`"
-              class="text-light"
-            ></div>
-            <div
-              v-else
-              v-html="`${this.dataStore.tienda.descripcion.slice(0, 150)}`"
-              class="text-light"
-            ></div>
+            <!-- <div v-if="this.dataStore.tienda.descripcion">
+              <div
+                v-if="this.dataStore.tienda.descripcion.length >= 150"
+                v-html="`${this.dataStore.tienda.descripcion.slice(0, 150)}...`"
+                class="text-light"
+              ></div>
+              <div
+                v-else
+                v-html="`${this.dataStore.tienda.descripcion.slice(0, 150)}`"
+                class="text-light"
+              ></div>
+            </div> -->
           </div>
         </div>
         <div>
@@ -40,7 +42,9 @@
             class="text-icon"
           >
             <div v-if="item.link" :is="item.icon" class="icon" />
-            <a v-if="item.link" :href="item.link">{{ item.nombre }}</a>
+            <a v-if="item.link" :href="item.link" target="_blank">{{
+              item.nombre
+            }}</a>
           </div>
         </div>
         <div>
@@ -78,6 +82,14 @@
               Enviar
             </button>
           </div>
+          <div class="content-checkbox">
+            <input type="checkbox" id="checkbox" v-model="checked" />
+            <p class="text-checkbox">
+              Acepto recibir email e información de
+              {{ dataStore.tienda.nombre }}, bajo las políticas de datos
+              personales
+            </p>
+          </div>
         </div>
       </div>
       <div class="items-movil">
@@ -93,7 +105,9 @@
               :key="`${index}${item.icon}`"
               v-if="item.link"
             >
-              <div class="icon" :is="item.icon" />
+              <a v-if="item.link" :href="item.link" target="_blank"
+                ><div class="icon" :is="item.icon"
+              /></a>
             </div>
           </div>
           <br />
@@ -172,89 +186,46 @@
         </div>
         <div class="tabs">
           <div class="tab" v-if="this.dataStore.politicas.cambio">
-            <input
-              type="radio"
-              id="rd1"
-              name="rd"
-              style="visibility: hidden;"
-            />
-            <label class="tab-label" for="rd1">Política de cambio</label>
+            <input id="tab-one" type="checkbox" name="tabs" />
+            <label for="tab-one">Política de cambio</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.cambio"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.datos">
-            <input
-              type="radio"
-              id="rd2"
-              name="rd"
-              style="visibility: hidden;"
-            />
-            <label class="tab-label" for="rd2"
-              >Políticas de tratamiento de datos</label
-            >
+            <input id="tab-two" type="checkbox" name="tabs" />
+            <label for="tab-two">Políticas de tratamiento de datos</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.datos"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.devolucion">
-            <input
-              type="radio"
-              id="rd3"
-              name="rd"
-              style="visibility: hidden;"
-            />
-            <label class="tab-label" for="rd3"
-              >Politica de devoluciones / retracto</label
-            >
+            <input id="tab-three" type="checkbox" name="tabs" />
+            <label for="tab-three">Politica de devoluciones / retracto</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.devolucion"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.garantia">
-            <input
-              type="radio"
-              id="rd4"
-              name="rd"
-              style="visibility: hidden;"
-            />
-            <label class="tab-label" for="rd4">Politica de garantia</label>
+            <input id="tab-four" type="checkbox" name="tabs" />
+            <label for="tab-four">Politica de garantia</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.garantia"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.envios">
-            <input
-              type="radio"
-              id="rd5"
-              name="rd"
-              style="visibility: hidden;"
-            />
-            <label class="tab-label" for="rd5">Politica de envios</label>
+            <input id="tab-five" type="checkbox" name="tabs" />
+            <label for="tab-five">Politica de envios</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.envios"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.pagos">
-            <input
-              type="radio"
-              id="rd6"
-              name="rd"
-              style="visibility: hidden;"
-            />
-            <label class="tab-label" for="rd6">Politica de envios</label>
+            <input id="tab-six" type="checkbox" name="tabs" />
+            <label for="tab-six">Politica de pagos</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.pagos"></div>
             </div>
-          </div>
-          <div class="tab">
-            <input
-              type="radio"
-              id="rd8"
-              name="rd"
-              style="visibility: hidden;"
-            />
-            <label for="rd8" class="tab-close">Cerrar todo</label>
           </div>
         </div>
       </div>
@@ -276,6 +247,7 @@ export default {
   },
   data() {
     return {
+      checked: false,
       outerVisible: false,
       logo: null,
       email: '',
@@ -325,34 +297,36 @@ export default {
   },
   methods: {
     toSubscribe() {
-      this.$refs.validate
-        .validate()
-        .then((response) => {
-          if (response) {
-            this.toSubscribeResponse = false
-            const params = {
-              correo: this.email,
-              tienda: this.dataStore.tienda.id_tienda,
-            }
-            axios
-              .post('https://templates.komercia.co/api/suscriptores', params)
-              .then((result) => {
-                this.register = 'Tu correo ha sido registrado'
-                this.$message.success('Tu suscripción esta activa')
-                this.email = ''
-                this.toSubscribeResponse = true
-              })
-              .catch(
-                (result) => (
-                  (this.register = 'Tu correo ya esta registrado'),
-                  this.$message.success('Tu correo ya esta registrado')
+      if (this.checked == true) {
+        this.$refs.validate
+          .validate()
+          .then((response) => {
+            if (response) {
+              this.toSubscribeResponse = false
+              const params = {
+                correo: this.email,
+                tienda: this.dataStore.tienda.id_tienda,
+              }
+              axios
+                .post('https://templates.komercia.co/api/suscriptores', params)
+                .then((result) => {
+                  this.register = 'Tu correo ha sido registrado'
+                  this.$message.success('Tu suscripción esta activa')
+                  this.email = ''
+                  this.toSubscribeResponse = true
+                })
+                .catch(
+                  (result) => (
+                    (this.register = 'Tu correo ya esta registrado'),
+                    this.$message.success('Tu correo ya esta registrado')
+                  )
                 )
-              )
-          }
-        })
-        .catch((e) => {
-          console.log(e)
-        })
+            }
+          })
+          .catch((e) => {
+            console.log(e)
+          })
+      }
     },
   },
   watch: {
@@ -367,9 +341,6 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-footer {
-  --logo_width: 70px;
-}
 .wrapper-footer {
   display: flex;
   justify-content: center;
@@ -422,13 +393,13 @@ div.wrapper-footer {
 }
 .content-logo {
   max-width: var(--logo_width);
+  width: 100%;
 }
 .logo {
-  width: 100%;
+  max-height: 70px;
   object-fit: contain;
-  object-position: center;
+  object-position: left;
 }
-
 .text-top {
   font-size: 18px;
   font-weight: 500;
@@ -536,6 +507,18 @@ div.wrapper-footer {
   background-color: var(--btnhover);
   border: solid 2px var(--btnhover);
 }
+.content-checkbox {
+  margin-top: 3px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.text-checkbox {
+  margin-left: 5px;
+  font-size: 12px;
+  color: black;
+}
 .items-movil {
   display: none;
 }
@@ -588,89 +571,21 @@ div.wrapper-footer {
   width: 100px;
   opacity: 0.7;
 }
-.content-btn-legal {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
-.content-btn-legal > button {
-  max-width: 120px;
-}
-.content-text-legal {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.tabs {
-  overflow: hidden;
-}
-.tab {
-  width: 100%;
-  color: var(--color_text);
-  overflow: hidden;
-}
-.tab-label {
-  display: flex;
-  justify-content: space-between;
-  padding: 1em;
-  background: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-.tab-label:hover {
-  background: white;
-}
-.tab-label::after {
-  content: '\276F';
-  width: 1em;
-  height: 1em;
-  text-align: center;
-  transition: all 0.35s;
-}
-.tab-content {
-  max-height: 0;
-  padding: 0 1em;
-  color: var(--color_subtext);
-  background: rgba(231, 231, 231, 0.74);
-  transition: all 0.35s;
-}
-.tab-close {
-  display: flex;
-  justify-content: flex-end;
-  padding: 1em;
-  font-size: 12px;
-  background: white;
-  cursor: pointer;
-}
-.tab-close:hover {
-  background: white;
-}
-input:checked + .tab-label {
-  background: white;
-}
-input:checked + .tab-label::after {
-  transform: rotate(90deg);
-}
-input:checked ~ .tab-content {
-  max-height: 100vh;
-  padding: 1em;
-}
 #modal-toggle {
   display: none;
 }
 .modal-content::-webkit-scrollbar {
-  background: var(--background_color_1);
-  width: 10px;
+  background: white;
+  width: 5px;
   border-top-right-radius: var(--radius_btn);
   border-bottom-right-radius: var(--radius_btn);
 }
 .modal-content::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px var(--background_color_2);
+  box-shadow: inset 0 0 10px white;
   border-radius: 10px;
 }
 .modal-content::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #9b9b9b, black);
   border-radius: 10px;
 }
 .modal-content,
@@ -708,11 +623,10 @@ input:checked ~ .tab-content {
   margin: auto;
   left: 0;
   right: 0;
-  text-align: center;
   width: 100%;
-  height: 100%;
-  max-height: 500px;
-  max-width: 900px;
+  padding: 10px;
+  max-height: 450px;
+  max-width: 1000px;
 }
 .header-modal {
   width: 100%;
@@ -723,17 +637,16 @@ input:checked ~ .tab-content {
   align-items: center;
 }
 .modal-close-btn {
-  position: absolute;
   display: inline-block;
   cursor: pointer;
   right: 10px;
 }
 .close-icon-modal {
   font-size: 30px;
-  color: var(--color_background_btn);
+  color: black;
 }
 .close-icon-modal:hover {
-  color: var(--btnhover);
+  color: gray;
 }
 .modal-close-btn svg {
   transition: 0.2s;
@@ -741,7 +654,74 @@ input:checked ~ .tab-content {
 .modal-close-btn:hover svg {
   transform: rotate(90deg);
 }
+.tabs {
+  width: 100%;
+  padding: 10px 20px;
+}
+.tab {
+  position: relative;
+  margin-bottom: 5px;
+  width: 100%;
+  color: #000;
+  overflow: hidden;
+}
+.tab input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.tab label {
+  position: relative;
+  display: block;
+  padding: 0 0 0 1em;
+  background: #e6e6e6;
+  font-weight: bold;
+  line-height: 3;
+  cursor: pointer;
+}
+.tab-content {
+  max-height: 0;
+  overflow: hidden;
+  color: black;
+  background: white;
+  border: 1px solid #e6e6e6;
+  -webkit-transition: max-height 0.35s;
+  -o-transition: max-height 0.35s;
+  transition: max-height 0.35s;
+}
+.tab-content div {
+  color: black;
+  margin: 1em;
+}
 
+.tab input:checked ~ .tab-content {
+  max-height: 100vh;
+}
+.tab label::after {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 3em;
+  height: 3em;
+  line-height: 3;
+  text-align: center;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
+.tab input[type='checkbox'] + label::after {
+  content: '+';
+}
+.tab input[type='radio'] + label::after {
+  content: '\25BC';
+}
+.tab input[type='checkbox']:checked + label::after {
+  transform: rotate(315deg);
+}
+.tab input[type='radio']:checked + label::after {
+  transform: rotateX(180deg);
+}
 @media (max-width: 768px) {
   .contenedor {
     padding: 60px 20px 10px;

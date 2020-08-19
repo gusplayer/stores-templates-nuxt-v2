@@ -406,7 +406,7 @@ export default {
 
 <style scoped>
 div.wrapper-productlist {
-  --background_color_1: #eeeeee;
+  --background_color_1: #f2f4f7;
 }
 .wrapper-productlist {
   width: 100%;
@@ -466,7 +466,7 @@ div.wrapper-productlist {
 }
 .text-categorias {
   background: transparent;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 1.4;
   color: var(--color_subtext);
