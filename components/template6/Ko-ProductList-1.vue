@@ -55,20 +55,11 @@
               >
             </BaseAccordian>
           </div>
-          <div class="filtrado-precios">
-            <p class="text-categorias">Precios</p>
-            <p class="text-categoria-precios" @click="SendpriceFalling()">
-              Menor precio
-            </p>
-            <p class="text-categoria-precios" @click="SendPriceUpward()">
-              Mayor precio
-            </p>
-          </div>
         </div>
         <div class="content-item-productos">
           <div class="grid-products">
             <div
-              v-for="product in filterProduct"
+              v-for="product in orderproduct"
               :key="product.id"
               class="content-products"
             >
@@ -100,7 +91,7 @@
 </template>
 
 <script>
-import KoProductCard1 from './_productcard/Ko-ProductCard-1'
+import KoProductCard1 from '../template5/_productcard/Ko-ProductCard-1'
 import BaseAccordian from '../headers/_order1/_AccordionList'
 
 export default {
@@ -187,6 +178,11 @@ export default {
       const initial = this.currentPage * 15 - 15
       const final = initial + 15
       return this.products.slice(initial, final)
+    },
+    orderproduct() {
+      return this.filterProduct.sort(function (prev, next) {
+        return next.orden - prev.orden
+      })
     },
     selectedCategory() {
       return this.$store.state.products.payload
@@ -363,16 +359,6 @@ export default {
         })
       }
     },
-    SendpriceFalling() {
-      this.products = this.products.sort(function (prev, next) {
-        return prev.precio - next.precio
-      })
-    },
-    SendPriceUpward() {
-      this.products = this.products.sort(function (prev, next) {
-        return next.precio - prev.precio
-      })
-    },
   },
   watch: {
     fullProducts(value) {
@@ -504,21 +490,7 @@ div.wrapper-productlist {
   display: flex;
   align-self: flex-start;
 }
-.filtrado-precios {
-  padding: 10px 0px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-}
-.filtrado-precios > p {
-  margin-bottom: 10px;
-}
-.text-categoria-precios {
-  width: 100%;
-  font-size: 16px;
-  color: var(--color_text);
-}
+
 .content-products {
   border-radius: 10px;
 }

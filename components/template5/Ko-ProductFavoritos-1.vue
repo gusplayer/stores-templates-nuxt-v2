@@ -3,7 +3,7 @@
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">Favoritos</p>
     </div>
-    <KoSwipper :products="dataProductFavorite"></KoSwipper>
+    <KoSwipper :products="orderproduct"></KoSwipper>
   </div>
 </template>
 
@@ -21,6 +21,11 @@ export default {
       return this.$store.state.dataStore.productos.filter(
         (product) => product.favorito === 1
       )
+    },
+    orderproduct() {
+      return this.dataProductFavorite.sort(function (prev, next) {
+        return next.orden - prev.orden
+      })
     },
   },
 }

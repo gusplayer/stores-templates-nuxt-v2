@@ -104,7 +104,7 @@
         <div class="content-item-productos">
           <div class="grid-products">
             <div
-              v-for="product in filterProduct"
+              v-for="product in orderproduct"
               :key="product.id"
               class="content-products"
             >
@@ -222,6 +222,11 @@ export default {
       const initial = this.currentPage * 16 - 16
       const final = initial + 16
       return this.products.slice(initial, final)
+    },
+    orderproduct() {
+      return this.filterProduct.sort(function (prev, next) {
+        return next.orden - prev.orden
+      })
     },
     selectedCategory() {
       return this.$store.state.products.payload
