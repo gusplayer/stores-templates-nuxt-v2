@@ -156,9 +156,6 @@ export default {
     fullPathServer() {
       return this.$store.state.fullPathServer
     },
-    settingBytemplatePrueba() {
-      return this.$store.state.settingBytemplatePrueba
-    },
     themeStyleIg() {
       return {
         '--font-style': 'Helvetica',

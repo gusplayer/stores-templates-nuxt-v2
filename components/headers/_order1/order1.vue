@@ -136,7 +136,7 @@
                     <p
                       class="without_shipping_cost"
                       v-if="
-                        rangosByCiudad.envio_metodo === 'gratis' ||
+                        rangosByCiudad.envio_metodo === 'gratis' &&
                         (shippingCities.length <= 0 && getFreeShipping == false)
                       "
                     >
@@ -272,6 +272,12 @@ export default {
       })
       if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
         free = false
+      }
+      if (this.rangosByCiudad.envio_metodo === 'tarifa_plana') {
+        free = true
+      }
+      if (this.rangosByCiudad.envio_metodo === 'precio') {
+        free = true
       }
       return free
     },

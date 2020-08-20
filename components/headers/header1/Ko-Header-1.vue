@@ -8,6 +8,7 @@
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
+              @click="clear"
             />
           </nuxt-link>
         </div>
@@ -246,6 +247,12 @@ export default {
       } else {
         intro.style.display = 'flex'
       }
+      if (name == 'Inicio') {
+        this.clear()
+      }
+      if (name == 'Contacto') {
+        this.showMenu = false
+      }
     },
     closeMenuCategory() {
       var intro = document.getElementById('menu-collapse')
@@ -333,6 +340,7 @@ export default {
       })
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
         data: '',

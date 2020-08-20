@@ -8,6 +8,7 @@
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
+              @click="clear"
             />
           </nuxt-link>
         </div>
@@ -242,6 +243,12 @@ export default {
         intro.style.display = 'none'
       } else {
         intro.style.display = 'flex'
+      }
+      if (name == 'Inicio') {
+        this.clear()
+      }
+      if (name == 'Contacto') {
+        this.showMenu = false
       }
     },
     closeMenuCategory() {

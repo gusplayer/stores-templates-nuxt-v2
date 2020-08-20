@@ -266,6 +266,12 @@ export default {
       if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
         free = false
       }
+      if (this.rangosByCiudad.envio_metodo === 'tarifa_plana') {
+        free = true
+      }
+      if (this.rangosByCiudad.envio_metodo === 'precio') {
+        free = true
+      }
       return free
     },
     rangosByCiudad() {

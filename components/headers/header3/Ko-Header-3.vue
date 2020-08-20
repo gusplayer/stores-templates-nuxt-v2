@@ -11,6 +11,7 @@
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
+              @click="clear"
             />
           </nuxt-link>
         </div>
@@ -203,6 +204,16 @@ export default {
       //     data: '',
       //   })
       // }
+    },
+    clear() {
+      this.$router.push({
+        path: `/`,
+      })
+      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('products/FILTER_BY', {
+        type: 'all',
+        data: '',
+      })
     },
   },
   watch: {
@@ -460,6 +471,7 @@ input::-webkit-input-placeholder {
   line-height: normal;
   letter-spacing: normal;
   color: var(--color_text);
+  cursor: pointer;
 }
 .header-icon-menu > .material-design-icon__svg {
   bottom: 0em;

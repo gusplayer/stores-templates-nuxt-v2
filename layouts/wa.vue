@@ -3,7 +3,6 @@
     <!-- <KoHeaderTest /> -->
     <KoHeaderWp :dataStore="dataStore" />
     <Categories :dataStore="dataStore" />
-    <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
     <nuxt />
     <!-- <KFooter1 :dataStore="dataStore" /> -->
   </div>
@@ -169,10 +168,6 @@ export default {
     fullPathServer() {
       return this.$store.state.fullPathServer
     },
-    settingBytemplatePrueba() {
-      return this.$store.state.settingBytemplatePrueba
-    },
-
     themeStyleWa() {
       return {
         '--font-style': 'Poppins',

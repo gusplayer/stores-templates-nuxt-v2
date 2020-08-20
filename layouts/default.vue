@@ -230,9 +230,6 @@ export default {
     dataStore() {
       return this.$store.state.dataStore
     },
-    settingBytemplatePrueba() {
-      return this.$store.state.settingBytemplatePrueba
-    },
     headerTemplate() {
       let headerComponent = ''
       switch (this.template) {
