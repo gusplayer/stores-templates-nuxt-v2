@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-contact">
+  <div class="wrapper-contact" :style="settingsTemplate">
     <div class="contact">
       <div class="contact-content">
         <div>
@@ -200,6 +200,23 @@ export default {
       ],
     }
   },
+  computed: {
+    settingsTemplate() {
+      return this.$store.state.settingByTemplate
+    },
+    settingBase() {
+      return {
+        '--background_color_2': '#fff',
+        '--background_color_2': '#e4e4e4',
+        '--color_background_btn': '#25dac5',
+        '--color_border': 'rgba(110, 110, 133, 0.342)',
+        '--color_icon': '#25dac5',
+        '--color_text': ' #1e0e62',
+        '--color_subtext': 'rgba(21, 20, 57, 0.541)',
+        '--color_text_btn': '#000',
+      }
+    },
+  },
   destroyed() {
     this.nombre = ''
     this.email = ''
@@ -246,15 +263,12 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-contact {
-  --background_color_1: #f2f4f7;
-}
 .wrapper-contact {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   box-sizing: border-box;
 }
 .contact {
@@ -404,7 +418,7 @@ div.wrapper-contact {
 .separator {
   margin-top: 15px;
   width: 100%;
-  border: solid 1.5px var(--background_color_2);
+  border: solid 1.5px var(--color_border);
 }
 .text-icon {
   display: flex;
@@ -415,7 +429,7 @@ div.wrapper-contact {
 }
 .contact-content-rigth {
   border-radius: 10px;
-  background-color: var(--background_color_2);
+  background-color: var(--background_color_1);
   padding: 30px 30px 50px 30px;
   margin-top: 20px;
 }
@@ -456,6 +470,7 @@ div.wrapper-contact {
 }
 .input-text::placeholder {
   color: var(--color_subtext);
+
   opacity: 0.7;
 }
 .input-text:-internal-autofill-selected {
@@ -467,7 +482,7 @@ div.wrapper-contact {
 .input-text:focus,
 .input-text:active {
   outline: 0;
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_border);
 }
 .input-text-rectangule {
   font-size: 14px;
@@ -494,7 +509,7 @@ div.wrapper-contact {
 .input-text-rectangule:focus,
 .input-text-rectangule:active {
   outline: 0;
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_border);
 }
 .text-error {
   font-size: 12px;
@@ -505,7 +520,7 @@ div.wrapper-contact {
 .btn {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   padding: 8px 14px;
   font-size: 14px;

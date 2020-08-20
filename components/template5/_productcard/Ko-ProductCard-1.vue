@@ -291,10 +291,6 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-card {
-  --color_subtext: #000;
-  --color_text_btn: #fff;
-}
 .separador {
   margin: 30px;
 }
@@ -306,7 +302,6 @@ div.wrapper-card {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background: var(--background_color_2); */
   background: white;
   box-sizing: border-box;
   border-radius: 10px;
@@ -401,7 +396,6 @@ div.wrapper-card {
   font-style: normal;
   line-height: 1.3;
   text-align: center;
-  /* letter-spacing: 1px; */
   color: var(--color_text);
   font-weight: 400;
 }
@@ -459,8 +453,8 @@ div.wrapper-card {
 .btn {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
-  border: solid 1px var(--color_text);
-  background-color: var(--color_text);
+  border: solid 1px var(--color_background_btn);
+  background-color: var(--color_background_btn);
   padding: 8px 14px;
   font-size: 14px;
   width: 120px;

@@ -768,9 +768,8 @@ div.wrapper-cart {
   transition: all 200ms ease-in;
 }
 .btn2:hover {
-  color: var(--btnhover2);
-  border: solid 2px var(--btnhover2);
-  background-color: transparent;
+  color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 .contenedor-vacio {
   display: flex;
@@ -794,9 +793,8 @@ div.wrapper-cart {
   transition: all 200ms ease-in;
 }
 .btn3:hover {
-  color: var(--btnhover2);
-  border: solid 2px var(--btnhover2);
-  background-color: transparent;
+  color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 .products_list_resposive {
   display: none;

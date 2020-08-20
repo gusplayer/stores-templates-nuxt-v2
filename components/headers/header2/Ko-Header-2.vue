@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container">
+  <div class="header-container" :style="settingsTemplate">
     <div class="wrapper-header" @click="closeMenuCategory">
       <div class="header">
         <KoOrder :dataStore="dataStore" />
@@ -134,6 +134,7 @@ export default {
   name: 'Ko-Header-2',
   props: {
     dataStore: Object,
+    settingsTemplate: Object,
   },
   mounted() {
     this.toggle = true
@@ -407,9 +408,6 @@ export default {
 </script>
 
 <style scoped>
-div.header-container {
-  --background_color_2: #f2f4f7;
-}
 .header-container {
   width: 100%;
   height: 88px;
@@ -484,7 +482,7 @@ div.header-container {
   border-radius: 10px;
 }
 .menu-grid::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #e6e6e6, var(--color_icon));
   border-radius: 10px;
 }
 .name-category-all {
@@ -515,6 +513,7 @@ div.header-container {
   margin-left: 5px;
   font-size: 14px;
   font-weight: 100;
+  color: var(--color_subtext);
 }
 .subcategoria li:hover {
   color: var(--color_hover_text);
@@ -600,7 +599,7 @@ div.header-container {
   box-sizing: border-box;
   width: 35px;
   height: 35px;
-  border: var(--color_shopping_cart) 2px solid;
+  border: var(--color_icon) 2px solid;
   border-radius: 50%;
   padding-bottom: 3px;
   margin-left: 20px;
@@ -613,8 +612,8 @@ div.header-container {
   right: -5px;
   top: -5px;
   color: var(--background_color_1);
-  background-color: var(--color_shopping_cart);
-  border: var(--color_shopping_cart) 1px;
+  background-color: var(--color_icon);
+  border: var(--color_icon) 1px;
   border-radius: 10px;
   line-height: 1;
   display: flex;
@@ -676,8 +675,8 @@ div.header-container {
 .btn {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
-  border: solid 1px var(--color_text);
-  background-color: var(--color_text);
+  border: solid 1px var(--color_background_btn);
+  background-color: var(--color_background_btn);
   color: white;
   padding: 8px 14px;
   font-size: 14px;
@@ -717,7 +716,7 @@ input[type='search'] {
   background: transparent
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
-  border: solid 2px var(--color_shopping_cart);
+  border: solid 2px var(--color_icon);
   padding: 6px 6px;
   width: 35px;
   -webkit-border-radius: 10em;

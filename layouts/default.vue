@@ -5,12 +5,20 @@
         this.$store.state.settingByTemplate &&
         this.$store.state.settingByTemplate.tipo_letra
           ? this.$store.state.settingByTemplate.tipo_letra
-          : 'Roboto',
+          : 'Poppins',
     }"
   >
-    <component :dataStore="dataStore" :is="headerTemplate" />
+    <component
+      :dataStore="dataStore"
+      :settingsTemplate="settingsTemplate ? settingsTemplate : settingBase"
+      :is="headerTemplate"
+    />
     <nuxt />
-    <component :dataStore="dataStore" :is="footerTemplate" />
+    <component
+      :dataStore="dataStore"
+      :settingsTemplate="settingsTemplate ? settingsTemplate : settingBase"
+      :is="footerTemplate"
+    />
     <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
       <div @click="redirectWhatsapp()">
         <koWhatsapp class="button-whatsapp" /><span
@@ -266,11 +274,23 @@ export default {
       }
       return footerComponent
     },
+    analytics_tagmanager() {
+      return this.$store.state.analytics_tagmanager
+    },
     settingsTemplate() {
       return this.$store.state.settingByTemplate
     },
-    analytics_tagmanager() {
-      return this.$store.state.analytics_tagmanager
+    settingBase() {
+      return {
+        '--background_color_1': '#fff',
+        '--background_color_2': '#e4e4e4',
+        '--color_background_btn': '#25dac5',
+        '--color_border': 'rgba(110, 110, 133, 0.342)',
+        '--color_icon': '#25dac5',
+        '--color_text': ' #1e0e62',
+        '--color_subtext': 'rgba(21, 20, 57, 0.541)',
+        '--color_text_btn': '#000',
+      }
     },
   },
   methods: {
@@ -378,6 +398,34 @@ export default {
   text-decoration: none;
   box-sizing: border-box;
   outline: none !important;
+}
+
+::-webkit-scrollbar {
+  border: 1px solid rgb(172, 172, 172);
+  background: transparent;
+  width: 13px;
+  border-top-right-radius: var(--radius_btn);
+  border-bottom-right-radius: var(--radius_btn);
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px white;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    170deg,
+    rgba(145, 145, 145, 1) 0%,
+    rgb(54, 54, 54) 76%
+  );
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    170deg,
+    rgb(102, 102, 102) 0%,
+    rgba(0, 0, 0, 1) 76%
+  );
+  border-radius: 10px;
 }
 .wrapper-whatsapp {
   position: fixed;

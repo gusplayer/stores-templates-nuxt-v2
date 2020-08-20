@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="home">
+  <div class="home" :style="settingsTemplate ? settingsTemplate : settingBase">
     <div class="space-search"></div>
     <div class="search-movil" id="navbar">
       <form id="demo-1" style="width: 100%;">
@@ -73,9 +73,20 @@ export default {
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },
-
-    fullPathServer() {
-      return this.$store.state.fullPathServer
+    settingsTemplate() {
+      return this.$store.state.settingByTemplate
+    },
+    settingBase() {
+      return {
+        '--background_color_1': '#fff',
+        '--background_color_2': '#e4e4e4',
+        '--color_background_btn': '#25dac5',
+        '--color_border': 'rgba(110, 110, 133, 0.342)',
+        '--color_icon': '#25dac5',
+        '--color_text': ' #1e0e62',
+        '--color_subtext': 'rgba(21, 20, 57, 0.541)',
+        '--color_text_btn': '#000',
+      }
     },
   },
   methods: {

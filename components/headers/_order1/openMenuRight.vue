@@ -24,6 +24,7 @@
               <BaseAccordian>
                 <template v-slot:categorias>
                   <li
+                    class="text-categoria"
                     @click="
                       sendCategory(categoria, categoria.id, (ref = false))
                     "
@@ -262,12 +263,11 @@ export default {
   }
   .order_header_close {
     font-size: 30px;
-    color: black;
+    color: var(--color_icon);
     transition: 0.3s;
     cursor: pointer;
   }
   .order_header_close:hover {
-    transform: rotate(90deg);
     color: gray;
   }
   .wrapper-category-all {

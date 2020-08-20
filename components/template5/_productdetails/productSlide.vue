@@ -122,8 +122,8 @@ export default {
   grid-gap: 5px;
 }
 .youtube__action_back {
-  background-color: var(--button_color);
-  color: var(--button_text_color);
+  background-color: var(--color_background_btn);
+  color: var(--color_text_btn);
   border-style: none;
   outline: none;
 }

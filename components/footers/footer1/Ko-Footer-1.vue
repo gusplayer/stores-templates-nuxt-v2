@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-footer">
+  <div class="wrapper-footer" ref="background" :style="settingsTemplate">
     <div class="contenedor">
       <div class="content-items-iconos">
         <div
@@ -22,6 +22,12 @@
       <a href="https://komercia.co/">
         <img
           src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
+          v-if="logo"
+          class="logo2"
+        />
+        <img
+          src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png"
+          v-else
           class="logo2"
         />
       </a>
@@ -90,9 +96,16 @@ export default {
   name: 'Ko-Footer-1',
   props: {
     dataStore: Object,
+    settingsTemplate: Object,
+  },
+  mounted() {
+    if (this.settingsTemplate) {
+      this.setLogo()
+    }
   },
   data() {
     return {
+      logo: null,
       links: [
         {
           nombre: 'Facebook',
@@ -117,14 +130,40 @@ export default {
       ],
     }
   },
-
-  methods: {},
+  computed: {
+    colorCSSlogo() {
+      return this.settingsTemplate['--background_color_1']
+    },
+  },
+  methods: {
+    setLogo() {
+      let color = getComputedStyle(this.$refs.background).getPropertyValue(
+        '--background_color_1'
+      )
+      let colorArray = color.split(',')
+      let colorInt = parseInt(colorArray[2])
+      if (colorInt > 50) {
+        this.logo = true
+      } else {
+        this.logo = false
+      }
+    },
+  },
   watch: {
     'dataStore.tienda'() {
       this.links[0].link = this.dataStore.tienda.red_facebook
       this.links[1].link = this.dataStore.tienda.red_twitter
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
+    },
+    colorCSSlogo(value) {
+      let colorArray = value.split(',')
+      let colorInt = parseInt(colorArray[2])
+      if (colorInt > 50) {
+        this.logo = true
+      } else {
+        this.logo = false
+      }
     },
   },
 }
@@ -194,7 +233,6 @@ export default {
 .contenedor-term-con {
   width: 100%;
   display: flex;
-  /* flex-direction: row; */
   justify-content: center;
   align-items: center;
   margin-bottom: 5px;
@@ -326,6 +364,7 @@ export default {
   display: block;
   padding: 0 0 0 1em;
   background: #e6e6e6;
+  color: var(--color_text);
   font-weight: bold;
   line-height: 3;
   cursor: pointer;
@@ -361,6 +400,7 @@ export default {
   transition: all 0.35s;
 }
 .tab input[type='checkbox'] + label::after {
+  color: var(--color_subtext);
   content: '+';
 }
 .tab input[type='radio'] + label::after {

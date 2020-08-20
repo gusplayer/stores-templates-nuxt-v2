@@ -539,7 +539,6 @@ div.wrapper-productlist {
   margin-right: 2px;
   cursor: pointer;
   display: flex;
-  align-self: flex-start;
 }
 .text-categorias-select {
   background: transparent;
@@ -554,7 +553,6 @@ div.wrapper-productlist {
   cursor: pointer;
   opacity: 0.6;
   display: flex;
-  align-self: flex-start;
 }
 .dropdown-content {
   display: none;

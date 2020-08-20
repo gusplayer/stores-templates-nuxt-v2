@@ -411,15 +411,12 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-productlist {
-  --background_color_1: #f2f4f7;
-}
 .wrapper-productlist {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   box-sizing: border-box;
 }
 .container {
@@ -480,7 +477,6 @@ div.wrapper-productlist {
   margin-right: 2px;
   cursor: pointer;
   display: flex;
-  align-self: flex-start;
 }
 .text-categorias-select {
   background: transparent;
@@ -494,7 +490,6 @@ div.wrapper-productlist {
   cursor: pointer;
   opacity: 0.6;
   display: flex;
-  align-self: flex-start;
 }
 
 .content-products {

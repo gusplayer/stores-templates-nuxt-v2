@@ -29,7 +29,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: #eef1f4;
+  background: var(--background_color_2);
 }
 .header-content-logo {
   display: flex;
@@ -45,9 +45,5 @@ export default {
   height: 100%;
   object-fit: hover;
   object-position: center;
-}
-.wrapper-logo-background {
-  background: var(--purple);
-  min-height: 400px;
 }
 </style>

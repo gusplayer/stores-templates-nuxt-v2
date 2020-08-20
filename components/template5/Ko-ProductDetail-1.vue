@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-productDetail">
+  <div class="wrapper-productDetail" :style="settingsTemplate">
     <div v-if="loading" v-loading="loading"></div>
     <div class="container-productDetail" v-else>
       <div class="section">
@@ -304,6 +304,21 @@ export default {
             this.data.detalle.categoria_producto.nombre_categoria_producto &&
           product.id !== this.data.detalle.id
       )
+    },
+    settingsTemplate() {
+      return this.$store.state.settingByTemplate
+    },
+    settingBase() {
+      return {
+        '--background_color_2': '#fff',
+        '--background_color_2': '#e4e4e4',
+        '--color_background_btn': '#25dac5',
+        '--color_border': 'rgba(110, 110, 133, 0.342)',
+        '--color_icon': '#25dac5',
+        '--color_text': ' #1e0e62',
+        '--color_subtext': 'rgba(21, 20, 57, 0.541)',
+        '--color_text_btn': '#000',
+      }
     },
   },
   methods: {
@@ -637,13 +652,10 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-productDetail {
-  --background_color_1: #f2f4f7;
-}
 .wrapper-productDetail {
   display: flex;
   width: 100%;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   justify-content: center;
   align-items: center;
 }
@@ -744,7 +756,7 @@ div.wrapper-productDetail {
   width: 100%;
   flex-direction: column;
   padding-bottom: 10px;
-  border-left: 1px solid rgba(21, 20, 57, 0.16);
+  border-left: 1px solid var(--color_border);
 }
 .content-right {
   margin-left: 20px;
@@ -877,7 +889,7 @@ i.close {
 .btn {
   border-radius: var(--radius_btn);
   color: var(--color_text_btn);
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   padding: 6px 14px;
   width: 238px;
@@ -959,7 +971,7 @@ i.close {
 .features {
   width: 100%;
   display: flex;
-  border-top: 1px solid rgba(21, 20, 57, 0.16);
+  border-top: 1px solid var(--color_border);
 }
 .responsive-purchase {
   display: none;
@@ -1172,7 +1184,7 @@ i.close {
   .btn-responsive {
     border-radius: var(--radius_btn);
     color: var(--color_text_btn);
-    border: solid 0px var(--color_border_btn);
+    border: solid 0px var(--color_background_btn);
     background-color: var(--color_background_btn);
     padding: 6px 10px;
     width: 100%;
@@ -1202,6 +1214,9 @@ i.close {
     text-align: center;
     padding: 5px 5px;
     text-transform: capitalize;
+  }
+  .features {
+    border-top: none;
   }
 }
 

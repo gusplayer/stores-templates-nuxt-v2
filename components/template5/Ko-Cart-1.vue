@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-cart" ref="color">
+  <div class="wrapper-cart" ref="color" :style="settingsTemplate">
     <div class="contenedor" v-if="this.productsCart.length">
       <ul class="products_list">
         <li
@@ -318,6 +318,7 @@
 <script>
 export default {
   name: 'Ko-Cart-1',
+
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch('GET_CITIES')
@@ -399,6 +400,21 @@ export default {
         }
       } else {
         return 0
+      }
+    },
+    settingsTemplate() {
+      return this.$store.state.settingByTemplate
+    },
+    settingBase() {
+      return {
+        '--background_color_2': '#fff',
+        '--background_color_2': '#e4e4e4',
+        '--color_background_btn': '#25dac5',
+        '--color_border': 'rgba(110, 110, 133, 0.342)',
+        '--color_icon': '#25dac5',
+        '--color_text': ' #1e0e62',
+        '--color_subtext': 'rgba(21, 20, 57, 0.541)',
+        '--color_text_btn': '#000',
       }
     },
   },
@@ -490,16 +506,12 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-cart {
-  --background_color_1: #f2f4f7;
-}
-
 .wrapper-cart {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   box-sizing: border-box;
   flex-direction: column;
   padding-bottom: 10px;
@@ -524,7 +536,7 @@ div.wrapper-cart {
 .wrapper_item {
   width: 100%;
   display: flex;
-  background-color: var(--background_color_1);
+  background-color: var(--background_color_2);
   padding: 20px 0px;
   border-top: 1px solid var(--color_border);
 }
@@ -600,7 +612,7 @@ div.wrapper-cart {
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   border-style: solid;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   height: 41px;
   width: 3em;
   box-sizing: border-box;
@@ -612,7 +624,7 @@ div.wrapper-cart {
   padding-left: 10px;
   padding-right: 10px;
   border-style: solid none solid none;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   height: 41px;
   width: 2.5em;
   justify-content: center;
@@ -625,7 +637,7 @@ div.wrapper-cart {
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   border-style: solid;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   height: 41px;
   width: 3em;
   box-sizing: border-box;
@@ -728,7 +740,7 @@ div.wrapper-cart {
   max-height: 150px;
 }
 ::-webkit-scrollbar {
-  background: var(--background_color_1);
+  background: transparent;
   width: 5px;
 }
 ::-webkit-scrollbar-track {
@@ -777,7 +789,7 @@ div.wrapper-cart {
 .btn1 {
   border-radius: var(--radius_btn);
   color: var(--color_text_btn);
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   padding: 8px 12px;
   width: 100%;
@@ -793,8 +805,8 @@ div.wrapper-cart {
 }
 .btn2 {
   border-radius: var(--radius_btn);
-  color: var(--color_background_btn_2);
-  border: solid 2px var(--color_background_btn_2);
+  color: var(--color_background_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: transparent;
   padding: 8px 0px;
   text-align: center;
@@ -806,9 +818,8 @@ div.wrapper-cart {
   transition: all 200ms ease-in;
 }
 .btn2:hover {
-  color: var(--btnhover2);
-  border: solid 2px var(--btnhover2);
-  background-color: transparent;
+  color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 .contenedor-vacio {
   display: flex;
@@ -822,8 +833,8 @@ div.wrapper-cart {
 }
 .btn3 {
   border-radius: var(--radius_btn);
-  color: var(--color_background_btn_2);
-  border: solid 2px var(--color_background_btn_2);
+  color: var(--color_background_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: transparent;
   padding: 8px 12px;
   font-size: 14px;
@@ -833,9 +844,8 @@ div.wrapper-cart {
   transition: all 200ms ease-in;
 }
 .btn3:hover {
-  color: var(--btnhover2);
-  border: solid 2px var(--btnhover2);
-  background-color: transparent;
+  color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 .products_list_resposive {
   display: none;

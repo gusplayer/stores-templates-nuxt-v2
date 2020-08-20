@@ -488,7 +488,7 @@ export default {
 }
 .order_header_close {
   font-size: 30px;
-  color: black;
+  color: var(--color_icon);
   cursor: pointer;
 }
 .order_header_close:hover {
@@ -512,7 +512,7 @@ export default {
   list-style: none;
 }
 .order_products_list::-webkit-scrollbar {
-  background: var(--background_color_1);
+  background: transparent;
   width: 6px;
 }
 .order_products_list::-webkit-scrollbar-track {
@@ -520,7 +520,7 @@ export default {
   border-radius: 10px;
 }
 .order_products_list::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #e6e6e6, var(--color_icon));
   border-radius: 10px;
 }
 .order_products_list_item {
@@ -532,7 +532,7 @@ export default {
   overflow-x: auto;
 }
 .order_products_list_item::-webkit-scrollbar {
-  background: var(--background_color_1);
+  background: transparent;
   width: 6px;
   max-height: 8px;
 }
@@ -541,7 +541,7 @@ export default {
   border-radius: 10px;
 }
 .order_products_list_item::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #e6e6e6, var(--color_icon));
   border-radius: 10px;
 }
 .order_products_list_item .photo {
@@ -578,7 +578,7 @@ export default {
 .order-combincacion-uni {
   border-radius: 10px;
   border: 1px solid white;
-  background-color: var(--color_shopping_cart);
+  background-color: var(--color_icon);
   color: #fff;
 }
 .order-combincacion-text {
@@ -588,7 +588,7 @@ export default {
 }
 .price {
   min-width: 60px;
-  color: var(--color_shopping_cart);
+  color: var(--color_subtext);
   font-size: 16px;
 }
 .order_products_list_item .material-icons.delete {
@@ -674,12 +674,12 @@ export default {
 .btn-remover-yes {
   font-weight: bold;
   border-style: none;
-  background-color: var(--color_shopping_cart);
+  background-color: var(--color_icon);
   padding: 4px 10px;
   width: 100%;
   max-width: 70px;
   color: var(--color_text_btn);
-  border: 2px solid var(--color_shopping_cart);
+  border: 2px solid var(--color_icon);
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -688,7 +688,6 @@ export default {
 }
 .btn-remover-yes:hover {
   background-color: var(--btnhover);
-  color: var(--color_text_btn);
   border: 2px solid var(--btnhover);
 }
 .btn-remover-no {
@@ -698,8 +697,8 @@ export default {
   padding: 4px 10px;
   width: 100%;
   max-width: 80px;
-  color: var(--btnhover);
-  border: 2px solid var(--btnhover);
+  color: red;
+  border: 2px solid red;
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -707,8 +706,8 @@ export default {
   transition: all ease 0.3s;
 }
 .btn-remover-no:hover {
-  color: var(--color_shopping_cart);
-  border: 2px solid var(--color_shopping_cart);
+  color: var(--color_icon);
+  border: 2px solid var(--color_icon);
 }
 .order_total {
   border-top: 1px solid var(--background_color_2);
@@ -740,7 +739,7 @@ export default {
   margin-right: 5px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar {
-  background: var(--background_color_1);
+  background: transparent;
   width: 4px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar-track {
@@ -748,7 +747,7 @@ export default {
   border-radius: 10px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #e6e6e6, var(--color_icon));
   border-radius: 10px;
 }
 .without_shipping_cost {
@@ -784,7 +783,7 @@ export default {
   max-width: 340px;
   border-radius: var(--radius_btn);
   color: var(--color_text_btn);
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   font-size: 14px;
   font-weight: bold;
@@ -812,8 +811,8 @@ export default {
   padding: 8px 10px;
   width: 100%;
   max-width: 340px;
-  color: var(--color_shopping_cart);
-  border: 2px solid var(--color_shopping_cart);
+  color: var(--color_background_btn);
+  border: 2px solid var(--color_background_btn);
   border-radius: var(--radius_btn);
   font-size: 14px;
   letter-spacing: 1px;

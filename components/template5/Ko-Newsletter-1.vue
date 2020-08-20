@@ -168,7 +168,7 @@ div.wrapper_newsletter {
 .input-text:focus,
 .input-text:active {
   outline: 0;
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_border);
 }
 .content-input-error {
   display: flex;
@@ -183,7 +183,7 @@ div.wrapper_newsletter {
 .btn {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   padding: 8px 14px;
   font-size: 14px;

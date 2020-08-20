@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container">
+  <div class="header-container" :style="settingsTemplate">
     <div class="wrapper-header">
       <div class="header">
         <KoOrder :dataStore="dataStore" />
@@ -64,6 +64,7 @@ export default {
   name: 'Ko-Header-3',
   props: {
     dataStore: Object,
+    settingsTemplate: Object,
   },
   mounted() {
     this.toggle = true
@@ -238,9 +239,6 @@ export default {
 </script>
 
 <style scoped>
-div.header-container {
-  --background_color_2: #f2f4f7;
-}
 .header-container {
   width: 100%;
   height: 91px;
@@ -352,7 +350,7 @@ div.header-container {
   box-sizing: border-box;
   width: 35px;
   height: 35px;
-  border: var(--color_shopping_cart) 2px solid;
+  border: var(--color_icon) 2px solid;
   border-radius: 50%;
   padding-bottom: 3px;
   margin-left: 20px;
@@ -365,8 +363,8 @@ div.header-container {
   right: -5px;
   top: -5px;
   color: var(--background_color_1);
-  background-color: var(--color_shopping_cart);
-  border: var(--color_shopping_cart) 1px;
+  background-color: var(--color_icon);
+  border: var(--color_icon) 1px;
   border-radius: 10px;
   line-height: 1;
   display: flex;
@@ -407,7 +405,7 @@ input[type='search'] {
   background: transparent
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
-  border: solid 2px var(--color_shopping_cart);
+  border: solid 2px var(--color_icon);
   padding: 6px 6px;
   width: 35px;
   -webkit-border-radius: 10em;

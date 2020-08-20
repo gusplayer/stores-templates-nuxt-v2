@@ -32,13 +32,10 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-ProductFavoritos {
-  --background_color_1: #f2f4f7;
-}
 .wrapper-ProductFavoritos {
   display: flex;
   width: 100%;
-  background-color: var(--background_color_1);
+  background-color: var(--background_color_2);
   flex-direction: column;
   justify-content: center;
   align-items: center;
