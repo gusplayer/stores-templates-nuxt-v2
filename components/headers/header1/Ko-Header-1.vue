@@ -308,7 +308,6 @@ export default {
         path: `/`,
       })
       this.showMenu = false
-      this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
@@ -350,18 +349,7 @@ export default {
       this.nameCategory = ''
     },
     Searchproduct(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
+      this.$store.commit('SET_SEARCHVALUE', search)
     },
     getSearch(value) {
       if (value) {
@@ -375,17 +363,6 @@ export default {
       let UrlCategory = category.replace(/-/g, ' ')
       let urlFiltrada = decodeURIComponent(UrlCategory)
       this.search = urlFiltrada
-      // if (urlFiltrada.length) {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'search',
-      //     data: urlFiltrada,
-      //   })
-      // } else {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'all',
-      //     data: '',
-      //   })
-      // }
     },
   },
   watch: {

@@ -222,9 +222,13 @@ export const state = () => ({
   },
   analytics_tagmanager: '',
   dataCookies: false,
+  searchValue: '',
 })
 
 export const mutations = {
+  SET_SEARCHVALUE(state, value) {
+    state.searchValue = value
+  },
   SET_ACCESSTOKEN(state, value) {
     state.accessToken = value
   },

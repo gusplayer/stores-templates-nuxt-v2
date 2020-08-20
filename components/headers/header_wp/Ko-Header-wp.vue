@@ -317,18 +317,7 @@ export default {
       this.nameCategory = ''
     },
     Searchproduct(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
+      this.$store.commit('SET_SEARCHVALUE', search)
     },
   },
   watch: {

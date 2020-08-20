@@ -199,6 +199,9 @@ export default {
     nameSubCategoryHeader() {
       return this.$store.state.subcategory_producto_header
     },
+    searchValue() {
+      return this.$store.state.searchValue
+    },
   },
   methods: {
     back() {
@@ -399,6 +402,9 @@ export default {
       } else if (domain == '/') {
         this.Allcategories()
       }
+    },
+    searchValue(value) {
+      this.Searchproduct(value)
     },
   },
 }
