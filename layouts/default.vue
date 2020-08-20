@@ -282,7 +282,7 @@ export default {
     },
     settingBase() {
       return {
-        '--background_color_1': '#fff',
+        '--background_color_1': 'hsla(173, 0%, 100%, 1)',
         '--background_color_2': '#e4e4e4',
         '--color_background_btn': '#25dac5',
         '--color_border': 'rgba(110, 110, 133, 0.342)',
@@ -365,7 +365,7 @@ export default {
   --magenta: #c52675;
   --yellow: #f2b931;
 
-  --background_color_1: #fff;
+  --background_color_1: hsla(173, 0%, 100%, 1);
   --background_color_2: #e4e4e4;
   --color_background_hover: #cccccc;
 
