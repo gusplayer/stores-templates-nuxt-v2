@@ -44,7 +44,7 @@ export default {
         spaceBetween: 22,
         grabCursor: true,
         autoplay: {
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: false,
         },
         breakpoints: {

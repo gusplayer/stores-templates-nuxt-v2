@@ -12,38 +12,6 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    // link: [
-    //   // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    //   {
-    //     href:
-    //       'https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap',
-    //     rel: 'stylesheet',
-    //   },
-    //   {
-    //     rel: 'stylesheet',
-    //     href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap',
-    //   },
-    //   {
-    //     rel: 'stylesheet',
-    //     href:
-    //       'https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap',
-    //   },
-    //   {
-    //     rel: 'stylesheet',
-    //     href:
-    //       'https://fonts.googleapis.com/css2?family=Cabin:wght@400;600&display=swap',
-    //   },
-    //   {
-    //     rel: 'stylesheet',
-    //     href:
-    //       'https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap',
-    //   },
-    //   {
-    //     rel: 'stylesheet',
-    //     href:
-    //       'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap',
-    //   },
-    // ],
   },
   loading: { color: '#fff' },
 
@@ -71,6 +39,19 @@ export default {
   ],
 
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
+  buildModules: ['nuxt-purgecss'],
+  purgeCSS: {
+    enabled: ({ isDev, isClient }) => !isDev && isClient,
+    paths: ['components/**/*.vue', 'layouts/**/*.vue', 'pages/**/*.vue'],
+    styleExtensions: ['.css'],
+    whitelist: ['body', 'html', 'nuxt-progress'],
+    extractors: [
+      {
+        extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
+        extensions: ['html', 'vue', 'js'],
+      },
+    ],
+  },
   debug: {
     enabled: true,
   },
