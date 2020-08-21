@@ -67,6 +67,7 @@ export default {
     { src: '~/plugins/vue-carrusel.js', ssr: false },
     { src: '~plugins/ga.js', mode: 'client' },
     { src: '~/plugins/gtm', mode: 'client' },
+    { src: '~/plugins/facebook-pixel', mode: 'client' },
   ],
 
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
