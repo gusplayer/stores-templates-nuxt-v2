@@ -223,6 +223,16 @@ export const state = () => ({
   analytics_tagmanager: '',
   dataCookies: false,
   searchValue: '',
+  settingBase: {
+    '--background_color_1': 'hsla(173, 0%, 100%, 1)',
+    '--background_color_2': '#efefef',
+    '--color_background_btn': '#000000',
+    '--color_border': 'rgba(127, 127, 139, 0.342)',
+    '--color_icon': '#25dac5',
+    '--color_text': ' #1e0e62',
+    '--color_subtext': 'rgba(21, 20, 57, 0.541)',
+    '--color_text_btn': '#ffffff',
+  },
 })
 
 export const mutations = {

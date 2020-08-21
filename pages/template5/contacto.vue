@@ -1,6 +1,14 @@
 <template lang="html">
   <div class="home">
-    <KoContact :dataStore="dataStore" />
+    <KoContact
+      :dataStore="dataStore"
+      :settingByTemplate="
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate['--background_color_1']
+          ? this.$store.state.settingByTemplate
+          : this.settingBase
+      "
+    />
   </div>
 </template>
 
@@ -14,6 +22,9 @@ export default {
   computed: {
     dataStore() {
       return this.$store.state.dataStore
+    },
+    settingBase() {
+      return this.$store.state.settingBase
     },
   },
 }

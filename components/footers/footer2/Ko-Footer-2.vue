@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-footer" ref="background" :style="settingsTemplate">
+  <div class="wrapper-footer" ref="background" :style="settingByTemplate">
     <div class="contenedor">
       <div class="top-footer">
         <div class="wrapper-logo">
@@ -246,7 +246,7 @@ export default {
   name: 'Ko-Footer-1',
   props: {
     dataStore: Object,
-    settingsTemplate: Object,
+    settingByTemplate: Object,
   },
   components: {
     ValidationObserver,
@@ -254,7 +254,7 @@ export default {
   },
   computed: {
     colorCSSlogo() {
-      return this.settingsTemplate['--background_color_1']
+      return this.settingByTemplate['--background_color_1']
     },
   },
   data() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container" :style="settingsTemplate">
+  <div class="header-container" :style="settingByTemplate">
     <div class="wrapper-header" @click="closeMenuCategory">
       <div class="header">
         <KoOrder :dataStore="dataStore" />
@@ -132,7 +132,7 @@ export default {
   name: 'Ko-Header-1',
   props: {
     dataStore: Object,
-    settingsTemplate: Object,
+    settingByTemplate: Object,
   },
   mounted() {
     this.toggle = true

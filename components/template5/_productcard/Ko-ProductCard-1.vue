@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-card">
+  <div class="wrapper-card" :style="settingByTemplate">
     <div class="container">
       <div
         class="wrapper"
@@ -152,7 +152,7 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',
-  props: { product: Object },
+  props: { product: Object, settingByTemplate: Object },
   mounted() {
     this.idSlug = this.product.id
   },

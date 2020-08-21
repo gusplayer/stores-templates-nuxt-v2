@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-productDetail" :style="settingsTemplate">
+  <div class="wrapper-productDetail" :style="settingByTemplate">
     <div v-if="loading" v-loading="loading"></div>
     <div class="container-productDetail" v-else>
       <div class="section">
@@ -218,6 +218,9 @@ import zoom from './_productdetails/zoomImg'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductDetail-1',
+  props: {
+    settingByTemplate: Object,
+  },
   components: {
     selectGroup,
     koDescription,
@@ -304,21 +307,6 @@ export default {
             this.data.detalle.categoria_producto.nombre_categoria_producto &&
           product.id !== this.data.detalle.id
       )
-    },
-    settingsTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    settingBase() {
-      return {
-        '--background_color_2': '#fff',
-        '--background_color_2': '#e4e4e4',
-        '--color_background_btn': '#25dac5',
-        '--color_border': 'rgba(110, 110, 133, 0.342)',
-        '--color_icon': '#25dac5',
-        '--color_text': ' #1e0e62',
-        '--color_subtext': 'rgba(21, 20, 57, 0.541)',
-        '--color_text_btn': '#000',
-      }
     },
   },
   methods: {

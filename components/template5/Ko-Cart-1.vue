@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-cart" ref="color" :style="settingsTemplate">
+  <div class="wrapper-cart" ref="color" :style="settingByTemplate">
     <div class="contenedor" v-if="this.productsCart.length">
       <ul class="products_list">
         <li
@@ -318,7 +318,9 @@
 <script>
 export default {
   name: 'Ko-Cart-1',
-
+  props: {
+    settingByTemplate: Object,
+  },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch('GET_CITIES')
@@ -400,21 +402,6 @@ export default {
         }
       } else {
         return 0
-      }
-    },
-    settingsTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    settingBase() {
-      return {
-        '--background_color_2': '#fff',
-        '--background_color_2': '#e4e4e4',
-        '--color_background_btn': '#25dac5',
-        '--color_border': 'rgba(110, 110, 133, 0.342)',
-        '--color_icon': '#25dac5',
-        '--color_text': ' #1e0e62',
-        '--color_subtext': 'rgba(21, 20, 57, 0.541)',
-        '--color_text_btn': '#000',
       }
     },
   },

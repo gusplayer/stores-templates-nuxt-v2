@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-footer" ref="background" :style="settingsTemplate">
+  <div class="wrapper-footer" ref="background" :style="settingByTemplate">
     <div class="contenedor">
       <div class="content-items-iconos">
         <div
@@ -96,10 +96,10 @@ export default {
   name: 'Ko-Footer-1',
   props: {
     dataStore: Object,
-    settingsTemplate: Object,
+    settingByTemplate: Object,
   },
   mounted() {
-    if (this.settingsTemplate) {
+    if (this.settingByTemplate) {
       this.setLogo()
     }
   },
@@ -130,11 +130,6 @@ export default {
       ],
     }
   },
-  computed: {
-    colorCSSlogo() {
-      return this.settingsTemplate['--background_color_1']
-    },
-  },
   methods: {
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
@@ -156,7 +151,10 @@ export default {
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
     },
-    colorCSSlogo(value) {
+    settingByTemplate(value) {
+      let color = getComputedStyle(this.$refs.background).getPropertyValue(
+        '--background_color_1'
+      )
       let colorArray = value.split(',')
       let colorInt = parseInt(colorArray[2])
       if (colorInt > 50) {

@@ -5,18 +5,28 @@
         this.$store.state.settingByTemplate &&
         this.$store.state.settingByTemplate.tipo_letra
           ? this.$store.state.settingByTemplate.tipo_letra
-          : 'Poppins',
+          : 'Roboto',
     }"
   >
     <component
       :dataStore="dataStore"
-      :settingsTemplate="settingsTemplate ? settingsTemplate : settingBase"
+      :settingByTemplate="
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate['--background_color_1']
+          ? this.$store.state.settingByTemplate
+          : this.settingBase
+      "
       :is="headerTemplate"
     />
     <nuxt />
     <component
       :dataStore="dataStore"
-      :settingsTemplate="settingsTemplate ? settingsTemplate : settingBase"
+      :settingByTemplate="
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate['--background_color_1']
+          ? this.$store.state.settingByTemplate
+          : this.settingBase
+      "
       :is="footerTemplate"
     />
     <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
@@ -242,7 +252,7 @@ export default {
       let headerComponent = ''
       switch (this.template) {
         case 3:
-          headerComponent = 'KoHeader1'
+          headerComponent = 'KoHeader2'
           break
         case 5:
           headerComponent = 'KoHeader1'
@@ -277,20 +287,11 @@ export default {
     analytics_tagmanager() {
       return this.$store.state.analytics_tagmanager
     },
-    settingsTemplate() {
-      return this.$store.state.settingByTemplate
-    },
     settingBase() {
-      return {
-        '--background_color_1': 'hsla(173, 0%, 100%, 1)',
-        '--background_color_2': '#e4e4e4',
-        '--color_background_btn': '#25dac5',
-        '--color_border': 'rgba(110, 110, 133, 0.342)',
-        '--color_icon': '#25dac5',
-        '--color_text': ' #1e0e62',
-        '--color_subtext': 'rgba(21, 20, 57, 0.541)',
-        '--color_text_btn': '#000',
-      }
+      return this.$store.state.settingBase
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -365,26 +366,26 @@ export default {
   --magenta: #c52675;
   --yellow: #f2b931;
 
-  --background_color_1: hsla(173, 0%, 100%, 1);
-  --background_color_2: #e4e4e4;
+  /* --background_color_1: hsla(173, 0%, 100%, 1); */
+  /* --background_color_2: #efefef; */
   --color_background_hover: #cccccc;
 
-  --color_text: #1e0e62;
+  /* --color_text: #1e0e62; */
   --color_hover_text: #c52675;
-  --color_subtext: rgba(21, 20, 57, 0.541);
+  /* --color_subtext: rgba(21, 20, 57, 0.541); */
 
   --color_shopping_cart: #25dac5;
-  --color_icon: #25dac5;
+  /* --color_icon: #25dac5; */
 
-  --color_text_btn: #000;
+  /* --color_text_btn: #000; */
   --color_border_btn: #25dac5;
-  --color_background_btn: #25dac5;
+  /* --color_background_btn: #000; */
   --btnhover: #c52675;
 
   --color_background_btn_2: #000;
   --btnhover2: #c52675;
 
-  --color_border: rgba(110, 110, 133, 0.342);
+  /* --color_border: rgba(127, 127, 139, 0.342); */
 
   --logo_width: 120px;
   --radius_btn: 5px;
@@ -415,7 +416,7 @@ export default {
   background: linear-gradient(
     170deg,
     rgba(145, 145, 145, 1) 0%,
-    rgb(54, 54, 54) 76%
+    rgb(102, 102, 102) 76%
   );
   border-radius: 10px;
 }
