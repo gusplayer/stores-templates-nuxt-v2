@@ -265,11 +265,9 @@ export default {
     },
     getFreeShipping() {
       let free = true
-      this.productsCart.filter((product) => {
-        if (product.envio_gratis == 0) {
-          free = false
-        }
-      })
+      if (this.rangosByCiudad.envio_metodo === 'gratis') {
+        free = false
+      }
       if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
         free = false
       }
