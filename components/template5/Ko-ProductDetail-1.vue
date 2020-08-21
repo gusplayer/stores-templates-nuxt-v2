@@ -762,11 +762,10 @@ i.close {
   color: var(--color_text);
 }
 .text-marca {
-  font-size: 10px;
+  font-size: 16px;
   font-stretch: semi-condensed;
   font-style: normal;
   color: var(--color_subtext);
-  /* margin-top: -6px; */
 }
 .text-promocion {
   font-size: 14px;
@@ -908,6 +907,7 @@ i.close {
   position: relative;
   box-sizing: border-box;
   max-width: 240px;
+  margin-bottom: 25px;
 }
 .text-quantity {
   font-size: 14px;
@@ -966,9 +966,9 @@ i.close {
 }
 .container-alerta {
   position: absolute;
-  bottom: -35px;
-  left: 78px;
-  width: 120px;
+  bottom: -32px;
+  left: 95px;
+  width: 130px;
   background-color: rgb(250, 232, 75);
   border: 1px solid rgb(230, 213, 66);
   border-radius: 6px;

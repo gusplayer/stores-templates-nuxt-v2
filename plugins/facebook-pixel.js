@@ -4,13 +4,9 @@ export default ({ app, store }) => {
     store.state.analytics_tagmanager.pixel_facebook
       ? store.state.analytics_tagmanager.pixel_facebook
       : ''
-  /*
-   ** Only run on client-side and only in production mode
-   */
+
   //   if (process.env.NODE_ENV !== 'production') return
-  /*
-   ** Initialize Facebook Pixel Script
-   */
+
   if (process.browser) {
     !(function (f, b, e, v, n, t, s) {
       if (f.fbq) return
@@ -37,7 +33,6 @@ export default ({ app, store }) => {
     )
     fbq('init', pixel_facebook)
     app.router.afterEach((to, from) => {
-      //   console.log('fire pageview', store.state)
       fbq('track', 'PageView')
     })
   }

@@ -53,15 +53,11 @@ export default {
     window.onscroll = function () {
       var currentScrollPos = window.pageYOffset
       if (prevScrollpos > currentScrollPos) {
-        // document.getElementById('navbar').style.left = '0px'
         document.getElementById('navbar').style.zIndex = '3'
         document.getElementById('navbar').style.top = '91px'
-        // document.getElementById('navbar').style.opacity = '1'
       } else {
-        // document.getElementById('navbar').style.left = '-400px'
         document.getElementById('navbar').style.zIndex = '0'
         document.getElementById('navbar').style.top = '52px'
-        // document.getElementById('navbar').style.opacity = '0'
       }
       prevScrollpos = currentScrollPos
     }
@@ -124,7 +120,6 @@ export default {
 .search-movil {
   display: none;
 }
-/* search */
 input {
   outline: none;
 }

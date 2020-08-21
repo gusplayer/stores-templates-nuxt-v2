@@ -498,8 +498,6 @@ export default {
 .content-item > div:nth-child(2) {
   flex: 2;
 }
-
-/* /////////////////filtro categorías///////////// */
 .content-filtrar {
   display: flex;
   flex-direction: row;
@@ -562,8 +560,6 @@ export default {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
-/* ///////categorias//////////// */
 .content-item-catalogo {
   display: flex;
   align-self: baseline;
@@ -605,7 +601,6 @@ export default {
   background: var(--color_background_hover);
   color: var(--color_hover_text);
 }
-/*////// subcategoria //////*/
 .content-item-subcategorie {
   background: var(--color_background_hover);
   padding-right: 10px;
@@ -624,9 +619,6 @@ export default {
   background: var(--color_background_hover);
   color: var(--color_hover_text);
 }
-
-/* ///////productos/////////// */
-
 .content-products {
   border-radius: 10px;
 }
@@ -664,13 +656,8 @@ export default {
   font-weight: bold;
   color: var(--color_subtext);
 }
-/* //////buscador ///////// */
-
 .top-right {
   display: none;
-  /* width: 100%;
-  padding-top: 0px;
-  padding-bottom: 15px; */
 }
 .header-icon-menu {
   font-size: 30px;
@@ -732,8 +719,6 @@ export default {
   height: 28px;
   line-height: 26px;
 }
-
-/* //////paginacion//////// */
 .pagination-medium {
   margin-top: 10px;
   background: transparent;
@@ -757,7 +742,6 @@ export default {
   z-index: 99;
   box-sizing: border-box;
 }
-/* search */
 .search {
   margin-right: 15px;
 }
@@ -803,56 +787,48 @@ export default {
   height: 35px;
 }
 @media (max-width: 1290px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(4, minmax(240px, 2fr));
     grid-gap: 15px;
   }
 }
 @media (max-width: 1265px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(4, minmax(240px, 2fr));
     grid-gap: 10px;
   }
 }
 @media (max-width: 1250px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(250px, 2fr));
     grid-gap: 25px;
   }
 }
 @media (max-width: 1060px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(250px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 1050px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 1020px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 15px;
   }
 }
 @media (max-width: 1010px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 10px;
   }
 }
 @media (max-width: 1000px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 25px;
@@ -860,21 +836,18 @@ export default {
 }
 
 @media (max-width: 790px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 780px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 16px;
   }
 }
 @media (max-width: 775px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 20px;
@@ -882,7 +855,6 @@ export default {
 }
 
 @media (max-width: 770px) {
-  /* ///////productos/////////// */
   .container {
     padding: 0px;
   }
@@ -895,7 +867,6 @@ export default {
   }
   .grid-products {
     grid-template-columns: repeat(2, minmax(10px, 2fr));
-    /* grid-gap: 32px; */
   }
   .dropbtn {
     margin-left: 5px;
@@ -908,12 +879,6 @@ export default {
   }
 }
 @media (max-width: 700px) {
-  /* .top-right {
-    display: initial;
-    width: 100%;
-    padding-top: 0px;
-    padding-bottom: 15px;
-  } */
   .content-items-categorias {
     margin-left: 5px;
     margin-bottom: 0px;
@@ -923,7 +888,6 @@ export default {
 @media (max-width: 450px) {
   .grid-products {
     grid-template-columns: repeat(2, minmax(160px, 1fr));
-    /* grid-gap: 32px; */
   }
   .content-item-productos {
     padding: 5px;

@@ -48,15 +48,11 @@ export default {
     window.onscroll = function () {
       var currentScrollPos = window.pageYOffset
       if (prevScrollpos > currentScrollPos) {
-        // document.getElementById('navbar').style.left = '0px'
         document.getElementById('navbar').style.zIndex = '3'
         document.getElementById('navbar').style.top = '91px'
-        // document.getElementById('navbar').style.opacity = '1'
       } else {
-        // document.getElementById('navbar').style.left = '-400px'
         document.getElementById('navbar').style.zIndex = '0'
         document.getElementById('navbar').style.top = '52px'
-        // document.getElementById('navbar').style.opacity = '0'
       }
       prevScrollpos = currentScrollPos
     }
@@ -101,17 +97,6 @@ export default {
       let UrlCategory = category.replace(/-/g, ' ')
       let urlFiltrada = decodeURIComponent(UrlCategory)
       this.search = urlFiltrada
-      // if (urlFiltrada.length) {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'search',
-      //     data: urlFiltrada,
-      //   })
-      // } else {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'all',
-      //     data: '',
-      //   })
-      // }
     },
   },
   watch: {
@@ -123,13 +108,12 @@ export default {
 </script>
 
 <style>
-.home {
+/* .home {
   overflow: hidden;
 }
 .search-movil {
   display: none;
 }
-/* search */
 input {
   outline: none;
 }
@@ -209,5 +193,5 @@ input::-webkit-input-placeholder {
     top: 91px;
     z-index: 3;
   }
-}
+} */
 </style>

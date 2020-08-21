@@ -302,7 +302,6 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background: white; */
   background: var(--background_color_1);
   box-sizing: border-box;
   border-radius: 10px;
