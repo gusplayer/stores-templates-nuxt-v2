@@ -37,7 +37,7 @@ export default ({ app, store }) => {
     )
     fbq('init', pixel_facebook)
     app.router.afterEach((to, from) => {
-      console.log('fire pageview', store.state)
+      //   console.log('fire pageview', store.state)
       fbq('track', 'PageView')
     })
   }
