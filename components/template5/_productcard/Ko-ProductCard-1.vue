@@ -49,7 +49,7 @@
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
                     >
-                      {{ currency(this.minPrice) }}
+                      {{ this.minPrice | currency }}
                     </p>
 
                     <p class="separator-price">-</p>
@@ -57,7 +57,7 @@
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
                     >
-                      {{ currency(this.maxPrice) }}
+                      {{ this.maxPrice | currency }}
                     </p>
                   </div>
                   <div v-else>
@@ -65,7 +65,7 @@
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
                     >
-                      {{ currency(this.product.precio) }}
+                      {{ this.product.precio | currency }}
                     </p>
                   </div>
                 </div>
@@ -113,7 +113,6 @@
             :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image-soldOut"
           />
-
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
@@ -131,6 +130,7 @@
               {{ `${this.product.nombre.slice(0, 34)}` }}
             </p>
           </router-link>
+
           <div class="content-text-price-movil-cart" v-if="this.product.precio">
             <router-link
               :to="{ path: `/productos/` + product.slug }"
@@ -139,13 +139,35 @@
               <div>
                 <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
-                </p>-->
-                <p class="card-price-2" v-if="this.product.precio > 0">
-                  {{ currency(this.product.precio) }}
-                </p>
+                </p> -->
+                <div
+                  class="content-price"
+                  v-if="estadoCart && this.minPrice != this.maxPrice"
+                >
+                  <p
+                    class="card-price-2"
+                    v-if="this.product.precio > 0 || this.product.precio"
+                  >
+                    {{ this.minPrice | currency }}
+                  </p>
+
+                  <p class="separator-price">-</p>
+                  <p
+                    class="card-price-2"
+                    v-if="this.product.precio > 0 || this.product.precio"
+                  >
+                    {{ this.maxPrice | currency }}
+                  </p>
+                </div>
+                <div v-else>
+                  <p class="card-price-2" v-if="this.product.precio > 0">
+                    {{ this.product.precio | currency }}
+                  </p>
+                </div>
               </div>
               <!-- <p class="card-descuento">-50%</p> -->
             </router-link>
+
             <div v-if="!this.estadoCart && !soldOut && !spent">
               <cartArrowDown
                 class="card-icon-cart-movil"

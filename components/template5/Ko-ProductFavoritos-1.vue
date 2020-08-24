@@ -11,22 +11,20 @@
 import KoSwipper from './_productofavorito/productSlide'
 export default {
   name: 'Ko-ProductFavoritos-1',
-
   components: {
     KoSwipper,
   },
-  mounted() {},
   computed: {
     dataProductFavorite() {
       return this.$store.state.dataStore.productos.filter(
         (product) => product.favorito === 1
       )
     },
-    orderproduct() {
-      return this.dataProductFavorite.sort(function (prev, next) {
-        return next.orden - prev.orden
-      })
-    },
+    // orderproduct() {
+    //   return this.dataProductFavorite.sort(function (prev, next) {
+    //     return next.orden - prev.orden
+    //   })
+    // },
   },
 }
 </script>

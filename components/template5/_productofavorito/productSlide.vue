@@ -6,7 +6,9 @@
         v-for="(product, index) in this.products"
         :key="index"
       >
-        <KoProductCard1 :product="product"></KoProductCard1>
+        <no-ssr>
+          <KoProductCard1 :product="product"></KoProductCard1>
+        </no-ssr>
       </div>
     </div>
     <div class="swiper-pagination" slot="pagination"></div>
