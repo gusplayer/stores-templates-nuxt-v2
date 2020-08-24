@@ -104,15 +104,10 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper_newsletter {
-  --background_color_1: #2f1893;
-  --color_text: #fff;
-  --color_subtext: #fff;
-}
 .wrapper_newsletter {
   display: flex;
   width: 100%;
-  background-color: var(--background_color_1);
+  background-color: var(--background_color_2);
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -209,7 +204,7 @@ div.wrapper_newsletter {
 .text-checkbox {
   margin-left: 5px;
   font-size: 12px;
-  color: white;
+  color: var(--color_subtext);
 }
 @media (max-width: 600px) {
   .title {

@@ -3,7 +3,7 @@
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">Favoritos</p>
     </div>
-    <KoSwipper :products="orderproduct"></KoSwipper>
+    <KoSwipper :products="dataProductFavorite"></KoSwipper>
   </div>
 </template>
 

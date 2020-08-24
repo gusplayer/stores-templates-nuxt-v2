@@ -1,27 +1,14 @@
 <template>
   <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <cld-image
-          cloudName="komercia-store"
-          :publicId="getIdCloudinary(setPhoto(photo))"
-          dpr="auto"
-          width="380"
-          height="375"
-          crop="scale"
-          class="photo"
-        >
-          <cld-transformation
-            width="400"
-            height="400"
-            crop="lpad"
-            quality="auto"
-            background="auto:border"
-          />
-        </cld-image>
+      <div class="swiper-slide wrapper-image">
+        <img :src="idCloudinary(photo, 350, 350)" class="photo" />
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
-        <img class="photo" :src="setPhoto(photo.foto_cloudinary)" />
+        <img
+          :src="idCloudinary(photo.foto_cloudinary, 350, 350)"
+          class="photo"
+        />
       </div>
       <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">
         <div class="youtube">
@@ -43,7 +30,9 @@
 </template>
 
 <script>
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   name: 'productSlide-details',
   props: ['photos', 'photo', 'idYoutube'],
   data() {
@@ -57,10 +46,10 @@ export default {
         setWrapperSize: true,
         paginationClickable: true,
         grabCursor: true,
-        autoplay: {
-          delay: 2500,
-          disableOnInteraction: false,
-        },
+        // autoplay: {
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // },
       },
     }
   },
@@ -84,29 +73,19 @@ export default {
 .swiper-wrapper {
 }
 .swiper-slide {
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
+  width: 100%;
+  max-width: 375px;
+  position: relative;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
   align-items: center;
-  max-width: 370px;
-  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
 }
-.swiper-slide .photo {
+.photo {
   width: 100%;
-  max-width: 370px;
-  max-height: 100%;
-  object-fit: contain;
-  margin: 0 auto;
-  object-position: center;
+  object-fit: cover;
+  overflow: hidden;
 }
 .photos .responsive .swiper-pagination-bullet {
   background-color: rgba(255, 255, 255, 0.5);

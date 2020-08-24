@@ -39,19 +39,7 @@ export default {
   ],
 
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
-  buildModules: ['nuxt-purgecss'],
-  purgeCSS: {
-    enabled: ({ isDev, isClient }) => !isDev && isClient,
-    paths: ['components/**/*.vue', 'layouts/**/*.vue', 'pages/**/*.vue'],
-    styleExtensions: ['.css'],
-    whitelist: ['body', 'html', 'nuxt-progress'],
-    extractors: [
-      {
-        extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
-        extensions: ['html', 'vue', 'js'],
-      },
-    ],
-  },
+
   debug: {
     enabled: true,
   },

@@ -84,12 +84,12 @@
         >
           <img
             v-if="!soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
+            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image"
           />
           <img
             v-if="soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
+            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image-soldOut"
           />
 

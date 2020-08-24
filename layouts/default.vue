@@ -47,16 +47,13 @@
             <button class="btn-accept" @click="acceptCookies()">
               Acepto cookies
             </button>
-            <button class="btn-decline" @click="declineCookies()">
-              Cancelar cookies
-            </button>
+            <a
+              class="_link"
+              href="http://www.allaboutcookies.org/"
+              target="_blank"
+              >¿Qué son las cookies?</a
+            >
           </div>
-          <a
-            class="_link"
-            href="http://www.allaboutcookies.org/"
-            target="_blank"
-            >¿Qué son las cookies?</a
-          >
         </div>
       </div>
     </div>
@@ -348,9 +345,6 @@ export default {
       document.getElementById('modalCookies').style.bottom = '-135px'
       document.cookie = `authCookies = 1; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;`
     },
-    declineCookies() {
-      document.getElementById('modalCookies').style.bottom = '-135px'
-    },
     acceptClose() {
       document.getElementById('modalNotificacion').style.zIndex = '-2'
       document.getElementById('modalNotificacion').style.opacity = '0'
@@ -416,7 +410,7 @@ export default {
   background: linear-gradient(
     170deg,
     rgba(145, 145, 145, 1) 0%,
-    rgb(102, 102, 102) 76%
+    rgb(44, 44, 44) 60%
   );
   border-radius: 10px;
 }
@@ -424,7 +418,7 @@ export default {
   background: linear-gradient(
     170deg,
     rgb(102, 102, 102) 0%,
-    rgba(0, 0, 0, 1) 76%
+    rgba(0, 0, 0, 1) 60%
   );
   border-radius: 10px;
 }
@@ -507,15 +501,14 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
 }
 .btn-accept {
   max-height: 29px;
   width: 140px;
   border-radius: 5px;
-  color: black;
-  border: solid 2px #25dac5;
-  background-color: #25dac5;
+  color: white;
+  border: solid 2px black;
+  background-color: black;
   padding: 4px 14px;
   font-size: 14px;
   cursor: pointer;
@@ -523,25 +516,8 @@ export default {
 }
 .btn-accept:hover {
   color: white;
-  border: solid 2px rgb(25, 26, 27);
-  background-color: rgb(25, 26, 27);
-}
-.btn-decline {
-  max-height: 29px;
-  width: 160px;
-  margin-left: 10px;
-  border-radius: 5px;
-  color: white;
-  border: solid 2px rgb(25, 26, 27);
-  background-color: rgb(25, 26, 27);
-  padding: 4px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.btn-decline:hover {
-  border: solid 2px rgb(25, 26, 27);
-  background-color: rgb(25, 26, 27);
+  border: solid 2px gray;
+  background-color: gray;
 }
 ._link {
   width: 149px;
@@ -549,6 +525,7 @@ export default {
   font-size: 12px;
   font-weight: bold;
   color: #41aaf0;
+  text-align: center;
   text-decoration: none;
 }
 ._link:hover {
@@ -609,11 +586,6 @@ export default {
   border: solid 2px gray;
   background-color: gray;
 }
-@media (max-width: 768px) {
-  .wrapper-btn {
-    flex-direction: column;
-  }
-}
 @media (max-width: 700px) {
   .content-cookie {
     flex-direction: column;
@@ -622,10 +594,6 @@ export default {
     font-size: 14px;
     margin-bottom: 10px;
     text-align: center;
-  }
-  ._link {
-    margin-top: 5px;
-    margin-left: 0px;
   }
 }
 </style>

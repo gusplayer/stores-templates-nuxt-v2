@@ -252,10 +252,10 @@ export default {
     ValidationObserver,
     ValidationProvider,
   },
-  computed: {
-    colorCSSlogo() {
-      return this.settingByTemplate['--background_color_1']
-    },
+  mounted() {
+    if (this.settingByTemplate) {
+      this.setLogo()
+    }
   },
   data() {
     return {
@@ -360,7 +360,10 @@ export default {
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
     },
-    colorCSSlogo(value) {
+    settingByTemplate(value) {
+      let color = getComputedStyle(this.$refs.background).getPropertyValue(
+        '--background_color_1'
+      )
       let colorArray = value.split(',')
       let colorInt = parseInt(colorArray[2])
       if (colorInt > 50) {
