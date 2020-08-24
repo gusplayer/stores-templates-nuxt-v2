@@ -149,11 +149,7 @@ export default {
         element === 'order' ||
         element === 'order_header_close' ||
         element === 'continue_shopping' ||
-        element === 'continue_shopping2' ||
-        element.animVal === 'material-design-icon__svg' ||
-        element.baseVal === 'material-design-icon__svg' ||
-        element.animVal === '' ||
-        element.baseVal === ''
+        element === 'continue_shopping2'
       ) {
         this.$store.commit('SET_OPENORDERMENULEFT', false)
       }
