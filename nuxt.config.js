@@ -19,7 +19,6 @@ export default {
     'element-ui/lib/theme-chalk/index.css',
     '~/assets/element-pagination.css',
     'swiper/dist/css/swiper.css',
-    'aos/dist/aos.css',
     'core-components-npm/dist/ko.css',
   ],
   plugins: [
@@ -29,7 +28,6 @@ export default {
     '~/plugins/cloudinary',
     '~/plugins/material-icons',
     '~plugins/validate.js',
-    { src: '@/plugins/aos.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },

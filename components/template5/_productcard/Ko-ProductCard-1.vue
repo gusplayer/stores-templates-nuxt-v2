@@ -40,13 +40,34 @@
                 <div>
                   <!-- <p class="card-price-1" v-if="this.product.precio > 0">
                     $ {{ this.product.precio }}
-                  </p>-->
-                  <p
-                    class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
+                  </p> -->
+                  <div
+                    class="content-price"
+                    v-if="estadoCart && this.minPrice != this.maxPrice"
                   >
-                    {{ currency(this.product.precio) }}
-                  </p>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{ currency(this.minPrice) }}
+                    </p>
+
+                    <p class="separator-price">-</p>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{ currency(this.maxPrice) }}
+                    </p>
+                  </div>
+                  <div v-else>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{ currency(this.product.precio) }}
+                    </p>
+                  </div>
                 </div>
                 <!-- <p class="card-descuento">-50%</p> -->
               </div>
@@ -155,10 +176,13 @@ export default {
   props: { product: Object, settingByTemplate: Object },
   mounted() {
     this.idSlug = this.product.id
+    this.prodcutPrice()
   },
   data() {
     return {
       estadoCart: false,
+      minPrice: '',
+      maxPrice: '',
       idSlug: '',
       maxQuantityValue: 0,
       productIndexCart: null,
@@ -278,6 +302,36 @@ export default {
           // this.$router.push('/')
           this.$store.state.openOrder = true
           this.$store.state.orderComponent = true
+        }
+      }
+    },
+    prodcutPrice() {
+      if (
+        this.product.con_variante &&
+        this.product.variantes[0].variantes !== '[object Object]'
+      ) {
+        const arrCombinations = this.product.variantes
+        let inventario = 0
+        if (
+          arrCombinations.length &&
+          arrCombinations[0].variantes !== '[object Object]'
+        ) {
+          if (this.product.combinaciones.length > 1) {
+            let arrPrice = this.product.combinaciones.map((products) => {
+              if (products.precio) {
+                return products.precio
+              }
+            })
+            if (arrPrice) {
+              let resultPrice = arrPrice.sort(function (prev, next) {
+                return prev - next
+              })
+              if (resultPrice[resultPrice.length - 1]) {
+                this.minPrice = resultPrice[0]
+                this.maxPrice = resultPrice[resultPrice.length - 1]
+              }
+            }
+          }
         }
       }
     },
@@ -415,6 +469,17 @@ export default {
   justify-content: center;
   align-items: center;
   height: 47px;
+}
+.content-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.separator-price {
+  color: var(--color_text);
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .card-price-1 {
   font-size: 12px;

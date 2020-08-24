@@ -6,7 +6,6 @@
           v-for="(product, index) in productsCart"
           :key="index"
           class="wrapper_item"
-          data-aos="zoom-in"
         >
           <div class="content_product_items">
             <div class="wrapper_item_photo">
