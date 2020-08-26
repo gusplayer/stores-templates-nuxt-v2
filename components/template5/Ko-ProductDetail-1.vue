@@ -466,7 +466,7 @@ export default {
       let id = ''
       if (url && url !== '' && url !== 'null') {
         this.validVideo = true
-        let id = url.match(myregexp)
+        id = url.match(myregexp)
         if (id) {
           this.idYoutube = id[1]
         }

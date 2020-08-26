@@ -79,7 +79,7 @@ export default {
                 tienda: this.dataStore.tienda.id_tienda,
               }
               axios
-                .post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
+                .post('https://api2.komercia.co/api/tienda/suscriptor', json)
                 .then((res) => {
                   this.register = 'Tu correo ha sido registrado'
                   this.$message.success('Comentario enviado!')

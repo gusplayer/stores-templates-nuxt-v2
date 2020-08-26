@@ -383,8 +383,9 @@ export default {
         costo_envio: this.shipping || 0,
         usuario: this.userData.id,
       }
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.post(
-        `https://api2.komercia.co/api/usuario/orden`,
+        'https://api2.komercia.co/api/usuario/orden',
         quotation,
         this.configHttp
       )

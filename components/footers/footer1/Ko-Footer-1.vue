@@ -152,9 +152,6 @@ export default {
       this.links[3].link = this.dataStore.tienda.red_youtube
     },
     settingByTemplate(value) {
-      let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
-      )
       let colorArray = value.split(',')
       let colorInt = parseInt(colorArray[2])
       if (colorInt > 50) {

@@ -197,7 +197,7 @@ export default {
     },
     clear() {
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
@@ -216,6 +216,7 @@ export default {
     search(value) {
       this.Searchproduct(value)
     },
+    // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
       let searchCategory = domain.slice(0, [11])
@@ -246,7 +247,6 @@ export default {
   background: var(--background_color_1);
   /* background-color: black; */
 }
-
 .wrapper-header {
   display: flex;
   justify-content: center;
@@ -268,7 +268,6 @@ export default {
   max-width: 1300px;
   padding: 10px 30px 0;
 }
-
 .header-content-logo {
   display: flex;
   flex: 1;
@@ -276,11 +275,7 @@ export default {
   align-items: center;
   padding: 2px 0px;
 }
-.wrapper-logo {
-  /* width: 100%; */
-}
 .header-logo {
-  /* width: 100%; */
   max-height: 70px;
   object-fit: contain;
   object-position: left;

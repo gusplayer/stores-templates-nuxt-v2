@@ -9,13 +9,11 @@
 <script>
 import KoHeaderIg from '../components/headers/header_ig/Ko-Header-ig'
 import KFooterIg from '../components/footers/footerIg/Ko-Footer-ig'
-import koWhatsapp from '../components/whatsapp/whatsapp'
 
 export default {
   components: {
     KoHeaderIg,
     KFooterIg,
-    koWhatsapp,
   },
   mounted() {
     // this.$store.dispatch('GET_LOGIN')

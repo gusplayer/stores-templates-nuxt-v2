@@ -273,12 +273,12 @@ export default {
     closeMenu() {
       this.showMenu = false
       this.$router.push({
-        path: `/productos/` + this.product[0].slug,
+        path: '/productos/' + this.product[0].slug,
       })
     },
     Sendsubcategory(value) {
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.showMenu = false
       this.addClass()
@@ -303,7 +303,7 @@ export default {
     },
     sendCategory(value, categoria, ref) {
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.showMenu = false
       this.currentPage = 1
@@ -334,7 +334,7 @@ export default {
     clear() {
       this.showMenu = false
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
@@ -385,6 +385,7 @@ export default {
     search(value) {
       this.Searchproduct(value)
     },
+    // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
       let searchCategory = domain.slice(0, [11])

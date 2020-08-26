@@ -299,7 +299,7 @@ export default {
       this.createComponet.settings = this.settings
       let obj = {}
 
-      this.settings.map((item, index) => {
+      this.settings.map((item) => {
         obj[item.setting] = item.value
       })
       this.createComponet.settings_base = JSON.stringify(obj)
@@ -347,7 +347,7 @@ export default {
       this.settings.push({ ...this.currentSetting })
       this.cleanCurrentSetting()
     },
-    removeSetting(index, p) {
+    removeSetting(index) {
       this.settings.splice(index, 1)
     },
     cleanCurrentSetting() {

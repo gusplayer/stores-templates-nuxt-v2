@@ -391,6 +391,7 @@ export default {
     nameSubCategoryHeader(value) {
       return value
     },
+    // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
       let searchCategory = domain.slice(0, [11])

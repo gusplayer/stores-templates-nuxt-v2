@@ -10,17 +10,12 @@
 
 <script>
 import KoHeaderWp from '../components/whatsapp/Header'
-import KFooter1 from '../components/whatsapp/Footer'
 import Categories from '../components/whatsapp/Categories'
-// import KoHeaderTest from '../components/headers/header_wp/Ko-Header-wp'
-// import koWhatsapp from '../components/whatsapp/whatsapp'
 
 export default {
   components: {
     KoHeaderWp,
-    KFooter1,
     Categories,
-    // KoHeaderTest,
   },
   mounted() {
     // this.$store.dispatch('GET_LOGIN')

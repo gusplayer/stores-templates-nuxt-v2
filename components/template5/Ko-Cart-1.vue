@@ -412,14 +412,14 @@ export default {
       })
       return result
     },
-    addQuantity(product, index) {
+    addQuantity(product) {
       if (product.limitQuantity > product.cantidad) {
         product.cantidad++
         this.$store.commit('UPDATE_CONTENTCART')
         this.$store.commit('CALCULATE_TOTALCART')
       }
     },
-    removeQuantity(product, index) {
+    removeQuantity(product) {
       if (product.cantidad >= 2) {
         product.cantidad--
         this.$store.commit('UPDATE_CONTENTCART')

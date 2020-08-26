@@ -116,7 +116,7 @@ export default {
     Sendsubcategory(value) {
       this.indexSelect2 = value
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.addClass()
@@ -141,7 +141,7 @@ export default {
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       let getSubcategory
       this.subcategories.filter((element) => {
@@ -179,7 +179,7 @@ export default {
     },
     clear() {
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.showMenu = false
       this.$store.commit('SET_OPENORDERMENURIGTH', false)

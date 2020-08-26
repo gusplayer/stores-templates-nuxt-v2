@@ -343,7 +343,8 @@ export default {
     },
     acceptCookies() {
       document.getElementById('modalCookies').style.bottom = '-135px'
-      document.cookie = `authCookies = 1; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;`
+      document.cookie =
+        'authCookies = 1; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;'
     },
     acceptClose() {
       document.getElementById('modalNotificacion').style.zIndex = '-2'
