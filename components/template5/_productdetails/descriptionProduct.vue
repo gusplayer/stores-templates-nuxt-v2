@@ -26,7 +26,7 @@
             </p>
             <img
               src="https://res.cloudinary.com/komercia-components/image/upload/v1579296851/assets/pasarela-epayco.png"
-              alt
+              alt="Pasarela de pagos epayco"
             />
           </li>
           <li v-if="mediospago.payu == 1">

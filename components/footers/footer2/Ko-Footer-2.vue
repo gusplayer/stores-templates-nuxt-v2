@@ -8,6 +8,7 @@
               <img
                 :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
                 class="logo"
+                alt="Logo Img"
               />
             </nuxt-link>
             <!-- <div v-if="this.dataStore.tienda.descripcion">
@@ -102,6 +103,7 @@
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="logo"
+              alt="Logo Img"
             />
             <div
               class="items-iconos"
@@ -180,11 +182,13 @@
           src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
           v-if="logo"
           class="logo2"
+          alt="Logo Img"
         />
         <img
           src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png"
           v-else
           class="logo2"
+          alt="Logo Img"
         />
       </a>
     </div>

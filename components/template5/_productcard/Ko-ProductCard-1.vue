@@ -14,11 +14,13 @@
             v-if="!soldOut"
             :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image"
+            alt="Product Img"
           />
           <img
             v-if="soldOut"
             :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image-soldOut"
+            alt="Product Img"
           />
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
@@ -107,11 +109,13 @@
             v-if="!soldOut"
             :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image"
+            alt="Product Img"
           />
           <img
             v-if="soldOut"
             :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image-soldOut"
+            alt="Product Img"
           />
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">

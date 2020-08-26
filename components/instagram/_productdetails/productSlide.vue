@@ -21,7 +21,11 @@
         </cld-image>
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
-        <img class="photo" :src="setPhoto(photo.foto_cloudinary)" />
+        <img
+          class="photo"
+          :src="setPhoto(photo.foto_cloudinary)"
+          alt="Product img"
+        />
       </div>
       <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">
         <div class="youtube">

@@ -2,12 +2,17 @@
   <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide wrapper-image">
-        <img :src="idCloudinary(photo, 350, 350)" class="photo" />
+        <img
+          :src="idCloudinary(photo, 350, 350)"
+          class="photo"
+          alt="Product img"
+        />
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
         <img
           :src="idCloudinary(photo.foto_cloudinary, 350, 350)"
           class="photo"
+          alt="Product img"
         />
       </div>
       <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">

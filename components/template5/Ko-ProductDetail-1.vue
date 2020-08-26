@@ -10,6 +10,7 @@
                 @click="selectedPhoto(data.detalle.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
+                alt="Product Img"
               />
               <img
                 v-for="(foto, itemsfoto) in data.fotos"
@@ -17,6 +18,7 @@
                 @click="selectedPhoto(foto.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
+                alt="Product Img"
               />
 
               <img
@@ -25,6 +27,7 @@
                 v-show="idYoutube"
                 v-on:mouseover="existYoutube = true"
                 class="video"
+                alt="Product Img"
               />
             </div>
           </div>
@@ -34,6 +37,7 @@
                 class="photo_main"
                 v-on:mouseover="active = !active"
                 :src="idCloudinary(selectPhotoUrl, 645, 430)"
+                alt="Product Zoom"
               />
             </div>
             <div v-if="!active" v-show="!existYoutube" class="photo_main">

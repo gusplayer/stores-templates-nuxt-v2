@@ -2,37 +2,52 @@
   <div class="container-card">
     <div class="wrapper-movil">
       <router-link :to="{ path: `/wa/` + product.slug }" class="wrapper-image">
-        <img :src="idCloudinary(this.product.foto_cloudinary, 280, 280)" class="product-image" />
+        <img
+          :src="idCloudinary(this.product.foto_cloudinary, 280, 280)"
+          class="product-image"
+          alt="Product img"
+        />
       </router-link>
       <div class="wrapper-text">
         <div class="title-container">
-          <p
-            class="card-text-movil"
-            v-if="this.product.nombre.length >= 40"
-          >{{ `${this.product.nombre.slice(0, 40)}..` }}</p>
-          <p class="card-text-movil" v-else>{{ `${this.product.nombre.slice(0, 40)}` }}</p>
-          <whatsapp-icon class="wp-icon" v-on:click="redirectWP(product.nombre, product.slug)" />
+          <p class="card-text-movil" v-if="this.product.nombre.length >= 40">
+            {{ `${this.product.nombre.slice(0, 40)}..` }}
+          </p>
+          <p class="card-text-movil" v-else>
+            {{ `${this.product.nombre.slice(0, 40)}` }}
+          </p>
+          <whatsapp-icon
+            class="wp-icon"
+            v-on:click="redirectWP(product.nombre, product.slug)"
+          />
         </div>
         <div class="content-text-price-movil-cart" v-if="this.product.precio">
-          <router-link :to="{ path: `/wa/` + product.slug }" class="wrapper-price">
+          <router-link
+            :to="{ path: `/wa/` + product.slug }"
+            class="wrapper-price"
+          >
             <div>
-              <p
-                class="text-price"
-                v-if="this.product.precio > 0"
-              >{{ currency(this.product.precio) }}</p>
+              <p class="text-price" v-if="this.product.precio > 0">
+                {{ currency(this.product.precio) }}
+              </p>
             </div>
             <!-- <p class="card-descuento">-50%</p> -->
           </router-link>
           <div class="container-sub-price">
             <div>
-              <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis!</p>
+              <p class="card-info-2" v-if="getFreeShipping == false">
+                Envío gratis!
+              </p>
               <p class="card-info-1" v-if="soldOut">Agotado 🙁</p>
             </div>
 
             <!-- <div class="add-cart" v-if="!this.estadoCart && !soldOut && !spent">
               <cartArrowDown class="card-icon-cart-movil" v-on:click="addShoppingCart" />
             </div>-->
-            <router-link :to="{ path: `/wa/` + product.slug }" class="view-more">
+            <router-link
+              :to="{ path: `/wa/` + product.slug }"
+              class="view-more"
+            >
               <mas-icon class="mas-icon" />
               <p>Ver</p>
             </router-link>

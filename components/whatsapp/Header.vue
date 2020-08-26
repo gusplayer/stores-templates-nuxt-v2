@@ -3,21 +3,17 @@
     <div class="portada-tienda">
       <whatsapp-icon class="wp-icon" />
       <p class="title-whatsapp">Catálogo WhatsApp</p>
-      <!-- <img
-        class="image-portada"
-        src="https://images.pexels.com/photos/64613/pexels-photo-64613.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-      />-->
     </div>
 
     <div class="info-logo-tienda">
       <div style>
         <div class="contain-image">
-          <img :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`" class="header-logo" />
+          <img
+            :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+            class="header-logo"
+            alt="Logo img"
+          />
         </div>
-        <!-- <div>
-          <p class="tiitle">Titutlo</p>
-          <p>Tienda Whatsapp</p>
-        </div>-->
       </div>
       <p>Información ></p>
     </div>

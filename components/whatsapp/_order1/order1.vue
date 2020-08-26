@@ -20,7 +20,7 @@
                     :key="index"
                   >
                     <div class="photo">
-                      <img :src="product.foto_cloudinary" />
+                      <img :src="product.foto_cloudinary" alt="Product img" />
                     </div>
                     <div class="name">
                       <p class="order-text" style="font-weight: bold;">
@@ -156,7 +156,7 @@
               </template>
               <template v-else>
                 <div class="wrapper_photo">
-                  <img :src="img" class="photo" />
+                  <img :src="img" class="photo" alt="empty car" />
                 </div>
                 <p class="text-cart-empty">
                   Tu carrito de compras ahora está vacío.

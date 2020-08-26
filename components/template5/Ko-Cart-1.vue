@@ -303,7 +303,7 @@
     </div>
     <div v-else class="contenedor-vacio">
       <div class="wrapper_photo">
-        <img :src="img" class="photo" />
+        <img :src="img" class="photo" alt="Product img" />
       </div>
       <p>Tu carrito de compras ahora está vacío.</p>
 

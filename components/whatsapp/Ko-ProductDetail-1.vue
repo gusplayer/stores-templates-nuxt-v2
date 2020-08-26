@@ -13,6 +13,7 @@
                 @click="selectedPhoto(data.detalle.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(data.detalle.foto_cloudinary, 500, 500)"
+                alt="Product Img"
               />
               <img
                 v-for="(foto, itemsfoto) in data.fotos"
@@ -20,6 +21,7 @@
                 @click="selectedPhoto(foto.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(foto.foto_cloudinary, 500, 500)"
+                alt="Product Img"
               />
 
               <img
@@ -28,34 +30,11 @@
                 v-show="idYoutube"
                 v-on:mouseover="existYoutube = true"
                 class="video"
+                alt="Product Video"
               />
             </div>
           </div>
           <div class="wrapper-photo_main">
-            <!-- <div v-if="active" v-show="!existYoutube" class="photo_main">
-              <img
-                class="photo_main"
-                v-on:mouseover.native="active = !active"
-                :src="idCloudinary(selectPhotoUrl, 645, 430)"
-              />
-            </div>-->
-            <!-- <div v-if="!active" v-show="!existYoutube" class="photo_main">
-              <cld-image
-                cloudName="komercia-store"
-                v-on:mouseleave.native="active = !active"
-                :publicId="getIdCloudinary(selectPhotoUrl)"
-                dpr="auto"
-                responsive="width"
-                width="845"
-                height="400"
-                gravity="face"
-                crop="crop"
-                class="photo_main"
-              >
-                <cld-transformation radius="5" quality="auto" background="auto:border" />
-              </cld-image>
-            </div>-->
-
             <iframe
               v-show="existYoutube"
               :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
@@ -80,7 +59,9 @@
               ${{ salesData.precio | currency }}
             </p>-->
             <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">$ {{ salesData.precio | currency }}</p>
+              <p class="text-precio" v-show="salesData.precio">
+                $ {{ salesData.precio | currency }}
+              </p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
             <p class="text-marca">

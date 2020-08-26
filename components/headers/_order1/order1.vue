@@ -21,6 +21,7 @@
                     <div class="photo">
                       <img
                         :src="idCloudinary(product.foto_cloudinary, 100, 100)"
+                        alt="Product Img"
                       />
                     </div>
                     <div class="name">
@@ -157,7 +158,7 @@
               <template v-else>
                 <div class="order_products_list-empty">
                   <div class="wrapper_photo">
-                    <img :src="img" class="photo" />
+                    <img :src="img" class="photo" alt="empty car" />
                   </div>
                   <p class="text-cart-empty">
                     Tu carrito de compras ahora está vacío.

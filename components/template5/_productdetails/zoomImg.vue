@@ -4,6 +4,7 @@
       class="photo_main"
       v-on:mouseover="active = !active"
       :src="idCloudinary(photo, 645, 430)"
+      alt="Product Img"
     />
   </figure>
 </template>

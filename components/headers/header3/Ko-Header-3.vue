@@ -11,6 +11,7 @@
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
+              alt="Logo Img"
               @click="clear"
             />
           </nuxt-link>

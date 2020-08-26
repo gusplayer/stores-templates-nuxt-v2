@@ -8,6 +8,7 @@
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
+              alt="Logo Img"
               @click="clear"
             />
           </nuxt-link>
@@ -108,7 +109,11 @@
         <div class="product-img-container" v-if="product.length">
           <div class="card-container">
             <div class="img-logo" v-if="product[0]">
-              <img :src="product[0].foto_cloudinary" class="logo" />
+              <img
+                :src="product[0].foto_cloudinary"
+                class="logo"
+                alt="Product img"
+              />
             </div>
             <div class="btn-container">
               <button @click="closeMenu()" class="btn">Comprar</button>

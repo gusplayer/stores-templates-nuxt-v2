@@ -13,8 +13,8 @@
           <img
             :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image"
+            alt="Product Img"
           />
-
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
@@ -80,8 +80,8 @@
           <img
             :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
             class="product-image"
+            alt="Product Img"
           />
-
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
