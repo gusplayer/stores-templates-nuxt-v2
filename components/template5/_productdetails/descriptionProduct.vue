@@ -35,7 +35,11 @@
               Miles de comercios alrededor del mundo confían en nosotros para
               recibir pagos online
             </p>
-            <a href="https://www.payulatam.com/co/" target="_blank">
+            <a
+              href="https://www.payulatam.com/co/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               <img
                 src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
                 alt="PayU"

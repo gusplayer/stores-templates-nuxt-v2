@@ -51,6 +51,7 @@
               class="_link"
               href="http://www.allaboutcookies.org/"
               target="_blank"
+              rel="noreferrer noopener"
               >¿Qué son las cookies?</a
             >
           </div>

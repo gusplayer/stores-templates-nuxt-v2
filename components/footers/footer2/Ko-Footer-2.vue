@@ -42,9 +42,13 @@
             class="text-icon"
           >
             <div v-if="item.link" :is="item.icon" class="icon" />
-            <a v-if="item.link" :href="item.link" target="_blank">{{
-              item.nombre
-            }}</a>
+            <a
+              v-if="item.link"
+              :href="item.link"
+              target="_blank"
+              rel="noreferrer noopener"
+              >{{ item.nombre }}</a
+            >
           </div>
         </div>
         <div>
@@ -105,7 +109,11 @@
               :key="`${index}${item.icon}`"
               v-if="item.link"
             >
-              <a v-if="item.link" :href="item.link" target="_blank"
+              <a
+                v-if="item.link"
+                :href="item.link"
+                target="_blank"
+                rel="noreferrer noopener"
                 ><div class="icon" :is="item.icon"
               /></a>
             </div>
@@ -167,7 +175,7 @@
       </div>
       <div class="separator"></div>
       <p>Desarrollado por Komercia Latam</p>
-      <a href="https://komercia.co/">
+      <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
         <img
           src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
           v-if="logo"

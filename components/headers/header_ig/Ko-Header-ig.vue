@@ -16,7 +16,8 @@
           <a
             v-if="this.dataStore.tienda.red_instagram"
             :href="this.dataStore.tienda.red_instagram"
-            target="_black"
+            target="_blank"
+            rel="noreferrer noopener"
             class="header-text-center"
             ><instagram-icon class="icon" />Seguir</a
           >
