@@ -96,7 +96,9 @@
             </div>
             <div v-if="this.data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
-                <label class="text-variant">{{ variant.nombre }}:</label>
+                <label for="variant name" class="text-variant"
+                  >{{ variant.nombre }}:</label
+                >
                 <selectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"

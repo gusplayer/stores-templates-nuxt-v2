@@ -67,15 +67,7 @@
             <p class="text-marca">
               <strong>{{ data.info.marca }}</strong>
             </p>
-            <!-- <div
-              class="content-text-desc"
-              v-if="data.info.descripcion && data.info.descripcion.length > 12"
-            >
-              <p
-                class="text-desc"
-                v-html="`${data.info.descripcion.slice(0, 99)}`"
-              ></p>
-            </div>-->
+
             <div class="content_buy_action">
               <div v-if="envio.titulo == 'Envío gratis'">
                 <p class="card-info-2">Envío gratis !</p>
@@ -84,81 +76,9 @@
                 <p class="card-info-1" v-if="spent">Agotado !</p>
               </div>
             </div>
-            <!-- <div v-if="this.data.detalle.con_variante > 0">
-              <div v-for="(variant, index) in data.variantes" :key="index">
-                <label class="text-variant">{{ variant.nombre }}:</label>
-                <selectGroup :index="index" :variantes="data.variantes">
-                  <option
-                    v-for="item in variant.valores"
-                    :key="item.option"
-                    :value="item.option"
-                  >{{ item.option }}</option>
-                </selectGroup>
-              </div>
-            </div>-->
-            <!-- <div :class="{ disabled: !salesData.estado }">
-              <div>
-                <div class="quantity">
-                  <p class="text-quantity">Cantidad:</p>
-                  <button class="quantity_remove" v-on:click="removeQuantity()">
-                    <menos-icon class="icon" />
-                  </button>
-                  <p class="quantity_value">{{ quantityValue }}</p>
-                  <button class="quantity_add" v-on:click="addQuantity()">
-                    <mas-icon class="icon" />
-                  </button>
-
-                  <div class="container-alerta" v-if="this.maxQuantityValue == this.quantityValue">
-                    <span class="alerta">última Unidad!</span>
-                  </div>
-                </div>
-                <div class="item-info-product">
-                  <div class="content-button">
-                    <button
-                      ref="colorBtn"
-                      class="btn"
-                      v-if="!spent"
-                      v-on:click="addShoppingCart"
-                    >Comprar</button>
-                   
-                  </div>
-                </div>
-              </div>
-            </div>-->
           </div>
         </div>
       </div>
-      <!-- <div class="section">
-        <div class="features">
-          <ko-description :dataStore="dataStore" :data="data" :envio="envio"></ko-description>
-        </div>
-      </div>-->
-      <!-- <div class="responsive-purchase">
-        <div class="ko-input">
-          <div class="quantity-resposive">
-            <button class="quantity_remove" v-on:click="removeQuantity()">
-              <menos-icon class="icon" />
-            </button>
-            <p class="quantity_value">{{ quantityValue }}</p>
-            <button class="quantity_add" v-on:click="addQuantity()">
-              <mas-icon class="icon" />
-            </button>
-            <transition name="slide-fade">
-              <div class="container-alert" v-show="quantityValue == maxQuantityValue">
-                <span class="alert">última Unidad!</span>
-              </div>
-            </transition>
-          </div>
-          <div style="width: 100%; margin-left: 10px;">
-            <div class="content_buy_action-responsive" v-if="spent">
-              <p class="card-info-1-res">Agotado !</p>
-            </div>
-            <button class="btn-responsive" ref="color2" v-if="!spent" v-on:click="addShoppingCart">
-              <cartArrowDown class="card-icon-cart" />Agregar
-            </button>
-          </div>
-        </div>
-      </div>-->
     </div>
     <KFooter />
   </div>

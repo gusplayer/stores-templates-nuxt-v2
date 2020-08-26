@@ -12,7 +12,7 @@
               />
             </nuxt-link>
           </div>
-          <label @click="closed" class="order_header_close">
+          <label for="order_close" @click="closed" class="order_header_close">
             <close-icon />
           </label>
         </div>

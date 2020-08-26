@@ -4,7 +4,11 @@
       <div class="order_content">
         <div class="order_header">
           <h3>Tu orden</h3>
-          <label @click="closeOrder" class="order_header_close">
+          <label
+            for="order_close"
+            @click="closeOrder"
+            class="order_header_close"
+          >
             <close-icon />
           </label>
         </div>

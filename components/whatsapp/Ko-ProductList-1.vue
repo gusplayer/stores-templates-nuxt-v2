@@ -1,116 +1,39 @@
 <template>
   <div class="wrapper-productlist">
-    <!-- <div class="container">
-      <div class="content-title">
-      </div>
-      <br />
-
-      <div class="content-items-categorias">
-        <div class="content-items-categorias-text">
-          <p
-            class="text-categorias-select"
-            v-if="this.nameCategoryHeader"
-            @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >/ {{ this.nameCategoryHeader }}</p>
-          <p
-            class="text-categorias-select"
-            v-if="this.nameSubCategoryHeader"
-          >/ {{ this.nameSubCategoryHeader }}</p>
-        </div>
-    
-      </div> -->
+    <div class="container">
       <div class="top-right">
-        <div class="content-item-top">
-          <!-- <ul>
-            <li class="dropdown">
-              <div class="content-filtrar">
-                <a class="dropbtn">Categorías</a>
-                <Flechadown-icon class="header-icon-menu" />
-              </div>
-              <div class="dropdown-content">
-                <div class="content-item-catalogo">
-                  <ul class="a-container">
-                    <li @click="clear">
-                      <p class="item-categoria">Todos</p>
-                    </li>
+        <div class="content-item-top"></div>
+      </div>
 
-                    <li
-                      @mouseover="mouseOver(index)"
-                      @mouseleave="mouseLeave"
-                      v-for="(categoria, index) in categorias"
-                      :key="categoria.id"
-                    >
-                      <label>
-                        <p
-                          class="item-categoria"
-                          :class="
-                            index == indexSelect ? 'item-categoria-active' : ''
-                          "
-                          @click="
-                            sendCategory(
-                              categoria,
-                              categoria.id,
-                              index,
-                              (ref = false)
-                            )
-                          "
-                        >{{ categoria.nombre_categoria_producto }}</p>
-                        <div
-                          :style="indexCategory == index ? '' : 'display: none'"
-                          class="content-item-subcategorie"
-                        >
-                          <li
-                            v-for="subcategory in selectedSubcategories"
-                            @click="Sendsubcategory(subcategory.id)"
-                            :class="
-                              subcategory.id == indexSelect2
-                                ? 'item-subcategorie-active'
-                                : ''
-                            "
-                            :key="subcategory.id"
-                          >
-                            <p class="item-subcategorie">{{ subcategory.nombre_subcategoria }}</p>
-                          </li>
-                        </div>
-                        <div :class="{ popover: sub == index }" v-if="sub == index"></div>
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-          </ul>-->
-          <!-- <div class="search">
-            <div>
-              <input v-model="search" type="text" placeholder="Buscar . . ." required />
-            </div>
-          </div>-->
+      <div class="content-item-productos">
+        <div class="flex-products">
+          <div
+            v-for="product in filterProduct"
+            :key="product.id"
+            class="content-products"
+          >
+            <KoProductCard1 :product="product"></KoProductCard1>
+          </div>
+        </div>
+        <div
+          v-if="(this.fullProducts.length == 0)"
+          class="content-products-empty"
+        >
+          <p>No se encontraron productos relacionados.</p>
+        </div>
+        <div class="pagination-medium">
+          <div class="product_pagination" v-if="products.length > 16">
+            <el-pagination
+              background
+              layout="prev, pager, next"
+              :total="products.length"
+              :page-size="16"
+              :current-page.sync="currentPage"
+              class="pagination"
+            ></el-pagination>
+          </div>
         </div>
       </div>
-      <!-- <div class="content-item"> -->
-        <div class="content-item-productos">
-          <div class="flex-products">
-            <div v-for="product in filterProduct" :key="product.id" class="content-products">
-              <KoProductCard1 :product="product"></KoProductCard1>
-            </div>
-          </div>
-          <div v-if="(this.fullProducts.length == 0)" class="content-products-empty">
-            <p>No se encontraron productos relacionados.</p>
-          </div>
-          <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 16">
-              <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="products.length"
-                :page-size="16"
-                :current-page.sync="currentPage"
-                class="pagination"
-              ></el-pagination>
-            </div>
-          </div>
-        </div>
-      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -343,7 +266,7 @@ div.wrapper-productlist {
   --background_color_1: #f2f4f7;
   /* background-image: url('../../assets/img/wp_background.png'); */
   background-color: #ece5dd;
-  background-color: #FAFAF8;
+  background-color: #fafaf8;
   background-position: center; /* Center the image */
   background-repeat: repeat; /* Do not repeat the image */
   background-size: contain;

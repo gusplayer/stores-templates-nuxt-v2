@@ -41,7 +41,7 @@
                       v-for="(categoria, index) in categorias"
                       :key="categoria.id"
                     >
-                      <label>
+                      <label for="productListTag">
                         <p
                           class="item-categoria"
                           :class="
