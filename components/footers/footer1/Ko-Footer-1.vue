@@ -19,7 +19,7 @@
     </div>
     <div class="under-footer">
       <div class="contenedor-term-con" v-if="dataStore.politicas">
-        <label class="modal-btn" for="modal-toggle">Condiciones legales</label>
+        <label for="modal-toggle">Condiciones legales</label>
       </div>
       <div class="separator"></div>
       <p>Desarrollado por Komercia Latam</p>
@@ -245,7 +245,7 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  color: var(--color_icon);
   cursor: pointer;
 }
 .separator {

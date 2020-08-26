@@ -193,7 +193,8 @@ export default {
   width: 100%;
 }
 .description div {
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   line-height: 1.5;
 }
 .left {
@@ -211,10 +212,12 @@ export default {
   width: 100%;
   flex-direction: column;
   padding-bottom: 10px;
-  border-left: 1px solid var(--color_border);
+  /* border-left: 1px solid var(--color_border); */
+  border-left: 1px solid rgba(127, 127, 139, 0.342);
 }
 .title-section {
-  color: var(--color_subtext);
+  color: rgba(21, 20, 57, 0.541);
+  /* color: var(--color_subtext); */
   font-size: 16px;
   text-transform: uppercase;
   align-self: flex-start;
@@ -230,14 +233,16 @@ export default {
   margin-top: 20px;
 }
 .text-desc {
-  color: var(--color_subtext);
+  color: rgba(21, 20, 57, 0.541);
+  /* color: var(--color_subtext); */
   font-size: 15px;
   text-transform: uppercase;
   align-self: flex-start;
   margin-top: 20px;
 }
 h3 {
-  color: var(--color_subtext);
+  color: rgba(21, 20, 57, 0.541);
+  /* color: var(--color_subtext); */
   font-size: 15px;
   text-transform: uppercase;
   align-self: flex-start;
@@ -245,7 +250,8 @@ h3 {
 h4 {
   margin-top: 15px;
   font-weight: bold;
-  color: var(--color_subtext);
+  color: rgba(21, 20, 57, 0.541);
+  /* color: var(--color_subtext); */
   margin-bottom: 5px;
 }
 li p {
@@ -268,7 +274,8 @@ li p {
   margin-bottom: 20px;
 }
 .line {
-  border-top: 1px solid var(--color_border);
+  /* border-top: 1px solid var(--color_border); */
+  border-top: 1px solid rgba(127, 127, 139, 0.342);
   width: 100%;
 }
 .deliverys {
@@ -351,7 +358,8 @@ li p {
     border-left: 0px;
   }
   .payments {
-    border-top: 1px solid var(--color_border);
+    /* border-top: 1px solid var(--color_border); */
+    border-top: 1px solid rgba(127, 127, 139, 0.342);
     margin-bottom: 10px;
     padding-right: 15px;
     padding-left: 15px;

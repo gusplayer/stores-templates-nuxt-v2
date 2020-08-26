@@ -391,35 +391,6 @@ export default {
 .header-items-icon-menu {
   display: flex;
 }
-/* search */
-
-input {
-  outline: none;
-}
-input[type='search'] {
-  -webkit-appearance: textfield;
-  -webkit-box-sizing: content-box;
-  font-family: inherit;
-  font-size: 100%;
-}
-input::-webkit-search-decoration,
-input::-webkit-search-cancel-button {
-  display: none;
-}
-input[type='search'] {
-  background: transparent
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
-  border: solid 2px var(--color_icon);
-  padding: 6px 6px;
-  width: 35px;
-  -webkit-border-radius: 10em;
-  -moz-border-radius: 10em;
-  border-radius: 10em;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
-}
 input[type='search']:focus {
   background-color: #fff;
   border-color: var(--color_hover_text);

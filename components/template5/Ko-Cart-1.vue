@@ -533,12 +533,12 @@ export default {
 }
 .wrapper_item_photo {
   position: relative;
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 100px;
+  max-height: 100px;
 }
 .products_item_photo {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;

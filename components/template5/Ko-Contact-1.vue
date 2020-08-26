@@ -258,7 +258,8 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_2);
+  /* background: var(--background_color_2); */
+  background: #efefef;
   box-sizing: border-box;
 }
 .contact {
@@ -294,7 +295,8 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: -0.4px;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
 }
 .contact-text-subtitle {
   font-size: 16px;
@@ -303,7 +305,8 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   margin-top: 10px;
 }
 .contact-text-subtitles {
@@ -313,7 +316,8 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   margin-top: 10px;
 }
 .contact-text-subtitle2 {
@@ -323,7 +327,8 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
@@ -335,7 +340,8 @@ export default {
   font-style: normal;
   line-height: 1;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   margin-top: 10px;
 }
 .contact-text-subtitle4 {
@@ -345,7 +351,8 @@ export default {
   font-style: normal;
   line-height: 1;
   letter-spacing: normal;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin-top: 10px;
   text-align: right;
 }
@@ -360,16 +367,18 @@ export default {
   font-style: normal;
   line-height: 2.11;
   letter-spacing: normal;
-  color: var(--color_icon);
+  /* color: var(--color_icon); */
+  color: #25dac5;
 }
 .text-icon {
   display: flex;
   flex-direction: row;
-  color: var(--color_icon);
+  /* color: var(--color_icon); */
+  color: #25dac5;
 }
 .text-icon a:hover {
   cursor: pointer;
-  color: var(--color_hover_text);
+  color: var(--btnhover);
 }
 .text-icon a {
   font-size: 16px;
@@ -378,7 +387,8 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin-top: 5px;
   margin-left: 7px;
 }
@@ -392,7 +402,8 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin-top: 10px;
 }
 .contact-text-sub2 {
@@ -402,13 +413,15 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin-top: 10px;
 }
 .separator {
   margin-top: 15px;
   width: 100%;
-  border: solid 1.5px var(--color_border);
+  /* border: solid 1.5px var(--color_border); */
+  border: solid 1.5px rgba(255, 255, 255, 1);
 }
 .text-icon {
   display: flex;
@@ -419,7 +432,8 @@ export default {
 }
 .contact-content-rigth {
   border-radius: 10px;
-  background-color: var(--background_color_1);
+  /* background-color: var(--background_color_1); */
+  background-color: rgb(223, 223, 223);
   padding: 30px 30px 50px 30px;
   margin-top: 20px;
 }
@@ -430,7 +444,8 @@ export default {
   font-style: normal;
   line-height: 1.86;
   letter-spacing: 2px;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin: 10px;
   margin-left: 0px;
 }
@@ -451,7 +466,8 @@ export default {
 }
 .input-text {
   font-size: 14px;
-  color: var(--color_subtext);
+  /* color: var(--color_border); */
+  color: rgba(21, 20, 57, 0.541);
   border: solid 2px #afafaf;
   border-radius: var(--radius_btn);
   background-color: transparent;
@@ -459,8 +475,8 @@ export default {
   width: 100%;
 }
 .input-text::placeholder {
-  color: var(--color_subtext);
-
+  /* color: var(--color_border); */
+  color: rgba(21, 20, 57, 0.541);
   opacity: 0.7;
 }
 .input-text:-internal-autofill-selected {
@@ -472,7 +488,8 @@ export default {
 .input-text:focus,
 .input-text:active {
   outline: 0;
-  border: solid 2px var(--color_border);
+  /* border: solid 2px var(--color_border); */
+  border: solid 2px rgba(127, 127, 139, 0.342);
 }
 .input-text-rectangule {
   font-size: 14px;
@@ -481,7 +498,8 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_border); */
+  color: rgba(21, 20, 57, 0.541);
   border: solid 2px #afafaf;
   border-radius: var(--radius_btn);
   background-color: transparent;
@@ -492,14 +510,16 @@ export default {
   min-height: 41px;
 }
 .input-text-rectangule::placeholder {
-  color: var(--color_subtext);
+  /* color: var(--color_border); */
+  color: rgba(21, 20, 57, 0.541);
   opacity: 0.7;
 }
 
 .input-text-rectangule:focus,
 .input-text-rectangule:active {
   outline: 0;
-  border: solid 2px var(--color_border);
+  /* border: solid 2px var(--color_border); */
+  border: solid 2px rgba(127, 127, 139, 0.342);
 }
 .text-error {
   font-size: 12px;
@@ -530,8 +550,6 @@ export default {
 }
 
 @media (max-width: 700px) {
-  /* For mobile phones */
-
   .contact {
     display: flex;
     flex-direction: column;

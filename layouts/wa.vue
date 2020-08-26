@@ -185,16 +185,13 @@ export default {
         '--color_icon': '#25dac5',
 
         '--color_text_btn': '#000',
-        '--color_border_btn': '#25dac5',
         '--color_background_btn': '#25dac5',
         '--btnhover': '#c52675',
 
         '--color_background_btn_2': ' #000',
-        '--btnhover2': '#c52675',
 
         '--color_border': 'rgba(110, 110, 133, 0.342)',
 
-        '--logo_width': '120px',
         '--radius_btn': '5px',
       }
     },
