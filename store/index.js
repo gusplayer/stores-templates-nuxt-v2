@@ -83,6 +83,7 @@ export const state = () => ({
   openOrder: false,
   openMenulateralRight: false,
   openMenulateralLeft: false,
+  stateBanner: true,
   mediospago: {
     epayco: false,
   },
@@ -124,102 +125,6 @@ export const state = () => ({
   settingByTemplate: '',
   category_producto_header: '',
   subcategory_producto_header: '',
-  settingBytemplatePrueba: {
-    notificaciones: {
-      texto: 'Promoción',
-      colorFondo: '#2f1893',
-      colorTexto: '#ffffff',
-      urlRedirect: '/',
-    },
-    banners: [
-      {
-        imagen: '',
-        urlRedirect: {
-          tipo: '',
-          url: 'interna/externa ',
-        },
-      },
-    ],
-    settings: {
-      '--background_color_1': '#fff',
-      '--background_color_2': '#e4e4e4',
-      '--background_header_footer': '#fff',
-      '--color_background_hover': '#cccccc',
-      '--color_text': '#1e0e62',
-      '--color_hover_text': '#C52675',
-      '--color_subtext': 'rgba(21, 20, 57, 0.541)',
-      '--color_shopping_cart': '#25DAC5',
-      '--color_icon': '#25DAC5',
-      '--color_text_btn': '#000',
-      '--color_background_btn': '#25DAC5',
-      '--color_background_btn_2': '#000',
-      '--color_border': 'rgba(21, 20, 57, 0.541)',
-      '--logo_width': '100px',
-      '--radius_btn': '25px',
-    },
-    sedes: [
-      {
-        imagen: '',
-        titulo: '',
-        descripcion: '',
-        urlRedirect: '',
-        ciudad: '',
-      },
-      {
-        imagen: '',
-        titulo: '',
-        descripcion: '',
-        urlRedirect: '',
-        ciudad: '',
-      },
-    ],
-    favoritos: [
-      {
-        order: 1,
-        id: 1,
-        titulo: 'Favoritos',
-        productos: [
-          {
-            idProducto: 30028,
-          },
-          {
-            idProducto: 30031,
-          },
-          {
-            idProducto: 30032,
-          },
-          {
-            idProducto: 30033,
-          },
-          {
-            idProducto: 30035,
-          },
-        ],
-      },
-      {
-        order: 2,
-        id: 2,
-        titulo: 'Productos',
-        productos: [
-          {
-            idProducto: 29907,
-          },
-          {
-            idProducto: 18202,
-          },
-          {
-            idProducto: 29908,
-          },
-          {
-            idProducto: 18345,
-          },
-          {
-            idProducto: 18348,
-          },
-        ],
-      },
-    ],
-  },
   analytics_tagmanager: '',
   dataCookies: false,
   searchValue: '',
@@ -236,6 +141,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+  SET_STATEBANNER(state, value) {
+    state.stateBanner = value
+  },
   SET_SEARCHVALUE(state, value) {
     state.searchValue = value
   },
@@ -260,7 +168,7 @@ export const mutations = {
   DELETEITEMCART: (state, index) => {
     state.productsCart.splice(index, 1)
   },
-  DELETEALLITEMSCART: (state, index) => {
+  DELETEALLITEMSCART: (state) => {
     state.productsCart = []
   },
   SET_SAVEOPTION: (state, payload) => {
@@ -390,23 +298,7 @@ export const mutations = {
   SET_ANALITICS_TAGMANAGER: (state, value) => {
     state.analytics_tagmanager = value
   },
-  SET_STORELAYOUT: (state) => {
-    // const link = document.createElement('link')
-    // link.href = `https://fonts.googleapis.com/css?family=${
-    //   state.storeLayout.setting.font
-    // }`
-    // link.rel = 'stylesheet'
-    // document.getElementsByTagName('head')[0].appendChild(link)
-    // document.documentElement.style.fontFamily =
-    //   state.storeLayout.setting.font
-    // state.storeLayout.setting.colors.forEach(color => {
-    //   document.documentElement.style.setProperty(color.var, color.hex)
-    // })
-    // document.documentElement.style.setProperty(
-    //   '--opacity',
-    //   state.storeLayout.setting.colors[2].hex + '20'
-    // )
-  },
+
   DATA: (state, response) => {
     state.dataStore = response.data
   },
@@ -451,7 +343,7 @@ export const actions = {
       state.dataCookies = true
     }
   },
-  async nuxtServerInit({ commit, dispatch, state }, { req, route }) {
+  async nuxtServerInit({ dispatch, state }, { req, route }) {
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
@@ -479,10 +371,10 @@ export const actions = {
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
     )
   },
-  GET_SERVER_PATH({ state, commit }, value) {
+  GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
   },
-  GET_TEMPLATE_STORE({ state, commit }, value) {
+  GET_TEMPLATE_STORE({ commit }, value) {
     commit('SET_TEMPLATE_STORE', value)
   },
   async GET_DATA_TIENDA_BY_ID({ commit }, idTienda) {
@@ -536,7 +428,7 @@ export const actions = {
       commit('SET_FAVICON')
     }
   },
-  GET_SETTINGS_COMPONENT({ state, commit, dispatch }, value) {
+  GET_SETTINGS_COMPONENT({ state, commit }, value) {
     axios
       .get(
         `${state.urlComponents}/api/components/settings/reference/${value}`,
@@ -648,7 +540,7 @@ export const getters = {
     state.valuesCSS = { ...state.SettingsValues }
     return getters.setSettingsCSS(state.valuesCSS)
   },
-  setSettingsCSS: (state) => (obj) => {
+  setSettingsCSS: () => (obj) => {
     let keys = Object.keys(obj)
     if (obj) {
       keys.map((key) => {

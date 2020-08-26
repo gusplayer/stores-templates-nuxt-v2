@@ -19,7 +19,7 @@
         />
       </form>
     </div>
-    <kBanner />
+    <kBanner v-if="this.stateBanner"></kBanner>
     <KComponent360 />
     <KProductFavoritos />
     <KProductList
@@ -65,6 +65,7 @@ export default {
     let domain = this.$route.fullPath
     let search = domain.slice(0, [9])
     if (search === '/?search=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.setSearch(domain)
     }
   },
@@ -85,6 +86,9 @@ export default {
     },
     settingBase() {
       return this.$store.state.settingBase
+    },
+    stateBanner() {
+      return this.$store.state.stateBanner
     },
   },
   methods: {

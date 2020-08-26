@@ -146,12 +146,16 @@ export default {
     let searchSubCategory = domain.slice(0, [14])
     let search = domain.slice(0, [9])
     if (domain == '/') {
+      this.$store.commit('SET_STATEBANNER', true)
       this.showSearch = true
     } else if (searchCategory === '/?category=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.showSearch = true
     } else if (searchSubCategory === '/?subcategory=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.showSearch = true
     } else if (search === '/?search=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.setSearch(domain)
       this.showSearch = true
     } else {
@@ -288,6 +292,7 @@ export default {
       this.$router.push({
         path: '/',
       })
+      this.$store.commit('SET_STATEBANNER', false)
       this.showMenu = false
       this.addClass()
       this.selectSubcategory = value
@@ -303,7 +308,6 @@ export default {
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
-
       this.$store.commit('products/FILTER_BY', {
         type: 'subcategory',
         data: value,
@@ -314,6 +318,7 @@ export default {
         path: '/',
       })
       this.showMenu = false
+      this.$store.commit('SET_STATEBANNER', false)
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
@@ -343,6 +348,7 @@ export default {
       this.$router.push({
         path: '/',
       })
+      this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
@@ -388,12 +394,16 @@ export default {
       let searchSubCategory = domain.slice(0, [14])
       let search = domain.slice(0, [9])
       if (domain == '/') {
+        this.$store.commit('SET_STATEBANNER', true)
         this.showSearch = true
       } else if (searchCategory === '/?category=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
       } else if (searchSubCategory === '/?subcategory=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
       } else if (search === '/?search=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.setSearch(domain)
         this.showSearch = true
       } else {

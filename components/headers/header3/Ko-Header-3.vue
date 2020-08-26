@@ -74,12 +74,16 @@ export default {
     let searchSubCategory = domain.slice(0, [14])
     let search = domain.slice(0, [9])
     if (domain == '/') {
+      this.$store.commit('SET_STATEBANNER', true)
       this.showSearch = true
     } else if (searchCategory === '/?category=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.showSearch = true
     } else if (searchSubCategory === '/?subcategory=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.showSearch = true
     } else if (search === '/?search=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.setSearch(domain)
       this.showSearch = true
     } else {
@@ -200,6 +204,7 @@ export default {
       this.$router.push({
         path: '/',
       })
+      this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
@@ -224,12 +229,16 @@ export default {
       let searchSubCategory = domain.slice(0, [14])
       let search = domain.slice(0, [9])
       if (domain == '/') {
+        this.$store.commit('SET_STATEBANNER', true)
         this.showSearch = true
       } else if (searchCategory === '/?category=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
       } else if (searchSubCategory === '/?subcategory=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
       } else if (search === '/?search=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.setSearch(domain)
         this.showSearch = true
       } else {
