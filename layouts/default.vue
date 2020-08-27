@@ -140,7 +140,7 @@ export default {
           hid: 'viewport',
           name: 'viewport',
           content:
-            'width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86,user-scalable=no',
+            'width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1',
         },
         { hid: 'description', name: 'description', content: description },
         { hid: 'subject', name: 'subject', content: 'tienda de ropa' },
@@ -427,9 +427,9 @@ export default {
   top: 50%;
   right: 0px;
   width: 155px;
+  color: black;
   overflow: hidden;
   background-color: #25d366;
-  color: #fff;
   border-radius: 10px 0 0 10px;
   z-index: 3;
   transition: all 0.5s ease-in-out;
@@ -437,11 +437,9 @@ export default {
   cursor: pointer;
 }
 .wrapper-whatsapp:hover {
-  color: #ffffff;
   transform: translate(0px, 0px);
 }
 .wrapper-whatsapp div span {
-  color: white;
   font-size: 15px;
   padding-top: 8px;
   padding-bottom: 10px;

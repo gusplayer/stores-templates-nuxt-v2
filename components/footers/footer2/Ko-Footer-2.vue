@@ -74,7 +74,7 @@
                   placeholder="Correo electrónico"
                   v-model="email"
                   @keyup.enter="toSubscribe"
-                  id="CorreoElectronico1"
+                  id="InputEmailOne"
                 />
                 <span
                   v-show="errors[0] || register"
@@ -150,7 +150,7 @@
                   placeholder="Correo electrónico"
                   v-model="email"
                   @keyup.enter="toSubscribe"
-                  id="CorreoElectronico2"
+                  id="InputEmailTwo"
                 />
                 <span
                   v-show="errors[0] || register"
@@ -539,10 +539,9 @@ export default {
   background-color: var(--color_background_btn);
   margin-left: 3%;
   padding: 4px 14px;
+  font-size: 16px;
   font-weight: bold;
   width: 100%;
-  min-height: 41px;
-  max-height: 41px;
   cursor: pointer;
   transition: all 200ms ease-in;
 }

@@ -536,10 +536,8 @@ export default {
   border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   padding: 8px 14px;
-  font-size: 14px;
+  font-size: 16px;
   width: 50%;
-  max-height: 41px;
-  min-height: 41px;
   font-weight: bold;
   cursor: pointer;
   margin-left: 20px;
@@ -554,12 +552,7 @@ export default {
 
 @media (max-width: 700px) {
   .contact {
-    display: flex;
     flex-direction: column;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
   }
   .contact > div:nth-child(2) {
     margin-left: 0px;
@@ -584,22 +577,9 @@ export default {
     flex-direction: column;
   }
   .btn {
-    color: var(--color_text_btn);
-    border-radius: var(--radius_btn);
-    border: solid 2px var(--color_border_btn);
-    background-color: var(--color_background_btn);
-    padding: 8px 14px;
-    font-size: 14px;
     width: 100%;
-    font-weight: bold;
-    cursor: pointer;
     margin-left: 0px;
     margin-top: 10px;
-  }
-  .btn:hover {
-    color: var(--color_text_btn_hover);
-    border: solid 2px var(--color_border_btn_hover);
-    background-color: var(--color_background_btn_hover);
   }
   .contact-content-rigth {
     padding: 20px 15px 20px 15px;

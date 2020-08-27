@@ -16,7 +16,7 @@
           type="search"
           placeholder="¿Qué buscas?"
           @keyup.enter="getSearch(search)"
-          id="SearchIndex6"
+          id="SearchIndexTemplate"
         />
       </form>
     </div>
