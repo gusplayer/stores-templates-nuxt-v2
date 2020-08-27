@@ -53,6 +53,7 @@
                 placeholder="¿Qué buscas?"
                 v-model="search"
                 @keyup.enter="getSearch(search)"
+                id="SearchHeader"
               />
             </form>
           </div>

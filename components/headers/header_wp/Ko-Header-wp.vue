@@ -49,7 +49,7 @@
         </div>
         <!-- <div class="search">
           <form id="demo-2">
-            <input type="search" placeholder="¿Qué buscas?" v-model="search" />
+            <input type="search" placeholder="¿Qué buscas?" v-model="search" id="SearchHeader"/>
           </form>
         </div>-->
         <div class="header-content-icon">

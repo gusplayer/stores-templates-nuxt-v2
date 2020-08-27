@@ -20,6 +20,7 @@
               type="email"
               placeholder="Correo electrónico"
               v-model="email"
+              id="CorreoElectronico"
             />
             <span
               v-show="errors[0] || register"

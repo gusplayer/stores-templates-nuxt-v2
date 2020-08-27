@@ -32,17 +32,25 @@
             </div>
           </div>
           <div class="wrapper-photo_main">
-            <div v-if="active" v-show="!existYoutube" class="photo_main">
+            <div
+              v-if="this.activeZoom"
+              v-show="!existYoutube"
+              class="photo_main"
+            >
               <img
                 class="photo_main"
-                v-on:mouseover="active = !active"
+                v-on:mouseover="activeZoom = !activeZoom"
                 :src="idCloudinary(selectPhotoUrl, 645, 430)"
                 alt="Product Zoom"
               />
             </div>
-            <div v-if="!active" v-show="!existYoutube" class="photo_main">
+            <div
+              v-if="!this.activeZoom"
+              v-show="!existYoutube"
+              class="photo_main"
+            >
               <zoom
-                v-on:mouseleave="active = !active"
+                v-on:mouseleave="activeZoom = !activeZoom"
                 :photo="selectPhotoUrl"
               />
             </div>
@@ -279,10 +287,9 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
-
     window.addEventListener('scroll', function () {
       var sticky = document.getElementById('sticky')
-      if (window.pageYOffset >= 340) {
+      if (window.pageYOffset >= 340 && screen.width > 725 && sticky) {
         sticky.style.display = 'flex'
         sticky.style.position = 'fixed'
         sticky.style.top = '88px'
@@ -313,7 +320,7 @@ export default {
         titulo: '',
         desc: '',
       },
-      active: true,
+      activeZoom: true,
     }
   },
   computed: {

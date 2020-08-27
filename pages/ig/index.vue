@@ -19,16 +19,13 @@ export default {
     var prevScrollpos = window.pageYOffset
     window.onscroll = function () {
       var currentScrollPos = window.pageYOffset
-      if (prevScrollpos > currentScrollPos) {
-        // document.getElementById('navbar').style.left = '0px'
-        document.getElementById('navbar').style.zIndex = '3'
-        document.getElementById('navbar').style.top = '53px'
-        // document.getElementById('navbar').style.opacity = '1'
+      var navbar = document.getElementById('navbar')
+      if (prevScrollpos > currentScrollPos && navbar) {
+        navbar.style.zIndex = '3'
+        navbar.style.top = '91px'
       } else {
-        // document.getElementById('navbar').style.left = '-400px'
-        document.getElementById('navbar').style.zIndex = '0'
-        document.getElementById('navbar').style.top = '0px'
-        // document.getElementById('navbar').style.opacity = '0'
+        navbar.style.zIndex = '0'
+        navbar.style.top = '52px'
       }
       prevScrollpos = currentScrollPos
     }

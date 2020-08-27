@@ -74,6 +74,7 @@
                   placeholder="Correo electrónico"
                   v-model="email"
                   @keyup.enter="toSubscribe"
+                  id="CorreoElectronico"
                 />
                 <span
                   v-show="errors[0] || register"
@@ -149,6 +150,7 @@
                   placeholder="Correo electrónico"
                   v-model="email"
                   @keyup.enter="toSubscribe"
+                  id="CorreoElectronico"
                 />
                 <span
                   v-show="errors[0] || register"

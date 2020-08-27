@@ -16,6 +16,7 @@
           type="search"
           placeholder="¿Qué buscas?"
           @keyup.enter="getSearch(search)"
+          id="SearchIndex"
         />
       </form>
     </div>
@@ -52,12 +53,13 @@ export default {
     var prevScrollpos = window.pageYOffset
     window.onscroll = function () {
       var currentScrollPos = window.pageYOffset
-      if (prevScrollpos > currentScrollPos) {
-        document.getElementById('navbar').style.zIndex = '3'
-        document.getElementById('navbar').style.top = '91px'
+      var navbar = document.getElementById('navbar')
+      if (prevScrollpos > currentScrollPos && navbar) {
+        navbar.style.zIndex = '3'
+        navbar.style.top = '91px'
       } else {
-        document.getElementById('navbar').style.zIndex = '0'
-        document.getElementById('navbar').style.top = '52px'
+        navbar.style.zIndex = '0'
+        navbar.style.top = '52px'
       }
       prevScrollpos = currentScrollPos
     }

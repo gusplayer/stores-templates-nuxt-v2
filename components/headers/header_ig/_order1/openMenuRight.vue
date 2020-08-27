@@ -27,6 +27,7 @@
                   type="search"
                   placeholder="¿Qué buscas?"
                   v-model="search"
+                  id="SearchHeader"
                 />
               </form>
             </div>

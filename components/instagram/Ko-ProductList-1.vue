@@ -95,6 +95,7 @@
                 type="text"
                 placeholder="Buscar . . ."
                 required
+                id="SearchProductList"
               />
             </div>
           </div>

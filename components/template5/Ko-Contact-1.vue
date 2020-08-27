@@ -86,6 +86,7 @@
                 v-model="nombre"
                 class="input-text"
                 placeholder="Escribe tu nombre"
+                id="ContactName"
               />
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
@@ -99,6 +100,7 @@
                 v-model="email"
                 placeholder="Tu correo"
                 class="input-text"
+                id="ContactEmail"
               />
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
@@ -125,6 +127,7 @@
                   type="number"
                   placeholder="Tu teléfono"
                   v-model="numberphone"
+                  id="ContactPhone"
                 />
                 <span class="text-error" v-show="errors[0]">{{
                   errors[0]
