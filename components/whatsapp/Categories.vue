@@ -251,7 +251,7 @@ export default {
   top: 0;
   z-index: 999;
   background-color: #fff;
-  height: 40px;
+  height: 50px;
   box-shadow: 0 1px 3px rgba(147, 147, 147, 0.12),
     0 1px 2px rgba(171, 169, 169, 0.187);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -259,21 +259,21 @@ export default {
 .container-categories {
   display: flex;
   padding: 6px;
-  overflow: scroll;
-  height: 40px;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
   align-items: center;
 }
 .container-categories li {
-  height: 30px;
+  display: flex;
   margin: 5px 8px;
-  padding: 3px;
   font-size: 14px;
   letter-spacing: 0.2px;
+  font-weight: 400;
   color: rgb(160, 160, 160);
   text-align: center;
   text-transform: capitalize;
   /* background-color: #ece5dd; */
-
   /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
 }
 .container-categories p {
@@ -282,8 +282,11 @@ export default {
   align-items: center;
 }
 .item-categoria-active {
-  color: #075e54;
-  font-weight: bold;
+  color: black;
+  font-weight: 400;
+  /* background-color: #128c7e; */
+  padding: 5px;
+  border-radius: 5px;
 }
 .category_name {
   white-space: nowrap;

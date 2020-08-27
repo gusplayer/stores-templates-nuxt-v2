@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="portada-tienda">
       <whatsapp-icon class="wp-icon" />
-      <p class="title-whatsapp">Catálogo WhatsApp</p>
+      <p class="title-whatsapp">Catálogo</p>
     </div>
 
     <div class="info-logo-tienda">
@@ -37,14 +37,14 @@ export default {
   top: 0;
 }
 .portada-tienda {
-  height: 40px;
+  height: 35px;
   overflow: hidden;
   background-color: #3a4a59;
-  background-color: #128c7e;
   background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
   padding: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: sticky;
   top: 0;
   z-index: 9;
@@ -85,22 +85,24 @@ export default {
 }
 .contain-image {
   overflow: hidden;
-  width: 80px;
-  height: 80px;
-  margin-top: -10px;
+  width: 90px;
+  height: 90px;
+  /* margin-top: -10px; */
   left: 20px;
   background-color: #fff;
   border-radius: 8px;
   position: absolute;
+  border: solid 3px white;
   /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
-  box-shadow: 0 0 2px rgba(52, 58, 67, 0.1), 0 5px 10px rgba(52, 58, 67, 0.08),
-    0 15px 35px rgba(52, 58, 67, 0.08);
+  box-shadow: 0 0 2px rgba(92, 100, 111, 0.1),
+    0 5px 10px rgba(134, 143, 155, 0.08), 0 15px 35px rgba(52, 58, 67, 0.08);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 45px;
 }
 .header-logo {
-  width: 80px;
-  height: 80px;
-  padding: 8px;
+  width: 90px;
+  height: 90px;
+  padding: 5px;
   object-fit: contain;
 }
 </style>
