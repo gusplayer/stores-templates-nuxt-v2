@@ -424,6 +424,7 @@ export const actions = {
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
+<<<<<<< HEAD
 
     let id = 582
 
@@ -436,7 +437,19 @@ export const actions = {
     //     name: `https://${full}`,
     //   })
     // }
+=======
+>>>>>>> e3fad99c998fba5edc4266f523b2acb673405d62
 
+    let id = 582
+    // if (parts[1] == 'komercia' || parts[1] == 'localhost:3000') {
+    //   id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+    //     name: `${subdomain}.komercia.co/`,
+    //   })
+    // } else {
+    //   id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+    //     name: `https://${full}`,
+    //   })
+    // }
     // console.log(id)
 
     //Localhost
@@ -448,8 +461,7 @@ export const actions = {
     //   `https://api2.komercia.co/api/tienda/info/by/url`,
     //   { name: `http://${full}` }
     // )
-
-    await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
+    await dispatch('GET_DATA_TIENDA_BY_ID', id)
 
     // console.log(route.path);
 
