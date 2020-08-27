@@ -75,7 +75,7 @@
 }
 .el-tag {
   border-color: #e2e2e2;
-  background-color: #e2e2e2;
+  background-color: transparent;
   color: black;
   display: inline-block;
   height: 28px;

@@ -3,12 +3,20 @@
     <h4 class="title-input">{{ label }}</h4>
     <div class="wrapper-inputs">
       <div class="content-input" v-for="(item, index) in value" :key="index">
-        <span class="label-input">{{item.label}}</span>
+        <span class="label-input">{{ item.label }}</span>
         <div class="input-number">
-          <span role="button" @click="decrease(index)" class="icon-input__decrease">
+          <span
+            role="button"
+            @click="decrease(index)"
+            class="icon-input__decrease"
+          >
             <font-awesome-icon icon="minus" />
           </span>
-          <span role="button" @click="increase(index)" class="icon-input__increase">
+          <span
+            role="button"
+            @click="increase(index)"
+            class="icon-input__increase"
+          >
             <font-awesome-icon icon="plus" />
           </span>
           <div class="input">
@@ -26,6 +34,7 @@
               aria-valuemin="1"
               :aria-valuenow="item.size"
               aria-disabled="undefined"
+              id="InputArray"
             />
           </div>
         </div>
@@ -39,7 +48,7 @@ export default {
   props: ['value', 'label'],
   data() {
     return {
-      num: 0
+      num: 0,
     }
   },
   methods: {
@@ -54,8 +63,8 @@ export default {
     },
     increase(index) {
       this.value[index].size = +this.$refs[`input-${index}`][0].value + 2
-    }
-  }
+    },
+  },
 }
 </script>
 

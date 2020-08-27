@@ -3,7 +3,7 @@
     <h4 class="title-input">{{ label }}</h4>
     <div class="input-number">
       <span
-        :class="isDisabledDecrease?'disabled': ''"
+        :class="isDisabledDecrease ? 'disabled' : ''"
         role="button"
         @click="decrease()"
         class="icon-input__decrease"
@@ -11,7 +11,7 @@
         <menos-icon icon="minus" />
       </span>
       <span
-        :class="isDisabledIncrease?'disabled': ''"
+        :class="isDisabledIncrease ? 'disabled' : ''"
         role="button"
         @click="increase()"
         class="icon-input__increase"
@@ -33,6 +33,7 @@
           aria-valuemin="1"
           :aria-valuenow="value"
           aria-disabled="undefined"
+          id="inputNumber"
         />
       </div>
     </div>
@@ -46,7 +47,7 @@ export default {
     label: String,
     tag: String,
     incremento: Number,
-    name: String
+    name: String,
   },
   created() {
     if (this.value == null) {
@@ -56,7 +57,7 @@ export default {
   data() {
     return {
       isDisabledDecrease: false,
-      isDisabledIncrease: false
+      isDisabledIncrease: false,
     }
   },
   computed: {
@@ -70,8 +71,8 @@ export default {
       },
       set(value) {
         this.$emit('input', `${value}px`)
-      }
-    }
+      },
+    },
   },
   methods: {
     decrease() {
@@ -91,7 +92,7 @@ export default {
       } else {
         this.sizeWidth = this.sizeWidth + this.incremento
       }
-    }
+    },
   },
   watch: {
     value() {
@@ -108,8 +109,8 @@ export default {
         this.isDisabledDecrease = false
         this.isDisabledIncrease = false
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -1,15 +1,37 @@
 <template lang="html">
   <div class="home">
-    <KoTemplate />
+    <component :is="indexTemplate" />
   </div>
 </template>
 
 <script>
-import KoTemplate from './template1/index'
+import KoTemplate5 from './template5/index'
+import KoTemplate6 from './template6/index'
 
 export default {
   components: {
-    KoTemplate,
+    KoTemplate5,
+    KoTemplate6,
+  },
+  computed: {
+    template() {
+      return this.$store.state.template
+    },
+    indexTemplate() {
+      let productListComponent = ''
+      switch (this.template) {
+        case 3:
+          productListComponent = 'KoTemplate5'
+          break
+        case 5:
+          productListComponent = 'KoTemplate5'
+          break
+        case 6:
+          productListComponent = 'KoTemplate6'
+          break
+      }
+      return productListComponent
+    },
   },
 }
 </script>

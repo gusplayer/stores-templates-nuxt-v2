@@ -84,7 +84,7 @@ export default {
     InputFile,
     InputArray,
     SelectBorder,
-    MultiCheckBox
+    MultiCheckBox,
   },
   data() {
     return {
@@ -92,13 +92,13 @@ export default {
       typeVideo: [
         {
           id: 1,
-          name: 'Youtube'
+          name: 'Youtube',
         },
         {
           id: 2,
-          name: 'Vimeo'
-        }
-      ]
+          name: 'Vimeo',
+        },
+      ],
     }
   },
   computed: {
@@ -111,12 +111,12 @@ export default {
       },
       set(value) {
         this.$store.state.SettingsValues = value
-      }
+      },
     },
     views() {
       return this.$store.state.views
-    }
-  }
+    },
+  },
 }
 </script>
 

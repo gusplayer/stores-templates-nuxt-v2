@@ -1,8 +1,7 @@
+/* eslint-disable no-undef */
 export default {
   mode: 'universal',
-  /*
-   ** Headers of the page
-   */
+
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -14,23 +13,6 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [
-      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        href:
-          'https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap',
-        rel: 'stylesheet',
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap',
-      },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap',
-      },
-    ],
   },
   loading: { color: '#fff' },
 
@@ -38,12 +20,8 @@ export default {
     'element-ui/lib/theme-chalk/index.css',
     '~/assets/element-pagination.css',
     'swiper/dist/css/swiper.css',
-    'aos/dist/aos.css',
     'core-components-npm/dist/ko.css',
   ],
-  /*
-   ** Plugins to load before mounting the App
-   */
   plugins: [
     '~/plugins/core-components-npm',
     '~/plugins/element',
@@ -51,58 +29,30 @@ export default {
     '~/plugins/cloudinary',
     '~/plugins/material-icons',
     '~plugins/validate.js',
-    { src: '@/plugins/aos.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
-    // { src: '~/plugins/google-analytics.js', ssr: false },
+    { src: '~plugins/ga.js', mode: 'client' },
+    { src: '~/plugins/gtm', mode: 'client' },
+    { src: '~/plugins/facebook-pixel', mode: 'client' },
   ],
-  /*
-   ** Nuxt.js dev-modules
-   */
-  // buildModules: [
-  //   [
-  //     '@nuxtjs/google-analytics',
-  //     {
-  //       id: 'UA-92934137-1',
-  //     },
-  //   ],
-  // ],
+
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
+
   debug: {
     enabled: true,
   },
-  /*
-   ** Nuxt.js modules
-   */
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    // ['@nuxtjs/google-tag-manager', { id: 'GTM-KGB4QPR', pageTracking: true }],
-  ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
   axios: {},
-  // resolve: {
-  //   root: [
-  //     path.resolve('.'),
-  //     path.resolve('../core-components-npm/src/components'),
-  //   ],
-  // },
-  // build: {
-  //   extend(config, ctx) {
-  //     if (ctx.isDev) {
-  //       config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-  //     }
-  //   },
-  // },
   build: {
+    publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
     },
+  },
+  router: {
+    base: '/',
   },
 }

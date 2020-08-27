@@ -1,21 +1,26 @@
 <template>
   <div class="wrapper-select">
-    <h4 class="title-input">{{label}}</h4>
+    <h4 class="title-input">{{ label }}</h4>
     <div class="select">
       <el-checkbox
         :indeterminate="isIndeterminate"
         v-model="checkAll"
         @change="handleCheckAllChange"
-      >Marcar todos</el-checkbox>
+        >Marcar todos</el-checkbox
+      >
       <div style="margin: 10px 0;"></div>
-      <el-checkbox-group v-model="checkedViews" @change="handleCheckedViewsChange">
+      <el-checkbox-group
+        v-model="checkedViews"
+        @change="handleCheckedViewsChange"
+      >
         <el-checkbox
           v-for="(view, index) in views"
           :label="view.id"
           :value="view.id"
           :key="`${view}-${index}`"
           :disabled="view.name === 'Detalle Producto'"
-        >{{view.name}}</el-checkbox>
+          >{{ view.name }}</el-checkbox
+        >
       </el-checkbox-group>
     </div>
   </div>
@@ -28,13 +33,13 @@ export default {
     return {
       checkedViews: [],
       checkAll: false,
-      isIndeterminate: true
+      isIndeterminate: true,
     }
   },
   methods: {
     selectedViews(value) {
       let views = []
-      value.filter(view => views.push(view.id))
+      value.filter((view) => views.push(view.id))
       return views
     },
     handleCheckedViewsChange(value) {
@@ -50,8 +55,8 @@ export default {
       this.isIndeterminate = false
       this.$emit('input', this.checkedViews)
       this.$store.dispatch('GET_PAGINATION', this.checkedViews)
-    }
-  }
+    },
+  },
 }
 </script>
 

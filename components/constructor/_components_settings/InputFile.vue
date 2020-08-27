@@ -1,10 +1,14 @@
 <template>
   <div class="upload">
-    <h4 class="title-input">{{label}}</h4>
+    <h4 class="title-input">{{ label }}</h4>
     <button
       @click="uploadImagen()"
-      :class="textButton == 'Cargar Imagen'?'button-upload':'button-upload-line'"
-    >{{textButton}}</button>
+      :class="
+        textButton == 'Cargar Imagen' ? 'button-upload' : 'button-upload-line'
+      "
+    >
+      {{ textButton }}
+    </button>
   </div>
 </template>
 
@@ -14,7 +18,7 @@ export default {
   data() {
     return {
       myUploadWidget: null,
-      idtienda: 0
+      idtienda: 0,
     }
   },
   computed: {
@@ -35,8 +39,8 @@ export default {
               menu: {
                 uploaded: 'Fotos',
                 tagged: 'Tus Fotos',
-                albums: 'Àlbumes'
-              }
+                albums: 'Àlbumes',
+              },
             },
             menu: {
               files: 'Mi equipo',
@@ -46,12 +50,12 @@ export default {
               gdrive: 'Google Photos',
               dropbox: 'Dropbox',
               facebook: 'Facebook',
-              instagram: 'Instagram'
+              instagram: 'Instagram',
             },
             actions: {
               upload: 'Upload',
               clear_all: 'Clear all',
-              log_out: 'Log out'
+              log_out: 'Log out',
             },
             notifications: {
               general_error: 'Un error ha ocurrido',
@@ -59,7 +63,7 @@ export default {
               limit_reached: 'No more files can be selected',
               invalid_add_url: 'Ingresa una URL válida',
               invalid_public_id: 'Public ID cannot contain \\,?,&,#,%,<,>',
-              no_new_files: 'Las imagenes ha sido cargadas'
+              no_new_files: 'Las imagenes ha sido cargadas',
             },
             image_search: {
               main_title: 'Buscar imágenes en Google',
@@ -72,29 +76,29 @@ export default {
                 free: 'free to use or share',
                 free_com: 'free to use or share, even commercially',
                 free_mod: 'free to use share or modify',
-                free_mod_com: 'free to use, share or modify, even commercially'
+                free_mod_com: 'free to use, share or modify, even commercially',
               },
-              search_error: 'Search failed, please try again.'
+              search_error: 'Search failed, please try again.',
             },
             instagram: {
               main_title: 'Instagram',
               no_auth_title: 'Utilizar imagenes de tu cuenta de instagram',
               no_auth_action: 'Connectar con Instagram',
               header_title: 'Tus fotos recientes de Instagram',
-              authenticating: 'Autenticando...'
+              authenticating: 'Autenticando...',
             },
             local: {
-              main_title: 'Subir imagenes de mi equipo'
+              main_title: 'Subir imagenes de mi equipo',
             },
             selection_counter: {
-              selected: 'seleccionado'
+              selected: 'seleccionado',
             },
             actions: {
               upload: 'Subir Imagen',
               clear_all: 'Limpiar Todo',
-              log_out: 'Cerrar sesión'
-            }
-          }
+              log_out: 'Cerrar sesión',
+            },
+          },
         },
         multiple: false,
         max_file_size: 4500000,
@@ -123,8 +127,8 @@ export default {
             error: '#F44235',
             inProgress: '#0078FF',
             complete: '#20B832',
-            sourceBg: '#E4EBF1'
-          }
+            sourceBg: '#E4EBF1',
+          },
           // fonts: {
           //   default: null,
           //   "'Fira Sans', sans-serif": {
@@ -132,7 +136,7 @@ export default {
           //     active: true
           //   }
           // }
-        }
+        },
       }
     },
     textButton() {
@@ -141,7 +145,7 @@ export default {
       } else if (this.$store.state.currentSettingsBanner.slides.length <= 3) {
         return 'Agregar Imagen'
       }
-    }
+    },
   },
   methods: {
     // handleRemove(file) {
@@ -164,14 +168,14 @@ export default {
       setTimeout(() => {
         this.loadingSavePhotoMain = false
       }, 7000)
-    }
+    },
     // afterUpload(error, result, type) {
     //   if (result.event === "success") {
     //     this.$emit("upload", { payload: result.info, type });
     //     this.myUploadWidget.close();
     //   }
     // },
-  }
+  },
 }
 </script>
 

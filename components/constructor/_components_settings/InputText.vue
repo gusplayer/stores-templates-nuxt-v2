@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-input">
-    <h4 class="title-input">{{label}}</h4>
+    <h4 class="title-input">{{ label }}</h4>
     <input
       type="text"
       autocomplete="off"
@@ -9,6 +9,7 @@
       class="input__inner"
       :value="value"
       @input="updateValue()"
+      id="innputText"
     />
   </div>
 </template>
@@ -19,8 +20,8 @@ export default {
   methods: {
     updateValue() {
       this.$emit('input', this.$refs.urlIframe.value)
-    }
-  }
+    },
+  },
 }
 </script>
 

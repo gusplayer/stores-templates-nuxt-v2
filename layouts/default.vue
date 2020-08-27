@@ -1,42 +1,130 @@
 <template>
-  <div style>
-    <KoHeader1 :dataStore="dataStore" />
-    <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
+  <div
+    :style="{
+      '--font-style':
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate.tipo_letra
+          ? this.$store.state.settingByTemplate.tipo_letra
+          : 'Roboto',
+    }"
+  >
+    <component
+      :dataStore="dataStore"
+      :settingByTemplate="
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate['--background_color_1']
+          ? this.$store.state.settingByTemplate
+          : this.settingBase
+      "
+      :is="headerTemplate"
+    />
     <nuxt />
-    <KFooter1 :dataStore="dataStore" />
+    <component
+      :dataStore="dataStore"
+      :settingByTemplate="
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate['--background_color_1']
+          ? this.$store.state.settingByTemplate
+          : this.settingBase
+      "
+      :is="footerTemplate"
+    />
     <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
-      <koWhatsapp class="button-whatsapp" @click.native="redirectWhatsapp()" />
+      <div @click="redirectWhatsapp()">
+        <koWhatsapp class="button-whatsapp" /><span
+          >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
+        >
+      </div>
+    </div>
+    <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
+      <div class="content-cookie">
+        <p class="title">
+          Este sitio web utiliza cookies para su funcionar correctamente y
+          brindarte una mejor experiencia.
+        </p>
+        <div class="wrapper-btn">
+          <div class="content-btn">
+            <button class="btn-accept" @click="acceptCookies()">
+              Acepto cookies
+            </button>
+            <a
+              class="_link"
+              href="http://www.allaboutcookies.org/"
+              target="_blank"
+              rel="noreferrer noopener"
+              >¿Qué son las cookies?</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="wrapper-notificacion"
+      id="modalNotificacion"
+      v-if="dataStore.tienda.estado == 0"
+    >
+      <div class="content-notificacion">
+        <koTiendaCerrada />
+        <p class="text-noti">
+          Disculpa, no podrá realizar compras por el momento,
+        </p>
+        <p class="subtitle-noti">¿Deseas continuar?</p>
+        <button class="btn-acceptM" @click="acceptClose()">
+          Aceptar
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import KoNotificacion from '../components/template1/Ko-Notificacion-1'
-import KoHeader1 from '../components/template1/Ko-Header-1'
-import KFooter1 from '../components/template1/Ko-Footer-1'
-import koWhatsapp from '../components/template1/_productdetails/whatsapp'
+import KoHeader1 from '../components/headers/header1/Ko-Header-1'
+import KoHeader2 from '../components/headers/header2/Ko-Header-2'
+import KoHeader3 from '../components/headers/header3/Ko-Header-3'
+import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
+import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
+import koWhatsapp from '../components/whatsapp/whatsapp'
+import koTiendaCerrada from '../assets/img/tiendaCerrada'
 
 export default {
   components: {
     KoHeader1,
-    KFooter1,
+    KoHeader2,
+    KoHeader3,
+    KoFooter1,
+    KoFooter2,
     koWhatsapp,
-    KoNotificacion,
+    koTiendaCerrada,
   },
   mounted() {
-    this.$store.dispatch('GET_LOGIN')
+    this.$store.dispatch('GET_COOKIES')
+    // this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')
-    this.$store.dispatch(
-      'GET_SETTINGS_BY_TEMPLATE',
-      this.$store.state.dataStore.tienda.id_tienda
-    )
-    this.$store.dispatch(
-      'GET_ANALITICS_TAGMANAGER',
-      this.$store.state.dataStore.tienda.id_tienda
-    )
+    this.$store.dispatch('GET_SERVER_PATH')
+    // this.$store.dispatch(
+    //   'GET_SETTINGS_BY_TEMPLATE',
+    //   this.$store.state.dataStore.tienda
+    //   // this.$store.state.dataStore.tienda.id_tienda
+    // )
+    let domain = this.$route.fullPath
+    if (domain == '/?clearCart=true') {
+      this.$store.commit('DELETEALLITEMSCART')
+      this.$store.commit('UPDATE_CONTENTCART')
+    }
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
+    let tipo_letra =
+      this.$store.state.settingByTemplate &&
+      this.$store.state.settingByTemplate.tipo_letra
+        ? this.$store.state.settingByTemplate.tipo_letra
+        : 'Roboto'
+
+    let tidio =
+      this.$store.state.analytics_tagmanager &&
+      this.$store.state.analytics_tagmanager.tidio_user
+        ? this.$store.state.analytics_tagmanager.tidio_user
+        : ''
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
     return {
@@ -128,7 +216,7 @@ export default {
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
         {
-          src: `https://www.googletagmanager.com/gtag/js?id=${this.analytics_tagmanager.analytics}`,
+          src: `https://code.tidio.co/${tidio}.js`,
         },
       ],
       link: [
@@ -141,18 +229,67 @@ export default {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         },
+        {
+          href: `https://fonts.googleapis.com/css?family=${tipo_letra}:400,700&display=swap`,
+          rel: 'stylesheet',
+        },
       ],
     }
   },
   computed: {
+    dataCookies() {
+      return this.$store.state.dataCookies
+    },
+    template() {
+      return this.$store.state.template
+    },
     dataStore() {
       return this.$store.state.dataStore
     },
-    settingBytemplatePrueba() {
-      return this.$store.state.settingBytemplatePrueba
+    headerTemplate() {
+      let headerComponent = ''
+      switch (this.template) {
+        case 3:
+          headerComponent = 'KoHeader1'
+          break
+        case 5:
+          headerComponent = 'KoHeader1'
+          break
+        case 6:
+          headerComponent = 'KoHeader2'
+          break
+        case 7:
+          headerComponent = 'KoHeader3'
+          break
+      }
+      return headerComponent
+    },
+    footerTemplate() {
+      let footerComponent = ''
+      switch (this.template) {
+        case 3:
+          footerComponent = 'KoFooter1'
+          break
+        case 5:
+          footerComponent = 'KoFooter1'
+          break
+        case 6:
+          footerComponent = 'KoFooter2'
+          break
+        case 7:
+          footerComponent = 'KoFooter2'
+          break
+      }
+      return footerComponent
     },
     analytics_tagmanager() {
       return this.$store.state.analytics_tagmanager
+    },
+    settingBase() {
+      return this.$store.state.settingBase
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -205,6 +342,15 @@ export default {
         }
       }
     },
+    acceptCookies() {
+      document.getElementById('modalCookies').style.bottom = '-135px'
+      document.cookie =
+        'authCookies = 1; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;'
+    },
+    acceptClose() {
+      document.getElementById('modalNotificacion').style.zIndex = '-2'
+      document.getElementById('modalNotificacion').style.opacity = '0'
+    },
   },
 }
 </script>
@@ -216,67 +362,237 @@ export default {
   --magenta: #c52675;
   --yellow: #f2b931;
 
-  --background_color_1: #fff;
-  --background_color_2: #e4e4e4;
+  /* --background_color_1: hsla(173, 0%, 100%, 1); */
+  /* --background_color_2: #efefef; */
   --color_background_hover: #cccccc;
 
-  --color_text: #1e0e62;
-  --color_hover_text: #c52675;
-  --color_subtext: rgba(21, 20, 57, 0.541);
+  /* --color_text: #000000; */
+  --color_hover_text: #c52633;
+  /* --color_subtext: rgba(21, 20, 57, 0.541); */
 
   --color_shopping_cart: #25dac5;
-  --color_icon: #25dac5;
+  /* --color_icon: #25dac5; */
 
-  --color_text_btn: #000;
-  --color_border_btn: #25dac5;
-  --color_background_btn: #25dac5;
-  --btnhover: #c52675;
+  /* --color_text_btn: #fff; */
+  /* --color_background_btn: #000; */
+  --btnhover: #929292;
 
   --color_background_btn_2: #000;
-  --btnhover2: #c52675;
 
-  --color_border: rgba(110, 110, 133, 0.342);
+  /* --color_border: rgba(127, 127, 139, 0.342); */
 
-  --logo_width: 120px;
   --radius_btn: 5px;
 }
 * {
   margin: 0px;
   padding: 0px;
-  font-family: 'Poppins';
-  /* outline: none; */
+  font-family: var(--font-style);
+  outline: none;
   list-style: none;
   text-decoration: none;
   box-sizing: border-box;
   outline: none !important;
 }
+
+::-webkit-scrollbar {
+  border: 1px solid rgb(172, 172, 172);
+  background: transparent;
+  width: 13px;
+  border-top-right-radius: var(--radius_btn);
+  border-bottom-right-radius: var(--radius_btn);
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px white;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    170deg,
+    rgba(145, 145, 145, 1) 0%,
+    rgb(44, 44, 44) 60%
+  );
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    170deg,
+    rgb(102, 102, 102) 0%,
+    rgba(0, 0, 0, 1) 60%
+  );
+  border-radius: 10px;
+}
 .wrapper-whatsapp {
-  width: 55px;
-  height: 55px;
+  position: fixed;
+  transform: translate(108px, 0px);
+  top: 50%;
+  right: 0px;
+  width: 155px;
+  overflow: hidden;
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 10px 0 0 10px;
+  z-index: 3;
+  transition: all 0.5s ease-in-out;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.wrapper-whatsapp:hover {
+  color: #ffffff;
+  transform: translate(0px, 0px);
+}
+.wrapper-whatsapp div span {
+  color: white;
+  font-size: 15px;
+  padding-top: 8px;
+  padding-bottom: 10px;
+  position: absolute;
+  line-height: 16px;
+  font-weight: bolder;
+}
+.button-whatsapp {
+  width: 50px;
+  fill: white;
+  line-height: 30px;
+  padding: 8px;
+  transform: rotate(0deg);
+  transition: all 0.5s ease-in-out;
+  text-align: center;
+}
+.button-whatsapp:hover {
+  transform: rotate(360deg);
+}
+.wrapper-cookie {
+  z-index: 3;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0px;
+  background: transparent;
+  transition: all 200ms ease-in;
+}
+.content-cookie {
+  padding: 10px;
+  width: 100%;
+  max-width: 1300px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #53585ee5;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-box-shadow: 3px 3px 28px 3px rgba(0, 0, 0, 0.46);
+  box-shadow: 3px 3px 28px 3px rgba(0, 0, 0, 0.46);
+}
+.title {
+  font-size: 16px;
+  color: white;
+}
+.wrapper-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.content-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.btn-accept {
+  max-height: 29px;
+  width: 140px;
+  border-radius: 5px;
+  color: white;
+  border: solid 2px black;
+  background-color: black;
+  padding: 4px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+.btn-accept:hover {
+  color: white;
+  border: solid 2px gray;
+  background-color: gray;
+}
+._link {
+  width: 149px;
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #41aaf0;
+  text-align: center;
+  text-decoration: none;
+}
+._link:hover {
+  color: #2c85c0;
+}
+.wrapper-notificacion {
+  top: 0;
+  opacity: 1;
+  z-index: 9999;
+  width: 100%;
+  height: calc(100vh);
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #27d367;
-  border-radius: 100%;
-  z-index: 2;
-  bottom: 80px;
-  right: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  transition: all 200ms ease-in;
+}
+.content-notificacion {
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
+  box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
+}
+.text-noti {
+  margin-top: 15px;
+  letter-spacing: 0px;
+  font-size: 16px;
+  color: rgb(75, 75, 75);
+  width: 160px;
+}
+.subtitle-noti {
+  font-weight: bold;
+  font-size: 17px;
+  color: #ff314d;
+  margin-bottom: 15px;
+}
+.btn-acceptM {
+  width: 110px;
+  border-radius: 5px;
+  color: white;
+  border: solid 2px black;
+  background-color: black;
+  padding: 4px 14px;
+  font-size: 14px;
   cursor: pointer;
   transition: all 200ms ease-in;
 }
-.wrapper-whatsapp:hover {
-  background: #20b355;
+.btn-acceptM:hover {
+  border: solid 2px gray;
+  background-color: gray;
 }
-.button-whatsapp {
-  fill: white;
-  width: 30px;
-  transition: all 200ms ease-in;
-}
-@media (max-width: 400px) {
-  .wrapper-whatsapp {
-    bottom: 60px;
-    right: 20px;
+@media (max-width: 700px) {
+  .content-cookie {
+    flex-direction: column;
+  }
+  .title {
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
   }
 }
 </style>

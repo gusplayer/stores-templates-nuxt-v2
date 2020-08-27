@@ -1,6 +1,6 @@
 <template>
   <div class="textarea">
-    <h4 class="title-input">{{label}}</h4>
+    <h4 class="title-input">{{ label }}</h4>
     <textarea
       autocomplete="off"
       rows="2"
@@ -19,8 +19,8 @@ export default {
   methods: {
     updateValue() {
       this.$emit('input', this.$refs.textArea.value)
-    }
-  }
+    },
+  },
 }
 </script>
 

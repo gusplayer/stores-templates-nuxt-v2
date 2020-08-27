@@ -4,9 +4,9 @@ import axios from 'axios'
 // import { stat } from "fs";
 
 // const idStore = 605
+import getCookie from '../utils/getCookie'
 
 export const state = () => ({
-  urlHttp: 'https://api2.komercia.co',
   configHttp: {
     headers: {
       'content-type': 'application/json',
@@ -15,7 +15,9 @@ export const state = () => ({
     },
   },
   isLoading: false,
+  fullPathServer: '',
   authData: '',
+  template: '',
   userData: {
     id: 0,
   },
@@ -60,7 +62,6 @@ export const state = () => ({
     ],
   },
   productsCart: [],
-  totalCart: 0,
   selectedCard: 'koProductCard2',
   beforeCombination: [],
   togglePayment: false,
@@ -80,7 +81,9 @@ export const state = () => ({
   subcategorias: [],
   geolocalizacion: [],
   openOrder: false,
-  openMenulateral: false,
+  openMenulateralRight: false,
+  openMenulateralLeft: false,
+  stateBanner: true,
   mediospago: {
     epayco: false,
   },
@@ -122,106 +125,28 @@ export const state = () => ({
   settingByTemplate: '',
   category_producto_header: '',
   subcategory_producto_header: '',
-  settingBytemplatePrueba: {
-    notificaciones: {
-      texto: 'Promoción',
-      colorFondo: '#2f1893',
-      colorTexto: '#ffffff',
-      urlRedirect: '/',
-    },
-    banners: [
-      {
-        imagen: '',
-        urlRedirect: {
-          tipo: '',
-          url: 'interna/externa ',
-        },
-      },
-    ],
-    settings: {
-      '--background_color_1': '#fff',
-      '--background_color_2': '#e4e4e4',
-      '--background_header_footer': '#fff',
-      '--color_background_hover': '#cccccc',
-      '--color_text': '#1e0e62',
-      '--color_hover_text': '#C52675',
-      '--color_subtext': 'rgba(21, 20, 57, 0.541)',
-      '--color_shopping_cart': '#25DAC5',
-      '--color_icon': '#25DAC5',
-      '--color_text_btn': '#000',
-      '--color_background_btn': '#25DAC5',
-      '--color_background_btn_2': '#000',
-      '--color_border': 'rgba(21, 20, 57, 0.541)',
-      '--logo_width': '100px',
-      '--radius_btn': '25px',
-    },
-    sedes: [
-      {
-        imagen: '',
-        titulo: '',
-        descripcion: '',
-        urlRedirect: '',
-        ciudad: '',
-      },
-      {
-        imagen: '',
-        titulo: '',
-        descripcion: '',
-        urlRedirect: '',
-        ciudad: '',
-      },
-    ],
-    favoritos: [
-      {
-        order: 1,
-        id: 1,
-        titulo: 'Favoritos',
-        productos: [
-          {
-            idProducto: 30028,
-          },
-          {
-            idProducto: 30031,
-          },
-          {
-            idProducto: 30032,
-          },
-          {
-            idProducto: 30033,
-          },
-          {
-            idProducto: 30035,
-          },
-        ],
-      },
-      {
-        order: 2,
-        id: 2,
-        titulo: 'Productos',
-        productos: [
-          {
-            idProducto: 29907,
-          },
-          {
-            idProducto: 18202,
-          },
-          {
-            idProducto: 29908,
-          },
-          {
-            idProducto: 18345,
-          },
-          {
-            idProducto: 18348,
-          },
-        ],
-      },
-    ],
-  },
   analytics_tagmanager: '',
+  dataCookies: false,
+  searchValue: '',
+  settingBase: {
+    '--background_color_1': 'hsla(173, 0%, 100%, 1)',
+    '--background_color_2': '#efefef',
+    '--color_background_btn': '#000000',
+    '--color_border': 'rgba(127, 127, 139, 0.342)',
+    '--color_icon': '#25dac5',
+    '--color_text': ' #000000',
+    '--color_subtext': 'rgba(21, 20, 57, 0.541)',
+    '--color_text_btn': '#ffffff',
+  },
 })
 
 export const mutations = {
+  SET_STATEBANNER(state, value) {
+    state.stateBanner = value
+  },
+  SET_SEARCHVALUE(state, value) {
+    state.searchValue = value
+  },
   SET_ACCESSTOKEN(state, value) {
     state.accessToken = value
   },
@@ -243,6 +168,9 @@ export const mutations = {
   DELETEITEMCART: (state, index) => {
     state.productsCart.splice(index, 1)
   },
+  DELETEALLITEMSCART: (state) => {
+    state.productsCart = []
+  },
   SET_SAVEOPTION: (state, payload) => {
     state.beforeCombination.splice(payload.index, 1, payload.option.option)
   },
@@ -255,8 +183,11 @@ export const mutations = {
   SET_OPENORDER: (state, value) => {
     state.openOrder = value
   },
-  SET_OPENORDERMENU: (state, value) => {
-    state.openMenulateral = value
+  SET_OPENORDERMENURIGTH: (state, value) => {
+    state.openMenulateralRight = value
+  },
+  SET_OPENORDERMENULEFT: (state, value) => {
+    state.openMenulateralLeft = value
   },
   SET_TOKEN(state, value) {
     state.configHttp = {
@@ -367,23 +298,7 @@ export const mutations = {
   SET_ANALITICS_TAGMANAGER: (state, value) => {
     state.analytics_tagmanager = value
   },
-  SET_STORELAYOUT: (state) => {
-    // const link = document.createElement('link')
-    // link.href = `https://fonts.googleapis.com/css?family=${
-    //   state.storeLayout.setting.font
-    // }`
-    // link.rel = 'stylesheet'
-    // document.getElementsByTagName('head')[0].appendChild(link)
-    // document.documentElement.style.fontFamily =
-    //   state.storeLayout.setting.font
-    // state.storeLayout.setting.colors.forEach(color => {
-    //   document.documentElement.style.setProperty(color.var, color.hex)
-    // })
-    // document.documentElement.style.setProperty(
-    //   '--opacity',
-    //   state.storeLayout.setting.colors[2].hex + '20'
-    // )
-  },
+
   DATA: (state, response) => {
     state.dataStore = response.data
   },
@@ -400,84 +315,68 @@ export const mutations = {
   SET_PRODUCT_INFO: (state, value) => {
     state.productInfo = value
   },
+  SET_SERVER_PATH(state, value) {
+    state.fullPathServer = value
+  },
+  SET_TEMPLATE_STORE(state, value) {
+    state.template = value
+  },
 }
 export const actions = {
-  GET_LOGIN({ state, commit, dispatch }) {
-    // const token = getCookie("authData");
-    axios
-      .post(
-        `${state.urlComponents}/api/login`,
-        { token: state.token },
-        state.configAxios
-      )
-      .then(async (response) => {
-        state.idStore = await response.data.store
-        commit('SET_ACCESSTOKEN', await response.data.access_token)
-        // dispatch("GET_TYPES_COMPONENTS");
-        // dispatch("GET_COMPONENTS_BY_REFERENCE");
-        dispatch('GET_VIEWS')
-        // dispatch("GET_COMPONENTS_BASE");
-        // dispatch("GET_DATASTORE");
-      })
+  // GET_LOGIN({ state, commit, dispatch }) {
+  //   // const token = getCookie('authData')
+  //   axios
+  //     .post(
+  //       `${state.urlComponents}/api/login`,
+  //       { token: state.token },
+  //       state.configAxios
+  //     )
+  //     .then(async (response) => {
+  //       state.idStore = await response.data.store
+  //       commit('SET_ACCESSTOKEN', await response.data.access_token)
+  //       dispatch('GET_VIEWS')
+  //     })
+  // },
+  GET_COOKIES({ state }) {
+    const cookies = getCookie('authCookies')
+    if (cookies == 1) {
+      state.dataCookies = true
+    }
   },
-  async nuxtServerInit({ commit, dispatch }, { req, route }) {
+  async nuxtServerInit({ dispatch, state }, { req, route }) {
     let full = req.headers.host
     let parts = full.split('.')
     let subdomain = parts[0]
-<<<<<<< HEAD
-
-    let id = 582
-
-    // if (parts[1] == 'komercia' || parts[1] == 'localhost:3000') {
-    //   id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
-    //     name: `${subdomain}.komercia.co/`,
-    //   })
-    // } else {
-    //   id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
-    //     name: `https://${full}`,
-    //   })
-    // }
-=======
->>>>>>> e3fad99c998fba5edc4266f523b2acb673405d62
-
-    let id = 582
-    // if (parts[1] == 'komercia' || parts[1] == 'localhost:3000') {
-    //   id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
-    //     name: `${subdomain}.komercia.co/`,
-    //   })
-    // } else {
-    //   id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
-    //     name: `https://${full}`,
-    //   })
-    // }
-    // console.log(id)
-
-    //Localhost
-    // const id = await axios.post(
-    //   `https://api2.komercia.co/api/tienda/info/by/url`,
-    //   { name: `${subdomain}.komercia.co/` }
-    // )
-    // const id = await axios.post(
-    //   `https://api2.komercia.co/api/tienda/info/by/url`,
-    //   { name: `http://${full}` }
-    // )
-    await dispatch('GET_DATA_TIENDA_BY_ID', id)
-
-    // console.log(route.path);
-
+    let id = 0
+    if (
+      parts[1] == 'komercia' ||
+      parts[1] == 'localhost:3000' ||
+      parts[1] == 'unicentrovillavicencio'
+    ) {
+      id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+        name: `${subdomain}.komercia.co/`,
+      })
+    } else {
+      id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+        name: `https://${full}`,
+      })
+    }
+    await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
+    await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
+    await dispatch('GET_SERVER_PATH', full)
+    await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
+    await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
+>>>>>>> store/index.js
     const idSlug = route.path.split('-')
-    // console.log(idSlug)
-
     const producto = await axios.get(
-      // `https://templates.komercia.co/api/producto/bolso-refraction-sp-24812`
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
     )
-
-    // const storeLayout = await axios.get(
-    //   `https://komercia-2c50b.firebaseio.com/stores/${id.data.data.id}.json?auth=NbJcMDHW4Ueg4x67y5hHmxbZF3fhsyneVfQBpSFn`
-    // )
-    // commit('STOREDB', { storeLayout, producto })
-    // commit('SELECT_CARD', storeLayout.data.setting.card || 'koProductCard1')
+  },
+  GET_SERVER_PATH({ commit }, value) {
+    commit('SET_SERVER_PATH', value)
+  },
+  GET_TEMPLATE_STORE({ commit }, value) {
+    commit('SET_TEMPLATE_STORE', value)
   },
   async GET_DATA_TIENDA_BY_ID({ commit }, idTienda) {
     const response = await axios.get(
@@ -497,14 +396,16 @@ export const actions = {
         commit('SET_CITIES', response.data)
       })
   },
-  GET_SETTINGS_BY_TEMPLATE({ commit }, id) {
+  GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
+    let template = store.template
+    let id = store.id_tienda
     this.$axios
-      .$get(`https://api2.komercia.co/api/template/5/settings/${id}`)
+      .$get(`https://api2.komercia.co/api/template/${template}/settings/${id}`)
       .then((response) => {
         commit('SET_SETTINGS_BY_TEMPLATE', response.data)
       })
   },
-  GET_ANALITICS_TAGMANAGER({ commit }, id) {
+  GET_ANALYTICS_TAGMANAGER({ commit }, id) {
     this.$axios
       .$get(`https://api2.komercia.co/api/apis/tienda/${id}`)
       .then((response) => {
@@ -528,7 +429,7 @@ export const actions = {
       commit('SET_FAVICON')
     }
   },
-  GET_SETTINGS_COMPONENT({ state, commit, dispatch }, value) {
+  GET_SETTINGS_COMPONENT({ state, commit }, value) {
     axios
       .get(
         `${state.urlComponents}/api/components/settings/reference/${value}`,
@@ -640,7 +541,7 @@ export const getters = {
     state.valuesCSS = { ...state.SettingsValues }
     return getters.setSettingsCSS(state.valuesCSS)
   },
-  setSettingsCSS: (state) => (obj) => {
+  setSettingsCSS: () => (obj) => {
     let keys = Object.keys(obj)
     if (obj) {
       keys.map((key) => {
