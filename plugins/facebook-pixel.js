@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export default ({ app, store }) => {
   let pixel_facebook =
     store.state.analytics_tagmanager &&
@@ -7,7 +8,7 @@ export default ({ app, store }) => {
 
   //   if (process.env.NODE_ENV !== 'production') return
 
-  if (process.browser) {
+  if (process.browser && pixel_facebook) {
     !(function (f, b, e, v, n, t, s) {
       if (f.fbq) return
       n = f.fbq = function () {
@@ -32,6 +33,7 @@ export default ({ app, store }) => {
       'https://connect.facebook.net/en_US/fbevents.js'
     )
     fbq('init', pixel_facebook)
+    // eslint-disable-next-line no-unused-vars
     app.router.afterEach((to, from) => {
       fbq('track', 'PageView')
     })

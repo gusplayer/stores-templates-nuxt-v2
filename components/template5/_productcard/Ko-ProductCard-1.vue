@@ -548,10 +548,7 @@ export default {
 .card-price-2 {
   font-size: 22px;
   font-weight: '500';
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.4;
-  letter-spacing: normal;
   /* color: var(--color_subtext); */
   color: rgba(21, 20, 57, 0.541);
   text-align: left;
