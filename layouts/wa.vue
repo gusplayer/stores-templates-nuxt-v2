@@ -156,6 +156,10 @@ export default {
           href:
             'https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap',
         },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap',
+        },
       ],
     }
   },
