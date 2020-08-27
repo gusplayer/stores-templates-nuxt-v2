@@ -279,15 +279,17 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
+
     window.addEventListener('scroll', function () {
+      var sticky = document.getElementById('sticky')
       if (window.pageYOffset >= 340) {
-        document.getElementById('sticky').style.display = 'flex'
-        document.getElementById('sticky').style.position = 'fixed'
-        document.getElementById('sticky').style.top = '88px'
+        sticky.style.display = 'flex'
+        sticky.style.position = 'fixed'
+        sticky.style.top = '88px'
       } else {
-        document.getElementById('sticky').style.display = 'none'
-        document.getElementById('sticky').style.position = 'static'
-        document.getElementById('sticky').style.top = ''
+        sticky.style.display = 'none'
+        sticky.style.position = 'static'
+        sticky.style.top = ''
       }
     })
   },
@@ -882,7 +884,7 @@ i.close {
   margin-top: 20px;
 }
 .content-float-info {
-  padding-top: 4px;
+  padding-top: 10px;
   padding-bottom: 20px;
   width: 100%;
   display: none;
