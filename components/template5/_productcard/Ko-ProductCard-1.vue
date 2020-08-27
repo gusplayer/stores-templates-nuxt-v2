@@ -393,7 +393,8 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_1);
+  /* background: var(--background_color_1); */
+  background: white;
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
@@ -487,7 +488,8 @@ export default {
   font-style: normal;
   line-height: 1.3;
   text-align: center;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: black;
   font-weight: 400;
 }
 .content-name-product {
@@ -514,7 +516,8 @@ export default {
   align-items: center;
 }
 .separator-price {
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: black;
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -549,7 +552,8 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   text-align: left;
 }
 .btn {
@@ -591,7 +595,8 @@ export default {
 }
 .card-icon-cart-movil {
   font-size: 20px;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: black;
   margin-right: 4px;
   cursor: pointer;
   bottom: 0.125em;
@@ -622,7 +627,8 @@ export default {
     font-style: normal;
     line-height: 1.3;
     letter-spacing: 0.2px;
-    color: var(--color_text);
+    /* color: var(--color_text); */
+    color: black;
     font-weight: 400;
     text-align: center;
   }
