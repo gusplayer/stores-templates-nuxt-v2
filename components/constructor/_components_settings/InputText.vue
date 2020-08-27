@@ -9,6 +9,7 @@
       class="input__inner"
       :value="value"
       @input="updateValue()"
+      id="innputText"
     />
   </div>
 </template>

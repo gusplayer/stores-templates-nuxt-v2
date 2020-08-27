@@ -34,6 +34,7 @@
               aria-valuemin="1"
               :aria-valuenow="item.size"
               aria-disabled="undefined"
+              id="InputArray"
             />
           </div>
         </div>

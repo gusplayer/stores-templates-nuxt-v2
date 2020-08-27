@@ -33,6 +33,7 @@
           aria-valuemin="1"
           :aria-valuenow="value"
           aria-disabled="undefined"
+          id="inputNumber"
         />
       </div>
     </div>

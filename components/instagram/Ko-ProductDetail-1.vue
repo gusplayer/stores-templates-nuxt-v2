@@ -10,6 +10,7 @@
                 @click="selectedPhoto(data.detalle.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
+                alt="Prodcut Img"
               />
               <img
                 v-for="(foto, itemsfoto) in data.fotos"
@@ -17,14 +18,15 @@
                 @click="selectedPhoto(foto.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
+                alt="Prodcut Img"
               />
-
               <img
                 v-if="idYoutube"
                 :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
                 v-show="idYoutube"
                 v-on:mouseover="existYoutube = true"
                 class="video"
+                alt="Prodcut video"
               />
             </div>
           </div>
@@ -34,6 +36,7 @@
                 class="photo_main"
                 v-on:mouseover.native="active = !active"
                 :src="idCloudinary(selectPhotoUrl, 645, 430)"
+                alt="Product zoom"
               />
             </div>
             <div v-if="!active" v-show="!existYoutube" class="photo_main">
@@ -107,7 +110,9 @@
             </div>
             <div v-if="this.data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
-                <label class="text-variant">{{ variant.nombre }}:</label>
+                <label for="variant name" class="text-variant"
+                  >{{ variant.nombre }}:</label
+                >
                 <selectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"

@@ -9,13 +9,11 @@
 <script>
 import KoHeaderIg from '../components/headers/header_ig/Ko-Header-ig'
 import KFooterIg from '../components/footers/footerIg/Ko-Footer-ig'
-import koWhatsapp from '../components/whatsapp/whatsapp'
 
 export default {
   components: {
     KoHeaderIg,
     KFooterIg,
-    koWhatsapp,
   },
   mounted() {
     // this.$store.dispatch('GET_LOGIN')
@@ -54,7 +52,7 @@ export default {
           hid: 'viewport',
           name: 'viewport',
           content:
-            'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0',
+            'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0',
         },
         { hid: 'description', name: 'description', content: description },
         { hid: 'subject', name: 'subject', content: 'tienda de ropa' },
@@ -156,9 +154,6 @@ export default {
     fullPathServer() {
       return this.$store.state.fullPathServer
     },
-    settingBytemplatePrueba() {
-      return this.$store.state.settingBytemplatePrueba
-    },
     themeStyleIg() {
       return {
         '--font-style': 'Helvetica',
@@ -181,16 +176,13 @@ export default {
         '--color_icon': '#3aacf7',
 
         '--color_text_btn': '#fff',
-        '--color_border_btn': '#000000',
         '--color_background_btn': '#000000',
         '--btnhover': '#25dac5',
 
         '--color_background_btn_2': ' #000',
-        '--btnhover2': '#25dac5',
 
         '--color_border': 'rgba(110, 110, 133, 0.342)',
 
-        '--logo_width': '120px',
         '--radius_btn': '5px',
       }
     },

@@ -61,7 +61,7 @@ export default {
 .icon {
   position: relative;
   font-size: 24px;
-  color: var(--color_text);
+  color: var(--color_icon);
   top: -3px;
 }
 .icon:hover {

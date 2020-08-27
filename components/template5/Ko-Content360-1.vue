@@ -27,6 +27,7 @@ export default {
 <style scoped>
 .wrapper_content360 {
   width: 100%;
+  background: var(--background_color_2);
 }
 .contenedor {
   width: 100%;

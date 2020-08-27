@@ -17,7 +17,7 @@
               class="text-icon"
             >
               <div v-if="item2.dato" :is="item2.icon" class="contact-icon" />
-              <a v-if="item2.dato" :href="item2.dato">{{ item2.dato }}</a>
+              <a v-if="item2.dato">{{ item2.dato }}</a>
             </div>
           </div>
           <div class="contact-content-icon">
@@ -27,7 +27,13 @@
               class="text-icon"
             >
               <div v-if="item.link" :is="item.icon" class="icon" />
-              <a v-if="item.link" :href="item.link">{{ item.nombre }}</a>
+              <a
+                v-if="item.link"
+                :href="item.link"
+                target="_blank"
+                rel="noreferrer noopener"
+                >{{ item.nombre }}</a
+              >
             </div>
           </div>
         </div>
@@ -80,6 +86,7 @@
                 v-model="nombre"
                 class="input-text"
                 placeholder="Escribe tu nombre"
+                id="ContactName"
               />
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
@@ -93,6 +100,7 @@
                 v-model="email"
                 placeholder="Tu correo"
                 class="input-text"
+                id="ContactEmail"
               />
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
@@ -119,6 +127,7 @@
                   type="number"
                   placeholder="Tu teléfono"
                   v-model="numberphone"
+                  id="ContactPhone"
                 />
                 <span class="text-error" v-show="errors[0]">{{
                   errors[0]

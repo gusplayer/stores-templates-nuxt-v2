@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-card">
+  <div class="wrapper-card" :style="settingByTemplate">
     <div class="container">
       <div
         class="wrapper"
@@ -14,11 +14,13 @@
             v-if="!soldOut"
             :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image"
+            alt="Product Img"
           />
           <img
             v-if="soldOut"
             :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image-soldOut"
+            alt="Product Img"
           />
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
@@ -40,13 +42,34 @@
                 <div>
                   <!-- <p class="card-price-1" v-if="this.product.precio > 0">
                     $ {{ this.product.precio }}
-                  </p>-->
-                  <p
-                    class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
+                  </p> -->
+                  <div
+                    class="content-price"
+                    v-if="estadoCart && this.minPrice != this.maxPrice"
                   >
-                    {{ currency(this.product.precio) }}
-                  </p>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{ this.minPrice | currency }}
+                    </p>
+
+                    <p class="separator-price">-</p>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{ this.maxPrice | currency }}
+                    </p>
+                  </div>
+                  <div v-else>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{ this.product.precio | currency }}
+                    </p>
+                  </div>
                 </div>
                 <!-- <p class="card-descuento">-50%</p> -->
               </div>
@@ -84,15 +107,16 @@
         >
           <img
             v-if="!soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
+            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image"
+            alt="Product Img"
           />
           <img
             v-if="soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
+            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image-soldOut"
+            alt="Product Img"
           />
-
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
@@ -110,6 +134,7 @@
               {{ `${this.product.nombre.slice(0, 34)}` }}
             </p>
           </router-link>
+
           <div class="content-text-price-movil-cart" v-if="this.product.precio">
             <router-link
               :to="{ path: `/productos/` + product.slug }"
@@ -118,13 +143,35 @@
               <div>
                 <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
-                </p>-->
-                <p class="card-price-2" v-if="this.product.precio > 0">
-                  {{ currency(this.product.precio) }}
-                </p>
+                </p> -->
+                <div
+                  class="content-price"
+                  v-if="estadoCart && this.minPrice != this.maxPrice"
+                >
+                  <p
+                    class="card-price-2"
+                    v-if="this.product.precio > 0 || this.product.precio"
+                  >
+                    {{ this.minPrice | currency }}
+                  </p>
+
+                  <p class="separator-price">-</p>
+                  <p
+                    class="card-price-2"
+                    v-if="this.product.precio > 0 || this.product.precio"
+                  >
+                    {{ this.maxPrice | currency }}
+                  </p>
+                </div>
+                <div v-else>
+                  <p class="card-price-2" v-if="this.product.precio > 0">
+                    {{ this.product.precio | currency }}
+                  </p>
+                </div>
               </div>
               <!-- <p class="card-descuento">-50%</p> -->
             </router-link>
+
             <div v-if="!this.estadoCart && !soldOut && !spent">
               <cartArrowDown
                 class="card-icon-cart-movil"
@@ -147,18 +194,26 @@
 </template>
 
 <script>
-import axios from 'axios'
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',
-  props: { product: Object },
+  props: { product: Object, settingByTemplate: Object },
   mounted() {
     this.idSlug = this.product.id
+    this.prodcutPrice()
+    if (
+      this.product.con_variante &&
+      this.product.variantes[0].variantes !== '[object Object]'
+    ) {
+      this.estadoCart = true
+    }
   },
   data() {
     return {
       estadoCart: false,
+      minPrice: '',
+      maxPrice: '',
       idSlug: '',
       maxQuantityValue: 0,
       productIndexCart: null,
@@ -190,7 +245,7 @@ export default {
         this.product.con_variante &&
         this.product.variantes[0].variantes !== '[object Object]'
       ) {
-        this.estadoCart = true
+        // this.estadoCart = true
         const arrCombinations = this.product.variantes
         let inventario = 0
         if (
@@ -281,20 +336,52 @@ export default {
         }
       }
     },
+    prodcutPrice() {
+      if (
+        this.product.con_variante &&
+        this.product.variantes[0].variantes !== '[object Object]'
+      ) {
+        const arrCombinations = this.product.variantes
+        if (
+          arrCombinations.length &&
+          arrCombinations[0].variantes !== '[object Object]'
+        ) {
+          if (this.product.combinaciones.length > 1) {
+            let arrPrice = this.product.combinaciones.map((products) => {
+              if (products.precio) {
+                return products.precio
+              }
+            })
+            if (arrPrice) {
+              let resultPrice = arrPrice.sort(function (prev, next) {
+                return prev - next
+              })
+              if (resultPrice[resultPrice.length - 1]) {
+                this.minPrice = resultPrice[0]
+                this.maxPrice = resultPrice[resultPrice.length - 1]
+              }
+            }
+          }
+        }
+      }
+    },
   },
   watch: {
     productsCarts(value) {
       this.getDataProduct()
     },
   },
+  filters: {
+    currency(value) {
+      if (value) {
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+      }
+    },
+  },
 }
 </script>
 
 <style scoped>
-div.wrapper-card {
-  --color_subtext: #000;
-  --color_text_btn: #fff;
-}
 .separador {
   margin: 30px;
 }
@@ -306,7 +393,7 @@ div.wrapper-card {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background: var(--background_color_2); */
+  /* background: var(--background_color_1); */
   background: white;
   box-sizing: border-box;
   border-radius: 10px;
@@ -345,7 +432,7 @@ div.wrapper-card {
   color: black;
   font-size: 12px;
   font-weight: bold;
-  top: 88%;
+  top: 87%;
   right: 0px;
   z-index: 2;
 }
@@ -401,8 +488,8 @@ div.wrapper-card {
   font-style: normal;
   line-height: 1.3;
   text-align: center;
-  /* letter-spacing: 1px; */
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: black;
   font-weight: 400;
 }
 .content-name-product {
@@ -421,6 +508,18 @@ div.wrapper-card {
   justify-content: center;
   align-items: center;
   height: 47px;
+}
+.content-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.separator-price {
+  /* color: var(--color_text); */
+  color: black;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .card-price-1 {
   font-size: 12px;
@@ -449,18 +548,16 @@ div.wrapper-card {
 .card-price-2 {
   font-size: 22px;
   font-weight: '500';
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.4;
-  letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   text-align: left;
 }
 .btn {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
-  border: solid 1px var(--color_text);
-  background-color: var(--color_text);
+  border: solid 1px var(--color_background_btn);
+  background-color: var(--color_background_btn);
   padding: 8px 14px;
   font-size: 14px;
   width: 120px;
@@ -495,7 +592,8 @@ div.wrapper-card {
 }
 .card-icon-cart-movil {
   font-size: 20px;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: black;
   margin-right: 4px;
   cursor: pointer;
   bottom: 0.125em;
@@ -526,7 +624,8 @@ div.wrapper-card {
     font-style: normal;
     line-height: 1.3;
     letter-spacing: 0.2px;
-    color: var(--color_text);
+    /* color: var(--color_text); */
+    color: black;
     font-weight: 400;
     text-align: center;
   }

@@ -59,7 +59,7 @@
         <div class="content-item-productos">
           <div class="grid-products">
             <div
-              v-for="product in orderproduct"
+              v-for="product in filterProduct"
               :key="product.id"
               class="content-products"
             >
@@ -73,12 +73,12 @@
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 15">
+            <div class="product_pagination" v-if="products.length > 24">
               <el-pagination
                 background
                 layout="prev, pager, next"
                 :total="products.length"
-                :page-size="15"
+                :page-size="24"
                 :current-page.sync="currentPage"
                 class="pagination"
               ></el-pagination>
@@ -168,19 +168,19 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 15 - 15
-      const final = initial + 15
+      const initial = this.currentPage * 24 - 24
+      const final = initial + 24
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 15 - 15
-      const final = initial + 15
-      return this.products.slice(initial, final)
+      const initial = this.currentPage * 24 - 24
+      const final = initial + 24
+      return this.orderproduct.slice(initial, final)
     },
     orderproduct() {
-      return this.filterProduct.sort(function (prev, next) {
+      return this.products.sort(function (prev, next) {
         return next.orden - prev.orden
       })
     },
@@ -198,6 +198,9 @@ export default {
     },
     nameSubCategoryHeader() {
       return this.$store.state.subcategory_producto_header
+    },
+    searchValue() {
+      return this.$store.state.searchValue
     },
   },
   methods: {
@@ -297,6 +300,7 @@ export default {
       })
     },
     clear() {
+      this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
@@ -388,6 +392,7 @@ export default {
     nameSubCategoryHeader(value) {
       return value
     },
+    // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
       let searchCategory = domain.slice(0, [11])
@@ -400,20 +405,20 @@ export default {
         this.Allcategories()
       }
     },
+    searchValue(value) {
+      this.Searchproduct(value)
+    },
   },
 }
 </script>
 
 <style scoped>
-div.wrapper-productlist {
-  --background_color_1: #eeeeee;
-}
 .wrapper-productlist {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   box-sizing: border-box;
 }
 .container {
@@ -466,7 +471,7 @@ div.wrapper-productlist {
 }
 .text-categorias {
   background: transparent;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 1.4;
   color: var(--color_subtext);
@@ -474,7 +479,6 @@ div.wrapper-productlist {
   margin-right: 2px;
   cursor: pointer;
   display: flex;
-  align-self: flex-start;
 }
 .text-categorias-select {
   background: transparent;
@@ -488,7 +492,6 @@ div.wrapper-productlist {
   cursor: pointer;
   opacity: 0.6;
   display: flex;
-  align-self: flex-start;
 }
 
 .content-products {

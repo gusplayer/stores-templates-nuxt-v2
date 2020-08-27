@@ -8,6 +8,7 @@
               <img
                 :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
                 class="header-logo"
+                alt="Logo Img"
               />
             </nuxt-link>
             <nuxt-link to="/ig">
@@ -26,6 +27,7 @@
                   type="search"
                   placeholder="¿Qué buscas?"
                   v-model="search"
+                  id="SearchHeader"
                 />
               </form>
             </div>
@@ -218,18 +220,7 @@ export default {
       this.nameCategory = ''
     },
     Searchproduct(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
+      this.$store.commit('SET_SEARCHVALUE', search)
     },
   },
   watch: {

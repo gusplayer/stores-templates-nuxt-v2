@@ -3,7 +3,7 @@
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">Favoritos</p>
     </div>
-    <KoSwipper :products="orderproduct"></KoSwipper>
+    <KoSwipper :products="dataProductFavorite"></KoSwipper>
   </div>
 </template>
 
@@ -11,34 +11,29 @@
 import KoSwipper from './_productofavorito/productSlide'
 export default {
   name: 'Ko-ProductFavoritos-1',
-
   components: {
     KoSwipper,
   },
-  mounted() {},
   computed: {
     dataProductFavorite() {
       return this.$store.state.dataStore.productos.filter(
         (product) => product.favorito === 1
       )
     },
-    orderproduct() {
-      return this.dataProductFavorite.sort(function (prev, next) {
-        return next.orden - prev.orden
-      })
-    },
+    // orderproduct() {
+    //   return this.dataProductFavorite.sort(function (prev, next) {
+    //     return next.orden - prev.orden
+    //   })
+    // },
   },
 }
 </script>
 
 <style scoped>
-div.wrapper-ProductFavoritos {
-  --background_color_1: #f2f4f7;
-}
 .wrapper-ProductFavoritos {
   display: flex;
   width: 100%;
-  background-color: var(--background_color_1);
+  background-color: var(--background_color_2);
   flex-direction: column;
   justify-content: center;
   align-items: center;

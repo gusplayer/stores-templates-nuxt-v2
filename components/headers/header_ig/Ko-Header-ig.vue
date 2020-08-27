@@ -8,6 +8,7 @@
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
+              alt="Logo Img"
             />
           </nuxt-link>
           <nuxt-link to="/ig">
@@ -16,7 +17,8 @@
           <a
             v-if="this.dataStore.tienda.red_instagram"
             :href="this.dataStore.tienda.red_instagram"
-            target="_black"
+            target="_blank"
+            rel="noreferrer noopener"
             class="header-text-center"
             ><instagram-icon class="icon" />Seguir</a
           >

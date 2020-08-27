@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-contact">
+  <div class="wrapper-contact" :style="settingByTemplate">
     <div class="contact">
       <div class="contact-content">
         <div>
@@ -17,7 +17,7 @@
               class="text-icon"
             >
               <div v-if="item2.dato" :is="item2.icon" class="contact-icon" />
-              <a v-if="item2.dato" :href="item2.dato">{{ item2.dato }}</a>
+              <a v-if="item2.dato">{{ item2.dato }}</a>
             </div>
           </div>
           <div class="contact-content-icon">
@@ -27,7 +27,13 @@
               class="text-icon"
             >
               <div v-if="item.link" :is="item.icon" class="icon" />
-              <a v-if="item.link" :href="item.link">{{ item.nombre }}</a>
+              <a
+                v-if="item.link"
+                :href="item.link"
+                target="_blank"
+                rel="noreferrer noopener"
+                >{{ item.nombre }}</a
+              >
             </div>
           </div>
         </div>
@@ -80,6 +86,7 @@
                 v-model="nombre"
                 class="input-text"
                 placeholder="Escribe tu nombre"
+                id="ContactName"
               />
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
@@ -93,6 +100,7 @@
                 v-model="email"
                 placeholder="Tu correo"
                 class="input-text"
+                id="ContactEmail"
               />
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
@@ -119,6 +127,7 @@
                   type="number"
                   placeholder="Tu teléfono"
                   v-model="numberphone"
+                  id="ContactPhone"
                 />
                 <span class="text-error" v-show="errors[0]">{{
                   errors[0]
@@ -146,6 +155,7 @@ export default {
   name: 'Ko-Contact-1',
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   components: {
     ValidationObserver,
@@ -220,7 +230,7 @@ export default {
               tienda: this.dataStore.tienda.id_tienda,
             }
             axios
-              .post(`https://templates.komercia.co/api/mensaje-contacto`, json)
+              .post('https://templates.komercia.co/api/mensaje-contacto', json)
               .then((response) => {
                 this.$message.success('Comentario enviado!')
               })
@@ -246,15 +256,13 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-contact {
-  --background_color_1: #f2f4f7;
-}
 .wrapper-contact {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_1);
+  /* background: var(--background_color_2); */
+  background: #efefef;
   box-sizing: border-box;
 }
 .contact {
@@ -290,7 +298,8 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: -0.4px;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
 }
 .contact-text-subtitle {
   font-size: 16px;
@@ -299,7 +308,8 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   margin-top: 10px;
 }
 .contact-text-subtitles {
@@ -309,7 +319,8 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   margin-top: 10px;
 }
 .contact-text-subtitle2 {
@@ -319,7 +330,8 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
@@ -331,7 +343,8 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   margin-top: 10px;
 }
 .contact-text-subtitle4 {
@@ -341,7 +354,8 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1;
   letter-spacing: normal;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin-top: 10px;
   text-align: right;
 }
@@ -356,16 +370,18 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 2.11;
   letter-spacing: normal;
-  color: var(--color_icon);
+  /* color: var(--color_icon); */
+  color: #25dac5;
 }
 .text-icon {
   display: flex;
   flex-direction: row;
-  color: var(--color_icon);
+  /* color: var(--color_icon); */
+  color: #25dac5;
 }
 .text-icon a:hover {
   cursor: pointer;
-  color: var(--color_hover_text);
+  color: var(--btnhover);
 }
 .text-icon a {
   font-size: 16px;
@@ -374,7 +390,8 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin-top: 5px;
   margin-left: 7px;
 }
@@ -388,7 +405,8 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin-top: 10px;
 }
 .contact-text-sub2 {
@@ -398,13 +416,15 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin-top: 10px;
 }
 .separator {
   margin-top: 15px;
   width: 100%;
-  border: solid 1.5px var(--background_color_2);
+  /* border: solid 1.5px var(--color_border); */
+  border: solid 1.5px rgba(255, 255, 255, 1);
 }
 .text-icon {
   display: flex;
@@ -415,7 +435,8 @@ div.wrapper-contact {
 }
 .contact-content-rigth {
   border-radius: 10px;
-  background-color: var(--background_color_2);
+  /* background-color: var(--background_color_1); */
+  background-color: rgb(223, 223, 223);
   padding: 30px 30px 50px 30px;
   margin-top: 20px;
 }
@@ -426,7 +447,8 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1.86;
   letter-spacing: 2px;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin: 10px;
   margin-left: 0px;
 }
@@ -447,7 +469,8 @@ div.wrapper-contact {
 }
 .input-text {
   font-size: 14px;
-  color: var(--color_subtext);
+  /* color: var(--color_border); */
+  color: rgba(21, 20, 57, 0.541);
   border: solid 2px #afafaf;
   border-radius: var(--radius_btn);
   background-color: transparent;
@@ -455,7 +478,8 @@ div.wrapper-contact {
   width: 100%;
 }
 .input-text::placeholder {
-  color: var(--color_subtext);
+  /* color: var(--color_border); */
+  color: rgba(21, 20, 57, 0.541);
   opacity: 0.7;
 }
 .input-text:-internal-autofill-selected {
@@ -467,7 +491,8 @@ div.wrapper-contact {
 .input-text:focus,
 .input-text:active {
   outline: 0;
-  border: solid 2px var(--color_border_btn);
+  /* border: solid 2px var(--color_border); */
+  border: solid 2px rgba(127, 127, 139, 0.342);
 }
 .input-text-rectangule {
   font-size: 14px;
@@ -476,7 +501,8 @@ div.wrapper-contact {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_border); */
+  color: rgba(21, 20, 57, 0.541);
   border: solid 2px #afafaf;
   border-radius: var(--radius_btn);
   background-color: transparent;
@@ -487,14 +513,16 @@ div.wrapper-contact {
   min-height: 41px;
 }
 .input-text-rectangule::placeholder {
-  color: var(--color_subtext);
+  /* color: var(--color_border); */
+  color: rgba(21, 20, 57, 0.541);
   opacity: 0.7;
 }
 
 .input-text-rectangule:focus,
 .input-text-rectangule:active {
   outline: 0;
-  border: solid 2px var(--color_border_btn);
+  /* border: solid 2px var(--color_border); */
+  border: solid 2px rgba(127, 127, 139, 0.342);
 }
 .text-error {
   font-size: 12px;
@@ -505,7 +533,7 @@ div.wrapper-contact {
 .btn {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   padding: 8px 14px;
   font-size: 14px;
@@ -525,8 +553,6 @@ div.wrapper-contact {
 }
 
 @media (max-width: 700px) {
-  /* For mobile phones */
-
   .contact {
     display: flex;
     flex-direction: column;

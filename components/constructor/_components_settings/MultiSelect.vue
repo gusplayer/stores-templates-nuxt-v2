@@ -25,6 +25,7 @@
           @blur="showLoader = false"
           placeholder="buscar..."
           v-model="search"
+          id="MultiSelect"
         />
       </div>
       <div class="checkbox-select__col">

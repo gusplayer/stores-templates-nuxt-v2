@@ -8,7 +8,11 @@
     <div class="info-logo-tienda">
       <div style>
         <div class="contain-image">
-          <img :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`" class="header-logo" />
+          <img
+            :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+            class="header-logo"
+            alt="Logo img"
+          />
         </div>
       </div>
       <p>Información ></p>

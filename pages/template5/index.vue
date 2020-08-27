@@ -1,5 +1,13 @@
 <template lang="html">
-  <div class="home">
+  <div
+    class="home"
+    :style="
+      this.$store.state.settingByTemplate &&
+      this.$store.state.settingByTemplate['--background_color_1']
+        ? this.$store.state.settingByTemplate
+        : this.settingBase
+    "
+  >
     <div class="space-search"></div>
     <div class="search-movil" id="navbar">
       <form id="demo-1" style="width: 100%;">
@@ -8,10 +16,11 @@
           type="search"
           placeholder="¿Qué buscas?"
           @keyup.enter="getSearch(search)"
+          id="SearchIndex"
         />
       </form>
     </div>
-    <kBanner />
+    <kBanner v-if="this.stateBanner"></kBanner>
     <KComponent360 />
     <KProductFavoritos />
     <KProductList
@@ -44,16 +53,13 @@ export default {
     var prevScrollpos = window.pageYOffset
     window.onscroll = function () {
       var currentScrollPos = window.pageYOffset
-      if (prevScrollpos > currentScrollPos) {
-        // document.getElementById('navbar').style.left = '0px'
-        document.getElementById('navbar').style.zIndex = '3'
-        document.getElementById('navbar').style.top = '91px'
-        // document.getElementById('navbar').style.opacity = '1'
+      var navbar = document.getElementById('navbar')
+      if (prevScrollpos > currentScrollPos && navbar) {
+        navbar.style.zIndex = '3'
+        navbar.style.top = '91px'
       } else {
-        // document.getElementById('navbar').style.left = '-400px'
-        document.getElementById('navbar').style.zIndex = '0'
-        document.getElementById('navbar').style.top = '52px'
-        // document.getElementById('navbar').style.opacity = '0'
+        navbar.style.zIndex = '0'
+        navbar.style.top = '52px'
       }
       prevScrollpos = currentScrollPos
     }
@@ -61,6 +67,7 @@ export default {
     let domain = this.$route.fullPath
     let search = domain.slice(0, [9])
     if (search === '/?search=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.setSearch(domain)
     }
   },
@@ -79,24 +86,16 @@ export default {
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },
-    fullPathServer() {
-      return this.$store.state.fullPathServer
+    settingBase() {
+      return this.$store.state.settingBase
+    },
+    stateBanner() {
+      return this.$store.state.stateBanner
     },
   },
   methods: {
     Searchproduct(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
+      this.$store.commit('SET_SEARCHVALUE', search)
     },
     getSearch(value) {
       if (value) {
@@ -110,17 +109,6 @@ export default {
       let UrlCategory = category.replace(/-/g, ' ')
       let urlFiltrada = decodeURIComponent(UrlCategory)
       this.search = urlFiltrada
-      // if (urlFiltrada.length) {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'search',
-      //     data: urlFiltrada,
-      //   })
-      // } else {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'all',
-      //     data: '',
-      //   })
-      // }
     },
   },
   watch: {
@@ -138,7 +126,6 @@ export default {
 .search-movil {
   display: none;
 }
-/* search */
 input {
   outline: none;
 }
@@ -156,7 +143,7 @@ input[type='search'] {
   background: #fff
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
-  border: solid 2px var(--color_border);
+  border: solid 2px var(--color_icon);
   padding: 4px 7px;
   width: 35px;
   max-height: 36px;
@@ -171,7 +158,7 @@ input[type='search'] {
   background: #fff
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
-  border: solid 2px var(--color_border);
+  border: solid 2px var(--color_icon);
   padding: 6px 4px 7px 38px;
   width: 100%;
   -webkit-border-radius: var(--radius_btn);

@@ -1,14 +1,10 @@
-/* eslint-disable */
 export default ({ app, store }) => {
-  /*
-   ** Only run on client-side and only in production mode
-   */
-
   let analytics =
     store.state.analytics_tagmanager &&
     store.state.analytics_tagmanager.analytics
       ? store.state.analytics_tagmanager.analytics
       : ''
+
   if (process.env.NODE_ENV !== 'production')
     return /*
      ** Include Google Analytics Script

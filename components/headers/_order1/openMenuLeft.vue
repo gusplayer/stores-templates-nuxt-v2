@@ -8,10 +8,11 @@
               <img
                 :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
                 class="header-logo"
+                alt="Logo Img"
               />
             </nuxt-link>
           </div>
-          <label @click="closed" class="order_header_close">
+          <label for="order_close" @click="closed" class="order_header_close">
             <close-icon />
           </label>
         </div>
@@ -149,11 +150,7 @@ export default {
         element === 'order' ||
         element === 'order_header_close' ||
         element === 'continue_shopping' ||
-        element === 'continue_shopping2' ||
-        element.animVal === 'material-design-icon__svg' ||
-        element.baseVal === 'material-design-icon__svg' ||
-        element.animVal === '' ||
-        element.baseVal === ''
+        element === 'continue_shopping2'
       ) {
         this.$store.commit('SET_OPENORDERMENULEFT', false)
       }
@@ -161,7 +158,7 @@ export default {
     Sendsubcategory(value) {
       this.indexSelect2 = value
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.$store.commit('SET_OPENORDERMENULEFT', false)
       this.addClass()
@@ -187,7 +184,7 @@ export default {
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       // this.$store.commit('SET_OPENORDERMENULEFT', false)
       this.currentPage = 1
@@ -217,7 +214,7 @@ export default {
     },
     clear() {
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.showMenu = false
       this.$store.commit('SET_OPENORDERMENULEFT', false)
@@ -299,12 +296,11 @@ export default {
 }
 .order_header_close {
   font-size: 30px;
-  color: black;
+  color: var(--color_icon);
   transition: 0.3s;
   cursor: pointer;
 }
 .order_header_close:hover {
-  transform: rotate(90deg);
   color: gray;
 }
 .wrapper-category-all {

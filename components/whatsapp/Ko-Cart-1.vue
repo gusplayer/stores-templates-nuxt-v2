@@ -6,7 +6,6 @@
           v-for="(product, index) in productsCart"
           :key="index"
           class="wrapper_item"
-          data-aos="zoom-in"
         >
           <div class="content_product_items">
             <div class="wrapper_item_photo">
@@ -268,7 +267,7 @@
     </div>
     <div v-else class="contenedor-vacio">
       <div class="wrapper_photo">
-        <img :src="img" class="photo" />
+        <img :src="img" class="photo" alt="Product img" />
       </div>
       <p>Tu carrito de compras ahora está vacío.</p>
 
@@ -768,9 +767,8 @@ div.wrapper-cart {
   transition: all 200ms ease-in;
 }
 .btn2:hover {
-  color: var(--btnhover2);
-  border: solid 2px var(--btnhover2);
-  background-color: transparent;
+  color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 .contenedor-vacio {
   display: flex;
@@ -794,9 +792,8 @@ div.wrapper-cart {
   transition: all 200ms ease-in;
 }
 .btn3:hover {
-  color: var(--btnhover2);
-  border: solid 2px var(--btnhover2);
-  background-color: transparent;
+  color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 .products_list_resposive {
   display: none;

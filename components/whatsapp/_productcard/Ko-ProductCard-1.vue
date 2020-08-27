@@ -2,7 +2,11 @@
   <div class="container-card">
     <div class="wrapper-movil">
       <router-link :to="{ path: `/wa/` + product.slug }" class="wrapper-image">
-        <img :src="idCloudinary(this.product.foto_cloudinary, 280, 280)" class="product-image" />
+        <img
+          :src="idCloudinary(this.product.foto_cloudinary, 280, 280)"
+          class="product-image"
+          alt="Product img"
+        />
       </router-link>
       <div class="wrapper-text">
         <div class="title-container">
@@ -23,7 +27,9 @@
         <div class="content-text-price-movil-cart" v-if="this.product.precio">
           <div class="container-sub-price">
             <div>
-              <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis!</p>
+              <p class="card-info-2" v-if="getFreeShipping == false">
+                Envío gratis!
+              </p>
               <p class="card-info-1" v-if="soldOut">Agotado 🙁</p>
               <p class="card-info-3" v-else-if="this.product.favorito">Destacado 😍</p>
             </div>

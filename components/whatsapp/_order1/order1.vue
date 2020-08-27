@@ -20,34 +20,43 @@
                     :key="index"
                   >
                     <div class="photo">
-                      <img :src="product.foto_cloudinary" />
+                      <img :src="product.foto_cloudinary" alt="Product img" />
                     </div>
                     <div class="name">
-                      <p
-                        class="order-text"
-                        style="font-weight: bold;"
-                      >{{ product.nombre | capitalize }}</p>
+                      <p class="order-text" style="font-weight: bold;">
+                        {{ product.nombre | capitalize }}
+                      </p>
                       <span>
                         <b class="unidades">Cantidad: {{ product.cantidad }}</b>
-                        <b class="unidades">X {{ product.precio | currency }}</b>
+                        <b class="unidades"
+                          >X {{ product.precio | currency }}</b
+                        >
                       </span>
                       <div v-if="product.combinacion">
                         <el-tag
                           v-for="(productCombinacion,
                           index2) in product.combinacion"
                           :key="index2"
-                        >{{ productCombinacion | capitalize }}</el-tag>
+                          >{{ productCombinacion | capitalize }}</el-tag
+                        >
                       </div>
                     </div>
                     <div class="price">
-                      <p>{{ (product.precio * product.cantidad) | currency }}</p>
+                      <p>
+                        {{ (product.precio * product.cantidad) | currency }}
+                      </p>
                     </div>
-                    <delete-icon class="material-icons delete" v-on:click="deleteItemCart(index)"></delete-icon>
+                    <delete-icon
+                      class="material-icons delete"
+                      v-on:click="deleteItemCart(index)"
+                    ></delete-icon>
                   </li>
                 </ul>
               </div>
               <div v-if="productsCart.length" class="content-remove-cart">
-                <p class="remove-cart" @click="remove = !remove">Vaciar carrito de compras</p>
+                <p class="remove-cart" @click="remove = !remove">
+                  Vaciar carrito de compras
+                </p>
               </div>
               <template v-if="productsCart.length">
                 <div class="order_total">
@@ -68,17 +77,21 @@
                           align-items: center;
                           margin-right: 10px;
                         "
-                      >Valor por Ciudad:</summary>
+                        >Valor por Ciudad:</summary
+                      >
                       <section>
                         <ol class="scroll_cart_summary_items_cities">
-                          <li v-for="(ciudad, index) in rangosByCiudad.rangos" :key="ciudad.id">
+                          <li
+                            v-for="(ciudad, index) in rangosByCiudad.rangos"
+                            :key="ciudad.id"
+                          >
                             <div v-if="ciudad.price > 0">
                               <b>
                                 {{
-                                shippingCities[index].nombre_ciu ===
-                                'Sin especificar'
-                                ? 'Resto del país'
-                                : shippingCities[index].nombre_ciu
+                                  shippingCities[index].nombre_ciu ===
+                                  'Sin especificar'
+                                    ? 'Resto del país'
+                                    : shippingCities[index].nombre_ciu
                                 }}:
                               </b>
                               {{ ciudad.price | currency }}
@@ -94,7 +107,9 @@
                         getFreeShipping == true
                       "
                     >
-                      <li class="text-color">Tarifa plana: {{ rangosByCiudades.valor | currency }}</li>
+                      <li class="text-color">
+                        Tarifa plana: {{ rangosByCiudades.valor | currency }}
+                      </li>
                     </div>
                     <div
                       v-else-if="
@@ -115,21 +130,25 @@
                         </ol>
                       </section>
                     </div>
-                    <p v-else-if="shipping && getFreeShipping == false">{{ shipping | currency }}</p>
+                    <p v-else-if="shipping && getFreeShipping == false">
+                      {{ shipping | currency }}
+                    </p>
                     <p
                       class="without_shipping_cost"
                       v-if="
                         rangosByCiudad.envio_metodo === 'gratis' ||
                         (shippingCities.length <= 0 && getFreeShipping == false)
                       "
-                    >Envío gratis en toda la tienda</p>
+                    >
+                      Envío gratis en toda la tienda
+                    </p>
                   </span>
                   <span class="order_total_net">
                     <p>Total a pagar</p>
                     <p>
                       {{
-                      (totalCart + (getFreeShipping ? 0 : shipping))
-                      | currency
+                        (totalCart + (getFreeShipping ? 0 : shipping))
+                          | currency
                       }}
                     </p>
                   </span>
@@ -137,20 +156,23 @@
               </template>
               <template v-else>
                 <div class="wrapper_photo">
-                  <img :src="img" class="photo" />
+                  <img :src="img" class="photo" alt="empty car" />
                 </div>
-                <p class="text-cart-empty">Tu carrito de compras ahora está vacío.</p>
+                <p class="text-cart-empty">
+                  Tu carrito de compras ahora está vacío.
+                </p>
               </template>
               <div class="content-button">
-                <p
-                  class="Quotation-message"
-                  v-if="isQuotation()"
-                >Contacte con la tienda para saber los precios de los productos</p>
+                <p class="Quotation-message" v-if="isQuotation()">
+                  Contacte con la tienda para saber los precios de los productos
+                </p>
                 <button
                   v-if="productsCart.length && !isQuotation()"
                   class="continue_shopping"
                   @click="GoPayments"
-                >Finalizar compra</button>
+                >
+                  Finalizar compra
+                </button>
                 <nuxt-link class="conten-btn" to="/" @click="closeOrder">
                   <button class="continue_shopping2">Seguir comprando</button>
                 </nuxt-link>
@@ -164,7 +186,9 @@
       </div>
       <div class="wrapper-items-remove" v-if="remove">
         <div class="content-items-remove">
-          <p class="text-remove">¿Realmente quiere eliminar todos los productos del carrito?</p>
+          <p class="text-remove">
+            ¿Realmente quiere eliminar todos los productos del carrito?
+          </p>
           <div class="content-btn-remove">
             <button @click="remove = !remove" class="btn-remover-no">No</button>
             <button class="btn-remover-yes" @click="removeCartItems">Si</button>
@@ -222,6 +246,12 @@ export default {
       })
       if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
         free = false
+      }
+      if (this.rangosByCiudad.envio_metodo === 'tarifa_plana') {
+        free = true
+      }
+      if (this.rangosByCiudad.envio_metodo === 'precio') {
+        free = true
       }
       return free
     },

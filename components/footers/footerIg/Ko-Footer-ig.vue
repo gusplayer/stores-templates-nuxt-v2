@@ -22,6 +22,7 @@
                 placeholder="Correo electrónico"
                 v-model="email"
                 @keyup.enter="toSubscribe"
+                id="CorreoElectronicoFooter"
               />
               <span
                 v-show="errors[0] || register"
@@ -51,10 +52,11 @@
       </div>
       <div class="separator"></div>
       <p>Desarrollado por Komercia Latam</p>
-      <a href="https://komercia.co/">
+      <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
         <img
           src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
           class="logo2"
+          alt="Logo Img"
         />
       </a>
     </div>

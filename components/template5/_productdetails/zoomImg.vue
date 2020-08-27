@@ -2,8 +2,9 @@
   <figure class="zoom" :style="setBackground(photo)" v-on:mousemove="zoom">
     <img
       class="photo_main"
-      v-on:mouseover="active = !active"
+      v-on:mouseover="activeZoom = !activeZoom"
       :src="idCloudinary(photo, 645, 430)"
+      alt="Product Img"
     />
   </figure>
 </template>
@@ -14,6 +15,11 @@ export default {
   mixins: [idCloudinary],
   name: 'zoomImg-details',
   props: ['photo'],
+  data() {
+    return {
+      activeZoom: true,
+    }
+  },
   methods: {
     zoom(e) {
       const zoomer = e.currentTarget

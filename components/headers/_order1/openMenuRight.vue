@@ -8,10 +8,11 @@
               <img
                 :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
                 class="header-logo"
+                alt="Logo Img"
               />
             </nuxt-link>
           </div>
-          <label @click="closed" class="order_header_close">
+          <label for="order_close" @click="closed" class="order_header_close">
             <close-icon />
           </label>
         </div>
@@ -24,6 +25,7 @@
               <BaseAccordian>
                 <template v-slot:categorias>
                   <li
+                    class="text-categoria"
                     @click="
                       sendCategory(categoria, categoria.id, (ref = false))
                     "
@@ -107,11 +109,7 @@ export default {
         element === 'order' ||
         element === 'order_header_close' ||
         element === 'continue_shopping' ||
-        element === 'continue_shopping2' ||
-        element.animVal === 'material-design-icon__svg' ||
-        element.baseVal === 'material-design-icon__svg' ||
-        element.animVal === '' ||
-        element.baseVal === ''
+        element === 'continue_shopping2'
       ) {
         this.$store.commit('SET_OPENORDERMENURIGTH', false)
       }
@@ -119,7 +117,7 @@ export default {
     Sendsubcategory(value) {
       this.indexSelect2 = value
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.addClass()
@@ -127,7 +125,6 @@ export default {
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.id == value
       )
-
       let filtradoCategorias = this.categorias.find(
         (element) => element.id == filtradoSubCategoria.categoria
       )
@@ -145,9 +142,17 @@ export default {
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
-      // this.$store.commit('SET_OPENORDERMENURIGTH', false)
+      let getSubcategory
+      this.subcategories.filter((element) => {
+        if (element.categoria == categoria) {
+          getSubcategory = true
+        }
+      })
+      if (getSubcategory != true) {
+        this.$store.commit('SET_OPENORDERMENURIGTH', false)
+      }
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
@@ -175,7 +180,7 @@ export default {
     },
     clear() {
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.showMenu = false
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
@@ -243,7 +248,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--color_border);
-    padding: 10px 30px;
+    padding: 10px 25px;
     flex: none;
   }
   .header-content-logo {
@@ -255,19 +260,17 @@ export default {
     width: 100%;
   }
   .header-logo {
-    /* width: 100%; */
     max-height: 60px;
     object-fit: contain;
     object-position: left;
   }
   .order_header_close {
     font-size: 30px;
-    color: black;
+    color: var(--color_icon);
     transition: 0.3s;
     cursor: pointer;
   }
   .order_header_close:hover {
-    transform: rotate(90deg);
     color: gray;
   }
   .wrapper-category-all {
@@ -275,11 +278,11 @@ export default {
     flex-direction: column;
     width: 100%;
     overflow-x: auto;
-    padding: 10px 30px;
-
+    padding: 10px 25px;
     margin-top: 10px;
   }
   .name-category-all {
+    font-weight: bold;
     font-size: 16px;
     color: var(--color_text);
     margin-bottom: 5px;
@@ -287,11 +290,14 @@ export default {
   .text-categoria {
     width: 100%;
     font-size: 16px;
+    font-weight: bold;
     color: var(--color_text);
   }
   .text-subcategoria {
+    margin-left: 3px;
+    margin-bottom: 5px;
     width: 100%;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--color_subtext);
   }
   .text-categoria-active {

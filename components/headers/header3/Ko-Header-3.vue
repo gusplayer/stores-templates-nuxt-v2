@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container">
+  <div class="header-container" :style="settingByTemplate">
     <div class="wrapper-header">
       <div class="header">
         <KoOrder :dataStore="dataStore" />
@@ -11,6 +11,8 @@
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
+              alt="Logo Img"
+              @click="clear"
             />
           </nuxt-link>
         </div>
@@ -26,6 +28,7 @@
               placeholder="¿Qué buscas?"
               v-model="search"
               @keyup.enter="getSearch(search)"
+              id="SearchHeader"
             />
           </form>
         </div>
@@ -63,6 +66,7 @@ export default {
   name: 'Ko-Header-3',
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   mounted() {
     this.toggle = true
@@ -71,12 +75,16 @@ export default {
     let searchSubCategory = domain.slice(0, [14])
     let search = domain.slice(0, [9])
     if (domain == '/') {
+      this.$store.commit('SET_STATEBANNER', true)
       this.showSearch = true
     } else if (searchCategory === '/?category=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.showSearch = true
     } else if (searchSubCategory === '/?subcategory=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.showSearch = true
     } else if (search === '/?search=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.setSearch(domain)
       this.showSearch = true
     } else {
@@ -167,18 +175,7 @@ export default {
       this.$store.state.openMenulateralRight = true
     },
     Searchproduct(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
+      this.$store.commit('SET_SEARCHVALUE', search)
     },
     getSearch(value) {
       if (value) {
@@ -204,6 +201,17 @@ export default {
       //   })
       // }
     },
+    clear() {
+      this.$router.push({
+        path: '/',
+      })
+      this.$store.commit('SET_STATEBANNER', true)
+      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('products/FILTER_BY', {
+        type: 'all',
+        data: '',
+      })
+    },
   },
   watch: {
     'dataStore.tienda'() {
@@ -215,18 +223,23 @@ export default {
     search(value) {
       this.Searchproduct(value)
     },
+    // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
       let searchCategory = domain.slice(0, [11])
       let searchSubCategory = domain.slice(0, [14])
       let search = domain.slice(0, [9])
       if (domain == '/') {
+        this.$store.commit('SET_STATEBANNER', true)
         this.showSearch = true
       } else if (searchCategory === '/?category=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
       } else if (searchSubCategory === '/?subcategory=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
       } else if (search === '/?search=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.setSearch(domain)
         this.showSearch = true
       } else {
@@ -238,9 +251,6 @@ export default {
 </script>
 
 <style scoped>
-div.header-container {
-  --background_color_2: #f2f4f7;
-}
 .header-container {
   width: 100%;
   height: 91px;
@@ -248,7 +258,6 @@ div.header-container {
   background: var(--background_color_1);
   /* background-color: black; */
 }
-
 .wrapper-header {
   display: flex;
   justify-content: center;
@@ -270,7 +279,6 @@ div.header-container {
   max-width: 1300px;
   padding: 10px 30px 0;
 }
-
 .header-content-logo {
   display: flex;
   flex: 1;
@@ -278,11 +286,7 @@ div.header-container {
   align-items: center;
   padding: 2px 0px;
 }
-.wrapper-logo {
-  /* width: 100%; */
-}
 .header-logo {
-  /* width: 100%; */
   max-height: 70px;
   object-fit: contain;
   object-position: left;
@@ -352,7 +356,7 @@ div.header-container {
   box-sizing: border-box;
   width: 35px;
   height: 35px;
-  border: var(--color_shopping_cart) 2px solid;
+  border: var(--color_icon) 2px solid;
   border-radius: 50%;
   padding-bottom: 3px;
   margin-left: 20px;
@@ -365,8 +369,8 @@ div.header-container {
   right: -5px;
   top: -5px;
   color: var(--background_color_1);
-  background-color: var(--color_shopping_cart);
-  border: var(--color_shopping_cart) 1px;
+  background-color: var(--color_icon);
+  border: var(--color_icon) 1px;
   border-radius: 10px;
   line-height: 1;
   display: flex;
@@ -387,35 +391,6 @@ div.header-container {
 }
 .header-items-icon-menu {
   display: flex;
-}
-/* search */
-
-input {
-  outline: none;
-}
-input[type='search'] {
-  -webkit-appearance: textfield;
-  -webkit-box-sizing: content-box;
-  font-family: inherit;
-  font-size: 100%;
-}
-input::-webkit-search-decoration,
-input::-webkit-search-cancel-button {
-  display: none;
-}
-input[type='search'] {
-  background: transparent
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
-  border: solid 2px var(--color_shopping_cart);
-  padding: 6px 6px;
-  width: 35px;
-  -webkit-border-radius: 10em;
-  -moz-border-radius: 10em;
-  border-radius: 10em;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
 }
 input[type='search']:focus {
   background-color: #fff;
@@ -460,6 +435,7 @@ input::-webkit-input-placeholder {
   line-height: normal;
   letter-spacing: normal;
   color: var(--color_text);
+  cursor: pointer;
 }
 .header-icon-menu > .material-design-icon__svg {
   bottom: 0em;

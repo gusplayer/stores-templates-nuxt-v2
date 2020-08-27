@@ -8,11 +8,27 @@
           : 'Roboto',
     }"
   >
-    <component :dataStore="dataStore" :is="headerTemplate" />
-    <!-- <KoHeader1 :dataStore="dataStore" /> -->
-    <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
+    <component
+      :dataStore="dataStore"
+      :settingByTemplate="
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate['--background_color_1']
+          ? this.$store.state.settingByTemplate
+          : this.settingBase
+      "
+      :is="headerTemplate"
+    />
     <nuxt />
-    <KFooter1 :dataStore="dataStore" />
+    <component
+      :dataStore="dataStore"
+      :settingByTemplate="
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate['--background_color_1']
+          ? this.$store.state.settingByTemplate
+          : this.settingBase
+      "
+      :is="footerTemplate"
+    />
     <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
       <div @click="redirectWhatsapp()">
         <koWhatsapp class="button-whatsapp" /><span
@@ -31,16 +47,14 @@
             <button class="btn-accept" @click="acceptCookies()">
               Acepto cookies
             </button>
-            <button class="btn-decline" @click="declineCookies()">
-              Cancelar cookies
-            </button>
+            <a
+              class="_link"
+              href="http://www.allaboutcookies.org/"
+              target="_blank"
+              rel="noreferrer noopener"
+              >¿Qué son las cookies?</a
+            >
           </div>
-          <a
-            class="_link"
-            href="http://www.allaboutcookies.org/"
-            target="_blank"
-            >¿Qué son las cookies?</a
-          >
         </div>
       </div>
     </div>
@@ -64,11 +78,11 @@
 </template>
 
 <script>
-import KoNotificacion from '../components/template5/Ko-Notificacion-1'
 import KoHeader1 from '../components/headers/header1/Ko-Header-1'
 import KoHeader2 from '../components/headers/header2/Ko-Header-2'
 import KoHeader3 from '../components/headers/header3/Ko-Header-3'
-import KFooter1 from '../components/footers/footer1/Ko-Footer-1'
+import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
+import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
 
@@ -77,9 +91,9 @@ export default {
     KoHeader1,
     KoHeader2,
     KoHeader3,
-    KFooter1,
+    KoFooter1,
+    KoFooter2,
     koWhatsapp,
-    KoNotificacion,
     koTiendaCerrada,
   },
   mounted() {
@@ -97,7 +111,6 @@ export default {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
-    // console.log('ruta completa ' + this.fullPathServer)
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
@@ -127,7 +140,7 @@ export default {
           hid: 'viewport',
           name: 'viewport',
           content:
-            'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0',
+            'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0',
         },
         { hid: 'description', name: 'description', content: description },
         { hid: 'subject', name: 'subject', content: 'tienda de ropa' },
@@ -233,12 +246,6 @@ export default {
     dataStore() {
       return this.$store.state.dataStore
     },
-    fullPathServer() {
-      return this.$store.state.fullPathServer
-    },
-    settingBytemplatePrueba() {
-      return this.$store.state.settingBytemplatePrueba
-    },
     headerTemplate() {
       let headerComponent = ''
       switch (this.template) {
@@ -258,22 +265,31 @@ export default {
       return headerComponent
     },
     footerTemplate() {
-      let headerComponent = ''
+      let footerComponent = ''
       switch (this.template) {
+        case 3:
+          footerComponent = 'KoFooter1'
+          break
         case 5:
-          headerComponent = 'KoHeader1'
+          footerComponent = 'KoFooter1'
           break
         case 6:
-          headerComponent = 'KoHeader2'
+          footerComponent = 'KoFooter2'
+          break
+        case 7:
+          footerComponent = 'KoFooter2'
           break
       }
-      return headerComponent
-    },
-    settingsTemplate() {
-      return this.$store.state.settingByTemplate
+      return footerComponent
     },
     analytics_tagmanager() {
       return this.$store.state.analytics_tagmanager
+    },
+    settingBase() {
+      return this.$store.state.settingBase
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -326,13 +342,10 @@ export default {
         }
       }
     },
-
     acceptCookies() {
       document.getElementById('modalCookies').style.bottom = '-135px'
-      document.cookie = `authCookies = 1; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;`
-    },
-    declineCookies() {
-      document.getElementById('modalCookies').style.bottom = '-135px'
+      document.cookie =
+        'authCookies = 1; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;'
     },
     acceptClose() {
       document.getElementById('modalNotificacion').style.zIndex = '-2'
@@ -349,34 +362,30 @@ export default {
   --magenta: #c52675;
   --yellow: #f2b931;
 
-  --background_color_1: #fff;
-  --background_color_2: #e4e4e4;
+  /* --background_color_1: hsla(173, 0%, 100%, 1); */
+  /* --background_color_2: #efefef; */
   --color_background_hover: #cccccc;
 
-  --color_text: #1e0e62;
-  --color_hover_text: #c52675;
-  --color_subtext: rgba(21, 20, 57, 0.541);
+  /* --color_text: #000000; */
+  --color_hover_text: #c52633;
+  /* --color_subtext: rgba(21, 20, 57, 0.541); */
 
   --color_shopping_cart: #25dac5;
-  --color_icon: #25dac5;
+  /* --color_icon: #25dac5; */
 
-  --color_text_btn: #000;
-  --color_border_btn: #25dac5;
-  --color_background_btn: #25dac5;
-  --btnhover: #c52675;
+  /* --color_text_btn: #fff; */
+  /* --color_background_btn: #000; */
+  --btnhover: #929292;
 
   --color_background_btn_2: #000;
-  --btnhover2: #c52675;
 
-  --color_border: rgba(110, 110, 133, 0.342);
+  /* --color_border: rgba(127, 127, 139, 0.342); */
 
-  --logo_width: 120px;
   --radius_btn: 5px;
 }
 * {
   margin: 0px;
   padding: 0px;
-  /* font-family: 'Poppins'; */
   font-family: var(--font-style);
   outline: none;
   list-style: none;
@@ -384,10 +393,38 @@ export default {
   box-sizing: border-box;
   outline: none !important;
 }
+
+::-webkit-scrollbar {
+  border: 1px solid rgb(172, 172, 172);
+  background: transparent;
+  width: 13px;
+  border-top-right-radius: var(--radius_btn);
+  border-bottom-right-radius: var(--radius_btn);
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px white;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    170deg,
+    rgba(145, 145, 145, 1) 0%,
+    rgb(44, 44, 44) 60%
+  );
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    170deg,
+    rgb(102, 102, 102) 0%,
+    rgba(0, 0, 0, 1) 60%
+  );
+  border-radius: 10px;
+}
 .wrapper-whatsapp {
   position: fixed;
   transform: translate(108px, 0px);
-  top: 35%;
+  top: 50%;
   right: 0px;
   width: 155px;
   overflow: hidden;
@@ -421,11 +458,9 @@ export default {
   transition: all 0.5s ease-in-out;
   text-align: center;
 }
-
 .button-whatsapp:hover {
   transform: rotate(360deg);
 }
-
 .wrapper-cookie {
   z-index: 3;
   position: fixed;
@@ -465,15 +500,14 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
 }
 .btn-accept {
   max-height: 29px;
   width: 140px;
   border-radius: 5px;
-  color: black;
-  border: solid 2px #25dac5;
-  background-color: #25dac5;
+  color: white;
+  border: solid 2px black;
+  background-color: black;
   padding: 4px 14px;
   font-size: 14px;
   cursor: pointer;
@@ -481,25 +515,8 @@ export default {
 }
 .btn-accept:hover {
   color: white;
-  border: solid 2px rgb(25, 26, 27);
-  background-color: rgb(25, 26, 27);
-}
-.btn-decline {
-  max-height: 29px;
-  width: 160px;
-  margin-left: 10px;
-  border-radius: 5px;
-  color: white;
-  border: solid 2px rgb(25, 26, 27);
-  background-color: rgb(25, 26, 27);
-  padding: 4px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.btn-decline:hover {
-  border: solid 2px rgb(25, 26, 27);
-  background-color: rgb(25, 26, 27);
+  border: solid 2px gray;
+  background-color: gray;
 }
 ._link {
   width: 149px;
@@ -507,6 +524,7 @@ export default {
   font-size: 12px;
   font-weight: bold;
   color: #41aaf0;
+  text-align: center;
   text-decoration: none;
 }
 ._link:hover {
@@ -567,11 +585,6 @@ export default {
   border: solid 2px gray;
   background-color: gray;
 }
-@media (max-width: 768px) {
-  .wrapper-btn {
-    flex-direction: column;
-  }
-}
 @media (max-width: 700px) {
   .content-cookie {
     flex-direction: column;
@@ -580,10 +593,6 @@ export default {
     font-size: 14px;
     margin-bottom: 10px;
     text-align: center;
-  }
-  ._link {
-    margin-top: 5px;
-    margin-left: 0px;
   }
 }
 </style>

@@ -3,7 +3,6 @@
     <!-- <KoHeaderTest /> -->
     <KoHeaderWp :dataStore="dataStore" />
     <Categories :dataStore="dataStore" />
-    <!-- <KoNotificacion :settingBytemplatePrueba="settingBytemplatePrueba" /> -->
     <nuxt />
     <!-- <KFooter1 :dataStore="dataStore" /> -->
   </div>
@@ -11,17 +10,12 @@
 
 <script>
 import KoHeaderWp from '../components/whatsapp/Header'
-import KFooter1 from '../components/whatsapp/Footer'
 import Categories from '../components/whatsapp/Categories'
-// import KoHeaderTest from '../components/headers/header_wp/Ko-Header-wp'
-// import koWhatsapp from '../components/whatsapp/whatsapp'
 
 export default {
   components: {
     KoHeaderWp,
-    KFooter1,
     Categories,
-    // KoHeaderTest,
   },
   mounted() {
     // this.$store.dispatch('GET_LOGIN')
@@ -62,7 +56,7 @@ export default {
           hid: 'viewport',
           name: 'viewport',
           content:
-            'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0',
+            'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0',
         },
         { hid: 'description', name: 'description', content: description },
         { hid: 'subject', name: 'subject', content: 'tienda de ropa' },
@@ -173,10 +167,6 @@ export default {
     fullPathServer() {
       return this.$store.state.fullPathServer
     },
-    settingBytemplatePrueba() {
-      return this.$store.state.settingBytemplatePrueba
-    },
-
     themeStyleWa() {
       return {
         '--font-style': 'Poppins',
@@ -199,16 +189,13 @@ export default {
         '--color_icon': '#25dac5',
 
         '--color_text_btn': '#000',
-        '--color_border_btn': '#25dac5',
         '--color_background_btn': '#25dac5',
         '--btnhover': '#c52675',
 
         '--color_background_btn_2': ' #000',
-        '--btnhover2': '#c52675',
 
         '--color_border': 'rgba(110, 110, 133, 0.342)',
 
-        '--logo_width': '120px',
         '--radius_btn': '5px',
       }
     },

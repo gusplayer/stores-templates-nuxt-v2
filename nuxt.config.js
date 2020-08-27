@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export default {
   mode: 'universal',
 
@@ -12,38 +13,6 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    // link: [
-    //   // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    //   {
-    //     href:
-    //       'https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap',
-    //     rel: 'stylesheet',
-    //   },
-    //   {
-    //     rel: 'stylesheet',
-    //     href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap',
-    //   },
-    //   {
-    //     rel: 'stylesheet',
-    //     href:
-    //       'https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap',
-    //   },
-    //   {
-    //     rel: 'stylesheet',
-    //     href:
-    //       'https://fonts.googleapis.com/css2?family=Cabin:wght@400;600&display=swap',
-    //   },
-    //   {
-    //     rel: 'stylesheet',
-    //     href:
-    //       'https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap',
-    //   },
-    //   {
-    //     rel: 'stylesheet',
-    //     href:
-    //       'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap',
-    //   },
-    // ],
   },
   loading: { color: '#fff' },
 
@@ -51,7 +20,6 @@ export default {
     'element-ui/lib/theme-chalk/index.css',
     '~/assets/element-pagination.css',
     'swiper/dist/css/swiper.css',
-    'aos/dist/aos.css',
     'core-components-npm/dist/ko.css',
   ],
   plugins: [
@@ -61,15 +29,16 @@ export default {
     '~/plugins/cloudinary',
     '~/plugins/material-icons',
     '~plugins/validate.js',
-    { src: '@/plugins/aos.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
     { src: '~plugins/ga.js', mode: 'client' },
     { src: '~/plugins/gtm', mode: 'client' },
+    { src: '~/plugins/facebook-pixel', mode: 'client' },
   ],
 
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
+
   debug: {
     enabled: true,
   },

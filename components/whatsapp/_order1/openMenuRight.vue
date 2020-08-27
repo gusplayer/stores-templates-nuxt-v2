@@ -8,6 +8,7 @@
               <img
                 :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
                 class="header-logo"
+                alt="logo img"
               />
             </nuxt-link>
           </div>

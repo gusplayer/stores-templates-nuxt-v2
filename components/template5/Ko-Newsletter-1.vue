@@ -20,6 +20,7 @@
               type="email"
               placeholder="Correo electrónico"
               v-model="email"
+              id="CorreoElectronicoNewslletter"
             />
             <span
               v-show="errors[0] || register"
@@ -79,7 +80,7 @@ export default {
                 tienda: this.dataStore.tienda.id_tienda,
               }
               axios
-                .post(`https://api2.komercia.co/api/tienda/suscriptor`, json)
+                .post('https://api2.komercia.co/api/tienda/suscriptor', json)
                 .then((res) => {
                   this.register = 'Tu correo ha sido registrado'
                   this.$message.success('Comentario enviado!')
@@ -104,15 +105,10 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper_newsletter {
-  --background_color_1: #2f1893;
-  --color_text: #fff;
-  --color_subtext: #fff;
-}
 .wrapper_newsletter {
   display: flex;
   width: 100%;
-  background-color: var(--background_color_1);
+  background-color: var(--background_color_2);
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -168,7 +164,7 @@ div.wrapper_newsletter {
 .input-text:focus,
 .input-text:active {
   outline: 0;
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_border);
 }
 .content-input-error {
   display: flex;
@@ -183,7 +179,7 @@ div.wrapper_newsletter {
 .btn {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   padding: 8px 14px;
   font-size: 14px;
@@ -209,7 +205,7 @@ div.wrapper_newsletter {
 .text-checkbox {
   margin-left: 5px;
   font-size: 12px;
-  color: white;
+  color: var(--color_subtext);
 }
 @media (max-width: 600px) {
   .title {

@@ -41,7 +41,7 @@
                       v-for="(categoria, index) in categorias"
                       :key="categoria.id"
                     >
-                      <label>
+                      <label for="productListTag">
                         <p
                           class="item-categoria"
                           :class="
@@ -95,6 +95,7 @@
                 type="text"
                 placeholder="Buscar . . ."
                 required
+                id="SearchProductList"
               />
             </div>
           </div>
@@ -104,7 +105,7 @@
         <div class="content-item-productos">
           <div class="grid-products">
             <div
-              v-for="product in orderproduct"
+              v-for="product in filterProduct"
               :key="product.id"
               class="content-products"
             >
@@ -221,10 +222,10 @@ export default {
     filterProduct() {
       const initial = this.currentPage * 16 - 16
       const final = initial + 16
-      return this.products.slice(initial, final)
+      return this.orderproduct.slice(initial, final)
     },
     orderproduct() {
-      return this.filterProduct.sort(function (prev, next) {
+      return this.products.sort(function (prev, next) {
         return next.orden - prev.orden
       })
     },
@@ -242,6 +243,9 @@ export default {
     },
     nameSubCategoryHeader() {
       return this.$store.state.subcategory_producto_header
+    },
+    searchValue() {
+      return this.$store.state.searchValue
     },
   },
   methods: {
@@ -331,6 +335,7 @@ export default {
       })
     },
     clear() {
+      this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
@@ -423,6 +428,7 @@ export default {
     nameSubCategoryHeader(value) {
       return value
     },
+    // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
       let searchCategory = domain.slice(0, [11])
@@ -435,20 +441,20 @@ export default {
         this.Allcategories()
       }
     },
+    searchValue(value) {
+      this.Searchproduct(value)
+    },
   },
 }
 </script>
 
 <style scoped>
-div.wrapper-productlist {
-  --background_color_1: #f2f4f7;
-}
 .wrapper-productlist {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   box-sizing: border-box;
 }
 .container {
@@ -495,8 +501,6 @@ div.wrapper-productlist {
 .content-item > div:nth-child(2) {
   flex: 2;
 }
-
-/* /////////////////filtro categorías///////////// */
 .content-filtrar {
   display: flex;
   flex-direction: row;
@@ -533,7 +537,6 @@ div.wrapper-productlist {
   margin-right: 2px;
   cursor: pointer;
   display: flex;
-  align-self: flex-start;
 }
 .text-categorias-select {
   background: transparent;
@@ -548,7 +551,6 @@ div.wrapper-productlist {
   cursor: pointer;
   opacity: 0.6;
   display: flex;
-  align-self: flex-start;
 }
 .dropdown-content {
   display: none;
@@ -561,8 +563,6 @@ div.wrapper-productlist {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
-/* ///////categorias//////////// */
 .content-item-catalogo {
   display: flex;
   align-self: baseline;
@@ -604,7 +604,6 @@ div.wrapper-productlist {
   background: var(--color_background_hover);
   color: var(--color_hover_text);
 }
-/*////// subcategoria //////*/
 .content-item-subcategorie {
   background: var(--color_background_hover);
   padding-right: 10px;
@@ -623,9 +622,6 @@ div.wrapper-productlist {
   background: var(--color_background_hover);
   color: var(--color_hover_text);
 }
-
-/* ///////productos/////////// */
-
 .content-products {
   border-radius: 10px;
 }
@@ -663,13 +659,8 @@ div.wrapper-productlist {
   font-weight: bold;
   color: var(--color_subtext);
 }
-/* //////buscador ///////// */
-
 .top-right {
   display: none;
-  /* width: 100%;
-  padding-top: 0px;
-  padding-bottom: 15px; */
 }
 .header-icon-menu {
   font-size: 30px;
@@ -731,8 +722,6 @@ div.wrapper-productlist {
   height: 28px;
   line-height: 26px;
 }
-
-/* //////paginacion//////// */
 .pagination-medium {
   margin-top: 10px;
   background: transparent;
@@ -756,7 +745,6 @@ div.wrapper-productlist {
   z-index: 99;
   box-sizing: border-box;
 }
-/* search */
 .search {
   margin-right: 15px;
 }
@@ -802,56 +790,48 @@ div.wrapper-productlist {
   height: 35px;
 }
 @media (max-width: 1290px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(4, minmax(240px, 2fr));
     grid-gap: 15px;
   }
 }
 @media (max-width: 1265px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(4, minmax(240px, 2fr));
     grid-gap: 10px;
   }
 }
 @media (max-width: 1250px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(250px, 2fr));
     grid-gap: 25px;
   }
 }
 @media (max-width: 1060px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(250px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 1050px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 1020px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 15px;
   }
 }
 @media (max-width: 1010px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-gap: 10px;
   }
 }
 @media (max-width: 1000px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 25px;
@@ -859,21 +839,18 @@ div.wrapper-productlist {
 }
 
 @media (max-width: 790px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 780px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 16px;
   }
 }
 @media (max-width: 775px) {
-  /* ///////productos/////////// */
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 20px;
@@ -881,7 +858,6 @@ div.wrapper-productlist {
 }
 
 @media (max-width: 770px) {
-  /* ///////productos/////////// */
   .container {
     padding: 0px;
   }
@@ -894,7 +870,6 @@ div.wrapper-productlist {
   }
   .grid-products {
     grid-template-columns: repeat(2, minmax(10px, 2fr));
-    /* grid-gap: 32px; */
   }
   .dropbtn {
     margin-left: 5px;
@@ -907,12 +882,6 @@ div.wrapper-productlist {
   }
 }
 @media (max-width: 700px) {
-  /* .top-right {
-    display: initial;
-    width: 100%;
-    padding-top: 0px;
-    padding-bottom: 15px;
-  } */
   .content-items-categorias {
     margin-left: 5px;
     margin-bottom: 0px;
@@ -922,7 +891,6 @@ div.wrapper-productlist {
 @media (max-width: 450px) {
   .grid-products {
     grid-template-columns: repeat(2, minmax(160px, 1fr));
-    /* grid-gap: 32px; */
   }
   .content-item-productos {
     padding: 5px;

@@ -6,7 +6,9 @@
         v-for="(product, index) in this.products"
         :key="index"
       >
-        <KoProductCard1 :product="product"></KoProductCard1>
+        <no-ssr>
+          <KoProductCard1 :product="product"></KoProductCard1>
+        </no-ssr>
       </div>
     </div>
     <div class="swiper-pagination" slot="pagination"></div>
@@ -34,7 +36,6 @@ export default {
     return {
       swiperOption: {
         direction: 'horizontal',
-        loop: true,
         pagination: {
           el: '.swiper-pagination',
         },
@@ -44,7 +45,7 @@ export default {
         spaceBetween: 22,
         grabCursor: true,
         autoplay: {
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: false,
         },
         breakpoints: {

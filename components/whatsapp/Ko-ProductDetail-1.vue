@@ -13,6 +13,7 @@
                 @click="selectedPhoto(data.detalle.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(data.detalle.foto_cloudinary, 500, 500)"
+                alt="Product Img"
               />
               <img
                 v-for="(foto, itemsfoto) in data.fotos"
@@ -20,6 +21,7 @@
                 @click="selectedPhoto(foto.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(foto.foto_cloudinary, 500, 500)"
+                alt="Product Img"
               />
 
               <img
@@ -28,34 +30,11 @@
                 v-show="idYoutube"
                 v-on:mouseover="existYoutube = true"
                 class="video"
+                alt="Product Video"
               />
             </div>
           </div>
           <div class="wrapper-photo_main">
-            <!-- <div v-if="active" v-show="!existYoutube" class="photo_main">
-              <img
-                class="photo_main"
-                v-on:mouseover.native="active = !active"
-                :src="idCloudinary(selectPhotoUrl, 645, 430)"
-              />
-            </div>-->
-            <!-- <div v-if="!active" v-show="!existYoutube" class="photo_main">
-              <cld-image
-                cloudName="komercia-store"
-                v-on:mouseleave.native="active = !active"
-                :publicId="getIdCloudinary(selectPhotoUrl)"
-                dpr="auto"
-                responsive="width"
-                width="845"
-                height="400"
-                gravity="face"
-                crop="crop"
-                class="photo_main"
-              >
-                <cld-transformation radius="5" quality="auto" background="auto:border" />
-              </cld-image>
-            </div>-->
-
             <iframe
               v-show="existYoutube"
               :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
@@ -80,21 +59,15 @@
               ${{ salesData.precio | currency }}
             </p>-->
             <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">$ {{ salesData.precio | currency }}</p>
+              <p class="text-precio" v-show="salesData.precio">
+                $ {{ salesData.precio | currency }}
+              </p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
             <p class="text-marca">
               <strong>{{ data.info.marca }}</strong>
             </p>
-            <!-- <div
-              class="content-text-desc"
-              v-if="data.info.descripcion && data.info.descripcion.length > 12"
-            >
-              <p
-                class="text-desc"
-                v-html="`${data.info.descripcion.slice(0, 99)}`"
-              ></p>
-            </div>-->
+
             <div class="content_buy_action">
               <div v-if="envio.titulo == 'Envío gratis'">
                 <p class="card-info-2">Envío gratis !</p>
@@ -103,81 +76,9 @@
                 <p class="card-info-1" v-if="spent">Agotado !</p>
               </div>
             </div>
-            <!-- <div v-if="this.data.detalle.con_variante > 0">
-              <div v-for="(variant, index) in data.variantes" :key="index">
-                <label class="text-variant">{{ variant.nombre }}:</label>
-                <selectGroup :index="index" :variantes="data.variantes">
-                  <option
-                    v-for="item in variant.valores"
-                    :key="item.option"
-                    :value="item.option"
-                  >{{ item.option }}</option>
-                </selectGroup>
-              </div>
-            </div>-->
-            <!-- <div :class="{ disabled: !salesData.estado }">
-              <div>
-                <div class="quantity">
-                  <p class="text-quantity">Cantidad:</p>
-                  <button class="quantity_remove" v-on:click="removeQuantity()">
-                    <menos-icon class="icon" />
-                  </button>
-                  <p class="quantity_value">{{ quantityValue }}</p>
-                  <button class="quantity_add" v-on:click="addQuantity()">
-                    <mas-icon class="icon" />
-                  </button>
-
-                  <div class="container-alerta" v-if="this.maxQuantityValue == this.quantityValue">
-                    <span class="alerta">última Unidad!</span>
-                  </div>
-                </div>
-                <div class="item-info-product">
-                  <div class="content-button">
-                    <button
-                      ref="colorBtn"
-                      class="btn"
-                      v-if="!spent"
-                      v-on:click="addShoppingCart"
-                    >Comprar</button>
-                   
-                  </div>
-                </div>
-              </div>
-            </div>-->
           </div>
         </div>
       </div>
-      <!-- <div class="section">
-        <div class="features">
-          <ko-description :dataStore="dataStore" :data="data" :envio="envio"></ko-description>
-        </div>
-      </div>-->
-      <!-- <div class="responsive-purchase">
-        <div class="ko-input">
-          <div class="quantity-resposive">
-            <button class="quantity_remove" v-on:click="removeQuantity()">
-              <menos-icon class="icon" />
-            </button>
-            <p class="quantity_value">{{ quantityValue }}</p>
-            <button class="quantity_add" v-on:click="addQuantity()">
-              <mas-icon class="icon" />
-            </button>
-            <transition name="slide-fade">
-              <div class="container-alert" v-show="quantityValue == maxQuantityValue">
-                <span class="alert">última Unidad!</span>
-              </div>
-            </transition>
-          </div>
-          <div style="width: 100%; margin-left: 10px;">
-            <div class="content_buy_action-responsive" v-if="spent">
-              <p class="card-info-1-res">Agotado !</p>
-            </div>
-            <button class="btn-responsive" ref="color2" v-if="!spent" v-on:click="addShoppingCart">
-              <cartArrowDown class="card-icon-cart" />Agregar
-            </button>
-          </div>
-        </div>
-      </div>-->
     </div>
     <KFooter />
   </div>

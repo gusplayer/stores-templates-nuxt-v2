@@ -41,7 +41,7 @@
                       v-for="(categoria, index) in categorias"
                       :key="categoria.id"
                     >
-                      <label>
+                      <label for="productListTag">
                         <p
                           class="item-categoria"
                           :class="
@@ -95,6 +95,7 @@
                 type="text"
                 placeholder="Buscar . . ."
                 required
+                id="SearchProductList"
               />
             </div>
           </div>
@@ -360,9 +361,6 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-productlist {
-  --background_color_1: #f2f4f7;
-}
 .wrapper-productlist {
   display: flex;
   justify-content: center;

@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container">
+  <div class="header-container" :style="settingByTemplate">
     <div class="wrapper-header" @click="closeMenuCategory">
       <div class="header">
         <KoOrder :dataStore="dataStore" />
@@ -8,6 +8,8 @@
             <img
               :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
+              alt="Logo Img"
+              @click="clear"
             />
           </nuxt-link>
         </div>
@@ -51,6 +53,7 @@
                 placeholder="¿Qué buscas?"
                 v-model="search"
                 @keyup.enter="getSearch(search)"
+                id="SearchHeader"
               />
             </form>
           </div>
@@ -107,7 +110,11 @@
         <div class="product-img-container" v-if="product.length">
           <div class="card-container">
             <div class="img-logo" v-if="product[0]">
-              <img :src="product[0].foto_cloudinary" class="logo" />
+              <img
+                :src="product[0].foto_cloudinary"
+                class="logo"
+                alt="Product img"
+              />
             </div>
             <div class="btn-container">
               <button @click="closeMenu()" class="btn">Comprar</button>
@@ -131,6 +138,7 @@ export default {
   name: 'Ko-Header-1',
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   mounted() {
     this.toggle = true
@@ -139,12 +147,16 @@ export default {
     let searchSubCategory = domain.slice(0, [14])
     let search = domain.slice(0, [9])
     if (domain == '/') {
+      this.$store.commit('SET_STATEBANNER', true)
       this.showSearch = true
     } else if (searchCategory === '/?category=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.showSearch = true
     } else if (searchSubCategory === '/?subcategory=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.showSearch = true
     } else if (search === '/?search=') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.setSearch(domain)
       this.showSearch = true
     } else {
@@ -246,6 +258,12 @@ export default {
       } else {
         intro.style.display = 'flex'
       }
+      if (name == 'Inicio') {
+        this.clear()
+      }
+      if (name == 'Contacto') {
+        this.showMenu = false
+      }
     },
     closeMenuCategory() {
       var intro = document.getElementById('menu-collapse')
@@ -268,13 +286,14 @@ export default {
     closeMenu() {
       this.showMenu = false
       this.$router.push({
-        path: `/productos/` + this.product[0].slug,
+        path: '/productos/' + this.product[0].slug,
       })
     },
     Sendsubcategory(value) {
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
+      this.$store.commit('SET_STATEBANNER', false)
       this.showMenu = false
       this.addClass()
       this.selectSubcategory = value
@@ -290,7 +309,6 @@ export default {
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
-
       this.$store.commit('products/FILTER_BY', {
         type: 'subcategory',
         data: value,
@@ -298,10 +316,10 @@ export default {
     },
     sendCategory(value, categoria, ref) {
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
       this.showMenu = false
-      this.currentPage = 1
+      this.$store.commit('SET_STATEBANNER', false)
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
@@ -329,10 +347,12 @@ export default {
     clear() {
       this.showMenu = false
       this.$router.push({
-        path: `/`,
+        path: '/',
       })
+      this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
         data: '',
@@ -342,18 +362,7 @@ export default {
       this.nameCategory = ''
     },
     Searchproduct(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
+      this.$store.commit('SET_SEARCHVALUE', search)
     },
     getSearch(value) {
       if (value) {
@@ -367,17 +376,6 @@ export default {
       let UrlCategory = category.replace(/-/g, ' ')
       let urlFiltrada = decodeURIComponent(UrlCategory)
       this.search = urlFiltrada
-      // if (urlFiltrada.length) {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'search',
-      //     data: urlFiltrada,
-      //   })
-      // } else {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'all',
-      //     data: '',
-      //   })
-      // }
     },
   },
   watch: {
@@ -390,18 +388,23 @@ export default {
     search(value) {
       this.Searchproduct(value)
     },
+    // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
       let searchCategory = domain.slice(0, [11])
       let searchSubCategory = domain.slice(0, [14])
       let search = domain.slice(0, [9])
       if (domain == '/') {
+        this.$store.commit('SET_STATEBANNER', true)
         this.showSearch = true
       } else if (searchCategory === '/?category=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
       } else if (searchSubCategory === '/?subcategory=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
       } else if (search === '/?search=') {
+        this.$store.commit('SET_STATEBANNER', false)
         this.setSearch(domain)
         this.showSearch = true
       } else {
@@ -413,9 +416,6 @@ export default {
 </script>
 
 <style scoped>
-div.header-container {
-  --background_color_2: #f2f4f7;
-}
 .header-container {
   width: 100%;
   height: 88px;
@@ -489,7 +489,7 @@ div.header-container {
   border-radius: 10px;
 }
 .menu-grid::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #e6e6e6, var(--color_icon));
   border-radius: 10px;
 }
 .name-category-all {
@@ -520,6 +520,7 @@ div.header-container {
   margin-left: 5px;
   font-size: 14px;
   font-weight: 100;
+  color: var(--color_subtext);
 }
 .subcategoria li:hover {
   color: var(--color_hover_text);
@@ -604,7 +605,7 @@ div.header-container {
   box-sizing: border-box;
   width: 35px;
   height: 35px;
-  border: var(--color_shopping_cart) 2px solid;
+  border: var(--color_icon) 2px solid;
   border-radius: 50%;
   padding-bottom: 3px;
   margin-left: 20px;
@@ -617,8 +618,8 @@ div.header-container {
   right: -5px;
   top: -5px;
   color: var(--background_color_1);
-  background-color: var(--color_shopping_cart);
-  border: var(--color_shopping_cart) 1px;
+  background-color: var(--color_icon);
+  border: var(--color_icon) 1px;
   border-radius: 10px;
   line-height: 1;
   display: flex;
@@ -680,8 +681,8 @@ div.header-container {
 .btn {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
-  border: solid 1px var(--color_text);
-  background-color: var(--color_text);
+  border: solid 1px var(--color_background_btn);
+  background-color: var(--color_background_btn);
   color: white;
   padding: 8px 14px;
   font-size: 14px;
@@ -702,35 +703,6 @@ div.header-container {
 .content-products:focus {
   box-shadow: 0px 0px 2px 1px var(--color_border);
 }
-/* search */
-
-input {
-  outline: none;
-}
-input[type='search'] {
-  -webkit-appearance: textfield;
-  -webkit-box-sizing: content-box;
-  font-family: inherit;
-  font-size: 100%;
-}
-input::-webkit-search-decoration,
-input::-webkit-search-cancel-button {
-  display: none;
-}
-input[type='search'] {
-  background: transparent
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
-  border: solid 2px var(--color_shopping_cart);
-  padding: 6px 6px;
-  width: 35px;
-  -webkit-border-radius: 10em;
-  -moz-border-radius: 10em;
-  border-radius: 10em;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
-}
 input[type='search']:focus {
   background-color: #fff;
   border-color: var(--color_hover_text);
@@ -742,7 +714,6 @@ input::-webkit-input-placeholder {
   color: var(--color_text);
 }
 #demo-2 input[type='search'] {
-  /* width: 15px; */
   width: 35px;
   height: 35px;
   padding-left: 10px;

@@ -1,12 +1,11 @@
 <template>
-  <div class="wrapper-cart" ref="color">
+  <div class="wrapper-cart" ref="color" :style="settingByTemplate">
     <div class="contenedor" v-if="this.productsCart.length">
       <ul class="products_list">
         <li
           v-for="(product, index) in productsCart"
           :key="index"
           class="wrapper_item"
-          data-aos="zoom-in"
         >
           <div class="content_product_items">
             <div class="wrapper_item_photo">
@@ -304,7 +303,7 @@
     </div>
     <div v-else class="contenedor-vacio">
       <div class="wrapper_photo">
-        <img :src="img" class="photo" />
+        <img :src="img" class="photo" alt="Product img" />
       </div>
       <p>Tu carrito de compras ahora está vacío.</p>
 
@@ -318,6 +317,9 @@
 <script>
 export default {
   name: 'Ko-Cart-1',
+  props: {
+    settingByTemplate: Object,
+  },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch('GET_CITIES')
@@ -410,14 +412,14 @@ export default {
       })
       return result
     },
-    addQuantity(product, index) {
+    addQuantity(product) {
       if (product.limitQuantity > product.cantidad) {
         product.cantidad++
         this.$store.commit('UPDATE_CONTENTCART')
         this.$store.commit('CALCULATE_TOTALCART')
       }
     },
-    removeQuantity(product, index) {
+    removeQuantity(product) {
       if (product.cantidad >= 2) {
         product.cantidad--
         this.$store.commit('UPDATE_CONTENTCART')
@@ -490,16 +492,12 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-cart {
-  --background_color_1: #f2f4f7;
-}
-
 .wrapper-cart {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   box-sizing: border-box;
   flex-direction: column;
   padding-bottom: 10px;
@@ -524,7 +522,7 @@ div.wrapper-cart {
 .wrapper_item {
   width: 100%;
   display: flex;
-  background-color: var(--background_color_1);
+  background-color: var(--background_color_2);
   padding: 20px 0px;
   border-top: 1px solid var(--color_border);
 }
@@ -535,12 +533,12 @@ div.wrapper-cart {
 }
 .wrapper_item_photo {
   position: relative;
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 100px;
+  max-height: 100px;
 }
 .products_item_photo {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
@@ -600,7 +598,7 @@ div.wrapper-cart {
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   border-style: solid;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   height: 41px;
   width: 3em;
   box-sizing: border-box;
@@ -612,7 +610,7 @@ div.wrapper-cart {
   padding-left: 10px;
   padding-right: 10px;
   border-style: solid none solid none;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   height: 41px;
   width: 2.5em;
   justify-content: center;
@@ -625,7 +623,7 @@ div.wrapper-cart {
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   border-style: solid;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   height: 41px;
   width: 3em;
   box-sizing: border-box;
@@ -728,7 +726,7 @@ div.wrapper-cart {
   max-height: 150px;
 }
 ::-webkit-scrollbar {
-  background: var(--background_color_1);
+  background: transparent;
   width: 5px;
 }
 ::-webkit-scrollbar-track {
@@ -777,7 +775,7 @@ div.wrapper-cart {
 .btn1 {
   border-radius: var(--radius_btn);
   color: var(--color_text_btn);
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   padding: 8px 12px;
   width: 100%;
@@ -793,8 +791,8 @@ div.wrapper-cart {
 }
 .btn2 {
   border-radius: var(--radius_btn);
-  color: var(--color_background_btn_2);
-  border: solid 2px var(--color_background_btn_2);
+  color: var(--color_background_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: transparent;
   padding: 8px 0px;
   text-align: center;
@@ -806,9 +804,8 @@ div.wrapper-cart {
   transition: all 200ms ease-in;
 }
 .btn2:hover {
-  color: var(--btnhover2);
-  border: solid 2px var(--btnhover2);
-  background-color: transparent;
+  color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 .contenedor-vacio {
   display: flex;
@@ -822,8 +819,8 @@ div.wrapper-cart {
 }
 .btn3 {
   border-radius: var(--radius_btn);
-  color: var(--color_background_btn_2);
-  border: solid 2px var(--color_background_btn_2);
+  color: var(--color_background_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: transparent;
   padding: 8px 12px;
   font-size: 14px;
@@ -833,9 +830,8 @@ div.wrapper-cart {
   transition: all 200ms ease-in;
 }
 .btn3:hover {
-  color: var(--btnhover2);
-  border: solid 2px var(--btnhover2);
-  background-color: transparent;
+  color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 .products_list_resposive {
   display: none;

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-productDetail">
+  <div class="wrapper-productDetail" :style="settingByTemplate">
     <div v-if="loading" v-loading="loading"></div>
     <div class="container-productDetail" v-else>
       <div class="section">
@@ -10,6 +10,7 @@
                 @click="selectedPhoto(data.detalle.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
+                alt="Product Img"
               />
               <img
                 v-for="(foto, itemsfoto) in data.fotos"
@@ -17,6 +18,7 @@
                 @click="selectedPhoto(foto.foto_cloudinary)"
                 class="img-list"
                 :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
+                alt="Product Img"
               />
 
               <img
@@ -25,20 +27,30 @@
                 v-show="idYoutube"
                 v-on:mouseover="existYoutube = true"
                 class="video"
+                alt="Product Img"
               />
             </div>
           </div>
           <div class="wrapper-photo_main">
-            <div v-if="active" v-show="!existYoutube" class="photo_main">
+            <div
+              v-if="this.activeZoom"
+              v-show="!existYoutube"
+              class="photo_main"
+            >
               <img
                 class="photo_main"
-                v-on:mouseover="active = !active"
+                v-on:mouseover="activeZoom = !activeZoom"
                 :src="idCloudinary(selectPhotoUrl, 645, 430)"
+                alt="Product Zoom"
               />
             </div>
-            <div v-if="!active" v-show="!existYoutube" class="photo_main">
+            <div
+              v-if="!this.activeZoom"
+              v-show="!existYoutube"
+              class="photo_main"
+            >
               <zoom
-                v-on:mouseleave="active = !active"
+                v-on:mouseleave="activeZoom = !activeZoom"
                 :photo="selectPhotoUrl"
               />
             </div>
@@ -92,7 +104,9 @@
             </div>
             <div v-if="this.data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
-                <label class="text-variant">{{ variant.nombre }}:</label>
+                <label for="variant name" class="text-variant"
+                  >{{ variant.nombre }}:</label
+                >
                 <selectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"
@@ -148,11 +162,47 @@
                     >
                       Agotado !
                     </button>
-                    <!-- <ko-whatsapp
-                      v-if="whatsapp"
-                      class="whatsapp"
-                      @click.native="redirectWhatsapp()"
-                    />-->
+                  </div>
+                  <div class="content-float-info" id="sticky">
+                    <p class="text-name">{{ data.detalle.nombre }}</p>
+                    <p class="text-marca">
+                      <strong>{{ data.info.marca }}</strong>
+                    </p>
+                    <!-- <p class="text-promocion" v-show="salesData.precio">
+                      ${{ salesData.precio | currency }}
+                    </p> -->
+                    <div class="wrapper-price">
+                      <p class="text-precio" v-show="salesData.precio">
+                        ${{ salesData.precio | currency }}
+                      </p>
+                      <!-- <p class="card-descuento">-50%</p> -->
+                    </div>
+                    <div class="content_buy_action">
+                      <div v-if="envio.titulo == 'Envío gratis'">
+                        <p class="card-info-2">Envío gratis !</p>
+                      </div>
+                      <div class="content_card-info">
+                        <p class="card-info-1" v-if="spent">Agotado !</p>
+                      </div>
+                    </div>
+                    <div>
+                      <button
+                        ref="colorBtn"
+                        class="btn"
+                        v-if="!spent"
+                        v-on:click="addShoppingCart"
+                      >
+                        Comprar
+                      </button>
+                      <button
+                        disabled
+                        class="btn-disabled"
+                        v-if="spent"
+                        v-on:click="addShoppingCart"
+                      >
+                        Agotado !
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -218,6 +268,9 @@ import zoom from './_productdetails/zoomImg'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductDetail-1',
+  props: {
+    settingByTemplate: Object,
+  },
   components: {
     selectGroup,
     koDescription,
@@ -234,6 +287,18 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
+    window.addEventListener('scroll', function () {
+      var sticky = document.getElementById('sticky')
+      if (window.pageYOffset >= 340 && screen.width > 725 && sticky) {
+        sticky.style.display = 'flex'
+        sticky.style.position = 'fixed'
+        sticky.style.top = '88px'
+      } else {
+        sticky.style.display = 'none'
+        sticky.style.position = 'static'
+        sticky.style.top = ''
+      }
+    })
   },
   data() {
     return {
@@ -255,7 +320,7 @@ export default {
         titulo: '',
         desc: '',
       },
-      active: true,
+      activeZoom: true,
     }
   },
   computed: {
@@ -318,7 +383,6 @@ export default {
       return this.productsData[0].id
     },
     getDataProduct() {
-      // const idOfSlug = "7887";
       const idOfSlug = this.searchIdForSlug()
       if (idOfSlug) {
         axios
@@ -353,7 +417,6 @@ export default {
           })
       } else {
         this.selectedPhoto(this.productsData[0].foto_cloudinary)
-        // this.videoYoutube(this.productsData[0].foto);
         this.data.detalle = {
           foto_cloudinary: this.productsData[0].foto_cloudinary,
           nombre: this.productsData[0].nombre,
@@ -463,7 +526,7 @@ export default {
       let id = ''
       if (url && url !== '' && url !== 'null') {
         this.validVideo = true
-        let id = url.match(myregexp)
+        id = url.match(myregexp)
         if (id) {
           this.idYoutube = id[1]
         }
@@ -507,55 +570,6 @@ export default {
     },
     evalStock(mq, qv) {
       return !(mq - qv < 0)
-    },
-    mobileCheck() {
-      window.mobilecheck = function () {
-        var check = false
-        ;(function (a) {
-          if (
-            /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
-              a
-            ) ||
-            /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
-              a.substr(0, 4)
-            )
-          )
-            check = true
-        })(navigator.userAgent || navigator.vendor || window.opera)
-        return check
-      }
-      return window.mobilecheck()
-    },
-    redirectWhatsapp() {
-      if (this.dataStore.tienda.whatsapp.length > 10) {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp
-        if (phone_number_whatsapp.charAt(0) === '+') {
-          phone_number_whatsapp = phone_number_whatsapp.slice(1)
-        }
-        if (this.mobileCheck()) {
-          window.open(
-            `https://wa.me/${phone_number_whatsapp}/?text=Hola%20vengo%20de%20tu%20tienda%20online%20y%20me%20gustaría%20recibir%20mas%20información`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `https://web.whatsapp.com/send?phone=${phone_number_whatsapp}&text=Hola%20vengo%20de%20tu%20tienda%20online%20y%20me%20gustaría%20recibir%20mas%20información%20${window.location}`,
-            '_blank'
-          )
-        }
-      } else {
-        if (this.mobileCheck()) {
-          window.open(
-            `https://wa.me/57${this.dataStore.tienda.whatsapp}/?text=Hola%20vengo%20de%20tu%20tienda%20online%20y%20me%20gustaría%20recibir%20mas%20información`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `https://web.whatsapp.com/send?phone=57${this.dataStore.tienda.whatsapp}&text=Hola%20vengo%20de%20tu%20tienda%20online%20y%20me%20gustaría%20recibir%20mas%20información%20${window.location}`,
-            '_blank'
-          )
-        }
-      }
     },
   },
   watch: {
@@ -637,17 +651,16 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-productDetail {
-  --background_color_1: #f2f4f7;
-}
 .wrapper-productDetail {
   display: flex;
   width: 100%;
-  background: var(--background_color_1);
+  background: #efefef;
+  /* background: var(--background_color_2); */
   justify-content: center;
   align-items: center;
 }
 .container-productDetail {
+  position: relative;
   display: flex;
   width: 100%;
   max-width: 1300px;
@@ -668,7 +681,8 @@ div.wrapper-productDetail {
 .text-category {
   font-size: 14px;
   font-weight: bold;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
 }
 .wrapper-left {
   flex: 2;
@@ -744,12 +758,12 @@ div.wrapper-productDetail {
   width: 100%;
   flex-direction: column;
   padding-bottom: 10px;
-  border-left: 1px solid rgba(21, 20, 57, 0.16);
+  /* border-left: 1px solid var(--color_border); */
+  border-left: 1px solid rgba(127, 127, 139, 0.342);
 }
 .content-right {
   margin-left: 20px;
 }
-
 i.close {
   color: black;
   align-self: flex-end;
@@ -759,14 +773,15 @@ i.close {
   font-weight: bold;
   font-size: 25px;
   line-height: 24px;
-  color: var(--color_text);
+  color: #000000;
+  /* color: var(--color_text); */
 }
 .text-marca {
-  font-size: 10px;
+  font-size: 16px;
   font-stretch: semi-condensed;
   font-style: normal;
-  color: var(--color_subtext);
-  /* margin-top: -6px; */
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
 }
 .text-promocion {
   font-size: 14px;
@@ -787,7 +802,8 @@ i.close {
 .text-precio {
   font-size: 30px;
   font-weight: bold;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
 }
 .card-descuento {
   font-size: 12px;
@@ -807,25 +823,31 @@ i.close {
   text-decoration-line: none;
   font-size: 14px;
   font-weight: normal;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
+
   line-height: 1.5;
   text-decoration: none;
 }
 .text-variant {
   font-size: 14px;
   font-weight: bold;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
 }
 .text-unidades {
   font-size: 14px;
   font-weight: bold;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
+
   margin-top: 5px;
 }
 .text-garantia {
   font-size: 14px;
   font-weight: bold;
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
   margin-top: 5px;
   margin-left: 5px;
 }
@@ -868,6 +890,15 @@ i.close {
   flex-direction: row;
   margin-top: 20px;
 }
+.content-float-info {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  background: #efefef;
+  transition: all 2s ease-out;
+}
 .whatsapp {
   fill: #27d367;
   width: 30px;
@@ -877,7 +908,7 @@ i.close {
 .btn {
   border-radius: var(--radius_btn);
   color: var(--color_text_btn);
-  border: solid 2px var(--color_border_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   padding: 6px 14px;
   width: 238px;
@@ -908,16 +939,19 @@ i.close {
   position: relative;
   box-sizing: border-box;
   max-width: 240px;
+  margin-bottom: 25px;
 }
 .text-quantity {
   font-size: 14px;
   font-weight: bold;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   margin-right: 15px;
   align-self: center;
 }
 .quantity_remove {
-  border: 2px var(--color_border);
+  /* border: 2px var(--color_border); */
+  border: 2px rgba(127, 127, 139, 0.342);
   border-top-left-radius: var(--radius_btn);
   border-bottom-left-radius: var(--radius_btn);
   border-style: solid none solid solid;
@@ -927,8 +961,11 @@ i.close {
 }
 .quantity_value {
   font-size: 1em;
-  color: var(--color_text);
-  border: 2px var(--color_border);
+  /* color: var(--color_text); */
+  color: #000000;
+  /* border: 2px var(--color_border); */
+  border: 2px rgba(127, 127, 139, 0.342);
+
   padding-left: 10px;
   padding-right: 10px;
   border-style: solid none solid none;
@@ -940,7 +977,8 @@ i.close {
   align-items: center;
 }
 .quantity_add {
-  border: 2px var(--color_border);
+  /* border: 2px var(--color_border); */
+  border: 2px rgba(127, 127, 139, 0.342);
   border-top-right-radius: var(--radius_btn);
   border-bottom-right-radius: var(--radius_btn);
   border-style: solid solid solid none;
@@ -950,25 +988,28 @@ i.close {
 }
 .icon {
   font-size: 16px;
-  color: var(--color_border);
+  /* color: var(--color_border); */
+  color: rgba(127, 127, 139, 0.342);
   transition: all 200ms ease-in;
 }
 .icon:hover {
-  color: var(--color_text);
+  /* color: var(--color_text); */
+  color: #000000;
 }
 .features {
   width: 100%;
   display: flex;
-  border-top: 1px solid rgba(21, 20, 57, 0.16);
+  /* border-top: 1px solid var(--color_border); */
+  border-top: 1px solid rgba(127, 127, 139, 0.342);
 }
 .responsive-purchase {
   display: none;
 }
 .container-alerta {
   position: absolute;
-  bottom: -35px;
-  left: 78px;
-  width: 120px;
+  bottom: -32px;
+  left: 95px;
+  width: 130px;
   background-color: rgb(250, 232, 75);
   border: 1px solid rgb(230, 213, 66);
   border-radius: 6px;
@@ -983,7 +1024,6 @@ i.close {
   padding: 5px 5px;
   text-transform: capitalize;
 }
-
 @media (max-width: 1250px) {
   .photo_main {
     width: 600px;
@@ -1017,7 +1057,6 @@ i.close {
     margin-right: 15px;
   }
 }
-
 @media (max-width: 768px) {
   .wrapper-left {
     flex: 1;
@@ -1044,7 +1083,6 @@ i.close {
     margin-bottom: 10px;
   }
 }
-
 @media (max-width: 725px) {
   .container-productDetail {
     padding: 0px 5px;
@@ -1072,7 +1110,6 @@ i.close {
     align-items: center;
     margin-bottom: 70px;
   }
-
   i.close {
     position: absolute;
     top: 10px;
@@ -1114,12 +1151,14 @@ i.close {
   .text-quantity {
     font-size: 14px;
     font-weight: bold;
-    color: var(--color_subtext);
+    /* color: var(--color_subtext); */
+    color: rgba(21, 20, 57, 0.541);
     margin-right: 5px;
     align-self: center;
   }
   .quantity_remove {
-    border: 1px var(--color_border);
+    /* border: 1px var(--color_border); */
+    border: 1px rgba(127, 127, 139, 0.342);
     border-top-left-radius: var(--radius_btn);
     border-bottom-left-radius: var(--radius_btn);
     border-style: solid none solid solid;
@@ -1129,8 +1168,10 @@ i.close {
   }
   .quantity_value {
     font-size: 1em;
-    color: var(--color_text);
-    border: 1px var(--color_border);
+    /* color: var(--color_text); */
+    color: #000000;
+    /* border: 1px var(--color_border); */
+    border: 1px rgba(127, 127, 139, 0.342);
     padding-left: 10px;
     padding-right: 10px;
     border-style: solid none solid none;
@@ -1142,7 +1183,8 @@ i.close {
     align-items: center;
   }
   .quantity_add {
-    border: 1px var(--color_border);
+    /* border: 1px var(--color_border); */
+    border: 1px rgba(127, 127, 139, 0.342);
     border-top-right-radius: var(--radius_btn);
     border-bottom-right-radius: var(--radius_btn);
     border-style: solid solid solid none;
@@ -1172,7 +1214,7 @@ i.close {
   .btn-responsive {
     border-radius: var(--radius_btn);
     color: var(--color_text_btn);
-    border: solid 0px var(--color_border_btn);
+    border: solid 0px var(--color_background_btn);
     background-color: var(--color_background_btn);
     padding: 6px 10px;
     width: 100%;
@@ -1202,6 +1244,9 @@ i.close {
     text-align: center;
     padding: 5px 5px;
     text-transform: capitalize;
+  }
+  .features {
+    border-top: none;
   }
 }
 
