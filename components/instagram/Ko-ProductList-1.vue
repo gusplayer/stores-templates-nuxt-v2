@@ -361,9 +361,6 @@ export default {
 </script>
 
 <style scoped>
-div.wrapper-productlist {
-  --background_color_1: #f2f4f7;
-}
 .wrapper-productlist {
   display: flex;
   justify-content: center;

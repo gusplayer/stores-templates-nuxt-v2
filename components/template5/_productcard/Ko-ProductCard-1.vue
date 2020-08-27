@@ -432,7 +432,7 @@ export default {
   color: black;
   font-size: 12px;
   font-weight: bold;
-  top: 88%;
+  top: 87%;
   right: 0px;
   z-index: 2;
 }

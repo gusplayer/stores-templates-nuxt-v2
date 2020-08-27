@@ -22,7 +22,7 @@
                 placeholder="Correo electrónico"
                 v-model="email"
                 @keyup.enter="toSubscribe"
-                id="CorreoElectronico"
+                id="CorreoElectronicoFooter"
               />
               <span
                 v-show="errors[0] || register"
