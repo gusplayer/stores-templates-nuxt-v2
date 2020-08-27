@@ -262,6 +262,16 @@ export default {
 </script>
 
 <style scoped>
+div.wrapper-productlist {
+  --background_color_1: #f2f4f7;
+  /* background-image: url('../../assets/img/wp_background.png'); */
+  background-color: #ece5dd;
+  background-color: #FAFAFA;
+  background-color: #F6F5FA;
+  background-position: center; /* Center the image */
+  background-repeat: repeat; /* Do not repeat the image */
+  background-size: contain;
+}
 .wrapper-productlist {
   display: flex;
   justify-content: center;
