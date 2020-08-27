@@ -204,7 +204,7 @@ export default {
 }
 .text-checkbox {
   margin-left: 5px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--color_subtext);
 }
 @media (max-width: 600px) {

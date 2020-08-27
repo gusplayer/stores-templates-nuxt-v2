@@ -1,9 +1,7 @@
 <template>
   <div class="wrapper-productlist">
     <div class="container">
-      <div class="content-title">
-        <!-- <p class="title">Productos</p> -->
-      </div>
+      <div class="content-title"></div>
       <br />
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
@@ -20,12 +18,12 @@
           </p>
         </div>
       </div>
-      <div class="top-right">
+      <!-- <div class="top-right">
         <div class="content-item-top">
           <ul>
             <li class="dropdown">
               <div class="content-filtrar">
-                <a class="dropbtn">Categorías</a>
+                <p class="dropbtn">Categorías</p>
                 <Flechadown-icon class="header-icon-menu" />
               </div>
               <div class="dropdown-content">
@@ -100,7 +98,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
