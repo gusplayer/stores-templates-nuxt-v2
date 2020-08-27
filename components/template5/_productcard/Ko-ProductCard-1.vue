@@ -490,7 +490,7 @@ export default {
   text-align: center;
   /* color: var(--color_text); */
   color: black;
-  font-weight: 400;
+  font-weight: 500;
 }
 .content-name-product {
   display: flex;
@@ -550,7 +550,7 @@ export default {
   font-weight: '500';
   line-height: 1.4;
   /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: rgb(107, 107, 107);
   text-align: left;
 }
 .btn {

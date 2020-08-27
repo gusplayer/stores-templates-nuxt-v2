@@ -366,7 +366,6 @@ export const actions = {
     await dispatch('GET_SERVER_PATH', full)
     await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
     await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
->>>>>>> store/index.js
     const idSlug = route.path.split('-')
     const producto = await axios.get(
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
