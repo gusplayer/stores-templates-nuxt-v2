@@ -125,7 +125,7 @@ export default {
 .subtext {
   text-align: center;
   color: var(--color_subtext);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
 }
 .title {

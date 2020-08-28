@@ -56,7 +56,7 @@ export default {
           hid: 'viewport',
           name: 'viewport',
           content:
-            'width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1',
+            'width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1',
         },
         { hid: 'description', name: 'description', content: description },
         { hid: 'subject', name: 'subject', content: 'tienda de ropa' },

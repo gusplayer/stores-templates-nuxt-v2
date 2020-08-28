@@ -1,42 +1,124 @@
 <template>
-  <div :style="themeStyleIg">
-    <KoHeaderIg :dataStore="dataStore" />
+  <div
+    :style="{
+      '--font-style':
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate.tipo_letra
+          ? this.$store.state.settingByTemplate.tipo_letra
+          : 'Roboto',
+    }"
+  >
+    <component
+      :dataStore="dataStore"
+      :settingByTemplate="
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate['--background_color_1']
+          ? this.$store.state.settingByTemplate
+          : this.settingBase
+      "
+      :is="headerTemplate"
+    />
     <nuxt />
-    <KFooterIg :dataStore="dataStore" />
+    <component
+      :dataStore="dataStore"
+      :settingByTemplate="
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate['--background_color_1']
+          ? this.$store.state.settingByTemplate
+          : this.settingBase
+      "
+      :is="footerTemplate"
+    />
+    <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
+      <div @click="redirectWhatsapp()">
+        <koWhatsapp class="button-whatsapp" /><span
+          >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
+        >
+      </div>
+    </div>
+    <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
+      <div class="content-cookie">
+        <p class="title">
+          Este sitio web utiliza cookies para su funcionar correctamente y
+          brindarte una mejor experiencia.
+        </p>
+        <div class="wrapper-btn">
+          <div class="content-btn">
+            <button class="btn-accept" @click="acceptCookies()">
+              Acepto cookies
+            </button>
+            <a
+              class="_link"
+              href="http://www.allaboutcookies.org/"
+              target="_blank"
+              rel="noreferrer noopener"
+              >¿Qué son las cookies?</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="wrapper-notificacion"
+      id="modalNotificacion"
+      v-if="dataStore.tienda.estado == 0"
+    >
+      <div class="content-notificacion">
+        <koTiendaCerrada />
+        <p class="text-noti">
+          Disculpa, no podrá realizar compras por el momento,
+        </p>
+        <p class="subtitle-noti">¿Deseas continuar?</p>
+        <button class="btn-acceptM" @click="acceptClose()">
+          Aceptar
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import KoHeaderIg from '../components/headers/header_ig/Ko-Header-ig'
-import KFooterIg from '../components/footers/footerIg/Ko-Footer-ig'
+import KoHeader1 from '../components/headers/header1/Ko-Header-1'
+import KoHeader2 from '../components/headers/header2/Ko-Header-2'
+import KoHeader3 from '../components/headers/header3/Ko-Header-3'
+import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
+import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
+import koWhatsapp from '../components/whatsapp/whatsapp'
+import koTiendaCerrada from '../assets/img/tiendaCerrada'
 
 export default {
   components: {
-    KoHeaderIg,
-    KFooterIg,
+    KoHeader1,
+    KoHeader2,
+    KoHeader3,
+    KoFooter1,
+    KoFooter2,
+    koWhatsapp,
+    koTiendaCerrada,
   },
   mounted() {
-    // this.$store.dispatch('GET_LOGIN')
+    this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_SHOPPING_CART')
-    this.$store.dispatch(
-      'GET_SETTINGS_BY_TEMPLATE',
-      this.$store.state.dataStore.tienda
-      // this.$store.state.dataStore.tienda.id_tienda
-    )
+    this.$store.dispatch('GET_SERVER_PATH')
     let domain = this.$route.fullPath
     if (domain == '/?clearCart=true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
-
-    // this.$store.dispatch(
-    //   'GET_ANALYTICS_TAGMANAGER',
-    //   this.$store.state.dataStore.tienda.id_tienda
-    // )
-    // console.log('ruta completa ' + this.fullPathServer)
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
+    let tipo_letra =
+      this.$store.state.settingByTemplate &&
+      this.$store.state.settingByTemplate.tipo_letra
+        ? this.$store.state.settingByTemplate.tipo_letra
+        : 'Roboto'
+
+    let tidio =
+      this.$store.state.analytics_tagmanager &&
+      this.$store.state.analytics_tagmanager.tidio_user
+        ? this.$store.state.analytics_tagmanager.tidio_user
+        : ''
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
     return {
@@ -52,7 +134,7 @@ export default {
           hid: 'viewport',
           name: 'viewport',
           content:
-            'width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1',
+            'width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1,',
         },
         { hid: 'description', name: 'description', content: description },
         { hid: 'subject', name: 'subject', content: 'tienda de ropa' },
@@ -127,9 +209,9 @@ export default {
           src:
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
-        // {
-        //   src: `https://www.googletagmanager.com/gtag/js?id=${this.analytics_tagmanager.analytics}`,
-        // },
+        {
+          src: `https://code.tidio.co/${tidio}.js`,
+        },
       ],
       link: [
         {
@@ -141,55 +223,68 @@ export default {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         },
+        {
+          href: `https://fonts.googleapis.com/css?family=${tipo_letra}:400,700&display=swap`,
+          rel: 'stylesheet',
+        },
       ],
     }
   },
   computed: {
+    dataCookies() {
+      return this.$store.state.dataCookies
+    },
     template() {
       return this.$store.state.template
     },
     dataStore() {
       return this.$store.state.dataStore
     },
-    fullPathServer() {
-      return this.$store.state.fullPathServer
-    },
-    themeStyleIg() {
-      return {
-        '--font-style': 'Helvetica',
-
-        '--purple': ' #4429b4',
-        '--green': '#00dd8d',
-        '--magenta': '#c52675',
-        '--yellow': '#f2b931',
-
-        '--background_color_1': '#fff',
-
-        '--background_color_2': '#e4e4e4',
-        '--color_background_hover': '#cccccc',
-
-        '--color_text': '#000',
-        '--color_hover_text': '#25dac5',
-        '--color_subtext': 'rgba(21, 20, 57, 0.541)',
-
-        '--color_shopping_cart': '#3aacf7',
-        '--color_icon': '#3aacf7',
-
-        '--color_text_btn': '#fff',
-        '--color_background_btn': '#000000',
-        '--btnhover': '#25dac5',
-
-        '--color_background_btn_2': ' #000',
-
-        '--color_border': 'rgba(110, 110, 133, 0.342)',
-
-        '--radius_btn': '5px',
+    headerTemplate() {
+      let headerComponent = ''
+      switch (this.template) {
+        case 3:
+          headerComponent = 'KoHeader1'
+          break
+        case 5:
+          headerComponent = 'KoHeader1'
+          break
+        case 6:
+          headerComponent = 'KoHeader2'
+          break
+        case 7:
+          headerComponent = 'KoHeader3'
+          break
       }
+      return headerComponent
     },
-
-    // analytics_tagmanager() {
-    //   return this.$store.state.analytics_tagmanager
-    // },
+    footerTemplate() {
+      let footerComponent = ''
+      switch (this.template) {
+        case 3:
+          footerComponent = 'KoFooter1'
+          break
+        case 5:
+          footerComponent = 'KoFooter1'
+          break
+        case 6:
+          footerComponent = 'KoFooter2'
+          break
+        case 7:
+          footerComponent = 'KoFooter2'
+          break
+      }
+      return footerComponent
+    },
+    analytics_tagmanager() {
+      return this.$store.state.analytics_tagmanager
+    },
+    settingBase() {
+      return this.$store.state.settingBase
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
+    },
   },
   methods: {
     mobileCheck() {
@@ -241,13 +336,17 @@ export default {
         }
       }
     },
+    acceptCookies() {
+      document.getElementById('modalCookies').style.bottom = '-135px'
+      document.cookie =
+        'authCookies = 1; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;'
+    },
+    acceptClose() {
+      document.getElementById('modalNotificacion').style.zIndex = '-2'
+      document.getElementById('modalNotificacion').style.opacity = '0'
+    },
   },
 }
 </script>
 
-<style>
-@font-face {
-  font-family: 'instagram';
-  src: url('../assets/font/instagram.ttf');
-}
-</style>
+<style></style>
