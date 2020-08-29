@@ -3,6 +3,8 @@
     <div class="contenedor">
       <p class="title">Mi compra Proximamente</p>
       <!-- <p>API incluir esta ruta: https://api2.komercia.co/api/orden/582/16907</p>
+      582 es la id de la tienda ya esta del this.datastore.tienda.id_tienda
+      16907 numero de factura 
       <p>Preguntar numero de orden y cedula (ID tienda ya esta)</p>
       <p>una vez se traiga la peticion, revisar si la cedula coincide</p>
       <p>
@@ -19,7 +21,6 @@ export default {
   props: {
     dataStore: Object,
   },
-
   mounted() {},
   data() {
     return {}
