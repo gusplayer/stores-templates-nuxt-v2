@@ -304,12 +304,12 @@ export default {
         if (this.product.id == this.idSlug) {
           let product = {
             id: this.product.id,
-            precio: this.product.precio,
+            // precio: this.product.precio,
             cantidad: 1,
-            foto_cloudinary: this.product.foto_cloudinary,
-            nombre: this.product.nombre,
+            // foto_cloudinary: this.product.foto_cloudinary,
+            // nombre: this.product.nombre,
             combinacion: undefined,
-            envio_gratis: this.product.envio_gratis,
+            // envio_gratis: this.product.envio_gratis,
           }
           if (this.salesData) {
             product.limitQuantity = this.product.stock

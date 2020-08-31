@@ -538,12 +538,12 @@ export default {
       }
       const product = {
         id: this.data.detalle.id,
-        precio: this.salesData.precio,
+        // precio: this.salesData.precio,
         cantidad: this.data.cantidad,
-        foto_cloudinary: this.data.detalle.foto_cloudinary,
-        nombre: this.data.detalle.nombre,
+        // foto_cloudinary: this.data.detalle.foto_cloudinary,
+        // nombre: this.data.detalle.nombre,
         combinacion: this.salesData.combinacion,
-        envio_gratis: this.data.detalle.envio_gratis,
+        // envio_gratis: this.data.detalle.envio_gratis,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
