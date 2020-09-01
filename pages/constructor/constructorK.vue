@@ -5,18 +5,14 @@
 </template>
 
 <script>
-import KoConstructor from '../../components/constructor/constructor'
+// import KoConstructor from '../../components/constructor/constructor'
 
 export default {
   layout: 'constructor-layout',
   components: {
-    KoConstructor,
+    // KoConstructor,
   },
 }
 </script>
 
-<style>
-.home {
-  overflow: hidden;
-}
-</style>
+<style></style>

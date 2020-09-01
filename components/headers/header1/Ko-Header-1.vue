@@ -230,9 +230,6 @@ export default {
     product() {
       return this.dataStore.productos
     },
-    fullPathServer() {
-      return this.$store.state.fullPathServer
-    },
   },
   methods: {
     openOrder() {

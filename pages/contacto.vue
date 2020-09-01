@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="home">
+  <div style="overflow: hidden;">
     <KoContact
       :dataStore="dataStore"
       :settingByTemplate="
@@ -30,8 +30,4 @@ export default {
 }
 </script>
 
-<style>
-.home {
-  overflow: hidden;
-}
-</style>
+<style></style>

@@ -121,7 +121,7 @@ export default {
 
 <style>
 .home {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .search-movil {
   display: none;

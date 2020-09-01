@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="home">
+  <div style="overflow: hidden;">
     <KoCart
       :settingByTemplate="
         this.$store.state.settingByTemplate &&
@@ -29,8 +29,4 @@ export default {
 }
 </script>
 
-<style>
-.home {
-  overflow: hidden;
-}
-</style>
+<style></style>

@@ -7,11 +7,13 @@
 <script>
 import KoTemplate5 from './template5/index'
 import KoTemplate6 from './template6/index'
+import KoTemplate7 from './template7/index'
 
 export default {
   components: {
     KoTemplate5,
     KoTemplate6,
+    KoTemplate7,
   },
   computed: {
     template() {
@@ -29,6 +31,9 @@ export default {
         case 6:
           productListComponent = 'KoTemplate6'
           break
+        case 7:
+          productListComponent = 'KoTemplate7'
+          break
       }
       return productListComponent
     },
@@ -36,8 +41,4 @@ export default {
 }
 </script>
 
-<style>
-.home {
-  overflow: hidden;
-}
-</style>
+<style></style>

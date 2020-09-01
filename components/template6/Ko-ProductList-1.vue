@@ -549,65 +549,7 @@ export default {
   color: var(--color_text);
   background-color: transparent;
 }
-.el-pager li.active,
-.el-pager li.hover,
-.el-pager li.focus {
-  color: var(--color_text);
-}
-.popover {
-  width: 300px;
-  background: transparent;
-  position: absolute;
-  right: -240px;
-  top: 0;
-  z-index: 99;
-  box-sizing: border-box;
-}
-/* search */
-.search {
-  margin-right: 15px;
-}
-.search > div {
-  display: inline-block;
-  position: relative;
-}
-.search > div:after {
-  content: '';
-  background: var(--color_text);
-  width: 2px;
-  height: 10px;
-  position: absolute;
-  top: 18px;
-  right: -3px;
-  transform: rotate(135deg);
-}
-.search > div > input {
-  color: var(--color_text);
-  font-size: 16px;
-  background: transparent;
-  width: 15px;
-  height: 15px;
-  padding: 8px;
-  border: 1.7px solid var(--color_text);
-  outline: none;
-  border-radius: 35px;
-  transition: width 0.5s;
-}
-.search > div > input::placeholder {
-  color: var(--color_text);
-  opacity: 1;
-}
-.search > div > input::-ms-placeholder {
-  color: var(--color_text);
-}
-.search > div > input::-ms-input-placeholder {
-  color: var(--color_text);
-}
-.search > div > input:focus,
-.search > div > input:valid {
-  width: 200px;
-  height: 35px;
-}
+
 @media (max-width: 1290px) {
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
