@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-productDetail" :style="settingByTemplate">
+  <div class="wrapper-productDetail">
     <div v-if="loading" v-loading="loading"></div>
     <div class="container-productDetail" v-else>
       <div class="section">
@@ -58,6 +58,11 @@
                   >
                 </selectGroup>
               </div>
+            </div>
+            <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
+              <button class="btn-whatsapp" @click="redirectWP()">
+                <whatsapp-icon class="wp-icon" />Más información
+              </button>
             </div>
           </div>
         </div>
@@ -398,6 +403,20 @@ export default {
     evalStock(mq, qv) {
       return !(mq - qv < 0)
     },
+    redirectWP() {
+      let baseUrl = 'https://api.whatsapp.com/send?phone='
+      let urlProduct
+      if (this.dataStore.tienda.dominio) {
+        urlProduct = `${this.dataStore.tienda.dominio}wa/${this.data.detalle.slug}`
+      } else {
+        urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa/${this.data.detalle.slug}`
+      }
+      let text =
+        'text=Hola 😀, %0AEstoy en tu tienda y me interesa el producto: '
+      window.open(
+        `${baseUrl}${this.dataStore.tienda.whatsapp}&${text} ${this.data.detalle.nombre}%0A- Link de compra: ${urlProduct}%0A`
+      )
+    },
   },
   watch: {
     productsData(value) {
@@ -635,7 +654,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  background: #00bb2d;
+  background: #25d366;
   border-radius: 10px;
   position: relative;
 }
@@ -736,7 +755,32 @@ export default {
   padding: 5px 5px;
   text-transform: capitalize;
 }
-
+.content-btn-whatsapp {
+  display: flex;
+  margin-top: 10px;
+}
+.btn-whatsapp {
+  color: black;
+  border-radius: 5px;
+  border: solid 1px #25d366;
+  background-color: #25d366;
+  padding: 8px 3px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 240px;
+  height: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.wp-icon {
+  font-size: 30px;
+  bottom: 4px;
+}
 @media (max-width: 670px) {
   .container-productDetail {
     padding: 10px 10px 90px 10px;

@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div class="wrapper-header">
-      <KoOrder :dataStore="dataStore" />
+      <KoOrderWa :dataStore="dataStore" />
       <div class="wrapper-banner-img">
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQdgeNil1eNY8XKW_XrVp9EUThSQghe12-sAA&usqp=CAU"
@@ -51,11 +51,11 @@
 </template>
 
 <script>
-import KoOrder from '../_order1/order1'
+import KoOrderWa from './_order1/orderWa'
 export default {
   name: 'Ko-Header-wa',
   components: {
-    KoOrder,
+    KoOrderWa,
   },
   props: {
     dataStore: Object,
@@ -210,7 +210,7 @@ export default {
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #00bb2d;
+  color: #25d366;
   margin-left: 7px;
   cursor: pointer;
 }
@@ -226,7 +226,7 @@ export default {
   box-sizing: border-box;
   width: 35px;
   height: 35px;
-  border: #00bb2d 2px solid;
+  border: #25d366 2px solid;
   border-radius: 50%;
   padding-bottom: 3px;
   position: relative;
@@ -234,7 +234,7 @@ export default {
 }
 .header-icon-cart {
   font-size: 20px;
-  color: #00bb2d;
+  color: #25d366;
 }
 .num-items {
   font-size: 11px;
@@ -242,8 +242,8 @@ export default {
   right: -5px;
   top: -5px;
   color: white;
-  background-color: #00bb2d;
-  border: #00bb2d 1px;
+  background-color: #25d366;
+  border: #25d366 1px;
   border-radius: 10px;
   line-height: 1;
   display: flex;

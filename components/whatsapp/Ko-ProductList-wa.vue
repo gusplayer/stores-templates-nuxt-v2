@@ -24,7 +24,10 @@
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard1 :product="product"></KoProductCard1>
+              <KoProductCard1
+                :product="product"
+                :dataStore="dataStore.tienda"
+              ></KoProductCard1>
             </div>
           </div>
           <div
@@ -394,8 +397,6 @@ export default {
     margin-left: 5px;
     margin-bottom: 0px;
   }
-}
-@media (max-width: 570px) {
   .grid-products {
     grid-template-columns: repeat(1, minmax(250px, 2fr));
   }

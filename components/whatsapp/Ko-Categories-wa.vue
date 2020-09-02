@@ -187,8 +187,8 @@ export default {
 }
 .content-card-category-active {
   color: grey;
-  border: solid 1px #00bb2d;
-  box-shadow: 0px 0px 2px 1px #00bb2d;
+  border: solid 1px #25d366;
+  box-shadow: 0px 0px 2px 1px #25d366;
 }
 .name-category {
   font-size: 14px;
@@ -220,11 +220,11 @@ export default {
 }
 .tags:hover {
   color: grey;
-  border: solid 1px #00bb2d;
+  border: solid 1px #25d366;
 }
 .tags-active {
   color: grey;
-  border: solid 1px #00bb2d;
+  border: solid 1px #25d366;
 }
 .content-item-category::-webkit-scrollbar {
   background: transparent;
@@ -236,7 +236,7 @@ export default {
   border-radius: 10px;
 }
 .content-item-category::-webkit-scrollbar-thumb {
-  background: #00bb2d;
+  background: #25d366;
   border-radius: 10px;
 }
 .content-item-category::-webkit-scrollbar-thumb:hover {

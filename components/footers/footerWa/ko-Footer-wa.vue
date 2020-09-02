@@ -2,7 +2,7 @@
   <div class="footer-container">
     <div class="wrapper-footer" @click="openOrder">
       <p class="text-footer">Tu pedido: {{ productsCart.length }} items</p>
-      <p class="text-footer">{{ totalCard | currency }}</p>
+      <p class="text-footer">{{ this.totalCart | currency }}</p>
     </div>
   </div>
 </template>
@@ -12,19 +12,12 @@ export default {
   props: {
     dataStore: Object,
   },
-  mounted() {
-    this.productsCart.forEach((element) => {
-      this.totalCard += element.precio
-    })
-  },
-  data() {
-    return {
-      totalCard: 0,
-    }
-  },
   computed: {
     productsCart() {
       return this.$store.state.productsCart
+    },
+    totalCart() {
+      return this.$store.state.totalCart
     },
   },
   methods: {
@@ -55,10 +48,10 @@ export default {
   z-index: 3;
   width: 100%;
   max-width: 320px;
-  background: #00bb2d;
+  background: #25d366;
   display: flex;
   justify-content: space-between;
-  border: 1px solid #00bb2d;
+  border: 1px solid #25d366;
   border-radius: 10px;
   padding: 10px 20px;
   cursor: pointer;
