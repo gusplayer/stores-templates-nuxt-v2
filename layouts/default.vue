@@ -100,14 +100,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES')
-    // this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')
-    this.$store.dispatch('GET_SERVER_PATH')
-    // this.$store.dispatch(
-    //   'GET_SETTINGS_BY_TEMPLATE',
-    //   this.$store.state.dataStore.tienda
-    //   // this.$store.state.dataStore.tienda.id_tienda
-    // )
     let domain = this.$route.fullPath
     if (domain == '/?clearCart=true') {
       this.$store.commit('DELETEALLITEMSCART')

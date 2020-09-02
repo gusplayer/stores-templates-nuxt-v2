@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  name: 'selectGroup-details',
   props: ['options', 'label', 'value', 'index', 'variantes'],
   mounted() {
     this.saveOption()
@@ -60,7 +61,8 @@ select {
   border: 0 !important;
   background: transparent;
   background-image: none;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   font-weight: 600;
 }
 select::-ms-expand {
@@ -73,7 +75,8 @@ select::-ms-expand {
   height: 40px;
   background: transparent;
   overflow: hidden;
-  border: 2px solid var(--color_border);
+  /* border: 2px solid var(--color_border); */
+  border: 2px solid rgba(127, 127, 139, 0.342);
   border-radius: var(--radius_btn);
 }
 select {
@@ -96,7 +99,8 @@ select {
   content: url('data:image/svg+xml;charset=UTF-8, <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" fill="BlueViolet" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>');
 }
 option {
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
 }
 option:disabled {
   background: white;
