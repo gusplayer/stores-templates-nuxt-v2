@@ -81,6 +81,7 @@
 import KoHeader1 from '../components/headers/header1/Ko-Header-1'
 import KoHeader2 from '../components/headers/header2/Ko-Header-2'
 import KoHeader3 from '../components/headers/header3/Ko-Header-3'
+import KoHeader4 from '../components/headers/header4/Ko-Header-4'
 import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
 import koWhatsapp from '../components/whatsapp/whatsapp'
@@ -91,6 +92,7 @@ export default {
     KoHeader1,
     KoHeader2,
     KoHeader3,
+    KoHeader4,
     KoFooter1,
     KoFooter2,
     koWhatsapp,
@@ -98,14 +100,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES')
-    // this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')
-    this.$store.dispatch('GET_SERVER_PATH')
-    // this.$store.dispatch(
-    //   'GET_SETTINGS_BY_TEMPLATE',
-    //   this.$store.state.dataStore.tienda
-    //   // this.$store.state.dataStore.tienda.id_tienda
-    // )
     let domain = this.$route.fullPath
     if (domain == '/?clearCart=true') {
       this.$store.commit('DELETEALLITEMSCART')
@@ -140,7 +135,7 @@ export default {
           hid: 'viewport',
           name: 'viewport',
           content:
-            'width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1,',
+            'width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0',
         },
         { hid: 'description', name: 'description', content: description },
         { hid: 'subject', name: 'subject', content: 'tienda de ropa' },
@@ -259,6 +254,9 @@ export default {
           headerComponent = 'KoHeader2'
           break
         case 7:
+          headerComponent = 'KoHeader4'
+          break
+        case 8:
           headerComponent = 'KoHeader3'
           break
       }
@@ -278,6 +276,9 @@ export default {
           break
         case 7:
           footerComponent = 'KoFooter2'
+          break
+        case 8:
+          footerComponent = 'KoFooter1'
           break
       }
       return footerComponent
@@ -398,8 +399,6 @@ export default {
   border: 1px solid rgb(172, 172, 172);
   background: transparent;
   width: 13px;
-  border-top-right-radius: var(--radius_btn);
-  border-bottom-right-radius: var(--radius_btn);
 }
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 10px white;

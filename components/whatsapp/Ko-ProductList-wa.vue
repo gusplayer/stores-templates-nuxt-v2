@@ -1,8 +1,6 @@
 <template>
   <div class="wrapper-productlist">
     <div class="container">
-      <div class="content-title"></div>
-      <br />
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
           <p class="text-categorias" @click="clear">Catálogo</p>
@@ -18,7 +16,7 @@
           </p>
         </div>
       </div>
-      <div class="content-item">
+      <div>
         <div class="content-item-productos">
           <div class="grid-products">
             <div
@@ -26,7 +24,10 @@
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard1 :product="product"></KoProductCard1>
+              <KoProductCard1
+                :product="product"
+                :dataStore="dataStore.tienda"
+              ></KoProductCard1>
             </div>
           </div>
           <div
@@ -35,17 +36,14 @@
           >
             <p>No se encontraron productos relacionados.</p>
           </div>
-          <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 16">
-              <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="products.length"
-                :page-size="16"
-                :current-page.sync="currentPage"
-                class="pagination"
-              ></el-pagination>
-            </div>
+          <div class="pagination-medium" v-if="products.length > 16">
+            <el-pagination
+              background
+              layout="prev, pager, next"
+              :total="products.length"
+              :page-size="16"
+              :current-page.sync="currentPage"
+            ></el-pagination>
           </div>
         </div>
       </div>
@@ -76,16 +74,6 @@ export default {
           maxTMP = product.precio
         }
       })
-    }
-    let domain = this.$route.fullPath
-    let searchCategory = domain.slice(0, [11])
-    let searchSubCategory = domain.slice(0, [14])
-    if (searchCategory === '/?category=') {
-      this.sendCategoryUrl(domain)
-    } else if (searchSubCategory === '/?subcategory=') {
-      this.SendsubcategoryUrl(domain)
-    } else if (domain == '/') {
-      this.Allcategories()
     }
   },
   data() {
@@ -142,6 +130,7 @@ export default {
       return this.orderproduct.slice(initial, final)
     },
     orderproduct() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return this.products.sort(function (prev, next) {
         return next.orden - prev.orden
       })
@@ -166,11 +155,6 @@ export default {
     },
   },
   methods: {
-    back() {
-      this.clear()
-      this.toggleCategories = true
-      this.nameCategory = ''
-    },
     Allcategories() {
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
@@ -191,53 +175,6 @@ export default {
         })
       }
       this.currentPage = 1
-    },
-    addClass() {
-      this.add = !this.add
-    },
-    mouseOver(index) {
-      this.sub = index
-      this.show = true
-    },
-    mouseLeave() {
-      this.sub = -1
-      this.show = false
-    },
-    Sendsubcategory(value) {
-      this.indexSelect2 = value
-      this.addClass()
-      this.selectSubcategory = value
-      let filtradoCategoria = this.subcategories.find(
-        (element) => element.id == value
-      )
-      this.nameSubCategory = filtradoCategoria.nombre_subcategoria
-      this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
-        data: value,
-      })
-    },
-    sendCategory(value, categoria, index, ref) {
-      this.indexSelect = index
-      this.currentPage = 1
-      this.nameCategory = value.nombre_categoria_producto
-      this.indexCategory = index
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
-        }
-      })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: value.nombre_categoria_producto,
-      })
     },
     breadcrumbsSendCategory(value) {
       let filtradoCategorias = this.categorias.find((element) => {
@@ -260,7 +197,6 @@ export default {
         data: '',
       })
       this.$emit('clear')
-      this.addClass()
       this.nameCategory = ''
     },
     sendCategoryUrl(value) {
@@ -333,6 +269,7 @@ export default {
       this.Searchproduct(value)
     },
     currentPage() {
+      // eslint-disable-next-line no-unused-vars
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
@@ -344,19 +281,6 @@ export default {
     },
     nameSubCategoryHeader(value) {
       return value
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      let domain = this.$route.fullPath
-      let searchCategory = domain.slice(0, [11])
-      let searchSubCategory = domain.slice(0, [14])
-      if (searchCategory === '/?category=') {
-        this.sendCategoryUrl(domain)
-      } else if (searchSubCategory === '/?subcategory=') {
-        this.SendsubcategoryUrl(domain)
-      } else if (domain == '/') {
-        this.Allcategories()
-      }
     },
     searchValue(value) {
       this.Searchproduct(value)
@@ -371,66 +295,16 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_2);
+  background: white;
   box-sizing: border-box;
 }
 .container {
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 1300px;
-  padding: 0px 20px;
+  max-width: 780px;
+  padding: 0px 20px 80px 20px;
   flex-direction: column;
-}
-.content-title {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.title {
-  font-size: 38px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.24;
-  letter-spacing: -0.4px;
-  color: var(--color_text);
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-.content-item-top {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-}
-.content-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  margin-bottom: 40px;
-}
-.content-item > div:nth-child(1) {
-  flex: 1;
-}
-.content-item > div:nth-child(2) {
-  flex: 2;
-}
-.content-filtrar {
-  display: flex;
-  flex-direction: row;
-}
-.dropbtn {
-  background: transparent;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: var(--color_subtext);
-  align-self: flex-end;
-  cursor: pointer;
-  margin-right: 2px;
 }
 .content-items-categorias {
   display: flex;
@@ -446,105 +320,26 @@ export default {
 }
 .text-categorias {
   background: transparent;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   line-height: 1.4;
-  color: var(--color_subtext);
-  align-self: flex-end;
+  color: black;
   margin-right: 2px;
   cursor: pointer;
   display: flex;
 }
 .text-categorias-select {
   background: transparent;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   line-height: 1.4;
-  color: var(--color_subtext);
+  color: rgb(46, 46, 46);
   align-self: flex-end;
-  margin-top: 2px;
   margin-right: 2px;
   margin-left: 5px;
   cursor: pointer;
   opacity: 0.6;
   display: flex;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0px 8px 20px 1px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-.content-item-catalogo {
-  display: flex;
-  align-self: baseline;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  max-width: 205px;
-  width: 100%;
-  border-radius: 10px;
-  background-color: var(--background_color_2);
-}
-.a-container {
-  width: 205px;
-  display: block;
-  position: relative;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  color: var(--color_subtext);
-  background-color: var(--background_color_2);
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-  align-items: center;
-  justify-content: center;
-}
-.item-categoria {
-  cursor: pointer;
-  padding: 0px 10px 0px 20px;
-  background-color: var(--background_color_2);
-}
-.item-categoria-active {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-
-.item-categoria:hover {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-.content-item-subcategorie {
-  background: var(--color_background_hover);
-  padding-right: 10px;
-  padding-left: 40px;
-}
-.item-subcategorie {
-  font-size: 13px;
-  cursor: pointer;
-  user-select: none;
-}
-.item-subcategorie-active {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-.item-subcategorie:hover {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-.content-products {
-  border-radius: 10px;
-}
-.content-products:hover,
-.content-products:focus {
-  box-shadow: 0px 0px 2px 1px var(--color_border);
 }
 .content-item-productos {
   display: flex;
@@ -557,9 +352,17 @@ export default {
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(250px, 2fr));
+  grid-template-columns: repeat(2, minmax(250px, 2fr));
   grid-gap: 25px;
   box-sizing: border-box;
+}
+.content-products {
+  border-radius: 10px;
+}
+.content-products:hover,
+.content-products:focus {
+  box-shadow: 0px 0px 2px 1px var(--color_border);
+  border-radius: 10px;
 }
 .content-products-empty {
   width: 100%;
@@ -573,170 +376,20 @@ export default {
   font-size: 18px;
   opacity: 0.6;
   font-weight: bold;
-  color: var(--color_subtext);
-}
-.top-right {
-  display: none;
-}
-.header-icon-menu {
-  font-size: 30px;
-  cursor: pointer;
-  color: var(--color_subtext);
-}
-.header-icon-close {
-  font-size: 30px;
-  color: rgba(21, 20, 57, 0.808);
-  margin-left: 22px;
-}
-.top-input-search {
-  position: relative;
-  display: grid;
-  align-content: start;
-  justify-content: flex-end;
-}
-.top-input-search input {
-  width: 100%;
-  padding: 10px 35px 10px 15px;
-  box-sizing: border-box;
-  font-size: 14px;
-  color: var(--color_subtext);
-  border: solid 2px #afafaf;
-  border-radius: var(--radius_btn);
-  background-color: transparent;
-}
-.top-input-search input::placeholder {
-  color: var(--color_subtext);
-  opacity: 0.7;
-}
-.top-input-search input:focus,
-.top-input-search input:active {
-  border-radius: var(--radius_btn);
-  border: solid 2px var(--color_border_btn);
-  outline: 0;
-}
-.top-input-search i.icon-search {
-  position: absolute;
-  top: 9px;
-  right: 15px;
-  z-index: 2;
-  color: var(--color_subtext);
-  font-weight: bold;
-}
-.top-input-search .response {
-  justify-self: start;
-  padding: 0 10px;
-  height: 32px;
-  line-height: 30px;
-  font-size: 12px;
-  color: var(--color_subtext);
-  border: solid 2px #d8d8d8;
-  border-radius: var(--radius_btn);
-  background-color: transparent;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  white-space: nowrap;
-  height: 28px;
-  line-height: 26px;
+  color: black;
 }
 .pagination-medium {
   margin-top: 10px;
-  background: transparent;
 }
-.pagination {
-  font-size: 18px;
-  color: var(--color_text);
-  background: transparent;
-}
-@media (max-width: 1290px) {
-  .grid-products {
-    grid-template-columns: repeat(4, minmax(240px, 2fr));
-    grid-gap: 15px;
-  }
-}
-@media (max-width: 1265px) {
-  .grid-products {
-    grid-template-columns: repeat(4, minmax(240px, 2fr));
-    grid-gap: 10px;
-  }
-}
-@media (max-width: 1250px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(250px, 2fr));
-    grid-gap: 25px;
-  }
-}
-@media (max-width: 1060px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(250px, 2fr));
-    grid-gap: 20px;
-  }
-}
-@media (max-width: 1050px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
-    grid-gap: 20px;
-  }
-}
-@media (max-width: 1020px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
-    grid-gap: 15px;
-  }
-}
-@media (max-width: 1010px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
-    grid-gap: 10px;
-  }
-}
-@media (max-width: 1000px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-gap: 25px;
-  }
-}
-
-@media (max-width: 790px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-gap: 20px;
-  }
-}
-@media (max-width: 780px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-gap: 16px;
-  }
-}
-@media (max-width: 775px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-gap: 20px;
-  }
-}
-
 @media (max-width: 770px) {
   .container {
-    padding: 0px;
+    padding: 0px 0px 80px 0px;
   }
   .content-item-productos {
     padding: 15px;
   }
-  .title {
-    font-size: 25px;
-    margin-top: 20px;
-  }
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(10px, 2fr));
-  }
-  .dropbtn {
-    margin-left: 5px;
-  }
   .text-categorias {
     padding: 0 10px;
-  }
-  .content-title {
-    padding: 0px 15px;
   }
 }
 @media (max-width: 700px) {
@@ -744,12 +397,11 @@ export default {
     margin-left: 5px;
     margin-bottom: 0px;
   }
-}
-
-@media (max-width: 450px) {
   .grid-products {
-    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    grid-template-columns: repeat(1, minmax(250px, 2fr));
   }
+}
+@media (max-width: 450px) {
   .content-item-productos {
     padding: 5px;
   }

@@ -16,38 +16,30 @@
           type="search"
           placeholder="¿Qué buscas?"
           @keyup.enter="getSearch(search)"
-          id="SearchIndex5"
+          id="SearchIndexTemplate"
         />
       </form>
     </div>
-    <kBanner v-if="this.stateBanner"></kBanner>
-    <KComponent360 />
-    <KProductFavoritos />
+    <kBanner :dataStore="dataStore" />
+    <KCategory :dataStore="dataStore" style="position: sticky; top: 88px;" />
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
     ></KProductList>
-    <kBannerFooter />
-    <KNewsletter :dataStore="dataStore" />
   </div>
 </template>
 
 <script>
-import kBanner from '../../components/template5/ko-Banner-1'
-import kBannerFooter from '../../components/template5/ko-BannerFooter-1'
-import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
-import KProductList from '../../components/template5/Ko-ProductList-1'
-import KNewsletter from '../../components/template5/Ko-Newsletter-1'
-import KComponent360 from '../../components/template5/Ko-Content360-1'
+import kBanner from '../../components/template7/ko-Banner-1'
+import KCategory from '../../components/template7/Ko-Category-1'
+import KProductList from '../../components/template7/Ko-ProductList-1'
+
 export default {
   layout: 'default',
   components: {
     kBanner,
     KProductList,
-    KNewsletter,
-    KProductFavoritos,
-    KComponent360,
-    kBannerFooter,
+    KCategory,
   },
   mounted() {
     var prevScrollpos = window.pageYOffset
@@ -63,11 +55,9 @@ export default {
       }
       prevScrollpos = currentScrollPos
     }
-
     let domain = this.$route.fullPath
     let search = domain.slice(0, [9])
     if (search === '/?search=') {
-      this.$store.commit('SET_STATEBANNER', false)
       this.setSearch(domain)
     }
   },
@@ -88,9 +78,6 @@ export default {
     },
     settingBase() {
       return this.$store.state.settingBase
-    },
-    stateBanner() {
-      return this.$store.state.stateBanner
     },
   },
   methods: {

@@ -1,11 +1,11 @@
 <template lang="html">
-  <div class="home">
+  <div style="overflow: hidden;">
     <KoProductDetail />
   </div>
 </template>
 
 <script>
-import KoProductDetail from '../../components/whatsapp/Ko-ProductDetail-1'
+import KoProductDetail from '../../components/whatsapp/Ko-ProductDetail-wa'
 
 export default {
   layout: 'wa',
@@ -15,8 +15,4 @@ export default {
 }
 </script>
 
-<style>
-.home {
-  overflow: hidden;
-}
-</style>
+<style></style>

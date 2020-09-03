@@ -4,9 +4,13 @@
       <div class="order_content">
         <div class="order_header">
           <h3>Tu orden</h3>
-          <button @click="closeOrder" class="order_header_close">
-            <window-close-icon />
-          </button>
+          <label
+            for="order_close"
+            @click="closeOrder"
+            class="order_header_close"
+          >
+            <close-icon />
+          </label>
         </div>
         <transition name="slide">
           <template>
@@ -19,7 +23,10 @@
                     :key="index"
                   >
                     <div class="photo">
-                      <img :src="product.foto_cloudinary" alt="Product img" />
+                      <img
+                        :src="idCloudinary(product.foto_cloudinary, 100, 100)"
+                        alt="Product Img"
+                      />
                     </div>
                     <div class="name">
                       <p class="order-text" style="font-weight: bold;">
@@ -46,10 +53,10 @@
                         {{ (product.precio * product.cantidad) | currency }}
                       </p>
                     </div>
-                    <delete-icon
+                    <window-close-icon
                       class="material-icons delete"
                       v-on:click="deleteItemCart(index)"
-                    ></delete-icon>
+                    />
                   </li>
                 </ul>
               </div>
@@ -61,7 +68,9 @@
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
-                    <p>Costo domicilio</p>
+                    <p style="font-weight: bold; font-size: 16px;">
+                      Costo domicilio
+                    </p>
                     <details
                       v-if="
                         rangosByCiudad.envio_metodo === 'precio_ciudad' &&
@@ -69,30 +78,59 @@
                         getFreeShipping == false
                       "
                     >
-                      <summary
-                        class="text-color"
-                        style="
-                          display: flex;
-                          align-items: center;
-                          margin-right: 10px;
-                        "
-                        >Valor por Ciudad:</summary
-                      >
+                      <summary class="text-color">Valor por Ciudad:</summary>
                       <section>
                         <ol class="scroll_cart_summary_items_cities">
                           <li
                             v-for="(ciudad, index) in rangosByCiudad.rangos"
                             :key="ciudad.id"
                           >
-                            <b>
-                              {{
-                                shippingCities[index].nombre_ciu ===
-                                'Sin especificar'
-                                  ? 'Resto del país'
-                                  : shippingCities[index].nombre_ciu
-                              }}:
-                            </b>
-                            {{ ciudad.price | currency }}
+                            <div v-if="ciudad.price > 0">
+                              <b>
+                                {{
+                                  shippingCities[index].nombre_ciu ===
+                                  'Sin especificar'
+                                    ? 'Resto del país'
+                                    : shippingCities[index].nombre_ciu
+                                }}:
+                              </b>
+                              {{ ciudad.price | currency }}
+                            </div>
+                          </li>
+                        </ol>
+                      </section>
+                    </details>
+                    <div
+                      v-else-if="
+                        rangosByCiudad.envio_metodo === 'tarifa_plana' &&
+                        shipping > 0 &&
+                        getFreeShipping == true
+                      "
+                    >
+                      <li class="text-color">
+                        Tarifa plana: {{ rangosByCiudades.valor | currency }}
+                      </li>
+                    </div>
+                    <details
+                      v-else-if="
+                        rangosByCiudad.envio_metodo === 'precio' &&
+                        getFreeShipping == true
+                      "
+                    >
+                      <summary class="text-color">Tarifa por precio:</summary>
+                      <section>
+                        <ol class="scroll_cart_summary_items_cities">
+                          <li
+                            v-for="(ciudad,
+                            indexRangos) in rangosByCiudad.rangos"
+                            :key="indexRangos"
+                          >
+                            <div>
+                              <b>
+                                {{ ciudad.inicial }} - {{ ciudad.final }}:
+                              </b>
+                              {{ ciudad.precio | currency }}
+                            </div>
                           </li>
                         </ol>
                       </section>
@@ -103,11 +141,11 @@
                     <p
                       class="without_shipping_cost"
                       v-if="
-                        rangosByCiudad.envio_metodo === 'gratis' ||
-                        getFreeShipping == true
+                        rangosByCiudad.envio_metodo === 'gratis' &&
+                        (shippingCities.length <= 0 && getFreeShipping == false)
                       "
                     >
-                      No tiene costo de envió
+                      Envío gratis en toda la tienda
                     </p>
                   </span>
                   <span class="order_total_net">
@@ -122,32 +160,39 @@
                 </div>
               </template>
               <template v-else>
-                <div class="wrapper_photo">
-                  <img :src="img" class="photo" alt="empty car" />
+                <div class="order_products_list-empty">
+                  <div class="wrapper_photo">
+                    <img :src="img" class="photo" alt="empty car" />
+                  </div>
+                  <p class="text-cart-empty">
+                    Tu carrito de compras ahora está vacío.
+                  </p>
                 </div>
-                <p class="text-cart-empty">
-                  Tu carrito de compras ahora está vacío.
-                </p>
               </template>
               <div class="content-button">
                 <p class="Quotation-message" v-if="isQuotation()">
                   Contacte con la tienda para saber los precios de los productos
                 </p>
-                <button
-                  v-if="productsCart.length && !isQuotation()"
-                  class="continue_shopping"
-                  @click="GoPayments"
+                <p
+                  class="Quotation-message"
+                  v-if="dataStore.tienda.estado == 0"
                 >
-                  Finalizar compra
+                  Tienda cerrada
+                </p>
+                <button
+                  v-if="
+                    productsCart.length &&
+                    !isQuotation() &&
+                    dataStore.tienda.estado == 1
+                  "
+                  class="continue_shopping"
+                  @click="redirectWP"
+                >
+                  <whatsapp-icon class="wp-icon" />Finalizar compra
                 </button>
-                <nuxt-link class="conten-btn" to="/" @click="closeOrder">
+                <nuxt-link class="conten-btn" to="/wa" @click="closeOrder">
                   <button class="continue_shopping2">
                     Seguir comprando
-                  </button>
-                </nuxt-link>
-                <nuxt-link to="/cart" class="conten-btn" @click="closeOrder">
-                  <button class="continue_shopping2">
-                    Ir al carrito
                   </button>
                 </nuxt-link>
               </div>
@@ -175,16 +220,21 @@
 </template>
 
 <script>
-import axios from 'axios'
+import idCloudinary from '../../../../mixins/idCloudinary'
 
 export default {
-  name: 'koOrder1',
-  props: {},
+  mixins: [idCloudinary],
+  name: 'koOrder1-cart',
+  props: {
+    dataStore: Object,
+  },
   mounted() {
+    this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch('GET_CITIES')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
       this.filterCities()
     }
+    this.$store.commit('CALCULATE_TOTALCART')
   },
   data() {
     return {
@@ -214,13 +264,17 @@ export default {
     },
     getFreeShipping() {
       let free = true
-      this.productsCart.filter((product) => {
-        if (product.envio_gratis == 0) {
-          free = false
-        }
-      })
+      if (this.rangosByCiudad.envio_metodo === 'gratis') {
+        free = false
+      }
       if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
         free = false
+      }
+      if (this.rangosByCiudad.envio_metodo === 'tarifa_plana') {
+        free = true
+      }
+      if (this.rangosByCiudad.envio_metodo === 'precio') {
+        free = true
       }
       return free
     },
@@ -289,54 +343,83 @@ export default {
         element === 'order_header_close' ||
         element === 'continue_shopping' ||
         element === 'continue_shopping2' ||
-        element.animVal === 'material-design-icon__svg'
+        element.animVal === 'material-design-icon__svg' ||
+        element.baseVal === 'material-design-icon__svg' ||
+        element.animVal === '' ||
+        element.baseVal === ''
       ) {
         this.$store.commit('SET_OPENORDER', false)
       }
     },
-    GoPayments() {
-      let json = {
-        products: this.$store.state.productsCart,
-        tienda: {
-          id: this.$store.state.tienda.id_tienda,
-          nombre: this.$store.state.tienda.nombre,
-          logo: this.$store.state.tienda.logo,
-          location: window.location.href,
-        },
-        tipo: 0,
-        total: this.$store.state.totalCart,
-        estado: 0,
-        direccion_entrega: 0,
+    mobileCheck() {
+      window.mobilecheck = function () {
+        var check = false
+        ;(function (a) {
+          if (
+            /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
+              a
+            ) ||
+            /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
+              a.substr(0, 4)
+            )
+          )
+            check = true
+        })(navigator.userAgent || navigator.vendor || window.opera)
+        return check
       }
-      json = JSON.stringify(json)
-      if (this.$store.state.productsCart.length != 0) {
-        location.href = `https://checkout.komercia.co/?params=${json}`
-      }
+      return window.mobilecheck()
     },
-    async createQuotation() {
-      let quotation = {
-        productos: this.$store.state.productsCart,
-        tienda: this.$store.state.tienda.id_tienda,
-        tipo: 1,
-        total: this.$store.state.totalCart,
-        estado: 0,
-        direccion_entrega: 0,
-        metodo_pago: '7',
-        costo_envio: this.shipping || 0,
-        usuario: this.userData.id,
+    redirectWP() {
+      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
+      let baseUrlPc = 'https://web.whatsapp.com/send?phone=57'
+      let urlProduct
+      if (this.dataStore.tienda.dominio) {
+        urlProduct = `${this.dataStore.tienda.dominio}wa`
+      } else {
+        urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
       }
-      const response = await axios.post(
-        `https://api2.komercia.co/api/usuario/orden`,
-        quotation,
-        this.configHttp
-      )
-      this.$store.state.openOrder = false
-      this.$store.state.productsCart = []
-      this.$store.commit('UPDATE_CONTENTCART')
-      this.$notify.success({
-        title: 'Hemos recibido tu cotización!',
-        message: 'Pronto te enviaremos la información a tu correo electrónico.',
+      let productosCart = {}
+      this.$store.state.productsCart.map((element) => {
+        if (element.nombre && element.precio) {
+          Object.assign(productosCart, {
+            [element.nombre]: element.precio,
+          })
+        }
       })
+      let productString = JSON.stringify(productosCart)
+      let productList = productString.replace(/[{}"]/g, '')
+      let resultproductList = productList.replace(/,/g, '%0A')
+
+      let text = `Hola%20%F0%9F%98%80%2C%20%0Aestoy%20finalizando%20una%20compra%20en%20tu%20tienda%0A${urlProduct}%0ATu%20orden%3A%0A%20%0A${resultproductList}%0A%0ATotal%3A%20${this.totalCart}%0A`
+      if (this.dataStore.tienda.whatsapp.length > 10) {
+        let phone_number_whatsapp = this.dataStore.tienda.whatsapp
+        if (phone_number_whatsapp.charAt(0) === '+') {
+          phone_number_whatsapp = phone_number_whatsapp.slice(1)
+        }
+        if (this.mobileCheck()) {
+          window.open(
+            `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
+            '_blank'
+          )
+        } else {
+          window.open(
+            `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
+            '_blank'
+          )
+        }
+      } else {
+        if (this.mobileCheck()) {
+          window.open(
+            `${baseUrlMovil}${this.dataStore.tienda.whatsapp}&text=${text}`,
+            '_blank'
+          )
+        } else {
+          window.open(
+            `${baseUrlPc}${this.dataStore.tienda.whatsapp}&text=${text}`,
+            '_blank'
+          )
+        }
+      }
     },
     filterCities() {
       if (
@@ -395,7 +478,7 @@ export default {
   max-width: 400px;
   width: 100%;
   height: 100vh;
-  background-color: var(--background_color_1);
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -422,66 +505,66 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--background_color_2);
-  padding: 10px 5px;
+  border-bottom: 1px solid rgba(112, 112, 117, 0.322);
+  padding: 10px 30px;
   flex: none;
 }
 .order_header_close {
-  font-size: 20px;
-  padding: 0px 2px;
-  border-radius: 25px;
-  border: 1px solid white;
-  background-color: var(--color_shopping_cart);
+  font-size: 30px;
+  color: #25d366;
   cursor: pointer;
-  outline: none;
-  flex: none;
-  color: #fff;
-  transition: all ease 0.3s;
 }
 .order_header_close:hover {
-  background-color: var(--color_hover_text);
+  color: gray;
 }
 .order--wrapper {
   display: grid;
   overflow-y: auto;
 }
-.order_products_list {
+.order_products_list-empty {
   height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.order_products_list {
+  max-height: 380px;
   overflow-y: auto;
   overflow-x: hidden;
   list-style: none;
 }
 .order_products_list::-webkit-scrollbar {
-  background: var(--background_color_1);
+  background: transparent;
   width: 6px;
 }
 .order_products_list::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px var(--background_color_2);
+  /* box-shadow: inset 0 0 10px rgba(112, 112, 117, 0.322); */
   border-radius: 10px;
 }
 .order_products_list::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #2de470, #25d366);
   border-radius: 10px;
 }
 .order_products_list_item {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border-bottom: 1px solid var(--background_color_2);
-  padding: 0px 5px;
+  border-bottom: 1px solid rgba(112, 112, 117, 0.322);
+  padding: 10px 30px;
   overflow-x: auto;
 }
 .order_products_list_item::-webkit-scrollbar {
-  background: var(--background_color_1);
+  background: transparent;
   width: 6px;
   max-height: 8px;
 }
 .order_products_list_item::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px var(--background_color_2);
+  /* box-shadow: inset 0 0 10px rgba(112, 112, 117, 0.322); */
   border-radius: 10px;
 }
 .order_products_list_item::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #2de470, #25d366);
   border-radius: 10px;
 }
 .order_products_list_item .photo {
@@ -495,19 +578,18 @@ export default {
   max-height: 50px;
 }
 .order_products_list_item .name {
-  max-width: 180px;
+  max-width: 190px;
   width: 100%;
 }
 .order-text {
-  color: var(--color_text);
+  color: black;
   font-size: 14px;
 }
 .unidades {
-  color: var(--color_text);
+  color: black;
   font-size: 13px;
   font-weight: 500;
 }
-
 .order-combincacion {
   width: 100%;
   max-width: 180px;
@@ -518,7 +600,7 @@ export default {
 .order-combincacion-uni {
   border-radius: 10px;
   border: 1px solid white;
-  background-color: var(--color_shopping_cart);
+  background-color: #25d366;
   color: #fff;
 }
 .order-combincacion-text {
@@ -527,16 +609,18 @@ export default {
   font-size: 10px;
 }
 .price {
-  color: var(--color_shopping_cart);
+  min-width: 60px;
+  color: var(--color_subtext);
   font-size: 16px;
 }
 .order_products_list_item .material-icons.delete {
+  height: 17px;
   cursor: pointer;
-  color: var(--color_icon);
+  color: #25d366;
   transition: 0.3s;
 }
 .order_products_list_item:hover .material-icons.delete {
-  color: var(--color_hover_text);
+  color: grey;
 }
 .order_beforefreeshipping {
   text-align: center;
@@ -552,25 +636,25 @@ export default {
 .order_beforefreeshipping p strong,
 .order_freeshipping p,
 .order_freeshipping p strong {
-  color: var(--color_text);
+  color: black;
 }
 .content-remove-cart {
   width: 100%;
-  padding: 0 5px;
+  padding: 10px 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .remove-cart {
-  color: var(--color_text);
+  color: black;
   font-weight: 300;
   font-size: 14px;
   cursor: pointer;
   transition: all ease 0.3s;
 }
 .remove-cart:hover {
-  color: var(--btnhover);
+  color: grey;
 }
 .wrapper-items-remove {
   position: absolute;
@@ -580,13 +664,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
 }
 .content-items-remove {
   width: 100%;
   margin: 15px;
+
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -595,10 +679,9 @@ export default {
   background: white;
 }
 .text-remove {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding: 20px;
   text-align: center;
-  color: var(--color_text);
+  color: black;
   font-weight: 300;
   font-size: 16px;
 }
@@ -608,17 +691,17 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 .btn-remover-yes {
   font-weight: bold;
   border-style: none;
-  background-color: var(--color_shopping_cart);
+  background-color: rgb(35, 100, 165);
   padding: 4px 10px;
   width: 100%;
   max-width: 70px;
-  color: var(--color_text_btn);
-  border: 2px solid var(--color_shopping_cart);
+  color: white;
+  border: 2px solid rgb(35, 100, 165);
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -626,9 +709,8 @@ export default {
   transition: all ease 0.3s;
 }
 .btn-remover-yes:hover {
-  background-color: var(--btnhover);
-  color: var(--color_text_btn);
-  border: 2px solid var(--btnhover);
+  background-color: grey;
+  border: 2px solid grey;
 }
 .btn-remover-no {
   font-weight: bold;
@@ -637,8 +719,8 @@ export default {
   padding: 4px 10px;
   width: 100%;
   max-width: 80px;
-  color: var(--btnhover);
-  border: 2px solid var(--btnhover);
+  color: red;
+  border: 2px solid red;
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -646,46 +728,48 @@ export default {
   transition: all ease 0.3s;
 }
 .btn-remover-no:hover {
-  color: var(--color_shopping_cart);
-  border: 2px solid var(--color_shopping_cart);
+  color: #25d366;
+  border: 2px solid #25d366;
 }
 .order_total {
-  border-top: 1px solid var(--background_color_2);
-  padding: 0 5px;
-  margin-bottom: 10px;
+  border-top: 1px solid rgba(112, 112, 117, 0.322);
+  padding: 0 30px;
 }
 .order_total_domicile,
 .order_total_net {
   display: flex;
   justify-content: space-between;
-  margin: 5px 0;
+  margin: 15px 0;
 }
 .order_total_domicile p {
-  color: var(--color_text);
+  color: black;
   font-weight: 300;
   font-size: 14px;
 }
 .text-color {
-  color: var(--color_text);
+  color: black;
 }
 .scroll_cart_summary_items_cities {
-  color: var(--color_text);
+  color: black;
   overflow-y: auto;
   max-height: 150px;
   display: flex;
   flex-direction: column;
-  max-width: 170px;
+  max-width: 230px;
+}
+.scroll_cart_summary_items_cities li {
+  margin-right: 5px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar {
-  background: var(--background_color_1);
+  background: transparent;
   width: 4px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px var(--background_color_2);
+  /* box-shadow: inset 0 0 10px rgba(112, 112, 117, 0.322); */
   border-radius: 10px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: linear-gradient(125deg, #2de470, #25d366);
   border-radius: 10px;
 }
 .without_shipping_cost {
@@ -693,7 +777,7 @@ export default {
   font-size: 13px;
 }
 .order_total_net p {
-  color: var(--color_text);
+  color: black;
   font-weight: bold;
 }
 .Quotation-message {
@@ -705,35 +789,35 @@ export default {
   padding: 8px 10px;
   width: 100%;
   max-width: 280px;
-  color: var(--color_text);
+  color: black;
   font-size: 14px;
   letter-spacing: 1px;
   outline: none;
   flex: none;
 }
 .continue_shopping {
-  margin-top: 10px;
-  justify-self: center;
-  border-style: none;
-  background-color: transparent;
+  color: white;
+  border-radius: 5px;
+  border: solid 1px black;
+  background-color: black;
+  font-size: 14px;
   padding: 8px 10px;
   width: 100%;
-  max-width: 280px;
-  border-radius: var(--radius_btn);
-  color: var(--color_text_btn);
-  border: solid 2px var(--color_border_btn);
-  background-color: var(--color_background_btn);
-  font-size: 14px;
+  height: 41px;
+  max-width: 340px;
   font-weight: bold;
-  letter-spacing: 1px;
   cursor: pointer;
-  outline: none;
-  flex: none;
+  transition: all 200ms ease-in;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
   transition: all ease 0.3s;
 }
 .continue_shopping:hover {
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
+  border: solid 2px grey;
+  background-color: grey;
 }
 .conten-btn {
   display: flex;
@@ -748,9 +832,10 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
-  max-width: 280px;
-  color: var(--color_shopping_cart);
-  border: 2px solid var(--color_shopping_cart);
+  max-width: 340px;
+  color: black;
+  border: 2px solid black;
+  border-radius: 5px;
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -759,8 +844,8 @@ export default {
   transition: all ease 0.3s;
 }
 .continue_shopping2:hover {
-  color: var(--color_hover_text);
-  border: 2px solid var(--color_hover_text);
+  color: grey;
+  border: 2px solid grey;
 }
 .wrapper_photo {
   position: relative;
@@ -770,7 +855,6 @@ export default {
 }
 .photo {
   width: 120px;
-  height: 120px;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
@@ -803,5 +887,40 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+details {
+  color: #333;
+  font-size: 13px;
+  align-self: center;
+  flex: 1;
+  margin-left: 30px;
+}
+details summary {
+  outline: none;
+  cursor: pointer;
+  text-align: right;
+  font-size: 14px;
+  font-weight: bold;
+}
+details ol {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+}
+details ol li div {
+  padding: 2px 4px;
+  display: flex;
+  justify-content: space-between;
+}
+details ol li:nth-child(even) {
+  background-color: rgba(87, 87, 87, 0.1);
+}
+details[open] summary ~ * {
+  animation: sweep 0.5s ease-in-out;
+}
+.wp-icon {
+  font-size: 30px;
+  bottom: 4px;
+  margin-right: 5px;
 }
 </style>

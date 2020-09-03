@@ -1,43 +1,27 @@
 <template>
   <div :style="themeStyleWa">
-    <!-- <KoHeaderTest /> -->
     <KoHeaderWp :dataStore="dataStore" />
-    <Categories :dataStore="dataStore" />
     <nuxt />
-    <!-- <KFooter1 :dataStore="dataStore" /> -->
+    <KFooterWa :dataStore="dataStore" />
   </div>
 </template>
 
 <script>
-import KoHeaderWp from '../components/whatsapp/Header'
-import Categories from '../components/whatsapp/Categories'
+import KoHeaderWp from '../components/headers/header_wp/Ko-Header-wa'
+import KFooterWa from '../components/footers/footerWa/ko-Footer-wa'
 
 export default {
   components: {
     KoHeaderWp,
-    Categories,
+    KFooterWa,
   },
   mounted() {
-    // this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_SHOPPING_CART')
-    this.$store.dispatch(
-      'GET_SETTINGS_BY_TEMPLATE',
-      this.$store.state.dataStore.tienda
-      // this.$store.state.dataStore.tienda.id_tienda
-    )
-
     let domain = this.$route.fullPath
     if (domain == '/?clearCart=true') {
-      // console.log(domain, 'borrar carrito')
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
-
-    // this.$store.dispatch(
-    //   'GET_ANALYTICS_TAGMANAGER',
-    //   this.$store.state.dataStore.tienda.id_tienda
-    // )
-    // console.log('ruta completa ' + this.fullPathServer)
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
@@ -56,7 +40,7 @@ export default {
           hid: 'viewport',
           name: 'viewport',
           content:
-            'width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1',
+            'width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0',
         },
         { hid: 'description', name: 'description', content: description },
         { hid: 'subject', name: 'subject', content: 'tienda de ropa' },
@@ -158,51 +142,28 @@ export default {
     }
   },
   computed: {
-    template() {
-      return this.$store.state.template
-    },
     dataStore() {
       return this.$store.state.dataStore
-    },
-    fullPathServer() {
-      return this.$store.state.fullPathServer
     },
     themeStyleWa() {
       return {
         '--font-style': 'Poppins',
-
-        '--purple': ' #4429b4',
-        '--green': '#00dd8d',
-        '--magenta': '#c52675',
-        '--yellow': '#f2b931',
-
         '--background_color_1': '#128c7e',
-
         '--background_color_2': '#e4e4e4',
         '--color_background_hover': '#cccccc',
-
         '--color_text': '#1e0e62',
         '--color_hover_text': '#c52675',
         '--color_subtext': 'rgba(21, 20, 57, 0.541)',
-
         '--color_shopping_cart': '#25dac5',
         '--color_icon': '#25dac5',
-
         '--color_text_btn': '#000',
         '--color_background_btn': '#25dac5',
         '--btnhover': '#c52675',
-
         '--color_background_btn_2': ' #000',
-
         '--color_border': 'rgba(110, 110, 133, 0.342)',
-
         '--radius_btn': '5px',
       }
     },
-
-    // analytics_tagmanager() {
-    //   return this.$store.state.analytics_tagmanager
-    // },
   },
   methods: {
     mobileCheck() {

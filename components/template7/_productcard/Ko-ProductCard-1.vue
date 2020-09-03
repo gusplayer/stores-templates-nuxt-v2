@@ -1,9 +1,108 @@
 <template>
-  <div class="wrapper-card">
+  <div class="wrapper-card" :style="settingByTemplate">
     <div class="container">
+      <div
+        class="wrapper"
+        v-on:mouseenter="active = false"
+        v-on:mouseleave="active = true"
+      >
+        <router-link
+          :to="{ path: `/productos/` + product.slug }"
+          class="wrapper-image"
+        >
+          <img
+            v-if="!soldOut"
+            :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            class="product-image"
+            alt="Product Img"
+          />
+          <img
+            v-if="soldOut"
+            :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            class="product-image-soldOut"
+            alt="Product Img"
+          />
+          <p class="card-info-1" v-if="soldOut">Agotado !</p>
+          <p class="card-info-2" v-if="getFreeShipping == false">
+            Envío gratis !
+          </p>
+        </router-link>
+        <div class="wrapper-text">
+          <div class="content-name-product">
+            <p class="card-text" v-if="this.product.nombre.length >= 55">
+              {{ `${this.product.nombre.slice(0, 55)}...` }}
+            </p>
+            <p class="card-text" v-else>
+              {{ `${this.product.nombre.slice(0, 55)}` }}
+            </p>
+          </div>
+          <div v-if="active">
+            <div class="content-text-price" v-if="this.product.precio">
+              <div class="wrapper-price">
+                <div>
+                  <!-- <p class="card-price-1" v-if="this.product.precio > 0">
+                    $ {{ this.product.precio }}
+                  </p> -->
+                  <div
+                    class="content-price"
+                    v-if="estadoCart && this.minPrice != this.maxPrice"
+                  >
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{ this.minPrice | currency }}
+                    </p>
+
+                    <p class="separator-price">-</p>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{ this.maxPrice | currency }}
+                    </p>
+                  </div>
+                  <div v-else>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{ this.product.precio | currency }}
+                    </p>
+                  </div>
+                </div>
+                <!-- <p class="card-descuento">-50%</p> -->
+              </div>
+            </div>
+            <div class="content-text-price2" v-else></div>
+          </div>
+          <div class="content-text-price2" v-if="!active">
+            <div
+              class="content-soldOut"
+              v-if="!this.estadoCart && !soldOut && !spent"
+            >
+              <router-link
+                :to="{ path: `/productos/` + product.slug }"
+                class="btn"
+                >Ver más</router-link
+              >
+              <div v-on:click="addShoppingCart" class="btn">
+                <cartArrowDown class="card-icon-cart" />Agregar
+              </div>
+            </div>
+
+            <router-link
+              :to="{ path: `/productos/` + product.slug }"
+              v-else
+              class="btn"
+              >Ver más</router-link
+            >
+          </div>
+        </div>
+      </div>
       <div class="wrapper-movil">
         <router-link
-          :to="{ path: `/wa/` + product.slug }"
+          :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
           <img
@@ -15,7 +114,7 @@
           <img
             v-if="soldOut"
             :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
-            class="product-image product-image-soldOut"
+            class="product-image-soldOut"
             alt="Product Img"
           />
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
@@ -25,85 +124,69 @@
         </router-link>
         <div class="wrapper-text">
           <router-link
-            :to="{ path: `/wa/` + product.slug }"
+            :to="{ path: `/productos/` + product.slug }"
             class="content-name-product-movil"
           >
-            <p
-              class="card-text-movil-title"
-              v-if="this.product.nombre.length >= 33"
-            >
+            <p class="card-text-movil" v-if="this.product.nombre.length >= 33">
               {{ `${this.product.nombre.slice(0, 33)}..` }}
             </p>
-            <p class="card-text-movil-title" v-else>
+            <p class="card-text-movil" v-else>
               {{ `${this.product.nombre.slice(0, 34)}` }}
             </p>
-            <p class="card-text-movil" v-if="this.product.marca">
-              {{ this.product.marca }}
-            </p>
-            <div
-              class="content-text-price-movil-cart"
-              v-if="this.product.precio"
+          </router-link>
+
+          <div class="content-text-price-movil-cart" v-if="this.product.precio">
+            <router-link
+              :to="{ path: `/productos/` + product.slug }"
+              class="wrapper-price"
             >
-              <div class="wrapper-price">
-                <div>
-                  <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
+              <div>
+                <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
                 </p> -->
-                  <div
-                    class="content-price"
-                    v-if="estadoCart && this.minPrice != this.maxPrice"
+                <div
+                  class="content-price"
+                  v-if="estadoCart && this.minPrice != this.maxPrice"
+                >
+                  <p
+                    class="card-price-2"
+                    v-if="this.product.precio > 0 || this.product.precio"
                   >
-                    <p
-                      class="card-price-2"
-                      v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{ this.minPrice | currency }}
-                    </p>
-                    <p class="separator-price">-</p>
-                    <p
-                      class="card-price-2"
-                      v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{ this.maxPrice | currency }}
-                    </p>
-                  </div>
-                  <div v-else>
-                    <p class="card-price-2" v-if="this.product.precio > 0">
-                      {{ this.product.precio | currency }}
-                    </p>
-                  </div>
-                </div>
-                <!-- <p class="card-descuento">-50%</p> -->
-              </div>
-            </div>
-          </router-link>
-          <div class="Content-btn-movil">
-            <div
-              class="content-soldOut"
-              v-if="!this.estadoCart && !soldOut && !spent"
-            >
-              <div
-                v-on:click="addShoppingCart"
-                class="btn"
-                style="margin-right: 5px;"
-              >
-                <cartArrowDown class="card-icon-cart" />Agregar
-              </div>
-              <router-link :to="{ path: `/wa/` + product.slug }" class="btn"
-                >Ver más</router-link
-              >
-            </div>
+                    {{ this.minPrice | currency }}
+                  </p>
 
-            <router-link
-              :to="{ path: `/wa/` + product.slug }"
-              v-else
-              class="btn"
-              >Ver más</router-link
-            >
+                  <p class="separator-price">-</p>
+                  <p
+                    class="card-price-2"
+                    v-if="this.product.precio > 0 || this.product.precio"
+                  >
+                    {{ this.maxPrice | currency }}
+                  </p>
+                </div>
+                <div v-else>
+                  <p class="card-price-2" v-if="this.product.precio > 0">
+                    {{ this.product.precio | currency }}
+                  </p>
+                </div>
+              </div>
+              <!-- <p class="card-descuento">-50%</p> -->
+            </router-link>
+
+            <div v-if="!this.estadoCart && !soldOut && !spent">
+              <cartArrowDown
+                class="card-icon-cart-movil"
+                v-on:click="addShoppingCart"
+              />
+            </div>
           </div>
-        </div>
-        <div class="btn-whatsapp" v-if="dataStore.whatsapp">
-          <whatsapp-icon class="wp-icon" v-on:click="redirectWP()" />
+          <div class="separator-movil" v-else>
+            <div v-if="!this.estadoCart && !soldOut && !spent">
+              <cartArrowDown
+                class="card-icon-cart-movil"
+                v-on:click="addShoppingCart"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -115,7 +198,7 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',
-  props: { product: Object, dataStore: Object },
+  props: { product: Object, settingByTemplate: Object },
   mounted() {
     this.idSlug = this.product.id
     this.prodcutPrice()
@@ -282,61 +365,6 @@ export default {
         }
       }
     },
-    mobileCheck() {
-      window.mobilecheck = function () {
-        var check = false
-        ;(function (a) {
-          if (
-            /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
-              a
-            ) ||
-            /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
-              a.substr(0, 4)
-            )
-          )
-            check = true
-        })(navigator.userAgent || navigator.vendor || window.opera)
-        return check
-      }
-      return window.mobilecheck()
-    },
-    redirectWP() {
-      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
-      let baseUrlPc = 'https://web.whatsapp.com/send?phone=57'
-      let urlProduct
-      if (this.dataStore.dominio) {
-        urlProduct = `${this.dataStore.dominio}wa/${this.product.slug}`
-      } else {
-        urlProduct = `http://${this.dataStore.subdominio}.komercia.store/wa/${this.product.slug}`
-      }
-      let text = `text=Hola 😀, %0AEstoy en tu tienda y me interesa el producto: ${this.product.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
-      if (this.dataStore.whatsapp.length > 10) {
-        let phone_number_whatsapp = this.dataStore.whatsapp
-        if (phone_number_whatsapp.charAt(0) === '+') {
-          phone_number_whatsapp = phone_number_whatsapp.slice(1)
-        }
-        if (this.mobileCheck()) {
-          window.open(
-            `${baseUrlMovil}${phone_number_whatsapp}&${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(`${baseUrlPc}${phone_number_whatsapp}&${text}`, '_blank')
-        }
-      } else {
-        if (this.mobileCheck()) {
-          window.open(
-            `${baseUrlMovil}${this.dataStore.whatsapp}&${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `${baseUrlPc}${this.dataStore.whatsapp}&${text}`,
-            '_blank'
-          )
-        }
-      }
-    },
   },
   watch: {
     productsCarts(value) {
@@ -354,12 +382,19 @@ export default {
 </script>
 
 <style scoped>
+.separador {
+  margin: 30px;
+}
+.separador-descuento {
+  margin: 20px;
+}
 .wrapper-card {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: rgb(241, 241, 241);
+  /* background: var(--background_color_1); */
+  background: white;
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
@@ -367,104 +402,112 @@ export default {
 .container {
   display: flex;
   align-items: flex-start;
+  flex-direction: column;
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
 }
-.wrapper-movil {
-  width: 100%;
-  height: 160px;
-  max-height: 160px;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-.wrapper-image {
-  max-width: 160px;
-  max-height: 160px;
-  overflow: hidden;
-  border-radius: 10px 0 0 10px;
-}
-.product-image {
-  width: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-.product-image-soldOut {
-  filter: grayscale(100%);
-}
 .card-info-1 {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #e71f77;
-  padding: 1px 2px;
+  padding: 1px 4px;
   border-radius: var(--radius_btn);
   color: white;
   font-size: 12px;
+  top: 80%;
+  right: 0px;
   z-index: 2;
-  position: absolute;
-  top: 110px;
-  left: 0px;
 }
 .card-info-2 {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #35dd8d;
-  padding: 1px 2px;
+  padding: 1px 4px;
   border-radius: var(--radius_btn);
   color: black;
   font-size: 12px;
   font-weight: bold;
+  top: 87%;
+  right: 0px;
   z-index: 2;
-  position: absolute;
-  top: 132px;
-  left: 0px;
+}
+.wrapper-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  max-height: 300px;
+}
+.product-image {
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.product-image-soldOut {
+  filter: grayscale(100%);
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
 }
 .wrapper-text {
+  display: initial;
+  margin-top: 5px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
-.content-name-product-movil {
-  display: flex;
-  width: 100%;
-  padding: 0px 10px;
-  margin-top: 10px;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-  height: 30px;
-}
-.card-text-movil-title {
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 1.3;
-  letter-spacing: 0.2px;
-  color: black;
-}
-.card-text-movil {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.3;
-  letter-spacing: 0.2px;
-  color: black;
-}
-.content-text-price-movil-cart {
+.content-text-price {
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+.content-text-price2 {
+  display: flex;
+  width: 100%;
+  height: 47px;
+  align-items: center;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+.content-soldOut {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.card-text {
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.3;
+  text-align: center;
+  /* color: var(--color_text); */
+  color: black;
+  font-weight: 500;
+}
+.content-name-product {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  padding: 0px 20px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
 }
 .wrapper-price {
   display: flex;
   flex-direction: row;
-  align-self: flex-start;
   justify-content: center;
   align-items: center;
+  height: 47px;
 }
 .content-price {
   display: flex;
@@ -472,7 +515,13 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.card-price-1-movil {
+.separator-price {
+  /* color: var(--color_text); */
+  color: black;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.card-price-1 {
   font-size: 12px;
   font-weight: bold;
   font-stretch: normal;
@@ -482,18 +531,6 @@ export default {
   color: rgba(55, 4, 4, 0.61);
   text-decoration: line-through;
   text-align: center;
-}
-.card-price-2 {
-  font-size: 18px;
-  font-weight: '500';
-  line-height: 1.4;
-  color: rgb(107, 107, 107);
-  text-align: left;
-}
-.separator-price {
-  color: black;
-  margin-left: 5px;
-  margin-right: 5px;
 }
 .card-descuento {
   font-size: 12px;
@@ -508,51 +545,167 @@ export default {
   top: -8px;
   margin-left: 5px;
 }
-.Content-btn-movil {
-  /* width: 100%; */
-  height: 40px;
-  display: flex;
-  align-self: flex-end;
-  align-items: flex-start;
-}
-.content-soldOut {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+.card-price-2 {
+  font-size: 22px;
+  font-weight: '500';
+  line-height: 1.4;
+  /* color: var(--color_subtext); */
+  color: rgb(107, 107, 107);
+  text-align: left;
 }
 .btn {
-  color: white;
-  border-radius: 5px;
-  border: solid 1px black;
-  background-color: black;
-  padding: 2px 3px;
+  color: var(--color_text_btn);
+  border-radius: var(--radius_btn);
+  border: solid 1px var(--color_background_btn);
+  background-color: var(--color_background_btn);
+  padding: 8px 14px;
   font-size: 14px;
-  width: 90px;
+  width: 120px;
+  height: 40px;
   font-weight: bold;
   cursor: pointer;
   transition: all 200ms ease-in;
   text-decoration: none;
   display: flex;
   justify-content: center;
+  align-self: center;
   text-align: center;
 }
 .btn:hover {
-  background-color: grey;
-  border: solid 1px grey;
+  background-color: var(--btnhover);
+  border: solid 1px var(--btnhover);
 }
-.btn-whatsapp {
-  position: absolute;
-  top: 70px;
-  right: 10px;
+.wrapper {
+  display: initial;
+  width: 100%;
 }
-.wp-icon {
-  font-size: 32px;
-  color: #25d366;
+.wrapper-movil {
+  display: none;
 }
-@media (max-width: 330px) {
-  .btn-whatsapp {
-    top: 78px;
+
+.card-icon-cart {
+  font-size: 20px;
+  color: var(--color_text_btn);
+  margin-right: 4px;
+  cursor: pointer;
+  bottom: 0.125em;
+}
+.card-icon-cart-movil {
+  font-size: 20px;
+  /* color: var(--color_text); */
+  color: black;
+  margin-right: 4px;
+  cursor: pointer;
+  bottom: 0.125em;
+}
+.card-icon-cart-movil:hover {
+  color: var(--btnhover);
+}
+@media (max-width: 768px) {
+  .wrapper {
+    display: none;
+  }
+  .wrapper-movil {
+    display: initial;
+    width: 100%;
+  }
+  .content-name-product-movil {
+    display: flex;
+    width: 100%;
+    padding: 0px 10px;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+  }
+  .card-text-movil {
+    font-size: 13px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.3;
+    letter-spacing: 0.2px;
+    /* color: var(--color_text); */
+    color: black;
+    font-weight: 400;
+    text-align: center;
+  }
+  .content-text-price-movil {
+    display: flex;
+    width: 100%;
+    padding: 0px 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  .content-text-price-movil-cart {
+    display: flex;
+    width: 100%;
+    padding: 0px 20px;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .card-price-1-movil {
+    font-size: 12px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.4;
+    letter-spacing: normal;
+    color: rgba(55, 4, 4, 0.61);
+    text-decoration: line-through;
+    text-align: center;
+  }
+  .separator-movil {
+    width: 100%;
+    height: 40px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+  .card-info-1 {
+    top: 77%;
+  }
+  .card-info-2 {
+    top: 85%;
+  }
+  .product-image {
+    width: 100%;
+    object-fit: contain;
+    /* object-fit: cover; */
+    overflow: hidden;
+  }
+}
+@media (max-width: 630px) {
+  .card-info-1 {
+    top: 76%;
+  }
+  .card-info-2 {
+    top: 85%;
+  }
+}
+@media (max-width: 580px) {
+  .card-info-1 {
+    top: 81%;
+  }
+  .card-info-2 {
+    top: 91%;
+  }
+}
+@media (max-width: 450px) {
+  .container {
+    width: 100%;
+    max-width: 200px;
+  }
+  .card-price-2 {
+    font-size: 16px;
+  }
+  .card-info-1 {
+    top: 70%;
+    font-size: 12px;
+  }
+  .card-info-2 {
+    top: 82%;
+    font-size: 12px;
   }
 }
 </style>

@@ -438,14 +438,14 @@ export default {
         products: this.$store.state.productsCart,
         tienda: {
           id: this.$store.state.tienda.id_tienda,
-          nombre: this.$store.state.tienda.nombre,
-          logo: this.$store.state.tienda.logo,
-          location: window.location.href,
+          // nombre: this.$store.state.tienda.nombre,
+          // logo: this.$store.state.tienda.logo,
+          // location: window.location.href,
         },
-        tipo: 0,
-        total: this.$store.state.totalCart,
-        estado: 0,
-        direccion_entrega: 0,
+        // tipo: 0,
+        // total: this.$store.state.totalCart,
+        // estado: 0,
+        // direccion_entrega: 0,
       }
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {

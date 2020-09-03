@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="home">
+  <div class="home" style="overflow: hidden;">
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
@@ -60,9 +60,6 @@ export default {
 </script>
 
 <style>
-.home {
-  overflow: hidden;
-}
 .search-movil {
   display: none;
 }

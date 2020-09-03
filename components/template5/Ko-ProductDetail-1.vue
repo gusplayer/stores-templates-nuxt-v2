@@ -289,7 +289,7 @@ export default {
     }
     window.addEventListener('scroll', function () {
       var sticky = document.getElementById('sticky')
-      if (window.pageYOffset >= 340 && screen.width > 725 && sticky) {
+      if (window.pageYOffset >= 376 && screen.width > 725 && sticky) {
         sticky.style.display = 'flex'
         sticky.style.position = 'fixed'
         sticky.style.top = '88px'
@@ -763,6 +763,8 @@ export default {
 }
 .content-right {
   margin-left: 20px;
+  position: sticky;
+  top: 88px;
 }
 i.close {
   color: black;
