@@ -5,7 +5,7 @@
         this.$store.state.settingByTemplate &&
         this.$store.state.settingByTemplate.tipo_letra
           ? this.$store.state.settingByTemplate.tipo_letra
-          : 'Roboto',
+          : 'Poppins',
     }"
   >
     <component
@@ -224,7 +224,7 @@ export default {
           href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         },
         {
-          href: `https://fonts.googleapis.com/css?family=${tipo_letra}:400,700&display=swap`,
+          href: `https://fonts.googleapis.com/css?family=${tipo_letra}:wght@300;400;700&display=swap`,
           rel: 'stylesheet',
         },
       ],
