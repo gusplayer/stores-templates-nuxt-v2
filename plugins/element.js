@@ -18,6 +18,10 @@ import {
   Loading,
   Message,
   Tag,
+  Steps,
+  Step,
+  Collapse,
+  CollapseItem,
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/es'
 import locale from 'element-ui/lib/locale'
@@ -43,3 +47,7 @@ locale.use(lang)
 Vue.use(Loading.directive)
 
 Vue.prototype.$message = Message
+Vue.use(Steps);
+Vue.use(Step);
+Vue.use(Collapse);
+Vue.use(CollapseItem);

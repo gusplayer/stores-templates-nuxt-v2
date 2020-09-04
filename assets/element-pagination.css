@@ -89,3 +89,154 @@
   box-sizing: border-box;
   white-space: nowrap;
 }
+
+/* Sección de mi compra, css para componentes de element */
+.help .icon-help > .material-design-icon__svg {
+  height: 18px !important;
+  width: 18px !important;
+  color: #390dbd !important;
+}
+.content-state-bar .el-step__main .el-step__description {
+  margin-top: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: #383838 !important;
+  max-width: 95px;
+  width: 100%;
+  margin: 0 auto;
+  padding-right: 0px;
+  margin-top: 10px;
+  padding-left: 0px;
+}
+.content-state-bar .el-step__main .el-step__description.is-process {
+  margin-top: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: #383838 !important;
+  opacity: 0.2;
+  max-width: 95px;
+  width: 100%;
+  margin: 0 auto;
+  padding-right: 0px;
+  margin-top: 10px;
+}
+.content-state-bar .el-step__main .el-step__description.is-wait {
+  margin-top: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: #383838 !important;
+  opacity: 0.2;
+  max-width: 75px;
+  width: 100%;
+  margin: 0 auto;
+  padding-right: 0px;
+  margin-top: 10px;
+}
+.content-state-bar .el-step__head.is-process {
+  color: #C0C4CC;
+  border-color: #C0C4CC;
+}
+.content-sections .el-collapse-item .el-collapse-item__header {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.63;
+  letter-spacing: normal;
+  text-align: left;
+  color: #383838;
+  padding: 17.5px 0px;
+  height: unset;
+  border-bottom: 1px solid #EBEEF5;
+}
+.content-sections .el-collapse-item .el-collapse-item__header.is-active {
+  border-bottom-color: transparent;
+  color: #383838;
+}
+.content-sections .el-collapse-item:last-child .el-collapse-item__wrap {
+  border-bottom-color: transparent;
+  color: #383838;
+}
+.el-collapse-item__wrap {
+  border-bottom: 1px solid #EBEEF5;
+}
+.content-sections .el-collapse {
+  border-top: 1px solid #EBEEF5;
+}
+.content-sections .el-collapse-item .el-collapse-item__header [class*=" el-icon-"] {
+  color: #390dbd;
+}
+.content-sections .el-collapse-item .el-collapse-item__header .el-collapse-item__arrow {
+  font-weight: 600;
+}
+.form .el-input__inner {
+  border: 1px solid #4a24b6 !important;
+}
+.content-state-bar-responsive .el-step__main .el-step__description {
+  margin-top: 3px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: left;
+  color: #383838 !important;
+}
+.content-state-bar-responsive .el-step__main .el-step__description.is-process {
+  margin-top: 3px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: left;
+  color: #383838 !important;
+  opacity: 0.2;
+}
+.content-state-bar-responsive .el-step__main .el-step__description.is-wait {
+  margin-top: 3px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: left;
+  color: #383838 !important;
+  opacity: 0.2;
+}
+.content-state-bar-responsive .el-step__head.is-process {
+  color: #C0C4CC;
+  border-color: #C0C4CC;
+}
+.content-state-bar-responsive .el-steps--vertical {
+  height: auto;
+}
+.content-state-bar-responsive .el-step.is-vertical .el-step__title {
+  padding-bottom: 0px;
+}
+/* Fin seccción de mi compra, css para componentes de element */

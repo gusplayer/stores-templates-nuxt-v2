@@ -29,6 +29,7 @@ import Search from 'vue-material-design-icons/Magnify.vue'
 import Circle from 'vue-material-design-icons/CircleMedium.vue'
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 import Account from 'vue-material-design-icons/AccountBoxOutline.vue'
+import HelpCircleOutline from 'vue-material-design-icons/HelpCircleOutline.vue'
 
 Vue.component('menu-icon', MenuIcon)
 Vue.component('account-icon', Account)
@@ -62,3 +63,4 @@ Vue.component('mas-icon', mas)
 Vue.component('circle-icon', Circle)
 
 Vue.component('arrow-left-icon', ArrowLeft)
+Vue.component('help-circle-outline', HelpCircleOutline)
