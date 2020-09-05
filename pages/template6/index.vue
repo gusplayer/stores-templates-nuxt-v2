@@ -20,7 +20,7 @@
         />
       </form>
     </div>
-    <kBanner :dataStore="dataStore" />
+    <kBanner v-if="this.stateBanner" />
     <KProductFavoritos />
     <KProductList
       :dataStore="dataStore"
@@ -58,11 +58,6 @@ export default {
       }
       prevScrollpos = currentScrollPos
     }
-    let domain = this.$route.fullPath
-    let search = domain.slice(0, [9])
-    if (search === '/?search=') {
-      this.setSearch(domain)
-    }
   },
   data() {
     return {
@@ -82,6 +77,9 @@ export default {
     settingBase() {
       return this.$store.state.settingBase
     },
+    stateBanner() {
+      return this.$store.state.stateBanner
+    },
   },
   methods: {
     Searchproduct(search) {
@@ -93,12 +91,6 @@ export default {
       } else {
         location.href = '?search=' + ''
       }
-    },
-    setSearch(value) {
-      let category = value.replace('/?search=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
-      this.search = urlFiltrada
     },
   },
   watch: {

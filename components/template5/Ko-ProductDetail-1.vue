@@ -1144,7 +1144,7 @@ i.close {
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
+    padding: 8px 5px;
   }
   .quantity-resposive {
     display: flex;
@@ -1207,7 +1207,8 @@ i.close {
     align-items: center;
     /* background: #e71f77; */
     background: gray;
-    padding: 6px 10px;
+    border: solid 1px gray;
+    padding: 8px 10px;
     border-radius: var(--radius_btn);
     color: white;
     font-size: 16px;
@@ -1216,9 +1217,9 @@ i.close {
   .btn-responsive {
     border-radius: var(--radius_btn);
     color: var(--color_text_btn);
-    border: solid 0px var(--color_background_btn);
+    border: solid 1px var(--color_background_btn);
     background-color: var(--color_background_btn);
-    padding: 6px 10px;
+    padding: 8px 10px;
     width: 100%;
     font-size: 16px;
   }

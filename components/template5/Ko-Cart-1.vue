@@ -74,7 +74,7 @@
             </div>
             <div class="content_icon">
               <a v-on:click="deleteItemCart(index)">
-                <window-close-icon class="cart-icon" />
+                <boteBasura-icon class="cart-icon" />
               </a>
             </div>
           </div>
@@ -123,7 +123,7 @@
               <div>
                 <div class="content_icon">
                   <a v-on:click="deleteItemCart(index)">
-                    <window-close-icon class="cart-icon" />
+                    <boteBasura-icon class="cart-icon" />
                   </a>
                 </div>
                 <div class="products_item_details">

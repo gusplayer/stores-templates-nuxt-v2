@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import kPrueba from '../../components/miCompra/prueba'
+import kPrueba from '../../components/miCompra/Ko-miCompra-1'
 
 export default {
   layout: 'miCompra',

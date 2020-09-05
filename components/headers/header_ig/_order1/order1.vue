@@ -53,7 +53,7 @@
                         {{ (product.precio * product.cantidad) | currency }}
                       </p>
                     </div>
-                    <window-close-icon
+                    <boteBasura-icon
                       class="material-icons delete"
                       v-on:click="deleteItemCart(index)"
                     />

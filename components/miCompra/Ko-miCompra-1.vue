@@ -20,47 +20,106 @@
         <div class="form">
           <div class="content-input">
             <label for="numOrden">Número de Orden</label>
-            <el-input id="numOrden" placeholder="Número de Orden" v-model="numOrden"></el-input>
+            <el-input
+              id="numOrden"
+              placeholder="Número de Orden"
+              v-model="numOrden"
+            ></el-input>
           </div>
           <div class="content-input">
             <label for="numId">Número de Identificación</label>
-            <el-input id="numId" placeholder="Cédula" v-model="cedula"></el-input>
+            <el-input
+              id="numId"
+              placeholder="Cédula"
+              v-model="cedula"
+            ></el-input>
           </div>
-          <el-button type="primary" icon="el-icon-search" @click="GET_ORDEN()">Buscar</el-button>
+          <el-button type="primary" icon="el-icon-search" @click="GET_ORDEN()"
+            >Buscar</el-button
+          >
         </div>
       </div>
       <div class="bar-middle">
         <h1 class="title-general">Mis ordenes</h1>
-        <p class="number-order">Numero de orden: <span class="id-order" v-if="orden.venta">{{orden.venta.id}}</span></p>
+        <p class="number-order">
+          Numero de orden:
+          <span class="id-order" v-if="orden.venta">{{ orden.venta.id }}</span>
+        </p>
       </div>
       <div class="bar-body" v-if="orden">
-        <p class="number-order-reponsive">Numero de orden: <span class="id-order" v-if="orden.venta">{{orden.venta.id}}</span></p>
+        <p class="number-order-reponsive">
+          Numero de orden:
+          <span class="id-order" v-if="orden.venta">{{ orden.venta.id }}</span>
+        </p>
         <div class="content-card">
-          <div class="card" v-for="(item, index) in orden.productos" :key="index.item">
-            <img class="img-product" :src="item.producto.foto_cloudinary" alt="Imagen del producto">
+          <div
+            class="card"
+            v-for="(item, index) in orden.productos"
+            :key="index.item"
+          >
+            <img
+              class="img-product"
+              :src="item.producto.foto_cloudinary"
+              alt="Imagen del producto"
+            />
             <div class="info">
-              <p class="name-product">{{item.producto.nombre}}</p>
-              <p class="price-product">{{item.precio_producto | currency}}</p>
-              <p class="quantity-product" v-if="item.unidades == 1">{{item.unidades}} unidad</p>
-              <p class="quantity-product" v-if="item.unidades == 0 || item.unidades > 1">{{item.unidades}} unidades</p>
+              <p class="name-product">{{ item.producto.nombre }}</p>
+              <p class="price-product">{{ item.precio_producto | currency }}</p>
+              <p class="quantity-product" v-if="item.unidades == 1">
+                {{ item.unidades }} unidad
+              </p>
+              <p
+                class="quantity-product"
+                v-if="item.unidades == 0 || item.unidades > 1"
+              >
+                {{ item.unidades }} unidades
+              </p>
             </div>
           </div>
         </div>
         <div class="content-info-orden" v-if="orden.venta">
           <div class="info-left">
-            <p class="cupon" v-if="orden.venta.cupon != 'null'">Cupón: <span class="cupon-value">{{orden.venta.cupon}}</span></p>
-            <p class="cupon" v-if="orden.venta.cupon == 'null' || orden.venta.cupon == null">Cupón: <span class="cupon-value">N/A</span></p>
-            <p class="shipping-price" v-if="orden.venta.costo_envio">Valor del envío: <span class="shipping-value">{{orden.venta.costo_envio | currency}}</span></p>
-            <p class="order-total" v-if="orden.venta.total">Total de la orden: <span class="total-value">{{orden.venta.total | currency}}</span></p>
-            <p class="payment-method" v-if="choicePayment">Método de pago: <span class="method-value">{{ choicePayment.title }}</span></p>
+            <p class="cupon" v-if="orden.venta.cupon != 'null'">
+              Cupón: <span class="cupon-value">{{ orden.venta.cupon }}</span>
+            </p>
+            <p
+              class="cupon"
+              v-if="orden.venta.cupon == 'null' || orden.venta.cupon == null"
+            >
+              Cupón: <span class="cupon-value">N/A</span>
+            </p>
+            <p class="shipping-price" v-if="orden.venta.costo_envio">
+              Valor del envío:
+              <span class="shipping-value">{{
+                orden.venta.costo_envio | currency
+              }}</span>
+            </p>
+            <p class="order-total" v-if="orden.venta.total">
+              Total de la orden:
+              <span class="total-value">{{
+                orden.venta.total | currency
+              }}</span>
+            </p>
+            <p class="payment-method" v-if="choicePayment">
+              Método de pago:
+              <span class="method-value">{{ choicePayment.title }}</span>
+            </p>
           </div>
           <div class="state-right">
             <div class="content-state-top">
               <p class="title-state">Estado del pedido</p>
-              <p class="last-update">Ultima actualización: <span class="date-update">{{orden.venta.fecha}}</span></p>
+              <p class="last-update">
+                Ultima actualización:
+                <span class="date-update">{{ orden.venta.fecha }}</span>
+              </p>
             </div>
             <div class="content-state-bar">
-              <el-steps :space="200" :active="2" align-center finish-status="success">
+              <el-steps
+                :space="200"
+                :active="2"
+                align-center
+                finish-status="success"
+              >
                 <el-step description="Pedido Confirmado"></el-step>
                 <el-step description="Pago aprobado"></el-step>
                 <el-step description="Pedido preparado"></el-step>
@@ -69,7 +128,13 @@
               </el-steps>
             </div>
             <div class="content-state-bar-responsive">
-              <el-steps :space="40" :active="2" align-center finish-status="success" direction="vertical">
+              <el-steps
+                :space="40"
+                :active="2"
+                align-center
+                finish-status="success"
+                direction="vertical"
+              >
                 <el-step description="Pedido Confirmado"></el-step>
                 <el-step description="Pago aprobado"></el-step>
                 <el-step description="Pedido preparado"></el-step>
@@ -79,7 +144,9 @@
             </div>
             <div class="content-update">
               <p class="last-update-responsive">Ultima actualización</p>
-              <span class="date-update-responsive">{{orden.venta.fecha}}</span>
+              <span class="date-update-responsive">{{
+                orden.venta.fecha
+              }}</span>
             </div>
           </div>
         </div>
@@ -87,34 +154,99 @@
           <el-collapse v-model="activeNames">
             <el-collapse-item title="Información del comprador" name="1">
               <div class="content-info-buyer" v-if="orden.venta.usuario">
-                <p class="name">Nombre: <span class="value-data">{{ orden.venta.usuario.nombre }}</span></p>
-                <p class="address">Dirección: <span class="value-data" v-if="orden.venta.usuario.user_info[0].direccion">{{ orden.venta.usuario.user_info[0].direccion }}</span></p>
-                <p class="telephone" v-if="orden.venta.usuario.user_info[0].telefono != null && orden.venta.usuario.user_info[0].telefono  != 'null' && orden.venta.usuario.user_info[0].telefono  != ''">Teléfono: <span class="value-data">{{ orden.venta.usuario.user_info[0].telefono }}</span></p>
-                <p class="telephone" v-if="orden.venta.usuario.user_info[0].telefono  == null || orden.venta.usuario.user_info[0].telefono  == '' || orden.venta.usuario.user_info[0].telefono  == 'null'">Teléfono: <span class="value-data">N/A</span></p>
-                <p class="email-address">Correo: <span class="value-data" v-if="orden.venta.usuario.email">{{ orden.venta.usuario.email }}</span></p>
+                <p class="name">
+                  Nombre:
+                  <span class="value-data">{{
+                    orden.venta.usuario.nombre
+                  }}</span>
+                </p>
+                <p class="address">
+                  Dirección:
+                  <span
+                    class="value-data"
+                    v-if="orden.venta.usuario.user_info[0].direccion"
+                    >{{ orden.venta.usuario.user_info[0].direccion }}</span
+                  >
+                </p>
+                <p
+                  class="telephone"
+                  v-if="
+                    orden.venta.usuario.user_info[0].telefono != null &&
+                    orden.venta.usuario.user_info[0].telefono != 'null' &&
+                    orden.venta.usuario.user_info[0].telefono != ''
+                  "
+                >
+                  Teléfono:
+                  <span class="value-data">{{
+                    orden.venta.usuario.user_info[0].telefono
+                  }}</span>
+                </p>
+                <p
+                  class="telephone"
+                  v-if="
+                    orden.venta.usuario.user_info[0].telefono == null ||
+                    orden.venta.usuario.user_info[0].telefono == '' ||
+                    orden.venta.usuario.user_info[0].telefono == 'null'
+                  "
+                >
+                  Teléfono: <span class="value-data">N/A</span>
+                </p>
+                <p class="email-address">
+                  Correo:
+                  <span class="value-data" v-if="orden.venta.usuario.email">{{
+                    orden.venta.usuario.email
+                  }}</span>
+                </p>
               </div>
             </el-collapse-item>
             <el-collapse-item title="Información del vendedor" name="2">
               <div class="content-info-seller">
-                <p class="city">Ciudad: <span class="value-data" v-if="city && city.nombre_ciu">{{ city.nombre_ciu }}</span></p>
-                <p class="address">Dirección: <span class="value-data" v-if="dataStore.geolocalizacion">{{ dataStore.geolocalizacion[0].direccion }}</span></p>
-                <p class="telephone" v-if="dataStore.geolocalizacion[0].telefono != null && dataStore.geolocalizacion[0].telefono != 'null' && dataStore.geolocalizacion[0].telefono != ''">Teléfono: <span class="value-data">{{ dataStore.geolocalizacion[0].telefono }}</span></p>
-                <p class="telephone" v-if="dataStore.geolocalizacion[0].telefono == null || dataStore.geolocalizacion[0].telefono == '' || dataStore.geolocalizacion[0].telefono == 'null'">Teléfono: <span class="value-data">N/A</span></p>
-                <p class="owner">Nombre Tienda: <span class="value-data" v-if="dataStore.tienda.nombre">{{ dataStore.tienda.nombre }}</span></p>
+                <p class="city">
+                  Ciudad:
+                  <span class="value-data" v-if="city && city.nombre_ciu">{{
+                    city.nombre_ciu
+                  }}</span>
+                </p>
+                <p class="address">
+                  Dirección:
+                  <span class="value-data" v-if="dataStore.geolocalizacion">{{
+                    dataStore.geolocalizacion[0].direccion
+                  }}</span>
+                </p>
+                <p
+                  class="telephone"
+                  v-if="
+                    dataStore.geolocalizacion[0].telefono != null &&
+                    dataStore.geolocalizacion[0].telefono != 'null' &&
+                    dataStore.geolocalizacion[0].telefono != ''
+                  "
+                >
+                  Teléfono:
+                  <span class="value-data">{{
+                    dataStore.geolocalizacion[0].telefono
+                  }}</span>
+                </p>
+                <p
+                  class="telephone"
+                  v-if="
+                    dataStore.geolocalizacion[0].telefono == null ||
+                    dataStore.geolocalizacion[0].telefono == '' ||
+                    dataStore.geolocalizacion[0].telefono == 'null'
+                  "
+                >
+                  Teléfono: <span class="value-data">N/A</span>
+                </p>
+                <p class="owner">
+                  Nombre Tienda:
+                  <span class="value-data" v-if="dataStore.tienda.nombre">{{
+                    dataStore.tienda.nombre
+                  }}</span>
+                </p>
               </div>
             </el-collapse-item>
           </el-collapse>
         </div>
       </div>
-      <!-- <p>API incluir esta ruta: https://api2.komercia.co/api/orden/582/16907</p>
-      582 es la id de la tienda ya esta del this.datastore.tienda.id_tienda
-      16907 numero de factura 
-      <p>Preguntar numero de orden y cedula (ID tienda ya esta)</p>
-      <p>una vez se traiga la peticion, revisar si la cedula coincide</p>
-      <p>
-        Si no coincide o la API le da error, mostrar un mensaje que no existe
-        esa orden
-      </p> -->
     </div>
   </div>
 </template>
@@ -122,7 +254,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'Ko-Newsletter-1',
+  name: 'Ko-miCompra-1',
   props: {
     dataStore: Object,
   },
@@ -246,7 +378,7 @@ export default {
   computed: {
     choicePayment() {
       return this.payments.find(
-        payment => payment.id === this.orden.venta.metodo_pago
+        (payment) => payment.id === this.orden.venta.metodo_pago
       )
     },
     cities() {
@@ -262,29 +394,33 @@ export default {
       }
     },
     GET_ORDEN() {
-      return  axios
+      return axios
         .get(`https://api2.komercia.co/api/orden/582/${this.numOrden}`, {
           headers: {
             'content-type': 'application/json',
             'Access-Control-Allow-Origin': '*',
           },
         })
-        .then(response => {
-          if (this.numOrden == response.data.data.venta.id && this.cedula == response.data.data.venta.usuario.identificacion) {
-            this.orden = response.data.data;
+        .then((response) => {
+          if (
+            this.numOrden == response.data.data.venta.id &&
+            this.cedula == response.data.data.venta.usuario.identificacion
+          ) {
+            this.orden = response.data.data
           } else {
-            this.orden = ""
+            this.orden = ''
             this.$message.error('No exite esta orden')
           }
-        }).catch(() => {
-          this.orden = ""
+        })
+        .catch(() => {
+          this.orden = ''
           this.$message.error('No exite esta orden')
         })
     },
     setCity() {
       if (this.cities) {
         this.city = this.cities.find(
-          city => city.id === this.dataStore.tienda.ciudad
+          (city) => city.id === this.dataStore.tienda.ciudad
         )
       }
     },
@@ -352,7 +488,7 @@ export default {
   width: 100%;
 }
 .form .el-button--primary {
-  color: #FFF;
+  color: #fff;
   background-color: #4a24b6;
   border-color: #4a24b6;
 }
@@ -550,7 +686,7 @@ export default {
   text-align: left;
   color: #4a24b6;
 }
-.order-total{
+.order-total {
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: bold;
@@ -684,7 +820,12 @@ export default {
   grid-row-gap: 15px;
   justify-content: space-between;
 }
-.city, .telephone, .owner, .name, .email-address, .address {
+.city,
+.telephone,
+.owner,
+.name,
+.email-address,
+.address {
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: bold;
@@ -727,21 +868,21 @@ export default {
   letter-spacing: -0.24px;
   text-align: center;
   color: #373d43;
-  margin-bottom: 40px
+  margin-bottom: 40px;
 }
-@media (max-width: 998px) { 
+@media (max-width: 998px) {
   .state-right {
     width: 100%;
   }
 }
-@media (max-width: 863px) { 
+@media (max-width: 863px) {
   .form {
     justify-content: center;
     flex-direction: column;
     align-items: center;
   }
 }
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
   .bar-top {
     padding: 15px 27px;
   }
@@ -787,7 +928,8 @@ export default {
     flex-direction: column;
     margin-top: 10px;
   }
-  .last-update, .date-update {
+  .last-update,
+  .date-update {
     display: none;
   }
   .last-update-responsive {
@@ -818,7 +960,7 @@ export default {
     align-items: flex-start;
   }
 }
-@media (max-width: 500px) { 
+@media (max-width: 500px) {
   .form .el-input {
     max-width: unset;
   }

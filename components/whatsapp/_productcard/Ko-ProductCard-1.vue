@@ -102,9 +102,9 @@
             >
           </div>
         </div>
-        <div class="btn-whatsapp" v-if="dataStore.whatsapp">
+        <!-- <div class="btn-whatsapp" v-if="dataStore.whatsapp">
           <whatsapp-icon class="wp-icon" v-on:click="redirectWP()" />
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

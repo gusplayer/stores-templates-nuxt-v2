@@ -470,7 +470,7 @@ export default {
   flex: 2;
   width: 100%;
   max-width: 1000px;
-  max-height: 700px;
+  max-height: 560px;
   margin-right: 1px;
   display: grid;
   grid-template-columns: auto auto auto auto;

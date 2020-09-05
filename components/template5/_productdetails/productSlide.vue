@@ -3,14 +3,14 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide wrapper-image">
         <img
-          :src="idCloudinary(photo, 350, 350)"
+          :src="idCloudinary(photo, 450, 450)"
           class="photo"
           alt="Product img"
         />
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
         <img
-          :src="idCloudinary(photo.foto_cloudinary, 350, 350)"
+          :src="idCloudinary(photo.foto_cloudinary, 450, 450)"
           class="photo"
           alt="Product img"
         />

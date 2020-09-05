@@ -53,7 +53,7 @@
                         {{ (product.precio * product.cantidad) | currency }}
                       </p>
                     </div>
-                    <window-close-icon
+                    <boteBasura-icon
                       class="material-icons delete"
                       v-on:click="deleteItemCart(index)"
                     />
@@ -358,49 +358,28 @@ export default {
       }
     },
     GoPayments() {
+      let objeto = {}
+      objeto = JSON.parse(JSON.stringify(this.productsCart))
+
+      objeto.map((element) => {
+        if (element.id) {
+          delete element.envio_gratis
+          delete element.foto_cloudinary
+          delete element.limitQuantity
+          delete element.nombre
+          delete element.precio
+        }
+      })
       let json = {
-        products: this.$store.state.productsCart,
+        products: objeto,
         tienda: {
           id: this.$store.state.tienda.id_tienda,
-          // nombre: this.$store.state.tienda.nombre,
-          // logo: this.$store.state.tienda.logo,
-          // location: window.location.href,
         },
-        // tipo: 0,
-        // total: this.$store.state.totalCart,
-        // estado: 0,
-        // direccion_entrega: 0,
       }
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
         location.href = `https://checkout.komercia.co/?params=${json}`
       }
-    },
-    async createQuotation() {
-      let quotation = {
-        productos: this.$store.state.productsCart,
-        tienda: this.$store.state.tienda.id_tienda,
-        tipo: 1,
-        total: this.$store.state.totalCart,
-        estado: 0,
-        direccion_entrega: 0,
-        metodo_pago: '7',
-        costo_envio: this.shipping || 0,
-        usuario: this.userData.id,
-      }
-      // eslint-disable-next-line no-unused-vars
-      const response = await axios.post(
-        'https://api2.komercia.co/api/usuario/orden',
-        quotation,
-        this.configHttp
-      )
-      this.$store.state.openOrder = false
-      this.$store.state.productsCart = []
-      this.$store.commit('UPDATE_CONTENTCART')
-      this.$notify.success({
-        title: 'Hemos recibido tu cotización!',
-        message: 'Pronto te enviaremos la información a tu correo electrónico.',
-      })
     },
     filterCities() {
       if (
@@ -423,6 +402,11 @@ export default {
     },
     cities() {
       this.filterCities()
+    },
+    productsCart() {
+      if (this.productsCart) {
+        this.tempCart = this.productsCart
+      }
     },
   },
   filters: {

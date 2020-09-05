@@ -55,11 +55,6 @@ export default {
       }
       prevScrollpos = currentScrollPos
     }
-    let domain = this.$route.fullPath
-    let search = domain.slice(0, [9])
-    if (search === '/?search=') {
-      this.setSearch(domain)
-    }
   },
   data() {
     return {
@@ -90,12 +85,6 @@ export default {
       } else {
         location.href = '?search=' + ''
       }
-    },
-    setSearch(value) {
-      let category = value.replace('/?search=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
-      this.search = urlFiltrada
     },
   },
   watch: {
