@@ -37,7 +37,7 @@ export default {
     { src: '~/plugins/facebook-pixel', mode: 'client' },
   ],
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm', 'vue-sweetalert2/nuxt'],
 
   debug: {
     enabled: true,

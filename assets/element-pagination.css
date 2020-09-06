@@ -239,4 +239,13 @@
 .content-state-bar-responsive .el-step.is-vertical .el-step__title {
   padding-bottom: 0px;
 }
+.swal2-title {
+  font-family: 'Poppins', sans-serif;
+}
+.swal2-html-container {
+  font-family: 'Poppins', sans-serif;
+}
+.swal2-styled.swal2-confirm  {
+  font-family: 'Poppins', sans-serif;
+}
 /* Fin seccción de mi compra, css para componentes de element */
