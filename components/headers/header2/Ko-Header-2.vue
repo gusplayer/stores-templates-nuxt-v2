@@ -290,6 +290,7 @@ export default {
       this.$router.push({
         path: '/',
       })
+      this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.$store.commit('SET_STATEBANNER', false)
       this.showMenu = false
       this.addClass()
@@ -316,9 +317,9 @@ export default {
       this.$router.push({
         path: '/',
       })
+      this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.showMenu = false
       this.$store.commit('SET_STATEBANNER', false)
-      this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')

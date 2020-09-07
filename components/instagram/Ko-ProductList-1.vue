@@ -148,6 +148,9 @@ export default {
     nameSubCategoryHeader() {
       return this.$store.state.subcategory_producto_header
     },
+    previousPage() {
+      return this.$store.state.previousPage
+    },
   },
   methods: {
     back() {
@@ -263,11 +266,7 @@ export default {
       this.Searchproduct(value)
     },
     currentPage() {
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollTo(0, 0)
-      }, 250)
+      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
     },
     nameCategoryHeader(value) {
       return value

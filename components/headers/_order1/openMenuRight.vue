@@ -119,6 +119,7 @@ export default {
       this.$router.push({
         path: '/',
       })
+      this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.addClass()
       this.selectSubcategory = value
@@ -144,6 +145,7 @@ export default {
       this.$router.push({
         path: '/',
       })
+      this.$store.commit('SET_PREVIOUSPAGE', 1)
       let getSubcategory
       this.subcategories.filter((element) => {
         if (element.categoria == categoria) {
@@ -153,7 +155,6 @@ export default {
       if (getSubcategory != true) {
         this.$store.commit('SET_OPENORDERMENURIGTH', false)
       }
-      this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')

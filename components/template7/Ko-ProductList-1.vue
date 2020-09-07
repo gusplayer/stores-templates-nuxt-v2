@@ -85,6 +85,28 @@ export default {
     } else if (domain == '/') {
       this.Allcategories()
     }
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
+    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'category',
+        data: this.nameCategoryHeader,
+      })
+    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
+      let filtradoSubCategoria = this.subcategories.find(
+        (element) => element.nombre_subcategoria == this.nameSubCategoryHeader
+      )
+      if (filtradoSubCategoria) {
+        this.categorias.find(
+          (element) => element.id == filtradoSubCategoria.categoria
+        )
+        this.$store.commit('products/FILTER_BY', {
+          type: 'subcategory',
+          data: filtradoSubCategoria.id,
+        })
+      }
+    }
   },
   data() {
     return {
@@ -162,6 +184,9 @@ export default {
     },
     searchValue() {
       return this.$store.state.searchValue
+    },
+    previousPage() {
+      return this.$store.state.previousPage
     },
   },
   methods: {
@@ -279,12 +304,12 @@ export default {
       this.Searchproduct(value)
     },
     currentPage() {
-      // eslint-disable-next-line no-unused-vars
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollTo(0, 0)
-      }, 250)
+      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage
+      }
     },
     nameCategoryHeader(value) {
       return value
