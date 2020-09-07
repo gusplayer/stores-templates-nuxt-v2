@@ -41,16 +41,10 @@
       </div>
       <div class="bar-middle">
         <h1 class="title-general">Mis ordenes</h1>
-        <p class="number-order">
-          Numero de orden:
-          <span class="id-order" v-if="orden.venta">{{ orden.venta.id }}</span>
-        </p>
+        <p class="number-order">Numero de orden: <span class="id-order" v-if="orden && orden.venta">{{orden.venta.id}}</span></p>
       </div>
-      <div class="bar-body" v-if="orden">
-        <p class="number-order-reponsive">
-          Numero de orden:
-          <span class="id-order" v-if="orden.venta">{{ orden.venta.id }}</span>
-        </p>
+      <div class="bar-body" v-if="orden && orden.venta">
+        <p class="number-order-reponsive">Numero de orden: <span class="id-order" v-if="orden.venta">{{orden.venta.id}}</span></p>
         <div class="content-card">
           <div
             class="card"
@@ -257,10 +251,22 @@ export default {
   name: 'Ko-miCompra-1',
   props: {
     dataStore: Object,
+    orden: Object,
   },
   mounted() {
     this.routePrev()
     this.setCity()
+    if (this.orden && this.orden.message) {
+      this.errorMessage()
+    }
+
+    if (this.orden && this.orden.venta && this.orden.venta.usuario) {
+      this.numOrden = this.orden.venta.id
+      this.cedula = this.orden.venta.usuario.identificacion
+    } else {
+      this.numOrden = ''
+      this.cedula = ''
+    }
   },
   destroyed() {
     this.city = {}
@@ -269,7 +275,6 @@ export default {
     return {
       toggleArrow: false,
       numOrden: '',
-      orden: '',
       cedula: '',
       activeNames: ['1'],
       payments: [
@@ -394,27 +399,24 @@ export default {
       }
     },
     GET_ORDEN() {
-      return axios
+      this.$router.replace({ query: {}})
+      return  axios
         .get(`https://api2.komercia.co/api/orden/582/${this.numOrden}`, {
           headers: {
             'content-type': 'application/json',
             'Access-Control-Allow-Origin': '*',
           },
         })
-        .then((response) => {
-          if (
-            this.numOrden == response.data.data.venta.id &&
-            this.cedula == response.data.data.venta.usuario.identificacion
-          ) {
-            this.orden = response.data.data
+        .then(response => {
+          if (this.numOrden == response.data.data.venta.id && this.cedula == response.data.data.venta.usuario.identificacion) {
+            this.$emit('update', response.data.data)
           } else {
-            this.orden = ''
-            this.$message.error('No exite esta orden')
+            this.$emit('update', {})
+            this.errorMessageTwo()
           }
-        })
-        .catch(() => {
-          this.orden = ''
-          this.$message.error('No exite esta orden')
+        }).catch(() => {
+          this.$emit('update', {})
+          this.errorMessageTwo()
         })
     },
     setCity() {
@@ -424,6 +426,26 @@ export default {
         )
       }
     },
+    errorMessage() {
+      this.$swal({
+        title: 'Esta orden no existe',
+        text: 'El número de la orden o el usuario son incorrectos',
+        showCloseButton: true,
+        confirmButtonText: 'Aceptar',
+        backdrop: 'rgba(14,47,90,0.6)',
+        icon: 'error',
+      })
+    },
+    errorMessageTwo() {
+      this.$swal({
+        title: 'Esta orden no existe',
+        text: 'El número de la orden o la cédula son incorrectos',
+        showCloseButton: true,
+        confirmButtonText: 'Aceptar',
+        backdrop: 'rgba(14,47,90,0.6)',
+        icon: 'error',
+      })
+    }
   },
   watch: {
     '$route.path'(value) {
@@ -869,6 +891,9 @@ export default {
   text-align: center;
   color: #373d43;
   margin-bottom: 40px;
+}
+.swal2-title {
+  font-family: 'Poppins', sans-serif;
 }
 @media (max-width: 998px) {
   .state-right {
