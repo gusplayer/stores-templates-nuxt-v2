@@ -544,7 +544,8 @@ export default {
 }
 .content-products:hover,
 .content-products:focus {
-  box-shadow: 0px 0px 2px 1px var(--color_border);
+  box-shadow: -6px -6px 10px var(--background_color_2),
+    6px 6px 10px rgba(0, 0, 0, 0.267);
 }
 .content-item-productos {
   display: flex;
