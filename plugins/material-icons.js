@@ -30,6 +30,7 @@ import Circle from 'vue-material-design-icons/CircleMedium.vue'
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 import Account from 'vue-material-design-icons/AccountBoxOutline.vue'
 import HelpCircleOutline from 'vue-material-design-icons/HelpCircleOutline.vue'
+import QrCode from 'vue-material-design-icons/QrCode.vue'
 
 Vue.component('menu-icon', MenuIcon)
 Vue.component('account-icon', Account)
@@ -64,3 +65,5 @@ Vue.component('circle-icon', Circle)
 
 Vue.component('arrow-left-icon', ArrowLeft)
 Vue.component('help-circle-outline', HelpCircleOutline)
+
+Vue.component('qr-code-icon', QrCode)

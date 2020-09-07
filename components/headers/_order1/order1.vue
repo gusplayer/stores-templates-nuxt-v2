@@ -4,13 +4,9 @@
       <div class="order_content">
         <div class="order_header">
           <h3>Tu orden</h3>
-          <label
-            for="order_close"
-            @click="closeOrder"
-            class="order_header_close"
-          >
+          <div @click="closedOder" class="order_header_close">
             <close-icon />
-          </label>
+          </div>
         </div>
         <transition name="slide">
           <template>
@@ -346,16 +342,14 @@ export default {
       const element = event.target.className
       if (
         element === 'order' ||
-        element === 'order_header_close' ||
         element === 'continue_shopping' ||
-        element === 'continue_shopping2' ||
-        element.animVal === 'material-design-icon__svg' ||
-        element.baseVal === 'material-design-icon__svg' ||
-        element.animVal === '' ||
-        element.baseVal === ''
+        element === 'continue_shopping2'
       ) {
         this.$store.commit('SET_OPENORDER', false)
       }
+    },
+    closedOder() {
+      this.$store.commit('SET_OPENORDER', false)
     },
     GoPayments() {
       let objeto = {}

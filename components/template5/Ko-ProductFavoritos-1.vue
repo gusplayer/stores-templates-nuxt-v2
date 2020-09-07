@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-ProductFavoritos" v-if="orderproduct.length">
     <div class="content-title-ProductFavoritos">
-      <p class="title-ProductFavoritos">Favoritos</p>
+      <p class="title-ProductFavoritos">Destacados</p>
     </div>
     <KoSwipper :products="orderproduct"></KoSwipper>
   </div>

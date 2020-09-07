@@ -21,7 +21,7 @@
       </form>
     </div>
     <kBanner v-if="this.stateBanner" />
-    <KProductFavoritos />
+    <KProductFavoritos v-if="this.stateBanner" />
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
