@@ -53,7 +53,7 @@
                         {{ (product.precio * product.cantidad) | currency }}
                       </p>
                     </div>
-                    <window-close-icon
+                    <boteBasura-icon
                       class="material-icons delete"
                       v-on:click="deleteItemCart(index)"
                     />
@@ -186,9 +186,9 @@
                     dataStore.tienda.estado == 1
                   "
                   class="continue_shopping"
-                  @click="redirectWP"
+                  @click="formOrden = !formOrden"
                 >
-                  <whatsapp-icon class="wp-icon" />Finalizar compra
+                  <whatsapp-icon class="wp-icon" />Siguiente
                 </button>
                 <nuxt-link class="conten-btn" to="/wa" @click="closeOrder">
                   <button class="continue_shopping2">
@@ -215,18 +215,107 @@
           </div>
         </div>
       </div>
+      <div class="wrapper-items-remove" v-if="formOrden">
+        <div class="content-items-form">
+          <p class="form-text">Completá tu pedido</p>
+          <ValidationObserver
+            ref="observer"
+            tag="form"
+            class="contact-content-rigth"
+          >
+            <p class="form-subtext">Nombre Completo</p>
+            <validation-provider
+              name="nombre"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  name="nombre"
+                  type="text"
+                  v-model="nombre"
+                  class="input-text"
+                  placeholder="Escribe tu nombre"
+                  id="ContactName"
+                />
+                <span class="text-error" v-show="errors[0]">{{
+                  errors[0]
+                }}</span>
+              </template>
+            </validation-provider>
+            <p class="form-subtext">Teléfono</p>
+            <validation-provider
+              name="celular"
+              rules="required|num"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  class="input-text"
+                  name="celular"
+                  type="number"
+                  placeholder="Tu teléfono"
+                  v-model="numberphone"
+                  id="ContactPhone"
+                />
+                <span class="text-error" v-show="errors[0]">{{
+                  errors[0]
+                }}</span>
+              </template>
+            </validation-provider>
+            <P class="form-subtext"
+              >Dirección Completa (Barrio, Edificio, Apto).</P
+            >
+            <validation-provider
+              name="dirreccion"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  class="input-text"
+                  name="dirreccion"
+                  placeholder="Tu dirección"
+                  v-model="dirreccion"
+                />
+                <span class="text-error" v-show="errors[0]">{{
+                  errors[0]
+                }}</span>
+              </template>
+            </validation-provider>
+            <button
+              class="continue_shopping"
+              v-on:click.prevent="redirectWP()"
+              style="margin-top: 15px;"
+            >
+              <whatsapp-icon class="wp-icon" />Finalizar compra
+            </button>
+          </ValidationObserver>
+          <label
+            for="order_close"
+            @click="formOrden = !formOrden"
+            class="form_close"
+          >
+            <close-icon />
+          </label>
+        </div>
+      </div>
     </div>
   </transition>
 </template>
 
 <script>
 import idCloudinary from '../../../../mixins/idCloudinary'
-
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   mixins: [idCloudinary],
   name: 'koOrder1-cart',
   props: {
     dataStore: Object,
+  },
+  components: {
+    ValidationObserver,
+    ValidationProvider,
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
@@ -244,6 +333,10 @@ export default {
       shippingCities: [],
       rangosByCiudades: [],
       remove: false,
+      formOrden: false,
+      nombre: '',
+      numberphone: '',
+      dirreccion: '',
     }
   },
   computed: {
@@ -341,7 +434,6 @@ export default {
       if (
         element === 'order' ||
         element === 'order_header_close' ||
-        element === 'continue_shopping' ||
         element === 'continue_shopping2' ||
         element.animVal === 'material-design-icon__svg' ||
         element.baseVal === 'material-design-icon__svg' ||
@@ -370,56 +462,61 @@ export default {
       return window.mobilecheck()
     },
     redirectWP() {
-      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
-      let baseUrlPc = 'https://web.whatsapp.com/send?phone=57'
-      let urlProduct
-      if (this.dataStore.tienda.dominio) {
-        urlProduct = `${this.dataStore.tienda.dominio}wa`
-      } else {
-        urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
-      }
-      let productosCart = {}
-      this.$store.state.productsCart.map((element) => {
-        if (element.nombre && element.precio) {
-          Object.assign(productosCart, {
-            [element.nombre]: element.precio,
+      this.$refs.observer.validate().then((response) => {
+        if (response) {
+          let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
+          let baseUrlPc = 'https://web.whatsapp.com/send?phone=57'
+          let urlProduct
+          if (this.dataStore.tienda.dominio) {
+            urlProduct = `${this.dataStore.tienda.dominio}wa`
+          } else {
+            urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
+          }
+          let productosCart = {}
+          this.$store.state.productsCart.map((element) => {
+            if (element.nombre && element.precio) {
+              Object.assign(productosCart, {
+                [element.nombre]: element.precio,
+              })
+            }
           })
+          let productString = JSON.stringify(productosCart)
+          let productList = productString.replace(/[{}"]/g, '')
+          let resultproductList = productList.replace(/,/g, '%0A')
+
+          let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%3A%0A${urlProduct}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${resultproductList}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACelular%3A%20${this.numberphone}%0ACiudad%3A%20${this.dirreccion}`
+
+          if (this.dataStore.tienda.whatsapp.length > 10) {
+            let phone_number_whatsapp = this.dataStore.tienda.whatsapp
+            if (phone_number_whatsapp.charAt(0) === '+') {
+              phone_number_whatsapp = phone_number_whatsapp.slice(1)
+            }
+            if (this.mobileCheck()) {
+              window.open(
+                `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
+                '_blank'
+              )
+            } else {
+              window.open(
+                `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
+                '_blank'
+              )
+            }
+          } else {
+            if (this.mobileCheck()) {
+              window.open(
+                `${baseUrlMovil}${this.dataStore.tienda.whatsapp}&text=${text}`,
+                '_blank'
+              )
+            } else {
+              window.open(
+                `${baseUrlPc}${this.dataStore.tienda.whatsapp}&text=${text}`,
+                '_blank'
+              )
+            }
+          }
         }
       })
-      let productString = JSON.stringify(productosCart)
-      let productList = productString.replace(/[{}"]/g, '')
-      let resultproductList = productList.replace(/,/g, '%0A')
-
-      let text = `Hola%20%F0%9F%98%80%2C%20%0Aestoy%20finalizando%20una%20compra%20en%20tu%20tienda%0A${urlProduct}%0ATu%20orden%3A%0A%20%0A${resultproductList}%0A%0ATotal%3A%20${this.totalCart}%0A`
-      if (this.dataStore.tienda.whatsapp.length > 10) {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp
-        if (phone_number_whatsapp.charAt(0) === '+') {
-          phone_number_whatsapp = phone_number_whatsapp.slice(1)
-        }
-        if (this.mobileCheck()) {
-          window.open(
-            `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
-      } else {
-        if (this.mobileCheck()) {
-          window.open(
-            `${baseUrlMovil}${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `${baseUrlPc}${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
-      }
     },
     filterCities() {
       if (
@@ -670,7 +767,6 @@ export default {
 .content-items-remove {
   width: 100%;
   margin: 15px;
-
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -730,6 +826,75 @@ export default {
 .btn-remover-no:hover {
   color: #25d366;
   border: 2px solid #25d366;
+}
+.content-items-form {
+  width: 100%;
+  padding: 30px 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  position: relative;
+}
+.form_close {
+  font-size: 30px;
+  color: #25d366;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+.form_close:hover {
+  color: gray;
+}
+.form-text {
+  color: black;
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+.form-subtext {
+  color: black;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.content-input {
+  max-width: 340px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.input-text {
+  font-size: 14px;
+  color: rgba(21, 20, 57, 0.541);
+  border: solid 2px #afafaf;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 8px 14px;
+  width: 100%;
+}
+.input-text::placeholder {
+  color: rgba(21, 20, 57, 0.541);
+  opacity: 0.7;
+}
+.input-text:-internal-autofill-selected {
+  -webkit-appearance: menulist-button;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: -internal-light-dark-color(black, white) !important;
+}
+.input-text:focus,
+.input-text:active {
+  outline: 0;
+  border: solid 2px black;
+}
+.text-error {
+  font-size: 12px;
+  color: #cb2027;
+  width: 100%;
+  margin-left: 10px;
 }
 .order_total {
   border-top: 1px solid rgba(112, 112, 117, 0.322);

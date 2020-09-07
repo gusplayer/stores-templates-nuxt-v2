@@ -24,7 +24,7 @@ import FlechaRight from 'vue-material-design-icons/ChevronRight.vue'
 import CartArrowDown from 'vue-material-design-icons/CartArrowDown.vue'
 import mas from 'vue-material-design-icons/Plus.vue'
 import menos from 'vue-material-design-icons/Minus.vue'
-import Delete from 'vue-material-design-icons/DeleteForever.vue'
+import boteBasura from 'vue-material-design-icons/DeleteForever.vue'
 import Search from 'vue-material-design-icons/Magnify.vue'
 import Circle from 'vue-material-design-icons/CircleMedium.vue'
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
@@ -47,7 +47,7 @@ Vue.component('menu-icon', Menu)
 Vue.component('menuDots-icon', MenuDots)
 Vue.component('close-icon', Close)
 Vue.component('window-close-icon', WindowClose)
-Vue.component('delete-icon', Delete)
+Vue.component('boteBasura-icon', boteBasura)
 Vue.component('search-icon', Search)
 
 Vue.component('phone-icon', Phone)

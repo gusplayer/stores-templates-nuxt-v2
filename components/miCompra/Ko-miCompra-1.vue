@@ -895,7 +895,7 @@ export default {
 .swal2-title {
   font-family: 'Poppins', sans-serif;
 }
-@media (max-width: 998px) { 
+@media (max-width: 998px) {
   .state-right {
     width: 100%;
   }

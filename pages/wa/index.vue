@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="home">
+    <KProductFavoritos />
     <KCategory :dataStore="dataStore" class="stiky-Kcategory-wa" />
     <KProductList :dataStore="dataStore" :fullProducts="fullProducts" />
   </div>
@@ -7,6 +8,7 @@
 
 <script>
 import KCategory from '../../components/whatsapp/Ko-Categories-wa'
+import KProductFavoritos from '../../components/whatsapp/Ko-ProductFavoritos-1'
 import KProductList from '../../components/whatsapp/Ko-ProductList-wa'
 
 export default {
@@ -14,6 +16,7 @@ export default {
   components: {
     KProductList,
     KCategory,
+    KProductFavoritos,
   },
   data() {
     return {}

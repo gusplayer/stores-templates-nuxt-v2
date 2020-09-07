@@ -22,15 +22,22 @@
           <!-- <p class="header-descripcion" v-if="dataStore.tienda.descripcion">
             {{ dataStore.tienda.descripcion }}
           </p> -->
-          <p
-            class="header-direccion"
-            v-if="dataStore.geolocalizacion[0].direccion"
-          >
-            {{ dataStore.geolocalizacion[0].direccion }}
-          </p>
-          <p class="header-horario" v-if="dataStore.geolocalizacion[0].horario">
-            Horario de atención: {{ dataStore.geolocalizacion[0].horario }}
-          </p>
+          <div v-if="dataStore.geolocalizacion.length">
+            <p
+              class="header-direccion"
+              v-if="dataStore.geolocalizacion[0].direccion"
+            >
+              {{ dataStore.geolocalizacion[0].direccion }}
+            </p>
+          </div>
+          <div v-if="dataStore.geolocalizacion.length">
+            <p
+              class="header-horario"
+              v-if="dataStore.geolocalizacion[0].horario"
+            >
+              Horario de atención: {{ dataStore.geolocalizacion[0].horario }}
+            </p>
+          </div>
         </div>
         <div class="header-content-items">
           <div class="wrapper-items-icons">

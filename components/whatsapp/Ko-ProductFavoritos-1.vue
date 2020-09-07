@@ -33,7 +33,7 @@ export default {
 .wrapper-ProductFavoritos {
   display: flex;
   width: 100%;
-  background-color: var(--background_color_2);
+  background-color: white;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -46,13 +46,13 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  max-width: 1300px;
-  padding: 10px 20px;
+  max-width: 780px;
+  padding: 10px 20px 20px 20px;
 }
 .content-title-ProductFavoritos {
   width: 100%;
-  max-width: 1300px;
-  padding: 10px 20px;
+  max-width: 780px;
+  padding: 10px 20px 5px 20px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -62,7 +62,7 @@ export default {
   font-size: 18px;
   font-weight: bold;
   line-height: 1.4;
-  color: var(--color_subtext);
+  color: black;
   cursor: pointer;
 }
 @media (max-width: 770px) {
