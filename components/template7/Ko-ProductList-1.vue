@@ -89,11 +89,13 @@ export default {
       this.currentPage = this.previousPage
     }
     if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
+      this.$store.commit('SET_STATEBANNER', false)
       this.$store.commit('products/FILTER_BY', {
         type: 'category',
         data: this.nameCategoryHeader,
       })
     } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
+      this.$store.commit('SET_STATEBANNER', false)
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.nombre_subcategoria == this.nameSubCategoryHeader
       )
