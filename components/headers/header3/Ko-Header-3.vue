@@ -22,7 +22,8 @@
           </div>
         </div>
         <div class="search" v-if="showSearch">
-          <form id="demo-2">
+          <form id="demo-2" style="position: relative;">
+            <search-icon class="icon-s" @click="focusInput" />
             <input
               type="search"
               placeholder="¿Qué buscas?"
@@ -212,6 +213,9 @@ export default {
         data: '',
       })
     },
+    focusInput() {
+      document.getElementById('SearchHeader').focus()
+    },
   },
   watch: {
     'dataStore.tienda'() {
@@ -391,6 +395,14 @@ export default {
 }
 .header-items-icon-menu {
   display: flex;
+}
+.icon-s {
+  font-size: 25px;
+  color: var(--color_icon);
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  cursor: pointer;
 }
 input[type='search']:focus {
   background-color: #fff;

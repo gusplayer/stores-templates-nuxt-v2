@@ -119,6 +119,7 @@ export default {
       this.$router.push({
         path: '/',
       })
+      this.$store.commit('SET_STATEBANNER', false)
       this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.addClass()
@@ -145,6 +146,7 @@ export default {
       this.$router.push({
         path: '/',
       })
+      this.$store.commit('SET_STATEBANNER', false)
       this.$store.commit('SET_PREVIOUSPAGE', 1)
       let getSubcategory
       this.subcategories.filter((element) => {

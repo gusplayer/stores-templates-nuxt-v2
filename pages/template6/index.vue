@@ -102,9 +102,6 @@ export default {
 </script>
 
 <style>
-.home {
-  /* overflow: hidden; */
-}
 .search-movil {
   display: none;
 }
@@ -122,9 +119,7 @@ input::-webkit-search-cancel-button {
   display: none;
 }
 input[type='search'] {
-  background: #fff
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
+  background: transparent;
   border: solid 2px var(--color_icon);
   padding: 4px 7px;
   width: 35px;
@@ -137,9 +132,8 @@ input[type='search'] {
   transition: all 0.5s;
 }
 #demo-1 input[type='search'] {
-  background: #fff
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
+  background: url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png)
+    no-repeat 7px center;
   border: solid 2px var(--color_icon);
   padding: 6px 4px 7px 38px;
   width: 100%;

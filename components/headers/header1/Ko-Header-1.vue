@@ -47,7 +47,8 @@
         </div>
         <div class="prueba" v-if="showSearch">
           <div class="search">
-            <form id="demo-2">
+            <form id="demo-2" style="position: relative;">
+              <search-icon class="icon-s" @click="focusInput" />
               <input
                 type="search"
                 placeholder="¿Qué buscas?"
@@ -376,6 +377,9 @@ export default {
       let urlFiltrada = decodeURIComponent(UrlCategory)
       this.search = urlFiltrada
     },
+    focusInput() {
+      document.getElementById('SearchHeader').focus()
+    },
   },
   watch: {
     'dataStore.tienda'() {
@@ -701,6 +705,14 @@ export default {
 .card-container:hover,
 .content-products:focus {
   box-shadow: 0px 0px 2px 1px var(--color_border);
+}
+.icon-s {
+  font-size: 25px;
+  color: var(--color_icon);
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  cursor: pointer;
 }
 input[type='search']:focus {
   background-color: #fff;
