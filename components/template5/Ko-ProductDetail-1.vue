@@ -1,6 +1,10 @@
 <template>
   <div class="wrapper-productDetail" :style="settingByTemplate">
-    <div v-if="loading" v-loading="loading"></div>
+    <div
+      class="container-productDetail-loading"
+      v-if="loading"
+      v-loading="loading"
+    ></div>
     <div class="container-productDetail" v-else>
       <div class="section">
         <div class="wrapper-left">
@@ -663,6 +667,17 @@ export default {
   /* background: var(--background_color_2); */
   justify-content: center;
   align-items: center;
+}
+.container-productDetail-loading {
+  height: calc(100vh - 420px);
+  width: 100%;
+  display: flex;
+  max-width: 1300px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 30px 30px 30px;
+  background: transparent;
 }
 .container-productDetail {
   position: relative;

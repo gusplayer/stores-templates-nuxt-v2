@@ -259,6 +259,9 @@ export default {
   left: 5px;
   cursor: pointer;
 }
+.icon-s:hover {
+  color: var(--btnhover);
+}
 input[type='search']:focus {
   background-color: #fff;
   border-color: var(--color_hover_text);

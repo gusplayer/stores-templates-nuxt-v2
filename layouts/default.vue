@@ -368,7 +368,7 @@ export default {
   --color_background_hover: #cccccc;
 
   /* --color_text: #000000; */
-  --color_hover_text: #c52633;
+  --color_hover_text: #d11c2b;
   /* --color_subtext: rgba(21, 20, 57, 0.541); */
 
   --color_shopping_cart: #25dac5;
