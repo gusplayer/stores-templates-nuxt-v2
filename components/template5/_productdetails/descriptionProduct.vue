@@ -191,6 +191,7 @@ export default {
 .description {
   display: flex;
   width: 100%;
+  border-bottom: 1px solid rgba(127, 127, 139, 0.342);
 }
 .description div {
   /* color: var(--color_subtext); */

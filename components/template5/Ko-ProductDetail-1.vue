@@ -219,6 +219,9 @@
           ></ko-description>
         </div>
       </div>
+      <div class="section-suggesProduct">
+        <koSuggesProduct :category="this.category.slice(0, 8)" />
+      </div>
       <div class="responsive-purchase">
         <div class="ko-input">
           <div class="quantity-resposive">
@@ -262,6 +265,7 @@ import axios from 'axios'
 import productSlide from './_productdetails/productSlide'
 import selectGroup from './_productdetails/selectGroup'
 import koDescription from './_productdetails/descriptionProduct.vue'
+import koSuggesProduct from './_productdetails/suggestionsProducto'
 import idCloudinary from '../../mixins/idCloudinary'
 import zoom from './_productdetails/zoomImg'
 
@@ -274,6 +278,7 @@ export default {
   components: {
     selectGroup,
     koDescription,
+    koSuggesProduct,
     productSlide,
     zoom,
   },
@@ -672,7 +677,11 @@ export default {
 .section {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  box-shadow: 10px 14px 28px #ededed, -10px -14px 28px #f1f1f1;
+}
+.section-suggesProduct {
+  width: 100%;
+  margin-top: 30px;
 }
 .wrapper-category {
   display: flex;
@@ -827,7 +836,6 @@ i.close {
   font-weight: normal;
   /* color: var(--color_subtext); */
   color: rgba(21, 20, 57, 0.541);
-
   line-height: 1.5;
   text-decoration: none;
 }
@@ -894,8 +902,8 @@ i.close {
 }
 .content-float-info {
   padding-top: 10px;
-  padding-bottom: 20px;
   width: 100%;
+  max-width: 385px;
   display: none;
   flex-direction: column;
   background: #efefef;
