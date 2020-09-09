@@ -1,5 +1,6 @@
 <template>
-  <div :style="themeStyleWa">
+  <!-- <div :style="themeStyleWa"> -->
+  <div class="general-container">
     <KoHeaderWp :dataStore="dataStore" />
     <nuxt />
     <KFooterWa :dataStore="dataStore" />
@@ -219,4 +220,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+* {
+  font-family: 'Poppins', sans-serif;
+}
+.general-container {
+  width: 100%;
+  overflow: hidden;
+}
+</style>

@@ -1,10 +1,11 @@
 <template>
   <div class="header-container">
     <div class="wrapper-header">
+      <div class="line-header"></div>
       <KoOrderWa :dataStore="dataStore" />
       <div class="wrapper-banner-img">
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQdgeNil1eNY8XKW_XrVp9EUThSQghe12-sAA&usqp=CAU"
+          src="https://res.cloudinary.com/komercia-store/image/upload/q_auto,c_scale,f_auto/v1589443010/c3bvs9jxbimfr5m0prki.png"
           class="banner"
           alt="Banner tienda"
         />
@@ -21,36 +22,34 @@
           <p class="header-text">{{ dataStore.tienda.nombre }}</p>
           <!-- <p class="header-descripcion" v-if="dataStore.tienda.descripcion">
             {{ dataStore.tienda.descripcion }}
-          </p> -->
+          </p>-->
           <div v-if="dataStore.geolocalizacion.length">
             <p
               class="header-direccion"
               v-if="dataStore.geolocalizacion[0].direccion"
-            >
-              {{ dataStore.geolocalizacion[0].direccion }}
-            </p>
+            >{{ dataStore.geolocalizacion[0].direccion }}</p>
           </div>
           <div v-if="dataStore.geolocalizacion.length">
             <p
               class="header-horario"
               v-if="dataStore.geolocalizacion[0].horario"
-            >
-              Horario de atención: {{ dataStore.geolocalizacion[0].horario }}
-            </p>
+            >Horario de atención: {{ dataStore.geolocalizacion[0].horario }}</p>
           </div>
         </div>
         <div class="header-content-items">
           <div class="wrapper-items-icons">
             <div v-for="(item, index) in links" :key="`${index}${item.icon}`">
-              <div class="header-icon" v-if="item.link" :is="item.icon" />
+              <div class="container-header-icon">
+                <div class="header-icon" v-if="item.link" :is="item.icon" />
+              </div>
             </div>
           </div>
-          <div class="header-content-icon">
+          <!-- <div class="header-content-icon">
             <div class="header-content-cart" @click="openOrder">
               <cart-icon class="header-icon-cart" />
               <span class="num-items">{{ productsCart }}</span>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
@@ -116,6 +115,11 @@ export default {
 </script>
 
 <style scoped>
+.line-header {
+  height: 2px;
+  width: 100%;
+  background-color: #445a64;
+}
 .header-container {
   width: 100%;
   display: flex;
@@ -136,9 +140,9 @@ export default {
 }
 .wrapper-banner-img {
   width: 100%;
-  max-height: 210px;
+  height: 6.3rem;
   overflow: hidden;
-  border-radius: 0 0 10px 10px;
+  /* border-radius: 0 0 10px 10px; */
 }
 .banner {
   width: 100%;
@@ -146,24 +150,30 @@ export default {
   overflow: hidden;
 }
 .containt-image {
-  width: 90px;
-  height: 90px;
+  display: flex;
+  width: 80px;
+  height: 80px;
   left: 20px;
-  top: 165px;
+  top: 4rem;
+  /* top: 165px; */
   background-color: white;
   position: absolute;
   overflow: hidden;
   border: solid 1px white;
-  border-radius: 45px;
+  border-radius: 55px;
+  align-items: center;
   box-shadow: 0 0 2px rgba(92, 100, 111, 0.1),
     0 5px 10px rgba(134, 143, 155, 0.08), 0 15px 35px rgba(52, 58, 67, 0.08);
+  /* box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 2px inset, white 0px 0px 0px 3px; */
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* border: solid 1px #201d1d; */
 }
 .header-logo {
-  width: 90px;
-  height: 90px;
+  height: 100%;
+  width: 100%;
   object-fit: contain;
   object-position: center;
+  border-radius: 50%;
 }
 .header {
   display: flex;
@@ -171,13 +181,13 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  padding: 15px 30px;
+  padding: 15px 15px;
 }
 .header-content-text {
   margin-left: 100px;
 }
 .header-text {
-  font-size: 18px;
+  font-size: 1.15rem;
   font-weight: bold;
   color: black;
 }
@@ -185,16 +195,19 @@ export default {
   font-size: 14px;
   font-weight: normal;
   color: black;
+  color: #4e4e4e;
 }
 .header-direccion {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: normal;
   color: black;
+  color: #4e4e4e;
 }
 .header-horario {
   font-size: 13px;
   font-weight: normal;
   color: black;
+  color: #4e4e4e;
 }
 .header-content-items {
   display: flex;
@@ -204,22 +217,31 @@ export default {
 }
 .wrapper-items-icons {
   margin-top: 3px;
-  margin-right: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-self: center;
 }
+.container-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  width: 28px;
+  background-color: #708195;
+  margin-right: 8px;
+  cursor: pointer;
+  border-radius: 45px;
+}
 .header-icon {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #25d366;
-  margin-left: 7px;
-  cursor: pointer;
+  color: #fff;
+  margin-top: -4px;
 }
 .header-content-icon {
   display: flex;
@@ -249,7 +271,7 @@ export default {
   right: -5px;
   top: -5px;
   color: white;
-  background-color: #25d366;
+  background-color: #708195;
   border: #25d366 1px;
   border-radius: 10px;
   line-height: 1;
@@ -261,20 +283,20 @@ export default {
 }
 @media (max-width: 530px) {
   .header {
-    padding: 50px 30px 15px 30px;
+    padding: 55px 20px 0px 20px;
   }
   .header-content-text {
     margin-left: 0px;
   }
   .header-content-items {
     position: absolute;
-    top: 215px;
-    right: 10px;
+    top: 6.9rem;
+    right: 20px;
   }
 }
-@media (max-width: 330px) {
+/* @media (max-width: 330px) {
   .header {
     padding: 70px 30px 15px 30px;
   }
-}
+} */
 </style>

@@ -21,6 +21,13 @@
     "_name": "_927df9c8"
   },
   {
+    "name": "micompra",
+    "path": "/micompra",
+    "component": "/Projects/template-nuxt-dokku/pages/micompra/index.vue",
+    "chunkName": "pages/micompra/index",
+    "_name": "_61ce72d8"
+  },
+  {
     "name": "template5",
     "path": "/template5",
     "component": "/Projects/template-nuxt-dokku/pages/template5/index.vue",
@@ -33,6 +40,13 @@
     "component": "/Projects/template-nuxt-dokku/pages/template6/index.vue",
     "chunkName": "pages/template6/index",
     "_name": "_653a9d54"
+  },
+  {
+    "name": "template7",
+    "path": "/template7",
+    "component": "/Projects/template-nuxt-dokku/pages/template7/index.vue",
+    "chunkName": "pages/template7/index",
+    "_name": "_0bc15fd6"
   },
   {
     "name": "wa",
@@ -54,27 +68,6 @@
     "component": "/Projects/template-nuxt-dokku/pages/ig/contacto.vue",
     "chunkName": "pages/ig/contacto",
     "_name": "_f9834516"
-  },
-  {
-    "name": "template5-cart",
-    "path": "/template5/cart",
-    "component": "/Projects/template-nuxt-dokku/pages/template5/cart.vue",
-    "chunkName": "pages/template5/cart",
-    "_name": "_52ebac6f"
-  },
-  {
-    "name": "template5-contacto",
-    "path": "/template5/contacto",
-    "component": "/Projects/template-nuxt-dokku/pages/template5/contacto.vue",
-    "chunkName": "pages/template5/contacto",
-    "_name": "_7a622e9e"
-  },
-  {
-    "name": "wa-cart",
-    "path": "/wa/cart",
-    "component": "/Projects/template-nuxt-dokku/pages/wa/cart.vue",
-    "chunkName": "pages/wa/cart",
-    "_name": "_12a002cc"
   },
   {
     "name": "ig-productos-slug",
