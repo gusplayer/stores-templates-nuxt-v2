@@ -362,7 +362,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  height: 40px;
+  /* height: 40px; */
 }
 .content-items-categorias-text {
   display: flex;
@@ -374,7 +374,7 @@ export default {
   font-weight: bold;
   line-height: 1.4;
   color: var(--color_subtext);
-  align-self: flex-end;
+  align-self: flex-start;
   margin-right: 2px;
   cursor: pointer;
   display: flex;
@@ -385,7 +385,7 @@ export default {
   font-weight: bold;
   line-height: 1.4;
   color: var(--color_subtext);
-  align-self: flex-end;
+  align-self: flex-start;
   margin-top: 2px;
   margin-right: 2px;
   margin-left: 5px;

@@ -38,6 +38,13 @@
                 </template>
                 <template v-slot:subcategorias
                   ><template>
+                    <li
+                      class="close text-subcategoria-all"
+                      v-if="selectedSubcategories.length > 0"
+                      @click="closed()"
+                    >
+                      Ver todo
+                    </li>
                     <div v-for="(subcategory, key) in subcategories" :key="key">
                       <li
                         v-if="subcategory.categoria == categoria.id"
@@ -83,6 +90,7 @@ export default {
       toggleCategories: true,
       indexSelect: '',
       indexSelect2: '',
+      getSubcategory: false,
     }
   },
   computed: {
@@ -148,15 +156,6 @@ export default {
       })
       this.$store.commit('SET_STATEBANNER', false)
       this.$store.commit('SET_PREVIOUSPAGE', 1)
-      let getSubcategory
-      this.subcategories.filter((element) => {
-        if (element.categoria == categoria) {
-          getSubcategory = true
-        }
-      })
-      if (getSubcategory != true) {
-        this.$store.commit('SET_OPENORDERMENURIGTH', false)
-      }
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
@@ -169,6 +168,7 @@ export default {
       })
       if (this.selectedSubcategories.length === 0) {
         this.addClass()
+        this.$store.commit('SET_OPENORDERMENURIGTH', false)
       }
       if (ref) {
         this.addClass()
@@ -293,6 +293,14 @@ export default {
   .text-categoria {
     width: 100%;
     font-size: 16px;
+    font-weight: bold;
+    color: var(--color_text);
+  }
+  .text-subcategoria-all {
+    margin-left: 3px;
+    margin-bottom: 5px;
+    width: 100%;
+    font-size: 15px;
     font-weight: bold;
     color: var(--color_text);
   }

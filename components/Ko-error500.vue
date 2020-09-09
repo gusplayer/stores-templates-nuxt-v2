@@ -11,6 +11,9 @@
       <p class="title-error">
         Contactar con Komercia
       </p>
+      <p class="subtitle-error">
+        error 500
+      </p>
     </div>
   </div>
 </template>
@@ -47,6 +50,10 @@ export default {
 .title-error {
   font-size: 30px;
   font-weight: bold;
+  color: black;
+}
+.subtitle-error {
+  font-size: 18px;
   color: black;
 }
 .logokomercia {

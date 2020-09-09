@@ -164,7 +164,6 @@ export default {
     // this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_DATA')
     // this.$store.dispatch('GET_STORELAYOUT')
-
     this.tiposComponentes = await API.getTipoComponente()
     this.listadoComponentes = await API.getReferenciasComponente()
   },

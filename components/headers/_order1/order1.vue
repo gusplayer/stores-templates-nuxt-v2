@@ -28,7 +28,7 @@
                       <p class="order-text" style="font-weight: bold;">
                         {{ product.nombre | capitalize }}
                       </p>
-                      <span>
+                      <span v-if="product.precio">
                         <b class="unidades">Cantidad: {{ product.cantidad }}</b>
                         <b class="unidades"
                           >X {{ product.precio | currency }}</b

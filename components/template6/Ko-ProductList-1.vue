@@ -503,7 +503,7 @@ export default {
   font-weight: bold;
   line-height: 1.4;
   color: var(--color_subtext);
-  align-self: flex-end;
+  align-self: flex-start;
   margin-right: 2px;
   cursor: pointer;
   display: flex;
@@ -514,7 +514,7 @@ export default {
   font-weight: bold;
   line-height: 1.4;
   color: var(--color_subtext);
-  align-self: flex-end;
+  align-self: flex-start;
   margin-right: 2px;
   margin-left: 5px;
   cursor: pointer;
