@@ -187,20 +187,8 @@ export default {
     },
     setSearch(value) {
       let category = value.replace('/?search=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
+      let urlFiltrada = decodeURIComponent(category)
       this.search = urlFiltrada
-      // if (urlFiltrada.length) {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'search',
-      //     data: urlFiltrada,
-      //   })
-      // } else {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'all',
-      //     data: '',
-      //   })
-      // }
     },
     clear() {
       this.$router.push({

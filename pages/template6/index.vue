@@ -83,7 +83,8 @@ export default {
   },
   methods: {
     Searchproduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.search = search
+      this.$store.commit('SET_SEARCHVALUE', this.search)
     },
     getSearch(value) {
       if (value) {

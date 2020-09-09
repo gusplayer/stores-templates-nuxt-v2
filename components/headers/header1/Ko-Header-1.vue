@@ -374,7 +374,7 @@ export default {
     setSearch(value) {
       let category = value.replace('/?search=', '')
       let urlFiltrada = decodeURIComponent(category)
-      this.$store.commit('SET_SEARCHVALUE', urlFiltrada)
+      this.search = urlFiltrada
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()
