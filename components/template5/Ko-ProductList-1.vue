@@ -674,6 +674,37 @@ export default {
   color: var(--color_text);
   background: transparent;
 }
+.product_pagination >>> .el-pagination.is-background .btn-next {
+  color: var(--color_text);
+  background-color: transparent;
+}
+.product_pagination >>> .el-pagination.is-background .btn-prev {
+  color: var(--color_text);
+  background-color: transparent;
+}
+.product_pagination >>> .el-pagination.is-background .el-pager li {
+  color: var(--color_text);
+  background-color: transparent;
+}
+.product_pagination >>> .el-pagination.is-background .btn-next:hover {
+  color: var(--btnhover);
+}
+.product_pagination >>> .el-pagination.is-background .btn-prev:hover {
+  color: var(--btnhover);
+}
+.product_pagination
+  >>> .el-pagination.is-background
+  .el-pager
+  li:not(.disabled):hover {
+  color: var(--btnhover);
+}
+.product_pagination
+  >>> .el-pagination.is-background
+  .el-pager
+  li:not(.disabled).active {
+  background-color: var(--color_icon);
+  color: var(--color_text);
+}
 @media (max-width: 1290px) {
   .grid-products {
     grid-template-columns: repeat(4, minmax(240px, 2fr));

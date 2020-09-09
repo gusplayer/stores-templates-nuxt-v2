@@ -677,7 +677,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 50px 30px 30px 30px;
-  background: transparent;
+  background: #efefef;
 }
 .container-productDetail {
   position: relative;
