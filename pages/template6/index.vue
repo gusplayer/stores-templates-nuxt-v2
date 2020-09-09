@@ -133,8 +133,9 @@ input[type='search'] {
   transition: all 0.5s;
 }
 #demo-1 input[type='search'] {
-  background: url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png)
-    no-repeat 7px center;
+  background: #fff
+    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
+    7px center;
   border: solid 2px var(--color_icon);
   padding: 6px 4px 7px 38px;
   width: 100%;
