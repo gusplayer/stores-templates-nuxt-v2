@@ -700,7 +700,7 @@ export default {
   .el-pager
   li:not(.disabled).active {
   background-color: var(--color_icon);
-  color: var(--color_text);
+  color: white;
 }
 @media (max-width: 1290px) {
   .grid-products {
