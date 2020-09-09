@@ -13,6 +13,7 @@ import { createStore } from './store.js'
 /* Plugins */
 
 import nuxt_plugin_workbox_596d4d33 from 'nuxt_plugin_workbox_596d4d33' // Source: ./workbox.js (mode: 'client')
+import nuxt_plugin_vuesweetalert2_1afaf2ae from 'nuxt_plugin_vuesweetalert2_1afaf2ae' // Source: ./vue-sweetalert2.js (mode: 'client')
 import nuxt_plugin_gtm_11f97b26 from 'nuxt_plugin_gtm_11f97b26' // Source: ./gtm.js (mode: 'all')
 import nuxt_plugin_axios_b75c1c52 from 'nuxt_plugin_axios_b75c1c52' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_corecomponentsnpm_428ce86c from 'nuxt_plugin_corecomponentsnpm_428ce86c' // Source: ../plugins/core-components-npm (mode: 'all')
@@ -21,12 +22,12 @@ import nuxt_plugin_mixinCommonMethods_b0161b88 from 'nuxt_plugin_mixinCommonMeth
 import nuxt_plugin_cloudinary_781c9a04 from 'nuxt_plugin_cloudinary_781c9a04' // Source: ../plugins/cloudinary (mode: 'all')
 import nuxt_plugin_materialicons_5694302c from 'nuxt_plugin_materialicons_5694302c' // Source: ../plugins/material-icons (mode: 'all')
 import nuxt_plugin_validate_4442dcea from 'nuxt_plugin_validate_4442dcea' // Source: ../plugins/validate.js (mode: 'all')
-import nuxt_plugin_aos_2279b4c6 from 'nuxt_plugin_aos_2279b4c6' // Source: ../plugins/aos.js (mode: 'client')
 import nuxt_plugin_fuse_6e95fa80 from 'nuxt_plugin_fuse_6e95fa80' // Source: ../plugins/fuse.js (mode: 'client')
 import nuxt_plugin_swiper_68e7f06e from 'nuxt_plugin_swiper_68e7f06e' // Source: ../plugins/swiper.js (mode: 'client')
 import nuxt_plugin_vuecarrusel_74d92192 from 'nuxt_plugin_vuecarrusel_74d92192' // Source: ../plugins/vue-carrusel.js (mode: 'client')
 import nuxt_plugin_ga_fb0a2534 from 'nuxt_plugin_ga_fb0a2534' // Source: ../plugins/ga.js (mode: 'client')
 import nuxt_plugin_gtm_5e4639ea from 'nuxt_plugin_gtm_5e4639ea' // Source: ../plugins/gtm (mode: 'client')
+import nuxt_plugin_facebookpixel_58a6ac96 from 'nuxt_plugin_facebookpixel_58a6ac96' // Source: ../plugins/facebook-pixel (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -206,6 +207,10 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_workbox_596d4d33(app.context, inject)
   }
 
+  if (process.client && typeof nuxt_plugin_vuesweetalert2_1afaf2ae === 'function') {
+    await nuxt_plugin_vuesweetalert2_1afaf2ae(app.context, inject)
+  }
+
   if (typeof nuxt_plugin_gtm_11f97b26 === 'function') {
     await nuxt_plugin_gtm_11f97b26(app.context, inject)
   }
@@ -238,10 +243,6 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_validate_4442dcea(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_aos_2279b4c6 === 'function') {
-    await nuxt_plugin_aos_2279b4c6(app.context, inject)
-  }
-
   if (process.client && typeof nuxt_plugin_fuse_6e95fa80 === 'function') {
     await nuxt_plugin_fuse_6e95fa80(app.context, inject)
   }
@@ -260,6 +261,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_gtm_5e4639ea === 'function') {
     await nuxt_plugin_gtm_5e4639ea(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_facebookpixel_58a6ac96 === 'function') {
+    await nuxt_plugin_facebookpixel_58a6ac96(app.context, inject)
   }
 
   // Lock enablePreview in context
