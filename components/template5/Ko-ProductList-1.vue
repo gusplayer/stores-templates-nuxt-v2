@@ -292,8 +292,7 @@ export default {
     },
     sendCategoryUrl(value) {
       let category = value.replace('/?category=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
+      let urlFiltrada = decodeURIComponent(category)
       this.$store.commit('products/FILTER_BY', {
         type: 'category',
         data: urlFiltrada,
@@ -306,9 +305,7 @@ export default {
     },
     SendsubcategoryUrl(value) {
       let subcategory = value.replace('/?subcategory=', '')
-      let UrlSubCategory = subcategory.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlSubCategory)
-
+      let urlFiltrada = decodeURIComponent(subcategory)
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.nombre_subcategoria == urlFiltrada
       )
