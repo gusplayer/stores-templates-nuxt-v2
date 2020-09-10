@@ -923,6 +923,7 @@ i.close {
   flex-direction: column;
   background: #efefef;
   transition: all 2s ease-out;
+  z-index: 3 !important;
 }
 .whatsapp {
   fill: #27d367;

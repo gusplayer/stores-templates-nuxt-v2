@@ -21,19 +21,23 @@
       </form>
     </div>
     <kBanner v-if="this.stateBanner" />
+    <kBannerMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
     <KProductFavoritos v-if="this.stateBanner" />
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
     ></KProductList>
+    <kContentMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
     <kBannerFooter />
   </div>
 </template>
 
 <script>
 import kBanner from '../../components/template5/ko-Banner-1'
+import kBannerMacrobrand from '../../components/template6/ko-Banner-macrobrand'
 import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
 import KProductList from '../../components/template6/Ko-ProductList-1'
+import kContentMacrobrand from '../../components/template6/Ko-Content-macrobrand'
 import kBannerFooter from '../../components/template5/ko-BannerFooter-1'
 
 export default {
@@ -43,6 +47,8 @@ export default {
     KProductList,
     KProductFavoritos,
     kBannerFooter,
+    kContentMacrobrand,
+    kBannerMacrobrand,
   },
   mounted() {
     var prevScrollpos = window.pageYOffset

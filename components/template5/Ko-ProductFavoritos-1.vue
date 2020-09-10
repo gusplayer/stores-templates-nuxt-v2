@@ -48,6 +48,7 @@ export default {
   align-items: flex-start;
   max-width: 1300px;
   padding: 10px 20px;
+  z-index: 1;
 }
 .content-title-ProductFavoritos {
   width: 100%;
