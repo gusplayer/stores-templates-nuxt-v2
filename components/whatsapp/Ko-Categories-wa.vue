@@ -1,49 +1,41 @@
 <template>
   <div class="wrapper_Category">
     <div class="content_Category">
-      <dir>
+      <!-- <dir>
         <p class="text-title">Categorías</p>
-      </dir>
+      </dir>-->
       <div class="content-item-category">
-        <div class="tags" style="margin-top: 10px; margin-bottom: 10px;">
-          <p class="name-category" @click="clear">Todos los productos</p>
+        <div class="tags">
+          <p class="name-category" @click="clear">Todo</p>
         </div>
         <div
           v-for="categoria in categorias"
           :key="categoria.id"
           class="tags"
           :class="categoria.id == idCategory ? 'tags-active' : ''"
-          style="margin-top: 10px; margin-bottom: 10px;"
         >
           <div @click="sendCategory(categoria, categoria.id, (ref = false))">
             <p
               class="name-category"
               :class="categoria.id == idCategory ? 'name-category-active' : ''"
-            >
-              {{ categoria.nombre_categoria_producto }}
-            </p>
+            >{{ categoria.nombre_categoria_producto }}</p>
           </div>
         </div>
       </div>
-      <div class="content-item-category" v-if="idCategory">
+      <!-- <div class="content-item-category" v-if="idCategory">
         <div
           v-for="(subcategory, key) in subcategories"
           :key="key"
           style="margin-top: 10px; margin-bottom: 10px;"
         >
-          <div
-            v-if="subcategory.categoria == idCategory"
-            @click="Sendsubcategory(subcategory.id)"
-          >
+          <div v-if="subcategory.categoria == idCategory" @click="Sendsubcategory(subcategory.id)">
             <button
               class="tags"
               :class="subcategory.id == indexSelect ? 'tags-active' : ''"
-            >
-              {{ subcategory.nombre_subcategoria }}
-            </button>
+            >{{ subcategory.nombre_subcategoria }}</button>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -161,11 +153,13 @@ export default {
   align-items: center;
   box-sizing: border-box;
   z-index: 3;
+  margin-top: 14px;
+  border-top: 1px solid rgba(213, 213, 213, 0.473);
+  border-bottom: 1px solid rgba(213, 213, 213, 0.473);
 }
 .content_Category {
   width: 100%;
-  max-width: 780px;
-  padding: 5px 15px;
+  padding: 5px 5px 0px 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -185,46 +179,50 @@ export default {
   overflow-x: auto;
   overflow-y: hidden;
 }
+.content-item-category::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}
 .content-card-category-active {
   color: grey;
   border: solid 1px #25d366;
   box-shadow: 0px 0px 2px 1px #25d366;
 }
 .name-category {
-  font-size: 14px;
-  font-weight: bold;
-  color: black;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4e4e4e;
   cursor: pointer;
   margin-top: 3px;
   text-align: center;
 }
-.name-category:hover {
+/* .name-category:hover {
   color: grey;
-}
+} */
 .name-category-active {
-  color: grey;
+  color: #075e54;
+  font-weight: bold;
 }
 .tags {
-  border-radius: 10px;
   color: black;
-  border: solid 1px black;
   background-color: white;
   padding: 3px 12px;
-  font-size: 14px;
+  font-size: 12px;
   height: 30px;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
-  margin-right: 10px;
-  transition: all 200ms ease-in;
+  margin-right: 5px;
+  transition: all 800ms ease-in;
   white-space: nowrap;
 }
-.tags:hover {
+/* .tags:hover {
   color: grey;
-  border: solid 1px #25d366;
-}
+  border-bottom: solid 1px #25d366;
+} */
 .tags-active {
-  color: grey;
-  border: solid 1px #25d366;
+  color: #075e54;
+  border-bottom: solid 2px #075e54;
+  font-weight: bold;
 }
 .content-item-category::-webkit-scrollbar {
   background: transparent;

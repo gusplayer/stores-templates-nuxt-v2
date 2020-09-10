@@ -127,6 +127,30 @@ export default {
     } else if (domain == '/') {
       this.Allcategories()
     }
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
+    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
+      this.$store.commit('SET_STATEBANNER', false)
+      this.$store.commit('products/FILTER_BY', {
+        type: 'category',
+        data: this.nameCategoryHeader,
+      })
+    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
+      this.$store.commit('SET_STATEBANNER', false)
+      let filtradoSubCategoria = this.subcategories.find(
+        (element) => element.nombre_subcategoria == this.nameSubCategoryHeader
+      )
+      if (filtradoSubCategoria) {
+        this.categorias.find(
+          (element) => element.id == filtradoSubCategoria.categoria
+        )
+        this.$store.commit('products/FILTER_BY', {
+          type: 'subcategory',
+          data: filtradoSubCategoria.id,
+        })
+      }
+    }
   },
   data() {
     return {
@@ -201,6 +225,9 @@ export default {
     },
     searchValue() {
       return this.$store.state.searchValue
+    },
+    previousPage() {
+      return this.$store.state.previousPage
     },
   },
   methods: {
@@ -313,8 +340,7 @@ export default {
     },
     sendCategoryUrl(value) {
       let category = value.replace('/?category=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
+      let urlFiltrada = decodeURIComponent(category)
       this.$store.commit('products/FILTER_BY', {
         type: 'category',
         data: urlFiltrada,
@@ -327,11 +353,8 @@ export default {
     },
     SendsubcategoryUrl(value) {
       let subcategory = value.replace('/?subcategory=', '')
-      let UrlSubCategory = subcategory.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlSubCategory)
-
+      let urlFiltrada = decodeURIComponent(subcategory)
       this.selectSubcategory = urlFiltrada
-
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.nombre_subcategoria == urlFiltrada
       )
@@ -380,11 +403,12 @@ export default {
       this.Searchproduct(value)
     },
     currentPage() {
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollTo(0, 0)
-      }, 250)
+      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage
+      }
     },
     nameCategoryHeader(value) {
       return value
@@ -475,7 +499,7 @@ export default {
   font-weight: bold;
   line-height: 1.4;
   color: var(--color_subtext);
-  align-self: flex-end;
+  align-self: flex-start;
   margin-right: 2px;
   cursor: pointer;
   display: flex;
@@ -486,7 +510,7 @@ export default {
   font-weight: bold;
   line-height: 1.4;
   color: var(--color_subtext);
-  align-self: flex-end;
+  align-self: flex-start;
   margin-right: 2px;
   margin-left: 5px;
   cursor: pointer;
@@ -499,8 +523,8 @@ export default {
 }
 .content-products:hover,
 .content-products:focus {
-  box-shadow: 0px 0px 2px 1px var(--color_border);
-  border-radius: 10px;
+  box-shadow: -6px -6px 10px var(--background_color_2),
+    6px 6px 10px rgba(0, 0, 0, 0.267);
 }
 .content-item-productos {
   display: flex;
@@ -547,9 +571,39 @@ export default {
 .pagination {
   font-size: 18px;
   color: var(--color_text);
+  background: transparent;
+}
+.product_pagination >>> .el-pagination.is-background .btn-next {
+  color: var(--color_text);
   background-color: transparent;
 }
-
+.product_pagination >>> .el-pagination.is-background .btn-prev {
+  color: var(--color_text);
+  background-color: transparent;
+}
+.product_pagination >>> .el-pagination.is-background .el-pager li {
+  color: var(--color_text);
+  background-color: transparent;
+}
+.product_pagination >>> .el-pagination.is-background .btn-next:hover {
+  color: var(--btnhover);
+}
+.product_pagination >>> .el-pagination.is-background .btn-prev:hover {
+  color: var(--btnhover);
+}
+.product_pagination
+  >>> .el-pagination.is-background
+  .el-pager
+  li:not(.disabled):hover {
+  color: var(--btnhover);
+}
+.product_pagination
+  >>> .el-pagination.is-background
+  .el-pager
+  li:not(.disabled).active {
+  background-color: var(--color_icon);
+  color: white;
+}
 @media (max-width: 1290px) {
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));

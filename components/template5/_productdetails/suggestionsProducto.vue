@@ -1,27 +1,27 @@
 <template>
   <div class="wrapper-ProductFavoritos" v-if="orderproduct.length">
     <div class="content-title-ProductFavoritos">
-      <p class="title-ProductFavoritos">Destacados</p>
+      <p class="title-ProductFavoritos">
+        Productos relacionados que podrían interesarte
+      </p>
     </div>
     <KoSwipper :products="orderproduct"></KoSwipper>
   </div>
 </template>
 
 <script>
-import KoSwipper from './_productofavorito/productSlide'
+import KoSwipper from '../_productofavorito/productSlide'
 export default {
-  name: 'Ko-ProductFavoritos-1',
+  name: 'suggestionsProducto',
+  props: {
+    category: {},
+  },
   components: {
     KoSwipper,
   },
   computed: {
-    dataProductFavorite() {
-      return this.$store.state.products.fullProducts.filter(
-        (product) => product.favorito === 1
-      )
-    },
     orderproduct() {
-      return this.dataProductFavorite.sort(function (prev, next) {
+      return this.category.sort(function (prev, next) {
         return next.orden - prev.orden
       })
     },
@@ -33,12 +33,14 @@ export default {
 .wrapper-ProductFavoritos {
   display: flex;
   width: 100%;
-  background-color: var(--background_color_2);
+  /* background-color: var(--background_color_2); */
+  background: #efefef;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 .swiper-container {
   width: 100%;
@@ -48,7 +50,6 @@ export default {
   align-items: flex-start;
   max-width: 1300px;
   padding: 10px 20px;
-  z-index: 1;
 }
 .content-title-ProductFavoritos {
   width: 100%;
@@ -63,7 +64,8 @@ export default {
   font-size: 18px;
   font-weight: bold;
   line-height: 1.4;
-  color: var(--color_subtext);
+  /* color: var(--color_subtext); */
+  color: rgba(21, 20, 57, 0.541);
   cursor: pointer;
 }
 @media (max-width: 770px) {

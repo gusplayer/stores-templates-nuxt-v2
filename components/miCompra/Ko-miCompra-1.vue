@@ -1,17 +1,13 @@
 <template>
-  <div class="wrapper_newsletter">
+  <div class="wrapper_micompra">
     <div class="contenedor">
       <div class="bar-top">
-        <div class="back">
-          <arrow-left-icon
-            v-if="toggleArrow"
-            @click="$router.go(-1)"
-            class="arrow-left"
-          ></arrow-left-icon>
+        <div class="back" v-if="toggleArrow" @click="$router.go(-1)">
+          <arrow-left-icon class="arrow-left"></arrow-left-icon>
           <p class="turn-back">Volver</p>
         </div>
         <div class="help">
-          <help-circle-outline class="icon-help"></help-circle-outline>
+          <help-circle-outline class="icon-help" />
           <p class="help-text">Ayuda</p>
         </div>
       </div>
@@ -41,10 +37,18 @@
       </div>
       <div class="bar-middle">
         <h1 class="title-general">Mis ordenes</h1>
-        <p class="number-order">Numero de orden: <span class="id-order" v-if="orden && orden.venta">{{orden.venta.id}}</span></p>
+        <p class="number-order">
+          Numero de orden:
+          <span class="id-order" v-if="orden && orden.venta">{{
+            orden.venta.id
+          }}</span>
+        </p>
       </div>
       <div class="bar-body" v-if="orden && orden.venta">
-        <p class="number-order-reponsive">Numero de orden: <span class="id-order" v-if="orden.venta">{{orden.venta.id}}</span></p>
+        <p class="number-order-reponsive">
+          Numero de orden:
+          <span class="id-order" v-if="orden.venta">{{ orden.venta.id }}</span>
+        </p>
         <div class="content-card">
           <div
             class="card"
@@ -407,14 +411,18 @@ export default {
             'Access-Control-Allow-Origin': '*',
           },
         })
-        .then(response => {
-          if (this.numOrden == response.data.data.venta.id && this.cedula == response.data.data.venta.usuario.identificacion) {
+        .then((response) => {
+          if (
+            this.numOrden == response.data.data.venta.id &&
+            this.cedula == response.data.data.venta.usuario.identificacion
+          ) {
             this.$emit('update', response.data.data)
           } else {
             this.$emit('update', {})
             this.errorMessageTwo()
           }
-        }).catch(() => {
+        })
+        .catch(() => {
           this.$emit('update', {})
           this.errorMessageTwo()
         })
@@ -445,7 +453,7 @@ export default {
         backdrop: 'rgba(14,47,90,0.6)',
         icon: 'error',
       })
-    }
+    },
   },
   watch: {
     '$route.path'(value) {
@@ -471,7 +479,7 @@ export default {
 </script>
 
 <style scoped>
-.wrapper_newsletter {
+.wrapper_micompra {
   display: flex;
   width: 100%;
   height: 100%;
@@ -482,11 +490,12 @@ export default {
   height: 100%;
 }
 .contenedor {
+  height: calc(100vh - 270px);
   width: 100%;
   max-width: 1300px;
   padding: 60px 20px 60px 20px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 }
@@ -511,8 +520,12 @@ export default {
 }
 .form .el-button--primary {
   color: #fff;
-  background-color: #4a24b6;
-  border-color: #4a24b6;
+  background-color: var(--color_background_btn);
+  border-color: var(--color_background_btn);
+}
+.form .el-button--primary:hover {
+  background-color: var(--btnhover);
+  border-color: var(--btnhover);
 }
 .bar-top {
   width: 100%;
@@ -526,6 +539,7 @@ export default {
 .back {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .help {
   display: flex;
@@ -533,7 +547,6 @@ export default {
 }
 .turn-back {
   margin-left: 10px;
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -549,14 +562,14 @@ export default {
 .material-design-icon > .material-design-icon__svg {
   height: 22px;
   width: 22px;
-  color: #390dbd;
+  color: var(--color_icon);
 }
 .icon-help {
   margin-top: -2px;
+  color: var(--color_icon);
 }
 .help-text {
   margin-left: 10px;
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -578,7 +591,6 @@ export default {
   border-radius: 0px 0px 30px 30px;
 }
 .title-general {
-  font-family: 'Poppins', sans-serif;
   font-size: 24px;
   font-weight: 600;
   font-stretch: normal;
@@ -589,7 +601,6 @@ export default {
   color: #373d43;
 }
 .number-order {
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -600,7 +611,6 @@ export default {
   color: #383838;
 }
 .id-order {
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -643,7 +653,6 @@ export default {
   padding-left: 15px;
 }
 .name-product {
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -654,7 +663,6 @@ export default {
   color: #383838;
 }
 .price-product {
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: 500;
   font-stretch: normal;
@@ -665,7 +673,6 @@ export default {
   color: #ff1313;
 }
 .quantity-product {
-  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
@@ -687,7 +694,6 @@ export default {
   grid-row-gap: 45px;
 }
 .cupon {
-  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
@@ -698,7 +704,6 @@ export default {
   color: #4a24b6;
 }
 .shipping-price {
-  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
@@ -709,7 +714,6 @@ export default {
   color: #4a24b6;
 }
 .order-total {
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -720,7 +724,6 @@ export default {
   color: #4a24b6;
 }
 .payment-method {
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -731,7 +734,6 @@ export default {
   color: #4a24b6;
 }
 .cupon-value {
-  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
@@ -742,7 +744,6 @@ export default {
   color: #383838;
 }
 .shipping-value {
-  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
@@ -753,7 +754,6 @@ export default {
   color: #383838;
 }
 .total-value {
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -764,7 +764,6 @@ export default {
   color: #383838;
 }
 .method-value {
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -775,7 +774,6 @@ export default {
   color: #383838;
 }
 .title-state {
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -789,7 +787,6 @@ export default {
   width: 68%;
 }
 .last-update {
-  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
@@ -800,7 +797,6 @@ export default {
   color: #4a24b6;
 }
 .date-update {
-  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
@@ -848,7 +844,6 @@ export default {
 .name,
 .email-address,
 .address {
-  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: bold;
   font-stretch: normal;
@@ -881,7 +876,6 @@ export default {
   max-width: 300px;
 }
 .title-form {
-  font-family: 'Poppins', sans-serif;
   font-size: 24px;
   font-weight: 600;
   font-stretch: normal;
@@ -891,9 +885,6 @@ export default {
   text-align: center;
   color: #373d43;
   margin-bottom: 40px;
-}
-.swal2-title {
-  font-family: 'Poppins', sans-serif;
 }
 @media (max-width: 998px) {
   .state-right {
@@ -921,7 +912,6 @@ export default {
     display: none;
   }
   .number-order-reponsive {
-    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: bold;
     font-stretch: normal;
@@ -958,8 +948,6 @@ export default {
     display: none;
   }
   .last-update-responsive {
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -969,7 +957,6 @@ export default {
     color: #4a24b6;
   }
   .date-update-responsive {
-    font-family: 'Poppins', sans-serif;
     font-size: 15px;
     font-weight: normal;
     font-stretch: normal;

@@ -3,17 +3,17 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _1a997840 = () => interopDefault(import('../pages/blog/index.vue' /* webpackChunkName: "pages/blog/index" */))
 const _7475a39b = () => interopDefault(import('../pages/cart.vue' /* webpackChunkName: "pages/cart" */))
+const _022f1cdc = () => interopDefault(import('../pages/constructor/index.vue' /* webpackChunkName: "pages/constructor/index" */))
 const _4a84afca = () => interopDefault(import('../pages/contacto.vue' /* webpackChunkName: "pages/contacto" */))
 const _927df9c8 = () => interopDefault(import('../pages/ig/index.vue' /* webpackChunkName: "pages/ig/index" */))
+const _61ce72d8 = () => interopDefault(import('../pages/micompra/index.vue' /* webpackChunkName: "pages/micompra/index" */))
 const _5f542ada = () => interopDefault(import('../pages/template5/index.vue' /* webpackChunkName: "pages/template5/index" */))
 const _653a9d54 = () => interopDefault(import('../pages/template6/index.vue' /* webpackChunkName: "pages/template6/index" */))
+const _0bc15fd6 = () => interopDefault(import('../pages/template7/index.vue' /* webpackChunkName: "pages/template7/index" */))
 const _b5c84470 = () => interopDefault(import('../pages/wa/index.vue' /* webpackChunkName: "pages/wa/index" */))
-const _573b7d81 = () => interopDefault(import('../pages/constructor/constructorK.vue' /* webpackChunkName: "pages/constructor/constructorK" */))
 const _f9834516 = () => interopDefault(import('../pages/ig/contacto.vue' /* webpackChunkName: "pages/ig/contacto" */))
-const _52ebac6f = () => interopDefault(import('../pages/template5/cart.vue' /* webpackChunkName: "pages/template5/cart" */))
-const _7a622e9e = () => interopDefault(import('../pages/template5/contacto.vue' /* webpackChunkName: "pages/template5/contacto" */))
-const _12a002cc = () => interopDefault(import('../pages/wa/cart.vue' /* webpackChunkName: "pages/wa/cart" */))
 const _a2f76150 = () => interopDefault(import('../pages/ig/productos/_slug.vue' /* webpackChunkName: "pages/ig/productos/_slug" */))
 const _2abcb93a = () => interopDefault(import('../pages/productos/_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
 const _b9358700 = () => interopDefault(import('../pages/wa/_slug.vue' /* webpackChunkName: "pages/wa/_slug" */))
@@ -36,9 +36,17 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/blog",
+    component: _1a997840,
+    name: "blog"
+  }, {
     path: "/cart",
     component: _7475a39b,
     name: "cart"
+  }, {
+    path: "/constructor",
+    component: _022f1cdc,
+    name: "constructor"
   }, {
     path: "/contacto",
     component: _4a84afca,
@@ -48,6 +56,10 @@ export const routerOptions = {
     component: _927df9c8,
     name: "ig"
   }, {
+    path: "/micompra",
+    component: _61ce72d8,
+    name: "micompra"
+  }, {
     path: "/template5",
     component: _5f542ada,
     name: "template5"
@@ -56,29 +68,17 @@ export const routerOptions = {
     component: _653a9d54,
     name: "template6"
   }, {
+    path: "/template7",
+    component: _0bc15fd6,
+    name: "template7"
+  }, {
     path: "/wa",
     component: _b5c84470,
     name: "wa"
   }, {
-    path: "/constructor/constructorK",
-    component: _573b7d81,
-    name: "constructor-constructorK"
-  }, {
     path: "/ig/contacto",
     component: _f9834516,
     name: "ig-contacto"
-  }, {
-    path: "/template5/cart",
-    component: _52ebac6f,
-    name: "template5-cart"
-  }, {
-    path: "/template5/contacto",
-    component: _7a622e9e,
-    name: "template5-contacto"
-  }, {
-    path: "/wa/cart",
-    component: _12a002cc,
-    name: "wa-cart"
   }, {
     path: "/ig/productos/:slug?",
     component: _a2f76150,

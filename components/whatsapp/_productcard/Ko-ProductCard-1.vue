@@ -2,10 +2,7 @@
   <div class="wrapper-card">
     <div class="container">
       <div class="wrapper-movil">
-        <router-link
-          :to="{ path: `/wa/` + product.slug }"
-          class="wrapper-image"
-        >
+        <router-link :to="{ path: `/wa/` + product.slug }" class="wrapper-image">
           <img
             v-if="!soldOut"
             :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
@@ -19,58 +16,38 @@
             alt="Product Img"
           />
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
-          <p class="card-info-2" v-if="getFreeShipping == false">
-            Envío gratis !
-          </p>
+          <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis !</p>
         </router-link>
         <div class="wrapper-text">
-          <router-link
-            :to="{ path: `/wa/` + product.slug }"
-            class="content-name-product-movil"
-          >
+          <router-link :to="{ path: `/wa/` + product.slug }" class="content-name-product-movil">
             <p
               class="card-text-movil-title"
-              v-if="this.product.nombre.length >= 33"
-            >
-              {{ `${this.product.nombre.slice(0, 33)}..` }}
-            </p>
-            <p class="card-text-movil-title" v-else>
-              {{ `${this.product.nombre.slice(0, 34)}` }}
-            </p>
-            <p class="card-text-movil" v-if="this.product.marca">
-              {{ this.product.marca }}
-            </p>
-            <div
-              class="content-text-price-movil-cart"
-              v-if="this.product.precio"
-            >
+              v-if="this.product.nombre.length >= 42"
+            >{{ `${this.product.nombre.slice(0, 42)}..` }}</p>
+            <p class="card-text-movil-title" v-else>{{ `${this.product.nombre.slice(0, 42)}` }}</p>
+            <p class="card-text-movil" v-if="this.product.marca">{{ this.product.marca }}</p>
+            <div class="content-text-price-movil-cart" v-if="this.product.precio">
               <div class="wrapper-price">
                 <div>
                   <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
-                </p> -->
-                  <div
-                    class="content-price"
-                    v-if="estadoCart && this.minPrice != this.maxPrice"
-                  >
+                  </p>-->
+                  <div class="content-price" v-if="estadoCart && this.minPrice != this.maxPrice">
                     <p
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{ this.minPrice | currency }}
-                    </p>
+                    >{{ this.minPrice | currency }}</p>
                     <p class="separator-price">-</p>
                     <p
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{ this.maxPrice | currency }}
-                    </p>
+                    >{{ this.maxPrice | currency }}</p>
                   </div>
                   <div v-else>
-                    <p class="card-price-2" v-if="this.product.precio > 0">
-                      {{ this.product.precio | currency }}
-                    </p>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0"
+                    >{{ this.product.precio | currency }}</p>
                   </div>
                 </div>
                 <!-- <p class="card-descuento">-50%</p> -->
@@ -78,33 +55,19 @@
             </div>
           </router-link>
           <div class="Content-btn-movil">
-            <div
-              class="content-soldOut"
-              v-if="!this.estadoCart && !soldOut && !spent"
-            >
-              <div
-                v-on:click="addShoppingCart"
-                class="btn"
-                style="margin-right: 5px;"
-              >
+            <div class="content-soldOut" v-if="!this.estadoCart && !soldOut && !spent">
+              <div v-on:click="addShoppingCart" class="btn" style="margin-right: 5px;">
                 <cartArrowDown class="card-icon-cart" />Agregar
               </div>
-              <router-link :to="{ path: `/wa/` + product.slug }" class="btn"
-                >Ver más</router-link
-              >
+              <router-link :to="{ path: `/wa/` + product.slug }" class="btn">Ver más</router-link>
             </div>
 
-            <router-link
-              :to="{ path: `/wa/` + product.slug }"
-              v-else
-              class="btn"
-              >Ver más</router-link
-            >
+            <router-link :to="{ path: `/wa/` + product.slug }" v-else class="btn">Ver más</router-link>
           </div>
         </div>
         <!-- <div class="btn-whatsapp" v-if="dataStore.whatsapp">
           <whatsapp-icon class="wp-icon" v-on:click="redirectWP()" />
-        </div> -->
+        </div>-->
       </div>
     </div>
   </div>
@@ -359,31 +322,36 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: rgb(241, 241, 241);
   box-sizing: border-box;
   border-radius: 10px;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: -6px -6px 10px var(--background_color_2),
+    6px 6px 10px rgba(0, 0, 0, 0.2);
+  border: none;
+  padding: 0px 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(213, 213, 213, 0.473);
 }
 .container {
   display: flex;
   align-items: flex-start;
   width: 100%;
-  border-radius: 10px;
   overflow: hidden;
 }
 .wrapper-movil {
   width: 100%;
-  height: 160px;
-  max-height: 160px;
+  height: 120px;
+  max-height: 120px;
   display: flex;
   flex-direction: row;
   position: relative;
 }
 .wrapper-image {
-  max-width: 160px;
-  max-height: 160px;
+  max-width: 120px;
+  max-height: 120px;
   overflow: hidden;
-  border-radius: 10px 0 0 10px;
+  border-radius: 4px;
+  box-shadow: 0 6px 10px 0 rgba(128, 98, 96, 0.16);
+  margin-right: 6px;
 }
 .product-image {
   width: 100%;
@@ -440,7 +408,7 @@ export default {
 }
 .card-text-movil-title {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 1.3;
   letter-spacing: 0.2px;
   color: black;
@@ -484,10 +452,12 @@ export default {
   text-align: center;
 }
 .card-price-2 {
-  font-size: 18px;
-  font-weight: '500';
+  font-size: 16px;
+  font-weight: 500;
   line-height: 1.4;
+  margin-top: 7px;
   color: rgb(107, 107, 107);
+  color: rgb(56, 161, 105);
   text-align: left;
 }
 .separator-price {
@@ -524,10 +494,8 @@ export default {
 .btn {
   color: white;
   border-radius: 5px;
-  border: solid 1px black;
-  background-color: black;
+  background-color: white;
   padding: 2px 3px;
-  font-size: 14px;
   width: 90px;
   font-weight: bold;
   cursor: pointer;
@@ -536,6 +504,12 @@ export default {
   display: flex;
   justify-content: center;
   text-align: center;
+  border-radius: 4px;
+  padding: 6px 0px;
+  font-weight: 700;
+  color: #445a64;
+  box-shadow: 0 6px 10px 0 rgba(128, 98, 96, 0.16);
+  font-size: 13px;
 }
 .btn:hover {
   background-color: grey;

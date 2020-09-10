@@ -1,10 +1,24 @@
 [
   {
+    "name": "blog",
+    "path": "/blog",
+    "component": "/Projects/template-nuxt-dokku/pages/blog/index.vue",
+    "chunkName": "pages/blog/index",
+    "_name": "_1a997840"
+  },
+  {
     "name": "cart",
     "path": "/cart",
     "component": "/Projects/template-nuxt-dokku/pages/cart.vue",
     "chunkName": "pages/cart",
     "_name": "_7475a39b"
+  },
+  {
+    "name": "constructor",
+    "path": "/constructor",
+    "component": "/Projects/template-nuxt-dokku/pages/constructor/index.vue",
+    "chunkName": "pages/constructor/index",
+    "_name": "_022f1cdc"
   },
   {
     "name": "contacto",
@@ -21,6 +35,13 @@
     "_name": "_927df9c8"
   },
   {
+    "name": "micompra",
+    "path": "/micompra",
+    "component": "/Projects/template-nuxt-dokku/pages/micompra/index.vue",
+    "chunkName": "pages/micompra/index",
+    "_name": "_61ce72d8"
+  },
+  {
     "name": "template5",
     "path": "/template5",
     "component": "/Projects/template-nuxt-dokku/pages/template5/index.vue",
@@ -35,6 +56,13 @@
     "_name": "_653a9d54"
   },
   {
+    "name": "template7",
+    "path": "/template7",
+    "component": "/Projects/template-nuxt-dokku/pages/template7/index.vue",
+    "chunkName": "pages/template7/index",
+    "_name": "_0bc15fd6"
+  },
+  {
     "name": "wa",
     "path": "/wa",
     "component": "/Projects/template-nuxt-dokku/pages/wa/index.vue",
@@ -42,39 +70,11 @@
     "_name": "_b5c84470"
   },
   {
-    "name": "constructor-constructorK",
-    "path": "/constructor/constructorK",
-    "component": "/Projects/template-nuxt-dokku/pages/constructor/constructorK.vue",
-    "chunkName": "pages/constructor/constructorK",
-    "_name": "_573b7d81"
-  },
-  {
     "name": "ig-contacto",
     "path": "/ig/contacto",
     "component": "/Projects/template-nuxt-dokku/pages/ig/contacto.vue",
     "chunkName": "pages/ig/contacto",
     "_name": "_f9834516"
-  },
-  {
-    "name": "template5-cart",
-    "path": "/template5/cart",
-    "component": "/Projects/template-nuxt-dokku/pages/template5/cart.vue",
-    "chunkName": "pages/template5/cart",
-    "_name": "_52ebac6f"
-  },
-  {
-    "name": "template5-contacto",
-    "path": "/template5/contacto",
-    "component": "/Projects/template-nuxt-dokku/pages/template5/contacto.vue",
-    "chunkName": "pages/template5/contacto",
-    "_name": "_7a622e9e"
-  },
-  {
-    "name": "wa-cart",
-    "path": "/wa/cart",
-    "component": "/Projects/template-nuxt-dokku/pages/wa/cart.vue",
-    "chunkName": "pages/wa/cart",
-    "_name": "_12a002cc"
   },
   {
     "name": "ig-productos-slug",

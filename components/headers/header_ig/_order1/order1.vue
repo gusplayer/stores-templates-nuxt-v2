@@ -559,6 +559,22 @@ export default {
   max-width: 190px;
   width: 100%;
 }
+.name >>> .el-tag {
+  border-color: var(--color_icon);
+  background-color: var(--background_color_1);
+  color: var(--color_text);
+  display: inline-block;
+  height: 28px;
+  margin-left: 2px;
+  padding: 0 2px;
+  font-size: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
 .order-text {
   color: var(--color_text);
   font-size: 14px;

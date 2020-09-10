@@ -4,13 +4,9 @@
       <div class="order_content">
         <div class="order_header">
           <h3>Tu orden</h3>
-          <label
-            for="order_close"
-            @click="closeOrder"
-            class="order_header_close"
-          >
+          <div @click="closedOder" class="order_header_close">
             <close-icon />
-          </label>
+          </div>
         </div>
         <transition name="slide">
           <template>
@@ -32,7 +28,7 @@
                       <p class="order-text" style="font-weight: bold;">
                         {{ product.nombre | capitalize }}
                       </p>
-                      <span>
+                      <span v-if="product.precio">
                         <b class="unidades">Cantidad: {{ product.cantidad }}</b>
                         <b class="unidades"
                           >X {{ product.precio | currency }}</b
@@ -346,16 +342,14 @@ export default {
       const element = event.target.className
       if (
         element === 'order' ||
-        element === 'order_header_close' ||
         element === 'continue_shopping' ||
-        element === 'continue_shopping2' ||
-        element.animVal === 'material-design-icon__svg' ||
-        element.baseVal === 'material-design-icon__svg' ||
-        element.animVal === '' ||
-        element.baseVal === ''
+        element === 'continue_shopping2'
       ) {
         this.$store.commit('SET_OPENORDER', false)
       }
+    },
+    closedOder() {
+      this.$store.commit('SET_OPENORDER', false)
     },
     GoPayments() {
       let objeto = {}
@@ -545,6 +539,22 @@ export default {
 .order_products_list_item .name {
   max-width: 190px;
   width: 100%;
+}
+.name >>> .el-tag {
+  border-color: var(--color_border);
+  background-color: var(--background_color_1);
+  color: var(--color_text);
+  display: inline-block;
+  height: 28px;
+  margin-left: 2px;
+  padding: 0 2px;
+  font-size: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;
 }
 .order-text {
   color: var(--color_text);

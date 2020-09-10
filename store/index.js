@@ -138,9 +138,13 @@ export const state = () => ({
     '--color_subtext': 'rgba(21, 20, 57, 0.541)',
     '--color_text_btn': '#ffffff',
   },
+  previousPage: 1,
 })
 
 export const mutations = {
+  SET_PREVIOUSPAGE(state, value) {
+    state.previousPage = value
+  },
   SET_STATEBANNER(state, value) {
     state.stateBanner = value
   },

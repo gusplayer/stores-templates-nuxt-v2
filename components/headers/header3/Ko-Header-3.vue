@@ -22,7 +22,8 @@
           </div>
         </div>
         <div class="search" v-if="showSearch">
-          <form id="demo-2">
+          <form id="demo-2" style="position: relative;">
+            <search-icon class="icon-s" @click="focusInput" />
             <input
               type="search"
               placeholder="¿Qué buscas?"
@@ -186,20 +187,8 @@ export default {
     },
     setSearch(value) {
       let category = value.replace('/?search=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
+      let urlFiltrada = decodeURIComponent(category)
       this.search = urlFiltrada
-      // if (urlFiltrada.length) {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'search',
-      //     data: urlFiltrada,
-      //   })
-      // } else {
-      //   this.$store.commit('products/FILTER_BY', {
-      //     type: 'all',
-      //     data: '',
-      //   })
-      // }
     },
     clear() {
       this.$router.push({
@@ -211,6 +200,9 @@ export default {
         type: 'all',
         data: '',
       })
+    },
+    focusInput() {
+      document.getElementById('SearchHeader').focus()
     },
   },
   watch: {
@@ -391,6 +383,17 @@ export default {
 }
 .header-items-icon-menu {
   display: flex;
+}
+.icon-s {
+  font-size: 25px;
+  color: var(--color_icon);
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  cursor: pointer;
+}
+.icon-s:hover {
+  color: var(--btnhover);
 }
 input[type='search']:focus {
   background-color: #fff;

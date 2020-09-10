@@ -1,5 +1,6 @@
 <template>
-  <div :style="themeStyleWa">
+  <!-- <div :style="themeStyleWa"> -->
+  <div class="general-container">
     <KoHeaderWp :dataStore="dataStore" />
     <nuxt />
     <KFooterWa :dataStore="dataStore" />
@@ -219,4 +220,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap'); */
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
+.general-container {
+  width: 100%;
+  overflow: hidden;
+}
+</style>

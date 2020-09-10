@@ -21,12 +21,13 @@
       </form>
     </div>
     <kBanner v-if="this.stateBanner"></kBanner>
-    <KComponent360 />
-    <KProductFavoritos />
+    <KComponent360 v-if="this.stateBanner" />
+    <KProductFavoritos v-if="this.stateBanner" />
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
     ></KProductList>
+    <!-- <KContent1 :dataStore="dataStore" /> -->
     <kBannerFooter />
     <KNewsletter :dataStore="dataStore" />
   </div>
@@ -37,6 +38,7 @@ import kBanner from '../../components/template5/ko-Banner-1'
 import kBannerFooter from '../../components/template5/ko-BannerFooter-1'
 import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
 import KProductList from '../../components/template5/Ko-ProductList-1'
+import KContent1 from '../../components/template5/Ko-Content-1'
 import KNewsletter from '../../components/template5/Ko-Newsletter-1'
 import KComponent360 from '../../components/template5/Ko-Content360-1'
 export default {
@@ -47,6 +49,7 @@ export default {
     KNewsletter,
     KProductFavoritos,
     KComponent360,
+    KContent1,
     kBannerFooter,
   },
   mounted() {
@@ -88,7 +91,8 @@ export default {
   },
   methods: {
     Searchproduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.search = search
+      this.$store.commit('SET_SEARCHVALUE', this.search)
     },
     getSearch(value) {
       if (value) {
@@ -107,9 +111,6 @@ export default {
 </script>
 
 <style>
-.home {
-  /* overflow: hidden; */
-}
 .search-movil {
   display: none;
 }
@@ -127,9 +128,7 @@ input::-webkit-search-cancel-button {
   display: none;
 }
 input[type='search'] {
-  background: #fff
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
+  background: transparent;
   border: solid 2px var(--color_icon);
   padding: 4px 7px;
   width: 35px;

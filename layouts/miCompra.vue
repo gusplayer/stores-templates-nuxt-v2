@@ -5,7 +5,7 @@
         this.$store.state.settingByTemplate &&
         this.$store.state.settingByTemplate.tipo_letra
           ? this.$store.state.settingByTemplate.tipo_letra
-          : 'Poppins',
+          : 'Roboto',
     }"
   >
     <component

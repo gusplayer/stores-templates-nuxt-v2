@@ -1,7 +1,8 @@
 <template lang="html">
   <div class="home">
-    <KProductFavoritos />
     <KCategory :dataStore="dataStore" class="stiky-Kcategory-wa" />
+    <KProductFavoritos />
+  
     <KProductList :dataStore="dataStore" :fullProducts="fullProducts" />
   </div>
 </template>

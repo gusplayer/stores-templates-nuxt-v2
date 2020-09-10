@@ -47,7 +47,8 @@
         </div>
         <div class="prueba" v-if="showSearch">
           <div class="search">
-            <form id="demo-2">
+            <form id="demo-2" style="position: relative;">
+              <search-icon class="icon-s" @click="focusInput" />
               <input
                 type="search"
                 placeholder="¿Qué buscas?"
@@ -310,6 +311,7 @@ export default {
         type: 'subcategory',
         data: value,
       })
+      this.$store.commit('SET_PREVIOUSPAGE', 1)
     },
     sendCategory(value, categoria, ref) {
       this.$router.push({
@@ -337,6 +339,7 @@ export default {
         type: 'category',
         data: value.nombre_categoria_producto,
       })
+      this.$store.commit('SET_PREVIOUSPAGE', 1)
     },
     addClass() {
       this.add = !this.add
@@ -370,9 +373,11 @@ export default {
     },
     setSearch(value) {
       let category = value.replace('/?search=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
+      let urlFiltrada = decodeURIComponent(category)
       this.search = urlFiltrada
+    },
+    focusInput() {
+      document.getElementById('SearchHeader').focus()
     },
   },
   watch: {
@@ -699,6 +704,17 @@ export default {
 .card-container:hover,
 .content-products:focus {
   box-shadow: 0px 0px 2px 1px var(--color_border);
+}
+.icon-s {
+  font-size: 25px;
+  color: var(--color_icon);
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  cursor: pointer;
+}
+.icon-s:hover {
+  color: var(--btnhover);
 }
 input[type='search']:focus {
   background-color: #fff;

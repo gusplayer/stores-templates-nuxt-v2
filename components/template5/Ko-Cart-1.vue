@@ -571,6 +571,22 @@ export default {
   display: flex;
   flex-direction: column;
 }
+.content_variant >>> .el-tag {
+  border-color: var(--color_border);
+  background-color: var(--background_color_1);
+  color: var(--color_text);
+  display: inline-block;
+  height: 28px;
+  margin-left: 2px;
+  padding: 0 2px;
+  font-size: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
 .text-variant {
   font-size: 12px;
   color: var(--color_text);

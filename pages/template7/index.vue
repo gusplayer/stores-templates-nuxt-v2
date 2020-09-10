@@ -96,9 +96,6 @@ export default {
 </script>
 
 <style>
-.home {
-  /* overflow: hidden; */
-}
 .search-movil {
   display: none;
 }
@@ -116,9 +113,7 @@ input::-webkit-search-cancel-button {
   display: none;
 }
 input[type='search'] {
-  background: #fff
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
+  background: transparent;
   border: solid 2px var(--color_icon);
   padding: 4px 7px;
   width: 35px;

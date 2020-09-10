@@ -397,7 +397,9 @@ export default {
   background: white;
   box-sizing: border-box;
   border-radius: 10px;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: -6px -6px 10px var(--background_color_2),
+    6px 6px 10px rgba(0, 0, 0, 0.2);
+  border: none;
 }
 .container {
   display: flex;
