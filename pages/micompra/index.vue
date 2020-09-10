@@ -21,9 +21,9 @@ export default {
   components: {
     kPrueba,
   },
-  asyncData ({route}) {
+  asyncData ({route, store}) {
     if (route.query.orden) {
-      return axios.get(`https://api2.komercia.co/api/orden/582/${route.query.orden}`, {
+      return axios.get(`https://api2.komercia.co/api/orden/${store.state.tienda.id_tienda}/${route.query.orden}`, {
         headers: {
           'content-type': 'application/json',
           'Access-Control-Allow-Origin': '*',

@@ -401,7 +401,7 @@ export default {
     GET_ORDEN() {
       this.$router.replace({ query: {}})
       return  axios
-        .get(`https://api2.komercia.co/api/orden/582/${this.numOrden}`, {
+        .get(`https://api2.komercia.co/api/orden/${this.dataStore.tienda.id_tienda}/${this.numOrden}`, {
           headers: {
             'content-type': 'application/json',
             'Access-Control-Allow-Origin': '*',
@@ -474,7 +474,7 @@ export default {
 .wrapper_newsletter {
   display: flex;
   width: 100%;
-  height: calc(100vh - 470px);
+  height: 100%;
   background-color: var(--background_color_2);
   justify-content: center;
   align-items: center;
