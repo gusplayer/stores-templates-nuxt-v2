@@ -8,32 +8,21 @@
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >
-            > {{ this.nameCategoryHeader }}
-          </p>
-          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            > {{ this.nameSubCategoryHeader }}
-          </p>
+          >> {{ this.nameCategoryHeader }}</p>
+          <p
+            class="text-categorias-select"
+            v-if="this.nameSubCategoryHeader"
+          >> {{ this.nameSubCategoryHeader }}</p>
         </div>
       </div>
       <div>
         <div class="content-item-productos">
           <div class="grid-products">
-            <div
-              v-for="product in filterProduct"
-              :key="product.id"
-              class="content-products"
-            >
-              <KoProductCard1
-                :product="product"
-                :dataStore="dataStore.tienda"
-              ></KoProductCard1>
+            <div v-for="product in filterProduct" :key="product.id" class="content-products">
+              <KoProductCard1 :product="product" :dataStore="dataStore.tienda"></KoProductCard1>
             </div>
           </div>
-          <div
-            v-if="(this.fullProducts.length == 0)"
-            class="content-products-empty"
-          >
+          <div v-if="(this.fullProducts.length == 0)" class="content-products-empty">
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium" v-if="products.length > 16">
@@ -295,8 +284,9 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: white;
+  background-color: #fafaf8;
   box-sizing: border-box;
+  margin-top: 16px;
 }
 .container {
   display: flex;
@@ -320,12 +310,12 @@ export default {
 }
 .text-categorias {
   background: transparent;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1.4;
-  color: black;
-  margin-right: 2px;
+
   cursor: pointer;
+  color: #4c4c4c;
   display: flex;
 }
 .text-categorias-select {
