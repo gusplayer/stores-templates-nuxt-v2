@@ -189,7 +189,7 @@ export default {
   box-shadow: 0px 0px 2px 1px #25d366;
 }
 .name-category {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: #4e4e4e;
   cursor: pointer;
