@@ -322,7 +322,6 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: white;
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: -6px -6px 10px var(--background_color_2),
@@ -340,18 +339,19 @@ export default {
 }
 .wrapper-movil {
   width: 100%;
-  height: 130px;
-  max-height: 130px;
+  height: 120px;
+  max-height: 120px;
   display: flex;
   flex-direction: row;
   position: relative;
 }
 .wrapper-image {
-  max-width: 130px;
-  max-height: 130px;
+  max-width: 120px;
+  max-height: 120px;
   overflow: hidden;
   border-radius: 4px;
   box-shadow: 0 6px 10px 0 rgba(128, 98, 96, 0.16);
+  margin-right: 6px;
 }
 .product-image {
   width: 100%;

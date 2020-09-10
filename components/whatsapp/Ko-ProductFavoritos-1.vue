@@ -8,7 +8,7 @@
       <div class="card-favorite" v-for="product in orderproduct">
         <img
           v-if="!soldOut"
-          :src="idCloudinary(product.foto_cloudinary, 150, 150)"
+          :src="idCloudinary(product.foto_cloudinary, 250, 250)"
           class="product-image"
           alt="Product Img"
         />
@@ -152,10 +152,10 @@ export default {
 }
 .card-favorite {
   margin: 6px;
-  width: 125px;
+  width: 130px;
 }
 .card-favorite img {
-  width: 125px;
+  width: 130px;
   object-fit: contain;
   border-radius: 5px;
 }

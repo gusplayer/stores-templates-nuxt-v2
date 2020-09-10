@@ -286,7 +286,8 @@ export default {
   width: 100%;
   background-color: #fafaf8;
   box-sizing: border-box;
-  margin-top: 16px;
+  margin-top: 0px;
+  padding-top: 18px;
 }
 .container {
   display: flex;
