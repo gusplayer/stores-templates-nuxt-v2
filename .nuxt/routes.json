@@ -1,10 +1,24 @@
 [
   {
+    "name": "blog",
+    "path": "/blog",
+    "component": "/Projects/template-nuxt-dokku/pages/blog/index.vue",
+    "chunkName": "pages/blog/index",
+    "_name": "_1a997840"
+  },
+  {
     "name": "cart",
     "path": "/cart",
     "component": "/Projects/template-nuxt-dokku/pages/cart.vue",
     "chunkName": "pages/cart",
     "_name": "_7475a39b"
+  },
+  {
+    "name": "constructor",
+    "path": "/constructor",
+    "component": "/Projects/template-nuxt-dokku/pages/constructor/index.vue",
+    "chunkName": "pages/constructor/index",
+    "_name": "_022f1cdc"
   },
   {
     "name": "contacto",
@@ -54,13 +68,6 @@
     "component": "/Projects/template-nuxt-dokku/pages/wa/index.vue",
     "chunkName": "pages/wa/index",
     "_name": "_b5c84470"
-  },
-  {
-    "name": "constructor-constructorK",
-    "path": "/constructor/constructorK",
-    "component": "/Projects/template-nuxt-dokku/pages/constructor/constructorK.vue",
-    "chunkName": "pages/constructor/constructorK",
-    "_name": "_573b7d81"
   },
   {
     "name": "ig-contacto",

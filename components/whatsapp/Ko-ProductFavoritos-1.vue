@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="card-button">
-          <p>ver</p>
+          <p>compra</p>
         </div>
       </div>
     </div>
@@ -148,15 +148,14 @@ export default {
   font-weight: 700;
   color: #445a64;
   box-shadow: 0 6px 10px 0 rgba(128, 98, 96, 0.16);
-  font-size: 12px;
+  font-size: 13px;
 }
-
 .card-favorite {
   margin: 6px;
-  width: 110px;
+  width: 125px;
 }
 .card-favorite img {
-  width: 110px;
+  width: 125px;
   object-fit: contain;
   border-radius: 5px;
 }
@@ -164,9 +163,9 @@ export default {
   font-size: 11px;
 }
 .card-price-2 {
-  font-size: 12px;
+  font-size: 13px;
   color: black;
-  font-weight: 800;
+  font-weight: 600;
 }
 @media (max-width: 770px) {
   .swiper-container {
