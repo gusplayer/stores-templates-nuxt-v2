@@ -1,6 +1,12 @@
 <template>
   <div class="wrapper-productlist">
     <div class="container">
+      <div class="text-macrobrand" v-if="dataStore.tienda.id_tienda == 1100">
+        <p>
+          Envío a nivel nacional - Pago seguro - Tiempo de entrega 10 días
+          hábiles
+        </p>
+      </div>
       <div class="content-items-categorias-text">
         <p class="text-categorias" @click="clear">Catálogo</p>
         <p
@@ -437,6 +443,21 @@ export default {
 </script>
 
 <style scoped>
+.text-macrobrand {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.text-macrobrand > p {
+  padding: 5px 20px;
+  font-size: 20px;
+  text-align: center;
+  color: var(--color_text);
+}
 .wrapper-productlist {
   width: 100%;
   display: flex;

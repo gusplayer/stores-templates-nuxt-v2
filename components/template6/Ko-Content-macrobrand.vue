@@ -91,7 +91,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  padding: 50px 30px 50px;
+  padding: 30px 30px 50px;
   flex-direction: column;
 }
 .item .texto {
