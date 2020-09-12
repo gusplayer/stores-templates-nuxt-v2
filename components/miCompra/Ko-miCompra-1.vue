@@ -490,7 +490,7 @@ export default {
   height: 100%;
 }
 .contenedor {
-  height: calc(100vh - 270px);
+  height: 100%;
   width: 100%;
   max-width: 1300px;
   padding: 60px 20px 60px 20px;
