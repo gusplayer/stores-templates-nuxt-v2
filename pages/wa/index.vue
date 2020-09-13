@@ -1,9 +1,11 @@
 <template lang="html">
   <div class="home">
-    <KCategory :dataStore="dataStore" class="stiky-Kcategory-wa" />
+      <KoHeaderWp :dataStore="dataStore" />
+    <KCategory :dataStore="dataStore"  />
     <KProductFavoritos />
   
     <KProductList :dataStore="dataStore" :fullProducts="fullProducts" />
+    <KFooterWa :dataStore="dataStore" />
   </div>
 </template>
 
@@ -11,6 +13,8 @@
 import KCategory from '../../components/whatsapp/Ko-Categories-wa'
 import KProductFavoritos from '../../components/whatsapp/Ko-ProductFavoritos-1'
 import KProductList from '../../components/whatsapp/Ko-ProductList-wa'
+import KoHeaderWp from '../../components/headers/header_wp/Ko-Header-wa'
+import KFooterWa from '../../components/footers/footerWa/ko-Footer-wa'
 
 export default {
   layout: 'wa',
@@ -18,6 +22,8 @@ export default {
     KProductList,
     KCategory,
     KProductFavoritos,
+    KFooterWa,
+    KoHeaderWp,
   },
   data() {
     return {}
@@ -32,9 +38,4 @@ export default {
   },
 }
 </script>
-<style>
-.stiky-Kcategory-wa {
-  position: sticky;
-  top: 0;
-}
-</style>
+

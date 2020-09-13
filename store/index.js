@@ -355,6 +355,7 @@ export const actions = {
     let id = 0
     if (
       parts[1] == 'komercia' ||
+      parts[1] == 'wapi' ||
       parts[1] == 'localhost:3000' ||
       parts[1] == 'unicentrovillavicencio'
     ) {

@@ -56,13 +56,14 @@
           </router-link>
           <div class="Content-btn-movil">
             <div class="content-soldOut" v-if="!this.estadoCart && !soldOut && !spent">
-              <div v-on:click="addShoppingCart" class="btn" style="margin-right: 5px;">
-                <cartArrowDown class="card-icon-cart" />Agregar
+              <div v-on:click="addShoppingCart" class="btn btn-whatsapp" style="margin-right: 5px;">
+                <!-- <cartArrowDown class="card-icon-cart" />Agregar -->
+                <img src="../../../assets/img/icon-3.png" width="20px" />
               </div>
-              <router-link :to="{ path: `/wa/` + product.slug }" class="btn">Ver más</router-link>
+              <router-link :to="{ path: `/wa/` + product.slug }" class="btn">compra</router-link>
             </div>
 
-            <router-link :to="{ path: `/wa/` + product.slug }" v-else class="btn">Ver más</router-link>
+            <router-link :to="{ path: `/wa/` + product.slug }" v-else class="btn">compra</router-link>
           </div>
         </div>
         <!-- <div class="btn-whatsapp" v-if="dataStore.whatsapp">
@@ -344,13 +345,14 @@ export default {
   display: flex;
   flex-direction: row;
   position: relative;
+  margin-bottom: 8px;
 }
 .wrapper-image {
   max-width: 120px;
   max-height: 120px;
   overflow: hidden;
   border-radius: 4px;
-  box-shadow: 0 6px 10px 0 rgba(128, 98, 96, 0.16);
+  box-shadow: 0 2px 5px rgba(131, 130, 131, 0.174);
   margin-right: 6px;
 }
 .product-image {
@@ -400,17 +402,17 @@ export default {
   display: flex;
   width: 100%;
   padding: 0px 10px;
-  margin-top: 10px;
+  margin-top: 1px;
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
   height: 30px;
 }
 .card-text-movil-title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.3;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.1px;
   color: black;
 }
 .card-text-movil {
@@ -452,8 +454,8 @@ export default {
   text-align: center;
 }
 .card-price-2 {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 1.4;
   margin-top: 7px;
   color: rgb(107, 107, 107);
@@ -495,8 +497,8 @@ export default {
   color: white;
   border-radius: 5px;
   background-color: white;
-  padding: 2px 3px;
-  width: 90px;
+  padding: 2px 14px;
+  width: fit-content;
   font-weight: bold;
   cursor: pointer;
   transition: all 200ms ease-in;
@@ -505,20 +507,22 @@ export default {
   justify-content: center;
   text-align: center;
   border-radius: 4px;
-  padding: 6px 0px;
-  font-weight: 700;
+  padding: 6px 10px;
+  font-weight: 600;
   color: #445a64;
   box-shadow: 0 6px 10px 0 rgba(128, 98, 96, 0.16);
-  font-size: 13px;
+  box-shadow: 0 2px 5px rgba(131, 130, 131, 0.174);
+  margin-right: 4px;
+  font-size: 12px;
 }
 .btn:hover {
   background-color: grey;
   border: solid 1px grey;
 }
 .btn-whatsapp {
-  position: absolute;
-  top: 70px;
-  right: 10px;
+  /* border: 1px solid gray; */
+  box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
+  margin-right: 10px;
 }
 .wp-icon {
   font-size: 32px;
