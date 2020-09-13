@@ -287,7 +287,7 @@ export default {
   background-color: #fafaf8;
   box-sizing: border-box;
   margin-top: 0px;
-  padding-top: 18px;
+  padding-top: 5px;
 }
 .container {
   display: flex;
@@ -344,7 +344,7 @@ export default {
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, minmax(250px, 2fr));
-  grid-gap: 25px;
+  grid-gap: 15px;
   box-sizing: border-box;
 }
 .content-products {

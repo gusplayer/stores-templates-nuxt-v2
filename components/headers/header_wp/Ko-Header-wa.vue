@@ -4,6 +4,7 @@
       <div class="line-header"></div>
       <KoOrderWa :dataStore="dataStore" />
       <div class="wrapper-banner-img">
+        <!-- src="https://res.cloudinary.com/komercia-store/image/upload/q_auto,c_scale,f_auto/v1589443010/c3bvs9jxbimfr5m0prki.png" -->
         <img
           src="https://res.cloudinary.com/komercia-store/image/upload/q_auto,c_scale,f_auto/v1589443010/c3bvs9jxbimfr5m0prki.png"
           class="banner"
@@ -19,7 +20,14 @@
       </nuxt-link>
       <div class="header">
         <div class="header-content-text">
-          <p class="header-text">{{ dataStore.tienda.nombre }}</p>
+          <p class="header-text">
+            {{ dataStore.tienda.nombre }}
+            <!-- <img
+              src="../../../assets/img/icon-4.png"
+              width="18px"
+              style="margin-bottom: -2px"
+            />-->
+          </p>
           <!-- <p class="header-descripcion" v-if="dataStore.tienda.descripcion">
             {{ dataStore.tienda.descripcion }}
           </p>-->
@@ -35,6 +43,11 @@
               v-if="dataStore.geolocalizacion[0].horario"
             >Horario de atención: {{ dataStore.geolocalizacion[0].horario }}</p>
           </div>
+        </div>
+        <div class="container-tienda-wp">
+          <p>
+            <whatsapp-icon class="wp-icon" />Tienda whatsapp
+          </p>
         </div>
         <div class="header-content-items">
           <div class="wrapper-items-icons">
@@ -281,6 +294,26 @@ export default {
   align-items: center;
   font-weight: bold;
 }
+.container-tienda-wp {
+  background-color: #f9f9f9;
+  position: absolute;
+  top: 6.9rem;
+  right: 25px;
+  border-radius: 15px;
+  padding: 4px 8px;
+  box-shadow: 0 0 2px rgba(92, 100, 111, 0.1);
+  box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
+  box-shadow: 0 2px 5px rgba(131, 130, 131, 0.276);
+}
+.container-tienda-wp p {
+  color: #4c4c4c;
+  font-size: 11px;
+}
+.wp-icon {
+  font-size: 15px;
+  color: #075e54;
+  margin-right: 3px;
+}
 @media (max-width: 530px) {
   .header {
     padding: 55px 20px 0px 20px;
@@ -290,8 +323,9 @@ export default {
   }
   .header-content-items {
     position: absolute;
-    top: 6.9rem;
+    top: 6.8rem;
     right: 20px;
+    display: none;
   }
 }
 /* @media (max-width: 330px) {

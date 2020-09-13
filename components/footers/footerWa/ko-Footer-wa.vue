@@ -1,11 +1,14 @@
 <template>
   <div class="footer-container">
     <div class="wrapper-footer" @click="openOrder">
-      <p class="text-footer">
-        <span>{{ productsCart.length }} items</span>
+      <p class="text-footer" v-if="productsCart.length > 0">
+        <span>{{ productsCart.length }}</span>
+        item
       </p>
-      <p class="text-footer carrito">Mi pedido</p>
-      <p class="text-footer valor">
+      <p class="text-footer carrito">
+        <whatsapp-icon class="wp-icon" />Comprar
+      </p>
+      <p class="text-footer valor" v-if="productsCart.length > 0">
         <span>{{ this.totalCart | currency }}</span>
       </p>
     </div>
@@ -50,7 +53,7 @@ export default {
   position: fixed;
   bottom: 0;
   padding: 8px;
-  z-index: 9999;
+  z-index: 999;
 }
 .wrapper-footer {
   background: #25d366;
@@ -64,9 +67,12 @@ export default {
   cursor: pointer;
   background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
 }
+.wrapper-footer p {
+  flex: 1;
+}
 .text-footer {
   color: white;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .main-container {
@@ -86,17 +92,26 @@ export default {
   width: 30%;
   align-items: center;
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 500;
 }
 .valor {
   width: 30%;
   text-align: right;
 }
 .valor span {
-  font-size: 14px;
+  font-size: 12px;
   text-align: right;
   background-color: #12a493;
   padding: 6px;
   border-radius: 5px;
+}
+.wp-icon {
+  font-size: 18px;
+  margin-right: 2px;
+  margin-bottom: -2px;
+}
+.icon-bag {
+  color: white;
 }
 </style>

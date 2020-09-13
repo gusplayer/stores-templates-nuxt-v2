@@ -1,21 +1,17 @@
 <template>
   <!-- <div :style="themeStyleWa"> -->
   <div class="general-container">
-    <KoHeaderWp :dataStore="dataStore" />
+    <!-- <KoHeaderWp :dataStore="dataStore" /> -->
     <nuxt />
-    <KFooterWa :dataStore="dataStore" />
   </div>
 </template>
 
 <script>
-import KoHeaderWp from '../components/headers/header_wp/Ko-Header-wa'
-import KFooterWa from '../components/footers/footerWa/ko-Footer-wa'
-
 export default {
-  components: {
-    KoHeaderWp,
-    KFooterWa,
-  },
+  // components: {
+  //   KoHeaderWp,
+  //   KFooterWa,
+  // },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
     let domain = this.$route.fullPath
@@ -227,6 +223,6 @@ export default {
 }
 .general-container {
   width: 100%;
-  overflow: hidden;
+  /* overflow-x: hidden; */
 }
 </style>

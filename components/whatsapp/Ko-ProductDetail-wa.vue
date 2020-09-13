@@ -18,24 +18,12 @@
             <p class="text-marca">
               <strong>{{ data.info.marca }}</strong>
             </p>
-            <!-- <p class="text-promocion" v-show="salesData.precio">
-              ${{ salesData.precio | currency }}
-            </p>-->
+
             <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">
-                ${{ salesData.precio | currency }}
-              </p>
+              <p class="text-precio" v-show="salesData.precio">${{ salesData.precio | currency }}</p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
-            <!-- <div
-              class="content-text-desc"
-              v-if="data.info.descripcion && data.info.descripcion.length > 12"
-            >
-              <p
-                class="text-desc"
-                v-html="`${data.info.descripcion.slice(0, 99)}`"
-              ></p>
-            </div>-->
+
             <div class="content_buy_action">
               <div v-if="envio.titulo == 'Envío gratis'">
                 <p class="card-info-2">Envío gratis !</p>
@@ -46,16 +34,13 @@
             </div>
             <div v-if="this.data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
-                <label for="variant name" class="text-variant"
-                  >{{ variant.nombre }}:</label
-                >
+                <label for="variant name" class="text-variant">{{ variant.nombre }}:</label>
                 <selectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
-                    >{{ item.option }}</option
-                  >
+                  >{{ item.option }}</option>
                 </selectGroup>
               </div>
             </div>
@@ -67,9 +52,15 @@
           </div>
         </div>
       </div>
+      <div class="back-button">
+        <!-- <router-link :to="{ path: `/wa/`}" class="btn">
+          <p><</p>
+        </router-link>-->
+        <p @click="$router.go(-1)"><</p>
+      </div>
       <div class="responsive-purchase">
         <div class="ko-input">
-          <div class="quantity-resposive">
+          <div class="quantity-resposive" v-if="!spent">
             <button class="quantity_remove" v-on:click="removeQuantity()">
               <menos-icon class="icon" />
             </button>
@@ -78,26 +69,21 @@
               <mas-icon class="icon" />
             </button>
             <transition name="slide-fade">
-              <div
-                class="container-alert"
-                v-show="quantityValue == maxQuantityValue"
-              >
+              <div class="container-alert" v-show="quantityValue == maxQuantityValue">
                 <span class="alert">última Unidad!</span>
               </div>
             </transition>
           </div>
-          <div style="width: 100%; margin-left: 10px;">
+          <div style="width: 100%; height: 100%; margin-left: 10px;">
             <div class="content_buy_action-responsive" v-if="spent">
-              <p class="card-info-1-res">Agotado !</p>
+              <p class="card-info-1-res">😥 Producto agotado</p>
             </div>
             <button
               class="btn-responsive"
               ref="color2"
               v-if="!spent"
               v-on:click="addShoppingCart"
-            >
-              <cartArrowDown class="card-icon-cart" />Agregar
-            </button>
+            >😃 Comprar</button>
           </div>
         </div>
       </div>
@@ -541,7 +527,7 @@ export default {
 .wrapper-productDetail {
   display: flex;
   width: 100%;
-  background: white;
+  background-color: #fafaf8;
   justify-content: center;
   align-items: center;
 }
@@ -589,9 +575,9 @@ export default {
 }
 .text-name {
   font-weight: bold;
-  font-size: 25px;
+  font-size: 16px;
   line-height: 24px;
-  color: #000000;
+  color: #445a64;
 }
 .text-marca {
   font-size: 16px;
@@ -616,9 +602,10 @@ export default {
   margin-left: 5px;
 }
 .text-precio {
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
   color: #000000;
+  margin-top: 12px;
 }
 .card-descuento {
   font-size: 12px;
@@ -680,23 +667,23 @@ export default {
 }
 .responsive-purchase {
   position: fixed;
-  bottom: 60px;
+  bottom: 0px;
   right: 0;
   width: 100%;
   z-index: 2;
-  background: transparent;
+  background: white;
   display: flex;
   justify-content: center;
+  box-shadow: 0px 2px 2px rgba(52, 58, 67, 0.1),
+    0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
 }
 .ko-input {
   display: flex;
   width: 100%;
-  max-width: 320px;
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  background: #25d366;
-  border-radius: 10px;
+  background: white;
   position: relative;
 }
 .quantity-resposive {
@@ -755,21 +742,28 @@ export default {
   justify-content: center;
   align-items: center;
   /* background: #e71f77; */
-  background: gray;
+  background: rgb(222, 222, 222);
   padding: 6px 10px;
   border-radius: var(--radius_btn);
-  color: white;
-  font-size: 16px;
+  color: #4c4c4c;
+  font-size: 14px;
+  font-weight: 600;
   width: 100%;
+  height: 100%;
 }
 .btn-responsive {
   border-radius: var(--radius_btn);
   color: white;
   border: solid 0px black;
-  background-color: black;
+  /* background-color: black; */
+  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
+  background-image: linear-gradient(85deg, #48ac98 0%, #45c4aa 100%);
+  box-shadow: 0px 0px 2px rgba(52, 58, 67, 0.1),
+    0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
   padding: 6px 10px;
   width: 100%;
-  font-size: 16px;
+  height: 100%;
+  font-size: 14px;
 }
 .card-icon-cart {
   font-size: 20px;
@@ -801,36 +795,51 @@ export default {
   margin-top: 10px;
 }
 .btn-whatsapp {
-  color: black;
+  color: white;
   border-radius: 5px;
-  border: solid 1px #25d366;
-  background-color: #25d366;
+  /* border: solid 1px #25d366; */
+  background-color: #445a64;
+
   padding: 8px 3px;
-  font-size: 14px;
+  font-size: 12px;
   width: 100%;
   max-width: 240px;
   height: 36px;
-  font-weight: bold;
+  font-weight: 400;
   cursor: pointer;
-  transition: all 200ms ease-in;
+  /* transition: all 200ms ease-in; */
   text-decoration: none;
   display: flex;
   justify-content: center;
   text-align: center;
+  border: 0px;
 }
 .wp-icon {
-  font-size: 30px;
+  font-size: 16px;
   bottom: 4px;
+  margin-right: 4px;
+  margin-bottom: -2px;
 }
-@media (max-width: 670px) {
-  .container-productDetail {
-    padding: 10px 10px 90px 10px;
-  }
-  .wrapper-left {
-    margin-right: 10px;
-  }
+.back-button {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+  padding: 0px 10px;
+  background-color: transparent;
+  z-index: 999;
 }
-@media (max-width: 630px) {
+.back-button p {
+  background-color: #fafaf8;
+  border-radius: 20px;
+  width: 30px;
+  font-size: 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(131, 130, 131, 0.473);
+}
+
+@media (max-width: 800px) {
   .container-productDetail {
     padding: 5px 5px 150px 5px;
   }
@@ -848,9 +857,10 @@ export default {
     align-items: center;
   }
   .content-right {
-    max-width: 260px;
-    margin-left: 15px;
-    margin-right: 15px;
+    width: 100%;
+    /* margin: 10px 20px; */
+    padding: 15px 10px;
+    margin-left: 0px;
   }
   .text-name {
     font-weight: 500;

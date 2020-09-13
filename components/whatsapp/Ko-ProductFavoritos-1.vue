@@ -20,9 +20,9 @@
         />
         <p
           class="card-text-movil-title"
-          v-if="product.nombre.length >= 17"
-        >{{ `${product.nombre.slice(0, 17)}..` }}</p>
-        <p class="card-text-movil-title" v-else>{{ `${product.nombre.slice(0, 34)}` }}</p>
+          v-if="product.nombre.length >= 19"
+        >{{ `${product.nombre.slice(0, 19)}..` }}</p>
+        <p class="card-text-movil-title" v-else>{{ `${product.nombre.slice(0, 39)}` }}</p>
 
         <div class="content-text-price-movil-cart" v-if="product.precio">
           <div class="wrapper-price">
@@ -147,7 +147,9 @@ export default {
   padding: 6px 0px;
   font-weight: 700;
   color: #445a64;
-  box-shadow: 0 6px 10px 0 rgba(128, 98, 96, 0.16);
+  transition: 0.3s;
+  box-shadow: 0 2px 10px rgba(131, 130, 131, 0.276);
+
   font-size: 13px;
 }
 .card-favorite {
