@@ -1,40 +1,51 @@
 <template>
   <div class="wrapper-productDetail" :style="settingByTemplate">
-    <div
-      class="container-productDetail-loading"
-      v-if="loading"
-      v-loading="loading"
-    ></div>
+    <div class="container-productDetail-loading" v-if="loading"></div>
     <div class="container-productDetail" v-else>
       <div class="section">
         <div class="wrapper-left">
-          <div class="photos">
-            <div class="photos_selected">
-              <img
-                @click="selectedPhoto(data.detalle.foto_cloudinary)"
-                class="img-list"
-                :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
-                alt="Product Img"
-              />
-              <img
-                v-for="(foto, itemsfoto) in data.fotos"
-                :key="itemsfoto"
-                @click="selectedPhoto(foto.foto_cloudinary)"
-                class="img-list"
-                :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
-                alt="Product Img"
-              />
-
-              <img
-                v-if="idYoutube"
-                :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
-                v-show="idYoutube"
-                v-on:mouseover="existYoutube = true"
-                class="video"
-                alt="Product Img"
-              />
+          <template>
+            <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="photos">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide photos_selected">
+                  <img
+                    @click="selectedPhoto(data.detalle.foto_cloudinary)"
+                    class="img-list"
+                    :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
+                    alt="Product Img"
+                  />
+                </div>
+                <div
+                  class="swiper-slide photos_selected"
+                  v-for="(foto, itemsfoto) in data.fotos"
+                  :key="itemsfoto"
+                >
+                  <img
+                    @click="selectedPhoto(foto.foto_cloudinary)"
+                    class="img-list"
+                    :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
+                    alt="Product Img"
+                  />
+                </div>
+                <div class="swiper-slide photos_selected">
+                  <img
+                    v-if="idYoutube"
+                    :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
+                    v-show="idYoutube"
+                    v-on:mouseover="existYoutube = true"
+                    class="video"
+                    alt="Product Img"
+                  />
+                </div>
+              </div>
+              <div class="swiper-prev">
+                <FlechaUp-icon class="icon-swiper" />
+              </div>
+              <div class="swiper-next">
+                <Flechadown-icon class="icon-swiper" />
+              </div>
             </div>
-          </div>
+          </template>
           <div class="wrapper-photo_main">
             <div
               v-if="this.activeZoom"
@@ -298,11 +309,17 @@ export default {
     }
     window.addEventListener('scroll', function () {
       var sticky = document.getElementById('sticky')
+      // console.log(window.pageYOffset)
       if (window.pageYOffset >= 376 && screen.width > 725 && sticky) {
         sticky.style.display = 'flex'
         sticky.style.position = 'fixed'
         sticky.style.top = '88px'
       } else {
+        sticky.style.display = 'none'
+        sticky.style.position = 'static'
+        sticky.style.top = ''
+      }
+      if (window.pageYOffset >= 843) {
         sticky.style.display = 'none'
         sticky.style.position = 'static'
         sticky.style.top = ''
@@ -330,9 +347,26 @@ export default {
         desc: '',
       },
       activeZoom: true,
+      swiperOption: {
+        direction: 'vertical',
+        slidesPerView: 4,
+        spaceBetween: 10,
+        mousewheel: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-next',
+          prevEl: '.swiper-prev',
+        },
+      },
     }
   },
   computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
     dataStore() {
       return this.$store.state.dataStore
     },
@@ -381,6 +415,9 @@ export default {
     },
   },
   methods: {
+    changeSlide() {
+      this.swiper.slidePrev(700, false)
+    },
     searchIdForSlug() {
       const product = this.productsData.filter(
         (product) => product.slug === this.id
@@ -722,12 +759,40 @@ export default {
 .photos {
   display: flex;
   margin-right: 30px;
+  max-height: 430px;
+  position: relative;
+}
+.swiper-wrapper {
+  width: 100%;
+  position: relative;
+}
+.swiper-prev {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  z-index: 2;
+}
+.swiper-next {
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  z-index: 2;
+  font-size: 25px;
+}
+.icon-swiper {
+  color: var(--color_icon);
+  font-size: 60px;
+  cursor: pointer;
+}
+.icon-swiper:hover {
+  color: var(--btnhover);
 }
 .photos_selected {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
+  max-height: 100px;
 }
 .img-list {
   cursor: pointer;

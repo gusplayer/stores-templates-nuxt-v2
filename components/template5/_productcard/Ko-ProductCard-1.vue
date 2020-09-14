@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-card" :style="settingByTemplate">
+  <div class="wrapper-card anim" :style="settingByTemplate">
     <div class="container">
       <div
         class="wrapper"
@@ -396,17 +396,26 @@ export default {
   /* background: var(--background_color_1); */
   background: white;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: -6px -6px 10px var(--background_color_2),
-    6px 6px 10px rgba(0, 0, 0, 0.2);
+    6px 6px 10px rgba(0, 0, 0, 0.096);
   border: none;
+}
+.anim {
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.wrapper-card:focus,
+.wrapper-card:hover {
+  transition: all 200ms ease-in;
+  position: relative;
+  top: -3px;
 }
 .container {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   overflow: hidden;
 }
 .card-info-1 {

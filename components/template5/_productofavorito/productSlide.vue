@@ -110,11 +110,11 @@ export default {
 .swiper-slide {
   width: 100%;
 }
-.swiper-pagination-bullet {
-  background-color: rgba(15, 15, 15, 0.5);
+.swiper-pagination >>> .swiper-pagination-bullet {
+  background-color: grey;
 }
-.swiper-pagination-bullet-active {
-  background-color: #fff;
+.swiper-pagination >>> .swiper-pagination-bullet-active {
+  background-color: var(--color_icon);
 }
 .btn {
   border-radius: 25px;

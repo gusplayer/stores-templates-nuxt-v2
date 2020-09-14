@@ -172,7 +172,7 @@ export default {
     max-width: 500px;
   }
   .container {
-    padding: 0px;
+    padding: 30px 0px;
     grid-template: repeat(1, 1fr) / 4fr;
   }
   .item_image {

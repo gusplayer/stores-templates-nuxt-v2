@@ -409,11 +409,6 @@ export default {
 .content-products {
   border-radius: 10px;
 }
-.content-products:hover,
-.content-products:focus {
-  box-shadow: 0px 0px 2px 1px var(--color_border);
-  border-radius: 10px;
-}
 .content-products-empty {
   width: 100%;
   min-height: 200px;

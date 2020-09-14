@@ -26,7 +26,7 @@
               v-show="errors[0] || register"
               class="text-error"
               :style="register ? 'color:green' : ''"
-              >{{ errors[0] || register }}</span
+              >{{ errorsCheckbox || register }}</span
             >
           </template>
         </ValidationProvider>
@@ -60,6 +60,7 @@ export default {
   mounted() {},
   data() {
     return {
+      errorsCheckbox: 'El campo checkbox y email son obligatorios',
       email: null,
       register: '',
       checked: false,
@@ -188,7 +189,6 @@ export default {
   cursor: pointer;
   margin-left: 20px;
   cursor: pointer;
-  min-height: 50px;
   max-height: 50px;
   transition: all 200ms ease-in;
 }

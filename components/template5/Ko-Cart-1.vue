@@ -286,7 +286,7 @@
                 </p>
               </span>
               <div class="content-btn">
-                <button ref="colorBtn" class="btn2">Seguir comprando</button>
+                <nuxt-link to="/" class="btn2">Seguir comprando</nuxt-link>
                 <button
                   ref="colorBtn2"
                   class="btn1"

@@ -14,8 +14,10 @@ export default {
       },
     ],
   },
-  loading: '~/components/Ko-loading.vue',
-
+  loading: {
+    color: 'blue',
+    height: '5px',
+  },
   css: [
     'element-ui/lib/theme-chalk/index.css',
     '~/assets/element-pagination.css',

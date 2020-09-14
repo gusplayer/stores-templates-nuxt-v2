@@ -80,7 +80,7 @@
                   v-show="errors[0] || register"
                   class="text-error"
                   :style="register ? 'color:green' : ''"
-                  >{{ errors[0] || register }}</span
+                  >{{ errorsCheckbox || register }}</span
                 >
               </template>
             </ValidationProvider>
@@ -175,7 +175,9 @@
     </div>
     <div class="under-footer">
       <div class="contenedor-term-con" v-if="dataStore.politicas">
-        <label for="modal-toggle">Condiciones legales</label>
+        <label for="modal-toggle"
+          >Políticas de privacidad y términos de uso</label
+        >
       </div>
       <div class="separator"></div>
       <p>Desarrollado por Komercia Latam</p>
@@ -273,6 +275,7 @@ export default {
   },
   data() {
     return {
+      errorsCheckbox: 'El campo checkbox y email son obligatorios',
       checked: false,
       outerVisible: false,
       logo: null,
@@ -336,34 +339,34 @@ export default {
     },
     toSubscribe() {
       if (this.checked == true) {
-        this.$refs.validate
-          .validate()
-          .then((response) => {
-            if (response) {
-              this.toSubscribeResponse = false
-              const params = {
-                correo: this.email,
-                tienda: this.dataStore.tienda.id_tienda,
-              }
-              axios
-                .post('https://templates.komercia.co/api/suscriptores', params)
-                .then((result) => {
-                  this.register = 'Tu correo ha sido registrado'
-                  this.$message.success('Tu suscripción esta activa')
-                  this.email = ''
-                  this.toSubscribeResponse = true
-                })
-                .catch(
-                  (result) => (
-                    (this.register = 'Tu correo ya esta registrado'),
-                    this.$message.success('Tu correo ya esta registrado')
-                  )
-                )
-            }
-          })
-          .catch((e) => {
-            console.log(e)
-          })
+        // this.$refs.validate
+        //   .validate()
+        //   .then((response) => {
+        //     if (response) {
+        //       this.toSubscribeResponse = false
+        //       const params = {
+        //         correo: this.email,
+        //         tienda: this.dataStore.tienda.id_tienda,
+        //       }
+        //       axios
+        //         .post('https://templates.komercia.co/api/suscriptores', params)
+        //         .then((result) => {
+        //           this.register = 'Tu correo ha sido registrado'
+        //           this.$message.success('Tu suscripción esta activa')
+        //           this.email = ''
+        //           this.toSubscribeResponse = true
+        //         })
+        //         .catch(
+        //           (result) => (
+        //             (this.register = 'Tu correo ya esta registrado'),
+        //             this.$message.success('Tu correo ya esta registrado')
+        //           )
+        //         )
+        //     }
+        //   })
+        //   .catch((e) => {
+        //     console.log(e)
+        //   })
       }
     },
   },
@@ -542,6 +545,7 @@ export default {
   font-size: 16px;
   font-weight: bold;
   width: 100%;
+  max-height: 41px;
   cursor: pointer;
   transition: all 200ms ease-in;
 }
@@ -591,6 +595,7 @@ export default {
   line-height: 1.4;
   letter-spacing: normal;
   color: var(--color_text);
+  text-align: center;
 }
 .contenedor-term-con {
   width: 100%;
@@ -601,7 +606,7 @@ export default {
   margin-bottom: 5px;
 }
 .contenedor-term-con label {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -814,16 +819,6 @@ export default {
   .under-footer {
     margin-bottom: 28px;
   }
-  .under-footer p {
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.4;
-    letter-spacing: normal;
-    color: var(--color_text);
-    text-align: center;
-  }
   .items-movil {
     display: flex;
     width: 100%;
@@ -849,7 +844,6 @@ export default {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 30px;
     grid-row-gap: 15px;
   }
   .text-movil {

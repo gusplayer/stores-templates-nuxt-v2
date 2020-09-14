@@ -19,7 +19,9 @@
     </div>
     <div class="under-footer">
       <div class="contenedor-term-con" v-if="dataStore.politicas">
-        <label for="modal-toggle">Condiciones legales</label>
+        <label for="modal-toggle"
+          >Políticas de privacidad y términos de uso</label
+        >
       </div>
       <div class="separator"></div>
       <p>Desarrollado por Komercia Latam</p>
@@ -239,7 +241,7 @@ export default {
   margin-bottom: 5px;
 }
 .contenedor-term-con label {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
