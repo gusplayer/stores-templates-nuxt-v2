@@ -38,10 +38,10 @@
                   />
                 </div>
               </div>
-              <div class="swiper-prev">
+              <div class="swiper-prev" v-if="data.fotos.length > 3">
                 <FlechaUp-icon class="icon-swiper" />
               </div>
-              <div class="swiper-next">
+              <div class="swiper-next" v-if="data.fotos.length > 3">
                 <Flechadown-icon class="icon-swiper" />
               </div>
             </div>

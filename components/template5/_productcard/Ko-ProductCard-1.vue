@@ -398,7 +398,7 @@ export default {
   box-sizing: border-box;
   border-radius: 5px;
   box-shadow: -6px -6px 10px var(--background_color_2),
-    6px 6px 10px rgba(0, 0, 0, 0.096);
+    6px 6px 10px rgba(0, 0, 0, 0.295);
   border: none;
 }
 .anim {
