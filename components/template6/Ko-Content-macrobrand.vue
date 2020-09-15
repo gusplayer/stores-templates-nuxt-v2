@@ -21,7 +21,10 @@
         <div class="item texto">
           <div class="wrapper-text">
             <p class="text-titulo">{{ setting.data[1].title_2 }}</p>
-            <p class="text-subtitulo">{{ setting.data[1].description }}</p>
+            <p class="text-subtitulo">{{ setting.data[1].description[0] }}</p>
+            <p class="text-subtitulo">{{ setting.data[1].description[1] }}</p>
+            <p class="text-subtitulo">{{ setting.data[1].description[2] }}</p>
+            <p class="text-subtitulo">{{ setting.data[1].description[3] }}</p>
             <a :href="setting.data[1].redirect_url">
               <button class="button">{{ setting.data[1].button_text }}</button>
             </a>
@@ -59,8 +62,12 @@ export default {
               title_2: '¿Qué hace nuestra compañía?',
               photo:
                 'https://res.cloudinary.com/komercia-store/image/upload/v1568415336/q1cyx9muultgp4afbed3.png',
-              description:
-                'Estrategias de marketing digital. -Diagnóstico de experiencia de cliente. -Venta de producto en e-commerce. -Desarrollo de producto para monetizar marcas.',
+              description: [
+                '-Estrategias de marketing digital.',
+                '-Diagnóstico de experiencia de cliente.',
+                '-Venta de producto en e-commerce.',
+                '-Desarrollo de producto para monetizar marcas.',
+              ],
               redirect_url: '/contacto',
               button_text: 'Contacto',
             },
@@ -116,6 +123,7 @@ export default {
   line-height: 1.45;
   letter-spacing: normal;
   color: var(--color_text);
+  margin-bottom: 20px;
 }
 .text-subtitulo {
   font-size: 20px;
@@ -125,8 +133,8 @@ export default {
   line-height: 1.63;
   letter-spacing: normal;
   color: var(--color_subtext);
-  margin-top: 20px;
-  text-align: justify;
+  /* margin-top: 20px; */
+  /* text-align: justify; */
 }
 .button {
   border-radius: var(--radius_btn);
