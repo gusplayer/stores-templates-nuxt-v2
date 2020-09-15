@@ -48,9 +48,11 @@
             <!-- <p class="card-descuento">-50%</p> -->
           </div>
         </div>
-        <div class="card-button">
-          <p>compra</p>
-        </div>
+        <router-link :to="{ path: `/wa/` + product.slug }">
+          <div class="card-button">
+            <p>compra</p>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>

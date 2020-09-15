@@ -223,6 +223,5 @@ export default {
 }
 .general-container {
   width: 100%;
-  /* overflow-x: hidden; */
 }
 </style>

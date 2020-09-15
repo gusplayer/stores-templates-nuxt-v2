@@ -6,7 +6,7 @@
       <div class="wrapper-banner-img">
         <!-- src="https://res.cloudinary.com/komercia-store/image/upload/q_auto,c_scale,f_auto/v1589443010/c3bvs9jxbimfr5m0prki.png" -->
         <img
-          src="https://res.cloudinary.com/komercia-store/image/upload/q_auto,c_scale,f_auto/v1589443010/c3bvs9jxbimfr5m0prki.png"
+          src="https://www.dinays.co/wp-content/uploads/2018/06/imagen-slider-helado-2-dinays-fruteria-y-heladeria-en-cali.png"
           class="banner"
           alt="Banner tienda"
         />
@@ -46,7 +46,7 @@
         </div>
         <div class="container-tienda-wp">
           <p>
-            <whatsapp-icon class="wp-icon" />Tienda whatsapp
+            <whatsapp-icon class="wp-icon" />Tienda WhatsApp
           </p>
         </div>
         <div class="header-content-items">
@@ -153,7 +153,7 @@ export default {
 }
 .wrapper-banner-img {
   width: 100%;
-  height: 6.3rem;
+  height: 9.5rem;
   overflow: hidden;
   /* border-radius: 0 0 10px 10px; */
 }
@@ -164,16 +164,17 @@ export default {
 }
 .containt-image {
   display: flex;
-  width: 80px;
-  height: 80px;
+  width: 85px;
+  height: 85px;
   left: 20px;
-  top: 4rem;
+  top: 7.5rem;
   /* top: 165px; */
   background-color: white;
   position: absolute;
   overflow: hidden;
   border: solid 1px white;
-  border-radius: 55px;
+  border-radius: 8px;
+  padding: 5px;
   align-items: center;
   box-shadow: 0 0 2px rgba(92, 100, 111, 0.1),
     0 5px 10px rgba(134, 143, 155, 0.08), 0 15px 35px rgba(52, 58, 67, 0.08);
@@ -186,7 +187,7 @@ export default {
   width: 100%;
   object-fit: contain;
   object-position: center;
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 .header {
   display: flex;
@@ -297,7 +298,7 @@ export default {
 .container-tienda-wp {
   background-color: #f9f9f9;
   position: absolute;
-  top: 6.9rem;
+  top: 10.5rem;
   right: 25px;
   border-radius: 15px;
   padding: 4px 8px;
@@ -307,7 +308,7 @@ export default {
 }
 .container-tienda-wp p {
   color: #4c4c4c;
-  font-size: 11px;
+  font-size: 12px;
 }
 .wp-icon {
   font-size: 15px;
@@ -316,7 +317,7 @@ export default {
 }
 @media (max-width: 530px) {
   .header {
-    padding: 55px 20px 0px 20px;
+    padding: 65px 20px 0px 20px;
   }
   .header-content-text {
     margin-left: 0px;
