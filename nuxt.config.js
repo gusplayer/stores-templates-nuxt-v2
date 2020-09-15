@@ -15,8 +15,8 @@ export default {
     ],
   },
   loading: {
-    color: 'blue',
-    height: '5px',
+    color: 'grey',
+    height: '3px',
   },
   css: [
     'element-ui/lib/theme-chalk/index.css',

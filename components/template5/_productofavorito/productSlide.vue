@@ -11,11 +11,15 @@
         </no-ssr>
       </div>
     </div>
-    <div class="swiper-pagination" slot="pagination"></div>
-    <div class="swiper-button-prev btn">
+    <!-- <div
+      class="swiper-pagination"
+      slot="pagination"
+      v-if="this.products.length > 1"
+    ></div> -->
+    <div class="swiper-button-prev btn" v-if="this.products.length > 1">
       <FlechaLeft-icon class="btn-icon" />
     </div>
-    <div class="swiper-button-next btn">
+    <div class="swiper-button-next btn" v-if="this.products.length > 1">
       <FlechaRight-icon class="btn-icon" />
     </div>
   </div>

@@ -397,9 +397,10 @@ export default {
   background: white;
   box-sizing: border-box;
   border-radius: 5px;
-  box-shadow: -6px -6px 10px var(--background_color_2),
-    6px 6px 10px rgba(0, 0, 0, 0.295);
-  border: none;
+  /* box-shadow: -6px -6px 10px var(--background_color_2),
+    6px 6px 10px rgba(0, 0, 0, 0.295); */
+  box-shadow: rgb(187, 187, 187) 0 1px 1px;
+  /* border: grey; */
 }
 .anim {
   transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
