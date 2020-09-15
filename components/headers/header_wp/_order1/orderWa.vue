@@ -152,7 +152,7 @@
                   class="continue_shopping"
                   @click="formOrden = !formOrden"
                 >
-                  <whatsapp-icon class="wp-icon" />Comprar por WhatsApp
+                  <whatsapp-icon class="wp-icon" />Pedido por WhatsApp
                 </button>
                 <!-- <nuxt-link class="conten-btn" to="/wa" @click="closeOrder">
                   <button class="continue_shopping2">Seguir comprando</button>
@@ -173,9 +173,9 @@
       </div>
       <div class="wrapper-items-remove" v-if="formOrden">
         <div class="content-items-form">
-          <p class="form-text">Completá tu pedido</p>
+          <p class="form-text">Completa tu pedido</p>
           <ValidationObserver ref="observer" tag="form" class="contact-content-rigth">
-            <p class="form-subtext">Nombre Completo</p>
+            <p class="form-subtext">Nombre y Apellido</p>
             <validation-provider name="nombre" rules="required" class="content-input">
               <template slot-scope="{ errors }">
                 <input
@@ -193,7 +193,7 @@
                 </span>
               </template>
             </validation-provider>
-            <p class="form-subtext">Teléfono</p>
+            <!-- <p class="form-subtext">Teléfono</p>
             <validation-provider name="celular" rules="required|num" class="content-input">
               <template slot-scope="{ errors }">
                 <input
@@ -210,8 +210,8 @@
                   }}
                 </span>
               </template>
-            </validation-provider>
-            <P class="form-subtext">Dirección Completa (Barrio, Edificio, Apto).</P>
+            </validation-provider>-->
+            <P class="form-subtext">Ciudad</P>
             <validation-provider name="dirreccion" rules="required" class="content-input">
               <template slot-scope="{ errors }">
                 <input
@@ -400,7 +400,7 @@ export default {
       this.$refs.observer.validate().then((response) => {
         if (response) {
           let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
-          let baseUrlPc = 'https://web.whatsapp.com/send?phone=57'
+          let baseUrlPc = 'https://web.whatsapp.com/send?phone='
           let urlProduct
           if (this.dataStore.tienda.dominio) {
             urlProduct = `${this.dataStore.tienda.dominio}wa`
@@ -419,13 +419,14 @@ export default {
           let productList = productString.replace(/[{}"]/g, '')
           let resultproductList = productList.replace(/,/g, '%0A')
 
-          let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%3A%0A$tu%20tienda%20WhatsApp%20Komercia:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${resultproductList}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0A%0ACiudad%3A%20${this.dirreccion}`
+          let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${resultproductList}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.dirreccion}`
 
-          if (this.dataStore.tienda.whatsapp.length > 10) {
-            let phone_number_whatsapp = this.dataStore.tienda.whatsapp
-            if (phone_number_whatsapp.charAt(0) === '+') {
-              phone_number_whatsapp = phone_number_whatsapp.slice(1)
-            }
+          // if (this.dataStore.tienda.whatsapp.length > 10) {
+          if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
+            // let phone_number_whatsapp = this.dataStore.tienda.whatsapp
+            // if (phone_number_whatsapp.charAt(0) == '+') {
+            let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+
             if (this.mobileCheck()) {
               window.open(
                 `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
@@ -440,12 +441,12 @@ export default {
           } else {
             if (this.mobileCheck()) {
               window.open(
-                `${baseUrlMovil}${this.dataStore.tienda.whatsapp}&text=${text}`,
+                `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
                 '_blank'
               )
             } else {
               window.open(
-                `${baseUrlPc}${this.dataStore.tienda.whatsapp}&text=${text}`,
+                `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
                 '_blank'
               )
             }
@@ -697,9 +698,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
-  z-index: 10;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background-color: #fff;
+  /* background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%); */
+  z-index: 1000;
 }
 .content-items-remove {
   width: 100%;
@@ -898,17 +900,17 @@ export default {
   flex: none;
 }
 .continue_shopping {
-  position: absolute;
+  position: fixed;
   z-index: 99;
   bottom: 10px;
   color: white;
   border-radius: 5px;
   border: solid 0px black;
   background-color: black;
-  font-size: 14px;
+  font-size: 15px;
   padding: 8px 10px;
   width: 100%;
-  height: 41px;
+  height: 50px;
   max-width: 340px;
   font-weight: bold;
   cursor: pointer;

@@ -218,7 +218,7 @@ export default {
   /* background-color: #075e54; */
   padding: 3px 12px;
   font-size: 12px;
-  height: 40px;
+  height: 50px;
   font-weight: 600;
   cursor: pointer;
   margin-right: 5px;
