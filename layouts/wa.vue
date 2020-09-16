@@ -222,6 +222,10 @@ export default {
   font-family: 'Poppins', sans-serif !important;
 }
 .general-container {
+  display: flex;
   width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
 }
 </style>
