@@ -173,13 +173,6 @@
                 </span>
               </template>
             </validation-provider>
-            <button
-              class="continue_shopping"
-              v-on:click.prevent="redirectWP()"
-              style="margin-top: 15px;"
-            >
-              <whatsapp-icon class="wp-icon" />Finalizar compra
-            </button>
           </ValidationObserver>
           <label
             for="order_close"
@@ -188,6 +181,13 @@
           >
             <close-icon />
           </label>
+          <button
+            class="continue_shopping"
+            v-on:click.prevent="redirectWP()"
+            style="margin-top: 15px;"
+          >
+            <whatsapp-icon class="wp-icon" />Finalizar compra
+          </button>
         </div>
       </div>
     </div>
@@ -358,25 +358,27 @@ export default {
           } else {
             urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
           }
-          let productosCart = {}
+          let productosCart = []
 
           this.$store.state.productsCart.map((element) => {
             if (element.combinacion) {
-              let productCombinacionString = JSON.stringify(element.combinacion)
-              let productCom = productCombinacionString.replace(/["]/g, '')
-              let productCom2 = productCom.replace(/,/g, '-')
-              Object.assign(productosCart, {
-                [element.nombre]: ` ${productCom2} -> cantidad = ${element.cantidad} -> Valor = ${element.precio}`,
-              })
+              productosCart.push(
+                `${element.cantidad} x ${element.nombre} = Variantes: [${
+                  element.combinacion
+                }] -> Valor: ${element.cantidad * element.precio} !`
+              )
             } else {
-              Object.assign(productosCart, {
-                [element.nombre]: ` cantidad = ${element.cantidad} -> Valor = ${element.precio}`,
-              })
+              productosCart.push(
+                `${element.cantidad} x ${element.nombre} -> Valor: ${
+                  element.cantidad * element.precio
+                }`
+              )
             }
           })
+
           let productString = JSON.stringify(productosCart)
-          let productList = productString.replace(/[{}"]/g, '')
-          let resultproductList = productList.replace(/,/g, '%0A')
+          let productList = productString.replace(/"/g, '')
+          let resultproductList = productList.replace(/!/g, '%0A')
           let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${resultproductList}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.dirreccion}`
 
           if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
@@ -860,8 +862,7 @@ export default {
   bottom: 10px;
   color: white;
   border-radius: 5px;
-  border: solid 0px black;
-  background-color: black;
+  border: none;
   font-size: 15px;
   padding: 8px 10px;
   width: 100%;
@@ -869,18 +870,12 @@ export default {
   max-width: 340px;
   font-weight: bold;
   cursor: pointer;
-  transition: all 200ms ease-in;
   text-decoration: none;
   display: flex;
   justify-content: center;
   text-align: center;
   align-items: center;
-  transition: all ease 0.3s;
   background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
-}
-.continue_shopping:hover {
-  border: solid 2px grey;
-  background-color: grey;
 }
 .conten-btn {
   display: flex;

@@ -359,7 +359,7 @@ export default {
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
-        window.scrollTo(0, 0)
+        window.scrollBy(0, -1500)
       }, 250)
     },
     previousPage() {

@@ -209,12 +209,7 @@
                       >
                         Comprar
                       </button>
-                      <button
-                        disabled
-                        class="btn-disabled"
-                        v-if="spent"
-                        v-on:click="addShoppingCart"
-                      >
+                      <button disabled class="btn-disabled" v-if="spent">
                         Agotado !
                       </button>
                     </div>

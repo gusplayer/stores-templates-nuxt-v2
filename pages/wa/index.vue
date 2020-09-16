@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="container-home">
-      <KoHeaderWp :dataStore="dataStore" />
-    <KCategory :dataStore="dataStore"  />
-    <KProductFavoritos v-if="this.stateBanner"/>  
+    <KoHeaderWp :dataStore="dataStore" />
+    <KCategory :dataStore="dataStore" />
+    <KProductFavoritos v-if="this.stateBanner" />
     <KProductList :dataStore="dataStore" :fullProducts="fullProducts" />
     <KFooterWa :dataStore="dataStore" />
   </div>
@@ -52,4 +52,3 @@ export default {
   margin-bottom: 15px;
 }
 </style>
-

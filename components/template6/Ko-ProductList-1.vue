@@ -412,11 +412,7 @@ export default {
     },
     currentPage() {
       this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollTo(0, 0)
-      }, 250)
+      window.scrollBy(0, -3300)
     },
     previousPage() {
       if (this.previousPage) {
