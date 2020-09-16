@@ -18,7 +18,14 @@
         </div>
         <div class="wrapper-items-icons">
           <div v-for="(item, index) in links" :key="`${index}${item.icon}`">
-            <div class="header-icon" v-if="item.link" :is="item.icon" />
+            <a
+              v-if="item.link"
+              :href="item.link"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <div class="header-icon" :is="item.icon"
+            /></a>
           </div>
         </div>
         <div class="search" v-if="showSearch">
