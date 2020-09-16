@@ -2,7 +2,10 @@
   <div class="wrapper-card">
     <div class="container">
       <div class="wrapper-movil">
-        <router-link :to="{ path: `/wa/` + product.slug }" class="wrapper-image">
+        <router-link
+          :to="{ path: `/wa/` + product.slug }"
+          class="wrapper-image"
+        >
           <img
             v-if="!soldOut"
             :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
@@ -16,38 +19,58 @@
             alt="Product Img"
           />
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
-          <p class="card-info-2" v-if="getFreeShipping == false">Envío gratis !</p>
+          <p class="card-info-2" v-if="getFreeShipping == false">
+            Envío gratis !
+          </p>
         </router-link>
         <div class="wrapper-text">
-          <router-link :to="{ path: `/wa/` + product.slug }" class="content-name-product-movil">
+          <router-link
+            :to="{ path: `/wa/` + product.slug }"
+            class="content-name-product-movil"
+          >
             <p
               class="card-text-movil-title"
               v-if="this.product.nombre.length >= 42"
-            >{{ `${this.product.nombre.slice(0, 42)}..` }}</p>
-            <p class="card-text-movil-title" v-else>{{ `${this.product.nombre.slice(0, 42)}` }}</p>
-            <p class="card-text-movil" v-if="this.product.marca">{{ this.product.marca }}</p>
-            <div class="content-text-price-movil-cart" v-if="this.product.precio">
+            >
+              {{ `${this.product.nombre.slice(0, 42)}..` }}
+            </p>
+            <p class="card-text-movil-title" v-else>
+              {{ `${this.product.nombre.slice(0, 42)}` }}
+            </p>
+            <p class="card-text-movil" v-if="this.product.marca">
+              {{ this.product.marca }}
+            </p>
+            <div
+              class="content-text-price-movil-cart"
+              v-if="this.product.precio"
+            >
               <div class="wrapper-price">
                 <div>
                   <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
                   </p>-->
-                  <div class="content-price" v-if="estadoCart && this.minPrice != this.maxPrice">
+                  <div
+                    class="content-price"
+                    v-if="estadoCart && this.minPrice != this.maxPrice"
+                  >
                     <p
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
-                    >{{ this.minPrice | currency }}</p>
+                    >
+                      {{ this.minPrice | currency }}
+                    </p>
                     <p class="separator-price">-</p>
                     <p
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
-                    >{{ this.maxPrice | currency }}</p>
+                    >
+                      {{ this.maxPrice | currency }}
+                    </p>
                   </div>
                   <div v-else>
-                    <p
-                      class="card-price-2"
-                      v-if="this.product.precio > 0"
-                    >{{ this.product.precio | currency }}</p>
+                    <p class="card-price-2" v-if="this.product.precio > 0">
+                      {{ this.product.precio | currency }}
+                    </p>
                   </div>
                 </div>
                 <!-- <p class="card-descuento">-50%</p> -->
@@ -55,15 +78,29 @@
             </div>
           </router-link>
           <div class="Content-btn-movil">
-            <div class="content-soldOut" v-if="!this.estadoCart && !soldOut && !spent">
-              <div v-on:click="addShoppingCart" class="btn btn-whatsapp" style="margin-right: 5px;">
+            <div
+              class="content-soldOut"
+              v-if="!this.estadoCart && !soldOut && !spent"
+            >
+              <div
+                v-on:click="addShoppingCart"
+                class="btn btn-whatsapp"
+                style="margin-right: 5px;"
+              >
                 <!-- <cartArrowDown class="card-icon-cart" />Agregar -->
-                <img src="../../../assets/img/icon-3.png" width="20px" />
+                <img src="../../../assets/img/icon-3.png" class="icon-shop" />
               </div>
-              <router-link :to="{ path: `/wa/` + product.slug }" class="btn">compra</router-link>
+              <router-link :to="{ path: `/wa/` + product.slug }" class="btn"
+                >compra</router-link
+              >
             </div>
 
-            <router-link :to="{ path: `/wa/` + product.slug }" v-else class="btn">compra</router-link>
+            <router-link
+              :to="{ path: `/wa/` + product.slug }"
+              v-else
+              class="btn"
+              >compra</router-link
+            >
           </div>
         </div>
         <!-- <div class="btn-whatsapp" v-if="dataStore.whatsapp">
@@ -493,6 +530,10 @@ export default {
   flex-direction: row;
   justify-content: space-around;
 }
+.icon-shop {
+  max-width: 20px;
+  max-height: 20px;
+}
 .btn {
   color: white;
   border-radius: 5px;
@@ -510,17 +551,14 @@ export default {
   padding: 6px 10px;
   font-weight: 600;
   color: #445a64;
-  box-shadow: 0 6px 10px 0 rgba(128, 98, 96, 0.16);
-  box-shadow: 0 2px 5px rgba(131, 130, 131, 0.174);
   margin-right: 4px;
   font-size: 12px;
 }
 .btn:hover {
   background-color: grey;
-  border: solid 1px grey;
 }
 .btn-whatsapp {
-  /* border: 1px solid gray; */
+  box-sizing: border-box;
   box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
   margin-right: 10px;
 }

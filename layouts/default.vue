@@ -36,7 +36,7 @@
         >
       </div>
     </div>
-    <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
+    <!-- <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
       <div class="content-cookie">
         <p class="title">
           Este sitio web utiliza cookies para su funcionar correctamente y
@@ -57,7 +57,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div
       class="wrapper-notificacion"
       id="modalNotificacion"

@@ -8,21 +8,32 @@
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >> {{ this.nameCategoryHeader }}</p>
-          <p
-            class="text-categorias-select"
-            v-if="this.nameSubCategoryHeader"
-          >> {{ this.nameSubCategoryHeader }}</p>
+          >
+            > {{ this.nameCategoryHeader }}
+          </p>
+          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
+            > {{ this.nameSubCategoryHeader }}
+          </p>
         </div>
       </div>
       <div>
         <div class="content-item-productos">
           <div class="grid-products">
-            <div v-for="product in filterProduct" :key="product.id" class="content-products">
-              <KoProductCard1 :product="product" :dataStore="dataStore.tienda"></KoProductCard1>
+            <div
+              v-for="product in filterProduct"
+              :key="product.id"
+              class="content-products"
+            >
+              <KoProductCard1
+                :product="product"
+                :dataStore="dataStore.tienda"
+              ></KoProductCard1>
             </div>
           </div>
-          <div v-if="(this.fullProducts.length == 0)" class="content-products-empty">
+          <div
+            v-if="(this.fullProducts.length == 0)"
+            class="content-products-empty"
+          >
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium" v-if="products.length > 16">
@@ -63,6 +74,9 @@ export default {
           maxTMP = product.precio
         }
       })
+    }
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
     }
   },
   data() {
@@ -141,6 +155,9 @@ export default {
     },
     searchValue() {
       return this.$store.state.searchValue
+    },
+    previousPage() {
+      return this.$store.state.previousPage
     },
   },
   methods: {
@@ -258,12 +275,17 @@ export default {
       this.Searchproduct(value)
     },
     currentPage() {
-      // eslint-disable-next-line no-unused-vars
+      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
         window.scrollTo(0, 0)
       }, 250)
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage
+      }
     },
     nameCategoryHeader(value) {
       return value

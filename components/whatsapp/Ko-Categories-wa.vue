@@ -1,12 +1,15 @@
 <template>
   <div class="wrapper_Category">
     <div class="content_Category">
-      <!-- <dir>
-        <p class="text-title">Categorías</p>
-      </dir>-->
       <div class="content-item-category">
-        <div class="tags">
-          <p class="name-category" @click="clear">Todo</p>
+        <div class="tags" :class="idCategory == '' ? 'tags-active' : ''">
+          <p
+            class="name-category"
+            :class="idCategory == '' ? 'name-category-active ' : ''"
+            @click="clear"
+          >
+            Todo
+          </p>
         </div>
         <div
           v-for="categoria in categorias"
@@ -18,7 +21,9 @@
             <p
               class="name-category"
               :class="categoria.id == idCategory ? 'name-category-active' : ''"
-            >{{ categoria.nombre_categoria_producto }}</p>
+            >
+              {{ categoria.nombre_categoria_producto }}
+            </p>
           </div>
         </div>
       </div>
@@ -128,6 +133,7 @@ export default {
       this.add = !this.add
     },
     clear() {
+      this.$store.commit('SET_STATEBANNER', true)
       this.idCategory = ''
       this.$router.push({
         path: '/wa',

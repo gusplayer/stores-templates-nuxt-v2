@@ -333,6 +333,8 @@ export default {
       })
     },
     clear() {
+      this.indexSelect = ''
+      this.indexSelect2 = ''
       this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
@@ -410,6 +412,11 @@ export default {
     },
     currentPage() {
       this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+      let timerTimeout = null
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null
+        window.scrollTo(0, 0)
+      }, 250)
     },
     previousPage() {
       if (this.previousPage) {

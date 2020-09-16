@@ -1,9 +1,8 @@
 <template lang="html">
   <div class="home">
-      <KoHeaderWp :dataStore="dataStore" />
-    <KCategory :dataStore="dataStore"  />
-    <KProductFavoritos />
-  
+    <KoHeaderWp :dataStore="dataStore" />
+    <KCategory :dataStore="dataStore" />
+    <KProductFavoritos v-if="this.stateBanner" />
     <KProductList :dataStore="dataStore" :fullProducts="fullProducts" />
     <KFooterWa :dataStore="dataStore" />
   </div>
@@ -35,7 +34,9 @@ export default {
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },
+    stateBanner() {
+      return this.$store.state.stateBanner
+    },
   },
 }
 </script>
-

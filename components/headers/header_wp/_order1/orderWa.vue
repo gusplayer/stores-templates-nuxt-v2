@@ -19,24 +19,34 @@
                     :key="index"
                   >
                     <div class="photo">
-                      <img :src="idCloudinary(product.foto_cloudinary, 120, 120)" alt="Product Img" />
+                      <img
+                        :src="idCloudinary(product.foto_cloudinary, 120, 120)"
+                        alt="Product Img"
+                      />
                     </div>
                     <div class="name">
-                      <p class="order-text">{{ product.nombre | capitalize }}</p>
+                      <p class="order-text">
+                        {{ product.nombre | capitalize }}
+                      </p>
                       <span>
                         <b class="unidades">{{ product.cantidad }}</b>
-                        <b class="unidades">X {{ product.precio | currency }}</b>
+                        <b class="unidades"
+                          >X {{ product.precio | currency }}</b
+                        >
                       </span>
                       <div v-if="product.combinacion">
                         <el-tag
                           v-for="(productCombinacion,
                           index2) in product.combinacion"
                           :key="index2"
-                        >{{ productCombinacion | capitalize }}</el-tag>
+                          >{{ productCombinacion | capitalize }}</el-tag
+                        >
                       </div>
                     </div>
                     <div class="price">
-                      <p>{{ (product.precio * product.cantidad) | currency }}</p>
+                      <p>
+                        {{ (product.precio * product.cantidad) | currency }}
+                      </p>
                     </div>
                     <boteBasura-icon
                       class="material-icons delete"
@@ -45,85 +55,26 @@
                   </li>
                 </ul>
               </div>
-              <!-- <div v-if="productsCart.length" class="content-remove-cart">
-                <p class="remove-cart" @click="remove = !remove">Vaciar carrito de compras</p>
-              </div>-->
+
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
-                    <!-- <p style="font-weight: bold; font-size: 16px;">Costo domicilio</p> -->
-                    <!-- <details
-                      v-if="
-                        rangosByCiudad.envio_metodo === 'precio_ciudad' &&
-                        shippingCities.length > 0 &&
-                        getFreeShipping == false
-                      "
-                    >
-                      <summary class="text-color">Valor por Ciudad:</summary>
-                      <section>
-                        <ol class="scroll_cart_summary_items_cities">
-                          <li v-for="(ciudad, index) in rangosByCiudad.rangos" :key="ciudad.id">
-                            <div v-if="ciudad.price > 0">
-                              <b>
-                                {{
-                                shippingCities[index].nombre_ciu ===
-                                'Sin especificar'
-                                ? 'Resto del país'
-                                : shippingCities[index].nombre_ciu
-                                }}:
-                              </b>
-                              {{ ciudad.price | currency }}
-                            </div>
-                          </li>
-                        </ol>
-                      </section>
-                    </details>-->
-                    <!-- <div
-                      v-else-if="
-                        rangosByCiudad.envio_metodo === 'tarifa_plana' &&
-                        shipping > 0 &&
-                        getFreeShipping == true
-                      "
-                    >
-                      <li class="text-color">Tarifa plana: {{ rangosByCiudades.valor | currency }}</li>
-                    </div>
-                    <details
-                      v-else-if="
-                        rangosByCiudad.envio_metodo === 'precio' &&
-                        getFreeShipping == true
-                      "
-                    >
-                      <summary class="text-color">Tarifa por precio:</summary>
-                      <section>
-                        <ol class="scroll_cart_summary_items_cities">
-                          <li
-                            v-for="(ciudad,
-                            indexRangos) in rangosByCiudad.rangos"
-                            :key="indexRangos"
-                          >
-                            <div>
-                              <b>{{ ciudad.inicial }} - {{ ciudad.final }}:</b>
-                              {{ ciudad.precio | currency }}
-                            </div>
-                          </li>
-                        </ol>
-                      </section>
-                    </details>-->
-                    <!-- <p v-else-if="shipping && getFreeShipping == false">{{ shipping | currency }}</p> -->
                     <p
                       class="without_shipping_cost"
                       v-if="
                         rangosByCiudad.envio_metodo === 'gratis' &&
                         (shippingCities.length <= 0 && getFreeShipping == false)
                       "
-                    >Envío gratis en toda la tienda</p>
+                    >
+                      Envío gratis en toda la tienda
+                    </p>
                   </span>
                   <span class="order_total_net">
                     <p>Total a pagar</p>
                     <p>
                       {{
-                      (totalCart + (getFreeShipping ? 0 : shipping))
-                      | currency
+                        (totalCart + (getFreeShipping ? 0 : shipping))
+                          | currency
                       }}
                     </p>
                   </span>
@@ -134,15 +85,21 @@
                   <div class="wrapper_photo">
                     <img :src="img" class="photo" alt="empty car" />
                   </div>
-                  <p class="text-cart-empty">Tu carrito de compras ahora está vacío.</p>
+                  <p class="text-cart-empty">
+                    Tu carrito de compras ahora está vacío.
+                  </p>
                 </div>
               </template>
               <div class="content-button">
+                <p class="Quotation-message" v-if="isQuotation()">
+                  Contacte con la tienda para saber los precios de los productos
+                </p>
                 <p
                   class="Quotation-message"
-                  v-if="isQuotation()"
-                >Contacte con la tienda para saber los precios de los productos</p>
-                <p class="Quotation-message" v-if="dataStore.tienda.estado == 0">Tienda cerrada</p>
+                  v-if="dataStore.tienda.estado == 0"
+                >
+                  Tienda cerrada
+                </p>
                 <button
                   v-if="
                     productsCart.length &&
@@ -154,9 +111,6 @@
                 >
                   <whatsapp-icon class="wp-icon" />Pedido por WhatsApp
                 </button>
-                <!-- <nuxt-link class="conten-btn" to="/wa" @click="closeOrder">
-                  <button class="continue_shopping2">Seguir comprando</button>
-                </nuxt-link>-->
               </div>
             </div>
           </template>
@@ -164,7 +118,9 @@
       </div>
       <div class="wrapper-items-remove" v-if="remove">
         <div class="content-items-remove">
-          <p class="text-remove">¿Realmente quiere eliminar todos los productos del carrito?</p>
+          <p class="text-remove">
+            ¿Realmente quiere eliminar todos los productos del carrito?
+          </p>
           <div class="content-btn-remove">
             <button @click="remove = !remove" class="btn-remover-no">No</button>
             <button class="btn-remover-yes" @click="removeCartItems">Si</button>
@@ -174,9 +130,17 @@
       <div class="wrapper-items-remove" v-if="formOrden">
         <div class="content-items-form">
           <p class="form-text">Completa tu pedido</p>
-          <ValidationObserver ref="observer" tag="form" class="contact-content-rigth">
+          <ValidationObserver
+            ref="observer"
+            tag="form"
+            class="contact-content-rigth"
+          >
             <p class="form-subtext">Nombre y Apellido</p>
-            <validation-provider name="nombre" rules="required" class="content-input">
+            <validation-provider
+              name="nombre"
+              rules="required"
+              class="content-input"
+            >
               <template slot-scope="{ errors }">
                 <input
                   name="nombre"
@@ -187,32 +151,16 @@
                   id="ContactName"
                 />
                 <span class="text-error" v-show="errors[0]">
-                  {{
-                  errors[0]
-                  }}
+                  {{ errors[0] }}
                 </span>
               </template>
             </validation-provider>
-            <!-- <p class="form-subtext">Teléfono</p>
-            <validation-provider name="celular" rules="required|num" class="content-input">
-              <template slot-scope="{ errors }">
-                <input
-                  class="input-text"
-                  name="celular"
-                  type="number"
-                  placeholder="Tu teléfono"
-                  v-model="numberphone"
-                  id="ContactPhone"
-                />
-                <span class="text-error" v-show="errors[0]">
-                  {{
-                  errors[0]
-                  }}
-                </span>
-              </template>
-            </validation-provider>-->
             <P class="form-subtext">Ciudad</P>
-            <validation-provider name="dirreccion" rules="required" class="content-input">
+            <validation-provider
+              name="dirreccion"
+              rules="required"
+              class="content-input"
+            >
               <template slot-scope="{ errors }">
                 <input
                   class="input-text"
@@ -221,9 +169,7 @@
                   v-model="dirreccion"
                 />
                 <span class="text-error" v-show="errors[0]">
-                  {{
-                  errors[0]
-                  }}
+                  {{ errors[0] }}
                 </span>
               </template>
             </validation-provider>
@@ -235,7 +181,11 @@
               <whatsapp-icon class="wp-icon" />Finalizar compra
             </button>
           </ValidationObserver>
-          <label for="order_close" @click="formOrden = !formOrden" class="form_close">
+          <label
+            for="order_close"
+            @click="formOrden = !formOrden"
+            class="form_close"
+          >
             <close-icon />
           </label>
         </div>
@@ -277,6 +227,7 @@ export default {
       nombre: '',
       numberphone: '',
       dirreccion: '',
+      productIndexCart: null,
     }
   },
   computed: {
@@ -408,23 +359,27 @@ export default {
             urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
           }
           let productosCart = {}
+
           this.$store.state.productsCart.map((element) => {
-            if (element.nombre && element.precio) {
+            if (element.combinacion) {
+              let productCombinacionString = JSON.stringify(element.combinacion)
+              let productCom = productCombinacionString.replace(/["]/g, '')
+              let productCom2 = productCom.replace(/,/g, '-')
               Object.assign(productosCart, {
-                [element.nombre]: element.precio,
+                [element.nombre]: ` ${productCom2} -> cantidad = ${element.cantidad} -> Valor = ${element.precio}`,
+              })
+            } else {
+              Object.assign(productosCart, {
+                [element.nombre]: ` cantidad = ${element.cantidad} -> Valor = ${element.precio}`,
               })
             }
           })
           let productString = JSON.stringify(productosCart)
           let productList = productString.replace(/[{}"]/g, '')
           let resultproductList = productList.replace(/,/g, '%0A')
-
           let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${resultproductList}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.dirreccion}`
 
-          // if (this.dataStore.tienda.whatsapp.length > 10) {
           if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-            // let phone_number_whatsapp = this.dataStore.tienda.whatsapp
-            // if (phone_number_whatsapp.charAt(0) == '+') {
             let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
 
             if (this.mobileCheck()) {

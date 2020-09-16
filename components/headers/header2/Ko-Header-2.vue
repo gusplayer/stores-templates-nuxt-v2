@@ -78,7 +78,16 @@
       <div id="menu-collapse">
         <div>
           <li @click="clear">
-            <p class="name-category-all">Todos los productos</p>
+            <p
+              class="name-category-all"
+              :class="
+                idCategory == '' && indexSelect == ''
+                  ? 'name-category-all-active'
+                  : ''
+              "
+            >
+              Todos los productos
+            </p>
           </li>
           <div class="menu-grid">
             <div
@@ -86,7 +95,12 @@
               v-for="categoria in categorias"
               :key="categoria.id"
             >
-              <ul class="name-category">
+              <ul
+                class="name-category"
+                :class="
+                  categoria.id == idCategory ? 'name-category-active' : ''
+                "
+              >
                 <li
                   @click="sendCategory(categoria, categoria.id, (ref = false))"
                 >
@@ -100,6 +114,12 @@
                       <li
                         v-if="subcategory.categoria == categoria.id"
                         @click="Sendsubcategory(subcategory.id)"
+                        class="text-subcategoria"
+                        :class="
+                          subcategory.id == indexSelect
+                            ? 'text-subcategoria-active'
+                            : ''
+                        "
                       >
                         {{ subcategory.nombre_subcategoria }}
                       </li>
@@ -217,7 +237,9 @@ export default {
       nameCategory: '',
       nameSubCategory: '',
       selectedSubcategories: [],
+      idCategory: '',
       toggleCategories: true,
+      indexSelect: '',
     }
   },
   computed: {
@@ -232,9 +254,6 @@ export default {
     },
     product() {
       return this.dataStore.productos
-    },
-    fullPathServer() {
-      return this.$store.state.fullPathServer
     },
   },
   methods: {
@@ -288,6 +307,7 @@ export default {
       })
     },
     Sendsubcategory(value) {
+      this.indexSelect = value
       this.$router.push({
         path: '/',
       })
@@ -315,6 +335,7 @@ export default {
       })
     },
     sendCategory(value, categoria, ref) {
+      this.idCategory = categoria
       this.$router.push({
         path: '/',
       })
@@ -346,6 +367,8 @@ export default {
       this.add = !this.add
     },
     clear() {
+      this.idCategory = ''
+      this.indexSelect = ''
       this.showMenu = false
       this.$router.push({
         path: '/',
@@ -503,11 +526,22 @@ export default {
   cursor: pointer;
   padding: 10px 0px;
 }
+.name-category-all-active {
+  font-size: 16px;
+  font-weight: bold;
+  color: red;
+  cursor: pointer;
+  padding: 10px 0px;
+}
 .name-category-all:hover {
   color: var(--btnhover);
 }
 .name-category {
   color: var(--color_text);
+  cursor: pointer;
+}
+.name-category-active {
+  color: red;
   cursor: pointer;
 }
 .name-category li {
@@ -523,10 +557,15 @@ export default {
   margin-bottom: 8px;
   margin-left: 5px;
   font-size: 14px;
-  font-weight: 100;
+  font-weight: 50;
+}
+.text-subcategoria {
   color: var(--color_subtext);
 }
-.subcategoria li:hover {
+.text-subcategoria-active {
+  color: red;
+}
+.text-subcategoria:hover {
   color: var(--color_hover_text);
 }
 .header-content-logo {
