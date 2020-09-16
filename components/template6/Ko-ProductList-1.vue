@@ -460,6 +460,7 @@ export default {
   font-size: 20px;
   text-align: center;
   color: var(--color_text);
+  font-weight: bold;
 }
 .wrapper-productlist {
   width: 100%;
