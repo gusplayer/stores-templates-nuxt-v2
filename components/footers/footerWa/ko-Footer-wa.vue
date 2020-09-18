@@ -49,7 +49,6 @@ export default {
   display: flex;
   justify-content: center;
   height: 60px;
-  background: #fff;
   position: fixed;
   bottom: 0;
   padding: 8px;
@@ -79,7 +78,7 @@ export default {
 .main-container {
   height: 60px;
   width: 100%;
-  background: #fff;
+  /* background: #fff; */
   position: fixed;
   bottom: 0;
   padding: 8px;

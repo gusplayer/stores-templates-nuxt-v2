@@ -49,7 +49,7 @@
             <whatsapp-icon class="wp-icon" />Tienda WhatsApp
           </p>
         </div>
-        <div class="header-content-items">
+        <!-- <div class="header-content-items">
           <div class="wrapper-items-icons">
             <div v-for="(item, index) in links" :key="`${index}${item.icon}`">
               <div class="container-header-icon">
@@ -57,13 +57,13 @@
               </div>
             </div>
           </div>
-          <!-- <div class="header-content-icon">
+          <div class="header-content-icon">
             <div class="header-content-cart" @click="openOrder">
               <cart-icon class="header-icon-cart" />
               <span class="num-items">{{ productsCart }}</span>
             </div>
-          </div>-->
-        </div>
+          </div>
+        </div> -->
       </div>
     </div>
   </div>

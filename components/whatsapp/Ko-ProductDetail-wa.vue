@@ -20,7 +20,9 @@
             </p>
 
             <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">${{ salesData.precio | currency }}</p>
+              <p class="text-precio" v-show="salesData.precio">
+                ${{ salesData.precio | currency }}
+              </p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
 
@@ -34,13 +36,16 @@
             </div>
             <div v-if="this.data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
-                <label for="variant name" class="text-variant">{{ variant.nombre }}:</label>
+                <label for="variant name" class="text-variant"
+                  >{{ variant.nombre }}:</label
+                >
                 <selectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
-                  >{{ item.option }}</option>
+                    >{{ item.option }}</option
+                  >
                 </selectGroup>
               </div>
             </div>
@@ -69,21 +74,24 @@
               <mas-icon class="icon" />
             </button>
             <transition name="slide-fade">
-              <div class="container-alert" v-show="quantityValue == maxQuantityValue">
+              <div
+                class="container-alert"
+                v-show="quantityValue == maxQuantityValue"
+              >
                 <span class="alert">última Unidad!</span>
               </div>
             </transition>
           </div>
-          <div style="width: 100%; height: 100%; margin-left: 10px;">
-            <div class="content_buy_action-responsive" v-if="spent">
-              <p class="card-info-1-res">😥 Producto agotado</p>
-            </div>
-            <button
-              class="btn-responsive"
-              ref="color2"
-              v-if="!spent"
-              v-on:click="addShoppingCart"
-            >😃 Comprar</button>
+          <button
+            class="btn-responsive"
+            ref="color2"
+            v-if="!spent"
+            v-on:click="addShoppingCart"
+          >
+            😃 Comprar
+          </button>
+          <div v-if="spent" class="wrapper-btn">
+            <p class="card-info-1-res">😥 Producto agotado</p>
           </div>
         </div>
       </div>
@@ -93,7 +101,6 @@
 
 <script>
 import axios from 'axios'
-import productSlide from './_productdetails/productSlide'
 import selectGroup from './_productdetails/selectGroup'
 import idCloudinary from '../../mixins/idCloudinary'
 
@@ -105,7 +112,6 @@ export default {
   },
   components: {
     selectGroup,
-    productSlide,
   },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -409,36 +415,38 @@ export default {
     },
     redirectWP() {
       let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
-      let baseUrlPc = 'https://web.whatsapp.com/send?phone=57'
+      let baseUrlPc = 'https://web.whatsapp.com/send?phone='
       let urlProduct
       if (this.dataStore.tienda.dominio) {
-        urlProduct = `${this.dataStore.tienda.dominio}wa/${this.data.detalle.slug}`
+        urlProduct = `${this.dataStore.tienda.dominio}wa`
       } else {
-        urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa/${this.data.detalle.slug}`
+        urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
       }
-      let text = `text=Hola 😀, %0AEstoy en tu tienda y me interesa el producto: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
-      if (this.dataStore.tienda.whatsapp.length > 10) {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp
-        if (phone_number_whatsapp.charAt(0) === '+') {
-          phone_number_whatsapp = phone_number_whatsapp.slice(1)
-        }
+      let text = `Hola 😀, %0AEstoy en tu tienda y me interesa el producto: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
+
+      if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
+        let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+
         if (this.mobileCheck()) {
           window.open(
-            `${baseUrlMovil}${phone_number_whatsapp}&${text}`,
+            `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
             '_blank'
           )
         } else {
-          window.open(`${baseUrlPc}${phone_number_whatsapp}&${text}`, '_blank')
+          window.open(
+            `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
+            '_blank'
+          )
         }
       } else {
         if (this.mobileCheck()) {
           window.open(
-            `${baseUrlMovil}${this.dataStore.tienda.whatsapp}&${text}`,
+            `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
             '_blank'
           )
         } else {
           window.open(
-            `${baseUrlPc}${this.dataStore.tienda.whatsapp}&${text}`,
+            `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
             '_blank'
           )
         }
@@ -529,7 +537,8 @@ export default {
   width: 100%;
   background-color: #fafaf8;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  height: calc(100vh);
 }
 .container-productDetail {
   position: relative;
@@ -671,20 +680,19 @@ export default {
   right: 0;
   width: 100%;
   z-index: 2;
-  background: white;
   display: flex;
   justify-content: center;
-  box-shadow: 0px 2px 2px rgba(52, 58, 67, 0.1),
-    0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
 }
 .ko-input {
   display: flex;
   width: 100%;
+  max-width: 720px;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
-  background: white;
+  padding: 5px 10px;
   position: relative;
+  box-shadow: 0px 2px 2px rgba(52, 58, 67, 0.1),
+    0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
 }
 .quantity-resposive {
   display: flex;
@@ -729,6 +737,21 @@ export default {
   height: 38px;
   width: 3em;
 }
+.btn-responsive {
+  border-radius: var(--radius_btn);
+  color: white;
+  border: solid 0px black;
+  /* background-color: black; */
+  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
+  background-image: linear-gradient(85deg, #48ac98 0%, #45c4aa 100%);
+  box-shadow: 0px 0px 2px rgba(52, 58, 67, 0.1),
+    0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
+  padding: 6px 10px;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  margin-left: 15px;
+}
 .icon {
   font-size: 16px;
   color: black;
@@ -736,6 +759,13 @@ export default {
 }
 .icon:hover {
   color: #000000;
+}
+.wrapper-btn {
+  padding: 5px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .card-info-1-res {
   display: flex;
@@ -750,20 +780,6 @@ export default {
   font-weight: 600;
   width: 100%;
   height: 100%;
-}
-.btn-responsive {
-  border-radius: var(--radius_btn);
-  color: white;
-  border: solid 0px black;
-  /* background-color: black; */
-  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
-  background-image: linear-gradient(85deg, #48ac98 0%, #45c4aa 100%);
-  box-shadow: 0px 0px 2px rgba(52, 58, 67, 0.1),
-    0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
-  padding: 6px 10px;
-  width: 100%;
-  height: 100%;
-  font-size: 14px;
 }
 .card-icon-cart {
   font-size: 20px;
@@ -829,6 +845,7 @@ export default {
   padding: 0px 10px;
   background-color: transparent;
   z-index: 999;
+  cursor: pointer;
 }
 .back-button p {
   background-color: #fafaf8;

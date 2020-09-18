@@ -249,8 +249,11 @@ export default {
           }
           this.$store.commit('UPDATE_CONTENTCART')
           // this.$router.push('/')
-          this.$store.state.openOrder = true
-          this.$store.state.orderComponent = true
+          this.$message({
+            showClose: true,
+            message: 'Se agregó el producto correctamente',
+            type: 'success',
+          })
         }
       }
     },
@@ -535,8 +538,6 @@ export default {
   max-height: 20px;
 }
 .btn {
-  color: white;
-  border-radius: 5px;
   background-color: white;
   padding: 2px 14px;
   width: fit-content;
@@ -553,9 +554,11 @@ export default {
   color: #445a64;
   margin-right: 4px;
   font-size: 12px;
+  border: 1px solid #ececec;
 }
 .btn:hover {
-  background-color: grey;
+  color: black;
+  background-color: #b9b9b9;
 }
 .btn-whatsapp {
   box-sizing: border-box;
