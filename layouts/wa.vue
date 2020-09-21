@@ -1,7 +1,6 @@
 <template>
   <!-- <div :style="themeStyleWa"> -->
   <div class="general-container">
-    <!-- <KoHeaderWp :dataStore="dataStore" /> -->
     <nuxt />
   </div>
 </template>

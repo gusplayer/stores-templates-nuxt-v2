@@ -1,5 +1,5 @@
 <template lang="html">
-  <div style="overflow: hidden;">
+  <div>
     <KoProductDetail />
   </div>
 </template>

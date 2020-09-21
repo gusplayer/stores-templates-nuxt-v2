@@ -11,6 +11,9 @@
               :idYoutube="idYoutube"
             ></productSlide>
           </div>
+          <div class="back-button">
+            <p @click="$router.go(-1)"><</p>
+          </div>
         </div>
         <div class="wrapper-right">
           <div class="content-right">
@@ -54,14 +57,15 @@
                 <whatsapp-icon class="wp-icon" />Más información
               </button>
             </div>
+            <div v-if="data.info.descripcion" class="wrapper-description">
+              <h3 class="text-variant">Descripción</h3>
+              <div
+                class="content-text-desc"
+                v-html="data.info.descripcion"
+              ></div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="back-button">
-        <!-- <router-link :to="{ path: `/wa/`}" class="btn">
-          <p><</p>
-        </router-link>-->
-        <p @click="$router.go(-1)"><</p>
       </div>
       <div class="responsive-purchase">
         <div class="ko-input">
@@ -101,6 +105,7 @@
 
 <script>
 import axios from 'axios'
+import productSlide from './_productdetails/productSlide'
 import selectGroup from './_productdetails/selectGroup'
 import idCloudinary from '../../mixins/idCloudinary'
 
@@ -112,6 +117,7 @@ export default {
   },
   components: {
     selectGroup,
+    productSlide,
   },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -538,6 +544,7 @@ export default {
   background-color: #fafaf8;
   justify-content: center;
   align-items: flex-start;
+  /* height: 100%; */
   height: calc(100vh);
 }
 .container-productDetail {
@@ -555,6 +562,10 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+.wrapper-description {
+  width: 100%;
+  margin-top: 20px;
+}
 .wrapper-left {
   flex: 2;
   width: 100%;
@@ -562,11 +573,31 @@ export default {
   flex-direction: row;
   margin-right: 25px;
   padding-bottom: 10px;
+  position: relative;
+}
+.back-button {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+  padding: 0px 10px;
+  background-color: transparent;
+  z-index: 999;
+  cursor: pointer;
+}
+.back-button p {
+  background-color: #fafaf8;
+  border-radius: 20px;
+  width: 30px;
+  font-size: 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(131, 130, 131, 0.473);
 }
 .photos_responsive {
   width: 100%;
   height: 375px;
-  max-width: 400px;
+  max-width: 375px;
   display: flex;
   box-sizing: border-box;
   overflow: hidden;
@@ -691,6 +722,7 @@ export default {
   align-items: center;
   padding: 5px 10px;
   position: relative;
+  background-color: #fafaf8;
   box-shadow: 0px 2px 2px rgba(52, 58, 67, 0.1),
     0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
 }
@@ -815,7 +847,6 @@ export default {
   border-radius: 5px;
   /* border: solid 1px #25d366; */
   background-color: #445a64;
-
   padding: 8px 3px;
   font-size: 12px;
   width: 100%;
@@ -836,29 +867,10 @@ export default {
   margin-right: 4px;
   margin-bottom: -2px;
 }
-.back-button {
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  height: 30px;
-  margin-top: 10px;
-  padding: 0px 10px;
-  background-color: transparent;
-  z-index: 999;
-  cursor: pointer;
-}
-.back-button p {
-  background-color: #fafaf8;
-  border-radius: 20px;
-  width: 30px;
-  font-size: 20px;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(131, 130, 131, 0.473);
-}
 
 @media (max-width: 800px) {
   .container-productDetail {
-    padding: 5px 5px 150px 5px;
+    padding: 0px 0px 40px 0px;
   }
   .section {
     flex-direction: column;
@@ -867,6 +879,7 @@ export default {
   .wrapper-left {
     justify-content: center;
     padding-bottom: 0px;
+    margin-right: 0px;
   }
   .wrapper-right {
     padding-bottom: 0px;
