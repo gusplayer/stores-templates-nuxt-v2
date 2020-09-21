@@ -567,11 +567,11 @@ export default {
   margin-top: 20px;
 }
 .wrapper-left {
-  flex: 2;
+  flex: 1;
   width: 100%;
   display: flex;
   flex-direction: row;
-  margin-right: 25px;
+  margin-right: 15px;
   padding-bottom: 10px;
   position: relative;
 }
