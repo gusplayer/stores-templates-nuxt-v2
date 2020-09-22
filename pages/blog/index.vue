@@ -1,7 +1,6 @@
 <template lang="html">
   <div class="home">
     <KoBlog />
-    <p />
   </div>
 </template>
 
