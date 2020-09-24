@@ -5,56 +5,56 @@
     </div>
     <div class="container-favorite">
       <div class="card-favorite" v-for="product in orderproduct">
-        <img
-          v-if="!soldOut"
-          :src="idCloudinary(product.foto_cloudinary, 250, 250)"
-          class="product-image"
-          alt="Product Img"
-        />
-        <img
-          v-if="soldOut"
-          :src="idCloudinary(product.foto_cloudinary, 150, 150)"
-          class="product-image product-image-soldOut"
-          alt="Product Img"
-        />
-        <p class="card-text-movil-title" v-if="product.nombre.length >= 19">
-          {{ `${product.nombre.slice(0, 19)}..` }}
-        </p>
-        <p class="card-text-movil-title" v-else>
-          {{ `${product.nombre.slice(0, 39)}` }}
-        </p>
-        <div>
-          <div v-if="product.precio">
-            <!-- <p class="card-price-1-movil" v-if="product.precio > 0">
+        <router-link :to="{ path: `/wa/` + product.slug }">
+          <img
+            v-if="!soldOut"
+            :src="idCloudinary(product.foto_cloudinary, 250, 250)"
+            class="product-image"
+            alt="Product Img"
+          />
+          <img
+            v-if="soldOut"
+            :src="idCloudinary(product.foto_cloudinary, 150, 150)"
+            class="product-image product-image-soldOut"
+            alt="Product Img"
+          />
+          <p class="card-text-movil-title" v-if="product.nombre.length >= 19">
+            {{ `${product.nombre.slice(0, 19)}..` }}
+          </p>
+          <p class="card-text-movil-title" v-else>
+            {{ `${product.nombre.slice(0, 39)}` }}
+          </p>
+          <div>
+            <div v-if="product.precio">
+              <!-- <p class="card-price-1-movil" v-if="product.precio > 0">
                   $ {{ product.precio }}
               </p>-->
-            <div
-              class="content-price"
-              v-if="estadoCart && minPrice != maxPrice"
-            >
-              <p
-                class="card-price-2"
-                v-if="product.precio > 0 || product.precio"
+              <div
+                class="content-price"
+                v-if="estadoCart && minPrice != maxPrice"
               >
-                {{ minPrice | currency }}
-              </p>
-              <p class="separator-price">-</p>
-              <p
-                class="card-price-2"
-                v-if="product.precio > 0 || product.precio"
-              >
-                {{ maxPrice | currency }}
-              </p>
+                <p
+                  class="card-price-2"
+                  v-if="product.precio > 0 || product.precio"
+                >
+                  {{ minPrice | currency }}
+                </p>
+                <p class="separator-price">-</p>
+                <p
+                  class="card-price-2"
+                  v-if="product.precio > 0 || product.precio"
+                >
+                  {{ maxPrice | currency }}
+                </p>
+              </div>
+              <div v-else>
+                <p class="card-price-2" v-if="product.precio > 0">
+                  {{ product.precio | currency }}
+                </p>
+              </div>
             </div>
-            <div v-else>
-              <p class="card-price-2" v-if="product.precio > 0">
-                {{ product.precio | currency }}
-              </p>
-            </div>
+            <div v-else class="separador-price"></div>
           </div>
-          <div v-else class="separador-price"></div>
-        </div>
-        <router-link :to="{ path: `/wa/` + product.slug }">
           <div class="card-button">
             <p>compra</p>
           </div>
@@ -169,6 +169,8 @@ export default {
   text-align: center;
   font-size: 11px;
   height: 34px;
+  text-decoration: none;
+  color: black;
 }
 .card-price-2 {
   font-size: 13px;
