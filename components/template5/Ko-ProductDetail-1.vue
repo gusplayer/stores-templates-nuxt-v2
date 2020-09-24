@@ -190,7 +190,6 @@
                       :title="sharing.title"
                       :description="sharing.description"
                       :quote="sharing.quote"
-                      :hashtags="sharing.hashtags"
                       :style="{ color: network.color }"
                     >
                       <div :is="network.icon" class="icon-shared" />
@@ -379,7 +378,6 @@ export default {
         title: '',
         description: '',
         quote: '',
-        hashtags: '',
       },
       networks: [
         {
@@ -476,11 +474,9 @@ export default {
               estado: true,
             }
             this.sharing.url = window.location.href
-            this.sharing.title = response.data.detalle.nombre
-            this.sharing.description = `Producto de la tienda ${this.dataStore.tienda.nombre}`
-            this.sharing.quote = `Producto de la tienda ${this.dataStore.tienda.nombre}`
-            this.sharing.hashtags = `Komercia, ${this.dataStore.tienda.subdominio}`
-
+            this.sharing.title = `Te recomiendo: ${response.data.detalle.nombre}`
+            this.sharing.description = `Te recomiendo: ${response.data.detalle.nombre} de la tienda ${this.dataStore.tienda.nombre}, Link del producto ${window.location.href}`
+            this.sharing.quote = `Te recomiendo: ${response.data.detalle.nombre} de la tienda ${this.dataStore.tienda.nombre}, Link del producto ${window.location.href}`
             this.maxQuantityValue = this.data.info.inventario
             this.setOptionEnvio()
             for (const [

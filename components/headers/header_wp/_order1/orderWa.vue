@@ -157,6 +157,42 @@
             </validation-provider>
             <P class="form-subtext">Ciudad</P>
             <validation-provider
+              name="ciudad"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  class="input-text"
+                  name="ciudad"
+                  placeholder="Tu ciudad"
+                  v-model="ciudad"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
+            <P class="form-subtext">Barrio</P>
+            <validation-provider
+              name="barrio"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  class="input-text"
+                  name="barrio"
+                  placeholder="Tu barrio"
+                  v-model="barrio"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
+            <P class="form-subtext">Dirección</P>
+            <validation-provider
               name="dirreccion"
               rules="required"
               class="content-input"
@@ -226,6 +262,8 @@ export default {
       formOrden: false,
       nombre: '',
       numberphone: '',
+      ciudad: '',
+      barrio: '',
       dirreccion: '',
       productIndexCart: null,
     }
@@ -362,10 +400,15 @@ export default {
 
           this.$store.state.productsCart.map((element) => {
             if (element.combinacion) {
+              let combiString = JSON.stringify(element.combinacion)
+              let combiList = combiString.replace(/"/g, '')
+              let resultcombitList = combiList.replace(/,/g, ' - ')
               productosCart.push(
-                `${element.cantidad} x ${element.nombre} = Variantes: [${
-                  element.combinacion
-                }] -> Valor: ${element.cantidad * element.precio} !`
+                `${element.cantidad} x ${
+                  element.nombre
+                } = Variantes: ${resultcombitList} -> Valor: ${
+                  element.cantidad * element.precio
+                }`
               )
             } else {
               productosCart.push(
@@ -378,8 +421,9 @@ export default {
 
           let productString = JSON.stringify(productosCart)
           let productList = productString.replace(/"/g, '')
-          let resultproductList = productList.replace(/!/g, '%0A')
-          let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${resultproductList}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.dirreccion}`
+          let resultproductList = productList.replace(/,/g, '%0A')
+          let result = resultproductList.slice(1, -1)
+          let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
 
           if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
             let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
