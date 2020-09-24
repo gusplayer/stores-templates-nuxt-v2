@@ -84,6 +84,9 @@ export default {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
+    if (this.$nuxt.$data.layoutName == 'unicentro') {
+      this.$store.commit('SET_LAYOUTUNICENTRO', true)
+    }
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda

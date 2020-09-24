@@ -34,7 +34,7 @@ import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
 import KProductList from '../../components/template5/Ko-ProductList-1'
 import KNewsletter from '../../components/template5/Ko-Newsletter-1'
 export default {
-  layout: 'default',
+  layout: 'unicentro',
   components: {
     KProductList,
     KNewsletter,

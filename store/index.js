@@ -191,9 +191,13 @@ export const state = () => ({
       slug: 'Blog-numero-dos',
     },
   ],
+  layoutUnicentro: false,
 })
 
 export const mutations = {
+  SET_LAYOUTUNICENTRO(state, value) {
+    state.layoutUnicentro = value
+  },
   SET_PREVIOUSPAGE(state, value) {
     state.previousPage = value
   },

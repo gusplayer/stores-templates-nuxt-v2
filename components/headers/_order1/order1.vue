@@ -249,6 +249,9 @@ export default {
     }
   },
   computed: {
+    layourUnicentro() {
+      return this.$store.state.layoutUnicentro
+    },
     configHttp() {
       return this.$store.state.configHttp
     },
@@ -372,8 +375,11 @@ export default {
       }
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
-        location.href = `https://checkout.komercia.co/?params=${json}`
-        // window.open(`https://checkout.komercia.co/?params=${json}`)
+        if (this.layourUnicentro == true) {
+          window.open(`https://checkout.komercia.co/?params=${json}`)
+        } else {
+          location.href = `https://checkout.komercia.co/?params=${json}`
+        }
       }
     },
     filterCities() {
