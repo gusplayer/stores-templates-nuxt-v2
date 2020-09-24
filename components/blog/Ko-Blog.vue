@@ -8,7 +8,7 @@
         <div class="content-item-productos">
           <div class="grid-products">
             <div
-              v-for="article in articles"
+              v-for="article in filterArticles"
               :key="article.id"
               class="content-products"
             >
@@ -16,15 +16,15 @@
             </div>
           </div>
           <div v-if="(articles.length == 0)" class="content-products-empty">
-            <p>No se encontraron articulos.</p>
+            <p>No se encontraron artículos.</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="articles.length > 16">
+            <div class="product_pagination" v-if="articles.length > 12">
               <el-pagination
                 background
                 layout="prev, pager, next"
                 :total="articles.length"
-                :page-size="16"
+                :page-size="12"
                 :current-page.sync="currentPage"
                 class="pagination"
               ></el-pagination>
@@ -50,6 +50,11 @@ export default {
   computed: {
     articles() {
       return this.$store.state.articles
+    },
+    filterArticles() {
+      const initial = this.currentPage * 12 - 12
+      const final = initial + 12
+      return this.articles.slice(initial, final)
     },
   },
 }
