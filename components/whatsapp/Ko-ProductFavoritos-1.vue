@@ -7,15 +7,8 @@
       <div class="card-favorite" v-for="product in orderproduct">
         <router-link :to="{ path: `/wa/` + product.slug }">
           <img
-            v-if="!soldOut"
             :src="idCloudinary(product.foto_cloudinary, 250, 250)"
             class="product-image"
-            alt="Product Img"
-          />
-          <img
-            v-if="soldOut"
-            :src="idCloudinary(product.foto_cloudinary, 150, 150)"
-            class="product-image product-image-soldOut"
             alt="Product Img"
           />
           <p class="card-text-movil-title" v-if="product.nombre.length >= 19">
@@ -29,25 +22,7 @@
               <!-- <p class="card-price-1-movil" v-if="product.precio > 0">
                   $ {{ product.precio }}
               </p>-->
-              <div
-                class="content-price"
-                v-if="estadoCart && minPrice != maxPrice"
-              >
-                <p
-                  class="card-price-2"
-                  v-if="product.precio > 0 || product.precio"
-                >
-                  {{ minPrice | currency }}
-                </p>
-                <p class="separator-price">-</p>
-                <p
-                  class="card-price-2"
-                  v-if="product.precio > 0 || product.precio"
-                >
-                  {{ maxPrice | currency }}
-                </p>
-              </div>
-              <div v-else>
+              <div>
                 <p class="card-price-2" v-if="product.precio > 0">
                   {{ product.precio | currency }}
                 </p>
