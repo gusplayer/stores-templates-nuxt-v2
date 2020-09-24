@@ -37,7 +37,7 @@ export default {
     { src: '~plugins/ga.js', mode: 'client' },
     { src: '~/plugins/gtm', mode: 'client' },
     { src: '~/plugins/facebook-pixel', mode: 'client' },
-    // { src: '~/plugins/aos', ssr: false },
+    { src: '~plugins/SocialSharing.js', ssr: false },
   ],
 
   modules: [

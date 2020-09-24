@@ -58,7 +58,7 @@ export default {
 .wrapper_error {
   display: flex;
   width: 100%;
-  background-color: white;
+  background: #efefef;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -67,7 +67,7 @@ export default {
   width: 100%;
   max-width: 1300px;
   /* height: calc(100vh - 432px); */
-  padding: 60px 20px 60px 20px;
+  padding: 20px 20px 60px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,10 +77,7 @@ export default {
   font-size: 30px;
   font-weight: bold;
   color: black;
-  margin-bottom: 50px;
-}
-.logokomercia {
-  width: 200px;
+  margin-bottom: 30px;
 }
 .content-item-productos {
   display: flex;
@@ -93,7 +90,7 @@ export default {
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(250px, 2fr));
+  grid-template-columns: repeat(3, minmax(250px, 2fr));
   grid-column-gap: 25px;
   grid-row-gap: 30px;
   box-sizing: border-box;
@@ -152,81 +149,9 @@ export default {
   background-color: var(--color_icon);
   color: white;
 }
-@media (max-width: 1290px) {
+@media (max-width: 800px) {
   .grid-products {
-    grid-template-columns: repeat(4, minmax(240px, 2fr));
     grid-column-gap: 15px;
-    grid-row-gap: 30px;
-  }
-}
-@media (max-width: 1265px) {
-  .grid-products {
-    grid-template-columns: repeat(4, minmax(240px, 2fr));
-    grid-column-gap: 10px;
-    grid-row-gap: 30px;
-  }
-}
-@media (max-width: 1250px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(250px, 2fr));
-    grid-column-gap: 25px;
-    grid-row-gap: 30px;
-  }
-}
-@media (max-width: 1060px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(250px, 2fr));
-    grid-column-gap: 20px;
-    grid-row-gap: 30px;
-  }
-}
-@media (max-width: 1050px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
-    grid-column-gap: 20px;
-    grid-row-gap: 30px;
-  }
-}
-@media (max-width: 1020px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
-    grid-column-gap: 15px;
-    grid-row-gap: 30px;
-  }
-}
-@media (max-width: 1010px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
-    grid-column-gap: 10px;
-  }
-}
-@media (max-width: 1000px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-column-gap: 25px;
-    grid-row-gap: 30px;
-  }
-}
-
-@media (max-width: 790px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-column-gap: 20px;
-    grid-row-gap: 30px;
-  }
-}
-@media (max-width: 780px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-column-gap: 16px;
-    grid-row-gap: 30px;
-  }
-}
-@media (max-width: 775px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
   }
 }
 
@@ -243,6 +168,8 @@ export default {
   }
   .grid-products {
     grid-template-columns: repeat(2, minmax(10px, 2fr));
+    grid-row-gap: 15px;
+    grid-column-gap: 20px;
   }
   .dropbtn {
     margin-left: 5px;
@@ -254,16 +181,9 @@ export default {
     padding: 0px 15px;
   }
 }
-@media (max-width: 700px) {
-  .content-items-categorias {
-    margin-left: 5px;
-    margin-bottom: 0px;
-  }
-}
-
-@media (max-width: 450px) {
+@media (max-width: 585px) {
   .grid-products {
-    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    grid-template-columns: repeat(1, minmax(10px, 2fr));
   }
   .content-item-productos {
     padding: 5px;

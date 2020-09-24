@@ -373,6 +373,7 @@ export default {
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
         location.href = `https://checkout.komercia.co/?params=${json}`
+        // window.open(`https://checkout.komercia.co/?params=${json}`)
       }
     },
     filterCities() {

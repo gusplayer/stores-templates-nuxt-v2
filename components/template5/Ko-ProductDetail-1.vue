@@ -178,6 +178,24 @@
                       Agotado !
                     </button>
                   </div>
+                  <div class="content-shared">
+                    <p class="text-unidades" style="margin-right: 10px;">
+                      Compartir:
+                    </p>
+                    <ShareNetwork
+                      v-for="network in this.networks"
+                      :network="network.network"
+                      :key="network.network"
+                      :url="sharing.url"
+                      :title="sharing.title"
+                      :description="sharing.description"
+                      :quote="sharing.quote"
+                      :hashtags="sharing.hashtags"
+                      :style="{ color: network.color }"
+                    >
+                      <div :is="network.icon" class="icon-shared" />
+                    </ShareNetwork>
+                  </div>
                   <div class="content-float-info" id="sticky">
                     <p class="text-name">{{ data.detalle.nombre }}</p>
                     <p class="text-marca">
@@ -356,6 +374,25 @@ export default {
           prevEl: '.swiper-prev',
         },
       },
+      sharing: {
+        url: '',
+        title: '',
+        description: '',
+        quote: '',
+        hashtags: '',
+      },
+      networks: [
+        {
+          network: 'facebook',
+          icon: 'facebook-icon',
+          color: '#1877f2',
+        },
+        {
+          network: 'whatsapp',
+          icon: 'whatsapp-icon',
+          color: '#25d366',
+        },
+      ],
     }
   },
   computed: {
@@ -438,6 +475,12 @@ export default {
               sku: this.data.info.sku,
               estado: true,
             }
+            this.sharing.url = window.location.href
+            this.sharing.title = response.data.detalle.nombre
+            this.sharing.description = `Producto de la tienda ${this.dataStore.tienda.nombre}`
+            this.sharing.quote = `Producto de la tienda ${this.dataStore.tienda.nombre}`
+            this.sharing.hashtags = `Komercia, ${this.dataStore.tienda.subdominio}`
+
             this.maxQuantityValue = this.data.info.inventario
             this.setOptionEnvio()
             for (const [
@@ -973,7 +1016,20 @@ i.close {
 .content-button {
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
+  margin-top: 15px;
+}
+.content-shared {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+.icon-shared {
+  font-size: 25px;
+  margin-right: 5px;
+  bottom: 2px;
+}
+.icon-shared:hover {
+  color: black;
 }
 .content-float-info {
   padding-top: 10px;
@@ -1025,7 +1081,7 @@ i.close {
   position: relative;
   box-sizing: border-box;
   max-width: 240px;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
 }
 .text-quantity {
   font-size: 14px;

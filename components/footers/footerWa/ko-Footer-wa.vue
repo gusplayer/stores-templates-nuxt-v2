@@ -54,6 +54,7 @@ export default {
   padding: 8px;
   z-index: 999;
   max-width: 900px;
+  background: white;
 }
 .wrapper-footer {
   background: #25d366;
