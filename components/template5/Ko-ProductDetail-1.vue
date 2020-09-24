@@ -332,7 +332,7 @@ export default {
         sticky.style.position = 'static'
         sticky.style.top = ''
       }
-      if (window.pageYOffset >= 843) {
+      if (window.pageYOffset >= 700) {
         sticky.style.display = 'none'
         sticky.style.position = 'static'
         sticky.style.top = ''
