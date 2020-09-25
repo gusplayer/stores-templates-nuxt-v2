@@ -35,12 +35,11 @@ export default {
   width: 100%;
   /* background-color: var(--background_color_2); */
   background: #efefef;
-
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-top: 10px;
+  padding-top: 30px;
 }
 .swiper-container {
   width: 100%;

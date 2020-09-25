@@ -321,17 +321,11 @@ export default {
     }
     window.addEventListener('scroll', function () {
       var sticky = document.getElementById('sticky')
-      // console.log(window.pageYOffset)
       if (window.pageYOffset >= 376 && screen.width > 725 && sticky) {
         sticky.style.display = 'flex'
         sticky.style.position = 'fixed'
         sticky.style.top = '88px'
       } else {
-        sticky.style.display = 'none'
-        sticky.style.position = 'static'
-        sticky.style.top = ''
-      }
-      if (window.pageYOffset >= 700) {
         sticky.style.display = 'none'
         sticky.style.position = 'static'
         sticky.style.top = ''
@@ -761,13 +755,15 @@ export default {
   padding: 50px 30px 30px 30px;
 }
 .section {
+  /* z-index: ; */
   width: 100%;
   display: flex;
   box-shadow: 10px 14px 28px #ededed, -10px -14px 28px #f1f1f1;
 }
 .section-suggesProduct {
+  z-index: 0;
   width: 100%;
-  margin-top: 30px;
+  /* padding-top: 30px; */
 }
 .wrapper-category {
   display: flex;
@@ -1028,14 +1024,16 @@ i.close {
   color: black;
 }
 .content-float-info {
-  padding-top: 10px;
+  z-index: 3;
   width: 100%;
   max-width: 385px;
-  display: none;
+  padding-top: 10px;
+  /* padding-bottom: 10px; */
   flex-direction: column;
-  background: #efefef;
+  display: none;
+  background: #efefef !important;
   transition: all 2s ease-out;
-  z-index: 3 !important;
+  border-radius: 5px;
 }
 .whatsapp {
   fill: #27d367;
