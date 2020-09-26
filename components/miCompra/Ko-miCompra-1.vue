@@ -403,9 +403,9 @@ export default {
       }
     },
     GET_ORDEN() {
-      this.$router.replace({ query: {} })
-      return axios
-        .get(`https://api2.komercia.co/api/orden/582/${this.numOrden}`, {
+      this.$router.replace({ query: {}})
+      return  axios
+        .get(`https://api2.komercia.co/api/orden/${this.dataStore.tienda.id_tienda}/${this.numOrden}`, {
           headers: {
             'content-type': 'application/json',
             'Access-Control-Allow-Origin': '*',
@@ -482,7 +482,7 @@ export default {
 .wrapper_micompra {
   display: flex;
   width: 100%;
-
+  height: 100%;
   background-color: var(--background_color_2);
   justify-content: center;
   align-items: center;
@@ -490,7 +490,7 @@ export default {
   height: 100%;
 }
 .contenedor {
-  height: calc(100vh - 270px);
+  height: 100%;
   width: 100%;
   max-width: 1300px;
   padding: 60px 20px 60px 20px;
