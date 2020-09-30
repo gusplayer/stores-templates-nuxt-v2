@@ -182,7 +182,8 @@
                   class="Quotation-message"
                   v-if="productsCart.length && this.shippingTarifaPrecio == 0"
                 >
-                  Rango de valor no está definido
+                  Contacte con la tienda, Rango de precios del domicilio no está
+                  definido
                 </p>
                 <p
                   class="Quotation-message"
