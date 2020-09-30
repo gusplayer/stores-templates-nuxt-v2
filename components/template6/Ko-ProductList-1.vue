@@ -506,6 +506,7 @@ export default {
   color: var(--color_subtext);
   margin-bottom: 10px;
   margin-left: 5px;
+  cursor: pointer;
 }
 .text-categoria-active {
   color: var(--color_hover_text);
