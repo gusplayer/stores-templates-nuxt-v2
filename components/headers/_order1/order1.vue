@@ -113,8 +113,12 @@
                         getFreeShipping == true
                       "
                     >
-                      <p class="text-color text-TarifaPrecio">
-                        {{ this.shippingTarifaPrecio }}
+                      <p
+                        v-if="this.shippingTarifaPrecio > 0"
+                        class="text-color text-TarifaPrecio"
+                      >
+                        Tarifa por precio:
+                        {{ this.shippingTarifaPrecio | currency }}
                       </p>
                       <details>
                         <summary class="text-color">Rango de precios: </summary>
@@ -176,6 +180,12 @@
                 </p>
                 <p
                   class="Quotation-message"
+                  v-if="productsCart.length && this.shippingTarifaPrecio == 0"
+                >
+                  Rango de valor no está definido
+                </p>
+                <p
+                  class="Quotation-message"
                   v-if="dataStore.tienda.estado == 0"
                 >
                   Tienda cerrada
@@ -184,7 +194,8 @@
                   v-if="
                     productsCart.length &&
                     !isQuotation() &&
-                    dataStore.tienda.estado == 1
+                    dataStore.tienda.estado == 1 &&
+                    this.shippingTarifaPrecio > 0
                   "
                   class="continue_shopping"
                   @click="GoPayments"
@@ -320,18 +331,19 @@ export default {
   methods: {
     shippingPrecio() {
       if (this.rangosByCiudades.envio_metodo == 'precio') {
-        this.rangosByCiudades.rangos.map((rango) => {
+        let result = this.rangosByCiudades.rangos.find((rango) => {
           if (
             this.totalCart >= rango.inicial &&
             this.totalCart <= rango.final
           ) {
-            if (rango.precio > 0) {
-              this.shippingTarifaPrecio = `Tarifa por precio: $${rango.precio}`
-            } else {
-              this.shippingTarifaPrecio = 'El rango no está definido'
-            }
+            return rango
           }
         })
+        if (result) {
+          this.shippingTarifaPrecio = result.precio
+        } else {
+          this.shippingTarifaPrecio = 0
+        }
       }
     },
     isQuotation() {
@@ -419,6 +431,9 @@ export default {
         this.tempCart = this.productsCart
         this.shippingPrecio()
       }
+    },
+    totalCart() {
+      this.shippingPrecio()
     },
   },
   filters: {
