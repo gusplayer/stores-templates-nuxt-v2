@@ -59,7 +59,6 @@
             </form>
           </div>
         </div>
-
         <div class="header-content-icon">
           <div class="header-content-cart" @click="openOrder">
             <cart-icon class="header-icon-cart" />
@@ -74,7 +73,7 @@
     </div>
     <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
       <div id="menu-collapse">
-        <div>
+        <div class="wrapper-meni-grid">
           <li @click="clear">
             <p
               class="name-category-all"
@@ -88,11 +87,7 @@
             </p>
           </li>
           <div class="menu-grid">
-            <div
-              class="container-category"
-              v-for="categoria in categorias"
-              :key="categoria.id"
-            >
+            <div v-for="categoria in categorias" :key="categoria.id">
               <ul
                 class="name-category"
                 :class="
@@ -497,27 +492,42 @@ export default {
   border-top: 1px solid #aba4a466;
   margin: 0 auto;
 }
-.menu-grid {
+.wrapper-meni-grid {
   flex: 2;
   width: 100%;
   max-width: 1000px;
   max-height: 560px;
-  margin-right: 1px;
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-row-gap: 0;
-  grid-column-gap: 13px;
   overflow-y: auto;
 }
-.menu-grid::-webkit-scrollbar {
-  background: var(--background_color_1);
-  width: 8px;
+.menu-grid {
+  width: 100%;
+  margin-right: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 30px;
+  row-gap: 10px;
 }
-.menu-grid::-webkit-scrollbar-track {
+.wrapper-meni-grid::-webkit-scrollbar {
+  border: 1px solid rgba(202, 202, 202, 0.322);
+  background: transparent;
+  width: 6px;
+}
+.wrapper-meni-grid::-webkit-scrollbar-track {
   border-radius: 10px;
 }
-.menu-grid::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_icon));
+.wrapper-meni-grid::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    170deg,
+    rgba(145, 145, 145, 1) 0%,
+    rgb(44, 44, 44) 60%
+  );
+}
+.wrapper-meni-grid::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    170deg,
+    rgb(102, 102, 102) 0%,
+    rgba(0, 0, 0, 1) 60%
+  );
   border-radius: 10px;
 }
 .name-category-all {
@@ -685,11 +695,6 @@ export default {
 .responsive {
   display: none;
 }
-.container-category {
-  display: inline-block;
-  width: 100%;
-}
-
 .product-img-container {
   flex: 1;
   max-width: 250px;
