@@ -107,30 +107,35 @@
                         Tarifa plana: {{ rangosByCiudades.valor | currency }}
                       </li>
                     </div>
-                    <details
+                    <div
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'precio' &&
                         getFreeShipping == true
                       "
                     >
-                      <summary class="text-color">Tarifa por precio:</summary>
-                      <section>
-                        <ol class="scroll_cart_summary_items_cities">
-                          <li
-                            v-for="(ciudad,
-                            indexRangos) in rangosByCiudad.rangos"
-                            :key="indexRangos"
-                          >
-                            <div>
-                              <b>
-                                {{ ciudad.inicial }} - {{ ciudad.final }}:
-                              </b>
-                              {{ ciudad.precio | currency }}
-                            </div>
-                          </li>
-                        </ol>
-                      </section>
-                    </details>
+                      <p class="text-color text-TarifaPrecio">
+                        {{ this.shippingTarifaPrecio }}
+                      </p>
+                      <details>
+                        <summary class="text-color">Rango de precios: </summary>
+                        <section>
+                          <ol class="scroll_cart_summary_items_cities">
+                            <li
+                              v-for="(ciudad,
+                              indexRangos) in rangosByCiudad.rangos"
+                              :key="indexRangos"
+                            >
+                              <div>
+                                <b>
+                                  {{ ciudad.inicial }} - {{ ciudad.final }}:
+                                </b>
+                                {{ ciudad.precio | currency }}
+                              </div>
+                            </li>
+                          </ol>
+                        </section>
+                      </details>
+                    </div>
                     <p v-else-if="shipping && getFreeShipping == false">
                       {{ shipping | currency }}
                     </p>
@@ -237,6 +242,9 @@ export default {
       this.filterCities()
     }
     this.$store.commit('CALCULATE_TOTALCART')
+    if (this.rangosByCiudades.envio_metodo == 'precio') {
+      this.shippingPrecio()
+    }
   },
   data() {
     return {
@@ -246,6 +254,7 @@ export default {
       shippingCities: [],
       rangosByCiudades: [],
       remove: false,
+      shippingTarifaPrecio: '',
     }
   },
   computed: {
@@ -300,21 +309,6 @@ export default {
           case 'tarifa_plana':
             return shipping.valor
             break
-          case 'precio_ciudad':
-            let result = shipping.rangos.find((rango) => {
-              if (
-                this.totalCart >= rango.inicial &&
-                this.totalCart <= rango.final
-              ) {
-                return rango
-              }
-            })
-            if (result) {
-              return result.precio
-            } else {
-              return 0
-            }
-            break
           default:
             return 0
         }
@@ -324,6 +318,22 @@ export default {
     },
   },
   methods: {
+    shippingPrecio() {
+      if (this.rangosByCiudades.envio_metodo == 'precio') {
+        this.rangosByCiudades.rangos.map((rango) => {
+          if (
+            this.totalCart >= rango.inicial &&
+            this.totalCart <= rango.final
+          ) {
+            if (rango.precio > 0) {
+              this.shippingTarifaPrecio = `Tarifa por precio: $${rango.precio}`
+            } else {
+              this.shippingTarifaPrecio = 'El rango no está definido'
+            }
+          }
+        })
+      }
+    },
     isQuotation() {
       let result = false
       this.productsCart.forEach((product) => {
@@ -407,6 +417,7 @@ export default {
     productsCart() {
       if (this.productsCart) {
         this.tempCart = this.productsCart
+        this.shippingPrecio()
       }
     },
   },
@@ -653,7 +664,6 @@ export default {
 .content-items-remove {
   width: 100%;
   margin: 15px;
-
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -731,6 +741,12 @@ export default {
 }
 .text-color {
   color: var(--color_text);
+}
+.text-TarifaPrecio {
+  margin-right: 1px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: flex-end;
 }
 .scroll_cart_summary_items_cities {
   color: var(--color_text);
