@@ -71,11 +71,10 @@ select::-ms-expand {
 .select {
   position: relative;
   display: flex;
-  width: 15em;
+  width: 100%;
   height: 40px;
   background: transparent;
   overflow: hidden;
-  /* border: 2px solid var(--color_border); */
   border: 2px solid rgba(127, 127, 139, 0.342);
   border-radius: var(--radius_btn);
 }

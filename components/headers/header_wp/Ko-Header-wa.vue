@@ -4,7 +4,6 @@
       <div class="line-header"></div>
       <KoOrderWa :dataStore="dataStore" />
       <div class="wrapper-banner-img">
-        <!-- src="https://res.cloudinary.com/komercia-store/image/upload/q_auto,c_scale,f_auto/v1589443010/c3bvs9jxbimfr5m0prki.png" -->
         <img
           src="https://www.dinays.co/wp-content/uploads/2018/06/imagen-slider-helado-2-dinays-fruteria-y-heladeria-en-cali.png"
           class="banner"
@@ -22,48 +21,27 @@
         <div class="header-content-text">
           <p class="header-text">
             {{ dataStore.tienda.nombre }}
-            <!-- <img
-              src="../../../assets/img/icon-4.png"
-              width="18px"
-              style="margin-bottom: -2px"
-            />-->
           </p>
-          <!-- <p class="header-descripcion" v-if="dataStore.tienda.descripcion">
-            {{ dataStore.tienda.descripcion }}
-          </p>-->
           <div v-if="dataStore.geolocalizacion.length">
             <p
               class="header-direccion"
               v-if="dataStore.geolocalizacion[0].direccion"
-            >{{ dataStore.geolocalizacion[0].direccion }}</p>
+            >
+              {{ dataStore.geolocalizacion[0].direccion }}
+            </p>
           </div>
           <div v-if="dataStore.geolocalizacion.length">
             <p
               class="header-horario"
               v-if="dataStore.geolocalizacion[0].horario"
-            >Horario de atención: {{ dataStore.geolocalizacion[0].horario }}</p>
+            >
+              Horario de atención: {{ dataStore.geolocalizacion[0].horario }}
+            </p>
           </div>
         </div>
         <div class="container-tienda-wp">
-          <p>
-            <whatsapp-icon class="wp-icon" />Tienda WhatsApp
-          </p>
+          <p><whatsapp-icon class="wp-icon" />Tienda WhatsApp</p>
         </div>
-        <!-- <div class="header-content-items">
-          <div class="wrapper-items-icons">
-            <div v-for="(item, index) in links" :key="`${index}${item.icon}`">
-              <div class="container-header-icon">
-                <div class="header-icon" v-if="item.link" :is="item.icon" />
-              </div>
-            </div>
-          </div>
-          <div class="header-content-icon">
-            <div class="header-content-cart" @click="openOrder">
-              <cart-icon class="header-icon-cart" />
-              <span class="num-items">{{ productsCart }}</span>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -145,7 +123,6 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 780px;
   background: white;
   flex-direction: column;
   transition: all ease 1s;
@@ -155,7 +132,6 @@ export default {
   width: 100%;
   height: 9.5rem;
   overflow: hidden;
-  /* border-radius: 0 0 10px 10px; */
 }
 .banner {
   width: 100%;

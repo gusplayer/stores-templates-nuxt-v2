@@ -2,6 +2,15 @@
   <div class="wrapper-productDetail">
     <div v-if="loading" v-loading="loading"></div>
     <div class="container-productDetail" v-else>
+      <div class="wrapper-back">
+        <div class="back-button">
+          <p @click="$router.go(-1)"><FlechaLeft-icon /></p>
+        </div>
+        <div class="wrapper-back breadcrumb">
+          <p @click="$router.go(-1)">Inicio ></p>
+          <p>{{ this.data.detalle.nombre }}</p>
+        </div>
+      </div>
       <div class="section">
         <div class="wrapper-left">
           <div class="photos_responsive">
@@ -11,9 +20,6 @@
               :idYoutube="idYoutube"
             ></productSlide>
           </div>
-          <div class="back-button">
-            <p @click="$router.go(-1)"><</p>
-          </div>
         </div>
         <div class="wrapper-right">
           <div class="content-right">
@@ -21,14 +27,12 @@
             <p class="text-marca">
               <strong>{{ data.info.marca }}</strong>
             </p>
-
             <div class="wrapper-price">
               <p class="text-precio" v-show="salesData.precio">
                 ${{ salesData.precio | currency }}
               </p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
-
             <div class="content_buy_action">
               <div v-if="envio.titulo == 'Envío gratis'">
                 <p class="card-info-2">Envío gratis !</p>
@@ -57,14 +61,13 @@
                 <whatsapp-icon class="wp-icon" />Más información
               </button>
             </div>
-            <div v-if="data.info.descripcion" class="wrapper-description">
-              <h3 class="text-variant">Descripción</h3>
-              <div
-                class="content-text-desc"
-                v-html="data.info.descripcion"
-              ></div>
-            </div>
           </div>
+        </div>
+      </div>
+      <div class="content-description">
+        <div v-if="data.info.descripcion" class="wrapper-description">
+          <h3 class="text-variant">Descripción</h3>
+          <div class="content-text-desc" v-html="data.info.descripcion"></div>
         </div>
       </div>
       <div class="responsive-purchase">
@@ -544,17 +547,18 @@ export default {
   background-color: #fafaf8;
   justify-content: center;
   align-items: flex-start;
-  /* height: 100%; */
-  height: calc(100vh);
+  height: 100%;
+  overflow: visible;
 }
 .container-productDetail {
-  position: relative;
   display: flex;
   width: 100%;
-  max-width: 780px;
+  max-width: 900px;
+  height: 100%;
+  min-height: calc(100vh);
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 20px 30px 80px 30px;
 }
 .section {
@@ -575,15 +579,16 @@ export default {
   padding-bottom: 10px;
   position: relative;
 }
-.back-button {
-  position: absolute;
-  top: 0px;
+.wrapper-back {
   width: 100%;
-  height: 30px;
-  margin-top: 10px;
-  padding: 0px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.back-button {
+  padding: 10px 10px;
   background-color: transparent;
-  z-index: 999;
   cursor: pointer;
 }
 .back-button p {
@@ -593,6 +598,17 @@ export default {
   font-size: 20px;
   text-align: center;
   box-shadow: 0 2px 10px rgba(131, 130, 131, 0.473);
+}
+.breadcrumb {
+  margin-left: 5px;
+}
+.breadcrumb > p:nth-child(1) {
+  color: #c2c8ca;
+  cursor: pointer;
+}
+.breadcrumb > p:nth-child(2) {
+  margin-left: 5px;
+  color: #c2c8ca;
 }
 .photos_responsive {
   width: 100%;
@@ -705,19 +721,22 @@ export default {
   font-weight: bold;
   color: rgba(21, 20, 57, 0.541);
 }
+.content-description {
+  width: 100%;
+  display: flex;
+}
 .responsive-purchase {
   position: fixed;
   bottom: 0px;
-  right: 0;
   width: 100%;
-  z-index: 2;
+  max-width: 520px;
+  z-index: 3;
   display: flex;
   justify-content: center;
 }
 .ko-input {
   display: flex;
   width: 100%;
-  max-width: 720px;
   justify-content: space-between;
   align-items: center;
   padding: 5px 10px;
@@ -745,6 +764,7 @@ export default {
   background: transparent;
   height: 38px;
   width: 3em;
+  cursor: pointer;
 }
 .quantity_value {
   font-size: 1em;
@@ -768,12 +788,12 @@ export default {
   background: transparent;
   height: 38px;
   width: 3em;
+  cursor: pointer;
 }
 .btn-responsive {
   border-radius: var(--radius_btn);
   color: white;
-  border: solid 0px black;
-  /* background-color: black; */
+  border: none;
   background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
   background-image: linear-gradient(85deg, #48ac98 0%, #45c4aa 100%);
   box-shadow: 0px 0px 2px rgba(52, 58, 67, 0.1),
@@ -783,6 +803,12 @@ export default {
   height: 100%;
   font-size: 14px;
   margin-left: 15px;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+.btn-responsive:hover {
+  -webkit-box-shadow: 5px 2px 28px -9px rgba(45, 241, 202, 0.71);
+  box-shadow: 5px 2px 28px -9px rgba(45, 241, 202, 0.71);
 }
 .icon {
   font-size: 16px;
@@ -803,7 +829,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: #e71f77; */
   background: rgb(222, 222, 222);
   padding: 6px 10px;
   border-radius: var(--radius_btn);
@@ -845,22 +870,23 @@ export default {
 .btn-whatsapp {
   color: white;
   border-radius: 5px;
-  /* border: solid 1px #25d366; */
   background-color: #445a64;
-  padding: 8px 3px;
-  font-size: 12px;
+  padding: 8px 10px;
   width: 100%;
-  max-width: 240px;
-  height: 36px;
   font-weight: 400;
   cursor: pointer;
-  /* transition: all 200ms ease-in; */
+  transition: all 200ms ease-in;
   text-decoration: none;
   display: flex;
   justify-content: center;
   text-align: center;
   border: 0px;
 }
+.btn-whatsapp:hover {
+  -webkit-box-shadow: 5px 2px 28px -9px rgba(68, 90, 100, 0.71);
+  box-shadow: 5px 2px 28px -9px rgba(68, 90, 100, 0.71);
+}
+
 .wp-icon {
   font-size: 16px;
   bottom: 4px;
@@ -868,7 +894,7 @@ export default {
   margin-bottom: -2px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 685px) {
   .container-productDetail {
     padding: 0px 0px 40px 0px;
   }
@@ -888,13 +914,15 @@ export default {
   }
   .content-right {
     width: 100%;
-    /* margin: 10px 20px; */
     padding: 15px 10px;
     margin-left: 0px;
   }
   .text-name {
     font-weight: 500;
     font-size: 20px;
+  }
+  .content-description {
+    padding: 0 5px;
   }
 }
 </style>
