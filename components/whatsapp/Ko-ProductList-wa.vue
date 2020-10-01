@@ -316,7 +316,7 @@ export default {
   justify-content: center;
   width: 100%;
   max-width: 780px;
-  padding: 0px 20px 80px 20px;
+  padding: 0px 20px 30px 20px;
   flex-direction: column;
 }
 .content-items-categorias {
@@ -379,7 +379,7 @@ export default {
 }
 .content-products-empty {
   width: 100%;
-  min-height: 470px;
+  min-height: 380px;
   display: flex;
   justify-content: center;
   align-items: center;
