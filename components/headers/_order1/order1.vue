@@ -180,7 +180,11 @@
                 </p>
                 <p
                   class="Quotation-message"
-                  v-if="productsCart.length && this.shippingTarifaPrecio == 0"
+                  v-if="
+                    productsCart.length &&
+                    this.shippingTarifaPrecio == 0 &&
+                    this.estadoShippingTarifaPrecio == true
+                  "
                 >
                   Contacte con la tienda, Rango de precios del domicilio no está
                   definido
@@ -196,7 +200,7 @@
                     productsCart.length &&
                     !isQuotation() &&
                     dataStore.tienda.estado == 1 &&
-                    this.shippingTarifaPrecio > 0
+                    this.estadoShippingTarifaPrecio == false
                   "
                   class="continue_shopping"
                   @click="GoPayments"
@@ -267,6 +271,7 @@ export default {
       rangosByCiudades: [],
       remove: false,
       shippingTarifaPrecio: '',
+      estadoShippingTarifaPrecio: false,
     }
   },
   computed: {
@@ -342,8 +347,10 @@ export default {
         })
         if (result) {
           this.shippingTarifaPrecio = result.precio
+          this.estadoShippingTarifaPrecio = false
         } else {
           this.shippingTarifaPrecio = 0
+          this.estadoShippingTarifaPrecio = true
         }
       }
     },
