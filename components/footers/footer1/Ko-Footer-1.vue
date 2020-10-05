@@ -16,6 +16,13 @@
           /></a>
         </div>
       </div>
+      <div class="footer-item-secciones">
+        <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
+          <nuxt-link :to="item.path" class="text-secciones">
+            {{ item.name }}
+          </nuxt-link>
+        </div>
+      </div>
     </div>
     <div class="under-footer">
       <div class="contenedor-term-con" v-if="dataStore.politicas">
@@ -114,6 +121,24 @@ export default {
   data() {
     return {
       logo: null,
+      secciones: [
+        {
+          name: 'Inicio',
+          path: '/',
+        },
+        {
+          name: 'Carrito',
+          path: '/cart',
+        },
+        {
+          name: 'Contacto',
+          path: '/contacto',
+        },
+        {
+          name: 'Mi compra',
+          path: '/micompra',
+        },
+      ],
       links: [
         {
           nombre: 'Facebook',
@@ -186,11 +211,31 @@ export default {
 .contenedor {
   width: 100%;
   max-width: 1300px;
-  padding: 40px 30px 20px;
+  padding: 40px 30px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.footer-item-secciones {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+.text-secciones {
+  font-size: 16px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--color_text);
+  margin-right: 10px;
+}
+.text-secciones:hover {
+  color: var(--color_hover_text);
 }
 .content-items-iconos {
   width: 100%;

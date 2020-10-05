@@ -26,21 +26,29 @@
                 class="header-text-center"
                 >{{ item.name }}</nuxt-link
               >
-              <div
-                v-else
-                style="margin-right: 20px; display: flex; flex-direction: row;"
-              >
-                <p class="header-text-center-icon">{{ item.name }}</p>
+              <div v-else>
                 <div
-                  class="header-text-center-icon"
-                  v-if="showMenu == false"
-                  :is="item.iconOpen"
-                />
-                <div
-                  class="header-text-center-icon"
-                  v-if="showMenu == true"
-                  :is="item.iconClose"
-                />
+                  v-if="dataStore.categorias.length > 0"
+                  style="
+                    margin-right: 20px;
+                    display: flex;
+                    flex-direction: row;
+                  "
+                >
+                  <p class="header-text-center-icon">
+                    {{ item.name }}
+                  </p>
+                  <div
+                    class="header-text-center-icon"
+                    v-if="showMenu == false"
+                    :is="item.iconOpen"
+                  />
+                  <div
+                    class="header-text-center-icon"
+                    v-if="showMenu == true"
+                    :is="item.iconClose"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -623,6 +631,7 @@ export default {
   font-weight: normal;
   color: var(--color_text);
   cursor: pointer;
+  bottom: 2px;
 }
 .header-text-center-icon:hover {
   color: var(--color_hover_text);

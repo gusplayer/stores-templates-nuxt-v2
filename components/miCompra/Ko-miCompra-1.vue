@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper_micompra">
     <div class="contenedor">
-      <div class="bar-top">
+      <!-- <div class="bar-top">
         <div class="back" v-if="toggleArrow" @click="$router.go(-1)">
           <arrow-left-icon class="arrow-left"></arrow-left-icon>
           <p class="turn-back">Volver</p>
@@ -10,7 +10,7 @@
           <help-circle-outline class="icon-help" />
           <p class="help-text">Ayuda</p>
         </div>
-      </div>
+      </div> -->
       <div class="content-form">
         <h1 class="title-form">Seguimiento de tu compra</h1>
         <div class="form">
@@ -26,16 +26,16 @@
             <label for="numId">Número de Identificación</label>
             <el-input
               id="numId"
-              placeholder="Cédula"
+              placeholder="Cédula del comprador"
               v-model="cedula"
             ></el-input>
           </div>
           <el-button type="primary" icon="el-icon-search" @click="GET_ORDEN()"
-            >Buscar</el-button
+            >Buscar mi pedido</el-button
           >
         </div>
       </div>
-      <div class="bar-middle">
+      <div class="bar-middle" v-if="orden && orden.venta">
         <h1 class="title-general">Mis ordenes</h1>
         <p class="number-order">
           Numero de orden:
@@ -102,8 +102,34 @@
               Método de pago:
               <span class="method-value">{{ choicePayment.title }}</span>
             </p>
+            <p class="payment-method" v-if="choicePayment">
+              Fecha de la compra:
+              <span class="method-value">{{ this.fechaState }}</span>
+            </p>
+            <p class="payment-method" v-if="choicePayment">
+              Hora de la compra:
+              <span class="method-value">{{ this.horaState }}</span>
+            </p>
           </div>
-          <div class="state-right">
+          <div class="content-state-top">
+            <div class="content-item-state">
+              <p class="title-state">
+                Estado del pedido :
+              </p>
+              <el-tag
+                :color="choiceState.color"
+                effect="dark"
+                style="margin-left: 10px;"
+              >
+                {{ choiceState.title }}
+              </el-tag>
+            </div>
+            <p class="last-update">
+              Ultima actualización:
+              <span class="date-update">{{ orden.venta.fecha }}</span>
+            </p>
+          </div>
+          <!-- <div class="state-right">
             <div class="content-state-top">
               <p class="title-state">Estado del pedido</p>
               <p class="last-update">
@@ -114,7 +140,7 @@
             <div class="content-state-bar">
               <el-steps
                 :space="200"
-                :active="2"
+                :active="orden.venta.estado"
                 align-center
                 finish-status="success"
               >
@@ -128,7 +154,7 @@
             <div class="content-state-bar-responsive">
               <el-steps
                 :space="40"
-                :active="2"
+                :active="orden.venta.estado"
                 align-center
                 finish-status="success"
                 direction="vertical"
@@ -146,7 +172,7 @@
                 orden.venta.fecha
               }}</span>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="content-sections">
           <el-collapse v-model="activeNames">
@@ -271,12 +297,21 @@ export default {
       this.numOrden = ''
       this.cedula = ''
     }
+    if (this.orden.venta) {
+      if (this.orden.venta.created_at) {
+        let result = this.orden.venta.created_at.split(' ')
+        this.fechaState = result[0]
+        this.horaState = result[1]
+      }
+    }
   },
   destroyed() {
     this.city = {}
   },
   data() {
     return {
+      fechaState: '',
+      horaState: '',
       toggleArrow: false,
       numOrden: '',
       cedula: '',
@@ -382,12 +417,54 @@ export default {
         },
       ],
       city: {},
+      statusUpdate: [
+        {
+          id: '0',
+          color: '#FFA801',
+          title: 'Sin pagar',
+        },
+        {
+          id: '1',
+          color: '#30c490',
+          title: 'Pagada',
+        },
+        {
+          id: '2',
+          color: '',
+          title: '',
+        },
+        {
+          id: '3',
+          color: '#EB4D4B',
+          title: 'Cancelada',
+        },
+        {
+          id: '4',
+          color: '#0000FF',
+          title: 'Despachada',
+        },
+        {
+          id: '5',
+          color: '',
+          title: '',
+        },
+        {
+          id: '6',
+          color: '#4429AE',
+          title: 'Entregado',
+        },
+      ],
     }
   },
   computed: {
     choicePayment() {
       return this.payments.find(
         (payment) => payment.id === this.orden.venta.metodo_pago
+      )
+    },
+    choiceState() {
+      return this.statusUpdate.find(
+        (payment) => payment.id === this.orden.venta.estado
       )
     },
     cities() {
@@ -403,14 +480,17 @@ export default {
       }
     },
     GET_ORDEN() {
-      this.$router.replace({ query: {}})
-      return  axios
-        .get(`https://api2.komercia.co/api/orden/${this.dataStore.tienda.id_tienda}/${this.numOrden}`, {
-          headers: {
-            'content-type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
-        })
+      this.$router.replace({ query: {} })
+      return axios
+        .get(
+          `https://api2.komercia.co/api/orden/${this.dataStore.tienda.id_tienda}/${this.numOrden}`,
+          {
+            headers: {
+              'content-type': 'application/json',
+              'Access-Control-Allow-Origin': '*',
+            },
+          }
+        )
         .then((response) => {
           if (
             this.numOrden == response.data.data.venta.id &&
@@ -483,6 +563,7 @@ export default {
   display: flex;
   width: 100%;
   height: 100%;
+  min-height: 600px;
   background-color: var(--background_color_2);
   justify-content: center;
   align-items: center;
@@ -686,7 +767,7 @@ export default {
   display: none;
 }
 .content-info-orden {
-  margin-bottom: 58px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -695,7 +776,7 @@ export default {
 }
 .cupon {
   font-size: 15px;
-  font-weight: normal;
+  font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.73;
@@ -705,7 +786,7 @@ export default {
 }
 .shipping-price {
   font-size: 15px;
-  font-weight: normal;
+  font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.73;
@@ -755,7 +836,7 @@ export default {
 }
 .total-value {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.63;
@@ -765,7 +846,7 @@ export default {
 }
 .method-value {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.63;
@@ -788,7 +869,7 @@ export default {
 }
 .last-update {
   font-size: 15px;
-  font-weight: normal;
+  font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.73;
@@ -807,14 +888,27 @@ export default {
   color: #383838;
   margin-left: 2px;
 }
-.content-state-top {
+/* .content-state-top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   flex-wrap: wrap;
   grid-column-gap: 60px;
   grid-row-gap: 15px;
   margin-bottom: 20px;
+} */
+.content-state-top {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.content-item-state {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .content-state-bar {
   margin-left: -9%;
@@ -943,10 +1037,10 @@ export default {
     flex-direction: column;
     margin-top: 10px;
   }
-  .last-update,
+  /* .last-update,
   .date-update {
     display: none;
-  }
+  } */
   .last-update-responsive {
     font-weight: normal;
     font-stretch: normal;
@@ -967,7 +1061,14 @@ export default {
     color: #383838;
     margin-left: 2px;
   }
+}
+
+@media (max-width: 600px) {
   .content-input {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .content-state-top {
     flex-direction: column;
     align-items: flex-start;
   }

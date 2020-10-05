@@ -395,31 +395,22 @@ export default {
   outline: none !important;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   border: 1px solid rgb(172, 172, 172);
   background: transparent;
   width: 13px;
 }
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 10px white;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    170deg,
-    rgba(145, 145, 145, 1) 0%,
-    rgb(44, 44, 44) 60%
-  );
-  border-radius: 10px;
+  background: rgb(168, 168, 168);
+  border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    170deg,
-    rgb(102, 102, 102) 0%,
-    rgba(0, 0, 0, 1) 60%
-  );
-  border-radius: 10px;
-}
+  background: gray;
+} */
 .wrapper-whatsapp {
   position: fixed;
   transform: translate(108px, 0px);

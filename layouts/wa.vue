@@ -106,9 +106,6 @@ export default {
           src:
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
-        // {
-        //   src: `https://www.googletagmanager.com/gtag/js?id=${this.analytics_tagmanager.analytics}`,
-        // },
       ],
       link: [
         {
