@@ -130,13 +130,15 @@ export default {
 }
 .wrapper-banner-img {
   width: 100%;
-  height: 9.5rem;
+  max-height: 160px;
   overflow: hidden;
 }
 .banner {
+  max-height: 160px;
   width: 100%;
   object-fit: cover;
   overflow: hidden;
+  object-position: center;
 }
 .containt-image {
   display: flex;
@@ -198,12 +200,6 @@ export default {
   font-weight: normal;
   color: black;
   color: #4e4e4e;
-}
-.header-content-items {
-  display: flex;
-  flex-direction: row;
-  align-self: flex-start;
-  justify-content: space-between;
 }
 .wrapper-items-icons {
   margin-top: 3px;
@@ -298,16 +294,5 @@ export default {
   .header-content-text {
     margin-left: 0px;
   }
-  .header-content-items {
-    position: absolute;
-    top: 6.8rem;
-    right: 20px;
-    display: none;
-  }
 }
-/* @media (max-width: 330px) {
-  .header {
-    padding: 70px 30px 15px 30px;
-  }
-} */
 </style>

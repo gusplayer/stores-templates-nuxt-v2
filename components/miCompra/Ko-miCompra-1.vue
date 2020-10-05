@@ -1,54 +1,57 @@
 <template>
   <div class="wrapper_micompra">
     <div class="contenedor">
-      <!-- <div class="bar-top">
-        <div class="back" v-if="toggleArrow" @click="$router.go(-1)">
-          <arrow-left-icon class="arrow-left"></arrow-left-icon>
-          <p class="turn-back">Volver</p>
-        </div>
-        <div class="help">
-          <help-circle-outline class="icon-help" />
-          <p class="help-text">Ayuda</p>
-        </div>
-      </div> -->
       <div class="content-form">
         <h1 class="title-form">Seguimiento de tu compra</h1>
-        <div class="form">
+        <ValidationObserver ref="observer" tag="form" class="form">
           <div class="content-input">
             <label for="numOrden">Número de Orden</label>
-            <el-input
-              id="numOrden"
-              placeholder="Número de Orden"
-              v-model="numOrden"
-            ></el-input>
+            <validation-provider
+              name="número de orden"
+              rules="required|numeric"
+              style="width: 100%;"
+            >
+              <template slot-scope="{ errors }">
+                <el-input
+                  id="numOrden"
+                  placeholder="Número de orden"
+                  v-model="numOrden"
+                ></el-input>
+                <span class="text-error" v-show="errors[0]">{{
+                  errors[0]
+                }}</span>
+              </template>
+            </validation-provider>
           </div>
           <div class="content-input">
             <label for="numId">Número de Identificación</label>
-            <el-input
-              id="numId"
-              placeholder="Cédula del comprador"
-              v-model="cedula"
-            ></el-input>
+            <validation-provider
+              name="cédula del comprador"
+              rules="required|numeric"
+              style="width: 100%;"
+            >
+              <template slot-scope="{ errors }">
+                <el-input
+                  id="numId"
+                  placeholder="Cédula del comprador"
+                  v-model="cedula"
+                ></el-input>
+                <span class="text-error" v-show="errors[0]">{{
+                  errors[0]
+                }}</span>
+              </template>
+            </validation-provider>
           </div>
-          <el-button type="primary" icon="el-icon-search" @click="GET_ORDEN()"
+          <el-button type="primary" icon="el-icon-search" @click="submitOrden"
             >Buscar mi pedido</el-button
           >
-        </div>
-      </div>
-      <div class="bar-middle" v-if="orden && orden.venta">
-        <h1 class="title-general">Mis ordenes</h1>
-        <p class="number-order">
-          Numero de orden:
-          <span class="id-order" v-if="orden && orden.venta">{{
-            orden.venta.id
-          }}</span>
-        </p>
+        </ValidationObserver>
       </div>
       <div class="bar-body" v-if="orden && orden.venta">
-        <p class="number-order-reponsive">
-          Numero de orden:
-          <span class="id-order" v-if="orden.venta">{{ orden.venta.id }}</span>
-        </p>
+        <div class="content-title">
+          <p>Información venta</p>
+          <p>No. {{ orden.venta.id }}</p>
+        </div>
         <div class="content-card">
           <div
             class="card"
@@ -62,58 +65,64 @@
             />
             <div class="info">
               <p class="name-product">{{ item.producto.nombre }}</p>
+              <p class="quantity-product">
+                Cantidad: {{ item.unidades }} X
+                {{ (item.unidades * item.precio_producto) | currency }}
+              </p>
               <p class="price-product">{{ item.precio_producto | currency }}</p>
-              <p class="quantity-product" v-if="item.unidades == 1">
-                {{ item.unidades }} unidad
-              </p>
-              <p
-                class="quantity-product"
-                v-if="item.unidades == 0 || item.unidades > 1"
-              >
-                {{ item.unidades }} unidades
-              </p>
+              <div v-if="item.variantes">
+                <el-tag
+                  v-for="(productCombinacion, index2) in JSON.parse(
+                    item.variantes
+                  )"
+                  :key="index2"
+                >
+                  {{ productCombinacion | capitalize }}
+                </el-tag>
+              </div>
             </div>
           </div>
         </div>
         <div class="content-info-orden" v-if="orden.venta">
           <div class="info-left">
-            <p class="cupon" v-if="orden.venta.cupon != 'null'">
-              Cupón: <span class="cupon-value">{{ orden.venta.cupon }}</span>
+            <p class="title-info-orden" v-if="orden.venta.cupon != 'null'">
+              Cupón:
+              <span class="value-info-orden">{{ orden.venta.cupon }}</span>
             </p>
             <p
-              class="cupon"
+              class="title-info-orden"
               v-if="orden.venta.cupon == 'null' || orden.venta.cupon == null"
             >
-              Cupón: <span class="cupon-value">N/A</span>
+              Cupón: <span class="value-info-orden">N/A</span>
             </p>
-            <p class="shipping-price" v-if="orden.venta.costo_envio">
+            <p class="title-info-orden" v-if="orden.venta.costo_envio">
               Valor del envío:
-              <span class="shipping-value">{{
+              <span class="value-info-orden">{{
                 orden.venta.costo_envio | currency
               }}</span>
             </p>
-            <p class="order-total" v-if="orden.venta.total">
+            <p class="title-info-orden" v-if="orden.venta.total">
               Total de la orden:
-              <span class="total-value">{{
+              <span class="value-info-orden">{{
                 orden.venta.total | currency
               }}</span>
             </p>
-            <p class="payment-method" v-if="choicePayment">
+            <p class="title-info-orden" v-if="choicePayment">
               Método de pago:
-              <span class="method-value">{{ choicePayment.title }}</span>
+              <span class="value-info-orden">{{ choicePayment.title }}</span>
             </p>
-            <p class="payment-method" v-if="choicePayment">
+            <p class="title-info-orden" v-if="choicePayment">
               Fecha de la compra:
-              <span class="method-value">{{ this.fechaState }}</span>
+              <span class="value-info-orden">{{ this.fechaState }}</span>
             </p>
-            <p class="payment-method" v-if="choicePayment">
+            <p class="title-info-orden" v-if="choicePayment">
               Hora de la compra:
-              <span class="method-value">{{ this.horaState }}</span>
+              <span class="value-info-orden">{{ this.horaState }}</span>
             </p>
           </div>
           <div class="content-state-top">
             <div class="content-item-state">
-              <p class="title-state">
+              <p class="title-info-orden">
                 Estado del pedido :
               </p>
               <el-tag
@@ -124,58 +133,14 @@
                 {{ choiceState.title }}
               </el-tag>
             </div>
-            <p class="last-update">
+            <p class="title-info-orden">
               Ultima actualización:
-              <span class="date-update">{{ orden.venta.fecha }}</span>
+              <span class="value-info-orden">{{ orden.venta.fecha }}</span>
             </p>
           </div>
-          <!-- <div class="state-right">
-            <div class="content-state-top">
-              <p class="title-state">Estado del pedido</p>
-              <p class="last-update">
-                Ultima actualización:
-                <span class="date-update">{{ orden.venta.fecha }}</span>
-              </p>
-            </div>
-            <div class="content-state-bar">
-              <el-steps
-                :space="200"
-                :active="orden.venta.estado"
-                align-center
-                finish-status="success"
-              >
-                <el-step description="Pedido Confirmado"></el-step>
-                <el-step description="Pago aprobado"></el-step>
-                <el-step description="Pedido preparado"></el-step>
-                <el-step description="Enviando el pedido"></el-step>
-                <el-step description="Entregar pedido"></el-step>
-              </el-steps>
-            </div>
-            <div class="content-state-bar-responsive">
-              <el-steps
-                :space="40"
-                :active="orden.venta.estado"
-                align-center
-                finish-status="success"
-                direction="vertical"
-              >
-                <el-step description="Pedido Confirmado"></el-step>
-                <el-step description="Pago aprobado"></el-step>
-                <el-step description="Pedido preparado"></el-step>
-                <el-step description="Enviando el pedido"></el-step>
-                <el-step description="Entregar pedido"></el-step>
-              </el-steps>
-            </div>
-            <div class="content-update">
-              <p class="last-update-responsive">Ultima actualización</p>
-              <span class="date-update-responsive">{{
-                orden.venta.fecha
-              }}</span>
-            </div>
-          </div> -->
         </div>
         <div class="content-sections">
-          <el-collapse v-model="activeNames">
+          <el-collapse>
             <el-collapse-item title="Información del comprador" name="1">
               <div class="content-info-buyer" v-if="orden.venta.usuario">
                 <p class="name">
@@ -277,11 +242,16 @@
 
 <script>
 import axios from 'axios'
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   name: 'Ko-miCompra-1',
   props: {
     dataStore: Object,
     orden: Object,
+  },
+  components: {
+    ValidationObserver,
+    ValidationProvider,
   },
   mounted() {
     this.routePrev()
@@ -315,7 +285,6 @@ export default {
       toggleArrow: false,
       numOrden: '',
       cedula: '',
-      activeNames: ['1'],
       payments: [
         {
           id: '1',
@@ -479,31 +448,40 @@ export default {
         this.toggleArrow = true
       }
     },
-    GET_ORDEN() {
-      this.$router.replace({ query: {} })
-      return axios
-        .get(
-          `https://api2.komercia.co/api/orden/${this.dataStore.tienda.id_tienda}/${this.numOrden}`,
-          {
-            headers: {
-              'content-type': 'application/json',
-              'Access-Control-Allow-Origin': '*',
-            },
-          }
-        )
+    submitOrden() {
+      this.$refs.observer
+        .validate()
         .then((response) => {
-          if (
-            this.numOrden == response.data.data.venta.id &&
-            this.cedula == response.data.data.venta.usuario.identificacion
-          ) {
-            this.$emit('update', response.data.data)
-          } else {
-            this.$emit('update', {})
-            this.errorMessageTwo()
+          if (response) {
+            this.$router.replace({ query: {} })
+            return axios
+              .get(
+                `https://api2.komercia.co/api/orden/${this.dataStore.tienda.id_tienda}/${this.numOrden}`,
+                {
+                  headers: {
+                    'content-type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                  },
+                }
+              )
+              .then((response) => {
+                if (
+                  this.numOrden == response.data.data.venta.id &&
+                  this.cedula == response.data.data.venta.usuario.identificacion
+                ) {
+                  this.$emit('update', response.data.data)
+                } else {
+                  this.$emit('update', {})
+                  this.errorMessageTwo()
+                }
+              })
+              .catch(() => {
+                this.$emit('update', {})
+                this.errorMessageTwo()
+              })
           }
         })
-        .catch(() => {
-          this.$emit('update', {})
+        .catch((e) => {
           this.errorMessageTwo()
         })
     },
@@ -546,6 +524,15 @@ export default {
     cities() {
       this.setCity()
     },
+    orden() {
+      if (this.orden.venta) {
+        if (this.orden.venta.created_at) {
+          let result = this.orden.venta.created_at.split(' ')
+          this.fechaState = result[0]
+          this.horaState = result[1]
+        }
+      }
+    },
   },
   filters: {
     currency(value) {
@@ -553,6 +540,12 @@ export default {
         return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
       return 0
+    },
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      }
     },
   },
 }
@@ -571,30 +564,47 @@ export default {
   height: 100%;
 }
 .contenedor {
-  height: 100%;
   width: 100%;
   max-width: 1300px;
-  padding: 60px 20px 60px 20px;
+  padding: 20px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 }
 .content-form {
-  margin-bottom: 5px;
-  padding: 30px 27px;
+  margin-bottom: 10px;
+  padding: 30px 27px 10px;
+  border-radius: 30px;
   width: 100%;
   background: #ffffff;
 }
+.title-form {
+  font-size: 24px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.46;
+  letter-spacing: -0.24px;
+  text-align: center;
+  color: black;
+  margin-bottom: 25px;
+}
 .form {
-  display: flex;
-  flex-wrap: wrap;
-  grid-column-gap: 30px;
-  grid-row-gap: 15px;
-  flex-direction: row;
   width: 100%;
-  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
+}
+.content-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-right: 30px;
+  height: 90px;
 }
 .form .el-input {
   width: 100%;
@@ -603,112 +613,50 @@ export default {
   color: #fff;
   background-color: var(--color_background_btn);
   border-color: var(--color_background_btn);
+  border-radius: 5px;
+  width: 100%;
 }
 .form .el-button--primary:hover {
   background-color: var(--btnhover);
   border-color: var(--btnhover);
 }
-.bar-top {
+.text-error {
+  font-size: 12px;
+  color: #cb2027;
   width: 100%;
-  padding: 15px 54px;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-}
-.back {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-.help {
-  display: flex;
-  align-items: center;
-}
-.turn-back {
   margin-left: 10px;
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  text-align: left;
-  color: #383838;
-}
-.arrow-left {
-  margin-top: 2px;
-}
-.material-design-icon > .material-design-icon__svg {
-  height: 22px;
-  width: 22px;
-  color: var(--color_icon);
-}
-.icon-help {
-  margin-top: -2px;
-  color: var(--color_icon);
-}
-.help-text {
-  margin-left: 10px;
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  text-align: left;
-  color: #383838;
-}
-.bar-middle {
-  width: 100%;
-  padding: 28px 54px;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 13px;
-  grid-column-gap: 30px;
-  border-radius: 0px 0px 30px 30px;
-}
-.title-general {
-  font-size: 24px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.46;
-  letter-spacing: -0.24px;
-  text-align: center;
-  color: #373d43;
-}
-.number-order {
-  font-size: 16px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  text-align: left;
-  color: #383838;
-}
-.id-order {
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  text-align: left;
-  color: #383838;
-  margin-left: 5px;
 }
 .bar-body {
   width: 100%;
-  padding: 40px 54px 60px 54px;
+  padding: 40px 54px 15px 54px;
   background-color: #ffffff;
   display: flex;
-  border-radius: 30px 30px 0px 0px;
+  border-radius: 30px;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.content-title {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+.content-title > p:nth-child(1) {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.3;
+  color: #383838;
+}
+.content-title > p:nth-child(2) {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.3;
+  color: #383838;
+  margin-bottom: 10px;
 }
 .content-card {
   width: 100%;
@@ -717,7 +665,7 @@ export default {
   grid-column-gap: 60px;
   grid-row-gap: 35px;
   align-items: center;
-  margin-bottom: 63px;
+  margin-bottom: 20px;
 }
 .card {
   display: flex;
@@ -743,185 +691,91 @@ export default {
   text-align: left;
   color: #383838;
 }
-.price-product {
-  font-size: 16px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  text-align: left;
-  color: #ff1313;
-}
 .quantity-product {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.73;
+  line-height: 1.3;
   letter-spacing: normal;
   text-align: left;
   color: #383838;
 }
-.number-order-reponsive {
-  display: none;
+.price-product {
+  font-size: 17px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-align: left;
+  color: black;
+}
+.info >>> .el-tag {
+  border-color: black;
+  background-color: transparent;
+  color: black;
+  display: inline-block;
+  height: 28px;
+  margin-left: 2px;
+  padding: 0 2px;
+  font-size: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;
 }
 .content-info-orden {
   margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  grid-column-gap: 60px;
-  grid-row-gap: 45px;
-}
-.cupon {
-  font-size: 15px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.73;
-  letter-spacing: normal;
-  text-align: left;
-  color: #4a24b6;
-}
-.shipping-price {
-  font-size: 15px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.73;
-  letter-spacing: normal;
-  text-align: left;
-  color: #4a24b6;
-}
-.order-total {
-  font-size: 16px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  text-align: left;
-  color: #4a24b6;
-}
-.payment-method {
-  font-size: 16px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  text-align: left;
-  color: #4a24b6;
-}
-.cupon-value {
-  font-size: 15px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.73;
-  letter-spacing: normal;
-  text-align: left;
-  color: #383838;
-}
-.shipping-value {
-  font-size: 15px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.73;
-  letter-spacing: normal;
-  text-align: left;
-  color: #383838;
-}
-.total-value {
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  text-align: left;
-  color: #383838;
-}
-.method-value {
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  text-align: left;
-  color: #383838;
-}
-.title-state {
-  font-size: 16px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.63;
-  letter-spacing: normal;
-  text-align: left;
-  color: #383838;
-}
-.state-right {
-  width: 68%;
-}
-.last-update {
-  font-size: 15px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.73;
-  letter-spacing: normal;
-  text-align: left;
-  color: #4a24b6;
-}
-.date-update {
-  font-size: 15px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.73;
-  letter-spacing: normal;
-  text-align: left;
-  color: #383838;
-  margin-left: 2px;
-}
-/* .content-state-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-  flex-wrap: wrap;
-  grid-column-gap: 60px;
-  grid-row-gap: 15px;
-  margin-bottom: 20px;
-} */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.info-left {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.title-info-orden {
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.73;
+  letter-spacing: normal;
+  text-align: left;
+  color: black;
+}
+.value-info-orden {
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.63;
+  letter-spacing: normal;
+  text-align: left;
+  color: #383838;
+}
 .content-state-top {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 15px;
 }
 .content-item-state {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.content-state-bar {
-  margin-left: -9%;
-  margin-right: -7%;
-}
-.content-info-seller {
-  display: flex;
-  grid-column-gap: 40px;
+.content-sections {
   width: 100%;
-  flex-wrap: wrap;
-  margin-top: 8px;
-  grid-row-gap: 15px;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
 }
 .content-info-buyer {
   display: flex;
@@ -952,117 +806,28 @@ export default {
 .value-data {
   font-weight: normal;
 }
-.content-state-bar-responsive {
-  display: none;
-}
-.content-update {
-  display: none;
-}
-.content-input {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  grid-column-gap: 30px;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 100%;
-  max-width: 300px;
-}
-.title-form {
-  font-size: 24px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.46;
-  letter-spacing: -0.24px;
-  text-align: center;
-  color: #373d43;
-  margin-bottom: 40px;
-}
-@media (max-width: 998px) {
-  .state-right {
-    width: 100%;
-  }
-}
+
 @media (max-width: 863px) {
   .form {
     justify-content: center;
     flex-direction: column;
     align-items: center;
   }
+  .content-input {
+    margin-right: 0px;
+  }
 }
 @media (max-width: 768px) {
   .bar-top {
     padding: 15px 27px;
   }
-  .bar-middle {
-    padding: 28px 27px;
-  }
   .bar-body {
-    padding: 27px 27px 61px 27px;
-  }
-  .number-order {
-    display: none;
-  }
-  .number-order-reponsive {
-    font-size: 16px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.63;
-    letter-spacing: normal;
-    text-align: left;
-    color: #383838;
-    display: initial;
-    margin-bottom: 30px;
-  }
-  .help {
-    display: none;
+    padding: 17px 17px 25px 17px;
   }
   .contenedor {
     padding: 60px 0px 60px 0px;
   }
-  .arrow-left {
-    margin-left: -3px;
-  }
-  .content-state-bar {
-    display: none;
-  }
-  .content-state-bar-responsive {
-    display: initial;
-  }
-  .content-update {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-  }
-  /* .last-update,
-  .date-update {
-    display: none;
-  } */
-  .last-update-responsive {
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.73;
-    letter-spacing: normal;
-    text-align: left;
-    color: #4a24b6;
-  }
-  .date-update-responsive {
-    font-size: 15px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.73;
-    letter-spacing: normal;
-    text-align: left;
-    color: #383838;
-    margin-left: 2px;
-  }
 }
-
 @media (max-width: 600px) {
   .content-input {
     flex-direction: column;
@@ -1072,10 +837,23 @@ export default {
     flex-direction: column;
     align-items: flex-start;
   }
+  .title-info-orden {
+    margin-top: 10px;
+  }
 }
 @media (max-width: 500px) {
   .form .el-input {
     max-width: unset;
+  }
+  .contenedor {
+    padding: 8px 5px 10px 5px;
+  }
+  .content-form {
+    margin-bottom: 10px;
+    padding: 20px 17px;
+    border-radius: 30px;
+    width: 100%;
+    background: #ffffff;
   }
 }
 </style>
