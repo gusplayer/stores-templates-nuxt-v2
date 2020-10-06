@@ -120,25 +120,9 @@
                         Tarifa por precio:
                         {{ this.shippingTarifaPrecio | currency }}
                       </p>
-                      <details>
-                        <summary class="text-color">Rango de precios: </summary>
-                        <section>
-                          <ol class="scroll_cart_summary_items_cities">
-                            <li
-                              v-for="(ciudad,
-                              indexRangos) in rangosByCiudad.rangos"
-                              :key="indexRangos"
-                            >
-                              <div>
-                                <b>
-                                  {{ ciudad.inicial }} - {{ ciudad.final }}:
-                                </b>
-                                {{ ciudad.precio | currency }}
-                              </div>
-                            </li>
-                          </ol>
-                        </section>
-                      </details>
+                      <p v-else class="text-TarifaPrecio">
+                        Envío no configurado
+                      </p>
                     </div>
                     <p v-else-if="shipping && getFreeShipping == false">
                       {{ shipping | currency }}
@@ -765,11 +749,10 @@ export default {
 .text-color {
   color: var(--color_text);
 }
-.text-TarifaPrecio {
-  margin-right: 1px;
-  margin-bottom: 5px;
+.order_total_domicile >>> .text-TarifaPrecio {
   display: flex;
   justify-content: flex-end;
+  color: red;
 }
 .scroll_cart_summary_items_cities {
   color: var(--color_text);
