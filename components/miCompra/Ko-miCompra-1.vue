@@ -1,51 +1,58 @@
 <template>
   <div class="wrapper_micompra">
     <div class="contenedor">
-      <div class="content-form">
+      <div class="wrapper-form">
         <h1 class="title-form">Seguimiento de tu compra</h1>
-        <ValidationObserver ref="observer" tag="form" class="form">
-          <div class="content-input">
-            <label for="numOrden">Número de Orden</label>
-            <validation-provider
-              name="número de orden"
-              rules="required|numeric"
-              style="width: 100%;"
-            >
-              <template slot-scope="{ errors }">
-                <el-input
-                  id="numOrden"
-                  placeholder="Número de orden"
-                  v-model="numOrden"
-                ></el-input>
-                <span class="text-error" v-show="errors[0]">{{
-                  errors[0]
-                }}</span>
-              </template>
-            </validation-provider>
+        <div class="content-form">
+          <ValidationObserver ref="observer" tag="form" class="form">
+            <div class="content-input">
+              <label for="numOrden" class="input-label">Número de Orden</label>
+              <validation-provider
+                name="número de orden"
+                rules="required|numeric"
+                style="width: 100%;"
+              >
+                <template slot-scope="{ errors }">
+                  <el-input
+                    id="numOrden"
+                    placeholder="Número de orden"
+                    v-model="numOrden"
+                    class="input-text"
+                  ></el-input>
+                  <span class="text-error" v-show="errors[0]">{{
+                    errors[0]
+                  }}</span>
+                </template>
+              </validation-provider>
+            </div>
+            <div class="content-input">
+              <label for="numId" class="input-label"
+                >Número de Identificación</label
+              >
+              <validation-provider
+                name="cédula del comprador"
+                rules="required|numeric"
+                style="width: 100%;"
+              >
+                <template slot-scope="{ errors }">
+                  <el-input
+                    id="numId"
+                    placeholder="Cédula del comprador"
+                    v-model="cedula"
+                  ></el-input>
+                  <span class="text-error" v-show="errors[0]">{{
+                    errors[0]
+                  }}</span>
+                </template>
+              </validation-provider>
+            </div>
+          </ValidationObserver>
+          <div class="content-btn">
+            <button class="btn-submitOrden" @click="submitOrden">
+              <search-icon class="icon-seach" />Buscar mi pedido
+            </button>
           </div>
-          <div class="content-input">
-            <label for="numId">Número de Identificación</label>
-            <validation-provider
-              name="cédula del comprador"
-              rules="required|numeric"
-              style="width: 100%;"
-            >
-              <template slot-scope="{ errors }">
-                <el-input
-                  id="numId"
-                  placeholder="Cédula del comprador"
-                  v-model="cedula"
-                ></el-input>
-                <span class="text-error" v-show="errors[0]">{{
-                  errors[0]
-                }}</span>
-              </template>
-            </validation-provider>
-          </div>
-          <el-button type="primary" icon="el-icon-search" @click="submitOrden"
-            >Buscar mi pedido</el-button
-          >
-        </ValidationObserver>
+        </div>
       </div>
       <div class="bar-body" v-if="orden && orden.venta">
         <div class="content-title">
@@ -156,6 +163,7 @@
                     v-if="orden.venta.usuario.user_info[0].direccion"
                     >{{ orden.venta.usuario.user_info[0].direccion }}</span
                   >
+                  <span class="value-data" v-else>N/A</span>
                 </p>
                 <p
                   class="telephone"
@@ -185,6 +193,14 @@
                   <span class="value-data" v-if="orden.venta.usuario.email">{{
                     orden.venta.usuario.email
                   }}</span>
+                  <span class="value-data" v-else>N/A</span>
+                </p>
+                <p class="messege">
+                  Mensaje:
+                  <span class="value-data" v-if="orden.mensajes.length">{{
+                    orden.mensajes[0].mensaje
+                  }}</span>
+                  <span class="value-data" v-else>N/A</span>
                 </p>
               </div>
             </el-collapse-item>
@@ -572,12 +588,17 @@ export default {
   align-items: center;
   flex-direction: column;
 }
-.content-form {
+.wrapper-form {
   margin-bottom: 10px;
   padding: 30px 27px 10px;
   border-radius: 30px;
   width: 100%;
   background: #ffffff;
+}
+.content-form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 .title-form {
   font-size: 24px;
@@ -589,8 +610,10 @@ export default {
   text-align: center;
   color: black;
   margin-bottom: 25px;
+  height: 28px;
 }
 .form {
+  flex: 2;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -606,17 +629,58 @@ export default {
   margin-right: 30px;
   height: 90px;
 }
-.form .el-input {
+
+.content-btn {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-submitOrden {
+  color: white;
+  border-radius: 5px;
+  border: solid 2px black;
+  background-color: black;
+  padding: 8px 14px;
+  font-size: 16px;
+  width: 100%;
+  min-height: 40px;
+  max-height: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.btn-submitOrden:hover {
+  color: white;
+  border: solid 2px var(--btnhover);
+  background-color: var(--btnhover);
+}
+.icon-seach {
+  font-size: 18px;
+  margin-right: 5px;
+  bottom: 2px;
+}
+.input-text {
+  height: 40px;
   width: 100%;
 }
-.form .el-button--primary {
+.input-label {
+  height: 25px;
+}
+.content-btn .el-button--primary {
   color: #fff;
   background-color: var(--color_background_btn);
   border-color: var(--color_background_btn);
   border-radius: 5px;
   width: 100%;
+  height: 40px;
+  max-height: 40px;
 }
-.form .el-button--primary:hover {
+.content-btn .el-button--primary:hover {
   background-color: var(--btnhover);
   border-color: var(--btnhover);
 }
@@ -712,14 +776,14 @@ export default {
   color: black;
 }
 .info >>> .el-tag {
-  border-color: black;
-  background-color: transparent;
+  border-color: #777780;
+  background-color: #e8e8f3;
   color: black;
   display: inline-block;
   height: 28px;
   margin-left: 2px;
-  padding: 0 2px;
-  font-size: 12px;
+  padding: 0 6px;
+  font-size: 13px;
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
@@ -757,7 +821,7 @@ export default {
   line-height: 1.63;
   letter-spacing: normal;
   text-align: left;
-  color: #383838;
+  color: black;
 }
 .content-state-top {
   width: 100%;
@@ -796,11 +860,20 @@ export default {
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.73;
   letter-spacing: normal;
   text-align: left;
-  color: #383838;
+  color: black;
   max-width: 230px;
+  width: 100%;
+}
+.messege {
+  font-size: 15px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: black;
   width: 100%;
 }
 .value-data {
@@ -809,9 +882,13 @@ export default {
 
 @media (max-width: 863px) {
   .form {
+    flex: 1;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+  }
+  .content-form {
+    flex-direction: column;
   }
   .content-input {
     margin-right: 0px;
