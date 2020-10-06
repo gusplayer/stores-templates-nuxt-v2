@@ -20,7 +20,6 @@ export default {
   },
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    '~/assets/element-pagination.css',
     'swiper/dist/css/swiper.css',
     'core-components-npm/dist/ko.css',
   ],

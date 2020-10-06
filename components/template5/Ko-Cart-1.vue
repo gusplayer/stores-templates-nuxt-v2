@@ -826,7 +826,8 @@ export default {
 .contenedor-vacio {
   display: flex;
   width: 100%;
-  height: calc(100vh - 345px - 88px);
+  height: 100%;
+  min-height: calc(100vh - 292px);
   max-width: 1300px;
   flex-direction: column;
   align-items: center;

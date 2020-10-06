@@ -13,12 +13,12 @@
                 style="width: 100%;"
               >
                 <template slot-scope="{ errors }">
-                  <el-input
+                  <input
                     id="numOrden"
                     placeholder="Número de orden"
                     v-model="numOrden"
                     class="input-text"
-                  ></el-input>
+                  ></input>
                   <span class="text-error" v-show="errors[0]">{{
                     errors[0]
                   }}</span>
@@ -35,11 +35,12 @@
                 style="width: 100%;"
               >
                 <template slot-scope="{ errors }">
-                  <el-input
+                  <input
                     id="numId"
                     placeholder="Cédula del comprador"
                     v-model="cedula"
-                  ></el-input>
+                    class="input-text"
+                  ></input>
                   <span class="text-error" v-show="errors[0]">{{
                     errors[0]
                   }}</span>
@@ -572,7 +573,7 @@ export default {
   display: flex;
   width: 100%;
   height: 100%;
-  min-height: 600px;
+  min-height: calc(100vh - 282px);
   background-color: var(--background_color_2);
   justify-content: center;
   align-items: center;
@@ -590,8 +591,8 @@ export default {
 }
 .wrapper-form {
   margin-bottom: 10px;
-  padding: 20px 54px 10px;
   border-radius: 30px;
+  padding: 20px 54px 10px;
   width: 100%;
   background: #ffffff;
 }
@@ -663,8 +664,29 @@ export default {
   bottom: 2px;
 }
 .input-text {
-  height: 40px;
+  font-size: 14px;
+  color: rgba(21, 20, 57, 0.541);
+  border: solid 2px #ccc9c9;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 8px 14px;
   width: 100%;
+  height: 40px;
+}
+.input-text::placeholder {
+  color: rgba(21, 20, 57, 0.541);
+  opacity: 0.7;
+}
+.input-text:-internal-autofill-selected {
+  -webkit-appearance: menulist-button;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: -internal-light-dark-color(black, white) !important;
+}
+.input-text:focus,
+.input-text:active {
+  outline: 0;
+  border: solid 2px rgba(60, 60, 63, 0.774);
 }
 .input-label {
   height: 25px;
