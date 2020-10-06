@@ -590,7 +590,7 @@ export default {
 }
 .wrapper-form {
   margin-bottom: 10px;
-  padding: 30px 27px 10px;
+  padding: 20px 54px 10px;
   border-radius: 30px;
   width: 100%;
   background: #ffffff;
@@ -605,12 +605,11 @@ export default {
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.46;
+  line-height: 1.2;
   letter-spacing: -0.24px;
   text-align: center;
   color: black;
   margin-bottom: 25px;
-  height: 28px;
 }
 .form {
   flex: 2;
@@ -629,7 +628,6 @@ export default {
   margin-right: 30px;
   height: 90px;
 }
-
 .content-btn {
   flex: 1;
   display: flex;
@@ -904,6 +902,9 @@ export default {
   .contenedor {
     padding: 60px 0px 60px 0px;
   }
+  .wrapper-form {
+    padding: 20px 17px 10px;
+  }
 }
 @media (max-width: 600px) {
   .content-input {
@@ -924,13 +925,6 @@ export default {
   }
   .contenedor {
     padding: 8px 5px 10px 5px;
-  }
-  .content-form {
-    margin-bottom: 10px;
-    padding: 20px 17px;
-    border-radius: 30px;
-    width: 100%;
-    background: #ffffff;
   }
 }
 </style>
