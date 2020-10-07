@@ -397,10 +397,8 @@ export default {
   background: white;
   box-sizing: border-box;
   border-radius: 5px;
-  /* box-shadow: -6px -6px 10px var(--background_color_2),
-    6px 6px 10px rgba(0, 0, 0, 0.295); */
-  box-shadow: rgb(187, 187, 187) 0 1px 1px;
-  /* border: grey; */
+  box-shadow: rgb(226, 226, 226) 0 1px 1px;
+  border: 1px solid rgba(243, 243, 243, 0.637);
 }
 .anim {
   transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -410,6 +408,8 @@ export default {
   transition: all 200ms ease-in;
   position: relative;
   top: -3px;
+  box-shadow: rgb(184, 184, 184) 0 1px 1px;
+  border: 1px solid rgba(218, 218, 218, 0.637);
 }
 .container {
   display: flex;

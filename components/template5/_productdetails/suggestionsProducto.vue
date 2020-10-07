@@ -59,7 +59,6 @@ export default {
   align-items: center;
 }
 .title-ProductFavoritos {
-  background: transparent;
   font-size: 18px;
   font-weight: bold;
   line-height: 1.4;

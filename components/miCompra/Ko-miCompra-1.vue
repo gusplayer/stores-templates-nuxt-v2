@@ -18,7 +18,7 @@
                     placeholder="Número de orden"
                     v-model="numOrden"
                     class="input-text"
-                  ></input>
+                  />
                   <span class="text-error" v-show="errors[0]">{{
                     errors[0]
                   }}</span>
@@ -40,7 +40,7 @@
                     placeholder="Cédula del comprador"
                     v-model="cedula"
                     class="input-text"
-                  ></input>
+                  />
                   <span class="text-error" v-show="errors[0]">{{
                     errors[0]
                   }}</span>

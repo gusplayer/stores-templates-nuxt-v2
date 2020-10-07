@@ -7,6 +7,9 @@
         v-if="!activeClass"
         v-html="data.info.descripcion"
       ></div>
+      <!-- <div class="wrapper-comments">
+        <KoComments :dataStore="dataStore" />
+      </div> -->
     </div>
     <div class="right">
       <div class="payments section">
@@ -128,23 +131,26 @@
           <p class="description-method">El valor del envío no tiene costo</p>
         </div>
       </div>
-      <!-- <div class="line"></div> -->
-      <!-- <div class="deliverys section">
-        <div class="content">
-          <h3 class="title-section">Opciones de garantía</h3>
-        </div>
-      </div> -->
+      <!-- <div class="line-comments"></div> -->
     </div>
+    <!-- <div class="wrapper-comments-responsive">
+      <KoComments :dataStore="dataStore" />
+    </div> -->
   </div>
 </template>
 
 <script>
+import KoComments from './commentsProduct'
+
 export default {
   name: 'descriptionProduct',
   props: {
     dataStore: Object,
     data: {},
     envio: {},
+  },
+  components: {
+    KoComments,
   },
   data() {
     return {
@@ -203,7 +209,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-right: 25px;
+  /* margin-right: 25px; */
   padding-bottom: 10px;
   overflow: hidden;
 }
@@ -240,6 +246,15 @@ export default {
   text-transform: uppercase;
   align-self: flex-start;
   margin-top: 20px;
+}
+.content-text-desc {
+  margin-right: 25px;
+  margin-bottom: 20px;
+  min-height: 300px;
+}
+.wrapper-comments {
+  border-top: 1px solid rgba(127, 127, 139, 0.342);
+  width: 100%;
 }
 h3 {
   color: rgba(21, 20, 57, 0.541);
@@ -308,6 +323,12 @@ li p {
   display: block;
   border-radius: 4px;
 }
+.wrapper-comments-responsive {
+  display: none;
+}
+.line-comments {
+  display: none;
+}
 @media (max-width: 810px) {
   .left {
     margin-right: 15px;
@@ -316,9 +337,6 @@ li p {
 @media (max-width: 768px) {
   .left {
     margin-right: 15px;
-  }
-  .content-text-desc {
-    margin-right: 25px;
   }
   .description {
     display: flex;
@@ -339,24 +357,44 @@ li p {
   .right {
     border-left: 0px;
   }
+  .content-text-desc {
+    border-bottom: 1px solid rgba(127, 127, 139, 0.342);
+    padding-bottom: 20px;
+    min-height: 0;
+  }
+  .wrapper-comments-responsive {
+    display: initial;
+  }
+  .wrapper-comments {
+    display: none;
+  }
+  .line-comments {
+    display: initial;
+    border-top: 1px solid rgba(127, 127, 139, 0.342);
+    width: 100%;
+  }
 }
-@media (max-width: 700px) {
+@media (max-width: 725px) {
   .content-text-desc {
     width: 100%;
-    margin-right: 0px;
+    padding-right: 15px;
+    padding-left: 15px;
     margin-bottom: 10px;
+    border-bottom: none;
   }
   .description {
     margin-bottom: 0px;
   }
   .left {
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     flex: 1;
-    padding-right: 15px;
-    padding-left: 15px;
   }
   .right {
     border-left: 0px;
+  }
+  .text-desc {
+    padding-right: 15px;
+    padding-left: 15px;
   }
   .payments {
     /* border-top: 1px solid var(--color_border); */

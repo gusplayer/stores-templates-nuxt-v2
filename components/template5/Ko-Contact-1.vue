@@ -508,9 +508,10 @@ export default {
   background-color: transparent;
   padding: 4px 14px;
   width: 100%;
-  max-width: 440px;
-  max-height: 140px;
-  min-height: 41px;
+  resize: none;
+  overflow-y: auto;
+  max-height: 80px;
+  min-height: 80px;
 }
 .input-text-rectangule::placeholder {
   /* color: var(--color_border); */
@@ -521,8 +522,21 @@ export default {
 .input-text-rectangule:focus,
 .input-text-rectangule:active {
   outline: 0;
-  /* border: solid 2px var(--color_border); */
   border: solid 2px rgba(127, 127, 139, 0.342);
+}
+.input-text-rectangule::-webkit-scrollbar {
+  background: transparent;
+  width: 5px;
+}
+.input-text-rectangule::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px transparent;
+  border-radius: 5px;
+}
+.input-text-rectangule::-webkit-scrollbar-thumb {
+  background: rgb(59, 59, 59);
+}
+.input-text-rectangule::-webkit-scrollbar-thumb:hover {
+  background: rgb(138, 138, 138);
 }
 .text-error {
   font-size: 12px;
