@@ -115,7 +115,7 @@
                     >
                       <p
                         v-if="this.shippingTarifaPrecio > 0"
-                        class="text-color text-TarifaPrecio"
+                        class="text-color"
                       >
                         Tarifa por precio:
                         {{ this.shippingTarifaPrecio | currency }}
