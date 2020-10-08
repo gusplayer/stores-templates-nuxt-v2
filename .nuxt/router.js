@@ -8,13 +8,15 @@ const _7475a39b = () => interopDefault(import('../pages/cart.vue' /* webpackChun
 const _022f1cdc = () => interopDefault(import('../pages/constructor/index.vue' /* webpackChunkName: "pages/constructor/index" */))
 const _4a84afca = () => interopDefault(import('../pages/contacto.vue' /* webpackChunkName: "pages/contacto" */))
 const _927df9c8 = () => interopDefault(import('../pages/ig/index.vue' /* webpackChunkName: "pages/ig/index" */))
-const _61ce72d8 = () => interopDefault(import('../pages/micompra/index.vue' /* webpackChunkName: "pages/micompra/index" */))
+const _3fab1015 = () => interopDefault(import('../pages/micompra.vue' /* webpackChunkName: "pages/micompra" */))
 const _5f542ada = () => interopDefault(import('../pages/template5/index.vue' /* webpackChunkName: "pages/template5/index" */))
 const _653a9d54 = () => interopDefault(import('../pages/template6/index.vue' /* webpackChunkName: "pages/template6/index" */))
 const _0bc15fd6 = () => interopDefault(import('../pages/template7/index.vue' /* webpackChunkName: "pages/template7/index" */))
-const _b5c84470 = () => interopDefault(import('../pages/wa/index.vue' /* webpackChunkName: "pages/wa/index" */))
+const _19aa8426 = () => interopDefault(import('../pages/unicentro/index.vue' /* webpackChunkName: "pages/unicentro/index" */))
 const _f9834516 = () => interopDefault(import('../pages/ig/contacto.vue' /* webpackChunkName: "pages/ig/contacto" */))
 const _a2f76150 = () => interopDefault(import('../pages/ig/productos/_slug.vue' /* webpackChunkName: "pages/ig/productos/_slug" */))
+const _efa453be = () => interopDefault(import('../pages/wa/p/_slug.vue' /* webpackChunkName: "pages/wa/p/_slug" */))
+const _1e06bad0 = () => interopDefault(import('../pages/blog/_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
 const _2abcb93a = () => interopDefault(import('../pages/productos/_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
 const _b9358700 = () => interopDefault(import('../pages/wa/_slug.vue' /* webpackChunkName: "pages/wa/_slug" */))
 const _3fea4e32 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -57,7 +59,7 @@ export const routerOptions = {
     name: "ig"
   }, {
     path: "/micompra",
-    component: _61ce72d8,
+    component: _3fab1015,
     name: "micompra"
   }, {
     path: "/template5",
@@ -72,9 +74,9 @@ export const routerOptions = {
     component: _0bc15fd6,
     name: "template7"
   }, {
-    path: "/wa",
-    component: _b5c84470,
-    name: "wa"
+    path: "/unicentro",
+    component: _19aa8426,
+    name: "unicentro"
   }, {
     path: "/ig/contacto",
     component: _f9834516,
@@ -84,11 +86,19 @@ export const routerOptions = {
     component: _a2f76150,
     name: "ig-productos-slug"
   }, {
+    path: "/wa/p/:slug?",
+    component: _efa453be,
+    name: "wa-p-slug"
+  }, {
+    path: "/blog/:slug",
+    component: _1e06bad0,
+    name: "blog-slug"
+  }, {
     path: "/productos/:slug?",
     component: _2abcb93a,
     name: "productos-slug"
   }, {
-    path: "/wa/:slug",
+    path: "/wa/:slug?",
     component: _b9358700,
     name: "wa-slug"
   }, {
