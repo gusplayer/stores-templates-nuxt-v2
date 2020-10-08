@@ -5,7 +5,7 @@
     </div>
     <div class="container-favorite">
       <div class="card-favorite" v-for="product in orderproduct">
-        <router-link :to="{ path: `/wa/` + product.slug }">
+        <router-link :to="{ path: `/wa/producto/` + product.slug }">
           <img
             :src="idCloudinary(product.foto_cloudinary, 250, 250)"
             class="product-image"

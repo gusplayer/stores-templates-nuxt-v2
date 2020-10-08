@@ -3,7 +3,7 @@
     <div class="container">
       <div class="wrapper-movil">
         <router-link
-          :to="{ path: `/wa/` + product.slug }"
+          :to="{ path: `/wa/producto/` + product.slug }"
           class="wrapper-image"
         >
           <img
@@ -25,7 +25,7 @@
         </router-link>
         <div class="wrapper-text">
           <router-link
-            :to="{ path: `/wa/` + product.slug }"
+            :to="{ path: `/wa/producto/` + product.slug }"
             class="content-name-product-movil"
           >
             <p
@@ -89,13 +89,15 @@
               >
                 <shopWa-icon class="wp-icon" />
               </div>
-              <router-link :to="{ path: `/wa/` + product.slug }" class="btn"
+              <router-link
+                :to="{ path: `/wa/producto/` + product.slug }"
+                class="btn"
                 >compra</router-link
               >
             </div>
 
             <router-link
-              :to="{ path: `/wa/` + product.slug }"
+              :to="{ path: `/wa/producto/` + product.slug }"
               v-else
               class="btn"
               >compra</router-link

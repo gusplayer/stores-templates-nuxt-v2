@@ -414,7 +414,6 @@ export const actions = {
     if (parts[0] == 'localhost:3000' || parts[0] == 'wapi') {
       let partsWapi = req.url.split('/')
       idWapi = partsWapi[2]
-      console.log(idWapi)
     } else if (
       parts[1] == 'komercia' ||
       parts[1] == 'localhost:3000' ||
