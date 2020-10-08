@@ -10,6 +10,7 @@ import Instagram from 'vue-material-design-icons/Instagram.vue'
 import Youtube from 'vue-material-design-icons/Youtube.vue'
 import Cart from 'vue-material-design-icons/CartOutline.vue'
 import CartShop from 'vue-material-design-icons/ShoppingOutline.vue'
+import shopping from 'vue-material-design-icons/shopping.vue'
 import Menu from 'vue-material-design-icons/Menu.vue'
 import MenuDots from 'vue-material-design-icons/DotsVertical.vue'
 import Close from 'vue-material-design-icons/CloseCircle.vue'
@@ -45,6 +46,7 @@ Vue.component('whatsapp-icon', Whatsapp)
 
 Vue.component('cart-icon', Cart)
 Vue.component('cartShop-icon', CartShop)
+Vue.component('shopWa-icon', shopping)
 Vue.component('menu-icon', Menu)
 Vue.component('menuDots-icon', MenuDots)
 Vue.component('close-icon', Close)

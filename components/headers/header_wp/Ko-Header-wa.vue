@@ -10,14 +10,14 @@
           alt="Banner tienda"
         />
       </div>
-      <nuxt-link to="/wa" class="containt-image">
-        <img
-          :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-          class="header-logo"
-          alt="Logo Img"
-        />
-      </nuxt-link>
       <div class="header">
+        <nuxt-link to="/wa" class="containt-image">
+          <img
+            :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+            class="header-logo"
+            alt="Logo Img"
+          />
+        </nuxt-link>
         <div class="header-content-text">
           <p class="header-text">
             {{ dataStore.tienda.nombre }}
@@ -37,6 +37,9 @@
             >
               Horario de atención: {{ dataStore.geolocalizacion[0].horario }}
             </p>
+          </div>
+          <div class="container-tienda-wp-responsive">
+            <p><whatsapp-icon class="wp-icon" />Tienda WhatsApp</p>
           </div>
         </div>
         <div class="container-tienda-wp">
@@ -126,26 +129,24 @@ export default {
   background: white;
   flex-direction: column;
   transition: all ease 1s;
-  position: relative;
 }
 .wrapper-banner-img {
   width: 100%;
-  max-height: 160px;
+  max-height: 260px;
   overflow: hidden;
 }
 .banner {
-  max-height: 160px;
+  max-height: 260px;
   width: 100%;
   object-fit: cover;
   overflow: hidden;
-  object-position: center;
 }
 .containt-image {
   display: flex;
-  width: 85px;
-  height: 85px;
+  width: 105px;
+  height: 105px;
   left: 20px;
-  top: 7.5rem;
+  top: -50px;
   /* top: 165px; */
   background-color: white;
   position: absolute;
@@ -174,9 +175,10 @@ export default {
   justify-content: space-between;
   width: 100%;
   padding: 15px 15px;
+  position: relative;
 }
 .header-content-text {
-  margin-left: 100px;
+  margin-left: 130px;
 }
 .header-text {
   font-size: 1.15rem;
@@ -268,9 +270,10 @@ export default {
   font-weight: bold;
 }
 .container-tienda-wp {
+  display: initial;
   background-color: #f9f9f9;
   position: absolute;
-  top: 10.5rem;
+  top: 15px;
   right: 25px;
   border-radius: 15px;
   padding: 4px 8px;
@@ -287,12 +290,42 @@ export default {
   color: #075e54;
   margin-right: 3px;
 }
+.container-tienda-wp-responsive {
+  display: none;
+}
 @media (max-width: 530px) {
   .header {
-    padding: 65px 20px 0px 20px;
+    padding: 40px 20px 5px 20px;
   }
   .header-content-text {
     margin-left: 0px;
+  }
+  .containt-image {
+    width: 85px;
+    height: 85px;
+  }
+  .wrapper-banner-img {
+    max-height: 160px;
+  }
+  .banner {
+    max-height: 160px;
+  }
+  .container-tienda-wp {
+    display: none;
+  }
+  .container-tienda-wp-responsive {
+    display: flex;
+    max-width: 160px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    padding: 4px 8px;
+    box-shadow: 0 0 2px rgba(92, 100, 111, 0.1);
+    box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
+    box-shadow: 0 2px 5px rgba(131, 130, 131, 0.276);
+  }
+  .container-tienda-wp-responsive p {
+    color: #4c4c4c;
+    font-size: 12px;
   }
 }
 </style>

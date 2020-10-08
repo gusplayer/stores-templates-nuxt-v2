@@ -4,7 +4,7 @@
     <KCategory :dataStore="dataStore" />
     <KProductFavoritos v-if="this.stateBanner" />
     <KProductList :dataStore="dataStore" :fullProducts="fullProducts" />
-    <KFooterWaLogo />
+    <KFooterWaLogo :dataStore="dataStore" />
     <KFooterWa :dataStore="dataStore" />
   </div>
 </template>

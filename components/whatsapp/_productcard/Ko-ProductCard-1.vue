@@ -87,8 +87,7 @@
                 class="btn btn-whatsapp"
                 style="margin-right: 5px;"
               >
-                <!-- <cartArrowDown class="card-icon-cart" />Agregar -->
-                <img src="../../../assets/img/icon-3.png" class="icon-shop" />
+                <shopWa-icon class="wp-icon" />
               </div>
               <router-link :to="{ path: `/wa/` + product.slug }" class="btn"
                 >compra</router-link
@@ -539,14 +538,13 @@ export default {
 }
 .btn {
   background-color: white;
-  padding: 2px 14px;
-  width: fit-content;
   font-weight: bold;
   cursor: pointer;
   transition: all 200ms ease-in;
   text-decoration: none;
   display: flex;
   justify-content: center;
+  align-items: center;
   text-align: center;
   border-radius: 4px;
   padding: 6px 10px;
@@ -557,8 +555,8 @@ export default {
   border: 1px solid #ececec;
 }
 .btn:hover {
-  color: black;
-  background-color: #b9b9b9;
+  color: white;
+  background-color: #128c7e;
 }
 .btn-whatsapp {
   box-sizing: border-box;
@@ -566,8 +564,8 @@ export default {
   margin-right: 10px;
 }
 .wp-icon {
-  font-size: 32px;
-  color: #25d366;
+  font-size: 20px;
+  bottom: 3px;
 }
 @media (max-width: 330px) {
   .btn-whatsapp {

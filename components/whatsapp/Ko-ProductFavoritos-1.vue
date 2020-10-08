@@ -76,6 +76,7 @@ export default {
   align-items: center;
   box-sizing: border-box;
   padding-top: 10px;
+  transition: all 200ms ease-in;
 }
 .swiper-container {
   width: 100%;
@@ -128,13 +129,18 @@ export default {
   color: #445a64;
   transition: 0.3s;
   box-shadow: 0 2px 10px rgba(131, 130, 131, 0.276);
-
   font-size: 13px;
+  transition: all 200ms ease-in;
+}
+.card-button:hover {
+  color: white;
+  background: #128c7e;
 }
 .card-favorite {
   margin: 6px;
   width: 130px;
 }
+
 .card-favorite img {
   width: 130px;
   object-fit: contain;
