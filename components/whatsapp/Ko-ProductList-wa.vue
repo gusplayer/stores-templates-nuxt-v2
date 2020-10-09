@@ -428,7 +428,7 @@ export default {
 }
 @media (max-width: 770px) {
   .container {
-    padding: 0px 0px 80px 0px;
+    padding: 0px 0px 10px 0px;
   }
   .content-item-productos {
     padding: 15px;

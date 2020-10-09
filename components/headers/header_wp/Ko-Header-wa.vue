@@ -319,7 +319,6 @@ export default {
   }
   .banner {
     max-height: 160px;
-    object-fit: cover;
   }
   .container-tienda-wp {
     top: 10px;
