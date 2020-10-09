@@ -62,7 +62,7 @@ export default {
         navbar.style.top = '91px'
       } else {
         navbar.style.zIndex = '0'
-        navbar.style.top = '52px'
+        navbar.style.top = '47px'
       }
       prevScrollpos = currentScrollPos
     }
@@ -158,7 +158,7 @@ input[type='search'] {
 #demo-1 input[type='search']:focus {
   width: 100%;
   background-color: #fff;
-  border-color: var(--color_hover_text);
+  border-color: var(--btnhover);
   box-sizing: border-box;
 }
 input[type='search']:focus {

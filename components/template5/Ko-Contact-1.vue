@@ -119,7 +119,7 @@
           </validation-provider>
           <P>TELÉFONO</P>
           <div class="input-content">
-            <validation-provider name="celular" rules="required|num">
+            <validation-provider name="celular" rules="required|numeric">
               <template slot-scope="{ errors }">
                 <input
                   class="input-text"
@@ -552,6 +552,7 @@ export default {
   padding: 8px 14px;
   font-size: 16px;
   width: 50%;
+  height: 36px;
   font-weight: bold;
   cursor: pointer;
   margin-left: 20px;

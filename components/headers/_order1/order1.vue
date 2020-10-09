@@ -50,7 +50,7 @@
                       </p>
                     </div>
                     <boteBasura-icon
-                      class="material-icons delete"
+                      class="icon-delete"
                       v-on:click="deleteItemCart(index)"
                     />
                   </li>
@@ -504,6 +504,7 @@ export default {
   display: grid;
   overflow-y: auto;
 }
+
 .order_products_list-empty {
   height: 380px;
   display: flex;
@@ -518,15 +519,16 @@ export default {
   list-style: none;
 }
 .order_products_list::-webkit-scrollbar {
+  border: 1px solid var(--color_border);
   background: transparent;
   width: 6px;
 }
 .order_products_list::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px var(--background_color_2);
+  box-shadow: inset 0 0 10px var(--color_border);
   border-radius: 10px;
 }
 .order_products_list::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_icon));
+  background: var(--color_icon);
   border-radius: 10px;
 }
 .order_products_list_item {
@@ -547,7 +549,7 @@ export default {
   border-radius: 10px;
 }
 .order_products_list_item::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_icon));
+  background: var(--color_icon);
   border-radius: 10px;
 }
 .order_products_list_item .photo {
@@ -565,8 +567,8 @@ export default {
   width: 100%;
 }
 .name >>> .el-tag {
-  border-color: var(--color_border);
-  background-color: var(--background_color_1);
+  border-color: var(--background_color_2);
+  background-color: var(--background_color_2);
   color: var(--color_text);
   display: inline-block;
   height: 28px;
@@ -613,15 +615,17 @@ export default {
   color: var(--color_subtext);
   font-size: 16px;
 }
-.order_products_list_item .material-icons.delete {
-  height: 17px;
+.icon-delete {
+  font-size: 20px;
   cursor: pointer;
   color: var(--color_icon);
   transition: 0.3s;
+  bottom: 5px;
 }
-.order_products_list_item:hover .material-icons.delete {
-  color: var(--color_hover_text);
+.icon-delete:hover {
+  color: var(--btnhover);
 }
+
 .order_beforefreeshipping {
   text-align: center;
   background-color: #ffd558;
@@ -695,12 +699,12 @@ export default {
 .btn-remover-yes {
   font-weight: bold;
   border-style: none;
-  background-color: var(--color_icon);
+  background-color: black;
   padding: 4px 10px;
   width: 100%;
   max-width: 70px;
-  color: var(--color_text_btn);
-  border: 2px solid var(--color_icon);
+  color: white;
+  border: 2px solid black;
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -727,8 +731,8 @@ export default {
   transition: all ease 0.3s;
 }
 .btn-remover-no:hover {
-  color: var(--color_icon);
-  border: 2px solid var(--color_icon);
+  color: var(--btnhover);
+  border: 2px solid var(--btnhover);
 }
 .order_total {
   border-top: 1px solid var(--background_color_2);
@@ -773,7 +777,7 @@ export default {
   border-radius: 10px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_icon));
+  background: var(--color_icon);
   border-radius: 10px;
 }
 .without_shipping_cost {
@@ -848,8 +852,8 @@ export default {
   transition: all ease 0.3s;
 }
 .continue_shopping2:hover {
-  color: var(--color_hover_text);
-  border: 2px solid var(--color_hover_text);
+  color: var(--btnhover);
+  border: 2px solid var(--btnhover);
 }
 .wrapper_photo {
   position: relative;

@@ -171,8 +171,6 @@ export default {
         '--color_text': '#000',
         '--color_hover_text': '#25dac5',
         '--color_subtext': 'rgba(21, 20, 57, 0.541)',
-
-        '--color_shopping_cart': '#3aacf7',
         '--color_icon': '#3aacf7',
 
         '--color_text_btn': '#fff',

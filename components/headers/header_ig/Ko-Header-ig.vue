@@ -176,7 +176,7 @@ export default {
   border-radius: 10px;
 }
 .menu-grid::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: var(--color_icon);
   border-radius: 10px;
 }
 .subcategoria {
@@ -287,7 +287,7 @@ export default {
   box-sizing: border-box;
   width: 35px;
   height: 35px;
-  /* border: var(--color_shopping_cart) 2px solid; */
+  /* border: var(--color_icon) 2px solid; */
   /* border-radius: 50%; */
   /* padding-bottom: 3px; */
   margin-left: 20px;
@@ -301,7 +301,7 @@ export default {
   top: -5px;
   color: var(--color_text);
   background-color: transparent;
-  border: var(--color_shopping_cart) 1px solid;
+  border: var(--color_icon) 1px solid;
   border-radius: 10px;
   line-height: 1;
   display: flex;

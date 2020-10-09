@@ -227,7 +227,7 @@ export default {
   color: var(--color_icon);
 }
 .header-icon-cart:hover {
-  color: var(--color_hover_text);
+  color: var(--btnhover);
 }
 .num-items {
   font-size: 11px;
@@ -264,7 +264,7 @@ export default {
 }
 input[type='search']:focus {
   background-color: #fff;
-  border-color: var(--color_hover_text);
+  border-color: var(--btnhover);
 }
 input:-moz-placeholder {
   color: var(--color_text);

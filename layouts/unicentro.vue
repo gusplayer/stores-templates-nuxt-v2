@@ -344,24 +344,8 @@ export default {
   --magenta: #c52675;
   --yellow: #f2b931;
 
-  /* --background_color_1: hsla(173, 0%, 100%, 1); */
-  /* --background_color_2: #efefef; */
-  --color_background_hover: #cccccc;
-
-  /* --color_text: #000000; */
-  --color_hover_text: #d11c2b;
-  /* --color_subtext: rgba(21, 20, 57, 0.541); */
-
-  --color_shopping_cart: #25dac5;
-  /* --color_icon: #25dac5; */
-
-  /* --color_text_btn: #fff; */
-  /* --color_background_btn: #000; */
+  --color_hover_text: #e64956;
   --btnhover: #929292;
-
-  --color_background_btn_2: #000;
-
-  /* --color_border: rgba(127, 127, 139, 0.342); */
 
   --radius_btn: 5px;
 }

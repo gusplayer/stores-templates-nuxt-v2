@@ -625,7 +625,7 @@ export default {
   border-radius: 10px;
 }
 .modal-content::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #9b9b9b, black);
+  background: black;
   border-radius: 10px;
 }
 .modal-content,

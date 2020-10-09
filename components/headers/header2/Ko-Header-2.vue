@@ -530,18 +530,10 @@ export default {
   border-radius: 10px;
 }
 .wrapper-meni-grid::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    170deg,
-    rgba(145, 145, 145, 1) 0%,
-    rgb(44, 44, 44) 60%
-  );
+  background: rgb(44, 44, 44);
 }
 .wrapper-meni-grid::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    170deg,
-    rgb(102, 102, 102) 0%,
-    rgba(0, 0, 0, 1) 60%
-  );
+  background: rgb(102, 102, 102);
   border-radius: 10px;
 }
 .name-category-all {
@@ -666,7 +658,7 @@ export default {
   cursor: pointer;
 }
 .header-icon:hover {
-  color: var(--color_hover_text);
+  color: var(--btnhover);
 }
 .header-content-cart {
   display: flex;
@@ -703,7 +695,7 @@ export default {
   color: var(--color_icon);
 }
 .header-icon-cart:hover {
-  color: var(--color_hover_text);
+  color: var(--btnhover);
 }
 .header-item-menu {
   display: none;
@@ -786,7 +778,7 @@ export default {
 }
 input[type='search']:focus {
   background-color: #fff;
-  border-color: var(--color_hover_text);
+  border-color: var(--btnhover);
 }
 input:-moz-placeholder {
   color: var(--color_text);

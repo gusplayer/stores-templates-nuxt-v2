@@ -250,7 +250,7 @@ export default {
   color: var(--color_icon);
 }
 .icon:hover {
-  color: var(--color_hover_text);
+  color: var(--btnhover);
 }
 .text-top-bold {
   font-size: 18px;
@@ -322,7 +322,7 @@ export default {
   border-radius: 10px;
 }
 .modal-content::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #9b9b9b, black);
+  background: black;
   border-radius: 10px;
 }
 .modal-content,

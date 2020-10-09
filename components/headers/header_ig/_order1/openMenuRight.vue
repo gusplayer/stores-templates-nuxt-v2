@@ -317,7 +317,7 @@ export default {
   padding: 0px 2px;
   border-radius: 25px;
   border: 1px solid white;
-  background-color: var(--color_shopping_cart);
+  background-color: var(--color_icon);
   cursor: pointer;
   outline: none;
   flex: none;
@@ -377,7 +377,7 @@ input[type='search'] {
   background: #fff
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
-  border: solid 2px var(--color_shopping_cart);
+  border: solid 2px var(--color_icon);
   padding: 4px 7px;
   width: 35px;
   max-height: 36px;
@@ -392,7 +392,7 @@ input[type='search'] {
   background: #fff
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
     7px center;
-  border: solid 2px var(--color_shopping_cart);
+  border: solid 2px var(--color_icon);
   padding: 2px 4px 4px 38px;
   width: 100%;
   -webkit-border-radius: var(--radius_btn);
@@ -406,7 +406,7 @@ input[type='search'] {
 #demo-1 input[type='search']:focus {
   width: 100%;
   background-color: #fff;
-  border-color: var(--color_hover_text);
+  border-color: var(--btnhover);
   box-sizing: border-box;
 }
 input[type='search']:focus {

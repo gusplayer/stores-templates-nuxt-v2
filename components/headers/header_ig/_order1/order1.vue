@@ -521,7 +521,7 @@ export default {
   border-radius: 10px;
 }
 .order_products_list::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: var(--color_icon);
   border-radius: 10px;
 }
 .order_products_list_item {
@@ -542,7 +542,7 @@ export default {
   border-radius: 10px;
 }
 .order_products_list_item::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: var(--color_icon);
   border-radius: 10px;
 }
 .order_products_list_item .photo {
@@ -595,7 +595,7 @@ export default {
 .order-combincacion-uni {
   border-radius: 10px;
   border: 1px solid white;
-  background-color: var(--color_shopping_cart);
+  background-color: var(--color_icon);
   color: #fff;
 }
 .order-combincacion-text {
@@ -605,7 +605,7 @@ export default {
 }
 .price {
   min-width: 60px;
-  color: var(--color_shopping_cart);
+  color: var(--color_icon);
   font-size: 16px;
 }
 .order_products_list_item .material-icons.delete {
@@ -691,12 +691,12 @@ export default {
 .btn-remover-yes {
   font-weight: bold;
   border-style: none;
-  background-color: var(--color_shopping_cart);
+  background-color: var(--color_icon);
   padding: 4px 10px;
   width: 100%;
   max-width: 70px;
   color: var(--color_text_btn);
-  border: 2px solid var(--color_shopping_cart);
+  border: 2px solid var(--color_icon);
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -724,8 +724,8 @@ export default {
   transition: all ease 0.3s;
 }
 .btn-remover-no:hover {
-  color: var(--color_shopping_cart);
-  border: 2px solid var(--color_shopping_cart);
+  color: var(--color_icon);
+  border: 2px solid var(--color_icon);
 }
 .order_total {
   border-top: 1px solid var(--background_color_2);
@@ -765,7 +765,7 @@ export default {
   border-radius: 10px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: var(--color_icon);
   border-radius: 10px;
 }
 .without_shipping_cost {
@@ -829,8 +829,8 @@ export default {
   padding: 8px 10px;
   width: 100%;
   max-width: 340px;
-  color: var(--color_shopping_cart);
-  border: 2px solid var(--color_shopping_cart);
+  color: var(--color_icon);
+  border: 2px solid var(--color_icon);
   border-radius: var(--radius_btn);
   font-size: 14px;
   letter-spacing: 1px;

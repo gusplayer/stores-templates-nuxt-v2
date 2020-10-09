@@ -500,7 +500,7 @@ input:checked ~ .tab-content {
   border-radius: 10px;
 }
 .modal-content::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_shopping_cart));
+  background: var(--color_icon);
   border-radius: 10px;
 }
 .modal-content,

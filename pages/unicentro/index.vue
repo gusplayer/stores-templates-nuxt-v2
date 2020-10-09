@@ -146,7 +146,7 @@ input[type='search'] {
 #demo-1 input[type='search']:focus {
   width: 100%;
   background-color: #fff;
-  border-color: var(--color_hover_text);
+  border-color: var(--btnhover);
   box-sizing: border-box;
 }
 input[type='search']:focus {

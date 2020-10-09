@@ -497,7 +497,8 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: var(--background_color_2);
+  /* background: var(--background_color_2); */
+  background: #efefef;
   box-sizing: border-box;
   flex-direction: column;
   padding-bottom: 10px;
@@ -522,7 +523,6 @@ export default {
 .wrapper_item {
   width: 100%;
   display: flex;
-  background-color: var(--background_color_2);
   padding: 20px 0px;
   border-top: 1px solid var(--color_border);
 }
@@ -614,7 +614,7 @@ export default {
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   border-style: solid;
-  background: var(--background_color_2);
+  background: transparent;
   height: 41px;
   width: 3em;
   box-sizing: border-box;
@@ -626,7 +626,7 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
   border-style: solid none solid none;
-  background: var(--background_color_2);
+  background: transparent;
   height: 41px;
   width: 2.5em;
   justify-content: center;
@@ -639,14 +639,14 @@ export default {
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   border-style: solid;
-  background: var(--background_color_2);
+  background: transparent;
   height: 41px;
   width: 3em;
   box-sizing: border-box;
 }
 .icon {
   font-size: 16px;
-  color: var(--color_border);
+  color: var(--color_icon);
   transition: all 200ms ease-in;
 }
 .icon:hover {
@@ -682,13 +682,13 @@ export default {
 }
 .cart-icon {
   font-size: 23px;
-  color: var(--color_text);
+  color: var(--color_icon);
   cursor: pointer;
   margin-right: 10px;
 }
 .cart-icon:hover {
   font-size: 24px;
-  color: var(--color_subtext);
+  color: var(--btnhover);
 }
 .cart-icon > .material-design-icon__svg {
   bottom: 0em;
@@ -750,7 +750,7 @@ export default {
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #e6e6e6, var(--color_text));
+  background: var(--color_icon);
   border-radius: 10px;
 }
 .cart_summary_price {
