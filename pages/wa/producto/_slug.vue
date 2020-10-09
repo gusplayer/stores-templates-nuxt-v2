@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div class="Wrapper-KoProductDetail-Slug-wapi">
     <KoProductDetail />
   </div>
 </template>
@@ -15,4 +15,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.Wrapper-KoProductDetail-Slug-wapi {
+  width: 100%;
+}
+</style>

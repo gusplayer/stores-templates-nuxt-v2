@@ -45,34 +45,34 @@
               v-if="this.product.precio"
             >
               <div class="wrapper-price">
-                <div>
-                  <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
+                <!-- <div> -->
+                <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
                   </p>-->
-                  <div
-                    class="content-price"
-                    v-if="estadoCart && this.minPrice != this.maxPrice"
+                <div
+                  class="content-price"
+                  v-if="estadoCart && this.minPrice != this.maxPrice"
+                >
+                  <p
+                    class="card-price-2"
+                    v-if="this.product.precio > 0 || this.product.precio"
                   >
-                    <p
-                      class="card-price-2"
-                      v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{ this.minPrice | currency }}
-                    </p>
-                    <p class="separator-price">-</p>
-                    <p
-                      class="card-price-2"
-                      v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{ this.maxPrice | currency }}
-                    </p>
-                  </div>
-                  <div v-else>
-                    <p class="card-price-2" v-if="this.product.precio > 0">
-                      {{ this.product.precio | currency }}
-                    </p>
-                  </div>
+                    {{ this.minPrice | currency }}
+                  </p>
+                  <p class="separator-price">-</p>
+                  <p
+                    class="card-price-2"
+                    v-if="this.product.precio > 0 || this.product.precio"
+                  >
+                    {{ this.maxPrice | currency }}
+                  </p>
                 </div>
+                <div v-else>
+                  <p class="card-price-2" v-if="this.product.precio > 0">
+                    {{ this.product.precio | currency }}
+                  </p>
+                </div>
+                <!-- </div> -->
                 <!-- <p class="card-descuento">-50%</p> -->
               </div>
             </div>
@@ -366,12 +366,17 @@ export default {
   width: 100%;
   box-sizing: border-box;
   border-radius: 10px;
-  box-shadow: -6px -6px 10px var(--background_color_2),
-    6px 6px 10px rgba(0, 0, 0, 0.2);
   border: none;
   padding: 0px 5px;
   padding-bottom: 5px;
   border-bottom: 1px solid rgba(213, 213, 213, 0.473);
+  -webkit-box-shadow: 5px 5px 5px 5px rgb(250, 250, 244);
+  box-shadow: 5px 5px 5px 5px rgb(250, 250, 244);
+  transition: all 200ms ease-in;
+}
+.wrapper-card:hover {
+  box-shadow: -6px -6px 10px rgb(250, 250, 244),
+    6px 6px 10px rgba(116, 116, 116, 0.144);
 }
 .container {
   display: flex;
@@ -412,10 +417,10 @@ export default {
   padding: 1px 2px;
   border-radius: var(--radius_btn);
   color: white;
-  font-size: 12px;
+  font-size: 10px;
   z-index: 2;
   position: absolute;
-  top: 110px;
+  top: 78px;
   left: 0px;
 }
 .card-info-2 {
@@ -426,11 +431,11 @@ export default {
   padding: 1px 2px;
   border-radius: var(--radius_btn);
   color: black;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: bold;
   z-index: 2;
   position: absolute;
-  top: 132px;
+  top: 98px;
   left: 0px;
 }
 .wrapper-text {
@@ -447,20 +452,20 @@ export default {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  height: 30px;
+  /* height: 30px; */
 }
 .card-text-movil-title {
   font-size: 14px;
   font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: 0.1px;
+  line-height: 1.2;
+  /* letter-spacing: 0.1px; */
   color: black;
 }
 .card-text-movil {
   font-size: 13px;
   font-weight: 400;
-  line-height: 1.3;
-  letter-spacing: 0.2px;
+  /* line-height: 1.2; */
+  /* letter-spacing: 0.2px; */
   color: black;
 }
 .content-text-price-movil-cart {
@@ -498,15 +503,14 @@ export default {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
-  margin-top: 7px;
-  color: rgb(107, 107, 107);
-  color: rgb(56, 161, 105);
+  color: #128c7e;
   text-align: left;
 }
 .separator-price {
   color: black;
   margin-left: 5px;
   margin-right: 5px;
+  text-align: center;
 }
 .card-descuento {
   font-size: 12px;

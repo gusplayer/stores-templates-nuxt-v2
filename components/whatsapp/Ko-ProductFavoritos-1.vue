@@ -155,7 +155,7 @@ export default {
 }
 .card-price-2 {
   font-size: 13px;
-  color: black;
+  color: #128c7e;
   font-weight: 600;
   text-align: center;
 }

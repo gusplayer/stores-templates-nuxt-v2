@@ -123,6 +123,7 @@ export const state = () => ({
   propertiesComponent: {},
   pagination: {},
   settingByTemplate: '',
+  settingByTemplateWapi: '',
   category_producto_header: '',
   subcategory_producto_header: '',
   analytics_tagmanager: '',
@@ -355,6 +356,9 @@ export const mutations = {
   SET_SETTINGS_BY_TEMPLATE: (state, value) => {
     state.settingByTemplate = value
   },
+  SET_SETTINGS_BY_TEMPLATE_WAPI: (state, value) => {
+    state.settingByTemplateWapi = value
+  },
   SET_ANALITICS_TAGMANAGER: (state, value) => {
     state.analytics_tagmanager = value
   },
@@ -431,6 +435,7 @@ export const actions = {
       await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
       await dispatch('GET_TEMPLATE_STORE', 99)
       await dispatch('GET_ANALYTICS_TAGMANAGER', idWapi)
+      await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
     } else {
       await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
       await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
@@ -474,6 +479,16 @@ export const actions = {
       .$get(`https://api2.komercia.co/api/template/${template}/settings/${id}`)
       .then((response) => {
         commit('SET_SETTINGS_BY_TEMPLATE', response.data)
+      })
+  },
+  GET_SETTINGS_BY_TEMPLATE_WAPI({ commit }, idWapi) {
+    let template = 99
+    this.$axios
+      .$get(
+        `https://api2.komercia.co/api/template/${template}/settings/${idWapi}`
+      )
+      .then((response) => {
+        commit('SET_SETTINGS_BY_TEMPLATE_WAPI', response.data)
       })
   },
   GET_ANALYTICS_TAGMANAGER({ commit }, id) {

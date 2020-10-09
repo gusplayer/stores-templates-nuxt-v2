@@ -3,12 +3,23 @@
     <div class="wrapper-header">
       <div class="line-header"></div>
       <KoOrderWa :dataStore="dataStore" />
-      <div class="wrapper-banner-img">
-        <img
-          src="https://www.dinays.co/wp-content/uploads/2018/06/imagen-slider-helado-2-dinays-fruteria-y-heladeria-en-cali.png"
-          class="banner"
-          alt="Banner tienda"
-        />
+      <div v-if="this.settingByTemplate">
+        <div class="wrapper-banner-img" v-if="this.settingByTemplate.banner">
+          <img
+            :src="`${this.settingByTemplate.banner}`"
+            class="banner"
+            alt="Banner-wapi"
+          />
+        </div>
+      </div>
+      <div v-else>
+        <div class="wrapper-banner-img">
+          <img
+            src="https://res.cloudinary.com/komerciaacademico/image/upload/v1602262163/image-not-found_dr4gcu.png"
+            class="banner"
+            alt="Banner-wapi"
+          />
+        </div>
       </div>
       <div class="header">
         <nuxt-link to="/wa" class="containt-image">
@@ -38,9 +49,6 @@
               Horario de atención: {{ dataStore.geolocalizacion[0].horario }}
             </p>
           </div>
-          <div class="container-tienda-wp-responsive">
-            <p><whatsapp-icon class="wp-icon" />Tienda WhatsApp</p>
-          </div>
         </div>
         <div class="container-tienda-wp">
           <p><whatsapp-icon class="wp-icon" />Tienda WhatsApp</p>
@@ -51,8 +59,10 @@
 </template>
 
 <script>
+// import idCloudinary from '../../../mixins/idCloudinary'
 import KoOrderWa from './_order1/orderWa'
 export default {
+  // mixins: [idCloudinary],
   name: 'Ko-Header-wa',
   components: {
     KoOrderWa,
@@ -90,6 +100,9 @@ export default {
   computed: {
     productsCart() {
       return this.$store.state.productsCart.length
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplateWapi
     },
   },
   methods: {
@@ -132,13 +145,13 @@ export default {
 }
 .wrapper-banner-img {
   width: 100%;
-  max-height: 260px;
+  max-height: 300px;
   overflow: hidden;
 }
 .banner {
-  max-height: 260px;
+  max-height: 300px;
   width: 100%;
-  object-fit: cover;
+  object-fit: hover;
   overflow: hidden;
 }
 .containt-image {
@@ -290,42 +303,27 @@ export default {
   color: #075e54;
   margin-right: 3px;
 }
-.container-tienda-wp-responsive {
-  display: none;
-}
 @media (max-width: 530px) {
   .header {
-    padding: 40px 20px 5px 20px;
+    padding: 50px 20px 1px 20px;
   }
   .header-content-text {
     margin-left: 0px;
   }
   .containt-image {
-    width: 85px;
-    height: 85px;
+    width: 90px;
+    height: 90px;
   }
   .wrapper-banner-img {
     max-height: 160px;
   }
   .banner {
     max-height: 160px;
+    object-fit: cover;
   }
   .container-tienda-wp {
-    display: none;
-  }
-  .container-tienda-wp-responsive {
-    display: flex;
-    max-width: 160px;
-    background-color: #f9f9f9;
-    border-radius: 15px;
-    padding: 4px 8px;
-    box-shadow: 0 0 2px rgba(92, 100, 111, 0.1);
-    box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
-    box-shadow: 0 2px 5px rgba(131, 130, 131, 0.276);
-  }
-  .container-tienda-wp-responsive p {
-    color: #4c4c4c;
-    font-size: 12px;
+    top: 10px;
+    right: 25px;
   }
 }
 </style>
