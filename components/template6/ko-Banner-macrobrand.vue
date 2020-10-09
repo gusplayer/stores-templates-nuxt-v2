@@ -23,11 +23,15 @@ export default {
       data: [
         {
           photo:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1599774926/macroband/Daniel_Samper_juego_de_mesa_ke1eoh.png',
+            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1602275277/macroband/banner_web_macrobrand_cjrt0q.jpg',
         },
         {
           photo:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1599774926/macroband/Matador_Banner_web_mi3ohr.jpg',
+            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1599774926/macroband/Matador_Banner_web_mi3ohr.jpg',
+        },
+        {
+          photo:
+            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1599774926/macroband/Daniel_Samper_juego_de_mesa_ke1eoh.png',
         },
       ],
     }
