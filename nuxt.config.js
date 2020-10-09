@@ -44,7 +44,6 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/gtm',
     'vue-sweetalert2/nuxt',
-    'nuxt-lazy-load',
   ],
 
   debug: {
