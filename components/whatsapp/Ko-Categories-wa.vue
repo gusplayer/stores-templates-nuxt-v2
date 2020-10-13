@@ -101,6 +101,7 @@ export default {
         type: 'subcategory',
         data: value,
       })
+      this.$store.commit('SET_PREVIOUSPAGE', 1)
     },
     sendCategory(value, categoria, ref) {
       this.idCategory = categoria
@@ -128,6 +129,7 @@ export default {
         type: 'category',
         data: value.nombre_categoria_producto,
       })
+      this.$store.commit('SET_PREVIOUSPAGE', 1)
     },
     addClass() {
       this.add = !this.add
