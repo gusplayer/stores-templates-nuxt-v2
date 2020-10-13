@@ -67,7 +67,7 @@ export default {
   width: 100%;
   height: 100%;
   max-height: 600px;
-  object-fit: hover;
+  object-fit: cover;
   object-position: center;
 }
 .swiper-pagination >>> .swiper-pagination-bullet {

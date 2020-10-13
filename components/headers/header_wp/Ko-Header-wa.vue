@@ -151,7 +151,7 @@ export default {
 .banner {
   max-height: 300px;
   width: 100%;
-  object-fit: hover;
+  object-fit: cover;
   overflow: hidden;
 }
 .containt-image {
