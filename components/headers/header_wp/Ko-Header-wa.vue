@@ -15,7 +15,7 @@
       <div v-else>
         <div class="wrapper-banner-img">
           <img
-            src="https://res.cloudinary.com/komerciaacademico/image/upload/v1602262163/image-not-found_dr4gcu.png"
+            src="https://res.cloudinary.com/komerciaacademico/image/upload/dpr_auto,q_auto:best/v1602262163/image-not-found_dr4gcu.wdp"
             class="banner"
             alt="Banner-wapi"
           />

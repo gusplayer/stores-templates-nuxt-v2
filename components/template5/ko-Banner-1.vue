@@ -3,7 +3,7 @@
     <div class="header-content-logo" v-if="this.banner">
       <div class="wrapper-banner" v-if="this.banner.banner">
         <img
-          :src="`${this.banner.banner}`"
+          :src="idCloudinaryBanner(this.banner.banner)"
           class="banner"
           alt="Banner tienda"
         />
@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '../../mixins/idCloudinaryBanner'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinaryBanner],
   name: 'Ko-Banner-1',
   computed: {
     banner() {
