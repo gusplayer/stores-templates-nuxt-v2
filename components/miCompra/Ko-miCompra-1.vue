@@ -166,28 +166,18 @@
                   >
                   <span class="value-data" v-else>N/A</span>
                 </p>
-                <p
-                  class="telephone"
-                  v-if="
-                    orden.venta.usuario.user_info[0].telefono != null &&
-                    orden.venta.usuario.user_info[0].telefono != 'null' &&
-                    orden.venta.usuario.user_info[0].telefono != ''
-                  "
-                >
+                <p class="telephone">
                   Teléfono:
-                  <span class="value-data">{{
-                    orden.venta.usuario.user_info[0].telefono
-                  }}</span>
-                </p>
-                <p
-                  class="telephone"
-                  v-if="
-                    orden.venta.usuario.user_info[0].telefono == null ||
-                    orden.venta.usuario.user_info[0].telefono == '' ||
-                    orden.venta.usuario.user_info[0].telefono == 'null'
-                  "
-                >
-                  Teléfono: <span class="value-data">N/A</span>
+                  <span
+                    class="value-data"
+                    v-if="
+                      orden.venta.usuario.user_info[0].telefono != null &&
+                      orden.venta.usuario.user_info[0].telefono != 'null' &&
+                      orden.venta.usuario.user_info[0].telefono != ''
+                    "
+                    >{{ orden.venta.usuario.user_info[0].telefono }}</span
+                  >
+                  <span class="value-data" v-else>N/A</span>
                 </p>
                 <p class="email-address">
                   Correo:
@@ -206,47 +196,36 @@
               </div>
             </el-collapse-item>
             <el-collapse-item title="Información del vendedor" name="2">
-              <div class="content-info-seller">
+              <div class="content-info-buyer">
                 <p class="city">
                   Ciudad:
                   <span class="value-data" v-if="city && city.nombre_ciu">{{
                     city.nombre_ciu
                   }}</span>
+                  <span class="value-data" v-else>N/A</span>
                 </p>
                 <p class="address">
                   Dirección:
-                  <span class="value-data" v-if="dataStore.geolocalizacion">{{
-                    dataStore.geolocalizacion[0].direccion
-                  }}</span>
+                  <span
+                    class="value-data"
+                    v-if="dataStore.geolocalizacion.length"
+                    >{{ dataStore.geolocalizacion[0].direccion }}</span
+                  >
+                  <span class="value-data" v-else>N/A</span>
                 </p>
-                <p
-                  class="telephone"
-                  v-if="
-                    dataStore.geolocalizacion[0].telefono != null &&
-                    dataStore.geolocalizacion[0].telefono != 'null' &&
-                    dataStore.geolocalizacion[0].telefono != ''
-                  "
-                >
+                <p class="telephone">
                   Teléfono:
-                  <span class="value-data">{{
-                    dataStore.geolocalizacion[0].telefono
+                  <span class="value-data" v-if="dataStore.tienda.telefono">{{
+                    dataStore.tienda.telefono
                   }}</span>
-                </p>
-                <p
-                  class="telephone"
-                  v-if="
-                    dataStore.geolocalizacion[0].telefono == null ||
-                    dataStore.geolocalizacion[0].telefono == '' ||
-                    dataStore.geolocalizacion[0].telefono == 'null'
-                  "
-                >
-                  Teléfono: <span class="value-data">N/A</span>
+                  <span class="value-data" v-else>N/A</span>
                 </p>
                 <p class="owner">
                   Nombre Tienda:
                   <span class="value-data" v-if="dataStore.tienda.nombre">{{
                     dataStore.tienda.nombre
                   }}</span>
+                  <span class="value-data" v-else>N/A</span>
                 </p>
               </div>
             </el-collapse-item>
@@ -861,13 +840,24 @@ export default {
   display: flex;
   flex-direction: column;
 }
+.content-sections >>> .el-collapse-item__header {
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: black;
+}
+.content-sections >>> .el-icon-arrow-right {
+  color: black;
+}
+
 .content-info-buyer {
   display: flex;
   grid-column-gap: 40px;
   width: 100%;
   flex-wrap: wrap;
-  margin-top: 8px;
-  grid-row-gap: 15px;
+  grid-row-gap: 5px;
   justify-content: space-between;
 }
 .city,
@@ -883,8 +873,6 @@ export default {
   letter-spacing: normal;
   text-align: left;
   color: black;
-  max-width: 230px;
-  width: 100%;
 }
 .messege {
   font-size: 15px;
