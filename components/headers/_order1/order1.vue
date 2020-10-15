@@ -31,28 +31,47 @@
                       <span v-if="product.precio">
                         <b class="unidades">Cantidad: {{ product.cantidad }}</b>
                         <b
-                          class="unidades"
-                          v-if="dataStore.tienda.codigo_pais == 'internacional'"
-                          >X
-                          {{
-                            new Intl.NumberFormat('en-IN', {
-                              style: 'currency',
-                              currency: dataStore.tienda.moneda,
-                              minimumFractionDigits: 0,
-                            }).format(product.precio)
-                          }}</b
+                          v-if="
+                            dataStore.tienda.codigo_pais &&
+                            dataStore.tienda.moneda
+                          "
                         >
-                        <b class="unidades" v-else
-                          >X
-                          {{
-                            new Intl.NumberFormat(
-                              dataStore.tienda.codigo_pais,
-                              {
+                          <b
+                            class="unidades"
+                            v-if="
+                              dataStore.tienda.codigo_pais == 'internacional'
+                            "
+                            >X
+                            {{
+                              new Intl.NumberFormat('en-IN', {
                                 style: 'currency',
                                 currency: dataStore.tienda.moneda,
                                 minimumFractionDigits: 0,
-                              }
-                            ).format(product.precio)
+                              }).format(product.precio)
+                            }}</b
+                          >
+                          <b class="unidades" v-else
+                            >X
+                            {{
+                              new Intl.NumberFormat(
+                                dataStore.tienda.codigo_pais,
+                                {
+                                  style: 'currency',
+                                  currency: dataStore.tienda.moneda,
+                                  minimumFractionDigits: 0,
+                                }
+                              ).format(product.precio)
+                            }}</b
+                          >
+                        </b>
+                        <b class="unidades" v-else
+                          >X
+                          {{
+                            new Intl.NumberFormat('es-CO', {
+                              style: 'currency',
+                              currency: 'COP',
+                              minimumFractionDigits: 0,
+                            }).format(product.precio)
                           }}</b
                         >
                       </span>
@@ -67,25 +86,45 @@
                       </div>
                     </div>
                     <div
-                      class="price"
-                      v-if="dataStore.tienda.codigo_pais == 'internacional'"
+                      v-if="
+                        dataStore.tienda.codigo_pais && dataStore.tienda.moneda
+                      "
                     >
-                      <p>
-                        {{
-                          new Intl.NumberFormat('en-IN', {
-                            style: 'currency',
-                            currency: dataStore.tienda.moneda,
-                            minimumFractionDigits: 0,
-                          }).format(product.precio * product.cantidad)
-                        }}
-                      </p>
+                      <div
+                        class="price"
+                        v-if="dataStore.tienda.codigo_pais == 'internacional'"
+                      >
+                        <p>
+                          {{
+                            new Intl.NumberFormat('en-IN', {
+                              style: 'currency',
+                              currency: dataStore.tienda.moneda,
+                              minimumFractionDigits: 0,
+                            }).format(product.precio * product.cantidad)
+                          }}
+                        </p>
+                      </div>
+                      <div class="price" v-else>
+                        <p>
+                          {{
+                            new Intl.NumberFormat(
+                              dataStore.tienda.codigo_pais,
+                              {
+                                style: 'currency',
+                                currency: dataStore.tienda.moneda,
+                                minimumFractionDigits: 0,
+                              }
+                            ).format(product.precio * product.cantidad)
+                          }}
+                        </p>
+                      </div>
                     </div>
                     <div class="price" v-else>
                       <p>
                         {{
-                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                          new Intl.NumberFormat('es-CO', {
                             style: 'currency',
-                            currency: dataStore.tienda.moneda,
+                            currency: 'COP',
                             minimumFractionDigits: 0,
                           }).format(product.precio * product.cantidad)
                         }}
@@ -170,25 +209,45 @@
                         getFreeShipping == true
                       "
                     >
-                      <li
-                        class="text-color"
-                        v-if="dataStore.tienda.codigo_pais == 'internacional'"
+                      <div
+                        v-if="
+                          dataStore.tienda.codigo_pais &&
+                          dataStore.tienda.moneda
+                        "
                       >
-                        Tarifa plana:
-                        {{
-                          new Intl.NumberFormat('en-IN', {
-                            style: 'currency',
-                            currency: dataStore.tienda.moneda,
-                            minimumFractionDigits: 0,
-                          }).format(rangosByCiudades.valor)
-                        }}
-                      </li>
+                        <li
+                          class="text-color"
+                          v-if="dataStore.tienda.codigo_pais == 'internacional'"
+                        >
+                          Tarifa plana:
+                          {{
+                            new Intl.NumberFormat('en-IN', {
+                              style: 'currency',
+                              currency: dataStore.tienda.moneda,
+                              minimumFractionDigits: 0,
+                            }).format(rangosByCiudades.valor)
+                          }}
+                        </li>
+                        <li class="text-color" v-else>
+                          Tarifa plana:
+                          {{
+                            new Intl.NumberFormat(
+                              dataStore.tienda.codigo_pais,
+                              {
+                                style: 'currency',
+                                currency: dataStore.tienda.moneda,
+                                minimumFractionDigits: 0,
+                              }
+                            ).format(rangosByCiudades.valor)
+                          }}
+                        </li>
+                      </div>
                       <li class="text-color" v-else>
                         Tarifa plana:
                         {{
-                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                          new Intl.NumberFormat('es-CO', {
                             style: 'currency',
-                            currency: dataStore.tienda.moneda,
+                            currency: 'COP',
                             minimumFractionDigits: 0,
                           }).format(rangosByCiudades.valor)
                         }}
@@ -201,28 +260,46 @@
                       "
                     >
                       <div v-if="this.shippingTarifaPrecio > 0">
-                        <p
-                          class="text-color"
-                          v-if="dataStore.tienda.codigo_pais == 'internacional'"
+                        <div
+                          v-if="
+                            dataStore.tienda.codigo_pais &&
+                            dataStore.tienda.moneda
+                          "
                         >
-                          {{
-                            new Intl.NumberFormat('en-IN', {
-                              style: 'currency',
-                              currency: dataStore.tienda.moneda,
-                              minimumFractionDigits: 0,
-                            }).format(this.shippingTarifaPrecio)
-                          }}
-                        </p>
-                        <p v-else class="text-color">
-                          {{
-                            new Intl.NumberFormat(
-                              dataStore.tienda.codigo_pais,
-                              {
+                          <p
+                            class="text-color"
+                            v-if="
+                              dataStore.tienda.codigo_pais == 'internacional'
+                            "
+                          >
+                            {{
+                              new Intl.NumberFormat('en-IN', {
                                 style: 'currency',
                                 currency: dataStore.tienda.moneda,
                                 minimumFractionDigits: 0,
-                              }
-                            ).format(this.shippingTarifaPrecio)
+                              }).format(this.shippingTarifaPrecio)
+                            }}
+                          </p>
+                          <p v-else class="text-color">
+                            {{
+                              new Intl.NumberFormat(
+                                dataStore.tienda.codigo_pais,
+                                {
+                                  style: 'currency',
+                                  currency: dataStore.tienda.moneda,
+                                  minimumFractionDigits: 0,
+                                }
+                              ).format(this.shippingTarifaPrecio)
+                            }}
+                          </p>
+                        </div>
+                        <p v-else class="text-color">
+                          {{
+                            new Intl.NumberFormat('es-CO', {
+                              style: 'currency',
+                              currency: 'COP',
+                              minimumFractionDigits: 0,
+                            }).format(this.shippingTarifaPrecio)
                           }}
                         </p>
                       </div>
@@ -231,20 +308,41 @@
                       </p>
                     </div>
                     <div v-else-if="shipping && getFreeShipping == false">
-                      <p v-if="dataStore.tienda.codigo_pais == 'internacional'">
-                        {{
-                          new Intl.NumberFormat('en-IN', {
-                            style: 'currency',
-                            currency: dataStore.tienda.moneda,
-                            minimumFractionDigits: 0,
-                          }).format(shipping)
-                        }}
-                      </p>
+                      <div
+                        v-if="
+                          dataStore.tienda.codigo_pais &&
+                          dataStore.tienda.moneda
+                        "
+                      >
+                        <p
+                          v-if="dataStore.tienda.codigo_pais == 'internacional'"
+                        >
+                          {{
+                            new Intl.NumberFormat('en-IN', {
+                              style: 'currency',
+                              currency: dataStore.tienda.moneda,
+                              minimumFractionDigits: 0,
+                            }).format(shipping)
+                          }}
+                        </p>
+                        <p v-else>
+                          {{
+                            new Intl.NumberFormat(
+                              dataStore.tienda.codigo_pais,
+                              {
+                                style: 'currency',
+                                currency: dataStore.tienda.moneda,
+                                minimumFractionDigits: 0,
+                              }
+                            ).format(shipping)
+                          }}
+                        </p>
+                      </div>
                       <p v-else>
                         {{
-                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                          new Intl.NumberFormat('es-CO', {
                             style: 'currency',
-                            currency: dataStore.tienda.moneda,
+                            currency: 'COP',
                             minimumFractionDigits: 0,
                           }).format(shipping)
                         }}
@@ -262,20 +360,39 @@
                   </span>
                   <span class="order_total_net">
                     <p>Total a pagar</p>
-                    <p v-if="dataStore.tienda.codigo_pais == 'internacional'">
-                      {{
-                        new Intl.NumberFormat('en-IN', {
-                          style: 'currency',
-                          currency: dataStore.tienda.moneda,
-                          minimumFractionDigits: 0,
-                        }).format(totalCart + (getFreeShipping ? 0 : shipping))
-                      }}
-                    </p>
+                    <div
+                      v-if="
+                        dataStore.tienda.codigo_pais && dataStore.tienda.moneda
+                      "
+                    >
+                      <p v-if="dataStore.tienda.codigo_pais == 'internacional'">
+                        {{
+                          new Intl.NumberFormat('en-IN', {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(
+                            totalCart + (getFreeShipping ? 0 : shipping)
+                          )
+                        }}
+                      </p>
+                      <p v-else>
+                        {{
+                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(
+                            totalCart + (getFreeShipping ? 0 : shipping)
+                          )
+                        }}
+                      </p>
+                    </div>
                     <p v-else>
                       {{
-                        new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                        new Intl.NumberFormat('es-CO', {
                           style: 'currency',
-                          currency: dataStore.tienda.moneda,
+                          currency: 'COP',
                           minimumFractionDigits: 0,
                         }).format(totalCart + (getFreeShipping ? 0 : shipping))
                       }}
