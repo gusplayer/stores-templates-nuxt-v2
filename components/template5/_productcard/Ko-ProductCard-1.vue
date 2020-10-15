@@ -47,29 +47,93 @@
                     class="content-price"
                     v-if="estadoCart && this.minPrice != this.maxPrice"
                   >
-                    <p
-                      class="card-price-2"
-                      v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{ this.minPrice | currency }}
-                    </p>
-
+                    <div v-if="dataStore.tienda.codigo_pais == 'internacional'">
+                      <p
+                        class="card-price-2"
+                        v-if="this.product.precio > 0 || this.product.precio"
+                      >
+                        {{
+                          new Intl.NumberFormat('en-IN', {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(this.minPrice)
+                        }}
+                      </p>
+                    </div>
+                    <div v-else>
+                      <p
+                        class="card-price-2"
+                        v-if="this.product.precio > 0 || this.product.precio"
+                      >
+                        {{
+                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(this.minPrice)
+                        }}
+                      </p>
+                    </div>
                     <p class="separator-price">-</p>
-
-                    <p
-                      class="card-price-2"
-                      v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{ this.maxPrice | currency }}
-                    </p>
+                    <div v-if="dataStore.tienda.codigo_pais == 'internacional'">
+                      <p
+                        class="card-price-2"
+                        v-if="this.product.precio > 0 || this.product.precio"
+                      >
+                        {{
+                          new Intl.NumberFormat('en-IN', {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(this.maxPrice)
+                        }}
+                      </p>
+                    </div>
+                    <div v-else>
+                      <p
+                        class="card-price-2"
+                        v-if="this.product.precio > 0 || this.product.precio"
+                      >
+                        {{
+                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(this.maxPrice)
+                        }}
+                      </p>
+                    </div>
                   </div>
                   <div v-else>
-                    <p
-                      class="card-price-2"
-                      v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{ this.product.precio | currency }}
-                    </p>
+                    <div v-if="dataStore.tienda.codigo_pais == 'internacional'">
+                      <p
+                        class="card-price-2"
+                        v-if="this.product.precio > 0 || this.product.precio"
+                      >
+                        {{
+                          new Intl.NumberFormat('en-IN', {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(this.product.precio)
+                        }}
+                      </p>
+                    </div>
+                    <div v-else>
+                      <p
+                        class="card-price-2"
+                        v-if="this.product.precio > 0 || this.product.precio"
+                      >
+                        {{
+                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(this.product.precio)
+                        }}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <!-- <p class="card-descuento">-50%</p> -->
@@ -149,25 +213,93 @@
                   class="content-price"
                   v-if="estadoCart && this.minPrice != this.maxPrice"
                 >
-                  <p
-                    class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
-                  >
-                    {{ this.minPrice | currency }}
-                  </p>
-
+                  <div v-if="dataStore.tienda.codigo_pais == 'internacional'">
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{
+                        new Intl.NumberFormat('en-IN', {
+                          style: 'currency',
+                          currency: dataStore.tienda.moneda,
+                          minimumFractionDigits: 0,
+                        }).format(this.minPrice)
+                      }}
+                    </p>
+                  </div>
+                  <div v-else>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{
+                        new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                          style: 'currency',
+                          currency: dataStore.tienda.moneda,
+                          minimumFractionDigits: 0,
+                        }).format(this.minPrice)
+                      }}
+                    </p>
+                  </div>
                   <p class="separator-price">-</p>
-                  <p
-                    class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
-                  >
-                    {{ this.maxPrice | currency }}
-                  </p>
+                  <div v-if="dataStore.tienda.codigo_pais == 'internacional'">
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{
+                        new Intl.NumberFormat('en-IN', {
+                          style: 'currency',
+                          currency: dataStore.tienda.moneda,
+                          minimumFractionDigits: 0,
+                        }).format(this.maxPrice)
+                      }}
+                    </p>
+                  </div>
+                  <div v-else>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{
+                        new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                          style: 'currency',
+                          currency: dataStore.tienda.moneda,
+                          minimumFractionDigits: 0,
+                        }).format(this.maxPrice)
+                      }}
+                    </p>
+                  </div>
                 </div>
                 <div v-else>
-                  <p class="card-price-2" v-if="this.product.precio > 0">
-                    {{ this.product.precio | currency }}
-                  </p>
+                  <div v-if="dataStore.tienda.codigo_pais == 'internacional'">
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{
+                        new Intl.NumberFormat('en-IN', {
+                          style: 'currency',
+                          currency: dataStore.tienda.moneda,
+                          minimumFractionDigits: 0,
+                        }).format(this.product.precio)
+                      }}
+                    </p>
+                  </div>
+                  <div v-else>
+                    <p
+                      class="card-price-2"
+                      v-if="this.product.precio > 0 || this.product.precio"
+                    >
+                      {{
+                        new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                          style: 'currency',
+                          currency: dataStore.tienda.moneda,
+                          minimumFractionDigits: 0,
+                        }).format(this.product.precio)
+                      }}
+                    </p>
+                  </div>
                 </div>
               </div>
               <!-- <p class="card-descuento">-50%</p> -->

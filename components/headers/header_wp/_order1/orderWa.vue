@@ -30,8 +30,30 @@
                       </p>
                       <span>
                         <b class="unidades">{{ product.cantidad }}</b>
-                        <b class="unidades"
-                          >X {{ product.precio | currency }}</b
+                        <b
+                          class="unidades"
+                          v-if="dataStore.tienda.codigo_pais == 'internacional'"
+                          >X
+                          {{
+                            new Intl.NumberFormat('en-IN', {
+                              style: 'currency',
+                              currency: dataStore.tienda.moneda,
+                              minimumFractionDigits: 0,
+                            }).format(product.precio)
+                          }}</b
+                        >
+                        <b class="unidades" v-else
+                          >X
+                          {{
+                            new Intl.NumberFormat(
+                              dataStore.tienda.codigo_pais,
+                              {
+                                style: 'currency',
+                                currency: dataStore.tienda.moneda,
+                                minimumFractionDigits: 0,
+                              }
+                            ).format(product.precio)
+                          }}</b
                         >
                       </span>
                       <div v-if="product.combinacion">
@@ -44,8 +66,23 @@
                       </div>
                     </div>
                     <div class="price">
-                      <p>
-                        {{ (product.precio * product.cantidad) | currency }}
+                      <p v-if="dataStore.tienda.codigo_pais == 'internacional'">
+                        {{
+                          new Intl.NumberFormat('en-IN', {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(product.precio * product.cantidad)
+                        }}
+                      </p>
+                      <p v-else>
+                        {{
+                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(product.precio * product.cantidad)
+                        }}
                       </p>
                     </div>
                     <boteBasura-icon
@@ -71,10 +108,22 @@
                   </span>
                   <span class="order_total_net">
                     <p>Total a pagar</p>
-                    <p>
+                    <p v-if="dataStore.tienda.codigo_pais == 'internacional'">
                       {{
-                        (totalCart + (getFreeShipping ? 0 : shipping))
-                          | currency
+                        new Intl.NumberFormat('en-IN', {
+                          style: 'currency',
+                          currency: dataStore.tienda.moneda,
+                          minimumFractionDigits: 0,
+                        }).format(totalCart + (getFreeShipping ? 0 : shipping))
+                      }}
+                    </p>
+                    <p v-else>
+                      {{
+                        new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                          style: 'currency',
+                          currency: dataStore.tienda.moneda,
+                          minimumFractionDigits: 0,
+                        }).format(totalCart + (getFreeShipping ? 0 : shipping))
                       }}
                     </p>
                   </span>

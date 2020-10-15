@@ -94,9 +94,35 @@
             <!-- <p class="text-promocion" v-show="salesData.precio">
               ${{ salesData.precio | currency }}
             </p>-->
-            <div class="wrapper-price">
+            <div
+              class="wrapper-price"
+              v-if="dataStore.tienda.codigo_pais == 'internacional'"
+            >
               <p class="text-precio" v-show="salesData.precio">
-                ${{ salesData.precio | currency }}
+                <!-- ${{ salesData.precio | currency }} -->
+                {{
+                  new Intl.NumberFormat('en-IN', {
+                    style: 'currency',
+                    currency: dataStore.tienda.moneda,
+                    minimumFractionDigits: 0,
+                  }).format(salesData.precio)
+                }}
+              </p>
+              <!-- <p class="card-descuento">-50%</p> -->
+            </div>
+            <div class="wrapper-price" v-else>
+              <p class="text-precio" v-show="salesData.precio">
+                <!-- ${{ salesData.precio | currency }} -->
+                {{
+                  new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                    style: 'currency',
+                    currency: dataStore.tienda.moneda,
+                    minimumFractionDigits: 0,
+                  }).format(salesData.precio)
+                }}
+                <!-- {{
+                  $n(salesData.precio, 'currency', dataStore.tienda.codigo_pais)
+                }} -->
               </p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
@@ -203,9 +229,32 @@
                     <!-- <p class="text-promocion" v-show="salesData.precio">
                       ${{ salesData.precio | currency }}
                     </p> -->
-                    <div class="wrapper-price">
+                    <div
+                      class="wrapper-price"
+                      v-if="dataStore.tienda.codigo_pais == 'internacional'"
+                    >
                       <p class="text-precio" v-show="salesData.precio">
-                        ${{ salesData.precio | currency }}
+                        <!-- ${{ salesData.precio | currency }} -->
+                        {{
+                          new Intl.NumberFormat('en-IN', {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(salesData.precio)
+                        }}
+                      </p>
+                      <!-- <p class="card-descuento">-50%</p> -->
+                    </div>
+                    <div class="wrapper-price" v-else>
+                      <p class="text-precio" v-show="salesData.precio">
+                        <!-- ${{ salesData.precio | currency }} -->
+                        {{
+                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(salesData.precio)
+                        }}
                       </p>
                       <!-- <p class="card-descuento">-50%</p> -->
                     </div>

@@ -22,9 +22,26 @@
               <!-- <p class="card-price-1-movil" v-if="product.precio > 0">
                   $ {{ product.precio }}
               </p>-->
-              <div>
+              <div v-if="dataStore.tienda.codigo_pais == 'internacional'">
                 <p class="card-price-2" v-if="product.precio > 0">
-                  {{ product.precio | currency }}
+                  {{
+                    new Intl.NumberFormat('en-IN', {
+                      style: 'currency',
+                      currency: dataStore.tienda.moneda,
+                      minimumFractionDigits: 0,
+                    }).format(product.precio)
+                  }}
+                </p>
+              </div>
+              <div v-else>
+                <p class="card-price-2" v-if="product.precio > 0">
+                  {{
+                    new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                      style: 'currency',
+                      currency: dataStore.tienda.moneda,
+                      minimumFractionDigits: 0,
+                    }).format(product.precio)
+                  }}
                 </p>
               </div>
             </div>
@@ -45,6 +62,9 @@ export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductFavoritos-1',
   computed: {
+    dataStore() {
+      return this.$store.state.dataStore
+    },
     dataProductFavorite() {
       return this.$store.state.products.fullProducts.filter(
         (product) => product.favorito === 1
