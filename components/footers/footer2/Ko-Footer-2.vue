@@ -172,7 +172,7 @@
       <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
         <img
           src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
-          v-if="logo"
+          v-if="logo == true"
           class="logo2"
           alt="Logo Img"
         />
@@ -331,34 +331,34 @@ export default {
     },
     toSubscribe() {
       if (this.checked == true) {
-        // this.$refs.validate
-        //   .validate()
-        //   .then((response) => {
-        //     if (response) {
-        //       this.toSubscribeResponse = false
-        //       const params = {
-        //         correo: this.email,
-        //         tienda: this.dataStore.tienda.id_tienda,
-        //       }
-        //       axios
-        //         .post('https://templates.komercia.co/api/suscriptores', params)
-        //         .then((result) => {
-        //           this.register = 'Tu correo ha sido registrado'
-        //           this.$message.success('Tu suscripción esta activa')
-        //           this.email = ''
-        //           this.toSubscribeResponse = true
-        //         })
-        //         .catch(
-        //           (result) => (
-        //             (this.register = 'Tu correo ya esta registrado'),
-        //             this.$message.success('Tu correo ya esta registrado')
-        //           )
-        //         )
-        //     }
-        //   })
-        //   .catch((e) => {
-        //     console.log(e)
-        //   })
+        this.$refs.validate
+          .validate()
+          .then((response) => {
+            if (response) {
+              this.toSubscribeResponse = false
+              const params = {
+                correo: this.email,
+                tienda: this.dataStore.tienda.id_tienda,
+              }
+              axios
+                .post('https://templates.komercia.co/api/suscriptores', params)
+                .then((result) => {
+                  this.register = 'Tu correo ha sido registrado'
+                  this.$message.success('Tu suscripción esta activa')
+                  this.email = ''
+                  this.toSubscribeResponse = true
+                })
+                .catch(
+                  (result) => (
+                    (this.register = 'Tu correo ya esta registrado'),
+                    this.$message.success('Tu correo ya esta registrado')
+                  )
+                )
+            }
+          })
+          .catch((e) => {
+            console.log(e)
+          })
       }
     },
   },

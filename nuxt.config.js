@@ -37,6 +37,7 @@ export default {
     { src: '~/plugins/gtm', mode: 'client' },
     { src: '~/plugins/facebook-pixel', mode: 'client' },
     { src: '~plugins/SocialSharing.js', ssr: false },
+    { src: '~/plugins/countryFlags.js', ssr: false },
   ],
 
   modules: [

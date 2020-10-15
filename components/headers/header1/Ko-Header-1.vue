@@ -512,7 +512,7 @@ export default {
   margin-right: 1px;
   display: flex;
   flex-wrap: wrap;
-  column-gap: 30px;
+  column-gap: 32px;
   row-gap: 10px;
 }
 .wrapper-meni-grid::-webkit-scrollbar {

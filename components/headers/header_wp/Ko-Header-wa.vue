@@ -6,7 +6,7 @@
       <div v-if="this.settingByTemplate">
         <div class="wrapper-banner-img" v-if="this.settingByTemplate.banner">
           <img
-            :src="`${this.settingByTemplate.banner}`"
+            :src="idCloudinaryBanner(this.settingByTemplate.banner)"
             class="banner"
             alt="Banner-wapi"
           />
@@ -59,10 +59,10 @@
 </template>
 
 <script>
-// import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinaryBanner from '../../../mixins/idCloudinaryBanner'
 import KoOrderWa from './_order1/orderWa'
 export default {
-  // mixins: [idCloudinary],
+  mixins: [idCloudinaryBanner],
   name: 'Ko-Header-wa',
   components: {
     KoOrderWa,

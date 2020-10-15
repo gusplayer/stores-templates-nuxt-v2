@@ -55,6 +55,7 @@
                     </p>
 
                     <p class="separator-price">-</p>
+
                     <p
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
@@ -224,6 +225,9 @@ export default {
     }
   },
   computed: {
+    dataStore() {
+      return this.$store.state.dataStore
+    },
     productsCarts() {
       return this.$store.state.productsCart
     },
