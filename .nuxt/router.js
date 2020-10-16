@@ -15,7 +15,7 @@ const _0bc15fd6 = () => interopDefault(import('../pages/template7/index.vue' /* 
 const _19aa8426 = () => interopDefault(import('../pages/unicentro/index.vue' /* webpackChunkName: "pages/unicentro/index" */))
 const _f9834516 = () => interopDefault(import('../pages/ig/contacto.vue' /* webpackChunkName: "pages/ig/contacto" */))
 const _a2f76150 = () => interopDefault(import('../pages/ig/productos/_slug.vue' /* webpackChunkName: "pages/ig/productos/_slug" */))
-const _efa453be = () => interopDefault(import('../pages/wa/p/_slug.vue' /* webpackChunkName: "pages/wa/p/_slug" */))
+const _ce89e4d6 = () => interopDefault(import('../pages/wa/producto/_slug.vue' /* webpackChunkName: "pages/wa/producto/_slug" */))
 const _1e06bad0 = () => interopDefault(import('../pages/blog/_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
 const _2abcb93a = () => interopDefault(import('../pages/productos/_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
 const _b9358700 = () => interopDefault(import('../pages/wa/_slug.vue' /* webpackChunkName: "pages/wa/_slug" */))
@@ -86,9 +86,9 @@ export const routerOptions = {
     component: _a2f76150,
     name: "ig-productos-slug"
   }, {
-    path: "/wa/p/:slug?",
-    component: _efa453be,
-    name: "wa-p-slug"
+    path: "/wa/producto/:slug?",
+    component: _ce89e4d6,
+    name: "wa-producto-slug"
   }, {
     path: "/blog/:slug",
     component: _1e06bad0,

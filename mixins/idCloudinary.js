@@ -10,5 +10,10 @@ export default {
       let fitImage2 = url.split('/')
       return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/c_lpad,dpr_auto,q_auto,f_auto,c_crop,g_custom/${fitImage[1]}`
     },
+    idCloudinaryBannerResponsive(url, width) {
+      let fitImage = url.split('/upload/')
+      let fitImage2 = url.split('/')
+      return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/dpr_auto,q_auto,f_auto,c_crop,g_custom/c_scale,w_${width}/${fitImage[1]}`
+    },
   },
 }

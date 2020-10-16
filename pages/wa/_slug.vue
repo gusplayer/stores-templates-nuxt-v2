@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="container-home">
+  <div class="container-home" v-loading="loading">
     <KoHeaderWp :dataStore="dataStore" />
     <KCategory :dataStore="dataStore" />
     <KProductFavoritos v-if="this.stateBanner" />
@@ -31,6 +31,13 @@ export default {
     return {}
   },
   computed: {
+    loading() {
+      if (this.dataStore.length) {
+        return true
+      } else {
+        return false
+      }
+    },
     dataStore() {
       return this.$store.state.dataStore
     },

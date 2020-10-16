@@ -84,11 +84,11 @@
     "_name": "_a2f76150"
   },
   {
-    "name": "wa-p-slug",
-    "path": "/wa/p/:slug?",
-    "component": "/Projects/template-nuxt-dokku/pages/wa/p/_slug.vue",
-    "chunkName": "pages/wa/p/_slug",
-    "_name": "_efa453be"
+    "name": "wa-producto-slug",
+    "path": "/wa/producto/:slug?",
+    "component": "/Projects/template-nuxt-dokku/pages/wa/producto/_slug.vue",
+    "chunkName": "pages/wa/producto/_slug",
+    "_name": "_ce89e4d6"
   },
   {
     "name": "blog-slug",

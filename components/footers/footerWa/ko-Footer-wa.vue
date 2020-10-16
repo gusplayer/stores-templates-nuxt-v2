@@ -97,7 +97,7 @@ export default {
 }
 .text-footer {
   color: white;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .main-container {
@@ -117,7 +117,7 @@ export default {
   width: 30%;
   align-items: center;
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
 }
 .valor {
