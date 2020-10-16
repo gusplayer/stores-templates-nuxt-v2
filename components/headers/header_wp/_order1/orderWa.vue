@@ -225,6 +225,27 @@
                 >
                   <whatsapp-icon class="wp-icon" />Pedido por WhatsApp
                 </button>
+                <div class="wrapper-country-flag" v-if="dataStore.tienda.pais">
+                  <div class="count-footer-country">
+                    <div
+                      v-if="dataStore.tienda.pais == 'Internacional'"
+                      style="display: flex;"
+                    >
+                      <no-ssr>
+                        <country-flag country="un" size="normal"></country-flag>
+                      </no-ssr>
+                    </div>
+                    <div v-else class="content-flag">
+                      <no-ssr>
+                        <country-flag
+                          :country="`${dataStore.tienda.codigo_pais}`"
+                          size="normal"
+                        ></country-flag>
+                      </no-ssr>
+                    </div>
+                    <p class="text-country">{{ dataStore.tienda.pais }}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </template>
@@ -1065,7 +1086,7 @@ export default {
 .continue_shopping {
   position: fixed;
   z-index: 99;
-  bottom: 10px;
+  bottom: 50px;
   color: white;
   border-radius: 5px;
   border: none;
@@ -1086,33 +1107,35 @@ export default {
 .continue_shopping:hover {
   background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
 }
+.wrapper-country-flag {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.count-footer-country {
+  display: flex;
+  width: 100%;
+  background: rgb(24, 24, 24);
+  justify-content: center;
+  align-items: center;
+}
+.content-flag {
+  display: flex;
+  align-items: center;
+}
+.text-country {
+  color: white;
+  height: 100%;
+  font-size: 12px;
+}
 .conten-btn {
   display: flex;
   width: 100%;
   justify-content: center;
-}
-.continue_shopping2 {
-  margin-top: 10px;
-  font-weight: bold;
-  justify-self: center;
-  border-style: none;
-  background-color: transparent;
-  padding: 8px 10px;
-  width: 100%;
-  max-width: 340px;
-  color: black;
-  border: 2px solid black;
-  border-radius: 5px;
-  font-size: 14px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  outline: none;
-  flex: none;
-  transition: all ease 0.3s;
-}
-.continue_shopping2:hover {
-  color: grey;
-  border: 2px solid grey;
 }
 .wrapper_photo {
   position: relative;

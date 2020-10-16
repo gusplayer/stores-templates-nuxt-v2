@@ -93,7 +93,7 @@ export default {
   background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
 }
 .wrapper-footer:hover {
-  background-image: linear-gradient(130deg, #0f7c6f 0, #20b894 80%);
+  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
 }
 .wrapper-footer p {
   flex: 1;
