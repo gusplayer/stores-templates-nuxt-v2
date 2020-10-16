@@ -9,19 +9,28 @@
         <whatsapp-icon class="wp-icon" />Comprar
       </p>
       <p class="text-footer valor" v-if="productsCart.length > 0">
-        <span v-if="dataStore.tienda.codigo_pais == 'internacional'">
-          {{
-            new Intl.NumberFormat('en-IN', {
+        <span v-if="dataStore.tienda.codigo_pais && dataStore.tienda.moneda">
+          <span v-if="dataStore.tienda.codigo_pais == 'internacional'">
+            {{
+              new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: dataStore.tienda.moneda,
+                minimumFractionDigits: 0,
+              }).format(this.totalCart)
+            }}</span
+          >
+          <span v-else>{{
+            new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
               style: 'currency',
               currency: dataStore.tienda.moneda,
               minimumFractionDigits: 0,
             }).format(this.totalCart)
-          }}</span
-        >
+          }}</span>
+        </span>
         <span v-else>{{
-          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+          new Intl.NumberFormat('es-CO', {
             style: 'currency',
-            currency: dataStore.tienda.moneda,
+            currency: 'COP',
             minimumFractionDigits: 0,
           }).format(this.totalCart)
         }}</span>

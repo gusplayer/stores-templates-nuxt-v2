@@ -32,28 +32,14 @@
                         <b class="unidades">{{ product.cantidad }}</b>
                         <b
                           class="unidades"
-                          v-if="dataStore.tienda.codigo_pais == 'internacional'"
-                          >X
-                          {{
-                            new Intl.NumberFormat('en-IN', {
-                              style: 'currency',
-                              currency: dataStore.tienda.moneda,
-                              minimumFractionDigits: 0,
-                            }).format(product.precio)
-                          }}</b
-                        >
-                        <b class="unidades" v-else
-                          >X
-                          {{
-                            new Intl.NumberFormat(
+                          :v-on:load="
+                            currentFormat(
+                              product.precio,
                               dataStore.tienda.codigo_pais,
-                              {
-                                style: 'currency',
-                                currency: dataStore.tienda.moneda,
-                                minimumFractionDigits: 0,
-                              }
-                            ).format(product.precio)
-                          }}</b
+                              dataStore.tienda.moneda
+                            )
+                          "
+                          >X {{ resultCurrent }}</b
                         >
                       </span>
                       <div v-if="product.combinacion">
@@ -66,23 +52,16 @@
                       </div>
                     </div>
                     <div class="price">
-                      <p v-if="dataStore.tienda.codigo_pais == 'internacional'">
-                        {{
-                          new Intl.NumberFormat('en-IN', {
-                            style: 'currency',
-                            currency: dataStore.tienda.moneda,
-                            minimumFractionDigits: 0,
-                          }).format(product.precio * product.cantidad)
-                        }}
-                      </p>
-                      <p v-else>
-                        {{
-                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
-                            style: 'currency',
-                            currency: dataStore.tienda.moneda,
-                            minimumFractionDigits: 0,
-                          }).format(product.precio * product.cantidad)
-                        }}
+                      <p
+                        :v-on:load="
+                          currentFormat(
+                            product.precio * product.cantidad,
+                            dataStore.tienda.codigo_pais,
+                            dataStore.tienda.moneda
+                          )
+                        "
+                      >
+                        {{ resultCurrent }}
                       </p>
                     </div>
                     <boteBasura-icon
@@ -108,23 +87,16 @@
                   </span>
                   <span class="order_total_net">
                     <p>Total a pagar</p>
-                    <p v-if="dataStore.tienda.codigo_pais == 'internacional'">
-                      {{
-                        new Intl.NumberFormat('en-IN', {
-                          style: 'currency',
-                          currency: dataStore.tienda.moneda,
-                          minimumFractionDigits: 0,
-                        }).format(totalCart + (getFreeShipping ? 0 : shipping))
-                      }}
-                    </p>
-                    <p v-else>
-                      {{
-                        new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
-                          style: 'currency',
-                          currency: dataStore.tienda.moneda,
-                          minimumFractionDigits: 0,
-                        }).format(totalCart + (getFreeShipping ? 0 : shipping))
-                      }}
+                    <p
+                      :v-on:load="
+                        currentFormat(
+                          totalCart + (getFreeShipping ? 0 : shipping),
+                          dataStore.tienda.codigo_pais,
+                          dataStore.tienda.moneda
+                        )
+                      "
+                    >
+                      {{ resultCurrent }}
                     </p>
                   </span>
                 </div>
@@ -472,7 +444,39 @@ export default {
           let productList = productString.replace(/"/g, '')
           let resultproductList = productList.replace(/,/g, '%0A')
           let result = resultproductList.slice(1, -1)
-          let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
+          let resultTotalF
+          if (
+            this.dataStore.tienda.codigo_pais &&
+            this.dataStore.tienda.moneda
+          ) {
+            if (this.dataStore.tienda.codigo_pais == 'internacional') {
+              {
+                resultTotalF = new Intl.NumberFormat('en-IN', {
+                  style: 'currency',
+                  currency: this.dataStore.tienda.moneda,
+                  minimumFractionDigits: 0,
+                }).format(this.totalCart)
+              }
+            } else {
+              {
+                resultTotalF = new Intl.NumberFormat(
+                  this.dataStore.tienda.codigo_pais,
+                  {
+                    style: 'currency',
+                    currency: this.dataStore.tienda.moneda,
+                    minimumFractionDigits: 0,
+                  }
+                ).format(this.totalCart)
+              }
+            }
+          } else {
+            resultTotalF = new Intl.NumberFormat('es-CO', {
+              style: 'currency',
+              currency: 'COP',
+              minimumFractionDigits: 0,
+            }).format(this.totalCart)
+          }
+          let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${resultTotalF}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
 
           if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
             let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)

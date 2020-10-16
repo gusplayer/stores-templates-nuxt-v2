@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import KoHeader1 from '../components/headers/header1/Ko-Header-1'
 import KoHeader2 from '../components/headers/header2/Ko-Header-2'
 import KoHeader3 from '../components/headers/header3/Ko-Header-3'
@@ -86,9 +87,11 @@ import KoHeader4 from '../components/headers/header4/Ko-Header-4'
 import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
 import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
-
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
+import currentFormat from '../mixins/currentFormat'
+
+Vue.mixin(currentFormat)
 
 export default {
   components: {

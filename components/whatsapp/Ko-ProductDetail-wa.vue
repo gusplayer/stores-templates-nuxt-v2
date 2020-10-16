@@ -28,8 +28,18 @@
               <strong>{{ data.info.marca }}</strong>
             </p>
             <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">
-                ${{ salesData.precio | currency }}
+              <p
+                class="text-precio"
+                v-show="salesData.precio"
+                :v-on:load="
+                  currentFormat(
+                    salesData.precio,
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+                "
+              >
+                {{ resultCurrent }}
               </p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>

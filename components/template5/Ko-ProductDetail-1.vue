@@ -97,7 +97,7 @@
             <div
               class="text-precio"
               v-show="salesData.precio"
-              :v-html="
+              :v-on:load="
                 currentFormat(
                   salesData.precio,
                   dataStore.tienda.codigo_pais,
@@ -214,7 +214,7 @@
                     <div
                       class="text-precio"
                       v-show="salesData.precio"
-                      :v-html="
+                      :v-on:load="
                         currentFormat(
                           salesData.precio,
                           dataStore.tienda.codigo_pais,
@@ -310,11 +310,11 @@ import selectGroup from './_productdetails/selectGroup'
 import koDescription from './_productdetails/descriptionProduct.vue'
 import koSuggesProduct from './_productdetails/suggestionsProducto'
 import idCloudinary from '../../mixins/idCloudinary'
-import currentFormat from '../../mixins/currentFormat'
+
 import zoom from './_productdetails/zoomImg'
 
 export default {
-  mixins: [idCloudinary, currentFormat],
+  mixins: [idCloudinary],
   name: 'Ko-ProductDetail-1',
   props: {
     settingByTemplate: Object,

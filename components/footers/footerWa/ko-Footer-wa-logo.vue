@@ -16,6 +16,25 @@
           /></a>
         </div>
       </div>
+      <!-- <div class="content-footer-country" v-if="dataStore.tienda.pais">
+        <div
+          v-if="dataStore.tienda.pais == 'Internacional'"
+          style="display: flex;"
+        >
+          <no-ssr>
+            <country-flag country="un" size="normal"></country-flag>
+          </no-ssr>
+        </div>
+        <div v-else class="content-flag">
+          <no-ssr>
+            <country-flag
+              :country="`${dataStore.tienda.codigo_pais}`"
+              size="normal"
+            ></country-flag>
+          </no-ssr>
+        </div>
+        <p class="text-country">{{ dataStore.tienda.pais }}</p>
+      </div> -->
       <div class="under-footer">
         <p>Desarrollado por Komercia Latam</p>
         <a
@@ -88,6 +107,29 @@ export default {
   align-items: center;
   justify-content: center;
 }
+/* .content-footer-country {
+  width: 100;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3px;
+}
+.content-flag {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  width: 45px;
+}
+.content-flag >>> .flag {
+  width: 55px;
+  height: 35px;
+}
+.text-country {
+  color: black;
+  height: 100%;
+  font-size: 12px;
+} */
 .under-footer {
   display: flex;
   width: 100%;

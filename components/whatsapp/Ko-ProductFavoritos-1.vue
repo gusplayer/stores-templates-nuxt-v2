@@ -22,27 +22,42 @@
               <!-- <p class="card-price-1-movil" v-if="product.precio > 0">
                   $ {{ product.precio }}
               </p>-->
-              <div v-if="dataStore.tienda.codigo_pais == 'internacional'">
-                <p class="card-price-2" v-if="product.precio > 0">
-                  {{
-                    new Intl.NumberFormat('en-IN', {
-                      style: 'currency',
-                      currency: dataStore.tienda.moneda,
-                      minimumFractionDigits: 0,
-                    }).format(product.precio)
-                  }}
-                </p>
-              </div>
-              <div v-else>
-                <p class="card-price-2" v-if="product.precio > 0">
-                  {{
-                    new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
-                      style: 'currency',
-                      currency: dataStore.tienda.moneda,
-                      minimumFractionDigits: 0,
-                    }).format(product.precio)
-                  }}
-                </p>
+              <div
+                v-if="dataStore.tienda.codigo_pais && dataStore.tienda.moneda"
+              >
+                <div v-if="dataStore.tienda.codigo_pais == 'internacional'">
+                  <p class="card-price-2" v-if="product.precio > 0">
+                    {{
+                      new Intl.NumberFormat('en-IN', {
+                        style: 'currency',
+                        currency: dataStore.tienda.moneda,
+                        minimumFractionDigits: 0,
+                      }).format(product.precio)
+                    }}
+                  </p>
+                </div>
+                <div v-else>
+                  <p class="card-price-2" v-if="product.precio > 0">
+                    {{
+                      new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                        style: 'currency',
+                        currency: dataStore.tienda.moneda,
+                        minimumFractionDigits: 0,
+                      }).format(product.precio)
+                    }}
+                  </p>
+                </div>
+                <div v-else>
+                  <p class="card-price-2" v-if="product.precio > 0">
+                    {{
+                      new Intl.NumberFormat('es-CO', {
+                        style: 'currency',
+                        currency: 'COP',
+                        minimumFractionDigits: 0,
+                      }).format(product.precio)
+                    }}
+                  </p>
+                </div>
               </div>
             </div>
             <div v-else class="separador-price"></div>

@@ -59,10 +59,10 @@
 </template>
 
 <script>
-import idCloudinaryBanner from '../../../mixins/idCloudinaryBanner'
+import idCloudinary from '../../../mixins/idCloudinary'
 import KoOrderWa from './_order1/orderWa'
 export default {
-  mixins: [idCloudinaryBanner],
+  mixins: [idCloudinary],
   name: 'Ko-Header-wa',
   components: {
     KoOrderWa,
