@@ -13,7 +13,6 @@ import { createStore } from './store.js'
 /* Plugins */
 
 import nuxt_plugin_workbox_596d4d33 from 'nuxt_plugin_workbox_596d4d33' // Source: ./workbox.js (mode: 'client')
-import nuxt_plugin_vlazyload_53bddcf6 from 'nuxt_plugin_vlazyload_53bddcf6' // Source: ./v-lazy-load.js (mode: 'all')
 import nuxt_plugin_vuesweetalert2_1afaf2ae from 'nuxt_plugin_vuesweetalert2_1afaf2ae' // Source: ./vue-sweetalert2.js (mode: 'client')
 import nuxt_plugin_gtm_11f97b26 from 'nuxt_plugin_gtm_11f97b26' // Source: ./gtm.js (mode: 'all')
 import nuxt_plugin_axios_b75c1c52 from 'nuxt_plugin_axios_b75c1c52' // Source: ./axios.js (mode: 'all')
@@ -30,6 +29,7 @@ import nuxt_plugin_ga_fb0a2534 from 'nuxt_plugin_ga_fb0a2534' // Source: ../plug
 import nuxt_plugin_gtm_5e4639ea from 'nuxt_plugin_gtm_5e4639ea' // Source: ../plugins/gtm (mode: 'client')
 import nuxt_plugin_facebookpixel_58a6ac96 from 'nuxt_plugin_facebookpixel_58a6ac96' // Source: ../plugins/facebook-pixel (mode: 'client')
 import nuxt_plugin_SocialSharing_0d0678df from 'nuxt_plugin_SocialSharing_0d0678df' // Source: ../plugins/SocialSharing.js (mode: 'client')
+import nuxt_plugin_countryFlags_00220ce0 from 'nuxt_plugin_countryFlags_00220ce0' // Source: ../plugins/countryFlags.js (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -209,10 +209,6 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_workbox_596d4d33(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_vlazyload_53bddcf6 === 'function') {
-    await nuxt_plugin_vlazyload_53bddcf6(app.context, inject)
-  }
-
   if (process.client && typeof nuxt_plugin_vuesweetalert2_1afaf2ae === 'function') {
     await nuxt_plugin_vuesweetalert2_1afaf2ae(app.context, inject)
   }
@@ -275,6 +271,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_SocialSharing_0d0678df === 'function') {
     await nuxt_plugin_SocialSharing_0d0678df(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_countryFlags_00220ce0 === 'function') {
+    await nuxt_plugin_countryFlags_00220ce0(app.context, inject)
   }
 
   // Lock enablePreview in context

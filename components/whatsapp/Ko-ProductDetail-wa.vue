@@ -1,16 +1,17 @@
 <template>
   <div class="wrapper-productDetail">
-    <div v-if="loading" v-loading="loading"></div>
-    <div class="container-productDetail" v-else>
-      <div class="wrapper-back">
-        <div class="back-button">
-          <p @click="$router.go(-1)"><FlechaLeft-icon /></p>
-        </div>
-        <div class="wrapper-back breadcrumb">
+    <div class="wrapper-back">
+      <div class="back-button">
+        <p @click="$router.go(-1)"><FlechaLeft-icon /></p>
+      </div>
+      <!-- <div class="wrapper-back breadcrumb">
           <p @click="$router.go(-1)">Inicio ></p>
           <p>{{ this.data.detalle.nombre }}</p>
-        </div>
-      </div>
+        </div> -->
+    </div>
+
+    <div v-if="loading" v-loading="loading"></div>
+    <div class="container-productDetail" v-else>
       <div class="section">
         <div class="wrapper-left">
           <div class="photos_responsive">
@@ -51,9 +52,12 @@
                 <p class="card-info-1" v-if="spent">Agotado !</p>
               </div>
             </div>
-            <div v-if="this.data.detalle.con_variante > 0">
+            <div
+              v-if="this.data.detalle.con_variante > 0"
+              class="container-variants"
+            >
               <div v-for="(variant, index) in data.variantes" :key="index">
-                <label for="variant name" class="text-variant"
+                <label for="variant name" class="text-variant-type"
                   >{{ variant.nombre }}:</label
                 >
                 <selectGroup :index="index" :variantes="data.variantes">
@@ -66,11 +70,6 @@
                 </selectGroup>
               </div>
             </div>
-            <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
-              <button class="btn-whatsapp" @click="redirectWP()">
-                <whatsapp-icon class="wp-icon" />Más información
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -80,6 +79,12 @@
           <div class="content-text-desc" v-html="data.info.descripcion"></div>
         </div>
       </div>
+      <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
+        <button class="btn-whatsapp" @click="redirectWP()">
+          <whatsapp-icon class="wp-icon" />Solicitar información
+        </button>
+      </div>
+      <br /><br />
       <div class="responsive-purchase">
         <div class="ko-input">
           <div class="quantity-resposive" v-if="!spent">
@@ -105,7 +110,9 @@
             v-if="!spent"
             v-on:click="addShoppingCart"
           >
-            😃 Comprar
+            <span>
+              Comprar
+            </span>
           </button>
           <div v-if="spent" class="wrapper-btn">
             <p class="card-info-1-res">😥 Producto agotado</p>
@@ -595,9 +602,11 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  position: absolute;
+  top: 0;
 }
 .back-button {
-  padding: 10px 10px;
+  padding: 15px 15px;
   background-color: transparent;
   cursor: pointer;
 }
@@ -627,7 +636,8 @@ export default {
   display: flex;
   box-sizing: border-box;
   overflow: hidden;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  padding: 15px 15px;
 }
 .wrapper-right {
   flex: 1;
@@ -640,10 +650,11 @@ export default {
   margin-left: 20px;
 }
 .text-name {
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
   color: #445a64;
+  color: #0f2930;
 }
 .text-marca {
   font-size: 16px;
@@ -668,9 +679,9 @@ export default {
   margin-left: 5px;
 }
 .text-precio {
-  font-size: 16px;
-  font-weight: 600;
-  color: #000000;
+  font-size: 20px;
+  font-weight: 400;
+  color: #0f2930;
   margin-top: 12px;
 }
 .card-descuento {
@@ -681,15 +692,23 @@ export default {
   padding: 0px 5px;
   margin-top: 10px;
 }
+.text-variant {
+  font-weight: 400;
+  font-size: 14px;
+  color: #0f2930;
+}
 .content-text-desc {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 13px;
+  color: #0f2930;
 }
+
 .text-desc {
   text-decoration-color: currentcolor;
   text-decoration-style: solid;
   text-decoration-line: none;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: normal;
   color: rgba(21, 20, 57, 0.541);
   line-height: 1.5;
@@ -726,11 +745,7 @@ export default {
   font-size: 12px;
   margin-bottom: 10px;
 }
-.text-variant {
-  font-size: 14px;
-  font-weight: bold;
-  color: rgba(21, 20, 57, 0.541);
-}
+
 .content-description {
   width: 100%;
   display: flex;
@@ -816,6 +831,10 @@ export default {
   cursor: pointer;
   transition: all 200ms ease-in;
 }
+.btn-responsive span {
+  font-size: 16px;
+}
+
 .btn-responsive:hover {
   -webkit-box-shadow: 5px 2px 28px -9px rgba(45, 241, 202, 0.71);
   box-shadow: 5px 2px 28px -9px rgba(45, 241, 202, 0.71);
@@ -903,6 +922,20 @@ export default {
   margin-right: 4px;
   margin-bottom: -2px;
 }
+.swiper-container {
+  border-radius: 6px;
+}
+
+.swiper-pagination-bullet-active {
+  background: black;
+}
+.container-variants {
+  margin-top: 15px;
+}
+.text-variant-type {
+  font-size: 14px;
+  color: #0f2930;
+}
 
 @media (max-width: 685px) {
   .container-productDetail {
@@ -924,15 +957,15 @@ export default {
   }
   .content-right {
     width: 100%;
-    padding: 15px 10px;
+    padding: 5px 15px;
     margin-left: 0px;
   }
   .text-name {
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 16px;
   }
   .content-description {
-    padding: 0 5px;
+    padding: 0 15px;
   }
 }
 </style>

@@ -86,7 +86,7 @@
                     </p>
                   </span>
                   <span class="order_total_net">
-                    <p>Total a pagar</p>
+                    <p>Total compra</p>
                     <p
                       :v-on:load="
                         currentFormat(
@@ -960,12 +960,12 @@ export default {
   color: white;
   border-radius: 5px;
   border: none;
-  font-size: 15px;
+  font-size: 16px;
   padding: 8px 10px;
   width: 100%;
   height: 50px;
   max-width: 340px;
-  font-weight: bold;
+  font-weight: 400;
   cursor: pointer;
   text-decoration: none;
   display: flex;

@@ -410,16 +410,16 @@ export default {
 }
 .wrapper-movil {
   width: 100%;
-  height: 120px;
-  max-height: 120px;
+  height: 110px;
+  max-height: 110px;
   display: flex;
   flex-direction: row;
   position: relative;
   margin-bottom: 8px;
 }
 .wrapper-image {
-  max-width: 120px;
-  max-height: 120px;
+  max-width: 110px;
+  max-height: 110px;
   overflow: hidden;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(131, 130, 131, 0.174);
@@ -484,6 +484,7 @@ export default {
   line-height: 1.2;
   /* letter-spacing: 0.1px; */
   color: black;
+  color: #0f2930;
 }
 .card-text-movil {
   font-size: 13px;
@@ -524,10 +525,12 @@ export default {
   text-align: center;
 }
 .card-price-2 {
-  font-size: 14px;
-  font-weight: 600;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 400;
   line-height: 1.4;
   color: #128c7e;
+  color: #0f2930;
   text-align: left;
 }
 .separator-price {

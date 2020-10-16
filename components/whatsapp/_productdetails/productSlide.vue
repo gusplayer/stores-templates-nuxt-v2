@@ -2,10 +2,18 @@
   <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide wrapper-image">
-        <img :src="idCloudinary(photo, 450, 450)" class="photo" alt="Product img" />
+        <img
+          :src="idCloudinary(photo, 600, 600)"
+          class="photo"
+          alt="Product img"
+        />
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
-        <img :src="idCloudinary(photo.foto_cloudinary, 600, 600)" class="photo" alt="Product img" />
+        <img
+          :src="idCloudinary(photo.foto_cloudinary, 600, 600)"
+          class="photo"
+          alt="Product img"
+        />
       </div>
       <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">
         <div class="youtube">
@@ -102,5 +110,8 @@ export default {
   color: var(--color_text_btn);
   border-style: none;
   outline: none;
+}
+.swiper-pagination-bullet-active {
+  background: #0f2930;
 }
 </style>

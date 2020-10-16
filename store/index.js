@@ -232,6 +232,7 @@ export const mutations = {
   DELETEALLITEMSCART: (state) => {
     state.productsCart = []
   },
+
   SET_SAVEOPTION: (state, payload) => {
     state.beforeCombination.splice(payload.index, 1, payload.option.option)
   },
@@ -262,6 +263,7 @@ export const mutations = {
   SET_SHOPPING_CART(state, value) {
     state.productsCart = value || []
   },
+
   SET_DATA(state) {
     state.productsData = state.dataStore.productos.sort((a, b) => {
       if (a.nombre < b.nombre) return -1
@@ -330,9 +332,19 @@ export const mutations = {
     link.href = state.storeLayout.setting.faviconURL.url
     document.getElementsByTagName('head')[0].appendChild(link)
   },
+  // UPDATE_CONTENTCART(state) {
+  //   state.totalCart = 0
+  //   localStorage.setItem('ShoppingCart', JSON.stringify(state.productsCart))
+  //   state.productsCart.forEach((product) => {
+  //     state.totalCart += product.precio * product.cantidad
+  //   })
+  // },
   UPDATE_CONTENTCART(state) {
     state.totalCart = 0
-    localStorage.setItem('ShoppingCart', JSON.stringify(state.productsCart))
+    localStorage.setItem(
+      `ShoppingCart/${state.dataStore.tienda.id_tienda}`,
+      JSON.stringify(state.productsCart)
+    )
     state.productsCart.forEach((product) => {
       state.totalCart += product.precio * product.cantidad
     })
@@ -592,11 +604,25 @@ export const actions = {
         commit('SET_PROPERTIES', response.data.data)
       })
   },
-  GET_SHOPPING_CART({ commit }) {
-    if (localStorage.getItem('ShoppingCart')) {
+  // GET_SHOPPING_CART({ commit }) {
+  //   if (localStorage.getItem('ShoppingCart')) {
+  //     commit(
+  //       'SET_SHOPPING_CART',
+  //       JSON.parse(localStorage.getItem('ShoppingCart'))
+  //     )
+  //   }
+  // },
+  GET_SHOPPING_CART({ state, commit }) {
+    if (
+      localStorage.getItem(`ShoppingCart/${state.dataStore.tienda.id_tienda}`)
+    ) {
       commit(
         'SET_SHOPPING_CART',
-        JSON.parse(localStorage.getItem('ShoppingCart'))
+        JSON.parse(
+          localStorage.getItem(
+            `ShoppingCart/${state.dataStore.tienda.id_tienda}`
+          )
+        )
       )
     }
   },
