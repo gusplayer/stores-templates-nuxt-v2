@@ -31,15 +31,48 @@
                       <span>
                         <b class="unidades">{{ product.cantidad }}</b>
                         <b
-                          class="unidades"
-                          :v-on:load="
-                            currentFormat(
-                              product.precio,
-                              dataStore.tienda.codigo_pais,
-                              dataStore.tienda.moneda
-                            )
+                          v-if="
+                            dataStore.tienda.codigo_pais &&
+                            dataStore.tienda.moneda
                           "
-                          >X {{ resultCurrent }}</b
+                        >
+                          <b
+                            class="unidades"
+                            v-if="
+                              dataStore.tienda.codigo_pais == 'internacional'
+                            "
+                            >X
+                            {{
+                              new Intl.NumberFormat('en-IN', {
+                                style: 'currency',
+                                currency: dataStore.tienda.moneda,
+                                minimumFractionDigits: 0,
+                              }).format(product.precio)
+                            }}</b
+                          >
+                          <b class="unidades" v-else
+                            >X
+                            {{
+                              new Intl.NumberFormat(
+                                dataStore.tienda.codigo_pais,
+                                {
+                                  style: 'currency',
+                                  currency: dataStore.tienda.moneda,
+                                  minimumFractionDigits: 0,
+                                }
+                              ).format(product.precio)
+                            }}</b
+                          >
+                        </b>
+                        <b class="unidades" v-else
+                          >X
+                          {{
+                            new Intl.NumberFormat('es-CO', {
+                              style: 'currency',
+                              currency: 'COP',
+                              minimumFractionDigits: 0,
+                            }).format(product.precio)
+                          }}</b
                         >
                       </span>
                       <div v-if="product.combinacion">
@@ -51,27 +84,61 @@
                         >
                       </div>
                     </div>
-                    <div class="price">
-                      <p
-                        :v-on:load="
-                          currentFormat(
-                            product.precio * product.cantidad,
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
-                          )
+                    <div v-if="product.precio > 0">
+                      <div
+                        v-if="
+                          dataStore.tienda.codigo_pais &&
+                          dataStore.tienda.moneda
                         "
                       >
-                        {{ resultCurrent }}
-                      </p>
+                        <div
+                          class="price"
+                          v-if="dataStore.tienda.codigo_pais == 'internacional'"
+                        >
+                          <p>
+                            {{
+                              new Intl.NumberFormat('en-IN', {
+                                style: 'currency',
+                                currency: dataStore.tienda.moneda,
+                                minimumFractionDigits: 0,
+                              }).format(product.precio * product.cantidad)
+                            }}
+                          </p>
+                        </div>
+                        <div class="price" v-else>
+                          <p>
+                            {{
+                              new Intl.NumberFormat(
+                                dataStore.tienda.codigo_pais,
+                                {
+                                  style: 'currency',
+                                  currency: dataStore.tienda.moneda,
+                                  minimumFractionDigits: 0,
+                                }
+                              ).format(product.precio * product.cantidad)
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="price" v-else>
+                        <p>
+                          {{
+                            new Intl.NumberFormat('es-CO', {
+                              style: 'currency',
+                              currency: 'COP',
+                              minimumFractionDigits: 0,
+                            }).format(product.precio * product.cantidad)
+                          }}
+                        </p>
+                      </div>
                     </div>
                     <boteBasura-icon
-                      class="material-icons delete"
+                      class="icon-delete"
                       v-on:click="deleteItemCart(index)"
                     />
                   </li>
                 </ul>
               </div>
-
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
@@ -87,16 +154,42 @@
                   </span>
                   <span class="order_total_net">
                     <p>Total compra</p>
-                    <p
-                      :v-on:load="
-                        currentFormat(
-                          totalCart + (getFreeShipping ? 0 : shipping),
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
+                    <div
+                      v-if="
+                        dataStore.tienda.codigo_pais && dataStore.tienda.moneda
                       "
                     >
-                      {{ resultCurrent }}
+                      <p v-if="dataStore.tienda.codigo_pais == 'internacional'">
+                        {{
+                          new Intl.NumberFormat('en-IN', {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(
+                            totalCart + (getFreeShipping ? 0 : shipping)
+                          )
+                        }}
+                      </p>
+                      <p v-else>
+                        {{
+                          new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
+                            style: 'currency',
+                            currency: dataStore.tienda.moneda,
+                            minimumFractionDigits: 0,
+                          }).format(
+                            totalCart + (getFreeShipping ? 0 : shipping)
+                          )
+                        }}
+                      </p>
+                    </div>
+                    <p v-else>
+                      {{
+                        new Intl.NumberFormat('es-CO', {
+                          style: 'currency',
+                          currency: 'COP',
+                          minimumFractionDigits: 0,
+                        }).format(totalCart + (getFreeShipping ? 0 : shipping))
+                      }}
                     </p>
                   </span>
                 </div>
@@ -677,6 +770,22 @@ export default {
   font-size: 13px;
   font-weight: 500;
 }
+.name >>> .el-tag {
+  border-color: #128c7e;
+  background-color: #128c7e;
+  color: white;
+  display: inline-block;
+  height: 28px;
+  margin-left: 2px;
+  padding: 0 4px;
+  font-size: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
 .order-combincacion {
   width: 100%;
   max-width: 180px;
@@ -700,14 +809,14 @@ export default {
   color: var(--color_subtext);
   font-size: 14px;
 }
-.order_products_list_item .material-icons.delete {
-  height: 14px;
+.icon-delete {
+  font-size: 20px;
   cursor: pointer;
-  color: gray;
+  color: #128c7e;
   transition: 0.3s;
-  font-size: 18px;
+  bottom: 5px;
 }
-.order_products_list_item:hover .material-icons.delete {
+.icon-delete:hover {
   color: grey;
 }
 .order_beforefreeshipping {
@@ -973,6 +1082,9 @@ export default {
   text-align: center;
   align-items: center;
   background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
+}
+.continue_shopping:hover {
+  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
 }
 .conten-btn {
   display: flex;

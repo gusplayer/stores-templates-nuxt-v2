@@ -53,35 +53,35 @@
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
                       v-on="
-                        currentFormat2(
+                        currentFormatWapiMin(
                           this.minPrice,
                           dataStore.tienda.codigo_pais,
                           dataStore.tienda.moneda
                         )
                       "
                     >
-                      {{ resultCurrent2 }}
+                      {{ resultCurrentWapiMin }}
                     </div>
                     <p class="separator-price">-</p>
                     <div
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
                       v-on="
-                        currentFormat(
+                        currentFormatWapiMax(
                           this.maxPrice,
                           dataStore.tienda.codigo_pais,
                           dataStore.tienda.moneda
                         )
                       "
                     >
-                      {{ resultCurrent }}
+                      {{ resultCurrentWapiMax }}
                     </div>
                   </div>
                   <div v-else>
                     <p
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
-                      v-on:load="
+                      v-on="
                         currentFormat(
                           this.product.precio,
                           dataStore.tienda.codigo_pais,
@@ -89,7 +89,7 @@
                         )
                       "
                     >
-                      {{ this.product.precio | currency }}
+                      {{ resultCurrent }}
                     </p>
                   </div>
                 </div>
@@ -174,35 +174,35 @@
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
                     v-on="
-                      currentFormat2(
+                      currentFormatWapiMin(
                         this.minPrice,
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
                       )
                     "
                   >
-                    {{ resultCurrent2 }}
+                    {{ resultCurrentWapiMin }}
                   </div>
                   <p class="separator-price">-</p>
                   <div
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
                     v-on="
-                      currentFormat(
+                      currentFormatWapiMax(
                         this.maxPrice,
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
                       )
                     "
                   >
-                    {{ resultCurrent }}
+                    {{ resultCurrentWapiMax }}
                   </div>
                 </div>
                 <div v-else>
                   <p
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
-                    v-on:load="
+                    v-on="
                       currentFormat(
                         this.product.precio,
                         dataStore.tienda.codigo_pais,
@@ -210,7 +210,7 @@
                       )
                     "
                   >
-                    {{ this.product.precio | currency }}
+                    {{ resultCurrent }}
                   </p>
                 </div>
               </div>
