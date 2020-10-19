@@ -313,7 +313,7 @@ export default {
 }
 .modal-content::-webkit-scrollbar {
   background: white;
-  width: 5px;
+  width: 10px;
   border-top-right-radius: var(--radius_btn);
   border-bottom-right-radius: var(--radius_btn);
 }
@@ -432,7 +432,7 @@ export default {
   margin: 1em;
 }
 .tab input:checked ~ .tab-content {
-  max-height: 100vh;
+  max-height: 100%;
 }
 .tab label::after {
   position: absolute;
