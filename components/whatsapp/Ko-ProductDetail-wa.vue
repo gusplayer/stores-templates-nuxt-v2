@@ -107,11 +107,21 @@
           <button
             class="btn-responsive"
             ref="color2"
-            v-if="!spent"
+            v-if="!spent && salesData.precio > 0"
             v-on:click="addShoppingCart"
           >
             <span>
               Comprar
+            </span>
+          </button>
+          <button
+            class="btn-responsive"
+            ref="color2"
+            v-else-if="salesData.precio == 0 && !spent"
+            v-on:click="WPQuotation()"
+          >
+            <span>
+              Cotizar
             </span>
           </button>
           <div v-if="spent" class="wrapper-btn">
@@ -445,6 +455,39 @@ export default {
       let urlProduct = window.location.href
       let text = `Hola 😀, %0AEstoy en tu tienda ${this.dataStore.tienda.nombre} y me interesa el producto: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
 
+      if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
+        let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+
+        if (this.mobileCheck()) {
+          window.open(
+            `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
+            '_blank'
+          )
+        } else {
+          window.open(
+            `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
+            '_blank'
+          )
+        }
+      } else {
+        if (this.mobileCheck()) {
+          window.open(
+            `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
+            '_blank'
+          )
+        } else {
+          window.open(
+            `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
+            '_blank'
+          )
+        }
+      }
+    },
+    WPQuotation() {
+      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
+      let baseUrlPc = 'https://web.whatsapp.com/send?phone='
+      let urlProduct = window.location.href
+      let text = `Hola%20%F0%9F%98%80%2C%0AEstoy%20en%20tu%20tienda%20%2A${this.dataStore.tienda.nombre}%2A%20y%20quiero%20cotizar%20este%20producto%3A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.data.detalle.nombre}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ALink%3A%20${urlProduct}`
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
 

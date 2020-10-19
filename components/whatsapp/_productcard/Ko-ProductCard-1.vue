@@ -107,6 +107,7 @@
               v-if="!this.estadoCart && !soldOut && !spent"
             >
               <div
+                v-if="this.product.precio > 0"
                 v-on:click="addShoppingCart"
                 class="btn btn-whatsapp"
                 style="margin-right: 5px;"
