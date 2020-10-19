@@ -1,17 +1,12 @@
 <template>
   <div class="wrapper-productDetail">
-    <div class="wrapper-back">
-      <div class="back-button">
-        <p @click="$router.go(-1)"><FlechaLeft-icon /></p>
-      </div>
-      <!-- <div class="wrapper-back breadcrumb">
-          <p @click="$router.go(-1)">Inicio ></p>
-          <p>{{ this.data.detalle.nombre }}</p>
-        </div> -->
-    </div>
-
     <div v-if="loading" v-loading="loading"></div>
     <div class="container-productDetail" v-else>
+      <div class="wrapper-back">
+        <div class="back-button">
+          <p @click="$router.go(-1)"><FlechaLeft-icon /></p>
+        </div>
+      </div>
       <div class="section">
         <div class="wrapper-left">
           <div class="photos_responsive">
@@ -70,6 +65,11 @@
                 </selectGroup>
               </div>
             </div>
+            <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
+              <button class="btn-whatsapp" @click="redirectWP()">
+                <whatsapp-icon class="wp-icon" />Solicitar información
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@
           <div class="content-text-desc" v-html="data.info.descripcion"></div>
         </div>
       </div>
-      <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
+      <div class="content-btn-whatsapp-res" v-if="dataStore.tienda.whatsapp">
         <button class="btn-whatsapp" @click="redirectWP()">
           <whatsapp-icon class="wp-icon" />Solicitar información
         </button>
@@ -442,13 +442,8 @@ export default {
     redirectWP() {
       let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
       let baseUrlPc = 'https://web.whatsapp.com/send?phone='
-      let urlProduct
-      if (this.dataStore.tienda.dominio) {
-        urlProduct = `${this.dataStore.tienda.dominio}wa`
-      } else {
-        urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
-      }
-      let text = `Hola 😀, %0AEstoy en tu tienda y me interesa el producto: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
+      let urlProduct = window.location.href
+      let text = `Hola 😀, %0AEstoy en tu tienda ${this.dataStore.tienda.nombre} y me interesa el producto: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
 
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
@@ -577,6 +572,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   padding: 20px 30px 80px 30px;
+  position: relative;
 }
 .section {
   width: 100%;
@@ -604,6 +600,7 @@ export default {
   align-items: center;
   position: absolute;
   top: 0;
+  z-index: 2;
 }
 .back-button {
   padding: 15px 15px;
@@ -618,6 +615,10 @@ export default {
   text-align: center;
   box-shadow: 0 2px 10px rgba(131, 130, 131, 0.473);
 }
+.back-button p:hover {
+  background-color: #128c7e;
+  color: white;
+}
 .breadcrumb {
   margin-left: 5px;
 }
@@ -631,13 +632,10 @@ export default {
 }
 .photos_responsive {
   width: 100%;
-  height: 375px;
-  max-width: 375px;
   display: flex;
   box-sizing: border-box;
   overflow: hidden;
-  /* margin-bottom: 10px; */
-  padding: 15px 15px;
+  margin-top: 5px;
 }
 .wrapper-right {
   flex: 1;
@@ -682,7 +680,7 @@ export default {
   font-size: 20px;
   font-weight: 400;
   color: #0f2930;
-  margin-top: 12px;
+  margin-top: 5px;
 }
 .card-descuento {
   font-size: 12px;
@@ -703,7 +701,6 @@ export default {
   font-size: 13px;
   color: #0f2930;
 }
-
 .text-desc {
   text-decoration-color: currentcolor;
   text-decoration-style: solid;
@@ -834,10 +831,8 @@ export default {
 .btn-responsive span {
   font-size: 16px;
 }
-
 .btn-responsive:hover {
-  -webkit-box-shadow: 5px 2px 28px -9px rgba(45, 241, 202, 0.71);
-  box-shadow: 5px 2px 28px -9px rgba(45, 241, 202, 0.71);
+  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
 }
 .icon {
   font-size: 16px;
@@ -845,7 +840,7 @@ export default {
   transition: all 200ms ease-in;
 }
 .icon:hover {
-  color: #000000;
+  color: #128c7e;
 }
 .wrapper-btn {
   padding: 5px 10px;
@@ -912,10 +907,11 @@ export default {
   border: 0px;
 }
 .btn-whatsapp:hover {
-  -webkit-box-shadow: 5px 2px 28px -9px rgba(68, 90, 100, 0.71);
-  box-shadow: 5px 2px 28px -9px rgba(68, 90, 100, 0.71);
+  background-color: #128c7e;
 }
-
+.content-btn-whatsapp-res {
+  display: none;
+}
 .wp-icon {
   font-size: 16px;
   bottom: 4px;
@@ -936,7 +932,6 @@ export default {
   font-size: 14px;
   color: #0f2930;
 }
-
 @media (max-width: 685px) {
   .container-productDetail {
     padding: 0px 0px 40px 0px;
@@ -965,6 +960,22 @@ export default {
     font-size: 16px;
   }
   .content-description {
+    padding: 0 15px;
+  }
+}
+@media (max-width: 400px) {
+  .content-btn-whatsapp {
+    display: none;
+  }
+  .content-btn-whatsapp-res {
+    width: 100%;
+    padding: 0 15px;
+    display: flex;
+    margin-top: 10px;
+  }
+  .photos_responsive {
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 0 15px;
   }
 }
