@@ -632,6 +632,7 @@ export default {
 }
 .photos_responsive {
   width: 100%;
+  max-width: 375px;
   display: flex;
   box-sizing: border-box;
   overflow: hidden;
