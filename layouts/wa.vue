@@ -5,9 +5,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import currentFormat from '../mixins/currentFormat'
-Vue.mixin(currentFormat)
 export default {
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')

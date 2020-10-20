@@ -92,21 +92,23 @@
               <strong>{{ data.info.marca }}</strong>
             </p>
             <!-- <p class="text-promocion" v-show="salesData.precio">
-              ${{ salesData.precio | currency }}
-            </p>-->
-            <div
-              class="text-precio"
-              v-show="salesData.precio"
-              :v-on:load="
-                currentFormat(
-                  salesData.precio,
-                  dataStore.tienda.codigo_pais,
-                  dataStore.tienda.moneda
-                )
-              "
-            >
-              {{ resultCurrent }}
-            </div>
+              ${{
+                salesData.precio
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
+            </p> -->
+            <p class="text-precio" v-show="salesData.precio">
+              {{
+                salesData.precio
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
+            </p>
             <!-- <p class="card-descuento">-50%</p> -->
             <!-- <div
               class="content-text-desc"
@@ -211,19 +213,15 @@
                     <!-- <p class="text-promocion" v-show="salesData.precio">
                       ${{ salesData.precio | currency }}
                     </p> -->
-                    <div
-                      class="text-precio"
-                      v-show="salesData.precio"
-                      :v-on:load="
-                        currentFormat(
-                          salesData.precio,
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
-                      "
-                    >
-                      {{ resultCurrent }}
-                    </div>
+                    <p class="text-precio" v-show="salesData.precio">
+                      {{
+                        salesData.precio
+                          | currency(
+                            dataStore.tienda.codigo_pais,
+                            dataStore.tienda.moneda
+                          )
+                      }}
+                    </p>
                     <!-- <p class="card-descuento">-50%</p> -->
                     <div class="content_buy_action">
                       <div v-if="envio.titulo == 'Envío gratis'">
@@ -725,11 +723,36 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+    currency(value, codigo_pais, moneda) {
+      let resultCurrent
+      if (codigo_pais && moneda) {
+        if (codigo_pais == 'internacional') {
+          {
+            resultCurrent = new Intl.NumberFormat('en-IN', {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        } else {
+          {
+            resultCurrent = new Intl.NumberFormat(codigo_pais, {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        }
+      } else {
+        resultCurrent = new Intl.NumberFormat('co', {
+          style: 'currency',
+          currency: 'COP',
+          minimumFractionDigits: 0,
+        }).format(value)
+        return resultCurrent
       }
-      return 0
     },
     toLowerCase(value) {
       if (value) {

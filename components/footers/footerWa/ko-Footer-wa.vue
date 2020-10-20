@@ -9,30 +9,9 @@
         <whatsapp-icon class="wp-icon" />Comprar
       </p>
       <p class="text-footer valor" v-if="productsCart.length > 0">
-        <span v-if="dataStore.tienda.codigo_pais && dataStore.tienda.moneda">
-          <span v-if="dataStore.tienda.codigo_pais == 'internacional'">
-            {{
-              new Intl.NumberFormat('en-IN', {
-                style: 'currency',
-                currency: dataStore.tienda.moneda,
-                minimumFractionDigits: 0,
-              }).format(this.totalCart)
-            }}</span
-          >
-          <span v-else>{{
-            new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
-              style: 'currency',
-              currency: dataStore.tienda.moneda,
-              minimumFractionDigits: 0,
-            }).format(this.totalCart)
-          }}</span>
-        </span>
-        <span v-else>{{
-          new Intl.NumberFormat('es-CO', {
-            style: 'currency',
-            currency: 'COP',
-            minimumFractionDigits: 0,
-          }).format(this.totalCart)
+        <span>{{
+          this.totalCart
+            | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
         }}</span>
       </p>
     </div>
@@ -58,9 +37,35 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+    currency(value, codigo_pais, moneda) {
+      let resultCurrent
+      if (codigo_pais && moneda) {
+        if (codigo_pais == 'internacional') {
+          {
+            resultCurrent = new Intl.NumberFormat('en-IN', {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        } else {
+          {
+            resultCurrent = new Intl.NumberFormat(codigo_pais, {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        }
+      } else {
+        resultCurrent = new Intl.NumberFormat('co', {
+          style: 'currency',
+          currency: 'COP',
+          minimumFractionDigits: 0,
+        }).format(value)
+        return resultCurrent
       }
     },
   },

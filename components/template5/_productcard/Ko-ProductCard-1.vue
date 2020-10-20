@@ -52,44 +52,41 @@
                     <div
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
-                      v-on="
-                        currentFormatWapiMin(
-                          this.minPrice,
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
-                      "
                     >
-                      {{ resultCurrentWapiMin }}
+                      {{
+                        this.minPrice
+                          | currency(
+                            dataStore.tienda.codigo_pais,
+                            dataStore.tienda.moneda
+                          )
+                      }}
                     </div>
                     <p class="separator-price">-</p>
                     <div
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
-                      v-on="
-                        currentFormatWapiMax(
-                          this.maxPrice,
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
-                      "
                     >
-                      {{ resultCurrentWapiMax }}
+                      {{
+                        this.maxPrice
+                          | currency(
+                            dataStore.tienda.codigo_pais,
+                            dataStore.tienda.moneda
+                          )
+                      }}
                     </div>
                   </div>
                   <div v-else>
                     <p
                       class="card-price-2"
                       v-if="this.product.precio > 0 || this.product.precio"
-                      v-on="
-                        currentFormat(
-                          this.product.precio,
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
-                      "
                     >
-                      {{ resultCurrent }}
+                      {{
+                        this.product.precio
+                          | currency(
+                            dataStore.tienda.codigo_pais,
+                            dataStore.tienda.moneda
+                          )
+                      }}
                     </p>
                   </div>
                 </div>
@@ -173,50 +170,46 @@
                   <div
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
-                    v-on="
-                      currentFormatWapiMin(
-                        this.minPrice,
-                        dataStore.tienda.codigo_pais,
-                        dataStore.tienda.moneda
-                      )
-                    "
                   >
-                    {{ resultCurrentWapiMin }}
+                    {{
+                      this.minPrice
+                        | currency(
+                          dataStore.tienda.codigo_pais,
+                          dataStore.tienda.moneda
+                        )
+                    }}
                   </div>
                   <p class="separator-price">-</p>
                   <div
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
-                    v-on="
-                      currentFormatWapiMax(
-                        this.maxPrice,
-                        dataStore.tienda.codigo_pais,
-                        dataStore.tienda.moneda
-                      )
-                    "
                   >
-                    {{ resultCurrentWapiMax }}
+                    {{
+                      this.maxPrice
+                        | currency(
+                          dataStore.tienda.codigo_pais,
+                          dataStore.tienda.moneda
+                        )
+                    }}
                   </div>
                 </div>
                 <div v-else>
                   <p
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
-                    v-on="
-                      currentFormat(
-                        this.product.precio,
-                        dataStore.tienda.codigo_pais,
-                        dataStore.tienda.moneda
-                      )
-                    "
                   >
-                    {{ resultCurrent }}
+                    {{
+                      this.product.precio
+                        | currency(
+                          dataStore.tienda.codigo_pais,
+                          dataStore.tienda.moneda
+                        )
+                    }}
                   </p>
                 </div>
               </div>
               <!-- <p class="card-descuento">-50%</p> -->
             </router-link>
-
             <div v-if="!this.estadoCart && !soldOut && !spent">
               <cartArrowDown
                 class="card-icon-cart-movil"
@@ -420,9 +413,35 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+    currency(value, codigo_pais, moneda) {
+      let resultCurrent
+      if (codigo_pais && moneda) {
+        if (codigo_pais == 'internacional') {
+          {
+            resultCurrent = new Intl.NumberFormat('en-IN', {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        } else {
+          {
+            resultCurrent = new Intl.NumberFormat(codigo_pais, {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        }
+      } else {
+        resultCurrent = new Intl.NumberFormat('co', {
+          style: 'currency',
+          currency: 'COP',
+          minimumFractionDigits: 0,
+        }).format(value)
+        return resultCurrent
       }
     },
   },

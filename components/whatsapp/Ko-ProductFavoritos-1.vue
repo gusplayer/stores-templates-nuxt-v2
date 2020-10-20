@@ -4,7 +4,11 @@
       <p class="title-ProductFavoritos">Destacados</p>
     </div>
     <div class="container-favorite">
-      <div class="card-favorite" v-for="product in orderproduct">
+      <div
+        class="card-favorite"
+        v-for="product in orderproduct"
+        :key="product.id"
+      >
         <router-link :to="{ path: `/wa/producto/` + product.slug }">
           <img
             :src="idCloudinary(product.foto_cloudinary, 250, 250)"
@@ -22,43 +26,16 @@
               <!-- <p class="card-price-1-movil" v-if="product.precio > 0">
                   $ {{ product.precio }}
               </p>-->
-              <div
-                v-if="dataStore.tienda.codigo_pais && dataStore.tienda.moneda"
-              >
-                <div v-if="dataStore.tienda.codigo_pais == 'internacional'">
-                  <p class="card-price-2" v-if="product.precio > 0">
-                    {{
-                      new Intl.NumberFormat('en-IN', {
-                        style: 'currency',
-                        currency: dataStore.tienda.moneda,
-                        minimumFractionDigits: 0,
-                      }).format(product.precio)
-                    }}
-                  </p>
-                </div>
-                <div v-else>
-                  <p class="card-price-2" v-if="product.precio > 0">
-                    {{
-                      new Intl.NumberFormat(dataStore.tienda.codigo_pais, {
-                        style: 'currency',
-                        currency: dataStore.tienda.moneda,
-                        minimumFractionDigits: 0,
-                      }).format(product.precio)
-                    }}
-                  </p>
-                </div>
-                <div v-else>
-                  <p class="card-price-2" v-if="product.precio > 0">
-                    {{
-                      new Intl.NumberFormat('es-CO', {
-                        style: 'currency',
-                        currency: 'COP',
-                        minimumFractionDigits: 0,
-                      }).format(product.precio)
-                    }}
-                  </p>
-                </div>
-              </div>
+
+              <p class="card-price-2" v-if="product.precio > 0">
+                {{
+                  product.precio
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
             </div>
             <div v-else class="separador-price"></div>
           </div>
@@ -92,9 +69,35 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+    currency(value, codigo_pais, moneda) {
+      let resultCurrent
+      if (codigo_pais && moneda) {
+        if (codigo_pais == 'internacional') {
+          {
+            resultCurrent = new Intl.NumberFormat('en-IN', {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        } else {
+          {
+            resultCurrent = new Intl.NumberFormat(codigo_pais, {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        }
+      } else {
+        resultCurrent = new Intl.NumberFormat('co', {
+          style: 'currency',
+          currency: 'COP',
+          minimumFractionDigits: 0,
+        }).format(value)
+        return resultCurrent
       }
     },
   },

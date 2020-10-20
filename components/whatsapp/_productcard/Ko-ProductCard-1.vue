@@ -56,44 +56,29 @@
                   <p
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
-                    :v-on:load="
-                      currentFormatWapiMin(
-                        this.minPrice,
-                        dataStore.codigo_pais,
-                        dataStore.moneda
-                      )
-                    "
                   >
-                    {{ resultCurrentWapiMin }}
+                    {{
+                      this.minPrice
+                        | currency(dataStore.codigo_pais, dataStore.moneda)
+                    }}
                   </p>
                   <p class="separator-price">-</p>
                   <p
                     class="card-price-2"
                     v-if="this.product.precio > 0 || this.product.precio"
-                    :v-on:load="
-                      currentFormatWapiMax(
-                        this.maxPrice,
-                        dataStore.codigo_pais,
-                        dataStore.moneda
-                      )
-                    "
                   >
-                    {{ resultCurrentWapiMax }}
+                    {{
+                      this.maxPrice
+                        | currency(dataStore.codigo_pais, dataStore.moneda)
+                    }}
                   </p>
                 </div>
                 <div v-else>
-                  <p
-                    class="card-price-2"
-                    v-if="this.product.precio > 0"
-                    :v-on:load="
-                      currentFormat(
-                        this.product.precio,
-                        dataStore.codigo_pais,
-                        dataStore.moneda
-                      )
-                    "
-                  >
-                    {{ resultCurrent }}
+                  <p class="card-price-2" v-if="this.product.precio > 0">
+                    {{
+                      this.product.precio
+                        | currency(dataStore.codigo_pais, dataStore.moneda)
+                    }}
                   </p>
                 </div>
                 <!-- </div> -->
@@ -374,9 +359,35 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+    currency(value, codigo_pais, moneda) {
+      let resultCurrent
+      if (codigo_pais && moneda) {
+        if (codigo_pais == 'internacional') {
+          {
+            resultCurrent = new Intl.NumberFormat('en-IN', {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        } else {
+          {
+            resultCurrent = new Intl.NumberFormat(codigo_pais, {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        }
+      } else {
+        resultCurrent = new Intl.NumberFormat('co', {
+          style: 'currency',
+          currency: 'COP',
+          minimumFractionDigits: 0,
+        }).format(value)
+        return resultCurrent
       }
     },
   },
@@ -535,6 +546,7 @@ export default {
   text-align: left;
 }
 .separator-price {
+  margin-top: 8px;
   color: black;
   margin-left: 5px;
   margin-right: 5px;
