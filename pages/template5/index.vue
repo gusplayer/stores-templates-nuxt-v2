@@ -10,7 +10,8 @@
   >
     <div class="space-search"></div>
     <div class="search-movil" id="navbar">
-      <form id="demo-1" style="width: 100%;">
+      <form id="demo-1" style="width: 100%; position: relative;">
+        <search-icon class="icon-s" />
         <input
           v-model="search"
           type="search"
@@ -27,7 +28,6 @@
       :dataStore="dataStore"
       :fullProducts="fullProducts"
     ></KProductList>
-    <!-- <KContent1 :dataStore="dataStore" /> -->
     <kBannerFooter />
     <KNewsletter :dataStore="dataStore" />
   </div>
@@ -38,7 +38,6 @@ import kBanner from '../../components/template5/ko-Banner-1'
 import kBannerFooter from '../../components/template5/ko-BannerFooter-1'
 import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
 import KProductList from '../../components/template5/Ko-ProductList-1'
-import KContent1 from '../../components/template5/Ko-Content-1'
 import KNewsletter from '../../components/template5/Ko-Newsletter-1'
 import KComponent360 from '../../components/template5/Ko-Content360-1'
 export default {
@@ -49,23 +48,22 @@ export default {
     KNewsletter,
     KProductFavoritos,
     KComponent360,
-    KContent1,
     kBannerFooter,
   },
   mounted() {
-    var prevScrollpos = window.pageYOffset
-    window.onscroll = function () {
-      var currentScrollPos = window.pageYOffset
-      var navbar = document.getElementById('navbar')
-      if (prevScrollpos > currentScrollPos && navbar) {
-        navbar.style.zIndex = '3'
-        navbar.style.top = '91px'
-      } else {
-        navbar.style.zIndex = '0'
-        navbar.style.top = '47px'
-      }
-      prevScrollpos = currentScrollPos
-    }
+    // var prevScrollpos = window.pageYOffset
+    // window.onscroll = function () {
+    //   var currentScrollPos = window.pageYOffset
+    //   var navbar = document.getElementById('navbar')
+    //   if (prevScrollpos > currentScrollPos && navbar) {
+    //     navbar.style.zIndex = '3'
+    //     navbar.style.top = '91px'
+    //   } else {
+    //     navbar.style.zIndex = '0'
+    //     navbar.style.top = '47px'
+    //   }
+    //   prevScrollpos = currentScrollPos
+    // }
   },
   data() {
     return {
@@ -141,10 +139,8 @@ input[type='search'] {
   transition: all 0.5s;
 }
 #demo-1 input[type='search'] {
-  background: #fff
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
-  border: solid 2px var(--color_icon);
+  background: #fff;
+  border: solid 2px grey;
   padding: 6px 4px 7px 38px;
   width: 100%;
   -webkit-border-radius: var(--radius_btn);
@@ -173,6 +169,14 @@ input::-webkit-input-placeholder {
 }
 .space-search {
   display: none;
+}
+.icon-s {
+  font-size: 25px;
+  color: grey;
+  position: absolute;
+  top: 3px;
+  left: 8px;
+  cursor: pointer;
 }
 @media (max-width: 500px) {
   .space-search {

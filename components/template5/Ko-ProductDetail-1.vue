@@ -753,6 +753,9 @@ export default {
         }).format(value)
         return resultCurrent
       }
+      //  if (value) {
+      //   return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+      //  }
     },
     toLowerCase(value) {
       if (value) {

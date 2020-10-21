@@ -10,7 +10,8 @@
   >
     <div class="space-search"></div>
     <div class="search-movil" id="navbar">
-      <form id="demo-1" style="width: 100%;">
+      <form id="demo-1" style="width: 100%; position: relative;">
+        <search-icon class="icon-s" />
         <input
           v-model="search"
           type="search"
@@ -39,21 +40,6 @@ export default {
     KProductList,
     KNewsletter,
     KProductFavoritos,
-  },
-  mounted() {
-    var prevScrollpos = window.pageYOffset
-    window.onscroll = function () {
-      var currentScrollPos = window.pageYOffset
-      var navbar = document.getElementById('navbar')
-      if (prevScrollpos > currentScrollPos && navbar) {
-        navbar.style.zIndex = '3'
-        navbar.style.top = '91px'
-      } else {
-        navbar.style.zIndex = '0'
-        navbar.style.top = '52px'
-      }
-      prevScrollpos = currentScrollPos
-    }
   },
   data() {
     return {
@@ -129,10 +115,8 @@ input[type='search'] {
   transition: all 0.5s;
 }
 #demo-1 input[type='search'] {
-  background: #fff
-    url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
-    7px center;
-  border: solid 2px var(--color_icon);
+  background: #fff;
+  border: solid 2px grey;
   padding: 6px 4px 7px 38px;
   width: 100%;
   -webkit-border-radius: var(--radius_btn);
@@ -161,6 +145,14 @@ input::-webkit-input-placeholder {
 }
 .space-search {
   display: none;
+}
+.icon-s {
+  font-size: 25px;
+  color: grey;
+  position: absolute;
+  top: 3px;
+  left: 8px;
+  cursor: pointer;
 }
 @media (max-width: 500px) {
   .space-search {

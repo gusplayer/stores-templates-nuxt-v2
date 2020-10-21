@@ -3,7 +3,7 @@
     <div class="contenedor">
       <p class="subtext">SUSCRIBÉTE</p>
       <p class="title">
-        Suscribéte a nuestro boletín para enviarte promociones.
+        Suscríbete a nuestro boletín para enviarte promociones.
       </p>
 
       <div class="content-button">
@@ -31,7 +31,7 @@
           </template>
         </ValidationProvider>
         <button ref="colorBtn" class="btn" @click="submitNewsletter">
-          Subscríbete
+          Suscríbete
         </button>
       </div>
       <div class="content-checkbox">
