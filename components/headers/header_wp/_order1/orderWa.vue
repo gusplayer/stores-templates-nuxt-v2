@@ -745,7 +745,7 @@ export default {
   align-items: center;
   background-color: #fff;
   z-index: 1000;
-  padding: 20px 0;
+  padding: 20px 0 8px;
   overflow-y: auto;
 }
 .content-items-form {
@@ -827,7 +827,7 @@ export default {
   font-size: 16px;
   padding: 8px 10px;
   width: 100%;
-  height: 50px;
+  height: 44px;
   max-width: 340px;
   font-weight: 400;
   cursor: pointer;
@@ -908,14 +908,14 @@ export default {
 .continue_shopping {
   position: fixed;
   z-index: 99;
-  bottom: 10px;
+  bottom: 8px;
   color: white;
   border-radius: 5px;
   border: none;
   font-size: 16px;
   padding: 8px 10px;
   width: 100%;
-  height: 50px;
+  height: 44px;
   max-width: 340px;
   font-weight: 400;
   cursor: pointer;

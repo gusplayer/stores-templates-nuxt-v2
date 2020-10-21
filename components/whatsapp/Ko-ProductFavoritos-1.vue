@@ -9,7 +9,11 @@
         v-for="product in orderproduct"
         :key="product.id"
       >
-        <router-link :to="{ path: `/wa/producto/` + product.slug }">
+        <router-link
+          :to="{
+            path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+          }"
+        >
           <img
             :src="idCloudinary(product.foto_cloudinary, 250, 250)"
             class="product-image"

@@ -80,7 +80,6 @@
           <whatsapp-icon class="wp-icon" />Solicitar información
         </button>
       </div>
-      <br /><br />
       <div class="responsive-purchase">
         <div class="ko-input">
           <div class="quantity-resposive" v-if="!spent">
@@ -816,10 +815,11 @@ export default {
   position: fixed;
   bottom: 0px;
   width: 100%;
-  max-width: 520px;
+  max-width: 900px;
   z-index: 3;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .ko-input {
   display: flex;
@@ -908,7 +908,7 @@ export default {
   color: #128c7e;
 }
 .wrapper-btn {
-  padding: 5px 10px;
+  padding: 5px 0px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -918,14 +918,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(222, 222, 222);
+  background: rgb(207, 207, 207);
   padding: 6px 10px;
   border-radius: var(--radius_btn);
   color: #4c4c4c;
   font-size: 14px;
   font-weight: 600;
   width: 100%;
-  height: 100%;
+  height: 36px;
 }
 .card-icon-cart {
   font-size: 20px;
@@ -1034,9 +1034,10 @@ export default {
   }
   .content-btn-whatsapp-res {
     width: 100%;
-    padding: 0 15px;
+    padding: 0 10px;
     display: flex;
     margin-top: 10px;
+    margin-bottom: 20px;
   }
   .photos_responsive {
     margin-top: 10px;

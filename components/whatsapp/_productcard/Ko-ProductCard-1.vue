@@ -3,7 +3,9 @@
     <div class="container">
       <div class="wrapper-movil">
         <router-link
-          :to="{ path: `/wa/producto/` + product.slug }"
+          :to="{
+            path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+          }"
           class="wrapper-image"
         >
           <img
@@ -25,7 +27,9 @@
         </router-link>
         <div class="wrapper-text">
           <router-link
-            :to="{ path: `/wa/producto/` + product.slug }"
+            :to="{
+              path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+            }"
             class="content-name-product-movil"
           >
             <p
@@ -100,14 +104,18 @@
                 <shopWa-icon class="wp-icon" />
               </div>
               <router-link
-                :to="{ path: `/wa/producto/` + product.slug }"
+                :to="{
+                  path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+                }"
                 class="btn"
                 >compra</router-link
               >
             </div>
 
             <router-link
-              :to="{ path: `/wa/producto/` + product.slug }"
+              :to="{
+                path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+              }"
               v-else
               class="btn"
               >compra</router-link
@@ -431,15 +439,15 @@ export default {
 }
 .wrapper-image {
   max-width: 110px;
-  max-height: 110px;
-  overflow: hidden;
+  /* max-height: 110px;
+  overflow: hidden; */
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(131, 130, 131, 0.174);
   margin-right: 6px;
 }
 .product-image {
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 }
 .product-image-soldOut {

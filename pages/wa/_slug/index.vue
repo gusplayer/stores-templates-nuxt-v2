@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import KCategory from '../../components/whatsapp/Ko-Categories-wa'
-import KProductFavoritos from '../../components/whatsapp/Ko-ProductFavoritos-1'
-import KProductList from '../../components/whatsapp/Ko-ProductList-wa'
-import KoHeaderWp from '../../components/headers/header_wp/Ko-Header-wa'
-import KFooterWaLogo from '../../components/footers/footerWa/ko-Footer-wa-logo'
-import KFooterWa from '../../components/footers/footerWa/ko-Footer-wa'
+import KCategory from '../../../components/whatsapp/Ko-Categories-wa'
+import KProductFavoritos from '../../../components/whatsapp/Ko-ProductFavoritos-1'
+import KProductList from '../../../components/whatsapp/Ko-ProductList-wa'
+import KoHeaderWp from '../../../components/headers/header_wp/Ko-Header-wa'
+import KFooterWaLogo from '../../../components/footers/footerWa/ko-Footer-wa-logo'
+import KFooterWa from '../../../components/footers/footerWa/ko-Footer-wa'
 
 export default {
   layout: 'wa',
