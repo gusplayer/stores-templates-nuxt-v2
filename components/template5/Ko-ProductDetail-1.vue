@@ -726,7 +726,9 @@ export default {
     currency(value, codigo_pais, moneda) {
       let resultCurrent
       if (codigo_pais && moneda) {
-        if (codigo_pais == 'internacional') {
+        if (value && codigo_pais == 'co' && moneda == 'COP') {
+          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+        } else if (codigo_pais == 'internacional') {
           {
             resultCurrent = new Intl.NumberFormat('en-IN', {
               style: 'currency',
@@ -746,16 +748,10 @@ export default {
           }
         }
       } else {
-        resultCurrent = new Intl.NumberFormat('co', {
-          style: 'currency',
-          currency: 'COP',
-          minimumFractionDigits: 0,
-        }).format(value)
-        return resultCurrent
+        if (value) {
+          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+        }
       }
-      //  if (value) {
-      //   return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      //  }
     },
     toLowerCase(value) {
       if (value) {

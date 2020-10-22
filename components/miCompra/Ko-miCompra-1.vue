@@ -252,10 +252,10 @@ export default {
   mounted() {
     this.routePrev()
     this.setCity()
+    this.clearCart()
     if (this.orden && this.orden.message) {
       this.errorMessage()
     }
-
     if (this.orden && this.orden.venta && this.orden.venta.usuario) {
       this.numOrden = this.orden.venta.id
       this.cedula = this.orden.venta.usuario.identificacion
@@ -437,6 +437,14 @@ export default {
     },
   },
   methods: {
+    clearCart() {
+      let domain = this.$route.fullPath
+      let result = domain.split('&')
+      if (result[result.length - 1] == 'clearCart=true') {
+        this.$store.commit('DELETEALLITEMSCART')
+        this.$store.commit('UPDATE_CONTENTCART')
+      }
+    },
     routePrev() {
       if (this.$route.path == '/') {
         this.toggleArrow = false
@@ -531,11 +539,35 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+    currency(value, codigo_pais, moneda) {
+      let resultCurrent
+      if (codigo_pais && moneda) {
+        if (value && codigo_pais == 'co' && moneda == 'COP') {
+          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+        } else if (codigo_pais == 'internacional') {
+          {
+            resultCurrent = new Intl.NumberFormat('en-IN', {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        } else {
+          {
+            resultCurrent = new Intl.NumberFormat(codigo_pais, {
+              style: 'currency',
+              currency: moneda,
+              minimumFractionDigits: 0,
+            }).format(value)
+            return resultCurrent
+          }
+        }
+      } else {
+        if (value) {
+          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+        }
       }
-      return 0
     },
     capitalize(value) {
       if (value) {
