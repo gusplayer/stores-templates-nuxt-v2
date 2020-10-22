@@ -1027,7 +1027,7 @@ export default {
     padding: 0 15px;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .content-btn-whatsapp {
     display: none;
   }
