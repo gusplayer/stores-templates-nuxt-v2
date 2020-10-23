@@ -174,11 +174,12 @@ input::-webkit-input-placeholder {
     width: 100%;
     display: flex;
     position: fixed;
-    padding: 0px 5px;
+    padding: 2px 5px 0px;
+    background: var(--background_color_1);
     -webkit-transition: all 0.8s;
     -moz-transition: all 0.8s;
     transition: all 0.8s;
-    top: 91px;
+    top: 88px;
     z-index: 3;
   }
 }
