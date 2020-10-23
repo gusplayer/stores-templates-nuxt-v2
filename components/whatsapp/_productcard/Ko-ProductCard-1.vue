@@ -443,11 +443,13 @@ export default {
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(131, 130, 131, 0.174);
   margin-right: 6px;
+  border-radius: 5px;
 }
 .product-image {
   width: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: 5px;
 }
 .product-image-soldOut {
   filter: grayscale(100%);

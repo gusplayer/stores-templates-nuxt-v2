@@ -1,7 +1,6 @@
 <template>
   <div class="header-container">
     <div class="wrapper-header">
-      <div class="line-header"></div>
       <KoOrderWa :dataStore="dataStore" />
       <div v-if="this.settingByTemplate">
         <div class="wrapper-banner-img" v-if="this.settingByTemplate.banner">
@@ -124,11 +123,6 @@ export default {
 </script>
 
 <style scoped>
-.line-header {
-  height: 2px;
-  width: 100%;
-  background-color: #445a64;
-}
 .header-container {
   width: 100%;
   display: flex;

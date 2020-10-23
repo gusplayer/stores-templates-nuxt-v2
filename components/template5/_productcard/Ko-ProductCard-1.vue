@@ -1,11 +1,7 @@
 <template>
-  <div class="wrapper-card anim" :style="settingByTemplate">
-    <div class="container">
-      <div
-        class="wrapper"
-        v-on:mouseenter="active = false"
-        v-on:mouseleave="active = true"
-      >
+  <div class="wrapper-card" :style="settingByTemplate">
+    <div class="container-card" id="product-card">
+      <div class="wrapper">
         <router-link
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
@@ -22,100 +18,86 @@
             class="product-image-soldOut"
             alt="Product Img"
           />
-          <p class="card-info-1" v-if="soldOut">Agotado !</p>
-          <p class="card-info-2" v-if="getFreeShipping == false">
-            Envío gratis !
-          </p>
         </router-link>
-        <div class="wrapper-text">
-          <div class="content-name-product">
-            <p class="card-text" v-if="this.product.nombre.length >= 55">
-              {{ `${this.product.nombre.slice(0, 55)}...` }}
+        <div class="separador-stats"></div>
+        <div class="stats">
+          <div class="stats-container">
+            <p class="card-info-1" v-if="soldOut">Agotado !</p>
+            <p class="card-info-2" v-if="getFreeShipping == false">
+              Envío gratis !
             </p>
-            <p class="card-text" v-else>
-              {{ `${this.product.nombre.slice(0, 55)}` }}
-            </p>
-          </div>
-          <div v-if="active">
+            <div class="content-name-product">
+              <p class="card-title" v-if="this.product.nombre.length >= 55">
+                {{ `${this.product.nombre.slice(0, 55)}...` }}
+              </p>
+              <p class="card-title" v-else>
+                {{ `${this.product.nombre.slice(0, 55)}` }}
+              </p>
+            </div>
             <div class="content-text-price" v-if="this.product.precio">
-              <div class="wrapper-price">
-                <div>
-                  <!-- <p class="card-price-1" v-if="this.product.precio > 0">
-                    $ {{ this.product.precio }}
-                  </p> -->
-                  <div
-                    class="content-price"
-                    v-if="
-                      this.estadoCart == true && this.minPrice != this.maxPrice
-                    "
-                  >
-                    <div
-                      class="card-price-2"
-                      v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{
-                        this.minPrice
-                          | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
-                          )
-                      }}
-                    </div>
-                    <p class="separator-price">-</p>
-                    <div
-                      class="card-price-2"
-                      v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{
-                        this.maxPrice
-                          | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
-                          )
-                      }}
-                    </div>
-                  </div>
-                  <div v-else>
-                    <p
-                      class="card-price-2"
-                      v-if="this.product.precio > 0 || this.product.precio"
-                    >
-                      {{
-                        this.product.precio
-                          | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
-                          )
-                      }}
-                    </p>
-                  </div>
+              <div
+                class="content-price"
+                v-if="this.estadoCart == true && this.minPrice != this.maxPrice"
+              >
+                <div
+                  class="text-price"
+                  v-if="this.product.precio > 0 || this.product.precio"
+                >
+                  {{
+                    this.minPrice
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
                 </div>
-                <!-- <p class="card-descuento">-50%</p> -->
+                <p class="separator-price">-</p>
+                <div
+                  class="text-price"
+                  v-if="this.product.precio > 0 || this.product.precio"
+                >
+                  {{
+                    this.maxPrice
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
+                </div>
+              </div>
+              <div v-else>
+                <p
+                  class="text-price"
+                  v-if="this.product.precio > 0 || this.product.precio"
+                >
+                  {{
+                    this.product.precio
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
+                </p>
               </div>
             </div>
             <div class="content-text-price2" v-else></div>
-          </div>
-          <div class="content-text-price2" v-if="!active">
-            <div
-              class="content-soldOut"
-              v-if="!this.estadoCart && !soldOut && !spent"
-            >
+            <div class="wrapper-btn-icon">
               <router-link
+                id="view_details"
+                router-link
                 :to="{ path: `/productos/` + product.slug }"
-                class="btn"
-                >Ver más</router-link
               >
-              <div v-on:click="addShoppingCart" class="btn">
-                <cartArrowDown class="card-icon-cart" />Agregar
+                <p>Ver más</p>
+              </router-link>
+              <div class="separador-btn"></div>
+              <div
+                id="add_cart"
+                v-on:click="addShoppingCart"
+                v-if="!this.estadoCart && !soldOut && !spent"
+              >
+                <p><cartArrowDown />Agregar</p>
               </div>
             </div>
-
-            <router-link
-              :to="{ path: `/productos/` + product.slug }"
-              v-else
-              class="btn"
-              >Ver más</router-link
-            >
           </div>
         </div>
       </div>
@@ -136,93 +118,77 @@
             class="product-image-soldOut"
             alt="Product Img"
           />
+        </router-link>
+        <div class="content-card-items">
           <p class="card-info-1" v-if="soldOut">Agotado !</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             Envío gratis !
           </p>
-        </router-link>
-        <div class="wrapper-text">
           <router-link
             :to="{ path: `/productos/` + product.slug }"
-            class="content-name-product-movil"
+            class="content-name-product"
           >
-            <p class="card-text-movil" v-if="this.product.nombre.length >= 33">
+            <p class="card-title" v-if="this.product.nombre.length >= 33">
               {{ `${this.product.nombre.slice(0, 33)}..` }}
             </p>
-            <p class="card-text-movil" v-else>
+            <p class="card-title" v-else>
               {{ `${this.product.nombre.slice(0, 34)}` }}
             </p>
           </router-link>
-
-          <div class="content-text-price-movil-cart" v-if="this.product.precio">
-            <router-link
-              :to="{ path: `/productos/` + product.slug }"
-              class="wrapper-price"
-            >
-              <div>
-                <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
-                  $ {{ this.product.precio }}
-                </p> -->
+          <div class="content-text-price" v-if="this.product.precio">
+            <router-link :to="{ path: `/productos/` + product.slug }">
+              <div
+                class="content-price"
+                v-if="estadoCart && this.minPrice != this.maxPrice"
+              >
                 <div
-                  class="content-price"
-                  v-if="estadoCart && this.minPrice != this.maxPrice"
+                  class="text-price"
+                  v-if="this.product.precio > 0 || this.product.precio"
                 >
-                  <div
-                    class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
-                  >
-                    {{
-                      this.minPrice
-                        | currency(
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
-                    }}
-                  </div>
-                  <p class="separator-price">-</p>
-                  <div
-                    class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
-                  >
-                    {{
-                      this.maxPrice
-                        | currency(
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
-                    }}
-                  </div>
+                  {{
+                    this.minPrice
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
                 </div>
-                <div v-else>
-                  <p
-                    class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
-                  >
-                    {{
-                      this.product.precio
-                        | currency(
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
-                    }}
-                  </p>
+                <p class="separator-price">-</p>
+                <div
+                  class="text-price"
+                  v-if="this.product.precio > 0 || this.product.precio"
+                >
+                  {{
+                    this.maxPrice
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
                 </div>
               </div>
-              <!-- <p class="card-descuento">-50%</p> -->
+              <div v-else>
+                <p
+                  class="text-price"
+                  v-if="this.product.precio > 0 || this.product.precio"
+                >
+                  {{
+                    this.product.precio
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
+                </p>
+              </div>
             </router-link>
             <div v-if="!this.estadoCart && !soldOut && !spent">
-              <cartArrowDown
-                class="card-icon-cart-movil"
-                v-on:click="addShoppingCart"
-              />
+              <cartArrowDown class="icon-cart" v-on:click="addShoppingCart" />
             </div>
           </div>
           <div class="separator-movil" v-else>
             <div v-if="!this.estadoCart && !soldOut && !spent">
-              <cartArrowDown
-                class="card-icon-cart-movil"
-                v-on:click="addShoppingCart"
-              />
+              <cartArrowDown v-on:click="addShoppingCart" />
             </div>
           </div>
         </div>
@@ -448,12 +414,6 @@ export default {
 </script>
 
 <style scoped>
-.separador {
-  margin: 30px;
-}
-.separador-descuento {
-  margin: 20px;
-}
 .wrapper-card {
   display: flex;
   justify-content: center;
@@ -466,53 +426,14 @@ export default {
   box-shadow: rgb(226, 226, 226) 0 1px 1px;
   border: 1px solid rgba(243, 243, 243, 0.637);
 }
-.anim {
-  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-.wrapper-card:focus,
-.wrapper-card:hover {
-  transition: all 200ms ease-in;
-  position: relative;
-  top: -3px;
-  box-shadow: rgb(184, 184, 184) 0 1px 1px;
-  border: 1px solid rgba(218, 218, 218, 0.637);
-}
-.container {
+.container-card {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
   border-radius: 5px;
   overflow: hidden;
-}
-.card-info-1 {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #e71f77;
-  padding: 1px 4px;
-  border-radius: var(--radius_btn);
-  color: white;
-  font-size: 12px;
-  top: 80%;
-  right: 0px;
-  z-index: 2;
-}
-.card-info-2 {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #35dd8d;
-  padding: 1px 4px;
-  border-radius: var(--radius_btn);
-  color: black;
-  font-size: 12px;
-  font-weight: bold;
-  top: 87%;
-  right: 0px;
-  z-index: 2;
+  position: relative;
 }
 .wrapper-image {
   position: relative;
@@ -534,58 +455,81 @@ export default {
   object-fit: cover;
   overflow: hidden;
 }
-.wrapper-text {
-  display: initial;
-  margin-top: 5px;
+.separador-stats {
+  height: 80px;
   width: 100%;
 }
-.content-text-price {
-  display: flex;
+.stats-container {
+  background: #fff;
+  position: absolute;
+  top: 290px;
+  left: 0;
   width: 100%;
-  align-items: center;
-  margin-bottom: 15px;
+  height: 120px;
+  padding: 5px 15px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
+}
+#product-card:hover .stats-container {
+  top: 245px;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
+}
+.card-info-1 {
+  position: absolute;
+  display: flex;
   justify-content: center;
-}
-.content-text-price2 {
-  display: flex;
-  width: 100%;
-  height: 47px;
   align-items: center;
-  margin-bottom: 15px;
-  justify-content: center;
+  background: #e71f77;
+  padding: 1px 4px;
+  border-radius: var(--radius_btn);
+  color: white;
+  font-size: 12px;
+  top: -44px;
+  right: 0px;
+  z-index: 2;
 }
-.content-soldOut {
-  width: 100%;
+.card-info-2 {
+  position: absolute;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-.card-text {
-  font-size: 14px;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.3;
-  text-align: center;
-  /* color: var(--color_text); */
+  justify-content: center;
+  align-items: center;
+  background: #35dd8d;
+  padding: 1px 4px;
+  border-radius: var(--radius_btn);
   color: black;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: bold;
+  top: -22px;
+  right: 0px;
+  z-index: 2;
 }
 .content-name-product {
-  display: flex;
   width: 100%;
-  height: 40px;
-  padding: 0px 20px;
-  margin-bottom: 5px;
-  margin-top: 10px;
-  justify-content: center;
-  align-items: center;
-}
-.wrapper-price {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 47px;
+  text-align: center;
+}
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+  /* color: var(--color_text); */
+  color: rgb(63, 63, 63);
+}
+.content-text-price {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
 }
 .content-price {
   display: flex;
@@ -593,65 +537,96 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.text-price {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+  /* color: var(--color_subtext); */
+  color: rgb(70, 70, 70);
+  text-align: center;
+}
 .separator-price {
   /* color: var(--color_text); */
-  color: black;
+  color: rgb(70, 70, 70);
   margin-left: 5px;
   margin-right: 5px;
 }
-.card-price-1 {
-  font-size: 12px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  color: rgba(55, 4, 4, 0.61);
-  text-decoration: line-through;
-  text-align: center;
+.wrapper-btn-icon {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
-.card-descuento {
-  font-size: 12px;
-  color: white;
-  background: #fe5858;
-  border-radius: 3px;
-  padding: 0px 4px;
+#add_cart {
   display: flex;
   justify-content: center;
-  align-self: flex-end;
-  position: relative;
-  top: -8px;
-  margin-left: 5px;
-}
-.card-price-2 {
-  font-size: 22px;
-  font-weight: '500';
-  line-height: 1.4;
-  /* color: var(--color_subtext); */
-  color: rgb(107, 107, 107);
-  text-align: left;
-}
-.btn {
+  font-size: 19px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 10px 0;
+  width: 130px;
+  opacity: 0;
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
-  border: solid 1px var(--color_background_btn);
+  border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
-  padding: 8px 14px;
-  font-size: 14px;
-  width: 120px;
-  height: 40px;
-  font-weight: bold;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
+}
+#add_cart:hover {
+  border: solid 2px var(--btnhover);
+  background-color: var(--btnhover);
   cursor: pointer;
-  transition: all 200ms ease-in;
-  text-decoration: none;
+}
+#product-card:hover #add_cart {
+  opacity: 1;
+  width: 152px;
+  font-size: 15px;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
+}
+#view_details {
   display: flex;
   justify-content: center;
-  align-self: center;
+  font-size: 19px;
   text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 10px 0;
+  width: 130px;
+  opacity: 0;
+  color: var(--color_background_btn);
+  border-radius: var(--radius_btn);
+  border: solid 2px var(--color_background_btn);
+  background-color: transparent;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
 }
-.btn:hover {
-  background-color: var(--btnhover);
-  border: solid 1px var(--btnhover);
+#view_details:hover {
+  color: var(--btnhover);
+  border: solid 2px var(--btnhover);
+
+  cursor: pointer;
+}
+#product-card:hover #view_details {
+  opacity: 1;
+  width: 152px;
+  font-size: 15px;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
+}
+.separador-btn {
+  width: 5px;
 }
 .wrapper {
   display: initial;
@@ -659,22 +634,6 @@ export default {
 }
 .wrapper-movil {
   display: none;
-}
-
-.card-icon-cart {
-  font-size: 20px;
-  color: var(--color_text_btn);
-  margin-right: 4px;
-  cursor: pointer;
-  bottom: 0.125em;
-}
-.card-icon-cart-movil {
-  font-size: 20px;
-  /* color: var(--color_text); */
-  color: black;
-  margin-right: 4px;
-  cursor: pointer;
-  bottom: 0.125em;
 }
 .card-icon-cart-movil:hover {
   color: var(--btnhover);
@@ -687,103 +646,46 @@ export default {
     display: initial;
     width: 100%;
   }
-  .content-name-product-movil {
-    display: flex;
+  .content-card-items {
     width: 100%;
-    padding: 0px 10px;
-    margin-top: 10px;
-    justify-content: center;
+    height: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    height: 30px;
+    padding: 5px 10px;
+    position: relative;
   }
-  .card-text-movil {
+  .card-title {
     font-size: 13px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.3;
-    letter-spacing: 0.2px;
-    /* color: var(--color_text); */
-    color: black;
-    font-weight: 400;
-    text-align: center;
   }
-  .content-text-price-movil {
-    display: flex;
+  .content-text-price {
     width: 100%;
-    padding: 0px 20px;
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-  }
-  .content-text-price-movil-cart {
-    display: flex;
-    width: 100%;
-    padding: 0px 20px;
-    align-items: center;
-    justify-content: space-around;
-  }
-  .card-price-1-movil {
-    font-size: 12px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.4;
-    letter-spacing: normal;
-    color: rgba(55, 4, 4, 0.61);
-    text-decoration: line-through;
-    text-align: center;
-  }
-  .separator-movil {
-    width: 100%;
-    height: 40px;
     margin-top: 5px;
-    display: flex;
-    justify-content: center;
-    align-self: center;
+  }
+  .text-price {
+    font-size: 15px;
+  }
+  .icon-cart {
+    margin-left: 20px;
   }
   .card-info-1 {
-    top: 77%;
+    font-size: 10px;
+    top: -43px;
   }
   .card-info-2 {
-    top: 85%;
-  }
-  .product-image {
-    width: 100%;
-    object-fit: contain;
-    /* object-fit: cover; */
-    overflow: hidden;
-  }
-}
-@media (max-width: 630px) {
-  .card-info-1 {
-    top: 76%;
-  }
-  .card-info-2 {
-    top: 85%;
-  }
-}
-@media (max-width: 580px) {
-  .card-info-1 {
-    top: 81%;
-  }
-  .card-info-2 {
-    top: 91%;
+    font-size: 10px;
+    top: -22px;
   }
 }
 @media (max-width: 450px) {
-  .container {
+  .container-card {
     width: 100%;
     max-width: 200px;
-  }
-  .card-price-2 {
-    font-size: 16px;
-  }
-  .card-info-1 {
-    top: 70%;
-    font-size: 12px;
-  }
-  .card-info-2 {
-    top: 82%;
-    font-size: 12px;
   }
 }
 </style>
