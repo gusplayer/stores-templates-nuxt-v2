@@ -18,6 +18,7 @@
             class="product-image-soldOut"
             alt="Product Img"
           />
+          <div class="image_overlay"></div>
         </router-link>
         <div class="separador-stats"></div>
         <div class="stats">
@@ -454,6 +455,22 @@ export default {
   width: 100%;
   object-fit: cover;
   overflow: hidden;
+}
+.image_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #6969692a;
+  opacity: 0;
+}
+#product-card:hover .image_overlay {
+  opacity: 0.7;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
 }
 .separador-stats {
   height: 80px;
