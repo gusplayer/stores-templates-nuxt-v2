@@ -84,13 +84,6 @@
     "_name": "_a2f76150"
   },
   {
-    "name": "wa-producto-slug",
-    "path": "/wa/producto/:slug?",
-    "component": "/Projects/template-nuxt-dokku/pages/wa/producto/_slug.vue",
-    "chunkName": "pages/wa/producto/_slug",
-    "_name": "_ce89e4d6"
-  },
-  {
     "name": "blog-slug",
     "path": "/blog/:slug",
     "component": "/Projects/template-nuxt-dokku/pages/blog/_slug.vue",
@@ -107,9 +100,16 @@
   {
     "name": "wa-slug",
     "path": "/wa/:slug?",
-    "component": "/Projects/template-nuxt-dokku/pages/wa/_slug.vue",
-    "chunkName": "pages/wa/_slug",
-    "_name": "_b9358700"
+    "component": "/Projects/template-nuxt-dokku/pages/wa/_slug/index.vue",
+    "chunkName": "pages/wa/_slug/index",
+    "_name": "_40726303"
+  },
+  {
+    "name": "wa-slug-producto-slug",
+    "path": "/wa/:slug?/producto/:slug?",
+    "component": "/Projects/template-nuxt-dokku/pages/wa/_slug/producto/_slug.vue",
+    "chunkName": "pages/wa/_slug/producto/_slug",
+    "_name": "_5a518a8c"
   },
   {
     "name": "index",
