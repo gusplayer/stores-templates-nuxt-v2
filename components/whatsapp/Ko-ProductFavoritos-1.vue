@@ -48,10 +48,18 @@
         </router-link>
       </div>
     </div>
-    <div class="btn-scroll icon-prev" @click="scrollLeft()">
+    <div
+      class="btn-scroll icon-prev"
+      @click="scrollLeft()"
+      v-if="orderproduct.length > 6"
+    >
       <FlechaLeft-icon class="btn-scroll-icon" />
     </div>
-    <div class="btn-scroll icon-next" @click="scrollRight()">
+    <div
+      class="btn-scroll icon-next"
+      @click="scrollRight()"
+      v-if="orderproduct.length > 6"
+    >
       <FlechaRight-icon class="btn-scroll-icon" />
     </div>
   </div>
