@@ -737,6 +737,7 @@ export default {
 .wrapper-items-form {
   width: 100%;
   max-width: 400px;
+  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
