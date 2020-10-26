@@ -737,7 +737,6 @@ export default {
 .wrapper-items-form {
   width: 100%;
   max-width: 400px;
-  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -745,7 +744,7 @@ export default {
   align-items: center;
   background-color: #fff;
   z-index: 1000;
-  padding: 20px 0 8px;
+  padding: 20px 0 45px;
   overflow-y: auto;
 }
 .content-items-form {
@@ -832,6 +831,8 @@ export default {
   font-weight: 400;
   cursor: pointer;
   text-decoration: none;
+  position: fixed;
+  bottom: 8px;
   display: flex;
   justify-content: center;
   text-align: center;

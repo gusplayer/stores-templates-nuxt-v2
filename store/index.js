@@ -423,11 +423,15 @@ export const actions = {
   async nuxtServerInit({ dispatch, state }, { req, route }) {
     let full = req.headers.host
     let parts = full.split('.')
+    let partsID = full.split('/')
     let subdomain = parts[0]
     let id = 0
     let idWapi = 0
-
-    if (parts[0] == 'localhost:3000' || parts[0] == 'wapi') {
+    if (
+      parts[0] == 'localhost:3000' ||
+      parts[0] == 'wapi' ||
+      partsID == '192.168.20.23:3333'
+    ) {
       let partsWapi = req.url.split('/')
       idWapi = partsWapi[2]
     } else if (

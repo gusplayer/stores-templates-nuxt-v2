@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "devIp": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3333 nuxt",
     "build": "nuxt build ",
     "static": "nuxt build --target static && nuxt export",
     "start": "nuxt start",
