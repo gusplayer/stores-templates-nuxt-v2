@@ -28,11 +28,11 @@
               Envío gratis !
             </p>
             <div class="content-name-product">
-              <p class="card-title" v-if="this.product.nombre.length >= 55">
-                {{ `${this.product.nombre.slice(0, 55)}...` }}
+              <p class="card-title" v-if="this.product.nombre.length >= 54">
+                {{ `${this.product.nombre.slice(0, 54)}...` }}
               </p>
               <p class="card-title" v-else>
-                {{ `${this.product.nombre.slice(0, 55)}` }}
+                {{ `${this.product.nombre.slice(0, 54)}` }}
               </p>
             </div>
             <div class="content-text-price" v-if="this.product.precio">
@@ -81,7 +81,7 @@
                 </p>
               </div>
             </div>
-            <div class="content-text-price2" v-else></div>
+            <div class="content-price-empty" v-else></div>
             <div class="wrapper-btn-icon">
               <router-link
                 id="view_details"
@@ -473,17 +473,17 @@ export default {
   transition: all 200ms ease-out;
 }
 .separador-stats {
-  height: 80px;
+  height: 90px;
   width: 100%;
 }
 .stats-container {
   background: #fff;
   position: absolute;
-  top: 290px;
+  top: 288px;
   left: 0;
   width: 100%;
   height: 120px;
-  padding: 5px 15px 0px;
+  padding: 20px 12px 0px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -493,7 +493,7 @@ export default {
   transition: all 200ms ease-out;
 }
 #product-card:hover .stats-container {
-  top: 245px;
+  top: 241px;
   -webkit-transition: all 200ms ease-out;
   -moz-transition: all 200ms ease-out;
   -o-transition: all 200ms ease-out;
@@ -530,9 +530,10 @@ export default {
 }
 .content-name-product {
   width: 100%;
+  min-height: 36px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   text-align: center;
 }
 .card-title {
@@ -553,6 +554,14 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  min-height: 29px;
+  max-height: 29px;
+}
+.content-price-empty {
+  width: 100%;
+  margin-top: 5px;
+  min-height: 29px;
+  max-height: 29px;
 }
 .text-price {
   font-size: 20px;
@@ -585,6 +594,7 @@ export default {
   padding: 10px 0;
   width: 130px;
   opacity: 0;
+  height: 41px;
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
   border: solid 2px var(--color_background_btn);
@@ -611,6 +621,8 @@ export default {
 #view_details {
   display: flex;
   justify-content: center;
+  align-items: center;
+  text-align: center;
   font-size: 19px;
   text-align: center;
   text-transform: uppercase;
@@ -618,6 +630,7 @@ export default {
   padding: 10px 0;
   width: 130px;
   opacity: 0;
+  height: 41px;
   color: var(--color_background_btn);
   border-radius: var(--radius_btn);
   border: solid 2px var(--color_background_btn);

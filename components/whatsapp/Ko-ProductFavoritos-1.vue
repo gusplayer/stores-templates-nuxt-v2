@@ -3,7 +3,7 @@
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">Destacados</p>
     </div>
-    <div class="container-favorite">
+    <div class="container-favorite" id="swiper-slide-favorite">
       <div
         class="card-favorite"
         v-for="product in orderproduct"
@@ -48,6 +48,12 @@
         </router-link>
       </div>
     </div>
+    <div class="btn-scroll icon-prev" @click="scrollLeft()">
+      <FlechaLeft-icon class="btn-scroll-icon" />
+    </div>
+    <div class="btn-scroll icon-next" @click="scrollRight()">
+      <FlechaRight-icon class="btn-scroll-icon" />
+    </div>
   </div>
 </template>
 
@@ -69,6 +75,14 @@ export default {
       return this.dataProductFavorite.sort(function (prev, next) {
         return next.orden - prev.orden
       })
+    },
+  },
+  methods: {
+    scrollLeft() {
+      document.getElementById('swiper-slide-favorite').scrollLeft -= 300
+    },
+    scrollRight() {
+      document.getElementById('swiper-slide-favorite').scrollLeft += 300
     },
   },
   filters: {
@@ -108,6 +122,7 @@ export default {
 
 <style scoped>
 .wrapper-ProductFavoritos {
+  position: relative;
   display: flex;
   width: 100%;
   background-color: #fafaf8;
@@ -124,12 +139,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  max-width: 780px;
   padding: 10px 20px 20px 20px;
 }
 .content-title-ProductFavoritos {
   width: 100%;
-  max-width: 780px;
   padding: 10px 20px 5px 20px;
   display: flex;
   justify-content: flex-start;
@@ -151,12 +164,39 @@ export default {
   flex-direction: row;
   overflow: scroll;
   width: 100%;
-  padding: 0px 5px;
+  padding: 0px 20px;
   overflow-y: hidden; /* Hide vertical scrollbar */
 }
 .container-favorite::-webkit-scrollbar {
   width: 0 !important;
   display: none;
+}
+.btn-scroll {
+  display: initial;
+  position: absolute;
+  top: 50%;
+  border-radius: 25px;
+  padding: 0px 10px;
+  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+  cursor: pointer;
+}
+.icon-prev {
+  left: 5px;
+}
+.icon-next {
+  right: 5px;
+}
+.btn-scroll-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: white;
+  bottom: 0.125em;
+}
+.btn-scroll-icon:hover {
+  color: var(--color_icon);
 }
 .card-button {
   margin-top: 6px;
@@ -210,10 +250,16 @@ export default {
   .content-title-ProductFavoritos {
     padding: 10px 20px;
   }
+  .btn-scroll {
+    display: none;
+  }
 }
 @media (max-width: 380px) {
   .swiper-container {
     padding: 20px 5px;
+  }
+  .container-favorite {
+    padding: 0px 5px;
   }
 }
 </style>

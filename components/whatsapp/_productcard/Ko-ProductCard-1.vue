@@ -2,6 +2,10 @@
   <div class="wrapper-card">
     <div class="container">
       <div class="wrapper-movil">
+        <p class="card-info-1" v-if="soldOut">Agotado !</p>
+        <p class="card-info-2" v-if="getFreeShipping == false">
+          Envío gratis !
+        </p>
         <router-link
           :to="{
             path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
@@ -20,10 +24,6 @@
             class="product-image product-image-soldOut"
             alt="Product Img"
           />
-          <p class="card-info-1" v-if="soldOut">Agotado !</p>
-          <p class="card-info-2" v-if="getFreeShipping == false">
-            Envío gratis !
-          </p>
         </router-link>
         <div class="wrapper-text">
           <router-link
@@ -122,9 +122,6 @@
             >
           </div>
         </div>
-        <!-- <div class="btn-whatsapp" v-if="dataStore.whatsapp">
-          <whatsapp-icon class="wp-icon" v-on:click="redirectWP()" />
-        </div>-->
       </div>
     </div>
   </div>
@@ -407,11 +404,9 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
+  /* height: 120px; */
   box-sizing: border-box;
   border-radius: 10px;
-  border: none;
-  padding: 0px 5px;
-  padding-bottom: 5px;
   border-bottom: 1px solid rgba(213, 213, 213, 0.473);
   -webkit-box-shadow: 5px 5px 5px 5px rgb(250, 250, 244);
   box-shadow: 5px 5px 5px 5px rgb(250, 250, 244);
@@ -429,27 +424,22 @@ export default {
 }
 .wrapper-movil {
   width: 100%;
-  height: 110px;
-  max-height: 110px;
   display: flex;
   flex-direction: row;
   position: relative;
-  margin-bottom: 8px;
 }
 .wrapper-image {
-  max-width: 110px;
-  /* max-height: 110px;
-  overflow: hidden; */
+  max-width: 115px;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(131, 130, 131, 0.174);
   margin-right: 6px;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .product-image {
   width: 100%;
   object-fit: cover;
   object-position: center;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .product-image-soldOut {
   filter: grayscale(100%);
@@ -465,7 +455,7 @@ export default {
   font-size: 10px;
   z-index: 2;
   position: absolute;
-  top: 78px;
+  top: 74px;
   left: 0px;
 }
 .card-info-2 {
@@ -480,7 +470,7 @@ export default {
   font-weight: bold;
   z-index: 2;
   position: absolute;
-  top: 98px;
+  top: 92px;
   left: 0px;
 }
 .wrapper-text {
@@ -500,18 +490,14 @@ export default {
   /* height: 30px; */
 }
 .card-text-movil-title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.2;
-  /* letter-spacing: 0.1px; */
-  color: black;
+  line-height: 1;
   color: #0f2930;
 }
 .card-text-movil {
   font-size: 13px;
-  font-weight: 400;
-  /* line-height: 1.2; */
-  /* letter-spacing: 0.2px; */
+  font-weight: 300;
   color: black;
 }
 .content-text-price-movil-cart {
@@ -537,10 +523,7 @@ export default {
 .card-price-1-movil {
   font-size: 12px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
+  line-height: 1;
   color: rgba(55, 4, 4, 0.61);
   text-decoration: line-through;
   text-align: center;
@@ -548,10 +531,9 @@ export default {
 .card-price-2 {
   margin-top: 8px;
   font-size: 15px;
-  font-weight: 400;
-  line-height: 1.4;
+  font-weight: 500;
+  line-height: 1;
   color: #128c7e;
-  color: #0f2930;
   text-align: left;
 }
 .separator-price {
@@ -625,6 +607,12 @@ export default {
 @media (max-width: 330px) {
   .btn-whatsapp {
     top: 78px;
+  }
+  .wrapper-image {
+    max-width: 10px;
+  }
+  .card-text-movil-title {
+    font-size: 15px;
   }
 }
 </style>

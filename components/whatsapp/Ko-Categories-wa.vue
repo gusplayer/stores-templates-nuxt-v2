@@ -1,7 +1,14 @@
 <template>
   <div class="wrapper_Category">
     <div class="content_Category">
-      <div class="content-item-category">
+      <div
+        class="btn-scroll"
+        @click="scrollLeft()"
+        v-if="this.categorias.length > 8"
+      >
+        <FlechaLeft-icon class="btn-scroll-icon" />
+      </div>
+      <div class="content-item-category" id="swiper-slide-categories">
         <div class="tags" :class="idCategory == '' ? 'tags-active' : ''">
           <p
             class="name-category"
@@ -26,6 +33,13 @@
             </p>
           </div>
         </div>
+      </div>
+      <div
+        class="btn-scroll"
+        @click="scrollRight()"
+        v-if="this.categorias.length > 8"
+      >
+        <FlechaRight-icon class="btn-scroll-icon" />
       </div>
       <!-- <div class="content-item-category" v-if="idCategory">
         <div
@@ -147,6 +161,12 @@ export default {
       this.$emit('clear')
       this.addClass()
     },
+    scrollLeft() {
+      document.getElementById('swiper-slide-categories').scrollLeft -= 300
+    },
+    scrollRight() {
+      document.getElementById('swiper-slide-categories').scrollLeft += 300
+    },
   },
   watch: {},
 }
@@ -157,7 +177,7 @@ export default {
   display: flex;
   width: 100%;
   background-color: white;
-  /* background-color: #075e54; */
+
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -172,11 +192,11 @@ export default {
 }
 .content_Category {
   width: 100%;
-  padding: 0px 5px 0px 5px;
+  padding: 0px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 .text-title {
   background: transparent;
@@ -260,5 +280,32 @@ export default {
 }
 .content-item-category::-webkit-scrollbar-thumb:hover {
   background: grey;
+}
+.btn-scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  min-height: 50px;
+  padding: 0px 6px;
+  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+  cursor: pointer;
+}
+.btn-scroll-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: white;
+  bottom: 0.125em;
+}
+.btn-scroll-icon:hover {
+  color: var(--color_icon);
+}
+@media (max-width: 770px) {
+  .btn-scroll {
+    display: none;
+  }
 }
 </style>

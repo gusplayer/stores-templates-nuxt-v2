@@ -315,7 +315,6 @@ export default {
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 780px;
   padding: 0px 20px 30px 20px;
   flex-direction: column;
 }

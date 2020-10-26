@@ -157,7 +157,6 @@ export default {
   },
   data() {
     return {
-      id: this.$route.params.slug,
       loading: true,
       data: {},
       selectPhotoUrl: '',
@@ -228,13 +227,14 @@ export default {
   },
   methods: {
     searchIdForSlug() {
+      let domain = this.$route.fullPath
+      let result = domain.split('/')
       const product = this.productsData.filter(
-        (product) => product.slug === this.id
+        (product) => product.slug === result[4]
       )
       if (product.length) {
         return product[0].id
       }
-
       return this.productsData[0].id
     },
     getDataProduct() {

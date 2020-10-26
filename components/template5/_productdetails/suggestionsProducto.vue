@@ -48,7 +48,7 @@ export default {
   justify-content: center;
   align-items: flex-start;
   max-width: 1300px;
-  padding: 10px 20px;
+  padding: 10px;
 }
 .content-title-ProductFavoritos {
   width: 100%;
