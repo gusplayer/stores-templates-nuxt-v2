@@ -177,7 +177,7 @@ export default {
   top: 50%;
   border-radius: 25px;
   padding: 0px 10px;
-  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+  background: #e4e4e4;
   cursor: pointer;
 }
 .icon-prev {
@@ -192,11 +192,11 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 20px;
-  color: white;
+  color: black;
   bottom: 0.125em;
 }
 .btn-scroll-icon:hover {
-  color: var(--color_icon);
+  color: white;
 }
 .card-button {
   margin-top: 6px;
@@ -235,7 +235,7 @@ export default {
 }
 .card-price-2 {
   font-size: 13px;
-  color: #128c7e;
+  color: black;
   font-weight: 600;
   text-align: center;
 }

@@ -288,7 +288,7 @@ export default {
   top: 50%;
   min-height: 50px;
   padding: 0px 6px;
-  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+  background: #e4e4e4;
   cursor: pointer;
 }
 .btn-scroll-icon {
@@ -297,15 +297,18 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 20px;
-  color: white;
+  color: black;
   bottom: 0.125em;
 }
 .btn-scroll-icon:hover {
-  color: var(--color_icon);
+  color: white;
 }
 @media (max-width: 770px) {
   .btn-scroll {
     display: none;
+  }
+  .content_Category {
+    padding: 0 5px;
   }
 }
 </style>

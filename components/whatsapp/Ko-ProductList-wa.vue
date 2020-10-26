@@ -335,7 +335,6 @@ export default {
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
-
   cursor: pointer;
   color: #4c4c4c;
   display: flex;
@@ -438,16 +437,17 @@ export default {
 }
 @media (max-width: 700px) {
   .content-items-categorias {
-    margin-left: 5px;
-    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-bottom: 10px;
   }
   .grid-products {
     grid-template-columns: repeat(1, minmax(250px, 2fr));
+    grid-gap: 20px;
   }
 }
 @media (max-width: 450px) {
   .content-item-productos {
-    padding: 5px;
+    padding: 0px 10px 20px;
   }
 }
 </style>

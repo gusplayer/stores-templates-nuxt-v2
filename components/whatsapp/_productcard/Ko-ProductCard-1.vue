@@ -431,12 +431,12 @@ export default {
 .wrapper-image {
   max-width: 115px;
   border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(131, 130, 131, 0.174);
   margin-right: 6px;
   border-radius: 10px;
 }
 .product-image {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
@@ -533,7 +533,7 @@ export default {
   font-size: 15px;
   font-weight: 500;
   line-height: 1;
-  color: #128c7e;
+  color: black;
   text-align: left;
 }
 .separator-price {
