@@ -94,7 +94,7 @@ export default {
     Sendsubcategory(value) {
       this.indexSelect = value
       this.$router.push({
-        path: '/wa',
+        path: `/wa/${this.dataStore.tienda.id_tienda}`,
       })
       this.$store.commit('SET_STATEBANNER', false)
       this.addClass()
@@ -120,7 +120,7 @@ export default {
     sendCategory(value, categoria, ref) {
       this.idCategory = categoria
       this.$router.push({
-        path: '/wa',
+        path: `/wa/${this.dataStore.tienda.id_tienda}`,
       })
       this.$store.commit('SET_STATEBANNER', false)
       this.nameCategory = value.nombre_categoria_producto
@@ -152,7 +152,7 @@ export default {
       this.$store.commit('SET_STATEBANNER', true)
       this.idCategory = ''
       this.$router.push({
-        path: '/wa',
+        path: `/wa/${this.dataStore.tienda.id_tienda}`,
       })
       this.$store.commit('products/FILTER_BY', {
         type: 'all',

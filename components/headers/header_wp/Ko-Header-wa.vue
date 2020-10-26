@@ -23,7 +23,10 @@
         </div>
       </div>
       <div class="header">
-        <nuxt-link to="/wa" class="containt-image">
+        <nuxt-link
+          :to="`/wa/${dataStore.tienda.id_tienda}/`"
+          class="containt-image"
+        >
           <img
             :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
             class="header-logo"
