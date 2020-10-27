@@ -153,6 +153,12 @@
                           }}
                         </p>
                       </div>
+                      <p
+                        v-else-if="(this.shippingTarifaPrecio >= 0)"
+                        class="text-color"
+                      >
+                        Envío gratis
+                      </p>
                       <p v-else class="text-TarifaPrecio">
                         Envío no configurado
                       </p>
@@ -215,14 +221,14 @@
                     productos o preguntar cobertura del país
                   </p>
                   <button class="continue_shopping" @click="redirectWhatsapp()">
-                    <whatsapp-icon class="wp-icon" />Preguntar por WhatsApp
+                    <whatsapp-icon class="wp-icon" />Comprar por WhatsApp
                   </button>
                 </div>
                 <p
                   class="domicilio-message"
                   v-if="
                     productsCart.length &&
-                    this.shippingTarifaPrecio == 0 &&
+                    this.shippingTarifaPrecio == 'empty' &&
                     this.estadoShippingTarifaPrecio == true
                   "
                 >
@@ -390,7 +396,7 @@ export default {
           this.shippingTarifaPrecio = result.precio
           this.estadoShippingTarifaPrecio = false
         } else {
-          this.shippingTarifaPrecio = 0
+          this.shippingTarifaPrecio = 'empty'
           this.estadoShippingTarifaPrecio = true
         }
       }
