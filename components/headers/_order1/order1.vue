@@ -220,7 +220,10 @@
                     Contacte con la tienda para saber los precios de los
                     productos o preguntar cobertura del país
                   </p>
-                  <button class="continue_shopping" @click="redirectWhatsapp()">
+                  <button
+                    class="continue_shopping_whatsapp"
+                    @click="formOrden = !formOrden"
+                  >
                     <whatsapp-icon class="wp-icon" />Comprar por WhatsApp
                   </button>
                 </div>
@@ -284,6 +287,101 @@
           </div>
         </div>
       </div>
+      <div class="wrapper-items-form" v-if="formOrden">
+        <div class="content-items-form">
+          <p class="form-text">Completa tu pedido</p>
+          <ValidationObserver ref="observer" tag="form" class="items-form">
+            <p class="form-subtext">Nombre y Apellido</p>
+            <validation-provider
+              name="nombre"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  name="nombre"
+                  type="text"
+                  v-model="nombre"
+                  class="input-text"
+                  placeholder="Escribe tu nombre"
+                  id="ContactName"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
+            <P class="form-subtext">Ciudad</P>
+            <validation-provider
+              name="ciudad"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  class="input-text"
+                  name="ciudad"
+                  placeholder="Tu ciudad"
+                  v-model="ciudad"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
+            <P class="form-subtext">Barrio</P>
+            <validation-provider
+              name="barrio"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  class="input-text"
+                  name="barrio"
+                  placeholder="Tu barrio"
+                  v-model="barrio"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
+            <P class="form-subtext">Dirección</P>
+            <validation-provider
+              name="dirreccion"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  class="input-text"
+                  name="dirreccion"
+                  placeholder="Tu dirección"
+                  v-model="dirreccion"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
+          </ValidationObserver>
+          <label
+            for="order_close"
+            @click="formOrden = !formOrden"
+            class="form_close"
+          >
+            <close-icon />
+          </label>
+        </div>
+        <button
+          class="continue_shopping_form"
+          v-on:click.prevent="redirectWP()"
+          style="margin-top: 15px;"
+        >
+          <whatsapp-icon class="wp-icon" />Finalizar compra
+        </button>
+      </div>
     </div>
   </transition>
 </template>
@@ -291,12 +389,16 @@
 <script>
 import axios from 'axios'
 import idCloudinary from '../../../mixins/idCloudinary'
-
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   mixins: [idCloudinary],
   name: 'koOrder1-cart',
   props: {
     dataStore: Object,
+  },
+  components: {
+    ValidationObserver,
+    ValidationProvider,
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
@@ -319,6 +421,12 @@ export default {
       remove: false,
       shippingTarifaPrecio: '',
       estadoShippingTarifaPrecio: false,
+      formOrden: false,
+      nombre: '',
+      numberphone: '',
+      ciudad: '',
+      barrio: '',
+      dirreccion: '',
     }
   },
   computed: {
@@ -491,36 +599,76 @@ export default {
       }
       return window.mobilecheck()
     },
-    redirectWhatsapp() {
-      if (this.dataStore.tienda.whatsapp.length > 10) {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp
-        if (phone_number_whatsapp.charAt(0) === '+') {
-          phone_number_whatsapp = phone_number_whatsapp.slice(1)
+    redirectWP() {
+      this.$refs.observer.validate().then((response) => {
+        if (response) {
+          let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
+          let baseUrlPc = 'https://web.whatsapp.com/send?phone='
+          let urlProduct
+          if (this.dataStore.tienda.dominio) {
+            urlProduct = `${this.dataStore.tienda.dominio}wa`
+          } else {
+            urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
+          }
+          let productosCart = []
+
+          this.$store.state.productsCart.map((element) => {
+            if (element.combinacion) {
+              let combiString = JSON.stringify(element.combinacion)
+              let combiList = combiString.replace(/"/g, '')
+              let resultcombitList = combiList.replace(/,/g, ' - ')
+              productosCart.push(
+                `${element.cantidad} x ${
+                  element.nombre
+                } = Variantes: ${resultcombitList} -> Valor: ${
+                  element.cantidad * element.precio
+                }`
+              )
+            } else {
+              productosCart.push(
+                `${element.cantidad} x ${element.nombre} -> Valor: ${
+                  element.cantidad * element.precio
+                }`
+              )
+            }
+          })
+
+          let productString = JSON.stringify(productosCart)
+          let productList = productString.replace(/"/g, '')
+          let resultproductList = productList.replace(/,/g, '%0A')
+          let result = resultproductList.slice(1, -1)
+
+          let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
+
+          if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
+            let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+            if (this.mobileCheck()) {
+              window.open(
+                `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
+                '_blank'
+              )
+            } else {
+              window.open(
+                `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
+                '_blank'
+              )
+            }
+          } else {
+            if (this.mobileCheck()) {
+              window.open(
+                `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
+                '_blank'
+              )
+            } else {
+              window.open(
+                `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
+                '_blank'
+              )
+            }
+          }
         }
-        if (this.mobileCheck()) {
-          window.open(
-            `https://wa.me/${phone_number_whatsapp}/?text=Hola%2C%20vengo%20de%20tu%20tienda%20online%20%2A${this.dataStore.tienda.nombre}%2A%20y%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20de%20algunos%20productos%20que%20no%20tienen%20precios.%0A${window.location}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `https://web.whatsapp.com/send?phone=${phone_number_whatsapp}&text=Hola%2C%20vengo%20de%20tu%20tienda%20online%20%2A${this.dataStore.tienda.nombre}%2A%20y%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20de%20algunos%20productos%20que%20no%20tienen%20precios.%0A${window.location}`,
-            '_blank'
-          )
-        }
-      } else {
-        if (this.mobileCheck()) {
-          window.open(
-            `https://wa.me/57${this.dataStore.tienda.whatsapp}/?text=Hola%2C%20vengo%20de%20tu%20tienda%20online%20%2A${this.dataStore.tienda.nombre}%2A%20y%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20de%20algunos%20productos%20que%20no%20tienen%20precios.%0A${window.location}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `https://web.whatsapp.com/send?phone=57${this.dataStore.tienda.whatsapp}&text=Hola%2C%20vengo%20de%20tu%20tienda%20online%20%2A${this.dataStore.tienda.nombre}%2A%20y%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20de%20algunos%20productos%20que%20no%20tienen%20precios.%0A${window.location}`,
-            '_blank'
-          )
-        }
-      }
+      })
+      this.formOrden = !this.formOrden
     },
   },
   watch: {
@@ -1093,5 +1241,139 @@ details ol li:nth-child(even) {
 }
 details[open] summary ~ * {
   animation: sweep 0.5s ease-in-out;
+}
+.continue_shopping_whatsapp {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius_btn);
+  color: var(--color_text_btn);
+  border: solid 2px var(--color_background_btn);
+  background-color: var(--color_background_btn);
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+  flex: none;
+  height: 41px;
+  transition: all ease 0.3s;
+}
+.continue_shopping_whatsapp:hover {
+  border: solid 2px var(--btnhover);
+  background-color: var(--btnhover);
+}
+.wrapper-items-form {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  z-index: 1000;
+  padding: 20px 0 45px;
+  overflow-y: auto;
+}
+.content-items-form {
+  width: 100%;
+  padding: 10px 0px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  position: relative;
+}
+.items-form {
+  width: 100%;
+  padding: 10px 30px;
+}
+.form_close {
+  font-size: 30px;
+  color: #25d366;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+.form_close:hover {
+  color: gray;
+}
+.form-text {
+  color: black;
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+.form-subtext {
+  color: black;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.content-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.input-text {
+  font-size: 14px;
+  color: rgba(21, 20, 57, 0.541);
+  border: solid 2px #afafaf;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 8px 14px;
+  width: 100%;
+}
+.input-text::placeholder {
+  color: rgba(21, 20, 57, 0.541);
+  opacity: 0.7;
+}
+.input-text:-internal-autofill-selected {
+  -webkit-appearance: menulist-button;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: -internal-light-dark-color(black, white) !important;
+}
+.input-text:focus,
+.input-text:active {
+  outline: 0;
+  border: solid 2px black;
+}
+.text-error {
+  font-size: 12px;
+  color: #cb2027;
+  width: 100%;
+  margin-left: 10px;
+}
+.continue_shopping_form {
+  font-size: 16px;
+  padding: 8px 10px;
+  width: 100%;
+  height: 44px;
+  max-width: 340px;
+  font-weight: 400;
+  cursor: pointer;
+  text-decoration: none;
+  position: fixed;
+  bottom: 8px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border-radius: var(--radius_btn);
+  color: var(--color_text_btn);
+  border: solid 2px var(--color_background_btn);
+  background-color: var(--color_background_btn);
+}
+.continue_shopping_form:hover {
+  border: solid 2px var(--btnhover);
+  background-color: var(--btnhover);
 }
 </style>
