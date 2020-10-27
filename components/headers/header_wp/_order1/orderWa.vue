@@ -117,11 +117,18 @@
                 >
                   Tienda cerrada
                 </p>
+                <p
+                  class="Quotation-message"
+                  v-if="dataStore.tienda.whatsapp == ''"
+                >
+                  La tienda no tiene configurado un número de WhatsApp
+                </p>
                 <button
                   v-if="
                     productsCart.length &&
                     !isQuotation() &&
-                    dataStore.tienda.estado == 1
+                    dataStore.tienda.estado == 1 &&
+                    dataStore.tienda.whatsapp
                   "
                   class="continue_shopping"
                   @click="formOrden = !formOrden"
