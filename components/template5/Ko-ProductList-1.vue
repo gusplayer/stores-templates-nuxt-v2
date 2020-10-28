@@ -163,12 +163,7 @@ export default {
     filterProduct() {
       const initial = this.currentPage * 16 - 16
       const final = initial + 16
-      return this.orderproduct.slice(initial, final)
-    },
-    orderproduct() {
-      return this.products.sort(function (prev, next) {
-        return next.orden - prev.orden
-      })
+      return this.products.slice(initial, final)
     },
     selectedCategory() {
       return this.$store.state.products.payload
