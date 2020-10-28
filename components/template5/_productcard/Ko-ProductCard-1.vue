@@ -96,7 +96,7 @@
                 v-on:click="addShoppingCart"
                 v-if="!this.estadoCart && !soldOut && !spent"
               >
-                <p><cartArrowDown />Agregar</p>
+                <p style="height: 23px;"><cartArrowDown />Agregar</p>
               </div>
             </div>
           </div>
@@ -587,6 +587,7 @@ export default {
 #add_cart {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 19px;
   text-align: center;
   text-transform: uppercase;
