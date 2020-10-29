@@ -2,7 +2,7 @@
   <div class="wrapper-ProductFavoritos" v-if="category.length">
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">
-        Productos relacionados que podrían interesarte
+        {{ $t('home_destacadosMsg') }}
       </p>
     </div>
     <KoSwipper :products="category"></KoSwipper>

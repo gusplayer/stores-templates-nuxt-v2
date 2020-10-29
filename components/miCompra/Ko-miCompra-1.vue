@@ -2,11 +2,13 @@
   <div class="wrapper_micompra">
     <div class="contenedor">
       <div class="wrapper-form">
-        <h1 class="title-form">Seguimiento de tu compra</h1>
+        <h1 class="title-form">{{ $t('mcompra_title') }}</h1>
         <div class="content-form">
           <ValidationObserver ref="observer" tag="form" class="form">
             <div class="content-input">
-              <label for="numOrden" class="input-label">Número de Orden</label>
+              <label for="numOrden" class="input-label">
+                {{ $t('mcompra_inputtitle') }}</label
+              >
               <validation-provider
                 name="número de orden"
                 rules="required|numeric"
@@ -15,7 +17,7 @@
                 <template slot-scope="{ errors }">
                   <input
                     id="numOrden"
-                    placeholder="Número de orden"
+                    :placeholder="$t('mcompra_inputtitleMsg')"
                     v-model="numOrden"
                     class="input-text"
                   />
@@ -26,8 +28,8 @@
               </validation-provider>
             </div>
             <div class="content-input">
-              <label for="numId" class="input-label"
-                >Número de Identificación</label
+              <label for="numId" class="input-label">
+                {{ $t('mcompra_inputId') }}</label
               >
               <validation-provider
                 name="cédula del comprador"
@@ -37,7 +39,7 @@
                 <template slot-scope="{ errors }">
                   <input
                     id="numId"
-                    placeholder="Cédula del comprador"
+                    :placeholder="$t('mcompra_inputIdMsg')"
                     v-model="cedula"
                     class="input-text"
                   />
@@ -50,14 +52,14 @@
           </ValidationObserver>
           <div class="content-btn">
             <button class="btn-submitOrden" @click="submitOrden">
-              <search-icon class="icon-seach" />Buscar mi pedido
+              <search-icon class="icon-seach" /> {{ $t('mcompra_inputBtn') }}
             </button>
           </div>
         </div>
       </div>
       <div class="bar-body" v-if="orden && orden.venta">
         <div class="content-title">
-          <p>Información venta</p>
+          <p>{{ $t('mcompra_title2') }}</p>
           <p>No. {{ orden.venta.id }}</p>
         </div>
         <div class="content-card">
@@ -74,7 +76,7 @@
             <div class="info">
               <p class="name-product">{{ item.producto.nombre }}</p>
               <p class="quantity-product">
-                Cantidad: {{ item.unidades }} X
+                {{ $t('mcompra_cantidad') }}{{ item.unidades }} X
                 {{ (item.unidades * item.precio_producto) | currency }}
               </p>
               <p class="price-product">{{ item.precio_producto | currency }}</p>
@@ -94,71 +96,74 @@
         <div class="content-info-orden" v-if="orden.venta">
           <div class="info-left">
             <p class="title-info-orden" v-if="orden.venta.cupon != 'null'">
-              Cupón:
+              {{ $t('mcompra_cupon') }}
               <span class="value-info-orden">{{ orden.venta.cupon }}</span>
             </p>
             <p
               class="title-info-orden"
               v-if="orden.venta.cupon == 'null' || orden.venta.cupon == null"
             >
-              Cupón: <span class="value-info-orden">N/A</span>
+              {{ $t('mcompra_cupon') }}
+              <span class="value-info-orden">N/A</span>
             </p>
             <p class="title-info-orden" v-if="orden.venta.costo_envio">
-              Valor del envío:
+              {{ $t('mcompra_valorEnvio') }}
               <span class="value-info-orden">{{
                 orden.venta.costo_envio | currency
               }}</span>
             </p>
             <p class="title-info-orden" v-if="orden.venta.total">
-              Total de la orden:
+              {{ $t('mcompra_totalOrden') }}
               <span class="value-info-orden">{{
                 orden.venta.total | currency
               }}</span>
             </p>
             <p class="title-info-orden" v-if="choicePayment">
-              Método de pago:
-              <span class="value-info-orden">{{ choicePayment.title }}</span>
+              {{ $t('mcompra_metodoPago') }}
+              <span class="value-info-orden">
+                {{ $t(`${choicePayment.title}`) }}</span
+              >
             </p>
             <p class="title-info-orden" v-if="choicePayment">
-              Fecha de la compra:
+              {{ $t('mcompra_fechaCompra') }}
               <span class="value-info-orden">{{ this.fechaState }}</span>
             </p>
             <p class="title-info-orden" v-if="choicePayment">
-              Hora de la compra:
+              {{ $t('mcompra_horaCompra') }}
               <span class="value-info-orden">{{ this.horaState }}</span>
             </p>
           </div>
           <div class="content-state-top">
             <div class="content-item-state">
               <p class="title-info-orden">
-                Estado del pedido :
+                {{ $t('mcompra_estadoCompra') }}
               </p>
               <el-tag
                 :color="choiceState.color"
                 effect="dark"
                 style="margin-left: 10px;"
               >
-                {{ choiceState.title }}
+                {{ $t(`${choiceState.title}`) }}
               </el-tag>
             </div>
             <p class="title-info-orden">
-              Ultima actualización:
+              {{ $t('mcompra_ultimaActualizacion') }}
               <span class="value-info-orden">{{ orden.venta.fecha }}</span>
             </p>
           </div>
         </div>
         <div class="content-sections">
           <el-collapse>
-            <el-collapse-item title="Información del comprador" name="1">
+            <el-collapse-item :title="$t('mcompra_infoComprador')" name="1">
               <div class="content-info-buyer" v-if="orden.venta.usuario">
                 <p class="name">
-                  Nombre:
+                  {{ $t('mcompra_nombre') }}
                   <span class="value-data">{{
                     orden.venta.usuario.nombre
                   }}</span>
                 </p>
                 <p class="address">
-                  Dirección:
+                  {{ $t('mcompra_direccion') }}
                   <span
                     class="value-data"
                     v-if="orden.venta.usuario.user_info[0].direccion"
@@ -167,7 +172,7 @@
                   <span class="value-data" v-else>N/A</span>
                 </p>
                 <p class="telephone">
-                  Teléfono:
+                  {{ $t('mcompra_telefono') }}
                   <span
                     class="value-data"
                     v-if="
@@ -180,14 +185,14 @@
                   <span class="value-data" v-else>N/A</span>
                 </p>
                 <p class="email-address">
-                  Correo:
+                  {{ $t('mcompra_correo') }}
                   <span class="value-data" v-if="orden.venta.usuario.email">{{
                     orden.venta.usuario.email
                   }}</span>
                   <span class="value-data" v-else>N/A</span>
                 </p>
                 <p class="messege">
-                  Mensaje:
+                  {{ $t('mcompra_mensaje') }}
                   <span class="value-data" v-if="orden.mensajes.length">{{
                     orden.mensajes[0].mensaje
                   }}</span>
@@ -195,17 +200,17 @@
                 </p>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="Información del vendedor" name="2">
+            <el-collapse-item :title="$t('mcompra_infoVendedor')" name="2">
               <div class="content-info-buyer">
                 <p class="city">
-                  Ciudad:
+                  {{ $t('mcompra_ciudad') }}
                   <span class="value-data" v-if="city && city.nombre_ciu">{{
                     city.nombre_ciu
                   }}</span>
                   <span class="value-data" v-else>N/A</span>
                 </p>
                 <p class="address">
-                  Dirección:
+                  {{ $t('mcompra_direccion') }}
                   <span
                     class="value-data"
                     v-if="dataStore.geolocalizacion.length"
@@ -214,14 +219,14 @@
                   <span class="value-data" v-else>N/A</span>
                 </p>
                 <p class="telephone">
-                  Teléfono:
+                  {{ $t('mcompra_telefono') }}
                   <span class="value-data" v-if="dataStore.tienda.telefono">{{
                     dataStore.tienda.telefono
                   }}</span>
                   <span class="value-data" v-else>N/A</span>
                 </p>
                 <p class="owner">
-                  Nombre Tienda:
+                  {{ $t('mcompra_nombreTienda') }}
                   <span class="value-data" v-if="dataStore.tienda.nombre">{{
                     dataStore.tienda.nombre
                   }}</span>
@@ -285,99 +290,99 @@ export default {
         {
           id: '1',
           tag: 'payco',
-          title: 'Tarjeta de Crédito',
+          title: 'mcompra_pTarjetaCredito',
           description: 'Pago realizado por ePayco',
         },
         {
           id: '2',
           tag: 'payco',
-          title: 'PSE - Cuenta de ahorros y corriente',
+          title: 'mcompra_pPase1',
           description: 'Paga con tu cuenta bancaria o tarjeta debito',
         },
         {
           id: '3',
           tag: 'payco',
-          title: 'Pago en efectivo',
+          title: 'mcompra_pPagoEfectivo',
           description: 'Mas de 14.000 puntos en todo el país',
         },
         {
           id: '4',
           tag: 'consignacion',
-          title: 'Consignación bancaria',
+          title: 'mcompra_pConsigancionBancaria',
           description: 'Transferencia o consignación a nuestra cuenta bancaria',
         },
         {
           id: '5',
           tag: 'efecty',
-          title: 'Giro a Efecty',
+          title: 'mcompra_pGiroEfecty',
           description: 'Transferencia o consignación a nuestra cuenta',
         },
         {
           id: '6',
           tag: 'tienda',
-          title: 'Pagar y recoger en la tienda',
+          title: 'mcompra_pRecogerTienda',
           description:
             'Si estas cerca a nuestro negocio, acercate a realizar el pago y recoger tu producto. Escribe abajo en los comentarios cuando vendrías a nuestra tienda para tener tu compra lista.',
         },
         {
           id: '7',
           tag: 'convenir',
-          title: 'Pago a convenir',
+          title: 'mcompra_pPagoConvenir',
           description:
             'Al finalizar tu compra, te contactaremos o puedes comunicarte con nosostros por algunos de nuestros medios de comunicación para que organicemos la forma de pago de tu compra. ',
         },
         {
           id: '8',
           tag: 'payco',
-          title: 'SafetyPay (Banca internacional)',
+          title: 'mcompra_pSafetyPat',
           description: 'Banca y efectivo internacinal',
         },
         {
           id: '9',
           tag: 'contraentrega',
-          title: 'Pago Contra-Entrega',
+          title: 'mcompra_pContraEntrega',
           description: 'Pagas en el momento que recibas tu compra',
         },
         {
           id: '10',
           tag: 'mercadopago',
-          title: 'Mercadopago',
+          title: 'mcompra_pmercadoPago',
           description: 'Tu cliente ha seleccionado mercadopago para pagar',
         },
         {
           id: '11',
           tag: 'payu',
-          title: 'Tarjeta de Credito',
+          title: 'mcompra_pTarjetaCreditoM',
           description: 'Paga con tu tarjeta hasta en 24 cuotas',
         },
         {
           id: '12',
           tag: 'payu',
-          title: 'Efectivo',
+          title: 'mcompra_pEfectivo',
           description: 'Tu cliente ha seleccionado PayU para pagar',
         },
         {
           id: '13',
           tag: 'payu',
-          title: 'PSE - Cuenta de Ahorros y corriente',
+          title: 'mcompra_pPayuCuentaAhorros',
           description: 'Tu cliente ha seleccionado PayU para pagar',
         },
         {
           id: '14',
           tag: 'mercadopago',
-          title: 'PSE - Cuenta de Ahorros y corriente',
+          title: 'mcompra_pPMercadoCuentaAhorros',
           description: 'Tu cliente ha seleccionado Mercado Pago para pagar',
         },
         {
           id: '15',
           tag: 'Daviplata',
-          title: 'Daviplata',
+          title: 'mcompra_pDaviplata',
           description: 'Tu cliente ha seleccionado Daviplata para pagar',
         },
         {
           id: '16',
           tag: 'Nequi',
-          title: 'Nequi',
+          title: 'mcompra_pNequi',
           description: 'Tu cliente ha seleccionado Nequi para pagar',
         },
       ],
@@ -386,12 +391,12 @@ export default {
         {
           id: '0',
           color: '#FFA801',
-          title: 'Sin pagar',
+          title: 'mcompra_sinPagar',
         },
         {
           id: '1',
           color: '#30c490',
-          title: 'Pagada',
+          title: 'mcompra_pagada',
         },
         {
           id: '2',
@@ -401,12 +406,12 @@ export default {
         {
           id: '3',
           color: '#EB4D4B',
-          title: 'Cancelada',
+          title: 'mcompra_cancelada',
         },
         {
           id: '4',
           color: '#0000FF',
-          title: 'Despachada',
+          title: 'mcompra_despachada',
         },
         {
           id: '5',
@@ -416,7 +421,7 @@ export default {
         {
           id: '6',
           color: '#4429AE',
-          title: 'Entregado',
+          title: 'mcompra_entregado',
         },
       ],
     }

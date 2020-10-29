@@ -3,10 +3,9 @@
     <div class="contact">
       <div class="contact-content">
         <div>
-          <p class="contact-text-title">Contáctanos</p>
+          <p class="contact-text-title">{{ $t('contact_title') }}</p>
           <p class="contact-text-subtitle">
-            Siempre estamos atentos a escuchar nuestros clientes, por favor
-            cuentanos tus opiniones y dudas.
+            {{ $t('contact_subtitle') }}
           </p>
         </div>
         <div class="wrapper-icon">
@@ -40,7 +39,7 @@
         <div class="separator"></div>
         <div v-if="dataStore.geolocalizacion.length">
           <div>
-            <p class="contact-text-sub">Visita nuestra tienda</p>
+            <p class="contact-text-sub">{{ $t('contact_vistaTienda') }}</p>
 
             <p class="contact-text-subtitle2">
               {{ this.dataStore.geolocalizacion[0].direccion }}
@@ -56,20 +55,22 @@
           ></iframe>
           <div class="under-text">
             <p class="contact-text-subtitle3">
-              Horario de atención:
+              {{ $t('contact_horarioAtencion') }}
               <br />
               {{ this.dataStore.geolocalizacion[0].horario }}
             </p>
-            <a class="contact-text-subtitle4">¿Cómo llegar?</a>
+            <a class="contact-text-subtitle4">
+              {{ $t('contact_comollegar') }}</a
+            >
           </div>
         </div>
       </div>
 
       <div class="contact-content">
         <div class="contact-item-text">
-          <p class="contact-text-title">Mensajes</p>
+          <p class="contact-text-title">{{ $t('contact_title2') }}</p>
           <p class="contact-text-subtitles">
-            Envíanos un mensaje y pronto estaremos en contacto.
+            {{ $t('contact_subtitle2') }}
           </p>
         </div>
         <ValidationObserver
@@ -77,7 +78,7 @@
           tag="form"
           class="contact-content-rigth"
         >
-          <p>NOMBRE</p>
+          <p>{{ $t('contact_nombre') }}</p>
           <validation-provider name="nombre" rules="required">
             <template slot-scope="{ errors }">
               <input
@@ -85,39 +86,39 @@
                 type="text"
                 v-model="nombre"
                 class="input-text"
-                placeholder="Escribe tu nombre"
+                :placeholder="$t('contact_nombrePlacer')"
                 id="ContactName"
               />
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
           </validation-provider>
-          <P>E-MAIL</P>
+          <P> {{ $t('contact_email') }}</P>
           <validation-provider name="email" rules="required|email">
             <template slot-scope="{ errors }">
               <input
                 name="email"
                 type="email"
                 v-model="email"
-                placeholder="Tu correo"
+                :placeholder="$t('contact_emailPlacer')"
                 class="input-text"
                 id="ContactEmail"
               />
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
           </validation-provider>
-          <P>MENSAJE</P>
+          <P> {{ $t('contact_mensale') }}</P>
           <validation-provider name="comentario" rules="required">
             <template slot-scope="{ errors }">
               <textarea
                 class="input-text-rectangule"
                 name="comentario"
-                placeholder="Escribe aquí tu mensaje"
+                :placeholder="$t('contact_mensalePlacer')"
                 v-model="comment"
               ></textarea>
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
           </validation-provider>
-          <P>TELÉFONO</P>
+          <P> {{ $t('contact_telefono') }}</P>
           <div class="input-content">
             <validation-provider name="celular" rules="required|numeric">
               <template slot-scope="{ errors }">
@@ -125,7 +126,7 @@
                   class="input-text"
                   name="celular"
                   type="number"
-                  placeholder="Tu teléfono"
+                  :placeholder="$t('contact_telefonoPlacer')"
                   v-model="numberphone"
                   id="ContactPhone"
                 />
@@ -139,7 +140,7 @@
               class="btn"
               v-on:click.prevent="submitContact"
             >
-              Enviar
+              {{ $t('contact_enviar') }}
             </button>
           </div>
         </ValidationObserver>
@@ -552,7 +553,7 @@ export default {
   padding: 8px 14px;
   font-size: 16px;
   width: 50%;
-  height: 36px;
+  height: 41px;
   font-weight: bold;
   cursor: pointer;
   margin-left: 20px;

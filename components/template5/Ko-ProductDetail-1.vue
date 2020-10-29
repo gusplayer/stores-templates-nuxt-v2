@@ -121,10 +121,12 @@
             </div>-->
             <div class="content_buy_action">
               <div v-if="envio.titulo == 'Envío gratis'">
-                <p class="card-info-2">Envío gratis !</p>
+                <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
               </div>
               <div class="content_card-info">
-                <p class="card-info-1" v-if="spent">Agotado !</p>
+                <p class="card-info-1" v-if="spent">
+                  {{ $t('home_cardAgotado') }}
+                </p>
               </div>
             </div>
             <div v-if="this.data.detalle.con_variante > 0">
@@ -145,7 +147,7 @@
             <div :class="{ disabled: !salesData.estado }">
               <div>
                 <div class="quantity">
-                  <p class="text-quantity">Cantidad:</p>
+                  <p class="text-quantity">{{ $t('cart_cantidad') }}</p>
                   <button class="quantity_remove" v-on:click="removeQuantity()">
                     <menos-icon class="icon" />
                   </button>
@@ -158,12 +160,14 @@
                     class="container-alerta"
                     v-if="this.maxQuantityValue == this.quantityValue"
                   >
-                    <span class="alerta">última Unidad!</span>
+                    <span class="alerta"> {{ $t('cart_ultimaUnidad') }}</span>
                   </div>
                 </div>
                 <div class="item-info-product">
                   <div v-if="data.info.garantia" class="content_buy_action">
-                    <p class="text-unidades">Garantía:</p>
+                    <p class="text-unidades">
+                      {{ $t('productdetail_garantia') }}
+                    </p>
                     <span class="text-garantia">{{ data.info.garantia }}</span>
                   </div>
                   <!-- <div v-if="salesData.unidades" class="content_buy_action">
@@ -177,7 +181,7 @@
                       v-if="!spent"
                       v-on:click="addShoppingCart"
                     >
-                      Comprar
+                      {{ $t('productdetail_btnComprar') }}
                     </button>
                     <button
                       disabled
@@ -185,12 +189,12 @@
                       v-if="spent"
                       v-on:click="addShoppingCart"
                     >
-                      Agotado !
+                      {{ $t('home_cardAgotado') }}
                     </button>
                   </div>
                   <div class="content-shared">
                     <p class="text-unidades" style="margin-right: 10px;">
-                      Compartir:
+                      {{ $t('productdetail_compartir') }}
                     </p>
                     <ShareNetwork
                       v-for="network in this.networks"
@@ -225,10 +229,12 @@
                     <!-- <p class="card-descuento">-50%</p> -->
                     <div class="content_buy_action">
                       <div v-if="envio.titulo == 'Envío gratis'">
-                        <p class="card-info-2">Envío gratis !</p>
+                        <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
                       </div>
                       <div class="content_card-info">
-                        <p class="card-info-1" v-if="spent">Agotado !</p>
+                        <p class="card-info-1" v-if="spent">
+                          {{ $t('home_cardAgotado') }}
+                        </p>
                       </div>
                     </div>
                     <div>
@@ -238,10 +244,10 @@
                         v-if="!spent"
                         v-on:click="addShoppingCart"
                       >
-                        Comprar
+                        {{ $t('productdetail_btnComprar') }}
                       </button>
                       <button disabled class="btn-disabled" v-if="spent">
-                        Agotado !
+                        {{ $t('home_cardAgotado') }}
                       </button>
                     </div>
                   </div>
@@ -278,13 +284,13 @@
                 class="container-alert"
                 v-show="quantityValue == maxQuantityValue"
               >
-                <span class="alert">última Unidad!</span>
+                <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
               </div>
             </transition>
           </div>
           <div style="width: 100%; margin-left: 10px;">
             <div class="content_buy_action-responsive" v-if="spent">
-              <p class="card-info-1-res">Agotado !</p>
+              <p class="card-info-1-res">{{ $t('home_cardAgotado') }}</p>
             </div>
             <button
               class="btn-responsive"
@@ -292,7 +298,9 @@
               v-if="!spent"
               v-on:click="addShoppingCart"
             >
-              <cartArrowDown class="card-icon-cart" />Agregar
+              <cartArrowDown class="card-icon-cart" />{{
+                $t('home_cardAgregar')
+              }}
             </button>
           </div>
         </div>

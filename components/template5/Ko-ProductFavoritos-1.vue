@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-ProductFavoritos" v-if="dataProductFavorite.length">
     <div class="content-title-ProductFavoritos">
-      <p class="title-ProductFavoritos">Destacados</p>
+      <p class="title-ProductFavoritos">{{ $t('home_destacados') }}</p>
     </div>
     <KoSwipper :products="dataProductFavorite"></KoSwipper>
   </div>

@@ -3,7 +3,7 @@
     <div class="order" @click="closeOrder" v-show="openOrder">
       <div class="order_content">
         <div class="order_header">
-          <h3>Tu orden</h3>
+          <h3>{{ $t('footer_title') }}</h3>
           <div @click="closedOder" class="order_header_close">
             <close-icon />
           </div>
@@ -29,7 +29,9 @@
                         {{ product.nombre | capitalize }}
                       </p>
                       <span v-if="product.precio">
-                        <b class="unidades">Cantidad: {{ product.cantidad }}</b>
+                        <b class="unidades">
+                          {{ $t('cart_cantidad') }} {{ product.cantidad }}</b
+                        >
                         <b class="unidades"
                           >X
                           {{
@@ -72,14 +74,14 @@
               </div>
               <div v-if="productsCart.length" class="content-remove-cart">
                 <p class="remove-cart" @click="remove = !remove">
-                  Vaciar carrito de compras
+                  {{ $t('footer_vaciarCarrito') }}
                 </p>
               </div>
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
                     <p style="font-weight: bold; font-size: 16px;">
-                      Costo domicilio
+                      {{ $t('footer_costoDomicilio') }}
                     </p>
                     <details
                       v-if="
@@ -88,7 +90,9 @@
                         getFreeShipping == false
                       "
                     >
-                      <summary class="text-color">Valor por Ciudad:</summary>
+                      <summary class="text-color">
+                        {{ $t('footer_valorCiudad') }}</summary
+                      >
                       <section>
                         <ol class="scroll_cart_summary_items_cities">
                           <li
@@ -126,7 +130,7 @@
                       "
                     >
                       <li class="text-color">
-                        Tarifa plana:
+                        {{ $t('footer_tarifaPlana') }}
                         {{
                           rangosByCiudades.valor
                             | currency(
@@ -157,10 +161,10 @@
                         v-else-if="(this.shippingTarifaPrecio >= 0)"
                         class="text-color"
                       >
-                        Envío gratis
+                        {{ $t('footer_tarifaPrecio') }}
                       </p>
                       <p v-else class="text-TarifaPrecio">
-                        Envío no configurado
+                        {{ $t('footer_encioNoconfig') }}
                       </p>
                     </div>
                     <div v-else-if="shipping && getFreeShipping == false">
@@ -181,11 +185,11 @@
                         (shippingCities.length <= 0 && getFreeShipping == false)
                       "
                     >
-                      Envío gratis en toda la tienda
+                      {{ $t('footer_encioGratis') }}
                     </p>
                   </span>
                   <span class="order_total_net">
-                    <p>Total a pagar</p>
+                    <p>{{ $t('footer_totalPagar') }}</p>
                     <p>
                       {{
                         (totalCart + (getFreeShipping ? 0 : shipping))
@@ -204,7 +208,7 @@
                     <img :src="img" class="photo" alt="empty car" />
                   </div>
                   <p class="text-cart-empty">
-                    Tu carrito de compras ahora está vacío.
+                    {{ $t('footer_carritoVacio') }}
                   </p>
                 </div>
               </template>
@@ -217,14 +221,14 @@
                   class="wrapper-Quotation"
                 >
                   <p class="Quotation-message">
-                    Contacte con la tienda para saber los precios de los
-                    productos o preguntar cobertura del país
+                    {{ $t('footer_contactoMgs') }}
                   </p>
                   <button
                     class="continue_shopping_whatsapp"
                     @click="formOrden = !formOrden"
                   >
-                    <whatsapp-icon class="wp-icon" />Comprar por WhatsApp
+                    <whatsapp-icon class="wp-icon" />
+                    {{ $t('footer_compraWhatsapp') }}
                   </button>
                 </div>
                 <p
@@ -235,14 +239,13 @@
                     this.estadoShippingTarifaPrecio == true
                   "
                 >
-                  Contacte con la tienda, Rango de precios del domicilio no está
-                  definido
+                  {{ $t('footer_contactoMgs2') }}
                 </p>
                 <p
                   class="Quotation-message"
                   v-if="dataStore.tienda.estado == 0"
                 >
-                  Tienda cerrada
+                  {{ $t('footer_tiendaCerrada') }}
                 </p>
                 <button
                   v-if="
@@ -255,16 +258,16 @@
                   class="continue_shopping"
                   @click="GoPayments"
                 >
-                  Finalizar compra
+                  {{ $t('footer_finalizarCompra') }}
                 </button>
                 <nuxt-link class="conten-btn" to="/" @click="closeOrder">
                   <button class="continue_shopping2">
-                    Seguir comprando
+                    {{ $t('footer_seguirCompra') }}
                   </button>
                 </nuxt-link>
                 <nuxt-link to="/cart" class="conten-btn" @click="closeOrder">
                   <button class="continue_shopping2">
-                    Ir al carrito
+                    {{ $t('footer_irCarrito') }}
                   </button>
                 </nuxt-link>
               </div>
@@ -275,23 +278,23 @@
       <div class="wrapper-items-remove" v-if="remove">
         <div class="content-items-remove">
           <p class="text-remove">
-            ¿Realmente quiere eliminar todos los productos del carrito?
+            {{ $t('footer_contactoMgs3') }}
           </p>
           <div class="content-btn-remove">
             <button @click="remove = !remove" class="btn-remover-no">
-              No
+              {{ $t('footer_noCart') }}
             </button>
             <button class="btn-remover-yes" @click="removeCartItems">
-              Si
+              {{ $t('footer_siCart') }}
             </button>
           </div>
         </div>
       </div>
       <div class="wrapper-items-form" v-if="formOrden">
         <div class="content-items-form">
-          <p class="form-text">Completa tu pedido</p>
+          <p class="form-text">{{ $t('footer_formtittle') }}</p>
           <ValidationObserver ref="observer" tag="form" class="items-form">
-            <p class="form-subtext">Nombre y Apellido</p>
+            <p class="form-subtext">{{ $t('footer_formNombre') }}</p>
             <validation-provider
               name="nombre"
               rules="required"
@@ -303,7 +306,7 @@
                   type="text"
                   v-model="nombre"
                   class="input-text"
-                  placeholder="Escribe tu nombre"
+                  :placeholder="$t('footer_formNombreMgs')"
                   id="ContactName"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -311,7 +314,7 @@
                 </span>
               </template>
             </validation-provider>
-            <P class="form-subtext">Ciudad</P>
+            <P class="form-subtext"> {{ $t('footer_formCiudad') }}</P>
             <validation-provider
               name="ciudad"
               rules="required"
@@ -321,7 +324,7 @@
                 <input
                   class="input-text"
                   name="ciudad"
-                  placeholder="Tu ciudad"
+                  :placeholder="$t('footer_formCiudadMgs')"
                   v-model="ciudad"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -329,7 +332,7 @@
                 </span>
               </template>
             </validation-provider>
-            <P class="form-subtext">Barrio</P>
+            <P class="form-subtext"> {{ $t('footer_formBarrio') }}</P>
             <validation-provider
               name="barrio"
               rules="required"
@@ -339,7 +342,7 @@
                 <input
                   class="input-text"
                   name="barrio"
-                  placeholder="Tu barrio"
+                  :placeholder="$t('footer_formBarrioMgs')"
                   v-model="barrio"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -347,7 +350,7 @@
                 </span>
               </template>
             </validation-provider>
-            <P class="form-subtext">Dirección</P>
+            <P class="form-subtext"> {{ $t('footer_formDireccion') }}</P>
             <validation-provider
               name="dirreccion"
               rules="required"
@@ -357,7 +360,7 @@
                 <input
                   class="input-text"
                   name="dirreccion"
-                  placeholder="Tu dirección"
+                  :placeholder="$t('footer_formDireccionMgs')"
                   v-model="dirreccion"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -379,7 +382,7 @@
           v-on:click.prevent="redirectWP()"
           style="margin-top: 15px;"
         >
-          <whatsapp-icon class="wp-icon" />Finalizar compra
+          <whatsapp-icon class="wp-icon" /> {{ $t('footer_finalizarCompra') }}
         </button>
       </div>
     </div>

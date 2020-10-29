@@ -20,7 +20,7 @@
             </div>
             <div class="products_item_details">
               <div class="content_variant">
-                <p class="text-tittle">Variante:</p>
+                <p class="text-tittle">{{ $t('cart_variante') }}</p>
                 <el-tag
                   v-for="(item, items) in product.combinacion"
                   :key="items"
@@ -31,7 +31,7 @@
                 </el-tag>
               </div>
               <div class="wrapper_quantity">
-                <p class="text-tittle">Cantidad:</p>
+                <p class="text-tittle">{{ $t('cart_cantidad') }}</p>
                 <div class="content_items_quantity">
                   <div class="quantity">
                     <button
@@ -53,7 +53,7 @@
                     v-if="product.cantidad == product.limitQuantity"
                   >
                     <span class="alert">
-                      última Unidad!
+                      {{ $t('cart_ultimaUnidad') }}
                       <div class="arrow"></div>
                     </span>
                   </div>
@@ -62,7 +62,7 @@
             </div>
             <div class="content_price">
               <div>
-                <p class="text-tittle">Precio:</p>
+                <p class="text-tittle">{{ $t('cart_precio') }}</p>
                 <b class="text-result">
                   {{
                     product.precio
@@ -74,7 +74,7 @@
                 </b>
               </div>
               <div>
-                <p class="text-tittle">Total:</p>
+                <p class="text-tittle">{{ $t('cart_total') }}</p>
                 <b class="text-result">
                   {{
                     product.precio
@@ -117,7 +117,7 @@
                 <div>
                   <div class="content_price">
                     <div>
-                      <p class="text-tittle">Precio:</p>
+                      <p class="text-tittle">{{ $t('cart_precio') }}</p>
                       <p class="text-result">
                         {{
                           product.precio
@@ -130,7 +130,7 @@
                     </div>
                   </div>
                   <div class="content_variant" v-if="product.combinacion">
-                    <p class="text-tittle">Variante:</p>
+                    <p class="text-tittle">{{ $t('cart_variante') }}</p>
                     <el-tag
                       v-for="(item, items) in product.combinacion"
                       :key="items"
@@ -155,7 +155,7 @@
                       v-if="product.cantidad == product.limitQuantity"
                     >
                       <span class="alert">
-                        última Unidad!
+                        {{ $t('cart_ultimaUnidad') }}
                         <div class="arrow"></div>
                       </span>
                     </div>
@@ -185,11 +185,11 @@
       <div class="wrapper_cart_summary">
         <div class="content_cart_summary">
           <div class="content_tittle">
-            <p class="text">RESUMEN</p>
+            <p class="text">{{ $t('cart_resumen') }}</p>
           </div>
           <div class="cart_summary_body">
             <span class="cart_summary_items">
-              <p class="cart_summary_tittle">Subtotal:</p>
+              <p class="cart_summary_tittle">{{ $t('cart_subtotal') }}</p>
               <b class="cart_summary_price">
                 {{
                   totalCart
@@ -202,7 +202,9 @@
             </span>
             <span class="order_total">
               <span class="order_total_domicile">
-                <p class="cart_summary_tittle">Costo domicilio:</p>
+                <p class="cart_summary_tittle">
+                  {{ $t('footer_costoDomicilio') }}
+                </p>
                 <details
                   v-if="
                     rangosByCiudad.envio_metodo === 'precio_ciudad' &&
@@ -210,7 +212,9 @@
                     getFreeShipping == false
                   "
                 >
-                  <summary class="cart_summary_price">Valor por Ciudad</summary>
+                  <summary class="cart_summary_price">{{
+                    $t('footer_valorCiudad')
+                  }}</summary>
                   <ol class="scroll_cart_summary_items_cities">
                     <li
                       v-for="(ciudad, index) in rangosByCiudad.rangos"
@@ -247,7 +251,7 @@
                   "
                 >
                   <li class="cart_summary_price">
-                    Tarifa plana:
+                    {{ $t('footer_tarifaPlana') }}
                     {{
                       rangosByCiudades.valor
                         | currency(
@@ -274,8 +278,14 @@
                       }}
                     </p>
                   </div>
+                  <p
+                    v-else-if="(this.shippingTarifaPrecio >= 0)"
+                    class="text-color"
+                  >
+                    {{ $t('footer_tarifaPrecio') }}
+                  </p>
                   <p v-else class="text-TarifaPrecio">
-                    Envío no configurado
+                    {{ $t('footer_encioNoconfig') }}
                   </p>
                 </div>
                 <p v-else-if="shipping && getFreeShipping == false">
@@ -294,19 +304,19 @@
                     (shippingCities.length <= 0 && getFreeShipping == false)
                   "
                 >
-                  Envío gratis en toda la tienda
+                  {{ $t('footer_encioGratis') }}
                 </p>
               </span>
             </span>
             <div class="line"></div>
             <div class="message-responsive">
               <p class="Quotation-message" v-if="isQuotation()">
-                Contacte con la tienda para saber los precios de los productos
+                {{ $t('footer_contactoMgs') }}
               </p>
             </div>
             <div class="wrapper_btn">
               <span class="cart_summary_items">
-                <p class="cart_summary_tittle">Total a pagar:</p>
+                <p class="cart_summary_tittle">{{ $t('cart_totalpagar') }}</p>
                 <p class="cart_summary_price">
                   {{
                     (totalCart + (getFreeShipping ? 0 : shipping))
@@ -318,10 +328,10 @@
                 </p>
               </span>
               <p class="Quotation-message" v-if="isQuotation()">
-                Contacte con la tienda para saber los precios de los productos
+                {{ $t('footer_contactoMgs') }}
               </p>
               <p class="Quotation-message" v-if="dataStore.tienda.estado == 0">
-                Tienda cerrada
+                {{ $t('footer_tiendaCerrada') }}
               </p>
               <button
                 ref="colorBtn"
@@ -329,13 +339,15 @@
                 @click="GoPayments"
                 v-if="!isQuotation() && dataStore.tienda.estado == 1"
               >
-                Finalizar compra
+                {{ $t('footer_finalizarCompra') }}
               </button>
-              <nuxt-link to="/" class="btn2">Seguir comprando</nuxt-link>
+              <nuxt-link to="/" class="btn2">
+                {{ $t('footer_seguirCompra') }}</nuxt-link
+              >
             </div>
             <div class="wrapper_btn_responsive">
               <span class="cart_summary_items">
-                <p class="cart_summary_tittle">Total a pagar:</p>
+                <p class="cart_summary_tittle">{{ $t('cart_totalpagar') }}</p>
                 <p class="cart_summary_price">
                   {{
                     (totalCart + (getFreeShipping ? 0 : shipping))
@@ -347,14 +359,16 @@
                 </p>
               </span>
               <div class="content-btn">
-                <nuxt-link to="/" class="btn2">Seguir comprando</nuxt-link>
+                <nuxt-link to="/" class="btn2">{{
+                  $t('footer_seguirCompra')
+                }}</nuxt-link>
                 <button
                   ref="colorBtn2"
                   class="btn1"
                   @click="GoPayments"
                   v-if="!isQuotation()"
                 >
-                  Finalizar compra
+                  F{{ $t('footer_finalizarCompra') }}
                 </button>
               </div>
             </div>
@@ -366,10 +380,11 @@
       <div class="wrapper_photo">
         <img :src="img" class="photo" alt="Product img" />
       </div>
-      <p>Tu carrito de compras ahora está vacío.</p>
-
+      <p>T{{ $t('footer_carritoVacio') }}</p>
       <nuxt-link to="/">
-        <button ref="colorBtn" class="btn3">Agregar productos</button>
+        <button ref="colorBtn" class="btn3">
+          {{ $t('cart_agregarProductos') }}
+        </button>
       </nuxt-link>
     </div>
   </div>
@@ -489,7 +504,7 @@ export default {
           this.shippingTarifaPrecio = result.precio
           this.estadoShippingTarifaPrecio = false
         } else {
-          this.shippingTarifaPrecio = 0
+          this.shippingTarifaPrecio = 'empty'
           this.estadoShippingTarifaPrecio = true
         }
       }
@@ -896,7 +911,7 @@ export default {
   display: none;
 }
 .Quotation-message {
-  color: var(--color_text_btn);
+  color: var(--color_text);
   padding: 8px 12px;
   width: 100%;
   font-size: 14px;

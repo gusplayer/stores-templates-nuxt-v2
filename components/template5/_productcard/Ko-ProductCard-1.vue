@@ -23,9 +23,11 @@
         <div class="separador-stats"></div>
         <div class="stats">
           <div class="stats-container">
-            <p class="card-info-1" v-if="soldOut">Agotado !</p>
+            <p class="card-info-1" v-if="soldOut">
+              {{ $t('home_cardAgotado') }}
+            </p>
             <p class="card-info-2" v-if="getFreeShipping == false">
-              Envío gratis !
+              {{ $t('home_cardGratis') }}
             </p>
             <div class="content-name-product">
               <p class="card-title" v-if="this.product.nombre.length >= 54">
@@ -88,7 +90,7 @@
                 router-link
                 :to="{ path: `/productos/` + product.slug }"
               >
-                <p>Ver más</p>
+                <p>{{ $t('home_cardvermas') }}</p>
               </router-link>
               <div class="separador-btn"></div>
               <div
@@ -96,7 +98,9 @@
                 v-on:click="addShoppingCart"
                 v-if="!this.estadoCart && !soldOut && !spent"
               >
-                <p style="height: 23px;"><cartArrowDown />Agregar</p>
+                <p style="height: 23px;">
+                  <cartArrowDown /> {{ $t('home_cardAgregar') }}
+                </p>
               </div>
             </div>
           </div>
@@ -121,9 +125,9 @@
           />
         </router-link>
         <div class="content-card-items">
-          <p class="card-info-1" v-if="soldOut">Agotado !</p>
+          <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
-            Envío gratis !
+            {{ $t('home_cardGratis') }}
           </p>
           <router-link
             :to="{ path: `/productos/` + product.slug }"

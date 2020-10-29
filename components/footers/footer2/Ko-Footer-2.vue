@@ -14,16 +14,16 @@
           </div>
         </div>
         <div>
-          <p class="text-top-bold">Secciones</p>
+          <p class="text-top-bold">{{ $t('footer_secciones') }}</p>
           <br />
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
             <nuxt-link :to="item.path" class="text-top">
-              {{ item.name }}
+              {{ $t(`${item.name}`) }}
             </nuxt-link>
           </div>
         </div>
         <div>
-          <p class="text-top-bold">Síguenos</p>
+          <p class="text-top-bold">{{ $t('footer_siguenos') }}</p>
           <br />
           <div
             v-for="(item, index) in links"
@@ -41,10 +41,9 @@
           </div>
         </div>
         <div>
-          <p class="text-top-bold">Suscríbete</p>
+          <p class="text-top-bold">{{ $t('footer_suscribete') }}</p>
           <p class="text-light">
-            Registra tu correo para recibir información sobre promociones y
-            nuevos productos.
+            {{ $t('footer_msg') }}
           </p>
           <br />
           <div class="input-content">
@@ -59,7 +58,7 @@
                   name="email"
                   class="input-text"
                   type="email"
-                  placeholder="Correo electrónico"
+                  :placeholder="$t('footer_email')"
                   v-model="email"
                   @keyup.enter="toSubscribe"
                   id="InputEmailOne"
@@ -73,15 +72,13 @@
               </template>
             </ValidationProvider>
             <button ref="colorBtn" class="btn" @click="toSubscribe">
-              Enviar
+              {{ $t('footer_enviar') }}
             </button>
           </div>
           <div class="content-checkbox">
             <input type="checkbox" id="checkbox" v-model="checked" />
             <p class="text-checkbox">
-              Acepto recibir email e información de
-              {{ dataStore.tienda.nombre }}, bajo las políticas de datos
-              personales
+              {{ $t('footer_checkbox') }}
             </p>
           </div>
         </div>
@@ -116,12 +113,12 @@
               :key="`${index}${item.name}`"
             >
               <nuxt-link :to="item.path" class="text-top">
-                {{ item.name }}
+                {{ $t(`${item.name}`) }}
               </nuxt-link>
             </div>
           </div>
           <div class="text-center">
-            <p>Suscríbite a nuestras promociones</p>
+            <p>{{ $t('footer_suscribete2') }}</p>
           </div>
           <div class="input-content">
             <ValidationProvider
@@ -135,7 +132,7 @@
                   name="email"
                   class="input-text"
                   type="email"
-                  placeholder="Correo electrónico"
+                  :placeholder="$t('footer_email')"
                   v-model="email"
                   @keyup.enter="toSubscribe"
                   id="InputEmailTwo"
@@ -148,7 +145,9 @@
                 >
               </template>
             </ValidationProvider>
-            <button class="btn" @click="toSubscribe">Enviar</button>
+            <button class="btn" @click="toSubscribe">
+              {{ $t('footer_enviar') }}
+            </button>
           </div>
         </div>
         <div v-if="currentViews.length" class="item-movil-center">
@@ -163,12 +162,10 @@
     </div>
     <div class="under-footer">
       <div class="contenedor-term-con" v-if="dataStore.politicas">
-        <label for="modal-toggle"
-          >Políticas de privacidad y términos de uso</label
-        >
+        <label for="modal-toggle">{{ $t('footer_politicasyterminos') }}</label>
       </div>
       <div class="separator"></div>
-      <p>Desarrollado por Komercia Latam</p>
+      <p>{{ $t('footer_desarrollado') }}</p>
       <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
         <img
           src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
@@ -189,7 +186,7 @@
       <label class="modal-backdrop" for="modal-toggle"></label>
       <div class="modal-content">
         <div class="header-modal">
-          <p class="text-top-bold">Condiciones legales</p>
+          <p class="text-top-bold">{{ $t('footer_condicionesLegales') }}</p>
           <label class="modal-close-btn" for="modal-toggle">
             <close-icon class="close-icon-modal" />
           </label>
@@ -197,42 +194,44 @@
         <div class="tabs">
           <div class="tab" v-if="this.dataStore.politicas.cambio">
             <input id="tab-one" type="checkbox" name="tabs" />
-            <label for="tab-one">Política de cambio</label>
+            <label for="tab-one">{{ $t('footer_politicaCambio') }}</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.cambio"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.datos">
             <input id="tab-two" type="checkbox" name="tabs" />
-            <label for="tab-two">Políticas de tratamiento de datos</label>
+            <label for="tab-two">{{ $t('footer_politicaTratamientos') }}</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.datos"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.devolucion">
             <input id="tab-three" type="checkbox" name="tabs" />
-            <label for="tab-three">Politica de devoluciones / retracto</label>
+            <label for="tab-three">{{
+              $t('footer_politicaDevoluciones')
+            }}</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.devolucion"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.garantia">
             <input id="tab-four" type="checkbox" name="tabs" />
-            <label for="tab-four">Politica de garantia</label>
+            <label for="tab-four">{{ $t('footer_politicaGarantia') }}</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.garantia"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.envios">
             <input id="tab-five" type="checkbox" name="tabs" />
-            <label for="tab-five">Politica de envios</label>
+            <label for="tab-five">{{ $t('footer_politicaEnvios') }}</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.envios"></div>
             </div>
           </div>
           <div class="tab" v-if="this.dataStore.politicas.pagos">
             <input id="tab-six" type="checkbox" name="tabs" />
-            <label for="tab-six">Politica de pagos</label>
+            <label for="tab-six">{{ $t('footer_politicaPagos') }}</label>
             <div class="tab-content">
               <div v-html="this.dataStore.politicas.pagos"></div>
             </div>
@@ -294,19 +293,19 @@ export default {
       ],
       secciones: [
         {
-          name: 'Inicio',
+          name: 'footer_inicio',
           path: '/',
         },
         {
-          name: 'Carrito',
+          name: 'footer_carrito',
           path: '/cart',
         },
         {
-          name: 'Contacto',
+          name: 'footer_contacto',
           path: '/contacto',
         },
         {
-          name: 'Mi compra',
+          name: 'footer_micompra',
           path: '/micompra',
         },
       ],

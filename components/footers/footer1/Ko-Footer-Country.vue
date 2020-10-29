@@ -1,31 +1,38 @@
 <template>
   <div class="wrapper-footer-country">
     <div class="content-footer-country" v-if="dataStore.tienda.pais">
-      <div
-        v-if="dataStore.tienda.pais == 'Internacional'"
-        style="display: flex;"
-      >
-        <no-ssr>
-          <country-flag country="un" size="normal"></country-flag>
-        </no-ssr>
+      <div class="content-item-flag">
+        <div
+          v-if="dataStore.tienda.pais == 'Internacional'"
+          style="display: flex;"
+        >
+          <no-ssr>
+            <country-flag country="un" size="normal"></country-flag>
+          </no-ssr>
+        </div>
+        <div v-else class="content-flag">
+          <no-ssr>
+            <country-flag
+              :country="`${dataStore.tienda.codigo_pais}`"
+              size="normal"
+            ></country-flag>
+          </no-ssr>
+        </div>
+        <p class="text-country">{{ dataStore.tienda.pais }}</p>
       </div>
-      <div v-else class="content-flag">
-        <no-ssr>
-          <country-flag
-            :country="`${dataStore.tienda.codigo_pais}`"
-            size="normal"
-          ></country-flag>
-        </no-ssr>
-      </div>
-
-      <p class="text-country">{{ dataStore.tienda.pais }}</p>
+      <KoLanguage />
     </div>
   </div>
 </template>
 
 <script>
+import KoLanguage from '../../k-select-language'
+
 export default {
-  name: 'Ko-Newsletter-1',
+  name: 'Ko-footer-flags',
+  components: {
+    KoLanguage,
+  },
   props: {
     dataStore: Object,
   },
@@ -36,7 +43,6 @@ export default {
 .wrapper-footer-country {
   display: flex;
   width: 100%;
-  /* background: var(--background_color_1); */
   background: rgb(24, 24, 24);
   justify-content: center;
   align-items: center;
@@ -44,7 +50,14 @@ export default {
 .content-footer-country {
   width: 100%;
   max-width: 1300px;
-  padding: 5px 20px 6px;
+  padding: 1px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.content-item-flag {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

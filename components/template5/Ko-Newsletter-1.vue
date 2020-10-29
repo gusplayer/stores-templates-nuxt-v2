@@ -1,11 +1,10 @@
 <template>
   <div class="wrapper_newsletter">
     <div class="contenedor">
-      <p class="subtext">SUSCRIBÉTE</p>
+      <p class="subtext">{{ $t('newsletter_subtitle') }}</p>
       <p class="title">
-        Suscríbete a nuestro boletín para enviarte promociones.
+        {{ $t('newsletter_title') }}
       </p>
-
       <div class="content-button">
         <ValidationProvider
           ref="validate"
@@ -18,7 +17,7 @@
               name="email"
               class="input-text"
               type="email"
-              placeholder="Correo electrónico"
+              :placeholder="$t('newsletter_email')"
               v-model="email"
               id="CorreoElectronicoNewslletter"
             />
@@ -31,14 +30,13 @@
           </template>
         </ValidationProvider>
         <button ref="colorBtn" class="btn" @click="submitNewsletter">
-          Suscríbete
+          {{ $t('newsletter_btn') }}
         </button>
       </div>
       <div class="content-checkbox">
         <input type="checkbox" id="checkbox" v-model="checked" />
         <p class="text-checkbox">
-          Acepto recibir email e información de {{ dataStore.tienda.nombre }},
-          bajo las políticas de datos personales
+          {{ $t('newsletter_msg') }}
         </p>
       </div>
     </div>

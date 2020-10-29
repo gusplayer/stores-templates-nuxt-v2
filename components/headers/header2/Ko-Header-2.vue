@@ -24,7 +24,7 @@
                 :to="item.path"
                 v-if="item.path"
                 class="header-text-center"
-                >{{ item.name }}</nuxt-link
+                >{{ $t(`${item.name}`) }}</nuxt-link
               >
               <div v-else>
                 <div
@@ -36,7 +36,7 @@
                   "
                 >
                   <p class="header-text-center-icon">
-                    {{ item.name }}
+                    {{ $t(`${item.name}`) }}
                   </p>
                   <div
                     class="header-text-center-icon"
@@ -229,16 +229,16 @@ export default {
       ],
       secciones: [
         {
-          name: 'Inicio',
+          name: 'header_inicio',
           path: '/',
         },
         {
-          name: 'Categorías',
+          name: 'header_categorias',
           iconOpen: 'Flechadown-icon',
           iconClose: 'FlechaUp-icon',
         },
         {
-          name: 'Contacto',
+          name: 'header_contacto',
           path: '/contacto',
         },
       ],

@@ -129,21 +129,6 @@ export default {
           link: this.dataStore.tienda.red_youtube,
         },
       ],
-      secciones: [
-        {
-          name: 'Inicio',
-          path: '/',
-        },
-        {
-          name: 'Categorías',
-          iconOpen: 'Flechadown-icon',
-          iconClose: 'FlechaUp-icon',
-        },
-        {
-          name: 'Contacto',
-          path: '/contacto',
-        },
-      ],
       cat: [],
       add: true,
       selectSubcategory: '',

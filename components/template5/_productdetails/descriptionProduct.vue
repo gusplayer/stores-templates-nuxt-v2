@@ -1,7 +1,9 @@
 <template>
   <div class="description">
     <div class="left">
-      <h3 class="text-desc" v-if="!activeClass">Descripción</h3>
+      <h3 class="text-desc" v-if="!activeClass">
+        {{ $t('productdetail_description') }}
+      </h3>
       <div
         class="content-text-desc"
         v-if="!activeClass"
@@ -14,18 +16,16 @@
     <div class="right">
       <div class="payments section">
         <div class="content">
-          <h3 class="title-section">Opciones de pago</h3>
+          <h3 class="title-section">{{ $t('productdetail_opcionesPago') }}</h3>
         </div>
         <p>
-          Puedes elegir cualquiera de estos medios. Es rápido, seguro y no tiene
-          costo adicional.
+          {{ $t('productdetail_opcionesPagoMsg') }}
         </p>
         <ul>
           <li v-if="mediospago.payco == 1">
-            <h4>Pasarela de pagos epayco</h4>
+            <h4>{{ $t('productdetail_PasarelaEpayco') }}</h4>
             <p>
-              Paga con tu tarjeta hasta 24 cuotas o en efectivo en mas de 14.000
-              puntos en todo el país
+              {{ $t('productdetail_PasarelaEpaycoMsg') }}
             </p>
             <img
               src="https://res.cloudinary.com/komercia-components/image/upload/v1579296851/assets/pasarela-epayco.png"
@@ -33,10 +33,9 @@
             />
           </li>
           <li v-if="mediospago.payu == 1">
-            <h4>Pasarela de pagos payu</h4>
+            <h4>{{ $t('productdetail_PasarelaPayu') }}</h4>
             <p>
-              Miles de comercios alrededor del mundo confían en nosotros para
-              recibir pagos online
+              {{ $t('productdetail_PasarelaPayuMsg') }}
             </p>
             <a
               href="https://www.payulatam.com/co/"
@@ -51,10 +50,9 @@
             </a>
           </li>
           <li v-if="mediospago.mercado_pago == 1">
-            <h4>Pasarela de pagos mercadopago</h4>
+            <h4>{{ $t('productdetail_PasarelaMercado') }}</h4>
             <p>
-              Difiere tu compra hasta 36 cuotas con tarjeta de crédito, más de
-              90 millones de personas en Latinoamérica lo están usando.
+              {{ $t('productdetail_PasarelaMercadoMsg') }}
             </p>
             <img
               class="logo-pasarela"
@@ -68,27 +66,29 @@
             />
           </li>
           <li v-if="mediospago.contraentrega == 1">
-            <h4>Pago contra entrega</h4>
-            <p>Pagas en el momento de recibir tu compra</p>
+            <h4>{{ $t('productdetail_PagoContra') }}</h4>
+            <p>{{ $t('productdetail_PagoContraMsg') }}</p>
           </li>
           <li v-if="mediospago.convenir == 1">
-            <h4>Pago a convenir</h4>
-            <p>Nos pondremos en contacto para organizar la forma de pago</p>
+            <h4>{{ $t('productdetail_pagoConvenir') }}</h4>
+            <p>{{ $t('productdetail_pagoConvenirMsg') }}</p>
           </li>
           <li v-if="mediospago.consignacion == 1">
-            <h4>Consignación Bancaria</h4>
-            <p>Transferencia o consignación a nuestra cuenta</p>
+            <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
+            <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
           </li>
           <li v-if="mediospago.efecty == 1">
-            <h4>Consignación Efecty</h4>
-            <p>Compra más seguro, fácil y rápido tus productos con efecty</p>
+            <h4>{{ $t('productdetail_ConsignacionEfecty') }}</h4>
+            <p>{{ $t('productdetail_ConsignacionEfectyMsg') }}</p>
           </li>
         </ul>
       </div>
       <div class="line"></div>
       <div class="deliverys section" v-if="this.envios.envio_metodo">
         <div class="content">
-          <h3 class="title-section">Opciones de Envio</h3>
+          <h3 class="title-section">
+            {{ $t('productdetail_opinionesEnvio') }}
+          </h3>
         </div>
         <div
           v-if="this.envios.envio_metodo === 'precio_ciudad'"
@@ -98,8 +98,7 @@
             • {{ this.envios.envio_metodo.replace('_', ' por ') }}
           </h4>
           <p class="description-method">
-            El valor del envío se calcula al momento de hacer la compra de
-            acuerdo a la ciudad de entrega
+            {{ $t('productdetail_opinionesEnvioMsg1') }}
           </p>
         </div>
         <div
@@ -110,25 +109,27 @@
             {{ this.envios.envio_metodo.replace('_', ' ') }}
           </h4>
           <p class="description-method">
-            El costo del envío es el mismo sin importar el lugar de entrega
+            {{ $t('productdetail_opinionesEnvioMsg2') }}
           </p>
-          <p class="price">Precio: {{ this.envios.valor | currency }} COP</p>
+          <p class="price">
+            {{ $t('cart_precio') }} {{ this.envios.valor | currency }}
+          </p>
         </div>
         <div
           v-if="this.envios.envio_metodo === 'precio'"
           class="wrapper-method"
         >
-          <h4>Precio por Total de Compra</h4>
+          <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
           <p class="description-method">
-            El valor del envío se calcula de acuerdo al total de compra
+            {{ $t('productdetail_precioTotalCompraMsg') }}
           </p>
         </div>
         <div
           v-if="this.envios.envio_metodo === 'gratis'"
           class="wrapper-method"
         >
-          <h4>Gratis</h4>
-          <p class="description-method">El valor del envío no tiene costo</p>
+          <h4>{{ $t('productdetail_gratis') }}</h4>
+          <p class="description-method">{{ $t('productdetail_gratisMsg') }}</p>
         </div>
       </div>
       <!-- <div class="line-comments"></div> -->
