@@ -510,7 +510,7 @@ export default {
     contact_title: 'Contate-nos',
     contact_subtitle:
       'Estamos sempre atentos para ouvir nossos clientes, por favor, diga-nos suas opiniões e dúvidas.',
-    contact_vistaTienda: 'VVisite nossa loja',
+    contact_vistaTienda: 'Visite nossa loja',
     contact_horarioAtencion: 'Horas de serviço:',
     contact_comollegar: 'Como chegar lá?',
     contact_title2: 'Mensagens',
