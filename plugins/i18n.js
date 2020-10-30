@@ -16,7 +16,7 @@ export default ({ app, store }) => {
       ? store.state.dataStore.tienda.lenguaje
       : 'es'
   app.i18n = new VueI18n({
-    locale: lenguaje,
+    locale: lenguaje.toLowerCase(),
     messages: {
       es: Object.assign({}, ...es),
       en: Object.assign({}, ...en),

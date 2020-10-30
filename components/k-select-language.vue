@@ -22,7 +22,7 @@
 export default {
   name: 'k-select-language',
   mounted() {
-    switch (this.dataStore.tienda.lenguaje) {
+    switch (this.dataStore.tienda.lenguaje.toLowerCase()) {
       case 'es':
         this.select.label = 'Spanish (es)'
         this.select.lng = 'es'
@@ -40,8 +40,8 @@ export default {
   data() {
     return {
       select: {
-        label: '',
-        lng: '',
+        label: 'Spanish (es)',
+        lng: 'es',
       },
       showDropdown: false,
       options: [
