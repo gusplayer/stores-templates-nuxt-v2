@@ -6,7 +6,8 @@
 
 <script>
 import KoTemplate5 from './template5/index'
-import KoTemplate6 from './template6/index'
+import KoTemplate6 from './template6/index_macrobrand'
+// import KoTemplate6 from './template6/index'
 import KoTemplate7 from './template7/index'
 
 export default {

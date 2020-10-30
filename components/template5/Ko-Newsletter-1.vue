@@ -81,6 +81,7 @@ export default {
               axios
                 .post('https://api2.komercia.co/api/tienda/suscriptor', json)
                 .then((res) => {
+                  window.fbq('track', 'Lead', { email: this.email })
                   this.register = 'Tu correo ha sido registrado'
                   this.$message.success('Comentario enviado!')
                   this.email = ''

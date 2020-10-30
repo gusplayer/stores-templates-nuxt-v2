@@ -1,5 +1,13 @@
 <template lang="html">
-  <div class="home">
+  <div
+    class="home"
+    :style="
+      this.$store.state.settingByTemplate &&
+      this.$store.state.settingByTemplate['--background_color_1']
+        ? this.$store.state.settingByTemplate
+        : this.settingBase
+    "
+  >
     <div class="space-search"></div>
     <div class="search-movil" id="navbar">
       <form id="demo-1" style="width: 100%; position: relative;">
@@ -13,22 +21,35 @@
         />
       </form>
     </div>
-    <p>banner</p>
-    <p>productsFavoritos</p>
-    <p>productsList</p>
-    <p>Video</p>
-    <p>Contenido</p>
-    <p>NewsLetter</p>
+    <kBanner v-if="this.stateBanner" />
+    <kBannerMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
+    <KProductFavoritos v-if="this.stateBanner" />
+    <KProductList
+      :dataStore="dataStore"
+      :fullProducts="fullProducts"
+    ></KProductList>
+    <kContentMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
+    <kBannerFooter />
   </div>
 </template>
 
 <script>
 import kBanner from '../../components/template5/ko-Banner-1'
+import kBannerMacrobrand from '../../components/template6/ko-Banner-macrobrand'
+import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
+import KProductList from '../../components/template6/Ko-ProductList-2'
+import kContentMacrobrand from '../../components/template6/Ko-Content-macrobrand'
+import kBannerFooter from '../../components/template5/ko-BannerFooter-1'
 
 export default {
   layout: 'default',
   components: {
     kBanner,
+    KProductList,
+    KProductFavoritos,
+    kBannerFooter,
+    kContentMacrobrand,
+    kBannerMacrobrand,
   },
   data() {
     return {
@@ -44,6 +65,12 @@ export default {
     },
     fullProducts() {
       return this.$store.getters['products/filterProducts']
+    },
+    settingBase() {
+      return this.$store.state.settingBase
+    },
+    stateBanner() {
+      return this.$store.state.stateBanner
     },
   },
   methods: {

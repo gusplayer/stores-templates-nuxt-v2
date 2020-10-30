@@ -341,6 +341,12 @@ export default {
           } else {
             this.$store.state.productsCart.push(product)
           }
+          window.fbq('track', 'AddToCart', {
+            idProducto: this.product.id,
+            NombreProducto: this.product.nombre,
+            cantidad: 1,
+            descripcion: 'Agregado rápido',
+          })
           this.$store.commit('UPDATE_CONTENTCART')
           // this.$router.push('/')
           this.$store.state.openOrder = true

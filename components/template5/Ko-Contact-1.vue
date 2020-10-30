@@ -234,6 +234,10 @@ export default {
               .post('https://templates.komercia.co/api/mensaje-contacto', json)
               .then((response) => {
                 this.$message.success('Comentario enviado!')
+                window.fbq('track', 'Contact', {
+                  Nombre: this.nombre,
+                  Correo: this.email,
+                })
               })
           }
         })

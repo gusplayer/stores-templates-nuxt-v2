@@ -68,6 +68,7 @@ export default {
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
+        window.fbq('track', 'Search', { ValorBuscado: value })
       } else {
         location.href = '?search=' + ''
       }

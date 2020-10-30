@@ -565,8 +565,10 @@ export default {
       if (this.$store.state.productsCart.length != 0) {
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
+          window.fbq('track', 'InitiateCheckout')
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
+          window.fbq('track', 'InitiateCheckout')
         }
       }
     },
