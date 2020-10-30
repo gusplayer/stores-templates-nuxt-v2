@@ -273,7 +273,7 @@ export default {
     },
     openMenu(name) {
       var intro = document.getElementById('menu-collapse')
-      if (name == 'Categorías') {
+      if (name == 'header_categorias') {
         this.showMenu = !this.showMenu
       }
       if (this.showMenu == false) {
@@ -281,10 +281,10 @@ export default {
       } else {
         intro.style.display = 'flex'
       }
-      if (name == 'Inicio') {
+      if (name == 'header_inicio') {
         this.clear()
       }
-      if (name == 'Contacto') {
+      if (name == 'header_contacto') {
         this.showMenu = false
       }
     },
