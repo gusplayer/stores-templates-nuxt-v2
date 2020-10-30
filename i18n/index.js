@@ -527,12 +527,11 @@ export default {
     contact_enviar: 'Enviar',
     // Newsletter
     newsletter_subtitle: 'SUSCRÍBASE',
-    newsletter_title:
-      'Suscríbete a nuestro boletín de noticias para que te enviemos promociones.',
+    newsletter_title: 'Assine nossa newsletter para enviar-lhe promoções.',
     newsletter_email: 'E-mail',
     newsletter_btn: ' Suscríbete',
     newsletter_msg:
-      'Acepto recibir correo electrónico e información, según la política de datos personales',
+      'Concordo em receber e-mails e informações, de acordo com a política de dados pessoais',
     // General
     home_destacados: 'Destacados',
     home_catalogo: 'Catálogo',
