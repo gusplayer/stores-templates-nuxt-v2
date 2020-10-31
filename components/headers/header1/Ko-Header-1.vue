@@ -256,6 +256,9 @@ export default {
     product() {
       return this.dataStore.productos
     },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
   },
   methods: {
     openOrder() {
@@ -396,7 +399,9 @@ export default {
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        window.fbq('track', 'Search', { ValorBuscado: value })
+        if (this.facebooPixel != null) {
+          window.fbq('track', 'Search', { ValorBuscado: value })
+        }
       } else {
         location.href = '?search=' + ''
       }

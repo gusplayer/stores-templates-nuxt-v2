@@ -62,6 +62,9 @@ export default {
     stateBanner() {
       return this.$store.state.stateBanner
     },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
   },
   methods: {
     Searchproduct(search) {
@@ -71,7 +74,9 @@ export default {
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        window.fbq('track', 'Search', { ValorBuscado: value })
+        if (this.facebooPixel != null) {
+          window.fbq('track', 'Search', { ValorBuscado: value })
+        }
       } else {
         location.href = '?search=' + ''
       }

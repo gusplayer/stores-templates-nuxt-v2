@@ -233,6 +233,9 @@ export default {
     }
   },
   computed: {
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
     dataStore() {
       return this.$store.state.dataStore
     },
@@ -341,12 +344,14 @@ export default {
           } else {
             this.$store.state.productsCart.push(product)
           }
-          window.fbq('track', 'AddToCart', {
-            idProducto: this.product.id,
-            NombreProducto: this.product.nombre,
-            cantidad: 1,
-            descripcion: 'Agregado rápido',
-          })
+          if (this.facebooPixel != null) {
+            window.fbq('track', 'AddToCart', {
+              idProducto: this.product.id,
+              NombreProducto: this.product.nombre,
+              cantidad: 1,
+              descripcion: 'Agregado rápido',
+            })
+          }
           this.$store.commit('UPDATE_CONTENTCART')
           // this.$router.push('/')
           this.$store.state.openOrder = true

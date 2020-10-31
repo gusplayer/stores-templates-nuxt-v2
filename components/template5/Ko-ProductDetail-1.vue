@@ -460,6 +460,9 @@ export default {
           product.id !== this.data.detalle.id
       )
     },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
   },
   methods: {
     changeSlide() {
@@ -510,11 +513,15 @@ export default {
               this.spent = true
             }
             this.loading = false
-            window.fbq('track', 'ViewContent', {
-              idProducto: idOfSlug,
-              NombreProducto: this.data.detalle.nombre,
-              descripcion: 'Ver producto en específico',
-            })
+            if (this.facebooPixel != null) {
+              if (this.facebooPixel != null) {
+                window.fbq('track', 'ViewContent', {
+                  idProducto: idOfSlug,
+                  NombreProducto: this.data.detalle.nombre,
+                  descripcion: 'Ver producto en específico',
+                })
+              }
+            }
           })
       } else {
         this.selectedPhoto(this.productsData[0].foto_cloudinary)
@@ -664,12 +671,14 @@ export default {
       } else {
         this.$store.state.productsCart.push(product)
       }
-      window.fbq('track', 'AddToCart', {
-        idProducto: this.data.detalle.id,
-        NombreProducto: this.data.detalle.nombre,
-        cantidad: this.data.cantidad,
-        descripcion: 'Agregado detalle del producto',
-      })
+      if (this.facebooPixel != null) {
+        window.fbq('track', 'AddToCart', {
+          idProducto: this.data.detalle.id,
+          NombreProducto: this.data.detalle.nombre,
+          cantidad: this.data.cantidad,
+          descripcion: 'Agregado detalle del producto',
+        })
+      }
       this.$store.commit('UPDATE_CONTENTCART')
       this.$router.push('/')
       this.$store.state.openOrder = true

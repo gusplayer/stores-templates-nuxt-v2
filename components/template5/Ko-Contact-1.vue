@@ -217,6 +217,11 @@ export default {
     this.numberphone = ''
     this.comment = ''
   },
+  computed: {
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
+  },
   methods: {
     submitContact() {
       this.$refs.observer
@@ -234,10 +239,12 @@ export default {
               .post('https://templates.komercia.co/api/mensaje-contacto', json)
               .then((response) => {
                 this.$message.success('Comentario enviado!')
-                window.fbq('track', 'Contact', {
-                  Nombre: this.nombre,
-                  Correo: this.email,
-                })
+                if (this.facebooPixel != null) {
+                  window.fbq('track', 'Contact', {
+                    Nombre: this.nombre,
+                    Correo: this.email,
+                  })
+                }
               })
           }
         })

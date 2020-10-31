@@ -60,6 +60,9 @@ export default {
     settingBase() {
       return this.$store.state.settingBase
     },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
   },
   methods: {
     Searchproduct(search) {
@@ -68,7 +71,9 @@ export default {
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        window.fbq('track', 'Search', { ValorBuscado: value })
+        if (this.facebooPixel != null) {
+          window.fbq('track', 'Search', { ValorBuscado: value })
+        }
       } else {
         location.href = '?search=' + ''
       }
