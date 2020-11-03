@@ -19,7 +19,7 @@
         <template>
           <div class="wrapper-category-all" v-if="showMenu">
             <li @click="clear">
-              <p class="name-category-all">Todos los productos</p>
+              <p class="name-category-all">{{ $t('header_allProduct') }}</p>
             </li>
             <div
               v-for="categoria in categorias"

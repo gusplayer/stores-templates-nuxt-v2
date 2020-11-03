@@ -70,7 +70,7 @@
             <search-icon class="icon-s" @click="focusInput" />
             <input
               type="search"
-              placeholder="¿Qué buscas?"
+              :placeholder="$t('header_search')"
               v-model="search"
               @keyup.enter="getSearch(search)"
               id="SearchHeader"
@@ -101,7 +101,7 @@
                   : ''
               "
             >
-              Todos los productos
+              {{ $t('header_allProduct') }}
             </p>
           </li>
           <div class="menu-grid">

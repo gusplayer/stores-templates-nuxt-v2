@@ -2,9 +2,9 @@
   <div class="wrapper-card">
     <div class="container">
       <div class="wrapper-movil">
-        <p class="card-info-1" v-if="soldOut">Agotado !</p>
+        <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
         <p class="card-info-2" v-if="getFreeShipping == false">
-          Envío gratis !
+          {{ $t('home_cardGratis') }}
         </p>
         <router-link
           :to="{
@@ -108,7 +108,8 @@
                   path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
                 }"
                 class="btn"
-                >compra</router-link
+              >
+                {{ $t('productdetail_btnComprar') }}</router-link
               >
             </div>
 
@@ -118,7 +119,8 @@
               }"
               v-else
               class="btn"
-              >compra</router-link
+            >
+              {{ $t('productdetail_btnComprar') }}</router-link
             >
           </div>
         </div>

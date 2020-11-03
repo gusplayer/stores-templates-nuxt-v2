@@ -5,6 +5,9 @@ export default {
     header_categorias: 'Categorías',
     header_contacto: 'Contacto',
     header_carrito: 'Carrito',
+    header_search: '¿Qué buscas?',
+    header_allProduct: 'Todos los productos',
+    header_tiendaWa: 'Tienda WhatsApp',
     //footer
     footer_inicio: 'Inicio',
     footer_carrito: 'Carrito',
@@ -63,6 +66,9 @@ export default {
     footer_formDireccion: 'Dirección',
     footer_formDireccionMgs: 'Tu dirección',
     footer_ordenFormbtn: 'Finalizar compra',
+    footer_pedidoWhatsapp: 'Pedido por WhatsApp',
+    footer_noTieneWhatsapp:
+      ' La tienda no tiene configurado un número de WhatsApp',
     // Micompra
     mcompra_title: 'Seguimiento de tu compra',
     mcompra_inputtitle: 'Número de Orden',
@@ -154,6 +160,7 @@ export default {
     home_cardvermas: 'Ver más',
     home_cardAgregar: 'Agregar',
     home_destacadosMsg: 'Productos relacionados que podrían interesarte',
+    home_todo: 'Todo',
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
@@ -192,6 +199,11 @@ export default {
       'El valor del envío se calcula de acuerdo al total de compra',
     productdetail_gratis: 'Gratis',
     productdetail_gratisMsg: 'El valor del envío no tiene costo',
+    //wa
+    productdetail_solicitarInfo: 'Solicitar información',
+    productdetail_cotizar: 'Cotizar',
+    productdetail_productoAgotado: 'Producto agotado',
+    productdetail_seleccionarOpcion: 'Seleccionar opción',
   },
   en: {
     // header
@@ -199,6 +211,9 @@ export default {
     header_categorias: 'Categories',
     header_contacto: 'Contact',
     header_carrito: 'Cart',
+    header_search: 'Search',
+    header_allProduct: 'All products',
+    header_tiendaWa: 'WhatsApp Store',
     //footer
     footer_inicio: 'Home',
     footer_carrito: 'Cart',
@@ -255,6 +270,9 @@ export default {
     footer_formBarrioMgs: 'Your neighborhood',
     footer_formDireccion: 'Address',
     footer_formDireccionMgs: 'Your address',
+    footer_pedidoWhatsapp: 'WhatsApp Order',
+    footer_noTieneWhatsapp:
+      'The store does not have a WhatsApp number configured',
     // Micompra
     mcompra_title: 'Track your purchase',
     mcompra_inputtitle: 'Order Number',
@@ -338,7 +356,7 @@ export default {
     newsletter_msg:
       'I agree to receive email and information, under the personal data policy',
     // General
-    home_destacados: 'Destacados',
+    home_destacados: 'Featured Products',
     home_catalogo: 'Catalog',
     home_msgCatalogo: 'No related products were found.',
     home_cardAgotado: 'Sold out!',
@@ -346,6 +364,7 @@ export default {
     home_cardvermas: 'View more',
     home_cardAgregar: 'Add',
     home_destacadosMsg: 'Related products that might interest you',
+    home_todo: 'All',
     //productdetail
     productdetail_garantia: 'Warranty:',
     productdetail_btnComprar: 'Purchase',
@@ -385,6 +404,10 @@ export default {
       'The value of the shipment is calculated according to the total purchase.',
     productdetail_gratis: 'Free',
     productdetail_gratisMsg: 'The value of the shipment has no cost',
+    productdetail_solicitarInfo: 'Request information',
+    productdetail_cotizar: 'Quote',
+    productdetail_productoAgotado: 'Product sold out',
+    productdetail_seleccionarOpcion: 'Select option',
   },
   pt: {
     // header
@@ -392,6 +415,9 @@ export default {
     header_categorias: 'Categorias',
     header_contacto: 'Contacto',
     header_carrito: 'Carroça',
+    header_search: 'Busca',
+    header_allProduct: 'Todos os produtos',
+    header_tiendaWa: 'WhatsApp Store',
     //footer
     footer_inicio: 'Home',
     footer_carrito: 'Carroça',
@@ -449,6 +475,8 @@ export default {
     footer_formBarrioMgs: 'Sua vizinhança',
     footer_formDireccion: 'Endereço',
     footer_formDireccionMgs: 'Sua Endereço',
+    footer_pedidoWhatsapp: 'WhatsApp Order',
+    footer_noTieneWhatsapp: 'A loja não tem um número WhatsApp configurado',
     // Micompra
     mcompra_title: 'Rastreando sua compra',
     mcompra_inputtitle: 'Número do pedido',
@@ -541,6 +569,7 @@ export default {
     home_cardvermas: 'Veja mais',
     home_cardAgregar: 'Adicione',
     home_destacadosMsg: 'Produtos relacionados que possam lhe interessar',
+    home_todo: 'Todo',
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
@@ -580,5 +609,9 @@ export default {
       'O valor da remessa é calculado de acordo com a compra total.',
     productdetail_gratis: 'Gratis',
     productdetail_gratisMsg: 'O valor da remessa não tem custo',
+    productdetail_solicitarInfo: 'Solicitar informações',
+    productdetail_cotizar: 'Citação',
+    productdetail_productoAgotado: 'Produto esgotado',
+    productdetail_seleccionarOpcion: 'Selecione a opção',
   },
 }

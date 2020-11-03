@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="under-footer">
-        <p>Desarrollado por Komercia Latam</p>
+        <p>{{ $t('footer_desarrollado') }}</p>
         <a
           href="https://komercia.co/"
           target="_blank"

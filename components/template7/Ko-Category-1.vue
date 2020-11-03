@@ -11,7 +11,9 @@
             />
           </div>
           <div class="content-text">
-            <p class="name-category" @click="clear">Todos los productos</p>
+            <p class="name-category" @click="clear">
+              {{ $t('header_allProduct') }}
+            </p>
           </div>
         </ul>
         <ul

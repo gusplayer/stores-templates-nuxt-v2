@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-ProductFavoritos" v-if="dataProductFavorite.length">
     <div class="content-title-ProductFavoritos">
-      <p class="title-ProductFavoritos">Destacados</p>
+      <p class="title-ProductFavoritos">{{ $t('home_destacados') }}</p>
     </div>
     <div class="container-favorite" id="swiper-slide-favorite">
       <div
@@ -43,7 +43,7 @@
             <div v-else class="separador-price"></div>
           </div>
           <div class="card-button">
-            <p>compra</p>
+            <p>{{ $t('productdetail_btnComprar') }}</p>
           </div>
         </router-link>
       </div>

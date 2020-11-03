@@ -8,7 +8,9 @@
         @change="updateValue()"
         :style="value == -1 || !value ? 'color: rgba(21, 20, 57, 0.4);' : ''"
       >
-        <option selected disabled>Seleccionar opción</option>
+        <option selected disabled>
+          {{ $t('productdetail_seleccionarOpcion') }}</option
+        >
         <slot></slot>
         <!-- <option v-for="(item, index) in options" :key="index" @input="updateValue()" :value="value">{{item.type}}</option> -->
       </select>

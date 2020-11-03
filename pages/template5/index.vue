@@ -15,7 +15,7 @@
         <input
           v-model="search"
           type="search"
-          placeholder="¿Qué buscas?"
+          :placeholder="$t('header_search')"
           @keyup.enter="getSearch(search)"
           id="SearchIndex5"
         />

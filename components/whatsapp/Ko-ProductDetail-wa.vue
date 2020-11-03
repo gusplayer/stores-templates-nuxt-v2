@@ -37,10 +37,12 @@
             </div>
             <div class="content_buy_action">
               <div v-if="envio.titulo == 'Envío gratis'">
-                <p class="card-info-2">Envío gratis !</p>
+                <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
               </div>
               <div class="content_card-info">
-                <p class="card-info-1" v-if="spent">Agotado !</p>
+                <p class="card-info-1" v-if="spent">
+                  {{ $t('home_cardAgotado') }}
+                </p>
               </div>
             </div>
             <div
@@ -63,7 +65,9 @@
             </div>
             <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
               <button class="btn-whatsapp" @click="redirectWP()">
-                <whatsapp-icon class="wp-icon" />Solicitar información
+                <whatsapp-icon class="wp-icon" />{{
+                  $t('productdetail_solicitarInfo')
+                }}
               </button>
             </div>
           </div>
@@ -71,13 +75,15 @@
       </div>
       <div class="content-description">
         <div v-if="data.info.descripcion" class="wrapper-description">
-          <h3 class="text-variant">Descripción</h3>
+          <h3 class="text-variant">{{ $t('productdetail_description') }}</h3>
           <div class="content-text-desc" v-html="data.info.descripcion"></div>
         </div>
       </div>
       <div class="content-btn-whatsapp-res" v-if="dataStore.tienda.whatsapp">
         <button class="btn-whatsapp" @click="redirectWP()">
-          <whatsapp-icon class="wp-icon" />Solicitar información
+          <whatsapp-icon class="wp-icon" />{{
+            $t('productdetail_solicitarInfo')
+          }}
         </button>
       </div>
       <div class="responsive-purchase">
@@ -95,7 +101,7 @@
                 class="container-alert"
                 v-show="quantityValue == maxQuantityValue"
               >
-                <span class="alert">última Unidad!</span>
+                <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
               </div>
             </transition>
           </div>
@@ -106,7 +112,7 @@
             v-on:click="addShoppingCart"
           >
             <span>
-              Comprar
+              {{ $t('productdetail_btnComprar') }}
             </span>
           </button>
           <button
@@ -116,11 +122,13 @@
             v-on:click="WPQuotation()"
           >
             <span>
-              Cotizar
+              {{ $t('productdetail_cotizar') }}
             </span>
           </button>
           <div v-if="spent" class="wrapper-btn">
-            <p class="card-info-1-res">😥 Producto agotado</p>
+            <p class="card-info-1-res">
+              😥 {{ $t('productdetail_productoAgotado') }}
+            </p>
           </div>
         </div>
       </div>

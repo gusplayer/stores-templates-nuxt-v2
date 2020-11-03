@@ -3,7 +3,7 @@
     <div class="order" @click="closeOrder" v-show="openOrder">
       <div class="order_content">
         <div class="order_header">
-          <h3>Tu orden</h3>
+          <h3>{{ $t('footer_title') }}</h3>
           <div @click="closedOder" class="order_header_close">
             <close-icon />
           </div>
@@ -80,11 +80,11 @@
                         (shippingCities.length <= 0 && getFreeShipping == false)
                       "
                     >
-                      Envío gratis en toda la tienda
+                      {{ $t('footer_encioGratis') }}
                     </p>
                   </span>
                   <span class="order_total_net">
-                    <p>Total compra</p>
+                    <p>{{ $t('footer_totalPagar') }}</p>
                     <p>
                       {{
                         (totalCart + (getFreeShipping ? 0 : shipping))
@@ -103,25 +103,25 @@
                     <img :src="img" class="photo" alt="empty car" />
                   </div>
                   <p class="text-cart-empty">
-                    Tu carrito de compras ahora está vacío.
+                    {{ $t('footer_carritoVacio') }}
                   </p>
                 </div>
               </template>
               <div class="content-button">
                 <p class="Quotation-message" v-if="isQuotation()">
-                  Contacte con la tienda para saber los precios de los productos
+                  {{ $t('footer_contactoMgs') }}
                 </p>
                 <p
                   class="Quotation-message"
                   v-if="dataStore.tienda.estado == 0"
                 >
-                  Tienda cerrada
+                  {{ $t('footer_tiendaCerrada') }}
                 </p>
                 <p
                   class="Quotation-message"
                   v-if="dataStore.tienda.whatsapp == ''"
                 >
-                  La tienda no tiene configurado un número de WhatsApp
+                  {{ $t('footer_noTieneWhatsapp') }}
                 </p>
                 <button
                   v-if="
@@ -133,7 +133,8 @@
                   class="continue_shopping"
                   @click="formOrden = !formOrden"
                 >
-                  <whatsapp-icon class="wp-icon" />Pedido por WhatsApp
+                  <whatsapp-icon class="wp-icon" />
+                  {{ $t('footer_pedidoWhatsapp') }}
                 </button>
               </div>
             </div>
@@ -142,9 +143,9 @@
       </div>
       <div class="wrapper-items-form" v-if="formOrden">
         <div class="content-items-form">
-          <p class="form-text">Completa tu pedido</p>
+          <p class="form-text">{{ $t('footer_formtittle') }}</p>
           <ValidationObserver ref="observer" tag="form" class="items-form">
-            <p class="form-subtext">Nombre y Apellido</p>
+            <p class="form-subtext">{{ $t('footer_formNombre') }}</p>
             <validation-provider
               name="nombre"
               rules="required"
@@ -156,7 +157,7 @@
                   type="text"
                   v-model="nombre"
                   class="input-text"
-                  placeholder="Escribe tu nombre"
+                  :placeholder="$t('footer_formNombreMgs')"
                   id="ContactName"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -164,7 +165,7 @@
                 </span>
               </template>
             </validation-provider>
-            <P class="form-subtext">Ciudad</P>
+            <P class="form-subtext"> {{ $t('footer_formCiudad') }}</P>
             <validation-provider
               name="ciudad"
               rules="required"
@@ -174,7 +175,7 @@
                 <input
                   class="input-text"
                   name="ciudad"
-                  placeholder="Tu ciudad"
+                  :placeholder="$t('footer_formCiudadMgs')"
                   v-model="ciudad"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -182,7 +183,7 @@
                 </span>
               </template>
             </validation-provider>
-            <P class="form-subtext">Barrio</P>
+            <P class="form-subtext"> {{ $t('footer_formBarrio') }}</P>
             <validation-provider
               name="barrio"
               rules="required"
@@ -192,7 +193,7 @@
                 <input
                   class="input-text"
                   name="barrio"
-                  placeholder="Tu barrio"
+                  :placeholder="$t('footer_formBarrioMgs')"
                   v-model="barrio"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -200,7 +201,7 @@
                 </span>
               </template>
             </validation-provider>
-            <P class="form-subtext">Dirección</P>
+            <P class="form-subtext"> {{ $t('footer_formDireccion') }}</P>
             <validation-provider
               name="dirreccion"
               rules="required"
@@ -210,7 +211,7 @@
                 <input
                   class="input-text"
                   name="dirreccion"
-                  placeholder="Tu dirección"
+                  :placeholder="$t('footer_formDireccionMgs')"
                   v-model="dirreccion"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -232,7 +233,7 @@
           v-on:click.prevent="redirectWP()"
           style="margin-top: 15px;"
         >
-          <whatsapp-icon class="wp-icon" />Finalizar compra
+          <whatsapp-icon class="wp-icon" /> {{ $t('footer_ordenFormbtn') }}
         </button>
       </div>
     </div>

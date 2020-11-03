@@ -3,7 +3,9 @@
     <div class="container">
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
-          <p class="text-categorias" @click="clear">Catálogo</p>
+          <p class="text-categorias" @click="clear">
+            {{ $t('home_catalogo') }}
+          </p>
           <p
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
@@ -34,7 +36,7 @@
             v-if="(this.fullProducts.length == 0)"
             class="content-products-empty"
           >
-            <p>No se encontraron productos relacionados.</p>
+            <p>{{ $t('home_msgCatalogo') }}</p>
           </div>
           <div class="pagination-medium" v-if="products.length > 16">
             <el-pagination
