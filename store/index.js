@@ -396,7 +396,7 @@ export const mutations = {
   },
   SET_TEMPLATE_STORE(state, value) {
     state.template = value
-    // state.template = 7
+    // state.template = 6
   },
 }
 export const actions = {
@@ -490,9 +490,11 @@ export const actions = {
   },
   GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
     let template = store.template
-    let id = store.id_tienda
+    // let template = 6
     this.$axios
-      .$get(`https://api2.komercia.co/api/template/${template}/settings/${id}`)
+      .$get(
+        `https://api2.komercia.co/api/template/${template}/settings/${store.id_tienda}`
+      )
       .then((response) => {
         commit('SET_SETTINGS_BY_TEMPLATE', response.data)
       })
@@ -608,14 +610,6 @@ export const actions = {
         commit('SET_PROPERTIES', response.data.data)
       })
   },
-  // GET_SHOPPING_CART({ commit }) {
-  //   if (localStorage.getItem('ShoppingCart')) {
-  //     commit(
-  //       'SET_SHOPPING_CART',
-  //       JSON.parse(localStorage.getItem('ShoppingCart'))
-  //     )
-  //   }
-  // },
   GET_SHOPPING_CART({ state, commit }) {
     if (
       localStorage.getItem(`ShoppingCart/${state.dataStore.tienda.id_tienda}`)

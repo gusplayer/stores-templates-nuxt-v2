@@ -24,7 +24,7 @@
                 :to="item.path"
                 v-if="item.path"
                 class="header-text-center"
-                >{{ item.name }}</nuxt-link
+                >{{ $t(`${item.name}`) }}</nuxt-link
               >
               <div v-else>
                 <div
@@ -36,7 +36,7 @@
                   "
                 >
                   <p class="header-text-center-icon">
-                    {{ item.name }}
+                    {{ $t(`${item.name}`) }}
                   </p>
                   <div
                     class="header-text-center-icon"
@@ -70,7 +70,7 @@
             <search-icon class="icon-s" @click="focusInput" />
             <input
               type="search"
-              placeholder="¿Qué buscas?"
+              :placeholder="$t('header_search')"
               v-model="search"
               @keyup.enter="getSearch(search)"
               id="SearchHeader"
@@ -101,7 +101,7 @@
                   : ''
               "
             >
-              Todos los productos
+              {{ $t('header_allProduct') }}
             </p>
           </li>
           <div class="menu-grid">
@@ -229,16 +229,16 @@ export default {
       ],
       secciones: [
         {
-          name: 'Inicio',
+          name: 'header_inicio',
           path: '/',
         },
         {
-          name: 'Categorías',
+          name: 'header_categorias',
           iconOpen: 'Flechadown-icon',
           iconClose: 'FlechaUp-icon',
         },
         {
-          name: 'Contacto',
+          name: 'header_contacto',
           path: '/contacto',
         },
       ],
@@ -266,6 +266,9 @@ export default {
     product() {
       return this.dataStore.productos
     },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
   },
   methods: {
     openOrder() {
@@ -278,7 +281,7 @@ export default {
     },
     openMenu(name) {
       var intro = document.getElementById('menu-collapse')
-      if (name == 'Categorías') {
+      if (name == 'header_categorias') {
         this.showMenu = !this.showMenu
       }
       if (this.showMenu == false) {
@@ -286,10 +289,10 @@ export default {
       } else {
         intro.style.display = 'flex'
       }
-      if (name == 'Inicio') {
+      if (name == 'header_inicio') {
         this.clear()
       }
-      if (name == 'Contacto') {
+      if (name == 'header_contacto') {
         this.showMenu = false
       }
     },
@@ -401,6 +404,9 @@ export default {
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
+        if (this.facebooPixel != null) {
+          window.fbq('track', 'Search', { ValorBuscado: value })
+        }
       } else {
         location.href = '?search=' + ''
       }

@@ -50,12 +50,13 @@
               class="header-horario"
               v-if="dataStore.geolocalizacion[0].horario"
             >
-              Horario de atención: {{ dataStore.geolocalizacion[0].horario }}
+              {{ $t('contact_horarioAtencion') }}
+              {{ dataStore.geolocalizacion[0].horario }}
             </p>
           </div>
         </div>
         <div class="container-tienda-wp">
-          <p><whatsapp-icon class="wp-icon" />Tienda WhatsApp</p>
+          <p><whatsapp-icon class="wp-icon" /> {{ $t('header_tiendaWa') }}</p>
         </div>
       </div>
     </div>

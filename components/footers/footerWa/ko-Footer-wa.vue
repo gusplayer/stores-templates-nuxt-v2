@@ -6,7 +6,7 @@
         item
       </p>
       <p class="text-footer carrito">
-        <whatsapp-icon class="wp-icon" />Comprar
+        <whatsapp-icon class="wp-icon" /> {{ $t('productdetail_btnComprar') }}
       </p>
       <p class="text-footer valor" v-if="productsCart.length > 0">
         <span>{{

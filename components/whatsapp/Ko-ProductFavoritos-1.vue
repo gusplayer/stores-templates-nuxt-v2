@@ -1,12 +1,12 @@
 <template>
-  <div class="wrapper-ProductFavoritos" v-if="orderproduct.length">
+  <div class="wrapper-ProductFavoritos" v-if="dataProductFavorite.length">
     <div class="content-title-ProductFavoritos">
-      <p class="title-ProductFavoritos">Destacados</p>
+      <p class="title-ProductFavoritos">{{ $t('home_destacados') }}</p>
     </div>
     <div class="container-favorite" id="swiper-slide-favorite">
       <div
         class="card-favorite"
-        v-for="product in orderproduct"
+        v-for="product in dataProductFavorite"
         :key="product.id"
       >
         <router-link
@@ -43,7 +43,7 @@
             <div v-else class="separador-price"></div>
           </div>
           <div class="card-button">
-            <p>Comprar</p>
+            <p>{{ $t('productdetail_btnComprar') }}</p>
           </div>
         </router-link>
       </div>
@@ -51,14 +51,14 @@
     <div
       class="btn-scroll icon-prev"
       @click="scrollLeft()"
-      v-if="orderproduct.length > 6"
+      v-if="dataProductFavorite.length > 6"
     >
       <FlechaLeft-icon class="btn-scroll-icon" />
     </div>
     <div
       class="btn-scroll icon-next"
       @click="scrollRight()"
-      v-if="orderproduct.length > 6"
+      v-if="dataProductFavorite.length > 6"
     >
       <FlechaRight-icon class="btn-scroll-icon" />
     </div>
@@ -78,11 +78,6 @@ export default {
       return this.$store.state.products.fullProducts.filter(
         (product) => product.favorito === 1
       )
-    },
-    orderproduct() {
-      return this.dataProductFavorite.sort(function (prev, next) {
-        return next.orden - prev.orden
-      })
     },
   },
   methods: {

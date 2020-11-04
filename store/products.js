@@ -22,7 +22,14 @@ export const state = () => ({
 export const getters = {
   filterProducts: (state) => {
     if (state.type === 'search') {
-      return new Fuse(state.fullProducts, state.options).search(state.payload)
+      let fuse = new Fuse(state.fullProducts, state.options).search(
+        state.payload
+      )
+      let results = []
+      fuse.forEach((items) => {
+        results.push(items.item)
+      })
+      return results
     } else if (state.type === 'subcategory') {
       return state.fullProducts.filter(
         (product) => product.subcategoria === state.payload
@@ -32,7 +39,9 @@ export const getters = {
         (product) => product.categoria === state.payload
       )
     }
-    return state.fullProducts
+    return state.fullProducts.sort(function (prev, next) {
+      return next.orden - prev.orden
+    })
   },
 }
 export const mutations = {

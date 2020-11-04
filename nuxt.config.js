@@ -30,6 +30,7 @@ export default {
     '~/plugins/cloudinary',
     '~/plugins/material-icons',
     '~plugins/validate.js',
+    { src: '~/plugins/i18n' },
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },

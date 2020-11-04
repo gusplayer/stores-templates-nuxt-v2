@@ -1,11 +1,11 @@
 <template>
-  <div class="wrapper-ProductFavoritos" v-if="orderproduct.length">
+  <div class="wrapper-ProductFavoritos" v-if="category.length">
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">
-        Productos relacionados que podrían interesarte
+        {{ $t('home_destacadosMsg') }}
       </p>
     </div>
-    <KoSwipper :products="orderproduct"></KoSwipper>
+    <KoSwipper :products="category"></KoSwipper>
   </div>
 </template>
 
@@ -18,13 +18,6 @@ export default {
   },
   components: {
     KoSwipper,
-  },
-  computed: {
-    orderproduct() {
-      return this.category.sort(function (prev, next) {
-        return next.orden - prev.orden
-      })
-    },
   },
 }
 </script>

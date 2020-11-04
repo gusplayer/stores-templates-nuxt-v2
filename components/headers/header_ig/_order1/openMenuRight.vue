@@ -25,14 +25,14 @@
               <form id="demo-1">
                 <input
                   type="search"
-                  placeholder="¿Qué buscas?"
+                  :placeholder="$t('header_search')"
                   v-model="search"
                   id="SearchHeader"
                 />
               </form>
             </div>
             <li @click="clear">
-              <p class="name-category-all">Todos los productos</p>
+              <p class="name-category-all">{{ $t('header_allProduct') }}</p>
             </li>
             <div
               v-for="categoria in categorias"

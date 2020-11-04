@@ -20,7 +20,7 @@
                 <search-icon class="icon-s" @click="focusInput" />
                 <input
                   type="search"
-                  placeholder="¿Qué buscas?"
+                  :placeholder="$t('header_search')"
                   v-model="search"
                   @keyup.enter="getSearch(search)"
                   id="SearchHeader"
@@ -90,6 +90,9 @@ export default {
     productsCart() {
       return this.$store.state.productsCart.length
     },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
   },
   methods: {
     openOrder() {
@@ -110,6 +113,9 @@ export default {
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
+        if (this.facebooPixel != null) {
+          window.fbq('track', 'Search', { ValorBuscado: value })
+        }
       } else {
         location.href = '?search=' + ''
       }

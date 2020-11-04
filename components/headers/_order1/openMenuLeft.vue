@@ -19,7 +19,7 @@
         <template>
           <div class="wrapper-category-all" v-if="showMenu">
             <li @click="clear">
-              <p class="name-category-all">Todos los productos</p>
+              <p class="name-category-all">{{ $t('header_allProduct') }}</p>
             </li>
             <div
               v-for="categoria in categorias"
@@ -75,7 +75,7 @@
             >
               <nuxt-link :to="item.path" class="text-secciones">
                 <div v-if="item.path" :is="item.icon" class="icon" />
-                {{ item.name }}
+                {{ $t(`${item.name}`) }}
               </nuxt-link>
             </div>
           </div>
@@ -109,17 +109,17 @@ export default {
       indexSelect2: '',
       secciones: [
         {
-          name: 'Inicio',
+          name: 'header_inicio',
           path: '/',
           icon: 'menu-icon',
         },
         {
-          name: 'Carrito',
+          name: 'header_carrito',
           path: '/cart',
           icon: 'cart-icon',
         },
         {
-          name: 'Contacto',
+          name: 'header_contacto',
           path: '/contacto',
           icon: 'account-icon',
         },

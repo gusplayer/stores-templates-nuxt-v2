@@ -7,6 +7,9 @@ import {
   Checkbox,
   CheckboxButton,
   CheckboxGroup,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
   Select,
   Option,
   Button,
@@ -29,6 +32,9 @@ import locale from 'element-ui/lib/locale'
 Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Drawer)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
 Vue.use(Input)
 Vue.use(Checkbox)
 Vue.use(CheckboxButton)
@@ -47,7 +53,7 @@ locale.use(lang)
 Vue.use(Loading.directive)
 
 Vue.prototype.$message = Message
-Vue.use(Steps);
-Vue.use(Step);
-Vue.use(Collapse);
-Vue.use(CollapseItem);
+Vue.use(Steps)
+Vue.use(Step)
+Vue.use(Collapse)
+Vue.use(CollapseItem)

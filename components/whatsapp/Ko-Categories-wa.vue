@@ -15,7 +15,7 @@
             :class="idCategory == '' ? 'name-category-active ' : ''"
             @click="clear"
           >
-            Todo
+            {{ $t('home_todo') }}
           </p>
         </div>
         <div

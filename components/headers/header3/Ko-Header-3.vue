@@ -33,7 +33,7 @@
             <search-icon class="icon-s" @click="focusInput" />
             <input
               type="search"
-              placeholder="¿Qué buscas?"
+              :placeholder="$t('header_search')"
               v-model="search"
               @keyup.enter="getSearch(search)"
               id="SearchHeader"
@@ -129,21 +129,6 @@ export default {
           link: this.dataStore.tienda.red_youtube,
         },
       ],
-      secciones: [
-        {
-          name: 'Inicio',
-          path: '/',
-        },
-        {
-          name: 'Categorías',
-          iconOpen: 'Flechadown-icon',
-          iconClose: 'FlechaUp-icon',
-        },
-        {
-          name: 'Contacto',
-          path: '/contacto',
-        },
-      ],
       cat: [],
       add: true,
       selectSubcategory: '',
@@ -169,6 +154,9 @@ export default {
     fullPathServer() {
       return this.$store.state.fullPathServer
     },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
   },
   methods: {
     openOrder() {
@@ -188,6 +176,9 @@ export default {
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
+        if (this.facebooPixel != null) {
+          window.fbq('track', 'Search', { ValorBuscado: value })
+        }
       } else {
         location.href = '?search=' + ''
       }

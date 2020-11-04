@@ -8,7 +8,7 @@
         @change="updateValue()"
         :style="value == -1 || !value ? 'color: rgba(21, 20, 57, 0.4);' : ''"
       >
-        <option disabled>Seleccionar opción</option>
+        <option disabled>{{ $t('productdetail_seleccionarOpcion') }}</option>
         <slot></slot>
       </select>
     </div>
