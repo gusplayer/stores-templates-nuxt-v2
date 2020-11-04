@@ -1,7 +1,7 @@
 <template>
   <div class="footer-container">
     <div class="wrapper-footer" @click="openOrder">
-      <p class="text-footer" v-if="productsCart.length > 0">
+      <p class="text-footer unidades" v-if="productsCart.length > 0">
         <span>{{ productsCart.length }}</span>
         item
       </p>
@@ -119,20 +119,23 @@ export default {
 
 .unidades {
   width: 30%;
+  font-size: 13px;
+  font-weight: 600;
 }
 .carrito {
   width: 30%;
   align-items: center;
   text-align: center;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
 }
 .valor {
   width: 30%;
   text-align: right;
+  font-weight: 500;
 }
 .valor span {
-  font-size: 12px;
+  font-size: 13px;
   text-align: right;
   background-color: #12a493;
   padding: 6px;

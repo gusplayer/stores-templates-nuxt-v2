@@ -43,7 +43,7 @@
             <div v-else class="separador-price"></div>
           </div>
           <div class="card-button">
-            <p>compra</p>
+            <p>Comprar</p>
           </div>
         </router-link>
       </div>
@@ -133,7 +133,7 @@ export default {
   position: relative;
   display: flex;
   width: 100%;
-  background-color: #fafaf8;
+  background-color: #f8f9fb;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -148,6 +148,7 @@ export default {
   justify-content: center;
   align-items: flex-start;
   padding: 10px 20px 20px 20px;
+  margin-right: 10px;
 }
 .content-title-ProductFavoritos {
   width: 100%;
@@ -185,7 +186,7 @@ export default {
   top: 50%;
   border-radius: 25px;
   padding: 0px 10px;
-  background: #e4e4e4;
+  /* background: #e4e4e4; */
   cursor: pointer;
 }
 .icon-prev {
@@ -203,9 +204,9 @@ export default {
   color: black;
   bottom: 0.125em;
 }
-.btn-scroll-icon:hover {
+/* .btn-scroll-icon:hover {
   color: white;
-}
+} */
 .card-button {
   margin-top: 6px;
   display: flex;
@@ -219,18 +220,23 @@ export default {
   box-shadow: 0 2px 10px rgba(131, 130, 131, 0.276);
   font-size: 13px;
   transition: all 200ms ease-in;
+  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: white;
+  color: #128c7e;
 }
-.card-button:hover {
+/* .card-button:hover {
   color: white;
   background: #128c7e;
-}
+} */
 .card-favorite {
   margin: 6px;
-  width: 130px;
+  margin-left: 10px;
+  width: 140px;
 }
 
 .card-favorite img {
-  width: 130px;
+  width: 140px;
   object-fit: contain;
   border-radius: 5px;
 }
@@ -244,12 +250,13 @@ export default {
 .card-price-2 {
   font-size: 13px;
   color: black;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
 }
 .separador-price {
-  height: 20px;
+  height: 10px;
   width: 100%;
+  background-color: #f8f9fb;
 }
 @media (max-width: 770px) {
   .swiper-container {

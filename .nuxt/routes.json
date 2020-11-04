@@ -105,11 +105,11 @@
     "_name": "_40726303"
   },
   {
-    "name": "wa-slug-producto-slug",
-    "path": "/wa/:slug?/producto/:slug?",
-    "component": "/Projects/template-nuxt-dokku/pages/wa/_slug/producto/_slug.vue",
-    "chunkName": "pages/wa/_slug/producto/_slug",
-    "_name": "_5a518a8c"
+    "name": "wa-slug-producto-slugProduct",
+    "path": "/wa/:slug?/producto/:slugProduct?",
+    "component": "/Projects/template-nuxt-dokku/pages/wa/_slug/producto/_slugProduct.vue",
+    "chunkName": "pages/wa/_slug/producto/_slugProduct",
+    "_name": "_0b6e8585"
   },
   {
     "name": "index",

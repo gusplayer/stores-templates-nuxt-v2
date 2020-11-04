@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-productDetail">
-    <div v-if="loading" v-loading="loading"></div>
-    <div class="container-productDetail" v-else>
+    <!-- <div v-if="true" v-loading="true"></div> -->
+    <div class="container-productDetail" v-if="!loading" v-loading="loading">
       <div class="wrapper-back">
         <div class="back-button">
           <p @click="$router.go(-1)"><FlechaLeft-icon /></p>
@@ -61,11 +61,11 @@
                 </selectGroup>
               </div>
             </div>
-            <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
+            <!-- <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
               <button class="btn-whatsapp" @click="redirectWP()">
                 <whatsapp-icon class="wp-icon" />Solicitar información
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -75,11 +75,11 @@
           <div class="content-text-desc" v-html="data.info.descripcion"></div>
         </div>
       </div>
-      <div class="content-btn-whatsapp-res" v-if="dataStore.tienda.whatsapp">
+      <!-- <div class="content-btn-whatsapp-res" v-if="dataStore.tienda.whatsapp">
         <button class="btn-whatsapp" @click="redirectWP()">
           <whatsapp-icon class="wp-icon" />Solicitar información
         </button>
-      </div>
+      </div> -->
       <div class="responsive-purchase">
         <div class="ko-input">
           <div class="quantity-resposive" v-if="!spent">
@@ -655,27 +655,31 @@ export default {
   position: relative;
 }
 .wrapper-back {
-  width: 100%;
+  background-color: #fafaf8;
+  box-shadow: 0 2px 10px rgba(131, 130, 131, 0.473);
+  width: 35px;
+  height: 35px;
+  border-radius: 45px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   position: absolute;
-  top: 0;
+  top: 20px;
+  left: 20px;
   z-index: 2;
 }
 .back-button {
-  padding: 15px 15px;
-  background-color: transparent;
+  display: flex;
+  /* padding: 25px 25px; */
   cursor: pointer;
+  justify-content: center;
+  text-align: center;
+  padding-left: 3px;
 }
 .back-button p {
-  background-color: #fafaf8;
-  border-radius: 20px;
-  width: 30px;
-  font-size: 20px;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(131, 130, 131, 0.473);
+  font-size: 28px;
+  color: #128c7e;
 }
 .back-button p:hover {
   background-color: #128c7e;
@@ -694,7 +698,6 @@ export default {
 }
 .photos_responsive {
   width: 100%;
-  max-width: 375px;
   display: flex;
   box-sizing: border-box;
   overflow: hidden;
@@ -712,7 +715,7 @@ export default {
 }
 .text-name {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 20px;
   color: #445a64;
   color: #0f2930;
@@ -740,8 +743,8 @@ export default {
   margin-left: 5px;
 }
 .text-precio {
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 700;
   color: #0f2930;
   margin-top: 5px;
 }
@@ -754,21 +757,21 @@ export default {
   margin-top: 10px;
 }
 .text-variant {
-  font-weight: 400;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 15px;
   color: #0f2930;
 }
 .content-text-desc {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 13px;
+  font-size: 14px;
   color: #0f2930;
 }
 .text-desc {
   text-decoration-color: currentcolor;
   text-decoration-style: solid;
   text-decoration-line: none;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: normal;
   color: rgba(21, 20, 57, 0.541);
   line-height: 1.5;
@@ -825,7 +828,7 @@ export default {
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
+  padding: 12px 10px;
   position: relative;
   background-color: #fafaf8;
   box-shadow: 0px 2px 2px rgba(52, 58, 67, 0.1),
@@ -894,6 +897,7 @@ export default {
 }
 .btn-responsive span {
   font-size: 16px;
+  font-weight: 600;
 }
 .btn-responsive:hover {
   background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
@@ -1020,8 +1024,10 @@ export default {
     margin-left: 0px;
   }
   .text-name {
-    font-weight: 400;
-    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 18px;
+    color: #445a64;
   }
   .content-description {
     padding: 0 15px;

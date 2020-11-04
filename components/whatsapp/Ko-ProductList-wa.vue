@@ -4,7 +4,7 @@
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
           <p class="text-categorias" @click="clear">Catálogo</p>
-          <p
+          <!-- <p
             class="text-categorias-select"
             v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
@@ -13,7 +13,7 @@
           </p>
           <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
             > {{ this.nameSubCategoryHeader }}
-          </p>
+          </p> -->
         </div>
       </div>
       <div>
@@ -36,6 +36,7 @@
           >
             <p>No se encontraron productos relacionados.</p>
           </div>
+          <br />
           <div class="pagination-medium" v-if="products.length > 16">
             <el-pagination
               background
@@ -305,8 +306,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  background-color: #fafaf8;
+  background-color: #f8f9fb;
   box-sizing: border-box;
   margin-top: 0px;
   padding-top: 5px;
