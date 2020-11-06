@@ -27,8 +27,21 @@
               v-for="product in filterProduct"
               :key="product.id"
               class="content-products"
+              itemscope
+              itemtype="http://schema.org/Product"
             >
-              <KoProductCard1 :product="product"></KoProductCard1>
+              <KoProductCard1
+                :product="product"
+                :settingByTemplate="settingByTemplate"
+              ></KoProductCard1>
+              <meta itemprop="productID" :content="`${product.id}`" />
+              <meta itemprop="name" :content="`${product.nombre}`" />
+              <meta itemprop="description" content="Producto" />
+              <meta itemprop="image" :content="`${product.foto_cloudinary}`" />
+              <meta itemprop="price" :content="`${product.precio}`" />
+              <meta itemprop="priceCurrency" :content="`${product.nombre}`" />
+              <meta itemprop="availability" :content="`${product.stock}`" />
+              <meta itemprop="itemCondition" content="New" />
             </div>
           </div>
           <div
