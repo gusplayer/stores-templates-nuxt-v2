@@ -284,14 +284,13 @@ export default {
 }
 .container-tienda-wp {
   display: initial;
-  background-color: #f9f9f9;
+  background-color: white;
   position: absolute;
-  top: 15px;
+  top: 10px;
   right: 25px;
   border-radius: 15px;
   padding: 4px 8px;
   box-shadow: 0 0 2px rgba(92, 100, 111, 0.1);
-  box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
   box-shadow: 0 2px 5px rgba(131, 130, 131, 0.276);
 }
 .container-tienda-wp p {

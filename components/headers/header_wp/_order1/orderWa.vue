@@ -20,7 +20,7 @@
                   >
                     <div class="photo">
                       <img
-                        :src="idCloudinary(product.foto_cloudinary, 120, 120)"
+                        :src="idCloudinary(product.foto_cloudinary, 100, 100)"
                         alt="Product Img"
                       />
                     </div>
@@ -100,8 +100,13 @@
               <template v-else>
                 <div class="order_products_list-empty">
                   <div class="wrapper_photo">
-                    <img :src="img" class="photo" alt="empty car" />
+                    <img
+                      src="../../../../assets/img/empty-cart.png"
+                      class="photo-carrito"
+                      alt="empty car"
+                    />
                   </div>
+                  <br />
                   <p class="text-cart-empty">
                     {{ $t('footer_carritoVacio') }}
                   </p>
@@ -637,14 +642,19 @@ export default {
   border-radius: 10px;
 }
 .order_products_list_item .photo {
-  width: 50px;
+  width: 55px;
+  height: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .order_products_list_item .photo img {
-  max-width: 50px;
-  max-height: 50px;
+  /* max-width: 200px;
+  max-height: 200px; */
+  width: 60px;
+}
+.photo-carrito {
+  width: 100%;
 }
 .order_products_list_item .name {
   max-width: 190px;
@@ -836,7 +846,7 @@ export default {
   width: 100%;
   height: 44px;
   max-width: 340px;
-  font-weight: 400;
+  font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   position: fixed;
@@ -845,8 +855,10 @@ export default {
   justify-content: center;
   text-align: center;
   align-items: center;
-  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
+  /* background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%); */
+  background: rgb(0, 191, 165);
 }
+
 .continue_shopping_form:hover {
   background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
 }

@@ -75,12 +75,11 @@ export default {
 </script>
 
 <style scoped>
-.swiper-wrapper {
-}
 .swiper-slide {
   width: 100%;
-  max-width: 375px;
-  position: relative;
+  max-width: 360px;
+  height: 360px;
+  /* position: relative; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -88,8 +87,8 @@ export default {
   overflow: hidden;
 }
 .photo {
-  width: 100%;
-  object-fit: cover;
+  width: fit-content;
+  object-fit: contain;
   overflow: hidden;
 }
 .photos .responsive .swiper-pagination-bullet {

@@ -18,7 +18,7 @@ const _a2f76150 = () => interopDefault(import('../pages/ig/productos/_slug.vue' 
 const _1e06bad0 = () => interopDefault(import('../pages/blog/_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
 const _2abcb93a = () => interopDefault(import('../pages/productos/_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
 const _40726303 = () => interopDefault(import('../pages/wa/_slug/index.vue' /* webpackChunkName: "pages/wa/_slug/index" */))
-const _5a518a8c = () => interopDefault(import('../pages/wa/_slug/producto/_slug.vue' /* webpackChunkName: "pages/wa/_slug/producto/_slug" */))
+const _0b6e8585 = () => interopDefault(import('../pages/wa/_slug/producto/_slugProduct.vue' /* webpackChunkName: "pages/wa/_slug/producto/_slugProduct" */))
 const _3fea4e32 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
@@ -98,9 +98,9 @@ export const routerOptions = {
     component: _40726303,
     name: "wa-slug"
   }, {
-    path: "/wa/:slug?/producto/:slug?",
-    component: _5a518a8c,
-    name: "wa-slug-producto-slug"
+    path: "/wa/:slug?/producto/:slugProduct?",
+    component: _0b6e8585,
+    name: "wa-slug-producto-slugProduct"
   }, {
     path: "/",
     component: _3fea4e32,

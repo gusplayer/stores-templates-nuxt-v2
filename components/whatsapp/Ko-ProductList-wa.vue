@@ -16,6 +16,7 @@
           <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
             > {{ this.nameSubCategoryHeader }}
           </p>
+          -->
         </div>
       </div>
       <div>
@@ -38,6 +39,7 @@
           >
             <p>{{ $t('home_msgCatalogo') }}</p>
           </div>
+          <br />
           <div class="pagination-medium" v-if="products.length > 16">
             <el-pagination
               background
@@ -301,8 +303,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  background-color: #fafaf8;
+  background-color: #f8f9fb;
   box-sizing: border-box;
   margin-top: 0px;
   padding-top: 5px;

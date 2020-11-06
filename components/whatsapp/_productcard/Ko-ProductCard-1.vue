@@ -406,18 +406,14 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* height: 120px; */
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 0px;
   border-bottom: 1px solid rgba(213, 213, 213, 0.473);
-  -webkit-box-shadow: 5px 5px 5px 5px rgb(250, 250, 244);
-  box-shadow: 5px 5px 5px 5px rgb(250, 250, 244);
   transition: all 200ms ease-in;
+  background-color: #f8f9fb;
+  padding-bottom: 4px;
 }
-.wrapper-card:hover {
-  box-shadow: -6px -6px 10px rgb(250, 250, 244),
-    6px 6px 10px rgba(116, 116, 116, 0.144);
-}
+
 .container {
   display: flex;
   align-items: flex-start;
@@ -431,17 +427,17 @@ export default {
   position: relative;
 }
 .wrapper-image {
-  max-width: 115px;
+  max-width: 110px;
   border-radius: 4px;
-  margin-right: 6px;
-  border-radius: 10px;
+  margin-right: 5px;
+  border-radius: 6px;
 }
 .product-image {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   object-fit: cover;
   object-position: center;
-  border-radius: 10px;
+  border-radius: 6px;
 }
 .product-image-soldOut {
   filter: grayscale(100%);
@@ -492,15 +488,17 @@ export default {
   /* height: 30px; */
 }
 .card-text-movil-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 1;
   color: #0f2930;
+  color: #445a64;
 }
 .card-text-movil {
   font-size: 13px;
   font-weight: 300;
   color: black;
+  color: #0f2930;
 }
 .content-text-price-movil-cart {
   display: flex;
@@ -523,24 +521,25 @@ export default {
   align-items: center;
 }
 .card-price-1-movil {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   line-height: 1;
-  color: rgba(55, 4, 4, 0.61);
+  color: #0f2930;
   text-decoration: line-through;
   text-align: center;
 }
 .card-price-2 {
   margin-top: 8px;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 700;
   line-height: 1;
   color: black;
+  color: #0f2930;
   text-align: left;
 }
 .separator-price {
   margin-top: 8px;
-  color: black;
+  color: #4c4c4c;
   margin-left: 5px;
   margin-right: 5px;
   text-align: center;
@@ -591,7 +590,12 @@ export default {
   color: #445a64;
   margin-right: 4px;
   font-size: 12px;
-  border: 1px solid #ececec;
+  /* border: 1px solid #ececec; */
+  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: white;
+  /* color: #25d366; */
+  color: #128c7e;
 }
 .btn:hover {
   color: white;
@@ -600,6 +604,7 @@ export default {
 .btn-whatsapp {
   box-sizing: border-box;
   box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
+  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
   margin-right: 10px;
 }
 .wp-icon {
