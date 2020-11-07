@@ -308,21 +308,40 @@
       <div itemscope itemtype="http://schema.org/Product">
         <meta itemprop="productID" :content="`${data.detalle.id}`" />
         <meta itemprop="name" :content="`${data.detalle.nombre}`" />
-        <meta itemprop="description" content="Producto" />
+        <meta itemprop="brand" :content="`${data.info.marca}`" />
+        <meta itemprop="description" :content="`${data.info.descripcion}`" />
         <meta itemprop="image" :content="`${data.detalle.foto_cloudinary}`" />
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+          <link itemprop="availability" href="in stock" />
+          <link itemprop="itemCondition" href="new" />
+          <meta itemprop="price" :content="`${data.detalle.precio}`" />
+          <meta
+            itemprop="priceCurrency"
+            :content="`${dataStore.tienda.moneda}`"
+          />
+        </div>
+        <meta itemprop="url" :content="`${this.sharing.url}`" />
+      </div>
+      <div>
+        <meta property="product:catalog_id" :content="`${data.detalle.id}`" />
+        <meta property="og:title" :content="`${data.detalle.nombre}`" />
+        <meta property="product:brand" :content="`${data.info.marca}`" />
+        <meta property="og:description" :content="`${data.info.descripcion}`" />
         <meta
-          itemprop="price"
-          :content="`${
-            data.detalle.precio
-            | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
-          }`"
+          property="og:image"
+          :content="`${data.detalle.foto_cloudinary}`"
+        />
+        <meta property="product:availability" content="in stock" />
+        <meta property="product:condition" content="new" />
+        <meta
+          property="product:price:amount"
+          :content="`${data.detalle.precio}`"
         />
         <meta
-          itemprop="priceCurrency"
+          property="product:price:currency"
           :content="`${dataStore.tienda.moneda}`"
         />
-        <meta itemprop="url" :content="`${this.sharing.url}`" />
-        <meta itemprop="itemCondition" content="New" />
+        <meta property="og:url" :content="`${this.sharing.url}`" />
       </div>
     </div>
   </div>
