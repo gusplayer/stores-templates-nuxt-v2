@@ -310,9 +310,17 @@
         <meta itemprop="name" :content="`${data.detalle.nombre}`" />
         <meta itemprop="description" content="Producto" />
         <meta itemprop="image" :content="`${data.detalle.foto_cloudinary}`" />
-        <meta itemprop="price" :content="`${data.detalle.precio}`" />
-        <meta itemprop="priceCurrency" :content="`${data.detalle.nombre}`" />
-        <meta itemprop="availability" :content="`${data.detalle.stock}`" />
+        <meta
+          itemprop="price"
+          :content="`${
+            data.detalle.precio
+            | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
+          }`"
+        />
+        <meta
+          itemprop="priceCurrency"
+          :content="`${dataStore.tienda.moneda}`"
+        />
         <meta itemprop="url" :content="`${this.sharing.url}`" />
         <meta itemprop="itemCondition" content="New" />
       </div>
