@@ -27,7 +27,6 @@
               v-for="product in filterProduct"
               :key="product.id"
               class="content-products"
-              itemscope
             >
               <KoProductCard1
                 :product="product"
