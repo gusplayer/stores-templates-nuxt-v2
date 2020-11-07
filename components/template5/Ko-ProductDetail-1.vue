@@ -305,16 +305,16 @@
           </div>
         </div>
       </div>
-    </div>
-    <div itemtype="http://schema.org/Product">
-      <meta itemprop="productID" :content="`${data.detalle.id}`" />
-      <meta itemprop="name" :content="`${data.detalle.nombre}`" />
-      <meta itemprop="description" content="Producto" />
-      <meta itemprop="image" :content="`${data.detalle.foto_cloudinary}`" />
-      <meta itemprop="price" :content="`${data.detalle.precio}`" />
-      <meta itemprop="priceCurrency" :content="`${data.detalle.nombre}`" />
-      <meta itemprop="availability" :content="`${data.detalle.stock}`" />
-      <meta itemprop="itemCondition" content="New" />
+      <div itemtype="http://schema.org/Product">
+        <meta itemprop="productID" :content="`${this.data.detalle.id}`" />
+        <meta itemprop="name" :content="`${data.detalle.nombre}`" />
+        <meta itemprop="description" content="Producto" />
+        <meta itemprop="image" :content="`${data.detalle.foto_cloudinary}`" />
+        <meta itemprop="price" :content="`${data.detalle.precio}`" />
+        <meta itemprop="priceCurrency" :content="`${data.detalle.nombre}`" />
+        <meta itemprop="availability" :content="`${data.detalle.stock}`" />
+        <meta itemprop="itemCondition" content="New" />
+      </div>
     </div>
   </div>
 </template>
