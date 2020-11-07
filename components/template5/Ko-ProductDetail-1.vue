@@ -313,7 +313,7 @@
         <meta itemprop="price" :content="`${data.detalle.precio}`" />
         <meta itemprop="priceCurrency" :content="`${data.detalle.nombre}`" />
         <meta itemprop="availability" :content="`${data.detalle.stock}`" />
-        <meta itemprop="url" :content="`${this.url}`" />
+        <meta itemprop="url" :content="`${this.sharing.url}`" />
         <meta itemprop="itemCondition" content="New" />
       </div>
     </div>
@@ -342,10 +342,8 @@ export default {
     koSuggesProduct,
     productSlide,
     zoom,
-    url: '',
   },
   mounted() {
-    this.url = window.location.href
     this.$store.state.beforeCombination = []
     if (this.dataStore.productos.length) {
       this.getDataProduct()
