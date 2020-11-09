@@ -350,7 +350,7 @@ export default {
               NombreProducto: this.data.detalle.nombre,
               cantidad: this.data.cantidad,
               currency: this.dataStore.tienda.moneda,
-              value: this.data.detalle.precio,
+              value: this.salesData.precio,
               content_type: 'product',
               descripcion: 'Agregado detalle del producto',
             })

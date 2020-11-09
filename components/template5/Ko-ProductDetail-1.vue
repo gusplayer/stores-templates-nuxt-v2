@@ -314,7 +314,7 @@
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
           <link itemprop="availability" href="in stock" />
           <link itemprop="itemCondition" href="new" />
-          <meta itemprop="price" :content="`${data.detalle.precio}`" />
+          <meta itemprop="price" :content="`${this.salesData.precio}`" />
           <meta
             itemprop="priceCurrency"
             :content="`${dataStore.tienda.moneda}`"
@@ -335,7 +335,7 @@
         <meta property="product:condition" content="new" />
         <meta
           property="product:price:amount"
-          :content="`${data.detalle.precio}`"
+          :content="`${this.salesData.precio}`"
         />
         <meta
           property="product:price:currency"
@@ -715,7 +715,7 @@ export default {
           NombreProducto: this.data.detalle.nombre,
           cantidad: this.data.cantidad,
           currency: this.dataStore.tienda.moneda,
-          value: this.data.detalle.precio,
+          value: this.salesData.precio,
           content_type: 'product',
           descripcion: 'Agregado detalle del producto',
         })
