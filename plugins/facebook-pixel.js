@@ -35,7 +35,7 @@ export default ({ app, store }) => {
     fbq('init', pixel_facebook)
     // eslint-disable-next-line no-unused-vars
     app.router.afterEach((to, from) => {
-      fbq('track', 'PageView')
+      fbq('track', 'ViewContent', { descripcion: 'PageHome' })
     })
   }
 }

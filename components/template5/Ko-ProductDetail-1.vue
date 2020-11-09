@@ -714,6 +714,9 @@ export default {
           idProducto: this.data.detalle.id,
           NombreProducto: this.data.detalle.nombre,
           cantidad: this.data.cantidad,
+          currency: this.dataStore.tienda.moneda,
+          value: this.data.detalle.precio,
+          content_type: 'product',
           descripcion: 'Agregado detalle del producto',
         })
       }

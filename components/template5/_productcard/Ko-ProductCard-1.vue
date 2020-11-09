@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-card" :style="settingByTemplate">
+  <div class="wrapper-card">
     <div class="container-card" id="product-card">
       <div class="wrapper">
         <router-link
@@ -207,7 +207,7 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',
-  props: { product: Object, settingByTemplate: Object },
+  props: { product: Object },
   mounted() {
     this.idSlug = this.product.id
     this.prodcutPrice()
@@ -346,10 +346,13 @@ export default {
           }
           if (this.facebooPixel != null) {
             window.fbq('track', 'AddToCart', {
-              idProducto: this.product.id,
-              NombreProducto: this.product.nombre,
-              cantidad: 1,
-              descripcion: 'Agregado rápido',
+              idProducto: this.data.detalle.id,
+              NombreProducto: this.data.detalle.nombre,
+              cantidad: this.data.cantidad,
+              currency: this.dataStore.tienda.moneda,
+              value: this.data.detalle.precio,
+              content_type: 'product',
+              descripcion: 'Agregado detalle del producto',
             })
           }
           this.$store.commit('UPDATE_CONTENTCART')
@@ -694,7 +697,7 @@ export default {
   }
   .content-card-items {
     width: 100%;
-    height: 65px;
+    height: 75px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -706,12 +709,7 @@ export default {
     font-size: 13px;
   }
   .content-text-price {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px;
+    margin-top: 0px;
   }
   .text-price {
     font-size: 15px;
