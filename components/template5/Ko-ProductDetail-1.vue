@@ -554,9 +554,15 @@ export default {
             if (this.facebooPixel != null) {
               if (this.facebooPixel != null) {
                 window.fbq('track', 'ViewContent', {
-                  idProducto: idOfSlug,
-                  NombreProducto: this.data.detalle.nombre,
-                  descripcion: 'Ver producto en específico',
+                  content_ids: this.data.detalle.id,
+                  name: this.data.detalle.nombre,
+                  brand: this.data.info.marca,
+                  currency: this.dataStore.tienda.moneda,
+                  price: this.salesData.precio,
+                  content_type: 'product',
+                  descripcion: 'Agregado detalle del producto',
+                  image: this.data.detalle.foto_cloudinary,
+                  url: this.sharing.url,
                 })
               }
             }
