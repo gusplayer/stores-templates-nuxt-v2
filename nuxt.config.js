@@ -47,6 +47,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/gtm',
     'vue-sweetalert2/nuxt',
+    '@nuxt/content',
   ],
   debug: {
     enabled: true,
