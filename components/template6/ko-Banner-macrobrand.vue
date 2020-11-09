@@ -33,6 +33,10 @@ export default {
           photo:
             'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1599774926/macroband/Daniel_Samper_juego_de_mesa_ke1eoh.png',
         },
+        {
+          photo:
+            'https://res.cloudinary.com/komerciaacademico/image/upload/v1604963548/macroband/banner_web_wtx0fm.png',
+        },
       ],
     }
   },
