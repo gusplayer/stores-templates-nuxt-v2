@@ -3,6 +3,7 @@ export default {
     // header
     header_inicio: 'Inicio',
     header_categorias: 'Categorías',
+    header_productos: 'Productos',
     header_contacto: 'Contacto',
     header_carrito: 'Carrito',
     header_search: '¿Qué buscas?',
@@ -56,6 +57,7 @@ export default {
       '¿Realmente quiere eliminar todos los productos del carrito?',
     footer_siCart: 'Si',
     footer_noCart: 'No',
+    footer_pagarOnline: 'Pagar Online',
     footer_formtittle: 'Completa tu pedido',
     footer_formNombre: 'Nombre y Apellido',
     footer_formNombreMgs: 'Escribe tu nombre',
@@ -209,6 +211,7 @@ export default {
     // header
     header_inicio: 'Home',
     header_categorias: 'Categories',
+    header_productos: 'Products',
     header_contacto: 'Contact',
     header_carrito: 'Cart',
     header_search: 'Search',
@@ -261,6 +264,7 @@ export default {
       'Do you really want to remove all the products from the cart?',
     footer_siCart: 'Yes',
     footer_noCart: 'No',
+    footer_pagarOnline: 'Pay Online',
     footer_formtittle: 'Complete your order',
     footer_formNombre: 'First and Last Name',
     footer_formNombreMgs: 'Enter your name',
@@ -413,6 +417,7 @@ export default {
     // header
     header_inicio: 'Home',
     header_categorias: 'Categorias',
+    header_productos: 'Productos',
     header_contacto: 'Contacto',
     header_carrito: 'Carroça',
     header_search: 'Busca',
@@ -466,6 +471,7 @@ export default {
       'Você realmente quer remover todos os produtos do carrinho?',
     footer_siCart: 'Sim',
     footer_noCart: 'Não',
+    footer_pagarOnline: 'Pague on-line',
     footer_formtittle: 'Complete seu pedido',
     footer_formNombre: 'Primeiro e último nome',
     footer_formNombreMgs: 'Escreva seu nome',

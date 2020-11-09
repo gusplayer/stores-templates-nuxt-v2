@@ -133,6 +133,18 @@
                     productsCart.length &&
                     !isQuotation() &&
                     dataStore.tienda.estado == 1 &&
+                    dataStore.tienda.pais == 'Colombia'
+                  "
+                  class="continue_shopping2"
+                  @click="GoPayments"
+                >
+                  {{ $t('footer_pagarOnline') }}
+                </button>
+                <button
+                  v-if="
+                    productsCart.length &&
+                    !isQuotation() &&
+                    dataStore.tienda.estado == 1 &&
                     dataStore.tienda.whatsapp
                   "
                   class="continue_shopping"
@@ -398,6 +410,40 @@ export default {
         return check
       }
       return window.mobilecheck()
+    },
+    GoPayments() {
+      let objeto = {}
+      objeto = JSON.parse(JSON.stringify(this.productsCart))
+
+      objeto.map((element) => {
+        if (element.id) {
+          delete element.envio_gratis
+          delete element.foto_cloudinary
+          delete element.limitQuantity
+          delete element.nombre
+          delete element.precio
+        }
+      })
+      let json = {
+        products: objeto,
+        tienda: {
+          id: this.$store.state.tienda.id_tienda,
+        },
+      }
+      json = JSON.stringify(json)
+      if (this.$store.state.productsCart.length != 0) {
+        if (this.layourUnicentro == true) {
+          window.open(`https://checkout.komercia.co/?params=${json}`)
+          if (this.facebooPixel != null) {
+            window.fbq('track', 'InitiateCheckout')
+          }
+        } else {
+          location.href = `https://checkout.komercia.co/?params=${json}`
+          if (this.facebooPixel != null) {
+            window.fbq('track', 'InitiateCheckout')
+          }
+        }
+      }
     },
     redirectWP() {
       this.$refs.observer.validate().then((response) => {
@@ -949,6 +995,31 @@ export default {
 }
 .continue_shopping:hover {
   background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+}
+.continue_shopping2 {
+  position: fixed;
+  z-index: 99;
+  bottom: 60px;
+  color: #128c7e;
+  border-radius: 5px;
+  background: transparent;
+  font-size: 16px;
+  padding: 8px 10px;
+  width: 100%;
+  height: 44px;
+  max-width: 340px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border: 2px solid #128c7e;
+}
+.continue_shopping2:hover {
+  color: #24a788;
+  border: 2px solid #24a788;
 }
 .conten-btn {
   display: flex;
