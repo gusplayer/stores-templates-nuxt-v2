@@ -346,7 +346,7 @@ export default {
           }
           if (this.facebooPixel != null) {
             window.fbq('track', 'AddToCart', {
-              idProducto: this.data.detalle.id,
+              content_ids: this.data.detalle.id,
               NombreProducto: this.data.detalle.nombre,
               cantidad: this.data.cantidad,
               currency: this.dataStore.tienda.moneda,
