@@ -72,7 +72,7 @@ export default {
   mounted() {
     this.url = window.location.host
     if (this.fullProducts) {
-      //   this.exportTableToCSV('feedname.csv')
+      this.exportTableToCSV('feedname.csv')
     }
   },
 
