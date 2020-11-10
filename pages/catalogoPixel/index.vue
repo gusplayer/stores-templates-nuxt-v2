@@ -44,13 +44,30 @@
             <td>{{ product.categoria }}</td>
           </tr>
         </table>
-        <button
-          id="carga"
-          class="btn-download"
-          @click="exportTableToCSV('feedname.csv')"
-        >
-          Export HTML Table To CSV File
-        </button>
+        <div class="content-btn">
+          <div>
+            <facebook-icon class="iconF" />
+            <instagram-icon class="iconI" />
+          </div>
+          <a
+            href="https://komercia.co/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img
+              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_300,q_auto:best,f_auto/v1599605487/1_aeokv2.png"
+              class="logokomercia"
+              alt="Logo Komercia"
+            />
+          </a>
+          <button
+            id="carga"
+            class="btn-download"
+            @click="exportTableToCSV('feedname.csv')"
+          >
+            Descargar archivo CSV
+          </button>
+        </div>
       </no-ssr>
     </div>
   </div>
@@ -124,7 +141,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--background_color_2);
+  background: white;
   box-sizing: border-box;
 }
 .container-catalogoPixel {
@@ -134,11 +151,22 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .content-table {
   max-height: 800px;
   overflow-x: auto;
   overflow-y: auto;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+}
+.content-btn {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  height: calc(100vh - 332px);
 }
 .btn-download {
   margin-top: 10px;
@@ -155,5 +183,17 @@ export default {
   border: solid 2px black;
   background-color: transparent;
   cursor: pointer;
+}
+.logokomercia {
+  width: 200px;
+}
+.iconF {
+  font-size: 50px;
+  color: #3b5998;
+}
+.iconI {
+  margin-right: 10px;
+  font-size: 50px;
+  color: #c13584;
 }
 </style>

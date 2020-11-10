@@ -2,18 +2,17 @@
   <div
     :style="{
       '--font-style':
-        this.$store.state.settingByTemplate &&
-        this.$store.state.settingByTemplate.tipo_letra
-          ? this.$store.state.settingByTemplate.tipo_letra
+        this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+          ? this.settingByTemplate.settings.tipo_letra
           : 'Roboto',
     }"
   >
     <component
       :dataStore="dataStore"
       :settingByTemplate="
-        this.$store.state.settingByTemplate &&
-        this.$store.state.settingByTemplate['--background_color_1']
-          ? this.$store.state.settingByTemplate
+        this.settingByTemplate.settings &&
+        this.settingByTemplate.settings['--background_color_1']
+          ? this.settingByTemplate.settings
           : this.settingBase
       "
       :is="headerTemplate"
@@ -22,9 +21,9 @@
     <component
       :dataStore="dataStore"
       :settingByTemplate="
-        this.$store.state.settingByTemplate &&
-        this.$store.state.settingByTemplate['--background_color_1']
-          ? this.$store.state.settingByTemplate
+        this.settingByTemplate.settings &&
+        this.settingByTemplate.settings['--background_color_1']
+          ? this.settingByTemplate.settings
           : this.settingBase
       "
       :is="footerTemplate"
@@ -88,6 +87,9 @@ import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
 import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
+//template6
+import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
+import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'
 
 export default {
   components: {
@@ -100,6 +102,8 @@ export default {
     KoFooterCountry,
     koWhatsapp,
     koTiendaCerrada,
+    Ko6Header1,
+    Ko6Footer1,
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES')
@@ -245,6 +249,7 @@ export default {
       return this.$store.state.dataStore
     },
     headerTemplate() {
+      let headerComp = ''
       let headerComponent = ''
       switch (this.template) {
         case 3:
@@ -254,7 +259,17 @@ export default {
           headerComponent = 'KoHeader1'
           break
         case 6:
-          headerComponent = 'KoHeader2'
+          if (this.settingByTemplate.header) {
+            switch (this.settingByTemplate.header) {
+              case 1:
+                headerComp = 'Ko6Header1'
+                break
+              case 2:
+                headerComp = 'KoHeader2'
+                break
+            }
+            return headerComp
+          }
           break
         case 7:
           headerComponent = 'KoHeader4'
@@ -266,6 +281,7 @@ export default {
       return headerComponent
     },
     footerTemplate() {
+      let footerComp = ''
       let footerComponent = ''
       switch (this.template) {
         case 3:
@@ -275,7 +291,17 @@ export default {
           footerComponent = 'KoFooter1'
           break
         case 6:
-          footerComponent = 'KoFooter2'
+          if (this.settingByTemplate.footer) {
+            switch (this.settingByTemplate.footer) {
+              case 1:
+                footerComp = 'Ko6Footer1'
+                break
+              case 2:
+                footerComp = 'KoFooter2'
+                break
+            }
+            return footerComp
+          }
           break
         case 7:
           footerComponent = 'KoFooter2'
@@ -381,23 +407,6 @@ export default {
   box-sizing: border-box;
   outline: none !important;
 }
-
-/* ::-webkit-scrollbar {
-  border: 1px solid rgb(172, 172, 172);
-  background: transparent;
-  width: 13px;
-}
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px white;
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb {
-  background: rgb(168, 168, 168);
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: gray;
-} */
 .wrapper-whatsapp {
   position: fixed;
   transform: translate(108px, 0px);

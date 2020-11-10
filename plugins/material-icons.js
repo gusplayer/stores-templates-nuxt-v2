@@ -33,6 +33,8 @@ import Account from 'vue-material-design-icons/AccountBoxOutline.vue'
 import HelpCircleOutline from 'vue-material-design-icons/HelpCircleOutline.vue'
 import MessageProcessing from 'vue-material-design-icons/MessageProcessing.vue'
 import MessageReplyText from 'vue-material-design-icons/MessageReplyText.vue'
+import ShoppingSearch from 'vue-material-design-icons/ShoppingSearch.vue'
+import FormatListBulletedSquare from 'vue-material-design-icons/FormatListBulletedSquare.vue'
 
 Vue.component('menu-icon', MenuIcon)
 Vue.component('account-icon', Account)
@@ -47,12 +49,14 @@ Vue.component('whatsapp-icon', Whatsapp)
 Vue.component('cart-icon', Cart)
 Vue.component('cartShop-icon', CartShop)
 Vue.component('shopWa-icon', shopping)
+Vue.component('shopping-search-icon', ShoppingSearch)
 Vue.component('menu-icon', Menu)
 Vue.component('menuDots-icon', MenuDots)
 Vue.component('close-icon', Close)
 Vue.component('window-close-icon', WindowClose)
 Vue.component('boteBasura-icon', boteBasura)
 Vue.component('search-icon', Search)
+Vue.component('listProduct-icon', FormatListBulletedSquare)
 
 Vue.component('phone-icon', Phone)
 Vue.component('email-icon', Email)

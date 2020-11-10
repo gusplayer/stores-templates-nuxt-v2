@@ -2,9 +2,9 @@
   <div
     class="home"
     :style="
-      this.$store.state.settingByTemplate &&
-      this.$store.state.settingByTemplate['--background_color_1']
-        ? this.$store.state.settingByTemplate
+      this.settingByTemplate.settings &&
+      this.settingByTemplate.settings['--background_color_1']
+        ? this.settingByTemplate.settings
         : this.settingBase
     "
   >
@@ -64,6 +64,9 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {

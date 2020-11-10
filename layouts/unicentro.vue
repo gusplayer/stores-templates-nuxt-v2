@@ -2,18 +2,17 @@
   <div
     :style="{
       '--font-style':
-        this.$store.state.settingByTemplate &&
-        this.$store.state.settingByTemplate.tipo_letra
-          ? this.$store.state.settingByTemplate.tipo_letra
+        this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+          ? this.settingByTemplate.settings.tipo_letra
           : 'Roboto',
     }"
   >
     <component
       :dataStore="dataStore"
       :settingByTemplate="
-        this.$store.state.settingByTemplate &&
-        this.$store.state.settingByTemplate['--background_color_1']
-          ? this.$store.state.settingByTemplate
+        this.settingByTemplate.settings &&
+        this.settingByTemplate.settings['--background_color_1']
+          ? this.settingByTemplate.settings
           : this.settingBase
       "
       :is="headerTemplate"
@@ -22,9 +21,9 @@
     <component
       :dataStore="dataStore"
       :settingByTemplate="
-        this.$store.state.settingByTemplate &&
-        this.$store.state.settingByTemplate['--background_color_1']
-          ? this.$store.state.settingByTemplate
+        this.settingByTemplate.settings &&
+        this.settingByTemplate.settings['--background_color_1']
+          ? this.settingByTemplate.settings
           : this.settingBase
       "
       :is="footerTemplate"

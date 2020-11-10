@@ -1,10 +1,10 @@
 <template lang="html">
   <div style="overflow: hidden;">
     <KoCart
-      :settingByTemplate="
-        this.$store.state.settingByTemplate &&
-        this.$store.state.settingByTemplate['--background_color_1']
-          ? this.$store.state.settingByTemplate
+      :style="
+        this.settingByTemplate.settings &&
+        this.settingByTemplate.settings['--background_color_1']
+          ? this.settingByTemplate.settings
           : this.settingBase
       "
     />
@@ -24,6 +24,9 @@ export default {
     },
     settingBase() {
       return this.$store.state.settingBase
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
 }

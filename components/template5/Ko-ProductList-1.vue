@@ -28,10 +28,7 @@
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard1
-                :product="product"
-                :settingByTemplate="settingByTemplate"
-              ></KoProductCard1>
+              <KoProductCard1 :product="product"></KoProductCard1>
             </div>
           </div>
           <div
