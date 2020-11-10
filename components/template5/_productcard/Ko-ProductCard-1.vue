@@ -491,7 +491,7 @@ export default {
   transition: all 200ms ease-out;
 }
 .separador-stats {
-  height: 90px;
+  height: 95px;
   width: 100%;
 }
 .stats-container {
@@ -686,6 +686,17 @@ export default {
 }
 .card-icon-cart-movil:hover {
   color: var(--btnhover);
+}
+
+@media (max-width: 1270px) {
+  .separador-stats {
+    height: 105px;
+  }
+}
+@media (max-width: 1249px) {
+  .separador-stats {
+    height: 98px;
+  }
 }
 @media (max-width: 768px) {
   .wrapper {
