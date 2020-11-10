@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper-catalogoPixel">
-    <div class="container-catalogoPixel content-table">
+    <div class="container-catalogoPixel">
       <no-ssr>
-        <table>
+        <table class="content-table">
           <tr>
             <th>id</th>
             <th>title</th>
@@ -44,25 +44,14 @@
             <td>{{ product.categoria }}</td>
           </tr>
         </table>
-        <button @click="exportTableToCSV('feedname.csv')">
+        <button
+          id="carga"
+          class="btn-download"
+          @click="exportTableToCSV('feedname.csv')"
+        >
           Export HTML Table To CSV File
         </button>
       </no-ssr>
-    </div>
-    <div class="container-catalogoPixel">
-      <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
-        <img
-          src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_300,q_auto:best,f_auto/v1599605487/1_aeokv2.png"
-          class="logokomercia"
-          alt="Logo Komercia"
-        />
-      </a>
-      <p class="icon-more">+</p>
-      <img
-        src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_300,q_auto:best,f_auto/v1605045287/xfacebook-pixel-logotyp.png.pagespeed.ic.LYUwNiemhv_tugqs7.png"
-        class="logoPixelFacebook"
-        alt="Logo Komercia"
-      />
     </div>
   </div>
 </template>
@@ -71,11 +60,7 @@
 export default {
   mounted() {
     this.url = window.location.host
-    if (this.fullProducts) {
-      this.exportTableToCSV('feedname.csv')
-    }
   },
-
   data() {
     return {
       url: '',
@@ -154,14 +139,21 @@ export default {
   max-height: 800px;
   overflow-x: auto;
   overflow-y: auto;
-  display: none;
 }
-.logokomercia {
-  width: 200px;
-}
-.icon-more {
-  font-size: 30px;
-  font-weight: bold;
-  padding: 10px 0;
+.btn-download {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 700;
+  padding: 10px 5px;
+  height: 41px;
+  color: black;
+  border-radius: 5px;
+  border: solid 2px black;
+  background-color: transparent;
+  cursor: pointer;
 }
 </style>
