@@ -346,11 +346,11 @@ export default {
           }
           if (this.facebooPixel != null) {
             window.fbq('track', 'AddToCart', {
-              content_ids: this.data.detalle.id,
-              NombreProducto: this.data.detalle.nombre,
-              cantidad: this.data.cantidad,
+              content_ids: this.product.id,
+              NombreProducto: this.product.nombre,
+              cantidad: 1,
               currency: this.dataStore.tienda.moneda,
-              value: this.salesData.precio,
+              value: this.product.precio,
               content_type: 'product',
               descripcion: 'Agregado detalle del producto',
             })
