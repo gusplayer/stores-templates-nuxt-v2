@@ -3,6 +3,7 @@
     <KoContact
       :dataStore="dataStore"
       :style="
+        this.settingByTemplate &&
         this.settingByTemplate.settings &&
         this.settingByTemplate.settings['--background_color_1']
           ? this.settingByTemplate.settings

@@ -10,6 +10,7 @@
     <component
       :dataStore="dataStore"
       :settingByTemplate="
+        this.settingByTemplate &&
         this.settingByTemplate.settings &&
         this.settingByTemplate.settings['--background_color_1']
           ? this.settingByTemplate.settings
@@ -21,6 +22,7 @@
     <component
       :dataStore="dataStore"
       :settingByTemplate="
+        this.settingByTemplate &&
         this.settingByTemplate.settings &&
         this.settingByTemplate.settings['--background_color_1']
           ? this.settingByTemplate.settings
@@ -88,8 +90,8 @@ import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
 //template6
-import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
-import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'
+// import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
+// import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'
 
 export default {
   components: {
@@ -102,8 +104,8 @@ export default {
     KoFooterCountry,
     koWhatsapp,
     koTiendaCerrada,
-    Ko6Header1,
-    Ko6Footer1,
+    // Ko6Header1,
+    // Ko6Footer1,
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES')
@@ -249,7 +251,7 @@ export default {
       return this.$store.state.dataStore
     },
     headerTemplate() {
-      let headerComp = ''
+      // let headerComp = ''
       let headerComponent = ''
       switch (this.template) {
         case 3:
@@ -259,18 +261,21 @@ export default {
           headerComponent = 'KoHeader1'
           break
         case 6:
-          if (this.settingByTemplate.header) {
-            switch (this.settingByTemplate.header) {
-              case 1:
-                headerComp = 'Ko6Header1'
-                break
-              case 2:
-                headerComp = 'KoHeader2'
-                break
-            }
-            return headerComp
-          }
+          headerComponent = 'KoHeader2'
           break
+        // case 6:
+        //   if (this.settingByTemplate.header) {
+        //     switch (this.settingByTemplate.header) {
+        //       case 1:
+        //         headerComp = 'Ko6Header1'
+        //         break
+        //       case 2:
+        //         headerComp = 'KoHeader2'
+        //         break
+        //     }
+        //     return headerComp
+        //   }
+        //   break
         case 7:
           headerComponent = 'KoHeader4'
           break
@@ -281,7 +286,7 @@ export default {
       return headerComponent
     },
     footerTemplate() {
-      let footerComp = ''
+      // let footerComp = ''
       let footerComponent = ''
       switch (this.template) {
         case 3:
@@ -291,18 +296,21 @@ export default {
           footerComponent = 'KoFooter1'
           break
         case 6:
-          if (this.settingByTemplate.footer) {
-            switch (this.settingByTemplate.footer) {
-              case 1:
-                footerComp = 'Ko6Footer1'
-                break
-              case 2:
-                footerComp = 'KoFooter2'
-                break
-            }
-            return footerComp
-          }
+          footerComponent = 'KoFooter2'
           break
+        // case 6:
+        //   if (this.settingByTemplate.footer) {
+        //     switch (this.settingByTemplate.footer) {
+        //       case 1:
+        //         footerComp = 'Ko6Footer1'
+        //         break
+        //       case 2:
+        //         footerComp = 'KoFooter2'
+        //         break
+        //     }
+        //     return footerComp
+        //   }
+        //   break
         case 7:
           footerComponent = 'KoFooter2'
           break
