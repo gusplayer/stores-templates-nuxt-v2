@@ -461,7 +461,7 @@ export default {
 }
 .menu-container {
   width: 100%;
-  background: var(--background_color_1);
+  background: var(--background_color_2);
   top: 88px;
   display: flex;
   transition: all ease 0.6s;
