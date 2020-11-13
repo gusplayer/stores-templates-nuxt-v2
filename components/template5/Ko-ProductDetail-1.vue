@@ -554,15 +554,9 @@ export default {
             if (this.facebooPixel != null) {
               if (this.facebooPixel != null) {
                 window.fbq('track', 'ViewContent', {
-                  content_ids: this.data.detalle.id,
-                  name: this.data.detalle.nombre,
-                  brand: this.data.info.marca,
-                  currency: this.dataStore.tienda.moneda,
-                  price: this.salesData.precio,
-                  content_type: 'product',
-                  descripcion: 'Agregado detalle del producto',
-                  image: this.data.detalle.foto_cloudinary,
-                  url: this.sharing.url,
+                  IdProducto: idOfSlug,
+                  NombreProducto: this.data.detalle.nombre,
+                  Descripcion: 'Ver producto en específico',
                 })
               }
             }
@@ -726,6 +720,7 @@ export default {
           descripcion: 'Agregado detalle del producto',
         })
       }
+      this.$gtm.push({ event: 'AddToCart' })
       this.$store.commit('UPDATE_CONTENTCART')
       this.$router.push('/')
       this.$store.state.openOrder = true

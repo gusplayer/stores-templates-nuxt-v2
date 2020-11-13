@@ -355,6 +355,7 @@ export default {
               descripcion: 'Agregado detalle del producto',
             })
           }
+          this.$gtm.push({ event: 'AddToCart' })
           this.$store.commit('UPDATE_CONTENTCART')
           // this.$router.push('/')
           this.$store.state.openOrder = true

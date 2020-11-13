@@ -571,11 +571,13 @@ export default {
           if (this.facebooPixel != null) {
             window.fbq('track', 'InitiateCheckout')
           }
+          this.$gtm.push({ event: 'InitiateCheckout' })
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
           if (this.facebooPixel != null) {
             window.fbq('track', 'InitiateCheckout')
           }
+          this.$gtm.push({ event: 'InitiateCheckout' })
         }
       }
     },
