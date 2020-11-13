@@ -257,6 +257,7 @@
                   "
                   class="continue_shopping"
                   @click="GoPayments"
+                  id="InitiateCheckoutTag"
                 >
                   {{ $t('footer_finalizarCompra') }}
                 </button>

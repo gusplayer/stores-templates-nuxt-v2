@@ -180,6 +180,7 @@
                       class="btn"
                       v-if="!spent"
                       v-on:click="addShoppingCart"
+                      id="AddToCartTag"
                     >
                       {{ $t('productdetail_btnComprar') }}
                     </button>

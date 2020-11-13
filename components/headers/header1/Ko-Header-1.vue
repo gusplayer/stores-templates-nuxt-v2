@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="header-content-icon">
-          <div class="header-content-cart" @click="openOrder">
+          <div class="header-content-cart" @click="openOrder" id="OpenCartTag">
             <cart-icon class="header-icon-cart" />
             <span class="num-items">{{ productsCart }}</span>
           </div>

@@ -137,6 +137,7 @@
                   "
                   class="continue_shopping2"
                   @click="GoPayments"
+                  id="InitiateCheckoutTag"
                 >
                   {{ $t('footer_pagarOnline') }}
                 </button>
