@@ -76,6 +76,19 @@
         </button>
       </div>
     </div>
+    <no-ssr>
+      <noscript>
+        <iframe
+          v-if="
+            this.analytics_tagmanager && this.analytics_tagmanager.tag_manager
+          "
+          :src="`https://www.googletagmanager.com/ns.html?id=${analytics_tagmanager.tag_manager}`"
+          height="0"
+          width="0"
+          style="display: none; visibility: hidden; opacity: 0;"
+        ></iframe>
+      </noscript>
+    </no-ssr>
   </div>
 </template>
 
