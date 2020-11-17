@@ -552,15 +552,6 @@ export default {
               this.spent = true
             }
             this.loading = false
-            if (this.facebooPixel != null) {
-              if (this.facebooPixel != null) {
-                window.fbq('track', 'ViewContent', {
-                  IdProducto: idOfSlug,
-                  NombreProducto: this.data.detalle.nombre,
-                  Descripcion: 'Ver producto en específico',
-                })
-              }
-            }
           })
       } else {
         this.selectedPhoto(this.productsData[0].foto_cloudinary)

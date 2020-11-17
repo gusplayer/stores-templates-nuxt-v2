@@ -265,7 +265,6 @@ export default {
       this.$gtm.push({
         event: 'OpenCart',
         action: 'click',
-        label: 'Purchase_tutienda',
       })
       this.showMenu = false
       this.$store.state.openOrder = true

@@ -65,6 +65,11 @@ export default {
     //   }
     //   prevScrollpos = currentScrollPos
     // }
+    if (this.facebooPixel != null) {
+      window.fbq('track', 'ViewContent', {
+        Descripcion: 'PageHome',
+      })
+    }
   },
   data() {
     return {
@@ -89,6 +94,9 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
     },
   },
   methods: {

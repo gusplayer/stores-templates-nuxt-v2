@@ -392,36 +392,43 @@ export default {
           id: '0',
           color: '#FFA801',
           title: 'mcompra_sinPagar',
+          ref: 'Sin pagar',
         },
         {
           id: '1',
           color: '#30c490',
           title: 'mcompra_pagada',
+          ref: 'Pagada',
         },
         {
           id: '2',
           color: '',
           title: '',
+          ref: '',
         },
         {
           id: '3',
           color: '#EB4D4B',
           title: 'mcompra_cancelada',
+          ref: 'Cancelada',
         },
         {
           id: '4',
           color: '#0000FF',
           title: 'mcompra_despachada',
+          ref: 'Despachada',
         },
         {
           id: '5',
           color: '',
           title: '',
+          ref: '',
         },
         {
           id: '6',
           color: '#4429AE',
           title: 'mcompra_entregado',
+          ref: 'Entregado',
         },
       ],
     }
@@ -439,6 +446,9 @@ export default {
     },
     cities() {
       return this.$store.state.cities
+    },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
     },
   },
   methods: {
@@ -494,6 +504,16 @@ export default {
           this.errorMessageTwo()
         })
     },
+    eventFacebooPixel() {
+      if (this.facebooPixel != null) {
+        window.fbq('track', 'Purchase', {
+          value: this.orden.venta.id,
+          Estado: this.choiceState.ref,
+          TotalCompra: this.orden.venta.total,
+          currency: this.dataStore.tienda.moneda,
+        })
+      }
+    },
     setCity() {
       if (this.cities) {
         this.city = this.cities.find(
@@ -536,6 +556,7 @@ export default {
     orden() {
       if (this.orden.venta) {
         if (this.orden.venta.created_at) {
+          this.eventFacebooPixel()
           let result = this.orden.venta.created_at.split(' ')
           this.fechaState = result[0]
           this.horaState = result[1]
