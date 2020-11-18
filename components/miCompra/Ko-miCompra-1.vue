@@ -277,6 +277,11 @@ export default {
         this.horaState = result[1]
       }
     }
+    if (this.facebooPixel != null) {
+      window.fbq('track', 'ViewContent', {
+        Descripcion: 'PageMcompra',
+      })
+    }
   },
   destroyed() {
     this.city = {}

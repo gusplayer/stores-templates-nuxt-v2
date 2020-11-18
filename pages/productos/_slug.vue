@@ -19,12 +19,22 @@ export default {
   components: {
     KoProductDetail,
   },
+  mounted() {
+    if (this.facebooPixel != null) {
+      window.fbq('track', 'ViewContent', {
+        Descripcion: 'PageCart',
+      })
+    }
+  },
   computed: {
     settingBase() {
       return this.$store.state.settingBase
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
     },
   },
 }

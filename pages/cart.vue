@@ -19,6 +19,13 @@ export default {
   components: {
     KoCart,
   },
+  mounted() {
+    if (this.facebooPixel != null) {
+      window.fbq('track', 'ViewContent', {
+        Descripcion: 'PageCart',
+      })
+    }
+  },
   computed: {
     dataStore() {
       return this.$store.state.dataStore
@@ -28,6 +35,9 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
     },
   },
 }

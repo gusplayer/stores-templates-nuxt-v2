@@ -16,6 +16,13 @@ export default {
     KoTemplate6,
     KoTemplate7,
   },
+  mounted() {
+    if (this.facebooPixel != null) {
+      window.fbq('track', 'ViewContent', {
+        Descripcion: 'PageHome',
+      })
+    }
+  },
   computed: {
     template() {
       return this.$store.state.template
@@ -37,6 +44,9 @@ export default {
           break
       }
       return productListComponent
+    },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager.pixel_facebook
     },
   },
 }
