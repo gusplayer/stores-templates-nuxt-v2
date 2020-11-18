@@ -70,7 +70,7 @@
           >
             <img
               class="img-product"
-              :src="item.producto.foto_cloudinary"
+              :src="idCloudinary(item.producto.foto_cloudinary, 300, 300)"
               alt="Imagen del producto"
             />
             <div class="info">
@@ -243,8 +243,10 @@
 
 <script>
 import axios from 'axios'
+import idCloudinary from '../../mixins/idCloudinary'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
+  mixins: [idCloudinary],
   name: 'Ko-miCompra-1',
   props: {
     dataStore: Object,

@@ -10,7 +10,7 @@
           <div class="content_product_items">
             <div class="wrapper_item_photo">
               <img
-                :src="setFoto(product)"
+                :src="idCloudinary(product.foto_cloudinary, 200, 200)"
                 class="products_item_photo"
                 :alt="product.nombre"
               />
@@ -104,7 +104,7 @@
           <div class="content_details">
             <div class="wrapper_item_photo">
               <img
-                :src="setFoto(product)"
+                :src="idCloudinary(product.foto_cloudinary, 200, 200)"
                 class="products_item_photo"
                 :alt="product.nombre"
               />
@@ -391,7 +391,9 @@
 </template>
 
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   name: 'Ko-Cart-1',
   props: {
     settingByTemplate: Object,
@@ -529,9 +531,6 @@ export default {
         this.$store.commit('UPDATE_CONTENTCART')
         this.$store.commit('CALCULATE_TOTALCART')
       }
-    },
-    setFoto(product) {
-      return product.foto_cloudinary
     },
     deleteItemCart(i) {
       this.$store.state.productsCart.splice(i, 1)
