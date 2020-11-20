@@ -21,7 +21,7 @@ export default {
     KoContact,
   },
   mounted() {
-    if (this.facebooPixel != null) {
+    if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
       window.fbq('track', 'ViewContent', {
         Descripcion: 'PageContact',
       })
@@ -38,7 +38,7 @@ export default {
       return this.$store.state.settingByTemplate
     },
     facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
+      return this.$store.state.analytics_tagmanager
     },
   },
 }

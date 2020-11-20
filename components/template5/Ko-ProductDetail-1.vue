@@ -500,7 +500,7 @@ export default {
       )
     },
     facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
+      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {
@@ -701,7 +701,7 @@ export default {
       } else {
         this.$store.state.productsCart.push(product)
       }
-      if (this.facebooPixel != null) {
+      if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
         window.fbq('track', 'AddToCart', {
           content_ids: this.data.detalle.id,
           NombreProducto: this.data.detalle.nombre,

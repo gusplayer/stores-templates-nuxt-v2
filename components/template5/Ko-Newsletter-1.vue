@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
+      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {
@@ -86,7 +86,10 @@ export default {
               axios
                 .post('https://api2.komercia.co/api/tienda/suscriptor', json)
                 .then((res) => {
-                  if (this.facebooPixel != null) {
+                  if (
+                    this.facebooPixel &&
+                    this.facebooPixel.pixel_facebook != null
+                  ) {
                     window.fbq('track', 'Lead', { email: this.email })
                   }
                   this.register = 'Tu correo ha sido registrado'

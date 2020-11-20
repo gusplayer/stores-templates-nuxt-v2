@@ -219,7 +219,7 @@ export default {
   },
   computed: {
     facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
+      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {
@@ -239,7 +239,10 @@ export default {
               .post('https://templates.komercia.co/api/mensaje-contacto', json)
               .then((response) => {
                 this.$message.success('Comentario enviado!')
-                if (this.facebooPixel != null) {
+                if (
+                  this.facebooPixel &&
+                  this.facebooPixel.pixel_facebook != null
+                ) {
                   window.fbq('track', 'Contact', {
                     Nombre: this.nombre,
                     Correo: this.email,

@@ -277,7 +277,7 @@ export default {
         this.horaState = result[1]
       }
     }
-    if (this.facebooPixel != null) {
+    if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
       window.fbq('track', 'ViewContent', {
         Descripcion: 'PageMcompra',
       })
@@ -455,7 +455,7 @@ export default {
       return this.$store.state.cities
     },
     facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
+      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {
@@ -512,7 +512,7 @@ export default {
         })
     },
     eventFacebooPixel() {
-      if (this.facebooPixel != null) {
+      if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
         window.fbq('track', 'Purchase', {
           value: this.orden.venta.id,
           Estado: this.choiceState.ref,

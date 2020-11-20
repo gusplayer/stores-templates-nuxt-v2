@@ -155,7 +155,7 @@ export default {
       return this.$store.state.fullPathServer
     },
     facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
+      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {
@@ -176,7 +176,7 @@ export default {
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        if (this.facebooPixel != null) {
+        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
           window.fbq('track', 'Search', { ValorBuscado: value })
         }
       } else {

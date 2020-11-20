@@ -17,7 +17,7 @@ export default {
     KoTemplate7,
   },
   mounted() {
-    if (this.facebooPixel != null) {
+    if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
       window.fbq('track', 'ViewContent', {
         Descripcion: 'PageHome',
       })
@@ -46,7 +46,7 @@ export default {
       return productListComponent
     },
     facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
+      return this.$store.state.analytics_tagmanager
     },
   },
 }

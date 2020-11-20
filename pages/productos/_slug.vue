@@ -20,7 +20,7 @@ export default {
     KoProductDetail,
   },
   mounted() {
-    if (this.facebooPixel != null) {
+    if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
       window.fbq('track', 'ViewContent', {
         Descripcion: 'PageCart',
       })
@@ -34,7 +34,7 @@ export default {
       return this.$store.state.settingByTemplate
     },
     facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
+      return this.$store.state.analytics_tagmanager
     },
   },
 }
