@@ -20,7 +20,10 @@
                   >
                     <div class="photo">
                       <img
-                        :src="idCloudinary(product.foto_cloudinary, 100, 100)"
+                        v-lazy-load
+                        :data-src="
+                          idCloudinary(product.foto_cloudinary, 100, 100)
+                        "
                         alt="Product Img"
                       />
                     </div>
@@ -205,7 +208,12 @@
               <template v-else>
                 <div class="order_products_list-empty">
                   <div class="wrapper_photo">
-                    <img :src="img" class="photo" alt="empty car" />
+                    <img
+                      v-lazy-load
+                      :data-src="img"
+                      class="photo"
+                      alt="empty car"
+                    />
                   </div>
                   <p class="text-cart-empty">
                     {{ $t('footer_carritoVacio') }}

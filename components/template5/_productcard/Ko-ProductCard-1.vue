@@ -8,13 +8,15 @@
         >
           <img
             v-if="!soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            v-lazy-load
+            :data-src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image"
             alt="Product Img"
           />
           <img
             v-if="soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            v-lazy-load
+            :data-src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image-soldOut"
             alt="Product Img"
           />
@@ -113,13 +115,15 @@
         >
           <img
             v-if="!soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+            v-lazy-load
+            :data-src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image"
             alt="Product Img"
           />
           <img
             v-if="soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+            v-lazy-load
+            :data-src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image-soldOut"
             alt="Product Img"
           />
@@ -198,38 +202,6 @@
           </div>
         </div>
       </div>
-      <div itemscope itemtype="http://schema.org/Product">
-        <meta itemprop="productID" :content="`${product.id}`" />
-        <meta itemprop="name" :content="`${product.nombre}`" />
-        <meta itemprop="brand" :content="`${product.marca}`" />
-        <meta itemprop="description" :content="`${product.categoria}`" />
-        <meta itemprop="image" :content="`${product.foto_cloudinary}`" />
-        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-          <link itemprop="availability" href="in stock" />
-          <link itemprop="itemCondition" href="new" />
-          <meta itemprop="price" :content="`${product.precio}`" />
-          <meta
-            itemprop="priceCurrency"
-            :content="`${dataStore.tienda.moneda}`"
-          />
-        </div>
-        <meta itemprop="url" :content="`${this.precioTag}`" />
-      </div>
-      <div>
-        <meta property="product:catalog_id" :content="`${product.id}`" />
-        <meta property="og:title" :content="`${product.nombre}`" />
-        <meta property="product:brand" :content="`${product.marca}`" />
-        <meta property="og:description" :content="`${product.categoria}`" />
-        <meta property="og:image" :content="`${product.foto_cloudinary}`" />
-        <meta property="product:availability" content="in stock" />
-        <meta property="product:condition" content="new" />
-        <meta property="product:price:amount" :content="`${product.precio}`" />
-        <meta
-          property="product:price:currency"
-          :content="`${dataStore.tienda.moneda}`"
-        />
-        <meta property="og:url" :content="`${this.precioTag}`" />
-      </div>
     </div>
   </div>
 </template>
@@ -241,9 +213,6 @@ export default {
   name: 'Ko-ProductCard-1',
   props: { product: Object },
   mounted() {
-    if (this.product) {
-      this.precioTag = `${window.location.href}productos/${this.product.slug}`
-    }
     this.idSlug = this.product.id
     this.prodcutPrice()
     if (
@@ -265,7 +234,6 @@ export default {
       salesData: null,
       spent: false,
       active: true,
-      precioTag: '',
     }
   },
   computed: {

@@ -10,7 +10,8 @@
           <div class="content_product_items">
             <div class="wrapper_item_photo">
               <img
-                :src="idCloudinary(product.foto_cloudinary, 200, 200)"
+                v-lazy-load
+                :data-src="idCloudinary(product.foto_cloudinary, 200, 200)"
                 class="products_item_photo"
                 :alt="product.nombre"
               />
@@ -104,7 +105,8 @@
           <div class="content_details">
             <div class="wrapper_item_photo">
               <img
-                :src="idCloudinary(product.foto_cloudinary, 200, 200)"
+                v-lazy-load
+                :data-src="idCloudinary(product.foto_cloudinary, 200, 200)"
                 class="products_item_photo"
                 :alt="product.nombre"
               />
@@ -378,7 +380,7 @@
     </div>
     <div v-else class="contenedor-vacio">
       <div class="wrapper_photo">
-        <img :src="img" class="photo" alt="Product img" />
+        <img v-lazy-load :data-src="img" class="photo" alt="Product img" />
       </div>
       <p>T{{ $t('footer_carritoVacio') }}</p>
       <nuxt-link to="/">

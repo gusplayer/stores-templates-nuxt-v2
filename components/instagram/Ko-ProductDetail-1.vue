@@ -9,7 +9,8 @@
               <img
                 @click="selectedPhoto(data.detalle.foto_cloudinary)"
                 class="img-list"
-                :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
+                v-lazy-load
+                :data-src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
                 alt="Prodcut Img"
               />
               <img
@@ -17,12 +18,14 @@
                 :key="itemsfoto"
                 @click="selectedPhoto(foto.foto_cloudinary)"
                 class="img-list"
-                :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
+                v-lazy-load
+                :data-src="idCloudinary(foto.foto_cloudinary, 120, 120)"
                 alt="Prodcut Img"
               />
               <img
                 v-if="idYoutube"
-                :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
+                v-lazy-load
+                :data-src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
                 v-show="idYoutube"
                 v-on:mouseover="existYoutube = true"
                 class="video"
@@ -35,7 +38,8 @@
               <img
                 class="photo_main"
                 v-on:mouseover.native="active = !active"
-                :src="idCloudinary(selectPhotoUrl, 645, 430)"
+                v-lazy-load
+                :data-src="idCloudinary(selectPhotoUrl, 645, 430)"
                 alt="Product zoom"
               />
             </div>

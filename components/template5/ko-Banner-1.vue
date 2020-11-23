@@ -3,7 +3,8 @@
     <div class="header-content-logo" v-if="this.banner">
       <div class="wrapper-banner" v-if="this.banner.banner">
         <img
-          :src="idCloudinaryBanner(this.banner.banner)"
+          v-lazy-load
+          :data-src="idCloudinaryBanner(this.banner.banner)"
           class="banner"
           alt="Banner tienda"
         />

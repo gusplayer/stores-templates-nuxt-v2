@@ -5,7 +5,8 @@
       <div v-if="this.settingByTemplate">
         <div class="wrapper-banner-img" v-if="this.settingByTemplate.banner">
           <img
-            :src="
+            v-lazy-load
+            :data-src="
               idCloudinaryBannerResponsive(this.settingByTemplate.banner, 1000)
             "
             class="banner"
@@ -16,7 +17,8 @@
       <div v-else>
         <div class="wrapper-banner-img">
           <img
-            src="https://www.kellyservices.pl/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcTFlIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c649985d042e87fdb30660e80b7dd19a010450b2/banner-default.jpg"
+            v-lazy-load
+            data-src="https://www.kellyservices.pl/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcTFlIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c649985d042e87fdb30660e80b7dd19a010450b2/banner-default.jpg"
             class="banner"
             alt="Banner-wapi"
           />
@@ -28,7 +30,8 @@
           class="containt-image"
         >
           <img
-            :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+            v-lazy-load
+            :data-src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
             class="header-logo"
             alt="Logo Img"
           />

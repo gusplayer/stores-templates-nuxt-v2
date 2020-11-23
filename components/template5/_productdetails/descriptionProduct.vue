@@ -28,7 +28,8 @@
               {{ $t('productdetail_PasarelaEpaycoMsg') }}
             </p>
             <img
-              src="https://res.cloudinary.com/komercia-components/image/upload/v1579296851/assets/pasarela-epayco.png"
+              v-lazy-load
+              data-src="https://res.cloudinary.com/komercia-components/image/upload/v1579296851/assets/pasarela-epayco.png"
               alt="Pasarela de pagos epayco"
             />
           </li>
@@ -43,7 +44,8 @@
               rel="noreferrer noopener"
             >
               <img
-                src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
+                v-lazy-load
+                data-src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
                 alt="PayU"
                 border="0"
               />
@@ -56,12 +58,14 @@
             </p>
             <img
               class="logo-pasarela"
-              src="../../../assets/img/mercadopago.png"
+              v-lazy-load
+              data-src="../../../assets/img/mercadopago.png"
               alt="logo mercado pago"
             />
             <img
               class="medios-mercadopago"
-              src="https://api2.komercia.co/img/mercadopagoopciones.png"
+              v-lazy-load
+              data-src="https://api2.komercia.co/img/mercadopagoopciones.png"
               alt="medio mercadopago"
             />
           </li>

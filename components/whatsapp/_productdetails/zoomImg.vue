@@ -3,7 +3,8 @@
     <img
       class="photo_main"
       v-on:mouseover="activeZoom = !activeZoom"
-      :src="idCloudinary(photo, 645, 430)"
+      v-lazy-load
+      :data-src="idCloudinary(photo, 645, 430)"
       alt="Product Img"
     />
   </figure>

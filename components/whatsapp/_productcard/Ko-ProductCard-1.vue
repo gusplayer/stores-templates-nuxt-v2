@@ -14,13 +14,15 @@
         >
           <img
             v-if="!soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+            v-lazy-load
+            :data-src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image"
             alt="Product Img"
           />
           <img
             v-if="soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+            v-lazy-load
+            :data-src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image product-image-soldOut"
             alt="Product Img"
           />
