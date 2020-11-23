@@ -39,7 +39,6 @@ export default {
     { src: '~/plugins/facebook-pixel', mode: 'client' },
     { src: '~plugins/SocialSharing.js', ssr: false },
     { src: '~/plugins/countryFlags.js', ssr: false },
-    // { src: '~/plugins/i18n.js', ssr: false },
   ],
 
   modules: [
@@ -47,7 +46,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/gtm',
     'vue-sweetalert2/nuxt',
-    ['nuxt-lazy-load'],
+    'nuxt-lazy-load',
   ],
   debug: {
     enabled: true,

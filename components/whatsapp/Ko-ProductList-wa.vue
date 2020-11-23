@@ -16,7 +16,6 @@
           <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
             > {{ this.nameSubCategoryHeader }}
           </p>
-          -->
         </div>
       </div>
       <div>
