@@ -70,8 +70,7 @@
           >
             <img
               class="img-product"
-              v-lazy-load
-              :data-src="idCloudinary(item.producto.foto_cloudinary, 300, 300)"
+              :src="idCloudinary(item.producto.foto_cloudinary, 300, 300)"
               alt="Imagen del producto"
             />
             <div class="info">

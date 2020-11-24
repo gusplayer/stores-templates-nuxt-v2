@@ -8,15 +8,13 @@
         >
           <img
             v-if="!soldOut"
-            v-lazy-load
-            :data-src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image"
             alt="Product Img"
           />
           <img
             v-if="soldOut"
-            v-lazy-load
-            :data-src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image-soldOut"
             alt="Product Img"
           />
@@ -115,15 +113,13 @@
         >
           <img
             v-if="!soldOut"
-            v-lazy-load
-            :data-src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+            v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image"
             alt="Product Img"
           />
           <img
             v-if="soldOut"
-            v-lazy-load
-            :data-src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+            v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
             class="product-image-soldOut"
             alt="Product Img"
           />

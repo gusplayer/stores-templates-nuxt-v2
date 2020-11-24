@@ -11,8 +11,7 @@
           class="wrapper-image"
         >
           <img
-            v-lazy-load
-            :data-src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
             class="product-image"
             alt="Product Img"
           />
@@ -79,8 +78,7 @@
           class="wrapper-image"
         >
           <img
-            v-lazy-load
-            :data-src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
+            :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
             class="product-image"
             alt="Product Img"
           />

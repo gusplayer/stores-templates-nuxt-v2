@@ -2,7 +2,7 @@
   <div class="wrapper-content">
     <div class="container">
       <div class="item item_image">
-        <img v-lazy-load :data-src="setting.data[0].photo" />
+        <img :src="setting.data[0].photo" />
       </div>
       <div class="item item_content">
         <div class="item texto">
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="item item_image">
-        <img v-lazy-load :data-src="setting.data[1].photo" />
+        <img :src="setting.data[1].photo" />
       </div>
     </div>
   </div>

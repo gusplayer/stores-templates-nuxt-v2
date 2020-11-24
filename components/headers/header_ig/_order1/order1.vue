@@ -24,10 +24,7 @@
                   >
                     <div class="photo">
                       <img
-                        v-lazy-load
-                        :data-src="
-                          idCloudinary(product.foto_cloudinary, 100, 100)
-                        "
+                        :src="idCloudinary(product.foto_cloudinary, 100, 100)"
                         alt="Product Img"
                       />
                     </div>
@@ -165,12 +162,7 @@
               <template v-else>
                 <div class="order_products_list-empty">
                   <div class="wrapper_photo">
-                    <img
-                      v-lazy-load
-                      :data-src="img"
-                      class="photo"
-                      alt="empty car"
-                    />
+                    <img :src="img" class="photo" alt="empty car" />
                   </div>
                   <p class="text-cart-empty">
                     Tu carrito de compras ahora está vacío.

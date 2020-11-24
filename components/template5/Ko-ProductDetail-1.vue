@@ -11,10 +11,7 @@
                   <img
                     @click="selectedPhoto(data.detalle.foto_cloudinary)"
                     class="img-list"
-                    v-lazy-load
-                    :data-src="
-                      idCloudinary(data.detalle.foto_cloudinary, 120, 120)
-                    "
+                    :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
                     alt="Product Img"
                   />
                 </div>
@@ -26,16 +23,14 @@
                   <img
                     @click="selectedPhoto(foto.foto_cloudinary)"
                     class="img-list"
-                    v-lazy-load
-                    :data-src="idCloudinary(foto.foto_cloudinary, 120, 120)"
+                    :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
                     alt="Product Img"
                   />
                 </div>
                 <div class="swiper-slide photos_selected">
                   <img
                     v-if="idYoutube"
-                    v-lazy-load
-                    :data-src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
+                    :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
                     v-show="idYoutube"
                     v-on:mouseover="existYoutube = true"
                     class="video"
@@ -60,8 +55,7 @@
               <img
                 class="photo_main"
                 v-on:mouseover="activeZoom = !activeZoom"
-                v-lazy-load
-                :data-src="idCloudinary(selectPhotoUrl, 645, 430)"
+                :src="idCloudinary(selectPhotoUrl, 645, 430)"
                 alt="Product Zoom"
               />
             </div>

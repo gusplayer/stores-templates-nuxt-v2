@@ -2,12 +2,7 @@
   <div class="wrapper-card anim">
     <router-link :to="{ path: `/blog/` + article.slug }" class="container">
       <div class="wrapper-image">
-        <img
-          v-lazy-load
-          :data-src="this.article.photo"
-          class="product-image"
-          alt="blog"
-        />
+        <img :src="this.article.photo" class="product-image" alt="blog" />
       </div>
       <!-- <div class="wrapper-image">
         <img :src="idCloudinary(this.article.photo, 600, 600)" class="product-image" alt="blog" />

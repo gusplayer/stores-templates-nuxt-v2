@@ -15,8 +15,7 @@
           }"
         >
           <img
-            v-lazy-load
-            :data-src="idCloudinary(product.foto_cloudinary, 250, 250)"
+            :src="idCloudinary(product.foto_cloudinary, 250, 250)"
             alt="Product Img"
           />
           <p class="card-text-movil-title" v-if="product.nombre.length >= 19">

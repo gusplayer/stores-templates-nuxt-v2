@@ -25,8 +25,7 @@
               puntos en todo el país
             </p>
             <img
-              v-lazy-load
-              data-src="https://res.cloudinary.com/komercia-components/image/upload/v1579296851/assets/pasarela-epayco.png"
+              src="https://res.cloudinary.com/komercia-components/image/upload/v1579296851/assets/pasarela-epayco.png"
               alt="Pasarela de pagos epayco"
             />
           </li>
@@ -42,8 +41,7 @@
               rel="noreferrer noopener"
             >
               <img
-                v-lazy-load
-                data-src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
+                src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
                 alt="PayU"
                 border="0"
               />
@@ -57,14 +55,12 @@
             </p>
             <img
               class="logo-pasarela"
-              v-lazy-load
-              data-src="../../../assets/img/mercadopago.png"
+              src="../../../assets/img/mercadopago.png"
               alt="logo mercado pago"
             />
             <img
               class="medios-mercadopago"
-              v-lazy-load
-              data-src="https://api2.komercia.co/img/mercadopagoopciones.png"
+              src="https://api2.komercia.co/img/mercadopagoopciones.png"
               alt="medio mercadopago"
             />
           </li>

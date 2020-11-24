@@ -3,8 +3,7 @@
     <div class="header-content-logo" v-if="this.banner">
       <div class="wrapper-banner" v-if="this.banner.banner_footer">
         <img
-          v-lazy-load
-          :data-src="idCloudinaryBanner(this.banner.banner_footer)"
+          v-lazy="idCloudinaryBanner(this.banner.banner_footer)"
           class="banner"
           alt="Banner tienda"
         />

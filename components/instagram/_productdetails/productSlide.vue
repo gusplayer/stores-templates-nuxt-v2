@@ -23,8 +23,7 @@
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
         <img
           class="photo"
-          v-lazy-load
-          :data-src="setPhoto(photo.foto_cloudinary)"
+          :src="setPhoto(photo.foto_cloudinary)"
           alt="Product img"
         />
       </div>

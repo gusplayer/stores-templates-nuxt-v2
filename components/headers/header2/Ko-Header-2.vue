@@ -6,8 +6,7 @@
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
             <img
-              v-lazy-load
-              :data-src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="header-logo"
               @click="clear"
               alt="Logo Img"
@@ -146,8 +145,7 @@
           <div class="card-container">
             <div class="img-logo" v-if="product[0]">
               <img
-                v-lazy-load
-                :data-src="product[0].foto_cloudinary"
+                :src="product[0].foto_cloudinary"
                 class="logo"
                 alt="Product img"
               />

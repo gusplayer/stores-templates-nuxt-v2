@@ -20,10 +20,7 @@
                   >
                     <div class="photo">
                       <img
-                        v-lazy-load
-                        :data-src="
-                          idCloudinary(product.foto_cloudinary, 100, 100)
-                        "
+                        :src="idCloudinary(product.foto_cloudinary, 100, 100)"
                         alt="Product Img"
                       />
                     </div>
@@ -104,8 +101,7 @@
                 <div class="order_products_list-empty">
                   <div class="wrapper_photo">
                     <img
-                      v-lazy-load
-                      data-src="../../../../assets/img/empty-cart.png"
+                      src="../../../../assets/img/empty-cart.png"
                       class="photo-carrito"
                       alt="empty car"
                     />

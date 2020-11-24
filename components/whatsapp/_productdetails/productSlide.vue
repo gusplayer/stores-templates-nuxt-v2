@@ -3,16 +3,14 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide wrapper-image">
         <img
-          v-lazy-load
-          :data-src="idCloudinary(photo, 600, 600)"
+          :src="idCloudinary(photo, 600, 600)"
           class="photo"
           alt="Product img"
         />
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
         <img
-          v-lazy-load
-          :data-src="idCloudinary(photo.foto_cloudinary, 600, 600)"
+          :src="idCloudinary(photo.foto_cloudinary, 600, 600)"
           class="photo"
           alt="Product img"
         />
