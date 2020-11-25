@@ -22,7 +22,7 @@
           {{ $t('productdetail_opcionesPagoMsg') }}
         </p>
         <ul>
-          <li v-if="mediospago.consignacion == 0">
+          <li v-if="mediospago.consignacion == 1">
             <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
             <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
           </li>
@@ -34,7 +34,7 @@
             <h4>{{ $t('productdetail_pagoConvenir') }}</h4>
             <p>{{ $t('productdetail_pagoConvenirMsg') }}</p>
           </li>
-          <li v-if="mediospago.credibanco == 0">
+          <li v-if="mediospago.credibanco == 1">
             <h4>{{ $t('productdetail_ConsignacionCredibanco') }}</h4>
             <p>
               {{ $t('productdetail_ConsignacionCredibancoMsg') }}
@@ -52,7 +52,7 @@
               />
             </a>
           </li>
-          <li v-if="mediospago.daviplata == 0">
+          <li v-if="mediospago.daviplata == 1">
             <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>
             <p>
               {{ $t('productdetail_ConsignaciondaviplataMsg') }}
@@ -79,7 +79,7 @@
               />
             </a>
           </li>
-          <li v-if="mediospago.mercado_pago == 0">
+          <li v-if="mediospago.mercado_pago == 1">
             <h4>{{ $t('productdetail_PasarelaMercado') }}</h4>
             <p>
               {{ $t('productdetail_PasarelaMercadoMsg') }}
@@ -115,7 +115,7 @@
               />
             </a>
           </li>
-          <li v-if="mediospago.payco == 0">
+          <li v-if="mediospago.payco == 1">
             <h4>{{ $t('productdetail_PasarelaEpayco') }}</h4>
             <p>
               {{ $t('productdetail_PasarelaEpaycoMsg') }}
@@ -126,7 +126,7 @@
               alt="Pasarela de pagos epayco"
             />
           </li>
-          <li v-if="mediospago.payu == 0">
+          <li v-if="mediospago.payu == 1">
             <h4>{{ $t('productdetail_PasarelaPayu') }}</h4>
             <p>
               {{ $t('productdetail_PasarelaPayuMsg') }}
@@ -144,7 +144,7 @@
               />
             </a>
           </li>
-          <li v-if="mediospago.wompi == 0">
+          <li v-if="mediospago.wompi == 1">
             <h4>{{ $t('productdetail_Consignacionwompi') }}</h4>
             <p>
               {{ $t('productdetail_PasarelaPayuMsg') }}
