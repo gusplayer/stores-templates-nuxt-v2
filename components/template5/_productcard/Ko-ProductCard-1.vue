@@ -6,18 +6,20 @@
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
-          <img
-            v-if="!soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
-            class="product-image"
-            alt="Product Img"
-          />
-          <img
-            v-if="soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
-            class="product-image-soldOut"
-            alt="Product Img"
-          />
+          <no-ssr>
+            <img
+              v-if="!soldOut"
+              v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+              class="product-image"
+              alt="Product Img"
+            />
+            <img
+              v-if="soldOut"
+              v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+              class="product-image-soldOut"
+              alt="Product Img"
+            />
+          </no-ssr>
           <div class="image_overlay"></div>
         </router-link>
         <div class="separador-stats"></div>
@@ -111,18 +113,20 @@
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
-          <img
-            v-if="!soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
-            class="product-image"
-            alt="Product Img"
-          />
-          <img
-            v-if="soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
-            class="product-image-soldOut"
-            alt="Product Img"
-          />
+          <no-ssr>
+            <img
+              v-if="!soldOut"
+              v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+              class="product-image"
+              alt="Product Img"
+            />
+            <img
+              v-if="soldOut"
+              v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+              class="product-image-soldOut"
+              alt="Product Img"
+            />
+          </no-ssr>
         </router-link>
         <div class="content-card-items">
           <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
@@ -462,6 +466,7 @@ export default {
   justify-content: center;
   overflow: hidden;
   width: 100%;
+  min-height: 250px;
   max-height: 300px;
 }
 .product-image {
@@ -742,6 +747,9 @@ export default {
   .container-card {
     width: 100%;
     max-width: 200px;
+  }
+  .wrapper-image {
+    min-height: 170px;
   }
 }
 </style>
