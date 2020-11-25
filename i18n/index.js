@@ -201,6 +201,15 @@ export default {
       'El valor del envío se calcula de acuerdo al total de compra',
     productdetail_gratis: 'Gratis',
     productdetail_gratisMsg: 'El valor del envío no tiene costo',
+    productdetail_ConsignacionCredibanco: 'Pago con Credibanco',
+    productdetail_ConsignacionCredibancoMsg:
+      'Paga con tu tarjeta hasta 24 cuotas o en efectivo en todo el país.',
+    productdetail_Consignaciondaviplata: 'Pago con DAVIPLATA',
+    productdetail_ConsignaciondaviplataMsg:
+      'Paga con tu tarjeta hasta 24 cuotas o en efectivo en todo el país.',
+    productdetail_Consignacionnequi: 'Pago con Nequi',
+    productdetail_ConsignacionnequiMsg: 'Transferencia a una cuenta de Nequi.',
+    productdetail_Consignacionwompi: 'Pago con Wompi',
     //wa
     productdetail_solicitarInfo: 'Solicitar información',
     productdetail_cotizar: 'Cotizar',
@@ -408,6 +417,15 @@ export default {
       'The value of the shipment is calculated according to the total purchase.',
     productdetail_gratis: 'Free',
     productdetail_gratisMsg: 'The value of the shipment has no cost',
+    productdetail_ConsignacionCredibanco: 'Pay with Credibanco',
+    productdetail_ConsignacionCredibancoMsg:
+      'Pay with your card up to 24 installments or cash nationwide.',
+    productdetail_Consignaciondaviplata: 'Payment with DAVIPLATA',
+    productdetail_ConsignaciondaviplataMsg:
+      'Pay with your card up to 24 installments or cash nationwide.',
+    productdetail_Consignacionnequi: 'Paying with Nequi',
+    productdetail_ConsignacionnequiMsg: 'Transfer to a Nequi account.',
+    productdetail_Consignacionwompi: 'Paying with Wompi',
     productdetail_solicitarInfo: 'Request information',
     productdetail_cotizar: 'Quote',
     productdetail_productoAgotado: 'Product sold out',
@@ -615,6 +633,15 @@ export default {
       'O valor da remessa é calculado de acordo com a compra total.',
     productdetail_gratis: 'Gratis',
     productdetail_gratisMsg: 'O valor da remessa não tem custo',
+    productdetail_ConsignacionCredibanco: 'Pagamento com Credibanco',
+    productdetail_ConsignacionCredibancoMsg:
+      'Pague com seu cartão em até 24 parcelas ou à vista em todo o país.',
+    productdetail_Consignaciondaviplata: 'Pagamento com DAVIPLATA',
+    productdetail_ConsignaciondaviplataMsg:
+      'Pague com seu cartão em até 24 parcelas ou à vista em todo o país.',
+    productdetail_Consignacionnequi: 'Pagamento com Nequi',
+    productdetail_ConsignacionnequiMsg: 'Transferência para uma conta Nequi.',
+    productdetail_Consignacionwompi: 'Pagamento com Wompi',
     productdetail_solicitarInfo: 'Solicitar informações',
     productdetail_cotizar: 'Citação',
     productdetail_productoAgotado: 'Produto esgotado',

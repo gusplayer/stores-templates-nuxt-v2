@@ -55,7 +55,7 @@
             </p>
             <img
               class="logo-pasarela"
-              src="../../../assets/img/mercadopago.png"
+              src="https://res.cloudinary.com/komerciaacademico/image/upload/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png"
               alt="logo mercado pago"
             />
             <img

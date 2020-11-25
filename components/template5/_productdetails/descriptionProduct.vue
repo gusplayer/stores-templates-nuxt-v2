@@ -22,17 +22,111 @@
           {{ $t('productdetail_opcionesPagoMsg') }}
         </p>
         <ul>
-          <li v-if="mediospago.payco == 1">
+          <li v-if="mediospago.consignacion == 0">
+            <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
+            <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
+          </li>
+          <li v-if="mediospago.contraentrega == 1">
+            <h4>{{ $t('productdetail_PagoContra') }}</h4>
+            <p>{{ $t('productdetail_PagoContraMsg') }}</p>
+          </li>
+          <li v-if="mediospago.convenir == 1">
+            <h4>{{ $t('productdetail_pagoConvenir') }}</h4>
+            <p>{{ $t('productdetail_pagoConvenirMsg') }}</p>
+          </li>
+          <li v-if="mediospago.credibanco == 0">
+            <h4>{{ $t('productdetail_ConsignacionCredibanco') }}</h4>
+            <p>
+              {{ $t('productdetail_ConsignacionCredibancoMsg') }}
+            </p>
+            <a
+              href="https://www.credibanco.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              class="cursor_point"
+            >
+              <img
+                class="logo-pasarela"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png"
+                alt="logo Credibanco"
+              />
+            </a>
+          </li>
+          <li v-if="mediospago.daviplata == 0">
+            <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>
+            <p>
+              {{ $t('productdetail_ConsignaciondaviplataMsg') }}
+            </p>
+            <img
+              class="logo-pasarela-daviplata"
+              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png"
+              alt="logo daviPlata"
+            />
+          </li>
+          <li v-if="mediospago.efecty == 1">
+            <h4>{{ $t('productdetail_ConsignacionEfecty') }}</h4>
+            <p>{{ $t('productdetail_ConsignacionEfectyMsg') }}</p>
+            <a
+              href="https://www.efecty.com.co/web/"
+              target="_blank"
+              rel="noreferrer noopener"
+              class="cursor_point"
+            >
+              <img
+                class="logo-pasarela-efecty"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png"
+                alt="logo efecty"
+              />
+            </a>
+          </li>
+          <li v-if="mediospago.mercado_pago == 0">
+            <h4>{{ $t('productdetail_PasarelaMercado') }}</h4>
+            <p>
+              {{ $t('productdetail_PasarelaMercadoMsg') }}
+            </p>
+            <a
+              href="https://www.mercadopago.com"
+              target="_blank"
+              rel="noreferrer noopener"
+              class="cursor_point"
+            >
+              <img
+                class="logo-pasarela-daviplata"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png"
+                alt="logo mercadopago"
+              />
+            </a>
+          </li>
+          <li v-if="mediospago.nequi == 1">
+            <h4>{{ $t('productdetail_Consignacionnequi') }}</h4>
+            <p>
+              {{ $t('productdetail_ConsignacionnequiMsg') }}
+            </p>
+            <a
+              href="https://www.nequi.com.co/"
+              target="_blank"
+              rel="noreferrer noopener"
+              class="cursor_point"
+            >
+              <img
+                class="logo-pasarela-daviplata"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png"
+                alt="logo nequi"
+              />
+            </a>
+          </li>
+          <li v-if="mediospago.payco == 0">
             <h4>{{ $t('productdetail_PasarelaEpayco') }}</h4>
             <p>
               {{ $t('productdetail_PasarelaEpaycoMsg') }}
             </p>
             <img
-              src="https://res.cloudinary.com/komercia-components/image/upload/v1579296851/assets/pasarela-epayco.png"
+              class="logo-pasarela-payco"
+              src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png"
               alt="Pasarela de pagos epayco"
             />
           </li>
-          <li v-if="mediospago.payu == 1">
+          <li v-if="mediospago.payu == 0">
             <h4>{{ $t('productdetail_PasarelaPayu') }}</h4>
             <p>
               {{ $t('productdetail_PasarelaPayuMsg') }}
@@ -43,43 +137,30 @@
               rel="noreferrer noopener"
             >
               <img
+                class="logo-pasarela-payu"
                 src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
                 alt="PayU"
                 border="0"
               />
             </a>
           </li>
-          <li v-if="mediospago.mercado_pago == 1">
-            <h4>{{ $t('productdetail_PasarelaMercado') }}</h4>
+          <li v-if="mediospago.wompi == 0">
+            <h4>{{ $t('productdetail_Consignacionwompi') }}</h4>
             <p>
-              {{ $t('productdetail_PasarelaMercadoMsg') }}
+              {{ $t('productdetail_PasarelaPayuMsg') }}
             </p>
-            <img
-              class="logo-pasarela"
-              src="../../../assets/img/mercadopago.png"
-              alt="logo mercado pago"
-            />
-            <img
-              class="medios-mercadopago"
-              src="https://api2.komercia.co/img/mercadopagoopciones.png"
-              alt="medio mercadopago"
-            />
-          </li>
-          <li v-if="mediospago.contraentrega == 1">
-            <h4>{{ $t('productdetail_PagoContra') }}</h4>
-            <p>{{ $t('productdetail_PagoContraMsg') }}</p>
-          </li>
-          <li v-if="mediospago.convenir == 1">
-            <h4>{{ $t('productdetail_pagoConvenir') }}</h4>
-            <p>{{ $t('productdetail_pagoConvenirMsg') }}</p>
-          </li>
-          <li v-if="mediospago.consignacion == 1">
-            <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
-            <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
-          </li>
-          <li v-if="mediospago.efecty == 1">
-            <h4>{{ $t('productdetail_ConsignacionEfecty') }}</h4>
-            <p>{{ $t('productdetail_ConsignacionEfectyMsg') }}</p>
+            <a
+              href="https://wompi.co/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                class="logo-pasarela-wompi"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png"
+                alt="wompi"
+                border="0"
+              />
+            </a>
           </li>
         </ul>
       </div>
@@ -307,6 +388,21 @@ li p {
 .logo-pasarela {
   width: 160px !important;
 }
+.logo-pasarela-daviplata {
+  width: 120px !important;
+}
+.logo-pasarela-efecty {
+  width: 100px !important;
+}
+.logo-pasarela-wompi {
+  width: 220px !important;
+}
+.logo-pasarela-payu {
+  width: 300px !important;
+}
+.logo-pasarela-payco {
+  width: 280px !important;
+}
 .capitalize {
   text-transform: capitalize;
   font-weight: 600 !important;
@@ -329,6 +425,9 @@ li p {
 }
 .line-comments {
   display: none;
+}
+.cursor_point {
+  cursor: pointer;
 }
 @media (max-width: 810px) {
   .left {
