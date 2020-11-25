@@ -4,7 +4,8 @@
       <div class="wrapper-banner" v-if="this.banner.banner">
         <no-ssr>
           <img
-            v-lazy="idCloudinaryBanner(this.banner.banner)"
+            loading="lazy"
+            :src="idCloudinaryBanner(this.banner.banner)"
             class="banner"
             alt="Banner tienda"
           />
