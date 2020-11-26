@@ -11,6 +11,7 @@
             <th>product_type</th>
             <th>condition</th>
             <th>availability</th>
+            <th>inventory</th>
             <th>description</th>
             <th>price</th>
             <th>brand</th>
@@ -23,14 +24,15 @@
             <td>{{ product.nombre }}</td>
             <td>{{ `https://${url}/productos/${product.slug}` }}</td>
             <td>{{ product.foto_cloudinary }}</td>
-            <td>product</td>
+            <td>Product {{ product.categoria }}</td>
             <td>new</td>
             <td>in stock</td>
+            <td>{{ product.stock }}</td>
             <td>This is a product</td>
             <td>
               {{ product.precio | currency(dataStore.tienda.moneda) }}
             </td>
-            <td>ZZZ</td>
+            <td>{{ product.marca }}</td>
             <td>G{{ index }}</td>
             <td>
               {{
