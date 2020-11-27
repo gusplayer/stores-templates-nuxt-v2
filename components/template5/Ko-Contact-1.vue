@@ -244,8 +244,8 @@ export default {
                   this.facebooPixel.pixel_facebook != null
                 ) {
                   window.fbq('track', 'Contact', {
-                    Nombre: this.nombre,
-                    Correo: this.email,
+                    name: this.nombre,
+                    description: this.email,
                   })
                 }
               })

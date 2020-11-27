@@ -85,7 +85,7 @@ export default {
       if (value) {
         location.href = '?search=' + value
         if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-          window.fbq('track', 'Search', { ValorBuscado: value })
+          window.fbq('track', 'Search', { value: value })
         }
       } else {
         location.href = '?search=' + ''

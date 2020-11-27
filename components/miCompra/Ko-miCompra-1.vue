@@ -279,7 +279,7 @@ export default {
     }
     if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
       window.fbq('track', 'ViewContent', {
-        Descripcion: 'PageMcompra',
+        description: 'PageMcompra',
       })
     }
   },
@@ -514,9 +514,9 @@ export default {
     eventFacebooPixel() {
       if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
         window.fbq('track', 'Purchase', {
-          value: this.orden.venta.id,
-          Estado: this.choiceState.ref,
-          TotalCompra: this.orden.venta.total,
+          content_ids: this.orden.venta.id,
+          description: this.choiceState.ref,
+          value: this.orden.venta.total,
           currency: this.dataStore.tienda.moneda,
         })
       }

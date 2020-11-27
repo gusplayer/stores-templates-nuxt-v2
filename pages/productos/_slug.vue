@@ -22,7 +22,7 @@ export default {
   mounted() {
     if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
       window.fbq('track', 'ViewContent', {
-        Descripcion: 'PageCart',
+        description: 'PageCart',
       })
     }
   },

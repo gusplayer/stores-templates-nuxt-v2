@@ -351,12 +351,12 @@ export default {
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
               content_ids: this.product.id,
-              NombreProducto: this.product.nombre,
-              cantidad: 1,
+              name: this.product.nombre,
+              quantity: 1,
               currency: this.dataStore.tienda.moneda,
               value: this.product.precio,
               content_type: 'product',
-              descripcion: 'Agregado detalle del producto',
+              description: 'Agregado detalle del producto',
             })
           }
           this.$gtm.push({ event: 'AddToCart' })

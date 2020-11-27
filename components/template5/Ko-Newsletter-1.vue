@@ -90,7 +90,7 @@ export default {
                     this.facebooPixel &&
                     this.facebooPixel.pixel_facebook != null
                   ) {
-                    window.fbq('track', 'Lead', { email: this.email })
+                    window.fbq('track', 'Lead', { value: this.email })
                   }
                   this.register = 'Tu correo ha sido registrado'
                   this.$message.success('Comentario enviado!')

@@ -704,12 +704,12 @@ export default {
       if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
         window.fbq('track', 'AddToCart', {
           content_ids: this.data.detalle.id,
-          NombreProducto: this.data.detalle.nombre,
-          cantidad: this.data.cantidad,
+          name: this.data.detalle.nombre,
+          quantity: this.data.cantidad,
           currency: this.dataStore.tienda.moneda,
           value: this.salesData.precio,
           content_type: 'product',
-          descripcion: 'Agregado detalle del producto',
+          description: 'Agregado detalle del producto',
         })
       }
       this.$gtm.push({ event: 'AddToCart' })
