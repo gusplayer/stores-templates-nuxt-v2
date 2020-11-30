@@ -537,6 +537,17 @@ export default {
               sku: this.data.info.sku,
               estado: true,
             }
+            if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+              window.fbq('track', 'ViewContent', {
+                content_ids: this.data.detalle.id,
+                name: this.data.detalle.nombre,
+                quantity: this.data.cantidad,
+                currency: this.dataStore.tienda.moneda,
+                value: this.salesData.precio,
+                content_type: 'product',
+                description: 'Agregado detalle del producto',
+              })
+            }
             this.sharing.url = window.location.href
             this.sharing.title = `Te recomiendo: ${response.data.detalle.nombre}`
             this.sharing.description = `Te recomiendo: ${response.data.detalle.nombre} de la tienda ${this.dataStore.tienda.nombre}, Link del producto ${window.location.href}`
