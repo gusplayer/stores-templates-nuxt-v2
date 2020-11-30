@@ -24,7 +24,7 @@
             <td>{{ product.nombre }}</td>
             <td>{{ `https://${url}/productos/${product.slug}` }}</td>
             <td>{{ product.foto_cloudinary }}</td>
-            <td>Product {{ product.categoria }}</td>
+            <td>product</td>
             <td>new</td>
             <td>in stock</td>
             <td>{{ product.stock }}</td>
