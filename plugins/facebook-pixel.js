@@ -30,8 +30,9 @@ export default ({ app, store }) => {
       'https://connect.facebook.net/en_US/fbevents.js'
     )
     fbq('init', pixel_facebook)
-    // app.router.afterEach((to, from) => {
-    // fbq('track', 'ViewContent', { descripcion: 'PageHome' })
-    // })
+    // eslint-disable-next-line no-unused-vars
+    app.router.afterEach((to, from) => {
+      fbq('track', 'ViewContent')
+    })
   }
 }

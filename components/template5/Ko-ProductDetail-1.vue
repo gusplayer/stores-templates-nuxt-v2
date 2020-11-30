@@ -310,7 +310,10 @@
         <meta itemprop="productID" :content="`${data.detalle.id}`" />
         <meta itemprop="name" :content="`${data.detalle.nombre}`" />
         <meta itemprop="brand" :content="`${data.info.marca}`" />
-        <meta itemprop="description" :content="`${data.info.descripcion}`" />
+        <meta
+          itemprop="description"
+          :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
+        />
         <meta itemprop="image" :content="`${data.detalle.foto_cloudinary}`" />
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
           <link itemprop="availability" href="in stock" />
@@ -327,7 +330,10 @@
         <meta property="product:catalog_id" :content="`${data.detalle.id}`" />
         <meta property="og:title" :content="`${data.detalle.nombre}`" />
         <meta property="product:brand" :content="`${data.info.marca}`" />
-        <meta property="og:description" :content="`${data.info.descripcion}`" />
+        <meta
+          property="og:description"
+          :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
+        />
         <meta
           property="og:image"
           :content="`${data.detalle.foto_cloudinary}`"
