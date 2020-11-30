@@ -726,7 +726,7 @@ export default {
           currency: this.dataStore.tienda.moneda,
           value: this.salesData.precio,
           content_type: 'product',
-          description: 'Agregado detalle del producto',
+          description: 'Vista del producto',
         })
       }
       this.$gtm.push({ event: 'AddToCart' })
