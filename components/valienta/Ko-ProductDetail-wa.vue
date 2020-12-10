@@ -427,7 +427,7 @@ export default {
         this.$store.state.productsCart.push(product)
       }
       this.$store.commit('UPDATE_CONTENTCART')
-      this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
+      this.$router.push(`/wp/${this.dataStore.tienda.id_tienda}`)
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
     },

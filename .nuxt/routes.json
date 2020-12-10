@@ -3,147 +3,126 @@
     "name": "blog",
     "path": "/blog",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\index.vue",
-    "chunkName": "pages/blog/index",
-    "_name": "_6b9ece36"
+    "chunkName": "pages/blog/index"
   },
   {
     "name": "cart",
     "path": "/cart",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\cart.vue",
-    "chunkName": "pages/cart",
-    "_name": "_1feef17b"
+    "chunkName": "pages/cart"
   },
   {
     "name": "catalogoPixel",
     "path": "/catalogoPixel",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\catalogoPixel\\\\index.vue",
-    "chunkName": "pages/catalogoPixel/index",
-    "_name": "_4a05a406"
+    "chunkName": "pages/catalogoPixel/index"
   },
   {
     "name": "constructor",
     "path": "/constructor",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\constructor\\\\index.vue",
-    "chunkName": "pages/constructor/index",
-    "_name": "_85415d9a"
+    "chunkName": "pages/constructor/index"
   },
   {
     "name": "contacto",
     "path": "/contacto",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\contacto.vue",
-    "chunkName": "pages/contacto",
-    "_name": "_4a37e4ac"
+    "chunkName": "pages/contacto"
   },
   {
     "name": "ig",
     "path": "/ig",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\index.vue",
-    "chunkName": "pages/ig/index",
-    "_name": "_3979c929"
+    "chunkName": "pages/ig/index"
   },
   {
     "name": "micompra",
     "path": "/micompra",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\micompra.vue",
-    "chunkName": "pages/micompra",
-    "_name": "_5feb2416"
+    "chunkName": "pages/micompra"
   },
   {
     "name": "template5",
     "path": "/template5",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template5\\\\index.vue",
-    "chunkName": "pages/template5/index",
-    "_name": "_3088f052"
+    "chunkName": "pages/template5/index"
   },
   {
     "name": "template6",
     "path": "/template6",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index.vue",
-    "chunkName": "pages/template6/index",
-    "_name": "_383a95b1"
+    "chunkName": "pages/template6/index"
   },
   {
     "name": "template7",
     "path": "/template7",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template7\\\\index.vue",
-    "chunkName": "pages/template7/index",
-    "_name": "_3fec3b10"
+    "chunkName": "pages/template7/index"
   },
   {
     "name": "unicentro",
     "path": "/unicentro",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\unicentro\\\\index.vue",
-    "chunkName": "pages/unicentro/index",
-    "_name": "_684e8838"
+    "chunkName": "pages/unicentro/index"
   },
   {
     "name": "ig-contacto",
     "path": "/ig/contacto",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\contacto.vue",
-    "chunkName": "pages/ig/contacto",
-    "_name": "_80e47f70"
+    "chunkName": "pages/ig/contacto"
   },
   {
     "name": "template6-index_macrobrand",
     "path": "/template6/index_macrobrand",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index_macrobrand.vue",
-    "chunkName": "pages/template6/index_macrobrand",
-    "_name": "_dc42c48e"
+    "chunkName": "pages/template6/index_macrobrand"
   },
   {
     "name": "ig-productos-slug",
     "path": "/ig/productos/:slug?",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\productos\\\\_slug.vue",
-    "chunkName": "pages/ig/productos/_slug",
-    "_name": "_53a126e0"
+    "chunkName": "pages/ig/productos/_slug"
   },
   {
     "name": "blog-slug",
     "path": "/blog/:slug",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\_slug.vue",
-    "chunkName": "pages/blog/_slug",
-    "_name": "_6f0c10c6"
+    "chunkName": "pages/blog/_slug"
   },
   {
     "name": "productos-slug",
     "path": "/productos/:slug?",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\_slug.vue",
-    "chunkName": "pages/productos/_slug",
-    "_name": "_d9c9901c"
+    "chunkName": "pages/productos/_slug"
   },
   {
     "name": "wa-slug",
     "path": "/wa/:slug?",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\index.vue",
-    "chunkName": "pages/wa/_slug/index",
-    "_name": "_e66da7a6"
+    "chunkName": "pages/wa/_slug/index"
   },
   {
     "name": "wp-slug",
     "path": "/wp/:slug?",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wp\\\\_slug\\\\index.vue",
-    "chunkName": "pages/wp/_slug/index",
-    "_name": "_cc763308"
+    "chunkName": "pages/wp/_slug/index"
   },
   {
     "name": "wa-slug-producto-slugProduct",
     "path": "/wa/:slug?/producto/:slugProduct?",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\producto\\\\_slugProduct.vue",
-    "chunkName": "pages/wa/_slug/producto/_slugProduct",
-    "_name": "_7b8758cc"
+    "chunkName": "pages/wa/_slug/producto/_slugProduct"
   },
   {
     "name": "wp-slug-producto-slugProduct",
     "path": "/wp/:slug?/producto/:slugProduct?",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wp\\\\_slug\\\\producto\\\\_slugProduct.vue",
-    "chunkName": "pages/wp/_slug/producto/_slugProduct",
-    "_name": "_dc1ebdaa"
+    "chunkName": "pages/wp/_slug/producto/_slugProduct"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_b88971f2"
+    "chunkName": "pages/index"
   }
 ]

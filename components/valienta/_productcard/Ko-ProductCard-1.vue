@@ -8,7 +8,7 @@
         </p>
         <router-link
           :to="{
-            path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+            path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
           }"
           class="wrapper-image"
         >
@@ -28,7 +28,7 @@
         <div class="wrapper-text">
           <router-link
             :to="{
-              path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+              path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
             }"
             class="content-name-product-movil"
           >
@@ -105,7 +105,7 @@
               </div>
               <router-link
                 :to="{
-                  path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+                  path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
                 }"
                 class="btn"
               >
@@ -115,7 +115,7 @@
 
             <router-link
               :to="{
-                path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+                path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
               }"
               v-else
               class="btn"
@@ -327,9 +327,9 @@ export default {
       let baseUrlPc = 'https://web.whatsapp.com/send?phone=57'
       let urlProduct
       if (this.dataStore.dominio) {
-        urlProduct = `${this.dataStore.dominio}wa/${this.product.slug}`
+        urlProduct = `${this.dataStore.dominio}wp/${this.product.slug}`
       } else {
-        urlProduct = `http://${this.dataStore.subdominio}.komercia.store/wa/${this.product.slug}`
+        urlProduct = `http://${this.dataStore.subdominio}.komercia.store/wp/${this.product.slug}`
       }
       let text = `text=Hola 😀, %0AEstoy en tu tienda y me interesa el producto: ${this.product.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
       if (this.dataStore.whatsapp.length > 10) {
