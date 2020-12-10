@@ -1,23 +1,24 @@
 import Vue from 'vue'
 
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
-import NuxtError from '../layouts/error.vue'
+import NuxtError from '..\\layouts\\error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
-import '../node_modules/element-ui/lib/theme-chalk/index.css'
+import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
 
-import '../node_modules/swiper/dist/css/swiper.css'
+import '..\\node_modules\\swiper\\dist\\css\\swiper.css'
 
-import '../node_modules/core-components-npm/dist/ko.css'
+import '..\\node_modules\\core-components-npm\\dist\\ko.css'
 
-import _8b6b8a5a from '../layouts/constructor-layout.vue'
-import _6f6c098b from '../layouts/default.vue'
-import _6c337394 from '../layouts/ig.vue'
-import _6541a79f from '../layouts/unicentro.vue'
-import _6c337540 from '../layouts/wa.vue'
+import _8b6b8a5a from '..\\layouts\\constructor-layout.vue'
+import _6f6c098b from '..\\layouts\\default.vue'
+import _6c337394 from '..\\layouts\\ig.vue'
+import _6541a79f from '..\\layouts\\unicentro.vue'
+import _6c337540 from '..\\layouts\\wa.vue'
+import _6c33754f from '..\\layouts\\wp.vue'
 
-const layouts = { "_constructor-layout": sanitizeComponent(_8b6b8a5a),"_default": sanitizeComponent(_6f6c098b),"_ig": sanitizeComponent(_6c337394),"_unicentro": sanitizeComponent(_6541a79f),"_wa": sanitizeComponent(_6c337540) }
+const layouts = { "_constructor-layout": sanitizeComponent(_8b6b8a5a),"_default": sanitizeComponent(_6f6c098b),"_ig": sanitizeComponent(_6c337394),"_unicentro": sanitizeComponent(_6541a79f),"_wa": sanitizeComponent(_6c337540),"_wp": sanitizeComponent(_6c33754f) }
 
 export default {
   render (h, props) {

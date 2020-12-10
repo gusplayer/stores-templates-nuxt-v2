@@ -1,15 +1,13 @@
 import Axios from 'axios'
 import defu from 'defu'
 
-const $nuxt = typeof window !== 'undefined' && window['$nuxt']
-
 // Axios.prototype cannot be modified
 const axiosExtra = {
   setBaseURL (baseURL) {
     this.defaults.baseURL = baseURL
   },
   setHeader (name, value, scopes = 'common') {
-    for (let scope of Array.isArray(scopes) ? scopes : [ scopes ]) {
+    for (const scope of Array.isArray(scopes) ? scopes : [ scopes ]) {
       if (!value) {
         delete this.defaults.headers[scope][name];
         return
@@ -43,12 +41,12 @@ const axiosExtra = {
 }
 
 // Request helpers ($get, $post, ...)
-for (let method of ['request', 'delete', 'get', 'head', 'options', 'post', 'put', 'patch']) {
+for (const method of ['request', 'delete', 'get', 'head', 'options', 'post', 'put', 'patch']) {
   axiosExtra['$' + method] = function () { return this[method].apply(this, arguments).then(res => res && res.data) }
 }
 
 const extendAxiosInstance = axios => {
-  for (let key in axiosExtra) {
+  for (const key in axiosExtra) {
     axios[key] = axiosExtra[key].bind(axios)
   }
 }
@@ -82,7 +80,10 @@ const setupProgress = (axios) => {
     set: () => { }
   }
 
-  const $loading = () => ($nuxt && $nuxt.$loading && $nuxt.$loading.set) ? $nuxt.$loading : noopLoading
+  const $loading = () => {
+    const $nuxt = typeof window !== 'undefined' && window['$nuxt']
+    return ($nuxt && $nuxt.$loading && $nuxt.$loading.set) ? $nuxt.$loading : noopLoading
+  }
 
   let currentRequests = 0
 
@@ -114,6 +115,10 @@ const setupProgress = (axios) => {
     currentRequests--
 
     if (Axios.isCancel(error)) {
+      if (currentRequests <= 0) {
+        currentRequests = 0
+        $loading().finish()
+      }
       return
     }
 
@@ -134,10 +139,12 @@ const setupProgress = (axios) => {
 }
 
 export default (ctx, inject) => {
+  // runtimeConfig
+  const runtimeConfig = ctx.$config && ctx.$config.axios || {}
   // baseURL
   const baseURL = process.browser
-      ? 'http://localhost:3000/'
-      : (process.env._AXIOS_BASE_URL_ || 'http://localhost:3000/')
+    ? (runtimeConfig.browserBaseURL || runtimeConfig.baseURL || 'http://localhost:3000/')
+      : (runtimeConfig.baseURL || process.env._AXIOS_BASE_URL_ || 'http://localhost:3000/')
 
   // Create fresh objects for all default header scopes
   // Axios creates only one which is shared across SSR requests!
@@ -162,7 +169,7 @@ export default (ctx, inject) => {
   // Proxy SSR request headers headers
   if (process.server && ctx.req && ctx.req.headers) {
     const reqHeaders = { ...ctx.req.headers }
-    for (let h of ["accept","host","cf-ray","cf-connecting-ip","content-length","content-md5","content-type"]) {
+    for (const h of ["accept","host","cf-ray","cf-connecting-ip","content-length","content-md5","content-type"]) {
       delete reqHeaders[h]
     }
     axiosOptions.headers.common = { ...reqHeaders, ...axiosOptions.headers.common }
