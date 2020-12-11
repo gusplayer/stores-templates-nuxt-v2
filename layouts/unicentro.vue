@@ -10,6 +10,7 @@
     <component
       :dataStore="dataStore"
       :settingByTemplate="
+      this.settingByTemplate &&
         this.settingByTemplate.settings &&
         this.settingByTemplate.settings['--background_color_1']
           ? this.settingByTemplate.settings
@@ -21,6 +22,7 @@
     <component
       :dataStore="dataStore"
       :settingByTemplate="
+      this.settingByTemplate &&
         this.settingByTemplate.settings &&
         this.settingByTemplate.settings['--background_color_1']
           ? this.settingByTemplate.settings
