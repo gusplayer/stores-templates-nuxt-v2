@@ -81,6 +81,7 @@ export const state = () => ({
   subcategorias: [],
   geolocalizacion: [],
   openOrder: false,
+  openOrderValienta: false,
   openMenulateralRight: false,
   openMenulateralLeft: false,
   stateBanner: true,
@@ -244,6 +245,9 @@ export const mutations = {
   },
   SET_OPENORDER: (state, value) => {
     state.openOrder = value
+  },
+  SET_OPENORDER_VALIENTA: (state, value) => {
+    state.openOrderValienta = value
   },
   SET_OPENORDERMENURIGTH: (state, value) => {
     state.openMenulateralRight = value
@@ -430,6 +434,7 @@ export const actions = {
     if (
       parts[0] == 'localhost:3000' ||
       parts[0] == 'wapi' ||
+      parts[0] == 'valienta' ||
       partsID[1] == '3333'
     ) {
       let partsWapi = req.url.split('/')
