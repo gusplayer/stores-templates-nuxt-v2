@@ -43,6 +43,7 @@ export default {
     footer_encioNoconfig: 'Envío no configurado',
     footer_encioGratis: 'Envío gratis en toda la tienda',
     footer_totalPagar: 'Total a pagar',
+    footer_descuento: 'Descuento',
     footer_carritoVacio: 'Tu carrito de compras ahora está vacío.',
     footer_contactoMgs:
       'Contacte con la tienda para saber los precios de los productos o preguntar cobertura del país.',
@@ -260,6 +261,7 @@ export default {
     footer_encioNoconfig: 'Non-Configured Shipping',
     footer_encioGratis: 'Free shipping throughout the store',
     footer_totalPagar: 'Total to pay',
+    footer_descuento: 'Discount',
     footer_carritoVacio: 'Your shopping cart is now empty.',
     footer_contactoMgs:
       'Contact the store for product prices or ask for country coverage.',
@@ -475,6 +477,7 @@ export default {
     footer_encioNoconfig: 'Expedição não-configurada',
     footer_encioGratis: 'Frete grátis em toda a loja',
     footer_totalPagar: 'Total a pagar',
+    footer_descuento: 'Desconto',
     footer_carritoVacio: 'Seu carrinho de compras agora está vazio.',
     footer_contactoMgs:
       'Entre em contato com a loja para saber os preços dos produtos ou a cobertura do país.',

@@ -194,6 +194,7 @@ export const state = () => ({
     },
   ],
   layoutUnicentro: false,
+  listDescuentos: [],
 })
 
 export const mutations = {
@@ -639,6 +640,21 @@ export const actions = {
       })
       .then((response) => {
         commit('SET_PRODUCT_INFO', response.data)
+      })
+  },
+  GET_DESCUENTOS({ state }) {
+    axios
+      .get(
+        `${state.urlKomercia}/api/descuentos/${state.dataStore.tienda.id_tienda}?page=1`,
+        state.configAxios
+      )
+      .then((response) => {
+        state.listDescuentos = response.data.descuentos.data.sort(function (
+          prev,
+          next
+        ) {
+          return prev.cantidad_productos - next.cantidad_productos
+        })
       })
   },
 }

@@ -188,11 +188,62 @@
                       {{ $t('footer_encioGratis') }}
                     </p>
                   </span>
+                  <span class="order_total_net" v-if="this.shippingDescuento">
+                    <p>{{ $t('footer_descuento') }}</p>
+                    <p
+                      v-if="
+                        this.shippingDescuento &&
+                        this.shippingDescuento.valor_descuento
+                      "
+                    >
+                      {{
+                        this.shippingDescuento.valor_descuento
+                          | currency(
+                            dataStore.tienda.codigo_pais,
+                            dataStore.tienda.moneda
+                          )
+                      }}
+                    </p>
+                    <p
+                      v-if="
+                        this.shippingDescuento &&
+                        this.shippingDescuento.porcentaje_descuento
+                      "
+                    >
+                      {{ this.shippingDescuento.porcentaje_descuento }}%
+                    </p>
+                  </span>
+                  <span class="order_total_net">
+                    <p>{{ $t('cart_subtotal') }}</p>
+                    <p>
+                      {{
+                        totalCart
+                          | currency(
+                            dataStore.tienda.codigo_pais,
+                            dataStore.tienda.moneda
+                          )
+                      }}
+                    </p>
+                  </span>
                   <span class="order_total_net">
                     <p>{{ $t('footer_totalPagar') }}</p>
                     <p>
                       {{
-                        (totalCart + (getFreeShipping ? 0 : shipping))
+                        (totalCart +
+                          (this.shipping ? this.shipping : 0) +
+                          (this.shippingTarifaPrecio
+                            ? this.shippingTarifaPrecio
+                            : 0) -
+                          (this.shippingDescuento &&
+                          this.shippingDescuento.valor_descuento
+                            ? this.shippingDescuento.valor_descuento
+                            : 0) -
+                          (this.shippingDescuento &&
+                          this.shippingDescuento.porcentaje_descuento
+                            ? (totalCart *
+                                this.shippingDescuento.porcentaje_descuento) /
+                              100
+                            : 0))
                           | currency(
                             dataStore.tienda.codigo_pais,
                             dataStore.tienda.moneda
@@ -405,6 +456,7 @@ export default {
     ValidationProvider,
   },
   mounted() {
+    this.$store.dispatch('GET_DESCUENTOS')
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch('GET_CITIES')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
@@ -431,6 +483,7 @@ export default {
       ciudad: '',
       barrio: '',
       dirreccion: '',
+      shippingDescuento: [],
     }
   },
   computed: {
@@ -494,6 +547,9 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
+    },
+    listDescuentos() {
+      return this.$store.state.listDescuentos
     },
   },
   methods: {
@@ -685,6 +741,15 @@ export default {
       })
       this.formOrden = !this.formOrden
     },
+    listaDescuentos() {
+      if (this.listDescuentos) {
+        this.shippingDescuento = this.listDescuentos.find((element) => {
+          if (element.cantidad_productos == this.productsCart.length) {
+            return element
+          }
+        })
+      }
+    },
   },
   watch: {
     rangosByCiudad() {
@@ -697,10 +762,14 @@ export default {
       if (this.productsCart) {
         this.tempCart = this.productsCart
         this.shippingPrecio()
+        this.listaDescuentos()
       }
     },
     totalCart() {
       this.shippingPrecio()
+    },
+    listDescuentos() {
+      this.listaDescuentos()
     },
   },
   filters: {
