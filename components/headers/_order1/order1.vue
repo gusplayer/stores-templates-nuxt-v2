@@ -196,6 +196,7 @@
                         this.shippingDescuento.valor_descuento
                       "
                     >
+                      -
                       {{
                         this.shippingDescuento.valor_descuento
                           | currency(
@@ -742,10 +743,14 @@ export default {
       this.formOrden = !this.formOrden
     },
     listaDescuentos() {
+      let cantidadProductos = 0
+      this.productsCart.filter((value) => {
+        cantidadProductos += value.cantidad
+      })
       if (this.listDescuentos) {
-        this.shippingDescuento = this.listDescuentos.find((element) => {
-          if (element.cantidad_productos == this.productsCart.length) {
-            return element
+        this.listDescuentos.filter((element) => {
+          if (cantidadProductos >= element.cantidad_productos) {
+            this.shippingDescuento = element
           }
         })
       }
@@ -766,6 +771,7 @@ export default {
       }
     },
     totalCart() {
+      this.listaDescuentos()
       this.shippingPrecio()
     },
     listDescuentos() {
