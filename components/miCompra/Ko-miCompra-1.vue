@@ -169,6 +169,14 @@
                     v-if="orden.venta.usuario.user_info[0].direccion"
                     >{{ orden.venta.usuario.user_info[0].direccion }}</span
                   >
+                  <span
+                    class="value-data"
+                    v-else-if="
+                      this.direccion_entrega &&
+                      this.direccion_entrega.value.direccion
+                    "
+                    >{{ this.direccion_entrega.value.direccion }}</span
+                  >
                   <span class="value-data" v-else>N/A</span>
                 </p>
                 <p class="telephone">
@@ -272,6 +280,7 @@ export default {
     }
     if (this.orden.venta) {
       if (this.orden.venta.created_at) {
+        this.shippingDireccion()
         let result = this.orden.venta.created_at.split(' ')
         this.fechaState = result[0]
         this.horaState = result[1]
@@ -438,6 +447,7 @@ export default {
           ref: 'Entregado',
         },
       ],
+      direccion_entrega: {},
     }
   },
   computed: {
@@ -459,6 +469,9 @@ export default {
     },
   },
   methods: {
+    shippingDireccion() {
+      this.direccion_entrega = JSON.parse(this.orden.venta.direccion_entrega)
+    },
     clearCart() {
       let domain = this.$route.fullPath
       let result = domain.split('&')
@@ -563,6 +576,7 @@ export default {
     orden() {
       if (this.orden.venta) {
         if (this.orden.venta.created_at) {
+          this.shippingDireccion()
           this.eventFacebooPixel()
           let result = this.orden.venta.created_at.split(' ')
           this.fechaState = result[0]
