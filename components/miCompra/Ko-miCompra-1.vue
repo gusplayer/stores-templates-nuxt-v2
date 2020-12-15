@@ -162,20 +162,51 @@
                     orden.venta.usuario.nombre
                   }}</span>
                 </p>
+                <p
+                  class="name"
+                  v-if="this.cityComprador && this.cityComprador.departamento"
+                >
+                  {{ $t('mcompra_departamento') }}
+                  <span class="value-data">{{
+                    this.cityComprador.departamento.nombre_dep
+                  }}</span>
+                </p>
+                <p class="name" v-if="this.cityComprador">
+                  {{ $t('mcompra_ciudad') }}
+                  <span class="value-data">{{
+                    this.cityComprador.nombre_ciu
+                  }}</span>
+                </p>
+                <p
+                  class="name"
+                  v-if="
+                    this.direccion_entrega &&
+                    this.direccion_entrega.value &&
+                    this.direccion_entrega.value.barrio
+                  "
+                >
+                  {{ $t('mcompra_barrio') }}
+                  <span class="value-data">{{
+                    this.direccion_entrega.value.barrio
+                  }}</span>
+                </p>
                 <p class="address">
                   {{ $t('mcompra_direccion') }}
                   <span
                     class="value-data"
-                    v-if="orden.venta.usuario.user_info[0].direccion"
-                    >{{ orden.venta.usuario.user_info[0].direccion }}</span
+                    v-if="
+                      this.direccion_entrega &&
+                      this.direccion_entrega.value &&
+                      this.direccion_entrega.value.direccion
+                    "
+                    >{{ this.direccion_entrega.value.direccion }}</span
                   >
                   <span
                     class="value-data"
                     v-else-if="
-                      this.direccion_entrega &&
-                      this.direccion_entrega.value.direccion
+                      orden && orden.venta.usuario.user_info[0].direccion
                     "
-                    >{{ this.direccion_entrega.value.direccion }}</span
+                    >{{ orden.venta.usuario.user_info[0].direccion }}</span
                   >
                   <span class="value-data" v-else>N/A</span>
                 </p>
@@ -210,6 +241,17 @@
             </el-collapse-item>
             <el-collapse-item :title="$t('mcompra_infoVendedor')" name="2">
               <div class="content-info-buyer">
+                <p
+                  class="city"
+                  v-if="
+                    city && city.departamento && city.departamento.nombre_dep
+                  "
+                >
+                  {{ $t('mcompra_departamento') }}
+                  <span class="value-data">{{
+                    city.departamento.nombre_dep
+                  }}</span>
+                </p>
                 <p class="city">
                   {{ $t('mcompra_ciudad') }}
                   <span class="value-data" v-if="city && city.nombre_ciu">{{
@@ -403,6 +445,7 @@ export default {
         },
       ],
       city: {},
+      cityComprador: {},
       statusUpdate: [
         {
           id: '0',
@@ -471,6 +514,11 @@ export default {
   methods: {
     shippingDireccion() {
       this.direccion_entrega = JSON.parse(this.orden.venta.direccion_entrega)
+      if (this.cities && this.direccion_entrega) {
+        this.cityComprador = this.cities.find(
+          (city) => city.id === this.direccion_entrega.value.ciudad_id
+        )
+      }
     },
     clearCart() {
       let domain = this.$route.fullPath
@@ -572,12 +620,13 @@ export default {
     },
     cities() {
       this.setCity()
+      this.shippingDireccion()
     },
     orden() {
       if (this.orden.venta) {
         if (this.orden.venta.created_at) {
-          this.shippingDireccion()
           this.eventFacebooPixel()
+          this.shippingDireccion()
           let result = this.orden.venta.created_at.split(' ')
           this.fechaState = result[0]
           this.horaState = result[1]
