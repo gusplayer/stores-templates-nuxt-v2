@@ -62,6 +62,7 @@ export default {
 <style scoped>
 .wrapper_error {
   display: flex;
+  flex-direction: column;
   width: 100%;
   background: #efefef;
   justify-content: center;
