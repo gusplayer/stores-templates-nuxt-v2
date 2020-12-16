@@ -211,7 +211,7 @@
                         this.shippingDescuento.porcentaje_descuento
                       "
                     >
-                      {{ this.shippingDescuento.porcentaje_descuento }}%
+                      - {{ this.shippingDescuento.porcentaje_descuento }}%
                     </p>
                   </span>
                   <span class="order_total_net">
@@ -484,7 +484,7 @@ export default {
       ciudad: '',
       barrio: '',
       dirreccion: '',
-      shippingDescuento: [],
+      shippingDescuento: '',
     }
   },
   computed: {
@@ -748,11 +748,17 @@ export default {
         cantidadProductos += value.cantidad
       })
       if (this.listDescuentos) {
+        let restulDesc
         this.listDescuentos.filter((element) => {
           if (cantidadProductos >= element.cantidad_productos) {
-            this.shippingDescuento = element
+            restulDesc = element
           }
         })
+        if (restulDesc) {
+          this.shippingDescuento = restulDesc
+        } else {
+          this.shippingDescuento = ''
+        }
       }
     },
   },
