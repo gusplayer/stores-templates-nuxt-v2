@@ -77,6 +77,7 @@
 
 <script>
 export default {
+  layout: 'default',
   mounted() {
     this.url = window.location.host
   },
