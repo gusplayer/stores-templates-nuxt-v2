@@ -211,7 +211,18 @@
                         this.shippingDescuento.porcentaje_descuento
                       "
                     >
-                      - {{ this.shippingDescuento.porcentaje_descuento }}%
+                      -
+                      {{
+                        Math.trunc(
+                          (totalCart *
+                            this.shippingDescuento.porcentaje_descuento) /
+                            100
+                        )
+                          | currency(
+                            dataStore.tienda.codigo_pais,
+                            dataStore.tienda.moneda
+                          )
+                      }}
                     </p>
                   </span>
                   <span class="order_total_net">
@@ -241,9 +252,11 @@
                             : 0) -
                           (this.shippingDescuento &&
                           this.shippingDescuento.porcentaje_descuento
-                            ? (totalCart *
-                                this.shippingDescuento.porcentaje_descuento) /
-                              100
+                            ? Math.trunc(
+                                (totalCart *
+                                  this.shippingDescuento.porcentaje_descuento) /
+                                  100
+                              )
                             : 0))
                           | currency(
                             dataStore.tienda.codigo_pais,
