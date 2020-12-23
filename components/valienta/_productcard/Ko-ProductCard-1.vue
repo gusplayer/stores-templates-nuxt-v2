@@ -26,12 +26,7 @@
           />
         </router-link>
         <div class="wrapper-text">
-          <router-link
-            :to="{
-              path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
-            }"
-            class="content-name-product-movil"
-          >
+          <div class="content-name-product-movil">
             <p
               class="card-text-movil-title"
               v-if="this.product.nombre.length >= 42"
@@ -41,14 +36,16 @@
             <p class="card-text-movil-title" v-else>
               {{ `${this.product.nombre.slice(0, 42)}` }}
             </p>
-            <p class="card-text-movil" v-if="this.product.marca">
-              {{ this.product.marca }}
-            </p>
             <div
               class="content-text-price-movil-cart"
               v-if="this.product.precio"
             >
-              <div class="wrapper-price">
+              <router-link
+                :to="{
+                  path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
+                }"
+                class="wrapper-price"
+              >
                 <!-- <div> -->
                 <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
                   $ {{ this.product.precio }}
@@ -87,41 +84,15 @@
                 </div>
                 <!-- </div> -->
                 <!-- <p class="card-descuento">-50%</p> -->
-              </div>
-            </div>
-          </router-link>
-          <div class="Content-btn-movil">
-            <div
-              class="content-soldOut"
-              v-if="!this.estadoCart && !soldOut && !spent"
-            >
+              </router-link>
               <div
-                v-if="this.product.precio > 0"
+                v-if="!this.estadoCart && !soldOut && !spent"
                 v-on:click="addShoppingCart"
-                class="btn btn-whatsapp"
-                style="margin-right: 5px;"
+                class="btn"
               >
                 <shopWa-icon class="wp-icon" />
               </div>
-              <router-link
-                :to="{
-                  path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
-                }"
-                class="btn"
-              >
-                {{ $t('productdetail_btnComprar') }}</router-link
-              >
             </div>
-
-            <router-link
-              :to="{
-                path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
-              }"
-              v-else
-              class="btn"
-            >
-              {{ $t('productdetail_btnComprar') }}</router-link
-            >
           </div>
         </div>
       </div>
@@ -408,12 +379,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   border-radius: 0px;
-  border-bottom: 1px solid rgba(213, 213, 213, 0.473);
-  transition: all 200ms ease-in;
-  background-color: #f8f9fb;
-  padding-bottom: 4px;
 }
-
 .container {
   display: flex;
   align-items: flex-start;
@@ -423,21 +389,19 @@ export default {
 .wrapper-movil {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
 }
 .wrapper-image {
-  max-width: 110px;
   border-radius: 4px;
   margin-right: 5px;
-  border-radius: 6px;
+  border-radius: 1px;
 }
 .product-image {
   width: 100%;
-  /* height: 100%; */
   object-fit: cover;
   object-position: center;
-  border-radius: 6px;
+  border-radius: 1px;
 }
 .product-image-soldOut {
   filter: grayscale(100%);
@@ -453,7 +417,7 @@ export default {
   font-size: 10px;
   z-index: 2;
   position: absolute;
-  top: 74px;
+  top: 155px;
   left: 0px;
 }
 .card-info-2 {
@@ -468,7 +432,7 @@ export default {
   font-weight: bold;
   z-index: 2;
   position: absolute;
-  top: 92px;
+  top: 175px;
   left: 0px;
 }
 .wrapper-text {
@@ -480,32 +444,25 @@ export default {
 .content-name-product-movil {
   display: flex;
   width: 100%;
-  padding: 0px 10px;
-  margin-top: 1px;
+  padding: 5px 0px 10px;
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
   /* height: 30px; */
 }
 .card-text-movil-title {
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: bold;
   line-height: 1;
-  color: #0f2930;
-  color: #445a64;
-}
-.card-text-movil {
-  font-size: 13px;
-  font-weight: 300;
-  color: black;
-  color: #0f2930;
+  color: #484848;
 }
 .content-text-price-movil-cart {
-  display: flex;
   width: 100%;
-  align-items: center;
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  flex-direction: column;
+  align-items: center;
+  align-self: center;
 }
 .wrapper-price {
   display: flex;
@@ -513,6 +470,7 @@ export default {
   align-self: flex-start;
   justify-content: center;
   align-items: center;
+  height: 24px;
 }
 .content-price {
   display: flex;
@@ -520,28 +478,25 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.card-price-2 {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1;
+  color: #484848;
+  text-align: left;
+}
+.separator-price {
+  color: #484848;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+}
 .card-price-1-movil {
   font-size: 14px;
   font-weight: bold;
   line-height: 1;
   color: #0f2930;
   text-decoration: line-through;
-  text-align: center;
-}
-.card-price-2 {
-  margin-top: 8px;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1;
-  color: black;
-  color: #0f2930;
-  text-align: left;
-}
-.separator-price {
-  margin-top: 8px;
-  color: #4c4c4c;
-  margin-left: 5px;
-  margin-right: 5px;
   text-align: center;
 }
 .card-descuento {
@@ -557,69 +512,29 @@ export default {
   top: -8px;
   margin-left: 5px;
 }
-.Content-btn-movil {
-  /* width: 100%; */
-  height: 40px;
-  display: flex;
-  align-self: flex-end;
-  align-items: flex-start;
-}
-.content-soldOut {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-.icon-shop {
-  max-width: 20px;
-  max-height: 20px;
-}
 .btn {
-  background-color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-  text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  border-radius: 4px;
-  padding: 6px 10px;
-  font-weight: 600;
-  color: #445a64;
-  margin-right: 4px;
-  font-size: 12px;
-  /* border: 1px solid #ececec; */
-  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-right: 10px;
   background-color: white;
-  /* color: #25d366; */
-  color: #128c7e;
+  color: #484848;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
 }
 .btn:hover {
-  color: white;
-  background-color: #128c7e;
-}
-.btn-whatsapp {
-  box-sizing: border-box;
-  box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
-  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
-  margin-right: 10px;
+  color: #a9206b;
 }
 .wp-icon {
-  font-size: 20px;
-  bottom: 3px;
+  font-size: 16px;
+  bottom: 4px;
 }
-@media (max-width: 330px) {
-  .btn-whatsapp {
-    top: 78px;
+@media (max-width: 400px) {
+  .card-info-1 {
+    top: 125px;
   }
-  .wrapper-image {
-    max-width: 10px;
-  }
-  .card-text-movil-title {
-    font-size: 15px;
+  .card-info-2 {
+    top: 145px;
   }
 }
 </style>

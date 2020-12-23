@@ -1,12 +1,11 @@
 <template>
   <div class="wrapper-productDetail">
-    <!-- <div v-if="true" v-loading="true"></div> -->
     <div class="container-productDetail" v-if="!loading" v-loading="loading">
-      <div class="wrapper-back">
-        <div class="back-button">
-          <p @click="$router.go(-1)"><FlechaLeft-icon /></p>
-        </div>
+      <div class="wrapper-back" @click="$router.go(-1)">
+        <arrow-left-icon class="icon-back" />
+        <p class="back-text">Volver al inicio</p>
       </div>
+
       <div class="section">
         <div class="wrapper-left">
           <div class="photos_responsive">
@@ -631,6 +630,7 @@ export default {
   align-items: flex-start;
   height: 100%;
   overflow: visible;
+  margin-top: 46.3px;
 }
 .container-productDetail {
   display: flex;
@@ -663,36 +663,30 @@ export default {
   position: relative;
 }
 .wrapper-back {
-  background-color: #fafaf8;
-  box-shadow: 0 2px 10px rgba(131, 130, 131, 0.473);
-  width: 35px;
-  height: 35px;
-  border-radius: 45px;
+  width: 100%;
+  padding: 5px 10px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 2;
+  color: #4a5782;
 }
-.back-button {
-  display: flex;
-  /* padding: 25px 25px; */
+.wrapper-back:hover {
+  color: #a9206b;
+}
+.icon-back {
+  font-weight: normal;
+  font-size: 18px;
+  bottom: 3px;
   cursor: pointer;
-  justify-content: center;
-  text-align: center;
-  padding-left: 3px;
+  margin-right: 5px;
 }
-.back-button p {
-  font-size: 28px;
-  color: #128c7e;
+.back-text {
+  font-weight: normal;
+  font-size: 14px;
+  cursor: pointer;
 }
-.back-button p:hover {
-  background-color: #128c7e;
-  color: white;
-}
+
 .breadcrumb {
   margin-left: 5px;
 }

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import KoProductDetail from '../../../../components/valienta/Ko-ProductDetail-wa'
+import KoProductDetail from '../../../../components/valienta/Ko-ProductDetail-valienta'
 
 export default {
   layout: 'wp',

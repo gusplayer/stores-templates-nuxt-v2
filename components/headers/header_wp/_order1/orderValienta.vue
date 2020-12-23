@@ -3,7 +3,7 @@
     <div class="order" @click="closeOrder" v-show="openOrder">
       <div class="order_content">
         <div class="order_header">
-          <h3>Tu pedido</h3>
+          <h3 style="color: #4a5782;">Resumen de pedido</h3>
           <div @click="closedOder" class="order_header_close">
             <close-icon />
           </div>
@@ -493,27 +493,15 @@ export default {
             let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
 
             if (this.mobileCheck()) {
-              window.open(
-                `${baseUrlMovil}text=${text}`,
-                '_blank'
-              )
+              window.open(`${baseUrlMovil}text=${text}`, '_blank')
             } else {
-              window.open(
-                `${baseUrlPc}text=${text}`,
-                '_blank'
-              )
+              window.open(`${baseUrlPc}text=${text}`, '_blank')
             }
           } else {
             if (this.mobileCheck()) {
-              window.open(
-                `${baseUrlMovil}text=${text}`,
-                '_blank'
-              )
+              window.open(`${baseUrlMovil}text=${text}`, '_blank')
             } else {
-              window.open(
-                `${baseUrlPc}text=${text}`,
-                '_blank'
-              )
+              window.open(`${baseUrlPc}text=${text}`, '_blank')
             }
           }
         }
@@ -634,7 +622,7 @@ export default {
 }
 .order_header_close {
   font-size: 25px;
-  color: #075e54;
+  color: #4a5782;
   cursor: pointer;
 }
 .order_header_close:hover {
@@ -719,8 +707,8 @@ export default {
   font-weight: 500;
 }
 .name >>> .el-tag {
-  border-color: #128c7e;
-  background-color: #128c7e;
+  border-color: #4a5782;
+  background-color: #4a5782;
   color: white;
   display: inline-block;
   height: 28px;
@@ -760,12 +748,12 @@ export default {
 .icon-delete {
   font-size: 20px;
   cursor: pointer;
-  color: #128c7e;
+  color: #ee7196;
   transition: 0.3s;
   bottom: 5px;
 }
 .icon-delete:hover {
-  color: grey;
+  color: #4a5782;
 }
 .order_beforefreeshipping {
   text-align: center;
@@ -831,7 +819,7 @@ export default {
 }
 .form_close {
   font-size: 30px;
-  color: #25d366;
+  color: #ee7196;
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -882,7 +870,7 @@ export default {
 }
 .text-error {
   font-size: 12px;
-  color: #cb2027;
+  color: #ee7196;
   width: 100%;
   margin-left: 10px;
 }
@@ -904,12 +892,10 @@ export default {
   justify-content: center;
   text-align: center;
   align-items: center;
-  /* background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%); */
-  background: rgb(0, 19, 191);
+  background: #4a5782;
 }
-
 .continue_shopping_form:hover {
-  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+  background: #ee7196;
 }
 .order_total {
   border-top: 1px solid rgba(112, 112, 117, 0.322);
@@ -994,16 +980,16 @@ export default {
   justify-content: center;
   text-align: center;
   align-items: center;
-  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
+  background: #4a5782;
 }
 .continue_shopping:hover {
-  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+  background: #ee7196;
 }
 .continue_shopping2 {
   position: fixed;
   z-index: 99;
   bottom: 60px;
-  color: #128c7e;
+  color: #4a5782;
   border-radius: 5px;
   background: transparent;
   font-size: 16px;
@@ -1018,11 +1004,11 @@ export default {
   justify-content: center;
   text-align: center;
   align-items: center;
-  border: 2px solid #128c7e;
+  border: 2px solid #4a5782;
 }
 .continue_shopping2:hover {
-  color: #24a788;
-  border: 2px solid #24a788;
+  color: #ee7196;
+  border: 2px solid #ee7196;
 }
 .conten-btn {
   display: flex;
