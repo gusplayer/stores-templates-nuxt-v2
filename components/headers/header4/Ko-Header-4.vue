@@ -3,41 +3,52 @@
     <div class="wrapper-header">
       <div class="header">
         <KoOrder :dataStore="dataStore" />
-        <div class="header-content-logo">
-          <nuxt-link to="/" class="wrapper-logo">
-            <img
-              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-              class="header-logo"
-              alt="Logo Img"
-              @click="clear"
-            />
-          </nuxt-link>
-        </div>
-        <div class="header-content-items">
-          <div v-if="showSearch">
-            <div class="search">
-              <form id="demo-2" style="position: relative;">
-                <search-icon class="icon-s" @click="focusInput" />
-                <input
-                  type="search"
-                  :placeholder="$t('header_search')"
-                  v-model="search"
-                  @keyup.enter="getSearch(search)"
-                  id="SearchHeader"
-                />
-              </form>
-            </div>
-          </div>
-          <div class="header-content-icon">
-            <div class="header-content-cart" @click="openOrder">
-              <cart-icon class="header-icon-cart" />
-              <span class="num-items">{{ productsCart }}</span>
-            </div>
-          </div>
           <div class="header-item-menu" @click="openMenulateral">
-            <menu-icon class="header-icon-menu nav-bar" />
+                <menu-icon class="header-icon-menu nav-bar" />
           </div>
-        </div>
+          <div class="header-content-logo">
+              <nuxt-link to="/" class="wrapper-logo">
+                <img
+                  :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+                  class="header-logo"
+                  alt="Logo Img"
+                  @click="clear"
+                />
+              </nuxt-link>
+          </div>
+          <div class="header-content-buttons">
+            <div v-for="(item, index) in secciones"
+                :key="`${index}${item.name}`">
+              <nuxt-link
+                :to="item.path"
+                v-if="item.path"
+                class="btn"
+                >{{ $t(`${item.name}`) }}
+                  </nuxt-link>
+            </div>
+          </div>
+          <div class="header-content-items">
+              <div v-if="showSearch">
+                <div class="search">
+                  <form id="demo-2" style="position: relative;">
+                    <search-icon class="icon-s" @click="focusInput" />
+                    <input
+                      type="search"
+                      :placeholder="$t('header_search')"
+                      v-model="search"
+                      @keyup.enter="getSearch(search)"
+                      id="SearchHeader"
+                    />
+                  </form>
+                </div>
+              </div>
+              <div class="header-content-icon">
+                <div class="header-content-cart" @click="openOrder">
+                  <cart-icon class="header-icon-cart" />
+                  <span class="num-items">{{ productsCart }}</span>
+                </div>
+              </div>
+          </div>
         <KoMenu :dataStore="dataStore" class="responsive" />
       </div>
     </div>
@@ -84,6 +95,26 @@ export default {
     return {
       search: '',
       showSearch: false,
+      secciones: [
+        {
+          name: 'header_inicio',
+          path: '/',
+        },
+        // {
+        //   name: 'header_categorias',
+        //   iconOpen: 'Flechadown-icon',
+        //   iconClose: 'FlechaUp-icon',
+        // },
+        {
+          name: 'header_contacto',
+          path: '/contacto',
+        },
+        {
+          name: 'header_blog',
+          path: '/blog',
+        },
+
+      ],
     }
   },
   computed: {
@@ -162,72 +193,66 @@ export default {
 </script>
 
 <style scoped>
-.header-container {
-  width: 100%;
-  height: 88px;
-  overflow: hidden;
-  background: var(--background_color_1);
-}
-.wrapper-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  background: var(--background_color_1);
-  flex-direction: column;
-  transition: all ease 1s;
-  position: fixed;
-  top: 0px;
-  z-index: 4;
-}
-.header {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1300px;
-  padding: 10px 30px 0;
-}
-.header-content-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2px 0px;
-}
-.wrapper-logo {
-  width: 100%;
-}
-.header-logo {
-  max-height: 70px;
-  object-fit: contain;
-  object-position: left;
-}
-.header-content-items {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-.header-content-icon {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.header-content-cart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  width: 35px;
-  height: 35px;
-  border: var(--color_icon) 2px solid;
-  border-radius: 50%;
-  padding-bottom: 3px;
-  margin-left: 20px;
-  position: relative;
-  cursor: pointer;
-}
+  .header-container{
+    @apply w-full flex flex-col justify-center items-center;
+  }
+  .header {
+    @apply flex w-full justify-between px-10 shadow-lg bg-white-white;
+  }
+  .header-content-buttons {
+    @apply w-auto flex flex-wrap gap-6 justify-center items-center;
+  }
+  .btn {
+    @apply font-semibold text-gray-textHeader;
+  }
+  .btn:hover {
+    @apply text-red-btnhoverHeader;
+  }
+  .wrapper-header {
+    @apply flex flex-col w-full justify-between items-center bg-blue-headerbg;
+  }
+  .header-content-logo {
+    @apply flex justify-center items-center py-1;
+  }
+  .wrapper-logo {
+    @apply w-full;
+  }
+  .header-logo {
+  @apply object-contain object-left max-h-16;
+  }
+  .header-content-items {
+    @apply flex flex-row justify-between items-center;
+  }
+  .header-content-icon {
+    @apply flex flex-row justify-between;
+  }
+  .header-content-cart {
+    @apply flex justify-center items-center w-9 h-9 box-border border-2 rounded-full pb-1 ml-5 relative cursor-pointer;
+  }
+  .header-content-page {
+    @apply flex grid grid-cols-2 gap-4;
+  }
+  @screen sm {
+    .header-container {
+      @apply w-full;
+    }
+    .header-content-buttons {
+      @apply sr-only;
+    }
+  }
+  @screen md {
+    .header-content-buttons {
+      @apply not-sr-only;
+    }
+  }
+  @screen lg {
+    .header {
+      @apply flex w-6/0 mt-6 py-2;
+    }
+    .header-content-page {
+      @apply flex w-6/0;
+    }
+  }
 .header-icon-cart {
   font-size: 20px;
   color: var(--color_icon);
@@ -252,10 +277,10 @@ export default {
   font-weight: bold;
 }
 .header-item-menu {
-  display: none;
+  @apply hidden;
 }
 .responsive {
-  display: none;
+  @apply hidden;
 }
 .icon-s {
   font-size: 25px;
@@ -302,11 +327,6 @@ input::-webkit-input-placeholder {
 #demo-2 input::-webkit-input-placeholder {
   color: transparent;
 }
-@media (max-width: 900px) {
-  .header {
-    padding: 10px 20px 0;
-  }
-}
 @media (max-width: 700px) {
   .header-item-menu {
     display: flex;
@@ -346,12 +366,9 @@ input::-webkit-input-placeholder {
     display: initial;
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 767px) {
   .search {
     display: none;
-  }
-  .header {
-    padding: 10px 15px 0;
   }
   .header-logo {
     max-width: 230px;
