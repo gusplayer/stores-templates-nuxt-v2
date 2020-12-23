@@ -99,6 +99,7 @@ import KoHeader3 from '../components/headers/header3/Ko-Header-3'
 import KoHeader4 from '../components/headers/header4/Ko-Header-4'
 import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
+import KoFooter4 from '../components/footers/footer4/Ko-Footer-4'
 import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
@@ -114,6 +115,7 @@ export default {
     KoHeader4,
     KoFooter1,
     KoFooter2,
+    KoFooter4,
     KoFooterCountry,
     koWhatsapp,
     koTiendaCerrada,
@@ -325,7 +327,8 @@ export default {
         //   }
         //   break
         case 7:
-          footerComponent = 'KoFooter2'
+          footerComponent = 'KoFooter4'
+          
           break
         case 8:
           footerComponent = 'KoFooter1'

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div
+  <!-- <div
     class="home"
     :style="
       this.$store.state.settingByTemplate &&
@@ -27,20 +27,23 @@
       :dataStore="dataStore"
       :fullProducts="fullProducts"
     ></KProductList>
-  </div>
+  </div> -->
+  <KHome></KHome>
 </template>
 
 <script>
-import kBanner from '../../components/template7/ko-Banner-1'
-import KCategory from '../../components/template7/Ko-Category-1'
-import KProductList from '../../components/template7/Ko-ProductList-1'
+// import kBanner from '../../components/template7/ko-Banner-1'
+// import KCategory from '../../components/template7/Ko-Category-1'
+// import KProductList from '../../components/template7/Ko-ProductList-1'
+import KHome from '../../components/template7/ko-home'
 
 export default {
   layout: 'default',
   components: {
-    kBanner,
-    KProductList,
-    KCategory,
+    KHome,
+    // kBanner,
+    // KProductList,
+    // KCategory,
   },
   data() {
     return {

@@ -9,6 +9,8 @@ export default {
     header_search: '¿Qué buscas?',
     header_allProduct: 'Todos los productos',
     header_tiendaWa: 'Tienda WhatsApp',
+    header_categorias: 'Categorias',
+    header_blog: 'Blog',
     //footer
     footer_inicio: 'Inicio',
     footer_carrito: 'Carrito',
@@ -72,6 +74,8 @@ export default {
     footer_pedidoWhatsapp: 'Pedido por WhatsApp',
     footer_noTieneWhatsapp:
       ' La tienda no tiene configurado un número de WhatsApp',
+    footer_categorias: 'Categorias',
+    footer_blog: 'Blog',
     // Micompra
     mcompra_title: 'Seguimiento de tu compra',
     mcompra_inputtitle: 'Número de Orden',
@@ -229,6 +233,8 @@ export default {
     header_search: 'Search',
     header_allProduct: 'All products',
     header_tiendaWa: 'WhatsApp Store',
+    header_categorias: 'Categories',
+    header_blog: 'Blog',
     //footer
     footer_inicio: 'Home',
     footer_carrito: 'Cart',
@@ -290,6 +296,8 @@ export default {
     footer_pedidoWhatsapp: 'WhatsApp Order',
     footer_noTieneWhatsapp:
       'The store does not have a WhatsApp number configured',
+    footer_categorias: 'Categories',
+    footer_blog: 'Blog',
     // Micompra
     mcompra_title: 'Track your purchase',
     mcompra_inputtitle: 'Order Number',
@@ -447,6 +455,8 @@ export default {
     header_search: 'Busca',
     header_allProduct: 'Todos os produtos',
     header_tiendaWa: 'WhatsApp Store',
+    header_categorias: 'Categorias',
+    header_blog: 'Blog',
     //footer
     footer_inicio: 'Home',
     footer_carrito: 'Carroça',
@@ -508,6 +518,8 @@ export default {
     footer_formDireccionMgs: 'Sua Endereço',
     footer_pedidoWhatsapp: 'WhatsApp Order',
     footer_noTieneWhatsapp: 'A loja não tem um número WhatsApp configurado',
+    footer_categorias: 'Categorias',
+    footer_blog: 'Blog',
     // Micompra
     mcompra_title: 'Rastreando sua compra',
     mcompra_inputtitle: 'Número do pedido',
