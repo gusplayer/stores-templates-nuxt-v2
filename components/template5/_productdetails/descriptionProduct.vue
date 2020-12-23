@@ -1,18 +1,15 @@
 <template>
   <div class="description">
-    <div class="left">
-      <h3 class="text-desc" v-if="!activeClass">
+    <div class="left" v-if="!activeClass">
+      <h3 class="text-desc">
         {{ $t('productdetail_description') }}
       </h3>
-      <div
-        class="content-text-desc"
-        v-if="!activeClass"
-        v-html="data.info.descripcion"
-      ></div>
+      <div class="content-text-desc" v-html="data.info.descripcion"></div>
       <!-- <div class="wrapper-comments">
         <KoComments :dataStore="dataStore" />
       </div> -->
     </div>
+    <div class="left-empty" v-else></div>
     <div class="right">
       <div class="payments section">
         <div class="content">
@@ -295,6 +292,12 @@ export default {
   padding-bottom: 10px;
   overflow: hidden;
 }
+.left-empty {
+  flex: 2;
+  width: 100%;
+  display: flex;
+  padding-bottom: 10px;
+}
 .right {
   flex: 1;
   display: flex;
@@ -435,9 +438,6 @@ li p {
   }
 }
 @media (max-width: 768px) {
-  .left {
-    margin-right: 15px;
-  }
   .description {
     display: flex;
     width: 100%;
@@ -450,9 +450,17 @@ li p {
     margin-left: 0px;
   }
   .left {
+    margin-right: 15px;
     margin-right: 0px;
     padding-bottom: 0px;
     flex: 1;
+    height: 100%;
+  }
+  .left-empty {
+    flex: 0;
+    width: 100%;
+    display: flex;
+    padding-bottom: 10px;
   }
   .right {
     border-left: 0px;
