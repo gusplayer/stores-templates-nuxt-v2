@@ -1,18 +1,22 @@
 <template>
   <div class="wrapper-card anim">
     <router-link :to="{ path: `/blog/` + article.slug }" class="container">
-      <div class="wrapper-image">
-        <img :src="this.article.photo" class="product-image" alt="blog" />
-      </div>
       <!-- <div class="wrapper-image">
-        <img :src="idCloudinary(this.article.photo, 600, 600)" class="product-image" alt="blog" />
+        <img :src="this.article.photo" class="product-image" alt="blog" />
       </div> -->
+      <div class="wrapper-image">
+        <img
+          :src="idCloudinary(this.article.imagen_principal_url, 600, 600)"
+          class="product-image"
+          alt="blog"
+        />
+      </div>
       <div class="wrapper-item-text">
         <p class="title">{{ this.article.titulo }}</p>
         <p class="subtext">{{ `${this.article.resumen.slice(0, 200)}...` }}</p>
         <div class="content-date">
           <p>Autor: {{ this.article.autor }}</p>
-          <p>{{ this.article.fecha_creacion }}</p>
+          <p>{{ this.article.created_at }}</p>
         </div>
       </div>
     </router-link>
