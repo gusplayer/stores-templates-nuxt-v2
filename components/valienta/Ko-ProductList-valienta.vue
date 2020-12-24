@@ -302,10 +302,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f8f9fb;
+  background-color: white;
   box-sizing: border-box;
   margin-top: 0px;
-  padding-top: 5px;
+  padding-top: 15px;
 }
 .container {
   display: flex;
@@ -319,8 +319,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  height: 40px;
+  margin-bottom: 10px;
 }
 .content-items-categorias-text {
   display: flex;
@@ -328,25 +327,23 @@ export default {
 }
 .text-categorias {
   background: transparent;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: bold;
   line-height: 1.4;
   cursor: pointer;
-  color: #4c4c4c;
-  display: flex;
+  color: #484848;
 }
 .text-categorias-select {
   background: transparent;
   font-size: 14px;
   font-weight: bold;
   line-height: 1.4;
-  color: rgb(46, 46, 46);
+  color: #484848;
   align-self: flex-end;
   margin-right: 2px;
-  margin-left: 5px;
+  margin-left: 1px;
   cursor: pointer;
   opacity: 0.6;
-  display: flex;
 }
 .content-item-productos {
   display: flex;
@@ -359,7 +356,7 @@ export default {
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(2, minmax(250px, 2fr));
+  grid-template-columns: repeat(4, minmax(173px, 2fr));
   grid-gap: 15px;
   box-sizing: border-box;
 }
@@ -420,6 +417,12 @@ export default {
   background-color: #2ec4a1;
   color: white;
 }
+@media (max-width: 800px) {
+  .grid-products {
+    grid-template-columns: repeat(3, minmax(173px, 2fr));
+    grid-gap: 20px;
+  }
+}
 @media (max-width: 770px) {
   .container {
     padding: 0px 0px 10px 0px;
@@ -430,20 +433,14 @@ export default {
   .text-categorias {
     padding: 0 10px;
   }
+  .grid-products {
+    grid-template-columns: repeat(2, minmax(173px, 2fr));
+    grid-gap: 20px;
+  }
 }
 @media (max-width: 700px) {
   .content-items-categorias {
     margin-left: 10px;
-    margin-bottom: 10px;
-  }
-  .grid-products {
-    grid-template-columns: repeat(1, minmax(250px, 2fr));
-    grid-gap: 20px;
-  }
-}
-@media (max-width: 450px) {
-  .content-item-productos {
-    padding: 0px 10px 20px;
   }
 }
 </style>

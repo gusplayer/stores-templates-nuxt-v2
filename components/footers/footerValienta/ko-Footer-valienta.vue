@@ -85,7 +85,7 @@ export default {
   background: white;
 }
 .wrapper-footer {
-   background: #2C3657; 
+  background: #2c3657;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -136,7 +136,7 @@ export default {
 .valor span {
   font-size: 13px;
   text-align: right;
-  background-color: #12a493;
+  background-color: #a9206b;
   padding: 6px;
   border-radius: 5px;
 }

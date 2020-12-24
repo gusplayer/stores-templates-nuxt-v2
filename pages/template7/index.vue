@@ -2,6 +2,7 @@
   <!-- <div
     class="home"
     :style="
+    this.settingByTemplate &&
       this.$store.state.settingByTemplate &&
       this.$store.state.settingByTemplate['--background_color_1']
         ? this.$store.state.settingByTemplate

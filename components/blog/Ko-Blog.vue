@@ -8,22 +8,25 @@
         <div class="content-item-productos">
           <div class="grid-products">
             <div
-              v-for="article in filterArticles"
+              v-for="article in listArticulos"
               :key="article.id"
               class="content-products"
             >
               <KoProductCard1 :article="article"></KoProductCard1>
             </div>
           </div>
-          <div v-if="(articles.length == 0)" class="content-products-empty">
+          <div
+            v-if="(listArticulos.length == 0)"
+            class="content-products-empty"
+          >
             <p>No se encontraron artículos.</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="articles.length > 12">
+            <div class="product_pagination" v-if="listArticulos.length > 12">
               <el-pagination
                 background
                 layout="prev, pager, next"
-                :total="articles.length"
+                :total="listArticulos.length"
                 :page-size="12"
                 :current-page.sync="currentPage"
                 class="pagination"
@@ -42,19 +45,22 @@ export default {
   components: {
     KoProductCard1,
   },
+  mounted() {
+    this.$store.dispatch('GET_ARTICLES')
+  },
   data() {
     return {
       currentPage: 1,
     }
   },
   computed: {
-    articles() {
-      return this.$store.state.articles
+    listArticulos() {
+      return this.$store.state.listArticulos
     },
     filterArticles() {
       const initial = this.currentPage * 12 - 12
       const final = initial + 12
-      return this.articles.slice(initial, final)
+      return this.listArticulos.slice(initial, final)
     },
   },
 }

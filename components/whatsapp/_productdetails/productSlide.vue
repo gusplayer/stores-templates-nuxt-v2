@@ -75,6 +75,10 @@ export default {
 </script>
 
 <style scoped>
+.swiper-wrapper {
+  max-width: 360px;
+  height: 360px;
+}
 .swiper-slide {
   width: 100%;
   max-width: 360px;

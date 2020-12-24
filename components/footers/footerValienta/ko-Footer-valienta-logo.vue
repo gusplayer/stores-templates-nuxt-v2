@@ -120,9 +120,9 @@ export default {
 .icon {
   margin-right: 10px;
   font-size: 20px;
-  color: #128c7e;
+  color: #a9206b;
 }
 .icon:hover {
-  color: #25d366;
+  color: #dd288c;
 }
 </style>

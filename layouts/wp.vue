@@ -1,5 +1,6 @@
 <template>
   <div class="general-container">
+    <koHeaderValienta :dataStore="dataStore" />
     <nuxt />
     <div
       class="wrapper-notificacion"
@@ -24,7 +25,7 @@
           Disculpa, no podrá realizar compras por el momento,
         </p>
         <p class="subtitle-noti">
-          La tienda no tiene configurado un número de WhatsApp
+          La tienda no es de Valienta
         </p>
       </div>
     </div>
@@ -32,10 +33,12 @@
 </template>
 
 <script>
+import koHeaderValienta from '../components/headers/header_wp/Ko-Header-valienta'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
 export default {
   components: {
     koTiendaCerrada,
+    koHeaderValienta,
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
@@ -179,8 +182,9 @@ export default {
   font-family: 'Poppins', sans-serif !important;
 }
 .general-container {
-  display: flex;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #f0f0f0;

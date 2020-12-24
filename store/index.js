@@ -141,60 +141,9 @@ export const state = () => ({
     '--color_text_btn': '#ffffff',
   },
   previousPage: 1,
-  articles: [
-    {
-      id: 1,
-      titulo: 'How to create a personal freelance brand',
-      photo: 'https://blog.hotmart.com/blog/2017/09/criar-um-blog-670x419.png',
-      autor: 'Miguel',
-      resumen:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem commodi sunt laborum modi. Placeat obcaecati ex exercitationem saepe similique minus eum. Dolorem dignissimos incidunt nulla labore tempora autem deserunt explicabo.',
-      contenido:
-        '<h1>Articulo prueba</h1><p><br></p><p>You have been dreaming of becoming your own boss for years and now you have finally taken the leap of faith. You are a freelancer! Being a freelancer doesn’t mean that all you need to do is build a regular client base and bill your hours.</p><p><br></p><p>Every brand has something unique that makes it what it is. That thing is personality and in the case of a freelancer,&nbsp;<em>you</em>&nbsp;are the personality of the brand. There has never been a better time to start owning who you truly are and begin to celebrate it.Be real, be authentic and take the risk to express in writing who you think you really are. The best way to do this is to write a free-association essay in the first person. By using the words,&nbsp;<em>I am,</em>&nbsp;you are affirming who you are to yourself. Next, think of your eulogy.Seriously! A legacy is what we leave behind when we are gone. It’s what pops into mind when people think of us. What other people think when they interact with you as your business is very important to how they feel about your business and what you are offering.</p>',
-      fecha_creacion: '22/09/2020',
-      slug: 'Blog-numero-uno',
-    },
-    {
-      id: 2,
-      titulo: 'Segundo Blog',
-      photo:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQPQ5gB912M2i2LM1CPd4sUPB1DXpcVMj846Q&usqp=CAU',
-      autor: 'Juan',
-      resumen:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem commodi sunt laborum modi. Placeat obcaecati ex exercitationem saepe similique minus eum. Dolorem dignissimos incidunt nulla labore tempora autem deserunt explicabo.',
-      contenido:
-        '<h1>Articulo prueba</h1><p><br></p><p>You have been dreaming of becoming your own boss for years and now you have finally taken the leap of faith. You are a freelancer! Being a freelancer doesn’t mean that all you need to do is build a regular client base and bill your hours.</p><p><br></p><p>Every brand has something unique that makes it what it is. That thing is personality and in the case of a freelancer,&nbsp;<em>you</em>&nbsp;are the personality of the brand. There has never been a better time to start owning who you truly are and begin to celebrate it.Be real, be authentic and take the risk to express in writing who you think you really are. The best way to do this is to write a free-association essay in the first person. By using the words,&nbsp;<em>I am,</em>&nbsp;you are affirming who you are to yourself. Next, think of your eulogy.Seriously! A legacy is what we leave behind when we are gone. It’s what pops into mind when people think of us. What other people think when they interact with you as your business is very important to how they feel about your business and what you are offering.</p>',
-      fecha_creacion: '22/10/2020',
-      slug: 'Blog-numero-dos',
-    },
-    {
-      id: 3,
-      titulo: 'How to create a personal freelance brand',
-      photo: 'https://blog.hotmart.com/blog/2017/09/criar-um-blog-670x419.png',
-      autor: 'Miguel',
-      resumen:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem commodi sunt laborum modi. Placeat obcaecati ex exercitationem saepe similique minus eum. Dolorem dignissimos incidunt nulla labore tempora autem deserunt explicabo.',
-      contenido:
-        '<h1>Articulo prueba</h1><p><br></p><p>You have been dreaming of becoming your own boss for years and now you have finally taken the leap of faith. You are a freelancer! Being a freelancer doesn’t mean that all you need to do is build a regular client base and bill your hours.</p><p><br></p><p>Every brand has something unique that makes it what it is. That thing is personality and in the case of a freelancer,&nbsp;<em>you</em>&nbsp;are the personality of the brand. There has never been a better time to start owning who you truly are and begin to celebrate it.Be real, be authentic and take the risk to express in writing who you think you really are. The best way to do this is to write a free-association essay in the first person. By using the words,&nbsp;<em>I am,</em>&nbsp;you are affirming who you are to yourself. Next, think of your eulogy.Seriously! A legacy is what we leave behind when we are gone. It’s what pops into mind when people think of us. What other people think when they interact with you as your business is very important to how they feel about your business and what you are offering.</p>',
-      fecha_creacion: '22/09/2020',
-      slug: 'Blog-numero-uno',
-    },
-    {
-      id: 4,
-      titulo: 'Segundo Blog',
-      photo:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQPQ5gB912M2i2LM1CPd4sUPB1DXpcVMj846Q&usqp=CAU',
-      autor: 'Juan',
-      resumen:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem commodi sunt laborum modi. Placeat obcaecati ex exercitationem saepe similique minus eum. Dolorem dignissimos incidunt nulla labore tempora autem deserunt explicabo.',
-      contenido:
-        '<h1>Articulo prueba</h1><p><br></p><p>You have been dreaming of becoming your own boss for years and now you have finally taken the leap of faith. You are a freelancer! Being a freelancer doesn’t mean that all you need to do is build a regular client base and bill your hours.</p><p><br></p><p>Every brand has something unique that makes it what it is. That thing is personality and in the case of a freelancer,&nbsp;<em>you</em>&nbsp;are the personality of the brand. There has never been a better time to start owning who you truly are and begin to celebrate it.Be real, be authentic and take the risk to express in writing who you think you really are. The best way to do this is to write a free-association essay in the first person. By using the words,&nbsp;<em>I am,</em>&nbsp;you are affirming who you are to yourself. Next, think of your eulogy.Seriously! A legacy is what we leave behind when we are gone. It’s what pops into mind when people think of us. What other people think when they interact with you as your business is very important to how they feel about your business and what you are offering.</p>',
-      fecha_creacion: '22/10/2020',
-      slug: 'Blog-numero-dos',
-    },
-  ],
   layoutUnicentro: false,
   listDescuentos: [],
+  listArticulos: [],
 })
 
 export const mutations = {
@@ -400,8 +349,8 @@ export const mutations = {
     state.fullPathServer = value
   },
   SET_TEMPLATE_STORE(state, value) {
-    // state.template = value
-    state.template = 7
+    state.template = value
+    // state.template = 7
   },
 }
 export const actions = {
@@ -655,6 +604,16 @@ export const actions = {
         ) {
           return prev.cantidad_productos - next.cantidad_productos
         })
+      })
+  },
+  GET_ARTICLES({ state }) {
+    axios
+      .get(
+        `${state.urlKomercia}/api/blogs/${state.dataStore.tienda.id_tienda}?page=1`,
+        state.configAxios
+      )
+      .then((response) => {
+        state.listArticulos = response.data.blogs.data
       })
   },
 }

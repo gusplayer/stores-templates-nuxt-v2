@@ -7,9 +7,10 @@
         <p @click="$router.go(-1)">Regresar</p>
       </div>
       <p class="title-blog">{{ articule.titulo }}</p>
+
       <div class="content-date">
         <p style="margin-right: 10px;">{{ articule.autor }}</p>
-        <p>{{ articule.fecha_creacion }}</p>
+        <p>{{ articule.updated_at }}</p>
       </div>
       <div class="wrapper-articulo" v-html="articule.contenido"></div>
     </div>
@@ -20,11 +21,9 @@ export default {
   name: 'Ko-Blog',
   mounted() {
     this.routePrev()
-    if (this.articles.length) {
-      let filtradoarticule = this.articles.find(
-        (element) => element.slug == this.$route.params.slug
-      )
-      this.articule = filtradoarticule
+    this.$store.dispatch('GET_ARTICLES')
+    if (this.listArticulos.length) {
+      this.searchIdForSlug()
     }
   },
   data() {
@@ -34,17 +33,31 @@ export default {
     }
   },
   computed: {
-    articles() {
-      return this.$store.state.articles
+    listArticulos() {
+      return this.$store.state.listArticulos
     },
   },
   methods: {
+    searchIdForSlug() {
+      let domain = this.$route.fullPath
+      let result = domain.split('/')
+      this.listArticulos.filter((product) => {
+        if (product.slug === result[result.length - 1]) {
+          this.articule = product
+        }
+      })
+    },
     routePrev() {
       if (this.$route.path == '/') {
         this.toggleArrow = false
       } else {
         this.toggleArrow = true
       }
+    },
+  },
+  watch: {
+    listArticulos() {
+      this.searchIdForSlug()
     },
   },
 }
