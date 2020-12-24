@@ -138,13 +138,16 @@ export default {
     @apply flex flex-wrap gap-4 my-6 justify-center items-center;
   }
   .btn {
-    @apply font-semibold text-gray-textHeader;
+    @apply font-semibold text-gray-textHeader uppercase tracking-wider;
   }
   .btn:hover {
     @apply text-red-btnhoverHeader;
   }
   .footer-content-icons {
     @apply w-full flex flex-wrap gap-8 justify-center items-center;
+  }
+  .btn {
+    font-family: 'Lora', serif !important ;
   }
   
   .text-icon {
@@ -178,7 +181,7 @@ export default {
   }
   @screen lg {
     .footer-content-image {
-      @apply not-sr-only w-3/5;
+      @apply not-sr-only w-full;
     }
     .footer-content-items{
       @apply flex w-5/0 flex-col justify-center items-center ;

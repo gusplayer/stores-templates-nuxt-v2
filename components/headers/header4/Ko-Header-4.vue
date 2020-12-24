@@ -5,6 +5,7 @@
         <KoOrder :dataStore="dataStore" />
           <div class="header-item-menu" @click="openMenulateral">
                 <menu-icon class="header-icon-menu nav-bar" />
+                <span class="header-text-menu">{{ $t('header_menu') }}</span>
           </div>
           <div class="header-content-logo">
               <nuxt-link to="/" class="wrapper-logo">
@@ -30,7 +31,12 @@
           <div class="header-content-items">
               <div v-if="showSearch">
                 <div class="search">
-                  <form id="demo-2" style="position: relative;">
+                  <form class="header-search-icon">
+                    <svg class="search-header" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </form>
+                  <!-- <form id="demo-2" style="position: relative;">
                     <search-icon class="icon-s" @click="focusInput" />
                     <input
                       type="search"
@@ -39,13 +45,17 @@
                       @keyup.enter="getSearch(search)"
                       id="SearchHeader"
                     />
-                  </form>
+                  </form> -->
                 </div>
               </div>
               <div class="header-content-icon">
                 <div class="header-content-cart" @click="openOrder">
-                  <cart-icon class="header-icon-cart" />
-                  <span class="num-items">{{ productsCart }}</span>
+                  <svg class="h-6 w-6 text-gray-textHeader" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                </div>
+                <div class="border-num-items">
+                    <span an class="num-items">{{ productsCart }}</span>
                 </div>
               </div>
           </div>
@@ -203,13 +213,13 @@ export default {
     @apply w-auto flex flex-wrap gap-6 justify-center items-center;
   }
   .btn {
-    @apply font-semibold text-gray-textHeader;
+    @apply font-semibold text-gray-textHeader uppercase tracking-wider text-base;
   }
   .btn:hover {
     @apply text-red-btnhoverHeader;
   }
   .wrapper-header {
-    @apply flex flex-col w-full justify-between items-center bg-blue-headerbg;
+    @apply flex flex-col w-full justify-between items-center bg-headaerbg;
   }
   .header-content-logo {
     @apply flex justify-center items-center py-1;
@@ -227,113 +237,68 @@ export default {
     @apply flex flex-row justify-between;
   }
   .header-content-cart {
-    @apply flex justify-center items-center w-9 h-9 box-border border-2 rounded-full pb-1 ml-5 relative cursor-pointer;
+    @apply flex justify-center items-center w-9 h-9 box-border pb-1 ml-5 relative cursor-pointer;
   }
   .header-content-page {
     @apply flex grid grid-cols-2 gap-4;
   }
+  .header-icon-cart {
+    font-size: 20px;
+    color: var(--color_icon);
+  }
+  .header-icon-cart:hover {
+    color: var(--btnhover);
+  }
+  .border-num-items {
+    @apply  bg-red-btnbannershop rounded-full h-4 w-auto flex justify-center items-center text-center -ml-3;
+  }
+  .num-items {
+    @apply text-xs p-1 text-white-white;
+  }
+  .header-item-menu {
+    @apply hidden;
+  }
+  .responsive {
+    @apply hidden;
+  }
+  .header-search-icon {
+    @apply w-6 h-6 text-gray-textHeader;
+  }
+  .search-header {
+    @apply cursor-pointer text-gray-textHeader;
+  }
+  .btn {
+    font-family: 'Lora', serif !important ;
+  }
+  .header-text-menu {
+    font-family: 'Lora', serif !important;
+  }
+/* ***** */
   @screen sm {
+    .header {
+      @apply w-full px-4;
+    }
     .header-container {
       @apply w-full;
     }
     .header-content-buttons {
       @apply sr-only;
     }
-  }
-  @screen md {
-    .header-content-buttons {
-      @apply not-sr-only;
+    .header-content-cart {
+      @apply  pb-0 ml-0;
     }
-  }
-  @screen lg {
-    .header {
-      @apply flex w-6/0 mt-6 py-2;
+    .header-text-menu{
+      @apply sr-only;
     }
-    .header-content-page {
-      @apply flex w-6/0;
+    .search-header {
+      @apply sr-only;
     }
-  }
-.header-icon-cart {
-  font-size: 20px;
-  color: var(--color_icon);
-}
-.header-icon-cart:hover {
-  color: var(--btnhover);
-}
-.num-items {
-  font-size: 11px;
-  position: absolute;
-  right: -5px;
-  top: -5px;
-  color: var(--background_color_1);
-  background-color: var(--color_icon);
-  border: var(--color_icon) 1px;
-  border-radius: 10px;
-  line-height: 1;
-  display: flex;
-  padding: 3px;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-}
-.header-item-menu {
-  @apply hidden;
-}
-.responsive {
-  @apply hidden;
-}
-.icon-s {
-  font-size: 25px;
-  color: var(--color_icon);
-  position: absolute;
-  top: 3px;
-  left: 5px;
-  cursor: pointer;
-}
-.icon-s:hover {
-  color: var(--btnhover);
-}
-input[type='search']:focus {
-  background-color: #fff;
-  border-color: var(--btnhover);
-}
-input:-moz-placeholder {
-  color: var(--color_text);
-}
-input::-webkit-input-placeholder {
-  color: var(--color_text);
-}
-#demo-2 input[type='search'] {
-  width: 35px;
-  height: 35px;
-  padding-left: 10px;
-  color: transparent;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-#demo-2 input[type='search']:hover {
-  background-color: #fff;
-}
-#demo-2 input[type='search']:focus {
-  width: 160px;
-  padding-left: 32px;
-  color: var(--color_text);
-  background-color: #fff;
-  cursor: auto;
-}
-#demo-2 input:-moz-placeholder {
-  color: transparent;
-}
-#demo-2 input::-webkit-input-placeholder {
-  color: transparent;
-}
-@media (max-width: 700px) {
-  .header-item-menu {
+    .header-item-menu {
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 20px;
+    /* margin-left: 20px; */
   }
   .header-icon-menu {
     font-size: 30px;
@@ -355,7 +320,7 @@ input::-webkit-input-placeholder {
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: var(--color_text);
+    color: #3f3f3f;
   }
   .nav-bar > .material-design-icon__svg {
     bottom: 0px;
@@ -365,8 +330,44 @@ input::-webkit-input-placeholder {
   .responsive {
     display: initial;
   }
-}
-@media (max-width: 767px) {
+  }
+  @screen md {
+    .header-text-menu {
+      @apply not-sr-only font-semibold text-xs uppercase tracking-widest pl-2;
+    }
+  }
+  @screen lg {
+    .header {
+      @apply flex w-full;
+    }
+  }
+  @screen xl {
+    .header {
+      @apply w-8/3 mt-8 py-2;
+    }
+    .header-content-page {
+      @apply flex w-8/3;
+    }
+    .header-content-buttons {
+      @apply not-sr-only;
+    }
+    .header-text-menu{
+      @apply sr-only;
+    }
+    .search-header {
+      @apply not-sr-only;
+    }
+    .header-item-menu {
+      @apply sr-only;
+    }
+  }
+  @screen xxl {
+    .header {
+      @apply flex w-4/6 mt-8 py-2;
+    }
+  }
+
+@media (max-width: 768px) {
   .search {
     display: none;
   }
