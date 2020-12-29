@@ -161,7 +161,7 @@ export default {
 }
 .content-products-empty {
   width: 100%;
-  min-height: calc(64vh);
+  min-height: calc(37vh);
   display: flex;
   justify-content: center;
   align-items: center;
