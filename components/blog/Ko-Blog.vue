@@ -1,32 +1,35 @@
 <template>
   <div class="wrapper_error">
     <div class="contenedor">
-      <div>
-        <p class="title-error">Blog</p>
+      <div class="content-tittle">
+        <p class="title">Blog</p>
+        <input
+          type="text"
+          v-model="search"
+          class="input-text"
+          placeholder="Buscar artículo"
+        />
       </div>
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
             <div
-              v-for="article in listArticulos"
+              v-for="article in filteredList"
               :key="article.id"
               class="content-products"
             >
               <KoProductCard1 :article="article"></KoProductCard1>
             </div>
           </div>
-          <div
-            v-if="(listArticulos.length == 0)"
-            class="content-products-empty"
-          >
+          <div v-if="(filteredList.length == 0)" class="content-products-empty">
             <p>No se encontraron artículos.</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="listArticulos.length > 12">
+            <div class="product_pagination" v-if="filteredList.length > 12">
               <el-pagination
                 background
                 layout="prev, pager, next"
-                :total="listArticulos.length"
+                :total="filteredList.length"
                 :page-size="12"
                 :current-page.sync="currentPage"
                 class="pagination"
@@ -51,6 +54,7 @@ export default {
   data() {
     return {
       currentPage: 1,
+      search: '',
     }
   },
   computed: {
@@ -60,7 +64,18 @@ export default {
     filterArticles() {
       const initial = this.currentPage * 12 - 12
       const final = initial + 12
-      return this.listArticulos.slice(initial, final)
+      return this.filteredList.slice(initial, final)
+    },
+    filteredList() {
+      if (this.search) {
+        return this.listArticulos.filter((element) => {
+          return element.titulo
+            .toLowerCase()
+            .includes(this.search.toLowerCase())
+        })
+      } else {
+        return this.listArticulos
+      }
     },
   },
 }
@@ -78,18 +93,55 @@ export default {
 .contenedor {
   width: 100%;
   max-width: 1300px;
-  /* height: calc(100vh - 432px); */
   padding: 20px 20px 60px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-.title-error {
+.content-tittle {
+  width: 100%;
+  padding: 10px 20px 15px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 5px;
+  background: white;
+}
+.title {
   font-size: 30px;
   font-weight: bold;
   color: black;
-  margin-bottom: 30px;
+  padding: 10px 0;
+}
+.input-text {
+  font-size: 14px;
+  color: rgba(21, 20, 57, 0.541);
+  border: solid 2px #afafaf;
+  border-radius: 0px;
+  background-color: transparent;
+  padding: 8px 14px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.input-text::placeholder {
+  color: rgba(21, 20, 57, 0.541);
+  opacity: 0.7;
+}
+.input-text:-internal-autofill-selected {
+  -webkit-appearance: menulist-button;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: -internal-light-dark-color(black, white) !important;
+}
+.input-text:focus,
+.input-text:active {
+  outline: 0;
+  border: solid 2px black;
 }
 .content-item-productos {
   display: flex;
@@ -109,7 +161,7 @@ export default {
 }
 .content-products-empty {
   width: 100%;
-  min-height: 200px;
+  min-height: calc(64vh);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -6,13 +6,24 @@
         </arrow-left-icon>
         <p @click="$router.go(-1)">Regresar</p>
       </div>
-      <p class="title-blog">{{ articule.titulo }}</p>
+      <p class="title-blog">{{ dataArticle.titulo }}</p>
 
       <div class="content-date">
-        <p style="margin-right: 10px;">{{ articule.autor }}</p>
-        <p>{{ articule.updated_at }}</p>
+        <div class="flex-shrink-0">
+          <a href="#">
+            <img
+              class="h-10 w-10 rounded-full"
+              src="https://api2.komercia.co/users/user.jpg"
+              alt=""
+            />
+          </a>
+        </div>
+        <div class="content-date-items">
+          <p>{{ dataArticle.autor }}</p>
+          <p>{{ this.shippingCreated }}</p>
+        </div>
       </div>
-      <div class="wrapper-articulo" v-html="articule.contenido"></div>
+      <div class="wrapper-articulo" v-html="dataArticle.contenido"></div>
     </div>
   </div>
 </template>
@@ -25,11 +36,21 @@ export default {
     if (this.listArticulos.length) {
       this.searchIdForSlug()
     }
+    if (this.dataArticle && this.dataArticle.created_at) {
+      let dateCreated = this.dataArticle.created_at
+      let resultCreated = dateCreated.split(' ')
+      this.shippingCreated = resultCreated[0]
+      let dateUpdate = this.dataArticle.updated_at
+      let resultUpdate = dateUpdate.split(' ')
+      this.shippingUpdated = resultUpdate[0]
+    }
   },
   data() {
     return {
-      articule: {},
+      dataArticle: {},
       toggleArrow: false,
+      shippingCreated: '',
+      shippingUpdated: '',
     }
   },
   computed: {
@@ -43,7 +64,7 @@ export default {
       let result = domain.split('/')
       this.listArticulos.filter((product) => {
         if (product.slug === result[result.length - 1]) {
-          this.articule = product
+          this.dataArticle = product
         }
       })
     },
@@ -66,6 +87,7 @@ export default {
 .wrapper-blog {
   display: flex;
   width: 100%;
+  min-height: calc(64vh);
   background: #efefef;
   justify-content: center;
   align-items: center;
@@ -75,8 +97,9 @@ export default {
   max-width: 1200px;
   padding: 30px 20px 50px 20px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+  align-self: flex-start;
   box-sizing: content-box;
 }
 .content-back {
@@ -94,28 +117,34 @@ export default {
   cursor: pointer;
   color: black;
 }
-.content-back p:hover,
-.arrow-left:hover {
-  color: red;
-}
 .title-blog {
   font-size: 30px;
   font-weight: bold;
   color: black;
+  margin-top: 20px;
 }
 .content-date {
   width: 100%;
   display: flex;
   flex-direction: row;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
-.content-date p {
+.content-date-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.content-date-items p {
   font-size: 14px;
   color: #3a4557bb;
+}
+.content-date-items p:nth-child(1) {
+  font-weight: bold;
 }
 .wrapper-articulo {
   background: white;
   border-radius: 5px;
-  padding: 20px;
+  padding: 15px;
 }
 </style>
