@@ -350,7 +350,7 @@ export const mutations = {
   },
   SET_TEMPLATE_STORE(state, value) {
     state.template = value
-    // state.template = 7
+    // state.template = 8
   },
 }
 export const actions = {
