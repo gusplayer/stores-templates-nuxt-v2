@@ -328,7 +328,7 @@ export default {
         //   break
         case 7:
           footerComponent = 'KoFooter4'
-          
+
           break
         case 8:
           footerComponent = 'KoFooter1'
@@ -426,7 +426,7 @@ export default {
   padding: 0px;
   font-family: var(--font-style);
   outline: none;
-  list-style: none;
+  /* list-style: none; */
   text-decoration: none;
   box-sizing: border-box;
   outline: none !important;
