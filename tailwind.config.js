@@ -8,26 +8,95 @@ module.exports = {
     extend: {
       width: {
         '1/0': '10%',
+        '1/1': '11%',
+        '1/2': '12%',
+        '1/3': '13%',
+        '1/4': '14%',
+        '1/5': '15%',
         '2/0': '20%',
         '3/0': '30%',
         '3/5': '35%',
         '4/0': '40%',
+        '4/1': '41%',
+        '4/2': '42%',
+        '4/3': '43%',
+        '4/4': '44%',
+        '4/5': '45%',
+        '4/6': '46%',
+        '4/7': '47%',
+        '4/8': '48%',
         '5/0': '50%',
         '6/0': '60%',
+        '6/3': '63%',
         '7/0': '70%',
         '8/0': '80%',
+        '8/2': '82%',
+        '8/3': '83%',
+        '8/4': '84%',
+        '8/5': '85%',
+        '8/6': '86%',
+        '8/3': '83%',
         '9/0': '90%',
+        '9/3': '93%',
+        '9/4': '94%',
+        '9/8': '98%',
+        '9/5': '95%',
         '10/0': '100%',
-        
+
+        '10': '10px',
+        '20': '20px',
+        '24': '24px',
+        '30': '30px',
+        '40': '40px',
+        '50': '50px',
+        '60': '60px',
+        '70': '70px',
+        '80': '80px',
+        '90': '90px',
+        '100': '100px',
+
         '9': '2.25rem',
       },
       height: {
-        '7': '1.75rem',
-        '9': '2.25rem',
+        '1': '1px',
+        '2': '2px',
+        '3': '3px',
+        '4': '4px',
+        '5': '5px',
+        '8': '8px',
+        '9': '9px',
+
+        '10': '10px',
+        '16': '16px',
+        '20': '20px',
+        '24': '24px',
+        '28': '28px',
+        '30': '30px',
+        '36': '36px',
+        '40': '40px',
+        '50': '50px',
+        '60': '60px',
+        '70': '70px',
+        '80': '80px',
+        '90': '90px',
+        '100': '100px',
+      },
+      margin: {
+        '10': '10px',
+        '20': '20px',
+        '24': '24px',
+        '30': '30px',
+        '40': '40px',
+        '50': '50px',
+        '60': '60px',
+        '70': '70px',
+        '80': '80px',
+        '90': '90px',
+        '100': '100px',
       },
       fontFamily: {
-        'sans': ['ui-sans-serif'],
-       },
+        sans: ['ui-sans-serif'],
+      },
       maxHeight: {
         '0': '0',
         '1': '25%',
@@ -35,23 +104,69 @@ module.exports = {
         '3': '75%',
         '16': '4rem',
         '230': '14rem',
-        'full': '100%',
-       },
-       backgroundImage: theme => ({
-        'headaerbg': "url('/img/hero-pattern.svg')",
-       })
+        full: '100%',
+      },
+      fontFamily: {
+        dancing: ['Dancing Script'],
+      },
+      fontSize: {
+        xs: '.75rem',
+        sm: '.875rem',
+        tiny: '.875rem',
+        base: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.875rem',
+        '4xl': '2.25rem',
+        '4.4xl': '2.45rem',
+        '4.5xl': '2.50rem',
+        '5xl': '3rem',
+        '6xl': '4rem',
+        '7xl': '5rem',
+      },
+      borderRadius: {
+        '1': '1px',
+        '2': '2px',
+        '3': '3px',
+        '4': '4px',
+        '5': '5px',
+        '6': '6px',
+        '7': '7px',
+        '8': '8px',
+        '9': '9px',
+        '10': '10px',
+      },
+
+      backgroundImage: (theme) => ({
+        bannerbg1:
+          "url('https://i.pinimg.com/564x/2c/61/fd/2c61fd220d7468b94eb7fe8fef69a164.jpg')",
+        bannerbg2:
+          "url('https://i.pinimg.com/564x/72/00/77/7200779d2efdf778a10752abc421f3ad.jpg')",
+        bannerbg3:
+          "url('https://i.pinimg.com/564x/15/e5/61/15e56154f6425f07c337d67485677e40.jpg')",
+      }),
     },
     screens: {
-      'sm':'300px',
+      sm: '300px',
       // => @media (min-wipxdth: 200px) { ... }
-      'md': '700px',
+      md: '768px',
       // => @media (min-width: 768px) { ... }
-      'lg': '1024px',
+      lg: '1024px',
       // => @media (min-width: 1024px) { ... }
-      'xl': '1440px',
+      mlg: '1280px',
+      // => @media (min-width: 1280px) { ... }
+      xl: '1440px',
       // => @media (min-width: 1440) { ... }
+      xml: '1920px',
+      // => @media (min-width: 19200) { ... }
+      xxl: '2560px',
+      // => @media (min-width: 2560) { ... }
     },
     colors: {
+      black: '#000',
+      white: '#fff',
+
       redes: {
         twitter: '#00acee',
         facebook: '#3b5998',
@@ -59,7 +174,7 @@ module.exports = {
         youtube: '#c4302b',
       },
       white: {
-        white: '#ffffff'
+        white: '#ffffff',
       },
       blue: {
         headerbg: '#E4F2F5',
@@ -67,15 +182,26 @@ module.exports = {
       },
       red: {
         btnhoverHeader: '#ED2353',
-        btnhomeshop: '#ED2353',
-        btnhomeshophover: '#D7204B',
-        
+        btnbannershop: '#ED2353',
+        btnbannershophover: '#D7204B',
       },
       gray: {
         textHeader: '#3f3f3f',
-        btnhomeviewhover: '#5C7882',
+        btnbannerviewhover: '#5C7882',
+        headerinputph: '#b7b7b7',
+        searchcontent: '#7F7F7F',
       },
-    }
+      coffe: {
+        headerpage: '#b09782',
+      },
+      rose: {
+        headerpage: '#93646A',
+        btnbannerviewhover: '#C18F96',
+      },
+    },
+    fontFamily: {
+      dancing: ['Dancing Script'],
+    },
   },
   variants: {},
   plugins: [],

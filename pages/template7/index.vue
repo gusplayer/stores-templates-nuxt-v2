@@ -1,50 +1,50 @@
 <template lang="html">
+  <div>
+    <KCarousel></KCarousel>
+  </div>
   <!-- <div
-    class="home"
-    :style="
-    this.settingByTemplate &&
-      this.$store.state.settingByTemplate &&
-      this.$store.state.settingByTemplate['--background_color_1']
-        ? this.$store.state.settingByTemplate
-        : this.settingBase
-    "
-  >
-    <div class="space-search"></div>
-    <div class="search-movil" id="navbar">
-      <form id="demo-1" style="width: 100%; position: relative;">
-        <search-icon class="icon-s" />
-        <input
-          v-model="search"
-          type="search"
-          :placeholder="$t('header_search')"
-          @keyup.enter="getSearch(search)"
-          id="SearchIndexTemplate"
-        />
-      </form>
-    </div>
-    <kBanner :dataStore="dataStore" />
-    <KCategory :dataStore="dataStore" style="position: sticky; top: 88px;" />
-    <KProductList
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
-    ></KProductList>
-  </div> -->
-  <KHome></KHome>
+      class="home"
+      :style="
+        this.settingByTemplate &&
+        this.$store.state.settingByTemplate &&
+        this.$store.state.settingByTemplate['--background_color_1']
+          ? this.$store.state.settingByTemplate
+          : this.settingBase
+      "
+    >
+      <div class="space-search"></div>
+      <div class="search-movil" id="navbar">
+        <form id="demo-1" style="width: 100%; position: relative;">
+          <search-icon class="icon-s" />
+          <input
+            v-model="search"
+            type="search"
+            :placeholder="$t('header_search')"
+            @keyup.enter="getSearch(search)"
+            id="SearchIndexTemplate"
+          />
+        </form>
+      </div>
+      <kBanner :dataStore="dataStore" />
+      <KCategory :dataStore="dataStore" style="position: sticky; top: 88px;" />
+      <KProductList
+        :dataStore="dataStore"
+        :fullProducts="fullProducts"
+      ></KProductList>
+    </div> -->
 </template>
 
 <script>
 // import kBanner from '../../components/template7/ko-Banner-1'
 // import KCategory from '../../components/template7/Ko-Category-1'
+import KCarousel from '../../components/template7/ko-carousel'
 // import KProductList from '../../components/template7/Ko-ProductList-1'
-import KHome from '../../components/template7/ko-home'
 
 export default {
   layout: 'default',
   components: {
-    KHome,
-    // kBanner,
+    KCarousel,
     // KProductList,
-    // KCategory,
   },
   data() {
     return {

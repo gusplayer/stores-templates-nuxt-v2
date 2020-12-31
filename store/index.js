@@ -84,6 +84,7 @@ export const state = () => ({
   openOrderValienta: false,
   openMenulateralRight: false,
   openMenulateralLeft: false,
+  openSearch: false,
   stateBanner: true,
   mediospago: {
     epayco: false,
@@ -144,6 +145,7 @@ export const state = () => ({
   layoutUnicentro: false,
   listDescuentos: [],
   listArticulos: [],
+  headerk07: false,
 })
 
 export const mutations = {
@@ -196,6 +198,9 @@ export const mutations = {
   SET_OPENORDER: (state, value) => {
     state.openOrder = value
   },
+  SET_OPENSEARCH: (state, value) => {
+    state.openSearch = value
+  },
   SET_OPENORDER_VALIENTA: (state, value) => {
     state.openOrderValienta = value
   },
@@ -204,6 +209,9 @@ export const mutations = {
   },
   SET_OPENORDERMENULEFT: (state, value) => {
     state.openMenulateralLeft = value
+  },
+  SET_STATESPACERHEADERK7: (state, value) => {
+    state.headerk07 = value
   },
   SET_TOKEN(state, value) {
     state.configHttp = {
@@ -349,8 +357,8 @@ export const mutations = {
     state.fullPathServer = value
   },
   SET_TEMPLATE_STORE(state, value) {
-    state.template = value
-    // state.template = 7
+    //state.template = value
+    state.template = 7
   },
 }
 export const actions = {

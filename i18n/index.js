@@ -11,6 +11,8 @@ export default {
     header_tiendaWa: 'Tienda WhatsApp',
     header_categorias: 'Categorias',
     header_blog: 'Blog',
+    header_menu: 'Menú',
+    header_buscar_producto: 'Buscar producto',
     //footer
     footer_inicio: 'Inicio',
     footer_carrito: 'Carrito',
