@@ -29,10 +29,10 @@ export default {
           photo:
             'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609802301/macroband/banner_01_s55h4i.jpg',
         },
-        {
-          photo:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1602278801/macroband/banner_web_macrobrand_tn8kra.jpg',
-        },
+        // {
+        //   photo:
+        //     'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1602278801/macroband/banner_web_macrobrand_tn8kra.jpg',
+        // },
         {
           photo:
             'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609802299/macroband/banner_03_vfdrvs.png',
