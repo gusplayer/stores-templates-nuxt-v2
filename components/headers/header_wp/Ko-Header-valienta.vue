@@ -5,9 +5,9 @@
       <div class="content-item-top">
         <div class="content-logo-valienta">
           <img
-            src="https://valienta.com/wp-content/uploads/2020/01/logo-v1.svg"
-            width="100px"
-            style="margin-left: 55px;"
+            src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609791464/valienta/logo-valienta_b8dwkw.png"
+            class="logo-valienta"
+            alt="logoValienta"
           />
         </div>
         <div class="wrapper-icons">
@@ -34,7 +34,7 @@
                 )
               "
               class="banner"
-              alt="Banner-wapi"
+              alt="Banner-valienta"
             />
           </div>
         </div>
@@ -43,7 +43,7 @@
             <img
               src="https://www.kellyservices.pl/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcTFlIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c649985d042e87fdb30660e80b7dd19a010450b2/banner-default.jpg"
               class="banner"
-              alt="Banner-wapi"
+              alt="Banner-valienta"
             />
           </div>
         </div>
@@ -56,7 +56,7 @@
           <img
             :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
             class="header-logo"
-            alt="Logo Img"
+            alt="Logovalienta"
           />
         </nuxt-link>
         <div style="width: 100%;">
@@ -211,9 +211,12 @@ export default {
 }
 .content-logo-valienta {
   width: 100%;
-  max-height: 35px;
   display: flex;
   justify-content: center;
+}
+.logo-valienta {
+  margin-left: 55px;
+  object-fit: contain;
 }
 .wrapper-icons {
   display: flex;

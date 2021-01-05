@@ -3,7 +3,7 @@
     <div class="order" @click="closeOrder" v-show="openOrder">
       <div class="order_content">
         <div class="order_header">
-          <h3 style="color: #4a5782;">Resumen de pedido</h3>
+          <h3 class="order-title">Resumen de pedido</h3>
           <div @click="closedOder" class="order_header_close">
             <close-icon />
           </div>
@@ -20,67 +20,78 @@
                   >
                     <div class="photo">
                       <img
-                        :src="idCloudinary(product.foto_cloudinary, 100, 100)"
+                        :src="idCloudinary(product.foto_cloudinary, 200, 200)"
                         alt="Product Img"
                       />
                     </div>
-                    <div class="name">
-                      <p class="order-text">
-                        {{ product.nombre | capitalize }}
-                      </p>
-                      <span>
-                        <b class="unidades">{{ product.cantidad }}</b>
-                        <b class="unidades"
-                          >X
-                          {{
-                            product.precio
-                              | currency(
-                                dataStore.tienda.codigo_pais,
-                                dataStore.tienda.moneda
-                              )
-                          }}
-                        </b>
-                      </span>
-                      <div v-if="product.combinacion">
-                        <el-tag
-                          v-for="(productCombinacion,
-                          index2) in product.combinacion"
-                          :key="index2"
-                          >{{ productCombinacion | capitalize }}</el-tag
-                        >
-                      </div>
-                    </div>
-                    <div v-if="product.precio > 0">
-                      <div class="price">
-                        <p>
-                          {{
-                            (product.precio * product.cantidad)
-                              | currency(
-                                dataStore.tienda.codigo_pais,
-                                dataStore.tienda.moneda
-                              )
-                          }}
+                    <div class="content-info-item">
+                      <div class="name">
+                        <p class="order-text">
+                          {{ product.nombre | capitalize }}
                         </p>
+                        <span>
+                          <b class="unidades">{{ product.cantidad }}</b>
+                          <b class="unidades"
+                            >X
+                            {{
+                              product.precio
+                                | currency(
+                                  dataStore.tienda.codigo_pais,
+                                  dataStore.tienda.moneda
+                                )
+                            }}
+                          </b>
+                        </span>
+                        <div v-if="product.combinacion">
+                          <el-tag
+                            v-for="(productCombinacion,
+                            index2) in product.combinacion"
+                            :key="index2"
+                            >{{ productCombinacion | capitalize }}</el-tag
+                          >
+                        </div>
+                      </div>
+                      <div v-if="product.precio > 0">
+                        <div class="price">
+                          <p>
+                            {{
+                              (product.precio * product.cantidad)
+                                | currency(
+                                  dataStore.tienda.codigo_pais,
+                                  dataStore.tienda.moneda
+                                )
+                            }}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                    <boteBasura-icon
-                      class="icon-delete"
-                      v-on:click="deleteItemCart(index)"
-                    />
+                    <div class="content-icon-delete">
+                      <boteBasura-icon
+                        class="icon-delete"
+                        v-on:click="deleteItemCart(index)"
+                      />
+                    </div>
                   </li>
                 </ul>
               </div>
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
-                    <p
-                      class="without_shipping_cost"
-                      v-if="
-                        rangosByCiudad.envio_metodo === 'gratis' &&
-                        (shippingCities.length <= 0 && getFreeShipping == false)
-                      "
-                    >
-                      {{ $t('footer_encioGratis') }}
+                    <p>{{ $t('footer_costoDomicilio') }}</p>
+                    <p class="without_shipping_cost">
+                      {{ $t('footer_pendiente') }}
+                    </p>
+                  </span>
+                  <span class="order_subtotal">
+                    <p>{{ $t('cart_subtotal') }}</p>
+                    <p class="without_shipping_cost">
+                      {{
+                        (totalCart + (getFreeShipping ? 0 : shipping))
+                          | currency(
+                            dataStore.tienda.codigo_pais,
+                            dataStore.tienda.moneda
+                          )
+                      }}
                     </p>
                   </span>
                   <span class="order_total_net">
@@ -128,7 +139,7 @@
                 >
                   {{ $t('footer_noTieneWhatsapp') }}
                 </p>
-                <button
+                <!-- <button
                   v-if="
                     productsCart.length &&
                     !isQuotation() &&
@@ -140,7 +151,7 @@
                   id="InitiateCheckoutTag"
                 >
                   {{ $t('footer_pagarOnline') }}
-                </button>
+                </button> -->
                 <button
                   v-if="
                     productsCart.length &&
@@ -161,7 +172,16 @@
       </div>
       <div class="wrapper-items-form" v-if="formOrden">
         <div class="content-items-form">
-          <p class="form-text">{{ $t('footer_formtittle') }}</p>
+          <div class="content-btn-closed">
+            <p class="form-text">{{ $t('footer_formtittleFinalizar') }}</p>
+            <label
+              for="order_close"
+              @click="formOrden = !formOrden"
+              class="form_close"
+            >
+              <close-icon />
+            </label>
+          </div>
           <ValidationObserver ref="observer" tag="form" class="items-form">
             <p class="form-subtext">{{ $t('footer_formNombre') }}</p>
             <validation-provider
@@ -177,6 +197,24 @@
                   class="input-text"
                   :placeholder="$t('footer_formNombreMgs')"
                   id="ContactName"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
+            <P class="form-subtext"> {{ $t('footer_formPhone') }}</P>
+            <validation-provider
+              name="ciudad"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  class="input-text"
+                  name="numberphone"
+                  :placeholder="$t('footer_formPhoneMgs')"
+                  v-model="numberphone"
                 />
                 <span class="text-error" v-show="errors[0]">
                   {{ errors[0] }}
@@ -201,24 +239,6 @@
                 </span>
               </template>
             </validation-provider>
-            <P class="form-subtext"> {{ $t('footer_formBarrio') }}</P>
-            <validation-provider
-              name="barrio"
-              rules="required"
-              class="content-input"
-            >
-              <template slot-scope="{ errors }">
-                <input
-                  class="input-text"
-                  name="barrio"
-                  :placeholder="$t('footer_formBarrioMgs')"
-                  v-model="barrio"
-                />
-                <span class="text-error" v-show="errors[0]">
-                  {{ errors[0] }}
-                </span>
-              </template>
-            </validation-provider>
             <P class="form-subtext"> {{ $t('footer_formDireccion') }}</P>
             <validation-provider
               name="dirreccion"
@@ -237,14 +257,25 @@
                 </span>
               </template>
             </validation-provider>
+            <P class="form-subtext"> {{ $t('footer_formDetalles') }}</P>
+            <validation-provider
+              name="barrio"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  class="input-text"
+                  name="barrio"
+                  :placeholder="$t('footer_formDetallesMgs')"
+                  v-model="barrio"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
           </ValidationObserver>
-          <label
-            for="order_close"
-            @click="formOrden = !formOrden"
-            class="form_close"
-          >
-            <close-icon />
-          </label>
         </div>
         <button
           class="continue_shopping_form"
@@ -487,8 +518,8 @@ export default {
           let resultproductList = productList.replace(/,/g, '%0A')
           let result = resultproductList.slice(1, -1)
 
-          let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
-
+          // let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
+          let text = `Nuevo%20pedido%20de%20${this.nombre}%0A%0AEste%20es%20mi%20pedido%20de%20${this.nombre}%0A%0A${result}%0A%0A%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20env%C3%ADo%20por%20separado%0A%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0AN%C3%BAmero%3A%20${this.numberphone}%0ACiudad%3A%20${this.ciudad}%0ADirecci%C3%B3n%3A%20${this.dirreccion}%0ADetalle%3A%20${this.barrio}`
           if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
             let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
 
@@ -620,6 +651,10 @@ export default {
   padding: 10px 30px;
   flex: none;
 }
+.order-title {
+  color: #4a5782;
+  font-weight: bold;
+}
 .order_header_close {
   font-size: 25px;
   color: #4a5782;
@@ -640,7 +675,7 @@ export default {
   align-items: center;
 }
 .order_products_list {
-  max-height: 380px;
+  max-height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
   list-style: none;
@@ -654,16 +689,18 @@ export default {
   border-radius: 10px;
 }
 .order_products_list::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #2de470, #25d366);
+  background: linear-gradient(125deg, #4a5782, #2d3755);
   border-radius: 10px;
 }
 .order_products_list_item {
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  border-bottom: 1px solid rgba(112, 112, 117, 0.322);
-  padding: 10px 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 10px 20px;
+  padding: 5px;
   overflow-x: auto;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
 }
 .order_products_list_item::-webkit-scrollbar {
   background: transparent;
@@ -671,33 +708,38 @@ export default {
   max-height: 8px;
 }
 .order_products_list_item::-webkit-scrollbar-track {
-  /* box-shadow: inset 0 0 10px rgba(112, 112, 117, 0.322); */
   border-radius: 10px;
 }
 .order_products_list_item::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #2de470, #25d366);
+  background: linear-gradient(125deg, #4a5782, #2d3755);
   border-radius: 10px;
 }
-.order_products_list_item .photo {
-  width: 55px;
-  height: 55px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.photo {
+  width: 90px;
+  object-fit: cover;
+  object-position: left;
+  overflow: hidden;
+  margin-right: 10px;
 }
-.order_products_list_item .photo img {
-  /* max-width: 200px;
-  max-height: 200px; */
-  width: 60px;
+.photo > img {
+  border-radius: 5px;
 }
 .photo-carrito {
   width: 100%;
+}
+.content-info-item {
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 .order_products_list_item .name {
   max-width: 190px;
   width: 100%;
 }
 .order-text {
+  font-weight: bold;
   color: black;
   font-size: 12px;
 }
@@ -744,6 +786,11 @@ export default {
   min-width: 60px;
   color: var(--color_subtext);
   font-size: 14px;
+}
+.content-icon-delete {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
 }
 .icon-delete {
   font-size: 20px;
@@ -799,7 +846,7 @@ export default {
   align-items: center;
   background-color: #fff;
   z-index: 1000;
-  padding: 20px 0 45px;
+  padding: 20px 0 60px;
   overflow-y: auto;
 }
 .content-items-form {
@@ -813,9 +860,17 @@ export default {
   background: white;
   position: relative;
 }
+.content-btn-closed {
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 .items-form {
   width: 100%;
-  padding: 10px 30px;
+  padding: 10px 20px;
 }
 .form_close {
   font-size: 30px;
@@ -838,6 +893,7 @@ export default {
   color: black;
   font-size: 15px;
   margin-bottom: 5px;
+  margin-top: 10px;
 }
 .content-input {
   width: 100%;
@@ -898,16 +954,34 @@ export default {
   background: #ee7196;
 }
 .order_total {
-  border-top: 1px solid rgba(112, 112, 117, 0.322);
-  padding: 0 30px;
+  padding: 0 20px;
+}
+.order_subtotal {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 .order_total_domicile,
 .order_total_net {
   display: flex;
   justify-content: space-between;
-  margin: 15px 0;
+  padding: 15px 0;
+}
+.order_total_net {
+  padding-top: 10px;
+  border-top: 1px solid rgba(112, 112, 117, 0.322);
 }
 .order_total_domicile p {
+  color: black;
+  font-weight: 300;
+  font-size: 14px;
+}
+.order_total_net p {
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+}
+.order_subtotal p {
   color: black;
   font-weight: 300;
   font-size: 14px;
@@ -935,7 +1009,7 @@ export default {
   border-radius: 10px;
 }
 .scroll_cart_summary_items_cities::-webkit-scrollbar-thumb {
-  background: linear-gradient(125deg, #2de470, #25d366);
+  background: linear-gradient(125deg, #4a5782, #2d3755);
   border-radius: 10px;
 }
 .without_shipping_cost {
@@ -1021,14 +1095,7 @@ export default {
   justify-content: center;
   align-self: center;
 }
-.photo {
-  object-fit: cover;
-  object-position: center;
-  border-radius: 45px;
-  overflow: hidden;
-  margin-right: 8px;
-  box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
-}
+
 .text-cart-empty {
   text-align: center;
 }

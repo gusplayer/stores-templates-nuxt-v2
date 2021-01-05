@@ -5,7 +5,6 @@
         <arrow-left-icon class="icon-back" />
         <p class="back-text">Volver al inicio</p>
       </div>
-
       <div class="section">
         <div class="wrapper-left">
           <div class="photos_responsive">
@@ -19,8 +18,8 @@
         <div class="wrapper-right">
           <div class="content-right">
             <p class="text-name">{{ data.detalle.nombre }}</p>
-            <p class="text-marca">
-              <strong>{{ data.info.marca }}</strong>
+            <p class="text-marca" v-show="salesData.sku">
+              <strong>Ref: {{ salesData.sku }}</strong>
             </p>
             <div class="wrapper-price">
               <p class="text-precio" v-show="salesData.precio">
@@ -44,7 +43,7 @@
                 </p>
               </div>
             </div>
-            <div
+            <!-- <div
               v-if="this.data.detalle.con_variante > 0"
               class="container-variants"
             >
@@ -61,6 +60,50 @@
                   >
                 </selectGroup>
               </div>
+            </div> -->
+            <div
+              v-if="this.data.detalle.con_variante > 0"
+              class="container-variants"
+            >
+              <div v-for="(variant, index) in data.variantes" :key="index">
+                <label for="variant name" class="text-variant-type"
+                  >{{ variant.nombre }}:</label
+                >
+                <selectRadioGroup
+                  :options="variant.valores"
+                  :index="index"
+                ></selectRadioGroup>
+              </div>
+            </div>
+            <div class="content-quantity" v-if="!spent">
+              <label for="variant name" class="text-variant-type"
+                >Cantidad:</label
+              >
+              <div class="quantity-resposive">
+                <button class="quantity_remove" v-on:click="removeQuantity()">
+                  <menos-icon class="icon" />
+                </button>
+                <p class="quantity_value">{{ quantityValue }}</p>
+                <button class="quantity_add" v-on:click="addQuantity()">
+                  <mas-icon class="icon" />
+                </button>
+                <transition name="slide-fade">
+                  <div
+                    class="container-alert"
+                    v-show="quantityValue == maxQuantityValue"
+                  >
+                    <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
+                  </div>
+                </transition>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px;"
+              v-if="salesData && salesData.unidades"
+            >
+              <p class="text-variant-type" v-if="salesData.unidades > 0">
+                Unidades disponibles: {{ salesData.unidades }}
+              </p>
             </div>
             <!-- <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
               <button class="btn-whatsapp" @click="redirectWP()">
@@ -78,32 +121,8 @@
           <div class="content-text-desc" v-html="data.info.descripcion"></div>
         </div>
       </div>
-      <!-- <div class="content-btn-whatsapp-res" v-if="dataStore.tienda.whatsapp">
-        <button class="btn-whatsapp" @click="redirectWP()">
-          <whatsapp-icon class="wp-icon" />{{
-            $t('productdetail_solicitarInfo')
-          }}
-        </button>
-      </div> -->
       <div class="responsive-purchase">
         <div class="ko-input">
-          <div class="quantity-resposive" v-if="!spent">
-            <button class="quantity_remove" v-on:click="removeQuantity()">
-              <menos-icon class="icon" />
-            </button>
-            <p class="quantity_value">{{ quantityValue }}</p>
-            <button class="quantity_add" v-on:click="addQuantity()">
-              <mas-icon class="icon" />
-            </button>
-            <transition name="slide-fade">
-              <div
-                class="container-alert"
-                v-show="quantityValue == maxQuantityValue"
-              >
-                <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
-              </div>
-            </transition>
-          </div>
           <button
             class="btn-responsive"
             ref="color2"
@@ -111,7 +130,7 @@
             v-on:click="addShoppingCart"
           >
             <span>
-              {{ $t('productdetail_btnComprar') }}
+              {{ $t('productdetail_btnAgregar') }}
             </span>
           </button>
           <button
@@ -139,6 +158,7 @@
 import axios from 'axios'
 import productSlide from './_productdetails/productSlide'
 import selectGroup from './_productdetails/selectGroup'
+import selectRadioGroup from './_productdetails/selectRadioGroup'
 import idCloudinary from '../../mixins/idCloudinary'
 
 export default {
@@ -150,6 +170,7 @@ export default {
   components: {
     selectGroup,
     productSlide,
+    selectRadioGroup,
   },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -429,6 +450,11 @@ export default {
       this.$router.push(`/wp/${this.dataStore.tienda.id_tienda}`)
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
+      this.$message({
+        showClose: true,
+        message: 'Se agregó el producto correctamente',
+        type: 'success',
+      })
     },
     evalStock(mq, qv) {
       return !(mq - qv < 0)
@@ -625,12 +651,12 @@ export default {
 .wrapper-productDetail {
   display: flex;
   width: 100%;
-  background-color: #fafaf8;
+  background-color: transparent;
   justify-content: center;
   align-items: flex-start;
   height: 100%;
   overflow: visible;
-  margin-top: 46.3px;
+  margin-top: 42px;
 }
 .container-productDetail {
   display: flex;
@@ -641,8 +667,9 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px 30px 80px 30px;
+  padding: 25px 30px 80px 30px;
   position: relative;
+  background-color: white;
 }
 .section {
   width: 100%;
@@ -664,7 +691,7 @@ export default {
 }
 .wrapper-back {
   width: 100%;
-  padding: 5px 10px;
+  padding: 10px 10px 5px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -686,7 +713,6 @@ export default {
   font-size: 14px;
   cursor: pointer;
 }
-
 .breadcrumb {
   margin-left: 5px;
 }
@@ -836,7 +862,13 @@ export default {
   box-shadow: 0px 2px 2px rgba(52, 58, 67, 0.1),
     0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
 }
+.content-quantity {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
 .quantity-resposive {
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
 }
@@ -848,10 +880,8 @@ export default {
   align-self: center;
 }
 .quantity_remove {
-  border: 1px black;
-  border-top-left-radius: var(--radius_btn);
-  border-bottom-left-radius: var(--radius_btn);
-  border-style: solid none solid solid;
+  border: 2px solid rgba(127, 127, 139, 0.342);
+  border-radius: 5px;
   background: transparent;
   height: 38px;
   width: 3em;
@@ -860,22 +890,20 @@ export default {
 .quantity_value {
   font-size: 1em;
   color: #000000;
-  border: 1px black;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-style: solid none solid none;
+  border: 2px solid rgba(127, 127, 139, 0.342);
+  border-radius: 5px;
   background: transparent;
   height: 38px;
-  width: 2.5em;
-  justify-content: center;
+  width: 3em;
   display: flex;
+  justify-content: center;
   align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .quantity_add {
-  border: 1px black;
-  border-top-right-radius: var(--radius_btn);
-  border-bottom-right-radius: var(--radius_btn);
-  border-style: solid solid solid none;
+  border: 2px solid rgba(127, 127, 139, 0.342);
+  border-radius: 5px;
   background: transparent;
   height: 38px;
   width: 3em;
@@ -885,15 +913,13 @@ export default {
   border-radius: var(--radius_btn);
   color: white;
   border: none;
-  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
-  background-image: linear-gradient(85deg, #48ac98 0%, #45c4aa 100%);
+  background: #4a5782;
   box-shadow: 0px 0px 2px rgba(52, 58, 67, 0.1),
     0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
   padding: 6px 10px;
   width: 100%;
   height: 100%;
   font-size: 14px;
-  margin-left: 15px;
   cursor: pointer;
   transition: all 200ms ease-in;
 }
@@ -902,7 +928,7 @@ export default {
   font-weight: 600;
 }
 .btn-responsive:hover {
-  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+  background: #374163;
 }
 .icon {
   font-size: 16px;
@@ -991,12 +1017,11 @@ export default {
 .swiper-container {
   border-radius: 6px;
 }
-
 .swiper-pagination-bullet-active {
   background: black;
 }
 .container-variants {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 .text-variant-type {
   font-size: 14px;
@@ -1004,7 +1029,7 @@ export default {
 }
 @media (max-width: 685px) {
   .container-productDetail {
-    padding: 0px 0px 40px 0px;
+    padding: 0px 0px 70px 0px;
   }
   .section {
     flex-direction: column;
