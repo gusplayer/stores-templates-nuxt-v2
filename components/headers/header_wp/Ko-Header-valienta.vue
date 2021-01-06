@@ -3,16 +3,44 @@
     <div class="wrapper-header">
       <KoOrderWa :dataStore="dataStore" />
       <div class="content-item-top">
-        <div class="content-logo-valienta">
+        <div class="content-logo-valienta" v-if="showSearch">
           <img
             src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609791464/valienta/logo-valienta_b8dwkw.png"
-            class="logo-valienta"
+            class="logo-valienta animated"
+            alt="logoValienta"
+          />
+        </div>
+        <div class="content-logo-valienta-search" v-if="!showSearch">
+          <img
+            src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609791464/valienta/logo-valienta_b8dwkw.png"
+            class="logo-valienta-search animated"
             alt="logoValienta"
           />
         </div>
         <div class="wrapper-icons">
           <div v-if="showInfo">
-            <search-icon class="icon-cart" />
+            <form>
+              <search-icon
+                class="icon-cart"
+                @click="showSearch = !showSearch"
+                v-if="showSearch"
+              />
+              <div class="content-items-search">
+                <input
+                  class="input-text"
+                  type="search"
+                  :placeholder="$t('header_search')"
+                  v-model="search"
+                  @keyup.enter="getSearch(search)"
+                  v-if="!showSearch"
+                />
+                <window-close-icon
+                  class="icon-cart"
+                  v-if="!showSearch"
+                  @click="showSearch = !showSearch"
+                />
+              </div>
+            </form>
           </div>
           <p class="separador"></p>
           <div class="content-cart" @click="openOrder">
@@ -91,12 +119,15 @@ export default {
   mounted() {
     let domain = this.$route.fullPath
     let result = domain.split('/')
+    let resulSearch = domain.split('?')
     if (result.length == '5') {
-      this.showSearch = false
       this.showInfo = false
     } else {
-      this.showSearch = true
       this.showInfo = true
+    }
+    let valueSearch = resulSearch[resulSearch.length - 1].slice(0, [7])
+    if (valueSearch == 'search=') {
+      this.setSearch(resulSearch[resulSearch.length - 1])
     }
   },
 
@@ -146,10 +177,15 @@ export default {
     },
     getSearch(value) {
       if (value) {
-        location.href = '?search=' + value
+        location.href = `wp/${this.dataStore.tienda.id_tienda}?search=` + value
       } else {
-        location.href = '?search=' + ''
+        location.href = `wp/${this.dataStore.tienda.id_tienda}?search=` + ''
       }
+    },
+    setSearch(value) {
+      let searchUrl = value.split('=')
+      let urlFiltrada = decodeURIComponent(searchUrl[searchUrl.length - 1])
+      this.search = urlFiltrada
     },
   },
   watch: {
@@ -202,7 +238,6 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  justify-content: flex-end;
   align-self: center;
   position: fixed;
   top: 0;
@@ -218,11 +253,55 @@ export default {
   margin-left: 55px;
   object-fit: contain;
 }
+.content-logo-valienta-search {
+  width: 100%;
+  max-width: 100px;
+  display: flex;
+  justify-content: flex-start;
+}
+.logo-valienta-search {
+  /* margin-left: 10px; */
+  object-fit: contain;
+}
 .wrapper-icons {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-self: center;
+}
+.animated {
+  transition: all 200ms ease-in;
+}
+.content-items-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.input-text {
+  transition: all 200ms ease-in;
+  font-size: 14px;
+  color: rgba(21, 20, 57, 0.541);
+  border-bottom: solid 2px #afafaf;
+  background-color: transparent;
+  padding: 2px 14px;
+  width: 100%;
+  max-width: 250px;
+}
+.input-text::placeholder {
+  color: rgba(21, 20, 57, 0.541);
+  opacity: 0.7;
+}
+.input-text:-internal-autofill-selected {
+  -webkit-appearance: menulist-button;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: -internal-light-dark-color(black, white) !important;
+}
+.input-text:focus,
+.input-text:active {
+  outline: 0;
+  border-bottom: solid 2px black;
 }
 .separador {
   margin-left: 5px;
@@ -253,6 +332,7 @@ export default {
   font-weight: normal;
 }
 .icon-cart {
+  cursor: pointer;
   font-size: 22px;
   color: #4a5782;
 }

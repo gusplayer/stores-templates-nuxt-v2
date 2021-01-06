@@ -283,6 +283,10 @@ export default {
         type: 'all',
         data: '',
       })
+      this.$router.push({
+        path: '',
+        query: '',
+      })
       this.$emit('clear')
       this.addClass()
       this.nameCategory = ''

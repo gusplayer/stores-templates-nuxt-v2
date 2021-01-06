@@ -245,6 +245,7 @@ export default {
   .order_content > div {
     width: 100%;
     box-sizing: border-box;
+    list-style: none;
   }
   .order_header {
     display: flex;

@@ -512,6 +512,7 @@ export default {
   padding: 10px 30px 10px 20px;
   border-top: 1px solid #aba4a466;
   margin: 0 auto;
+  list-style: none;
 }
 .wrapper-meni-grid {
   flex: 2;
@@ -602,7 +603,7 @@ export default {
 }
 .header-logo {
   /* width: 100%; */
-  max-height: 70px;
+  max-height: 74px;
   object-fit: contain;
   object-position: left;
 }
