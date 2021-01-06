@@ -105,6 +105,23 @@
                 Unidades disponibles: {{ salesData.unidades }}
               </p>
             </div>
+            <div class="content-shared">
+              <p class="text-variant-type" style="margin-right: 10px;">
+                {{ $t('productdetail_compartir') }}
+              </p>
+              <ShareNetwork
+                v-for="network in this.networks"
+                :network="network.network"
+                :key="network.network"
+                :url="sharing.url"
+                :title="sharing.title"
+                :description="sharing.description"
+                :quote="sharing.quote"
+                :style="{ color: network.color }"
+              >
+                <div :is="network.icon" class="icon-shared" />
+              </ShareNetwork>
+            </div>
             <!-- <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
               <button class="btn-whatsapp" @click="redirectWP()">
                 <whatsapp-icon class="wp-icon" />{{
@@ -203,6 +220,24 @@ export default {
         desc: '',
       },
       activeZoom: true,
+      sharing: {
+        url: '',
+        title: '',
+        description: '',
+        quote: '',
+      },
+      networks: [
+        {
+          network: 'facebook',
+          icon: 'facebook-icon',
+          color: '#1877f2',
+        },
+        {
+          network: 'whatsapp',
+          icon: 'whatsapp-icon',
+          color: '#25d366',
+        },
+      ],
     }
   },
   computed: {
@@ -280,6 +315,11 @@ export default {
               sku: this.data.info.sku,
               estado: true,
             }
+            this.sharing.url = window.location.href
+            this.sharing.title = `Te recomiendo: ${response.data.detalle.nombre}`
+            this.sharing.description = `Te recomiendo: ${response.data.detalle.nombre} de la tienda ${this.dataStore.tienda.nombre}, Link del producto ${window.location.href}`
+            this.sharing.quote = `Te recomiendo: ${response.data.detalle.nombre} de la tienda ${this.dataStore.tienda.nombre}, Link del producto ${window.location.href}`
+
             this.maxQuantityValue = this.data.info.inventario
             this.setOptionEnvio()
             for (const [
@@ -1026,6 +1066,19 @@ export default {
 .text-variant-type {
   font-size: 14px;
   color: #0f2930;
+}
+.content-shared {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+.icon-shared {
+  font-size: 25px;
+  margin-right: 5px;
+  bottom: 6px;
+}
+.icon-shared:hover {
+  color: black;
 }
 @media (max-width: 685px) {
   .container-productDetail {

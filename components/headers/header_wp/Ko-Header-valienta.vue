@@ -3,20 +3,39 @@
     <div class="wrapper-header">
       <KoOrderWa :dataStore="dataStore" />
       <div class="content-item-top">
-        <div class="content-logo-valienta" v-if="showSearch">
+        <nuxt-link
+          :to="`/wp/${dataStore.tienda.id_tienda}/`"
+          class="content-logo-valienta"
+          v-if="showSearch"
+        >
           <img
             src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609791464/valienta/logo-valienta_b8dwkw.png"
             class="logo-valienta animated"
             alt="logoValienta"
           />
-        </div>
-        <div class="content-logo-valienta-search" v-if="!showSearch">
+        </nuxt-link>
+        <nuxt-link
+          :to="`/wp/${dataStore.tienda.id_tienda}/`"
+          class="content-logo-valienta-search"
+          v-else-if="showInfo && !showSearch"
+        >
           <img
             src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609791464/valienta/logo-valienta_b8dwkw.png"
             class="logo-valienta-search animated"
             alt="logoValienta"
           />
-        </div>
+        </nuxt-link>
+        <nuxt-link
+          :to="`/wp/${dataStore.tienda.id_tienda}/`"
+          class="content-logo-valienta"
+          v-else
+        >
+          <img
+            src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609791464/valienta/logo-valienta_b8dwkw.png"
+            class="logo-valienta animated"
+            alt="logoValienta"
+          />
+        </nuxt-link>
         <div class="wrapper-icons">
           <div v-if="showInfo">
             <form>

@@ -965,6 +965,8 @@ export default {
 .order_products_list_item .photo img {
   max-width: 50px;
   max-height: 50px;
+  border-radius: 5px;
+  margin-right: 5px;
 }
 .order_products_list_item .name {
   max-width: 190px;
