@@ -24,7 +24,7 @@
           rel="noreferrer noopener"
         >
           <img
-            src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
+            src="https://valienta.com/wp-content/uploads/2020/01/logo-v1.svg"
             class="logo2"
             alt="Logo Img"
           />
@@ -82,7 +82,7 @@ export default {
 .contenedor {
   width: 100%;
   border-top: 1px solid rgba(213, 213, 213, 0.473);
-  padding: 10px 30px 20px;
+  padding: 10px 30px 65px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,6 +106,7 @@ export default {
   color: black;
 }
 .logo2 {
+  margin-top: 5px;
   width: 100px;
   opacity: 0.7;
 }

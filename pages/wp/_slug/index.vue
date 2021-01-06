@@ -4,13 +4,13 @@
     <!-- <KProductFavoritos v-if="this.stateBanner" /> -->
     <KProductList :dataStore="dataStore" :fullProducts="fullProducts" />
     <KFooterWpLogo :dataStore="dataStore" />
-    <!-- <KFooterWp :dataStore="dataStore" /> -->
+    <KFooterWp :dataStore="dataStore" />
   </div>
 </template>
 
 <script>
 import KFooterWpLogo from '../../../components/footers/footerValienta/ko-Footer-valienta-logo'
-// import KFooterWp from '../../../components/footers/footerValienta/ko-Footer-valienta'
+import KFooterWp from '../../../components/footers/footerValienta/ko-Footer-valienta'
 import KCategory from '../../../components/valienta/Ko-Categories-valienta'
 // import KProductFavoritos from '../../../components/valienta/Ko-ProductFavoritos-1'
 import KProductList from '../../../components/valienta/Ko-ProductList-valienta'
@@ -21,7 +21,7 @@ export default {
     KProductList,
     KCategory,
     // KProductFavoritos,
-    // KFooterWp,
+    KFooterWp,
     KFooterWpLogo,
   },
   data() {

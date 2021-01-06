@@ -48,9 +48,6 @@ export default {
   components: {
     KoProductCard1,
   },
-  mounted() {
-    this.$store.dispatch('GET_ARTICLES')
-  },
   data() {
     return {
       currentPage: 1,

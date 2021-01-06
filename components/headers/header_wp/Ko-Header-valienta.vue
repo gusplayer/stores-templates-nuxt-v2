@@ -253,7 +253,7 @@ export default {
 .content-item-top {
   width: 100%;
   max-width: 900px;
-  padding: 7px 20px;
+  padding: 10px 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -323,8 +323,8 @@ export default {
   border-bottom: solid 2px black;
 }
 .separador {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 8px;
+  margin-right: 10px;
   border-left: 1px solid #4a5782;
   max-height: 22px;
   top: 2px;
@@ -352,7 +352,7 @@ export default {
 }
 .icon-cart {
   cursor: pointer;
-  font-size: 22px;
+  font-size: 25px;
   color: #4a5782;
 }
 .icon-cart:hover {

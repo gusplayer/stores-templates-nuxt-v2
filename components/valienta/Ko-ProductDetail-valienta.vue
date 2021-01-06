@@ -958,7 +958,6 @@ export default {
     0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
   padding: 6px 10px;
   width: 100%;
-  height: 100%;
   font-size: 14px;
   cursor: pointer;
   transition: all 200ms ease-in;
