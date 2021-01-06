@@ -134,11 +134,9 @@ export default {
   head() {
     let tienda = this.$store.state.dataStore.tienda
     let tipo_letra =
-      this.$store.state.settingByTemplate &&
-      this.$store.state.settingByTemplate.tipo_letra
-        ? this.$store.state.settingByTemplate.tipo_letra
+      this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+        ? this.settingByTemplate.settings.tipo_letra
         : 'Roboto'
-
     let tidio =
       this.$store.state.analytics_tagmanager &&
       this.$store.state.analytics_tagmanager.tidio_user
@@ -424,7 +422,7 @@ export default {
 * {
   margin: 0px;
   padding: 0px;
-  font-family: var(--font-style), sans-serif;
+  font-family: var(--font-style);
   outline: none;
   /* list-style: none; */
   text-decoration: none;
