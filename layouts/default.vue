@@ -424,7 +424,7 @@ export default {
 * {
   margin: 0px;
   padding: 0px;
-  font-family: var(--font-style);
+  font-family: var(--font-style), sans-serif;
   outline: none;
   /* list-style: none; */
   text-decoration: none;
