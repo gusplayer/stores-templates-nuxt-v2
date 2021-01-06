@@ -26,9 +26,15 @@
                 class="header-text-center"
                 >{{ $t(`${item.name}`) }}</nuxt-link
               >
+              <nuxt-link
+                :to="item.href"
+                v-else-if="item.href && listArticulos > 0"
+                class="header-text-center"
+                >{{ $t(`${item.name}`) }}</nuxt-link
+              >
               <div v-else>
                 <div
-                  v-if="dataStore.categorias.length > 0"
+                  v-if="dataStore.categorias.length > 0 && item.ref"
                   style="
                     margin-right: 20px;
                     display: flex;
@@ -236,10 +242,15 @@ export default {
           name: 'header_categorias',
           iconOpen: 'Flechadown-icon',
           iconClose: 'FlechaUp-icon',
+          ref: 'categorias',
         },
         {
           name: 'header_contacto',
           path: '/contacto',
+        },
+        {
+          name: 'header_blog',
+          href: '/blog',
         },
       ],
       cat: [],
@@ -268,6 +279,9 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
+    },
+    listArticulos() {
+      return this.$store.state.listArticulos.length
     },
   },
   methods: {

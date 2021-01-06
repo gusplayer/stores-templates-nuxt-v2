@@ -18,7 +18,14 @@
       </div>
       <div class="footer-item-secciones">
         <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-          <nuxt-link :to="item.path" class="text-secciones">
+          <nuxt-link v-if="item.path" :to="item.path" class="text-secciones">
+            {{ $t(`${item.name}`) }}
+          </nuxt-link>
+          <nuxt-link
+            v-if="item.href && listArticulos > 0"
+            :to="item.href"
+            class="text-secciones"
+          >
             {{ $t(`${item.name}`) }}
           </nuxt-link>
         </div>
@@ -138,6 +145,10 @@ export default {
           name: 'footer_micompra',
           path: '/micompra',
         },
+        {
+          name: 'header_blog',
+          href: '/blog',
+        },
       ],
       links: [
         {
@@ -162,6 +173,11 @@ export default {
         },
       ],
     }
+  },
+  computed: {
+    listArticulos() {
+      return this.$store.state.listArticulos.length
+    },
   },
   methods: {
     setLogo() {
