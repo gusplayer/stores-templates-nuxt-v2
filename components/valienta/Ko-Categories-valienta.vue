@@ -49,7 +49,7 @@
 import idCloudinary from '../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
-  name: 'Ko-Categories-wa',
+  name: 'Ko-Categories-valienta',
   props: {
     dataStore: Object,
   },
@@ -173,7 +173,7 @@ export default {
 }
 .content_Category {
   width: 100%;
-  padding: 0px;
+  padding: 10px 5px 1px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -267,9 +267,6 @@ export default {
 @media (max-width: 770px) {
   .btn-scroll {
     display: none;
-  }
-  .content_Category {
-    padding: 0 5px;
   }
 }
 </style>

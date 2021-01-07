@@ -19,7 +19,7 @@
       <div class="under-footer">
         <p>{{ $t('footer_desarrollado') }}</p>
         <a
-          href="https://komercia.co/"
+          href="https://valienta.com/"
           target="_blank"
           rel="noreferrer noopener"
         >

@@ -18,9 +18,9 @@
         <div class="wrapper-right">
           <div class="content-right">
             <p class="text-name">{{ data.detalle.nombre }}</p>
-            <p class="text-marca" v-show="salesData.sku">
+            <!-- <p class="text-marca" v-show="salesData.sku">
               <strong>Ref: {{ salesData.sku }}</strong>
-            </p>
+            </p> -->
             <div class="wrapper-price">
               <p class="text-precio" v-show="salesData.precio">
                 {{
@@ -121,14 +121,10 @@
               >
                 <div :is="network.icon" class="icon-shared" />
               </ShareNetwork>
-            </div>
-            <!-- <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
               <button class="btn-whatsapp" @click="redirectWP()">
-                <whatsapp-icon class="wp-icon" />{{
-                  $t('productdetail_solicitarInfo')
-                }}
+                <whatsapp-icon class="wp-icon" />
               </button>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -180,7 +176,7 @@ import idCloudinary from '../../mixins/idCloudinary'
 
 export default {
   mixins: [idCloudinary],
-  name: 'Ko-ProductDetail-wa',
+  name: 'Ko-ProductDetail-valienta',
   props: {
     settingByTemplate: Object,
   },
@@ -231,11 +227,6 @@ export default {
           network: 'facebook',
           icon: 'facebook-icon',
           color: '#1877f2',
-        },
-        {
-          network: 'whatsapp',
-          icon: 'whatsapp-icon',
-          color: '#25d366',
         },
       ],
     }
@@ -467,6 +458,7 @@ export default {
         nombre: this.data.detalle.nombre,
         combinacion: this.salesData.combinacion,
         envio_gratis: this.data.detalle.envio_gratis,
+        descripcion: this.data.info.descripcion,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
@@ -518,70 +510,26 @@ export default {
       return window.mobilecheck()
     },
     redirectWP() {
-      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
-      let baseUrlPc = 'https://web.whatsapp.com/send?phone='
+      let baseUrlMovil = 'https://api.whatsapp.com/send?'
+      let baseUrlPc = 'https://web.whatsapp.com/send?'
       let urlProduct = window.location.href
       let text = `Hola 😀, %0AEstoy en tu tienda ${this.dataStore.tienda.nombre} y me interesa el producto: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
 
-      if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-
-        if (this.mobileCheck()) {
-          window.open(
-            `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
+      if (this.mobileCheck()) {
+        window.open(`${baseUrlMovil}text=${text}`, '_blank')
       } else {
-        if (this.mobileCheck()) {
-          window.open(
-            `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
+        window.open(`${baseUrlPc}text=${text}`, '_blank')
       }
     },
     WPQuotation() {
-      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
-      let baseUrlPc = 'https://web.whatsapp.com/send?phone='
+      let baseUrlMovil = 'https://api.whatsapp.com/send?'
+      let baseUrlPc = 'https://web.whatsapp.com/send?'
       let urlProduct = window.location.href
       let text = `Hola%20%F0%9F%98%80%2C%0AEstoy%20en%20tu%20tienda%20%2A${this.dataStore.tienda.nombre}%2A%20y%20quiero%20cotizar%20este%20producto%3A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.data.detalle.nombre}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ALink%3A%20${urlProduct}`
-      if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-
-        if (this.mobileCheck()) {
-          window.open(
-            `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
+      if (this.mobileCheck()) {
+        window.open(`${baseUrlMovil}text=${text}`, '_blank')
       } else {
-        if (this.mobileCheck()) {
-          window.open(
-            `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
+        window.open(`${baseUrlPc}text=${text}`, '_blank')
       }
     },
   },
@@ -1027,12 +975,10 @@ export default {
   margin-top: 10px;
 }
 .btn-whatsapp {
-  color: white;
+  color: #25d366;
   border-radius: 5px;
-  background-color: #445a64;
-  padding: 8px 10px;
-  width: 100%;
-  font-weight: 400;
+  background-color: transparent;
+  width: 10px;
   cursor: pointer;
   transition: all 200ms ease-in;
   text-decoration: none;
@@ -1042,16 +988,14 @@ export default {
   border: 0px;
 }
 .btn-whatsapp:hover {
-  background-color: #128c7e;
+  color: black;
 }
 .content-btn-whatsapp-res {
   display: none;
 }
 .wp-icon {
-  font-size: 16px;
-  bottom: 4px;
-  margin-right: 4px;
-  margin-bottom: -2px;
+  font-size: 27px;
+  bottom: 10px;
 }
 .swiper-container {
   border-radius: 6px;
