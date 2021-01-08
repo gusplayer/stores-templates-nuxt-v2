@@ -607,7 +607,7 @@ export const actions = {
         })
       })
   },
-  GET_ARTICLES({ state }, id) {
+  async GET_ARTICLES({ state }, id) {
     axios
       .get(`${state.urlKomercia}/api/blogs/${id}?page=1`, state.configAxios)
       .then((response) => {

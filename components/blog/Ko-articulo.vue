@@ -61,7 +61,7 @@ export default {
   components: { EditorContent },
   mounted() {
     this.routePrev()
-    this.$store.dispatch('GET_ARTICLES')
+    // this.$store.dispatch('GET_ARTICLES')
     if (this.listArticulos.length) {
       this.searchIdForSlug()
     }
