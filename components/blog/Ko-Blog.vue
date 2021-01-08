@@ -18,7 +18,10 @@
               :key="article.id"
               class="content-products"
             >
-              <KoProductCard1 :article="article"></KoProductCard1>
+              <KoProductCard1
+                v-if="article.estado == 1"
+                :article="article"
+              ></KoProductCard1>
             </div>
           </div>
           <div v-if="(filteredList.length == 0)" class="content-products-empty">
