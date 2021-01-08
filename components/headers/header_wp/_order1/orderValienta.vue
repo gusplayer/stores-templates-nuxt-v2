@@ -493,22 +493,26 @@ export default {
           let productosCart = []
 
           this.$store.state.productsCart.map((element) => {
+            let resultDes
             if (element.combinacion) {
               let combiString = JSON.stringify(element.combinacion)
               let combiList = combiString.replace(/"/g, '')
               let resultcombitList = combiList.replace(/,/g, ' - ')
+              resultDes = element.descripcion.slice(3, -4)
               productosCart.push(
-                `${element.cantidad} x ${element.nombre} -> ${
-                  element.descripcion
-                } = Variantes: ${resultcombitList} -> Valor: ${
+                `${element.cantidad} x ${
+                  element.nombre
+                } -> ${resultDes} = Variantes: ${resultcombitList} -> Valor: ${
                   element.cantidad * element.precio
                 }`
               )
             } else {
               productosCart.push(
-                `${element.cantidad} x ${element.nombre} -> ${
-                  element.descripcion
-                } -> Valor: ${element.cantidad * element.precio}`
+                `${element.cantidad} x ${
+                  element.nombre
+                } -> ${resultDes} -> Valor: ${
+                  element.cantidad * element.precio
+                }`
               )
             }
           })
@@ -517,9 +521,8 @@ export default {
           let productList = productString.replace(/"/g, '')
           let resultproductList = productList.replace(/,/g, '%0A')
           let result = resultproductList.slice(1, -1)
-
           // let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
-          let text = `Nuevo%20pedido%20de%20la%20tienda%20${this.dataStore.tienda.nombre}%0A%0AEste%20es%20mi%20pedido%20de%20${this.dataStore.tienda.nombre}%0A%0A${result}%0A%0A%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20env%C3%ADo%20por%20separado%0A%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0AN%C3%BAmero%3A%20${this.numberphone}%0ACiudad%3A%20${this.ciudad}%0ADirecci%C3%B3n%3A%20${this.dirreccion}%0ADetalle%3A%20${this.barrio}`
+          let text = `Nuevo%20pedido%20de%20la%20tienda%20${this.dataStore.tienda.nombre}%0A%0APedido%20de%20${this.nombre}%0A%0A${result}%0A%0A%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20env%C3%ADo%20por%20separado%0A%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0AN%C3%BAmero%3A%20${this.numberphone}%0ACiudad%3A%20${this.ciudad}%0ADirecci%C3%B3n%3A%20${this.dirreccion}%0ADetalle%3A%20${this.barrio}`
           if (this.mobileCheck()) {
             window.open(`${baseUrlMovil}text=${text}`, '_blank')
           } else {
