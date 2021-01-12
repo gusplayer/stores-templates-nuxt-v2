@@ -36,11 +36,19 @@
         <label for="modal-toggle"> {{ $t('footer_politicasyterminos') }}</label>
       </div>
       <div class="separator"></div>
-      <p v-if="dataStore.tienda.id_tienda != 5574">
+      <p
+        v-if="
+          dataStore.tienda.id_tienda != 5574 ||
+          dataStore.tienda.id_tienda != 5347
+        "
+      >
         {{ $t('footer_desarrollado') }}
       </p>
       <a
-        v-if="dataStore.tienda.id_tienda != 5574"
+        v-if="
+          dataStore.tienda.id_tienda != 5574 ||
+          dataStore.tienda.id_tienda != 5347
+        "
         href="https://komercia.co/"
         target="_blank"
         rel="noreferrer noopener"
@@ -61,7 +69,10 @@
       <nuxt-link
         to="/"
         class="wrapper-logo-tablada"
-        v-if="dataStore.tienda.id_tienda == 5574"
+        v-if="
+          dataStore.tienda.id_tienda == 5574 ||
+          dataStore.tienda.id_tienda == 5347
+        "
       >
         <img
           :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
