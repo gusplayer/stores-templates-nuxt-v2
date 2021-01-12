@@ -36,8 +36,15 @@
         <label for="modal-toggle"> {{ $t('footer_politicasyterminos') }}</label>
       </div>
       <div class="separator"></div>
-      <p>{{ $t('footer_desarrollado') }}</p>
-      <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
+      <p v-if="dataStore.tienda.id_tienda != 5574">
+        {{ $t('footer_desarrollado') }}
+      </p>
+      <a
+        v-if="dataStore.tienda.id_tienda != 5574"
+        href="https://komercia.co/"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
         <img
           src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
           v-if="logo == true"
@@ -51,6 +58,17 @@
           alt="Logo Img"
         />
       </a>
+      <nuxt-link
+        to="/"
+        class="wrapper-logo-tablada"
+        v-if="dataStore.tienda.id_tienda == 5574"
+      >
+        <img
+          :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+          class="logo-tablada"
+          alt="Logo Img"
+        />
+      </nuxt-link>
     </div>
     <div class="modal-container" v-if="dataStore.politicas">
       <input type="checkbox" id="modal-toggle" />
@@ -475,6 +493,17 @@ export default {
 }
 .tab input[type='radio']:checked + label::after {
   transform: rotateX(180deg);
+}
+.wrapper-logo-tablada {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo-tablada {
+  max-height: 74px;
+  object-fit: contain;
+  object-position: left;
 }
 @media (max-width: 768px) {
   .contenedor {
