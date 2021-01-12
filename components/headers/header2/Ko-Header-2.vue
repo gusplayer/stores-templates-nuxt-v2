@@ -538,9 +538,11 @@ export default {
 .menu-grid {
   width: 100%;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  column-gap: 30px;
-  row-gap: 10px;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
 }
 .wrapper-meni-grid::-webkit-scrollbar {
   border: 1px solid rgba(202, 202, 202, 0.322);
@@ -577,6 +579,7 @@ export default {
 .name-category {
   color: var(--color_text);
   cursor: pointer;
+  margin-right: 32px;
 }
 .name-category-active {
   color: red;
@@ -593,7 +596,7 @@ export default {
 .subcategoria li {
   padding: 0px;
   margin-bottom: 8px;
-  margin-left: 5px;
+  margin-left: 7px;
   font-size: 14px;
   font-weight: 50;
 }

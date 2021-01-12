@@ -537,14 +537,6 @@ export default {
   max-height: 560px;
   overflow-y: auto;
 }
-.menu-grid {
-  width: 100%;
-  margin-right: 1px;
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 32px;
-  row-gap: 10px;
-}
 .wrapper-meni-grid::-webkit-scrollbar {
   border: 1px solid rgba(202, 202, 202, 0.322);
   background: transparent;
@@ -559,6 +551,15 @@ export default {
 .wrapper-meni-grid::-webkit-scrollbar-thumb:hover {
   background: rgb(102, 102, 102);
   border-radius: 10px;
+}
+.menu-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
 }
 .name-category-all {
   font-size: 16px;
@@ -580,6 +581,7 @@ export default {
 .name-category {
   color: var(--color_text);
   cursor: pointer;
+  margin-right: 32px;
 }
 .name-category-active {
   color: red;
@@ -596,7 +598,7 @@ export default {
 .subcategoria li {
   padding: 0px;
   margin-bottom: 8px;
-  margin-left: 5px;
+  margin-left: 7px;
   font-size: 14px;
   font-weight: 50;
 }
