@@ -36,19 +36,11 @@
         <label for="modal-toggle"> {{ $t('footer_politicasyterminos') }}</label>
       </div>
       <div class="separator"></div>
-      <p
-        v-if="
-          dataStore.tienda.id_tienda != 5574 ||
-          dataStore.tienda.id_tienda != 5347
-        "
-      >
+      <p v-if="this.showLogo == true">
         {{ $t('footer_desarrollado') }}
       </p>
       <a
-        v-if="
-          dataStore.tienda.id_tienda != 5574 ||
-          dataStore.tienda.id_tienda != 5347
-        "
+        v-if="this.showLogo == true"
         href="https://komercia.co/"
         target="_blank"
         rel="noreferrer noopener"
@@ -69,10 +61,7 @@
       <nuxt-link
         to="/"
         class="wrapper-logo-tablada"
-        v-if="
-          dataStore.tienda.id_tienda == 5574 ||
-          dataStore.tienda.id_tienda == 5347
-        "
+        v-if="this.showLogo == false"
       >
         <img
           :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
@@ -153,9 +142,16 @@ export default {
     if (this.settingByTemplate) {
       this.setLogo()
     }
+    if (
+      this.dataStore.tienda.id_tienda == 5574 ||
+      this.dataStore.tienda.id_tienda == 5347
+    ) {
+      this.showLogo = false
+    }
   },
   data() {
     return {
+      showLogo: true,
       logo: null,
       secciones: [
         {
