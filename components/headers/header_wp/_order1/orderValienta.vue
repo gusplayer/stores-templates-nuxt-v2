@@ -77,8 +77,26 @@
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
-                    <p>{{ $t('footer_costoDomicilio') }}</p>
-                    <p class="without_shipping_cost">
+                    <p>
+                      {{ $t('footer_costoDomicilio') }}
+                    </p>
+                    <p
+                      v-if="
+                        rangosByCiudad.envio_metodo === 'tarifa_plana' &&
+                        shipping > 0 &&
+                        getFreeShipping == true
+                      "
+                      class="without_shipping_cost"
+                    >
+                      {{
+                        rangosByCiudades.valor
+                          | currency(
+                            dataStore.tienda.codigo_pais,
+                            dataStore.tienda.moneda
+                          )
+                      }}
+                    </p>
+                    <p v-else class="without_shipping_cost">
                       {{ $t('footer_pendiente') }}
                     </p>
                   </span>
@@ -86,7 +104,7 @@
                     <p>{{ $t('cart_subtotal') }}</p>
                     <p class="without_shipping_cost">
                       {{
-                        (totalCart + (getFreeShipping ? 0 : shipping))
+                        totalCart
                           | currency(
                             dataStore.tienda.codigo_pais,
                             dataStore.tienda.moneda
@@ -98,7 +116,7 @@
                     <p>{{ $t('footer_totalPagar') }}</p>
                     <p>
                       {{
-                        (totalCart + (getFreeShipping ? 0 : shipping))
+                        (totalCart + (this.shipping ? this.shipping : 0))
                           | currency(
                             dataStore.tienda.codigo_pais,
                             dataStore.tienda.moneda
@@ -506,11 +524,17 @@ export default {
             }
           })
 
+          let envio = ''
+          if (this.rangosByCiudades && this.rangosByCiudades.valor > 0) {
+            envio = this.rangosByCiudades.valor
+          } else {
+            envio = 'Pendiente'
+          }
           let productString = JSON.stringify(productosCart)
           let productList = productString.replace(/"/g, '')
           let resultproductList = productList.replace(/,/g, '%0A')
           let result = resultproductList.slice(1, -1)
-          let text = `Nuevo%20pedido%20de%20la%20tienda%20${this.dataStore.tienda.nombre}%0A%0APedido%20de%20${this.nombre}%0A%0A${result}%0A%0A%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20env%C3%ADo%20por%20separado%0A%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0AN%C3%BAmero%3A%20${this.numberphone}%0ACiudad%3A%20${this.ciudad}%0ADirecci%C3%B3n%3A%20${this.dirreccion}%0ADetalle%3A%20${this.barrio}`
+          let text = `Nuevo%20pedido%20de%20la%20tienda%20${this.dataStore.tienda.nombre}%0A%0APedido%20de%20${this.nombre}%0A%0A${result}%0A%0A%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20env%C3%ADo%3A%20${envio}%0A%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0AN%C3%BAmero%3A%20${this.numberphone}%0ACiudad%3A%20${this.ciudad}%0ADirecci%C3%B3n%3A%20${this.dirreccion}%0ADetalle%3A%20${this.barrio}`
           if (this.mobileCheck()) {
             window.open(`${baseUrlMovil}text=${text}`, '_blank')
             this.formOrden = false

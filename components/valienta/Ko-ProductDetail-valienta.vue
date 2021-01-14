@@ -1,10 +1,13 @@
 <template>
   <div class="wrapper-productDetail">
     <div class="container-productDetail" v-if="!loading" v-loading="loading">
-      <div class="wrapper-back" @click="$router.go(-1)">
+      <nuxt-link
+        :to="`/wp/${dataStore.tienda.id_tienda}/`"
+        class="wrapper-back"
+      >
         <arrow-left-icon class="icon-back" />
         <p class="back-text">Volver al inicio</p>
-      </div>
+      </nuxt-link>
       <div class="section">
         <div class="wrapper-left">
           <div class="photos_responsive">
@@ -513,7 +516,7 @@ export default {
       let baseUrlMovil = 'https://api.whatsapp.com/send?'
       let baseUrlPc = 'https://web.whatsapp.com/send?'
       let urlProduct = window.location.href
-      let text = `Hola 😀, %0AEstoy en tu tienda ${this.dataStore.tienda.nombre} y me interesa el producto: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
+      let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, que seguro te va a encantar: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
 
       if (this.mobileCheck()) {
         window.open(`${baseUrlMovil}text=${text}`, '_blank')

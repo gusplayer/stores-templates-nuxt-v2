@@ -68,6 +68,7 @@ export default {
   background: transparent;
   cursor: pointer;
   margin-right: 10px;
+  margin-bottom: 7px;
 }
 .ko-radio_group_option:hover {
   transition: 0.2s;

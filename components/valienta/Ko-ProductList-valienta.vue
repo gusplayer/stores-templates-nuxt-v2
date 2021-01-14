@@ -272,6 +272,7 @@ export default {
     },
     currentPage() {
       this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+      // eslint-disable-next-line no-unused-vars
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
@@ -387,34 +388,34 @@ export default {
   margin-top: 10px;
 }
 .pagination-medium >>> .el-pagination.is-background .btn-next {
-  color: #2ec4a1;
+  color: #4a5782;
   background-color: transparent;
 }
 .pagination-medium >>> .el-pagination.is-background .btn-prev {
-  color: #2ec4a1;
+  color: #4a5782;
   background-color: transparent;
 }
 .pagination-medium >>> .el-pagination.is-background .el-pager li {
-  color: #2ec4a1;
+  color: #4a5782;
   background-color: transparent;
 }
 .pagination-medium >>> .el-pagination.is-background .btn-next:hover {
-  color: #2ec4a1;
+  color: #4a5782;
 }
 .pagination-medium >>> .el-pagination.is-background .btn-prev:hover {
-  color: #2ec4a1;
+  color: #4a5782;
 }
 .pagination-medium
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled):hover {
-  color: #2ec4a1;
+  color: #4a5782;
 }
 .pagination-medium
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled).active {
-  background-color: #2ec4a1;
+  background-color: #4a5782;
   color: white;
 }
 @media (max-width: 800px) {
