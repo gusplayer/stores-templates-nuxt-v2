@@ -1,5 +1,13 @@
 <template lang="html">
-  <div class="home">
+  <div
+    class="home"
+    :style="
+      this.settingByTemplate.settings &&
+      this.settingByTemplate.settings['--background_color_1']
+        ? this.settingByTemplate.settings
+        : this.settingBase
+    "
+  >
     <div class="space-search"></div>
     <div class="search-movil" id="navbar">
       <form id="demo-1" style="width: 100%; position: relative;">
@@ -13,22 +21,32 @@
         />
       </form>
     </div>
-    <p>banner</p>
-    <p>productsFavoritos</p>
-    <p>productsList</p>
-    <p>Video</p>
-    <p>Contenido</p>
-    <p>NewsLetter</p>
+    <k6Banner />
+    <k6ProductFavoritos />
+    <ko6ProductOrder1 />
+    <k6Video :dataStore="dataStore" />
+    <k6Content :dataStore="dataStore" />
+    <k6NewsLetter :dataStore="dataStore" />
   </div>
 </template>
 
 <script>
-import kBanner from '../../components/template5/ko-Banner-1'
+import k6Banner from '../../components/template6/ko6-Banner-1'
+import k6ProductFavoritos from '../../components/template6/Ko6-ProductFavoritos-1'
+import ko6ProductOrder1 from '../../components/template6/ko6-ProductOrder-1'
+import k6Video from '../../components/template6/Ko6-Videos-1'
+import k6Content from '../../components/template6/Ko6-Content-1'
+import k6NewsLetter from '../../components/template6/Ko6-Newsletter-1'
 
 export default {
   layout: 'default',
   components: {
-    kBanner,
+    k6Banner,
+    k6ProductFavoritos,
+    ko6ProductOrder1,
+    k6Video,
+    k6Content,
+    k6NewsLetter,
   },
   data() {
     return {
@@ -46,7 +64,13 @@ export default {
       return this.$store.getters['products/filterProducts']
     },
     facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
+      return this.$store.state.analytics_tagmanager
+    },
+    settingBase() {
+      return this.$store.state.settingBase
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -57,8 +81,8 @@ export default {
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        if (this.facebooPixel != null) {
-          window.fbq('track', 'Search', { ValorBuscado: value })
+        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          window.fbq('track', 'Search', { value: value })
         }
       } else {
         location.href = '?search=' + ''
