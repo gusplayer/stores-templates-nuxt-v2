@@ -270,6 +270,10 @@ export default {
         }
       })
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$router.push({
+        path: '',
+        query: { category: filtradoCategorias.nombre_categoria_producto },
+      })
       this.$store.commit('products/FILTER_BY', {
         type: 'category',
         data: filtradoCategorias.nombre_categoria_producto,
