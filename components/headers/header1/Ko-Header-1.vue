@@ -243,7 +243,6 @@ export default {
           href: '/blog',
         },
       ],
-      cat: [],
       add: true,
       selectSubcategory: '',
       nameCategory: '',

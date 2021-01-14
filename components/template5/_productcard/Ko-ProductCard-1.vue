@@ -302,6 +302,7 @@ export default {
         estado: true,
       }
       this.maxQuantityValue = this.product.stock
+
       this.productsCarts.find((productCart, index) => {
         if (productCart.id == this.product.id) {
           this.productIndexCart = index
@@ -309,6 +310,7 @@ export default {
           this.maxQuantityValue = this.product.stock - productCart.cantidad
         }
       })
+
       if (
         this.salesData.unidades == 0 ||
         this.maxQuantityValue <= 0 ||
@@ -319,6 +321,7 @@ export default {
     },
     addShoppingCart() {
       if (this.product) {
+        this.productIndexCart = null
         this.getDataProduct()
         if (this.product.id == this.idSlug) {
           let product = {
@@ -335,6 +338,7 @@ export default {
           } else {
             product.limitQuantity = this.product.stock
           }
+
           if (typeof this.productIndexCart === 'number') {
             const mutableProduct = this.$store.state.productsCart[
               this.productIndexCart
@@ -348,6 +352,7 @@ export default {
           } else {
             this.$store.state.productsCart.push(product)
           }
+
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
               content_ids: this.product.id,
