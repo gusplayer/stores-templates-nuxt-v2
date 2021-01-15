@@ -717,6 +717,8 @@ export default {
 }
 .photos_responsive {
   width: 100%;
+  height: 375px;
+  max-width: 400px;
   display: flex;
   box-sizing: border-box;
   overflow: hidden;
@@ -1073,7 +1075,7 @@ export default {
   .photos_responsive {
     margin-top: 10px;
     margin-bottom: 10px;
-    padding: 0 15px;
+    padding: 0px;
   }
 }
 </style>
