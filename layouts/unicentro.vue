@@ -10,7 +10,7 @@
     <component
       :dataStore="dataStore"
       :settingByTemplate="
-      this.settingByTemplate &&
+        this.settingByTemplate &&
         this.settingByTemplate.settings &&
         this.settingByTemplate.settings['--background_color_1']
           ? this.settingByTemplate.settings
@@ -22,7 +22,7 @@
     <component
       :dataStore="dataStore"
       :settingByTemplate="
-      this.settingByTemplate &&
+        this.settingByTemplate &&
         this.settingByTemplate.settings &&
         this.settingByTemplate.settings['--background_color_1']
           ? this.settingByTemplate.settings
@@ -355,7 +355,7 @@ export default {
   padding: 0px;
   font-family: var(--font-style);
   outline: none;
-  list-style: none;
+  /* list-style: none; */
   text-decoration: none;
   box-sizing: border-box;
   outline: none !important;

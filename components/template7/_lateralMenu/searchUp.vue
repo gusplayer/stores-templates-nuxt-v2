@@ -3,12 +3,15 @@
     <div class="order" v-show="openSearch">
       <div class="order_content">
         <div class="search-input-content">
-          <input
-            type="text"
-            :placeholder="$t('header_buscar_producto')"
-            v-model="search"
-            class="input-search"
-          />
+          <form>
+            <input
+              type="search"
+              :placeholder="$t('header_buscar_producto')"
+              v-model="search"
+              class="input-search"
+              @keyup.enter="getSearch(search)"
+            />
+          </form>
           <div class="close-container" @click="closedSearch">
             <div class="leftright"></div>
             <div class="rightleft"></div>
@@ -79,6 +82,21 @@ export default {
     },
   },
   methods: {
+    getSearch(value) {
+      if (value) {
+        location.href = '?search=' + value
+        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          window.fbq('track', 'Search', { value: value })
+        }
+      } else {
+        location.href = '?search=' + ''
+      }
+    },
+    setSearch(value) {
+      let category = value.replace('/?search=', '')
+      let urlFiltrada = decodeURIComponent(category)
+      this.search = urlFiltrada
+    },
     toggleItem: function () {
       this.show = !this.show
     },

@@ -1,9 +1,6 @@
 <template>
   <div class="wrapper-card anim">
     <router-link :to="{ path: `/blog/` + article.slug }" class="container">
-      <!-- <div class="wrapper-image">
-        <img :src="this.article.photo" class="product-image" alt="blog" />
-      </div> -->
       <div class="wrapper-image">
         <img
           :src="idCloudinary(this.article.imagen_principal_url, 600, 600)"
@@ -15,8 +12,21 @@
         <p class="title">{{ this.article.titulo }}</p>
         <p class="subtext">{{ `${this.article.resumen.slice(0, 200)}...` }}</p>
         <div class="content-date">
-          <p>Autor: {{ this.article.autor }}</p>
-          <p>{{ this.article.created_at }}</p>
+          <div class="content-img">
+            <div class="flex-shrink-0">
+              <a href="#">
+                <img
+                  class="h-10 w-10 rounded-full"
+                  src="https://api2.komercia.co/users/user.jpg"
+                  alt=""
+                />
+              </a>
+            </div>
+            <p class="text-autor">
+              <strong>Autor:</strong> {{ this.article.autor }}
+            </p>
+          </div>
+          <p class="text-data">{{ this.shippingCreated }}</p>
         </div>
       </div>
     </router-link>
@@ -29,13 +39,18 @@ export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',
   props: { article: Object },
-  mounted() {},
-  data() {
-    return {}
+  mounted() {
+    if (this.article.created_at) {
+      let domain = this.article.created_at
+      let result = domain.split(' ')
+      this.shippingCreated = result[0]
+    }
   },
-  computed: {},
-  methods: {},
-  watch: {},
+  data() {
+    return {
+      shippingCreated: '',
+    }
+  },
 }
 </script>
 
@@ -102,25 +117,38 @@ export default {
   line-height: 23px;
 }
 .subtext {
-  margin-top: 10px;
   width: 100%;
+  height: 90px;
+  margin-top: 10px;
   font-size: 15px;
-  text-align: justify;
   color: rgb(73, 70, 70);
-  letter-spacing: 0.5px;
-  line-height: 23px;
 }
 .content-date {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
-.content-date p {
+.content-img {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.text-autor {
+  width: 100%;
+  margin-left: 10px;
+  font-size: 14px;
+  color: #3a4557bb;
+}
+.text-data {
   width: 100%;
   font-size: 14px;
-  text-align: justify;
   color: #3a4557bb;
+  display: flex;
+  justify-content: flex-end;
 }
 @media (max-width: 965px) {
   .wrapper-item-text {

@@ -1,49 +1,39 @@
 <template lang="html">
-  <div>
-    <KCarousel></KCarousel>
-    <KPromo></KPromo>
-    <!-- <KBanner :dataStore="dataStore" /> -->
-    <!-- <KCategory :dataStore="dataStore" style="position: sticky; top: 88px;" /> -->
-    <KProductList
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
-    ></KProductList>
-    <!-- <KProducts></KProducts> -->
-    <KAdvertising></KAdvertising>
-    <KGify :dataStore="dataStore" :fullProducts="fullProducts"></KGify>
-    <KHowwork></KHowwork>
-    <KWrapper></KWrapper>
+  <div
+    class="home"
+    :style="
+      this.settingByTemplate &&
+      this.settingByTemplate.settings &&
+      this.settingByTemplate.settings['--background_color_1']
+        ? this.settingByTemplate.settings
+        : this.settingBase
+    "
+  >
+    <div class="space-search"></div>
+    <div class="search-movil" id="navbar">
+      <form id="demo-1" style="width: 100%; position: relative;">
+        <search-icon class="icon-s" />
+        <input
+          v-model="search"
+          type="search"
+          :placeholder="$t('header_search')"
+          @keyup.enter="getSearch(search)"
+          id="SearchIndex5"
+        />
+      </form>
+    </div>
+    <kBanner></kBanner>
   </div>
 </template>
 
 <script>
-// import KBanner from '../../components/template7/ko-Banner-1'
-// import KCategory from '../../components/template7/Ko-Category-1'
-// import KProducts from '../../components/template7/_productsItems//Ko-products'
-import KCarousel from '../../components/template7/_carouselBanner/ko-carousel'
-import KPromo from '../../components/template7/ko-Banner-Promo'
-import KProductList from '../../components/template7/Ko-ProductList'
-import KAdvertising from '../../components/template7/Ko-advertising'
-import KGify from '../../components/template7/Ko-gify'
-import KHowwork from '../../components/template7/Ko-how-we-work'
-import KWrapper from '../../components/template7/Ko-wrapper'
-
+import kBanner from '../../components/template8/prueba'
 export default {
   layout: 'default',
   components: {
-    KCarousel,
-    KPromo,
-    KProductList,
-    KAdvertising,
-    KGify,
-    KHowwork,
-    KWrapper,
-    // KProducts,
-    // KBanner,
-    // KCategory,
-
-    // KProductList,
+    kBanner,
   },
+  mounted() {},
   data() {
     return {
       search: '',
@@ -62,20 +52,21 @@ export default {
     settingBase() {
       return this.$store.state.settingBase
     },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
+    stateBanner() {
+      return this.$store.state.stateBanner
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
     Searchproduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.search = search
+      this.$store.commit('SET_SEARCHVALUE', this.search)
     },
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        if (this.facebooPixel != null) {
-          window.fbq('track', 'Search', { ValorBuscado: value })
-        }
       } else {
         location.href = '?search=' + ''
       }

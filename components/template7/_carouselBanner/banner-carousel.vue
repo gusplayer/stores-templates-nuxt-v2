@@ -22,12 +22,12 @@
       <div class="banner-content-buttons">
         <button class="content-bttns-shop">
           <span class="content-textbutton-shop">
-            Comprar
+            {{ $t('productdetail_btnComprar') }}
           </span>
         </button>
         <button :class="`content-bttns-view${banner.id} content-bttns-view`">
           <span class="content-textbutton-viewmore">
-            Ver más
+            {{ $t('home_cardvermas') }}
           </span>
         </button>
       </div>
@@ -57,10 +57,12 @@ export default {
   @apply flex flex-row gap-3 justify-center items-center;
 }
 .content-bttns-shop {
-  @apply mr-2 px-6 h-36 rounded-full bg-red-btnbannershop shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply mr-2 rounded-full border-2 border-red-btnhoverHeader bg-red-btnbannershop shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  padding: 10px 20px;
 }
 .content-bttns-view {
-  @apply ml-2 px-6 h-36 rounded-full border-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply ml-2 rounded-full border-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  padding: 10px 20px;
 }
 .content-bttns-view1 {
   @apply border-gray-btnbannerviewhover;
@@ -89,6 +91,8 @@ export default {
 }
 .content-textbutton-shop {
   @apply text-white-white;
+  font-size: 13px;
+  line-height: 18px;
 }
 .banner-text-tittle-1 {
   @apply text-blue-headerpage;
@@ -118,7 +122,8 @@ export default {
   font-family: 'Great Vibes', cursive !important;
 }
 .banner-text-subtittle {
-  font-family: 'Lora', cursive !important;
+  font-family: 'Lora', serif !important;
+  font-style: italic;
 }
 .content-textbutton-shop {
   font-family: 'Lora', serif !important;
@@ -211,10 +216,10 @@ export default {
     @apply w-8/3;
   }
   .text-subtittle {
-    @apply w-8/3 mt-6;
+    @apply w-8/3 mt-4;
   }
   .banner-content-buttons {
-    @apply my-10 w-9/0;
+    @apply my-6 w-9/0;
   }
   .banner-img {
     @apply w-full;

@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="header-content-icon">
-            <div class="header-content-cart">
+            <div class="header-content-cart" @click="openOrder">
               <svg
                 class="icon-shop"
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,17 +77,17 @@
             </div>
           </div>
         </div>
-        <KoMenu :dataStore="dataStore" class="responsive" />
         <KoSearch :dataStore="dataStore" />
+        <KoMenu :dataStore="dataStore" class="responsive" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import KoOrder from '../../template7/_lateralMenu/order1'
+import KoOrder from '../../template7/_lateralMenu/orderRight'
 import KoMenu from '../../template7/_lateralMenu/openMenuLeft'
-import KoSearch from '../../template7/ko-search'
+import KoSearch from '../../template7/_lateralMenu/searchUp'
 
 export default {
   components: {
@@ -121,9 +121,7 @@ export default {
     } else {
       this.showSearch = false
     }
-    if (domain == '/') {
-      this.$store.commit('SET_STATESPACERHEADERK7', false)
-    } else {
+    if (domain == '/' || domain != '/') {
       this.$store.commit('SET_STATESPACERHEADERK7', true)
     }
 
@@ -198,12 +196,6 @@ export default {
     },
   },
   methods: {
-    // openStateHeader() {
-    //   this.$store.commit('SET_STATEOPENHEADER', true)
-    // },
-    // closeStateHeader() {
-    //   this.$store.commit('SET_STATECLOSEHEADER', false)
-    // },
     openSearch() {
       this.$store.commit('SET_OPENSEARCH', true)
     },
@@ -286,7 +278,7 @@ export default {
 .header-container {
   transition: all 0.5s ease-in-out;
   @apply w-full flex flex-col justify-center items-center fixed z-10;
-  top: 20px;
+  top: 30px;
 }
 .header {
   @apply flex w-full justify-between shadow-lg bg-white-white;
@@ -332,7 +324,7 @@ export default {
   color: var(--btnhover);
 }
 .border-num-items {
-  @apply bg-red-btnbannershop rounded-full h-16 w-auto flex justify-center items-center text-center -ml-3 border -mt-3;
+  @apply bg-red-btnbannershop rounded-full h-16 w-auto flex justify-center items-center text-center -ml-3  -mt-3;
 }
 .num-items {
   @apply text-xs p-1 text-white-white;

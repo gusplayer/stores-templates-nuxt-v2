@@ -453,13 +453,13 @@ export default {
   padding: 0px;
   font-family: var(--font-style);
   outline: none;
-  list-style: none;
+  /* list-style: none; */
   text-decoration: none;
   box-sizing: border-box;
   outline: none !important;
 }
 .separadorKo7 {
-  width: 120%;
+  width: 100%;
   padding-top: 110px;
   background: #efefef;
 }

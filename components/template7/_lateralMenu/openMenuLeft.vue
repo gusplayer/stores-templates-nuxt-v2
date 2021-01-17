@@ -19,13 +19,15 @@
 
         <div class="search-content">
           <div class="search-input-content">
-            <input
-              type="text"
-              :placeholder="$t('header_buscar_producto')"
-              v-model="search"
-              class="input-search"
-            />
-            <!-- @keyup.enter="getSearch(search)" -->
+            <form>
+              <input
+                type="text"
+                :placeholder="$t('header_buscar_producto')"
+                v-model="search"
+                @keyup.enter="getSearch(search)"
+                class="input-search"
+              />
+            </form>
           </div>
           <div class="search-icon-content">
             <svg
@@ -44,55 +46,22 @@
             </svg>
           </div>
         </div>
-        <div class="header-content-buttons">
-          <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-            <nuxt-link :to="item.path" v-if="item.path" class="btn"
-              >{{ $t(`${item.name}`) }}
-            </nuxt-link>
+
+        <div class="content-lateral-menu">
+          <div class="content-btns-lateral-menu">
+            <button
+              id="btnfocus"
+              class="btn-lateral-menu-left"
+              v-on:click="focusbtn = false"
+            >
+              {{ $t('header_menu') }}
+            </button>
+            <button class="btn-lateral-menu-right" v-on:click="focusbtn = true">
+              {{ $t('header_categorias') }}
+            </button>
           </div>
-          <div class="tab w-full overflow-hidden">
-            <input
-              class="absolute opacity-0"
-              id="tab-multi-one"
-              type="checkbox"
-              name="tabs"
-            />
-            <div class="flex flex-row" @click="toggleItem">
-              <label class="btn" for="tab-multi-one">{{
-                $t('header_categorias')
-              }}</label>
-              <button class="svg-content" for="tab-multi-one">
-                <label for="tab-multi-one">
-                  <svg
-                    v-if="!show"
-                    class="svg-acordeon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <svg
-                    v-if="show"
-                    class="svg-acordeon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </label>
-              </button>
-            </div>
-            <div class="tab-content overflow-hidden border-l-2 leading-normal">
+          <div class="conten-Menu" v-if="!focusbtn">
+            <div class="header-content-buttons">
               <div
                 v-for="(item, index) in secciones"
                 :key="`${index}${item.name}`"
@@ -100,6 +69,66 @@
                 <nuxt-link :to="item.path" v-if="item.path" class="btn"
                   >{{ $t(`${item.name}`) }}
                 </nuxt-link>
+              </div>
+            </div>
+          </div>
+          <div class="content-Categorys" v-if="focusbtn">
+            <div class="tab w-full overflow-hidden">
+              <input
+                class="absolute opacity-0"
+                id="tab-multi-one"
+                type="checkbox"
+                name="tabs"
+              />
+              <div class="flex flex-row" @click="toggleItem">
+                <label class="btn" for="tab-multi-one">{{
+                  $t('header_categorias')
+                }}</label>
+                <button class="svg-content" for="tab-multi-one">
+                  <label for="tab-multi-one">
+                    <svg
+                      v-if="!show"
+                      class="svg-acordeon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <svg
+                      v-if="show"
+                      class="svg-acordeon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </label>
+                </button>
+              </div>
+              <div
+                class="tab-content overflow-hidden border-l-2 leading-normal"
+              >
+                <div v-for="(item, index) in dataStore.categorias" :key="index">
+                  <p
+                    class="btn"
+                    @click="sendCategory(item, item.id, index, (ref = false))"
+                  >
+                    {{ item.nombre_categoria_producto }}
+                  </p>
+                  <!-- <nuxt-link :to="item.path" v-if="item.path" class="btn"
+                  >{{ $t(`${item.name}`) }}
+                </nuxt-link> -->
+                </div>
               </div>
             </div>
           </div>
@@ -117,9 +146,14 @@ export default {
     showMenu: Boolean,
   },
   components: {},
-
+  mounted() {
+    window.onload = function () {
+      document.getElementById('btnfocus').focus()
+    }
+  },
   data() {
     return {
+      focusbtn: false,
       add: true,
       show: false,
       selectSubcategory: '',
@@ -154,6 +188,7 @@ export default {
       ],
     }
   },
+
   computed: {
     logoImg() {
       return this.$store.state.dataStore.tienda.logo
@@ -169,9 +204,18 @@ export default {
     },
   },
   methods: {
+    getSearch(value) {
+      if (value) {
+        location.href = '?search=' + value
+        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          window.fbq('track', 'Search', { value: value })
+        }
+      } else {
+        location.href = '?search=' + ''
+      }
+    },
     toggleItem: function () {
       this.show = !this.show
-      console.log('Que webada muestra esto: ' + this.show)
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()
@@ -196,7 +240,7 @@ export default {
     Sendsubcategory(value) {
       this.indexSelect2 = value
       this.$router.push({
-        path: '/',
+        path: '/productos',
       })
       this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.$store.commit('SET_OPENORDERMENULEFT', false)
@@ -223,7 +267,7 @@ export default {
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
       this.$router.push({
-        path: '/',
+        path: '/productos',
       })
       this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.nameCategory = value.nombre_categoria_producto
@@ -275,6 +319,59 @@ export default {
 </script>
 
 <style scoped>
+.content-lateral-menu {
+  @apply w-full flex flex-col justify-center items-center;
+}
+.content-btns-lateral-menu {
+  @apply w-full flex flex-row justify-center items-center;
+}
+.btn-lateral-menu-right:focus .conten-Menu {
+  @apply hidden;
+}
+.btn-lateral-menu-left {
+  padding: 18px 15px;
+  max-width: 50%;
+  width: 50%;
+  color: #909090;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 900;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Lora', serif !important;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
+}
+.btn-lateral-menu-right {
+  padding: 18px 15px;
+  max-width: 50%;
+  width: 50%;
+  color: #909090;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 900;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Lora', serif !important;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
+}
+.btn-lateral-menu-left:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333;
+  border-bottom: 2px solid #ed2353;
+}
+.btn-lateral-menu-right:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333;
+  border-bottom: 2px solid #ed2353;
+}
+.conten-Menu,
+.content-Categorys {
+  @apply w-full flex flex-col justify-start items-center;
+}
 .text-acordion {
   @apply block leading-normal flex justify-between cursor-pointer;
 }
@@ -283,23 +380,10 @@ export default {
 }
 .svg-content:scope {
   @apply bg-red-btnbannershop text-white-white;
-  /* animation: spi 1s; */
 }
 .svg-acordeon {
   @apply h-12 w-12 cursor-pointer;
 }
-/* }
-  @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(180deg);
-    animation: none;
-  }
-}
-  	 */
-
 .search-content {
   @apply flex flex-row w-full items-center shadow-xl py-2;
 }
