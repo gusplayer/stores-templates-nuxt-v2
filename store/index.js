@@ -419,6 +419,7 @@ export const actions = {
       await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
       await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
       await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
+      await dispatch('GET_ARTICLES', id.data.data.id)
     }
     await dispatch('GET_SERVER_PATH', full)
     await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
@@ -614,12 +615,9 @@ export const actions = {
         })
       })
   },
-  GET_ARTICLES({ state }) {
+  async GET_ARTICLES({ state }, id) {
     axios
-      .get(
-        `${state.urlKomercia}/api/blogs/${state.dataStore.tienda.id_tienda}?page=1`,
-        state.configAxios
-      )
+      .get(`${state.urlKomercia}/api/blogs/${id}?page=1`, state.configAxios)
       .then((response) => {
         state.listArticulos = response.data.blogs.data
       })

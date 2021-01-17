@@ -1,25 +1,23 @@
 <template>
-  <div class="wrapper-card">
+  <div class="wrapper-card" :style="settingByTemplate">
     <div class="container-card" id="product-card">
       <div class="wrapper">
         <router-link
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
-          <no-ssr>
-            <img
-              v-if="!soldOut"
-              v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
-              class="product-image"
-              alt="Product Img"
-            />
-            <img
-              v-if="soldOut"
-              v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
-              class="product-image-soldOut"
-              alt="Product Img"
-            />
-          </no-ssr>
+          <img
+            v-if="!soldOut"
+            :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            class="product-image"
+            alt="Product Img"
+          />
+          <img
+            v-if="soldOut"
+            :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            class="product-image-soldOut"
+            alt="Product Img"
+          />
           <div class="image_overlay"></div>
         </router-link>
         <div class="separador-stats"></div>
@@ -113,20 +111,18 @@
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
-          <no-ssr>
-            <img
-              v-if="!soldOut"
-              v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
-              class="product-image"
-              alt="Product Img"
-            />
-            <img
-              v-if="soldOut"
-              v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
-              class="product-image-soldOut"
-              alt="Product Img"
-            />
-          </no-ssr>
+          <img
+            v-if="!soldOut"
+            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+            class="product-image"
+            alt="Product Img"
+          />
+          <img
+            v-if="soldOut"
+            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+            class="product-image-soldOut"
+            alt="Product Img"
+          />
         </router-link>
         <div class="content-card-items">
           <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
@@ -210,8 +206,8 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
-  name: 'Ko-ProductCard-1',
-  props: { product: Object },
+  name: 'Ko6-ProductCard-1',
+  props: { product: Object, settingByTemplate: Object },
   mounted() {
     this.idSlug = this.product.id
     this.prodcutPrice()
@@ -302,7 +298,6 @@ export default {
         estado: true,
       }
       this.maxQuantityValue = this.product.stock
-
       this.productsCarts.find((productCart, index) => {
         if (productCart.id == this.product.id) {
           this.productIndexCart = index
@@ -310,7 +305,6 @@ export default {
           this.maxQuantityValue = this.product.stock - productCart.cantidad
         }
       })
-
       if (
         this.salesData.unidades == 0 ||
         this.maxQuantityValue <= 0 ||
@@ -338,7 +332,6 @@ export default {
           } else {
             product.limitQuantity = this.product.stock
           }
-
           if (typeof this.productIndexCart === 'number') {
             const mutableProduct = this.$store.state.productsCart[
               this.productIndexCart
@@ -352,14 +345,13 @@ export default {
           } else {
             this.$store.state.productsCart.push(product)
           }
-
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
-              content_ids: this.product.id,
-              name: this.product.nombre,
-              quantity: 1,
+              content_ids: this.data.detalle.id,
+              name: this.data.detalle.nombre,
+              quantity: this.data.cantidad,
               currency: this.dataStore.tienda.moneda,
-              value: this.product.precio,
+              value: this.salesData.precio,
               content_type: 'product',
               description: 'Agregado detalle del producto',
             })
@@ -471,7 +463,6 @@ export default {
   justify-content: center;
   overflow: hidden;
   width: 100%;
-  min-height: 250px;
   max-height: 300px;
 }
 .product-image {
@@ -502,7 +493,7 @@ export default {
   transition: all 200ms ease-out;
 }
 .separador-stats {
-  height: 95px;
+  height: 90px;
   width: 100%;
 }
 .stats-container {
@@ -698,17 +689,6 @@ export default {
 .card-icon-cart-movil:hover {
   color: var(--btnhover);
 }
-
-@media (max-width: 1270px) {
-  .separador-stats {
-    height: 105px;
-  }
-}
-@media (max-width: 1249px) {
-  .separador-stats {
-    height: 98px;
-  }
-}
 @media (max-width: 768px) {
   .wrapper {
     display: none;
@@ -731,7 +711,7 @@ export default {
     font-size: 13px;
   }
   .content-text-price {
-    margin-top: 0px;
+    margin-top: 2px;
   }
   .text-price {
     font-size: 15px;
@@ -752,9 +732,6 @@ export default {
   .container-card {
     width: 100%;
     max-width: 200px;
-  }
-  .wrapper-image {
-    min-height: 170px;
   }
 }
 </style>

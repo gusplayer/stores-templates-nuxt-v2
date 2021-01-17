@@ -1,26 +1,68 @@
 <template>
   <div class="wrapper-productlist">
     <div class="container">
-      <div class="content-title"></div>
-      <br />
-      <div class="content-items-categorias">
-        <div class="content-items-categorias-text">
-          <p class="text-categorias" @click="clear">
-            {{ $t('home_catalogo') }}
-          </p>
-          <p
-            class="text-categorias-select"
-            v-if="this.nameCategoryHeader"
-            @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >
-            > {{ this.nameCategoryHeader }}
-          </p>
-          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            > {{ this.nameSubCategoryHeader }}
-          </p>
-        </div>
+      <div class="content-items-categorias-text">
+        <p class="text-categorias" @click="clear">Catálogo</p>
+        <p
+          class="text-categorias-select"
+          v-if="this.nameCategoryHeader"
+          @click="breadcrumbsSendCategory(nameCategoryHeader)"
+        >
+          > {{ this.nameCategoryHeader }}
+        </p>
+        <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
+          > {{ this.nameSubCategoryHeader }}
+        </p>
       </div>
       <div class="content-item">
+        <div class="wrapper-filter">
+          <div class="content-sticky">
+            <div
+              v-for="categoria in categorias"
+              :key="categoria.id"
+              class="content-categoria"
+            >
+              <BaseAccordian>
+                <template v-slot:categorias>
+                  <li
+                    class="text-categoria"
+                    @click="
+                      sendCategory(
+                        categoria,
+                        categoria.id,
+                        index,
+                        (ref = false)
+                      )
+                    "
+                    :class="
+                      categoria.id == indexSelect ? 'text-categoria-active' : ''
+                    "
+                  >
+                    {{ categoria.nombre_categoria_producto }}
+                  </li>
+                </template>
+                <template v-slot:subcategorias
+                  ><template>
+                    <div v-for="(subcategory, key) in subcategories" :key="key">
+                      <li
+                        v-if="subcategory.categoria == categoria.id"
+                        @click="Sendsubcategory(subcategory.id)"
+                        class="text-subcategoria"
+                        :class="
+                          subcategory.id == indexSelect2
+                            ? 'text-subcategoria-active'
+                            : ''
+                        "
+                      >
+                        {{ subcategory.nombre_subcategoria }}
+                      </li>
+                    </div>
+                  </template></template
+                >
+              </BaseAccordian>
+            </div>
+          </div>
+        </div>
         <div class="content-item-productos">
           <div class="grid-products">
             <div
@@ -35,15 +77,15 @@
             v-if="(this.fullProducts.length == 0)"
             class="content-products-empty"
           >
-            <p>{{ $t('home_msgCatalogo') }}</p>
+            <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 16">
+            <div class="product_pagination" v-if="products.length > 24">
               <el-pagination
                 background
                 layout="prev, pager, next"
                 :total="products.length"
-                :page-size="16"
+                :page-size="24"
                 :current-page.sync="currentPage"
                 class="pagination"
               ></el-pagination>
@@ -56,16 +98,19 @@
 </template>
 
 <script>
-import KoProductCard1 from './_productcard/Ko-ProductCard-1'
+import KoProductCard1 from '../template5/_productcard/Ko-ProductCard-1'
+import BaseAccordian from '../headers/_order1/_AccordionList'
+
 export default {
   components: {
     KoProductCard1,
+    BaseAccordian,
   },
   props: {
     dataStore: Object,
     fullProducts: {},
   },
-  name: 'Ko-ProductList-1',
+  name: 'Ko6-ProductList-1',
   mounted() {
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
@@ -80,26 +125,24 @@ export default {
       })
     }
     let domain = this.$route.fullPath
-    let searchCategory = domain.slice(0, [11])
-    let searchSubCategory = domain.slice(0, [14])
+    let searchCategory = domain.slice(10, [21])
+    let searchSubCategory = domain.slice(10, [24])
     if (searchCategory === '/?category=') {
       this.sendCategoryUrl(domain)
     } else if (searchSubCategory === '/?subcategory=') {
       this.SendsubcategoryUrl(domain)
-    } else if (domain == '/') {
+    } else if (domain == '/productos') {
       this.Allcategories()
     }
     if (this.previousPage) {
       this.currentPage = this.previousPage
     }
     if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('SET_STATEBANNER', false)
       this.$store.commit('products/FILTER_BY', {
         type: 'category',
         data: this.nameCategoryHeader,
       })
     } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      this.$store.commit('SET_STATEBANNER', false)
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.nombre_subcategoria == this.nameSubCategoryHeader
       )
@@ -116,8 +159,6 @@ export default {
   },
   data() {
     return {
-      drawerleft: false,
-      directionleft: 'ltr',
       add: true,
       search: '',
       productsCategory: [],
@@ -156,15 +197,15 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 24 - 24
+      const final = initial + 24
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 24 - 24
+      const final = initial + 24
       return this.products.slice(initial, final)
     },
     selectedCategory() {
@@ -231,20 +272,30 @@ export default {
       this.indexSelect2 = value
       this.addClass()
       this.selectSubcategory = value
-      let filtradoCategoria = this.subcategories.find(
+      let filtradoSubCategoria = this.subcategories.find(
         (element) => element.id == value
       )
-      this.nameSubCategory = filtradoCategoria.nombre_subcategoria
+
+      let filtradoCategorias = this.categorias.find(
+        (element) => element.id == filtradoSubCategoria.categoria
+      )
+      this.$store.commit(
+        'SET_CATEGORY_PRODCUTRO',
+        filtradoCategorias.nombre_categoria_producto
+      )
+      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
         type: 'subcategory',
         data: value,
       })
     },
     sendCategory(value, categoria, index, ref) {
-      this.indexSelect = index
+      this.indexSelect = categoria
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
-      this.indexCategory = index
+      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -270,16 +321,14 @@ export default {
         }
       })
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-      this.$router.push({
-        path: '',
-        query: { category: filtradoCategorias.nombre_categoria_producto },
-      })
       this.$store.commit('products/FILTER_BY', {
         type: 'category',
         data: filtradoCategorias.nombre_categoria_producto,
       })
     },
     clear() {
+      this.indexSelect = ''
+      this.indexSelect2 = ''
       this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
@@ -287,17 +336,13 @@ export default {
         type: 'all',
         data: '',
       })
-      this.$router.push({
-        path: '',
-        query: '',
-      })
       this.$emit('clear')
       this.addClass()
       this.nameCategory = ''
     },
     sendCategoryUrl(value) {
-      let category = value.replace('/?category=', '')
-      let urlFiltrada = decodeURIComponent(category)
+      let category = value.split('=')
+      let urlFiltrada = decodeURIComponent(category[category.length - 1])
       this.$store.commit('products/FILTER_BY', {
         type: 'category',
         data: urlFiltrada,
@@ -309,8 +354,9 @@ export default {
       }
     },
     SendsubcategoryUrl(value) {
-      let subcategory = value.replace('/?subcategory=', '')
-      let urlFiltrada = decodeURIComponent(subcategory)
+      let subcategory = value.split('=')
+      let urlFiltrada = decodeURIComponent(subcategory[subcategory.length - 1])
+      this.selectSubcategory = urlFiltrada
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.nombre_subcategoria == urlFiltrada
       )
@@ -318,7 +364,6 @@ export default {
         let filtradoCategorias = this.categorias.find(
           (element) => element.id == filtradoSubCategoria.categoria
         )
-
         this.$store.commit('products/FILTER_BY', {
           type: 'subcategory',
           data: filtradoSubCategoria.id,
@@ -361,11 +406,7 @@ export default {
     },
     currentPage() {
       this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollBy(0, -1500)
-      }, 250)
+      window.scrollBy(0, -3300)
     },
     previousPage() {
       if (this.previousPage) {
@@ -381,13 +422,13 @@ export default {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
-      let searchCategory = domain.slice(0, [11])
-      let searchSubCategory = domain.slice(0, [14])
+      let searchCategory = domain.slice(10, [21])
+      let searchSubCategory = domain.slice(10, [24])
       if (searchCategory === '/?category=') {
         this.sendCategoryUrl(domain)
       } else if (searchSubCategory === '/?subcategory=') {
         this.SendsubcategoryUrl(domain)
-      } else if (domain == '/') {
+      } else if (domain == '/productos') {
         this.Allcategories()
       }
     },
@@ -399,83 +440,93 @@ export default {
 </script>
 
 <style scoped>
+.text-macrobrand {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.text-macrobrand > p {
+  padding: 5px 20px;
+  font-size: 20px;
+  text-align: center;
+  color: var(--color_text);
+  font-weight: bold;
+}
 .wrapper-productlist {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   background: var(--background_color_2);
   box-sizing: border-box;
 }
 .container {
-  display: flex;
-  justify-content: center;
   width: 100%;
   max-width: 1300px;
-  padding: 0px 20px;
-  flex-direction: column;
-}
-.content-title {
-  width: 100%;
+  padding: 40px 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
-.title {
-  font-size: 38px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.24;
-  letter-spacing: -0.4px;
-  color: var(--color_text);
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-.content-item-top {
+.content-sticky {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  position: sticky;
+  top: 118px;
 }
 .content-item {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  margin-bottom: 40px;
 }
 .content-item > div:nth-child(1) {
+  max-width: 300px;
   flex: 1;
 }
 .content-item > div:nth-child(2) {
   flex: 2;
 }
-.content-filtrar {
+.wrapper-filter {
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  list-style: none;
 }
-.dropbtn {
-  background: transparent;
+/* categorias */
+.content-categoria {
+  width: 100%;
+  padding-right: 20px;
+}
+.text-categoria {
+  width: 100%;
   font-size: 16px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: var(--color_subtext);
-  align-self: flex-end;
-  cursor: pointer;
-  margin-right: 2px;
+  color: var(--color_text);
 }
-.content-items-categorias {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  /* height: 40px; */
+.text-subcategoria {
+  width: 100%;
+  font-size: 16px;
+  color: var(--color_subtext);
+  margin-bottom: 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.text-categoria-active {
+  color: var(--color_hover_text);
+}
+.text-subcategoria-active {
+  color: var(--color_hover_text);
 }
 .content-items-categorias-text {
   display: flex;
   flex-direction: row;
+  margin-bottom: 15px;
+  position: sticky;
+  top: 88px;
 }
 .text-categorias {
   background: transparent;
@@ -495,103 +546,31 @@ export default {
   line-height: 1.4;
   color: var(--color_subtext);
   align-self: flex-start;
-  margin-top: 2px;
   margin-right: 2px;
   margin-left: 5px;
   cursor: pointer;
   opacity: 0.6;
   display: flex;
 }
-.dropdown-content {
-  display: none;
-  position: absolute;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0px 8px 20px 1px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-.content-item-catalogo {
-  display: flex;
-  align-self: baseline;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  max-width: 205px;
-  width: 100%;
-  border-radius: 10px;
-  background-color: var(--background_color_2);
-}
-.a-container {
-  width: 205px;
-  display: block;
-  position: relative;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  color: var(--color_subtext);
-  background-color: var(--background_color_2);
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-  align-items: center;
-  justify-content: center;
-}
-.item-categoria {
-  cursor: pointer;
-  padding: 0px 10px 0px 20px;
-  background-color: var(--background_color_2);
-}
-.item-categoria-active {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-
-.item-categoria:hover {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-.content-item-subcategorie {
-  background: var(--color_background_hover);
-  padding-right: 10px;
-  padding-left: 40px;
-}
-.item-subcategorie {
-  font-size: 13px;
-  cursor: pointer;
-  user-select: none;
-}
-.item-subcategorie-active {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-.item-subcategorie:hover {
-  background: var(--color_background_hover);
-  color: var(--color_hover_text);
-}
-
 .content-item-productos {
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
 }
 .grid-products {
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(250px, 2fr));
+  grid-template-columns: repeat(3, minmax(250px, 2fr));
   grid-column-gap: 25px;
   grid-row-gap: 30px;
   box-sizing: border-box;
 }
 .content-products-empty {
   width: 100%;
-  min-height: 200px;
+  min-height: calc(100vh - 461px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -603,69 +582,8 @@ export default {
   font-weight: bold;
   color: var(--color_subtext);
 }
-.top-right {
-  display: none;
-}
-.header-icon-menu {
-  font-size: 30px;
-  cursor: pointer;
-  color: var(--color_subtext);
-}
-.header-icon-close {
-  font-size: 30px;
-  color: rgba(21, 20, 57, 0.808);
-  margin-left: 22px;
-}
-.top-input-search {
-  position: relative;
-  display: grid;
-  align-content: start;
-  justify-content: flex-end;
-}
-.top-input-search input {
-  width: 100%;
-  padding: 10px 35px 10px 15px;
-  box-sizing: border-box;
-  font-size: 14px;
-  color: var(--color_subtext);
-  border: solid 2px #afafaf;
-  border-radius: var(--radius_btn);
-  background-color: transparent;
-}
-.top-input-search input::placeholder {
-  color: var(--color_subtext);
-  opacity: 0.7;
-}
-.top-input-search input:focus,
-.top-input-search input:active {
-  border-radius: var(--radius_btn);
-  border: solid 2px var(--color_border_btn);
-  outline: 0;
-}
-.top-input-search i.icon-search {
-  position: absolute;
-  top: 9px;
-  right: 15px;
-  z-index: 2;
-  color: var(--color_subtext);
-  font-weight: bold;
-}
-.top-input-search .response {
-  justify-self: start;
-  padding: 0 10px;
-  height: 32px;
-  line-height: 30px;
-  font-size: 12px;
-  color: var(--color_subtext);
-  border: solid 2px #d8d8d8;
-  border-radius: var(--radius_btn);
-  background-color: transparent;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  white-space: nowrap;
-  height: 28px;
-  line-height: 26px;
-}
+
+/* //////paginacion//////// */
 .pagination-medium {
   margin-top: 10px;
   background: transparent;
@@ -708,14 +626,14 @@ export default {
 }
 @media (max-width: 1290px) {
   .grid-products {
-    grid-template-columns: repeat(4, minmax(240px, 2fr));
+    grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-column-gap: 15px;
     grid-row-gap: 30px;
   }
 }
 @media (max-width: 1265px) {
   .grid-products {
-    grid-template-columns: repeat(4, minmax(240px, 2fr));
+    grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-column-gap: 10px;
     grid-row-gap: 30px;
   }
@@ -752,6 +670,7 @@ export default {
   .grid-products {
     grid-template-columns: repeat(3, minmax(240px, 2fr));
     grid-column-gap: 10px;
+    grid-row-gap: 30px;
   }
 }
 @media (max-width: 1000px) {
@@ -761,7 +680,6 @@ export default {
     grid-row-gap: 30px;
   }
 }
-
 @media (max-width: 790px) {
   .grid-products {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
@@ -788,24 +706,20 @@ export default {
   .container {
     padding: 0px;
   }
-  .content-item-productos {
-    padding: 15px;
+  .content-items-categorias-text {
+    padding: 20px 10px 10px 10px;
   }
-  .title {
-    font-size: 25px;
-    margin-top: 20px;
+  .content-item-productos {
+    padding: 0px 15px;
   }
   .grid-products {
     grid-template-columns: repeat(2, minmax(10px, 2fr));
   }
-  .dropbtn {
-    margin-left: 5px;
+  .wrapper-filter {
+    padding-left: 10px;
   }
-  .text-categorias {
-    padding: 0 10px;
-  }
-  .content-title {
-    padding: 0px 15px;
+  .content-categoria {
+    padding-right: 0px;
   }
 }
 @media (max-width: 700px) {
@@ -813,14 +727,22 @@ export default {
     margin-left: 5px;
     margin-bottom: 0px;
   }
+  .wrapper-filter {
+    display: none;
+  }
 }
-
 @media (max-width: 450px) {
   .grid-products {
     grid-template-columns: repeat(2, minmax(160px, 1fr));
   }
   .content-item-productos {
     padding: 5px;
+  }
+  .text-macrobrand > p {
+    font-size: 16px;
+  }
+  .text-macrobrand {
+    margin-bottom: 10px;
   }
 }
 </style>

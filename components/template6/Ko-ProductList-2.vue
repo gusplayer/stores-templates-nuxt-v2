@@ -3,8 +3,8 @@
     <div class="container">
       <div class="text-macrobrand" v-if="dataStore.tienda.id_tienda == 1100">
         <p>
-          Envío a nivel nacional - Pago seguro - Tiempo de entrega 10 días
-          hábiles
+          Envíos gratis a nivel nacional en compras superiores a $100.000 - Pago
+          seguro - Tiempo de entrega 10 días hábiles.
         </p>
       </div>
       <div class="content-items-categorias-text">
@@ -575,6 +575,7 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  list-style: none;
 }
 
 /* //////paginacion//////// */
@@ -736,6 +737,7 @@ export default {
     font-size: 16px;
   }
   .text-macrobrand {
+    margin-top: 10px;
     margin-bottom: 10px;
   }
 }

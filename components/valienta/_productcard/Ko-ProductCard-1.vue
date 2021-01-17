@@ -1,11 +1,7 @@
 <template>
   <div class="wrapper-card">
-    <div class="container">
+    <div class="container-card">
       <div class="wrapper-movil">
-        <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
-        <p class="card-info-2" v-if="getFreeShipping == false">
-          {{ $t('home_cardGratis') }}
-        </p>
         <router-link
           :to="{
             path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
@@ -24,6 +20,10 @@
             class="product-image product-image-soldOut"
             alt="Product Img"
           />
+          <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
+          <p class="card-info-2" v-if="getFreeShipping == false">
+            {{ $t('home_cardGratis') }}
+          </p>
         </router-link>
         <div class="wrapper-text">
           <div class="content-name-product-movil">
@@ -207,6 +207,7 @@ export default {
     },
     addShoppingCart() {
       if (this.product) {
+        this.productIndexCart = null
         this.getDataProduct()
         if (this.product.id == this.idSlug) {
           let product = {
@@ -380,7 +381,7 @@ export default {
   box-sizing: border-box;
   border-radius: 0px;
 }
-.container {
+.container-card {
   display: flex;
   align-items: flex-start;
   width: 100%;
@@ -390,9 +391,9 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 .wrapper-image {
+  position: relative;
   border-radius: 4px;
   margin-right: 5px;
   border-radius: 1px;
@@ -417,7 +418,7 @@ export default {
   font-size: 10px;
   z-index: 2;
   position: absolute;
-  top: 155px;
+  bottom: 28px;
   left: 0px;
 }
 .card-info-2 {
@@ -432,7 +433,7 @@ export default {
   font-weight: bold;
   z-index: 2;
   position: absolute;
-  top: 175px;
+  bottom: 8px;
   left: 0px;
 }
 .wrapper-text {
@@ -528,13 +529,5 @@ export default {
 .wp-icon {
   font-size: 16px;
   bottom: 4px;
-}
-@media (max-width: 400px) {
-  .card-info-1 {
-    top: 125px;
-  }
-  .card-info-2 {
-    top: 145px;
-  }
 }
 </style>

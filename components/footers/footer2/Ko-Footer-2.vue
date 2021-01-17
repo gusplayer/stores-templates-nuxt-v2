@@ -17,7 +17,14 @@
           <p class="text-top-bold">{{ $t('footer_secciones') }}</p>
           <br />
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-            <nuxt-link :to="item.path" class="text-top">
+            <nuxt-link v-if="item.path" :to="item.path" class="text-top">
+              {{ $t(`${item.name}`) }}
+            </nuxt-link>
+            <nuxt-link
+              v-if="item.href && listArticulos > 0"
+              :to="item.href"
+              class="text-top"
+            >
               {{ $t(`${item.name}`) }}
             </nuxt-link>
           </div>
@@ -112,7 +119,14 @@
               v-for="(item, index) in secciones"
               :key="`${index}${item.name}`"
             >
-              <nuxt-link :to="item.path" class="text-top">
+              <nuxt-link v-if="item.path" :to="item.path" class="text-top">
+                {{ $t(`${item.name}`) }}
+              </nuxt-link>
+              <nuxt-link
+                v-if="item.href && listArticulos > 0"
+                :to="item.href"
+                class="text-top"
+              >
                 {{ $t(`${item.name}`) }}
               </nuxt-link>
             </div>
@@ -308,9 +322,18 @@ export default {
           name: 'footer_micompra',
           path: '/micompra',
         },
+        {
+          name: 'header_blog',
+          href: '/blog',
+        },
       ],
       currentViews: [],
     }
+  },
+  computed: {
+    listArticulos() {
+      return this.$store.state.listArticulos.length
+    },
   },
   destroyed() {
     this.email = ''

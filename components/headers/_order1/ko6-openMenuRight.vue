@@ -17,6 +17,22 @@
           </label>
         </div>
         <template>
+          <div class="wrapper-secciones">
+            <div
+              v-for="(item, index) in secciones"
+              :key="`${index}${item.name}`"
+              @click="closed"
+              style="margin-bottom: 20px;"
+            >
+              <nuxt-link :to="item.path" class="text-secciones">
+                <div v-if="item.path" :is="item.icon" class="icon" />
+                {{ $t(`${item.name}`) }}
+              </nuxt-link>
+            </div>
+          </div>
+        </template>
+        <div class="line-separator" v-if="this.showCategories == true"></div>
+        <template v-if="this.showCategories == true">
           <div class="wrapper-category-all">
             <li @click="clear">
               <p class="name-category-all">{{ $t('header_allProduct') }}</p>
@@ -80,6 +96,9 @@ export default {
   components: {
     BaseAccordian,
   },
+  mounted() {
+    this.initHeader()
+  },
   data() {
     return {
       add: true,
@@ -91,6 +110,34 @@ export default {
       indexSelect: '',
       indexSelect2: '',
       getSubcategory: false,
+      showCategories: false,
+      secciones: [
+        {
+          name: 'footer_inicio',
+          path: '/',
+          icon: 'menu-icon',
+        },
+        {
+          name: 'header_productos',
+          path: '/productos',
+          icon: 'listProduct-icon',
+        },
+        {
+          name: 'footer_carrito',
+          path: '/cart',
+          icon: 'cart-icon',
+        },
+        {
+          name: 'footer_contacto',
+          path: '/contacto',
+          icon: 'account-icon',
+        },
+        {
+          name: 'footer_micompra',
+          path: '/micompra',
+          icon: 'shopping-search-icon',
+        },
+      ],
     }
   },
   computed: {
@@ -108,6 +155,14 @@ export default {
     },
   },
   methods: {
+    initHeader() {
+      let domain = this.$route.fullPath
+      if (domain == '/productos') {
+        this.showCategories = true
+      } else {
+        this.showCategories = false
+      }
+    },
     closed() {
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
     },
@@ -197,7 +252,12 @@ export default {
       this.nameCategory = ''
     },
   },
-  watch: {},
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.initHeader()
+    },
+  },
 }
 </script>
 
@@ -317,6 +377,27 @@ export default {
   }
   .text-subcategoria-active {
     color: var(--color_hover_text);
+  }
+  .line-separator {
+    width: 100%;
+    border-bottom: 1px solid var(--color_border);
+  }
+  .wrapper-secciones {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 25px 0px;
+  }
+  .text-secciones {
+    font-size: 16px;
+    color: var(--color_text);
+  }
+  .text-secciones:hover {
+    color: var(--color_hover_text);
+  }
+  .icon {
+    color: var(--color_icon);
   }
 }
 </style>

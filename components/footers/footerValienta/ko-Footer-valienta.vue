@@ -76,10 +76,10 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 60px;
+  height: 50px;
   position: fixed;
   bottom: 0;
-  padding: 8px;
+  padding: 0px 8px 10px;
   z-index: 999;
   max-width: 900px;
   background: white;
@@ -96,7 +96,7 @@ export default {
   cursor: pointer;
 }
 .wrapper-footer:hover {
-  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+  background-image: linear-gradient(130deg, #36467a 0, rgb(47, 63, 112) 80%);
 }
 .wrapper-footer p {
   flex: 1;

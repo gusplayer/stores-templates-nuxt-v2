@@ -18,15 +18,29 @@
         </button>
       </div>
     </div>
-    <div class="wrapper-notificacion-wa" v-if="dataStore.tienda.whatsapp == ''">
-      <div class="content-notificacion">
+    <div
+      class="wrapper-notificacion-valienta"
+      v-if="dataStore.entidades[0].id != 16"
+    >
+      <div class="content-notificacion-valienta">
         <koTiendaCerrada />
         <p class="text-noti">
           Disculpa, no podrá realizar compras por el momento,
         </p>
-        <p class="subtitle-noti">
-          La tienda no es de Valienta
+        <p class="subtitle-noti-valienta">
+          La tienda no es de
         </p>
+        <a
+          href="https://valienta.com/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img
+            src="https://valienta.com/wp-content/uploads/2020/01/logo-v1.svg"
+            class="logo2"
+            alt="Logo Img"
+          />
+        </a>
       </div>
     </div>
   </div>
@@ -177,7 +191,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 * {
   font-family: 'Poppins', sans-serif !important;
 }
@@ -202,7 +216,7 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   transition: all 200ms ease-in;
 }
-.content-notificacion {
+.content-notificacion-valienta {
   padding: 30px 20px;
   width: 100%;
   max-width: 250px;
@@ -223,11 +237,10 @@ export default {
   color: rgb(75, 75, 75);
   width: 160px;
 }
-.subtitle-noti {
+.subtitle-noti-valienta {
   font-weight: bold;
   font-size: 17px;
   color: #ff314d;
-  margin-bottom: 15px;
 }
 .btn-acceptM {
   width: 110px;
@@ -244,7 +257,7 @@ export default {
   border: solid 2px gray;
   background-color: gray;
 }
-.wrapper-notificacion-wa {
+.wrapper-notificacion-valienta {
   top: 0;
   opacity: 1;
   z-index: 9999;
@@ -254,7 +267,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.719);
   transition: all 200ms ease-in;
+  border: none;
+}
+.logo2 {
+  /* margin-top: 5px; */
+  width: 100px;
+  opacity: 0.7;
+  margin-bottom: 15px;
 }
 </style>
