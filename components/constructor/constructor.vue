@@ -4,26 +4,18 @@
       <div class="menu-lateral-left-head">
         <h1 class="title-head-left">Componentes</h1>
       </div>
-      <div v-if="developerDataToken" class="menu-login-user">
-        <p class="label">Token del usuario</p>
-        <el-input placeholder="Token del usuario" v-model="input"></el-input>
-        <br />
-
-        <el-button class="button" type="primary">Iniciar sesión</el-button>
-      </div>
-      <div v-else class="menu-login-user">
+      <div class="menu-login-user">
         <p class="label">Tipo de Componentes</p>
-
         <el-select
           style="width: 100%;"
           v-model="valueTipos"
           placeholder="Categoria"
         >
           <el-option
-            v-for="item in tiposComponentes"
+            v-for="item in tiposComponentesNew"
             :key="item.id"
             :label="item.label"
-            :value="item.id"
+            :value="item.label"
           ></el-option>
         </el-select>
         <br />
@@ -36,7 +28,7 @@
           placeholder="Componentes"
         >
           <el-option
-            v-for="item in listadoComponentes"
+            v-for="item in listadoComponentesN"
             :key="item.id"
             :label="item.name"
             :value="item.name"
@@ -49,20 +41,6 @@
           v-on:click="onPressSelectComponent"
           >Seleccionar</el-button
         >
-        <br />
-        <el-button
-          v-if="editar"
-          class="button"
-          type="warning"
-          v-on:click="onPressEdit()"
-          >Editar</el-button
-        >
-        <div v-if="getSettingsCSS.length">
-          <optionsItems v-if="editar"></optionsItems>
-        </div>
-        <div v-else>
-          <optionsGeneral v-if="editar"></optionsGeneral>
-        </div>
       </div>
     </div>
     <div class="right-container">
@@ -84,18 +62,6 @@
         </h1>
         <div class="header-buttons">
           <el-button
-            class="button-new-component hidden"
-            @click="dialogForm()"
-            type="primary"
-            >Nuevo Componente</el-button
-          >
-          <el-button
-            @click="removeComponent()"
-            class="button-new-component hidden"
-            type="danger"
-            >Eliminar</el-button
-          >
-          <el-button
             @click="ocutlarlateral()"
             class="button-new-component hidden"
             type="danger"
@@ -103,8 +69,6 @@
           >
         </div>
       </div>
-      <!-- probar para banner -->
-      <!-- :Settings="getSettingsCSS.length?getSettingsCSS:[]"  -->
       <div class="preview-container">
         <component
           v-if="selectedComponent && getSettingsCSS"
@@ -118,66 +82,34 @@
           "
           tienda="carrito"
         ></component>
-        <!-- <KContent1></KContent1> -->
-        <br />
-        <!-- <componenteP :currentSettingsHeader="currentSettingsHeader"></componenteP> -->
+      </div>
+      <div>
+        <p></p>
       </div>
     </div>
-    <el-dialog
-      width="85%"
-      :visible.sync="dialogFormVisible"
-      @close="setComponent()"
-    >
-      <div
-        :is="componente"
-        @upDialogFormVisible="upDialogFormVisible"
-        :currentComponent="currentComponent"
-      ></div>
-      <!-- <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
-      </span>-->
-    </el-dialog>
   </div>
 </template>
 <script>
-import API from './_api/api'
-import FormNewComponent from './_crudComponent/FormNewComponent'
-import EditComponent from './_crudComponent/EditComponent'
-import RemoveComponent from './_crudComponent/RemoveComponent'
-// import componenteP from '../../../core-components-npm/src/components/banners/Ko-Banner-2'
-// import KContent1 from '../../../core-components-npm/src/components/contents/Ko-Content-1'
 import optionsGeneral from './_components_settings/OptionGeneral'
 import optionsItems from './_components_settings/OptionItems'
-
 export default {
   components: {
-    EditComponent,
-    FormNewComponent,
-    RemoveComponent,
-    // componenteP,
-    // KContent1,
     optionsGeneral,
     optionsItems,
   },
   async mounted() {
     // this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_DATA')
-    // this.$store.dispatch('GET_STORELAYOUT')
-    this.tiposComponentes = await API.getTipoComponente()
-    this.listadoComponentes = await API.getReferenciasComponente()
+    this.$store.dispatch('GET_STORELAYOUT')
   },
   data() {
     return {
-      fileTipos: { name: 'Grid' },
+      fileTipos: { name: '' },
       nameCurrentComponent: '',
       currentComponent: null,
       valueTipos: '',
       currentStoreData: '',
       selectedComponent: false,
-      developerDataToken: '',
-      componentsApi: '',
-      valueComponentes: '',
       stores: [
         { value: 1, label: 'Topalxe' },
         { value: 347, label: 'Ohlala' },
@@ -188,47 +120,224 @@ export default {
         { value: 582, label: 'Tu Tienda' },
         { value: 1100, label: 'Macrobrand' },
         { value: 1559, label: 'Sticker Hipster' },
-        { value: 1429, label: 'boom Store Colombia' },
-        { value: 1359, label: 'Señora pepa' },
       ],
-      tiposComponentes: '',
-      listadoComponentes: '',
-      dialogFormVisible: false,
-      editar: false,
-      componente: '',
+      tiposComponentesNew: [
+        {
+          id: 1,
+          label: 'banners',
+        },
+        {
+          id: 2,
+          label: 'carts',
+        },
+        {
+          id: 3,
+          label: 'contacts',
+        },
+        {
+          id: 4,
+          label: 'contents',
+        },
+        {
+          id: 5,
+          label: 'footers',
+        },
+        {
+          id: 6,
+          label: 'headers',
+        },
+        {
+          id: 7,
+          label: 'newsletter',
+        },
+        {
+          id: 8,
+          label: 'productdetails',
+        },
+        {
+          id: 9,
+          label: 'productlist',
+        },
+        {
+          id: 10,
+          label: 'separators',
+        },
+        {
+          id: 11,
+          label: 'videos',
+        },
+      ],
+      listadoComponentesNew: [
+        {
+          id_Tipos: 1,
+          label: 'banners',
+          componentes: [
+            {
+              id: 11,
+              name: 'Ko-Banner-1',
+            },
+            // {
+            //   id: 12,
+            //   name: 'Ko-Banner-2',
+            // },
+            {
+              id: 13,
+              name: 'Ko-Banner-3',
+            },
+          ],
+        },
+        {
+          id_Tipos: 2,
+          label: 'carts',
+          componentes: [
+            {
+              id: 21,
+              name: 'Ko-Cart-1',
+            },
+          ],
+        },
+        {
+          id_Tipos: 3,
+          label: 'contacts',
+          componentes: [
+            {
+              id: 31,
+              name: 'Ko-Contact-1',
+            },
+          ],
+        },
+        {
+          id_Tipos: 4,
+          label: 'contents',
+          componentes: [
+            {
+              id: 41,
+              name: 'Ko-Content-1',
+            },
+          ],
+        },
+        {
+          id_Tipos: 5,
+          label: 'footers',
+          componentes: [
+            {
+              id: 51,
+              name: 'Ko-Footer-1',
+            },
+          ],
+        },
+        {
+          id_Tipos: 6,
+          label: 'headers',
+          componentes: [
+            {
+              id: 61,
+              name: 'Ko-Header-1',
+            },
+            {
+              id: 62,
+              name: 'Ko-Header-2',
+            },
+            // {
+            //   id: 63,
+            //   name: 'Ko-Header-3',
+            // },
+            // {
+            //   id: 64,
+            //   name: 'Ko-Header-4',
+            // },
+          ],
+        },
+        {
+          id_Tipos: 7,
+          label: 'newsletter',
+          componentes: [
+            {
+              id: 71,
+              name: 'Ko-Newsletter-1',
+            },
+          ],
+        },
+        {
+          id_Tipos: 8,
+          label: 'productdetails',
+          componentes: [
+            {
+              id: 81,
+              name: 'Ko-ProductDetail-1',
+            },
+          ],
+        },
+        {
+          id_Tipos: 9,
+          label: 'productlist',
+          componentes: [
+            {
+              id: 91,
+              name: 'Ko-ProductList-1',
+            },
+          ],
+        },
+        {
+          id_Tipos: 10,
+          label: 'separators',
+          componentes: [
+            {
+              id: 101,
+              name: 'Ko-Separator-1',
+            },
+          ],
+        },
+        {
+          id_Tipos: 11,
+          label: 'videos',
+          componentes: [
+            {
+              id: 111,
+              name: 'Ko-Videos-1',
+            },
+            {
+              id: 112,
+              name: 'Ko-Videos-2',
+            },
+          ],
+        },
+      ],
       SettingsComponentes: '',
+      urlComponents: '',
     }
   },
   computed: {
     componentFile() {
-      if (this.selectedComponent) {
-        if ('headers' == this.fileTipos.name.toLowerCase()) {
-          this.SettingsComponentes = 'headers'
-        }
-        if (
-          'banners' == this.fileTipos.name.toLowerCase() ||
-          'contents' == this.fileTipos.name.toLowerCase() ||
-          'separators' == this.fileTipos.name.toLowerCase() ||
-          'videos' == this.fileTipos.name.toLowerCase() ||
-          'carts' == this.fileTipos.name.toLowerCase() ||
-          'productdetails' == this.fileTipos.name.toLowerCase() ||
-          'newsletter' == this.fileTipos.name.toLowerCase() ||
-          'contacts' == this.fileTipos.name.toLowerCase() ||
-          'productlist' == this.fileTipos.name.toLowerCase()
-        ) {
-          this.SettingsComponentes = 'general'
-        }
-        if ('footers' == this.fileTipos.name.toLowerCase()) {
-          this.SettingsComponentes = 'footers'
-        }
+      // if (this.selectedComponent) {
+      //   if ('headers' == this.fileTipos.name.toLowerCase()) {
+      //     this.SettingsComponentes = 'headers'
+      //   }
+      //   if (
+      //     'banners' == this.fileTipos.name.toLowerCase() ||
+      //     'contents' == this.fileTipos.name.toLowerCase() ||
+      //     'separators' == this.fileTipos.name.toLowerCase() ||
+      //     'videos' == this.fileTipos.name.toLowerCase() ||
+      //     'carts' == this.fileTipos.name.toLowerCase() ||
+      //     'productdetails' == this.fileTipos.name.toLowerCase() ||
+      //     'newsletter' == this.fileTipos.name.toLowerCase() ||
+      //     'contacts' == this.fileTipos.name.toLowerCase() ||
+      //     'productlist' == this.fileTipos.name.toLowerCase()
+      //   ) {
+      //     this.SettingsComponentes = 'general'
+      //   }
+      //   if ('footers' == this.fileTipos.name.toLowerCase()) {
+      //     this.SettingsComponentes = 'footers'
+      //   }
+      //             return () =>
+      //       import(
+      //         `../../../core-components-npm/src/components/${this.fileTipos.name.toLowerCase()}/${
+      //           this.nameCurrentComponent
+      //         }`
+      //       )
 
-        // return () =>
-        //   import(
-        //     `../../../core-components-npm/src/components/${this.fileTipos.name.toLowerCase()}/${
-        //       this.nameCurrentComponent
-        //     }`
-        //   )
-      }
+      // }
+      return false
     },
     dataStore() {
       return this.$store.state.dataStore
@@ -237,7 +346,13 @@ export default {
       return this.$store.getters['products/filterProducts']
     },
     getSettingsCSS() {
-      return this.$store.getters.getSettingsCSS
+      return this.$store.state.getSettingsCSSNew
+    },
+    listadoComponentesN() {
+      let result = this.listadoComponentesNew.find(
+        (element) => element.label == this.valueTipos
+      )
+      return result.componentes
     },
   },
   methods: {
@@ -249,44 +364,11 @@ export default {
     },
     onPressSelectComponent() {
       this.selectedComponent = false
-      this.editar = true
-      let id = this.listadoComponentes.find(
-        (element) => element.name == this.nameCurrentComponent
-      )
-      this.tiposComponentes.forEach((element) => {
-        if (element.id == this.valueTipos) {
-          this.fileTipos.name = element.name
-        }
-      })
+      this.fileTipos.name = this.valueTipos
       this.selectedComponent = true
-      this.$store.dispatch('GET_SETTINGS_COMPONENT', id.id)
-    },
-    onPressEdit() {
-      this.componente = 'EditComponent'
-      this.currentComponent = this.listadoComponentes.find(
-        (component) => component.name == this.nameCurrentComponent
-      )
-      this.$store.dispatch(
-        'GET_SETTINGS_BY_COMPONENT',
-        this.currentComponent.component_type_id
-      )
-      this.dialogFormVisible = true
-    },
-    dialogForm() {
-      this.componente = 'FormNewComponent'
-      this.dialogFormVisible = true
-    },
-    removeComponent() {
-      this.componente = 'RemoveComponent'
-      this.dialogFormVisible = true
-    },
-    upDialogFormVisible(newValue) {
-      this.dialogFormVisible = newValue
     },
     setComponent() {
       this.currentComponent = null
-      this.editar = false
-      this.componente = ''
       this.valueTipos = ''
     },
   },
@@ -296,17 +378,10 @@ export default {
       this.selectedComponent = false
       this.nameCurrentComponent = ''
       this.fileTipos.name = ''
-      this.listadoComponentes = await API.getReferenciasComponente(
-        this.valueTipos
-      )
     },
     nameCurrentComponent() {
       this.currentComponent = null
     },
-    // size(newValue, oldValue) {
-    //   let reset = `${newValue}`
-    //   this.$store.state['settings'].currentSettingsHeader += newValue
-    // }
   },
 }
 </script>

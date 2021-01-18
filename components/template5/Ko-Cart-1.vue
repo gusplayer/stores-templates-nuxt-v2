@@ -380,7 +380,7 @@
       <div class="wrapper_photo">
         <img :src="img" class="photo" alt="Product img" />
       </div>
-      <p>T{{ $t('footer_carritoVacio') }}</p>
+      <p>{{ $t('footer_carritoVacio') }}</p>
       <nuxt-link to="/">
         <button ref="colorBtn" class="btn3">
           {{ $t('cart_agregarProductos') }}
