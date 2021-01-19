@@ -1,6 +1,5 @@
 <template>
-  <!-- <div class="banner-content"> -->
-  <div class="banner">
+  <div class="banner" :style="settingByTemplate">
     <div class="banner-content-items">
       <div class="banner-content-img">
         <img
@@ -21,9 +20,11 @@
       </div>
       <div class="banner-content-buttons">
         <button class="content-bttns-shop">
-          <span class="content-textbutton-shop">
-            {{ $t('productdetail_btnComprar') }}
-          </span>
+          <nuxt-link :to="'/productos'">
+            <span class="content-textbutton-shop">
+              {{ $t('productdetail_btnComprar') }}
+            </span>
+          </nuxt-link>
         </button>
         <button :class="`content-bttns-view${banner.id} content-bttns-view`">
           <span class="content-textbutton-viewmore">
@@ -36,12 +37,12 @@
       <img class="img-girl" :src="banner.photo" alt="banner-carousel" />
     </div>
   </div>
-  <!-- </div> -->
 </template>
 <script>
 export default {
   props: {
     banner: {},
+    settingByTemplate: Object,
   },
 }
 </script>
@@ -57,8 +58,10 @@ export default {
   @apply flex flex-row gap-3 justify-center items-center;
 }
 .content-bttns-shop {
-  @apply mr-2 rounded-full border-2 border-red-btnhoverHeader bg-red-btnbannershop shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply mr-2 rounded-full bg-red-btnbannershop border-2 border-red-btnbannershop shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
   padding: 10px 20px;
+  /* background: var(--color_background_btn);
+  border: var(--color_background_btn) 1px solid; */
 }
 .content-bttns-view {
   @apply ml-2 rounded-full border-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;

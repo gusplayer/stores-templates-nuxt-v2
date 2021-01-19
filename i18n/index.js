@@ -163,6 +163,9 @@ export default {
     contact_enviar: 'Enviar',
     // Newsletter
     newsletter_subtitle: 'SUSCRIBÉTE',
+    nesletter_tittle: 'Suscríbete',
+    newsletter_subtittle: 'Suscríbete a nuestro boletin',
+    newsletter_description: 'Te enviaremos promociones',
     newsletter_title: 'Suscríbete a nuestro boletín para enviarte promociones.',
     newsletter_email: 'Correo electrónico',
     newsletter_btn: ' Suscríbete',
@@ -394,6 +397,9 @@ export default {
     contact_enviar: 'Send',
     // Newsletter
     newsletter_subtitle: 'SUBSCRIBE',
+    nesletter_tittle: 'Suscribe',
+    newsletter_subtittle: 'Subscribe to our newsletter',
+    newsletter_description: 'We will send you promotions',
     newsletter_title: 'Subscribe to our newsletter to send you promotions.',
     newsletter_email: 'E-mail',
     newsletter_btn: ' Subscribe',
@@ -626,6 +632,9 @@ export default {
     contact_enviar: 'Enviar',
     // Newsletter
     newsletter_subtitle: 'SUSCRÍBASE',
+    nesletter_tittle: 'Se inscrever',
+    newsletter_subtittle: 'Assine a nossa newsletter',
+    newsletter_description: 'Nós lhe enviaremos promoções',
     newsletter_title: 'Assine nossa newsletter para enviar-lhe promoções.',
     newsletter_email: 'E-mail',
     newsletter_btn: ' Suscríbete',

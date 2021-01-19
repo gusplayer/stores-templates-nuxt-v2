@@ -4,8 +4,9 @@
       <div class="order_content">
         <div class="order_header">
           <h3>{{ $t('footer_title') }}</h3>
-          <div @click="closedOder" class="order_header_close">
-            <window-close-icon />
+          <div class="order_header_close" @click="closedOder">
+            <div class="leftright"></div>
+            <div class="rightleft"></div>
           </div>
         </div>
         <transition name="slide">
@@ -897,10 +898,26 @@ export default {
   padding: 10px 30px;
   flex: none;
 }
+.leftright,
+.rightleft {
+  background: var(--color_icon);
+}
 .order_header_close {
-  font-size: 30px;
-  color: var(--color_icon);
-  cursor: pointer;
+  @apply relative w-30 h-20 cursor-pointer flex justify-center items-center;
+}
+.leftright {
+  @apply h-4 w-30 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
+}
+.rightleft {
+  @apply h-4 w-30 absolute rounded-2 transform rotate-45 transition-all ease-in duration-200;
+}
+.order_header_close:hover .leftright {
+  @apply transform rotate-0;
+  background: var(--btnhover);
+}
+.order_header_close:hover .rightleft {
+  @apply transform rotate-0;
+  background: var(--btnhover);
 }
 .order_header_close:hover {
   color: gray;

@@ -12,7 +12,8 @@
     <KAdvertising></KAdvertising>
     <KGify :dataStore="dataStore" :fullProducts="fullProducts"></KGify>
     <KHowwork></KHowwork>
-    <KWrapper></KWrapper>
+    <KNews></KNews>
+    <KWrapper :dataStore="dataStore"></KWrapper>
   </div>
 </template>
 
@@ -27,7 +28,7 @@ import KAdvertising from '../../components/template7/Ko-advertising'
 import KGify from '../../components/template7/Ko-gify'
 import KHowwork from '../../components/template7/Ko-how-we-work'
 import KWrapper from '../../components/template7/Ko-wrapper'
-
+import KNews from '../../components/template7/Ko-Newsletter'
 export default {
   layout: 'default',
   components: {
@@ -38,6 +39,7 @@ export default {
     KGify,
     KHowwork,
     KWrapper,
+    KNews,
     // KProducts,
     // KBanner,
     // KCategory,

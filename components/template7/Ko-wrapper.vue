@@ -26,7 +26,13 @@
             :key="index"
             :class="`swiper-slide wrapper-${index + 1}`"
           >
-            <img class="img-wrapp" :src="imagen.url" alt="wrapper-images" />
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              :href="dataStore.tienda.red_instagram"
+            >
+              <img class="img-wrapp" :src="imagen.url" alt="wrapper-images" />
+            </a>
           </div>
         </div>
       </div>
@@ -35,6 +41,10 @@
 </template>
 <script>
 export default {
+  props: {
+    dataStore: Object,
+    settingByTemplate: Object,
+  },
   data() {
     return {
       swiperOption: {
@@ -105,6 +115,14 @@ export default {
     console.log('Current Swiper instance object', this.mySwiper)
     this.mySwiper.slideTo(3, 1000, false)
   },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+    },
+  },
 }
 </script>
 <style scoped>
@@ -129,6 +147,9 @@ export default {
 }
 .wrapper-content {
   @apply flex flex-col justify-center items-center w-full;
+}
+.wrapper-items-content {
+  @apply flex flex-col justify-center items-center;
 }
 .wrapper-content-items {
   @apply flex flex-col justify-center items-center w-full mb-16 text-center;
@@ -174,9 +195,7 @@ export default {
 .wrapper-6:hover {
   @apply bg-black bg-opacity-50 cursor-pointer;
 }
-.wrapper-items-content {
-  @apply flex flex-col justify-center items-center;
-}
+
 @screen sm {
   .wrapper-items-content {
     @apply w-9/5;

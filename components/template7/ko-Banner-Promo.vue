@@ -18,9 +18,11 @@
             >
             <div class="banner-content-buttons">
               <button class="content-bttns-shop">
-                <span class="content-textbutton-shop">
-                   {{ $t('productdetail_btnComprar') }}
-                </span>
+                <nuxt-link :to="'/productos'">
+                  <span class="content-textbutton-shop">
+                    {{ $t('productdetail_btnComprar') }}
+                  </span>
+                </nuxt-link>
               </button>
             </div>
           </div>
@@ -204,7 +206,9 @@ figure {
 #promo-banner-tittle-4 {
   color: #647db4;
 }
-
+.promo-banners, .banner-medium, .promo-banner-3{
+  @apply cursor-pointer;
+}
 @screen sm {
   .promo-banners {
     @apply sr-only;
@@ -223,6 +227,7 @@ figure {
   .banner-content-buttons{
     @apply sr-only;
   }
+  
 }
 @screen md {
   .promo-banners {

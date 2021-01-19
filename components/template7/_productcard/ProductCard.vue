@@ -21,7 +21,6 @@
         </no-ssr>
         <div class="image_overlay"></div>
       </router-link>
-
       <div class="overlay-top" v-if="getFreeShipping == false && !soldOut">
         <div class="icons-hover">
           <div class="transport-icon">
@@ -196,7 +195,9 @@
           {{ `${this.product.nombre.slice(0, 54)}` }}
         </p>
       </div>
-      <div class="categoria">{{ this.product.categoria }}</div>
+      <div class="categoria" v-if="this.product.categoria">
+        {{ this.product.categoria }}
+      </div>
       <div class="precio">
         <div class="content-text-price" v-if="this.product.precio">
           <div
@@ -244,6 +245,7 @@
             </p>
           </div>
         </div>
+        <div v-else><p>- $ -</p></div>
       </div>
     </div>
   </div>
@@ -294,10 +296,9 @@ export default {
       let free = true
       if (this.product.envio_gratis == 1) {
         free = false
+      } else if (this.rangosByCiudad.envio_metodo === 'gratis') {
+        free = false
       }
-      // else if (this.rangosByCiudad.envio_metodo === 'gratis') {
-      //   free = false
-      // }
       return free
     },
     rangosByCiudad() {

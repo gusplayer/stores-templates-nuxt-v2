@@ -128,29 +128,34 @@ export default {
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 20,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
+        autoplay: {
+          delay: 6000,
+          disableOnInteraction: false,
         },
         breakpoints: {
           2560: {
             slidesPerView: 5,
+            slidesPerGroup: 5,
             spaceBetween: 30,
           },
           1024: {
             slidesPerView: 4,
+            slidesPerGroup: 4,
             spaceBetween: 40,
           },
           768: {
             slidesPerView: 3,
+            slidesPerGroup: 3,
             spaceBetween: 30,
           },
           640: {
             slidesPerView: 2,
+            slidesPerGroup: 2,
             spaceBetween: 20,
           },
           320: {
             slidesPerView: 2,
+            slidesPerGroup: 2,
             spaceBetween: 10,
           },
         },
@@ -416,7 +421,7 @@ export default {
 }
 .product-text,
 .product-conten-items {
-  @apply flex flex-col justify-center items-center w-full;
+  @apply flex flex-col justify-center items-center w-full text-center;
 }
 .product-tittle,
 .product-subtittle,

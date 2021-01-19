@@ -43,18 +43,9 @@
                   />
                 </svg>
               </form>
-              <!-- <form id="demo-2" style="position: relative;">
-                    <search-icon class="icon-s" @click="focusInput" />
-                    <input
-                      type="search"
-                      :placeholder="$t('header_search')"
-                      v-model="search"
-                      @keyup.enter="getSearch(search)"
-                      id="SearchHeader"
-                    />
-                  </form> -->
             </div>
           </div>
+          <div class="empty" v-if="showSearch"></div>
           <div class="header-content-icon">
             <div class="header-content-cart" @click="openOrder">
               <svg
@@ -171,11 +162,10 @@ export default {
           name: 'header_inicio',
           path: '/',
         },
-        // {
-        //   name: 'header_categorias',
-        //   iconOpen: 'Flechadown-icon',
-        //   iconClose: 'FlechaUp-icon',
-        // },
+        {
+          name: 'header_productos',
+          path: '/productos',
+        },
         {
           name: 'header_contacto',
           path: '/contacto',
@@ -272,28 +262,50 @@ export default {
 </script>
 
 <style scoped>
-.icon-shop {
-  @apply h-24 w-24 text-gray-textHeader;
-}
 .header-container {
   transition: all 0.5s ease-in-out;
   @apply w-full flex flex-col justify-center items-center fixed z-10;
   top: 30px;
 }
-.header {
-  @apply flex w-full justify-between shadow-lg bg-white-white;
-}
-.header-content-buttons {
-  @apply w-auto flex flex-wrap gap-6 justify-center items-center;
-}
-.btn {
-  @apply mx-4 font-semibold text-gray-textHeader uppercase tracking-wider text-base;
-}
-.btn:hover {
-  @apply text-red-btnhoverHeader;
-}
 .wrapper-header {
   @apply flex flex-col w-full justify-between items-center;
+}
+.header {
+  @apply flex w-full justify-between shadow-lg;
+  background: var(--background_color_1);
+}
+.header-item-menu {
+  @apply hidden;
+}
+.header-icon-menu {
+  font-size: 30px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--color_text);
+}
+.header-icon-menu > .material-design-icon__svg {
+  bottom: 0em;
+}
+.nav-bar {
+  width: 24px;
+  height: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #3f3f3f;
+}
+.nav-bar > .material-design-icon__svg {
+  bottom: 0px;
+  width: 24px;
+  height: 24px;
+}
+.header-text-menu {
+  font-family: 'Lora', serif !important;
 }
 .header-content-logo {
   @apply flex justify-center items-center py-1;
@@ -304,8 +316,32 @@ export default {
 .header-logo {
   @apply object-contain object-left max-h-16;
 }
+.header-content-buttons {
+  @apply w-auto flex flex-wrap gap-6 justify-center items-center;
+}
+.btn {
+  @apply mx-4 font-semibold uppercase tracking-wider text-base;
+  color: var(--color_text);
+  font-family: 'Lora', serif !important ;
+}
+.btn:hover {
+  color: var(--btnhover);
+}
 .header-content-items {
   @apply flex flex-row justify-between items-center;
+}
+.header-search-icon {
+  @apply w-6 h-6;
+}
+.search-header {
+  @apply cursor-pointer;
+  color: var(--color_icon);
+}
+.search-header:hover {
+  color: var(--btnhover);
+}
+.empty {
+  @apply mx-2;
 }
 .header-content-icon {
   @apply flex flex-row justify-between;
@@ -313,7 +349,23 @@ export default {
 .header-content-cart {
   @apply flex justify-center items-center w-9 h-9 box-border pb-1 ml-5 relative cursor-pointer;
 }
-.header-content-page {
+.icon-shop {
+  @apply h-24 w-24;
+  color: var(--color_icon);
+}
+.icon-shop:hover {
+  color: var(--btnhover);
+}
+.border-num-items {
+  @apply rounded-full h-16 w-auto flex justify-center items-center text-center -ml-3 -mt-3;
+  background: var(--color_background_btn);
+}
+.num-items {
+  @apply text-xs p-1;
+  color: var(--color_text_btn);
+}
+
+/* .header-content-page {
   @apply flex grid grid-cols-2 gap-4;
 }
 .header-icon-cart {
@@ -323,30 +375,10 @@ export default {
 .header-icon-cart:hover {
   color: var(--btnhover);
 }
-.border-num-items {
-  @apply bg-red-btnbannershop rounded-full h-16 w-auto flex justify-center items-center text-center -ml-3  -mt-3;
-}
-.num-items {
-  @apply text-xs p-1 text-white-white;
-}
-.header-item-menu {
-  @apply hidden;
-}
 .responsive {
   @apply hidden;
-}
-.header-search-icon {
-  @apply w-6 h-6 text-gray-textHeader;
-}
-.search-header {
-  @apply cursor-pointer text-gray-textHeader;
-}
-.btn {
-  font-family: 'Lora', serif !important ;
-}
-.header-text-menu {
-  font-family: 'Lora', serif !important;
-}
+} */
+
 /* ***** */
 @screen sm {
   .header {
@@ -374,36 +406,10 @@ export default {
     justify-content: space-between;
     /* margin-left: 20px; */
   }
-  .header-icon-menu {
-    font-size: 30px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: var(--color_text);
-  }
-  .header-icon-menu > .material-design-icon__svg {
-    bottom: 0em;
-  }
-  .nav-bar {
-    width: 24px;
-    height: 24px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #3f3f3f;
-  }
-  .nav-bar > .material-design-icon__svg {
-    bottom: 0px;
-    width: 24px;
-    height: 24px;
-  }
-  .responsive {
+
+  /* .responsive {
     display: initial;
-  }
+  } */
 }
 @screen md {
   .header-text-menu {

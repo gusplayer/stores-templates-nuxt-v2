@@ -10,64 +10,11 @@
           <KObanner :banner="banner"></KObanner>
         </div>
       </div>
-      <!-- <div
-        class="swiper-pagination swiper-pagination-bullets"
-        slot="pagination"
-      ></div> -->
-      <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div>
+      <div class="swiper-pagination"></div>
+      <!-- <div class="swiper-button-prev" slot="button-prev"></div>
+      <div class="swiper-button-next" slot="button-next"></div> -->
     </div>
   </div>
-  <!-- <div class="carousel-content">
-    <div class="carousel" v-for="(banner, index) in this.Banners" :key="index">
-      <div class="carousel-inner">
-        <input
-          class="carousel-open"
-          type="radio"
-          :id="`carousel-${index + 1}`"
-          name="carousel"
-          aria-hidden="false"
-          hidden=""
-          checked="checked"
-        />
-        <div :class="`carousel-item slide${index + 1}`">
-          <div class="banner-content">
-            <KObanner class="trans" :banner="banner"></KObanner>
-          </div>
-        </div>
-        <label for="carousel-3" class="carousel-control prev control-1"
-          >‹</label
-        >
-        <label for="carousel-2" class="carousel-control next control-1"
-          >›</label
-        >
-        <label for="carousel-1" class="carousel-control prev control-2"
-          >‹</label
-        >
-        <label for="carousel-3" class="carousel-control next control-2"
-          >›</label
-        >
-        <label for="carousel-2" class="carousel-control prev control-3"
-          >‹</label
-        >
-        <label for="carousel-1" class="carousel-control next control-3"
-          >›</label
-        >
-
-        <ol class="carousel-indicators">
-          <li v-for="(list, index) in 3" :key="index">
-            <label :for="`carousel-${index + 1}`" class="carousel-bullet">
-              <span class="carousel-bullet-num">0{{ index + 1 }}</span>
-              <span
-                id="bullet-hover"
-                :class="`carousel-bullet-${index + 1}`"
-              ></span>
-            </label>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -106,20 +53,18 @@ export default {
       ],
       swiperOption: {
         slidesPerView: 'auto',
-        spaceBetween: 30,
         loop: true,
         pagination: {
           el: '.swiper-pagination',
           clickable: true,
-          // renderBullet(index, className) {
-          //   return `
-          //   <div class="">${index + 1}</div>
-          //   <div  class="swiper-pagination-bullet-custom border"></div> `
-          // },
         },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+          delay: 6000,
+          disableOnInteraction: false,
         },
       },
     }

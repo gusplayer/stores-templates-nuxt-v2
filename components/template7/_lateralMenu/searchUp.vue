@@ -17,19 +17,24 @@
             <div class="rightleft"></div>
           </div>
         </div>
+        <div class="products-search">
+          <KProducts></KProducts>
+        </div>
       </div>
     </div>
   </transition>
 </template>
 
 <script>
+import KProducts from '../../../pages/productos/index'
 export default {
   name: 'KoSearch',
   props: {
-    dataStore: Object,
     showMenu: Boolean,
   },
-  components: {},
+  components: {
+    KProducts,
+  },
 
   data() {
     return {
@@ -79,6 +84,12 @@ export default {
     },
     subcategories() {
       return this.dataStore.subcategorias
+    },
+    dataStore() {
+      return this.$store.state.dataStore
+    },
+    fullProducts() {
+      return this.$store.getters['products/filterProducts']
     },
   },
   methods: {
@@ -197,14 +208,24 @@ export default {
 </script>
 
 <style scoped>
+.products-search {
+  overflow-y: auto;
+  z-index: auto;
+}
+input[type='search'] {
+  border: none;
+  width: 100%;
+}
 .search-input-content {
-  @apply w-full flex flex-row justify-start items-center shadow-lg;
+  @apply w-full flex flex-row justify-center items-center shadow-lg z-auto;
+  height: 12%;
 }
 .input-search {
-  @apply w-full py-4 text-center items-center text-5xl;
+  @apply w-full py-4 text-center items-center text-5xl z-10;
 }
 ::-webkit-input-placeholder {
   @apply text-gray-textHeader text-center items-center text-5xl;
+  font-family: 'Lora', serif !important;
 }
 .order {
   @apply fixed top-0 left-0 w-10/0 flex justify-center items-center bg-black z-auto bg-opacity-50;
@@ -271,7 +292,7 @@ export default {
   max-height: 100vh;
 }
 .close-container {
-  @apply relative w-50 h-50 cursor-pointer flex justify-center items-center mr-6;
+  @apply relative w-50 h-50 cursor-pointer flex justify-center items-center;
 }
 .leftright {
   @apply h-4 w-50 absolute bg-black rounded-2 transform -rotate-45 transition-all ease-in duration-200;

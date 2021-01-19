@@ -3,6 +3,7 @@
     <div class="order" @click="closeOrder" v-show="openMenuLeft">
       <div class="order_content">
         <div class="order_header">
+          <div class="w-16"></div>
           <div class="header-content-logo">
             <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
               <img
@@ -12,9 +13,10 @@
               />
             </nuxt-link>
           </div>
-          <label for="order_close" @click="closed" class="order_header_close">
-            <window-close-icon />
-          </label>
+          <div class="close-container" @click="closed">
+            <div class="leftright"></div>
+            <div class="rightleft"></div>
+          </div>
         </div>
 
         <div class="search-content">
@@ -72,7 +74,7 @@
               </div>
             </div>
           </div>
-          <div class="content-Categorys" v-if="focusbtn">
+          <!-- <div class="content-Categorys" v-if="focusbtn">
             <div class="tab w-full overflow-hidden">
               <input
                 class="absolute opacity-0"
@@ -125,10 +127,19 @@
                   >
                     {{ item.nombre_categoria_producto }}
                   </p>
-                  <!-- <nuxt-link :to="item.path" v-if="item.path" class="btn"
-                  >{{ $t(`${item.name}`) }}
-                </nuxt-link> -->
                 </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="content-Categorys" v-if="focusbtn">
+            <div class="header-content-buttons">
+              <div v-for="(item, index) in dataStore.categorias" :key="index">
+                <p
+                  class="btn"
+                  @click="sendCategory(item, item.id, index, (ref = false))"
+                >
+                  {{ item.nombre_categoria_producto }}
+                </p>
               </div>
             </div>
           </div>
@@ -319,6 +330,27 @@ export default {
 </script>
 
 <style scoped>
+.close-container {
+  @apply relative w-30 h-50 cursor-pointer flex justify-center items-center ml-12;
+}
+.leftright {
+  @apply h-4 w-30 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
+}
+.rightleft {
+  @apply h-4 w-30 absolute rounded-2 transform rotate-45 transition-all ease-in duration-200;
+}
+.close-container:hover .leftright {
+  @apply transform rotate-0;
+  background: var(--btnhover);
+}
+.close-container:hover .rightleft {
+  @apply transform rotate-0;
+  background: var(--btnhover);
+}
+.leftright,
+.rightleft {
+  background: var(--color_icon);
+}
 .content-lateral-menu {
   @apply w-full flex flex-col justify-center items-center;
 }
@@ -430,15 +462,6 @@ export default {
   align-items: center;
   border-bottom: 1px solid var(--color_border);
   padding: 5px 30px;
-  flex: none;
-}
-.order_header_close {
-  font-size: 30px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-.order_header_close:hover {
-  color: gray;
 }
 .wrapper-logo {
   width: 100%;
@@ -471,7 +494,8 @@ export default {
   @apply w-full grid grid-cols-1 justify-start items-center;
 }
 .btn {
-  @apply w-full flex font-semibold text-gray-textHeader uppercase tracking-wider text-base py-3 pl-4 border-b;
+  @apply w-full flex font-semibold text-gray-textHeader uppercase tracking-wider text-base py-3 pl-4;
+  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
 .btn {
   font-family: 'Lora', serif !important ;

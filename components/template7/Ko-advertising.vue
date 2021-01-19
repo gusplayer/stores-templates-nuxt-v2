@@ -16,9 +16,11 @@
             </div>
           </div>
           <button class="content-bttns-shop">
-            <span class="content-textbutton-shop">
-              {{ $t('productdetail_btnComprar') }}
-            </span>
+            <nuxt-link :to="'/productos'">
+              <span class="content-textbutton-shop">
+                {{ $t('productdetail_btnComprar') }}
+              </span>
+            </nuxt-link>
           </button>
         </div>
       </div>
