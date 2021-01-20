@@ -31,12 +31,15 @@
       :is="footerTemplate"
     />
     <KoFooterCountry :dataStore="dataStore" />
-    <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
-      <div @click="redirectWhatsapp()">
-        <koWhatsapp class="button-whatsapp" /><span
-          >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
-        >
-      </div>
+    <div
+      class="wrapper-whatsapp"
+      v-if="dataStore.tienda.whatsapp"
+      @click="redirectWhatsapp()"
+    >
+      <koWhatsapp class="button-whatsapp" />
+      <span
+        >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
+      >
     </div>
     <!-- <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
       <div class="content-cookie">
@@ -435,7 +438,7 @@ export default {
   top: 50%;
   right: 0px;
   width: 155px;
-  color: black;
+  color: white;
   overflow: hidden;
   background-color: #25d366;
   border-radius: 10px 0 0 10px;
@@ -443,17 +446,22 @@ export default {
   transition: all 0.5s ease-in-out;
   vertical-align: middle;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  max-height: 51px;
 }
 .wrapper-whatsapp:hover {
   transform: translate(0px, 0px);
 }
-.wrapper-whatsapp div span {
+.wrapper-whatsapp span {
   font-size: 15px;
   padding-top: 8px;
   padding-bottom: 10px;
-  position: absolute;
+  position: relative;
   line-height: 16px;
   font-weight: bolder;
+  margin-left: 5px;
+  color: white;
 }
 .button-whatsapp {
   width: 50px;
