@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 export default {
   mode: 'universal',
-
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -53,7 +52,6 @@ export default {
     { src: '~/plugins/countryFlags.js', ssr: false },
     { src: '~/plugins/vue-lazyload.js', ssr: false },
   ],
-
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',

@@ -10,7 +10,9 @@
       </div>
       <div class="wrapper-item-text">
         <p class="title">{{ this.article.titulo }}</p>
-        <p class="subtext">{{ `${this.article.resumen.slice(0, 200)}...` }}</p>
+        <p v-if="this.article.resumen" class="subtext">
+          {{ `${this.article.resumen.slice(0, 200)}...` }}
+        </p>
         <div class="content-date">
           <div class="content-img">
             <div class="flex-shrink-0">
