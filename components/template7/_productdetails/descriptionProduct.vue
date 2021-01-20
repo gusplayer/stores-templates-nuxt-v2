@@ -1,54 +1,16 @@
 <template>
   <div class="description">
     <div class="left">
-      <div class="deliverys section" v-if="this.envios.envio_metodo">
-        <div class="content">
-          <h3 class="title-section">
-            {{ $t('productdetail_opinionesEnvio') }}
-          </h3>
-        </div>
-        <div
-          v-if="this.envios.envio_metodo === 'precio_ciudad'"
-          class="wrapper-method"
-        >
-          <h4 class="capitalize">
-            • {{ this.envios.envio_metodo.replace('_', ' por ') }}
-          </h4>
-          <p class="description-method">
-            {{ $t('productdetail_opinionesEnvioMsg1') }}
-          </p>
-        </div>
-        <div
-          v-if="this.envios.envio_metodo === 'tarifa_plana'"
-          class="wrapper-method"
-        >
-          <h4 class="capitalize">
-            {{ this.envios.envio_metodo.replace('_', ' ') }}
-          </h4>
-          <p class="description-method">
-            {{ $t('productdetail_opinionesEnvioMsg2') }}
-          </p>
-          <p class="price">
-            {{ $t('cart_precio') }} {{ this.envios.valor | currency }}
-          </p>
-        </div>
-        <div
-          v-if="this.envios.envio_metodo === 'precio'"
-          class="wrapper-method"
-        >
-          <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
-          <p class="description-method">
-            {{ $t('productdetail_precioTotalCompraMsg') }}
-          </p>
-        </div>
-        <div
-          v-if="this.envios.envio_metodo === 'gratis'"
-          class="wrapper-method"
-        >
-          <h4>{{ $t('productdetail_gratis') }}</h4>
-          <p class="description-method">{{ $t('productdetail_gratisMsg') }}</p>
-        </div>
+      <!-- Descriptioin product -->
+      <div class="content-tittle-description">
+        <span class="tittle-description">
+          {{ $t('productdetail_description') }}
+        </span>
       </div>
+      <div
+        class="content_product_description"
+        v-html="data.info.descripcion"
+      ></div>
     </div>
 
     <div class="right">
@@ -202,6 +164,54 @@
           </li>
         </ul>
       </div>
+      <div class="deliverys section" v-if="this.envios.envio_metodo">
+        <div class="content">
+          <h3 class="title-section">
+            {{ $t('productdetail_opinionesEnvio') }}
+          </h3>
+        </div>
+        <div
+          v-if="this.envios.envio_metodo === 'precio_ciudad'"
+          class="wrapper-method"
+        >
+          <h4 class="capitalize">
+            • {{ this.envios.envio_metodo.replace('_', ' por ') }}
+          </h4>
+          <p class="description-method">
+            {{ $t('productdetail_opinionesEnvioMsg1') }}
+          </p>
+        </div>
+        <div
+          v-if="this.envios.envio_metodo === 'tarifa_plana'"
+          class="wrapper-method"
+        >
+          <h4 class="capitalize">
+            {{ this.envios.envio_metodo.replace('_', ' ') }}
+          </h4>
+          <p class="description-method">
+            {{ $t('productdetail_opinionesEnvioMsg2') }}
+          </p>
+          <p class="price">
+            {{ $t('cart_precio') }} {{ this.envios.valor | currency }}
+          </p>
+        </div>
+        <div
+          v-if="this.envios.envio_metodo === 'precio'"
+          class="wrapper-method"
+        >
+          <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
+          <p class="description-method">
+            {{ $t('productdetail_precioTotalCompraMsg') }}
+          </p>
+        </div>
+        <div
+          v-if="this.envios.envio_metodo === 'gratis'"
+          class="wrapper-method"
+        >
+          <h4>{{ $t('productdetail_gratis') }}</h4>
+          <p class="description-method">{{ $t('productdetail_gratisMsg') }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -273,6 +283,8 @@ export default {
 }
 .left {
   flex: 2;
+  justify-content: start;
+  align-items: center;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -286,6 +298,34 @@ export default {
   display: flex;
   padding-bottom: 10px;
 }
+.content-tittle-description {
+  @apply w-full justify-start items-start;
+  margin-top: 20px;
+}
+.tittle-description {
+  color: rgba(21, 20, 57, 0.541);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* color: var(--color_subtext); */
+  font-size: 16px;
+  text-transform: uppercase;
+  align-self: flex-start;
+  font-weight: bold;
+  font-family: 'Lora', serif !important;
+}
+.content_product_description {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-family: 'Lora', serif !important;
+  color: #777;
+}
+
 .right {
   flex: 1;
   display: flex;
@@ -430,6 +470,19 @@ li p {
 }
 .cursor_point {
   cursor: pointer;
+}
+@screen sm {
+  .content_product_description {
+    @apply w-9/0;
+  }
+  .content-tittle-description {
+    @apply w-9/0;
+  }
+}
+@screen md {
+  .left {
+    @apply items-start;
+  }
 }
 @media (max-width: 810px) {
   .left {

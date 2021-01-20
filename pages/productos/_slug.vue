@@ -14,7 +14,7 @@
 
 <script>
 import KoProductDetail from '../../components/template5/Ko-ProductDetail-1'
-
+// import KoProductDetail from '../../components/template7/Ko-ProductDetail'
 export default {
   components: {
     KoProductDetail,

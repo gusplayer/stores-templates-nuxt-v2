@@ -3,7 +3,6 @@ export default {
   mode: 'universal',
 
   head: {
-    
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -18,21 +17,14 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
+    // Fuentes template 7
     link: [
       {
-      href: "https://fonts.googleapis.com/css2?family=Charm&family=Courgette&family=Dancing+Script:wght@500&family=Pacifico&family=Viaoda+Libre&display=swap",
-      rel: "stylesheet"
+        href:
+          'https://fonts.googleapis.com/css2?family=David+Libre&family=Great+Vibes&family=Lora:ital@0;1&display=swap',
+        rel: 'stylesheet',
       },
-      {
-      href: "https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap",
-      rel:"stylesheet"
-      },
-      {
-      href: "https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap",
-      rel: "stylesheet"
-      }
-    ]
-    
+    ],
   },
   loading: {
     color: 'grey',

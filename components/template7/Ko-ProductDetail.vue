@@ -142,11 +142,7 @@
                 </div>
               </div>
             </div>
-            <!-- Descriptioin product -->
-            <div
-              class="content_product_description"
-              v-html="data.info.descripcion"
-            ></div>
+            
             <!-- Unidades en stock -->
             <div class="content_stock">
               <svg
@@ -284,11 +280,11 @@
 
       <div class="section">
         <div class="features">
-          <ko-description
+          <KoDescription
             :dataStore="dataStore"
             :data="data"
             :envio="envio"
-          ></ko-description>
+          ></KoDescription>
         </div>
       </div>
       <!-- Productos relacionados -->
@@ -343,7 +339,7 @@
     </div>
   </div>
 </template>
-
+content_product_description
 <script>
 import axios from 'axios'
 import ProductSlide from '../../components/template7/_productdetails/productSlide'
@@ -1028,13 +1024,7 @@ export default {
   margin-bottom: 20px;
   color: #ed2353;
 }
-.content_product_description {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  font-family: 'Lora', serif !important;
-  color: #777;
-}
+
 .content_stock {
   @apply flex flex-row justify-start items-center w-full;
 }

@@ -18,7 +18,11 @@
       "
       :is="headerTemplate"
     />
-    <div v-if="this.estadoHeader7 && this.headerk07" class="separadorKo7"></div>
+    <div
+      v-if="this.estadoHeader7 && this.headerk07"
+      class="separadorKo7"
+      id="separadork07"
+    ></div>
     <nuxt />
     <component
       :dataStore="dataStore"
@@ -128,7 +132,6 @@ export default {
     this.$store.dispatch('GET_SHOPPING_CART')
     let domain = this.$route.fullPath
     let domains = this.$route.fullPath
-
     if (domain == '/?clearCart=true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
@@ -137,6 +140,14 @@ export default {
       this.estadoHeader7 = false
     } else {
       this.estadoHeader7 = true
+      var separador = document.getElementById('separadork07')
+      if (separador) {
+        if (domains == '/productos') {
+          separador.style.backgroundColor = '#efefef'
+        } else {
+          separador.style.backgroundColor = '#efefef'
+        }
+      }
     }
   },
   data() {
@@ -421,13 +432,21 @@ export default {
   },
   watch: {
     // eslint-disable-next-line no-unused-vars
+
     $route(to, from) {
       let domains = this.$route.fullPath
-
       if (domains == '/') {
         this.estadoHeader7 = false
       } else {
         this.estadoHeader7 = true
+        var separador = document.getElementById('separadork07')
+        if (separador) {
+          if (domains == '/productos') {
+            separador.style.backgroundColor = '#efefef'
+          } else {
+            separador.style.backgroundColor = '#efefef'
+          }
+        }
       }
     },
   },
@@ -459,7 +478,7 @@ export default {
 .separadorKo7 {
   width: 100%;
   padding-top: 110px;
-  background: #efefef;
+  /* background: #efefef; */
 }
 .wrapper-whatsapp {
   position: fixed;

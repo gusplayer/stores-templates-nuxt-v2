@@ -357,8 +357,8 @@ export const mutations = {
     state.fullPathServer = value
   },
   SET_TEMPLATE_STORE(state, value) {
-    //state.template = value
-    state.template = 7
+    state.template = value
+    // state.template = 7
   },
 }
 export const actions = {
