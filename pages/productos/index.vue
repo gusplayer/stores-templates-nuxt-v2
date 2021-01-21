@@ -15,6 +15,7 @@
 
 <script>
 import KProductList from '../../components/template6/Ko6-ProductList-2'
+// import KProductList from '../../components/template7/Ko-ProductList'
 
 export default {
   components: {

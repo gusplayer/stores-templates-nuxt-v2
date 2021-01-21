@@ -16,6 +16,14 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
+    // Fuentes template 7
+    link: [
+      {
+        href:
+          'https://fonts.googleapis.com/css2?family=David+Libre&family=Great+Vibes&family=Lora:ital@0;1&display=swap',
+        rel: 'stylesheet',
+      },
+    ],
   },
   loading: {
     color: 'grey',

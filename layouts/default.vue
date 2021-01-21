@@ -18,6 +18,11 @@
       "
       :is="headerTemplate"
     />
+    <div
+      v-if="this.estadoHeader7 && this.headerk07"
+      class="separadorKo7"
+      id="separadork07"
+    ></div>
     <nuxt />
     <component
       :dataStore="dataStore"
@@ -129,9 +134,28 @@ export default {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_SHOPPING_CART')
     let domain = this.$route.fullPath
+    let domains = this.$route.fullPath
     if (domain == '/?clearCart=true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
+    }
+    if (domains == '/') {
+      this.estadoHeader7 = false
+    } else {
+      this.estadoHeader7 = true
+      var separador = document.getElementById('separadork07')
+      if (separador) {
+        if (domains == '/productos') {
+          separador.style.backgroundColor = '#efefef'
+        } else {
+          separador.style.backgroundColor = '#efefef'
+        }
+      }
+    }
+  },
+  data() {
+    return {
+      estadoHeader7: false,
     }
   },
   head() {
@@ -329,7 +353,6 @@ export default {
         //   break
         case 7:
           footerComponent = 'KoFooter4'
-
           break
         case 8:
           footerComponent = 'KoFooter1'
@@ -345,6 +368,9 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    headerk07() {
+      return this.$store.state.headerk07
     },
   },
   methods: {
@@ -407,6 +433,26 @@ export default {
       document.getElementById('modalNotificacion').style.opacity = '0'
     },
   },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+
+    $route(to, from) {
+      let domains = this.$route.fullPath
+      if (domains == '/') {
+        this.estadoHeader7 = false
+      } else {
+        this.estadoHeader7 = true
+        var separador = document.getElementById('separadork07')
+        if (separador) {
+          if (domains == '/productos') {
+            separador.style.backgroundColor = '#efefef'
+          } else {
+            separador.style.backgroundColor = '#efefef'
+          }
+        }
+      }
+    },
+  },
 }
 </script>
 
@@ -431,6 +477,11 @@ export default {
   text-decoration: none;
   box-sizing: border-box;
   outline: none !important;
+}
+.separadorKo7 {
+  width: 100%;
+  padding-top: 110px;
+  /* background: #efefef; */
 }
 .wrapper-whatsapp {
   position: fixed;
@@ -608,6 +659,26 @@ export default {
     font-size: 14px;
     margin-bottom: 10px;
     text-align: center;
+  }
+}
+@screen sm {
+  .separadorKo7 {
+    padding-top: 60px;
+  }
+}
+@screen mlg {
+  .separadorKo7 {
+    padding-top: 70px;
+  }
+}
+@screen xl {
+  .separadorKo7 {
+    padding-top: 80px;
+  }
+}
+@screen xl {
+  .separadorKo7 {
+    padding-top: 110px;
   }
 }
 </style>

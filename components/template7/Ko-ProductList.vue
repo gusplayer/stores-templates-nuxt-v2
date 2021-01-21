@@ -1,61 +1,44 @@
 <template>
-  <div class="wrapper-productlist">
-    <div class="container">
-      <div class="content-items-categorias">
-        <div class="content-items-categorias-text">
-          <p class="text-categorias" @click="clear">Catálogo</p>
-          <p
-            class="text-categorias-select"
-            v-if="this.nameCategoryHeader"
-            @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >
-            > {{ this.nameCategoryHeader }}
-          </p>
-          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            > {{ this.nameSubCategoryHeader }}
-          </p>
+  <div class="product-content">
+    <div class="producto-items-content">
+      <div class="product-text">
+        <div class="product-tittle">
+          <span class="tittle">Accesorios de madera.</span>
+        </div>
+        <div class="product-subtittle">
+          <span class="subtittle">Productos Destacados</span>
+        </div>
+        <div class="product-description">
+          <span class="description">
+            Es un hecho establecido desde hace mucho tiempo que un lector se
+            distraerá
+          </span>
         </div>
       </div>
-      <div>
-        <div class="content-item-productos">
-          <div class="grid-products">
-            <div
-              v-for="product in filterProduct"
-              :key="product.id"
-              class="content-products"
-            >
-              <KoProductCard1 :product="product"></KoProductCard1>
-            </div>
-          </div>
-          <div
-            v-if="(this.fullProducts.length == 0)"
-            class="content-products-empty"
-          >
-            <p>No se encontraron productos relacionados.</p>
-          </div>
-          <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 16">
-              <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="products.length"
-                :page-size="16"
-                :current-page.sync="currentPage"
-                class="pagination"
-              ></el-pagination>
-            </div>
-          </div>
+      <div class="product-conten-items">
+        <div
+          v-for="product in filterProduct"
+          :key="product.id"
+          class="content-products"
+        >
+          <KoProductCard :product="product"></KoProductCard>
         </div>
+      </div>
+      <div
+        v-if="(this.fullProducts.length == 0)"
+        class="content-products-empty"
+      >
+        <p>{{ $t('home_msgCatalogo') }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import KoProductCard1 from './_productcard/Ko-ProductCard-1'
+import KoProductCard from '../../components/template7/_productcard/ProductCard'
 export default {
   components: {
-    KoProductCard1,
+    KoProductCard,
   },
   props: {
     dataStore: Object,
@@ -186,6 +169,11 @@ export default {
     },
   },
   methods: {
+    back() {
+      this.clear()
+      this.toggleCategories = true
+      this.nameCategory = ''
+    },
     Allcategories() {
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
@@ -206,6 +194,53 @@ export default {
         })
       }
       this.currentPage = 1
+    },
+    addClass() {
+      this.add = !this.add
+    },
+    mouseOver(index) {
+      this.sub = index
+      this.show = true
+    },
+    mouseLeave() {
+      this.sub = -1
+      this.show = false
+    },
+    Sendsubcategory(value) {
+      this.indexSelect2 = value
+      this.addClass()
+      this.selectSubcategory = value
+      let filtradoCategoria = this.subcategories.find(
+        (element) => element.id == value
+      )
+      this.nameSubCategory = filtradoCategoria.nombre_subcategoria
+      this.$store.commit('products/FILTER_BY', {
+        type: 'subcategory',
+        data: value,
+      })
+    },
+    sendCategory(value, categoria, index, ref) {
+      this.indexSelect = index
+      this.currentPage = 1
+      this.nameCategory = value.nombre_categoria_producto
+      this.indexCategory = index
+      this.selectedSubcategories = []
+      this.subcategories.find((subcategoria) => {
+        if (subcategoria.categoria === categoria) {
+          this.toggleCategories = false
+          this.selectedSubcategories.push(subcategoria)
+        }
+      })
+      if (this.selectedSubcategories.length === 0) {
+        this.addClass()
+      }
+      if (ref) {
+        this.addClass()
+      }
+      this.$store.commit('products/FILTER_BY', {
+        type: 'category',
+        data: value.nombre_categoria_producto,
+      })
     },
     breadcrumbsSendCategory(value) {
       let filtradoCategorias = this.categorias.find((element) => {
@@ -228,6 +263,7 @@ export default {
         data: '',
       })
       this.$emit('clear')
+      this.addClass()
       this.nameCategory = ''
     },
     sendCategoryUrl(value) {
@@ -246,9 +282,6 @@ export default {
     SendsubcategoryUrl(value) {
       let subcategory = value.replace('/?subcategory=', '')
       let urlFiltrada = decodeURIComponent(subcategory)
-
-      this.selectSubcategory = urlFiltrada
-
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.nombre_subcategoria == urlFiltrada
       )
@@ -299,6 +332,11 @@ export default {
     },
     currentPage() {
       this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+      let timerTimeout = null
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null
+        window.scrollBy(0, -1500)
+      }, 250)
     },
     previousPage() {
       if (this.previousPage) {
@@ -332,224 +370,108 @@ export default {
 </script>
 
 <style scoped>
-.wrapper-productlist {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: var(--background_color_2);
-  box-sizing: border-box;
+.product-content {
+  @apply flex flex-col justify-center items-center w-full my-80;
 }
-.container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 1300px;
-  padding: 0px 20px;
-  flex-direction: column;
+.product-text,
+.product-conten-items {
+  @apply flex flex-col justify-center items-center w-full;
 }
-.content-items-categorias {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  /* height: 40px; */
-}
-.content-items-categorias-text {
-  display: flex;
-  flex-direction: row;
-}
-.text-categorias {
-  background: transparent;
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: var(--color_subtext);
-  align-self: flex-start;
-  margin-right: 2px;
-  cursor: pointer;
-  display: flex;
-}
-.text-categorias-select {
-  background: transparent;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: var(--color_subtext);
-  align-self: flex-start;
-  margin-top: 2px;
-  margin-right: 2px;
-  margin-left: 5px;
-  cursor: pointer;
-  opacity: 0.6;
-  display: flex;
-}
-.content-item-productos {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.grid-products {
-  width: 100%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(250px, 2fr));
-  grid-gap: 25px;
-  box-sizing: border-box;
-}
-.content-products {
-  border-radius: 10px;
-}
-.content-products-empty {
-  width: 100%;
-  min-height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.content-products-empty p {
-  font-size: 18px;
-  opacity: 0.6;
-  font-weight: bold;
-  color: var(--color_subtext);
-}
-.pagination-medium {
-  margin-top: 10px;
-  background: transparent;
-}
-.pagination {
-  font-size: 18px;
-  color: var(--color_text);
-  background: transparent;
-}
-.product_pagination >>> .el-pagination.is-background .btn-next {
-  color: var(--color_text);
-  background-color: transparent;
-}
-.product_pagination >>> .el-pagination.is-background .btn-prev {
-  color: var(--color_text);
-  background-color: transparent;
-}
-.product_pagination >>> .el-pagination.is-background .el-pager li {
-  color: var(--color_text);
-  background-color: transparent;
-}
-.product_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: var(--btnhover);
-}
-.product_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: var(--btnhover);
-}
-.product_pagination
-  >>> .el-pagination.is-background
-  .el-pager
-  li:not(.disabled):hover {
-  color: var(--btnhover);
-}
-.product_pagination
-  >>> .el-pagination.is-background
-  .el-pager
-  li:not(.disabled).active {
-  background-color: var(--color_icon);
-  color: white;
-}
-@media (max-width: 1290px) {
-  .grid-products {
-    grid-template-columns: repeat(4, minmax(240px, 2fr));
-    grid-gap: 15px;
-  }
-}
-@media (max-width: 1265px) {
-  .grid-products {
-    grid-template-columns: repeat(4, minmax(240px, 2fr));
-    grid-gap: 10px;
-  }
-}
-@media (max-width: 1250px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(250px, 2fr));
-    grid-gap: 25px;
-  }
-}
-@media (max-width: 1060px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(250px, 2fr));
-    grid-gap: 20px;
-  }
-}
-@media (max-width: 1050px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
-    grid-gap: 20px;
-  }
-}
-@media (max-width: 1020px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
-    grid-gap: 15px;
-  }
-}
-@media (max-width: 1010px) {
-  .grid-products {
-    grid-template-columns: repeat(3, minmax(240px, 2fr));
-    grid-gap: 10px;
-  }
-}
-@media (max-width: 1000px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-gap: 25px;
-  }
+.product-tittle,
+.product-subtittle,
+.product-description,
+.tittle,
+.subtittle,
+.description,
+.product-conten-items,
+.producto-items-content {
+  @apply flex flex-col justify-center items-center text-center;
 }
 
-@media (max-width: 790px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-gap: 20px;
+.tittle {
+  font-family: 'Great Vibes', cursive !important;
+  color: #ed2353;
+}
+.subtittle {
+  font-family: 'David Libre', serif !important;
+  color: #2d2a2a;
+}
+.description {
+  font-family: 'Lora', serif !important ;
+  color: #777;
+}
+.product-conten-items {
+  @apply gap-4;
+}
+@screen sm {
+  .producto-items-content {
+    @apply w-9/5;
+  }
+  .product-conten-items {
+    @apply grid grid-cols-2;
+  }
+  .tittle {
+    line-height: 34px;
+    font-size: 24px;
+  }
+  .subtittle {
+    line-height: 42px;
+    font-size: 32px;
+  }
+  .description {
+    line-height: 24px;
+    font-size: 14px;
   }
 }
-@media (max-width: 780px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-gap: 16px;
+@screen md {
+  .product-conten-items {
+    @apply grid grid-cols-3;
+  }
+  .subtittle {
+    line-height: 46px;
+    font-size: 36px;
   }
 }
-@media (max-width: 775px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-gap: 20px;
+@screen lg {
+  .product-text {
+    @apply w-full;
+  }
+  .product-conten-items {
+    @apply grid grid-cols-4;
   }
 }
-@media (max-width: 770px) {
-  .container {
-    padding: 0px;
-  }
-  .content-item-productos {
-    padding: 15px;
-  }
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(10px, 2fr));
-  }
-  .text-categorias {
-    padding: 0 10px;
+@screen mlg {
+  .producto-items-content {
+    @apply w-9/3;
   }
 }
-@media (max-width: 700px) {
-  .content-items-categorias {
-    margin-left: 5px;
-    margin-bottom: 0px;
+@screen xl {
+  .producto-items-content {
+    @apply w-8/3;
   }
 }
-@media (max-width: 450px) {
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(160px, 1fr));
+@screen xml {
+  .producto-items-content {
+    @apply w-6/3;
   }
-  .content-item-productos {
-    padding: 5px;
+
+  @screen xxl {
+    .producto-items-content {
+      @apply w-4/6;
+    }
+  }
+
+  .tittle {
+    line-height: 34px;
+    font-size: 24px;
+  }
+  .subtittle {
+    line-height: 46px;
+    font-size: 36px;
+  }
+  .description {
+    line-height: 24px;
+    font-size: 14px;
   }
 }
 </style>
