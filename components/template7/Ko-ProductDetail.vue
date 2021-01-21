@@ -1036,7 +1036,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   margin-top: 15px;
   padding-bottom: 30px;
@@ -1096,7 +1096,7 @@ export default {
 .content_buy_action {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 .transport-icon{
@@ -1176,7 +1176,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   margin-top: 10px;
 }
 .icon-shared {

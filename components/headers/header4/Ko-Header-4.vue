@@ -22,6 +22,12 @@
             <nuxt-link :to="item.path" v-if="item.path" class="btn"
               >{{ $t(`${item.name}`) }}
             </nuxt-link>
+            <nuxt-link
+              :to="item.href"
+              v-else-if="item.href && listArticulos > 0"
+              class="btn"
+              >{{ $t(`${item.name}`) }}</nuxt-link
+            >
           </div>
         </div>
         <div class="header-content-items">
@@ -172,7 +178,7 @@ export default {
         },
         {
           name: 'header_blog',
-          path: '/blog',
+          href: '/blog',
         },
       ],
     }
@@ -183,6 +189,9 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
+    },
+    listArticulos() {
+      return this.$store.state.listArticulos.length
     },
   },
   methods: {

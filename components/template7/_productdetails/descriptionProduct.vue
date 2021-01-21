@@ -283,7 +283,7 @@ export default {
 }
 .left {
   flex: 2;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   display: flex;

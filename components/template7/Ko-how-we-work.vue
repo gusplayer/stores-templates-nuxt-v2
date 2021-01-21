@@ -111,7 +111,7 @@ export default {
     },
   },
   mounted() {
-    console.log('Current Swiper instance object', this.mySwiper)
+    // console.log('Current Swiper instance object', this.mySwiper)
     this.mySwiper.slideTo(3, 1000, false)
   },
 }

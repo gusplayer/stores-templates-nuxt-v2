@@ -50,9 +50,8 @@ export default {
   },
   name: 'Ko-ProductList-1',
   mounted() {
-    console.log('Current Swiper instance object', this.mySwiper)
+    // console.log('Current Swiper instance object', this.mySwiper)
     this.mySwiper.slideTo(3, 1000, false)
-
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']

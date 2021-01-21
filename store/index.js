@@ -487,7 +487,7 @@ export const actions = {
   },
   GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
     let template = store.template
-    // let template = 6
+    // let template = 7
     this.$axios
       .$get(
         `https://api2.komercia.co/api/template/${template}/settings/${store.id_tienda}`

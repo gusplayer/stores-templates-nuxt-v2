@@ -14,6 +14,12 @@
             <nuxt-link :to="item.path" v-if="item.path" class="btn">
               {{ $t(`${item.name}`) }}
             </nuxt-link>
+            <nuxt-link
+              :to="item.href"
+              v-else-if="item.href && listArticulos > 0"
+              class="btn"
+              >{{ $t(`${item.name}`) }}</nuxt-link
+            >
           </div>
         </div>
         <KoSocialNet :dataStore="dataStore"></KoSocialNet>
@@ -50,10 +56,15 @@ export default {
         },
         {
           name: 'header_blog',
-          path: '/blog',
+          href: '/blog',
         },
       ],
     }
+  },
+  computed: {
+    listArticulos() {
+      return this.$store.state.listArticulos.length
+    },
   },
 }
 </script>
