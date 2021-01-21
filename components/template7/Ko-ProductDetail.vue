@@ -342,11 +342,11 @@
 content_product_description
 <script>
 import axios from 'axios'
-import ProductSlide from '../../components/template7/_productdetails/productSlide'
-import SelectGroup from '../../components/template7/_productdetails/SelectGroup'
-import KoDescription from '../../components/template7/_productdetails/descriptionProduct.vue'
-import KoSuggesProduct from '../../components/template7/_productdetails/suggestionsProducto'
-import Zoom from '../../components/template7/_productdetails/zoomImg'
+import ProductSlide from './_productdetails/productSlide'
+import SelectGroup from './_productdetails/selectGroup'
+import KoDescription from './_productdetails/descriptionProduct'
+import KoSuggesProduct from './_productdetails/suggestionsProducto'
+import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
 
 export default {

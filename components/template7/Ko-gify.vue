@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import KoProductGifyCard from '../../components/template7/_productcard/ProductCard'
+import KoProductGifyCard from './_productcard/ProductCard'
 export default {
   components: {
     KoProductGifyCard,
