@@ -1,128 +1,169 @@
 [
   {
+    "name": "_tailwind",
+    "path": "/_tailwind",
+    "component": "C:\\Users\\migue\\OneDrive\\Documentos\\Komercia\\template-nuxt-dokku\\node_modules\\@nuxtjs\\tailwindcss\\lib\\ui\\pages\\index.vue",
+    "_name": "_6dead19d"
+  },
+  {
     "name": "blog",
     "path": "/blog",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\index.vue",
-    "chunkName": "pages/blog/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\index.vue",
+    "chunkName": "pages/blog/index",
+    "_name": "_1393236f"
   },
   {
     "name": "cart",
     "path": "/cart",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\cart.vue",
-    "chunkName": "pages/cart"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\cart.vue",
+    "chunkName": "pages/cart",
+    "_name": "_5dd2ce31"
   },
   {
     "name": "catalogoPixel",
     "path": "/catalogoPixel",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\catalogoPixel\\\\index.vue",
-    "chunkName": "pages/catalogoPixel/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\catalogoPixel\\\\index.vue",
+    "chunkName": "pages/catalogoPixel/index",
+    "_name": "_466cdeb3"
   },
   {
     "name": "constructor",
     "path": "/constructor",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\constructor\\\\index.vue",
-    "chunkName": "pages/constructor/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\constructor\\\\index.vue",
+    "chunkName": "pages/constructor/index",
+    "_name": "_3960912e"
   },
   {
     "name": "contacto",
     "path": "/contacto",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\contacto.vue",
-    "chunkName": "pages/contacto"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\contacto.vue",
+    "chunkName": "pages/contacto",
+    "_name": "_d502c140"
   },
   {
     "name": "ig",
     "path": "/ig",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\index.vue",
-    "chunkName": "pages/ig/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\index.vue",
+    "chunkName": "pages/ig/index",
+    "_name": "_5b9d239a"
   },
   {
     "name": "micompra",
     "path": "/micompra",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\micompra.vue",
-    "chunkName": "pages/micompra"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\micompra.vue",
+    "chunkName": "pages/micompra",
+    "_name": "_eab600aa"
+  },
+  {
+    "name": "productos",
+    "path": "/productos",
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\index.vue",
+    "chunkName": "pages/productos/index",
+    "_name": "_40f254f0"
   },
   {
     "name": "template5",
     "path": "/template5",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template5\\\\index.vue",
-    "chunkName": "pages/template5/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template5\\\\index.vue",
+    "chunkName": "pages/template5/index",
+    "_name": "_46ad27f0"
   },
   {
     "name": "template6",
     "path": "/template6",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index.vue",
-    "chunkName": "pages/template6/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index.vue",
+    "chunkName": "pages/template6/index",
+    "_name": "_3749dd32"
   },
   {
     "name": "template7",
     "path": "/template7",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template7\\\\index.vue",
-    "chunkName": "pages/template7/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template7\\\\index.vue",
+    "chunkName": "pages/template7/index",
+    "_name": "_27e69274"
+  },
+  {
+    "name": "template8",
+    "path": "/template8",
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template8\\\\index.vue",
+    "chunkName": "pages/template8/index",
+    "_name": "_188347b6"
   },
   {
     "name": "unicentro",
     "path": "/unicentro",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\unicentro\\\\index.vue",
-    "chunkName": "pages/unicentro/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\unicentro\\\\index.vue",
+    "chunkName": "pages/unicentro/index",
+    "_name": "_146f03ee"
   },
   {
     "name": "ig-contacto",
     "path": "/ig/contacto",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\contacto.vue",
-    "chunkName": "pages/ig/contacto"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\contacto.vue",
+    "chunkName": "pages/ig/contacto",
+    "_name": "_bb06f204"
   },
   {
     "name": "template6-index_macrobrand",
     "path": "/template6/index_macrobrand",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index_macrobrand.vue",
-    "chunkName": "pages/template6/index_macrobrand"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index_macrobrand.vue",
+    "chunkName": "pages/template6/index_macrobrand",
+    "_name": "_3702577a"
   },
   {
     "name": "ig-productos-slug",
     "path": "/ig/productos/:slug?",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\productos\\\\_slug.vue",
-    "chunkName": "pages/ig/productos/_slug"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\productos\\\\_slug.vue",
+    "chunkName": "pages/ig/productos/_slug",
+    "_name": "_419f1d46"
   },
   {
     "name": "blog-slug",
     "path": "/blog/:slug",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\_slug.vue",
-    "chunkName": "pages/blog/_slug"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\_slug.vue",
+    "chunkName": "pages/blog/_slug",
+    "_name": "_11dc8227"
   },
   {
     "name": "productos-slug",
-    "path": "/productos/:slug?",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\_slug.vue",
-    "chunkName": "pages/productos/_slug"
+    "path": "/productos/:slug",
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\_slug.vue",
+    "chunkName": "pages/productos/_slug",
+    "_name": "_3f3bb3a8"
   },
   {
     "name": "wa-slug",
     "path": "/wa/:slug?",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\index.vue",
-    "chunkName": "pages/wa/_slug/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\index.vue",
+    "chunkName": "pages/wa/_slug/index",
+    "_name": "_38e9a7e3"
   },
   {
     "name": "wp-slug",
     "path": "/wp/:slug?",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wp\\\\_slug\\\\index.vue",
-    "chunkName": "pages/wp/_slug/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wp\\\\_slug\\\\index.vue",
+    "chunkName": "pages/wp/_slug/index",
+    "_name": "_45e56232"
   },
   {
     "name": "wa-slug-producto-slugProduct",
     "path": "/wa/:slug?/producto/:slugProduct?",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\producto\\\\_slugProduct.vue",
-    "chunkName": "pages/wa/_slug/producto/_slugProduct"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\producto\\\\_slugProduct.vue",
+    "chunkName": "pages/wa/_slug/producto/_slugProduct",
+    "_name": "_9d100ab8"
   },
   {
     "name": "wp-slug-producto-slugProduct",
     "path": "/wp/:slug?/producto/:slugProduct?",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wp\\\\_slug\\\\producto\\\\_slugProduct.vue",
-    "chunkName": "pages/wp/_slug/producto/_slugProduct"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wp\\\\_slug\\\\producto\\\\_slugProduct.vue",
+    "chunkName": "pages/wp/_slug/producto/_slugProduct",
+    "_name": "_fda76f96"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_22530111"
   }
 ]

@@ -3,27 +3,30 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _6b9ece36 = () => interopDefault(import('..\\pages\\blog\\index.vue' /* webpackChunkName: "pages/blog/index" */))
-const _1feef17b = () => interopDefault(import('..\\pages\\cart.vue' /* webpackChunkName: "pages/cart" */))
-const _4a05a406 = () => interopDefault(import('..\\pages\\catalogoPixel\\index.vue' /* webpackChunkName: "pages/catalogoPixel/index" */))
-const _85415d9a = () => interopDefault(import('..\\pages\\constructor\\index.vue' /* webpackChunkName: "pages/constructor/index" */))
-const _4a37e4ac = () => interopDefault(import('..\\pages\\contacto.vue' /* webpackChunkName: "pages/contacto" */))
-const _3979c929 = () => interopDefault(import('..\\pages\\ig\\index.vue' /* webpackChunkName: "pages/ig/index" */))
-const _5feb2416 = () => interopDefault(import('..\\pages\\micompra.vue' /* webpackChunkName: "pages/micompra" */))
-const _3088f052 = () => interopDefault(import('..\\pages\\template5\\index.vue' /* webpackChunkName: "pages/template5/index" */))
-const _383a95b1 = () => interopDefault(import('..\\pages\\template6\\index.vue' /* webpackChunkName: "pages/template6/index" */))
-const _3fec3b10 = () => interopDefault(import('..\\pages\\template7\\index.vue' /* webpackChunkName: "pages/template7/index" */))
-const _684e8838 = () => interopDefault(import('..\\pages\\unicentro\\index.vue' /* webpackChunkName: "pages/unicentro/index" */))
-const _80e47f70 = () => interopDefault(import('..\\pages\\ig\\contacto.vue' /* webpackChunkName: "pages/ig/contacto" */))
-const _dc42c48e = () => interopDefault(import('..\\pages\\template6\\index_macrobrand.vue' /* webpackChunkName: "pages/template6/index_macrobrand" */))
-const _53a126e0 = () => interopDefault(import('..\\pages\\ig\\productos\\_slug.vue' /* webpackChunkName: "pages/ig/productos/_slug" */))
-const _6f0c10c6 = () => interopDefault(import('..\\pages\\blog\\_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
-const _d9c9901c = () => interopDefault(import('..\\pages\\productos\\_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
-const _e66da7a6 = () => interopDefault(import('..\\pages\\wa\\_slug\\index.vue' /* webpackChunkName: "pages/wa/_slug/index" */))
-const _cc763308 = () => interopDefault(import('..\\pages\\wp\\_slug\\index.vue' /* webpackChunkName: "pages/wp/_slug/index" */))
-const _7b8758cc = () => interopDefault(import('..\\pages\\wa\\_slug\\producto\\_slugProduct.vue' /* webpackChunkName: "pages/wa/_slug/producto/_slugProduct" */))
-const _dc1ebdaa = () => interopDefault(import('..\\pages\\wp\\_slug\\producto\\_slugProduct.vue' /* webpackChunkName: "pages/wp/_slug/producto/_slugProduct" */))
-const _b88971f2 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _6dead19d = () => interopDefault(import('..\\node_modules\\@nuxtjs\\tailwindcss\\lib\\ui\\pages\\index.vue' /* webpackChunkName: "" */))
+const _1393236f = () => interopDefault(import('..\\pages\\blog\\index.vue' /* webpackChunkName: "pages/blog/index" */))
+const _5dd2ce31 = () => interopDefault(import('..\\pages\\cart.vue' /* webpackChunkName: "pages/cart" */))
+const _466cdeb3 = () => interopDefault(import('..\\pages\\catalogoPixel\\index.vue' /* webpackChunkName: "pages/catalogoPixel/index" */))
+const _3960912e = () => interopDefault(import('..\\pages\\constructor\\index.vue' /* webpackChunkName: "pages/constructor/index" */))
+const _d502c140 = () => interopDefault(import('..\\pages\\contacto.vue' /* webpackChunkName: "pages/contacto" */))
+const _5b9d239a = () => interopDefault(import('..\\pages\\ig\\index.vue' /* webpackChunkName: "pages/ig/index" */))
+const _eab600aa = () => interopDefault(import('..\\pages\\micompra.vue' /* webpackChunkName: "pages/micompra" */))
+const _40f254f0 = () => interopDefault(import('..\\pages\\productos\\index.vue' /* webpackChunkName: "pages/productos/index" */))
+const _46ad27f0 = () => interopDefault(import('..\\pages\\template5\\index.vue' /* webpackChunkName: "pages/template5/index" */))
+const _3749dd32 = () => interopDefault(import('..\\pages\\template6\\index.vue' /* webpackChunkName: "pages/template6/index" */))
+const _27e69274 = () => interopDefault(import('..\\pages\\template7\\index.vue' /* webpackChunkName: "pages/template7/index" */))
+const _188347b6 = () => interopDefault(import('..\\pages\\template8\\index.vue' /* webpackChunkName: "pages/template8/index" */))
+const _146f03ee = () => interopDefault(import('..\\pages\\unicentro\\index.vue' /* webpackChunkName: "pages/unicentro/index" */))
+const _bb06f204 = () => interopDefault(import('..\\pages\\ig\\contacto.vue' /* webpackChunkName: "pages/ig/contacto" */))
+const _3702577a = () => interopDefault(import('..\\pages\\template6\\index_macrobrand.vue' /* webpackChunkName: "pages/template6/index_macrobrand" */))
+const _419f1d46 = () => interopDefault(import('..\\pages\\ig\\productos\\_slug.vue' /* webpackChunkName: "pages/ig/productos/_slug" */))
+const _11dc8227 = () => interopDefault(import('..\\pages\\blog\\_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
+const _3f3bb3a8 = () => interopDefault(import('..\\pages\\productos\\_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
+const _38e9a7e3 = () => interopDefault(import('..\\pages\\wa\\_slug\\index.vue' /* webpackChunkName: "pages/wa/_slug/index" */))
+const _45e56232 = () => interopDefault(import('..\\pages\\wp\\_slug\\index.vue' /* webpackChunkName: "pages/wp/_slug/index" */))
+const _9d100ab8 = () => interopDefault(import('..\\pages\\wa\\_slug\\producto\\_slugProduct.vue' /* webpackChunkName: "pages/wa/_slug/producto/_slugProduct" */))
+const _fda76f96 = () => interopDefault(import('..\\pages\\wp\\_slug\\producto\\_slugProduct.vue' /* webpackChunkName: "pages/wp/_slug/producto/_slugProduct" */))
+const _22530111 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -42,88 +45,100 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/_tailwind",
+    component: _6dead19d,
+    name: "_tailwind"
+  }, {
     path: "/blog",
-    component: _6b9ece36,
+    component: _1393236f,
     name: "blog"
   }, {
     path: "/cart",
-    component: _1feef17b,
+    component: _5dd2ce31,
     name: "cart"
   }, {
     path: "/catalogoPixel",
-    component: _4a05a406,
+    component: _466cdeb3,
     name: "catalogoPixel"
   }, {
     path: "/constructor",
-    component: _85415d9a,
+    component: _3960912e,
     name: "constructor"
   }, {
     path: "/contacto",
-    component: _4a37e4ac,
+    component: _d502c140,
     name: "contacto"
   }, {
     path: "/ig",
-    component: _3979c929,
+    component: _5b9d239a,
     name: "ig"
   }, {
     path: "/micompra",
-    component: _5feb2416,
+    component: _eab600aa,
     name: "micompra"
   }, {
+    path: "/productos",
+    component: _40f254f0,
+    name: "productos"
+  }, {
     path: "/template5",
-    component: _3088f052,
+    component: _46ad27f0,
     name: "template5"
   }, {
     path: "/template6",
-    component: _383a95b1,
+    component: _3749dd32,
     name: "template6"
   }, {
     path: "/template7",
-    component: _3fec3b10,
+    component: _27e69274,
     name: "template7"
   }, {
+    path: "/template8",
+    component: _188347b6,
+    name: "template8"
+  }, {
     path: "/unicentro",
-    component: _684e8838,
+    component: _146f03ee,
     name: "unicentro"
   }, {
     path: "/ig/contacto",
-    component: _80e47f70,
+    component: _bb06f204,
     name: "ig-contacto"
   }, {
     path: "/template6/index_macrobrand",
-    component: _dc42c48e,
+    component: _3702577a,
     name: "template6-index_macrobrand"
   }, {
     path: "/ig/productos/:slug?",
-    component: _53a126e0,
+    component: _419f1d46,
     name: "ig-productos-slug"
   }, {
     path: "/blog/:slug",
-    component: _6f0c10c6,
+    component: _11dc8227,
     name: "blog-slug"
   }, {
-    path: "/productos/:slug?",
-    component: _d9c9901c,
+    path: "/productos/:slug",
+    component: _3f3bb3a8,
     name: "productos-slug"
   }, {
     path: "/wa/:slug?",
-    component: _e66da7a6,
+    component: _38e9a7e3,
     name: "wa-slug"
   }, {
     path: "/wp/:slug?",
-    component: _cc763308,
+    component: _45e56232,
     name: "wp-slug"
   }, {
     path: "/wa/:slug?/producto/:slugProduct?",
-    component: _7b8758cc,
+    component: _9d100ab8,
     name: "wa-slug-producto-slugProduct"
   }, {
     path: "/wp/:slug?/producto/:slugProduct?",
-    component: _dc1ebdaa,
+    component: _fda76f96,
     name: "wp-slug-producto-slugProduct"
   }, {
     path: "/",
-    component: _b88971f2,
+    component: _22530111,
     name: "index"
   }],
 
