@@ -171,7 +171,10 @@
                     this.cityComprador.departamento.nombre_dep
                   }}</span>
                 </p>
-                <p class="name" v-if="this.cityComprador">
+                <p
+                  class="name"
+                  v-if="this.cityComprador && this.cityComprador.nombre_ciu"
+                >
                   {{ $t('mcompra_ciudad') }}
                   <span class="value-data">{{
                     this.cityComprador.nombre_ciu
@@ -515,9 +518,11 @@ export default {
     shippingDireccion() {
       this.direccion_entrega = JSON.parse(this.orden.venta.direccion_entrega)
       if (this.cities && this.direccion_entrega) {
-        this.cityComprador = this.cities.find(
-          (city) => city.id === this.direccion_entrega.value.ciudad_id
-        )
+        if (this.direccion_entrega.value) {
+          this.cityComprador = this.cities.find((city) => {
+            city.id === this.direccion_entrega.value.ciudad_id
+          })
+        }
       }
     },
     clearCart() {
