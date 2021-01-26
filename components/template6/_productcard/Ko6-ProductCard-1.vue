@@ -133,11 +133,11 @@
             :to="{ path: `/productos/` + product.slug }"
             class="content-name-product"
           >
-            <p class="card-title" v-if="this.product.nombre.length >= 33">
-              {{ `${this.product.nombre.slice(0, 33)}..` }}
+            <p class="card-title" v-if="this.product.nombre.length >= 25">
+              {{ `${this.product.nombre.slice(0, 25)}..` }}
             </p>
             <p class="card-title" v-else>
-              {{ `${this.product.nombre.slice(0, 34)}` }}
+              {{ `${this.product.nombre.slice(0, 30)}` }}
             </p>
           </router-link>
           <div class="content-text-price" v-if="this.product.precio">
