@@ -50,7 +50,6 @@ export default {
   },
   name: 'Ko-ProductList-1',
   mounted() {
-    // console.log('Current Swiper instance object', this.mySwiper)
     this.mySwiper.slideTo(3, 1000, false)
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
@@ -132,6 +131,10 @@ export default {
           disableOnInteraction: false,
         },
         breakpoints: {
+          10000: {
+            slidesPerView: 6,
+            spaceBetween: 20,
+          },
           2560: {
             slidesPerView: 5,
             slidesPerGroup: 5,
@@ -150,9 +153,9 @@ export default {
           640: {
             slidesPerView: 2,
             slidesPerGroup: 2,
-            spaceBetween: 20,
+            spaceBetween: 10,
           },
-          320: {
+          425: {
             slidesPerView: 2,
             slidesPerGroup: 2,
             spaceBetween: 10,

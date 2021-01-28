@@ -21,59 +21,7 @@
         </no-ssr>
         <div class="image_overlay"></div>
       </router-link>
-      <div class="overlay-top" v-if="getFreeShipping == false && !soldOut">
-        <div class="icons-hover">
-          <div class="transport-icon">
-            <svg
-              class="transporte-icon"
-              v-if="getFreeShipping == false && !soldOut"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              version="1.1"
-              width="100%"
-              height="100%"
-              viewBox="0 0 24 24"
-              fill="#333"
-            >
-              <path
-                d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3M5 10.5L6.5 9L8 10.5L11.5 7L13 8.5L8 13.5L5 10.5Z"
-              />
-            </svg>
-          </div>
 
-          <!-- <div class="agotado-icon">
-            <svg
-              class="block-icon"
-              v-if="soldOut"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="#333"
-              width="100%"
-              height="100%"
-            >
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9C4.63 15.55 4 13.85 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1C19.37 8.45 20 10.15 20 12c0 4.42-3.58 8-8 8z"
-              />
-            </svg>
-          </div> -->
-        </div>
-      </div>
-      <div class="overlay-free" v-if="getFreeShipping == false && !soldOut">
-        <div class="text-free">
-          <p>{{ $t('home_cardGratis') }}</p>
-        </div>
-      </div>
-      <div class="overlay-polygon" v-if="getFreeShipping == false && !soldOut">
-        <svg
-          class="icon-overlay-free"
-          width="12px"
-          height="12px"
-          viewBox="0 0 255 255"
-        >
-          <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
-        </svg>
-      </div>
       <div class="overlay-sould" v-if="soldOut">
         <div class="text-sould">
           <svg
@@ -187,10 +135,12 @@
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             version="1.1"
+            width="60%"
+            height="60%"
             viewBox="0 0 24 24"
           >
             <path
-              d="M19 6H17A5 5 0 0 0 7 6H5A2 2 0 0 0 3 8V20A2 2 0 0 0 5 22H12.05A6.5 6.5 0 0 1 9 16.5A6.4 6.4 0 0 1 10.25 12.68A5 5 0 0 1 7 8H9A3 3 0 0 0 12 11H12.06A6.22 6.22 0 0 1 14.06 10.16A3 3 0 0 0 15 8H17A4.88 4.88 0 0 1 16.54 10.09A6.5 6.5 0 0 1 21 13.09V8A2 2 0 0 0 19 6M9 6A3 3 0 0 1 15 6M19.31 18.9A4.5 4.5 0 1 0 17.88 20.32L21 23.39L22.39 22M15.5 19A2.5 2.5 0 1 1 18 16.5A2.5 2.5 0 0 1 15.5 19Z"
+              d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7.14,4.5 2.78,7.5 1,12C3.39,18.08 10.25,21.06 16.33,18.67C19.38,17.47 21.8,15.06 23,12C21.22,7.5 16.86,4.5 12,4.5M7,22H9V24H7V22M11,22H13V24H11V22M15,22H17V24H15V22Z"
             />
           </svg>
         </div>
@@ -221,7 +171,7 @@
       <div class="precio">
         <div class="content-text-price" v-if="this.product.precio">
           <div
-            class="content-price"
+            class="content-price flex flex-row"
             v-if="this.estadoCart == true && this.minPrice != this.maxPrice"
           >
             <div
@@ -236,7 +186,7 @@
                   )
               }}
             </div>
-            <p class="separator-price">-</p>
+            <p class="separator-price mx-4">-</p>
             <div
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
@@ -266,6 +216,138 @@
           </div>
         </div>
         <div v-else class="h-20"></div>
+      </div>
+      <!-- Envios gratis -->
+      <div class="content_buy_action">
+        <div v-if="product.envio_gratis == 1 && product.stock > 0">
+          <div class="transport-icon">
+            <svg
+              class="transporte-icon mr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1"
+              width="25px"
+              height="25px"
+              viewBox="0 0 24 24"
+              fill="#00a650"
+            >
+              <path
+                d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3M5 10.5L6.5 9L8 10.5L11.5 7L13 8.5L8 13.5L5 10.5Z"
+              />
+            </svg>
+            <p>{{ $t('footer_tarifaPrecio') }}</p>
+          </div>
+        </div>
+        <!-- Producto agotado -->
+        <div class="content_card-info" v-if="spent && product.stock == 0">
+          <div class="icon-card-info-sould">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              id="Layer_1"
+              enable-background="new 0 0 512 512"
+              height="50px"
+              viewBox="0 0 512 512"
+              width="50px"
+            >
+              <g>
+                <g>
+                  <path
+                    d="m256 116.457h-16c-13.255 0-24-10.745-24-24 0-13.255 10.745-24 24-24h16c13.255 0 24 10.745 24 24 0 13.255-10.745 24-24 24z"
+                    fill="#cd3232"
+                  />
+                </g>
+                <g>
+                  <path
+                    d="m464 460.457h-416c-17.673 0-32-14.327-32-32v-160c0-17.673 14.327-32 32-32h416c17.673 0 32 14.327 32 32v160c0 17.673-14.327 32-32 32z"
+                    fill="#cd3232"
+                  />
+                </g>
+                <g>
+                  <path
+                    d="m432 460.457h-384c-17.673 0-32-14.327-32-32v-160c0-17.673 14.327-32 32-32h384c17.673 0 32 14.327 32 32v160c0 17.673-14.327 32-32 32z"
+                    fill="#ff4646"
+                  />
+                </g>
+                <g><circle cx="96" cy="268.457" fill="#cd3232" r="16" /></g>
+                <g><circle cx="384" cy="268.457" fill="#cd3232" r="16" /></g>
+                <g>
+                  <path
+                    d="m384.008 277.371c-2.993 0-5.916-1.507-7.6-4.243l-119.614-194.373c-3.562-5.789-9.998-9.384-16.794-9.384s-13.232 3.596-16.794 9.384l-119.615 194.373c-2.58 4.193-8.071 5.498-12.263 2.92-4.192-2.58-5.5-8.07-2.92-12.263l119.615-194.373c6.783-11.022 19.036-17.869 31.977-17.869s25.194 6.847 31.977 17.869l119.614 194.374c2.58 4.192 1.272 9.683-2.92 12.263-1.456.895-3.069 1.322-4.663 1.322z"
+                    fill="#463c4b"
+                  />
+                </g>
+                <g><circle cx="240" cy="92.457" fill="#ff4646" r="24" /></g>
+                <g>
+                  <g>
+                    <path
+                      d="m72 416.457c-11.028 0-20-8.972-20-20v-8c0-2.209 1.791-4 4-4s4 1.791 4 4v8c0 6.617 5.383 12 12 12s12-5.383 12-12v-22.111c0-4.575-2.542-8.688-6.634-10.733l-14.311-7.155c-6.819-3.411-11.055-10.265-11.055-17.89v-22.111c0-11.028 8.972-20 20-20s20 8.972 20 20v8c0 2.209-1.791 4-4 4s-4-1.791-4-4v-8c0-6.617-5.383-12-12-12s-12 5.383-12 12v22.111c0 4.575 2.542 8.688 6.634 10.733l14.311 7.155c6.819 3.41 11.055 10.265 11.055 17.889v22.111c0 11.029-8.972 20.001-20 20.001z"
+                      fill="#32283c"
+                    />
+                  </g>
+                  <g>
+                    <path
+                      d="m128 416.457c-11.028 0-20-8.972-20-20v-80c0-11.028 8.972-20 20-20s20 8.972 20 20v80c0 11.028-8.972 20-20 20zm0-112c-6.617 0-12 5.383-12 12v80c0 6.617 5.383 12 12 12s12-5.383 12-12v-80c0-6.617-5.383-12-12-12z"
+                      fill="#32283c"
+                    />
+                  </g>
+                  <g>
+                    <path
+                      d="m304 416.457c-11.028 0-20-8.972-20-20v-80c0-11.028 8.972-20 20-20s20 8.972 20 20v80c0 11.028-8.972 20-20 20zm0-112c-6.617 0-12 5.383-12 12v80c0 6.617 5.383 12 12 12s12-5.383 12-12v-80c0-6.617-5.383-12-12-12z"
+                      fill="#e6e6eb"
+                    />
+                  </g>
+                  <g>
+                    <path
+                      d="m200 416.457h-16c-11.028 0-20-8.972-20-20v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 6.617 5.383 12 12 12h16c2.209 0 4 1.791 4 4s-1.791 4-4 4z"
+                      fill="#32283c"
+                    />
+                  </g>
+                  <g>
+                    <path
+                      d="m232 416.457h-16c-2.209 0-4-1.791-4-4v-112c0-2.209 1.791-4 4-4h16c11.028 0 20 8.972 20 20v80c0 11.028-8.972 20-20 20zm-12-8h12c6.617 0 12-5.383 12-12v-80c0-6.617-5.383-12-12-12h-12z"
+                      fill="#32283c"
+                    />
+                  </g>
+                  <g>
+                    <path
+                      d="m360 416.457c-11.028 0-20-8.972-20-20v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 6.617 5.383 12 12 12s12-5.383 12-12v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 11.028-8.972 20-20 20z"
+                      fill="#e6e6eb"
+                    />
+                  </g>
+                  <path
+                    d="m424 296.457h-32c-2.209 0-4 1.791-4 4s1.791 4 4 4h12v108c0 2.209 1.791 4 4 4s4-1.791 4-4v-108h12c2.209 0 4-1.791 4-4s-1.791-4-4-4z"
+                    fill="#e6e6eb"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="text-card-info-sould">
+            {{ $t('productdetail_productoAgotado') }}
+          </div>
+        </div>
+      </div>
+      <!-- Btn comprar -->
+      <div class="content-button">
+        <button
+          ref="colorBtn"
+          class="btn"
+          v-if="!spent"
+          v-on:click="addShoppingCart"
+          id="AddToCartTag"
+        >
+          <p class="txt-btn-product">
+            {{ $t('productdetail_añadiralcarrito') }}
+          </p>
+        </button>
+        <button
+          disabled
+          class="btn-disabled"
+          v-if="spent"
+          v-on:click="addShoppingCart"
+        >
+          <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
+        </button>
       </div>
     </div>
   </div>
@@ -505,17 +587,6 @@ export default {
 </script>
 
 <style scoped>
-.product-image {
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
-}
-.product-image-soldOut {
-  filter: grayscale(100%);
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
-}
 .transporte-icon:hover {
   fill: #ed2353;
 }
@@ -529,20 +600,16 @@ export default {
   @apply h-full w-full;
   color: #333;
 }
-.producto {
-  @apply flex flex-col justify-center items-center cursor-pointer mt-8;
-}
-.datos-producto {
-  @apply w-full flex flex-col justify-center items-center;
-}
+
 .container {
   @apply relative w-full;
 }
 .image {
   @apply block w-full h-auto;
+  max-width: 90%;
 }
 .icon {
-  @apply text-white-white;
+  @apply text-2xl text-white-white;
 }
 .cart-Shop {
   @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
@@ -581,20 +648,23 @@ export default {
 .icon-show-mobile {
   fill: white;
 }
-.tittle {
+
+.card-title {
   font-family: 'David Libre', serif !important;
-  color: #3f3f3f;
+  color: #333333;
   font: inherit;
-  font-size: 100%;
 }
 .categoria {
   font-family: 'Lora', serif !important;
   color: #9e9e9e;
   font: inherit;
-  font-size: 100%;
 }
-.precio {
-  @apply font-bold;
+.text-price {
+  font-family: 'Lora', serif !important;
+  color: #ed2353;
+  font-weight: 600;
+}
+.separator-price {
   font-family: 'Lora', serif !important;
   color: #ed2353;
   font-weight: 600;
@@ -624,19 +694,91 @@ export default {
   transform: translate(-50%, -50%);
   white-space: nowrap;
 }
+.content_buy_action {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.transport-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #00a650;
+  font-family: 'Lora', serif !important;
+}
+.content_card-info {
+  @apply w-full flex flex-row justify-start items-end;
+  margin-bottom: 10px;
+}
+.text-card-info-sould {
+  color: #ed2353;
+  margin-left: 8px;
+  font-weight: bold;
+  /* line-height: 1.2; */
+  font-size: 16px;
+  font-family: 'Lora', serif !important;
+}
+.content-button {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 20px;
+}
+.btn {
+  font-family: 'Lora', serif !important;
+  color: white;
+  border-radius: 35px;
+  border: solid 2px #ed2353;
+  background-color: #ed2353;
+  padding: 10px 14px;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  transition: color 0.25s ease, background-color 0.25s ease,
+    border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+.btn:hover {
+  color: white;
+  border: solid 2px #d7204b;
+  background-color: #d7204b;
+}
+.txt-btn-product {
+  padding: 10px 14px;
+  font-size: 12px;
+  line-height: 16px;
+}
+.btn-disabled {
+  color: white;
+  border-radius: 35px;
+  border: solid 2px gray;
+  background-color: gray;
+  padding: 12px 20px;
+  font-size: 13px;
+  line-height: 18px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  transition: color 0.25s ease, background-color 0.25s ease,
+    border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
 @screen sm {
   .text-cart {
     @apply hidden;
   }
   .overlay-bottom {
-    @apply absolute right-0 bottom-0 overflow-hidden bg-red-btnhoverproducts transition-all ease-in duration-300;
-    width: 20%;
-    height: 20%;
-    left: 10px;
-    bottom: 10px;
-  }
-  .overlay-bottom:hover {
-    @apply bg-red-btnbannershop;
+    @apply hidden;
   }
   .overlay-top {
     @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-md max-w-full max-h-full transition-all ease-in duration-300;
@@ -645,6 +787,10 @@ export default {
     right: 0;
     width: 20%;
     height: 20%;
+  }
+  .container:hover .overlay-top {
+    width: 20%;
+    left: 80%;
   }
   .overlay-free {
     @apply rounded;
@@ -657,6 +803,11 @@ export default {
     width: 50%;
     height: 10%;
     transition: 0.5s ease;
+  }
+  .container:hover .overlay-free {
+    width: 50%;
+    left: 45%;
+    transition-delay: 700ms;
   }
   .text-free {
     font-size: 75%;
@@ -672,6 +823,10 @@ export default {
     height: 5%;
     /* transition: 0.5s ease; */
   }
+  .container:hover .overlay-polygon {
+    width: 5%;
+    left: 85%;
+  }
   .overlay-sould {
     @apply flex justify-center items-center rounded-l-lg;
     position: absolute;
@@ -684,45 +839,63 @@ export default {
     height: 20%;
     transition: 0.5s ease;
   }
+  .container:hover .overlay-sould {
+    width: 35%;
+    left: 60%;
+    transition-delay: 700ms;
+  }
   .svg-sould-out {
     width: 40px;
     height: 40px;
   }
   .cart-shop {
-    @apply hidden;
+    @apply sr-only hidden;
   }
-  .content-price {
-    @apply flex flex-row justify-center items-center w-full;
+  .cart-shop-mobile {
+    @apply not-sr-only block;
+  }
+  .icon-show-mobile {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2.5px;
+  }
+  .producto {
+    @apply grid grid-cols-1 gap-4 justify-center items-center cursor-pointer;
+  }
+  .product-image {
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  .product-image-soldOut {
+    filter: grayscale(100%);
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  .datos-producto {
+    @apply w-full h-full flex flex-col justify-center items-center;
+  }
+  .card-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .categoria {
+    font-size: 14px;
+    margin-bottom: 10px;
   }
   .text-price {
-    font-size: 12px;
+    font-size: 15px;
+    margin-bottom: 10px;
   }
   .separator-price {
-    @apply mx-1;
-  }
-}
-@media (max-width: 425px) {
-  .icon {
     font-size: 20px;
   }
-  .icon-show-mobile {
-    width: 20px;
+  .transport-icon {
+    @apply hidden;
   }
-}
-@media (min-width: 426px) {
-  .icon {
-    font-size: 25px;
-  }
-  .icon-show-mobile {
-    width: 25px;
-  }
-}
-@media (min-width: 530px) {
-  .icon {
-    font-size: 30px;
-  }
-  .icon-show-mobile {
-    width: 30px;
+  .content_card-info {
+    @apply hidden;
   }
 }
 @screen md {
@@ -733,25 +906,32 @@ export default {
     width: 60px;
     height: 60px;
   }
-  .text-price {
-    font-size: 15px;
-  }
-  .separator-price {
-    @apply mx-4;
+  .icon {
+    margin-top: 2px;
   }
 }
-@media (max-width: 1279px) {
-  .overlay-bottom {
-    @apply flex justify-center items-center right-0 bottom-0 overflow-hidden bg-red-btnhoverproducts transition-all ease-in duration-300;
-    width: 18%;
-    height: 18%;
-    left: 10px;
-    bottom: 10px;
+@media (min-width: 780px) {
+  .producto {
+    @apply grid grid-cols-2 gap-4 justify-start items-start cursor-pointer;
   }
-  .overlay-bottom:hover {
-    @apply bg-red-btnbannershop;
+  .product-image {
+    width: 80%;
+    object-fit: cover;
+    overflow: hidden;
   }
-  .cart-shop-mobile {
+  .product-image-soldOut {
+    filter: grayscale(100%);
+    width: 80%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  .datos-producto {
+    @apply w-full h-full flex flex-col justify-center items-start;
+  }
+  .transport-icon {
+    @apply flex;
+  }
+  .content_card-info {
     @apply flex;
   }
 }
@@ -762,25 +942,16 @@ export default {
   .text-cart {
     @apply block;
   }
-  .overlay-bottom {
-    @apply absolute w-full left-0 right-0 bottom-0 overflow-hidden h-0 bg-red-btnhoverproducts transition-all ease-in duration-300;
-  }
-  .overlay-bottom:hover {
-    @apply bg-red-btnbannershop transition-all ease-in duration-300;
-  }
-  .container:hover .overlay-bottom {
-    height: 12%;
-  }
   .overlay-top {
     @apply absolute w-0 overflow-hidden transition-all ease-in duration-300 shadow-2xl rounded-md bg-white-white;
     top: 6%;
-    left: 100%;
+    left: 80%;
     right: 0;
     height: 20%;
   }
   .container:hover .overlay-top {
     width: 15%;
-    left: 85%;
+    left: 65%;
   }
   .overlay-free {
     @apply rounded;
@@ -796,7 +967,7 @@ export default {
   }
   .container:hover .overlay-free {
     width: 44%;
-    left: 55%;
+    left: 35%;
     transition-delay: 700ms;
   }
   .text-free {
@@ -815,14 +986,14 @@ export default {
   }
   .container:hover .overlay-polygon {
     width: 5%;
-    left: 89%;
+    left: 70%;
     transition-delay: 950ms;
   }
   .overlay-sould {
     @apply flex justify-center items-center rounded-l-lg;
     position: absolute;
     top: 5%;
-    left: 100%;
+    left: 75%;
     right: 0;
     /* background-color: #008cba; */
     overflow: hidden;
@@ -832,7 +1003,7 @@ export default {
   }
   .container:hover .overlay-sould {
     width: 35%;
-    left: 65%;
+    left: 50%;
     transition-delay: 700ms;
   }
   .svg-sould-out {
@@ -840,10 +1011,29 @@ export default {
     height: 60px;
   }
   .cart-shop {
-    @apply flex;
+    @apply not-sr-only block;
   }
   .cart-shop-mobile {
-    @apply hidden;
+    @apply sr-only hidden;
+  }
+
+  .card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .categoria {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .text-price {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .separator-price {
+    font-size: 20px;
+  }
+  .transport-icon {
+    margin-bottom: 20px;
   }
 }
 </style>

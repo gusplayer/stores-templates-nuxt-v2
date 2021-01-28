@@ -18,7 +18,10 @@
           </div>
         </div>
         <div class="products-search">
-          <KProducts></KProducts>
+          <KProducts
+            :dataStore="dataStore"
+            :fullProducts="fullProducts"
+          ></KProducts>
         </div>
       </div>
     </div>
@@ -26,7 +29,7 @@
 </template>
 
 <script>
-import KProducts from '../../../pages/productos/index'
+import KProducts from '../../../components/template7/Ko-ProductList'
 export default {
   name: 'KoSearch',
   props: {
@@ -210,14 +213,14 @@ export default {
 <style scoped>
 .products-search {
   overflow-y: auto;
-  z-index: auto;
+  z-index: 10;
 }
 input[type='search'] {
   border: none;
   width: 100%;
 }
 .search-input-content {
-  @apply w-full flex flex-row justify-center items-center shadow-lg z-auto;
+  @apply w-full flex flex-row justify-center items-center shadow-lg z-20;
   height: 12%;
 }
 .input-search {

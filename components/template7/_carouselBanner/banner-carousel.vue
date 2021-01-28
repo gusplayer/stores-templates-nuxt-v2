@@ -58,23 +58,21 @@ export default {
   @apply flex flex-row gap-3 justify-center items-center;
 }
 .content-bttns-shop {
-  @apply mr-2 rounded-full bg-red-btnbannershop border-2 border-red-btnbannershop shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply mr-2 rounded-full bg-red-btnbannershop shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
   padding: 10px 20px;
-  /* background: var(--color_background_btn);
-  border: var(--color_background_btn) 1px solid; */
 }
 .content-bttns-view {
   @apply ml-2 rounded-full border-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
   padding: 10px 20px;
 }
 .content-bttns-view1 {
-  @apply border-gray-btnbannerviewhover;
+  @apply border-gray-btnbannerviewhover border-2;
 }
 .content-bttns-view2 {
-  @apply border-coffe-headerpage;
+  @apply border-coffe-headerpage border-2;
 }
 .content-bttns-view3 {
-  @apply border-rose-btnbannerviewhover;
+  @apply border-rose-btnbannerviewhover border-2;
 }
 .content-bttns-shop:hover {
   @apply bg-red-btnbannershophover;

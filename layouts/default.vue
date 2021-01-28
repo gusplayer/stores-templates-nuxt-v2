@@ -140,18 +140,17 @@ export default {
       this.$store.commit('UPDATE_CONTENTCART')
     }
     var separador = document.getElementById('separadork07')
-    if (domains == '/') {
+    if (domains == '/' || domains == '/productos') {
       this.estadoHeader7 = false
     } else {
       this.estadoHeader7 = true
-
-      if (separador) {
-        if (domains == '/productos') {
-          separador.style.backgroundColor = '#ffffff'
-        } else {
-          separador.style.backgroundColor = '#efefef'
-        }
-      }
+      // if (separador) {
+      //   if (domains == '/productos' ) {
+      //     separador.style.background = '#ffffff'
+      //   } else {
+      //     separador.style.background = '#efefef'
+      //   }
+      // }
     }
   },
   data() {
@@ -439,17 +438,17 @@ export default {
     $route(to, from) {
       let domains = this.$route.fullPath
       var separador = document.getElementById('separadork07')
-      if (domains == '/') {
+      if (domains == '/' || domains == '/productos') {
         this.estadoHeader7 = false
       } else {
         this.estadoHeader7 = true
-        if (separador) {
-          if (domains == '/productos') {
-            separador.style.backgroundColor = '#ffffff'
-          } else {
-            separador.style.backgroundColor = '#efefef'
-          }
-        }
+        // if (separador) {
+        //   if (domains == '/productos') {
+        //     separador.style.background = '#ffffff'
+        //   } else {
+        //     separador.style.background = '#efefef'
+        //   }
+        // }
       }
     },
   },
@@ -481,7 +480,7 @@ export default {
 .separadorKo7 {
   width: 100%;
   padding-top: 120px;
-  background: transparent;
+  background: #efefef;
 }
 .wrapper-whatsapp {
   position: fixed;
@@ -678,7 +677,7 @@ export default {
 }
 @screen xl {
   .separadorKo7 {
-    padding-top: 110px;
+    padding-top: 120px;
   }
 }
 </style>
