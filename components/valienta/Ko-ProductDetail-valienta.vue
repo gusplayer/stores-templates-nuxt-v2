@@ -137,6 +137,11 @@
           <div class="content-text-desc" v-html="data.info.descripcion"></div>
         </div>
       </div>
+      <div class="content-text-nota">
+        <p class="text-variant-nota">
+          Recuerda, al pedido se le debe sumar el valor del envío
+        </p>
+      </div>
       <div class="responsive-purchase">
         <div class="ko-input">
           <button
@@ -658,7 +663,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 25px 30px 80px 30px;
+  padding: 25px 30px 55px 30px;
   position: relative;
   background-color: white;
 }
@@ -844,6 +849,15 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.content-text-nota {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  padding: 20px 0px;
+  background: white;
+}
 .ko-input {
   display: flex;
   width: 100%;
@@ -1015,6 +1029,10 @@ export default {
   font-size: 14px;
   color: #0f2930;
 }
+.text-variant-nota {
+  font-size: 14px;
+  color: #948690;
+}
 .content-shared {
   display: flex;
   flex-direction: row;
@@ -1030,7 +1048,7 @@ export default {
 }
 @media (max-width: 685px) {
   .container-productDetail {
-    padding: 0px 0px 70px 0px;
+    padding: 0px 0px 60px 0px;
   }
   .section {
     flex-direction: column;
@@ -1059,6 +1077,9 @@ export default {
   }
   .content-description {
     padding: 0 15px;
+  }
+  .content-text-nota {
+    padding: 5px 15px;
   }
 }
 @media (max-width: 500px) {
