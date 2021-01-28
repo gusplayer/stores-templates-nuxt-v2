@@ -74,15 +74,6 @@ export default {
   @apply flex justify-center items-center bg-footerbg bg-auto bg-center bg-no-repeat;
   height: 322px;
 }
-.footer-content {
-  @apply w-9/5 flex grid grid-cols-3 mx-6;
-}
-.footer-content-image {
-  @apply object-cover;
-}
-.footer-img {
-  @apply transform rotate-180;
-}
 .footer-content-items {
   @apply flex flex-col justify-center items-center w-full my-2;
 }
@@ -94,36 +85,26 @@ export default {
 }
 .btn {
   @apply mx-2 font-semibold text-gray-textHeader uppercase tracking-wider;
+  transition: all 0.25s ease;
 }
 .btn:hover {
   @apply text-red-btnhoverHeader;
-}
-.footer-content-icons {
-  @apply w-full flex flex-wrap justify-center items-center;
-}
-.icon-socialmedia {
-  @apply flex flex-wrap mx-2;
+  transition: all 0.25s ease;
 }
 .btn {
-  font-family: 'Lora', serif !important ;
+  font-family: 'David libre', serif !important ;
 }
 @screen sm {
-  .footer-content-image {
-    @apply sr-only;
-  }
   .footer-content {
     @apply w-full flex;
   }
   .btn {
     @apply text-sm;
   }
-  .icon-socialmedia {
-    @apply w-5;
-  }
 }
-@screen lg {
-  .footer-content-image {
-    @apply not-sr-only;
+@screen md {
+  .btn {
+    font-size: 16px;
   }
 }
 </style>

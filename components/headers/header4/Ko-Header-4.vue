@@ -147,11 +147,13 @@ export default {
           header.style.width = '46%'
         }
       } else if (prevScrollpos > currentScrollPos && navbar) {
+        //sube
         // this.$store.commit('SET_STATESPACERHEADERK7', false)
         header.style.width = '100%'
         navbar.style.zIndex = '20'
         navbar.style.top = '0px'
       } else {
+        //baja
         // this.$store.commit('SET_STATESPACERHEADERK7', true)
         navbar.style.zIndex = '20'
         navbar.style.top = '-100px'
@@ -280,8 +282,7 @@ export default {
   @apply flex flex-col w-full justify-between items-center;
 }
 .header {
-  @apply flex w-full justify-between shadow-lg;
-  background: var(--background_color_1);
+  @apply flex w-full justify-between shadow-lg bg-white-white;
 }
 .header-item-menu {
   @apply hidden;
@@ -293,7 +294,7 @@ export default {
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: var(--color_text);
+  color: #3f3f3f;
 }
 .header-icon-menu > .material-design-icon__svg {
   bottom: 0em;
@@ -329,12 +330,14 @@ export default {
   @apply w-auto flex flex-wrap gap-6 justify-center items-center;
 }
 .btn {
-  @apply mx-4 font-semibold uppercase tracking-wider text-base;
-  color: var(--color_text);
-  font-family: 'Lora', serif !important ;
+  @apply mx-4 font-semibold uppercase tracking-wider text-gray-textHeader;
+  transition: all 0.25s ease;
+  font-family: 'David libre', serif !important ;
+  font-size: 14px;
 }
 .btn:hover {
-  color: var(--btnhover);
+  @apply text-red-btnhoverHeader;
+  transition: all 0.25s ease;
 }
 .header-content-items {
   @apply flex flex-row justify-between items-center;
@@ -343,11 +346,12 @@ export default {
   @apply w-6 h-6;
 }
 .search-header {
-  @apply cursor-pointer;
-  color: var(--color_icon);
+  @apply cursor-pointer text-gray-textHeader;
+  transition: all 0.25s ease;
 }
 .search-header:hover {
-  color: var(--btnhover);
+  @apply text-red-btnhoverHeader;
+  transition: all 0.25s ease;
 }
 .empty {
   @apply mx-2;
@@ -359,34 +363,20 @@ export default {
   @apply flex justify-center items-center w-9 h-9 box-border pb-1 ml-5 relative cursor-pointer;
 }
 .icon-shop {
-  @apply h-24 w-24;
-  color: var(--color_icon);
+  @apply h-24 w-24 text-gray-textHeader;
+  transition: all 0.25s ease;
 }
 .icon-shop:hover {
-  color: var(--btnhover);
+  @apply text-red-btnhoverHeader;
+  transition: all 0.25s ease;
 }
 .border-num-items {
-  @apply rounded-full h-16 w-auto flex justify-center items-center text-center -ml-3 -mt-3;
-  background: var(--color_background_btn);
+  @apply rounded-full h-16 w-auto flex justify-center items-center text-center -ml-3 -mt-3 bg-red-btnbannershop;
+  /* background: var(--color_background_btn); */
 }
 .num-items {
-  @apply text-xs p-1;
-  color: var(--color_text_btn);
+  @apply text-xs p-1 text-white-white;
 }
-
-/* .header-content-page {
-  @apply flex grid grid-cols-2 gap-4;
-}
-.header-icon-cart {
-  font-size: 20px;
-  color: var(--color_icon);
-}
-.header-icon-cart:hover {
-  color: var(--btnhover);
-}
-.responsive {
-  @apply hidden;
-} */
 
 /* ***** */
 @screen sm {
@@ -415,10 +405,6 @@ export default {
     justify-content: space-between;
     /* margin-left: 20px; */
   }
-
-  /* .responsive {
-    display: initial;
-  } */
 }
 @screen md {
   .header-text-menu {
@@ -469,7 +455,6 @@ export default {
     @apply w-4/6;
   }
 }
-
 @media (max-width: 768px) {
   .search {
     display: none;

@@ -2,25 +2,20 @@
   <div>
     <KCarousel></KCarousel>
     <KPromo></KPromo>
-    <!-- <KBanner :dataStore="dataStore" /> -->
-    <!-- <KCategory :dataStore="dataStore" style="position: sticky; top: 88px;" /> -->
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
     ></KProductList>
-    <!-- <KProducts></KProducts> -->
     <KAdvertising></KAdvertising>
     <KGify :dataStore="dataStore" :fullProducts="fullProducts"></KGify>
     <KHowwork></KHowwork>
+    <KBlog :dataStore="dataStore" v-show="listArticulos.length > 0"></KBlog>
     <KNews></KNews>
     <KWrapper :dataStore="dataStore"></KWrapper>
   </div>
 </template>
 
 <script>
-// import KBanner from '../../components/template7/ko-Banner-1'
-// import KCategory from '../../components/template7/Ko-Category-1'
-// import KProducts from '../../components/template7/_productsItems//Ko-products'
 import KCarousel from '../../components/template7/_carouselBanner/ko-carousel'
 import KPromo from '../../components/template7/ko-Banner-Promo'
 import KProductList from '../../components/template7/Ko-ProductList'
@@ -29,6 +24,8 @@ import KGify from '../../components/template7/Ko-gify'
 import KHowwork from '../../components/template7/Ko-how-we-work'
 import KWrapper from '../../components/template7/Ko-wrapper'
 import KNews from '../../components/template7/Ko-Newsletter'
+import KBlog from '../../components/template7/Ko-blog'
+
 export default {
   layout: 'default',
   components: {
@@ -40,11 +37,7 @@ export default {
     KHowwork,
     KWrapper,
     KNews,
-    // KProducts,
-    // KBanner,
-    // KCategory,
-
-    // KProductList,
+    KBlog,
   },
   data() {
     return {
@@ -66,6 +59,25 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
+    listArticulos() {
+      return this.$store.state.listArticulos
+    },
+    filterArticles() {
+      const initial = this.currentPage * 12 - 12
+      const final = initial + 12
+      return this.filteredList.slice(initial, final)
+    },
+    filteredList() {
+      if (this.search) {
+        return this.listArticulos.filter((element) => {
+          return element.titulo
+            .toLowerCase()
+            .includes(this.search.toLowerCase())
+        })
+      } else {
+        return this.listArticulos
+      }
     },
   },
   methods: {

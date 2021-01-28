@@ -17,7 +17,7 @@
 
 <script>
 import K05ProductList from '../../components/template6/Ko6-ProductList-2'
-import K07ProductList from '../../components/template7/Ko-ProductList'
+import K07ProductList from '../../components/template7/Ko-ProductListFilter'
 
 export default {
   components: {

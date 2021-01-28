@@ -1,6 +1,6 @@
 <template>
   <div class="product-content">
-    <div class="producto-items-content">
+    <div class="producto-items-content" id="section">
       <div class="product-text">
         <div class="product-tittle">
           <span class="tittle">Accesorios de madera.</span>
@@ -15,20 +15,46 @@
           </span>
         </div>
       </div>
-      <div class="product-conten-items">
-        <div
-          v-for="product in filterProduct"
-          :key="product.id"
-          class="content-products"
-        >
-          <KoProductCard :product="product"></KoProductCard>
+      <div class="content-item">
+        <div class="content-item-productos">
+          <div class="product-conten-items">
+            <div
+              v-for="product in filterProduct"
+              :key="product.id"
+              class="content-products"
+            >
+              <KoProductCard :product="product"></KoProductCard>
+            </div>
+          </div>
+          <div
+            v-if="(this.fullProducts.length == 0)"
+            class="content-products-empty"
+          >
+            <div class="header-content-logo">
+              <nuxt-link to="/productos" class="wrapper-logo">
+                <img
+                  :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+                  class="header-logo"
+                  alt="Logo Img"
+                  @click="clear"
+                />
+              </nuxt-link>
+            </div>
+            <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
+          </div>
+          <div class="pagination-medium">
+            <div class="product_pagination" v-if="products.length > 16">
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="products.length"
+                :page-size="16"
+                :current-page.sync="currentPage"
+                class="pagination"
+              ></el-pagination>
+            </div>
+          </div>
         </div>
-      </div>
-      <div
-        v-if="(this.fullProducts.length == 0)"
-        class="content-products-empty"
-      >
-        <p>{{ $t('home_msgCatalogo') }}</p>
       </div>
     </div>
   </div>
@@ -36,6 +62,7 @@
 
 <script>
 import KoProductCard from './_productcard/ProductCard'
+
 export default {
   components: {
     KoProductCard,
@@ -45,6 +72,32 @@ export default {
     fullProducts: {},
   },
   name: 'Ko-ProductList-1',
+  data() {
+    return {
+      drawerleft: false,
+      directionleft: 'ltr',
+      add: true,
+      search: '',
+      productsCategory: [],
+      price: [0, 1000000],
+      range: {
+        max: 0,
+      },
+      currentPage: 1,
+      sub: -1,
+      show: false,
+      value: '',
+      valuesub: '',
+      selectSubcategory: '',
+      nameCategory: '',
+      nameSubCategory: '',
+      selectedSubcategories: [],
+      toggleCategories: true,
+      indexCategory: 0,
+      indexSelect: '',
+      indexSelect2: '',
+    }
+  },
   mounted() {
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
@@ -93,32 +146,7 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      drawerleft: false,
-      directionleft: 'ltr',
-      add: true,
-      search: '',
-      productsCategory: [],
-      price: [0, 1000000],
-      range: {
-        max: 0,
-      },
-      currentPage: 1,
-      sub: -1,
-      show: false,
-      value: '',
-      valuesub: '',
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      toggleCategories: true,
-      indexCategory: 0,
-      indexSelect: '',
-      indexSelect2: '',
-    }
-  },
+
   computed: {
     products: {
       get() {
@@ -403,6 +431,85 @@ export default {
 .product-conten-items {
   @apply gap-4;
 }
+.content-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 40px;
+}
+.content-item-productos {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.grid-products {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(250px, 2fr));
+  grid-column-gap: 25px;
+  grid-row-gap: 30px;
+  box-sizing: border-box;
+}
+.content-products-empty {
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.txt-products-empty {
+  @apply mt-6;
+  font-size: 20px;
+  color: #3f3f3f;
+  font-weight: 600;
+  font-family: 'David Libre', serif !important;
+}
+.pagination-medium {
+  margin-top: 10px;
+  background: transparent;
+}
+.pagination {
+  font-size: 18px;
+  color: #3f3f3f;
+  background: transparent;
+}
+.product_pagination >>> .el-pagination.is-background .btn-next {
+  color: #3f3f3f;
+  background-color: transparent;
+}
+.product_pagination >>> .el-pagination.is-background .btn-prev {
+  color: #3f3f3f;
+  background-color: transparent;
+}
+.product_pagination >>> .el-pagination.is-background .el-pager li {
+  color: #3f3f3f;
+  background-color: transparent;
+}
+.product_pagination >>> .el-pagination.is-background .btn-next:hover {
+  color: #ed2353;
+}
+.product_pagination >>> .el-pagination.is-background .btn-prev:hover {
+  color: #ed2353;
+}
+.product_pagination
+  >>> .el-pagination.is-background
+  .el-pager
+  li:not(.disabled):hover {
+  color: #ed2353;
+}
+.product_pagination
+  >>> .el-pagination.is-background
+  .el-pager
+  li:not(.disabled).active {
+  background-color: #ed2353;
+  color: white;
+}
 @screen sm {
   .producto-items-content {
     @apply w-9/5;
@@ -455,12 +562,6 @@ export default {
     @apply w-6/3;
   }
 
-  @screen xxl {
-    .producto-items-content {
-      @apply w-4/6;
-    }
-  }
-
   .tittle {
     line-height: 34px;
     font-size: 24px;
@@ -472,6 +573,11 @@ export default {
   .description {
     line-height: 24px;
     font-size: 14px;
+  }
+}
+@screen xxl {
+  .producto-items-content {
+    @apply w-4/6;
   }
 }
 </style>
