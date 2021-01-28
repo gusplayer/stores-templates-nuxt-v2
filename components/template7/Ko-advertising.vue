@@ -28,7 +28,9 @@
   </div>
 </template>
 <script>
-export default {}
+export default {
+  name: 'Ko-advertising',
+}
 </script>
 <style scoped>
 .advertising-content {

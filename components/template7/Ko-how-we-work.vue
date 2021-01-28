@@ -83,6 +83,7 @@
 </template>
 <script>
 export default {
+  name: 'Ko-how-we-work',
   data() {
     return {
       swiperOption: {

@@ -19,7 +19,7 @@
         <div class="content-item-productos">
           <div class="product-conten-items">
             <div
-              v-for="product in filterProduct"
+              v-for="product in listProducts"
               :key="product.id"
               class="content-products"
             >
@@ -27,7 +27,7 @@
             </div>
           </div>
           <div
-            v-if="(this.fullProducts.length == 0)"
+            v-if="(this.listProducts.length == 0)"
             class="content-products-empty"
           >
             <div class="header-content-logo">
@@ -41,18 +41,6 @@
               </nuxt-link>
             </div>
             <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
-          </div>
-          <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 16">
-              <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="products.length"
-                :page-size="16"
-                :current-page.sync="currentPage"
-                class="pagination"
-              ></el-pagination>
-            </div>
           </div>
         </div>
       </div>
@@ -72,326 +60,33 @@ export default {
     fullProducts: {},
   },
   name: 'Ko-ProductList-1',
-  data() {
-    return {
-      drawerleft: false,
-      directionleft: 'ltr',
-      add: true,
-      search: '',
-      productsCategory: [],
-      price: [0, 1000000],
-      range: {
-        max: 0,
-      },
-      currentPage: 1,
-      sub: -1,
-      show: false,
-      value: '',
-      valuesub: '',
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      toggleCategories: true,
-      indexCategory: 0,
-      indexSelect: '',
-      indexSelect2: '',
-    }
-  },
   mounted() {
-    this.$store.commit('products/SET_FILTER', this.$route.query)
-    if (this.$store.getters['products/filterProducts']) {
-      this.products = this.$store.getters['products/filterProducts']
-      let maxTMP = 0
-      this.products.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
-    }
     let domain = this.$route.fullPath
-    let searchCategory = domain.slice(0, [11])
-    let searchSubCategory = domain.slice(0, [14])
-    if (searchCategory === '/?category=') {
-      this.sendCategoryUrl(domain)
-    } else if (searchSubCategory === '/?subcategory=') {
-      this.SendsubcategoryUrl(domain)
-    } else if (domain == '/') {
-      this.Allcategories()
-    }
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
-    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('SET_STATEBANNER', false)
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: this.nameCategoryHeader,
-      })
-    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      this.$store.commit('SET_STATEBANNER', false)
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.nombre_subcategoria == this.nameSubCategoryHeader
-      )
-      if (filtradoSubCategoria) {
-        this.categorias.find(
-          (element) => element.id == filtradoSubCategoria.categoria
-        )
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: filtradoSubCategoria.id,
-        })
-      }
+    if (domain === '/') {
+      this.clear()
     }
   },
-
   computed: {
-    products: {
-      get() {
-        return this.dataStore.productos
-      },
-      set(value) {
-        this.dataStore.productos = value
-      },
-    },
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    getProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
-      return this.fullProducts
-        .filter((product) => product.categoria == this.select)
-        .slice(initial, final)
-    },
-    filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
-      return this.products.slice(initial, final)
-    },
-    selectedCategory() {
-      return this.$store.state.products.payload
-    },
-    selectedType() {
-      return this.$store.state.products.type
-    },
-    heightHeader() {
-      return this.$refs.header.offsetHeight
-    },
-    nameCategoryHeader() {
-      return this.$store.state.category_producto_header
-    },
-    nameSubCategoryHeader() {
-      return this.$store.state.subcategory_producto_header
-    },
-    searchValue() {
-      return this.$store.state.searchValue
-    },
-    previousPage() {
-      return this.$store.state.previousPage
+    listProducts() {
+      return this.fullProducts.slice(0, 8)
     },
   },
   methods: {
-    back() {
-      this.clear()
-      this.toggleCategories = true
-      this.nameCategory = ''
-    },
-    Allcategories() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'all',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    Searchproduct(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
-    },
-    addClass() {
-      this.add = !this.add
-    },
-    mouseOver(index) {
-      this.sub = index
-      this.show = true
-    },
-    mouseLeave() {
-      this.sub = -1
-      this.show = false
-    },
-    Sendsubcategory(value) {
-      this.indexSelect2 = value
-      this.addClass()
-      this.selectSubcategory = value
-      let filtradoCategoria = this.subcategories.find(
-        (element) => element.id == value
-      )
-      this.nameSubCategory = filtradoCategoria.nombre_subcategoria
-      this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
-        data: value,
-      })
-    },
-    sendCategory(value, categoria, index, ref) {
-      this.indexSelect = index
-      this.currentPage = 1
-      this.nameCategory = value.nombre_categoria_producto
-      this.indexCategory = index
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
-        }
-      })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: value.nombre_categoria_producto,
-      })
-    },
-    breadcrumbsSendCategory(value) {
-      let filtradoCategorias = this.categorias.find((element) => {
-        if (element.nombre_categoria_producto == value) {
-          return element
-        }
-      })
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: filtradoCategorias.nombre_categoria_producto,
-      })
-    },
     clear() {
-      this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
         data: '',
       })
-      this.$emit('clear')
-      this.addClass()
-      this.nameCategory = ''
-    },
-    sendCategoryUrl(value) {
-      let category = value.replace('/?category=', '')
-      let urlFiltrada = decodeURIComponent(category)
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: urlFiltrada,
-      })
-      if (this.$store.getters['products/filterProducts'].length) {
-        this.$store.commit('SET_CATEGORY_PRODCUTRO', urlFiltrada)
-      } else {
-        this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      }
-    },
-    SendsubcategoryUrl(value) {
-      let subcategory = value.replace('/?subcategory=', '')
-      let urlFiltrada = decodeURIComponent(subcategory)
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.nombre_subcategoria == urlFiltrada
-      )
-      if (filtradoSubCategoria) {
-        let filtradoCategorias = this.categorias.find(
-          (element) => element.id == filtradoSubCategoria.categoria
-        )
-
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: filtradoSubCategoria.id,
-        })
-        if (this.$store.getters['products/filterProducts'].length) {
-          this.$store.commit(
-            'SET_CATEGORY_PRODCUTRO',
-            filtradoCategorias.nombre_categoria_producto
-          )
-          this.$store.commit(
-            'SET_SUBCATEGORY_PRODCUTRO',
-            filtradoSubCategoria.nombre_subcategoria
-          )
-        } else {
-          this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-          this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-        }
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: '',
-        })
-      }
     },
   },
   watch: {
-    fullProducts(value) {
-      this.products = value
-      let maxTMP = 0
-      value.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
-    },
-    search(value) {
-      this.Searchproduct(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollBy(0, -1500)
-      }, 250)
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
-      let searchCategory = domain.slice(0, [11])
-      let searchSubCategory = domain.slice(0, [14])
-      if (searchCategory === '/?category=') {
-        this.sendCategoryUrl(domain)
-      } else if (searchSubCategory === '/?subcategory=') {
-        this.SendsubcategoryUrl(domain)
-      } else if (domain == '/') {
-        this.Allcategories()
+      if (domain === '/') {
+        this.clear()
       }
-    },
-    searchValue(value) {
-      this.Searchproduct(value)
     },
   },
 }
@@ -445,15 +140,6 @@ export default {
   justify-content: center;
   flex-direction: column;
 }
-.grid-products {
-  width: 100%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(250px, 2fr));
-  grid-column-gap: 25px;
-  grid-row-gap: 30px;
-  box-sizing: border-box;
-}
 .content-products-empty {
   width: 100%;
   min-height: 200px;
@@ -469,46 +155,6 @@ export default {
   color: #3f3f3f;
   font-weight: 600;
   font-family: 'David Libre', serif !important;
-}
-.pagination-medium {
-  margin-top: 10px;
-  background: transparent;
-}
-.pagination {
-  font-size: 18px;
-  color: #3f3f3f;
-  background: transparent;
-}
-.product_pagination >>> .el-pagination.is-background .btn-next {
-  color: #3f3f3f;
-  background-color: transparent;
-}
-.product_pagination >>> .el-pagination.is-background .btn-prev {
-  color: #3f3f3f;
-  background-color: transparent;
-}
-.product_pagination >>> .el-pagination.is-background .el-pager li {
-  color: #3f3f3f;
-  background-color: transparent;
-}
-.product_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: #ed2353;
-}
-.product_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: #ed2353;
-}
-.product_pagination
-  >>> .el-pagination.is-background
-  .el-pager
-  li:not(.disabled):hover {
-  color: #ed2353;
-}
-.product_pagination
-  >>> .el-pagination.is-background
-  .el-pager
-  li:not(.disabled).active {
-  background-color: #ed2353;
-  color: white;
 }
 @screen sm {
   .producto-items-content {

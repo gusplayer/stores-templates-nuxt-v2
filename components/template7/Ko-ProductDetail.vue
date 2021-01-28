@@ -339,7 +339,6 @@
     </div>
   </div>
 </template>
-content_product_description
 <script>
 import axios from 'axios'
 import ProductSlide from './_productdetails/productSlide'

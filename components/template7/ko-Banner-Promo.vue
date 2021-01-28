@@ -97,6 +97,7 @@
 
 <script>
 export default {
+  name: 'ko-Banner-Promo',
   data() {
     return {
       Banner: [

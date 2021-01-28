@@ -57,7 +57,12 @@
               <div
                 @click="sendCategory(categorys, categorys.id, (ref = false))"
               >
-                <p class="txt-categorys">
+                <p
+                  class="txt-categorys"
+                  :class="
+                    categorys.id == indexSelect ? 'txt-categorys-active' : ''
+                  "
+                >
                   {{ categorys.nombre_categoria_producto }}
                 </p>
               </div>
@@ -65,25 +70,41 @@
           </div>
           <div class="empty"></div>
 
-          <div class="item-tittle" v-if="showSubCategory">
+          <div
+            class="item-tittle"
+            v-if="showSubCategory && selectedSubcategories.length"
+          >
             <p class="txt-tittles">
               {{ $t('home_filtrarpor') }}{{ $t('home_subcategory') }}
             </p>
           </div>
-          <div class="subcategory-list" v-if="showSubCategory">
+          <div
+            class="subcategory-list"
+            v-if="showSubCategory && selectedSubcategories.length"
+          >
             <div
               v-for="(subcategorys, index) in selectedSubcategories"
               :key="index"
             >
               <div @click="Sendsubcategory(subcategorys.id)">
-                <p class="txt-categorys">
+                <p
+                  class="txt-categorys"
+                  :class="
+                    subcategorys.id == indexSelect2
+                      ? 'txt-categorys-active'
+                      : ''
+                  "
+                >
                   {{ subcategorys.nombre_subcategoria }}
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="empty" v-if="showSubCategory"></div>
+        <div
+          class="empty"
+          v-if="showSubCategory && selectedSubcategories.length"
+        ></div>
       </div>
       <div class="content-right">
         <div class="top-content">
@@ -123,6 +144,7 @@
                   <svg
                     @click="showList"
                     class="show-icon"
+                    :class="indexshowList == 1 ? 'show-icon-active' : ''"
                     version="1.1"
                     id="list-view"
                     xmlns="http://www.w3.org/2000/svg"
@@ -144,6 +166,7 @@
                   <svg
                     @click="showGrid2"
                     class="show-icon"
+                    :class="indexshowList == 2 ? 'show-icon-active' : ''"
                     version="1.1"
                     id="Layer_1"
                     xmlns="http://www.w3.org/2000/svg"
@@ -165,6 +188,7 @@
                 <button class="show">
                   <svg
                     @click="showGrid3"
+                    :class="indexshowList == 3 ? 'show-icon-active' : ''"
                     class="show-icon"
                     version="1.1"
                     id="Layer_2"
@@ -192,6 +216,7 @@
                 <button class="show">
                   <svg
                     @click="showGrid4"
+                    :class="indexshowList == 4 ? 'show-icon-active' : ''"
                     class="show-icon"
                     version="1.1"
                     id="Layer_3"
@@ -263,7 +288,6 @@
                 </div>
                 <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
               </div>
-
               <div class="pagination-medium">
                 <div class="product_pagination" v-if="products.length > 16">
                   <el-pagination
@@ -285,12 +309,12 @@
 </template>
 
 <script>
-import KoSocialNet from '../template7/Ko-Social-Networks'
+// import KoSocialNet from '../template7/Ko-Social-Networks'
 import KoProdcutCardFilter from './_productcard/ProductCardFilter'
 import KoProdcutCardFilerList from './_productcard/ProductCardFilterList'
 export default {
   components: {
-    KoSocialNet,
+    // KoSocialNet,
     KoProdcutCardFilter,
     KoProdcutCardFilerList,
   },
@@ -327,33 +351,7 @@ export default {
       indexCategory: 0,
       indexSelect: '',
       indexSelect2: '',
-      secciones: [
-        // {
-        //   name: 'header_inicio',
-        //   path: '/',
-        // },
-        // {
-        //   name: 'header_productos',
-        //   // path: '/productos',
-        //   // iconOpen: 'Flechadown-icon',
-        //   // iconClose: 'FlechaUp-icon',
-        //   ref: 'categorias',
-        // },
-        // {
-        //   name: 'header_categorias',
-        //   iconOpen: 'Flechadown-icon',
-        //   iconClose: 'FlechaUp-icon',
-        //   ref: 'categorias',
-        // },
-        {
-          name: 'header_contacto',
-          path: '/contacto',
-        },
-        {
-          name: 'header_blog',
-          href: '/blog',
-        },
-      ],
+      indexshowList: 3,
     }
   },
   mounted() {
@@ -467,6 +465,7 @@ export default {
   },
   methods: {
     showList() {
+      this.indexshowList = 1
       this.showinList = true
       var gridselector = document.getElementById('grid-selection')
       if (gridselector) {
@@ -477,6 +476,7 @@ export default {
       }
     },
     showGrid2() {
+      this.indexshowList = 2
       this.showinList = false
       var gridselector = document.getElementById('grid-selection')
       if (gridselector) {
@@ -487,6 +487,7 @@ export default {
       }
     },
     showGrid3() {
+      this.indexshowList = 3
       this.showinList = false
       var gridselector = document.getElementById('grid-selection')
       if (gridselector) {
@@ -497,6 +498,7 @@ export default {
       }
     },
     showGrid4() {
+      this.indexshowList = 4
       this.showinList = false
       var dimension = screen.width
       var gridselector = document.getElementById('grid-selection')
@@ -573,6 +575,10 @@ export default {
         filtradoCategorias.nombre_categoria_producto
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.$router.push({
+        path: '',
+        query: { subcategory: this.nameSubCategory },
+      })
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
         type: 'subcategory',
@@ -591,6 +597,10 @@ export default {
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$router.push({
+        path: '',
+        query: { category: this.nameCategory },
+      })
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -624,6 +634,10 @@ export default {
     clear() {
       this.indexSelect = ''
       this.indexSelect2 = ''
+      this.$router.push({
+        path: '',
+        query: {},
+      })
       this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
@@ -970,6 +984,15 @@ export default {
   transition: all 0.25s ease;
   cursor: pointer;
 }
+.txt-categorys-active {
+  @apply w-full flex flex-row justify-start items-center pr-1;
+  color: #0c0c0c;
+  font-size: 14px;
+  font-family: 'Lora', serif !important ;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  font-weight: bold;
+}
 .product-stock {
   color: #333;
   margin-right: 6px;
@@ -987,6 +1010,9 @@ export default {
 }
 .show-icon {
   fill: #8e8e8e;
+}
+.show-icon-active {
+  fill: #0c0c0c;
 }
 .show-icon:hover {
   fill: #333333;

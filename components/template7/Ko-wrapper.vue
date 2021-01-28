@@ -41,6 +41,7 @@
 </template>
 <script>
 export default {
+  name: 'Ko-wrapper',
   props: {
     dataStore: Object,
     settingByTemplate: Object,

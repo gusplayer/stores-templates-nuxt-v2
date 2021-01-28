@@ -35,6 +35,7 @@
 <script>
 import Kblog from '../template7/_blog/blogcard'
 export default {
+  name: 'ko-Blog',
   components: {
     Kblog,
   },

@@ -358,6 +358,7 @@
 </template>
 <script>
 export default {
+  name: 'Ko-Social-Networks',
   props: {
     dataStore: Object,
     settingByTemplate: Object,
