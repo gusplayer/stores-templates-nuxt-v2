@@ -468,6 +468,7 @@ export default {
     },
     addShoppingCart() {
       if (this.product) {
+        this.productIndexCart = null
         this.getDataProduct()
         if (this.product.id == this.idSlug) {
           let product = {
