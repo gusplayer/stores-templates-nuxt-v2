@@ -187,10 +187,12 @@
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             version="1.1"
+            width="60%"
+            height="60%"
             viewBox="0 0 24 24"
           >
             <path
-              d="M19 6H17A5 5 0 0 0 7 6H5A2 2 0 0 0 3 8V20A2 2 0 0 0 5 22H12.05A6.5 6.5 0 0 1 9 16.5A6.4 6.4 0 0 1 10.25 12.68A5 5 0 0 1 7 8H9A3 3 0 0 0 12 11H12.06A6.22 6.22 0 0 1 14.06 10.16A3 3 0 0 0 15 8H17A4.88 4.88 0 0 1 16.54 10.09A6.5 6.5 0 0 1 21 13.09V8A2 2 0 0 0 19 6M9 6A3 3 0 0 1 15 6M19.31 18.9A4.5 4.5 0 1 0 17.88 20.32L21 23.39L22.39 22M15.5 19A2.5 2.5 0 1 1 18 16.5A2.5 2.5 0 0 1 15.5 19Z"
+              d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7.14,4.5 2.78,7.5 1,12C3.39,18.08 10.25,21.06 16.33,18.67C19.38,17.47 21.8,15.06 23,12C21.22,7.5 16.86,4.5 12,4.5M7,22H9V24H7V22M11,22H13V24H11V22M15,22H17V24H15V22Z"
             />
           </svg>
         </div>
@@ -221,7 +223,7 @@
       <div class="precio">
         <div class="content-text-price" v-if="this.product.precio">
           <div
-            class="content-price"
+            class="content-price flex flex-row"
             v-if="this.estadoCart == true && this.minPrice != this.maxPrice"
           >
             <div
@@ -236,7 +238,7 @@
                   )
               }}
             </div>
-            <p class="separator-price">-</p>
+            <p class="separator-price mx-4">-</p>
             <div
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
@@ -530,10 +532,11 @@ export default {
   color: #333;
 }
 .producto {
-  @apply flex flex-col justify-center items-center cursor-pointer mt-8;
+  @apply flex flex-col justify-center items-center cursor-pointer;
 }
 .datos-producto {
   @apply w-full flex flex-col justify-center items-center;
+  padding-bottom: 20px;
 }
 .container {
   @apply relative w-full;
@@ -542,7 +545,7 @@ export default {
   @apply block w-full h-auto;
 }
 .icon {
-  @apply text-white-white;
+  @apply text-2xl text-white-white;
 }
 .cart-Shop {
   @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
@@ -624,19 +627,13 @@ export default {
   transform: translate(-50%, -50%);
   white-space: nowrap;
 }
+
 @screen sm {
   .text-cart {
     @apply hidden;
   }
   .overlay-bottom {
-    @apply absolute right-0 bottom-0 overflow-hidden bg-red-btnhoverproducts transition-all ease-in duration-300;
-    width: 20%;
-    height: 20%;
-    left: 10px;
-    bottom: 10px;
-  }
-  .overlay-bottom:hover {
-    @apply bg-red-btnbannershop;
+    @apply hidden;
   }
   .overlay-top {
     @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-md max-w-full max-h-full transition-all ease-in duration-300;
@@ -645,6 +642,10 @@ export default {
     right: 0;
     width: 20%;
     height: 20%;
+  }
+  .container:hover .overlay-top {
+    width: 20%;
+    left: 80%;
   }
   .overlay-free {
     @apply rounded;
@@ -657,6 +658,11 @@ export default {
     width: 50%;
     height: 10%;
     transition: 0.5s ease;
+  }
+  .container:hover .overlay-free {
+    width: 50%;
+    left: 45%;
+    transition-delay: 700ms;
   }
   .text-free {
     font-size: 75%;
@@ -672,6 +678,10 @@ export default {
     height: 5%;
     /* transition: 0.5s ease; */
   }
+  .container:hover .overlay-polygon {
+    width: 5%;
+    left: 85%;
+  }
   .overlay-sould {
     @apply flex justify-center items-center rounded-l-lg;
     position: absolute;
@@ -684,45 +694,25 @@ export default {
     height: 20%;
     transition: 0.5s ease;
   }
+  .container:hover .overlay-sould {
+    width: 35%;
+    left: 60%;
+    transition-delay: 700ms;
+  }
   .svg-sould-out {
     width: 40px;
     height: 40px;
   }
   .cart-shop {
-    @apply hidden;
+    @apply sr-only hidden;
   }
-  .content-price {
-    @apply flex flex-row justify-center items-center w-full;
-  }
-  .text-price {
-    font-size: 12px;
-  }
-  .separator-price {
-    @apply mx-1;
-  }
-}
-@media (max-width: 425px) {
-  .icon {
-    font-size: 20px;
+  .cart-shop-mobile {
+    @apply not-sr-only block;
   }
   .icon-show-mobile {
-    width: 20px;
-  }
-}
-@media (min-width: 426px) {
-  .icon {
-    font-size: 25px;
-  }
-  .icon-show-mobile {
-    width: 25px;
-  }
-}
-@media (min-width: 530px) {
-  .icon {
-    font-size: 30px;
-  }
-  .icon-show-mobile {
-    width: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2.5px;
   }
 }
 @screen md {
@@ -733,26 +723,8 @@ export default {
     width: 60px;
     height: 60px;
   }
-  .text-price {
-    font-size: 15px;
-  }
-  .separator-price {
-    @apply mx-4;
-  }
-}
-@media (max-width: 1279px) {
-  .overlay-bottom {
-    @apply flex justify-center items-center right-0 bottom-0 overflow-hidden bg-red-btnhoverproducts transition-all ease-in duration-300;
-    width: 18%;
-    height: 18%;
-    left: 10px;
-    bottom: 10px;
-  }
-  .overlay-bottom:hover {
-    @apply bg-red-btnbannershop;
-  }
-  .cart-shop-mobile {
-    @apply flex;
+  .icon {
+    margin-top: 2px;
   }
 }
 @screen mlg {
@@ -761,6 +733,9 @@ export default {
   }
   .text-cart {
     @apply block;
+  }
+  .overlay-bottom {
+    @apply flex;
   }
   .overlay-bottom {
     @apply absolute w-full left-0 right-0 bottom-0 overflow-hidden h-0 bg-red-btnhoverproducts transition-all ease-in duration-300;
@@ -840,10 +815,10 @@ export default {
     height: 60px;
   }
   .cart-shop {
-    @apply flex;
+    @apply not-sr-only block;
   }
   .cart-shop-mobile {
-    @apply hidden;
+    @apply sr-only hidden;
   }
 }
 </style>

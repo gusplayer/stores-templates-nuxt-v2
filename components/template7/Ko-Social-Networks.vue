@@ -9,18 +9,64 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            focusable="false"
-            data-prefix="fab"
-            data-icon="facebook"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:svgjs="http://svgjs.com/svgjs"
+            version="1.1"
+            width="100%"
+            height="100%"
+            x="0"
+            y="0"
+            viewBox="0 0 112.196 112.196"
+            style="enable-background: new 0 0 512 512;"
+            xml:space="preserve"
             class="facebook-icon"
-            role="img"
-            viewBox="0 0 512 512"
           >
-            <path
-              fill="#3b5998"
-              d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"
+            <circle
+              class="circle-facebook"
+              r="56.098"
+              cx="56.098"
+              cy="56.098"
+              fill="#cccccc"
+              shape="circle"
+              transform="matrix(0.8,0,0,0.8,11.219599914550777,11.219599914550777)"
             />
+            <g
+              transform="matrix(0.7,0,0,0.7,16.829399871826176,16.829399871826176)"
+            >
+              <g xmlns="http://www.w3.org/2000/svg">
+                <circle
+                  style=""
+                  cx="56.098"
+                  cy="56.098"
+                  r="56.098"
+                  fill="#ffffff"
+                  data-original="#3b5998"
+                  class="circle-facebook"
+                />
+                <path
+                  style=""
+                  d="M70.201,58.294h-10.01v36.672H45.025V58.294h-7.213V45.406h7.213v-8.34   c0-5.964,2.833-15.303,15.301-15.303L71.56,21.81v12.51h-8.151c-1.337,0-3.217,0.668-3.217,3.513v7.585h11.334L70.201,58.294z"
+                  fill="#999999"
+                  data-original="#ffffff"
+                  class="facebook-icon-circle"
+                />
+              </g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+            </g>
           </svg>
         </a>
       </div>
@@ -32,18 +78,66 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            focusable="false"
-            data-prefix="fab"
-            data-icon="twitter"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:svgjs="http://svgjs.com/svgjs"
+            version="1.1"
+            width="100%"
+            height="100%"
+            x="0"
+            y="0"
+            viewBox="0 0 112.197 112.197"
+            style="enable-background: new 0 0 512 512;"
+            xml:space="preserve"
             class="twitter-icon"
-            role="img"
-            viewBox="0 0 512 512"
           >
-            <path
-              fill="#00acee"
-              d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+            <circle
+              class="circle-twitter"
+              r="56.0985"
+              cx="56.0985"
+              cy="56.0985"
+              fill="#cccccc"
+              shape="circle"
+              transform="matrix(0.8,0,0,0.8,11.21969985961914,11.21969985961914)"
             />
+            <g
+              transform="matrix(0.7,0,0,0.7,16.829699707031253,16.829399871826176)"
+            >
+              <g xmlns="http://www.w3.org/2000/svg">
+                <circle
+                  style=""
+                  cx="56.099"
+                  cy="56.098"
+                  r="56.098"
+                  fill="#ffffff"
+                  data-original="#55acee"
+                  class="circle-twitter"
+                />
+                <g>
+                  <path
+                    style=""
+                    d="M90.461,40.316c-2.404,1.066-4.99,1.787-7.702,2.109c2.769-1.659,4.894-4.284,5.897-7.417    c-2.591,1.537-5.462,2.652-8.515,3.253c-2.446-2.605-5.931-4.233-9.79-4.233c-7.404,0-13.409,6.005-13.409,13.409    c0,1.051,0.119,2.074,0.349,3.056c-11.144-0.559-21.025-5.897-27.639-14.012c-1.154,1.98-1.816,4.285-1.816,6.742    c0,4.651,2.369,8.757,5.965,11.161c-2.197-0.069-4.266-0.672-6.073-1.679c-0.001,0.057-0.001,0.114-0.001,0.17    c0,6.497,4.624,11.916,10.757,13.147c-1.124,0.308-2.311,0.471-3.532,0.471c-0.866,0-1.705-0.083-2.523-0.239    c1.706,5.326,6.657,9.203,12.526,9.312c-4.59,3.597-10.371,5.74-16.655,5.74c-1.08,0-2.15-0.063-3.197-0.188    c5.931,3.806,12.981,6.025,20.553,6.025c24.664,0,38.152-20.432,38.152-38.153c0-0.581-0.013-1.16-0.039-1.734    C86.391,45.366,88.664,43.005,90.461,40.316L90.461,40.316z"
+                    fill="#999999"
+                    data-original="#f1f2f2"
+                    class="twitter-icon-circle"
+                  />
+                </g>
+              </g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+            </g>
           </svg>
         </a>
       </div>
@@ -52,94 +146,125 @@
           target="_blank"
           rel="noreferrer noopener"
           :href="dataStore.tienda.red_instagram"
+          @mouseover="hover = true"
+          @mouseleave="hover = false"
         >
           <svg
-            class="instagram-icon"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:svgjs="http://svgjs.com/svgjs"
             version="1.1"
-            id="Layer_1"
-            x="0px"
-            y="0px"
-            viewBox="0 0 551.034 551.034"
-            style="enable-background: new 0 0 551.034 551.034;"
+            width="100%"
+            height="100%"
+            x="0"
+            y="0"
+            viewBox="0 0 512 512"
+            style="enable-background: new 0 0 512 512;"
             xml:space="preserve"
+            class="instagram-icon"
           >
-            <g>
-              <linearGradient
-                id="SVGID_1_"
-                gradientUnits="userSpaceOnUse"
-                x1="275.517"
-                y1="4.57"
-                x2="275.517"
-                y2="549.72"
-                gradientTransform="matrix(1 0 0 -1 0 554)"
-              >
-                <stop offset="0" style="stop-color: #e09b3d;" />
-                <stop offset="0.3" style="stop-color: #c74c4d;" />
-                <stop offset="0.6" style="stop-color: #c21975;" />
-                <stop offset="1" style="stop-color: #7024c4;" />
-              </linearGradient>
-              <path
-                style="fill: url(#SVGID_1_);"
-                d="M386.878,0H164.156C73.64,0,0,73.64,0,164.156v222.722   c0,90.516,73.64,164.156,164.156,164.156h222.722c90.516,0,164.156-73.64,164.156-164.156V164.156   C551.033,73.64,477.393,0,386.878,0z M495.6,386.878c0,60.045-48.677,108.722-108.722,108.722H164.156   c-60.045,0-108.722-48.677-108.722-108.722V164.156c0-60.046,48.677-108.722,108.722-108.722h222.722   c60.045,0,108.722,48.676,108.722,108.722L495.6,386.878L495.6,386.878z"
-              />
-
-              <linearGradient
-                id="SVGID_2_"
-                gradientUnits="userSpaceOnUse"
-                x1="275.517"
-                y1="4.57"
-                x2="275.517"
-                y2="549.72"
-                gradientTransform="matrix(1 0 0 -1 0 554)"
-              >
-                <stop offset="0" style="stop-color: #e09b3d;" />
-                <stop offset="0.3" style="stop-color: #c74c4d;" />
-                <stop offset="0.6" style="stop-color: #c21975;" />
-                <stop offset="1" style="stop-color: #7024c4;" />
-              </linearGradient>
-              <path
-                style="fill: url(#SVGID_2_);"
-                d="M275.517,133C196.933,133,133,196.933,133,275.516s63.933,142.517,142.517,142.517   S418.034,354.1,418.034,275.516S354.101,133,275.517,133z M275.517,362.6c-48.095,0-87.083-38.988-87.083-87.083   s38.989-87.083,87.083-87.083c48.095,0,87.083,38.988,87.083,87.083C362.6,323.611,323.611,362.6,275.517,362.6z"
-              />
-
-              <linearGradient
-                id="SVGID_3_"
-                gradientUnits="userSpaceOnUse"
-                x1="418.31"
-                y1="4.57"
-                x2="418.31"
-                y2="549.72"
-                gradientTransform="matrix(1 0 0 -1 0 554)"
-              >
-                <stop offset="0" style="stop-color: #e09b3d;" />
-                <stop offset="0.3" style="stop-color: #c74c4d;" />
-                <stop offset="0.6" style="stop-color: #c21975;" />
-                <stop offset="1" style="stop-color: #7024c4;" />
-              </linearGradient>
+            <g v-if="!hover">
               <circle
-                style="fill: url(#SVGID_3_);"
-                cx="418.31"
-                cy="134.07"
-                r="34.15"
+                class="circle-instagram"
+                r="256"
+                cx="256"
+                cy="256"
+                fill="#cccccc"
+                shape="circle"
+                transform="matrix(0.8,0,0,0.8,51.19999999999999,51.19999999999999)"
               />
             </g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
+            <g v-if="hover">
+              <circle
+                class="circle-instagram"
+                r="256"
+                cx="256"
+                cy="256"
+                fill="url(#a)"
+                data-original="#cccccc"
+                shape="circle"
+                transform="matrix(0.8,0,0,0.8,51.19999999999999,51.19999999999999)"
+              />
+              <linearGradient
+                class="circle-instagram"
+                xmlns="http://www.w3.org/2000/svg"
+                id="a"
+                gradientTransform="matrix(1 0 0 -1 0 -20854)"
+                gradientUnits="userSpaceOnUse"
+                x1="0"
+                x2="512"
+                y1="-21110"
+                y2="-21110"
+              >
+                <stop stop-opacity="1" stop-color="#f5b300" offset="0" />
+                <stop stop-opacity="1" stop-color="#ea00f3" offset="1" />
+              </linearGradient>
+            </g>
+            <g
+              transform="matrix(0.7,0,0,0.7,76.80000000000001,76.80000000000001)"
+            >
+              <linearGradient
+                v-if="!hover"
+                xmlns="http://www.w3.org/2000/svg"
+                id="a"
+                gradientTransform="matrix(1 0 0 -1 0 -20854)"
+                gradientUnits="userSpaceOnUse"
+                x1="0"
+                x2="512"
+                y1="-21110"
+                y2="-21110"
+              >
+                <stop stop-opacity="1" stop-color="#ffffff" offset="1" />
+                <stop stop-opacity="1" stop-color="#009eff" offset="1" />
+              </linearGradient>
+              <linearGradient
+                v-if="hover"
+                xmlns="http://www.w3.org/2000/svg"
+                id="a"
+                gradientTransform="matrix(1 0 0 -1 0 -20854)"
+                gradientUnits="userSpaceOnUse"
+                x1="0"
+                x2="512"
+                y1="-21110"
+                y2="-21110"
+              >
+                <stop stop-opacity="1" stop-color="#f5b300" offset="0" />
+                <stop stop-opacity="1" stop-color="#ea00f3" offset="1" />
+              </linearGradient>
+
+              <path
+                class="circle-instagram"
+                xmlns="http://www.w3.org/2000/svg"
+                d="m512 256c0 141.386719-114.613281 256-256 256s-256-114.613281-256-256 114.613281-256 256-256 256 114.613281 256 256zm0 0"
+                fill="url(#a)"
+                data-original="url(#a)"
+                style=""
+              />
+
+              <g xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="m329.636719 433h-147.273438c-56.996093 0-103.363281-46.367188-103.363281-103.363281v-147.273438c0-56.996093 46.367188-103.363281 103.363281-103.363281h147.273438c56.996093 0 103.363281 46.367188 103.363281 103.363281v147.273438c0 56.996093-46.367188 103.363281-103.363281 103.363281zm-147.273438-324c-40.453125 0-73.363281 32.910156-73.363281 73.363281v147.273438c0 40.453125 32.910156 73.363281 73.363281 73.363281h147.273438c40.453125 0 73.363281-32.910156 73.363281-73.363281v-147.273438c0-40.453125-32.910156-73.363281-73.363281-73.363281zm0 0"
+                  fill="#999999"
+                  data-original="#ffffff"
+                  style=""
+                  class="instagram-icon-circle"
+                />
+                <path
+                  d="m256 352c-52.933594 0-96-43.066406-96-96s43.066406-96 96-96 96 43.066406 96 96-43.066406 96-96 96zm0-162c-36.394531 0-66 29.605469-66 66s29.605469 66 66 66 66-29.605469 66-66-29.605469-66-66-66zm0 0"
+                  fill="#999999"
+                  data-original="#ffffff"
+                  style=""
+                  class="instagram-icon-circle"
+                />
+                <path
+                  d="m365.832031 159.898438c0 7.582031-6.148437 13.730468-13.730469 13.730468-7.582031 0-13.730468-6.148437-13.730468-13.730468 0-7.582032 6.148437-13.730469 13.730468-13.730469 7.582032 0 13.730469 6.148437 13.730469 13.730469zm0 0"
+                  fill="#999999"
+                  data-original="#ffffff"
+                  style=""
+                  class="instagram-icon-circle"
+                />
+              </g>
+            </g>
           </svg>
         </a>
       </div>
@@ -151,18 +276,80 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            focusable="false"
-            data-prefix="fab"
-            data-icon="youtube"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:svgjs="http://svgjs.com/svgjs"
+            version="1.1"
+            width="100%"
+            height="100%"
+            x="0"
+            y="0"
+            viewBox="0 0 473.931 473.931"
+            style="enable-background: new 0 0 512 512;"
+            xml:space="preserve"
             class="youtube-icon"
-            role="img"
-            viewBox="0 0 576 512"
           >
-            <path
-              fill="#c4302b"
-              d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"
+            <circle
+              class="circle-youtube"
+              r="236.9655"
+              cx="236.9655"
+              cy="236.9655"
+              fill="#cccccc"
+              shape="circle"
+              transform="matrix(0.8,0,0,0.8,47.393099975585926,47.393099975585926)"
             />
+            <g
+              transform="matrix(0.7,0,0,0.7,71.08980102539064,71.08980102539064)"
+            >
+              <circle
+                xmlns="http://www.w3.org/2000/svg"
+                style=""
+                cx="236.966"
+                cy="236.966"
+                r="236.966"
+                fill="#ffffff"
+                data-original="#d42428"
+                class="circle-youtube"
+              />
+              <path
+                xmlns="http://www.w3.org/2000/svg"
+                style=""
+                d="M404.518,69.38c92.541,92.549,92.549,242.593,0,335.142c-92.541,92.541-242.593,92.545-335.142,0  L404.518,69.38z"
+                fill="#ffffff"
+                data-original="#cc202d"
+                class="circle-youtube"
+              />
+              <path
+                xmlns="http://www.w3.org/2000/svg"
+                style=""
+                d="M469.168,284.426L351.886,167.148l-138.322,15.749l-83.669,129.532l156.342,156.338  C378.157,449.322,450.422,376.612,469.168,284.426z"
+                fill="#ffffff"
+                data-original="#ba202e"
+                class="circle-youtube"
+              />
+              <path
+                xmlns="http://www.w3.org/2000/svg"
+                style=""
+                d="M360.971,191.238c0-19.865-16.093-35.966-35.947-35.966H156.372c-19.85,0-35.94,16.105-35.94,35.966  v96.444c0,19.865,16.093,35.966,35.94,35.966h168.649c19.858,0,35.947-16.105,35.947-35.966v-96.444H360.971z M216.64,280.146  v-90.584l68.695,45.294L216.64,280.146z"
+                fill="#999999"
+                data-original="#ffffff"
+                class="youtube-icon-circle"
+              />
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+              <g xmlns="http://www.w3.org/2000/svg"></g>
+            </g>
           </svg>
         </a>
       </div>
@@ -176,7 +363,9 @@ export default {
     settingByTemplate: Object,
   },
   data() {
-    return {}
+    return {
+      hover: false,
+    }
   },
   watch: {
     'dataStore.tienda'() {
@@ -196,14 +385,57 @@ export default {
   @apply w-auto flex flex-wrap justify-center items-center;
 }
 .icons-networks {
-  @apply mx-4;
+  margin-right: 1px;
+  margin-left: 1px;
 }
 .facebook-icon,
 .twitter-icon,
 .instagram-icon,
 .youtube-icon {
-  width: 22px;
-  height: 22px;
-  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  /* cursor: pointer; */
+}
+.circle-twitter,
+.twitter-icon-circle,
+.circle-facebook,
+.facebook-icon-circle,
+.circle-youtube,
+.youtube-icon-circle {
+  transition: all 200ms ease-in;
+}
+.twitter-icon:hover .circle-twitter {
+  transition: all 200ms ease-in;
+  fill: #00acee;
+}
+.twitter-icon:hover .twitter-icon-circle {
+  transition: all 200ms ease-in;
+  fill: #ffffff;
+}
+
+.facebook-icon:hover .circle-facebook {
+  transition: all 200ms ease-in;
+  fill: #3b5998;
+}
+.facebook-icon:hover .facebook-icon-circle {
+  transition: all 200ms ease-in;
+  fill: #ffffff;
+}
+
+.youtube-icon:hover .circle-youtube {
+  transition: all 200ms ease-in;
+  fill: #f61c0d;
+}
+.youtube-icon:hover .youtube-icon-circle {
+  transition: all 200ms ease-in;
+  fill: #ffffff;
+}
+.circle-instagram,
+.instagram-icon-circle {
+  transition: all 200ms ease-in;
+}
+.instagram-icon:hover .instagram-icon-circle {
+  transition: all 200ms ease-in;
+  fill: #ffffff;
 }
 </style>

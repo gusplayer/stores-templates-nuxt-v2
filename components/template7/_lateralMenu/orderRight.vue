@@ -1314,7 +1314,7 @@ export default {
   align-self: center;
 }
 .photo {
-  width: 120px;
+  width: 100%;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;

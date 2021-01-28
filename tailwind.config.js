@@ -100,9 +100,6 @@ module.exports = {
         '90': '90px',
         '100': '100px',
       },
-      fontFamily: {
-        sans: ['ui-sans-serif'],
-      },
       maxHeight: {
         '0': '0',
         '1': '25%',
@@ -111,9 +108,6 @@ module.exports = {
         '16': '4rem',
         '230': '14rem',
         full: '100%',
-      },
-      fontFamily: {
-        dancing: ['Dancing Script'],
       },
       fontSize: {
         xs: '.75rem',
@@ -154,17 +148,19 @@ module.exports = {
         bannerbg3:
           "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610007018/Komercia/Carousel-Slider/flowers-slider-3-bg_fyovcu.jpg')",
         promobg1:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/v1609626112/Komercia/Promo-wrapper/flowers-banner-large-min_kdnmvh.jpg')",
+          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-banner-large-min_kdnmvh.jpg')",
         promobg2:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/v1609626133/Komercia/Promo-wrapper/flowers-banner-medium-top_irhu3b.jpg')",
+          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-banner-medium-top_irhu3b.jpg')",
         promobg3:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/v1609626154/Komercia/Promo-wrapper/flowers-banner-medium-bottom_rnpeht.jpg')",
+          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-banner-medium-bottom_rnpeht.jpg')",
         promobg4:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/v1609626183/Komercia/Promo-wrapper/flowers-bottom-right-full-heigh-min_qdbqsb.jpg')",
+          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-bottom-right-full-heigh-min_gbnlij.jpg')",
         advertisingbg:
           "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609975091/Komercia/PublicShare/flowers-discount-bg-opt_yvc5ta.jpg')",
         hworkbg:
           "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610008708/Komercia/Work/flowers-infobox-line-bg_wcixcy.svg')",
+        shopbg:
+          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1611623008/Komercia/Shop/flowers-shoppage_jwuds4.jpg')",
       }),
     },
     screens: {
@@ -204,7 +200,6 @@ module.exports = {
         btnhoverHeader: '#ED2353',
         btnbannershop: '#ED2353',
         btnbannershophover: '#D7204B',
-
         btnhoverproducts: '#F14F75',
       },
       gray: {
@@ -220,9 +215,6 @@ module.exports = {
         headerpage: '#93646A',
         btnbannerviewhover: '#C18F96',
       },
-    },
-    fontFamily: {
-      dancing: ['Dancing Script'],
     },
   },
   variants: {},

@@ -89,17 +89,26 @@ export default {
         slidesPerView: 'auto',
         spaceBetween: 20,
         breakpoints: {
-          580: {
-            slidesPerView: 1,
-            spaceBetween: 0,
-          },
-          1024: {
-            slidesPerView: 2,
-            spaceBetween: 0,
+          10000: {
+            slidesPerView: 3,
+            spaceBetween: 20,
           },
           2560: {
             slidesPerView: 3,
-            spaceBetween: 0,
+            spaceBetween: 10,
+          },
+          1920: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          1024: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+
+          425: {
+            slidesPerView: 1,
+            spaceBetween: 10,
           },
         },
       },
@@ -111,7 +120,6 @@ export default {
     },
   },
   mounted() {
-    // console.log('Current Swiper instance object', this.mySwiper)
     this.mySwiper.slideTo(3, 1000, false)
   },
 }

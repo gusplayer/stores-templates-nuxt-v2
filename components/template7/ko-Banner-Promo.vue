@@ -5,7 +5,6 @@
         <figure class="promo-banner-images" id="promo-banner-images-1">
           <img
             id="images-1"
-            class="images"
             src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-banner-large-min_kdnmvh.jpg"
             alt="left-banner"
           />
@@ -29,13 +28,14 @@
           <div class="banner-border-1"></div>
         </figure>
       </div>
-
       <div class="banner-medium">
         <div class="promo-banner-2">
           <figure class="promo-banner-images" id="promo-banner-images-2">
             <img
               id="images-2"
               class="images"
+              width="384"
+              height="230"
               src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-banner-medium-top_irhu3b.jpg"
               alt="medium-top-banner"
             />
@@ -54,6 +54,8 @@
             <img
               id="images-3"
               class="images"
+              width="384"
+              height="230"
               src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-banner-medium-bottom_rnpeht.jpg"
               alt="medium-bottom-banner"
             />
@@ -73,6 +75,8 @@
           <img
             id="images-4"
             class="images"
+            width="283"
+            height="480"
             src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-bottom-right-full-heigh-min_gbnlij.jpg"
             alt="right-banner"
           />
@@ -234,7 +238,7 @@ figure {
     @apply not-sr-only;
   }
   .promo-banner-items {
-    @apply w-full;
+    @apply w-9/5;
   }
   .banner-border-1 {
     @apply absolute border-4 border-white-white border-opacity-50 z-auto;
@@ -272,7 +276,7 @@ figure {
     @apply w-8/0 text-center;
   }
   .promo-banner-subtittle {
-    line-height: 58px;
+    line-height: 30px;
     font-size: 12px;
   }
   #promo-banner-subtittle-medium {
@@ -288,9 +292,39 @@ figure {
     @apply pr-16 leading-normal  ;
   }
 }
+@media (min-width:900px){
+    .banner-border-1 {
+    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
+    padding-top: 160px;
+    padding-left: 160px;
+  }
+  .banner-border-2 {
+    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
+    padding-top: 160px;
+    padding-left: 80px;
+  }
+}
+@media (min-width:970px){
+    .banner-border-1 {
+    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
+    padding-top: 190px;
+    /* padding-bottom: 140px; */
+    
+    padding-left: 190px;
+    /* padding-right: 130px; */
+  }
+  .banner-border-2 {
+    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
+    padding-top: 190px;
+    /* padding-bottom: 128px; */
+    
+    padding-left: 100px;
+    /* padding-right: 70px; */
+  }
+}
 @screen lg {
   .promo-banner-items {
-    @apply w-9/7;
+    @apply w-9/5;
   }
   .banner-border-1 {
     @apply absolute border-4 border-white-white border-opacity-50 z-auto;
@@ -342,6 +376,42 @@ figure {
   }
   .banner-content-buttons{
     @apply not-sr-only;
+  }
+}
+@media (min-width:1120px){
+  .banner-border-1 {
+    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
+    padding-top: 210px;    
+    padding-left: 210px;
+  }
+  .banner-border-2 {
+    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
+    padding-top: 210px;    
+    padding-left: 110px;
+  }
+}
+@media (min-width:1180px){
+    .banner-border-1 {
+    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
+    padding-top: 220px;    
+    padding-left: 220px;
+  }
+  .banner-border-2 {
+    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
+    padding-top: 210px;    
+    padding-left: 110px;
+  }
+}
+@media (min-width:1240px){
+    .banner-border-1 {
+    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
+    padding-top: 230px;    
+    padding-left: 230px;
+  }
+  .banner-border-2 {
+    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
+    padding-top: 230px;
+    padding-left: 130px;
   }
 }
 @screen mlg {
@@ -396,7 +466,7 @@ figure {
   #promo-banner-tittle-2, #promo-banner-tittle-3, #promo-banner-subtittle-medium {
     @apply pr-40 leading-normal  ;
   }
-  
+
 }
 @screen xl {
   .promo-banner-items {
@@ -447,6 +517,7 @@ figure {
   #promo-banner-tittle-2, #promo-banner-tittle-3, #promo-banner-subtittle-medium {
     @apply pr-40 leading-normal  ;
   }
+
 }
 @screen xml {
   .promo-banner-items {
