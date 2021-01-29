@@ -84,7 +84,7 @@
         </button>
       </div>
     </div>
-    <no-ssr>
+    <client-only>
       <noscript>
         <iframe
           v-if="
@@ -96,7 +96,7 @@
           style="display: none; visibility: hidden; opacity: 0;"
         ></iframe>
       </noscript>
-    </no-ssr>
+    </client-only>
   </div>
 </template>
 

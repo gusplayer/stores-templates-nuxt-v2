@@ -2,14 +2,14 @@
   <div class="wrapper-banner">
     <div class="header-content-logo" v-if="this.banner">
       <div class="wrapper-banner" v-if="this.banner.banner">
-        <no-ssr>
+        <client-only>
           <img
             loading="lazy"
             :src="idCloudinaryBanner(this.banner.banner)"
             class="banner"
             alt="Banner tienda"
           />
-        </no-ssr>
+        </client-only>
       </div>
     </div>
   </div>

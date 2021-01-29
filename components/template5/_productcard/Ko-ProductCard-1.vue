@@ -6,7 +6,7 @@
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
-          <no-ssr>
+          <client-only>
             <img
               v-if="!soldOut"
               v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
@@ -19,7 +19,7 @@
               class="product-image-soldOut"
               alt="Product Img"
             />
-          </no-ssr>
+          </client-only>
           <div class="image_overlay"></div>
         </router-link>
         <div class="separador-stats"></div>
@@ -113,7 +113,7 @@
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
-          <no-ssr>
+          <client-only>
             <img
               v-if="!soldOut"
               v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
@@ -126,7 +126,7 @@
               class="product-image-soldOut"
               alt="Product Img"
             />
-          </no-ssr>
+          </client-only>
         </router-link>
         <div class="content-card-items">
           <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
