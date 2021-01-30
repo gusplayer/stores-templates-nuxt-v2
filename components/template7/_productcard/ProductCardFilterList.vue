@@ -5,7 +5,7 @@
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
       >
-        <no-ssr>
+        <client-only>
           <img
             v-if="!soldOut"
             v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
@@ -18,7 +18,7 @@
             class="product-image-soldOut"
             alt="Product Img"
           />
-        </no-ssr>
+        </client-only>
         <div class="image_overlay"></div>
       </router-link>
 
@@ -468,6 +468,7 @@ export default {
     },
     addShoppingCart() {
       if (this.product) {
+        this.productIndexCart = null
         this.getDataProduct()
         if (this.product.id == this.idSlug) {
           let product = {

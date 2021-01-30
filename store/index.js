@@ -173,10 +173,10 @@ export const state = () => ({
       3: 'Carrito',
       4: 'Contacto',
     },
-    '--title_1': 'Accesorios para mujer hechos a mano',
-    '--description':
+    title: 'Accesorios para mujer hechos a mano',
+    description:
       'Laura Pachecho es una emprendedora con años de experiencia creando accesorios de alta calidad.',
-    '--text_btn': 'Conócenos',
+    text_btn: 'Conócenos',
   },
   headerk07: false,
 })

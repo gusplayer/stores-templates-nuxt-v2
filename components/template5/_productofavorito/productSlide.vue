@@ -6,9 +6,9 @@
         v-for="(product, index) in this.products"
         :key="index"
       >
-        <no-ssr>
+        <client-only>
           <KoProductCard1 :product="product"></KoProductCard1>
-        </no-ssr>
+        </client-only>
       </div>
     </div>
     <!-- <div

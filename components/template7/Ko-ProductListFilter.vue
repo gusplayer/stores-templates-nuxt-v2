@@ -134,9 +134,42 @@
               <div class="show-number-items">
                 <p class="product-stock">
                   {{ $t('home_mostrar') }}
-                  <span class="separator-breadCrumbs">/</span>
-                  {{ dataStore.productos.length }}
-                  <span class="separator-breadCrumbs">/</span>
+                  <span
+                    @click="shoView2"
+                    :class="
+                      this.indexshowView == 1
+                        ? 'product-stock-active'
+                        : 'product-stock-text'
+                    "
+                  >
+                    <span class="separator-breadCrumbs">/</span>
+                    2
+                    <span class="separator-breadCrumbs">/</span>
+                  </span>
+                  <span
+                    @click="shoView4"
+                    :class="
+                      this.indexshowView == 2
+                        ? 'product-stock-active'
+                        : 'product-stock-text'
+                    "
+                  >
+                    <span class="separator-breadCrumbs">/</span>
+                    4
+                    <span class="separator-breadCrumbs">/</span>
+                  </span>
+                  <span
+                    @click="shoView16"
+                    :class="
+                      this.indexshowView == 3
+                        ? 'product-stock-active'
+                        : 'product-stock-text'
+                    "
+                  >
+                    <span class="separator-breadCrumbs">/</span>
+                    16
+                    <span class="separator-breadCrumbs">/</span>
+                  </span>
                 </p>
               </div>
               <div class="show-view-per-list">
@@ -289,12 +322,15 @@
                 <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
               </div>
               <div class="pagination-medium">
-                <div class="product_pagination" v-if="products.length > 16">
+                <div
+                  class="product_pagination"
+                  v-if="products.length > this.numVistas"
+                >
                   <el-pagination
                     background
                     layout="prev, pager, next"
                     :total="products.length"
-                    :page-size="16"
+                    :page-size="this.numVistas"
                     :current-page.sync="currentPage"
                     class="pagination"
                   ></el-pagination>
@@ -323,37 +359,6 @@ export default {
     fullProducts: {},
   },
   name: 'Ko-ProductList-Filter',
-  data() {
-    return {
-      showinList: false,
-      showSubCategory: false,
-      statesub: false,
-      rangeSlide: [0, 1000000],
-      drawerleft: false,
-      directionleft: 'ltr',
-      add: true,
-      search: '',
-      productsCategory: [],
-      price: [0, 1000000],
-      range: {
-        max: 0,
-      },
-      currentPage: 1,
-      sub: -1,
-      show: false,
-      value: '',
-      valuesub: '',
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      toggleCategories: true,
-      indexCategory: 0,
-      indexSelect: '',
-      indexSelect2: '',
-      indexshowList: 3,
-    }
-  },
   mounted() {
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
@@ -410,7 +415,39 @@ export default {
       }
     }
   },
-
+  data() {
+    return {
+      showinList: false,
+      showSubCategory: false,
+      statesub: false,
+      rangeSlide: [0, 1000000],
+      drawerleft: false,
+      directionleft: 'ltr',
+      add: true,
+      search: '',
+      productsCategory: [],
+      price: [0, 1000000],
+      range: {
+        max: 0,
+      },
+      currentPage: 1,
+      sub: -1,
+      show: false,
+      value: '',
+      valuesub: '',
+      selectSubcategory: '',
+      nameCategory: '',
+      nameSubCategory: '',
+      selectedSubcategories: [],
+      toggleCategories: true,
+      indexCategory: 0,
+      indexSelect: '',
+      indexSelect2: '',
+      indexshowList: 3,
+      indexshowView: 3,
+      numVistas: 16,
+    }
+  },
   computed: {
     products: {
       get() {
@@ -427,8 +464,8 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * this.numVistas - this.numVistas
+      const final = initial + this.numVistas
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
@@ -437,8 +474,8 @@ export default {
       return this.$store.state.listArticulos.length
     },
     filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * this.numVistas - this.numVistas
+      const final = initial + this.numVistas
       return this.products.slice(initial, final)
     },
     selectedCategory() {
@@ -446,9 +483,6 @@ export default {
     },
     selectedType() {
       return this.$store.state.products.type
-    },
-    heightHeader() {
-      return this.$refs.header.offsetHeight
     },
     nameCategoryHeader() {
       return this.$store.state.category_producto_header
@@ -474,6 +508,18 @@ export default {
           'grid-template-columns: repeat(1, minmax(0, 1fr))'
         )
       }
+    },
+    shoView2() {
+      this.indexshowView = 1
+      this.numVistas = 2
+    },
+    shoView4() {
+      this.indexshowView = 2
+      this.numVistas = 4
+    },
+    shoView16() {
+      this.indexshowView = 3
+      this.numVistas = 16
     },
     showGrid2() {
       this.indexshowList = 2
@@ -885,6 +931,18 @@ export default {
   font-size: 14px;
   font-family: 'Lora', serif !important ;
   cursor: pointer;
+}
+.product-stock-text {
+  color: #8e8e8e;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: 'Lora', serif !important ;
+}
+.product-stock-active {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 15px;
+  font-family: 'Lora', serif !important ;
 }
 .text-categorias-select {
   width: 100%;
