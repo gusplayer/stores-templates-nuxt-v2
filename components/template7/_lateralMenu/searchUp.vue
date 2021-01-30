@@ -212,6 +212,7 @@ export default {
 
 <style scoped>
 .products-search {
+  width: 100%;
   overflow-y: auto;
   z-index: 10;
 }

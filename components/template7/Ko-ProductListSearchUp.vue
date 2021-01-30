@@ -399,7 +399,7 @@ export default {
 
 <style scoped>
 .product-content {
-  @apply flex flex-col justify-center items-center w-full my-80;
+  @apply w-full flex flex-col justify-center items-center w-full my-80;
 }
 .product-text,
 .product-conten-items {

@@ -134,44 +134,12 @@
               <div class="show-number-items">
                 <p class="product-stock">
                   {{ $t('home_mostrar') }}
-                  <span
-                    @click="shoView2"
-                    :class="
-                      this.indexshowView == 1
-                        ? 'product-stock-active'
-                        : 'product-stock-text'
-                    "
-                  >
-                    <span class="separator-breadCrumbs">/</span>
-                    2
-                    <span class="separator-breadCrumbs">/</span>
-                  </span>
-                  <span
-                    @click="shoView4"
-                    :class="
-                      this.indexshowView == 2
-                        ? 'product-stock-active'
-                        : 'product-stock-text'
-                    "
-                  >
-                    <span class="separator-breadCrumbs">/</span>
-                    4
-                    <span class="separator-breadCrumbs">/</span>
-                  </span>
-                  <span
-                    @click="shoView16"
-                    :class="
-                      this.indexshowView == 3
-                        ? 'product-stock-active'
-                        : 'product-stock-text'
-                    "
-                  >
-                    <span class="separator-breadCrumbs">/</span>
-                    16
-                    <span class="separator-breadCrumbs">/</span>
-                  </span>
+                  <span class="separator-breadCrumbs">/</span>
+                  {{ dataStore.productos.length }}
+                  <span class="separator-breadCrumbs">/</span>
                 </p>
               </div>
+
               <div class="show-view-per-list">
                 <button class="show">
                   <svg
@@ -463,9 +431,9 @@ export default {
     subcategories() {
       return this.dataStore.subcategorias
     },
-    getProductsCategorie() {
-      const initial = this.currentPage * this.numVistas - this.numVistas
-      const final = initial + this.numVistas
+    ggetProductsCategorie() {
+      const initial = this.currentPage * 16 - 16
+      const final = initial + 16
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
@@ -474,10 +442,11 @@ export default {
       return this.$store.state.listArticulos.length
     },
     filterProduct() {
-      const initial = this.currentPage * this.numVistas - this.numVistas
-      const final = initial + this.numVistas
+      const initial = this.currentPage * 16 - 16
+      const final = initial + 16
       return this.products.slice(initial, final)
     },
+
     selectedCategory() {
       return this.$store.state.products.payload
     },
@@ -511,15 +480,12 @@ export default {
     },
     shoView2() {
       this.indexshowView = 1
-      this.numVistas = 2
     },
     shoView4() {
       this.indexshowView = 2
-      this.numVistas = 4
     },
     shoView16() {
       this.indexshowView = 3
-      this.numVistas = 16
     },
     showGrid2() {
       this.indexshowList = 2

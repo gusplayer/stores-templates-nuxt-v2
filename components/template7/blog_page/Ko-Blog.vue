@@ -59,15 +59,40 @@
       </div>
     </div>
     <div class="contenedor">
-      <!-- <div class="content-tittle">
-        <p class="title">Blog</p>
-        <input
-          type="text"
-          v-model="search"
-          class="input-text"
-          placeholder="Buscar artículo"
-        />
-      </div> -->
+      <div class="content-search-blog">
+        <div class="text-search">
+          <p class="title">Buscar Articulo</p>
+        </div>
+        <div class="empty-space"></div>
+        <div class="content-tittle">
+          <div class="input-animated">
+            <input
+              type="text"
+              v-model="search"
+              class="input-text"
+              placeholder="¿Que deseas buscar?"
+            />
+            <span class="search-icon">
+              <svg
+                class="search-header"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                width="20px"
+                height="20px"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
@@ -162,55 +187,13 @@ export default {
   margin-bottom: 40px;
 }
 .contenedor {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-.content-tittle {
-  width: 100%;
-  padding: 10px 20px 15px;
-  margin-bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  border-radius: 5px;
-  background: white;
-}
-.title {
-  font-size: 30px;
-  font-weight: bold;
-  color: black;
-  padding: 10px 0;
-}
-.input-text {
-  font-size: 14px;
-  color: rgba(21, 20, 57, 0.541);
-  border: solid 2px #afafaf;
-  border-radius: 0px;
-  background-color: transparent;
-  padding: 8px 14px;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-.input-text::placeholder {
-  color: rgba(21, 20, 57, 0.541);
-  opacity: 0.7;
-}
-.input-text:-internal-autofill-selected {
-  -webkit-appearance: menulist-button;
-  background-color: transparent !important;
-  background-image: none !important;
-  color: -internal-light-dark-color(black, white) !important;
-}
-.input-text:focus,
-.input-text:active {
-  outline: 0;
-  border: solid 2px black;
-}
+
 .content-item-productos {
   display: flex;
   width: 100%;
@@ -292,6 +275,85 @@ export default {
 #separator {
   margin-left: 20px;
 }
+.content-tittle {
+  width: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border-radius: 5px;
+  background: white;
+}
+.title {
+  font-size: 25px;
+  font-family: 'David libre', serif !important ;
+  font-weight: bold;
+  color: #3f3f3f;
+  margin-bottom: 20px;
+}
+.content-search-blog {
+  @apply flex flex-row  items-center;
+  border-bottom: 1px solid gray;
+  margin-bottom: 30px;
+  height: 30px;
+}
+.input-animated {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-0%, -50%);
+  margin-bottom: -20px;
+  border-radius: 50px;
+  background: white;
+  border: 2px solid #7f7f7f;
+
+  /* -webkit-box-shadow: 0px 5px 12px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 12px 5px rgba(0, 0, 0, 0.2); */
+}
+.input-animated:hover > .input-text {
+  width: 240px;
+  padding: 0 15px;
+  color: #7f7f7f;
+  font-size: 16px;
+  font-family: 'Lora', serif !important ;
+}
+.input-text:focus {
+  width: 240px;
+  padding: 0 15px;
+  color: #7f7f7f;
+  font-size: 16px;
+}
+
+.input-animated:hover > .search-icon {
+  background: #fff;
+  cursor: pointer;
+  color: #ed2353;
+}
+.search-icon {
+  color: #7f7f7f;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+.input-text {
+  border: none;
+  background: none;
+  outline: none;
+  color: transparent;
+  font-size: 0px;
+  transition: 0.4s;
+  width: 0px;
+}
+.input-text:focus {
+  border: none;
+}
+.empty-space {
+  @apply mx-2;
+}
 @screen sm {
   .grid-products {
     @apply w-9/0 grid-cols-1;
@@ -308,6 +370,18 @@ export default {
   }
   #separator {
     margin-left: 10px;
+  }
+  .content-search-blog {
+    @apply w-9/0 justify-center;
+  }
+  .input-text {
+    width: 240px;
+    color: #24272b;
+    padding: 0 15px;
+    font-size: 16px;
+  }
+  .title {
+    @apply hidden;
   }
 }
 @media (min-width: 425px) {
@@ -353,6 +427,16 @@ export default {
   #separator {
     margin-left: 10px;
   }
+  .content-search-blog {
+    @apply w-7/0 justify-center;
+  }
+  .input-text {
+    width: 0px;
+    padding: 0px;
+  }
+  .title {
+    @apply flex;
+  }
 }
 @media (min-width: 900px) {
   .icon-blog {
@@ -362,12 +446,14 @@ export default {
 }
 @screen lg {
   .grid-products {
-    @apply w-9/7 grid-cols-3;
+    @apply w-9/5 grid-cols-3;
   }
-
   .icon-blog {
     width: 4%;
     margin-bottom: 40px;
+  }
+  .content-search-blog {
+    @apply w-6/0;
   }
 }
 @media (min-width: 1100px) {
@@ -396,6 +482,9 @@ export default {
   #separator {
     margin-left: 20px;
   }
+  .content-search-blog {
+    @apply w-6/0;
+  }
 }
 @screen xl {
   .grid-products {
@@ -403,6 +492,9 @@ export default {
   }
   .tittle-banner-blog {
     @apply w-8/3;
+  }
+  .content-search-blog {
+    @apply w-5/0;
   }
 }
 @screen xml {
@@ -412,6 +504,9 @@ export default {
   .tittle-banner-blog {
     @apply w-6/3;
   }
+  .content-search-blog {
+    @apply w-4/0;
+  }
 }
 @screen xxl {
   .grid-products {
@@ -419,6 +514,9 @@ export default {
   }
   .tittle-banner-blog {
     @apply w-4/6;
+  }
+  .content-search-blog {
+    @apply w-3/0;
   }
 }
 </style>
