@@ -239,7 +239,7 @@
           </div>
         </div>
         <!-- Producto agotado -->
-        <div class="content_card-info" v-if="spent && product.stock == 0">
+        <div class="content_card-info" v-if="spent || product.stock == 0">
           <div class="icon-card-info-sould">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -332,7 +332,7 @@
         <button
           ref="colorBtn"
           class="btn"
-          v-if="!spent"
+          v-if="product.stock > 0"
           v-on:click="addShoppingCart"
           id="AddToCartTag"
         >
@@ -343,7 +343,7 @@
         <button
           disabled
           class="btn-disabled"
-          v-if="spent"
+          v-if="product.stock == 0"
           v-on:click="addShoppingCart"
         >
           <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
@@ -734,7 +734,7 @@ export default {
   border-radius: 35px;
   border: solid 2px #ed2353;
   background-color: #ed2353;
-  padding: 10px 14px;
+  padding: 3px 6px;
   font-size: 12px;
   line-height: 16px;
   align-items: center;
@@ -761,7 +761,7 @@ export default {
   border-radius: 35px;
   border: solid 2px gray;
   background-color: gray;
-  padding: 12px 20px;
+  padding: 3px 6px;
   font-size: 13px;
   line-height: 18px;
   align-items: center;

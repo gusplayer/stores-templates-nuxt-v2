@@ -1,7 +1,7 @@
 <template>
   <div class="carousel-content">
     <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-      <div class="swiper-wrapper z-auto border">
+      <div class="swiper-wrapper z-auto">
         <div
           :class="`swiper-slide slide${index + 1}`"
           v-for="(banner, index) in this.Banners"

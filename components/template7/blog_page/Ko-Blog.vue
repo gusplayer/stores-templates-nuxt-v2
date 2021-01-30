@@ -315,7 +315,6 @@ export default {
   padding: 0 15px;
   color: #7f7f7f;
   font-size: 16px;
-  font-family: 'Lora', serif !important ;
 }
 .input-text:focus {
   width: 240px;
@@ -347,6 +346,7 @@ export default {
   font-size: 0px;
   transition: 0.4s;
   width: 0px;
+  font-family: 'Lora', serif !important ;
 }
 .input-text:focus {
   border: none;
