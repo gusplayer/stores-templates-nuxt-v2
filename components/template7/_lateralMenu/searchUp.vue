@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import KProducts from '../../../components/template7/Ko-ProductList'
+import KProducts from '../../../components/template7/Ko-ProductListSearchUp'
 export default {
   name: 'KoSearch',
   props: {

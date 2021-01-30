@@ -1027,7 +1027,6 @@ export default {
   @apply w-full flex flex-wrap justify-center items-center;
 }
 .btn-tittle-shop {
-  transition: all 0.25s ease;
   color: #fff;
   font-family: 'David libre', serif !important ;
   font-weight: 400;

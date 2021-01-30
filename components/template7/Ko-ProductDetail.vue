@@ -838,6 +838,7 @@ export default {
   background: #efefef;
   justify-content: center;
   align-items: center;
+  padding-top: 120px;
 }
 .container-productDetail-loading {
   height: calc(100vh - 420px);
