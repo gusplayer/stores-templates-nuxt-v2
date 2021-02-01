@@ -74,6 +74,10 @@ export default {
           path: '/contacto',
         },
         {
+          name: 'footer_micompra',
+          path: '/micompra',
+        },
+        {
           name: 'header_blog',
           href: '/blog',
         },

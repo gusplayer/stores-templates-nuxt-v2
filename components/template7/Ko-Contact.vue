@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-contact" :style="settingByTemplate">
-    <div class="contact shadow-xs">
+    <div class="contact">
       <div class="contact-content">
         <div>
           <p class="contact-text-title">{{ $t('contact_title') }}</p>
@@ -279,7 +279,7 @@ export default {
   /* background: var(--background_color_2); */
   background: #f7f7f7;
   box-sizing: border-box;
-  padding-top: 120px;
+  padding-top: 130px;
 }
 .contact {
   display: flex;

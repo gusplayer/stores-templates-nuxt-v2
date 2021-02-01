@@ -9,7 +9,8 @@
         : this.settingBase
     "
   >
-    <kPrueba
+    <component
+      :is="indexTemplate"
       :dataStore="dataStore"
       :orden="orden"
       v-if="orden"
@@ -20,11 +21,13 @@
 
 <script>
 import axios from 'axios'
-import kPrueba from '../components/miCompra/Ko-miCompra-1'
+import KoMicompra05 from '../components/miCompra/Ko-miCompra-1'
+import KoMicompra07 from '../components/template7/Ko-miCompra'
 
 export default {
   components: {
-    kPrueba,
+    KoMicompra05,
+    KoMicompra07,
   },
   asyncData({ route, store }) {
     if (route.query.orden) {
@@ -74,6 +77,24 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    indexTemplate() {
+      let productListComponent = ''
+      switch (this.template) {
+        case 3:
+          productListComponent = 'KoMicompra05'
+          break
+        case 5:
+          productListComponent = 'KoMicompra05'
+          break
+        case 6:
+          productListComponent = 'KoMicompra05'
+          break
+        case 7:
+          productListComponent = 'KoMicompra07'
+          break
+      }
+      return productListComponent
     },
   },
   methods: {
