@@ -52,11 +52,16 @@
             <button
               id="btnfocus"
               class="btn-lateral-menu-left"
-              v-on:click="focusbtn = false"
+              @click="selectTag1"
+              :class="selecttag == 1 ? 'show-select-active' : ''"
             >
               {{ $t('header_menu') }}
             </button>
-            <button class="btn-lateral-menu-right" v-on:click="focusbtn = true">
+            <button
+              class="btn-lateral-menu-right"
+              @click="selectTag2"
+              :class="selecttag == 2 ? 'show-select-active' : ''"
+            >
               {{ $t('header_categorias') }}
             </button>
           </div>
@@ -153,6 +158,7 @@ export default {
   },
   data() {
     return {
+      selecttag: 1,
       activeNames: [],
       focusbtn: false,
       search: '',
@@ -211,6 +217,12 @@ export default {
     },
   },
   methods: {
+    selectTag1() {
+      this.selecttag = 1
+    },
+    selectTag2() {
+      this.selecttag = 2
+    },
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
@@ -510,16 +522,16 @@ export default {
   transition: background-color 0.25s ease, color 0.25s ease;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
-.btn-lateral-menu-left:focus {
+.show-select-active {
   background-color: rgba(0, 0, 0, 0.05);
   color: #333;
   border-bottom: 2px solid #ed2353;
 }
-.btn-lateral-menu-right:focus {
+/* .btn-lateral-menu-right:focus {
   background-color: rgba(0, 0, 0, 0.05);
   color: #333;
   border-bottom: 2px solid #ed2353;
-}
+} */
 .conten-Menu,
 .content-Categorys {
   @apply w-full flex flex-col justify-start items-center;

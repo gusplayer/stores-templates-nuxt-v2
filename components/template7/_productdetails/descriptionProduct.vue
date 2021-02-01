@@ -315,9 +315,10 @@ export default {
 }
 .content_product_description {
   display: flex;
+  flex-direction: column;
   margin-top: 20px;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
   font-size: 14px;
   line-height: 1.6;

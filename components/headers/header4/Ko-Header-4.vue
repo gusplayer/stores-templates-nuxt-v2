@@ -1,6 +1,6 @@
 <template>
   <div class="header-container" id="navbar" :style="settingByTemplate">
-    <div class="wrapper-header">
+    <div class="wrapper-header" id="headbg">
       <div class="header" id="headerid">
         <KoOrder :dataStore="dataStore" />
         <div class="header-item-menu" @click="openMenulateral">
@@ -118,19 +118,24 @@ export default {
     } else {
       this.showSearch = false
     }
-    if (domain == '/' || domain != '/') {
-      this.$store.commit('SET_STATESPACERHEADERK7', true)
-    }
+    // if (domain == '/' || domain != '/') {
+    //   this.$store.commit('SET_STATESPACERHEADERK7', true)
+    // }
 
     var prevScrollpos = window.pageYOffset
     window.onscroll = function () {
       var currentScrollPos = window.pageYOffset
       var navbar = document.getElementById('navbar')
       var header = document.getElementById('headerid')
+      var bghead = document.getElementById('headbg')
 
       if (currentScrollPos == 0) {
         if (screen.width >= 300) {
           header.style.width = '100%'
+          bghead.style.backgroundColor = 'transparent'
+          bghead.style.boxShadow = '0px 0px 0px 0px'
+          header.style.boxShadow =
+            '0px 22px 11px -12px rgba(145, 145, 145, 0.57)'
         }
         if (screen.width >= 1280) {
           header.style.width = '93%'
@@ -149,9 +154,12 @@ export default {
       } else if (prevScrollpos > currentScrollPos && navbar) {
         //sube
         // this.$store.commit('SET_STATESPACERHEADERK7', false)
-        header.style.width = '100%'
+        // header.style.width = '100%'
         navbar.style.zIndex = '20'
         navbar.style.top = '0px'
+        bghead.style.backgroundColor = '#ffffff'
+        header.style.boxShadow = '0px 0px 0px 0px'
+        bghead.style.boxShadow = '0px 22px 11px -12px rgba(145,145,145,0.57)'
       } else {
         //baja
         // this.$store.commit('SET_STATESPACERHEADERK7', true)
@@ -163,6 +171,7 @@ export default {
   },
   data() {
     return {
+      resizehead: false,
       search: '',
       showSearch: false,
       secciones: [
@@ -282,7 +291,7 @@ export default {
   @apply flex flex-col w-full justify-between items-center;
 }
 .header {
-  @apply flex w-full justify-between shadow-lg bg-white-white;
+  @apply flex w-full justify-between bg-white-white;
 }
 .header-item-menu {
   @apply hidden;

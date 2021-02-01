@@ -145,6 +145,13 @@ export default {
   -webkit-align-items: center;
   align-items: center;
 }
+.img-wrapp:hover {
+  transition: all 200ms ease-in;
+  top: -3px;
+  position: relative;
+  -webkit-transform: scale(1.3);
+  transform: scale(1.03);
+}
 .wrapper-content {
   @apply flex flex-col justify-center items-center w-full;
 }

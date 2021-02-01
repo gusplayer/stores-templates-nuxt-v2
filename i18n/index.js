@@ -187,6 +187,8 @@ export default {
     home_filtrar: 'Filtrar',
     home_subcategory: 'Subcategoria',
     home_mostrar: 'Mostrar: ',
+    home_by: 'Por',
+    home_continuar_leyendo: 'Continuar leyendo',
 
     //productdetail
     productdetail_garantia: 'Garantía:',
@@ -428,6 +430,9 @@ export default {
     home_filtrar: 'Filter',
     home_subcategory: 'Subcategory',
     home_mostrar: 'Show: ',
+    home_by: 'By',
+    home_continuar_leyendo: 'Continue reading',
+
     //productdetail
     productdetail_garantia: 'Warranty:',
     productdetail_btnComprar: 'Purchase',
@@ -669,6 +674,8 @@ export default {
     home_filtrar: 'Filtrado',
     home_subcategory: 'Subcategoria',
     home_mostrar: 'Exposição: ',
+    home_by: 'De',
+    home_continuar_leyendo: 'Continue lendo',
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',

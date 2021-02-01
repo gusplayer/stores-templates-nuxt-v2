@@ -110,22 +110,30 @@
         <div class="top-content">
           <div class="content-items-categorias">
             <div class="content-items-categorias-text">
-              <p class="text-categorias" @click="clear">
+              <p class="text-categorias" id="homeCate" @click="clear">
                 {{ $t('home_catalogo') }}
+                <span
+                  v-if="this.nameCategoryHeader"
+                  class="separator-breadCrumbs"
+                  >/</span
+                >
               </p>
               <p
                 class="text-categorias-select"
                 v-if="this.nameCategoryHeader"
                 @click="breadcrumbsSendCategory(nameCategoryHeader)"
               >
-                <span class="separator-breadCrumbs">/</span>
                 <span id="statecate">{{ this.nameCategoryHeader }}</span>
               </p>
+              <span
+                v-if="this.nameSubCategoryHeader"
+                class="separator-breadCrumbs"
+                >/
+              </span>
               <p
                 class="text-categorias-select"
                 v-if="this.nameSubCategoryHeader"
               >
-                <span class="separator-breadCrumbs">/</span>
                 <span id="statesubcate">{{ this.nameSubCategoryHeader }}</span>
               </p>
             </div>
@@ -134,44 +142,12 @@
               <div class="show-number-items">
                 <p class="product-stock">
                   {{ $t('home_mostrar') }}
-                  <span
-                    @click="shoView2"
-                    :class="
-                      this.indexshowView == 1
-                        ? 'product-stock-active'
-                        : 'product-stock-text'
-                    "
-                  >
-                    <span class="separator-breadCrumbs">/</span>
-                    2
-                    <span class="separator-breadCrumbs">/</span>
-                  </span>
-                  <span
-                    @click="shoView4"
-                    :class="
-                      this.indexshowView == 2
-                        ? 'product-stock-active'
-                        : 'product-stock-text'
-                    "
-                  >
-                    <span class="separator-breadCrumbs">/</span>
-                    4
-                    <span class="separator-breadCrumbs">/</span>
-                  </span>
-                  <span
-                    @click="shoView16"
-                    :class="
-                      this.indexshowView == 3
-                        ? 'product-stock-active'
-                        : 'product-stock-text'
-                    "
-                  >
-                    <span class="separator-breadCrumbs">/</span>
-                    16
-                    <span class="separator-breadCrumbs">/</span>
-                  </span>
+                  <span class="separator-breadCrumbs">/</span>
+                  {{ dataStore.productos.length }}
+                  <span class="separator-breadCrumbs">/</span>
                 </p>
               </div>
+
               <div class="show-view-per-list">
                 <button class="show">
                   <svg
@@ -463,9 +439,9 @@ export default {
     subcategories() {
       return this.dataStore.subcategorias
     },
-    getProductsCategorie() {
-      const initial = this.currentPage * this.numVistas - this.numVistas
-      const final = initial + this.numVistas
+    ggetProductsCategorie() {
+      const initial = this.currentPage * 16 - 16
+      const final = initial + 16
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
@@ -474,10 +450,11 @@ export default {
       return this.$store.state.listArticulos.length
     },
     filterProduct() {
-      const initial = this.currentPage * this.numVistas - this.numVistas
-      const final = initial + this.numVistas
+      const initial = this.currentPage * 16 - 16
+      const final = initial + 16
       return this.products.slice(initial, final)
     },
+
     selectedCategory() {
       return this.$store.state.products.payload
     },
@@ -511,15 +488,12 @@ export default {
     },
     shoView2() {
       this.indexshowView = 1
-      this.numVistas = 2
     },
     shoView4() {
       this.indexshowView = 2
-      this.numVistas = 4
     },
     shoView16() {
       this.indexshowView = 3
-      this.numVistas = 16
     },
     showGrid2() {
       this.indexshowList = 2
@@ -634,6 +608,11 @@ export default {
     sendCategory(value, categoria, index, ref) {
       this.statesub = true
       var stateCategory = document.getElementById('statecate')
+      var catalogo = document.getElementById('homeCate')
+      if (catalogo) {
+        catalogo.style.color = '#8e8e8e'
+        catalogo.style.fontWeight = '100'
+      }
       if (this.statesub == true && stateCategory) {
         stateCategory.style.color = '#333333'
         stateCategory.style.fontWeight = '600'
@@ -666,6 +645,18 @@ export default {
       })
     },
     breadcrumbsSendCategory(value) {
+      this.statesub = true
+      var stateCategory = document.getElementById('statecate')
+      var catalogo = document.getElementById('homeCate')
+
+      if (this.statesub == true && stateCategory) {
+        catalogo.style.color = '#8e8e8e'
+        catalogo.style.fontWeight = '100'
+
+        stateCategory.style.color = '#333333'
+        stateCategory.style.fontWeight = '600'
+      }
+
       let filtradoCategorias = this.categorias.find((element) => {
         if (element.nombre_categoria_producto == value) {
           return element
@@ -678,6 +669,11 @@ export default {
       })
     },
     clear() {
+      var catalogo = document.getElementById('homeCate')
+      if (catalogo) {
+        catalogo.style.color = '#333333'
+        catalogo.style.fontWeight = '600'
+      }
       this.indexSelect = ''
       this.indexSelect2 = ''
       this.$router.push({
@@ -745,23 +741,6 @@ export default {
     },
   },
   watch: {
-    showGrid4() {
-      this.showinList = false
-      var dimension = screen.width
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
-          'style',
-          'grid-template-columns: repeat(4, minmax(0, 1fr))'
-        )
-        if (gridselector && dimension < 768) {
-          gridselector.setAttribute(
-            'style',
-            'grid-template-columns: repeat(2, minmax(0, 1fr))'
-          )
-        }
-      }
-    },
     fullProducts(value) {
       this.products = value
       let maxTMP = 0
@@ -913,17 +892,19 @@ export default {
   @apply w-full flex flex-row;
 }
 .text-categorias {
+  display: flex;
+  flex-direction: row;
   width: auto;
-  color: #8e8e8e;
+  color: #333333;
   margin-right: 6px;
-  font-weight: 100;
-  transition: all 0.25s ease;
+  font-weight: 600;
   font-size: 14px;
   font-family: 'Lora', serif !important ;
   cursor: pointer;
 }
+
 .separator-breadCrumbs {
-  width: 100%;
+  width: auto;
   color: #8e8e8e;
   margin-right: 6px;
   margin-left: 6px;
@@ -945,6 +926,8 @@ export default {
   font-family: 'Lora', serif !important ;
 }
 .text-categorias-select {
+  display: flex;
+  flex-direction: row;
   width: 100%;
   margin-right: 6px;
   color: #8e8e8e;
@@ -964,6 +947,7 @@ export default {
 }
 #statesubcate {
   width: 100%;
+  margin-left: 6px;
   transition: all 0.25s ease;
   color: #333;
   font-weight: 600;
@@ -1085,7 +1069,6 @@ export default {
   @apply w-full flex flex-wrap justify-center items-center;
 }
 .btn-tittle-shop {
-  transition: all 0.25s ease;
   color: #fff;
   font-family: 'David libre', serif !important ;
   font-weight: 400;
@@ -1205,6 +1188,12 @@ export default {
   li:not(.disabled).active {
   background-color: #ed2353;
   color: white;
+}
+
+.show-number-items,
+.product-stock,
+.separator-breadCrumbs {
+  cursor: default;
 }
 @screen sm {
   #grid-selection {

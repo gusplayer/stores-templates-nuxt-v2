@@ -1,15 +1,61 @@
 <template lang="html">
   <div class="home">
-    <KoBlog />
+    <component
+      :is="indexTemplate"
+      :style="
+        this.settingByTemplate &&
+        this.settingByTemplate.settings &&
+        this.settingByTemplate.settings['--background_color_1']
+          ? this.settingByTemplate.settings
+          : this.settingBase
+      "
+      :dataStore="dataStore"
+    />
   </div>
 </template>
 
 <script>
-import KoBlog from '../../components/blog/Ko-Blog'
+import K05Blog from '../../components/blog/Ko-Blog'
+import K07Blog from '../../components/template7/blog_page/Ko-Blog'
 
 export default {
   layout: 'default',
-  components: { KoBlog },
+  components: { K05Blog, K07Blog },
+  computed: {
+    dataStore() {
+      return this.$store.state.dataStore
+    },
+    fullProducts() {
+      return this.$store.getters['products/filterProducts']
+    },
+    settingBase() {
+      return this.$store.state.settingBase
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
+    },
+    template() {
+      return this.$store.state.template
+    },
+    indexTemplate() {
+      let productListComponent = ''
+      switch (this.template) {
+        case 3:
+          productListComponent = 'K05Blog'
+          break
+        case 5:
+          productListComponent = 'K05Blog'
+          break
+        case 6:
+          productListComponent = 'K05Blog'
+          break
+        case 7:
+          productListComponent = 'K07Blog'
+          break
+      }
+      return productListComponent
+    },
+  },
 }
 </script>
 

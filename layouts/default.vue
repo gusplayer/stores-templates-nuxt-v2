@@ -18,11 +18,11 @@
       "
       :is="headerTemplate"
     />
-    <div
+    <!-- <div
       v-if="this.estadoHeader7 && this.headerk07"
       class="separadorKo7"
       id="separadork07"
-    ></div>
+    ></div> -->
     <nuxt />
     <component
       :dataStore="dataStore"
@@ -139,23 +139,15 @@ export default {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
-    var separador = document.getElementById('separadork07')
-    if (domains == '/' || domains == '/productos') {
-      this.estadoHeader7 = false
-    } else {
-      this.estadoHeader7 = true
-      // if (separador) {
-      //   if (domains == '/productos' ) {
-      //     separador.style.background = '#ffffff'
-      //   } else {
-      //     separador.style.background = '#efefef'
-      //   }
-      // }
-    }
+    // if (domains == '/contacto') {
+    //   this.estadoHeader7 = true
+    // } else {
+    //   this.estadoHeader7 = false
+    // }
   },
   data() {
     return {
-      estadoHeader7: false,
+      // estadoHeader7: false,
     }
   },
   head() {
@@ -435,22 +427,15 @@ export default {
   },
   watch: {
     // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      let domains = this.$route.fullPath
-      var separador = document.getElementById('separadork07')
-      if (domains == '/' || domains == '/productos') {
-        this.estadoHeader7 = false
-      } else {
-        this.estadoHeader7 = true
-        // if (separador) {
-        //   if (domains == '/productos') {
-        //     separador.style.background = '#ffffff'
-        //   } else {
-        //     separador.style.background = '#efefef'
-        //   }
-        // }
-      }
-    },
+    // $route(to, from) {
+    //   let domains = this.$route.fullPath
+    //   var separador = document.getElementById('separadork07')
+    //   if (domains == '/contacto') {
+    //     this.estadoHeader7 = true
+    //   } else {
+    //     this.estadoHeader7 = false
+    //   }
+    // },
   },
 }
 </script>
@@ -477,11 +462,11 @@ export default {
   box-sizing: border-box;
   outline: none !important;
 }
-.separadorKo7 {
+/* .separadorKo7 {
   width: 100%;
   padding-top: 120px;
   background: #efefef;
-}
+} */
 .wrapper-whatsapp {
   position: fixed;
   transform: translate(108px, 0px);
