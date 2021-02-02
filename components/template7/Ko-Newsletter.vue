@@ -306,28 +306,12 @@ export default {
     @apply w-4/0;
   }
 }
-@screen xl {
+@media (min-width: 1192px) {
   .wrapper-items-content {
-    @apply w-8/3;
+    width: 1192px;
   }
   .wrapper-items {
-    @apply w-4/0;
-  }
-}
-@screen xml {
-  .wrapper-items-content {
-    @apply w-6/3;
-  }
-  .wrapper-items {
-    @apply w-3/0;
-  }
-}
-@screen xxl {
-  .wrapper-items-content {
-    @apply w-4/6;
-  }
-  .wrapper-items {
-    width: 22%;
+    width: 600px;
   }
 }
 </style>

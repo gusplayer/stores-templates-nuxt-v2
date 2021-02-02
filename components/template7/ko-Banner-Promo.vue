@@ -467,12 +467,13 @@ figure {
   #promo-banner-tittle-2, #promo-banner-tittle-3, #promo-banner-subtittle-medium {
     @apply pr-40 leading-normal  ;
   }
-
+}
+@media (min-width: 1192px) {
+  .promo-banner-items {
+    width: 1192px;
+  }
 }
 @screen xl {
-  .promo-banner-items {
-    @apply w-8/3;
-  }
   #promo-banner-tittle-1 {
     line-height: 58px;
     font-size: 48px;
@@ -519,15 +520,5 @@ figure {
     @apply pr-40 leading-normal  ;
   }
 
-}
-@screen xml {
-  .promo-banner-items {
-    @apply w-6/3;
-  }
-}
-@screen xxl {
-  .promo-banner-items {
-    @apply w-4/6;
-  }
 }
 </style>

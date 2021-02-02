@@ -203,10 +203,12 @@ export default {
     @apply w-9/0 text-lg;
   }
 }
-@screen xl {
+@media (min-width: 1192px) {
   .banner {
-    @apply w-8/3;
+    width: 1192px;
   }
+}
+@screen xl {
   .banner-text-tittle {
     @apply text-6xl;
   }
@@ -227,16 +229,8 @@ export default {
   }
 }
 @screen xml {
-  .banner {
-    @apply w-6/3;
-  }
   .banner-text-tittle {
     @apply text-6xl;
-  }
-}
-@screen xxl {
-  .banner {
-    @apply w-4/6;
   }
 }
 </style>

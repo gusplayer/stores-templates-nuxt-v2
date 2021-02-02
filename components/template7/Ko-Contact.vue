@@ -631,19 +631,9 @@ export default {
     @apply w-9/3;
   }
 }
-@screen xl {
+@media (min-width: 1192px) {
   .contact {
-    @apply w-8/3;
-  }
-}
-@screen xml {
-  .contact {
-    @apply w-6/3;
-  }
-}
-@screen xxl {
-  .contact {
-    @apply w-4/6;
+    width: 1192px;
   }
 }
 </style>

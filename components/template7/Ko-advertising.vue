@@ -143,20 +143,9 @@ export default {
     @apply w-5/0;
   }
 }
-
-@screen xl {
+@media (min-width: 1192px) {
   .advertising-background {
-    @apply w-8/3 h-full;
-  }
-}
-@screen xml {
-  .advertising-background {
-    @apply w-6/3 h-full;
-  }
-}
-@screen xxl {
-  .advertising-background {
-    @apply w-4/6 h-full;
+    width: 1192px;
   }
 }
 </style>

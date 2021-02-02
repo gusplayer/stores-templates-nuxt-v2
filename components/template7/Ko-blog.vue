@@ -211,28 +211,12 @@ export default {
     @apply w-9/3;
   }
 }
-@screen xl {
+@media (min-width: 1192px) {
   .wrapper-items-content {
-    @apply w-8/3;
+    width: 1192px;
   }
   .wrapper-items {
-    @apply w-8/3;
-  }
-}
-@screen xml {
-  .wrapper-items-content {
-    @apply w-6/3;
-  }
-  .wrapper-items {
-    @apply w-6/3;
-  }
-}
-@screen xxl {
-  .wrapper-items-content {
-    @apply w-4/6;
-  }
-  .wrapper-items {
-    @apply w-4/6;
+    width: 1192px;
   }
 }
 </style>

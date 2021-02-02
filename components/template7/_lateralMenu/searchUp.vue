@@ -222,7 +222,8 @@ input[type='search'] {
 }
 .search-input-content {
   @apply w-full flex flex-row justify-center items-center shadow-lg z-20;
-  height: 12%;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 .input-search {
   @apply w-full py-4 text-center items-center text-5xl z-10;

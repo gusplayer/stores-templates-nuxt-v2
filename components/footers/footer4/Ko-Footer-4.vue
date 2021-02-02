@@ -24,21 +24,27 @@
         </div>
         <KoSocialNet :dataStore="dataStore"></KoSocialNet>
       </div>
+      <div class="madebyKomercia">
+        <a
+          href="https://komercia.co/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img
+            src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
+            v-if="logo == true"
+            class="logo2"
+            alt="Logo Img"
+          />
+          <img
+            src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png"
+            v-else
+            class="logo2"
+            alt="Logo Img"
+          />
+        </a>
+      </div>
     </div>
-    <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
-      <img
-        src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
-        v-if="logo == true"
-        class="logo2"
-        alt="Logo Img"
-      />
-      <img
-        src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png"
-        v-else
-        class="logo2"
-        alt="Logo Img"
-      />
-    </a>
   </div>
 </template>
 
@@ -124,6 +130,7 @@ export default {
   height: 322px;
 }
 .footer-content {
+  @apply flex flex-col justify-center items-center;
   margin-bottom: 10px;
 }
 .footer-content-items {
@@ -150,6 +157,9 @@ export default {
   width: 100px;
   opacity: 0.5;
 }
+.madebyKomercia {
+  @apply mt-4;
+}
 @screen sm {
   .footer-content {
     @apply w-full flex;
@@ -161,6 +171,11 @@ export default {
 @screen md {
   .btn {
     font-size: 16px;
+  }
+}
+@media (min-width: 1192px) {
+  .footer-content {
+    width: 1192px;
   }
 }
 </style>

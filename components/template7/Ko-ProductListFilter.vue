@@ -139,14 +139,14 @@
             </div>
 
             <div class="items-end">
-              <div class="show-number-items">
+              <!-- <div class="show-number-items">
                 <p class="product-stock">
                   {{ $t('home_mostrar') }}
                   <span class="separator-breadCrumbs">/</span>
                   {{ dataStore.productos.length }}
                   <span class="separator-breadCrumbs">/</span>
                 </p>
-              </div>
+              </div> -->
 
               <div class="show-view-per-list">
                 <button class="show">
@@ -1063,7 +1063,7 @@ export default {
   fill: #333333;
 }
 .items-end {
-  @apply w-full flex flex-row justify-center items-center;
+  @apply w-full flex flex-row justify-end items-center;
 }
 .tittle-banner-shop {
   @apply w-full flex flex-wrap justify-center items-center;
@@ -1296,19 +1296,9 @@ export default {
     margin-bottom: 20px;
   }
 }
-@screen xl {
+@media (min-width: 1192px) {
   .content-shop-items {
-    @apply w-8/3;
-  }
-}
-@screen xml {
-  .content-shop-items {
-    @apply w-6/3;
-  }
-}
-@screen xxl {
-  .content-shop-items {
-    @apply w-4/6;
+    width: 1192px;
   }
 }
 </style>

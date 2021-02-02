@@ -247,15 +247,13 @@ export default {
     font-size: 14px;
   }
 }
-@screen xl {
+@media (min-width: 1192px) {
   .hwwork-content-items {
-    @apply w-8/3;
+    width: 1192px;
   }
 }
+
 @screen xml {
-  .hwwork-content-items {
-    @apply w-6/3;
-  }
   .tittle {
     line-height: 34px;
     font-size: 24px;
@@ -267,11 +265,6 @@ export default {
   .description {
     line-height: 24px;
     font-size: 14px;
-  }
-}
-@screen xxl {
-  .hwwork-content-items {
-    @apply w-4/6;
   }
 }
 </style>
