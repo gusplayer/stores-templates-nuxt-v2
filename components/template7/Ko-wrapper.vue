@@ -145,9 +145,11 @@ export default {
   -webkit-align-items: center;
   align-items: center;
 }
+.img-wrapp {
+  transition: all 200ms ease-in;
+}
 .img-wrapp:hover {
   transition: all 200ms ease-in;
-  top: -3px;
   position: relative;
   -webkit-transform: scale(1.3);
   transform: scale(1.03);
@@ -249,19 +251,9 @@ export default {
     font-size: 14px;
   }
 }
-@scree xl {
+@media (min-width: 1192px) {
   .wrapper-items-content {
-    @apply w-8/3;
-  }
-}
-@screen xml {
-  .wrapper-items-content {
-    @apply w-6/3;
-  }
-}
-@scree xxl {
-  .wrapper-items-content {
-    @apply w-4/6;
+    width: 1192px;
   }
 }
 </style>

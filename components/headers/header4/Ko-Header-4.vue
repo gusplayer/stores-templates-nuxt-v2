@@ -142,24 +142,38 @@ export default {
           navbar.style.zIndex = '20'
           navbar.style.top = '30px'
         }
-        if (screen.width >= 1440) {
-          header.style.width = '83%'
-        }
-        if (screen.width >= 1920) {
-          header.style.width = '63%'
-        }
-        if (screen.width >= 2560) {
-          header.style.width = '46%'
-        }
+        // if (screen.width >= 1440) {
+        //   header.style.width = '83%'
+        // }
+        // if (screen.width >= 1920) {
+        //   header.style.width = '63%'
+        // }
+        // if (screen.width >= 2560) {
+        //   header.style.width = '46%'
+        // }
       } else if (prevScrollpos > currentScrollPos && navbar) {
         //sube
-        // this.$store.commit('SET_STATESPACERHEADERK7', false)
-        // header.style.width = '100%'
-        navbar.style.zIndex = '20'
         navbar.style.top = '0px'
+        navbar.style.zIndex = '20'
         bghead.style.backgroundColor = '#ffffff'
         header.style.boxShadow = '0px 0px 0px 0px'
         bghead.style.boxShadow = '0px 22px 11px -12px rgba(145,145,145,0.57)'
+
+        if (screen.width >= 300) {
+          header.style.width = '100%'
+        }
+        if (screen.width >= 1280) {
+          header.style.width = '93%'
+        }
+        // if (screen.width >= 1440) {
+        //   header.style.width = '83%'
+        // }
+        // if (screen.width >= 1920) {
+        //   header.style.width = '63%'
+        // }
+        // if (screen.width >= 2560) {
+        //   header.style.width = '46%'
+        // }
       } else {
         //baja
         // this.$store.commit('SET_STATESPACERHEADERK7', true)
@@ -442,28 +456,16 @@ export default {
     @apply sr-only;
   }
 }
-@screen xl {
+@media (min-width: 1192px) {
   .header {
-    @apply w-8/3;
+    width: 100%;
+    max-width: 1192px;
   }
   .header-content-page {
-    @apply flex w-8/3;
-  }
-}
-@screen xml {
-  .header {
-    @apply w-6/3;
-  }
-  .header-content-page {
-    @apply flex w-6/3;
+    width: 1192px;
   }
 }
 
-@screen xxl {
-  .header {
-    @apply w-4/6;
-  }
-}
 @media (max-width: 768px) {
   .search {
     display: none;

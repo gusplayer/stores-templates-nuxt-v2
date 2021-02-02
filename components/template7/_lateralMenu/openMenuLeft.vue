@@ -219,9 +219,12 @@ export default {
   methods: {
     selectTag1() {
       this.selecttag = 1
+      this.focusbtn=false
     },
     selectTag2() {
       this.selecttag = 2
+            this.focusbtn=true
+
     },
     getSearch(value) {
       if (value) {
