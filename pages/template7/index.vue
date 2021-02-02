@@ -1,50 +1,43 @@
 <template lang="html">
-  <!-- <div
-    class="home"
-    :style="
-    this.settingByTemplate &&
-      this.$store.state.settingByTemplate &&
-      this.$store.state.settingByTemplate['--background_color_1']
-        ? this.$store.state.settingByTemplate
-        : this.settingBase
-    "
-  >
-    <div class="space-search"></div>
-    <div class="search-movil" id="navbar">
-      <form id="demo-1" style="width: 100%; position: relative;">
-        <search-icon class="icon-s" />
-        <input
-          v-model="search"
-          type="search"
-          :placeholder="$t('header_search')"
-          @keyup.enter="getSearch(search)"
-          id="SearchIndexTemplate"
-        />
-      </form>
-    </div>
-    <kBanner :dataStore="dataStore" />
-    <KCategory :dataStore="dataStore" style="position: sticky; top: 88px;" />
+  <div>
+    <KCarousel></KCarousel>
+    <KPromo></KPromo>
     <KProductList
       :dataStore="dataStore"
       :fullProducts="fullProducts"
     ></KProductList>
-  </div> -->
-  <KHome></KHome>
+    <KAdvertising></KAdvertising>
+    <KGify :dataStore="dataStore" :fullProducts="fullProducts"></KGify>
+    <KHowwork></KHowwork>
+    <KBlog :dataStore="dataStore" v-show="listArticulos.length > 0"></KBlog>
+    <KNews></KNews>
+    <KWrapper :dataStore="dataStore"></KWrapper>
+  </div>
 </template>
 
 <script>
-// import kBanner from '../../components/template7/ko-Banner-1'
-// import KCategory from '../../components/template7/Ko-Category-1'
-// import KProductList from '../../components/template7/Ko-ProductList-1'
-import KHome from '../../components/template7/ko-home'
+import KCarousel from '../../components/template7/_carouselBanner/ko-carousel'
+import KPromo from '../../components/template7/ko-Banner-Promo'
+import KProductList from '../../components/template7/Ko-ProductList'
+import KAdvertising from '../../components/template7/Ko-advertising'
+import KGify from '../../components/template7/Ko-gify'
+import KHowwork from '../../components/template7/Ko-how-we-work'
+import KWrapper from '../../components/template7/Ko-wrapper'
+import KNews from '../../components/template7/Ko-Newsletter'
+import KBlog from '../../components/template7/Ko-blog'
 
 export default {
   layout: 'default',
   components: {
-    KHome,
-    // kBanner,
-    // KProductList,
-    // KCategory,
+    KCarousel,
+    KPromo,
+    KProductList,
+    KAdvertising,
+    KGify,
+    KHowwork,
+    KWrapper,
+    KNews,
+    KBlog,
   },
   data() {
     return {
@@ -66,6 +59,25 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager.pixel_facebook
+    },
+    listArticulos() {
+      return this.$store.state.listArticulos
+    },
+    filterArticles() {
+      const initial = this.currentPage * 12 - 12
+      const final = initial + 12
+      return this.filteredList.slice(initial, final)
+    },
+    filteredList() {
+      if (this.search) {
+        return this.listArticulos.filter((element) => {
+          return element.titulo
+            .toLowerCase()
+            .includes(this.search.toLowerCase())
+        })
+      } else {
+        return this.listArticulos
+      }
     },
   },
   methods: {

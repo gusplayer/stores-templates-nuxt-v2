@@ -18,7 +18,14 @@
       </div>
       <div class="footer-item-secciones">
         <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-          <nuxt-link :to="item.path" class="text-secciones">
+          <nuxt-link v-if="item.path" :to="item.path" class="text-secciones">
+            {{ $t(`${item.name}`) }}
+          </nuxt-link>
+          <nuxt-link
+            v-if="item.href && listArticulos > 0"
+            :to="item.href"
+            class="text-secciones"
+          >
             {{ $t(`${item.name}`) }}
           </nuxt-link>
         </div>
@@ -29,8 +36,15 @@
         <label for="modal-toggle"> {{ $t('footer_politicasyterminos') }}</label>
       </div>
       <div class="separator"></div>
-      <p>{{ $t('footer_desarrollado') }}</p>
-      <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
+      <p v-if="this.showLogo == true">
+        {{ $t('footer_desarrollado') }}
+      </p>
+      <a
+        v-if="this.showLogo == true"
+        href="https://komercia.co/"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
         <img
           src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
           v-if="logo == true"
@@ -44,6 +58,17 @@
           alt="Logo Img"
         />
       </a>
+      <nuxt-link
+        to="/"
+        class="wrapper-logo-tablada"
+        v-if="this.showLogo == false"
+      >
+        <img
+          :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+          class="logo-tablada"
+          alt="Logo Img"
+        />
+      </nuxt-link>
     </div>
     <div class="modal-container" v-if="dataStore.politicas">
       <input type="checkbox" id="modal-toggle" />
@@ -117,9 +142,16 @@ export default {
     if (this.settingByTemplate) {
       this.setLogo()
     }
+    if (
+      this.dataStore.tienda.id_tienda == 5574 ||
+      this.dataStore.tienda.id_tienda == 5347
+    ) {
+      this.showLogo = false
+    }
   },
   data() {
     return {
+      showLogo: true,
       logo: null,
       secciones: [
         {
@@ -137,6 +169,10 @@ export default {
         {
           name: 'footer_micompra',
           path: '/micompra',
+        },
+        {
+          name: 'header_blog',
+          href: '/blog',
         },
       ],
       links: [
@@ -162,6 +198,11 @@ export default {
         },
       ],
     }
+  },
+  computed: {
+    listArticulos() {
+      return this.$store.state.listArticulos.length
+    },
   },
   methods: {
     setLogo() {
@@ -459,6 +500,17 @@ export default {
 }
 .tab input[type='radio']:checked + label::after {
   transform: rotateX(180deg);
+}
+.wrapper-logo-tablada {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo-tablada {
+  max-height: 74px;
+  object-fit: contain;
+  object-position: left;
 }
 @media (max-width: 768px) {
   .contenedor {

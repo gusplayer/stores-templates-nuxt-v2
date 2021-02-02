@@ -26,9 +26,15 @@
                 class="header-text-center"
                 >{{ $t(`${item.name}`) }}</nuxt-link
               >
+              <nuxt-link
+                :to="item.href"
+                v-else-if="item.href && listArticulos > 0"
+                class="header-text-center"
+                >{{ $t(`${item.name}`) }}</nuxt-link
+              >
               <div v-else>
                 <div
-                  v-if="dataStore.categorias.length > 0"
+                  v-if="dataStore.categorias.length > 0 && item.ref"
                   style="
                     margin-right: 20px;
                     display: flex;
@@ -226,13 +232,17 @@ export default {
           name: 'header_categorias',
           iconOpen: 'Flechadown-icon',
           iconClose: 'FlechaUp-icon',
+          ref: 'categorias',
         },
         {
           name: 'header_contacto',
           path: '/contacto',
         },
+        {
+          name: 'header_blog',
+          href: '/blog',
+        },
       ],
-      cat: [],
       add: true,
       selectSubcategory: '',
       nameCategory: '',
@@ -258,6 +268,9 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
+    },
+    listArticulos() {
+      return this.$store.state.listArticulos.length
     },
   },
   methods: {
@@ -335,6 +348,10 @@ export default {
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$router.push({
+        path: '',
+        query: { subcategory: this.nameSubCategory },
+      })
       this.$store.commit('products/FILTER_BY', {
         type: 'subcategory',
         data: value,
@@ -364,6 +381,10 @@ export default {
       if (ref) {
         this.addClass()
       }
+      this.$router.push({
+        path: '',
+        query: { category: value.nombre_categoria_producto },
+      })
       this.$store.commit('products/FILTER_BY', {
         type: 'category',
         data: value.nombre_categoria_producto,
@@ -379,11 +400,13 @@ export default {
       this.showMenu = false
       this.$router.push({
         path: '/',
+        query: '',
       })
       this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
         data: '',
@@ -504,6 +527,7 @@ export default {
   padding: 10px 30px 10px 20px;
   border-top: 1px solid #aba4a466;
   margin: 0 auto;
+  list-style: none;
 }
 .wrapper-meni-grid {
   flex: 2;
@@ -511,14 +535,6 @@ export default {
   max-width: 1000px;
   max-height: 560px;
   overflow-y: auto;
-}
-.menu-grid {
-  width: 100%;
-  margin-right: 1px;
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 32px;
-  row-gap: 10px;
 }
 .wrapper-meni-grid::-webkit-scrollbar {
   border: 1px solid rgba(202, 202, 202, 0.322);
@@ -534,6 +550,15 @@ export default {
 .wrapper-meni-grid::-webkit-scrollbar-thumb:hover {
   background: rgb(102, 102, 102);
   border-radius: 10px;
+}
+.menu-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
 }
 .name-category-all {
   font-size: 16px;
@@ -555,6 +580,7 @@ export default {
 .name-category {
   color: var(--color_text);
   cursor: pointer;
+  margin-right: 32px;
 }
 .name-category-active {
   color: red;
@@ -571,7 +597,7 @@ export default {
 .subcategoria li {
   padding: 0px;
   margin-bottom: 8px;
-  margin-left: 5px;
+  margin-left: 7px;
   font-size: 14px;
   font-weight: 50;
 }
@@ -595,7 +621,7 @@ export default {
 }
 .header-logo {
   /* width: 100%; */
-  max-height: 70px;
+  max-height: 74px;
   object-fit: contain;
   object-position: left;
 }

@@ -69,7 +69,7 @@
 import idCloudinary from '../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
-  name: 'Ko-ProductFavoritos-1',
+  name: 'Ko-ProductFavoritos-valienta',
   computed: {
     dataStore() {
       return this.$store.state.dataStore

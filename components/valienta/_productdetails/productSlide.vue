@@ -30,6 +30,7 @@
         </div>
       </div>
     </div>
+    <div class="swiper-pagination" slot="pagination" v-if="photos.length"></div>
     <!-- <div class="swiper-pagination" slot="pagination"></div> -->
   </div>
 </template>
@@ -76,13 +77,11 @@ export default {
 
 <style scoped>
 .swiper-wrapper {
-  max-width: 360px;
-  height: 360px;
 }
 .swiper-slide {
   width: 100%;
-  max-width: 360px;
-  height: 360px; /* position: relative; */
+  max-width: 375px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,8 +89,8 @@ export default {
   overflow: hidden;
 }
 .photo {
-  width: fit-content;
-  object-fit: contain;
+  width: 100%;
+  object-fit: cover;
   overflow: hidden;
 }
 .photos .responsive .swiper-pagination-bullet {
@@ -99,6 +98,18 @@ export default {
 }
 .photos .responsive .swiper-pagination-bullet-active {
   background-color: #fff;
+}
+
+.swiper-pagination >>> .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  /* border: 1px #a9206b solid; */
+  opacity: 0.8;
+  background: #4a5782;
+}
+.swiper-pagination >>> .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #a9206b;
 }
 .youtube {
   width: 99%;

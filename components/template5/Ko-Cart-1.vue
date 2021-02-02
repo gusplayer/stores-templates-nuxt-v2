@@ -380,7 +380,7 @@
       <div class="wrapper_photo">
         <img :src="img" class="photo" alt="Product img" />
       </div>
-      <p>T{{ $t('footer_carritoVacio') }}</p>
+      <p>{{ $t('footer_carritoVacio') }}</p>
       <nuxt-link to="/">
         <button ref="colorBtn" class="btn3">
           {{ $t('cart_agregarProductos') }}
@@ -638,6 +638,7 @@ export default {
   display: flex;
   width: 100%;
   max-width: 1300px;
+  min-height: calc(66vh);
   flex-direction: column;
   align-items: center;
   padding: 30px 20px 30px 20px;
@@ -848,11 +849,10 @@ export default {
   flex: 1;
   flex-direction: column;
   width: 100%;
-  margin-left: 145px;
+  margin-left: 100px;
 }
 .cart_summary_items {
   display: flex;
-  flex: 1;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
@@ -1108,6 +1108,9 @@ details[open] summary ~ * {
   }
   .cart_summary_body {
     margin-left: 0px;
+  }
+  .content_tittle {
+    flex: 0;
   }
   .cart_summary_items {
     display: flex;

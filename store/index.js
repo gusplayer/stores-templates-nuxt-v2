@@ -84,6 +84,7 @@ export const state = () => ({
   openOrderValienta: false,
   openMenulateralRight: false,
   openMenulateralLeft: false,
+  openSearch: false,
   stateBanner: true,
   mediospago: {
     epayco: false,
@@ -144,6 +145,40 @@ export const state = () => ({
   layoutUnicentro: false,
   listDescuentos: [],
   listArticulos: [],
+  getSettingsCSSNew: {
+    '--color_text': '#1e0e62',
+    '--color_subtext': 'rgba(21, 20, 57, 0.4)',
+    '--color_hover_text': '#8918C8',
+
+    '--color_icon': 'rgba(21, 20, 57, 0.4)',
+    '--color_shopping_cart': '#4e33e6',
+    '--color_border': '#929292',
+
+    '--background_color_1': 'hsla(173, 0%, 100%, 1)',
+    '--background_color_2': '#CFCFCF',
+
+    '--color_text_btn': '#ffffff',
+    '--color_border_btn': '#000000',
+    '--color_background_btn': '#000000',
+    '--color_background_btn_2': 'hsla(0, 0%, 0%, 1)',
+
+    '--btnhover': '#e64956',
+
+    '--radius_btn': '25px',
+    '--logo_width': '120px',
+
+    tabs: {
+      1: 'Accesorios',
+      2: 'Nosotros',
+      3: 'Carrito',
+      4: 'Contacto',
+    },
+    title: 'Accesorios para mujer hechos a mano',
+    description:
+      'Laura Pachecho es una emprendedora con años de experiencia creando accesorios de alta calidad.',
+    text_btn: 'Conócenos',
+  },
+  headerk07: false,
 })
 
 export const mutations = {
@@ -196,6 +231,9 @@ export const mutations = {
   SET_OPENORDER: (state, value) => {
     state.openOrder = value
   },
+  SET_OPENSEARCH: (state, value) => {
+    state.openSearch = value
+  },
   SET_OPENORDER_VALIENTA: (state, value) => {
     state.openOrderValienta = value
   },
@@ -204,6 +242,9 @@ export const mutations = {
   },
   SET_OPENORDERMENULEFT: (state, value) => {
     state.openMenulateralLeft = value
+  },
+  SET_STATESPACERHEADERK7: (state, value) => {
+    state.headerk07 = value
   },
   SET_TOKEN(state, value) {
     state.configHttp = {
@@ -349,8 +390,8 @@ export const mutations = {
     state.fullPathServer = value
   },
   SET_TEMPLATE_STORE(state, value) {
-    // state.template = value
-    state.template = 8
+    state.template = value
+    // state.template = 7
   },
 }
 export const actions = {
@@ -411,6 +452,7 @@ export const actions = {
       await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
       await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
       await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
+      await dispatch('GET_ARTICLES', id.data.data.id)
     }
     await dispatch('GET_SERVER_PATH', full)
     await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
@@ -445,7 +487,7 @@ export const actions = {
   },
   GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
     let template = store.template
-    // let template = 6
+    // let template = 7
     this.$axios
       .$get(
         `https://api2.komercia.co/api/template/${template}/settings/${store.id_tienda}`
@@ -606,12 +648,9 @@ export const actions = {
         })
       })
   },
-  GET_ARTICLES({ state }) {
+  async GET_ARTICLES({ state }, id) {
     axios
-      .get(
-        `${state.urlKomercia}/api/blogs/${state.dataStore.tienda.id_tienda}?page=1`,
-        state.configAxios
-      )
+      .get(`${state.urlKomercia}/api/blogs/${id}?page=1`, state.configAxios)
       .then((response) => {
         state.listArticulos = response.data.blogs.data
       })

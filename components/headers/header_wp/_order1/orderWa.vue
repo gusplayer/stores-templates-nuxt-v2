@@ -87,7 +87,7 @@
                     <p>{{ $t('footer_totalPagar') }}</p>
                     <p>
                       {{
-                        (totalCart + (getFreeShipping ? 0 : shipping))
+                        (totalCart + (this.shipping ? this.shipping : 0))
                           | currency(
                             dataStore.tienda.codigo_pais,
                             dataStore.tienda.moneda
@@ -549,23 +549,19 @@ export default {
         if (value && codigo_pais == 'co' && moneda == 'COP') {
           return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
         } else if (codigo_pais == 'internacional') {
-          {
-            resultCurrent = new Intl.NumberFormat('en-IN', {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
+          resultCurrent = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: moneda,
+            minimumFractionDigits: 0,
+          }).format(value)
+          return resultCurrent
         } else {
-          {
-            resultCurrent = new Intl.NumberFormat(codigo_pais, {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
+          resultCurrent = new Intl.NumberFormat(codigo_pais, {
+            style: 'currency',
+            currency: moneda,
+            minimumFractionDigits: 0,
+          }).format(value)
+          return resultCurrent
         }
       } else {
         if (value) {

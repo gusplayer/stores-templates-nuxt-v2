@@ -6,7 +6,7 @@
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
-          <no-ssr>
+          <client-only>
             <img
               v-if="!soldOut"
               v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
@@ -19,7 +19,7 @@
               class="product-image-soldOut"
               alt="Product Img"
             />
-          </no-ssr>
+          </client-only>
           <div class="image_overlay"></div>
         </router-link>
         <div class="separador-stats"></div>
@@ -113,7 +113,7 @@
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
-          <no-ssr>
+          <client-only>
             <img
               v-if="!soldOut"
               v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
@@ -126,7 +126,7 @@
               class="product-image-soldOut"
               alt="Product Img"
             />
-          </no-ssr>
+          </client-only>
         </router-link>
         <div class="content-card-items">
           <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
@@ -137,11 +137,11 @@
             :to="{ path: `/productos/` + product.slug }"
             class="content-name-product"
           >
-            <p class="card-title" v-if="this.product.nombre.length >= 33">
-              {{ `${this.product.nombre.slice(0, 33)}..` }}
+            <p class="card-title" v-if="this.product.nombre.length >= 25">
+              {{ `${this.product.nombre.slice(0, 25)}..` }}
             </p>
             <p class="card-title" v-else>
-              {{ `${this.product.nombre.slice(0, 34)}` }}
+              {{ `${this.product.nombre.slice(0, 30)}` }}
             </p>
           </router-link>
           <div class="content-text-price" v-if="this.product.precio">
@@ -302,6 +302,7 @@ export default {
         estado: true,
       }
       this.maxQuantityValue = this.product.stock
+
       this.productsCarts.find((productCart, index) => {
         if (productCart.id == this.product.id) {
           this.productIndexCart = index
@@ -309,6 +310,7 @@ export default {
           this.maxQuantityValue = this.product.stock - productCart.cantidad
         }
       })
+
       if (
         this.salesData.unidades == 0 ||
         this.maxQuantityValue <= 0 ||
@@ -319,6 +321,7 @@ export default {
     },
     addShoppingCart() {
       if (this.product) {
+        this.productIndexCart = null
         this.getDataProduct()
         if (this.product.id == this.idSlug) {
           let product = {
@@ -335,6 +338,7 @@ export default {
           } else {
             product.limitQuantity = this.product.stock
           }
+
           if (typeof this.productIndexCart === 'number') {
             const mutableProduct = this.$store.state.productsCart[
               this.productIndexCart
@@ -348,6 +352,7 @@ export default {
           } else {
             this.$store.state.productsCart.push(product)
           }
+
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
               content_ids: this.product.id,

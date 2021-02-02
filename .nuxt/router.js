@@ -76,6 +76,10 @@ export const routerOptions = {
     component: _19b12e6a,
     name: "micompra"
   }, {
+    path: "/productos",
+    component: _40f254f0,
+    name: "productos"
+  }, {
     path: "/template5",
     component: _ea932872,
     name: "template5"

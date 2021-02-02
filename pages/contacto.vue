@@ -1,7 +1,7 @@
 <template lang="html">
-  <div style="overflow: hidden;">
-    <KoContact
-      :dataStore="dataStore"
+  <div class="home">
+    <component
+      :is="indexTemplate"
       :style="
         this.settingByTemplate &&
         this.settingByTemplate.settings &&
@@ -9,16 +9,21 @@
           ? this.settingByTemplate.settings
           : this.settingBase
       "
+      :dataStore="dataStore"
     />
   </div>
 </template>
 
 <script>
-import KoContact from '../components/template5/Ko-Contact-1'
+import K05Contact from '../components/template5/Ko-Contact-1'
+import K07Contact from '../components/template7/Ko-Contact'
 
 export default {
+  layout: 'default',
+
   components: {
-    KoContact,
+    K05Contact,
+    K07Contact,
   },
   mounted() {
     if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
@@ -39,6 +44,27 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
+    },
+    template() {
+      return this.$store.state.template
+    },
+    indexTemplate() {
+      let productListComponent = ''
+      switch (this.template) {
+        case 3:
+          productListComponent = 'K05Contact'
+          break
+        case 5:
+          productListComponent = 'K05Contact'
+          break
+        case 6:
+          productListComponent = 'K05Contact'
+          break
+        case 7:
+          productListComponent = 'K07Contact'
+          break
+      }
+      return productListComponent
     },
   },
 }

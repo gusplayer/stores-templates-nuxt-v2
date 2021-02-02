@@ -92,9 +92,8 @@ export default {
   head() {
     let tienda = this.$store.state.dataStore.tienda
     let tipo_letra =
-      this.$store.state.settingByTemplate &&
-      this.$store.state.settingByTemplate.tipo_letra
-        ? this.$store.state.settingByTemplate.tipo_letra
+      this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+        ? this.settingByTemplate.settings.tipo_letra
         : 'Roboto'
 
     let tidio =

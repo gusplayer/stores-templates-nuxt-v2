@@ -26,9 +26,15 @@
                 class="header-text-center"
                 >{{ $t(`${item.name}`) }}</nuxt-link
               >
+              <nuxt-link
+                :to="item.href"
+                v-else-if="item.href && listArticulos > 0"
+                class="header-text-center"
+                >{{ $t(`${item.name}`) }}</nuxt-link
+              >
               <div v-else>
                 <div
-                  v-if="dataStore.categorias.length > 0"
+                  v-if="dataStore.categorias.length > 0 && item.ref"
                   style="
                     margin-right: 20px;
                     display: flex;
@@ -236,10 +242,15 @@ export default {
           name: 'header_categorias',
           iconOpen: 'Flechadown-icon',
           iconClose: 'FlechaUp-icon',
+          ref: 'categorias',
         },
         {
           name: 'header_contacto',
           path: '/contacto',
+        },
+        {
+          name: 'header_blog',
+          href: '/blog',
         },
       ],
       cat: [],
@@ -268,6 +279,9 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
+    },
+    listArticulos() {
+      return this.$store.state.listArticulos.length
     },
   },
   methods: {
@@ -512,6 +526,7 @@ export default {
   padding: 10px 30px 10px 20px;
   border-top: 1px solid #aba4a466;
   margin: 0 auto;
+  list-style: none;
 }
 .wrapper-meni-grid {
   flex: 2;
@@ -523,9 +538,11 @@ export default {
 .menu-grid {
   width: 100%;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  column-gap: 30px;
-  row-gap: 10px;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
 }
 .wrapper-meni-grid::-webkit-scrollbar {
   border: 1px solid rgba(202, 202, 202, 0.322);
@@ -562,6 +579,7 @@ export default {
 .name-category {
   color: var(--color_text);
   cursor: pointer;
+  margin-right: 32px;
 }
 .name-category-active {
   color: red;
@@ -578,7 +596,7 @@ export default {
 .subcategoria li {
   padding: 0px;
   margin-bottom: 8px;
-  margin-left: 5px;
+  margin-left: 7px;
   font-size: 14px;
   font-weight: 50;
 }
@@ -602,7 +620,7 @@ export default {
 }
 .header-logo {
   /* width: 100%; */
-  max-height: 70px;
+  max-height: 74px;
   object-fit: contain;
   object-position: left;
 }

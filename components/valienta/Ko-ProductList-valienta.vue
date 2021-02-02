@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-productlist">
-    <div class="container">
+    <div class="container-productlist">
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
           <p class="text-categorias" @click="clear">
@@ -18,36 +18,35 @@
           </p>
         </div>
       </div>
-      <div>
-        <div class="content-item-productos">
-          <div class="grid-products">
-            <div
-              v-for="product in filterProduct"
-              :key="product.id"
-              class="content-products"
-            >
-              <KoProductCard1
-                :product="product"
-                :dataStore="dataStore.tienda"
-              ></KoProductCard1>
-            </div>
-          </div>
+
+      <div class="content-item-productos">
+        <div class="grid-products">
           <div
-            v-if="(this.fullProducts.length == 0)"
-            class="content-products-empty"
+            v-for="product in filterProduct"
+            :key="product.id"
+            class="content-products"
           >
-            <p>{{ $t('home_msgCatalogo') }}</p>
+            <KoProductCard1
+              :product="product"
+              :dataStore="dataStore.tienda"
+            ></KoProductCard1>
           </div>
-          <br />
-          <div class="pagination-medium" v-if="products.length > 16">
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              :total="products.length"
-              :page-size="16"
-              :current-page.sync="currentPage"
-            ></el-pagination>
-          </div>
+        </div>
+        <div
+          v-if="(this.fullProducts.length == 0)"
+          class="content-products-empty"
+        >
+          <p>{{ $t('home_msgCatalogo') }}</p>
+        </div>
+        <br />
+        <div class="pagination-medium" v-if="products.length > 16">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="products.length"
+            :page-size="16"
+            :current-page.sync="currentPage"
+          ></el-pagination>
         </div>
       </div>
     </div>
@@ -64,7 +63,7 @@ export default {
     dataStore: Object,
     fullProducts: {},
   },
-  name: 'Ko-ProductList-1',
+  name: 'Ko-ProductList-valienta',
   mounted() {
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
@@ -273,6 +272,7 @@ export default {
     },
     currentPage() {
       this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+      // eslint-disable-next-line no-unused-vars
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
@@ -299,6 +299,7 @@ export default {
 
 <style scoped>
 .wrapper-productlist {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -307,12 +308,12 @@ export default {
   margin-top: 0px;
   padding-top: 15px;
 }
-.container {
-  display: flex;
-  justify-content: center;
+.container-productlist {
   width: 100%;
-  padding: 0px 20px 30px 20px;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  padding: 0px 20px 30px 20px;
 }
 .content-items-categorias {
   display: flex;
@@ -356,7 +357,7 @@ export default {
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(173px, 2fr));
+  grid-template-columns: repeat(4, minmax(163px, 2fr));
   grid-gap: 15px;
   box-sizing: border-box;
 }
@@ -387,44 +388,44 @@ export default {
   margin-top: 10px;
 }
 .pagination-medium >>> .el-pagination.is-background .btn-next {
-  color: #2ec4a1;
+  color: #4a5782;
   background-color: transparent;
 }
 .pagination-medium >>> .el-pagination.is-background .btn-prev {
-  color: #2ec4a1;
+  color: #4a5782;
   background-color: transparent;
 }
 .pagination-medium >>> .el-pagination.is-background .el-pager li {
-  color: #2ec4a1;
+  color: #4a5782;
   background-color: transparent;
 }
 .pagination-medium >>> .el-pagination.is-background .btn-next:hover {
-  color: #2ec4a1;
+  color: #4a5782;
 }
 .pagination-medium >>> .el-pagination.is-background .btn-prev:hover {
-  color: #2ec4a1;
+  color: #4a5782;
 }
 .pagination-medium
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled):hover {
-  color: #2ec4a1;
+  color: #4a5782;
 }
 .pagination-medium
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled).active {
-  background-color: #2ec4a1;
+  background-color: #4a5782;
   color: white;
 }
 @media (max-width: 800px) {
   .grid-products {
-    grid-template-columns: repeat(3, minmax(173px, 2fr));
+    grid-template-columns: repeat(3, minmax(163px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 770px) {
-  .container {
+  .container-productlist {
     padding: 0px 0px 10px 0px;
   }
   .content-item-productos {
@@ -434,13 +435,19 @@ export default {
     padding: 0 10px;
   }
   .grid-products {
-    grid-template-columns: repeat(2, minmax(173px, 2fr));
+    grid-template-columns: repeat(2, minmax(163px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 700px) {
   .content-items-categorias {
     margin-left: 10px;
+  }
+}
+@media (max-width: 300px) {
+  .grid-products {
+    grid-template-columns: repeat(2, minmax(123px, 2fr));
+    grid-gap: 20px;
   }
 }
 </style>

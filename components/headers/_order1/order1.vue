@@ -3,7 +3,7 @@
     <div class="order" @click="closeOrder" v-show="openOrder">
       <div class="order_content">
         <div class="order_header">
-          <h3>{{ $t('footer_title') }}</h3>
+          <h3 class="order_header_title">{{ $t('footer_title') }}</h3>
           <div @click="closedOder" class="order_header_close">
             <close-icon />
           </div>
@@ -858,6 +858,7 @@ export default {
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
+  list-style: none;
 }
 .order_content {
   position: absolute;
@@ -895,6 +896,9 @@ export default {
   border-bottom: 1px solid var(--background_color_2);
   padding: 10px 30px;
   flex: none;
+}
+.order_header_title {
+  color: var(--color_text);
 }
 .order_header_close {
   font-size: 30px;
@@ -965,6 +969,8 @@ export default {
 .order_products_list_item .photo img {
   max-width: 50px;
   max-height: 50px;
+  border-radius: 5px;
+  margin-right: 5px;
 }
 .order_products_list_item .name {
   max-width: 190px;
@@ -1302,6 +1308,7 @@ export default {
   border-radius: 10px;
 }
 .text-cart-empty {
+  color: var(--color_text);
   text-align: center;
 }
 .fade-enter-active,

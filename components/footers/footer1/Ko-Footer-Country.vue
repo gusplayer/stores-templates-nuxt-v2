@@ -6,17 +6,17 @@
           v-if="dataStore.tienda.pais == 'Internacional'"
           style="display: flex;"
         >
-          <no-ssr>
+          <client-only>
             <country-flag country="un" size="normal"></country-flag>
-          </no-ssr>
+          </client-only>
         </div>
         <div v-else class="content-flag">
-          <no-ssr>
+          <client-only>
             <country-flag
               :country="`${dataStore.tienda.codigo_pais}`"
               size="normal"
             ></country-flag>
-          </no-ssr>
+          </client-only>
         </div>
         <p class="text-country">{{ dataStore.tienda.pais }}</p>
       </div>

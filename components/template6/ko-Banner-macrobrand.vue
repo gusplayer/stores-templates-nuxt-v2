@@ -23,19 +23,19 @@ export default {
       data: [
         {
           photo:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1606402552/macroband/banner_web_kswnm6.png',
+            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609802297/macroband/banner_02_lmmyse.png',
         },
         {
           photo:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1605040750/macroband/banner_web_vzbzxv.png',
+            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609802301/macroband/banner_01_s55h4i.jpg',
         },
+        // {
+        //   photo:
+        //     'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1602278801/macroband/banner_web_macrobrand_tn8kra.jpg',
+        // },
         {
           photo:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1602278801/macroband/banner_web_macrobrand_tn8kra.jpg',
-        },
-        {
-          photo:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1599774926/macroband/Matador_Banner_web_mi3ohr.jpg',
+            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609802299/macroband/banner_03_vfdrvs.png',
         },
       ],
     }

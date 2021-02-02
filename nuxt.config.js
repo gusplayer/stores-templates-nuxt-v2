@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 export default {
   mode: 'universal',
-
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -15,6 +14,14 @@ export default {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || '',
+      },
+    ],
+    // Fuentes template 7
+    link: [
+      {
+        href:
+          'https://fonts.googleapis.com/css2?family=David+Libre&family=Great+Vibes&family=Lora:ital@0;1&display=swap',
+        rel: 'stylesheet',
       },
     ],
   },
@@ -45,7 +52,6 @@ export default {
     { src: '~/plugins/countryFlags.js', ssr: false },
     { src: '~/plugins/vue-lazyload.js', ssr: false },
   ],
-
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',

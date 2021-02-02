@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="home">
-    <KoProductDetail
+    <component
+      :is="indexTemplate"
       :style="
         this.settingByTemplate &&
         this.settingByTemplate.settings &&
@@ -13,11 +14,12 @@
 </template>
 
 <script>
-import KoProductDetail from '../../components/template5/Ko-ProductDetail-1'
-
+import Ko5ProductDetail from '../../components/template5/Ko-ProductDetail-1'
+import Ko7ProductDetail from '../../components/template7/Ko-ProductDetail'
 export default {
   components: {
-    KoProductDetail,
+    Ko5ProductDetail,
+    Ko7ProductDetail,
   },
   computed: {
     settingBase() {
@@ -25,6 +27,27 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    template() {
+      return this.$store.state.template
+    },
+    indexTemplate() {
+      let productListComponent = ''
+      switch (this.template) {
+        case 3:
+          productListComponent = 'Ko5ProductDetail'
+          break
+        case 5:
+          productListComponent = 'Ko5ProductDetail'
+          break
+        case 6:
+          productListComponent = 'Ko5ProductDetail'
+          break
+        case 7:
+          productListComponent = 'Ko7ProductDetail'
+          break
+      }
+      return productListComponent
     },
   },
 }

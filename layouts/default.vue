@@ -18,6 +18,11 @@
       "
       :is="headerTemplate"
     />
+    <!-- <div
+      v-if="this.estadoHeader7 && this.headerk07"
+      class="separadorKo7"
+      id="separadork07"
+    ></div> -->
     <nuxt />
     <component
       :dataStore="dataStore"
@@ -31,12 +36,15 @@
       :is="footerTemplate"
     />
     <KoFooterCountry :dataStore="dataStore" />
-    <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
-      <div @click="redirectWhatsapp()">
-        <koWhatsapp class="button-whatsapp" /><span
-          >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
-        >
-      </div>
+    <div
+      class="wrapper-whatsapp"
+      v-if="dataStore.tienda.whatsapp"
+      @click="redirectWhatsapp()"
+    >
+      <koWhatsapp class="button-whatsapp" />
+      <span
+        >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
+      >
     </div>
     <!-- <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
       <div class="content-cookie">
@@ -76,7 +84,7 @@
         </button>
       </div>
     </div>
-    <no-ssr>
+    <client-only>
       <noscript>
         <iframe
           v-if="
@@ -88,7 +96,7 @@
           style="display: none; visibility: hidden; opacity: 0;"
         ></iframe>
       </noscript>
-    </no-ssr>
+    </client-only>
   </div>
 </template>
 
@@ -126,19 +134,28 @@ export default {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_SHOPPING_CART')
     let domain = this.$route.fullPath
+    let domains = this.$route.fullPath
     if (domain == '/?clearCart=true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
+    }
+    // if (domains == '/contacto') {
+    //   this.estadoHeader7 = true
+    // } else {
+    //   this.estadoHeader7 = false
+    // }
+  },
+  data() {
+    return {
+      // estadoHeader7: false,
     }
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
     let tipo_letra =
-      this.$store.state.settingByTemplate &&
-      this.$store.state.settingByTemplate.tipo_letra
-        ? this.$store.state.settingByTemplate.tipo_letra
+      this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+        ? this.settingByTemplate.settings.tipo_letra
         : 'Roboto'
-
     let tidio =
       this.$store.state.analytics_tagmanager &&
       this.$store.state.analytics_tagmanager.tidio_user
@@ -328,7 +345,6 @@ export default {
         //   break
         case 7:
           footerComponent = 'KoFooter4'
-
           break
         case 8:
           footerComponent = 'KoFooter1'
@@ -344,6 +360,9 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    headerk07() {
+      return this.$store.state.headerk07
     },
   },
   methods: {
@@ -406,6 +425,18 @@ export default {
       document.getElementById('modalNotificacion').style.opacity = '0'
     },
   },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    // $route(to, from) {
+    //   let domains = this.$route.fullPath
+    //   var separador = document.getElementById('separadork07')
+    //   if (domains == '/contacto') {
+    //     this.estadoHeader7 = true
+    //   } else {
+    //     this.estadoHeader7 = false
+    //   }
+    // },
+  },
 }
 </script>
 
@@ -431,13 +462,18 @@ export default {
   box-sizing: border-box;
   outline: none !important;
 }
+/* .separadorKo7 {
+  width: 100%;
+  padding-top: 120px;
+  background: #efefef;
+} */
 .wrapper-whatsapp {
   position: fixed;
   transform: translate(108px, 0px);
   top: 50%;
   right: 0px;
   width: 155px;
-  color: black;
+  color: white;
   overflow: hidden;
   background-color: #25d366;
   border-radius: 10px 0 0 10px;
@@ -445,17 +481,22 @@ export default {
   transition: all 0.5s ease-in-out;
   vertical-align: middle;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  max-height: 51px;
 }
 .wrapper-whatsapp:hover {
   transform: translate(0px, 0px);
 }
-.wrapper-whatsapp div span {
+.wrapper-whatsapp span {
   font-size: 15px;
   padding-top: 8px;
   padding-bottom: 10px;
-  position: absolute;
+  position: relative;
   line-height: 16px;
   font-weight: bolder;
+  margin-left: 5px;
+  color: white;
 }
 .button-whatsapp {
   width: 50px;
@@ -602,6 +643,26 @@ export default {
     font-size: 14px;
     margin-bottom: 10px;
     text-align: center;
+  }
+}
+@screen sm {
+  .separadorKo7 {
+    padding-top: 60px;
+  }
+}
+@screen mlg {
+  .separadorKo7 {
+    padding-top: 70px;
+  }
+}
+@screen xl {
+  .separadorKo7 {
+    padding-top: 80px;
+  }
+}
+@screen xl {
+  .separadorKo7 {
+    padding-top: 120px;
   }
 }
 </style>
