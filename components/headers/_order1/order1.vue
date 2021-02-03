@@ -1300,9 +1300,10 @@ export default {
   display: flex;
   justify-content: center;
   align-self: center;
+  max-width: 120px;
 }
 .photo {
-  width: 120px;
+  width: 100%;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;

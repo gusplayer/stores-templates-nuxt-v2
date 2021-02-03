@@ -94,6 +94,9 @@ export default {
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },
+    searchValue() {
+      return this.$store.state.searchValue
+    },
   },
   methods: {
     getSearch(value) {
@@ -127,6 +130,7 @@ export default {
       }
     },
     Searchproduct(search) {
+      this.search = search
       this.$store.commit('SET_SEARCHVALUE', search)
     },
     Sendsubcategory(value) {
@@ -203,7 +207,7 @@ export default {
     },
   },
   watch: {
-    search(value) {
+    searchValue(value) {
       this.Searchproduct(value)
     },
   },
@@ -243,7 +247,8 @@ input[type='search'] {
   top: 120px;
   max-width: 100%;
   height: 100vh;
-  background-color: var(--background_color_1);
+  /* background-color: var(--background_color_1); */
+  background-color: white;
   padding-bottom: 10px;
   animation: dispatch 0.2s linear 1;
   z-index: auto;

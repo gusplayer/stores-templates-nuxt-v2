@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container" id="navbar" :style="settingByTemplate">
+  <div class="header-container" id="navbar" :style="settingByTemplate7">
     <div class="wrapper-header" id="headbg">
       <div class="header" id="headerid">
         <KoOrder :dataStore="dataStore" />
@@ -95,32 +95,21 @@ export default {
   name: 'Ko-Header-4',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingByTemplate7: Object,
+    settingByTemplate7General: Object,
   },
   mounted() {
     let domain = this.$route.fullPath
-    let searchCategory = domain.slice(0, [11])
-    let searchSubCategory = domain.slice(0, [14])
-    let search = domain.slice(0, [9])
+    let result = domain.split('/')
+    let search = result[result.length - 1].slice(0, [8])
     if (domain == '/') {
-      this.$store.commit('SET_STATEBANNER', true)
       this.showSearch = true
-    } else if (searchCategory === '/?category=') {
-      this.$store.commit('SET_STATEBANNER', false)
+    } else if (search == '?search=') {
       this.showSearch = true
-    } else if (searchSubCategory === '/?subcategory=') {
-      this.$store.commit('SET_STATEBANNER', false)
-      this.showSearch = true
-    } else if (search === '/?search=') {
-      this.$store.commit('SET_STATEBANNER', false)
       this.setSearch(domain)
-      this.showSearch = true
     } else {
       this.showSearch = false
     }
-    // if (domain == '/' || domain != '/') {
-    //   this.$store.commit('SET_STATESPACERHEADERK7', true)
-    // }
 
     var prevScrollpos = window.pageYOffset
     window.onscroll = function () {
@@ -142,15 +131,6 @@ export default {
           navbar.style.zIndex = '20'
           navbar.style.top = '30px'
         }
-        // if (screen.width >= 1440) {
-        //   header.style.width = '83%'
-        // }
-        // if (screen.width >= 1920) {
-        //   header.style.width = '63%'
-        // }
-        // if (screen.width >= 2560) {
-        //   header.style.width = '46%'
-        // }
       } else if (prevScrollpos > currentScrollPos && navbar) {
         //sube
         navbar.style.top = '0px'
@@ -165,18 +145,7 @@ export default {
         if (screen.width >= 1280) {
           header.style.width = '93%'
         }
-        // if (screen.width >= 1440) {
-        //   header.style.width = '83%'
-        // }
-        // if (screen.width >= 1920) {
-        //   header.style.width = '63%'
-        // }
-        // if (screen.width >= 2560) {
-        //   header.style.width = '46%'
-        // }
       } else {
-        //baja
-        // this.$store.commit('SET_STATESPACERHEADERK7', true)
         navbar.style.zIndex = '20'
         navbar.style.top = '-100px'
       }
@@ -255,6 +224,7 @@ export default {
       }
     },
     setSearch(value) {
+      this.openSearch()
       let category = value.replace('/?search=', '')
       let UrlCategory = category.replace(/-/g, ' ')
       let urlFiltrada = decodeURIComponent(UrlCategory)
@@ -271,22 +241,13 @@ export default {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
-      let searchCategory = domain.slice(0, [11])
-      let searchSubCategory = domain.slice(0, [14])
-      let search = domain.slice(0, [9])
+      let result = domain.split('/')
+      let search = result[result.length - 1].slice(0, [8])
       if (domain == '/') {
-        this.$store.commit('SET_STATEBANNER', true)
         this.showSearch = true
-      } else if (searchCategory === '/?category=') {
-        this.$store.commit('SET_STATEBANNER', false)
+      } else if (search == '?search=') {
         this.showSearch = true
-      } else if (searchSubCategory === '/?subcategory=') {
-        this.$store.commit('SET_STATEBANNER', false)
-        this.showSearch = true
-      } else if (search === '/?search=') {
-        this.$store.commit('SET_STATEBANNER', false)
         this.setSearch(domain)
-        this.showSearch = true
       } else {
         this.showSearch = false
       }
@@ -357,6 +318,7 @@ export default {
   transition: all 0.25s ease;
   font-family: 'David libre', serif !important ;
   font-size: 14px;
+  /* color:var(--color_badge_cart); */
 }
 .btn:hover {
   @apply text-red-btnhoverHeader;

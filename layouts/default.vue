@@ -7,34 +7,14 @@
           : 'Roboto',
     }"
   >
-    <component
-      :dataStore="dataStore"
-      :settingByTemplate="
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings['--background_color_1']
-          ? this.settingByTemplate.settings
-          : this.settingBase
-      "
-      :is="headerTemplate"
-    />
+    <component v-bind="componentsProps" :is="headerTemplate" />
     <!-- <div
       v-if="this.estadoHeader7 && this.headerk07"
       class="separadorKo7"
       id="separadork07"
     ></div> -->
     <nuxt />
-    <component
-      :dataStore="dataStore"
-      :settingByTemplate="
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings['--background_color_1']
-          ? this.settingByTemplate.settings
-          : this.settingBase
-      "
-      :is="footerTemplate"
-    />
+    <component v-bind="componentsProps" :is="footerTemplate" />
     <KoFooterCountry :dataStore="dataStore" />
     <div
       class="wrapper-whatsapp"
@@ -361,8 +341,30 @@ export default {
     settingByTemplate() {
       return this.$store.state.settingByTemplate
     },
+    settingByTemplate7() {
+      return this.$store.state.settingByTemplate7
+    },
     headerk07() {
       return this.$store.state.headerk07
+    },
+    componentsProps() {
+      return {
+        dataStore: this.dataStore,
+        settingByTemplate:
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings['--background_color_1']
+            ? this.settingByTemplate.settings
+            : this.settingBase,
+        settingByTemplate7:
+          this.settingByTemplate7 && this.settingByTemplate7.header
+            ? this.settingByTemplate7.header
+            : '',
+        settingByTemplate7General:
+          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
+            ? this.settingByTemplate7.settingGeneral
+            : '',
+      }
     },
   },
   methods: {

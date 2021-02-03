@@ -126,6 +126,7 @@ export const state = () => ({
   pagination: {},
   settingByTemplate: '',
   settingByTemplateWapi: '',
+  settingByTemplate7: '',
   category_producto_header: '',
   subcategory_producto_header: '',
   analytics_tagmanager: '',
@@ -363,6 +364,9 @@ export const mutations = {
   SET_SETTINGS_BY_TEMPLATE: (state, value) => {
     state.settingByTemplate = value
   },
+  SET_SETTINGS_BY_TEMPLATE_7: (state, value) => {
+    state.settingByTemplate7 = value
+  },
   SET_SETTINGS_BY_TEMPLATE_WAPI: (state, value) => {
     state.settingByTemplateWapi = value
   },
@@ -391,7 +395,7 @@ export const mutations = {
   },
   SET_TEMPLATE_STORE(state, value) {
     state.template = value
-    // state.template = 7
+    // state.template = 8
   },
 }
 export const actions = {
@@ -456,6 +460,9 @@ export const actions = {
     }
     await dispatch('GET_SERVER_PATH', full)
     await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
+    if (id.data.data.template == 7) {
+      await dispatch('GET_SETTINGS_BY_TEMPLATE_7', state.dataStore.tienda)
+    }
     const idSlug = route.path.split('-')
     const producto = await axios.get(
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
@@ -494,6 +501,15 @@ export const actions = {
       )
       .then((response) => {
         commit('SET_SETTINGS_BY_TEMPLATE', response.data)
+      })
+  },
+  GET_SETTINGS_BY_TEMPLATE_7({ commit }, store) {
+    this.$axios
+      .$get(
+        `https://backend-nuxt-editor.herokuapp.com/template7?id=${store.id_tienda}`
+      )
+      .then((response) => {
+        commit('SET_SETTINGS_BY_TEMPLATE_7', response.body)
       })
   },
   GET_SETTINGS_BY_TEMPLATE_WAPI({ commit }, idWapi) {

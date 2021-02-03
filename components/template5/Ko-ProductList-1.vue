@@ -318,7 +318,6 @@ export default {
         let filtradoCategorias = this.categorias.find(
           (element) => element.id == filtradoSubCategoria.categoria
         )
-
         this.$store.commit('products/FILTER_BY', {
           type: 'subcategory',
           data: filtradoSubCategoria.id,
