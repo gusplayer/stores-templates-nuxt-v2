@@ -454,7 +454,7 @@ li p {
     margin-right: 0px;
     padding-bottom: 0px;
     flex: 1;
-    height: 100%;
+    /* height: 100%; */
   }
   .left-empty {
     flex: 0;
