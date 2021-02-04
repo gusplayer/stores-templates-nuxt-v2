@@ -180,6 +180,7 @@ export const state = () => ({
     text_btn: 'Conócenos',
   },
   headerk07: false,
+  pixelKey:'x3130lz4ecwicp4b1l95r7wbnc4347'
 })
 
 export const mutations = {

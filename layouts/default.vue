@@ -141,6 +141,10 @@ export default {
       this.$store.state.analytics_tagmanager.tidio_user
         ? this.$store.state.analytics_tagmanager.tidio_user
         : ''
+    let verificationFacebookPixel =
+      this.$store.state.dataStore.tienda.id_tienda == '1559'
+        ? this.$store.state.pixelKey
+        : ''
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
     return {
@@ -225,6 +229,10 @@ export default {
           name: 'og:street-address',
           content: geolocalizacion.direccion,
         },
+        {
+          name: 'facebook-domain-verification',
+          content: `${verificationFacebookPixel}`,
+        },
       ],
       script: [
         {
@@ -243,7 +251,7 @@ export default {
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+          // href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         },
         {
           href: `https://fonts.googleapis.com/css?family=${tipo_letra}:400,700&display=swap`,
