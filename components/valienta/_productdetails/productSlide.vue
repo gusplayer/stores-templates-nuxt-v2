@@ -7,6 +7,15 @@
           class="photo"
           alt="Product img"
         />
+        <a
+          class="btn-download"
+          :href="photo"
+          target="_blank"
+          rel="noreferrer noopener"
+          download
+        >
+          <cloud-download-icon />
+        </a>
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
         <img
@@ -14,6 +23,15 @@
           class="photo"
           alt="Product img"
         />
+        <a
+          class="btn-download"
+          :href="photo.foto_cloudinary"
+          target="_blank"
+          rel="noreferrer noopener"
+          download
+        >
+          <cloud-download-icon />
+        </a>
       </div>
       <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">
         <div class="youtube">
@@ -65,8 +83,9 @@ export default {
     },
   },
   methods: {
-    setPhoto(photo) {
-      return photo
+    setPhoto(value) {
+      console.log(value)
+      // return photo
     },
     changeSlide() {
       this.swiper.slidePrev(500, false)
@@ -86,6 +105,7 @@ export default {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  flex-direction: column;
   overflow: hidden;
 }
 .photo {
@@ -126,5 +146,20 @@ export default {
 }
 .swiper-pagination-bullet-active {
   background: #0f2930;
+}
+.btn-download {
+  z-index: 20;
+  top: 0;
+  right: 35px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  color: #4a5782;
+  font-size: 30px;
+}
+.btn-download:hover {
+  color: #a9206b;
 }
 </style>

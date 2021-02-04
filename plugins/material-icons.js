@@ -35,6 +35,7 @@ import MessageProcessing from 'vue-material-design-icons/MessageProcessing.vue'
 import MessageReplyText from 'vue-material-design-icons/MessageReplyText.vue'
 import ShoppingSearch from 'vue-material-design-icons/ShoppingSearch.vue'
 import FormatListBulletedSquare from 'vue-material-design-icons/FormatListBulletedSquare.vue'
+import CloudDownload from 'vue-material-design-icons/CloudDownload.vue'
 
 Vue.component('menu-icon', MenuIcon)
 Vue.component('account-icon', Account)
@@ -75,3 +76,5 @@ Vue.component('help-circle-outline', HelpCircleOutline)
 
 Vue.component('Message-question-icon', MessageProcessing)
 Vue.component('Message-answer-icon', MessageReplyText)
+
+Vue.component('cloud-download-icon', CloudDownload)
