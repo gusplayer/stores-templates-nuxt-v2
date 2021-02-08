@@ -58,13 +58,12 @@
         </div>
       </div>
     </div>
-    <div class="container-article">
+    <div class="container-article" v-if="dataArticle">
       <div class="content-blog">
-        <div class="content-back" v-if="toggleArrow">
-          <arrow-left-icon class="arrow-left" @click="$router.go(-1)">
-          </arrow-left-icon>
-          <p @click="$router.go(-1)">Regresar</p>
-        </div>
+        <nuxt-link to="/blog" class="content-back">
+          <arrow-left-icon class="arrow-left"> </arrow-left-icon>
+          <p>Regresar</p>
+        </nuxt-link>
         <p class="title-blog">{{ dataArticle.titulo }}</p>
 
         <div class="content-date">
@@ -123,8 +122,6 @@ export default {
     dataStore: Object,
   },
   mounted() {
-    this.routePrev()
-    // this.$store.dispatch('GET_ARTICLES')
     if (this.listArticulos.length) {
       this.searchIdForSlug()
     }
@@ -138,49 +135,16 @@ export default {
     }
   },
   beforeDestroy() {
-    this.editor.destroy()
+    if (this.editor) {
+      this.editor.destroy()
+    }
   },
   data() {
     return {
       dataArticle: {},
-      toggleArrow: false,
       shippingCreated: '',
       shippingUpdated: '',
-      editor: new Editor({
-        editable: false,
-        extensions: [
-          new Bold(),
-          new Blockquote(),
-          new CodeBlock(),
-          new HardBreak(),
-          new Heading({ levels: [1, 2, 3] }),
-          new BulletList(),
-          new OrderedList(),
-          new ListItem(),
-          new TodoItem(),
-          new TodoList(),
-          new Image(),
-          new Code(),
-          new Italic(),
-          new Link(),
-          new Strike(),
-          new Underline(),
-          new History(),
-          new Search({
-            disableRegex: false,
-          }),
-          new Table({
-            resizable: true,
-          }),
-          new TableHeader(),
-          new TableCell(),
-          new TableRow(),
-        ],
-        content: '',
-        onUpdate: ({ getHTML }) => {
-          this.html = getHTML()
-        },
-      }),
+      editor: '',
     }
   },
   computed: {
@@ -198,16 +162,44 @@ export default {
         }
       })
       if (this.dataArticle) {
+        this.editor = new Editor({
+          editable: false,
+          extensions: [
+            new Bold(),
+            new Blockquote(),
+            new CodeBlock(),
+            new HardBreak(),
+            new Heading({ levels: [1, 2, 3] }),
+            new BulletList(),
+            new OrderedList(),
+            new ListItem(),
+            new TodoItem(),
+            new TodoList(),
+            new Image(),
+            new Code(),
+            new Italic(),
+            new Link(),
+            new Strike(),
+            new Underline(),
+            new History(),
+            new Search({
+              disableRegex: false,
+            }),
+            new Table({
+              resizable: true,
+            }),
+            new TableHeader(),
+            new TableCell(),
+            new TableRow(),
+          ],
+          content: '',
+          onUpdate: ({ getHTML }) => {
+            this.html = getHTML()
+          },
+        })
         if (this.dataArticle.contenido) {
           this.editor.setContent(this.dataArticle.contenido, true)
         }
-      }
-    },
-    routePrev() {
-      if (this.$route.path == '/') {
-        this.toggleArrow = false
-      } else {
-        this.toggleArrow = true
       }
     },
   },
