@@ -94,7 +94,7 @@
         <div class="item-movil-top">
           <div class="left-logo-movil">
             <img
-              src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               class="logo"
               alt="Logo Img"
             />

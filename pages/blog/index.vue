@@ -25,9 +25,6 @@ export default {
     dataStore() {
       return this.$store.state.dataStore
     },
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
     settingBase() {
       return this.$store.state.settingBase
     },

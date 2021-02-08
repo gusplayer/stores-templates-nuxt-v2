@@ -114,21 +114,13 @@ export default {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_SHOPPING_CART')
     let domain = this.$route.fullPath
-    let domains = this.$route.fullPath
     if (domain == '/?clearCart=true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
-    // if (domains == '/contacto') {
-    //   this.estadoHeader7 = true
-    // } else {
-    //   this.estadoHeader7 = false
-    // }
   },
   data() {
-    return {
-      // estadoHeader7: false,
-    }
+    return {}
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
