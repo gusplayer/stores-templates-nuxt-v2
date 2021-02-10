@@ -2,7 +2,9 @@
   <div
     :style="{
       '--font-style':
-        this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+        this.settingByTemplate &&
+        this.settingByTemplate.settings &&
+        this.settingByTemplate.settings.tipo_letra
           ? this.settingByTemplate.settings.tipo_letra
           : 'Roboto',
     }"
@@ -72,10 +74,11 @@ export default {
   head() {
     let tienda = this.$store.state.dataStore.tienda
     let tipo_letra =
-      this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+      this.settingByTemplate &&
+      this.settingByTemplate.settings &&
+      this.settingByTemplate.settings.tipo_letra
         ? this.settingByTemplate.settings.tipo_letra
         : 'Roboto'
-
     let tidio =
       this.$store.state.analytics_tagmanager &&
       this.$store.state.analytics_tagmanager.tidio_user

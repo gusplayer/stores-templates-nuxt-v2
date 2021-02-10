@@ -329,9 +329,6 @@ export default {
     },
     Sendsubcategory(value) {
       this.indexSelect = value
-      this.$router.push({
-        path: '/',
-      })
       this.$store.commit('SET_STATEBANNER', false)
       this.showMenu = false
       this.addClass()
@@ -349,7 +346,7 @@ export default {
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
       this.$router.push({
-        path: '',
+        path: '/',
         query: { subcategory: this.nameSubCategory },
       })
       this.$store.commit('products/FILTER_BY', {
@@ -360,9 +357,6 @@ export default {
     },
     sendCategory(value, categoria, ref) {
       this.idCategory = categoria
-      this.$router.push({
-        path: '/',
-      })
       this.showMenu = false
       this.$store.commit('SET_STATEBANNER', false)
       this.nameCategory = value.nombre_categoria_producto
@@ -382,7 +376,7 @@ export default {
         this.addClass()
       }
       this.$router.push({
-        path: '',
+        path: '/',
         query: { category: value.nombre_categoria_producto },
       })
       this.$store.commit('products/FILTER_BY', {

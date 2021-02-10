@@ -2,7 +2,9 @@
   <div
     :style="{
       '--font-style':
-        this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+        this.settingByTemplate &&
+        this.settingByTemplate.settings &&
+        this.settingByTemplate.settings.tipo_letra
           ? this.settingByTemplate.settings.tipo_letra
           : 'Roboto',
     }"
@@ -64,19 +66,6 @@
         </button>
       </div>
     </div>
-    <client-only>
-      <noscript>
-        <iframe
-          v-if="
-            this.analytics_tagmanager && this.analytics_tagmanager.tag_manager
-          "
-          :src="`https://www.googletagmanager.com/ns.html?id=${analytics_tagmanager.tag_manager}`"
-          height="0"
-          width="0"
-          style="display: none; visibility: hidden; opacity: 0;"
-        ></iframe>
-      </noscript>
-    </client-only>
   </div>
 </template>
 
@@ -125,7 +114,9 @@ export default {
   head() {
     let tienda = this.$store.state.dataStore.tienda
     let tipo_letra =
-      this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+      this.settingByTemplate &&
+      this.settingByTemplate.settings &&
+      this.settingByTemplate.settings.tipo_letra
         ? this.settingByTemplate.settings.tipo_letra
         : 'Roboto'
     let tidio =
@@ -133,9 +124,10 @@ export default {
       this.$store.state.analytics_tagmanager.tidio_user
         ? this.$store.state.analytics_tagmanager.tidio_user
         : ''
-    let verificationFacebookPixel =
-      this.$store.state.dataStore.tienda.id_tienda == '1559'
-        ? this.$store.state.pixelKey
+    let FacebookPixel1 =
+      this.analytics_tagmanager &&
+      this.analytics_tagmanager.facebook_pixel_metatag_1
+        ? this.analytics_tagmanager.facebook_pixel_metatag_1
         : ''
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
@@ -223,7 +215,7 @@ export default {
         },
         {
           name: 'facebook-domain-verification',
-          content: `${verificationFacebookPixel}`,
+          content: `${FacebookPixel1}`,
         },
       ],
       script: [
