@@ -18,11 +18,13 @@
 <script>
 import K05ProductList from '../../components/template6/Ko6-ProductList-2'
 import K07ProductList from '../../components/template7/Ko-ProductListFilter'
+import K09ProductList from '../../components/template9/Ko-ProductListFilter'
 
 export default {
   components: {
     K05ProductList,
     K07ProductList,
+    K09ProductList,
   },
   computed: {
     dataStore() {
@@ -54,6 +56,9 @@ export default {
           break
         case 7:
           productListComponent = 'K07ProductList'
+          break
+        case 9:
+          productListComponent = 'K09ProductList'
           break
       }
       return productListComponent
