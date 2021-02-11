@@ -339,7 +339,7 @@ export default {
 .title-section {
   color: rgba(21, 20, 57, 0.541);
   /* color: var(--color_subtext); */
-  font-size: 16px;
+  font-size: 15px;
   text-transform: uppercase;
   align-self: flex-start;
   font-weight: bold;
@@ -374,6 +374,7 @@ export default {
   width: 100%;
 }
 .text-method-payment {
+  font-size: 14px;
   font-family: 'Lora', serif !important;
 }
 h3 {

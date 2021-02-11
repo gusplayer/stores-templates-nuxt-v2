@@ -96,9 +96,11 @@ export default {
 .product-content {
   @apply flex flex-col justify-center items-center w-full my-80;
 }
-.product-text,
-.product-conten-items {
+.product-text {
   @apply flex flex-col justify-center items-center w-full;
+}
+.product-conten-items {
+  @apply flex flex-col justify-start items-start;
 }
 .product-tittle,
 .product-subtittle,
@@ -106,7 +108,6 @@ export default {
 .tittle,
 .subtittle,
 .description,
-.product-conten-items,
 .producto-items-content {
   @apply flex flex-col justify-center items-center text-center;
 }

@@ -401,8 +401,10 @@ export default {
 .product-content {
   @apply w-full flex flex-col justify-center items-center w-full my-80;
 }
-.product-text,
 .product-conten-items {
+  @apply flex flex-col justify-start items-start  w-full  text-center;
+}
+.product-text {
   @apply flex flex-col justify-center items-center w-full;
 }
 .product-tittle,
@@ -411,7 +413,6 @@ export default {
 .tittle,
 .subtittle,
 .description,
-.product-conten-items,
 .producto-items-content {
   @apply flex flex-col justify-center items-center text-center;
 }

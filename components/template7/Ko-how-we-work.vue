@@ -126,6 +126,9 @@ export default {
 }
 </script>
 <style scoped>
+.hwork-seemore {
+  @apply hidden;
+}
 .hwork-tittle,
 .hwork-description,
 .hwork-seemore {

@@ -17,10 +17,11 @@
 <script>
 import K05Article from '../../components/blog/Ko-articulo'
 import K07Article from '../../components/template7/blog_page/Ko-articulo'
+import K09Article from '../../components/template9/blog_page/Ko-articulo'
 
 export default {
   layout: 'default',
-  components: { K05Article, K07Article },
+  components: { K05Article, K07Article, K09Article },
   computed: {
     dataStore() {
       return this.$store.state.dataStore
@@ -48,6 +49,9 @@ export default {
           break
         case 7:
           productListComponent = 'K07Article'
+          break
+        case 9:
+          productListComponent = 'K09Article'
           break
       }
       return productListComponent

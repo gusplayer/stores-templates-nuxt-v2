@@ -2,6 +2,7 @@
   <div class="promo-banner-content">
     <div class="promo-banner-items">
       <div class="promo-banners">
+        <nuxt-link :to="'/productos'">
         <figure class="promo-banner-images" id="promo-banner-images-1">
           <img
             id="images-1"
@@ -27,9 +28,11 @@
           </div>
           <div class="banner-border-1"></div>
         </figure>
+        </nuxt-link>
       </div>
       <div class="banner-medium">
         <div class="promo-banner-2">
+          <nuxt-link :to="'/productos'">
           <figure class="promo-banner-images" id="promo-banner-images-2">
             <img
               id="images-2"
@@ -48,8 +51,10 @@
               >
             </div>
           </figure>
+          </nuxt-link>
         </div>
         <div class="promo-banner-3">
+          <nuxt-link :to="'/productos'">
           <figure class="promo-banner-images" id="promo-banner-images-3">
             <img
               id="images-3"
@@ -68,9 +73,11 @@
               >
             </div>
           </figure>
+          </nuxt-link>
         </div>
       </div>
       <div class="promo-banners">
+        <nuxt-link :to="'/productos'">
         <figure class="promo-banner-images" id="promo-banner-images-4">
           <img
             id="images-4"
@@ -90,7 +97,9 @@
           </div>
           <div class="banner-border-2"></div>
         </figure>
+        </nuxt-link>
       </div>
+      </nuxt-link>
     </div>
   </div>
 </template>

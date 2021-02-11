@@ -16,12 +16,15 @@
 <script>
 import K05Cart from '../components/template5/Ko-Cart-1'
 import K07Cart from '../components/template7/Ko-Cart'
+import K09Cart from '../components/template9/Ko-Cart'
+
 export default {
   layout: 'default',
 
   components: {
     K05Cart,
     K07Cart,
+    K09Cart,
   },
   mounted() {
     if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
@@ -61,6 +64,9 @@ export default {
           break
         case 7:
           productListComponent = 'K07Cart'
+          break
+        case 9:
+          productListComponent = 'K09Cart'
           break
       }
       return productListComponent

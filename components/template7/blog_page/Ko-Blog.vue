@@ -60,9 +60,9 @@
     </div>
     <div class="contenedor">
       <div class="content-search-blog">
-        <div class="text-search">
+        <!-- <div class="text-search">
           <p class="title">Buscar Articulo</p>
-        </div>
+        </div> -->
         <div class="empty-space"></div>
         <div class="content-tittle">
           <div class="input-animated">
@@ -312,7 +312,7 @@ export default {
 }
 .input-animated:hover > .input-text {
   width: 240px;
-  padding: 0 15px;
+  /* padding: 0 15px; */
   color: #7f7f7f;
   font-size: 16px;
 }
@@ -345,11 +345,19 @@ export default {
   color: transparent;
   font-size: 0px;
   transition: 0.4s;
-  width: 0px;
+  /* width: 0px; */
   font-family: 'Lora', serif !important ;
 }
 .input-text:focus {
   border: none;
+}
+::-webkit-input-placeholder {
+  @apply text-left items-center;
+  font-size: 16px;
+  /* font-weight: 800; */
+  color: #7f7f7f;
+  padding-left: 10px;
+  font-family: 'Lora', serif !important ;
 }
 .empty-space {
   @apply mx-2;
@@ -434,7 +442,7 @@ export default {
     @apply w-7/0 justify-center;
   }
   .input-text {
-    width: 0px;
+    /* width: 0px; */
     padding: 0px;
   }
   .title {
