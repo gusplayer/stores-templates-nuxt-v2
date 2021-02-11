@@ -219,12 +219,11 @@ export default {
   methods: {
     selectTag1() {
       this.selecttag = 1
-      this.focusbtn=false
+      this.focusbtn = false
     },
     selectTag2() {
       this.selecttag = 2
-            this.focusbtn=true
-
+      this.focusbtn = true
     },
     getSearch(value) {
       if (value) {
@@ -355,7 +354,7 @@ export default {
   max-width: 300px;
   width: 100%;
   height: 100%;
-  background-color: var(--background_color_1);
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;

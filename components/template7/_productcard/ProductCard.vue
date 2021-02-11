@@ -534,7 +534,7 @@ export default {
   @apply flex flex-col justify-center items-center cursor-pointer mt-8;
 }
 .datos-producto {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply w-full flex flex-col justify-center items-center pt-4;
 }
 .container {
   @apply relative w-full;

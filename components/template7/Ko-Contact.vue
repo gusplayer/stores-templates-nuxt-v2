@@ -277,7 +277,7 @@ export default {
   align-items: center;
   width: 100%;
   /* background: var(--background_color_2); */
-  background: #f7f7f7;
+  background: #fff;
   box-sizing: border-box;
   padding-top: 130px;
 }
@@ -309,6 +309,7 @@ export default {
   width: 100%;
 }
 .contact-text-title {
+  font-family: 'Lora', serif !important ;
   font-size: 35px;
   font-weight: bold;
   font-stretch: normal;
@@ -319,6 +320,8 @@ export default {
   color: #000000;
 }
 .contact-text-subtitle {
+  font-family: 'Lora', serif !important ;
+
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -341,6 +344,8 @@ export default {
   margin-top: 10px;
 }
 .contact-text-subtitle2 {
+  font-family: 'Lora', serif !important ;
+
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -354,6 +359,8 @@ export default {
   text-align: center;
 }
 .contact-text-subtitle3 {
+  font-family: 'Lora', serif !important ;
+
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -365,6 +372,8 @@ export default {
   margin-top: 10px;
 }
 .contact-text-subtitle4 {
+  font-family: 'Lora', serif !important ;
+
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -381,6 +390,8 @@ export default {
   flex-direction: column;
 }
 .contact-icon {
+  font-family: 'Lora', serif !important ;
+
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
@@ -391,16 +402,22 @@ export default {
   color: #25dac5;
 }
 .text-icon {
+  font-family: 'Lora', serif !important ;
+
   display: flex;
   flex-direction: row;
   /* color: var(--color_icon); */
   color: #25dac5;
 }
 .text-icon a:hover {
+  font-family: 'Lora', serif !important ;
+
   cursor: pointer;
   color: var(--btnhover);
 }
 .text-icon a {
+  font-family: 'Lora', serif !important ;
+
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -416,6 +433,8 @@ export default {
   font-size: 17px;
 }
 .contact-text-sub {
+  font-family: 'Lora', serif !important ;
+
   font-size: 22px;
   font-weight: 600;
   font-stretch: normal;
@@ -427,6 +446,8 @@ export default {
   margin-top: 10px;
 }
 .contact-text-sub2 {
+  font-family: 'Lora', serif !important ;
+
   font-size: 22px;
   font-weight: 600;
   font-stretch: normal;
@@ -453,11 +474,13 @@ export default {
 .contact-content-rigth {
   border-radius: 10px;
   /* background-color: var(--background_color_1); */
-  background-color: rgb(223, 223, 223);
+  background-color: #f4f4f4;
   padding: 30px 30px 50px 30px;
   margin-top: 20px;
 }
 .contact-content-rigth p {
+  font-family: 'Lora', serif !important ;
+
   font-size: 14px;
   font-weight: 600;
   font-stretch: normal;
@@ -485,6 +508,8 @@ export default {
   flex-direction: row;
 }
 .input-text {
+  font-family: 'Lora', serif !important ;
+
   font-size: 14px;
   /* color: var(--color_border); */
   color: rgba(21, 20, 57, 0.541);
@@ -495,6 +520,8 @@ export default {
   width: 100%;
 }
 .input-text::placeholder {
+  font-family: 'Lora', serif !important ;
+
   /* color: var(--color_border); */
   color: rgba(21, 20, 57, 0.541);
   opacity: 0.7;
@@ -512,6 +539,8 @@ export default {
   border: solid 2px rgba(127, 127, 139, 0.342);
 }
 .input-text-rectangule {
+  font-family: 'Lora', serif !important ;
+
   font-size: 14px;
   font-weight: 400;
   font-stretch: normal;
@@ -531,6 +560,8 @@ export default {
   min-height: 80px;
 }
 .input-text-rectangule::placeholder {
+  font-family: 'Lora', serif !important ;
+
   /* color: var(--color_border); */
   color: rgba(21, 20, 57, 0.541);
   opacity: 0.7;
@@ -556,6 +587,8 @@ export default {
   background: rgb(138, 138, 138);
 }
 .text-error {
+  font-family: 'Lora', serif !important ;
+
   font-size: 12px;
   color: #cb2027;
   width: 100%;
@@ -565,7 +598,7 @@ export default {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
   border: solid 2px var(--color_background_btn);
-  background-color: var(--color_background_btn);
+  background-color: #2c2930;
   padding: 8px 14px;
   font-size: 16px;
   width: 50%;
@@ -577,6 +610,8 @@ export default {
   transition: all 200ms ease-in;
 }
 .btn:hover {
+  font-family: 'Lora', serif !important ;
+
   color: white;
   border: solid 2px var(--btnhover);
   background-color: var(--btnhover);

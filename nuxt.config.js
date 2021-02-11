@@ -23,6 +23,11 @@ export default {
           'https://fonts.googleapis.com/css2?family=David+Libre&family=Great+Vibes&family=Lora:ital@0;1&display=swap',
         rel: 'stylesheet',
       },
+      {
+        href:
+          'https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap',
+        rel: 'stylesheet',
+      },
     ],
   },
   loading: {
