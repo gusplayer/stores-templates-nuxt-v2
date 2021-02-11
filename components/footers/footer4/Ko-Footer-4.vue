@@ -148,8 +148,8 @@ export default {
 
 <style scoped>
 .footer-container {
-  @apply flex flex-col justify-center items-center bg-footerbg bg-auto bg-center bg-no-repeat;
   /* background: var(--background_color_1); */
+  @apply flex flex-col justify-center items-center bg-footerbg bg-auto bg-center bg-no-repeat;
   height: 322px;
 }
 .footer-content {

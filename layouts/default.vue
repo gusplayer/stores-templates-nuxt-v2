@@ -352,10 +352,10 @@ export default {
       return {
         dataStore: this.dataStore,
         settingByTemplate:
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings['--background_color_1']
-            ? this.settingByTemplate.settings
+          this.$store.state.settingByTemplate &&
+          this.$store.state.settingByTemplate.settings &&
+          this.$store.state.settingByTemplate.settings['--background_color_1']
+            ? this.$store.state.settingByTemplate.settings
             : this.settingBase,
         settingByTemplate7h:
           this.settingByTemplate7 && this.settingByTemplate7.header

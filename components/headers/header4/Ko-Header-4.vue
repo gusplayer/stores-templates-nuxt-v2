@@ -122,7 +122,12 @@ export default {
     settingByTemplate7General: Object,
   },
   mounted() {
-    let colorBg = this.settingByTemplate7h['--background_color_1']
+    let colorBg = ''
+    if (this.settingByTemplate7h) {
+      colorBg = this.settingByTemplate7h['--background_color_1']
+    } else {
+      colorBg = '#ffffff'
+    }
     let domain = this.$route.fullPath
     let result = domain.split('/')
     let search = result[result.length - 1].slice(0, [8])
