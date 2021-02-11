@@ -80,7 +80,10 @@ select::-ms-expand {
   overflow: hidden;
   /* border: 2px solid var(--color_border); */
   border: 2px solid #777;
-  border-radius: var(--radius_btn);
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 select {
   flex: 1;

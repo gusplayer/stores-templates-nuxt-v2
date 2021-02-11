@@ -835,7 +835,7 @@ export default {
 .wrapper-productDetail {
   display: flex;
   width: 100%;
-  background: #efefef;
+  background: #fff;
   justify-content: center;
   align-items: center;
   padding-top: 120px;

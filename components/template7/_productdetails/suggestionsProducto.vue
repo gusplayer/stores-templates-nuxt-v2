@@ -27,7 +27,7 @@ export default {
   display: flex;
   width: 100%;
   /* background-color: var(--background_color_2); */
-  background: #efefef;
+  background: #fff;
   flex-direction: column;
   justify-content: center;
   align-items: center;

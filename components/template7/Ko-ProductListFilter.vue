@@ -45,7 +45,7 @@
         <div class="content-category-left">
           <div class="item-tittle">
             <p class="txt-tittles">
-              {{ $t('home_filtrarpor') }}{{ $t('productdetail_categoria') }}
+              {{ $t('productdetail_categoria') }}
             </p>
           </div>
           <div class="categorys-list">
@@ -75,7 +75,7 @@
             v-if="showSubCategory && selectedSubcategories.length"
           >
             <p class="txt-tittles">
-              {{ $t('home_filtrarpor') }}{{ $t('home_subcategory') }}
+              {{ $t('home_subcategory') }}
             </p>
           </div>
           <div
@@ -1079,13 +1079,15 @@ export default {
 .product-text {
   @apply flex flex-col justify-center items-center w-full;
 }
+.product-conten-items {
+  @apply flex flex-col justify-start items-start text-center  w-full;
+}
 .product-tittle,
 .product-subtittle,
 .product-description,
 .tittle,
 .subtittle,
-.description,
-.product-conten-items {
+.description {
   @apply flex flex-col justify-center items-center text-center;
 }
 .producto-items-content {

@@ -1,0 +1,416 @@
+<template>
+  <div class="producto">
+    <div
+      class="container"
+      @mouseover="hover = true"
+      @mouseleave="hover = false"
+    >
+      <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+        <div class="figure-img">
+          <figure class="content-imge">
+            <img
+              v-if="article.imagen_principal_url"
+              class="images"
+              :src="idCloudinaryBanner(this.article.imagen_principal_url)"
+              alt="right-banner"
+            />
+
+            <div v-else class="empty"></div>
+          </figure>
+        </div>
+      </router-link>
+      <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+        <div class="overlay-top">
+          <div class="text-tittle">
+            <p class="txt-day">
+              {{ this.dayCreate }}
+            </p>
+            <p class="txt-month">
+              {{ this.nameMonth }}
+            </p>
+          </div>
+        </div>
+      </router-link>
+
+      <router-link
+        :to="{ path: `/blog/` + article.slug }"
+        class="contet-bottom"
+      >
+        <div class="overlay-bottom z-20">
+          <div class="content-bottom-titulo">
+            <div class="text-cart">
+              <p class="w-full txt-tituloart">
+                {{ this.article.titulo }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="overlay-bottom-autor z-20">
+          <div class="content-bottom-autor">
+            <div class="text-cart-read">
+              <p class="txt-read">{{ $t('home_leerMas') }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="overlay-bottom-shadow"></div>
+      </router-link>
+    </div>
+  </div>
+</template>
+<script>
+import idCloudinary from '../../../mixins/idCloudinary'
+export default {
+  mixins: [idCloudinary],
+  name: 'Ko-Blogcard',
+  props: { article: Object },
+  mounted() {
+    if (this.article.created_at) {
+      let domain = this.article.created_at
+      let result = domain.split(' ')
+      this.shippingCreated = result[0]
+      let data = this.shippingCreated.split('-')
+      this.dayCreate = data[2]
+      this.monthCreate = data[1]
+    }
+    if (this.monthCreate == 1) {
+      this.nameMonth = 'Ene'
+    }
+    if (this.monthCreate == 2) {
+      this.nameMonth = 'Feb'
+    }
+    if (this.monthCreate == 3) {
+      this.nameMonth = 'Mar'
+    }
+    if (this.monthCreate == 4) {
+      this.nameMonth = 'Abr'
+    }
+    if (this.monthCreate == 5) {
+      this.nameMonth = 'May'
+    }
+    if (this.monthCreate == 6) {
+      this.nameMonth = 'Jun'
+    }
+    if (this.monthCreate == 7) {
+      this.nameMonth = 'Jul'
+    }
+    if (this.monthCreate == 8) {
+      this.nameMonth = 'Ago'
+    }
+    if (this.monthCreate == 9) {
+      this.nameMonth = 'Sep'
+    }
+    if (this.monthCreate == 10) {
+      this.nameMonth = 'Oct'
+    }
+    if (this.monthCreate == 11) {
+      this.nameMonth = 'Nov'
+    }
+    if (this.monthCreate == 12) {
+      this.nameMonth = 'Dic'
+    }
+  },
+  data() {
+    return {
+      hover: false,
+      shippingCreated: '',
+      dayCreate: '',
+      monthCreate: '',
+      nameMonth: '',
+    }
+  },
+}
+</script>
+<style scoped>
+.producto {
+  @apply w-full flex flex-col justify-center items-center cursor-pointer;
+  background-color: #f8f8f8;
+}
+.container {
+  @apply relative;
+}
+.images {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.empty {
+  background: #cccccc;
+  height: 100%;
+  width: 100%;
+}
+
+.text-tittle {
+  @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
+  font: inherit;
+  font-size: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.content-bottom-titulo {
+  @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
+  font: inherit;
+  font-size: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.content-bottom-autor {
+  @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
+  font: inherit;
+  font-size: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.content-imge {
+  @apply flex justify-center items-center;
+}
+.txt-day,
+.txt-month {
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: #333333;
+  font-weight: 600;
+}
+.txt-tituloart,
+.txt-autorart {
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: white;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.text-cart-read {
+  @apply text-left;
+  width: 90px;
+}
+.txt-read {
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: white;
+  font-weight: 600;
+}
+.txt-read:hover {
+  width: auto;
+  border-bottom: 2px solid #2c2930;
+  z-index: 20;
+}
+.txt-day {
+  /* font-size: 24px; */
+  font-weight: 600;
+}
+.txt-month {
+  /* padding-bottom: 8px; */
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+  /* font-size: 12px; */
+}
+
+.overlay-bottom-shadow {
+  @apply absolute overflow-hidden max-w-full max-h-full;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0) 50%,
+    rgb(0, 0, 0) 100%
+  );
+  opacity: 0.5;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+.container:hover .overlay-bottom-shadow {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0.904) 90%,
+    rgb(0, 0, 0) 100%
+  );
+}
+@screen sm {
+  .txt-day {
+    font-size: 15px;
+  }
+  .txt-month {
+    font-size: 10px;
+  }
+  .overlay-top {
+    @apply absolute overflow-hidden shadow-md bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    top: 10px;
+    left: 10px;
+    right: 0;
+    width: 40px;
+    height: 45px;
+  }
+  .text-cart {
+    @apply w-8/5 text-left;
+    margin-left: 20px;
+  }
+  .text-cart-read {
+    margin-left: 20px;
+  }
+  .txt-tituloart {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .txt-read {
+    font-size: 13px;
+  }
+  .overlay-bottom {
+    @apply absolute overflow-hidden max-w-full max-h-full transition-all ease-in duration-200;
+    bottom: 45px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 180px;
+  }
+  .overlay-bottom-autor {
+    @apply absolute overflow-hidden max-w-full max-h-full transition-all ease-in duration-200 justify-start items-start;
+    bottom: 40px;
+    left: 0%;
+    right: 0;
+    width: 100%;
+    height: 40px;
+  }
+}
+
+@media (max-width: 580px) {
+  .images {
+    height: 300px;
+  }
+  .empty {
+    height: 300px;
+  }
+}
+@media (min-width: 581px) {
+  .text-cart {
+    @apply w-8/5;
+  }
+  .txt-tituloart {
+    font-size: 18px;
+  }
+}
+@screen md {
+  .txt-day {
+    font-size: 22px;
+  }
+  .txt-month {
+    font-size: 14px;
+  }
+  .overlay-top {
+    top: 10px;
+    left: 10px;
+    right: 0;
+    width: 60px;
+    height: 65px;
+  }
+  .text-cart {
+    @apply w-8/5;
+    margin-left: 30px;
+  }
+  .text-cart-read {
+    margin-left: 30px;
+  }
+  .txt-tituloart {
+    font-size: 30px;
+  }
+  .txt-read {
+    font-size: 16px;
+  }
+  .overlay-bottom {
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 300px;
+  }
+  .overlay-bottom-autor {
+    bottom: 60px;
+    left: 0%;
+    right: 0;
+    width: 100%;
+    height: 40px;
+  }
+  .images {
+    height: 560px;
+  }
+  .empty {
+    height: 3560px;
+  }
+}
+@screen lg {
+  .overlay-top {
+    top: 10px;
+    left: 10px;
+    right: 0;
+    width: 60px;
+    height: 65px;
+  }
+  .overlay-bottom {
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 200px;
+  }
+  .container:hover .overlay-bottom {
+    bottom: 90px;
+  }
+  .overlay-bottom-autor {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 0px;
+  }
+  .container:hover .overlay-bottom-autor {
+    bottom: 65px;
+    height: 40px;
+  }
+}
+@media (min-width: 1025px) {
+  .txt-tituloart {
+    font-size: 25px;
+  }
+}
+@screen mlg {
+  .txt-day {
+    font-size: 25px;
+  }
+  .txt-tituloart {
+    font-size: 36px;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .overlay-top {
+    top: 10px;
+    left: 10px;
+    right: 0;
+    width: 70px;
+    height: 75px;
+  }
+  .overlay-bottom {
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 250px;
+  }
+  .container:hover .overlay-bottom {
+    bottom: 50px;
+  }
+}
+</style>

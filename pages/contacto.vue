@@ -17,6 +17,7 @@
 <script>
 import K05Contact from '../components/template5/Ko-Contact-1'
 import K07Contact from '../components/template7/Ko-Contact'
+import K09Contact from '../components/template9/Ko-Contact'
 
 export default {
   layout: 'default',
@@ -24,6 +25,7 @@ export default {
   components: {
     K05Contact,
     K07Contact,
+    K09Contact,
   },
   mounted() {
     if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
@@ -62,6 +64,9 @@ export default {
           break
         case 7:
           productListComponent = 'K07Contact'
+          break
+        case 9:
+          productListComponent = 'K09Contact'
           break
       }
       return productListComponent

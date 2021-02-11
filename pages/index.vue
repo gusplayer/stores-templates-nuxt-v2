@@ -10,12 +10,15 @@ import KoTemplate6 from './template6/index_macrobrand'
 // import KoTemplate6 from './template6/index'
 import KoTemplate7 from './template7/index'
 import KoTemplate8 from './template8/index'
+import KoTemplate9 from './template9/index'
+
 export default {
   components: {
     KoTemplate5,
     KoTemplate6,
     KoTemplate7,
     KoTemplate8,
+    KoTemplate9,
   },
   mounted() {
     if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
@@ -45,6 +48,9 @@ export default {
           break
         case 8:
           productListComponent = 'KoTemplate8'
+          break
+        case 9:
+          productListComponent = 'KoTemplate9'
           break
       }
       return productListComponent

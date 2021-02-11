@@ -189,6 +189,13 @@ export default {
     home_mostrar: 'Mostrar: ',
     home_by: 'Por',
     home_continuar_leyendo: 'Continuar leyendo',
+    home_comprarAhora: 'Comprar Ahora',
+    home_escuchaAhora: 'Escucha Ahora',
+    home_vamos: 'Vamos',
+    home_vistarapida: 'Vista Rápida',
+    home_allproducts: 'Ver Todos Los Productos',
+    home_leerMas: 'Leer mas',
+    home_buscar: 'Buscar',
 
     //productdetail
     productdetail_garantia: 'Garantía:',
@@ -432,6 +439,13 @@ export default {
     home_mostrar: 'Show: ',
     home_by: 'By',
     home_continuar_leyendo: 'Continue reading',
+    home_comprarAhora: 'Shop Now',
+    home_escuchaAhora: 'Listen Now',
+    home_vamos: 'Go',
+    home_vistarapida: 'Quick View',
+    home_allproducts: 'View All Products',
+    home_leerMas: 'Read more ',
+    home_buscar: 'Search',
 
     //productdetail
     productdetail_garantia: 'Warranty:',
@@ -676,6 +690,14 @@ export default {
     home_mostrar: 'Exposição: ',
     home_by: 'De',
     home_continuar_leyendo: 'Continue lendo',
+    home_comprarAhora: 'Comprar Agora',
+    home_escuchaAhora: 'Ouça Agora',
+    home_vamos: 'Ir',
+    home_vistarapida: 'Olhada Rápida',
+    home_allproducts: 'Ver Todos Os Produtos',
+    home_leerMas: 'Ler mais ',
+    home_buscar: 'Pesquisa',
+
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
