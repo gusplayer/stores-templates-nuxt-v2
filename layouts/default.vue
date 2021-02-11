@@ -171,7 +171,6 @@ export default {
           'http-equiv': 'Content-Language',
           content: 'es',
         },
-        //openGraph meta
         { hid: 'og:title', name: 'og:title', content: tienda.nombre },
         {
           hid: 'og:type',
@@ -348,14 +347,18 @@ export default {
           this.settingByTemplate.settings['--background_color_1']
             ? this.settingByTemplate.settings
             : this.settingBase,
-        settingByTemplate7:
+        settingByTemplate7h:
           this.settingByTemplate7 && this.settingByTemplate7.header
             ? this.settingByTemplate7.header
-            : '',
+            : null,
+        settingByTemplate7f:
+          this.settingByTemplate7 && this.settingByTemplate7.footer
+            ? this.settingByTemplate7.footer
+            : null,
         settingByTemplate7General:
           this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
             ? this.settingByTemplate7.settingGeneral
-            : '',
+            : null,
       }
     },
   },
@@ -418,18 +421,6 @@ export default {
       document.getElementById('modalNotificacion').style.zIndex = '-2'
       document.getElementById('modalNotificacion').style.opacity = '0'
     },
-  },
-  watch: {
-    // eslint-disable-next-line no-unused-vars
-    // $route(to, from) {
-    //   let domains = this.$route.fullPath
-    //   var separador = document.getElementById('separadork07')
-    //   if (domains == '/contacto') {
-    //     this.estadoHeader7 = true
-    //   } else {
-    //     this.estadoHeader7 = false
-    //   }
-    // },
   },
 }
 </script>

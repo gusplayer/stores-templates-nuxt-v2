@@ -1,6 +1,19 @@
 <template>
-  <div class="footer-container" ref="background" :style="settingByTemplate">
-    <div class="footer-content">
+  <div
+    class="footer-container"
+    ref="background"
+    :style="[settingByTemplate7f, settingByTemplate7General]"
+  >
+    <div
+      class="footer-content"
+      :style="{
+        '--font-style-1':
+          this.settingByTemplate7General &&
+          this.settingByTemplate7General.fount_1
+            ? this.settingByTemplate7General.fount_1
+            : 'David libre',
+      }"
+    >
       <div class="footer-content-items">
         <div class="footer-content-logo">
           <img
@@ -54,14 +67,20 @@ export default {
   components: {
     KoSocialNet,
   },
-  name: 'Ko-Footer-1',
+  name: 'Ko-Footer-4',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingByTemplate7f: Object,
+    settingByTemplate7General: Object,
   },
   mounted() {
-    if (this.settingByTemplate) {
+    if (
+      this.settingByTemplate7f &&
+      this.settingByTemplate7f.img_background == false
+    ) {
       this.setLogo()
+    } else {
+      this.logo = true
     }
   },
   data() {
@@ -97,6 +116,9 @@ export default {
     },
   },
   methods: {
+    setBg() {
+      var bghead = document.getElementById('headbg')
+    },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
         '--background_color_1'
@@ -127,6 +149,7 @@ export default {
 <style scoped>
 .footer-container {
   @apply flex flex-col justify-center items-center bg-footerbg bg-auto bg-center bg-no-repeat;
+  /* background: var(--background_color_1); */
   height: 322px;
 }
 .footer-content {
@@ -137,13 +160,16 @@ export default {
   @apply flex flex-col justify-center items-center w-full my-2;
 }
 .footer-logo {
-  @apply object-contain max-h-16;
+  object-fit: contain;
+  width: 100%;
+  max-width: var(--with_logo);
 }
 .footer-content-button {
   @apply w-full flex flex-wrap gap-4 justify-center items-center mt-8;
 }
 .btn {
-  @apply mx-2 font-semibold text-gray-textHeader uppercase tracking-wider;
+  @apply mx-2 font-semibold uppercase tracking-wider;
+  color: var(--color_text);
   transition: all 0.25s ease;
 }
 .btn:hover {
@@ -151,7 +177,7 @@ export default {
   transition: all 0.25s ease;
 }
 .btn {
-  font-family: 'David libre', serif !important ;
+  font-family: var(--font-style-1), serif !important ;
 }
 .logo2 {
   width: 100px;

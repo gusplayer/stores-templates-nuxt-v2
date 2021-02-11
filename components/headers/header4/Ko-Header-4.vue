@@ -1,6 +1,29 @@
 <template>
-  <div class="header-container" id="navbar" :style="settingByTemplate7">
-    <div class="wrapper-header" id="headbg">
+  <div
+    class="header-container"
+    id="navbar"
+    :style="[settingByTemplate7h, settingByTemplate7General]"
+  >
+    <div
+      class="wrapper-header"
+      id="headbg"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate7General &&
+            this.settingByTemplate7General.fount_1
+              ? this.settingByTemplate7General.fount_1
+              : 'David libre',
+        },
+        {
+          '--font-style-3':
+            this.settingByTemplate7General &&
+            this.settingByTemplate7General.fount_3
+              ? this.settingByTemplate7General.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="header" id="headerid">
         <KoOrder :dataStore="dataStore" />
         <div class="header-item-menu" @click="openMenulateral">
@@ -95,10 +118,11 @@ export default {
   name: 'Ko-Header-4',
   props: {
     dataStore: Object,
-    settingByTemplate7: Object,
+    settingByTemplate7h: Object,
     settingByTemplate7General: Object,
   },
   mounted() {
+    let colorBg = this.settingByTemplate7h['--background_color_1']
     let domain = this.$route.fullPath
     let result = domain.split('/')
     let search = result[result.length - 1].slice(0, [8])
@@ -135,7 +159,7 @@ export default {
         //sube
         navbar.style.top = '0px'
         navbar.style.zIndex = '20'
-        bghead.style.backgroundColor = '#ffffff'
+        bghead.style.backgroundColor = colorBg
         header.style.boxShadow = '0px 0px 0px 0px'
         bghead.style.boxShadow = '0px 22px 11px -12px rgba(145,145,145,0.57)'
 
@@ -266,7 +290,8 @@ export default {
   @apply flex flex-col w-full justify-between items-center;
 }
 .header {
-  @apply flex w-full justify-between bg-white-white;
+  @apply flex w-full justify-between;
+  background: var(--background_color_1);
 }
 .header-item-menu {
   @apply hidden;
@@ -278,7 +303,7 @@ export default {
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #3f3f3f;
+  color: var(--color_icon);
 }
 .header-icon-menu > .material-design-icon__svg {
   bottom: 0em;
@@ -291,7 +316,7 @@ export default {
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #3f3f3f;
+  color: var(--color_icon);
 }
 .nav-bar > .material-design-icon__svg {
   bottom: 0px;
@@ -299,7 +324,8 @@ export default {
   height: 24px;
 }
 .header-text-menu {
-  font-family: 'Lora', serif !important;
+  color: var(--color_text);
+  font-family: var(--font-style-3), serif !important;
 }
 .header-content-logo {
   @apply flex justify-center items-center py-1;
@@ -308,20 +334,22 @@ export default {
   @apply w-full;
 }
 .header-logo {
-  @apply object-contain object-left max-h-16;
+  @apply object-contain object-left;
+  width: 100%;
+  max-width: var(--with_logo);
 }
 .header-content-buttons {
   @apply w-auto flex flex-wrap gap-6 justify-center items-center;
 }
 .btn {
-  @apply mx-4 font-semibold uppercase tracking-wider text-gray-textHeader;
+  @apply mx-4 font-semibold uppercase tracking-wider;
   transition: all 0.25s ease;
-  font-family: 'David libre', serif !important ;
+  font-family: var(--font-style-1), serif !important ;
   font-size: 14px;
-  /* color:var(--color_badge_cart); */
+  color: var(--color_text);
 }
 .btn:hover {
-  @apply text-red-btnhoverHeader;
+  color: var(--hover_text);
   transition: all 0.25s ease;
 }
 .header-content-items {
@@ -331,11 +359,12 @@ export default {
   @apply w-6 h-6;
 }
 .search-header {
-  @apply cursor-pointer text-gray-textHeader;
+  cursor: pointer;
+  color: var(--color_icon);
   transition: all 0.25s ease;
 }
 .search-header:hover {
-  @apply text-red-btnhoverHeader;
+  color: var(--hover_text);
   transition: all 0.25s ease;
 }
 .empty {
@@ -348,19 +377,21 @@ export default {
   @apply flex justify-center items-center w-9 h-9 box-border pb-1 ml-5 relative cursor-pointer;
 }
 .icon-shop {
-  @apply h-24 w-24 text-gray-textHeader;
+  @apply h-24 w-24;
+  color: var(--color_icon);
   transition: all 0.25s ease;
 }
 .icon-shop:hover {
-  @apply text-red-btnhoverHeader;
+  color: var(--hover_text);
   transition: all 0.25s ease;
 }
 .border-num-items {
-  @apply rounded-full h-16 w-auto flex justify-center items-center text-center -ml-3 -mt-3 bg-red-btnbannershop;
-  /* background: var(--color_background_btn); */
+  @apply rounded-full h-16 w-auto flex justify-center items-center text-center -ml-3 -mt-3;
+  background: var(--color_badge_cart);
 }
 .num-items {
-  @apply text-xs p-1 text-white-white;
+  @apply text-xs p-1;
+  color: white;
 }
 
 /* ***** */
@@ -403,7 +434,9 @@ export default {
 }
 @screen mlg {
   .header {
-    @apply w-9/3 py-2;
+    @apply w-9/3;
+    padding-bottom: var(--padding);
+    padding-top: var(--padding);
   }
   .header-content-buttons {
     @apply not-sr-only;
