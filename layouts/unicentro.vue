@@ -2,34 +2,16 @@
   <div
     :style="{
       '--font-style':
-        this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+        this.settingByTemplate &&
+        this.settingByTemplate.settings &&
+        this.settingByTemplate.settings.tipo_letra
           ? this.settingByTemplate.settings.tipo_letra
           : 'Roboto',
     }"
   >
-    <component
-      :dataStore="dataStore"
-      :settingByTemplate="
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings['--background_color_1']
-          ? this.settingByTemplate.settings
-          : this.settingBase
-      "
-      :is="headerTemplate"
-    />
+    <component v-bind="componentsProps" :is="headerTemplate" />
     <nuxt />
-    <component
-      :dataStore="dataStore"
-      :settingByTemplate="
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings['--background_color_1']
-          ? this.settingByTemplate.settings
-          : this.settingBase
-      "
-      :is="footerTemplate"
-    />
+    <component v-bind="componentsProps" :is="footerTemplate" />
     <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
       <div @click="redirectWhatsapp()">
         <koWhatsapp class="button-whatsapp" /><span
@@ -92,10 +74,11 @@ export default {
   head() {
     let tienda = this.$store.state.dataStore.tienda
     let tipo_letra =
-      this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+      this.settingByTemplate &&
+      this.settingByTemplate.settings &&
+      this.settingByTemplate.settings.tipo_letra
         ? this.settingByTemplate.settings.tipo_letra
         : 'Roboto'
-
     let tidio =
       this.$store.state.analytics_tagmanager &&
       this.$store.state.analytics_tagmanager.tidio_user
@@ -272,6 +255,25 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    componentsProps() {
+      return {
+        dataStore: this.dataStore,
+        settingByTemplate:
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings['--background_color_1']
+            ? this.settingByTemplate.settings
+            : this.settingBase,
+        settingByTemplate7:
+          this.settingByTemplate7 && this.settingByTemplate7.header
+            ? this.settingByTemplate7.header
+            : '',
+        settingByTemplate7General:
+          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
+            ? this.settingByTemplate7.settingGeneral
+            : '',
+      }
     },
   },
   methods: {

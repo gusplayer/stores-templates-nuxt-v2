@@ -2,39 +2,21 @@
   <div
     :style="{
       '--font-style':
-        this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+        this.settingByTemplate &&
+        this.settingByTemplate.settings &&
+        this.settingByTemplate.settings.tipo_letra
           ? this.settingByTemplate.settings.tipo_letra
           : 'Roboto',
     }"
   >
-    <component
-      :dataStore="dataStore"
-      :settingByTemplate="
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings['--background_color_1']
-          ? this.settingByTemplate.settings
-          : this.settingBase
-      "
-      :is="headerTemplate"
-    />
+    <component v-bind="componentsProps" :is="headerTemplate" />
     <!-- <div
       v-if="this.estadoHeader7 && this.headerk07"
       class="separadorKo7"
       id="separadork07"
     ></div> -->
     <nuxt />
-    <component
-      :dataStore="dataStore"
-      :settingByTemplate="
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings['--background_color_1']
-          ? this.settingByTemplate.settings
-          : this.settingBase
-      "
-      :is="footerTemplate"
-    />
+    <component v-bind="componentsProps" :is="footerTemplate" />
     <KoFooterCountry :dataStore="dataStore" />
     <div
       class="wrapper-whatsapp"
@@ -84,19 +66,6 @@
         </button>
       </div>
     </div>
-    <client-only>
-      <noscript>
-        <iframe
-          v-if="
-            this.analytics_tagmanager && this.analytics_tagmanager.tag_manager
-          "
-          :src="`https://www.googletagmanager.com/ns.html?id=${analytics_tagmanager.tag_manager}`"
-          height="0"
-          width="0"
-          style="display: none; visibility: hidden; opacity: 0;"
-        ></iframe>
-      </noscript>
-    </client-only>
   </div>
 </template>
 
@@ -134,32 +103,31 @@ export default {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_SHOPPING_CART')
     let domain = this.$route.fullPath
-    let domains = this.$route.fullPath
     if (domain == '/?clearCart=true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
-    // if (domains == '/contacto') {
-    //   this.estadoHeader7 = true
-    // } else {
-    //   this.estadoHeader7 = false
-    // }
   },
   data() {
-    return {
-      // estadoHeader7: false,
-    }
+    return {}
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
     let tipo_letra =
-      this.settingByTemplate && this.settingByTemplate.settings.tipo_letra
+      this.settingByTemplate &&
+      this.settingByTemplate.settings &&
+      this.settingByTemplate.settings.tipo_letra
         ? this.settingByTemplate.settings.tipo_letra
         : 'Roboto'
     let tidio =
       this.$store.state.analytics_tagmanager &&
       this.$store.state.analytics_tagmanager.tidio_user
         ? this.$store.state.analytics_tagmanager.tidio_user
+        : ''
+    let FacebookPixel1 =
+      this.analytics_tagmanager &&
+      this.analytics_tagmanager.facebook_pixel_metatag_1
+        ? this.analytics_tagmanager.facebook_pixel_metatag_1
         : ''
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
@@ -245,6 +213,10 @@ export default {
           name: 'og:street-address',
           content: geolocalizacion.direccion,
         },
+        {
+          name: 'facebook-domain-verification',
+          content: `${FacebookPixel1}`,
+        },
       ],
       script: [
         {
@@ -263,7 +235,7 @@ export default {
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+          // href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         },
         {
           href: `https://fonts.googleapis.com/css?family=${tipo_letra}:400,700&display=swap`,
@@ -361,8 +333,30 @@ export default {
     settingByTemplate() {
       return this.$store.state.settingByTemplate
     },
+    settingByTemplate7() {
+      return this.$store.state.settingByTemplate7
+    },
     headerk07() {
       return this.$store.state.headerk07
+    },
+    componentsProps() {
+      return {
+        dataStore: this.dataStore,
+        settingByTemplate:
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings['--background_color_1']
+            ? this.settingByTemplate.settings
+            : this.settingBase,
+        settingByTemplate7:
+          this.settingByTemplate7 && this.settingByTemplate7.header
+            ? this.settingByTemplate7.header
+            : '',
+        settingByTemplate7General:
+          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
+            ? this.settingByTemplate7.settingGeneral
+            : '',
+      }
     },
   },
   methods: {

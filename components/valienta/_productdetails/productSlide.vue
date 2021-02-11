@@ -7,6 +7,9 @@
           class="photo"
           alt="Product img"
         />
+        <!-- <button class="btn-download" @click="downloadQR(photo)">
+          <cloud-download-icon />
+        </button> -->
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
         <img
@@ -14,6 +17,9 @@
           class="photo"
           alt="Product img"
         />
+        <!-- <button class="btn-download" @click="downloadQR(photo.foto_cloudinary)">
+          <cloud-download-icon />
+        </button> -->
       </div>
       <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">
         <div class="youtube">
@@ -36,6 +42,8 @@
 </template>
 
 <script>
+// import saveAs from 'file-saver'
+
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
@@ -65,9 +73,12 @@ export default {
     },
   },
   methods: {
-    setPhoto(photo) {
-      return photo
+    setPhoto(value) {
+      return value
     },
+    // async downloadQR(value) {
+    //   saveAs(value, 'image.jpg')
+    // },
     changeSlide() {
       this.swiper.slidePrev(500, false)
     },
@@ -86,6 +97,7 @@ export default {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  flex-direction: column;
   overflow: hidden;
 }
 .photo {
@@ -126,5 +138,20 @@ export default {
 }
 .swiper-pagination-bullet-active {
   background: #0f2930;
+}
+.btn-download {
+  z-index: 20;
+  top: 0;
+  right: 35px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  color: #4a5782;
+  font-size: 30px;
+}
+.btn-download:hover {
+  color: #a9206b;
 }
 </style>

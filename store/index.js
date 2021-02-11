@@ -126,6 +126,7 @@ export const state = () => ({
   pagination: {},
   settingByTemplate: '',
   settingByTemplateWapi: '',
+  settingByTemplate7: '',
   category_producto_header: '',
   subcategory_producto_header: '',
   analytics_tagmanager: '',
@@ -179,6 +180,7 @@ export const state = () => ({
     text_btn: 'Conócenos',
   },
   headerk07: false,
+  pixelKey: 'x3130lz4ecwicp4b1l95r7wbnc4347',
 })
 
 export const mutations = {
@@ -200,12 +202,6 @@ export const mutations = {
   SET_SETTINGS_COMPONENT(state, value) {
     state.propertiesComponent = value
   },
-  SET_VIEWS(state, value) {
-    state.views = value
-  },
-  SET_PAGINATION(state, value) {
-    state.pagination = value
-  },
   SET_CATEGORY_PRODCUTRO(state, value) {
     state.category_producto_header = value
   },
@@ -217,16 +213,6 @@ export const mutations = {
   },
   DELETEALLITEMSCART: (state) => {
     state.productsCart = []
-  },
-
-  SET_SAVEOPTION: (state, payload) => {
-    state.beforeCombination.splice(payload.index, 1, payload.option.option)
-  },
-  SET_DETALLEPRODUCTO: (state, payload) => {
-    state.detalleProducto = payload
-  },
-  SET_BEFORECOMBINATION: (state) => {
-    state.beforeCombination = []
   },
   SET_OPENORDER: (state, value) => {
     state.openOrder = value
@@ -246,19 +232,9 @@ export const mutations = {
   SET_STATESPACERHEADERK7: (state, value) => {
     state.headerk07 = value
   },
-  SET_TOKEN(state, value) {
-    state.configHttp = {
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${value || process.env.TOKEN}`,
-        'Access-Control-Allow-Origin': '*',
-      },
-    }
-  },
   SET_SHOPPING_CART(state, value) {
     state.productsCart = value || []
   },
-
   SET_DATA(state) {
     state.productsData = state.dataStore.productos.sort((a, b) => {
       if (a.nombre < b.nombre) return -1
@@ -300,9 +276,6 @@ export const mutations = {
     )
     state.whatsapp = state.tienda.whatsapp
   },
-  SET_LOADING(state, value) {
-    state.isLoading = value
-  },
   GET_USERDATA(state) {
     let headers = {
       'content-type': 'application/json',
@@ -318,22 +291,6 @@ export const mutations = {
       state.userData = response.data.data
     })
   },
-  SET_FAVICON: (state) => {
-    const link =
-      document.querySelector("link[rel*='icon']") ||
-      document.createElement('link')
-    link.type = 'image/png'
-    link.rel = 'icon'
-    link.href = state.storeLayout.setting.faviconURL.url
-    document.getElementsByTagName('head')[0].appendChild(link)
-  },
-  // UPDATE_CONTENTCART(state) {
-  //   state.totalCart = 0
-  //   localStorage.setItem('ShoppingCart', JSON.stringify(state.productsCart))
-  //   state.productsCart.forEach((product) => {
-  //     state.totalCart += product.precio * product.cantidad
-  //   })
-  // },
   UPDATE_CONTENTCART(state) {
     state.totalCart = 0
     localStorage.setItem(
@@ -350,18 +307,14 @@ export const mutations = {
       state.totalCart += product.precio * product.cantidad
     })
   },
-  LOGOUT() {
-    window.location.href = 'https://perfil.komercia.co/logout'
-  },
-  SELECT_CARD(state, value) {
-    state.selectedCard = value
-    // state.storeLayout.setting.card = value
-  },
   SET_CITIES: (state, payload) => {
     state.cities = payload
   },
   SET_SETTINGS_BY_TEMPLATE: (state, value) => {
     state.settingByTemplate = value
+  },
+  SET_SETTINGS_BY_TEMPLATE_7: (state, value) => {
+    state.settingByTemplate7 = value
   },
   SET_SETTINGS_BY_TEMPLATE_WAPI: (state, value) => {
     state.settingByTemplateWapi = value
@@ -369,19 +322,11 @@ export const mutations = {
   SET_ANALITICS_TAGMANAGER: (state, value) => {
     state.analytics_tagmanager = value
   },
-
   DATA: (state, response) => {
     state.dataStore = response.data
   },
-  STOREDB: (state, { storeLayout, producto }) => {
-    state.storeLayout = storeLayout.data
-    state.detalleProducto = producto.data.detalle
-  },
   SET_SETTINGS_BY_COMPONENT: (state, value) => {
     state.settingsByComponent = value
-  },
-  SET_PROPERTIES: (state, value) => {
-    state.properties = value
   },
   SET_PRODUCT_INFO: (state, value) => {
     state.productInfo = value
@@ -391,8 +336,69 @@ export const mutations = {
   },
   SET_TEMPLATE_STORE(state, value) {
     state.template = value
-    // state.template = 7
+    // state.template = 8
   },
+  SET_ARTICLES(state, value) {
+    state.listArticulos = value
+  },
+  // SET_VIEWS(state, value) {
+  //   state.views = value
+  // },
+  // SET_PAGINATION(state, value) {
+  //   state.pagination = value
+  // },
+  // SET_SAVEOPTION: (state, payload) => {
+  //   state.beforeCombination.splice(payload.index, 1, payload.option.option)
+  // },
+  // SET_DETALLEPRODUCTO: (state, payload) => {
+  //   state.detalleProducto = payload
+  // },
+  // SET_BEFORECOMBINATION: (state) => {
+  //   state.beforeCombination = []
+  // },
+  // SET_TOKEN(state, value) {
+  //   state.configHttp = {
+  //     headers: {
+  //       'content-type': 'application/json',
+  //       Authorization: `Bearer ${value || process.env.TOKEN}`,
+  //       'Access-Control-Allow-Origin': '*',
+  //     },
+  //   }
+  // },
+  // SET_LOADING(state, value) {
+  //   state.isLoading = value
+  // },
+  // SET_FAVICON: (state) => {
+  //   const link =
+  //     document.querySelector("link[rel*='icon']") ||
+  //     document.createElement('link')
+  //   link.type = 'image/png'
+  //   link.rel = 'icon'
+  //   link.href = state.storeLayout.setting.faviconURL.url
+  //   document.getElementsByTagName('head')[0].appendChild(link)
+  // },
+  // UPDATE_CONTENTCART(state) {
+  //   state.totalCart = 0
+  //   localStorage.setItem('ShoppingCart', JSON.stringify(state.productsCart))
+  //   state.productsCart.forEach((product) => {
+  //     state.totalCart += product.precio * product.cantidad
+  //   })
+  // },
+
+  // LOGOUT() {
+  //   window.location.href = 'https://perfil.komercia.co/logout'
+  // },
+  // SELECT_CARD(state, value) {
+  //   state.selectedCard = value
+  //   // state.storeLayout.setting.card = value
+  // },
+  // STOREDB: (state, { storeLayout, producto }) => {
+  //   state.storeLayout = storeLayout.data
+  //   state.detalleProducto = producto.data.detalle
+  // },
+  // SET_PROPERTIES: (state, value) => {
+  //   state.properties = value
+  // },
 }
 export const actions = {
   // GET_LOGIN({ state, commit, dispatch }) {
@@ -453,9 +459,15 @@ export const actions = {
       await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
       await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
       await dispatch('GET_ARTICLES', id.data.data.id)
+      if (id.data.data.template == 7) {
+        if (state.dataStore && state.dataStore.tienda) {
+          await dispatch('GET_SETTINGS_BY_TEMPLATE_7', state.dataStore.tienda)
+        }
+      }
     }
     await dispatch('GET_SERVER_PATH', full)
     await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
+
     const idSlug = route.path.split('-')
     const producto = await axios.get(
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
@@ -473,7 +485,6 @@ export const actions = {
     )
     commit('DATA', response.data)
     commit('SET_DATA')
-    // console.log(response.data)
   },
   GET_DATA({ commit }) {
     commit('SET_DATA')
@@ -485,50 +496,53 @@ export const actions = {
         commit('SET_CITIES', response.data)
       })
   },
-  GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
+  async GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
     let template = store.template
-    // let template = 7
+    const response = await axios.get(
+      `https://api2.komercia.co/api/template/${template}/settings/${store.id_tienda}`
+    )
+    commit('SET_SETTINGS_BY_TEMPLATE', response.data.data)
+  },
+  GET_SETTINGS_BY_TEMPLATE_7({ commit }, store) {
     this.$axios
       .$get(
-        `https://api2.komercia.co/api/template/${template}/settings/${store.id_tienda}`
+        `https://backend-nuxt-editor.herokuapp.com/template7?id=${store.id_tienda}`
       )
       .then((response) => {
-        commit('SET_SETTINGS_BY_TEMPLATE', response.data)
+        commit('SET_SETTINGS_BY_TEMPLATE_7', response.body)
       })
+    // const response = await axios.get(
+    //   `https://backend-nuxt-editor.herokuapp.com/template7?id=${store.id_tienda}`
+    // )
+    // console.log(response.data)
+    // commit('SET_SETTINGS_BY_TEMPLATE_7', response.data)
   },
-  GET_SETTINGS_BY_TEMPLATE_WAPI({ commit }, idWapi) {
+  async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit }, idWapi) {
     let template = 99
-    this.$axios
-      .$get(
-        `https://api2.komercia.co/api/template/${template}/settings/${idWapi}`
-      )
-      .then((response) => {
-        commit('SET_SETTINGS_BY_TEMPLATE_WAPI', response.data)
-      })
+    // this.$axios
+    //   .$get(
+    //     `https://api2.komercia.co/api/template/${template}/settings/${idWapi}`
+    //   )
+    //   .then((response) => {
+    //     commit('SET_SETTINGS_BY_TEMPLATE_WAPI', response.data)
+    //   })
+    const response = await axios.get(
+      `https://api2.komercia.co/api/template/${template}/settings/${idWapi}`
+    )
+    commit('SET_SETTINGS_BY_TEMPLATE_WAPI', response.data.data)
   },
-  GET_ANALYTICS_TAGMANAGER({ commit }, id) {
-    this.$axios
-      .$get(`https://api2.komercia.co/api/apis/tienda/${id}`)
-      .then((response) => {
-        commit('SET_ANALITICS_TAGMANAGER', response.data)
-      })
+  async GET_ANALYTICS_TAGMANAGER({ commit }, id) {
+    const response = await axios.get(
+      `https://api2.komercia.co/api/apis/tienda/${id}`
+    )
+    commit('SET_ANALITICS_TAGMANAGER', response.data.data)
   },
-  GET_STORELAYOUT({ commit, state }) {
-    if (process.client) {
-      const link = document.createElement('link')
-      link.href = `https://fonts.googleapis.com/css?family=${state.storeLayout.setting.font}`
-      link.rel = 'stylesheet'
-      document.getElementsByTagName('head')[0].appendChild(link)
-      document.documentElement.style.fontFamily = state.storeLayout.setting.font
-      state.storeLayout.setting.colors.forEach((color) => {
-        document.documentElement.style.setProperty(color.var, color.hex)
-      })
-      document.documentElement.style.setProperty(
-        '--opacity',
-        state.storeLayout.setting.colors[2].hex + '20'
-      )
-      commit('SET_FAVICON')
-    }
+  async GET_ARTICLES({ state, commit }, id) {
+    const response = await axios.get(
+      `${state.urlKomercia}/api/blogs/${id}?page=1`,
+      state.configAxios
+    )
+    commit('SET_ARTICLES', response.data.blogs.data)
   },
   GET_SETTINGS_COMPONENT({ state, commit }, value) {
     axios
@@ -564,21 +578,6 @@ export const actions = {
         console.log(error)
       })
   },
-  GET_VIEWS({ state, commit }) {
-    axios
-      .get(`${state.urlComponents}/api/views`, {
-        headers: {
-          Authorization: `Bearer ${state.accessToken}`,
-        },
-      })
-      .then((response) => {
-        commit('SET_VIEWS', response.data.data)
-      })
-  },
-  GET_PAGINATION({ state, commit }, value) {
-    state.pagination = value
-    commit('SET_PAGINATION', state.pagination)
-  },
   GET_SETTINGS_BY_COMPONENT({ state, commit }, id) {
     return axios
       .get(`${state.urlComponents}/api/components/type/${id}/settings`, {
@@ -593,18 +592,6 @@ export const actions = {
       .catch((e) => {
         state.errorSettingsByComponent = e.response.data.mensaje
         commit('SET_SETTINGS_BY_COMPONENT', '')
-      })
-  },
-  GET_PROPERTIES({ state, commit }) {
-    axios
-      .get(`${state.urlComponents}/api/components/properties/all`, {
-        headers: {
-          'content-type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-      })
-      .then((response) => {
-        commit('SET_PROPERTIES', response.data.data)
       })
   },
   GET_SHOPPING_CART({ state, commit }) {
@@ -623,7 +610,7 @@ export const actions = {
   },
   GET_PRODUCT_INFO({ state, commit }, id) {
     axios
-      .get(`${state.urlTempleate}/api/producto/${id}`, {
+      .get(`${state.urlTemplate}/api/producto/${id}`, {
         headers: {
           'content-type': 'application/json',
           'Access-Control-Allow-Origin': '*',
@@ -648,13 +635,50 @@ export const actions = {
         })
       })
   },
-  async GET_ARTICLES({ state }, id) {
-    axios
-      .get(`${state.urlKomercia}/api/blogs/${id}?page=1`, state.configAxios)
-      .then((response) => {
-        state.listArticulos = response.data.blogs.data
-      })
-  },
+  // GET_STORELAYOUT({ commit, state }) {
+  //   if (process.client) {
+  //     const link = document.createElement('link')
+  //     link.href = `https://fonts.googleapis.com/css?family=${state.storeLayout.setting.font}`
+  //     link.rel = 'stylesheet'
+  //     document.getElementsByTagName('head')[0].appendChild(link)
+  //     document.documentElement.style.fontFamily = state.storeLayout.setting.font
+  //     state.storeLayout.setting.colors.forEach((color) => {
+  //       document.documentElement.style.setProperty(color.var, color.hex)
+  //     })
+  //     document.documentElement.style.setProperty(
+  //       '--opacity',
+  //       state.storeLayout.setting.colors[2].hex + '20'
+  //     )
+  //     commit('SET_FAVICON')
+  //   }
+  // },
+  // GET_VIEWS({ state, commit }) {
+  //   axios
+  //     .get(`${state.urlComponents}/api/views`, {
+  //       headers: {
+  //         Authorization: `Bearer ${state.accessToken}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       commit('SET_VIEWS', response.data.data)
+  //     })
+  // },
+  // GET_PAGINATION({ state, commit }, value) {
+  //   state.pagination = value
+  //   commit('SET_PAGINATION', state.pagination)
+  // },
+  // GET_PROPERTIES({ state, commit }) {
+  //   axios
+  //     .get(`${state.urlComponents}/api/components/properties/all`, {
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         'Access-Control-Allow-Origin': '*',
+  //       },
+  //     })
+  //     .then((response) => {
+  //       commit('SET_PROPERTIES', response.data.data)
+  //     })
+  // },
 }
 export const getters = {
   getSettingsCSS: (state, getters) => {

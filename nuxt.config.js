@@ -51,6 +51,7 @@ export default {
     { src: '~plugins/SocialSharing.js', ssr: false },
     { src: '~/plugins/countryFlags.js', ssr: false },
     { src: '~/plugins/vue-lazyload.js', ssr: false },
+    { src: '~/plugins/saveAs.js', ssr: false },
   ],
   modules: [
     '@nuxtjs/axios',

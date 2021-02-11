@@ -13,7 +13,7 @@ import '..\\node_modules\\swiper\\dist\\css\\swiper.css'
 
 import '..\\node_modules\\core-components-npm\\dist\\ko.css'
 
-import _6c3374f9 from './layouts.tw.531319a3.vue'
+import _6c3374f9 from './layouts.tw.39531a9c.vue'
 import _8b6b8a5a from '..\\layouts\\constructor-layout.vue'
 import _6f6c098b from '..\\layouts\\default.vue'
 import _6c337394 from '..\\layouts\\ig.vue'
