@@ -4,10 +4,14 @@
       <div class="swiper-wrapper z-auto">
         <div
           :class="`swiper-slide slide${index + 1}`"
-          v-for="(banner, index) in this.Banners"
+          v-for="(banner, index) in this.settingKCarousel.values"
           :key="index"
         >
-          <KObanner :banner="banner"></KObanner>
+          <KObanner
+            :banner="banner"
+            :settingKCarousel="settingKCarousel"
+            :settingGeneral="settingGeneral"
+          ></KObanner>
         </div>
       </div>
       <div class="swiper-pagination"></div>
@@ -23,34 +27,13 @@ export default {
   components: {
     KObanner,
   },
+  props: {
+    dataStore: Object,
+    settingKCarousel: Object,
+    settingGeneral: Object,
+  },
   data() {
     return {
-      Banners: [
-        {
-          photo:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Carousel-Slider/flowers-slider-1-img.png',
-          title: 'Hermosas flores para sus vacaciones.',
-          description:
-            'A volutpat nisl ante una parturient vestibulum parturient pretium velit egestas sit donec vestibulum.',
-          id: '1',
-        },
-        {
-          photo:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Carousel-Slider/flowers-slider-2-img.png',
-          title: 'Las mejores rosas en colores asombrosos.',
-          description:
-            'Cuando pides un ramo de flores, tu objetivo es impresionar a la persona especial que necesita.',
-          id: '2',
-        },
-        {
-          photo:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Carousel-Slider/flowers-slider-3-img.png',
-          title: 'Tulipanes frescos la elección perfecta.',
-          description:
-            'Un símbolo de amor simple, caridad, paraíso en la tierra, celestial y recordatorio de la pasión por la vida.',
-          id: '3',
-        },
-      ],
       swiperOption: {
         slidesPerView: 'auto',
         loop: true,

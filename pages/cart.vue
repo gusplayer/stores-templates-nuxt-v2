@@ -1,15 +1,6 @@
 <template lang="html">
   <div style="overflow: hidden;">
-    <component
-      :is="indexTemplate"
-      :style="
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings['--background_color_1']
-          ? this.settingByTemplate.settings
-          : this.settingBase
-      "
-    />
+    <component :is="indexTemplate" v-bind="componentsProps" />
   </div>
 </template>
 
@@ -49,7 +40,6 @@ export default {
     template() {
       return this.$store.state.template
     },
-
     indexTemplate() {
       let productListComponent = ''
       switch (this.template) {
@@ -70,6 +60,28 @@ export default {
           break
       }
       return productListComponent
+    },
+    settingByTemplate7() {
+      return this.$store.state.settingByTemplate7
+    },
+    componentsProps() {
+      return {
+        dataStore: this.dataStore,
+        settingGeneral:
+          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
+            ? this.settingByTemplate7.settingGeneral
+            : null,
+        settingK07Cart:
+          this.settingByTemplate7 && this.settingByTemplate7.card1
+            ? this.settingByTemplate7.card1
+            : null,
+        settingK05Cart:
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings['--background_color_1']
+            ? this.settingByTemplate.settings
+            : this.settingBase,
+      }
     },
   },
 }

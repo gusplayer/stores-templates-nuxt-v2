@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper_error">
+  <div class="wrapper_error" :style="settingK05Blog">
     <div class="banner-blog">
       <div class="tittle-banner-blog">
         <p class="txt-banner">{{ dataStore.tienda.nombre }}</p>
@@ -145,6 +145,7 @@ export default {
   },
   props: {
     dataStore: Object,
+    settingK05Blog: Object,
   },
   data() {
     return {

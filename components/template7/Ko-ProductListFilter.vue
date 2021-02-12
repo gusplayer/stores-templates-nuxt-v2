@@ -1,47 +1,36 @@
 <template>
-  <div class="product-content">
-    <div class="content-banner-shop">
+  <div class="product-content" :style="[settingK07ProductList, settingGeneral]">
+    <div
+      class="content-banner-shop"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'David Libre',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="tittle-banner-shop">
         <p class="btn-tittle-shop">
-          {{ $t('header_productos') }}
+          {{ settingK07ProductList.title }}
         </p>
       </div>
     </div>
     <div class="content-shop-items">
       <div class="content-left">
-        <!-- <div class="content-input-slide">
-          <div class="item-tittle">
-            <p class="txt-tittles">
-              {{ $t('home_filtrarpor') }}{{ $t('home_preciofilt') }}
-            </p>
-          </div>
-          <div class="itemLeft-range-slide">
-            <input
-              class="input-slide"
-              type="range"
-              min="0"
-              :max="range.max"
-              value="1"
-              id="myRange"
-            />
-          </div>
-
-          <div class="value-range-slide">
-            <div class="values-prices">
-              <p class="value-price">
-                {{ $t('cart_precio') }}
-              </p>
-              <p class="value-precio-change">
-                <span class="price"> $0 — $ </span>
-                <span class="price" id="value-range"></span>
-              </p>
-            </div>
-            <div class="btn-slider">
-              <button class="btn-items-left">{{ $t('home_filtrar') }}</button>
-            </div>
-          </div>
-        </div> -->
-        <!-- <div class="empty"></div> -->
         <div class="content-category-left">
           <div class="item-tittle">
             <p class="txt-tittles">
@@ -139,15 +128,6 @@
             </div>
 
             <div class="items-end">
-              <!-- <div class="show-number-items">
-                <p class="product-stock">
-                  {{ $t('home_mostrar') }}
-                  <span class="separator-breadCrumbs">/</span>
-                  {{ dataStore.productos.length }}
-                  <span class="separator-breadCrumbs">/</span>
-                </p>
-              </div> -->
-
               <div class="show-view-per-list">
                 <button class="show">
                   <svg
@@ -321,18 +301,18 @@
 </template>
 
 <script>
-// import KoSocialNet from '../template7/Ko-Social-Networks'
 import KoProdcutCardFilter from './_productcard/ProductCardFilter'
 import KoProdcutCardFilerList from './_productcard/ProductCardFilterList'
 export default {
   components: {
-    // KoSocialNet,
     KoProdcutCardFilter,
     KoProdcutCardFilerList,
   },
   props: {
     dataStore: Object,
     fullProducts: {},
+    settingGeneral: Object,
+    settingK07ProductList: Object,
   },
   name: 'Ko-ProductList-Filter',
   mounted() {
@@ -349,12 +329,6 @@ export default {
         }
       })
     }
-
-    // var slider = document.getElementById('myRange')
-    // var valueslide = document.getElementById('value-range')
-    // slider.oninput = function () {
-    //   valueslide.innerHTML = this.value
-    // }
 
     let domain = this.$route.fullPath
     let searchCategory = domain.slice(0, [11])
@@ -798,11 +772,12 @@ export default {
 <style scoped>
 .product-content {
   @apply flex flex-col justify-center items-center w-full mb-80;
+  background: var(--background_color_2);
 }
 .content-banner-shop {
   @apply w-full flex justify-center items-center bg-shopbg bg-cover bg-no-repeat;
+  /* background-image: var(--url_img); */
 }
-
 .itemLeft-range-slide {
   @apply w-full flex justify-center items-center;
   margin-bottom: 20px;
@@ -816,12 +791,12 @@ export default {
 .txt-tittles {
   @apply w-full flex justify-start items-center;
   margin-bottom: 20px;
-  color: #2d2a2a;
+  color: var(--color_text);
   text-transform: uppercase;
   font-weight: 600;
   font-size: 16px;
   transition: all 0.25s ease;
-  font-family: 'David libre', serif !important ;
+  font-family: var(--font-style-1), serif !important ;
   cursor: default;
 }
 .value-range-slide {
@@ -832,9 +807,9 @@ export default {
 }
 .value-price {
   @apply w-auto pr-1;
-  color: #717171;
+  color: var(--color_subtext);
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   transition: all 0.25s ease;
   cursor: default;
 }
@@ -846,10 +821,10 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  color: #2d2a2a;
+  color: var(--color_text);
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   transition: all 0.25s ease;
   cursor: default;
 }
@@ -867,7 +842,7 @@ export default {
   @apply w-3/0 flex justify-center items-center;
 }
 .btn-items-left {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   transition: all 0.25s ease;
   display: flex;
   border-radius: 35px;
@@ -895,11 +870,11 @@ export default {
   display: flex;
   flex-direction: row;
   width: auto;
-  color: #333333;
+  color: var(--color_text);
   margin-right: 6px;
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   cursor: pointer;
 }
 
@@ -910,20 +885,20 @@ export default {
   margin-left: 6px;
   transition: all 0.25s ease;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   cursor: pointer;
 }
 .product-stock-text {
   color: #8e8e8e;
   font-weight: bold;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 }
 .product-stock-active {
   color: rgb(0, 0, 0);
   font-weight: bold;
   font-size: 15px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 }
 .text-categorias-select {
   display: flex;
@@ -934,7 +909,7 @@ export default {
   font-weight: 100;
   transition: all 0.25s ease;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   cursor: pointer;
 }
 #statecate {
@@ -942,7 +917,7 @@ export default {
   color: #333;
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   cursor: pointer;
 }
 #statesubcate {
@@ -952,7 +927,7 @@ export default {
   color: #333;
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   cursor: pointer;
 }
 .top-content {
@@ -1020,9 +995,9 @@ export default {
 }
 .txt-categorys {
   @apply w-full flex flex-row justify-start items-center pr-1;
-  color: #717171;
+  color: var(--color_subtext);
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   transition: all 0.25s ease;
   cursor: pointer;
 }
@@ -1030,7 +1005,7 @@ export default {
   @apply w-full flex flex-row justify-start items-center pr-1;
   color: #0c0c0c;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   transition: all 0.25s ease;
   cursor: pointer;
   font-weight: bold;
@@ -1041,7 +1016,7 @@ export default {
   font-weight: 600;
   transition: all 0.25s ease;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   cursor: pointer;
 }
 .show-view-per-list {
@@ -1057,10 +1032,10 @@ export default {
   fill: #0c0c0c;
 }
 .show-icon:hover {
-  fill: #333333;
+  fill: var(--color_text);
 }
 .show:focus .show-icon {
-  fill: #333333;
+  fill: var(--color_text);
 }
 .items-end {
   @apply w-full flex flex-row justify-end items-center;
@@ -1069,8 +1044,8 @@ export default {
   @apply w-full flex flex-wrap justify-center items-center;
 }
 .btn-tittle-shop {
-  color: #fff;
-  font-family: 'David libre', serif !important ;
+  color: var(--color_title);
+  font-family: var(--font-style-1), serif !important ;
   font-weight: 400;
 }
 .txt-categorys:hover {
@@ -1094,15 +1069,15 @@ export default {
   @apply w-full;
 }
 .tittle {
-  font-family: 'Great Vibes', cursive !important;
+  font-family: var(--font-style-2), cursive !important;
   color: #ed2353;
 }
 .subtittle {
-  font-family: 'David Libre', serif !important;
-  color: #2d2a2a;
+  font-family: var(--font-style-1), serif !important;
+  color: var(--color_text);
 }
 .description {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   color: #777;
 }
 .product-conten-items {
@@ -1149,7 +1124,7 @@ export default {
   font-size: 20px;
   color: #3f3f3f;
   font-weight: 600;
-  font-family: 'David Libre', serif !important;
+  font-family: var(--font-style-1), serif !important;
 }
 .pagination-medium {
   margin-top: 50px;

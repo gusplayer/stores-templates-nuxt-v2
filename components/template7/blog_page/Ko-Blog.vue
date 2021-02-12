@@ -1,6 +1,28 @@
 <template>
-  <div class="wrapper_error">
-    <div class="banner-blog">
+  <div class="wrapper_error" :style="[settingK07Blog, settingGeneral]">
+    <div
+      class="banner-blog"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'David libre',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="tittle-banner-blog">
         <p class="txt-banner">{{ dataStore.tienda.nombre }}</p>
         <p class="txt-banner" id="separator">{{ $t('header_blog') }}</p>
@@ -58,7 +80,29 @@
         </div>
       </div>
     </div>
-    <div class="contenedor">
+    <div
+      class="contenedor"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'David libre',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="content-search-blog">
         <!-- <div class="text-search">
           <p class="title">Buscar Articulo</p>
@@ -104,6 +148,8 @@
               <KoProductCard1
                 v-if="article.estado == 1"
                 :article="article"
+                :settingK07Blog="settingK07Blog"
+                :settingGeneral="settingGeneral"
               ></KoProductCard1>
             </div>
           </div>
@@ -145,6 +191,8 @@ export default {
   },
   props: {
     dataStore: Object,
+    settingGeneral: Object,
+    settingK07Blog: Object,
   },
   data() {
     return {
@@ -180,7 +228,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: white;
+  background: var(--background_color_2);
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -193,7 +241,6 @@ export default {
   align-items: center;
   flex-direction: column;
 }
-
 .content-item-productos {
   display: flex;
   width: 100%;
@@ -242,16 +289,16 @@ export default {
   background-color: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: var(--btnhover);
+  color: var(--hover_text);
 }
 .product_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: var(--btnhover);
+  color: var(--hover_text);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled):hover {
-  color: var(--btnhover);
+  color: var(--hover_text);
 }
 .product_pagination
   >>> .el-pagination.is-background
@@ -261,8 +308,8 @@ export default {
   color: white;
 }
 .txt-banner {
-  color: #fff;
-  font-family: 'David libre', serif !important ;
+  color: var(--color_title);
+  font-family: var(--font-style-1), serif !important ;
   font-weight: 400;
 }
 .tittle-banner-blog {
@@ -285,7 +332,7 @@ export default {
 }
 .title {
   font-size: 25px;
-  font-family: 'David libre', serif !important ;
+  font-family: var(--font-style-1), serif !important ;
   font-weight: bold;
   color: #3f3f3f;
   margin-bottom: 20px;
@@ -322,7 +369,6 @@ export default {
   color: #7f7f7f;
   font-size: 16px;
 }
-
 .input-animated:hover > .search-icon {
   background: #fff;
   cursor: pointer;
@@ -346,7 +392,7 @@ export default {
   font-size: 0px;
   transition: 0.4s;
   /* width: 0px; */
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 }
 .input-text:focus {
   border: none;
@@ -357,7 +403,7 @@ export default {
   /* font-weight: 800; */
   color: #7f7f7f;
   padding-left: 10px;
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 }
 .empty-space {
   @apply mx-2;

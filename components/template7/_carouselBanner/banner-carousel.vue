@@ -1,16 +1,28 @@
 <template>
-  <div class="banner" :style="settingByTemplate">
-    <div class="banner-content-items">
+  <div class="banner" :style="[settingKCarousel, banner, settingGeneral]">
+    <div
+      class="banner-content-items"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="banner-content-img">
-        <img
-          class="img-banner"
-          src="https://woodmartcdn-cec2.kxcdn.com/wp-content/uploads/2018/11/flowers-slider-txt-element.jpg.png"
-          alt="img-flor"
-        />
+        <img class="img-banner" :src="banner.url_img_left" alt="img-flor" />
       </div>
       <div class="text-tittle">
-        <span :class="`banner-text-tittle banner-text-tittle-${banner.id}`">
-          {{ banner.title }}
+        <span :class="`banner-text-tittle banner-text-tittle`">
+          {{ banner.tittle }}
         </span>
       </div>
       <div class="text-subtittle">
@@ -26,7 +38,7 @@
             </span>
           </nuxt-link>
         </button>
-        <button :class="`content-bttns-view${banner.id} content-bttns-view`">
+        <button :class="`content-bttns-view content-bttns-view`">
           <span class="content-textbutton-viewmore">
             {{ $t('home_cardvermas') }}
           </span>
@@ -34,15 +46,16 @@
       </div>
     </div>
     <div class="banner-img">
-      <img class="img-girl" :src="banner.photo" alt="banner-carousel" />
+      <img class="img-girl" :src="banner.url_img_right" alt="banner-carousel" />
     </div>
   </div>
 </template>
 <script>
 export default {
   props: {
-    banner: {},
-    settingByTemplate: Object,
+    banner: Object,
+    settingKCarousel: Object,
+    settingGeneral: Object,
   },
 }
 </script>
@@ -58,54 +71,38 @@ export default {
   @apply flex flex-row gap-3 justify-center items-center;
 }
 .content-bttns-shop {
-  @apply mr-2 rounded-full bg-red-btnbannershop shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply mr-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  border-radius: var(--radius_btn);
+  background: var(--color_background_btn);
   padding: 10px 20px;
-}
-.content-bttns-view {
-  @apply ml-2 rounded-full border-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
-  padding: 10px 20px;
-}
-.content-bttns-view1 {
-  @apply border-gray-btnbannerviewhover border-2;
-}
-.content-bttns-view2 {
-  @apply border-coffe-headerpage border-2;
-}
-.content-bttns-view3 {
-  @apply border-rose-btnbannerviewhover border-2;
 }
 .content-bttns-shop:hover {
   @apply bg-red-btnbannershophover;
   transition: all 0.2s ease-out;
 }
-.content-bttns-view1:hover {
-  @apply bg-gray-btnbannerviewhover text-white-white;
-  transition: all 0.2s ease-out;
+.content-bttns-view {
+  @apply ml-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  border-radius: var(--radius_btn);
+  border: 2px solid var(--color_background_btn_2);
+  color: var(--color_background_btn_2);
+  padding: 10px 20px;
 }
-.content-bttns-view2:hover {
-  @apply bg-coffe-headerpage text-white-white;
-  transition: all 0.2s ease-out;
-}
-.content-bttns-view3:hover {
-  @apply bg-rose-btnbannerviewhover text-white-white;
+.content-bttns-view:hover {
+  border: 2px solid var(--hover_text);
+  color: var(--hover_text);
   transition: all 0.2s ease-out;
 }
 .content-textbutton-shop {
-  @apply text-white-white;
+  color: var(--color_text_btn);
   font-size: 13px;
   line-height: 18px;
 }
-.banner-text-tittle-1 {
-  @apply text-blue-headerpage;
-}
-.banner-text-tittle-2 {
-  @apply text-coffe-headerpage;
-}
-.banner-text-tittle-3 {
-  @apply text-rose-headerpage;
+.banner-text-tittle {
+  font-family: var(--font-style-2), cursive !important;
+  color: var(--color_text);
 }
 .banner-text-subtittle {
-  @apply text-gray-btnbannerviewhover;
+  color: var(--color_subtext);
 }
 .text-tittle {
   @apply flex justify-center items-center text-center leading-tight;
@@ -119,18 +116,15 @@ export default {
 .banner-img {
   @apply flex w-full justify-center items-center;
 }
-.banner-text-tittle {
-  font-family: 'Great Vibes', cursive !important;
-}
 .banner-text-subtittle {
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
   font-style: italic;
 }
 .content-textbutton-shop {
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
 }
 .content-textbutton-viewmore {
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
 }
 @screen sm {
   .banner {

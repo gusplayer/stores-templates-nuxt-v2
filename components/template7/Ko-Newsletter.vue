@@ -1,6 +1,22 @@
 <template>
-  <div class="wrapper_newsletter">
-    <div class="wrapper-items-content">
+  <div class="wrapper_newsletter" :style="[settingKNews, settingGeneral]">
+    <div
+      class="wrapper-items-content"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="wrapper-content-items">
         <div class="wrapper-items-text">
           <div class="tittle">
@@ -17,8 +33,23 @@
         </div>
       </div>
     </div>
-
-    <div class="wrapper-items">
+    <div
+      class="wrapper-items"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="conten-input-check">
         <div class="content-input">
           <ValidationProvider
@@ -75,6 +106,8 @@ export default {
   name: 'Ko-Newsletter-1',
   props: {
     dataStore: Object,
+    settingGeneral: Object,
+    settingKNews: Object,
   },
   components: {
     ValidationObserver,
@@ -142,6 +175,7 @@ export default {
 <style scoped>
 .wrapper_newsletter {
   @apply w-full flex flex-col justify-center items-center;
+  background: var(--background_color_1);
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;
@@ -158,19 +192,21 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .tittle-text {
-  font-family: 'Great Vibes', cursive !important;
-  color: #ed2353;
+  font-family: var(--font-style-2), cursive !important;
+  color: var(--color_pre_title);
 }
 .subtittle-text {
-  font-family: 'Lora', serif !important;
-  color: #2d2a2a;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_title);
 }
 .description-text {
-  font-family: 'Lora', serif !important;
-  color: #777777;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_description);
 }
 .content-bttns-shop {
-  @apply mr-2 rounded-full bg-red-btnbannershop shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply mr-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  background: var(--color_background_btn);
+  border-radius: var(--radius_btn);
   padding: 12px 20px;
   margin-left: 20px;
 }
@@ -179,12 +215,12 @@ export default {
   transition: all 0.2s ease-out;
 }
 .content-textbutton-shop {
-  @apply text-white-white;
+  color: var(-color_text_btn);
   font-size: 13px;
   line-height: 18px;
 }
 .content-textbutton-shop {
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
 }
 .wrapper-items {
   @apply w-auto flex justify-center;
@@ -200,7 +236,7 @@ export default {
 }
 .input-text {
   @apply w-full flex justify-start items-center border;
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
   border-radius: 30px;
   padding: 0 15px;
   max-width: 100%;
@@ -215,7 +251,7 @@ export default {
   opacity: 0.7;
 }
 .text-error {
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
   font-size: 12px;
   color: #ed2353;
   width: auto;

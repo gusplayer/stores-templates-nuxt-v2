@@ -1,5 +1,9 @@
 <template>
-  <div class="wrapper-cart" ref="color" :style="settingByTemplate">
+  <div
+    class="wrapper-cart"
+    ref="color"
+    :style="[settingK07Cart, settingGeneral]"
+  >
     <div class="contenedor" v-if="this.productsCart.length">
       <ul class="products_list">
         <li
@@ -396,7 +400,9 @@ export default {
   mixins: [idCloudinary],
   name: 'Ko-Cart-1',
   props: {
-    settingByTemplate: Object,
+    dataStore: Object,
+    settingGeneral: Object,
+    settingK07Cart: Object,
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
@@ -423,9 +429,6 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
     totalCart() {
       return this.$store.state.totalCart
     },
@@ -628,8 +631,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background: var(--background_color_2); */
-  background: #efefef;
+  background: var(--background_color_1);
   box-sizing: border-box;
   flex-direction: column;
   padding-top: 120px;
@@ -705,9 +707,9 @@ export default {
   flex-direction: column;
 }
 .content_variant >>> .el-tag {
-  border-color: var(--color_border);
-  background-color: var(--background_color_1);
-  color: var(--color_text);
+  border-color: var(--color_tag);
+  background-color: var(--color_tag);
+  color: var(--color_text_tag);
   display: inline-block;
   height: 28px;
   margin-left: 2px;
@@ -821,7 +823,7 @@ export default {
 }
 .cart-icon:hover {
   font-size: 24px;
-  color: var(--btnhover);
+  color: var(--hover_text);
 }
 .cart-icon > .material-design-icon__svg {
   bottom: 0em;
@@ -830,7 +832,7 @@ export default {
   display: flex;
   flex: 1;
   width: 100%;
-  border-bottom: 1px solid var(--colorBorder);
+  border-bottom: 1px solid var(--color_border);
   margin-top: 5px;
 }
 .content_cart_summary {
@@ -934,8 +936,8 @@ export default {
   transition: all 200ms ease-in;
 }
 .btn1:hover {
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
+  border: solid 2px var(--hover_text);
+  background-color: var(--hover_text);
 }
 .btn2 {
   border-radius: var(--radius_btn);
@@ -952,8 +954,8 @@ export default {
   transition: all 200ms ease-in;
 }
 .btn2:hover {
-  color: var(--btnhover);
-  border: solid 2px var(--btnhover);
+  color: var(--hover_text);
+  border: solid 2px var(--hover_text);
 }
 .contenedor-vacio {
   display: flex;
@@ -979,8 +981,8 @@ export default {
   transition: all 200ms ease-in;
 }
 .btn3:hover {
-  color: var(--btnhover);
-  border: solid 2px var(--btnhover);
+  color: var(--hover_text);
+  border: solid 2px var(--hover_text);
 }
 .products_list_resposive {
   display: none;

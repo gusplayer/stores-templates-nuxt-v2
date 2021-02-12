@@ -1,6 +1,28 @@
 <template>
-  <div class="producto">
-    <div class="container">
+  <div class="producto" :style="[settingKProdutCard, settingGeneral]">
+    <div
+      class="container"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'David Libre',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <router-link
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
@@ -200,13 +222,35 @@
               router-link
               :to="{ path: `/productos/` + product.slug }"
             >
-              <p>{{ $t('home_cardvermas') }}</p>
+              <p class="color_tex_btn">{{ $t('home_cardvermas') }}</p>
             </router-link>
           </div>
         </div>
       </div>
     </div>
-    <div class="datos-producto">
+    <div
+      class="datos-producto"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'David Libre',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="tittle">
         <p class="card-title" v-if="this.product.nombre.length >= 54">
           {{ `${this.product.nombre.slice(0, 54)}...` }}
@@ -276,7 +320,11 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',
-  props: { product: Object },
+  props: {
+    product: Object,
+    settingKProdutCard: Object,
+    settingGeneral: Object,
+  },
 
   data() {
     return {
@@ -546,7 +594,7 @@ export default {
   @apply text-white-white;
 }
 .cart-Shop {
-  @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -557,7 +605,7 @@ export default {
   text-align: center;
 }
 .cart-Shop-mobile {
-  @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -567,6 +615,9 @@ export default {
   transform: translate(-50%, -50%);
   text-align: center;
   justify-column: center;
+}
+.color_tex_btn {
+  color: var(--color_text_btn_card);
 }
 .icons-hover {
   @apply text-gray-textHeader absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
@@ -583,21 +634,21 @@ export default {
   fill: white;
 }
 .tittle {
-  font-family: 'David Libre', serif !important;
-  color: #3f3f3f;
+  font-family: var(--font-style-1), serif !important;
+  color: var(--color_text_card);
   font: inherit;
   font-size: 100%;
 }
 .categoria {
-  font-family: 'Lora', serif !important;
-  color: #9e9e9e;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_subtext_card);
   font: inherit;
   font-size: 100%;
 }
 .precio {
   @apply font-bold;
-  font-family: 'Lora', serif !important;
-  color: #ed2353;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_price_card);
   font-weight: 600;
 }
 .text-free {
@@ -614,7 +665,6 @@ export default {
 .icon-overlay-free {
   color: #25db37;
 }
-
 .text-sould {
   color: white;
   position: absolute;
@@ -625,12 +675,15 @@ export default {
   transform: translate(-50%, -50%);
   white-space: nowrap;
 }
+.overlay-bottom {
+  background: var(--color_background_btn_card);
+}
 @screen sm {
   .text-cart {
     @apply hidden;
   }
   .overlay-bottom {
-    @apply absolute right-0 bottom-0 overflow-hidden bg-red-btnhoverproducts transition-all ease-in duration-300;
+    @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
     width: 20%;
     height: 20%;
     left: 10px;
@@ -743,7 +796,7 @@ export default {
 }
 @media (max-width: 1279px) {
   .overlay-bottom {
-    @apply flex justify-center items-center right-0 bottom-0 overflow-hidden bg-red-btnhoverproducts transition-all ease-in duration-300;
+    @apply flex justify-center items-center right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
     width: 18%;
     height: 18%;
     left: 10px;
@@ -764,7 +817,7 @@ export default {
     @apply block;
   }
   .overlay-bottom {
-    @apply absolute w-full left-0 right-0 bottom-0 overflow-hidden h-0 bg-red-btnhoverproducts transition-all ease-in duration-300;
+    @apply absolute w-full left-0 right-0 bottom-0 overflow-hidden h-0 transition-all ease-in duration-300;
   }
   .overlay-bottom:hover {
     @apply bg-red-btnbannershop transition-all ease-in duration-300;

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-cart" ref="color" :style="settingByTemplate">
+  <div class="wrapper-cart" ref="color" :style="settingK05Cart">
     <div class="contenedor" v-if="this.productsCart.length">
       <ul class="products_list">
         <li
@@ -396,7 +396,8 @@ export default {
   mixins: [idCloudinary],
   name: 'Ko-Cart-1',
   props: {
-    settingByTemplate: Object,
+    dataStore: Object,
+    settingK05Cart: Object,
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
@@ -423,9 +424,6 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
     totalCart() {
       return this.$store.state.totalCart
     },

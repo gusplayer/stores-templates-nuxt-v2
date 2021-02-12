@@ -1,6 +1,16 @@
 <template>
-  <div class="wrapper-contact" :style="settingByTemplate">
-    <div class="contact">
+  <div class="wrapper-contact" :style="[settingK07Contact, settingGeneral]">
+    <div
+      class="contact"
+      :style="[
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="contact-content">
         <div>
           <p class="contact-text-title">{{ $t('contact_title') }}</p>
@@ -156,7 +166,8 @@ export default {
   name: 'Ko-Contact-1',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingGeneral: Object,
+    settingK07Contact: Object,
   },
   components: {
     ValidationObserver,
@@ -276,8 +287,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background: var(--background_color_2); */
-  background: #fff;
+  background: var(--background_color_1);
   box-sizing: border-box;
   padding-top: 130px;
 }
@@ -309,18 +319,17 @@ export default {
   width: 100%;
 }
 .contact-text-title {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
   font-size: 35px;
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: -0.4px;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
 }
 .contact-text-subtitle {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 
   font-size: 16px;
   font-weight: normal;
@@ -328,8 +337,7 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_subtext);
   margin-top: 10px;
 }
 .contact-text-subtitles {
@@ -339,12 +347,11 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_subtext);
   margin-top: 10px;
 }
 .contact-text-subtitle2 {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 
   font-size: 16px;
   font-weight: normal;
@@ -352,14 +359,13 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_subtext);
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
 }
 .contact-text-subtitle3 {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 
   font-size: 12px;
   font-weight: normal;
@@ -367,12 +373,11 @@ export default {
   font-style: normal;
   line-height: 1;
   letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_subtext);
   margin-top: 10px;
 }
 .contact-text-subtitle4 {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 
   font-size: 12px;
   font-weight: normal;
@@ -380,8 +385,7 @@ export default {
   font-style: normal;
   line-height: 1;
   letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
   margin-top: 10px;
   text-align: right;
 }
@@ -390,7 +394,7 @@ export default {
   flex-direction: column;
 }
 .contact-icon {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 
   font-size: 18px;
   font-weight: normal;
@@ -398,25 +402,23 @@ export default {
   font-style: normal;
   line-height: 2.11;
   letter-spacing: normal;
-  /* color: var(--color_icon); */
-  color: #25dac5;
+  color: var(--color_icon);
 }
 .text-icon {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 
   display: flex;
   flex-direction: row;
-  /* color: var(--color_icon); */
-  color: #25dac5;
+  color: var(--color_icon);
 }
 .text-icon a:hover {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 
   cursor: pointer;
-  color: var(--btnhover);
+  color: var(--hover_text);
 }
 .text-icon a {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 
   font-size: 16px;
   font-weight: normal;
@@ -424,8 +426,7 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
   margin-top: 5px;
   margin-left: 7px;
 }
@@ -433,7 +434,7 @@ export default {
   font-size: 17px;
 }
 .contact-text-sub {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 
   font-size: 22px;
   font-weight: 600;
@@ -441,12 +442,11 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
   margin-top: 10px;
 }
 .contact-text-sub2 {
-  font-family: 'Lora', serif !important ;
+  font-family: var(--font-style-3), serif !important ;
 
   font-size: 22px;
   font-weight: 600;
@@ -454,15 +454,14 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
   margin-top: 10px;
 }
 .separator {
   margin-top: 15px;
   width: 100%;
-  /* border: solid 1.5px var(--color_border); */
-  border: solid 1.5px rgba(255, 255, 255, 1);
+  background: var(--color_icon);
+  border: solid 1.5px var(--color_icon);
 }
 .text-icon {
   display: flex;
@@ -473,22 +472,19 @@ export default {
 }
 .contact-content-rigth {
   border-radius: 10px;
-  /* background-color: var(--background_color_1); */
-  background-color: #f4f4f4;
+  background-color: var(--background_color_2);
   padding: 30px 30px 50px 30px;
   margin-top: 20px;
 }
 .contact-content-rigth p {
-  font-family: 'Lora', serif !important ;
-
+  font-family: var(--font-style-3), serif !important ;
   font-size: 14px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.86;
   letter-spacing: 2px;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
   margin: 10px;
   margin-left: 0px;
 }
@@ -508,11 +504,9 @@ export default {
   flex-direction: row;
 }
 .input-text {
-  font-family: 'Lora', serif !important ;
-
+  font-family: var(--font-style-3), serif !important ;
   font-size: 14px;
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_text);
   border: solid 2px #afafaf;
   border-radius: var(--radius_btn);
   background-color: transparent;
@@ -520,10 +514,8 @@ export default {
   width: 100%;
 }
 .input-text::placeholder {
-  font-family: 'Lora', serif !important ;
-
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
+  font-family: var(--font-style-3), serif !important ;
+  color: var(--color_text);
   opacity: 0.7;
 }
 .input-text:-internal-autofill-selected {
@@ -535,20 +527,17 @@ export default {
 .input-text:focus,
 .input-text:active {
   outline: 0;
-  /* border: solid 2px var(--color_border); */
-  border: solid 2px rgba(127, 127, 139, 0.342);
+  border: solid 2px var(--color_background_btn);
 }
 .input-text-rectangule {
-  font-family: 'Lora', serif !important ;
-
+  font-family: var(--font-style-3), serif !important ;
   font-size: 14px;
   font-weight: 400;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_text);
   border: solid 2px #afafaf;
   border-radius: var(--radius_btn);
   background-color: transparent;
@@ -560,10 +549,8 @@ export default {
   min-height: 80px;
 }
 .input-text-rectangule::placeholder {
-  font-family: 'Lora', serif !important ;
-
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
+  font-family: var(--font-style-3), serif !important ;
+  color: var(--color_text);
   opacity: 0.7;
 }
 
@@ -587,8 +574,7 @@ export default {
   background: rgb(138, 138, 138);
 }
 .text-error {
-  font-family: 'Lora', serif !important ;
-
+  font-family: var(--font-style-3), serif !important ;
   font-size: 12px;
   color: #cb2027;
   width: 100%;
@@ -598,7 +584,7 @@ export default {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
   border: solid 2px var(--color_background_btn);
-  background-color: #2c2930;
+  background: var(--color_background_btn);
   padding: 8px 14px;
   font-size: 16px;
   width: 50%;
@@ -610,11 +596,10 @@ export default {
   transition: all 200ms ease-in;
 }
 .btn:hover {
-  font-family: 'Lora', serif !important ;
-
+  font-family: var(--font-style-3), serif !important ;
   color: white;
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
+  border: solid 2px var(--hover_text);
+  background-color: var(--hover_text);
 }
 @screen sm {
   .contact {

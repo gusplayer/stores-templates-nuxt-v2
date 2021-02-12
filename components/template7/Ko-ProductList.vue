@@ -1,17 +1,39 @@
 <template>
-  <div class="product-content">
-    <div class="producto-items-content" id="section">
+  <div class="product-content" :style="[settingKProductList, settingGeneral]">
+    <div
+      class="producto-items-content"
+      id="section"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'David Libre',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="product-text">
         <div class="product-tittle">
-          <span class="tittle">Accesorios de madera.</span>
+          <span class="tittle">{{ settingKProductList.pre_title }}</span>
         </div>
         <div class="product-subtittle">
-          <span class="subtittle">Productos Destacados</span>
+          <span class="subtittle">{{ settingKProductList.title }}</span>
         </div>
         <div class="product-description">
           <span class="description">
-            Es un hecho establecido desde hace mucho tiempo que un lector se
-            distraerá
+            {{ settingKProductList.description }}
           </span>
         </div>
       </div>
@@ -23,7 +45,11 @@
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard :product="product"></KoProductCard>
+              <KoProductCard
+                :product="product"
+                :settingKProdutCard="settingKProdutCard"
+                :settingGeneral="settingGeneral"
+              ></KoProductCard>
             </div>
           </div>
           <div
@@ -58,6 +84,9 @@ export default {
   props: {
     dataStore: Object,
     fullProducts: {},
+    settingKProductList: Object,
+    settingGeneral: Object,
+    settingKProdutCard: Object,
   },
   name: 'Ko-ProductList-1',
   mounted() {
@@ -95,6 +124,7 @@ export default {
 <style scoped>
 .product-content {
   @apply flex flex-col justify-center items-center w-full my-80;
+  background: var(--background_color_1);
 }
 .product-text {
   @apply flex flex-col justify-center items-center w-full;
@@ -113,16 +143,16 @@ export default {
 }
 
 .tittle {
-  font-family: 'Great Vibes', cursive !important;
-  color: #ed2353;
+  font-family: var(--font-style-2), cursive !important;
+  color: var(--color_pre_title);
 }
 .subtittle {
-  font-family: 'David Libre', serif !important;
-  color: #2d2a2a;
+  font-family: var(--font-style-1), serif !important;
+  color: var(--color_title);
 }
 .description {
-  font-family: 'Lora', serif !important ;
-  color: #777;
+  font-family: var(--font-style-3), serif !important ;
+  color: var(--color_description);
 }
 .product-conten-items {
   @apply gap-4;

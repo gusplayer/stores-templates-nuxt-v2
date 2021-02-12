@@ -1,9 +1,17 @@
 <template>
-  <div class="producto">
+  <div class="producto" :style="[settingKBlog, settingGeneral]">
     <div
       class="container"
       @mouseover="hover = true"
       @mouseleave="hover = false"
+      :style="[
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
     >
       <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
         <div class="figure-img">
@@ -57,7 +65,7 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-Blogcard',
-  props: { article: Object },
+  props: { article: Object, settingKBlog: Object, settingGeneral: Object },
   mounted() {
     if (this.article.created_at) {
       let domain = this.article.created_at
@@ -137,13 +145,6 @@ export default {
   max-height: 270px;
   width: 100%;
 }
-/* .product-image:hover {
-  filter: grayscale(40%);
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
-} */
-
 .text-tittle {
   @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
   font: inherit;
@@ -157,7 +158,8 @@ export default {
 }
 
 .content-bottom-titulo {
-  @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
+  color: var(--color_background_text);
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -170,9 +172,9 @@ export default {
 .text-cart {
   @apply w-full;
 }
-
 .content-bottom-autor {
   @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
+  color: var(--color_background_text_2);
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -206,22 +208,20 @@ figure {
     rgb(0, 0, 0) 100%
   );
 }
-
 .figure-img figure:hover img {
   opacity: 0.5;
 }
 .content-imge {
   @apply flex justify-center items-center;
 }
-
 .txt-day,
 .txt-month {
-  font-family: 'Lora', serif !important;
-  color: #333333;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_text_date);
 }
 .txt-tituloart,
 .txt-autorart {
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
   font-size: 14px;
 }
 .txt-tituloart {
@@ -238,9 +238,18 @@ figure {
   font-weight: 600;
   font-size: 12px;
 }
+.overlay-top {
+  background: var(--color_bg_date);
+}
+.overlay-bottom {
+  background: var(--color_background_card);
+}
+.overlay-bottom-autor {
+  background: var(--color_background_card_2);
+}
 @screen sm {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 7%;
     left: 5%;
     right: 0;
@@ -248,14 +257,14 @@ figure {
     height: 28%;
   }
   .overlay-bottom {
-    @apply absolute right-0 bottom-0 overflow-hidden bg-red-btnbannershop transition-all ease-in duration-300;
+    @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
     width: 60%;
     height: 25px;
     left: 20%;
     bottom: 35%;
   }
   .overlay-bottom-autor {
-    @apply absolute overflow-hidden shadow-2xl bg-gray-textHeader bg-opacity-75 rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl bg-opacity-75 rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     bottom: 5%;
     left: 0%;
     right: 0;
@@ -273,7 +282,7 @@ figure {
 }
 @screen md {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 5%;
     left: 5%;
     right: 0;
@@ -281,14 +290,14 @@ figure {
     height: 22%;
   }
   .overlay-bottom {
-    @apply absolute right-0 bottom-0 overflow-hidden bg-red-btnbannershop transition-all ease-in duration-300;
+    @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
     width: 60%;
     height: 25px;
     left: 20%;
     bottom: 35%;
   }
   .overlay-bottom-autor {
-    @apply absolute overflow-hidden shadow-2xl bg-gray-textHeader bg-opacity-75 rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl bg-opacity-75 rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     bottom: 3%;
     left: 0%;
     right: 0;
@@ -298,7 +307,7 @@ figure {
 }
 @screen lg {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 5%;
     left: 5%;
     right: 0;
@@ -308,7 +317,7 @@ figure {
 }
 @screen mlg {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 5%;
     left: 5%;
     right: 0;

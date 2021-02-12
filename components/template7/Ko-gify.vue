@@ -1,16 +1,38 @@
 <template>
-  <div class="product-content">
-    <div class="producto-items-content">
+  <div class="product-content" :style="[settingKGify, settingGeneral]">
+    <div
+      class="producto-items-content"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'David Libre',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="product-text">
         <div class="product-tittle">
-          <span class="tittle">Massa et semper litara.</span>
+          <span class="tittle">{{ settingKGify.pre_title }}</span>
         </div>
         <div class="product-subtittle">
-          <span class="subtittle">Nuestros productos Gify</span>
+          <span class="subtittle">{{ settingKGify.title }}</span>
         </div>
         <div class="product-description">
           <span class="description">
-            A laoreet ad litora consequat a luctus a suspendisse ruturm
+            {{ settingKGify.description }}
           </span>
         </div>
       </div>
@@ -24,6 +46,8 @@
             <KoProductGifyCard
               :product="product"
               class="gifyload"
+              :settingKProdutCard="settingKProdutCard"
+              :settingGeneral="settingGeneral"
             ></KoProductGifyCard>
           </div>
         </div>
@@ -47,6 +71,9 @@ export default {
   props: {
     dataStore: Object,
     fullProducts: {},
+    settingGeneral: Object,
+    settingKProdutCard: Object,
+    settingKGify: Object,
   },
   name: 'Ko-gify-1',
   data() {
@@ -103,6 +130,7 @@ export default {
 <style scoped>
 .product-content {
   @apply flex flex-col justify-center items-center w-full my-80;
+  background: var(--background_color_1);
 }
 .product-text,
 .product-conten-items {
@@ -120,16 +148,16 @@ export default {
 }
 
 .tittle {
-  font-family: 'Great Vibes', cursive !important;
-  color: #ed2353;
+  font-family: var(--font-style-2), cursive !important;
+  color: var(--color_pre_title);
 }
 .subtittle {
-  font-family: 'David Libre', serif !important;
-  color: #2d2a2a;
+  font-family: var(--font-style-1), serif !important;
+  color: var(--color_title);
 }
 .description {
-  font-family: 'Lora', serif !important ;
-  color: #777;
+  font-family: var(--font-style-3), serif !important ;
+  color: var(--color_description);
 }
 .product-conten-items {
   @apply flex flex-row;
@@ -172,7 +200,6 @@ export default {
     width: 1192px;
   }
 }
-
 @screen xxl {
   .tittle {
     line-height: 34px;

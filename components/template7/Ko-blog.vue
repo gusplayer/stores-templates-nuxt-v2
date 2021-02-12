@@ -1,17 +1,33 @@
 <template>
-  <div class="wrapper-content">
-    <div class="wrapper-items-content">
+  <div class="wrapper-content" :style="[settingKBlog, settingGeneral]">
+    <div
+      class="wrapper-items-content"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="wrapper-content-items">
         <div class="wrapper-items-text">
           <div class="tittle">
-            <span class="tittle-text">Comparte las mejores noticias.</span>
+            <span class="tittle-text">{{ settingKBlog.pre_title }}</span>
           </div>
           <div class="subtittle">
-            <span class="subtittle-text">Nuestro nuevo artículo</span>
+            <span class="subtittle-text">{{ settingKBlog.title }}</span>
           </div>
           <div class="description">
             <span class="description-text">
-              Hay muchas variaciones de pasajes de lorem ipsum.
+              {{ settingKBlog.description }}
             </span>
           </div>
         </div>
@@ -25,7 +41,12 @@
             :key="article.id"
             :class="`swiper-slide wrapper-${index + 1}`"
           >
-            <Kblog v-if="article.estado == 1" :article="article"></Kblog>
+            <Kblog
+              v-if="article.estado == 1"
+              :article="article"
+              :settingKBlog="settingKBlog"
+              :settingGeneral="settingGeneral"
+            ></Kblog>
           </div>
         </div>
       </div>
@@ -41,7 +62,8 @@ export default {
   },
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingKBlog: Object,
+    settingGeneral: Object,
   },
   data() {
     return {
@@ -71,11 +93,6 @@ export default {
             spaceBetween: 10,
           },
         },
-
-        // setWrapperSize: true,
-        // paginationClickable: true,
-        // grabCursor: true,
-        // ...
       },
     }
   },
@@ -114,8 +131,6 @@ export default {
   text-align: center;
   font-size: 18px;
   background: #fff;
-
-  /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -131,6 +146,7 @@ export default {
 }
 .wrapper-content {
   @apply flex flex-col justify-center items-center w-full mb-16;
+  background: var(--background_color_1);
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;
@@ -147,18 +163,17 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .tittle-text {
-  font-family: 'Great Vibes', cursive !important;
-  color: #ed2353;
+  font-family: var(--font-style-2), cursive !important;
+  color: var(--color_pre_title);
 }
 .subtittle-text {
-  font-family: 'Lora', serif !important;
-  color: #2d2a2a;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_title);
 }
 .description-text {
-  font-family: 'Lora', serif !important;
-  color: #777777;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_description);
 }
-
 @screen sm {
   .wrapper-items-content {
     @apply w-9/5;

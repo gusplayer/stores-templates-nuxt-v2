@@ -1,18 +1,38 @@
 <template>
-  <div class="advertising-content">
-    <div class="advertising-background">
+  <div
+    class="advertising-wrapper"
+    :style="[settingKAdvertising, settingGeneral]"
+  >
+    <div
+      class="advertising-background"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="advertising-items">
         <div class="advertising-border">
           <img
             class="max-w-auto"
-            src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609975581/Komercia/PublicShare/flowers-discount-text-element_vaghlr.jpg"
+            :src="settingKAdvertising.ur_img_card"
             alt="icon"
           />
           <div class="advertising-text">
-            <span class="tittle">-15% de descuento</span>
+            <span class="tittle">{{ settingKAdvertising.title }}</span>
             <div class="subtittles-items">
-              <span class="subtittle">En un ramo de la</span>
-              <span class="subtittle">colección de verano</span>
+              <span class="subtittle">{{
+                settingKAdvertising.description
+              }}</span>
             </div>
           </div>
           <button class="content-bttns-shop">
@@ -30,11 +50,17 @@
 <script>
 export default {
   name: 'Ko-advertising',
+  props: {
+    dataStore: Object,
+    settingGeneral: Object,
+    settingKAdvertising: Object,
+  },
 }
 </script>
 <style scoped>
-.advertising-content {
+.advertising-wrapper {
   @apply w-full flex justify-center items-center;
+  background: var(--background_color_1);
   margin-bottom: 70px;
 }
 .advertising-background {
@@ -43,7 +69,8 @@ export default {
   padding-bottom: 66px;
 }
 .advertising-items {
-  @apply flex justify-center items-center bg-white-white shadow-2xl z-auto;
+  @apply flex justify-center items-center shadow-2xl z-auto;
+  background: var(--background_color_1_card);
   width: 596px;
   height: 449px;
   padding-top: 20px;
@@ -53,10 +80,11 @@ export default {
 }
 .advertising-border {
   @apply w-full h-full flex flex-col justify-center items-center border border-opacity-50 z-auto;
-  border-color: #e5e5e5;
+  border-color: var(--color_border);
 }
 .content-bttns-shop {
-  @apply mr-2 rounded-full bg-red-btnbannershop shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply mr-2 rounded-full shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  background: var(--color_background_btn_card);
   padding: 12px 20px;
 }
 .content-bttns-shop:hover {
@@ -64,29 +92,28 @@ export default {
   transition: all 0.2s ease-out;
 }
 .content-textbutton-shop {
-  @apply text-white-white;
+  color: var(--color_text_btn_card);
   font-size: 13px;
   line-height: 18px;
 }
 .content-textbutton-shop {
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
 }
 .advertising-text {
   @apply w-full flex flex-col justify-center items-center;
 }
 .tittle {
   @apply py-4;
-  font-family: 'Great Vibes', cursive !important;
-  color: #ed2353;
+  font-family: var(--font-style-2), cursive !important;
+  color: var(--color_text_card);
 }
 .subtittle {
-  font-family: 'Lora', serif !important;
-  color: #303030;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_subtext_card);
 }
 .subtittles-items {
   @apply flex flex-col justify-center items-center pb-4 w-full;
 }
-
 @screen sm {
   .advertising-background {
     @apply w-9/0 h-full;

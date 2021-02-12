@@ -1,6 +1,22 @@
 <template>
-  <div class="producto">
-    <div class="content-product">
+  <div class="producto" :style="[settingK07Blog, settingGeneral]">
+    <div
+      class="content-product"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'David libre',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="wrapper-card">
         <div class="container">
           <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
@@ -95,7 +111,7 @@ import idCloudinary from '../../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',
-  props: { article: Object },
+  props: { article: Object, settingGeneral: Object, settingK07Blog: Object },
   mounted() {
     if (this.article.created_at) {
       let domain = this.article.created_at
@@ -174,7 +190,7 @@ export default {
   position: relative;
   justify-content: center;
   align-items: center;
-  background: white;
+  background: var(--color_background_card);
   box-sizing: border-box;
   border-radius: 5px;
   -webkit-box-shadow: 0px 10px 19px 7px rgba(107, 107, 107, 0.4);
@@ -187,7 +203,6 @@ export default {
   -webkit-box-shadow: 0px 16px 17px 7px #6b6b6b;
   box-shadow: 0px 16px 26px 7px #6b6b6b;
 }
-
 .images {
   object-fit: cover;
   overflow: hidden;
@@ -209,7 +224,6 @@ export default {
   transform: translate(-50%, -50%);
   text-align: center;
 }
-
 .figure-img figure img {
   -webkit-transform: scale(1);
   transform: scale(1);
@@ -239,18 +253,16 @@ figure {
     rgb(0, 0, 0) 100%
   );
 }
-
 .figure-img figure:hover img {
   opacity: 0.5;
 }
 .content-imge {
   @apply w-full flex justify-center items-center;
 }
-
 .txt-day,
 .txt-month {
-  font-family: 'Lora', serif !important;
-  color: #333333;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_text_date);
 }
 .txt-day {
   font-size: 24px;
@@ -270,13 +282,13 @@ figure {
   cursor: default;
 }
 .txt-tituloart {
-  font-family: 'David libre', serif !important;
-  color: #2d2a2a;
+  font-family: var(--font-style-1), serif !important;
+  color: var(--color_text);
   transition: all 0.25s ease;
   cursor: pointer;
 }
 .txt-tituloart:hover {
-  color: #ed2353;
+  color: var(--hover_text);
   transition: all 0.25s ease;
 }
 .text-autor {
@@ -284,8 +296,8 @@ figure {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: 'Lora', serif !important;
-  color: #a4a4a4;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_autor);
   font-size: 14px;
 }
 .summary-article {
@@ -297,8 +309,8 @@ figure {
   cursor: default;
 }
 .subtext {
-  font-family: 'Lora', serif !important;
-  color: #777777;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_description);
   font-size: 14px;
   cursor: text;
 }
@@ -313,8 +325,8 @@ figure {
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
-  color: #ed2353;
-  font-family: 'Lora', serif !important;
+  color: var(--color_text_btn);
+  font-family: var(--font-style-3), serif !important;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -327,13 +339,13 @@ figure {
   @apply transition-all ease-in duration-200;
   position: relative;
   color: #ed2353;
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
   margin-left: 10px;
   margin-bottom: -5px;
   display: none;
 }
 .svg-points {
-  fill: #ed2353;
+  fill: var(--color_text_btn);
   animation: bounce 1s infinite;
 }
 @keyframes bounce {
@@ -350,7 +362,6 @@ figure {
 .txt-read-more:hover .points-text-read {
   @apply flex transition-all ease-in duration-200;
 }
-
 .content-bottom-titulo {
   @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
@@ -366,14 +377,20 @@ figure {
   @apply w-full;
 }
 .txt-tituloart-bottom {
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
   font-size: 16px;
   text-transform: uppercase;
-  color: white;
+  color: var(--color_bg_text);
+}
+.overlay-top {
+  background: var(--color_bg_date);
+}
+.overlay-bottom {
+  background: var(--color_bg_card);
 }
 @screen sm {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 5%;
     left: 5%;
     right: 0;
@@ -381,7 +398,7 @@ figure {
     height: 26%;
   }
   .overlay-bottom {
-    @apply absolute overflow-hidden bg-red-btnbannershop transition-all ease-in duration-300;
+    @apply absolute overflow-hidden transition-all ease-in duration-300;
     width: 80%;
     height: 25px;
     left: 10%;
@@ -401,7 +418,7 @@ figure {
 }
 @media (min-width: 425px) {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 5%;
     left: 5%;
     right: 0;
@@ -411,7 +428,7 @@ figure {
 }
 @media (min-width: 500px) {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 5%;
     left: 5%;
     right: 0;
@@ -419,7 +436,7 @@ figure {
     height: 18%;
   }
   .overlay-bottom {
-    @apply absolute overflow-hidden bg-red-btnbannershop transition-all ease-in duration-300;
+    @apply absolute overflow-hidden transition-all ease-in duration-300;
     width: 80%;
     height: 25px;
     left: 10%;
@@ -429,7 +446,7 @@ figure {
 }
 @media (min-width: 576px) {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 5%;
     left: 5%;
     right: 0;
@@ -437,7 +454,7 @@ figure {
     height: 30%;
   }
   .overlay-bottom {
-    @apply absolute overflow-hidden bg-red-btnbannershop transition-all ease-in duration-300;
+    @apply absolute overflow-hidden transition-all ease-in duration-300;
     width: 80%;
     height: 25px;
     left: 10%;
@@ -447,7 +464,7 @@ figure {
 }
 @screen md {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 5%;
     left: 5%;
     right: 0;
@@ -457,7 +474,7 @@ figure {
 }
 @screen lg {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 5%;
     left: 5%;
     right: 0;
@@ -465,7 +482,7 @@ figure {
     height: 25%;
   }
   .overlay-bottom {
-    @apply absolute right-0 bottom-0 overflow-hidden bg-red-btnbannershop transition-all ease-in duration-300;
+    @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
     width: 80%;
     height: 25px;
     left: 10%;
@@ -474,7 +491,7 @@ figure {
 }
 @screen mlg {
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-2xl rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 5%;
     left: 5%;
     right: 0;
@@ -482,7 +499,7 @@ figure {
     height: 22%;
   }
   .overlay-bottom {
-    @apply absolute right-0 bottom-0 overflow-hidden bg-red-btnbannershop transition-all ease-in duration-300;
+    @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
     width: 80%;
     height: 25px;
     left: 10%;

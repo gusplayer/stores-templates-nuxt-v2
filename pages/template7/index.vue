@@ -1,17 +1,14 @@
 <template lang="html">
   <div>
-    <KCarousel></KCarousel>
-    <KPromo></KPromo>
-    <KProductList
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
-    ></KProductList>
-    <KAdvertising></KAdvertising>
-    <KGify :dataStore="dataStore" :fullProducts="fullProducts"></KGify>
-    <KHowwork></KHowwork>
-    <KBlog :dataStore="dataStore" v-show="listArticulos.length > 0"></KBlog>
-    <KNews></KNews>
-    <KWrapper :dataStore="dataStore"></KWrapper>
+    <KCarousel v-bind="componentsProps" />
+    <KPromo v-bind="componentsProps" />
+    <KProductList v-bind="componentsProps" />
+    <KAdvertising v-bind="componentsProps" />
+    <KGify v-bind="componentsProps" />
+    <KHowwork v-bind="componentsProps" />
+    <KBlog v-bind="componentsProps" v-show="listArticulos.length > 0" />
+    <KNews v-bind="componentsProps" />
+    <KWrapper v-bind="componentsProps" />
   </div>
 </template>
 
@@ -77,6 +74,59 @@ export default {
         })
       } else {
         return this.listArticulos
+      }
+    },
+    settingByTemplate7() {
+      return this.$store.state.settingByTemplate7
+    },
+    componentsProps() {
+      return {
+        dataStore: this.dataStore,
+        fullProducts: this.fullProducts,
+        settingGeneral:
+          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
+            ? this.settingByTemplate7.settingGeneral
+            : null,
+        settingKCarousel:
+          this.settingByTemplate7 && this.settingByTemplate7.banner
+            ? this.settingByTemplate7.banner
+            : null,
+        settingKPromo:
+          this.settingByTemplate7 && this.settingByTemplate7.content
+            ? this.settingByTemplate7.content
+            : null,
+        settingKProductList:
+          this.settingByTemplate7 && this.settingByTemplate7.productList
+            ? this.settingByTemplate7.productList
+            : null,
+        settingKProdutCard:
+          this.settingByTemplate7 && this.settingByTemplate7.card
+            ? this.settingByTemplate7.card
+            : null,
+        settingKGify:
+          this.settingByTemplate7 && this.settingByTemplate7.ProductFavorite
+            ? this.settingByTemplate7.ProductFavorite
+            : null,
+        settingKHowwork:
+          this.settingByTemplate7 && this.settingByTemplate7.howWork
+            ? this.settingByTemplate7.howWork
+            : null,
+        settingKNews:
+          this.settingByTemplate7 && this.settingByTemplate7.newsletter
+            ? this.settingByTemplate7.newsletter
+            : null,
+        settingKWrapper:
+          this.settingByTemplate7 && this.settingByTemplate7.contentImg
+            ? this.settingByTemplate7.contentImg
+            : null,
+        settingKAdvertising:
+          this.settingByTemplate7 && this.settingByTemplate7.advertising
+            ? this.settingByTemplate7.advertising
+            : null,
+        settingKBlog:
+          this.settingByTemplate7 && this.settingByTemplate7.blog
+            ? this.settingByTemplate7.blog
+            : null,
       }
     },
   },

@@ -9,8 +9,7 @@
           ? this.settingByTemplate.settings
           : this.settingBase
       "
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
+      v-bind="componentsProps"
     />
   </div>
 </template>
@@ -62,6 +61,23 @@ export default {
           break
       }
       return productListComponent
+    },
+    settingByTemplate7() {
+      return this.$store.state.settingByTemplate7
+    },
+    componentsProps() {
+      return {
+        dataStore: this.dataStore,
+        fullProducts: this.fullProducts,
+        settingGeneral:
+          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
+            ? this.settingByTemplate7.settingGeneral
+            : null,
+        settingK07ProductList:
+          this.settingByTemplate7 && this.settingByTemplate7.productListFilter
+            ? this.settingByTemplate7.productListFilter
+            : null,
+      }
     },
   },
 }

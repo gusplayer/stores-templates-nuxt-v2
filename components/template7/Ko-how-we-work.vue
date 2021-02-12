@@ -1,76 +1,98 @@
 <template>
-  <div class="hwwork-content">
-    <div class="hwwork-content-items">
+  <div class="hwwork-content" :style="[settingKHowwork, settingGeneral]">
+    <div
+      class="hwwork-content-items"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'David Libre',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="hwwork-items">
         <div class="tittle">
-          <span class="tittle-text">Massa et semper litara.</span>
+          <span class="tittle-text">{{ settingKHowwork.pre_title }}</span>
         </div>
         <div class="subtittle">
-          <span class="subtittle-text">Cómo trabajamos</span>
+          <span class="subtittle-text">{{ settingKHowwork.title }}</span>
         </div>
         <div class="description">
           <span class="description-text">
-            Las autoridades de nuestro negocio lo dirán en términos inequívocos.
+            {{ settingKHowwork.description }}
           </span>
         </div>
       </div>
-
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="hwork-dates">
         <div id="hwork-imgaes" class="swiper-wrapper">
-          <div id="hwork-text-1" class="swiper-slide">
-            <img
-              src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610008702/Komercia/Work/flowers-infobox-1-img-opt-196x177_c4koro.png"
-              alt="imageshwork-1"
-            />
+          <div
+            id="hwork-text-1"
+            class="swiper-slide"
+            :style="settingKHowwork.values[0]"
+          >
+            <img :src="settingKHowwork.values[0].url_img" alt="imageshwork-1" />
             <div class="hwork-tittle">
-              <span class="tittle-h">Elige las mejores flores</span>
+              <span class="tittle-h">{{
+                settingKHowwork.values[0].title_product
+              }}</span>
             </div>
             <div class="hwork-description">
               <span class="description-h"
-                >Comienzas con un texto, esculpes información, eliminas lo que
-                no se necesita, vas al grano, aclaras las cosas, eres una
-                persona contenta.</span
+                >{{ settingKHowwork.values[0].description_product }}.</span
               >
             </div>
             <div class="hwork-seemore">
               <span class="seemore-h">{{ $t('home_cardvermas') }}</span>
             </div>
           </div>
-          <div id="hwork-text-2" class="swiper-slide">
-            <img
-              src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610008704/Komercia/Work/flowers-infobox-2-img-opt-196x177_ekaxlf.png"
-              alt="imageshwork-2"
-            />
+          <div
+            id="hwork-text-2"
+            class="swiper-slide"
+            :style="settingKHowwork.values[1]"
+          >
+            <img :src="settingKHowwork.values[1].url_img" alt="imageshwork-2" />
             <div class="hwork-tittle">
-              <span class="tittle-h">Hacemos una composición</span>
+              <span class="tittle-h">{{
+                settingKHowwork.values[1].title_product
+              }}</span>
             </div>
             <div class="hwork-description">
-              <span class="description-h"
-                >Los defensores rígidos de la estrategia de contenido pueden
-                evitar el uso de copias falsas, pero luego los diseñadores
-                pueden querer pedirles que proporcionen hojas de estilo con la
-                copia.</span
-              >
+              <span class="description-h">{{
+                settingKHowwork.values[1].description_product
+              }}</span>
             </div>
             <div class="hwork-seemore">
               <span class="seemore-h">{{ $t('home_cardvermas') }}</span>
             </div>
           </div>
-          <div id="hwork-text-3" class="swiper-slide">
-            <img
-              src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610008707/Komercia/Work/flowers-infobox-3-img-opt-196x177_qqq1bx.png"
-              alt="imageshwork-3"
-            />
+          <div
+            id="hwork-text-3"
+            class="swiper-slide"
+            :style="settingKHowwork.values[2]"
+          >
+            <img :src="settingKHowwork.values[2].url_img" alt="imageshwork-3" />
             <div class="hwork-tittle">
-              <span class="tittle-h">El ramo está listo</span>
+              <span class="tittle-h">{{
+                settingKHowwork.values[2].title_product
+              }}</span>
             </div>
             <div class="hwork-description">
-              <span class="description-h"
-                >De todos modos, todavía usa Lorem Ipsum y con razón, ya que
-                siempre tendrá un lugar en la caja de herramientas de los
-                trabajadores web, ordenar que las cosas sucedan, no siempre de
-                la manera.</span
-              >
+              <span class="description-h">{{
+                settingKHowwork.values[2].description_product
+              }}</span>
             </div>
             <div class="hwork-seemore">
               <span class="seemore-h">{{ $t('home_cardvermas') }}</span>
@@ -84,6 +106,10 @@
 <script>
 export default {
   name: 'Ko-how-we-work',
+  props: {
+    settingKHowwork: Object,
+    settingGeneral: Object,
+  },
   data() {
     return {
       swiperOption: {
@@ -140,25 +166,24 @@ export default {
 }
 .tittle-h {
   @apply font-semibold;
-  font-family: 'David Libre', serif !important;
+  font-family: var(--font-style-1), serif !important;
   line-height: 34px;
   font-size: 24px;
   color: #2d2a2a;
 }
 .description-h {
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
   font: inherit;
   font-size: 14px;
   color: #777;
 }
 .seemore-h {
   @apply uppercase font-semibold border-b-2 border-red-btnbannershop;
-  font-family: 'Lora', serif !important;
+  font-family: var(--font-style-3), serif !important;
   font-size: 13px;
   line-height: 18px;
   color: #333;
 }
-
 #hwork-text-1 {
   @apply flex flex-col justify-center items-center text-center mt-4;
 }
@@ -171,13 +196,12 @@ export default {
 .hwork-description {
   @apply w-9/0;
 }
-
 .hwork-dates {
   @apply bg-hworkbg bg-no-repeat bg-auto w-full mt-16;
 }
-
 .hwwork-content {
   @apply w-full flex flex-col justify-center items-center my-16;
+  background: var(--background_color_1);
 }
 .hwwork-content-items {
   @apply flex flex-col justify-center items-center text-center;
@@ -191,21 +215,20 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .tittle-text {
-  font-family: 'Great Vibes', cursive !important;
-  color: #ed2353;
+  font-family: var(--font-style-2), cursive !important;
+  color: var(--color_pre_title);
 }
 .subtittle-text {
-  font-family: 'David Libre', serif !important;
-  color: #2d2a2a;
+  font-family: var(--font-style-1), serif !important;
+  color: var(--color_title);
 }
 .description-text {
-  font-family: 'Lora', serif !important;
-  color: #777777;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_description);
 }
 .gify-slider-content {
   @apply flex overflow-hidden;
 }
-
 @screen sm {
   .hwwork-content-items {
     @apply w-9/5;
@@ -232,7 +255,6 @@ export default {
     font-size: 36px;
   }
 }
-
 @screen mlg {
   .hwwork-content-items {
     @apply w-9/3;
@@ -255,7 +277,6 @@ export default {
     width: 1192px;
   }
 }
-
 @screen xml {
   .tittle {
     line-height: 34px;

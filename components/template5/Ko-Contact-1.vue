@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-contact" :style="settingByTemplate">
+  <div class="wrapper-contact" :style="settingK05Contact">
     <div class="contact">
       <div class="contact-content">
         <div>
@@ -156,7 +156,7 @@ export default {
   name: 'Ko-Contact-1',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingK05Contact: Object,
   },
   components: {
     ValidationObserver,

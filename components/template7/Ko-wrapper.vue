@@ -1,24 +1,55 @@
 <template>
-  <div class="wrapper-content">
-    <div class="wrapper-items-content">
+  <div class="wrapper-content" :style="[settingKWrapper, settingGeneral]">
+    <div
+      class="wrapper-items-content"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="wrapper-content-items">
         <div class="wrapper-items-text">
           <div class="tittle">
-            <span class="tittle-text">Vea nuestra colección.</span>
+            <span class="tittle-text">{{ settingKWrapper.pre_title }}</span>
           </div>
           <div class="subtittle">
-            <span class="subtittle-text">Nuestro Instagram</span>
+            <span class="subtittle-text">{{ settingKWrapper.title }}</span>
           </div>
           <div class="description">
             <span class="description-text">
-              En un contexto profesional, a menudo sucede que empresas privadas
-              o
+              {{ settingKWrapper.description }}
             </span>
           </div>
         </div>
       </div>
     </div>
-    <div class="wrapper-items">
+    <div
+      class="wrapper-items"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Great Vibes',
+        },
+        {
+          '--font-style-3':
+            this.settingGeneral && this.settingGeneral.fount_3
+              ? this.settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
           <div
@@ -44,7 +75,8 @@ export default {
   name: 'Ko-wrapper',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingGeneral: Object,
+    settingKWrapper: Object,
   },
   data() {
     return {
@@ -156,6 +188,7 @@ export default {
 }
 .wrapper-content {
   @apply flex flex-col justify-center items-center w-full;
+  background: var(--background_color_1);
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;
@@ -172,16 +205,16 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .tittle-text {
-  font-family: 'Great Vibes', cursive !important;
-  color: #ed2353;
+  font-family: var(--font-style-2), cursive !important;
+  color: var(--color_pre_title);
 }
 .subtittle-text {
-  font-family: 'Lora', serif !important;
-  color: #2d2a2a;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_title);
 }
 .description-text {
-  font-family: 'Lora', serif !important;
-  color: #777777;
+  font-family: var(--font-style-3), serif !important;
+  color: var(--color_description);
 }
 .wrapper-items {
   @apply w-full;
