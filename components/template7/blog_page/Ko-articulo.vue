@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper-blog">
-    <div class="banner-blog">
+  <div class="wrapper-blog" :style="[settingK07Blog, settingGeneral]">
+    <div class="banner-blog" id="BgBannerBlogAr">
       <div class="tittle-banner-blog">
         <p class="txt-banner">{{ dataStore.tienda.nombre }}</p>
         <p class="txt-banner" id="separator">{{ $t('header_blog') }}</p>
@@ -120,6 +120,8 @@ export default {
   components: { EditorContent },
   props: {
     dataStore: Object,
+    settingGeneral: Object,
+    settingK07Blog: Object,
   },
   mounted() {
     if (this.listArticulos.length) {
@@ -132,6 +134,9 @@ export default {
       let dateUpdate = this.dataArticle.updated_at
       let resultUpdate = dateUpdate.split(' ')
       this.shippingUpdated = resultUpdate[0]
+    }
+    if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
+      this.setBg()
     }
   },
   beforeDestroy() {
@@ -202,10 +207,21 @@ export default {
         }
       }
     },
+    setBg() {
+      if (this.settingK07Blog.url_img) {
+        var imagen = document.getElementById('BgBannerBlogAr')
+        imagen.style.backgroundImage = `url(${this.settingK07Blog.url_img})`
+      }
+    },
   },
   watch: {
     listArticulos() {
       this.searchIdForSlug()
+    },
+    settingK07Blog() {
+      if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
+        this.setBg()
+      }
     },
   },
 }
@@ -408,7 +424,7 @@ export default {
   pointer-events: none;
 }
 .txt-banner {
-  color: #fff;
+  color: var(--color_title);
   font-family: 'David libre', serif !important ;
   font-weight: 400;
 }
@@ -416,7 +432,7 @@ export default {
   @apply w-full flex flex-row justify-center items-center my-12;
 }
 .banner-blog {
-  @apply w-full flex flex-col justify-center items-center bg-shopbg bg-cover bg-no-repeat;
+  @apply w-full flex flex-col justify-center items-center bg-cover bg-no-repeat;
   margin-bottom: 40px;
 }
 #separator {

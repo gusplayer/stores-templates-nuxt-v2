@@ -1,9 +1,10 @@
 <template>
-  <div class="carousel-content">
+  <div class="carousel-content" :style="settingKCarousel">
     <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
       <div class="swiper-wrapper z-auto">
+        <!-- :class="`swiper-slide slide${index + 1}`" -->
         <div
-          :class="`swiper-slide slide${index + 1}`"
+          class="swiper-slide"
           v-for="(banner, index) in this.settingKCarousel.values"
           :key="index"
         >
@@ -59,7 +60,6 @@ export default {
 .swiper-slide {
   @apply w-full flex justify-center items-center z-auto;
 }
-
 .slide1 {
   @apply bg-bannerbg1 bg-no-repeat bg-center bg-cover;
 }
@@ -91,5 +91,11 @@ export default {
 .swiper-button-next {
   @apply transition-all ease-in duration-200 transform translate-x-16;
   right: 2%;
+}
+.swiper-pagination >>> .swiper-pagination-bullet {
+  background-color: grey;
+}
+.swiper-pagination >>> .swiper-pagination-bullet-active {
+  background-color: var(--pagination_color);
 }
 </style>

@@ -5,6 +5,7 @@
   >
     <div
       class="advertising-background"
+      id="BgAdvertising"
       :style="[
         {
           '--font-style-2':
@@ -55,6 +56,32 @@ export default {
     settingGeneral: Object,
     settingKAdvertising: Object,
   },
+  mounted() {
+    if (
+      this.settingKAdvertising &&
+      this.settingKAdvertising['--url_img_background']
+    ) {
+      this.setBg()
+    }
+  },
+  methods: {
+    setBg() {
+      if (this.settingKAdvertising['--url_img_background']) {
+        var imagen = document.getElementById('BgAdvertising')
+        imagen.style.backgroundImage = `url(${this.settingKAdvertising['--url_img_background']})`
+      }
+    },
+  },
+  watch: {
+    settingKAdvertising() {
+      if (
+        this.settingKAdvertising &&
+        this.settingKAdvertising['--url_img_background']
+      ) {
+        this.setBg()
+      }
+    },
+  },
 }
 </script>
 <style scoped>
@@ -64,7 +91,7 @@ export default {
   margin-bottom: 70px;
 }
 .advertising-background {
-  @apply flex justify-center items-center bg-advertisingbg bg-cover z-auto;
+  @apply flex justify-center items-center bg-cover z-auto;
   padding-top: 66px;
   padding-bottom: 66px;
 }
@@ -83,8 +110,9 @@ export default {
   border-color: var(--color_border);
 }
 .content-bttns-shop {
-  @apply mr-2 rounded-full shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  /* @apply mr-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider; */
   background: var(--color_background_btn_card);
+  border-radius: var(--radius_btn);
   padding: 12px 20px;
 }
 .content-bttns-shop:hover {

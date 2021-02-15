@@ -2,6 +2,7 @@
   <div class="product-content" :style="[settingK07ProductList, settingGeneral]">
     <div
       class="content-banner-shop"
+      id="BgProductlistF"
       :style="[
         {
           '--font-style-1':
@@ -316,6 +317,12 @@ export default {
   },
   name: 'Ko-ProductList-Filter',
   mounted() {
+    if (
+      this.settingK07ProductList &&
+      this.settingK07ProductList.img_background == true
+    ) {
+      this.setBg()
+    }
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
@@ -329,7 +336,6 @@ export default {
         }
       })
     }
-
     let domain = this.$route.fullPath
     let searchCategory = domain.slice(0, [11])
     let searchSubCategory = domain.slice(0, [14])
@@ -713,8 +719,22 @@ export default {
         })
       }
     },
+    setBg() {
+      if (this.settingK07ProductList.url_img) {
+        var imagen = document.getElementById('BgProductlistF')
+        imagen.style.backgroundImage = `url(${this.settingK07ProductList.url_img})`
+      }
+    },
   },
   watch: {
+    banner() {
+      if (
+        this.settingK07ProductList &&
+        this.settingK07ProductList.img_background == true
+      ) {
+        this.setBg()
+      }
+    },
     fullProducts(value) {
       this.products = value
       let maxTMP = 0
@@ -775,7 +795,7 @@ export default {
   background: var(--background_color_2);
 }
 .content-banner-shop {
-  @apply w-full flex justify-center items-center bg-shopbg bg-cover bg-no-repeat;
+  @apply w-full flex justify-center items-center bg-cover bg-no-repeat;
   /* background-image: var(--url_img); */
 }
 .itemLeft-range-slide {

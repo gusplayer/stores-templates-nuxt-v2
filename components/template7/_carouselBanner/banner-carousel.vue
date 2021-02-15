@@ -1,5 +1,9 @@
 <template>
-  <div class="banner" :style="[settingKCarousel, banner, settingGeneral]">
+  <div
+    class="banner bgCarousel"
+    id="BgCarousel"
+    :style="[settingKCarousel, banner, settingGeneral]"
+  >
     <div
       class="banner-content-items"
       :style="[
@@ -38,7 +42,7 @@
             </span>
           </nuxt-link>
         </button>
-        <button :class="`content-bttns-view content-bttns-view`">
+        <button class="content-bttns-view content-bttns-view">
           <span class="content-textbutton-viewmore">
             {{ $t('home_cardvermas') }}
           </span>
@@ -57,10 +61,33 @@ export default {
     settingKCarousel: Object,
     settingGeneral: Object,
   },
+  mounted() {
+    if (this.banner && this.banner.url_img_background) {
+      this.setBg()
+    }
+  },
+  methods: {
+    setBg() {
+      if (this.banner.url_img_background) {
+        var imagen = document.getElementById('BgCarousel')
+        imagen.style.backgroundImage = `url(${this.banner.url_img_background})`
+      }
+    },
+  },
+  watch: {
+    banner() {
+      if (this.banner && this.banner.url_img_background) {
+        this.setBg()
+      }
+    },
+  },
 }
 </script>
 
 <style scoped>
+.bgCarousel {
+  @apply bg-no-repeat bg-center bg-cover;
+}
 .banner {
   @apply flex flex-col justify-center items-center pt-20;
 }

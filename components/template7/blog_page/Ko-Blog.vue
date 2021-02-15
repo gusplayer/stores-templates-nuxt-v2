@@ -2,6 +2,7 @@
   <div class="wrapper_error" :style="[settingK07Blog, settingGeneral]">
     <div
       class="banner-blog"
+      id="BgBannerBlog"
       :style="[
         {
           '--font-style-1':
@@ -194,6 +195,11 @@ export default {
     settingGeneral: Object,
     settingK07Blog: Object,
   },
+  mounted() {
+    if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
+      this.setBg()
+    }
+  },
   data() {
     return {
       currentPage: 1,
@@ -218,6 +224,21 @@ export default {
         })
       } else {
         return this.listArticulos
+      }
+    },
+  },
+  methods: {
+    setBg() {
+      if (this.settingK07Blog.url_img) {
+        var imagen = document.getElementById('BgBannerBlog')
+        imagen.style.backgroundImage = `url(${this.settingK07Blog.url_img})`
+      }
+    },
+  },
+  watch: {
+    settingK07Blog() {
+      if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
+        this.setBg()
       }
     },
   },
@@ -316,7 +337,7 @@ export default {
   @apply w-full flex flex-row justify-center items-center my-12;
 }
 .banner-blog {
-  @apply w-full flex flex-col justify-center items-center bg-shopbg bg-cover bg-no-repeat;
+  @apply w-full flex flex-col justify-center items-center bg-cover bg-no-repeat;
   margin-bottom: 40px;
 }
 #separator {

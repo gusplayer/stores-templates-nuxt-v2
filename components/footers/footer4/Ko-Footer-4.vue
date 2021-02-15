@@ -2,6 +2,7 @@
   <div
     class="footer-container"
     ref="background"
+    id="BgFooter"
     :style="[settingByTemplate7f, settingByTemplate7General]"
   >
     <div
@@ -80,6 +81,7 @@ export default {
     ) {
       this.setLogo()
     } else {
+      this.setBg()
       this.logo = true
     }
   },
@@ -117,7 +119,10 @@ export default {
   },
   methods: {
     setBg() {
-      var bghead = document.getElementById('headbg')
+      if (this.settingByTemplate7f['--url_img']) {
+        var imagen = document.getElementById('BgFooter')
+        imagen.style.backgroundImage = `url(${this.settingByTemplate7f['--url_img']})`
+      }
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
@@ -133,13 +138,24 @@ export default {
     },
   },
   watch: {
-    settingByTemplate(value) {
-      let colorArray = value.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
+    settingByTemplate7f(value) {
+      if (
+        this.settingByTemplate7f &&
+        this.settingByTemplate7f.img_background == true
+      ) {
+        this.setBg()
+      }
+      if (
+        this.settingByTemplate7f &&
+        this.settingByTemplate7f.img_background == false
+      ) {
+        let colorArray = value.split(',')
+        let colorInt = parseInt(colorArray[2])
+        if (colorInt > 50) {
+          this.logo = true
+        } else {
+          this.logo = false
+        }
       }
     },
   },
@@ -148,8 +164,8 @@ export default {
 
 <style scoped>
 .footer-container {
-  /* background: var(--background_color_1); */
-  @apply flex flex-col justify-center items-center bg-footerbg bg-auto bg-center bg-no-repeat;
+  background: var(--background_color_1);
+  @apply flex flex-col justify-center items-center bg-auto bg-center bg-no-repeat;
   height: 322px;
 }
 .footer-content {

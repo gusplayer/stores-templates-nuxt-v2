@@ -215,7 +215,7 @@ export default {
   transition: all 0.2s ease-out;
 }
 .content-textbutton-shop {
-  color: var(-color_text_btn);
+  color: var(--color_text_btn);
   font-size: 13px;
   line-height: 18px;
 }
