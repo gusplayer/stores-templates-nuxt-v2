@@ -69,6 +69,10 @@ export default {
     return {
       title: tienda.nombre ? tienda.nombre : 'Tienda',
       meta: [
+        {
+          name: ' google',
+          content: ' notranslate',
+        },
         { hid: 'utf-8', charset: 'utf-8' },
         {
           hid: 'x-ua-compatible',
