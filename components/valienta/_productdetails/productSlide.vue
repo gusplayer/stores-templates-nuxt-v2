@@ -7,6 +7,9 @@
           class="photo"
           alt="Product img"
         />
+        <button class="btn-download" @click="downloadImg(photo)">
+          <cloud-download-icon />
+        </button>
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
         <img
@@ -14,6 +17,12 @@
           class="photo"
           alt="Product img"
         />
+        <button
+          class="btn-download"
+          @click="downloadImg(photo.foto_cloudinary)"
+        >
+          <cloud-download-icon />
+        </button>
       </div>
       <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">
         <div class="youtube">
@@ -36,6 +45,7 @@
 </template>
 
 <script>
+import saveAs from 'file-saver'
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
@@ -68,6 +78,10 @@ export default {
     setPhoto(value) {
       return value
     },
+    async downloadImg(value) {
+      saveAs(value, 'image.jpg')
+    },
+
     changeSlide() {
       this.swiper.slidePrev(500, false)
     },
