@@ -347,7 +347,9 @@ export default {
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
       this.$router.push({
         path: '/',
-        query: { subcategory: this.nameSubCategory },
+        query: {
+          subcategory: `${this.nameSubCategory}^${filtradoCategorias.id}`,
+        },
       })
       this.$store.commit('products/FILTER_BY', {
         type: 'subcategory',

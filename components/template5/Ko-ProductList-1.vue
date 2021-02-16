@@ -310,18 +310,25 @@ export default {
     },
     SendsubcategoryUrl(value) {
       let subcategory = value.replace('/?subcategory=', '')
-      let urlFiltrada = decodeURIComponent(subcategory)
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.nombre_subcategoria == urlFiltrada
-      )
+      let resTemp = subcategory.split('%5E')
+      let urlFiltrada = decodeURIComponent(resTemp[0])
+      let filtradoSubCategoria = this.subcategories.find((element) => {
+        if (
+          element.categoria == parseInt(resTemp[1]) &&
+          element.nombre_subcategoria == urlFiltrada
+        ) {
+          return element
+        }
+      })
       if (filtradoSubCategoria) {
         let filtradoCategorias = this.categorias.find(
-          (element) => element.id == filtradoSubCategoria.categoria
+          (element) => element.id == parseInt(resTemp[1])
         )
         this.$store.commit('products/FILTER_BY', {
           type: 'subcategory',
           data: filtradoSubCategoria.id,
         })
+
         if (this.$store.getters['products/filterProducts'].length) {
           this.$store.commit(
             'SET_CATEGORY_PRODCUTRO',
