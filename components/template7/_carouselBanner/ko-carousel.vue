@@ -9,7 +9,13 @@
           v-for="(banner, index) in this.settingKCarousel.values"
           :key="index"
         >
+          <img
+            class="img-bg"
+            :src="settingKCarousel.values[index].url_img_background"
+            alt="bg"
+          />
           <KObanner
+            class="absolute"
             :banner="banner"
             :settingKCarousel="settingKCarousel"
             :settingGeneral="settingGeneral"
@@ -36,6 +42,10 @@ export default {
   },
   data() {
     return {
+      bg1: '',
+      bg2: '',
+      bg3: '',
+
       swiperOption: {
         slidesPerView: 'auto',
         loop: true,
@@ -47,32 +57,36 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-        autoplay: {
-          delay: 6000,
-          disableOnInteraction: false,
-        },
+        // autoplay: {
+        //   delay: 6000,
+        //   disableOnInteraction: false,
+        // },
       },
     }
   },
   mounted() {
+    this.bg1 = this.settingKCarousel.values[0].url_img_background
+    this.bg2 = this.settingKCarousel.values[1].url_img_background
+    this.bg3 = this.settingKCarousel.values[2].url_img_background
+
     var bgImage1 = document.getElementById('slide2')
     if (bgImage1) {
       bgImage1.style.backgroundColor = '#000'
     }
-    if (this.settingKCarousel) {
-      this.setBg()
-    } else {
-      console.log('No entro')
-    }
+    // if (this.settingKCarousel) {
+    //   this.setBg()
+    // } else {
+    //   console.log('No entro')
+    // }
   },
   methods: {
-    setBg() {
-      console.log('Entro en metodo')
-      var bgImage = document.getElementById('slide1')
-      if (bgImage) {
-        bgImage.style.backgroundImage = `url(${this.settingKCarousel.values[1].url_img_background})`
-      }
-    },
+    // setBg() {
+    //   console.log('Entro en metodo')
+    //   var bgImage = document.getElementById('slide1')
+    //   if (bgImage) {
+    //     bgImage.style.backgroundImage = `url(${this.settingKCarousel.values[1].url_img_background})`
+    //   }
+    // },
   },
   watch: {
     // banner() {
@@ -92,7 +106,7 @@ export default {
   @apply w-full flex justify-center items-center z-auto;
 }
 #slide1 {
-  @apply border bg-no-repeat bg-center bg-cover;
+  @apply bg-no-repeat bg-center bg-cover;
   /* background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612320607/Template9/Carousel/slide-headphones-bg_atwvao.jpg'); */
 }
 #slide2 {
@@ -129,5 +143,57 @@ export default {
 }
 .swiper-pagination >>> .swiper-pagination-bullet-active {
   background-color: var(--pagination_color);
+}
+@screen sm {
+  .img-bg {
+    width: 100%;
+    height: 810px;
+    object-fit: cover;
+  }
+}
+@media (min-width: 375px) {
+  .img-bg {
+    height: 870px;
+  }
+}
+@media (min-width: 425px) {
+  .img-bg {
+    height: 920px;
+  }
+}
+@media (min-width: 480px) {
+  .img-bg {
+    height: 940px;
+  }
+}
+@media (min-width: 520px) {
+  .img-bg {
+    height: 980px;
+  }
+}
+@media (min-width: 620px) {
+  .img-bg {
+    height: 1050px;
+  }
+}
+@screen md {
+  .img-bg {
+    height: 1120px;
+  }
+}
+@media (min-width: 900px) {
+  .img-bg {
+    height: 1180px;
+  }
+}
+@screen lg {
+  .img-bg {
+    height: 620px;
+  }
+}
+@media (min-width: 1192px) {
+  .img-bg {
+    height: 750px;
+  }
 }
 </style>

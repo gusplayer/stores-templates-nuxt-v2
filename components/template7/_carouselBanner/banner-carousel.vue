@@ -164,7 +164,7 @@ export default {
     @apply w-full text-lg;
   }
   .text-tittle {
-    @apply w-9/0 leading-tight;
+    @apply w-9/5 leading-tight;
   }
   .text-subtittle {
     @apply w-9/0 mt-4;
@@ -228,16 +228,8 @@ export default {
   .banner {
     width: 1192px;
   }
-}
-@screen xl {
   .banner-text-tittle {
     @apply text-6xl;
-  }
-  .banner-text-subtittle {
-    @apply w-8/0 text-base;
-  }
-  .text-tittle {
-    @apply w-8/3;
   }
   .text-subtittle {
     @apply w-8/3 mt-4;
@@ -247,11 +239,6 @@ export default {
   }
   .banner-img {
     @apply w-full;
-  }
-}
-@screen xml {
-  .banner-text-tittle {
-    @apply text-6xl;
   }
 }
 </style>
