@@ -288,5 +288,8 @@ export default {
   .wrapper-items-content {
     width: 1192px;
   }
+  .img-wrapp {
+    width: 100vw;
+  }
 }
 </style>
