@@ -62,32 +62,32 @@ export default {
     settingGeneral: Object,
   },
   mounted() {
-    if (this.banner && this.banner.url_img_background) {
-      this.setBg()
-    }
+    // if (this.banner && this.banner.url_img_background) {
+    //   this.setBg()
+    // }
   },
   methods: {
-    setBg() {
-      if (this.banner.url_img_background) {
-        var imagen = document.getElementById('BgCarousel')
-        imagen.style.backgroundImage = `url(${this.banner.url_img_background})`
-      }
-    },
+    //   setBg() {
+    //     if (this.banner.url_img_background) {
+    //       var imagen = document.getElementById('BgCarousel')
+    //       imagen.style.backgroundImage = `url(${this.banner.url_img_background})`
+    //     }
+    //   },
   },
   watch: {
-    banner() {
-      if (this.banner && this.banner.url_img_background) {
-        this.setBg()
-      }
-    },
+    // banner() {
+    //   if (this.banner && this.banner.url_img_background) {
+    //     this.setBg()
+    //   }
+    // },
   },
 }
 </script>
 
 <style scoped>
-.bgCarousel {
+/* .bgCarousel {
   @apply bg-no-repeat bg-center bg-cover;
-}
+} */
 .banner {
   @apply flex flex-col justify-center items-center pt-20;
 }
