@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="banner bgCarousel"
-    id="BgCarousel"
-    :style="[settingKCarousel, banner, settingGeneral]"
-  >
+  <div class="banner" :style="[settingKCarousel, banner, settingGeneral]">
     <div
       class="banner-content-items"
       :style="[
@@ -61,33 +57,10 @@ export default {
     settingKCarousel: Object,
     settingGeneral: Object,
   },
-  mounted() {
-    if (this.banner && this.banner.url_img_background) {
-      this.setBg()
-    }
-  },
-  methods: {
-    setBg() {
-      if (this.banner.url_img_background) {
-        var imagen = document.getElementById('BgCarousel')
-        imagen.style.backgroundImage = `url(${this.banner.url_img_background})`
-      }
-    },
-  },
-  watch: {
-    banner() {
-      if (this.banner && this.banner.url_img_background) {
-        this.setBg()
-      }
-    },
-  },
 }
 </script>
 
 <style scoped>
-.bgCarousel {
-  @apply bg-no-repeat bg-center bg-cover;
-}
 .banner {
   @apply flex flex-col justify-center items-center pt-20;
 }
@@ -164,7 +137,7 @@ export default {
     @apply w-full text-lg;
   }
   .text-tittle {
-    @apply w-9/0 leading-tight;
+    @apply w-9/5 leading-tight;
   }
   .text-subtittle {
     @apply w-9/0 mt-4;
@@ -228,16 +201,8 @@ export default {
   .banner {
     width: 1192px;
   }
-}
-@screen xl {
   .banner-text-tittle {
     @apply text-6xl;
-  }
-  .banner-text-subtittle {
-    @apply w-8/0 text-base;
-  }
-  .text-tittle {
-    @apply w-8/3;
   }
   .text-subtittle {
     @apply w-8/3 mt-4;
@@ -247,11 +212,6 @@ export default {
   }
   .banner-img {
     @apply w-full;
-  }
-}
-@screen xml {
-  .banner-text-tittle {
-    @apply text-6xl;
   }
 }
 </style>

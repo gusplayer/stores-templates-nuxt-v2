@@ -432,6 +432,14 @@ export default {
     @apply not-sr-only font-semibold text-xs uppercase tracking-widest pl-2;
   }
 }
+@media (max-width: 768px) {
+  .search {
+    display: none;
+  }
+  /* .header-logo {
+    max-width: 230px;
+  } */
+}
 @screen lg {
   .header {
     @apply w-full;
@@ -463,15 +471,6 @@ export default {
   }
   .header-content-page {
     width: 1192px;
-  }
-}
-
-@media (max-width: 768px) {
-  .search {
-    display: none;
-  }
-  .header-logo {
-    max-width: 230px;
   }
 }
 </style>

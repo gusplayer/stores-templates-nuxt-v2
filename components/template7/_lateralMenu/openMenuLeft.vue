@@ -104,7 +104,9 @@
                             : ''
                         "
                       >
-                        {{ categoria.nombre_categoria_producto }}
+                        <p>
+                          {{ categoria.nombre_categoria_producto }}
+                        </p>
                       </li>
                     </template>
                     <template v-slot:subcategorias
@@ -281,9 +283,9 @@ export default {
     },
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
-      // this.$router.push({
-      //   path: '/productos',
-      // })
+      this.$router.push({
+        path: '/productos',
+      })
       this.$store.commit('SET_STATEBANNER', false)
       this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.nameCategory = value.nombre_categoria_producto

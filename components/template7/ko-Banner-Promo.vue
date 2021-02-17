@@ -200,38 +200,54 @@ figure {
 }
 #promo-banner-text-1,
 #promo-banner-text-4 {
-  @apply justify-center items-center flex;
+  @apply flex justify-center items-center;
 }
 #promo-banner-text-2,
 #promo-banner-text-3 {
-  @apply justify-start items-start flex;
+  @apply flex justify-start items-start;
 }
 .promo-banner-subtittle {
   color: rgba(48, 48, 48, 0.7);
 }
 #promo-banner-tittle-1 {
+  @apply overflow-hidden;
   color: var(--color_text);
+  text-overflow: ellipsis;
 }
 #promo-banner-tittle-2 {
+  @apply overflow-hidden;
   color: var(--color_text);
+  text-overflow: ellipsis;
 }
 #promo-banner-tittle-3 {
+  @apply overflow-hidden;
   color: var(--color_text);
+  text-overflow: ellipsis;
 }
 #promo-banner-tittle-4 {
+  @apply overflow-hidden;
   color: var(--color_text);
+  text-overflow: ellipsis;
 }
 #promo-banner-subtittle-1 {
+  @apply overflow-hidden;
   color: var(--color_subtext);
+  text-overflow: ellipsis;
 }
 #promo-banner-subtittle-2 {
+  @apply overflow-hidden;
   color: var(--color_subtext);
+  text-overflow: ellipsis;
 }
 #promo-banner-subtittle-3 {
+  @apply overflow-hidden;
   color: var(--color_subtext);
+  text-overflow: ellipsis;
 }
 #promo-banner-subtittle-4 {
+  @apply overflow-hidden;
   color: var(--color_subtext);
+  text-overflow: ellipsis;
 }
 .promo-banners,
 .banner-medium,
@@ -240,28 +256,63 @@ figure {
 }
 @screen sm {
   .promo-banners {
-    @apply sr-only;
+    @apply hidden;
   }
   #promo-banner-tittle-2 {
     line-height: 42px;
     font-size: 32px;
+    height: auto;
+    max-hegiht: 90px;
   }
   #promo-banner-tittle-3 {
     line-height: 42px;
     font-size: 32px;
+    height: auto;
+    max-height: 90px;
   }
   #promo-banner-tittle-2,
   #promo-banner-tittle-3,
   #promo-banner-subtittle-medium {
-    @apply pr-16 leading-normal;
+    @apply leading-normal overflow-hidden flex justify-start items-center;
+    width: 255px;
   }
   .banner-content-buttons {
-    @apply sr-only;
+    @apply hidden;
+  }
+}
+@media (min-width: 375px) {
+  #promo-banner-tittle-2 {
+    /* height: 130px; */
+    max-height: 130px;
+  }
+  #promo-banner-tittle-3 {
+    /* height: 130px; */
+    max-height: 130px;
+  }
+  #promo-banner-tittle-2,
+  #promo-banner-tittle-3,
+  #promo-banner-subtittle-medium {
+    width: 285px;
+  }
+}
+@media (min-width: 425px) {
+  #promo-banner-tittle-2 {
+    /* height: 150px; */
+    max-height: 150px;
+  }
+  #promo-banner-tittle-3 {
+    /* height: 150px; */
+    max-height: 150px;
+  }
+  #promo-banner-tittle-2,
+  #promo-banner-tittle-3,
+  #promo-banner-subtittle-medium {
+    width: 350px;
   }
 }
 @screen md {
   .promo-banners {
-    @apply not-sr-only;
+    @apply flex;
   }
   .promo-banner-items {
     @apply w-9/5;
@@ -285,18 +336,31 @@ figure {
   #promo-banner-tittle-1 {
     line-height: 34px;
     font-size: 30px;
+    max-height: 100px;
   }
   #promo-banner-tittle-2 {
     line-height: 34px;
     font-size: 24px;
+    max-height: 100px;
   }
   #promo-banner-tittle-3 {
     line-height: 34px;
     font-size: 24px;
+    max-height: 100px;
   }
   #promo-banner-tittle-4 {
     line-height: 34px;
     font-size: 24px;
+    width: 130px;
+    max-width: 130px;
+    height: auto;
+    max-height: 100px;
+  }
+  #promo-banner-subtittle-4 {
+    width: 135px;
+    height: auto;
+    max-height: 80px;
+    max-width: 135px;
   }
   .promo-banner-subtittle {
     @apply w-8/0 text-center;
@@ -310,14 +374,24 @@ figure {
   }
   #promo-banner-text-1 {
     @apply pb-10 leading-normal;
+    width: 250px;
   }
   #promo-banner-text-4 {
     @apply pb-24 leading-normal;
   }
+  #promo-banner-tittle-1,
+  #promo-banner-tittle-4 {
+    @apply flex justify-center items-start text-center;
+  }
   #promo-banner-tittle-2,
   #promo-banner-tittle-3,
   #promo-banner-subtittle-medium {
-    @apply pr-16 leading-normal;
+    @apply leading-normal;
+    width: 200px;
+    max-width: 200px;
+  }
+  .promo-banner-subtittle {
+    font-size: 14px;
   }
 }
 @media (min-width: 900px) {
@@ -377,6 +451,8 @@ figure {
   #promo-banner-tittle-2 {
     line-height: 34px;
     font-size: 24px;
+    height: auto;
+    max-height: 120px;
   }
   #promo-banner-tittle-3 {
     line-height: 34px;
@@ -385,6 +461,12 @@ figure {
   #promo-banner-tittle-4 {
     line-height: 34px;
     font-size: 24px;
+    width: 170px;
+    max-width: 170px;
+  }
+  #promo-banner-subtittle-4 {
+    width: 170px;
+    max-width: 170px;
   }
   .promo-banner-subtittle {
     @apply w-full;
@@ -395,6 +477,8 @@ figure {
   }
   #promo-banner-text-1 {
     @apply pb-24 leading-normal;
+    width: 300px;
+    max-width: 300px;
   }
   #promo-banner-text-4 {
     @apply pb-40 leading-normal;
@@ -402,10 +486,12 @@ figure {
   #promo-banner-tittle-2,
   #promo-banner-tittle-3,
   #promo-banner-subtittle-medium {
-    @apply pr-32 leading-normal;
+    @apply leading-normal;
+    width: 270px;
+    max-width: 270px;
   }
   .banner-content-buttons {
-    @apply not-sr-only;
+    @apply flex;
   }
 }
 @media (min-width: 1120px) {
@@ -432,7 +518,7 @@ figure {
     padding-left: 110px;
   }
 }
-@media (min-width: 1240px) {
+/* @media (min-width: 1240px) {
   .banner-border-1 {
     @apply absolute border-4 border-white-white border-opacity-50 z-auto;
     padding-top: 230px;
@@ -443,8 +529,8 @@ figure {
     padding-top: 230px;
     padding-left: 130px;
   }
-}
-@screen mlg {
+} */
+/* @screen mlg {
   .promo-banner-items {
     @apply w-9/3;
   }
@@ -496,15 +582,13 @@ figure {
   #promo-banner-tittle-2,
   #promo-banner-tittle-3,
   #promo-banner-subtittle-medium {
-    @apply pr-40 leading-normal;
+    @apply leading-normal;
   }
-}
+} */
 @media (min-width: 1192px) {
   .promo-banner-items {
     width: 1192px;
   }
-}
-@screen xl {
   #promo-banner-tittle-1 {
     line-height: 58px;
     font-size: 48px;
@@ -542,7 +626,9 @@ figure {
     padding-right: 118px;
   }
   #promo-banner-text-1 {
-    @apply pb-40 leading-normal;
+    @apply leading-normal overflow-hidden;
+    width: 350px;
+    /* height: 400px; */
   }
   #promo-banner-text-4 {
     @apply pb-56 leading-normal;
@@ -550,7 +636,25 @@ figure {
   #promo-banner-tittle-2,
   #promo-banner-tittle-3,
   #promo-banner-subtittle-medium {
-    @apply pr-40 leading-normal;
+    @apply leading-normal;
+    width: 350px;
+    max-width: 350px;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+  #promo-banner-tittle-2,
+  #promo-banner-tittle-3 {
+    @apply overflow-hidden;
+    height: auto;
+    max-height: 175px;
+  }
+  #promo-banner-text-2,
+  #promo-banner-text-3 {
+    @apply overflow-hidden flex justify-center items-start;
+    height: 200px;
+    max-height: 200px;
   }
 }
 </style>
