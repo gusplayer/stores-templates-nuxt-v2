@@ -2,7 +2,6 @@
   <div class="carousel-content" :style="settingKCarousel">
     <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
       <div class="swiper-wrapper z-auto">
-        <!-- :class="`swiper-slide slide${index + 1}`" -->
         <div
           :class="`swiper-slide`"
           :id="`slide${index + 1}`"
@@ -57,46 +56,12 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-        // autoplay: {
-        //   delay: 6000,
-        //   disableOnInteraction: false,
-        // },
+        autoplay: {
+          delay: 6000,
+          disableOnInteraction: false,
+        },
       },
     }
-  },
-  mounted() {
-    this.bg1 = this.settingKCarousel.values[0].url_img_background
-    this.bg2 = this.settingKCarousel.values[1].url_img_background
-    this.bg3 = this.settingKCarousel.values[2].url_img_background
-
-    var bgImage1 = document.getElementById('slide2')
-    if (bgImage1) {
-      bgImage1.style.backgroundColor = '#000'
-    }
-    // if (this.settingKCarousel) {
-    //   this.setBg()
-    // } else {
-    //   console.log('No entro')
-    // }
-  },
-  methods: {
-    // setBg() {
-    //   console.log('Entro en metodo')
-    //   var bgImage = document.getElementById('slide1')
-    //   if (bgImage) {
-    //     bgImage.style.backgroundImage = `url(${this.settingKCarousel.values[1].url_img_background})`
-    //   }
-    // },
-  },
-  watch: {
-    // banner() {
-    //   if (
-    //     this.settingKCarousel &&
-    //     this.settingKCarousel.values[0].url_img_background
-    //   ) {
-    //     this.setBg()
-    //   }
-    // },
   },
 }
 </script>
@@ -107,7 +72,6 @@ export default {
 }
 #slide1 {
   @apply bg-no-repeat bg-center bg-cover;
-  /* background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612320607/Template9/Carousel/slide-headphones-bg_atwvao.jpg'); */
 }
 #slide2 {
   @apply bg-no-repeat bg-center bg-cover;
