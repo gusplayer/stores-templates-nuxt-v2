@@ -74,11 +74,10 @@
     </div> -->
     <div class="container-article">
       <div class="content-blog">
-        <div class="content-back" v-if="toggleArrow">
-          <arrow-left-icon class="arrow-left" @click="$router.go(-1)">
-          </arrow-left-icon>
-          <p @click="$router.go(-1)">Regresar</p>
-        </div>
+        <nuxt-link to="/blog" class="content-back">
+          <arrow-left-icon class="arrow-left"> </arrow-left-icon>
+          <p>Regresar</p>
+        </nuxt-link>
         <p class="title-blog">{{ dataArticle.titulo }}</p>
 
         <div class="content-date">
@@ -98,47 +97,67 @@
         </div>
         <!-- <div class="wrapper-articulo" v-html="dataArticle.contenido"></div> -->
         <div class="editor" v-if="dataArticle.contenido">
-          <editor-content class="editor__content" :editor="editor" />
+          <el-tiptap
+            v-model="dataArticle.contenido"
+            :extensions="extensions"
+            :spellcheck="false"
+            :readonly="true"
+            :charCounterCount="false"
+            :tooltip="false"
+            :showMenubar="false"
+            :bubble="false"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { Editor, EditorContent } from 'tiptap'
 import {
-  Blockquote,
-  CodeBlock,
-  HardBreak,
+  Doc,
+  Paragraph,
+  Text,
   Heading,
-  OrderedList,
-  BulletList,
-  ListItem,
-  TodoItem,
-  TodoList,
   Bold,
-  Code,
-  Image,
   Italic,
+  Underline,
+  Strike,
+  Code,
+  CodeBlock,
+  Blockquote,
   Link,
+  BulletList,
+  OrderedList,
+  ListItem,
+  TodoList,
+  TodoItem,
+  Iframe,
   Table,
   TableHeader,
-  TableCell,
   TableRow,
-  Strike,
-  Underline,
+  TableCell,
+  Image,
+  TextAlign,
+  LineHeight,
+  Indent,
+  HorizontalRule,
+  HardBreak,
+  TrailingNode,
   History,
-  Search,
-} from 'tiptap-extensions'
+  TextColor,
+  TextHighlight,
+  FormatClear,
+  FontSize,
+  Preview,
+  Print,
+  SelectAll,
+} from 'element-tiptap'
 export default {
   name: 'Ko-Blog',
-  components: { EditorContent },
   props: {
     dataStore: Object,
   },
   mounted() {
-    this.routePrev()
-    // this.$store.dispatch('GET_ARTICLES')
     if (this.listArticulos.length) {
       this.searchIdForSlug()
     }
@@ -151,50 +170,124 @@ export default {
       this.shippingUpdated = resultUpdate[0]
     }
   },
-  beforeDestroy() {
-    this.editor.destroy()
-  },
   data() {
     return {
       dataArticle: {},
-      toggleArrow: false,
       shippingCreated: '',
       shippingUpdated: '',
-      editor: new Editor({
-        editable: false,
-        extensions: [
-          new Bold(),
-          new Blockquote(),
-          new CodeBlock(),
-          new HardBreak(),
-          new Heading({ levels: [1, 2, 3] }),
-          new BulletList(),
-          new OrderedList(),
-          new ListItem(),
-          new TodoItem(),
-          new TodoList(),
-          new Image(),
-          new Code(),
-          new Italic(),
-          new Link(),
-          new Strike(),
-          new Underline(),
-          new History(),
-          new Search({
-            disableRegex: false,
-          }),
-          new Table({
-            resizable: true,
-          }),
-          new TableHeader(),
-          new TableCell(),
-          new TableRow(),
-        ],
-        content: '',
-        onUpdate: ({ getHTML }) => {
-          this.html = getHTML()
-        },
-      }),
+      extensions: [
+        new Doc(),
+        new Paragraph(),
+        new Text(),
+        new Heading({ level: 5, bubble: true }),
+        new Bold({ bubble: true }),
+        new Italic({ bubble: true }),
+        new Underline({ bubble: true }),
+        new Strike({ bubble: true }),
+        new Code({ bubble: true }),
+        new CodeBlock({ bubble: true }),
+        new Blockquote({ bubble: true }),
+        new Link({ bubble: true }),
+        new BulletList({ bubble: true }),
+        new OrderedList({ bubble: true }),
+        new ListItem({ bubble: true }),
+        new TodoList({ bubble: true }),
+        new TodoItem({ bubble: true }),
+        new Iframe({ bubble: true }),
+        new Table({
+          resizable: true,
+          bubble: true,
+        }),
+        new TableHeader(),
+        new TableRow(),
+        new TableCell(),
+        new Image({
+          urlPattern: '',
+          uploadRequest: '',
+          bubble: true,
+        }),
+        new TextAlign({
+          alignments: ['left', 'center', 'right', 'justify'],
+          bubble: true,
+        }),
+        new LineHeight({
+          lineHeights: ['100%', '200%', '300%'],
+        }),
+        new Indent({
+          minIndent: 0,
+          maxIndent: 7,
+        }),
+        new HorizontalRule({ bubble: true }),
+        new HardBreak(),
+        new TrailingNode(),
+        new History(),
+        new TextColor({
+          colors: [
+            '#f44336',
+            '#e91e63',
+            '#9c27b0',
+            '#673ab7',
+            '#3f51b5',
+            '#2196f3',
+            '#03a9f4',
+            '#00bcd4',
+            '#009688',
+            '#4caf50',
+            '#8bc34a',
+            '#cddc39',
+            '#ffeb3b',
+            '#ffc107',
+            '#ff9800',
+            '#ff5722',
+            '#000000',
+          ],
+          bubble: true,
+        }),
+        new TextHighlight({
+          colors: [
+            '#f44336',
+            '#e91e63',
+            '#9c27b0',
+            '#673ab7',
+            '#3f51b5',
+            '#2196f3',
+            '#03a9f4',
+            '#00bcd4',
+            '#009688',
+            '#4caf50',
+            '#8bc34a',
+            '#cddc39',
+            '#ffeb3b',
+            '#ffc107',
+            '#ff9800',
+            '#ff5722',
+            '#000000',
+          ],
+          bubble: true,
+        }),
+        new FormatClear(),
+        new FontSize({
+          fontSizes: [
+            '8',
+            '10',
+            '12',
+            '14',
+            '16',
+            '18',
+            '20',
+            '24',
+            '30',
+            '36',
+            '48',
+            '60',
+            '72',
+          ],
+          bubble: true,
+        }),
+        new Preview(),
+        new Print(),
+        new SelectAll(),
+      ],
     }
   },
   computed: {
@@ -211,18 +304,6 @@ export default {
           this.dataArticle = product
         }
       })
-      if (this.dataArticle) {
-        if (this.dataArticle.contenido) {
-          this.editor.setContent(this.dataArticle.contenido, true)
-        }
-      }
-    },
-    routePrev() {
-      if (this.$route.path == '/') {
-        this.toggleArrow = false
-      } else {
-        this.toggleArrow = true
-      }
     },
   },
   watch: {

@@ -57,6 +57,7 @@ export default {
     { src: '~/plugins/countryFlags.js', ssr: false },
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/saveAs.js', ssr: false },
+    { src: '~/plugins/element-tiptap', ssr: false },
   ],
   modules: [
     '@nuxtjs/axios',

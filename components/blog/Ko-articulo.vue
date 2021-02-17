@@ -29,41 +29,63 @@
           </div>
         </div>
         <div class="editor" v-if="dataArticle.contenido">
-          <editor-content class="editor__content" :editor="editor" />
+          <el-tiptap
+            v-model="dataArticle.contenido"
+            :extensions="extensions"
+            :spellcheck="false"
+            :readonly="true"
+            :charCounterCount="false"
+            :tooltip="false"
+            :showMenubar="false"
+            :bubble="false"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { Editor, EditorContent } from 'tiptap'
 import {
-  Blockquote,
-  CodeBlock,
-  HardBreak,
+  Doc,
+  Paragraph,
+  Text,
   Heading,
-  OrderedList,
-  BulletList,
-  ListItem,
-  TodoItem,
-  TodoList,
   Bold,
-  Code,
-  Image,
   Italic,
+  Underline,
+  Strike,
+  Code,
+  CodeBlock,
+  Blockquote,
   Link,
+  BulletList,
+  OrderedList,
+  ListItem,
+  TodoList,
+  TodoItem,
+  Iframe,
   Table,
   TableHeader,
-  TableCell,
   TableRow,
-  Strike,
-  Underline,
+  TableCell,
+  Image,
+  TextAlign,
+  LineHeight,
+  Indent,
+  HorizontalRule,
+  HardBreak,
+  TrailingNode,
   History,
-  Search,
-} from 'tiptap-extensions'
+  TextColor,
+  TextHighlight,
+  FormatClear,
+  FontSize,
+  Preview,
+  Print,
+  SelectAll,
+} from 'element-tiptap'
 export default {
   name: 'Ko-Blog',
-  components: { EditorContent },
   props: {
     dataStore: Object,
   },
@@ -80,17 +102,124 @@ export default {
       this.shippingUpdated = resultUpdate[0]
     }
   },
-  beforeDestroy() {
-    if (this.editor) {
-      this.editor.destroy()
-    }
-  },
   data() {
     return {
       dataArticle: {},
       shippingCreated: '',
       shippingUpdated: '',
-      editor: '',
+      extensions: [
+        new Doc(),
+        new Paragraph(),
+        new Text(),
+        new Heading({ level: 5, bubble: true }),
+        new Bold({ bubble: true }),
+        new Italic({ bubble: true }),
+        new Underline({ bubble: true }),
+        new Strike({ bubble: true }),
+        new Code({ bubble: true }),
+        new CodeBlock({ bubble: true }),
+        new Blockquote({ bubble: true }),
+        new Link({ bubble: true }),
+        new BulletList({ bubble: true }),
+        new OrderedList({ bubble: true }),
+        new ListItem({ bubble: true }),
+        new TodoList({ bubble: true }),
+        new TodoItem({ bubble: true }),
+        new Iframe({ bubble: true }),
+        new Table({
+          resizable: true,
+          bubble: true,
+        }),
+        new TableHeader(),
+        new TableRow(),
+        new TableCell(),
+        new Image({
+          urlPattern: '',
+          uploadRequest: '',
+          bubble: true,
+        }),
+        new TextAlign({
+          alignments: ['left', 'center', 'right', 'justify'],
+          bubble: true,
+        }),
+        new LineHeight({
+          lineHeights: ['100%', '200%', '300%'],
+        }),
+        new Indent({
+          minIndent: 0,
+          maxIndent: 7,
+        }),
+        new HorizontalRule({ bubble: true }),
+        new HardBreak(),
+        new TrailingNode(),
+        new History(),
+        new TextColor({
+          colors: [
+            '#f44336',
+            '#e91e63',
+            '#9c27b0',
+            '#673ab7',
+            '#3f51b5',
+            '#2196f3',
+            '#03a9f4',
+            '#00bcd4',
+            '#009688',
+            '#4caf50',
+            '#8bc34a',
+            '#cddc39',
+            '#ffeb3b',
+            '#ffc107',
+            '#ff9800',
+            '#ff5722',
+            '#000000',
+          ],
+          bubble: true,
+        }),
+        new TextHighlight({
+          colors: [
+            '#f44336',
+            '#e91e63',
+            '#9c27b0',
+            '#673ab7',
+            '#3f51b5',
+            '#2196f3',
+            '#03a9f4',
+            '#00bcd4',
+            '#009688',
+            '#4caf50',
+            '#8bc34a',
+            '#cddc39',
+            '#ffeb3b',
+            '#ffc107',
+            '#ff9800',
+            '#ff5722',
+            '#000000',
+          ],
+          bubble: true,
+        }),
+        new FormatClear(),
+        new FontSize({
+          fontSizes: [
+            '8',
+            '10',
+            '12',
+            '14',
+            '16',
+            '18',
+            '20',
+            '24',
+            '30',
+            '36',
+            '48',
+            '60',
+            '72',
+          ],
+          bubble: true,
+        }),
+        new Preview(),
+        new Print(),
+        new SelectAll(),
+      ],
     }
   },
   computed: {
@@ -107,46 +236,6 @@ export default {
           this.dataArticle = product
         }
       })
-      if (this.dataArticle) {
-        this.editor = new Editor({
-          editable: false,
-          extensions: [
-            new Bold(),
-            new Blockquote(),
-            new CodeBlock(),
-            new HardBreak(),
-            new Heading({ levels: [1, 2, 3] }),
-            new BulletList(),
-            new OrderedList(),
-            new ListItem(),
-            new TodoItem(),
-            new TodoList(),
-            new Image(),
-            new Code(),
-            new Italic(),
-            new Link(),
-            new Strike(),
-            new Underline(),
-            new History(),
-            new Search({
-              disableRegex: false,
-            }),
-            new Table({
-              resizable: true,
-            }),
-            new TableHeader(),
-            new TableCell(),
-            new TableRow(),
-          ],
-          content: '',
-          onUpdate: ({ getHTML }) => {
-            this.html = getHTML()
-          },
-        })
-        if (this.dataArticle.contenido) {
-          this.editor.setContent(this.dataArticle.contenido, true)
-        }
-      }
     },
   },
   watch: {
@@ -214,144 +303,6 @@ export default {
 }
 .content-date-items p:nth-child(1) {
   font-weight: bold;
-}
-
-/* ///////////// */
-.editor {
-  width: 100%;
-  background: white;
-  border-radius: 5px;
-  padding: 15px;
-  position: relative;
-  margin-top: 5px;
-}
-.editor__content {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  outline: none;
-  padding-top: 10px;
-}
-.editor__content >>> * {
-  caret-color: black;
-  outline: none;
-}
-.editor__content >>> pre {
-  padding: 0.7rem 1rem;
-  border-radius: 5px;
-  background: black;
-  color: green;
-  font-size: 0.8rem;
-  overflow-x: auto;
-}
-.editor__content >>> pre code {
-  display: block;
-}
-.editor__content >>> p code {
-  padding: 0.2rem 0.4rem;
-  border-radius: 5px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  background: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.8);
-}
-.editor__content >>> ul,
-.editor__content >>> ol {
-  padding-left: 1rem;
-}
-.editor__content >>> li > p,
-.editor__content >>> li > ol,
-.editor__content >>> li > ul {
-  margin: 0;
-}
-.editor__content >>> ul {
-  color: black;
-  list-style-type: disc;
-}
-.editor__content >>> ol {
-  color: black;
-  list-style-type: decimal;
-}
-.editor__content >>> a {
-  color: rgb(68, 68, 211);
-}
-.editor__content >>> h1 {
-  font-weight: bold;
-  font-size: 2em;
-}
-.editor__content >>> h2 {
-  font-weight: bold;
-  font-size: 1.5em;
-}
-.editor__content >>> h3 {
-  font-weight: bold;
-  font-size: 1.17em;
-}
-.editor__content >>> blockquote {
-  border-left: 3px solid rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.8);
-  padding-left: 0.8rem;
-  font-style: italic;
-}
-.editor__content >>> blockquote p {
-  margin: 0;
-}
-.editor__content >>> img {
-  /* width: 100%; */
-  /* margin: 0; */
-  max-width: 100%;
-  border-radius: 3px;
-}
-.editor__content >>> img {
-  /* width: 100%; */
-  /* margin: 0; */
-  max-width: 100%;
-  border-radius: 3px;
-}
-.editor__content >>> table {
-  border-collapse: collapse;
-  table-layout: fixed;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-}
-.editor__content >>> table td,
-.editor__content >>> table th {
-  min-width: 1em;
-  border: 2px solid grey;
-  padding: 3px 5px;
-  vertical-align: top;
-  box-sizing: border-box;
-  position: relative;
-}
-.editor__content >>> table td > *,
-.editor__content >>> table th > * {
-  margin-bottom: 0;
-}
-.editor__content >>> table th {
-  font-weight: bold;
-  text-align: left;
-}
-.editor__content >>> table .selectedCell:after {
-  z-index: 2;
-  position: absolute;
-  content: '';
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: rgba(200, 200, 255, 0.4);
-  pointer-events: none;
-}
-.editor__content >>> table .column-resize-handle {
-  position: absolute;
-  right: -2px;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  z-index: 20;
-  background-color: #adf;
-  pointer-events: none;
 }
 .txt-banner {
   color: #000;
