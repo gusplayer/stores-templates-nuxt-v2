@@ -313,7 +313,7 @@ export default {
   },
   name: 'Ko-ProductList-Filter',
   mounted() {
-    this.$store.commit('products/SET_FILTER', this.$route.query)
+    // this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
       let maxTMP = 0
@@ -360,23 +360,9 @@ export default {
       this.currentPage = this.previousPage
     }
     if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: this.nameCategoryHeader,
-      })
+      this.$store.commit('SET_STATEBANNER', false)
     } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.nombre_subcategoria == this.nameSubCategoryHeader
-      )
-      if (filtradoSubCategoria) {
-        this.categorias.find(
-          (element) => element.id == filtradoSubCategoria.categoria
-        )
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: filtradoSubCategoria.id,
-        })
-      }
+      this.$store.commit('SET_STATEBANNER', false)
     }
   },
   data() {
