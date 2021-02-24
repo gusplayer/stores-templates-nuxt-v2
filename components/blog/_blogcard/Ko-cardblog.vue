@@ -1,8 +1,8 @@
 <template>
-  <div class="producto">
+  <div class="producto-blog">
     <div class="content-product">
       <div class="wrapper-card">
-        <div class="container">
+        <div class="container-blog">
           <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
             <div class="figure-img">
               <figure class="content-imge">
@@ -179,13 +179,13 @@ export default {
 </script>
 
 <style scoped>
-.producto {
+.producto-blog {
   @apply w-full relative justify-center items-center cursor-pointer;
 }
 .content-product {
   @apply w-full;
 }
-.container {
+.container-blog {
   @apply relative shadow-2xl;
   max-width: 100%;
 }

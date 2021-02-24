@@ -1,7 +1,10 @@
 <template>
-  <div class="producto" :style="[settingKProdutCard, settingGeneral]">
+  <div
+    class="producto-productCard"
+    :style="[settingKProdutCard, settingGeneral]"
+  >
     <div
-      class="container"
+      class="container-productCard"
       :style="[
         {
           '--font-style-1':
@@ -578,13 +581,13 @@ export default {
   @apply h-full w-full;
   color: #333;
 }
-.producto {
+.producto-productCard {
   @apply flex flex-col justify-center items-center cursor-pointer mt-8;
 }
 .datos-producto {
   @apply w-full flex flex-col justify-center items-center pt-4;
 }
-.container {
+.container-productCard {
   @apply relative w-full;
 }
 .image {
@@ -822,7 +825,7 @@ export default {
   .overlay-bottom:hover {
     @apply bg-red-btnbannershop transition-all ease-in duration-300;
   }
-  .container:hover .overlay-bottom {
+  .container-productCard:hover .overlay-bottom {
     height: 12%;
   }
   .overlay-top {
@@ -832,7 +835,7 @@ export default {
     right: 0;
     height: 20%;
   }
-  .container:hover .overlay-top {
+  .container-productCard:hover .overlay-top {
     width: 15%;
     left: 85%;
   }
@@ -848,7 +851,7 @@ export default {
     height: 10%;
     transition: 0.5s ease;
   }
-  .container:hover .overlay-free {
+  .container-productCard:hover .overlay-free {
     width: 44%;
     left: 55%;
     transition-delay: 700ms;
@@ -867,7 +870,7 @@ export default {
     height: 5%;
     /* transition: 0.5s ease; */
   }
-  .container:hover .overlay-polygon {
+  .container-productCard:hover .overlay-polygon {
     width: 5%;
     left: 89%;
     transition-delay: 950ms;
@@ -884,7 +887,7 @@ export default {
     height: 20%;
     transition: 0.5s ease;
   }
-  .container:hover .overlay-sould {
+  .container-productCard:hover .overlay-sould {
     width: 35%;
     left: 65%;
     transition-delay: 700ms;

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-card">
-    <div class="container">
+    <div class="container-card">
       <div
         class="wrapper"
         v-on:mouseenter="active = false"
@@ -299,7 +299,7 @@ div.wrapper-card {
   border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05) !important;
 }
-.container {
+.container-card {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -562,7 +562,7 @@ div.wrapper-card {
   }
 }
 @media (max-width: 450px) {
-  .container {
+  .container-card {
     width: 100%;
     max-width: 200px;
   }

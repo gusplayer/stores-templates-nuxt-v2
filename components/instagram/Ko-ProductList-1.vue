@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-productlist">
-    <div class="container">
+    <div class="container-productlist">
       <div class="content-title">
         <!-- <p class="title">Productos</p> -->
       </div>
@@ -287,7 +287,7 @@ export default {
   background: var(--background_color_1);
   box-sizing: border-box;
 }
-.container {
+.container-productlist {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -717,7 +717,7 @@ export default {
 
 @media (max-width: 770px) {
   /* ///////productos/////////// */
-  .container {
+  .container-productlist {
     padding: 0px;
   }
   .content-item-productos {

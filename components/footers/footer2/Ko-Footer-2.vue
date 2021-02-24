@@ -260,7 +260,7 @@
 import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko-Footer-1',
+  name: 'Ko-Footer-2',
   props: {
     dataStore: Object,
     settingByTemplate: Object,

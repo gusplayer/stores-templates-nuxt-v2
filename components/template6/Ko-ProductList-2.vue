@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-productlist">
-    <div class="container">
+    <div class="container-productlist">
       <div class="text-macrobrand" v-if="dataStore.tienda.id_tienda == 1100">
         <p>
           Envíos gratis a nivel nacional en compras superiores a $100.000 - Pago
@@ -455,7 +455,7 @@ export default {
   background: var(--background_color_2);
   box-sizing: border-box;
 }
-.container {
+.container-productlist {
   width: 100%;
   max-width: 1300px;
   padding: 40px 20px;
@@ -688,7 +688,7 @@ export default {
 }
 
 @media (max-width: 770px) {
-  .container {
+  .container-productlist {
     padding: 0px;
   }
   .content-items-categorias-text {
