@@ -8,6 +8,7 @@
 import K05Cart from '../components/template5/Ko-Cart-1'
 import K07Cart from '../components/template7/Ko-Cart'
 import K09Cart from '../components/template9/Ko-Cart'
+import K10Cart from '../components/template9/Ko-Cart'
 
 export default {
   layout: 'default',
@@ -16,6 +17,7 @@ export default {
     K05Cart,
     K07Cart,
     K09Cart,
+    K10Cart,
   },
   mounted() {
     if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
@@ -57,6 +59,9 @@ export default {
           break
         case 9:
           productListComponent = 'K09Cart'
+          break
+        case 9:
+          productListComponent = 'K10Cart'
           break
       }
       return productListComponent
