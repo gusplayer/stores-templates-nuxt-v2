@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-productlist">
-    <div class="container">
+    <div class="container-productlist">
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
           <p class="text-categorias" @click="clear">
@@ -307,7 +307,7 @@ export default {
   margin-top: 0px;
   padding-top: 5px;
 }
-.container {
+.container-productlist {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -364,6 +364,7 @@ export default {
   box-sizing: border-box;
 }
 .content-products {
+  width: 100%;
   border-radius: 10px;
 }
 .content-products:hover,
@@ -425,25 +426,30 @@ export default {
     padding: 0px 0px 10px 0px;
   }
   .content-item-productos {
-    padding: 15px;
+    padding: 0px;
   }
   .text-categorias {
-    padding: 0 10px;
+    padding: 0 0px;
   }
 }
 @media (max-width: 700px) {
   .content-items-categorias {
-    margin-left: 10px;
+    /* margin-left: 10px; */
     margin-bottom: 10px;
   }
   .grid-products {
-    grid-template-columns: repeat(1, minmax(250px, 2fr));
+    grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 20px;
+  }
+}
+@media (max-width: 555px) {
+  .grid-products {
+    grid-template-columns: repeat(1, minmax(250px, 2fr));
   }
 }
 @media (max-width: 450px) {
   .content-item-productos {
-    padding: 0px 10px 20px;
+    padding: 0px 0px 20px;
   }
 }
 </style>

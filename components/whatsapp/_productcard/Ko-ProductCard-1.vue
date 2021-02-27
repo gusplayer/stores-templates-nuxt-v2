@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-card">
-    <div class="container">
+    <div class="container-card">
       <div class="wrapper-movil">
         <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
         <p class="card-info-2" v-if="getFreeShipping == false">
@@ -415,7 +415,7 @@ export default {
   padding-bottom: 4px;
 }
 
-.container {
+.container-card {
   display: flex;
   align-items: flex-start;
   width: 100%;
@@ -617,10 +617,16 @@ export default {
     top: 78px;
   }
   .wrapper-image {
-    max-width: 10px;
+    max-width: 105px;
   }
   .card-text-movil-title {
     font-size: 15px;
+  }
+  .card-info-1 {
+    top: 70px;
+  }
+  .card-info-2 {
+    top: 88px;
   }
 }
 </style>

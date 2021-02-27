@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-content">
-    <div class="container">
+    <div class="container-content">
       <div class="item item_image">
         <img :src="setting.data[0].photo" />
       </div>
@@ -89,7 +89,7 @@ export default {
   align-items: center;
   box-sizing: border-box;
 }
-.container {
+.container-content {
   display: grid;
   grid-template: repeat(2, 1fr) / repeat(2, 1fr);
   margin: 0 auto;
@@ -179,7 +179,7 @@ export default {
   .wrapper-text {
     max-width: 500px;
   }
-  .container {
+  .container-content {
     padding: 30px 0px;
     grid-template: repeat(1, 1fr) / 4fr;
   }

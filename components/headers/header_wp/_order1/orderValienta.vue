@@ -423,7 +423,7 @@ export default {
     },
     removeCartItems() {
       // this.remove = false
-      location.reload(true)
+      // location.reload(true)
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     },

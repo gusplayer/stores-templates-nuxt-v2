@@ -510,7 +510,7 @@ export const actions = {
   },
   async GET_SETTINGS_BY_TEMPLATE_7({ commit }, store) {
     const response = await axios.get(
-      `https://backend-nuxt-editor.herokuapp.com/template7?id=${store.id_tienda}`
+      `https://node.komercia.co/template7?id=${store.id_tienda}`
     )
     commit('SET_SETTINGS_BY_TEMPLATE_7', response.data.body)
   },

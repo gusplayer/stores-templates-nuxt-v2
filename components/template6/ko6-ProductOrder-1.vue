@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-ProductOrder" v-if="fullProducts.length">
-    <div class="container">
+    <div class="container-ProductOrder">
       <div class="content-title-ProductOrder">
         <p class="title-ProductOrder">Favorito</p>
       </div>
@@ -50,7 +50,7 @@ export default {
   box-sizing: border-box;
   padding: 20px 0 30px;
 }
-.container {
+.container-ProductOrder {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -184,7 +184,7 @@ export default {
   }
 }
 @media (max-width: 770px) {
-  .container {
+  .container-ProductOrder {
     padding: 20px 8px;
   }
   .content-item-productos {
@@ -209,7 +209,7 @@ export default {
   }
 }
 @media (max-width: 380px) {
-  .container {
+  .container-ProductOrder {
     padding: 20px 5px;
   }
 }

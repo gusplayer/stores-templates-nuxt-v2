@@ -1,6 +1,6 @@
 <template>
-  <div class="gify-contet">
-    <div class="container">
+  <div class="gify-content">
+    <div class="container-gify">
       <img class="image" :src="gify.photo" alt="gify" />
       <div class="overlay-tops">
         <div class="icons-hover">
@@ -109,13 +109,13 @@ export default {
   @apply h-full w-full;
   color: #333;
 }
-.gify-contet {
+.gify-content {
   @apply flex flex-col justify-center items-center cursor-pointer;
 }
 .datos-productos {
   @apply w-full flex flex-col justify-center items-center;
 }
-.container {
+.container-gify {
   @apply relative w-full;
 }
 .image {
@@ -127,7 +127,7 @@ export default {
 .overlay-bottoms:hover {
   @apply bg-red-btnbannershop transition-all ease-in duration-300;
 }
-.container:hover .overlay-bottoms {
+.container-gify:hover .overlay-bottoms {
   height: 10%;
 }
 .icon {
@@ -151,7 +151,7 @@ export default {
   right: 0;
   height: 40%;
 }
-.container:hover .overlay-tops {
+.container-gify:hover .overlay-tops {
   width: 15%;
   left: 85%;
 }
