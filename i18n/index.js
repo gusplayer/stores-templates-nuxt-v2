@@ -196,7 +196,11 @@ export default {
     home_allproducts: 'Ver Todos Los Productos',
     home_leerMas: 'Leer mas',
     home_buscar: 'Buscar',
-
+    home_contactenos: 'Contáctenos',
+    home_nombre: 'Nombre',
+    home_email: 'Email',
+    home_mensaje: 'Mensaje',
+    home_telefono: 'Teléfono',
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
@@ -446,7 +450,11 @@ export default {
     home_allproducts: 'View All Products',
     home_leerMas: 'Read more ',
     home_buscar: 'Search',
-
+    home_contactenos: 'Contact us',
+    home_nombre: 'Name',
+    home_email: 'E-mail',
+    home_mensaje: 'Message',
+    home_telefono: 'Phone',
     //productdetail
     productdetail_garantia: 'Warranty:',
     productdetail_btnComprar: 'Purchase',
@@ -697,7 +705,11 @@ export default {
     home_allproducts: 'Ver Todos Os Produtos',
     home_leerMas: 'Ler mais ',
     home_buscar: 'Pesquisa',
-
+    home_contactenos: 'Entre em contato conosco',
+    home_nombre: 'Nome',
+    home_email: 'E-mail',
+    home_mensaje: 'Mensagem',
+    home_telefono: 'Telefone',
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
