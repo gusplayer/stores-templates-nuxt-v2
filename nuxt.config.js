@@ -58,7 +58,6 @@ export default {
     { src: '~plugins/ga.js', mode: 'client' },
     { src: '~/plugins/gtm', mode: 'client' },
     { src: '~/plugins/facebook-pixel', mode: 'client' },
-    { src: '~plugins/SocialSharing.js', ssr: false },
     { src: '~/plugins/countryFlags.js', ssr: false },
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/element-tiptap', ssr: false },

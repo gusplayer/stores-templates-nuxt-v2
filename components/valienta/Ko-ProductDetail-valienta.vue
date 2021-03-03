@@ -120,18 +120,14 @@
               <p class="text-variant-type" style="margin-right: 10px;">
                 {{ $t('productdetail_compartir') }}
               </p>
-              <ShareNetwork
-                v-for="network in this.networks"
-                :network="network.network"
-                :key="network.network"
-                :url="sharing.url"
-                :title="sharing.title"
-                :description="sharing.description"
-                :quote="sharing.quote"
-                :style="{ color: network.color }"
+              <a
+                :href="this.sharingFacebook"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="btn-facebook"
               >
-                <div :is="network.icon" class="icon-shared" />
-              </ShareNetwork>
+                <facebook-icon class="wp-icon" />
+              </a>
               <button class="btn-whatsapp" @click="redirectWP()">
                 <whatsapp-icon class="wp-icon" />
               </button>
@@ -186,7 +182,7 @@
 <script>
 import axios from 'axios'
 import productSlide from './_productdetails/productSlide'
-import selectGroup from './_productdetails/selectGroup'
+// import selectGroup from './_productdetails/selectGroup'
 import selectRadioGroup from './_productdetails/selectRadioGroup'
 import idCloudinary from '../../mixins/idCloudinary'
 
@@ -197,7 +193,7 @@ export default {
     settingByTemplate: Object,
   },
   components: {
-    selectGroup,
+    // selectGroup,
     productSlide,
     selectRadioGroup,
   },
@@ -234,17 +230,9 @@ export default {
       activeZoom: true,
       sharing: {
         url: '',
-        title: '',
-        description: '',
         quote: '',
       },
-      networks: [
-        {
-          network: 'facebook',
-          icon: 'facebook-icon',
-          color: '#1877f2',
-        },
-      ],
+      sharingFacebook: '',
     }
   },
   computed: {
@@ -322,11 +310,11 @@ export default {
               sku: this.data.info.sku,
               estado: true,
             }
-            this.sharing.url = window.location.href
-            this.sharing.title = `Te recomiendo: ${response.data.detalle.nombre}`
-            this.sharing.description = `Te recomiendo: ${response.data.detalle.nombre} de la tienda ${this.dataStore.tienda.nombre}, Link del producto ${window.location.href}`
-            this.sharing.quote = `Te recomiendo: ${response.data.detalle.nombre} de la tienda ${this.dataStore.tienda.nombre}, Link del producto ${window.location.href}`
-
+            if (response && response.data) {
+              this.sharing.url = window.location.href
+              this.sharing.quote = `Explora%20los%20productos%20de%20${response.data.detalle.nombre}%20que%20te%20van%20a%20encantar.%0ALink%20del%20producto%3A%20${this.sharing.url}`
+              this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
+            }
             this.maxQuantityValue = this.data.info.inventario
             this.setOptionEnvio()
             for (const [
@@ -1003,6 +991,23 @@ export default {
 .content-btn-whatsapp {
   display: flex;
   margin-top: 10px;
+}
+.btn-facebook {
+  color: #1877f2;
+  border-radius: 5px;
+  background-color: transparent;
+  width: 10px;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 0px;
+  margin-right: 20px;
+}
+.btn-facebook:hover {
+  color: black;
 }
 .btn-whatsapp {
   color: #25d366;
