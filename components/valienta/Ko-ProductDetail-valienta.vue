@@ -36,6 +36,14 @@
               </p>
               <!-- <p class="card-descuento">-50%</p> -->
             </div>
+            <div
+              class="content-description-corta"
+              v-if="data.info.descripcion_corta"
+            >
+              <p class="text-variant-type">
+                {{ data.info.descripcion_corta }}
+              </p>
+            </div>
             <div class="content_buy_action">
               <div v-if="envio.titulo == 'Envío gratis'">
                 <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
@@ -803,6 +811,9 @@ export default {
   line-height: 1.5;
   text-decoration: none;
 }
+.content-description-corta {
+  margin-top: 15px;
+}
 .content_buy_action {
   display: flex;
   flex-direction: row;
@@ -1023,7 +1034,7 @@ export default {
   background: black;
 }
 .container-variants {
-  margin-top: 20px;
+  margin-top: 5px;
 }
 .text-variant-type {
   font-size: 14px;
