@@ -162,7 +162,7 @@ export default {
     contact_telefonoPlacer: 'Escribe tu teléfono',
     contact_enviar: 'Enviar',
     // Newsletter
-    newsletter_subtitle: 'SUSCRIBÉTE',
+    newsletter_subtitle: 'SUSCRÍBETE',
     nesletter_tittle: 'Suscríbete',
     newsletter_subtittle: 'Suscríbete a nuestro boletin',
     newsletter_description: 'Te enviaremos promociones',
