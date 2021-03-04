@@ -25,6 +25,16 @@
               {{ this.dataStore.tienda.email_tienda }}
             </p>
           </div>
+          <div class="content-Pliticas-Terminos">
+            <button
+              class="txt-pol-term"
+              id="myBtn"
+              v-if="dataStore.politicas"
+              @click="politics"
+            >
+              {{ $t('footer_politicasyterminos') }}
+            </button>
+          </div>
         </div>
         <div class="footer-content-itemsBtns">
           <div class="content-buttons">
@@ -100,6 +110,7 @@
         <KoNewsLetter></KoNewsLetter>
       </div>
       <div class="madebyKomercia">
+        <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
         <a
           href="https://komercia.co/"
           target="_blank"
@@ -120,16 +131,23 @@
         </a>
       </div>
     </div>
+    <div class="modal" id="myModal" v-if="dataStore.politicas">
+      <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+    </div>
+    <!-- <KoTermsConditions class="modal" id="myModal"></KoTermsConditions> -->
   </div>
 </template>
 
 <script>
 import KoNewsLetter from '../../../components/template10/Ko-Newsletter'
 import KoSocialNet from '../../../components/template10/Ko-Social-Networks'
+import KoTermsConditions from '../../../components/footers/ko-TermsAndConditions'
+
 export default {
   components: {
     KoNewsLetter,
     KoSocialNet,
+    KoTermsConditions,
   },
   name: 'Ko-Footer-6',
   props: {
@@ -188,6 +206,22 @@ export default {
     },
   },
   methods: {
+    politics() {
+      var modal = document.getElementById('myModal')
+      var btn = document.getElementById('myBtn')
+      var span = document.getElementsByClassName('close')[0]
+      btn.onclick = function () {
+        modal.style.display = 'block'
+      }
+      span.onclick = function () {
+        modal.style.display = 'none'
+      }
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = 'none'
+        }
+      }
+    },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
         '--background_color_1'
@@ -231,7 +265,11 @@ export default {
 }
 .madebyKomercia {
   border-color: #eee;
-  @apply w-full flex justify-center items-center border-t-2;
+  @apply w-full flex flex-col justify-center items-center border-t-2;
+}
+.txt-devBy {
+  font-size: 14px;
+  color: #666;
 }
 .logo2 {
   width: 100px;
@@ -276,6 +314,24 @@ export default {
   background-color: #fff;
   transition: 0.4s ease-out;
   @apply w-full max-h-0 justify-start items-center mt-10 mb-10 overflow-hidden;
+}
+.content-Pliticas-Terminos {
+  @apply w-auto flex flex-col justify-start items-center;
+}
+.txt-pol-term {
+  color: #222;
+  font-size: 15px;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  @apply text-left;
+}
+.txt-pol-term:hover {
+  color: #eb7025;
+}
+.modal {
+  padding-top: 200px;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  @apply w-full h-full hidden fixed z-10 left-0 top-0 overflow-auto;
 }
 @screen sm {
   .img-logo {

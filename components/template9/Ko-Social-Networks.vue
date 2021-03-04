@@ -380,7 +380,7 @@ export default {
 </script>
 <style scoped>
 .content-SocialNet {
-  @apply w-full flex flex-row justify-center items-center mt-8;
+  @apply w-full flex flex-row justify-center items-center mt-32 mb-20;
 }
 .icon-social {
   @apply w-auto flex flex-wrap justify-center items-center;

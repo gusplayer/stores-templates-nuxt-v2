@@ -161,7 +161,7 @@ export default {
 @media (min-width: 1400px) {
   .wrapper-items {
     max-width: 1400px;
-    @apply h-auto;
+    @apply w-full h-auto;
   }
 }
 @screen xml {

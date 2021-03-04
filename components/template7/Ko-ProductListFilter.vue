@@ -1009,7 +1009,7 @@ export default {
   @apply w-full flex flex-col justify-start items-center;
 }
 .txt-categorys {
-  @apply w-full flex flex-row justify-start items-center pr-1;
+  @apply w-full flex flex-row justify-start items-center pr-4;
   color: var(--color_subtext);
   font-size: 14px;
   font-family: var(--font-style-3), serif !important ;
@@ -1017,7 +1017,7 @@ export default {
   cursor: pointer;
 }
 .txt-categorys-active {
-  @apply w-full flex flex-row justify-start items-center pr-1;
+  @apply w-full flex flex-row justify-start items-center pr-4;
   color: #0c0c0c;
   font-size: 14px;
   font-family: var(--font-style-3), serif !important ;
@@ -1273,7 +1273,7 @@ export default {
     padding-bottom: 5px;
   }
   .content-left {
-    @apply w-3/0 mr-6 flex flex-col justify-between items-start;
+    @apply w-3/0 mr-24 flex flex-col justify-between items-start;
   }
   .show-view-per-list {
     @apply w-auto grid grid-cols-4 gap-4 justify-center items-center;

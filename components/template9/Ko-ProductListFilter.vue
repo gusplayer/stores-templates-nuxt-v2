@@ -1061,11 +1061,11 @@ export default {
   @apply w-auto justify-center items-center;
 }
 .show {
-  @apply w-full cursor-pointer mt-4;
+  @apply w-full cursor-pointer mt-16;
 }
 
 .show-icon {
-  @apply p-3;
+  @apply p-12;
   fill: #8e8e8e;
 }
 .show-icon-active {
@@ -1289,7 +1289,7 @@ export default {
     @apply w-auto;
   }
   .content-banner-shop {
-    @apply justify-start items-start my-8;
+    @apply justify-start items-start my-32;
     padding-left: 20px;
   }
   .tittle-banner-shop {

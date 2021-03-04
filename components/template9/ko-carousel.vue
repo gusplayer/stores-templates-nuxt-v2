@@ -212,15 +212,14 @@ export default {
     @apply w-full;
   }
   .text-top {
-    @apply w-full flex justify-center items-center text-center mb-6;
+    @apply w-full flex justify-center items-center text-center mb-24;
   }
   .banner-text-top {
     font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
+    @apply font-semibold uppercase;
   }
   .text-medium {
-    @apply w-full flex flex-col justify-center items-center text-center mb-6;
+    @apply w-full flex flex-col justify-center items-center text-center mb-24;
   }
   .banner-text-medium {
     font-size: 38px;
@@ -231,7 +230,7 @@ export default {
     line-height: 1.3;
   }
   .text-bottom {
-    @apply w-full flex flex-col justify-center items-center text-center mb-6;
+    @apply w-full flex flex-col justify-center items-center text-center mb-24;
   }
   .banner-text-bottom {
     font-size: 16px;
@@ -243,7 +242,7 @@ export default {
     margin-top: 30px;
   }
   .text-button {
-    @apply px-6;
+    @apply px-24;
     transition: all 0.25s ease;
     letter-spacing: 1px;
     font-size: 15px;
@@ -320,10 +319,10 @@ export default {
     width: 35%;
   }
   .text-top {
-    margin-bottom: 20px;
+    @apply mb-20;
   }
   .text-bottom {
-    margin-bottom: 40px;
+    @apply mb-40;
   }
   .banner-text-medium {
     font-size: 90px;

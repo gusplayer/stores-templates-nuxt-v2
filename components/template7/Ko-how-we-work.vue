@@ -158,7 +158,7 @@ export default {
 .hwork-tittle,
 .hwork-description,
 .hwork-seemore {
-  @apply mt-4;
+  @apply mt-16;
 }
 .hwork-seemore:hover .seemore-h {
   @apply cursor-pointer;
@@ -185,22 +185,22 @@ export default {
   color: #333;
 }
 #hwork-text-1 {
-  @apply flex flex-col justify-center items-center text-center mt-4;
+  @apply flex flex-col justify-center items-center text-center mt-16;
 }
 #hwork-text-2 {
-  @apply flex flex-col justify-center items-center text-center mt-4;
+  @apply flex flex-col justify-center items-center text-center mt-16;
 }
 #hwork-text-3 {
-  @apply flex flex-col justify-center items-center text-center mt-4;
+  @apply flex flex-col justify-center items-center text-center mt-16;
 }
 .hwork-description {
   @apply w-9/0;
 }
 .hwork-dates {
-  @apply bg-hworkbg bg-no-repeat bg-auto w-full mt-16;
+  @apply bg-hworkbg bg-no-repeat bg-auto w-full mt-64;
 }
 .hwwork-content {
-  @apply w-full flex flex-col justify-center items-center my-16;
+  @apply w-full flex flex-col justify-center items-center my-64;
   background: var(--background_color_1);
 }
 .hwwork-content-items {

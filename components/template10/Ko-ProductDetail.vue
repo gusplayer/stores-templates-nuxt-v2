@@ -1044,6 +1044,9 @@ export default {
   .banner-detail {
     @apply hidden;
   }
+  .section-suggesProduct {
+    @apply w-9/0;
+  }
   /* ------------------- DOWN ----------------------- */
 }
 @media (min-width: 425px) {
@@ -1105,6 +1108,9 @@ export default {
   }
   .right {
     @apply mt-40;
+  }
+  .section-suggesProduct {
+    @apply w-9/5;
   }
 }
 @media (min-width: 850px) {

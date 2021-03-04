@@ -130,7 +130,7 @@ export default {
   @apply flex flex-col justify-center items-center w-full;
 }
 .product-conten-items {
-  @apply flex flex-col justify-start items-start;
+  @apply flex flex-col justify-start items-start mt-30;
 }
 .product-tittle,
 .product-subtittle,

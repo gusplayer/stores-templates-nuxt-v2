@@ -199,7 +199,7 @@
             </p>
           </div>
         </div>
-        <div v-else class="h-20"></div>
+        <!-- <div v-else class="h-20"></div> -->
       </div>
       <div class="content-btn">
         <button
@@ -505,7 +505,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
 .datos-producto {
-  @apply w-full flex flex-col justify-center items-center my-6 ml-2 cursor-default;
+  @apply w-full flex flex-col justify-center items-center my-6  cursor-default;
 }
 .container {
   @apply relative max-w-full;
@@ -535,6 +535,7 @@ export default {
   color: #3f3f3f;
   font: inherit;
   font-size: 100%;
+  @apply w-full flex justify-center items-center;
 }
 .card-title {
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
@@ -559,7 +560,6 @@ export default {
   color: #000;
   white-space: nowrap;
   font-weight: 400;
-  line-height: 1.1;
   text-align: left;
 }
 .text-free {

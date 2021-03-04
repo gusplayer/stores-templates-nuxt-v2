@@ -626,7 +626,7 @@ export default {
     padding-top: 120px;
   }
   .tittle-banner-blog {
-    @apply w-9/3 flex flex-row justify-center items-center my-12;
+    @apply w-9/3 flex flex-row justify-center items-center my-48;
   }
   .txt-banner {
     font-size: 78px;

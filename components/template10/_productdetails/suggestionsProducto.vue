@@ -62,10 +62,10 @@ export default {
 }
 @media (max-width: 770px) {
   .swiper-container {
-    padding: 20px 8px;
+    padding-top: 20px;
   }
   .content-title-ProductFavoritos {
-    padding: 10px 10px;
+    @apply py-10;
   }
 }
 @media (max-width: 380px) {

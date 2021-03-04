@@ -288,8 +288,7 @@ export default {
 <style scoped>
 .header-container {
   transition: all 0.5s ease-in-out;
-  @apply w-full flex flex-col justify-center items-center fixed z-10;
-  top: 30px;
+  @apply w-full flex flex-col justify-center items-center fixed z-10 top-30;
 }
 .wrapper-header {
   @apply flex flex-col w-full justify-between items-center;
@@ -333,7 +332,7 @@ export default {
   font-family: var(--font-style-3), serif !important;
 }
 .header-content-logo {
-  @apply flex justify-center items-center py-1;
+  @apply flex justify-center items-center py-4;
 }
 .wrapper-logo {
   @apply w-full;
@@ -347,7 +346,7 @@ export default {
   @apply w-auto flex flex-wrap gap-6 justify-center items-center;
 }
 .btn {
-  @apply mx-4 font-semibold uppercase tracking-wider;
+  @apply mx-16 font-semibold uppercase tracking-wider;
   transition: all 0.25s ease;
   font-family: var(--font-style-1), serif !important ;
   font-size: 14px;
@@ -361,7 +360,7 @@ export default {
   @apply flex flex-row justify-between items-center;
 }
 .header-search-icon {
-  @apply w-6 h-6;
+  @apply w-24 h-24;
 }
 .search-header {
   cursor: pointer;
@@ -373,7 +372,7 @@ export default {
   transition: all 0.25s ease;
 }
 .empty {
-  @apply mx-2;
+  @apply mx-8;
 }
 .header-content-icon {
   @apply flex flex-row justify-between;
@@ -391,18 +390,18 @@ export default {
   transition: all 0.25s ease;
 }
 .border-num-items {
-  @apply rounded-full h-16 w-auto flex justify-center items-center text-center -ml-3 -mt-3;
+  @apply rounded-full h-16 w-auto flex justify-center items-center text-center -ml-12 -mt-12;
   background: var(--color_badge_cart);
 }
 .num-items {
-  @apply text-xs p-1;
+  @apply text-xs p-5;
   color: white;
 }
 
 /* ***** */
 @screen sm {
   .header {
-    @apply w-full px-4;
+    @apply w-full px-16;
   }
   .header-container {
     @apply w-full;
@@ -429,7 +428,7 @@ export default {
 }
 @screen md {
   .header-text-menu {
-    @apply not-sr-only font-semibold text-xs uppercase tracking-widest pl-2;
+    @apply not-sr-only font-semibold text-xs uppercase tracking-widest pl-8;
   }
 }
 @media (max-width: 768px) {

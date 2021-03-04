@@ -247,6 +247,7 @@ export default {
   font-size: 15px;
 }
 .icon-msg {
+  fill: var(--color_subtext);
   @apply w-20 -mt-2 -mr-20 relative;
 }
 .input-icon {

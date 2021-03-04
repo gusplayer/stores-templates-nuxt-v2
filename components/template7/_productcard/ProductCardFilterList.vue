@@ -875,7 +875,7 @@ export default {
     overflow: hidden;
   }
   .datos-producto {
-    @apply w-full h-full flex flex-col justify-center items-center pt-4;
+    @apply w-full h-full flex flex-col justify-center items-center pt-16;
   }
   .card-title {
     font-size: 14px;

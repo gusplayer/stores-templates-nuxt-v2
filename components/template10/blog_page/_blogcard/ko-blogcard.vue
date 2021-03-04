@@ -130,7 +130,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-items-blog {
-  @apply w-full relative flex flex-col justify-center items-center mb-40;
+  @apply w-full relative flex flex-col justify-center items-center;
 }
 .content-image {
   @apply w-full flex justify-center items-center;

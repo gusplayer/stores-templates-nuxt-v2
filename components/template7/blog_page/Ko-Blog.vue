@@ -334,7 +334,7 @@ export default {
   font-weight: 400;
 }
 .tittle-banner-blog {
-  @apply w-full flex flex-row justify-center items-center my-12;
+  @apply w-full flex flex-row justify-center items-center my-48;
 }
 .banner-blog {
   @apply w-full flex flex-col justify-center items-center bg-cover bg-no-repeat;
@@ -386,7 +386,6 @@ export default {
 }
 .input-text:focus {
   width: 240px;
-  padding: 0 15px;
   color: #7f7f7f;
   font-size: 16px;
 }
@@ -411,8 +410,8 @@ export default {
   outline: none;
   color: transparent;
   font-size: 0px;
+  padding-left: 10px;
   transition: 0.4s;
-  /* width: 0px; */
   font-family: var(--font-style-3), serif !important ;
 }
 .input-text:focus {
@@ -421,9 +420,7 @@ export default {
 ::-webkit-input-placeholder {
   @apply text-left items-center;
   font-size: 16px;
-  /* font-weight: 800; */
   color: #7f7f7f;
-  padding-left: 10px;
   font-family: var(--font-style-3), serif !important ;
 }
 .empty-space {
@@ -508,10 +505,7 @@ export default {
   .content-search-blog {
     @apply w-7/0 justify-center;
   }
-  .input-text {
-    /* width: 0px; */
-    padding: 0px;
-  }
+
   .title {
     @apply flex;
   }
@@ -551,7 +545,7 @@ export default {
     padding-top: 120px;
   }
   .tittle-banner-blog {
-    @apply w-9/3 flex flex-row justify-center items-center my-12;
+    @apply w-9/3 flex flex-row justify-center items-center my-48;
   }
   .txt-banner {
     font-size: 78px;

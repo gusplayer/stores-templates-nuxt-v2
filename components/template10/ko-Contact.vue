@@ -411,10 +411,12 @@ export default {
   }
   .btn {
     background-color: #333b48;
-    border-color: #333b48;
     font-size: 14px;
     color: #fff;
     @apply w-auto h-35 border mt-20 px-20;
+  }
+  .btn:hover {
+    background-color: #eb7025;
   }
   .form-cont {
     @apply w-full flex flex-col justify-start items-center;

@@ -335,7 +335,7 @@ export default {
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
 }
 .header-content-logo {
-  @apply flex justify-center items-center py-1;
+  @apply flex justify-center items-center py-4;
 }
 .wrapper-logo {
   @apply w-full;
@@ -360,7 +360,8 @@ export default {
   border-bottom: 2px solid #000;
 }
 .header-content-items {
-  @apply flex flex-row justify-between items-center;
+  @apply flex flex-row justify-end items-center;
+  flex: 1;
 }
 .header-search-icon {
   @apply flex justify-center items-center;
@@ -402,7 +403,7 @@ export default {
   @apply flex flex-row justify-center items-center cursor-pointer;
 }
 .header-content-cart {
-  @apply flex justify-center items-center w-9 h-9 box-border pb-1 ml-5 relative cursor-pointer;
+  @apply flex justify-center items-center w-36 h-36 box-border pb-4 ml-20 relative cursor-pointer;
 }
 .icon-shop {
   fill: #303030;
@@ -450,7 +451,7 @@ export default {
 /* ***** */
 @screen sm {
   .header {
-    @apply w-full px-4;
+    @apply w-full px-16;
   }
   .header-container {
     @apply w-full;
@@ -468,14 +469,10 @@ export default {
     @apply hidden;
   }
   .header-item-menu {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-    /* margin-left: 20px; */
+    @apply flex flex-row justify-start items-center flex-1;
   }
   .search-header-left {
-    @apply flex ml-4;
+    @apply flex ml-16;
   }
   .txt-bag,
   .border-num-items {
@@ -484,7 +481,7 @@ export default {
 }
 @screen md {
   .header-text-menu {
-    @apply flex font-semibold text-xs uppercase tracking-widest pl-2;
+    @apply flex font-semibold text-xs uppercase tracking-widest pl-8;
   }
 }
 @media (min-width: 640px) {
@@ -496,7 +493,7 @@ export default {
     @apply flex;
   }
   .search-header-left {
-    @apply ml-8;
+    @apply ml-32;
   }
 }
 @screen lg {
@@ -510,7 +507,7 @@ export default {
     @apply flex;
   }
   .header-content-buttons {
-    @apply flex;
+    @apply flex justify-start items-center flex-1;
   }
   .header-item-menu {
     @apply hidden;

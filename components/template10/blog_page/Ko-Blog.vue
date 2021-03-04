@@ -150,7 +150,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .grid-products {
-  @apply grid gap-4 justify-center items-center;
+  @apply grid gap-4 justify-center items-center mb-40;
   box-sizing: border-box;
 }
 .pagination-medium {

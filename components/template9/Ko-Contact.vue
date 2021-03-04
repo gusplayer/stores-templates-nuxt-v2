@@ -1,162 +1,195 @@
 <template>
-  <div class="wrapper-contact" :style="settingByTemplate">
-    <div class="contact">
-      <div class="contact-content">
-        <div>
-          <p class="contact-text-title">{{ $t('contact_title') }}</p>
-          <p class="contact-text-subtitle">
-            {{ $t('contact_subtitle') }}
-          </p>
-        </div>
-        <div class="wrapper-icon">
-          <div class="contact-content-icon">
-            <div
-              v-for="(item2, index) in dataContact"
-              :key="`${index}${item2.dato}`"
-              class="text-icon"
-            >
-              <div v-if="item2.dato" :is="item2.icon" class="contact-icon" />
-              <a v-if="item2.dato">{{ item2.dato }}</a>
-            </div>
-          </div>
-          <div class="contact-content-icon">
-            <div
-              v-for="(item, index) in links"
-              :key="`${index}${item.nombre}`"
-              class="text-icon"
-            >
-              <div v-if="item.link" :is="item.icon" class="icon" />
-              <a
-                v-if="item.link"
-                :href="item.link"
-                target="_blank"
-                rel="noreferrer noopener"
-                >{{ item.nombre }}</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="separator"></div>
-        <div v-if="dataStore.geolocalizacion.length">
-          <div>
-            <p class="contact-text-sub">{{ $t('contact_vistaTienda') }}</p>
-
-            <p class="contact-text-subtitle2">
-              {{ this.dataStore.geolocalizacion[0].direccion }}
-            </p>
-          </div>
-          <iframe
-            :src="`https://maps.google.com/maps?q=${this.dataStore.geolocalizacion[0].latitud},${this.dataStore.geolocalizacion[0].longitud}&hl=es;z=14&amp;output=embed`"
-            width="100%"
-            height="250"
-            frameborder="0"
-            style="border: 0;"
-            allowfullscreen
-          ></iframe>
-          <div class="under-text">
-            <p class="contact-text-subtitle3">
-              {{ $t('contact_horarioAtencion') }}
-              <br />
-              {{ this.dataStore.geolocalizacion[0].horario }}
-            </p>
-            <a class="contact-text-subtitle4">
-              {{ $t('contact_comollegar') }}</a
-            >
-          </div>
-        </div>
+  <div calss="content-contact">
+    <div class="content-form-contact">
+      <div class="banner-mapa" v-if="dataStore.geolocalizacion.length">
+        <iframe
+          :src="`https://maps.google.com/maps?q=${this.dataStore.geolocalizacion[0].latitud},${this.dataStore.geolocalizacion[0].longitud}&hl=es;z=14&amp;output=embed`"
+          width="100%"
+          height="250"
+          frameborder="0"
+          style="border: 0;"
+          allowfullscreen
+        ></iframe>
       </div>
 
-      <div class="contact-content">
-        <div class="contact-item-text">
-          <p class="contact-text-title">{{ $t('contact_title2') }}</p>
-          <p class="contact-text-subtitles">
-            {{ $t('contact_subtitle2') }}
-          </p>
-        </div>
-        <ValidationObserver
-          ref="observer"
-          tag="form"
-          class="contact-content-rigth"
-        >
-          <p>{{ $t('contact_nombre') }}</p>
-          <validation-provider name="nombre" rules="required">
-            <template slot-scope="{ errors }">
-              <input
-                name="nombre"
-                type="text"
-                v-model="nombre"
-                class="input-text"
-                :placeholder="$t('contact_nombrePlacer')"
-                id="ContactName"
-              />
-              <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
-            </template>
-          </validation-provider>
-          <P> {{ $t('contact_email') }}</P>
-          <validation-provider name="email" rules="required|email">
-            <template slot-scope="{ errors }">
-              <input
-                name="email"
-                type="email"
-                v-model="email"
-                :placeholder="$t('contact_emailPlacer')"
-                class="input-text"
-                id="ContactEmail"
-              />
-              <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
-            </template>
-          </validation-provider>
-          <P> {{ $t('contact_mensale') }}</P>
-          <validation-provider name="comentario" rules="required">
-            <template slot-scope="{ errors }">
-              <textarea
-                class="input-text-rectangule"
-                name="comentario"
-                :placeholder="$t('contact_mensalePlacer')"
-                v-model="comment"
-              ></textarea>
-              <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
-            </template>
-          </validation-provider>
-          <P> {{ $t('contact_telefono') }}</P>
-          <div class="input-content">
-            <validation-provider name="celular" rules="required|numeric">
-              <template slot-scope="{ errors }">
-                <input
-                  class="input-text"
-                  name="celular"
-                  type="number"
-                  :placeholder="$t('contact_telefonoPlacer')"
-                  v-model="numberphone"
-                  id="ContactPhone"
+      <div class="container-contact">
+        <div class="content-grid">
+          <div class="left">
+            <div class="content-info">
+              <p class="txt-info">
+                Información
+              </p>
+            </div>
+            <div class="content-locatioin">
+              <svg
+                class="icon-left"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40px"
+                height="40px"
+                viewBox="0 0 24 24"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
                 />
-                <span class="text-error" v-show="errors[0]">{{
-                  errors[0]
-                }}</span>
-              </template>
-            </validation-provider>
-            <button
-              ref="colorBtn"
-              class="btn"
-              v-on:click.prevent="submitContact"
-            >
-              {{ $t('contact_enviar') }}
-            </button>
+              </svg>
+              <p class="txt-left">
+                {{ this.dataStore.geolocalizacion[0].direccion }}
+              </p>
+            </div>
+            <div class="empty"></div>
+            <div class="content-email">
+              <svg
+                class="icon-left"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40px"
+                height="40px"
+                viewBox="0 0 24 24"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                />
+              </svg>
+              <div class="email">
+                <p class="txt-left">Envíenos un correo electronico</p>
+                <p class="txt-left">
+                  {{ this.dataStore.tienda.email_tienda }}
+                </p>
+              </div>
+            </div>
           </div>
-        </ValidationObserver>
+          <div class="right">
+            <div class="contact-content">
+              <!-- <div class="contact-item-text">
+              <p class="contact-text-title">{{ $t('contact_title2') }}</p>
+              <p class="contact-text-subtitles">
+                {{ $t('contact_subtitle2') }}
+              </p>
+            </div> -->
+              <ValidationObserver
+                ref="observer"
+                tag="form"
+                class="contact-content-rigth"
+              >
+                <div class="content-form">
+                  <div class="content-contacus">
+                    <p class="txt-contactus">{{ $t('home_contactenos') }}</p>
+                  </div>
+                  <div class="form-cont">
+                    <p class="txt-input">{{ $t('home_nombre') }}</p>
+                    <validation-provider
+                      name="nombre"
+                      rules="required"
+                      class="validator"
+                    >
+                      <template slot-scope="{ errors }">
+                        <input
+                          name="nombre"
+                          type="text"
+                          v-model="nombre"
+                          class="input-text"
+                          :placeholder="$t('contact_nombrePlacer')"
+                          id="ContactName"
+                        />
+                        <span class="text-error" v-show="errors[0]">{{
+                          errors[0]
+                        }}</span>
+                      </template>
+                    </validation-provider>
+                  </div>
+                  <div class="form-cont">
+                    <p class="txt-input">{{ $t('home_email') }}</p>
+                    <validation-provider
+                      name="email"
+                      rules="required|email"
+                      class="validator"
+                    >
+                      <template slot-scope="{ errors }">
+                        <input
+                          name="email"
+                          type="email"
+                          v-model="email"
+                          :placeholder="$t('contact_emailPlacer')"
+                          class="input-text"
+                          id="ContactEmail"
+                        />
+                        <span class="text-error" v-show="errors[0]">{{
+                          errors[0]
+                        }}</span>
+                      </template>
+                    </validation-provider>
+                  </div>
+                  <div class="form-cont">
+                    <p class="txt-input">{{ $t('home_mensaje') }}</p>
+                    <validation-provider
+                      name="comentario"
+                      rules="required"
+                      class="validator"
+                    >
+                      <template slot-scope="{ errors }">
+                        <textarea
+                          class="input-text-rectangule"
+                          name="comentario"
+                          :placeholder="$t('contact_mensalePlacer')"
+                          v-model="comment"
+                        ></textarea>
+                        <span class="text-error" v-show="errors[0]">{{
+                          errors[0]
+                        }}</span>
+                      </template>
+                    </validation-provider>
+                  </div>
+                  <div class="form-cont">
+                    <p class="txt-input">{{ $t('home_telefono') }}</p>
+                    <div class="input-content">
+                      <validation-provider
+                        name="celular"
+                        rules="required|numeric"
+                        class="validator"
+                      >
+                        <template slot-scope="{ errors }">
+                          <input
+                            class="input-text"
+                            name="celular"
+                            type="number"
+                            :placeholder="$t('contact_telefonoPlacer')"
+                            v-model="numberphone"
+                            id="ContactPhone"
+                          />
+                          <span class="text-error" v-show="errors[0]">{{
+                            errors[0]
+                          }}</span>
+                        </template>
+                      </validation-provider>
+                    </div>
+                  </div>
+                  <div class="content-bn">
+                    <button
+                      ref="colorBtn"
+                      class="btn"
+                      v-on:click.prevent="submitContact"
+                    >
+                      {{ $t('contact_enviar') }}
+                    </button>
+                  </div>
+                </div>
+              </ValidationObserver>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko-Contact-1',
+  name: 'Ko-Contact',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    // settingByTemplate: Object,
   },
   components: {
     ValidationObserver,
@@ -271,371 +304,168 @@ export default {
 </script>
 
 <style scoped>
-.wrapper-contact {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  /* background: var(--background_color_2); */
-  background: #fff;
-  box-sizing: border-box;
-  padding-top: 8px;
-  z-index: 10;
-  margin-top: 72px;
+.content-contact {
+  @apply w-full flex flex-col justify-center items-center;
 }
-.contact {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 30px 30px;
-  margin-bottom: 40px;
-  /* -webkit-box-shadow: 0px 8px 15px -7px rgba(0, 0, 0, 0.76);
-  box-shadow: 0px 8px 15px -7px rgba(0, 0, 0, 0.76); */
+.content-form-contact {
+  @apply w-full flex flex-col justify-center items-center mt-72;
 }
-.contact > div {
-  flex: 1;
-  max-width: 500px;
-  width: 100%;
+.container-contact {
+  @apply w-full justify-center items-center;
 }
-.contact > div:nth-child(2) {
-  margin-left: 20px;
-}
-.contact-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-self: end;
-}
-.contact-item-text {
-  width: 100%;
-}
-.contact-text-title {
-  font-size: 35px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: -0.4px;
-  /* color: var(--color_text); */
-  color: #000000;
-}
-.contact-text-subtitle {
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-  margin-top: 10px;
-}
-.contact-text-subtitles {
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-  margin-top: 10px;
-}
-.contact-text-subtitle2 {
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-.contact-text-subtitle3 {
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-  margin-top: 10px;
-}
-.contact-text-subtitle4 {
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
-  margin-top: 10px;
-  text-align: right;
-}
-.-text {
-  display: flex;
-  flex-direction: column;
-}
-.contact-icon {
-  font-size: 18px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 2.11;
-  letter-spacing: normal;
-  /* color: var(--color_icon); */
-  color: #25dac5;
-}
-.text-icon {
-  display: flex;
-  flex-direction: row;
-  /* color: var(--color_icon); */
-  color: #25dac5;
-}
-.text-icon a:hover {
-  cursor: pointer;
-  color: var(--btnhover);
-}
-.text-icon a {
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
-  margin-top: 5px;
-  margin-left: 7px;
-}
-.icon {
-  font-size: 17px;
-}
-.contact-text-sub {
-  font-size: 22px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
-  margin-top: 10px;
-}
-.contact-text-sub2 {
-  font-size: 22px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
-  margin-top: 10px;
-}
-.separator {
-  margin-top: 15px;
-  width: 100%;
-  /* border: solid 1.5px var(--color_border); */
-  border: solid 1.5px rgba(255, 255, 255, 1);
-}
-.text-icon {
-  display: flex;
-  flex-direction: row;
-}
-.contact-content-icon {
-  margin-top: 10px;
-}
-.contact-content-rigth {
-  border-radius: 10px;
-  /* background-color: var(--background_color_1); */
-  background-color: #f4f4f4;
-  padding: 30px 30px 50px 30px;
-  margin-top: 20px;
-}
-.contact-content-rigth p {
-  font-size: 14px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.86;
-  letter-spacing: 2px;
-  /* color: var(--color_text); */
-  color: #000000;
-  margin: 10px;
-  margin-left: 0px;
-}
-.under-text {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.under-text p:nth-child(1) {
-  flex: 2;
-}
-.under-text p:nth-child(2) {
-  flex: 1;
-}
-.input-content {
-  display: flex;
-  flex-direction: row;
-}
-.input-text {
-  font-size: 14px;
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
-  border: solid 2px #afafaf;
-  border-radius: var(--radius_btn);
-  background-color: transparent;
-  padding: 8px 14px;
-  width: 100%;
-}
-.input-text::placeholder {
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
-  opacity: 0.7;
-}
-.input-text:-internal-autofill-selected {
-  -webkit-appearance: menulist-button;
-  background-color: transparent !important;
-  background-image: none !important;
-  color: -internal-light-dark-color(black, white) !important;
-}
-.input-text:focus,
-.input-text:active {
-  outline: 0;
-  /* border: solid 2px var(--color_border); */
-  border: solid 2px rgba(127, 127, 139, 0.342);
-}
-.input-text-rectangule {
-  font-size: 14px;
-  font-weight: 400;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
-  border: solid 2px #afafaf;
-  border-radius: var(--radius_btn);
-  background-color: transparent;
-  padding: 4px 14px;
-  width: 100%;
-  resize: none;
-  overflow-y: auto;
-  max-height: 80px;
-  min-height: 80px;
-}
-.input-text-rectangule::placeholder {
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
-  opacity: 0.7;
-}
-
-.input-text-rectangule:focus,
-.input-text-rectangule:active {
-  outline: 0;
-  border: solid 2px rgba(127, 127, 139, 0.342);
-}
-.input-text-rectangule::-webkit-scrollbar {
-  background: transparent;
-  width: 5px;
-}
-.input-text-rectangule::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px transparent;
-  border-radius: 5px;
-}
-.input-text-rectangule::-webkit-scrollbar-thumb {
-  background: rgb(59, 59, 59);
-}
-.input-text-rectangule::-webkit-scrollbar-thumb:hover {
-  background: rgb(138, 138, 138);
-}
-.text-error {
-  font-size: 12px;
-  color: #cb2027;
-  width: 100%;
-  margin-left: 10px;
-}
-.btn {
-  color: var(--color_text_btn);
-  border-radius: var(--radius_btn);
-  border: solid 2px #2c2930;
-  background-color: #2c2930;
-  padding: 8px 14px;
-  font-size: 16px;
-  width: 50%;
-  height: 41px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-left: 20px;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.btn:hover {
-  color: white;
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
+.empty {
+  background-color: #dbdbdb;
+  @apply w-full h-1 my-20;
 }
 @screen sm {
-  .contact {
-    @apply w-9/0;
+  .banner-mapa {
+    @apply hidden;
   }
-}
-@media (max-width: 700px) {
-  .contact {
-    flex-direction: column;
+  .container-contact {
+    margin-top: 140px;
+    @apply flex flex-col;
   }
-  .contact > div:nth-child(2) {
-    margin-left: 0px;
+  .content-grid {
+    @apply w-9/0 flex flex-col justify-start items-start mt-20;
+  }
+  .left {
+    @apply w-full flex flex-col justify-start items-start;
+  }
+  .content-info {
+    @apply w-full flex justify-start items-center mb-30;
+  }
+  .txt-info {
+    color: #414141;
+    font-size: 14px;
+    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    @apply uppercase font-semibold tracking-1;
+  }
+  .content-locatioin,
+  .content-email {
+    @apply w-full flex flex-row justify-start items-center;
+  }
+  .icon-left {
+    fill: #878787;
+  }
+  .txt-left {
+    color: #414141;
+    font-size: 14px;
+    @apply w-full flex justify-start items-center pl-20;
+  }
+  .email {
+    @apply w-full flex flex-col justify-start items-center;
+  }
+  .right {
+    @apply w-full flex flex-col justify-center items-center;
   }
   .contact-content {
-    align-self: normal;
-  }
-  .contact-text-subtitle {
-    display: none;
-  }
-  .separator {
-    display: none;
-  }
-  .wrapper-icon {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-  .contact-text-sub {
-    margin-top: 20px;
-  }
-  .input-content {
-    flex-direction: column;
-  }
-  .btn {
-    width: 100%;
-    margin-left: 0px;
-    margin-top: 10px;
+    @apply w-full flex flex-col justify-start items-center my-40;
   }
   .contact-content-rigth {
-    padding: 20px 15px 20px 15px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    @apply w-full flex flex-col justify-start items-start shadow-xl;
+  }
+  .content-form {
+    @apply w-full flex flex-col justify-center items-start p-40;
+  }
+  .content-contacus {
+    @apply w-full flex justify-start items-center mb-40;
+  }
+  .txt-contactus {
+    color: #414141;
+    font-size: 18px;
+    @apply w-full justify-center items-center uppercase font-semibold;
+  }
+  .validator {
+    @apply w-full;
+  }
+  .text-error {
+    color: red;
+    font-size: 13px;
+    @apply w-full;
+  }
+  input,
+  .input-text {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    font-size: 13px;
+    color: #acaaa6;
+    @apply w-full h-40 pl-10;
+  }
+  textarea,
+  .input-text-rectangule {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    font-size: 13px;
+    color: #acaaa6;
+    @apply w-full h-100 pl-10 pt-10;
+  }
+  .txt-input {
+    color: #414141;
+    font-size: 13px;
+    @apply w-full justify-center items-center capitalize;
+  }
+  .content-bn {
+    @apply w-full flex justify-start items-center;
+  }
+  .btn {
+    background-color: #333b48;
+    font-size: 14px;
+    color: #fff;
+    @apply w-auto h-35 border mt-20 px-20;
+  }
+  .btn:hover {
+    @apply shadow-lg;
+  }
+  .form-cont {
+    @apply w-full flex flex-col justify-start items-center;
+  }
+  .input-content {
+    @apply w-full flex flex-col justify-center items-start;
   }
 }
 @screen md {
-  .contact {
-    @apply w-9/5;
+  .banner-mapa {
+    margin-top: 140px;
+    @apply w-full flex;
+  }
+  .container-contact {
+    margin-top: 20px;
+    @apply flex flex-row justify-center items-center;
+  }
+  .content-grid {
+    @apply w-9/5 flex flex-row;
+  }
+  .left {
+    @apply w-5/0 mr-20;
+  }
+  .contact-content {
+    @apply mb-40 mt-0;
+  }
+  .form-cont {
+    @apply flex-row mb-20;
+  }
+  .txt-input {
+    @apply w-100;
+  }
+  .content-bn {
+    @apply justify-end items-center;
   }
 }
 @screen mlg {
-  .contact {
-    @apply w-9/3;
+  .banner-mapa {
+    margin-top: 0px;
   }
 }
-@media (min-width: 1192px) {
-  .contact {
-    width: 1192px;
+@screen lg {
+  .left {
+    width: 320px;
+  }
+}
+@media (min-width: 1400px) {
+  .container-contact {
+    max-width: 1400px;
   }
 }
 </style>

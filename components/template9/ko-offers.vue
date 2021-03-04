@@ -334,7 +334,7 @@ export default {
     font-size: 36px;
   }
   .txts-right {
-    @apply mb-2;
+    @apply mb-8;
   }
   .right {
     margin-left: 63px;
