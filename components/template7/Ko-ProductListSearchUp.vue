@@ -399,7 +399,8 @@ export default {
 
 <style scoped>
 .product-content {
-  @apply w-full flex flex-col justify-center items-center w-full my-80;
+  @apply w-full flex flex-col justify-center items-center mt-80;
+  margin-bottom: 150px;
 }
 .product-conten-items {
   @apply flex flex-col justify-start items-start  w-full  text-center;
@@ -472,7 +473,7 @@ export default {
   font-family: 'David Libre', serif !important;
 }
 .pagination-medium {
-  margin-top: 10px;
+  margin-top: 40px;
   background: transparent;
 }
 .pagination {
