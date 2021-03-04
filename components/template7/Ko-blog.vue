@@ -145,14 +145,14 @@ export default {
   align-items: center;
 }
 .wrapper-content {
-  @apply flex flex-col justify-center items-center w-full mb-16;
+  @apply flex flex-col justify-center items-center w-full mb-64;
   background: var(--background_color_1);
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;
 }
 .wrapper-content-items {
-  @apply flex flex-col justify-center items-center w-full mb-12 text-center;
+  @apply flex flex-col justify-center items-center w-full mb-48 text-center;
 }
 .wrapper-items-text {
   @apply w-full;

@@ -473,7 +473,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
 .datos-producto {
-  @apply w-full flex flex-col justify-center items-start my-6 ml-2 cursor-default;
+  @apply w-full flex flex-col justify-center items-start my-24 ml-8 cursor-default;
 }
 .container {
   @apply relative max-w-full;

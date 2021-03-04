@@ -303,7 +303,7 @@ export default {
 </script>
 <style scoped>
 .content-tab {
-  @apply w-full flex flex-col justify-center items-center mt-6;
+  @apply w-full flex flex-col justify-center items-center mt-24;
   border-bottom: 1px solid #ededed;
 }
 .head-content {
@@ -311,7 +311,7 @@ export default {
   border-bottom: 1px solid #ededed;
 }
 .tab {
-  @apply w-auto flex flex-col justify-center items-center px-4 cursor-pointer;
+  @apply w-auto flex flex-col justify-center items-center px-16 cursor-pointer;
 }
 .show-select-active {
   background-color: #fff;
@@ -330,7 +330,7 @@ export default {
   letter-spacing: 1px;
 }
 .item-content {
-  @apply w-full flex flex-col justify-start items-start pb-4;
+  @apply w-full flex flex-col justify-start items-start pb-16;
 }
 
 .content_product_description {

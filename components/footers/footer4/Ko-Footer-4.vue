@@ -38,7 +38,20 @@
         </div>
         <KoSocialNet :dataStore="dataStore"></KoSocialNet>
       </div>
+
+      <div class="content-Pliticas-Terminos">
+        <button
+          class="btn"
+          id="myBtn"
+          @click="politica"
+          v-if="dataStore.politicas"
+        >
+          {{ $t('footer_politicasyterminos') }}
+        </button>
+      </div>
+      <div class="separator"></div>
       <div class="madebyKomercia">
+        <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
         <a
           href="https://komercia.co/"
           target="_blank"
@@ -59,14 +72,20 @@
         </a>
       </div>
     </div>
+    <div class="modal" id="myModal" v-if="dataStore.politicas">
+      <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+    </div>
   </div>
 </template>
 
 <script>
 import KoSocialNet from '../../../components/template7/Ko-Social-Networks'
+import KoTermsConditions from '../../../components/footers/ko-TermsAndConditions'
+
 export default {
   components: {
     KoSocialNet,
+    KoTermsConditions,
   },
   name: 'Ko-Footer-4',
   props: {
@@ -118,6 +137,22 @@ export default {
     },
   },
   methods: {
+    politica() {
+      var modal = document.getElementById('myModal')
+      var btn = document.getElementById('myBtn')
+      var span = document.getElementsByClassName('close')[0]
+      btn.onclick = function () {
+        modal.style.display = 'block'
+      }
+      span.onclick = function () {
+        modal.style.display = 'none'
+      }
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = 'none'
+        }
+      }
+    },
     setBg() {
       if (this.settingByTemplate7f['--url_img']) {
         var imagen = document.getElementById('BgFooter')
@@ -173,7 +208,7 @@ export default {
   margin-bottom: 10px;
 }
 .footer-content-items {
-  @apply flex flex-col justify-center items-center w-full my-2;
+  @apply flex flex-col justify-center items-center w-full my-10;
 }
 .footer-logo {
   object-fit: contain;
@@ -181,10 +216,10 @@ export default {
   max-width: var(--with_logo);
 }
 .footer-content-button {
-  @apply w-full flex flex-wrap gap-4 justify-center items-center mt-8;
+  @apply w-full flex flex-wrap gap-4 justify-center items-center mt-32;
 }
 .btn {
-  @apply mx-2 font-semibold uppercase tracking-wider;
+  @apply mx-8 font-semibold uppercase tracking-wider;
   color: var(--color_text);
   transition: all 0.25s ease;
 }
@@ -199,8 +234,24 @@ export default {
   width: 100px;
   opacity: 0.5;
 }
+.separator {
+  max-width: 400px;
+  border: solid 1px #666;
+  background: #666;
+  @apply w-full h-2 opacity-50 my-5;
+}
 .madebyKomercia {
-  @apply mt-4;
+  @apply w-full flex flex-col justify-center items-center;
+}
+.txt-devBy {
+  font-size: 14px;
+  color: #666;
+}
+.modal {
+  padding-top: 200px;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  @apply w-full h-full hidden fixed z-10 left-0 top-0 overflow-auto;
 }
 @screen sm {
   .footer-content {
@@ -208,6 +259,11 @@ export default {
   }
   .btn {
     @apply text-sm;
+  }
+}
+@media (max-width: 600px) {
+  .separator {
+    max-width: 300px;
   }
 }
 @screen md {

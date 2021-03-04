@@ -181,7 +181,7 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .wrapper-content-items {
-  @apply flex flex-col justify-center items-center w-full mb-8 text-center;
+  @apply flex flex-col justify-center items-center w-full mb-32 text-center;
 }
 .wrapper-items-text {
   @apply w-full;
@@ -204,7 +204,7 @@ export default {
   color: var(--color_description);
 }
 .content-bttns-shop {
-  @apply mr-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply mr-8 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
   background: var(--color_background_btn);
   border-radius: var(--radius_btn);
   padding: 12px 20px;
@@ -235,13 +235,11 @@ export default {
   @apply w-full flex justify-start items-center;
 }
 .input-text {
-  @apply w-full flex justify-start items-center border;
+  @apply w-full h-42 flex justify-start items-center border;
   font-family: var(--font-style-3), serif !important;
   border-radius: 30px;
   padding: 0 15px;
   max-width: 100%;
-  width: 100%;
-  height: 42px;
   font-size: 14px;
   border: 2px solid rgba(129, 129, 129, 0.2);
   transition: border-color 0.5s ease;
@@ -265,7 +263,7 @@ export default {
 }
 
 .content-checkbox {
-  @apply w-full flex justify-start items-center ml-8 mt-2;
+  @apply w-full flex justify-start items-center ml-32 mt-8;
 }
 .text-checkbox {
   margin-left: 5px;
@@ -289,13 +287,13 @@ export default {
     font-size: 14px;
   }
   .wrapper-items {
-    @apply flex-col w-9/0 mb-12 items-center;
+    @apply flex-col w-9/0 mb-48 items-center;
   }
   .content-checkbox {
     @apply ml-0;
   }
   .conten-input-check {
-    @apply mb-4;
+    @apply mb-16;
   }
   .content-button {
     @apply justify-center;

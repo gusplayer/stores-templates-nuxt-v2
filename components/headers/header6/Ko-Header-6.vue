@@ -144,7 +144,7 @@ export default {
     KoMenu,
     KoSearch,
   },
-  name: 'Ko-Header-5',
+  name: 'Ko-Header-6',
   props: {
     dataStore: Object,
     settingByTemplate: Object,

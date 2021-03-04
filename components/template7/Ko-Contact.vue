@@ -585,6 +585,7 @@ export default {
   border-radius: var(--radius_btn);
   border: solid 2px var(--color_background_btn);
   background: var(--color_background_btn);
+  font-family: var(--font-style-3), serif !important ;
   padding: 8px 14px;
   font-size: 16px;
   width: 50%;
@@ -596,7 +597,6 @@ export default {
   transition: all 200ms ease-in;
 }
 .btn:hover {
-  font-family: var(--font-style-3), serif !important ;
   color: white;
   border: solid 2px var(--hover_text);
   background-color: var(--hover_text);

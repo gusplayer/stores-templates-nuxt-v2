@@ -62,7 +62,7 @@ export default {
 
 <style scoped>
 .banner {
-  @apply flex flex-col justify-center items-center pt-20;
+  @apply flex flex-col justify-center items-center pt-80;
 }
 .banner-content-items {
   @apply w-full flex flex-col justify-center items-center;
@@ -71,7 +71,7 @@ export default {
   @apply flex flex-row gap-3 justify-center items-center;
 }
 .content-bttns-shop {
-  @apply mr-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply mr-8 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
   border-radius: var(--radius_btn);
   background: var(--color_background_btn);
   padding: 10px 20px;
@@ -81,7 +81,7 @@ export default {
   transition: all 0.2s ease-out;
 }
 .content-bttns-view {
-  @apply ml-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply ml-8 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
   border-radius: var(--radius_btn);
   border: 2px solid var(--color_background_btn_2);
   color: var(--color_background_btn_2);
@@ -111,7 +111,7 @@ export default {
   @apply flex justify-center items-center text-center break-all;
 }
 .banner-content-img {
-  @apply mb-6;
+  @apply mb-24;
 }
 .banner-img {
   @apply flex w-full justify-center items-center;
@@ -140,16 +140,16 @@ export default {
     @apply w-9/5 leading-tight;
   }
   .text-subtittle {
-    @apply w-9/0 mt-4;
+    @apply w-9/0 mt-16;
   }
   .banner-content-items {
     @apply w-full;
   }
   .banner-content-img {
-    @apply mt-6;
+    @apply mt-24;
   }
   .banner-content-buttons {
-    @apply mt-6 mb-10 w-9/0;
+    @apply mt-24 mb-40 w-9/0;
   }
   .content-textbutton-shop {
     @apply text-xs;
@@ -172,7 +172,7 @@ export default {
     @apply w-9/0 text-xl;
   }
   .banner-content-buttons {
-    @apply mt-10 mb-12;
+    @apply mt-40 mb-12;
   }
 }
 @screen lg {
@@ -205,10 +205,10 @@ export default {
     @apply text-6xl;
   }
   .text-subtittle {
-    @apply w-8/3 mt-4;
+    @apply w-8/3 mt-16;
   }
   .banner-content-buttons {
-    @apply my-6 w-9/0;
+    @apply my-24 w-9/0;
   }
   .banner-img {
     @apply w-full;

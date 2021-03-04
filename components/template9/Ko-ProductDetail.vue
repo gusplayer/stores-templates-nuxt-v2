@@ -787,7 +787,7 @@ export default {
   @apply w-full grid grid-cols-1 gap-4 justify-center items-center;
 }
 .content-variant {
-  @apply w-auto flex flex-col justify-center items-start mb-8;
+  @apply w-auto flex flex-col justify-center items-start mb-32;
 }
 .img-list {
   object-fit: cover;

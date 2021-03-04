@@ -110,10 +110,10 @@ export default {
   border-color: var(--color_border);
 }
 .content-bttns-shop {
-  /* @apply mr-2 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider; */
   background: var(--color_background_btn_card);
   border-radius: var(--radius_btn);
-  padding: 12px 20px;
+  padding: 10px 20px;
+  @apply mt-20;
 }
 .content-bttns-shop:hover {
   @apply bg-red-btnbannershophover;
@@ -123,9 +123,8 @@ export default {
   color: var(--color_text_btn_card);
   font-size: 13px;
   line-height: 18px;
-}
-.content-textbutton-shop {
   font-family: var(--font-style-3), serif !important;
+  @apply uppercase font-semibold;
 }
 .advertising-text {
   @apply w-full flex flex-col justify-center items-center;
@@ -138,6 +137,7 @@ export default {
 .subtittle {
   font-family: var(--font-style-3), serif !important;
   color: var(--color_subtext_card);
+  @apply text-center;
 }
 .subtittles-items {
   @apply flex flex-col justify-center items-center pb-4 w-full;

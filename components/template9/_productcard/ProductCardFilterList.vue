@@ -824,7 +824,7 @@ export default {
   padding-bottom: 20px;
 }
 .btn {
-  @apply mt-2 px-4 flex flex-row justify-items-center items-center;
+  @apply mt-8 px-16 flex flex-row justify-items-center items-center;
   font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
   color: white;
   fill: #fff;
@@ -856,7 +856,7 @@ export default {
   line-height: 1;
 }
 .btn-disabled {
-  @apply mt-2 px-4 flex flex-row justify-items-center items-center;
+  @apply mt-8 px-16 flex flex-row justify-items-center items-center;
   font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
   fill: #fff;
   color: white;
@@ -875,7 +875,7 @@ export default {
     border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
 .datos-producto {
-  @apply w-full flex flex-col justify-center items-start my-6 ml-2 cursor-default;
+  @apply w-full flex flex-col justify-center items-start my-24 ml-8 cursor-default;
 }
 .tittle {
   font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
@@ -1022,7 +1022,7 @@ export default {
 }
 @media (min-width: 640px) {
   .producto {
-    @apply grid grid-cols-3 justify-start items-start cursor-pointer pt-4 pb-8;
+    @apply grid grid-cols-3 justify-start items-start cursor-pointer pt-16 pb-32;
   }
   .datos-producto-right {
     @apply w-full flex flex-col justify-items-center items-start;

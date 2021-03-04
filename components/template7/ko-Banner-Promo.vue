@@ -37,9 +37,7 @@
               </span>
               <div class="banner-content-buttons">
                 <button class="content-bttns-shop">
-                  <span class="content-textbutton-shop">
-                    {{ $t('productdetail_btnComprar') }}
-                  </span>
+                  {{ $t('productdetail_btnComprar') }}
                 </button>
               </div>
             </div>
@@ -148,7 +146,7 @@ export default {
   @apply flex flex-row justify-center items-start w-full h-full;
 }
 .banner-medium {
-  @apply grid grid-rows-2 gap-5 mx-5;
+  @apply grid grid-rows-2 gap-5 mx-20;
 }
 figure {
   @apply overflow-hidden m-0 p-0;
@@ -183,21 +181,19 @@ figure {
   @apply flex flex-row gap-3 justify-center items-center;
 }
 .content-bttns-shop {
-  @apply mr-2 px-6 h-36 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider z-10;
-  background: var(--color_background_btn);
+  @apply mr-8 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider text-12;
   border-radius: var(--radius_btn);
+  background: var(--color_background_btn);
+  color: var(--color_text_btn);
+  font-family: var(--font-style-3), serif !important;
+  padding: 10px 20px;
 }
 .content-bttns-shop:hover {
   cursor: pointer;
   background: var(--hover_text);
   transition: all 0.2s ease-out;
 }
-.content-textbutton-shop {
-  color: var(--color_text_btn);
-}
-.content-textbutton-shop {
-  @apply text-xs;
-}
+
 #promo-banner-text-1,
 #promo-banner-text-4 {
   @apply flex justify-center items-center;
@@ -476,12 +472,12 @@ figure {
     font-size: 14px;
   }
   #promo-banner-text-1 {
-    @apply pb-24 leading-normal;
+    @apply pb-96 leading-normal;
     width: 300px;
     max-width: 300px;
   }
   #promo-banner-text-4 {
-    @apply pb-40 leading-normal;
+    @apply pb-100 leading-normal;
   }
   #promo-banner-tittle-2,
   #promo-banner-tittle-3,
@@ -518,73 +514,7 @@ figure {
     padding-left: 110px;
   }
 }
-/* @media (min-width: 1240px) {
-  .banner-border-1 {
-    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
-    padding-top: 230px;
-    padding-left: 230px;
-  }
-  .banner-border-2 {
-    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
-    padding-top: 230px;
-    padding-left: 130px;
-  }
-} */
-/* @screen mlg {
-  .promo-banner-items {
-    @apply w-9/3;
-  }
-  #promo-banner-tittle-1 {
-    line-height: 58px;
-    font-size: 48px;
-  }
-  #promo-banner-tittle-2 {
-    line-height: 42px;
-    font-size: 32px;
-  }
-  #promo-banner-tittle-3 {
-    line-height: 42px;
-    font-size: 32px;
-  }
-  #promo-banner-tittle-4 {
-    line-height: 42px;
-    font-size: 32px;
-  }
-  .promo-banner-subtittle {
-    line-height: 58px;
-    font-size: 14px;
-  }
-  .banner-border-1 {
-    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
-    padding-top: 216px;
-    padding-bottom: 216px;
 
-    padding-left: 218px;
-    padding-right: 219px;
-  }
-  .banner-border-2 {
-    @apply absolute border-4 border-white-white border-opacity-50 z-auto;
-    padding-top: 216px;
-    padding-bottom: 216px;
-
-    padding-left: 117px;
-    padding-right: 118px;
-  }
-  #promo-banner-subtittle-medium {
-    @apply leading-tight;
-  }
-  #promo-banner-text-1 {
-    @apply pb-40 leading-normal;
-  }
-  #promo-banner-text-4 {
-    @apply pb-56 leading-normal;
-  }
-  #promo-banner-tittle-2,
-  #promo-banner-tittle-3,
-  #promo-banner-subtittle-medium {
-    @apply leading-normal;
-  }
-} */
 @media (min-width: 1192px) {
   .promo-banner-items {
     width: 1192px;
@@ -631,7 +561,8 @@ figure {
     /* height: 400px; */
   }
   #promo-banner-text-4 {
-    @apply pb-56 leading-normal;
+    @apply leading-normal;
+    padding-bottom: 224px;
   }
   #promo-banner-tittle-2,
   #promo-banner-tittle-3,

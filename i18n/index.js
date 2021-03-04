@@ -201,6 +201,7 @@ export default {
     home_email: 'Email',
     home_mensaje: 'Mensaje',
     home_telefono: 'Teléfono',
+    home_valorEnvio: 'Valor de envio',
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
@@ -455,6 +456,8 @@ export default {
     home_email: 'E-mail',
     home_mensaje: 'Message',
     home_telefono: 'Phone',
+    home_valorEnvio: 'Shipping value',
+
     //productdetail
     productdetail_garantia: 'Warranty:',
     productdetail_btnComprar: 'Purchase',
@@ -710,6 +713,8 @@ export default {
     home_email: 'E-mail',
     home_mensaje: 'Mensagem',
     home_telefono: 'Telefone',
+    home_valorEnvio: 'Valor do frete',
+
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',

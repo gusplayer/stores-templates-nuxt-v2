@@ -24,12 +24,14 @@ import axios from 'axios'
 import KoMicompra05 from '../components/miCompra/Ko-miCompra-1'
 import KoMicompra07 from '../components/template7/Ko-miCompra'
 import KoMicompra09 from '../components/template9/Ko-miCompra'
+import KoMicompra10 from '../components/template10/Ko-miCompra'
 
 export default {
   components: {
     KoMicompra05,
     KoMicompra07,
     KoMicompra09,
+    KoMicompra10,
   },
   asyncData({ route, store }) {
     if (route.query.orden) {
@@ -97,6 +99,9 @@ export default {
           break
         case 9:
           productListComponent = 'KoMicompra09'
+          break
+        case 10:
+          productListComponent = 'KoMicompra10'
           break
       }
       return productListComponent

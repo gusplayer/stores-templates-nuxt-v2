@@ -65,23 +65,6 @@
               />
             </svg>
           </div>
-
-          <!-- <div class="agotado-icon">
-            <svg
-              class="block-icon"
-              v-if="soldOut"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="#333"
-              width="100%"
-              height="100%"
-            >
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9C4.63 15.55 4 13.85 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1C19.37 8.45 20 10.15 20 12c0 4.42-3.58 8-8 8z"
-              />
-            </svg>
-          </div> -->
         </div>
       </div>
       <div class="overlay-free" v-if="getFreeShipping == false && !soldOut">
@@ -198,7 +181,7 @@
           @mouseleave="hover = false"
         >
           <div class="text-cart" v-if="!hover">
-            <p class="w-full">{{ $t('productdetail_añadiralcarrito') }}</p>
+            <p class="txt-cart">{{ $t('productdetail_añadiralcarrito') }}</p>
           </div>
           <div class="icon-cart" v-if="hover">
             <cart-icon class="icon" />
@@ -582,10 +565,10 @@ export default {
   color: #333;
 }
 .producto-productCard {
-  @apply flex flex-col justify-center items-center cursor-pointer mt-8;
+  @apply flex flex-col justify-center items-center cursor-pointer mt-20;
 }
 .datos-producto {
-  @apply w-full flex flex-col justify-center items-center pt-4;
+  @apply w-full flex flex-col justify-center items-center pt-16;
 }
 .container-productCard {
   @apply relative w-full;
@@ -678,15 +661,18 @@ export default {
   transform: translate(-50%, -50%);
   white-space: nowrap;
 }
-.overlay-bottom {
-  background: var(--color_background_btn_card);
-}
+
 @screen sm {
   .text-cart {
     @apply hidden;
   }
+  .txt-cart {
+    @apply w-full;
+    color: var(--color_text_btn_card);
+  }
   .overlay-bottom {
     @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
+    background: var(--color_background_btn_card);
     width: 20%;
     height: 20%;
     left: 10px;

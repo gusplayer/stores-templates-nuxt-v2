@@ -449,7 +449,7 @@ export default {
   color: var(--color_hover_text);
 }
 .close-container {
-  @apply relative h-50 cursor-pointer flex justify-center items-center;
+  @apply relative h-40 cursor-pointer flex justify-center items-center;
 }
 .leftright {
   @apply h-4 w-30 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
@@ -468,23 +468,23 @@ export default {
   @apply bg-gray-textHeader;
 }
 .search-content {
-  @apply flex flex-row w-full items-center shadow-xl py-2;
+  @apply flex flex-row w-full items-center shadow-xl py-14;
 }
 .search-input-content {
   @apply w-full;
 }
 .input-search {
-  @apply px-2 py-2 w-full;
+  @apply px-10 py-2 w-full;
 }
 ::-webkit-input-placeholder {
   font-family: 'Lora', serif !important;
   @apply text-gray-textHeader;
 }
 .search-icon-content {
-  @apply w-auto h-auto justify-center items-center px-3 cursor-pointer;
+  @apply w-auto h-auto justify-center items-center px-12 cursor-pointer;
 }
 .icon-search {
-  @apply w-6 h-6 text-gray-textHeader;
+  @apply w-24 h-24 text-gray-textHeader;
 }
 .content-lateral-menu {
   @apply w-full flex flex-col justify-center items-center;
@@ -551,20 +551,20 @@ export default {
   @apply w-full grid grid-cols-1 justify-start items-center;
 }
 .btn {
-  @apply w-full flex font-semibold  uppercase tracking-wider  py-3 pl-4;
+  @apply w-full flex font-semibold  uppercase tracking-wider py-15 pl-20;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
   font-family: 'Lora', serif !important;
   color: #2d2a2a;
   font-size: 13px;
 }
 .btn-category {
-  @apply w-full flex font-semibold uppercase tracking-wider py-3 pl-4;
+  @apply w-full flex font-semibold uppercase tracking-wider py-15 pl-20;
   color: #2d2a2a;
   font-size: 13px;
   font-family: 'Lora', serif !important;
 }
 .btn-category-all {
-  @apply w-full flex font-semibold uppercase tracking-wider py-3 pl-4;
+  @apply w-full flex font-semibold uppercase tracking-wider py-15 pl-20;
   color: #2d2a2a;
   font-size: 13px;
   font-family: 'Lora', serif !important;
