@@ -144,7 +144,8 @@ export default {
     }
     if (
       this.dataStore.tienda.id_tienda == 5574 ||
-      this.dataStore.tienda.id_tienda == 5347
+      this.dataStore.tienda.id_tienda == 5347 ||
+      this.dataStore.tienda.id_tienda == 6369
     ) {
       this.showLogo = false
     }
