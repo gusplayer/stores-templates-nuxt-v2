@@ -71,7 +71,16 @@ export default {
     '@nuxtjs/gtm',
     'vue-sweetalert2/nuxt',
   ],
-  buildModules: ['@nuxtjs/tailwindcss'],
+  buildModules: ['@nuxtjs/tailwindcss', 'nuxt-purgecss'],
+  purgeCSS: {},
+  '@fullhuman/postcss-purgecss': {
+    content: [
+      './pages/**/*.vue',
+      './layouts/**/*.vue',
+      './components/**/*.vue',
+    ],
+    safelist: ['html', 'body'],
+  },
   debug: {
     enabled: true,
   },
@@ -84,7 +93,21 @@ export default {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
     },
+    // extractCSS: true,
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.(css|vue)$/,
+            chunks: 'all',
+            enforce: true,
+          },
+        },
+      },
+    },
   },
+
   router: {
     base: '/',
   },
