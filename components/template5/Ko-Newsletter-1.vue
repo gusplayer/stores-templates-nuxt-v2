@@ -34,10 +34,10 @@
         </button>
       </div>
       <div class="content-checkbox">
-        <input type="checkbox" id="checkbox" v-model="checked" />
-        <p class="text-checkbox">
+        <input id="checkboxNewsletter" type="checkbox" v-model="checked" />
+        <label for="checkboxNewsletter" class="text-checkbox">
           {{ $t('newsletter_msg') }}
-        </p>
+        </label>
       </div>
     </div>
   </div>

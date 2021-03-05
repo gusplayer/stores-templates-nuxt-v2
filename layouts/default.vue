@@ -143,6 +143,10 @@ export default {
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
     return {
       title: tienda.nombre ? tienda.nombre : 'Tienda',
+      htmlAttrs: {
+        lang: 'es',
+        amp: true,
+      },
       meta: [
         { hid: 'utf-8', charset: 'utf-8' },
         {
@@ -157,7 +161,7 @@ export default {
             'width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0',
         },
         { hid: 'description', name: 'description', content: description },
-        { hid: 'subject', name: 'subject', content: 'tienda de ropa' },
+        { hid: 'subject', name: 'subject', content: 'Tienda Online' },
         { hid: 'summary', name: 'summary', content: description },
         {
           hid: 'url',
@@ -225,6 +229,10 @@ export default {
         {
           name: 'facebook-domain-verification',
           content: `${FacebookPixel1}`,
+        },
+        {
+          name: ' google',
+          content: ' notranslate',
         },
       ],
       script: [
