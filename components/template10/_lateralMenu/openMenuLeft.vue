@@ -154,8 +154,8 @@ export default {
           //icon: 'account-icon',
         },
         {
-          name: 'footer_micompra',
-          path: '/micompra',
+          name: 'header_carrito',
+          path: '/cart',
         },
         {
           name: 'header_blog',
