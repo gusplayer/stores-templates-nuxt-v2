@@ -32,9 +32,13 @@
       </div>
     </div>
     <div class="under-footer">
-      <div class="contenedor-term-con" v-if="dataStore.politicas">
-        <label for="modal-toggle"> {{ $t('footer_politicasyterminos') }}</label>
-      </div>
+      <button
+        class="contenedor-term-con"
+        v-if="dataStore.politicas"
+        @click="OpenModalPolitics"
+      >
+        <p>{{ $t('footer_politicasyterminos') }}</p>
+      </button>
       <div class="separator"></div>
       <p v-if="this.showLogo == true">
         {{ $t('footer_desarrollado') }}
@@ -70,70 +74,22 @@
         />
       </nuxt-link>
     </div>
-    <div class="modal-container" v-if="dataStore.politicas">
-      <input type="checkbox" id="modal-toggle" />
-      <label class="modal-backdrop" for="modal-toggle"></label>
-      <div class="modal-content">
-        <div class="header-modal">
-          <p class="text-top-bold">{{ $t('footer_condicionesLegales') }}</p>
-          <label class="modal-close-btn" for="modal-toggle">
-            <close-icon class="close-icon-modal" />
-          </label>
-        </div>
-        <div class="tabs">
-          <div class="tab" v-if="this.dataStore.politicas.cambio">
-            <input id="tab-one" type="checkbox" name="tabs" />
-            <label for="tab-one">{{ $t('footer_politicaCambio') }}</label>
-            <div class="tab-content">
-              <div v-html="this.dataStore.politicas.cambio"></div>
-            </div>
-          </div>
-          <div class="tab" v-if="this.dataStore.politicas.datos">
-            <input id="tab-two" type="checkbox" name="tabs" />
-            <label for="tab-two">{{ $t('footer_politicaTratamientos') }}</label>
-            <div class="tab-content">
-              <div v-html="this.dataStore.politicas.datos"></div>
-            </div>
-          </div>
-          <div class="tab" v-if="this.dataStore.politicas.devolucion">
-            <input id="tab-three" type="checkbox" name="tabs" />
-            <label for="tab-three">{{
-              $t('footer_politicaDevoluciones')
-            }}</label>
-            <div class="tab-content">
-              <div v-html="this.dataStore.politicas.devolucion"></div>
-            </div>
-          </div>
-          <div class="tab" v-if="this.dataStore.politicas.garantia">
-            <input id="tab-four" type="checkbox" name="tabs" />
-            <label for="tab-four">{{ $t('footer_politicaGarantia') }}</label>
-            <div class="tab-content">
-              <div v-html="this.dataStore.politicas.garantia"></div>
-            </div>
-          </div>
-          <div class="tab" v-if="this.dataStore.politicas.envios">
-            <input id="tab-five" type="checkbox" name="tabs" />
-            <label for="tab-five">{{ $t('footer_politicaEnvios') }}</label>
-            <div class="tab-content">
-              <div v-html="this.dataStore.politicas.envios"></div>
-            </div>
-          </div>
-          <div class="tab" v-if="this.dataStore.politicas.pagos">
-            <input id="tab-six" type="checkbox" name="tabs" />
-            <label for="tab-six">{{ $t('footer_politicaPagos') }}</label>
-            <div class="tab-content">
-              <div v-html="this.dataStore.politicas.pagos"></div>
-            </div>
-          </div>
-        </div>
+    <div v-if="showModal">
+      <div class="modal" v-if="dataStore.politicas">
+        <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import KoTermsConditions from '../ko-TermsAndConditions'
+
 export default {
   name: 'Ko-Footer-1',
+  components: {
+    KoTermsConditions,
+  },
   props: {
     dataStore: Object,
     settingByTemplate: Object,
@@ -204,8 +160,14 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos.length
     },
+    showModal() {
+      return this.$store.state.modalpolitics05
+    },
   },
   methods: {
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
+    },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
         '--background_color_1'
@@ -327,7 +289,7 @@ export default {
   align-items: center;
   margin-bottom: 5px;
 }
-.contenedor-term-con label {
+.contenedor-term-con p {
   font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
@@ -350,157 +312,11 @@ export default {
   width: 100px;
   opacity: 0.7;
 }
-#modal-toggle {
-  display: none;
-}
-.modal-content::-webkit-scrollbar {
-  background: white;
-  width: 10px;
-  border-top-right-radius: var(--radius_btn);
-  border-bottom-right-radius: var(--radius_btn);
-}
-.modal-content::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px white;
-  border-radius: 10px;
-}
-.modal-content::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 10px;
-}
-.modal-content,
-.modal-backdrop {
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  position: fixed;
-  z-index: -1;
-  overflow: hidden;
-  cursor: pointer;
-}
-.modal-backdrop {
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-}
-#modal-toggle:checked ~ .modal-backdrop {
-  opacity: 1;
-  z-index: 15;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-#modal-toggle:checked ~ .modal-content {
-  opacity: 1;
-  z-index: 15;
-  background-color: #fff;
-  overflow: auto;
-  pointer-events: auto;
-  cursor: auto;
-  border-radius: var(--radius_btn);
-}
-.modal-content {
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  left: 0;
-  right: 0;
-  width: 100%;
-  padding: 10px;
-  max-height: 450px;
-  max-width: 1000px;
-}
-.header-modal {
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.modal-close-btn {
-  display: inline-block;
-  cursor: pointer;
-  right: 10px;
-}
-.close-icon-modal {
-  font-size: 30px;
-  color: black;
-}
-.close-icon-modal:hover {
-  color: gray;
-}
-.modal-close-btn svg {
-  transition: 0.2s;
-}
-.modal-close-btn:hover svg {
-  transform: rotate(90deg);
-}
-.tabs {
-  width: 100%;
-  padding: 10px 20px;
-}
-.tab {
-  position: relative;
-  margin-bottom: 5px;
-  width: 100%;
-  color: #000;
-  overflow: hidden;
-}
-.tab input {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-}
-.tab label {
-  position: relative;
-  display: block;
-  padding: 0 0 0 1em;
-  background: #e6e6e6;
-  color: var(--color_text);
-  font-weight: bold;
-  line-height: 3;
-  cursor: pointer;
-}
-.tab-content {
-  max-height: 0;
-  overflow: hidden;
-  color: black;
-  background: white;
-  border: 1px solid #e6e6e6;
-  -webkit-transition: max-height 0.35s;
-  -o-transition: max-height 0.35s;
-  transition: max-height 0.35s;
-}
-.tab-content div {
-  color: black;
-  margin: 1em;
-}
-.tab input:checked ~ .tab-content {
-  max-height: 100%;
-}
-.tab label::after {
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: block;
-  width: 3em;
-  height: 3em;
-  line-height: 3;
-  text-align: center;
-  -webkit-transition: all 0.35s;
-  -o-transition: all 0.35s;
-  transition: all 0.35s;
-}
-.tab input[type='checkbox'] + label::after {
-  color: var(--color_subtext);
-  content: '+';
-}
-.tab input[type='radio'] + label::after {
-  content: '\25BC';
-}
-.tab input[type='checkbox']:checked + label::after {
-  transform: rotate(315deg);
-}
-.tab input[type='radio']:checked + label::after {
-  transform: rotateX(180deg);
+.modal {
+  padding-top: 200px;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
 }
 .wrapper-logo-tablada {
   width: 100%;

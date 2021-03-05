@@ -28,8 +28,7 @@
       <div class="content-Pliticas-Terminos">
         <button
           class="btn"
-          id="myBtn"
-          @click="politica"
+          @click="OpenModalPolitics"
           v-if="dataStore.politicas"
         >
           {{ $t('footer_politicasyterminos') }}
@@ -58,8 +57,10 @@
         </a>
       </div>
     </div>
-    <div class="modal" id="myModal" v-if="dataStore.politicas">
-      <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+    <div v-if="showModal">
+      <div class="modal" v-if="dataStore.politicas">
+        <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+      </div>
     </div>
   </div>
 </template>
@@ -116,23 +117,13 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos.length
     },
+    showModal() {
+      return this.$store.state.modalpolitics05
+    },
   },
   methods: {
-    politica() {
-      var modal = document.getElementById('myModal')
-      var btn = document.getElementById('myBtn')
-      var span = document.getElementsByClassName('close')[0]
-      btn.onclick = function () {
-        modal.style.display = 'block'
-      }
-      span.onclick = function () {
-        modal.style.display = 'none'
-      }
-      window.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = 'none'
-        }
-      }
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
@@ -212,7 +203,7 @@ export default {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full hidden fixed z-10 left-0 top-0 overflow-auto;
+  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
 }
 @media (max-width: 600px) {
   .separator {

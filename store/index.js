@@ -180,6 +180,7 @@ export const state = () => ({
     text_btn: 'Conócenos',
   },
   headerk07: false,
+  modalpolitics05: false,
 })
 
 export const mutations = {

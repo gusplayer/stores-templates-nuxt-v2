@@ -2,7 +2,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <p class="txt-Legal">{{ $t('footer_condicionesLegales') }}</p>
-      <span class="close">&times;</span>
+      <span class="close" @click="closeModalpolitics">&times;</span>
     </div>
     <div class="content-items-modal">
       <button
@@ -88,7 +88,6 @@ export default {
   mounted() {
     var acc = document.getElementsByClassName('accordion')
     var i
-
     for (i = 0; i < acc.length; i++) {
       acc[i].addEventListener('click', function () {
         this.classList.toggle('active')
@@ -104,6 +103,11 @@ export default {
         }
       })
     }
+  },
+  methods: {
+    closeModalpolitics() {
+      this.$store.state.modalpolitics05 = false
+    },
   },
 }
 </script>
