@@ -148,10 +148,6 @@ export default {
         amp: true,
       },
       meta: [
-        {
-          name: ' google',
-          content: ' notranslate',
-        },
         { hid: 'utf-8', charset: 'utf-8' },
         {
           hid: 'x-ua-compatible',
@@ -233,6 +229,10 @@ export default {
         {
           name: 'facebook-domain-verification',
           content: `${FacebookPixel1}`,
+        },
+        {
+          name: ' google',
+          content: ' notranslate',
         },
       ],
       script: [
