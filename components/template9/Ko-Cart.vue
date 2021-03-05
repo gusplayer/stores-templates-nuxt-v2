@@ -32,6 +32,7 @@
                         viewBox="0 0 24 24"
                         fill="#222"
                       >
+                        <title>Eliminar de carrito</title>
                         <path d="M0 0h24v24H0z" fill="none" />
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path
@@ -131,6 +132,7 @@
                     viewBox="0 0 24 24"
                     fill="#222"
                   >
+                    <title>Eliminar de carrito</title>
                     <path d="M0 0h24v24H0z" fill="none" />
                     <path d="M0 0h24v24H0V0z" fill="none" />
                     <path
