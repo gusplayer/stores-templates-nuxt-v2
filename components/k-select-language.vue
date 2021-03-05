@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-dropdown">
     <el-dropdown>
-      <span class="el-dropdown-link">
+      <span class="el-dropdown-link" aria-haspopup = "list">
         {{ select.label }}<Flechadown-icon class="icon-dropdown" />
       </span>
       <el-dropdown-menu slot="dropdown">

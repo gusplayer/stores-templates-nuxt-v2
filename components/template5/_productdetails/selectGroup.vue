@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-select">
-    <h4 class="title-input">{{ label }}</h4>
+    <h4 class="title-input" lang="es">{{ label }}</h4>
     <div class="select">
       <select
         name="format"

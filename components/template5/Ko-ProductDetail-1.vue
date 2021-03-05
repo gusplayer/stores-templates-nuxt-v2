@@ -131,7 +131,7 @@
             </div>
             <div v-if="this.data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
-                <label for="variant name" class="text-variant"
+                <label lang="es" for="variant name" class="text-variant"
                   >{{ variant.nombre }}:</label
                 >
                 <selectGroup :index="index" :variantes="data.variantes">
@@ -535,7 +535,7 @@ export default {
               })
             }
             if (response && response.data) {
-              this.sharing.url = window.location.href              
+              this.sharing.url = window.location.href
               this.sharing.quote = `Explora%20el%20producto%20${response.data.detalle.nombre}%2C%20te%20van%20a%20encantar.%0ALink%20del%20producto%3A%20${this.sharing.url}`
               this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
             }
