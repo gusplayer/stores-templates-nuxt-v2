@@ -47,6 +47,7 @@ export default {
     'swiper/dist/css/swiper.css',
     'core-components-npm/dist/ko.css',
   ],
+
   plugins: [
     '~/plugins/core-components-npm',
     '~/plugins/element',
@@ -58,9 +59,9 @@ export default {
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
-    { src: '~plugins/ga.js', mode: 'client' },
-    { src: '~/plugins/gtm', mode: 'client' },
-    { src: '~/plugins/facebook-pixel', mode: 'client' },
+    { src: '~plugins/ga.js', ssr: false },
+    { src: '~/plugins/gtm', ssr: false },
+    { src: '~/plugins/facebook-pixel', ssr: false },
     { src: '~/plugins/countryFlags.js', ssr: false },
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/element-tiptap', ssr: false },
@@ -71,9 +72,30 @@ export default {
     '@nuxtjs/gtm',
     'vue-sweetalert2/nuxt',
   ],
-  buildModules: ['@nuxtjs/tailwindcss'],
+  buildModules: ['@nuxtjs/tailwindcss', 'nuxt-purgecss'],
+  purgeCSS: {},
+  '@fullhuman/postcss-purgecss': {
+    content: [
+      './pages/**/*.vue',
+      './layouts/**/*.vue',
+      './components/**/*.vue',
+    ],
+    safelist: ['html', 'body'],
+  },
   debug: {
     enabled: true,
+  },
+  pwa: {
+    icon: false,
+    meta: {
+      title: process.env.npm_package_name || '',
+      author: 'Komercia',
+    },
+    manifest: {
+      name: process.env.npm_package_name || '',
+      short_name: process.env.npm_package_name || '',
+      lang: 'es',
+    },
   },
   axios: {},
   build: {
@@ -84,7 +106,21 @@ export default {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
     },
+    // extractCSS: true,
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.(css|vue)$/,
+            chunks: 'all',
+            enforce: true,
+          },
+        },
+      },
+    },
   },
+
   router: {
     base: '/',
   },
