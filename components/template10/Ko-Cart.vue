@@ -722,7 +722,7 @@ export default {
     @apply w-full flex flex-col justify-center items-center;
   }
   .content-items-product {
-    @apply p-25;
+    @apply py-20;
   }
   .product {
     border-color: #efefef;
@@ -783,6 +783,9 @@ export default {
 @screen md {
   .product {
     @apply grid grid-cols-3;
+  }
+  .content-items-product {
+    @apply p-25;
   }
   .producto-price-total {
     @apply hidden;
