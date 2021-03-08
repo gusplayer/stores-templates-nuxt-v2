@@ -13,15 +13,13 @@ import '..\\node_modules\\swiper\\dist\\css\\swiper.css'
 
 import '..\\node_modules\\core-components-npm\\dist\\ko.css'
 
-import _6c3374f9 from './layouts.tw.39531a9c.vue'
 import _8b6b8a5a from '..\\layouts\\constructor-layout.vue'
 import _6f6c098b from '..\\layouts\\default.vue'
-import _6c337394 from '..\\layouts\\ig.vue'
 import _6541a79f from '..\\layouts\\unicentro.vue'
 import _6c337540 from '..\\layouts\\wa.vue'
 import _6c33754f from '..\\layouts\\wp.vue'
 
-const layouts = { "_tw": sanitizeComponent(_6c3374f9),"_constructor-layout": sanitizeComponent(_8b6b8a5a),"_default": sanitizeComponent(_6f6c098b),"_ig": sanitizeComponent(_6c337394),"_unicentro": sanitizeComponent(_6541a79f),"_wa": sanitizeComponent(_6c337540),"_wp": sanitizeComponent(_6c33754f) }
+const layouts = { "_constructor-layout": sanitizeComponent(_8b6b8a5a),"_default": sanitizeComponent(_6f6c098b),"_unicentro": sanitizeComponent(_6541a79f),"_wa": sanitizeComponent(_6c337540),"_wp": sanitizeComponent(_6c33754f) }
 
 export default {
   render (h, props) {
@@ -75,7 +73,8 @@ export default {
   },
   created () {
     // Add this.$nuxt in child instances
-    Vue.prototype.$nuxt = this
+    this.$root.$options.$nuxt = this
+
     if (process.client) {
       // add to window so we can listen when ready
       window.$nuxt = this
@@ -169,15 +168,24 @@ export default {
       }
       this.$loading.finish()
     },
-
     errorChanged () {
-      if (this.nuxt.err && this.$loading) {
-        if (this.$loading.fail) {
-          this.$loading.fail(this.nuxt.err)
+      if (this.nuxt.err) {
+        if (this.$loading) {
+          if (this.$loading.fail) {
+            this.$loading.fail(this.nuxt.err)
+          }
+          if (this.$loading.finish) {
+            this.$loading.finish()
+          }
         }
-        if (this.$loading.finish) {
-          this.$loading.finish()
+
+        let errorLayout = (NuxtError.options || NuxtError).layout;
+
+        if (typeof errorLayout === 'function') {
+          errorLayout = errorLayout(this.context)
         }
+
+        this.setLayout(errorLayout)
       }
     },
 

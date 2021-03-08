@@ -595,23 +595,19 @@ export default {
       }
     },
     errorMessage() {
-      this.$swal({
-        title: 'Esta orden no existe',
-        text: 'El número de la orden o el usuario son incorrectos',
-        showCloseButton: true,
-        confirmButtonText: 'Aceptar',
-        backdrop: 'rgba(14,47,90,0.6)',
-        icon: 'error',
+      this.$message.error({
+        dangerouslyUseHTMLString: true,
+        message:
+          '<strong>Esta orden no existe</strong><p>El número de la orden o el usuario son incorrectos</p>',
+        duration: 4000,
       })
     },
     errorMessageTwo() {
-      this.$swal({
-        title: 'Esta orden no existe',
-        text: 'El número de la orden o la cédula son incorrectos',
-        showCloseButton: true,
-        confirmButtonText: 'Aceptar',
-        backdrop: 'rgba(14,47,90,0.6)',
-        icon: 'error',
+      this.$message.error({
+        dangerouslyUseHTMLString: true,
+        message:
+          '<strong>Esta orden no existe</strong><p>El número de la orden o la cédula son incorrectos</p>',
+        duration: 4000,
       })
     },
   },

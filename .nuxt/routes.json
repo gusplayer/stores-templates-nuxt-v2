@@ -1,11 +1,5 @@
 [
   {
-    "name": "_tailwind",
-    "path": "/_tailwind",
-    "component": "C:\\Users\\migue\\OneDrive\\Documentos\\Komercia\\template-nuxt-dokku\\node_modules\\@nuxtjs\\tailwindcss\\lib\\ui\\pages\\index.vue",
-    "_name": "_6dead19d"
-  },
-  {
     "name": "blog",
     "path": "/blog",
     "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\index.vue",
@@ -41,13 +35,6 @@
     "_name": "_d502c140"
   },
   {
-    "name": "ig",
-    "path": "/ig",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\index.vue",
-    "chunkName": "pages/ig/index",
-    "_name": "_5b9d239a"
-  },
-  {
     "name": "micompra",
     "path": "/micompra",
     "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\micompra.vue",
@@ -60,6 +47,13 @@
     "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\index.vue",
     "chunkName": "pages/productos/index",
     "_name": "_40f254f0"
+  },
+  {
+    "name": "template10",
+    "path": "/template10",
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template10\\\\index.vue",
+    "chunkName": "pages/template10/index",
+    "_name": "_1c4a2d58"
   },
   {
     "name": "template5",
@@ -90,6 +84,13 @@
     "_name": "_188347b6"
   },
   {
+    "name": "template9",
+    "path": "/template9",
+    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template9\\\\index.vue",
+    "chunkName": "pages/template9/index",
+    "_name": "_091ffcf8"
+  },
+  {
     "name": "unicentro",
     "path": "/unicentro",
     "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\unicentro\\\\index.vue",
@@ -97,25 +98,11 @@
     "_name": "_146f03ee"
   },
   {
-    "name": "ig-contacto",
-    "path": "/ig/contacto",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\contacto.vue",
-    "chunkName": "pages/ig/contacto",
-    "_name": "_bb06f204"
-  },
-  {
     "name": "template6-index_macrobrand",
     "path": "/template6/index_macrobrand",
     "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index_macrobrand.vue",
     "chunkName": "pages/template6/index_macrobrand",
     "_name": "_3702577a"
-  },
-  {
-    "name": "ig-productos-slug",
-    "path": "/ig/productos/:slug?",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\ig\\\\productos\\\\_slug.vue",
-    "chunkName": "pages/ig/productos/_slug",
-    "_name": "_419f1d46"
   },
   {
     "name": "blog-slug",
@@ -133,14 +120,14 @@
   },
   {
     "name": "wa-slug",
-    "path": "/wa/:slug?",
+    "path": "/wa/:slug",
     "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\index.vue",
     "chunkName": "pages/wa/_slug/index",
     "_name": "_38e9a7e3"
   },
   {
     "name": "wp-slug",
-    "path": "/wp/:slug?",
+    "path": "/wp/:slug",
     "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wp\\\\_slug\\\\index.vue",
     "chunkName": "pages/wp/_slug/index",
     "_name": "_45e56232"

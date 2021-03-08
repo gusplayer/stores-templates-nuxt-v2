@@ -5,7 +5,6 @@ export default {
     title: process.env.npm_package_name || '',
     htmlAttrs: {
       lang: 'es',
-      amp: true,
     },
     meta: [
       { charset: 'utf-8' },
@@ -52,7 +51,6 @@ export default {
     '~/plugins/core-components-npm',
     '~/plugins/element',
     '~/plugins/mixinCommonMethods',
-    '~/plugins/cloudinary',
     '~/plugins/material-icons',
     '~plugins/validate.js',
     { src: '~/plugins/i18n' },
@@ -66,12 +64,7 @@ export default {
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/element-tiptap', ssr: false },
   ],
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    '@nuxtjs/gtm',
-    'vue-sweetalert2/nuxt',
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/gtm'],
   buildModules: ['@nuxtjs/tailwindcss'],
   debug: {
     enabled: true,
@@ -96,19 +89,6 @@ export default {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
-    },
-    // extractCSS: true,
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          styles: {
-            name: 'styles',
-            test: /\.(css|vue)$/,
-            chunks: 'all',
-            enforce: true,
-          },
-        },
-      },
     },
   },
 
