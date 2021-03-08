@@ -53,7 +53,6 @@ export default {
       title: tienda.nombre ? tienda.nombre : 'Tienda',
       htmlAttrs: {
         lang: 'es',
-        amp: true,
       },
       meta: [
         { hid: 'utf-8', charset: 'utf-8' },
