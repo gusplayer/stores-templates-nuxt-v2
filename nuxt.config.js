@@ -72,16 +72,7 @@ export default {
     '@nuxtjs/gtm',
     'vue-sweetalert2/nuxt',
   ],
-  buildModules: ['@nuxtjs/tailwindcss', 'nuxt-purgecss'],
-  purgeCSS: {},
-  '@fullhuman/postcss-purgecss': {
-    content: [
-      './pages/**/*.vue',
-      './layouts/**/*.vue',
-      './components/**/*.vue',
-    ],
-    safelist: ['html', 'body'],
-  },
+  buildModules: ['@nuxtjs/tailwindcss'],
   debug: {
     enabled: true,
   },
