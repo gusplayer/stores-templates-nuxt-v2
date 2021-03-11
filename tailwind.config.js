@@ -1,9 +1,8 @@
 module.exports = {
-  future: {
-    // removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
-  },
-  purge: false,
+  // future: {
+  //   purgeLayersByDefault: true,
+  //   defaultLineHeights: true,
+  // },
   theme: {
     extend: {
       width: {
@@ -2336,7 +2335,6 @@ module.exports = {
       colors: {
         black: '#000',
         white: '#fff',
-
         redes: {
           twitter: '#00acee',
           facebook: '#3b5998',
@@ -2387,28 +2385,8 @@ module.exports = {
         // => @media (min-width: 2560) { ... }
       },
       backgroundImage: (theme) => ({
-        footerbg:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610007327/Komercia/Footer/flowers-footer-bg_bkpqsk.jpg')",
-        bannerbg1:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610007011/Komercia/Carousel-Slider/flowers-slider-1-bg-opt_pjvepv.jpg')",
-        bannerbg2:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610007015/Komercia/Carousel-Slider/flowers-slider-2-bg_bjeems.jpg')",
-        bannerbg3:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610007018/Komercia/Carousel-Slider/flowers-slider-3-bg_fyovcu.jpg')",
-        promobg1:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-banner-large-min_kdnmvh.jpg')",
-        promobg2:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-banner-medium-top_irhu3b.jpg')",
-        promobg3:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-banner-medium-bottom_rnpeht.jpg')",
-        promobg4:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609187409/Komercia/Promo-wrapper/flowers-bottom-right-full-heigh-min_gbnlij.jpg')",
-        advertisingbg:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1609975091/Komercia/PublicShare/flowers-discount-bg-opt_yvc5ta.jpg')",
         hworkbg:
           "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610008708/Komercia/Work/flowers-infobox-line-bg_wcixcy.svg')",
-        shopbg:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1611623008/Komercia/Shop/flowers-shoppage_jwuds4.jpg')",
       }),
     },
   },
@@ -2416,4 +2394,15 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  purge: {
+    enabled: process.env.NODE_ENV === 'production',
+    layers: ['utilities'],
+    content: [
+      'components/**/*.vue',
+      'layouts/**/*.vue',
+      'pages/**/*.vue',
+      'plugins/**/*.js',
+      'nuxt.config.js',
+    ],
+  },
 }

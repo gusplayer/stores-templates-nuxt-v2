@@ -20,7 +20,7 @@
                   >
                     <div class="photo">
                       <img
-                        :src="idCloudinary(product.foto_cloudinary, 200, 200)"
+                        v-lazy="idCloudinary(product.foto_cloudinary, 200, 200)"
                         alt="Product Img"
                       />
                     </div>

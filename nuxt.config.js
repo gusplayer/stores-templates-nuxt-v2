@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+const isProd = process.env.NODE_ENV === 'production'
 export default {
   mode: 'universal',
   head: {
@@ -23,11 +24,6 @@ export default {
       {
         href:
           'https://fonts.googleapis.com/css2?family=David+Libre&family=Great+Vibes&family=Lora:ital@0;1&display=swap',
-        rel: 'stylesheet',
-      },
-      {
-        href:
-          'https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap',
         rel: 'stylesheet',
       },
       {
@@ -63,75 +59,8 @@ export default {
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/element-tiptap', ssr: false },
   ],
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    '@nuxtjs/gtm',
-    '@luxdamore/nuxt-prune-html',
-  ],
-  pruneHtml: {
-    enabled: false,
-    hideGenericMessagesInConsole: false,
-    hideErrorsInConsole: false,
-    hookRenderRoute: true,
-    hookGeneratePage: true,
-    selectors: [
-      'link[rel="preload"][as="script"]',
-      'script:not([type="application/ld+json"])',
-    ],
-    classesSelectorsToKeep: [],
-    link: [
-      {
-        rel: 'preload',
-        as: 'script',
-        href: '/my-custom-lazy-load-for-bots.js',
-        position: 'phead', // Default value is 'body', other allowed values are: 'phead', 'head' and 'pbody'
-      },
-      {
-        rel: 'stylesheet',
-        href: '/my-custom-styles-for-bots.css',
-        position: 'head',
-      },
-    ],
-    script: [
-      {
-        src: '/my-custom-lazy-load-for-bots.js',
-        lazy: true,
-        defer: true,
-      },
-    ],
-    htmlElementClass: null,
-    cheerio: {
-      xmlMode: false,
-    },
-    types: ['default-detect'],
-    headerNameForDefaultDetection: 'user-agent',
-    auditUserAgent: 'lighthouse',
-    isAudit: true,
-    isBot: true,
-    ignoreBotOrAudit: false,
-    matchUserAgent: null,
-    queryParametersToPrune: [
-      {
-        key: 'prune',
-        value: 'true',
-      },
-    ],
-    queryParametersToExcludePrune: [],
-    headersToPrune: [], //
-    headersToExcludePrune: [],
-    onBeforePrune: null,
-    onAfterPrune: null,
-  },
-  buildModules: ['@nuxtjs/tailwindcss', 'nuxt-compress'],
-  'nuxt-compress': {
-    gzip: {
-      cache: true,
-    },
-    brotli: {
-      threshold: 10240,
-    },
-  },
+  modules: ['@nuxtjs/pwa', '@nuxtjs/gtm'],
+  buildModules: ['@nuxtjs/tailwindcss'],
   debug: {
     enabled: true,
   },
@@ -147,8 +76,8 @@ export default {
       lang: 'es',
     },
   },
-  axios: {},
   build: {
+    minimize: true,
     // analyze: true, //Map webpack
     publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
@@ -156,11 +85,41 @@ export default {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
         config.performance.maxAssetSize = 700 * 1024
-        const isProd = process.env.NODE_ENV === 'production'
-        if (isProd && isClient) {
+        if (isProd) {
           config.optimization.splitChunks.maxSize = 249856 // 244 Kib
         }
       }
+    },
+    ...(isProd && {
+      optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+          chunks: 'all',
+          automaticNameDelimiter: '.',
+          name: true,
+          maxSize: 249856,
+        },
+      },
+    }),
+    ...(isProd && {
+      html: {
+        minify: {
+          collapseBooleanAttributes: true,
+          decodeEntities: true,
+          minifyCSS: true,
+          minifyJS: true,
+          processConditionalComments: true,
+          removeEmptyAttributes: true,
+          removeRedundantAttributes: true,
+          trimCustomFragments: true,
+          useShortDoctype: true,
+        },
+      },
+    }),
+  },
+  render: {
+    bundleRenderer: {
+      shouldPreload: (file, type) => ['script', 'style', 'font'].includes(type),
     },
   },
 

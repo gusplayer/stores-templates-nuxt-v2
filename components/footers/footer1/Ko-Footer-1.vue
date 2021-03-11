@@ -50,13 +50,17 @@
         rel="noreferrer noopener"
       >
         <img
-          src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
+          v-lazy="
+            `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
+          "
           v-if="logo == true"
           class="logo2"
           alt="Logo Img"
         />
         <img
-          src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png"
+          v-lazy="
+            `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
+          "
           v-else
           class="logo2"
           alt="Logo Img"

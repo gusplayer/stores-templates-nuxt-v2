@@ -378,7 +378,7 @@
     </div>
     <div v-else class="contenedor-vacio">
       <div class="wrapper_photo">
-        <img :src="img" class="photo" alt="Product img" />
+        <img v-lazy="img" class="photo" alt="Product img" />
       </div>
       <p>{{ $t('footer_carritoVacio') }}</p>
       <nuxt-link to="/">

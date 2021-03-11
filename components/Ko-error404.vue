@@ -3,7 +3,9 @@
     <div class="contenedor">
       <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
         <img
-          src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_300,q_auto:best,f_auto/v1599605487/1_aeokv2.png"
+          v-lazy="
+            `https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_300,q_auto:best,f_auto/v1599605487/1_aeokv2.png`
+          "
           class="logokomercia"
           alt="Logo Komercia"
         />

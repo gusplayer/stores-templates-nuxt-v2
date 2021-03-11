@@ -24,7 +24,9 @@
           rel="noreferrer noopener"
         >
           <img
-            src="https://valienta.com/wp-content/uploads/2020/01/logo-v1.svg"
+            v-lazy="
+              `https://valienta.com/wp-content/uploads/2020/01/logo-v1.svg`
+            "
             class="logo2"
             alt="Logo Img"
           />

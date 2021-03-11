@@ -9,7 +9,6 @@
           :key="index"
         >
           <img class="slide-bg" :src="banner.slide" alt="Bg-Image" />
-
           <CarouselContent class="absolute" :banner="banner"></CarouselContent>
         </div>
       </div>

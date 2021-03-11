@@ -86,6 +86,7 @@ import KoFooter6 from '../components/footers/footer6/Ko-Footer-6'
 import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
+
 //template6
 // import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
 // import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'
@@ -159,9 +160,17 @@ export default {
           content:
             'width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0',
         },
-        { hid: 'description', name: 'description', content: description },
+        {
+          hid: 'description',
+          name: 'description',
+          content: description ? description : 'Tienda Online',
+        },
         { hid: 'subject', name: 'subject', content: 'Tienda Online' },
-        { hid: 'summary', name: 'summary', content: description },
+        {
+          hid: 'summary',
+          name: 'summary',
+          content: description ? description : 'Tienda Online',
+        },
         {
           hid: 'url',
           name: 'url',
@@ -184,7 +193,11 @@ export default {
           'http-equiv': 'Content-Language',
           content: 'es',
         },
-        { hid: 'og:title', name: 'og:title', content: tienda.nombre },
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: tienda.nombre ? tienda.nombre : 'Tienda',
+        },
         {
           hid: 'og:type',
           name: 'og:type',
@@ -202,8 +215,16 @@ export default {
           name: 'og:image',
           content: `https://api2.komercia.co/logos/${tienda.logo}`,
         },
-        { hid: 'og:site_name', name: 'og:site_name', content: tienda.nombre },
-        { hid: 'og:description', name: 'og:description', content: description },
+        {
+          hid: 'og:site_name',
+          name: 'og:site_name',
+          content: tienda.nombre ? tienda.nombre : 'Tienda',
+        },
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          content: description ? description : 'Tienda Online',
+        },
         { hid: 'og:email', name: 'og:email', content: tienda.email_tienda },
         {
           hid: 'og:phone_number',
@@ -227,7 +248,7 @@ export default {
         },
         {
           name: 'facebook-domain-verification',
-          content: `${FacebookPixel1}`,
+          content: FacebookPixel1 ? `${FacebookPixel1}` : '',
         },
         {
           name: ' google',
@@ -240,7 +261,7 @@ export default {
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
         {
-          src: `https://code.tidio.co/${tidio}.js`,
+          src: tidio ? `https://code.tidio.co/${tidio}.js` : '',
         },
       ],
       link: [
@@ -248,10 +269,6 @@ export default {
           rel: 'icon',
           type: 'image/x-icon',
           href: `https://api2.komercia.co/logos/${tienda.logo}`,
-        },
-        {
-          rel: 'stylesheet',
-          // href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         },
         {
           href: `https://fonts.googleapis.com/css?family=${tipo_letra}:400,700&display=swap`,

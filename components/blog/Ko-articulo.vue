@@ -17,8 +17,8 @@
           <div class="flex-shrink-0">
             <a href="#">
               <img
-                class="h-10 w-10 rounded-full"
-                src="https://api2.komercia.co/users/user.jpg"
+                class="h-40 w-40 rounded-full"
+                v-lazy="`https://api2.komercia.co/users/user.jpg`"
                 alt=""
               />
             </a>

@@ -104,9 +104,17 @@ export default {
           content:
             'width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0',
         },
-        { hid: 'description', name: 'description', content: description },
+        {
+          hid: 'description',
+          name: 'description',
+          content: description ? description : 'Tienda Online',
+        },
         { hid: 'subject', name: 'subject', content: 'Tienda Online' },
-        { hid: 'summary', name: 'summary', content: description },
+        {
+          hid: 'summary',
+          name: 'summary',
+          content: description ? description : 'Tienda Online',
+        },
         {
           hid: 'url',
           name: 'url',
@@ -149,7 +157,11 @@ export default {
           content: `https://api2.komercia.co/logos/${tienda.logo}`,
         },
         { hid: 'og:site_name', name: 'og:site_name', content: tienda.nombre },
-        { hid: 'og:description', name: 'og:description', content: description },
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          content: description ? description : 'Tienda Online',
+        },
         { hid: 'og:email', name: 'og:email', content: tienda.email_tienda },
         {
           hid: 'og:phone_number',
@@ -182,7 +194,7 @@ export default {
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
         {
-          src: `https://code.tidio.co/${tidio}.js`,
+          src: tidio ? `https://code.tidio.co/${tidio}.js` : '',
         },
       ],
       link: [

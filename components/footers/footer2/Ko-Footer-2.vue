@@ -6,7 +6,9 @@
           <div class="left-logo">
             <nuxt-link to="/" class="content-logo">
               <img
-                :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+                v-lazy="
+                  `https://api2.komercia.co/logos/${dataStore.tienda.logo}`
+                "
                 class="logo"
                 alt="Logo Img"
               />
@@ -182,13 +184,17 @@
       <p>{{ $t('footer_desarrollado') }}</p>
       <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
         <img
-          src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
+          v-lazy="
+            `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
+          "
           v-if="logo == true"
           class="logo2"
           alt="Logo Img"
         />
         <img
-          src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png"
+          v-lazy="
+            `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
+          "
           v-else
           class="logo2"
           alt="Logo Img"
