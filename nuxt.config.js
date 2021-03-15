@@ -77,17 +77,17 @@ export default {
     },
   },
   build: {
-    // minimize: true,
+    minimize: true,
     // analyze: true, //Map webpack
     publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-        // config.performance.maxAssetSize = 700 * 1024
-        // if (isProd) {
-        //   config.optimization.splitChunks.maxSize = 249856 // 244 Kib
-        // }
+        config.performance.maxAssetSize = 700 * 1024
+        if (isProd) {
+          config.optimization.splitChunks.maxSize = 249856 // 244 Kib
+        }
       }
     },
     // postcss: {
@@ -95,38 +95,38 @@ export default {
     //     'postcss-nested': {},
     //   },
     // },
-    // ...(isProd && {
-    //   optimization: {
-    //     runtimeChunk: 'single',
-    //     splitChunks: {
-    //       chunks: 'all',
-    //       automaticNameDelimiter: '.',
-    //       name: true,
-    //       maxSize: 249856,
-    //     },
-    //   },
-    // }),
-    // ...(isProd && {
-    //   html: {
-    //     minify: {
-    //       collapseBooleanAttributes: true,
-    //       decodeEntities: true,
-    //       minifyCSS: true,
-    //       minifyJS: true,
-    //       processConditionalComments: true,
-    //       removeEmptyAttributes: true,
-    //       removeRedundantAttributes: true,
-    //       trimCustomFragments: true,
-    //       useShortDoctype: true,
-    //     },
-    //   },
-    // }),
+    ...(isProd && {
+      optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+          chunks: 'all',
+          automaticNameDelimiter: '.',
+          name: true,
+          maxSize: 249856,
+        },
+      },
+    }),
+    ...(isProd && {
+      html: {
+        minify: {
+          collapseBooleanAttributes: true,
+          decodeEntities: true,
+          minifyCSS: true,
+          minifyJS: true,
+          processConditionalComments: true,
+          removeEmptyAttributes: true,
+          removeRedundantAttributes: true,
+          trimCustomFragments: true,
+          useShortDoctype: true,
+        },
+      },
+    }),
   },
-  // render: {
-  //   bundleRenderer: {
-  //     shouldPreload: (file, type) => ['script', 'style', 'font'].includes(type),
-  //   },
-  // },
+  render: {
+    bundleRenderer: {
+      shouldPreload: (file, type) => ['script', 'style', 'font'].includes(type),
+    },
+  },
   router: {
     base: '/',
   },

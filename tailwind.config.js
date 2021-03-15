@@ -3,7 +3,7 @@ module.exports = {
   //   purgeLayersByDefault: true,
   //   // defaultLineHeights: true,
   // },
-  purge: false,
+  // purge: false,
   theme: {
     extend: {
       width: {
@@ -2395,16 +2395,16 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-  // purge: {
-  //   enabled: true,
-  //   // enabled: process.env.NODE_ENV === 'production',
-  //   layers: ['utilities'],
-  //   content: [
-  //     'components/**/*.vue',
-  //     'layouts/**/*.vue',
-  //     'pages/**/*.vue',
-  //     'plugins/**/*.js',
-  //     'nuxt.config.js',
-  //   ],
-  // },
+  purge: {
+    // enabled: true,
+    enabled: process.env.NODE_ENV === 'production',
+    layers: ['utilities'],
+    content: [
+      'components/**/*.vue',
+      'layouts/**/*.vue',
+      'pages/**/*.vue',
+      'plugins/**/*.js',
+      'nuxt.config.js',
+    ],
+  },
 }
