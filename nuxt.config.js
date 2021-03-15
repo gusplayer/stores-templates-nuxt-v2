@@ -77,7 +77,7 @@ export default {
     },
   },
   build: {
-    // minimize: true,
+    minimize: true,
     // analyze: true, //Map webpack
     publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
@@ -90,38 +90,43 @@ export default {
         }
       }
     },
-    // ...(isProd && {
-    //   optimization: {
-    //     runtimeChunk: 'single',
-    //     splitChunks: {
-    //       chunks: 'all',
-    //       automaticNameDelimiter: '.',
-    //       name: true,
-    //       maxSize: 249856,
-    //     },
-    //   },
-    // }),
-    // ...(isProd && {
-    //   html: {
-    //     minify: {
-    //       collapseBooleanAttributes: true,
-    //       decodeEntities: true,
-    //       minifyCSS: true,
-    //       minifyJS: true,
-    //       processConditionalComments: true,
-    //       removeEmptyAttributes: true,
-    //       removeRedundantAttributes: true,
-    //       trimCustomFragments: true,
-    //       useShortDoctype: true,
-    //     },
-    //   },
-    // }),
-  },
-  render: {
-    bundleRenderer: {
-      shouldPreload: (file, type) => ['script', 'style', 'font'].includes(type),
+    postcss: {
+      plugins: {
+        'postcss-nested': {},
+      },
     },
+    ...(isProd && {
+      optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+          chunks: 'all',
+          automaticNameDelimiter: '.',
+          name: true,
+          maxSize: 249856,
+        },
+      },
+    }),
+    ...(isProd && {
+      html: {
+        minify: {
+          collapseBooleanAttributes: true,
+          decodeEntities: true,
+          minifyCSS: true,
+          minifyJS: true,
+          processConditionalComments: true,
+          removeEmptyAttributes: true,
+          removeRedundantAttributes: true,
+          trimCustomFragments: true,
+          useShortDoctype: true,
+        },
+      },
+    }),
   },
+  // render: {
+  //   bundleRenderer: {
+  //     shouldPreload: (file, type) => ['script', 'style', 'font'].includes(type),
+  //   },
+  // },
   router: {
     base: '/',
   },

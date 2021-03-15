@@ -205,7 +205,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .wrapper-footer {
   width: 100%;
   display: flex;
