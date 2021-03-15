@@ -101,28 +101,27 @@ export default {
         },
       },
     }),
-    ...(isProd && {
-      html: {
-        minify: {
-          collapseBooleanAttributes: true,
-          decodeEntities: true,
-          minifyCSS: true,
-          minifyJS: true,
-          processConditionalComments: true,
-          removeEmptyAttributes: true,
-          removeRedundantAttributes: true,
-          trimCustomFragments: true,
-          useShortDoctype: true,
-        },
-      },
-    }),
+    // ...(isProd && {
+    //   html: {
+    //     minify: {
+    //       collapseBooleanAttributes: true,
+    //       decodeEntities: true,
+    //       minifyCSS: true,
+    //       minifyJS: true,
+    //       processConditionalComments: true,
+    //       removeEmptyAttributes: true,
+    //       removeRedundantAttributes: true,
+    //       trimCustomFragments: true,
+    //       useShortDoctype: true,
+    //     },
+    //   },
+    // }),
   },
   render: {
     bundleRenderer: {
       shouldPreload: (file, type) => ['script', 'style', 'font'].includes(type),
     },
   },
-
   router: {
     base: '/',
   },
