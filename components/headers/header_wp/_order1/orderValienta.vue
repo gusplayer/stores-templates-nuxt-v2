@@ -726,13 +726,15 @@ export default {
   border-radius: 10px;
 }
 .photo {
-  width: 90px;
+  max-width: 90px;
+  width: 100%;
   object-fit: cover;
   object-position: left;
   overflow: hidden;
   margin-right: 10px;
 }
 .photo > img {
+  max-width: 90px;
   border-radius: 5px;
 }
 .photo-carrito {

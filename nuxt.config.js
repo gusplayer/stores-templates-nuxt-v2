@@ -77,7 +77,7 @@ export default {
     },
   },
   build: {
-    minimize: true,
+    // minimize: true,
     // analyze: true, //Map webpack
     publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
@@ -90,17 +90,17 @@ export default {
         }
       }
     },
-    ...(isProd && {
-      optimization: {
-        runtimeChunk: 'single',
-        splitChunks: {
-          chunks: 'all',
-          automaticNameDelimiter: '.',
-          name: true,
-          maxSize: 249856,
-        },
-      },
-    }),
+    // ...(isProd && {
+    //   optimization: {
+    //     runtimeChunk: 'single',
+    //     splitChunks: {
+    //       chunks: 'all',
+    //       automaticNameDelimiter: '.',
+    //       name: true,
+    //       maxSize: 249856,
+    //     },
+    //   },
+    // }),
     // ...(isProd && {
     //   html: {
     //     minify: {

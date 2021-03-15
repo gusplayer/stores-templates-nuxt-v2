@@ -185,7 +185,7 @@ input::-webkit-input-placeholder {
     -webkit-transition: all 0.8s;
     -moz-transition: all 0.8s;
     transition: all 0.8s;
-    top: 88px;
+    top: 91px;
     z-index: 3;
   }
 }

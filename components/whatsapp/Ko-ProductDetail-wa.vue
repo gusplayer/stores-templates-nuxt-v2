@@ -689,8 +689,10 @@ export default {
   font-size: 28px;
   color: #128c7e;
 }
-.back-button p:hover {
+.wrapper-back:hover {
   background-color: #128c7e;
+}
+.back-button p:hover {
   color: white;
 }
 .breadcrumb {

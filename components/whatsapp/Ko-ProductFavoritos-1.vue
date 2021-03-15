@@ -249,7 +249,7 @@ export default {
   text-align: center;
 }
 .separador-price {
-  height: 10px;
+  height: 19px;
   width: 100%;
   background-color: #f8f9fb;
 }

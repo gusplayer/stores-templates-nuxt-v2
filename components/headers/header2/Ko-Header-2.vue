@@ -586,6 +586,7 @@ export default {
   color: var(--color_text);
   cursor: pointer;
   margin-right: 32px;
+  list-style: none;
 }
 .name-category-active {
   color: red;
@@ -605,6 +606,7 @@ export default {
   margin-left: 7px;
   font-size: 14px;
   font-weight: 50;
+  list-style: none;
 }
 .text-subcategoria {
   color: var(--color_subtext);
