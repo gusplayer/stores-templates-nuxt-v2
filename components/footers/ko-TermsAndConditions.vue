@@ -111,7 +111,7 @@ export default {
   },
 }
 </script>
-<style scoped lang="postcss">
+<style scoped>
 .accordion {
   color: #222;
   background-color: #eee;

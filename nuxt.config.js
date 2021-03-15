@@ -90,37 +90,37 @@ export default {
         }
       }
     },
-    postcss: {
-      plugins: {
-        'postcss-nested': {},
-      },
-    },
-    ...(isProd && {
-      optimization: {
-        runtimeChunk: 'single',
-        splitChunks: {
-          chunks: 'all',
-          automaticNameDelimiter: '.',
-          name: true,
-          maxSize: 249856,
-        },
-      },
-    }),
-    ...(isProd && {
-      html: {
-        minify: {
-          collapseBooleanAttributes: true,
-          decodeEntities: true,
-          minifyCSS: true,
-          minifyJS: true,
-          processConditionalComments: true,
-          removeEmptyAttributes: true,
-          removeRedundantAttributes: true,
-          trimCustomFragments: true,
-          useShortDoctype: true,
-        },
-      },
-    }),
+    // postcss: {
+    //   plugins: {
+    //     'postcss-nested': {},
+    //   },
+    // },
+    // ...(isProd && {
+    //   optimization: {
+    //     runtimeChunk: 'single',
+    //     splitChunks: {
+    //       chunks: 'all',
+    //       automaticNameDelimiter: '.',
+    //       name: true,
+    //       maxSize: 249856,
+    //     },
+    //   },
+    // }),
+    // ...(isProd && {
+    //   html: {
+    //     minify: {
+    //       collapseBooleanAttributes: true,
+    //       decodeEntities: true,
+    //       minifyCSS: true,
+    //       minifyJS: true,
+    //       processConditionalComments: true,
+    //       removeEmptyAttributes: true,
+    //       removeRedundantAttributes: true,
+    //       trimCustomFragments: true,
+    //       useShortDoctype: true,
+    //     },
+    //   },
+    // }),
   },
   // render: {
   //   bundleRenderer: {
