@@ -77,17 +77,17 @@ export default {
     },
   },
   build: {
-    minimize: true,
+    // minimize: true,
     // analyze: true, //Map webpack
     publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-        config.performance.maxAssetSize = 700 * 1024
-        if (isProd) {
-          config.optimization.splitChunks.maxSize = 249856 // 244 Kib
-        }
+        // config.performance.maxAssetSize = 700 * 1024
+        // if (isProd) {
+        //   config.optimization.splitChunks.maxSize = 249856 // 244 Kib
+        // }
       }
     },
     // postcss: {

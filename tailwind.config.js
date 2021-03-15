@@ -1,7 +1,7 @@
 module.exports = {
   // future: {
   //   purgeLayersByDefault: true,
-  //   defaultLineHeights: true,
+  //   // defaultLineHeights: true,
   // },
   purge: false,
   theme: {
@@ -2396,7 +2396,9 @@ module.exports = {
   },
   plugins: [],
   // purge: {
-  //   enabled: process.env.NODE_ENV === 'production',
+  //   enabled: true,
+  //   // enabled: process.env.NODE_ENV === 'production',
+  //   layers: ['utilities'],
   //   content: [
   //     'components/**/*.vue',
   //     'layouts/**/*.vue',
