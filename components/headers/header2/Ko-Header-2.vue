@@ -605,7 +605,7 @@ export default {
   margin-bottom: 8px;
   margin-left: 7px;
   font-size: 14px;
-  font-weight: 50;
+  font-weight: 300;
   list-style: none;
 }
 .text-subcategoria {
