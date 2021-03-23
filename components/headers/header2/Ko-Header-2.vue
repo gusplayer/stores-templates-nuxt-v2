@@ -232,6 +232,11 @@ export default {
           icon: 'youtube-icon',
           link: this.dataStore.tienda.red_youtube,
         },
+        {
+          nombre: 'Tiktok',
+          icon: 'tiktok-icon',
+          link: this.dataStore.tienda.red_tiktok,
+        },
       ],
       secciones: [
         {
@@ -446,6 +451,7 @@ export default {
       this.links[1].link = this.dataStore.tienda.red_twitter
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
     },
 
     search(value) {
@@ -686,11 +692,13 @@ export default {
   line-height: normal;
   letter-spacing: normal;
   color: var(--color_icon);
+  fill: var(--color_icon);
   margin-left: 7px;
   cursor: pointer;
 }
 .header-icon:hover {
   color: var(--btnhover);
+  fill: var(--btnhover);
 }
 .header-content-cart {
   display: flex;

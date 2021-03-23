@@ -310,6 +310,11 @@ export default {
           icon: 'youtube-icon',
           link: this.dataStore.tienda.red_youtube,
         },
+        {
+          nombre: 'Tiktok',
+          icon: 'tiktok-icon',
+          link: this.dataStore.tienda.red_tiktok,
+        },
       ],
       secciones: [
         {
@@ -396,6 +401,7 @@ export default {
       this.links[1].link = this.dataStore.tienda.red_twitter
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
     },
     settingByTemplate(value) {
       let colorArray = value.split(',')
@@ -554,6 +560,7 @@ export default {
 .icon {
   font-size: 19px;
   color: var(--color_icon);
+  fill: var(--color_icon);
 }
 .btn {
   border-radius: var(--radius_btn);
