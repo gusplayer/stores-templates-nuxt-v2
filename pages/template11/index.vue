@@ -10,7 +10,7 @@
 </template>
 <script>
 import Kcarousel from '../../components/template11/ko-carousel'
-import Ksection from '../../components/template10/ko-section'
+import Ksection from '../../components/template11/ko-section'
 import Ktrending from '../../components/template11/ko-trendingProduct'
 import Kparallax from '../../components/template11/ko-parallax'
 import Kblog from '../../components/template11/ko-blog'
