@@ -170,7 +170,7 @@ export default {
   color: #222;
   font-size: 14px;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply tracking-1 leading-16 font-semibold whitespace-no-wrap;
+  @apply tracking-1 leading-16 font-semibold whitespace-nowrap;
 }
 .content-bttns-shop:hover .content-textbutton-shop {
   color: #eb7025;

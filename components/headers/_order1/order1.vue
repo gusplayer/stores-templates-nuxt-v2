@@ -20,7 +20,7 @@
                   >
                     <div class="photo">
                       <img
-                        :src="idCloudinary(product.foto_cloudinary, 100, 100)"
+                        v-lazy="idCloudinary(product.foto_cloudinary, 100, 100)"
                         alt="Product Img"
                       />
                     </div>
@@ -270,7 +270,7 @@
               <template v-else>
                 <div class="order_products_list-empty">
                   <div class="wrapper_photo">
-                    <img :src="img" class="photo" alt="empty car" />
+                    <img v-lazy="img" class="photo" alt="empty car" />
                   </div>
                   <p class="text-cart-empty">
                     {{ $t('footer_carritoVacio') }}
@@ -456,7 +456,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import idCloudinary from '../../../mixins/idCloudinary'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {

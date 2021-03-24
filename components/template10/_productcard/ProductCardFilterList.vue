@@ -677,7 +677,7 @@ export default {
 .text-price {
   color: #333333;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply pl-5 whitespace-no-wrap font-semibold;
+  @apply pl-5 whitespace-nowrap font-semibold;
 }
 .separator-price {
   color: #333;
@@ -691,7 +691,7 @@ export default {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  @apply absolute whitespace-no-wrap;
+  @apply absolute whitespace-nowrap;
 }
 .icon-overlay-free {
   color: #25db37;
@@ -703,7 +703,7 @@ export default {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  @apply absolute whitespace-no-wrap;
+  @apply absolute whitespace-nowrap;
 }
 .content_buy_action {
   @apply flex flex-row justify-start items-center;
@@ -745,7 +745,7 @@ export default {
 .txt-btn-product {
   font-size: 12px;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply font-semibold ml-10 tracking-1 leading-1 uppercase whitespace-no-wrap;
+  @apply font-semibold ml-10 tracking-1 leading-1 uppercase whitespace-nowrap;
 }
 .btn-disabled {
   fill: #fff;
@@ -754,7 +754,7 @@ export default {
   transition: color 0.25s ease, background-color 0.25s ease,
     border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply h-40 flex flex-row justify-center items-center cursor-pointer tracking-1 leading-1 capitalize ml-10 font-semibold whitespace-no-wrap mt-2 px-15;
+  @apply h-40 flex flex-row justify-center items-center cursor-pointer tracking-1 leading-1 capitalize ml-10 font-semibold whitespace-nowrap mt-2 px-15;
 }
 .datos-producto {
   @apply w-full flex flex-col justify-center items-start my-6 ml-2 cursor-default;

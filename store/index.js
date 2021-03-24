@@ -1,11 +1,6 @@
 export const strict = false
-// import { database } from "~/plugins/firebase"
 import axios from 'axios'
-// import { stat } from "fs";
-
-// const idStore = 605
 import getCookie from '../utils/getCookie'
-
 export const state = () => ({
   configHttp: {
     headers: {
@@ -493,20 +488,18 @@ export const actions = {
     commit('SET_DATA')
   },
   GET_CITIES({ commit }) {
-    this.$axios
-      .$get(`https://api2.komercia.co/api/ciudades`)
-      .then((response) => {
-        commit('SET_CITIES', response.data)
-      })
+    axios.get(`https://api2.komercia.co/api/ciudades`).then((response) => {
+      commit('SET_CITIES', response.data.data)
+    })
   },
   async GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
     let template = store.template
-    this.$axios
-      .$get(
+    axios
+      .get(
         `https://api2.komercia.co/api/template/${template}/settings/${store.id_tienda}`
       )
       .then((response) => {
-        commit('SET_SETTINGS_BY_TEMPLATE', response.data)
+        commit('SET_SETTINGS_BY_TEMPLATE', response.data.data)
       })
   },
   async GET_SETTINGS_BY_TEMPLATE_7({ commit }, store) {

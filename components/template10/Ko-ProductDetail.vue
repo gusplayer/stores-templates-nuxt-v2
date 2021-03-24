@@ -1017,7 +1017,7 @@ export default {
     font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
     color: #fff;
     font-size: 12px;
-    @apply font-semibold whitespace-no-wrap uppercase;
+    @apply font-semibold whitespace-nowrap uppercase;
   }
   .minicart-icon {
     fill: #fff;

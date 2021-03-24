@@ -271,7 +271,7 @@
               <template v-else>
                 <div class="order_products_list-empty">
                   <div class="wrapper_photo">
-                    <img :src="img" class="photo" alt="empty car" />
+                    <img v-lazy="img" class="photo" alt="empty car" />
                   </div>
                   <p class="text-cart-empty">
                     {{ $t('footer_carritoVacio') }}

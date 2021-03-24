@@ -5,6 +5,7 @@ export default ({ app, store }) => {
     store.state.analytics_tagmanager.pixel_facebook
       ? store.state.analytics_tagmanager.pixel_facebook
       : ''
+
   if (process.browser && pixel_facebook) {
     !(function (f, b, e, v, n, t, s) {
       if (f.fbq) return

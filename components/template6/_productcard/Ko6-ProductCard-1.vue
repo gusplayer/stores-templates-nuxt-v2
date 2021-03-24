@@ -86,7 +86,7 @@
             <div class="content-price-empty" v-else></div>
             <div class="wrapper-btn-icon">
               <router-link
-                id="view_details"
+                id="view_details_06"
                 router-link
                 :to="{ path: `/productos/` + product.slug }"
               >
@@ -639,7 +639,7 @@ export default {
   -o-transition: all 200ms ease-out;
   transition: all 200ms ease-out;
 }
-#view_details {
+#view_details_06 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -661,13 +661,13 @@ export default {
   -o-transition: all 200ms ease-out;
   transition: all 200ms ease-out;
 }
-#view_details:hover {
+#view_details_06:hover {
   color: var(--btnhover);
   border: solid 2px var(--btnhover);
 
   cursor: pointer;
 }
-#product-card:hover #view_details {
+#product-card:hover #view_details_06 {
   opacity: 1;
   width: 152px;
   font-size: 15px;

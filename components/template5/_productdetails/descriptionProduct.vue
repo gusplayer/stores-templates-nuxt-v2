@@ -18,7 +18,7 @@
         <p>
           {{ $t('productdetail_opcionesPagoMsg') }}
         </p>
-        <ul>
+        <ul style="list-style: none;">
           <li v-if="mediospago.consignacion == 1">
             <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
             <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>

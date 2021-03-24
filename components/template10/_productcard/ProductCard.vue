@@ -569,7 +569,7 @@ export default {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  @apply absolute whitespace-no-wrap;
+  @apply absolute whitespace-nowrap;
 }
 .icon-overlay-free {
   color: #222;

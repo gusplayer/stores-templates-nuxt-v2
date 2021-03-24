@@ -329,6 +329,17 @@
         </div>
       </div>
     </div>
+    <div v-else class="contenedor-vacio">
+      <div class="wrapper_photo">
+        <img v-lazy="img" class="photo" alt="Product img" />
+      </div>
+      <p>{{ $t('footer_carritoVacio') }}</p>
+      <nuxt-link to="/">
+        <button ref="colorBtn" class="btn3">
+          {{ $t('cart_agregarProductos') }}
+        </button>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 

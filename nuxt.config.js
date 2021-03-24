@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
+const isProd = process.env.NODE_ENV === 'production'
 export default {
   mode: 'universal',
   head: {
     title: process.env.npm_package_name || '',
     htmlAttrs: {
       lang: 'es',
-      amp: true,
     },
     meta: [
       { charset: 'utf-8' },
@@ -28,11 +28,6 @@ export default {
       },
       {
         href:
-          'https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap',
-        rel: 'stylesheet',
-      },
-      {
-        href:
           'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap',
         rel: 'stylesheet',
       },
@@ -47,12 +42,10 @@ export default {
     'swiper/dist/css/swiper.css',
     'core-components-npm/dist/ko.css',
   ],
-
   plugins: [
     '~/plugins/core-components-npm',
     '~/plugins/element',
     '~/plugins/mixinCommonMethods',
-    '~/plugins/cloudinary',
     '~/plugins/material-icons',
     '~plugins/validate.js',
     { src: '~/plugins/i18n' },
@@ -66,22 +59,8 @@ export default {
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/element-tiptap', ssr: false },
   ],
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    '@nuxtjs/gtm',
-    'vue-sweetalert2/nuxt',
-  ],
-  buildModules: ['@nuxtjs/tailwindcss', 'nuxt-purgecss'],
-  purgeCSS: {},
-  '@fullhuman/postcss-purgecss': {
-    content: [
-      './pages/**/*.vue',
-      './layouts/**/*.vue',
-      './components/**/*.vue',
-    ],
-    safelist: ['html', 'body'],
-  },
+  modules: ['@nuxtjs/pwa', '@nuxtjs/gtm'],
+  buildModules: ['@nuxtjs/tailwindcss'],
   debug: {
     enabled: true,
   },
@@ -97,30 +76,57 @@ export default {
       lang: 'es',
     },
   },
-  axios: {},
   build: {
+    minimize: true,
+    // analyze: true, //Map webpack
     publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+        config.performance.maxAssetSize = 700 * 1024
+        if (isProd) {
+          config.optimization.splitChunks.maxSize = 249856 // 244 Kib
+        }
       }
     },
-    // extractCSS: true,
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          styles: {
-            name: 'styles',
-            test: /\.(css|vue)$/,
-            chunks: 'all',
-            enforce: true,
-          },
+    // postcss: {
+    //   plugins: {
+    //     'postcss-nested': {},
+    //   },
+    // },
+    ...(isProd && {
+      optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+          chunks: 'all',
+          automaticNameDelimiter: '.',
+          name: true,
+          maxSize: 249856,
         },
       },
+    }),
+    ...(isProd && {
+      html: {
+        minify: {
+          collapseBooleanAttributes: true,
+          decodeEntities: true,
+          minifyCSS: true,
+          minifyJS: true,
+          processConditionalComments: true,
+          removeEmptyAttributes: true,
+          removeRedundantAttributes: true,
+          trimCustomFragments: true,
+          useShortDoctype: true,
+        },
+      },
+    }),
+  },
+  render: {
+    bundleRenderer: {
+      shouldPreload: (file, type) => ['script', 'style', 'font'].includes(type),
     },
   },
-
   router: {
     base: '/',
   },

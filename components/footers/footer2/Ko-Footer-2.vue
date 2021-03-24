@@ -6,7 +6,9 @@
           <div class="left-logo">
             <nuxt-link to="/" class="content-logo">
               <img
-                :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+                v-lazy="
+                  `https://api2.komercia.co/logos/${dataStore.tienda.logo}`
+                "
                 class="logo"
                 alt="Logo Img"
               />
@@ -182,13 +184,17 @@
       <p>{{ $t('footer_desarrollado') }}</p>
       <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
         <img
-          src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png"
+          v-lazy="
+            `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
+          "
           v-if="logo == true"
           class="logo2"
           alt="Logo Img"
         />
         <img
-          src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png"
+          v-lazy="
+            `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
+          "
           v-else
           class="logo2"
           alt="Logo Img"
@@ -304,6 +310,11 @@ export default {
           icon: 'youtube-icon',
           link: this.dataStore.tienda.red_youtube,
         },
+        {
+          nombre: 'Tiktok',
+          icon: 'tiktok-icon',
+          link: this.dataStore.tienda.red_tiktok,
+        },
       ],
       secciones: [
         {
@@ -390,6 +401,7 @@ export default {
       this.links[1].link = this.dataStore.tienda.red_twitter
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
     },
     settingByTemplate(value) {
       let colorArray = value.split(',')
@@ -548,6 +560,7 @@ export default {
 .icon {
   font-size: 19px;
   color: var(--color_icon);
+  fill: var(--color_icon);
 }
 .btn {
   border-radius: var(--radius_btn);
