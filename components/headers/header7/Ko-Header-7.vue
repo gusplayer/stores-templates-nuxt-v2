@@ -1,0 +1,440 @@
+<template>
+  <div class="content-header" :style="settingByTemplate">
+    <div class="content-items-header">
+      <div class="item-logo">
+        <nuxt-link to="/">
+          <img
+            src="https://res.cloudinary.com/brahyanr10/image/upload/v1615866784/demo-store-logo-1584092461_rwmuiv.png"
+            class="header-logo"
+            alt="Logo-tienda"
+            @click="clear"
+          />
+        </nuxt-link>
+      </div>
+      <div class="content-items-btns">
+        <div class="wrapper-content-btns">
+          <div class="item-menu" @click="openMenulateral">
+            <svg
+              class="icon-menu"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              width="25px"
+              height="25px"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </div>
+          <div class="item-btns">
+            <div
+              class="content-btns"
+              v-for="(item, index) in secciones"
+              :key="`${index}${item.name}`"
+            >
+              <nuxt-link :to="item.path" v-if="item.path">
+                <button
+                  class="btn"
+                  :class="btnSelect == item.id ? 'btn-active' : ''"
+                >
+                  {{ $t(`${item.name}`) }}
+                </button>
+              </nuxt-link>
+
+              <nuxt-link
+                :to="item.href"
+                v-else-if="item.href && listArticulos > 0"
+              >
+                <button
+                  class="btn"
+                  :class="btnSelect == item.id ? 'btn-active' : ''"
+                >
+                  {{ $t(`${item.name}`) }}
+                </button>
+              </nuxt-link>
+              <div class="separator"></div>
+            </div>
+          </div>
+          <div class="item-logo-md">
+            <nuxt-link to="/">
+              <img
+                src="https://res.cloudinary.com/brahyanr10/image/upload/v1615866784/demo-store-logo-1584092461_rwmuiv.png"
+                class="header-logo-md"
+                alt="Logo-tienda"
+                @click="clear"
+              />
+            </nuxt-link>
+          </div>
+          <div class="item-header">
+            <div class="input-animated">
+              <input
+                type="text"
+                v-model="search"
+                class="input-text"
+                placeholder="¿Que deseas buscar?"
+              />
+              <svg
+                class="svg-search"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="25px"
+                height="25px"
+              >
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                  d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                />
+              </svg>
+            </div>
+            <div class="icon-shop">
+              <svg
+                @click="openOrder"
+                class="svg-shop"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                width="25px"
+                height="25px"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="32"
+                  d="M320 320H192M80 176a16 16 0 00-16 16v216c0 30.24 25.76 56 56 56h272c30.24 0 56-24.51 56-54.75V192a16 16 0 00-16-16zM160 176v-32a96 96 0 0196-96h0a96 96 0 0196 96v32"
+                />
+              </svg>
+              <div class="item-numCart">
+                <span class="txt-numCart">{{ productsCart }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <KoOrder :dataStore="dataStore"></KoOrder>
+    <KoMenu :dataStore="dataStore" class="responsive" />
+  </div>
+</template>
+<script>
+import KoOrder from '../../../components/template11/_lateralMenu/orderRight'
+import KoMenu from '../../../components/template11/_lateralMenu/openMenuLeft'
+
+export default {
+  name: 'Ko-Header-7',
+  props: { dataStore: Object, settingByTemplate: Object },
+  components: {
+    KoOrder,
+    KoMenu,
+  },
+  mounted() {
+    let domain = this.$route.fullPath
+    let searchCategory = domain.slice(0, [11])
+    let searchSubCategory = domain.slice(0, [14])
+    let search = domain.slice(0, [9])
+    if (domain == '/') {
+      this.$store.commit('SET_STATEBANNER', true)
+      this.showSearch = true
+    } else if (searchCategory === '/?category=') {
+      this.$store.commit('SET_STATEBANNER', false)
+      this.showSearch = true
+    } else if (searchSubCategory === '/?subcategory=') {
+      this.$store.commit('SET_STATEBANNER', false)
+      this.showSearch = true
+    } else if (search === '/?search=') {
+      this.$store.commit('SET_STATEBANNER', false)
+      this.setSearch(domain)
+      this.showSearch = true
+    } else {
+      this.showSearch = false
+    }
+  },
+  data() {
+    return {
+      searchSelect: true,
+      btnSelect: 1,
+      resizehead: false,
+      search: '',
+      showSearch: false,
+      secciones: [
+        {
+          name: 'header_inicio',
+          path: '/',
+          id: 1,
+        },
+        {
+          name: 'header_productos',
+          path: '/productos',
+          id: 2,
+        },
+        {
+          name: 'header_contacto',
+          path: '/contacto',
+          id: 3,
+        },
+        {
+          name: 'header_blog',
+          href: '/blog',
+          id: 4,
+        },
+      ],
+    }
+  },
+  computed: {
+    productsCart() {
+      return this.$store.state.productsCart.length
+    },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager
+    },
+    listArticulos() {
+      return this.$store.state.listArticulos.length
+    },
+  },
+  methods: {
+    btnActivate(value) {
+      if (value == 1) {
+        this.btnSelect = 1
+      }
+      if (value == 2) {
+        this.btnSelect = 2
+      }
+      if (value == 3) {
+        this.btnSelect = 3
+      }
+      if (value == 4) {
+        this.btnSelect = 4
+      }
+    },
+    openSearch() {
+      this.searchSelect = false
+      this.$store.commit('SET_OPENSEARCH', true)
+    },
+    closedSearch() {
+      this.searchSelect = true
+      this.$store.commit('SET_OPENSEARCH', false)
+    },
+    openOrder() {
+      this.$store.commit('SET_OPENORDER', true)
+    },
+    openMenulateral() {
+      this.$store.commit('SET_OPENORDERMENULEFT', true)
+    },
+    closed() {
+      this.$store.commit('SET_OPENORDERMENULEFT', false)
+    },
+    clear() {
+      this.$router.push({
+        path: '/',
+      })
+      this.$store.commit('SET_STATEBANNER', true)
+    },
+    Searchproduct(search) {
+      this.$store.commit('SET_SEARCHVALUE', search)
+    },
+    getSearch(value) {
+      if (value) {
+        location.href = '?search=' + value
+        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          window.fbq('track', 'Search', { value: value })
+        }
+      } else {
+        location.href = '?search=' + ''
+      }
+    },
+    setSearch(value) {
+      let category = value.replace('/?search=', '')
+      let UrlCategory = category.replace(/-/g, ' ')
+      let urlFiltrada = decodeURIComponent(UrlCategory)
+      this.search = urlFiltrada
+    },
+    focusInput() {
+      document.getElementById('SearchHeader').focus()
+    },
+  },
+  watch: {
+    search(value) {
+      this.Searchproduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      let domain = this.$route.fullPath
+      let searchCategory = domain.slice(0, [11])
+      let searchSubCategory = domain.slice(0, [14])
+      let search = domain.slice(0, [9])
+      if (domain == '/') {
+        this.$store.commit('SET_STATEBANNER', true)
+        this.showSearch = true
+      } else if (searchCategory === '/?category=') {
+        this.$store.commit('SET_STATEBANNER', false)
+        this.showSearch = true
+      } else if (searchSubCategory === '/?subcategory=') {
+        this.$store.commit('SET_STATEBANNER', false)
+        this.showSearch = true
+      } else if (search === '/?search=') {
+        this.$store.commit('SET_STATEBANNER', false)
+        this.setSearch(domain)
+        this.showSearch = true
+      } else {
+        this.showSearch = false
+      }
+    },
+  },
+}
+</script>
+<style scoped>
+.content-header {
+  @apply w-full flex flex-col justify-center items-center bg-black;
+}
+.content-btns {
+  @apply w-auto flex flex-row justify-center items-center;
+}
+.btn {
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  font-family: 'Roboto' Arial, Helvetica, sans-serif;
+  @apply w-auto font-normal whitespace-nowrap uppercase py-20 px-30;
+}
+.btn:hover {
+  color: #767676;
+}
+.item-header {
+  @apply w-full flex flex-row justify-end items-center flex-1;
+}
+.input-animated {
+  background: transparent;
+  @apply h-45 flex flex-row justify-center items-center;
+}
+.input-animated:hover > .input-text {
+  width: 180px;
+  color: #fff;
+  font-size: 16px;
+  @apply pl-10;
+}
+.input-text {
+  color: #fff;
+  background: transparent;
+  font-size: 0px;
+  transition: 0.4s;
+  font-family: 'Roboto', sans-serif !important ;
+  @apply w-0 outline-none;
+}
+.input-text:focus {
+  width: 180px;
+  color: #fff;
+  font-size: 16px;
+  @apply pl-10;
+}
+.input-text:focus .input-animated {
+  border-color: #fff;
+  @apply border;
+}
+::-webkit-input-placeholder {
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  @apply text-left items-center;
+}
+.svg-search {
+  fill: #fff;
+  @apply cursor-pointer;
+}
+.svg-search:hover {
+  fill: #767676;
+}
+.svg-shop,
+.icon-menu {
+  color: #fff;
+  @apply cursor-pointer;
+}
+.svg-shop:hover {
+  color: #767676;
+}
+.icon-menu:hover {
+  color: #767676;
+}
+.icon-shop {
+  @apply w-auto flex flex-row justify-center items-center ml-20;
+}
+@screen sm {
+  .content-items-header {
+    @apply w-full flex flex-col justify-center items-center py-10;
+  }
+  .content-items-btns {
+    @apply w-full flex flex-row justify-center items-center;
+  }
+  .wrapper-content-btns {
+    @apply w-full flex flex-row justify-between items-center px-20;
+  }
+  .item-logo {
+    @apply w-full flex flex-col justify-center items-center pb-20;
+  }
+  .item-btns {
+    @apply hidden;
+  }
+  .item-menu {
+    @apply w-auto flex flex-col justify-center items-start flex-1;
+  }
+  .item-numCart {
+    @apply w-auto h-25 flex justify-center items-center;
+  }
+  .txt-numCart {
+    color: #fff;
+    font-size: 13px;
+    font-family: 'Roboto' Arial, Helvetica, sans-serif;
+    @apply ml-5;
+  }
+  .item-logo-md {
+    @apply hidden;
+  }
+}
+@screen md {
+  .header-logo-md {
+    max-width: 230px;
+  }
+  .item-logo {
+    @apply hidden;
+  }
+  .item-logo-md {
+    @apply w-full flex flex-col justify-center items-center;
+  }
+  .header-logo-md {
+    @apply max-h-16;
+  }
+}
+@screen lg {
+  .content-items-header {
+    @apply pb-0;
+  }
+  .content-items-btns {
+    border-color: #2b2b2b;
+    @apply border-t;
+  }
+  .item-logo {
+    @apply flex pt-10 pb-25;
+  }
+  .item-logo-md {
+    @apply hidden;
+  }
+  .item-menu {
+    @apply hidden;
+  }
+  .item-btns {
+    @apply w-auto flex flex-row justify-between items-center;
+  }
+  .separator {
+    background-color: #2b2b2b;
+    @apply w-1 h-16 flex justify-center items-center;
+  }
+}
+@media (min-width: 1200px) {
+  .wrapper-content-btns {
+    max-width: 1200px;
+  }
+}
+</style>

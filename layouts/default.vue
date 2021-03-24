@@ -76,12 +76,14 @@ import KoHeader3 from '../components/headers/header3/Ko-Header-3'
 import KoHeader4 from '../components/headers/header4/Ko-Header-4'
 import KoHeader5 from '../components/headers/header5/Ko-Header-5'
 import KoHeader6 from '../components/headers/header6/Ko-Header-6'
+import KoHeader7 from '../components/headers/header7/Ko-Header-7'
 
 import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
 import KoFooter4 from '../components/footers/footer4/Ko-Footer-4'
 import KoFooter5 from '../components/footers/footer5/Ko-Footer-5'
 import KoFooter6 from '../components/footers/footer6/Ko-Footer-6'
+import KoFooter7 from '../components/footers/footer7/Ko-Footer-7'
 
 import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
 import koWhatsapp from '../components/whatsapp/whatsapp'
@@ -99,11 +101,13 @@ export default {
     KoHeader4,
     KoHeader5,
     KoHeader6,
+    KoHeader7,
     KoFooter1,
     KoFooter2,
     KoFooter4,
     KoFooter5,
     KoFooter6,
+    KoFooter7,
     KoFooterCountry,
     koWhatsapp,
     koTiendaCerrada,
@@ -325,6 +329,9 @@ export default {
         case 10:
           headerComponent = 'KoHeader6'
           break
+        case 11:
+          headerComponent = 'KoHeader7'
+          break
       }
       return headerComponent
     },
@@ -365,6 +372,9 @@ export default {
           break
         case 10:
           footerComponent = 'KoFooter6'
+          break
+        case 11:
+          footerComponent = 'KoFooter7'
           break
       }
       return footerComponent

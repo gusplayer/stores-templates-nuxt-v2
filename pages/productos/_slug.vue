@@ -18,6 +18,7 @@ import Ko5ProductDetail from '../../components/template5/Ko-ProductDetail-1'
 import Ko7ProductDetail from '../../components/template7/Ko-ProductDetail'
 import Ko9ProductDetail from '../../components/template9/Ko-ProductDetail'
 import Ko10ProductDetail from '../../components/template10/Ko-ProductDetail'
+import Ko11ProductDetail from '../../components/template11/ko-ProductDetail'
 
 export default {
   components: {
@@ -25,6 +26,7 @@ export default {
     Ko7ProductDetail,
     Ko9ProductDetail,
     Ko10ProductDetail,
+    Ko11ProductDetail,
   },
   computed: {
     settingBase() {
@@ -56,6 +58,9 @@ export default {
           break
         case 10:
           productListComponent = 'Ko10ProductDetail'
+          break
+        case 11:
+          productListComponent = 'Ko11ProductDetail'
           break
       }
       return productListComponent
