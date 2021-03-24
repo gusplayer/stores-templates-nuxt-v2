@@ -40,6 +40,7 @@
           <div class="conten-Menu" v-if="!focusbtn">
             <div class="header-content-buttons">
               <div
+                @click="closed"
                 v-for="(item, index) in secciones"
                 :key="`${index}${item.name}`"
               >
@@ -113,7 +114,7 @@
 </template>
 
 <script>
-import BaseAccordian from '../../template9/_lateralMenu/_BaseAccordion'
+import BaseAccordian from '../../template10/_lateralMenu/_BaseAccordion'
 export default {
   name: 'KoMenuLeft',
   props: {
@@ -153,14 +154,13 @@ export default {
           //icon: 'account-icon',
         },
         {
-          name: 'header_blog',
-          path: '/blog',
-          //icon: 'account-icon',
-        },
-        {
           name: 'header_carrito',
           path: '/cart',
-          //icon: 'cart-icon',
+        },
+        {
+          name: 'header_blog',
+          href: '/blog',
+          //icon: 'account-icon',
         },
       ],
     }

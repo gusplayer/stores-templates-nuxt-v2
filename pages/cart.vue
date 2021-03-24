@@ -1,5 +1,5 @@
 <template lang="html">
-  <div style="overflow: hidden;">
+  <div>
     <component :is="indexTemplate" v-bind="componentsProps" />
   </div>
 </template>
@@ -8,7 +8,7 @@
 import K05Cart from '../components/template5/Ko-Cart-1'
 import K07Cart from '../components/template7/Ko-Cart'
 import K09Cart from '../components/template9/Ko-Cart'
-import K10Cart from '../components/template9/Ko-Cart'
+import K10Cart from '../components/template10/Ko-Cart'
 
 export default {
   layout: 'default',
@@ -60,7 +60,7 @@ export default {
         case 9:
           productListComponent = 'K09Cart'
           break
-        case 9:
+        case 10:
           productListComponent = 'K10Cart'
           break
       }
@@ -92,4 +92,4 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped></style>

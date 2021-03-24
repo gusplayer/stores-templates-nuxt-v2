@@ -68,32 +68,47 @@
                   </div>
                   <div class="product-quiantity">
                     <div class="txt-tittle-quantity">Cantidad</div>
-
-                    <div class="content-quantity">
-                      <div class="quantity">
-                        <!-- <p class="text-quantity">{{ $t('cart_cantidad') }}</p> -->
+                    <div class="content-box-items">
+                      <div class="box-quantity">
+                        <p class="txt-quantity">{{ product.cantidad }}</p>
+                      </div>
+                      <div class="box-quantity-btns">
                         <button
-                          class="quantity_remove"
-                          v-on:click="removeQuantity(product)"
-                        >
-                          <menos-icon class="text-icon" />
-                        </button>
-                        <p class="text-quantity_value">
-                          {{ product.cantidad }}
-                        </p>
-                        <button
-                          class="quantity_add"
+                          class="btn-quantity btn1"
                           v-on:click="addQuantity(product)"
                         >
-                          <mas-icon class="text-icon" />
+                          <svg
+                            class="text-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            width="20"
+                            fill="#222"
+                          >
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path
+                              d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                            />
+                          </svg>
                         </button>
-                        <!-- Anuncio ult unidad -->
-                        <!-- <div
-                              class="container-alerta"
-                              v-if="this.maxQuantityValue == this.quantityValue"
-                            >
-                              <span class="alerta"> {{ $t('cart_ultimaUnidad') }}</span>
-                            </div> -->
+                        <button
+                          class="btn-quantity btn2"
+                          v-on:click="removeQuantity(product)"
+                        >
+                          <svg
+                            class="text-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            width="20"
+                            fill="#222"
+                          >
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path
+                              d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                            />
+                          </svg>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -328,17 +343,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div v-else class="contenedor-vacio">
-      <div class="wrapper_photo">
-        <img v-lazy="img" class="photo" alt="Product img" />
-      </div>
-      <p>{{ $t('footer_carritoVacio') }}</p>
-      <nuxt-link to="/">
-        <button ref="colorBtn" class="btn3">
-          {{ $t('cart_agregarProductos') }}
-        </button>
-      </nuxt-link>
     </div>
   </div>
 </template>
@@ -704,12 +708,9 @@ export default {
   fill: #eb7025;
   @apply cursor-pointer;
 }
-.quantity {
-  @apply flex flex-row justify-center items-center;
-}
 @screen sm {
   .content-cart {
-    margin-top: 72px;
+    margin-top: 140px;
   }
   .conten-items-cart {
     @apply w-9/0;
@@ -777,33 +778,8 @@ export default {
     background-color: #222;
     color: #fff;
   }
-  .content-quantity {
-    background: #f4f4f4;
-    @apply w-full h-54 flex flex-col justify-center items-center pb-1;
-  }
-  .quantity {
-    @apply w-full;
-  }
-  .quantity_remove,
-  .quantity_add {
-    background: #f4f4f4;
-    @apply flex justify-center items-center;
-  }
-  .text-icon {
-    @apply w-34 flex justify-center items-center cursor-pointer;
-  }
-  .text-quantity_value {
-    padding: 0 35px;
-    border: none;
-    font-size: 21px;
-    @apply w-full flex-col justify-center items-center text-center font-semibold;
-  }
 }
-@media (min-width: 480px) {
-  .content-quantity {
-    @apply w-4/0 mr-2;
-  }
-}
+
 @screen md {
   .product {
     @apply grid grid-cols-3;
@@ -842,9 +818,6 @@ export default {
   }
   .btn-buy-2 {
     @apply w-8/0;
-  }
-  .content-quantity {
-    width: 150px;
   }
 }
 @screen lg {

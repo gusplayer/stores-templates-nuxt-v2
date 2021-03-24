@@ -830,9 +830,6 @@ export default {
   @apply w-full mt-40;
 }
 .content-quantity-boxes {
-  @apply w-full flex flex-row justify-start items-center;
-}
-.content-quantity-boxes {
   @apply w-full flex justify-start items-center my-30;
 }
 .txt-tittle-quantity {

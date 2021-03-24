@@ -202,6 +202,7 @@ export default {
     home_mensaje: 'Mensaje',
     home_telefono: 'Teléfono',
     home_valorEnvio: 'Valor de envio',
+    home_tuCarrito: 'Tu carrito',
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
@@ -457,6 +458,7 @@ export default {
     home_mensaje: 'Message',
     home_telefono: 'Phone',
     home_valorEnvio: 'Shipping value',
+    home_tuCarrito: 'Your cart',
 
     //productdetail
     productdetail_garantia: 'Warranty:',
@@ -714,6 +716,7 @@ export default {
     home_mensaje: 'Mensagem',
     home_telefono: 'Telefone',
     home_valorEnvio: 'Valor do frete',
+    home_tuCarrito: 'Seu carrinho',
 
     //productdetail
     productdetail_garantia: 'Garantía:',
