@@ -129,7 +129,7 @@
                         getFreeShipping == true
                       "
                     >
-                      <li class="text-color">
+                      <li class="text-color" style="list-style: none;">
                         {{ $t('footer_tarifaPlana') }}
                         {{
                           rangosByCiudades.valor

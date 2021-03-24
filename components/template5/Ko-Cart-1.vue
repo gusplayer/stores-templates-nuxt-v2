@@ -250,7 +250,7 @@
                     getFreeShipping == true
                   "
                 >
-                  <li class="cart_summary_price">
+                  <li class="cart_summary_price" style="list-style: none;">
                     {{ $t('footer_tarifaPlana') }}
                     {{
                       rangosByCiudades.valor

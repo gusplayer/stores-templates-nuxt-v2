@@ -1,6 +1,6 @@
 <template>
   <div class="content-cart">
-    <div class="conten-items-cart">
+    <div v-if="this.productsCart.length" class="conten-items-cart">
       <div class="cart-tittle">
         <p class="txt-cart">{{ $t('home_tuCarrito') }}</p>
       </div>
