@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "devPlus": "node --max-old-space-size=12000 node_modules/nuxt/bin/nuxt.js",
     "devIp": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3333 nuxt",
     "build": "nuxt build ",
     "static": "nuxt build --target static && nuxt export",

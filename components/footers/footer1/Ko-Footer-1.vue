@@ -247,6 +247,7 @@ export default {
   letter-spacing: normal;
   color: var(--color_text);
   margin-right: 10px;
+  /* text-align: center; */
 }
 .text-secciones:hover {
   color: var(--color_hover_text);
@@ -351,7 +352,7 @@ export default {
     opacity: 0;
   }
   .contenedor {
-    padding: 20px 15px 10px;
+    padding: 20px 10px 10px;
   }
   .modal-content {
     width: 100vw;

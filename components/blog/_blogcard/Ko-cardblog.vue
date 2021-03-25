@@ -391,7 +391,7 @@ figure {
   font-family: 'Lora', serif !important;
   font-size: 16px;
   text-transform: uppercase;
-  color: white;
+  color: var(--color_text);
 }
 @screen sm {
   .overlay-top {

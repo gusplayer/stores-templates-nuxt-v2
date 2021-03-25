@@ -120,16 +120,15 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      tipo_letra: null,
+      tipo_letra2: null,
+      tipo_letra3: null,
+    }
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
-    let tipo_letra =
-      this.settingByTemplate &&
-      this.settingByTemplate.settings &&
-      this.settingByTemplate.settings.tipo_letra
-        ? this.settingByTemplate.settings.tipo_letra
-        : 'Roboto'
+
     let tidio =
       this.$store.state.analytics_tagmanager &&
       this.$store.state.analytics_tagmanager.tidio_user
@@ -271,7 +270,28 @@ export default {
           href: `https://api2.komercia.co/logos/${tienda.logo}`,
         },
         {
-          href: `https://fonts.googleapis.com/css?family=${tipo_letra}:400,700&display=swap`,
+          href:
+            this.template == 3 ||
+            this.template == 5 ||
+            this.template == 6 ||
+            this.template == 10 ||
+            this.template == 11
+              ? `https://fonts.googleapis.com/css?family=${this.tipo_letra}:100,200,300,400,500,600,700,800,900&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 7
+              ? `https://fonts.googleapis.com/css2?family=${this.tipo_letra}&family=${this.tipo_letra2}&family=${this.tipo_letra3}@0;1&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 9
+              ? `https://fonts.googleapis.com/css2?family=${this.tipo_letra}&family=${this.tipo_letra2}@0;1&display=swap`
+              : '',
           rel: 'stylesheet',
         },
       ],
@@ -293,12 +313,33 @@ export default {
       switch (this.template) {
         case 3:
           headerComponent = 'KoHeader1'
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.tipo_letra =
+            this.settingByTemplate &&
+            this.settingByTemplate.settings &&
+            this.settingByTemplate.settings.tipo_letra
+              ? this.settingByTemplate.settings.tipo_letra
+              : 'Roboto'
           break
         case 5:
           headerComponent = 'KoHeader1'
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.tipo_letra =
+            this.settingByTemplate &&
+            this.settingByTemplate.settings &&
+            this.settingByTemplate.settings.tipo_letra
+              ? this.settingByTemplate.settings.tipo_letra
+              : 'Roboto'
           break
         case 6:
           headerComponent = 'KoHeader2'
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.tipo_letra =
+            this.settingByTemplate &&
+            this.settingByTemplate.settings &&
+            this.settingByTemplate.settings.tipo_letra
+              ? this.settingByTemplate.settings.tipo_letra
+              : 'Roboto'
           break
         // case 6:
         //   if (this.settingByTemplate.header) {
@@ -315,15 +356,57 @@ export default {
         //   break
         case 7:
           headerComponent = 'KoHeader4'
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.tipo_letra =
+            this.settingByTemplate &&
+            this.settingByTemplate.settings &&
+            this.settingByTemplate.settings.tipo_letra
+              ? this.settingByTemplate.settings.tipo_letra
+              : 'David Libre'
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.tipo_letra2 =
+            this.settingByTemplate &&
+            this.settingByTemplate.settings &&
+            this.settingByTemplate.settings.tipo_letra
+              ? this.settingByTemplate.settings.tipo_letra
+              : 'Great Vibes'
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.tipo_letra3 =
+            this.settingByTemplate &&
+            this.settingByTemplate.settings &&
+            this.settingByTemplate.settings.tipo_letra
+              ? this.settingByTemplate.settings.tipo_letra
+              : 'Lora'
           break
         case 8:
           headerComponent = 'KoHeader3'
           break
         case 9:
           headerComponent = 'KoHeader5'
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.tipo_letra =
+            this.settingByTemplate &&
+            this.settingByTemplate.settings &&
+            this.settingByTemplate.settings.tipo_letra
+              ? this.settingByTemplate.settings.tipo_letra
+              : 'Roboto'
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.tipo_letra2 =
+            this.settingByTemplate &&
+            this.settingByTemplate.settings &&
+            this.settingByTemplate.settings.tipo_letra
+              ? this.settingByTemplate.settings.tipo_letra
+              : 'Poppins'
           break
         case 10:
           headerComponent = 'KoHeader6'
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.tipo_letra =
+            this.settingByTemplate &&
+            this.settingByTemplate.settings &&
+            this.settingByTemplate.settings.tipo_letra
+              ? this.settingByTemplate.settings.tipo_letra
+              : 'Poppins'
           break
       }
       return headerComponent

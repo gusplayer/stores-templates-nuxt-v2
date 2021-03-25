@@ -246,6 +246,9 @@ export default {
 }
 </script>
 <style scoped>
+.editor >>> .el-tiptap-editor__menu-bubble {
+  display: none;
+}
 .wrapper-blog {
   display: flex;
   flex-direction: column;

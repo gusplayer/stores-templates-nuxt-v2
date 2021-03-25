@@ -139,46 +139,83 @@ export default {
     } else {
       this.showSearch = false
     }
-
     var prevScrollpos = window.pageYOffset
-    window.onscroll = function () {
-      var currentScrollPos = window.pageYOffset
-      var navbar = document.getElementById('navbar')
-      var header = document.getElementById('headerid')
-      var bghead = document.getElementById('headbg')
-
-      if (currentScrollPos == 0) {
-        if (screen.width >= 300) {
-          header.style.width = '100%'
-          bghead.style.backgroundColor = 'transparent'
-          bghead.style.boxShadow = '0px 0px 0px 0px'
-          header.style.boxShadow =
-            '0px 22px 11px -12px rgba(145, 145, 145, 0.57)'
-        }
-        if (screen.width >= 1280) {
-          header.style.width = '93%'
+    var navbar = document.getElementById('navbar')
+    var header = document.getElementById('headerid')
+    var bghead = document.getElementById('headbg')
+    if (
+      this.settingByTemplate7h &&
+      this.settingByTemplate7h.transparente == true
+    ) {
+      header.style.backgroundColor = 'transparent'
+      window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset
+        if (currentScrollPos == 0) {
+          if (screen.width >= 300) {
+            header.style.width = '100%'
+            bghead.style.backgroundColor = 'transparent'
+            header.style.backgroundColor = 'transparent'
+            bghead.style.boxShadow = 'transparent'
+            header.style.boxShadow = 'transparent'
+          }
+          if (screen.width >= 1280) {
+            header.style.width = '93%'
+            navbar.style.zIndex = '20'
+            navbar.style.top = '30px'
+          }
+        } else if (prevScrollpos > currentScrollPos && navbar) {
+          navbar.style.top = '0px'
           navbar.style.zIndex = '20'
-          navbar.style.top = '30px'
+          bghead.style.backgroundColor = 'transparent'
+          header.style.backgroundColor = 'transparent'
+          header.style.boxShadow = 'transparent'
+          bghead.style.boxShadow = 'transparent'
+          if (screen.width >= 300) {
+            header.style.width = '100%'
+          }
+          if (screen.width >= 1280) {
+            header.style.width = '93%'
+          }
+        } else {
+          navbar.style.zIndex = '20'
+          navbar.style.top = '-160px'
         }
-      } else if (prevScrollpos > currentScrollPos && navbar) {
-        //sube
-        navbar.style.top = '0px'
-        navbar.style.zIndex = '20'
-        bghead.style.backgroundColor = colorBg
-        header.style.boxShadow = '0px 0px 0px 0px'
-        bghead.style.boxShadow = '0px 22px 11px -12px rgba(145,145,145,0.57)'
-
-        if (screen.width >= 300) {
-          header.style.width = '100%'
-        }
-        if (screen.width >= 1280) {
-          header.style.width = '93%'
-        }
-      } else {
-        navbar.style.zIndex = '20'
-        navbar.style.top = '-100px'
+        prevScrollpos = currentScrollPos
       }
-      prevScrollpos = currentScrollPos
+    } else {
+      window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset
+        if (currentScrollPos == 0) {
+          if (screen.width >= 300) {
+            header.style.width = '100%'
+            bghead.style.backgroundColor = 'transparent'
+            bghead.style.boxShadow = '0px 0px 0px 0px'
+            header.style.boxShadow =
+              '0px 22px 11px -12px rgba(145, 145, 145, 0.57)'
+          }
+          if (screen.width >= 1280) {
+            header.style.width = '93%'
+            navbar.style.zIndex = '20'
+            navbar.style.top = '30px'
+          }
+        } else if (prevScrollpos > currentScrollPos && navbar) {
+          navbar.style.top = '0px'
+          navbar.style.zIndex = '20'
+          bghead.style.backgroundColor = colorBg
+          header.style.boxShadow = '0px 0px 0px 0px'
+          bghead.style.boxShadow = '0px 22px 11px -12px rgba(145,145,145,0.57)'
+          if (screen.width >= 300) {
+            header.style.width = '100%'
+          }
+          if (screen.width >= 1280) {
+            header.style.width = '93%'
+          }
+        } else {
+          navbar.style.zIndex = '20'
+          navbar.style.top = '-160px'
+        }
+        prevScrollpos = currentScrollPos
+      }
     }
   },
   data() {
