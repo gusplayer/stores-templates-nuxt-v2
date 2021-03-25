@@ -246,9 +246,6 @@ export default {
 }
 </script>
 <style scoped>
-.editor >>> .el-tiptap-editor__menu-bubble {
-  display: none;
-}
 .wrapper-blog {
   display: flex;
   flex-direction: column;
@@ -326,6 +323,24 @@ export default {
 }
 .container-article {
   @apply shadow-2xl;
+}
+.editor >>> .el-tiptap-editor__menu-bubble {
+  display: none;
+}
+.editor >>> .el-tiptap-editor__content h1 {
+  font-size: 2em;
+}
+.editor >>> .el-tiptap-editor__content h2 {
+  font-size: 1.5em;
+}
+.editor >>> .el-tiptap-editor__content h3 {
+  font-size: 1.17em;
+}
+.editor >>> .el-tiptap-editor__content h4 {
+  font-size: 1.12em;
+}
+.editor >>> .el-tiptap-editor__content h5 {
+  font-size: 0.83em;
 }
 @screen sm {
   .container-article {
