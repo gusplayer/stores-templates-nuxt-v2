@@ -586,20 +586,20 @@ export default {
   fill: white;
 }
 .tittle {
-  font-family: 'David Libre', serif !important;
+  font-family: 'David Libre' !important;
   color: #3f3f3f;
   font: inherit;
   font-size: 100%;
 }
 .categoria {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #9e9e9e;
   font: inherit;
   font-size: 100%;
 }
 .precio {
   @apply font-bold;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #ed2353;
   font-weight: 600;
 }

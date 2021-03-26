@@ -272,7 +272,7 @@ figure {
 
 .txt-day,
 .txt-month {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #333333;
 }
 .txt-day {
@@ -292,7 +292,7 @@ figure {
   cursor: default;
 }
 .txt-tituloart {
-  font-family: 'David libre', serif !important;
+  font-family: 'David libre' !important;
   color: #2d2a2a;
   transition: all 0.25s ease;
   cursor: pointer;
@@ -306,7 +306,7 @@ figure {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #a4a4a4;
   font-size: 14px;
 }
@@ -319,7 +319,7 @@ figure {
   cursor: default;
 }
 .subtext {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #777777;
   font-size: 14px;
   cursor: text;
@@ -336,7 +336,7 @@ figure {
   align-items: center;
   text-transform: uppercase;
   color: var(--color_icon);
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -349,7 +349,7 @@ figure {
   @apply transition-all ease-in duration-200;
   position: relative;
   color: var(--color_icon);
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   margin-left: 10px;
   margin-bottom: -5px;
   display: none;
@@ -388,7 +388,7 @@ figure {
   @apply w-full;
 }
 .txt-tituloart-bottom {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   font-size: 16px;
   text-transform: uppercase;
   color: var(--color_text);

@@ -419,15 +419,15 @@ export default {
 }
 
 .tittle {
-  font-family: 'Great Vibes', cursive !important;
+  font-family: 'Great Vibes' !important;
   color: #ed2353;
 }
 .subtittle {
-  font-family: 'David Libre', serif !important;
+  font-family: 'David Libre' !important;
   color: #2d2a2a;
 }
 .description {
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   color: #777;
 }
 .product-conten-items {
@@ -470,7 +470,7 @@ export default {
   font-size: 20px;
   color: #3f3f3f;
   font-weight: 600;
-  font-family: 'David Libre', serif !important;
+  font-family: 'David Libre' !important;
 }
 .pagination-medium {
   margin-top: 40px;

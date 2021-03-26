@@ -366,7 +366,7 @@ export default {
 }
 .header-text-menu {
   color: var(--color_text);
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
 }
 .header-content-logo {
   @apply flex justify-center items-center py-4;
@@ -385,7 +385,7 @@ export default {
 .btn {
   @apply mx-16 font-semibold uppercase tracking-wider;
   transition: all 0.25s ease;
-  font-family: var(--font-style-1), serif !important ;
+  font-family: var(--font-style-1) !important ;
   font-size: 14px;
   color: var(--color_text);
 }

@@ -123,7 +123,7 @@ export default {
   color: var(--color_text_btn_card);
   font-size: 13px;
   line-height: 18px;
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   @apply uppercase font-semibold;
 }
 .advertising-text {
@@ -131,11 +131,11 @@ export default {
 }
 .tittle {
   @apply py-4;
-  font-family: var(--font-style-2), cursive !important;
+  font-family: var(--font-style-2) !important;
   color: var(--color_text_card);
 }
 .subtittle {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_subtext_card);
   @apply text-center;
 }

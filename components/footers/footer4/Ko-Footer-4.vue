@@ -223,7 +223,7 @@ export default {
   transition: all 0.25s ease;
 }
 .btn {
-  font-family: var(--font-style-1), serif !important ;
+  font-family: var(--font-style-1) !important ;
 }
 .logo2 {
   width: 100px;

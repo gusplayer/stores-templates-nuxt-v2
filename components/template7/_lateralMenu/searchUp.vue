@@ -234,7 +234,7 @@ input[type='search'] {
 }
 ::-webkit-input-placeholder {
   @apply text-gray-textHeader text-center items-center text-5xl;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .order {
   @apply fixed top-0 left-0 w-10/0 flex justify-center items-center bg-black z-auto bg-opacity-50;

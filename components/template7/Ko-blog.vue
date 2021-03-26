@@ -163,15 +163,15 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .tittle-text {
-  font-family: var(--font-style-2), cursive !important;
+  font-family: var(--font-style-2) !important;
   color: var(--color_pre_title);
 }
 .subtittle-text {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_title);
 }
 .description-text {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_description);
 }
 @screen sm {

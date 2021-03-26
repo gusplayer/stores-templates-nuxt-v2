@@ -168,14 +168,14 @@ figure {
   @apply absolute flex flex-col;
 }
 .promo-banner-tittle {
-  font-family: var(--font-style-2), cursive !important;
+  font-family: var(--font-style-2) !important;
 }
 .promo-banner-subtittle {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   font-style: italic;
 }
 .content-textbutton-shop {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
 }
 .banner-content-buttons {
   @apply flex flex-row gap-3 justify-center items-center;
@@ -185,7 +185,7 @@ figure {
   border-radius: var(--radius_btn);
   background: var(--color_background_btn);
   color: var(--color_text_btn);
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   padding: 10px 20px;
 }
 .content-bttns-shop:hover {

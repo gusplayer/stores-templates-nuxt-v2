@@ -216,12 +216,12 @@ figure {
 }
 .txt-day,
 .txt-month {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_text_date);
 }
 .txt-tituloart,
 .txt-autorart {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   font-size: 14px;
 }
 .txt-tituloart {

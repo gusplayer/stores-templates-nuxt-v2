@@ -532,7 +532,7 @@ export default {
 }
 .txt-banner {
   color: #fff;
-  font-family: 'David libre', serif !important ;
+  font-family: 'David libre' !important ;
   font-weight: 400;
 }
 #separator {
@@ -546,7 +546,7 @@ export default {
 }
 .txt-banner {
   color: #2c2930;
-  font-family: 'Poppins', serif !important ;
+  font-family: 'Poppins' !important ;
   font-weight: 400;
 }
 .tittle-banner-blog {

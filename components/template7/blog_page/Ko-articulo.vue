@@ -537,7 +537,7 @@ export default {
 }
 .txt-banner {
   color: var(--color_title);
-  font-family: 'David libre', serif !important ;
+  font-family: 'David libre' !important ;
   font-weight: 400;
 }
 .tittle-banner-blog {

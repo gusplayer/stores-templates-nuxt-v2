@@ -119,16 +119,88 @@ export default {
       this.$store.commit('UPDATE_CONTENTCART')
     }
   },
-  data() {
-    return {
-      tipo_letra: null,
-      tipo_letra2: null,
-      tipo_letra3: null,
-    }
-  },
   head() {
+    let tipo_letra
+    let tipo_letra2
+    let tipo_letra3
+    switch (this.template) {
+      case 3:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto'
+        break
+      case 5:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto'
+        break
+      case 6:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto'
+        break
+      case 7:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate7 &&
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_1
+            ? this.settingByTemplate7.settingGeneral.fount_1
+            : 'David Libre'
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra2 =
+          this.settingByTemplate7 &&
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_2
+            ? this.settingByTemplate7.settingGeneral.fount_2
+            : 'Great Vibes'
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra3 =
+          this.settingByTemplate7 &&
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_3
+            ? this.settingByTemplate7.settingGeneral.fount_3
+            : 'Lora'
+        break
+      case 9:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto'
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra2 =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Poppins'
+        break
+      case 10:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Poppins'
+        break
+    }
     let tienda = this.$store.state.dataStore.tienda
-
     let tidio =
       this.$store.state.analytics_tagmanager &&
       this.$store.state.analytics_tagmanager.tidio_user
@@ -276,21 +348,35 @@ export default {
             this.template == 6 ||
             this.template == 10 ||
             this.template == 11
-              ? `https://fonts.googleapis.com/css?family=${this.tipo_letra}:100,200,300,400,500,600,700,800,900&display=swap`
+              ? `https://fonts.googleapis.com/css?family=${tipo_letra}:100,200,300,400,500,600,700,800,900&display=swap`
               : '',
           rel: 'stylesheet',
         },
         {
           href:
             this.template == 7
-              ? `https://fonts.googleapis.com/css2?family=${this.tipo_letra}&family=${this.tipo_letra2}&family=${this.tipo_letra3}@0;1&display=swap`
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 7
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra2}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 7
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra3}&display=swap`
               : '',
           rel: 'stylesheet',
         },
         {
           href:
             this.template == 9
-              ? `https://fonts.googleapis.com/css2?family=${this.tipo_letra}&family=${this.tipo_letra2}@0;1&display=swap`
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&family=${tipo_letra2}@0;1&display=swap`
               : '',
           rel: 'stylesheet',
         },
@@ -313,33 +399,12 @@ export default {
       switch (this.template) {
         case 3:
           headerComponent = 'KoHeader1'
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.tipo_letra =
-            this.settingByTemplate &&
-            this.settingByTemplate.settings &&
-            this.settingByTemplate.settings.tipo_letra
-              ? this.settingByTemplate.settings.tipo_letra
-              : 'Roboto'
           break
         case 5:
           headerComponent = 'KoHeader1'
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.tipo_letra =
-            this.settingByTemplate &&
-            this.settingByTemplate.settings &&
-            this.settingByTemplate.settings.tipo_letra
-              ? this.settingByTemplate.settings.tipo_letra
-              : 'Roboto'
           break
         case 6:
           headerComponent = 'KoHeader2'
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.tipo_letra =
-            this.settingByTemplate &&
-            this.settingByTemplate.settings &&
-            this.settingByTemplate.settings.tipo_letra
-              ? this.settingByTemplate.settings.tipo_letra
-              : 'Roboto'
           break
         // case 6:
         //   if (this.settingByTemplate.header) {
@@ -356,63 +421,20 @@ export default {
         //   break
         case 7:
           headerComponent = 'KoHeader4'
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.tipo_letra =
-            this.settingByTemplate &&
-            this.settingByTemplate.settings &&
-            this.settingByTemplate.settings.tipo_letra
-              ? this.settingByTemplate.settings.tipo_letra
-              : 'David Libre'
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.tipo_letra2 =
-            this.settingByTemplate &&
-            this.settingByTemplate.settings &&
-            this.settingByTemplate.settings.tipo_letra
-              ? this.settingByTemplate.settings.tipo_letra
-              : 'Great Vibes'
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.tipo_letra3 =
-            this.settingByTemplate &&
-            this.settingByTemplate.settings &&
-            this.settingByTemplate.settings.tipo_letra
-              ? this.settingByTemplate.settings.tipo_letra
-              : 'Lora'
           break
         case 8:
           headerComponent = 'KoHeader3'
           break
         case 9:
           headerComponent = 'KoHeader5'
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.tipo_letra =
-            this.settingByTemplate &&
-            this.settingByTemplate.settings &&
-            this.settingByTemplate.settings.tipo_letra
-              ? this.settingByTemplate.settings.tipo_letra
-              : 'Roboto'
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.tipo_letra2 =
-            this.settingByTemplate &&
-            this.settingByTemplate.settings &&
-            this.settingByTemplate.settings.tipo_letra
-              ? this.settingByTemplate.settings.tipo_letra
-              : 'Poppins'
           break
         case 10:
           headerComponent = 'KoHeader6'
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.tipo_letra =
-            this.settingByTemplate &&
-            this.settingByTemplate.settings &&
-            this.settingByTemplate.settings.tipo_letra
-              ? this.settingByTemplate.settings.tipo_letra
-              : 'Poppins'
           break
       }
       return headerComponent
     },
     footerTemplate() {
-      // let footerComp = ''
       let footerComponent = ''
       switch (this.template) {
         case 3:
@@ -560,10 +582,8 @@ export default {
   --green: #00dd8d;
   --magenta: #c52675;
   --yellow: #f2b931;
-
   --color_hover_text: #e64956;
   --btnhover: #929292;
-
   --radius_btn: 5px;
 }
 * {

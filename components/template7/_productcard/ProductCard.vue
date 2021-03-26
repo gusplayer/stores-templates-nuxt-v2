@@ -620,20 +620,20 @@ export default {
   fill: white;
 }
 .tittle {
-  font-family: var(--font-style-1), serif !important;
+  font-family: var(--font-style-1) !important;
   color: var(--color_text_card);
   font: inherit;
   font-size: 100%;
 }
 .categoria {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_subtext_card);
   font: inherit;
   font-size: 100%;
 }
 .precio {
   @apply font-bold;
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_price_card);
   font-weight: 600;
 }

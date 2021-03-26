@@ -288,7 +288,7 @@ export default {
 }
 .title {
   font-size: 25px;
-  font-family: 'David libre', serif !important ;
+  font-family: 'David libre' !important ;
   font-weight: bold;
   color: #3f3f3f;
   margin-bottom: 20px;
@@ -349,7 +349,7 @@ export default {
   font-size: 0px;
   transition: 0.4s;
   width: 0px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
 }
 .input-text:focus {
   border: none;

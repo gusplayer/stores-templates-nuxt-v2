@@ -195,7 +195,7 @@ export default {
 }
 .txt-banner {
   color: #222;
-  font-family: 'Poppins', serif !important ;
+  font-family: 'Poppins' !important ;
   font-weight: 600;
 }
 .tittle-banner-blog {
@@ -218,7 +218,7 @@ export default {
 }
 .title {
   font-size: 25px;
-  font-family: 'Poppins', serif !important ;
+  font-family: 'Poppins' !important ;
   font-weight: bold;
   color: #2c2930;
   margin-bottom: 20px;
@@ -279,7 +279,7 @@ export default {
   font-size: 0px;
   transition: 0.4s;
   width: 0px;
-  font-family: 'Poppins', serif !important ;
+  font-family: 'Poppins' !important ;
 }
 .input-text:focus {
   border: none;

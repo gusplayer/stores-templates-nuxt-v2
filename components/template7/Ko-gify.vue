@@ -148,15 +148,15 @@ export default {
 }
 
 .tittle {
-  font-family: var(--font-style-2), cursive !important;
+  font-family: var(--font-style-2) !important;
   color: var(--color_pre_title);
 }
 .subtittle {
-  font-family: var(--font-style-1), serif !important;
+  font-family: var(--font-style-1) !important;
   color: var(--color_title);
 }
 .description {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   color: var(--color_description);
 }
 .product-conten-items {

@@ -651,22 +651,22 @@ export default {
 }
 
 .card-title {
-  font-family: 'David Libre', serif !important;
+  font-family: 'David Libre' !important;
   color: #333333;
   font: inherit;
 }
 .categoria {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #9e9e9e;
   font: inherit;
 }
 .text-price {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #ed2353;
   font-weight: 600;
 }
 .separator-price {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #ed2353;
   font-weight: 600;
 }
@@ -709,7 +709,7 @@ export default {
   font-weight: bold;
   margin-bottom: 10px;
   color: #00a650;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .content_card-info {
   @apply w-full flex flex-row justify-start items-end;
@@ -721,7 +721,7 @@ export default {
   font-weight: bold;
   /* line-height: 1.2; */
   font-size: 16px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .content-button {
   display: flex;
@@ -729,7 +729,7 @@ export default {
   padding-bottom: 20px;
 }
 .btn {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: white;
   border-radius: 35px;
   border: solid 2px #ed2353;
