@@ -456,7 +456,7 @@ export default {
 }
 .txt-banner {
   color: #fff;
-  font-family: 'David libre', serif !important ;
+  font-family: 'Roboto', sans-serif !important ;
   font-weight: 400;
 }
 #separator {
@@ -470,7 +470,7 @@ export default {
 }
 .txt-banner {
   color: #2c2930;
-  font-family: 'Poppins', serif !important ;
+  font-family: 'Roboto', sans-serif !important ;
   font-weight: 400;
 }
 .tittle-banner-blog {
@@ -486,31 +486,30 @@ export default {
 .separatorCrumb {
   font-size: 9px;
   color: #222;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
 }
 .txt-crumb {
   font-size: 15px;
   color: #222;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
 }
 .s1:hover {
-  color: #eb7025;
+  color: #000;
   transition: all 0.25s ease;
 }
 .s2:hover {
-  color: #eb7025;
+  color: #000;
   transition: all 0.25s ease;
 }
 @screen sm {
   .bannerBlog {
-    @apply hidden;
+    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center py-20;
   }
   .container-article {
     @apply w-9/0;
   }
-
   .txt-banner {
     font-size: 36px;
   }
@@ -525,13 +524,7 @@ export default {
     margin-top: 140px;
   }
 }
-
 @screen md {
-  .bannerBlog {
-    height: 220px;
-    background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/v1614233821/Temp10/Productos/bg-beagrumb_gxvk1i.jpg');
-    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center;
-  }
   .container-article {
     @apply w-9/5;
   }
@@ -539,7 +532,6 @@ export default {
     font-size: 36px;
   }
 }
-
 @screen lg {
   .icon-blog {
     width: 4%;

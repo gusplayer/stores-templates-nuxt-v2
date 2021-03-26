@@ -1,7 +1,7 @@
 <template>
-  <transition name="fade">
-    <div class="order" @click="closeOrder" v-show="openMenuLeft">
-      <div class="order_content">
+  <transition name="fade z-50">
+    <div class="order z-50" @click="closeOrder" v-show="openMenuLeft">
+      <div class="order_content z-50">
         <div class="order_header">
           <div class="empty"></div>
           <div class="header-content-logo">

@@ -256,6 +256,16 @@ export default {
     focusInput() {
       document.getElementById('SearchHeader').focus()
     },
+    Searchproduct(search) {
+      this.$store.commit('SET_SEARCHVALUE', search)
+      if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+        window.fbq('track', 'Search', { value: search })
+      }
+      this.$router.push({
+        path: '/productos',
+        query: { search: search },
+      })
+    },
   },
   watch: {
     search(value) {
