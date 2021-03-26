@@ -458,9 +458,6 @@ export default {
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
     },
-    headerk07() {
-      return this.$store.state.headerk07
-    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -568,11 +565,6 @@ export default {
   box-sizing: border-box;
   outline: none !important;
 }
-/* .separadorKo7 {
-  width: 100%;
-  padding-top: 120px;
-  background: #efefef;
-} */
 .wrapper-whatsapp {
   position: fixed;
   transform: translate(108px, 0px);
@@ -749,26 +741,6 @@ export default {
     font-size: 14px;
     margin-bottom: 10px;
     text-align: center;
-  }
-}
-@screen sm {
-  .separadorKo7 {
-    padding-top: 60px;
-  }
-}
-@screen mlg {
-  .separadorKo7 {
-    padding-top: 70px;
-  }
-}
-@screen xl {
-  .separadorKo7 {
-    padding-top: 80px;
-  }
-}
-@screen xl {
-  .separadorKo7 {
-    padding-top: 120px;
   }
 }
 </style>

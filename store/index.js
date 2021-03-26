@@ -174,8 +174,22 @@ export const state = () => ({
       'Laura Pachecho es una emprendedora con años de experiencia creando accesorios de alta calidad.',
     text_btn: 'Conócenos',
   },
-  headerk07: false,
   modalpolitics05: false,
+  showTemplate7: {
+    showHeader07: true,
+    showFooter07: true,
+    showBody07: true,
+    showCarousel: true,
+    showPromo: true,
+    showProductList: true,
+    showAdvertising: true,
+    showGify: true,
+    showHowwork: true,
+    showBlog: true,
+    showNews: true,
+    showWrapper: true,
+    showCountry: true,
+  },
 })
 
 export const mutations = {
@@ -215,7 +229,6 @@ export const mutations = {
   DELETEALLITEMSCART: (state) => {
     state.productsCart = []
   },
-
   SET_SAVEOPTION: (state, payload) => {
     state.beforeCombination.splice(payload.index, 1, payload.option.option)
   },
@@ -239,9 +252,6 @@ export const mutations = {
   },
   SET_OPENORDERMENULEFT: (state, value) => {
     state.openMenulateralLeft = value
-  },
-  SET_STATESPACERHEADERK7: (state, value) => {
-    state.headerk07 = value
   },
   SET_TOKEN(state, value) {
     state.configHttp = {

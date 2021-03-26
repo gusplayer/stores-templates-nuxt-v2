@@ -149,15 +149,12 @@ export default {
     } else {
       this.showSearch = false
     }
-    // if (domain == '/' || domain != '/') {
-    //   this.$store.commit('SET_STATESPACERHEADERK7', true)
-    // }
 
     var prevScrollpos = window.pageYOffset
     window.onscroll = function () {
       var currentScrollPos = window.pageYOffset
       var navbar = document.getElementById('navbar')
-      var header = document.getElementById('headerid')
+      // var header = document.getElementById('headerid')
       var bghead = document.getElementById('headbg')
 
       if (currentScrollPos == 0) {

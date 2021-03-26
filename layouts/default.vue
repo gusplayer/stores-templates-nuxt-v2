@@ -9,15 +9,18 @@
           : 'Roboto',
     }"
   >
-    <component v-bind="componentsProps" :is="headerTemplate" />
-    <!-- <div
-      v-if="this.estadoHeader7 && this.headerk07"
-      class="separadorKo7"
-      id="separadork07"
-    ></div> -->
-    <nuxt />
-    <component v-bind="componentsProps" :is="footerTemplate" />
-    <KoFooterCountry :dataStore="dataStore" />
+    <component
+      v-bind="componentsProps"
+      :is="headerTemplate"
+      v-if="showTemplate7.showHeader07"
+    />
+    <nuxt v-if="showTemplate7.showBody07" />
+    <component
+      v-bind="componentsProps"
+      :is="footerTemplate"
+      v-if="showTemplate7.showFooter07"
+    />
+    <KoFooterCountry :dataStore="dataStore" v-if="showTemplate7.showCountry" />
     <div
       class="wrapper-whatsapp"
       v-if="dataStore.tienda.whatsapp"
@@ -76,7 +79,6 @@ import KoHeader3 from '../components/headers/header3/Ko-Header-3'
 import KoHeader4 from '../components/headers/header4/Ko-Header-4'
 import KoHeader5 from '../components/headers/header5/Ko-Header-5'
 import KoHeader6 from '../components/headers/header6/Ko-Header-6'
-
 import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
 import KoFooter4 from '../components/footers/footer4/Ko-Footer-4'
@@ -486,9 +488,6 @@ export default {
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
     },
-    headerk07() {
-      return this.$store.state.headerk07
-    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -511,6 +510,9 @@ export default {
             ? this.settingByTemplate7.settingGeneral
             : null,
       }
+    },
+    showTemplate7() {
+      return this.$store.state.showTemplate7
     },
   },
   methods: {
@@ -591,16 +593,10 @@ export default {
   padding: 0px;
   font-family: var(--font-style);
   outline: none;
-  /* list-style: none; */
   text-decoration: none;
   box-sizing: border-box;
   outline: none !important;
 }
-/* .separadorKo7 {
-  width: 100%;
-  padding-top: 120px;
-  background: #efefef;
-} */
 .wrapper-whatsapp {
   position: fixed;
   transform: translate(108px, 0px);
@@ -777,26 +773,6 @@ export default {
     font-size: 14px;
     margin-bottom: 10px;
     text-align: center;
-  }
-}
-@screen sm {
-  .separadorKo7 {
-    padding-top: 60px;
-  }
-}
-@screen mlg {
-  .separadorKo7 {
-    padding-top: 70px;
-  }
-}
-@screen xl {
-  .separadorKo7 {
-    padding-top: 80px;
-  }
-}
-@screen xl {
-  .separadorKo7 {
-    padding-top: 120px;
   }
 }
 </style>
