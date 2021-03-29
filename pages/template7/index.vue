@@ -1,23 +1,51 @@
 <template lang="html">
   <div>
-    <KCarousel v-bind="componentsProps" v-if="showTemplate7.showCarousel" />
-    <KPromo v-bind="componentsProps" v-if="showTemplate7.showPromo" />
+    <KCarousel
+      v-bind="componentsProps"
+      v-if="showTemplate7.showCarousel && settingByTemplate7.banner.visible"
+    />
+    <KPromo
+      v-bind="componentsProps"
+      v-if="showTemplate7.showPromo && settingByTemplate7.content.visible"
+    />
     <KProductList
       v-bind="componentsProps"
-      v-if="showTemplate7.showProductList"
+      v-if="
+        showTemplate7.showProductList && settingByTemplate7.productList.visible
+      "
     />
     <KAdvertising
       v-bind="componentsProps"
-      v-if="showTemplate7.showAdvertising"
+      v-if="
+        showTemplate7.showAdvertising && settingByTemplate7.advertising.visible
+      "
     />
-    <KGify v-bind="componentsProps" v-if="showTemplate7.showGify" />
-    <KHowwork v-bind="componentsProps" v-if="showTemplate7.showHowwork" />
+    <KGify
+      v-bind="componentsProps"
+      v-if="
+        showTemplate7.showGify && settingByTemplate7.ProductFavorite.visible
+      "
+    />
+    <KHowwork
+      v-bind="componentsProps"
+      v-if="showTemplate7.showHowwork && settingByTemplate7.howWork.visible"
+    />
     <KBlog
       v-bind="componentsProps"
-      v-show="listArticulos.length > 0 && showTemplate7.showBlog"
+      v-show="
+        listArticulos.length > 0 &&
+        showTemplate7.showBlog &&
+        settingByTemplate7.blog.visible
+      "
     />
-    <KNews v-bind="componentsProps" v-if="showTemplate7.showNews" />
-    <KWrapper v-bind="componentsProps" v-if="showTemplate7.showWrapper" />
+    <KNews
+      v-bind="componentsProps"
+      v-if="showTemplate7.showNews && settingByTemplate7.newsletter.visible"
+    />
+    <KWrapper
+      v-bind="componentsProps"
+      v-if="showTemplate7.showWrapper && settingByTemplate7.contentImg.visible"
+    />
   </div>
 </template>
 
