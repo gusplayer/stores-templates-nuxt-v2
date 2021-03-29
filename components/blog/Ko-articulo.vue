@@ -47,25 +47,51 @@
           </ol>
         </nav>
         <div>
-          <p
-            class="mt-10 text-3xl text-start font-extrabold tracking-tight text-gray-900 sm:text"
-          >
+          <p class="size_title mt-10 text-start">
             {{ dataArticle.titulo }}
           </p>
         </div>
-        <div class="content-date">
-          <div class="flex-shrink-0">
-            <a href="#">
-              <img
-                class="h-40 w-40 rounded-full"
-                v-lazy="`https://api2.komercia.co/users/user.jpg`"
-                alt=""
-              />
-            </a>
+        <div class="flex justify-between items-center">
+          <div class="content-date">
+            <div class="flex-shrink-0">
+              <a href="#">
+                <img
+                  class="h-40 w-40 rounded-full"
+                  v-lazy="`https://api2.komercia.co/users/user.jpg`"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="content-date-items">
+              <p>{{ dataArticle.autor }}</p>
+              <p>{{ this.shippingCreated }}</p>
+            </div>
           </div>
-          <div class="content-date-items">
-            <p>{{ dataArticle.autor }}</p>
-            <p>{{ this.shippingCreated }}</p>
+          <div class="flex icons">
+            <a
+              :href="this.sharingFacebook"
+              target="_blank"
+              rel="noreferrer noopener"
+              style="max-height: 25px;"
+            >
+              <facebook-icon class="wp-icon" />
+            </a>
+            <a
+              :href="this.sharingTwitter"
+              target="_blank"
+              rel="noreferrer noopener"
+              style="max-height: 25px;"
+            >
+              <twitter-icon class="wp-icon marginIcon" />
+            </a>
+            <a
+              :href="this.sharingLinkedin"
+              target="_blank"
+              rel="noreferrer noopener"
+              style="max-height: 25px;"
+            >
+              <linkedin-icon class="wp-icon marginIcon" />
+            </a>
           </div>
         </div>
         <div class="editor" v-if="dataArticle.contenido">
@@ -260,6 +286,14 @@ export default {
         new Print(),
         new SelectAll(),
       ],
+      sharing: {
+        url: '',
+        quote: '',
+        quoteTwitter: '',
+      },
+      sharingFacebook: '',
+      sharingTwitter: '',
+      sharingLinkedin: '',
     }
   },
   computed: {
@@ -276,6 +310,12 @@ export default {
           this.dataArticle = product
         }
       })
+      this.sharing.url = window.location.href
+      this.sharing.quote = `${this.dataArticle.titulo}%0A%0A${this.dataArticle.resumen}`
+      this.sharing.quoteTwitter = `${this.dataArticle.titulo}%20by%20${this.dataArticle.autor}%0A`
+      this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
+      this.sharingTwitter = `https://twitter.com/intent/tweet?text=${this.sharing.quoteTwitter}%0A${this.sharing.url}`
+      this.sharingLinkedin = `https://www.linkedin.com/shareArticle?mini=true&url=${this.sharing.url}`
     },
   },
   watch: {
@@ -286,6 +326,12 @@ export default {
 }
 </script>
 <style scoped>
+.size_title {
+  font-size: 48px;
+  font-weight: bold;
+  color: black;
+  line-height: 48px;
+}
 .wrapper-blog {
   display: flex;
   flex-direction: column;
@@ -327,7 +373,6 @@ export default {
 .content-date-items p:nth-child(1) {
   font-weight: bold;
 }
-
 .editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
   border: none;
   padding: 10px 5px;
@@ -350,7 +395,18 @@ export default {
 .editor >>> .el-tiptap-editor__content h5 {
   font-size: 0.83em;
 }
-
+.wp-icon {
+  font-size: 25px;
+  bottom: 2px;
+  color: #757575;
+  cursor: pointer;
+}
+.wp-icon:hover {
+  color: #494949;
+}
+.marginIcon {
+  margin-left: 8px;
+}
 @screen sm {
   .container-article {
     width: 95%;
@@ -360,27 +416,34 @@ export default {
     margin-bottom: 40px;
   }
 }
-@media (min-width: 425px) {
+@media (max-width: 425px) {
   .icon-blog {
     width: 8%;
     margin-bottom: 40px;
   }
+  .size_title {
+    font-size: 25px;
+  }
 }
-@media (min-width: 490px) {
+@media (max-width: 490px) {
   .icon-blog {
     width: 7%;
     margin-bottom: 40px;
   }
 }
-@media (min-width: 576px) {
+@media (max-width: 576px) {
   .grid-products {
     @apply w-9/5 grid-cols-2;
   }
 }
-@media (min-width: 600px) {
+@media (max-width: 600px) {
   .icon-blog {
     width: 6%;
     margin-bottom: 40px;
+  }
+  .size_title {
+    font-size: 28px;
+    line-height: 35px;
   }
 }
 @screen md {
@@ -392,7 +455,7 @@ export default {
     margin-bottom: 40px;
   }
 }
-@media (min-width: 900px) {
+@media (max-width: 900px) {
   .icon-blog {
     width: 4%;
     margin-bottom: 40px;
@@ -404,7 +467,7 @@ export default {
     margin-bottom: 40px;
   }
 }
-@media (min-width: 1100px) {
+@media (max-width: 1100px) {
   .icon-blog {
     width: 3%;
     margin-bottom: 40px;
@@ -412,7 +475,7 @@ export default {
 }
 @screen mlg {
   .container-article {
-    @apply w-9/3;
+    @apply w-7/8;
   }
   .icon-blog {
     width: 5%;
@@ -421,17 +484,7 @@ export default {
 }
 @screen xl {
   .container-article {
-    @apply w-8/3;
-  }
-}
-@screen xml {
-  .container-article {
-    @apply w-6/3;
-  }
-}
-@screen xxl {
-  .container-article {
-    @apply w-4/6;
+    @apply w-4/8;
   }
 }
 </style>

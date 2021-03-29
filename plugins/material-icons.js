@@ -8,6 +8,7 @@ import Twitter from 'vue-material-design-icons/Twitter.vue'
 import Google from 'vue-material-design-icons/GooglePlus.vue'
 import Instagram from 'vue-material-design-icons/Instagram.vue'
 import Youtube from 'vue-material-design-icons/Youtube.vue'
+import Linkedin from 'vue-material-design-icons/Linkedin.vue'
 import Cart from 'vue-material-design-icons/CartOutline.vue'
 import CartShop from 'vue-material-design-icons/ShoppingOutline.vue'
 import shopping from 'vue-material-design-icons/Shopping.vue'
@@ -46,6 +47,7 @@ Vue.component('twitter-icon', Twitter)
 Vue.component('google-icon', Google)
 Vue.component('instagram-icon', Instagram)
 Vue.component('youtube-icon', Youtube)
+Vue.component('linkedin-icon', Linkedin)
 Vue.component('whatsapp-icon', Whatsapp)
 Vue.component('tiktok-icon', tiktok)
 
