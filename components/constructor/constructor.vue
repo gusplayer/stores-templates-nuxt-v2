@@ -75,7 +75,7 @@
           :is="componentFile"
           :dataStore="dataStore"
           :currentComponentSettings="getSettingsCSS"
-          :stateComponent="true"
+          :isDisabled="true"
           :fullProducts="
             nameCurrentComponent.includes('ProductList') ? fullProducts : ''
           "
@@ -222,6 +222,10 @@ export default {
               id: 51,
               name: 'Ko-Footer-1',
             },
+            {
+              id: 52,
+              name: 'Ko-Footer-2',
+            },
           ],
         },
         {
@@ -307,34 +311,34 @@ export default {
   },
   computed: {
     componentFile() {
-      // if (this.selectedComponent) {
-      //   if ('headers' == this.fileTipos.name.toLowerCase()) {
-      //     this.SettingsComponentes = 'headers'
-      //   }
-      //   if (
-      //     'banners' == this.fileTipos.name.toLowerCase() ||
-      //     'contents' == this.fileTipos.name.toLowerCase() ||
-      //     'separators' == this.fileTipos.name.toLowerCase() ||
-      //     'videos' == this.fileTipos.name.toLowerCase() ||
-      //     'carts' == this.fileTipos.name.toLowerCase() ||
-      //     'productdetails' == this.fileTipos.name.toLowerCase() ||
-      //     'newsletter' == this.fileTipos.name.toLowerCase() ||
-      //     'contacts' == this.fileTipos.name.toLowerCase() ||
-      //     'productlist' == this.fileTipos.name.toLowerCase()
-      //   ) {
-      //     this.SettingsComponentes = 'general'
-      //   }
-      //   if ('footers' == this.fileTipos.name.toLowerCase()) {
-      //     this.SettingsComponentes = 'footers'
-      //   }
-      //   return () =>
-      //     import(
-      //       `../../../core-components-npm/src/components/${this.fileTipos.name.toLowerCase()}/${
-      //         this.nameCurrentComponent
-      //       }`
-      //     )
-      // }
-      return false
+      if (this.selectedComponent) {
+        if ('headers' == this.fileTipos.name.toLowerCase()) {
+          this.SettingsComponentes = 'headers'
+        }
+        if (
+          'banners' == this.fileTipos.name.toLowerCase() ||
+          'contents' == this.fileTipos.name.toLowerCase() ||
+          'separators' == this.fileTipos.name.toLowerCase() ||
+          'videos' == this.fileTipos.name.toLowerCase() ||
+          'carts' == this.fileTipos.name.toLowerCase() ||
+          'productdetails' == this.fileTipos.name.toLowerCase() ||
+          'newsletter' == this.fileTipos.name.toLowerCase() ||
+          'contacts' == this.fileTipos.name.toLowerCase() ||
+          'productlist' == this.fileTipos.name.toLowerCase()
+        ) {
+          this.SettingsComponentes = 'general'
+        }
+        if ('footers' == this.fileTipos.name.toLowerCase()) {
+          this.SettingsComponentes = 'footers'
+        }
+        return () =>
+          import(
+            `../../../core-components-npm/src/components/${this.fileTipos.name.toLowerCase()}/${
+              this.nameCurrentComponent
+            }`
+          )
+      }
+      // return false
     },
     dataStore() {
       return this.$store.state.dataStore

@@ -174,9 +174,8 @@ export default {
     }
     let tienda = this.$store.state.dataStore.tienda
     let tidio =
-      this.$store.state.analytics_tagmanager &&
-      this.$store.state.analytics_tagmanager.tidio_user
-        ? this.$store.state.analytics_tagmanager.tidio_user
+      this.analytics_tagmanager && this.analytics_tagmanager.tidio_user
+        ? this.analytics_tagmanager.tidio_user
         : ''
     let FacebookPixel1 =
       this.analytics_tagmanager &&
@@ -462,10 +461,10 @@ export default {
       return {
         dataStore: this.dataStore,
         settingByTemplate:
-          this.$store.state.settingByTemplate &&
-          this.$store.state.settingByTemplate.settings &&
-          this.$store.state.settingByTemplate.settings['--background_color_1']
-            ? this.$store.state.settingByTemplate.settings
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings['--background_color_1']
+            ? this.settingByTemplate.settings
             : this.settingBase,
         settingByTemplate7h:
           this.settingByTemplate7 && this.settingByTemplate7.header

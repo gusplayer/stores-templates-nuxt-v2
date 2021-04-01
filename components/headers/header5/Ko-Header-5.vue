@@ -1,6 +1,26 @@
 <template>
-  <div class="header-container" id="navbar" :style="settingByTemplate">
-    <div class="wrapper-header" id="headbg">
+  <div
+    class="header-container"
+    id="navbar"
+    :style="[
+      settingByTemplate9[0].setting9Header,
+      settingByTemplate9[0].setting9General,
+    ]"
+  >
+    <div
+      class="wrapper-header"
+      id="headbg"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate9 &&
+            this.settingByTemplate9[0].setting9General &&
+            this.settingByTemplate9[0].setting9General.fount_1
+              ? this.settingByTemplate9[0].setting9General.fount_1
+              : 'Poppins',
+        },
+      ]"
+    >
       <div class="header" id="headerid">
         <KoOrder :dataStore="dataStore" />
         <div class="header-item-menu">
@@ -105,7 +125,10 @@
             </div>
           </div>
         </div>
-        <KoSearch :dataStore="dataStore" />
+        <KoSearch
+          :dataStore="dataStore"
+          :settingByTemplate9="settingByTemplate9"
+        />
         <KoMenu :dataStore="dataStore" class="responsive" />
       </div>
     </div>
@@ -126,9 +149,17 @@ export default {
   name: 'Ko-Header-5',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingByTemplate9: Array,
   },
   mounted() {
+    let colorBg = ''
+    if (this.settingByTemplate9 && this.settingByTemplate9[0].setting9Header) {
+      colorBg = this.settingByTemplate9[0].setting9Header[
+        '--background_color_1'
+      ]
+    } else {
+      colorBg = '#ffffff'
+    }
     let domain = this.$route.fullPath
     let searchCategory = domain.slice(0, [11])
     let searchSubCategory = domain.slice(0, [14])
@@ -149,25 +180,22 @@ export default {
     } else {
       this.showSearch = false
     }
-
+    var navbar = document.getElementById('navbar')
+    var header = document.getElementById('headerid')
+    var bghead = document.getElementById('headbg')
     var prevScrollpos = window.pageYOffset
+    header.style.backgroundColor = colorBg
     window.onscroll = function () {
       var currentScrollPos = window.pageYOffset
-      var navbar = document.getElementById('navbar')
-      // var header = document.getElementById('headerid')
-      var bghead = document.getElementById('headbg')
-
       if (currentScrollPos == 0) {
         navbar.style.zIndex = '20'
         navbar.style.top = '0px'
       } else if (prevScrollpos > currentScrollPos && navbar) {
-        //sube
         navbar.style.top = '0px'
         navbar.style.zIndex = '20'
-        bghead.style.backgroundColor = '#ffffff'
+        bghead.style.backgroundColor = colorBg
         // header.style.boxShadow = '0px 22px 11px -12px rgba(145, 145, 145, 0.57)'
       } else {
-        //baja
         navbar.style.zIndex = '20'
         navbar.style.top = '-100px'
       }
@@ -290,13 +318,14 @@ export default {
 .header-container {
   transition: all 0.5s ease-in-out;
   @apply w-full flex flex-col justify-center items-center fixed top-0 z-10;
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid var(--background_color_1);
 }
 .wrapper-header {
   @apply flex flex-col w-full justify-between items-center;
 }
 .header {
-  @apply flex w-full justify-between bg-white-white;
+  @apply flex w-full justify-between;
+  background: var(--background_color_1);
 }
 .header-item-menu {
   @apply hidden;
@@ -308,7 +337,7 @@ export default {
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #3f3f3f;
+  color: var(--color_icon);
 }
 .header-icon-menu > .material-design-icon__svg {
   bottom: 0em;
@@ -321,7 +350,7 @@ export default {
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #3f3f3f;
+  color: var(--color_icon);
 }
 .nav-bar > .material-design-icon__svg {
   bottom: 0px;
@@ -329,16 +358,20 @@ export default {
   height: 24px;
 }
 .header-text-menu {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1) !important;
 }
 .header-content-logo {
-  @apply flex justify-center items-center py-4;
+  margin-top: var(--padding);
+  margin-bottom: var(--padding);
+  @apply flex justify-center items-center;
 }
 .wrapper-logo {
+  max-width: var(--with_logo);
   @apply w-full;
 }
 .header-logo {
-  @apply object-contain object-left max-h-16;
+  @apply object-contain object-left w-full;
 }
 .header-content-buttons {
   @apply w-auto flex flex-wrap gap-0 justify-center items-center;
@@ -346,13 +379,14 @@ export default {
 .btn {
   margin-right: 20px;
   transition: all 0.1s ease;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1) !important;
   font-size: 14px;
-  color: #303030;
+  color: var(--color_text);
   font-weight: 600;
 }
 .btn:hover {
-  color: #000;
+  color: var(--hover_text);
   transition: all 0.1s ease;
   border-bottom: 2px solid #000;
 }
@@ -365,20 +399,20 @@ export default {
 }
 .search-header {
   @apply cursor-pointer;
-  fill: #303030;
+  fill: var(--color_icon);
   transition: all 0.25s ease;
 }
 .search-header:hover {
-  fill: #000;
+  fill: var(--hover_text);
   transition: all 0.25s ease;
 }
 .search-header-left {
   @apply cursor-pointer;
-  fill: #303030;
+  fill: var(--color_icon);
   transition: all 0.25s ease;
 }
 .search-header-left:hover {
-  fill: #000;
+  fill: var(--hover_text);
   transition: all 0.25s ease;
 }
 .empty {
@@ -387,13 +421,14 @@ export default {
 .btn-bag {
   margin-right: 15px;
   transition: all 0.1s ease;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1) !important;
   font-size: 14px;
-  color: #303030;
+  color: var(--color_text);
   font-weight: 600;
 }
 .header-content-icon:hover .btn-bag {
-  color: #000;
+  color: var(--hover_text);
   transition: all 0.25s ease;
 }
 .header-content-icon {
@@ -403,11 +438,11 @@ export default {
   @apply flex justify-center items-center w-36 h-36 box-border pb-4 ml-20 relative cursor-pointer;
 }
 .icon-shop {
-  fill: #303030;
+  fill: var(--color_icon);
   transition: all 0.25s ease;
 }
 .header-content-icon:hover .icon-shop {
-  fill: #000;
+  fill: var(--hover_text);
   transition: all 0.25s ease;
 }
 .border-num-items {
@@ -418,10 +453,10 @@ export default {
   @apply w-auto flex justify-center items-center text-center;
   /* background: var(--color_background_btn); */
 }
-
 .num-items {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #333;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1) !important;
+  color: var(--color_text);
   font-size: 14px;
   line-height: 12px;
   font-weight: 600;
@@ -429,12 +464,13 @@ export default {
   letter-spacing: 0px;
   padding-left: 10px;
   padding-right: 15px;
-  border-left: 1px solid #000;
-  border-left-color: rgba(0, 0, 0, 0.21);
+  border-left: 1px solid var(--color_border);
+  /* border-left-color: var(--color_border); */
 }
 .num-items-up {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #2c2930;
+  font-family: var(--font-style-1) !important;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  color: var(--color_text);
   font-size: 10px;
   font-weight: 400;
   letter-spacing: 0px;
@@ -442,7 +478,7 @@ export default {
   margin-top: -30px;
 }
 .header-content-icon:hover .num-items {
-  color: #000;
+  color: var(--hover_text);
   transition: all 0.25s ease;
 }
 /* ***** */

@@ -21,6 +21,8 @@
           <KProducts
             :dataStore="dataStore"
             :fullProducts="fullProducts"
+            :settingKProdutCard="settingKProdutCard"
+            :settingGeneral="settingGeneral"
           ></KProducts>
         </div>
       </div>
@@ -33,12 +35,14 @@ import KProducts from '../../../components/template7/Ko-ProductListSearchUp'
 export default {
   name: 'KoSearch',
   props: {
+    dataStore: Object,
     showMenu: Boolean,
+    settingGeneral: Object,
+    settingKProdutCard: Object,
   },
   components: {
     KProducts,
   },
-
   data() {
     return {
       add: true,
@@ -87,9 +91,6 @@ export default {
     },
     subcategories() {
       return this.dataStore.subcategorias
-    },
-    dataStore() {
-      return this.$store.state.dataStore
     },
     fullProducts() {
       return this.$store.getters['products/filterProducts']

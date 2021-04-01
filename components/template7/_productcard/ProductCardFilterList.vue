@@ -21,7 +21,6 @@
         </client-only>
         <div class="image_overlay"></div>
       </router-link>
-
       <div class="overlay-sould" v-if="soldOut">
         <div class="text-sould">
           <svg
@@ -219,7 +218,7 @@
       </div>
       <!-- Envios gratis -->
       <div class="content_buy_action">
-        <div v-if="product.envio_gratis == 1 && product.stock > 0">
+        <div v-if="product.envio_gratis == 1 && !soldOut && !spent">
           <div class="transport-icon">
             <svg
               class="transporte-icon mr-2"
@@ -332,7 +331,7 @@
         <button
           ref="colorBtn"
           class="btn"
-          v-if="product.stock > 0"
+          v-if="!this.estadoCart && !soldOut && !spent"
           v-on:click="addShoppingCart"
           id="AddToCartTag"
         >
@@ -340,12 +339,7 @@
             {{ $t('productdetail_añadiralcarrito') }}
           </p>
         </button>
-        <button
-          disabled
-          class="btn-disabled"
-          v-if="product.stock == 0"
-          v-on:click="addShoppingCart"
-        >
+        <button disabled class="btn-disabled" v-else>
           <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
         </button>
       </div>
@@ -383,6 +377,9 @@ export default {
       this.product.variantes[0].variantes !== '[object Object]'
     ) {
       this.estadoCart = true
+    }
+    if (this.product) {
+      this.getDataProduct()
     }
   },
   computed: {
@@ -444,26 +441,28 @@ export default {
   },
   methods: {
     getDataProduct() {
-      this.salesData = {
-        precio: this.product.precio,
-        unidades: this.product.stock,
-        sku: this.product.sku,
-        estado: true,
-      }
-      this.maxQuantityValue = this.product.stock
-      this.productsCarts.find((productCart, index) => {
-        if (productCart.id == this.product.id) {
-          this.productIndexCart = index
-          this.productCart = productCart
-          this.maxQuantityValue = this.product.stock - productCart.cantidad
+      if (this.product) {
+        this.salesData = {
+          precio: this.product.precio,
+          unidades: this.product.stock,
+          sku: this.product.sku,
+          estado: true,
         }
-      })
-      if (
-        this.salesData.unidades == 0 ||
-        this.maxQuantityValue <= 0 ||
-        this.maxQuantityValue == 0
-      ) {
-        this.spent = true
+        this.maxQuantityValue = this.product.stock
+        this.productsCarts.find((productCart, index) => {
+          if (productCart.id == this.product.id) {
+            this.productIndexCart = index
+            this.productCart = productCart
+            this.maxQuantityValue = this.product.stock - productCart.cantidad
+          }
+        })
+        if (
+          this.salesData.unidades == 0 ||
+          this.maxQuantityValue <= 0 ||
+          this.maxQuantityValue == 0
+        ) {
+          this.spent = true
+        }
       }
     },
     addShoppingCart() {

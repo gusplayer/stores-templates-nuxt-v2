@@ -361,7 +361,6 @@ export default {
   name: 'Ko-Social-Networks',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
   },
   data() {
     return {
@@ -413,7 +412,6 @@ export default {
   transition: all 200ms ease-in;
   fill: #ffffff;
 }
-
 .facebook-icon:hover .circle-facebook {
   transition: all 200ms ease-in;
   fill: #3b5998;
@@ -422,7 +420,6 @@ export default {
   transition: all 200ms ease-in;
   fill: #ffffff;
 }
-
 .youtube-icon:hover .circle-youtube {
   transition: all 200ms ease-in;
   fill: #f61c0d;

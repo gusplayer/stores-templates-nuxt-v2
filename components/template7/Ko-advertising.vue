@@ -88,7 +88,7 @@ export default {
 .advertising-wrapper {
   @apply w-full flex justify-center items-center;
   background: var(--background_color_1);
-  margin-bottom: 70px;
+  padding-bottom: 70px;
 }
 .advertising-background {
   @apply flex justify-center items-center bg-cover z-auto;

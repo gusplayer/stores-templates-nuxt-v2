@@ -42,10 +42,10 @@
       v-bind="componentsProps"
       v-if="showTemplate7.showNews && settingByTemplate7.newsletter.visible"
     />
-    <KWrapper
+    <!-- <KWrapper
       v-bind="componentsProps"
       v-if="showTemplate7.showWrapper && settingByTemplate7.contentImg.visible"
-    />
+    /> -->
   </div>
 </template>
 
@@ -56,9 +56,9 @@ import KProductList from '../../components/template7/Ko-ProductList'
 import KAdvertising from '../../components/template7/Ko-advertising'
 import KGify from '../../components/template7/Ko-gify'
 import KHowwork from '../../components/template7/Ko-how-we-work'
-import KWrapper from '../../components/template7/Ko-wrapper'
 import KNews from '../../components/template7/Ko-Newsletter'
 import KBlog from '../../components/template7/Ko-blog'
+// import KWrapper from '../../components/template7/Ko-wrapper'
 
 export default {
   layout: 'default',
@@ -69,9 +69,9 @@ export default {
     KAdvertising,
     KGify,
     KHowwork,
-    KWrapper,
     KNews,
     KBlog,
+    // KWrapper,
   },
   mounted() {
     let domain = this.$route.fullPath
@@ -222,45 +222,15 @@ export default {
         break
     }
   },
-  data() {
-    return {
-      search: '',
-    }
-  },
   computed: {
-    template() {
-      return this.$store.state.template
-    },
     dataStore() {
       return this.$store.state.dataStore
     },
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
-    },
     listArticulos() {
       return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
-      }
     },
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
@@ -319,25 +289,7 @@ export default {
       return this.$store.state.showTemplate7
     },
   },
-  methods: {
-    Searchproduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
-    },
-    getSearch(value) {
-      if (value) {
-        location.href = '?search=' + value
-        if (this.facebooPixel != null) {
-          window.fbq('track', 'Search', { ValorBuscado: value })
-        }
-      } else {
-        location.href = '?search=' + ''
-      }
-    },
-  },
   watch: {
-    search(value) {
-      this.Searchproduct(value)
-    },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath

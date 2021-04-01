@@ -1,20 +1,6 @@
 <template>
   <div class="product-content">
     <div class="producto-items-content" id="section">
-      <div class="product-text">
-        <div class="product-tittle">
-          <span class="tittle">Accesorios de madera.</span>
-        </div>
-        <div class="product-subtittle">
-          <span class="subtittle">Productos Destacados</span>
-        </div>
-        <div class="product-description">
-          <span class="description">
-            Es un hecho establecido desde hace mucho tiempo que un lector se
-            distraerá
-          </span>
-        </div>
-      </div>
       <div class="content-item">
         <div class="content-item-productos">
           <div class="product-conten-items">
@@ -23,7 +9,11 @@
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard :product="product"></KoProductCard>
+              <KoProductCard
+                :product="product"
+                :settingKProdutCard="settingKProdutCard"
+                :settingGeneral="settingGeneral"
+              ></KoProductCard>
             </div>
           </div>
           <div
@@ -70,6 +60,8 @@ export default {
   props: {
     dataStore: Object,
     fullProducts: {},
+    settingGeneral: Object,
+    settingKProdutCard: Object,
   },
   name: 'Ko-ProductList-1',
   data() {
@@ -146,7 +138,6 @@ export default {
       }
     }
   },
-
   computed: {
     products: {
       get() {

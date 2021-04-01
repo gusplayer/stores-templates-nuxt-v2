@@ -1,6 +1,23 @@
 <template>
-  <div class="product-content">
-    <div class="producto-items-content" id="section">
+  <div class="product-content" :style="[productList, settingGeneral]">
+    <div
+      class="producto-items-content"
+      id="section"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
       <div class="product-text">
         <div class="product-tittle">
           <span class="tittle">Selecciones de esta semana</span>
@@ -54,6 +71,8 @@ export default {
   props: {
     dataStore: Object,
     fullProducts: {},
+    productList: Object,
+    settingGeneral: Object,
   },
   name: 'Ko-ProductList',
   mounted() {
@@ -78,6 +97,7 @@ export default {
     },
   },
   watch: {
+    // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       let domain = this.$route.fullPath
       if (domain === '/') {

@@ -129,7 +129,7 @@ export default {
 
 <style scoped>
 .product-content {
-  @apply flex flex-col justify-center items-center w-full my-80;
+  @apply flex flex-col justify-center items-center w-full py-60;
   background: var(--background_color_1);
 }
 .product-text,

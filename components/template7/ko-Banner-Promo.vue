@@ -139,7 +139,7 @@ export default {
 
 <style scoped>
 .promo-banner-content {
-  @apply w-full flex flex-row justify-center items-center mt-40;
+  @apply w-full flex flex-row justify-center items-center pt-40;
   background: var(--background_color_1);
 }
 .promo-banner-items {

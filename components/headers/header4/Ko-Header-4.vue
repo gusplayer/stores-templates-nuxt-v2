@@ -2,7 +2,10 @@
   <div
     class="header-container"
     id="navbar"
-    :style="[settingByTemplate7h, settingByTemplate7General]"
+    :style="[
+      settingByTemplate7[0].setting7Header,
+      settingByTemplate7[0].setting7General,
+    ]"
   >
     <div
       class="wrapper-header"
@@ -10,16 +13,18 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate7General &&
-            this.settingByTemplate7General.fount_1
-              ? this.settingByTemplate7General.fount_1
+            this.settingByTemplate7 &&
+            this.settingByTemplate7[0].setting7General &&
+            this.settingByTemplate7[0].setting7General.fount_1
+              ? this.settingByTemplate7[0].setting7General.fount_1
               : 'David libre',
         },
         {
           '--font-style-3':
-            this.settingByTemplate7General &&
-            this.settingByTemplate7General.fount_3
-              ? this.settingByTemplate7General.fount_3
+            this.settingByTemplate7 &&
+            this.settingByTemplate7[0].setting7General &&
+            this.settingByTemplate7[0].setting7General.fount_3
+              ? this.settingByTemplate7[0].setting7General.fount_3
               : 'Lora',
         },
       ]"
@@ -97,7 +102,11 @@
             </div>
           </div>
         </div>
-        <KoSearch :dataStore="dataStore" />
+        <KoSearch
+          :dataStore="dataStore"
+          :settingKProdutCard="this.settingByTemplate7[0].settingKProdutCard"
+          :settingGeneral="this.settingByTemplate7[0].setting7General"
+        />
         <KoMenu :dataStore="dataStore" class="responsive" />
       </div>
     </div>
@@ -118,13 +127,14 @@ export default {
   name: 'Ko-Header-4',
   props: {
     dataStore: Object,
-    settingByTemplate7h: Object,
-    settingByTemplate7General: Object,
+    settingByTemplate7: Array,
   },
   mounted() {
     let colorBg = ''
-    if (this.settingByTemplate7h) {
-      colorBg = this.settingByTemplate7h['--background_color_1']
+    if (this.settingByTemplate7 && this.settingByTemplate7[0].setting7Header) {
+      colorBg = this.settingByTemplate7[0].setting7Header[
+        '--background_color_1'
+      ]
     } else {
       colorBg = '#ffffff'
     }
@@ -144,8 +154,9 @@ export default {
     var header = document.getElementById('headerid')
     var bghead = document.getElementById('headbg')
     if (
-      this.settingByTemplate7h &&
-      this.settingByTemplate7h.transparente == true
+      this.settingByTemplate7 &&
+      this.settingByTemplate7[0].setting7Header &&
+      this.settingByTemplate7[0].setting7Header.transparente == true
     ) {
       header.style.backgroundColor = 'transparent'
       window.onscroll = function () {
@@ -183,6 +194,7 @@ export default {
         prevScrollpos = currentScrollPos
       }
     } else {
+      header.style.backgroundColor = colorBg
       window.onscroll = function () {
         var currentScrollPos = window.pageYOffset
         if (currentScrollPos == 0) {

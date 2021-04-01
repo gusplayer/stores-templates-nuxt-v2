@@ -53,16 +53,20 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
           <div
-            v-for="(imagen, index) in Imagenes"
+            v-for="(imagen, index) in (settingKWrapper, values)"
             :key="index"
             :class="`swiper-slide wrapper-${index + 1}`"
           >
             <a
               target="_blank"
               rel="noreferrer noopener"
-              :href="dataStore.tienda.red_instagram"
+              :href="imagen.url_redirect"
             >
-              <img class="img-wrapp" :src="imagen.url" alt="wrapper-images" />
+              <img
+                class="img-wrapp"
+                :src="imagen.url_img"
+                alt="wrapper-images"
+              />
             </a>
           </div>
         </div>
@@ -111,32 +115,6 @@ export default {
         // grabCursor: true,
         // ...
       },
-      Imagenes: [
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492245/Komercia/Wrapper/wrapper-1_dfo9fn.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492248/Komercia/Wrapper/wrapper-2_iqhq6i.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492251/Komercia/Wrapper/wrapper-3_zt0bqm.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492254/Komercia/Wrapper/wrapper-4_tveirf.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492258/Komercia/Wrapper/wrapper-5_kamx9v.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492261/Komercia/Wrapper/wrapper-6_zxfqi5.jpg',
-        },
-      ],
     }
   },
   computed: {
@@ -187,7 +165,7 @@ export default {
   transform: scale(1.03);
 }
 .wrapper-content {
-  @apply flex flex-col justify-center items-center w-full;
+  @apply flex flex-col justify-center items-center w-full py-20;
   background: var(--background_color_1);
 }
 .wrapper-items-content {

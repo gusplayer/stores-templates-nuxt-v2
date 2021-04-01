@@ -323,7 +323,7 @@ export default {
       this.numOrden = ''
       this.cedula = ''
     }
-    if (this.orden.venta) {
+    if (this.orden && this.orden.venta) {
       if (this.orden.venta.created_at) {
         this.shippingDireccion()
         let result = this.orden.venta.created_at.split(' ')

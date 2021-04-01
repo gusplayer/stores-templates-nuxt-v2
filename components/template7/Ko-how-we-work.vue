@@ -200,7 +200,7 @@ export default {
   @apply bg-hworkbg bg-no-repeat bg-auto w-full mt-64;
 }
 .hwwork-content {
-  @apply w-full flex flex-col justify-center items-center my-64;
+  @apply w-full flex flex-col justify-center items-center py-30;
   background: var(--background_color_1);
 }
 .hwwork-content-items {

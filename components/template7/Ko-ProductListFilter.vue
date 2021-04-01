@@ -255,6 +255,8 @@
                     :product="product"
                     v-if="!showinList"
                     class="product-nolist"
+                    :settingGeneral="settingGeneral"
+                    :settingKProdutCard="settingKProdutCard"
                   ></KoProdcutCardFilter>
                   <KoProdcutCardFilerList
                     :product="product"
@@ -302,7 +304,7 @@
 </template>
 
 <script>
-import KoProdcutCardFilter from './_productcard/ProductCardFilter'
+import KoProdcutCardFilter from './_productcard/ProductCard'
 import KoProdcutCardFilerList from './_productcard/ProductCardFilterList'
 export default {
   components: {
@@ -314,6 +316,7 @@ export default {
     fullProducts: {},
     settingGeneral: Object,
     settingK07ProductList: Object,
+    settingKProdutCard: Object,
   },
   name: 'Ko-ProductList-Filter',
   mounted() {

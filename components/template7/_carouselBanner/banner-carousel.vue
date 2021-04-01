@@ -17,7 +17,7 @@
         },
       ]"
     >
-      <div class="banner-content-img">
+      <div class="banner-content-img" v-if="banner.url_img_left">
         <img class="img-banner" :src="banner.url_img_left" alt="img-flor" />
       </div>
       <div class="text-tittle">
@@ -45,7 +45,7 @@
         </button>
       </div>
     </div>
-    <div class="banner-img">
+    <div class="banner-img" v-if="banner.url_img_right">
       <img class="img-girl" :src="banner.url_img_right" alt="banner-carousel" />
     </div>
   </div>

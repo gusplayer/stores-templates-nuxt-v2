@@ -82,6 +82,10 @@ export default {
           this.settingByTemplate7 && this.settingByTemplate7.productListFilter
             ? this.settingByTemplate7.productListFilter
             : null,
+        settingKProdutCard:
+          this.settingByTemplate7 && this.settingByTemplate7.card
+            ? this.settingByTemplate7.card
+            : null,
       }
     },
   },

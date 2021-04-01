@@ -145,7 +145,7 @@ export default {
   align-items: center;
 }
 .wrapper-content {
-  @apply flex flex-col justify-center items-center w-full mb-64;
+  @apply flex flex-col justify-center items-center w-full py-30;
   background: var(--background_color_1);
 }
 .wrapper-items-content {

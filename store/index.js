@@ -121,6 +121,7 @@ export const state = () => ({
   pagination: {},
   settingByTemplate: '',
   settingByTemplate7: '',
+  settingByTemplate9: '',
   settingByTemplateWapi: '',
   category_producto_header: '',
   subcategory_producto_header: '',
@@ -189,6 +190,18 @@ export const state = () => ({
     showNews: true,
     showWrapper: true,
     showCountry: true,
+  },
+  showTemplate9: {
+    showHeader09: true,
+    showFooter09: true,
+    showBody09: true,
+    showCountry: true,
+    showBanner: true,
+    showOffers: true,
+    showProductList: true,
+    showBlog: true,
+    showWrapper: true,
+    showNews: true,
   },
 })
 
@@ -376,7 +389,9 @@ export const mutations = {
   SET_SETTINGS_BY_TEMPLATE_7: (state, value) => {
     state.settingByTemplate7 = value
   },
-
+  SET_SETTINGS_BY_TEMPLATE_9: (state, value) => {
+    state.settingByTemplate9 = value
+  },
   SET_SETTINGS_BY_TEMPLATE_WAPI: (state, value) => {
     state.settingByTemplateWapi = value
   },
@@ -471,10 +486,14 @@ export const actions = {
         if (state.dataStore && state.dataStore.tienda) {
           await dispatch('GET_SETTINGS_BY_TEMPLATE_7', state.dataStore.tienda)
         }
+      } else if (id.data.data.template == 9) {
+        if (state.dataStore && state.dataStore.tienda) {
+          await dispatch('GET_SETTINGS_BY_TEMPLATE_9', state.dataStore.tienda)
+        }
       }
     }
-    await dispatch('GET_SERVER_PATH', full)
     await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
+    await dispatch('GET_SERVER_PATH', full)
     const idSlug = route.path.split('-')
     const producto = await axios.get(
       `https://templates.komercia.co/api/producto/${idSlug.pop()}`
@@ -504,7 +523,7 @@ export const actions = {
   },
   async GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
     let template = store.template
-    axios
+    await axios
       .get(
         `https://api2.komercia.co/api/template/${template}/settings/${store.id_tienda}`
       )
@@ -517,6 +536,12 @@ export const actions = {
       `https://node.komercia.co/template7?id=${store.id_tienda}`
     )
     commit('SET_SETTINGS_BY_TEMPLATE_7', response.data.body)
+  },
+  async GET_SETTINGS_BY_TEMPLATE_9({ commit }, store) {
+    const response = await axios.get(
+      `https://node.komercia.co/template9?id=${store.id_tienda}`
+    )
+    commit('SET_SETTINGS_BY_TEMPLATE_9', response.data.body)
   },
   async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit }, idWapi) {
     let template = 99

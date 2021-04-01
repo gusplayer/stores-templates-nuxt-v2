@@ -66,9 +66,7 @@ export default {
             ? this.settingByTemplate7.blog1
             : null,
         settingK05Blog:
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings['--background_color_1']
+          this.settingByTemplate && this.settingByTemplate.settings
             ? this.settingByTemplate.settings
             : this.settingBase,
       }

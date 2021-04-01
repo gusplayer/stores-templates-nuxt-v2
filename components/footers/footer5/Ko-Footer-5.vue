@@ -1,7 +1,25 @@
 <template>
-  <div class="footer-container" ref="background" :style="settingByTemplate">
-    <KoNewsLetter></KoNewsLetter>
-    <div class="footer-content">
+  <div
+    class="footer-container"
+    ref="background"
+    :style="[
+      settingByTemplate9[0].setting9Header,
+      settingByTemplate9[0].setting9General,
+    ]"
+  >
+    <div
+      class="footer-content"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate9 &&
+            this.settingByTemplate9[0].setting9General &&
+            this.settingByTemplate9[0].setting9General.fount_1
+              ? this.settingByTemplate9[0].setting9General.fount_1
+              : 'Poppins',
+        },
+      ]"
+    >
       <div class="footer-content-items">
         <div class="footer-content-logo">
           <img
@@ -70,23 +88,21 @@
 </template>
 
 <script>
-import KoNewsLetter from '../../../components/template9/Ko-Newsletter'
 import KoSocialNet from '../../../components/template9/Ko-Social-Networks'
 import KoTermsConditions from '../../../components/footers/ko-TermsAndConditions'
 
 export default {
   components: {
-    KoNewsLetter,
     KoSocialNet,
     KoTermsConditions,
   },
   name: 'Ko-Footer-5',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingByTemplate9: Array,
   },
   mounted() {
-    if (this.settingByTemplate) {
+    if (this.settingByTemplate9) {
       this.setLogo()
     }
   },
@@ -130,20 +146,22 @@ export default {
       this.$store.state.modalpolitics05 = true
     },
     setLogo() {
-      let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
-      )
-      let colorArray = color.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
+      if (this.settingByTemplate9) {
+        let color = this.settingByTemplate9[0].setting9Header[
+          '--background_color_1'
+        ]
+        let colorArray = color.split(',')
+        let colorInt = parseInt(colorArray[2])
+        if (colorInt > 50) {
+          this.logo = true
+        } else {
+          this.logo = false
+        }
       }
     },
   },
   watch: {
-    settingByTemplate(value) {
+    settingByTemplate9(value) {
       let colorArray = value.split(',')
       let colorInt = parseInt(colorArray[2])
       if (colorInt > 50) {
@@ -158,8 +176,8 @@ export default {
 
 <style scoped>
 .footer-container {
+  background: var(--background_color_1);
   @apply flex flex-col justify-center items-center;
-  background-color: #f8f8f8;
 }
 .footer-content {
   @apply flex flex-col justify-center items-center;
@@ -169,16 +187,18 @@ export default {
   @apply flex flex-col justify-center items-center w-full mb-10 mt-40;
 }
 .footer-logo {
-  @apply object-contain max-h-16;
+  max-width: var(--with_logo);
+  @apply object-contain;
 }
 .footer-content-button {
   @apply w-full flex flex-wrap gap-4 justify-center items-center mt-32;
 }
 .btn {
   transition: all 0.1s ease;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1) !important;
   font-size: 14px;
-  color: #303030;
+  color: var(--color_text);
   @apply font-semibold mx-8;
 }
 .btn:hover {
@@ -192,16 +212,16 @@ export default {
 }
 .separator {
   max-width: 400px;
-  border: solid 1px #666;
-  background: #666;
-  @apply w-full h-2 opacity-50 my-10;
+  border: solid 1px var(--color_icon_bg);
+  background: var(--color_icon_bg);
+  @apply w-full h-2 my-10;
 }
 .madebyKomercia {
   @apply w-full flex flex-col justify-center items-center mb-10;
 }
 .txt-devBy {
   font-size: 14px;
-  color: #666;
+  color: var(--color_text);
 }
 .modal {
   padding-top: 200px;

@@ -182,10 +182,6 @@ export default {
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
-        },
-        {
-          rel: 'stylesheet',
           href:
             'https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap',
         },

@@ -174,7 +174,7 @@ export default {
 
 <style scoped>
 .wrapper_newsletter {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply w-full flex flex-col justify-center items-center py-30;
   background: var(--background_color_1);
 }
 .wrapper-items-content {

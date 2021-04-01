@@ -3,15 +3,19 @@
     class="footer-container"
     ref="background"
     id="BgFooter"
-    :style="[settingByTemplate7f, settingByTemplate7General]"
+    :style="[
+      settingByTemplate7[0].setting7Header,
+      settingByTemplate7[0].setting7General,
+    ]"
   >
     <div
       class="footer-content"
       :style="{
         '--font-style-1':
-          this.settingByTemplate7General &&
-          this.settingByTemplate7General.fount_1
-            ? this.settingByTemplate7General.fount_1
+          this.settingByTemplate7 &&
+          this.settingByTemplate7[0].setting7General &&
+          this.settingByTemplate7[0].setting7General.fount_1
+            ? this.settingByTemplate7[0].setting7General.fount_1
             : 'David libre',
       }"
     >
@@ -38,7 +42,6 @@
         </div>
         <KoSocialNet :dataStore="dataStore"></KoSocialNet>
       </div>
-
       <div class="content-Pliticas-Terminos">
         <button
           class="btn"
@@ -95,13 +98,13 @@ export default {
   name: 'Ko-Footer-4',
   props: {
     dataStore: Object,
-    settingByTemplate7f: Object,
-    settingByTemplate7General: Object,
+    settingByTemplate7: Array,
   },
   mounted() {
     if (
-      this.settingByTemplate7f &&
-      this.settingByTemplate7f.img_background == false
+      this.settingByTemplate7 &&
+      this.settingByTemplate7[0].setting7Footer &&
+      this.settingByTemplate7[0].setting7Footer.img_background == false
     ) {
       this.setLogo()
     } else {
@@ -149,9 +152,9 @@ export default {
       this.$store.state.modalpolitics05 = true
     },
     setBg() {
-      if (this.settingByTemplate7f['--url_img']) {
+      if (this.settingByTemplate7[0].setting7Footer['--url_img']) {
         var imagen = document.getElementById('BgFooter')
-        imagen.style.backgroundImage = `url(${this.settingByTemplate7f['--url_img']})`
+        imagen.style.backgroundImage = `url(${this.settingByTemplate7[0].setting7Footer['--url_img']})`
       }
     },
     setLogo() {
@@ -170,14 +173,16 @@ export default {
   watch: {
     settingByTemplate7f(value) {
       if (
-        this.settingByTemplate7f &&
-        this.settingByTemplate7f.img_background == true
+        this.settingByTemplate7 &&
+        this.settingByTemplate7[0].setting7Footer &&
+        this.settingByTemplate7[0].setting7Footer.img_background == true
       ) {
         this.setBg()
       }
       if (
-        this.settingByTemplate7f &&
-        this.settingByTemplate7f.img_background == false
+        this.settingByTemplate7 &&
+        this.settingByTemplate7[0].setting7Footer &&
+        this.settingByTemplate7[0].setting7Footer.img_background == false
       ) {
         let colorArray = value.split(',')
         let colorInt = parseInt(colorArray[2])

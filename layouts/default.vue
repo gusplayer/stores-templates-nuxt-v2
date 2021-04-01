@@ -12,15 +12,15 @@
     <component
       v-bind="componentsProps"
       :is="headerTemplate"
-      v-if="showTemplate7.showHeader07"
+      v-if="showTemplate.showHeader07"
     />
-    <nuxt v-if="showTemplate7.showBody07" />
+    <nuxt v-if="showTemplate.showBody07" />
     <component
       v-bind="componentsProps"
       :is="footerTemplate"
-      v-if="showTemplate7.showFooter07"
+      v-if="showTemplate.showFooter07"
     />
-    <KoFooterCountry :dataStore="dataStore" v-if="showTemplate7.showCountry" />
+    <KoFooterCountry :dataStore="dataStore" v-if="showTemplate.showCountry" />
     <div
       class="wrapper-whatsapp"
       v-if="dataStore.tienda.whatsapp"
@@ -183,14 +183,14 @@ export default {
           this.settingByTemplate.settings &&
           this.settingByTemplate.settings.tipo_letra
             ? this.settingByTemplate.settings.tipo_letra
-            : 'Roboto'
+            : 'Poppins'
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra2 =
           this.settingByTemplate &&
           this.settingByTemplate.settings &&
           this.settingByTemplate.settings.tipo_letra
             ? this.settingByTemplate.settings.tipo_letra
-            : 'Poppins'
+            : 'Roboto'
         break
       case 10:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -204,9 +204,8 @@ export default {
     }
     let tienda = this.$store.state.dataStore.tienda
     let tidio =
-      this.$store.state.analytics_tagmanager &&
-      this.$store.state.analytics_tagmanager.tidio_user
-        ? this.$store.state.analytics_tagmanager.tidio_user
+      this.analytics_tagmanager && this.analytics_tagmanager.tidio_user
+        ? this.analytics_tagmanager.tidio_user
         : ''
     let FacebookPixel1 =
       this.analytics_tagmanager &&
@@ -378,7 +377,14 @@ export default {
         {
           href:
             this.template == 9
-              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&family=${tipo_letra2}@0;1&display=swap`
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 9
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra2}&display=swap`
               : '',
           rel: 'stylesheet',
         },
@@ -488,30 +494,63 @@ export default {
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
     },
+    settingByTemplate9() {
+      return this.$store.state.settingByTemplate9
+    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
         settingByTemplate:
-          this.$store.state.settingByTemplate &&
-          this.$store.state.settingByTemplate.settings &&
-          this.$store.state.settingByTemplate.settings['--background_color_1']
-            ? this.$store.state.settingByTemplate.settings
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings['--background_color_1']
+            ? this.settingByTemplate.settings
             : this.settingBase,
-        settingByTemplate7h:
-          this.settingByTemplate7 && this.settingByTemplate7.header
-            ? this.settingByTemplate7.header
-            : null,
-        settingByTemplate7f:
-          this.settingByTemplate7 && this.settingByTemplate7.footer
-            ? this.settingByTemplate7.footer
-            : null,
-        settingByTemplate7General:
-          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
-            ? this.settingByTemplate7.settingGeneral
-            : null,
+        settingByTemplate7: this.settingByTemplate7
+          ? [
+              {
+                setting7Header:
+                  this.settingByTemplate7 && this.settingByTemplate7.header
+                    ? this.settingByTemplate7.header
+                    : null,
+                setting7Footer:
+                  this.settingByTemplate7 && this.settingByTemplate7.footer
+                    ? this.settingByTemplate7.footer
+                    : null,
+                setting7General:
+                  this.settingByTemplate7 &&
+                  this.settingByTemplate7.settingGeneral
+                    ? this.settingByTemplate7.settingGeneral
+                    : null,
+                settingKProdutCard:
+                  this.settingByTemplate7 && this.settingByTemplate7.card
+                    ? this.settingByTemplate7.card
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate9: this.settingByTemplate9
+          ? [
+              {
+                setting9Header:
+                  this.settingByTemplate9 && this.settingByTemplate9.header
+                    ? this.settingByTemplate9.header
+                    : null,
+                setting9Footer:
+                  this.settingByTemplate9 && this.settingByTemplate9.footer
+                    ? this.settingByTemplate9.footer
+                    : null,
+                setting9General:
+                  this.settingByTemplate9 &&
+                  this.settingByTemplate9.settingGeneral
+                    ? this.settingByTemplate9.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
       }
     },
-    showTemplate7() {
+    showTemplate() {
       return this.$store.state.showTemplate7
     },
   },
