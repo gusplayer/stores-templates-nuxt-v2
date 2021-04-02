@@ -282,7 +282,7 @@
                 <div
                   v-if="
                     isQuotation() ||
-                    (dataStore.tienda.pais != 'Colombia' && productsCart.length)
+                    (countryStore == false && productsCart.length)
                   "
                   class="wrapper-Quotation"
                 >
@@ -319,7 +319,7 @@
                     !isQuotation() &&
                     dataStore.tienda.estado == 1 &&
                     this.estadoShippingTarifaPrecio == false &&
-                    dataStore.tienda.pais == 'Colombia'
+                    countryStore == true
                   "
                   class="continue_shopping"
                   @click="GoPayments"
@@ -566,6 +566,22 @@ export default {
     },
     listDescuentos() {
       return this.$store.state.listDescuentos
+    },
+    countryStore() {
+      if (this.dataStore && this.dataStore.tienda.pais) {
+        switch (this.dataStore.tienda.pais) {
+          case 'Colombia':
+            return true
+            break
+          case 'Chile':
+            return true
+            break
+          default:
+            return false
+        }
+      } else {
+        return false
+      }
     },
   },
   methods: {
