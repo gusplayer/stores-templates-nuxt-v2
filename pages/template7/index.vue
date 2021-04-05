@@ -42,10 +42,10 @@
       v-bind="componentsProps"
       v-if="showTemplate7.showNews && settingByTemplate7.newsletter.visible"
     />
-    <!-- <KWrapper
+    <KWrapper
       v-bind="componentsProps"
       v-if="showTemplate7.showWrapper && settingByTemplate7.contentImg.visible"
-    /> -->
+    />
   </div>
 </template>
 
@@ -58,7 +58,7 @@ import KGify from '../../components/template7/Ko-gify'
 import KHowwork from '../../components/template7/Ko-how-we-work'
 import KNews from '../../components/template7/Ko-Newsletter'
 import KBlog from '../../components/template7/Ko-blog'
-// import KWrapper from '../../components/template7/Ko-wrapper'
+import KWrapper from '../../components/template7/Ko-wrapper'
 
 export default {
   layout: 'default',
@@ -71,7 +71,7 @@ export default {
     KHowwork,
     KNews,
     KBlog,
-    // KWrapper,
+    KWrapper,
   },
   mounted() {
     let domain = this.$route.fullPath

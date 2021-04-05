@@ -203,6 +203,7 @@ export default {
     home_telefono: 'Teléfono',
     home_valorEnvio: 'Valor de envio',
     home_tuCarrito: 'Tu carrito',
+    home_pdescuento: 'Producto Con descuento',
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
@@ -459,7 +460,7 @@ export default {
     home_telefono: 'Phone',
     home_valorEnvio: 'Shipping value',
     home_tuCarrito: 'Your cart',
-
+    home_pdescuento: 'Product Discount',
     //productdetail
     productdetail_garantia: 'Warranty:',
     productdetail_btnComprar: 'Purchase',
@@ -717,7 +718,7 @@ export default {
     home_telefono: 'Telefone',
     home_valorEnvio: 'Valor do frete',
     home_tuCarrito: 'Seu carrinho',
-
+    home_pdescuento: 'Desconto de produto',
     //productdetail
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',

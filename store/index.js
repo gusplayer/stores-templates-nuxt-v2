@@ -281,7 +281,6 @@ export const mutations = {
   SET_ARTICLES(state, value) {
     state.listArticulos = value
   },
-
   SET_DATA(state) {
     state.productsData = state.dataStore.productos.sort((a, b) => {
       if (a.nombre < b.nombre) return -1
@@ -398,7 +397,6 @@ export const mutations = {
   SET_ANALITICS_TAGMANAGER: (state, value) => {
     state.analytics_tagmanager = value
   },
-
   DATA: (state, response) => {
     state.dataStore = response.data
   },

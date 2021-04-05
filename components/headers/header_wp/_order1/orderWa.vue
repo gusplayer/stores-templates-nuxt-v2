@@ -133,7 +133,7 @@
                     productsCart.length &&
                     !isQuotation() &&
                     dataStore.tienda.estado == 1 &&
-                    dataStore.tienda.pais == 'Colombia'
+                    countryStore == true
                   "
                   class="continue_shopping2"
                   @click="GoPayments"
@@ -364,6 +364,22 @@ export default {
         }
       } else {
         return 0
+      }
+    },
+    countryStore() {
+      if (this.dataStore && this.dataStore.tienda.pais) {
+        switch (this.dataStore.tienda.pais) {
+          case 'Colombia':
+            return true
+            break
+          case 'Chile':
+            return true
+            break
+          default:
+            return false
+        }
+      } else {
+        return false
       }
     },
   },

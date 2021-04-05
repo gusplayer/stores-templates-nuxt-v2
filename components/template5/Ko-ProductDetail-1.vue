@@ -91,43 +91,80 @@
             <p class="text-marca">
               <strong>{{ data.info.marca }}</strong>
             </p>
-            <!-- <p class="text-promocion" v-show="salesData.precio">
-              ${{
+            <p
+              class="text-promocion"
+              v-show="
+                data.info.tag_promocion == 1 &&
+                data.info.promocion_valor &&
                 salesData.precio
-                  | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
-                  )
-              }}
-            </p> -->
-            <p class="text-precio" v-show="salesData.precio">
+              "
+            >
               {{
-                salesData.precio
+                (salesData.precio +
+                  (data.info.tag_promocion == 1 && data.info.promocion_valor
+                    ? Math.trunc(
+                        (salesData.precio * data.info.promocion_valor) / 100
+                      )
+                    : 0))
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
                   )
               }}
             </p>
-            <!-- <p class="card-descuento">-50%</p> -->
-            <!-- <div
-              class="content-text-desc"
-              v-if="data.info.descripcion && data.info.descripcion.length > 12"
+            <div
+              class="wrapper-price"
+              :class="data.info.tag_promocion == 1 ? '' : 'wrapper-price_space'"
             >
+              <p class="text-precio" v-show="salesData.precio">
+                {{
+                  salesData.precio
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
               <p
-                class="text-desc"
-                v-html="`${data.info.descripcion.slice(0, 99)}`"
-              ></p>
-            </div>-->
+                class="card-descuento"
+                v-show="
+                  data.info.tag_promocion == 1 &&
+                  data.info.promocion_valor &&
+                  salesData.precio
+                "
+              >
+                {{ data.info.promocion_valor }}% OFF
+              </p>
+            </div>
             <div class="content_buy_action">
-              <div v-if="envio.titulo == 'Envío gratis'">
-                <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
+              <div
+                v-if="envio.titulo == 'Envío gratis'"
+                class="content_buy_action"
+              >
+                <p class="card-info-2">
+                  <svg
+                    class="transporte-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3M5 10.5L6.5 9L8 10.5L11.5 7L13 8.5L8 13.5L5 10.5Z"
+                    /></svg
+                  >{{ $t('home_cardGratis') }}
+                </p>
               </div>
               <div class="content_card-info">
                 <p class="card-info-1" v-if="spent">
                   {{ $t('home_cardAgotado') }}
                 </p>
               </div>
+            </div>
+            <div v-if="data.info.descripcion_corta" style="margin-bottom: 5px;">
+              <p class="text-marca">
+                <strong>{{ data.info.descripcion_corta }}</strong>
+              </p>
             </div>
             <div v-if="this.data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
@@ -214,22 +251,75 @@
                     <p class="text-marca">
                       <strong>{{ data.info.marca }}</strong>
                     </p>
-                    <!-- <p class="text-promocion" v-show="salesData.precio">
-                      ${{ salesData.precio | currency }}
-                    </p> -->
-                    <p class="text-precio" v-show="salesData.precio">
-                      {{
+                    <p
+                      class="text-promocion"
+                      v-show="
+                        data.info.tag_promocion == 1 &&
+                        data.info.promocion_valor &&
                         salesData.precio
+                      "
+                    >
+                      {{
+                        (salesData.precio +
+                          (data.info.tag_promocion == 1 &&
+                          data.info.promocion_valor
+                            ? Math.trunc(
+                                (salesData.precio * data.info.promocion_valor) /
+                                  100
+                              )
+                            : 0))
                           | currency(
                             dataStore.tienda.codigo_pais,
                             dataStore.tienda.moneda
                           )
                       }}
                     </p>
-                    <!-- <p class="card-descuento">-50%</p> -->
+                    <div
+                      class="wrapper-price"
+                      :class="
+                        data.info.tag_promocion == 1
+                          ? ''
+                          : 'wrapper-price_space'
+                      "
+                    >
+                      <p class="text-precio" v-show="salesData.precio">
+                        {{
+                          salesData.precio
+                            | currency(
+                              dataStore.tienda.codigo_pais,
+                              dataStore.tienda.moneda
+                            )
+                        }}
+                      </p>
+                      <p
+                        class="card-descuento"
+                        v-show="
+                          data.info.tag_promocion == 1 &&
+                          data.info.promocion_valor &&
+                          salesData.precio
+                        "
+                      >
+                        {{ data.info.promocion_valor }}% OFF
+                      </p>
+                    </div>
                     <div class="content_buy_action">
-                      <div v-if="envio.titulo == 'Envío gratis'">
-                        <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
+                      <div
+                        v-if="envio.titulo == 'Envío gratis'"
+                        class="content_buy_action"
+                      >
+                        <p class="card-info-2">
+                          <svg
+                            class="transporte-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3M5 10.5L6.5 9L8 10.5L11.5 7L13 8.5L8 13.5L5 10.5Z"
+                            /></svg
+                          >{{ $t('home_cardGratis') }}
+                        </p>
                       </div>
                       <div class="content_card-info">
                         <p class="card-info-1" v-if="spent">
@@ -686,6 +776,8 @@ export default {
         nombre: this.data.detalle.nombre,
         combinacion: this.salesData.combinacion,
         envio_gratis: this.data.detalle.envio_gratis,
+        promocion_valor: this.data.info.promocion_valor,
+        tag_promocion: this.data.info.tag_promocion,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
@@ -1042,13 +1134,17 @@ i.close {
   font-weight: bold;
   color: rgba(55, 4, 4, 0.61);
   text-decoration: line-through;
-  margin-top: 5px;
+  margin-top: 10px;
+}
+.wrapper-price_space {
+  margin-top: 10px;
 }
 .wrapper-price {
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: flex-start;
+  margin-bottom: 12px;
 }
 .wrapper-price > p:nth-child(2) {
   margin-left: 5px;
@@ -1058,14 +1154,13 @@ i.close {
   font-weight: bold;
   /* color: var(--color_text); */
   color: #000000;
+  line-height: 24px;
 }
 .card-descuento {
   font-size: 12px;
-  color: white;
-  background: #35dd8d;
+  color: #00a650;
+  /* font-weight: bold; */
   border-radius: 3px;
-  padding: 0px 5px;
-  margin-top: 10px;
 }
 .content-text-desc {
   margin-top: 10px;
@@ -1107,7 +1202,9 @@ i.close {
 .content_buy_action {
   display: flex;
   flex-direction: row;
+  margin-bottom: 10px;
 }
+
 .content_card-info {
   display: initial;
 }
@@ -1120,7 +1217,9 @@ i.close {
   border-radius: 5px;
   color: white;
   font-size: 12px;
-  margin-bottom: 10px;
+  font-weight: bold;
+  min-height: 24px;
+  max-height: 24px;
 }
 .card-info-2 {
   display: flex;
@@ -1133,7 +1232,14 @@ i.close {
   margin-right: 10px;
   font-size: 12px;
   font-weight: bold;
-  margin-bottom: 10px;
+  min-height: 24px;
+  max-height: 24px;
+}
+.transporte-icon {
+  fill: black;
+  width: 22px;
+  height: 22px;
+  margin-right: 5px;
 }
 .item-info-product {
   margin-top: 10px;
@@ -1263,7 +1369,6 @@ i.close {
   color: #000000;
   /* border: 2px var(--color_border); */
   border: 2px rgba(127, 127, 139, 0.342);
-
   padding-left: 10px;
   padding-right: 10px;
   border-style: solid none solid none;

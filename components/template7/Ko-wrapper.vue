@@ -53,7 +53,7 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
           <div
-            v-for="(imagen, index) in (settingKWrapper, values)"
+            v-for="(imagen, index) in settingKWrapper.values"
             :key="index"
             :class="`swiper-slide wrapper-${index + 1}`"
           >
@@ -140,7 +140,6 @@ export default {
   text-align: center;
   font-size: 18px;
   background: #fff;
-
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
@@ -163,6 +162,9 @@ export default {
   position: relative;
   -webkit-transform: scale(1.3);
   transform: scale(1.03);
+}
+.swiper-wrapper {
+  max-height: 317px;
 }
 .wrapper-content {
   @apply flex flex-col justify-center items-center w-full py-20;
