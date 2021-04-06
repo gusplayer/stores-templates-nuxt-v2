@@ -100,12 +100,11 @@
               "
             >
               {{
-                (salesData.precio +
-                  (data.info.tag_promocion == 1 && data.info.promocion_valor
-                    ? Math.trunc(
-                        (salesData.precio * data.info.promocion_valor) / 100
-                      )
-                    : 0))
+                (data.info.tag_promocion == 1 && data.info.promocion_valor
+                  ? Math.trunc(
+                      salesData.precio / (1 - data.info.promocion_valor / 100)
+                    )
+                  : 0)
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -260,14 +259,13 @@
                       "
                     >
                       {{
-                        (salesData.precio +
-                          (data.info.tag_promocion == 1 &&
-                          data.info.promocion_valor
-                            ? Math.trunc(
-                                (salesData.precio * data.info.promocion_valor) /
-                                  100
-                              )
-                            : 0))
+                        (data.info.tag_promocion == 1 &&
+                        data.info.promocion_valor
+                          ? Math.trunc(
+                              salesData.precio /
+                                (1 - data.info.promocion_valor / 100)
+                            )
+                          : 0)
                           | currency(
                             dataStore.tienda.codigo_pais,
                             dataStore.tienda.moneda
