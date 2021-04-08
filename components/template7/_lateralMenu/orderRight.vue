@@ -88,7 +88,8 @@
                       v-if="
                         rangosByCiudad.envio_metodo === 'precio_ciudad' &&
                         shippingCities.length > 0 &&
-                        getFreeShipping == false
+                        getFreeShipping == false &&
+                        FreeShippingCart == false
                       "
                     >
                       <summary class="text-color">
@@ -127,7 +128,8 @@
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'tarifa_plana' &&
                         shipping > 0 &&
-                        getFreeShipping == true
+                        getFreeShipping == true &&
+                        FreeShippingCart == false
                       "
                     >
                       <li class="text-color" style="list-style: none;">
@@ -144,7 +146,8 @@
                     <div
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'precio' &&
-                        getFreeShipping == true
+                        getFreeShipping == true &&
+                        FreeShippingCart == false
                       "
                     >
                       <div v-if="this.shippingTarifaPrecio > 0">
@@ -168,7 +171,7 @@
                         {{ $t('footer_encioNoconfig') }}
                       </p>
                     </div>
-                    <div v-else-if="shipping && getFreeShipping == false">
+                    <!-- <div v-else-if="shipping && getFreeShipping == false">
                       <p>
                         {{
                           shipping
@@ -178,15 +181,23 @@
                             )
                         }}
                       </p>
-                    </div>
+                    </div> -->
                     <p
                       class="without_shipping_cost"
-                      v-if="
+                      v-else-if="
                         rangosByCiudad.envio_metodo === 'gratis' &&
-                        (shippingCities.length <= 0 && getFreeShipping == false)
+                        shippingCities.length <= 0 &&
+                        getFreeShipping == false &&
+                        FreeShippingCart == false
                       "
                     >
                       {{ $t('footer_encioGratis') }}
+                    </p>
+                    <p
+                      class="without_shipping_cost"
+                      v-else-if="FreeShippingCart == true"
+                    >
+                      {{ $t('footer_tarifaPrecio') }}
                     </p>
                   </span>
                   <span class="order_total_net" v-if="this.shippingDescuento">
@@ -482,6 +493,7 @@ export default {
     if (this.rangosByCiudades.envio_metodo == 'precio') {
       this.shippingPrecio()
     }
+    this.productsFreeShippingCart()
   },
   data() {
     return {
@@ -500,6 +512,7 @@ export default {
       barrio: '',
       dirreccion: '',
       shippingDescuento: '',
+      FreeShippingCart: false,
     }
   },
   computed: {
@@ -801,6 +814,22 @@ export default {
         }
       }
     },
+    productsFreeShippingCart() {
+      if (this.productsCart) {
+        let result = this.productsCart.filter((rango) => {
+          if (rango.envio_gratis === 1) {
+            return rango
+          }
+        })
+        if (this.productsCart.length == result.length) {
+          this.FreeShippingCart = true
+          // this.rangosByCiudad.envio_metodo = 'gratis'
+        } else {
+          this.FreeShippingCart = false
+          // this.rangosByCiudad.envio_metodo = this.rangosByCiudad.envio_metodo
+        }
+      }
+    },
   },
   watch: {
     rangosByCiudad() {
@@ -814,6 +843,7 @@ export default {
         this.tempCart = this.productsCart
         this.shippingPrecio()
         this.listaDescuentos()
+        this.productsFreeShippingCart()
       }
     },
     totalCart() {

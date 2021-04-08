@@ -74,6 +74,7 @@ export default {
     KWrapper,
   },
   mounted() {
+    window.addEventListener('message', this.addEventListenertemplate)
     let domain = this.$route.fullPath
     switch (domain) {
       case '':
@@ -287,6 +288,16 @@ export default {
     },
     showTemplate7() {
       return this.$store.state.showTemplate7
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenertemplate)
+  },
+  methods: {
+    addEventListenertemplate(e) {
+      if (e.origin.includes('https://panel.komercia.co')) {
+        alert('Prueba eventListener' + e)
+      }
     },
   },
   watch: {

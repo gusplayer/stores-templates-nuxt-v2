@@ -61,11 +61,12 @@
               target="_blank"
               rel="noreferrer noopener"
               :href="imagen.url_redirect"
+              class="wrapper-ints"
             >
               <img
                 class="img-wrapp"
                 :src="imagen.url_img"
-                alt="wrapper-images"
+                alt="imagenes de instagram"
               />
             </a>
           </div>
@@ -86,7 +87,7 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 'auto',
-        spaceBetween: 20,
+        spaceBetween: 0,
         breakpoints: {
           10000: {
             slidesPerView: 6,
@@ -154,6 +155,10 @@ export default {
   -webkit-align-items: center;
   align-items: center;
 }
+.swiper-wrapper {
+  height: 300px;
+  max-height: 300px;
+}
 .img-wrapp {
   transition: all 200ms ease-in;
 }
@@ -162,9 +167,6 @@ export default {
   position: relative;
   -webkit-transform: scale(1.3);
   transform: scale(1.03);
-}
-.swiper-wrapper {
-  max-height: 317px;
 }
 .wrapper-content {
   @apply flex flex-col justify-center items-center w-full py-20;
@@ -217,7 +219,6 @@ export default {
 .wrapper-6:hover {
   @apply bg-black bg-opacity-50 cursor-pointer;
 }
-
 @screen sm {
   .wrapper-items-content {
     @apply w-9/5;
@@ -269,7 +270,33 @@ export default {
     width: 1192px;
   }
   .img-wrapp {
-    width: 100vw;
+    width: 100%;
+  }
+}
+@media (max-width: 1300px) {
+  .swiper-wrapper {
+    height: 100%;
+    max-height: 205px;
+  }
+}
+@media (max-width: 1280px) {
+  .swiper-wrapper {
+    max-height: 200px;
+  }
+}
+@media (max-width: 600px) {
+  .swiper-wrapper {
+    max-height: 170px;
+  }
+}
+@media (max-width: 500px) {
+  .swiper-wrapper {
+    max-height: 150px;
+  }
+}
+@media (max-width: 430px) {
+  .swiper-wrapper {
+    max-height: 125px;
   }
 }
 </style>

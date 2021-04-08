@@ -34,6 +34,7 @@ export default {
     KNews,
   },
   mounted() {
+    window.addEventListener('message', this.addEventListenertemplate)
     let domain = this.$route.fullPath
     switch (domain) {
       case '':
@@ -176,6 +177,16 @@ export default {
     },
     showTemplate9() {
       return this.$store.state.showTemplate9
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenertemplate)
+  },
+  methods: {
+    addEventListenertemplate(e) {
+      if (e.origin.includes('https://panel.komercia.co')) {
+        alert('Prueba eventListener' + e)
+      }
     },
   },
   // eslint-disable-next-line no-unused-vars
