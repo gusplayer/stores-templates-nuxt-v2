@@ -27,7 +27,7 @@
         >
           <div class="overlay-top">
             <div>
-              <p>5% OFF</p>
+              <p>{{ this.product.promocion_valor }}% OFF</p>
             </div>
           </div>
           <div class="overlay-free">
@@ -470,64 +470,6 @@ export default {
 </script>
 
 <style scoped>
-/*Comienzo de animacion*/
-.overlay-top {
-  top: 43px;
-  left: 100%;
-  right: 0;
-  width: 0;
-  height: 29px;
-  padding: 5px;
-  font-size: 13px;
-  background: white;
-  color: #00a650;
-  @apply absolute overflow-hidden rounded-md shadow-md transition-all ease-in duration-300;
-}
-#product-card:hover .overlay-top {
-  width: 60px;
-  left: 75%;
-}
-.overlay-free {
-  position: absolute;
-  background-color: #00a650;
-  color: white;
-  overflow: hidden;
-  transition: 0.5s ease;
-  top: 0px;
-  left: 100%;
-  right: 0;
-  width: 0;
-  height: 35px;
-  text-align: center;
-  @apply rounded;
-}
-.txt-free {
-  line-height: 12px;
-  font-size: 13px;
-  margin-top: 5px;
-}
-#product-card:hover .overlay-free {
-  width: 125px;
-  left: 55%;
-  transition-delay: 700ms;
-}
-.overlay-polygon {
-  position: absolute;
-  top: 35px;
-  left: 100%;
-  right: 0;
-  background-color: transparent;
-  overflow: hidden;
-  width: 0;
-  height: 5%;
-  fill: #00a650;
-}
-#product-card:hover .overlay-polygon {
-  width: 5%;
-  left: 90%;
-  transition-delay: 950ms;
-}
-/*fin de animacion*/
 .wrapper-card {
   display: flex;
   justify-content: center;
@@ -797,7 +739,7 @@ export default {
   @apply absolute overflow-hidden rounded-md shadow-md transition-all ease-in duration-300;
 }
 #product-card:hover .overlay-top {
-  width: 60px;
+  width: 67px;
   left: 75%;
 }
 .overlay-free {
