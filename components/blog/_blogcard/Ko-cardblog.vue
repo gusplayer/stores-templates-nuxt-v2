@@ -31,13 +31,6 @@
               </div>
             </div>
           </router-link>
-          <div class="overlay-bottom">
-            <div class="content-bottom-titulo">
-              <div class="text-cart">
-                <p class="txt-tituloart-bottom">{{ $t('header_blog') }}</p>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="container-properitys">
           <div class="content-tittle-article">
@@ -54,19 +47,7 @@
               >{{ `${this.article.titulo.slice(0, 63)}` }}</router-link
             >
           </div>
-          <div class="content-autor">
-            <p class="text-autor">
-              <span clas="txt-by">{{ $t('home_by') }}</span>
-              <span class="flex-shrink-0 mx-1">
-                <img
-                  class="h-20 w-20 rounded-full"
-                  v-lazy="`https://api2.komercia.co/users/user.jpg`"
-                  alt=""
-                />
-              </span>
-              {{ this.article.autor }}
-            </p>
-          </div>
+
           <div class="summary-article">
             <p
               v-if="this.article.resumen && this.article.resumen.length > 175"
@@ -78,27 +59,18 @@
               {{ `${this.article.resumen.slice(0, 175)}` }}
             </p>
           </div>
-          <div class="read-more">
-            <router-link
-              :to="{ path: `/blog/` + article.slug }"
-              class="txt-read-more"
-            >
-              {{ $t('home_continuar_leyendo') }}
-              <span class="points-text-read"
-                ><svg
-                  class="svg-points"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  version="1.1"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-                  /></svg
-              ></span>
-            </router-link>
+
+          <div class="content-autor">
+            <p class="text-autor">
+              <span class="flex-shrink-0 mx-1">
+                <img
+                  class="h-30 w-30 rounded-full mr-4"
+                  v-lazy="`https://api2.komercia.co/users/user.jpg`"
+                  alt=""
+                />
+              </span>
+              {{ this.article.autor }}
+            </p>
           </div>
         </div>
       </div>
@@ -272,7 +244,7 @@ figure {
 
 .txt-day,
 .txt-month {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #333333;
 }
 .txt-day {
@@ -286,16 +258,14 @@ figure {
   font-size: 12px;
 }
 .content-tittle-article {
-  @apply w-full flex justify-center items-center;
+  @apply w-full flex items-center text-left;
   padding-top: 10px;
   padding-bottom: 10px;
-  cursor: default;
 }
 .txt-tituloart {
-  font-family: 'David libre', serif !important;
+  font-family: 'David libre' !important;
   color: #2d2a2a;
   transition: all 0.25s ease;
-  cursor: pointer;
 }
 .txt-tituloart:hover {
   color: var(--color_icon);
@@ -306,12 +276,12 @@ figure {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #a4a4a4;
   font-size: 14px;
 }
 .summary-article {
-  @apply w-full flex justify-center items-center text-center;
+  @apply w-full flex justify-start items-center;
   padding-bottom: 10px;
 }
 .container-properitys {
@@ -319,7 +289,7 @@ figure {
   cursor: default;
 }
 .subtext {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #777777;
   font-size: 14px;
   cursor: text;
@@ -336,7 +306,7 @@ figure {
   align-items: center;
   text-transform: uppercase;
   color: var(--color_icon);
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -349,7 +319,7 @@ figure {
   @apply transition-all ease-in duration-200;
   position: relative;
   color: var(--color_icon);
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   margin-left: 10px;
   margin-bottom: -5px;
   display: none;
@@ -372,27 +342,6 @@ figure {
 .txt-read-more:hover .points-text-read {
   @apply flex transition-all ease-in duration-200;
 }
-
-.content-bottom-titulo {
-  @apply absolute text-center transition-all ease-in duration-300 w-full;
-  font: inherit;
-  font-size: 100%;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-.text-cart {
-  @apply w-full;
-}
-.txt-tituloart-bottom {
-  font-family: 'Lora', serif !important;
-  font-size: 16px;
-  text-transform: uppercase;
-  color: white;
-}
 @screen sm {
   .overlay-top {
     @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
@@ -402,17 +351,8 @@ figure {
     width: 15%;
     height: 29%;
   }
-  .overlay-bottom {
-    @apply absolute overflow-hidden transition-all ease-in duration-300;
-    width: 80%;
-    height: 25px;
-    left: 10%;
-    bottom: -5%;
-    right: 0;
-    background: var(--color_icon);
-  }
   .content-autor {
-    @apply w-full flex justify-center items-center;
+    @apply w-full flex justify-start items-center;
     padding-bottom: 10px;
   }
   .txt-tituloart {
@@ -441,15 +381,6 @@ figure {
     width: 12%;
     height: 21%;
   }
-  .overlay-bottom {
-    @apply absolute overflow-hidden transition-all ease-in duration-300;
-    width: 80%;
-    height: 25px;
-    left: 10%;
-    bottom: -3%;
-    right: 0;
-    background: var(--color_icon);
-  }
 }
 @media (min-width: 576px) {
   .overlay-top {
@@ -459,15 +390,6 @@ figure {
     right: 0;
     width: 18%;
     height: 33%;
-  }
-  .overlay-bottom {
-    @apply absolute overflow-hidden transition-all ease-in duration-300;
-    width: 80%;
-    height: 25px;
-    left: 10%;
-    bottom: -6%;
-    right: 0;
-    background: var(--color_icon);
   }
 }
 @screen md {
@@ -489,13 +411,6 @@ figure {
     width: 15%;
     height: 28%;
   }
-  .overlay-bottom {
-    @apply absolute right-0 bottom-0 overflow-hidden bg-red-btnbannershop transition-all ease-in duration-300;
-    width: 80%;
-    height: 25px;
-    left: 10%;
-    bottom: -5%;
-  }
 }
 @screen mlg {
   .overlay-top {
@@ -506,14 +421,7 @@ figure {
     width: 15%;
     height: 25%;
   }
-  .overlay-bottom {
-    @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
-    width: 80%;
-    height: 25px;
-    left: 10%;
-    bottom: -5%;
-    background: var(--color_icon);
-  }
+
   .txt-tituloart {
     font-size: 24px;
   }
@@ -521,7 +429,6 @@ figure {
     width: 100%;
     height: 270px;
     max-height: 270px;
-    /* height: 100%; */
     object-fit: cover;
     overflow: hidden;
   }

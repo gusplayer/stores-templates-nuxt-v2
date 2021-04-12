@@ -477,7 +477,7 @@ export default {
   @apply px-10 py-2 w-full;
 }
 ::-webkit-input-placeholder {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   @apply text-gray-textHeader;
 }
 .search-icon-content {
@@ -506,7 +506,7 @@ export default {
   font-weight: 900;
   font-size: 14px;
   cursor: pointer;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   transition: background-color 0.25s ease, color 0.25s ease;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
   border-right: 1px solid rgba(129, 129, 129, 0.2);
@@ -522,7 +522,7 @@ export default {
   font-weight: 900;
   font-size: 14px;
   cursor: pointer;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   transition: background-color 0.25s ease, color 0.25s ease;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
@@ -553,7 +553,7 @@ export default {
 .btn {
   @apply w-full flex font-semibold  uppercase tracking-wider py-15 pl-20;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #2d2a2a;
   font-size: 13px;
 }
@@ -561,13 +561,13 @@ export default {
   @apply w-full flex font-semibold uppercase tracking-wider py-15 pl-20;
   color: #2d2a2a;
   font-size: 13px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .btn-category-all {
   @apply w-full flex font-semibold uppercase tracking-wider py-15 pl-20;
   color: #2d2a2a;
   font-size: 13px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
 @media (min-width: 1280px) {

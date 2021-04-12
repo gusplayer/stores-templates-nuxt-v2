@@ -412,6 +412,9 @@ export default {
     ) {
       this.estadoCart = true
     }
+    if (this.product) {
+      this.getDataProduct()
+    }
   },
   computed: {
     facebooPixel() {
@@ -472,26 +475,28 @@ export default {
   },
   methods: {
     getDataProduct() {
-      this.salesData = {
-        precio: this.product.precio,
-        unidades: this.product.stock,
-        sku: this.product.sku,
-        estado: true,
-      }
-      this.maxQuantityValue = this.product.stock
-      this.productsCarts.find((productCart, index) => {
-        if (productCart.id == this.product.id) {
-          this.productIndexCart = index
-          this.productCart = productCart
-          this.maxQuantityValue = this.product.stock - productCart.cantidad
+      if (this.product) {
+        this.salesData = {
+          precio: this.product.precio,
+          unidades: this.product.stock,
+          sku: this.product.sku,
+          estado: true,
         }
-      })
-      if (
-        this.salesData.unidades == 0 ||
-        this.maxQuantityValue <= 0 ||
-        this.maxQuantityValue == 0
-      ) {
-        this.spent = true
+        this.maxQuantityValue = this.product.stock
+        this.productsCarts.find((productCart, index) => {
+          if (productCart.id == this.product.id) {
+            this.productIndexCart = index
+            this.productCart = productCart
+            this.maxQuantityValue = this.product.stock - productCart.cantidad
+          }
+        })
+        if (
+          this.salesData.unidades == 0 ||
+          this.maxQuantityValue <= 0 ||
+          this.maxQuantityValue == 0
+        ) {
+          this.spent = true
+        }
       }
     },
     addShoppingCart() {

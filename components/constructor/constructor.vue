@@ -75,7 +75,7 @@
           :is="componentFile"
           :dataStore="dataStore"
           :currentComponentSettings="getSettingsCSS"
-          :stateComponent="true"
+          :isDisabled="true"
           :fullProducts="
             nameCurrentComponent.includes('ProductList') ? fullProducts : ''
           "
@@ -221,6 +221,10 @@ export default {
             {
               id: 51,
               name: 'Ko-Footer-1',
+            },
+            {
+              id: 52,
+              name: 'Ko-Footer-2',
             },
           ],
         },

@@ -1,7 +1,22 @@
 <template>
-  <div class="contein-carousel">
-    <!-- <Khead :dataStore="dataStore"></Khead> -->
-    <div class="carousel-content">
+  <div class="contein-carousel" :style="[banner, settingGeneral]">
+    <div
+      class="carousel-content"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide swiper-slide-1">
@@ -63,10 +78,7 @@
             </div>
           </div>
         </div>
-
         <div class="swiper-pagination"></div>
-        <!-- <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div> -->
       </div>
     </div>
   </div>
@@ -74,13 +86,14 @@
 
 <script>
 export default {
-  components: {},
+  props: {
+    dataStore: Object,
+    banner: Object,
+    settingGeneral: Object,
+  },
   computed: {
     template() {
       return this.$store.state.template
-    },
-    dataStore() {
-      return this.$store.state.dataStore
     },
   },
   data() {
@@ -159,11 +172,13 @@ export default {
 }
 .banner-text-top,
 .banner-text-medium {
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: var(--font-style-1);
 }
 .banner-text-bottom,
 .text-button {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif; */
+  font-family: var(--font-style-2);
 }
 .btn-shop {
   transition: all 0.25s ease;

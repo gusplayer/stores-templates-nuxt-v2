@@ -43,10 +43,22 @@ import KoHeader1 from '../components/headers/header1/Ko-Header-1'
 import KoHeader2 from '../components/headers/header2/Ko-Header-2'
 import KoHeader3 from '../components/headers/header3/Ko-Header-3'
 import KoHeader4 from '../components/headers/header4/Ko-Header-4'
+import KoHeader5 from '../components/headers/header5/Ko-Header-5'
+import KoHeader6 from '../components/headers/header6/Ko-Header-6'
+
 import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
+import KoFooter4 from '../components/footers/footer4/Ko-Footer-4'
+import KoFooter5 from '../components/footers/footer5/Ko-Footer-5'
+import KoFooter6 from '../components/footers/footer6/Ko-Footer-6'
+
+import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
+
+//template6
+// import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
+// import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'
 
 export default {
   components: {
@@ -54,10 +66,18 @@ export default {
     KoHeader2,
     KoHeader3,
     KoHeader4,
+    KoHeader5,
+    KoHeader6,
     KoFooter1,
     KoFooter2,
+    KoFooter4,
+    KoFooter5,
+    KoFooter6,
+    KoFooterCountry,
     koWhatsapp,
     koTiendaCerrada,
+    // Ko6Header1,
+    // Ko6Footer1,
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES')
@@ -72,17 +92,95 @@ export default {
     }
   },
   head() {
+    let tipo_letra
+    let tipo_letra2
+    let tipo_letra3
+    switch (this.template) {
+      case 3:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto'
+        break
+      case 5:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto'
+        break
+      case 6:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto'
+        break
+      case 7:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate7 &&
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_1
+            ? this.settingByTemplate7.settingGeneral.fount_1
+            : 'David Libre'
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra2 =
+          this.settingByTemplate7 &&
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_2
+            ? this.settingByTemplate7.settingGeneral.fount_2
+            : 'Great Vibes'
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra3 =
+          this.settingByTemplate7 &&
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_3
+            ? this.settingByTemplate7.settingGeneral.fount_3
+            : 'Lora'
+        break
+      case 9:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto'
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra2 =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Poppins'
+        break
+      case 10:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Poppins'
+        break
+    }
     let tienda = this.$store.state.dataStore.tienda
-    let tipo_letra =
-      this.settingByTemplate &&
-      this.settingByTemplate.settings &&
-      this.settingByTemplate.settings.tipo_letra
-        ? this.settingByTemplate.settings.tipo_letra
-        : 'Roboto'
     let tidio =
-      this.$store.state.analytics_tagmanager &&
-      this.$store.state.analytics_tagmanager.tidio_user
-        ? this.$store.state.analytics_tagmanager.tidio_user
+      this.analytics_tagmanager && this.analytics_tagmanager.tidio_user
+        ? this.analytics_tagmanager.tidio_user
+        : ''
+    let FacebookPixel1 =
+      this.analytics_tagmanager &&
+      this.analytics_tagmanager.facebook_pixel_metatag_1
+        ? this.analytics_tagmanager.facebook_pixel_metatag_1
         : ''
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
@@ -137,8 +235,11 @@ export default {
           'http-equiv': 'Content-Language',
           content: 'es',
         },
-        //openGraph meta
-        { hid: 'og:title', name: 'og:title', content: tienda.nombre },
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: tienda.nombre ? tienda.nombre : 'Tienda',
+        },
         {
           hid: 'og:type',
           name: 'og:type',
@@ -156,7 +257,11 @@ export default {
           name: 'og:image',
           content: `https://api2.komercia.co/logos/${tienda.logo}`,
         },
-        { hid: 'og:site_name', name: 'og:site_name', content: tienda.nombre },
+        {
+          hid: 'og:site_name',
+          name: 'og:site_name',
+          content: tienda.nombre ? tienda.nombre : 'Tienda',
+        },
         {
           hid: 'og:description',
           name: 'og:description',
@@ -184,6 +289,10 @@ export default {
           content: geolocalizacion.direccion,
         },
         {
+          name: 'facebook-domain-verification',
+          content: FacebookPixel1 ? `${FacebookPixel1}` : '',
+        },
+        {
           name: ' google',
           content: ' notranslate',
         },
@@ -204,11 +313,42 @@ export default {
           href: `https://api2.komercia.co/logos/${tienda.logo}`,
         },
         {
+          href:
+            this.template == 3 ||
+            this.template == 5 ||
+            this.template == 6 ||
+            this.template == 10 ||
+            this.template == 11
+              ? `https://fonts.googleapis.com/css?family=${tipo_letra}:100,200,300,400,500,600,700,800,900&display=swap`
+              : '',
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         },
         {
-          href: `https://fonts.googleapis.com/css?family=${tipo_letra}:400,700&display=swap`,
+          href:
+            this.template == 7
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 7
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra2}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 7
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra3}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 9
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&family=${tipo_letra2}@0;1&display=swap`
+              : '',
           rel: 'stylesheet',
         },
       ],
@@ -225,6 +365,7 @@ export default {
       return this.$store.state.dataStore
     },
     headerTemplate() {
+      // let headerComp = ''
       let headerComponent = ''
       switch (this.template) {
         case 3:
@@ -236,11 +377,30 @@ export default {
         case 6:
           headerComponent = 'KoHeader2'
           break
+        // case 6:
+        //   if (this.settingByTemplate.header) {
+        //     switch (this.settingByTemplate.header) {
+        //       case 1:
+        //         headerComp = 'Ko6Header1'
+        //         break
+        //       case 2:
+        //         headerComp = 'KoHeader2'
+        //         break
+        //     }
+        //     return headerComp
+        //   }
+        //   break
         case 7:
           headerComponent = 'KoHeader4'
           break
         case 8:
           headerComponent = 'KoHeader3'
+          break
+        case 9:
+          headerComponent = 'KoHeader5'
+          break
+        case 10:
+          headerComponent = 'KoHeader6'
           break
       }
       return headerComponent
@@ -257,11 +417,30 @@ export default {
         case 6:
           footerComponent = 'KoFooter2'
           break
+        // case 6:
+        //   if (this.settingByTemplate.footer) {
+        //     switch (this.settingByTemplate.footer) {
+        //       case 1:
+        //         footerComp = 'Ko6Footer1'
+        //         break
+        //       case 2:
+        //         footerComp = 'KoFooter2'
+        //         break
+        //     }
+        //     return footerComp
+        //   }
+        //   break
         case 7:
-          footerComponent = 'KoFooter2'
+          footerComponent = 'KoFooter4'
           break
         case 8:
           footerComponent = 'KoFooter1'
+          break
+        case 9:
+          footerComponent = 'KoFooter5'
+          break
+        case 10:
+          footerComponent = 'KoFooter6'
           break
       }
       return footerComponent
@@ -275,6 +454,9 @@ export default {
     settingByTemplate() {
       return this.$store.state.settingByTemplate
     },
+    settingByTemplate7() {
+      return this.$store.state.settingByTemplate7
+    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -284,14 +466,18 @@ export default {
           this.settingByTemplate.settings['--background_color_1']
             ? this.settingByTemplate.settings
             : this.settingBase,
-        settingByTemplate7:
+        settingByTemplate7h:
           this.settingByTemplate7 && this.settingByTemplate7.header
             ? this.settingByTemplate7.header
-            : '',
+            : null,
+        settingByTemplate7f:
+          this.settingByTemplate7 && this.settingByTemplate7.footer
+            ? this.settingByTemplate7.footer
+            : null,
         settingByTemplate7General:
           this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
             ? this.settingByTemplate7.settingGeneral
-            : '',
+            : null,
       }
     },
   },
@@ -364,10 +550,8 @@ export default {
   --green: #00dd8d;
   --magenta: #c52675;
   --yellow: #f2b931;
-
   --color_hover_text: #e64956;
   --btnhover: #929292;
-
   --radius_btn: 5px;
 }
 * {
@@ -386,7 +570,7 @@ export default {
   top: 50%;
   right: 0px;
   width: 155px;
-  color: black;
+  color: white;
   overflow: hidden;
   background-color: #25d366;
   border-radius: 10px 0 0 10px;
@@ -394,17 +578,22 @@ export default {
   transition: all 0.5s ease-in-out;
   vertical-align: middle;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  max-height: 51px;
 }
 .wrapper-whatsapp:hover {
   transform: translate(0px, 0px);
 }
-.wrapper-whatsapp div span {
+.wrapper-whatsapp span {
   font-size: 15px;
   padding-top: 8px;
   padding-bottom: 10px;
-  position: absolute;
+  position: relative;
   line-height: 16px;
   font-weight: bolder;
+  margin-left: 5px;
+  color: white;
 }
 .button-whatsapp {
   width: 50px;

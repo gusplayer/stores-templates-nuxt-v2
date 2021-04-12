@@ -2,7 +2,10 @@
   <div
     class="header-container"
     id="navbar"
-    :style="[settingByTemplate7h, settingByTemplate7General]"
+    :style="[
+      settingByTemplate7[0].setting7Header,
+      settingByTemplate7[0].setting7General,
+    ]"
   >
     <div
       class="wrapper-header"
@@ -10,16 +13,18 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate7General &&
-            this.settingByTemplate7General.fount_1
-              ? this.settingByTemplate7General.fount_1
+            this.settingByTemplate7 &&
+            this.settingByTemplate7[0].setting7General &&
+            this.settingByTemplate7[0].setting7General.fount_1
+              ? this.settingByTemplate7[0].setting7General.fount_1
               : 'David libre',
         },
         {
           '--font-style-3':
-            this.settingByTemplate7General &&
-            this.settingByTemplate7General.fount_3
-              ? this.settingByTemplate7General.fount_3
+            this.settingByTemplate7 &&
+            this.settingByTemplate7[0].setting7General &&
+            this.settingByTemplate7[0].setting7General.fount_3
+              ? this.settingByTemplate7[0].setting7General.fount_3
               : 'Lora',
         },
       ]"
@@ -97,7 +102,11 @@
             </div>
           </div>
         </div>
-        <KoSearch :dataStore="dataStore" />
+        <KoSearch
+          :dataStore="dataStore"
+          :settingKProdutCard="this.settingByTemplate7[0].settingKProdutCard"
+          :settingGeneral="this.settingByTemplate7[0].setting7General"
+        />
         <KoMenu :dataStore="dataStore" class="responsive" />
       </div>
     </div>
@@ -118,13 +127,14 @@ export default {
   name: 'Ko-Header-4',
   props: {
     dataStore: Object,
-    settingByTemplate7h: Object,
-    settingByTemplate7General: Object,
+    settingByTemplate7: Array,
   },
   mounted() {
     let colorBg = ''
-    if (this.settingByTemplate7h) {
-      colorBg = this.settingByTemplate7h['--background_color_1']
+    if (this.settingByTemplate7 && this.settingByTemplate7[0].setting7Header) {
+      colorBg = this.settingByTemplate7[0].setting7Header[
+        '--background_color_1'
+      ]
     } else {
       colorBg = '#ffffff'
     }
@@ -139,46 +149,85 @@ export default {
     } else {
       this.showSearch = false
     }
-
     var prevScrollpos = window.pageYOffset
-    window.onscroll = function () {
-      var currentScrollPos = window.pageYOffset
-      var navbar = document.getElementById('navbar')
-      var header = document.getElementById('headerid')
-      var bghead = document.getElementById('headbg')
-
-      if (currentScrollPos == 0) {
-        if (screen.width >= 300) {
-          header.style.width = '100%'
-          bghead.style.backgroundColor = 'transparent'
-          bghead.style.boxShadow = '0px 0px 0px 0px'
-          header.style.boxShadow =
-            '0px 22px 11px -12px rgba(145, 145, 145, 0.57)'
-        }
-        if (screen.width >= 1280) {
-          header.style.width = '93%'
+    var navbar = document.getElementById('navbar')
+    var header = document.getElementById('headerid')
+    var bghead = document.getElementById('headbg')
+    if (
+      this.settingByTemplate7 &&
+      this.settingByTemplate7[0].setting7Header &&
+      this.settingByTemplate7[0].setting7Header.transparente == true
+    ) {
+      header.style.backgroundColor = 'transparent'
+      window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset
+        if (currentScrollPos == 0) {
+          if (screen.width >= 300) {
+            header.style.width = '100%'
+            bghead.style.backgroundColor = 'transparent'
+            header.style.backgroundColor = 'transparent'
+            bghead.style.boxShadow = 'transparent'
+            header.style.boxShadow = 'transparent'
+          }
+          if (screen.width >= 1280) {
+            header.style.width = '93%'
+            navbar.style.zIndex = '20'
+            navbar.style.top = '30px'
+          }
+        } else if (prevScrollpos > currentScrollPos && navbar) {
+          navbar.style.top = '0px'
           navbar.style.zIndex = '20'
-          navbar.style.top = '30px'
+          bghead.style.backgroundColor = 'transparent'
+          header.style.backgroundColor = 'transparent'
+          header.style.boxShadow = 'transparent'
+          bghead.style.boxShadow = 'transparent'
+          if (screen.width >= 300) {
+            header.style.width = '100%'
+          }
+          if (screen.width >= 1280) {
+            header.style.width = '93%'
+          }
+        } else {
+          navbar.style.zIndex = '20'
+          navbar.style.top = '-160px'
         }
-      } else if (prevScrollpos > currentScrollPos && navbar) {
-        //sube
-        navbar.style.top = '0px'
-        navbar.style.zIndex = '20'
-        bghead.style.backgroundColor = colorBg
-        header.style.boxShadow = '0px 0px 0px 0px'
-        bghead.style.boxShadow = '0px 22px 11px -12px rgba(145,145,145,0.57)'
-
-        if (screen.width >= 300) {
-          header.style.width = '100%'
-        }
-        if (screen.width >= 1280) {
-          header.style.width = '93%'
-        }
-      } else {
-        navbar.style.zIndex = '20'
-        navbar.style.top = '-100px'
+        prevScrollpos = currentScrollPos
       }
-      prevScrollpos = currentScrollPos
+    } else {
+      header.style.backgroundColor = colorBg
+      window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset
+        if (currentScrollPos == 0) {
+          if (screen.width >= 300) {
+            header.style.width = '100%'
+            bghead.style.backgroundColor = 'transparent'
+            bghead.style.boxShadow = '0px 0px 0px 0px'
+            header.style.boxShadow =
+              '0px 22px 11px -12px rgba(145, 145, 145, 0.57)'
+          }
+          if (screen.width >= 1280) {
+            header.style.width = '93%'
+            navbar.style.zIndex = '20'
+            navbar.style.top = '30px'
+          }
+        } else if (prevScrollpos > currentScrollPos && navbar) {
+          navbar.style.top = '0px'
+          navbar.style.zIndex = '20'
+          bghead.style.backgroundColor = colorBg
+          header.style.boxShadow = '0px 0px 0px 0px'
+          bghead.style.boxShadow = '0px 22px 11px -12px rgba(145,145,145,0.57)'
+          if (screen.width >= 300) {
+            header.style.width = '100%'
+          }
+          if (screen.width >= 1280) {
+            header.style.width = '93%'
+          }
+        } else {
+          navbar.style.zIndex = '20'
+          navbar.style.top = '-160px'
+        }
+        prevScrollpos = currentScrollPos
+      }
     }
   },
   data() {
@@ -329,7 +378,7 @@ export default {
 }
 .header-text-menu {
   color: var(--color_text);
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
 }
 .header-content-logo {
   @apply flex justify-center items-center py-4;
@@ -348,7 +397,7 @@ export default {
 .btn {
   @apply mx-16 font-semibold uppercase tracking-wider;
   transition: all 0.25s ease;
-  font-family: var(--font-style-1), serif !important ;
+  font-family: var(--font-style-1) !important ;
   font-size: 14px;
   color: var(--color_text);
 }

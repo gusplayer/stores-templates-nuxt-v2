@@ -1,14 +1,33 @@
 <template>
   <transition name="fade">
     <div class="order" @click="closeOrder" v-show="openSearch">
-      <div class="order_content">
+      <div
+        class="order_content"
+        :style="[
+          {
+            '--font-style-1':
+              this.settingByTemplate9 &&
+              this.settingByTemplate9[0].setting9General &&
+              this.settingByTemplate9[0].setting9General.fount_1
+                ? this.settingByTemplate9[0].setting9General.fount_1
+                : 'Poppins',
+          },
+          {
+            '--font-style-2':
+              this.settingByTemplate9 &&
+              this.settingByTemplate9[0].setting9General &&
+              this.settingByTemplate9[0].setting9General.fount_2
+                ? this.settingByTemplate9[0].setting9General.fount_2
+                : 'Roboto',
+          },
+        ]"
+      >
         <div class="close-container" @click="closedSearch">
           <div class="content-close">
             <div class="leftright"></div>
             <div class="rightleft"></div>
           </div>
         </div>
-
         <div class="products-search">
           <div class="search-input-content">
             <form class="form-search">
@@ -39,6 +58,7 @@ export default {
   name: 'KoSearch',
   props: {
     showMenu: Boolean,
+    settingByTemplate9: Array,
   },
   components: {},
 
@@ -222,7 +242,8 @@ export default {
   top: 0px;
   width: 100%;
   height: 300px;
-  background-color: var(--background_color_1);
+  /* background-color: var(--background_color_1); */
+  background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -261,7 +282,8 @@ input[type='search'] {
   font-size: 40px;
   color: #000;
   font-weight: 800;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: var(--font-style-1) !important;
 }
 .input-search {
   @apply w-full items-center z-10;
@@ -272,7 +294,8 @@ input[type='search'] {
   font-weight: 800;
   color: #000;
   padding-left: 5px;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: var(--font-style-1) !important;
 }
 .form-search:focus .cont-search-up {
   display: flex;
@@ -283,7 +306,8 @@ input[type='search'] {
 }
 .txt-search-up {
   font-size: 40px;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: var(--font-style-1) !important;
   font-weight: 800;
   margin-left: 10px;
   color: #2c2930;
@@ -310,7 +334,8 @@ input[type='search'] {
 }
 .btn-txt {
   color: #fff;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif; */
+  font-family: var(--font-style-2) !important;
   font-size: 23px;
   font-weight: 800;
   /* padding-left: 60px;

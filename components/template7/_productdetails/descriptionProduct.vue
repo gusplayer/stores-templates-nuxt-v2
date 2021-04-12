@@ -311,7 +311,7 @@ export default {
   text-transform: uppercase;
   align-self: flex-start;
   font-weight: bold;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .content_product_description {
   display: flex;
@@ -323,7 +323,7 @@ export default {
   font-size: 14px;
   line-height: 1.6;
   margin-bottom: 20px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #777;
 }
 
@@ -343,7 +343,7 @@ export default {
   text-transform: uppercase;
   align-self: flex-start;
   font-weight: bold;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .right img {
   max-width: 320px;
@@ -362,7 +362,7 @@ export default {
   text-transform: uppercase;
   align-self: flex-start;
   margin-top: 20px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .content-text-desc {
   margin-right: 25px;
@@ -375,7 +375,7 @@ export default {
 }
 .text-method-payment {
   font-size: 14px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 h3 {
   color: rgba(21, 20, 57, 0.541);
@@ -383,7 +383,7 @@ h3 {
   font-size: 15px;
   text-transform: uppercase;
   align-self: flex-start;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 h4 {
   margin-top: 15px;
@@ -391,12 +391,12 @@ h4 {
   color: rgba(21, 20, 57, 0.541);
   /* color: var(--color_subtext); */
   margin-bottom: 5px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 li p {
   line-height: 1.4;
   font-size: 14px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .icon {
   width: 50px;
@@ -448,12 +448,12 @@ li p {
 .capitalize {
   text-transform: capitalize;
   font-weight: 600 !important;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .description-method {
   line-height: 1.4;
   font-size: 14px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .price {
   margin-top: 10px;

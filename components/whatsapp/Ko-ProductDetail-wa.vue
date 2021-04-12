@@ -46,6 +46,14 @@
               </div>
             </div>
             <div
+              v-if="data.info.descripcion_corta"
+              style="margin-top: 10px; margin-bottom: 5px;"
+            >
+              <p class="text-marca">
+                <strong>{{ data.info.descripcion_corta }}</strong>
+              </p>
+            </div>
+            <div
               v-if="this.data.detalle.con_variante > 0"
               class="container-variants"
             >

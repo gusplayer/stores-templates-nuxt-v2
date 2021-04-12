@@ -330,7 +330,7 @@ export default {
 }
 .txt-banner {
   color: var(--color_title);
-  font-family: var(--font-style-1), serif !important ;
+  font-family: var(--font-style-1) !important ;
   font-weight: 400;
 }
 .tittle-banner-blog {
@@ -353,7 +353,7 @@ export default {
 }
 .title {
   font-size: 25px;
-  font-family: var(--font-style-1), serif !important ;
+  font-family: var(--font-style-1) !important ;
   font-weight: bold;
   color: #3f3f3f;
   margin-bottom: 20px;
@@ -412,7 +412,7 @@ export default {
   font-size: 0px;
   padding-left: 10px;
   transition: 0.4s;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 }
 .input-text:focus {
   border: none;
@@ -421,7 +421,7 @@ export default {
   @apply text-left items-center;
   font-size: 16px;
   color: #7f7f7f;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 }
 .empty-space {
   @apply mx-2;

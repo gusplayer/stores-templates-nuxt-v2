@@ -255,6 +255,8 @@
                     :product="product"
                     v-if="!showinList"
                     class="product-nolist"
+                    :settingGeneral="settingGeneral"
+                    :settingKProdutCard="settingKProdutCard"
                   ></KoProdcutCardFilter>
                   <KoProdcutCardFilerList
                     :product="product"
@@ -302,7 +304,7 @@
 </template>
 
 <script>
-import KoProdcutCardFilter from './_productcard/ProductCardFilter'
+import KoProdcutCardFilter from './_productcard/ProductCard'
 import KoProdcutCardFilerList from './_productcard/ProductCardFilterList'
 export default {
   components: {
@@ -314,6 +316,7 @@ export default {
     fullProducts: {},
     settingGeneral: Object,
     settingK07ProductList: Object,
+    settingKProdutCard: Object,
   },
   name: 'Ko-ProductList-Filter',
   mounted() {
@@ -811,7 +814,7 @@ export default {
   font-weight: 600;
   font-size: 16px;
   transition: all 0.25s ease;
-  font-family: var(--font-style-1), serif !important ;
+  font-family: var(--font-style-1) !important ;
   cursor: default;
 }
 .value-range-slide {
@@ -824,7 +827,7 @@ export default {
   @apply w-auto pr-1;
   color: var(--color_subtext);
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   transition: all 0.25s ease;
   cursor: default;
 }
@@ -839,7 +842,7 @@ export default {
   color: var(--color_text);
   font-weight: 600;
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   transition: all 0.25s ease;
   cursor: default;
 }
@@ -857,7 +860,7 @@ export default {
   @apply w-3/0 flex justify-center items-center;
 }
 .btn-items-left {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   transition: all 0.25s ease;
   display: flex;
   border-radius: 35px;
@@ -889,7 +892,7 @@ export default {
   margin-right: 6px;
   font-weight: 600;
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   cursor: pointer;
 }
 
@@ -900,20 +903,20 @@ export default {
   margin-left: 6px;
   transition: all 0.25s ease;
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   cursor: pointer;
 }
 .product-stock-text {
   color: #8e8e8e;
   font-weight: bold;
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 }
 .product-stock-active {
   color: rgb(0, 0, 0);
   font-weight: bold;
   font-size: 15px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 }
 .text-categorias-select {
   display: flex;
@@ -924,7 +927,7 @@ export default {
   font-weight: 100;
   transition: all 0.25s ease;
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   cursor: pointer;
 }
 #statecate {
@@ -932,7 +935,7 @@ export default {
   color: #333;
   font-weight: 600;
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   cursor: pointer;
 }
 #statesubcate {
@@ -942,7 +945,7 @@ export default {
   color: #333;
   font-weight: 600;
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   cursor: pointer;
 }
 .top-content {
@@ -1012,7 +1015,7 @@ export default {
   @apply w-full flex flex-row justify-start items-center pr-4;
   color: var(--color_subtext);
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   transition: all 0.25s ease;
   cursor: pointer;
 }
@@ -1020,7 +1023,7 @@ export default {
   @apply w-full flex flex-row justify-start items-center pr-4;
   color: #0c0c0c;
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   transition: all 0.25s ease;
   cursor: pointer;
   font-weight: bold;
@@ -1031,7 +1034,7 @@ export default {
   font-weight: 600;
   transition: all 0.25s ease;
   font-size: 14px;
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   cursor: pointer;
 }
 .show-view-per-list {
@@ -1060,7 +1063,7 @@ export default {
 }
 .btn-tittle-shop {
   color: var(--color_title);
-  font-family: var(--font-style-1), serif !important ;
+  font-family: var(--font-style-1) !important ;
   font-weight: 400;
 }
 .txt-categorys:hover {
@@ -1084,15 +1087,15 @@ export default {
   @apply w-full;
 }
 .tittle {
-  font-family: var(--font-style-2), cursive !important;
+  font-family: var(--font-style-2) !important;
   color: #ed2353;
 }
 .subtittle {
-  font-family: var(--font-style-1), serif !important;
+  font-family: var(--font-style-1) !important;
   color: var(--color_text);
 }
 .description {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   color: #777;
 }
 .product-conten-items {
@@ -1139,7 +1142,7 @@ export default {
   font-size: 20px;
   color: #3f3f3f;
   font-weight: 600;
-  font-family: var(--font-style-1), serif !important;
+  font-family: var(--font-style-1) !important;
 }
 .pagination-medium {
   margin-top: 50px;

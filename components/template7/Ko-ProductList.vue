@@ -123,7 +123,7 @@ export default {
 
 <style scoped>
 .product-content {
-  @apply flex flex-col justify-center items-center w-full my-80;
+  @apply flex flex-col justify-center items-center w-full py-50;
   background: var(--background_color_1);
 }
 .product-text {
@@ -143,15 +143,15 @@ export default {
 }
 
 .tittle {
-  font-family: var(--font-style-2), cursive !important;
+  font-family: var(--font-style-2) !important;
   color: var(--color_pre_title);
 }
 .subtittle {
-  font-family: var(--font-style-1), serif !important;
+  font-family: var(--font-style-1) !important;
   color: var(--color_title);
 }
 .description {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   color: var(--color_description);
 }
 .product-conten-items {
@@ -185,7 +185,7 @@ export default {
   font-size: 20px;
   color: #3f3f3f;
   font-weight: 600;
-  font-family: 'David Libre', serif !important;
+  font-family: 'David Libre' !important;
 }
 @screen sm {
   .producto-items-content {

@@ -1,21 +1,38 @@
 <template>
-  <div class="wrapper-content">
-    <div class="wrapper-items-content">
-      <div class="product-text">
-        <div class="product-tittle">
-          <span class="tittle">Desde el blog</span>
+  <div class="wrapper-content" :style="[blog, settingGeneral]">
+    <div
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
+      <div class="wrapper-items-content">
+        <div class="product-text">
+          <div class="product-tittle">
+            <span class="tittle">Desde el blog</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="wrapper-items">
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-        <div class="swiper-wrapper">
-          <div
-            v-for="(article, index) in filteredList"
-            :key="article.id"
-            :class="`swiper-slide wrapper-${index + 1}`"
-          >
-            <Kblog v-if="article.estado == 1" :article="article"></Kblog>
+      <div class="wrapper-items">
+        <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+          <div class="swiper-wrapper">
+            <div
+              v-for="(article, index) in filteredList"
+              :key="article.id"
+              :class="`swiper-slide wrapper-${index + 1}`"
+            >
+              <Kblog v-if="article.estado == 1" :article="article"></Kblog>
+            </div>
           </div>
         </div>
       </div>
@@ -31,7 +48,8 @@ export default {
   },
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    blog: Object,
+    settingGeneral: Object,
   },
   data() {
     return {

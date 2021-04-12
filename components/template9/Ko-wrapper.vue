@@ -1,21 +1,38 @@
 <template>
-  <div class="wrapper-content">
-    <div class="wrapper-items-content">
-      <div class="product-text">
-        <div class="product-tittle">
-          <span class="tittle">Instagram Feed</span>
+  <div class="wrapper-content" :style="[wrapper, settingGeneral]">
+    <div
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
+      <div class="wrapper-items-content">
+        <div class="product-text">
+          <div class="product-tittle">
+            <span class="tittle">Instagram Feed</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="wrapper-items">
-      <div v-for="(imagen, index) in Imagenes" :key="index" class="grid-imgs">
-        <a
-          target="_blank"
-          rel="noreferrer noopener"
-          :href="dataStore.tienda.red_instagram"
-        >
-          <img class="img-wrapp" :src="imagen.url" alt="wrapper-images" />
-        </a>
+      <div class="wrapper-items">
+        <div v-for="(imagen, index) in Imagenes" :key="index" class="grid-imgs">
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            :href="dataStore.tienda.red_instagram"
+          >
+            <img class="img-wrapp" :src="imagen.url" alt="wrapper-images" />
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -25,7 +42,8 @@ export default {
   name: 'Ko-wrapper',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    wrapper: Object,
+    settingGeneral: Object,
   },
   data() {
     return {

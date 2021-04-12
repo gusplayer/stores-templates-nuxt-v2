@@ -1,31 +1,95 @@
 <template>
   <div class="wrapper-blog">
-    <div class="banner-blog">
-      <div class="tittle-banner-blog">
-        <p class="txt-banner">{{ dataStore.tienda.nombre }}</p>
-        <p class="txt-banner" id="separator">{{ $t('header_blog') }}</p>
-      </div>
-    </div>
     <div class="container-article" v-if="dataArticle">
       <div class="content-blog">
-        <nuxt-link to="/blog" class="content-back">
-          <arrow-left-icon class="arrow-left"> </arrow-left-icon>
-          <p>Regresar</p>
-        </nuxt-link>
-        <p class="title-blog">{{ dataArticle.titulo }}</p>
-        <div class="content-date">
-          <div class="flex-shrink-0">
-            <a href="#">
-              <img
-                class="h-40 w-40 rounded-full"
-                v-lazy="`https://api2.komercia.co/users/user.jpg`"
-                alt=""
-              />
-            </a>
+        <nav class="flex mt-20 mb-5 sm:mb-10" aria-label="Breadcrumb">
+          <ol class="flex items-start space-x-4">
+            <li>
+              <nuxt-link to="/" class="text-gray-400 hover:text-gray-500">
+                <svg
+                  class="flex-shrink-0 h-20 w-20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+                  />
+                </svg>
+                <span class="sr-only">Home</span>
+              </nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/blog" class="flex items-center">
+                <svg
+                  class="flex-shrink-0 h-20 w-20 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <p
+                  class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                >
+                  listado de artículos
+                </p>
+              </nuxt-link>
+            </li>
+          </ol>
+        </nav>
+        <div>
+          <p class="size_title mt-10 text-start">
+            {{ dataArticle.titulo }}
+          </p>
+        </div>
+        <div class="flex justify-between items-center">
+          <div class="content-date">
+            <div class="flex-shrink-0">
+              <a href="#">
+                <img
+                  class="h-40 w-40 rounded-full"
+                  v-lazy="`https://api2.komercia.co/users/user.jpg`"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="content-date-items">
+              <p>{{ dataArticle.autor }}</p>
+              <p>{{ this.shippingCreated }}</p>
+            </div>
           </div>
-          <div class="content-date-items">
-            <p>{{ dataArticle.autor }}</p>
-            <p>{{ this.shippingCreated }}</p>
+          <div class="flex icons">
+            <a
+              :href="this.sharingFacebook"
+              target="_blank"
+              rel="noreferrer noopener"
+              style="max-height: 25px;"
+            >
+              <facebook-icon class="wp-icon" />
+            </a>
+            <a
+              :href="this.sharingTwitter"
+              target="_blank"
+              rel="noreferrer noopener"
+              style="max-height: 25px;"
+            >
+              <twitter-icon class="wp-icon marginIcon" />
+            </a>
+            <a
+              :href="this.sharingLinkedin"
+              target="_blank"
+              rel="noreferrer noopener"
+              style="max-height: 25px;"
+            >
+              <linkedin-icon class="wp-icon marginIcon" />
+            </a>
           </div>
         </div>
         <div class="editor" v-if="dataArticle.contenido">
@@ -220,6 +284,14 @@ export default {
         new Print(),
         new SelectAll(),
       ],
+      sharing: {
+        url: '',
+        quote: '',
+        quoteTwitter: '',
+      },
+      sharingFacebook: '',
+      sharingTwitter: '',
+      sharingLinkedin: '',
     }
   },
   computed: {
@@ -236,6 +308,12 @@ export default {
           this.dataArticle = product
         }
       })
+      this.sharing.url = window.location.href
+      this.sharing.quote = `${this.dataArticle.titulo}%0A%0A${this.dataArticle.resumen}`
+      this.sharing.quoteTwitter = `${this.dataArticle.titulo}%20by%20${this.dataArticle.autor}%0A`
+      this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
+      this.sharingTwitter = `https://twitter.com/intent/tweet?text=${this.sharing.quoteTwitter}%0A${this.sharing.url}`
+      this.sharingLinkedin = `https://www.linkedin.com/shareArticle?mini=true&url=${this.sharing.url}`
     },
   },
   watch: {
@@ -246,6 +324,12 @@ export default {
 }
 </script>
 <style scoped>
+.size_title {
+  font-size: 48px;
+  font-weight: bold;
+  color: black;
+  line-height: 48px;
+}
 .wrapper-blog {
   display: flex;
   flex-direction: column;
@@ -253,7 +337,10 @@ export default {
   align-items: center;
   width: 100%;
   min-height: calc(72vh);
-  background: #fff;
+  background: white;
+}
+.container-article {
+  @apply flex justify-center items-center;
 }
 .content-blog {
   @apply p-4;
@@ -264,32 +351,12 @@ export default {
   align-self: flex-start;
   box-sizing: content-box;
 }
-.content-back {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-.arrow-left {
-  bottom: 2px;
-  margin-right: 5px;
-  cursor: pointer;
-  color: black;
-}
-.content-back p {
-  cursor: pointer;
-  color: black;
-}
-.title-blog {
-  font-size: 30px;
-  font-weight: bold;
-  color: black;
-  margin-top: 20px;
-}
 .content-date {
   width: 100%;
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
+  margin-top: 10px;
 }
 .content-date-items {
   width: 100%;
@@ -304,83 +371,89 @@ export default {
 .content-date-items p:nth-child(1) {
   font-weight: bold;
 }
-.txt-banner {
-  color: #000;
-  font-weight: 400;
+.editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
+  border: none;
+  padding: 10px 5px;
 }
-.tittle-banner-blog {
-  @apply w-full flex flex-row justify-center items-center my-6;
+.editor >>> .el-tiptap-editor__menu-bubble {
+  display: none;
 }
-.banner-blog {
-  @apply w-full flex flex-col justify-center items-center;
-  background: white;
+.editor >>> .el-tiptap-editor__content h1 {
+  font-size: 2em;
 }
-#separator {
-  margin-left: 20px;
+.editor >>> .el-tiptap-editor__content h2 {
+  font-size: 1.5em;
 }
-.container-article {
-  @apply flex justify-center items-center rounded-md;
+.editor >>> .el-tiptap-editor__content h3 {
+  font-size: 1.17em;
 }
-.container-article {
-  @apply shadow-2xl;
+.editor >>> .el-tiptap-editor__content h4 {
+  font-size: 1.12em;
+}
+.editor >>> .el-tiptap-editor__content h5 {
+  font-size: 0.83em;
+}
+.wp-icon {
+  font-size: 25px;
+  bottom: 2px;
+  color: #757575;
+  cursor: pointer;
+}
+.wp-icon:hover {
+  color: #494949;
+}
+.marginIcon {
+  margin-left: 8px;
 }
 @screen sm {
   .container-article {
-    @apply w-9/0;
-  }
-  .txt-banner {
-    font-size: 36px;
+    width: 95%;
   }
   .icon-blog {
     width: 10%;
     margin-bottom: 40px;
   }
-  #separator {
-    margin-left: 10px;
-  }
 }
-@media (min-width: 425px) {
+@media (max-width: 425px) {
   .icon-blog {
     width: 8%;
     margin-bottom: 40px;
   }
+  .size_title {
+    font-size: 25px;
+  }
 }
-@media (min-width: 490px) {
+@media (max-width: 490px) {
   .icon-blog {
     width: 7%;
     margin-bottom: 40px;
   }
 }
-@media (min-width: 576px) {
+@media (max-width: 576px) {
   .grid-products {
     @apply w-9/5 grid-cols-2;
   }
-  .tittle-banner-blog {
-    @apply w-9/5;
-  }
 }
-@media (min-width: 600px) {
+@media (max-width: 600px) {
   .icon-blog {
     width: 6%;
     margin-bottom: 40px;
+  }
+  .size_title {
+    font-size: 28px;
+    line-height: 35px;
   }
 }
 @screen md {
   .container-article {
     @apply w-9/5;
   }
-  .txt-banner {
-    font-size: 36px;
-  }
   .icon-blog {
     width: 5%;
     margin-bottom: 40px;
   }
-  #separator {
-    margin-left: 10px;
-  }
 }
-@media (min-width: 900px) {
+@media (max-width: 900px) {
   .icon-blog {
     width: 4%;
     margin-bottom: 40px;
@@ -392,7 +465,7 @@ export default {
     margin-bottom: 40px;
   }
 }
-@media (min-width: 1100px) {
+@media (max-width: 1100px) {
   .icon-blog {
     width: 3%;
     margin-bottom: 40px;
@@ -400,44 +473,16 @@ export default {
 }
 @screen mlg {
   .container-article {
-    @apply w-9/3;
-  }
-  .tittle-banner-blog {
-    @apply w-9/3 flex flex-row justify-center items-center my-4;
-  }
-  .txt-banner {
-    font-size: 50px;
+    @apply w-7/8;
   }
   .icon-blog {
     width: 5%;
     margin-bottom: 80px;
   }
-  #separator {
-    margin-left: 20px;
-  }
 }
 @screen xl {
   .container-article {
-    @apply w-8/3;
-  }
-  .tittle-banner-blog {
-    @apply w-8/3;
-  }
-}
-@screen xml {
-  .container-article {
-    @apply w-6/3;
-  }
-  .tittle-banner-blog {
-    @apply w-6/3;
-  }
-}
-@screen xxl {
-  .container-article {
-    @apply w-4/6;
-  }
-  .tittle-banner-blog {
-    @apply w-4/6;
+    @apply w-4/8;
   }
 }
 </style>

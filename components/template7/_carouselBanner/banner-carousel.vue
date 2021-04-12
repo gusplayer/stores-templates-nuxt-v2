@@ -17,7 +17,7 @@
         },
       ]"
     >
-      <div class="banner-content-img">
+      <div class="banner-content-img" v-if="banner.url_img_left">
         <img class="img-banner" :src="banner.url_img_left" alt="img-flor" />
       </div>
       <div class="text-tittle">
@@ -45,7 +45,7 @@
         </button>
       </div>
     </div>
-    <div class="banner-img">
+    <div class="banner-img" v-if="banner.url_img_right">
       <img class="img-girl" :src="banner.url_img_right" alt="banner-carousel" />
     </div>
   </div>
@@ -98,7 +98,7 @@ export default {
   line-height: 18px;
 }
 .banner-text-tittle {
-  font-family: var(--font-style-2), cursive !important;
+  font-family: var(--font-style-2) !important;
   color: var(--color_text);
 }
 .banner-text-subtittle {
@@ -117,14 +117,14 @@ export default {
   @apply flex w-full justify-center items-center;
 }
 .banner-text-subtittle {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   font-style: italic;
 }
 .content-textbutton-shop {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
 }
 .content-textbutton-viewmore {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
 }
 @screen sm {
   .banner {

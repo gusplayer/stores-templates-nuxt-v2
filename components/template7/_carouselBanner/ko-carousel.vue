@@ -12,6 +12,7 @@
             class="img-bg"
             :src="settingKCarousel.values[index].url_img_background"
             alt="bg"
+            v-if="settingKCarousel.values[index].url_img_background"
           />
           <KObanner
             class="absolute"

@@ -848,7 +848,7 @@ export default {
   @apply w-auto pr-1;
   color: #717171;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   transition: all 0.25s ease;
   cursor: default;
 }
@@ -863,7 +863,7 @@ export default {
   color: #2d2a2a;
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   transition: all 0.25s ease;
   cursor: default;
 }
@@ -880,7 +880,7 @@ export default {
   @apply w-3/0 flex justify-center items-center;
 }
 .btn-items-left {
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   transition: all 0.25s ease;
   display: flex;
   border-radius: 35px;
@@ -912,7 +912,7 @@ export default {
   margin-right: 6px;
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   cursor: pointer;
 }
 .separator-breadCrumbs {
@@ -922,20 +922,20 @@ export default {
   margin-left: 6px;
   transition: all 0.25s ease;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   cursor: pointer;
 }
 .product-stock-text {
   color: #8e8e8e;
   font-weight: bold;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
 }
 .product-stock-active {
   color: rgb(0, 0, 0);
   font-weight: bold;
   font-size: 15px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
 }
 .text-categorias-select {
   display: flex;
@@ -946,7 +946,7 @@ export default {
   font-weight: 100;
   transition: all 0.25s ease;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   cursor: pointer;
 }
 #statecate {
@@ -954,7 +954,7 @@ export default {
   color: #333;
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   cursor: pointer;
 }
 #statesubcate {
@@ -964,7 +964,7 @@ export default {
   color: #333;
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   cursor: pointer;
 }
 .top-content {
@@ -1054,7 +1054,7 @@ export default {
   font-weight: 600;
   transition: all 0.25s ease;
   font-size: 14px;
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   cursor: pointer;
 }
 .show-view-per-list {
@@ -1111,15 +1111,15 @@ export default {
   @apply w-full;
 }
 .tittle {
-  font-family: 'Great Vibes', cursive !important;
+  font-family: 'Great Vibes' !important;
   color: #ed2353;
 }
 .subtittle {
-  font-family: 'David Libre', serif !important;
+  font-family: 'David Libre' !important;
   color: #2d2a2a;
 }
 .description {
-  font-family: 'Lora', serif !important ;
+  font-family: 'Lora' !important ;
   color: #777;
 }
 .content-item {
@@ -1164,7 +1164,7 @@ export default {
   font-size: 20px;
   color: #3f3f3f;
   font-weight: 600;
-  font-family: 'David Libre', serif !important;
+  font-family: 'David Libre' !important;
 }
 .pagination-medium {
   margin-top: 50px;

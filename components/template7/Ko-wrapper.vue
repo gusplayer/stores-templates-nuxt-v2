@@ -53,16 +53,21 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
           <div
-            v-for="(imagen, index) in Imagenes"
+            v-for="(imagen, index) in settingKWrapper.values"
             :key="index"
             :class="`swiper-slide wrapper-${index + 1}`"
           >
             <a
               target="_blank"
               rel="noreferrer noopener"
-              :href="dataStore.tienda.red_instagram"
+              :href="imagen.url_redirect"
+              class="wrapper-ints"
             >
-              <img class="img-wrapp" :src="imagen.url" alt="wrapper-images" />
+              <img
+                class="img-wrapp"
+                :src="imagen.url_img"
+                alt="imagenes de instagram"
+              />
             </a>
           </div>
         </div>
@@ -82,7 +87,7 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 'auto',
-        spaceBetween: 20,
+        spaceBetween: 0,
         breakpoints: {
           10000: {
             slidesPerView: 6,
@@ -111,32 +116,6 @@ export default {
         // grabCursor: true,
         // ...
       },
-      Imagenes: [
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492245/Komercia/Wrapper/wrapper-1_dfo9fn.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492248/Komercia/Wrapper/wrapper-2_iqhq6i.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492251/Komercia/Wrapper/wrapper-3_zt0bqm.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492254/Komercia/Wrapper/wrapper-4_tveirf.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492258/Komercia/Wrapper/wrapper-5_kamx9v.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto,h_750,w_750/v1610492261/Komercia/Wrapper/wrapper-6_zxfqi5.jpg',
-        },
-      ],
     }
   },
   computed: {
@@ -162,7 +141,6 @@ export default {
   text-align: center;
   font-size: 18px;
   background: #fff;
-
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
@@ -177,6 +155,10 @@ export default {
   -webkit-align-items: center;
   align-items: center;
 }
+.swiper-wrapper {
+  height: 300px;
+  max-height: 300px;
+}
 .img-wrapp {
   transition: all 200ms ease-in;
 }
@@ -187,7 +169,7 @@ export default {
   transform: scale(1.03);
 }
 .wrapper-content {
-  @apply flex flex-col justify-center items-center w-full;
+  @apply flex flex-col justify-center items-center w-full py-20;
   background: var(--background_color_1);
 }
 .wrapper-items-content {
@@ -205,15 +187,15 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .tittle-text {
-  font-family: var(--font-style-2), cursive !important;
+  font-family: var(--font-style-2) !important;
   color: var(--color_pre_title);
 }
 .subtittle-text {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_title);
 }
 .description-text {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_description);
 }
 .wrapper-items {
@@ -237,7 +219,6 @@ export default {
 .wrapper-6:hover {
   @apply bg-black bg-opacity-50 cursor-pointer;
 }
-
 @screen sm {
   .wrapper-items-content {
     @apply w-9/5;
@@ -289,7 +270,33 @@ export default {
     width: 1192px;
   }
   .img-wrapp {
-    width: 100vw;
+    width: 100%;
+  }
+}
+@media (max-width: 1300px) {
+  .swiper-wrapper {
+    height: 100%;
+    max-height: 205px;
+  }
+}
+@media (max-width: 1280px) {
+  .swiper-wrapper {
+    max-height: 200px;
+  }
+}
+@media (max-width: 600px) {
+  .swiper-wrapper {
+    max-height: 170px;
+  }
+}
+@media (max-width: 500px) {
+  .swiper-wrapper {
+    max-height: 150px;
+  }
+}
+@media (max-width: 430px) {
+  .swiper-wrapper {
+    max-height: 125px;
   }
 }
 </style>

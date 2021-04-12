@@ -88,7 +88,7 @@ export default {
 .advertising-wrapper {
   @apply w-full flex justify-center items-center;
   background: var(--background_color_1);
-  margin-bottom: 70px;
+  padding-bottom: 70px;
 }
 .advertising-background {
   @apply flex justify-center items-center bg-cover z-auto;
@@ -123,19 +123,21 @@ export default {
   color: var(--color_text_btn_card);
   font-size: 13px;
   line-height: 18px;
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   @apply uppercase font-semibold;
 }
 .advertising-text {
+  text-align: center;
+  padding: 2px;
   @apply w-full flex flex-col justify-center items-center;
 }
 .tittle {
   @apply py-4;
-  font-family: var(--font-style-2), cursive !important;
+  font-family: var(--font-style-2) !important;
   color: var(--color_text_card);
 }
 .subtittle {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_subtext_card);
   @apply text-center;
 }

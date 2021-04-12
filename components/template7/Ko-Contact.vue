@@ -319,7 +319,7 @@ export default {
   width: 100%;
 }
 .contact-text-title {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   font-size: 35px;
   font-weight: bold;
   font-stretch: normal;
@@ -329,7 +329,7 @@ export default {
   color: var(--color_text);
 }
 .contact-text-subtitle {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 
   font-size: 16px;
   font-weight: normal;
@@ -351,7 +351,7 @@ export default {
   margin-top: 10px;
 }
 .contact-text-subtitle2 {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 
   font-size: 16px;
   font-weight: normal;
@@ -365,7 +365,7 @@ export default {
   text-align: center;
 }
 .contact-text-subtitle3 {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 
   font-size: 12px;
   font-weight: normal;
@@ -377,7 +377,7 @@ export default {
   margin-top: 10px;
 }
 .contact-text-subtitle4 {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 
   font-size: 12px;
   font-weight: normal;
@@ -394,7 +394,7 @@ export default {
   flex-direction: column;
 }
 .contact-icon {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 
   font-size: 18px;
   font-weight: normal;
@@ -405,20 +405,20 @@ export default {
   color: var(--color_icon);
 }
 .text-icon {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 
   display: flex;
   flex-direction: row;
   color: var(--color_icon);
 }
 .text-icon a:hover {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 
   cursor: pointer;
   color: var(--hover_text);
 }
 .text-icon a {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 
   font-size: 16px;
   font-weight: normal;
@@ -434,7 +434,7 @@ export default {
   font-size: 17px;
 }
 .contact-text-sub {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 
   font-size: 22px;
   font-weight: 600;
@@ -446,7 +446,7 @@ export default {
   margin-top: 10px;
 }
 .contact-text-sub2 {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
 
   font-size: 22px;
   font-weight: 600;
@@ -477,7 +477,7 @@ export default {
   margin-top: 20px;
 }
 .contact-content-rigth p {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   font-size: 14px;
   font-weight: 600;
   font-stretch: normal;
@@ -504,7 +504,7 @@ export default {
   flex-direction: row;
 }
 .input-text {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   font-size: 14px;
   color: var(--color_text);
   border: solid 2px #afafaf;
@@ -514,7 +514,7 @@ export default {
   width: 100%;
 }
 .input-text::placeholder {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   color: var(--color_text);
   opacity: 0.7;
 }
@@ -530,7 +530,7 @@ export default {
   border: solid 2px var(--color_background_btn);
 }
 .input-text-rectangule {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   font-size: 14px;
   font-weight: 400;
   font-stretch: normal;
@@ -549,7 +549,7 @@ export default {
   min-height: 80px;
 }
 .input-text-rectangule::placeholder {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   color: var(--color_text);
   opacity: 0.7;
 }
@@ -574,7 +574,7 @@ export default {
   background: rgb(138, 138, 138);
 }
 .text-error {
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   font-size: 12px;
   color: #cb2027;
   width: 100%;
@@ -585,7 +585,7 @@ export default {
   border-radius: var(--radius_btn);
   border: solid 2px var(--color_background_btn);
   background: var(--color_background_btn);
-  font-family: var(--font-style-3), serif !important ;
+  font-family: var(--font-style-3) !important ;
   padding: 8px 14px;
   font-size: 16px;
   width: 50%;

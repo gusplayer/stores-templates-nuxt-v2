@@ -1,14 +1,51 @@
 <template lang="html">
   <div>
-    <KCarousel v-bind="componentsProps" />
-    <KPromo v-bind="componentsProps" />
-    <KProductList v-bind="componentsProps" />
-    <KAdvertising v-bind="componentsProps" />
-    <KGify v-bind="componentsProps" />
-    <KHowwork v-bind="componentsProps" />
-    <KBlog v-bind="componentsProps" v-show="listArticulos.length > 0" />
-    <KNews v-bind="componentsProps" />
-    <KWrapper v-bind="componentsProps" />
+    <KCarousel
+      v-bind="componentsProps"
+      v-if="showTemplate7.showCarousel && settingByTemplate7.banner.visible"
+    />
+    <KPromo
+      v-bind="componentsProps"
+      v-if="showTemplate7.showPromo && settingByTemplate7.content.visible"
+    />
+    <KProductList
+      v-bind="componentsProps"
+      v-if="
+        showTemplate7.showProductList && settingByTemplate7.productList.visible
+      "
+    />
+    <KAdvertising
+      v-bind="componentsProps"
+      v-if="
+        showTemplate7.showAdvertising && settingByTemplate7.advertising.visible
+      "
+    />
+    <KGify
+      v-bind="componentsProps"
+      v-if="
+        showTemplate7.showGify && settingByTemplate7.ProductFavorite.visible
+      "
+    />
+    <KHowwork
+      v-bind="componentsProps"
+      v-if="showTemplate7.showHowwork && settingByTemplate7.howWork.visible"
+    />
+    <KBlog
+      v-bind="componentsProps"
+      v-show="
+        listArticulos.length > 0 &&
+        showTemplate7.showBlog &&
+        settingByTemplate7.blog.visible
+      "
+    />
+    <KNews
+      v-bind="componentsProps"
+      v-if="showTemplate7.showNews && settingByTemplate7.newsletter.visible"
+    />
+    <KWrapper
+      v-bind="componentsProps"
+      v-if="showTemplate7.showWrapper && settingByTemplate7.contentImg.visible"
+    />
   </div>
 </template>
 
@@ -19,9 +56,9 @@ import KProductList from '../../components/template7/Ko-ProductList'
 import KAdvertising from '../../components/template7/Ko-advertising'
 import KGify from '../../components/template7/Ko-gify'
 import KHowwork from '../../components/template7/Ko-how-we-work'
-import KWrapper from '../../components/template7/Ko-wrapper'
 import KNews from '../../components/template7/Ko-Newsletter'
 import KBlog from '../../components/template7/Ko-blog'
+import KWrapper from '../../components/template7/Ko-wrapper'
 
 export default {
   layout: 'default',
@@ -32,49 +69,169 @@ export default {
     KAdvertising,
     KGify,
     KHowwork,
-    KWrapper,
     KNews,
     KBlog,
+    KWrapper,
   },
-  data() {
-    return {
-      search: '',
+  mounted() {
+    window.addEventListener('message', this.addEventListenertemplate)
+    let domain = this.$route.fullPath
+    switch (domain) {
+      case '':
+        this.$store.state.showTemplate7.showHeader07 = true
+        this.$store.state.showTemplate7.showBody07 = true
+        this.$store.state.showTemplate7.showFooter07 = true
+        this.$store.state.showTemplate7.showCountry = true
+        break
+      case '/?component=header':
+        this.$store.state.showTemplate7.showHeader07 = true
+        this.$store.state.showTemplate7.showBody07 = false
+        this.$store.state.showTemplate7.showFooter07 = false
+        this.$store.state.showTemplate7.showCountry = false
+        break
+      case '/?component=footer':
+        this.$store.state.showTemplate7.showHeader07 = false
+        this.$store.state.showTemplate7.showBody07 = false
+        this.$store.state.showTemplate7.showFooter07 = true
+        this.$store.state.showTemplate7.showCountry = false
+        break
+      case '/?component=banner':
+        this.$store.state.showTemplate7.showHeader07 = false
+        this.$store.state.showTemplate7.showFooter07 = false
+        this.$store.state.showTemplate7.showCarousel = true
+        this.$store.state.showTemplate7.showPromo = false
+        this.$store.state.showTemplate7.showProductList = false
+        this.$store.state.showTemplate7.showAdvertising = false
+        this.$store.state.showTemplate7.showGify = false
+        this.$store.state.showTemplate7.showHowwork = false
+        this.$store.state.showTemplate7.showBlog = false
+        this.$store.state.showTemplate7.showNews = false
+        this.$store.state.showTemplate7.showWrapper = false
+        this.$store.state.showTemplate7.showCountry = false
+        break
+      case '/?component=promo':
+        this.$store.state.showTemplate7.showHeader07 = false
+        this.$store.state.showTemplate7.showFooter07 = false
+        this.$store.state.showTemplate7.showCarousel = false
+        this.$store.state.showTemplate7.showPromo = true
+        this.$store.state.showTemplate7.showProductList = false
+        this.$store.state.showTemplate7.showAdvertising = false
+        this.$store.state.showTemplate7.showGify = false
+        this.$store.state.showTemplate7.showHowwork = false
+        this.$store.state.showTemplate7.showBlog = false
+        this.$store.state.showTemplate7.showNews = false
+        this.$store.state.showTemplate7.showWrapper = false
+        this.$store.state.showTemplate7.showCountry = false
+        break
+      case '/?component=productlist':
+        this.$store.state.showTemplate7.showHeader07 = false
+        this.$store.state.showTemplate7.showFooter07 = false
+        this.$store.state.showTemplate7.showCarousel = false
+        this.$store.state.showTemplate7.showPromo = false
+        this.$store.state.showTemplate7.showProductList = true
+        this.$store.state.showTemplate7.showAdvertising = false
+        this.$store.state.showTemplate7.showGify = false
+        this.$store.state.showTemplate7.showHowwork = false
+        this.$store.state.showTemplate7.showBlog = false
+        this.$store.state.showTemplate7.showNews = false
+        this.$store.state.showTemplate7.showWrapper = false
+        this.$store.state.showTemplate7.showCountry = false
+        break
+      case '/?component=advertising':
+        this.$store.state.showTemplate7.showHeader07 = false
+        this.$store.state.showTemplate7.showFooter07 = false
+        this.$store.state.showTemplate7.showCarousel = false
+        this.$store.state.showTemplate7.showPromo = false
+        this.$store.state.showTemplate7.showProductList = false
+        this.$store.state.showTemplate7.showAdvertising = true
+        this.$store.state.showTemplate7.showGify = false
+        this.$store.state.showTemplate7.showHowwork = false
+        this.$store.state.showTemplate7.showBlog = false
+        this.$store.state.showTemplate7.showNews = false
+        this.$store.state.showTemplate7.showWrapper = false
+        this.$store.state.showTemplate7.showCountry = false
+        break
+      case '/?component=gify':
+        this.$store.state.showTemplate7.showHeader07 = false
+        this.$store.state.showTemplate7.showFooter07 = false
+        this.$store.state.showTemplate7.showCarousel = false
+        this.$store.state.showTemplate7.showPromo = false
+        this.$store.state.showTemplate7.showProductList = false
+        this.$store.state.showTemplate7.showAdvertising = false
+        this.$store.state.showTemplate7.showGify = true
+        this.$store.state.showTemplate7.showHowwork = false
+        this.$store.state.showTemplate7.showBlog = false
+        this.$store.state.showTemplate7.showNews = false
+        this.$store.state.showTemplate7.showWrapper = false
+        this.$store.state.showTemplate7.showCountry = false
+        break
+      case '/?component=howwork':
+        this.$store.state.showTemplate7.showHeader07 = false
+        this.$store.state.showTemplate7.showFooter07 = false
+        this.$store.state.showTemplate7.showCarousel = false
+        this.$store.state.showTemplate7.showPromo = false
+        this.$store.state.showTemplate7.showProductList = false
+        this.$store.state.showTemplate7.showAdvertising = false
+        this.$store.state.showTemplate7.showGify = false
+        this.$store.state.showTemplate7.showHowwork = true
+        this.$store.state.showTemplate7.showBlog = false
+        this.$store.state.showTemplate7.showNews = false
+        this.$store.state.showTemplate7.showWrapper = false
+        this.$store.state.showTemplate7.showCountry = false
+        break
+      case '/?component=blog':
+        this.$store.state.showTemplate7.showHeader07 = false
+        this.$store.state.showTemplate7.showFooter07 = false
+        this.$store.state.showTemplate7.showCarousel = false
+        this.$store.state.showTemplate7.showPromo = false
+        this.$store.state.showTemplate7.showProductList = false
+        this.$store.state.showTemplate7.showAdvertising = false
+        this.$store.state.showTemplate7.showGify = false
+        this.$store.state.showTemplate7.showHowwork = false
+        this.$store.state.showTemplate7.showBlog = true
+        this.$store.state.showTemplate7.showNews = false
+        this.$store.state.showTemplate7.showWrapper = false
+        this.$store.state.showTemplate7.showCountry = false
+        break
+      case '/?component=newsletter':
+        this.$store.state.showTemplate7.showHeader07 = false
+        this.$store.state.showTemplate7.showFooter07 = false
+        this.$store.state.showTemplate7.showCarousel = false
+        this.$store.state.showTemplate7.showPromo = false
+        this.$store.state.showTemplate7.showProductList = false
+        this.$store.state.showTemplate7.showAdvertising = false
+        this.$store.state.showTemplate7.showGify = false
+        this.$store.state.showTemplate7.showHowwork = false
+        this.$store.state.showTemplate7.showBlog = false
+        this.$store.state.showTemplate7.showNews = true
+        this.$store.state.showTemplate7.showWrapper = false
+        this.$store.state.showTemplate7.showCountry = false
+        break
+      case '/?component=instagram':
+        this.$store.state.showTemplate7.showHeader07 = false
+        this.$store.state.showTemplate7.showFooter07 = false
+        this.$store.state.showTemplate7.showCarousel = false
+        this.$store.state.showTemplate7.showPromo = false
+        this.$store.state.showTemplate7.showProductList = false
+        this.$store.state.showTemplate7.showAdvertising = false
+        this.$store.state.showTemplate7.showGify = false
+        this.$store.state.showTemplate7.showHowwork = false
+        this.$store.state.showTemplate7.showBlog = false
+        this.$store.state.showTemplate7.showNews = false
+        this.$store.state.showTemplate7.showWrapper = true
+        this.$store.state.showTemplate7.showCountry = false
+        break
     }
   },
   computed: {
-    template() {
-      return this.$store.state.template
-    },
     dataStore() {
       return this.$store.state.dataStore
     },
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
-    },
     listArticulos() {
       return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
-      }
     },
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
@@ -129,25 +286,170 @@ export default {
             : null,
       }
     },
+    showTemplate7() {
+      return this.$store.state.showTemplate7
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenertemplate)
   },
   methods: {
-    Searchproduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
-    },
-    getSearch(value) {
-      if (value) {
-        location.href = '?search=' + value
-        if (this.facebooPixel != null) {
-          window.fbq('track', 'Search', { ValorBuscado: value })
-        }
-      } else {
-        location.href = '?search=' + ''
+    addEventListenertemplate(e) {
+      if (e.origin.includes('https://panel.komercia.co')) {
+        alert('Prueba eventListener' + e)
       }
     },
   },
   watch: {
-    search(value) {
-      this.Searchproduct(value)
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      let domain = this.$route.fullPath
+      switch (domain) {
+        case '':
+          this.$store.state.showTemplate7.showHeader07 = true
+          this.$store.state.showTemplate7.showBody07 = true
+          this.$store.state.showTemplate7.showFooter07 = true
+          this.$store.state.showTemplate7.showCountry = true
+          break
+        case '/?component=header':
+          this.$store.state.showTemplate7.showHeader07 = true
+          this.$store.state.showTemplate7.showBody07 = false
+          this.$store.state.showTemplate7.showFooter07 = false
+          this.$store.state.showTemplate7.showCountry = false
+          break
+        case '/?component=footer':
+          this.$store.state.showTemplate7.showHeader07 = false
+          this.$store.state.showTemplate7.showBody07 = false
+          this.$store.state.showTemplate7.showFooter07 = true
+          this.$store.state.showTemplate7.showCountry = false
+          break
+        case '/?component=banner':
+          this.$store.state.showTemplate7.showHeader07 = false
+          this.$store.state.showTemplate7.showFooter07 = false
+          this.$store.state.showTemplate7.showCarousel = true
+          this.$store.state.showTemplate7.showPromo = false
+          this.$store.state.showTemplate7.showProductList = false
+          this.$store.state.showTemplate7.showAdvertising = false
+          this.$store.state.showTemplate7.showGify = false
+          this.$store.state.showTemplate7.showHowwork = false
+          this.$store.state.showTemplate7.showBlog = false
+          this.$store.state.showTemplate7.showNews = false
+          this.$store.state.showTemplate7.showWrapper = false
+          this.$store.state.showTemplate7.showCountry = false
+          break
+        case '/?component=promo':
+          this.$store.state.showTemplate7.showHeader07 = false
+          this.$store.state.showTemplate7.showFooter07 = false
+          this.$store.state.showTemplate7.showCarousel = false
+          this.$store.state.showTemplate7.showPromo = true
+          this.$store.state.showTemplate7.showProductList = false
+          this.$store.state.showTemplate7.showAdvertising = false
+          this.$store.state.showTemplate7.showGify = false
+          this.$store.state.showTemplate7.showHowwork = false
+          this.$store.state.showTemplate7.showBlog = false
+          this.$store.state.showTemplate7.showNews = false
+          this.$store.state.showTemplate7.showWrapper = false
+          this.$store.state.showTemplate7.showCountry = false
+          break
+        case '/?component=productlist':
+          this.$store.state.showTemplate7.showHeader07 = false
+          this.$store.state.showTemplate7.showFooter07 = false
+          this.$store.state.showTemplate7.showCarousel = false
+          this.$store.state.showTemplate7.showPromo = false
+          this.$store.state.showTemplate7.showProductList = true
+          this.$store.state.showTemplate7.showAdvertising = false
+          this.$store.state.showTemplate7.showGify = false
+          this.$store.state.showTemplate7.showHowwork = false
+          this.$store.state.showTemplate7.showBlog = false
+          this.$store.state.showTemplate7.showNews = false
+          this.$store.state.showTemplate7.showWrapper = false
+          this.$store.state.showTemplate7.showCountry = false
+          break
+        case '/?component=advertising':
+          this.$store.state.showTemplate7.showHeader07 = false
+          this.$store.state.showTemplate7.showFooter07 = false
+          this.$store.state.showTemplate7.showCarousel = false
+          this.$store.state.showTemplate7.showPromo = false
+          this.$store.state.showTemplate7.showProductList = false
+          this.$store.state.showTemplate7.showAdvertising = true
+          this.$store.state.showTemplate7.showGify = false
+          this.$store.state.showTemplate7.showHowwork = false
+          this.$store.state.showTemplate7.showBlog = false
+          this.$store.state.showTemplate7.showNews = false
+          this.$store.state.showTemplate7.showWrapper = false
+          this.$store.state.showTemplate7.showCountry = false
+          break
+        case '/?component=gify':
+          this.$store.state.showTemplate7.showHeader07 = false
+          this.$store.state.showTemplate7.showFooter07 = false
+          this.$store.state.showTemplate7.showCarousel = false
+          this.$store.state.showTemplate7.showPromo = false
+          this.$store.state.showTemplate7.showProductList = false
+          this.$store.state.showTemplate7.showAdvertising = false
+          this.$store.state.showTemplate7.showGify = true
+          this.$store.state.showTemplate7.showHowwork = false
+          this.$store.state.showTemplate7.showBlog = false
+          this.$store.state.showTemplate7.showNews = false
+          this.$store.state.showTemplate7.showWrapper = false
+          this.$store.state.showTemplate7.showCountry = false
+          break
+        case '/?component=howwork':
+          this.$store.state.showTemplate7.showHeader07 = false
+          this.$store.state.showTemplate7.showFooter07 = false
+          this.$store.state.showTemplate7.showCarousel = false
+          this.$store.state.showTemplate7.showPromo = false
+          this.$store.state.showTemplate7.showProductList = false
+          this.$store.state.showTemplate7.showAdvertising = false
+          this.$store.state.showTemplate7.showGify = false
+          this.$store.state.showTemplate7.showHowwork = true
+          this.$store.state.showTemplate7.showBlog = false
+          this.$store.state.showTemplate7.showNews = false
+          this.$store.state.showTemplate7.showWrapper = false
+          this.$store.state.showTemplate7.showCountry = false
+          break
+        case '/?component=blog':
+          this.$store.state.showTemplate7.showHeader07 = false
+          this.$store.state.showTemplate7.showFooter07 = false
+          this.$store.state.showTemplate7.showCarousel = false
+          this.$store.state.showTemplate7.showPromo = false
+          this.$store.state.showTemplate7.showProductList = false
+          this.$store.state.showTemplate7.showAdvertising = false
+          this.$store.state.showTemplate7.showGify = false
+          this.$store.state.showTemplate7.showHowwork = false
+          this.$store.state.showTemplate7.showBlog = true
+          this.$store.state.showTemplate7.showNews = false
+          this.$store.state.showTemplate7.showWrapper = false
+          this.$store.state.showTemplate7.showCountry = false
+          break
+        case '/?component=newsletter':
+          this.$store.state.showTemplate7.showHeader07 = false
+          this.$store.state.showTemplate7.showFooter07 = false
+          this.$store.state.showTemplate7.showCarousel = false
+          this.$store.state.showTemplate7.showPromo = false
+          this.$store.state.showTemplate7.showProductList = false
+          this.$store.state.showTemplate7.showAdvertising = false
+          this.$store.state.showTemplate7.showGify = false
+          this.$store.state.showTemplate7.showHowwork = false
+          this.$store.state.showTemplate7.showBlog = false
+          this.$store.state.showTemplate7.showNews = true
+          this.$store.state.showTemplate7.showWrapper = false
+          this.$store.state.showTemplate7.showCountry = false
+          break
+        case '/?component=instagram':
+          this.$store.state.showTemplate7.showHeader07 = false
+          this.$store.state.showTemplate7.showFooter07 = false
+          this.$store.state.showTemplate7.showCarousel = false
+          this.$store.state.showTemplate7.showPromo = false
+          this.$store.state.showTemplate7.showProductList = false
+          this.$store.state.showTemplate7.showAdvertising = false
+          this.$store.state.showTemplate7.showGify = false
+          this.$store.state.showTemplate7.showHowwork = false
+          this.$store.state.showTemplate7.showBlog = false
+          this.$store.state.showTemplate7.showNews = false
+          this.$store.state.showTemplate7.showWrapper = true
+          this.$store.state.showTemplate7.showCountry = false
+          break
+      }
     },
   },
 }

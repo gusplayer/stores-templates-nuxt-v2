@@ -60,28 +60,96 @@
     </div>
     <div class="container-article" v-if="dataArticle">
       <div class="content-blog">
-        <nuxt-link to="/blog" class="content-back">
-          <arrow-left-icon class="arrow-left"> </arrow-left-icon>
-          <p>Regresar</p>
-        </nuxt-link>
-        <p class="title-blog">{{ dataArticle.titulo }}</p>
-
-        <div class="content-date">
-          <div class="flex-shrink-0">
-            <a href="#">
-              <img
-                class="h-10 w-10 rounded-full"
-                src="https://api2.komercia.co/users/user.jpg"
-                alt=""
-              />
+        <nav class="flex mt-20 mb-5 sm:mb-10" aria-label="Breadcrumb">
+          <ol class="flex items-start space-x-4">
+            <li>
+              <nuxt-link to="/" class="text-gray-400 hover:text-gray-500">
+                <svg
+                  class="flex-shrink-0 h-20 w-20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+                  />
+                </svg>
+                <span class="sr-only">Home</span>
+              </nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/blog" class="flex items-center">
+                <svg
+                  class="flex-shrink-0 h-20 w-20 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <p
+                  class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                >
+                  listado de artículos
+                </p>
+              </nuxt-link>
+            </li>
+          </ol>
+        </nav>
+        <div>
+          <p class="size_title mt-10 text-start">
+            {{ dataArticle.titulo }}
+          </p>
+        </div>
+        <div class="flex justify-between items-center">
+          <div class="content-date">
+            <div class="flex-shrink-0">
+              <a href="#">
+                <img
+                  class="h-40 w-40 rounded-full"
+                  v-lazy="`https://api2.komercia.co/users/user.jpg`"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="content-date-items">
+              <p>{{ dataArticle.autor }}</p>
+              <p>{{ this.shippingCreated }}</p>
+            </div>
+          </div>
+          <div class="flex icons">
+            <a
+              :href="this.sharingFacebook"
+              target="_blank"
+              rel="noreferrer noopener"
+              style="max-height: 25px;"
+            >
+              <facebook-icon class="wp-icon" />
+            </a>
+            <a
+              :href="this.sharingTwitter"
+              target="_blank"
+              rel="noreferrer noopener"
+              style="max-height: 25px;"
+            >
+              <twitter-icon class="wp-icon marginIcon" />
+            </a>
+            <a
+              :href="this.sharingLinkedin"
+              target="_blank"
+              rel="noreferrer noopener"
+              style="max-height: 25px;"
+            >
+              <linkedin-icon class="wp-icon marginIcon" />
             </a>
           </div>
-          <div class="content-date-items">
-            <p>{{ dataArticle.autor }}</p>
-            <p>{{ this.shippingCreated }}</p>
-          </div>
         </div>
-        <!-- <div class="wrapper-articulo" v-html="dataArticle.contenido"></div> -->
         <div class="editor" v-if="dataArticle.contenido">
           <el-tiptap
             v-model="dataArticle.contenido"
@@ -284,6 +352,14 @@ export default {
         new Print(),
         new SelectAll(),
       ],
+      sharing: {
+        url: '',
+        quote: '',
+        quoteTwitter: '',
+      },
+      sharingFacebook: '',
+      sharingTwitter: '',
+      sharingLinkedin: '',
     }
   },
   computed: {
@@ -300,6 +376,12 @@ export default {
           this.dataArticle = product
         }
       })
+      this.sharing.url = window.location.href
+      this.sharing.quote = `${this.dataArticle.titulo}%0A%0A${this.dataArticle.resumen}`
+      this.sharing.quoteTwitter = `${this.dataArticle.titulo}%20by%20${this.dataArticle.autor}%0A`
+      this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
+      this.sharingTwitter = `https://twitter.com/intent/tweet?text=${this.sharing.quoteTwitter}%0A${this.sharing.url}`
+      this.sharingLinkedin = `https://www.linkedin.com/shareArticle?mini=true&url=${this.sharing.url}`
     },
     setBg() {
       if (this.settingK07Blog.url_img) {
@@ -321,14 +403,37 @@ export default {
 }
 </script>
 <style scoped>
+.txt-banner {
+  color: var(--color_title);
+  font-family: 'David libre' !important ;
+  font-weight: 400;
+}
+.tittle-banner-blog {
+  @apply w-full flex flex-row justify-center items-center my-12;
+}
+.banner-blog {
+  @apply w-full flex flex-col justify-center items-center bg-cover bg-no-repeat;
+}
+#separator {
+  margin-left: 20px;
+}
+.size_title {
+  font-size: 48px;
+  font-weight: bold;
+  color: black;
+  line-height: 48px;
+}
 .wrapper-blog {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: calc(64vh);
-  background: #fff;
+  min-height: calc(72vh);
+  background: white;
+}
+.container-article {
+  @apply flex justify-center items-center;
 }
 .content-blog {
   @apply p-4;
@@ -339,32 +444,12 @@ export default {
   align-self: flex-start;
   box-sizing: content-box;
 }
-.content-back {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-.arrow-left {
-  bottom: 2px;
-  margin-right: 5px;
-  cursor: pointer;
-  color: black;
-}
-.content-back p {
-  cursor: pointer;
-  color: black;
-}
-.title-blog {
-  font-size: 30px;
-  font-weight: bold;
-  color: black;
-  margin-top: 20px;
-}
 .content-date {
   width: 100%;
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
+  margin-top: 10px;
 }
 .content-date-items {
   width: 100%;
@@ -379,174 +464,43 @@ export default {
 .content-date-items p:nth-child(1) {
   font-weight: bold;
 }
-
-/* ///////////// */
-.editor {
-  width: 100%;
-  background: white;
-  border-radius: 5px;
-  padding: 15px;
-  position: relative;
-  margin-top: 5px;
+.editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
+  border: none;
+  padding: 10px 5px;
 }
-.editor__content {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  outline: none;
-  padding-top: 10px;
+.editor >>> .el-tiptap-editor__menu-bubble {
+  display: none;
 }
-.editor__content >>> * {
-  caret-color: black;
-  outline: none;
-}
-.editor__content >>> pre {
-  padding: 0.7rem 1rem;
-  border-radius: 5px;
-  background: black;
-  color: green;
-  font-size: 0.8rem;
-  overflow-x: auto;
-}
-.editor__content >>> pre code {
-  display: block;
-}
-.editor__content >>> p code {
-  padding: 0.2rem 0.4rem;
-  border-radius: 5px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  background: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.8);
-}
-.editor__content >>> ul,
-.editor__content >>> ol {
-  padding-left: 1rem;
-}
-.editor__content >>> li > p,
-.editor__content >>> li > ol,
-.editor__content >>> li > ul {
-  margin: 0;
-}
-.editor__content >>> ul {
-  color: black;
-  list-style-type: disc;
-}
-.editor__content >>> ol {
-  color: black;
-  list-style-type: decimal;
-}
-.editor__content >>> a {
-  color: rgb(68, 68, 211);
-}
-.editor__content >>> h1 {
-  font-weight: bold;
+.editor >>> .el-tiptap-editor__content h1 {
   font-size: 2em;
 }
-.editor__content >>> h2 {
-  font-weight: bold;
+.editor >>> .el-tiptap-editor__content h2 {
   font-size: 1.5em;
 }
-.editor__content >>> h3 {
-  font-weight: bold;
+.editor >>> .el-tiptap-editor__content h3 {
   font-size: 1.17em;
 }
-.editor__content >>> blockquote {
-  border-left: 3px solid rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.8);
-  padding-left: 0.8rem;
-  font-style: italic;
+.editor >>> .el-tiptap-editor__content h4 {
+  font-size: 1.12em;
 }
-.editor__content >>> blockquote p {
-  margin: 0;
+.editor >>> .el-tiptap-editor__content h5 {
+  font-size: 0.83em;
 }
-.editor__content >>> img {
-  /* width: 100%; */
-  /* margin: 0; */
-  max-width: 100%;
-  border-radius: 3px;
+.wp-icon {
+  font-size: 25px;
+  bottom: 2px;
+  color: #757575;
+  cursor: pointer;
 }
-.editor__content >>> img {
-  /* width: 100%; */
-  /* margin: 0; */
-  max-width: 100%;
-  border-radius: 3px;
+.wp-icon:hover {
+  color: #494949;
 }
-.editor__content >>> table {
-  border-collapse: collapse;
-  table-layout: fixed;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-}
-.editor__content >>> table td,
-.editor__content >>> table th {
-  min-width: 1em;
-  border: 2px solid grey;
-  padding: 3px 5px;
-  vertical-align: top;
-  box-sizing: border-box;
-  position: relative;
-}
-.editor__content >>> table td > *,
-.editor__content >>> table th > * {
-  margin-bottom: 0;
-}
-.editor__content >>> table th {
-  font-weight: bold;
-  text-align: left;
-}
-.editor__content >>> table .selectedCell:after {
-  z-index: 2;
-  position: absolute;
-  content: '';
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: rgba(200, 200, 255, 0.4);
-  pointer-events: none;
-}
-.editor__content >>> table .column-resize-handle {
-  position: absolute;
-  right: -2px;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  z-index: 20;
-  background-color: #adf;
-  pointer-events: none;
-}
-.txt-banner {
-  color: var(--color_title);
-  font-family: 'David libre', serif !important ;
-  font-weight: 400;
-}
-.tittle-banner-blog {
-  @apply w-full flex flex-row justify-center items-center my-12;
-}
-.banner-blog {
-  @apply w-full flex flex-col justify-center items-center bg-cover bg-no-repeat;
-  margin-bottom: 40px;
-}
-#separator {
-  margin-left: 20px;
-}
-.container-article {
-  @apply flex justify-center items-center rounded-md;
-}
-.container-article {
-  @apply shadow-2xl;
+.marginIcon {
+  margin-left: 8px;
 }
 @screen sm {
   .container-article {
-    @apply w-9/0;
-  }
-  .banner-blog {
-    padding-top: 80px;
-  }
-  .txt-banner {
-    font-size: 36px;
+    width: 95%;
   }
   .icon-blog {
     width: 10%;
@@ -555,20 +509,29 @@ export default {
   #separator {
     margin-left: 10px;
   }
+  .banner-blog {
+    padding-top: 80px;
+  }
+  .txt-banner {
+    font-size: 36px;
+  }
 }
-@media (min-width: 425px) {
+@media (max-width: 425px) {
   .icon-blog {
     width: 8%;
     margin-bottom: 40px;
   }
+  .size_title {
+    font-size: 25px;
+  }
 }
-@media (min-width: 490px) {
+@media (max-width: 490px) {
   .icon-blog {
     width: 7%;
     margin-bottom: 40px;
   }
 }
-@media (min-width: 576px) {
+@media (max-width: 576px) {
   .grid-products {
     @apply w-9/5 grid-cols-2;
   }
@@ -576,15 +539,23 @@ export default {
     @apply w-9/5;
   }
 }
-@media (min-width: 600px) {
+@media (max-width: 600px) {
   .icon-blog {
     width: 6%;
     margin-bottom: 40px;
+  }
+  .size_title {
+    font-size: 28px;
+    line-height: 35px;
   }
 }
 @screen md {
   .container-article {
     @apply w-9/5;
+  }
+  .icon-blog {
+    width: 5%;
+    margin-bottom: 40px;
   }
   .banner-blog {
     padding-top: 90px;
@@ -592,15 +563,11 @@ export default {
   .txt-banner {
     font-size: 36px;
   }
-  .icon-blog {
-    width: 5%;
-    margin-bottom: 40px;
-  }
   #separator {
     margin-left: 10px;
   }
 }
-@media (min-width: 900px) {
+@media (max-width: 900px) {
   .icon-blog {
     width: 4%;
     margin-bottom: 40px;
@@ -612,7 +579,7 @@ export default {
     margin-bottom: 40px;
   }
 }
-@media (min-width: 1100px) {
+@media (max-width: 1100px) {
   .icon-blog {
     width: 3%;
     margin-bottom: 40px;
@@ -620,7 +587,11 @@ export default {
 }
 @screen mlg {
   .container-article {
-    @apply w-9/3;
+    @apply w-7/8;
+  }
+  .icon-blog {
+    width: 5%;
+    margin-bottom: 80px;
   }
   .banner-blog {
     padding-top: 120px;
@@ -631,36 +602,16 @@ export default {
   .txt-banner {
     font-size: 78px;
   }
-  .icon-blog {
-    width: 5%;
-    margin-bottom: 80px;
-  }
   #separator {
     margin-left: 20px;
   }
 }
 @screen xl {
   .container-article {
-    @apply w-8/3;
+    @apply w-4/8;
   }
   .tittle-banner-blog {
     @apply w-8/3;
-  }
-}
-@screen xml {
-  .container-article {
-    @apply w-6/3;
-  }
-  .tittle-banner-blog {
-    @apply w-6/3;
-  }
-}
-@screen xxl {
-  .container-article {
-    @apply w-4/6;
-  }
-  .tittle-banner-blog {
-    @apply w-4/6;
   }
 }
 </style>

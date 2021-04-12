@@ -1002,7 +1002,7 @@ export default {
   font-size: 34px;
   line-height: 1.2;
   color: #000000;
-  font-family: 'David Libre', serif !important;
+  font-family: 'David Libre' !important;
   margin-bottom: 20px;
 }
 .text-marca {
@@ -1031,7 +1031,7 @@ export default {
   font-weight: 600;
   font-size: 22px;
   line-height: 1.2;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   margin-bottom: 20px;
   color: #ed2353;
 }
@@ -1057,7 +1057,7 @@ export default {
   font-weight: 600;
   font-size: 14px;
   line-height: 1.2;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #333;
 }
 .card-descuento {
@@ -1094,7 +1094,7 @@ export default {
 .text-unidades {
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #333;
 }
 .text-garantia {
@@ -1102,7 +1102,7 @@ export default {
   font-weight: bold;
   color: #333;
   margin-left: 5px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .content_buy_action {
   display: flex;
@@ -1118,7 +1118,7 @@ export default {
   font-weight: bold;
   margin-bottom: 10px;
   color: #00a650;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .content_card-info {
   @apply w-full flex flex-row justify-start items-end;
@@ -1130,7 +1130,7 @@ export default {
   font-weight: bold;
   /* line-height: 1.2; */
   font-size: 16px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
 }
 .card-info-1 {
   display: flex;
@@ -1172,7 +1172,7 @@ export default {
   font-weight: 600;
   line-height: 1.2;
   font-size: 14px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #333;
 }
 .category-text {
@@ -1180,7 +1180,7 @@ export default {
   font-weight: 400;
   line-height: 1.2;
   font-size: 14px;
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: #777;
 }
 .content-shared {
@@ -1245,7 +1245,7 @@ export default {
   margin-left: 20px;
 }
 .btn {
-  font-family: 'Lora', serif !important;
+  font-family: 'Lora' !important;
   color: white;
   border-radius: 35px;
   border: solid 2px #ed2353;

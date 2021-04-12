@@ -261,7 +261,7 @@ figure {
 }
 .txt-day,
 .txt-month {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_text_date);
 }
 .txt-day {
@@ -282,7 +282,7 @@ figure {
   cursor: default;
 }
 .txt-tituloart {
-  font-family: var(--font-style-1), serif !important;
+  font-family: var(--font-style-1) !important;
   color: var(--color_text);
   transition: all 0.25s ease;
   cursor: pointer;
@@ -296,7 +296,7 @@ figure {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_autor);
   font-size: 14px;
 }
@@ -309,7 +309,7 @@ figure {
   cursor: default;
 }
 .subtext {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_description);
   font-size: 14px;
   cursor: text;
@@ -326,7 +326,7 @@ figure {
   align-items: center;
   text-transform: uppercase;
   color: var(--color_text_btn);
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -339,7 +339,7 @@ figure {
   @apply transition-all ease-in duration-200;
   position: relative;
   color: #ed2353;
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   margin-left: 10px;
   margin-bottom: -5px;
   display: none;
@@ -377,7 +377,7 @@ figure {
   @apply w-full;
 }
 .txt-tituloart-bottom {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   font-size: 16px;
   text-transform: uppercase;
   color: var(--color_bg_text);

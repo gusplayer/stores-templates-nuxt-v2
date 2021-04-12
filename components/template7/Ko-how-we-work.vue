@@ -166,20 +166,20 @@ export default {
 }
 .tittle-h {
   @apply font-semibold;
-  font-family: var(--font-style-1), serif !important;
+  font-family: var(--font-style-1) !important;
   line-height: 34px;
   font-size: 24px;
   color: #2d2a2a;
 }
 .description-h {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   font: inherit;
   font-size: 14px;
   color: #777;
 }
 .seemore-h {
   @apply uppercase font-semibold border-b-2 border-red-btnbannershop;
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   font-size: 13px;
   line-height: 18px;
   color: #333;
@@ -200,7 +200,7 @@ export default {
   @apply bg-hworkbg bg-no-repeat bg-auto w-full mt-64;
 }
 .hwwork-content {
-  @apply w-full flex flex-col justify-center items-center my-64;
+  @apply w-full flex flex-col justify-center items-center py-30;
   background: var(--background_color_1);
 }
 .hwwork-content-items {
@@ -215,15 +215,15 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .tittle-text {
-  font-family: var(--font-style-2), cursive !important;
+  font-family: var(--font-style-2) !important;
   color: var(--color_pre_title);
 }
 .subtittle-text {
-  font-family: var(--font-style-1), serif !important;
+  font-family: var(--font-style-1) !important;
   color: var(--color_title);
 }
 .description-text {
-  font-family: var(--font-style-3), serif !important;
+  font-family: var(--font-style-3) !important;
   color: var(--color_description);
 }
 .gify-slider-content {

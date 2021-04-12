@@ -22,6 +22,28 @@
           </client-only>
           <div class="image_overlay"></div>
         </router-link>
+        <div
+          v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
+        >
+          <div class="overlay-top">
+            <div>
+              <p>{{ this.product.promocion_valor }}% OFF</p>
+            </div>
+          </div>
+          <div class="overlay-free">
+            <p class="txt-free">{{ $t('home_pdescuento') }}</p>
+          </div>
+          <div class="overlay-polygon">
+            <svg
+              class="icon-overlay-free"
+              width="12px"
+              height="12px"
+              viewBox="0 0 255 255"
+            >
+              <polygon points="0,0 127.5,127.5 255,0" />
+            </svg>
+          </div>
+        </div>
         <div class="separador-stats"></div>
         <div class="stats">
           <div class="stats-container">
@@ -221,6 +243,9 @@ export default {
     ) {
       this.estadoCart = true
     }
+    if (this.product) {
+      this.getDataProduct()
+    }
   },
   data() {
     return {
@@ -295,28 +320,30 @@ export default {
   },
   methods: {
     getDataProduct() {
-      this.salesData = {
-        precio: this.product.precio,
-        unidades: this.product.stock,
-        sku: this.product.sku,
-        estado: true,
-      }
-      this.maxQuantityValue = this.product.stock
-
-      this.productsCarts.find((productCart, index) => {
-        if (productCart.id == this.product.id) {
-          this.productIndexCart = index
-          this.productCart = productCart
-          this.maxQuantityValue = this.product.stock - productCart.cantidad
+      if (this.product) {
+        this.salesData = {
+          precio: this.product.precio,
+          unidades: this.product.stock,
+          sku: this.product.sku,
+          estado: true,
         }
-      })
+        this.maxQuantityValue = this.product.stock
 
-      if (
-        this.salesData.unidades == 0 ||
-        this.maxQuantityValue <= 0 ||
-        this.maxQuantityValue == 0
-      ) {
-        this.spent = true
+        this.productsCarts.find((productCart, index) => {
+          if (productCart.id == this.product.id) {
+            this.productIndexCart = index
+            this.productCart = productCart
+            this.maxQuantityValue = this.product.stock - productCart.cantidad
+          }
+        })
+
+        if (
+          this.salesData.unidades == 0 ||
+          this.maxQuantityValue <= 0 ||
+          this.maxQuantityValue == 0
+        ) {
+          this.spent = true
+        }
       }
     },
     addShoppingCart() {
@@ -698,7 +725,63 @@ export default {
 .card-icon-cart-movil:hover {
   color: var(--btnhover);
 }
-
+/*Comienzo de animacion*/
+.overlay-top {
+  top: 43px;
+  left: 100%;
+  right: 0;
+  width: 0;
+  height: 29px;
+  padding: 5px;
+  font-size: 13px;
+  background: white;
+  color: #35dd8d;
+  @apply absolute overflow-hidden rounded-md shadow-md transition-all ease-in duration-300;
+}
+#product-card:hover .overlay-top {
+  width: 67px;
+  left: 75%;
+}
+.overlay-free {
+  position: absolute;
+  background-color: #35dd8d;
+  color: white;
+  overflow: hidden;
+  transition: 0.5s ease;
+  top: 0px;
+  left: 100%;
+  right: 0;
+  width: 0;
+  height: 35px;
+  text-align: center;
+  @apply rounded;
+}
+.txt-free {
+  line-height: 12px;
+  font-size: 13px;
+  margin-top: 5px;
+}
+#product-card:hover .overlay-free {
+  width: 125px;
+  left: 55%;
+  transition-delay: 700ms;
+}
+.overlay-polygon {
+  position: absolute;
+  top: 35px;
+  left: 100%;
+  right: 0;
+  background-color: transparent;
+  overflow: hidden;
+  width: 0;
+  height: 5%;
+  fill: #35dd8d;
+}
+#product-card:hover .overlay-polygon {
+  width: 5%;
+  left: 90%;
+  transition-delay: 950ms;
+}
 @media (max-width: 1270px) {
   .separador-stats {
     height: 105px;
