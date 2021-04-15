@@ -1,52 +1,60 @@
 <template>
-  <div class="banner" :style="[settingKCarousel, banner, settingGeneral]">
-    <div
-      class="banner-content-items"
-      :style="[
-        {
-          '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
-              : 'Great Vibes',
-        },
-        {
-          '--font-style-3':
-            this.settingGeneral && this.settingGeneral.fount_3
-              ? this.settingGeneral.fount_3
-              : 'Lora',
-        },
-      ]"
-    >
-      <div class="banner-content-img" v-if="banner.url_img_left">
-        <img class="img-banner" :src="banner.url_img_left" alt="img-flor" />
-      </div>
-      <div class="text-tittle">
-        <span :class="`banner-text-tittle banner-text-tittle`">
-          {{ banner.tittle }}
-        </span>
-      </div>
-      <div class="text-subtittle">
-        <span class="banner-text-subtittle">
-          {{ banner.description }}
-        </span>
-      </div>
-      <div class="banner-content-buttons">
-        <button class="content-bttns-shop">
-          <nuxt-link :to="'/productos'">
-            <span class="content-textbutton-shop">
-              {{ $t('productdetail_btnComprar') }}
+  <div
+    class="wrapper-banner"
+    :style="[settingKCarousel, banner, settingGeneral]"
+  >
+    <div class="banner">
+      <div class="content-items-banner">
+        <div
+          class="banner-content-items"
+          :style="[
+            {
+              '--font-style-2':
+                this.settingGeneral && this.settingGeneral.fount_2
+                  ? this.settingGeneral.fount_2
+                  : 'Great Vibes',
+            },
+            {
+              '--font-style-3':
+                this.settingGeneral && this.settingGeneral.fount_3
+                  ? this.settingGeneral.fount_3
+                  : 'Lora',
+            },
+          ]"
+        >
+          <div class="text-tittle">
+            <span class="banner-text-tittle">
+              {{ banner.tittle }}
             </span>
-          </nuxt-link>
-        </button>
-        <button class="content-bttns-view content-bttns-view">
-          <span class="content-textbutton-viewmore">
-            {{ $t('home_cardvermas') }}
-          </span>
-        </button>
+          </div>
+          <div class="text-subtittle">
+            <span class="banner-text-subtittle">
+              {{ banner.description }}
+            </span>
+          </div>
+          <div class="banner-content-buttons" v-if="banner.url_redirect">
+            <a
+              :href="`${banner.url_redirect}`"
+              rel="noreferrer noopener"
+              target="_blank"
+              class="content-bttns-shop"
+            >
+              <span class="content-textbutton-shop">
+                {{ $t('productdetail_btnComprar') }}
+              </span>
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="banner-img" v-if="banner.url_img_right">
-      <img class="img-girl" :src="banner.url_img_right" alt="banner-carousel" />
+      <div class="content-items-banner">
+        <div class="banner-img" v-if="banner.url_img_right">
+          <img
+            class="img-girl"
+            :src="banner.url_img_right"
+            alt="banner-carousel"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -61,17 +69,60 @@ export default {
 </script>
 
 <style scoped>
-.banner {
-  @apply flex flex-col justify-center items-center pt-80;
-}
-.banner-content-items {
+.wrapper-banner {
   @apply w-full flex flex-col justify-center items-center;
 }
+.banner {
+  display: grid;
+  flex-direction: column;
+  padding-top: 80px;
+  width: 100%;
+  grid-gap: 1.5rem;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 1300px;
+}
+.content-items-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner-content-items {
+  max-width: 420px;
+  @apply w-full flex flex-col justify-center items-center;
+}
+.banner-img {
+  max-width: 570px;
+  @apply flex w-full justify-center items-center;
+}
+.img-girl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.text-tittle {
+  @apply flex justify-center items-center text-center leading-tight;
+}
+.banner-text-tittle {
+  font-size: 64px;
+  color: var(--color_text);
+  font-family: var(--font-style-2) !important;
+}
+.text-subtittle {
+  @apply flex justify-center items-center text-center break-all;
+}
+.banner-text-subtittle {
+  font-size: 18px;
+  color: var(--color_subtext);
+  font-family: var(--font-style-3) !important;
+  font-style: italic;
+}
 .banner-content-buttons {
-  @apply flex flex-row gap-3 justify-center items-center;
+  @apply flex justify-center items-center mt-10;
 }
 .content-bttns-shop {
-  @apply mr-8 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
+  @apply shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
   border-radius: var(--radius_btn);
   background: var(--color_background_btn);
   padding: 10px 20px;
@@ -80,138 +131,60 @@ export default {
   @apply bg-red-btnbannershophover;
   transition: all 0.2s ease-out;
 }
-.content-bttns-view {
-  @apply ml-8 shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
-  border-radius: var(--radius_btn);
-  border: 2px solid var(--color_background_btn_2);
-  color: var(--color_background_btn_2);
-  padding: 10px 20px;
-}
-.content-bttns-view:hover {
-  border: 2px solid var(--hover_text);
-  color: var(--hover_text);
-  transition: all 0.2s ease-out;
-}
 .content-textbutton-shop {
   color: var(--color_text_btn);
   font-size: 13px;
   line-height: 18px;
-}
-.banner-text-tittle {
-  font-family: var(--font-style-2) !important;
-  color: var(--color_text);
-}
-.banner-text-subtittle {
-  color: var(--color_subtext);
-}
-.text-tittle {
-  @apply flex justify-center items-center text-center leading-tight;
-}
-.text-subtittle {
-  @apply flex justify-center items-center text-center break-all;
-}
-.banner-content-img {
-  @apply mb-24;
-}
-.banner-img {
-  @apply flex w-full justify-center items-center;
-}
-.banner-text-subtittle {
-  font-family: var(--font-style-3) !important;
-  font-style: italic;
-}
-.content-textbutton-shop {
   font-family: var(--font-style-3) !important;
 }
-.content-textbutton-viewmore {
-  font-family: var(--font-style-3) !important;
-}
-@screen sm {
-  .banner {
-    @apply w-full;
+@media (max-width: 1500px) {
+  .banner-img {
+    max-width: 520px;
   }
+}
+@media (max-width: 1400px) {
+  .banner-img {
+    max-width: 420px;
+  }
+}
+@media (max-width: 1300px) {
   .banner-text-tittle {
-    @apply w-full text-5xl;
+    font-size: 54px;
   }
   .banner-text-subtittle {
-    @apply w-full text-lg;
+    font-size: 15px;
   }
-  .text-tittle {
-    @apply w-9/5 leading-tight;
+}
+@media (max-width: 1200px) {
+  .banner {
+    padding-top: 60px;
   }
-  .text-subtittle {
-    @apply w-9/0 mt-16;
-  }
-  .banner-content-items {
-    @apply w-full;
-  }
-  .banner-content-img {
-    @apply mt-24;
-  }
-  .banner-content-buttons {
-    @apply mt-24 mb-40 w-9/0;
-  }
-  .content-textbutton-shop {
-    @apply text-xs;
-  }
-  .content-textbutton-viewmore {
-    @apply text-xs;
+}
+@media (max-width: 1120px) {
+  .banner {
+    padding-top: 40px;
   }
   .banner-img {
-    @apply w-9/0;
+    max-width: 380px;
   }
 }
-@screen md {
+@media (max-width: 1024px) {
   .banner {
-    @apply w-8/0;
+    padding-top: 40px;
   }
   .banner-text-tittle {
-    @apply w-5/0;
+    font-size: 45px;
   }
   .banner-text-subtittle {
-    @apply w-9/0 text-xl;
-  }
-  .banner-content-buttons {
-    @apply mt-40 mb-12;
-  }
-}
-@screen lg {
-  .banner {
-    @apply w-full grid grid-cols-2 gap-6;
-  }
-  .banner-text-tittle {
-    @apply w-8/0 text-5xl;
-  }
-  .text-tittle {
-    @apply w-8/0;
-  }
-}
-@screen mlg {
-  .banner {
-    @apply w-9/3;
-  }
-  .banner-text-tittle {
-    @apply w-9/0 text-6xl;
-  }
-  .banner-text-subtittle {
-    @apply w-9/0 text-lg;
-  }
-}
-@media (min-width: 1192px) {
-  .banner {
-    width: 1192px;
-  }
-  .banner-text-tittle {
-    @apply text-6xl;
-  }
-  .text-subtittle {
-    @apply w-8/3 mt-16;
-  }
-  .banner-content-buttons {
-    @apply my-24 w-9/0;
+    font-size: 14px;
   }
   .banner-img {
-    @apply w-full;
+    max-width: 350px;
+  }
+}
+@media (max-width: 950px) {
+  .wrapper-banner {
+    display: none;
   }
 }
 </style>

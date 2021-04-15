@@ -1,5 +1,13 @@
 <template>
-  <div class="contein-carousel" :style="[banner, settingGeneral]">
+  <div
+    class="contein-carousel"
+    :style="[
+      banner,
+      settingGeneral,
+      currentSettingByTemplate9.banner,
+      currentSettingByTemplate9.settingGeneral,
+    ]"
+  >
     <div
       class="carousel-content"
       :style="[
@@ -15,64 +23,112 @@
               ? this.settingGeneral.fount_2
               : 'Roboto',
         },
+        {
+          '--font-style-1':
+            this.currentSettingByTemplate9 &&
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_1
+              ? this.currentSettingByTemplate9.settingGeneral.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-2':
+            this.currentSettingByTemplate9 &&
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_2
+              ? this.currentSettingByTemplate9.settingGeneral.fount_2
+              : 'Roboto',
+        },
       ]"
     >
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide swiper-slide-1">
-            <div class="banner-content-items-1">
-              <div class="content-items-1">
-                <div class="text-top">
-                  <p class="banner-text-top">
-                    Muchas gracias a todos nuestros clientes
-                  </p>
-                </div>
-                <div class="text-medium">
-                  <p class="banner-text-medium txtmed1">Empujando</p>
-                  <p class="banner-text-medium">los límites</p>
-                </div>
-                <div class="text-bottom">
-                  <p class="banner-text-bottom">
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    essecillum dolore eu fugiat nulla pariatur. Excepteur sint
-                  </p>
-                </div>
-                <nuxt-link :to="'/productos'">
+          <div
+            class="swiper-slide"
+            v-if="
+              this.banner &&
+              this.banner.values &&
+              this.banner.values[0]['url_img_background']
+            "
+          >
+            <div
+              class="swiper-slide-1"
+              :style="`background-image: url(${this.banner.values[0]['url_img_background']})`"
+            >
+              <div class="banner-content-items-1">
+                <div class="content-items-1">
+                  <div class="text-top">
+                    <p class="banner-text-top banner-text-top_1">
+                      {{ banner.values[0].pretitle }}
+                    </p>
+                  </div>
+                  <div class="text-medium">
+                    <p class="banner-text-medium banner-text-medium_1">
+                      {{ banner.values[0].title }}
+                    </p>
+                  </div>
+                  <div class="text-bottom">
+                    <p class="banner-text-bottom banner-text-bottom_1">
+                      {{ banner.values[0].description }}
+                    </p>
+                  </div>
                   <div class="banner-button">
-                    <button class="btn-shop">
+                    <a
+                      :href="`${banner.values[0].url_redirect}`"
+                      rel="noreferrer noopener"
+                      target="_blank"
+                      class="btn-shop"
+                    >
                       <span class="text-button">
                         {{ $t('home_comprarAhora') }}
                       </span>
-                    </button>
+                    </a>
                   </div>
-                </nuxt-link>
+                </div>
               </div>
             </div>
           </div>
-          <div class="swiper-slide swiper-slide-2">
-            <div class="banner-content-items-2">
-              <div class="content-items-2">
-                <div class="text-top">
-                  <span class="banner-text-top"> Sigue al conejo rojo </span>
-                </div>
-                <div class="text-medium">
-                  <span class="banner-text-medium txtmed1"> Hasta </span>
-                  <span class="banner-text-medium"> 50% de descuento </span>
-                </div>
-                <div class="text-bottom">
-                  <p class="banner-text-bottom">
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    essecillum dolore eu fugiat nulla pariatur. Excepteur sint
-                  </p>
-                </div>
-                <div class="banner-button">
-                  <button class="btn-shop">
-                    <nuxt-link :to="'/productos'">
+          <div
+            class="swiper-slide"
+            v-if="
+              this.banner &&
+              this.banner.values &&
+              this.banner.values[0]['url_img_background']
+            "
+          >
+            <div
+              class="swiper-slide-2"
+              :style="`background-image: url(${this.banner.values[1]['url_img_background']})`"
+            >
+              <div class="banner-content-items-2">
+                <div class="content-items-2">
+                  <div class="text-top">
+                    <span class="banner-text-top banner-text-top_2">
+                      {{ banner.values[1].pretitle }}</span
+                    >
+                  </div>
+                  <div class="text-medium">
+                    <span class="banner-text-medium banner-text-medium_2">
+                      {{ banner.values[1].title }}
+                    </span>
+                  </div>
+                  <div class="text-bottom">
+                    <p class="banner-text-bottom banner-text-bottom_2">
+                      {{ banner.values[1].description }}
+                    </p>
+                  </div>
+                  <div class="banner-button">
+                    <a
+                      :href="`${banner.values[1].url_redirect}`"
+                      rel="noreferrer noopener"
+                      target="_blank"
+                      class="btn-shop"
+                    >
                       <span class="text-button">
                         {{ $t('home_comprarAhora') }}
                       </span>
-                    </nuxt-link>
-                  </button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -91,31 +147,8 @@ export default {
     banner: Object,
     settingGeneral: Object,
   },
-  computed: {
-    template() {
-      return this.$store.state.template
-    },
-  },
   data() {
     return {
-      Banners: [
-        {
-          txtTop: 'Muchas gracias a todos nuestros clientes',
-          txtMedium1: 'Empujando',
-          txtMedium2: 'los límites',
-          txtBottom1:
-            'Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur.',
-          id: '1',
-        },
-        {
-          txtTop: 'Sigue al conejo rojo',
-          txtMedium1: 'Hasta',
-          txtMedium2: '50% de descuento',
-          txtBottom1:
-            'Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur.',
-          id: '2',
-        },
-      ],
       swiperOption: {
         slidesPerView: 'auto',
         loop: true,
@@ -134,6 +167,14 @@ export default {
       },
     }
   },
+  computed: {
+    template() {
+      return this.$store.state.template
+    },
+    currentSettingByTemplate9() {
+      return this.$store.state.currentSettingByTemplate9
+    },
+  },
 }
 </script>
 <style scoped>
@@ -150,7 +191,6 @@ export default {
 .swiper-slide-1 {
   height: 831px;
   width: 100vw;
-  background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612320607/Template9/Carousel/slide-headphones-bg_atwvao.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -158,17 +198,30 @@ export default {
 .swiper-slide-2 {
   height: 831px;
   width: 100vw;
-  background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612320609/Template9/Carousel/home-sp-slide-02_v3ynzg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-
-.banner-text-top,
-.banner-text-medium,
-.banner-text-bottom,
+.banner-text-top_1 {
+  color: var(--color_pretitle_1);
+}
+.banner-text-medium_1 {
+  color: var(--color_title_1);
+}
+.banner-text-bottom_1 {
+  color: var(--color_description_1);
+}
+.banner-text-top_2 {
+  color: var(--color_pretitle_2);
+}
+.banner-text-medium_2 {
+  color: var(--color_title_2);
+}
+.banner-text-bottom_2 {
+  color: var(--color_description_2);
+}
 .text-button {
-  color: white;
+  color: var(--color_text_btn);
 }
 .banner-text-top,
 .banner-text-medium {
@@ -182,18 +235,22 @@ export default {
 }
 .btn-shop {
   transition: all 0.25s ease;
-  background-color: #2c2930;
+  background-color: var(--color_background_btn);
+  border-radius: var(--radius_btn);
   height: 51px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn-shop:hover {
   transition: all 0.25s ease;
-  background-color: white;
+  background-color: #ffffff;
 }
 .btn-shop:hover .text-button {
   transition: all 0.25s ease;
   color: #2c2930;
 }
-.swiper-pagination-bullet-active {
+.carousel-content >>> .swiper-pagination-bullet-active {
   opacity: 1;
   background: #2c2930;
 }
@@ -202,11 +259,9 @@ export default {
   height: 2px;
   display: inline-block;
   border-radius: 100%;
-  background: #000;
+  background: white;
   opacity: 0.2;
 }
-/* ----------------------------- */
-
 @screen sm {
   .swiper-slide-1 {
     @apply flex flex-col justify-center items-center z-auto;
@@ -241,9 +296,7 @@ export default {
     line-height: 0.9;
     font-weight: 700;
   }
-  .txtmed1 {
-    line-height: 1.3;
-  }
+
   .text-bottom {
     @apply w-full flex flex-col justify-center items-center text-center mb-24;
   }
@@ -314,9 +367,6 @@ export default {
   .banner-button {
     @apply justify-start items-start text-center;
   }
-  .txtmed1 {
-    line-height: 0.9;
-  }
 }
 @media (min-width: 1300px) {
   .banner-content-items-1 {
@@ -328,7 +378,7 @@ export default {
     width: 1300px;
   }
   .content-items-1 {
-    width: 45%;
+    width: 47%;
   }
   .content-items-2 {
     width: 35%;

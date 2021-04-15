@@ -70,22 +70,53 @@ export default {
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
     },
+    settingByTemplate9() {
+      return this.$store.state.settingByTemplate9
+    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral:
-          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
-            ? this.settingByTemplate7.settingGeneral
-            : null,
-        settingK07ProductList:
-          this.settingByTemplate7 && this.settingByTemplate7.productListFilter
-            ? this.settingByTemplate7.productListFilter
-            : null,
-        settingKProdutCard:
-          this.settingByTemplate7 && this.settingByTemplate7.card
-            ? this.settingByTemplate7.card
-            : null,
+        settingByTemplate7: this.settingByTemplate7
+          ? [
+              {
+                settingGeneral:
+                  this.settingByTemplate7 &&
+                  this.settingByTemplate7.settingGeneral
+                    ? this.settingByTemplate7.settingGeneral
+                    : null,
+                settingK07ProductList:
+                  this.settingByTemplate7 &&
+                  this.settingByTemplate7.productListFilter
+                    ? this.settingByTemplate7.productListFilter
+                    : null,
+                settingKProdutCard:
+                  this.settingByTemplate7 && this.settingByTemplate7.card
+                    ? this.settingByTemplate7.card
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate9: this.settingByTemplate9
+          ? [
+              {
+                cardProduct:
+                  this.settingByTemplate9 && this.settingByTemplate9.cardProduct
+                    ? this.settingByTemplate9.cardProduct
+                    : null,
+                productListFilter:
+                  this.settingByTemplate9 &&
+                  this.settingByTemplate9.productListFilter
+                    ? this.settingByTemplate9.productListFilter
+                    : null,
+                setting9General:
+                  this.settingByTemplate9 &&
+                  this.settingByTemplate9.settingGeneral
+                    ? this.settingByTemplate9.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
       }
     },
   },

@@ -37,11 +37,15 @@
             </div>
           </div>
           <button class="content-bttns-shop">
-            <nuxt-link :to="'/productos'">
+            <a
+              :href="`${settingKAdvertising.url_redirect}`"
+              rel="noreferrer noopener"
+              target="_blank"
+            >
               <span class="content-textbutton-shop">
                 {{ $t('productdetail_btnComprar') }}
               </span>
-            </nuxt-link>
+            </a>
           </button>
         </div>
       </div>

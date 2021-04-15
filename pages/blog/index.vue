@@ -53,22 +53,47 @@ export default {
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
     },
+    settingByTemplate9() {
+      return this.$store.state.settingByTemplate9
+    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral:
-          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
-            ? this.settingByTemplate7.settingGeneral
-            : null,
-        settingK07Blog:
-          this.settingByTemplate7 && this.settingByTemplate7.blog1
-            ? this.settingByTemplate7.blog1
-            : null,
         settingK05Blog:
           this.settingByTemplate && this.settingByTemplate.settings
             ? this.settingByTemplate.settings
             : this.settingBase,
+        settingByTemplate7: this.settingByTemplate7
+          ? [
+              {
+                settingGeneral:
+                  this.settingByTemplate7 &&
+                  this.settingByTemplate7.settingGeneral
+                    ? this.settingByTemplate7.settingGeneral
+                    : null,
+                settingK07Blog:
+                  this.settingByTemplate7 && this.settingByTemplate7.blog1
+                    ? this.settingByTemplate7.blog1
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate9: this.settingByTemplate9
+          ? [
+              {
+                blog:
+                  this.settingByTemplate9 && this.settingByTemplate9.blog
+                    ? this.settingByTemplate9.blog
+                    : null,
+                settingGeneral:
+                  this.settingByTemplate9 &&
+                  this.settingByTemplate9.settingGeneral
+                    ? this.settingByTemplate9.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
       }
     },
   },

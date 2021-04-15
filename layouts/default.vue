@@ -12,13 +12,13 @@
     <component
       v-bind="componentsProps"
       :is="headerTemplate"
-      v-if="showTemplate.showHeader07"
+      v-if="showTemplate.showHeader"
     />
-    <nuxt v-if="showTemplate.showBody07" />
+    <nuxt v-if="showTemplate.showBody" />
     <component
       v-bind="componentsProps"
       :is="footerTemplate"
-      v-if="showTemplate.showFooter07"
+      v-if="showTemplate.showFooter"
     />
     <KoFooterCountry :dataStore="dataStore" v-if="showTemplate.showCountry" />
     <div
@@ -551,7 +551,7 @@ export default {
       }
     },
     showTemplate() {
-      return this.$store.state.showTemplate7
+      return this.$store.state.showTemplate
     },
   },
   methods: {

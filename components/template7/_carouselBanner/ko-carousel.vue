@@ -3,19 +3,25 @@
     <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
       <div class="swiper-wrapper z-auto">
         <div
-          :class="`swiper-slide`"
+          class="swiper-slide img-bg"
           :id="`slide${index + 1}`"
           v-for="(banner, index) in this.settingKCarousel.values"
           :key="index"
         >
           <img
-            class="img-bg"
+            class="banner"
             :src="settingKCarousel.values[index].url_img_background"
             alt="bg"
             v-if="settingKCarousel.values[index].url_img_background"
           />
+          <img
+            class="banner-responsive"
+            :src="settingKCarousel.values[index].url_img_left"
+            alt="bg"
+            v-if="settingKCarousel.values[index].url_img_left"
+          />
           <KObanner
-            class="absolute"
+            class="absolute top-0"
             :banner="banner"
             :settingKCarousel="settingKCarousel"
             :settingGeneral="settingGeneral"
@@ -23,8 +29,6 @@
         </div>
       </div>
       <div class="swiper-pagination"></div>
-      <!-- <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div> -->
     </div>
   </div>
 </template>
@@ -109,56 +113,32 @@ export default {
 .swiper-pagination >>> .swiper-pagination-bullet-active {
   background-color: var(--pagination_color);
 }
-@screen sm {
-  .img-bg {
+.img-bg {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  box-sizing: content-box;
+  position: relative;
+}
+.banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.banner-responsive {
+  display: none;
+}
+@media (max-width: 950px) {
+  .banner {
+    display: none;
+  }
+  .banner-responsive {
+    display: initial;
     width: 100%;
-    height: 810px;
+    height: 100%;
     object-fit: cover;
-  }
-}
-@media (min-width: 375px) {
-  .img-bg {
-    height: 870px;
-  }
-}
-@media (min-width: 425px) {
-  .img-bg {
-    height: 920px;
-  }
-}
-@media (min-width: 480px) {
-  .img-bg {
-    height: 940px;
-  }
-}
-@media (min-width: 520px) {
-  .img-bg {
-    height: 980px;
-  }
-}
-@media (min-width: 620px) {
-  .img-bg {
-    height: 1050px;
-  }
-}
-@screen md {
-  .img-bg {
-    height: 1120px;
-  }
-}
-@media (min-width: 900px) {
-  .img-bg {
-    height: 1180px;
-  }
-}
-@screen lg {
-  .img-bg {
-    height: 620px;
-  }
-}
-@media (min-width: 1192px) {
-  .img-bg {
-    height: 750px;
+    object-position: center;
   }
 }
 </style>

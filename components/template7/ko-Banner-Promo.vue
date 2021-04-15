@@ -18,7 +18,11 @@
       ]"
     >
       <div class="promo-banners" :style="settingKPromo.values[0]">
-        <nuxt-link :to="'/productos'">
+        <a
+          :href="`${settingKPromo.values[0].url_redirect}`"
+          rel="noreferrer noopener"
+          target="_blank"
+        >
           <figure class="promo-banner-images">
             <img
               id="images-1"
@@ -43,11 +47,15 @@
             </div>
             <div class="banner-border-1"></div>
           </figure>
-        </nuxt-link>
+        </a>
       </div>
       <div class="banner-medium">
         <div class="promo-banner-2" :style="settingKPromo.values[1]">
-          <nuxt-link :to="'/productos'">
+          <a
+            :href="`${settingKPromo.values[1].url_redirect}`"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
             <figure class="promo-banner-images">
               <img
                 id="images-2"
@@ -68,10 +76,14 @@
                 >
               </div>
             </figure>
-          </nuxt-link>
+          </a>
         </div>
         <div class="promo-banner-3" :style="settingKPromo.values[2]">
-          <nuxt-link :to="'/productos'">
+          <a
+            :href="`${settingKPromo.values[2].url_redirect}`"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
             <figure class="promo-banner-images">
               <img
                 id="images-3"
@@ -92,11 +104,15 @@
                 >
               </div>
             </figure>
-          </nuxt-link>
+          </a>
         </div>
       </div>
       <div class="promo-banners" :style="settingKPromo.values[3]">
-        <nuxt-link :to="'/productos'">
+        <a
+          :href="`${settingKPromo.values[3].url_redirect}`"
+          rel="noreferrer noopener"
+          target="_blank"
+        >
           <figure class="promo-banner-images" id="promo-banner-images-4">
             <img
               id="images-4"
@@ -118,7 +134,7 @@
             </div>
             <div class="banner-border-2"></div>
           </figure>
-        </nuxt-link>
+        </a>
       </div>
     </div>
   </div>

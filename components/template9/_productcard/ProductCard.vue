@@ -1,6 +1,16 @@
 <template>
-  <div class="producto">
-    <div class="container">
+  <div class="producto" :style="[productListCard, settingGeneral]">
+    <div
+      class="container"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
       <router-link
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
@@ -152,7 +162,17 @@
         </div>
       </router-link>
     </div>
-    <div class="datos-producto">
+    <div
+      class="datos-producto"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
       <div class="categoria" v-if="this.product.categoria">
         {{ this.product.categoria }}
       </div>
@@ -224,7 +244,7 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',
-  props: { product: Object },
+  props: { product: Object, settingGeneral: Object, productListCard: Object },
 
   data() {
     return {
@@ -470,11 +490,8 @@ export default {
   object-fit: cover;
   overflow: hidden;
 }
-.hearts-icon {
-  @apply h-full w-full;
-  color: #333;
-}
 .producto {
+  background: var(--background_color_card);
   @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
 .datos-producto {
@@ -486,11 +503,8 @@ export default {
 .image {
   @apply w-full h-auto;
 }
-.icon {
-  @apply text-white-white;
-}
 .cart-Shop {
-  @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -501,7 +515,7 @@ export default {
   text-align: center;
 }
 .icons-hover {
-  @apply text-gray-textHeader absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
+  @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -515,20 +529,22 @@ export default {
   fill: white;
 }
 .tittle {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-  color: #3f3f3f;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2);
   font: inherit;
   font-size: 100%;
 }
 .categoria {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-  color: #bbbbbb;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2);
+  color: var(--color_category);
   font: inherit;
   font-weight: 600;
 }
 .card-title {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-  color: #333333;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2);
+  color: var(--color_text_card);
   font: inherit;
   font-weight: 800;
   text-align: left;
@@ -537,16 +553,19 @@ export default {
   color: #333333;
 }
 .separator-price {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2);
   font-size: 16px;
-  color: #000;
+  color: var(--color_price_card);
+
   margin-top: 10px;
 }
 .text-price {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2);
   margin-top: 10px;
   font-size: 16px;
-  color: #000;
+  color: var(--color_price_card);
   white-space: nowrap;
   font-weight: 600;
   line-height: 1.1;
@@ -626,11 +645,11 @@ export default {
     height: 40px;
   }
   .overlay-free {
+    background-color: #3d3d3d;
     @apply rounded;
     position: absolute;
     top: 0%;
     right: 0;
-    background-color: #3d3d3d;
     overflow: hidden;
     width: 110px;
     height: 10%;
@@ -693,9 +712,6 @@ export default {
   }
 }
 @screen mlg {
-  .icon {
-    margin-top: 0px;
-  }
   .text-cart {
     @apply block;
   }

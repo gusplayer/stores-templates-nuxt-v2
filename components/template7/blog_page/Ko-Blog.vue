@@ -1,25 +1,34 @@
 <template>
-  <div class="wrapper_error" :style="[settingK07Blog, settingGeneral]">
+  <div
+    class="wrapper_error"
+    :style="[
+      settingByTemplate7[0].settingK07Blog,
+      settingByTemplate7[0].settingGeneral,
+    ]"
+  >
     <div
       class="banner-blog"
       id="BgBannerBlog"
       :style="[
         {
           '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_1
+              ? this.settingByTemplate7[0].settingGeneral.fount_1
               : 'David libre',
         },
         {
           '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_2
+              ? this.settingByTemplate7[0].settingGeneral.fount_2
               : 'Great Vibes',
         },
         {
           '--font-style-3':
-            this.settingGeneral && this.settingGeneral.fount_3
-              ? this.settingGeneral.fount_3
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_3
+              ? this.settingByTemplate7[0].settingGeneral.fount_3
               : 'Lora',
         },
       ]"
@@ -86,20 +95,23 @@
       :style="[
         {
           '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_1
+              ? this.settingByTemplate7[0].settingGeneral.fount_1
               : 'David libre',
         },
         {
           '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_2
+              ? this.settingByTemplate7[0].settingGeneral.fount_2
               : 'Great Vibes',
         },
         {
           '--font-style-3':
-            this.settingGeneral && this.settingGeneral.fount_3
-              ? this.settingGeneral.fount_3
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_3
+              ? this.settingByTemplate7[0].settingGeneral.fount_3
               : 'Lora',
         },
       ]"
@@ -149,8 +161,8 @@
               <KoProductCard1
                 v-if="article.estado == 1"
                 :article="article"
-                :settingK07Blog="settingK07Blog"
-                :settingGeneral="settingGeneral"
+                :settingK07Blog="settingByTemplate7[0].settingK07Blog"
+                :settingGeneral="settingByTemplate7[0].settingGeneral"
               ></KoProductCard1>
             </div>
           </div>
@@ -192,11 +204,13 @@ export default {
   },
   props: {
     dataStore: Object,
-    settingGeneral: Object,
-    settingK07Blog: Object,
+    settingByTemplate7: Array,
   },
   mounted() {
-    if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
+    if (
+      this.settingByTemplate7[0].settingK07Blog &&
+      this.settingByTemplate7[0].settingK07Blog.img_background == true
+    ) {
       this.setBg()
     }
   },
@@ -229,15 +243,18 @@ export default {
   },
   methods: {
     setBg() {
-      if (this.settingK07Blog.url_img) {
+      if (this.settingByTemplate7[0].settingK07Blog.url_img) {
         var imagen = document.getElementById('BgBannerBlog')
-        imagen.style.backgroundImage = `url(${this.settingK07Blog.url_img})`
+        imagen.style.backgroundImage = `url(${this.settingByTemplate7[0].settingK07Blog.url_img})`
       }
     },
   },
   watch: {
-    settingK07Blog() {
-      if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
+    'settingByTemplate7[0].settingK07Blog'() {
+      if (
+        this.settingByTemplate7[0].settingK07Blog &&
+        this.settingByTemplate7[0].settingK07Blog.img_background == true
+      ) {
         this.setBg()
       }
     },

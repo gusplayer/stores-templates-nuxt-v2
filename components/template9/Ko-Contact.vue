@@ -1,6 +1,23 @@
 <template>
-  <div calss="content-contact">
-    <div class="content-form-contact">
+  <div
+    calss="content-contact-template9"
+    :style="[
+      settingByTemplate9[0].cardProduct,
+      settingByTemplate9[0].setting9General,
+    ]"
+  >
+    <div
+      class="content-form-contact"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate9[0].setting9General &&
+            this.settingByTemplate9[0].setting9General.fount_1
+              ? this.settingByTemplate9[0].setting9General.fount_1
+              : 'Poppins',
+        },
+      ]"
+    >
       <div class="banner-mapa" v-if="dataStore.geolocalizacion.length">
         <iframe
           :src="`https://maps.google.com/maps?q=${this.dataStore.geolocalizacion[0].latitud},${this.dataStore.geolocalizacion[0].longitud}&hl=es;z=14&amp;output=embed`"
@@ -11,7 +28,6 @@
           allowfullscreen
         ></iframe>
       </div>
-
       <div class="container-contact">
         <div class="content-grid">
           <div class="left">
@@ -189,7 +205,7 @@ export default {
   name: 'Ko-Contact',
   props: {
     dataStore: Object,
-    // settingByTemplate: Object,
+    settingByTemplate9: Array,
   },
   components: {
     ValidationObserver,
@@ -304,17 +320,18 @@ export default {
 </script>
 
 <style scoped>
-.content-contact {
+.content-contact-template9 {
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-form-contact {
-  @apply w-full flex flex-col justify-center items-center mt-72;
+  background: var(--background_color_1);
+  @apply w-full flex flex-col justify-center items-center pt-69;
 }
 .container-contact {
   @apply w-full justify-center items-center;
 }
 .empty {
-  background-color: #dbdbdb;
+  background: var(--background_color_1);
   @apply w-full h-1 my-20;
 }
 @screen sm {
@@ -335,9 +352,10 @@ export default {
     @apply w-full flex justify-start items-center mb-30;
   }
   .txt-info {
-    color: #414141;
+    color: var(--color_text);
     font-size: 14px;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-1);
     @apply uppercase font-semibold tracking-1;
   }
   .content-locatioin,
@@ -345,10 +363,10 @@ export default {
     @apply w-full flex flex-row justify-start items-center;
   }
   .icon-left {
-    fill: #878787;
+    fill: var(--color_icon);
   }
   .txt-left {
-    color: #414141;
+    color: var(--color_subtext);
     font-size: 14px;
     @apply w-full flex justify-start items-center pl-20;
   }
@@ -362,8 +380,8 @@ export default {
     @apply w-full flex flex-col justify-start items-center my-40;
   }
   .contact-content-rigth {
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: var(--background_color_2);
+    border: 1px solid var(--background_color_2);
     @apply w-full flex flex-col justify-start items-start shadow-xl;
   }
   .content-form {
@@ -373,7 +391,7 @@ export default {
     @apply w-full flex justify-start items-center mb-40;
   }
   .txt-contactus {
-    color: #414141;
+    color: var(--color_text);
     font-size: 18px;
     @apply w-full justify-center items-center uppercase font-semibold;
   }
@@ -387,22 +405,20 @@ export default {
   }
   input,
   .input-text {
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
+    color: var(--color_subtext);
+    border: 1px solid var(--background_color_2);
     font-size: 13px;
-    color: #acaaa6;
     @apply w-full h-40 pl-10;
   }
   textarea,
   .input-text-rectangule {
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
+    color: var(--color_subtext);
+    border: 1px solid var(--background_color_2);
     font-size: 13px;
-    color: #acaaa6;
     @apply w-full h-100 pl-10 pt-10;
   }
   .txt-input {
-    color: #414141;
+    color: var(--color_subtext);
     font-size: 13px;
     @apply w-full justify-center items-center capitalize;
   }
@@ -410,9 +426,10 @@ export default {
     @apply w-full flex justify-start items-center;
   }
   .btn {
-    background-color: #333b48;
+    background-color: var(--color_background_btn);
     font-size: 14px;
-    color: #fff;
+    color: var(--color_text_btn);
+    border-radius: var(--radius_btn);
     @apply w-auto h-35 border mt-20 px-20;
   }
   .btn:hover {

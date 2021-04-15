@@ -5,6 +5,8 @@
     :style="[
       settingByTemplate9[0].setting9Header,
       settingByTemplate9[0].setting9General,
+      currentSettingByTemplate9.footer,
+      currentSettingByTemplate9.settingGeneral,
     ]"
   >
     <div
@@ -16,6 +18,14 @@
             this.settingByTemplate9[0].setting9General &&
             this.settingByTemplate9[0].setting9General.fount_1
               ? this.settingByTemplate9[0].setting9General.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-1':
+            this.currentSettingByTemplate9 &&
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_1
+              ? this.currentSettingByTemplate9.settingGeneral.fount_1
               : 'Poppins',
         },
       ]"
@@ -139,6 +149,9 @@ export default {
     },
     showModal() {
       return this.$store.state.modalpolitics05
+    },
+    currentSettingByTemplate9() {
+      return this.$store.state.currentSettingByTemplate9
     },
   },
   methods: {

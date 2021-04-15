@@ -1,5 +1,13 @@
 <template>
-  <div class="wrapper-content" :style="[wrapper, settingGeneral]">
+  <div
+    class="wrapper-content"
+    :style="[
+      wrapper,
+      settingGeneral,
+      currentSettingByTemplate9.wrapper,
+      currentSettingByTemplate9.settingGeneral,
+    ]"
+  >
     <div
       :style="[
         {
@@ -9,28 +17,34 @@
               : 'Poppins',
         },
         {
-          '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
-              : 'Roboto',
+          '--font-style-1':
+            this.currentSettingByTemplate9 &&
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_1
+              ? this.currentSettingByTemplate9.settingGeneral.fount_1
+              : 'Poppins',
         },
       ]"
     >
       <div class="wrapper-items-content">
         <div class="product-text">
           <div class="product-tittle">
-            <span class="tittle">Instagram Feed</span>
+            <span class="tittle">{{ wrapper.title }}</span>
           </div>
         </div>
       </div>
       <div class="wrapper-items">
-        <div v-for="(imagen, index) in Imagenes" :key="index" class="grid-imgs">
+        <div
+          v-for="(imagen, index) in wrapper.values"
+          :key="index"
+          class="grid-imgs"
+        >
           <a
             target="_blank"
             rel="noreferrer noopener"
-            :href="dataStore.tienda.red_instagram"
+            :href="imagen.url_redirect"
           >
-            <img class="img-wrapp" :src="imagen.url" alt="wrapper-images" />
+            <img class="img-wrapp" :src="imagen.url_img" alt="wrapper-images" />
           </a>
         </div>
       </div>
@@ -45,40 +59,9 @@ export default {
     wrapper: Object,
     settingGeneral: Object,
   },
-  data() {
-    return {
-      Imagenes: [
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612567120/Template9/Insta%20feed/106126747_116303283248247_1364453437983674588_n_nk4whf.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612567123/Template9/Insta%20feed/106205430_1167171920308203_7606075881202904642_n_ffumkq.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612567126/Template9/Insta%20feed/106354131_189289569205191_2308887490431682312_n_mwh1ac.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612567128/Template9/Insta%20feed/106275795_331385771589537_2659543148796565714_n_evg4qt.jpg',
-        },
-        {
-          url:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612567130/Template9/Insta%20feed/106115016_144855913874556_2205084450678486706_n_bzyvnl.jpg',
-        },
-      ],
-    }
-  },
-  computed: {},
-  mounted() {},
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
+  computed: {
+    currentSettingByTemplate9() {
+      return this.$store.state.currentSettingByTemplate9
     },
   },
 }
@@ -94,7 +77,8 @@ export default {
   transform: scale(0.95);
 }
 .wrapper-content {
-  @apply flex flex-col justify-center items-center w-full mb-10;
+  background: var(--background_color_1);
+  @apply flex flex-col justify-center items-center w-full pb-20;
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;
@@ -103,7 +87,6 @@ export default {
 .wrapper-items {
   @apply justify-center items-center;
 }
-
 .product-text {
   @apply flex flex-col justify-center items-center w-full my-60;
 }
@@ -112,8 +95,9 @@ export default {
 }
 .tittle {
   @apply flex flex-col justify-center items-center;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #333333;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1);
+  color: var(--color_title);
   font-weight: 700;
 }
 @screen sm {
@@ -145,6 +129,9 @@ export default {
   .tittle {
     line-height: 34px;
     font-size: 36px;
+  }
+  .product-text {
+    @apply my-0 pt-30 pb-50;
   }
 }
 @screen lg {

@@ -1,6 +1,30 @@
 <template>
-  <div class="product-content">
-    <div class="content-banner-shop">
+  <div
+    class="product-content"
+    :style="[
+      settingByTemplate9[0].setting9General,
+      settingByTemplate9[0].productListFilter,
+    ]"
+  >
+    <div
+      class="content-banner-shop"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate9[0].setting9General &&
+            this.settingByTemplate9[0].setting9General.fount_1
+              ? this.settingByTemplate9[0].setting9General.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-2':
+            this.settingByTemplate9[0].setting9General &&
+            this.settingByTemplate9[0].setting9General.fount_2
+              ? this.settingByTemplate9[0].setting9General.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
       <div class="crumb">
         <nuxt-link to="/">
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -17,44 +41,26 @@
         </p>
       </div>
     </div>
-    <div class="content-shop-items">
+    <div
+      class="content-shop-items"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate9[0].setting9General &&
+            this.settingByTemplate9[0].setting9General.fount_1
+              ? this.settingByTemplate9[0].setting9General.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-2':
+            this.settingByTemplate9[0].setting9General &&
+            this.settingByTemplate9[0].setting9General.fount_2
+              ? this.settingByTemplate9[0].setting9General.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
       <div class="content-left">
-        <!-- <div class="content-input-slide">
-          <div class="item-tittle">
-            <p class="txt-tittles">
-              {{ $t('home_filtrarpor') }}{{ $t('home_preciofilt') }}
-            </p>
-          </div>
-          <div class="itemLeft-range-slide">
-            <input
-              class="input-slide"
-              type="range"
-              v-model="value"
-              min="0"
-              :max="range.max"
-              value="1"
-              id="myRange"
-            />
-          </div>
-
-          <div class="value-range-slide">
-            <div class="values-prices">
-              <p class="value-price">
-                {{ $t('cart_precio') }}
-              </p>
-              <p class="value-precio-change">
-                <span class="price"> $0 — ${{ value }}</span>
-                <span class="price" id="value-range"></span>
-              </p>
-            </div>
-            <div class="btn-slider">
-              <button class="btn-items-left" @click="filterProductPrice">
-                {{ $t('home_filtrar') }}
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="empty"></div> -->
         <div class="content-input-slide">
           <button class="item-tittle accordion">
             <p class="txt-tittles">
@@ -157,45 +163,7 @@
         </div>
         <div class="top-content">
           <div class="content-items-categorias">
-            <!-- <div class="content-items-categorias-text">
-              <p class="text-categorias" id="homeCate" @click="clear">
-                {{ $t('home_catalogo') }}
-                <span
-                  v-if="this.nameCategoryHeader"
-                  class="separator-breadCrumbs"
-                  >/</span
-                >
-              </p>
-              <p
-                class="text-categorias-select"
-                v-if="this.nameCategoryHeader"
-                @click="breadcrumbsSendCategory(nameCategoryHeader)"
-              >
-                <span id="statecate">{{ this.nameCategoryHeader }}</span>
-              </p>
-              <span
-                v-if="this.nameSubCategoryHeader"
-                class="separator-breadCrumbs"
-                >/
-              </span>
-              <p
-                class="text-categorias-select"
-                v-if="this.nameSubCategoryHeader"
-              >
-                <span id="statesubcate">{{ this.nameSubCategoryHeader }}</span>
-              </p>
-            </div> -->
-
             <div class="items-end">
-              <!-- <div class="show-number-items">
-                <p class="product-stock">
-                  {{ $t('home_mostrar') }}
-                  <span class="separator-breadCrumbs">/</span>
-                  {{ dataStore.productos.length }}
-                  <span class="separator-breadCrumbs">/</span>
-                </p>
-              </div> -->
-
               <div class="show-view-per-list">
                 <button class="show">
                   <svg
@@ -249,11 +217,15 @@
                   class="content-products"
                 >
                   <KoProdcutCardFilter
+                    :settingGeneral="settingByTemplate9[0].setting9General"
+                    :productListCard="settingByTemplate9[0].cardProduct"
                     :product="product"
                     v-if="!showinList"
                     class="product-nolist"
                   ></KoProdcutCardFilter>
                   <KoProdcutCardFilerList
+                    :settingGeneral="settingByTemplate9[0].setting9General"
+                    :productListCard="settingByTemplate9[0].cardProduct"
                     :product="product"
                     v-if="showinList"
                   ></KoProdcutCardFilerList>
@@ -303,17 +275,16 @@ import KoProdcutCardFilter from './_productcard/ProductCard'
 import KoProdcutCardFilerList from './_productcard/ProductCardFilterList'
 export default {
   components: {
-    // KoSocialNet,
     KoProdcutCardFilter,
     KoProdcutCardFilerList,
   },
   props: {
     dataStore: Object,
     fullProducts: {},
+    settingByTemplate9: Array,
   },
   name: 'Ko-ProductList-Filter',
   mounted() {
-    // this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
       let maxTMP = 0
@@ -340,12 +311,6 @@ export default {
         }
       })
     }
-    // var slider = document.getElementById('myRange')
-    // var valueslide = document.getElementById('value-range')
-    // slider.oninput = function () {
-    //   valueslide.innerHTML = this.value
-    // }
-
     let domain = this.$route.fullPath
     let searchCategory = domain.slice(0, [20])
     let searchSubCategory = domain.slice(0, [23])
@@ -408,7 +373,6 @@ export default {
         this.dataStore.productos = value
       },
     },
-
     categorias() {
       return this.dataStore.categorias
     },
@@ -573,19 +537,12 @@ export default {
     },
     Sendsubcategory(value) {
       this.statesub = false
-      var stateCategory = document.getElementById('statecate')
-      if (this.statesub == false && stateCategory) {
-        stateCategory.style.color = '#8e8e8e'
-        stateCategory.style.fontWeight = '100'
-      }
-
       this.indexSelect2 = value
       this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.id == value
       )
-
       let filtradoCategorias = this.categorias.find(
         (element) => element.id == filtradoSubCategoria.categoria
       )
@@ -608,15 +565,10 @@ export default {
     },
     sendCategory(value, categoria, index, ref) {
       this.statesub = true
-      var stateCategory = document.getElementById('statecate')
       var catalogo = document.getElementById('homeCate')
       if (catalogo) {
         catalogo.style.color = '#8e8e8e'
         catalogo.style.fontWeight = '100'
-      }
-      if (this.statesub == true && stateCategory) {
-        stateCategory.style.color = '#333333'
-        stateCategory.style.fontWeight = '600'
       }
       this.indexSelect = categoria
       this.currentPage = 1
@@ -647,17 +599,11 @@ export default {
     },
     breadcrumbsSendCategory(value) {
       this.statesub = true
-      var stateCategory = document.getElementById('statecate')
       var catalogo = document.getElementById('homeCate')
-
-      if (this.statesub == true && stateCategory) {
+      if (this.statesub == true) {
         catalogo.style.color = '#8e8e8e'
         catalogo.style.fontWeight = '100'
-
-        stateCategory.style.color = '#333333'
-        stateCategory.style.fontWeight = '600'
       }
-
       let filtradoCategorias = this.categorias.find((element) => {
         if (element.nombre_categoria_producto == value) {
           return element
@@ -807,7 +753,8 @@ export default {
 
 <style scoped>
 .product-content {
-  @apply flex flex-col justify-center items-center w-full mb-80;
+  background: var(--background_color_1);
+  @apply flex flex-col justify-center items-center w-full pb-40;
   margin-top: 72px;
 }
 .content-banner-shop {
@@ -829,43 +776,15 @@ export default {
   /* border-bottom: 2px solid #2c2930; */
 }
 .txt-tittles {
+  color: var(--color_text);
   @apply w-full flex justify-start items-center;
-  color: #333;
   font-weight: 600;
   font-size: 20px;
   letter-spacing: 0px;
   transition: all 0.25s ease;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1);
   cursor: pointer;
-}
-.value-range-slide {
-  @apply w-full flex flex-row justify-start items-center;
-}
-.values-prices {
-  @apply w-8/0 flex flex-row justify-start items-center;
-}
-.value-price {
-  @apply w-auto pr-1;
-  color: #717171;
-  font-size: 14px;
-  font-family: 'Lora' !important ;
-  transition: all 0.25s ease;
-  cursor: default;
-}
-.value-precio-change {
-  @apply w-full flex flex-row justify-start items-center;
-}
-.price {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  color: #2d2a2a;
-  font-weight: 600;
-  font-size: 14px;
-  font-family: 'Lora' !important ;
-  transition: all 0.25s ease;
-  cursor: default;
 }
 .item-tittle {
   @apply w-full flex justify-start items-center;
@@ -874,98 +793,13 @@ export default {
   @apply w-full;
   margin-bottom: 30px;
   border-bottom: 1px solid;
-  border-color: rgba(129, 129, 129, 0.2);
-}
-.btn-slider {
-  @apply w-3/0 flex justify-center items-center;
-}
-.btn-items-left {
-  font-family: 'Lora' !important ;
-  transition: all 0.25s ease;
-  display: flex;
-  border-radius: 35px;
-  background-color: #ededed;
-  padding: 10px 14px;
-  font-size: 12px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.btn-items-left:hover {
-  background-color: #e5e5e5;
+  border-color: var(--color_icon);
 }
 .content-items-categorias {
   @apply w-full flex flex-row justify-between items-center;
 }
 .content-items-categorias-text {
   @apply w-full flex flex-row;
-}
-.text-categorias {
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  color: #333333;
-  margin-right: 6px;
-  font-weight: 600;
-  font-size: 14px;
-  font-family: 'Lora' !important ;
-  cursor: pointer;
-}
-.separator-breadCrumbs {
-  width: auto;
-  color: #8e8e8e;
-  margin-right: 6px;
-  margin-left: 6px;
-  transition: all 0.25s ease;
-  font-size: 14px;
-  font-family: 'Lora' !important ;
-  cursor: pointer;
-}
-.product-stock-text {
-  color: #8e8e8e;
-  font-weight: bold;
-  font-size: 14px;
-  font-family: 'Lora' !important ;
-}
-.product-stock-active {
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-  font-size: 15px;
-  font-family: 'Lora' !important ;
-}
-.text-categorias-select {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-right: 6px;
-  color: #8e8e8e;
-  font-weight: 100;
-  transition: all 0.25s ease;
-  font-size: 14px;
-  font-family: 'Lora' !important ;
-  cursor: pointer;
-}
-#statecate {
-  width: 100%;
-  color: #333;
-  font-weight: 600;
-  font-size: 14px;
-  font-family: 'Lora' !important ;
-  cursor: pointer;
-}
-#statesubcate {
-  width: 100%;
-  margin-left: 6px;
-  transition: all 0.25s ease;
-  color: #333;
-  font-weight: 600;
-  font-size: 14px;
-  font-family: 'Lora' !important ;
-  cursor: pointer;
 }
 .top-content {
   display: flex;
@@ -1031,31 +865,23 @@ export default {
   @apply w-full flex flex-col justify-start items-center;
 }
 .txt-categorys {
+  color: var(--color_subtext);
   @apply w-full flex flex-row justify-start items-center pr-1;
-  color: #333;
   font-size: 15px;
   line-height: 1.3;
   font-weight: 400;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important ;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important ; */
+  font-family: var(--font-style-2);
   transition: all 0.25s ease;
   cursor: pointer;
 }
 .txt-categorys-active {
-  @apply w-full flex flex-row justify-start items-center pr-1;
   color: #000;
+  @apply w-full flex flex-row justify-start items-center pr-1;
   font-size: 14px;
   transition: all 0.25s ease;
   cursor: pointer;
   font-weight: bold;
-}
-.product-stock {
-  color: #333;
-  margin-right: 6px;
-  font-weight: 600;
-  transition: all 0.25s ease;
-  font-size: 14px;
-  font-family: 'Lora' !important ;
-  cursor: pointer;
 }
 .show-view-per-list {
   @apply w-auto justify-center items-center;
@@ -1063,14 +889,13 @@ export default {
 .show {
   @apply w-full cursor-pointer mt-16;
 }
-
 .show-icon {
+  fill: var(--color_icon);
   @apply p-12;
-  fill: #8e8e8e;
 }
 .show-icon-active {
-  fill: #000;
-  background-color: #f8f8f8;
+  fill: var(--color_text);
+  /* background-color: #f8f8f8; */
 }
 .show-icon:hover {
   fill: #000;
@@ -1086,8 +911,9 @@ export default {
   @apply w-full flex;
 }
 .btn-tittle-shop {
-  color: #333;
-  font-family: 'Poppins', sans-serif;
+  color: var(--color_text);
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: var(--font-style-1);
   font-weight: 700;
   letter-spacing: 1px;
   line-height: 1.1;
@@ -1101,26 +927,11 @@ export default {
 .product-tittle,
 .product-subtittle,
 .product-description,
-.tittle,
-.subtittle,
-.description,
 .product-conten-items {
   @apply justify-center items-center text-center gap-4;
 }
 .producto-items-content {
   @apply w-full;
-}
-.tittle {
-  font-family: 'Great Vibes' !important;
-  color: #ed2353;
-}
-.subtittle {
-  font-family: 'David Libre' !important;
-  color: #2d2a2a;
-}
-.description {
-  font-family: 'Lora' !important ;
-  color: #777;
 }
 .content-item {
   display: flex;
@@ -1147,8 +958,8 @@ export default {
   box-sizing: border-box;
 }
 .content-products {
+  border-bottom: 0.5px solid var(--color_icon);
   @apply w-full flex flex-col justify-center items-center;
-  border-bottom: 0.5px solid #f2f2f2;
 }
 .content-products-empty {
   width: 100%;
@@ -1164,7 +975,8 @@ export default {
   font-size: 20px;
   color: #3f3f3f;
   font-weight: 600;
-  font-family: 'David Libre' !important;
+  /* font-family: 'David Libre' !important; */
+  font-family: var(--font-style-2);
 }
 .pagination-medium {
   margin-top: 50px;
@@ -1172,44 +984,39 @@ export default {
 }
 .pagination {
   font-size: 18px;
-  color: #3f3f3f;
+  color: var(--pagination_color);
   background: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .btn-next {
-  color: #3f3f3f;
+  color: var(--pagination_color);
   background-color: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .btn-prev {
-  color: #3f3f3f;
+  color: var(--pagination_color);
   background-color: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .el-pager li {
-  color: #3f3f3f;
+  color: var(--pagination_color);
   background-color: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: #ed2353;
+  color: var(--color_icon);
 }
 .product_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: #ed2353;
+  color: var(--color_icon);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled):hover {
-  color: #ed2353;
+  color: var(--color_icon);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled).active {
-  background-color: #ed2353;
+  background-color: var(--color_icon);
   color: white;
-}
-.show-number-items,
-.product-stock,
-.separator-breadCrumbs {
-  cursor: default;
 }
 .crumb {
   @apply w-full flex flex-row justify-start items-start;
@@ -1217,7 +1024,7 @@ export default {
 .txt-crumb {
   font-family: Arial, sans-serif;
   font-size: 12px;
-  color: #b3b3b3;
+  color: var(--color_subtext);
   line-height: 14px;
   padding-right: 6px;
   cursor: pointer;
@@ -1246,7 +1053,7 @@ export default {
 }
 .accordion:after {
   content: '\002B';
-  color: #000;
+  color: var(--color_icon);
   font-weight: bold;
   float: right;
   /* margin-left: 5px; */
@@ -1284,9 +1091,6 @@ export default {
   }
   .content-items-categorias-text {
     @apply justify-center items-center;
-  }
-  .text-categorias-select {
-    @apply w-auto;
   }
   .content-banner-shop {
     @apply justify-start items-start my-32;
@@ -1334,7 +1138,7 @@ export default {
   }
   .top-content {
     display: flex;
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid var(--color_icon);
     padding-top: 0px;
     padding-bottom: 5px;
   }

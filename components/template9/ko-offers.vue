@@ -1,5 +1,15 @@
 <template>
-  <div class="container-offers" :style="[koffers, settingGeneral]">
+  <div
+    class="container-offers"
+    :style="[
+      koffers.values[0],
+      koffers.values[2],
+      settingGeneral,
+      currentSettingByTemplate9.offers[0],
+      currentSettingByTemplate9.offers[2],
+      currentSettingByTemplate9.settingGeneral,
+    ]"
+  >
     <div
       :style="[
         {
@@ -9,25 +19,33 @@
               : 'Poppins',
         },
         {
-          '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
-              : 'Roboto',
+          '--font-style-1':
+            this.currentSettingByTemplate9 &&
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_1
+              ? this.currentSettingByTemplate9.settingGeneral.fount_1
+              : 'Poppins',
         },
       ]"
+      v-if="koffers"
     >
       <div class="content-items show-cont">
-        <nuxt-link to="/productos">
+        <div>
           <div class="items-left">
             <img
               class="image-left"
-              src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612395449/Template9/PromoSale/banner-slider-clean-01_1_bgmlxb.jpg"
+              :src="koffers.values[0].url_img_background"
               alt="image-left"
+              v-if="koffers.values[0].url_img_background"
             />
             <div class="content-txt-left">
               <div class="left">
-                <p class="txt-left">Tendencias:</p>
-                <p class="txt-left">Bolsos Khinkali</p>
+                <p class="txt-left" v-if="koffers.values[0].title">
+                  {{ koffers.values[0].title }}
+                </p>
+                <p class="txt-left" v-if="koffers.values[0].description">
+                  {{ koffers.values[0].description }}
+                </p>
                 <button class="btn-left">
                   <span class="txt-btn-left">{{
                     $t('home_comprarAhora')
@@ -36,7 +54,7 @@
               </div>
             </div>
           </div>
-        </nuxt-link>
+        </div>
 
         <div
           class="items-center"
@@ -46,60 +64,76 @@
           <div class="image-static" v-if="!hover">
             <img
               class="image"
-              src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612395553/Template9/PromoSale/banner-slider-clean-04_1_qpqmbl.jpg"
-              alt=""
+              :src="koffers.values[1].url_img_background"
+              v-if="koffers.values[1].url_img_background"
+              alt="imagen center static"
             />
           </div>
           <div class="image-gif" v-if="hover">
             <img
               class="image"
-              src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612395446/Template9/PromoSale/banner-slider-clean-04-anim_w7x9yw.gif"
-              alt=""
+              :src="koffers.values[1].url_gift_background"
+              v-if="koffers.values[1].url_gift_background"
+              alt="imagen center gift"
             />
           </div>
         </div>
-        <nuxt-link to="/productos">
+        <div>
           <div class="items-right">
             <img
               class="image-right"
-              src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612395445/Template9/PromoSale/banner-slider-clean-03_1_zux8pa.jpg"
+              :src="koffers.values[2].url_img_background"
+              v-if="koffers.values[2].url_img_background"
               alt="image-right"
             />
             <div class="content-txt-right">
               <div class="right">
                 <div class="container">
-                  <p class="txt-right">Podcast:</p>
+                  <p class="txt-right" v-if="koffers.values[2].title">
+                    {{ koffers.values[2].title }}
+                  </p>
                   <div class="overlay-1">
-                    <p class="txt-right">Podcast:</p>
+                    <p class="txt-right" v-if="koffers.values[2].title">
+                      {{ koffers.values[2].title }}
+                    </p>
                   </div>
                 </div>
                 <div class="container">
-                  <p class="txt-right">Partes de mi</p>
+                  <p class="txt-right" v-if="koffers.values[2].description">
+                    {{ koffers.values[2].description }}
+                  </p>
                   <div class="overlay-2">
-                    <p class="txt-right">Partes de mi</p>
+                    <p class="txt-right" v-if="koffers.values[2].description">
+                      {{ koffers.values[2].description }}
+                    </p>
                   </div>
                 </div>
                 <button class="btn-right">
                   <span class="txt-btn-right">{{
-                    $t('home_escuchaAhora')
+                    $t('home_comprarAhora')
                   }}</span>
                 </button>
               </div>
             </div>
           </div>
-        </nuxt-link>
+        </div>
       </div>
       <div class="content-items hid-cont">
         <div class="items-left">
           <img
             class="image-left"
-            src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612395449/Template9/PromoSale/banner-slider-clean-01_1_bgmlxb.jpg"
+            :src="koffers.values[0].url_img_background"
+            v-if="koffers.values[0].url_img_background"
             alt="image-left"
           />
           <div class="content-txt-left">
             <div class="left">
-              <p class="txt-left">Tendencias:</p>
-              <p class="txt-left">Bolsos Khinkali</p>
+              <p class="txt-left" v-if="koffers.values[0].title">
+                {{ koffers.values[0].title }}
+              </p>
+              <p class="txt-left" v-if="koffers.values[0].description">
+                {{ koffers.values[0].description }}
+              </p>
               <button class="btn-left">
                 <span class="txt-btn-left">{{ $t('home_comprarAhora') }}</span>
               </button>
@@ -115,36 +149,47 @@
             <div class="image-static" v-if="!hover">
               <img
                 class="image"
-                src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612395553/Template9/PromoSale/banner-slider-clean-04_1_qpqmbl.jpg"
-                alt=""
+                :src="koffers.values[1].url_img_background"
+                v-if="koffers.values[1].url_img_background"
+                alt="imagen center static"
               />
             </div>
             <div class="image-gif" v-if="hover">
               <img
                 class="image"
-                src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612395446/Template9/PromoSale/banner-slider-clean-04-anim_w7x9yw.gif"
-                alt=""
+                :src="koffers.values[1].url_gift_background"
+                v-if="koffers.values[1].url_gift_background"
+                alt="imagen center gift"
               />
             </div>
           </div>
           <div class="items-right">
             <img
               class="image-right"
-              src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1612395445/Template9/PromoSale/banner-slider-clean-03_1_zux8pa.jpg"
+              :src="koffers.values[2].url_img_background"
+              v-if="koffers.values[2].url_img_background"
               alt="image-right"
             />
             <div class="content-txt-right">
               <div class="right">
                 <div class="container">
-                  <p class="txt-right">Podcast:</p>
+                  <p class="txt-right" v-if="koffers.values[2].title">
+                    {{ koffers.values[2].title }}
+                  </p>
                   <div class="overlay-1">
-                    <p class="txt-right">Podcast:</p>
+                    <p class="txt-right" v-if="koffers.values[2].title">
+                      {{ koffers.values[2].title }}
+                    </p>
                   </div>
                 </div>
                 <div class="container">
-                  <p class="txt-right">Partes de mi</p>
+                  <p class="txt-right" v-if="koffers.values[2].description">
+                    {{ koffers.values[2].description }}
+                  </p>
                   <div class="overlay-2">
-                    <p class="txt-right">Partes de mi</p>
+                    <p class="txt-right" v-if="koffers.values[2].description">
+                      {{ koffers.values[2].description }}
+                    </p>
                   </div>
                 </div>
                 <button class="btn-right">
@@ -164,13 +209,18 @@
 export default {
   props: {
     dataStore: Object,
-    koffers: Array,
+    koffers: Object,
     settingGeneral: Object,
   },
   data() {
     return {
       hover: false,
     }
+  },
+  computed: {
+    currentSettingByTemplate9() {
+      return this.$store.state.currentSettingByTemplate9
+    },
   },
 }
 </script>
@@ -181,8 +231,6 @@ export default {
 .content-items {
   @apply w-full justify-center items-center;
 }
-
-/* ----------------LEFT----------------- */
 .items-left {
   width: 100%;
   height: auto;
@@ -207,13 +255,14 @@ export default {
   overflow: hidden;
 }
 .txt-left {
-  font-family: 'Poppins', sans-serif;
-  color: #303030;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: var(--font-style-1);
+  color: var(--color_title_1);
   font-weight: 700;
   line-height: 1.1;
 }
 .btn-left {
-  background-color: #3d3d3d;
+  background-color: var(--color_background_btn_1);
   width: auto;
   height: 30px;
   font-weight: 800;
@@ -222,7 +271,7 @@ export default {
   transition: all 200ms ease-in;
 }
 .txt-btn-left {
-  color: white;
+  color: var(--color_text_btn_1);
   text-transform: uppercase;
 }
 .content-txt-left {
@@ -235,14 +284,12 @@ export default {
   transition: all 200ms ease-in;
   transform: translateX(10px);
 }
-/* ----------------CENTER----------------- */
 .items-center {
   @apply w-full cursor-pointer;
 }
 .image {
   @apply object-cover w-full;
 }
-/* ----------------RIGHT----------------- */
 .items-right {
   width: 100%;
   height: auto;
@@ -267,14 +314,15 @@ export default {
   overflow: hidden;
 }
 .txt-right {
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: var(--font-style-1);
   width: auto;
-  color: #303030;
+  color: var(--color_title_2);
   font-weight: bold;
   line-height: 1.1;
 }
 .btn-right {
-  background-color: #fff;
+  color: var(--color_background_btn_2);
   width: auto;
   height: 30px;
   font-weight: 800;
@@ -283,7 +331,7 @@ export default {
   transition: all 200ms ease-in;
 }
 .txt-btn-right {
-  color: #3d3d3d;
+  color: var(--color_text_btn_2);
   text-transform: uppercase;
 }
 .content-txt-right {
@@ -320,8 +368,6 @@ export default {
   height: 100%;
   transition: 0.2s ease;
 }
-
-/* ------------------------------------------- */
 @screen sm {
   .content-items {
     @apply grid grid-cols-1;

@@ -5,6 +5,8 @@
     :style="[
       settingByTemplate9[0].setting9Header,
       settingByTemplate9[0].setting9General,
+      currentSettingByTemplate9.header,
+      currentSettingByTemplate9.settingGeneral,
     ]"
   >
     <div
@@ -17,6 +19,14 @@
             this.settingByTemplate9[0].setting9General &&
             this.settingByTemplate9[0].setting9General.fount_1
               ? this.settingByTemplate9[0].setting9General.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-1':
+            this.currentSettingByTemplate9 &&
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_1
+              ? this.currentSettingByTemplate9.settingGeneral.fount_1
               : 'Poppins',
         },
       ]"
@@ -237,6 +247,9 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos.length
     },
+    currentSettingByTemplate9() {
+      return this.$store.state.currentSettingByTemplate9
+    },
   },
   methods: {
     openSearch() {
@@ -310,6 +323,19 @@ export default {
         this.showSearch = false
       }
     },
+    'currentSettingByTemplate9.header'() {
+      let colorBg = ''
+      if (
+        this.currentSettingByTemplate9 &&
+        this.currentSettingByTemplate9.header
+      ) {
+        colorBg = this.currentSettingByTemplate9.header['--background_color_1']
+      }
+      var header = document.getElementById('headerid')
+      var bghead = document.getElementById('headbg')
+      header.style.backgroundColor = colorBg
+      bghead.style.backgroundColor = colorBg
+    },
   },
 }
 </script>
@@ -317,15 +343,15 @@ export default {
 <style scoped>
 .header-container {
   transition: all 0.5s ease-in-out;
-  @apply w-full flex flex-col justify-center items-center fixed top-0 z-10;
   border-bottom: 1px solid var(--background_color_1);
+  @apply w-full flex flex-col justify-center items-center fixed top-0 z-10;
 }
 .wrapper-header {
   @apply flex flex-col w-full justify-between items-center;
 }
 .header {
-  @apply flex w-full justify-between;
   background: var(--background_color_1);
+  @apply flex w-full justify-between;
 }
 .header-item-menu {
   @apply hidden;

@@ -1,12 +1,19 @@
 <template>
-  <div class="wrapper-contact" :style="[settingK07Contact, settingGeneral]">
+  <div
+    class="wrapper-contact"
+    :style="[
+      settingByTemplate7[0].settingK07Contact,
+      settingByTemplate7[0].settingGeneral,
+    ]"
+  >
     <div
       class="contact"
       :style="[
         {
           '--font-style-3':
-            this.settingGeneral && this.settingGeneral.fount_3
-              ? this.settingGeneral.fount_3
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_3
+              ? this.settingByTemplate7[0].settingGeneral.fount_3
               : 'Lora',
         },
       ]"
@@ -166,8 +173,7 @@ export default {
   name: 'Ko-Contact-1',
   props: {
     dataStore: Object,
-    settingGeneral: Object,
-    settingK07Contact: Object,
+    settingByTemplate7: Array,
   },
   components: {
     ValidationObserver,

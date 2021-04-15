@@ -1,32 +1,41 @@
 <template>
-  <div class="product-content" :style="[settingK07ProductList, settingGeneral]">
+  <div
+    class="product-content"
+    :style="[
+      settingByTemplate7[0].settingK07ProductList,
+      settingByTemplate7[0].settingGeneral,
+    ]"
+  >
     <div
       class="content-banner-shop"
       id="BgProductlistF"
       :style="[
         {
           '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_1
+              ? this.settingByTemplate7[0].settingGeneral.fount_1
               : 'David Libre',
         },
         {
           '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_2
+              ? this.settingByTemplate7[0].settingGeneral.fount_2
               : 'Great Vibes',
         },
         {
           '--font-style-3':
-            this.settingGeneral && this.settingGeneral.fount_3
-              ? this.settingGeneral.fount_3
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_3
+              ? this.settingByTemplate7[0].settingGeneral.fount_3
               : 'Lora',
         },
       ]"
     >
       <div class="tittle-banner-shop">
         <p class="btn-tittle-shop">
-          {{ settingK07ProductList.title }}
+          {{ settingByTemplate7[0].settingK07ProductList.title }}
         </p>
       </div>
     </div>
@@ -255,8 +264,10 @@
                     :product="product"
                     v-if="!showinList"
                     class="product-nolist"
-                    :settingGeneral="settingGeneral"
-                    :settingKProdutCard="settingKProdutCard"
+                    :settingGeneral="settingByTemplate7[0].settingGeneral"
+                    :settingKProdutCard="
+                      settingByTemplate7[0].settingKProdutCard
+                    "
                   ></KoProdcutCardFilter>
                   <KoProdcutCardFilerList
                     :product="product"
@@ -314,15 +325,14 @@ export default {
   props: {
     dataStore: Object,
     fullProducts: {},
-    settingGeneral: Object,
-    settingK07ProductList: Object,
-    settingKProdutCard: Object,
+    settingByTemplate7: Array,
   },
   name: 'Ko-ProductList-Filter',
   mounted() {
     if (
-      this.settingK07ProductList &&
-      this.settingK07ProductList.img_background == true
+      this.settingByTemplate7[0] &&
+      this.settingByTemplate7[0].settingK07ProductList &&
+      this.settingByTemplate7[0].settingK07ProductList.img_background == true
     ) {
       this.setBg()
     }
@@ -718,17 +728,18 @@ export default {
       }
     },
     setBg() {
-      if (this.settingK07ProductList.url_img) {
+      if (this.settingByTemplate7[0].settingK07ProductList.url_img) {
         var imagen = document.getElementById('BgProductlistF')
-        imagen.style.backgroundImage = `url(${this.settingK07ProductList.url_img})`
+        imagen.style.backgroundImage = `url(${this.settingByTemplate7[0].settingK07ProductList.url_img})`
       }
     },
   },
   watch: {
     banner() {
       if (
-        this.settingK07ProductList &&
-        this.settingK07ProductList.img_background == true
+        this.settingByTemplate7[0] &&
+        this.settingByTemplate7[0].settingK07ProductList &&
+        this.settingByTemplate7[0].settingK07ProductList.img_background == true
       ) {
         this.setBg()
       }

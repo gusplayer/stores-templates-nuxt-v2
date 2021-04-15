@@ -1,9 +1,26 @@
 <template>
-  <div class="producto">
+  <div
+    class="producto"
+    :style="[blog, settingGeneral, currentblog, currentsettingGeneral]"
+  >
     <div
       class="container"
       @mouseover="hover = true"
       @mouseleave="hover = false"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-1':
+            this.currentsettingGeneral && this.currentsettingGeneral.fount_1
+              ? this.currentsettingGeneral.fount_1
+              : 'Poppins',
+        },
+      ]"
     >
       <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
         <div class="figure-img">
@@ -62,7 +79,13 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-Blogcard',
-  props: { article: Object },
+  props: {
+    article: Object,
+    blog: Object,
+    settingGeneral: Object,
+    currentblog: Object,
+    currentsettingGeneral: Object,
+  },
   mounted() {
     if (this.article.created_at) {
       let domain = this.article.created_at
@@ -122,8 +145,8 @@ export default {
 </script>
 <style scoped>
 .producto {
-  @apply w-full flex flex-col justify-center items-center cursor-pointer;
   background-color: #f8f8f8;
+  @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
 .container {
   @apply relative;
@@ -139,7 +162,6 @@ export default {
   height: 100%;
   width: 100%;
 }
-
 .text-tittle {
   @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
   font: inherit;
@@ -152,7 +174,7 @@ export default {
   text-align: center;
 }
 .content-bottom-titulo {
-  @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -163,7 +185,7 @@ export default {
   text-align: center;
 }
 .content-bottom-autor {
-  @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -179,14 +201,16 @@ export default {
 }
 .txt-day,
 .txt-month {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #333333;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1);
+  color: var(--color_text_date);
   font-weight: 600;
 }
 .txt-tituloart,
 .txt-autorart {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: white;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1);
+  color: var(--color_title_card);
   font-weight: 600;
   text-transform: capitalize;
 }
@@ -195,8 +219,9 @@ export default {
   width: 90px;
 }
 .txt-read {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: white;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1);
+  color: var(--color_title_card);
   font-weight: 600;
 }
 .txt-read:hover {
@@ -215,7 +240,6 @@ export default {
   font-weight: 600;
   /* font-size: 12px; */
 }
-
 .overlay-bottom-shadow {
   @apply absolute overflow-hidden max-w-full max-h-full;
   background: linear-gradient(
@@ -248,7 +272,8 @@ export default {
     font-size: 10px;
   }
   .overlay-top {
-    @apply absolute overflow-hidden shadow-md bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    background-color: var(--color_bg_date);
+    @apply absolute overflow-hidden shadow-md rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 10px;
     left: 10px;
     right: 0;

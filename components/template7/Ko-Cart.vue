@@ -2,9 +2,24 @@
   <div
     class="wrapper-cart"
     ref="color"
-    :style="[settingK07Cart, settingGeneral]"
+    :style="[
+      settingByTemplate7[0].settingK07Cart,
+      settingByTemplate7[0].settingGeneral,
+    ]"
   >
-    <div class="contenedor" v-if="this.productsCart.length">
+    <div
+      class="contenedor"
+      v-if="this.productsCart.length"
+      :style="[
+        {
+          '--font-style-3':
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_3
+              ? this.settingByTemplate7[0].settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <ul class="products_list">
         <li
           v-for="(product, index) in productsCart"
@@ -345,7 +360,7 @@
               >
                 {{ $t('footer_finalizarCompra') }}
               </button>
-              <nuxt-link to="/" class="btn2">
+              <nuxt-link to="/productos" class="btn2">
                 {{ $t('footer_seguirCompra') }}</nuxt-link
               >
             </div>
@@ -380,7 +395,19 @@
         </div>
       </div>
     </div>
-    <div v-else class="contenedor-vacio">
+    <div
+      v-else
+      class="contenedor-vacio"
+      :style="[
+        {
+          '--font-style-3':
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_3
+              ? this.settingByTemplate7[0].settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]"
+    >
       <div class="wrapper_photo">
         <img v-lazy="img" class="photo" alt="Product img" />
       </div>
@@ -401,8 +428,7 @@ export default {
   name: 'Ko-Cart-1',
   props: {
     dataStore: Object,
-    settingGeneral: Object,
-    settingK07Cart: Object,
+    settingByTemplate7: Array,
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
@@ -689,6 +715,7 @@ export default {
   font-weight: bold;
   font-size: 18px;
   color: var(--color_text);
+  font-family: var(--font-style-3);
 }
 .products_item_details {
   display: flex;
@@ -725,16 +752,19 @@ export default {
 .text-variant {
   font-size: 12px;
   color: var(--color_text);
+  font-family: var(--font-style-3);
 }
 .text-result {
   font-size: 14px;
   font-weight: bold;
   color: var(--color_text);
+  font-family: var(--font-style-3);
 }
 .text-tittle {
   font-size: 14px;
   font-weight: bold;
   color: var(--color_subtext);
+  font-family: var(--font-style-3);
 }
 .content_items_quantity {
   display: flex;
@@ -758,6 +788,7 @@ export default {
   font-size: 1em;
   color: var(--color_text);
   border: 2px var(--color_border);
+  font-family: var(--font-style-3);
   padding-left: 10px;
   padding-right: 10px;
   border-style: solid none solid none;
@@ -864,11 +895,13 @@ export default {
   font-weight: bold;
   font-size: 18px;
   color: var(--color_text);
+  font-family: var(--font-style-3);
 }
 .cart_summary_tittle {
   font-size: 14px;
   font-weight: bold;
   color: var(--color_subtext);
+  font-family: var(--font-style-3);
 }
 .scroll_cart_summary_items_cities {
   overflow-y: auto;
@@ -891,11 +924,13 @@ export default {
   font-size: 14px;
   font-weight: bold;
   color: var(--color_text);
+  font-family: var(--font-style-3);
 }
 .cart_summary_items_cities {
   font-size: 14px;
   font-weight: bold;
   color: var(--color_text);
+  font-family: var(--font-style-3);
 }
 .order_total_domicile,
 .order_total_net {
@@ -914,6 +949,7 @@ export default {
 }
 .Quotation-message {
   color: var(--color_text);
+  font-family: var(--font-style-3);
   padding: 8px 12px;
   width: 100%;
   font-size: 14px;
@@ -934,6 +970,7 @@ export default {
   cursor: pointer;
   margin-top: 10px;
   transition: all 200ms ease-in;
+  font-family: var(--font-style-3);
 }
 .btn1:hover {
   border: solid 2px var(--hover_text);
@@ -952,6 +989,7 @@ export default {
   cursor: pointer;
   margin-top: 10px;
   transition: all 200ms ease-in;
+  font-family: var(--font-style-3);
 }
 .btn2:hover {
   color: var(--hover_text);
@@ -979,6 +1017,7 @@ export default {
   cursor: pointer;
   margin-top: 10px;
   transition: all 200ms ease-in;
+  font-family: var(--font-style-3);
 }
 .btn3:hover {
   color: var(--hover_text);

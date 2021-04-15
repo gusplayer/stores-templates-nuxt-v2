@@ -1,17 +1,35 @@
 <template>
   <div>
-    <Kbanner v-bind="componentsProps" v-if="showTemplate9.showBanner" />
-    <Koffers v-bind="componentsProps" v-if="showTemplate9.showOffers" />
+    <Kbanner
+      v-bind="componentsProps"
+      v-if="showTemplate9.showBanner && settingByTemplate9.banner.visible"
+    />
+    <Koffers
+      v-bind="componentsProps"
+      v-if="showTemplate9.showOffers && settingByTemplate9.koffers.visible"
+    />
     <Kproductlist
       v-bind="componentsProps"
-      v-if="showTemplate9.showProductList"
+      v-if="
+        showTemplate9.showProductList && settingByTemplate9.productList.visible
+      "
     />
     <Kblog
       v-bind="componentsProps"
-      v-show="listArticulos.length > 0 && showTemplate9.showBlog"
+      v-show="
+        listArticulos.length > 0 &&
+        showTemplate9.showBlog &&
+        settingByTemplate9.blog.visible
+      "
     />
-    <KWrapper v-bind="componentsProps" v-if="showTemplate9.showWrapper" />
-    <KNews v-bind="componentsProps" v-if="showTemplate9.showNews" />
+    <KWrapper
+      v-bind="componentsProps"
+      v-if="showTemplate9.showWrapper && settingByTemplate9.wrapper.visible"
+    />
+    <KNews
+      v-bind="componentsProps"
+      v-if="showTemplate9.showNews && settingByTemplate9.newsletter.visible"
+    />
   </div>
 </template>
 
@@ -22,9 +40,12 @@ import Kproductlist from '../../components/template9/Ko-ProductList'
 import Kblog from '../../components/template9/ko-blog'
 import KWrapper from '../../components/template9/Ko-wrapper'
 import KNews from '../../components/template9/Ko-Newsletter'
+import showComponent09 from '../../mixins/showComponent'
+import currentSettingByTemplate9 from '../../mixins/currentsetting'
 
 export default {
   layout: 'default',
+  mixins: [showComponent09, currentSettingByTemplate9],
   components: {
     Kbanner,
     Koffers,
@@ -34,99 +55,13 @@ export default {
     KNews,
   },
   mounted() {
+    window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
-    let domain = this.$route.fullPath
-    switch (domain) {
-      case '':
-        this.$store.state.showTemplate9.showHeader09 = true
-        this.$store.state.showTemplate9.showBody09 = true
-        this.$store.state.showTemplate9.showFooter09 = true
-        this.$store.state.showTemplate9.showCountry = true
-        break
-      case '/?component=header09':
-        this.$store.state.showTemplate9.showHeader09 = true
-        this.$store.state.showTemplate9.showBody09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=footer09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showBody09 = false
-        this.$store.state.showTemplate9.showFooter09 = true
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=banner09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = true
-        this.$store.state.showTemplate9.showOffers = false
-        this.$store.state.showTemplate9.showProductList = false
-        this.$store.state.showTemplate9.showBlog = false
-        this.$store.state.showTemplate9.showWrapper = false
-        this.$store.state.showTemplate9.showNews = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=offers09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = false
-        this.$store.state.showTemplate9.showOffers = true
-        this.$store.state.showTemplate9.showProductList = false
-        this.$store.state.showTemplate9.showBlog = false
-        this.$store.state.showTemplate9.showWrapper = false
-        this.$store.state.showTemplate9.showNews = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=productList09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = false
-        this.$store.state.showTemplate9.showOffers = false
-        this.$store.state.showTemplate9.showProductList = true
-        this.$store.state.showTemplate9.showBlog = false
-        this.$store.state.showTemplate9.showWrapper = false
-        this.$store.state.showTemplate9.showNews = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=blog09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = false
-        this.$store.state.showTemplate9.showOffers = false
-        this.$store.state.showTemplate9.showProductList = false
-        this.$store.state.showTemplate9.showBlog = true
-        this.$store.state.showTemplate9.showWrapper = false
-        this.$store.state.showTemplate9.showNews = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=wrapper09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = false
-        this.$store.state.showTemplate9.showOffers = false
-        this.$store.state.showTemplate9.showProductList = false
-        this.$store.state.showTemplate9.showBlog = false
-        this.$store.state.showTemplate9.showWrapper = true
-        this.$store.state.showTemplate9.showNews = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=newsletter09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = false
-        this.$store.state.showTemplate9.showOffers = false
-        this.$store.state.showTemplate9.showProductList = false
-        this.$store.state.showTemplate9.showBlog = false
-        this.$store.state.showTemplate9.showWrapper = false
-        this.$store.state.showTemplate9.showNews = true
-        this.$store.state.showTemplate9.showCountry = false
-        break
-    }
+    // let domain = this.$route.fullPath
+    // this.showComponent09(domain)
   },
   data() {
-    return {
-      search: '',
-    }
+    return {}
   },
   computed: {
     dataStore() {
@@ -161,6 +96,10 @@ export default {
           this.settingByTemplate9 && this.settingByTemplate9.productList
             ? this.settingByTemplate9.productList
             : null,
+        productListCard:
+          this.settingByTemplate9 && this.settingByTemplate9.cardProduct
+            ? this.settingByTemplate9.cardProduct
+            : null,
         blog:
           this.settingByTemplate9 && this.settingByTemplate9.blog
             ? this.settingByTemplate9.blog
@@ -184,100 +123,19 @@ export default {
   },
   methods: {
     addEventListenertemplate(e) {
-      if (e.origin.includes('https://panel.komercia.co')) {
-        alert('Prueba eventListener' + e)
+      // if (e.origin.includes('https://panel.komercia.co')) {
+      if (e && e.data) {
+        this.currentSettingByTemplate9(e.data)
       }
+      // }
     },
   },
-  // eslint-disable-next-line no-unused-vars
-  $route(to, from) {
-    let domain = this.$route.fullPath
-    switch (domain) {
-      case '':
-        this.$store.state.showTemplate9.showHeader09 = true
-        this.$store.state.showTemplate9.showBody09 = true
-        this.$store.state.showTemplate9.showFooter09 = true
-        this.$store.state.showTemplate9.showCountry = true
-        break
-      case '/?component=header09':
-        this.$store.state.showTemplate9.showHeader09 = true
-        this.$store.state.showTemplate9.showBody09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=footer09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showBody09 = false
-        this.$store.state.showTemplate9.showFooter09 = true
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=banner09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = true
-        this.$store.state.showTemplate9.showOffers = false
-        this.$store.state.showTemplate9.showProductList = false
-        this.$store.state.showTemplate9.showBlog = false
-        this.$store.state.showTemplate9.showWrapper = false
-        this.$store.state.showTemplate9.showNews = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=offers09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = false
-        this.$store.state.showTemplate9.showOffers = true
-        this.$store.state.showTemplate9.showProductList = false
-        this.$store.state.showTemplate9.showBlog = false
-        this.$store.state.showTemplate9.showWrapper = false
-        this.$store.state.showTemplate9.showNews = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=productList09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = false
-        this.$store.state.showTemplate9.showOffers = false
-        this.$store.state.showTemplate9.showProductList = true
-        this.$store.state.showTemplate9.showBlog = false
-        this.$store.state.showTemplate9.showWrapper = false
-        this.$store.state.showTemplate9.showNews = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=blog09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = false
-        this.$store.state.showTemplate9.showOffers = false
-        this.$store.state.showTemplate9.showProductList = false
-        this.$store.state.showTemplate9.showBlog = true
-        this.$store.state.showTemplate9.showWrapper = false
-        this.$store.state.showTemplate9.showNews = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=wrapper09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = false
-        this.$store.state.showTemplate9.showOffers = false
-        this.$store.state.showTemplate9.showProductList = false
-        this.$store.state.showTemplate9.showBlog = false
-        this.$store.state.showTemplate9.showWrapper = true
-        this.$store.state.showTemplate9.showNews = false
-        this.$store.state.showTemplate9.showCountry = false
-        break
-      case '/?component=newsletter09':
-        this.$store.state.showTemplate9.showHeader09 = false
-        this.$store.state.showTemplate9.showFooter09 = false
-        this.$store.state.showTemplate9.showBanner = false
-        this.$store.state.showTemplate9.showOffers = false
-        this.$store.state.showTemplate9.showProductList = false
-        this.$store.state.showTemplate9.showBlog = false
-        this.$store.state.showTemplate9.showWrapper = false
-        this.$store.state.showTemplate9.showNews = true
-        this.$store.state.showTemplate9.showCountry = false
-        break
-    }
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    // $route(to, from) {
+    //   let domain = this.$route.fullPath
+    //   this.showComponent09(domain)
+    // },
   },
 }
 </script>

@@ -334,7 +334,7 @@
         <img v-lazy="img" class="photo" alt="Product img" />
       </div>
       <p>{{ $t('footer_carritoVacio') }}</p>
-      <nuxt-link to="/">
+      <nuxt-link to="/productos">
         <button ref="colorBtn" class="btn3">
           {{ $t('cart_agregarProductos') }}
         </button>
@@ -576,7 +576,7 @@ export default {
 
 <style scoped>
 .content-cart {
-  @apply w-full flex flex-col justify-center items-center mb-30;
+  @apply w-full flex flex-col justify-center items-center pb-30 pt-50;
 }
 .conten-items-cart {
   @apply flex flex-col justify-center items-center;
@@ -706,6 +706,45 @@ export default {
 }
 .quantity {
   @apply flex flex-row justify-center items-center;
+}
+.contenedor-vacio {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 480px);
+  max-width: 1300px;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  justify-content: center;
+}
+.wrapper_photo {
+  position: relative;
+  max-width: 600px;
+  max-height: 600px;
+}
+.photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+.btn3 {
+  border-radius: var(--radius_btn);
+  color: var(--color_background_btn);
+  border: solid 2px var(--color_background_btn);
+  background-color: transparent;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 200ms ease-in;
+}
+.btn3:hover {
+  color: var(--btnhover);
+  border: solid 2px var(--btnhover);
 }
 @screen sm {
   .content-cart {

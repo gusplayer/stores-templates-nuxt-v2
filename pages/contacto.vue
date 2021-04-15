@@ -69,23 +69,48 @@ export default {
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
     },
+    settingByTemplate9() {
+      return this.$store.state.settingByTemplate9
+    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        settingGeneral:
-          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
-            ? this.settingByTemplate7.settingGeneral
-            : null,
-        settingK07Contact:
-          this.settingByTemplate7 && this.settingByTemplate7.contact
-            ? this.settingByTemplate7.contact
-            : null,
         settingK05Contact:
           this.settingByTemplate &&
           this.settingByTemplate.settings &&
           this.settingByTemplate.settings['--background_color_1']
             ? this.settingByTemplate.settings
             : this.settingBase,
+        settingByTemplate7: this.settingByTemplate7
+          ? [
+              {
+                settingK07Contact:
+                  this.settingByTemplate7 && this.settingByTemplate7.contact
+                    ? this.settingByTemplate7.contact
+                    : null,
+                settingGeneral:
+                  this.settingByTemplate7 &&
+                  this.settingByTemplate7.settingGeneral
+                    ? this.settingByTemplate7.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate9: this.settingByTemplate9
+          ? [
+              {
+                cardProduct:
+                  this.settingByTemplate9 && this.settingByTemplate9.contact
+                    ? this.settingByTemplate9.contact
+                    : null,
+                setting9General:
+                  this.settingByTemplate9 &&
+                  this.settingByTemplate9.settingGeneral
+                    ? this.settingByTemplate9.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
       }
     },
   },

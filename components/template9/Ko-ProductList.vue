@@ -1,5 +1,13 @@
 <template>
-  <div class="product-content" :style="[productList, settingGeneral]">
+  <div
+    class="product-content"
+    :style="[
+      productList,
+      settingGeneral,
+      currentSettingByTemplate9.productList,
+      currentSettingByTemplate9.settingGeneral,
+    ]"
+  >
     <div
       class="producto-items-content"
       id="section"
@@ -16,11 +24,25 @@
               ? this.settingGeneral.fount_2
               : 'Roboto',
         },
+        {
+          '--font-style-1':
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_1
+              ? this.currentSettingByTemplate9.settingGeneral.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-2':
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_2
+              ? this.currentSettingByTemplate9.settingGeneral.fount_2
+              : 'Roboto',
+        },
       ]"
     >
       <div class="product-text">
         <div class="product-tittle">
-          <span class="tittle">Selecciones de esta semana</span>
+          <span class="tittle">{{ productList.title }}</span>
         </div>
       </div>
       <div class="content-item">
@@ -31,7 +53,11 @@
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard :product="product"></KoProductCard>
+              <KoProductCard
+                :product="product"
+                :productListCard="productListCard"
+                :settingGeneral="settingGeneral"
+              ></KoProductCard>
             </div>
           </div>
           <nuxt-link to="/productos" class="cont-product">
@@ -73,6 +99,7 @@ export default {
     fullProducts: {},
     productList: Object,
     settingGeneral: Object,
+    productListCard: Object,
   },
   name: 'Ko-ProductList',
   mounted() {
@@ -84,6 +111,9 @@ export default {
   computed: {
     listProducts() {
       return this.fullProducts.slice(0, 8)
+    },
+    currentSettingByTemplate9() {
+      return this.$store.state.currentSettingByTemplate9
     },
   },
   methods: {
@@ -110,7 +140,8 @@ export default {
 
 <style scoped>
 .product-content {
-  @apply flex flex-col justify-center items-center w-full my-70;
+  background: var(--background_color_1);
+  @apply flex flex-col justify-center items-center w-full pt-70;
 }
 .producto-items-content {
   @apply w-full flex flex-col justify-center items-center text-center;
@@ -129,8 +160,9 @@ export default {
   @apply mb-40;
 }
 .tittle {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #333333;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1);
+  color: var(--color_title);
   font-weight: 700;
 }
 .content-item {
@@ -160,23 +192,24 @@ export default {
 .txt-products-empty {
   @apply mt-6;
   font-size: 20px;
-  color: #3f3f3f;
+  color: var(--color_title);
   font-weight: 600;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1);
 }
-
 .btn-products {
   @apply px-5;
   margin-top: 80px;
   width: auto;
   height: 45px;
-  border: 2px solid #2c2930;
-  color: #2c2930;
+  border: 2px solid var(--color_background_btn);
+  color: var(--color_text_btn);
   font-size: 15px;
   font-weight: 800;
   letter-spacing: 1px;
   transition: all 150ms ease-in;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2);
 }
 .btn-products:hover {
   color: #fff;

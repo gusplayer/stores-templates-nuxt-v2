@@ -1,5 +1,13 @@
 <template>
-  <div class="wrapper-content" :style="[blog, settingGeneral]">
+  <div
+    class="wrapper-content"
+    :style="[
+      blog,
+      settingGeneral,
+      currentSettingByTemplate9.blog,
+      currentSettingByTemplate9.settingGeneral,
+    ]"
+  >
     <div
       :style="[
         {
@@ -9,17 +17,18 @@
               : 'Poppins',
         },
         {
-          '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
-              : 'Roboto',
+          '--font-style-1':
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_1
+              ? this.currentSettingByTemplate9.settingGeneral.fount_1
+              : 'Poppins',
         },
       ]"
     >
       <div class="wrapper-items-content">
         <div class="product-text">
           <div class="product-tittle">
-            <span class="tittle">Desde el blog</span>
+            <span class="tittle">{{ blog.title }}</span>
           </div>
         </div>
       </div>
@@ -31,7 +40,16 @@
               :key="article.id"
               :class="`swiper-slide wrapper-${index + 1}`"
             >
-              <Kblog v-if="article.estado == 1" :article="article"></Kblog>
+              <Kblog
+                v-if="article.estado == 1"
+                :article="article"
+                :blog="blog"
+                :settingGeneral="settingGeneral"
+                :currentblog="currentSettingByTemplate9.blog"
+                :currentsettingGeneral="
+                  currentSettingByTemplate9.settingGeneral
+                "
+              ></Kblog>
             </div>
           </div>
         </div>
@@ -105,6 +123,9 @@ export default {
         return this.listArticulos
       }
     },
+    currentSettingByTemplate9() {
+      return this.$store.state.currentSettingByTemplate9
+    },
   },
   mounted() {
     this.mySwiper.slideTo(3, 1000, false)
@@ -116,9 +137,7 @@ export default {
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
+  background-color: var(--background_color_1);
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -133,9 +152,9 @@ export default {
   align-items: center;
 }
 .wrapper-content {
+  background-color: var(--background_color_1);
   @apply flex flex-col justify-center items-center w-full;
   padding-bottom: 64px;
-  background-color: #f8f8f8;
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;
@@ -152,8 +171,9 @@ export default {
 }
 .tittle {
   @apply flex flex-col justify-center items-center;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #333333;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1);
+  color: var(--color_title);
   font-weight: 700;
 }
 @screen sm {

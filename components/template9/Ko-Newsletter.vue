@@ -1,5 +1,13 @@
 <template>
-  <div class="wrapper_newsletter" :style="[newsletter, settingGeneral]">
+  <div
+    class="wrapper_newsletter"
+    :style="[
+      newsletter,
+      settingGeneral,
+      currentSettingByTemplate9.news,
+      currentSettingByTemplate9.settingGeneral,
+    ]"
+  >
     <div
       :style="[
         {
@@ -12,6 +20,22 @@
           '--font-style-2':
             this.settingGeneral && this.settingGeneral.fount_2
               ? this.settingGeneral.fount_2
+              : 'Roboto',
+        },
+        {
+          '--font-style-1':
+            this.currentSettingByTemplate9 &&
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_1
+              ? this.currentSettingByTemplate9.settingGeneral.fount_1
+              : 'Poppins',
+        },
+        {
+          '--font-style-2':
+            this.currentSettingByTemplate9 &&
+            this.currentSettingByTemplate9.settingGeneral &&
+            this.currentSettingByTemplate9.settingGeneral.fount_2
+              ? this.currentSettingByTemplate9.settingGeneral.fount_2
               : 'Roboto',
         },
       ]"
@@ -123,6 +147,9 @@ export default {
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
     },
+    currentSettingByTemplate9() {
+      return this.$store.state.currentSettingByTemplate9
+    },
   },
   methods: {
     submitNewsletter() {
@@ -168,15 +195,16 @@ export default {
 
 <style scoped>
 .wrapper_newsletter {
+  background-color: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
-  background-color: #f8f8f8;
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;
 }
 .content-bttns-shop {
+  background-color: var(--color_background_btn);
+  width: 100%;
   @apply mr-2 shadow-md justify-center items-center flex;
-  background-color: #2c2930;
   padding: 12px 20px;
   transition: all 0.2s ease-out;
 }
@@ -185,20 +213,22 @@ export default {
   transition: all 0.2s ease-out;
 }
 .content-textbutton-shop {
+  color: var(--color_text_btn);
   @apply text-white-white;
   font-size: 16px;
   letter-spacing: 1px;
   font-weight: 800;
   white-space: nowrap;
   line-height: 18px;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2);
 }
 .content-bttns-shop:hover .content-textbutton-shop {
   color: #2c2930;
   transition: all 0.2s ease-out;
 }
 .wrapper-items {
-  @apply flex justify-center;
+  @apply flex flex-col justify-center;
 }
 .conten-input-check {
   @apply w-full flex flex-col justify-center items-center;
@@ -210,13 +240,15 @@ export default {
   @apply w-full flex justify-start items-center;
 }
 .input-text {
+  color: var(--color_title);
+  border-bottom: 3px solid #e0e0e0;
   @apply flex justify-start items-center;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2);
   padding: 0 25px;
   width: 100%;
   height: 42px;
   font-size: 14px;
-  border-bottom: 3px solid #e0e0e0;
   transition: border-color 0.6s ease;
   background-color: transparent;
 }
@@ -229,7 +261,8 @@ export default {
   opacity: 0.7;
 }
 .text-error {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2);
   font-size: 12px;
   color: #ed2353;
   width: auto;
@@ -244,10 +277,11 @@ export default {
   @apply w-full flex justify-start items-center ml-8 mt-2;
 }
 .text-checkbox {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2);
   margin-left: 5px;
   font-size: 13px;
-  color: #2c2930;
+  color: var(--color_title);
 }
 #checkbox:focus {
   background-color: #2c2930;
@@ -259,9 +293,10 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .tittle {
+  color: var(--color_title);
   @apply flex flex-col justify-center items-center;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #1d1d1d;
+  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-1);
   font-weight: 700;
 }
 .icon-msg {
@@ -274,13 +309,9 @@ export default {
   @apply w-full flex flex-row;
 }
 @screen sm {
-  .wrapper-items-content {
-    @apply w-9/5;
-  }
   .wrapper-items {
-    @apply w-9/5 flex flex-col mb-12;
+    @apply flex flex-col mb-12;
   }
-
   .content-checkbox {
     @apply ml-0;
   }
@@ -305,31 +336,27 @@ export default {
   .img-wrapp {
     width: 100%;
   }
-  .wrapper-items {
-    width: 90vw;
-  }
 }
 @screen md {
   .wrapper-items {
-    @apply flex-row;
+    @apply flex-row items-start;
   }
   .content-button {
     @apply justify-start;
   }
-  .wrapper-items {
-    @apply w-6/0 items-start;
-  }
 }
 @screen mlg {
-  .wrapper-items-content {
-    @apply w-9/3;
-  }
   .wrapper-items {
     @apply w-auto;
   }
   .tittle {
     line-height: 34px;
     font-size: 36px;
+  }
+}
+@media (max-width: 500px) {
+  .wrapper_newsletter {
+    padding: 0 10px 0 10px;
   }
 }
 </style>

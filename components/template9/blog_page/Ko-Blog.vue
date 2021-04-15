@@ -1,6 +1,20 @@
 <template>
-  <div class="wrapper_error">
-    <div class="banner-blog">
+  <div
+    class="wrapper_blog"
+    :style="[settingByTemplate9[0].blog, settingByTemplate9[0].settingGeneral]"
+  >
+    <div
+      class="banner-blog"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate9[0].settingGeneral &&
+            this.settingByTemplate9[0].settingGeneral.fount_1
+              ? this.settingByTemplate9[0].settingGeneral.fount_1
+              : 'Poppins',
+        },
+      ]"
+    >
       <div class="crumb">
         <nuxt-link to="/">
           <p class="txt-crumb s1">Home</p>
@@ -12,7 +26,18 @@
         <p class="txt-banner">{{ $t('header_blog') }}</p>
       </div>
     </div>
-    <div class="contenedor">
+    <div
+      class="contenedor"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate9[0].settingGeneral &&
+            this.settingByTemplate9[0].settingGeneral.fount_1
+              ? this.settingByTemplate9[0].settingGeneral.fount_1
+              : 'Poppins',
+        },
+      ]"
+    >
       <div class="content-search-blog">
         <div class="text-search">
           <p class="title">Buscar Articulo</p>
@@ -58,6 +83,8 @@
               <KoblogCard
                 v-if="article.estado == 1"
                 :article="article"
+                :blog="settingByTemplate9[0].blog"
+                :settingGeneral="settingByTemplate9[0].settingGeneral"
               ></KoblogCard>
             </div>
           </div>
@@ -91,7 +118,7 @@
   </div>
 </template>
 <script>
-import KoblogCard from '../../../components/template9/blog_page/_blogcard/ko-blogcard'
+import KoblogCard from '../../../components/template9/_blog/blogcard'
 export default {
   name: 'Ko-Blog',
   components: {
@@ -99,6 +126,7 @@ export default {
   },
   props: {
     dataStore: Object,
+    settingByTemplate9: Array,
   },
   data() {
     return {
@@ -130,11 +158,11 @@ export default {
 }
 </script>
 <style scoped>
-.wrapper_error {
+.wrapper_blog {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: white;
+  background: var(--background_color_1);
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -202,8 +230,9 @@ export default {
   color: white;
 }
 .txt-banner {
-  color: #333333;
-  font-family: 'Poppins' !important ;
+  color: var(--color_title);
+  /* font-family: 'Poppins' !important ; */
+  font-family: var(--font-style-1);
   font-weight: 700;
 }
 .tittle-banner-blog {
@@ -226,7 +255,8 @@ export default {
 }
 .title {
   font-size: 25px;
-  font-family: 'Poppins' !important ;
+  /* font-family: 'Poppins' !important ; */
+  font-family: var(--font-style-1);
   font-weight: bold;
   color: #2c2930;
   margin-bottom: 20px;
@@ -287,7 +317,8 @@ export default {
   font-size: 0px;
   transition: 0.4s;
   width: 0px;
-  font-family: 'Poppins' !important ;
+  /* font-family: 'Poppins' !important ; */
+  font-family: var(--font-style-1);
 }
 .input-text:focus {
   border: none;
