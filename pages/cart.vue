@@ -8,7 +8,7 @@
 import K05Cart from '../components/template5/Ko-Cart-1'
 import K07Cart from '../components/template7/Ko-Cart'
 import K09Cart from '../components/template9/Ko-Cart'
-import K10Cart from '../components/template10/ko-cart'
+import K10Cart from '../components/template10/Ko-Cart'
 import K11Cart from '../components/template11/ko-cart'
 
 export default {
