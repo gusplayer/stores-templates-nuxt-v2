@@ -19,6 +19,7 @@ import K05ProductList from '../../components/template6/Ko6-ProductList-2'
 import K07ProductList from '../../components/template7/Ko-ProductListFilter'
 import K09ProductList from '../../components/template9/Ko-ProductListFilter'
 import K10ProductList from '../../components/template10/Ko-ProductListFilter'
+import K11ProductList from '../../components/template11/ko-ProductListFilter'
 
 export default {
   components: {
@@ -26,6 +27,7 @@ export default {
     K07ProductList,
     K09ProductList,
     K10ProductList,
+    K11ProductList,
   },
   computed: {
     dataStore() {
@@ -63,6 +65,9 @@ export default {
           break
         case 10:
           productListComponent = 'K10ProductList'
+          break
+        case 11:
+          productListComponent = 'K11ProductList'
           break
       }
       return productListComponent

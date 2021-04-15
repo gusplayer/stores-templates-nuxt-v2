@@ -9,10 +9,11 @@ import K05Blog from '../../components/blog/Ko-Blog'
 import K07Blog from '../../components/template7/blog_page/Ko-Blog'
 import K09Blog from '../../components/template9/blog_page/Ko-Blog'
 import K10Blog from '../../components/template10/blog_page/Ko-Blog'
+import K11Blog from '../../components/template11/blog_page/Ko-Blog'
 
 export default {
   layout: 'default',
-  components: { K05Blog, K07Blog, K09Blog, K10Blog },
+  components: { K05Blog, K07Blog, K09Blog, K10Blog, K11Blog },
   computed: {
     dataStore() {
       return this.$store.state.dataStore
@@ -46,6 +47,9 @@ export default {
           break
         case 10:
           productListComponent = 'K10Blog'
+          break
+        case 11:
+          productListComponent = 'K11Blog'
           break
       }
       return productListComponent
