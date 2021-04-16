@@ -7,6 +7,7 @@
       currentSettingByTemplate9.productList,
       currentSettingByTemplate9.settingGeneral,
     ]"
+    v-if="this.listProducts.length > 0"
   >
     <div
       class="producto-items-content"
@@ -65,22 +66,6 @@
               {{ $t('home_allproducts') }}
             </button>
           </nuxt-link>
-          <div
-            v-if="(this.listProducts.length == 0)"
-            class="content-products-empty"
-          >
-            <div class="header-content-logo">
-              <nuxt-link to="/productos" class="wrapper-logo">
-                <img
-                  :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-                  class="header-logo"
-                  alt="Logo Img"
-                  @click="clear"
-                />
-              </nuxt-link>
-            </div>
-            <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
-          </div>
         </div>
       </div>
     </div>
@@ -179,23 +164,6 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-.content-products-empty {
-  width: 100%;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.txt-products-empty {
-  @apply mt-6;
-  font-size: 20px;
-  color: var(--color_title);
-  font-weight: 600;
-  /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-1);
 }
 .btn-products {
   @apply px-5;

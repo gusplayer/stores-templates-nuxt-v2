@@ -2,16 +2,29 @@
   <div>
     <Kbanner
       v-bind="componentsProps"
-      v-if="showTemplate9.showBanner && settingByTemplate9.banner.visible"
+      v-if="
+        showTemplate9.showBanner &&
+        settingByTemplate9 &&
+        settingByTemplate9.banner &&
+        settingByTemplate9.banner.visible
+      "
     />
     <Koffers
       v-bind="componentsProps"
-      v-if="showTemplate9.showOffers && settingByTemplate9.koffers.visible"
+      v-if="
+        showTemplate9.showOffers &&
+        settingByTemplate9 &&
+        settingByTemplate9.koffers &&
+        settingByTemplate9.koffers.visible
+      "
     />
     <Kproductlist
       v-bind="componentsProps"
       v-if="
-        showTemplate9.showProductList && settingByTemplate9.productList.visible
+        showTemplate9.showProductList &&
+        settingByTemplate9 &&
+        settingByTemplate9.productList &&
+        settingByTemplate9.productList.visible
       "
     />
     <Kblog
@@ -19,16 +32,28 @@
       v-show="
         listArticulos.length > 0 &&
         showTemplate9.showBlog &&
+        settingByTemplate9 &&
+        settingByTemplate9.blog &&
         settingByTemplate9.blog.visible
       "
     />
     <KWrapper
       v-bind="componentsProps"
-      v-if="showTemplate9.showWrapper && settingByTemplate9.wrapper.visible"
+      v-if="
+        showTemplate9.showWrapper &&
+        settingByTemplate9 &&
+        settingByTemplate9.wrapper &&
+        settingByTemplate9.wrapper.visible
+      "
     />
     <KNews
       v-bind="componentsProps"
-      v-if="showTemplate9.showNews && settingByTemplate9.newsletter.visible"
+      v-if="
+        showTemplate9.showNews &&
+        settingByTemplate9 &&
+        settingByTemplate9.newsletter &&
+        settingByTemplate9.newsletter.visible
+      "
     />
   </div>
 </template>

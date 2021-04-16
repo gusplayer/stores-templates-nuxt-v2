@@ -455,6 +455,11 @@ export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductDetail-1',
   props: {
+    dataStore: Object,
+    productsData: Array,
+    whatsapp: String,
+    envios: Object,
+    facebooPixel: Object,
     settingByTemplate: Object,
   },
   components: {
@@ -533,12 +538,6 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    productsData() {
-      return this.dataStore.productos
-    },
     existPayments() {
       const mediospago = this.dataStore.medios_pago
       if (
@@ -552,14 +551,8 @@ export default {
       }
       return false
     },
-    modalPayment() {
-      return this.$store.state.togglePayment
-    },
     beforeCombination() {
       return this.$store.state.beforeCombination
-    },
-    envios() {
-      return this.dataStore.medios_envio
     },
     precio() {
       if (this.data.detalle.precio) {
@@ -568,9 +561,6 @@ export default {
           .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
     },
-    whatsapp() {
-      return this.dataStore.tienda.whatsapp
-    },
     category() {
       return this.productsData.filter(
         (product) =>
@@ -578,9 +568,6 @@ export default {
             this.data.detalle.categoria_producto.nombre_categoria_producto &&
           product.id !== this.data.detalle.id
       )
-    },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {

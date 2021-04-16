@@ -1,15 +1,6 @@
 <template lang="html">
   <div class="home">
-    <component
-      :is="indexTemplate"
-      :style="
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings['--background_color_1']
-          ? this.settingByTemplate.settings
-          : this.settingBase
-      "
-    />
+    <component :is="indexTemplate" v-bind="componentsProps" />
   </div>
 </template>
 
@@ -64,6 +55,82 @@ export default {
           break
       }
       return productListComponent
+    },
+    settingByTemplate7() {
+      return this.$store.state.settingByTemplate7
+    },
+    settingByTemplate9() {
+      return this.$store.state.settingByTemplate9
+    },
+    dataStore() {
+      return this.$store.state.dataStore
+    },
+    productsData() {
+      return this.dataStore.productos
+    },
+    whatsapp() {
+      return this.dataStore.tienda.whatsapp
+    },
+    envios() {
+      return this.dataStore.medios_envio
+    },
+    integracioneStore() {
+      return this.$store.state.analytics_tagmanager
+    },
+    componentsProps() {
+      return {
+        dataStore: this.dataStore,
+        productsData: this.productsData,
+        whatsapp: this.whatsapp,
+        envios: this.envios,
+        facebooPixel: this.integracioneStore,
+        settingByTemplate:
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings['--background_color_1']
+            ? this.settingByTemplate.settings
+            : this.settingBase,
+        settingByTemplate7: this.settingByTemplate7
+          ? [
+              {
+                settingGeneral:
+                  this.settingByTemplate7 &&
+                  this.settingByTemplate7.settingGeneral
+                    ? this.settingByTemplate7.settingGeneral
+                    : null,
+                settingK07DetailsProduct:
+                  this.settingByTemplate7 &&
+                  this.settingByTemplate7.detailsProduct
+                    ? this.settingByTemplate7.detailsProduct
+                    : null,
+                settingKProdutCard:
+                  this.settingByTemplate7 && this.settingByTemplate7.card
+                    ? this.settingByTemplate7.card
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate9: this.settingByTemplate9
+          ? [
+              {
+                cardProduct:
+                  this.settingByTemplate9 && this.settingByTemplate9.cardProduct
+                    ? this.settingByTemplate9.cardProduct
+                    : null,
+                detailsProduct:
+                  this.settingByTemplate9 &&
+                  this.settingByTemplate9.detailsProduct
+                    ? this.settingByTemplate9.detailsProduct
+                    : null,
+                setting9General:
+                  this.settingByTemplate9 &&
+                  this.settingByTemplate9.settingGeneral
+                    ? this.settingByTemplate9.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
+      }
     },
   },
 }

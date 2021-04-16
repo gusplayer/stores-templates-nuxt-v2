@@ -274,11 +274,11 @@ export default {
 .description {
   display: flex;
   width: 100%;
-  border-bottom: 1px solid rgba(127, 127, 139, 0.342);
+  border-bottom: 1px solid var(--color_border);
 }
 .description div {
   /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_description);
   line-height: 1.5;
 }
 .left {
@@ -299,11 +299,11 @@ export default {
   padding-bottom: 10px;
 }
 .content-tittle-description {
-  @apply w-full justify-start items-start;
   margin-top: 20px;
+  @apply w-full justify-start items-start;
 }
 .tittle-description {
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_description);
   margin-top: 20px;
   margin-bottom: 20px;
   /* color: var(--color_subtext); */
@@ -311,7 +311,7 @@ export default {
   text-transform: uppercase;
   align-self: flex-start;
   font-weight: bold;
-  font-family: 'Lora' !important;
+  font-family: var(--font-style-3);
 }
 .content_product_description {
   display: flex;
@@ -323,10 +323,9 @@ export default {
   font-size: 14px;
   line-height: 1.6;
   margin-bottom: 20px;
-  font-family: 'Lora' !important;
-  color: #777;
+  font-family: var(--font-style-3);
+  color: var(--color_description);
 }
-
 .right {
   flex: 1;
   display: flex;
@@ -334,16 +333,16 @@ export default {
   flex-direction: column;
   padding-bottom: 10px;
   /* border-left: 1px solid var(--color_border); */
-  border-left: 1px solid rgba(127, 127, 139, 0.342);
+  border-left: 1px solid var(--color_border);
 }
 .title-section {
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_description);
   /* color: var(--color_subtext); */
   font-size: 15px;
   text-transform: uppercase;
   align-self: flex-start;
   font-weight: bold;
-  font-family: 'Lora' !important;
+  font-family: var(--font-style-3);
 }
 .right img {
   max-width: 320px;
@@ -356,13 +355,13 @@ export default {
   margin-top: 20px;
 }
 .text-desc {
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_description);
   /* color: var(--color_subtext); */
   font-size: 15px;
   text-transform: uppercase;
   align-self: flex-start;
   margin-top: 20px;
-  font-family: 'Lora' !important;
+  font-family: var(--font-style-3);
 }
 .content-text-desc {
   margin-right: 25px;
@@ -370,33 +369,33 @@ export default {
   min-height: 300px;
 }
 .wrapper-comments {
-  border-top: 1px solid rgba(127, 127, 139, 0.342);
+  border-top: 1px solid var(--color_border);
   width: 100%;
 }
 .text-method-payment {
   font-size: 14px;
-  font-family: 'Lora' !important;
+  font-family: var(--font-style-3);
 }
 h3 {
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_description);
   /* color: var(--color_subtext); */
   font-size: 15px;
   text-transform: uppercase;
   align-self: flex-start;
-  font-family: 'Lora' !important;
+  font-family: var(--font-style-3);
 }
 h4 {
   margin-top: 15px;
   font-weight: bold;
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_description);
   /* color: var(--color_subtext); */
   margin-bottom: 5px;
-  font-family: 'Lora' !important;
+  font-family: var(--font-style-3);
 }
 li p {
   line-height: 1.4;
   font-size: 14px;
-  font-family: 'Lora' !important;
+  font-family: var(--font-style-3);
 }
 .icon {
   width: 50px;
@@ -415,7 +414,7 @@ li p {
 }
 .line {
   /* border-top: 1px solid var(--color_border); */
-  border-top: 1px solid rgba(127, 127, 139, 0.342);
+  border-top: 1px solid var(--color_border);
   width: 100%;
 }
 .deliverys {
@@ -448,12 +447,12 @@ li p {
 .capitalize {
   text-transform: capitalize;
   font-weight: 600 !important;
-  font-family: 'Lora' !important;
+  font-family: var(--font-style-3);
 }
 .description-method {
   line-height: 1.4;
   font-size: 14px;
-  font-family: 'Lora' !important;
+  font-family: var(--font-style-3);
 }
 .price {
   margin-top: 10px;
@@ -520,7 +519,7 @@ li p {
     border-left: 0px;
   }
   .content-text-desc {
-    border-bottom: 1px solid rgba(127, 127, 139, 0.342);
+    border-bottom: 1px solid var(--color_border);
     padding-bottom: 20px;
     min-height: 0;
   }
@@ -532,7 +531,7 @@ li p {
   }
   .line-comments {
     display: initial;
-    border-top: 1px solid rgba(127, 127, 139, 0.342);
+    border-top: 1px solid var(--color_border);
     width: 100%;
   }
 }
@@ -560,7 +559,7 @@ li p {
   }
   .payments {
     /* border-top: 1px solid var(--color_border); */
-    border-top: 1px solid rgba(127, 127, 139, 0.342);
+    border-top: 1px solid var(--color_border);
     margin-bottom: 10px;
     padding-right: 15px;
     padding-left: 15px;

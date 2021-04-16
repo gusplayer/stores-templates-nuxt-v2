@@ -189,9 +189,6 @@ import idCloudinary from '../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductDetail-valienta',
-  props: {
-    settingByTemplate: Object,
-  },
   components: {
     // selectGroup,
     productSlide,

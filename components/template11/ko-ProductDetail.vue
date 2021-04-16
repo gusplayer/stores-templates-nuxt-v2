@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-productDetail" :style="settingByTemplate">
+  <div class="wrapper-productDetail">
     <div class="container-productDetail-loading" v-if="loading"></div>
     <div class="container-productDetail" v-else>
       <div class="banner-detail">
@@ -285,7 +285,7 @@
 import axios from 'axios'
 import ProductSlide from './_productdetails/productSlide'
 import SelectGroup from './_productdetails/selectGroup'
-import OptionAcordion from './_productdetails/OptAcordion'
+// import OptionAcordion from './_productdetails/OptAcordion'
 import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
 import Zoom from './_productdetails/zoomImg'
@@ -295,10 +295,14 @@ export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductDetail',
   props: {
-    settingByTemplate: Object,
+    dataStore: Object,
+    productsData: Array,
+    whatsapp: String,
+    envios: Object,
+    facebooPixel: Object,
   },
   components: {
-    OptionAcordion,
+    // OptionAcordion,
     OptionTab,
     SelectGroup,
     KoSuggesProduct,
@@ -392,12 +396,6 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    productsData() {
-      return this.dataStore.productos
-    },
     existPayments() {
       const mediospago = this.dataStore.medios_pago
       if (
@@ -417,9 +415,8 @@ export default {
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
-    envios() {
-      return this.dataStore.medios_envio
-    },
+
+    // eslint-disable-next-line vue/return-in-computed-property
     precio() {
       if (this.data.detalle.precio) {
         return `$${this.data.detalle.precio
@@ -427,9 +424,7 @@ export default {
           .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
     },
-    whatsapp() {
-      return this.dataStore.tienda.whatsapp
-    },
+
     category() {
       return this.productsData.filter(
         (product) =>
@@ -437,9 +432,6 @@ export default {
             this.data.detalle.categoria_producto.nombre_categoria_producto &&
           product.id !== this.data.detalle.id
       )
-    },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {
@@ -679,10 +671,10 @@ export default {
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
     },
-    productsData(value) {
+    productsData() {
       this.getDataProduct()
     },
-    envios(value) {
+    envios() {
       this.setOptionEnvio()
     },
     quantityValue(value) {

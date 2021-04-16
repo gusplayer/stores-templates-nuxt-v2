@@ -153,9 +153,7 @@ import idCloudinary from '../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductDetail-wa',
-  props: {
-    settingByTemplate: Object,
-  },
+
   components: {
     selectGroup,
     productSlide,

@@ -1,14 +1,7 @@
 <template>
   <div
     class="container-offers"
-    :style="[
-      koffers.values[0],
-      koffers.values[2],
-      settingGeneral,
-      currentSettingByTemplate9.offers[0],
-      currentSettingByTemplate9.offers[2],
-      currentSettingByTemplate9.settingGeneral,
-    ]"
+    :style="[settingGeneral, currentSettingByTemplate9.settingGeneral]"
   >
     <div
       :style="[
@@ -40,23 +33,44 @@
             />
             <div class="content-txt-left">
               <div class="left">
-                <p class="txt-left" v-if="koffers.values[0].title">
+                <p
+                  class="txt-left"
+                  v-if="koffers.values[0].title"
+                  :style="`color: ${koffers.values[0]['--color_title']};`"
+                >
                   {{ koffers.values[0].title }}
                 </p>
-                <p class="txt-left" v-if="koffers.values[0].description">
+                <p
+                  class="txt-left"
+                  v-if="koffers.values[0].description"
+                  :style="`color: ${koffers.values[0]['--color_title']};`"
+                  style="margin-bottom: 10px;"
+                >
                   {{ koffers.values[0].description }}
                 </p>
-                <button class="btn-left">
-                  <span class="txt-btn-left">{{
-                    $t('home_comprarAhora')
-                  }}</span>
-                </button>
+                <div>
+                  <a
+                    :href="`${koffers.values[0].url_redirect}`"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    class="btn-left"
+                    :style="`background: ${koffers.values[0]['--color_background_btn']};`"
+                  >
+                    <span
+                      class="txt-btn-left"
+                      :style="`color: ${koffers.values[0]['--color_text_btn']};`"
+                      >{{ $t('home_comprarAhora') }}</span
+                    >
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div
+        <a
+          :href="`${koffers.values[1].url_redirect}`"
+          rel="noreferrer noopener"
+          target="_blank"
           class="items-center"
           @mouseover="hover = true"
           @mouseleave="hover = false"
@@ -77,7 +91,7 @@
               alt="imagen center gift"
             />
           </div>
-        </div>
+        </a>
         <div>
           <div class="items-right">
             <img
@@ -89,30 +103,56 @@
             <div class="content-txt-right">
               <div class="right">
                 <div class="container">
-                  <p class="txt-right" v-if="koffers.values[2].title">
+                  <p
+                    class="txt-right"
+                    v-if="koffers.values[2].title"
+                    :style="`color: ${koffers.values[2]['--color_title']};`"
+                  >
                     {{ koffers.values[2].title }}
                   </p>
                   <div class="overlay-1">
-                    <p class="txt-right" v-if="koffers.values[2].title">
+                    <p
+                      class="txt-right"
+                      v-if="koffers.values[2].title"
+                      :style="`color: ${koffers.values[2]['--color_title']};`"
+                    >
                       {{ koffers.values[2].title }}
                     </p>
                   </div>
                 </div>
                 <div class="container">
-                  <p class="txt-right" v-if="koffers.values[2].description">
+                  <p
+                    class="txt-right"
+                    v-if="koffers.values[2].description"
+                    :style="`color: ${koffers.values[2]['--color_title']};`"
+                  >
                     {{ koffers.values[2].description }}
                   </p>
                   <div class="overlay-2">
-                    <p class="txt-right" v-if="koffers.values[2].description">
+                    <p
+                      class="txt-right"
+                      v-if="koffers.values[2].description"
+                      :style="`color: ${koffers.values[2]['--color_title']};`"
+                    >
                       {{ koffers.values[2].description }}
                     </p>
                   </div>
                 </div>
-                <button class="btn-right">
-                  <span class="txt-btn-right">{{
-                    $t('home_comprarAhora')
-                  }}</span>
-                </button>
+                <div style="margin-top: 10px;">
+                  <a
+                    :href="`${koffers.values[2].url_redirect}`"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    class="btn-right"
+                    :style="`background: ${koffers.values[2]['--color_background_btn']};`"
+                  >
+                    <span
+                      class="txt-btn-right"
+                      :style="`color: ${koffers.values[2]['--color_text_btn']};`"
+                      >{{ $t('home_comprarAhora') }}</span
+                    >
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -128,20 +168,43 @@
           />
           <div class="content-txt-left">
             <div class="left">
-              <p class="txt-left" v-if="koffers.values[0].title">
+              <p
+                class="txt-left"
+                v-if="koffers.values[0].title"
+                :style="`color: ${koffers.values[0]['--color_title']};`"
+              >
                 {{ koffers.values[0].title }}
               </p>
-              <p class="txt-left" v-if="koffers.values[0].description">
+              <p
+                class="txt-left"
+                v-if="koffers.values[0].description"
+                :style="`color: ${koffers.values[0]['--color_title']};`"
+              >
                 {{ koffers.values[0].description }}
               </p>
-              <button class="btn-left">
-                <span class="txt-btn-left">{{ $t('home_comprarAhora') }}</span>
-              </button>
+              <div style="margin-top: 10px;">
+                <a
+                  :href="`${koffers.values[0].url_redirect}`"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  class="btn-left"
+                  :style="`background: ${koffers.values[0]['--color_background_btn']};`"
+                >
+                  <span
+                    class="txt-btn-left"
+                    :style="`color: ${koffers.values[0]['--color_text_btn']};`"
+                    >{{ $t('home_comprarAhora') }}</span
+                  >
+                </a>
+              </div>
             </div>
           </div>
         </div>
         <div class="mid-content">
-          <div
+          <a
+            :href="`${koffers.values[1].url_redirect}`"
+            rel="noreferrer noopener"
+            target="_blank"
             class="items-center"
             @mouseover="hover = true"
             @mouseleave="hover = false"
@@ -162,7 +225,7 @@
                 alt="imagen center gift"
               />
             </div>
-          </div>
+          </a>
           <div class="items-right">
             <img
               class="image-right"
@@ -173,30 +236,56 @@
             <div class="content-txt-right">
               <div class="right">
                 <div class="container">
-                  <p class="txt-right" v-if="koffers.values[2].title">
+                  <p
+                    class="txt-right"
+                    v-if="koffers.values[2].title"
+                    :style="`color: ${koffers.values[2]['--color_title']};`"
+                  >
                     {{ koffers.values[2].title }}
                   </p>
                   <div class="overlay-1">
-                    <p class="txt-right" v-if="koffers.values[2].title">
+                    <p
+                      class="txt-right"
+                      v-if="koffers.values[2].title"
+                      :style="`color: ${koffers.values[2]['--color_title']};`"
+                    >
                       {{ koffers.values[2].title }}
                     </p>
                   </div>
                 </div>
                 <div class="container">
-                  <p class="txt-right" v-if="koffers.values[2].description">
+                  <p
+                    class="txt-right"
+                    v-if="koffers.values[2].description"
+                    :style="`color: ${koffers.values[2]['--color_title']};`"
+                  >
                     {{ koffers.values[2].description }}
                   </p>
                   <div class="overlay-2">
-                    <p class="txt-right" v-if="koffers.values[2].description">
+                    <p
+                      class="txt-right"
+                      v-if="koffers.values[2].description"
+                      :style="`color: ${koffers.values[2]['--color_title']};`"
+                    >
                       {{ koffers.values[2].description }}
                     </p>
                   </div>
                 </div>
-                <button class="btn-right">
-                  <span class="txt-btn-right">{{
-                    $t('home_escuchaAhora')
-                  }}</span>
-                </button>
+                <div style="margin-top: 10px;">
+                  <a
+                    :href="`${koffers.values[2].url_redirect}`"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    class="btn-right"
+                    :style="`background: ${koffers.values[2]['--color_background_btn']};`"
+                  >
+                    <span
+                      class="txt-btn-right"
+                      :style="`color: ${koffers.values[2]['--color_text_btn']};`"
+                      >{{ $t('home_escuchaAhora') }}</span
+                    >
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -257,21 +346,20 @@ export default {
 .txt-left {
   /* font-family: 'Poppins', sans-serif; */
   font-family: var(--font-style-1);
-  color: var(--color_title_1);
+  /* color: var(--color_title_1); */
   font-weight: 700;
   line-height: 1.1;
 }
 .btn-left {
-  background-color: var(--color_background_btn_1);
+  /* background-color: var(--color_background_btn_1); */
   width: auto;
-  height: 30px;
+  /* height: 30px; */
   font-weight: 800;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px 5px;
   transition: all 200ms ease-in;
 }
 .txt-btn-left {
-  color: var(--color_text_btn_1);
+  /* color: var(--color_text_btn_1); */
   text-transform: uppercase;
 }
 .content-txt-left {
@@ -317,21 +405,20 @@ export default {
   /* font-family: 'Poppins', sans-serif; */
   font-family: var(--font-style-1);
   width: auto;
-  color: var(--color_title_2);
+  /* color: var(--color_title_2); */
   font-weight: bold;
   line-height: 1.1;
 }
 .btn-right {
-  color: var(--color_background_btn_2);
+  /* color: var(--color_background_btn_2); */
   width: auto;
-  height: 30px;
+  /* height: 30px; */
   font-weight: 800;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px 5px;
   transition: all 200ms ease-in;
 }
 .txt-btn-right {
-  color: var(--color_text_btn_2);
+  /* color: var(--color_text_btn_2); */
   text-transform: uppercase;
 }
 .content-txt-right {

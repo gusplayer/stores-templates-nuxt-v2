@@ -27,7 +27,7 @@ export default {
   display: flex;
   width: 100%;
   /* background-color: var(--background_color_2); */
-  background: #fff;
+  background: var(--background_color_1);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -56,7 +56,7 @@ export default {
   font-weight: bold;
   line-height: 1.4;
   /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_title);
   cursor: pointer;
 }
 @media (max-width: 770px) {

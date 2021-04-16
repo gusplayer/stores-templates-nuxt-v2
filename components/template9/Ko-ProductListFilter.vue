@@ -235,16 +235,6 @@
                 v-if="(this.fullProducts.length == 0)"
                 class="content-products-empty"
               >
-                <div class="header-content-logo">
-                  <nuxt-link to="/productos" class="wrapper-logo">
-                    <img
-                      :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-                      class="header-logo"
-                      alt="Logo Img"
-                      @click="clear"
-                    />
-                  </nuxt-link>
-                </div>
                 <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
               </div>
               <div class="pagination-medium">
@@ -754,8 +744,8 @@ export default {
 <style scoped>
 .product-content {
   background: var(--background_color_1);
+  padding-top: 72px;
   @apply flex flex-col justify-center items-center w-full pb-40;
-  margin-top: 72px;
 }
 .content-banner-shop {
   @apply w-full flex flex-col;
@@ -963,7 +953,7 @@ export default {
 }
 .content-products-empty {
   width: 100%;
-  min-height: 200px;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;

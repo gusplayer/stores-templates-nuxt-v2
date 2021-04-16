@@ -1,7 +1,29 @@
 <template>
-  <div class="wrapper-productDetail" :style="settingByTemplate">
+  <div class="wrapper-productDetail" :style="[
+      settingByTemplate7[0].settingK07DetailsProduct,
+      settingByTemplate7[0].settingGeneral,
+      settingByTemplate7[0].settingKProdutCard,
+    ]">
     <div class="container-productDetail-loading" v-if="loading"></div>
-    <div class="container-productDetail" v-else>
+    <div class="container-productDetail" v-else 
+    :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate7 &&
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_1
+              ? this.settingByTemplate7[0].settingGeneral.fount_1
+              : 'David libre',
+        },
+        {
+          '--font-style-3':
+            this.settingByTemplate7 &&
+            this.settingByTemplate7[0].settingGeneral &&
+            this.settingByTemplate7[0].settingGeneral.fount_3
+              ? this.settingByTemplate7[0].settingGeneral.fount_3
+              : 'Lora',
+        },
+      ]">
       <div class="section">
         <!-- Slider izq  -->
         <div class="wrapper-left">
@@ -276,7 +298,6 @@
           </div>
         </div>
       </div>
-
       <div class="section">
         <div class="features">
           <KoDescription
@@ -351,7 +372,12 @@ export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductDetail-1',
   props: {
-    settingByTemplate: Object,
+    dataStore: Object,
+    productsData: Array,
+    whatsapp: String,
+    envios: Object,
+    facebooPixel: Object,
+    settingByTemplate7: Array,
   },
   components: {
     SelectGroup,
@@ -428,13 +454,7 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
-    },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    productsData() {
-      return this.dataStore.productos
-    },
+    },   
     existPayments() {
       const mediospago = this.dataStore.medios_pago
       if (
@@ -454,19 +474,14 @@ export default {
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
-    envios() {
-      return this.dataStore.medios_envio
-    },
+  
     precio() {
       if (this.data.detalle.precio) {
         return `$${this.data.detalle.precio
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
-    },
-    whatsapp() {
-      return this.dataStore.tienda.whatsapp
-    },
+    },   
     category() {
       return this.productsData.filter(
         (product) =>
@@ -475,9 +490,7 @@ export default {
           product.id !== this.data.detalle.id
       )
     },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
+    
   },
   methods: {
     changeSlide() {
@@ -846,7 +859,8 @@ export default {
 .wrapper-productDetail {
   display: flex;
   width: 100%;
-  background: #fff;
+  /* background: #fff; */
+  background: var(--color_background_btn);
   justify-content: center;
   align-items: center;
   padding-top: 120px;
@@ -860,7 +874,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 50px 30px 30px 30px;
-  background: #efefef;
+  background: var(--color_background_btn);
 }
 .container-productDetail {
   position: relative;
@@ -880,15 +894,6 @@ export default {
 .section-suggesProduct {
   z-index: 1 !important;
   width: 100%;
-}
-.wrapper-category {
-  display: flex;
-  margin-bottom: 5px;
-}
-.text-category {
-  font-size: 14px;
-  font-weight: bold;
-  color: rgba(21, 20, 57, 0.541);
 }
 .wrapper-left {
   flex: 2;
@@ -992,7 +997,7 @@ export default {
   width: 100%;
   flex-direction: column;
   padding-bottom: 10px;
-  border-left: 1px solid rgba(129,129,129,.2);;
+  border-left: 1px solid var(--color_border);
 }
 .content-right {
   margin-left: 20px;
@@ -1001,15 +1006,16 @@ export default {
   font-weight: 400;
   font-size: 34px;
   line-height: 1.2;
-  color: #000000;
-  font-family: 'David Libre' !important;
+  color: var(--color_title);
+  /* font-family: 'David Libre' !important; */
+  font-family: var(--font-style-1);
   margin-bottom: 20px;
 }
 .text-marca {
   font-size: 16px;
   font-stretch: semi-condensed;
   font-style: normal;
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_description);
 }
 .text-promocion {
   font-size: 14px;
@@ -1031,11 +1037,11 @@ export default {
   font-weight: 600;
   font-size: 22px;
   line-height: 1.2;
-  font-family: 'Lora' !important;
+  /* font-family: 'Lora' !important; */
+  font-family: var(--font-style-3);
   margin-bottom: 20px;
-  color: #ed2353;
+  color: var(--color_price);
 }
-
 .content_stock {
   @apply flex flex-row justify-start items-center w-full;
 }
@@ -1051,14 +1057,15 @@ export default {
   align-items: center;
   margin-top: 15px;
   padding-bottom: 30px;
-  border-bottom: solid 1px rgba(129,129,129,.2);;
+  border-bottom: solid 1px var(--color_border);
 }
 .stock-text {
   font-weight: 600;
   font-size: 14px;
   line-height: 1.2;
-  font-family: 'Lora' !important;
-  color: #333;
+  font-family: var(--font-style-3);
+    /* font-family: 'Lora' !important; */
+  color: var(--color_title);
 }
 .card-descuento {
   font-size: 12px;
@@ -1078,7 +1085,7 @@ export default {
   text-decoration-line: none;
   font-size: 14px;
   font-weight: normal;
-  color: #333;
+  color: var(--color_title);
   line-height: 1.5;
   text-decoration: none;
 }
@@ -1089,20 +1096,22 @@ export default {
 .text-variant {
   font-size: 14px;
   font-weight: bold;
-  color: #333;
+  color: var(--color_title);
 }
 .text-unidades {
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Lora' !important;
-  color: #333;
+  /* font-family: 'Lora' !important; */
+  font-family: var(--font-style-3);
+  color: var(--color_title);
 }
 .text-garantia {
   font-size: 14px;
   font-weight: bold;
-  color: #333;
+  color: var(--color_description);
   margin-left: 5px;
-  font-family: 'Lora' !important;
+  /* font-family: 'Lora' !important; */
+  font-family: var(--font-style-3);
 }
 .content_buy_action {
   display: flex;
@@ -1118,11 +1127,12 @@ export default {
   font-weight: bold;
   margin-bottom: 10px;
   color: #00a650;
-  font-family: 'Lora' !important;
+  /* font-family: 'Lora' !important; */
+  font-family: var(--font-style-3);
 }
 .content_card-info {
-  @apply w-full flex flex-row justify-start items-end;
   margin-bottom: 10px;
+  @apply w-full flex flex-row justify-start items-end;
 }
 .text-card-info-sould{
   color: #ed2353;
@@ -1130,7 +1140,8 @@ export default {
   font-weight: bold;
   /* line-height: 1.2; */
   font-size: 16px;
-  font-family: 'Lora' !important;
+  /* font-family: 'Lora' !important; */
+  font-family: var(--font-style-3);
 }
 .card-info-1 {
   display: flex;
@@ -1165,23 +1176,25 @@ export default {
   margin-left: 15px;
 }
 .category_product {
-  @apply flex flex-row justify-start items-center w-full;
   margin-top: 15px;
+  @apply flex flex-row justify-start items-center w-full;
 }
 .category-beffore {
   font-weight: 600;
   line-height: 1.2;
   font-size: 14px;
-  font-family: 'Lora' !important;
-  color: #333;
+  /* font-family: 'Lora' !important; */
+  font-family: var(--font-style-3);
+  color: var(--color_title);
 }
 .category-text {
   margin-left: 5px;
   font-weight: 400;
   line-height: 1.2;
   font-size: 14px;
-  font-family: 'Lora' !important;
-  color: #777;
+  /* font-family: 'Lora' !important; */
+  font-family: var(--font-style-3);
+  color: var(--color_description);
 }
 .content-shared {
   display: flex;
@@ -1245,11 +1258,12 @@ export default {
   margin-left: 20px;
 }
 .btn {
-  font-family: 'Lora' !important;
-  color: white;
+  font-family: var(--font-style-3);
+  /* font-family: 'Lora' !important; */
+  color: var(--color_text_btn);
   border-radius: 35px;
-  border: solid 2px #ed2353;
-  background-color: #ed2353;
+  border: solid 2px var(--color_background_btn);
+  background-color: var(--color_background_btn);
   padding: 12px 20px;
   font-size: 13px;
   line-height: 18px;
@@ -1263,9 +1277,9 @@ export default {
     border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
 .btn:hover {
-  color: white;
-  border: solid 2px #D7204B;
-  background-color: #D7204B;
+  color: var(--hover_text);
+  border: solid 2px var(--hover_card);
+  background-color: var(--hover_card);
 }
 .btn-disabled {
   color: white;
@@ -1295,12 +1309,12 @@ export default {
   font-size: 14px;
   font-weight: bold;
   /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_description);
   margin-right: 15px;
   align-self: center;
 }
 .quantity_remove {
-  border: 1px solid #777;
+  border: 1px solid var(--color_border);
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
   background: transparent;
@@ -1309,8 +1323,8 @@ export default {
 }
 .quantity_value {
   font-size: 14px;
-  color: #333;
-  border: 1px solid #777;
+  color: var(--color_title);
+  border: 1px solid var(--color_border);
   width: 30px;
   height: 42px;
   border-style: solid none solid none;
@@ -1320,7 +1334,7 @@ export default {
   align-items: center;
 }
 .quantity_add {
-  border: 1px solid #777;
+  border: 1px solid var(--color_border);
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   background: transparent;
@@ -1335,19 +1349,19 @@ export default {
 }
 .icon {
   font-size: 16px;
-  color: #777;
+  color: var(--color_price);
 }
 .quantity_add:hover .icon{
-  color: white;
+ color: var(--color_title);
 }
 .quantity_remove:hover .icon{
-  color: white;
+ color: var(--color_title);
 }
 .features {
   width: 100%;
   display: flex;
   /* border-top: 1px solid var(--color_border); */
-  border-top: 1px solid rgba(129,129,129,.2);
+  border-top: 1px solid var(--color_border);
 }
 .container-alerta {
   position: absolute;

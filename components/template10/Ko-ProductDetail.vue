@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-productDetail" :style="settingByTemplate">
+  <div class="wrapper-productDetail">
     <div class="container-productDetail-loading" v-if="loading"></div>
     <div class="container-productDetail" v-else>
       <div class="banner-detail">
@@ -293,7 +293,11 @@ export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductDetail-1',
   props: {
-    settingByTemplate: Object,
+    dataStore: Object,
+    productsData: Array,
+    whatsapp: String,
+    envios: Object,
+    facebooPixel: Object,
   },
   components: {
     OptionAcordion,
@@ -390,12 +394,6 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    productsData() {
-      return this.dataStore.productos
-    },
     existPayments() {
       const mediospago = this.dataStore.medios_pago
       if (
@@ -415,18 +413,13 @@ export default {
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
-    envios() {
-      return this.dataStore.medios_envio
-    },
+    // eslint-disable-next-line vue/return-in-computed-property
     precio() {
       if (this.data.detalle.precio) {
         return `$${this.data.detalle.precio
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
-    },
-    whatsapp() {
-      return this.dataStore.tienda.whatsapp
     },
     category() {
       return this.productsData.filter(
@@ -435,9 +428,6 @@ export default {
             this.data.detalle.categoria_producto.nombre_categoria_producto &&
           product.id !== this.data.detalle.id
       )
-    },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {

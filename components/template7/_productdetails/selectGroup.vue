@@ -61,8 +61,8 @@ select {
   border: 0 !important;
   background: transparent;
   background-image: none;
-  /* color: var(--color_subtext); */
-  color: #777;
+  color: var(--color_description);
+  /* color: #777; */
   font-weight: 600;
 }
 select::-ms-expand {
@@ -78,8 +78,8 @@ select::-ms-expand {
   height: 40px;
   background: transparent;
   overflow: hidden;
-  /* border: 2px solid var(--color_border); */
-  border: 2px solid #777;
+  border: 2px solid var(--color_border);
+  /* border: 2px solid #777; */
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
   border-top-right-radius: 30px;
@@ -105,8 +105,8 @@ select {
   content: url('data:image/svg+xml;charset=UTF-8, <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" fill="Red" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>');
 }
 option {
-  /* color: var(--color_subtext); */
-  color: #333;
+  color: var(--color_description);
+  /* color: #333; */
 }
 option:disabled {
   background: white;

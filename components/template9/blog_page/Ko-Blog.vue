@@ -17,10 +17,25 @@
     >
       <div class="crumb">
         <nuxt-link to="/">
-          <p class="txt-crumb s1">Home</p>
+          <p
+            class="txt-crumb s1"
+            :style="`color: ${settingByTemplate9[0].blog.breadcrumbs};`"
+          >
+            Home
+          </p>
         </nuxt-link>
-        <p class="txt-crumb">/</p>
-        <p class="txt-crumb s2">Blog</p>
+        <p
+          class="txt-crumb"
+          :style="`color: ${settingByTemplate9[0].blog.breadcrumbs};`"
+        >
+          /
+        </p>
+        <p
+          class="txt-crumb s2"
+          :style="`color: ${settingByTemplate9[0].blog.breadcrumbs};`"
+        >
+          Blog
+        </p>
       </div>
       <div class="tittle-banner-blog">
         <p class="txt-banner">{{ $t('header_blog') }}</p>
@@ -333,7 +348,7 @@ export default {
 .txt-crumb {
   font-family: Arial, sans-serif;
   font-size: 12px;
-  color: #b3b3b3;
+  /* color: #b3b3b3; */
   line-height: 14px;
   padding: 2px 4px;
   cursor: pointer;

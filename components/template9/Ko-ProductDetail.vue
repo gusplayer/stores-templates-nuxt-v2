@@ -1,7 +1,27 @@
 <template>
-  <div class="wrapper-productDetail" :style="settingByTemplate">
+  <div
+    class="wrapper-productDetail"
+    :style="[
+      settingByTemplate9[0].detailsProduct,
+      settingByTemplate9[0].setting9General,
+      settingByTemplate9[0].cardProduct,
+    ]"
+  >
     <div class="container-productDetail-loading" v-if="loading"></div>
-    <div class="container-productDetail" v-else>
+    <div
+      class="container-productDetail"
+      v-else
+      :style="[
+        {
+          '--font-style-2':
+            this.settingByTemplate9 &&
+            this.settingByTemplate9[0].setting9General &&
+            this.settingByTemplate9[0].setting9General.fount_2
+              ? this.settingByTemplate9[0].setting9General.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
       <div class="crumb">
         <nuxt-link to="/">
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -159,7 +179,10 @@
                 :envio="envio"
               ></OptionTab>
             </div>
-            <div class="content-free-shipping">
+            <div
+              class="content-free-shipping"
+              v-if="envio && envio.titulo == 'Gratis'"
+            >
               <svg
                 class="transporte-icon mr-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -233,27 +256,32 @@
 </template>
 <script>
 import axios from 'axios'
-import ProductSlide from './_productdetails/productSlide'
+// import ProductSlide from './_productdetails/productSlide'
 import SelectGroup from './_productdetails/selectGroup'
 import OptionAcordion from './_productdetails/OptAcordion'
 import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
-import Zoom from './_productdetails/zoomImg'
+// import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
 
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductDetail-1',
   props: {
-    settingByTemplate: Object,
+    dataStore: Object,
+    productsData: Array,
+    whatsapp: String,
+    envios: Object,
+    facebooPixel: Object,
+    settingByTemplate9: Array,
   },
   components: {
     OptionAcordion,
     OptionTab,
     SelectGroup,
     KoSuggesProduct,
-    ProductSlide,
-    Zoom,
+    // ProductSlide,
+    // Zoom,
   },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -265,18 +293,6 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
-    // window.addEventListener('scroll', function () {
-    //   var sticky = document.getElementById('sticky')
-    //   if (window.pageYOffset >= 1 && screen.width > 725 && sticky) {
-    //     sticky.style.display = 'flex'
-    //     sticky.style.flexDirection = 'column'
-    //     sticky.style.position = 'fixed'
-    //     sticky.style.top = '160px'
-    //     sticky.style.width = '20%'
-    //     sticky.style.overflow = 'hidden'
-
-    //   }
-    // })
   },
   data() {
     return {
@@ -342,12 +358,6 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    productsData() {
-      return this.dataStore.productos
-    },
     existPayments() {
       const mediospago = this.dataStore.medios_pago
       if (
@@ -367,18 +377,13 @@ export default {
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
-    envios() {
-      return this.dataStore.medios_envio
-    },
+    // eslint-disable-next-line vue/return-in-computed-property
     precio() {
       if (this.data.detalle.precio) {
         return `$${this.data.detalle.precio
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
-    },
-    whatsapp() {
-      return this.dataStore.tienda.whatsapp
     },
     category() {
       return this.productsData.filter(
@@ -387,9 +392,6 @@ export default {
             this.data.detalle.categoria_producto.nombre_categoria_producto &&
           product.id !== this.data.detalle.id
       )
-    },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {
@@ -728,7 +730,7 @@ export default {
 .wrapper-productDetail {
   display: flex;
   width: 100%;
-  background: #fff;
+  background: var(--background_color_1);
   justify-content: center;
   align-items: center;
   padding-top: 72px;
@@ -742,7 +744,7 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 50px 30px 30px 30px;
-  background: #fff;
+  background: var(--background_color_1);
 }
 .container-productDetail {
   display: flex;
@@ -753,14 +755,13 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
 .crumb {
   @apply flex flex-row justify-start items-start my-40;
 }
 .txt-crumb {
   font-family: Arial, sans-serif;
   font-size: 12px;
-  color: #b3b3b3;
+  color: var(--breadcrumbs);
   line-height: 14px;
   padding-right: 6px;
   cursor: pointer;
@@ -779,7 +780,6 @@ export default {
 .product-content {
   @apply w-full flex;
 }
-
 .left {
   @apply flex flex-col justify-center items-center;
 }
@@ -854,7 +854,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #f4f4f4;
+    background: var(--color_quantity_bg);
     height: 54px;
     padding-bottom: 1px;
   }
@@ -881,7 +881,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 54px;
-    background-color: #2c2930;
+    background-color: var(--color_background_btn);
     transition: all 0.15s ease-in;
   }
   .btn-disabled {
@@ -891,7 +891,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 54px;
-    background-color: #2c2930;
+    background-color: var(--color_background_btn);
     transition: all 0.15s ease-in;
   }
   .btn:hover {
@@ -914,20 +914,22 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f4f4f4;
+    background: var(--color_quantity_bg);
   }
 
   .text-category {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-    color: #303030;
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-2);
+    color: var(--color_category);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 4px;
     transition: all 0.6s ease-in-out;
   }
   .text-name {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-    color: #333333;
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-2);
+    color: var(--color_title);
     font-size: 36px;
     font-weight: 700;
     letter-spacing: 0px;
@@ -935,8 +937,9 @@ export default {
     text-transform: capitalize;
   }
   .text-price {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-    color: #333333;
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-2);
+    color: var(--color_price);
     font-size: 36px;
     font-weight: 600;
     line-height: 1;
@@ -944,7 +947,8 @@ export default {
     text-transform: capitalize;
   }
   .text-stock {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-2);
     color: #92bb35;
     font-size: 14px;
     font-weight: 600;
@@ -959,6 +963,7 @@ export default {
     align-items: center;
     width: 34px;
     cursor: pointer;
+    colo: var(--color_quantity_num);
   }
   .text-quantity_value {
     display: flex;
@@ -970,10 +975,12 @@ export default {
     border: none;
     font-size: 21px;
     font-weight: 700;
+    colo: var(--color_quantity_num);
   }
   .text-addCart {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-    color: #fff;
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-2);
+    color: var(--color_text_btn);
     font-size: 15px;
     font-weight: 900;
     line-height: 54px;
@@ -982,12 +989,13 @@ export default {
     text-transform: capitalize;
   }
   .minicart-icon {
-    fill: #fff;
+    fill: var(--color_text_btn);
     margin-right: 20px;
   }
   .text-shipping {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-    color: #333;
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-2);
+    color: var(--color_title);
     font-size: 14px;
     font-weight: 700;
     line-height: 1px;
@@ -995,14 +1003,16 @@ export default {
     text-transform: capitalize;
   }
   .text-variant {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-    color: #303030;
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-2);
+    color: var(--color_title);
     font-size: 16px;
     font-weight: 700;
     transition: all 0.6s ease-in-out;
   }
   .text-option {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-2);
     color: #303030;
     font-size: 16px;
     font-weight: 700;
