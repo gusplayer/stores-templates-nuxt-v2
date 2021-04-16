@@ -66,11 +66,10 @@ import Kblog from '../../components/template9/ko-blog'
 import KWrapper from '../../components/template9/Ko-wrapper'
 import KNews from '../../components/template9/Ko-Newsletter'
 import showComponent09 from '../../mixins/showComponent'
-import currentSettingByTemplate9 from '../../mixins/currentsetting'
 
 export default {
   layout: 'default',
-  mixins: [showComponent09, currentSettingByTemplate9],
+  mixins: [showComponent09],
   components: {
     Kbanner,
     Koffers,
@@ -148,11 +147,11 @@ export default {
   },
   methods: {
     addEventListenertemplate(e) {
-      // if (e.origin.includes('https://panel.komercia.co')) {
-      if (e && e.data) {
-        this.currentSettingByTemplate9(e.data)
+      if (e.origin.includes('https://panel.komercia.co')) {
+        if (e && e.data) {
+          this.$store.commit('SET_CURRENTSETTING09', e.data)
+        }
       }
-      // }
     },
   },
   watch: {

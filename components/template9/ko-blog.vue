@@ -1,26 +1,11 @@
 <template>
-  <div
-    class="wrapper-content"
-    :style="[
-      blog,
-      settingGeneral,
-      currentSettingByTemplate9.blog,
-      currentSettingByTemplate9.settingGeneral,
-    ]"
-  >
+  <div class="wrapper-content" :style="[blog, settingGeneral]">
     <div
       :style="[
         {
           '--font-style-1':
             this.settingGeneral && this.settingGeneral.fount_1
               ? this.settingGeneral.fount_1
-              : 'Poppins',
-        },
-        {
-          '--font-style-1':
-            this.currentSettingByTemplate9.settingGeneral &&
-            this.currentSettingByTemplate9.settingGeneral.fount_1
-              ? this.currentSettingByTemplate9.settingGeneral.fount_1
               : 'Poppins',
         },
       ]"
@@ -45,10 +30,6 @@
                 :article="article"
                 :blog="blog"
                 :settingGeneral="settingGeneral"
-                :currentblog="currentSettingByTemplate9.blog"
-                :currentsettingGeneral="
-                  currentSettingByTemplate9.settingGeneral
-                "
               ></Kblog>
             </div>
           </div>
@@ -122,9 +103,6 @@ export default {
       } else {
         return this.listArticulos
       }
-    },
-    currentSettingByTemplate9() {
-      return this.$store.state.currentSettingByTemplate9
     },
   },
   mounted() {

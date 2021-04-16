@@ -645,6 +645,7 @@ export default {
   text-decoration: none;
   box-sizing: border-box;
   outline: none !important;
+  /* overflow-x: hidden; */
 }
 .wrapper-whatsapp {
   position: fixed;

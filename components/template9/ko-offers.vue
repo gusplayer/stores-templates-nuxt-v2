@@ -1,22 +1,11 @@
 <template>
-  <div
-    class="container-offers"
-    :style="[settingGeneral, currentSettingByTemplate9.settingGeneral]"
-  >
+  <div class="container-offers" :style="[settingGeneral]">
     <div
       :style="[
         {
           '--font-style-1':
             this.settingGeneral && this.settingGeneral.fount_1
               ? this.settingGeneral.fount_1
-              : 'Poppins',
-        },
-        {
-          '--font-style-1':
-            this.currentSettingByTemplate9 &&
-            this.currentSettingByTemplate9.settingGeneral &&
-            this.currentSettingByTemplate9.settingGeneral.fount_1
-              ? this.currentSettingByTemplate9.settingGeneral.fount_1
               : 'Poppins',
         },
       ]"
@@ -305,11 +294,6 @@ export default {
     return {
       hover: false,
     }
-  },
-  computed: {
-    currentSettingByTemplate9() {
-      return this.$store.state.currentSettingByTemplate9
-    },
   },
 }
 </script>

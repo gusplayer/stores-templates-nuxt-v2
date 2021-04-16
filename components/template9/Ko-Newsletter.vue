@@ -1,13 +1,5 @@
 <template>
-  <div
-    class="wrapper_newsletter"
-    :style="[
-      newsletter,
-      settingGeneral,
-      currentSettingByTemplate9.news,
-      currentSettingByTemplate9.settingGeneral,
-    ]"
-  >
+  <div class="wrapper_newsletter" :style="[newsletter, settingGeneral]">
     <div
       :style="[
         {
@@ -20,22 +12,6 @@
           '--font-style-2':
             this.settingGeneral && this.settingGeneral.fount_2
               ? this.settingGeneral.fount_2
-              : 'Roboto',
-        },
-        {
-          '--font-style-1':
-            this.currentSettingByTemplate9 &&
-            this.currentSettingByTemplate9.settingGeneral &&
-            this.currentSettingByTemplate9.settingGeneral.fount_1
-              ? this.currentSettingByTemplate9.settingGeneral.fount_1
-              : 'Poppins',
-        },
-        {
-          '--font-style-2':
-            this.currentSettingByTemplate9 &&
-            this.currentSettingByTemplate9.settingGeneral &&
-            this.currentSettingByTemplate9.settingGeneral.fount_2
-              ? this.currentSettingByTemplate9.settingGeneral.fount_2
               : 'Roboto',
         },
       ]"
@@ -146,9 +122,6 @@ export default {
   computed: {
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
-    },
-    currentSettingByTemplate9() {
-      return this.$store.state.currentSettingByTemplate9
     },
   },
   methods: {

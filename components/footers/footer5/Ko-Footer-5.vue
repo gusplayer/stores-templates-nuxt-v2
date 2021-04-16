@@ -3,11 +3,10 @@
     class="footer-container"
     ref="background"
     :style="[
-      settingByTemplate9[0].setting9Header,
+      settingByTemplate9[0].setting9Footer,
       settingByTemplate9[0].setting9General,
-      currentSettingByTemplate9.footer,
-      currentSettingByTemplate9.settingGeneral,
     ]"
+    v-if="settingByTemplate9 && settingByTemplate9[0].setting9Footer"
   >
     <div
       class="footer-content"
@@ -18,14 +17,6 @@
             this.settingByTemplate9[0].setting9General &&
             this.settingByTemplate9[0].setting9General.fount_1
               ? this.settingByTemplate9[0].setting9General.fount_1
-              : 'Poppins',
-        },
-        {
-          '--font-style-1':
-            this.currentSettingByTemplate9 &&
-            this.currentSettingByTemplate9.settingGeneral &&
-            this.currentSettingByTemplate9.settingGeneral.fount_1
-              ? this.currentSettingByTemplate9.settingGeneral.fount_1
               : 'Poppins',
         },
       ]"
@@ -112,7 +103,7 @@ export default {
     settingByTemplate9: Array,
   },
   mounted() {
-    if (this.settingByTemplate9) {
+    if (this.settingByTemplate9 && this.settingByTemplate9[0].setting9Footer) {
       this.setLogo()
     }
   },
@@ -150,17 +141,17 @@ export default {
     showModal() {
       return this.$store.state.modalpolitics05
     },
-    currentSettingByTemplate9() {
-      return this.$store.state.currentSettingByTemplate9
-    },
   },
   methods: {
     OpenModalPolitics() {
       this.$store.state.modalpolitics05 = true
     },
     setLogo() {
-      if (this.settingByTemplate9) {
-        let color = this.settingByTemplate9[0].setting9Header[
+      if (
+        this.settingByTemplate9 &&
+        this.settingByTemplate9[0].setting9Footer
+      ) {
+        let color = this.settingByTemplate9[0].setting9Footer[
           '--background_color_1'
         ]
         let colorArray = color.split(',')
@@ -174,13 +165,21 @@ export default {
     },
   },
   watch: {
-    settingByTemplate9(value) {
-      let colorArray = value.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
+    settingByTemplate9() {
+      if (
+        this.settingByTemplate9 &&
+        this.settingByTemplate9[0].setting9Footer
+      ) {
+        let color = this.settingByTemplate9[0].setting9Footer[
+          '--background_color_1'
+        ]
+        let colorArray = color.split(',')
+        let colorInt = parseInt(colorArray[2])
+        if (colorInt > 50) {
+          this.logo = true
+        } else {
+          this.logo = false
+        }
       }
     },
   },

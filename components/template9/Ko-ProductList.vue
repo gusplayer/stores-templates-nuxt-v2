@@ -1,12 +1,7 @@
 <template>
   <div
     class="product-content"
-    :style="[
-      productList,
-      settingGeneral,
-      currentSettingByTemplate9.productList,
-      currentSettingByTemplate9.settingGeneral,
-    ]"
+    :style="[productList, settingGeneral]"
     v-if="this.listProducts.length > 0"
   >
     <div
@@ -23,20 +18,6 @@
           '--font-style-2':
             this.settingGeneral && this.settingGeneral.fount_2
               ? this.settingGeneral.fount_2
-              : 'Roboto',
-        },
-        {
-          '--font-style-1':
-            this.currentSettingByTemplate9.settingGeneral &&
-            this.currentSettingByTemplate9.settingGeneral.fount_1
-              ? this.currentSettingByTemplate9.settingGeneral.fount_1
-              : 'Poppins',
-        },
-        {
-          '--font-style-2':
-            this.currentSettingByTemplate9.settingGeneral &&
-            this.currentSettingByTemplate9.settingGeneral.fount_2
-              ? this.currentSettingByTemplate9.settingGeneral.fount_2
               : 'Roboto',
         },
       ]"
@@ -96,9 +77,6 @@ export default {
   computed: {
     listProducts() {
       return this.fullProducts.slice(0, 8)
-    },
-    currentSettingByTemplate9() {
-      return this.$store.state.currentSettingByTemplate9
     },
   },
   methods: {

@@ -5,8 +5,6 @@
     :style="[
       settingByTemplate9[0].setting9Header,
       settingByTemplate9[0].setting9General,
-      currentSettingByTemplate9.header,
-      currentSettingByTemplate9.settingGeneral,
     ]"
   >
     <div
@@ -19,14 +17,6 @@
             this.settingByTemplate9[0].setting9General &&
             this.settingByTemplate9[0].setting9General.fount_1
               ? this.settingByTemplate9[0].setting9General.fount_1
-              : 'Poppins',
-        },
-        {
-          '--font-style-1':
-            this.currentSettingByTemplate9 &&
-            this.currentSettingByTemplate9.settingGeneral &&
-            this.currentSettingByTemplate9.settingGeneral.fount_1
-              ? this.currentSettingByTemplate9.settingGeneral.fount_1
               : 'Poppins',
         },
       ]"
@@ -247,9 +237,6 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos.length
     },
-    currentSettingByTemplate9() {
-      return this.$store.state.currentSettingByTemplate9
-    },
   },
   methods: {
     openSearch() {
@@ -323,13 +310,15 @@ export default {
         this.showSearch = false
       }
     },
-    'currentSettingByTemplate9.header'() {
+    settingByTemplate9() {
       let colorBg = ''
       if (
-        this.currentSettingByTemplate9 &&
-        this.currentSettingByTemplate9.header
+        this.settingByTemplate9 &&
+        this.settingByTemplate9[0].setting9Header
       ) {
-        colorBg = this.currentSettingByTemplate9.header['--background_color_1']
+        colorBg = this.settingByTemplate9[0].setting9Header[
+          '--background_color_1'
+        ]
       }
       var header = document.getElementById('headerid')
       var bghead = document.getElementById('headbg')
