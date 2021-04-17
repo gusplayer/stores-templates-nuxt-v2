@@ -147,7 +147,13 @@ export default {
   },
   methods: {
     addEventListenertemplate(e) {
-      if (e.origin.includes('https://panel.komercia.co')) {
+      console.log(e)
+      if (
+        e.origin.includes('https://panel.komercia.co') ||
+        e.origin.includes(
+          `https://${this.dataStore.tienda.subdominio}.komercia.store`
+        )
+      ) {
         if (e && e.data) {
           this.$store.commit('SET_CURRENTSETTING09', e.data)
         }
