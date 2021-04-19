@@ -6,6 +6,7 @@
       settingByTemplate9[0].setting9Header,
       settingByTemplate9[0].setting9General,
     ]"
+    v-if="settingByTemplate9"
   >
     <div
       class="wrapper-header"

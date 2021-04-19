@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="settingByTemplate9">
     <Kbanner
       v-bind="componentsProps"
       v-if="
@@ -81,8 +81,8 @@ export default {
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
-    // let domain = this.$route.fullPath
-    // this.showComponent09(domain)
+    let domain = this.$route.fullPath
+    this.showComponent09(domain)
   },
   data() {
     return {}
@@ -147,12 +147,10 @@ export default {
   },
   methods: {
     addEventListenertemplate(e) {
-      console.log(e)
+      // console.log(e)
       if (
         e.origin.includes('https://panel.komercia.co') ||
-        e.origin.includes(
-          `https://${this.dataStore.tienda.subdominio}.komercia.store`
-        )
+        e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data) {
           this.$store.commit('SET_CURRENTSETTING09', e.data)
@@ -162,10 +160,10 @@ export default {
   },
   watch: {
     // eslint-disable-next-line no-unused-vars
-    // $route(to, from) {
-    //   let domain = this.$route.fullPath
-    //   this.showComponent09(domain)
-    // },
+    $route(to, from) {
+      let domain = this.$route.fullPath
+      this.showComponent09(domain)
+    },
   },
 }
 </script>

@@ -34,17 +34,26 @@
               <div class="banner-content-items-1">
                 <div class="content-items-1">
                   <div class="text-top">
-                    <p class="banner-text-top banner-text-top_1">
+                    <p
+                      class="banner-text-top"
+                      :style="`color: ${banner.values[0]['--color_pretitle']};`"
+                    >
                       {{ banner.values[0].pretitle }}
                     </p>
                   </div>
                   <div class="text-medium">
-                    <p class="banner-text-medium banner-text-medium_1">
+                    <p
+                      class="banner-text-medium"
+                      :style="`color: ${banner.values[0]['--color_title']};`"
+                    >
                       {{ banner.values[0].title }}
                     </p>
                   </div>
                   <div class="text-bottom">
-                    <p class="banner-text-bottom banner-text-bottom_1">
+                    <p
+                      class="banner-text-bottom"
+                      :style="`color: ${banner.values[0]['--color_description']};`"
+                    >
                       {{ banner.values[0].description }}
                     </p>
                   </div>
@@ -79,17 +88,26 @@
               <div class="banner-content-items-2">
                 <div class="content-items-2">
                   <div class="text-top">
-                    <span class="banner-text-top banner-text-top_2">
+                    <span
+                      class="banner-text-top"
+                      :style="`color: ${banner.values[1]['--color_pretitle']};`"
+                    >
                       {{ banner.values[1].pretitle }}</span
                     >
                   </div>
                   <div class="text-medium">
-                    <span class="banner-text-medium banner-text-medium_2">
+                    <span
+                      class="banner-text-medium"
+                      :style="`color: ${banner.values[1]['--color_title']};`"
+                    >
                       {{ banner.values[1].title }}
                     </span>
                   </div>
                   <div class="text-bottom">
-                    <p class="banner-text-bottom banner-text-bottom_2">
+                    <p
+                      class="banner-text-bottom"
+                      :style="`color: ${banner.values[1]['--color_description']};`"
+                    >
                       {{ banner.values[1].description }}
                     </p>
                   </div>
@@ -169,24 +187,6 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
-.banner-text-top_1 {
-  color: var(--color_pretitle_1);
-}
-.banner-text-medium_1 {
-  color: var(--color_title_1);
-}
-.banner-text-bottom_1 {
-  color: var(--color_description_1);
-}
-.banner-text-top_2 {
-  color: var(--color_pretitle_2);
-}
-.banner-text-medium_2 {
-  color: var(--color_title_2);
-}
-.banner-text-bottom_2 {
-  color: var(--color_description_2);
 }
 .text-button {
   color: var(--color_text_btn);
