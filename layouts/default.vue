@@ -626,7 +626,9 @@ export default {
   --btnhover: #929292;
   --radius_btn: 5px;
 }
+
 * {
+  scroll-behavior: smooth;
   margin: 0px;
   padding: 0px;
   font-family: var(--font-style);
