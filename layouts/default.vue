@@ -9,18 +9,10 @@
           : 'Roboto',
     }"
   >
-    <component
-      v-bind="componentsProps"
-      :is="headerTemplate"
-      v-if="showTemplate.showHeader"
-    />
-    <nuxt v-if="showTemplate.showBody" />
-    <component
-      v-bind="componentsProps"
-      :is="footerTemplate"
-      v-if="showTemplate.showFooter"
-    />
-    <KoFooterCountry :dataStore="dataStore" v-if="showTemplate.showCountry" />
+    <component v-bind="componentsProps" :is="headerTemplate" id="headerX" />
+    <nuxt />
+    <component v-bind="componentsProps" :is="footerTemplate" id="footerX" />
+    <KoFooterCountry :dataStore="dataStore" />
     <div
       class="wrapper-whatsapp"
       v-if="dataStore.tienda.whatsapp"
@@ -559,9 +551,6 @@ export default {
             ]
           : null,
       }
-    },
-    showTemplate() {
-      return this.$store.state.showTemplate
     },
   },
   methods: {

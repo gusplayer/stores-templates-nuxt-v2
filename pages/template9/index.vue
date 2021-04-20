@@ -1,55 +1,55 @@
 <template>
   <div v-if="settingByTemplate9">
     <Kbanner
+      id="kbannerX"
       v-bind="componentsProps"
       v-if="
-        showTemplate9.showBanner &&
         settingByTemplate9 &&
         settingByTemplate9.banner &&
         settingByTemplate9.banner.visible
       "
     />
     <Koffers
+      id="KoffersX"
       v-bind="componentsProps"
       v-if="
-        showTemplate9.showOffers &&
         settingByTemplate9 &&
         settingByTemplate9.koffers &&
         settingByTemplate9.koffers.visible
       "
     />
     <Kproductlist
+      id="KproductlistX"
       v-bind="componentsProps"
       v-if="
-        showTemplate9.showProductList &&
         settingByTemplate9 &&
         settingByTemplate9.productList &&
         settingByTemplate9.productList.visible
       "
     />
     <Kblog
+      id="KblogX"
       v-bind="componentsProps"
       v-show="
         listArticulos.length > 0 &&
-        showTemplate9.showBlog &&
         settingByTemplate9 &&
         settingByTemplate9.blog &&
         settingByTemplate9.blog.visible
       "
     />
     <KWrapper
+      id="KWrapperX"
       v-bind="componentsProps"
       v-if="
-        showTemplate9.showWrapper &&
         settingByTemplate9 &&
         settingByTemplate9.wrapper &&
         settingByTemplate9.wrapper.visible
       "
     />
     <KNews
+      id="KNewsX"
       v-bind="componentsProps"
       v-if="
-        showTemplate9.showNews &&
         settingByTemplate9 &&
         settingByTemplate9.newsletter &&
         settingByTemplate9.newsletter.visible
@@ -83,9 +83,6 @@ export default {
     window.addEventListener('message', this.addEventListenertemplate)
     let domain = this.$route.fullPath
     this.showComponent09(domain)
-  },
-  data() {
-    return {}
   },
   computed: {
     dataStore() {
@@ -138,9 +135,6 @@ export default {
             : null,
       }
     },
-    showTemplate9() {
-      return this.$store.state.showTemplate9
-    },
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenertemplate)
@@ -157,12 +151,8 @@ export default {
         }
       }
     },
-  },
-  watch: {
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      let domain = this.$route.fullPath
-      this.showComponent09(domain)
+    moverseA(idDelElemento) {
+      location.hash = '#' + idDelElemento
     },
   },
 }

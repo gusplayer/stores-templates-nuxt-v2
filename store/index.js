@@ -176,31 +176,6 @@ export const state = () => ({
     text_btn: 'Conócenos',
   },
   modalpolitics05: false,
-  showTemplate: {
-    showHeader: true,
-    showBody: true,
-    showFooter: true,
-    showCountry: true,
-  },
-  showTemplate7: {
-    showCarousel: true,
-    showPromo: true,
-    showProductList: true,
-    showAdvertising: true,
-    showGify: true,
-    showHowwork: true,
-    showBlog: true,
-    showNews: true,
-    showWrapper: true,
-  },
-  showTemplate9: {
-    showBanner: true,
-    showOffers: true,
-    showProductList: true,
-    showBlog: true,
-    showWrapper: true,
-    showNews: true,
-  },
 })
 
 export const mutations = {
@@ -245,6 +220,9 @@ export const mutations = {
           break
       }
     }
+  },
+  SET_CURRENTSETTING07(state, value) {
+    console.log('Template7', value)
   },
   SET_LAYOUTUNICENTRO(state, value) {
     state.layoutUnicentro = value

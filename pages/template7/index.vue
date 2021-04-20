@@ -1,50 +1,49 @@
 <template lang="html">
   <div>
     <KCarousel
+      id="kbannerX"
       v-bind="componentsProps"
-      v-if="showTemplate7.showCarousel && settingByTemplate7.banner.visible"
+      v-if="settingByTemplate7.banner.visible"
     />
     <KPromo
+      id="KoffersX"
       v-bind="componentsProps"
-      v-if="showTemplate7.showPromo && settingByTemplate7.content.visible"
+      v-if="settingByTemplate7.content.visible"
     />
     <KProductList
+      id="KproductlistX"
       v-bind="componentsProps"
-      v-if="
-        showTemplate7.showProductList && settingByTemplate7.productList.visible
-      "
+      v-if="settingByTemplate7.productList.visible"
     />
     <KAdvertising
+      id="KAdvertisingX"
       v-bind="componentsProps"
-      v-if="
-        showTemplate7.showAdvertising && settingByTemplate7.advertising.visible
-      "
+      v-if="settingByTemplate7.advertising.visible"
     />
     <KGify
+      id="KGifyX"
       v-bind="componentsProps"
-      v-if="
-        showTemplate7.showGify && settingByTemplate7.ProductFavorite.visible
-      "
+      v-if="settingByTemplate7.ProductFavorite.visible"
     />
     <KHowwork
+      id="KHowworkX"
       v-bind="componentsProps"
-      v-if="showTemplate7.showHowwork && settingByTemplate7.howWork.visible"
+      v-if="settingByTemplate7.howWork.visible"
     />
     <KBlog
+      id="KblogX"
       v-bind="componentsProps"
-      v-show="
-        listArticulos.length > 0 &&
-        showTemplate7.showBlog &&
-        settingByTemplate7.blog.visible
-      "
+      v-show="listArticulos.length > 0 && settingByTemplate7.blog.visible"
     />
     <KNews
+      id="KNewsX"
       v-bind="componentsProps"
-      v-if="showTemplate7.showNews && settingByTemplate7.newsletter.visible"
+      v-if="settingByTemplate7.newsletter.visible"
     />
     <KWrapper
+      id="KWrapperX"
       v-bind="componentsProps"
-      v-if="showTemplate7.showWrapper && settingByTemplate7.contentImg.visible"
+      v-if="settingByTemplate7.contentImg.visible"
     />
   </div>
 </template>
@@ -76,6 +75,7 @@ export default {
     KWrapper,
   },
   mounted() {
+    window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
     let domain = this.$route.fullPath
     this.showComponent07(domain)
@@ -143,25 +143,24 @@ export default {
             : null,
       }
     },
-    showTemplate7() {
-      return this.$store.state.showTemplate7
-    },
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenertemplate)
   },
   methods: {
     addEventListenertemplate(e) {
-      if (e.origin.includes('https://panel.komercia.co')) {
-        alert('Prueba eventListener' + e)
+      // console.log(e)
+      if (
+        e.origin.includes('https://panel.komercia.co') ||
+        e.origin.includes('http://localhost:8080')
+      ) {
+        if (e && e.data) {
+          this.$store.commit('SET_CURRENTSETTING07', e.data)
+        }
       }
     },
-  },
-  watch: {
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      let domain = this.$route.fullPath
-      this.showComponent07(domain)
+    moverseA(idDelElemento) {
+      location.hash = '#' + idDelElemento
     },
   },
 }
