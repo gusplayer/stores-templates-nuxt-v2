@@ -1,86 +1,96 @@
 <template>
   <div
-    class="footer-container"
-    ref="background"
-    id="BgFooter"
     :style="[
       settingByTemplate7[0].setting7Header,
       settingByTemplate7[0].setting7General,
     ]"
   >
     <div
-      class="footer-content"
-      :style="{
-        '--font-style-1':
-          this.settingByTemplate7 &&
-          this.settingByTemplate7[0].setting7General &&
-          this.settingByTemplate7[0].setting7General.fount_1
-            ? this.settingByTemplate7[0].setting7General.fount_1
-            : 'David libre',
-      }"
+      class="footer-container"
+      ref="background"
+      :style="
+        this.settingByTemplate7[0].setting7Footer.img_background == true
+          ? `background-image: url(${this.settingByTemplate7[0].setting7Footer['--url_img']})`
+          : 'background-image: none;'
+      "
     >
-      <div class="footer-content-items">
-        <div class="footer-content-logo">
-          <img
-            class="footer-logo"
-            v-lazy="`https://api2.komercia.co/logos/582-Txm0318.png`"
-            alt=""
-          />
-        </div>
-        <div class="footer-content-button">
-          <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-            <nuxt-link :to="item.path" v-if="item.path" class="btn">
-              {{ $t(`${item.name}`) }}
-            </nuxt-link>
-            <nuxt-link
-              :to="item.href"
-              v-else-if="item.href && listArticulos > 0"
-              class="btn"
-              >{{ $t(`${item.name}`) }}</nuxt-link
-            >
+      <div
+        class="footer-content"
+        :style="{
+          '--font-style-1':
+            this.settingByTemplate7 &&
+            this.settingByTemplate7[0].setting7General &&
+            this.settingByTemplate7[0].setting7General.fount_1
+              ? this.settingByTemplate7[0].setting7General.fount_1
+              : 'David libre',
+        }"
+      >
+        <div class="footer-content-items">
+          <div class="footer-content-logo">
+            <img
+              class="footer-logo"
+              v-lazy="`https://api2.komercia.co/logos/582-Txm0318.png`"
+              alt=""
+            />
           </div>
+          <div class="footer-content-button">
+            <div
+              v-for="(item, index) in secciones"
+              :key="`${index}${item.name}`"
+            >
+              <nuxt-link :to="item.path" v-if="item.path" class="btn">
+                {{ $t(`${item.name}`) }}
+              </nuxt-link>
+              <nuxt-link
+                :to="item.href"
+                v-else-if="item.href && listArticulos > 0"
+                class="btn"
+                >{{ $t(`${item.name}`) }}</nuxt-link
+              >
+            </div>
+          </div>
+          <KoSocialNet :dataStore="dataStore"></KoSocialNet>
         </div>
-        <KoSocialNet :dataStore="dataStore"></KoSocialNet>
+        <div class="content-Pliticas-Terminos">
+          <button
+            class="btn"
+            @click="OpenModalPolitics"
+            v-if="dataStore.politicas"
+          >
+            {{ $t('footer_politicasyterminos') }}
+          </button>
+        </div>
+        <div class="separator"></div>
+        <div class="madebyKomercia">
+          <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
+          <a
+            href="https://komercia.co/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img
+              v-lazy="
+                `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
+              "
+              v-if="logo == true"
+              class="logo2"
+              alt="Logo Img"
+            />
+            <img
+              v-lazy="
+                `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
+              "
+              v-else
+              class="logo2"
+              alt="Logo Img"
+            />
+          </a>
+        </div>
       </div>
-      <div class="content-Pliticas-Terminos">
-        <button
-          class="btn"
-          @click="OpenModalPolitics"
-          v-if="dataStore.politicas"
-        >
-          {{ $t('footer_politicasyterminos') }}
-        </button>
-      </div>
-      <div class="separator"></div>
-      <div class="madebyKomercia">
-        <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
-        <a
-          href="https://komercia.co/"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <img
-            v-lazy="
-              `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
-            "
-            v-if="logo == true"
-            class="logo2"
-            alt="Logo Img"
-          />
-          <img
-            v-lazy="
-              `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
-            "
-            v-else
-            class="logo2"
-            alt="Logo Img"
-          />
-        </a>
-      </div>
-    </div>
-    <div v-if="showModal">
-      <div class="modal" v-if="dataStore.politicas">
-        <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+      <div v-if="showModal">
+        <div class="modal" v-if="dataStore.politicas">
+          <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+        </div>
       </div>
     </div>
   </div>
@@ -107,9 +117,6 @@ export default {
       this.settingByTemplate7[0].setting7Footer.img_background == false
     ) {
       this.setLogo()
-    } else {
-      this.setBg()
-      this.logo = true
     }
   },
   data() {
@@ -136,7 +143,7 @@ export default {
           href: '/blog',
         },
       ],
-      logo: null,
+      logo: true,
     }
   },
   computed: {
@@ -150,12 +157,6 @@ export default {
   methods: {
     OpenModalPolitics() {
       this.$store.state.modalpolitics05 = true
-    },
-    setBg() {
-      if (this.settingByTemplate7[0].setting7Footer['--url_img']) {
-        var imagen = document.getElementById('BgFooter')
-        imagen.style.backgroundImage = `url(${this.settingByTemplate7[0].setting7Footer['--url_img']})`
-      }
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
@@ -171,20 +172,16 @@ export default {
     },
   },
   watch: {
-    settingByTemplate7f(value) {
-      if (
-        this.settingByTemplate7 &&
-        this.settingByTemplate7[0].setting7Footer &&
-        this.settingByTemplate7[0].setting7Footer.img_background == true
-      ) {
-        this.setBg()
-      }
+    settingByTemplate7f() {
       if (
         this.settingByTemplate7 &&
         this.settingByTemplate7[0].setting7Footer &&
         this.settingByTemplate7[0].setting7Footer.img_background == false
       ) {
-        let colorArray = value.split(',')
+        let color = getComputedStyle(this.$refs.background).getPropertyValue(
+          '--background_color_1'
+        )
+        let colorArray = color.split(',')
         let colorInt = parseInt(colorArray[2])
         if (colorInt > 50) {
           this.logo = true
@@ -200,12 +197,12 @@ export default {
 <style scoped>
 .footer-container {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center bg-auto bg-center bg-no-repeat;
   height: 322px;
+  @apply flex flex-col justify-center items-center bg-auto bg-center bg-no-repeat;
 }
 .footer-content {
-  @apply flex flex-col justify-center items-center;
   margin-bottom: 10px;
+  @apply flex flex-col justify-center items-center;
 }
 .footer-content-items {
   @apply flex flex-col justify-center items-center w-full my-10;
@@ -219,9 +216,9 @@ export default {
   @apply w-full flex flex-wrap gap-4 justify-center items-center mt-32;
 }
 .btn {
-  @apply mx-8 font-semibold uppercase tracking-wider;
   color: var(--color_text);
   transition: all 0.25s ease;
+  @apply mx-8 font-semibold uppercase tracking-wider;
 }
 .btn:hover {
   @apply text-red-btnhoverHeader;

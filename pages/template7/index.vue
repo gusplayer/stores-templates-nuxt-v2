@@ -75,10 +75,10 @@ export default {
     KWrapper,
   },
   mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
-    let domain = this.$route.fullPath
-    this.showComponent07(domain)
+    // window.parent.postMessage('message', '*')
+    // window.addEventListener('message', this.addEventListenertemplate)
+    // let domain = this.$route.fullPath
+    // this.showComponent07(domain)
   },
   computed: {
     dataStore() {
@@ -145,23 +145,30 @@ export default {
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    // window.removeEventListener('message', this.addEventListenertemplate)
   },
   methods: {
-    addEventListenertemplate(e) {
-      // console.log(e)
-      if (
-        e.origin.includes('https://panel.komercia.co') ||
-        e.origin.includes('http://localhost:8080')
-      ) {
-        if (e && e.data) {
-          this.$store.commit('SET_CURRENTSETTING07', e.data)
-        }
-      }
-    },
+    // addEventListenertemplate(e) {
+    //   // console.log(e)
+    //   if (
+    //     e.origin.includes('https://panel.komercia.co') ||
+    //     e.origin.includes('http://localhost:8080')
+    //   ) {
+    //     if (e && e.data) {
+    //       this.$store.commit('SET_CURRENTSETTING07', e.data)
+    //     }
+    //   }
+    // },
     moverseA(idDelElemento) {
       location.hash = '#' + idDelElemento
     },
+  },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    // $route(to, from) {
+    //   let domain = this.$route.fullPath
+    //   this.showComponent09(domain)
+    // },
   },
 }
 </script>

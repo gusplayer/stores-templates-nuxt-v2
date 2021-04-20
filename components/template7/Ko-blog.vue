@@ -16,6 +16,7 @@
               : 'Lora',
         },
       ]"
+      v-if="settingKBlog"
     >
       <div class="wrapper-content-items">
         <div class="wrapper-items-text">

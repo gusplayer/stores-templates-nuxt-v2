@@ -131,7 +131,7 @@ export default {
           href: '/blog',
         },
       ],
-      logo: null,
+      logo: true,
     }
   },
   computed: {

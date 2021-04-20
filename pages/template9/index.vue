@@ -155,5 +155,12 @@ export default {
       location.hash = '#' + idDelElemento
     },
   },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      let domain = this.$route.fullPath
+      this.showComponent09(domain)
+    },
+  },
 }
 </script>

@@ -113,7 +113,7 @@ export default {
   data() {
     return {
       showLogo: true,
-      logo: null,
+      logo: true,
       secciones: [
         {
           name: 'footer_inicio',
