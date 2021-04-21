@@ -42,4 +42,4 @@ export default {
   watch: {},
 }
 </script>
-<style></style>
+

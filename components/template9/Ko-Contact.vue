@@ -444,7 +444,12 @@ export default {
 }
 @screen md {
   .banner-mapa {
-    margin-top: 140px;
+    margin-top: 0px;
+  }
+}
+@screen md {
+  .banner-mapa {
+    margin-top: 20px;
     @apply w-full flex;
   }
   .container-contact {
@@ -476,6 +481,9 @@ export default {
   }
 }
 @screen lg {
+  .banner-mapa {
+    margin-top: 0px;
+  }
   .left {
     width: 320px;
   }

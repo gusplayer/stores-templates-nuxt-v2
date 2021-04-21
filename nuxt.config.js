@@ -20,13 +20,6 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    // link: [
-    //   {
-    //     href:
-    //       'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap',
-    //     rel: 'stylesheet',
-    //   },
-    // ],
   },
   loading: {
     color: 'grey',
@@ -34,7 +27,7 @@ export default {
   },
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    'swiper/dist/css/swiper.css',
+    // 'swiper/dist/css/swiper.css',
     'core-components-npm/dist/ko.css',
   ],
   plugins: [
@@ -56,33 +49,40 @@ export default {
   ],
   modules: ['@nuxtjs/pwa', '@nuxtjs/gtm'],
   buildModules: ['@nuxtjs/tailwindcss'],
+  tailwindcss: {
+    jit: true,
+  },
   debug: {
     enabled: true,
   },
   pwa: {
     icon: false,
     meta: {
-      title: process.env.npm_package_name || '',
+      name: process.env.npm_package_name || '',
       author: 'Komercia',
+      description:
+        'tienda, store, shop, shopping, tienda online, online, komercia, producto, articulo',
+      theme_color: '#E2E4E7',
+      lang: 'es',
     },
     manifest: {
       name: process.env.npm_package_name || '',
       short_name: process.env.npm_package_name || '',
-      lang: 'es',
+      start_url: '/',
     },
   },
   build: {
-    minimize: true,
+    // minimize: true,
     // analyze: true, //Map webpack
     publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-        config.performance.maxAssetSize = 700 * 1024
-        if (isProd) {
-          config.optimization.splitChunks.maxSize = 249856 // 244 Kib
-        }
+        // config.performance.maxAssetSize = 700 * 1024
+        // if (isProd) {
+        //   config.optimization.splitChunks.maxSize = 249856 // 244 Kib
+        // }
       }
     },
     // postcss: {
@@ -90,38 +90,38 @@ export default {
     //     'postcss-nested': {},
     //   },
     // },
-    ...(isProd && {
-      optimization: {
-        runtimeChunk: 'single',
-        splitChunks: {
-          chunks: 'all',
-          automaticNameDelimiter: '.',
-          name: true,
-          maxSize: 249856,
-        },
-      },
-    }),
-    ...(isProd && {
-      html: {
-        minify: {
-          collapseBooleanAttributes: true,
-          decodeEntities: true,
-          minifyCSS: true,
-          minifyJS: true,
-          processConditionalComments: true,
-          removeEmptyAttributes: true,
-          removeRedundantAttributes: true,
-          trimCustomFragments: true,
-          useShortDoctype: true,
-        },
-      },
-    }),
+    // ...(isProd && {
+    //   optimization: {
+    //     runtimeChunk: 'single',
+    //     splitChunks: {
+    //       chunks: 'all',
+    //       automaticNameDelimiter: '.',
+    //       name: true,
+    //       maxSize: 249856,
+    //     },
+    //   },
+    // }),
+    // ...(isProd && {
+    //   html: {
+    //     minify: {
+    //       collapseBooleanAttributes: true,
+    //       decodeEntities: true,
+    //       minifyCSS: true,
+    //       minifyJS: true,
+    //       processConditionalComments: true,
+    //       removeEmptyAttributes: true,
+    //       removeRedundantAttributes: true,
+    //       trimCustomFragments: true,
+    //       useShortDoctype: true,
+    //     },
+    //   },
+    // }),
   },
-  render: {
-    bundleRenderer: {
-      shouldPreload: (file, type) => ['script', 'style', 'font'].includes(type),
-    },
-  },
+  // render: {
+  //   bundleRenderer: {
+  //     shouldPreload: (file, type) => ['script', 'style', 'font'].includes(type),
+  //   },
+  // },
   router: {
     base: '/',
   },

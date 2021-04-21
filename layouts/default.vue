@@ -626,7 +626,9 @@ export default {
   --btnhover: #929292;
   --radius_btn: 5px;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 * {
   scroll-behavior: smooth;
   margin: 0px;

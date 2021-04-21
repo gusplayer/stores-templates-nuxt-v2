@@ -16,106 +16,48 @@
               : 'Roboto',
         },
       ]"
+      v-if="this.banner"
     >
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper" v-if="this.banner.values">
           <div
             class="swiper-slide"
-            v-if="
-              this.banner &&
-              this.banner.values &&
-              this.banner.values[0] &&
-              this.banner.values[0]['url_img_background']
-            "
+            v-for="(elementBannner, index) in this.banner.values"
+            :key="index"
           >
             <div
               class="swiper-slide-1"
-              :style="`background-image: url(${this.banner.values[0]['url_img_background']})`"
+              :style="`background-image: url(${elementBannner['url_img_background']})`"
             >
               <div class="banner-content-items-1">
                 <div class="content-items-1">
                   <div class="text-top">
                     <p
                       class="banner-text-top"
-                      :style="`color: ${banner.values[0]['--color_pretitle']};`"
+                      :style="`color: ${elementBannner['--color_pretitle']};`"
                     >
-                      {{ banner.values[0].pretitle }}
+                      {{ elementBannner.pretitle }}
                     </p>
                   </div>
                   <div class="text-medium">
                     <p
                       class="banner-text-medium"
-                      :style="`color: ${banner.values[0]['--color_title']};`"
+                      :style="`color: ${elementBannner['--color_title']};`"
                     >
-                      {{ banner.values[0].title }}
+                      {{ elementBannner.title }}
                     </p>
                   </div>
                   <div class="text-bottom">
                     <p
                       class="banner-text-bottom"
-                      :style="`color: ${banner.values[0]['--color_description']};`"
+                      :style="`color: ${elementBannner['--color_description']};`"
                     >
-                      {{ banner.values[0].description }}
+                      {{ elementBannner.description }}
                     </p>
                   </div>
                   <div class="banner-button">
                     <a
-                      :href="`${banner.values[0].url_redirect}`"
-                      rel="noreferrer noopener"
-                      target="_blank"
-                      class="btn-shop"
-                    >
-                      <span class="text-button">
-                        {{ $t('home_comprarAhora') }}
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="swiper-slide"
-            v-if="
-              this.banner &&
-              this.banner.values &&
-              this.banner.values[1] &&
-              this.banner.values[1]['url_img_background']
-            "
-          >
-            <div
-              class="swiper-slide-2"
-              :style="`background-image: url(${this.banner.values[1]['url_img_background']})`"
-            >
-              <div class="banner-content-items-2">
-                <div class="content-items-2">
-                  <div class="text-top">
-                    <span
-                      class="banner-text-top"
-                      :style="`color: ${banner.values[1]['--color_pretitle']};`"
-                    >
-                      {{ banner.values[1].pretitle }}</span
-                    >
-                  </div>
-                  <div class="text-medium">
-                    <span
-                      class="banner-text-medium"
-                      :style="`color: ${banner.values[1]['--color_title']};`"
-                    >
-                      {{ banner.values[1].title }}
-                    </span>
-                  </div>
-                  <div class="text-bottom">
-                    <p
-                      class="banner-text-bottom"
-                      :style="`color: ${banner.values[1]['--color_description']};`"
-                    >
-                      {{ banner.values[1].description }}
-                    </p>
-                  </div>
-                  <div class="banner-button">
-                    <a
-                      :href="`${banner.values[1].url_redirect}`"
+                      :href="`${elementBannner.url_redirect}`"
                       rel="noreferrer noopener"
                       target="_blank"
                       class="btn-shop"
@@ -156,10 +98,10 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-        autoplay: {
-          delay: 6000,
-          disableOnInteraction: false,
-        },
+        // autoplay: {
+        //   delay: 6000,
+        //   disableOnInteraction: false,
+        // },
       },
     }
   },
@@ -177,13 +119,6 @@ export default {
   @apply z-auto;
 }
 .swiper-slide-1 {
-  height: 831px;
-  width: 100vw;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.swiper-slide-2 {
   height: 831px;
   width: 100vw;
   background-size: cover;
@@ -236,19 +171,10 @@ export default {
   .swiper-slide-1 {
     @apply flex flex-col justify-center items-center z-auto;
   }
-  .swiper-slide-2 {
-    @apply flex flex-col justify-center items-center z-auto;
-  }
   .banner-content-items-1 {
     @apply w-9/0 flex flex-col justify-center items-center;
   }
-  .banner-content-items-2 {
-    @apply w-7/0 flex flex-col justify-center items-center;
-  }
   .content-items-1 {
-    @apply w-full;
-  }
-  .content-items-2 {
     @apply w-full;
   }
   .text-top {
@@ -266,7 +192,6 @@ export default {
     line-height: 0.9;
     font-weight: 700;
   }
-
   .text-bottom {
     @apply w-full flex flex-col justify-center items-center text-center mb-24;
   }
@@ -293,9 +218,6 @@ export default {
   .banner-content-items-1 {
     @apply w-7/0;
   }
-  .banner-content-items-2 {
-    @apply w-6/5;
-  }
   .banner-text-top {
     font-size: 16px;
   }
@@ -310,20 +232,11 @@ export default {
   .swiper-slide-1 {
     @apply justify-center items-center z-auto;
   }
-  .swiper-slide-2 {
-    @apply justify-center items-center z-auto;
-  }
   .banner-content-items-1 {
     @apply w-9/8 justify-start items-start;
   }
-  .banner-content-items-2 {
-    @apply w-5/0 justify-start items-start;
-  }
   .content-items-1 {
     @apply w-5/0;
-  }
-  .content-items-2 {
-    @apply w-9/0;
   }
   .text-top {
     @apply justify-start items-start text-left mb-0;
@@ -343,15 +256,8 @@ export default {
     @apply justify-start items-start;
     width: 1300px;
   }
-  .banner-content-items-2 {
-    @apply justify-end items-end;
-    width: 1300px;
-  }
   .content-items-1 {
     width: 47%;
-  }
-  .content-items-2 {
-    width: 35%;
   }
   .text-top {
     @apply mb-20;
