@@ -9,9 +9,9 @@
           : 'Roboto',
     }"
   >
-    <component v-bind="componentsProps" :is="headerTemplate" id="headerX" />
+    <component v-bind="componentsProps" :is="headerTemplate" />
     <nuxt />
-    <component v-bind="componentsProps" :is="footerTemplate" id="footerX" />
+    <component v-bind="componentsProps" :is="footerTemplate" />
     <KoFooterCountry :dataStore="dataStore" />
     <div
       class="wrapper-whatsapp"

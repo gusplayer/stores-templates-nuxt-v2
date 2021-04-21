@@ -10,7 +10,6 @@
   >
     <div
       class="wrapper-header"
-      id="headbg"
       :style="[
         {
           '--font-style-1':
@@ -22,7 +21,7 @@
         },
       ]"
     >
-      <div class="header" id="headerid">
+      <div class="header">
         <KoOrder :dataStore="dataStore" />
         <div class="header-item-menu">
           <menu-icon
@@ -153,14 +152,6 @@ export default {
     settingByTemplate9: Array,
   },
   mounted() {
-    let colorBg = ''
-    if (this.settingByTemplate9 && this.settingByTemplate9[0].setting9Header) {
-      colorBg = this.settingByTemplate9[0].setting9Header[
-        '--background_color_1'
-      ]
-    } else {
-      colorBg = '#ffffff'
-    }
     let domain = this.$route.fullPath
     let searchCategory = domain.slice(0, [11])
     let searchSubCategory = domain.slice(0, [14])
@@ -181,27 +172,15 @@ export default {
     } else {
       this.showSearch = false
     }
-    var navbar = document.getElementById('navbar')
-    var header = document.getElementById('headerid')
-    var bghead = document.getElementById('headbg')
-    var prevScrollpos = window.pageYOffset
-    header.style.backgroundColor = colorBg
-    window.onscroll = function () {
-      var currentScrollPos = window.pageYOffset
-      if (currentScrollPos == 0) {
-        navbar.style.zIndex = '20'
-        navbar.style.top = '0px'
-      } else if (prevScrollpos > currentScrollPos && navbar) {
-        navbar.style.top = '0px'
-        navbar.style.zIndex = '20'
-        bghead.style.backgroundColor = colorBg
-        // header.style.boxShadow = '0px 22px 11px -12px rgba(145, 145, 145, 0.57)'
+
+    window.addEventListener('scroll', function () {
+      var navbar = document.getElementById('navbar')
+      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
+        navbar.style.position = 'fixed'
       } else {
-        navbar.style.zIndex = '20'
-        navbar.style.top = '-100px'
+        navbar.style.position = 'static'
       }
-      prevScrollpos = currentScrollPos
-    }
+    })
   },
   data() {
     return {
@@ -311,21 +290,6 @@ export default {
         this.showSearch = false
       }
     },
-    settingByTemplate9() {
-      let colorBg = ''
-      if (
-        this.settingByTemplate9 &&
-        this.settingByTemplate9[0].setting9Header
-      ) {
-        colorBg = this.settingByTemplate9[0].setting9Header[
-          '--background_color_1'
-        ]
-      }
-      var header = document.getElementById('headerid')
-      var bghead = document.getElementById('headbg')
-      header.style.backgroundColor = colorBg
-      bghead.style.backgroundColor = colorBg
-    },
   },
 }
 </script>
@@ -334,9 +298,12 @@ export default {
 .header-container {
   transition: all 0.5s ease-in-out;
   border-bottom: 1px solid var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center fixed top-0 z-10;
+  background: var(--background_color_1);
+  position: static;
+  @apply w-full flex flex-col justify-center items-center top-0 z-10;
 }
 .wrapper-header {
+  background: var(--background_color_1);
   @apply flex flex-col w-full justify-between items-center;
 }
 .header {

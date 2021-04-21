@@ -141,7 +141,6 @@ export default {
   },
   methods: {
     addEventListenertemplate(e) {
-      // console.log(e)
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')

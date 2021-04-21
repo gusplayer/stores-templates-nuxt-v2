@@ -24,6 +24,7 @@
             v-if="
               this.banner &&
               this.banner.values &&
+              this.banner.values[0] &&
               this.banner.values[0]['url_img_background']
             "
           >
@@ -78,7 +79,8 @@
             v-if="
               this.banner &&
               this.banner.values &&
-              this.banner.values[0]['url_img_background']
+              this.banner.values[1] &&
+              this.banner.values[1]['url_img_background']
             "
           >
             <div
@@ -166,7 +168,7 @@ export default {
 <style scoped>
 .contein-carousel {
   @apply w-full flex flex-col justify-center items-center;
-  margin-top: 72px;
+  /* margin-top: 72px; */
 }
 .carousel-content {
   @apply w-full flex justify-center items-center z-auto;

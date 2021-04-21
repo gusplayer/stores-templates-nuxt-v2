@@ -6,10 +6,10 @@ export default {
           this.moverseA('headerX')
           break
         case '/?component=header':
-          this.moverseA('headerX')
+          this.moverseA('kbannerX')
           break
         case '/?component=footer':
-          this.moverseA('footerX')
+          this.moverseA('KNewsX')
           break
         case '/?component=banner':
           this.moverseA('kbannerX')
@@ -46,10 +46,10 @@ export default {
           this.moverseA('headerX')
           break
         case '/?component=header':
-          this.moverseA('headerX')
+          this.moverseA('kbannerX')
           break
         case '/?component=footer':
-          this.moverseA('footerX')
+          this.moverseA('KNewsX')
           break
         case '/?component=banner':
           this.moverseA('kbannerX')
