@@ -98,10 +98,10 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-        // autoplay: {
-        //   delay: 6000,
-        //   disableOnInteraction: false,
-        // },
+        autoplay: {
+          delay: 6000,
+          disableOnInteraction: false,
+        },
       },
     }
   },

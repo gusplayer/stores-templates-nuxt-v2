@@ -3,6 +3,7 @@
     <Kbanner
       id="kbannerX"
       v-bind="componentsProps"
+      :key="bannerRendering"
       v-if="
         settingByTemplate9 &&
         settingByTemplate9.banner &&
@@ -79,6 +80,11 @@ export default {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
   },
+  data() {
+    return {
+      bannerRendering: 0,
+    }
+  },
   computed: {
     dataStore() {
       return this.$store.state.dataStore
@@ -142,6 +148,9 @@ export default {
       ) {
         if (e && e.data && e.data.component) {
           this.$store.commit('SET_CURRENTSETTING09', e.data)
+          if (e.data.component == 'banner') {
+            this.bannerRendering += 1
+          }
         } else if (e && e.data && e.data.componentToEdit) {
           switch (e.data.componentToEdit) {
             case 'settingGeneral':
