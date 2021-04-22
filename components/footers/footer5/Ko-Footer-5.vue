@@ -29,6 +29,7 @@
             alt=""
           />
         </div>
+        <KoSocialNet :dataStore="dataStore"></KoSocialNet>
         <div class="footer-content-button">
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
             <nuxt-link :to="item.path" v-if="item.path" class="btn">
@@ -42,7 +43,6 @@
             >
           </div>
         </div>
-        <KoSocialNet :dataStore="dataStore"></KoSocialNet>
       </div>
       <div class="content-Pliticas-Terminos">
         <button
@@ -203,7 +203,7 @@ export default {
   @apply object-contain;
 }
 .footer-content-button {
-  @apply w-full flex flex-wrap gap-4 justify-center items-center mt-32;
+  @apply w-full flex flex-wrap gap-4 justify-center items-center mt-32 mb-10;
 }
 .btn {
   transition: all 0.1s ease;

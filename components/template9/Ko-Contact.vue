@@ -18,7 +18,14 @@
         },
       ]"
     >
-      <div class="banner-mapa" v-if="dataStore.geolocalizacion.length">
+      <div
+        class="banner-mapa"
+        v-if="
+          this.dataStore &&
+          this.dataStore.geolocalizacion &&
+          this.dataStore.geolocalizacion.length
+        "
+      >
         <iframe
           :src="`https://maps.google.com/maps?q=${this.dataStore.geolocalizacion[0].latitud},${this.dataStore.geolocalizacion[0].longitud}&hl=es;z=14&amp;output=embed`"
           width="100%"
@@ -36,7 +43,15 @@
                 Información
               </p>
             </div>
-            <div class="content-locatioin">
+            <div
+              class="content-locatioin"
+              v-if="
+                this.dataStore &&
+                this.dataStore.geolocalizacion &&
+                this.dataStore.geolocalizacion.length &&
+                this.dataStore.geolocalizacion[0].direccion
+              "
+            >
               <svg
                 class="icon-left"
                 xmlns="http://www.w3.org/2000/svg"
@@ -53,8 +68,23 @@
                 {{ this.dataStore.geolocalizacion[0].direccion }}
               </p>
             </div>
-            <div class="empty"></div>
-            <div class="content-email">
+            <div
+              class="empty"
+              v-if="
+                this.dataStore &&
+                this.dataStore.geolocalizacion &&
+                this.dataStore.geolocalizacion.length &&
+                this.dataStore.geolocalizacion[0].direccion
+              "
+            ></div>
+            <div
+              class="content-email"
+              v-if="
+                this.dataStore &&
+                this.dataStore.tienda &&
+                this.dataStore.tienda.email_tienda
+              "
+            >
               <svg
                 class="icon-left"
                 xmlns="http://www.w3.org/2000/svg"
