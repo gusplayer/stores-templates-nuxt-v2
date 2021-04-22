@@ -40,36 +40,5 @@ export default {
           break
       }
     },
-    showComponent09(domain) {
-      switch (domain) {
-        case '':
-          this.moverseA('headerX')
-          break
-        case '/?component=header':
-          this.moverseA('kbannerX')
-          break
-        case '/?component=footer':
-          this.moverseA('KNewsX')
-          break
-        case '/?component=banner':
-          this.moverseA('kbannerX')
-          break
-        case '/?component=koffers':
-          this.moverseA('KoffersX')
-          break
-        case '/?component=productList':
-          this.moverseA('KproductlistX')
-          break
-        case '/?component=blog':
-          this.moverseA('KblogX')
-          break
-        case '/?component=wrapper':
-          this.moverseA('KWrapperX')
-          break
-        case '/?component=newsletter':
-          this.moverseA('KNewsX')
-          break
-      }
-    },
   },
 }

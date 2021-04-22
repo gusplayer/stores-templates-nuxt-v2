@@ -181,43 +181,45 @@ export const state = () => ({
 export const mutations = {
   SET_CURRENTSETTING09(state, value) {
     if (value) {
-      switch (value.component) {
-        case 'settingGeneral':
-          state.settingByTemplate9.settingGeneral = value
-          break
-        case 'header':
-          state.settingByTemplate9.header = value
-          break
-        case 'footer':
-          state.settingByTemplate9.footer = value
-          break
-        case 'banner':
-          state.settingByTemplate9.banner = value
-          break
-        case 'koffers':
-          state.settingByTemplate9.koffers = value
-          break
-        case 'productList':
-          state.settingByTemplate9.productList = value
-          break
-        case 'blog':
-          state.settingByTemplate9.blog = value
-          break
-        case 'wrapper':
-          state.settingByTemplate9.wrapper = value
-          break
-        case 'newsletter':
-          state.settingByTemplate9.newsletter = value
-          break
-        case 'productListFilter':
-          state.settingByTemplate9.productListFilter = value
-          break
-        case 'contact':
-          state.settingByTemplate9.contact = value
-          break
-        case 'detailsProduct':
-          state.settingByTemplate9.detailsProduct = value
-          break
+      if (value.component) {
+        switch (value.component) {
+          case 'settingGeneral':
+            state.settingByTemplate9.settingGeneral = value
+            break
+          case 'header':
+            state.settingByTemplate9.header = value
+            break
+          case 'footer':
+            state.settingByTemplate9.footer = value
+            break
+          case 'banner':
+            state.settingByTemplate9.banner = value
+            break
+          case 'koffers':
+            state.settingByTemplate9.koffers = value
+            break
+          case 'productList':
+            state.settingByTemplate9.productList = value
+            break
+          case 'blog':
+            state.settingByTemplate9.blog = value
+            break
+          case 'wrapper':
+            state.settingByTemplate9.wrapper = value
+            break
+          case 'newsletter':
+            state.settingByTemplate9.newsletter = value
+            break
+          case 'productListFilter':
+            state.settingByTemplate9.productListFilter = value
+            break
+          case 'contact':
+            state.settingByTemplate9.contact = value
+            break
+          case 'detailsProduct':
+            state.settingByTemplate9.detailsProduct = value
+            break
+        }
       }
     }
   },

@@ -65,11 +65,8 @@ import Kproductlist from '../../components/template9/Ko-ProductList'
 import Kblog from '../../components/template9/ko-blog'
 import KWrapper from '../../components/template9/Ko-wrapper'
 import KNews from '../../components/template9/Ko-Newsletter'
-import showComponent09 from '../../mixins/showComponent'
-
 export default {
   layout: 'default',
-  mixins: [showComponent09],
   components: {
     Kbanner,
     Koffers,
@@ -81,8 +78,6 @@ export default {
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
-    let domain = this.$route.fullPath
-    this.showComponent09(domain)
   },
   computed: {
     dataStore() {
@@ -145,20 +140,43 @@ export default {
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
       ) {
-        if (e && e.data) {
+        if (e && e.data && e.data.component) {
           this.$store.commit('SET_CURRENTSETTING09', e.data)
+        } else if (e && e.data && e.data.componentToEdit) {
+          switch (e.data.componentToEdit) {
+            case 'settingGeneral':
+              this.moverseA('kbannerX')
+              break
+            // case 'header':
+            //   this.moverseA('kbannerX')
+            //   break
+            case 'footer':
+              this.moverseA('KNewsX')
+              break
+            case 'banner':
+              this.moverseA('kbannerX')
+              break
+            case 'koffers':
+              this.moverseA('KoffersX')
+              break
+            case 'productList':
+              this.moverseA('KproductlistX')
+              break
+            case 'blog':
+              this.moverseA('KblogX')
+              break
+            case 'wrapper':
+              this.moverseA('KWrapperX')
+              break
+            case 'newsletter':
+              this.moverseA('KNewsX')
+              break
+          }
         }
       }
     },
     moverseA(idDelElemento) {
       location.hash = '#' + idDelElemento
-    },
-  },
-  watch: {
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      let domain = this.$route.fullPath
-      this.showComponent09(domain)
     },
   },
 }
