@@ -1,5 +1,9 @@
 <template>
-  <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+  <div
+    v-swiper:mySwiper="swiperOption"
+    ref="mySwiper"
+    style="position: relative;"
+  >
     <div class="swiper-wrapper">
       <div
         class="swiper-slide"
@@ -11,15 +15,10 @@
         </client-only>
       </div>
     </div>
-    <!-- <div
-      class="swiper-pagination"
-      slot="pagination"
-      v-if="this.products.length > 1"
-    ></div> -->
-    <div class="swiper-button-prev btn" v-if="this.products.length > 1">
+    <div class="prev btnPrev" v-if="this.products.length > 1">
       <FlechaLeft-icon class="btn-icon" />
     </div>
-    <div class="swiper-button-next btn" v-if="this.products.length > 1">
+    <div class="next btnNext" v-if="this.products.length > 1">
       <FlechaRight-icon class="btn-icon" />
     </div>
   </div>
@@ -87,8 +86,8 @@ export default {
           },
         },
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
+          nextEl: '.next',
+          prevEl: '.prev',
         },
       },
     }
@@ -109,18 +108,23 @@ export default {
 <style scoped>
 .swiper-wrapper {
   width: 100%;
-  position: relative;
 }
 .swiper-slide {
   width: 100%;
 }
-.swiper-pagination >>> .swiper-pagination-bullet {
-  background-color: grey;
+.btnPrev {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  border-radius: 25px;
+  padding: 0px 22px;
+  background: black;
+  cursor: pointer;
 }
-.swiper-pagination >>> .swiper-pagination-bullet-active {
-  background-color: var(--color_icon);
-}
-.btn {
+.btnNext {
+  position: absolute;
+  z-index: 10;
+  right: 0;
   border-radius: 25px;
   padding: 0px 22px;
   background: black;
@@ -136,6 +140,6 @@ export default {
   bottom: 0.125em;
 }
 .btn-icon:hover {
-  color: var(--color_icon);
+  color: var(--color_text);
 }
 </style>
