@@ -28,7 +28,11 @@
             rel="noreferrer noopener"
             :href="imagen.url_redirect"
           >
-            <img class="img-wrapp" :src="imagen.url_img" alt="wrapper-images" />
+            <img
+              class="img-wrapp"
+              v-lazy="imagen.url_img"
+              alt="wrapper-images"
+            />
           </a>
         </div>
       </div>

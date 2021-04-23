@@ -25,7 +25,9 @@
         <div class="footer-content-logo">
           <img
             class="footer-logo"
-            v-lazy="`https://api2.komercia.co/logos/582-Txm0318.png`"
+            v-lazy="
+              `https://api2.komercia.co/logos/${this.dataStore.tienda.logo}`
+            "
             alt=""
           />
         </div>

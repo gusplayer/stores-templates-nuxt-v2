@@ -14,7 +14,7 @@
             <div class="product">
               <div class="product-image">
                 <img
-                  :src="idCloudinaryBanner(product.foto_cloudinary)"
+                  v-lazy="idCloudinaryBanner(product.foto_cloudinary)"
                   class="product-photo"
                   :alt="product.nombre"
                 />

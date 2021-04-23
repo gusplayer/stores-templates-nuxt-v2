@@ -55,7 +55,7 @@
                       {{ elementBannner.description }}
                     </p>
                   </div>
-                  <div class="banner-button">
+                  <div class="banner-button" v-if="elementBannner.url_redirect">
                     <a
                       :href="`${elementBannner.url_redirect}`"
                       rel="noreferrer noopener"

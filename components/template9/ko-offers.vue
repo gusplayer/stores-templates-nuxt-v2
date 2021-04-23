@@ -16,7 +16,7 @@
           <div class="items-left">
             <img
               class="image-left"
-              :src="koffers.values[0].url_img_background"
+              v-lazy="koffers.values[0].url_img_background"
               alt="image-left"
               v-if="koffers.values[0].url_img_background"
             />
@@ -37,7 +37,7 @@
                 >
                   {{ koffers.values[0].description }}
                 </p>
-                <div>
+                <div v-if="koffers.values[0].url_redirect">
                   <a
                     :href="`${koffers.values[0].url_redirect}`"
                     rel="noreferrer noopener"
@@ -67,7 +67,7 @@
           <div class="image-static" v-if="!hover">
             <img
               class="image"
-              :src="koffers.values[1].url_img_background"
+              v-lazy="koffers.values[1].url_img_background"
               v-if="koffers.values[1].url_img_background"
               alt="imagen center static"
             />
@@ -75,7 +75,7 @@
           <div class="image-gif" v-if="hover">
             <img
               class="image"
-              :src="koffers.values[1].url_gift_background"
+              v-lazy="koffers.values[1].url_gift_background"
               v-if="koffers.values[1].url_gift_background"
               alt="imagen center gift"
             />
@@ -85,7 +85,7 @@
           <div class="items-right">
             <img
               class="image-right"
-              :src="koffers.values[2].url_img_background"
+              v-lazy="koffers.values[2].url_img_background"
               v-if="koffers.values[2].url_img_background"
               alt="image-right"
             />
@@ -127,7 +127,10 @@
                     </p>
                   </div>
                 </div>
-                <div style="margin-top: 10px;">
+                <div
+                  style="margin-top: 10px;"
+                  v-if="koffers.values[2].url_redirect"
+                >
                   <a
                     :href="`${koffers.values[2].url_redirect}`"
                     rel="noreferrer noopener"
@@ -151,7 +154,7 @@
         <div class="items-left">
           <img
             class="image-left"
-            :src="koffers.values[0].url_img_background"
+            v-lazy="koffers.values[0].url_img_background"
             v-if="koffers.values[0].url_img_background"
             alt="image-left"
           />
@@ -171,7 +174,10 @@
               >
                 {{ koffers.values[0].description }}
               </p>
-              <div style="margin-top: 10px;">
+              <div
+                style="margin-top: 10px;"
+                v-if="koffers.values[0].url_redirect"
+              >
                 <a
                   :href="`${koffers.values[0].url_redirect}`"
                   rel="noreferrer noopener"
@@ -201,7 +207,7 @@
             <div class="image-static" v-if="!hover">
               <img
                 class="image"
-                :src="koffers.values[1].url_img_background"
+                v-lazy="koffers.values[1].url_img_background"
                 v-if="koffers.values[1].url_img_background"
                 alt="imagen center static"
               />
@@ -209,7 +215,7 @@
             <div class="image-gif" v-if="hover">
               <img
                 class="image"
-                :src="koffers.values[1].url_gift_background"
+                v-lazy="koffers.values[1].url_gift_background"
                 v-if="koffers.values[1].url_gift_background"
                 alt="imagen center gift"
               />
@@ -218,7 +224,7 @@
           <div class="items-right">
             <img
               class="image-right"
-              :src="koffers.values[2].url_img_background"
+              v-lazy="koffers.values[2].url_img_background"
               v-if="koffers.values[2].url_img_background"
               alt="image-right"
             />
@@ -260,7 +266,10 @@
                     </p>
                   </div>
                 </div>
-                <div style="margin-top: 10px;">
+                <div
+                  style="margin-top: 10px;"
+                  v-if="koffers.values[2].url_redirect"
+                >
                   <a
                     :href="`${koffers.values[2].url_redirect}`"
                     rel="noreferrer noopener"
@@ -284,7 +293,9 @@
   </div>
 </template>
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   props: {
     dataStore: Object,
     koffers: Object,
