@@ -188,9 +188,14 @@ export default {
     @apply grid grid-cols-3;
   }
 }
+@media (min-width: 1000px) {
+  .product-conten-items {
+    width: 95%;
+  }
+}
 @media (min-width: 1160px) {
   .product-conten-items {
-    @apply w-9/0 grid grid-cols-4;
+    @apply grid grid-cols-4;
     width: 95vw;
   }
 }

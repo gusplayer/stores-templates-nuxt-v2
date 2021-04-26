@@ -23,11 +23,7 @@
           :key="index"
           class="grid-imgs"
         >
-          <a
-            target="_blank"
-            rel="noreferrer noopener"
-            :href="imagen.url_redirect"
-          >
+          <a :href="imagen.url_redirect" rel="noreferrer noopener">
             <img
               class="img-wrapp"
               v-lazy="imagen.url_img"

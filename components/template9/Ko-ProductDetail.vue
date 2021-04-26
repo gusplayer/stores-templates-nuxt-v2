@@ -733,7 +733,7 @@ export default {
   background: var(--background_color_1);
   justify-content: center;
   align-items: center;
-  padding-top: 72px;
+  padding-top: 20px;
 }
 .container-productDetail-loading {
   height: calc(100vh - 420px);

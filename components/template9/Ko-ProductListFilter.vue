@@ -744,7 +744,7 @@ export default {
 <style scoped>
 .product-content {
   background: var(--background_color_1);
-  padding-top: 72px;
+  padding-top: 20px;
   @apply flex flex-col justify-center items-center w-full pb-40;
 }
 .content-banner-shop {

@@ -145,21 +145,25 @@ export default {
 </script>
 <style scoped>
 .producto {
+  max-height: 560px;
   background-color: #f8f8f8;
   @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
 .container {
+  max-height: 560px;
   @apply relative;
 }
 .images {
   width: 100%;
   height: 100%;
+  max-height: 560px;
   object-fit: cover;
   overflow: hidden;
 }
 .empty {
   background: #cccccc;
   height: 100%;
+  max-height: 560px;
   width: 100%;
 }
 .text-tittle {
@@ -314,10 +318,12 @@ export default {
 
 @media (max-width: 580px) {
   .images {
-    height: 300px;
+    height: 100%;
+    max-height: 300px;
   }
   .empty {
-    height: 300px;
+    height: 100%;
+    max-height: 300px;
   }
 }
 @media (min-width: 581px) {

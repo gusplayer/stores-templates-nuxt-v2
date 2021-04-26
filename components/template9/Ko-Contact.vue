@@ -354,8 +354,9 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-form-contact {
+  padding-top: 20px;
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center pt-69;
+  @apply w-full flex flex-col justify-center items-center;
 }
 .container-contact {
   @apply w-full justify-center items-center;

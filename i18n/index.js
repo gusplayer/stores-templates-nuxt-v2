@@ -211,7 +211,7 @@ export default {
     productdetail_compartir: 'Compartir:',
     productdetail_description: 'Descripción',
     productdetail_opcionesPago: 'Opciones de pago',
-    productdetail_stock: 'en stock',
+    productdetail_stock: 'Disponible',
     productdetail_categoria: 'Categoría',
     productdetail_añadiralcarrito: 'Añadir al carrito',
     productdetail_opcionesPagoMsg:
@@ -468,7 +468,7 @@ export default {
     productdetail_compartir: 'Share:',
     productdetail_description: 'Description',
     productdetail_opcionesPago: 'Payment options',
-    productdetail_stock: 'in stock',
+    productdetail_stock: 'Available',
     productdetail_categoria: 'Category',
     productdetail_añadiralcarrito: 'Add to cart',
     productdetail_opcionesPagoMsg:
@@ -726,7 +726,7 @@ export default {
     productdetail_compartir: 'Compartilhe:',
     productdetail_description: 'Descrição',
     productdetail_opcionesPago: 'Opções de pagamento',
-    productdetail_stock: 'em estoque',
+    productdetail_stock: 'Disponíve',
     productdetail_categoria: 'Categoria',
     productdetail_añadiralcarrito: 'Adicionar ao carrinho',
     productdetail_opcionesPagoMsg:

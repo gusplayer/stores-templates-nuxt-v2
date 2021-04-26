@@ -30,6 +30,7 @@
                 :article="article"
                 :blog="blog"
                 :settingGeneral="settingGeneral"
+                style="max-height: 560px;"
               ></Kblog>
             </div>
           </div>
@@ -131,12 +132,12 @@ export default {
 }
 .wrapper-content {
   background-color: var(--background_color_1);
-  @apply flex flex-col justify-center items-center w-full;
   padding-bottom: 64px;
+  @apply flex flex-col justify-center items-center w-full;
 }
 .wrapper-items-content {
-  @apply flex flex-col justify-center items-center;
   width: 93vw;
+  @apply flex flex-col justify-center items-center;
 }
 .wrapper-items {
   width: 93vw;
@@ -148,11 +149,11 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .tittle {
-  @apply flex flex-col justify-center items-center;
   /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-1);
   color: var(--color_title);
   font-weight: 700;
+  @apply flex flex-col justify-center items-center;
 }
 @screen sm {
   .product-tittle {

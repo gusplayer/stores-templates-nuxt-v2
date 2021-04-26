@@ -21,7 +21,6 @@
         <a
           :href="`${settingKPromo.values[0].url_redirect}`"
           rel="noreferrer noopener"
-          target="_blank"
         >
           <figure class="promo-banner-images">
             <img
@@ -54,7 +53,6 @@
           <a
             :href="`${settingKPromo.values[1].url_redirect}`"
             rel="noreferrer noopener"
-            target="_blank"
           >
             <figure class="promo-banner-images">
               <img
@@ -82,7 +80,6 @@
           <a
             :href="`${settingKPromo.values[2].url_redirect}`"
             rel="noreferrer noopener"
-            target="_blank"
           >
             <figure class="promo-banner-images">
               <img
@@ -111,7 +108,6 @@
         <a
           :href="`${settingKPromo.values[3].url_redirect}`"
           rel="noreferrer noopener"
-          target="_blank"
         >
           <figure class="promo-banner-images" id="promo-banner-images-4">
             <img

@@ -59,7 +59,6 @@
                     <a
                       :href="`${elementBannner.url_redirect}`"
                       rel="noreferrer noopener"
-                      target="_blank"
                       class="btn-shop"
                     >
                       <span class="text-button">

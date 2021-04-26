@@ -58,9 +58,8 @@
             :class="`swiper-slide wrapper-${index + 1}`"
           >
             <a
-              target="_blank"
-              rel="noreferrer noopener"
               :href="imagen.url_redirect"
+              rel="noreferrer noopener"
               class="wrapper-ints"
             >
               <img

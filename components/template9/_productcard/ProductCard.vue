@@ -533,6 +533,8 @@ export default {
   font-family: var(--font-style-2);
   font: inherit;
   font-size: 100%;
+  min-height: 49px;
+  max-height: 49px;
 }
 .categoria {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */

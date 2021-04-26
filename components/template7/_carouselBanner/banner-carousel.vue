@@ -36,7 +36,6 @@
             <a
               :href="`${banner.url_redirect}`"
               rel="noreferrer noopener"
-              target="_blank"
               class="content-bttns-shop"
             >
               <span class="content-textbutton-shop">

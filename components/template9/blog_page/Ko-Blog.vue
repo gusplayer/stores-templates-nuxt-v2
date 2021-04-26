@@ -100,6 +100,7 @@
                 :article="article"
                 :blog="settingByTemplate9[0].blog"
                 :settingGeneral="settingByTemplate9[0].settingGeneral"
+                style="max-height: 560px;"
               ></KoblogCard>
             </div>
           </div>
@@ -185,7 +186,7 @@ export default {
   box-sizing: border-box;
   margin-bottom: 40px;
   z-index: 10;
-  margin-top: 72px;
+  padding-top: 20px;
 }
 .contenedor {
   width: 100%;
@@ -256,6 +257,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .banner-blog {
+  padding-top: 20px;
   @apply w-full flex flex-col justify-center items-start pt-8 z-10;
   /* background-color: #efefef; */
 }

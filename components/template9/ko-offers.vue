@@ -41,7 +41,6 @@
                   <a
                     :href="`${koffers.values[0].url_redirect}`"
                     rel="noreferrer noopener"
-                    target="_blank"
                     class="btn-left"
                     :style="`background: ${koffers.values[0]['--color_background_btn']};`"
                   >
@@ -59,7 +58,6 @@
         <a
           :href="`${koffers.values[1].url_redirect}`"
           rel="noreferrer noopener"
-          target="_blank"
           class="items-center"
           @mouseover="hover = true"
           @mouseleave="hover = false"
@@ -134,7 +132,6 @@
                   <a
                     :href="`${koffers.values[2].url_redirect}`"
                     rel="noreferrer noopener"
-                    target="_blank"
                     class="btn-right"
                     :style="`background: ${koffers.values[2]['--color_background_btn']};`"
                   >
@@ -181,7 +178,6 @@
                 <a
                   :href="`${koffers.values[0].url_redirect}`"
                   rel="noreferrer noopener"
-                  target="_blank"
                   class="btn-left"
                   :style="`background: ${koffers.values[0]['--color_background_btn']};`"
                 >
@@ -199,7 +195,6 @@
           <a
             :href="`${koffers.values[1].url_redirect}`"
             rel="noreferrer noopener"
-            target="_blank"
             class="items-center"
             @mouseover="hover = true"
             @mouseleave="hover = false"
@@ -273,7 +268,6 @@
                   <a
                     :href="`${koffers.values[2].url_redirect}`"
                     rel="noreferrer noopener"
-                    target="_blank"
                     class="btn-right"
                     :style="`background: ${koffers.values[2]['--color_background_btn']};`"
                   >
