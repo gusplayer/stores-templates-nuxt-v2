@@ -1,9 +1,10 @@
 <template>
   <div
     :style="[
-      settingByTemplate7[0].setting7Header,
+      settingByTemplate7[0].setting7Footer,
       settingByTemplate7[0].setting7General,
     ]"
+    v-if="settingByTemplate7 && settingByTemplate7[0].setting7Footer"
   >
     <div
       class="footer-container"
@@ -29,8 +30,10 @@
           <div class="footer-content-logo">
             <img
               class="footer-logo"
-              v-lazy="`https://api2.komercia.co/logos/582-Txm0318.png`"
-              alt=""
+              v-lazy="
+                `https://api2.komercia.co/logos/${this.dataStore.tienda.logo}`
+              "
+              alt="logotienda"
             />
           </div>
           <div class="footer-content-button">

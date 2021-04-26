@@ -6,7 +6,7 @@
       settingByTemplate7[0].setting7Header,
       settingByTemplate7[0].setting7General,
     ]"
-    v-if="settingByTemplate7.length"
+    v-if="settingByTemplate7 && settingByTemplate7[0].setting7Header"
   >
     <div
       class="wrapper-header"

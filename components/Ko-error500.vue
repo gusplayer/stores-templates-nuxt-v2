@@ -14,7 +14,7 @@
         Contactar con Komercia
       </p>
       <p class="subtitle-error">
-        error 500
+        Error 500
       </p>
     </div>
   </div>
@@ -42,7 +42,7 @@ export default {
 .contenedor {
   width: 100%;
   max-width: 1300px;
-  height: calc(100vh - 432px);
+  height: calc(100vh - 36px);
   padding: 60px 20px 60px 20px;
   display: flex;
   justify-content: center;

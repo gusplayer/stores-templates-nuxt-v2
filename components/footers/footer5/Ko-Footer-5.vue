@@ -28,7 +28,7 @@
             v-lazy="
               `https://api2.komercia.co/logos/${this.dataStore.tienda.logo}`
             "
-            alt=""
+            alt="logotienda"
           />
         </div>
         <KoSocialNet :dataStore="dataStore"></KoSocialNet>
