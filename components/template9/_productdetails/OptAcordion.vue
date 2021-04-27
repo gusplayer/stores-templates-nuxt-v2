@@ -7,7 +7,6 @@
         v-html="data.info.descripcion"
       ></div>
     </div>
-
     <button class="accordion">{{ $t('productdetail_opcionesPago') }}</button>
     <div class="panel">
       <ul>
@@ -149,7 +148,6 @@
         </li>
       </ul>
     </div>
-
     <button class="accordion">{{ $t('productdetail_opinionesEnvio') }}</button>
     <div class="deliverys section panel" v-if="this.envios.envio_metodo">
       <div class="content">
@@ -271,7 +269,7 @@ export default {
   color: #000;
   cursor: pointer;
   font-weight: 800;
-  line-height: 38px;
+  /* line-height: 38px; */
   height: 62px;
   width: 100%;
   text-transform: capitalize;
@@ -281,13 +279,13 @@ export default {
   border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 .accordion:after {
-  @apply flex justify-center items-center;
   content: '\002B';
   color: #000;
   font-size: 22px;
   font-weight: 400;
   float: left;
   margin-right: 10px;
+  @apply flex justify-center items-center;
 }
 .active:after {
   content: '\2212';

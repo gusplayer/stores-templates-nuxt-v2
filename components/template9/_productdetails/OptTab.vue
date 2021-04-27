@@ -303,12 +303,12 @@ export default {
 </script>
 <style scoped>
 .content-tab {
-  @apply w-full flex flex-col justify-center items-center mt-24;
   border-bottom: 1px solid #ededed;
+  @apply w-full flex flex-col justify-center items-center mt-24;
 }
 .head-content {
-  @apply w-full flex flex-row justify-start items-start;
   border-bottom: 1px solid #ededed;
+  @apply w-full flex flex-row justify-start items-start;
 }
 .tab {
   @apply w-auto flex flex-col justify-center items-center px-16 cursor-pointer;
@@ -319,15 +319,15 @@ export default {
   border-bottom: 2px solid #000;
 }
 .tittle {
-  @apply flex justify-center items-center;
   font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
   color: #000;
   height: 40px;
   font-size: 15px;
   font-weight: 800;
-  line-height: 30px;
+  /* line-height: 30px; */
   text-transform: capitalize;
   letter-spacing: 1px;
+  @apply flex justify-center items-center;
 }
 .item-content {
   @apply w-full flex flex-col justify-start items-start pb-16;
