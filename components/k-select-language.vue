@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-dropdown">
     <el-dropdown>
-      <span class="el-dropdown-link" aria-haspopup = "list">
+      <span class="el-dropdown-link" aria-haspopup="list">
         {{ select.label }}<Flechadown-icon class="icon-dropdown" />
       </span>
       <el-dropdown-menu slot="dropdown">
@@ -93,6 +93,7 @@ export default {
   cursor: pointer;
   color: white;
   font-size: 12px;
+  /* font-family: 'Poppins'; */
 }
 .el-dropdown {
   margin: 8px;
@@ -110,6 +111,7 @@ export default {
 .el-dropdown-menu__item {
   padding: 0 10px;
   color: black;
+  /* font-family: 'Poppins'; */
 }
 .el-dropdown-menu__item:hover {
   color: #e64956;

@@ -78,5 +78,6 @@ export default {
   color: white;
   height: 100%;
   font-size: 12px;
+  /* font-family: 'Poppins'; */
 }
 </style>

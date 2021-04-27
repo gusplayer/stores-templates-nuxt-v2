@@ -238,13 +238,12 @@
                   </div> -->
                 </div>
                 <!-- Btn comprar -->
-                <div class="content-button ">
+                <div class="content-button">
                   <button
                     ref="colorBtn"
                     class="btn"
                     v-if="!spent"
-                    v-on:click="addShoppingCart"
-                    id="AddToCartTag"
+                    v-on:click="addShoppingCart"                    
                   >
                     {{ $t('productdetail_añadiralcarrito') }}
                   </button>
@@ -252,7 +251,6 @@
                     disabled
                     class="btn-disabled"
                     v-if="spent"
-                    v-on:click="addShoppingCart"
                   >
                     {{ $t('home_cardAgotado') }}
                   </button>
@@ -1204,9 +1202,9 @@ export default {
   margin-top: 10px;
 }
 .btn-facebook {
-  color: #1877f2;
-  border-radius: 5px;
+  color: #1877f2;  
   background-color: transparent;
+  border-radius: 5px;
   width: 10px;
   cursor: pointer;
   transition: all 200ms ease-in;
@@ -1261,7 +1259,7 @@ export default {
   font-family: var(--font-style-3);
   /* font-family: 'Lora' !important; */
   color: var(--color_text_btn);
-  border-radius: 35px;
+  border-radius: var(--radius_btn);
   border: solid 2px var(--color_background_btn);
   background-color: var(--color_background_btn);
   padding: 12px 20px;
@@ -1315,8 +1313,8 @@ export default {
 }
 .quantity_remove {
   border: 1px solid var(--color_border);
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
+  border-top-left-radius: var(--radius_btn);
+  border-bottom-left-radius: var(--radius_btn);
   background: transparent;
   width: 30px;
   height: 42px;  
@@ -1335,8 +1333,8 @@ export default {
 }
 .quantity_add {
   border: 1px solid var(--color_border);
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-top-right-radius: var(--radius_btn);
+  border-bottom-right-radius: var(--radius_btn);
   background: transparent;
   width: 30px;
   height: 42px; 

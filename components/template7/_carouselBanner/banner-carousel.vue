@@ -74,7 +74,7 @@ export default {
 .banner {
   display: grid;
   flex-direction: column;
-  padding-top: 80px;
+  padding-top: 120px;
   width: 100%;
   grid-gap: 1.5rem;
   gap: 1.5rem;

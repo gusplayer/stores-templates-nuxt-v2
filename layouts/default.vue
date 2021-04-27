@@ -12,7 +12,7 @@
     <component v-bind="componentsProps" :is="headerTemplate" />
     <nuxt />
     <component v-bind="componentsProps" :is="footerTemplate" />
-    <KoFooterCountry :dataStore="dataStore" />
+    <KoFooterCountry v-bind="componentsProps" />
     <div
       class="wrapper-whatsapp"
       v-if="dataStore.tienda.whatsapp"
