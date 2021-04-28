@@ -1,5 +1,6 @@
 <template>
   <div class="promo-banner-content" :style="[settingKPromo, settingGeneral]">
+    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
     <div
       class="promo-banner-items"
       :style="[
@@ -142,6 +143,7 @@ export default {
   props: {
     settingKPromo: Object,
     settingGeneral: Object,
+    settingKCarousel: Object,
   },
   data() {
     return {}
@@ -151,8 +153,11 @@ export default {
 
 <style scoped>
 .promo-banner-content {
-  @apply w-full flex flex-row justify-center items-center pt-40;
   background: var(--background_color_1);
+  @apply w-full flex flex-col justify-center items-center pt-40;
+}
+.separador-blog {
+  padding-top: 100px;
 }
 .promo-banner-items {
   @apply flex flex-row justify-center items-start w-full h-full;

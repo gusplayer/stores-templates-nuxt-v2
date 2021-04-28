@@ -1,5 +1,6 @@
 <template>
   <div class="product-content" :style="[settingKGify, settingGeneral]">
+    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
     <div
       class="producto-items-content"
       :style="[
@@ -74,6 +75,7 @@ export default {
     settingGeneral: Object,
     settingKProdutCard: Object,
     settingKGify: Object,
+    settingKCarousel: Object,
   },
   name: 'Ko-gify-1',
   data() {
@@ -131,6 +133,9 @@ export default {
 .product-content {
   @apply flex flex-col justify-center items-center w-full py-60;
   background: var(--background_color_1);
+}
+.separador-blog {
+  padding-top: 100px;
 }
 .product-text,
 .product-conten-items {

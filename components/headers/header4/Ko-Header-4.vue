@@ -204,7 +204,7 @@ export default {
             bghead.style.backgroundColor = 'transparent'
             bghead.style.boxShadow = '0px 0px 0px 0px'
             header.style.boxShadow =
-              '0px 22px 11px -12px rgba(145, 145, 145, 0.57)'
+              '0px 0px 22px 2px rgba(145, 145, 145, 0.57)'
           }
           if (screen.width >= 1280) {
             header.style.width = '93%'
@@ -216,7 +216,7 @@ export default {
           navbar.style.zIndex = '20'
           bghead.style.backgroundColor = colorBg
           header.style.boxShadow = '0px 0px 0px 0px'
-          bghead.style.boxShadow = '0px 22px 11px -12px rgba(145,145,145,0.57)'
+          bghead.style.boxShadow = '0px 0px 22px 2px rgba(145,145,145,0.57)'
           if (screen.width >= 300) {
             header.style.width = '100%'
           }

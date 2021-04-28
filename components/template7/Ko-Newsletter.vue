@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper_newsletter" :style="[settingKNews, settingGeneral]">
+    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
     <div
       class="wrapper-items-content"
       :style="[
@@ -108,6 +109,7 @@ export default {
     dataStore: Object,
     settingGeneral: Object,
     settingKNews: Object,
+    settingKCarousel: Object,
   },
   components: {
     ValidationObserver,
@@ -174,8 +176,11 @@ export default {
 
 <style scoped>
 .wrapper_newsletter {
-  @apply w-full flex flex-col justify-center items-center py-30;
   background: var(--background_color_1);
+  @apply w-full flex flex-col justify-center items-center py-30;
+}
+.separador-blog {
+  padding-top: 100px;
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;

@@ -1,5 +1,6 @@
 <template>
   <div class="hwwork-content" :style="[settingKHowwork, settingGeneral]">
+    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
     <div
       class="hwwork-content-items"
       :style="[
@@ -109,6 +110,7 @@ export default {
   props: {
     settingKHowwork: Object,
     settingGeneral: Object,
+    settingKCarousel: Object,
   },
   data() {
     return {
@@ -154,6 +156,9 @@ export default {
 <style scoped>
 .hwork-seemore {
   @apply hidden;
+}
+.separador-blog {
+  padding-top: 100px;
 }
 .hwork-tittle,
 .hwork-description,

@@ -40,7 +40,10 @@
       </div>
     </div>
     <div class="content-shop-items">
-      <div class="content-left">
+      <div
+        class="content-left"
+        v-if="this.categorias && this.categorias.length > 0"
+      >
         <div class="content-category-left">
           <div class="item-tittle">
             <p class="txt-tittles">
@@ -68,7 +71,6 @@
             </div>
           </div>
           <div class="empty"></div>
-
           <div
             class="item-tittle"
             v-if="showSubCategory && selectedSubcategories.length"
@@ -396,8 +398,8 @@ export default {
       indexCategory: 0,
       indexSelect: '',
       indexSelect2: '',
-      indexshowList: 3,
-      indexshowView: 3,
+      indexshowList: 4,
+      indexshowView: 4,
       numVistas: 16,
     }
   },
@@ -431,7 +433,6 @@ export default {
       const final = initial + 16
       return this.products.slice(initial, final)
     },
-
     selectedCategory() {
       return this.$store.state.products.payload
     },
@@ -556,14 +557,12 @@ export default {
         stateCategory.style.color = '#8e8e8e'
         stateCategory.style.fontWeight = '100'
       }
-
       this.indexSelect2 = value
       this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.id == value
       )
-
       let filtradoCategorias = this.categorias.find(
         (element) => element.id == filtradoSubCategoria.categoria
       )
@@ -1243,7 +1242,7 @@ export default {
     @apply grid grid-cols-3;
   }
   #grid-selection {
-    @apply grid grid-cols-3;
+    @apply grid grid-cols-4;
   }
 }
 @screen lg {

@@ -3,6 +3,7 @@
     class="advertising-wrapper"
     :style="[settingKAdvertising, settingGeneral]"
   >
+    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
     <div
       class="advertising-background"
       id="BgAdvertising"
@@ -59,6 +60,7 @@ export default {
     dataStore: Object,
     settingGeneral: Object,
     settingKAdvertising: Object,
+    settingKCarousel: Object,
   },
   mounted() {
     if (
@@ -90,9 +92,13 @@ export default {
 </script>
 <style scoped>
 .advertising-wrapper {
-  @apply w-full flex justify-center items-center;
   background: var(--background_color_1);
   padding-bottom: 70px;
+  flex-direction: column;
+  @apply w-full flex justify-center items-center;
+}
+.separador-blog {
+  padding-top: 100px;
 }
 .advertising-background {
   @apply flex justify-center items-center bg-cover z-auto;
@@ -100,7 +106,6 @@ export default {
   padding-bottom: 66px;
 }
 .advertising-items {
-  @apply flex justify-center items-center shadow-2xl z-auto;
   background: var(--background_color_1_card);
   width: 596px;
   height: 449px;
@@ -108,10 +113,11 @@ export default {
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
+  @apply flex justify-center items-center shadow-2xl z-auto;
 }
 .advertising-border {
-  @apply w-full h-full flex flex-col justify-center items-center border border-opacity-50 z-auto;
   border-color: var(--color_border);
+  @apply w-full h-full flex flex-col justify-center items-center border border-opacity-50 z-auto;
 }
 .content-bttns-shop {
   background: var(--color_background_btn_card);

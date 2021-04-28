@@ -17,6 +17,10 @@
         },
       ]"
     >
+      <div
+        class="separador-blog"
+        v-if="settingKCarousel.visible == false"
+      ></div>
       <div class="wrapper-content-items">
         <div class="wrapper-items-text">
           <div class="tittle">
@@ -81,6 +85,7 @@ export default {
     dataStore: Object,
     settingGeneral: Object,
     settingKWrapper: Object,
+    settingKCarousel: Object,
   },
   data() {
     return {
@@ -153,6 +158,9 @@ export default {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+}
+.separador-blog {
+  padding-top: 100px;
 }
 .swiper-wrapper {
   height: 300px;

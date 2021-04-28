@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper-content" :style="[settingKBlog, settingGeneral]">
+    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
     <div
       class="wrapper-items-content"
       :style="[
@@ -65,6 +66,7 @@ export default {
     dataStore: Object,
     settingKBlog: Object,
     settingGeneral: Object,
+    settingKCarousel: Object,
   },
   data() {
     return {
@@ -145,9 +147,12 @@ export default {
   -webkit-align-items: center;
   align-items: center;
 }
+.separador-blog {
+  padding-top: 100px;
+}
 .wrapper-content {
-  @apply flex flex-col justify-center items-center w-full py-30;
   background: var(--background_color_1);
+  @apply flex flex-col justify-center items-center w-full py-30;
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;

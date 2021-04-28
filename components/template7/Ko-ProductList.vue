@@ -1,5 +1,6 @@
 <template>
   <div class="product-content" :style="[settingKProductList, settingGeneral]">
+    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
     <div
       class="producto-items-content"
       id="section"
@@ -87,6 +88,7 @@ export default {
     settingKProductList: Object,
     settingGeneral: Object,
     settingKProdutCard: Object,
+    settingKCarousel: Object,
   },
   name: 'Ko-ProductList-1',
   mounted() {
@@ -123,8 +125,11 @@ export default {
 
 <style scoped>
 .product-content {
-  @apply flex flex-col justify-center items-center w-full py-50;
   background: var(--background_color_1);
+  @apply flex flex-col justify-center items-center w-full py-50;
+}
+.separador-blog {
+  padding-top: 100px;
 }
 .product-text {
   @apply flex flex-col justify-center items-center w-full;
