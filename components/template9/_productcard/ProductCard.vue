@@ -151,7 +151,19 @@
         </div>
       </div>
       <router-link :to="{ path: `/productos/` + product.slug }">
-        <div class="overlay-bottom">
+        <div
+          class="overlay-bottom-promo"
+          v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
+        >
+          <div class="cart-Shop">
+            <div class="text-cart">
+              <p class="w-full txt-add">
+                {{ this.product.promocion_valor }}% OFF
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="overlay-bottom" v-else>
           <div class="cart-Shop">
             <div class="text-cart">
               <p class="w-full txt-add">
@@ -596,6 +608,13 @@ export default {
   transform: translate(-50%, -50%);
   white-space: nowrap;
 }
+.overlay-bottom-promo {
+  background-color: #35dd8d;
+  transition: all 200ms ease-in;
+}
+.overlay-bottom-promo:hover {
+  @apply bg-white-white;
+}
 .overlay-bottom {
   background-color: #3d3d3d;
 }
@@ -629,14 +648,16 @@ export default {
   .precio {
     font-size: 16px;
   }
-  .overlay-bottom {
+  .overlay-bottom,
+  .overlay-bottom-promo {
     @apply absolute right-0 overflow-hidden transition-all ease-in duration-100;
     width: 110px;
     height: 0px;
     left: 10px;
     bottom: 10px;
   }
-  .producto:hover .overlay-bottom {
+  .producto:hover .overlay-bottom,
+  .producto:hover .overlay-bottom-promo {
     height: 30px;
   }
   .overlay-top {
@@ -702,14 +723,16 @@ export default {
   .separator-price {
     @apply mx-4;
   }
-  .overlay-bottom {
+  .overlay-bottom,
+  .overlay-bottom-promo {
     @apply absolute right-0 overflow-hidden transition-all ease-in duration-100;
     width: 110px;
     height: 0px;
     left: 10px;
     bottom: 10px;
   }
-  .producto:hover .overlay-bottom {
+  .producto:hover .overlay-bottom,
+  .producto:hover .overlay-bottom-promo {
     height: 40px;
   }
 }

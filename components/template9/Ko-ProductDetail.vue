@@ -79,6 +79,38 @@
             <div class="content-name">
               <p class="text-name">{{ data.detalle.nombre }}</p>
             </div>
+            <div class="content-promo">
+              <p
+                class="text-price-promo"
+                v-show="
+                  data.info.tag_promocion == 1 &&
+                  data.info.promocion_valor &&
+                  salesData.precio
+                "
+              >
+                {{
+                  (data.info.tag_promocion == 1 && data.info.promocion_valor
+                    ? Math.trunc(
+                        salesData.precio / (1 - data.info.promocion_valor / 100)
+                      )
+                    : 0)
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
+              <p
+                class="text-numero-promo"
+                v-show="
+                  data.info.tag_promocion == 1 &&
+                  data.info.promocion_valor &&
+                  salesData.precio
+                "
+              >
+                {{ data.info.promocion_valor }}% OFF
+              </p>
+            </div>
             <div class="content-price">
               <p class="text-price" v-show="salesData.precio">
                 {{
@@ -516,7 +548,7 @@ export default {
             case 'tarifa_plana':
               this.envio = {
                 titulo: 'Tarifa plana',
-                desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.envios.valores.valor}`,
+                desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.data.envioproducto.valor}`,
               }
               break
             case 'precio':
@@ -524,6 +556,12 @@ export default {
                 titulo: 'Tarifa por precio',
                 desc:
                   'Segun la suma del costo de tus productos te cobraran el envio',
+              }
+              break
+            case 'precio_ciudad':
+              this.envio = {
+                titulo: 'Tarifa por ciudad',
+                desc: 'Segun la ciudad te cobraran el envio',
               }
               break
             case 'peso':
@@ -807,6 +845,7 @@ export default {
 .content-category,
 .content-name,
 .content-price,
+.content-promo,
 .content-addCart {
   @apply w-full flex flex-row justify-start items-center;
 }
@@ -955,6 +994,27 @@ export default {
     line-height: 1.42857143;
     letter-spacing: -0.02em;
     margin-left: 30px;
+    text-transform: capitalize;
+  }
+  .text-price-promo {
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-2);
+    color: var(--color_price);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-decoration: line-through;
+  }
+  .text-numero-promo {
+    font-family: var(--font-style-2);
+    font-size: 12px;
+    color: #00a650;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.42857143;
+    letter-spacing: -0.02em;
+    margin-left: 100px;
     text-transform: capitalize;
   }
   .text-icon {

@@ -60,6 +60,9 @@
                       :href="`${elementBannner.url_redirect}`"
                       rel="noreferrer noopener"
                       class="btn-shop"
+                      :class="
+                        elementBannner.url_redirect ? 'cursorPointer' : null
+                      "
                     >
                       <span class="text-button">
                         {{ $t('home_comprarAhora') }}
@@ -113,6 +116,9 @@ export default {
 }
 .carousel-content {
   @apply w-full flex justify-center items-center z-auto;
+}
+.cursorPointer {
+  cursor: pointer;
 }
 .swiper-wrapper {
   @apply z-auto;

@@ -181,7 +181,7 @@
             </h3>
           </div>
           <div
-            v-if="this.envios.envio_metodo === 'precio_ciudad'"
+            v-if="this.envio.titulo == 'Tarifa por ciudad'"
             class="wrapper-method"
           >
             <h4 class="capitalize">
@@ -192,7 +192,7 @@
             </p>
           </div>
           <div
-            v-if="this.envios.envio_metodo === 'tarifa_plana'"
+            v-if="this.envio.titulo == 'Tarifa plana'"
             class="wrapper-method"
           >
             <h4 class="capitalize">
@@ -206,7 +206,7 @@
             </p>
           </div>
           <div
-            v-if="this.envios.envio_metodo === 'precio'"
+            v-if="this.envio.titulo == 'Tarifa por precio'"
             class="wrapper-method"
           >
             <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
@@ -215,7 +215,7 @@
             </p>
           </div>
           <div
-            v-if="this.envios.envio_metodo === 'gratis'"
+            v-if="this.envio.titulo == 'Envío gratis'"
             class="wrapper-method"
           >
             <h4>{{ $t('productdetail_gratis') }}</h4>

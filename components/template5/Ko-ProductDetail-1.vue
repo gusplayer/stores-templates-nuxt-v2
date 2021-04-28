@@ -693,7 +693,7 @@ export default {
             case 'tarifa_plana':
               this.envio = {
                 titulo: 'Tarifa plana',
-                desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.envios.valores.valor}`,
+                desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.data.envioproducto.valor}`,
               }
               break
             case 'precio':
@@ -701,6 +701,12 @@ export default {
                 titulo: 'Tarifa por precio',
                 desc:
                   'Segun la suma del costo de tus productos te cobraran el envio',
+              }
+              break
+            case 'precio_ciudad':
+              this.envio = {
+                titulo: 'Tarifa por ciudad',
+                desc: 'Segun la ciudad te cobraran el envio',
               }
               break
             case 'peso':

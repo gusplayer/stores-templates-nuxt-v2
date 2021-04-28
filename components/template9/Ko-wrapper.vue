@@ -23,13 +23,16 @@
           :key="index"
           class="grid-imgs"
         >
-          <a :href="imagen.url_redirect" rel="noreferrer noopener">
+          <div
+            @click="openURL(index)"
+            :class="imagen.url_redirect ? 'cursorPointer' : null"
+          >
             <img
               class="img-wrapp"
               v-lazy="imagen.url_img"
               alt="wrapper-images"
             />
-          </a>
+          </div>
         </div>
       </div>
     </div>
@@ -43,11 +46,25 @@ export default {
     wrapper: Object,
     settingGeneral: Object,
   },
+  methods: {
+    openURL(index) {
+      if (this.wrapper.values[index].url_redirect) {
+        window.open(
+          `${this.wrapper.values[index].url_redirect}`,
+          '_blank',
+          'noreferrer noopener'
+        )
+      }
+    },
+  },
 }
 </script>
 <style scoped>
 .img-wrapp {
   transition: all 150ms ease-in;
+}
+.cursorPointer {
+  cursor: pointer;
 }
 .img-wrapp:hover {
   transition: all 150ms ease-in;
