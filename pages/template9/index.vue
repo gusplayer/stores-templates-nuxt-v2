@@ -154,31 +154,53 @@ export default {
         } else if (e && e.data && e.data.componentToEdit) {
           switch (e.data.componentToEdit) {
             case 'settingGeneral':
+              this.$router.push('/')
               this.moverseA('kbannerX')
               break
-            // case 'header':
-            //   this.moverseA('kbannerX')
-            //   break
             case 'footer':
+              this.$router.push('/')
               this.moverseA('KNewsX')
               break
             case 'banner':
+              this.$router.push('/')
               this.moverseA('kbannerX')
               break
             case 'koffers':
+              this.$router.push('/')
               this.moverseA('KoffersX')
               break
             case 'productList':
+              this.$router.push('/')
               this.moverseA('KproductlistX')
               break
             case 'blog':
+              this.$router.push('/')
               this.moverseA('KblogX')
               break
             case 'wrapper':
+              this.$router.push('/')
               this.moverseA('KWrapperX')
               break
             case 'newsletter':
+              this.$router.push('/')
               this.moverseA('KNewsX')
+              break
+            case 'detailsProduct':
+              if (this.fullProducts) {
+                this.$router.push({
+                  path: '/productos/' + this.fullProducts[0].slug,
+                })
+              }
+              break
+            case 'productListFilter':
+              this.$router.push({
+                path: '/productos',
+              })
+              break
+            case 'contact':
+              this.$router.push({
+                path: '/contacto',
+              })
               break
           }
         }
