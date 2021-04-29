@@ -31,7 +31,10 @@
             alt="logotienda"
           />
         </div>
-        <KoSocialNet :dataStore="dataStore"></KoSocialNet>
+        <KoSocialNet
+          :dataStore="dataStore"
+          :setting9Footer="settingByTemplate9[0].setting9Footer"
+        ></KoSocialNet>
         <div class="footer-content-button">
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
             <nuxt-link :to="item.path" v-if="item.path" class="btn">

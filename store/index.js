@@ -189,9 +189,6 @@ export const mutations = {
           case 'header':
             state.settingByTemplate9.header = value
             break
-          case 'footer':
-            state.settingByTemplate9.footer = value
-            break
           case 'banner':
             state.settingByTemplate9.banner = value
             break
@@ -218,6 +215,12 @@ export const mutations = {
             break
           case 'detailsProduct':
             state.settingByTemplate9.detailsProduct = value
+            break
+          case 'footer':
+            state.settingByTemplate9.footer = value
+            break
+          case 'cardProduct':
+            state.settingByTemplate9.cardProduct = value
             break
         }
       }

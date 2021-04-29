@@ -1,5 +1,5 @@
 <template>
-  <div class="content-SocialNet">
+  <div class="content-SocialNet" :style="setting9Footer">
     <div class="icon-social">
       <div class="icons-networks" v-if="dataStore.tienda.red_facebook != null">
         <a
@@ -22,11 +22,10 @@
             class="facebook-icon"
           >
             <circle
-              class="circle-facebook"
+              class="circle-facebook circleBg"
               r="56.098"
               cx="56.098"
               cy="56.098"
-              fill="#2c2930"
               shape="circle"
               transform="matrix(0.8,0,0,0.8,11.219599914550777,11.219599914550777)"
             />
@@ -46,9 +45,7 @@
                 <path
                   style=""
                   d="M70.201,58.294h-10.01v36.672H45.025V58.294h-7.213V45.406h7.213v-8.34   c0-5.964,2.833-15.303,15.301-15.303L71.56,21.81v12.51h-8.151c-1.337,0-3.217,0.668-3.217,3.513v7.585h11.334L70.201,58.294z"
-                  fill="#fff"
-                  data-original="#ffffff"
-                  class="facebook-icon-circle"
+                  class="facebook-icon-circle iconBg"
                 />
               </g>
               <g xmlns="http://www.w3.org/2000/svg"></g>
@@ -91,11 +88,10 @@
             class="twitter-icon"
           >
             <circle
-              class="circle-twitter"
+              class="circle-twitter circleBg"
               r="56.0985"
               cx="56.0985"
               cy="56.0985"
-              fill="#2c2930"
               shape="circle"
               transform="matrix(0.8,0,0,0.8,11.21969985961914,11.21969985961914)"
             />
@@ -114,11 +110,8 @@
                 />
                 <g>
                   <path
-                    style=""
                     d="M90.461,40.316c-2.404,1.066-4.99,1.787-7.702,2.109c2.769-1.659,4.894-4.284,5.897-7.417    c-2.591,1.537-5.462,2.652-8.515,3.253c-2.446-2.605-5.931-4.233-9.79-4.233c-7.404,0-13.409,6.005-13.409,13.409    c0,1.051,0.119,2.074,0.349,3.056c-11.144-0.559-21.025-5.897-27.639-14.012c-1.154,1.98-1.816,4.285-1.816,6.742    c0,4.651,2.369,8.757,5.965,11.161c-2.197-0.069-4.266-0.672-6.073-1.679c-0.001,0.057-0.001,0.114-0.001,0.17    c0,6.497,4.624,11.916,10.757,13.147c-1.124,0.308-2.311,0.471-3.532,0.471c-0.866,0-1.705-0.083-2.523-0.239    c1.706,5.326,6.657,9.203,12.526,9.312c-4.59,3.597-10.371,5.74-16.655,5.74c-1.08,0-2.15-0.063-3.197-0.188    c5.931,3.806,12.981,6.025,20.553,6.025c24.664,0,38.152-20.432,38.152-38.153c0-0.581-0.013-1.16-0.039-1.734    C86.391,45.366,88.664,43.005,90.461,40.316L90.461,40.316z"
-                    fill="#fff"
-                    data-original="#f1f2f2"
-                    class="twitter-icon-circle"
+                    class="twitter-icon-circle iconBg"
                   />
                 </g>
               </g>
@@ -165,11 +158,10 @@
           >
             <g v-if="!hover">
               <circle
-                class="circle-instagram"
+                class="circle-instagram circleBg"
                 r="256"
                 cx="256"
                 cy="256"
-                fill="#2c2930"
                 shape="circle"
                 transform="matrix(0.8,0,0,0.8,51.19999999999999,51.19999999999999)"
               />
@@ -244,24 +236,15 @@
               <g xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="m329.636719 433h-147.273438c-56.996093 0-103.363281-46.367188-103.363281-103.363281v-147.273438c0-56.996093 46.367188-103.363281 103.363281-103.363281h147.273438c56.996093 0 103.363281 46.367188 103.363281 103.363281v147.273438c0 56.996093-46.367188 103.363281-103.363281 103.363281zm-147.273438-324c-40.453125 0-73.363281 32.910156-73.363281 73.363281v147.273438c0 40.453125 32.910156 73.363281 73.363281 73.363281h147.273438c40.453125 0 73.363281-32.910156 73.363281-73.363281v-147.273438c0-40.453125-32.910156-73.363281-73.363281-73.363281zm0 0"
-                  fill="#fff"
-                  data-original="#ffffff"
-                  style=""
-                  class="instagram-icon-circle"
+                  class="instagram-icon-circle iconBg"
                 />
                 <path
                   d="m256 352c-52.933594 0-96-43.066406-96-96s43.066406-96 96-96 96 43.066406 96 96-43.066406 96-96 96zm0-162c-36.394531 0-66 29.605469-66 66s29.605469 66 66 66 66-29.605469 66-66-29.605469-66-66-66zm0 0"
-                  fill="#fff"
-                  data-original="#ffffff"
-                  style=""
-                  class="instagram-icon-circle"
+                  class="instagram-icon-circle iconBg"
                 />
                 <path
                   d="m365.832031 159.898438c0 7.582031-6.148437 13.730468-13.730469 13.730468-7.582031 0-13.730468-6.148437-13.730468-13.730468 0-7.582032 6.148437-13.730469 13.730468-13.730469 7.582032 0 13.730469 6.148437 13.730469 13.730469zm0 0"
-                  fill="#fff"
-                  data-original="#ffffff"
-                  style=""
-                  class="instagram-icon-circle"
+                  class="instagram-icon-circle iconBg"
                 />
               </g>
             </g>
@@ -289,11 +272,10 @@
             class="youtube-icon"
           >
             <circle
-              class="circle-youtube"
+              class="circle-youtube circleBg"
               r="236.9655"
               cx="236.9655"
               cy="236.9655"
-              fill="#2c2930"
               shape="circle"
               transform="matrix(0.8,0,0,0.8,47.393099975585926,47.393099975585926)"
             />
@@ -328,11 +310,8 @@
               />
               <path
                 xmlns="http://www.w3.org/2000/svg"
-                style=""
                 d="M360.971,191.238c0-19.865-16.093-35.966-35.947-35.966H156.372c-19.85,0-35.94,16.105-35.94,35.966  v96.444c0,19.865,16.093,35.966,35.94,35.966h168.649c19.858,0,35.947-16.105,35.947-35.966v-96.444H360.971z M216.64,280.146  v-90.584l68.695,45.294L216.64,280.146z"
-                fill="#fff"
-                data-original="#ffffff"
-                class="youtube-icon-circle"
+                class="youtube-icon-circle iconBg"
               />
               <g xmlns="http://www.w3.org/2000/svg"></g>
               <g xmlns="http://www.w3.org/2000/svg"></g>
@@ -361,6 +340,7 @@ export default {
   name: 'Ko-Social-Networks',
   props: {
     dataStore: Object,
+    setting9Footer: Object,
   },
   data() {
     return {
@@ -435,5 +415,11 @@ export default {
 .instagram-icon:hover .instagram-icon-circle {
   transition: all 200ms ease-in;
   fill: #ffffff;
+}
+.circleBg {
+  fill: var(--color_icon_bg);
+}
+.iconBg {
+  fill: var(--color_icon);
 }
 </style>
