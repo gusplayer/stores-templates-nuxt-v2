@@ -32,7 +32,7 @@ export default {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-top: 30px;
+  padding: 30px 0;
 }
 .swiper-container {
   width: 100%;
@@ -46,7 +46,6 @@ export default {
 .content-title-ProductFavoritos {
   width: 100%;
   max-width: 1460px;
-  padding-bottom: 30px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -60,6 +59,17 @@ export default {
   /* color: var(--color_subtext); */
   color: var(--color_title);
   cursor: pointer;
+}
+@media (max-width: 1300px) {
+  .swiper-container {
+    padding: 20px 8px;
+  }
+  .content-title-ProductFavoritos {
+    padding: 10px 10px;
+  }
+  .wrapper-ProductFavoritos {
+    padding: 30px 10px;
+  }
 }
 @media (max-width: 770px) {
   .swiper-container {

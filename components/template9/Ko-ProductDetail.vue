@@ -79,7 +79,7 @@
             <div class="content-name">
               <p class="text-name">{{ data.detalle.nombre }}</p>
             </div>
-            <div class="content-promo">
+            <div class="content-price">
               <p
                 class="text-price-promo"
                 v-show="
@@ -110,8 +110,6 @@
               >
                 {{ data.info.promocion_valor }}% OFF
               </p>
-            </div>
-            <div class="content-price">
               <p class="text-price" v-show="salesData.precio">
                 {{
                   salesData.precio
@@ -788,10 +786,10 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   max-width: 1460px;
   align-items: center;
   justify-content: center;
+  padding: 0 10px;
 }
 .crumb {
   @apply flex flex-row justify-start items-start my-40;
@@ -844,10 +842,12 @@ export default {
 }
 .content-category,
 .content-name,
-.content-price,
-.content-promo,
 .content-addCart {
   @apply w-full flex flex-row justify-start items-center;
+}
+.content-price {
+  align-items: center;
+  @apply grid grid-flow-row grid-cols-2 grid-rows-2 gap-0;
 }
 .quantity {
   @apply flex flex-row justify-center items-center;
@@ -876,7 +876,7 @@ export default {
   }
   .content-name,
   .content-price {
-    @apply mb-30;
+    @apply mb-25;
   }
   .content-options {
     @apply flex;
@@ -991,9 +991,9 @@ export default {
     color: #92bb35;
     font-size: 14px;
     font-weight: 600;
-    line-height: 1.42857143;
-    letter-spacing: -0.02em;
-    margin-left: 30px;
+    /* line-height: 1.42857143;
+    letter-spacing: -0.02em; */
+    /* margin-left: 30px; */
     text-transform: capitalize;
   }
   .text-price-promo {
@@ -1012,9 +1012,9 @@ export default {
     color: #00a650;
     font-size: 14px;
     font-weight: 600;
-    line-height: 1.42857143;
-    letter-spacing: -0.02em;
-    margin-left: 100px;
+    /* line-height: 1.42857143; */
+    /* letter-spacing: -0.02em; */
+    /* margin-left: 100px; */
     text-transform: capitalize;
   }
   .text-icon {

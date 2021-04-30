@@ -111,7 +111,6 @@
             <div class="wrapper-btn-icon">
               <router-link
                 id="view_details"
-                router-link
                 :to="{ path: `/productos/` + product.slug }"
               >
                 <p>{{ $t('home_cardvermas') }}</p>

@@ -250,7 +250,7 @@
             </div>
           </div>
           <!-- Producto agotado -->
-          <div class="content_card-info" v-if="spent || product.stock == 0">
+          <div class="content_card-info" v-if="soldOut">
             <div class="icon-card-info-sould">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -340,10 +340,19 @@
         </div>
         <!-- Btn comprar -->
         <div class="content-button hid">
+          <router-link
+            :to="{ path: `/productos/` + product.slug }"
+            ref="colorBtn"
+            class="btn-view"
+          >
+            <p class="txt-btn-product">
+              {{ $t('home_cardvermas') }}
+            </p>
+          </router-link>
           <button
             ref="colorBtn"
             class="btn"
-            v-if="product.stock > 0"
+            v-if="!this.estadoCart && !soldOut && !spent"
             v-on:click="addShoppingCart"
             id="AddToCartTag"
           >
@@ -361,14 +370,6 @@
             <p class="txt-btn-product">
               {{ $t('productdetail_añadiralcarrito') }}
             </p>
-          </button>
-          <button
-            disabled
-            class="btn-disabled"
-            v-if="product.stock == 0"
-            v-on:click="addShoppingCart"
-          >
-            <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
           </button>
         </div>
       </div>
@@ -424,10 +425,19 @@
         </div>
         <!-- Btn comprar -->
         <div class="content-button">
+          <router-link
+            :to="{ path: `/productos/` + product.slug }"
+            ref="colorBtn"
+            class="btn-view"
+          >
+            <p class="txt-btn-product">
+              {{ $t('home_cardvermas') }}
+            </p>
+          </router-link>
           <button
             ref="colorBtn"
-            class="btn btnr"
-            v-if="product.stock > 0"
+            class="btn"
+            v-if="!this.estadoCart && !soldOut && !spent"
             v-on:click="addShoppingCart"
             id="AddToCartTag"
           >
@@ -445,25 +455,6 @@
             <p class="txt-btn-product">
               {{ $t('productdetail_añadiralcarrito') }}
             </p>
-          </button>
-          <button
-            disabled
-            class="btn-disabled"
-            v-if="product.stock == 0"
-            v-on:click="addShoppingCart"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="minicart-icon-1"
-              width="14"
-              height="16"
-              viewBox="0 0 14 16"
-            >
-              <path
-                d="M11,3V0H3V3H0V16H14V3H11ZM5,2H9V3H5V2Zm7,12H2V5H3V7H5V5H9V7h2V5h1v9Z"
-              ></path>
-            </svg>
-            <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
           </button>
         </div>
       </div>
@@ -846,9 +837,35 @@ export default {
   font-family: var(--font-style-2);
 }
 .content-button {
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding-bottom: 20px;
+}
+.btn-view {
+  color: var(--color_background_btn);
+  border: 2px solid var(--color_background_btn);
+  background-color: transparent;
+  font-family: var(--font-style-2);
+  min-height: 40px;
+  max-height: 40px;
+  width: 100%;
+  margin-left: 10px;
+  letter-spacing: 1px;
+  font-size: 15px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.25s ease, background-color 0.25s ease,
+    border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  @apply mt-8 px-16 flex flex-row justify-items-center items-center;
+}
+.btn:hover {
+  @apply shadow-md;
+  color: white;
+  background-color: #f8f8f8;
+  color: #2c2930;
+  fill: #2c2930;
 }
 .btn {
   fill: var(--color_text_btn);
@@ -856,8 +873,10 @@ export default {
   background-color: var(--color_background_btn);
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-2);
-  height: 40px;
-  width: auto;
+  min-height: 40px;
+  max-height: 40px;
+  width: 100%;
+  margin-left: 10px;
   letter-spacing: 1px;
   font-size: 15px;
   align-items: center;
@@ -1048,6 +1067,11 @@ export default {
 @media (min-width: 500px) {
   .producto {
     @apply w-9/5;
+  }
+}
+@media (max-width: 640px) {
+  .content-button {
+    flex-direction: row;
   }
 }
 @media (min-width: 640px) {
