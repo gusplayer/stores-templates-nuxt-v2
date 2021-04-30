@@ -327,9 +327,17 @@ export default {
     font-size: 36px;
   }
 }
+@media (max-width: 770px) {
+  .content-button {
+    margin-top: 18px;
+  }
+}
 @media (max-width: 500px) {
   .wrapper_newsletter {
     padding: 0 10px 0 10px;
+  }
+  .content-button {
+    margin-top: 12px;
   }
 }
 </style>

@@ -150,7 +150,6 @@ export default {
   @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
 .container {
-  max-height: 560px;
   @apply relative;
 }
 .images {
@@ -167,7 +166,6 @@ export default {
   width: 100%;
 }
 .text-tittle {
-  @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -176,9 +174,9 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
 }
 .content-bottom-titulo {
-  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -187,9 +185,9 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
 }
 .content-bottom-autor {
-  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -198,8 +196,8 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
 }
-
 .content-imge {
   @apply flex justify-center items-center;
 }
@@ -245,7 +243,6 @@ export default {
   /* font-size: 12px; */
 }
 .overlay-bottom-shadow {
-  @apply absolute overflow-hidden max-w-full max-h-full;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 30%,
@@ -259,6 +256,7 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 10;
+  @apply absolute overflow-hidden max-w-full max-h-full;
 }
 .container:hover .overlay-bottom-shadow {
   background: linear-gradient(
@@ -269,6 +267,9 @@ export default {
   );
 }
 @screen sm {
+  .container {
+    max-width: 100%;
+  }
   .txt-day {
     font-size: 15px;
   }

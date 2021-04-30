@@ -68,17 +68,12 @@
               {{ $t('header_categorias') }}
             </button>
           </div>
-          <div class="image-prom">
-            <img
-              src="https://res.cloudinary.com/brahyanr10/image/upload/v1612581639/Template9/lateral_menu/mobile-menu-sp_ht6jn3.jpg"
-              alt="prom"
-            />
-          </div>
           <div class="conten-Menu" v-if="!focusbtn">
             <div class="header-content-buttons">
               <div
                 v-for="(item, index) in secciones"
                 :key="`${index}${item.name}`"
+                @click="closed"
               >
                 <nuxt-link :to="item.path" v-if="item.path" class="btn"
                   >{{ $t(`${item.name}`) }}
@@ -355,7 +350,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 6;
+  z-index: 99999;
   transition: all 0.25s ease;
 }
 .order_content {
@@ -496,6 +491,7 @@ export default {
 }
 .conten-Menu,
 .content-Categorys {
+  margin-top: 20px;
   @apply w-8/0 flex flex-col justify-start items-center;
 }
 .content-Categorys {
@@ -542,9 +538,7 @@ export default {
   font-weight: 400;
   color: #000;
 }
-.image-prom {
-  @apply w-8/0 my-6;
-}
+
 @media (min-width: 1280px) {
   .order {
     @apply hidden;

@@ -244,7 +244,8 @@ export default {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+  z-index: 999;
+  @apply w-full h-full fixed left-0 top-0 overflow-auto;
 }
 @media (max-width: 600px) {
   .separator {

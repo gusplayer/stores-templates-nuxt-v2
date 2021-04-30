@@ -6,7 +6,6 @@
   >
     <div
       class="producto-items-content"
-      id="section"
       :style="[
         {
           '--font-style-1':
@@ -23,9 +22,7 @@
       ]"
     >
       <div class="product-text">
-        <div class="product-tittle">
-          <span class="tittle">{{ productList.title }}</span>
-        </div>
+        <p class="tittle">{{ productList.title }}</p>
       </div>
       <div class="content-item">
         <div class="content-item-productos">
@@ -113,14 +110,9 @@ export default {
   @apply flex flex-col justify-start items-start;
 }
 .product-text {
-  @apply flex flex-col justify-center items-center w-full mb-30;
-}
-.product-tittle,
-.tittle {
-  @apply flex flex-col justify-center items-center;
-}
-.product-tittle {
-  @apply mb-40;
+  max-width: 470px;
+  text-align: center;
+  @apply w-full mb-30;
 }
 .tittle {
   /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
@@ -167,9 +159,6 @@ export default {
     @apply grid grid-cols-1 gap-4;
     width: 75%;
   }
-  .product-tittle {
-    width: 75%;
-  }
   .tittle {
     line-height: 34px;
     font-size: 30px;
@@ -181,9 +170,6 @@ export default {
   }
 }
 @screen lg {
-  .product-text {
-    @apply w-full;
-  }
   .product-conten-items {
     @apply grid grid-cols-3;
   }
@@ -195,8 +181,8 @@ export default {
 }
 @media (min-width: 1160px) {
   .product-conten-items {
-    @apply grid grid-cols-4;
     width: 95vw;
+    @apply grid grid-cols-4;
   }
 }
 @screen xml {
@@ -208,6 +194,13 @@ export default {
 @screen xxl {
   .product-conten-items {
     @apply gap-10;
+  }
+}
+@media (max-width: 460px) {
+  .product-text {
+    width: 90%;
+    height: auto;
+    word-wrap: break-word;
   }
 }
 </style>
