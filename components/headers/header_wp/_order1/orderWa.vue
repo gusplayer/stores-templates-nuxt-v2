@@ -1079,11 +1079,11 @@ export default {
   opacity: 0;
 }
 .content-button {
-  padding: 0 30px;
-  /* display: flex;
+  /* padding: 0 30px; */
+  display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; */
+  flex-direction: column;
 }
 details {
   color: #333;
