@@ -350,7 +350,7 @@ export default {
       indexSelect2: '',
       indexshowList: 3,
       indexshowView: 3,
-      numVistas: 16,
+      numVistas: 18,
       pruebasss: [],
     }
   },
@@ -370,8 +370,8 @@ export default {
       return this.dataStore.subcategorias
     },
     ggetProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 18 - 18
+      const final = initial + 18
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
@@ -380,8 +380,8 @@ export default {
       return this.$store.state.listArticulos.length
     },
     filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 18 - 18
+      const final = initial + 18
       return this.products.slice(initial, final)
     },
 
