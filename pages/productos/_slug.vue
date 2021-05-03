@@ -19,6 +19,10 @@ export default {
     Ko10ProductDetail,
     Ko11ProductDetail,
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenertemplate)
+  },
   computed: {
     settingBase() {
       return this.$store.state.settingBase
@@ -130,6 +134,25 @@ export default {
               },
             ]
           : null,
+      }
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenertemplate)
+  },
+  methods: {
+    addEventListenertemplate(e) {
+      if (
+        e.origin.includes('https://panel.komercia.co') ||
+        e.origin.includes('http://localhost:8080')
+      ) {
+        if (e && e.data && e.data.component) {
+          this.$store.commit('SET_CURRENTSETTING09', e.data)
+        } else if (e && e.data && e.data.returnHome == true) {
+          this.$router.push({
+            path: '/',
+          })
+        }
       }
     },
   },

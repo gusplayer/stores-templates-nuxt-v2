@@ -74,6 +74,9 @@ export default {
   build: {
     // minimize: true,
     // analyze: true, //Map webpack
+    babel: {
+      plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
+    },
     publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {

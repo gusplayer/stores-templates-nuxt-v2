@@ -569,7 +569,7 @@ export default {
         })
       }
     },
-    roductsFreeShippingCart() {
+    productsFreeShippingCart() {
       if (this.productsCart) {
         let result = this.productsCart.filter((rango) => {
           if (rango.envio_gratis === 1) {
