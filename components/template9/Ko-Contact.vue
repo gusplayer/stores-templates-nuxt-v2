@@ -449,7 +449,7 @@ export default {
     @apply w-full h-100 pl-10 pt-10;
   }
   .txt-input {
-    color: var(--color_subtext);
+    color: var(--color_text);
     font-size: 13px;
     @apply w-full justify-center items-center capitalize;
   }
@@ -457,6 +457,7 @@ export default {
     @apply w-full flex justify-start items-center;
   }
   .btn {
+    border: 1px solid var(--color_background_btn);
     background-color: var(--color_background_btn);
     font-size: 14px;
     color: var(--color_text_btn);
