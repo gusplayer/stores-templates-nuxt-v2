@@ -42,7 +42,14 @@
             </div>
             <div v-else class="separador-price"></div>
           </div>
-          <div class="card-button">
+          <div
+            class="card-button"
+            :class="
+              dataStore.entidades.length && dataStore.entidades[0].id == 17
+                ? 'card-button-midasoluciones'
+                : 'card-button-wapi'
+            "
+          >
             <p>{{ $t('productdetail_btnComprar') }}</p>
           </div>
         </router-link>
@@ -199,9 +206,6 @@ export default {
   color: black;
   bottom: 0.125em;
 }
-/* .btn-scroll-icon:hover {
-  color: white;
-} */
 .card-button {
   margin-top: 6px;
   display: flex;
@@ -210,26 +214,23 @@ export default {
   border-radius: 4px;
   padding: 6px 0px;
   font-weight: 700;
-  color: #445a64;
-  transition: 0.3s;
-  box-shadow: 0 2px 10px rgba(131, 130, 131, 0.276);
   font-size: 13px;
-  transition: all 200ms ease-in;
   box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.card-button-wapi {
   background-color: white;
   color: #128c7e;
 }
-/* .card-button:hover {
-  color: white;
-  background: #128c7e;
-} */
+.card-button-midasoluciones {
+  background-color: white;
+  color: #f7c224;
+}
 .card-favorite {
   margin: 6px;
   margin-left: 10px;
   width: 140px;
 }
-
 .card-favorite img {
   width: 140px;
   object-fit: contain;

@@ -4,7 +4,15 @@
       <div class="order_content">
         <div class="order_header">
           <h3>{{ $t('footer_title') }}</h3>
-          <div @click="closedOder" class="order_header_close">
+          <div
+            @click="closedOder"
+            class="order_header_close"
+            :class="
+              dataStore.entidades.length && dataStore.entidades[0].id == 17
+                ? 'order_header_close_midasoluciones'
+                : 'order_header_close_wapi'
+            "
+          >
             <close-icon />
           </div>
         </div>
@@ -65,6 +73,12 @@
                     </div>
                     <boteBasura-icon
                       class="icon-delete"
+                      :class="
+                        dataStore.entidades.length &&
+                        dataStore.entidades[0].id == 17
+                          ? 'icon-delete-midasoluciones'
+                          : 'icon-delete-wapi'
+                      "
                       v-on:click="deleteItemCart(index)"
                     />
                   </li>
@@ -136,6 +150,12 @@
                     countryStore == true
                   "
                   class="continue_shopping2"
+                  :class="
+                    dataStore.entidades.length &&
+                    dataStore.entidades[0].id == 17
+                      ? 'continue_shopping2-midasoluciones'
+                      : 'continue_shopping2-wapi'
+                  "
                   @click="GoPayments"
                   id="InitiateCheckoutTag"
                 >
@@ -149,6 +169,12 @@
                     dataStore.tienda.whatsapp
                   "
                   class="continue_shopping"
+                  :class="
+                    dataStore.entidades.length &&
+                    dataStore.entidades[0].id == 17
+                      ? 'continue_shopping-midasoluciones'
+                      : 'continue_shopping-wapi'
+                  "
                   @click="formOrden = !formOrden"
                 >
                   <whatsapp-icon class="wp-icon" />
@@ -242,12 +268,22 @@
             for="order_close"
             @click="formOrden = !formOrden"
             class="form_close"
+            :class="
+              dataStore.entidades.length && dataStore.entidades[0].id == 17
+                ? 'form_close_midasoluciones'
+                : 'form_close_wapi'
+            "
           >
             <close-icon />
           </label>
         </div>
         <button
           class="continue_shopping_form"
+          :class="
+            dataStore.entidades.length && dataStore.entidades[0].id == 17
+              ? 'continue_shopping_form_midasoluciones'
+              : 'continue_shopping_form_wapi'
+          "
           v-on:click.prevent="redirectWP()"
           style="margin-top: 15px;"
         >
@@ -646,10 +682,16 @@ export default {
 }
 .order_header_close {
   font-size: 25px;
-  color: #075e54;
   cursor: pointer;
 }
-.order_header_close:hover {
+.order_header_close_wapi {
+  color: #12a493;
+}
+.order_header_close_midasoluciones {
+  color: #fecb37;
+}
+.order_header_close_wapi:hover,
+.order_header_close_midasoluciones:hover {
   color: gray;
 }
 .order--wrapper {
@@ -731,8 +773,8 @@ export default {
   font-weight: 500;
 }
 .name >>> .el-tag {
-  border-color: #128c7e;
-  background-color: #128c7e;
+  border-color: #999c9c;
+  background-color: #999c9c;
   color: white;
   display: inline-block;
   height: 28px;
@@ -771,12 +813,19 @@ export default {
 }
 .icon-delete {
   font-size: 20px;
-  cursor: pointer;
   color: #128c7e;
   transition: 0.3s;
   bottom: 5px;
+  cursor: pointer;
 }
-.icon-delete:hover {
+.icon-delete-wapi {
+  color: #12a493;
+}
+.icon-delete-midasoluciones {
+  color: #fecb37;
+}
+.icon-delete-wapi:hover,
+.icon-delete-midasoluciones:hover {
   color: grey;
 }
 .order_beforefreeshipping {
@@ -843,13 +892,19 @@ export default {
 }
 .form_close {
   font-size: 30px;
-  color: #25d366;
   cursor: pointer;
   position: absolute;
   top: 0;
   right: 10px;
 }
-.form_close:hover {
+.form_close_wapi {
+  color: #12a493;
+}
+.form_close_midasoluciones {
+  color: #fecb37;
+}
+.form_close_wapi:hover,
+.form_close_midasoluciones:hover {
   color: gray;
 }
 .form-text {
@@ -899,7 +954,6 @@ export default {
   margin-left: 10px;
 }
 .continue_shopping_form {
-  color: white;
   border-radius: 5px;
   border: none;
   font-size: 16px;
@@ -916,12 +970,20 @@ export default {
   justify-content: center;
   text-align: center;
   align-items: center;
-  /* background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%); */
+}
+.continue_shopping_form_wapi {
+  color: white;
   background: rgb(0, 191, 165);
 }
-
-.continue_shopping_form:hover {
+.continue_shopping_form_wapi:hover {
   background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+}
+.continue_shopping_form_midasoluciones {
+  color: black;
+  background: rgb(254, 203, 55);
+}
+.continue_shopping_form_midasoluciones:hover {
+  background-image: linear-gradient(130deg, #c79e25 0, #e0b531 80%);
 }
 .order_total {
   border-top: 1px solid rgba(112, 112, 117, 0.322);
@@ -991,7 +1053,6 @@ export default {
   position: fixed;
   z-index: 99;
   bottom: 8px;
-  color: white;
   border-radius: 5px;
   border: none;
   font-size: 16px;
@@ -1006,16 +1067,25 @@ export default {
   justify-content: center;
   text-align: center;
   align-items: center;
+}
+.continue_shopping-wapi {
+  color: white;
   background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
 }
-.continue_shopping:hover {
+.continue_shopping-wapi:hover {
   background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+}
+.continue_shopping-midasoluciones {
+  color: black;
+  background-image: linear-gradient(130deg, #eebe2d 0, #fecb37 80%);
+}
+.continue_shopping-midasoluciones:hover {
+  background-image: linear-gradient(130deg, #c79e25 0, #e0b531 80%);
 }
 .continue_shopping2 {
   position: fixed;
   z-index: 99;
   bottom: 60px;
-  color: #128c7e;
   border-radius: 5px;
   background: transparent;
   font-size: 16px;
@@ -1030,11 +1100,22 @@ export default {
   justify-content: center;
   text-align: center;
   align-items: center;
+}
+.continue_shopping2-wapi {
+  color: #128c7e;
   border: 2px solid #128c7e;
 }
-.continue_shopping2:hover {
-  color: #24a788;
-  border: 2px solid #24a788;
+.continue_shopping2-wapi:hover {
+  color: #0f7c6f;
+  border: 2px solid #0f7c6f;
+}
+.continue_shopping2-midasoluciones {
+  color: black;
+  border: 2px solid black;
+}
+.continue_shopping2-midasoluciones:hover {
+  color: #f8d058;
+  border: 2px solid #f8d058;
 }
 .conten-btn {
   display: flex;

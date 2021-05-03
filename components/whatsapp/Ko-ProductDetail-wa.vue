@@ -2,11 +2,18 @@
   <div class="wrapper-productDetail">
     <!-- <div v-if="true" v-loading="true"></div> -->
     <div class="container-productDetail" v-if="!loading" v-loading="loading">
-      <div class="wrapper-back">
-        <div class="back-button">
-          <p @click="$router.go(-1)"><FlechaLeft-icon /></p>
-        </div>
-      </div>
+      <nuxt-link
+        :to="`/wa/${dataStore.tienda.id_tienda}/`"
+        class="wrapper-back"
+        :class="
+          dataStore.entidades.length && dataStore.entidades[0].id == 17
+            ? 'wrapper-back-midasoluciones'
+            : 'wrapper-back-wapi'
+        "
+      >
+        <arrow-left-icon class="icon-back" />
+        <p class="back-text">Volver al inicio</p>
+      </nuxt-link>
       <div class="section">
         <div class="wrapper-left">
           <div class="photos_responsive">
@@ -115,6 +122,11 @@
           </div>
           <button
             class="btn-responsive"
+            :class="
+              dataStore.entidades.length && dataStore.entidades[0].id == 17
+                ? 'btn-responsive-midasoluciones'
+                : 'btn-responsive-wapi'
+            "
             ref="color2"
             v-if="!spent && salesData.precio > 0"
             v-on:click="addShoppingCart"
@@ -125,6 +137,11 @@
           </button>
           <button
             class="btn-responsive"
+            :class="
+              dataStore.entidades.length && dataStore.entidades[0].id == 17
+                ? 'btn-responsive-midasoluciones'
+                : 'btn-responsive-wapi'
+            "
             ref="color2"
             v-else-if="salesData.precio == 0 && !spent"
             v-on:click="WPQuotation()"
@@ -675,34 +692,31 @@ export default {
   position: relative;
 }
 .wrapper-back {
-  background-color: #fafaf8;
-  box-shadow: 0 2px 10px rgba(131, 130, 131, 0.473);
-  width: 35px;
-  height: 35px;
-  border-radius: 45px;
+  width: 100%;
+  padding: 10px 10px 5px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 2;
 }
-.back-button {
-  display: flex;
-  /* padding: 25px 25px; */
+.wrapper-back-wapi {
+  color: #4a5782;
+}
+.wrapper-back-wapi:hover {
+  color: #2ec4a1;
+}
+.wrapper-back-midasoluciones {
+  color: #4a5782;
+}
+.wrapper-back-midasoluciones:hover {
+  color: #fecb37;
+}
+.icon-back {
+  font-weight: normal;
+  font-size: 18px;
+  bottom: 3px;
   cursor: pointer;
-  justify-content: center;
-  text-align: center;
-  padding-left: 3px;
-}
-.back-button p {
-  font-size: 28px;
-  color: #128c7e;
-}
-.wrapper-back:hover {
-  background-color: #128c7e;
+  margin-right: 5px;
 }
 .back-button p:hover {
   color: white;
@@ -903,10 +917,7 @@ export default {
 }
 .btn-responsive {
   border-radius: var(--radius_btn);
-  color: white;
   border: none;
-  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
-  background-image: linear-gradient(85deg, #48ac98 0%, #45c4aa 100%);
   box-shadow: 0px 0px 2px rgba(52, 58, 67, 0.1),
     0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
   padding: 6px 10px;
@@ -921,8 +932,19 @@ export default {
   font-size: 16px;
   font-weight: 600;
 }
-.btn-responsive:hover {
+.btn-responsive-wapi {
+  color: white;
+  background-image: linear-gradient(85deg, #48ac98 0%, #45c4aa 100%);
+}
+.btn-responsive-wapi:hover {
   background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+}
+.btn-responsive-midasoluciones {
+  color: black;
+  background-image: linear-gradient(85deg, #eebe2d 0%, #fecb37 100%);
+}
+.btn-responsive-midasoluciones:hover {
+  background-image: linear-gradient(130deg, #c79e25 0, #e0b531 80%);
 }
 .icon {
   font-size: 16px;

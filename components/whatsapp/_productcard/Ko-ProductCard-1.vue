@@ -8,7 +8,7 @@
         </p>
         <router-link
           :to="{
-            path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+            path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
           }"
           class="wrapper-image"
         >
@@ -28,7 +28,8 @@
         <div class="wrapper-text">
           <router-link
             :to="{
-              path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+              path:
+                `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
             }"
             class="content-name-product-movil"
           >
@@ -63,7 +64,10 @@
                   >
                     {{
                       this.minPrice
-                        | currency(dataStore.codigo_pais, dataStore.moneda)
+                        | currency(
+                          dataStore.tienda.codigo_pais,
+                          dataStore.tienda.moneda
+                        )
                     }}
                   </p>
                   <p class="separator-price">-</p>
@@ -73,7 +77,10 @@
                   >
                     {{
                       this.maxPrice
-                        | currency(dataStore.codigo_pais, dataStore.moneda)
+                        | currency(
+                          dataStore.tienda.codigo_pais,
+                          dataStore.tienda.moneda
+                        )
                     }}
                   </p>
                 </div>
@@ -81,7 +88,10 @@
                   <p class="card-price-2" v-if="this.product.precio > 0">
                     {{
                       this.product.precio
-                        | currency(dataStore.codigo_pais, dataStore.moneda)
+                        | currency(
+                          dataStore.tienda.codigo_pais,
+                          dataStore.tienda.moneda
+                        )
                     }}
                   </p>
                 </div>
@@ -98,27 +108,44 @@
               <div
                 v-if="this.product.precio > 0"
                 v-on:click="addShoppingCart"
-                class="btn btn-whatsapp"
+                class="btn"
+                :class="
+                  dataStore.entidades.length && dataStore.entidades[0].id == 17
+                    ? 'btn-midasoluciones'
+                    : 'btn-wapi'
+                "
                 style="margin-right: 5px;"
               >
                 <shopWa-icon class="wp-icon" />
               </div>
               <router-link
                 :to="{
-                  path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+                  path:
+                    `/wa/${dataStore.tienda.id_tienda}/producto/` +
+                    product.slug,
                 }"
                 class="btn"
+                :class="
+                  dataStore.entidades.length && dataStore.entidades[0].id == 17
+                    ? 'btn-midasoluciones'
+                    : 'btn-wapi'
+                "
               >
                 {{ $t('productdetail_btnComprar') }}</router-link
               >
             </div>
-
             <router-link
               :to="{
-                path: `/wa/${dataStore.id_tienda}/producto/` + product.slug,
+                path:
+                  `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
               }"
               v-else
               class="btn"
+              :class="
+                dataStore.entidades.length && dataStore.entidades[0].id == 17
+                  ? 'btn-midasoluciones'
+                  : 'btn-wapi'
+              "
             >
               {{ $t('productdetail_btnComprar') }}</router-link
             >
@@ -327,14 +354,14 @@ export default {
       let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
       let baseUrlPc = 'https://web.whatsapp.com/send?phone=57'
       let urlProduct
-      if (this.dataStore.dominio) {
-        urlProduct = `${this.dataStore.dominio}wa/${this.product.slug}`
+      if (this.dataStore.tienda.dominio) {
+        urlProduct = `${this.dataStore.tienda.dominio}wa/${this.product.slug}`
       } else {
-        urlProduct = `http://${this.dataStore.subdominio}.komercia.store/wa/${this.product.slug}`
+        urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa/${this.product.slug}`
       }
       let text = `text=Hola 😀, %0AEstoy en tu tienda y me interesa el producto: ${this.product.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
-      if (this.dataStore.whatsapp.length > 10) {
-        let phone_number_whatsapp = this.dataStore.whatsapp
+      if (this.dataStore.tienda.whatsapp.length > 10) {
+        let phone_number_whatsapp = this.dataStore.tienda.whatsapp
         if (phone_number_whatsapp.charAt(0) === '+') {
           phone_number_whatsapp = phone_number_whatsapp.slice(1)
         }
@@ -349,12 +376,12 @@ export default {
       } else {
         if (this.mobileCheck()) {
           window.open(
-            `${baseUrlMovil}${this.dataStore.whatsapp}&${text}`,
+            `${baseUrlMovil}${this.dataStore.tienda.whatsapp}&${text}`,
             '_blank'
           )
         } else {
           window.open(
-            `${baseUrlPc}${this.dataStore.whatsapp}&${text}`,
+            `${baseUrlPc}${this.dataStore.tienda.whatsapp}&${text}`,
             '_blank'
           )
         }
@@ -576,46 +603,42 @@ export default {
   max-height: 20px;
 }
 .btn {
-  background-color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-  text-decoration: none;
   display: flex;
   justify-content: center;
-  align-items: center;
   text-align: center;
+  text-decoration: none;
+  align-items: center;
   border-radius: 4px;
   padding: 6px 10px;
   font-weight: 600;
-  color: #445a64;
   margin-right: 4px;
   font-size: 12px;
-  /* border: 1px solid #ececec; */
-  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
+  box-sizing: border-box;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
+  cursor: pointer;
+}
+.btn-wapi {
   background-color: white;
-  /* color: #25d366; */
   color: #128c7e;
 }
-.btn:hover {
+.btn-wapi:hover {
   color: white;
   background-color: #128c7e;
 }
-.btn-whatsapp {
-  box-sizing: border-box;
-  box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
-  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
-  margin-right: 10px;
+.btn-midasoluciones {
+  background-color: white;
+  color: #f7c224;
+}
+.btn-midasoluciones:hover {
+  color: black;
+  background-color: #f7c224;
 }
 .wp-icon {
   font-size: 20px;
   bottom: 3px;
 }
 @media (max-width: 330px) {
-  .btn-whatsapp {
-    top: 78px;
-  }
   .wrapper-image {
     max-width: 105px;
   }

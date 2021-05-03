@@ -1,18 +1,50 @@
 <template>
   <div class="footer-container">
-    <div class="wrapper-footer" @click="openOrder">
-      <p class="text-footer unidades" v-if="productsCart.length > 0">
+    <div
+      class="wrapper-footer"
+      @click="openOrder"
+      :class="
+        dataStore.entidades.length && dataStore.entidades[0].id == 17
+          ? 'wrapper-footer-midasoluciones'
+          : 'wrapper-footer-wapi'
+      "
+    >
+      <p
+        class="unidades"
+        v-if="productsCart.length > 0"
+        :class="
+          dataStore.entidades.length && dataStore.entidades[0].id == 17
+            ? 'text-footer-midasoluciones'
+            : 'text-footer-wapi'
+        "
+      >
         <span>{{ productsCart.length }}</span>
         item
       </p>
-      <p class="text-footer carrito">
-        <whatsapp-icon class="wp-icon" /> {{ $t('productdetail_btnComprar') }}
+      <p
+        class="carrito"
+        :class="
+          dataStore.entidades.length && dataStore.entidades[0].id == 17
+            ? 'text-footer-midasoluciones'
+            : 'text-footer-wapi'
+        "
+      >
+        <whatsapp-icon class="wp-icon" />
+        {{ $t('productdetail_btnComprar') }}
       </p>
-      <p class="text-footer valor" v-if="productsCart.length > 0">
-        <span>{{
-          this.totalCart
-            | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
-        }}</span>
+      <p class="text-footer-wapi valor" v-if="productsCart.length > 0">
+        <span
+          :class="
+            dataStore.entidades.length && dataStore.entidades[0].id == 17
+              ? 'valor-midasoluciones'
+              : 'valor-wapi'
+          "
+        >
+          {{
+            this.totalCart
+              | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
+          }}</span
+        >
       </p>
     </div>
   </div>
@@ -94,19 +126,10 @@ export default {
   border-radius: 8px;
   padding: 0px 9px;
   cursor: pointer;
-  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
-}
-.wrapper-footer:hover {
-  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
 }
 .wrapper-footer p {
   flex: 1;
 }
-.text-footer {
-  color: white;
-  font-size: 16px;
-}
-
 .main-container {
   height: 60px;
   width: 100%;
@@ -116,7 +139,6 @@ export default {
   padding: 8px;
   z-index: 9999;
 }
-
 .unidades {
   width: 30%;
   font-size: 13px;
@@ -134,19 +156,39 @@ export default {
   text-align: right;
   font-weight: 500;
 }
-.valor span {
+.wp-icon {
+  font-size: 18px;
+  margin-right: 2px;
+  margin-bottom: -2px;
+}
+.wrapper-footer-wapi {
+  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
+}
+.wrapper-footer-wapi:hover {
+  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
+}
+.wrapper-footer-midasoluciones {
+  background-image: linear-gradient(130deg, #eebe2d 0, #fecb37 80%);
+}
+.wrapper-footer-midasoluciones:hover {
+  background-image: linear-gradient(130deg, #c79e25 0, #e0b531 80%);
+}
+.text-footer-wapi {
+  color: white;
+  font-size: 16px;
+}
+.valor-wapi {
   font-size: 13px;
   text-align: right;
   background-color: #12a493;
   padding: 6px;
   border-radius: 5px;
 }
-.wp-icon {
-  font-size: 18px;
-  margin-right: 2px;
-  margin-bottom: -2px;
-}
-.icon-bag {
-  color: white;
+.valor-midasoluciones {
+  font-size: 13px;
+  text-align: right;
+  background-color: black;
+  padding: 6px;
+  border-radius: 5px;
 }
 </style>

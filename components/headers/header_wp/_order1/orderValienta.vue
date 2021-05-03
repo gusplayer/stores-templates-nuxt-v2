@@ -320,6 +320,7 @@ export default {
       this.filterCities()
     }
     this.$store.commit('CALCULATE_TOTALCART')
+    this.productsFreeShippingCart()
   },
   data() {
     return {
@@ -335,6 +336,7 @@ export default {
       barrio: '',
       dirreccion: '',
       productIndexCart: null,
+      FreeShippingCart: false,
     }
   },
   computed: {
@@ -377,35 +379,39 @@ export default {
       return this.$store.state.cities
     },
     shipping() {
-      if (this.$store.state.envios.estado) {
-        let shipping = JSON.parse(this.$store.state.envios.valores)
-        switch (shipping.envio_metodo) {
-          case 'gratis':
-            return 0
-            break
-          case 'tarifa_plana':
-            return shipping.valor
-            break
-          case 'precio_ciudad':
-            let result = shipping.rangos.find((rango) => {
-              if (
-                this.totalCart >= rango.inicial &&
-                this.totalCart <= rango.final
-              ) {
-                return rango
-              }
-            })
-            if (result) {
-              return result.precio
-            } else {
-              return 0
-            }
-            break
-          default:
-            return 0
-        }
-      } else {
+      if (this.FreeShippingCart == true) {
         return 0
+      } else {
+        if (this.$store.state.envios.estado) {
+          let shipping = JSON.parse(this.$store.state.envios.valores)
+          switch (shipping.envio_metodo) {
+            case 'gratis':
+              return 0
+              break
+            case 'tarifa_plana':
+              return shipping.valor
+              break
+            case 'precio_ciudad':
+              let result = shipping.rangos.find((rango) => {
+                if (
+                  this.totalCart >= rango.inicial &&
+                  this.totalCart <= rango.final
+                ) {
+                  return rango
+                }
+              })
+              if (result) {
+                return result.precio
+              } else {
+                return 0
+              }
+              break
+            default:
+              return 0
+          }
+        } else {
+          return 0
+        }
       }
     },
   },
@@ -563,6 +569,22 @@ export default {
         })
       }
     },
+    roductsFreeShippingCart() {
+      if (this.productsCart) {
+        let result = this.productsCart.filter((rango) => {
+          if (rango.envio_gratis === 1) {
+            return rango
+          }
+        })
+        if (this.productsCart.length == result.length) {
+          this.FreeShippingCart = true
+          // this.rangosByCiudad.envio_metodo = 'gratis'
+        } else {
+          this.FreeShippingCart = false
+          // this.rangosByCiudad.envio_metodo = this.rangosByCiudad.envio_metodo
+        }
+      }
+    },
   },
   watch: {
     rangosByCiudad() {
@@ -570,6 +592,11 @@ export default {
     },
     cities() {
       this.filterCities()
+    },
+    productsCart() {
+      if (this.productsCart) {
+        this.productsFreeShippingCart()
+      }
     },
   },
   filters: {

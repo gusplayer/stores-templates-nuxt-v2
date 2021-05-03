@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import KoOrder from '../../template7/_lateralMenu/orderRight'
+import KoOrder from '../_order1/order1'
 import KoMenu from '../../template7/_lateralMenu/openMenuLeft'
 import KoSearch from '../../template7/_lateralMenu/searchUp'
 

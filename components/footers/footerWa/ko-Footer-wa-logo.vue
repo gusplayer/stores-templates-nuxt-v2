@@ -12,11 +12,38 @@
             :href="item.link"
             target="_blank "
             rel="noreferrer noopener"
-            ><div class="icon" :is="item.icon"
-          /></a>
+          >
+            <div
+              :is="item.icon"
+              :class="
+                dataStore.entidades.length && dataStore.entidades[0].id == 17
+                  ? 'icon-midasoluciones'
+                  : 'icon-wapi'
+              "
+            />
+          </a>
         </div>
       </div>
-      <div class="under-footer">
+      <div
+        class="under-footer"
+        v-if="dataStore.entidades.length && dataStore.entidades[0].id == 17"
+      >
+        <p>{{ $t('footer_desarrollado') }}</p>
+        <a
+          href="https://komercia.co/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img
+            v-lazy="
+              `https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1620052318/midasSoluciones/LOGO_CHICO_1_ezxrjw.png`
+            "
+            class="logo-midasoluciones"
+            alt="Logo Img"
+          />
+        </a>
+      </div>
+      <div class="under-footer" v-else>
         <p>{{ $t('footer_desarrollado') }}</p>
         <a
           href="https://komercia.co/"
@@ -27,7 +54,7 @@
             v-lazy="
               `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
             "
-            class="logo2"
+            class="logo-wapi"
             alt="Logo Img"
           />
         </a>
@@ -107,8 +134,12 @@ export default {
   letter-spacing: normal;
   color: black;
 }
-.logo2 {
+.logo-wapi {
   width: 100px;
+  opacity: 0.7;
+}
+.logo-midasoluciones {
+  width: 150px;
   opacity: 0.7;
 }
 .content-items-iconos {
@@ -119,12 +150,20 @@ export default {
   align-items: center;
   margin-bottom: 5px;
 }
-.icon {
+.icon-wapi {
   margin-right: 10px;
   font-size: 20px;
   color: #128c7e;
 }
-.icon:hover {
+.icon-wapi:hover {
   color: #25d366;
+}
+.icon-midasoluciones {
+  margin-right: 10px;
+  font-size: 20px;
+  color: #fecb37;
+}
+.icon-midasoluciones:hover {
+  color: #f8d058;
 }
 </style>

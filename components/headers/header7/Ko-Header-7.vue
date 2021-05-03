@@ -122,7 +122,7 @@
   </div>
 </template>
 <script>
-import KoOrder from '../../../components/template11/_lateralMenu/orderRight'
+import KoOrder from '../_order1/order1'
 import KoMenu from '../../../components/template11/_lateralMenu/openMenuLeft'
 
 export default {

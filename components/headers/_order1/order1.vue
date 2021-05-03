@@ -3,9 +3,10 @@
     <div class="order" @click="closeOrder" v-show="openOrder">
       <div class="order_content">
         <div class="order_header">
-          <h3 class="order_header_title">{{ $t('footer_title') }}</h3>
-          <div @click="closedOder" class="order_header_close">
-            <close-icon />
+          <h3>{{ $t('footer_title') }}</h3>
+          <div class="order_header_close" @click="closedOder">
+            <div class="leftright"></div>
+            <div class="rightleft"></div>
           </div>
         </div>
         <transition name="slide">
@@ -562,20 +563,39 @@ export default {
       return this.$store.state.cities
     },
     shipping() {
-      if (this.$store.state.envios.estado) {
-        let shipping = JSON.parse(this.$store.state.envios.valores)
-        switch (shipping.envio_metodo) {
-          case 'gratis':
-            return 0
-            break
-          case 'tarifa_plana':
-            return shipping.valor
-            break
-          default:
-            return 0
-        }
-      } else {
+      if (this.FreeShippingCart == true) {
         return 0
+      } else {
+        if (this.$store.state.envios.estado) {
+          let shipping = JSON.parse(this.$store.state.envios.valores)
+          switch (shipping.envio_metodo) {
+            case 'gratis':
+              return 0
+              break
+            case 'tarifa_plana':
+              return shipping.valor
+              break
+            case 'precio_ciudad':
+              let result = shipping.rangos.find((rango) => {
+                if (
+                  this.totalCart >= rango.inicial &&
+                  this.totalCart <= rango.final
+                ) {
+                  return rango
+                }
+              })
+              if (result) {
+                return result.precio
+              } else {
+                return 0
+              }
+              break
+            default:
+              return 0
+          }
+        } else {
+          return 0
+        }
       }
     },
     facebooPixel() {
@@ -909,8 +929,8 @@ export default {
   display: flex;
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10;
-  list-style: none;
+  z-index: 15;
+  transition: all 0.25s ease;
 }
 .order_content {
   position: absolute;
@@ -918,7 +938,7 @@ export default {
   max-width: 400px;
   width: 100%;
   height: 100vh;
-  background-color: var(--background_color_1);
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -945,17 +965,30 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--background_color_2);
+  border-bottom: 1px solid #ededed;
   padding: 10px 30px;
   flex: none;
 }
-.order_header_title {
-  color: var(--color_text);
+.leftright,
+.rightleft {
+  background: #2c2930;
 }
 .order_header_close {
-  font-size: 30px;
-  color: var(--color_icon);
-  cursor: pointer;
+  @apply relative w-30 h-20 cursor-pointer flex justify-center items-center;
+}
+.leftright {
+  @apply h-4 w-30 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
+}
+.rightleft {
+  @apply h-4 w-30 absolute rounded-2 transform rotate-45 transition-all ease-in duration-200;
+}
+.order_header_close:hover .leftright {
+  @apply transform rotate-0;
+  background: #000;
+}
+.order_header_close:hover .rightleft {
+  @apply transform rotate-0;
+  background: #000;
 }
 .order_header_close:hover {
   color: gray;
@@ -979,23 +1012,23 @@ export default {
   list-style: none;
 }
 .order_products_list::-webkit-scrollbar {
-  border: 1px solid var(--color_border);
+  border: 1px solid #ededed;
   background: transparent;
   width: 6px;
 }
 .order_products_list::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px var(--color_border);
+  box-shadow: inset 0 0 10px #2c2930;
   border-radius: 10px;
 }
 .order_products_list::-webkit-scrollbar-thumb {
-  background: var(--color_icon);
+  background: #2c2930;
   border-radius: 10px;
 }
 .order_products_list_item {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border-bottom: 1px solid var(--background_color_2);
+  border-bottom: 1px solid #ededed;
   padding: 10px 30px;
   overflow-x: auto;
 }
@@ -1005,11 +1038,11 @@ export default {
   max-height: 8px;
 }
 .order_products_list_item::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px var(--background_color_2);
+  box-shadow: inset 0 0 10px #2c2930;
   border-radius: 10px;
 }
 .order_products_list_item::-webkit-scrollbar-thumb {
-  background: var(--color_icon);
+  background: #2c2930;
   border-radius: 10px;
 }
 .order_products_list_item .photo {
@@ -1021,17 +1054,15 @@ export default {
 .order_products_list_item .photo img {
   max-width: 50px;
   max-height: 50px;
-  border-radius: 5px;
-  margin-right: 5px;
 }
 .order_products_list_item .name {
   max-width: 190px;
   width: 100%;
 }
 .name >>> .el-tag {
-  border-color: var(--background_color_2);
-  background-color: var(--background_color_2);
-  color: var(--color_text);
+  border-color: #2c2930;
+  background-color: #2c2930;
+  color: #fff;
   display: inline-block;
   height: 28px;
   margin-left: 2px;
@@ -1045,11 +1076,11 @@ export default {
   white-space: nowrap;
 }
 .order-text {
-  color: var(--color_text);
+  color: #2c2930;
   font-size: 14px;
 }
 .unidades {
-  color: var(--color_text);
+  color: #2c2930;
   font-size: 13px;
   font-weight: 500;
 }
@@ -1064,7 +1095,7 @@ export default {
 .order-combincacion-uni {
   border-radius: 10px;
   border: 1px solid white;
-  background-color: var(--color_icon);
+  background-color: #2c2930;
   color: #fff;
 }
 .order-combincacion-text {
@@ -1076,18 +1107,18 @@ export default {
   width: 100%;
   min-width: 60px;
   max-width: 100px;
-  color: var(--color_subtext);
+  color: #2c2930;
   font-size: 16px;
 }
 .icon-delete {
   font-size: 20px;
   cursor: pointer;
-  color: var(--color_icon);
+  color: #2c2930;
   transition: 0.3s;
   bottom: 5px;
 }
 .icon-delete:hover {
-  color: var(--btnhover);
+  color: #000;
 }
 
 .order_beforefreeshipping {
@@ -1104,7 +1135,7 @@ export default {
 .order_beforefreeshipping p strong,
 .order_freeshipping p,
 .order_freeshipping p strong {
-  color: var(--color_text);
+  color: #2c2930;
 }
 .content-remove-cart {
   width: 100%;
@@ -1115,14 +1146,14 @@ export default {
   align-items: center;
 }
 .remove-cart {
-  color: var(--color_text);
+  color: #2c2930;
   font-weight: 300;
   font-size: 14px;
   cursor: pointer;
   transition: all ease 0.3s;
 }
 .remove-cart:hover {
-  color: var(--btnhover);
+  color: #2c2930;
 }
 .wrapper-items-remove {
   position: absolute;
@@ -1148,7 +1179,7 @@ export default {
 .text-remove {
   padding: 20px;
   text-align: center;
-  color: var(--color_text);
+  color: #2c2930;
   font-weight: 300;
   font-size: 16px;
 }
@@ -1163,12 +1194,12 @@ export default {
 .btn-remover-yes {
   font-weight: bold;
   border-style: none;
-  background-color: black;
+  background-color: #2c2930;
   padding: 4px 10px;
   width: 100%;
   max-width: 70px;
   color: white;
-  border: 2px solid black;
+  border: 2px solid #2c2930;
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -1176,8 +1207,8 @@ export default {
   transition: all ease 0.3s;
 }
 .btn-remover-yes:hover {
-  background-color: var(--btnhover);
-  border: 2px solid var(--btnhover);
+  background-color: #2c2930;
+  border: 2px solid #2c2930;
 }
 .btn-remover-no {
   font-weight: bold;
@@ -1195,11 +1226,11 @@ export default {
   transition: all ease 0.3s;
 }
 .btn-remover-no:hover {
-  color: var(--btnhover);
-  border: 2px solid var(--btnhover);
+  color: #2c2930;
+  border: 2px solid #ededed;
 }
 .order_total {
-  border-top: 1px solid var(--background_color_2);
+  border-top: 1px solid #ededed;
   padding: 0 30px;
 }
 .order_total_domicile,
@@ -1209,12 +1240,12 @@ export default {
   margin: 15px 0;
 }
 .order_total_domicile p {
-  color: var(--color_text);
+  color: #2c2930;
   font-weight: 300;
   font-size: 14px;
 }
 .text-color {
-  color: var(--color_text);
+  color: #2c2930;
 }
 .order_total_domicile >>> .text-TarifaPrecio {
   display: flex;
@@ -1222,7 +1253,7 @@ export default {
   color: red;
 }
 .scroll_cart_summary_items_cities {
-  color: var(--color_text);
+  color: #2c2930;
   overflow-y: auto;
   max-height: 150px;
   display: flex;
@@ -1245,11 +1276,11 @@ export default {
   border-radius: 10px;
 }
 .without_shipping_cost {
-  color: var(--main_color);
+  color: #2c2930;
   font-size: 13px;
 }
 .order_total_net p {
-  color: var(--color_text);
+  color: #2c2930;
   font-weight: bold;
 }
 .domicilio-message {
@@ -1261,7 +1292,7 @@ export default {
   padding: 8px 10px;
   width: 100%;
   max-width: 280px;
-  color: var(--color_text);
+  color: #2c2930;
   font-size: 14px;
   letter-spacing: 1px;
   outline: none;
@@ -1283,7 +1314,7 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
-  color: var(--color_text);
+  color: #2c2930;
   font-size: 14px;
   letter-spacing: 1px;
   outline: none;
@@ -1303,9 +1334,9 @@ export default {
   margin-top: 10px;
   padding: 8px 10px;
   border-radius: var(--radius_btn);
-  color: var(--color_text_btn);
-  border: solid 2px var(--color_background_btn);
-  background-color: var(--color_background_btn);
+  color: #fff;
+  border: solid 2px #2c2930;
+  background-color: #2c2930;
   font-size: 14px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -1316,8 +1347,9 @@ export default {
   transition: all ease 0.3s;
 }
 .continue_shopping:hover {
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
+  border: solid 2px #ccc;
+  background-color: #f8f8f8;
+  color: #2c2930;
 }
 .conten-btn {
   display: flex;
@@ -1332,8 +1364,8 @@ export default {
   padding: 8px 10px;
   width: 100%;
   max-width: 340px;
-  color: var(--color_background_btn);
-  border: 2px solid var(--color_background_btn);
+  color: #2c2930;
+  border: 2px solid #2c2930;
   border-radius: var(--radius_btn);
   font-size: 14px;
   letter-spacing: 1px;
@@ -1344,15 +1376,15 @@ export default {
   transition: all ease 0.3s;
 }
 .continue_shopping2:hover {
-  color: var(--btnhover);
-  border: 2px solid var(--btnhover);
+  color: #fff;
+  background-color: #2c2930;
+  border: 2px solid #2c2930;
 }
 .wrapper_photo {
   position: relative;
   display: flex;
   justify-content: center;
   align-self: center;
-  max-width: 120px;
 }
 .photo {
   width: 100%;
@@ -1361,7 +1393,6 @@ export default {
   border-radius: 10px;
 }
 .text-cart-empty {
-  color: var(--color_text);
   text-align: center;
 }
 .fade-enter-active,
@@ -1429,9 +1460,9 @@ details[open] summary ~ * {
   margin-top: 10px;
   padding: 8px 10px;
   border-radius: var(--radius_btn);
-  color: var(--color_text_btn);
-  border: solid 2px var(--color_background_btn);
-  background-color: var(--color_background_btn);
+  color: #fff;
+  border: solid 2px #2c2930;
+  background-color: #2c2930;
   font-size: 14px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -1442,8 +1473,9 @@ details[open] summary ~ * {
   transition: all ease 0.3s;
 }
 .continue_shopping_whatsapp:hover {
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
+  border: solid 2px #25d366;
+  background-color: #25d366;
+  color: #fff;
 }
 .wrapper-items-form {
   width: 100%;
@@ -1546,12 +1578,13 @@ details[open] summary ~ * {
   text-align: center;
   align-items: center;
   border-radius: var(--radius_btn);
-  color: var(--color_text_btn);
-  border: solid 2px var(--color_background_btn);
-  background-color: var(--color_background_btn);
+  color: #fff;
+  border: solid 2px #2c2930;
+  background-color: #2c2930;
 }
 .continue_shopping_form:hover {
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
+  border: solid 2px #ccc;
+  background-color: #fff;
+  color: #2c2930;
 }
 </style>

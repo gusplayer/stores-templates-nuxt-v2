@@ -154,6 +154,15 @@ export default {
   object-fit: cover;
   overflow: hidden;
 }
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 15px;
+  position: relative;
+}
 .containt-image {
   display: flex;
   width: 105px;
@@ -181,15 +190,6 @@ export default {
   object-position: center;
   /* border-radius: 50%; */
 }
-.header {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  padding: 15px 15px;
-  position: relative;
-}
 .header-content-text {
   margin-left: 130px;
 }
@@ -215,72 +215,6 @@ export default {
   font-weight: normal;
   color: black;
   color: #4e4e4e;
-}
-.wrapper-items-icons {
-  margin-top: 3px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-self: center;
-}
-.container-header-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 28px;
-  width: 28px;
-  background-color: #708195;
-  margin-right: 8px;
-  cursor: pointer;
-  border-radius: 45px;
-}
-.header-icon {
-  font-size: 20px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #fff;
-  margin-top: -4px;
-}
-.header-content-icon {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.header-content-cart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  width: 35px;
-  height: 35px;
-  border: #25d366 2px solid;
-  border-radius: 50%;
-  padding-bottom: 3px;
-  position: relative;
-  cursor: pointer;
-}
-.header-icon-cart {
-  font-size: 20px;
-  color: #25d366;
-}
-.num-items {
-  font-size: 11px;
-  position: absolute;
-  right: -5px;
-  top: -5px;
-  color: white;
-  background-color: #708195;
-  border: #25d366 1px;
-  border-radius: 10px;
-  line-height: 1;
-  display: flex;
-  padding: 3px;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
 }
 .container-tienda-wp {
   display: initial;
