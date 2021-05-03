@@ -1174,6 +1174,9 @@ export default {
   .right {
     width: 50%;
   }
+  .product-content {
+    @apply w-full;
+  }
 }
 @media (min-width: 1350px) {
   .video {

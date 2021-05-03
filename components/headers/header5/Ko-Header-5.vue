@@ -118,7 +118,7 @@
               <span an class="num-items-up">{{ productsCart }}</span>
             </div>
             <div class="txt-bag">
-              <p class="btn-bag">Bag</p>
+              <p class="btn-bag">Carrito</p>
             </div>
             <div class="border-num-items">
               <span an class="num-items">{{ productsCart }}</span>
