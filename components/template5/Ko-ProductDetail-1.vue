@@ -11,7 +11,7 @@
                   <img
                     @click="selectedPhoto(data.detalle.foto_cloudinary)"
                     class="img-list"
-                    :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
+                    :src="idCloudinary(data.detalle.foto_cloudinary, 200, 200)"
                     alt="Product Img"
                   />
                 </div>
@@ -23,7 +23,7 @@
                   <img
                     @click="selectedPhoto(foto.foto_cloudinary)"
                     class="img-list"
-                    :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
+                    :src="idCloudinary(foto.foto_cloudinary, 200, 200)"
                     alt="Product Img"
                   />
                 </div>
@@ -55,7 +55,7 @@
               <img
                 class="photo_main"
                 v-on:mouseover="activeZoom = !activeZoom"
-                :src="idCloudinary(selectPhotoUrl, 645, 430)"
+                :src="idCloudinary(selectPhotoUrl, 745, 530)"
                 alt="Product Zoom"
               />
             </div>
