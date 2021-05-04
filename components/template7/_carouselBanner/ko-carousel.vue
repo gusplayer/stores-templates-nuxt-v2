@@ -16,9 +16,9 @@
           />
           <img
             class="banner-responsive"
-            :src="settingKCarousel.values[index].url_img_left"
+            :src="settingKCarousel.values[index].url_img_movil"
             alt="bg"
-            v-if="settingKCarousel.values[index].url_img_left"
+            v-if="settingKCarousel.values[index].url_img_movil"
           />
           <KObanner
             class="absolute top-0"
