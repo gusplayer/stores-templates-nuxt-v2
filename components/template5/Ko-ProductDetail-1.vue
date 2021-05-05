@@ -11,7 +11,7 @@
                   <img
                     @click="selectedPhoto(data.detalle.foto_cloudinary)"
                     class="img-list"
-                    :src="idCloudinary(data.detalle.foto_cloudinary, 200, 200)"
+                    :src="idCloudinary(data.detalle.foto_cloudinary, 100, 100)"
                     alt="Product Img"
                   />
                 </div>
@@ -23,7 +23,7 @@
                   <img
                     @click="selectedPhoto(foto.foto_cloudinary)"
                     class="img-list"
-                    :src="idCloudinary(foto.foto_cloudinary, 200, 200)"
+                    :src="idCloudinary(foto.foto_cloudinary, 100, 100)"
                     alt="Product Img"
                   />
                 </div>
@@ -55,7 +55,7 @@
               <img
                 class="photo_main"
                 v-on:mouseover="activeZoom = !activeZoom"
-                :src="idCloudinary(selectPhotoUrl, 745, 530)"
+                :src="idCloudinaryDetalle(selectPhotoUrl, 645, 430)"
                 alt="Product Zoom"
               />
             </div>
@@ -448,11 +448,12 @@ import selectGroup from './_productdetails/selectGroup'
 import koDescription from './_productdetails/descriptionProduct.vue'
 import koSuggesProduct from './_productdetails/suggestionsProducto'
 import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryDetalle from '../../mixins/idCloudinary'
 
 import zoom from './_productdetails/zoomImg'
 
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinary, idCloudinaryDetalle],
   name: 'Ko-ProductDetail-1',
   props: {
     dataStore: Object,
