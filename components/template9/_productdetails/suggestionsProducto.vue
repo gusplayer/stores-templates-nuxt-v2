@@ -1,5 +1,9 @@
 <template>
-  <div class="wrapper-ProductFavoritos" v-if="category.length">
+  <div
+    class="wrapper-ProductFavoritos"
+    v-if="category.length"
+    :style="cardProduct"
+  >
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">
         {{ $t('home_destacadosMsg') }}
@@ -15,6 +19,7 @@ export default {
   name: 'suggestionsProducto',
   props: {
     category: {},
+    cardProduct: {},
   },
   components: {
     KoSwipper,

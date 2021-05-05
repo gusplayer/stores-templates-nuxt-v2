@@ -79,7 +79,7 @@
               <img
                 class="photo_main"
                 v-on:mouseover="activeZoom = !activeZoom"
-                :src="idCloudinary(selectPhotoUrl, 645, 430)"
+                :src="idCloudinaryDetalle(selectPhotoUrl, 645, 430)"
                 alt="Product Zoom"
               />
             </div>
@@ -365,9 +365,11 @@ import KoDescription from './_productdetails/descriptionProduct'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
 import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryDetalle from '../../mixins/idCloudinary'
+
 
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinary,idCloudinaryDetalle],
   name: 'Ko-ProductDetail-1',
   props: {
     dataStore: Object,

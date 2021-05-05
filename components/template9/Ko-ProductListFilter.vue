@@ -27,10 +27,26 @@
     >
       <div class="crumb">
         <nuxt-link to="/">
-          <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
+          <p
+            class="txt-crumb s1"
+            :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+          >
+            {{ $t('header_inicio') }}
+          </p>
         </nuxt-link>
-        <p class="txt-crumb">/</p>
-        <p class="txt-crumb s2" @click="clear">{{ $t('header_productos') }}</p>
+        <p
+          class="txt-crumb"
+          :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+        >
+          /
+        </p>
+        <p
+          class="txt-crumb s2"
+          @click="clear"
+          :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+        >
+          {{ $t('header_productos') }}
+        </p>
       </div>
       <div class="tittle-banner-shop">
         <p class="btn-tittle-shop" v-if="!this.nameCategoryHeader">
@@ -145,10 +161,24 @@
         <div class="content-banner-shop-r">
           <div class="crumb">
             <nuxt-link to="/">
-              <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
+              <p
+                class="txt-crumb s1"
+                :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+              >
+                {{ $t('header_inicio') }}
+              </p>
             </nuxt-link>
-            <p class="txt-crumb">/</p>
-            <p class="txt-crumb s2" @click="clear">
+            <p
+              class="txt-crumb"
+              :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+            >
+              /
+            </p>
+            <p
+              class="txt-crumb s2"
+              @click="clear"
+              :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+            >
               {{ $t('header_productos') }}
             </p>
           </div>
@@ -915,9 +945,12 @@ export default {
 }
 .product-tittle,
 .product-subtittle,
-.product-description,
-.product-conten-items {
+.product-description {
   @apply justify-center items-center text-center gap-4;
+}
+
+.product-conten-items {
+  @apply gap-4;
 }
 .producto-items-content {
   @apply w-full;
@@ -948,7 +981,9 @@ export default {
 }
 .content-products {
   border-bottom: 0.5px solid var(--color_icon);
-  @apply w-full flex flex-col justify-center items-center;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 .content-products-empty {
   width: 100%;
@@ -1013,7 +1048,6 @@ export default {
 .txt-crumb {
   font-family: Arial, sans-serif;
   font-size: 12px;
-  color: var(--color_subtext);
   line-height: 14px;
   padding-right: 6px;
   cursor: pointer;
@@ -1054,7 +1088,7 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 0 18px;
-  background-color: white;
+  background-color: transparent;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease-out;

@@ -4,7 +4,6 @@
     :style="[
       settingByTemplate9[0].detailsProduct,
       settingByTemplate9[0].setting9General,
-      settingByTemplate9[0].cardProduct,
     ]"
   >
     <div class="container-productDetail-loading" v-if="loading"></div>
@@ -234,7 +233,10 @@
       </div>
       <!-- Productos relacionados  -->
       <div class="section-suggesProduct">
-        <KoSuggesProduct :category="this.category.slice(0, 8)" />
+        <KoSuggesProduct
+          :category="this.category.slice(0, 8)"
+          :cardProduct="this.settingByTemplate9[0].cardProduct"
+        />
       </div>
       <!-- Metas -->
       <div itemscope itemtype="http://schema.org/Product">
@@ -955,7 +957,6 @@ export default {
     align-items: center;
     background: var(--color_quantity_bg);
   }
-
   .text-category {
     /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
     font-family: var(--font-style-2);
@@ -1023,7 +1024,7 @@ export default {
     align-items: center;
     width: 34px;
     cursor: pointer;
-    colo: var(--color_quantity_num);
+    color: var(--color_quantity_num);
   }
   .text-quantity_value {
     display: flex;
@@ -1035,7 +1036,7 @@ export default {
     border: none;
     font-size: 21px;
     font-weight: 700;
-    colo: var(--color_quantity_num);
+    color: var(--color_quantity_num);
   }
   .text-addCart {
     /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */

@@ -245,7 +245,7 @@
             </p>
           </div>
         </div>
-        <div v-else class="h-20"></div>
+        <div v-else class="h-27"></div>
       </div>
     </div>
   </div>
@@ -507,7 +507,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
 .datos-producto {
-  @apply w-full flex flex-col justify-center items-start my-24 ml-8 cursor-default;
+  @apply w-full flex flex-col justify-center items-start my-24 cursor-default;
 }
 .container {
   @apply relative max-w-full;
@@ -571,8 +571,6 @@ export default {
   font-family: var(--font-style-2);
   font-size: 16px;
   color: var(--color_price_card);
-
-  margin-top: 10px;
 }
 .text-price {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
@@ -616,13 +614,13 @@ export default {
   @apply bg-white-white;
 }
 .overlay-bottom {
-  background-color: #3d3d3d;
+  background-color: var(--color_background_btn);
 }
 .overlay-bottom:hover {
-  @apply bg-white-white;
+  background-color: #3d3d3d;
 }
 .txt-add {
-  color: white;
+  color: var(--color_text_btn);
   font-size: 15px;
   letter-spacing: 1px;
   text-transform: capitalize;
@@ -630,7 +628,7 @@ export default {
   transition: all 200ms ease-in;
 }
 .overlay-bottom:hover .txt-add {
-  color: #3d3d3d;
+  color: white;
   transition: all 200ms ease-in;
 }
 .txt-free {
