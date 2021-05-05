@@ -1,16 +1,6 @@
 <template lang="html">
   <div class="home">
-    <component
-      :is="indexTemplate"
-      :style="
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings['--background_color_1']
-          ? this.settingByTemplate.settings
-          : this.settingBase
-      "
-      v-bind="componentsProps"
-    />
+    <component :is="indexTemplate" v-bind="componentsProps" />
   </div>
 </template>
 
@@ -86,6 +76,12 @@ export default {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
+        settingByTemplate:
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings['--background_color_1']
+            ? this.settingByTemplate.settings
+            : this.settingBase,
         settingByTemplate7: this.settingByTemplate7
           ? [
               {
