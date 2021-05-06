@@ -90,6 +90,7 @@ export default {
   data() {
     return {
       swiperOption: {
+        autoHeight: true,
         slidesPerView: 'auto',
         loop: true,
         effect: 'fade',
@@ -101,10 +102,10 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-        autoplay: {
-          delay: 6000,
-          disableOnInteraction: false,
-        },
+        // autoplay: {
+        //   delay: 6000,
+        //   disableOnInteraction: false,
+        // },
       },
     }
   },
@@ -125,7 +126,10 @@ export default {
   @apply z-auto;
 }
 .swiper-slide-1 {
-  height: 831px;
+  max-height: 831px;
+  /* height: 831px; */
+  height: 100vw;
+  object-fit: contain;
   width: 100vw;
   background-size: cover;
   background-position: center;
@@ -172,6 +176,9 @@ export default {
   border-radius: 100%;
   background: white;
   opacity: 0.2;
+}
+.banner-content-items-1 {
+  padding: 20px;
 }
 @screen sm {
   .swiper-slide-1 {
