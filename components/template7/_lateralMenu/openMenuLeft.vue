@@ -71,6 +71,7 @@
               <div
                 v-for="(item, index) in secciones"
                 :key="`${index}${item.name}`"
+                @click="closed"
               >
                 <nuxt-link :to="item.path" v-if="item.path" class="btn"
                   >{{ $t(`${item.name}`) }}

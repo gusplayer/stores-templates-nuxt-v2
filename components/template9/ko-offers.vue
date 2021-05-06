@@ -427,7 +427,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #fff;
+  /* background: #fff; */
   overflow: hidden;
   width: 0;
   height: 100%;
@@ -438,7 +438,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #fff;
+  /* background: #fff; */
   overflow: hidden;
   width: 0;
   height: 100%;

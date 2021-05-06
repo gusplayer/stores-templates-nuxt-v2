@@ -516,7 +516,6 @@ export default {
   @apply w-full h-auto;
 }
 .cart-Shop {
-  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -525,9 +524,9 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
 }
 .icons-hover {
-  @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -536,6 +535,7 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
 }
 .icon-show-mobile {
   fill: white;
@@ -659,11 +659,11 @@ export default {
     height: 30px;
   }
   .overlay-top {
-    @apply absolute overflow-hidden rounded-md bg-white-white shadow-md transition-all ease-in duration-300;
     top: 10%;
     right: 0;
     width: 45px;
     height: 40px;
+    @apply absolute overflow-hidden rounded-md bg-white-white shadow-md transition-all ease-in duration-300;
   }
   .overlay-free {
     background-color: #3d3d3d;

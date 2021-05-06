@@ -11,17 +11,6 @@
         </client-only>
       </div>
     </div>
-    <!-- <div
-      class="swiper-pagination"
-      slot="pagination"
-      v-if="this.products.length > 1"
-    ></div> -->
-    <!-- <div class="swiper-button-prev btn" v-if="this.products.length > 1">
-      <FlechaLeft-icon class="btn-icon" />
-    </div>
-    <div class="swiper-button-next btn" v-if="this.products.length > 1">
-      <FlechaRight-icon class="btn-icon" />
-    </div> -->
   </div>
 </template>
 
@@ -53,6 +42,10 @@ export default {
           disableOnInteraction: false,
         },
         breakpoints: {
+          2000: {
+            slidesPerView: 3,
+            spaceBetween: 35,
+          },
           1250: {
             slidesPerView: 3,
             spaceBetween: 35,

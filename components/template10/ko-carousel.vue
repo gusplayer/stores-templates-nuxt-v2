@@ -25,7 +25,7 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 'auto',
-        // effect: 'fade',
+        effect: 'fade',
         loop: true,
         pagination: {
           el: '.swiper-pagination',

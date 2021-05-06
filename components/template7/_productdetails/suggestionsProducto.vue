@@ -26,8 +26,7 @@ export default {
 .wrapper-ProductFavoritos {
   display: flex;
   width: 100%;
-  /* background-color: var(--background_color_2); */
-  background: var(--background_color_1);
+  background: transparent;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -55,7 +54,6 @@ export default {
   font-size: 18px;
   font-weight: bold;
   line-height: 1.4;
-  /* color: var(--color_subtext); */
   color: var(--color_title);
   cursor: pointer;
 }

@@ -366,8 +366,6 @@ import KoSuggesProduct from './_productdetails/suggestionsProducto'
 import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
 import idCloudinaryDetalle from '../../mixins/idCloudinary'
-
-
 export default {
   mixins: [idCloudinary,idCloudinaryDetalle],
   name: 'Ko-ProductDetail-1',
@@ -867,6 +865,8 @@ export default {
   width: 100%;
   /* background: #fff; */
   background: var(--color_background_btn);
+  background: var(--background_color_1);
+
   justify-content: center;
   align-items: center;
   padding-top: 120px;
