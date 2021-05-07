@@ -87,6 +87,9 @@ export default {
     banner: Object,
     settingGeneral: Object,
   },
+  mounted() {
+    this.autoplayBanner()
+  },
   data() {
     return {
       swiperOption: {
@@ -102,12 +105,26 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-        // autoplay: {
-        //   delay: 6000,
-        //   disableOnInteraction: false,
-        // },
+        autoplay: {
+          delay: 6000,
+          disableOnInteraction: false,
+        },
       },
     }
+  },
+  methods: {
+    autoplayBanner() {
+      if (this.banner && this.banner.values.length == 1) {
+        this.swiperOption.autoplay.delay = 900000000000000000
+      } else {
+        this.swiperOption.autoplay.delay = 6000
+      }
+    },
+  },
+  watch: {
+    'banner.values'() {
+      this.autoplayBanner()
+    },
   },
 }
 </script>
