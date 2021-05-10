@@ -107,12 +107,6 @@
           </div>
           <div class="right">
             <div class="contact-content">
-              <!-- <div class="contact-item-text">
-              <p class="contact-text-title">{{ $t('contact_title2') }}</p>
-              <p class="contact-text-subtitles">
-                {{ $t('contact_subtitle2') }}
-              </p>
-            </div> -->
               <ValidationObserver
                 ref="observer"
                 tag="form"

@@ -34,7 +34,9 @@
             <div class="main-images">
               <img
                 class="img-list"
-                :src="idCloudinaryBanner(data.detalle.foto_cloudinary)"
+                v-lazy="
+                  idCloudinaryDetalle(data.detalle.foto_cloudinary, 1000, 1000)
+                "
                 alt="Product Img"
               />
             </div>
@@ -45,19 +47,11 @@
             >
               <img
                 class="img-list"
-                :src="idCloudinaryBanner(foto.foto_cloudinary)"
+                v-lazy="idCloudinaryDetalle(foto.foto_cloudinary, 1000, 1000)"
                 alt="Product Img"
               />
             </div>
             <div class="youtuve-video">
-              <!-- <img
-                v-if="idYoutube"
-                :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
-                v-show="idYoutube"
-                v-on:mouseover="existYoutube = true"
-                class="video"
-                alt="Product Img"
-              /> -->
               <iframe
                 v-show="idYoutube"
                 :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
@@ -288,16 +282,14 @@
 </template>
 <script>
 import axios from 'axios'
-// import ProductSlide from './_productdetails/productSlide'
 import SelectGroup from './_productdetails/selectGroup'
 import OptionAcordion from './_productdetails/OptAcordion'
 import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
-// import Zoom from './_productdetails/zoomImg'
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryDetalle from '../../mixins/idCloudinary'
 
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinaryDetalle],
   name: 'Ko-ProductDetail-1',
   props: {
     dataStore: Object,

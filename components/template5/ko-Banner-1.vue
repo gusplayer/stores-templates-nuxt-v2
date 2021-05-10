@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinaryBanner],
   name: 'Ko-Banner-1',
   computed: {
     banner() {

@@ -166,8 +166,6 @@
                 <p class="txt_summary_tittle">
                   {{ $t('footer_costoDomicilio') }}
                 </p>
-
-                <!-- precio ciudad -->
                 <div
                   class="content-byCity"
                   v-if="
@@ -204,7 +202,6 @@
                     </div>
                   </div>
                 </div>
-                <!-- tarifa plana -->
                 <div
                   class="content-Plana"
                   v-else-if="
@@ -230,7 +227,6 @@
                     </p>
                   </div>
                 </div>
-                <!-- por precio -->
                 <div
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'precio' &&
@@ -258,7 +254,6 @@
                     {{ $t('footer_encioNoconfig') }}
                   </p>
                 </div>
-                <!-- envio -->
                 <p
                   v-else-if="shipping && getFreeShipping == false"
                   class="txt_summary_price"
@@ -271,7 +266,6 @@
                       )
                   }}
                 </p>
-                <!-- envio gratis tienda -->
                 <div
                   class="contet-free-delivery"
                   v-if="

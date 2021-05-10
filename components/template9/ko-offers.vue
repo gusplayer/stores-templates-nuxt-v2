@@ -16,7 +16,7 @@
           <div class="items-left">
             <img
               class="image-left"
-              v-lazy="koffers.values[0].url_img_background"
+              :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
               alt="image-left"
               v-if="koffers.values[0].url_img_background"
             />
@@ -65,7 +65,7 @@
           <div class="image-static" v-if="!hover">
             <img
               class="image"
-              v-lazy="koffers.values[1].url_img_background"
+              :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
               v-if="koffers.values[1].url_img_background"
               alt="imagen center static"
             />
@@ -73,7 +73,7 @@
           <div class="image-gif" v-if="hover">
             <img
               class="image"
-              v-lazy="koffers.values[1].url_gift_background"
+              :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
               v-if="koffers.values[1].url_gift_background"
               alt="imagen center gift"
             />
@@ -83,7 +83,7 @@
           <div class="items-right">
             <img
               class="image-right"
-              v-lazy="koffers.values[2].url_img_background"
+              :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
               v-if="koffers.values[2].url_img_background"
               alt="image-right"
             />
@@ -151,7 +151,7 @@
         <div class="items-left">
           <img
             class="image-left"
-            v-lazy="koffers.values[0].url_img_background"
+            :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
             v-if="koffers.values[0].url_img_background"
             alt="image-left"
           />
@@ -202,7 +202,7 @@
             <div class="image-static" v-if="!hover">
               <img
                 class="image"
-                v-lazy="koffers.values[1].url_img_background"
+                :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
                 v-if="koffers.values[1].url_img_background"
                 alt="imagen center static"
               />
@@ -210,7 +210,7 @@
             <div class="image-gif" v-if="hover">
               <img
                 class="image"
-                v-lazy="koffers.values[1].url_gift_background"
+                :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
                 v-if="koffers.values[1].url_gift_background"
                 alt="imagen center gift"
               />
@@ -219,7 +219,7 @@
           <div class="items-right">
             <img
               class="image-right"
-              v-lazy="koffers.values[2].url_img_background"
+              :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
               v-if="koffers.values[2].url_img_background"
               alt="image-right"
             />
@@ -287,9 +287,9 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinaryBanner],
   props: {
     dataStore: Object,
     koffers: Object,

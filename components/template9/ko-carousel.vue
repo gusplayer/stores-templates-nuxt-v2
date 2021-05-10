@@ -27,7 +27,9 @@
           >
             <div
               class="swiper-slide-1"
-              :style="`background-image: url(${elementBannner['url_img_background']})`"
+              :style="`background-image: url(${idCloudinaryBanner(
+                elementBannner['url_img_background']
+              )})`"
             >
               <div class="banner-content-items-1">
                 <div class="content-items-1">
@@ -81,12 +83,14 @@
 </template>
 
 <script>
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
   props: {
     dataStore: Object,
     banner: Object,
     settingGeneral: Object,
   },
+  mixins: [idCloudinaryBanner],
   mounted() {
     this.autoplayBanner()
   },
