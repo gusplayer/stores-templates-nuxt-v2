@@ -149,7 +149,7 @@ export default {
 .swiper-slide-1 {
   max-height: 831px;
   /* height: 831px; */
-  height: 100vw;
+  height: 50vw;
   object-fit: contain;
   width: 100vw;
   background-size: cover;
@@ -250,6 +250,7 @@ export default {
 }
 @screen md {
   .banner-content-items-1 {
+    display: initial;
     @apply w-7/0;
   }
   .banner-text-top {
@@ -301,6 +302,11 @@ export default {
   }
   .banner-text-medium {
     font-size: 90px;
+  }
+}
+@media (max-width: 500px) {
+  .banner-content-items-1 {
+    display: none;
   }
 }
 </style>
