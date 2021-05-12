@@ -24,11 +24,20 @@
       </div>
     </div>
     <div class="content-tab">
-      <div
-        class="item-content descripcion"
-        v-html="data.info.descripcion"
-        v-if="focusbtn1"
-      ></div>
+      <div class="editor" v-if="focusbtn1">
+        <div v-if="data.info.descripcion">
+          <el-tiptap
+            v-model="data.info.descripcion"
+            :extensions="extensions"
+            :spellcheck="false"
+            :readonly="true"
+            :charCounterCount="false"
+            :tooltip="false"
+            :showMenubar="false"
+            :bubble="false"
+          />
+        </div>
+      </div>
       <div class="item-content opcpago" v-if="focusbtn2">
         <ul>
           <li v-if="mediospago.consignacion == 1">
@@ -229,6 +238,45 @@
   </div>
 </template>
 <script>
+import {
+  Doc,
+  Paragraph,
+  Text,
+  Heading,
+  Bold,
+  Italic,
+  Underline,
+  Strike,
+  Code,
+  CodeBlock,
+  Blockquote,
+  Link,
+  BulletList,
+  OrderedList,
+  ListItem,
+  TodoList,
+  TodoItem,
+  Iframe,
+  Table,
+  TableHeader,
+  TableRow,
+  TableCell,
+  Image,
+  TextAlign,
+  LineHeight,
+  Indent,
+  HorizontalRule,
+  HardBreak,
+  TrailingNode,
+  History,
+  TextColor,
+  TextHighlight,
+  FormatClear,
+  FontSize,
+  Preview,
+  Print,
+  SelectAll,
+} from 'element-tiptap'
 export default {
   components: {},
   props: {
@@ -245,6 +293,119 @@ export default {
       focusbtn1: true,
       focusbtn2: false,
       focusbtn3: false,
+      extensions: [
+        new Doc(),
+        new Paragraph(),
+        new Text(),
+        new Heading({ level: 5, bubble: true }),
+        new Bold({ bubble: true }),
+        new Italic({ bubble: true }),
+        new Underline({ bubble: true }),
+        new Strike({ bubble: true }),
+        new Code({ bubble: true }),
+        new CodeBlock({ bubble: true }),
+        new Blockquote({ bubble: true }),
+        new Link({ bubble: true }),
+        new BulletList({ bubble: true }),
+        new OrderedList({ bubble: true }),
+        new ListItem({ bubble: true }),
+        new TodoList({ bubble: true }),
+        new TodoItem({ bubble: true }),
+        new Iframe({ bubble: true }),
+        new Table({
+          resizable: true,
+          bubble: true,
+        }),
+        new TableHeader(),
+        new TableRow(),
+        new TableCell(),
+        new Image({
+          urlPattern: '',
+          uploadRequest: '',
+          bubble: true,
+        }),
+        new TextAlign({
+          alignments: ['left', 'center', 'right', 'justify'],
+          bubble: true,
+        }),
+        new LineHeight({
+          lineHeights: ['100%', '200%', '300%'],
+        }),
+        new Indent({
+          minIndent: 0,
+          maxIndent: 7,
+        }),
+        new HorizontalRule({ bubble: true }),
+        new HardBreak(),
+        new TrailingNode(),
+        new History(),
+        new TextColor({
+          colors: [
+            '#f44336',
+            '#e91e63',
+            '#9c27b0',
+            '#673ab7',
+            '#3f51b5',
+            '#2196f3',
+            '#03a9f4',
+            '#00bcd4',
+            '#009688',
+            '#4caf50',
+            '#8bc34a',
+            '#cddc39',
+            '#ffeb3b',
+            '#ffc107',
+            '#ff9800',
+            '#ff5722',
+            '#000000',
+          ],
+          bubble: true,
+        }),
+        new TextHighlight({
+          colors: [
+            '#f44336',
+            '#e91e63',
+            '#9c27b0',
+            '#673ab7',
+            '#3f51b5',
+            '#2196f3',
+            '#03a9f4',
+            '#00bcd4',
+            '#009688',
+            '#4caf50',
+            '#8bc34a',
+            '#cddc39',
+            '#ffeb3b',
+            '#ffc107',
+            '#ff9800',
+            '#ff5722',
+            '#000000',
+          ],
+          bubble: true,
+        }),
+        new FormatClear(),
+        new FontSize({
+          fontSizes: [
+            '8',
+            '10',
+            '12',
+            '14',
+            '16',
+            '18',
+            '20',
+            '24',
+            '30',
+            '36',
+            '48',
+            '60',
+            '72',
+          ],
+          bubble: true,
+        }),
+        new Preview(),
+        new Print(),
+        new SelectAll(),
+      ],
     }
   },
   computed: {
@@ -302,6 +463,29 @@ export default {
 }
 </script>
 <style scoped>
+.editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
+  border: none;
+  padding: 0px 5px;
+  background-color: transparent;
+}
+.editor >>> .el-tiptap-editor__menu-bubble {
+  display: none;
+}
+.editor >>> .el-tiptap-editor__content h1 {
+  font-size: 2em;
+}
+.editor >>> .el-tiptap-editor__content h2 {
+  font-size: 1.5em;
+}
+.editor >>> .el-tiptap-editor__content h3 {
+  font-size: 1.17em;
+}
+.editor >>> .el-tiptap-editor__content h4 {
+  font-size: 1.12em;
+}
+.editor >>> .el-tiptap-editor__content h5 {
+  font-size: 0.83em;
+}
 .content-tab {
   border-bottom: 1px solid #ededed;
   @apply w-full flex flex-col justify-center items-center mt-24;

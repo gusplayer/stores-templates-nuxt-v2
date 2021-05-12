@@ -1196,7 +1196,6 @@ i.close {
   flex-direction: row;
   margin-bottom: 10px;
 }
-
 .content_card-info {
   display: initial;
 }
@@ -1641,7 +1640,6 @@ i.close {
     border-top: none;
   }
 }
-
 @media (max-width: 600px) {
   .container-productDetail {
     padding: 0px;

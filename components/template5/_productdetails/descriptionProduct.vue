@@ -4,7 +4,18 @@
       <h3 class="text-desc">
         {{ $t('productdetail_description') }}
       </h3>
-      <div class="content-text-desc" v-html="data.info.descripcion"></div>
+      <div class="editor" v-if="data.info.descripcion">
+        <el-tiptap
+          v-model="data.info.descripcion"
+          :extensions="extensions"
+          :spellcheck="false"
+          :readonly="true"
+          :charCounterCount="false"
+          :tooltip="false"
+          :showMenubar="false"
+          :bubble="false"
+        />
+      </div>
       <!-- <div class="wrapper-comments">
         <KoComments :dataStore="dataStore" />
       </div> -->
@@ -219,8 +230,46 @@
 </template>
 
 <script>
-import KoComments from './commentsProduct'
-
+// import KoComments from './commentsProduct'
+import {
+  Doc,
+  Paragraph,
+  Text,
+  Heading,
+  Bold,
+  Italic,
+  Underline,
+  Strike,
+  Code,
+  CodeBlock,
+  Blockquote,
+  Link,
+  BulletList,
+  OrderedList,
+  ListItem,
+  TodoList,
+  TodoItem,
+  Iframe,
+  Table,
+  TableHeader,
+  TableRow,
+  TableCell,
+  Image,
+  TextAlign,
+  LineHeight,
+  Indent,
+  HorizontalRule,
+  HardBreak,
+  TrailingNode,
+  History,
+  TextColor,
+  TextHighlight,
+  FormatClear,
+  FontSize,
+  Preview,
+  Print,
+  SelectAll,
+} from 'element-tiptap'
 export default {
   name: 'descriptionProduct',
   props: {
@@ -228,13 +277,126 @@ export default {
     data: {},
     envio: {},
   },
-  components: {
-    KoComments,
-  },
+  // components: {
+  //   KoComments,
+  // },
   data() {
     return {
       medioEnvio: '',
       envioproducto: '',
+      extensions: [
+        new Doc(),
+        new Paragraph(),
+        new Text(),
+        new Heading({ level: 5, bubble: true }),
+        new Bold({ bubble: true }),
+        new Italic({ bubble: true }),
+        new Underline({ bubble: true }),
+        new Strike({ bubble: true }),
+        new Code({ bubble: true }),
+        new CodeBlock({ bubble: true }),
+        new Blockquote({ bubble: true }),
+        new Link({ bubble: true }),
+        new BulletList({ bubble: true }),
+        new OrderedList({ bubble: true }),
+        new ListItem({ bubble: true }),
+        new TodoList({ bubble: true }),
+        new TodoItem({ bubble: true }),
+        new Iframe({ bubble: true }),
+        new Table({
+          resizable: true,
+          bubble: true,
+        }),
+        new TableHeader(),
+        new TableRow(),
+        new TableCell(),
+        new Image({
+          urlPattern: '',
+          uploadRequest: '',
+          bubble: true,
+        }),
+        new TextAlign({
+          alignments: ['left', 'center', 'right', 'justify'],
+          bubble: true,
+        }),
+        new LineHeight({
+          lineHeights: ['100%', '200%', '300%'],
+        }),
+        new Indent({
+          minIndent: 0,
+          maxIndent: 7,
+        }),
+        new HorizontalRule({ bubble: true }),
+        new HardBreak(),
+        new TrailingNode(),
+        new History(),
+        new TextColor({
+          colors: [
+            '#f44336',
+            '#e91e63',
+            '#9c27b0',
+            '#673ab7',
+            '#3f51b5',
+            '#2196f3',
+            '#03a9f4',
+            '#00bcd4',
+            '#009688',
+            '#4caf50',
+            '#8bc34a',
+            '#cddc39',
+            '#ffeb3b',
+            '#ffc107',
+            '#ff9800',
+            '#ff5722',
+            '#000000',
+          ],
+          bubble: true,
+        }),
+        new TextHighlight({
+          colors: [
+            '#f44336',
+            '#e91e63',
+            '#9c27b0',
+            '#673ab7',
+            '#3f51b5',
+            '#2196f3',
+            '#03a9f4',
+            '#00bcd4',
+            '#009688',
+            '#4caf50',
+            '#8bc34a',
+            '#cddc39',
+            '#ffeb3b',
+            '#ffc107',
+            '#ff9800',
+            '#ff5722',
+            '#000000',
+          ],
+          bubble: true,
+        }),
+        new FormatClear(),
+        new FontSize({
+          fontSizes: [
+            '8',
+            '10',
+            '12',
+            '14',
+            '16',
+            '18',
+            '20',
+            '24',
+            '30',
+            '36',
+            '48',
+            '60',
+            '72',
+          ],
+          bubble: true,
+        }),
+        new Preview(),
+        new Print(),
+        new SelectAll(),
+      ],
     }
   },
   computed: {
@@ -252,6 +414,7 @@ export default {
       }
     },
     envios() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },
@@ -331,11 +494,6 @@ export default {
   text-transform: uppercase;
   align-self: flex-start;
   margin-top: 20px;
-}
-.content-text-desc {
-  margin-right: 25px;
-  margin-bottom: 20px;
-  min-height: 300px;
 }
 .wrapper-comments {
   border-top: 1px solid rgba(127, 127, 139, 0.342);
@@ -432,6 +590,29 @@ li p {
 .cursor_point {
   cursor: pointer;
 }
+.editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
+  border: none;
+  padding: 0px 5px;
+  background-color: transparent;
+}
+.editor >>> .el-tiptap-editor__menu-bubble {
+  display: none;
+}
+.editor >>> .el-tiptap-editor__content h1 {
+  font-size: 2em;
+}
+.editor >>> .el-tiptap-editor__content h2 {
+  font-size: 1.5em;
+}
+.editor >>> .el-tiptap-editor__content h3 {
+  font-size: 1.17em;
+}
+.editor >>> .el-tiptap-editor__content h4 {
+  font-size: 1.12em;
+}
+.editor >>> .el-tiptap-editor__content h5 {
+  font-size: 0.83em;
+}
 @media (max-width: 810px) {
   .left {
     margin-right: 15px;
@@ -465,11 +646,6 @@ li p {
   .right {
     border-left: 0px;
   }
-  .content-text-desc {
-    border-bottom: 1px solid rgba(127, 127, 139, 0.342);
-    padding-bottom: 20px;
-    min-height: 0;
-  }
   .wrapper-comments-responsive {
     display: initial;
   }
@@ -483,12 +659,8 @@ li p {
   }
 }
 @media (max-width: 725px) {
-  .content-text-desc {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-bottom: 10px;
-    border-bottom: none;
+  .editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
+    padding: 0px 15px;
   }
   .description {
     margin-bottom: 0px;

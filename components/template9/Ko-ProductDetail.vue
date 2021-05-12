@@ -757,6 +757,9 @@ export default {
 </script>
 
 <style scoped>
+.content-items-right {
+  width: 100%;
+}
 .wrapper-productDetail {
   display: flex;
   width: 100%;
