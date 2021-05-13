@@ -49,10 +49,8 @@ export default {
   },
   data() {
     return {
-      bg1: '',
-      bg2: '',
-      bg3: '',
       swiperOption: {
+        autoHeight: true,
         effect: 'fade',
         slidesPerView: 'auto',
         loop: true,

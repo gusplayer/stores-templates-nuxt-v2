@@ -200,8 +200,8 @@ export default {
 <style scoped>
 .footer-container {
   background: var(--background_color_1);
-  height: 322px;
-  @apply flex flex-col justify-center items-center bg-auto bg-center bg-no-repeat;
+  min-height: 322px;
+  @apply flex flex-col justify-center items-center bg-auto bg-bottom bg-no-repeat;
 }
 .footer-content {
   margin-bottom: 10px;
