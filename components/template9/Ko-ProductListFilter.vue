@@ -463,26 +463,6 @@ export default {
         )
       }
     },
-    shoView2() {
-      this.indexshowView = 1
-    },
-    shoView4() {
-      this.indexshowView = 2
-    },
-    shoView16() {
-      this.indexshowView = 3
-    },
-    showGrid2() {
-      this.indexshowList = 2
-      this.showinList = false
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
-          'style',
-          'grid-template-columns: repeat(2, minmax(0, 1fr))'
-        )
-      }
-    },
     showGrid3() {
       this.indexshowList = 3
       this.showinList = false
@@ -492,24 +472,6 @@ export default {
           'style',
           'grid-template-columns: repeat(3, minmax(0, 1fr))'
         )
-      }
-    },
-    showGrid4() {
-      this.indexshowList = 4
-      this.showinList = false
-      var dimension = screen.width
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
-          'style',
-          'grid-template-columns: repeat(4, minmax(0, 1fr))'
-        )
-        if (gridselector && dimension < 768) {
-          gridselector.setAttribute(
-            'style',
-            'grid-template-columns: repeat(2, minmax(0, 1fr))'
-          )
-        }
       }
     },
     back() {
@@ -736,7 +698,7 @@ export default {
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
-        window.scrollBy(0, -1500)
+        window.scrollBy(0, -4500)
       }, 250)
     },
     previousPage() {

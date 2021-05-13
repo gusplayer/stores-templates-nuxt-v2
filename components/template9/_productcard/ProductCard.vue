@@ -189,12 +189,28 @@
         {{ this.product.categoria }}
       </div>
       <router-link :to="{ path: `/productos/` + product.slug }">
-        <div class="tittle">
+        <div class="tittle tittle-xml">
+          <p class="card-title" v-if="this.product.nombre.length >= 90">
+            {{ `${this.product.nombre.slice(0, 90)}...` }}
+          </p>
+          <p class="card-title" v-else>
+            {{ `${this.product.nombre.slice(0, 90)}` }}
+          </p>
+        </div>
+        <div class="tittle tittle-lg">
           <p class="card-title" v-if="this.product.nombre.length >= 54">
             {{ `${this.product.nombre.slice(0, 54)}...` }}
           </p>
           <p class="card-title" v-else>
             {{ `${this.product.nombre.slice(0, 54)}` }}
+          </p>
+        </div>
+        <div class="tittle tittle-sm">
+          <p class="card-title" v-if="this.product.nombre.length >= 40">
+            {{ `${this.product.nombre.slice(0, 40)}...` }}
+          </p>
+          <p class="card-title" v-else>
+            {{ `${this.product.nombre.slice(0, 40)}` }}
           </p>
         </div>
       </router-link>
@@ -548,6 +564,15 @@ export default {
   min-height: 49px;
   max-height: 49px;
 }
+.tittle-xml {
+  display: initial;
+}
+.tittle-lg {
+  display: none;
+}
+.tittle-sm {
+  display: none;
+}
 .categoria {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-2);
@@ -842,6 +867,28 @@ export default {
   .container:hover .overlay-top {
     width: 40px;
     left: 89%;
+  }
+}
+@media (max-width: 1125px) {
+  .tittle-xml {
+    display: none;
+  }
+  .tittle-lg {
+    display: initial;
+  }
+  .tittle-sm {
+    display: none;
+  }
+}
+@media (max-width: 400px) {
+  .tittle-xml {
+    display: none;
+  }
+  .tittle-lg {
+    display: none;
+  }
+  .tittle-sm {
+    display: initial;
   }
 }
 </style>

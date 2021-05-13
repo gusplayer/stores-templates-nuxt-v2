@@ -20,36 +20,6 @@
             <div class="rightleft"></div>
           </div>
         </div>
-
-        <!-- <div class="search-content">
-          <div class="search-input-content">
-            <form>
-              <input
-                type="text"
-                :placeholder="$t('header_buscar_producto')"
-                v-model="search"
-                @keyup.enter="getSearch(search)"
-                class="input-search"
-              />
-            </form>
-          </div>
-          <div class="search-icon-content" @click="getSearch(search)">
-            <svg
-              class="icon-search"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="{2}"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
-        </div> -->
         <div class="content-lateral-menu">
           <div class="content-btns-lateral-menu">
             <button
@@ -286,14 +256,14 @@ export default {
     },
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
-      // this.$router.push({
-      //   path: '/productos',
-      // })
-      this.$store.commit('SET_STATEBANNER', false)
       this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$router.push({
+        path: '/productos',
+        query: { category: this.nameCategory },
+      })
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
