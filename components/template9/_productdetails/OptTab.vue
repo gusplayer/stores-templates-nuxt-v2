@@ -463,6 +463,9 @@ export default {
 }
 </script>
 <style scoped>
+.editor {
+  width: 100%;
+}
 .editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
   border: none;
   padding: 0px 5px;
@@ -473,18 +476,62 @@ export default {
 }
 .editor >>> .el-tiptap-editor__content h1 {
   font-size: 2em;
+  font-family: var(--font-style-3);
 }
 .editor >>> .el-tiptap-editor__content h2 {
   font-size: 1.5em;
+  font-family: var(--font-style-3);
 }
 .editor >>> .el-tiptap-editor__content h3 {
   font-size: 1.17em;
+  font-family: var(--font-style-3);
 }
 .editor >>> .el-tiptap-editor__content h4 {
   font-size: 1.12em;
+  font-family: var(--font-style-3);
 }
 .editor >>> .el-tiptap-editor__content h5 {
   font-size: 0.83em;
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content p {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content span {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content blockquote {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content code {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content ul {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content ol {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content li {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content pre {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content strong {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content em {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content s {
+  font-family: var(--font-style-3);
+}
+.editor >>> .el-tiptap-editor__content .image-view__body__image {
+  cursor: none;
+}
+.editor >>> .el-popper.el-tiptap-image-popper {
+  display: none;
 }
 .content-tab {
   border-bottom: 1px solid #ededed;
