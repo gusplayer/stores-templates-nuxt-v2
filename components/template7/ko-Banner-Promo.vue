@@ -157,7 +157,7 @@ export default {
 <style scoped>
 .promo-banner-content {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center pt-40;
+  @apply w-full flex flex-col justify-center items-center pt-20 pb-20;
 }
 .separador-blog {
   padding-top: 100px;

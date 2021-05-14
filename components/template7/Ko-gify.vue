@@ -151,7 +151,6 @@ export default {
 . border {
   @apply flex flex-col justify-center items-center text-center;
 }
-
 .tittle {
   font-family: var(--font-style-2) !important;
   color: var(--color_pre_title);
