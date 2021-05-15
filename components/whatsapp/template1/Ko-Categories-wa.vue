@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-Categories-wa',

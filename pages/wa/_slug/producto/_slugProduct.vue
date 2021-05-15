@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import KoProductDetail from '../../../../components/whatsapp/Ko-ProductDetail-wa'
+import KoProductDetail from '../../../../components/whatsapp/template1/Ko-ProductDetail-wa'
 
 export default {
   layout: 'wa',

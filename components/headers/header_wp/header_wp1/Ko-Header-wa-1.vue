@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
-import KoOrderWa from './_order1/orderWa'
+import idCloudinary from '../../../../mixins/idCloudinary'
+import KoOrderWa from '../_order1/orderWa'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-Header-wa',
