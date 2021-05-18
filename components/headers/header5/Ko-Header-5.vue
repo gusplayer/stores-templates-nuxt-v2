@@ -172,7 +172,6 @@ export default {
     } else {
       this.showSearch = false
     }
-
     window.addEventListener('scroll', function () {
       var navbar = document.getElementById('navbar')
       if (window.pageYOffset > 0 && screen.width > 725 && navbar) {

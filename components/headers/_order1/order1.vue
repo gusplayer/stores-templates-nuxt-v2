@@ -331,13 +331,22 @@
                 >
                   {{ $t('footer_tiendaCerrada') }}
                 </p>
+                <p
+                  class="Quotation-message"
+                  v-if="!IsMinProduct() && productsCart.length"
+                >
+                  La tienda tiene configurado un mínimo de productos igual o
+                  mayores a {{ this.dataStore.tienda.minimo_compra }}, para
+                  poder realizar la compra
+                </p>
                 <button
                   v-if="
                     productsCart.length &&
                     !isQuotation() &&
                     dataStore.tienda.estado == 1 &&
                     this.estadoShippingTarifaPrecio == false &&
-                    countryStore == true
+                    countryStore == true &&
+                    IsMinProduct()
                   "
                   class="continue_shopping"
                   @click="GoPayments"
@@ -499,6 +508,7 @@ export default {
       this.shippingPrecio()
     }
     this.productsFreeShippingCart()
+    this.IsMinProduct()
   },
   data() {
     return {
@@ -648,6 +658,24 @@ export default {
       })
       return result
     },
+    IsMinProduct() {
+      let result = false
+      if (
+        this.dataStore.tienda.minimo_compra == 0 ||
+        this.dataStore.tienda.minimo_compra == null
+      ) {
+        result = true
+      } else {
+        let cantidadProductos = 0
+        this.productsCart.filter((value) => {
+          cantidadProductos += value.cantidad
+        })
+        if (cantidadProductos >= this.dataStore.tienda.minimo_compra) {
+          result = true
+        }
+      }
+      return result
+    },
     deleteItemCart(i) {
       this.$store.commit('DELETEITEMCART', i)
       this.$store.commit('UPDATE_CONTENTCART')
@@ -674,7 +702,6 @@ export default {
     GoPayments() {
       let objeto = {}
       objeto = JSON.parse(JSON.stringify(this.productsCart))
-
       objeto.map((element) => {
         if (element.id) {
           delete element.envio_gratis
@@ -751,7 +778,6 @@ export default {
             urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
           }
           let productosCart = []
-
           this.$store.state.productsCart.map((element) => {
             if (element.combinacion) {
               let combiString = JSON.stringify(element.combinacion)
@@ -772,7 +798,6 @@ export default {
               )
             }
           })
-
           let productString = JSON.stringify(productosCart)
           let productList = productString.replace(/"/g, '')
           let resultproductList = productList.replace(/,/g, '%0A')
@@ -788,7 +813,6 @@ export default {
             })
           }
           this.$gtm.push({ event: 'InitiateCheckout' })
-
           if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
             let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
             if (this.mobileCheck()) {
@@ -868,6 +892,7 @@ export default {
         this.shippingPrecio()
         this.listaDescuentos()
         this.productsFreeShippingCart()
+        this.IsMinProduct()
       }
     },
     totalCart() {
@@ -1314,6 +1339,7 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
+  max-width: 340px;
   color: #2c2930;
   font-size: 14px;
   letter-spacing: 1px;
