@@ -265,6 +265,10 @@
           property="og:image"
           :content="`${data.detalle.foto_cloudinary}`"
         />
+        <meta
+          property="og:image:secure_url"
+          :content="`${data.detalle.foto_cloudinary}`"
+        />
         <meta property="product:availability" content="in stock" />
         <meta property="product:condition" content="new" />
         <meta
@@ -318,6 +322,7 @@ export default {
       this.setOptionEnvio()
     }
   },
+
   data() {
     return {
       id: this.$route.params.slug,
@@ -446,17 +451,6 @@ export default {
               sku: this.data.info.sku,
               estado: true,
             }
-            if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-              window.fbq('track', 'ViewContent', {
-                content_ids: this.data.detalle.id,
-                name: this.data.detalle.nombre,
-                quantity: this.data.cantidad,
-                currency: this.dataStore.tienda.moneda,
-                value: this.salesData.precio,
-                content_type: 'product',
-                description: 'Agregado detalle del producto',
-              })
-            }
             this.sharing.url = window.location.href
             this.sharing.title = `Te recomiendo: ${response.data.detalle.nombre}`
             this.sharing.description = `Te recomiendo: ${response.data.detalle.nombre} de la tienda ${this.dataStore.tienda.nombre}, Link del producto ${window.location.href}`
@@ -478,6 +472,21 @@ export default {
               this.spent = true
             }
             this.loading = false
+            if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+              window.fbq('track', 'ViewContent', {
+                content_type: 'product',
+                content_ids: this.data.detalle.id,
+                value: this.salesData.precio ? this.salesData.precio : 0,
+                content_name: this.data.detalle.nombre,
+                currency: this.dataStore.tienda.moneda,
+                content_category:
+                  this.data.detalle.categoria_producto &&
+                  this.data.detalle.categoria_producto.nombre_categoria_producto
+                    ? this.data.detalle.categoria_producto
+                        .nombre_categoria_producto
+                    : 'category',
+              })
+            }
           })
       } else {
         this.selectedPhoto(this.productsData[0].foto_cloudinary)
@@ -635,13 +644,13 @@ export default {
       }
       if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
         window.fbq('track', 'AddToCart', {
-          content_ids: this.data.detalle.id,
-          name: this.data.detalle.nombre,
-          quantity: this.data.cantidad,
-          currency: this.dataStore.tienda.moneda,
-          value: this.salesData.precio,
           content_type: 'product',
-          description: 'Vista del producto',
+          content_ids: this.data.detalle.id,
+          value: this.salesData.precio,
+          num_items: this.data.cantidad,
+          content_name: this.data.detalle.nombre,
+          currency: this.dataStore.tienda.moneda,
+          description: 'Agregar al carrito el producto',
         })
       }
       this.$gtm.push({ event: 'AddToCart' })

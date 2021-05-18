@@ -22,11 +22,6 @@ export default {
     K11Contact,
   },
   mounted() {
-    if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-      window.fbq('track', 'ViewContent', {
-        description: 'PageContact',
-      })
-    }
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
   },
@@ -39,9 +34,6 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
-    },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager
     },
     template() {
       return this.$store.state.template

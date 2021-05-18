@@ -21,13 +21,6 @@ export default {
     K10Cart,
     K11Cart,
   },
-  mounted() {
-    if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-      window.fbq('track', 'ViewContent', {
-        description: 'PageCart',
-      })
-    }
-  },
   computed: {
     dataStore() {
       return this.$store.state.dataStore
@@ -37,9 +30,6 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
-    },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager
     },
     template() {
       return this.$store.state.template

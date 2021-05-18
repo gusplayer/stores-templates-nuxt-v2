@@ -116,6 +116,14 @@ export default {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
+    if (
+      this.analytics_tagmanager &&
+      this.analytics_tagmanager.pixel_facebook != null
+    ) {
+      window.fbq('track', 'PageView', {
+        description: 'StoreKomercia',
+      })
+    }
   },
   head() {
     let tipo_letra

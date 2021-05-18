@@ -331,11 +331,6 @@ export default {
         this.horaState = result[1]
       }
     }
-    if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-      window.fbq('track', 'ViewContent', {
-        description: 'PageMcompra',
-      })
-    }
   },
   destroyed() {
     this.city = {}

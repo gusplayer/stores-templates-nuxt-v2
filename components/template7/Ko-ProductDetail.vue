@@ -518,17 +518,6 @@ export default {
               sku: this.data.info.sku,
               estado: true,
             }
-            if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-              window.fbq('track', 'ViewContent', {
-                content_ids: this.data.detalle.id,
-                name: this.data.detalle.nombre,
-                quantity: this.data.cantidad,
-                currency: this.dataStore.tienda.moneda,
-                value: this.salesData.precio,
-                content_type: 'product',
-                description: 'Agregado detalle del producto',
-              })
-            }
             if (response && response.data) {
               this.sharing.url = window.location.href
               this.sharing.quote = `Explora%20el%20producto%20${response.data.detalle.nombre}%2C%20te%20van%20a%20encantar.%0ALink%20del%20producto%3A%20${this.sharing.url}`
@@ -551,6 +540,22 @@ export default {
               this.spent = true
             }
             this.loading = false
+            if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+              window.fbq('track', 'ViewContent', {
+                content_type: 'product',
+                content_ids: this.data.detalle.id,
+                value: this.salesData.precio ? this.salesData.precio : 0,
+                content_name: this.data.detalle.nombre,
+                currency: this.dataStore.tienda.moneda,
+                content_category:
+                  this.data.detalle.categoria_producto &&
+                  this.data.detalle.categoria_producto.nombre_categoria_producto
+                    ? this.data.detalle.categoria_producto
+                        .nombre_categoria_producto
+                    : 'category',
+                description: 'Description Producto',
+              })
+            }
           })
       } else {
         this.selectedPhoto(this.productsData[0].foto_cloudinary)
@@ -708,13 +713,13 @@ export default {
       }
       if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
         window.fbq('track', 'AddToCart', {
-          content_ids: this.data.detalle.id,
-          name: this.data.detalle.nombre,
-          quantity: this.data.cantidad,
-          currency: this.dataStore.tienda.moneda,
-          value: this.salesData.precio,
           content_type: 'product',
-          description: 'Vista del producto',
+          content_ids: this.data.detalle.id,
+          value: this.salesData.precio,
+          num_items:this.data.cantidad,
+          content_name: this.data.detalle.nombre,
+          currency: this.dataStore.tienda.moneda,
+          description: 'Agregar al carrito el producto',
         })
       }
       this.$gtm.push({ event: 'AddToCart' })

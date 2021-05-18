@@ -411,13 +411,13 @@ export default {
           }
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
-              content_ids: this.product.id,
-              name: this.product.nombre,
-              quantity: 1,
-              currency: this.dataStore.tienda.moneda,
-              value: this.product.precio,
               content_type: 'product',
-              description: 'Agregado detalle del producto',
+              content_ids: this.data.detalle.id,
+              value: this.salesData.precio,
+              num_items: this.data.cantidad,
+              content_name: this.data.detalle.nombre,
+              currency: this.dataStore.tienda.moneda,
+              description: 'Agregar al carrito el producto',
             })
           }
           this.$gtm.push({ event: 'AddToCart' })

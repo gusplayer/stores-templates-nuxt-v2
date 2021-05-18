@@ -24,13 +24,6 @@ export default {
     KoTemplate10,
     KoTemplate11,
   },
-  mounted() {
-    if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-      window.fbq('track', 'ViewContent', {
-        description: 'PageHome',
-      })
-    }
-  },
   computed: {
     template() {
       return this.$store.state.template
@@ -64,9 +57,6 @@ export default {
           break
       }
       return productListComponent
-    },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager
     },
   },
 }
