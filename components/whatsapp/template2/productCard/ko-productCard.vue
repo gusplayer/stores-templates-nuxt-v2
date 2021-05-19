@@ -481,11 +481,17 @@ export default {
   }
 }
 @media (min-width: 600px) {
-  .content-description-product {
+  /* .content-description-product {
     @apply w-full h-50 flex flex-row justify-center items-center gap-2;
+  } */
+  /* .item-price-product {
+    @apply flex flex-row justify-end items-center;
+  } */
+  .content-description-product {
+    @apply h-70;
   }
   .item-price-product {
-    @apply flex flex-row justify-end items-center;
+    @apply flex flex-row justify-start items-center;
   }
   .txt-name-product {
     font-size: 16px;

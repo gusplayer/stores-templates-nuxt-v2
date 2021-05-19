@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import KoProductCard1 from '../_productcard/Ko-ProductCard-1'
+import KoProductCard1 from './_productcard/Ko-ProductCard-1'
 export default {
   components: {
     KoProductCard1,

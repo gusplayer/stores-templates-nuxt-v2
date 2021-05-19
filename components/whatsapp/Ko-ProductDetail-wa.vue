@@ -164,9 +164,9 @@
 
 <script>
 import axios from 'axios'
-import productSlide from '../_productdetails/productSlide'
-import selectGroup from '../_productdetails/selectGroup'
-import idCloudinary from '../../../mixins/idCloudinary'
+import productSlide from './_productdetails/productSlide'
+import selectGroup from './_productdetails/selectGroup'
+import idCloudinary from '../../mixins/idCloudinary'
 
 export default {
   mixins: [idCloudinary],

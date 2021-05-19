@@ -114,7 +114,7 @@
                     ? 'btn-midasoluciones'
                     : 'btn-wapi'
                 "
-                style="margin-right: 5px;"
+                style="margin-right: 5px"
               >
                 <shopWa-icon class="wp-icon" />
               </div>
@@ -157,7 +157,7 @@
 </template>
 
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '../../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',

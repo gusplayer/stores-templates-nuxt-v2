@@ -14,12 +14,11 @@
           :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
           v-for="categoria in categories"
           :key="categoria.id"
+          @click="sendCategory(categoria, categoria.id, (ref = false))"
         >
-          <div @click="sendCategory(categoria, categoria.id, (ref = false))">
-            <p class="txt-category">
-              {{ categoria.nombre_categoria_producto }}
-            </p>
-          </div>
+          <p class="txt-category">
+            {{ categoria.nombre_categoria_producto }}
+          </p>
         </div>
       </div>
     </div>
@@ -155,7 +154,7 @@ export default {
   }
   .active-tag {
     background-color: #eaeaea;
-    @apply w-full flex justify-center items-center cursor-pointer mr-18 rounded-full px-8;
+    @apply w-full flex justify-center items-center cursor-pointer mr-18 rounded-md px-8;
   }
   .disable-tag {
     @apply w-full flex justify-center items-center cursor-pointer mr-18 rounded-full px-8;

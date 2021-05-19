@@ -38,6 +38,78 @@
             {{ dataStore.tienda.categoria_tienda }}
           </p>
         </div>
+        <div class="content-seeMore">
+          <p
+            v-if="!showInfoStore"
+            class="txt-seeMore"
+            @click="showInfoStore = true"
+          >
+            {{ $t('home_cardvermas') }}
+          </p>
+          <p v-else class="txt-seeMore" @click="showInfoStore = false">
+            Ver menos
+          </p>
+          <svg
+            v-if="!showInfoStore"
+            @click="showInfoStore = true"
+            class="svg-arrow"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path d="M7,10L12,15L17,10H7Z" />
+          </svg>
+          <svg
+            v-else
+            @click="showInfoStore = false"
+            class="svg-arrow"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path d="M7,15L12,10L17,15H7Z" />
+          </svg>
+        </div>
+        <div class="content-infoStore" v-if="showInfoStore">
+          <div v-if="dataStore.geolocalizacion.length">
+            <p
+              class="txt-direccion"
+              v-if="dataStore.geolocalizacion[0].direccion"
+            >
+              {{ dataStore.geolocalizacion[0].direccion }}
+            </p>
+          </div>
+          <div v-if="dataStore.tienda.whatsapp">
+            <p class="txt-direccion">
+              WhatsApp:
+              <span
+                class="txt-direccion mx-5"
+                v-if="dataStore.tienda.pais == 'Colombia'"
+              >
+                (+57)
+              </span>
+              <span
+                class="txt-direccion mx-5"
+                v-if="dataStore.tienda.pais == 'Chile'"
+              >
+                (+56)
+              </span>
+              {{ dataStore.tienda.whatsapp }}
+            </p>
+          </div>
+          <div v-if="dataStore.geolocalizacion.length">
+            <p class="txt-horario" v-if="dataStore.geolocalizacion[0].horario">
+              {{ $t('contact_horarioAtencion') }}
+              {{ dataStore.geolocalizacion[0].horario }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <KoOrderWa :dataStore="dataStore" />
@@ -56,6 +128,7 @@ export default {
   },
   data() {
     return {
+      showInfoStore: false,
       links: [
         {
           nombre: 'Facebook',
@@ -112,6 +185,9 @@ export default {
   .banner-image {
     @apply w-auto h-auto object-cover object-center;
   }
+  .content-data-store {
+    @apply w-9/0 flex flex-col justify-center items-center;
+  }
   .data-item-logo {
     @apply w-full flex flex-col justify-center items-center -mt-50;
   }
@@ -133,6 +209,31 @@ export default {
     font-family: 'Poppins', sans-serif !important;
     @apply w-full flex flex-col justify-center items-center font-medium;
   }
+  .content-seeMore {
+    background-color: #eaeaea;
+    @apply w-auto flex flex-row justify-center items-center rounded-full px-5 mb-10 cursor-pointer;
+  }
+  .txt-seeMore {
+    font-size: 14px;
+    color: #3d3d3d;
+    font-family: 'Poppins', sans-serif !important;
+    @apply w-auto flex flex-col justify-center items-center font-medium pl-5;
+  }
+  .svg-arrow {
+    fill: #3d3d3d;
+    @apply w-auto h-auto flex flex-col justify-center items-center;
+  }
+  .content-infoStore {
+    background-color: #eaeaea;
+    @apply w-full flex flex-col justify-center items-start p-15 rounded-9 mb-10;
+  }
+  .txt-direccion,
+  .txt-horario {
+    font-size: 13px;
+    color: #3d3d3d;
+    font-family: 'Poppins', sans-serif !important;
+    @apply w-auto flex justify-center items-center font-medium;
+  }
 }
 @screen md {
   .data-item-logo {
@@ -148,6 +249,19 @@ export default {
   }
   .category-store {
     font-size: 24px;
+  }
+  .content-seeMore {
+    @apply mb-20;
+  }
+  .content-infoStore {
+    @apply w-7/0 mb-20;
+  }
+  .txt-seeMore {
+    font-size: 16px;
+  }
+  .txt-direccion,
+  .txt-horario {
+    font-size: 15px;
   }
 }
 </style>

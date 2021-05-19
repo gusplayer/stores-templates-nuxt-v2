@@ -34,7 +34,7 @@
             background
             layout="prev, pager, next"
             :total="products.length"
-            :page-size="16"
+            :page-size="18"
             :current-page.sync="currentPage"
           ></el-pagination>
         </div>
@@ -110,15 +110,15 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 18 - 18
+      const final = initial + 18
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 18 - 18
+      const final = initial + 18
       return this.products.slice(initial, final)
     },
     selectedCategory() {
@@ -370,7 +370,7 @@ export default {
 }
 @media (min-width: 768px) {
   .content-grid-product {
-    @apply grid grid-cols-2 gap-6;
+    @apply grid grid-cols-3 gap-6;
   }
 }
 </style>
