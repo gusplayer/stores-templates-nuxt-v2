@@ -310,6 +310,8 @@ export default {
   @apply w-full justify-center items-center;
 }
 .items-left {
+  max-width: 635px;
+  max-height: 400px;
   width: 100%;
   height: auto;
   display: flex;
@@ -365,9 +367,13 @@ export default {
   @apply w-full cursor-pointer;
 }
 .image {
+  max-width: 635px;
+  max-height: 400px;
   @apply object-cover w-full;
 }
 .items-right {
+  max-width: 635px;
+  max-height: 400px;
   width: 100%;
   height: auto;
   display: flex;
@@ -443,6 +449,11 @@ export default {
   width: 0;
   height: 100%;
   transition: 0.2s ease;
+}
+@media (max-width: 350px) {
+  .hid-cont {
+    display: none;
+  }
 }
 @screen sm {
   .content-items {

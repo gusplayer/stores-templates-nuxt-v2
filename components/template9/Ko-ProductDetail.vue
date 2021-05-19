@@ -322,7 +322,6 @@ export default {
       this.setOptionEnvio()
     }
   },
-
   data() {
     return {
       id: this.$route.params.slug,
