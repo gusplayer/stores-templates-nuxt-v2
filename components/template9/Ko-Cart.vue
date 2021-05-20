@@ -149,8 +149,50 @@
             <p class="txt-summary">{{ $t('cart_resumen') }}</p>
           </div>
           <div class="content-cart-product">
+            <span class="cart-summary-items" v-if="this.shippingDescuento">
+              <p class="txt-cart-summary" style="font-weight: bold;">
+                {{ $t('footer_descuento') }}
+              </p>
+              <p
+                class="txt_summary_price"
+                v-if="
+                  this.shippingDescuento &&
+                  this.shippingDescuento.valor_descuento
+                "
+              >
+                -
+                {{
+                  this.shippingDescuento.valor_descuento
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
+              <p
+                class="txt_summary_price"
+                v-if="
+                  this.shippingDescuento &&
+                  this.shippingDescuento.porcentaje_descuento
+                "
+              >
+                -
+                {{
+                  Math.trunc(
+                    (totalCart * this.shippingDescuento.porcentaje_descuento) /
+                      100
+                  )
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
+            </span>
             <div class="cart-summary-items">
-              <p class="txt-cart-summary">{{ $t('cart_subtotal') }}</p>
+              <p class="txt-cart-summary" style="font-weight: bold;">
+                {{ $t('cart_subtotal') }}
+              </p>
               <p class="txt_summary_price">
                 {{
                   totalCart
@@ -163,7 +205,7 @@
             </div>
             <div class="order_total">
               <div class="order_total_domicile">
-                <p class="txt_summary_tittle">
+                <p class="txt_summary_tittle" style="font-weight: bold;">
                   {{ $t('footer_costoDomicilio') }}
                 </p>
                 <div
@@ -281,11 +323,6 @@
               </div>
             </div>
             <div class="line"></div>
-            <div class="message-responsive">
-              <p class="Quotation-message" v-if="isQuotation()">
-                {{ $t('footer_contactoMgs') }}
-              </p>
-            </div>
             <div class="content-btn">
               <div class="content-totalPay">
                 <p class="txt_summary_tittle txt-total">
@@ -293,7 +330,24 @@
                 </p>
                 <p class="txt_summary_price">
                   {{
-                    (totalCart + (this.shipping ? this.shipping : 0))
+                    (totalCart +
+                      (this.shipping ? this.shipping : 0) +
+                      (this.shippingTarifaPrecio &&
+                      this.shippingTarifaPrecio != 'empty'
+                        ? this.shippingTarifaPrecio
+                        : 0) -
+                      (this.shippingDescuento &&
+                      this.shippingDescuento.valor_descuento
+                        ? this.shippingDescuento.valor_descuento
+                        : 0) -
+                      (this.shippingDescuento &&
+                      this.shippingDescuento.porcentaje_descuento
+                        ? Math.trunc(
+                            (totalCart *
+                              this.shippingDescuento.porcentaje_descuento) /
+                              100
+                          )
+                        : 0))
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -301,17 +355,44 @@
                   }}
                 </p>
               </div>
-              <p class="Quotation-message" v-if="isQuotation()">
+              <p
+                class="Quotation-message"
+                v-if="
+                  isQuotation() ||
+                  (countryStore == false && productsCart.length)
+                "
+              >
                 {{ $t('footer_contactoMgs') }}
               </p>
               <p class="Quotation-message" v-if="dataStore.tienda.estado == 0">
                 {{ $t('footer_tiendaCerrada') }}
               </p>
+              <p
+                class="Quotation-message"
+                v-if="!IsMinValorTotal() && productsCart.length"
+              >
+                La tienda tiene configurado un valor mínimo igual o mayores a
+                {{
+                  this.dataStore.tienda.minimo_compra
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+                para poder realizar la compra
+              </p>
               <button
                 ref="colorBtn"
                 class="btn-buy-1"
                 @click="GoPayments"
-                v-if="!isQuotation() && dataStore.tienda.estado == 1"
+                v-if="
+                  productsCart.length &&
+                  !isQuotation() &&
+                  dataStore.tienda.estado == 1 &&
+                  this.estadoShippingTarifaPrecio == false &&
+                  countryStore == true &&
+                  IsMinValorTotal()
+                "
               >
                 {{ $t('footer_finalizarCompra') }}
               </button>
@@ -355,6 +436,8 @@ export default {
     if (this.rangosByCiudades.envio_metodo == 'precio') {
       this.shippingPrecio()
     }
+    this.productsFreeShippingCart()
+    this.IsMinValorTotal()
   },
   data() {
     return {
@@ -366,6 +449,8 @@ export default {
       rangosByCiudades: [],
       shippingTarifaPrecio: '',
       estadoShippingTarifaPrecio: false,
+      shippingDescuento: '',
+      FreeShippingCart: false,
     }
   },
   computed: {
@@ -435,6 +520,25 @@ export default {
       } else {
         return 0
       }
+    },
+    countryStore() {
+      if (this.dataStore && this.dataStore.tienda.pais) {
+        switch (this.dataStore.tienda.pais) {
+          case 'Colombia':
+            return true
+            break
+          case 'Chile':
+            return true
+            break
+          default:
+            return false
+        }
+      } else {
+        return false
+      }
+    },
+    listDescuentos() {
+      return this.$store.state.listDescuentos
     },
   },
   methods: {
@@ -515,6 +619,70 @@ export default {
         })
       }
     },
+    IsMinValorTotal() {
+      let result = false
+      if (
+        this.dataStore.tienda.minimo_compra == 0 ||
+        this.dataStore.tienda.minimo_compra == null
+      ) {
+        result = true
+      } else {
+        let tempTotal =
+          this.totalCart +
+          (this.shipping ? this.shipping : 0) +
+          (this.shippingTarifaPrecio && this.shippingTarifaPrecio != 'empty'
+            ? this.shippingTarifaPrecio
+            : 0) -
+          (this.shippingDescuento && this.shippingDescuento.valor_descuento
+            ? this.shippingDescuento.valor_descuento
+            : 0) -
+          (this.shippingDescuento && this.shippingDescuento.porcentaje_descuento
+            ? Math.trunc(
+                (this.totalCart * this.shippingDescuento.porcentaje_descuento) /
+                  100
+              )
+            : 0)
+        if (tempTotal >= this.dataStore.tienda.minimo_compra) {
+          result = true
+        }
+      }
+      return result
+    },
+    listaDescuentos() {
+      let cantidadProductos = 0
+      this.productsCart.filter((value) => {
+        cantidadProductos += value.cantidad
+      })
+      if (this.listDescuentos) {
+        let restulDesc
+        this.listDescuentos.filter((element) => {
+          if (cantidadProductos >= element.cantidad_productos) {
+            restulDesc = element
+          }
+        })
+        if (restulDesc) {
+          this.shippingDescuento = restulDesc
+        } else {
+          this.shippingDescuento = ''
+        }
+      }
+    },
+    productsFreeShippingCart() {
+      if (this.productsCart) {
+        let result = this.productsCart.filter((rango) => {
+          if (rango.envio_gratis === 1) {
+            return rango
+          }
+        })
+        if (this.productsCart.length == result.length) {
+          this.FreeShippingCart = true
+          // this.rangosByCiudad.envio_metodo = 'gratis'
+        } else {
+          this.FreeShippingCart = false
+          // this.rangosByCiudad.envio_metodo = this.rangosByCiudad.envio_metodo
+        }
+      }
+    },
   },
   watch: {
     rangosByCiudad() {
@@ -523,8 +691,19 @@ export default {
     cities() {
       this.filterCities()
     },
+    productsCart() {
+      if (this.productsCart) {
+        this.listaDescuentos()
+        this.productsFreeShippingCart()
+      }
+    },
     totalCart() {
+      this.listaDescuentos()
       this.shippingPrecio()
+      this.IsMinValorTotal()
+    },
+    listDescuentos() {
+      this.listaDescuentos()
     },
   },
   filters: {
@@ -739,6 +918,16 @@ export default {
 .btn3:hover {
   color: var(--btnhover);
   border: solid 2px var(--btnhover);
+}
+.Quotation-message {
+  color: var(--color_text);
+  padding: 8px 12px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: center;
 }
 @screen sm {
   .content-cart {

@@ -333,11 +333,17 @@
                 </p>
                 <p
                   class="Quotation-message"
-                  v-if="!IsMinProduct() && productsCart.length"
+                  v-if="!IsMinValorTotal() && productsCart.length"
                 >
-                  La tienda tiene configurado un mínimo de productos igual o
-                  mayores a {{ this.dataStore.tienda.minimo_compra }}, para
-                  poder realizar la compra
+                  La tienda tiene configurado un valor mínimo igual o mayores a
+                  {{
+                    this.dataStore.tienda.minimo_compra
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
+                  para poder realizar la compra
                 </p>
                 <button
                   v-if="
@@ -346,7 +352,7 @@
                     dataStore.tienda.estado == 1 &&
                     this.estadoShippingTarifaPrecio == false &&
                     countryStore == true &&
-                    IsMinProduct()
+                    IsMinValorTotal()
                   "
                   class="continue_shopping"
                   @click="GoPayments"
@@ -508,7 +514,7 @@ export default {
       this.shippingPrecio()
     }
     this.productsFreeShippingCart()
-    this.IsMinProduct()
+    this.IsMinValorTotal()
   },
   data() {
     return {
@@ -658,7 +664,7 @@ export default {
       })
       return result
     },
-    IsMinProduct() {
+    IsMinValorTotal() {
       let result = false
       if (
         this.dataStore.tienda.minimo_compra == 0 ||
@@ -666,11 +672,7 @@ export default {
       ) {
         result = true
       } else {
-        let cantidadProductos = 0
-        this.productsCart.filter((value) => {
-          cantidadProductos += value.cantidad
-        })
-        if (cantidadProductos >= this.dataStore.tienda.minimo_compra) {
+        if (this.totalCart >= this.dataStore.tienda.minimo_compra) {
           result = true
         }
       }
@@ -892,12 +894,12 @@ export default {
         this.shippingPrecio()
         this.listaDescuentos()
         this.productsFreeShippingCart()
-        this.IsMinProduct()
       }
     },
     totalCart() {
       this.listaDescuentos()
       this.shippingPrecio()
+      this.IsMinValorTotal()
     },
     listDescuentos() {
       this.listaDescuentos()
