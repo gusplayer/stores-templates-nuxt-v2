@@ -540,9 +540,6 @@ export default {
     layourUnicentro() {
       return this.$store.state.layoutUnicentro
     },
-    configHttp() {
-      return this.$store.state.configHttp
-    },
     userData() {
       return this.$store.state.userData
     },

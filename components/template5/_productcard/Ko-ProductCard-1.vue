@@ -352,7 +352,7 @@ export default {
         if (this.product.id == this.idSlug) {
           let product = {
             id: this.product.id,
-            precio: this.product.precio,
+            precio: this.salesData.precio,
             cantidad: 1,
             foto_cloudinary: this.product.foto_cloudinary,
             nombre: this.product.nombre,
@@ -381,10 +381,10 @@ export default {
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
               content_type: 'product',
-              content_ids: this.data.detalle.id,
+              content_ids: this.product.id,
               value: this.salesData.precio,
-              num_items: this.data.cantidad,
-              content_name: this.data.detalle.nombre,
+              num_items: 1,
+              content_name: this.product.nombre,
               currency: this.dataStore.tienda.moneda,
               description: 'Agregar al carrito el producto',
             })
