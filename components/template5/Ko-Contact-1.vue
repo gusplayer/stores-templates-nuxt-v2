@@ -1,6 +1,14 @@
 <template>
   <div class="wrapper-contact" :style="settingK05Contact">
-    <div class="contact">
+    <div
+      class="contact"
+      :style="{
+        '--font-style':
+          this.settingK05Contact && this.settingK05Contact.tipo_letra
+            ? this.settingK05Contact.tipo_letra
+            : 'Roboto',
+      }"
+    >
       <div class="contact-content">
         <div>
           <p class="contact-text-title">{{ $t('contact_title') }}</p>

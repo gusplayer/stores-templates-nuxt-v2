@@ -249,7 +249,7 @@ export default {
 .txt-banner {
   color: var(--color_title);
   /* font-family: 'Poppins' !important ; */
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-1) !important ;
   font-weight: 700;
 }
 .tittle-banner-blog {
@@ -274,10 +274,10 @@ export default {
 .title {
   font-size: 25px;
   /* font-family: 'Poppins' !important ; */
-  font-family: var(--font-style-1);
   font-weight: bold;
   color: #2c2930;
   margin-bottom: 20px;
+  font-family: var(--font-style-1) !important ;
 }
 .content-search-blog {
   border-bottom: 1px solid gray;
@@ -336,7 +336,7 @@ export default {
   transition: 0.4s;
   width: 0px;
   /* font-family: 'Poppins' !important ; */
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-1) !important ;
 }
 .input-text:focus {
   border: none;
@@ -356,6 +356,7 @@ export default {
   padding: 2px 4px;
   cursor: pointer;
   transition: all 0.25s ease;
+  font-family: var(--font-style-1) !important ;
 }
 .s1:hover {
   background-color: #2c2930;

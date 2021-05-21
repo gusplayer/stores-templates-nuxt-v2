@@ -8,28 +8,39 @@
         : this.settingBase
     "
   >
-    <div class="space-search"></div>
-    <div class="search-movil" id="navbar">
-      <form id="demo-1" style="width: 100%; position: relative;">
-        <search-icon class="icon-s" />
-        <input
-          v-model="search"
-          type="search"
-          :placeholder="$t('header_search')"
-          @keyup.enter="getSearch(search)"
-          id="SearchIndexTemplate"
-        />
-      </form>
+    <div
+      :style="{
+        '--font-style':
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto',
+      }"
+    >
+      <div class="space-search"></div>
+      <div class="search-movil" id="navbar">
+        <form id="demo-1" style="width: 100%; position: relative;">
+          <search-icon class="icon-s" />
+          <input
+            v-model="search"
+            type="search"
+            :placeholder="$t('header_search')"
+            @keyup.enter="getSearch(search)"
+            id="SearchIndexTemplate"
+          />
+        </form>
+      </div>
+      <kBanner v-if="this.stateBanner" />
+      <kBannerMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
+      <KProductFavoritos v-if="this.stateBanner" />
+      <KProductList
+        :dataStore="dataStore"
+        :fullProducts="fullProducts"
+      ></KProductList>
+      <kContentMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
+      <kBannerFooter />
     </div>
-    <kBanner v-if="this.stateBanner" />
-    <kBannerMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
-    <KProductFavoritos v-if="this.stateBanner" />
-    <KProductList
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
-    ></KProductList>
-    <kContentMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
-    <kBannerFooter />
   </div>
 </template>
 

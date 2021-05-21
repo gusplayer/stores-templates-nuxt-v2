@@ -575,14 +575,14 @@ export default {
 }
 .categoria {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-2) !important;
   color: var(--color_category);
   font: inherit;
   font-weight: 600;
 }
 .card-title {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-2) !important;
   color: var(--color_text_card);
   font: inherit;
   font-weight: 800;
@@ -593,13 +593,13 @@ export default {
 }
 .separator-price {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-2) !important;
   font-size: 16px;
   color: var(--color_price_card);
 }
 .text-price {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-2) !important;
   margin-top: 10px;
   font-size: 16px;
   color: var(--color_price_card);

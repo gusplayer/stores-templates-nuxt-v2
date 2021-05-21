@@ -380,7 +380,7 @@ export default {
     color: var(--color_text);
     font-size: 14px;
     /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
-    font-family: var(--font-style-1);
+    font-family: var(--font-style-1) !important;
     @apply uppercase font-semibold tracking-1;
   }
   .content-locatioin,
@@ -393,6 +393,7 @@ export default {
   .txt-left {
     color: var(--color_subtext);
     font-size: 14px;
+    font-family: var(--font-style-1) !important;
     @apply w-full flex justify-start items-center pl-20;
   }
   .email {
@@ -418,18 +419,21 @@ export default {
   .txt-contactus {
     color: var(--color_text);
     font-size: 18px;
+    font-family: var(--font-style-1) !important;
     @apply w-full justify-center items-center uppercase font-semibold;
   }
   .validator {
     @apply w-full;
   }
   .text-error {
+    font-family: var(--font-style-1) !important;
     color: red;
     font-size: 13px;
     @apply w-full;
   }
   input,
   .input-text {
+    font-family: var(--font-style-1) !important;
     color: var(--color_subtext);
     border: 1px solid var(--background_color_2);
     font-size: 13px;
@@ -437,12 +441,14 @@ export default {
   }
   textarea,
   .input-text-rectangule {
+    font-family: var(--font-style-1) !important;
     color: var(--color_subtext);
     border: 1px solid var(--background_color_2);
     font-size: 13px;
     @apply w-full h-100 pl-10 pt-10;
   }
   .txt-input {
+    font-family: var(--font-style-1) !important;
     color: var(--color_text);
     font-size: 13px;
     @apply w-full justify-center items-center capitalize;
@@ -457,6 +463,7 @@ export default {
     color: var(--color_text_btn);
     border-radius: var(--radius_btn);
     @apply w-auto h-35 border mt-20 px-20;
+    font-family: var(--font-style-1) !important;
   }
   .btn:hover {
     @apply shadow-lg;

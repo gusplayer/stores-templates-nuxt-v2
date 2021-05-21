@@ -1,14 +1,5 @@
 <template>
-  <div
-    :style="{
-      '--font-style':
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings.tipo_letra
-          ? this.settingByTemplate.settings.tipo_letra
-          : 'Roboto',
-    }"
-  >
+  <div>
     <component v-bind="componentsProps" :is="headerTemplate" />
     <nuxt />
     <component v-bind="componentsProps" :is="footerTemplate" />
@@ -63,7 +54,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import KoHeader1 from '../components/headers/header1/Ko-Header-1'
 import KoHeader2 from '../components/headers/header2/Ko-Header-2'
@@ -78,11 +68,9 @@ import KoFooter4 from '../components/footers/footer4/Ko-Footer-4'
 import KoFooter5 from '../components/footers/footer5/Ko-Footer-5'
 import KoFooter6 from '../components/footers/footer6/Ko-Footer-6'
 import KoFooter7 from '../components/footers/footer7/Ko-Footer-7'
-
 import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
-
 //template6
 // import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
 // import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'

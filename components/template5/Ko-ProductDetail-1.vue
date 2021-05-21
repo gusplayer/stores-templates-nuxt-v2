@@ -1,7 +1,16 @@
 <template>
   <div class="wrapper-productDetail" :style="settingByTemplate">
     <div class="container-productDetail-loading" v-if="loading"></div>
-    <div class="container-productDetail" v-else>
+    <div
+      class="container-productDetail"
+      v-else
+      :style="{
+        '--font-style':
+          this.settingK05Contact && this.settingK05Contact.tipo_letra
+            ? this.settingK05Contact.tipo_letra
+            : 'Roboto',
+      }"
+    >
       <div class="section">
         <div class="wrapper-left">
           <template>

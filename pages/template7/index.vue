@@ -1,5 +1,30 @@
 <template lang="html">
-  <div v-if="settingByTemplate7">
+  <div
+    v-if="settingByTemplate7"
+    :style="[
+      {
+        '--font-style-1':
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_1
+            ? this.settingByTemplate7.settingGeneral.fount_1
+            : 'David Libre',
+      },
+      {
+        '--font-style-2':
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_2
+            ? this.settingByTemplate7.settingGeneral.fount_2
+            : 'Great Vibes',
+      },
+      {
+        '--font-style-3':
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_3
+            ? this.settingByTemplate7.settingGeneral.fount_3
+            : 'Lora',
+      },
+    ]"
+  >
     <KCarousel
       id="kbannerX"
       v-bind="componentsProps"
