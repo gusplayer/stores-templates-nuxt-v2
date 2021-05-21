@@ -3,7 +3,7 @@
     <div class="order" @click="closeOrder" v-show="openOrder">
       <div class="order_content">
         <div class="order_header">
-          <h3>{{ $t('footer_title') }}</h3>
+          <h3>{{ $t('footer_title') }} ({{ cantidadProductos }})</h3>
           <div class="order_header_close" @click="closedOder">
             <div class="leftright"></div>
             <div class="rightleft"></div>
@@ -534,6 +534,7 @@ export default {
       dirreccion: '',
       shippingDescuento: '',
       FreeShippingCart: false,
+      cantidadProductos: 0,
     }
   },
   computed: {
@@ -843,14 +844,14 @@ export default {
       this.formOrden = !this.formOrden
     },
     listaDescuentos() {
-      let cantidadProductos = 0
+      this.cantidadProductos = 0
       this.productsCart.filter((value) => {
-        cantidadProductos += value.cantidad
+        this.cantidadProductos += value.cantidad
       })
       if (this.listDescuentos) {
         let restulDesc
         this.listDescuentos.filter((element) => {
-          if (cantidadProductos >= element.cantidad_productos) {
+          if (this.cantidadProductos >= element.cantidad_productos) {
             restulDesc = element
           }
         })
@@ -990,7 +991,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ededed;
-  padding: 10px 30px;
+  padding: 15px 25px;
   flex: none;
 }
 .leftright,
@@ -1053,7 +1054,7 @@ export default {
   align-items: center;
   justify-content: space-around;
   border-bottom: 1px solid #ededed;
-  padding: 10px 30px;
+  padding: 10px 25px;
   overflow-x: auto;
 }
 .order_products_list_item::-webkit-scrollbar {
@@ -1070,14 +1071,17 @@ export default {
   border-radius: 10px;
 }
 .order_products_list_item .photo {
-  width: 50px;
+  width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .order_products_list_item .photo img {
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 60px;
+  max-height: 60px;
+  border-radius: 5px;
+  object-fit: cover;
+  margin-right: 8px;
 }
 .order_products_list_item .name {
   max-width: 190px;
@@ -1142,7 +1146,7 @@ export default {
   bottom: 5px;
 }
 .icon-delete:hover {
-  color: #000;
+  color: rgb(223, 62, 62);
 }
 
 .order_beforefreeshipping {
@@ -1163,7 +1167,7 @@ export default {
 }
 .content-remove-cart {
   width: 100%;
-  padding: 10px 5px;
+  padding: 10px 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1255,7 +1259,7 @@ export default {
 }
 .order_total {
   border-top: 1px solid #ededed;
-  padding: 0 30px;
+  padding: 0 25px;
 }
 .order_total_domicile,
 .order_total_net {
@@ -1352,7 +1356,7 @@ export default {
 }
 .continue_shopping {
   width: 100%;
-  max-width: 340px;
+  max-width: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1372,8 +1376,8 @@ export default {
   transition: all ease 0.3s;
 }
 .continue_shopping:hover {
-  border: solid 2px #ccc;
-  background-color: #f8f8f8;
+  border: solid 2px #a1a1a1;
+  background-color: #a1a1a1;
   color: #2c2930;
 }
 .conten-btn {
@@ -1388,7 +1392,7 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
-  max-width: 340px;
+  max-width: 350px;
   color: #2c2930;
   border: 2px solid #2c2930;
   border-radius: var(--radius_btn);
@@ -1401,9 +1405,8 @@ export default {
   transition: all ease 0.3s;
 }
 .continue_shopping2:hover {
-  color: #fff;
-  background-color: #2c2930;
-  border: 2px solid #2c2930;
+  color: #a1a1a1;
+  border: 2px solid #a1a1a1;
 }
 .wrapper_photo {
   position: relative;

@@ -1,5 +1,12 @@
 <template>
-  <div class="content-cart">
+  <div
+    class="content-cart"
+    :class="
+      this.template == 7
+        ? 'margintopbytemplate07'
+        : 'margintopbytemplategeneral'
+    "
+  >
     <div v-if="this.productsCart.length" class="conten-items-cart">
       <div class="cart-tittle">
         <cart-icon class="header-icon-cart" />
@@ -784,7 +791,13 @@ export default {
 
 <style scoped>
 .content-cart {
-  @apply w-full flex flex-col justify-center items-center pb-30 pt-50;
+  @apply w-full flex flex-col justify-center items-center pb-45;
+}
+.margintopbytemplate07 {
+  @apply pt-100;
+}
+.margintopbytemplategeneral {
+  @apply pt-30;
 }
 .conten-items-cart {
   @apply flex flex-col justify-center items-center;
