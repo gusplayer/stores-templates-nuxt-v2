@@ -1,166 +1,141 @@
 <template>
-  <div class="wrapper-card">
-    <div class="container-card">
-      <div class="wrapper-movil">
-        <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
-        <p class="card-info-2" v-if="getFreeShipping == false">
-          {{ $t('home_cardGratis') }}
-        </p>
+  <div class="content-productCard">
+    <div class="content-itemsCard">
+      <router-link
+        class="content-img-prodcut"
+        :to="{
+          path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+        }"
+      >
+        <img
+          v-if="!soldOut"
+          v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+          class="product-image"
+          alt="Product-Img-soldOut"
+        />
+        <img
+          v-if="soldOut"
+          v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+          class="product-image product-image-soldOut"
+          alt="Product-Img"
+        />
+      </router-link>
+      <div class="content-right-data">
         <router-link
+          class="content-description-product"
           :to="{
             path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
           }"
-          class="wrapper-image"
         >
-          <img
-            v-if="!soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
-            class="product-image"
-            alt="Product Img"
-          />
-          <img
-            v-if="soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
-            class="product-image product-image-soldOut"
-            alt="Product Img"
-          />
+          <p
+            class="txt-name-product pb-auto"
+            v-if="this.product.nombre.length >= 42"
+          >
+            {{ `${this.product.nombre.slice(0, 42)}..` }}
+          </p>
+          <p class="txt-name-product pb-auto" v-else>
+            {{ `${this.product.nombre.slice(0, 42)}` }}
+          </p>
+          <div class="content-price-product">
+            <div
+              class="item-price-product"
+              v-if="estadoCart && this.minPrice != this.maxPrice"
+            >
+              <p
+                class="txt-product-price"
+                v-if="this.product.precio > 0 || this.product.precio"
+              >
+                {{
+                  this.minPrice
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
+              <p class="separator-price">-</p>
+              <p
+                class="txt-product-price"
+                v-if="this.product.precio > 0 || this.product.precio"
+              >
+                {{
+                  this.maxPrice
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
+            </div>
+            <div class="item-price-product" v-else>
+              <p class="txt-product-price" v-if="this.product.precio > 0">
+                {{
+                  this.product.precio
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
+            </div>
+          </div>
         </router-link>
-        <div class="wrapper-text">
+        <div
+          class="content-buttons"
+          v-if="!this.estadoCart && !soldOut && !spent"
+        >
+          <div
+            class="button-left"
+            v-if="this.product.precio > 0"
+            v-on:click="addShoppingCart"
+          >
+            <svg
+              class="svg-img"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              />
+            </svg>
+          </div>
           <router-link
+            class="button-right"
             :to="{
               path:
                 `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
             }"
-            class="content-name-product-movil"
           >
-            <p
-              class="card-text-movil-title"
-              v-if="this.product.nombre.length >= 42"
-            >
-              {{ `${this.product.nombre.slice(0, 42)}..` }}
+            <p class="txt-btn-right">
+              {{ $t('productdetail_btnComprar') }}
             </p>
-            <p class="card-text-movil-title" v-else>
-              {{ `${this.product.nombre.slice(0, 42)}` }}
-            </p>
-            <p class="card-text-movil" v-if="this.product.marca">
-              {{ this.product.marca }}
-            </p>
-            <div
-              class="content-text-price-movil-cart"
-              v-if="this.product.precio"
-            >
-              <div class="wrapper-price">
-                <!-- <div> -->
-                <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
-                  $ {{ this.product.precio }}
-                  </p>-->
-                <div
-                  class="content-price"
-                  v-if="estadoCart && this.minPrice != this.maxPrice"
-                >
-                  <p
-                    class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
-                  >
-                    {{
-                      this.minPrice
-                        | currency(
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
-                    }}
-                  </p>
-                  <p class="separator-price">-</p>
-                  <p
-                    class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
-                  >
-                    {{
-                      this.maxPrice
-                        | currency(
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
-                    }}
-                  </p>
-                </div>
-                <div v-else>
-                  <p class="card-price-2" v-if="this.product.precio > 0">
-                    {{
-                      this.product.precio
-                        | currency(
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
-                        )
-                    }}
-                  </p>
-                </div>
-                <!-- </div> -->
-                <!-- <p class="card-descuento">-50%</p> -->
-              </div>
-            </div>
           </router-link>
-          <div class="Content-btn-movil">
-            <div
-              class="content-soldOut"
-              v-if="!this.estadoCart && !soldOut && !spent"
-            >
-              <div
-                v-if="this.product.precio > 0"
-                v-on:click="addShoppingCart"
-                class="btn"
-                :class="
-                  dataStore.entidades.length && dataStore.entidades[0].id == 17
-                    ? 'btn-midasoluciones'
-                    : 'btn-wapi'
-                "
-                style="margin-right: 5px;"
-              >
-                <shopWa-icon class="wp-icon" />
-              </div>
-              <router-link
-                :to="{
-                  path:
-                    `/wa/${dataStore.tienda.id_tienda}/producto/` +
-                    product.slug,
-                }"
-                class="btn"
-                :class="
-                  dataStore.entidades.length && dataStore.entidades[0].id == 17
-                    ? 'btn-midasoluciones'
-                    : 'btn-wapi'
-                "
-              >
-                {{ $t('productdetail_btnComprar') }}</router-link
-              >
-            </div>
-            <router-link
-              :to="{
-                path:
-                  `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
-              }"
-              v-else
-              class="btn"
-              :class="
-                dataStore.entidades.length && dataStore.entidades[0].id == 17
-                  ? 'btn-midasoluciones'
-                  : 'btn-wapi'
-              "
-            >
-              {{ $t('productdetail_btnComprar') }}</router-link
-            >
-          </div>
         </div>
+        <router-link
+          v-else
+          class="button-right"
+          :to="{
+            path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+          }"
+        >
+          <p class="txt-btn-right">
+            {{ $t('productdetail_btnComprar') }}
+          </p>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '../../../../mixins/idCloudinary'
 export default {
+  name: 'ProductCardWa',
   mixins: [idCloudinary],
-  name: 'Ko-ProductCard-1',
   props: { product: Object, dataStore: Object },
   mounted() {
     this.idSlug = this.product.id
@@ -427,229 +402,91 @@ export default {
   },
 }
 </script>
-
 <style scoped>
-.wrapper-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 0px;
-  border-bottom: 1px solid rgba(213, 213, 213, 0.473);
-  transition: all 200ms ease-in;
-  background-color: #f8f9fb;
-  padding-bottom: 4px;
+.content-productCard {
+  @apply w-full h-full flex flex-col justify-start items-center;
 }
-
-.container-card {
-  display: flex;
-  align-items: flex-start;
-  width: 100%;
-  overflow: hidden;
-}
-.wrapper-movil {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-.wrapper-image {
-  max-width: 110px;
-  border-radius: 4px;
-  margin-right: 5px;
-  border-radius: 6px;
-}
-.product-image {
-  width: 100%;
-  /* height: 100%; */
-  object-fit: cover;
-  object-position: center;
-  border-radius: 6px;
-}
-.product-image-soldOut {
-  filter: grayscale(100%);
-}
-.card-info-1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #e71f77;
-  padding: 1px 2px;
-  border-radius: var(--radius_btn);
-  color: white;
-  font-size: 10px;
-  z-index: 2;
-  position: absolute;
-  top: 74px;
-  left: 0px;
-}
-.card-info-2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #35dd8d;
-  padding: 1px 2px;
-  border-radius: var(--radius_btn);
-  color: black;
-  font-size: 10px;
-  font-weight: bold;
-  z-index: 2;
-  position: absolute;
-  top: 92px;
-  left: 0px;
-}
-.wrapper-text {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.content-name-product-movil {
-  display: flex;
-  width: 100%;
-  padding: 0px 10px;
-  margin-top: 1px;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-  /* height: 30px; */
-}
-.card-text-movil-title {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1;
-  color: #0f2930;
-  color: #445a64;
-}
-.card-text-movil {
-  font-size: 13px;
-  font-weight: 300;
-  color: black;
-  color: #0f2930;
-}
-.content-text-price-movil-cart {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-}
-.wrapper-price {
-  display: flex;
-  flex-direction: row;
-  align-self: flex-start;
-  justify-content: center;
-  align-items: center;
-}
-.content-price {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.card-price-1-movil {
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1;
-  color: #0f2930;
-  text-decoration: line-through;
-  text-align: center;
-}
-.card-price-2 {
-  margin-top: 8px;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1;
-  color: black;
-  color: #0f2930;
-  text-align: left;
-}
-.separator-price {
-  margin-top: 8px;
-  color: #4c4c4c;
-  margin-left: 5px;
-  margin-right: 5px;
-  text-align: center;
-}
-.card-descuento {
-  font-size: 12px;
-  color: white;
-  background: #fe5858;
-  border-radius: 3px;
-  padding: 0px 4px;
-  display: flex;
-  justify-content: center;
-  align-self: flex-end;
-  position: relative;
-  top: -8px;
-  margin-left: 5px;
-}
-.Content-btn-movil {
-  /* width: 100%; */
-  height: 40px;
-  display: flex;
-  align-self: flex-end;
-  align-items: flex-start;
-}
-.content-soldOut {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-.icon-shop {
-  max-width: 20px;
-  max-height: 20px;
-}
-.btn {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  text-decoration: none;
-  align-items: center;
-  border-radius: 4px;
-  padding: 6px 10px;
-  font-weight: 600;
-  margin-right: 4px;
-  font-size: 12px;
-  box-sizing: border-box;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
-  cursor: pointer;
-}
-.btn-wapi {
-  background-color: white;
-  color: #128c7e;
-}
-.btn-wapi:hover {
-  color: white;
-  background-color: #128c7e;
-}
-.btn-midasoluciones {
-  background-color: white;
-  color: #f7c224;
-}
-.btn-midasoluciones:hover {
-  color: black;
-  background-color: #f7c224;
-}
-.wp-icon {
-  font-size: 20px;
-  bottom: 3px;
-}
-@media (max-width: 330px) {
-  .wrapper-image {
-    max-width: 105px;
+@screen sm {
+  .content-itemsCard {
+    @apply w-full flex flex-row gap-4 justify-center items-start;
   }
-  .card-text-movil-title {
+  .content-img-prodcut {
+    background-color: #f9f9f9;
+    @apply w-full flex flex-col justify-center items-center rounded-9 border overflow-hidden;
+  }
+  .product-image {
+    @apply w-full object-cover object-center;
+  }
+  .product-image-soldOut {
+    filter: grayscale(100%);
+  }
+  .content-right-data {
+    @apply w-full flex flex-col justify-center items-center;
+  }
+  .content-description-product {
+    @apply w-full h-80 flex flex-col gap-1 justify-start items-start mb-10;
+  }
+  .txt-name-product {
+    color: #3d3d3d;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif !important;
+    @apply w-full flex flex-col justify-center items-start font-medium;
+  }
+  .content-price-product {
+    @apply w-auto flex flex-col justify-center items-center;
+  }
+  .item-price-product {
+    @apply w-full flex flex-row justify-start items-center gap-1;
+  }
+  .txt-product-price {
+    color: #3d3d3d;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif !important;
+    @apply w-auto flex flex-col justify-center items-start font-bold;
+  }
+  .content-buttons {
+    @apply w-full flex flex-row justify-between items-center;
+  }
+  .button-left {
+    background-color: #ececec;
+    @apply w-auto flex flex-col justify-center items-center rounded-5 p-8 mr-5 cursor-pointer;
+  }
+  .button-left:hover {
+    background-color: #e0e0e0;
+  }
+  .svg-img {
+    color: #3d3d3d;
+    @apply w-21 h-auto;
+  }
+  .button-right {
+    background: #56d162;
+    background: -moz-linear-gradient(left, #56d162 0%, #27b43d 100%);
+    background: -webkit-linear-gradient(left, #56d162 0%, #27b43d 100%);
+    background: linear-gradient(to right, #56d162 0%, #27b43d 100%);
+    @apply w-full flex flex-col justify-center items-center rounded-7 px-12 py-8 cursor-pointer;
+  }
+  .button-right:hover {
+    transition: 120 s ease-in;
+    background: #1bc434;
+  }
+  .txt-btn-right {
+    font-size: 14px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif !important;
+    @apply w-full flex flex-col justify-center items-center font-semibold;
+  }
+}
+@media (min-width: 375px) {
+  .content-description-product {
+    @apply h-auto;
+  }
+}
+@screen md {
+  .txt-name-product {
     font-size: 15px;
   }
-  .card-info-1 {
-    top: 70px;
-  }
-  .card-info-2 {
-    top: 88px;
+  .txt-product-price {
+    font-size: 16px;
   }
 }
 </style>

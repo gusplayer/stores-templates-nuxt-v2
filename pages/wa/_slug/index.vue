@@ -1,62 +1,45 @@
 <template lang="html">
-  <div class="container-home" v-loading="loading">
-    <KoHeaderWp :dataStore="dataStore" />
-    <KCategory :dataStore="dataStore" />
-    <KProductFavoritos v-if="this.stateBanner" />
-    <KProductList :dataStore="dataStore" :fullProducts="fullProducts" />
-    <KFooterWaLogo :dataStore="dataStore" />
-    <KFooterWa :dataStore="dataStore" />
+  <div class="content-wa">
+    <component :is="indexTemplate" />
   </div>
 </template>
 
 <script>
-import KCategory from '../../../components/whatsapp/Ko-Categories-wa'
-import KProductFavoritos from '../../../components/whatsapp/Ko-ProductFavoritos-1'
-import KProductList from '../../../components/whatsapp/Ko-ProductList-wa'
-import KoHeaderWp from '../../../components/headers/header_wp/Ko-Header-wa'
-import KFooterWaLogo from '../../../components/footers/footerWa/ko-Footer-wa-logo'
-import KFooterWa from '../../../components/footers/footerWa/ko-Footer-wa'
+import WaTemplate1 from './templates/template1/index'
+import WaTemplate2 from './templates/template2/index'
+import WaTemplate3 from './templates/template3/index'
 
 export default {
+  name: 'index-wa',
   layout: 'wa',
-  components: {
-    KProductList,
-    KCategory,
-    KProductFavoritos,
-    KFooterWa,
-    KoHeaderWp,
-    KFooterWaLogo,
-  },
+  components: { WaTemplate1, WaTemplate2, WaTemplate3 },
   data() {
-    return {}
+    return {
+      componentNumber: 1,
+    }
   },
   computed: {
-    loading() {
-      if (this.dataStore.length) {
-        return true
-      } else {
-        return false
+    indexTemplate() {
+      let componentTemplate = ''
+      switch (this.componentNumber) {
+        case 1:
+          componentTemplate = 'WaTemplate1'
+          break
+        case 2:
+          componentTemplate = 'WaTemplate2'
+          break
+        case 3:
+          componentTemplate = 'WaTemplate3'
+          break
       }
-    },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
-    stateBanner() {
-      return this.$store.state.stateBanner
+      return componentTemplate
     },
   },
 }
 </script>
 
 <style scoped>
-.container-home {
-  width: 100%;
-  max-width: 900px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  background-color: #fff;
+.content-wa {
+  @apply w-full flex flex-col justify-center items-center;
 }
 </style>

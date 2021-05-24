@@ -54,7 +54,7 @@
             </div>
             <div
               v-if="data.info.descripcion_corta"
-              style="margin-top: 10px; margin-bottom: 5px;"
+              style="margin-top: 10px; margin-bottom: 5px"
             >
               <p class="text-marca">
                 <strong>{{ data.info.descripcion_corta }}</strong>
@@ -73,8 +73,9 @@
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
-                    >{{ item.option }}</option
                   >
+                    {{ item.option }}
+                  </option>
                 </selectGroup>
               </div>
             </div>
