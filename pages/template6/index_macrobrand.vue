@@ -86,6 +86,9 @@ export default {
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
     },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
+    },
   },
   methods: {
     Searchproduct(search) {
