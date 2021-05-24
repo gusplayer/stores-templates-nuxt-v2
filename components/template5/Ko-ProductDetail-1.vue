@@ -6,8 +6,8 @@
       v-else
       :style="{
         '--font-style':
-          this.settingK05Contact && this.settingK05Contact.tipo_letra
-            ? this.settingK05Contact.tipo_letra
+          this.settingByTemplate && this.settingByTemplate.tipo_letra
+            ? this.settingByTemplate.tipo_letra
             : 'Roboto',
       }"
     >

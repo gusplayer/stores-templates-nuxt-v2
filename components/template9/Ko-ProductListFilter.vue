@@ -1055,6 +1055,11 @@ export default {
   overflow: hidden;
   transition: max-height 0.4s ease-out;
 }
+.content-left {
+  position: sticky;
+  top: 130px;
+  transition: all 0.25s ease;
+}
 @screen sm {
   .product-conten-items {
     @apply w-full grid grid-cols-1;
@@ -1066,7 +1071,7 @@ export default {
     @apply w-9/5 flex flex-row justify-start items-start;
   }
   .content-left {
-    @apply hidden;
+    display: none;
   }
   .content-right {
     @apply w-full;

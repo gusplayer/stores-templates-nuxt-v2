@@ -3,7 +3,6 @@
     <component :is="indexTemplate" />
   </div>
 </template>
-
 <script>
 import KoTemplate5 from './template5/index'
 import KoTemplate6 from './template6/index_macrobrand'
@@ -13,7 +12,6 @@ import KoTemplate8 from './template8/index'
 import KoTemplate9 from './template9/index'
 import KoTemplate10 from './template10/index'
 import KoTemplate11 from './template11/index'
-
 export default {
   components: {
     KoTemplate5,
@@ -61,5 +59,3 @@ export default {
   },
 }
 </script>
-
-<style></style>

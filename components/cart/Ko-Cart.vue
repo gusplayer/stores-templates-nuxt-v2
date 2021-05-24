@@ -791,7 +791,7 @@ export default {
 
 <style scoped>
 .content-cart {
-  @apply w-full flex flex-col justify-center items-center pb-45;
+  @apply w-full flex flex-col justify-center items-center pb-48;
 }
 .margintopbytemplate07 {
   @apply pt-100;
