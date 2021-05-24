@@ -340,12 +340,6 @@ export default {
     }
   },
   computed: {
-    configHttp() {
-      return this.$store.state.configHttp
-    },
-    userData() {
-      return this.$store.state.userData
-    },
     openOrder() {
       return this.$store.state.openOrderValienta
     },

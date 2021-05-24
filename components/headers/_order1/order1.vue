@@ -541,9 +541,7 @@ export default {
     layourUnicentro() {
       return this.$store.state.layoutUnicentro
     },
-    userData() {
-      return this.$store.state.userData
-    },
+
     openOrder() {
       return this.$store.state.openOrder
     },

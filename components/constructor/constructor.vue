@@ -98,7 +98,6 @@ export default {
   async mounted() {
     // this.$store.dispatch('GET_LOGIN')
     this.$store.dispatch('GET_DATA')
-    // this.$store.dispatch('GET_STORELAYOUT')
   },
   data() {
     return {

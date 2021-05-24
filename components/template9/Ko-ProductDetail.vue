@@ -399,9 +399,6 @@ export default {
       }
       return false
     },
-    modalPayment() {
-      return this.$store.state.togglePayment
-    },
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
@@ -525,9 +522,6 @@ export default {
         sku: '4a00',
       }
       this.spent = true
-    },
-    togglePayment() {
-      this.$store.state.togglePayment = !this.$store.state.togglePayment
     },
     setOptionEnvio() {
       if (this.data.detalle) {

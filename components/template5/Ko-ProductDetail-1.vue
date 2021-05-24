@@ -686,9 +686,6 @@ export default {
       }
       this.spent = true
     },
-    togglePayment() {
-      this.$store.state.togglePayment = !this.$store.state.togglePayment
-    },
     setOptionEnvio() {
       if (this.data.detalle) {
         if (this.data.detalle.envio_gratis == 1) {
