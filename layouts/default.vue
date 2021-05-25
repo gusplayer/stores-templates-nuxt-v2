@@ -1,20 +1,21 @@
 <template>
   <div>
-    <component v-bind="componentsProps" :is="headerTemplate" />
-    <nuxt />
-    <component v-bind="componentsProps" :is="footerTemplate" />
-    <KoFooterCountry v-bind="componentsProps" />
-    <div
-      class="wrapper-whatsapp"
-      v-if="dataStore.tienda.whatsapp"
-      @click="redirectWhatsapp()"
-    >
-      <koWhatsapp class="button-whatsapp" />
-      <span
-        >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
+    <div v-if="dataStore">
+      <component v-bind="componentsProps" :is="headerTemplate" />
+      <nuxt />
+      <component v-bind="componentsProps" :is="footerTemplate" />
+      <KoFooterCountry v-bind="componentsProps" />
+      <div
+        class="wrapper-whatsapp"
+        v-if="dataStore.tienda.whatsapp"
+        @click="redirectWhatsapp()"
       >
-    </div>
-    <!-- <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
+        <koWhatsapp class="button-whatsapp" />
+        <span
+          >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
+        >
+      </div>
+      <!-- <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
       <div class="content-cookie">
         <p class="title">
           Este sitio web utiliza cookies para su funcionar correctamente y
@@ -36,21 +37,25 @@
         </div>
       </div>
     </div> -->
-    <div
-      class="wrapper-notificacion"
-      id="modalNotificacion"
-      v-if="dataStore.tienda.estado == 0"
-    >
-      <div class="content-notificacion">
-        <koTiendaCerrada />
-        <p class="text-noti">
-          Disculpa, no podrá realizar compras por el momento,
-        </p>
-        <p class="subtitle-noti">¿Deseas continuar?</p>
-        <button class="btn-acceptM" @click="acceptClose()">
-          Aceptar
-        </button>
+      <div
+        class="wrapper-notificacion"
+        id="modalNotificacion"
+        v-if="dataStore.tienda.estado == 0"
+      >
+        <div class="content-notificacion">
+          <koTiendaCerrada />
+          <p class="text-noti">
+            Disculpa, no podrá realizar compras por el momento,
+          </p>
+          <p class="subtitle-noti">¿Deseas continuar?</p>
+          <button class="btn-acceptM" @click="acceptClose()">
+            Aceptar
+          </button>
+        </div>
       </div>
+    </div>
+    <div v-else>
+      <koTiendaError />
     </div>
   </div>
 </template>
@@ -71,6 +76,7 @@ import KoFooter7 from '../components/footers/footer7/Ko-Footer-7'
 import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
+import koTiendaError from '../components/Ko-errorStore'
 //template6
 // import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
 // import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'
@@ -95,6 +101,7 @@ export default {
     koTiendaCerrada,
     // Ko6Header1,
     // Ko6Footer1,
+    koTiendaError,
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES')
@@ -195,6 +202,8 @@ export default {
         break
     }
     let tienda = this.$store.state.dataStore.tienda
+      ? this.$store.state.dataStore.tienda
+      : ''
     let tidio =
       this.analytics_tagmanager && this.analytics_tagmanager.tidio_user
         ? this.analytics_tagmanager.tidio_user
@@ -205,9 +214,12 @@ export default {
         ? this.analytics_tagmanager.facebook_pixel_metatag_1
         : ''
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
-    let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
+    let description =
+      tienda && tienda.descripcion
+        ? tienda.descripcion.replace(/<[^>]*>?/g, '')
+        : ''
     return {
-      title: tienda.nombre ? tienda.nombre : 'Tienda',
+      title: tienda && tienda.nombre ? tienda.nombre : 'Tienda',
       htmlAttrs: {
         lang: 'es',
       },
@@ -298,17 +310,26 @@ export default {
         {
           hid: 'og:latitude',
           name: 'og:latitude',
-          content: geolocalizacion.latitud,
+          content:
+            geolocalizacion && geolocalizacion.latitud
+              ? geolocalizacion.latitud
+              : '',
         },
         {
           hid: 'og:longitude',
           name: 'og:longitude',
-          content: geolocalizacion.longitud,
+          content:
+            geolocalizacion && geolocalizacion.longitud
+              ? geolocalizacion.longitud
+              : '',
         },
         {
           hid: 'og:street-address',
           name: 'og:street-address',
-          content: geolocalizacion.direccion,
+          content:
+            geolocalizacion && geolocalizacion.direccion
+              ? geolocalizacion.direccion
+              : '',
         },
         {
           name: 'facebook-domain-verification',

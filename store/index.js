@@ -468,7 +468,7 @@ export const actions = {
       await dispatch('GET_ANALYTICS_TAGMANAGER', idWapi)
       await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
     } else {
-      if (id) {
+      if (id && id.data.data && id.data.data.id) {
         await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
         await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
         await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
