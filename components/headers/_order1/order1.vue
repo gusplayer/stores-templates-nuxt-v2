@@ -262,7 +262,8 @@
                         (totalCart +
                           (this.shipping ? this.shipping : 0) +
                           (this.shippingTarifaPrecio &&
-                          this.shippingTarifaPrecio != 'empty'
+                          this.shippingTarifaPrecio != 'empty' &&
+                          this.FreeShippingCart == false
                             ? this.shippingTarifaPrecio
                             : 0) -
                           (this.shippingDescuento &&
@@ -541,7 +542,6 @@ export default {
     layourUnicentro() {
       return this.$store.state.layoutUnicentro
     },
-
     openOrder() {
       return this.$store.state.openOrder
     },

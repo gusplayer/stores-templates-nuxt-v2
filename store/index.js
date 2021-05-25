@@ -468,35 +468,31 @@ export const actions = {
       await dispatch('GET_ANALYTICS_TAGMANAGER', idWapi)
       await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
     } else {
-      await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
-      await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
-      await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
-      await dispatch('GET_ARTICLES', id.data.data.id)
-      if (id.data.data.template == 7) {
-        if (state.dataStore && state.dataStore.tienda) {
-          await dispatch('GET_SETTINGS_BY_TEMPLATE_7', state.dataStore.tienda)
-        }
-      } else if (id.data.data.template == 9) {
-        if (state.dataStore && state.dataStore.tienda) {
-          await dispatch('GET_SETTINGS_BY_TEMPLATE_9', state.dataStore.tienda)
+      if (id) {
+        await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
+        await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
+        await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
+        await dispatch('GET_ARTICLES', id.data.data.id)
+        if (id.data.data.template == 7) {
+          if (state.dataStore && state.dataStore.tienda) {
+            await dispatch('GET_SETTINGS_BY_TEMPLATE_7', state.dataStore.tienda)
+          }
+        } else if (id.data.data.template == 9) {
+          if (state.dataStore && state.dataStore.tienda) {
+            await dispatch('GET_SETTINGS_BY_TEMPLATE_9', state.dataStore.tienda)
+          }
         }
       }
-      // else if (id.data.data.template == 99) {
-      //   if (state.dataStore && state.dataStore.tienda) {
-      //     await dispatch(
-      //       'GET_SETTINGS_BY_TEMPLATE_WAPI',
-      //       state.dataStore.tienda
-      //     )
-      //   }
-      // }
     }
-    await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
-    // await dispatch('GET_DATAVALIENTA')
-    await dispatch('GET_SERVER_PATH', full)
-    const idSlug = route.path.split('-')
-    const producto = await axios.get(
-      `https://templates.komercia.co/api/producto/${idSlug.pop()}`
-    )
+    if (state.dataStore) {
+      await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
+      // await dispatch('GET_DATAVALIENTA')
+      await dispatch('GET_SERVER_PATH', full)
+    }
+    // const idSlug = route.path.split('-')
+    // const producto = await axios.get(
+    //   `https://templates.komercia.co/api/producto/${idSlug.pop()}`
+    // )
   },
   GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
@@ -541,8 +537,8 @@ export const actions = {
     )
     commit('SET_SETTINGS_BY_TEMPLATE_9', response.data.body)
   },
-  async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit }, idWapi) {
-    let template = 99
+  async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit, state }, idWapi) {
+    let template = state.template ? state.template : 99
     const response = await axios.get(
       `https://api2.komercia.co/api/template/${template}/settings/${idWapi}`
     )

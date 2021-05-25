@@ -16,6 +16,7 @@
       <p class="subtitle-error">
         El enlace en el que hizo clic puede estar roto o ya no existe.
       </p>
+      <nuxt-link to="/" class="btn-error">Ir al inicio</nuxt-link>
     </div>
   </div>
 </template>
@@ -34,7 +35,7 @@ export default {
 .wrapper_error {
   display: flex;
   width: 100%;
-  background-color: var(--background_color_2);
+  background-color: white;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -42,7 +43,7 @@ export default {
 .contenedor {
   width: 100%;
   max-width: 1300px;
-  height: calc(100vh - 432px);
+  min-height: calc(100vh - 335px);
   padding: 60px 20px 60px 20px;
   display: flex;
   justify-content: center;
@@ -52,13 +53,29 @@ export default {
 .title-error {
   font-size: 30px;
   font-weight: bold;
-  color: var(--color_text);
+  color: black;
 }
 .subtitle-error {
   font-size: 18px;
-  color: var(--color_subtext);
+  color: black;
 }
 .logokomercia {
   width: 200px;
+}
+.btn-error {
+  border-radius: 5px;
+  color: black;
+  border: solid 2px black;
+  background-color: transparent;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 200ms ease-in;
+}
+.btn-error:hover {
+  color: grey;
+  border: solid 2px grey;
 }
 </style>

@@ -205,20 +205,6 @@
                 }}
               </p>
             </span>
-            <div class="cart-summary-items">
-              <p class="txt-cart-summary" style="font-weight: bold;">
-                {{ $t('cart_subtotal') }}
-              </p>
-              <p class="txt_summary_price">
-                {{
-                  totalCart
-                    | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
-                    )
-                }}
-              </p>
-            </div>
             <div class="order_total">
               <div class="order_total_domicile">
                 <p class="txt_summary_tittle" style="font-weight: bold;">
@@ -353,7 +339,30 @@
                   </p>
                   <p class="txt_summary_price">$0</p>
                 </div>
+                <div
+                  class="contet-free-delivery"
+                  v-else-if="FreeShippingCart == true"
+                >
+                  <p class="txt_summary_tittle">
+                    {{ $t('footer_tarifaPrecio') }}
+                  </p>
+                  <p class="txt_summary_price">$0</p>
+                </div>
               </div>
+            </div>
+            <div class="cart-summary-items">
+              <p class="txt-cart-summary" style="font-weight: bold;">
+                {{ $t('cart_subtotal') }}
+              </p>
+              <p class="txt_summary_price">
+                {{
+                  totalCart
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
             </div>
             <div class="line"></div>
             <div class="content-btn">
@@ -366,7 +375,8 @@
                     (totalCart +
                       (this.shipping ? this.shipping : 0) +
                       (this.shippingTarifaPrecio &&
-                      this.shippingTarifaPrecio != 'empty'
+                      this.shippingTarifaPrecio != 'empty' &&
+                      this.FreeShippingCart == false
                         ? this.shippingTarifaPrecio
                         : 0) -
                       (this.shippingDescuento &&
