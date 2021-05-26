@@ -672,8 +672,13 @@
                 href="https://www.komercia.co"
                 rel="noreferrer noopener"
                 class="btn-komercia"
-                >Komercia</a
-              >
+                ><img
+                  v-lazy="
+                    `https://res.cloudinary.com/brahyanr10/image/upload/c_scale,w_240/v1621536560/Landing-komercia-v2/37_v2dlhk.png`
+                  "
+                  class="logokomerciaBtn"
+                  alt="Logo Komercia Botón"
+              /></a>
             </div>
           </div>
         </div>
@@ -768,6 +773,9 @@ export default {
 .logokomercia {
   width: 200px;
 }
+.logokomerciaBtn {
+  width: 120px;
+}
 .title-error {
   font-size: 100px;
   font-weight: bold;
@@ -801,7 +809,7 @@ export default {
   justify-content: center;
   border-radius: 5px;
   padding: 8px 12px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: all 200ms ease-in;
@@ -811,21 +819,22 @@ export default {
   background: #4429b4;
   border: solid 2px #4429b4;
   font-size: 16px;
+  min-height: 47px;
+  max-height: 47px;
 }
 .btn-komercia:hover {
-  background: grey;
-  border: solid 2px grey;
+  background: #623bfc;
+  border: solid 2px #623bfc;
 }
 .btn-error {
-  font-size: 16px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-self: center;
   border-radius: 5px;
-  background-color: transparent;
+  background-color: white;
   padding: 8px 12px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: all 200ms ease-in;
@@ -833,6 +842,8 @@ export default {
   color: #25d366;
   border: solid 2px #25d366;
   fill: #25d366;
+  min-height: 47px;
+  max-height: 47px;
 }
 .btn-error:hover {
   color: #4429b4;
@@ -874,6 +885,7 @@ export default {
 @media (max-width: 770px) {
   .content-right {
     max-width: 320px;
+    padding: 10px 15px 50px;
   }
 }
 @media (max-width: 650px) {
@@ -886,12 +898,16 @@ export default {
   }
 }
 @media (max-width: 400px) {
-  .contenedor {
-    display: flex;
-    flex-direction: column;
-  }
   .content-right {
     max-width: 90%;
+  }
+}
+@media (max-width: 330px) {
+  .contenedor {
+    padding: 5px 10px 50px;
+  }
+  .content-right {
+    max-width: 100%;
   }
 }
 </style>
