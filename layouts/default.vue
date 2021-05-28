@@ -657,6 +657,9 @@ html {
   outline: none !important;
   /* overflow-x: hidden; */
 }
+.el-popover {
+  display: none;
+}
 .wrapper-whatsapp {
   position: fixed;
   transform: translate(108px, 0px);

@@ -6,12 +6,12 @@
       </h3>
       <div class="editor" v-if="data.info.descripcion">
         <el-tiptap
+          :readonly="true"
           v-model="data.info.descripcion"
           :extensions="extensions"
           :spellcheck="false"
-          :readonly="true"
           :charCounterCount="false"
-          :tooltip="false"
+          :tooltip="true"
           :showMenubar="false"
           :bubble="false"
         />
@@ -453,7 +453,7 @@ export default {
   flex-direction: column;
   /* margin-right: 25px; */
   padding-bottom: 10px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .left-empty {
   flex: 2;
@@ -660,6 +660,7 @@ li p {
 .editor >>> .el-popper.el-tiptap-image-popper {
   display: none;
 }
+
 @media (max-width: 810px) {
   .left {
     margin-right: 15px;
