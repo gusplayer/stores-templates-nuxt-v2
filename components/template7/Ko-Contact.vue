@@ -156,7 +156,11 @@
               ref="colorBtn"
               class="btn"
               v-on:click.prevent="submitContact"
+              v-if="stateBtn == true"
             >
+              {{ $t('contact_enviar') }}
+            </button>
+            <button ref="colorBtn" class="btn2" disabled v-else>
               {{ $t('contact_enviar') }}
             </button>
           </div>
@@ -181,6 +185,7 @@ export default {
   },
   data() {
     return {
+      stateBtn: true,
       nombre: '',
       email: '',
       numberphone: '',
@@ -245,6 +250,7 @@ export default {
         .validate()
         .then((response) => {
           if (response) {
+            this.stateBtn = false
             const json = {
               nombre: this.nombre,
               correo: this.email,
@@ -256,6 +262,7 @@ export default {
               .post('https://templates.komercia.co/api/mensaje-contacto', json)
               .then((response) => {
                 this.$message.success('Comentario enviado!')
+                this.stateBtn = true
                 if (
                   this.facebooPixel &&
                   this.facebooPixel.pixel_facebook != null
@@ -265,12 +272,19 @@ export default {
                     description: this.email,
                   })
                 }
+                this.formDatareset()
               })
           }
         })
         .catch((e) => {
           this.$message.error('error')
         })
+    },
+    formDatareset() {
+      this.nombre = ''
+      this.email = ''
+      this.numberphone = ''
+      this.comment = ''
     },
   },
   watch: {
@@ -599,13 +613,27 @@ export default {
   font-weight: bold;
   cursor: pointer;
   margin-left: 20px;
-  cursor: pointer;
   transition: all 200ms ease-in;
 }
 .btn:hover {
   color: white;
   border: solid 2px var(--hover_text);
   background-color: var(--hover_text);
+}
+.btn2 {
+  color: black;
+  border-radius: var(--radius_btn);
+  border: solid 2px grey;
+  background: grey;
+  font-family: var(--font-style-3) !important ;
+  padding: 8px 14px;
+  font-size: 16px;
+  width: 50%;
+  height: 41px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 20px;
+  transition: all 200ms ease-in;
 }
 @screen sm {
   .contact {
