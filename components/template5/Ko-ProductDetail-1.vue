@@ -254,100 +254,6 @@
                       <whatsapp-icon class="wp-icon" />
                     </button>
                   </div>
-                  <div class="content-float-info" id="sticky">
-                    <p class="text-name">{{ data.detalle.nombre }}</p>
-                    <p class="text-marca">
-                      <strong>{{ data.info.marca }}</strong>
-                    </p>
-                    <p
-                      class="text-promocion"
-                      v-show="
-                        data.info.tag_promocion == 1 &&
-                        data.info.promocion_valor &&
-                        salesData.precio
-                      "
-                    >
-                      {{
-                        (data.info.tag_promocion == 1 &&
-                        data.info.promocion_valor
-                          ? Math.trunc(
-                              salesData.precio /
-                                (1 - data.info.promocion_valor / 100)
-                            )
-                          : 0)
-                          | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
-                          )
-                      }}
-                    </p>
-                    <div
-                      class="wrapper-price"
-                      :class="
-                        data.info.tag_promocion == 1
-                          ? ''
-                          : 'wrapper-price_space'
-                      "
-                    >
-                      <p class="text-precio" v-show="salesData.precio">
-                        {{
-                          salesData.precio
-                            | currency(
-                              dataStore.tienda.codigo_pais,
-                              dataStore.tienda.moneda
-                            )
-                        }}
-                      </p>
-                      <p
-                        class="card-descuento"
-                        v-show="
-                          data.info.tag_promocion == 1 &&
-                          data.info.promocion_valor &&
-                          salesData.precio
-                        "
-                      >
-                        {{ data.info.promocion_valor }}% OFF
-                      </p>
-                    </div>
-                    <div class="content_buy_action">
-                      <div
-                        v-if="envio.titulo == 'Envío gratis'"
-                        class="content_buy_action"
-                      >
-                        <p class="card-info-2">
-                          <svg
-                            class="transporte-icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                            version="1.1"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3M5 10.5L6.5 9L8 10.5L11.5 7L13 8.5L8 13.5L5 10.5Z"
-                            /></svg
-                          >{{ $t('home_cardGratis') }}
-                        </p>
-                      </div>
-                      <div class="content_card-info">
-                        <p class="card-info-1" v-if="spent">
-                          {{ $t('home_cardAgotado') }}
-                        </p>
-                      </div>
-                    </div>
-                    <div>
-                      <button
-                        ref="colorBtn"
-                        class="btn"
-                        v-if="!spent"
-                        v-on:click="addShoppingCart"
-                      >
-                        {{ $t('productdetail_btnComprar') }}
-                      </button>
-                      <button disabled class="btn-disabled" v-if="spent">
-                        {{ $t('home_cardAgotado') }}
-                      </button>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -489,18 +395,6 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
-    window.addEventListener('scroll', function () {
-      var sticky = document.getElementById('sticky')
-      if (window.pageYOffset >= 376 && screen.width > 725 && sticky) {
-        sticky.style.display = 'flex'
-        sticky.style.position = 'fixed'
-        sticky.style.top = '88px'
-      } else {
-        sticky.style.display = 'none'
-        sticky.style.position = 'static'
-        sticky.style.top = ''
-      }
-    })
   },
   data() {
     return {
@@ -564,6 +458,7 @@ export default {
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
+    // eslint-disable-next-line vue/return-in-computed-property
     precio() {
       if (this.data.detalle.precio) {
         return `$${this.data.detalle.precio
@@ -1293,18 +1188,7 @@ i.close {
   font-size: 27px;
   bottom: 2px;
 }
-.content-float-info {
-  z-index: 3;
-  width: 100%;
-  max-width: 385px;
-  padding-top: 10px;
-  /* padding-bottom: 10px; */
-  flex-direction: column;
-  display: none;
-  background: #efefef !important;
-  transition: all 2s ease-out;
-  border-radius: 5px;
-}
+
 .whatsapp {
   fill: #27d367;
   width: 30px;
