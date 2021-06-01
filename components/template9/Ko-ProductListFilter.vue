@@ -120,7 +120,6 @@
             </div>
           </div>
           <div class="empty"></div>
-
           <button
             class="item-tittle accordion"
             v-show="showSubCategory && selectedSubcategories.length"
@@ -343,11 +342,6 @@ export default {
     if (this.previousPage) {
       this.currentPage = this.previousPage
     }
-    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('SET_STATEBANNER', false)
-    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      this.$store.commit('SET_STATEBANNER', false)
-    }
   },
   data() {
     return {
@@ -413,7 +407,6 @@ export default {
       const final = initial + 18
       return this.products.slice(initial, final)
     },
-
     selectedCategory() {
       return this.$store.state.products.payload
     },
@@ -608,7 +601,6 @@ export default {
         path: '',
         query: {},
       })
-      this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {

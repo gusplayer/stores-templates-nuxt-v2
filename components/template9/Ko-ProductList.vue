@@ -66,10 +66,7 @@ export default {
   },
   name: 'Ko-ProductList',
   mounted() {
-    let domain = this.$route.fullPath
-    if (domain === '/') {
-      this.clear()
-    }
+    this.clear()
   },
   computed: {
     listProducts() {
@@ -89,10 +86,7 @@ export default {
   watch: {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
-      let domain = this.$route.fullPath
-      if (domain === '/') {
-        this.clear()
-      }
+      this.clear()
     },
   },
 }
