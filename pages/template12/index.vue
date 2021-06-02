@@ -1,12 +1,12 @@
 <template>
   <div v-if="settingByTemplate12">
     <div class="main-wrapper bg-gray-50 overflow-hidden">
-      <i-header />
-      <i-hero-image v-bind="heroTitles" />
+      <i-header v-bind="{ componentsProps }" />
+      <i-hero-image v-bind="{ ...heroTiles, ...componentsProps }" />
       <div class="divider mt-4 mb-14" />
       <div class="main-section_container">
-        <!-- <cart :data-store="dataStore" /> -->
-        <i-main-section :data="dataFormatted" />
+        <!-- <cart :data-store="dataStore"  v-bind={componentsProps}/> -->
+        <i-main-section :data="dataFormatted" v-bind={componentsProps} />
       </div>
       <i-footer />
     </div>
@@ -37,6 +37,16 @@ export default {
     },
     settingByTemplate12() {
       return this.$store.state.settingByTemplate12
+    },
+    componentsProps() {
+      return {
+        dataStore: this.dataStore,
+        fullProducts: this.fullProducts,
+        settingGeneral:
+          this.settingByTemplate12 && this.settingByTemplate12.allSettings
+            ? this.settingByTemplate12.allSettings
+            : null,
+      }
     },
     dataFormatted() {
       return [
