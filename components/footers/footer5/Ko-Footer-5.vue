@@ -201,7 +201,7 @@ export default {
   margin-bottom: 10px;
 }
 .footer-content-items {
-  @apply flex flex-col justify-center items-center w-full mb-10 mt-40;
+  @apply flex flex-col justify-center items-center w-full mb-10 mt-20;
 }
 .footer-logo {
   max-width: var(--with_logo);

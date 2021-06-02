@@ -9,67 +9,17 @@ export const state = () => ({
       'Access-Control-Allow-Origin': '*',
     },
   },
-  isLoading: false,
   fullPathServer: '',
   authData: '',
   template: '',
-  userData: {
-    id: 0,
-  },
-  storeLayoutKey: '',
-  storeLayout: {
-    pages: [
-      {
-        name: 'Inicio',
-        active: true,
-        components: [],
-        value: 'home',
-        exception: ['products', 'carts'],
-      },
-      {
-        name: 'Productos',
-        active: true,
-        components: [],
-        value: 'products',
-        exception: ['products', 'carts', 'contacts'],
-      },
-      {
-        name: 'Detalle del producto',
-        active: true,
-        components: [],
-        value: 'product_details',
-        only: ['products'],
-      },
-      {
-        name: 'Carrito',
-        active: true,
-        components: [],
-        value: 'cart',
-        only: ['carts'],
-      },
-      {
-        name: 'Contacto',
-        active: true,
-        components: [],
-        value: 'contact',
-        only: ['contacts'],
-      },
-    ],
-  },
   productsCart: [],
-  selectedCard: 'koProductCard2',
   beforeCombination: [],
-  togglePayment: false,
   envios: {
     valores: {
       envio_metodo: 'gratis',
       valor: 0,
     },
   },
-  settingData: {},
-  tienda: {},
-  detalleProducto: {},
-  banners: [],
   cities: [],
   productsData: [],
   categorias: [],
@@ -100,7 +50,7 @@ export const state = () => ({
   token:
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI3MmU0ZDc1NmM2NDFjMGM5N2VlMTQzYjc1OTg3NDg1MDI3YzVjYzhhZDNiNTdjMTM1ZjFhNDY2MGIzMTExODMwMWIxYTcxYTk0MGRjYTcyIn0.eyJhdWQiOiIyIiwianRpIjoiMjcyZTRkNzU2YzY0MWMwYzk3ZWUxNDNiNzU5ODc0ODUwMjdjNWNjOGFkM2I1N2MxMzVmMWE0NjYwYjMxMTE4MzAxYjFhNzFhOTQwZGNhNzIiLCJpYXQiOjE1OTA1MTMyNTMsIm5iZiI6MTU5MDUxMzI1MywiZXhwIjoxNTkzMTA1MjUzLCJzdWIiOiIzNDgwIiwic2NvcGVzIjpbXX0.qbFxfGqpayFbPSXy01sygMXWq4fLTqLXpjeksrdT-Pxo9k129iWxFi3XnJ6uYh7LE6frYUMJNiETa3CWA5CJ2ebQk2UGx310sZl5H0Io1oz5KicwJUpq2OgwNLkjg0d_VcvRJTO5aT2gmnwPJbMuz_Y3OHbgFO5zCb2u1SqDSepnxEFl83iR-BKiJ7vESeZlUcHT-xR1SQQClmj4PnLhCeV5MRYFS-ui-TmImheJe8SoQLs-ly9cRTk1u-GYrLskL3yI0z9aOKi6UNXUoe4y8Ji3p8odfJk5ZinX7koXWrPqiBqp15Q2oE763gCnGPQeWE-Tz7QLJJSGeVGHe5xKawjGLRIK57MNG5QttFT5nYpwh1zQZ3jqY2v5JFM2wrLzOUOcAtvR48bFxBe-ea3NkBuLo7V0mJGjpng1rdeCPBV2NwQQTPqmgSAUrFZvX81T5cLfyNmyUVRmJnojelLoiKaaU2ASEBOGt1GFmtw5tbgeXjrFBlPzoWUCRKZyq9qdJyeKbTZbaTD7rewvGZCh9iyjt_Mey3l5-2CJE_csIInAEkFc9i07HrSFuv8pmVrfy1LEDoJwoik5pv39WlIrXtD8bc5maJ-smX8JDeAMMfFhNmjtcbWt1qDaiJYApVDSGPNe5Rw6Uu_bOWyPkKQjXPwbcOSRJT_OihlnCfe1z6M',
   accessToken: '',
-  settingsByComponent: '',
+
   properties: '',
   errorSettingsByComponent: null,
   productInfo: '',
@@ -146,24 +96,18 @@ export const state = () => ({
     '--color_text': '#1e0e62',
     '--color_subtext': 'rgba(21, 20, 57, 0.4)',
     '--color_hover_text': '#8918C8',
-
     '--color_icon': 'rgba(21, 20, 57, 0.4)',
     '--color_shopping_cart': '#4e33e6',
     '--color_border': '#929292',
-
     '--background_color_1': 'hsla(173, 0%, 100%, 1)',
     '--background_color_2': '#CFCFCF',
-
     '--color_text_btn': '#ffffff',
     '--color_border_btn': '#000000',
     '--color_background_btn': '#000000',
     '--color_background_btn_2': 'hsla(0, 0%, 0%, 1)',
-
     '--btnhover': '#e64956',
-
     '--radius_btn': '25px',
     '--logo_width': '120px',
-
     tabs: {
       1: 'Accesorios',
       2: 'Nosotros',
@@ -176,8 +120,47 @@ export const state = () => ({
     text_btn: 'Conócenos',
   },
   modalpolitics05: false,
+  /////
+  storeLayout: {
+    pages: [
+      {
+        name: 'Inicio',
+        active: true,
+        components: [],
+        value: 'home',
+        exception: ['products', 'carts'],
+      },
+      {
+        name: 'Productos',
+        active: true,
+        components: [],
+        value: 'products',
+        exception: ['products', 'carts', 'contacts'],
+      },
+      {
+        name: 'Detalle del producto',
+        active: true,
+        components: [],
+        value: 'product_details',
+        only: ['products'],
+      },
+      {
+        name: 'Carrito',
+        active: true,
+        components: [],
+        value: 'cart',
+        only: ['carts'],
+      },
+      {
+        name: 'Contacto',
+        active: true,
+        components: [],
+        value: 'contact',
+        only: ['contacts'],
+      },
+    ],
+  },
 })
-
 export const mutations = {
   SET_CURRENTSETTING09(state, value) {
     if (value) {
@@ -244,15 +227,6 @@ export const mutations = {
   SET_ACCESSTOKEN(state, value) {
     state.accessToken = value
   },
-  SET_SETTINGS_COMPONENT(state, value) {
-    state.propertiesComponent = value
-  },
-  SET_VIEWS(state, value) {
-    state.views = value
-  },
-  SET_PAGINATION(state, value) {
-    state.pagination = value
-  },
   SET_CATEGORY_PRODCUTRO(state, value) {
     state.category_producto_header = value
   },
@@ -264,15 +238,6 @@ export const mutations = {
   },
   DELETEALLITEMSCART: (state) => {
     state.productsCart = []
-  },
-  SET_SAVEOPTION: (state, payload) => {
-    state.beforeCombination.splice(payload.index, 1, payload.option.option)
-  },
-  SET_DETALLEPRODUCTO: (state, payload) => {
-    state.detalleProducto = payload
-  },
-  SET_BEFORECOMBINATION: (state) => {
-    state.beforeCombination = []
   },
   SET_OPENORDER: (state, value) => {
     state.openOrder = value
@@ -288,18 +253,6 @@ export const mutations = {
   },
   SET_OPENORDERMENULEFT: (state, value) => {
     state.openMenulateralLeft = value
-  },
-  SET_TOKEN(state, value) {
-    state.configHttp = {
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${value || process.env.TOKEN}`,
-        'Access-Control-Allow-Origin': '*',
-      },
-    }
-  },
-  SET_SHOPPING_CART(state, value) {
-    state.productsCart = value || []
   },
   SET_ARTICLES(state, value) {
     state.listArticulos = value
@@ -345,40 +298,9 @@ export const mutations = {
     )
     state.whatsapp = state.tienda.whatsapp
   },
-  SET_LOADING(state, value) {
-    state.isLoading = value
+  SET_SHOPPING_CART(state, value) {
+    state.productsCart = value || []
   },
-  GET_USERDATA(state) {
-    let headers = {
-      'content-type': 'application/json',
-      Authorization: `Bearer ${state.authData || ''}`,
-      'Access-Control-Allow-Origin': '*',
-      Accept: 'application/json',
-    }
-    axios({
-      method: 'get',
-      url: 'https://api2.komercia.co/api/user',
-      headers,
-    }).then((response) => {
-      state.userData = response.data.data
-    })
-  },
-  SET_FAVICON: (state) => {
-    const link =
-      document.querySelector("link[rel*='icon']") ||
-      document.createElement('link')
-    link.type = 'image/png'
-    link.rel = 'icon'
-    link.href = state.storeLayout.setting.faviconURL.url
-    document.getElementsByTagName('head')[0].appendChild(link)
-  },
-  // UPDATE_CONTENTCART(state) {
-  //   state.totalCart = 0
-  //   localStorage.setItem('ShoppingCart', JSON.stringify(state.productsCart))
-  //   state.productsCart.forEach((product) => {
-  //     state.totalCart += product.precio * product.cantidad
-  //   })
-  // },
   UPDATE_CONTENTCART(state) {
     state.totalCart = 0
     localStorage.setItem(
@@ -394,13 +316,6 @@ export const mutations = {
     state.productsCart.forEach((product) => {
       state.totalCart += product.precio * product.cantidad
     })
-  },
-  LOGOUT() {
-    window.location.href = 'https://perfil.komercia.co/logout'
-  },
-  SELECT_CARD(state, value) {
-    state.selectedCard = value
-    // state.storeLayout.setting.card = value
   },
   SET_CITIES: (state, payload) => {
     state.cities = payload
@@ -423,26 +338,80 @@ export const mutations = {
   DATA: (state, response) => {
     state.dataStore = response.data
   },
-  STOREDB: (state, { storeLayout, producto }) => {
-    state.storeLayout = storeLayout.data
-    state.detalleProducto = producto.data.detalle
-  },
-  SET_SETTINGS_BY_COMPONENT: (state, value) => {
-    state.settingsByComponent = value
-  },
-  SET_PROPERTIES: (state, value) => {
-    state.properties = value
-  },
-  SET_PRODUCT_INFO: (state, value) => {
-    state.productInfo = value
-  },
   SET_SERVER_PATH(state, value) {
     state.fullPathServer = value
   },
   SET_TEMPLATE_STORE(state, value) {
     state.template = value
-    // state.template = 7
   },
+  /////////
+  LOGOUT() {
+    window.location.href = 'https://perfil.komercia.co/logout'
+  },
+  GET_USERDATA(state) {
+    let headers = {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${state.authData || ''}`,
+      'Access-Control-Allow-Origin': '*',
+      Accept: 'application/json',
+    }
+    axios({
+      method: 'get',
+      url: 'https://api2.komercia.co/api/user',
+      headers,
+    }).then((response) => {
+      state.userData = response.data.data
+    })
+  },
+  SET_TOKEN(state, value) {
+    state.configHttp = {
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${value || process.env.TOKEN}`,
+        'Access-Control-Allow-Origin': '*',
+      },
+    }
+  },
+  SET_BEFORECOMBINATION: (state) => {
+    state.beforeCombination = []
+  },
+  SET_SAVEOPTION: (state, payload) => {
+    state.beforeCombination.splice(payload.index, 1, payload.option.option)
+  },
+  // STOREDB: (state, { storeLayout, producto }) => {
+  //   state.storeLayout = storeLayout.data
+  //   state.detalleProducto = producto.data.detalle
+  // },
+  // SET_FAVICON: (state) => {
+  //   const link =
+  //     document.querySelector("link[rel*='icon']") ||
+  //     document.createElement('link')
+  //   link.type = 'image/png'
+  //   link.rel = 'icon'
+  //   link.href = state.storeLayout.setting.faviconURL.url
+  //   document.getElementsByTagName('head')[0].appendChild(link)
+  // },
+  // SET_SETTINGS_COMPONENT(state, value) {
+  //   state.propertiesComponent = value
+  // },
+  // SET_VIEWS(state, value) {
+  //   state.views = value
+  // },
+  // SET_PAGINATION(state, value) {
+  //   state.pagination = value
+  // },
+  // SET_DETALLEPRODUCTO: (state, payload) => {
+  //   state.detalleProducto = payload
+  // },
+  // SET_SETTINGS_BY_COMPONENT: (state, value) => {
+  //   state.settingsByComponent = value
+  // },
+  // SET_PROPERTIES: (state, value) => {
+  //   state.properties = value
+  // },
+  // SET_PRODUCT_INFO: (state, value) => {
+  //   state.productInfo = value
+  // },
 }
 export const actions = {
   // GET_LOGIN({ state, commit, dispatch }) {
@@ -499,26 +468,31 @@ export const actions = {
       await dispatch('GET_ANALYTICS_TAGMANAGER', idWapi)
       await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
     } else {
-      await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
-      await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
-      await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
-      await dispatch('GET_ARTICLES', id.data.data.id)
-      if (id.data.data.template == 7) {
-        if (state.dataStore && state.dataStore.tienda) {
-          await dispatch('GET_SETTINGS_BY_TEMPLATE_7', state.dataStore.tienda)
-        }
-      } else if (id.data.data.template == 9) {
-        if (state.dataStore && state.dataStore.tienda) {
-          await dispatch('GET_SETTINGS_BY_TEMPLATE_9', state.dataStore.tienda)
+      if (id && id.data.data && id.data.data.id) {
+        await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
+        await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
+        await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
+        await dispatch('GET_ARTICLES', id.data.data.id)
+        if (id.data.data.template == 7) {
+          if (state.dataStore && state.dataStore.tienda) {
+            await dispatch('GET_SETTINGS_BY_TEMPLATE_7', state.dataStore.tienda)
+          }
+        } else if (id.data.data.template == 9) {
+          if (state.dataStore && state.dataStore.tienda) {
+            await dispatch('GET_SETTINGS_BY_TEMPLATE_9', state.dataStore.tienda)
+          }
         }
       }
     }
-    await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
-    await dispatch('GET_SERVER_PATH', full)
-    const idSlug = route.path.split('-')
-    const producto = await axios.get(
-      `https://templates.komercia.co/api/producto/${idSlug.pop()}`
-    )
+    if (state.dataStore) {
+      await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
+      // await dispatch('GET_DATAVALIENTA')
+      await dispatch('GET_SERVER_PATH', full)
+    }
+    // const idSlug = route.path.split('-')
+    // const producto = await axios.get(
+    //   `https://templates.komercia.co/api/producto/${idSlug.pop()}`
+    // )
   },
   GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
@@ -532,7 +506,6 @@ export const actions = {
     )
     commit('DATA', response.data)
     commit('SET_DATA')
-    // console.log(response.data)
   },
   GET_DATA({ commit }) {
     commit('SET_DATA')
@@ -564,8 +537,8 @@ export const actions = {
     )
     commit('SET_SETTINGS_BY_TEMPLATE_9', response.data.body)
   },
-  async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit }, idWapi) {
-    let template = 99
+  async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit, state }, idWapi) {
+    let template = state.template ? state.template : 99
     const response = await axios.get(
       `https://api2.komercia.co/api/template/${template}/settings/${idWapi}`
     )
@@ -613,144 +586,150 @@ export const actions = {
     )
     commit('SET_ARTICLES', response.data.blogs.data)
   },
-  GET_STORELAYOUT({ commit, state }) {
-    if (process.client) {
-      const link = document.createElement('link')
-      link.href = `https://fonts.googleapis.com/css?family=${state.storeLayout.setting.font}`
-      link.rel = 'stylesheet'
-      document.getElementsByTagName('head')[0].appendChild(link)
-      document.documentElement.style.fontFamily = state.storeLayout.setting.font
-      state.storeLayout.setting.colors.forEach((color) => {
-        document.documentElement.style.setProperty(color.var, color.hex)
-      })
-      document.documentElement.style.setProperty(
-        '--opacity',
-        state.storeLayout.setting.colors[2].hex + '20'
-      )
-      commit('SET_FAVICON')
-    }
-  },
-  GET_SETTINGS_COMPONENT({ state, commit }, value) {
-    axios
-      .get(
-        `${state.urlComponents}/api/components/settings/reference/${value}`,
-        {
-          headers: {
-            Authorization: `Bearer ${state.accessToken}`,
-          },
-        }
-      )
-      .then((response) => {
-        commit('SET_SETTINGS_COMPONENT', response.data.data)
-        state.baseComponents = response.data.data
-        if (state.baseComponents.settings_base.length) {
-          if (state.baseComponents.component_type_id == 2) {
-            state.SettingsValues = []
-            let components = JSON.parse(
-              state.baseComponents.settings_base[0].valores
-            )
-            state.SettingsValues.push({ ...components })
-          } else {
-            let components = JSON.parse(
-              state.baseComponents.settings_base[0].valores
-            )
-            state.SettingsValues = components
-          }
-        } else {
-          alert('No tiene settings')
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  },
-  GET_VIEWS({ state, commit }) {
-    axios
-      .get(`${state.urlComponents}/api/views`, {
-        headers: {
-          Authorization: `Bearer ${state.accessToken}`,
-        },
-      })
-      .then((response) => {
-        commit('SET_VIEWS', response.data.data)
-      })
-  },
-  GET_PAGINATION({ state, commit }, value) {
-    state.pagination = value
-    commit('SET_PAGINATION', state.pagination)
-  },
-  GET_SETTINGS_BY_COMPONENT({ state, commit }, id) {
-    return axios
-      .get(`${state.urlComponents}/api/components/type/${id}/settings`, {
-        headers: {
-          'content-type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-      })
-      .then((response) => {
-        commit('SET_SETTINGS_BY_COMPONENT', response.data.data)
-      })
-      .catch((e) => {
-        state.errorSettingsByComponent = e.response.data.mensaje
-        commit('SET_SETTINGS_BY_COMPONENT', '')
-      })
-  },
-  GET_PROPERTIES({ state, commit }) {
-    axios
-      .get(`${state.urlComponents}/api/components/properties/all`, {
-        headers: {
-          'content-type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-      })
-      .then((response) => {
-        commit('SET_PROPERTIES', response.data.data)
-      })
-  },
-
-  GET_PRODUCT_INFO({ state, commit }, id) {
-    axios
-      .get(`${state.urlTemplate}/api/producto/${id}`, {
-        headers: {
-          'content-type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-      })
-      .then((response) => {
-        commit('SET_PRODUCT_INFO', response.data)
-      })
-  },
+  // async GET_DATAVALIENTA({ state, commit }) {
+  //   const response = await axios.get(
+  //     `https://gateway-service-api.prod.valienta.co/company-service-api/store/product`
+  //   )
+  //   console.log(response.data)
+  //   // commit('SET_DATAVALIENTA', response.data.blogs.data)
+  // },
+  // GET_STORELAYOUT({ commit, state }) {
+  //   if (process.client) {
+  //     const link = document.createElement('link')
+  //     link.href = `https://fonts.googleapis.com/css?family=${state.storeLayout.setting.font}`
+  //     link.rel = 'stylesheet'
+  //     document.getElementsByTagName('head')[0].appendChild(link)
+  //     document.documentElement.style.fontFamily = state.storeLayout.setting.font
+  //     state.storeLayout.setting.colors.forEach((color) => {
+  //       document.documentElement.style.setProperty(color.var, color.hex)
+  //     })
+  //     document.documentElement.style.setProperty(
+  //       '--opacity',
+  //       state.storeLayout.setting.colors[2].hex + '20'
+  //     )
+  //     commit('SET_FAVICON')
+  //   }
+  // },
+  // GET_SETTINGS_COMPONENT({ state, commit }, value) {
+  //   axios
+  //     .get(
+  //       `${state.urlComponents}/api/components/settings/reference/${value}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${state.accessToken}`,
+  //         },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       commit('SET_SETTINGS_COMPONENT', response.data.data)
+  //       state.baseComponents = response.data.data
+  //       if (state.baseComponents.settings_base.length) {
+  //         if (state.baseComponents.component_type_id == 2) {
+  //           state.SettingsValues = []
+  //           let components = JSON.parse(
+  //             state.baseComponents.settings_base[0].valores
+  //           )
+  //           state.SettingsValues.push({ ...components })
+  //         } else {
+  //           let components = JSON.parse(
+  //             state.baseComponents.settings_base[0].valores
+  //           )
+  //           state.SettingsValues = components
+  //         }
+  //       } else {
+  //         alert('No tiene settings')
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // },
+  // GET_VIEWS({ state, commit }) {
+  //   axios
+  //     .get(`${state.urlComponents}/api/views`, {
+  //       headers: {
+  //         Authorization: `Bearer ${state.accessToken}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       commit('SET_VIEWS', response.data.data)
+  //     })
+  // },
+  // GET_PAGINATION({ state, commit }, value) {
+  //   state.pagination = value
+  //   commit('SET_PAGINATION', state.pagination)
+  // },
+  // GET_SETTINGS_BY_COMPONENT({ state, commit }, id) {
+  //   return axios
+  //     .get(`${state.urlComponents}/api/components/type/${id}/settings`, {
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         'Access-Control-Allow-Origin': '*',
+  //       },
+  //     })
+  //     .then((response) => {
+  //       commit('SET_SETTINGS_BY_COMPONENT', response.data.data)
+  //     })
+  //     .catch((e) => {
+  //       state.errorSettingsByComponent = e.response.data.mensaje
+  //       commit('SET_SETTINGS_BY_COMPONENT', '')
+  //     })
+  // },
+  // GET_PROPERTIES({ state, commit }) {
+  //   axios
+  //     .get(`${state.urlComponents}/api/components/properties/all`, {
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         'Access-Control-Allow-Origin': '*',
+  //       },
+  //     })
+  //     .then((response) => {
+  //       commit('SET_PROPERTIES', response.data.data)
+  //     })
+  // },
+  // GET_PRODUCT_INFO({ state, commit }, id) {
+  //   axios
+  //     .get(`${state.urlTemplate}/api/producto/${id}`, {
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         'Access-Control-Allow-Origin': '*',
+  //       },
+  //     })
+  //     .then((response) => {
+  //       commit('SET_PRODUCT_INFO', response.data)
+  //     })
+  // },
 }
 export const getters = {
-  getSettingsCSS: (state, getters) => {
-    if (state.SettingsValues.length) {
-      state.valuesCSS = []
-      state.SettingsValues.map((item) => {
-        state.valuesCSS.push(getters.setSettingsCSS({ ...item }))
-      })
-      return state.valuesCSS
-      // return getters.setSettingsCSS(state.valuesCSS)
-    }
-    // state.valuesCSS = {}
-    state.valuesCSS = { ...state.SettingsValues }
-    return getters.setSettingsCSS(state.valuesCSS)
-  },
-  setSettingsCSS: () => (obj) => {
-    let keys = Object.keys(obj)
-    if (obj) {
-      keys.map((key) => {
-        if (key !== `--${key}`) {
-          Object.defineProperty(
-            obj,
-            `--${key}`,
-            Object.getOwnPropertyDescriptor(obj, key)
-          )
-          delete obj[key]
-        }
-      })
-      return obj
-    } else {
-      return 'Objecto invalido'
-    }
-  },
+  // getSettingsCSS: (state, getters) => {
+  //   if (state.SettingsValues.length) {
+  //     state.valuesCSS = []
+  //     state.SettingsValues.map((item) => {
+  //       state.valuesCSS.push(getters.setSettingsCSS({ ...item }))
+  //     })
+  //     return state.valuesCSS
+  //     // return getters.setSettingsCSS(state.valuesCSS)
+  //   }
+  //   // state.valuesCSS = {}
+  //   state.valuesCSS = { ...state.SettingsValues }
+  //   return getters.setSettingsCSS(state.valuesCSS)
+  // },
+  // setSettingsCSS: () => (obj) => {
+  //   let keys = Object.keys(obj)
+  //   if (obj) {
+  //     keys.map((key) => {
+  //       if (key !== `--${key}`) {
+  //         Object.defineProperty(
+  //           obj,
+  //           `--${key}`,
+  //           Object.getOwnPropertyDescriptor(obj, key)
+  //         )
+  //         delete obj[key]
+  //       }
+  //     })
+  //     return obj
+  //   } else {
+  //     return 'Objecto invalido'
+  //   }
+  // },
 }

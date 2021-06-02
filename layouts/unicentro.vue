@@ -90,6 +90,14 @@ export default {
     if (this.$nuxt.$data.layoutName == 'unicentro') {
       this.$store.commit('SET_LAYOUTUNICENTRO', true)
     }
+    if (
+      this.analytics_tagmanager &&
+      this.analytics_tagmanager.pixel_facebook != null
+    ) {
+      window.fbq('track', 'PageView', {
+        description: 'StoreKomercia',
+      })
+    }
   },
   head() {
     let tipo_letra

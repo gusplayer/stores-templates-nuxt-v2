@@ -150,7 +150,7 @@ export default {
 }
 .tittle {
   /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-1) !important;
   color: var(--color_title);
   font-weight: 700;
   @apply flex flex-col justify-center items-center;

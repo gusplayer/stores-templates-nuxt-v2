@@ -23,7 +23,7 @@
           :href="`${settingKPromo.values[0].url_redirect}`"
           rel="noreferrer noopener"
         >
-          <figure class="promo-banner-images">
+          <figure class="promo-banner-images content-1">
             <img
               id="images-1"
               :src="settingKPromo.values[0].url_img"
@@ -55,7 +55,7 @@
             :href="`${settingKPromo.values[1].url_redirect}`"
             rel="noreferrer noopener"
           >
-            <figure class="promo-banner-images">
+            <figure class="promo-banner-images content-2">
               <img
                 id="images-2"
                 class="images"
@@ -82,7 +82,7 @@
             :href="`${settingKPromo.values[2].url_redirect}`"
             rel="noreferrer noopener"
           >
-            <figure class="promo-banner-images">
+            <figure class="promo-banner-images content-2">
               <img
                 id="images-3"
                 class="images"
@@ -110,7 +110,10 @@
           :href="`${settingKPromo.values[3].url_redirect}`"
           rel="noreferrer noopener"
         >
-          <figure class="promo-banner-images" id="promo-banner-images-4">
+          <figure
+            class="promo-banner-images content-4"
+            id="promo-banner-images-4"
+          >
             <img
               id="images-4"
               class="images"
@@ -119,7 +122,7 @@
               :src="settingKPromo.values[3].url_img"
               alt="right-banner"
             />
-            <div class="promo-banner-text" id="promo-banner-text-4">
+            <div class="promo-banner-text text4" id="promo-banner-text-4">
               <p class="promo-banner-tittle" id="promo-banner-tittle-4">
                 {{ settingKPromo.values[3].tittle }}
               </p>
@@ -154,7 +157,7 @@ export default {
 <style scoped>
 .promo-banner-content {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center pt-40;
+  @apply w-full flex flex-col justify-center items-center pt-20 pb-20;
 }
 .separador-blog {
   padding-top: 100px;
@@ -168,6 +171,18 @@ export default {
 figure {
   @apply overflow-hidden m-0 p-0;
 }
+.content-1 {
+  max-width: 495px;
+  max-height: 480px;
+}
+.content-2 {
+  max-width: 384px;
+  max-height: 230px;
+}
+.content-4 {
+  max-width: 283px;
+  max-height: 480px;
+}
 .promo-banner-items figure img {
   -webkit-transform: scale(1);
   transform: scale(1);
@@ -180,6 +195,9 @@ figure {
 }
 .promo-banner-images {
   @apply flex justify-center items-center;
+}
+.text4 {
+  max-width: 170px;
 }
 .promo-banner-text {
   @apply absolute flex flex-col;
@@ -210,7 +228,6 @@ figure {
   background: var(--hover_text);
   transition: all 0.2s ease-out;
 }
-
 #promo-banner-text-1,
 #promo-banner-text-4 {
   @apply flex justify-center items-center;
@@ -364,8 +381,6 @@ figure {
   #promo-banner-tittle-4 {
     line-height: 34px;
     font-size: 24px;
-    width: 130px;
-    max-width: 130px;
     height: auto;
     max-height: 100px;
   }
@@ -474,8 +489,6 @@ figure {
   #promo-banner-tittle-4 {
     line-height: 34px;
     font-size: 24px;
-    width: 170px;
-    max-width: 170px;
   }
   #promo-banner-subtittle-4 {
     width: 170px;
@@ -531,7 +544,6 @@ figure {
     padding-left: 110px;
   }
 }
-
 @media (min-width: 1192px) {
   .promo-banner-items {
     width: 1192px;

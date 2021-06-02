@@ -157,22 +157,17 @@ export default {
     let searchSubCategory = domain.slice(0, [14])
     let search = domain.slice(0, [9])
     if (domain == '/') {
-      this.$store.commit('SET_STATEBANNER', true)
       this.showSearch = true
     } else if (searchCategory === '/?category=') {
-      this.$store.commit('SET_STATEBANNER', false)
       this.showSearch = true
     } else if (searchSubCategory === '/?subcategory=') {
-      this.$store.commit('SET_STATEBANNER', false)
       this.showSearch = true
     } else if (search === '/?search=') {
-      this.$store.commit('SET_STATEBANNER', false)
       this.setSearch(domain)
       this.showSearch = true
     } else {
       this.showSearch = false
     }
-
     window.addEventListener('scroll', function () {
       var navbar = document.getElementById('navbar')
       if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
@@ -238,7 +233,6 @@ export default {
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', true)
     },
     Searchproduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
@@ -274,16 +268,12 @@ export default {
       let searchSubCategory = domain.slice(0, [14])
       let search = domain.slice(0, [9])
       if (domain == '/') {
-        this.$store.commit('SET_STATEBANNER', true)
         this.showSearch = true
       } else if (searchCategory === '/?category=') {
-        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
       } else if (searchSubCategory === '/?subcategory=') {
-        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
       } else if (search === '/?search=') {
-        this.$store.commit('SET_STATEBANNER', false)
         this.setSearch(domain)
         this.showSearch = true
       } else {

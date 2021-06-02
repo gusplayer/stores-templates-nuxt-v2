@@ -9,28 +9,39 @@
         : this.settingBase
     "
   >
-    <div class="space-search"></div>
-    <div class="search-movil" id="navbar">
-      <form id="demo-1" style="width: 100%; position: relative;">
-        <search-icon class="icon-s" />
-        <input
-          v-model="search"
-          type="search"
-          :placeholder="$t('header_search')"
-          @keyup.enter="getSearch(search)"
-          id="SearchIndex5"
-        />
-      </form>
+    <div
+      :style="{
+        '--font-style':
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto',
+      }"
+    >
+      <div class="space-search"></div>
+      <div class="search-movil" id="navbar">
+        <form id="demo-1" style="width: 100%; position: relative;">
+          <search-icon class="icon-s" />
+          <input
+            v-model="search"
+            type="search"
+            :placeholder="$t('header_search')"
+            @keyup.enter="getSearch(search)"
+            id="SearchIndex5"
+          />
+        </form>
+      </div>
+      <kBanner v-if="this.stateBanner"></kBanner>
+      <KComponent360 v-if="this.stateBanner" />
+      <KProductFavoritos v-if="this.stateBanner" />
+      <KProductList
+        :dataStore="dataStore"
+        :fullProducts="fullProducts"
+      ></KProductList>
+      <kBannerFooter />
+      <KNewsletter :dataStore="dataStore" />
     </div>
-    <kBanner v-if="this.stateBanner"></kBanner>
-    <KComponent360 v-if="this.stateBanner" />
-    <KProductFavoritos v-if="this.stateBanner" />
-    <KProductList
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
-    ></KProductList>
-    <kBannerFooter />
-    <KNewsletter :dataStore="dataStore" />
   </div>
 </template>
 
@@ -192,12 +203,12 @@ input::-webkit-input-placeholder {
     width: 100%;
     display: flex;
     position: fixed;
-    padding: 2px 5px 0px;
+    padding: 8px 5px 0px;
     background: var(--background_color_1);
     -webkit-transition: all 0.8s;
     -moz-transition: all 0.8s;
     transition: all 0.8s;
-    top: 91px;
+    top: 88px;
     z-index: 3;
   }
 }

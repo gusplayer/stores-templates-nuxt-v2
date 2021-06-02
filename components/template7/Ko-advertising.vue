@@ -24,11 +24,13 @@
     >
       <div class="advertising-items">
         <div class="advertising-border">
-          <img
-            class="max-w-auto"
-            :src="settingKAdvertising.ur_img_card"
-            alt="icon"
-          />
+          <div class="wrapper-img">
+            <img
+              class="max-w-auto"
+              :src="settingKAdvertising.ur_img_card"
+              alt="icon"
+            />
+          </div>
           <div class="advertising-text">
             <span class="tittle">{{ settingKAdvertising.title }}</span>
             <div class="subtittles-items">
@@ -104,6 +106,10 @@ export default {
   @apply flex justify-center items-center bg-cover z-auto;
   padding-top: 66px;
   padding-bottom: 66px;
+}
+.wrapper-img {
+  max-width: 160px;
+  max-height: 80px;
 }
 .advertising-items {
   background: var(--background_color_1_card);

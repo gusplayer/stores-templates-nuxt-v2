@@ -140,6 +140,6 @@ export default {
   bottom: 0.125em;
 }
 .btn-icon:hover {
-  color: var(--color_text);
+  color: grey;
 }
 </style>

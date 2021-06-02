@@ -1,70 +1,56 @@
 <template>
-  <div class="wrapper-productlist">
-    <div class="container-productlist">
-      <div class="content-items-categorias">
-        <div class="content-items-categorias-text">
-          <p class="text-categorias" @click="clear">
-            {{ $t('home_catalogo') }}
-          </p>
-          <p
-            class="text-categorias-select"
-            v-if="this.nameCategoryHeader"
-            @click="breadcrumbsSendCategory(nameCategoryHeader)"
-          >
-            > {{ this.nameCategoryHeader }}
-          </p>
-          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            > {{ this.nameSubCategoryHeader }}
-          </p>
-        </div>
+  <div class="content-productoList">
+    <div class="content-item-productList">
+      <div class="content-categories">
+        <p class="txt-catalogo">
+          {{ $t('home_catalogo') }}
+        </p>
+        <p class="txt-category" v-if="this.nameCategoryHeader">
+          {{ this.nameCategoryHeader }}
+        </p>
       </div>
-      <div>
-        <div class="content-item-productos">
-          <div class="grid-products">
-            <div
-              v-for="product in filterProduct"
-              :key="product.id"
-              class="content-products"
-            >
-              <KoProductCard1
-                :product="product"
-                :dataStore="dataStore"
-              ></KoProductCard1>
-            </div>
-          </div>
+      <div class="content-items-product">
+        <div class="content-grid-product">
           <div
-            v-if="(this.fullProducts.length == 0)"
-            class="content-products-empty"
+            class="card-product"
+            v-for="product in filterProduct"
+            :key="product.id"
           >
-            <p>{{ $t('home_msgCatalogo') }}</p>
+            <ProductCard
+              :product="product"
+              :dataStore="dataStore"
+            ></ProductCard>
           </div>
-          <br />
-          <div class="pagination-medium" v-if="products.length > 16">
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              :total="products.length"
-              :page-size="16"
-              :current-page.sync="currentPage"
-            ></el-pagination>
-          </div>
+        </div>
+        <div
+          v-if="this.fullProducts.length == 0"
+          class="content-products-empty"
+        >
+          <p>{{ $t('home_msgCatalogo') }}</p>
+        </div>
+        <br />
+        <div class="pagination-content" v-if="products.length > 16">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="products.length"
+            :page-size="18"
+            :current-page.sync="currentPage"
+          ></el-pagination>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-import KoProductCard1 from './_productcard/Ko-ProductCard-1'
+import ProductCard from '../template2/productCard/ko-productCard'
 export default {
-  components: {
-    KoProductCard1,
-  },
+  name: 'ProductListWa',
   props: {
     dataStore: Object,
     fullProducts: {},
   },
-  name: 'Ko-ProductList-1',
+  components: { ProductCard },
   mounted() {
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
@@ -124,15 +110,15 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 18 - 18
+      const final = initial + 18
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 18 - 18
+      const final = initial + 18
       return this.products.slice(initial, final)
     },
     selectedCategory() {
@@ -296,160 +282,95 @@ export default {
   },
 }
 </script>
-
 <style scoped>
-.wrapper-productlist {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f8f9fb;
-  box-sizing: border-box;
-  margin-top: 0px;
-  padding-top: 5px;
+.content-productoList {
+  @apply w-full flex flex-col justify-center items-center;
 }
-.container-productlist {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 0px 20px 30px 20px;
-  flex-direction: column;
-}
-.content-items-categorias {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  height: 40px;
-}
-.content-items-categorias-text {
-  display: flex;
-  flex-direction: row;
-}
-.text-categorias {
-  background: transparent;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.4;
-  cursor: pointer;
-  color: #4c4c4c;
-  display: flex;
-}
-.text-categorias-select {
-  background: transparent;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: rgb(46, 46, 46);
-  align-self: flex-end;
-  margin-right: 2px;
-  margin-left: 5px;
-  cursor: pointer;
-  opacity: 0.6;
-  display: flex;
-}
-.content-item-productos {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.grid-products {
-  width: 100%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(250px, 2fr));
-  grid-gap: 15px;
-  box-sizing: border-box;
-}
-.content-products {
-  width: 100%;
-  border-radius: 10px;
-}
-.content-products:hover,
-.content-products:focus {
-  box-shadow: -6px -6px 10px var(--background_color_2),
-    6px 6px 10px rgba(0, 0, 0, 0.267);
-}
-.content-products-empty {
-  width: 100%;
-  min-height: 380px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0px 20px;
-}
-.content-products-empty p {
-  font-size: 18px;
-  opacity: 0.6;
-  font-weight: bold;
-  color: black;
-}
-.pagination-medium {
-  margin-top: 10px;
-}
-.pagination-medium >>> .el-pagination.is-background .btn-next {
-  color: black;
-  background-color: transparent;
-}
-.pagination-medium >>> .el-pagination.is-background .btn-prev {
-  color: black;
-  background-color: transparent;
-}
-.pagination-medium >>> .el-pagination.is-background .el-pager li {
-  color: black;
-  background-color: transparent;
-}
-.pagination-medium >>> .el-pagination.is-background .btn-next:hover {
-  color: black;
-}
-.pagination-medium >>> .el-pagination.is-background .btn-prev:hover {
-  color: black;
-}
-.pagination-medium
-  >>> .el-pagination.is-background
-  .el-pager
-  li:not(.disabled):hover {
-  color: black;
-}
-.pagination-medium
-  >>> .el-pagination.is-background
-  .el-pager
-  li:not(.disabled).active {
-  background-color: black;
-  color: white;
-}
-@media (max-width: 770px) {
-  .container {
-    padding: 0px 0px 10px 0px;
+@screen sm {
+  .content-item-productList {
+    @apply w-9/0 flex flex-col justify-center items-center;
   }
-  .content-item-productos {
-    padding: 0px;
+  .content-categories {
+    @apply w-full flex flex-row justify-between items-center mb-10;
   }
-  .text-categorias {
-    padding: 0 0px;
+  .txt-catalogo {
+    color: #3d3d3d;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif !important;
+    @apply w-full flex justify-start items-center font-semibold;
+  }
+  .txt-category {
+    color: #818181;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif !important;
+    @apply w-full flex justify-end items-center font-semibold;
+  }
+  .content-items-product {
+    @apply w-full flex flex-col justify-center items-center;
+  }
+  .content-grid-product {
+    @apply w-full h-full grid grid-cols-2 gap-4 justify-center items-start;
+  }
+  .card-product {
+    @apply w-full h-full flex flex-col justify-start items-center;
+  }
+  .content-products-empty {
+    padding: 0px 20px;
+    min-height: 380px;
+    @apply w-full flex justify-center items-center text-center;
+  }
+  .content-products-empty p {
+    font-size: 18px;
+    opacity: 0.6;
+    font-weight: bold;
+    color: black;
+  }
+  .pagination-content {
+    @apply w-full mt-10 mb-40 overflow-x-auto;
+  }
+  .pagination-content::-webkit-scrollbar {
+    @apply hidden;
+  }
+  .pagination-medium >>> .el-pagination.is-background .btn-next {
+    color: black;
+    background-color: transparent;
+  }
+  .pagination-medium >>> .el-pagination.is-background .btn-prev {
+    color: black;
+    background-color: transparent;
+  }
+  .pagination-medium >>> .el-pagination.is-background .el-pager li {
+    color: black;
+    background-color: transparent;
+  }
+  .pagination-medium >>> .el-pagination.is-background .btn-next:hover {
+    color: black;
+  }
+  .pagination-medium >>> .el-pagination.is-background .btn-prev:hover {
+    color: black;
+  }
+  .pagination-medium
+    >>> .el-pagination.is-background
+    .el-pager
+    li:not(.disabled):hover {
+    color: black;
+  }
+  .pagination-medium
+    >>> .el-pagination.is-background
+    .el-pager
+    li:not(.disabled).active {
+    background-color: black;
+    color: white;
   }
 }
-@media (max-width: 700px) {
-  .content-items-categorias {
-    /* margin-left: 10px; */
-    margin-bottom: 10px;
-  }
-  .grid-products {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
-    grid-gap: 20px;
+@media (min-width: 430px) {
+  .pagination-content {
+    @apply w-full flex justify-center items-center;
   }
 }
-@media (max-width: 555px) {
-  .grid-products {
-    grid-template-columns: repeat(1, minmax(250px, 2fr));
-  }
-}
-@media (max-width: 450px) {
-  .content-item-productos {
-    padding: 0px 0px 20px;
+@media (min-width: 768px) {
+  .content-grid-product {
+    @apply grid grid-cols-3 gap-6;
   }
 }
 </style>

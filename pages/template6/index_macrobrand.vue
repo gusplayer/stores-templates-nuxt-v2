@@ -8,28 +8,39 @@
         : this.settingBase
     "
   >
-    <div class="space-search"></div>
-    <div class="search-movil" id="navbar">
-      <form id="demo-1" style="width: 100%; position: relative;">
-        <search-icon class="icon-s" />
-        <input
-          v-model="search"
-          type="search"
-          :placeholder="$t('header_search')"
-          @keyup.enter="getSearch(search)"
-          id="SearchIndexTemplate"
-        />
-      </form>
+    <div
+      :style="{
+        '--font-style':
+          this.settingByTemplate &&
+          this.settingByTemplate.settings &&
+          this.settingByTemplate.settings.tipo_letra
+            ? this.settingByTemplate.settings.tipo_letra
+            : 'Roboto',
+      }"
+    >
+      <div class="space-search"></div>
+      <div class="search-movil" id="navbar">
+        <form id="demo-1" style="width: 100%; position: relative;">
+          <search-icon class="icon-s" />
+          <input
+            v-model="search"
+            type="search"
+            :placeholder="$t('header_search')"
+            @keyup.enter="getSearch(search)"
+            id="SearchIndexTemplate"
+          />
+        </form>
+      </div>
+      <kBanner v-if="this.stateBanner" />
+      <kBannerMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
+      <KProductFavoritos v-if="this.stateBanner" />
+      <KProductList
+        :dataStore="dataStore"
+        :fullProducts="fullProducts"
+      ></KProductList>
+      <kContentMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
+      <kBannerFooter />
     </div>
-    <kBanner v-if="this.stateBanner" />
-    <kBannerMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
-    <KProductFavoritos v-if="this.stateBanner" />
-    <KProductList
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
-    ></KProductList>
-    <kContentMacrobrand v-if="dataStore.tienda.id_tienda == 1100" />
-    <kBannerFooter />
   </div>
 </template>
 
@@ -74,6 +85,9 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -180,12 +194,12 @@ input::-webkit-input-placeholder {
     width: 100%;
     display: flex;
     position: fixed;
-    padding: 2px 5px 0px;
+    padding: 8px 5px 0px;
     background: var(--background_color_1);
     -webkit-transition: all 0.8s;
     -moz-transition: all 0.8s;
     transition: all 0.8s;
-    top: 91px;
+    top: 88px;
     z-index: 3;
   }
 }

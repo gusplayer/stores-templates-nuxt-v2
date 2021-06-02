@@ -61,6 +61,14 @@ export default {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
+    if (
+      this.analytics_tagmanager &&
+      this.analytics_tagmanager.pixel_facebook != null
+    ) {
+      window.fbq('track', 'PageView', {
+        description: 'StoreKomerciaValienta',
+      })
+    }
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
@@ -195,6 +203,9 @@ export default {
   computed: {
     dataStore() {
       return this.$store.state.dataStore
+    },
+    analytics_tagmanager() {
+      return this.$store.state.analytics_tagmanager
     },
   },
   methods: {

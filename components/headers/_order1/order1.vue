@@ -3,7 +3,7 @@
     <div class="order" @click="closeOrder" v-show="openOrder">
       <div class="order_content">
         <div class="order_header">
-          <h3>{{ $t('footer_title') }}</h3>
+          <h3>{{ $t('footer_title') }} ({{ cantidadProductos }})</h3>
           <div class="order_header_close" @click="closedOder">
             <div class="leftright"></div>
             <div class="rightleft"></div>
@@ -262,7 +262,8 @@
                         (totalCart +
                           (this.shipping ? this.shipping : 0) +
                           (this.shippingTarifaPrecio &&
-                          this.shippingTarifaPrecio != 'empty'
+                          this.shippingTarifaPrecio != 'empty' &&
+                          this.FreeShippingCart == false
                             ? this.shippingTarifaPrecio
                             : 0) -
                           (this.shippingDescuento &&
@@ -331,13 +332,28 @@
                 >
                   {{ $t('footer_tiendaCerrada') }}
                 </p>
+                <p
+                  class="Quotation-message"
+                  v-if="!IsMinValorTotal() && productsCart.length"
+                >
+                  La tienda tiene configurado un valor mínimo igual o mayores a
+                  {{
+                    this.dataStore.tienda.minimo_compra
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
+                  para poder realizar la compra
+                </p>
                 <button
                   v-if="
                     productsCart.length &&
                     !isQuotation() &&
                     dataStore.tienda.estado == 1 &&
                     this.estadoShippingTarifaPrecio == false &&
-                    countryStore == true
+                    countryStore == true &&
+                    IsMinValorTotal()
                   "
                   class="continue_shopping"
                   @click="GoPayments"
@@ -499,6 +515,7 @@ export default {
       this.shippingPrecio()
     }
     this.productsFreeShippingCart()
+    this.IsMinValorTotal()
   },
   data() {
     return {
@@ -518,17 +535,12 @@ export default {
       dirreccion: '',
       shippingDescuento: '',
       FreeShippingCart: false,
+      cantidadProductos: 0,
     }
   },
   computed: {
     layourUnicentro() {
       return this.$store.state.layoutUnicentro
-    },
-    configHttp() {
-      return this.$store.state.configHttp
-    },
-    userData() {
-      return this.$store.state.userData
     },
     openOrder() {
       return this.$store.state.openOrder
@@ -648,6 +660,20 @@ export default {
       })
       return result
     },
+    IsMinValorTotal() {
+      let result = false
+      if (
+        this.dataStore.tienda.minimo_compra == 0 ||
+        this.dataStore.tienda.minimo_compra == null
+      ) {
+        result = true
+      } else {
+        if (this.totalCart >= this.dataStore.tienda.minimo_compra) {
+          result = true
+        }
+      }
+      return result
+    },
     deleteItemCart(i) {
       this.$store.commit('DELETEITEMCART', i)
       this.$store.commit('UPDATE_CONTENTCART')
@@ -674,7 +700,6 @@ export default {
     GoPayments() {
       let objeto = {}
       objeto = JSON.parse(JSON.stringify(this.productsCart))
-
       objeto.map((element) => {
         if (element.id) {
           delete element.envio_gratis
@@ -751,7 +776,6 @@ export default {
             urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
           }
           let productosCart = []
-
           this.$store.state.productsCart.map((element) => {
             if (element.combinacion) {
               let combiString = JSON.stringify(element.combinacion)
@@ -772,7 +796,6 @@ export default {
               )
             }
           })
-
           let productString = JSON.stringify(productosCart)
           let productList = productString.replace(/"/g, '')
           let resultproductList = productList.replace(/,/g, '%0A')
@@ -788,7 +811,6 @@ export default {
             })
           }
           this.$gtm.push({ event: 'InitiateCheckout' })
-
           if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
             let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
             if (this.mobileCheck()) {
@@ -820,14 +842,14 @@ export default {
       this.formOrden = !this.formOrden
     },
     listaDescuentos() {
-      let cantidadProductos = 0
+      this.cantidadProductos = 0
       this.productsCart.filter((value) => {
-        cantidadProductos += value.cantidad
+        this.cantidadProductos += value.cantidad
       })
       if (this.listDescuentos) {
         let restulDesc
         this.listDescuentos.filter((element) => {
-          if (cantidadProductos >= element.cantidad_productos) {
+          if (this.cantidadProductos >= element.cantidad_productos) {
             restulDesc = element
           }
         })
@@ -873,6 +895,7 @@ export default {
     totalCart() {
       this.listaDescuentos()
       this.shippingPrecio()
+      this.IsMinValorTotal()
     },
     listDescuentos() {
       this.listaDescuentos()
@@ -966,7 +989,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ededed;
-  padding: 10px 30px;
+  padding: 15px 25px;
   flex: none;
 }
 .leftright,
@@ -1029,7 +1052,7 @@ export default {
   align-items: center;
   justify-content: space-around;
   border-bottom: 1px solid #ededed;
-  padding: 10px 30px;
+  padding: 10px 25px;
   overflow-x: auto;
 }
 .order_products_list_item::-webkit-scrollbar {
@@ -1046,14 +1069,17 @@ export default {
   border-radius: 10px;
 }
 .order_products_list_item .photo {
-  width: 50px;
+  width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .order_products_list_item .photo img {
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 60px;
+  max-height: 60px;
+  border-radius: 5px;
+  object-fit: cover;
+  margin-right: 8px;
 }
 .order_products_list_item .name {
   max-width: 190px;
@@ -1118,7 +1144,7 @@ export default {
   bottom: 5px;
 }
 .icon-delete:hover {
-  color: #000;
+  color: rgb(223, 62, 62);
 }
 
 .order_beforefreeshipping {
@@ -1139,7 +1165,7 @@ export default {
 }
 .content-remove-cart {
   width: 100%;
-  padding: 10px 5px;
+  padding: 10px 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1231,7 +1257,7 @@ export default {
 }
 .order_total {
   border-top: 1px solid #ededed;
-  padding: 0 30px;
+  padding: 0 25px;
 }
 .order_total_domicile,
 .order_total_net {
@@ -1314,6 +1340,7 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
+  max-width: 340px;
   color: #2c2930;
   font-size: 14px;
   letter-spacing: 1px;
@@ -1327,7 +1354,7 @@ export default {
 }
 .continue_shopping {
   width: 100%;
-  max-width: 340px;
+  max-width: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1347,8 +1374,8 @@ export default {
   transition: all ease 0.3s;
 }
 .continue_shopping:hover {
-  border: solid 2px #ccc;
-  background-color: #f8f8f8;
+  border: solid 2px #a1a1a1;
+  background-color: #a1a1a1;
   color: #2c2930;
 }
 .conten-btn {
@@ -1363,7 +1390,7 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
-  max-width: 340px;
+  max-width: 350px;
   color: #2c2930;
   border: 2px solid #2c2930;
   border-radius: var(--radius_btn);
@@ -1376,9 +1403,8 @@ export default {
   transition: all ease 0.3s;
 }
 .continue_shopping2:hover {
-  color: #fff;
-  background-color: #2c2930;
-  border: 2px solid #2c2930;
+  color: #a1a1a1;
+  border: 2px solid #a1a1a1;
 }
 .wrapper_photo {
   position: relative;

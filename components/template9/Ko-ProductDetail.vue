@@ -4,7 +4,6 @@
     :style="[
       settingByTemplate9[0].detailsProduct,
       settingByTemplate9[0].setting9General,
-      settingByTemplate9[0].cardProduct,
     ]"
   >
     <div class="container-productDetail-loading" v-if="loading"></div>
@@ -35,7 +34,9 @@
             <div class="main-images">
               <img
                 class="img-list"
-                :src="idCloudinaryBanner(data.detalle.foto_cloudinary)"
+                v-lazy="
+                  idCloudinaryDetalle(data.detalle.foto_cloudinary, 1000, 1000)
+                "
                 alt="Product Img"
               />
             </div>
@@ -46,19 +47,11 @@
             >
               <img
                 class="img-list"
-                :src="idCloudinaryBanner(foto.foto_cloudinary)"
+                v-lazy="idCloudinaryDetalle(foto.foto_cloudinary, 1000, 1000)"
                 alt="Product Img"
               />
             </div>
             <div class="youtuve-video">
-              <!-- <img
-                v-if="idYoutube"
-                :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
-                v-show="idYoutube"
-                v-on:mouseover="existYoutube = true"
-                class="video"
-                alt="Product Img"
-              /> -->
               <iframe
                 v-show="idYoutube"
                 :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
@@ -234,7 +227,10 @@
       </div>
       <!-- Productos relacionados  -->
       <div class="section-suggesProduct">
-        <KoSuggesProduct :category="this.category.slice(0, 8)" />
+        <KoSuggesProduct
+          :category="this.category.slice(0, 8)"
+          :cardProduct="this.settingByTemplate9[0].cardProduct"
+        />
       </div>
       <!-- Metas -->
       <div itemscope itemtype="http://schema.org/Product">
@@ -269,6 +265,10 @@
           property="og:image"
           :content="`${data.detalle.foto_cloudinary}`"
         />
+        <meta
+          property="og:image:secure_url"
+          :content="`${data.detalle.foto_cloudinary}`"
+        />
         <meta property="product:availability" content="in stock" />
         <meta property="product:condition" content="new" />
         <meta
@@ -286,16 +286,14 @@
 </template>
 <script>
 import axios from 'axios'
-// import ProductSlide from './_productdetails/productSlide'
 import SelectGroup from './_productdetails/selectGroup'
 import OptionAcordion from './_productdetails/OptAcordion'
 import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
-// import Zoom from './_productdetails/zoomImg'
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryDetalle from '../../mixins/idCloudinary'
 
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinaryDetalle],
   name: 'Ko-ProductDetail-1',
   props: {
     dataStore: Object,
@@ -401,9 +399,6 @@ export default {
       }
       return false
     },
-    modalPayment() {
-      return this.$store.state.togglePayment
-    },
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
@@ -452,17 +447,6 @@ export default {
               sku: this.data.info.sku,
               estado: true,
             }
-            if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-              window.fbq('track', 'ViewContent', {
-                content_ids: this.data.detalle.id,
-                name: this.data.detalle.nombre,
-                quantity: this.data.cantidad,
-                currency: this.dataStore.tienda.moneda,
-                value: this.salesData.precio,
-                content_type: 'product',
-                description: 'Agregado detalle del producto',
-              })
-            }
             this.sharing.url = window.location.href
             this.sharing.title = `Te recomiendo: ${response.data.detalle.nombre}`
             this.sharing.description = `Te recomiendo: ${response.data.detalle.nombre} de la tienda ${this.dataStore.tienda.nombre}, Link del producto ${window.location.href}`
@@ -484,6 +468,21 @@ export default {
               this.spent = true
             }
             this.loading = false
+            if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+              window.fbq('track', 'ViewContent', {
+                content_type: 'product',
+                content_ids: this.data.detalle.id,
+                value: this.salesData.precio ? this.salesData.precio : 0,
+                content_name: this.data.detalle.nombre,
+                currency: this.dataStore.tienda.moneda,
+                content_category:
+                  this.data.detalle.categoria_producto &&
+                  this.data.detalle.categoria_producto.nombre_categoria_producto
+                    ? this.data.detalle.categoria_producto
+                        .nombre_categoria_producto
+                    : 'category',
+              })
+            }
           })
       } else {
         this.selectedPhoto(this.productsData[0].foto_cloudinary)
@@ -523,9 +522,6 @@ export default {
         sku: '4a00',
       }
       this.spent = true
-    },
-    togglePayment() {
-      this.$store.state.togglePayment = !this.$store.state.togglePayment
     },
     setOptionEnvio() {
       if (this.data.detalle) {
@@ -641,13 +637,13 @@ export default {
       }
       if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
         window.fbq('track', 'AddToCart', {
-          content_ids: this.data.detalle.id,
-          name: this.data.detalle.nombre,
-          quantity: this.data.cantidad,
-          currency: this.dataStore.tienda.moneda,
-          value: this.salesData.precio,
           content_type: 'product',
-          description: 'Vista del producto',
+          content_ids: this.data.detalle.id,
+          value: this.salesData.precio,
+          num_items: this.data.cantidad,
+          content_name: this.data.detalle.nombre,
+          currency: this.dataStore.tienda.moneda,
+          description: 'Agregar al carrito el producto',
         })
       }
       this.$gtm.push({ event: 'AddToCart' })
@@ -763,6 +759,9 @@ export default {
 </script>
 
 <style scoped>
+.content-items-right {
+  width: 100%;
+}
 .wrapper-productDetail {
   display: flex;
   width: 100%;
@@ -955,7 +954,6 @@ export default {
     align-items: center;
     background: var(--color_quantity_bg);
   }
-
   .text-category {
     /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
     font-family: var(--font-style-2);
@@ -1023,7 +1021,7 @@ export default {
     align-items: center;
     width: 34px;
     cursor: pointer;
-    colo: var(--color_quantity_num);
+    color: var(--color_quantity_num);
   }
   .text-quantity_value {
     display: flex;
@@ -1035,7 +1033,7 @@ export default {
     border: none;
     font-size: 21px;
     font-weight: 700;
-    colo: var(--color_quantity_num);
+    color: var(--color_quantity_num);
   }
   .text-addCart {
     /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */

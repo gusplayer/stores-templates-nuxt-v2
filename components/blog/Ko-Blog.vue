@@ -1,6 +1,12 @@
 <template>
   <div :style="settingK05Blog">
     <div
+      :style="{
+        '--font-style':
+          this.settingK05Blog && this.settingK05Blog.tipo_letra
+            ? this.settingK05Blog.tipo_letra
+            : 'Roboto',
+      }"
       class="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8"
     >
       <div class="max-w-7xl mx-auto content-blog-list">

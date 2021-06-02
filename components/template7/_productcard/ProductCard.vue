@@ -300,7 +300,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
@@ -457,13 +456,13 @@ export default {
           }
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
-              content_ids: this.product.id,
-              name: this.product.nombre,
-              quantity: 1,
-              currency: this.dataStore.tienda.moneda,
-              value: this.product.precio,
               content_type: 'product',
-              description: 'Agregado detalle del producto',
+              content_ids: this.product.id,
+              value: this.salesData.precio,
+              num_items: 1,
+              content_name: this.product.nombre,
+              currency: this.dataStore.tienda.moneda,
+              description: 'Agregar al carrito el producto',
             })
           }
           this.$gtm.push({ event: 'AddToCart' })
@@ -543,7 +542,6 @@ export default {
   },
 }
 </script>
-
 <style scoped>
 .product-image {
   width: 100%;
@@ -566,8 +564,8 @@ export default {
   @apply text-red-btnbannershop;
 }
 .hearts-icon {
-  @apply h-full w-full;
   color: #333;
+  @apply h-full w-full;
 }
 .producto-productCard {
   @apply flex flex-col justify-center items-center cursor-pointer mt-20;
@@ -585,7 +583,6 @@ export default {
   @apply text-white-white;
 }
 .cart-Shop {
-  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -594,9 +591,9 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
 }
 .cart-Shop-mobile {
-  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -606,12 +603,12 @@ export default {
   transform: translate(-50%, -50%);
   text-align: center;
   justify-column: center;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
 }
 .color_tex_btn {
   color: var(--color_text_btn_card);
 }
 .icons-hover {
-  @apply text-gray-textHeader absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -620,6 +617,7 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply text-gray-textHeader absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
 }
 .icon-show-mobile {
   fill: white;
@@ -676,26 +674,25 @@ export default {
     color: var(--color_text_btn_card);
   }
   .overlay-bottom {
-    @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
     background: var(--color_background_btn_card);
     width: 20%;
     height: 20%;
     left: 10px;
     bottom: 10px;
+    @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
   }
   .overlay-bottom:hover {
     @apply bg-red-btnbannershop;
   }
   .overlay-top {
-    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-md max-w-full max-h-full transition-all ease-in duration-300;
     top: 8%;
     left: 80%;
     right: 0;
     width: 20%;
     height: 20%;
+    @apply absolute overflow-hidden shadow-2xl bg-white-white rounded-md max-w-full max-h-full transition-all ease-in duration-300;
   }
   .overlay-free {
-    @apply rounded;
     position: absolute;
     top: 0%;
     left: 45%;
@@ -705,6 +702,7 @@ export default {
     width: 50%;
     height: 10%;
     transition: 0.5s ease;
+    @apply rounded;
   }
   .text-free {
     font-size: 75%;

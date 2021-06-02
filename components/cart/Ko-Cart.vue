@@ -1,7 +1,15 @@
 <template>
-  <div class="content-cart">
+  <div
+    class="content-cart"
+    :class="
+      this.template == 7
+        ? 'margintopbytemplate07'
+        : 'margintopbytemplategeneral'
+    "
+  >
     <div v-if="this.productsCart.length" class="conten-items-cart">
       <div class="cart-tittle">
+        <cart-icon class="header-icon-cart" />
         <p class="txt-cart">{{ $t('home_tuCarrito') }}</p>
       </div>
       <div class="content-product-total">
@@ -12,14 +20,16 @@
             :key="index"
           >
             <div class="product">
-              <div class="product-image">
+              <div
+                class="content-items-product content-items-product-resposive-img"
+              >
                 <img
                   v-lazy="idCloudinaryBanner(product.foto_cloudinary)"
                   class="product-photo"
                   :alt="product.nombre"
                 />
               </div>
-              <div class="content-items-product">
+              <div class="content-items-product margin-items-product">
                 <div class="product-items">
                   <div class="product-name">
                     <p class="text-name">{{ product.nombre | capitalize }}</p>
@@ -67,33 +77,31 @@
                     </div>
                   </div>
                   <div class="product-quiantity">
-                    <div class="txt-tittle-quantity">Cantidad</div>
+                    <div class="txt-tittle-quantity">
+                      {{ $t('cart_cantidad') }}
+                    </div>
+                    <div class="quantity">
+                      <button
+                        class="quantity_remove"
+                        v-on:click="removeQuantity(product)"
+                      >
+                        <menos-icon class="icon-quantity" />
+                      </button>
+                      <p class="quantity_value">{{ product.cantidad }}</p>
+                      <button
+                        class="quantity_add"
+                        v-on:click="addQuantity(product)"
+                      >
+                        <mas-icon class="icon-quantity" />
+                      </button>
 
-                    <div class="content-quantity">
-                      <div class="quantity">
-                        <!-- <p class="text-quantity">{{ $t('cart_cantidad') }}</p> -->
-                        <button
-                          class="quantity_remove"
-                          v-on:click="removeQuantity(product)"
+                      <div
+                        class="container-alerta"
+                        v-if="product.limitQuantity == product.cantidad"
+                      >
+                        <span class="alerta">
+                          {{ $t('cart_ultimaUnidad') }}</span
                         >
-                          <menos-icon class="text-icon" />
-                        </button>
-                        <p class="text-quantity_value">
-                          {{ product.cantidad }}
-                        </p>
-                        <button
-                          class="quantity_add"
-                          v-on:click="addQuantity(product)"
-                        >
-                          <mas-icon class="text-icon" />
-                        </button>
-                        <!-- Anuncio ult unidad -->
-                        <!-- <div
-                              class="container-alerta"
-                              v-if="this.maxQuantityValue == this.quantityValue"
-                            >
-                              <span class="alerta"> {{ $t('cart_ultimaUnidad') }}</span>
-                            </div> -->
                       </div>
                     </div>
                   </div>
@@ -150,67 +158,105 @@
           </div>
           <div class="content-cart-product">
             <div class="cart-summary-items">
-              <p class="txt-cart-summary">{{ $t('cart_subtotal') }}</p>
+              <p class="txt-cart-summary" style="font-weight: bold;">
+                {{ $t('cart_items') }}
+              </p>
               <p class="txt_summary_price">
+                {{ this.cantidadProductos }}
+              </p>
+            </div>
+            <span class="cart-summary-items" v-if="this.shippingDescuento">
+              <p class="txt-cart-summary" style="font-weight: bold;">
+                {{ $t('footer_descuento') }}
+              </p>
+              <p
+                class="txt_summary_price"
+                v-if="
+                  this.shippingDescuento &&
+                  this.shippingDescuento.valor_descuento
+                "
+              >
+                -
                 {{
-                  totalCart
+                  this.shippingDescuento.valor_descuento
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
                     )
                 }}
               </p>
-            </div>
+              <p
+                class="txt_summary_price"
+                v-if="
+                  this.shippingDescuento &&
+                  this.shippingDescuento.porcentaje_descuento
+                "
+              >
+                -
+                {{
+                  Math.trunc(
+                    (totalCart * this.shippingDescuento.porcentaje_descuento) /
+                      100
+                  )
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
+            </span>
             <div class="order_total">
               <div class="order_total_domicile">
-                <p class="txt_summary_tittle">
+                <p class="txt_summary_tittle" style="font-weight: bold;">
                   {{ $t('footer_costoDomicilio') }}
                 </p>
-
-                <!-- precio ciudad -->
-                <div
-                  class="content-byCity"
+                <details
                   v-if="
                     rangosByCiudad.envio_metodo === 'precio_ciudad' &&
                     shippingCities.length > 0 &&
-                    getFreeShipping == false
+                    getFreeShipping == false &&
+                    FreeShippingCart == false
                   "
                 >
-                  <p class="txt_summary_tittle">
-                    {{ $t('footer_valorCiudad') }}
-                  </p>
-                  <div
-                    class="content-item-byCity"
-                    v-for="(ciudad, index) in rangosByCiudad.rangos"
-                    :key="ciudad.id"
+                  <summary class="txt-cart-summary">
+                    {{ $t('footer_valorCiudad') }}</summary
                   >
-                    <div class="price-by-city" v-if="ciudad.price > 0">
-                      <p class="txt_summary_tittle">
-                        {{
-                          shippingCities[index].nombre_ciu === 'Sin especificar'
-                            ? 'Resto del país'
-                            : shippingCities[index].nombre_ciu
-                        }}:
-                      </p>
-                      <p class="txt_summary_price">
-                        {{
-                          ciudad.price
-                            | currency(
-                              dataStore.tienda.codigo_pais,
-                              dataStore.tienda.moneda
-                            )
-                        }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <!-- tarifa plana -->
+                  <section>
+                    <ol class="scroll_cart_summary_items_cities">
+                      <li
+                        v-for="(ciudad, index) in rangosByCiudad.rangos"
+                        :key="ciudad.id"
+                      >
+                        <div v-if="ciudad.price > 0">
+                          <b>
+                            {{
+                              shippingCities[index].nombre_ciu ===
+                              'Sin especificar'
+                                ? 'Resto del país'
+                                : shippingCities[index].nombre_ciu
+                            }}:
+                          </b>
+                          <p>
+                            {{
+                              ciudad.price
+                                | currency(
+                                  dataStore.tienda.codigo_pais,
+                                  dataStore.tienda.moneda
+                                )
+                            }}
+                          </p>
+                        </div>
+                      </li>
+                    </ol>
+                  </section>
+                </details>
                 <div
                   class="content-Plana"
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'tarifa_plana' &&
                     shipping > 0 &&
-                    getFreeShipping == true
+                    getFreeShipping == true &&
+                    FreeShippingCart == false
                   "
                 >
                   <div class="content-list">
@@ -230,14 +276,23 @@
                     </p>
                   </div>
                 </div>
-                <!-- por precio -->
                 <div
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'precio' &&
-                    getFreeShipping == true
+                    getFreeShipping == true &&
+                    FreeShippingCart == false
                   "
+                  style="width: 100%;"
                 >
-                  <div v-if="this.shippingTarifaPrecio > 0">
+                  <div
+                    class="content-Plana"
+                    v-if="this.shippingTarifaPrecio > 0"
+                  >
+                    <div class="content-list">
+                      <p class="txt_summary_tittle">
+                        {{ $t('footer_Porprecio') }}
+                      </p>
+                    </div>
                     <p class="txt_summary_price">
                       {{
                         this.shippingTarifaPrecio
@@ -258,7 +313,6 @@
                     {{ $t('footer_encioNoconfig') }}
                   </p>
                 </div>
-                <!-- envio -->
                 <p
                   v-else-if="shipping && getFreeShipping == false"
                   class="txt_summary_price"
@@ -271,12 +325,13 @@
                       )
                   }}
                 </p>
-                <!-- envio gratis tienda -->
                 <div
                   class="contet-free-delivery"
-                  v-if="
-                    rangosByCiudad.envio_metodo === 'gratis' ||
-                    (shippingCities.length <= 0 && getFreeShipping == false)
+                  v-else-if="
+                    rangosByCiudad.envio_metodo === 'gratis' &&
+                    shippingCities.length <= 0 &&
+                    getFreeShipping == false &&
+                    FreeShippingCart == false
                   "
                 >
                   <p class="txt_summary_tittle">
@@ -284,14 +339,32 @@
                   </p>
                   <p class="txt_summary_price">$0</p>
                 </div>
+                <div
+                  class="contet-free-delivery"
+                  v-else-if="FreeShippingCart == true"
+                >
+                  <p class="txt_summary_tittle">
+                    {{ $t('footer_tarifaPrecio') }}
+                  </p>
+                  <p class="txt_summary_price">$0</p>
+                </div>
               </div>
             </div>
-            <div class="line"></div>
-            <div class="message-responsive">
-              <p class="Quotation-message" v-if="isQuotation()">
-                {{ $t('footer_contactoMgs') }}
+            <div class="cart-summary-items">
+              <p class="txt-cart-summary" style="font-weight: bold;">
+                {{ $t('cart_subtotal') }}
+              </p>
+              <p class="txt_summary_price">
+                {{
+                  totalCart
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
               </p>
             </div>
+            <div class="line"></div>
             <div class="content-btn">
               <div class="content-totalPay">
                 <p class="txt_summary_tittle txt-total">
@@ -299,7 +372,25 @@
                 </p>
                 <p class="txt_summary_price">
                   {{
-                    (totalCart + (this.shipping ? this.shipping : 0))
+                    (totalCart +
+                      (this.shipping ? this.shipping : 0) +
+                      (this.shippingTarifaPrecio &&
+                      this.shippingTarifaPrecio != 'empty' &&
+                      this.FreeShippingCart == false
+                        ? this.shippingTarifaPrecio
+                        : 0) -
+                      (this.shippingDescuento &&
+                      this.shippingDescuento.valor_descuento
+                        ? this.shippingDescuento.valor_descuento
+                        : 0) -
+                      (this.shippingDescuento &&
+                      this.shippingDescuento.porcentaje_descuento
+                        ? Math.trunc(
+                            (totalCart *
+                              this.shippingDescuento.porcentaje_descuento) /
+                              100
+                          )
+                        : 0))
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -307,21 +398,48 @@
                   }}
                 </p>
               </div>
-              <p class="Quotation-message" v-if="isQuotation()">
+              <p
+                class="Quotation-message"
+                v-if="
+                  isQuotation() ||
+                  (countryStore == false && productsCart.length)
+                "
+              >
                 {{ $t('footer_contactoMgs') }}
               </p>
               <p class="Quotation-message" v-if="dataStore.tienda.estado == 0">
                 {{ $t('footer_tiendaCerrada') }}
               </p>
+              <p
+                class="Quotation-message"
+                v-if="!IsMinValorTotal() && productsCart.length"
+              >
+                La tienda tiene configurado un valor mínimo igual o mayores a
+                {{
+                  this.dataStore.tienda.minimo_compra
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+                para poder realizar la compra
+              </p>
               <button
                 ref="colorBtn"
                 class="btn-buy-1"
                 @click="GoPayments"
-                v-if="!isQuotation() && dataStore.tienda.estado == 1"
+                v-if="
+                  productsCart.length &&
+                  !isQuotation() &&
+                  dataStore.tienda.estado == 1 &&
+                  this.estadoShippingTarifaPrecio == false &&
+                  countryStore == true &&
+                  IsMinValorTotal()
+                "
               >
                 {{ $t('footer_finalizarCompra') }}
               </button>
-              <nuxt-link to="/" class="btn-buy-2">
+              <nuxt-link :to="`${this.redirectCart}`" class="btn-buy-2">
                 {{ $t('footer_seguirCompra') }}
               </nuxt-link>
             </div>
@@ -333,8 +451,8 @@
       <div class="wrapper_photo">
         <img v-lazy="img" class="photo" alt="Product img" />
       </div>
-      <p>{{ $t('footer_carritoVacio') }}</p>
-      <nuxt-link to="/productos">
+      <p class="text-empty">{{ $t('footer_carritoVacio') }}</p>
+      <nuxt-link :to="`${this.redirectCart}`">
         <button ref="colorBtn" class="btn3">
           {{ $t('cart_agregarProductos') }}
         </button>
@@ -349,11 +467,12 @@ export default {
   mixins: [idCloudinary],
   name: 'Cart',
   props: {
-    // settingByTemplate: Object,
+    dataStore: Object,
+    cities: Array,
   },
   mounted() {
+    this.$store.dispatch('GET_DESCUENTOS')
     this.$store.dispatch('GET_SHOPPING_CART')
-    this.$store.dispatch('GET_CITIES')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
       this.filterCities()
     }
@@ -361,6 +480,9 @@ export default {
     if (this.rangosByCiudades.envio_metodo == 'precio') {
       this.shippingPrecio()
     }
+    this.productsFreeShippingCart()
+    this.IsMinValorTotal()
+    this.listaDescuentos()
   },
   data() {
     return {
@@ -372,20 +494,30 @@ export default {
       rangosByCiudades: [],
       shippingTarifaPrecio: '',
       estadoShippingTarifaPrecio: false,
+      shippingDescuento: '',
+      FreeShippingCart: false,
+      cantidadProductos: 0,
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
+    template() {
+      return this.$store.state.template
     },
     totalCart() {
       return this.$store.state.totalCart
     },
-    productsCart() {
-      return this.$store.state.productsCart
-    },
-    orderComponent() {
-      return this.$store.state.orderComponent
+    redirectCart() {
+      let resultURl
+      if (this.template == 5 || this.template == 6) {
+        resultURl = '/'
+      } else if (
+        this.template == 7 ||
+        this.template == 9 ||
+        this.template == 10
+      ) {
+        resultURl = '/productos'
+      }
+      return resultURl
     },
     getFreeShipping() {
       let free = true
@@ -404,43 +536,68 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },
-    cities() {
-      return this.$store.state.cities
-    },
     shipping() {
-      if (this.$store.state.envios.estado) {
-        let shipping = JSON.parse(this.$store.state.envios.valores)
-        switch (shipping.envio_metodo) {
-          case 'gratis':
-            return 0
-            break
-          case 'tarifa_plana':
-            return shipping.valor
-            break
-          case 'precio_ciudad':
-            let result = shipping.rangos.find((rango) => {
-              if (
-                this.totalCart >= rango.inicial &&
-                this.totalCart <= rango.final
-              ) {
-                return rango
-              }
-            })
-            if (result) {
-              return result.precio
-            } else {
+      if (this.FreeShippingCart == true) {
+        return 0
+      } else {
+        if (this.$store.state.envios.estado) {
+          let shipping = JSON.parse(this.$store.state.envios.valores)
+          switch (shipping.envio_metodo) {
+            case 'gratis':
               return 0
-            }
+              break
+            case 'tarifa_plana':
+              return shipping.valor
+              break
+            case 'precio_ciudad':
+              let result = shipping.rangos.find((rango) => {
+                if (
+                  this.totalCart >= rango.inicial &&
+                  this.totalCart <= rango.final
+                ) {
+                  return rango
+                }
+              })
+              if (result) {
+                return result.precio
+              } else {
+                return 0
+              }
+              break
+            default:
+              return 0
+          }
+        } else {
+          return 0
+        }
+      }
+    },
+    countryStore() {
+      if (this.dataStore && this.dataStore.tienda.pais) {
+        switch (this.dataStore.tienda.pais) {
+          case 'Colombia':
+            return true
+            break
+          case 'Chile':
+            return true
             break
           default:
-            return 0
+            return false
         }
       } else {
-        return 0
+        return false
       }
+    },
+
+    listDescuentos() {
+      return this.$store.state.listDescuentos
+    },
+    productsCart() {
+      return this.$store.state.productsCart
     },
   },
   methods: {
@@ -493,14 +650,7 @@ export default {
         products: this.$store.state.productsCart,
         tienda: {
           id: this.$store.state.tienda.id_tienda,
-          // nombre: this.$store.state.tienda.nombre,
-          // logo: this.$store.state.tienda.logo,
-          // location: window.location.href,
         },
-        // tipo: 0,
-        // total: this.$store.state.totalCart,
-        // estado: 0,
-        // direccion_entrega: 0,
       }
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
@@ -521,6 +671,70 @@ export default {
         })
       }
     },
+    IsMinValorTotal() {
+      let result = false
+      if (
+        this.dataStore.tienda.minimo_compra == 0 ||
+        this.dataStore.tienda.minimo_compra == null
+      ) {
+        result = true
+      } else {
+        let tempTotal =
+          this.totalCart +
+          (this.shipping ? this.shipping : 0) +
+          (this.shippingTarifaPrecio && this.shippingTarifaPrecio != 'empty'
+            ? this.shippingTarifaPrecio
+            : 0) -
+          (this.shippingDescuento && this.shippingDescuento.valor_descuento
+            ? this.shippingDescuento.valor_descuento
+            : 0) -
+          (this.shippingDescuento && this.shippingDescuento.porcentaje_descuento
+            ? Math.trunc(
+                (this.totalCart * this.shippingDescuento.porcentaje_descuento) /
+                  100
+              )
+            : 0)
+        if (tempTotal >= this.dataStore.tienda.minimo_compra) {
+          result = true
+        }
+      }
+      return result
+    },
+    listaDescuentos() {
+      this.cantidadProductos = 0
+      this.productsCart.filter((value) => {
+        this.cantidadProductos += value.cantidad
+      })
+      if (this.listDescuentos) {
+        let restulDesc
+        this.listDescuentos.filter((element) => {
+          if (this.cantidadProductos >= element.cantidad_productos) {
+            restulDesc = element
+          }
+        })
+        if (restulDesc) {
+          this.shippingDescuento = restulDesc
+        } else {
+          this.shippingDescuento = ''
+        }
+      }
+    },
+    productsFreeShippingCart() {
+      if (this.productsCart) {
+        let result = this.productsCart.filter((rango) => {
+          if (rango.envio_gratis === 1) {
+            return rango
+          }
+        })
+        if (this.productsCart.length == result.length) {
+          this.FreeShippingCart = true
+          // this.rangosByCiudad.envio_metodo = 'gratis'
+        } else {
+          this.FreeShippingCart = false
+          // this.rangosByCiudad.envio_metodo = this.rangosByCiudad.envio_metodo
+        }
+      }
+    },
   },
   watch: {
     rangosByCiudad() {
@@ -529,8 +743,19 @@ export default {
     cities() {
       this.filterCities()
     },
+    productsCart() {
+      if (this.productsCart) {
+        this.listaDescuentos()
+        this.productsFreeShippingCart()
+      }
+    },
     totalCart() {
+      this.listaDescuentos()
       this.shippingPrecio()
+      this.IsMinValorTotal()
+    },
+    listDescuentos() {
+      this.listaDescuentos()
     },
   },
   filters: {
@@ -576,17 +801,29 @@ export default {
 
 <style scoped>
 .content-cart {
-  @apply w-full flex flex-col justify-center items-center pb-30 pt-50;
+  @apply w-full flex flex-col justify-center items-center pb-48;
+}
+.margintopbytemplate07 {
+  @apply pt-100;
+}
+.margintopbytemplategeneral {
+  @apply pt-30;
 }
 .conten-items-cart {
   @apply flex flex-col justify-center items-center;
 }
 .cart-tittle {
-  @apply w-full flex flex-row justify-center items-center my-30;
+  @apply w-full flex flex-row justify-center items-center mt-40 mb-15;
+}
+.header-icon-cart {
+  font-size: 30px;
+  margin-right: 5px;
+  color: #222;
+  bottom: 0.125em;
 }
 .txt-cart {
   color: #222;
-  font-size: 42px;
+  font-size: 30px;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
   @apply w-full text-left font-semibold;
 }
@@ -597,34 +834,101 @@ export default {
 .content-left {
   @apply w-full flex flex-col justify-center items-start;
 }
-
-.txt-tittle-quantity {
+.quantity {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  position: relative;
+  box-sizing: border-box;
+  max-width: 240px;
+  background: #f4f4f4;
+}
+.text-quantity {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2c2930;
+  margin-right: 15px;
+  align-self: center;
+}
+.quantity_remove {
+  border: 1px #f4f4f4;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-style: solid none solid solid;
+  background: transparent;
+  height: 41px;
+  width: 55px;
+}
+.quantity_value {
+  font-size: 1em;
+  color: #2c2930;
+  border: 1px #f4f4f4;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-style: solid none solid none;
+  background: transparent;
+  height: 41px;
+  width: 55px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.quantity_add {
+  border: 1px #f4f4f4;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-style: solid solid solid none;
+  background: transparent;
+  height: 41px;
+  width: 55px;
+}
+.container-alerta {
+  position: absolute;
+  bottom: 4px;
+  right: -133px;
+  width: 130px;
+  background-color: rgb(250, 232, 75);
+  border: 1px solid rgb(230, 213, 66);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: black;
+}
+.icon-quantity {
+  color: #2c2930;
+  @apply cursor-pointer;
+}
+.icon-quantity:hover {
+  color: #eb7025;
+  @apply cursor-pointer;
+}
+.alerta {
+  text-align: center;
+  padding: 5px 5px;
+  text-transform: capitalize;
+}
+.product-variant >>> .el-tag {
+  border-color: #2c2930;
+  background-color: #2c2930;
+  color: #fff;
+  display: inline-block;
+  height: 28px;
+  margin-left: 2px;
+  padding: 0 2px;
   font-size: 12px;
-  color: #222;
-  min-width: 70px;
-  @apply w-auto font-semibold mr-10;
-}
-.box-quantity {
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  @apply w-75 h-50 flex text-center justify-center items-center;
-}
-.box-quantity-btns {
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  @apply w-25 h-50 flex flex-col text-center justify-center items-center;
-}
-.btn-quantity {
-  background-color: #fff;
-  border-color: rgba(0, 0, 0, 0.15);
-  @apply w-25 h-25 flex justify-center items-center border-t border-r;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;
 }
 .text-name,
 .text-variant,
 .text-tittle,
 .text-result,
-.txt-tittle-quantity,
-.txt-quantity,
 .txt-price-product,
 .txt-total-product,
 .txt-summary,
@@ -635,6 +939,12 @@ export default {
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
 }
 .product-photo {
+  object-position: center;
+  width: 100%;
+  max-height: 200px;
+  max-width: 200px;
+  object-fit: cover;
+  border-radius: 6px;
   @apply shadow-md;
 }
 .content-cart-product {
@@ -643,8 +953,6 @@ export default {
 .cart-summary-items {
   @apply w-full flex flex-row justify-between items-center;
 }
-
-/* ------------------------------------ */
 .content-txt-summary {
   @apply w-full flex flex-col justify-center items-start mb-30;
 }
@@ -659,14 +967,58 @@ export default {
   @apply w-full flex flex-col justify-start items-start;
 }
 /* por-precio */
-.content-byCity {
-  @apply w-full flex flex-col justify-start items-center mb-20;
+details {
+  color: #333;
+  font-size: 13px;
+  align-self: flex-end;
+  flex: 1;
+  width: 100%;
 }
-.content-item-byCity {
-  @apply w-full flex flex-col justify-start items-center;
+details summary {
+  outline: none;
+  cursor: pointer;
+  text-align: right;
+  font-size: 14px;
+  font-weight: bold;
 }
-.price-by-city {
-  @apply w-full flex flex-row justify-between items-center;
+details ol {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+}
+details ol li div {
+  padding: 2px 4px;
+  display: flex;
+  justify-content: space-between;
+}
+details ol li:nth-child(even) {
+  background-color: rgba(102, 102, 102, 0.1);
+}
+details[open] summary ~ * {
+  animation: sweep 0.5s ease-in-out;
+}
+.scroll_cart_summary_items_cities {
+  color: #2c2930;
+  overflow-y: auto;
+  max-height: 150px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.scroll_cart_summary_items_cities li {
+  margin-right: 5px;
+}
+.scroll_cart_summary_items_cities::-webkit-scrollbar {
+  background: transparent;
+  width: 4px;
+}
+.scroll_cart_summary_items_cities::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px transparent;
+  border-radius: 10px;
+}
+.scroll_cart_summary_items_cities::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
 }
 /* Tarifa-Plana */
 .content-Plana {
@@ -689,7 +1041,6 @@ export default {
 .content-btn {
   @apply w-full flex flex-col justify-center items-center;
 }
-
 .txt_summary_tittle {
   @apply w-full flex justify-start items-center;
 }
@@ -704,14 +1055,11 @@ export default {
   fill: #eb7025;
   @apply cursor-pointer;
 }
-.quantity {
-  @apply flex flex-row justify-center items-center;
-}
 .contenedor-vacio {
   display: flex;
   width: 100%;
   height: 100%;
-  min-height: calc(100vh - 480px);
+  height: calc(100vh - 416px);
   max-width: 1300px;
   flex-direction: column;
   align-items: center;
@@ -731,9 +1079,9 @@ export default {
   border-radius: 10px;
 }
 .btn3 {
-  border-radius: var(--radius_btn);
-  color: var(--color_background_btn);
-  border: solid 2px var(--color_background_btn);
+  border-radius: 5px;
+  color: black;
+  border: solid 2px black;
   background-color: transparent;
   padding: 8px 12px;
   font-size: 14px;
@@ -743,13 +1091,24 @@ export default {
   transition: all 200ms ease-in;
 }
 .btn3:hover {
-  color: var(--btnhover);
-  border: solid 2px var(--btnhover);
+  color: grey;
+  border: solid 2px grey;
+}
+.Quotation-message {
+  color: #222;
+  padding: 8px 12px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: center;
+}
+.text-empty {
+  color: #222;
+  margin-top: 10px;
 }
 @screen sm {
-  .content-cart {
-    margin-top: 72px;
-  }
   .conten-items-cart {
     @apply w-9/0;
   }
@@ -764,7 +1123,7 @@ export default {
   }
   .product {
     border-color: #efefef;
-    @apply w-full grid grid-cols-2 gap-4 justify-center items-start mb-40 border;
+    @apply w-full grid grid-cols-2 justify-center items-start mb-20 border;
   }
   .product-items {
     @apply w-full grid grid-cols-1 gap-4 justify-center items-start;
@@ -813,34 +1172,8 @@ export default {
     @apply w-full h-40 flex justify-center items-center font-semibold border-2 rounded-md;
   }
   .btn-buy-2:hover {
-    background-color: #222;
-    color: #fff;
-  }
-  .content-quantity {
-    background: #f4f4f4;
-    @apply w-full h-54 flex flex-col justify-center items-center pb-1;
-  }
-  .quantity {
-    @apply w-full;
-  }
-  .quantity_remove,
-  .quantity_add {
-    background: #f4f4f4;
-    @apply flex justify-center items-center;
-  }
-  .text-icon {
-    @apply w-34 flex justify-center items-center cursor-pointer;
-  }
-  .text-quantity_value {
-    padding: 0 35px;
-    border: none;
-    font-size: 21px;
-    @apply w-full flex-col justify-center items-center text-center font-semibold;
-  }
-}
-@media (min-width: 480px) {
-  .content-quantity {
-    @apply w-4/0 mr-2;
+    border-color: #eb7025;
+    color: #eb7025;
   }
 }
 @screen md {
@@ -856,9 +1189,6 @@ export default {
   .content-product-priceIcon {
     @apply w-full flex flex-row justify-between items-center p-25;
   }
-  .product-quiantity {
-    @apply mt-0;
-  }
   .content_icon-sm {
     @apply hidden;
   }
@@ -869,21 +1199,9 @@ export default {
     font-size: 20px;
     @apply font-semibold;
   }
-  .txt-tittle-quantity {
-    font-size: 16px;
-  }
   .txt-price-product {
     font-size: 20px;
     @apply font-semibold;
-  }
-  .btn-buy-1 {
-    @apply w-8/0;
-  }
-  .btn-buy-2 {
-    @apply w-8/0;
-  }
-  .content-quantity {
-    width: 150px;
   }
 }
 @screen lg {
@@ -894,17 +1212,11 @@ export default {
     top: 160px;
     @apply w-6/0 sticky mb-40;
   }
-  .content-cart {
-    margin-top: 160px;
-  }
   .content-product-total {
     @apply w-full flex flex-row justify-center items-start;
   }
 }
 @screen mlg {
-  .content-cart {
-    margin-top: 0px;
-  }
   .content-right {
     top: 120px;
     @apply w-5/0;
@@ -914,6 +1226,19 @@ export default {
   .conten-items-cart {
     max-width: 1400px;
     @apply w-full;
+  }
+}
+@media (max-width: 500px) {
+  .product {
+    @apply grid grid-cols-1;
+  }
+  .content-items-product-resposive-img {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .margin-items-product {
+    margin-left: 20px;
   }
 }
 </style>

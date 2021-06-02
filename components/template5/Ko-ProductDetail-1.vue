@@ -1,7 +1,16 @@
 <template>
   <div class="wrapper-productDetail" :style="settingByTemplate">
     <div class="container-productDetail-loading" v-if="loading"></div>
-    <div class="container-productDetail" v-else>
+    <div
+      class="container-productDetail"
+      v-else
+      :style="{
+        '--font-style':
+          this.settingByTemplate && this.settingByTemplate.tipo_letra
+            ? this.settingByTemplate.tipo_letra
+            : 'Roboto',
+      }"
+    >
       <div class="section">
         <div class="wrapper-left">
           <template>
@@ -11,7 +20,7 @@
                   <img
                     @click="selectedPhoto(data.detalle.foto_cloudinary)"
                     class="img-list"
-                    :src="idCloudinary(data.detalle.foto_cloudinary, 200, 200)"
+                    :src="idCloudinary(data.detalle.foto_cloudinary, 100, 100)"
                     alt="Product Img"
                   />
                 </div>
@@ -23,7 +32,7 @@
                   <img
                     @click="selectedPhoto(foto.foto_cloudinary)"
                     class="img-list"
-                    :src="idCloudinary(foto.foto_cloudinary, 200, 200)"
+                    :src="idCloudinary(foto.foto_cloudinary, 100, 100)"
                     alt="Product Img"
                   />
                 </div>
@@ -55,7 +64,7 @@
               <img
                 class="photo_main"
                 v-on:mouseover="activeZoom = !activeZoom"
-                :src="idCloudinary(selectPhotoUrl, 745, 530)"
+                :src="idCloudinaryDetalle(selectPhotoUrl, 645, 430)"
                 alt="Product Zoom"
               />
             </div>
@@ -245,100 +254,6 @@
                       <whatsapp-icon class="wp-icon" />
                     </button>
                   </div>
-                  <div class="content-float-info" id="sticky">
-                    <p class="text-name">{{ data.detalle.nombre }}</p>
-                    <p class="text-marca">
-                      <strong>{{ data.info.marca }}</strong>
-                    </p>
-                    <p
-                      class="text-promocion"
-                      v-show="
-                        data.info.tag_promocion == 1 &&
-                        data.info.promocion_valor &&
-                        salesData.precio
-                      "
-                    >
-                      {{
-                        (data.info.tag_promocion == 1 &&
-                        data.info.promocion_valor
-                          ? Math.trunc(
-                              salesData.precio /
-                                (1 - data.info.promocion_valor / 100)
-                            )
-                          : 0)
-                          | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
-                          )
-                      }}
-                    </p>
-                    <div
-                      class="wrapper-price"
-                      :class="
-                        data.info.tag_promocion == 1
-                          ? ''
-                          : 'wrapper-price_space'
-                      "
-                    >
-                      <p class="text-precio" v-show="salesData.precio">
-                        {{
-                          salesData.precio
-                            | currency(
-                              dataStore.tienda.codigo_pais,
-                              dataStore.tienda.moneda
-                            )
-                        }}
-                      </p>
-                      <p
-                        class="card-descuento"
-                        v-show="
-                          data.info.tag_promocion == 1 &&
-                          data.info.promocion_valor &&
-                          salesData.precio
-                        "
-                      >
-                        {{ data.info.promocion_valor }}% OFF
-                      </p>
-                    </div>
-                    <div class="content_buy_action">
-                      <div
-                        v-if="envio.titulo == 'Envío gratis'"
-                        class="content_buy_action"
-                      >
-                        <p class="card-info-2">
-                          <svg
-                            class="transporte-icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                            version="1.1"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3M5 10.5L6.5 9L8 10.5L11.5 7L13 8.5L8 13.5L5 10.5Z"
-                            /></svg
-                          >{{ $t('home_cardGratis') }}
-                        </p>
-                      </div>
-                      <div class="content_card-info">
-                        <p class="card-info-1" v-if="spent">
-                          {{ $t('home_cardAgotado') }}
-                        </p>
-                      </div>
-                    </div>
-                    <div>
-                      <button
-                        ref="colorBtn"
-                        class="btn"
-                        v-if="!spent"
-                        v-on:click="addShoppingCart"
-                      >
-                        {{ $t('productdetail_btnComprar') }}
-                      </button>
-                      <button disabled class="btn-disabled" v-if="spent">
-                        {{ $t('home_cardAgotado') }}
-                      </button>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -448,11 +363,12 @@ import selectGroup from './_productdetails/selectGroup'
 import koDescription from './_productdetails/descriptionProduct.vue'
 import koSuggesProduct from './_productdetails/suggestionsProducto'
 import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryDetalle from '../../mixins/idCloudinary'
 
 import zoom from './_productdetails/zoomImg'
 
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinary, idCloudinaryDetalle],
   name: 'Ko-ProductDetail-1',
   props: {
     dataStore: Object,
@@ -479,18 +395,6 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
-    window.addEventListener('scroll', function () {
-      var sticky = document.getElementById('sticky')
-      if (window.pageYOffset >= 376 && screen.width > 725 && sticky) {
-        sticky.style.display = 'flex'
-        sticky.style.position = 'fixed'
-        sticky.style.top = '88px'
-      } else {
-        sticky.style.display = 'none'
-        sticky.style.position = 'static'
-        sticky.style.top = ''
-      }
-    })
   },
   data() {
     return {
@@ -554,6 +458,7 @@ export default {
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
+    // eslint-disable-next-line vue/return-in-computed-property
     precio() {
       if (this.data.detalle.precio) {
         return `$${this.data.detalle.precio
@@ -598,17 +503,6 @@ export default {
               sku: this.data.info.sku,
               estado: true,
             }
-            if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-              window.fbq('track', 'ViewContent', {
-                content_ids: this.data.detalle.id,
-                name: this.data.detalle.nombre,
-                quantity: this.data.cantidad,
-                currency: this.dataStore.tienda.moneda,
-                value: this.salesData.precio,
-                content_type: 'product',
-                description: 'Agregado detalle del producto',
-              })
-            }
             if (response && response.data) {
               this.sharing.url = window.location.href
               this.sharing.quote = `Explora%20el%20producto%20${response.data.detalle.nombre}%2C%20te%20van%20a%20encantar.%0ALink%20del%20producto%3A%20${this.sharing.url}`
@@ -631,6 +525,22 @@ export default {
               this.spent = true
             }
             this.loading = false
+            if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+              window.fbq('track', 'ViewContent', {
+                content_type: 'product',
+                content_ids: this.data.detalle.id,
+                value: this.salesData.precio ? this.salesData.precio : 0,
+                content_name: this.data.detalle.nombre,
+                currency: this.dataStore.tienda.moneda,
+                content_category:
+                  this.data.detalle.categoria_producto &&
+                  this.data.detalle.categoria_producto.nombre_categoria_producto
+                    ? this.data.detalle.categoria_producto
+                        .nombre_categoria_producto
+                    : 'category',
+                description: 'Description Product',
+              })
+            }
           })
       } else {
         this.selectedPhoto(this.productsData[0].foto_cloudinary)
@@ -670,9 +580,6 @@ export default {
         sku: '4a00',
       }
       this.spent = true
-    },
-    togglePayment() {
-      this.$store.state.togglePayment = !this.$store.state.togglePayment
     },
     setOptionEnvio() {
       if (this.data.detalle) {
@@ -790,13 +697,13 @@ export default {
       }
       if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
         window.fbq('track', 'AddToCart', {
-          content_ids: this.data.detalle.id,
-          name: this.data.detalle.nombre,
-          quantity: this.data.cantidad,
-          currency: this.dataStore.tienda.moneda,
-          value: this.salesData.precio,
           content_type: 'product',
-          description: 'Vista del producto',
+          content_ids: this.data.detalle.id,
+          value: this.salesData.precio,
+          num_items: this.data.cantidad,
+          content_name: this.data.detalle.nombre,
+          currency: this.dataStore.tienda.moneda,
+          description: 'Agregar al carrito el producto',
         })
       }
       this.$gtm.push({ event: 'AddToCart' })
@@ -1195,7 +1102,6 @@ i.close {
   flex-direction: row;
   margin-bottom: 10px;
 }
-
 .content_card-info {
   display: initial;
 }
@@ -1282,18 +1188,7 @@ i.close {
   font-size: 27px;
   bottom: 2px;
 }
-.content-float-info {
-  z-index: 3;
-  width: 100%;
-  max-width: 385px;
-  padding-top: 10px;
-  /* padding-bottom: 10px; */
-  flex-direction: column;
-  display: none;
-  background: #efefef !important;
-  transition: all 2s ease-out;
-  border-radius: 5px;
-}
+
 .whatsapp {
   fill: #27d367;
   width: 30px;
@@ -1640,7 +1535,6 @@ i.close {
     border-top: none;
   }
 }
-
 @media (max-width: 600px) {
   .container-productDetail {
     padding: 0px;

@@ -107,12 +107,6 @@
           </div>
           <div class="right">
             <div class="contact-content">
-              <!-- <div class="contact-item-text">
-              <p class="contact-text-title">{{ $t('contact_title2') }}</p>
-              <p class="contact-text-subtitles">
-                {{ $t('contact_subtitle2') }}
-              </p>
-            </div> -->
               <ValidationObserver
                 ref="observer"
                 tag="form"
@@ -215,7 +209,11 @@
                       ref="colorBtn"
                       class="btn"
                       v-on:click.prevent="submitContact"
+                      v-if="stateBtn == true"
                     >
+                      {{ $t('contact_enviar') }}
+                    </button>
+                    <button ref="colorBtn" class="btn2" disabled v-else>
                       {{ $t('contact_enviar') }}
                     </button>
                   </div>
@@ -288,6 +286,7 @@ export default {
           icon: 'email-icon',
         },
       ],
+      stateBtn: true,
     }
   },
   destroyed() {
@@ -306,6 +305,7 @@ export default {
       this.$refs.observer
         .validate()
         .then((response) => {
+          this.stateBtn = false
           if (response) {
             const json = {
               nombre: this.nombre,
@@ -318,6 +318,7 @@ export default {
               .post('https://templates.komercia.co/api/mensaje-contacto', json)
               .then((response) => {
                 this.$message.success('Comentario enviado!')
+                this.stateBtn = true
                 if (
                   this.facebooPixel &&
                   this.facebooPixel.pixel_facebook != null
@@ -327,12 +328,19 @@ export default {
                     description: this.email,
                   })
                 }
+                this.formDatareset()
               })
           }
         })
         .catch((e) => {
           this.$message.error('error')
         })
+    },
+    formDatareset() {
+      this.nombre = ''
+      this.email = ''
+      this.numberphone = ''
+      this.comment = ''
     },
   },
   watch: {
@@ -386,7 +394,7 @@ export default {
     color: var(--color_text);
     font-size: 14px;
     /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
-    font-family: var(--font-style-1);
+    font-family: var(--font-style-1) !important;
     @apply uppercase font-semibold tracking-1;
   }
   .content-locatioin,
@@ -399,6 +407,7 @@ export default {
   .txt-left {
     color: var(--color_subtext);
     font-size: 14px;
+    font-family: var(--font-style-1) !important;
     @apply w-full flex justify-start items-center pl-20;
   }
   .email {
@@ -424,18 +433,21 @@ export default {
   .txt-contactus {
     color: var(--color_text);
     font-size: 18px;
+    font-family: var(--font-style-1) !important;
     @apply w-full justify-center items-center uppercase font-semibold;
   }
   .validator {
     @apply w-full;
   }
   .text-error {
+    font-family: var(--font-style-1) !important;
     color: red;
     font-size: 13px;
     @apply w-full;
   }
   input,
   .input-text {
+    font-family: var(--font-style-1) !important;
     color: var(--color_subtext);
     border: 1px solid var(--background_color_2);
     font-size: 13px;
@@ -443,12 +455,14 @@ export default {
   }
   textarea,
   .input-text-rectangule {
+    font-family: var(--font-style-1) !important;
     color: var(--color_subtext);
     border: 1px solid var(--background_color_2);
     font-size: 13px;
     @apply w-full h-100 pl-10 pt-10;
   }
   .txt-input {
+    font-family: var(--font-style-1) !important;
     color: var(--color_text);
     font-size: 13px;
     @apply w-full justify-center items-center capitalize;
@@ -463,9 +477,19 @@ export default {
     color: var(--color_text_btn);
     border-radius: var(--radius_btn);
     @apply w-auto h-35 border mt-20 px-20;
+    font-family: var(--font-style-1) !important;
   }
   .btn:hover {
     @apply shadow-lg;
+  }
+  .btn2 {
+    border: 1px solid grey;
+    background-color: grey;
+    font-size: 14px;
+    color: black;
+    border-radius: var(--radius_btn);
+    font-family: var(--font-style-1) !important;
+    @apply w-auto h-35 border mt-20 px-20;
   }
   .form-cont {
     @apply w-full flex flex-col justify-start items-center;

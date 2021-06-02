@@ -3,7 +3,6 @@
     <component :is="indexTemplate" />
   </div>
 </template>
-
 <script>
 import KoTemplate5 from './template5/index'
 import KoTemplate6 from './template6/index_macrobrand'
@@ -13,7 +12,6 @@ import KoTemplate8 from './template8/index'
 import KoTemplate9 from './template9/index'
 import KoTemplate10 from './template10/index'
 import KoTemplate11 from './template11/index'
-
 export default {
   components: {
     KoTemplate5,
@@ -23,13 +21,6 @@ export default {
     KoTemplate9,
     KoTemplate10,
     KoTemplate11,
-  },
-  mounted() {
-    if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-      window.fbq('track', 'ViewContent', {
-        description: 'PageHome',
-      })
-    }
   },
   computed: {
     template() {
@@ -65,11 +56,6 @@ export default {
       }
       return productListComponent
     },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
   },
 }
 </script>
-
-<style></style>

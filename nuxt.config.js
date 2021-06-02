@@ -27,7 +27,6 @@ export default {
   },
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    // 'swiper/dist/css/swiper.css',
     'core-components-npm/dist/ko.css',
   ],
   plugins: [
@@ -36,13 +35,13 @@ export default {
     '~/plugins/mixinCommonMethods',
     '~/plugins/material-icons',
     '~plugins/validate.js',
+    '~/plugins/facebook-pixel',
     { src: '~/plugins/i18n' },
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
     { src: '~plugins/ga.js', ssr: false },
     { src: '~/plugins/gtm', ssr: false },
-    { src: '~/plugins/facebook-pixel', ssr: false },
     { src: '~/plugins/countryFlags.js', ssr: false },
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/element-tiptap', ssr: false },
@@ -72,8 +71,6 @@ export default {
     },
   },
   build: {
-    // minimize: true,
-    // analyze: true, //Map webpack
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
     },
@@ -82,49 +79,9 @@ export default {
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-        // config.performance.maxAssetSize = 700 * 1024
-        // if (isProd) {
-        //   config.optimization.splitChunks.maxSize = 249856 // 244 Kib
-        // }
       }
     },
-    // postcss: {
-    //   plugins: {
-    //     'postcss-nested': {},
-    //   },
-    // },
-    // ...(isProd && {
-    //   optimization: {
-    //     runtimeChunk: 'single',
-    //     splitChunks: {
-    //       chunks: 'all',
-    //       automaticNameDelimiter: '.',
-    //       name: true,
-    //       maxSize: 249856,
-    //     },
-    //   },
-    // }),
-    // ...(isProd && {
-    //   html: {
-    //     minify: {
-    //       collapseBooleanAttributes: true,
-    //       decodeEntities: true,
-    //       minifyCSS: true,
-    //       minifyJS: true,
-    //       processConditionalComments: true,
-    //       removeEmptyAttributes: true,
-    //       removeRedundantAttributes: true,
-    //       trimCustomFragments: true,
-    //       useShortDoctype: true,
-    //     },
-    //   },
-    // }),
   },
-  // render: {
-  //   bundleRenderer: {
-  //     shouldPreload: (file, type) => ['script', 'style', 'font'].includes(type),
-  //   },
-  // },
   router: {
     base: '/',
   },

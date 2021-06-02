@@ -189,12 +189,28 @@
         {{ this.product.categoria }}
       </div>
       <router-link :to="{ path: `/productos/` + product.slug }">
-        <div class="tittle">
+        <div class="tittle tittle-xml">
+          <p class="card-title" v-if="this.product.nombre.length >= 90">
+            {{ `${this.product.nombre.slice(0, 90)}...` }}
+          </p>
+          <p class="card-title" v-else>
+            {{ `${this.product.nombre.slice(0, 90)}` }}
+          </p>
+        </div>
+        <div class="tittle tittle-lg">
           <p class="card-title" v-if="this.product.nombre.length >= 54">
             {{ `${this.product.nombre.slice(0, 54)}...` }}
           </p>
           <p class="card-title" v-else>
             {{ `${this.product.nombre.slice(0, 54)}` }}
+          </p>
+        </div>
+        <div class="tittle tittle-sm">
+          <p class="card-title" v-if="this.product.nombre.length >= 40">
+            {{ `${this.product.nombre.slice(0, 40)}...` }}
+          </p>
+          <p class="card-title" v-else>
+            {{ `${this.product.nombre.slice(0, 40)}` }}
           </p>
         </div>
       </router-link>
@@ -245,7 +261,7 @@
             </p>
           </div>
         </div>
-        <div v-else class="h-20"></div>
+        <div v-else class="h-27"></div>
       </div>
     </div>
   </div>
@@ -403,13 +419,13 @@ export default {
           }
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
-              content_ids: this.product.id,
-              name: this.product.nombre,
-              quantity: 1,
-              currency: this.dataStore.tienda.moneda,
-              value: this.product.precio,
               content_type: 'product',
-              description: 'Agregado detalle del producto',
+              content_ids: this.product.id,
+              value: this.salesData.precio,
+              num_items: 1,
+              content_name: this.product.nombre,
+              currency: this.dataStore.tienda.moneda,
+              description: 'Agregar al carrito el producto',
             })
           }
           this.$gtm.push({ event: 'AddToCart' })
@@ -507,7 +523,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
 .datos-producto {
-  @apply w-full flex flex-col justify-center items-start my-24 ml-8 cursor-default;
+  @apply w-full flex flex-col justify-center items-start my-24 cursor-default;
 }
 .container {
   @apply relative max-w-full;
@@ -516,7 +532,6 @@ export default {
   @apply w-full h-auto;
 }
 .cart-Shop {
-  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -525,9 +540,9 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
 }
 .icons-hover {
-  @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -536,6 +551,7 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
 }
 .icon-show-mobile {
   fill: white;
@@ -548,16 +564,25 @@ export default {
   min-height: 49px;
   max-height: 49px;
 }
+.tittle-xml {
+  display: initial;
+}
+.tittle-lg {
+  display: none;
+}
+.tittle-sm {
+  display: none;
+}
 .categoria {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-2) !important;
   color: var(--color_category);
   font: inherit;
   font-weight: 600;
 }
 .card-title {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-2) !important;
   color: var(--color_text_card);
   font: inherit;
   font-weight: 800;
@@ -568,15 +593,13 @@ export default {
 }
 .separator-price {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-2) !important;
   font-size: 16px;
   color: var(--color_price_card);
-
-  margin-top: 10px;
 }
 .text-price {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-2) !important;
   margin-top: 10px;
   font-size: 16px;
   color: var(--color_price_card);
@@ -616,13 +639,13 @@ export default {
   @apply bg-white-white;
 }
 .overlay-bottom {
-  background-color: #3d3d3d;
+  background-color: var(--color_background_btn);
 }
 .overlay-bottom:hover {
-  @apply bg-white-white;
+  background-color: #3d3d3d;
 }
 .txt-add {
-  color: white;
+  color: var(--color_text_btn);
   font-size: 15px;
   letter-spacing: 1px;
   text-transform: capitalize;
@@ -630,7 +653,7 @@ export default {
   transition: all 200ms ease-in;
 }
 .overlay-bottom:hover .txt-add {
-  color: #3d3d3d;
+  color: white;
   transition: all 200ms ease-in;
 }
 .txt-free {
@@ -661,11 +684,11 @@ export default {
     height: 30px;
   }
   .overlay-top {
-    @apply absolute overflow-hidden rounded-md bg-white-white shadow-md transition-all ease-in duration-300;
     top: 10%;
     right: 0;
     width: 45px;
     height: 40px;
+    @apply absolute overflow-hidden rounded-md bg-white-white shadow-md transition-all ease-in duration-300;
   }
   .overlay-free {
     background-color: #3d3d3d;
@@ -844,6 +867,28 @@ export default {
   .container:hover .overlay-top {
     width: 40px;
     left: 89%;
+  }
+}
+@media (max-width: 1125px) {
+  .tittle-xml {
+    display: none;
+  }
+  .tittle-lg {
+    display: initial;
+  }
+  .tittle-sm {
+    display: none;
+  }
+}
+@media (max-width: 400px) {
+  .tittle-xml {
+    display: none;
+  }
+  .tittle-lg {
+    display: none;
+  }
+  .tittle-sm {
+    display: initial;
   }
 }
 </style>

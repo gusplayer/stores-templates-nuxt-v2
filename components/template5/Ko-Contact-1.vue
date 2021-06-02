@@ -1,6 +1,14 @@
 <template>
   <div class="wrapper-contact" :style="settingK05Contact">
-    <div class="contact">
+    <div
+      class="contact"
+      :style="{
+        '--font-style':
+          this.settingK05Contact && this.settingK05Contact.tipo_letra
+            ? this.settingK05Contact.tipo_letra
+            : 'Roboto',
+      }"
+    >
       <div class="contact-content">
         <div>
           <p class="contact-text-title">{{ $t('contact_title') }}</p>
@@ -139,7 +147,11 @@
               ref="colorBtn"
               class="btn"
               v-on:click.prevent="submitContact"
+              v-if="stateBtn == true"
             >
+              {{ $t('contact_enviar') }}
+            </button>
+            <button ref="colorBtn" class="btn2" disabled v-else>
               {{ $t('contact_enviar') }}
             </button>
           </div>
@@ -209,6 +221,7 @@ export default {
           icon: 'email-icon',
         },
       ],
+      stateBtn: true,
     }
   },
   destroyed() {
@@ -228,6 +241,7 @@ export default {
         .validate()
         .then((response) => {
           if (response) {
+            this.stateBtn = false
             const json = {
               nombre: this.nombre,
               correo: this.email,
@@ -239,6 +253,7 @@ export default {
               .post('https://templates.komercia.co/api/mensaje-contacto', json)
               .then((response) => {
                 this.$message.success('Comentario enviado!')
+                this.stateBtn = true
                 if (
                   this.facebooPixel &&
                   this.facebooPixel.pixel_facebook != null
@@ -248,12 +263,19 @@ export default {
                     description: this.email,
                   })
                 }
+                this.formDatareset()
               })
           }
         })
         .catch((e) => {
           this.$message.error('error')
         })
+    },
+    formDatareset() {
+      this.nombre = ''
+      this.email = ''
+      this.numberphone = ''
+      this.comment = ''
     },
   },
   watch: {
@@ -571,13 +593,24 @@ export default {
   font-weight: bold;
   cursor: pointer;
   margin-left: 20px;
-  cursor: pointer;
   transition: all 200ms ease-in;
 }
 .btn:hover {
   color: white;
   border: solid 2px var(--btnhover);
   background-color: var(--btnhover);
+}
+.btn2 {
+  color: black;
+  border-radius: var(--radius_btn);
+  border: solid 2px grey;
+  background-color: grey;
+  padding: 8px 14px;
+  font-size: 16px;
+  width: 50%;
+  height: 41px;
+  font-weight: bold;
+  margin-left: 20px;
 }
 
 @media (max-width: 700px) {

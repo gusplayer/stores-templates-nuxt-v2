@@ -16,7 +16,7 @@
           <div class="items-left">
             <img
               class="image-left"
-              v-lazy="koffers.values[0].url_img_background"
+              :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
               alt="image-left"
               v-if="koffers.values[0].url_img_background"
             />
@@ -65,7 +65,7 @@
           <div class="image-static" v-if="!hover">
             <img
               class="image"
-              v-lazy="koffers.values[1].url_img_background"
+              :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
               v-if="koffers.values[1].url_img_background"
               alt="imagen center static"
             />
@@ -73,7 +73,7 @@
           <div class="image-gif" v-if="hover">
             <img
               class="image"
-              v-lazy="koffers.values[1].url_gift_background"
+              :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
               v-if="koffers.values[1].url_gift_background"
               alt="imagen center gift"
             />
@@ -83,7 +83,7 @@
           <div class="items-right">
             <img
               class="image-right"
-              v-lazy="koffers.values[2].url_img_background"
+              :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
               v-if="koffers.values[2].url_img_background"
               alt="image-right"
             />
@@ -151,7 +151,7 @@
         <div class="items-left">
           <img
             class="image-left"
-            v-lazy="koffers.values[0].url_img_background"
+            :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
             v-if="koffers.values[0].url_img_background"
             alt="image-left"
           />
@@ -202,7 +202,7 @@
             <div class="image-static" v-if="!hover">
               <img
                 class="image"
-                v-lazy="koffers.values[1].url_img_background"
+                :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
                 v-if="koffers.values[1].url_img_background"
                 alt="imagen center static"
               />
@@ -210,7 +210,7 @@
             <div class="image-gif" v-if="hover">
               <img
                 class="image"
-                v-lazy="koffers.values[1].url_gift_background"
+                :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
                 v-if="koffers.values[1].url_gift_background"
                 alt="imagen center gift"
               />
@@ -219,7 +219,7 @@
           <div class="items-right">
             <img
               class="image-right"
-              v-lazy="koffers.values[2].url_img_background"
+              :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
               v-if="koffers.values[2].url_img_background"
               alt="image-right"
             />
@@ -287,9 +287,9 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinaryBanner],
   props: {
     dataStore: Object,
     koffers: Object,
@@ -310,6 +310,8 @@ export default {
   @apply w-full justify-center items-center;
 }
 .items-left {
+  max-width: 635px;
+  max-height: 400px;
   width: 100%;
   height: auto;
   display: flex;
@@ -365,9 +367,13 @@ export default {
   @apply w-full cursor-pointer;
 }
 .image {
+  max-width: 635px;
+  max-height: 400px;
   @apply object-cover w-full;
 }
 .items-right {
+  max-width: 635px;
+  max-height: 400px;
   width: 100%;
   height: auto;
   display: flex;
@@ -427,7 +433,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #fff;
+  /* background: #fff; */
   overflow: hidden;
   width: 0;
   height: 100%;
@@ -438,11 +444,16 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #fff;
+  /* background: #fff; */
   overflow: hidden;
   width: 0;
   height: 100%;
   transition: 0.2s ease;
+}
+@media (max-width: 350px) {
+  .hid-cont {
+    display: none;
+  }
 }
 @screen sm {
   .content-items {

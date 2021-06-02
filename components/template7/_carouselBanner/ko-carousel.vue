@@ -44,13 +44,14 @@ export default {
     settingKCarousel: Object,
     settingGeneral: Object,
   },
+  mounted() {
+    this.autoplayBanner()
+  },
   data() {
     return {
-      bg1: '',
-      bg2: '',
-      bg3: '',
-
       swiperOption: {
+        autoHeight: true,
+        effect: 'fade',
         slidesPerView: 'auto',
         loop: true,
         pagination: {
@@ -67,6 +68,20 @@ export default {
         },
       },
     }
+  },
+  methods: {
+    autoplayBanner() {
+      if (this.settingKCarousel && this.settingKCarousel.values.length == 1) {
+        this.swiperOption.autoplay.delay = 900000000000000000
+      } else {
+        this.swiperOption.autoplay.delay = 6000
+      }
+    },
+  },
+  watch: {
+    'settingKCarousel.values'() {
+      this.autoplayBanner()
+    },
   },
 }
 </script>

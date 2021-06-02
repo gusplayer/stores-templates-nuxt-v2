@@ -27,7 +27,9 @@
           >
             <div
               class="swiper-slide-1"
-              :style="`background-image: url(${elementBannner['url_img_background']})`"
+              :style="`background-image: url(${idCloudinaryBanner(
+                elementBannner['url_img_background']
+              )})`"
             >
               <div class="banner-content-items-1">
                 <div class="content-items-1">
@@ -81,17 +83,24 @@
 </template>
 
 <script>
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
   props: {
     dataStore: Object,
     banner: Object,
     settingGeneral: Object,
   },
+  mixins: [idCloudinaryBanner],
+  mounted() {
+    this.autoplayBanner()
+  },
   data() {
     return {
       swiperOption: {
+        autoHeight: true,
         slidesPerView: 'auto',
         loop: true,
+        effect: 'fade',
         pagination: {
           el: '.swiper-pagination',
           clickable: true,
@@ -106,6 +115,20 @@ export default {
         },
       },
     }
+  },
+  methods: {
+    autoplayBanner() {
+      if (this.banner && this.banner.values.length == 1) {
+        this.swiperOption.autoplay.delay = 900000000000000000
+      } else {
+        this.swiperOption.autoplay.delay = 6000
+      }
+    },
+  },
+  watch: {
+    'banner.values'() {
+      this.autoplayBanner()
+    },
   },
 }
 </script>
@@ -124,7 +147,10 @@ export default {
   @apply z-auto;
 }
 .swiper-slide-1 {
-  height: 831px;
+  max-height: 831px;
+  /* height: 831px; */
+  height: 50vw;
+  object-fit: contain;
   width: 100vw;
   background-size: cover;
   background-position: center;
@@ -171,6 +197,9 @@ export default {
   border-radius: 100%;
   background: white;
   opacity: 0.2;
+}
+.banner-content-items-1 {
+  padding: 20px;
 }
 @screen sm {
   .swiper-slide-1 {
@@ -221,6 +250,7 @@ export default {
 }
 @screen md {
   .banner-content-items-1 {
+    display: initial;
     @apply w-7/0;
   }
   .banner-text-top {
@@ -272,6 +302,11 @@ export default {
   }
   .banner-text-medium {
     font-size: 90px;
+  }
+}
+@media (max-width: 500px) {
+  .banner-content-items-1 {
+    display: none;
   }
 }
 </style>

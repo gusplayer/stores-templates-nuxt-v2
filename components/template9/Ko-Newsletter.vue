@@ -283,7 +283,7 @@ export default {
 }
 @screen sm {
   .wrapper-items {
-    @apply flex flex-col mb-12;
+    @apply flex flex-col mb-40;
   }
   .content-checkbox {
     @apply ml-0;

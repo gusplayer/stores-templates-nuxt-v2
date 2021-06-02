@@ -48,7 +48,6 @@
           </div>
         </div>
       </router-link>
-
       <router-link
         :to="{ path: `/blog/` + article.slug }"
         class="contet-bottom"
@@ -75,9 +74,9 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinaryBanner from '../../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinaryBanner],
   name: 'Ko-Blogcard',
   props: {
     article: Object,

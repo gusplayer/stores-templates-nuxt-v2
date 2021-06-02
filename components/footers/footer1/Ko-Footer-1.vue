@@ -1,6 +1,14 @@
 <template>
   <div class="wrapper-footer" ref="background" :style="settingByTemplate">
-    <div class="contenedor">
+    <div
+      :style="{
+        '--font-style':
+          this.settingByTemplate && this.settingByTemplate.tipo_letra
+            ? this.settingByTemplate.tipo_letra
+            : 'Roboto',
+      }"
+      class="contenedor"
+    >
       <div class="content-items-iconos">
         <div
           v-for="(item, index) in links"
@@ -31,7 +39,15 @@
         </div>
       </div>
     </div>
-    <div class="under-footer">
+    <div
+      :style="{
+        '--font-style':
+          this.settingByTemplate && this.settingByTemplate.tipo_letra
+            ? this.settingByTemplate.tipo_letra
+            : 'Roboto',
+      }"
+      class="under-footer"
+    >
       <button
         class="contenedor-term-con"
         v-if="dataStore.politicas"
@@ -78,7 +94,15 @@
         />
       </nuxt-link>
     </div>
-    <div v-if="showModal">
+    <div
+      :style="{
+        '--font-style':
+          this.settingByTemplate && this.settingByTemplate.tipo_letra
+            ? this.settingByTemplate.tipo_letra
+            : 'Roboto',
+      }"
+      v-if="showModal"
+    >
       <div class="modal" v-if="dataStore.politicas">
         <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
       </div>

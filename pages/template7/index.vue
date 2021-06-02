@@ -1,5 +1,30 @@
 <template lang="html">
-  <div v-if="settingByTemplate7">
+  <div
+    v-if="settingByTemplate7"
+    :style="[
+      {
+        '--font-style-1':
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_1
+            ? this.settingByTemplate7.settingGeneral.fount_1
+            : 'David Libre',
+      },
+      {
+        '--font-style-2':
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_2
+            ? this.settingByTemplate7.settingGeneral.fount_2
+            : 'Great Vibes',
+      },
+      {
+        '--font-style-3':
+          this.settingByTemplate7.settingGeneral &&
+          this.settingByTemplate7.settingGeneral.fount_3
+            ? this.settingByTemplate7.settingGeneral.fount_3
+            : 'Lora',
+      },
+    ]"
+  >
     <KCarousel
       id="kbannerX"
       v-bind="componentsProps"
@@ -253,12 +278,12 @@ input::-webkit-input-placeholder {
     width: 100%;
     display: flex;
     position: fixed;
-    padding: 2px 5px 0px;
+    padding: 8px 5px 0px;
     background: var(--background_color_1);
     -webkit-transition: all 0.8s;
     -moz-transition: all 0.8s;
     transition: all 0.8s;
-    top: 91px;
+    top: 88px;
     z-index: 3;
   }
 }

@@ -23,8 +23,9 @@ export default {
     errorPage() {
       if (this.error.statusCode === 404) {
         return error404
+      } else {
+        return error500
       }
-      return error500
     },
   },
 }

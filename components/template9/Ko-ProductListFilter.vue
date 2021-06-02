@@ -27,10 +27,26 @@
     >
       <div class="crumb">
         <nuxt-link to="/">
-          <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
+          <p
+            class="txt-crumb s1"
+            :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+          >
+            {{ $t('header_inicio') }}
+          </p>
         </nuxt-link>
-        <p class="txt-crumb">/</p>
-        <p class="txt-crumb s2" @click="clear">{{ $t('header_productos') }}</p>
+        <p
+          class="txt-crumb"
+          :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+        >
+          /
+        </p>
+        <p
+          class="txt-crumb s2"
+          @click="clear"
+          :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+        >
+          {{ $t('header_productos') }}
+        </p>
       </div>
       <div class="tittle-banner-shop">
         <p class="btn-tittle-shop" v-if="!this.nameCategoryHeader">
@@ -104,7 +120,6 @@
             </div>
           </div>
           <div class="empty"></div>
-
           <button
             class="item-tittle accordion"
             v-show="showSubCategory && selectedSubcategories.length"
@@ -145,10 +160,24 @@
         <div class="content-banner-shop-r">
           <div class="crumb">
             <nuxt-link to="/">
-              <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
+              <p
+                class="txt-crumb s1"
+                :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+              >
+                {{ $t('header_inicio') }}
+              </p>
             </nuxt-link>
-            <p class="txt-crumb">/</p>
-            <p class="txt-crumb s2" @click="clear">
+            <p
+              class="txt-crumb"
+              :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+            >
+              /
+            </p>
+            <p
+              class="txt-crumb s2"
+              @click="clear"
+              :style="`color: ${settingByTemplate9[0].productListFilter.breadcrumbs};`"
+            >
               {{ $t('header_productos') }}
             </p>
           </div>
@@ -289,7 +318,6 @@ export default {
     }
     var acc = document.getElementsByClassName('accordion')
     var i
-
     for (i = 0; i < acc.length; i++) {
       acc[i].addEventListener('click', function () {
         this.classList.toggle('active')
@@ -313,11 +341,6 @@ export default {
     }
     if (this.previousPage) {
       this.currentPage = this.previousPage
-    }
-    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('SET_STATEBANNER', false)
-    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      this.$store.commit('SET_STATEBANNER', false)
     }
   },
   data() {
@@ -384,7 +407,6 @@ export default {
       const final = initial + 18
       return this.products.slice(initial, final)
     },
-
     selectedCategory() {
       return this.$store.state.products.payload
     },
@@ -434,26 +456,6 @@ export default {
         )
       }
     },
-    shoView2() {
-      this.indexshowView = 1
-    },
-    shoView4() {
-      this.indexshowView = 2
-    },
-    shoView16() {
-      this.indexshowView = 3
-    },
-    showGrid2() {
-      this.indexshowList = 2
-      this.showinList = false
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
-          'style',
-          'grid-template-columns: repeat(2, minmax(0, 1fr))'
-        )
-      }
-    },
     showGrid3() {
       this.indexshowList = 3
       this.showinList = false
@@ -463,24 +465,6 @@ export default {
           'style',
           'grid-template-columns: repeat(3, minmax(0, 1fr))'
         )
-      }
-    },
-    showGrid4() {
-      this.indexshowList = 4
-      this.showinList = false
-      var dimension = screen.width
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
-          'style',
-          'grid-template-columns: repeat(4, minmax(0, 1fr))'
-        )
-        if (gridselector && dimension < 768) {
-          gridselector.setAttribute(
-            'style',
-            'grid-template-columns: repeat(2, minmax(0, 1fr))'
-          )
-        }
       }
     },
     back() {
@@ -617,7 +601,6 @@ export default {
         path: '',
         query: {},
       })
-      this.$store.commit('SET_STATEBANNER', true)
       this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
       this.$store.commit('products/FILTER_BY', {
@@ -707,7 +690,7 @@ export default {
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
-        window.scrollBy(0, -1500)
+        window.scrollBy(0, -4500)
       }, 250)
     },
     previousPage() {
@@ -916,9 +899,12 @@ export default {
 }
 .product-tittle,
 .product-subtittle,
-.product-description,
-.product-conten-items {
+.product-description {
   @apply justify-center items-center text-center gap-4;
+}
+
+.product-conten-items {
+  @apply gap-4;
 }
 .producto-items-content {
   @apply w-full;
@@ -949,7 +935,9 @@ export default {
 }
 .content-products {
   border-bottom: 0.5px solid var(--color_icon);
-  @apply w-full flex flex-col justify-center items-center;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 .content-products-empty {
   width: 100%;
@@ -1014,7 +1002,6 @@ export default {
 .txt-crumb {
   font-family: Arial, sans-serif;
   font-size: 12px;
-  color: var(--color_subtext);
   line-height: 14px;
   padding-right: 6px;
   cursor: pointer;
@@ -1055,10 +1042,15 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 0 18px;
-  background-color: white;
+  background-color: transparent;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease-out;
+}
+.content-left {
+  position: sticky;
+  top: 130px;
+  transition: all 0.25s ease;
 }
 @screen sm {
   .product-conten-items {
@@ -1071,7 +1063,7 @@ export default {
     @apply w-9/5 flex flex-row justify-start items-start;
   }
   .content-left {
-    @apply hidden;
+    display: none;
   }
   .content-right {
     @apply w-full;

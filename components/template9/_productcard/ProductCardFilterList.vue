@@ -614,13 +614,13 @@ export default {
           }
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
-              content_ids: this.product.id,
-              name: this.product.nombre,
-              quantity: 1,
-              currency: this.dataStore.tienda.moneda,
-              value: this.product.precio,
               content_type: 'product',
-              description: 'Agregado detalle del producto',
+              content_ids: this.product.id,
+              value: this.salesData.precio,
+              num_items: 1,
+              content_name: this.product.nombre,
+              currency: this.dataStore.tienda.moneda,
+              description: 'Agregar al carrito el producto',
             })
           }
           this.$gtm.push({ event: 'AddToCart' })
@@ -715,7 +715,6 @@ export default {
 }
 .cart-Shop {
   color: #00a650;
-  @apply absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -724,10 +723,10 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
 }
 .cart-Shop-mobile {
   color: #00a650;
-  @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -737,9 +736,9 @@ export default {
   transform: translate(-50%, -50%);
   text-align: center;
   justify-column: center;
+  @apply text-white-white absolute text-center transition-all ease-in duration-300 w-full;
 }
 .icons-hover {
-  @apply text-gray-textHeader absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
   font: inherit;
   font-size: 100%;
   top: 50%;
@@ -748,6 +747,7 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  @apply text-gray-textHeader absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
 }
 .icon-show-mobile {
   fill: white;
@@ -850,7 +850,6 @@ export default {
   min-height: 40px;
   max-height: 40px;
   width: 100%;
-  margin-left: 10px;
   letter-spacing: 1px;
   font-size: 15px;
   align-items: center;
@@ -876,7 +875,6 @@ export default {
   min-height: 40px;
   max-height: 40px;
   width: 100%;
-  margin-left: 10px;
   letter-spacing: 1px;
   font-size: 15px;
   align-items: center;
@@ -1020,6 +1018,7 @@ export default {
     margin-top: 2.5px;
   }
   .producto {
+    background: var(--background_color_card);
     @apply w-9/0 grid grid-cols-1 gap-4 justify-center items-center cursor-pointer;
   }
   .product-image {
