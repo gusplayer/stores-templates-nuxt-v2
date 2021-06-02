@@ -24,9 +24,11 @@
 <script>
 import ProductCard from './ProductCard'
 import SectionWithTitle from './SectionWithTitle'
+import settingsProps from './mixins/ComponentProps'
 
 export default {
   name: 'ISection',
+  mixins: [settingsProps],
   components: {
     SectionWithTitle,
     ProductCard,
@@ -74,5 +76,4 @@ export default {
     margin: 0 auto;
   }
 }
-
 </style>

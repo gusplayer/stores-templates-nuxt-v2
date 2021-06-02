@@ -38,8 +38,11 @@
 </template>
 
 <script>
+import settingsProps from './mixins/ComponentProps'
+
 export default {
   name: 'ProductCard',
+  mixins: [settingsProps],
   props: {
     name: {
       type: String,

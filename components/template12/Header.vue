@@ -27,8 +27,11 @@
 </template>
 
 <script>
+import settingsProps from './mixins/ComponentProps'
+
 export default {
   name: 'IHeader',
+  mixins: [settingsProps],
   data: () => ({
     logoSrc: 'http://templates.framework-y.com/gourmet/images/logo.png',
   }),

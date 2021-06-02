@@ -3,6 +3,10 @@
     ref="footer"
     :class="`${visible ? 'visible' : 'invisible'}`"
     class="footer_container relative flex flex-col pt-14 items-center w-full bg-gray-100"
+    :style="[
+      settingByTemplate12[0].cardProduct,
+      settingByTemplate12[0].setting12General,
+    ]"
   >
     <div class="footer_logo mb-6">
       <img :src="logoSrc" class="w-44 fit-contain" />
@@ -10,6 +14,14 @@
     <p
       class="footer_brand_modus text-center text-md font-normal text-gray-400 pr-4 pl-4"
       v-html="modus"
+      :style="[
+      {
+        '--font-style-1':
+            this.settingByTemplate12[0].setting12General &&
+            this.settingByTemplate12[0].setting12General.fount_1
+              ? this.settingByTemplate12[0].setting12General.fount_1
+              : 'Poppins',
+      }]"
     />
     <div class="footer_social_icons flex flex-nowrap mt-6 mb-12">
       <div
@@ -30,8 +42,11 @@
 </template>
 
 <script>
+import settingsProps from './mixins/ComponentProps'
+
 export default {
   name: 'IFooter',
+  mixins: [settingsProps],
   props: {
     modus: {
       type: String,

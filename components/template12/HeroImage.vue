@@ -23,8 +23,11 @@
 </template>
 
 <script>
+import settingsProps from './mixins/ComponentProps'
+
 export default {
   name: 'HeroImage',
+  mixins: [settingsProps],
   props: {
     title: {
       type: String,

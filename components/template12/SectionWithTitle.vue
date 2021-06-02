@@ -21,8 +21,11 @@
 </template>
 
 <script>
+import settingsProps from './mixins/ComponentProps'
+
 export default {
   name: 'SectionWithTitle',
+  mixins: [settingsProps],
   props: {
     title: {
       type: String,
