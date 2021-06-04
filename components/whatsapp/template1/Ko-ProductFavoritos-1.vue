@@ -18,8 +18,8 @@
             :src="idCloudinary(product.foto_cloudinary, 250, 250)"
             alt="Product Img"
           />
-          <p class="card-text-movil-title" v-if="product.nombre.length >= 19">
-            {{ `${product.nombre.slice(0, 19)}..` }}
+          <p class="card-text-movil-title" v-if="product.nombre.length >= 15">
+            {{ `${product.nombre.slice(0, 15)}..` }}
           </p>
           <p class="card-text-movil-title" v-else>
             {{ `${product.nombre.slice(0, 39)}` }}
