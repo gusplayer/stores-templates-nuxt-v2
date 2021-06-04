@@ -23,6 +23,11 @@
         <nuxt-link
           :to="this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
           class="data-item-logo"
+          :class="
+            this.settingByTemplate.logo_cuadrado == 1
+              ? `imagen-cuadrado`
+              : `imagen-redondo`
+          "
         >
           <img
             class="logo-img"
@@ -158,6 +163,12 @@ export default {
 }
 </script>
 <style scoped>
+.imagen-redondo {
+  border-radius: 100px;
+}
+.imagen-cuadrado {
+  border-radius: 5px;
+}
 .content-header {
   @apply w-full flex flex-col justify-center items-center;
 }
@@ -176,17 +187,17 @@ export default {
     @apply flex flex-col justify-center items-center;
   }
   .data-item-logo {
-    @apply w-full flex flex-col justify-center items-center -mt-50;
+    background: white;
+    width: 100px;
+    height: 100px;
+    @apply flex flex-col justify-center items-center -mt-60 shadow-md;
   }
   .logo-img {
-    background-color: white;
-    @apply w-98 h-98 shadow-md;
-  }
-  .imagen-redondo {
-    border-radius: 100px;
-  }
-  .imagen-cuadrado {
-    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: transparent;
   }
   .data-item-name {
     @apply w-full flex flex-col justify-center items-center my-10;
@@ -230,6 +241,8 @@ export default {
 }
 @screen md {
   .data-item-logo {
+    width: 180px;
+    height: 180px;
     @apply -mt-100;
   }
   .logo-img {

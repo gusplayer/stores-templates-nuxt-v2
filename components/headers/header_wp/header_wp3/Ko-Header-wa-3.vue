@@ -12,6 +12,11 @@
                 this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`
               "
               class="data-item-logo"
+              :class="
+                this.settingByTemplate.logo_cuadrado == 1
+                  ? `imagen-cuadrado`
+                  : `imagen-redondo`
+              "
             >
               <img
                 class="logo-img"
@@ -161,6 +166,12 @@ export default {
 .content-header {
   @apply w-full flex flex-col justify-center items-center;
 }
+.imagen-redondo {
+  border-radius: 100px;
+}
+.imagen-cuadrado {
+  border-radius: 5px;
+}
 @screen sm {
   .content-header-items {
     @apply w-full flex flex-col justify-center items-center;
@@ -170,39 +181,25 @@ export default {
     @apply w-9/5 flex flex-col justify-center items-center bg-cover bg-no-repeat bg-center rounded-9 overflow-hidden my-8;
   }
   .content-data-store {
-    /* background: rgb(175, 149, 74);
-    background: -moz-linear-gradient(
-      left,
-      rgb(175, 149, 74) 0%,
-      rgb(188, 173, 122, 0.47) 100%
-    );
-    background: -webkit-linear-gradient(
-      left,
-      rgb(175, 149, 74) 0%,
-      rgb(188, 173, 122, 0.47) 100%
-    );
-    background: linear-gradient(
-      to right,
-      rgb(175, 149, 74) 0%,
-      rgb(188, 173, 122, 0.47) 100%
-    ); */
     @apply w-full h-full flex flex-col justify-center items-center rounded-9 overflow-hidden;
   }
   .content-logo-name {
     @apply w-full flex flex-row justify-center items-center mt-20;
   }
   .data-item-logo {
-    @apply w-7/0 flex flex-col justify-center items-center;
+    margin-left: 20px;
+    margin-right: 20px;
+    background: white;
+    width: 110px;
+    height: 75px;
+    @apply flex flex-col justify-center items-center shadow-md;
   }
   .logo-img {
-    background-color: white;
-    @apply w-70 h-70 shadow-md;
-  }
-  .imagen-redondo {
-    border-radius: 100px;
-  }
-  .imagen-cuadrado {
-    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: transparent;
   }
   .data-item-name {
     @apply w-full flex flex-col justify-center items-center my-10;
@@ -256,8 +253,9 @@ export default {
   .content-banner-items {
     height: 135px;
   }
-  .logo-img {
-    @apply w-80 h-80;
+  .data-item-logo {
+    width: 110px;
+    height: 90px;
   }
   .name-store {
     font-size: 20px;
@@ -274,9 +272,9 @@ export default {
   .content-logo-name {
     @apply mt-0 mb-20;
   }
-  .logo-img {
-    width: 170px;
-    height: 170px;
+  .data-item-logo {
+    width: 150px;
+    height: 120px;
   }
   .name-store {
     font-size: 40px;
