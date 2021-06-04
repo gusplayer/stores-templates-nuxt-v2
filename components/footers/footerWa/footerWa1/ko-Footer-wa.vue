@@ -1,6 +1,10 @@
 <template>
   <div class="footer-container">
-    <div class="wrapper-footer" @click="openOrder">
+    <div
+      class="wrapper-footer"
+      @click="openOrder"
+      :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+    >
       <p class="unidades" v-if="productsCart.length > 0">
         <span>{{ productsCart.length }}</span>
         item
@@ -32,6 +36,9 @@ export default {
     },
     totalCart() {
       return this.$store.state.totalCart
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -96,7 +103,6 @@ export default {
   border-radius: 8px;
   padding: 0px 9px;
   cursor: pointer;
-  color: #000;
 }
 .wrapper-footer p {
   flex: 1;
@@ -104,7 +110,6 @@ export default {
 .main-container {
   height: 60px;
   width: 100%;
-  /* background: #fff; */
   position: fixed;
   bottom: 0;
   padding: 8px;
