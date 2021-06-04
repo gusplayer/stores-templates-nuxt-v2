@@ -42,6 +42,14 @@
           <p class="header-title">
             {{ dataStore.tienda.nombre }}
           </p>
+          <p
+            class="header-subtitle"
+            v-if="
+              this.settingByTemplate && this.settingByTemplate.mensaje_principal
+            "
+          >
+            {{ this.settingByTemplate.mensaje_principal }}
+          </p>
           <div
             v-if="this.settingByTemplate && this.settingByTemplate.descripcion"
           >
@@ -194,8 +202,13 @@ export default {
   margin-left: 130px;
 }
 .header-title {
-  font-size: 1.15rem;
+  font-size: 20px;
   font-weight: bold;
+  color: black;
+}
+.header-subtitle {
+  font-size: 16px;
+  /* font-weight: 500; */
   color: black;
 }
 .header-description {
