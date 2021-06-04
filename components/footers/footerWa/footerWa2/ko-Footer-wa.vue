@@ -9,6 +9,7 @@
       </div>
       <div
         @click="openOrder"
+        :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
         :class="productsCart.length > 0 ? 'button-footer' : 'button-footer-out'"
       >
         <p class="text-items-button">Realizar pedido</p>
@@ -29,6 +30,7 @@ export default {
   name: 'FooterWa2',
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   computed: {
     productsCart() {
@@ -80,6 +82,11 @@ export default {
 <style scoped>
 .content-footer {
   background-color: #3d3d3d;
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  max-width: 900px;
+  height: 60px;
   @apply w-full flex flex-col justify-center items-center;
 }
 @screen sm {
@@ -97,25 +104,15 @@ export default {
     @apply w-auto flex flex-row justify-center items-center font-semibold;
   }
   .button-footer {
-    /* flex: 2; */
     width: 130px;
-    background: #56d162;
-    background: -moz-linear-gradient(left, #56d162 0%, #27b43d 100%);
-    background: -webkit-linear-gradient(left, #56d162 0%, #27b43d 100%);
-    background: linear-gradient(to right, #56d162 0%, #27b43d 100%);
     @apply flex flex-col justify-center items-center py-7 rounded-md cursor-pointer;
   }
   .button-footer-out {
     width: 161px;
-    background: #56d162;
-    background: -moz-linear-gradient(left, #56d162 0%, #27b43d 100%);
-    background: -webkit-linear-gradient(left, #56d162 0%, #27b43d 100%);
-    background: linear-gradient(to right, #56d162 0%, #27b43d 100%);
     @apply flex flex-col justify-center items-center py-7 rounded-md;
   }
   .text-items-button {
     font-size: 12px;
-    color: #fff;
     font-family: 'Poppins', sans-serif !important;
     @apply w-auto font-semibold;
   }

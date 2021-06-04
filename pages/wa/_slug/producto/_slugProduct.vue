@@ -9,6 +9,7 @@ import KoProductDetail from '../../../../components/whatsapp/Ko-ProductDetail-wa
 
 export default {
   layout: 'wa',
+  name: 'WapiMEDetail',
   components: {
     KoProductDetail,
   },

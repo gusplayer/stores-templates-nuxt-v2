@@ -86,10 +86,12 @@
         >
           <div
             class="button-left"
+            :style="`background: ${settingByTemplate.color_primario};`"
             v-if="this.product.precio > 0"
             v-on:click="addShoppingCart"
           >
             <svg
+              :style="`color:${settingByTemplate.color_secundario};`"
               class="svg-img"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -106,12 +108,16 @@
           </div>
           <router-link
             class="button-right"
+            :style="`background: ${settingByTemplate.color_primario};`"
             :to="{
               path:
                 `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
             }"
           >
-            <p class="txt-btn-right">
+            <p
+              class="txt-btn-right"
+              :style="`color:${settingByTemplate.color_secundario};`"
+            >
               {{ $t('productdetail_btnComprar') }}
             </p>
           </router-link>
@@ -119,11 +125,15 @@
         <router-link
           v-else
           class="button-right"
+          :style="`background: ${settingByTemplate.color_primario};`"
           :to="{
             path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
           }"
         >
-          <p class="txt-btn-right">
+          <p
+            class="txt-btn-right"
+            :style="`color:${settingByTemplate.color_secundario};`"
+          >
             {{ $t('productdetail_btnComprar') }}
           </p>
         </router-link>
@@ -162,6 +172,9 @@ export default {
     }
   },
   computed: {
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
+    },
     productsCarts() {
       return this.$store.state.productsCart
     },
@@ -448,30 +461,16 @@ export default {
     @apply w-full flex flex-row justify-between items-center;
   }
   .button-left {
-    background-color: #ececec;
     @apply w-auto flex flex-col justify-center items-center rounded-5 p-8 mr-5 cursor-pointer;
   }
-  .button-left:hover {
-    background-color: #e0e0e0;
-  }
   .svg-img {
-    color: #3d3d3d;
     @apply w-21 h-auto;
   }
   .button-right {
-    background: #56d162;
-    background: -moz-linear-gradient(left, #56d162 0%, #27b43d 100%);
-    background: -webkit-linear-gradient(left, #56d162 0%, #27b43d 100%);
-    background: linear-gradient(to right, #56d162 0%, #27b43d 100%);
     @apply w-full flex flex-col justify-center items-center rounded-7 px-12 py-8 cursor-pointer;
-  }
-  .button-right:hover {
-    transition: 120 s ease-in;
-    background: #1bc434;
   }
   .txt-btn-right {
     font-size: 14px;
-    color: #fff;
     font-family: 'Poppins', sans-serif !important;
     @apply w-full flex flex-col justify-center items-center font-semibold;
   }

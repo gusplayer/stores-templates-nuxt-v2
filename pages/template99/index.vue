@@ -3,15 +3,13 @@
     <component :is="indexTemplate" />
   </div>
 </template>
-
 <script>
-import WaTemplate1 from '../../template99/templates/template1/index'
-import WaTemplate2 from '../../template99/templates/template2/index'
-import WaTemplate3 from '../../template99/templates/template3/index'
-
+import WaTemplate1 from './templates/template1/index'
+import WaTemplate2 from './templates/template2/index'
+import WaTemplate3 from './templates/template3/index'
 export default {
-  name: 'WapiME',
   layout: 'wa',
+  name: 'templateWhatsapp',
   components: { WaTemplate1, WaTemplate2, WaTemplate3 },
   computed: {
     settingByTemplate() {
@@ -37,8 +35,10 @@ export default {
   },
 }
 </script>
-
 <style scoped>
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
 .content-wa {
   @apply w-full flex flex-col justify-center items-center;
 }

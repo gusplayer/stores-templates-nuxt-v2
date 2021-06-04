@@ -3,13 +3,9 @@
     <!-- <div v-if="true" v-loading="true"></div> -->
     <div class="container-productDetail" v-if="!loading" v-loading="loading">
       <nuxt-link
-        :to="`/wa/${dataStore.tienda.id_tienda}/`"
+        :to="this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
         class="wrapper-back"
-        :class="
-          dataStore.entidades.length && dataStore.entidades[0].id == 17
-            ? 'wrapper-back-midasoluciones'
-            : 'wrapper-back-wapi'
-        "
+        :style="`color: ${settingByTemplate.color_primario};`"
       >
         <arrow-left-icon class="icon-back" />
         <p class="back-text">Volver al inicio</p>
@@ -54,7 +50,7 @@
             </div>
             <div
               v-if="data.info.descripcion_corta"
-              style="margin-top: 10px; margin-bottom: 5px"
+              style="margin-top: 10px; margin-bottom: 5px;"
             >
               <p class="text-marca">
                 <strong>{{ data.info.descripcion_corta }}</strong>
@@ -128,11 +124,7 @@
           </div>
           <button
             class="btn-responsive"
-            :class="
-              dataStore.entidades.length && dataStore.entidades[0].id == 17
-                ? 'btn-responsive-midasoluciones'
-                : 'btn-responsive-wapi'
-            "
+            :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
             ref="color2"
             v-if="!spent && salesData.precio > 0"
             v-on:click="addShoppingCart"
@@ -143,11 +135,7 @@
           </button>
           <button
             class="btn-responsive"
-            :class="
-              dataStore.entidades.length && dataStore.entidades[0].id == 17
-                ? 'btn-responsive-midasoluciones'
-                : 'btn-responsive-wapi'
-            "
+            :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
             ref="color2"
             v-else-if="salesData.precio == 0 && !spent"
             v-on:click="WPQuotation()"
@@ -410,6 +398,12 @@ export default {
           product.id !== this.data.detalle.id
       )
     },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
+    },
+    stateWapiME() {
+      return this.$store.state.stateWapiME
+    },
   },
   methods: {
     searchIdForSlug() {
@@ -608,7 +602,11 @@ export default {
         this.$store.state.productsCart.push(product)
       }
       this.$store.commit('UPDATE_CONTENTCART')
-      this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
+      if (this.stateWapiME) {
+        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
+      } else {
+        this.$router.push(`/`)
+      }
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
     },
@@ -851,18 +849,6 @@ export default {
   justify-content: flex-start;
   align-items: center;
 }
-.wrapper-back-wapi {
-  color: #4a5782;
-}
-.wrapper-back-wapi:hover {
-  color: #2ec4a1;
-}
-.wrapper-back-midasoluciones {
-  color: #4a5782;
-}
-.wrapper-back-midasoluciones:hover {
-  color: #fecb37;
-}
 .icon-back {
   font-weight: normal;
   font-size: 18px;
@@ -1082,20 +1068,6 @@ export default {
 .btn-responsive span {
   font-size: 16px;
   font-weight: 600;
-}
-.btn-responsive-wapi {
-  color: white;
-  background-image: linear-gradient(85deg, #48ac98 0%, #45c4aa 100%);
-}
-.btn-responsive-wapi:hover {
-  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
-}
-.btn-responsive-midasoluciones {
-  color: black;
-  background-image: linear-gradient(85deg, #eebe2d 0%, #fecb37 100%);
-}
-.btn-responsive-midasoluciones:hover {
-  background-image: linear-gradient(130deg, #c79e25 0, #e0b531 80%);
 }
 .icon {
   font-size: 16px;

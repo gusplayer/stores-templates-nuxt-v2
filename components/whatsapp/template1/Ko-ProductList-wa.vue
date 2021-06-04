@@ -302,7 +302,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f8f9fb;
+  background-color: white;
   box-sizing: border-box;
   margin-top: 0px;
   padding-top: 5px;

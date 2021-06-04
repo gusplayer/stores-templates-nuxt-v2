@@ -109,12 +109,8 @@
                 v-if="this.product.precio > 0"
                 v-on:click="addShoppingCart"
                 class="btn"
-                :class="
-                  dataStore.entidades.length && dataStore.entidades[0].id == 17
-                    ? 'btn-midasoluciones'
-                    : 'btn-wapi'
-                "
-                style="margin-right: 5px"
+                :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+                style="margin-right: 5px;"
               >
                 <shopWa-icon class="wp-icon" />
               </div>
@@ -125,11 +121,7 @@
                     product.slug,
                 }"
                 class="btn"
-                :class="
-                  dataStore.entidades.length && dataStore.entidades[0].id == 17
-                    ? 'btn-midasoluciones'
-                    : 'btn-wapi'
-                "
+                :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
               >
                 {{ $t('productdetail_btnComprar') }}</router-link
               >
@@ -141,11 +133,7 @@
               }"
               v-else
               class="btn"
-              :class="
-                dataStore.entidades.length && dataStore.entidades[0].id == 17
-                  ? 'btn-midasoluciones'
-                  : 'btn-wapi'
-              "
+              :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
             >
               {{ $t('productdetail_btnComprar') }}</router-link
             >
@@ -235,6 +223,9 @@ export default {
       } else {
         return !this.product.stock
       }
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -618,22 +609,7 @@ export default {
   box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
   cursor: pointer;
 }
-.btn-wapi {
-  background-color: white;
-  color: #128c7e;
-}
-.btn-wapi:hover {
-  color: white;
-  background-color: #128c7e;
-}
-.btn-midasoluciones {
-  background-color: white;
-  color: #f7c224;
-}
-.btn-midasoluciones:hover {
-  color: black;
-  background-color: #f7c224;
-}
+
 .wp-icon {
   font-size: 20px;
   bottom: 3px;

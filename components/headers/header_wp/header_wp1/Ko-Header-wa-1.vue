@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="wrapper-header">
       <KoOrderWa :dataStore="dataStore" />
-      <div v-if="this.settingByTemplate">
+      <div v-if="this.settingByTemplate && this.settingByTemplate.banner">
         <div class="wrapper-banner-img" v-if="this.settingByTemplate.banner">
           <img
             :src="
@@ -24,8 +24,13 @@
       </div>
       <div class="header">
         <nuxt-link
-          :to="`/wa/${dataStore.tienda.id_tienda}/`"
+          :to="this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
           class="containt-image"
+          :class="
+            this.settingByTemplate.logo_cuadrado == 1
+              ? `imagen-cuadrado`
+              : `imagen-redondo`
+          "
         >
           <img
             :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
@@ -34,24 +39,14 @@
           />
         </nuxt-link>
         <div class="header-content-text">
-          <p class="header-text">
+          <p class="header-title">
             {{ dataStore.tienda.nombre }}
           </p>
-          <div v-if="dataStore.geolocalizacion.length">
-            <p
-              class="header-direccion"
-              v-if="dataStore.geolocalizacion[0].direccion"
-            >
-              {{ dataStore.geolocalizacion[0].direccion }}
-            </p>
-          </div>
-          <div v-if="dataStore.geolocalizacion.length">
-            <p
-              class="header-horario"
-              v-if="dataStore.geolocalizacion[0].horario"
-            >
-              {{ $t('contact_horarioAtencion') }}
-              {{ dataStore.geolocalizacion[0].horario }}
+          <div
+            v-if="this.settingByTemplate && this.settingByTemplate.descripcion"
+          >
+            <p class="header-description">
+              {{ this.settingByTemplate.descripcion }}
             </p>
           </div>
         </div>
@@ -74,8 +69,8 @@ export default {
   },
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
-
   data() {
     return {
       links: [
@@ -106,8 +101,8 @@ export default {
     productsCart() {
       return this.$store.state.productsCart.length
     },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplateWapi
+    stateWapiME() {
+      return this.$store.state.stateWapiME
     },
   },
   methods: {
@@ -174,7 +169,6 @@ export default {
   position: absolute;
   overflow: hidden;
   border: solid 1px white;
-  border-radius: 8px;
   padding: 5px;
   align-items: center;
   box-shadow: 0 0 2px rgba(92, 100, 111, 0.1),
@@ -182,6 +176,12 @@ export default {
   /* box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 2px inset, white 0px 0px 0px 3px; */
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   /* border: solid 1px #201d1d; */
+}
+.imagen-redondo {
+  border-radius: 100px;
+}
+.imagen-cuadrado {
+  border-radius: 5px;
 }
 .header-logo {
   height: 100%;
@@ -193,28 +193,17 @@ export default {
 .header-content-text {
   margin-left: 130px;
 }
-.header-text {
+.header-title {
   font-size: 1.15rem;
   font-weight: bold;
   color: black;
 }
-.header-descripcion {
-  font-size: 14px;
-  font-weight: normal;
-  color: black;
-  color: #4e4e4e;
-}
-.header-direccion {
+.header-description {
+  margin-top: 10px;
   font-size: 13px;
   font-weight: normal;
-  color: black;
   color: #4e4e4e;
-}
-.header-horario {
-  font-size: 13px;
-  font-weight: normal;
-  color: black;
-  color: #4e4e4e;
+  max-width: 500px;
 }
 .container-tienda-wp {
   display: initial;

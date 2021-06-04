@@ -12,15 +12,9 @@
             :href="item.link"
             target="_blank "
             rel="noreferrer noopener"
+            :style="`color: ${settingByTemplate.color_primario};`"
           >
-            <div
-              :is="item.icon"
-              :class="
-                dataStore.entidades.length && dataStore.entidades[0].id == 17
-                  ? 'icon-midasoluciones'
-                  : 'icon-wapi'
-              "
-            />
+            <div :is="item.icon" class="icon-wapi" />
           </a>
         </div>
       </div>
@@ -68,6 +62,7 @@ export default {
   name: 'Ko-Footer-Wa',
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   data() {
     return {
@@ -111,7 +106,7 @@ export default {
 .contenedor {
   width: 100%;
   border-top: 1px solid rgba(213, 213, 213, 0.473);
-  padding: 20px 30px 60px;
+  padding: 20px 30px 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -151,19 +146,11 @@ export default {
   margin-bottom: 5px;
 }
 .icon-wapi {
+  cursor: pointer;
   margin-right: 10px;
   font-size: 20px;
-  color: #128c7e;
 }
 .icon-wapi:hover {
-  color: #25d366;
-}
-.icon-midasoluciones {
-  margin-right: 10px;
-  font-size: 20px;
-  color: #fecb37;
-}
-.icon-midasoluciones:hover {
-  color: #f8d058;
+  color: #445a64;
 }
 </style>

@@ -44,11 +44,7 @@
           </div>
           <div
             class="card-button"
-            :class="
-              dataStore.entidades.length && dataStore.entidades[0].id == 17
-                ? 'card-button-midasoluciones'
-                : 'card-button-wapi'
-            "
+            :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
           >
             <p>{{ $t('productdetail_btnComprar') }}</p>
           </div>
@@ -85,6 +81,9 @@ export default {
       return this.$store.state.products.fullProducts.filter(
         (product) => product.favorito === 1
       )
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -135,12 +134,12 @@ export default {
   position: relative;
   display: flex;
   width: 100%;
-  background-color: #f8f9fb;
+  background-color: white;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   transition: all 200ms ease-in;
 }
 .swiper-container {
@@ -149,12 +148,12 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 10px 20px 20px 20px;
+  padding: 0px 20px 20px 20px;
   margin-right: 10px;
 }
 .content-title-ProductFavoritos {
   width: 100%;
-  padding: 10px 20px 5px 20px;
+  padding: 0px 20px 5px 20px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -217,14 +216,6 @@ export default {
   font-size: 13px;
   box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.card-button-wapi {
-  background-color: white;
-  color: #128c7e;
-}
-.card-button-midasoluciones {
-  background-color: white;
-  color: #f7c224;
 }
 .card-favorite {
   margin: 6px;

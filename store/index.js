@@ -72,7 +72,6 @@ export const state = () => ({
   settingByTemplate: '',
   settingByTemplate7: '',
   settingByTemplate9: '',
-  settingByTemplateWapi: '',
   category_producto_header: '',
   subcategory_producto_header: '',
   analytics_tagmanager: '',
@@ -120,6 +119,7 @@ export const state = () => ({
     text_btn: 'Conócenos',
   },
   modalpolitics05: false,
+  stateWapiME: true,
   /////
   storeLayout: {
     pages: [
@@ -329,8 +329,8 @@ export const mutations = {
   SET_SETTINGS_BY_TEMPLATE_9: (state, value) => {
     state.settingByTemplate9 = value
   },
-  SET_SETTINGS_BY_TEMPLATE_WAPI: (state, value) => {
-    state.settingByTemplateWapi = value
+  SET_STATE_WAPIME: (state, value) => {
+    state.stateWapiME = value
   },
   SET_ANALITICS_TAGMANAGER: (state, value) => {
     state.analytics_tagmanager = value
@@ -434,7 +434,7 @@ export const actions = {
       state.dataCookies = true
     }
   },
-  async nuxtServerInit({ dispatch, state }, { req, route }) {
+  async nuxtServerInit({ commit, dispatch, state }, { req, route }) {
     let full = req.headers.host
     let parts = full.split('.')
     let partsID = full.split(':')
@@ -467,6 +467,7 @@ export const actions = {
       await dispatch('GET_TEMPLATE_STORE', 99)
       await dispatch('GET_ANALYTICS_TAGMANAGER', idWapi)
       await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
+      await commit('SET_STATE_WAPIME', true)
     } else {
       if (id && id.data.data && id.data.data.id) {
         await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
@@ -481,11 +482,19 @@ export const actions = {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch('GET_SETTINGS_BY_TEMPLATE_9', state.dataStore.tienda)
           }
+        } else if (
+          id.data.data.template == 5 ||
+          id.data.data.template == 6 ||
+          id.data.data.template == 99
+        ) {
+          if (state.dataStore && state.dataStore.tienda) {
+            await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
+            await commit('SET_STATE_WAPIME', false)
+          }
         }
       }
     }
     if (state.dataStore) {
-      await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
       // await dispatch('GET_DATAVALIENTA')
       await dispatch('GET_SERVER_PATH', full)
     }
@@ -539,10 +548,13 @@ export const actions = {
   },
   async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit, state }, idWapi) {
     let template = state.template ? state.template : 99
-    const response = await axios.get(
-      `https://api2.komercia.co/api/template/${template}/settings/${idWapi}`
-    )
-    commit('SET_SETTINGS_BY_TEMPLATE_WAPI', response.data.data)
+    await axios
+      .get(
+        `https://api2.komercia.co/api/template/${template}/settings/${idWapi}`
+      )
+      .then((response) => {
+        commit('SET_SETTINGS_BY_TEMPLATE', response.data.data)
+      })
   },
   async GET_ANALYTICS_TAGMANAGER({ commit }, id) {
     const response = await axios.get(

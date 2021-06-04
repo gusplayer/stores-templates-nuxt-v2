@@ -1,16 +1,16 @@
 <template>
   <div class="content-productoList">
     <div class="content-item-productList">
-      <div class="content-categories">
-        <p class="txt-catalogo">
-          {{ $t('home_catalogo') }}
-        </p>
-        <p class="txt-category mx-2" v-if="this.nameCategoryHeader">/</p>
-        <p class="txt-category" v-if="this.nameCategoryHeader">
-          {{ this.nameCategoryHeader }}
-        </p>
-      </div>
       <div class="content-items-product">
+        <div class="content-categories">
+          <p class="txt-catalogo">
+            {{ $t('home_catalogo') }}
+          </p>
+          <p class="txt-category mx-2" v-if="this.nameCategoryHeader">/</p>
+          <p class="txt-category" v-if="this.nameCategoryHeader">
+            {{ this.nameCategoryHeader }}
+          </p>
+        </div>
         <div class="content-grid-product">
           <div
             class="card-product"
@@ -290,7 +290,7 @@ export default {
 }
 @screen sm {
   .content-item-productList {
-    @apply w-9/0 flex flex-col justify-center items-center;
+    @apply w-full flex flex-col justify-center items-center;
   }
   .content-categories {
     @apply w-full flex flex-row justify-start items-center mb-10;

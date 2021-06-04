@@ -69,8 +69,8 @@ export default {
     dataStore() {
       return this.$store.state.dataStore
     },
-    productsData() {
-      return this.dataStore.productos
+    fullProducts() {
+      return this.$store.getters['products/filterProducts']
     },
     whatsapp() {
       return this.dataStore.tienda.whatsapp
@@ -84,7 +84,7 @@ export default {
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        productsData: this.productsData,
+        productsData: this.fullProducts,
         whatsapp: this.whatsapp,
         envios: this.envios,
         facebooPixel: this.integracioneStore,

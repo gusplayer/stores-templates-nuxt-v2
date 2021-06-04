@@ -1,45 +1,16 @@
 <template>
   <div class="footer-container">
-    <div
-      class="wrapper-footer"
-      @click="openOrder"
-      :class="
-        dataStore.entidades.length && dataStore.entidades[0].id == 17
-          ? 'wrapper-footer-midasoluciones'
-          : 'wrapper-footer-wapi'
-      "
-    >
-      <p
-        class="unidades"
-        v-if="productsCart.length > 0"
-        :class="
-          dataStore.entidades.length && dataStore.entidades[0].id == 17
-            ? 'text-footer-midasoluciones'
-            : 'text-footer-wapi'
-        "
-      >
+    <div class="wrapper-footer" @click="openOrder">
+      <p class="unidades" v-if="productsCart.length > 0">
         <span>{{ productsCart.length }}</span>
         item
       </p>
-      <p
-        class="carrito"
-        :class="
-          dataStore.entidades.length && dataStore.entidades[0].id == 17
-            ? 'text-footer-midasoluciones'
-            : 'text-footer-wapi'
-        "
-      >
+      <p class="carrito">
         <whatsapp-icon class="wp-icon" />
         {{ $t('productdetail_btnComprar') }}
       </p>
       <p class="text-footer-wapi valor" v-if="productsCart.length > 0">
-        <span
-          :class="
-            dataStore.entidades.length && dataStore.entidades[0].id == 17
-              ? 'valor-midasoluciones'
-              : 'valor-wapi'
-          "
-        >
+        <span class="valor">
           {{
             this.totalCart
               | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
@@ -117,7 +88,6 @@ export default {
   background: white;
 }
 .wrapper-footer {
-  /* background: #25d366; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -126,6 +96,7 @@ export default {
   border-radius: 8px;
   padding: 0px 9px;
   cursor: pointer;
+  color: #000;
 }
 .wrapper-footer p {
   flex: 1;
@@ -141,54 +112,27 @@ export default {
 }
 .unidades {
   width: 30%;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
 }
 .carrito {
   width: 30%;
   align-items: center;
   text-align: center;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
 }
 .valor {
   width: 30%;
   text-align: right;
   font-weight: 500;
+  padding: 6px;
+  border-radius: 5px;
+  font-size: 13px;
 }
 .wp-icon {
   font-size: 18px;
   margin-right: 2px;
   margin-bottom: -2px;
-}
-.wrapper-footer-wapi {
-  background-image: linear-gradient(130deg, #128c7e 0, #2ec4a1 80%);
-}
-.wrapper-footer-wapi:hover {
-  background-image: linear-gradient(130deg, #0f7c6f 0, #24a788 80%);
-}
-.wrapper-footer-midasoluciones {
-  background-image: linear-gradient(130deg, #eebe2d 0, #fecb37 80%);
-}
-.wrapper-footer-midasoluciones:hover {
-  background-image: linear-gradient(130deg, #c79e25 0, #e0b531 80%);
-}
-.text-footer-wapi {
-  color: white;
-  font-size: 16px;
-}
-.valor-wapi {
-  font-size: 13px;
-  text-align: right;
-  background-color: #12a493;
-  padding: 6px;
-  border-radius: 5px;
-}
-.valor-midasoluciones {
-  font-size: 13px;
-  text-align: right;
-  background-color: black;
-  padding: 6px;
-  border-radius: 5px;
 }
 </style>

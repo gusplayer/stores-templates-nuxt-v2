@@ -4,7 +4,7 @@
       <div class="content-banner">
         <div class="content-banner-items">
           <img
-            v-if="this.settingByTemplate.banner"
+            v-if="this.settingByTemplate && this.settingByTemplate.banner"
             class="banner-image"
             :src="
               idCloudinaryBannerResponsive(this.settingByTemplate.banner, 1000)
@@ -21,11 +21,16 @@
       </div>
       <div class="content-data-store">
         <nuxt-link
-          :to="`/wa/${dataStore.tienda.id_tienda}/`"
+          :to="this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
           class="data-item-logo"
         >
           <img
             class="logo-img"
+            :class="
+              this.settingByTemplate.logo_cuadrado == 1
+                ? `imagen-cuadrado`
+                : `imagen-redondo`
+            "
             :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
             alt="logo-Store"
           />
@@ -34,8 +39,13 @@
           <p class="name-store">
             {{ dataStore.tienda.nombre }}
           </p>
-          <p class="category-store">
-            {{ dataStore.tienda.categoria_tienda }}
+          <p
+            class="category-store"
+            v-if="
+              this.settingByTemplate && this.settingByTemplate.mensaje_principal
+            "
+          >
+            {{ this.settingByTemplate.mensaje_principal }}
           </p>
         </div>
         <div class="content-seeMore">
@@ -77,36 +87,11 @@
           </svg>
         </div>
         <div class="content-infoStore" v-if="showInfoStore">
-          <div v-if="dataStore.geolocalizacion.length">
-            <p
-              class="txt-direccion"
-              v-if="dataStore.geolocalizacion[0].direccion"
-            >
-              {{ dataStore.geolocalizacion[0].direccion }}
-            </p>
-          </div>
-          <div v-if="dataStore.tienda.whatsapp">
+          <div
+            v-if="this.settingByTemplate && this.settingByTemplate.descripcion"
+          >
             <p class="txt-direccion">
-              WhatsApp:
-              <span
-                class="txt-direccion mx-5"
-                v-if="dataStore.tienda.pais == 'Colombia'"
-              >
-                (+57)
-              </span>
-              <span
-                class="txt-direccion mx-5"
-                v-if="dataStore.tienda.pais == 'Chile'"
-              >
-                (+56)
-              </span>
-              {{ dataStore.tienda.whatsapp }}
-            </p>
-          </div>
-          <div v-if="dataStore.geolocalizacion.length">
-            <p class="txt-horario" v-if="dataStore.geolocalizacion[0].horario">
-              {{ $t('contact_horarioAtencion') }}
-              {{ dataStore.geolocalizacion[0].horario }}
+              {{ this.settingByTemplate.descripcion }}
             </p>
           </div>
         </div>
@@ -125,6 +110,7 @@ export default {
   components: { KoOrderWa },
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   data() {
     return {
@@ -157,8 +143,8 @@ export default {
     productsCart() {
       return this.$store.state.productsCart.length
     },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplateWapi
+    stateWapiME() {
+      return this.$store.state.stateWapiME
     },
   },
   watch: {
@@ -186,13 +172,21 @@ export default {
     @apply w-auto h-auto object-cover object-center;
   }
   .content-data-store {
-    @apply w-9/0 flex flex-col justify-center items-center;
+    width: 95%;
+    @apply flex flex-col justify-center items-center;
   }
   .data-item-logo {
     @apply w-full flex flex-col justify-center items-center -mt-50;
   }
   .logo-img {
-    @apply w-98 h-98 rounded-full shadow-md;
+    background-color: white;
+    @apply w-98 h-98 shadow-md;
+  }
+  .imagen-redondo {
+    border-radius: 100px;
+  }
+  .imagen-cuadrado {
+    border-radius: 5px;
   }
   .data-item-name {
     @apply w-full flex flex-col justify-center items-center my-10;
@@ -227,8 +221,7 @@ export default {
     background-color: #eaeaea;
     @apply w-full flex flex-col justify-center items-start p-15 rounded-9 mb-10;
   }
-  .txt-direccion,
-  .txt-horario {
+  .txt-direccion {
     font-size: 13px;
     color: #3d3d3d;
     font-family: 'Poppins', sans-serif !important;
@@ -242,7 +235,7 @@ export default {
   .logo-img {
     width: 200px;
     height: 200px;
-    @apply rounded-full shadow-md;
+    @apply shadow-md;
   }
   .name-store {
     font-size: 30px;
@@ -254,13 +247,13 @@ export default {
     @apply mb-20;
   }
   .content-infoStore {
-    @apply w-7/0 mb-20;
+    width: 100%;
+    @apply mb-20;
   }
   .txt-seeMore {
     font-size: 16px;
   }
-  .txt-direccion,
-  .txt-horario {
+  .txt-direccion {
     font-size: 15px;
   }
 }

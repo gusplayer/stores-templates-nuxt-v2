@@ -4,7 +4,10 @@
       <component v-bind="componentsProps" :is="headerTemplate" />
       <nuxt />
       <component v-bind="componentsProps" :is="footerTemplate" />
-      <KoFooterCountry v-bind="componentsProps" />
+      <KoFooterCountry
+        v-bind="componentsProps"
+        v-if="dataStore.tienda.template != 99"
+      />
       <div
         class="wrapper-whatsapp"
         v-if="dataStore.tienda.whatsapp"
@@ -200,6 +203,10 @@ export default {
             ? this.settingByTemplate.settings.tipo_letra
             : 'Poppins'
         break
+      case 99:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra = 'Poppins'
+        break
     }
     let tienda = this.$store.state.dataStore.tienda
       ? this.$store.state.dataStore.tienda
@@ -361,7 +368,8 @@ export default {
             this.template == 5 ||
             this.template == 6 ||
             this.template == 10 ||
-            this.template == 11
+            this.template == 11 ||
+            this.template == 99
               ? `https://fonts.googleapis.com/css?family=${tipo_letra}:100,200,300,400,500,600,700,800,900&display=swap`
               : '',
           rel: 'stylesheet',

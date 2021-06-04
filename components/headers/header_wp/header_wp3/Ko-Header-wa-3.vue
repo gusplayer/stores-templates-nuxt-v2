@@ -5,28 +5,21 @@
         class="content-banner-items"
         :style="`background-image: url(${this.bannerUrl})`"
       >
-        <!-- <img
-          v-if="this.settingByTemplate.banner"
-          class="banner-image"
-          :src="
-            idCloudinaryBannerResponsive(this.settingByTemplate.banner, 1000)
-          "
-          alt="banner-store"
-        />
-        <img
-          v-else
-          src="https://www.kellyservices.pl/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcTFlIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c649985d042e87fdb30660e80b7dd19a010450b2/banner-default.jpg"
-          class="banner-image"
-          alt="banner-wapi"
-        /> -->
         <div class="content-data-store">
           <div class="content-logo-name">
             <nuxt-link
-              :to="`/wa/${dataStore.tienda.id_tienda}/`"
+              :to="
+                this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`
+              "
               class="data-item-logo"
             >
               <img
                 class="logo-img"
+                :class="
+                  this.settingByTemplate.logo_cuadrado == 1
+                    ? `imagen-cuadrado`
+                    : `imagen-redondo`
+                "
                 :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
                 alt="logo-Store"
               />
@@ -35,8 +28,14 @@
               <p class="name-store">
                 {{ dataStore.tienda.nombre }}
               </p>
-              <p class="category-store">
-                {{ dataStore.tienda.categoria_tienda }}
+              <p
+                class="category-store"
+                v-if="
+                  this.settingByTemplate &&
+                  this.settingByTemplate.mensaje_principal
+                "
+              >
+                {{ this.settingByTemplate.mensaje_principal }}
               </p>
             </div>
           </div>
@@ -82,39 +81,13 @@
       </div>
     </div>
     <div class="content-infoStore" v-if="showInfoStore">
-      <div v-if="dataStore.geolocalizacion.length">
-        <p class="txt-direccion" v-if="dataStore.geolocalizacion[0].direccion">
-          {{ dataStore.geolocalizacion[0].direccion }}
-        </p>
-      </div>
-      <div v-if="dataStore.tienda.whatsapp">
+      <div v-if="this.settingByTemplate && this.settingByTemplate.descripcion">
         <p class="txt-direccion">
-          WhatsApp:
-          <span
-            class="txt-direccion mx-5"
-            v-if="dataStore.tienda.pais == 'Colombia'"
-          >
-            (+57)
-          </span>
-          <span
-            class="txt-direccion mx-5"
-            v-if="dataStore.tienda.pais == 'Chile'"
-          >
-            (+56)
-          </span>
-          {{ dataStore.tienda.whatsapp }}
-        </p>
-      </div>
-      <div v-if="dataStore.geolocalizacion.length">
-        <p class="txt-horario" v-if="dataStore.geolocalizacion[0].horario">
-          {{ $t('contact_horarioAtencion') }}
-          {{ dataStore.geolocalizacion[0].horario }}
+          {{ this.settingByTemplate.descripcion }}
         </p>
       </div>
     </div>
-    <div class="content-category-data">
-      <p class="txt-category-top">Categorias</p>
-    </div>
+
     <KoOrderWa :dataStore="dataStore" />
   </div>
 </template>
@@ -128,9 +101,15 @@ export default {
   components: { KoOrderWa },
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   mounted() {
-    this.bannerUrl = this.settingByTemplate.banner
+    if (this.settingByTemplate && this.settingByTemplate.banner) {
+      this.bannerUrl = this.settingByTemplate.banner
+    } else {
+      this.bannerUrl =
+        'https://www.kellyservices.pl/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcTFlIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c649985d042e87fdb30660e80b7dd19a010450b2/banner-default.jpg'
+    }
   },
   data() {
     return {
@@ -164,8 +143,8 @@ export default {
     productsCart() {
       return this.$store.state.productsCart.length
     },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplateWapi
+    stateWapiME() {
+      return this.$store.state.stateWapiME
     },
   },
   watch: {
@@ -191,7 +170,7 @@ export default {
     @apply w-9/5 flex flex-col justify-center items-center bg-cover bg-no-repeat bg-center rounded-9 overflow-hidden my-8;
   }
   .content-data-store {
-    background: rgb(175, 149, 74);
+    /* background: rgb(175, 149, 74);
     background: -moz-linear-gradient(
       left,
       rgb(175, 149, 74) 0%,
@@ -206,7 +185,7 @@ export default {
       to right,
       rgb(175, 149, 74) 0%,
       rgb(188, 173, 122, 0.47) 100%
-    );
+    ); */
     @apply w-full h-full flex flex-col justify-center items-center rounded-9 overflow-hidden;
   }
   .content-logo-name {
@@ -216,7 +195,14 @@ export default {
     @apply w-7/0 flex flex-col justify-center items-center;
   }
   .logo-img {
-    @apply w-70 h-70 rounded-full shadow-md;
+    background-color: white;
+    @apply w-70 h-70 shadow-md;
+  }
+  .imagen-redondo {
+    border-radius: 100px;
+  }
+  .imagen-cuadrado {
+    border-radius: 5px;
   }
   .data-item-name {
     @apply w-full flex flex-col justify-center items-center my-10;
@@ -236,12 +222,7 @@ export default {
   .content-category-data {
     @apply w-9/5 flex flex-col justify-center items-center;
   }
-  .txt-category-top {
-    color: #3d3d3d;
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif !important;
-    @apply w-full flex flex-col justify-center items-start font-semibold my-10;
-  }
+
   .content-seeMore {
     @apply w-auto flex flex-row justify-center items-center mb-10 cursor-pointer;
   }
@@ -259,8 +240,7 @@ export default {
     background-color: #eaeaea;
     @apply w-9/5 flex flex-col justify-center items-start p-15 rounded-9 mb-10;
   }
-  .txt-direccion,
-  .txt-horario {
+  .txt-direccion {
     font-size: 13px;
     color: #3d3d3d;
     font-family: 'Poppins', sans-serif !important;
@@ -304,15 +284,10 @@ export default {
   .category-store {
     font-size: 26px;
   }
-
-  .txt-category-top {
-    font-size: 18px;
-  }
   .txt-seeMore {
     font-size: 18px;
   }
-  .txt-direccion,
-  .txt-horario {
+  .txt-direccion {
     font-size: 17px;
   }
 }

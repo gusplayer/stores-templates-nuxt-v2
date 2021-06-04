@@ -1,12 +1,5 @@
 <template>
-  <div
-    class="wrapper_Category"
-    :class="
-      dataStore.entidades.length && dataStore.entidades[0].id == 17
-        ? 'wrapper_Category_midasoluciones'
-        : 'wrapper_Category_wapi'
-    "
-  >
+  <div class="wrapper_Category">
     <div class="content_Category">
       <div
         class="btn-scroll"
@@ -16,27 +9,8 @@
         <FlechaLeft-icon class="btn-scroll-icon" />
       </div>
       <div class="content-item-category" id="swiper-slide-categories">
-        <div
-          class="tags"
-          :class="
-            idCategory == ''
-              ? dataStore.entidades.length && dataStore.entidades[0].id == 17
-                ? 'name-category-active-midasoluciones'
-                : 'name-category-active-wapi'
-              : ''
-          "
-        >
-          <p
-            class="name-category"
-            :class="
-              idCategory == ''
-                ? dataStore.entidades.length && dataStore.entidades[0].id == 17
-                  ? 'name-category-active-midasoluciones'
-                  : 'name-category-active-wapi'
-                : ''
-            "
-            @click="clear"
-          >
+        <div class="tags" :class="idCategory == '' ? 'tags-active-wapi' : ''">
+          <p class="name-category" @click="clear">
             {{ $t('home_todo') }}
           </p>
         </div>
@@ -44,25 +18,12 @@
           v-for="categoria in categorias"
           :key="categoria.id"
           class="tags"
-          :class="
-            categoria.id == idCategory
-              ? dataStore.entidades.length && dataStore.entidades[0].id == 17
-                ? 'tags-active-midasoluciones'
-                : 'tags-active-wapi'
-              : ''
-          "
+          :class="categoria.id == idCategory ? 'tags-active-wapi' : ''"
         >
           <div @click="sendCategory(categoria, categoria.id, (ref = false))">
             <p
               class="name-category"
-              :class="
-                categoria.id == idCategory
-                  ? dataStore.entidades.length &&
-                    dataStore.entidades[0].id == 17
-                    ? 'name-category-active-midasoluciones'
-                    : 'name-category-active-wapi'
-                  : ''
-              "
+              :class="categoria.id == idCategory ? 'name-category-active' : ''"
             >
               {{ categoria.nombre_categoria_producto }}
             </p>
@@ -114,9 +75,11 @@ export default {
   methods: {
     Sendsubcategory(value) {
       this.indexSelect = value
-      this.$router.push({
-        path: `/wa/${this.dataStore.tienda.id_tienda}`,
-      })
+      if (this.stateWapiME) {
+        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
+      } else {
+        this.$router.push(`/`)
+      }
       this.$store.commit('SET_STATEBANNER', false)
       this.addClass()
       this.selectSubcategory = value
@@ -140,9 +103,11 @@ export default {
     },
     sendCategory(value, categoria, ref) {
       this.idCategory = categoria
-      this.$router.push({
-        path: `/wa/${this.dataStore.tienda.id_tienda}`,
-      })
+      if (this.stateWapiME) {
+        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
+      } else {
+        this.$router.push(`/`)
+      }
       this.$store.commit('SET_STATEBANNER', false)
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
@@ -172,9 +137,11 @@ export default {
     clear() {
       this.$store.commit('SET_STATEBANNER', true)
       this.idCategory = ''
-      this.$router.push({
-        path: `/wa/${this.dataStore.tienda.id_tienda}`,
-      })
+      if (this.stateWapiME) {
+        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
+      } else {
+        this.$router.push(`/`)
+      }
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
         data: '',
@@ -207,13 +174,9 @@ export default {
   border-bottom: 1px solid rgba(213, 213, 213, 0.473);
   position: sticky;
   position: -webkit-sticky;
-  top: 0; /* required */
-}
-.wrapper_Category_wapi {
-  box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
-}
-.wrapper_Category_midasoluciones {
-  box-shadow: 0 2px 5px rgba(238, 230, 155, 0.42);
+  top: 0;
+  margin-bottom: 20px;
+  @apply shadow;
 }
 .content_Category {
   width: 100%;
@@ -279,14 +242,10 @@ export default {
   cursor: pointer;
   margin-top: 3px;
   text-align: center;
+  font-weight: bold;
 }
-.name-category-active-wapi {
+.name-category-active {
   color: #075e54;
-  font-weight: bold;
-}
-.name-category-active-midasoluciones {
-  color: #fecb37;
-  font-weight: bold;
 }
 .tags {
   display: flex;
@@ -307,12 +266,6 @@ export default {
   border-bottom: solid 2px #25d366;
   font-weight: bold;
   box-shadow: 0 2px 5px rgba(155, 238, 205, 0.42);
-}
-.tags-active-midasoluciones {
-  color: #fecb37;
-  border-bottom: solid 2px #fecb37;
-  font-weight: bold;
-  box-shadow: 0 2px 5px #f7ce56;
 }
 
 @media (max-width: 770px) {

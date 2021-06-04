@@ -54,9 +54,11 @@ export default {
   methods: {
     Sendsubcategory(value) {
       this.indexSelect = value
-      this.$router.push({
-        path: `/wa/${this.dataStore.tienda.id_tienda}`,
-      })
+      if (this.stateWapiME) {
+        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
+      } else {
+        this.$router.push(`/`)
+      }
       this.$store.commit('SET_STATEBANNER', false)
       this.addClass()
       this.selectSubcategory = value
@@ -80,9 +82,11 @@ export default {
     },
     sendCategory(value, categoria, ref) {
       this.idCategory = categoria
-      this.$router.push({
-        path: `/wa/${this.dataStore.tienda.id_tienda}`,
-      })
+      if (this.stateWapiME) {
+        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
+      } else {
+        this.$router.push(`/`)
+      }
       this.$store.commit('SET_STATEBANNER', false)
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
@@ -112,9 +116,11 @@ export default {
     clear() {
       this.idCategory = ''
       this.$store.commit('SET_STATEBANNER', true)
-      this.$router.push({
-        path: `/wa/${this.dataStore.tienda.id_tienda}`,
-      })
+      if (this.stateWapiME) {
+        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
+      } else {
+        this.$router.push(`/`)
+      }
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
         data: '',
