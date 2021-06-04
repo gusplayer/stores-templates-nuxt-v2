@@ -6,8 +6,7 @@
       :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
     >
       <p class="unidades" v-if="productsCart.length > 0">
-        <span>{{ productsCart.length }}</span>
-        item
+        ({{ productsCart.length }}) item
       </p>
       <p class="carrito">
         <whatsapp-icon class="wp-icon" />
@@ -119,13 +118,19 @@ export default {
   width: 30%;
   font-size: 16px;
   font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
 }
 .carrito {
   width: 30%;
-  align-items: center;
-  text-align: center;
+  justify-content: center;
+  align-content: center;
   font-size: 16px;
   font-weight: 600;
+  display: flex;
+  flex-direction: row;
 }
 .valor {
   width: 30%;
@@ -138,6 +143,25 @@ export default {
 .wp-icon {
   font-size: 18px;
   margin-right: 2px;
-  margin-bottom: -2px;
+  bottom: 0.125em;
+}
+@media (max-width: 325px) {
+  .unidades {
+    width: 25%;
+    font-size: 15px;
+  }
+  .carrito {
+    width: 30%;
+
+    font-size: 16px;
+  }
+  .valor {
+    width: 35%;
+
+    font-size: 13px;
+  }
+  .unidades {
+    display: none;
+  }
 }
 </style>

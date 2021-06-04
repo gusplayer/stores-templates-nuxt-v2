@@ -418,9 +418,11 @@ export default {
 }
 @screen sm {
   .content-items-productCard {
+    max-width: 350px;
     @apply w-full flex flex-col justify-center items-center;
   }
   .content-img-prodcut {
+    max-width: 350px;
     background-color: #f9f9f9;
     @apply w-full flex flex-col justify-center items-center rounded-9 border overflow-hidden;
   }

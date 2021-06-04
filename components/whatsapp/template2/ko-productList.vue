@@ -10,7 +10,14 @@
             {{ this.nameCategoryHeader }}
           </p>
         </div>
-        <div class="content-grid-product">
+        <div
+          :class="
+            this.settingByTemplate &&
+            this.settingByTemplate.estilo_productos == 1
+              ? 'content-grid-product-list'
+              : 'content-grid-product-grid'
+          "
+        >
           <div
             class="card-product"
             v-for="product in filterProduct"
@@ -29,14 +36,17 @@
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
         <br />
-        <div class="pagination-content" v-if="products.length > 16">
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="products.length"
-            :page-size="18"
-            :current-page.sync="currentPage"
-          ></el-pagination>
+        <div class="wrapper-pagination" v-if="products.length > 16">
+          <div class="pagination-medium">
+            <el-pagination
+              background
+              small
+              layout="prev, pager, next"
+              :total="products.length"
+              :page-size="18"
+              :current-page.sync="currentPage"
+            ></el-pagination>
+          </div>
         </div>
       </div>
     </div>
@@ -141,6 +151,9 @@ export default {
     },
     previousPage() {
       return this.$store.state.previousPage
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -286,6 +299,48 @@ export default {
 .content-productoList {
   @apply w-full flex flex-col justify-center items-center;
 }
+.pagination-medium {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.pagination-medium >>> .el-pagination.is-background .btn-next {
+  color: black;
+  background-color: transparent;
+}
+.pagination-medium >>> .el-pagination.is-background .btn-prev {
+  color: black;
+  background-color: transparent;
+}
+.pagination-medium >>> .el-pagination.is-background .el-pager li {
+  color: black;
+  background-color: transparent;
+}
+.pagination-medium >>> .el-pagination.is-background .btn-next:hover {
+  color: black;
+}
+.pagination-medium >>> .el-pagination.is-background .btn-prev:hover {
+  color: black;
+}
+.pagination-medium
+  >>> .el-pagination.is-background
+  .el-pager
+  li:not(.disabled):hover {
+  color: black;
+}
+.pagination-medium
+  >>> .el-pagination.is-background
+  .el-pager
+  li:not(.disabled).active {
+  background-color: black;
+  color: white;
+}
+.wrapper-pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 @screen sm {
   .content-item-productList {
     width: 95%;
@@ -309,8 +364,11 @@ export default {
   .content-items-product {
     @apply w-full flex flex-col justify-center items-center;
   }
-  .content-grid-product {
-    @apply w-full h-full grid grid-cols-2 gap-4 justify-center items-start;
+  .content-grid-product-list {
+    @apply w-full h-full grid grid-cols-1 gap-4 justify-center items-start;
+  }
+  .content-grid-product-grid {
+    @apply w-full h-full grid grid-cols-2  gap-4 justify-center items-start;
   }
   .card-product {
     @apply w-full h-full flex flex-col justify-start items-center;
@@ -326,51 +384,12 @@ export default {
     font-weight: bold;
     color: black;
   }
-  .pagination-content {
-    @apply w-full mt-10 mb-40 overflow-x-auto;
-  }
-  .pagination-content::-webkit-scrollbar {
-    @apply hidden;
-  }
-  .pagination-medium >>> .el-pagination.is-background .btn-next {
-    color: black;
-    background-color: transparent;
-  }
-  .pagination-medium >>> .el-pagination.is-background .btn-prev {
-    color: black;
-    background-color: transparent;
-  }
-  .pagination-medium >>> .el-pagination.is-background .el-pager li {
-    color: black;
-    background-color: transparent;
-  }
-  .pagination-medium >>> .el-pagination.is-background .btn-next:hover {
-    color: black;
-  }
-  .pagination-medium >>> .el-pagination.is-background .btn-prev:hover {
-    color: black;
-  }
-  .pagination-medium
-    >>> .el-pagination.is-background
-    .el-pager
-    li:not(.disabled):hover {
-    color: black;
-  }
-  .pagination-medium
-    >>> .el-pagination.is-background
-    .el-pager
-    li:not(.disabled).active {
-    background-color: black;
-    color: white;
-  }
-}
-@media (min-width: 430px) {
-  .pagination-content {
-    @apply w-full flex justify-center items-center;
-  }
 }
 @media (min-width: 768px) {
-  .content-grid-product {
+  .content-grid-product-list {
+    @apply grid grid-cols-1 gap-6;
+  }
+  .content-grid-product-grid {
     @apply grid grid-cols-3 gap-6;
   }
 }

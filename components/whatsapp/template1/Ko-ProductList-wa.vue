@@ -20,7 +20,14 @@
       </div>
       <div>
         <div class="content-item-productos">
-          <div class="grid-products">
+          <div
+            :class="
+              this.settingByTemplate &&
+              this.settingByTemplate.estilo_productos == 1
+                ? 'grid-products-list'
+                : 'grid-products-grid'
+            "
+          >
             <div
               v-for="product in filterProduct"
               :key="product.id"
@@ -39,14 +46,31 @@
             <p>{{ $t('home_msgCatalogo') }}</p>
           </div>
           <br />
-          <div class="pagination-medium" v-if="products.length > 16">
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              :total="products.length"
-              :page-size="16"
-              :current-page.sync="currentPage"
-            ></el-pagination>
+          <div class="wrapper-pagination-web">
+            <div class="pagination-medium" v-if="products.length > 16">
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="products.length"
+                :page-size="16"
+                :current-page.sync="currentPage"
+              ></el-pagination>
+            </div>
+          </div>
+          <div
+            class="wrapper-pagination-responsive"
+            v-if="products.length > 16"
+          >
+            <div class="pagination-medium">
+              <el-pagination
+                small
+                background
+                layout="prev, pager, next"
+                :total="products.length"
+                :page-size="16"
+                :current-page.sync="currentPage"
+              ></el-pagination>
+            </div>
           </div>
         </div>
       </div>
@@ -155,6 +179,9 @@ export default {
     },
     previousPage() {
       return this.$store.state.previousPage
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -355,7 +382,15 @@ export default {
   justify-content: center;
   flex-direction: column;
 }
-.grid-products {
+.grid-products-list {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(250px, 2fr));
+  grid-gap: 15px;
+  box-sizing: border-box;
+}
+.grid-products-grid {
   width: 100%;
   margin: 0 auto;
   display: grid;
@@ -421,6 +456,15 @@ export default {
   background-color: black;
   color: white;
 }
+.wrapper-pagination-web {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.wrapper-pagination-responsive {
+  display: none;
+}
 @media (max-width: 770px) {
   .container {
     padding: 0px 0px 10px 0px;
@@ -437,14 +481,26 @@ export default {
     /* margin-left: 10px; */
     margin-bottom: 10px;
   }
-  .grid-products {
+  .grid-products-list {
+    grid-gap: 20px;
+  }
+  .grid-products-grid {
     grid-template-columns: repeat(2, minmax(250px, 2fr));
     grid-gap: 20px;
   }
 }
 @media (max-width: 555px) {
-  .grid-products {
+  .grid-products-grid {
     grid-template-columns: repeat(1, minmax(250px, 2fr));
+  }
+  .wrapper-pagination-web {
+    display: none;
+  }
+  .wrapper-pagination-responsive {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
   }
 }
 @media (max-width: 450px) {
