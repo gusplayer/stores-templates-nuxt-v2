@@ -19,7 +19,7 @@ export default {
     },
     indexTemplate() {
       let componentTemplate = ''
-      if (this.settingByTemplate) {
+      if (this.settingByTemplate && this.settingByTemplate.tema) {
         switch (this.settingByTemplate.tema) {
           case 1:
             componentTemplate = 'WaTemplate1'
@@ -31,6 +31,8 @@ export default {
             componentTemplate = 'WaTemplate3'
             break
         }
+      } else {
+        return (componentTemplate = 'WaTemplate1')
       }
       return componentTemplate
     },

@@ -11,14 +11,7 @@
             {{ this.nameCategoryHeader }}
           </p>
         </div>
-        <div
-          :class="
-            this.settingByTemplate &&
-            this.settingByTemplate.estilo_productos == 1
-              ? 'content-grid-product-list'
-              : 'content-grid-product-grid'
-          "
-        >
+        <div class="content-grid-product">
           <div
             class="card-product"
             v-for="product in filterProduct"
@@ -364,11 +357,8 @@ export default {
   .content-items-product {
     @apply w-9/5 flex flex-col justify-center items-center;
   }
-  .content-grid-product-list {
+  .content-grid-product {
     @apply w-full h-full grid grid-cols-1 gap-4 justify-center items-start;
-  }
-  .content-grid-product-grid {
-    @apply w-full h-full grid grid-cols-1  gap-4 justify-center items-start;
   }
   .card-product {
     @apply w-full h-full flex flex-col justify-start items-center;
@@ -386,10 +376,7 @@ export default {
   }
 }
 @media (min-width: 768px) {
-  .content-grid-product-list {
-    @apply grid grid-cols-1 gap-6;
-  }
-  .content-grid-product-grid {
+  .content-grid-product {
     @apply grid grid-cols-2 gap-6;
   }
 }

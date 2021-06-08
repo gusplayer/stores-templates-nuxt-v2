@@ -73,17 +73,12 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductFavoritos-1',
+  props: { dataStore: Object, settingByTemplate: Object },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
     dataProductFavorite() {
       return this.$store.state.products.fullProducts.filter(
         (product) => product.favorito === 1
       )
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
     },
   },
   methods: {

@@ -87,6 +87,7 @@ export default {
   bottom: 0;
   max-width: 900px;
   height: 60px;
+
   @apply w-full flex flex-col justify-center items-center;
 }
 @screen sm {
@@ -104,15 +105,17 @@ export default {
     @apply w-auto flex flex-row justify-center items-center font-semibold;
   }
   .button-footer {
+    height: 37px;
     width: 130px;
     @apply flex flex-col justify-center items-center py-7 rounded-md cursor-pointer;
   }
   .button-footer-out {
+    height: 37px;
     width: 161px;
     @apply flex flex-col justify-center items-center py-7 rounded-md;
   }
   .text-items-button {
-    font-size: 12px;
+    font-size: 14px;
     font-family: 'Poppins', sans-serif !important;
     @apply w-auto font-semibold;
   }
@@ -125,14 +128,32 @@ export default {
     font-size: 18px;
   }
   .button-footer {
+    height: 40px;
     @apply w-auto py-8 px-30;
   }
   .button-footer-out {
     width: 280px;
+    height: 40px;
     @apply py-10;
   }
   .text-items-button {
-    font-size: 18px;
+    font-size: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .button-footer {
+    height: 40px;
+  }
+  .button-footer-out {
+    height: 40px;
+  }
+}
+@media (max-width: 400px) {
+  .button-footer {
+    height: 37px;
+  }
+  .button-footer-out {
+    height: 37px;
   }
 }
 </style>

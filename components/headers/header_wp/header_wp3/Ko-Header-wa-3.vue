@@ -5,7 +5,10 @@
         class="content-banner-items"
         :style="`background-image: url(${this.bannerUrl})`"
       >
-        <div class="content-data-store">
+        <div
+          class="content-data-store"
+          :style="`background: ${settingByTemplate.color_icon};`"
+        >
           <div class="content-logo-name">
             <nuxt-link
               :to="

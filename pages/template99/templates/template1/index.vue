@@ -1,25 +1,15 @@
 <template lang="html">
   <div class="container-home" v-loading="loading">
-    <KoHeaderWp :dataStore="dataStore" :settingByTemplate="settingByTemplate" />
-    <component
-      :is="indexCategory"
-      :dataStore="dataStore"
-      :settingByTemplate="settingByTemplate"
-    />
+    <KoHeaderWp v-bind="componentsProps" />
+    <component :is="indexCategory" v-bind="componentsProps" />
     <KProductFavoritos
       v-if="this.stateBanner"
-      :settingByTemplate="settingByTemplate"
+      v-bind="componentsProps"
+      style="margin-bottom: 10px;"
     />
-    <KProductList
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
-      :settingByTemplate="settingByTemplate"
-    />
-    <KFooterWaLogo
-      :dataStore="dataStore"
-      :settingByTemplate="settingByTemplate"
-    />
-    <KFooterWa :dataStore="dataStore" :settingByTemplate="settingByTemplate" />
+    <component :is="indexList" v-bind="componentsProps" />
+    <KFooterWaLogo v-bind="componentsProps" />
+    <KFooterWa v-bind="componentsProps" />
   </div>
 </template>
 
@@ -29,10 +19,11 @@ import KCategory01 from '../../../../components/whatsapp/template1/Ko-Categories
 import KCategory02 from '../../../../components/whatsapp/template2/ko-slide-categorys'
 import KCategory03 from '../../../../components/whatsapp/template3/ko-slide-categorys'
 import KProductFavoritos from '../../../../components/whatsapp/template1/Ko-ProductFavoritos-1'
-import KProductList from '../../../../components/whatsapp/template1/Ko-ProductList-wa'
+import KProductList from '../../../../components/whatsapp/template1/Ko-ProductList-wa.vue'
+import KProductList2 from '../../../../components/whatsapp/template2/ko-productList.vue'
+import KProductList3 from '../../../../components/whatsapp/template3/ko-productList.vue'
 import KFooterWaLogo from '../../../../components/footers/footerWa/footerWa1/ko-Footer-wa-logo'
 import KFooterWa from '../../../../components/footers/footerWa/footerWa1/ko-Footer-wa'
-
 export default {
   name: 'indexWaTemp1',
   layout: 'wa',
@@ -43,16 +34,31 @@ export default {
     KCategory03,
     KProductFavoritos,
     KProductList,
+    KProductList2,
+    KProductList3,
     KFooterWaLogo,
     KFooterWa,
   },
   data() {
-    return {}
+    return {
+      settingBaseWapir: {
+        color_icon: '',
+        color_primario: 'back',
+        color_secundario: 'white',
+        descripcion: '',
+        estilo_categorias: 1,
+        estilo_productos: 1,
+        logo_cuadrado: 1,
+        mensaje_principal: '',
+        pago_online: 1,
+        tema: 1,
+      },
+    }
   },
   computed: {
     indexCategory() {
       let componentTemplate = ''
-      if (this.settingByTemplate) {
+      if (this.settingByTemplate && this.settingByTemplate.estilo_categorias) {
         switch (this.settingByTemplate.estilo_categorias) {
           case 1:
             componentTemplate = 'KCategory01'
@@ -64,6 +70,27 @@ export default {
             componentTemplate = 'KCategory03'
             break
         }
+      } else {
+        return (componentTemplate = 'KCategory01')
+      }
+      return componentTemplate
+    },
+    indexList() {
+      let componentTemplate = ''
+      if (this.settingByTemplate && this.settingByTemplate.estilo_productos) {
+        switch (this.settingByTemplate.estilo_productos) {
+          case 3:
+            componentTemplate = 'KProductList'
+            break
+          case 2:
+            componentTemplate = 'KProductList2'
+            break
+          case 1:
+            componentTemplate = 'KProductList3'
+            break
+        }
+      } else {
+        return (componentTemplate = 'KProductList3')
       }
       return componentTemplate
     },
@@ -85,6 +112,21 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    settingBaseWapi() {
+      return this.settingBaseWapir
+    },
+    componentsProps() {
+      return {
+        dataStore: this.dataStore,
+        fullProducts: this.fullProducts,
+        settingByTemplate:
+          this.settingByTemplate &&
+          this.settingByTemplate.tema &&
+          this.settingByTemplate.estilo_categorias
+            ? this.settingByTemplate
+            : this.settingBaseWapi,
+      }
     },
   },
 }

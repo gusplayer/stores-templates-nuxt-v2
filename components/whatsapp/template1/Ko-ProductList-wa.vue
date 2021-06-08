@@ -20,14 +20,7 @@
       </div>
       <div>
         <div class="content-item-productos">
-          <div
-            :class="
-              this.settingByTemplate &&
-              this.settingByTemplate.estilo_productos == 1
-                ? 'grid-products-list'
-                : 'grid-products-grid'
-            "
-          >
+          <div div class="grid-products">
             <div
               v-for="product in filterProduct"
               :key="product.id"
@@ -87,6 +80,7 @@ export default {
   props: {
     dataStore: Object,
     fullProducts: {},
+    settingByTemplate: Object,
   },
   name: 'Ko-ProductList-1',
   mounted() {
@@ -179,9 +173,6 @@ export default {
     },
     previousPage() {
       return this.$store.state.previousPage
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
     },
   },
   methods: {
@@ -382,15 +373,7 @@ export default {
   justify-content: center;
   flex-direction: column;
 }
-.grid-products-list {
-  width: 100%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(1, minmax(250px, 2fr));
-  grid-gap: 15px;
-  box-sizing: border-box;
-}
-.grid-products-grid {
+.grid-products {
   width: 100%;
   margin: 0 auto;
   display: grid;
@@ -481,16 +464,12 @@ export default {
     /* margin-left: 10px; */
     margin-bottom: 10px;
   }
-  .grid-products-list {
-    grid-gap: 20px;
-  }
-  .grid-products-grid {
-    grid-template-columns: repeat(2, minmax(250px, 2fr));
+  .grid-products {
     grid-gap: 20px;
   }
 }
 @media (max-width: 555px) {
-  .grid-products-grid {
+  .grid-products {
     grid-template-columns: repeat(1, minmax(250px, 2fr));
   }
   .wrapper-pagination-web {

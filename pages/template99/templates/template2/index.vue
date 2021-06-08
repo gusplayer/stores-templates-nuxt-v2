@@ -10,7 +10,8 @@
       v-if="this.stateBanner"
       :settingByTemplate="settingByTemplate"
     /> -->
-    <KoProductListWa
+    <component
+      :is="indexList"
       :dataStore="dataStore"
       :fullProducts="fullProducts"
       :settingByTemplate="settingByTemplate"
@@ -28,7 +29,9 @@ import KCategory01 from '../../../../components/whatsapp/template1/Ko-Categories
 import KCategory02 from '../../../../components/whatsapp/template2/ko-slide-categorys'
 import KCategory03 from '../../../../components/whatsapp/template3/ko-slide-categorys'
 // import KProductFavoritos from '../../../../components/whatsapp/template1/Ko-ProductFavoritos-1'
-import KoProductListWa from '../../../../components/whatsapp/template2/ko-productList'
+import KProductList from '../../../../components/whatsapp/template1/Ko-ProductList-wa.vue'
+import KProductList2 from '../../../../components/whatsapp/template2/ko-productList.vue'
+import KProductList3 from '../../../../components/whatsapp/template3/ko-productList.vue'
 import KFooterWaLogo from '../../../../components/footers/footerWa/footerWa1/ko-Footer-wa-logo'
 import KoFooterWa from '../../../../components/footers/footerWa/footerWa2/ko-Footer-wa'
 
@@ -40,7 +43,9 @@ export default {
     KCategory02,
     KCategory03,
     // KProductFavoritos,
-    KoProductListWa,
+    KProductList,
+    KProductList2,
+    KProductList3,
     KFooterWaLogo,
     KoFooterWa,
   },
@@ -59,6 +64,25 @@ export default {
             componentTemplate = 'KCategory03'
             break
         }
+      }
+      return componentTemplate
+    },
+    indexList() {
+      let componentTemplate = ''
+      if (this.settingByTemplate && this.settingByTemplate.estilo_productos) {
+        switch (this.settingByTemplate.estilo_productos) {
+          case 3:
+            componentTemplate = 'KProductList'
+            break
+          case 2:
+            componentTemplate = 'KProductList2'
+            break
+          case 1:
+            componentTemplate = 'KProductList3'
+            break
+        }
+      } else {
+        return (componentTemplate = 'KProductList')
       }
       return componentTemplate
     },
