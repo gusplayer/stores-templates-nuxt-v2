@@ -582,7 +582,7 @@ export default {
   overflow: hidden;
   background-color: #25d366;
   border-radius: 10px 0 0 10px;
-  z-index: 3;
+  z-index: 50;
   transition: all 0.5s ease-in-out;
   vertical-align: middle;
   cursor: pointer;

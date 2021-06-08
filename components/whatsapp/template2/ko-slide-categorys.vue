@@ -143,7 +143,8 @@ export default {
 .content-slide-categorys {
   top: 0;
   position: sticky;
-  @apply w-full flex justify-center items-center bg-white-white z-50 py-5;
+  z-index: 10;
+  @apply w-full flex justify-center items-center bg-white-white py-5;
 }
 
 @screen sm {
