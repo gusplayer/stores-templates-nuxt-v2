@@ -103,7 +103,11 @@ export default {
       return this.$store.state.stateBanner
     },
     settingByTemplate() {
-      return this.$store.state.settingByTemplate
+      if (this.$store.state.settingByTemplate) {
+        return this.$store.state.settingByTemplate
+      } else {
+        return this.$store.state.settingBaseWapir
+      }
     },
   },
 }

@@ -504,7 +504,6 @@ export default {
   name: 'koOrder1-cart-wapi',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
   },
   components: {
     ValidationObserver,
@@ -575,6 +574,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },
@@ -640,7 +640,11 @@ export default {
       }
     },
     settingByTemplate() {
-      return this.$store.state.settingByTemplate
+      if (this.$store.state.settingByTemplate) {
+        return this.$store.state.settingByTemplate
+      } else {
+        return this.$store.state.settingBaseWapir
+      }
     },
   },
   methods: {

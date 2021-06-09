@@ -379,6 +379,7 @@ export default {
     envios() {
       return this.dataStore.medios_envio
     },
+    // eslint-disable-next-line vue/return-in-computed-property
     precio() {
       if (this.data.detalle.precio) {
         return `$${this.data.detalle.precio
