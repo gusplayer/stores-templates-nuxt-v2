@@ -486,7 +486,7 @@
         <button
           class="continue_shopping_form"
           :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
-          v-on:click.prevent="redirectWP()"
+          v-on:click.prevent="setOrder()"
           style="margin-top: 15px;"
         >
           <whatsapp-icon class="wp-icon" /> {{ $t('footer_ordenFormbtn') }}
@@ -495,8 +495,8 @@
     </div>
   </transition>
 </template>
-
 <script>
+import axios from 'axios'
 import idCloudinary from '../../../../mixins/idCloudinary'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
@@ -542,6 +542,7 @@ export default {
       shippingDescuento: '',
       FreeShippingCart: false,
       cantidadProductos: 0,
+      statusorden: false,
     }
   },
   computed: {
@@ -779,14 +780,7 @@ export default {
         if (response) {
           let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
           let baseUrlPc = 'https://web.whatsapp.com/send?phone='
-          let urlProduct
-          if (this.dataStore.tienda.dominio) {
-            urlProduct = `${this.dataStore.tienda.dominio}wa`
-          } else {
-            urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
-          }
           let productosCart = []
-
           this.$store.state.productsCart.map((element) => {
             if (element.combinacion) {
               let combiString = JSON.stringify(element.combinacion)
@@ -807,17 +801,13 @@ export default {
               )
             }
           })
-
           let productString = JSON.stringify(productosCart)
           let productList = productString.replace(/"/g, '')
           let resultproductList = productList.replace(/,/g, '%0A')
           let result = resultproductList.slice(1, -1)
-
           let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
-
           if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
             let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-
             if (this.mobileCheck()) {
               window.open(
                 `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
@@ -842,8 +832,36 @@ export default {
               )
             }
           }
+          this.removeCartItems()
         }
       })
+    },
+    setOrder() {
+      const params = {
+        usuario: 1371,
+        tienda: this.dataStore.tienda.id_tienda,
+        total: this.totalCart,
+        direccion_entrega: {
+          type: 0,
+          value: null,
+        },
+        productos: this.productsCart,
+        metodo_pago: 7,
+        canal: 1,
+        comentario: `Pedio por WhatsApp, nombre del cliente: ${this.nombre}, Datos de envió. Ciudad: ${this.ciudad}, Barrio: ${this.barrio}, Dirección: ${this.dirreccion} `,
+        costo_envio: 0,
+        tipo: 0,
+      }
+      axios
+        .post('https://api2.komercia.co/api/usuario/orden', params)
+        .then(() => {
+          this.$message.success('Datos enviados correctamente!')
+          this.closedOder()
+          this.redirectWP()
+        })
+        .catch(() => {
+          this.$message.error('Error al enviar los datos!')
+        })
     },
     listaDescuentos() {
       this.cantidadProductos = 0
