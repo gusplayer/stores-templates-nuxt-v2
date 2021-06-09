@@ -53,7 +53,6 @@ export default {
   props: {
     dataStore: Object,
     fullProducts: {},
-    id: '',
   },
   components: { ProductCard },
   mounted() {

@@ -1,7 +1,10 @@
 <template>
   <div class="header-container">
     <div class="wrapper-header">
-      <KoOrderWa :dataStore="dataStore" />
+      <KoOrderWa
+        :dataStore="dataStore"
+        :settingByTemplate="settingByTemplate"
+      />
       <div class="content-item-top">
         <nuxt-link
           :to="`/wp/${dataStore.tienda.id_tienda}/`"

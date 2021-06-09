@@ -160,6 +160,18 @@ export const state = () => ({
       },
     ],
   },
+  settingBaseWapir: {
+    color_icon: '',
+    color_primario: 'back',
+    color_secundario: 'white',
+    descripcion: '',
+    estilo_categorias: 1,
+    estilo_productos: 1,
+    logo_cuadrado: 1,
+    mensaje_principal: '',
+    pago_online: 1,
+    tema: 1,
+  },
 })
 export const mutations = {
   SET_CURRENTSETTING09(state, value) {

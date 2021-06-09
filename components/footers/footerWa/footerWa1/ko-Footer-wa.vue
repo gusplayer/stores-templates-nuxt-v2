@@ -28,6 +28,7 @@
 export default {
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   computed: {
     productsCart() {
@@ -35,9 +36,6 @@ export default {
     },
     totalCart() {
       return this.$store.state.totalCart
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
     },
   },
   methods: {

@@ -1,7 +1,10 @@
 <template>
   <div class="header-container">
     <div class="wrapper-header">
-      <KoOrderWa :dataStore="dataStore" />
+      <KoOrderWa
+        :dataStore="dataStore"
+        :settingByTemplate="settingByTemplate"
+      />
       <div v-if="this.settingByTemplate && this.settingByTemplate.banner">
         <div class="wrapper-banner-img" v-if="this.settingByTemplate.banner">
           <img

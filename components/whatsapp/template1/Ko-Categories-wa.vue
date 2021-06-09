@@ -48,6 +48,7 @@ export default {
   name: 'Ko-Categories-wa',
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   data() {
     return {

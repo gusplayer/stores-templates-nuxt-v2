@@ -102,7 +102,7 @@
         </div>
       </div>
     </div>
-    <KoOrderWa :dataStore="dataStore" />
+    <KoOrderWa :dataStore="dataStore" :settingByTemplate="settingByTemplate" />
   </div>
 </template>
 <script>

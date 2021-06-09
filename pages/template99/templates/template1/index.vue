@@ -39,22 +39,6 @@ export default {
     KFooterWaLogo,
     KFooterWa,
   },
-  data() {
-    return {
-      settingBaseWapir: {
-        color_icon: '',
-        color_primario: 'back',
-        color_secundario: 'white',
-        descripcion: '',
-        estilo_categorias: 1,
-        estilo_productos: 1,
-        logo_cuadrado: 1,
-        mensaje_principal: '',
-        pago_online: 1,
-        tema: 1,
-      },
-    }
-  },
   computed: {
     indexCategory() {
       let componentTemplate = ''
@@ -114,7 +98,7 @@ export default {
       return this.$store.state.settingByTemplate
     },
     settingBaseWapi() {
-      return this.settingBaseWapir
+      return this.$store.state.settingBaseWapir
     },
     componentsProps() {
       return {

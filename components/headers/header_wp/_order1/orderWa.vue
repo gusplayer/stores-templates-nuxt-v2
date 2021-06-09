@@ -504,6 +504,7 @@ export default {
   name: 'koOrder1-cart-wapi',
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   components: {
     ValidationObserver,

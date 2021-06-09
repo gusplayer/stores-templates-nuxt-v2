@@ -373,7 +373,6 @@ export default {
       }
       return false
     },
-
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
@@ -398,11 +397,15 @@ export default {
           product.id !== this.data.detalle.id
       )
     },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
     stateWapiME() {
       return this.$store.state.stateWapiME
+    },
+    settingByTemplate() {
+      if (this.$store.state.settingByTemplate) {
+        return this.$store.state.settingByTemplate
+      } else {
+        return this.$store.state.settingBaseWapir
+      }
     },
   },
   methods: {
