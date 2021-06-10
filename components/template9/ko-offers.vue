@@ -10,47 +10,46 @@
         },
       ]"
       v-if="koffers"
+      class="wrapper-items"
     >
-      <div class="content-items show-cont">
-        <div>
-          <div class="items-left">
-            <img
-              class="image-left"
-              :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
-              alt="image-left"
-              v-if="koffers.values[0].url_img_background"
-            />
-            <div class="content-txt-left">
-              <div class="left">
-                <p
-                  class="txt-left"
-                  v-if="koffers.values[0].title"
-                  :style="`color: ${koffers.values[0]['--color_title']};`"
+      <div class="content-items">
+        <div class="items-left">
+          <img
+            class="image-left"
+            :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
+            alt="image-left"
+            v-if="koffers.values[0].url_img_background"
+          />
+          <div class="content-txt-left">
+            <div class="left">
+              <p
+                class="txt-left"
+                v-if="koffers.values[0].title"
+                :style="`color: ${koffers.values[0]['--color_title']};`"
+              >
+                {{ koffers.values[0].title }}
+              </p>
+              <p
+                class="txt-left"
+                v-if="koffers.values[0].description"
+                :style="`color: ${koffers.values[0]['--color_title']};`"
+                style="margin-bottom: 10px;"
+              >
+                {{ koffers.values[0].description }}
+              </p>
+              <div v-if="koffers.values[0].url_redirect">
+                <a
+                  :href="`${koffers.values[0].url_redirect}`"
+                  rel="noreferrer noopener"
+                  class="btn-left"
+                  :style="`background: ${koffers.values[0]['--color_background_btn']};`"
                 >
-                  {{ koffers.values[0].title }}
-                </p>
-                <p
-                  class="txt-left"
-                  v-if="koffers.values[0].description"
-                  :style="`color: ${koffers.values[0]['--color_title']};`"
-                  style="margin-bottom: 10px;"
-                >
-                  {{ koffers.values[0].description }}
-                </p>
-                <div v-if="koffers.values[0].url_redirect">
-                  <a
-                    :href="`${koffers.values[0].url_redirect}`"
-                    rel="noreferrer noopener"
-                    class="btn-left"
-                    :style="`background: ${koffers.values[0]['--color_background_btn']};`"
+                  <span
+                    class="txt-btn-left"
+                    :style="`color: ${koffers.values[0]['--color_text_btn']};`"
+                    >{{ $t('home_comprarAhora') }}</span
                   >
-                    <span
-                      class="txt-btn-left"
-                      :style="`color: ${koffers.values[0]['--color_text_btn']};`"
-                      >{{ $t('home_comprarAhora') }}</span
-                    >
-                  </a>
-                </div>
+                </a>
               </div>
             </div>
           </div>
@@ -79,17 +78,24 @@
             />
           </div>
         </a>
-        <div>
-          <div class="items-right">
-            <img
-              class="image-right"
-              :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
-              v-if="koffers.values[2].url_img_background"
-              alt="image-right"
-            />
-            <div class="content-txt-right">
-              <div class="right">
-                <div class="container">
+        <div class="items-right">
+          <img
+            class="image-right"
+            :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
+            v-if="koffers.values[2].url_img_background"
+            alt="image-right"
+          />
+          <div class="content-txt-right">
+            <div class="right">
+              <div class="container">
+                <p
+                  class="txt-right"
+                  v-if="koffers.values[2].title"
+                  :style="`color: ${koffers.values[2]['--color_title']};`"
+                >
+                  {{ koffers.values[2].title }}
+                </p>
+                <div class="overlay-1">
                   <p
                     class="txt-right"
                     v-if="koffers.values[2].title"
@@ -97,17 +103,17 @@
                   >
                     {{ koffers.values[2].title }}
                   </p>
-                  <div class="overlay-1">
-                    <p
-                      class="txt-right"
-                      v-if="koffers.values[2].title"
-                      :style="`color: ${koffers.values[2]['--color_title']};`"
-                    >
-                      {{ koffers.values[2].title }}
-                    </p>
-                  </div>
                 </div>
-                <div class="container">
+              </div>
+              <div class="container">
+                <p
+                  class="txt-right"
+                  v-if="koffers.values[2].description"
+                  :style="`color: ${koffers.values[2]['--color_title']};`"
+                >
+                  {{ koffers.values[2].description }}
+                </p>
+                <div class="overlay-2">
                   <p
                     class="txt-right"
                     v-if="koffers.values[2].description"
@@ -115,169 +121,24 @@
                   >
                     {{ koffers.values[2].description }}
                   </p>
-                  <div class="overlay-2">
-                    <p
-                      class="txt-right"
-                      v-if="koffers.values[2].description"
-                      :style="`color: ${koffers.values[2]['--color_title']};`"
-                    >
-                      {{ koffers.values[2].description }}
-                    </p>
-                  </div>
-                </div>
-                <div
-                  style="margin-top: 10px;"
-                  v-if="koffers.values[2].url_redirect"
-                >
-                  <a
-                    :href="`${koffers.values[2].url_redirect}`"
-                    rel="noreferrer noopener"
-                    class="btn-right"
-                    :style="`background: ${koffers.values[2]['--color_background_btn']};`"
-                  >
-                    <span
-                      class="txt-btn-right"
-                      :style="`color: ${koffers.values[2]['--color_text_btn']};`"
-                      >{{ $t('home_comprarAhora') }}</span
-                    >
-                  </a>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="content-items hid-cont">
-        <div class="items-left">
-          <img
-            class="image-left"
-            :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
-            v-if="koffers.values[0].url_img_background"
-            alt="image-left"
-          />
-          <div class="content-txt-left">
-            <div class="left">
-              <p
-                class="txt-left"
-                v-if="koffers.values[0].title"
-                :style="`color: ${koffers.values[0]['--color_title']};`"
-              >
-                {{ koffers.values[0].title }}
-              </p>
-              <p
-                class="txt-left"
-                v-if="koffers.values[0].description"
-                :style="`color: ${koffers.values[0]['--color_title']};`"
-              >
-                {{ koffers.values[0].description }}
-              </p>
               <div
                 style="margin-top: 10px;"
-                v-if="koffers.values[0].url_redirect"
+                v-if="koffers.values[2].url_redirect"
               >
                 <a
-                  :href="`${koffers.values[0].url_redirect}`"
+                  :href="`${koffers.values[2].url_redirect}`"
                   rel="noreferrer noopener"
-                  class="btn-left"
-                  :style="`background: ${koffers.values[0]['--color_background_btn']};`"
+                  class="btn-right"
+                  :style="`background: ${koffers.values[2]['--color_background_btn']};`"
                 >
                   <span
-                    class="txt-btn-left"
-                    :style="`color: ${koffers.values[0]['--color_text_btn']};`"
+                    class="txt-btn-right"
+                    :style="`color: ${koffers.values[2]['--color_text_btn']};`"
                     >{{ $t('home_comprarAhora') }}</span
                   >
                 </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="mid-content">
-          <a
-            :href="`${koffers.values[1].url_redirect}`"
-            rel="noreferrer noopener"
-            class="items-center"
-            @mouseover="hover = true"
-            @mouseleave="hover = false"
-          >
-            <div class="image-static" v-if="!hover">
-              <img
-                class="image"
-                :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
-                v-if="koffers.values[1].url_img_background"
-                alt="imagen center static"
-              />
-            </div>
-            <div class="image-gif" v-if="hover">
-              <img
-                class="image"
-                :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
-                v-if="koffers.values[1].url_gift_background"
-                alt="imagen center gift"
-              />
-            </div>
-          </a>
-          <div class="items-right">
-            <img
-              class="image-right"
-              :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
-              v-if="koffers.values[2].url_img_background"
-              alt="image-right"
-            />
-            <div class="content-txt-right">
-              <div class="right">
-                <div class="container">
-                  <p
-                    class="txt-right"
-                    v-if="koffers.values[2].title"
-                    :style="`color: ${koffers.values[2]['--color_title']};`"
-                  >
-                    {{ koffers.values[2].title }}
-                  </p>
-                  <div class="overlay-1">
-                    <p
-                      class="txt-right"
-                      v-if="koffers.values[2].title"
-                      :style="`color: ${koffers.values[2]['--color_title']};`"
-                    >
-                      {{ koffers.values[2].title }}
-                    </p>
-                  </div>
-                </div>
-                <div class="container">
-                  <p
-                    class="txt-right"
-                    v-if="koffers.values[2].description"
-                    :style="`color: ${koffers.values[2]['--color_title']};`"
-                  >
-                    {{ koffers.values[2].description }}
-                  </p>
-                  <div class="overlay-2">
-                    <p
-                      class="txt-right"
-                      v-if="koffers.values[2].description"
-                      :style="`color: ${koffers.values[2]['--color_title']};`"
-                    >
-                      {{ koffers.values[2].description }}
-                    </p>
-                  </div>
-                </div>
-                <div
-                  style="margin-top: 10px;"
-                  v-if="koffers.values[2].url_redirect"
-                >
-                  <a
-                    :href="`${koffers.values[2].url_redirect}`"
-                    rel="noreferrer noopener"
-                    class="btn-right"
-                    :style="`background: ${koffers.values[2]['--color_background_btn']};`"
-                  >
-                    <span
-                      class="txt-btn-right"
-                      :style="`color: ${koffers.values[2]['--color_text_btn']};`"
-                      >{{ $t('home_escuchaAhora') }}</span
-                    >
-                  </a>
-                </div>
               </div>
             </div>
           </div>
@@ -303,6 +164,9 @@ export default {
 }
 </script>
 <style scoped>
+.wrapper-items {
+  width: 100%;
+}
 .container-offers {
   @apply w-full flex flex-col justify-center items-center;
 }
@@ -310,8 +174,6 @@ export default {
   @apply w-full justify-center items-center;
 }
 .items-left {
-  max-width: 635px;
-  max-height: 400px;
   width: 100%;
   height: auto;
   display: flex;
@@ -367,13 +229,9 @@ export default {
   @apply w-full cursor-pointer;
 }
 .image {
-  max-width: 635px;
-  max-height: 400px;
   @apply object-cover w-full;
 }
 .items-right {
-  max-width: 635px;
-  max-height: 400px;
   width: 100%;
   height: auto;
   display: flex;
@@ -450,11 +308,6 @@ export default {
   height: 100%;
   transition: 0.2s ease;
 }
-@media (max-width: 350px) {
-  .hid-cont {
-    display: none;
-  }
-}
 @screen sm {
   .content-items {
     @apply grid grid-cols-1;
@@ -474,9 +327,6 @@ export default {
   .right {
     margin-left: 30px;
   }
-  .hid-cont {
-    @apply hidden;
-  }
   .items-right:hover .overlay-1 {
     width: 140px;
   }
@@ -485,26 +335,23 @@ export default {
   }
 }
 @screen md {
+  .content-items {
+    @apply grid grid-cols-3;
+  }
   .mid-content {
     @apply grid grid-cols-2 justify-center items-center;
   }
   .txt-left {
-    font-size: 36px;
+    font-size: 22px;
   }
   .txt-right {
-    font-size: 36px;
+    font-size: 22px;
   }
   .txts-right {
     @apply mb-8;
   }
   .right {
     margin-left: 63px;
-  }
-  .hid-cont {
-    @apply grid;
-  }
-  .show-cont {
-    @apply hidden;
   }
   .txt-btn-left {
     font-size: 14px;
@@ -518,13 +365,25 @@ export default {
   .items-right:hover .overlay-2 {
     width: 240px;
   }
+  .items-left {
+    max-width: 635px;
+    max-height: 400px;
+  }
+  .image {
+    max-width: 635px;
+    max-height: 400px;
+  }
+  .items-right {
+    max-width: 635px;
+    max-height: 400px;
+  }
 }
 @screen lg {
-  .content-items {
-    @apply grid grid-cols-3;
+  .txt-left {
+    font-size: 36px;
   }
-  .hid-cont {
-    @apply hidden;
+  .txt-right {
+    font-size: 36px;
   }
 }
 </style>
