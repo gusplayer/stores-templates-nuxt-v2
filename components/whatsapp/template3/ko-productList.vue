@@ -3,14 +3,20 @@
     <div class="content-item-productList">
       <div class="content-items-product">
         <div class="content-categories">
-          <p class="txt-catalogo">
-            {{ $t('home_catalogo') }}
-          </p>
-          <p class="txt-category mx-2" v-if="this.nameCategoryHeader">/</p>
-          <p class="txt-category" v-if="this.nameCategoryHeader">
-            {{ this.nameCategoryHeader }}
-          </p>
+          <div class="content-items-categorias-text">
+            <p class="txt-catalogo">
+              {{ $t('home_catalogo') }}
+            </p>
+            <p class="txt-category mx-2" v-if="this.nameCategoryHeader">/</p>
+            <p class="txt-category" v-if="this.nameCategoryHeader">
+              {{ this.nameCategoryHeader }}
+            </p>
+          </div>
+          <div>
+            <search-icon class="icon-s" @click="openSearch" />
+          </div>
         </div>
+        <KoSearch :settingByTemplate="settingByTemplate" />
         <div class="content-grid-product">
           <div
             class="card-product"
@@ -48,13 +54,14 @@
 </template>
 <script>
 import ProductCard from '../template3/productCard/ko-productCard'
+import KoSearch from '../searchWa.vue'
 export default {
   name: 'ProductListWa',
   props: {
     dataStore: Object,
     fullProducts: {},
   },
-  components: { ProductCard },
+  components: { ProductCard, KoSearch },
   mounted() {
     this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
@@ -151,6 +158,9 @@ export default {
     },
   },
   methods: {
+    openSearch() {
+      this.$store.commit('SET_OPENSEARCH', true)
+    },
     Allcategories() {
       this.$store.commit('products/FILTER_BY', {
         type: 'all',
@@ -334,24 +344,38 @@ export default {
   justify-content: center;
   align-content: center;
 }
+.content-items-categorias-text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.icon-s {
+  font-size: 25px;
+  color: black;
+  cursor: pointer;
+}
+.icon-s:hover {
+  color: grey;
+}
 @screen sm {
   .content-item-productList {
     @apply w-full flex flex-col justify-center items-center;
   }
   .content-categories {
-    @apply w-full flex flex-row justify-start items-center mb-10;
+    @apply w-full flex flex-row justify-between items-center mb-10;
   }
   .txt-catalogo {
     color: #3d3d3d;
     font-size: 15px;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-auto flex justify-start items-center font-semibold;
+    @apply font-semibold;
   }
   .txt-category {
-    color: #3d3d3d;
-    font-size: 14px;
+    color: #818181;
+    font-size: 15px;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-auto flex justify-end items-center font-normal;
+    @apply font-semibold;
   }
   .content-items-product {
     @apply w-9/5 flex flex-col justify-center items-center;

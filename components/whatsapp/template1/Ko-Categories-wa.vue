@@ -72,6 +72,9 @@ export default {
     product() {
       return this.dataStore.productos
     },
+    stateWapiME() {
+      return this.$store.state.stateWapiME
+    },
   },
   methods: {
     Sendsubcategory(value) {
