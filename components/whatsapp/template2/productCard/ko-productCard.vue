@@ -467,6 +467,7 @@ export default {
     @apply w-full flex flex-row justify-between items-center;
   }
   .button-left {
+    max-height: 34px;
     background-color: #ececec;
     @apply w-auto flex flex-col justify-center items-center rounded-5 p-8 mr-5 cursor-pointer;
   }
@@ -475,6 +476,7 @@ export default {
     @apply w-21 h-auto;
   }
   .button-right {
+    max-height: 34px;
     @apply w-full flex flex-col justify-center items-center rounded-7 px-12 py-8 cursor-pointer;
   }
   .txt-btn-right {

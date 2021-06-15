@@ -128,29 +128,31 @@
             </p>
           </router-link>
         </div>
-        <router-link
-          v-else
-          class="button-right"
-          :style="`background: ${
-            settingByTemplate && settingByTemplate.color_primario
-              ? settingByTemplate.color_primario
-              : '#25D366'
-          };`"
-          :to="{
-            path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
-          }"
-        >
-          <p
-            class="txt-btn-right"
-            :style="`color:${
-              settingByTemplate && settingByTemplate.color_secundario
-                ? settingByTemplate.color_secundario
-                : '#FFFFFF'
+        <div v-else class="content-buttons">
+          <router-link
+            class="button-right"
+            :style="`background: ${
+              settingByTemplate && settingByTemplate.color_primario
+                ? settingByTemplate.color_primario
+                : '#25D366'
             };`"
+            :to="{
+              path:
+                `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+            }"
           >
-            {{ $t('productdetail_btnComprar') }}
-          </p>
-        </router-link>
+            <p
+              class="txt-btn-right"
+              :style="`color:${
+                settingByTemplate && settingByTemplate.color_secundario
+                  ? settingByTemplate.color_secundario
+                  : '#FFFFFF'
+              };`"
+            >
+              {{ $t('productdetail_btnComprar') }}
+            </p>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -477,9 +479,10 @@ export default {
     @apply w-auto flex flex-col justify-center items-start font-bold;
   }
   .content-buttons {
-    @apply w-full flex flex-row justify-between items-center;
+    @apply w-full flex flex-row justify-end items-center;
   }
   .button-left {
+    max-height: 34px;
     background-color: #ececec;
     @apply w-auto flex flex-col justify-center items-center rounded-5 p-8 mr-5 cursor-pointer;
   }
@@ -488,6 +491,8 @@ export default {
     @apply w-21 h-auto;
   }
   .button-right {
+    max-height: 34px;
+    max-width: 124px;
     @apply w-full flex flex-col justify-center items-center rounded-7 px-12 py-8 cursor-pointer;
   }
   .txt-btn-right {

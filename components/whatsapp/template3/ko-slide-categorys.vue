@@ -2,17 +2,21 @@
   <div class="content-slide-categorys">
     <div class="content-categories">
       <div class="itens-slide-categories" id="swiper-slide-categories">
-        <div class="active-tag" @click="clear">
+        <div
+          :class="idCategory == '' ? 'active-tag' : 'disable-tag'"
+          @click="clear"
+        >
           <p class="txt-category" @click="sendCategory('', '', (ref = false))">
             {{ $t('home_todo') }}
           </p>
         </div>
         <div
-          class="active-tag"
+          :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
           v-for="categoria in categories"
           :key="categoria.id"
+          @click="sendCategory(categoria, categoria.id, (ref = false))"
         >
-          <div @click="sendCategory(categoria, categoria.id, (ref = false))">
+          <div>
             <p class="txt-category">
               {{ categoria.nombre_categoria_producto }}
             </p>
@@ -161,6 +165,12 @@ export default {
     @apply hidden;
   }
   .active-tag {
+    max-height: 32px;
+    background-color: #a1a1a1;
+    @apply w-full flex justify-center items-center cursor-pointer mr-10 rounded-md p-10;
+  }
+  .disable-tag {
+    max-height: 32px;
     background-color: #eaeaea;
     @apply w-full flex justify-center items-center cursor-pointer mr-10 rounded-md p-10;
   }
@@ -176,7 +186,6 @@ export default {
     font-size: 16px;
   }
   .active-tag {
-    background-color: #eaeaea;
     @apply py-4;
   }
 }
