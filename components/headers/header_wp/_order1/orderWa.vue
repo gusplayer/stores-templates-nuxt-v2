@@ -1135,6 +1135,22 @@ export default {
   justify-content: flex-end;
   align-items: center;
 }
+.wrapper_photo {
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.photo {
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.text-cart-empty {
+  text-align: center;
+}
 .order_products_list {
   max-height: 380px;
   overflow-y: auto;
@@ -1506,21 +1522,6 @@ export default {
   flex: none;
   height: 41px;
   transition: all ease 0.3s;
-}
-.wrapper_photo {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-self: center;
-}
-.photo {
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-}
-.text-cart-empty {
-  text-align: center;
 }
 .fade-enter-active,
 .fade-leave-active {
