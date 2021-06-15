@@ -56,7 +56,7 @@
 import ProductCard from '../template2/productCard/ko-productCard'
 import KoSearch from '../searchWa.vue'
 export default {
-  name: 'ProductListWa',
+  name: 'ProductGridWa',
   props: {
     dataStore: Object,
     fullProducts: {},

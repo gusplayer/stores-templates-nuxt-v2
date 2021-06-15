@@ -86,20 +86,10 @@
         >
           <div
             class="button-left"
-            :style="`background: ${
-              settingByTemplate && settingByTemplate.color_primario
-                ? settingByTemplate.color_primario
-                : '#25D366'
-            };`"
             v-if="this.product.precio > 0"
             v-on:click="addShoppingCart"
           >
             <svg
-              :style="`color:${
-                settingByTemplate && settingByTemplate.color_secundario
-                  ? settingByTemplate.color_secundario
-                  : '#FFFFFF'
-              };`"
               class="svg-img"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -462,7 +452,8 @@ export default {
     filter: grayscale(100%);
   }
   .content-right-data {
-    @apply w-full flex flex-col justify-center items-center;
+    padding: 5px 0;
+    @apply h-full w-full flex flex-col justify-between items-center;
   }
   .content-description-product {
     @apply w-full h-80 flex flex-col gap-1 justify-start items-start mb-10;
@@ -489,9 +480,11 @@ export default {
     @apply w-full flex flex-row justify-between items-center;
   }
   .button-left {
+    background-color: #ececec;
     @apply w-auto flex flex-col justify-center items-center rounded-5 p-8 mr-5 cursor-pointer;
   }
   .svg-img {
+    color: black;
     @apply w-21 h-auto;
   }
   .button-right {

@@ -85,20 +85,10 @@
       >
         <div
           class="button-left"
-          :style="`background: ${
-            settingByTemplate && settingByTemplate.color_primario
-              ? settingByTemplate.color_primario
-              : '#25D366'
-          };`"
           v-if="this.product.precio > 0"
           v-on:click="addShoppingCart"
         >
           <svg
-            :style="`color:${
-              settingByTemplate && settingByTemplate.color_secundario
-                ? settingByTemplate.color_secundario
-                : '#FFFFFF'
-            };`"
             class="svg-img"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -477,10 +467,11 @@ export default {
     @apply w-full flex flex-row justify-between items-center;
   }
   .button-left {
-    /* background-color: #ececec; */
+    background-color: #ececec;
     @apply w-auto flex flex-col justify-center items-center rounded-5 p-8 mr-5 cursor-pointer;
   }
   .svg-img {
+    color: black;
     @apply w-21 h-auto;
   }
   .button-right {
