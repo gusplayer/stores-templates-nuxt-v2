@@ -357,7 +357,15 @@
                     settingByTemplate.pago_online == 1
                   "
                   class="continue_shopping2"
-                  :style="`color: ${settingByTemplate.color_primario}; border:2px solid ${settingByTemplate.color_primario};`"
+                  :style="`color: ${
+                    settingByTemplate && settingByTemplate.color_primario
+                      ? settingByTemplate.color_primario
+                      : '#25D366'
+                  }; border:2px solid ${
+                    settingByTemplate && settingByTemplate.color_primario
+                      ? settingByTemplate.color_primario
+                      : '#25D366'
+                  };`"
                   @click="GoPayments"
                   id="InitiateCheckoutTag"
                 >
@@ -371,7 +379,21 @@
                     dataStore.tienda.whatsapp
                   "
                   class="continue_shopping"
-                  :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+                  :style="`background: ${
+                    settingByTemplate && settingByTemplate.color_primario
+                      ? settingByTemplate.color_primario
+                      : '#25D366'
+                  }; color:${
+                    settingByTemplate && settingByTemplate.color_secundario
+                      ? settingByTemplate.color_secundario
+                      : '#FFFFFF'
+                  };
+                  border:2px solid ${
+                    settingByTemplate && settingByTemplate.color_primario
+                      ? settingByTemplate.color_primario
+                      : '#25D366'
+                  };                  
+                  `"
                   @click="formOrden = !formOrden"
                 >
                   <whatsapp-icon class="wp-icon" />
@@ -447,7 +469,7 @@
                 </span>
               </template>
             </validation-provider>
-            <p class="form-subtext">{{ $t('footer_formCorreo') }}</p>
+            <!-- <p class="form-subtext">{{ $t('footer_formCorreo') }}</p>
             <validation-provider
               name="correo"
               rules="required"
@@ -466,7 +488,7 @@
                   {{ errors[0] }}
                 </span>
               </template>
-            </validation-provider>
+            </validation-provider> -->
             <P class="form-subtext"> {{ $t('footer_formCiudad') }}</P>
             <validation-provider
               name="ciudad"
@@ -525,7 +547,21 @@
         </div>
         <button
           class="continue_shopping_form"
-          :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+          :style="`background: ${
+            settingByTemplate && settingByTemplate.color_primario
+              ? settingByTemplate.color_primario
+              : '#25D366'
+          }; color:${
+            settingByTemplate && settingByTemplate.color_secundario
+              ? settingByTemplate.color_secundario
+              : '#FFFFFF'
+          };
+          border:2px solid ${
+            settingByTemplate && settingByTemplate.color_primario
+              ? settingByTemplate.color_primario
+              : '#25D366'
+          };          
+          `"
           v-on:click.prevent="setOrder()"
           style="margin-top: 15px;"
         >
@@ -576,7 +612,7 @@ export default {
       formOrden: false,
       nombre: '',
       identificacion: '',
-      correo: '',
+      // correo: '',
       numberphone: '',
       ciudad: '',
       barrio: '',
@@ -818,101 +854,100 @@ export default {
       return window.mobilecheck()
     },
     redirectWP() {
-      this.$refs.observer.validate().then((response) => {
-        if (response) {
-          let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
-          let baseUrlPc = 'https://web.whatsapp.com/send?phone='
-          let productosCart = []
-          this.$store.state.productsCart.map((element) => {
-            if (element.combinacion) {
-              let combiString = JSON.stringify(element.combinacion)
-              let combiList = combiString.replace(/"/g, '')
-              let resultcombitList = combiList.replace(/,/g, ' - ')
-              productosCart.push(
-                `${element.cantidad} x ${
-                  element.nombre
-                } = Variantes: ${resultcombitList} -> Valor: ${
-                  element.cantidad * element.precio
-                }`
-              )
-            } else {
-              productosCart.push(
-                `${element.cantidad} x ${element.nombre} -> Valor: ${
-                  element.cantidad * element.precio
-                }`
-              )
-            }
-          })
-          let productString = JSON.stringify(productosCart)
-          let productList = productString.replace(/"/g, '')
-          let resultproductList = productList.replace(/,/g, '%0A')
-          let result = resultproductList.slice(1, -1)
-          let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0AIdentificación%3A%20${this.identificacion}%0AE-mail%3A%20${this.correo}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
-          if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-            let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-            if (this.mobileCheck()) {
-              window.open(
-                `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
-                '_blank'
-              )
-            } else {
-              window.open(
-                `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
-                '_blank'
-              )
-            }
-          } else {
-            if (this.mobileCheck()) {
-              window.open(
-                `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-                '_blank'
-              )
-            } else {
-              window.open(
-                `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-                '_blank'
-              )
-            }
-          }
-          this.removeCartItems()
+      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
+      let baseUrlPc = 'https://web.whatsapp.com/send?phone='
+      let productosCart = []
+      this.$store.state.productsCart.map((element) => {
+        if (element.combinacion) {
+          let combiString = JSON.stringify(element.combinacion)
+          let combiList = combiString.replace(/"/g, '')
+          let resultcombitList = combiList.replace(/,/g, ' - ')
+          productosCart.push(
+            `${element.cantidad} x ${
+              element.nombre
+            } = Variantes: ${resultcombitList} -> Valor: ${
+              element.cantidad * element.precio
+            }`
+          )
+        } else {
+          productosCart.push(
+            `${element.cantidad} x ${element.nombre} -> Valor: ${
+              element.cantidad * element.precio
+            }`
+          )
         }
       })
+      let productString = JSON.stringify(productosCart)
+      let productList = productString.replace(/"/g, '')
+      let resultproductList = productList.replace(/,/g, '%0A')
+      let result = resultproductList.slice(1, -1)
+      let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0AIdentificación%3A%20${this.identificacion}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
+      if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
+        let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+        if (this.mobileCheck()) {
+          window.open(
+            `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
+            '_blank'
+          )
+        } else {
+          window.open(
+            `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
+            '_blank'
+          )
+        }
+      } else {
+        if (this.mobileCheck()) {
+          window.open(
+            `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
+            '_blank'
+          )
+        } else {
+          window.open(
+            `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
+            '_blank'
+          )
+        }
+      }
+      this.removeCartItems()
     },
     setOrder() {
-      let temp = {
-        nombre: this.nombre,
-        identificacion: this.identificacion,
-        correo: this.correo,
-        ciudad: this.ciudad,
-        barrio: this.barrio,
-        direccion: this.dirreccion,
-      }
-      const myJSON = JSON.stringify(temp)
-      const params = {
-        usuario: 30866,
-        tienda: this.dataStore.tienda.id_tienda,
-        total: this.totalCart,
-        direccion_entrega: {
-          type: 0,
-          value: null,
-        },
-        productos: this.productsCart,
-        metodo_pago: 7,
-        canal: 1,
-        comentario: myJSON,
-        costo_envio: 0,
-        tipo: 0,
-      }
-      axios
-        .post('https://api2.komercia.co/api/usuario/orden', params)
-        .then(() => {
-          this.$message.success('Datos enviados correctamente!')
-          this.closedOder()
-          this.redirectWP()
-        })
-        .catch(() => {
-          this.$message.error('Error al enviar los datos!')
-        })
+      this.$refs.observer.validate().then((response) => {
+        if (response) {
+          let temp = {
+            nombre: this.nombre,
+            identificacion: this.identificacion,
+            ciudad: this.ciudad,
+            barrio: this.barrio,
+            direccion: this.dirreccion,
+          }
+          const myJSON = JSON.stringify(temp)
+          const params = {
+            usuario: 30866,
+            tienda: this.dataStore.tienda.id_tienda,
+            total: this.totalCart,
+            direccion_entrega: {
+              type: 0,
+              value: null,
+            },
+            productos: this.productsCart,
+            metodo_pago: 7,
+            canal: 1,
+            comentario: myJSON,
+            costo_envio: 0,
+            tipo: 0,
+          }
+          axios
+            .post('https://api2.komercia.co/api/usuario/orden', params)
+            .then(() => {
+              this.$message.success('Datos enviados correctamente!')
+              this.closedOder()
+              this.redirectWP()
+            })
+            .catch(() => {
+              this.$message.error('Error al enviar los datos!')
+            })
+        }
+      })
     },
     listaDescuentos() {
       this.cantidadProductos = 0

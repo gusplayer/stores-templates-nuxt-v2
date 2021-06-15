@@ -6,11 +6,19 @@
           <div class="content-close">
             <div
               class="leftright"
-              :style="`background: ${settingByTemplate.color_primario};`"
+              :style="`background: ${
+                settingByTemplate && settingByTemplate.color_primario
+                  ? settingByTemplate.color_primario
+                  : '#25D366'
+              };`"
             ></div>
             <div
               class="rightleft"
-              :style="`background: ${settingByTemplate.color_primario};`"
+              :style="`background: ${
+                settingByTemplate && settingByTemplate.color_primario
+                  ? settingByTemplate.color_primario
+                  : '#25D366'
+              };`"
             ></div>
           </div>
         </div>
@@ -31,12 +39,20 @@
           <div class="cont-btn">
             <button
               class="content-btn"
-              :style="`background: ${settingByTemplate.color_primario};`"
+              :style="`background: ${
+                settingByTemplate && settingByTemplate.color_primario
+                  ? settingByTemplate.color_primario
+                  : '#25D366'
+              };`"
               @click="closedSearch"
             >
               <span
                 class="btn-txt"
-                :style="`color:${settingByTemplate.color_secundario};`"
+                :style="`color:${
+                  settingByTemplate && settingByTemplate.color_secundario
+                    ? settingByTemplate.color_secundario
+                    : '#FFFFFF'
+                };`"
                 >{{ $t('home_vamos') }}</span
               >
             </button>

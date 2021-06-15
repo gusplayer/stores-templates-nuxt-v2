@@ -5,7 +5,11 @@
       <nuxt-link
         :to="this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
         class="wrapper-back"
-        :style="`color: ${settingByTemplate.color_primario};`"
+        :style="`color: ${
+          settingByTemplate && settingByTemplate.color_primario
+            ? settingByTemplate.color_primario
+            : '#25D366'
+        };`"
       >
         <arrow-left-icon class="icon-back" />
         <p class="back-text">Volver al inicio</p>
@@ -124,7 +128,15 @@
           </div>
           <button
             class="btn-responsive"
-            :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+            :style="`background: ${
+              settingByTemplate && settingByTemplate.color_primario
+                ? settingByTemplate.color_primario
+                : '#25D366'
+            }; color:${
+              settingByTemplate && settingByTemplate.color_secundario
+                ? settingByTemplate.color_secundario
+                : '#FFFFFF'
+            };`"
             ref="color2"
             v-if="!spent && salesData.precio > 0"
             v-on:click="addShoppingCart"
@@ -135,7 +147,15 @@
           </button>
           <button
             class="btn-responsive"
-            :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+            :style="`background: ${
+              settingByTemplate && settingByTemplate.color_primario
+                ? settingByTemplate.color_primario
+                : '#25D366'
+            }; color:${
+              settingByTemplate && settingByTemplate.color_secundario
+                ? settingByTemplate.color_secundario
+                : '#FFFFFF'
+            };`"
             ref="color2"
             v-else-if="salesData.precio == 0 && !spent"
             v-on:click="WPQuotation()"

@@ -3,7 +3,15 @@
     <div
       class="wrapper-footer"
       @click="openOrder"
-      :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+      :style="`background: ${
+        settingByTemplate && settingByTemplate.color_primario
+          ? settingByTemplate.color_primario
+          : '#25D366'
+      }; color:${
+        settingByTemplate && settingByTemplate.color_secundario
+          ? settingByTemplate.color_secundario
+          : '#FFFFFF'
+      };`"
     >
       <p class="unidades" v-if="productsCart.length > 0">
         ({{ productsCart.length }}) item

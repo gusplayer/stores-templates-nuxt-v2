@@ -161,8 +161,8 @@ export const state = () => ({
     ],
   },
   settingBaseWapir: {
-    color_icon: 'black',
-    color_primario: 'black',
+    color_icon: '#25d3652c',
+    color_primario: '#25D366',
     color_secundario: 'white',
     descripcion: '',
     estilo_categorias: 1,

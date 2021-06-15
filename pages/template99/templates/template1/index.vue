@@ -23,7 +23,7 @@ import KProductList from '../../../../components/whatsapp/template1/Ko-ProductLi
 import KProductList2 from '../../../../components/whatsapp/template2/ko-productList.vue'
 import KProductList3 from '../../../../components/whatsapp/template3/ko-productList.vue'
 import KFooterWaLogo from '../../../../components/footers/footerWa/footerWa1/ko-Footer-wa-logo'
-import KFooterWa from '../../../../components/footers/footerWa/footerWa1/ko-Footer-wa'
+import KFooterWa from '../../../../components/footers/footerWa/footerWa2/ko-Footer-wa.vue'
 export default {
   name: 'indexWaTemp1',
   layout: 'wa',

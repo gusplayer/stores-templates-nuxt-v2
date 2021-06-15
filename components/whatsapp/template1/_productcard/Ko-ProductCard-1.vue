@@ -109,7 +109,15 @@
                 v-if="this.product.precio > 0"
                 v-on:click="addShoppingCart"
                 class="btn"
-                :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+                :style="`background: ${
+                  settingByTemplate && settingByTemplate.color_primario
+                    ? settingByTemplate.color_primario
+                    : '#25D366'
+                }; color:${
+                  settingByTemplate && settingByTemplate.color_secundario
+                    ? settingByTemplate.color_secundario
+                    : '#FFFFFF'
+                };`"
                 style="margin-right: 5px;"
               >
                 <shopWa-icon class="wp-icon" />
@@ -121,7 +129,15 @@
                     product.slug,
                 }"
                 class="btn"
-                :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+                :style="`background: ${
+                  settingByTemplate && settingByTemplate.color_primario
+                    ? settingByTemplate.color_primario
+                    : '#25D366'
+                }; color:${
+                  settingByTemplate && settingByTemplate.color_secundario
+                    ? settingByTemplate.color_secundario
+                    : '#FFFFFF'
+                };`"
               >
                 {{ $t('productdetail_btnComprar') }}</router-link
               >
@@ -133,7 +149,15 @@
               }"
               v-else
               class="btn"
-              :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+              :style="`background: ${
+                settingByTemplate && settingByTemplate.color_primario
+                  ? settingByTemplate.color_primario
+                  : '#25D366'
+              }; color:${
+                settingByTemplate && settingByTemplate.color_secundario
+                  ? settingByTemplate.color_secundario
+                  : '#FFFFFF'
+              };`"
             >
               {{ $t('productdetail_btnComprar') }}</router-link
             >

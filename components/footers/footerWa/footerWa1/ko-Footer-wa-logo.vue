@@ -12,7 +12,11 @@
             :href="item.link"
             target="_blank "
             rel="noreferrer noopener"
-            :style="`color: ${settingByTemplate.color_primario};`"
+            :style="`color: ${
+              settingByTemplate && settingByTemplate.color_primario
+                ? settingByTemplate.color_primario
+                : '#25D366'
+            };`"
           >
             <div :is="item.icon" class="icon-wapi" />
           </a>

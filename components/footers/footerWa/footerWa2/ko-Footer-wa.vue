@@ -9,7 +9,15 @@
       </div>
       <div
         @click="openOrder"
-        :style="`background: ${settingByTemplate.color_primario}; color:${settingByTemplate.color_secundario};`"
+        :style="`background: ${
+          settingByTemplate && settingByTemplate.color_primario
+            ? settingByTemplate.color_primario
+            : '#25D366'
+        }; color:${
+          settingByTemplate && settingByTemplate.color_secundario
+            ? settingByTemplate.color_secundario
+            : '#FFFFFF'
+        };`"
         :class="productsCart.length > 0 ? 'button-footer' : 'button-footer-out'"
       >
         <p class="text-items-button">Realizar pedido</p>
