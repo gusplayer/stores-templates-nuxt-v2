@@ -6,10 +6,11 @@
       :dataStore="dataStore"
       :settingByTemplate="settingByTemplate"
     />
-    <!-- <KProductFavoritos
+    <KProductFavoritos
       v-if="this.stateBanner"
+      :dataStore="dataStore"
       :settingByTemplate="settingByTemplate"
-    /> -->
+    />
     <component
       :is="indexList"
       :dataStore="dataStore"
@@ -28,7 +29,7 @@ import KoHeaderWa from '../../../../components/headers/header_wp/header_wp2/Ko-H
 import KCategory01 from '../../../../components/whatsapp/template1/Ko-Categories-wa'
 import KCategory02 from '../../../../components/whatsapp/template2/ko-slide-categorys'
 import KCategory03 from '../../../../components/whatsapp/template3/ko-slide-categorys'
-// import KProductFavoritos from '../../../../components/whatsapp/template1/Ko-ProductFavoritos-1'
+import KProductFavoritos from '../../../../components/whatsapp/template1/Ko-ProductFavoritos-1'
 import KProductList from '../../../../components/whatsapp/template1/Ko-ProductList-wa.vue'
 import KProductList2 from '../../../../components/whatsapp/template2/ko-productList.vue'
 import KProductList3 from '../../../../components/whatsapp/template3/ko-productList.vue'
@@ -42,7 +43,7 @@ export default {
     KCategory01,
     KCategory02,
     KCategory03,
-    // KProductFavoritos,
+    KProductFavoritos,
     KProductList,
     KProductList2,
     KProductList3,
