@@ -169,23 +169,6 @@ export default {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif; */
   font-family: var(--font-style-2);
 }
-.btn-shop {
-  transition: all 0.25s ease;
-  background-color: var(--color_background_btn);
-  border-radius: var(--radius_btn);
-  height: 51px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.btn-shop:hover {
-  transition: all 0.25s ease;
-  background-color: #ffffff;
-}
-.btn-shop:hover .text-button {
-  transition: all 0.25s ease;
-  color: #2c2930;
-}
 .carousel-content >>> .swiper-pagination-bullet-active {
   opacity: 1;
   background: #2c2930;
@@ -212,40 +195,51 @@ export default {
     @apply w-full;
   }
   .text-top {
-    @apply w-full flex justify-center items-center text-center mb-24;
+    @apply w-full flex justify-center items-center text-center mb-10;
   }
   .banner-text-top {
-    font-size: 14px;
-    @apply font-semibold uppercase;
+    font-size: 10px;
+    @apply font-semibold uppercase flex;
   }
   .text-medium {
-    @apply w-full flex flex-col justify-center items-center text-center mb-24;
+    @apply w-full flex flex-col justify-center items-center text-center mb-10;
   }
   .banner-text-medium {
-    font-size: 38px;
+    font-size: 18px;
     line-height: 0.9;
     font-weight: 700;
   }
   .text-bottom {
-    @apply w-full flex flex-col justify-center items-center text-center mb-24;
-  }
-  .banner-text-bottom {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 32px;
+    @apply hidden;
   }
   .banner-button {
     @apply w-full flex flex-col justify-center items-center text-center;
-    margin-top: 30px;
   }
   .text-button {
-    @apply px-24;
+    @apply px-14;
     transition: all 0.25s ease;
     letter-spacing: 1px;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 800;
     text-align: center;
     white-space: nowrap;
+  }
+  .btn-shop {
+    transition: all 0.25s ease;
+    background-color: var(--color_background_btn);
+    border-radius: var(--radius_btn);
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-shop:hover {
+    transition: all 0.25s ease;
+    background-color: #ffffff;
+  }
+  .btn-shop:hover .text-button {
+    transition: all 0.25s ease;
+    color: #2c2930;
   }
 }
 @screen md {
@@ -253,14 +247,33 @@ export default {
     display: initial;
     @apply w-7/0;
   }
-  .banner-text-top {
-    font-size: 16px;
+  .text-top {
+    @apply mb-24;
   }
+  .banner-text-top {
+    font-size: 14px;
+  }
+
   .banner-text-medium {
-    font-size: 72px;
+    font-size: 40px;
+  }
+  .text-bottom {
+    @apply w-full flex flex-col justify-center items-center text-center mb-24;
   }
   .banner-text-bottom {
     font-size: 16px;
+  }
+  .text-medium {
+    @apply mb-24;
+  }
+  .banner-text-bottom {
+    font-size: 16px;
+    font-weight: 600;
+    @apply flex;
+  }
+  .banner-button {
+    @apply w-full flex flex-col justify-center items-center text-center;
+    margin-top: 30px;
   }
 }
 @screen lg {
@@ -274,7 +287,7 @@ export default {
     @apply w-5/0;
   }
   .text-top {
-    @apply justify-start items-start text-left mb-0;
+    @apply justify-start items-start text-left mb-10;
   }
   .text-medium {
     @apply justify-start items-start text-left;
@@ -284,6 +297,9 @@ export default {
   }
   .banner-button {
     @apply justify-start items-start text-center;
+  }
+  .banner-text-medium {
+    font-size: 72px;
   }
 }
 @media (min-width: 1300px) {
@@ -304,9 +320,9 @@ export default {
     font-size: 90px;
   }
 }
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
   .banner-content-items-1 {
     display: none;
   }
-}
+} */
 </style>
