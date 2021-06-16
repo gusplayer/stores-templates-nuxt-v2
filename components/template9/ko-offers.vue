@@ -33,11 +33,11 @@
                 class="txt-left"
                 v-if="koffers.values[0].description"
                 :style="`color: ${koffers.values[0]['--color_title']};`"
-                style="margin-bottom: 10px;"
+                style="margin-bottom: 10px"
               >
                 {{ koffers.values[0].description }}
               </p>
-              <div v-if="koffers.values[0].url_redirect">
+              <div class="btns-center" v-if="koffers.values[0].url_redirect">
                 <a
                   :href="`${koffers.values[0].url_redirect}`"
                   rel="noreferrer noopener"
@@ -124,7 +124,7 @@
                 </div>
               </div>
               <div
-                style="margin-top: 10px;"
+                class="item-button-right"
                 v-if="koffers.values[2].url_redirect"
               >
                 <a
@@ -206,21 +206,18 @@ export default {
 .btn-left {
   /* background-color: var(--color_background_btn_1); */
   width: auto;
-  /* height: 30px; */
+  justify-content: center;
+  align-items: center;
   font-weight: 800;
-  padding: 10px 5px;
   transition: all 200ms ease-in;
-}
-.txt-btn-left {
-  /* color: var(--color_text_btn_1); */
-  text-transform: uppercase;
+  @apply px-14 py-5 text-center;
 }
 .content-txt-left {
   @apply absolute w-full h-full flex flex-col justify-center items-center;
 }
-.left {
+/* .left {
   margin-left: 40px;
-}
+} */
 .items-left:hover .btn-left {
   transition: all 200ms ease-in;
   transform: translateX(10px);
@@ -265,18 +262,14 @@ export default {
 .btn-right {
   /* color: var(--color_background_btn_2); */
   width: auto;
-  /* height: 30px; */
+  justify-content: center;
+  align-items: center;
   font-weight: 800;
-  padding: 10px 5px;
   transition: all 200ms ease-in;
-}
-.txt-btn-right {
-  /* color: var(--color_text_btn_2); */
-  text-transform: uppercase;
+  @apply px-14 py-5 text-center;
 }
 .content-txt-right {
-  @apply absolute w-full flex flex-col justify-end items-center;
-  height: 88%;
+  @apply absolute w-full h-full flex flex-col justify-center items-center;
 }
 .items-right:hover .btn-right {
   transition: all 200ms ease-in;
@@ -313,25 +306,35 @@ export default {
     @apply grid grid-cols-1;
   }
   .txt-left {
-    font-size: 30px;
+    font-size: 25px;
   }
-  .txt-btn.left {
-    font-size: 14px;
+  .txt-btn-left {
+    font-size: 13px;
   }
   .txt-right {
-    font-size: 30px;
+    font-size: 25px;
   }
-  .txt-btn.right {
-    font-size: 14px;
+  .txt-btn-right {
+    font-size: 13px;
   }
-  .right {
+  /* .right {
     margin-left: 30px;
-  }
+  } */
   .items-right:hover .overlay-1 {
     width: 140px;
   }
   .items-right:hover .overlay-2 {
     width: 200px;
+  }
+  .item-button-right,
+  .btns-center {
+    @apply w-full flex justify-center items-center mt-10;
+  }
+}
+@media (min-width: 425px) {
+  .txt-right,
+  .txt-left {
+    font-size: 30px;
   }
 }
 @screen md {
@@ -350,9 +353,9 @@ export default {
   .txts-right {
     @apply mb-8;
   }
-  .right {
+  /* .right {
     margin-left: 63px;
-  }
+  } */
   .txt-btn-left {
     font-size: 14px;
   }
@@ -377,12 +380,13 @@ export default {
     max-width: 635px;
     max-height: 400px;
   }
+  .item-button-right,
+  .btns-center {
+    @apply w-full flex justify-start items-center mt-10;
+  }
 }
 @screen lg {
-  .txt-left {
-    font-size: 36px;
-  }
-  .txt-right {
+  .txt-left. .txt-right {
     font-size: 36px;
   }
 }
