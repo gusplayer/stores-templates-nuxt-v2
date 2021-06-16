@@ -449,7 +449,7 @@
                 </span>
               </template>
             </validation-provider>
-            <p class="form-subtext">{{ $t('footer_formIdenti') }}</p>
+            <p class="form-subtext">{{ $t('footer_formPhone') }}</p>
             <validation-provider
               name="identificacion"
               rules="required"
@@ -461,7 +461,7 @@
                   type="text"
                   v-model="identificacion"
                   class="input-text"
-                  :placeholder="$t('footer_formIdentiMgs')"
+                  :placeholder="$t('footer_formPhoneMgs')"
                   id="Contactidentificacion"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -881,7 +881,7 @@ export default {
       let productList = productString.replace(/"/g, '')
       let resultproductList = productList.replace(/,/g, '%0A')
       let result = resultproductList.slice(1, -1)
-      let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0AIdentificación%3A%20${this.identificacion}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
+      let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACelular%3A%20${this.identificacion}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
         if (this.mobileCheck()) {
@@ -939,9 +939,9 @@ export default {
           axios
             .post('https://api2.komercia.co/api/usuario/orden', params)
             .then(() => {
-              this.$message.success('Datos enviados correctamente!')
-              this.closedOder()
               this.redirectWP()
+              this.closedOder()
+              this.$message.success('Datos enviados correctamente!')
             })
             .catch(() => {
               this.$message.error('Error al enviar los datos!')
@@ -1134,6 +1134,22 @@ export default {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+}
+.wrapper_photo {
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.photo {
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.text-cart-empty {
+  text-align: center;
 }
 .order_products_list {
   max-height: 380px;
@@ -1506,21 +1522,6 @@ export default {
   flex: none;
   height: 41px;
   transition: all ease 0.3s;
-}
-.wrapper_photo {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-self: center;
-}
-.photo {
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-}
-.text-cart-empty {
-  text-align: center;
 }
 .fade-enter-active,
 .fade-leave-active {

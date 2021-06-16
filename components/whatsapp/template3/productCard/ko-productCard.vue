@@ -86,20 +86,10 @@
         >
           <div
             class="button-left"
-            :style="`background: ${
-              settingByTemplate && settingByTemplate.color_primario
-                ? settingByTemplate.color_primario
-                : '#25D366'
-            };`"
             v-if="this.product.precio > 0"
             v-on:click="addShoppingCart"
           >
             <svg
-              :style="`color:${
-                settingByTemplate && settingByTemplate.color_secundario
-                  ? settingByTemplate.color_secundario
-                  : '#FFFFFF'
-              };`"
               class="svg-img"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -138,29 +128,31 @@
             </p>
           </router-link>
         </div>
-        <router-link
-          v-else
-          class="button-right"
-          :style="`background: ${
-            settingByTemplate && settingByTemplate.color_primario
-              ? settingByTemplate.color_primario
-              : '#25D366'
-          };`"
-          :to="{
-            path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
-          }"
-        >
-          <p
-            class="txt-btn-right"
-            :style="`color:${
-              settingByTemplate && settingByTemplate.color_secundario
-                ? settingByTemplate.color_secundario
-                : '#FFFFFF'
+        <div v-else class="content-buttons">
+          <router-link
+            class="button-right"
+            :style="`background: ${
+              settingByTemplate && settingByTemplate.color_primario
+                ? settingByTemplate.color_primario
+                : '#25D366'
             };`"
+            :to="{
+              path:
+                `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+            }"
           >
-            {{ $t('productdetail_btnComprar') }}
-          </p>
-        </router-link>
+            <p
+              class="txt-btn-right"
+              :style="`color:${
+                settingByTemplate && settingByTemplate.color_secundario
+                  ? settingByTemplate.color_secundario
+                  : '#FFFFFF'
+              };`"
+            >
+              {{ $t('productdetail_btnComprar') }}
+            </p>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -462,7 +454,8 @@ export default {
     filter: grayscale(100%);
   }
   .content-right-data {
-    @apply w-full flex flex-col justify-center items-center;
+    padding: 5px 0;
+    @apply h-full w-full flex flex-col justify-between items-center;
   }
   .content-description-product {
     @apply w-full h-80 flex flex-col gap-1 justify-start items-start mb-10;
@@ -486,15 +479,20 @@ export default {
     @apply w-auto flex flex-col justify-center items-start font-bold;
   }
   .content-buttons {
-    @apply w-full flex flex-row justify-between items-center;
+    @apply w-full flex flex-row justify-end items-center;
   }
   .button-left {
+    max-height: 34px;
+    background-color: #ececec;
     @apply w-auto flex flex-col justify-center items-center rounded-5 p-8 mr-5 cursor-pointer;
   }
   .svg-img {
+    color: black;
     @apply w-21 h-auto;
   }
   .button-right {
+    max-height: 34px;
+    max-width: 124px;
     @apply w-full flex flex-col justify-center items-center rounded-7 px-12 py-8 cursor-pointer;
   }
   .txt-btn-right {
