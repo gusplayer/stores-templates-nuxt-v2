@@ -95,7 +95,7 @@ export default {
 <style scoped>
 .advertising-wrapper {
   background: var(--background_color_1);
-  padding-bottom: 70px;
+  padding: 40px 0;
   flex-direction: column;
   @apply w-full flex justify-center items-center;
 }
