@@ -1,12 +1,37 @@
 <template>
-  <div v-if="settingByTemplate12">
+  <div
+    v-if="settingByTemplate12"
+    :style="[
+      {
+        '--font-style-1':
+          this.settingByTemplate9.allSettings &&
+          this.settingByTemplate9.allSettings.fount_1
+            ? this.settingByTemplate9.allSettings.fount_1
+            : 'David Libre',
+      },
+      {
+        '--font-style-2':
+          this.settingByTemplate9.allSettings &&
+          this.settingByTemplate9.allSettings.fount_2
+            ? this.settingByTemplate9.allSettings.fount_2
+            : 'Great Vibes',
+      },
+      {
+        '--font-style-3':
+          this.settingByTemplate9.allSettings &&
+          this.settingByTemplate9.allSettings.fount_3
+            ? this.settingByTemplate9.allSettings.fount_3
+            : 'Lora',
+      },
+    ]"
+  >
     <div class="main-wrapper bg-gray-50 overflow-hidden">
       <i-header v-bind="{ componentsProps }" />
-      <i-hero-image v-bind="{ ...heroTiles, ...componentsProps }" />
+      <i-hero-image v-bind="{ ...heroImageTitle, ...componentsProps }" />
       <div class="divider mt-4 mb-14" />
       <div class="main-section_container">
         <!-- <cart :data-store="dataStore"  v-bind={componentsProps}/> -->
-        <i-main-section :data="dataFormatted" v-bind={componentsProps} />
+        <i-main-section :data="dataFormatted" v-bind="{ componentsProps }" />
       </div>
       <i-footer />
     </div>
@@ -28,6 +53,16 @@ export default {
   computed: {
     dataStore() {
       return this.$store.state.dataStore
+    },
+    heroImageTitle() {
+      return {
+        title: this.settingByTemplate12
+          ? this.settingByTemplate12.allSettings.title
+          : 'menu list two',
+        subtitle: this.settingByTemplate12
+          ? this.settingByTemplate12.allSettings.subtitle
+          : 'Menu and portfolio',
+      }
     },
     fullProducts() {
       return this.$store.getters['products/filterProducts']
@@ -52,216 +87,14 @@ export default {
       return [
         {
           id: 0,
-          title: 'Meat & first Dishes',
-          subtitle: 'Slow cook meals and fresh fishes',
-          products: [
-            {
-              name: 'Steamed king crab',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-1.jpg',
-            },
-            {
-              name: 'Roast partridge',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-5.jpg',
-            },
-            {
-              name: 'Salad of shaved fenne',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-2.jpg',
-            },
-            {
-              name: 'Slow roasted white',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-6.jpg',
-            },
-            {
-              name: 'Roast partridge',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-3.jpg',
-            },
-            {
-              name: 'Salad of shaved fenne',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-7.jpg',
-            },
-            {
-              name: 'Slow roasted white',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-4.jpg',
-            },
-            {
-              name: 'Roast partridge',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-8.jpg',
-            },
-          ],
-        },
-        {
-          id: 1,
-          title: 'Seasons and burgers',
-          subtitle: 'Genuine and fresh ingredients',
-          products: [
-            {
-              name: 'Steamed king crab',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-36.jpg',
-            },
-            {
-              name: 'Roast partridge',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-37.jpg',
-            },
-            {
-              name: 'Salad of shaved fenne',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-38.jpg',
-            },
-            {
-              name: 'Slow roasted white',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-39.jpg',
-            },
-            {
-              name: 'Roast partridge',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-40.jpg',
-            },
-            {
-              name: 'Salad of shaved fenne',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-41.jpg',
-            },
-            {
-              name: 'Slow roasted white',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-42.jpg',
-            },
-            {
-              name: 'Roast partridge',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-43.jpg',
-            },
-          ],
-        },
-        {
-          id: 2,
-          title: 'Desserts & creams',
-          subtitle: 'Hand made ice creams and desserts',
-          products: [
-            {
-              name: 'Steamed king crab',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-17.jpg',
-            },
-            {
-              name: 'Roast partridge',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-16.jpg',
-            },
-            {
-              name: 'Salad of shaved fenne',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-18.jpg',
-            },
-            {
-              name: 'Slow roasted white',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-19.jpg',
-            },
-            {
-              name: 'Roast partridge',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-20.jpg',
-            },
-            {
-              name: 'Salad of shaved fenne',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-22.jpg',
-            },
-            {
-              name: 'Slow roasted white',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-21.jpg',
-            },
-            {
-              name: 'Roast partridge',
-              description:
-                'Duis aute irure dolo irure dolor in reprehenderit in voluptate velito esse cillume.',
-              price: 9,
-              image:
-                'http://templates.framework-y.com/gourmet/images/gallery/square-23.jpg',
-            },
-          ],
+          title: '',
+          subtitle: '',
+          products: this.listArticulos.map((item) => ({
+            name: item.item,
+            price: item.price,
+            image: item.image,
+            description: item.description,
+          })),
         },
       ]
     },
