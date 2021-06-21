@@ -21,7 +21,11 @@
       :dataStore="dataStore"
       :settingByTemplate="settingByTemplate"
     />
-    <KoFooterWa :dataStore="dataStore" :settingByTemplate="settingByTemplate" />
+    <KoFooterWa
+      :dataStore="dataStore"
+      :settingByTemplate="settingByTemplate"
+      v-if="productsCart.length > 0"
+    />
   </div>
 </template>
 <script>
@@ -108,6 +112,9 @@ export default {
       } else {
         return this.$store.state.settingBaseWapir
       }
+    },
+    productsCart() {
+      return this.$store.state.productsCart
     },
   },
 }

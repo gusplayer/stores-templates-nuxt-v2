@@ -9,7 +9,7 @@
     />
     <component :is="indexList" v-bind="componentsProps" />
     <KFooterWaLogo v-bind="componentsProps" />
-    <KFooterWa v-bind="componentsProps" />
+    <KFooterWa v-bind="componentsProps" v-if="productsCart.length > 0" />
   </div>
 </template>
 
@@ -111,6 +111,9 @@ export default {
             ? this.settingByTemplate
             : this.settingBaseWapi,
       }
+    },
+    productsCart() {
+      return this.$store.state.productsCart
     },
   },
 }
