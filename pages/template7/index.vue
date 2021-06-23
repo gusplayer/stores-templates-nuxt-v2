@@ -29,6 +29,7 @@
       id="kbannerX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.banner.visible"
+      :key="bannerRendering"
     />
     <KPromo
       id="KoffersX"
@@ -100,10 +101,15 @@ export default {
     KWrapper,
   },
   mounted() {
-    // window.parent.postMessage('message', '*')
-    // window.addEventListener('message', this.addEventListenertemplate)
-    // let domain = this.$route.fullPath
-    // this.showComponent07(domain)
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenertemplate)
+    let domain = this.$route.fullPath
+    this.showComponent07(domain)
+  },
+  data() {
+    return {
+      bannerRendering: 0,
+    }
   },
   computed: {
     dataStore() {
@@ -170,30 +176,90 @@ export default {
     },
   },
   beforeDestroy() {
-    // window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenertemplate)
   },
   methods: {
-    // addEventListenertemplate(e) {
-    //   // console.log(e)
-    //   if (
-    //     e.origin.includes('https://panel.komercia.co') ||
-    //     e.origin.includes('http://localhost:8080')
-    //   ) {
-    //     if (e && e.data) {
-    //       this.$store.commit('SET_CURRENTSETTING07', e.data)
-    //     }
-    //   }
-    // },
+    addEventListenertemplate(e) {
+      if (
+        e.origin.includes('https://panel.komercia.co') ||
+        e.origin.includes('http://localhost:8080')
+      ) {
+        if (e && e.data && e.data.component) {
+          this.$store.commit('SET_CURRENTSETTING07', e.data)
+          if (e.data.component == 'banner') {
+            this.bannerRendering += 1
+          }
+        } else if (e && e.data && e.data.componentToEdit) {
+          switch (e.data.componentToEdit) {
+            case 'settingGeneral':
+              this.moverseA('kbannerX')
+              break
+            case 'header':
+              this.moverseA('kbannerX')
+              break
+            case 'footer':
+              this.moverseA('KWrapperX')
+              break
+            case 'banner':
+              this.moverseA('kbannerX')
+              break
+            case 'content':
+              this.moverseA('KoffersX')
+              break
+            case 'productlist':
+              this.moverseA('KproductlistX')
+              break
+            case 'card':
+              this.moverseA('KproductlistX')
+              break
+            case 'advertising':
+              this.moverseA('KAdvertisingX')
+              break
+            case 'ProductFavorite':
+              this.moverseA('KGifyX')
+              break
+            case 'howwork':
+              this.moverseA('KHowworkX')
+              break
+            case 'blog':
+              this.moverseA('KblogX')
+              break
+            case 'newsletter':
+              this.moverseA('KNewsX')
+              break
+            case 'contentImg':
+              this.moverseA('KWrapperX')
+              break
+            case 'detailsProduct':
+              if (this.fullProducts) {
+                this.$router.push({
+                  path: '/productos/' + this.fullProducts[0].slug,
+                })
+              }
+              break
+            case 'productListFilter':
+              this.$router.push({
+                path: '/productos',
+              })
+              break
+            case 'contact':
+              this.$router.push({
+                path: '/contacto',
+              })
+              break
+          }
+        } else {
+          if (e && e.data && e.data.returnHome == true) {
+            this.$router.push({
+              path: '/',
+            })
+          }
+        }
+      }
+    },
     moverseA(idDelElemento) {
       location.hash = '#' + idDelElemento
     },
-  },
-  watch: {
-    // eslint-disable-next-line no-unused-vars
-    // $route(to, from) {
-    //   let domain = this.$route.fullPath
-    //   this.showComponent09(domain)
-    // },
   },
 }
 </script>

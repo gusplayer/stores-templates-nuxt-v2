@@ -222,7 +222,58 @@ export const mutations = {
     }
   },
   SET_CURRENTSETTING07(state, value) {
-    console.log('Template7', value)
+    if (value && value.component) {
+      switch (value.component) {
+        case 'settingGeneral':
+          state.settingByTemplate7.settingGeneral = value.setting
+          break
+        case 'header':
+          state.settingByTemplate7.header = value.setting
+          break
+        case 'banner':
+          state.settingByTemplate7.banner = value.setting
+          break
+        case 'content':
+          state.settingByTemplate7.content = value.setting
+          break
+        case 'productlist':
+          state.settingByTemplate7.productList = value.setting
+          break
+        case 'advertising':
+          state.settingByTemplate7.advertising = value.setting
+          break
+        case 'ProductFavorite':
+          state.settingByTemplate7.ProductFavorite = value.setting
+          break
+        case 'howwork':
+          state.settingByTemplate7.howWork = value.setting
+          break
+        case 'blog':
+          state.settingByTemplate7.blog = value.setting
+          break
+        case 'newsletter':
+          state.settingByTemplate7.newsletter = value.setting
+          break
+        case 'contentImg':
+          state.settingByTemplate7.contentImg = value.setting
+          break
+        case 'footer':
+          state.settingByTemplate7.footer = value.setting
+          break
+        case 'contact':
+          state.settingByTemplate7.contact = value.setting
+          break
+        case 'productListFilter':
+          state.settingByTemplate7.productListFilter = value.setting
+          break
+        case 'card':
+          state.settingByTemplate7.card = value.setting
+          break
+        case 'detailsProduct':
+          state.settingByTemplate7.detailsProduct = value.setting
+          break
+      }
+    }
   },
   SET_LAYOUTUNICENTRO(state, value) {
     state.layoutUnicentro = value
