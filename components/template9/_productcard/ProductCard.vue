@@ -206,11 +206,11 @@
           </p>
         </div>
         <div class="tittle tittle-sm">
-          <p class="card-title" v-if="this.product.nombre.length >= 40">
-            {{ `${this.product.nombre.slice(0, 40)}...` }}
+          <p class="card-title" v-if="this.product.nombre.length >= 30">
+            {{ `${this.product.nombre.slice(0, 30)}...` }}
           </p>
           <p class="card-title" v-else>
-            {{ `${this.product.nombre.slice(0, 40)}` }}
+            {{ `${this.product.nombre.slice(0, 30)}` }}
           </p>
         </div>
       </router-link>
@@ -405,9 +405,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,
@@ -600,7 +599,6 @@ export default {
 .text-price {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-2) !important;
-  margin-top: 10px;
   font-size: 16px;
   color: var(--color_price_card);
   white-space: nowrap;

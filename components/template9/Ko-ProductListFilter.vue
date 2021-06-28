@@ -261,7 +261,7 @@
                 </div>
               </div>
               <div
-                v-if="(this.fullProducts.length == 0)"
+                v-if="this.fullProducts.length == 0"
                 class="content-products-empty"
               >
                 <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
@@ -1054,7 +1054,7 @@ export default {
 }
 @screen sm {
   .product-conten-items {
-    @apply w-full grid grid-cols-1;
+    @apply w-full grid grid-cols-2;
   }
   .btn-tittle-shop {
     font-size: 36px;

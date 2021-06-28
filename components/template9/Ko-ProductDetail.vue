@@ -188,6 +188,44 @@
                 </button>
               </div>
             </div>
+            <div class="responsive-purchase">
+              <div class="ko-input">
+                <div class="quantity-resposive">
+                  <button
+                    class="quantity_remove_res"
+                    v-on:click="removeQuantity()"
+                  >
+                    <menos-icon class="icon_res" />
+                  </button>
+                  <p class="quantity_value_res">{{ quantityValue }}</p>
+                  <button class="quantity_add_res" v-on:click="addQuantity()">
+                    <mas-icon class="icon_res" />
+                  </button>
+                  <transition name="slide-fade">
+                    <div
+                      class="container-alert"
+                      v-show="quantityValue == maxQuantityValue"
+                    >
+                      <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
+                    </div>
+                  </transition>
+                </div>
+                <div style="width: 100%; margin-left: 10px">
+                  <div class="content_buy_action-responsive" v-if="spent">
+                    <p class="card-info-1-res">{{ $t('home_cardAgotado') }}</p>
+                  </div>
+                  <button
+                    class="btn-responsive"
+                    v-if="!spent"
+                    v-on:click="addShoppingCart"
+                  >
+                    <cartArrowDown class="card-icon-cart" />{{
+                      $t('home_cardAgregar')
+                    }}
+                  </button>
+                </div>
+              </div>
+            </div>
             <div class="content-options">
               <OptionAcordion
                 :dataStore="dataStore"
@@ -548,8 +586,7 @@ export default {
             case 'precio':
               this.envio = {
                 titulo: 'Tarifa por precio',
-                desc:
-                  'Segun la suma del costo de tus productos te cobraran el envio',
+                desc: 'Segun la suma del costo de tus productos te cobraran el envio',
               }
               break
             case 'precio_ciudad':
@@ -594,7 +631,8 @@ export default {
       this.existYoutube = false
     },
     videoYoutube(url) {
-      let myregexp = /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+      let myregexp =
+        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
       let id = ''
       if (url && url !== '' && url !== 'null') {
         this.validVideo = true
@@ -623,9 +661,8 @@ export default {
         product.limitQuantity = this.data.info.inventario
       }
       if (typeof this.productIndexCart === 'number') {
-        const mutableProduct = this.$store.state.productsCart[
-          this.productIndexCart
-        ]
+        const mutableProduct =
+          this.$store.state.productsCart[this.productIndexCart]
         mutableProduct.cantidad += this.data.cantidad
         this.$store.state.productsCart.splice(
           this.productIndexCart,
@@ -855,6 +892,9 @@ export default {
   width: 100%;
   margin-top: 40px;
 }
+.responsive-purchase {
+  display: none;
+}
 @screen sm {
   .product-content {
     @apply flex-col justify-center items-center;
@@ -1078,7 +1118,7 @@ export default {
   }
   /* ------------------- DOWN ----------------------- */
 }
-@media (min-width: 480px) {
+@media (min-width: 450px) {
   .content-direction-btns {
     @apply flex-row;
   }
@@ -1193,6 +1233,133 @@ export default {
   }
   .crumb {
     @apply w-full;
+  }
+}
+@media (max-width: 450px) {
+  .content-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .content-direction-btns {
+    display: none;
+  }
+  .responsive-purchase {
+    display: initial;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    box-shadow: 0 0 30px 50px rgba(96, 125, 139, 0.096);
+    background: var(--background_color_1);
+    z-index: 2;
+  }
+  .ko-input {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 5px;
+  }
+  .quantity-resposive {
+    display: flex;
+    flex-direction: row;
+  }
+  .text-quantity {
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(21, 20, 57, 0.541);
+    margin-right: 5px;
+    align-self: center;
+  }
+  .quantity_remove_res {
+    border: 1px rgba(127, 127, 139, 0.342);
+    border-top-left-radius: var(--radius_btn);
+    border-bottom-left-radius: var(--radius_btn);
+    border-style: solid none solid solid;
+    background: transparent;
+    height: 44px;
+    width: 3em;
+  }
+  .quantity_value_res {
+    font-size: 1em;
+    color: #000000;
+    border: 1px rgba(127, 127, 139, 0.342);
+    padding-left: 10px;
+    padding-right: 10px;
+    border-style: solid none solid none;
+    background: transparent;
+    height: 44px;
+    width: 2.5em;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  .quantity_add_res {
+    border: 1px rgba(127, 127, 139, 0.342);
+    border-top-right-radius: var(--radius_btn);
+    border-bottom-right-radius: var(--radius_btn);
+    border-style: solid solid solid none;
+    background: transparent;
+    height: 44px;
+    width: 3em;
+  }
+  .icon_res {
+    font-size: 16px;
+  }
+  .content_buy_action-responsive {
+    display: flex;
+    width: 100%;
+  }
+  .card-info-1-res {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: gray;
+    border: solid 1px gray;
+    padding: 8px 10px;
+    border-radius: var(--radius_btn);
+    color: white;
+    font-size: 16px;
+    width: 100%;
+  }
+  .btn-responsive {
+    border-radius: var(--radius_btn);
+    color: var(--color_text_btn);
+    border: solid 1px var(--color_background_btn);
+    background-color: var(--color_background_btn);
+    padding: 8px 10px;
+    width: 100%;
+    font-size: 16px;
+  }
+  .card-icon-cart {
+    font-size: 20px;
+    color: var(--color_text_btn);
+    margin-right: 4px;
+    cursor: pointer;
+  }
+  .container-alert {
+    position: absolute;
+    top: -55px;
+    left: 45px;
+    width: 80px;
+    background-color: rgb(250, 232, 75);
+    border: 1px solid rgb(230, 213, 66);
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: black;
+  }
+  .alert {
+    text-align: center;
+    padding: 5px 5px;
+    text-transform: capitalize;
+  }
+  .features {
+    border-top: none;
   }
 }
 </style>

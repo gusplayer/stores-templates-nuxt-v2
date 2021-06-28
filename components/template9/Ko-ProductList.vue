@@ -150,8 +150,8 @@ export default {
 }
 @screen sm {
   .product-conten-items {
-    @apply grid grid-cols-1 gap-4;
-    width: 75%;
+    @apply grid grid-cols-2 gap-4;
+    width: 95%;
   }
   .tittle {
     line-height: 34px;

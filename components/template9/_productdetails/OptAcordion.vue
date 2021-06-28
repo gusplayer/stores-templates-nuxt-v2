@@ -582,4 +582,10 @@ img {
   width: 50%;
   margin-top: 15px;
 }
+
+@media (max-width: 450px) {
+  .content-acordion {
+    @apply mt-0;
+  }
+}
 </style>
