@@ -1,39 +1,25 @@
 <template>
   <div
-    v-if="settingByTemplate12"
     :style="[
       {
         '--font-style-1':
-          this.settingByTemplate9.allSettings &&
-          this.settingByTemplate9.allSettings.fount_1
-            ? this.settingByTemplate9.allSettings.fount_1
-            : 'David Libre',
-      },
-      {
-        '--font-style-2':
-          this.settingByTemplate9.allSettings &&
-          this.settingByTemplate9.allSettings.fount_2
-            ? this.settingByTemplate9.allSettings.fount_2
-            : 'Great Vibes',
-      },
-      {
-        '--font-style-3':
-          this.settingByTemplate9.allSettings &&
-          this.settingByTemplate9.allSettings.fount_3
-            ? this.settingByTemplate9.allSettings.fount_3
-            : 'Lora',
+          this.settingByTemplate12 &&
+          this.settingByTemplate12.allSettings &&
+          this.settingByTemplate12.allSettings.fount_1
+            ? this.settingByTemplate12.allSettings.fount_1
+            : 'Poppins',
       },
     ]"
   >
     <div class="main-wrapper bg-gray-50 overflow-hidden">
-      <i-header v-bind="{ componentsProps }" />
-      <i-hero-image v-bind="{ ...heroImageTitle, ...componentsProps }" />
+      <i-header v-bind="componentsProps" />
+      <i-hero-image v-bind="componentsProps" />
+
       <div class="divider mt-4 mb-14" />
       <div class="main-section_container">
-        <!-- <cart :data-store="dataStore"  v-bind={componentsProps}/> -->
-        <i-main-section :data="dataFormatted" v-bind="{ componentsProps }" />
+        <i-main-section v-bind="componentsProps" />
       </div>
-      <i-footer />
+      <i-footer v-bind="componentsProps" />
     </div>
   </div>
 </template>
@@ -47,28 +33,13 @@ export default {
     IHeroImage: () => import('../../components/template12/HeroImage'),
     IMainSection: () => import('../../components/template12/MainSection'),
   },
-  mounted() {
-    window.addEventListener('message', this.addEventListenertemplate)
-  },
+  mounted() {},
   computed: {
     dataStore() {
       return this.$store.state.dataStore
     },
-    heroImageTitle() {
-      return {
-        title: this.settingByTemplate12
-          ? this.settingByTemplate12.allSettings.title
-          : 'menu list two',
-        subtitle: this.settingByTemplate12
-          ? this.settingByTemplate12.allSettings.subtitle
-          : 'Menu and portfolio',
-      }
-    },
     fullProducts() {
       return this.$store.getters['products/filterProducts']
-    },
-    listArticulos() {
-      return this.$store.state.listArticulos
     },
     settingByTemplate12() {
       return this.$store.state.settingByTemplate12
@@ -77,37 +48,14 @@ export default {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral:
-          this.settingByTemplate12 && this.settingByTemplate12.allSettings
-            ? this.settingByTemplate12.allSettings
-            : null,
-      }
-    },
-    dataFormatted() {
-      return [
-        {
-          id: 0,
-          title: '',
-          subtitle: '',
-          products: this.listArticulos.map((item) => ({
-            name: item.item,
-            price: item.price,
-            image: item.image,
-            description: item.description,
-          })),
-        },
-      ]
-    },
-    heroTitles() {
-      return {
-        title: 'menu list two',
-        subtitle: 'Menu and portfolio',
+        // settingGeneral:
+        //   this.settingByTemplate12 && this.settingByTemplate12.allSettings
+        //     ? this.settingByTemplate12.allSettings
+        //     : null,
       }
     },
   },
-  methods: {
-    addEventListenertemplate() {},
-  },
+  methods: {},
 }
 </script>
 

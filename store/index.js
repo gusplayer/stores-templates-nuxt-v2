@@ -72,6 +72,7 @@ export const state = () => ({
   settingByTemplate: '',
   settingByTemplate7: '',
   settingByTemplate9: '',
+  settingByTemplate12: '',
   category_producto_header: '',
   subcategory_producto_header: '',
   analytics_tagmanager: '',
@@ -273,6 +274,11 @@ export const mutations = {
           state.settingByTemplate7.detailsProduct = value.setting
           break
       }
+    }
+  },
+  SET_CURRENTSETTING12(state, value) {
+    if (value && value.component) {
+      state.settingByTemplate = value.setting
     }
   },
   SET_LAYOUTUNICENTRO(state, value) {
@@ -548,6 +554,7 @@ export const actions = {
         } else if (
           id.data.data.template == 5 ||
           id.data.data.template == 6 ||
+          id.data.data.template == 12 ||
           id.data.data.template == 99
         ) {
           if (state.dataStore && state.dataStore.tienda) {

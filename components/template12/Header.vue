@@ -1,29 +1,47 @@
 <template>
-  <header
-    class="flex text-white justify-between items-center pr-4 pl-4 pb-2 transform-gpu fixed top-0 left-0 w-full z-10"
-    :class="{
-      'bg-white text-gray-800 h-16 pt-2 ease duration-500 shadow': isVariantLogo,
-      'pt-8 h-10': !isVariantLogo,
-    }"
-  >
-    <h1>
-      <nuxt-link to="/">
-        <img :src="logoSrc" class="w-28" />
-      </nuxt-link>
-    </h1>
-    <div
-      class="bg-transparent p-2 cursor-pointer ease duration-200 rounded-md"
-      :class="{
-        'hover:bg-gray-200': isVariantLogo,
-        'hover:bg-gray-900': !isVariantLogo,
-      }"
-      role="button"
-      title="Cart"
-      @click="handleOpenCart"
+  <div>
+    <header
+      class="wrapper-header"
+      :class="isVariantLogo == true ? 'bg-white-white shadow' : ''"
     >
-      <cart-icon title />
-    </div>
-  </header>
+      <div class="header-content-logo">
+        <nuxt-link to="/" class="wrapper-logo">
+          <img
+            :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+            class="header-logo"
+            alt="Logo Img"
+          />
+        </nuxt-link>
+      </div>
+      <div class="content_car">
+        <button
+          style="margin-right: 20px"
+          @click="openSearch"
+          id="OpenCartTag"
+          class="btn-cart content_car"
+          :class="isVariantLogo == true ? 'text-1' : 'text-2'"
+        >
+          <search-icon class="icon" />
+          <p style="font-size: 18px; margin-left: 2px">
+            {{ $t('home_buscar') }}
+          </p>
+        </button>
+        <button
+          @click="openOrder"
+          id="OpenCartTag"
+          class="btn-cart content_car"
+          :class="isVariantLogo == true ? 'text-1' : 'text-2'"
+        >
+          <cart-icon class="icon" />
+          <p style="font-size: 18px; margin-left: 2px">
+            {{ $t('footer_carrito') }}
+          </p>
+        </button>
+      </div>
+    </header>
+    <KoOrder :dataStore="dataStore" />
+    <KoSearch />
+  </div>
 </template>
 
 <script>
@@ -31,20 +49,15 @@ import settingsProps from './mixins/ComponentProps'
 
 export default {
   name: 'IHeader',
+  components: {
+    KoOrder: () => import('../../components/headers/_order1/order1.vue'),
+    KoSearch: () => import('./searchTem12.vue'),
+  },
   mixins: [settingsProps],
-  data: () => ({
-    logoSrc: 'http://templates.framework-y.com/gourmet/images/logo.png',
-  }),
-  computed: {
-    defaultLogoSrc() {
-      return 'http://templates.framework-y.com/gourmet/images/logo.png'
-    },
-    variantLogoSrc() {
-      return 'http://templates.framework-y.com/gourmet/images/logo-2.png'
-    },
-    isVariantLogo() {
-      return this.logoSrc === this.variantLogoSrc
-    },
+  data() {
+    return {
+      isVariantLogo: false,
+    }
   },
   async mounted() {
     window.addEventListener('scroll', await this.handleToggleLogo)
@@ -54,15 +67,64 @@ export default {
   },
   methods: {
     async handleToggleLogo() {
-      if (window.scrollY >= 200) {
-        await (this.logoSrc = this.variantLogoSrc)
-      } else {
-        await (this.logoSrc = this.defaultLogoSrc)
-      }
+      await (this.isVariantLogo = !!(window.scrollY >= 120))
     },
-    handleOpenCart() {
+    openOrder() {
+      this.$gtm.push({
+        event: 'OpenCart',
+        action: 'click',
+      })
+      this.showMenu = false
       this.$store.commit('SET_OPENORDER', true)
+    },
+    openSearch() {
+      this.$store.commit('SET_OPENSEARCH', true)
     },
   },
 }
 </script>
+<style scoped>
+.wrapper-header {
+  padding: 0 20px;
+  transition: all 200ms ease-in-out;
+  @apply flex fixed justify-between items-center transform-gpu top-0 left-0 w-full z-10;
+}
+.header-content-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 0px;
+}
+.wrapper-logo {
+  width: 100%;
+}
+.header-logo {
+  max-height: 80px;
+  object-fit: contain;
+  object-position: left;
+}
+.btn-cart {
+  font-weight: normal;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.content_car {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.icon {
+  bottom: 0.125em;
+  font-size: 19px;
+}
+.text-1 {
+  color: black;
+}
+.text-2 {
+  color: white;
+}
+.text-1:hover,
+.text-2:hover {
+  color: gray;
+}
+</style>

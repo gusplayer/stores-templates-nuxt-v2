@@ -26,12 +26,12 @@
                       />
                     </div>
                     <div class="name">
-                      <p class="order-text" style="font-weight: bold;">
+                      <p class="order-text" style="font-weight: bold">
                         {{ product.nombre | capitalize }}
                       </p>
                       <span v-if="product.precio">
-                        <b class="unidades">
-                          {{ $t('cart_cantidad') }} {{ product.cantidad }}</b
+                        <b class="unidades"
+                          >{{ $t('cart_cantidad') }} {{ product.cantidad }}</b
                         >
                         <b class="unidades"
                           >X
@@ -46,8 +46,9 @@
                       </span>
                       <div v-if="product.combinacion">
                         <el-tag
-                          v-for="(productCombinacion,
-                          index2) in product.combinacion"
+                          v-for="(
+                            productCombinacion, index2
+                          ) in product.combinacion"
                           :key="index2"
                         >
                           {{ productCombinacion | capitalize }}
@@ -81,7 +82,7 @@
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
-                    <p style="font-weight: bold; font-size: 16px;">
+                    <p style="font-weight: bold; font-size: 16px">
                       {{ $t('footer_costoDomicilio') }}
                     </p>
                     <details
@@ -93,8 +94,8 @@
                       "
                     >
                       <summary class="text-color">
-                        {{ $t('footer_valorCiudad') }}</summary
-                      >
+                        {{ $t('footer_valorCiudad') }}
+                      </summary>
                       <section>
                         <ol class="scroll_cart_summary_items_cities">
                           <li
@@ -132,7 +133,7 @@
                         FreeShippingCart == false
                       "
                     >
-                      <li class="text-color" style="list-style: none;">
+                      <li class="text-color" style="list-style: none">
                         {{ $t('footer_tarifaPlana') }}
                         {{
                           rangosByCiudades.valor
@@ -162,7 +163,7 @@
                         </p>
                       </div>
                       <p
-                        v-else-if="(this.shippingTarifaPrecio >= 0)"
+                        v-else-if="this.shippingTarifaPrecio >= 0"
                         class="text-color"
                       >
                         {{ $t('footer_tarifaPrecio') }}
@@ -481,7 +482,7 @@
         <button
           class="continue_shopping_form"
           v-on:click.prevent="redirectWP()"
-          style="margin-top: 15px;"
+          style="margin-top: 15px"
         >
           <whatsapp-icon class="wp-icon" /> {{ $t('footer_finalizarCompra') }}
         </button>
@@ -519,8 +520,7 @@ export default {
   },
   data() {
     return {
-      img:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
+      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
 
       shippingCities: [],
       rangosByCiudades: [],

@@ -6,16 +6,25 @@
         class="hero_image_bg h-inherit w-full"
       />
       <div
-        class="hidden lg:flex justify-center h-inherit items-center z-10 flex-col text-gray-100 ease duration-300"
+        class="
+          hidden
+          lg:flex
+          justify-center
+          h-inherit
+          items-center
+          flex-col
+          text-gray-100
+          ease
+          duration-300
+        "
+        style="z-index: 3"
         :class="{
           'opacity-40 ': shouldChangeOpacity,
         }"
       >
-        <h2 class="uppercase text-5xl font-semibold m-0">
-          {{ title }}
-        </h2>
+        <h2 class="uppercase text-5xl font-semibold m-0">MENU LIST TWO</h2>
         <p class="mt-2 italic text-md normal-case text-gray-200">
-          {{ subtitle }}
+          Menu and portfolio
         </p>
       </div>
     </div>
@@ -24,20 +33,9 @@
 
 <script>
 import settingsProps from './mixins/ComponentProps'
-
 export default {
   name: 'HeroImage',
   mixins: [settingsProps],
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    subtitle: {
-      type: String,
-      required: true,
-    },
-  },
   data: () => ({
     shouldChangeOpacity: false,
   }),
@@ -54,7 +52,7 @@ export default {
   },
   methods: {
     async handleTextOpacity() {
-      await (this.shouldChangeOpacity = !!(window.scrollY >= 160))
+      await (this.shouldChangeOpacity = !!(window.scrollY >= 120))
     },
   },
 }

@@ -84,11 +84,9 @@ import KHowwork from '../../components/template7/Ko-how-we-work'
 import KNews from '../../components/template7/Ko-Newsletter'
 import KBlog from '../../components/template7/Ko-blog'
 import KWrapper from '../../components/template7/Ko-wrapper'
-import showComponent07 from '../../mixins/showComponent'
 
 export default {
   layout: 'default',
-  mixins: [showComponent07],
   components: {
     KCarousel,
     KPromo,
@@ -103,8 +101,6 @@ export default {
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
-    let domain = this.$route.fullPath
-    this.showComponent07(domain)
   },
   data() {
     return {

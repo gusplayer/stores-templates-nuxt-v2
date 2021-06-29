@@ -12,6 +12,7 @@ import KoTemplate8 from './template8/index'
 import KoTemplate9 from './template9/index'
 import KoTemplate10 from './template10/index'
 import KoTemplate11 from './template11/index'
+import KoTemplate12 from './template12/index'
 import KoTemplateWhatsapp from './template99/index'
 
 export default {
@@ -23,6 +24,7 @@ export default {
     KoTemplate9,
     KoTemplate10,
     KoTemplate11,
+    KoTemplate12,
     KoTemplateWhatsapp,
   },
   computed: {
@@ -55,6 +57,9 @@ export default {
           break
         case 11:
           productListComponent = 'KoTemplate11'
+          break
+        case 12:
+          productListComponent = 'KoTemplate12'
           break
         case 99:
           productListComponent = 'KoTemplateWhatsapp'

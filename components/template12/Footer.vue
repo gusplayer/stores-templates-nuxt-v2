@@ -1,41 +1,53 @@
 <template>
-  <footer
-    ref="footer"
-    :class="`${visible ? 'visible' : 'invisible'}`"
-    class="footer_container relative flex flex-col pt-14 items-center w-full bg-gray-100"
-    :style="[
-      settingByTemplate12[0].cardProduct,
-      settingByTemplate12[0].setting12General,
-    ]"
-  >
-    <div class="footer_logo mb-6">
-      <img :src="logoSrc" class="w-44 fit-contain" />
+  <footer class="wrapper_footer">
+    <div class="header-content-logo">
+      <nuxt-link to="/" class="wrapper-logo">
+        <img
+          :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+          class="header-logo"
+          alt="Logo Img"
+        />
+      </nuxt-link>
     </div>
-    <p
-      class="footer_brand_modus text-center text-md font-normal text-gray-400 pr-4 pl-4"
-      v-html="modus"
-      :style="[
-      {
-        '--font-style-1':
-            this.settingByTemplate12[0].setting12General &&
-            this.settingByTemplate12[0].setting12General.fount_1
-              ? this.settingByTemplate12[0].setting12General.fount_1
-              : 'Poppins',
-      }]"
-    />
-    <div class="footer_social_icons flex flex-nowrap mt-6 mb-12">
+    <p class="text-title">
+      We don't care if we're doing haute cuisine or burgers and pizza. We just
+      do it right. Always.
+    </p>
+    <div class="content-items-iconos">
       <div
-        v-for="item in 4"
-        :key="item"
-        class="w-10 rounded-sm h-10 bg-gray-300 mr-4 hover:bg-blue-200"
-      />
+        v-for="(item, index) in links"
+        :key="`${index}${item.icon}`"
+        v-if="item.link"
+      >
+        <a v-if="item.link" :href="item.link" target="_blank "
+          ><div class="icon" :is="item.icon"
+        /></a>
+      </div>
+    </div>
+    <button
+      class="text-politics"
+      v-if="dataStore.politicas"
+      @click="OpenModalPolitics"
+    >
+      <p>{{ $t('footer_politicasyterminos') }}</p>
+    </button>
+    <div v-if="showModal">
+      <div class="modal" v-if="dataStore.politicas">
+        <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+      </div>
     </div>
     <div
-      class="footer_resources w-full text-gray-400 text-center text-sm font-normal"
+      class="
+        footer_resources
+        w-full
+        text-gray-400 text-center text-sm
+        font-normal
+      "
     >
       <hr class="border-t border-gray-200 w-full" />
       <p class="p-4">
-        {{ resourcesText }}
+        © 2017 Gourmet - info@restaurant.com - +02 123458992 - Wall Street
+        Avenue 502, New York - Restaurant Template Handmade by schiocco.io
       </p>
     </div>
   </footer>
@@ -43,61 +55,118 @@
 
 <script>
 import settingsProps from './mixins/ComponentProps'
-
+import KoTermsConditions from '../footers/ko-TermsAndConditions.vue'
 export default {
   name: 'IFooter',
   mixins: [settingsProps],
-  props: {
-    modus: {
-      type: String,
-      default: () =>
-        "We don't care if we're doing haute cuisine or burgers and pizza. <br / >We just do it right. Always.",
-    },
-    resourcesText: {
-      type: String,
-      default: () =>
-        '© 2017 Gourmet - info@restaurant.com - +02 123458992 - Wall Street Avenue 502, New York - Restaurant Template Handmade by schiocco.io',
-    },
+  components: {
+    KoTermsConditions,
   },
-  data: () => ({
-    visible: false,
-  }),
+  data() {
+    return {
+      links: [
+        {
+          nombre: 'Facebook',
+          icon: 'facebook-icon',
+          link: this.dataStore.tienda.red_facebook,
+        },
+        {
+          nombre: 'Twitter',
+          icon: 'twitter-icon',
+          link: this.dataStore.tienda.red_twitter,
+        },
+        {
+          nombre: 'Instagram',
+          icon: 'instagram-icon',
+          link: this.dataStore.tienda.red_instagram,
+        },
+        {
+          nombre: 'Youtube',
+          icon: 'youtube-icon',
+          link: this.dataStore.tienda.red_youtube,
+        },
+        {
+          nombre: 'Tiktok',
+          icon: 'tiktok-icon',
+          link: this.dataStore.tienda.red_tiktok,
+        },
+      ],
+    }
+  },
   computed: {
-    logoSrc() {
-      return '/logo-2.png'
+    showModal() {
+      return this.$store.state.modalpolitics05
     },
-  },
-  mounted() {
-    this.execIntersectionObserver()
   },
   methods: {
-    execIntersectionObserver() {
-      const vm = this
-      const ref = document.getElementById('LastSection')
-      const observer = new window.IntersectionObserver(function (entries) {
-        const { isIntersecting } = entries[0]
-        vm.visible = isIntersecting
-      })
-      observer.observe(ref)
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
+    },
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
     },
   },
 }
 </script>
 
 <style scoped>
-.footer_container {
-  height: 50vh;
+.wrapper_footer {
+  padding: 40px 0 10px;
+  @apply relative flex flex-col items-center w-full bg-gray-100;
 }
-
-@media screen and (min-width: 752px) {
-  .footer_container {
-    height: 44vh;
-  }
+.header-content-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 0px;
 }
-
-@media screen and (min-width: 1200px) {
-  .footer_container {
-    height: 35vh;
-  }
+.wrapper-logo {
+  width: 100%;
+}
+.header-logo {
+  max-height: 80px;
+  object-fit: contain;
+  object-position: left;
+}
+.text-title {
+  color: rgb(156, 163, 175);
+  padding: 15px 0 20px;
+  text-align: center;
+  font-weight: 400;
+  max-width: 380px;
+}
+.text-politics {
+  color: rgb(156, 163, 175);
+  text-align: center;
+  font-weight: 400;
+}
+.modal {
+  padding-top: 200px;
+  background-color: rgba(0, 0, 0, 0.4);
+  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+}
+.content-items-iconos {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0 40px;
+}
+.icon {
+  margin-right: 10px;
+  font-size: 28px;
+  color: rgb(156, 163, 175);
+  fill: rgb(156, 163, 175);
+}
+.icon:hover {
+  color: grey;
+  fill: grey;
 }
 </style>

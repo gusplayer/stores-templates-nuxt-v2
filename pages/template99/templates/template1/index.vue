@@ -1,15 +1,19 @@
 <template lang="html">
   <div class="container-home" v-loading="loading">
-    <KoHeaderWp v-bind="componentsProps" />
-    <component :is="indexCategory" v-bind="componentsProps" />
+    <KoHeaderWp v-bind="componentsProps" id="KHeaderX" />
+    <component :is="indexCategory" v-bind="componentsProps" id="KHeaderX" />
     <KProductFavoritos
       v-if="this.stateBanner"
       v-bind="componentsProps"
-      style="margin-bottom: 10px;"
+      style="margin-bottom: 10px"
     />
-    <component :is="indexList" v-bind="componentsProps" />
-    <KFooterWaLogo v-bind="componentsProps" />
-    <KFooterWa v-bind="componentsProps" v-if="productsCart.length > 0" />
+    <component :is="indexList" v-bind="componentsProps" id="KListX" />
+    <KFooterWaLogo v-bind="componentsProps" id="KfooterX" />
+    <KFooterWa
+      v-bind="componentsProps"
+      v-if="productsCart.length > 0"
+      id="KfooterX"
+    />
   </div>
 </template>
 
@@ -38,6 +42,10 @@ export default {
     KProductList3,
     KFooterWaLogo,
     KFooterWa,
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenertemplate)
   },
   computed: {
     indexCategory() {
@@ -114,6 +122,75 @@ export default {
     },
     productsCart() {
       return this.$store.state.productsCart
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenertemplate)
+  },
+  methods: {
+    addEventListenertemplate(e) {
+      if (
+        e.origin.includes('https://panel.komercia.co') ||
+        e.origin.includes('http://localhost:8080')
+      ) {
+        if (e && e.data && e.data.component) {
+          this.$store.commit('SET_CURRENTSETTING12', e.data)
+          switch (e.data.component) {
+            case 'Banner':
+              this.moverseA('KHeaderX')
+              this.$store.commit('SET_OPENORDER', false)
+              break
+            case 'Logo':
+              this.moverseA('KHeaderX')
+              this.$store.commit('SET_OPENORDER', false)
+              break
+            case 'mensaje_principal':
+              this.moverseA('KHeaderX')
+              this.$store.commit('SET_OPENORDER', false)
+              break
+            case 'descripcion':
+              this.moverseA('KHeaderX')
+              this.$store.commit('SET_OPENORDER', false)
+              break
+            case 'tema':
+              this.moverseA('KHeaderX')
+              this.$store.commit('SET_OPENORDER', false)
+              break
+            case 'estilo_categorias':
+              this.moverseA('KHeaderX')
+              this.$store.commit('SET_OPENORDER', false)
+              break
+            case 'estilo_productos':
+              this.moverseA('KListX')
+              this.$store.commit('SET_OPENORDER', false)
+              break
+            case 'pago_online':
+              this.moverseA('KHeaderX')
+              if (e.data.setting.pago_online == 1) {
+                this.$store.commit('SET_OPENORDER', true)
+              } else {
+                this.$store.commit('SET_OPENORDER', false)
+              }
+              break
+            case 'color_primario':
+              this.moverseA('KListX')
+
+              this.$store.commit('SET_OPENORDER', false)
+              break
+            case 'color_secundario':
+              this.moverseA('KListX')
+              this.$store.commit('SET_OPENORDER', false)
+              break
+            case 'color_icon':
+              this.moverseA('KListX')
+              this.$store.commit('SET_OPENORDER', false)
+              break
+          }
+        }
+      }
+    },
+    moverseA(idDelElemento) {
+      location.hash = '#' + idDelElemento
     },
   },
 }

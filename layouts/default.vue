@@ -51,9 +51,7 @@
             Disculpa, no podrá realizar compras por el momento,
           </p>
           <p class="subtitle-noti">¿Deseas continuar?</p>
-          <button class="btn-acceptM" @click="acceptClose()">
-            Aceptar
-          </button>
+          <button class="btn-acceptM" @click="acceptClose()">Aceptar</button>
         </div>
       </div>
     </div>
@@ -207,6 +205,10 @@ export default {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra = 'Poppins'
         break
+      case 12:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra = 'Poppins'
+        break
     }
     let tienda = this.$store.state.dataStore.tienda
       ? this.$store.state.dataStore.tienda
@@ -349,8 +351,7 @@ export default {
       ],
       script: [
         {
-          src:
-            'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
+          src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
         {
           src: tidio ? `https://code.tidio.co/${tidio}.js` : '',
@@ -369,7 +370,8 @@ export default {
             this.template == 6 ||
             this.template == 10 ||
             this.template == 11 ||
-            this.template == 99
+            this.template == 99 ||
+            this.template == 12
               ? `https://fonts.googleapis.com/css?family=${tipo_letra}:100,200,300,400,500,600,700,800,900&display=swap`
               : '',
           rel: 'stylesheet',

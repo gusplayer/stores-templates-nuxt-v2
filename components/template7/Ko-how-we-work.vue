@@ -44,7 +44,11 @@
             class="swiper-slide"
             :style="settingKHowwork.values[0]"
           >
-            <img :src="settingKHowwork.values[0].url_img" alt="imageshwork-1" />
+            <img
+              :src="settingKHowwork.values[0].url_img"
+              alt="imageshwork-1"
+              class="img-kohow"
+            />
             <div class="hwork-tittle">
               <span class="tittle-h">{{
                 settingKHowwork.values[0].title_product
@@ -64,7 +68,11 @@
             class="swiper-slide"
             :style="settingKHowwork.values[1]"
           >
-            <img :src="settingKHowwork.values[1].url_img" alt="imageshwork-2" />
+            <img
+              :src="settingKHowwork.values[1].url_img"
+              alt="imageshwork-2"
+              class="img-kohow"
+            />
             <div class="hwork-tittle">
               <span class="tittle-h">{{
                 settingKHowwork.values[1].title_product
@@ -84,7 +92,11 @@
             class="swiper-slide"
             :style="settingKHowwork.values[2]"
           >
-            <img :src="settingKHowwork.values[2].url_img" alt="imageshwork-3" />
+            <img
+              :src="settingKHowwork.values[2].url_img"
+              alt="imageshwork-3"
+              class="img-kohow"
+            />
             <div class="hwork-tittle">
               <span class="tittle-h">{{
                 settingKHowwork.values[2].title_product
@@ -233,6 +245,12 @@ export default {
 }
 .gify-slider-content {
   @apply flex overflow-hidden;
+}
+.img-kohow {
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: cover;
+  object-position: center;
 }
 @screen sm {
   .hwwork-content-items {
