@@ -20,8 +20,8 @@
     >
       <div class="space-search"></div>
       <div class="search-movil" id="navbar">
-        <form id="demo-1" style="width: 100%; position: relative;">
-          <search-icon class="icon-s" />
+        <form id="demo-1" style="width: 100%; position: relative">
+          <search-icon class="icon-search-tp" />
           <input
             v-model="search"
             type="search"
@@ -176,7 +176,7 @@ input::-webkit-input-placeholder {
 .space-search {
   display: none;
 }
-.icon-s {
+.icon-search-tp {
   font-size: 25px;
   color: grey;
   position: absolute;

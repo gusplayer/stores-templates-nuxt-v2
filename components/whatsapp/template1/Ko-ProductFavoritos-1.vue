@@ -14,10 +14,13 @@
             path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
           }"
         >
-          <img
-            :src="idCloudinary(product.foto_cloudinary, 250, 250)"
-            alt="Product Img"
-          />
+          <div class="wrapper-img">
+            <img
+              :src="idCloudinary(product.foto_cloudinary, 250, 250)"
+              class="card_favorite_img"
+              alt="Product Img"
+            />
+          </div>
           <p class="card-text-movil-title" v-if="product.nombre.length >= 15">
             {{ `${product.nombre.slice(0, 15)}..` }}
           </p>
@@ -225,9 +228,19 @@ export default {
   margin-left: 10px;
   width: 140px;
 }
-.card-favorite img {
-  width: 140px;
-  object-fit: contain;
+.wrapper-img {
+  width: 100%;
+  max-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card_favorite_img {
+  width: 100%;
+  max-width: 100px;
+  max-height: 90px;
+  object-fit: cover;
+  object-position: center;
   border-radius: 5px;
 }
 .card-text-movil-title {
@@ -246,7 +259,7 @@ export default {
 .separador-price {
   height: 19px;
   width: 100%;
-  background-color: #f8f9fb;
+  background-color: transparent;
 }
 @media (max-width: 770px) {
   .swiper-container {
@@ -257,6 +270,22 @@ export default {
   }
   .btn-scroll {
     display: none;
+  }
+  .wrapper-img {
+    max-width: 70px;
+  }
+  .card_favorite_img {
+    max-width: 70px;
+    max-height: 70px;
+  }
+}
+@media (max-width: 500px) {
+  .card_favorite_img {
+    max-width: 60px;
+    max-height: 60px;
+  }
+  .wrapper-img {
+    max-width: 60px;
   }
 }
 @media (max-width: 380px) {
