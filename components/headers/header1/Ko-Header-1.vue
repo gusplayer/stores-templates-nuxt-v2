@@ -11,6 +11,7 @@
       <div class="wrapper-header" @click="closeMenuCategory">
         <div class="header">
           <KoOrder :dataStore="dataStore" />
+          <KoSearch />
           <div class="header-content-logo">
             <nuxt-link to="/" class="wrapper-logo">
               <img
@@ -67,18 +68,25 @@
               </div>
             </div>
           </div>
-          <div class="prueba" v-if="showSearch">
-            <div class="search">
-              <form id="demo-2" style="position: relative;">
-                <search-icon class="icon-s" @click="focusInput" />
-                <input
-                  type="search"
-                  :placeholder="$t('header_search')"
-                  v-model="search"
-                  @keyup.enter="getSearch(search)"
-                  id="SearchHeader"
-                />
-              </form>
+          <div class="search" v-if="showSearch">
+            <form id="demo-2" style="position: relative">
+              <search-icon class="icon-s" @click="focusInput" />
+              <input
+                type="search"
+                :placeholder="$t('header_search')"
+                v-model="search"
+                @keyup.enter="getSearch(search)"
+                id="SearchHeader"
+              />
+            </form>
+          </div>
+          <div class="search_res">
+            <div
+              class="header-content-cart"
+              @click="openSearch"
+              id="OpenCartTag"
+            >
+              <search-icon class="header-icon-cart" />
             </div>
           </div>
           <div class="header-content-icon">
@@ -177,11 +185,12 @@
 <script>
 import KoOrder from '../_order1/order1'
 import KoMenu from '../_order1/openMenuRight'
-
+import KoSearch from './search.vue'
 export default {
   components: {
     KoOrder,
     KoMenu,
+    KoSearch,
   },
   name: 'Ko-Header-1',
   props: {
@@ -292,6 +301,9 @@ export default {
     },
   },
   methods: {
+    openSearch() {
+      this.$store.commit('SET_OPENSEARCH', true)
+    },
     openOrder() {
       this.$gtm.push({
         event: 'OpenCart',
@@ -845,6 +857,9 @@ input::-webkit-input-placeholder {
 #demo-2 input::-webkit-input-placeholder {
   color: transparent;
 }
+.search_res {
+  display: none;
+}
 @media (max-width: 900px) {
   .header {
     padding: 10px 20px 0;
@@ -904,6 +919,9 @@ input::-webkit-input-placeholder {
 @media (max-width: 500px) {
   .search {
     display: none;
+  }
+  .search_res {
+    display: flex;
   }
   .header {
     padding: 10px 15px 0;

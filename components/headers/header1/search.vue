@@ -182,11 +182,11 @@ input[type='search'] {
 }
 .leftright {
   background: #000;
-  @apply h-2 w-20 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
+  @apply h-2 w-20 absolute rounded-2 transform -rotate-45 transition-all ease-in-out duration-300;
 }
 .rightleft {
   background: #000;
-  @apply h-2 w-20 absolute rounded-2 transform rotate-45 transition-all ease-in duration-200;
+  @apply h-2 w-20 absolute rounded-2 transform rotate-45 transition-all ease-in-out duration-300;
 }
 .content-close {
   @apply flex justify-center items-center cursor-pointer;

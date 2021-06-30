@@ -50,8 +50,8 @@ import settingsProps from './mixins/ComponentProps'
 export default {
   name: 'IHeader',
   components: {
-    KoOrder: () => import('../../components/headers/_order1/order1.vue'),
-    KoSearch: () => import('./searchTem12.vue'),
+    KoOrder: () => import('../headers/_order1/order1.vue'),
+    KoSearch: () => import('../headers/header1/search.vue'),
   },
   mixins: [settingsProps],
   data() {
