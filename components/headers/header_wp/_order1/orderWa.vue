@@ -26,7 +26,7 @@
                       />
                     </div>
                     <div class="name">
-                      <p class="order-text" style="font-weight: bold;">
+                      <p class="order-text" style="font-weight: bold">
                         {{ product.nombre | capitalize }}
                       </p>
                       <span v-if="product.precio">
@@ -46,8 +46,9 @@
                       </span>
                       <div v-if="product.combinacion">
                         <el-tag
-                          v-for="(productCombinacion,
-                          index2) in product.combinacion"
+                          v-for="(
+                            productCombinacion, index2
+                          ) in product.combinacion"
                           :key="index2"
                         >
                           {{ productCombinacion | capitalize }}
@@ -81,7 +82,7 @@
               <template v-if="productsCart.length">
                 <div class="order_total">
                   <span class="order_total_domicile">
-                    <p style="font-weight: bold; font-size: 16px;">
+                    <p style="font-weight: bold; font-size: 16px">
                       {{ $t('footer_costoDomicilio') }}
                     </p>
                     <details
@@ -93,8 +94,8 @@
                       "
                     >
                       <summary class="text-color">
-                        {{ $t('footer_valorCiudad') }}</summary
-                      >
+                        {{ $t('footer_valorCiudad') }}
+                      </summary>
                       <section>
                         <ol class="scroll_cart_summary_items_cities">
                           <li
@@ -132,7 +133,7 @@
                         FreeShippingCart == false
                       "
                     >
-                      <li class="text-color" style="list-style: none;">
+                      <li class="text-color" style="list-style: none">
                         {{ $t('footer_tarifaPlana') }}
                         {{
                           rangosByCiudades.valor
@@ -162,7 +163,7 @@
                         </p>
                       </div>
                       <p
-                        v-else-if="(this.shippingTarifaPrecio >= 0)"
+                        v-else-if="this.shippingTarifaPrecio >= 0"
                         class="text-color"
                       >
                         {{ $t('footer_tarifaPrecio') }}
@@ -308,13 +309,6 @@
                   <p class="Quotation-message">
                     {{ $t('footer_contactoMgs') }}
                   </p>
-                  <button
-                    class="continue_shopping_whatsapp"
-                    @click="formOrden = !formOrden"
-                  >
-                    <whatsapp-icon class="wp-icon" />
-                    {{ $t('footer_compraWhatsapp') }}
-                  </button>
                 </div>
                 <p
                   class="domicilio-message"
@@ -507,7 +501,7 @@
                 </span>
               </template>
             </validation-provider>
-            <P class="form-subtext"> {{ $t('footer_formBarrio') }}</P>
+            <P class="form-subtext"> {{ $t(`${placeholderBarrio}`) }}</P>
             <validation-provider
               name="barrio"
               rules="required"
@@ -517,7 +511,7 @@
                 <input
                   class="input-text"
                   name="barrio"
-                  :placeholder="$t('footer_formBarrioMgs')"
+                  :placeholder="$t(`${placeholderMsgBarrio}`)"
                   v-model="barrio"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -563,7 +557,7 @@
           };          
           `"
           v-on:click.prevent="setOrder()"
-          style="margin-top: 15px;"
+          style="margin-top: 15px"
         >
           <whatsapp-icon class="wp-icon" /> {{ $t('footer_ordenFormbtn') }}
         </button>
@@ -586,6 +580,7 @@ export default {
     ValidationProvider,
   },
   mounted() {
+    this.setPlaceholderDep()
     this.$store.dispatch('GET_DESCUENTOS')
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch('GET_CITIES')
@@ -601,8 +596,7 @@ export default {
   },
   data() {
     return {
-      img:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
+      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
 
       shippingCities: [],
       rangosByCiudades: [],
@@ -621,6 +615,8 @@ export default {
       FreeShippingCart: false,
       cantidadProductos: 0,
       statusorden: false,
+      placeholderBarrio: 'footer_formBarrio',
+      placeholderMsgBarrio: 'footer_formBarrioMgs',
     }
   },
   computed: {
@@ -674,6 +670,7 @@ export default {
               return shipping.valor
               break
             case 'precio_ciudad':
+              // eslint-disable-next-line no-case-declarations
               let result = shipping.rangos.find((rango) => {
                 if (
                   this.totalCart >= rango.inicial &&
@@ -982,6 +979,30 @@ export default {
           this.FreeShippingCart = false
           // this.rangosByCiudad.envio_metodo = this.rangosByCiudad.envio_metodo
         }
+      }
+    },
+    setPlaceholderDep() {
+      switch (this.dataStore.tienda.id_pais) {
+        //colombia
+        case 1:
+          this.placeholderBarrio = 'footer_formBarrio'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          break
+        //Mexico
+        case 3:
+          this.placeholderBarrio = 'footer_formColonia'
+          this.placeholderMsgBarrio = 'footer_formColoniaMgs'
+          break
+        //Argentina
+        case 6:
+          this.placeholderBarrio = 'footer_formBarrio'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          break
+        //Chile
+        case 7:
+          this.placeholderBarrio = 'footer_formBarrio'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          break
       }
     },
   },
