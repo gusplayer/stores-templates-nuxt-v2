@@ -1,10 +1,13 @@
 <template>
-  <div class="wrapper-footer-country">
+  <div
+    class="wrapper-footer-country"
+    :class="valueWa == true ? 'content-footer-country-wa' : ''"
+  >
     <div class="content-footer-country" v-if="dataStore.tienda.pais">
       <div class="content-item-flag">
         <div
           v-if="dataStore.tienda.pais == 'Internacional'"
-          style="display: flex;"
+          style="display: flex"
         >
           <client-only>
             <country-flag country="un" size="normal"></country-flag>
@@ -35,6 +38,7 @@ export default {
   },
   props: {
     dataStore: Object,
+    valueWa: Boolean,
   },
 }
 </script>
@@ -49,12 +53,16 @@ export default {
 }
 .content-footer-country {
   width: 100%;
-  max-width: 1300px;
   padding: 1px 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  max-width: 1300px;
+}
+
+.content-footer-country-wa {
+  max-width: 900px;
 }
 .content-item-flag {
   width: 100%;

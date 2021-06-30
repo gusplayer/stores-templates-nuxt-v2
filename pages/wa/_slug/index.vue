@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="content-wa">
     <component :is="indexTemplate" />
+    <WCountry :dataStore="dataStore" :valueWa="true" />
   </div>
 </template>
 
@@ -8,12 +9,16 @@
 import WaTemplate1 from '../../template99/templates/template1/index'
 import WaTemplate2 from '../../template99/templates/template2/index'
 import WaTemplate3 from '../../template99/templates/template3/index'
+import WCountry from '../../../components/footers/footer1/Ko-Footer-Country.vue'
 
 export default {
   name: 'WapiME',
   layout: 'wa',
-  components: { WaTemplate1, WaTemplate2, WaTemplate3 },
+  components: { WaTemplate1, WaTemplate2, WaTemplate3, WCountry },
   computed: {
+    dataStore() {
+      return this.$store.state.dataStore
+    },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
     },

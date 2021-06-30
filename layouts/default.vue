@@ -7,6 +7,7 @@
       <KoFooterCountry
         v-bind="componentsProps"
         v-if="dataStore.tienda.template != 99"
+        :valueWa="false"
       />
       <div
         class="wrapper-whatsapp"

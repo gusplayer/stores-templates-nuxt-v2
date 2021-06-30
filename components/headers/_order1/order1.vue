@@ -434,7 +434,7 @@
                 </span>
               </template>
             </validation-provider>
-            <P class="form-subtext"> {{ $t('footer_formBarrio') }}</P>
+            <P class="form-subtext"> {{ $t(`${placeholderBarrio}`) }}</P>
             <validation-provider
               name="barrio"
               rules="required"
@@ -444,7 +444,7 @@
                 <input
                   class="input-text"
                   name="barrio"
-                  :placeholder="$t('footer_formBarrioMgs')"
+                  :placeholder="$t(`${placeholderMsgBarrio}`)"
                   v-model="barrio"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -505,6 +505,7 @@ export default {
     ValidationProvider,
   },
   mounted() {
+    this.setPlaceholderDep()
     this.$store.dispatch('GET_DESCUENTOS')
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.dispatch('GET_CITIES')
@@ -536,6 +537,8 @@ export default {
       shippingDescuento: '',
       FreeShippingCart: false,
       cantidadProductos: 0,
+      placeholderBarrio: 'footer_formBarrio',
+      placeholderMsgBarrio: 'footer_formBarrioMgs',
     }
   },
   computed: {
@@ -874,6 +877,30 @@ export default {
           this.FreeShippingCart = false
           // this.rangosByCiudad.envio_metodo = this.rangosByCiudad.envio_metodo
         }
+      }
+    },
+    setPlaceholderDep() {
+      switch (this.dataStore.tienda.id_pais) {
+        //colombia
+        case 1:
+          this.placeholderBarrio = 'footer_formBarrio'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          break
+        //Mexico
+        case 3:
+          this.placeholderBarrio = 'footer_formColonia'
+          this.placeholderMsgBarrio = 'footer_formColoniaMgs'
+          break
+        //Argentina
+        case 6:
+          this.placeholderBarrio = 'footer_formBarrio'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          break
+        //Chile
+        case 7:
+          this.placeholderBarrio = 'footer_formBarrio'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          break
       }
     },
   },
