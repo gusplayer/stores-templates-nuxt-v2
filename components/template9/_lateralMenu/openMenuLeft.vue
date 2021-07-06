@@ -163,7 +163,7 @@ export default {
         },
         {
           name: 'header_blog',
-          path: '/blog',
+          href: '/blog',
           //icon: 'account-icon',
         },
         {
