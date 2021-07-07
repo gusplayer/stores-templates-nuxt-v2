@@ -30,12 +30,17 @@
               alt="left-banner"
             />
             <div class="promo-banner-text" id="promo-banner-text-1">
-              <p class="promo-banner-tittle" id="promo-banner-tittle-1">
+              <p
+                class="promo-banner-tittle"
+                id="promo-banner-tittle-1"
+                :style="`color: ${settingKPromo.values[0]['--color_text']};`"
+              >
                 {{ settingKPromo.values[0].tittle }}
               </p>
               <span
                 class="promo-banner-subtittle"
                 id="promo-banner-subtittle-1"
+                :style="`color: ${settingKPromo.values[0]['--color_subtext']};`"
               >
                 {{ settingKPromo.values[0].description }}
               </span>
@@ -65,12 +70,17 @@
                 alt="medium-top-banner"
               />
               <div class="promo-banner-text" id="promo-banner-text-2">
-                <p class="promo-banner-tittle" id="promo-banner-tittle-2">
+                <p
+                  class="promo-banner-tittle"
+                  id="promo-banner-tittle-2"
+                  :style="`color: ${settingKPromo.values[1]['--color_text']};`"
+                >
                   {{ settingKPromo.values[1].tittle }}
                 </p>
                 <span
                   class="promo-banner-subtittle"
                   id="promo-banner-subtittle-medium"
+                  :style="`color: ${settingKPromo.values[1]['--color_subtext']};`"
                   >{{ settingKPromo.values[1].description }}</span
                 >
               </div>
@@ -92,12 +102,17 @@
                 alt="medium-bottom-banner"
               />
               <div class="promo-banner-text" id="promo-banner-text-3">
-                <p class="promo-banner-tittle" id="promo-banner-tittle-3">
+                <p
+                  class="promo-banner-tittle"
+                  id="promo-banner-tittle-3"
+                  :style="`color: ${settingKPromo.values[2]['--color_text']};`"
+                >
                   {{ settingKPromo.values[2].tittle }}
                 </p>
                 <span
                   class="promo-banner-subtittle"
                   id="promo-banner-subtittle-medium"
+                  :style="`color: ${settingKPromo.values[2]['--color_subtext']};`"
                   >{{ settingKPromo.values[2].description }}</span
                 >
               </div>
@@ -123,12 +138,17 @@
               alt="right-banner"
             />
             <div class="promo-banner-text text4" id="promo-banner-text-4">
-              <p class="promo-banner-tittle" id="promo-banner-tittle-4">
+              <p
+                class="promo-banner-tittle"
+                id="promo-banner-tittle-4"
+                :style="`color: ${settingKPromo.values[3]['--color_text']};`"
+              >
                 {{ settingKPromo.values[3].tittle }}
               </p>
               <span
                 class="promo-banner-subtittle"
                 id="promo-banner-subtittle-4"
+                :style="`color: ${settingKPromo.values[3]['--color_subtext']};`"
                 >{{ settingKPromo.values[3].description }}</span
               >
             </div>
@@ -240,45 +260,20 @@ figure {
   color: rgba(48, 48, 48, 0.7);
 }
 #promo-banner-tittle-1 {
-  @apply overflow-hidden;
-  color: var(--color_text);
   text-overflow: ellipsis;
 }
-#promo-banner-tittle-2 {
-  @apply overflow-hidden;
-  color: var(--color_text);
-  text-overflow: ellipsis;
-}
-#promo-banner-tittle-3 {
-  @apply overflow-hidden;
-  color: var(--color_text);
-  text-overflow: ellipsis;
-}
+#promo-banner-tittle-2,
+#promo-banner-tittle-3,
 #promo-banner-tittle-4 {
-  @apply overflow-hidden;
-  color: var(--color_text);
   text-overflow: ellipsis;
 }
-#promo-banner-subtittle-1 {
-  @apply overflow-hidden;
-  color: var(--color_subtext);
-  text-overflow: ellipsis;
-}
-#promo-banner-subtittle-2 {
-  @apply overflow-hidden;
-  color: var(--color_subtext);
-  text-overflow: ellipsis;
-}
-#promo-banner-subtittle-3 {
-  @apply overflow-hidden;
-  color: var(--color_subtext);
-  text-overflow: ellipsis;
-}
+#promo-banner-subtittle-1,
+#promo-banner-subtittle-2,
+#promo-banner-subtittle-3,
 #promo-banner-subtittle-4 {
-  @apply overflow-hidden;
-  color: var(--color_subtext);
   text-overflow: ellipsis;
 }
+
 .promo-banners,
 .banner-medium,
 .promo-banner-3 {
