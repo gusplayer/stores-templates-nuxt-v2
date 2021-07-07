@@ -12,7 +12,7 @@
               <validation-provider
                 name="número de orden"
                 rules="required|numeric"
-                style="width: 100%;"
+                style="width: 100%"
               >
                 <template slot-scope="{ errors }">
                   <input
@@ -34,7 +34,7 @@
               <validation-provider
                 name="cédula del comprador"
                 rules="required|numeric"
-                style="width: 100%;"
+                style="width: 100%"
               >
                 <template slot-scope="{ errors }">
                   <input
@@ -141,7 +141,7 @@
               <el-tag
                 :color="choiceState.color"
                 effect="dark"
-                style="margin-left: 10px;"
+                style="margin-left: 10px"
               >
                 {{ $t(`${choiceState.title}`) }}
               </el-tag>
@@ -511,7 +511,11 @@ export default {
   },
   methods: {
     shippingDireccion() {
-      this.direccion_entrega = JSON.parse(this.orden.venta.direccion_entrega)
+      this.direccion_entrega = JSON.parse(
+        this.orden && this.orden.venta && this.orden.venta.direccion_entrega
+          ? this.orden.venta.direccion_entrega
+          : null
+      )
       if (this.cities && this.direccion_entrega) {
         if (this.direccion_entrega.value) {
           this.cityComprador = this.cities.find((city) => {
