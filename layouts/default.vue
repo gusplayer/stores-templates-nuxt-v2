@@ -208,7 +208,10 @@ export default {
         break
       case 12:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra = 'Poppins'
+        tipo_letra =
+          this.settingByTemplate12 && this.settingByTemplate12.fontFamily
+            ? this.settingByTemplate12.fontFamily
+            : 'Poppins'
         break
     }
     let tienda = this.$store.state.dataStore.tienda
@@ -348,6 +351,23 @@ export default {
         {
           name: ' google',
           content: ' notranslate',
+        },
+        //quitar cache
+        {
+          name: 'Expires',
+          content: '0',
+        },
+        {
+          name: 'Last-Modified',
+          content: '0',
+        },
+        {
+          name: 'Cache-Control',
+          content: 'no-cache, mustrevalidate',
+        },
+        {
+          name: 'Pragma',
+          content: 'no-cache',
         },
       ],
       script: [
@@ -526,6 +546,9 @@ export default {
     },
     settingByTemplate9() {
       return this.$store.state.settingByTemplate9
+    },
+    settingByTemplate12() {
+      return this.$store.state.settingByTemplate12
     },
     componentsProps() {
       return {
