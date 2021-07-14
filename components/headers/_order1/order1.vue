@@ -34,8 +34,7 @@
                           >{{ $t('cart_cantidad') }} {{ product.cantidad }}</b
                         >
                         <b class="unidades"
-                          >X
-                          {{
+                          >X{{
                             product.precio
                               | currency(
                                 dataStore.tienda.codigo_pais,
@@ -293,9 +292,7 @@
                   <div class="wrapper_photo">
                     <img v-lazy="img" class="photo" alt="empty car" />
                   </div>
-                  <p class="text-cart-empty">
-                    {{ $t('footer_carritoVacio') }}
-                  </p>
+                  <p class="text-cart-empty">{{ $t('footer_carritoVacio') }}</p>
                 </div>
               </template>
               <div class="content-button">
@@ -571,6 +568,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },
@@ -591,6 +589,7 @@ export default {
               return shipping.valor
               break
             case 'precio_ciudad':
+              // eslint-disable-next-line no-case-declarations
               let result = shipping.rangos.find((rango) => {
                 if (
                   this.totalCart >= rango.inicial &&

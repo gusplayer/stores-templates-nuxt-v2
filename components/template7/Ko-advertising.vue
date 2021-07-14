@@ -143,6 +143,7 @@ export default {
   @apply uppercase font-semibold;
 }
 .advertising-text {
+  margin-top: 15px;
   text-align: center;
   padding: 2px;
   @apply w-full flex flex-col justify-center items-center;
