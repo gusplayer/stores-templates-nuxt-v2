@@ -32,17 +32,6 @@
               {{ banner.description }}
             </span>
           </div>
-          <div class="banner-content-buttons" v-if="banner.url_redirect">
-            <a
-              :href="`${banner.url_redirect}`"
-              rel="noreferrer noopener"
-              class="content-bttns-shop"
-            >
-              <span class="content-textbutton-shop">
-                {{ $t('productdetail_btnComprar') }}
-              </span>
-            </a>
-          </div>
         </div>
       </div>
       <div class="content-items-banner">
@@ -116,25 +105,6 @@ export default {
   color: var(--color_subtext);
   font-family: var(--font-style-3) !important;
   font-style: italic;
-}
-.banner-content-buttons {
-  @apply flex justify-center items-center mt-10;
-}
-.content-bttns-shop {
-  @apply shadow-md justify-center items-center flex font-semibold uppercase tracking-wider;
-  border-radius: var(--radius_btn);
-  background: var(--color_background_btn);
-  padding: 10px 20px;
-}
-.content-bttns-shop:hover {
-  @apply bg-red-btnbannershophover;
-  transition: all 0.2s ease-out;
-}
-.content-textbutton-shop {
-  color: var(--color_text_btn);
-  font-size: 13px;
-  line-height: 18px;
-  font-family: var(--font-style-3) !important;
 }
 @media (max-width: 1500px) {
   .banner-img {

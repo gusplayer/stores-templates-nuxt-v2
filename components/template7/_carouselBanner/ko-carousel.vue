@@ -8,24 +8,32 @@
           v-for="(banner, index) in this.settingKCarousel.values"
           :key="index"
         >
-          <img
-            class="banner"
-            :src="settingKCarousel.values[index].url_img_background"
-            alt="bg"
-            v-if="settingKCarousel.values[index].url_img_background"
-          />
-          <img
-            class="banner-responsive"
-            :src="settingKCarousel.values[index].url_img_movil"
-            alt="bg"
-            v-if="settingKCarousel.values[index].url_img_movil"
-          />
-          <KObanner
-            class="absolute top-0"
-            :banner="banner"
-            :settingKCarousel="settingKCarousel"
-            :settingGeneral="settingGeneral"
-          ></KObanner>
+          <a
+            :href="`${
+              banner && banner.url_redirect ? banner.url_redirect : ''
+            }`"
+            rel="noreferrer noopener"
+            class="cursor-pointer"
+          >
+            <img
+              class="banner"
+              :src="settingKCarousel.values[index].url_img_background"
+              alt="bg"
+              v-if="settingKCarousel.values[index].url_img_background"
+            />
+            <img
+              class="banner-responsive"
+              :src="settingKCarousel.values[index].url_img_movil"
+              alt="bg"
+              v-if="settingKCarousel.values[index].url_img_movil"
+            />
+            <KObanner
+              class="absolute top-0"
+              :banner="banner"
+              :settingKCarousel="settingKCarousel"
+              :settingGeneral="settingGeneral"
+            ></KObanner>
+          </a>
         </div>
       </div>
       <div class="swiper-pagination"></div>
