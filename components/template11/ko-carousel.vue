@@ -63,6 +63,7 @@ export default {
 </script>
 <style scoped>
 .content-carousel {
+  max-height: 732px;
   @apply w-full flex flex-col justify-center items-center;
 }
 .slide-bg {
