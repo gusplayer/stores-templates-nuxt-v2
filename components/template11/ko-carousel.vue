@@ -1,22 +1,19 @@
 <template>
-  <div class="content-carousel">
-    <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-      <div class="swiper-wrapper">
-        <div
-          class="swiper-slide"
-          :id="`slide${index + 1}`"
-          v-for="(banner, index) in this.Banners"
-          :key="index"
-        >
-          <img class="slide-bg" :src="banner.slide" alt="Bg-Image" />
-          <CarouselContent class="absolute" :banner="banner"></CarouselContent>
-        </div>
+  <!-- <div class="content-carousel"> -->
+  <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+    <div class="swiper-wrapper z-auto">
+      <div
+        class="swiper-slide"
+        :id="`slide${index + 1}`"
+        v-for="(banner, index) in this.Banners"
+        :key="index"
+      >
+        <img class="slide-bg" :src="banner.slide" alt="Bg-Image" />
+        <CarouselContent class="absolute" :banner="banner"></CarouselContent>
       </div>
-      <!-- Add Arrows -->
-      <!-- <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div> -->
     </div>
   </div>
+  <!-- </div> -->
 </template>
 <script>
 import CarouselContent from '../../components/template11/_carouselBanner/banner-carousel'
@@ -27,8 +24,9 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: 'auto',
+        autoHeight: true,
         effect: 'fade',
+        slidesPerView: 'auto',
         loop: true,
         pagination: {
           el: '.swiper-pagination',
@@ -63,7 +61,6 @@ export default {
 </script>
 <style scoped>
 .content-carousel {
-  max-height: 732px;
   @apply w-full flex flex-col justify-center items-center;
 }
 .slide-bg {
@@ -71,5 +68,10 @@ export default {
 }
 .swiper-slide {
   @apply w-full flex justify-center items-center z-10;
+}
+@media (min-width: 1400px) {
+  .slide-bg {
+    max-height: 732px;
+  }
 }
 </style>
