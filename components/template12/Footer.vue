@@ -128,6 +128,7 @@ export default {
           link: this.dataStore.tienda.red_tiktok,
         },
       ],
+      logo: true,
     }
   },
   computed: {
