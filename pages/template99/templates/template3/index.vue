@@ -10,6 +10,7 @@
       :dataStore="dataStore"
       :settingByTemplate="settingByTemplate"
       id="KHeaderX"
+      v-if="categorias.length > 0"
     />
     <KProductFavoritos
       v-if="this.stateBanner"
@@ -111,6 +112,9 @@ export default {
     },
     dataStore() {
       return this.$store.state.dataStore
+    },
+    categorias() {
+      return this.dataStore.categorias
     },
     fullProducts() {
       return this.$store.getters['products/filterProducts']

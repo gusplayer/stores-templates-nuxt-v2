@@ -1,7 +1,12 @@
 <template lang="html">
   <div class="container-home" v-loading="loading">
     <KoHeaderWp v-bind="componentsProps" id="KHeaderX" />
-    <component :is="indexCategory" v-bind="componentsProps" id="KHeaderX" />
+    <component
+      :is="indexCategory"
+      v-bind="componentsProps"
+      id="KHeaderX"
+      v-if="categorias.length > 0"
+    />
     <KProductFavoritos
       v-if="this.stateBanner"
       v-bind="componentsProps"
@@ -96,6 +101,9 @@ export default {
     },
     dataStore() {
       return this.$store.state.dataStore
+    },
+    categorias() {
+      return this.dataStore.categorias
     },
     fullProducts() {
       return this.$store.getters['products/filterProducts']
