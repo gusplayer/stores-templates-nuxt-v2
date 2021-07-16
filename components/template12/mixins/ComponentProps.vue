@@ -5,10 +5,10 @@ export default {
       type: Object,
       required: true,
     },
-    // settingByTemplate12: {
-    //   type: Array,
-    //   required: true,
-    // },
+    settingByTemplate12: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

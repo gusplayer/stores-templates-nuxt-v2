@@ -5,7 +5,11 @@
       :class="isVariantLogo == true ? 'bg-white-white shadow' : ''"
     >
       <div class="header-content-logo">
-        <nuxt-link to="/" class="wrapper-logo">
+        <nuxt-link
+          to="/"
+          class="wrapper-logo"
+          :style="`max-width:${settingByTemplate12.logoSize} ;`"
+        >
           <img
             :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
             class="header-logo"
@@ -99,7 +103,6 @@ export default {
   width: 100%;
 }
 .header-logo {
-  max-height: 80px;
   object-fit: contain;
   object-position: left;
 }

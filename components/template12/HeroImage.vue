@@ -22,9 +22,17 @@
           'opacity-40 ': shouldChangeOpacity,
         }"
       >
-        <h2 class="uppercase text-5xl font-semibold m-0">MENU LIST TWO</h2>
-        <p class="mt-2 italic text-md normal-case text-gray-200">
-          Menu and portfolio
+        <h2
+          class="uppercase text-5xl font-semibold m-0"
+          :style="`color:${settingByTemplate12.bannerTitleColor} ;`"
+        >
+          {{ settingByTemplate12.bannerTitle }}
+        </h2>
+        <p
+          class="mt-2 italic text-md normal-case text-gray-200"
+          :style="`color:${settingByTemplate12.bannerDescriptionColor} ;`"
+        >
+          {{ settingByTemplate12.bannerDescription }}
         </p>
       </div>
     </div>
@@ -41,7 +49,10 @@ export default {
   }),
   computed: {
     imageSrc() {
-      return `https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1`
+      return this.settingByTemplate12.desktopBanner
+    },
+    imageSrcResponsive() {
+      return this.settingByTemplate12.responsiveBanner
     },
   },
   async mounted() {
@@ -65,7 +76,6 @@ export default {
   padding: 0px;
   margin: 0px;
 }
-
 .hero_image_bg {
   position: absolute;
   top: 0px;
@@ -81,7 +91,6 @@ export default {
   animation-fill-mode: forwards;
   filter: brightness(0.7);
 }
-
 /* Zoom in Keyframes */
 @-webkit-keyframes ZoominOut {
   0% {
@@ -91,7 +100,6 @@ export default {
     transform: scale(1);
   }
 }
-
 @keyframes ZoominOut {
   0% {
     transform: scale(1.4);
@@ -100,7 +108,6 @@ export default {
     transform: scale(1);
   }
 }
-
 @media screen and (min-width: 920px) {
   .hero-image_container {
     height: 51.178vh;

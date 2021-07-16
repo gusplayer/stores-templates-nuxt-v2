@@ -1,13 +1,19 @@
 <template>
   <main>
-    <div class="mt-8 section-with-title_container">
+    <div
+      class="mt-20 section-with-title_container"
+      :style="`background:${settingByTemplate12.backgroundColor};`"
+    >
       <div
         class="pt-4 pb-4"
         v-for="category in dataStore.categorias"
         :key="category.id"
       >
         <header class="text-center mb-20">
-          <h2 class="font-semibold text-4xl uppercase text-gray-600">
+          <h2
+            class="font-semibold text-4xl uppercase"
+            :style="`color:${settingByTemplate12.titleColor};`"
+          >
             {{ category.nombre_categoria_producto }}
           </h2>
         </header>
@@ -24,6 +30,7 @@
                   : {}
               "
               :dataStore="dataStore"
+              :settingByTemplate12="settingByTemplate12"
             ></ProductCard>
           </div>
         </div>

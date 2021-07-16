@@ -277,8 +277,8 @@ export const mutations = {
     }
   },
   SET_CURRENTSETTING12(state, value) {
-    if (value && value.component) {
-      state.settingByTemplate = value.setting
+    if (value && value.data) {
+      state.settingByTemplate12 = value.data
     }
   },
   SET_LAYOUTUNICENTRO(state, value) {
@@ -397,6 +397,9 @@ export const mutations = {
   },
   SET_SETTINGS_BY_TEMPLATE_9: (state, value) => {
     state.settingByTemplate9 = value
+  },
+  SET_SETTINGS_BY_TEMPLATE_12: (state, value) => {
+    state.settingByTemplate12 = value
   },
   SET_STATE_WAPIME: (state, value) => {
     state.stateWapiME = value
@@ -551,10 +554,16 @@ export const actions = {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch('GET_SETTINGS_BY_TEMPLATE_9', state.dataStore.tienda)
           }
+        } else if (id.data.data.template == 12) {
+          if (state.dataStore && state.dataStore.tienda) {
+            await dispatch(
+              'GET_SETTINGS_BY_TEMPLATE_12',
+              state.dataStore.tienda
+            )
+          }
         } else if (
           id.data.data.template == 5 ||
           id.data.data.template == 6 ||
-          id.data.data.template == 12 ||
           id.data.data.template == 99
         ) {
           if (state.dataStore && state.dataStore.tienda) {
@@ -615,6 +624,12 @@ export const actions = {
       `https://node.komercia.co/template9?id=${store.id_tienda}`
     )
     commit('SET_SETTINGS_BY_TEMPLATE_9', response.data.body)
+  },
+  async GET_SETTINGS_BY_TEMPLATE_12({ commit }, store) {
+    const response = await axios.get(
+      `https://node.komercia.co/template12?id=${store.id_tienda}`
+    )
+    commit('SET_SETTINGS_BY_TEMPLATE_12', response.data.body)
   },
   async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit, state }, idWapi) {
     let template = state.template ? state.template : 99

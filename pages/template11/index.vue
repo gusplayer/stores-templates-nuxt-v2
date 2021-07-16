@@ -23,67 +23,16 @@ export default {
     Kparallax,
     Kblog,
   },
-  data() {
-    return {
-      search: '',
-    }
-  },
   computed: {
-    template() {
-      return this.$store.state.template
-    },
     dataStore() {
       return this.$store.state.dataStore
     },
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    facebooPixel() {
-      return this.$store.state.analytics_tagmanager.pixel_facebook
-    },
     listArticulos() {
       return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
-      }
-    },
-  },
-  methods: {
-    Searchproduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
-    },
-    getSearch(value) {
-      if (value) {
-        location.href = '?search=' + value
-        if (this.facebooPixel != null) {
-          window.fbq('track', 'Search', { ValorBuscado: value })
-        }
-      } else {
-        location.href = '?search=' + ''
-      }
-    },
-  },
-  watch: {
-    search(value) {
-      this.Searchproduct(value)
     },
   },
 }
 </script>
-<style></style>

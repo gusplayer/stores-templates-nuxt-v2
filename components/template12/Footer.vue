@@ -1,7 +1,14 @@
 <template>
-  <footer class="wrapper_footer">
+  <footer
+    class="wrapper_footer"
+    :style="`background:${settingByTemplate12.backgroundFooter};`"
+  >
     <div class="header-content-logo">
-      <nuxt-link to="/" class="wrapper-logo">
+      <nuxt-link
+        to="/"
+        class="wrapper-logo"
+        :style="`max-width:${settingByTemplate12.logoSize};`"
+      >
         <img
           :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
           class="header-logo"
@@ -9,9 +16,8 @@
         />
       </nuxt-link>
     </div>
-    <p class="text-title">
-      We don't care if we're doing haute cuisine or burgers and pizza. We just
-      do it right. Always.
+    <p class="text-title" :style="`color:${settingByTemplate12.footerText};`">
+      {{ settingByTemplate12.footerTitle }}
     </p>
     <div class="content-items-iconos">
       <div
@@ -19,7 +25,11 @@
         :key="`${index}${item.icon}`"
         v-if="item.link"
       >
-        <a v-if="item.link" :href="item.link" target="_blank "
+        <a
+          v-if="item.link"
+          :href="item.link"
+          target="_blank "
+          :style="`color:${settingByTemplate12.footerText}; fill:${settingByTemplate12.footerText};`"
           ><div class="icon" :is="item.icon"
         /></a>
       </div>
@@ -28,6 +38,7 @@
       class="text-politics"
       v-if="dataStore.politicas"
       @click="OpenModalPolitics"
+      :style="`color:${settingByTemplate12.footerText} ;`"
     >
       <p>{{ $t('footer_politicasyterminos') }}</p>
     </button>
@@ -45,10 +56,31 @@
       "
     >
       <hr class="border-t border-gray-200 w-full" />
-      <p class="p-4">
-        © 2017 Gourmet - info@restaurant.com - +02 123458992 - Wall Street
-        Avenue 502, New York - Restaurant Template Handmade by schiocco.io
-      </p>
+      <div class="madebyKomercia">
+        <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
+        <a
+          href="https://komercia.co/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img
+            v-lazy="
+              `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
+            "
+            v-if="logo == true"
+            class="logo2"
+            alt="Logo Img"
+          />
+          <img
+            v-lazy="
+              `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
+            "
+            v-else
+            class="logo2"
+            alt="Logo Img"
+          />
+        </a>
+      </div>
     </div>
   </footer>
 </template>
@@ -61,6 +93,11 @@ export default {
   mixins: [settingsProps],
   components: {
     KoTermsConditions,
+  },
+  mounted() {
+    if (this.settingByTemplate12 && this.settingByTemplate12.backgroundFooter) {
+      this.setLogo()
+    }
   },
   data() {
     return {
@@ -102,8 +139,38 @@ export default {
     OpenModalPolitics() {
       this.$store.state.modalpolitics05 = true
     },
+    setLogo() {
+      if (
+        this.settingByTemplate12 &&
+        this.settingByTemplate12.backgroundFooter
+      ) {
+        let color = this.settingByTemplate12.backgroundFooter
+        let colorArray = color.split(',')
+        let colorInt = parseInt(colorArray[2])
+        if (colorInt > 50) {
+          this.logo = true
+        } else {
+          this.logo = false
+        }
+      }
+    },
   },
   watch: {
+    settingByTemplate12() {
+      if (
+        this.settingByTemplate12 &&
+        this.settingByTemplate12.backgroundFooter
+      ) {
+        let color = this.settingByTemplate12.backgroundFooter
+        let colorArray = color.split(',')
+        let colorInt = parseInt(colorArray[2])
+        if (colorInt > 50) {
+          this.logo = true
+        } else {
+          this.logo = false
+        }
+      }
+    },
     'dataStore.tienda'() {
       this.links[0].link = this.dataStore.tienda.red_facebook
       this.links[1].link = this.dataStore.tienda.red_twitter
@@ -118,7 +185,7 @@ export default {
 <style scoped>
 .wrapper_footer {
   padding: 40px 0 10px;
-  @apply relative flex flex-col items-center w-full bg-gray-100;
+  @apply relative flex flex-col items-center w-full;
 }
 .header-content-logo {
   display: flex;
@@ -130,19 +197,16 @@ export default {
   width: 100%;
 }
 .header-logo {
-  max-height: 80px;
   object-fit: contain;
   object-position: left;
 }
 .text-title {
-  color: rgb(156, 163, 175);
   padding: 15px 0 20px;
   text-align: center;
   font-weight: 400;
   max-width: 380px;
 }
 .text-politics {
-  color: rgb(156, 163, 175);
   text-align: center;
   font-weight: 400;
 }
@@ -162,11 +226,21 @@ export default {
 .icon {
   margin-right: 10px;
   font-size: 28px;
-  color: rgb(156, 163, 175);
-  fill: rgb(156, 163, 175);
 }
 .icon:hover {
   color: grey;
   fill: grey;
+}
+.madebyKomercia {
+  margin-top: 20px;
+  @apply w-full flex flex-col justify-center items-center mb-10;
+}
+.txt-devBy {
+  font-size: 14px;
+  color: var(--color_text);
+}
+.logo2 {
+  width: 100px;
+  opacity: 0.5;
 }
 </style>

@@ -6,35 +6,61 @@
     v-show="product"
     v-on:click="addShoppingCart"
   >
-    <div class="content-img-prodcut">
+    <div
+      class="content-img-prodcut"
+      :class="
+        settingByTemplate12.responsiveImages == true
+          ? 'img_visileRes'
+          : 'img_normal'
+      "
+    >
       <img
         v-if="!soldOut"
         :src="product.foto_cloudinary"
         role="presentation"
         class="product-image"
+        :class="
+          settingByTemplate12.roundedImages == true
+            ? 'img_rounded'
+            : 'img_normal'
+        "
       />
       <img
         v-if="soldOut"
         :src="product.foto_cloudinary"
         role="presentation"
         class="product-image product-image-soldOut"
+        :class="
+          settingByTemplate12.roundedImages == true
+            ? 'img_rounded'
+            : 'img_normal'
+        "
       />
     </div>
 
     <div class="wrapper-text">
       <div class="product_header mb-1">
-        <h3 class="product_name font-semibold text-md text-gray-800">
+        <h3
+          class="product_name font-semibold text-md"
+          :style="`color:${settingByTemplate12.textColor};`"
+        >
           {{ product.nombre }}
         </h3>
       </div>
       <div class="product_description">
-        <p class="font-normal text-gray-500 text-sm">
+        <p
+          class="font-normal text-sm"
+          :style="`color:${settingByTemplate12.descriptionColor};`"
+        >
           {{ product.categoria }}
         </p>
       </div>
     </div>
     <div class="wrapper-price">
-      <span class="font-semibold">
+      <span
+        class="font-semibold"
+        :style="`color:${settingByTemplate12.priceColor};`"
+      >
         {{
           product.precio
             | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
@@ -49,7 +75,7 @@ import idCloudinary from '../../mixins/idCloudinary'
 export default {
   name: 'ProductCard',
   mixins: [idCloudinary],
-  props: { product: Object, dataStore: Object },
+  props: { product: Object, dataStore: Object, settingByTemplate12: Object },
   mounted() {
     this.idSlug = this.product.id
     this.prodcutPrice()
@@ -309,10 +335,15 @@ export default {
 .product-image {
   max-width: 80px;
   max-height: 80px;
-  border-radius: 5px;
   object-fit: cover;
   margin-right: 10px;
   object-position: center;
+}
+.img_rounded {
+  border-radius: 5px;
+}
+.img_normal {
+  border-radius: 0px;
 }
 .product-image-soldOut {
   filter: grayscale(100%);
@@ -322,6 +353,9 @@ export default {
 }
 .wrapper-text {
   @apply w-full flex-col;
+}
+.img_visileRes {
+  display: flex;
 }
 @media (max-width: 768px) {
   .wrapper-text {
@@ -344,6 +378,12 @@ export default {
   .product-image {
     max-width: 70px;
     max-height: 70px;
+  }
+  .img_visileRes {
+    display: none;
+  }
+  .img_normal {
+    display: flex;
   }
 }
 @media (max-width: 320px) {
