@@ -8,7 +8,7 @@
         <nuxt-link
           to="/"
           class="wrapper-logo"
-          :style="`max-width:${settingByTemplate12.logoSize} ;`"
+          :style="`max-width:${settingByTemplate12.logoSize};`"
         >
           <img
             :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"

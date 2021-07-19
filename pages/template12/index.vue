@@ -89,7 +89,7 @@ export default {
 
 <style>
 * {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-1) !important;
 }
 .product_container:last-child .product_divider {
   display: none;
