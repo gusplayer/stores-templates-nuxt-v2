@@ -13,7 +13,7 @@
               banner && banner.url_redirect ? banner.url_redirect : ''
             }`"
             rel="noreferrer noopener"
-            class="cursor-pointer"
+            :class="banner && banner.url_redirect ? 'cursor-pointer' : ''"
           >
             <img
               class="banner"

@@ -18,6 +18,7 @@
         <i-main-section v-bind="componentsProps" id="KProductX" />
       </div>
       <i-footer v-bind="componentsProps" id="KFooterX" />
+      <i-button-car></i-button-car>
     </div>
   </div>
 </template>
@@ -30,6 +31,7 @@ export default {
     IFooter: () => import('../../components/template12/Footer'),
     IHeroImage: () => import('../../components/template12/HeroImage'),
     IMainSection: () => import('../../components/template12/MainSection'),
+    IButtonCar: () => import('../../components/template10/buttonCar.vue'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
