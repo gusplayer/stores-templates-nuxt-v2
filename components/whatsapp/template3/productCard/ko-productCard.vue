@@ -4,7 +4,7 @@
       <router-link
         class="content-img-prodcut"
         :to="{
-          path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+          path: `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
         }"
       >
         <img
@@ -24,7 +24,7 @@
         <router-link
           class="content-description-product"
           :to="{
-            path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+            path: `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
           }"
         >
           <p
@@ -113,7 +113,7 @@
             };`"
             :to="{
               path:
-                `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+                `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
             }"
           >
             <p
@@ -138,7 +138,7 @@
             };`"
             :to="{
               path:
-                `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+                `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
             }"
           >
             <p
@@ -289,9 +289,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,

@@ -8,7 +8,7 @@
         </p>
         <router-link
           :to="{
-            path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+            path: `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
           }"
           class="wrapper-image"
         >
@@ -29,7 +29,7 @@
           <router-link
             :to="{
               path:
-                `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+                `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
             }"
             class="content-name-product-movil"
           >
@@ -118,14 +118,14 @@
                     ? settingByTemplate.color_secundario
                     : '#FFFFFF'
                 };`"
-                style="margin-right: 5px;"
+                style="margin-right: 5px"
               >
                 <shopWa-icon class="wp-icon" />
               </div>
               <router-link
                 :to="{
                   path:
-                    `/wa/${dataStore.tienda.id_tienda}/producto/` +
+                    `/wa/${dataStore.tienda.id_tienda}/productos/` +
                     product.slug,
                 }"
                 class="btn"
@@ -145,7 +145,7 @@
             <router-link
               :to="{
                 path:
-                  `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+                  `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
               }"
               v-else
               class="btn"
@@ -300,9 +300,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,

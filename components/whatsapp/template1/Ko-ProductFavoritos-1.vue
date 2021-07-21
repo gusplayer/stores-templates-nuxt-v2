@@ -11,7 +11,7 @@
       >
         <router-link
           :to="{
-            path: `/wa/${dataStore.tienda.id_tienda}/producto/` + product.slug,
+            path: `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
           }"
         >
           <div class="wrapper-img">
