@@ -382,6 +382,7 @@ export default {
   list-style: none;
 }
 .order_header {
+  padding: 5px 0px;
   @apply grid grid-cols-3 gap-4;
   justify-content: start;
   align-items: center;

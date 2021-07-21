@@ -133,9 +133,8 @@ export default {
   mounted() {
     let colorBg = ''
     if (this.settingByTemplate7 && this.settingByTemplate7[0].setting7Header) {
-      colorBg = this.settingByTemplate7[0].setting7Header[
-        '--background_color_1'
-      ]
+      colorBg =
+        this.settingByTemplate7[0].setting7Header['--background_color_1']
     } else {
       colorBg = '#ffffff'
     }
@@ -451,6 +450,8 @@ export default {
 /* ***** */
 @screen sm {
   .header {
+    padding-bottom: var(--padding);
+    padding-top: var(--padding);
     @apply w-full px-16;
   }
   .header-container {
@@ -497,8 +498,6 @@ export default {
 @screen mlg {
   .header {
     @apply w-9/3;
-    padding-bottom: var(--padding);
-    padding-top: var(--padding);
   }
   .header-content-buttons {
     @apply not-sr-only;
