@@ -12,7 +12,7 @@
   >
     <div class="main-wrapper overflow-hidden">
       <i-header v-bind="componentsProps" id="KHeaderX" />
-      <i-hero-image v-bind="componentsProps" />
+      <i-hero-image v-bind="componentsProps" id="KHeaderX" />
       <!-- <div class="divider mt-4 mb-14" /> -->
       <div class="main-section_container">
         <i-main-section v-bind="componentsProps" id="KProductX" />
@@ -89,7 +89,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 * {
   font-family: var(--font-style-1) !important;
 }
