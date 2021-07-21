@@ -1,7 +1,7 @@
 <template>
   <main>
     <div
-      class="mt-20 section-with-title_container"
+      class="pt-20 section-with-title_container"
       :style="`background:${settingByTemplate12.backgroundColor};`"
     >
       <div

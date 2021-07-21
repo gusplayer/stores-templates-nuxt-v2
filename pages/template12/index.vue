@@ -104,6 +104,6 @@ main section:last-child .section-with-title_container .border-transparent {
 }
 .main-section_container {
   box-shadow: 0 20px 12px 2px rgb(0 0 0 / 9%);
-  padding-bottom: 2.2rem;
+  /* padding-bottom: 2.2rem; */
 }
 </style>
