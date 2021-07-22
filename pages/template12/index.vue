@@ -12,7 +12,7 @@
   >
     <div class="main-wrapper overflow-hidden">
       <i-header v-bind="componentsProps" id="KHeaderX" />
-      <i-hero-image v-bind="componentsProps" id="KHeaderX" />
+      <i-hero-image v-bind="componentsProps" />
       <!-- <div class="divider mt-4 mb-14" /> -->
       <div class="main-section_container">
         <i-main-section v-bind="componentsProps" id="KProductX" />

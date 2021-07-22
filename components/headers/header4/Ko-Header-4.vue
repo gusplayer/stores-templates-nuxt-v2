@@ -149,7 +149,7 @@ export default {
     } else {
       this.showSearch = false
     }
-    var prevScrollpos = window.pageYOffset
+    // var prevScrollpos = window.pageYOffset
     var navbar = document.getElementById('navbar')
     var header = document.getElementById('headerid')
     var bghead = document.getElementById('headbg')
@@ -174,7 +174,7 @@ export default {
             navbar.style.zIndex = '20'
             navbar.style.top = '30px'
           }
-        } else if (prevScrollpos > currentScrollPos && navbar) {
+        } else {
           navbar.style.top = '0px'
           navbar.style.zIndex = '20'
           bghead.style.backgroundColor = 'transparent'
@@ -187,11 +187,8 @@ export default {
           if (screen.width >= 1280) {
             header.style.width = '93%'
           }
-        } else {
-          navbar.style.zIndex = '20'
-          navbar.style.top = '-160px'
         }
-        prevScrollpos = currentScrollPos
+        // prevScrollpos = currentScrollPos
       }
     } else {
       header.style.backgroundColor = colorBg
@@ -210,23 +207,20 @@ export default {
             navbar.style.zIndex = '20'
             navbar.style.top = '30px'
           }
-        } else if (prevScrollpos > currentScrollPos && navbar) {
+        } else {
           navbar.style.top = '0px'
           navbar.style.zIndex = '20'
           bghead.style.backgroundColor = colorBg
           header.style.boxShadow = '0px 0px 0px 0px'
-          bghead.style.boxShadow = '0px 0px 22px 2px rgba(145,145,145,0.57)'
+          bghead.style.boxShadow = '0px 0px 10px 4px rgba(145,145,145,0.10)'
           if (screen.width >= 300) {
             header.style.width = '100%'
           }
           if (screen.width >= 1280) {
             header.style.width = '93%'
           }
-        } else {
-          navbar.style.zIndex = '20'
-          navbar.style.top = '-160px'
         }
-        prevScrollpos = currentScrollPos
+        // prevScrollpos = currentScrollPos
       }
     }
   },

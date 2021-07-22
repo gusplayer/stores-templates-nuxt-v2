@@ -22,6 +22,11 @@
           </client-only>
         </div>
         <p class="text-country">{{ dataStore.tienda.pais }}</p>
+        <p class="text-country text-margin">|</p>
+        <p class="text-country">
+          <strong style="margin-right: 1px">$</strong>
+          {{ dataStore.tienda.moneda }}
+        </p>
       </div>
       <KoLanguage />
     </div>
@@ -60,7 +65,6 @@ export default {
   align-items: center;
   max-width: 1300px;
 }
-
 .content-footer-country-wa {
   max-width: 900px;
 }
@@ -87,5 +91,9 @@ export default {
   height: 100%;
   font-size: 12px;
   /* font-family: 'Poppins'; */
+}
+.text-margin {
+  margin-right: 5px;
+  margin-left: 5px;
 }
 </style>

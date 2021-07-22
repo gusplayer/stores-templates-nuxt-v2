@@ -16,9 +16,10 @@
     >
       <img
         v-if="!soldOut"
-        :src="product.foto_cloudinary"
+        v-lazy="idCloudinary(product.foto_cloudinary, 350, 350)"
         role="presentation"
         class="product-image"
+        alt="Product Img"
         :class="
           settingByTemplate12.roundedImages == true
             ? 'img_rounded'
@@ -27,9 +28,10 @@
       />
       <img
         v-if="soldOut"
-        :src="product.foto_cloudinary"
+        v-lazy="product.foto_cloudinary"
         role="presentation"
         class="product-image product-image-soldOut"
+        alt="Product Img"
         :class="
           settingByTemplate12.roundedImages == true
             ? 'img_rounded'
@@ -61,10 +63,7 @@
         class="font-semibold"
         :style="`color:${settingByTemplate12.priceColor};`"
       >
-        {{
-          product.precio
-            | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
-        }}
+        {{ product.precio | currency }}
       </span>
     </div>
   </div>
@@ -267,35 +266,11 @@ export default {
     },
   },
   filters: {
-    currency(value, codigo_pais, moneda) {
-      let resultCurrent
-      if (codigo_pais && moneda) {
-        if (value && codigo_pais == 'co' && moneda == 'COP') {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        } else if (codigo_pais == 'internacional') {
-          {
-            resultCurrent = new Intl.NumberFormat('en-IN', {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        } else {
-          {
-            resultCurrent = new Intl.NumberFormat(codigo_pais, {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        }
-      } else {
-        if (value) {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        }
+    currency(value) {
+      if (value) {
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
+      return ''
     },
   },
 }
@@ -303,7 +278,7 @@ export default {
 
 <style scoped>
 .wrapper_card {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   width: 100%;
   max-width: 460px;
   @apply relative flex items-start flex-nowrap bg-transparent cursor-pointer;
@@ -340,10 +315,10 @@ export default {
   object-position: center;
 }
 .img_rounded {
-  border-radius: 5px;
+  border-radius: 100%;
 }
 .img_normal {
-  border-radius: 0px;
+  border-radius: 2px;
 }
 .product-image-soldOut {
   filter: grayscale(100%);

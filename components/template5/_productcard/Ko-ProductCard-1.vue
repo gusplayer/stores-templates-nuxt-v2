@@ -121,7 +121,7 @@
                 v-on:click="addShoppingCart"
                 v-if="!this.estadoCart && !soldOut && !spent"
               >
-                <p style="height: 23px;">
+                <p style="height: 23px">
                   <cartArrowDown /> {{ $t('home_cardAgregar') }}
                 </p>
               </div>
@@ -280,6 +280,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },
@@ -366,9 +367,8 @@ export default {
           }
 
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,

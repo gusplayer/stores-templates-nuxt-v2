@@ -1,8 +1,9 @@
 <template>
   <div class="w-full hero-image_container">
     <div class="relative h-inherit flex items-center justify-center">
-      <div
-        :style="`background-image: url('${imageSrc}')`"
+      <img
+        :src="imageSrc"
+        alt="img banner"
         class="hero_image_bg h-inherit w-full"
       />
       <div
@@ -17,7 +18,7 @@
           ease
           duration-300
         "
-        style="z-index: 3"
+        style="z-index: 3; height: 51.178vh"
         :class="{
           'opacity-40 ': shouldChangeOpacity,
         }"
@@ -63,7 +64,7 @@ export default {
   },
   methods: {
     async handleTextOpacity() {
-      await (this.shouldChangeOpacity = !!(window.scrollY >= 120))
+      await (this.shouldChangeOpacity = !!(window.scrollY >= 110))
     },
   },
 }
@@ -71,7 +72,7 @@ export default {
 
 <style scoped>
 .hero-image_container {
-  height: 250px;
+  height: 51.178vh;
   overflow: hidden;
   padding: 0px;
   margin: 0px;

@@ -24,7 +24,7 @@
           </div>
           <div class="cont-btn">
             <button class="content-btn" @click="closedSearch">
-              <span class="btn-txt">{{ $t('home_vamos') }}</span>
+              <span class="btn-txt">{{ $t('home_buscar') }}</span>
             </button>
           </div>
         </div>
