@@ -213,6 +213,7 @@ export default {
     home_tuCarrito: 'Tu carrito',
     home_pdescuento: 'Producto Con descuento',
     //productdetail
+    productdetail_name: 'Detalle de producto',
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
     productdetail_btnAgregar: 'Agregar al carrito',
@@ -478,6 +479,7 @@ export default {
     home_tuCarrito: 'Your cart',
     home_pdescuento: 'Product Discount',
     //productdetail
+    productdetail_name: 'Product detail',
     productdetail_garantia: 'Warranty:',
     productdetail_btnComprar: 'Purchase',
     productdetail_btnAgregar: 'Add to cart',
@@ -744,6 +746,7 @@ export default {
     home_tuCarrito: 'Seu carrinho',
     home_pdescuento: 'Desconto de produto',
     //productdetail
+    productdetail_name: 'Detalhe do produto',
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
     productdetail_btnAgregar: 'Adicionar ao carrinho',

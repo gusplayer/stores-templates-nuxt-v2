@@ -17,8 +17,8 @@
           text-gray-100
           ease
           duration-300
+          content-text
         "
-        style="z-index: 3; height: 51.178vh"
         :class="{
           'opacity-40 ': shouldChangeOpacity,
         }"
@@ -92,6 +92,10 @@ export default {
   animation-fill-mode: forwards;
   filter: brightness(0.7);
 }
+.content-text {
+  z-index: 3;
+  height: 51.178vh;
+}
 /* Zoom in Keyframes */
 @-webkit-keyframes ZoominOut {
   0% {
@@ -112,6 +116,46 @@ export default {
 @media screen and (min-width: 920px) {
   .hero-image_container {
     height: 51.178vh;
+  }
+}
+@media (max-width: 800px) {
+  .content-text {
+    height: 511px;
+  }
+  .hero-image_container {
+    height: 511px;
+  }
+}
+@media (max-width: 650px) {
+  .content-text {
+    height: 430px;
+  }
+  .hero-image_container {
+    height: 430px;
+  }
+}
+@media (max-width: 550px) {
+  .content-text {
+    height: 480px;
+  }
+  .hero-image_container {
+    height: 380px;
+  }
+}
+@media (max-width: 500px) {
+  .content-text {
+    height: 300px;
+  }
+  .hero-image_container {
+    height: 300px;
+  }
+}
+@media (max-width: 400px) {
+  .content-text {
+    height: 250px;
+  }
+  .hero-image_container {
+    height: 250px;
   }
 }
 </style>

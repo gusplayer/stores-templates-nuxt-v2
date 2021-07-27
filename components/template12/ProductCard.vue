@@ -4,7 +4,6 @@
     @mouseenter="() => (isHover = true)"
     @mouseleave="() => (isHover = false)"
     v-show="product"
-    v-on:click="addShoppingCart"
   >
     <div
       class="content-img-prodcut"
@@ -39,7 +38,6 @@
         "
       />
     </div>
-
     <div class="wrapper-text">
       <div class="product_header mb-1">
         <h3
@@ -55,6 +53,12 @@
           :style="`color:${settingByTemplate12.descriptionColor};`"
         >
           {{ product.categoria }}
+        </p>
+        <p
+          class="font-normal text-xs"
+          :style="`color:${settingByTemplate12.descriptionColor};`"
+        >
+          {{ product.marca }}
         </p>
       </div>
     </div>
@@ -280,7 +284,7 @@ export default {
 .wrapper_card {
   margin-bottom: 25px;
   width: 100%;
-  max-width: 460px;
+  /* max-width: 460px; */
   @apply relative flex items-start flex-nowrap bg-transparent cursor-pointer;
 }
 .wrapper_card > div:nth-child(1) {
@@ -333,13 +337,11 @@ export default {
   display: flex;
 }
 @media (max-width: 768px) {
-  .wrapper-text {
-    max-width: 190px;
+  .wrapper_card {
+    @apply items-center justify-center;
   }
 }
-.wrapper_card {
-  @apply items-center justify-center;
-}
+
 @media (max-width: 450px) {
   .wrapper-text {
     max-width: 160px;

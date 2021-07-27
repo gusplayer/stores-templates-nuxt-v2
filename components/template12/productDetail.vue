@@ -1,184 +1,217 @@
 <template>
-  <div class="wrapper-productDetail">
-    <!-- <div v-if="true" v-loading="true"></div> -->
-    <div class="container-productDetail" v-if="!loading" v-loading="loading">
-      <nuxt-link
-        :to="this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
-        class="wrapper-back"
-        :style="`color: ${
-          settingByTemplate && settingByTemplate.color_primario
-            ? settingByTemplate.color_primario
-            : '#25D366'
-        };`"
-      >
-        <arrow-left-icon class="icon-back" />
-        <p class="back-text">Volver al inicio</p>
-      </nuxt-link>
-      <div class="section">
-        <div class="wrapper-left">
-          <div class="photos_responsive">
-            <productSlide
-              :photos="data.fotos"
-              :photo="data.detalle.foto_cloudinary"
-              :idYoutube="idYoutube"
-            ></productSlide>
+  <div
+    class="modal-content"
+    :style="[
+      {
+        '--font-style-1':
+          this.settingByTemplate12 && this.settingByTemplate12.fontFamily
+            ? this.settingByTemplate12.fontFamily
+            : 'Poppins',
+      },
+    ]"
+  >
+    <div class="modal-header">
+      <p class="txt-Legal">{{ $t('productdetail_name') }}</p>
+      <span class="close" @click="closeModalpolitics">&times;</span>
+    </div>
+    <div v-if="tempData">
+      <div class="container-productDetail" v-if="!loading" v-loading="loading">
+        <div class="section">
+          <div class="wrapper-left">
+            <div class="photos_responsive">
+              <productSlide
+                :photos="data.fotos"
+                :photo="data.detalle.foto_cloudinary"
+                :idYoutube="idYoutube"
+              ></productSlide>
+            </div>
           </div>
-        </div>
-        <div class="wrapper-right">
-          <div class="content-right">
-            <p class="text-name">{{ data.detalle.nombre }}</p>
-            <p class="text-marca">
-              <strong>{{ data.info.marca }}</strong>
-            </p>
-            <div class="wrapper-price">
-              <p class="text-precio" v-show="salesData.precio">
-                {{
+          <div class="wrapper-right">
+            <div class="content-right">
+              <p class="text-name">{{ data.detalle.nombre }}</p>
+              <p class="text-marca">
+                <strong>{{ data.info.marca }}</strong>
+              </p>
+              <p
+                class="text-promocion"
+                v-show="
+                  data.info.tag_promocion == 1 &&
+                  data.info.promocion_valor &&
                   salesData.precio
-                    | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
-                    )
+                "
+              >
+                {{
+                  (data.info.tag_promocion == 1 && data.info.promocion_valor
+                    ? Math.trunc(
+                        salesData.precio / (1 - data.info.promocion_valor / 100)
+                      )
+                    : 0) | currency
                 }}
               </p>
-              <!-- <p class="card-descuento">-50%</p> -->
-            </div>
-            <div class="content_buy_action">
-              <div v-if="envio.titulo == 'Envío gratis'">
-                <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
-              </div>
-              <div class="content_card-info">
-                <p class="card-info-1" v-if="spent">
-                  {{ $t('home_cardAgotado') }}
+              <div
+                class="wrapper-price"
+                :class="
+                  data.info.tag_promocion == 1 ? '' : 'wrapper-price_space'
+                "
+              >
+                <p class="text-precio" v-show="salesData.precio">
+                  {{ salesData.precio | currency }}
+                </p>
+                <p
+                  class="card-descuento"
+                  v-show="
+                    data.info.tag_promocion == 1 &&
+                    data.info.promocion_valor &&
+                    salesData.precio
+                  "
+                >
+                  {{ data.info.promocion_valor }}% OFF
                 </p>
               </div>
-            </div>
-            <div
-              v-if="data.info.descripcion_corta"
-              style="margin-top: 10px; margin-bottom: 5px"
-            >
-              <p class="text-marca">
-                <strong>{{ data.info.descripcion_corta }}</strong>
-              </p>
-            </div>
-            <div
-              v-if="this.data.detalle.con_variante > 0"
-              class="container-variants"
-            >
-              <div v-for="(variant, index) in data.variantes" :key="index">
-                <label for="variant name" class="text-variant-type"
-                  >{{ variant.nombre }}:</label
-                >
-                <selectGroup :index="index" :variantes="data.variantes">
-                  <option
-                    v-for="item in variant.valores"
-                    :key="item.option"
-                    :value="item.option"
-                  >
-                    {{ item.option }}
-                  </option>
-                </selectGroup>
+              <div class="content_buy_action">
+                <div v-if="envio.titulo == 'Envío gratis'">
+                  <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
+                </div>
+                <div class="content_card-info">
+                  <p class="card-info-1" v-if="spent">
+                    {{ $t('home_cardAgotado') }}
+                  </p>
+                </div>
               </div>
-            </div>
-            <!-- <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
+              <div
+                v-if="data.info.descripcion_corta"
+                style="margin-top: 10px; margin-bottom: 5px"
+              >
+                <p class="text-marca">
+                  <strong>{{ data.info.descripcion_corta }}</strong>
+                </p>
+              </div>
+              <div
+                v-if="this.data.detalle.con_variante > 0"
+                class="container-variants"
+              >
+                <div v-for="(variant, index) in data.variantes" :key="index">
+                  <label for="variant name" class="text-variant-type"
+                    >{{ variant.nombre }}:</label
+                  >
+                  <selectGroup :index="index" :variantes="data.variantes">
+                    <option
+                      v-for="item in variant.valores"
+                      :key="item.option"
+                      :value="item.option"
+                    >
+                      {{ item.option }}
+                    </option>
+                  </selectGroup>
+                </div>
+              </div>
+              <!-- <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
               <button class="btn-whatsapp" @click="redirectWP()">
                 <whatsapp-icon class="wp-icon" />{{
                   $t('productdetail_solicitarInfo')
                 }}
               </button>
             </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="content-description">
+          <div v-if="data.info.descripcion" class="wrapper-description">
+            <h3 class="text-variant">{{ $t('productdetail_description') }}</h3>
+            <div class="editor content-text-desc" v-if="data.info.descripcion">
+              <el-tiptap
+                v-model="data.info.descripcion"
+                :extensions="extensions"
+                :spellcheck="false"
+                :readonly="true"
+                :charCounterCount="false"
+                :tooltip="false"
+                :showMenubar="false"
+                :bubble="false"
+              />
+            </div>
+            <!-- <div class="content-text-desc" v-html="data.info.descripcion"></div> -->
+          </div>
+        </div>
+        <div class="responsive-purchase">
+          <div class="ko-input">
+            <div class="quantity-resposive" v-if="!spent">
+              <button class="quantity_remove" v-on:click="removeQuantity()">
+                <menos-icon class="icon" />
+              </button>
+              <p class="quantity_value">{{ quantityValue }}</p>
+              <button class="quantity_add" v-on:click="addQuantity()">
+                <mas-icon class="icon" />
+              </button>
+              <transition name="slide-fade">
+                <div
+                  class="container-alert"
+                  v-show="quantityValue == maxQuantityValue"
+                >
+                  <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
+                </div>
+              </transition>
+            </div>
+            <button
+              class="btn-responsive"
+              :style="`background: ${
+                settingByTemplate && settingByTemplate.color_primario
+                  ? settingByTemplate.color_primario
+                  : '#25D366'
+              }; color:${
+                settingByTemplate && settingByTemplate.color_secundario
+                  ? settingByTemplate.color_secundario
+                  : '#FFFFFF'
+              };`"
+              ref="color2"
+              v-if="!spent && salesData.precio > 0"
+              v-on:click="addShoppingCart"
+            >
+              <span>
+                {{ $t('productdetail_btnComprar') }}
+              </span>
+            </button>
+            <button
+              class="btn-responsive"
+              :style="`background: ${
+                settingByTemplate && settingByTemplate.color_primario
+                  ? settingByTemplate.color_primario
+                  : '#25D366'
+              }; color:${
+                settingByTemplate && settingByTemplate.color_secundario
+                  ? settingByTemplate.color_secundario
+                  : '#FFFFFF'
+              };`"
+              ref="color2"
+              v-else-if="salesData.precio == 0 && !spent"
+              v-on:click="WPQuotation()"
+            >
+              <span>
+                {{ $t('productdetail_cotizar') }}
+              </span>
+            </button>
+            <div v-if="spent" class="wrapper-btn">
+              <p class="card-info-1-res">
+                😥 {{ $t('productdetail_productoAgotado') }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="content-description">
-        <div v-if="data.info.descripcion" class="wrapper-description">
-          <h3 class="text-variant">{{ $t('productdetail_description') }}</h3>
-          <div class="editor content-text-desc" v-if="data.info.descripcion">
-            <el-tiptap
-              v-model="data.info.descripcion"
-              :extensions="extensions"
-              :spellcheck="false"
-              :readonly="true"
-              :charCounterCount="false"
-              :tooltip="false"
-              :showMenubar="false"
-              :bubble="false"
-            />
-          </div>
-          <!-- <div class="content-text-desc" v-html="data.info.descripcion"></div> -->
+      <div class="flex flex-col justify-center w-full items-center" v-else>
+        <div class="spinner">
+          <div class="dot1"></div>
+          <div class="dot2"></div>
         </div>
-      </div>
-      <div class="responsive-purchase">
-        <div class="ko-input">
-          <div class="quantity-resposive" v-if="!spent">
-            <button class="quantity_remove" v-on:click="removeQuantity()">
-              <menos-icon class="icon" />
-            </button>
-            <p class="quantity_value">{{ quantityValue }}</p>
-            <button class="quantity_add" v-on:click="addQuantity()">
-              <mas-icon class="icon" />
-            </button>
-            <transition name="slide-fade">
-              <div
-                class="container-alert"
-                v-show="quantityValue == maxQuantityValue"
-              >
-                <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
-              </div>
-            </transition>
-          </div>
-          <button
-            class="btn-responsive"
-            :style="`background: ${
-              settingByTemplate && settingByTemplate.color_primario
-                ? settingByTemplate.color_primario
-                : '#25D366'
-            }; color:${
-              settingByTemplate && settingByTemplate.color_secundario
-                ? settingByTemplate.color_secundario
-                : '#FFFFFF'
-            };`"
-            ref="color2"
-            v-if="!spent && salesData.precio > 0"
-            v-on:click="addShoppingCart"
-          >
-            <span>
-              {{ $t('productdetail_btnComprar') }}
-            </span>
-          </button>
-          <button
-            class="btn-responsive"
-            :style="`background: ${
-              settingByTemplate && settingByTemplate.color_primario
-                ? settingByTemplate.color_primario
-                : '#25D366'
-            }; color:${
-              settingByTemplate && settingByTemplate.color_secundario
-                ? settingByTemplate.color_secundario
-                : '#FFFFFF'
-            };`"
-            ref="color2"
-            v-else-if="salesData.precio == 0 && !spent"
-            v-on:click="WPQuotation()"
-          >
-            <span>
-              {{ $t('productdetail_cotizar') }}
-            </span>
-          </button>
-          <div v-if="spent" class="wrapper-btn">
-            <p class="card-info-1-res">
-              😥 {{ $t('productdetail_productoAgotado') }}
-            </p>
-          </div>
-        </div>
+        <p class="text-2xl font-semibold text-black">Cargando producto..</p>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios'
-import productSlide from './_productdetails/productSlide'
-import selectGroup from './_productdetails/selectGroup'
+import productSlide from '../whatsapp/_productdetails/productSlide.vue'
+import selectGroup from '../whatsapp/_productdetails/selectGroup'
 import idCloudinary from '../../mixins/idCloudinary'
 import {
   Doc,
@@ -220,8 +253,13 @@ import {
   SelectAll,
 } from 'element-tiptap'
 export default {
+  name: 'Ko-ProductDetail',
+  props: {
+    dataStore: Object,
+    tempData: Object,
+    settingByTemplate12: Object,
+  },
   mixins: [idCloudinary],
-  name: 'Ko-ProductDetail-wa',
   components: {
     selectGroup,
     productSlide,
@@ -373,9 +411,6 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
     productsData() {
       return this.dataStore.productos
     },
@@ -429,19 +464,11 @@ export default {
     },
   },
   methods: {
-    searchIdForSlug() {
-      let domain = this.$route.fullPath
-      let result = domain.split('/')
-      const product = this.productsData.filter(
-        (product) => product.slug === result[4]
-      )
-      if (product.length) {
-        return product[0].id
-      }
-      return this.productsData[0].id
+    closeModalpolitics() {
+      this.$store.state.modalproductDetails = false
     },
     getDataProduct() {
-      const idOfSlug = this.searchIdForSlug()
+      const idOfSlug = this.tempData.id
       if (idOfSlug) {
         axios
           .get(`https://templates.komercia.co/api/producto/${idOfSlug}`)
@@ -624,11 +651,7 @@ export default {
         this.$store.state.productsCart.push(product)
       }
       this.$store.commit('UPDATE_CONTENTCART')
-      if (this.stateWapiME) {
-        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
-      } else {
-        this.$router.push(`/`)
-      }
+      this.$store.state.modalproductDetails = false
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
     },
@@ -783,35 +806,11 @@ export default {
     },
   },
   filters: {
-    currency(value, codigo_pais, moneda) {
-      let resultCurrent
-      if (codigo_pais && moneda) {
-        if (value && codigo_pais == 'co' && moneda == 'COP') {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        } else if (codigo_pais == 'internacional') {
-          {
-            resultCurrent = new Intl.NumberFormat('en-IN', {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        } else {
-          {
-            resultCurrent = new Intl.NumberFormat(codigo_pais, {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        }
-      } else {
-        if (value) {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        }
+    currency(value) {
+      if (value) {
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
+      return ''
     },
     toLowerCase(value) {
       if (value) {
@@ -822,27 +821,18 @@ export default {
   },
 }
 </script>
-
 <style scoped>
-.wrapper-productDetail {
-  display: flex;
-  width: 100%;
-  background-color: #fafaf8;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100%;
-  overflow: visible;
+* {
+  font-family: var(--font-style-1) !important;
 }
 .container-productDetail {
   display: flex;
   width: 100%;
-  max-width: 900px;
   height: 100%;
-  min-height: calc(100vh);
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px 30px 80px 30px;
+  padding: 20px 30px 0px 30px;
   position: relative;
 }
 .section {
@@ -927,30 +917,33 @@ export default {
   font-weight: bold;
   color: rgba(55, 4, 4, 0.61);
   text-decoration: line-through;
-  margin-top: 5px;
+  margin-top: 10px;
+}
+.wrapper-price_space {
+  margin-top: 10px;
 }
 .wrapper-price {
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: flex-start;
+  margin-bottom: 12px;
 }
 .wrapper-price > p:nth-child(2) {
   margin-left: 5px;
 }
 .text-precio {
-  font-size: 16px;
-  font-weight: 700;
-  color: #0f2930;
-  margin-top: 5px;
+  font-size: 30px;
+  font-weight: bold;
+  /* color: var(--color_text); */
+  color: #000000;
+  line-height: 24px;
 }
 .card-descuento {
   font-size: 12px;
-  color: white;
-  background: #35dd8d;
+  color: #00a650;
+  /* font-weight: bold; */
   border-radius: 3px;
-  padding: 0px 5px;
-  margin-top: 10px;
 }
 .text-variant {
   font-weight: 600;
@@ -1006,14 +999,14 @@ export default {
 }
 .content-description {
   width: 100%;
+  margin-bottom: 20px;
   display: flex;
 }
 .responsive-purchase {
-  position: fixed;
+  position: sticky;
   bottom: 0px;
   width: 100%;
-  max-width: 900px;
-  z-index: 3;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1023,11 +1016,8 @@ export default {
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 10px;
-  position: relative;
+  padding: 12px 0px;
   background-color: #fafaf8;
-  box-shadow: 0px 2px 2px rgba(52, 58, 67, 0.1),
-    0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
 }
 .quantity-resposive {
   display: flex;
@@ -1214,7 +1204,7 @@ export default {
 }
 @media (max-width: 685px) {
   .container-productDetail {
-    padding: 0px 0px 40px 0px;
+    padding: 0px;
   }
   .section {
     flex-direction: column;
@@ -1261,6 +1251,159 @@ export default {
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 0 15px;
+  }
+  .ko-input {
+    padding: 12px 10px;
+  }
+}
+/* Modal Content */
+.modal-content {
+  max-height: 600px;
+  background-color: #fefefe;
+  border: 1px solid #888;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  overflow-y: auto;
+  @apply relative m-auto p-0;
+}
+.modal-content::-webkit-scrollbar {
+  @apply w-10;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 4px;
+}
+.modal-content::-webkit-scrollbar-thumb:active {
+  background-color: #777777;
+}
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #686868;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.401);
+}
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+/* The Close Button */
+.close {
+  color: #fff;
+  font-size: 28px;
+  @apply float-right font-semibold;
+}
+.close:hover,
+.close:focus {
+  color: #ccc;
+  text-decoration: none;
+  @apply cursor-pointer;
+}
+.modal-header {
+  z-index: 2;
+  background-color: #222;
+  color: white;
+  @apply w-full flex justify-between items-center py-10 px-20 sticky top-0;
+}
+.txt-Legal {
+  font-size: 16px;
+  color: #fff;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  @apply font-semibold;
+}
+@screen sm {
+  .modal-content {
+    @apply w-full;
+  }
+}
+@screen md {
+  .modal-content {
+    @apply w-7/0;
+  }
+}
+@media (min-width: 1400px) {
+  .modal-content {
+    @apply w-5/0;
+  }
+}
+/* cargando */
+.card {
+  max-height: 460px;
+  min-height: 460px;
+}
+.spinner {
+  margin: 50px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-align: center;
+  -webkit-animation: sk-rotate 2s infinite linear;
+  animation: sk-rotate 2s infinite linear;
+}
+.dot1,
+.dot2 {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: #4429b4;
+  border-radius: 100%;
+  -webkit-animation: sk-bounce 2s infinite ease-in-out;
+  animation: sk-bounce 2s infinite ease-in-out;
+}
+.dot2 {
+  top: auto;
+  bottom: 0;
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+@-webkit-keyframes sk-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes sk-rotate {
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes sk-bounce {
+  0%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes sk-bounce {
+  0%,
+  100% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
   }
 }
 </style>

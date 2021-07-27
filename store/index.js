@@ -120,8 +120,8 @@ export const state = () => ({
     text_btn: 'Conócenos',
   },
   modalpolitics05: false,
+  modalproductDetails: false,
   stateWapiME: true,
-  /////
   storeLayout: {
     pages: [
       {
