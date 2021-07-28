@@ -22,7 +22,7 @@
       ]"
     >
       <div class="product-text">
-        <p class="tittle">{{ productList.title }}</p>
+        <span class="tittle">{{ productList.title }}</span>
       </div>
       <div class="content-item">
         <div class="content-item-productos">
@@ -67,6 +67,8 @@ export default {
   name: 'Ko-ProductList',
   mounted() {
     this.clear()
+    var el = document.querySelector('.tittle')
+    el.innerHTML = el.innerHTML.replace(/&nbsp;/g, ' ')
   },
   computed: {
     listProducts() {
@@ -193,8 +195,9 @@ export default {
 @media (max-width: 460px) {
   .product-text {
     width: 90%;
-    height: auto;
-    word-wrap: break-word;
+    /* height: auto; */
+    /* word-wrap: break-word; */
+    /* overflow: hidden; */
   }
 }
 </style>

@@ -89,6 +89,7 @@ export default {
   @apply flex flex-col justify-center items-center w-full my-60;
 }
 .product-tittle {
+  text-align: center;
   @apply flex flex-col justify-center items-center;
 }
 .tittle {
