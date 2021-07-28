@@ -154,15 +154,6 @@
             </div>
             <button
               class="btn-responsive"
-              :style="`background: ${
-                settingByTemplate && settingByTemplate.color_primario
-                  ? settingByTemplate.color_primario
-                  : '#25D366'
-              }; color:${
-                settingByTemplate && settingByTemplate.color_secundario
-                  ? settingByTemplate.color_secundario
-                  : '#FFFFFF'
-              };`"
               ref="color2"
               v-if="!spent && salesData.precio > 0"
               v-on:click="addShoppingCart"
@@ -173,15 +164,6 @@
             </button>
             <button
               class="btn-responsive"
-              :style="`background: ${
-                settingByTemplate && settingByTemplate.color_primario
-                  ? settingByTemplate.color_primario
-                  : '#25D366'
-              }; color:${
-                settingByTemplate && settingByTemplate.color_secundario
-                  ? settingByTemplate.color_secundario
-                  : '#FFFFFF'
-              };`"
               ref="color2"
               v-else-if="salesData.precio == 0 && !spent"
               v-on:click="WPQuotation()"
@@ -451,16 +433,6 @@ export default {
             this.data.detalle.categoria_producto.nombre_categoria_producto &&
           product.id !== this.data.detalle.id
       )
-    },
-    stateWapiME() {
-      return this.$store.state.stateWapiME
-    },
-    settingByTemplate() {
-      if (this.$store.state.settingByTemplate) {
-        return this.$store.state.settingByTemplate
-      } else {
-        return this.$store.state.settingBaseWapir
-      }
     },
   },
   methods: {
@@ -1076,6 +1048,8 @@ export default {
   margin-left: 15px;
   cursor: pointer;
   transition: all 200ms ease-in;
+  background: #222;
+  color: #fff;
 }
 .btn-responsive span {
   font-size: 16px;
@@ -1168,7 +1142,6 @@ export default {
 .swiper-container {
   border-radius: 6px;
 }
-
 .swiper-pagination-bullet-active {
   background: black;
 }
