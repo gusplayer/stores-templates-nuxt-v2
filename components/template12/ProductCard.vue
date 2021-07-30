@@ -328,7 +328,9 @@ export default {
   filter: grayscale(100%);
 }
 .wrapper-price {
-  width: 100%;
+  /* width: 100%; */
+  display: flex;
+  justify-content: flex-end;
 }
 .wrapper-text {
   @apply w-full flex-col;
@@ -341,16 +343,20 @@ export default {
     @apply items-center justify-center;
   }
 }
-
 @media (max-width: 450px) {
   .wrapper-text {
     max-width: 160px;
+    margin-right: 3px;
+  }
+  .wrapper_card {
+    align-items: flex-start;
   }
   .wrapper_card > div:nth-child(1) {
-    max-width: 70px;
+    max-width: 80px;
+    margin-right: 10px;
   }
   .wrapper_card > div:nth-child(3) {
-    max-width: 80px;
+    max-width: 100px;
   }
   .product-image {
     max-width: 70px;

@@ -9,9 +9,9 @@
         v-for="category in dataStore.categorias"
         :key="category.id"
       >
-        <header class="text-center mb-20">
+        <header class="text-center">
           <h2
-            class="font-semibold text-4xl uppercase"
+            class="text-title"
             :style="`color:${settingByTemplate12.titleColor};`"
           >
             {{ category.nombre_categoria_producto }}
@@ -116,13 +116,15 @@ export default {
   margin: 0 auto;
 }
 .products-wrapper {
-  padding: 40px 10px 20px;
+  padding: 60px 10px 20px;
   max-width: 940px;
   width: 100%;
   margin: 0 auto;
   display: grid;
   -ms-grid-columns: repeat(2, minmax(420px, 1fr));
   grid-template-columns: repeat(2, minmax(420px, 1fr));
+  column-gap: 20px;
+  /* row-gap: 15px; */
 }
 .modal {
   padding-top: 200px;
@@ -130,15 +132,27 @@ export default {
   background-color: rgba(0, 0, 0, 0.4);
   @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
 }
+.text-title {
+  @apply font-semibold text-4xl uppercase;
+}
 @media (max-width: 800px) {
   .products-wrapper {
     -ms-grid-columns: repeat(1, minmax(100%, 1fr));
     grid-template-columns: repeat(1, minmax(100%, 1fr));
   }
+  .text-title {
+    @apply text-2xl;
+  }
 }
 @media (max-width: 500px) {
   .modal {
     padding-top: 80px;
+  }
+  .products-wrapper {
+    padding: 25px 10px 20px;
+  }
+  .text-title {
+    @apply text-2xl;
   }
 }
 </style>

@@ -150,12 +150,36 @@ export default {
     height: 300px;
   }
 }
+@media (max-width: 450px) {
+  .content-text {
+    height: 270px;
+  }
+  .hero-image_container {
+    height: 270px;
+  }
+}
 @media (max-width: 400px) {
   .content-text {
     height: 250px;
   }
   .hero-image_container {
     height: 250px;
+  }
+}
+@media (max-width: 350px) {
+  .content-text {
+    height: 220px;
+  }
+  .hero-image_container {
+    height: 220px;
+  }
+}
+@media (max-width: 350px) {
+  .content-text {
+    height: 211px;
+  }
+  .hero-image_container {
+    height: 211px;
   }
 }
 </style>
