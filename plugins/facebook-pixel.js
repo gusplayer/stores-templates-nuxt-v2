@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-export default ({ app, store }) => {
+export default ({ store }) => {
   let pixel_facebook =
     store.state.analytics_tagmanager != null &&
     store.state.analytics_tagmanager.pixel_facebook

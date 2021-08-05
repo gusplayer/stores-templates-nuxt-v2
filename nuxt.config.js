@@ -37,6 +37,7 @@ export default {
     '~plugins/validate.js',
     '~/plugins/facebook-pixel',
     { src: '~/plugins/i18n' },
+    { src: '~/plugins/chatFacebook.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-carrusel.js', ssr: false },
