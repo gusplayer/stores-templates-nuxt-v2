@@ -116,15 +116,51 @@
             <!-- <p class="text-marca">
               <strong>{{ data.info.marca }}</strong>
             </p> -->
-            <p class="text-precio" v-show="salesData.precio">
-              {{
+            
+            <p
+              class="text-promocion"
+              v-show="
+                data.info.tag_promocion == 1 &&
+                data.info.promocion_valor &&
                 salesData.precio
+              "
+            >
+              {{
+                (data.info.tag_promocion == 1 && data.info.promocion_valor
+                  ? Math.trunc(
+                      salesData.precio / (1 - data.info.promocion_valor / 100)
+                    )
+                  : 0)
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
                   )
               }}
             </p>
+            <div
+              class="wrapper-price"
+              :class="data.info.tag_promocion == 1 ? '' : 'wrapper-price_space'"
+            >
+              <p class="text-precio" v-show="salesData.precio">
+                {{
+                  salesData.precio
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
+              <p
+                class="card-descuento"
+                v-show="
+                  data.info.tag_promocion == 1 &&
+                  data.info.promocion_valor &&
+                  salesData.precio
+                "
+              >
+                {{ data.info.promocion_valor }}% OFF
+              </p>
+            </div>
             <!-- Envios gratis -->
             <div class="content_buy_action">
               <div v-if="data.detalle.envio_gratis == 1 && salesData.unidades > 0">
@@ -1078,7 +1114,7 @@ export default {
   background: #35dd8d;
   border-radius: 3px;
   padding: 0px 5px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 .content-text-desc {
   margin-top: 10px;
