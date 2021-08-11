@@ -80,6 +80,10 @@ export default {
                   this.settingByTemplate7 && this.settingByTemplate7.blog1
                     ? this.settingByTemplate7.blog1
                     : null,
+                settingK07Blog1:
+                  this.settingByTemplate7 && this.settingByTemplate7.blog
+                    ? this.settingByTemplate7.blog
+                    : null,
               },
             ]
           : null,

@@ -34,7 +34,7 @@
     >
       <div
         class="banner-blog"
-        :style="`background-image: url(${this.settingByTemplate7[0].settingK07Blog.url_img})`"
+        :style="`background-image: url(${this.settingByTemplate7[0].settingK07Blog1['--url_img']})`"
       >
         <div class="tittle-banner-blog">
           <p class="txt-banner">{{ dataStore.tienda.nombre }}</p>
@@ -170,7 +170,7 @@
               ></KoProductCard1>
             </div>
           </div>
-          <div v-if="(filteredList.length == 0)" class="content-products-empty">
+          <div v-if="filteredList.length == 0" class="content-products-empty">
             <div class="header-content-logo">
               <nuxt-link to="/" class="wrapper-logo">
                 <img
