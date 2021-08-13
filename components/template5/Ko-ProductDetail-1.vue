@@ -169,7 +169,7 @@
                 </p>
               </div>
             </div>
-            <div v-if="data.info.descripcion_corta" style="margin-bottom: 5px;">
+            <div v-if="data.info.descripcion_corta" style="margin-bottom: 5px">
               <p class="text-marca">
                 <strong>{{ data.info.descripcion_corta }}</strong>
               </p>
@@ -184,8 +184,9 @@
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
-                    >{{ item.option }}</option
                   >
+                    {{ item.option }}
+                  </option>
                 </selectGroup>
               </div>
             </div>
@@ -223,8 +224,21 @@
                     <button
                       ref="colorBtn"
                       class="btn"
-                      v-if="!spent"
+                      v-if="
+                        !spent &&
+                        (data.info.tipo_servicio == null ||
+                          data.info.tipo_servicio == '0')
+                      "
                       v-on:click="addShoppingCart"
+                      id="AddToCartTag"
+                    >
+                      {{ $t('productdetail_btnAgregar') }}
+                    </button>
+                    <button
+                      ref="colorBtn"
+                      class="btn"
+                      v-if="!spent && data.info.tipo_servicio == '1'"
+                      v-on:click="GoPayments"
                       id="AddToCartTag"
                     >
                       {{ $t('productdetail_btnComprar') }}
@@ -239,7 +253,7 @@
                     </button>
                   </div>
                   <div class="content-shared">
-                    <p class="text-unidades" style="margin-right: 10px;">
+                    <p class="text-unidades" style="margin-right: 10px">
                       {{ $t('productdetail_compartir') }}
                     </p>
                     <a
@@ -291,7 +305,7 @@
               </div>
             </transition>
           </div>
-          <div style="width: 100%; margin-left: 10px;">
+          <div style="width: 100%; margin-left: 10px">
             <div class="content_buy_action-responsive" v-if="spent">
               <p class="card-info-1-res">{{ $t('home_cardAgotado') }}</p>
             </div>
@@ -302,7 +316,7 @@
               v-on:click="addShoppingCart"
             >
               <cartArrowDown class="card-icon-cart" />{{
-                $t('home_cardAgregar')
+                $t('productdetail_btnAgregar')
               }}
             </button>
           </div>
@@ -606,8 +620,7 @@ export default {
             case 'precio':
               this.envio = {
                 titulo: 'Tarifa por precio',
-                desc:
-                  'Segun la suma del costo de tus productos te cobraran el envio',
+                desc: 'Segun la suma del costo de tus productos te cobraran el envio',
               }
               break
             case 'precio_ciudad':
@@ -652,7 +665,8 @@ export default {
       this.existYoutube = false
     },
     videoYoutube(url) {
-      let myregexp = /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+      let myregexp =
+        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
       let id = ''
       if (url && url !== '' && url !== 'null') {
         this.validVideo = true
@@ -683,9 +697,8 @@ export default {
         product.limitQuantity = this.data.info.inventario
       }
       if (typeof this.productIndexCart === 'number') {
-        const mutableProduct = this.$store.state.productsCart[
-          this.productIndexCart
-        ]
+        const mutableProduct =
+          this.$store.state.productsCart[this.productIndexCart]
         mutableProduct.cantidad += this.data.cantidad
         this.$store.state.productsCart.splice(
           this.productIndexCart,
@@ -711,6 +724,35 @@ export default {
       this.$router.push('/')
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
+    },
+    GoPayments() {
+      let objeto = {
+        cantidad: this.quantityValue,
+        id: this.data.info.id,
+      }
+
+      let json = {
+        products: objeto,
+        tienda: {
+          id: this.$store.state.tienda.id_tienda,
+        },
+      }
+      json = JSON.stringify(json)
+      if (json) {
+        if (this.layourUnicentro == true) {
+          window.open(`https://checkout.komercia.co/?params=${json}`)
+          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+            window.fbq('track', 'InitiateCheckout')
+          }
+          this.$gtm.push({ event: 'InitiateCheckout' })
+        } else {
+          location.href = `https://checkout.komercia.co/?params=${json}`
+          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+            window.fbq('track', 'InitiateCheckout')
+          }
+          this.$gtm.push({ event: 'InitiateCheckout' })
+        }
+      }
     },
     evalStock(mq, qv) {
       return !(mq - qv < 0)

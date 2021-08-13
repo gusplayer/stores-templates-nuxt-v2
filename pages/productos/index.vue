@@ -135,7 +135,11 @@ export default {
         e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component) {
-          this.$store.commit('SET_CURRENTSETTING09', e.data)
+          if (e.data.template == 9) {
+            this.$store.commit('SET_CURRENTSETTING09', e.data)
+          } else if (e.data.template == 7) {
+            this.$store.commit('SET_CURRENTSETTING07', e.data)
+          }
         } else if (e && e.data && e.data.returnHome == true) {
           this.$router.push({
             path: '/',

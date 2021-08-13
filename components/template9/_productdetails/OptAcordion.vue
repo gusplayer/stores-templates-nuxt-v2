@@ -484,6 +484,7 @@ export default {
 }
 .editor >>> .el-tiptap-editor__content .image-view__body__image {
   cursor: none;
+  pointer-events: none;
 }
 .editor >>> .el-popper.el-tiptap-image-popper {
   display: none;

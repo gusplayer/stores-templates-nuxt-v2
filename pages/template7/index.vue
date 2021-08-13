@@ -100,7 +100,7 @@ export default {
   },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
+    window.addEventListener('message', this.addEventListenertemplate07)
   },
   data() {
     return {
@@ -172,20 +172,25 @@ export default {
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenertemplate07)
   },
   methods: {
-    addEventListenertemplate(e) {
+    addEventListenertemplate07(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
       ) {
-        if (e && e.data && e.data.component) {
+        if (e && e.data && e.data.component && e.data.template == 7) {
           this.$store.commit('SET_CURRENTSETTING07', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1
           }
-        } else if (e && e.data && e.data.componentToEdit) {
+        } else if (
+          e &&
+          e.data &&
+          e.data.componentToEdit &&
+          e.data.template == 7
+        ) {
           switch (e.data.componentToEdit) {
             case 'settingGeneral':
               this.moverseA('kbannerX')

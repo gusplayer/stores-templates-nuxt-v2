@@ -29,7 +29,7 @@
         <p>
           {{ $t('productdetail_opcionesPagoMsg') }}
         </p>
-        <ul style="list-style: none;">
+        <ul style="list-style: none">
           <li v-if="mediospago.consignacion == 1">
             <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
             <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
@@ -656,6 +656,7 @@ li p {
 }
 .editor >>> .el-tiptap-editor__content .image-view__body__image {
   cursor: none;
+  pointer-events: none;
 }
 .editor >>> .el-popper.el-tiptap-image-popper {
   display: none;

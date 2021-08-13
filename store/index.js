@@ -72,6 +72,7 @@ export const state = () => ({
   settingByTemplate: '',
   settingByTemplate7: '',
   settingByTemplate9: '',
+  settingByTemplate11: '',
   settingByTemplate12: '',
   category_producto_header: '',
   subcategory_producto_header: '',
@@ -276,6 +277,21 @@ export const mutations = {
       }
     }
   },
+  SET_CURRENTSETTING11(state, value) {
+    if (value && value.component) {
+      switch (value.component) {
+        case 'settingGeneral':
+          state.settingByTemplate11.settingGeneral = value.setting
+          break
+        case 'header':
+          state.settingByTemplate11.header = value.setting
+          break
+        case 'banner':
+          state.settingByTemplate11.banner = value.setting
+          break
+      }
+    }
+  },
   SET_CURRENTSETTING12(state, value) {
     if (value && value.data) {
       state.settingByTemplate12 = value.data
@@ -397,6 +413,9 @@ export const mutations = {
   },
   SET_SETTINGS_BY_TEMPLATE_9: (state, value) => {
     state.settingByTemplate9 = value
+  },
+  SET_SETTINGS_BY_TEMPLATE_11: (state, value) => {
+    state.settingByTemplate11 = value
   },
   SET_SETTINGS_BY_TEMPLATE_12: (state, value) => {
     state.settingByTemplate12 = value
@@ -554,6 +573,13 @@ export const actions = {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch('GET_SETTINGS_BY_TEMPLATE_9', state.dataStore.tienda)
           }
+        } else if (id.data.data.template == 11) {
+          if (state.dataStore && state.dataStore.tienda) {
+            await dispatch(
+              'GET_SETTINGS_BY_TEMPLATE_11',
+              state.dataStore.tienda
+            )
+          }
         } else if (id.data.data.template == 12) {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch(
@@ -624,6 +650,12 @@ export const actions = {
       `https://node.komercia.co/template9?id=${store.id_tienda}`
     )
     commit('SET_SETTINGS_BY_TEMPLATE_9', response.data.body)
+  },
+  async GET_SETTINGS_BY_TEMPLATE_11({ commit }, store) {
+    const response = await axios.get(
+      `https://node.komercia.co/template11?id=${store.id_tienda}`
+    )
+    commit('SET_SETTINGS_BY_TEMPLATE_11', response.data.body)
   },
   async GET_SETTINGS_BY_TEMPLATE_12({ commit }, store) {
     const response = await axios.get(
