@@ -180,17 +180,17 @@ export default {
       case 9:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
+          this.settingByTemplate9 &&
+          this.settingByTemplate9.settingGeneral &&
+          this.settingByTemplate9.settingGeneral.fount_1
+            ? this.settingByTemplate9.settingGeneral.fount_1
             : 'Poppins'
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra2 =
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
+          this.settingByTemplate9 &&
+          this.settingByTemplate9.settingGeneral &&
+          this.settingByTemplate9.settingGeneral.fount_2
+            ? this.settingByTemplate9.settingGeneral.fount_2
             : 'Roboto'
         break
       case 10:
@@ -201,6 +201,15 @@ export default {
           this.settingByTemplate.settings.tipo_letra
             ? this.settingByTemplate.settings.tipo_letra
             : 'Poppins'
+        break
+      case 11:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate11 &&
+          this.settingByTemplate11.settingGeneral &&
+          this.settingByTemplate.settingGeneral.fount_1
+            ? this.settingByTemplate.settingGeneral.fount_1
+            : 'Roboto'
         break
       case 99:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -390,7 +399,6 @@ export default {
             this.template == 5 ||
             this.template == 6 ||
             this.template == 10 ||
-            this.template == 11 ||
             this.template == 99 ||
             this.template == 12
               ? `https://fonts.googleapis.com/css?family=${tipo_letra}:100,200,300,400,500,600,700,800,900&display=swap`
@@ -429,6 +437,13 @@ export default {
           href:
             this.template == 9
               ? `https://fonts.googleapis.com/css2?family=${tipo_letra2}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 11
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
               : '',
           rel: 'stylesheet',
         },
@@ -547,6 +562,9 @@ export default {
     settingByTemplate9() {
       return this.$store.state.settingByTemplate9
     },
+    settingByTemplate11() {
+      return this.$store.state.settingByTemplate11
+    },
     settingByTemplate12() {
       return this.$store.state.settingByTemplate12
     },
@@ -597,6 +615,30 @@ export default {
                   this.settingByTemplate9 &&
                   this.settingByTemplate9.settingGeneral
                     ? this.settingByTemplate9.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate11: this.settingByTemplate11
+          ? [
+              {
+                setting11Header:
+                  this.settingByTemplate11 && this.settingByTemplate11.header
+                    ? this.settingByTemplate11.header
+                    : null,
+                setting11Footer:
+                  this.settingByTemplate11 && this.settingByTemplate11.footer
+                    ? this.settingByTemplate11.footer
+                    : null,
+                setting11General:
+                  this.settingByTemplate11 &&
+                  this.settingByTemplate11.settingGeneral
+                    ? this.settingByTemplate11.settingGeneral
+                    : null,
+                newsletter:
+                  this.settingByTemplate11 &&
+                  this.settingByTemplate11.newsletter
+                    ? this.settingByTemplate11.newsletter
                     : null,
               },
             ]

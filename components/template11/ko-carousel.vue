@@ -1,25 +1,39 @@
 <template>
-  <!-- <div class="content-carousel"> -->
   <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
     <div class="swiper-wrapper z-auto">
-      <div
+      <a
         class="swiper-slide"
-        :id="`slide${index + 1}`"
-        v-for="(banner, index) in this.Banners"
+        v-for="(banner, index) in this.settingKbanner.values"
         :key="index"
+        :class="banner.visbleBtn ? 'pointer-events-none' : 'cursorPointer'"
+        :href="`${banner.visbleBtn ? '' : banner.url_redirect}`"
+        rel="noreferrer noopener"
       >
-        <img class="slide-bg" :src="banner.slide" alt="Bg-Image" />
-        <CarouselContent class="absolute" :banner="banner"></CarouselContent>
-      </div>
+        <img
+          class="slide-bgWeb"
+          :src="banner.url_img_background"
+          alt="Bg-Image"
+        />
+        <img
+          class="slide-bgMovil"
+          :src="banner.url_img_background_res"
+          alt="Bg-Image"
+        />
+        <CarouselContent class="absolute" :banner="banner" />
+      </a>
     </div>
   </div>
-  <!-- </div> -->
 </template>
 <script>
 import CarouselContent from '../../components/template11/_carouselBanner/banner-carousel'
 export default {
+  name: 'Ko-Banner',
   components: {
     CarouselContent,
+  },
+  props: {
+    settingKbanner: Object,
+    settingGeneral: Object,
   },
   data() {
     return {
@@ -41,20 +55,6 @@ export default {
           disableOnInteraction: false,
         },
       },
-      Banners: [
-        {
-          slide:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1616108946/Template11/Carousel/sample-1_ltoymz.jpg',
-          txt1: 'Tendencias de moda 2020',
-          txt2: 'Ultimo atuendo de modas',
-        },
-        {
-          slide:
-            'https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1616108946/Template11/Carousel/sample-2_wp40pi.jpg',
-          txt1: 'Tendencias de moda 2020',
-          txt2: 'Explora el grado de modas',
-        },
-      ],
     }
   },
 }
@@ -63,15 +63,29 @@ export default {
 .content-carousel {
   @apply w-full flex flex-col justify-center items-center;
 }
-.slide-bg {
-  @apply w-full object-center object-cover;
-}
 .swiper-slide {
   @apply w-full flex justify-center items-center z-10;
 }
+.slide-bgWeb {
+  display: initial;
+  @apply w-full object-center object-cover;
+}
+.slide-bgMovil {
+  display: none;
+}
 @media (min-width: 1400px) {
-  .slide-bg {
+  .slide-bgWeb,
+  .slide-bgMovil {
     max-height: 732px;
+  }
+}
+@media (max-width: 768px) {
+  .slide-bgWeb {
+    display: none;
+  }
+  .slide-bgMovil {
+    display: initial;
+    @apply w-full object-center object-cover;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="content-networks">
+  <div class="content-networks" :style="footerIcon">
     <a
       class="social-networks"
       target="_blank"
@@ -41,7 +41,7 @@
         height="18px"
         width="18px"
         viewBox="0 0 512 512"
-        style="enable-background: new 0 0 512 512;"
+        style="enable-background: new 0 0 512 512"
         xml:space="preserve"
       >
         <g>
@@ -106,7 +106,7 @@ export default {
   name: 'Ko-Social-Networks',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    footerIcon: Object,
   },
   data() {
     return {
@@ -131,7 +131,7 @@ export default {
   @apply w-auto flex flex-row justify-center items-center;
 }
 .icon {
-  color: #a3a3a3;
+  color: var(--color_icon);
 }
 .icon:hover {
   color: #fff;

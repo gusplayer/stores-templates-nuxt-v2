@@ -1,5 +1,5 @@
 <template>
-  <div class="producto">
+  <div class="producto" :style="settingKcardProduct">
     <div class="container">
       <router-link
         :to="{ path: `/productos/` + product.slug }"
@@ -21,125 +21,6 @@
         </client-only>
         <div class="image_overlay"></div>
       </router-link>
-      <!-- <div class="overlay-top" v-if="getFreeShipping == false && !soldOut">
-        <div class="icons-hover">
-          <div class="transport-icon">
-            <svg
-              class="transporte-icon"
-              v-if="getFreeShipping == false && !soldOut"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              version="1.1"
-              width="25px"
-              height="25px"
-              viewBox="0 0 24 24"
-              fill="#333"
-            >
-              <path
-                d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3M5 10.5L6.5 9L8 10.5L11.5 7L13 8.5L8 13.5L5 10.5Z"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div class="overlay-free" v-if="getFreeShipping == false && !soldOut">
-        <div class="text-free">
-          <p class="txt-free">{{ $t('home_cardGratis') }}</p>
-        </div>
-      </div>
-      <div class="overlay-polygon" v-if="getFreeShipping == false && !soldOut">
-        <svg
-          class="icon-overlay-free"
-          width="12px"
-          height="12px"
-          viewBox="0 0 255 255"
-        >
-          <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
-        </svg>
-      </div>
-      <div class="overlay-sould" v-if="soldOut">
-        <div class="text-sould">
-          <svg
-            class="svg-sould-out"
-            xmlns="http://www.w3.org/2000/svg"
-            id="Layer_1"
-            enable-background="new 0 0 512 512"
-            viewBox="0 0 512 512"
-          >
-            <g>
-              <g>
-                <path
-                  d="m256 116.457h-16c-13.255 0-24-10.745-24-24 0-13.255 10.745-24 24-24h16c13.255 0 24 10.745 24 24 0 13.255-10.745 24-24 24z"
-                  fill="#cd3232"
-                />
-              </g>
-              <g>
-                <path
-                  d="m464 460.457h-416c-17.673 0-32-14.327-32-32v-160c0-17.673 14.327-32 32-32h416c17.673 0 32 14.327 32 32v160c0 17.673-14.327 32-32 32z"
-                  fill="#cd3232"
-                />
-              </g>
-              <g>
-                <path
-                  d="m432 460.457h-384c-17.673 0-32-14.327-32-32v-160c0-17.673 14.327-32 32-32h384c17.673 0 32 14.327 32 32v160c0 17.673-14.327 32-32 32z"
-                  fill="#ff4646"
-                />
-              </g>
-              <g><circle cx="96" cy="268.457" fill="#cd3232" r="16" /></g>
-              <g><circle cx="384" cy="268.457" fill="#cd3232" r="16" /></g>
-              <g>
-                <path
-                  d="m384.008 277.371c-2.993 0-5.916-1.507-7.6-4.243l-119.614-194.373c-3.562-5.789-9.998-9.384-16.794-9.384s-13.232 3.596-16.794 9.384l-119.615 194.373c-2.58 4.193-8.071 5.498-12.263 2.92-4.192-2.58-5.5-8.07-2.92-12.263l119.615-194.373c6.783-11.022 19.036-17.869 31.977-17.869s25.194 6.847 31.977 17.869l119.614 194.374c2.58 4.192 1.272 9.683-2.92 12.263-1.456.895-3.069 1.322-4.663 1.322z"
-                  fill="#463c4b"
-                />
-              </g>
-              <g><circle cx="240" cy="92.457" fill="#ff4646" r="24" /></g>
-              <g>
-                <g>
-                  <path
-                    d="m72 416.457c-11.028 0-20-8.972-20-20v-8c0-2.209 1.791-4 4-4s4 1.791 4 4v8c0 6.617 5.383 12 12 12s12-5.383 12-12v-22.111c0-4.575-2.542-8.688-6.634-10.733l-14.311-7.155c-6.819-3.411-11.055-10.265-11.055-17.89v-22.111c0-11.028 8.972-20 20-20s20 8.972 20 20v8c0 2.209-1.791 4-4 4s-4-1.791-4-4v-8c0-6.617-5.383-12-12-12s-12 5.383-12 12v22.111c0 4.575 2.542 8.688 6.634 10.733l14.311 7.155c6.819 3.41 11.055 10.265 11.055 17.889v22.111c0 11.029-8.972 20.001-20 20.001z"
-                    fill="#32283c"
-                  />
-                </g>
-                <g>
-                  <path
-                    d="m128 416.457c-11.028 0-20-8.972-20-20v-80c0-11.028 8.972-20 20-20s20 8.972 20 20v80c0 11.028-8.972 20-20 20zm0-112c-6.617 0-12 5.383-12 12v80c0 6.617 5.383 12 12 12s12-5.383 12-12v-80c0-6.617-5.383-12-12-12z"
-                    fill="#32283c"
-                  />
-                </g>
-                <g>
-                  <path
-                    d="m304 416.457c-11.028 0-20-8.972-20-20v-80c0-11.028 8.972-20 20-20s20 8.972 20 20v80c0 11.028-8.972 20-20 20zm0-112c-6.617 0-12 5.383-12 12v80c0 6.617 5.383 12 12 12s12-5.383 12-12v-80c0-6.617-5.383-12-12-12z"
-                    fill="#e6e6eb"
-                  />
-                </g>
-                <g>
-                  <path
-                    d="m200 416.457h-16c-11.028 0-20-8.972-20-20v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 6.617 5.383 12 12 12h16c2.209 0 4 1.791 4 4s-1.791 4-4 4z"
-                    fill="#32283c"
-                  />
-                </g>
-                <g>
-                  <path
-                    d="m232 416.457h-16c-2.209 0-4-1.791-4-4v-112c0-2.209 1.791-4 4-4h16c11.028 0 20 8.972 20 20v80c0 11.028-8.972 20-20 20zm-12-8h12c6.617 0 12-5.383 12-12v-80c0-6.617-5.383-12-12-12h-12z"
-                    fill="#32283c"
-                  />
-                </g>
-                <g>
-                  <path
-                    d="m360 416.457c-11.028 0-20-8.972-20-20v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 6.617 5.383 12 12 12s12-5.383 12-12v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 11.028-8.972 20-20 20z"
-                    fill="#e6e6eb"
-                  />
-                </g>
-                <path
-                  d="m424 296.457h-32c-2.209 0-4 1.791-4 4s1.791 4 4 4h12v108c0 2.209 1.791 4 4 4s4-1.791 4-4v-108h12c2.209 0 4-1.791 4-4s-1.791-4-4-4z"
-                  fill="#e6e6eb"
-                />
-              </g>
-            </g>
-          </svg>
-        </div>
-      </div> -->
     </div>
     <div class="datos-producto">
       <router-link :to="{ path: `/productos/` + product.slug }">
@@ -197,7 +78,6 @@
             }}
           </p>
         </div>
-        <!-- <div v-else class="h-20"></div> -->
       </div>
     </div>
   </div>
@@ -208,7 +88,7 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard',
-  props: { product: Object },
+  props: { product: Object, settingKcardProduct: Object },
 
   data() {
     return {
@@ -255,6 +135,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },
@@ -336,9 +217,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,
@@ -446,6 +326,7 @@ export default {
   @apply w-full object-cover overflow-hidden;
 }
 .producto {
+  background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
 .datos-producto {
@@ -478,22 +359,16 @@ export default {
   @apply w-full flex justify-center items-center;
 }
 .card-title {
-  color: #777;
-  font-family: 'Roboto', sans-serif !important;
+  font-size: var(--fontSizeTitle);
   @apply pt-10 transition-all ease-out duration-0.2;
 }
-/* .card-title:hover {
-  color: #777;
-  @apply transition-all ease-out duration-0.2 cursor-pointer whitespace-nowrap text-center;
-} */
 .separator-price {
   font-size: 16px;
-  color: #222;
+  color: var(--color_price);
   margin-top: 10px;
-  font-family: 'Roboto', sans-serif !important;
 }
 .text-price {
-  color: #000;
+  font-size: var(--fontSizePretitle);
   @apply text-center font-semibold mt-10;
 }
 .text-free {
@@ -545,10 +420,16 @@ export default {
 }
 @screen sm {
   .card-title {
+    color: var(--color_title);
+    font-weight: var(--fontWeighTitle);
+    font-family: var(--font-style-1) !important;
     font-size: 14px;
   }
   .text-price {
     font-size: 13px;
+    color: var(--color_price);
+    font-weight: var(--fontWeighPretitle);
+    font-family: var(--font-style-1) !important;
   }
   .content-text-price,
   .content-price {
@@ -599,7 +480,6 @@ export default {
     width: 40px;
     height: 40px;
   }
-
   .separator-price {
     @apply mx-1;
   }
@@ -619,7 +499,6 @@ export default {
     font-size: 16px;
   }
 }
-
 @screen mlg {
   .icon {
     margin-top: 0px;

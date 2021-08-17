@@ -1,9 +1,19 @@
 <template>
-  <div class="product-content">
-    <div class="producto-items-content">
+  <div class="product-content" :style="[settingKtrending, settingGeneral]">
+    <div
+      class="producto-items-content"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingGeneral && this.settingGeneral.fount_1
+              ? this.settingGeneral.fount_1
+              : 'Roboto',
+        },
+      ]"
+    >
       <div class="product-text">
         <div class="product-tittle">
-          <p class="tittle">Producto de tendencia</p>
+          <p class="tittle">{{ settingKtrending.title }}</p>
         </div>
       </div>
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
@@ -13,11 +23,15 @@
             :key="product.id"
             class="swiper-slide"
           >
-            <KoproductCard :product="product" class="gifyload"></KoproductCard>
+            <KoproductCard
+              :product="product"
+              :settingKcardProduct="settingKcardProduct"
+              class="gifyload"
+            ></KoproductCard>
           </div>
         </div>
         <div
-          v-if="(this.fullProducts.length == 0)"
+          v-if="this.fullProducts.length == 0"
           class="content-products-empty"
         >
           <p>{{ $t('home_msgCatalogo') }}</p>
@@ -36,6 +50,9 @@ export default {
   props: {
     dataStore: Object,
     fullProducts: {},
+    settingKtrending: Object,
+    settingGeneral: Object,
+    settingKcardProduct: Object,
   },
   name: 'Ko-trending',
   data() {
@@ -43,10 +60,9 @@ export default {
       swiperOption: {
         slidesPerView: '',
         spaceBetween: '',
-        // autoplay: {
-        //   delay: 6000,
-        //   disableOnInteraction: false,
-        // },
+        autoplay: {
+          delay: 4000,
+        },
         breakpoints: {
           10000: {
             slidesPerView: 3,
@@ -81,7 +97,8 @@ export default {
   @apply shadow-lg;
 }
 .product-content {
-  @apply flex flex-col justify-center items-center w-full mb-40;
+  background: var(--background_color_1);
+  @apply flex flex-col justify-center items-center w-full pb-40;
 }
 .product-text {
   @apply flex flex-col justify-center items-center w-full text-center;
@@ -90,20 +107,19 @@ export default {
 .tittle {
   @apply flex flex-col justify-center items-center text-center;
 }
-
 @screen sm {
   .producto-items-content {
     @apply w-9/0;
   }
   .tittle {
-    color: #000;
+    color: var(--color_title);
     font-size: 20px;
-    font-family: 'Roboto', sans-serif;
-    @apply font-bold tracking-0 capitalize;
+    font-family: var(--font-style-1);
+    font-weight: var(--fontWeight);
+    @apply tracking-0 capitalize;
   }
-
   .product-text {
-    @apply mb-40;
+    margin-bottom: var(--marginbottomTitle);
   }
 }
 @screen md {
@@ -111,7 +127,7 @@ export default {
     @apply w-9/5;
   }
   .tittle {
-    font-size: 30px;
+    font-size: var(--fontSize);
   }
 }
 @screen lg {
@@ -124,13 +140,8 @@ export default {
     width: 1200px;
   }
   .tittle {
-    font-size: 30px;
+    font-size: var(--fontSize);
     @apply pb-10 leading-50;
-  }
-  .subtittle {
-    font-size: 15px;
-    max-width: 560px;
-    @apply w-full mb-50 leading-25;
   }
 }
 </style>

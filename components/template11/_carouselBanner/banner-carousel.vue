@@ -1,13 +1,23 @@
 <template>
   <div class="content-carousel">
     <div class="content-txt">
-      <p class="txt-top">{{ banner.txt1 }}</p>
-      <div class="separator"></div>
-      <p class="txt-bottom">{{ banner.txt2 }}</p>
+      <p class="txt-top" :style="`color: ${banner.colorPretitle};`">
+        {{ banner.pretitle }}
+      </p>
+      <div
+        class="separator"
+        :style="`background: ${banner.color_border};`"
+      ></div>
+      <p class="txt-bottom" :style="`color: ${banner.colorTitle};`">
+        {{ banner.title }}
+      </p>
     </div>
-    <div class="content-btn">
-      <nuxt-link to="/productos">
-        <button class="btn">
+    <div class="content-btn" v-if="banner.visbleBtn">
+      <nuxt-link :to="banner.url_redirect">
+        <button
+          class="btn"
+          :style="`background: ${banner.color_background_btn}; color: ${banner.color_text_btn}; margin-top:${banner.marginTopBtn};`"
+        >
           {{ $t('home_comprarAhora') }}
         </button>
       </nuxt-link>
@@ -17,7 +27,7 @@
 <script>
 export default {
   props: {
-    banner: {},
+    banner: Object,
   },
 }
 </script>
@@ -33,29 +43,22 @@ export default {
 }
 @screen sm {
   .txt-top {
-    color: #fff;
     font-size: 12px;
-    font-family: 'Roboto', sans-serif;
     @apply font-light tracking-1 capitalize;
   }
   .txt-bottom {
-    color: #fff;
     font-size: 16px;
-    font-family: 'Roboto Condensed', sans-serif;
     @apply font-bold uppercase tracking-0;
   }
   .btn {
-    color: #000;
-    background-color: #fff;
     font-size: 10px;
-    @apply font-normal leading-21 uppercase mt-15 px-14 py-4;
+    @apply font-normal leading-21 uppercase px-14 py-4;
   }
   .btn:hover {
     color: #fff;
     background-color: #000;
   }
   .separator {
-    background: #fff;
     @apply w-60 h-1 my-10 uppercase;
   }
 }
@@ -68,7 +71,6 @@ export default {
   }
   .btn {
     font-size: 12px;
-    @apply mt-40 px-22 py-9;
   }
 }
 @screen lg {
@@ -77,7 +79,6 @@ export default {
   }
   .btn {
     font-size: 14px;
-    @apply mt-68;
   }
 }
 </style>

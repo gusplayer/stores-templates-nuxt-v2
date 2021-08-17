@@ -1,5 +1,5 @@
 <template>
-  <div class="producto">
+  <div class="producto" :style="settingKblog">
     <div
       class="container"
       @mouseover="hover = true"
@@ -14,7 +14,6 @@
               :src="idCloudinaryBanner(this.article.imagen_principal_url)"
               alt="right-banner"
             />
-
             <div v-else class="empty"></div>
           </div>
         </div>
@@ -40,22 +39,11 @@
             </p>
           </router-link>
         </div>
-        <!-- <div class="content-date-article">
-          <span class="txt-article-day">{{ this.dayCreate }}</span>
-          <span class="txt-article-month">{{ this.nameMonth }}</span>
-          <span class="txt-article-create">{{ this.yearCreate }}</span>
-        </div> -->
-        <!-- <div class="content-border-article"></div> -->
         <div class="content-abstract-article">
           <p class="txt-article-abstract">
             {{ this.article.resumen }}
           </p>
         </div>
-        <!-- <div class="content-button-article">
-          <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
-            <button class="btn">+ {{ $t('home_leerMas') }}</button>
-          </router-link>
-        </div> -->
       </div>
     </div>
   </div>
@@ -65,7 +53,7 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-Blogcard',
-  props: { article: Object },
+  props: { article: Object, settingKblog: Object },
   mounted() {
     if (this.article.created_at) {
       let domain = this.article.created_at
@@ -128,7 +116,7 @@ export default {
 <style scoped>
 .producto {
   @apply w-full flex flex-col justify-center items-center;
-  background-color: #fff;
+  background-color: var(--CardBg);
 }
 .container {
   @apply relative;
@@ -157,14 +145,14 @@ export default {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-style-1);
   @apply w-full absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0 top-5/0 left-5/0;
 }
 .txt-day,
 .txt-month {
-  color: #333333;
+  color: var(--ColorText_Date);
   font-weight: 600;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-style-1);
 }
 .txt-day {
   font-weight: 600;
@@ -177,30 +165,16 @@ export default {
 .content-txt-article,
 .content-tittle-article,
 .content-abstract-article {
+  padding: 0 5px;
   @apply w-full flex flex-col justify-start items-start;
 }
 .content-date-aticle {
   @apply w-full flex flex-row justify-start items-start;
 }
-
 .txt-article-abstract {
-  color: #777;
-  font-family: 'Roboto', sans-serif;
+  color: var(--CardDescription);
+  font-family: var(--font-style-1);
 }
-/* .content-button-article {
-  @apply h-50;
-}
-.btn {
-  color: #222;
-  box-shadow: inset 0px -50px 0px -41px rgba(235, 112, 37, 0.3);
-  font-family: 'Roboto', sans-serif;
-  @apply w-auto flex flex-col text-center font-semibold px-10 cursor-pointer transition-all ease-in duration-0.2;
-}
-.btn:hover {
-  box-shadow: inset 0px -50px 0px 0px rgba(235, 112, 37);
-  color: #fff;
-  @apply p-10;
-} */
 @screen sm {
   .container {
     @apply max-w-full;
@@ -218,22 +192,23 @@ export default {
     font-size: 10px;
   }
   .overlay-top {
-    @apply absolute overflow-hidden shadow-md bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    @apply absolute overflow-hidden shadow-md rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 10px;
     left: 10px;
     right: 0;
     width: 40px;
     height: 45px;
+    background-color: var(--ColorBg_Date);
   }
   .txt-article-tittle {
     font-size: 14px;
-    color: #000;
+    color: var(--CardTitle);
     letter-spacing: 0.3px;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--font-style-1);
     @apply w-full flex justify-start items-start font-medium mt-20 mb-15 cursor-pointer text-left transition-all ease-in duration-0.5;
   }
   .container:hover .txt-article-tittle {
-    color: #767676;
+    color: var(--CardTitle);
     @apply transition-all ease-in duration-0.2;
   }
   .txt-article-day,

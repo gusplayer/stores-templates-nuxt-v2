@@ -1,6 +1,23 @@
 <template>
-  <div class="product-content">
-    <div class="bannerProduct">
+  <div
+    class="product-content"
+    :style="[
+      settingByTemplate11[0].setting11General,
+      settingByTemplate11[0].productList,
+    ]"
+  >
+    <div
+      class="bannerProduct"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate11[0].setting11General &&
+            this.settingByTemplate11[0].setting11General.fount_1
+              ? this.settingByTemplate11[0].setting11General.fount_1
+              : 'Roboto',
+        },
+      ]"
+    >
       <div class="crumb">
         <nuxt-link to="/">
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -20,42 +37,6 @@
             </p>
           </nuxt-link>
           <div class="empty"></div>
-          <!-- <div class="content-input-slide">
-          <div class="item-tittle">
-            <p class="txt-tittles">
-              {{ $t('home_filtrarpor') }}{{ $t('home_preciofilt') }}
-            </p>
-          </div>
-          <div class="itemLeft-range-slide">
-            <input
-              class="input-slide"
-              type="range"
-              v-model="value"
-              min="0"
-              :max="range.max"
-              value="1"
-              id="myRange"
-            />
-          </div>
-
-          <div class="value-range-slide">
-            <div class="values-prices">
-              <p class="value-price">
-                {{ $t('cart_precio') }}
-              </p>
-              <p class="value-precio-change">
-                <span class="price"> $0 — ${{ value }}</span>
-                <span class="price" id="value-range"></span>
-              </p>
-            </div>
-            <div class="btn-slider">
-              <button class="btn-items-left" @click="filterProductPrice">
-                {{ $t('home_filtrar') }}
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="empty"></div> -->
           <div class="content-input-slide">
             <button class="item-tittle accordion">
               <p class="txt-tittles">
@@ -93,15 +74,6 @@
                       categorys.id == indexSelect ? 'txt-categorys-active' : ''
                     "
                   >
-                    <!-- <span
-                      class="rounded-list"
-                      :class="
-                        categorys.id == indexSelect
-                          ? 'txt-rounded-list-active'
-                          : ''
-                      "
-                    ></span> -->
-
                     {{ categorys.nombre_categoria_producto }}
                   </p>
                 </div>
@@ -134,14 +106,6 @@
                         : ''
                     "
                   >
-                    <!-- <span
-                      class="rounded-list"
-                      :class="
-                        subcategorys.id == indexSelect2
-                          ? 'txt-rounded-list-active'
-                          : ''
-                      "
-                    ></span> -->
                     {{ subcategorys.nombre_subcategoria }}
                   </p>
                 </div>
@@ -174,16 +138,6 @@
           <div class="top-content">
             <div class="content-items-categorias">
               <div class="items-end">
-                <!-- <div class="show-number-items">
-                <p class="product-stock">
-                  {{ $t('home_mostrar') }}
-                  <span class="separator-breadCrumbs">/</span>
-                  {{ dataStore.productos.length }}
-                  <span class="separator-breadCrumbs">/</span>
-                </p>
-              </div> -->
-
-                <!-- Grilla de 3 o 1 -->
                 <div class="show-view-per-list">
                   <button class="show">
                     <svg
@@ -223,7 +177,6 @@
               </div>
             </div>
           </div>
-
           <div class="producto-items-content" id="section">
             <div class="content-item">
               <div class="content-item-productos">
@@ -237,16 +190,18 @@
                       :product="product"
                       v-if="!showinList"
                       class="product-list"
+                      :settingKcardProduct="settingByTemplate11[0].cardProduct"
                     ></KoProdcutCardFilter>
                     <KoProdcutCardFilerList
                       :product="product"
                       v-if="showinList"
                       class="product-list"
+                      :settingKcardProduct="settingByTemplate11[0].cardProduct"
                     ></KoProdcutCardFilerList>
                   </div>
                 </div>
                 <div
-                  v-if="(this.fullProducts.length == 0)"
+                  v-if="this.fullProducts.length == 0"
                   class="content-products-empty"
                 >
                   <div class="header-content-logo">
@@ -290,17 +245,16 @@ import KoProdcutCardFilter from './_productcard/ProductCard'
 import KoProdcutCardFilerList from './_productcard/ProductCardFilterList'
 export default {
   components: {
-    // KoSocialNet,
     KoProdcutCardFilter,
     KoProdcutCardFilerList,
   },
   props: {
+    settingByTemplate11: Array,
     dataStore: Object,
     fullProducts: {},
   },
   name: 'Ko-ProductList-Filter',
   mounted() {
-    // this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
       let maxTMP = 0
@@ -327,12 +281,6 @@ export default {
         }
       })
     }
-    // var slider = document.getElementById('myRange')
-    // var valueslide = document.getElementById('value-range')
-    // slider.oninput = function () {
-    //   valueslide.innerHTML = this.value
-    // }
-
     let domain = this.$route.fullPath
     let searchCategory = domain.slice(0, [20])
     let searchSubCategory = domain.slice(0, [23])
@@ -798,7 +746,8 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .product-content {
-  @apply flex flex-col justify-center items-center w-full mb-80;
+  background: var(--background_color_1);
+  @apply flex flex-col justify-center items-center w-full pb-80;
 }
 .content-banner-shop {
   @apply w-full flex flex-col;
@@ -817,9 +766,9 @@ export default {
   /* border-bottom: 2px solid #2c2930; */
 }
 .txt-tittles {
-  color: #222;
+  color: var(--color_text);
   font-size: 15px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full flex justify-start items-center font-semibold tracking-0 cursor-pointer uppercase transition-all ease-in duration-0.2;
 }
 .value-range-slide {
@@ -831,7 +780,7 @@ export default {
 .value-price {
   color: #717171;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-auto pr-1 cursor-default transition-all ease-in duration-0.2;
 }
 .value-precio-change {
@@ -840,7 +789,7 @@ export default {
 .price {
   color: #2d2a2a;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply flex flex-row justify-start items-center font-semibold transition-all ease-in duration-0.2 cursor-default;
 }
 .item-tittle {
@@ -848,7 +797,7 @@ export default {
 }
 .empty {
   margin-bottom: 30px;
-  border-color: rgba(129, 129, 129, 0.2);
+  border-color: var(--border);
   @apply w-full mb-30 border-b;
 }
 .btn-slider {
@@ -860,7 +809,7 @@ export default {
   border-radius: 35px;
   padding: 10px 14px;
   letter-spacing: 0.3px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply flex justify-center items-center text-center uppercase font-semibold cursor-pointer transition-all ease-in duration-0.2;
 }
 .btn-items-left:hover {
@@ -875,43 +824,43 @@ export default {
 .text-categorias {
   color: #333333;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-auto flex flex-row mr-6 font-semibold cursor-pointer;
 }
 .separator-breadCrumbs {
   color: #8e8e8e;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-auto mr-6 ml-6 cursor-pointer transition-all ease-in duration-0.2;
 }
 .product-stock-text {
   color: #8e8e8e;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply font-semibold;
 }
 .product-stock-active {
   color: #000;
   font-size: 15px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply font-semibold;
 }
 .text-categorias-select {
   color: #8e8e8e;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full flex flex-row mr-6 font-normal cursor-pointer transition-all ease-in duration-0.2;
 }
 #statecate {
   color: #333;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full font-semibold cursor-pointer;
 }
 #statesubcate {
   color: #333;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full ml-6 font-semibold cursor-pointer transition-all ease-in duration-0.2;
 }
 .top-content {
@@ -970,10 +919,10 @@ export default {
   @apply w-full flex flex-col justify-start items-center;
 }
 .txt-categorys {
-  color: #333;
+  color: var(--color_subtext);
   font-size: 15px;
   line-height: 1.3;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
 }
 .txt-categorys:hover {
@@ -999,7 +948,7 @@ export default {
 .product-stock {
   color: #333;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply mr-6 font-semibold cursor-pointer transition-all ease-in duration-0.2;
 }
 .show-view-per-list {
@@ -1009,12 +958,12 @@ export default {
   @apply w-full cursor-pointer mt-4;
 }
 .show-icon {
-  fill: #8e8e8e;
+  fill: var(--color_text);
   @apply p-3;
 }
 .show-icon-active {
-  fill: #000;
-  background-color: #f8f8f8;
+  fill: var(--color_subtext);
+  background-color: transparent;
 }
 .show-icon:hover {
   fill: #000;
@@ -1030,8 +979,8 @@ export default {
   @apply w-full flex justify-start items-start;
 }
 .btn-tittle-shop {
-  color: #000;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--color_text);
+  font-family: var(--font-style-1) !important;
   @apply font-semibold uppercase justify-start items-start;
 }
 .product-text {
@@ -1061,7 +1010,7 @@ export default {
 .txt-products-empty {
   font-size: 20px;
   color: #3f3f3f;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply mt-6 font-semibold;
 }
 .pagination-medium {
@@ -1114,14 +1063,14 @@ export default {
 }
 .separatorCrumb {
   font-size: 9px;
-  color: #222;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--breadCrumbs);
+  font-family: var(--font-style-1) !important;
   @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
 }
 .txt-crumb {
   font-size: 15px;
-  color: #222;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--breadCrumbs);
+  font-family: var(--font-style-1) !important;
   @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
 }
 .s1:hover {
@@ -1139,7 +1088,7 @@ export default {
 }
 .accordion:after {
   content: '\002B';
-  color: #000;
+  color: var(--border);
   font-weight: bold;
   float: right;
 }
@@ -1200,7 +1149,7 @@ export default {
     @apply w-full flex flex-col justify-start items-start;
   }
   .txt-content-home {
-    color: #222;
+    color: var(--color_text);
     font-size: 16px;
     line-height: 1.1;
     @apply w-auto py-20 uppercase font-semibold cursor-pointer;
@@ -1219,7 +1168,7 @@ export default {
     @apply w-9/3;
   }
   .bannerProduct {
-    border-color: #e8e8e8;
+    border-color: var(--border);
     @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center py-20 border-b;
   }
 }
@@ -1246,7 +1195,7 @@ export default {
     font-size: 20px;
   }
   .top-content {
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid var(--border);
     @apply flex pt-0 pb-5;
   }
   .content-left {

@@ -1,24 +1,38 @@
 <template>
-  <div calss="content-contact">
-    <div class="content-form-contact">
+  <div
+    class="content-contact"
+    :style="[
+      settingByTemplate11[0].contact,
+      settingByTemplate11[0].setting11General,
+    ]"
+  >
+    <div
+      class="content-form-contact"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate11[0].setting11General &&
+            this.settingByTemplate11[0].setting11General.fount_1
+              ? this.settingByTemplate11[0].setting11General.fount_1
+              : 'Roboto',
+        },
+      ]"
+    >
       <div class="banner-mapa" v-if="dataStore.geolocalizacion.length">
         <iframe
           :src="`https://maps.google.com/maps?q=${this.dataStore.geolocalizacion[0].latitud},${this.dataStore.geolocalizacion[0].longitud}&hl=es;z=14&amp;output=embed`"
           width="100%"
           height="250"
           frameborder="0"
-          style="border: 0;"
+          style="border: 0"
           allowfullscreen
         ></iframe>
       </div>
-
       <div class="container-contact">
         <div class="content-grid">
           <div class="left">
             <div class="content-info">
-              <p class="txt-info">
-                Información
-              </p>
+              <p class="txt-info">Información</p>
             </div>
             <div class="content-locatioin">
               <svg
@@ -64,12 +78,6 @@
           </div>
           <div class="right">
             <div class="contact-content">
-              <!-- <div class="contact-item-text">
-              <p class="contact-text-title">{{ $t('contact_title2') }}</p>
-              <p class="contact-text-subtitles">
-                {{ $t('contact_subtitle2') }}
-              </p>
-            </div> -->
               <ValidationObserver
                 ref="observer"
                 tag="form"
@@ -90,7 +98,7 @@
                         <input
                           name="nombre"
                           type="text"
-                          v-model="Nombre"
+                          v-model="nombre"
                           class="input-text"
                           :placeholder="$t('contact_nombrePlacer')"
                           id="ContactName"
@@ -192,7 +200,7 @@ export default {
   name: 'Ko-Contact',
   props: {
     dataStore: Object,
-    // settingByTemplate: Object,
+    settingByTemplate11: Array,
   },
   components: {
     ValidationObserver,
@@ -273,7 +281,7 @@ export default {
             }
             axios
               .post('https://templates.komercia.co/api/mensaje-contacto', json)
-              .then((response) => {
+              .then(() => {
                 this.$message.success('Comentario enviado!')
                 if (
                   this.facebooPixel &&
@@ -308,6 +316,7 @@ export default {
 
 <style scoped>
 .content-contact {
+  background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-form-contact {
@@ -317,7 +326,7 @@ export default {
   @apply w-full justify-center items-center;
 }
 .empty {
-  background-color: #dbdbdb;
+  background-color: var(--border);
   @apply w-full h-1 my-20;
 }
 @screen sm {
@@ -338,9 +347,9 @@ export default {
     @apply w-full flex justify-start items-center mb-30;
   }
   .txt-info {
-    color: #414141;
+    color: var(--color_text);
     font-size: 14px;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-style-1);
     @apply uppercase font-semibold tracking-1;
   }
   .content-locatioin,
@@ -348,10 +357,10 @@ export default {
     @apply w-full flex flex-row justify-start items-center;
   }
   .icon-left {
-    fill: #878787;
+    fill: var(--color_subtext);
   }
   .txt-left {
-    color: #414141;
+    color: var(--color_subtext);
     font-size: 14px;
     @apply w-full flex justify-start items-center pl-20;
   }
@@ -365,8 +374,8 @@ export default {
     @apply w-full flex flex-col justify-start items-center my-40;
   }
   .contact-content-rigth {
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: var(--background_color_2);
+    border: 1px solid var(--border);
     @apply w-full flex flex-col justify-start items-start shadow-xl;
   }
   .content-form {
@@ -376,7 +385,7 @@ export default {
     @apply w-full flex justify-start items-center mb-40;
   }
   .txt-contactus {
-    color: #414141;
+    color: var(--color_title_form);
     font-size: 18px;
     @apply w-full justify-center items-center uppercase font-semibold;
   }
@@ -405,7 +414,7 @@ export default {
     @apply w-full h-100 pl-10 pt-10;
   }
   .txt-input {
-    color: #414141;
+    color: var(--color_text_form);
     font-size: 13px;
     @apply w-full justify-center items-center capitalize;
   }
@@ -413,10 +422,10 @@ export default {
     @apply w-full flex justify-start items-center;
   }
   .btn {
-    background-color: #333b48;
+    background-color: var(--color_background_btn);
     font-size: 14px;
-    color: #fff;
-    @apply w-auto h-35 border mt-20 px-20;
+    color: var(--color_text_btn);
+    @apply w-auto h-35 mt-20 px-20;
   }
   .form-cont {
     @apply w-full flex flex-col justify-start items-center;

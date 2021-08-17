@@ -1,31 +1,56 @@
 <template>
-  <div class="content-parallax">
-    <div class="content-bg">
+  <div
+    class="content-parallax"
+    :style="[
+      settingKparallax,
+      settingGeneral,
+      {
+        '--font-style-1':
+          this.settingGeneral && this.settingGeneral.fount_1
+            ? this.settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
+    <a
+      :class="settingKparallax.visbleBtn ? '' : 'cursorPointer'"
+      :href="`${
+        settingKparallax.visbleBtn ? '' : settingKparallax.url_redirect
+      }`"
+      rel="noreferrer noopener"
+      class="content-bg"
+      :style="`background-image: url(${settingKparallax.url_img_background});`"
+    >
       <div class="content-txt">
-        <p class="txt-top">Últimas Ideas Y Combinaciones De Atuendos De Moda</p>
+        <p class="txt-top">{{ settingKparallax.pretitle }}</p>
         <div class="separator"></div>
-        <p class="txt-bottom">TENDENCIAS DE ROPA DE INSTYLE</p>
-        <div class="content-btn">
-          <nuxt-link to="/productos">
+        <p class="txt-bottom">{{ settingKparallax.title }}</p>
+        <div class="content-btn" v-if="settingKparallax.visbleBtn">
+          <nuxt-link :to="settingKparallax.url_redirect">
             <button class="btn">
               {{ $t('home_comprarAhora') }}
             </button>
           </nuxt-link>
         </div>
       </div>
-    </div>
+    </a>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  name: 'Ko-Parallax',
+  props: {
+    settingKparallax: Object,
+    settingGeneral: Object,
+  },
+}
 </script>
 <style scoped>
 .content-parallax {
-  @apply w-full flex flex-col justify-center items-center mb-40;
+  @apply w-full flex flex-col justify-center items-center;
 }
 .content-bg {
   background-position: 50% 73.2661%;
-  background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/v1616131522/Template11/Parallax/parallax_udbjr5.jpg');
   @apply w-full flex flex-col justify-center items-center bg-fixed bg-no-repeat bg-cover;
 }
 .content-txt {
@@ -34,31 +59,36 @@ export default {}
 .content-btn {
   @apply w-full flex flex-col justify-center items-center;
 }
+.cursorPointer {
+  cursor: pointer;
+}
 @screen sm {
   .txt-top {
-    color: #fff;
+    color: var(--colorPretitle);
     font-size: 14px;
-    font-family: 'Roboto', sans-serif;
-    @apply font-light tracking-1 capitalize text-center;
+    font-family: var(--font-style-1);
+    font-weight: var(--fontWeighPretitle);
+    @apply tracking-1 capitalize text-center;
   }
   .txt-bottom {
-    color: #fff;
+    color: var(--colorTitle);
     font-size: 20px;
-    font-family: 'Roboto Condensed', sans-serif;
-    @apply font-bold uppercase tracking-0 text-center mb-34;
+    font-family: var(--font-style-1);
+    font-weight: var(--fontWeighTitle);
+    @apply uppercase tracking-0 text-center mb-34;
   }
   .btn {
-    color: #000;
-    background-color: #fff;
+    color: var(--color_text_btn);
+    background-color: var(--color_background_btn);
     font-size: 14px;
-    @apply font-normal leading-21 uppercase px-15 py-10;
+    @apply font-normal leading-21 uppercase px-15 py-10 cursor-pointer;
   }
   .btn:hover {
     color: #fff;
     background-color: #000;
   }
   .separator {
-    background: #fff;
+    background: var(--color_border);
     @apply w-60 h-1 my-10 uppercase;
   }
   .content-txt {
@@ -67,7 +97,7 @@ export default {}
 }
 @screen md {
   .txt-top {
-    font-size: 20px;
+    font-size: var(--fontSizePretitle);
   }
   .txt-bottom {
     font-size: 40px;
@@ -83,11 +113,11 @@ export default {}
 }
 @screen lg {
   .txt-bottom {
-    font-size: 55px;
+    font-size: var(--fontSizeTitle);
   }
   .btn {
     font-size: 14px;
-    @apply mt-30;
+    margin-top: var(--marginTopBtn);
   }
   .content-txt {
     padding: 171px 10px;
@@ -98,7 +128,7 @@ export default {}
     padding: 236px;
   }
   .txt-bottom {
-    font-size: 55px;
+    font-size: var(--fontSizeTitle);
   }
 }
 </style>

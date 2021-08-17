@@ -72,6 +72,9 @@ export default {
     settingByTemplate9() {
       return this.$store.state.settingByTemplate9
     },
+    settingByTemplate11() {
+      return this.$store.state.settingByTemplate11
+    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -122,6 +125,27 @@ export default {
               },
             ]
           : null,
+        settingByTemplate11: this.settingByTemplate11
+          ? [
+              {
+                productList:
+                  this.settingByTemplate11 &&
+                  this.settingByTemplate11.productList
+                    ? this.settingByTemplate11.productList
+                    : null,
+                cardProduct:
+                  this.settingByTemplate11 &&
+                  this.settingByTemplate11.cardProduct
+                    ? this.settingByTemplate11.cardProduct
+                    : null,
+                setting11General:
+                  this.settingByTemplate11 &&
+                  this.settingByTemplate11.settingGeneral
+                    ? this.settingByTemplate11.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
       }
     },
   },
@@ -139,6 +163,8 @@ export default {
             this.$store.commit('SET_CURRENTSETTING09', e.data)
           } else if (e.data.template == 7) {
             this.$store.commit('SET_CURRENTSETTING07', e.data)
+          } else if (e.data.template == 11) {
+            this.$store.commit('SET_CURRENTSETTING11', e.data)
           }
         } else if (e && e.data && e.data.returnHome == true) {
           this.$router.push({

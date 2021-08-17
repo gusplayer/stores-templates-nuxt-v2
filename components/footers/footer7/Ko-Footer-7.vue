@@ -1,42 +1,121 @@
 <template>
-  <div class="content-footer" ref="background" :style="settingByTemplate">
-    <KoNewsLetter></KoNewsLetter>
-    <div class="content-footer-items">
-      <div class="content-items-sm">
-        <div class="content-store-sm">
-          <div class="info-store-sm">
-            <button class="accordion btn">Información de la tienda</button>
-            <div class="footer-content-tienda panel">
-              <!-- <img
-                class="img-logo"
-                :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
-                alt="Logo"
-              />
-            </div> -->
-              <div class="content-direction">
-                <p class="txt-direction txt">
-                  {{ this.dataStore.geolocalizacion[0].direccion }}
-                </p>
-              </div>
-              <div class="content-number">
-                <p class="txt-number txt">
-                  {{ this.dataStore.tienda.telefono }}
-                </p>
-              </div>
-              <div class="content-email">
-                <p class="txt-email txt">
-                  {{ this.dataStore.tienda.email_tienda }}
-                </p>
+  <div
+    class="wrapper-footer"
+    ref="background"
+    :style="[
+      settingByTemplate11[0].setting11Footer,
+      settingByTemplate11[0].setting11General,
+    ]"
+  >
+    <div
+      class="content-footer"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate11 &&
+            this.settingByTemplate11[0].setting11General &&
+            this.settingByTemplate11[0].setting11General.fount_1
+              ? this.settingByTemplate11[0].setting11General.fount_1
+              : 'Roboto',
+        },
+      ]"
+    >
+      <KoNewsLetter
+        :newsletter="settingByTemplate11[0].newsletter"
+      ></KoNewsLetter>
+      <div class="content-footer-items">
+        <div class="content-items-sm">
+          <div class="content-store-sm">
+            <div class="info-store-sm">
+              <button class="accordion btn">Información de la tienda</button>
+              <div class="footer-content-tienda panel">
+                <div class="content-direction">
+                  <p class="txt-direction txt">
+                    {{ this.dataStore.geolocalizacion[0].direccion }}
+                  </p>
+                </div>
+                <div class="content-number">
+                  <p class="txt-number txt">
+                    {{ this.dataStore.tienda.telefono }}
+                  </p>
+                </div>
+                <div class="content-email">
+                  <p class="txt-email txt">
+                    {{ this.dataStore.tienda.email_tienda }}
+                  </p>
+                </div>
               </div>
             </div>
+            <div class="info-networks">
+              <button class="accordion btn">Siguenos</button>
+              <KoSocialNet
+                :footerIcon="this.settingByTemplate11[0].setting11Footer"
+                :dataStore="dataStore"
+                class="panel"
+              ></KoSocialNet>
+            </div>
+            <div class="info-legal-sm">
+              <button
+                class="btn-legal btn"
+                v-if="dataStore.politicas"
+                @click="OpenModalPolitics"
+              >
+                {{ $t('footer_politicasyterminos') }}
+              </button>
+            </div>
           </div>
-          <div class="info-networks">
-            <button class="accordion btn">Siguenos</button>
-            <KoSocialNet :dataStore="dataStore" class="panel"></KoSocialNet>
+        </div>
+        <div class="content-items-lg">
+          <div class="info-btn-footer gap-2">
+            <img
+              class="img-logo"
+              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+              alt="Logo"
+            />
+            <div class="content-direction">
+              <p class="txt-direction txt">
+                {{ this.dataStore.geolocalizacion[0].direccion }}
+              </p>
+            </div>
+            <div class="content-number">
+              <p class="txt-number txt">
+                {{ this.dataStore.tienda.telefono }}
+              </p>
+            </div>
+            <div class="content-email">
+              <p class="txt-email txt">
+                {{ this.dataStore.tienda.email_tienda }}
+              </p>
+            </div>
+            <div class="info-networkss">
+              <KoSocialNet
+                :footerIcon="this.settingByTemplate11[0].setting11Footer"
+                :dataStore="dataStore"
+              ></KoSocialNet>
+            </div>
           </div>
-          <div class="info-legal-sm">
+          <div class="info-btn-footer">
+            <p class="btn">Enlaces</p>
+            <div
+              v-for="(item, index) in secciones"
+              :key="`${index}${item.name}`"
+            >
+              <nuxt-link :to="item.path" v-if="item.path" class="btns">
+                {{ $t(`${item.name}`) }}
+              </nuxt-link>
+              <nuxt-link
+                :to="item.href"
+                v-else-if="item.href && listArticulos > 0"
+                class="btns"
+              >
+                {{ $t(`${item.name}`) }}
+              </nuxt-link>
+            </div>
+          </div>
+          <div class="info-btn-footer">
+            <p class="btn">Nuestra empresa</p>
             <button
-              class="btn-legal btn"
+              class="btn-legal btns"
               v-if="dataStore.politicas"
               @click="OpenModalPolitics"
             >
@@ -45,76 +124,33 @@
           </div>
         </div>
       </div>
-      <div class="content-items-lg">
-        <div class="info-btn-footer gap-2">
+      <div
+        class="empty"
+        v-if="this.settingByTemplate11[0].setting11Footer.watermark"
+      />
+      <div
+        class="madebyKomercia"
+        v-if="this.settingByTemplate11[0].setting11Footer.watermark"
+      >
+        <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
+        <a
+          href="https://komercia.co/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           <img
-            class="img-logo"
-            src="https://res.cloudinary.com/brahyanr10/image/upload/v1615866784/demo-store-logo-1584092461_rwmuiv.png"
-            alt="Logo"
+            v-lazy="
+              `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
+            "
+            class="logo2"
+            alt="Logo Img"
           />
-          <div class="content-direction">
-            <p class="txt-direction txt">
-              {{ this.dataStore.geolocalizacion[0].direccion }}
-            </p>
-          </div>
-          <div class="content-number">
-            <p class="txt-number txt">
-              {{ this.dataStore.tienda.telefono }}
-            </p>
-          </div>
-          <div class="content-email">
-            <p class="txt-email txt">
-              {{ this.dataStore.tienda.email_tienda }}
-            </p>
-          </div>
-          <div class="info-networkss">
-            <KoSocialNet :dataStore="dataStore"></KoSocialNet>
-          </div>
-        </div>
-        <div class="info-btn-footer">
-          <p class="btn">Enlaces</p>
-
-          <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-            <nuxt-link :to="item.path" v-if="item.path" class="btns">
-              {{ $t(`${item.name}`) }}
-            </nuxt-link>
-            <nuxt-link
-              :to="item.href"
-              v-else-if="item.href && listArticulos > 0"
-              class="btns"
-            >
-              {{ $t(`${item.name}`) }}
-            </nuxt-link>
-          </div>
-        </div>
-        <div class="info-btn-footer">
-          <p class="btn">Nuestra empresa</p>
-          <button
-            class="btn-legal btns"
-            v-if="dataStore.politicas"
-            @click="OpenModalPolitics"
-          >
-            {{ $t('footer_politicasyterminos') }}
-          </button>
-        </div>
+        </a>
       </div>
-    </div>
-    <div class="empty"></div>
-    <div class="madebyKomercia">
-      <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
-      <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
-        <img
-          v-lazy="
-            `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
-          "
-          class="logo2"
-          alt="Logo Img"
-        />
-      </a>
-    </div>
-    <div v-if="showModal">
-      <div class="modal" v-if="dataStore.politicas">
-        <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+      <div v-if="showModal">
+        <div class="modal" v-if="dataStore.politicas">
+          <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+        </div>
       </div>
     </div>
   </div>
@@ -123,7 +159,6 @@
 import KoNewsLetter from '../../../components/template11/ko-newsletter'
 import KoSocialNet from '../../../components/template11/ko-socialnet'
 import KoTermsConditions from '../../../components/footers/ko-TermsAndConditions'
-
 export default {
   components: {
     KoNewsLetter,
@@ -133,15 +168,17 @@ export default {
   name: 'Ko-Footer-6',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingByTemplate11: Array,
   },
   mounted() {
-    if (this.settingByTemplate) {
+    if (
+      this.settingByTemplate11 &&
+      this.settingByTemplate11[0].setting11Footer
+    ) {
       this.setLogo()
     }
     var acc = document.getElementsByClassName('accordion')
     var i
-
     for (i = 0; i < acc.length; i++) {
       acc[i].addEventListener('click', function () {
         this.classList.toggle('active')
@@ -207,13 +244,20 @@ export default {
     },
   },
   watch: {
-    settingByTemplate(value) {
-      let colorArray = value.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
+    settingByTemplate9() {
+      if (
+        this.settingByTemplate11 &&
+        this.settingByTemplate11[0].setting11Footer
+      ) {
+        let color =
+          this.settingByTemplate11[0].setting11Footer['--background_color_1']
+        let colorArray = color.split(',')
+        let colorInt = parseInt(colorArray[2])
+        if (colorInt > 50) {
+          this.logo = true
+        } else {
+          this.logo = false
+        }
       }
     },
   },
@@ -221,8 +265,12 @@ export default {
 </script>
 
 <style scoped>
+.wrapper-footer {
+  background: var(--background_color_1);
+  @apply w-full flex justify-center items-center;
+}
 .content-footer {
-  background: #000;
+  background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-footer-items {
@@ -236,7 +284,7 @@ export default {
   @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
 }
 .empty {
-  background-color: #2b2b2b;
+  background-color: var(--color_border);
   @apply w-full h-1 flex flex-col justify-center items-center;
 }
 @screen sm {
@@ -258,15 +306,15 @@ export default {
   }
 
   .btn {
-    color: #fff;
+    color: var(--color_title);
     font-size: 18px;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply pb-10;
   }
   .txt {
-    color: #a3a3a3;
+    color: var(--color_text);
     font-size: 14px;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: var(--font-style-1) !important;
   }
   .btns:hover {
     color: #fff;
@@ -299,7 +347,7 @@ export default {
   }
   .txt-devBy {
     font-size: 14px;
-    color: #666;
+    color: var(--color_text);
   }
   .logo2 {
     width: 100px;
@@ -314,7 +362,8 @@ export default {
     @apply w-9/0 grid grid-cols-3 gap-4 justify-center items-start;
   }
   .img-logo {
-    @apply w-6/0 h-auto object-contain;
+    max-width: var(--with_logo);
+    @apply w-full object-contain;
   }
   .content-image {
     @apply w-full flex flex-col justify-start items-center mb-20;
@@ -323,9 +372,9 @@ export default {
     @apply w-full flex flex-col justify-center items-start;
   }
   .btns {
-    color: #a3a3a3;
+    color: var(--color_text);
     font-size: 14px;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: var(--font-style-1) !important;
   }
   .btns:hover {
     color: #fff;

@@ -4,16 +4,50 @@
       id="kCarouselX"
       v-bind="componentsProps"
       :key="bannerRendering"
-    ></Kcarousel>
-    <Ksection id="kSectionX" v-bind="componentsProps"></Ksection>
-    <Ktrending id="kTredingX" v-bind="componentsProps"></Ktrending>
-    <Kparallax id="kParallaxX" v-bind="componentsProps"></Kparallax>
-    <Ktrending id="kTreding2X" v-bind="componentsProps"></Ktrending>
+      v-if="
+        settingByTemplate11 &&
+        settingByTemplate11.banner &&
+        settingByTemplate11.banner.visible
+      "
+    />
+    <Ksection
+      id="kSectionX"
+      v-bind="componentsProps"
+      v-if="
+        settingByTemplate11 &&
+        settingByTemplate11.section &&
+        settingByTemplate11.section.visible
+      "
+    />
+    <Ktrending
+      id="kTredingX"
+      v-bind="componentsProps"
+      v-if="
+        settingByTemplate11 &&
+        settingByTemplate11.trending &&
+        settingByTemplate11.trending.visible
+      "
+    />
+    <Kparallax
+      id="kParallaxX"
+      v-bind="componentsProps"
+      v-if="
+        settingByTemplate11 &&
+        settingByTemplate11.parallax &&
+        settingByTemplate11.parallax.visible
+      "
+    />
+    <!-- <Ktrending id="kTreding2X" v-bind="componentsProps" /> -->
     <Kblog
       id="kBlogX"
       v-bind="componentsProps"
       v-show="listArticulos.length > 0"
-    ></Kblog>
+      v-if="
+        settingByTemplate11 &&
+        settingByTemplate11.blog &&
+        settingByTemplate11.blog.visible
+      "
+    />
   </div>
 </template>
 <script>
@@ -77,21 +111,9 @@ export default {
           this.settingByTemplate11 && this.settingByTemplate11.contact
             ? this.settingByTemplate11.contact
             : null,
-        settingKfooter:
-          this.settingByTemplate11 && this.settingByTemplate11.footer
-            ? this.settingByTemplate11.footer
-            : null,
-        settingKheader:
-          this.settingByTemplate11 && this.settingByTemplate11.header
-            ? this.settingByTemplate11.header
-            : null,
         settingKinformation:
           this.settingByTemplate11 && this.settingByTemplate11.information
             ? this.settingByTemplate11.information
-            : null,
-        settingKnewsletter:
-          this.settingByTemplate11 && this.settingByTemplate11.newsletter
-            ? this.settingByTemplate11.newsletter
             : null,
         settingKparallax:
           this.settingByTemplate11 && this.settingByTemplate11.parallax
@@ -121,12 +143,17 @@ export default {
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
       ) {
-        if (e && e.data && e.data.component) {
+        if (e && e.data && e.data.component && e.data.template == 11) {
           this.$store.commit('SET_CURRENTSETTING11', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1
           }
-        } else if (e && e.data && e.data.componentToEdit) {
+        } else if (
+          e &&
+          e.data &&
+          e.data.componentToEdit &&
+          e.data.template == 11
+        ) {
           switch (e.data.componentToEdit) {
             case 'settingGeneral':
               this.moverseA('kbannerX')
@@ -155,7 +182,6 @@ export default {
             case 'blog':
               this.moverseA('kBlogX')
               break
-
             case 'detailsProduct':
               if (this.fullProducts) {
                 this.$router.push({

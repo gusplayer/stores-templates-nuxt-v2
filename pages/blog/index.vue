@@ -60,6 +60,9 @@ export default {
     settingByTemplate9() {
       return this.$store.state.settingByTemplate9
     },
+    settingByTemplate11() {
+      return this.$store.state.settingByTemplate11
+    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -98,6 +101,21 @@ export default {
                   this.settingByTemplate9 &&
                   this.settingByTemplate9.settingGeneral
                     ? this.settingByTemplate9.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate11: this.settingByTemplate11
+          ? [
+              {
+                blog:
+                  this.settingByTemplate11 && this.settingByTemplate11.blog
+                    ? this.settingByTemplate11.blog
+                    : null,
+                setting11General:
+                  this.settingByTemplate11 &&
+                  this.settingByTemplate11.settingGeneral
+                    ? this.settingByTemplate11.settingGeneral
                     : null,
               },
             ]

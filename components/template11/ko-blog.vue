@@ -1,9 +1,21 @@
 <template>
-  <div class="wrapper-content">
+  <div
+    class="wrapper-content"
+    :style="[
+      settingKblog,
+      settingGeneral,
+      {
+        '--font-style-1':
+          this.settingGeneral && this.settingGeneral.fount_1
+            ? this.settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="wrapper-items-content">
       <div class="product-text">
         <div class="product-tittle">
-          <p class="tittle">De nuestro blog</p>
+          <p class="tittle">{{ settingKblog.title }}</p>
         </div>
       </div>
     </div>
@@ -15,7 +27,11 @@
             :key="article.id"
             :class="`swiper-slide wrapper-${index + 1}`"
           >
-            <Kblog v-if="article.estado == 1" :article="article"></Kblog>
+            <Kblog
+              v-if="article.estado == 1"
+              :article="article"
+              :settingKblog="settingKblog"
+            ></Kblog>
           </div>
         </div>
       </div>
@@ -31,7 +47,8 @@ export default {
   },
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingKblog: Object,
+    settingGeneral: Object,
   },
   data() {
     return {
@@ -107,24 +124,25 @@ export default {
   align-items: center;
 }
 .wrapper-content {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply w-full flex flex-col justify-center items-center pt-40;
   padding-bottom: 64px;
-  background-color: #fff;
+  background-color: var(--background_color_1);
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;
 }
 
 .product-text {
-  @apply w-full flex flex-col justify-center items-center mb-30 text-center;
+  margin-bottom: var(--marginbottomTitle);
+  @apply w-full flex flex-col justify-center items-center text-center;
 }
 .product-tittle {
   @apply flex flex-col justify-center items-center;
 }
 .tittle {
-  color: #000;
-  font-weight: 700;
-  font-family: 'Roboto', sans-serif;
+  color: var(--color_title);
+  font-weight: var(--fontWeight);
+  font-family: var(--font-style-1);
   @apply flex flex-col justify-center items-center capitalize text-center;
 }
 @screen sm {
@@ -142,7 +160,7 @@ export default {
     @apply w-9/5;
   }
   .tittle {
-    font-size: 30px;
+    font-size: var(--fontSize);
   }
 }
 @media (min-width: 1200px) {
@@ -157,7 +175,7 @@ export default {
   }
   .tittle {
     line-height: 34px;
-    font-size: 36px;
+    font-size: var(--fontSize);
   }
 }
 </style>

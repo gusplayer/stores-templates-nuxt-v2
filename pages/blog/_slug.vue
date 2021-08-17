@@ -57,6 +57,9 @@ export default {
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
     },
+    settingByTemplate11() {
+      return this.$store.state.settingByTemplate11
+    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -75,6 +78,21 @@ export default {
           this.settingByTemplate.settings['--background_color_1']
             ? this.settingByTemplate.settings
             : this.settingBase,
+        settingByTemplate11: this.settingByTemplate11
+          ? [
+              {
+                cardProduct:
+                  this.settingByTemplate11 && this.settingByTemplate11.blog
+                    ? this.settingByTemplate11.blog
+                    : null,
+                setting11General:
+                  this.settingByTemplate11 &&
+                  this.settingByTemplate11.settingGeneral
+                    ? this.settingByTemplate11.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
       }
     },
   },
