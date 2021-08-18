@@ -289,6 +289,39 @@ export const mutations = {
         case 'banner':
           state.settingByTemplate11.banner = value.setting
           break
+        case 'section':
+          state.settingByTemplate11.section = value.setting
+          break
+        case 'treding':
+          state.settingByTemplate11.trending = value.setting
+          break
+        case 'parallax':
+          state.settingByTemplate11.parallax = value.setting
+          break
+        case 'information':
+          state.settingByTemplate11.information = value.setting
+          break
+        case 'blog':
+          state.settingByTemplate11.blog = value.setting
+          break
+        case 'newsLetter':
+          state.settingByTemplate11.newsletter = value.setting
+          break
+        case 'footer':
+          state.settingByTemplate11.footer = value.setting
+          break
+        case 'contact':
+          state.settingByTemplate11.contact = value.setting
+          break
+        case 'card':
+          state.settingByTemplate11.cardProduct = value.setting
+          break
+        case 'productListFilter':
+          state.settingByTemplate11.productList = value.setting
+          break
+        case 'detailsProduct':
+          state.settingByTemplate11.detailsProduct = value.setting
+          break
       }
     }
   },

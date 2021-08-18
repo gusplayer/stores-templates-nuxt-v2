@@ -131,7 +131,7 @@ export default {
   background: #fff;
   font-size: 14px;
   padding: 12px 22px;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-style-1);
   @apply w-full flex justify-center items-center tracking-1 uppercase transition-all ease-out duration-0.2 whitespace-nowrap;
 }
 .content-checkbox {
@@ -139,8 +139,8 @@ export default {
 }
 .text-checkbox {
   margin-left: 8px;
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
+  color: var(--color_terms);
+  font-family: var(--font-style-1);
   @apply bg-transparent;
 }
 #checkbox:focus {
@@ -162,7 +162,7 @@ export default {
   padding: 12px 10px;
   font-size: 14px;
   background-color: #fff;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-style-1);
   @apply w-full h-45 flex flex-col justify-start items-center;
 }
 .input-text::placeholder {
@@ -171,8 +171,7 @@ export default {
 .text-error {
   font-size: 12px;
   color: #ed2353;
-  /* background-color: rgba(255, 255, 255); */
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-style-1);
   @apply w-full mt-10;
 }
 

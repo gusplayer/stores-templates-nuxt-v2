@@ -496,7 +496,10 @@ export default {
     @apply mx-4;
   }
   .text-price {
-    font-size: 16px;
+    font-size: var(--fontSizePretitle);
+  }
+  .card-title {
+    font-size: var(--fontSizeTitle);
   }
 }
 @screen mlg {

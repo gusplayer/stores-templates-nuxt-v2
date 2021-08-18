@@ -22,6 +22,8 @@
     >
       <KoNewsLetter
         :newsletter="settingByTemplate11[0].newsletter"
+        :setting11General="settingByTemplate11[0].setting11General"
+        :dataStore="dataStore"
       ></KoNewsLetter>
       <div class="content-footer-items">
         <div class="content-items-sm">

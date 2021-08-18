@@ -37,7 +37,7 @@
         settingByTemplate11.parallax.visible
       "
     />
-    <!-- <Ktrending id="kTreding2X" v-bind="componentsProps" /> -->
+    <!-- <Ktrending id="kInformationX" v-bind="componentsProps" /> -->
     <Kblog
       id="kBlogX"
       v-bind="componentsProps"
@@ -164,6 +164,9 @@ export default {
             case 'footer':
               this.moverseA('kBlogX')
               break
+            case 'newsLetter':
+              this.moverseA('kBlogX')
+              break
             case 'banner':
               this.moverseA('kCarouselX')
               break
@@ -173,11 +176,14 @@ export default {
             case 'treding':
               this.moverseA('kTredingX')
               break
+            case 'card':
+              this.moverseA('kTredingX')
+              break
             case 'parallax':
               this.moverseA('kParallaxX')
               break
-            case 'treding2':
-              this.moverseA('kTreding2X')
+            case 'information':
+              this.moverseA('kInformationX')
               break
             case 'blog':
               this.moverseA('kBlogX')

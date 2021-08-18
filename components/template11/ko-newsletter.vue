@@ -1,13 +1,29 @@
 <template>
-  <div class="content-newslatter">
-    <div class="content-bg">
+  <div
+    class="content-newslatter"
+    :style="[
+      newsletter,
+      setting11General,
+      {
+        '--font-style-1':
+          this.setting11General && this.setting11General.fount_1
+            ? this.setting11General.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
+    <div
+      class="content-bg"
+      :style="`background-image: url(${newsletter.url_img_background});`"
+    >
       <div class="content-txt">
-        <p class="txt-top">
-          Para actualizaciones diarias
-        </p>
+        <p class="txt-top">Para actualizaciones diarias</p>
         <p class="txt-bottom">Suscríbete a nuestro boletin informativo</p>
         <div class="content-newsletter">
-          <Newsletter :dataStore="dataStore"></Newsletter>
+          <Newsletter
+            :dataStore="dataStore"
+            :newsletter="newsletter"
+          ></Newsletter>
         </div>
       </div>
     </div>
@@ -19,6 +35,8 @@ export default {
   name: 'Ko-Newsletter',
   props: {
     dataStore: Object,
+    newsletter: Object,
+    setting11General: Object,
   },
   components: {
     Newsletter,
@@ -31,7 +49,7 @@ export default {
 }
 .content-bg {
   background-position: 50% 72.0205%;
-  background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/v1616200598/Template11/Newslatter/newsletter-bg_cko8so.jpg');
+  /* background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/v1616200598/Template11/Newslatter/newsletter-bg_cko8so.jpg'); */
   @apply w-full flex flex-col justify-center items-center bg-fixed bg-no-repeat bg-cover;
 }
 .content-txt {
@@ -42,15 +60,15 @@ export default {
     @apply px-20 py-55;
   }
   .txt-top {
-    color: #fff;
+    color: var(--color_pretitle);
     font-size: 14px;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--font-style-1);
     @apply w-full font-light tracking-1 text-center;
   }
   .txt-bottom {
-    color: #fff;
+    color: var(--color_title);
     font-size: 20px;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--font-style-1);
     @apply w-full font-bold capitalize tracking-0 text-center mb-27 mt-20;
   }
   .btn {
