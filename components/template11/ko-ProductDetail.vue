@@ -14,7 +14,6 @@
         </div>
       </div>
       <div class="empty"></div>
-
       <div class="product-content">
         <div class="left">
           <div class="wrapper-left">
@@ -561,8 +560,7 @@ export default {
             case 'precio':
               this.envio = {
                 titulo: 'Tarifa por precio',
-                desc:
-                  'Segun la suma del costo de tus productos te cobraran el envio',
+                desc: 'Segun la suma del costo de tus productos te cobraran el envio',
               }
               break
             case 'precio_ciudad':
@@ -607,7 +605,8 @@ export default {
       this.existYoutube = false
     },
     videoYoutube(url) {
-      let myregexp = /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+      let myregexp =
+        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
       let id = ''
       if (url && url !== '' && url !== 'null') {
         this.validVideo = true
@@ -636,9 +635,8 @@ export default {
         product.limitQuantity = this.data.info.inventario
       }
       if (typeof this.productIndexCart === 'number') {
-        const mutableProduct = this.$store.state.productsCart[
-          this.productIndexCart
-        ]
+        const mutableProduct =
+          this.$store.state.productsCart[this.productIndexCart]
         mutableProduct.cantidad += this.data.cantidad
         this.$store.state.productsCart.splice(
           this.productIndexCart,
@@ -791,7 +789,7 @@ export default {
 .photos {
   display: flex;
   margin-right: 30px;
-  max-height: 430px;
+  max-width: 110px;
   position: relative;
 }
 .swiper-wrapper {
@@ -895,7 +893,8 @@ export default {
   @apply w-full flex flex-col justify-center items-start mt-30;
 }
 .content-items-variant {
-  @apply w-full flex flex-row justify-start items-center;
+  margin-bottom: 8px;
+  @apply w-full flex flex-col justify-start items-start;
 }
 .img-list {
   @apply w-auto h-auto object-cover overflow-hidden;

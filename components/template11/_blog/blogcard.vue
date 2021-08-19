@@ -1,5 +1,5 @@
 <template>
-  <div class="producto" :style="settingKblog">
+  <div class="producto h-full" :style="settingKblog">
     <div
       class="container"
       @mouseover="hover = true"
@@ -115,7 +115,7 @@ export default {
 </script>
 <style scoped>
 .producto {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply w-full flex flex-col justify-start items-center;
   background-color: var(--CardBg);
 }
 .container {

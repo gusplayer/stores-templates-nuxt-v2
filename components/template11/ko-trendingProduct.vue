@@ -22,6 +22,7 @@
             v-for="product in fullProducts"
             :key="product.id"
             class="swiper-slide"
+            style="margin-right: 40px; height: auto"
           >
             <KoproductCard
               :product="product"
@@ -62,6 +63,7 @@ export default {
         spaceBetween: '',
         autoplay: {
           delay: 4000,
+          disableOnInteraction: false,
         },
         breakpoints: {
           10000: {

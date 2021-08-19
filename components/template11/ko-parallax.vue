@@ -47,9 +47,11 @@ export default {
 </script>
 <style scoped>
 .content-parallax {
+  max-height: 500px;
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-bg {
+  max-height: 500px;
   background-position: 50% 73.2661%;
   @apply w-full flex flex-col justify-center items-center bg-fixed bg-no-repeat bg-cover;
 }

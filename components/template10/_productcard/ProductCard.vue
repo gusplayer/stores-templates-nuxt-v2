@@ -1,5 +1,5 @@
 <template>
-  <div class="producto">
+  <div class="producto h-full">
     <div class="container">
       <router-link
         :to="{ path: `/productos/` + product.slug }"
@@ -397,9 +397,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,
@@ -507,7 +506,7 @@ export default {
   @apply w-full object-cover overflow-hidden;
 }
 .producto {
-  @apply w-full flex flex-col justify-center items-center cursor-pointer;
+  @apply w-full flex flex-col justify-start items-center cursor-pointer;
 }
 .datos-producto {
   @apply w-full flex flex-col justify-center items-center my-6  cursor-default;

@@ -1,5 +1,5 @@
 <template>
-  <div class="producto" :style="settingKcardProduct">
+  <div class="producto h-full" :style="settingKcardProduct">
     <div class="container">
       <router-link
         :to="{ path: `/productos/` + product.slug }"
@@ -327,7 +327,7 @@ export default {
 }
 .producto {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center cursor-pointer;
+  @apply w-full flex flex-col justify-start items-center cursor-pointer;
 }
 .datos-producto {
   @apply w-full flex flex-col justify-center items-center my-6  cursor-default;

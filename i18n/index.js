@@ -172,7 +172,7 @@ export default {
     // Newsletter
     newsletter_subtitle: 'SUSCRÍBETE',
     nesletter_tittle: 'Suscríbete',
-    newsletter_subtittle: 'Suscríbete a nuestro boletin',
+    newsletter_subtittle: 'Suscríbete a nuestro boletín',
     newsletter_description: 'Te enviaremos promociones',
     newsletter_title: 'Suscríbete a nuestro boletín para enviarte promociones.',
     newsletter_email: 'Correo electrónico',

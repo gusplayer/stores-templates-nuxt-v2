@@ -5,6 +5,7 @@
         class="swiper-slide"
         v-for="(product, index) in this.products"
         :key="index"
+        style="margin-right: 40px; height: auto"
       >
         <client-only>
           <KoProductCard1 :product="product"></KoProductCard1>

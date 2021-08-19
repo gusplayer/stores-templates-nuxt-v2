@@ -80,7 +80,6 @@
               </div>
             </div>
             <div class="empty"></div>
-
             <button
               class="item-tittle accordion"
               v-show="showSubCategory && selectedSubcategories.length"
@@ -184,7 +183,7 @@
                   <div
                     v-for="product in filterProduct"
                     :key="product.id"
-                    class="content-products"
+                    class="content-products h-full"
                   >
                     <KoProdcutCardFilter
                       :product="product"

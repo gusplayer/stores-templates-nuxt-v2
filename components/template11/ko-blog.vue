@@ -26,6 +26,7 @@
             v-for="(article, index) in filteredList"
             :key="article.id"
             :class="`swiper-slide wrapper-${index + 1}`"
+            style="height: auto"
           >
             <Kblog
               v-if="article.estado == 1"

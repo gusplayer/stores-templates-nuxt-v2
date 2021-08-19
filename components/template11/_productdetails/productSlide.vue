@@ -21,7 +21,7 @@
             <i class="material-icons">keyboard_backspace</i>
           </button>
           <iframe
-            style="max-width: 375px; width: 100%;"
+            style="max-width: 375px; width: 100%"
             height="375"
             :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
             frameborder="0"
