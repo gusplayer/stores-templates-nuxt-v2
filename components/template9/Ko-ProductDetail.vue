@@ -162,7 +162,7 @@
                 <button
                   ref="colorBtn"
                   class="btn"
-                  v-if="!spent"
+                  v-if="!spent && this.salesData.estado == true"
                   v-on:click="addShoppingCart"
                   id="AddToCartTag"
                 >
@@ -181,7 +181,16 @@
                     {{ $t('productdetail_añadiralcarrito') }}
                   </p>
                 </button>
-                <button disabled class="btn-disabled" v-if="spent">
+                <button
+                  disabled
+                  class="btn-disabled"
+                  v-else-if="this.salesData.estado == false"
+                >
+                  <p class="text-addCart">
+                    {{ $t('productdetail_btnANodisponible') }}
+                  </p>
+                </button>
+                <button disabled class="btn-disabled" v-else-if="spent">
                   <p class="text-addCart">
                     {{ $t('home_cardAgotado') }}
                   </p>
@@ -216,13 +225,21 @@
                   </div>
                   <button
                     class="btn-responsive"
-                    v-if="!spent"
+                    v-if="!spent && this.salesData.estado == true"
                     v-on:click="addShoppingCart"
                   >
                     <cartArrowDown class="card-icon-cart" />{{
                       $t('home_cardAgregar')
                     }}
                   </button>
+                  <div
+                    class="content_buy_action-responsive"
+                    v-if="this.salesData.estado == false"
+                  >
+                    <p class="card-info-1-res">
+                      {{ $t('productdetail_btnANodisponible') }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

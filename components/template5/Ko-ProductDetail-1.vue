@@ -226,6 +226,7 @@
                       class="btn"
                       v-if="
                         !spent &&
+                        this.salesData.estado == true &&
                         (data.info.tipo_servicio == null ||
                           data.info.tipo_servicio == '0')
                       "
@@ -235,20 +236,22 @@
                       {{ $t('productdetail_btnAgregar') }}
                     </button>
                     <button
+                      disabled
+                      class="btn-disabled"
+                      v-else-if="this.salesData.estado == false"
+                    >
+                      {{ $t('productdetail_btnANodisponible') }}
+                    </button>
+                    <button
                       ref="colorBtn"
                       class="btn"
-                      v-if="!spent && data.info.tipo_servicio == '1'"
+                      v-else-if="!spent && data.info.tipo_servicio == '1'"
                       v-on:click="GoPayments"
                       id="AddToCartTag"
                     >
                       {{ $t('productdetail_btnComprar') }}
                     </button>
-                    <button
-                      disabled
-                      class="btn-disabled"
-                      v-if="spent"
-                      v-on:click="addShoppingCart"
-                    >
+                    <button disabled class="btn-disabled" v-else-if="spent">
                       {{ $t('home_cardAgotado') }}
                     </button>
                   </div>
@@ -312,12 +315,24 @@
             <button
               class="btn-responsive"
               ref="color2"
-              v-if="!spent"
+              v-if="
+                !spent &&
+                this.salesData.estado == true &&
+                (data.info.tipo_servicio == null ||
+                  data.info.tipo_servicio == '0')
+              "
               v-on:click="addShoppingCart"
             >
               <cartArrowDown class="card-icon-cart" />{{
                 $t('productdetail_btnAgregar')
               }}
+            </button>
+            <button
+              disabled
+              class="btn-disabled"
+              v-if="this.salesData.estado == false"
+            >
+              {{ $t('productdetail_btnANodisponible') }}
             </button>
           </div>
         </div>
@@ -727,10 +742,15 @@ export default {
     },
     GoPayments() {
       let objeto = {
-        cantidad: this.quantityValue,
         id: this.data.info.id,
+        cantidad: this.quantityValue,
+        combinacion:
+          this.salesData && this.salesData.combinacion
+            ? this.salesData.combinacion
+            : undefined,
+        promocion_valor: this.data.info.promocion_valor,
+        tag_promocion: this.data.info.tag_promocion,
       }
-
       let json = {
         products: objeto,
         tienda: {

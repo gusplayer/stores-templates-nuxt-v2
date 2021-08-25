@@ -1,12 +1,17 @@
 <template>
-  <div class="wrapper-productDetail" :style="[
+  <div
+    class="wrapper-productDetail"
+    :style="[
       settingByTemplate7[0].settingK07DetailsProduct,
       settingByTemplate7[0].settingGeneral,
       settingByTemplate7[0].settingKProdutCard,
-    ]">
+    ]"
+  >
     <div class="container-productDetail-loading" v-if="loading"></div>
-    <div class="container-productDetail" v-else 
-    :style="[
+    <div
+      class="container-productDetail"
+      v-else
+      :style="[
         {
           '--font-style-1':
             this.settingByTemplate7 &&
@@ -23,9 +28,9 @@
               ? this.settingByTemplate7[0].settingGeneral.fount_3
               : 'Lora',
         },
-      ]">
+      ]"
+    >
       <div class="section">
-        <!-- Slider izq  -->
         <div class="wrapper-left">
           <template>
             <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="photos">
@@ -110,13 +115,12 @@
           </div>
         </div>
         <!-- Datos derecha -->
-        <div class="wrapper-right" >
+        <div class="wrapper-right">
           <div class="content-right">
             <p class="text-name">{{ data.detalle.nombre }}</p>
             <!-- <p class="text-marca">
               <strong>{{ data.info.marca }}</strong>
             </p> -->
-            
             <p
               class="text-promocion"
               v-show="
@@ -161,9 +165,10 @@
                 {{ data.info.promocion_valor }}% OFF
               </p>
             </div>
-            <!-- Envios gratis -->
             <div class="content_buy_action">
-              <div v-if="data.detalle.envio_gratis == 1 && salesData.unidades > 0">
+              <div
+                v-if="data.detalle.envio_gratis == 1 && salesData.unidades > 0"
+              >
                 <div class="transport-icon">
                   <svg
                     class="transporte-icon mr-2"
@@ -179,29 +184,106 @@
                       d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3M5 10.5L6.5 9L8 10.5L11.5 7L13 8.5L8 13.5L5 10.5Z"
                     />
                   </svg>
-                  <p>{{ $t('footer_tarifaPrecio')}}</p>
+                  <p>{{ $t('footer_tarifaPrecio') }}</p>
                 </div>
               </div>
-              <!-- Producto agotado -->
-              <div class="content_card-info" v-if="spent && salesData.unidades == 0">
+              <div
+                class="content_card-info"
+                v-if="spent && salesData.unidades == 0"
+              >
                 <div class="icon-card-info-sould">
-                  <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  id="Layer_1" 
-                  enable-background="new 0 0 512 512" 
-                  height="50px" 
-                  viewBox="0 0 512 512" 
-                  width="50px"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="Layer_1"
+                    enable-background="new 0 0 512 512"
+                    height="50px"
+                    viewBox="0 0 512 512"
+                    width="50px"
                   >
-                  <g><g><path d="m256 116.457h-16c-13.255 0-24-10.745-24-24 0-13.255 10.745-24 24-24h16c13.255 0 24 10.745 24 24 0 13.255-10.745 24-24 24z" fill="#cd3232"/></g><g><path d="m464 460.457h-416c-17.673 0-32-14.327-32-32v-160c0-17.673 14.327-32 32-32h416c17.673 0 32 14.327 32 32v160c0 17.673-14.327 32-32 32z" fill="#cd3232"/></g><g><path d="m432 460.457h-384c-17.673 0-32-14.327-32-32v-160c0-17.673 14.327-32 32-32h384c17.673 0 32 14.327 32 32v160c0 17.673-14.327 32-32 32z" fill="#ff4646"/></g><g><circle cx="96" cy="268.457" fill="#cd3232" r="16"/></g><g><circle cx="384" cy="268.457" fill="#cd3232" r="16"/></g><g><path d="m384.008 277.371c-2.993 0-5.916-1.507-7.6-4.243l-119.614-194.373c-3.562-5.789-9.998-9.384-16.794-9.384s-13.232 3.596-16.794 9.384l-119.615 194.373c-2.58 4.193-8.071 5.498-12.263 2.92-4.192-2.58-5.5-8.07-2.92-12.263l119.615-194.373c6.783-11.022 19.036-17.869 31.977-17.869s25.194 6.847 31.977 17.869l119.614 194.374c2.58 4.192 1.272 9.683-2.92 12.263-1.456.895-3.069 1.322-4.663 1.322z" fill="#463c4b"/></g><g><circle cx="240" cy="92.457" fill="#ff4646" r="24"/></g><g><g><path d="m72 416.457c-11.028 0-20-8.972-20-20v-8c0-2.209 1.791-4 4-4s4 1.791 4 4v8c0 6.617 5.383 12 12 12s12-5.383 12-12v-22.111c0-4.575-2.542-8.688-6.634-10.733l-14.311-7.155c-6.819-3.411-11.055-10.265-11.055-17.89v-22.111c0-11.028 8.972-20 20-20s20 8.972 20 20v8c0 2.209-1.791 4-4 4s-4-1.791-4-4v-8c0-6.617-5.383-12-12-12s-12 5.383-12 12v22.111c0 4.575 2.542 8.688 6.634 10.733l14.311 7.155c6.819 3.41 11.055 10.265 11.055 17.889v22.111c0 11.029-8.972 20.001-20 20.001z" fill="#32283c"/></g><g><path d="m128 416.457c-11.028 0-20-8.972-20-20v-80c0-11.028 8.972-20 20-20s20 8.972 20 20v80c0 11.028-8.972 20-20 20zm0-112c-6.617 0-12 5.383-12 12v80c0 6.617 5.383 12 12 12s12-5.383 12-12v-80c0-6.617-5.383-12-12-12z" fill="#32283c"/></g><g><path d="m304 416.457c-11.028 0-20-8.972-20-20v-80c0-11.028 8.972-20 20-20s20 8.972 20 20v80c0 11.028-8.972 20-20 20zm0-112c-6.617 0-12 5.383-12 12v80c0 6.617 5.383 12 12 12s12-5.383 12-12v-80c0-6.617-5.383-12-12-12z" fill="#e6e6eb"/></g><g><path d="m200 416.457h-16c-11.028 0-20-8.972-20-20v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 6.617 5.383 12 12 12h16c2.209 0 4 1.791 4 4s-1.791 4-4 4z" fill="#32283c"/></g><g><path d="m232 416.457h-16c-2.209 0-4-1.791-4-4v-112c0-2.209 1.791-4 4-4h16c11.028 0 20 8.972 20 20v80c0 11.028-8.972 20-20 20zm-12-8h12c6.617 0 12-5.383 12-12v-80c0-6.617-5.383-12-12-12h-12z" fill="#32283c"/></g><g><path d="m360 416.457c-11.028 0-20-8.972-20-20v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 6.617 5.383 12 12 12s12-5.383 12-12v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 11.028-8.972 20-20 20z" fill="#e6e6eb"/></g><path d="m424 296.457h-32c-2.209 0-4 1.791-4 4s1.791 4 4 4h12v108c0 2.209 1.791 4 4 4s4-1.791 4-4v-108h12c2.209 0 4-1.791 4-4s-1.791-4-4-4z" fill="#e6e6eb"/></g></g></svg>
+                    <g>
+                      <g>
+                        <path
+                          d="m256 116.457h-16c-13.255 0-24-10.745-24-24 0-13.255 10.745-24 24-24h16c13.255 0 24 10.745 24 24 0 13.255-10.745 24-24 24z"
+                          fill="#cd3232"
+                        />
+                      </g>
+                      <g>
+                        <path
+                          d="m464 460.457h-416c-17.673 0-32-14.327-32-32v-160c0-17.673 14.327-32 32-32h416c17.673 0 32 14.327 32 32v160c0 17.673-14.327 32-32 32z"
+                          fill="#cd3232"
+                        />
+                      </g>
+                      <g>
+                        <path
+                          d="m432 460.457h-384c-17.673 0-32-14.327-32-32v-160c0-17.673 14.327-32 32-32h384c17.673 0 32 14.327 32 32v160c0 17.673-14.327 32-32 32z"
+                          fill="#ff4646"
+                        />
+                      </g>
+                      <g>
+                        <circle cx="96" cy="268.457" fill="#cd3232" r="16" />
+                      </g>
+                      <g>
+                        <circle cx="384" cy="268.457" fill="#cd3232" r="16" />
+                      </g>
+                      <g>
+                        <path
+                          d="m384.008 277.371c-2.993 0-5.916-1.507-7.6-4.243l-119.614-194.373c-3.562-5.789-9.998-9.384-16.794-9.384s-13.232 3.596-16.794 9.384l-119.615 194.373c-2.58 4.193-8.071 5.498-12.263 2.92-4.192-2.58-5.5-8.07-2.92-12.263l119.615-194.373c6.783-11.022 19.036-17.869 31.977-17.869s25.194 6.847 31.977 17.869l119.614 194.374c2.58 4.192 1.272 9.683-2.92 12.263-1.456.895-3.069 1.322-4.663 1.322z"
+                          fill="#463c4b"
+                        />
+                      </g>
+                      <g>
+                        <circle cx="240" cy="92.457" fill="#ff4646" r="24" />
+                      </g>
+                      <g>
+                        <g>
+                          <path
+                            d="m72 416.457c-11.028 0-20-8.972-20-20v-8c0-2.209 1.791-4 4-4s4 1.791 4 4v8c0 6.617 5.383 12 12 12s12-5.383 12-12v-22.111c0-4.575-2.542-8.688-6.634-10.733l-14.311-7.155c-6.819-3.411-11.055-10.265-11.055-17.89v-22.111c0-11.028 8.972-20 20-20s20 8.972 20 20v8c0 2.209-1.791 4-4 4s-4-1.791-4-4v-8c0-6.617-5.383-12-12-12s-12 5.383-12 12v22.111c0 4.575 2.542 8.688 6.634 10.733l14.311 7.155c6.819 3.41 11.055 10.265 11.055 17.889v22.111c0 11.029-8.972 20.001-20 20.001z"
+                            fill="#32283c"
+                          />
+                        </g>
+                        <g>
+                          <path
+                            d="m128 416.457c-11.028 0-20-8.972-20-20v-80c0-11.028 8.972-20 20-20s20 8.972 20 20v80c0 11.028-8.972 20-20 20zm0-112c-6.617 0-12 5.383-12 12v80c0 6.617 5.383 12 12 12s12-5.383 12-12v-80c0-6.617-5.383-12-12-12z"
+                            fill="#32283c"
+                          />
+                        </g>
+                        <g>
+                          <path
+                            d="m304 416.457c-11.028 0-20-8.972-20-20v-80c0-11.028 8.972-20 20-20s20 8.972 20 20v80c0 11.028-8.972 20-20 20zm0-112c-6.617 0-12 5.383-12 12v80c0 6.617 5.383 12 12 12s12-5.383 12-12v-80c0-6.617-5.383-12-12-12z"
+                            fill="#e6e6eb"
+                          />
+                        </g>
+                        <g>
+                          <path
+                            d="m200 416.457h-16c-11.028 0-20-8.972-20-20v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 6.617 5.383 12 12 12h16c2.209 0 4 1.791 4 4s-1.791 4-4 4z"
+                            fill="#32283c"
+                          />
+                        </g>
+                        <g>
+                          <path
+                            d="m232 416.457h-16c-2.209 0-4-1.791-4-4v-112c0-2.209 1.791-4 4-4h16c11.028 0 20 8.972 20 20v80c0 11.028-8.972 20-20 20zm-12-8h12c6.617 0 12-5.383 12-12v-80c0-6.617-5.383-12-12-12h-12z"
+                            fill="#32283c"
+                          />
+                        </g>
+                        <g>
+                          <path
+                            d="m360 416.457c-11.028 0-20-8.972-20-20v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 6.617 5.383 12 12 12s12-5.383 12-12v-96c0-2.209 1.791-4 4-4s4 1.791 4 4v96c0 11.028-8.972 20-20 20z"
+                            fill="#e6e6eb"
+                          />
+                        </g>
+                        <path
+                          d="m424 296.457h-32c-2.209 0-4 1.791-4 4s1.791 4 4 4h12v108c0 2.209 1.791 4 4 4s4-1.791 4-4v-108h12c2.209 0 4-1.791 4-4s-1.791-4-4-4z"
+                          fill="#e6e6eb"
+                        />
+                      </g>
+                    </g>
+                  </svg>
                 </div>
                 <div class="text-card-info-sould">
                   {{ $t('productdetail_productoAgotado') }}
                 </div>
               </div>
             </div>
-            
-            <!-- Unidades en stock -->
             <div class="content_stock">
               <svg
                 v-if="salesData.unidades > 0"
@@ -232,11 +314,13 @@
                 />
               </svg>
               <p class="stock-text">
-                {{ salesData.unidades }} {{ $t('productdetail_stock') }}</span>
+                {{ salesData.unidades }} {{ $t('productdetail_stock') }}
               </p>
             </div>
-            <!-- Variantes de prodcuto -->
-            <div v-if="this.data.detalle.con_variante > 0" class="content-variant">
+            <div
+              v-if="this.data.detalle.con_variante > 0"
+              class="content-variant"
+            >
               <div v-for="(variant, index) in data.variantes" :key="index">
                 <label for="variant name" class="text-variant"
                   >{{ variant.nombre }}:</label
@@ -246,15 +330,16 @@
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
-                    >{{ item.option }}</option
                   >
+                    {{ item.option }}
+                  </option>
                 </SelectGroup>
               </div>
             </div>
-            <!-- Suma de productos -->
+
             <div :class="{ disabled: !salesData.estado }">
               <!-- Div quanti y btn -->
-              <div class="content-quanti-btnShop" >
+              <div class="content-quanti-btnShop">
                 <div class="quantity">
                   <!-- <p class="text-quantity">{{ $t('cart_cantidad') }}</p> -->
                   <button class="quantity_remove" v-on:click="removeQuantity()">
@@ -278,16 +363,19 @@
                   <button
                     ref="colorBtn"
                     class="btn"
-                    v-if="!spent"
-                    v-on:click="addShoppingCart"                    
+                    v-if="!spent && this.salesData.estado == true"
+                    v-on:click="addShoppingCart"
                   >
                     {{ $t('productdetail_añadiralcarrito') }}
                   </button>
                   <button
                     disabled
                     class="btn-disabled"
-                    v-if="spent"
+                    v-else-if="this.salesData.estado == false"
                   >
+                    {{ $t('productdetail_btnANodisponible') }}
+                  </button>
+                  <button disabled class="btn-disabled" v-else-if="spent">
                     {{ $t('home_cardAgotado') }}
                   </button>
                 </div>
@@ -295,37 +383,38 @@
               <!-- text de garantia -->
               <div class="item-info-product">
                 <div v-if="data.info.garantia" class="content_buy_action">
-                    <p class="text-unidades">
-                      {{ $t('productdetail_garantia') }}
-                    </p>
-                    <span class="text-garantia">{{ data.info.garantia }}</span>
+                  <p class="text-unidades">
+                    {{ $t('productdetail_garantia') }}
+                  </p>
+                  <span class="text-garantia">{{ data.info.garantia }}</span>
                 </div>
                 <!-- Categoria de producto -->
                 <div class="category_product">
-                    <p class="category-beffore">{{ $t('productdetail_categoria') }}:</p>
-                    <p class="category-text">
-                      {{
-                        data.detalle.categoria_producto
-                          .nombre_categoria_producto
-                      }}
-                    </p>
+                  <p class="category-beffore">
+                    {{ $t('productdetail_categoria') }}:
+                  </p>
+                  <p class="category-text">
+                    {{
+                      data.detalle.categoria_producto.nombre_categoria_producto
+                    }}
+                  </p>
                 </div>
                 <!-- Compartir Redes -->
                 <div class="content-shared">
-                    <p class="text-unidades" style="margin-right: 10px;">
-                      {{ $t('productdetail_compartir') }}
-                    </p>
-                    <a
-                      :href="this.sharingFacebook"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      class="btn-facebook"
-                    >
-                      <facebook-icon class="wp-icon" />
-                    </a>
-                    <button class="btn-whatsapp" @click="redirectWP()">
-                      <whatsapp-icon class="wp-icon" />
-                    </button>
+                  <p class="text-unidades" style="margin-right: 10px">
+                    {{ $t('productdetail_compartir') }}
+                  </p>
+                  <a
+                    :href="this.sharingFacebook"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    class="btn-facebook"
+                  >
+                    <facebook-icon class="wp-icon" />
+                  </a>
+                  <button class="btn-whatsapp" @click="redirectWP()">
+                    <whatsapp-icon class="wp-icon" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -347,48 +436,48 @@
       </div>
       <!-- Metas -->
       <div itemscope itemtype="http://schema.org/Product">
-          <meta itemprop="productID" :content="`${data.detalle.id}`" />
-          <meta itemprop="name" :content="`${data.detalle.nombre}`" />
-          <meta itemprop="brand" :content="`${data.info.marca}`" />
+        <meta itemprop="productID" :content="`${data.detalle.id}`" />
+        <meta itemprop="name" :content="`${data.detalle.nombre}`" />
+        <meta itemprop="brand" :content="`${data.info.marca}`" />
+        <meta
+          itemprop="description"
+          :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
+        />
+        <meta itemprop="image" :content="`${data.detalle.foto_cloudinary}`" />
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+          <link itemprop="availability" href="in stock" />
+          <link itemprop="itemCondition" href="new" />
+          <meta itemprop="price" :content="`${this.salesData.precio}`" />
           <meta
-            itemprop="description"
-            :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
-          />
-          <meta itemprop="image" :content="`${data.detalle.foto_cloudinary}`" />
-          <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-            <link itemprop="availability" href="in stock" />
-            <link itemprop="itemCondition" href="new" />
-            <meta itemprop="price" :content="`${this.salesData.precio}`" />
-            <meta
-              itemprop="priceCurrency"
-              :content="`${dataStore.tienda.moneda}`"
-            />
-          </div>
-          <meta itemprop="url" :content="`${this.sharing.url}`" />
-      </div>
-      <div>
-          <meta property="product:catalog_id" :content="`${data.detalle.id}`" />
-          <meta property="og:title" :content="`${data.detalle.nombre}`" />
-          <meta property="product:brand" :content="`${data.info.marca}`" />
-          <meta
-            property="og:description"
-            :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
-          />
-          <meta
-            property="og:image"
-            :content="`${data.detalle.foto_cloudinary}`"
-          />
-          <meta property="product:availability" content="in stock" />
-          <meta property="product:condition" content="new" />
-          <meta
-            property="product:price:amount"
-            :content="`${this.salesData.precio}`"
-          />
-          <meta
-            property="product:price:currency"
+            itemprop="priceCurrency"
             :content="`${dataStore.tienda.moneda}`"
           />
-          <meta property="og:url" :content="`${this.sharing.url}`" />
+        </div>
+        <meta itemprop="url" :content="`${this.sharing.url}`" />
+      </div>
+      <div>
+        <meta property="product:catalog_id" :content="`${data.detalle.id}`" />
+        <meta property="og:title" :content="`${data.detalle.nombre}`" />
+        <meta property="product:brand" :content="`${data.info.marca}`" />
+        <meta
+          property="og:description"
+          :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
+        />
+        <meta
+          property="og:image"
+          :content="`${data.detalle.foto_cloudinary}`"
+        />
+        <meta property="product:availability" content="in stock" />
+        <meta property="product:condition" content="new" />
+        <meta
+          property="product:price:amount"
+          :content="`${this.salesData.precio}`"
+        />
+        <meta
+          property="product:price:currency"
+          :content="`${dataStore.tienda.moneda}`"
+        />
+        <meta property="og:url" :content="`${this.sharing.url}`" />
       </div>
     </div>
   </div>
@@ -403,7 +492,7 @@ import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
 import idCloudinaryDetalle from '../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary,idCloudinaryDetalle],
+  mixins: [idCloudinary, idCloudinaryDetalle],
   name: 'Ko-ProductDetail-1',
   props: {
     dataStore: Object,
@@ -440,7 +529,7 @@ export default {
     //     sticky.style.width = '20%'
     //     sticky.style.overflow = 'hidden'
 
-    //   } 
+    //   }
     // })
   },
   data() {
@@ -482,13 +571,13 @@ export default {
         url: '',
         quote: '',
       },
-      sharingFacebook: '',      
+      sharingFacebook: '',
     }
   },
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
-    },   
+    },
     existPayments() {
       const mediospago = this.dataStore.medios_pago
       if (
@@ -504,7 +593,7 @@ export default {
     },
     beforeCombination() {
       return this.$store.state.beforeCombination
-    },  
+    },
     // eslint-disable-next-line vue/return-in-computed-property
     precio() {
       if (this.data.detalle.precio) {
@@ -512,7 +601,7 @@ export default {
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
-    },   
+    },
     category() {
       return this.productsData.filter(
         (product) =>
@@ -521,7 +610,6 @@ export default {
           product.id !== this.data.detalle.id
       )
     },
-    
   },
   methods: {
     changeSlide() {
@@ -654,8 +742,7 @@ export default {
             case 'precio':
               this.envio = {
                 titulo: 'Tarifa por precio',
-                desc:
-                  'Segun la suma del costo de tus productos te cobraran el envio',
+                desc: 'Segun la suma del costo de tus productos te cobraran el envio',
               }
               break
             case 'precio_ciudad':
@@ -700,7 +787,8 @@ export default {
       this.existYoutube = false
     },
     videoYoutube(url) {
-      let myregexp = /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+      let myregexp =
+        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
       let id = ''
       if (url && url !== '' && url !== 'null') {
         this.validVideo = true
@@ -729,9 +817,8 @@ export default {
         product.limitQuantity = this.data.info.inventario
       }
       if (typeof this.productIndexCart === 'number') {
-        const mutableProduct = this.$store.state.productsCart[
-          this.productIndexCart
-        ]
+        const mutableProduct =
+          this.$store.state.productsCart[this.productIndexCart]
         mutableProduct.cantidad += this.data.cantidad
         this.$store.state.productsCart.splice(
           this.productIndexCart,
@@ -746,7 +833,7 @@ export default {
           content_type: 'product',
           content_ids: this.data.detalle.id,
           value: this.salesData.precio,
-          num_items:this.data.cantidad,
+          num_items: this.data.cantidad,
           content_name: this.data.detalle.nombre,
           currency: this.dataStore.tienda.moneda,
           description: 'Agregar al carrito el producto',
@@ -1105,7 +1192,7 @@ export default {
   font-size: 14px;
   line-height: 1.2;
   font-family: var(--font-style-3);
-    /* font-family: 'Lora' !important; */
+  /* font-family: 'Lora' !important; */
   color: var(--color_title);
 }
 .card-descuento {
@@ -1130,7 +1217,7 @@ export default {
   line-height: 1.5;
   text-decoration: none;
 }
-.content-variant{
+.content-variant {
   margin-top: 15px;
   margin-bottom: 30px;
 }
@@ -1160,7 +1247,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
 }
-.transport-icon{
+.transport-icon {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -1175,7 +1262,7 @@ export default {
   margin-bottom: 10px;
   @apply w-full flex flex-row justify-start items-end;
 }
-.text-card-info-sould{
+.text-card-info-sould {
   color: #ed2353;
   margin-left: 8px;
   font-weight: bold;
@@ -1245,7 +1332,7 @@ export default {
   margin-top: 10px;
 }
 .btn-facebook {
-  color: #1877f2;  
+  color: #1877f2;
   background-color: transparent;
   border-radius: 5px;
   width: 10px;
@@ -1324,7 +1411,7 @@ export default {
 }
 .btn-disabled {
   color: white;
-  border-radius: 35px;
+  border-radius: var(--radius_btn);
   border: solid 2px gray;
   background-color: gray;
   padding: 12px 20px;
@@ -1360,7 +1447,7 @@ export default {
   border-bottom-left-radius: var(--radius_btn);
   background: transparent;
   width: 30px;
-  height: 42px;  
+  height: 42px;
 }
 .quantity_value {
   font-size: 14px;
@@ -1380,7 +1467,7 @@ export default {
   border-bottom-right-radius: var(--radius_btn);
   background: transparent;
   width: 30px;
-  height: 42px; 
+  height: 42px;
 }
 .quantity_add:hover {
   @apply bg-red-btnbannershop;
@@ -1392,11 +1479,11 @@ export default {
   font-size: 16px;
   color: var(--color_price);
 }
-.quantity_add:hover .icon{
- color: var(--color_title);
+.quantity_add:hover .icon {
+  color: var(--color_title);
 }
-.quantity_remove:hover .icon{
- color: var(--color_title);
+.quantity_remove:hover .icon {
+  color: var(--color_title);
 }
 .features {
   width: 100%;

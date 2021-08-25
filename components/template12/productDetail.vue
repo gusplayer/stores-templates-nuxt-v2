@@ -135,7 +135,10 @@
         </div>
         <div class="responsive-purchase">
           <div class="ko-input">
-            <div class="quantity-resposive" v-if="!spent">
+            <div
+              class="quantity-resposive"
+              v-if="!spent && this.salesData.estado == true"
+            >
               <button class="quantity_remove" v-on:click="removeQuantity()">
                 <menos-icon class="icon" />
               </button>
@@ -155,7 +158,9 @@
             <button
               class="btn-responsive"
               ref="color2"
-              v-if="!spent && salesData.precio > 0"
+              v-if="
+                !spent && salesData.precio > 0 && this.salesData.estado == true
+              "
               v-on:click="addShoppingCart"
             >
               <span>
@@ -172,7 +177,16 @@
                 {{ $t('productdetail_cotizar') }}
               </span>
             </button>
-            <div v-if="spent" class="wrapper-btn">
+            <button
+              disabled
+              class="btn-responsive"
+              v-else-if="this.salesData.estado == false"
+            >
+              <span>
+                {{ $t('productdetail_btnANodisponible') }}
+              </span>
+            </button>
+            <div v-else-if="spent" class="wrapper-btn">
               <p class="card-info-1-res">
                 😥 {{ $t('productdetail_productoAgotado') }}
               </p>

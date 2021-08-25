@@ -109,7 +109,7 @@
               </div>
             </div>
             <div
-              style="margin-top: 10px;"
+              style="margin-top: 10px"
               v-if="salesData && salesData.unidades"
             >
               <p class="text-variant-type" v-if="salesData.unidades > 0">
@@ -117,7 +117,7 @@
               </p>
             </div>
             <div class="content-shared">
-              <p class="text-variant-type" style="margin-right: 10px;">
+              <p class="text-variant-type" style="margin-right: 10px">
                 {{ $t('productdetail_compartir') }}
               </p>
               <a
@@ -151,7 +151,9 @@
           <button
             class="btn-responsive"
             ref="color2"
-            v-if="!spent && salesData.precio > 0"
+            v-if="
+              !spent && salesData.precio > 0 && this.salesData.estado == true
+            "
             v-on:click="addShoppingCart"
           >
             <span>
@@ -166,6 +168,15 @@
           >
             <span>
               {{ $t('productdetail_cotizar') }}
+            </span>
+          </button>
+          <button
+            disabled
+            class="btn-responsive"
+            v-if="this.salesData.estado == false"
+          >
+            <span>
+              {{ $t('productdetail_btnANodisponible') }}
             </span>
           </button>
           <div v-if="spent" class="wrapper-btn">
@@ -391,8 +402,7 @@ export default {
             case 'precio':
               this.envio = {
                 titulo: 'Tarifa por precio',
-                desc:
-                  'Segun la suma del costo de tus productos te cobraran el envio',
+                desc: 'Segun la suma del costo de tus productos te cobraran el envio',
               }
               break
             case 'precio_ciudad':
@@ -437,7 +447,8 @@ export default {
       this.existYoutube = false
     },
     videoYoutube(url) {
-      let myregexp = /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+      let myregexp =
+        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
       let id = ''
       if (url && url !== '' && url !== 'null') {
         this.validVideo = true
@@ -467,9 +478,8 @@ export default {
         product.limitQuantity = this.data.info.inventario
       }
       if (typeof this.productIndexCart === 'number') {
-        const mutableProduct = this.$store.state.productsCart[
-          this.productIndexCart
-        ]
+        const mutableProduct =
+          this.$store.state.productsCart[this.productIndexCart]
         mutableProduct.cantidad += this.data.cantidad
         this.$store.state.productsCart.splice(
           this.productIndexCart,
