@@ -886,11 +886,21 @@ export default {
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
             '_blank'
           )
+          if (navigator.platform == 'iPhone' || navigator.platform == 'iPad') {
+            window.location.href(
+              `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
+            )
+          }
         } else {
           window.open(
             `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
             '_blank'
           )
+          if (navigator.platform == 'iPhone' || navigator.platform == 'iPad') {
+            window.location.href(
+              `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
+            )
+          }
         }
       } else {
         if (this.mobileCheck()) {
@@ -898,11 +908,21 @@ export default {
             `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
             '_blank'
           )
+          if (navigator.platform == 'iPhone' || navigator.platform == 'iPad') {
+            window.location.href(
+              `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`
+            )
+          }
         } else {
           window.open(
             `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
             '_blank'
           )
+          if (navigator.platform == 'iPhone' || navigator.platform == 'iPad') {
+            window.location.href(
+              `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
+            )
+          }
         }
       }
       this.removeCartItems()
