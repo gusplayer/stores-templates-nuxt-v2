@@ -14,7 +14,9 @@
   >
     <div
       class="content-bg"
-      :style="`background-image: url(${newsletter.url_img_background});`"
+      :style="`background-image: url(${idCloudinaryBanner(
+        newsletter.url_img_background
+      )});`"
     >
       <div class="content-txt">
         <p class="txt-top">Para actualizaciones diarias</p>
@@ -31,6 +33,7 @@
 </template>
 <script>
 import Newsletter from '../../components/template11/_newsletter/newsletter'
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
   name: 'Ko-Newsletter',
   props: {
@@ -38,6 +41,7 @@ export default {
     newsletter: Object,
     setting11General: Object,
   },
+  mixins: [idCloudinaryBanner],
   components: {
     Newsletter,
   },

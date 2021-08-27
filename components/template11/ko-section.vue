@@ -15,8 +15,12 @@
         <div class="wrapper-left">
           <img
             class="img-left"
-            :src="this.settingKsection.values[0].url_img_background"
-            alt="banner-1"
+            v-lazy="
+              idCloudinaryBanner(
+                this.settingKsection.values[0].url_img_background
+              )
+            "
+            alt="imagen-1"
           />
           <div
             class="txt-content"
@@ -26,13 +30,15 @@
               class="txt-top"
               :style="`color: ${this.settingKsection.values[0].colorPretitle}; margin-bottom:${this.settingKsection.values[0].marginbottomPretitle};`"
             >
-              {{ this.settingKsection.values[0].pretitle }}
+              {{
+                this.settingKsection.values[0].pretitle.replace(/&nbsp;/g, ' ')
+              }}
             </p>
             <p
               class="txt-bottom"
               :style="`color: ${this.settingKsection.values[0].colorTitle}; margin-bottom:${this.settingKsection.values[0].marginbottomTitle};`"
             >
-              {{ this.settingKsection.values[0].title }}
+              {{ this.settingKsection.values[0].title.replace(/&nbsp;/g, ' ') }}
             </p>
           </div>
         </div>
@@ -41,8 +47,12 @@
         <div class="wrapper-center">
           <img
             class="img-center"
-            :src="this.settingKsection.values[1].url_img_background"
-            alt="banner-2"
+            v-lazy="
+              idCloudinaryBanner(
+                this.settingKsection.values[1].url_img_background
+              )
+            "
+            alt="imagen-2"
           />
           <div
             class="txt-content"
@@ -52,13 +62,15 @@
               class="txt-top"
               :style="`color: ${this.settingKsection.values[1].colorPretitle}; margin-bottom:${this.settingKsection.values[1].marginbottomPretitle};`"
             >
-              {{ this.settingKsection.values[1].pretitle }}
+              {{
+                this.settingKsection.values[1].pretitle.replace(/&nbsp;/g, ' ')
+              }}
             </p>
             <p
               class="txt-bottom"
               :style="`color: ${this.settingKsection.values[1].colorTitle}; margin-bottom:${this.settingKsection.values[1].marginbottomTitle};`"
             >
-              {{ this.settingKsection.values[1].title }}
+              {{ this.settingKsection.values[1].title.replace(/&nbsp;/g, ' ') }}
             </p>
           </div>
         </div>
@@ -67,8 +79,12 @@
         <div class="wrapper-right">
           <img
             class="img-right"
-            :src="this.settingKsection.values[2].url_img_background"
-            alt="banner-3"
+            v-lazy="
+              idCloudinaryBanner(
+                this.settingKsection.values[2].url_img_background
+              )
+            "
+            alt="imagen-3"
           />
           <div
             class="txt-content"
@@ -78,13 +94,15 @@
               class="txt-top"
               :style="`color: ${this.settingKsection.values[2].colorPretitle}; margin-bottom:${this.settingKsection.values[2].marginbottomPretitle};`"
             >
-              {{ this.settingKsection.values[2].pretitle }}
+              {{
+                this.settingKsection.values[2].pretitle.replace(/&nbsp;/g, ' ')
+              }}
             </p>
             <p
               class="txt-bottom"
               :style="`color: ${this.settingKsection.values[2].colorTitle}; margin-bottom:${this.settingKsection.values[2].marginbottomTitle};`"
             >
-              {{ this.settingKsection.values[2].title }}
+              {{ this.settingKsection.values[2].title.replace(/&nbsp;/g, ' ') }}
             </p>
           </div>
         </div>
@@ -93,12 +111,14 @@
   </div>
 </template>
 <script>
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
   name: 'Ko-Section',
   props: {
     settingKsection: Object,
     settingGeneral: Object,
   },
+  mixins: [idCloudinaryBanner],
 }
 </script>
 <style scoped>

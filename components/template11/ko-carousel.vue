@@ -11,21 +11,19 @@
       >
         <img
           class="slide-bgWeb"
-          :src="banner.url_img_background"
-          alt="Bg-Image"
-        />
+          :src="idCloudinaryBanner(banner.url_img_background)"
+          alt="Bg-Image" />
         <img
           class="slide-bgMovil"
-          :src="banner.url_img_background_res"
-          alt="Bg-Image"
-        />
-        <CarouselContent class="absolute" :banner="banner" />
-      </a>
+          :src="idCloudinaryBanner(banner.url_img_background_res)"
+          alt="Bg-Image" /><CarouselContent class="absolute" :banner="banner"
+      /></a>
     </div>
   </div>
 </template>
 <script>
 import CarouselContent from '../../components/template11/_carouselBanner/banner-carousel'
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
   name: 'Ko-Banner',
   components: {
@@ -35,6 +33,7 @@ export default {
     settingKbanner: Object,
     settingGeneral: Object,
   },
+  mixins: [idCloudinaryBanner],
   data() {
     return {
       swiperOption: {

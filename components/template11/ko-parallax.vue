@@ -19,17 +19,21 @@
       }`"
       rel="noreferrer noopener"
       class="content-bg"
-      :style="`background-image: url(${settingKparallax.url_img_background});`"
+      :style="`background-image: url(${idCloudinaryBanner(
+        settingKparallax.url_img_background
+      )});`"
     >
       <div class="content-txt">
-        <p class="txt-top">{{ settingKparallax.pretitle }}</p>
+        <p class="txt-top">
+          {{ settingKparallax.pretitle.replace(/&nbsp;/g, ' ') }}
+        </p>
         <div class="separator"></div>
-        <p class="txt-bottom">{{ settingKparallax.title }}</p>
+        <p class="txt-bottom">
+          {{ settingKparallax.title.replace(/&nbsp;/g, ' ') }}
+        </p>
         <div class="content-btn" v-if="settingKparallax.visbleBtn">
           <nuxt-link :to="settingKparallax.url_redirect">
-            <button class="btn">
-              {{ $t('home_comprarAhora') }}
-            </button>
+            <button class="btn">{{ $t('home_comprarAhora') }}</button>
           </nuxt-link>
         </div>
       </div>
@@ -37,12 +41,14 @@
   </div>
 </template>
 <script>
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
   name: 'Ko-Parallax',
   props: {
     settingKparallax: Object,
     settingGeneral: Object,
   },
+  mixins: [idCloudinaryBanner],
 }
 </script>
 <style scoped>

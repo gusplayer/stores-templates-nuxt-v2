@@ -28,7 +28,7 @@
                     <img
                       @click="selectedPhoto(data.detalle.foto_cloudinary)"
                       class="img-list"
-                      :src="
+                      v-lazy="
                         idCloudinary(data.detalle.foto_cloudinary, 120, 120)
                       "
                       alt="Product Img"
@@ -42,14 +42,14 @@
                     <img
                       @click="selectedPhoto(foto.foto_cloudinary)"
                       class="img-list"
-                      :src="foto.foto_cloudinary"
+                      v-lazy="foto.foto_cloudinary"
                       alt="Product Img"
                     />
                   </div>
                   <div class="swiper-slide photos_selected">
                     <img
                       v-if="idYoutube"
-                      :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
+                      v-lazy="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
                       v-show="idYoutube"
                       v-on:mouseover="existYoutube = true"
                       class="video"
@@ -75,7 +75,7 @@
                 <img
                   class="photo_main"
                   v-on:mouseover="activeZoom = !activeZoom"
-                  :src="selectPhotoUrl"
+                  v-lazy="selectPhotoUrl"
                   alt="Product Zoom"
                 />
               </div>
@@ -91,7 +91,9 @@
               </div>
               <iframe
                 v-show="existYoutube"
-                :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
+                v-lazy="
+                  `https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`
+                "
                 frameborder="0"
                 allowfullscreen
                 class="photo_main"
@@ -109,7 +111,7 @@
             <div class="main-images">
               <img
                 class="img-list"
-                :src="idCloudinaryBanner(data.detalle.foto_cloudinary)"
+               v-lazy="idCloudinaryBanner(data.detalle.foto_cloudinary)"
                 alt="Product Img"
               />
             </div>

@@ -20,7 +20,9 @@
     >
       <div class="banner-mapa" v-if="dataStore.geolocalizacion.length">
         <iframe
-          :src="`https://maps.google.com/maps?q=${this.dataStore.geolocalizacion[0].latitud},${this.dataStore.geolocalizacion[0].longitud}&hl=es;z=14&amp;output=embed`"
+          v-lazy="
+            `https://maps.google.com/maps?q=${this.dataStore.geolocalizacion[0].latitud},${this.dataStore.geolocalizacion[0].longitud}&hl=es;z=14&amp;output=embed`
+          "
           width="100%"
           height="250"
           frameborder="0"
@@ -331,10 +333,11 @@ export default {
 }
 @screen sm {
   .banner-mapa {
-    @apply hidden;
+    /* margin-top: 30px; */
+    @apply flex w-full;
   }
   .container-contact {
-    margin-top: 140px;
+    margin-top: 20px;
     @apply flex flex-col;
   }
   .content-grid {
@@ -436,7 +439,7 @@ export default {
 }
 @screen md {
   .banner-mapa {
-    margin-top: 140px;
+    /* margin-top: 140px; */
     @apply w-full flex;
   }
   .container-contact {

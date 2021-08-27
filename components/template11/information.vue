@@ -20,7 +20,7 @@
         }; background:${settingKinformation.values[0].color_bg}; `"
       >
         <img
-          :src="settingKinformation.values[0].url_img_Top"
+          v-lazy="settingKinformation.values[0].url_img_Top"
           alt="imgInfo1"
           class="contentimg"
         />
@@ -53,8 +53,8 @@
         }; background:${settingKinformation.values[1].color_bg}; `"
       >
         <img
-          :src="settingKinformation.values[1].url_img_Top"
-          alt="imgInfo1"
+          v-lazy="settingKinformation.values[1].url_img_Top"
+          alt="imgInfo2"
           class="contentimg"
         />
         <p
@@ -86,8 +86,8 @@
         }; background:${settingKinformation.values[2].color_bg}; `"
       >
         <img
-          :src="settingKinformation.values[2].url_img_Top"
-          alt="imgInfo1"
+          v-lazy="settingKinformation.values[2].url_img_Top"
+          alt="imgInfo3"
           class="contentimg"
         />
         <p

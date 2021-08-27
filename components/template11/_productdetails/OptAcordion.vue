@@ -34,11 +34,7 @@
             rel="noreferrer noopener"
             class="cursor_point"
           >
-            <img
-              class="logo-pasarela"
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png"
-              alt="logo Credibanco"
-            />
+            <img class="logo-pasarela" v-lazy="img1" alt="logo Credibanco" />
           </a>
         </li>
         <li v-if="mediospago.daviplata == 1">
@@ -48,7 +44,7 @@
           </p>
           <img
             class="logo-pasarela-daviplata"
-            src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png"
+            v-lazy="img2"
             alt="logo daviPlata"
           />
         </li>
@@ -61,11 +57,7 @@
             rel="noreferrer noopener"
             class="cursor_point"
           >
-            <img
-              class="logo-pasarela-efecty"
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png"
-              alt="logo efecty"
-            />
+            <img class="logo-pasarela-efecty" v-lazy="img3" alt="logo efecty" />
           </a>
         </li>
         <li v-if="mediospago.mercado_pago == 1">
@@ -81,7 +73,7 @@
           >
             <img
               class="logo-pasarela-daviplata"
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png"
+              v-lazy="img4"
               alt="logo mercadopago"
             />
           </a>
@@ -99,7 +91,7 @@
           >
             <img
               class="logo-pasarela-daviplata"
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png"
+              v-lazy="img5"
               alt="logo nequi"
             />
           </a>
@@ -111,7 +103,7 @@
           </p>
           <img
             class="logo-pasarela-payco"
-            src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png"
+            v-lazy="img6"
             alt="Pasarela de pagos epayco"
           />
         </li>
@@ -127,7 +119,7 @@
           >
             <img
               class="logo-pasarela-payu"
-              src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
+              v-lazy="img7"
               alt="PayU"
               border="0"
             />
@@ -141,7 +133,7 @@
           <a href="https://wompi.co/" target="_blank" rel="noreferrer noopener">
             <img
               class="logo-pasarela-wompi"
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png"
+              v-lazy="img8"
               alt="wompi"
               border="0"
             />
@@ -223,6 +215,14 @@ export default {
     return {
       medioEnvio: '',
       envioproducto: '',
+      img1: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png',
+      img2: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png',
+      img3: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png',
+      img4: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png',
+      img5: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png',
+      img6: 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png',
+      img7: 'https://ecommerce.payulatam.com/logos/PayU_CO.png',
+      img8: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png',
     }
   },
   computed: {
@@ -240,6 +240,7 @@ export default {
       }
     },
     envios() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },

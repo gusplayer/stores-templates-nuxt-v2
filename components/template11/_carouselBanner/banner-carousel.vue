@@ -2,14 +2,14 @@
   <div class="content-carousel">
     <div class="content-txt">
       <p class="txt-top" :style="`color: ${banner.colorPretitle};`">
-        {{ banner.pretitle }}
+        {{ banner.pretitle.replace(/&nbsp;/g, ' ') }}
       </p>
       <div
         class="separator"
         :style="`background: ${banner.color_border};`"
       ></div>
       <p class="txt-bottom" :style="`color: ${banner.colorTitle};`">
-        {{ banner.title }}
+        {{ banner.title.replace(/&nbsp;/g, ' ') }}
       </p>
     </div>
     <div class="content-btn" v-if="banner.visbleBtn">
@@ -40,6 +40,11 @@ export default {
 }
 .content-btn {
   @apply w-full flex flex-col justify-center items-center;
+}
+@media (max-width: 500px) {
+  .btn {
+    margin-top: 10px !important;
+  }
 }
 @screen sm {
   .txt-top {

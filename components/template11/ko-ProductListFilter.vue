@@ -206,7 +206,9 @@
                   <div class="header-content-logo">
                     <nuxt-link to="/productos" class="wrapper-logo">
                       <img
-                        :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+                        v-lazy="
+                          `https://api2.komercia.co/logos/${dataStore.tienda.logo}`
+                        "
                         class="header-logo"
                         alt="Logo Img"
                         @click="clear"

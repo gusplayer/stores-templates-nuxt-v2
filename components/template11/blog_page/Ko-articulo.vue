@@ -5,7 +5,7 @@
       <div class="content-img">
         <img
           class="img-aritcle"
-          :src="dataArticle.imagen_principal_url"
+          v-lazy="dataArticle.imagen_principal_url"
           alt="Image-Article"
         />
       </div>
