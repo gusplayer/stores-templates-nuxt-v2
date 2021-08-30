@@ -37,7 +37,15 @@
         settingByTemplate11.parallax.visible
       "
     />
-    <KInformacion id="kInformationX" v-bind="componentsProps" />
+    <KInformacion
+      id="kInformationX"
+      v-bind="componentsProps"
+      v-if="
+        settingByTemplate11 &&
+        settingByTemplate11.information &&
+        settingByTemplate11.information.visible
+      "
+    />
     <Kblog
       id="kBlogX"
       v-bind="componentsProps"

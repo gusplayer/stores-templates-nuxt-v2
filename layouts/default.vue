@@ -207,8 +207,8 @@ export default {
         tipo_letra =
           this.settingByTemplate11 &&
           this.settingByTemplate11.settingGeneral &&
-          this.settingByTemplate.settingGeneral.fount_1
-            ? this.settingByTemplate.settingGeneral.fount_1
+          this.settingByTemplate11.settingGeneral.fount_1
+            ? this.settingByTemplate11.settingGeneral.fount_1
             : 'Roboto'
         break
       case 99:
