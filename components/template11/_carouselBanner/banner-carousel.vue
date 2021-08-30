@@ -1,5 +1,16 @@
 <template>
-  <div class="content-carousel">
+  <div
+    class="content-carousel"
+    :style="[
+      settingGeneral,
+      {
+        '--font-style-1':
+          this.settingGeneral && this.settingGeneral.fount_1
+            ? this.settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="content-txt">
       <p class="txt-top" :style="`color: ${banner.colorPretitle};`">
         {{ banner.pretitle.replace(/&nbsp;/g, ' ') }}
@@ -28,6 +39,7 @@
 export default {
   props: {
     banner: Object,
+    settingGeneral: Object,
   },
 }
 </script>
@@ -57,11 +69,12 @@ export default {
   }
   .btn {
     font-size: 10px;
+    border-radius: var(--radius_btn);
     @apply font-normal leading-21 uppercase px-14 py-4;
   }
   .btn:hover {
-    color: #fff;
-    background-color: #000;
+    color: var(--hover_text_btn);
+    background-color: var(--hover_Bg_btn);
   }
   .separator {
     @apply w-60 h-1 my-10 uppercase;

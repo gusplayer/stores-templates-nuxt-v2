@@ -29,7 +29,7 @@
         class="item-content descripcion"
         v-html="data.info.descripcion"
         v-if="focusbtn1"
-        style="color: #777;"
+        style="color: #777"
       ></div>
       <div class="item-content opcpago" v-if="focusbtn2">
         <ul>
@@ -313,32 +313,32 @@ export default {
 }
 
 .content_product_description {
-  color: #777;
+  color: var(--color_subtext);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.42857143;
-  font-family: 'Roboto', sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full flex flex-col justify-center items-start;
 }
 h3 {
-  color: #606060;
+  color: var(--color_text);
   font-size: 15px;
   font-weight: 600;
   text-transform: uppercase;
   align-self: flex-start;
-  font-family: 'Roboto', sans-serif !important;
+  font-family: var(--font-style-1) !important;
 }
 h4 {
-  font-family: 'Roboto', sans-serif !important;
-  color: #606060;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_text);
   font-size: 15px;
   font-weight: 600;
   line-height: 1.42857143;
   @apply w-full flex flex-col justify-center items-start mb-5;
 }
 li p {
-  font-family: 'Roboto', sans-serif !important;
-  color: #777;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
@@ -346,8 +346,8 @@ li p {
 }
 .description-method,
 .price {
-  font-family: 'Roboto', sans-serif !important;
-  color: #777;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
@@ -363,24 +363,24 @@ img {
     @apply w-full flex flex-col justify-center items-center;
   }
   .content-tab {
-    border-color: #ededed;
+    border-color: var(--border);
     @apply w-full flex flex-col justify-center items-center mt-6 border p-20;
   }
   .head-content {
     @apply w-full grid grid-cols-1 gap-2 justify-center items-center;
   }
   .tittle {
-    color: #777;
+    color: var(--color_subtext);
     font-size: 14px;
     background-color: transparent;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply w-full h-40 flex justify-center items-center font-normal uppercase transition-all ease-in duration-0.2;
   }
   .show-select-active {
-    background-color: #000;
+    background-color: var(--color_gb_tabs);
   }
   .show-select-active .tittle {
-    color: #fff;
+    color: var(--color_text_tabs);
   }
 }
 @media (min-width: 425px) {
@@ -398,7 +398,7 @@ img {
   }
   .head-content {
     @apply w-full flex flex-row justify-start items-start mb-0;
-    border-bottom: 1px solid #ededed;
+    border-bottom: 1px solid transparent;
   }
   .head-content {
     @apply w-full flex flex-row justify-start items-start mb-0 gap-0;
@@ -407,7 +407,7 @@ img {
     @apply w-full flex justify-start items-center;
   }
   .content-tab {
-    border-color: #ededed;
+    border-color: var(--border);
     @apply w-full flex flex-row justify-start items-start mt-0 border transition-all ease-in duration-0.2;
   }
   .tittle {
@@ -415,10 +415,10 @@ img {
     @apply w-full h-50 text-center justify-center items-center;
   }
   .show-select-active {
-    background-color: #000;
+    background-color: var(--color_gb_tabs);
   }
   .show-select-active .tittle {
-    color: #fff;
+    color: var(--color_text_tabs);
   }
   .content-tab {
     @apply p-40;

@@ -6,7 +6,7 @@
         name="format"
         ref="format"
         @change="updateValue()"
-        :style="value == -1 || !value ? 'color: #777' : ''"
+        :class="value == -1 || !value ? 'colortext' : ''"
       >
         <option disabled>{{ $t('productdetail_seleccionarOpcion') }}</option>
         <slot></slot>
@@ -61,9 +61,8 @@ select {
   border: 0 !important;
   background: transparent;
   background-image: none;
-  /* color: var(--color_subtext); */
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #222;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
   font-size: 14px;
   font-weight: 600;
   transition: all 0.6s ease-in-out;
@@ -72,7 +71,7 @@ select::-ms-expand {
   display: none;
 }
 .title-input {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   color: #222;
   font-size: 14px;
   font-weight: 600;
@@ -84,25 +83,27 @@ select::-ms-expand {
   display: flex;
   width: 15em;
   height: 40px;
-  background: white;
+  background: transparent;
   overflow: hidden;
   color: #222;
-  /* border: 2px solid var(--color_border); */
-  border: 2px solid #222;
+  border: 2px solid var(--border);
   border-radius: var(--radius_btn);
+}
+.colortext {
+  color: var(--color_subtext);
 }
 select {
   flex: 1;
   padding: 0 0.5em 0 1em;
   cursor: pointer;
   font-size: 1em;
-  background-color: #fff;
+  background-color: transparent;
   color: #222;
 }
 .select::after {
   content: url('data:image/svg+xml;charset=UTF-8, <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" fill="Dark Gray" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>');
   position: absolute;
-  color: #222;
+  color: var(--border);
   top: 0;
   right: 0;
   padding: 0.4em 1em;
@@ -112,7 +113,7 @@ select {
 }
 option {
   /* color: var(--color_subtext); */
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   color: #222;
   font-size: 14px;
   font-weight: 400;
@@ -120,7 +121,7 @@ option {
 }
 option:disabled {
   background: #f8f8f8;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   color: #222;
   font-size: 14px;
   font-weight: 700;

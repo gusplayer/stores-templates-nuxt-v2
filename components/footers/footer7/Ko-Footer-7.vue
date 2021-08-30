@@ -319,7 +319,7 @@ export default {
     font-family: var(--font-style-1) !important;
   }
   .btns:hover {
-    color: #fff;
+    color: var(--hover_text);
   }
   .btn-legal {
     @apply w-full flex flex-col justify-center items-start text-left;
@@ -379,7 +379,7 @@ export default {
     font-family: var(--font-style-1) !important;
   }
   .btns:hover {
-    color: #fff;
+    color: var(--hover_text);
   }
 }
 @media (min-width: 1200px) {

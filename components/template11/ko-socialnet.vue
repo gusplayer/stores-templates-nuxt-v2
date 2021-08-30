@@ -134,6 +134,6 @@ export default {
   color: var(--color_icon);
 }
 .icon:hover {
-  color: #fff;
+  color: var(--hover_text);
 }
 </style>

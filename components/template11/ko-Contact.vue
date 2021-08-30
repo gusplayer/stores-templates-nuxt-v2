@@ -4,20 +4,16 @@
     :style="[
       settingByTemplate11[0].contact,
       settingByTemplate11[0].setting11General,
+      {
+        '--font-style-1':
+          this.settingByTemplate11[0].setting11General &&
+          this.settingByTemplate11[0].setting11General.fount_1
+            ? this.settingByTemplate11[0].setting11General.fount_1
+            : 'Roboto',
+      },
     ]"
   >
-    <div
-      class="content-form-contact"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingByTemplate11[0].setting11General &&
-            this.settingByTemplate11[0].setting11General.fount_1
-              ? this.settingByTemplate11[0].setting11General.fount_1
-              : 'Roboto',
-        },
-      ]"
-    >
+    <div class="content-form-contact">
       <div class="banner-mapa" v-if="dataStore.geolocalizacion.length">
         <iframe
           v-lazy="
@@ -428,7 +424,12 @@ export default {
     background-color: var(--color_background_btn);
     font-size: 14px;
     color: var(--color_text_btn);
+    border-radius: var(--radius_btn);
     @apply w-auto h-35 mt-20 px-20;
+  }
+  .btn:hover {
+    color: var(--hover_text_btn);
+    background-color: var(--hover_Bg_btn);
   }
   .form-cont {
     @apply w-full flex flex-col justify-start items-center;

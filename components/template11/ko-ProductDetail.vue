@@ -1,5 +1,18 @@
 <template>
-  <div class="wrapper-productDetail">
+  <div
+    class="wrapper-productDetail"
+    :style="[
+      settingByTemplate11[0].detailsProduct,
+      settingByTemplate11[0].setting11General,
+      {
+        '--font-style-1':
+          this.settingByTemplate11[0].setting11General &&
+          this.settingByTemplate11[0].setting11General.fount_1
+            ? this.settingByTemplate11[0].setting11General.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="container-productDetail-loading" v-if="loading"></div>
     <div class="container-productDetail" v-else>
       <div class="banner-detail">
@@ -65,7 +78,6 @@
                 </div>
               </div>
             </template>
-            <!-- Foto grande -->
             <div class="wrapper-photo_main">
               <div
                 v-if="this.activeZoom"
@@ -107,45 +119,35 @@
               ></ProductSlide>
             </div>
           </div>
-          <!-- <div class="content-images">
-            <div class="main-images">
-              <img
-                class="img-list"
-               v-lazy="idCloudinaryBanner(data.detalle.foto_cloudinary)"
-                alt="Product Img"
-              />
-            </div>
-          </div> -->
         </div>
-        <div class="right">
+        <div
+          class="right"
+          :style="`margin-top:${this.settingByTemplate11[0].detailsProduct['--marginTopTitle']};`"
+        >
           <div class="content-items-right">
             <div class="content-name">
-              <p class="text-name">{{ data.detalle.nombre }}</p>
-            </div>
-
-            <div class="content-price">
-              <p class="text-price" v-show="salesData.precio">
-                {{
-                  salesData.precio
-                    | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
-                    )
-                }}
+              <p
+                class="text-name"
+                :style="`font-size:${this.settingByTemplate11[0].detailsProduct['--fontSizeTitle']}; font-weight:${this.settingByTemplate11[0].detailsProduct['--fontWeighTitle']};`"
+              >
+                {{ data.detalle.nombre }}
               </p>
-              <!-- <p class="text-stock" v-if="salesData.unidades > 0">
-                {{ $t('productdetail_stock') }}
-              </p> -->
+            </div>
+            <div class="content-price">
+              <p
+                class="text-price"
+                :style="`font-size:${this.settingByTemplate11[0].detailsProduct['--fontSizePrice']}; font-weight:${this.settingByTemplate11[0].detailsProduct['--fontWeighPrice']};`"
+                v-show="salesData.precio"
+              >
+                {{ salesData.precio | currency }}
+              </p>
             </div>
             <div class="empty"></div>
-
-            <!-- Unidades en stock -->
             <div class="content-stock">
               <p class="stock-text-1">{{ $t('productdetail_stock') }}:</p>
               <p class="stock-text-2">{{ salesData.unidades }}</p>
             </div>
             <div class="empty"></div>
-            <!-- Variantes de prodcuto -->
             <div
               class="content-variant"
               v-if="this.data.detalle.con_variante > 0"
@@ -238,11 +240,9 @@
           :envio="envio"
         ></OptionTab>
       </div>
-      <!-- Productos relacionados  -->
       <div class="section-suggesProduct">
         <KoSuggesProduct :category="this.category.slice(0, 8)" />
       </div>
-      <!-- Metas -->
       <div itemscope itemtype="http://schema.org/Product">
         <meta itemprop="productID" :content="`${data.detalle.id}`" />
         <meta itemprop="name" :content="`${data.detalle.nombre}`" />
@@ -294,7 +294,6 @@
 import axios from 'axios'
 import ProductSlide from './_productdetails/productSlide'
 import SelectGroup from './_productdetails/selectGroup'
-// import OptionAcordion from './_productdetails/OptAcordion'
 import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
 import Zoom from './_productdetails/zoomImg'
@@ -309,9 +308,9 @@ export default {
     whatsapp: String,
     envios: Object,
     facebooPixel: Object,
+    settingByTemplate11: Array,
   },
   components: {
-    // OptionAcordion,
     OptionTab,
     SelectGroup,
     KoSuggesProduct,
@@ -328,18 +327,6 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
-    // window.addEventListener('scroll', function () {
-    //   var sticky = document.getElementById('sticky')
-    //   if (window.pageYOffset >= 1 && screen.width > 725 && sticky) {
-    //     sticky.style.display = 'flex'
-    //     sticky.style.flexDirection = 'column'
-    //     sticky.style.position = 'fixed'
-    //     sticky.style.top = '160px'
-    //     sticky.style.width = '20%'
-    //     sticky.style.overflow = 'hidden'
-
-    //   }
-    // })
   },
   data() {
     return {
@@ -421,7 +408,6 @@ export default {
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
-
     // eslint-disable-next-line vue/return-in-computed-property
     precio() {
       if (this.data.detalle.precio) {
@@ -430,7 +416,6 @@ export default {
           .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
     },
-
     category() {
       return this.productsData.filter(
         (product) =>
@@ -745,35 +730,11 @@ export default {
     },
   },
   filters: {
-    currency(value, codigo_pais, moneda) {
-      let resultCurrent
-      if (codigo_pais && moneda) {
-        if (value && codigo_pais == 'co' && moneda == 'COP') {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        } else if (codigo_pais == 'internacional') {
-          {
-            resultCurrent = new Intl.NumberFormat('en-IN', {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        } else {
-          {
-            resultCurrent = new Intl.NumberFormat(codigo_pais, {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        }
-      } else {
-        if (value) {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        }
+    currency(value) {
+      if (value) {
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
+      return ''
     },
     toLowerCase(value) {
       if (value) {
@@ -825,7 +786,7 @@ export default {
   cursor: pointer;
 }
 .icon-swiper:hover {
-  color: var(--btnhover);
+  color: var(--hover_text);
 }
 .photos_selected {
   width: 100%;
@@ -878,19 +839,19 @@ export default {
   -o-transform: scale(1.2);
   transform: scale(1.2);
 }
-
 .wrapper-productDetail {
-  background: #fff;
+  background: var(--background_color_1);
   @apply w-full flex justify-center items-center;
 }
 .container-productDetail-loading {
   height: calc(100vh - 420px);
   max-width: 1200px;
   padding: 50px 30px 30px 30px;
-  background: #fff;
+  background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
 }
 .container-productDetail {
+  background: var(--background_color_1);
   @apply w-full h-full flex flex-col justify-center items-center;
 }
 .left {
@@ -914,7 +875,6 @@ export default {
 .youtuve-video {
   @apply w-full flex justify-center items-center;
 }
-
 .right {
   @apply w-full flex flex-col justify-start items-start;
 }
@@ -936,73 +896,27 @@ export default {
 .content-quantity-boxes {
   @apply w-full flex justify-start items-center my-30;
 }
-.txt-tittle-quantity {
-  font-size: 12px;
-  color: #666;
-  min-width: 70px;
-  @apply w-auto font-semibold uppercase mr-10;
-}
 .box-quantity {
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: transparent;
+  border: 1px solid var(--border);
   @apply w-75 h-50 flex text-center justify-center items-center;
 }
 .box-quantity-btns {
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: var(--color_background_btn);
+  border: 1px solid var(--color_background_btn);
   @apply w-25 h-50 flex flex-col text-center justify-center items-center;
 }
 .btn-quantity {
-  background-color: #fff;
-  border-color: rgba(0, 0, 0, 0.15);
+  background-color: var(--color_background_btn);
+  border-color: var(--color_background_btn);
   @apply w-25 h-25 flex justify-center items-center border-t border-r;
 }
-
 .material-design-icon > .material-design-icon__svg {
   height: 1em;
   width: 1em;
-  fill: #666;
+  fill: var(--color_text_btn);
   position: absolute;
   bottom: 0em;
-}
-.content-networks {
-  @apply w-auto flex flex-row justify-start items-start mb-30;
-}
-
-.social-networks {
-  @apply w-auto flex flex-row justify-start items-start mr-20;
-}
-
-.facebook-icon,
-.twitter-icon,
-.instagram-icon,
-.youtube-icon {
-  fill: #666;
-  @apply transition-all ease-in duration-0.2 cursor-pointer;
-}
-.facebook-icon:hover {
-  color: #eb7025;
-  fill: #eb7025;
-  transform: scale(1.5);
-  @apply transition-all ease-in duration-0.2;
-}
-.twitter-icon:hover {
-  color: #eb7025;
-  fill: #eb7025;
-  transform: scale(1.5);
-  @apply transition-all ease-in duration-0.2;
-}
-.instagram-icon:hover {
-  color: #eb7025;
-  fill: #eb7025;
-  transform: scale(1.5);
-  @apply transition-all ease-in duration-0.2;
-}
-.youtube-icon:hover {
-  color: #eb7025;
-  fill: #eb7025;
-  transform: scale(1.5);
-  @apply transition-all ease-in duration-0.2;
 }
 @screen sm {
   .product-content {
@@ -1015,7 +929,6 @@ export default {
     width: 100%;
     height: 200px;
   }
-
   .content-name,
   .content-price {
     @apply mb-30;
@@ -1026,76 +939,49 @@ export default {
   .tab {
     @apply w-9/0 flex mt-40;
   }
-  .content-cart {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #f4f4f4;
-    height: 54px;
-    padding-bottom: 1px;
-  }
-  .content-free-shipping {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 54px;
-    background: #f4f4f4;
-    margin-top: 20px;
-  }
+
   .content-options {
     @apply w-full flex flex-col justify-start items-center;
   }
-
   .btn {
-    background-color: #000;
+    background-color: var(--color_background_btn);
     transition: all 0.15s ease-in;
     @apply w-full h-54 flex flex-row justify-center items-center;
   }
   .btn-disabled {
-    background-color: #2c2930;
+    background-color: var(--color_background_btn);
     transition: all 0.15s ease-in;
     @apply w-full h-54 flex flex-row justify-center items-center;
   }
-
   .btn:hover .text-addCart {
-    color: #fff;
+    color: var(--hover_text_btn);
+    background: var(--hover_Bg_btn);
     transition: all 0.15s ease-in;
   }
   .quantity {
     @apply w-full;
   }
-  .quantity_remove,
-  .quantity_add {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f4f4f4;
-  }
   .text-name {
-    color: #222;
-    font-size: 22px;
+    color: var(--color_text);
+    /* font-size: 22px; */
     line-height: 1;
-    font-family: 'Roboto', sans-serif !important;
-    @apply font-medium capitalize;
+    font-family: var(--font-style-1) !important;
+    @apply capitalize;
   }
   .text-price {
-    color: #222;
-    font-size: 20px;
+    color: var(--color_price);
+    /* font-size: 20px; */
     line-height: 26px;
     letter-spacing: 0.3px;
-    font-family: 'Roboto', sans-serif !important;
-    @apply capitalize font-medium;
+    font-family: var(--font-style-1) !important;
+    @apply capitalize;
   }
   .text-stock {
     color: #92bb35;
     font-size: 14px;
     line-height: 1.42857143;
     letter-spacing: -0.02em;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply capitalize font-semibold ml-30;
   }
   .text-icon {
@@ -1112,28 +998,28 @@ export default {
     @apply w-full flex justify-center items-center text-center font-semibold;
   }
   .text-addCart {
-    font-family: 'Roboto', sans-serif !important;
-    color: #fff;
+    font-family: var(--font-style-1) !important;
+    color: var(--color_text_btn);
     font-size: 12px;
     @apply font-semibold whitespace-nowrap uppercase;
   }
   .minicart-icon {
-    fill: #fff;
-    color: #fff;
+    fill: var(--color_text_btn);
+    color: var(--color_text_btn);
     @apply mr-10 mb-5;
   }
   .text-variant {
-    color: #222;
+    color: var(--color_subtext);
     font-size: 16px;
     transition: all 0.6s ease-in-out;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply font-semibold mr-10;
   }
   .text-option {
-    color: #222;
+    color: var(--color_subtext);
     font-size: 16px;
     transition: all 0.6s ease-in-out;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply font-semibold;
   }
   .banner-detail {
@@ -1146,7 +1032,7 @@ export default {
     @apply w-full flex flex-col justify-center items-center;
   }
   .empty {
-    background-color: #e4e4e4;
+    background-color: var(--border);
     max-width: 1200px;
     @apply w-full h-1;
   }
@@ -1154,18 +1040,17 @@ export default {
     @apply w-full flex flex-row justify-start items-center my-26;
   }
   .stock-text-1 {
-    color: #191919;
+    color: var(--color_subtext);
     font-size: 15px;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply font-normal text-left capitalize mr-20;
   }
   .stock-text-2 {
-    color: #767676;
+    color: var(--color_subtext);
     font-size: 15px;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply font-normal text-left;
   }
-  /* ------------------- DOWN ----------------------- */
 }
 @media (min-width: 425px) {
   .content-direction-btns {
@@ -1173,9 +1058,6 @@ export default {
   }
 }
 @media (min-width: 480px) {
-  .content-cart {
-    @apply w-4/0 mr-2;
-  }
   .video {
     height: 250px;
   }
@@ -1189,27 +1071,25 @@ export default {
   }
   .separatorCrumb {
     font-size: 9px;
-    color: #222;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    color: var(--breadCrumbs);
+    font-family: var(--font-style-1) !important;
     @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
   }
   .txt-crumb {
     font-size: 15px;
-    color: #222;
-    font-family: 'Roboto', sans-serif !important;
+    color: var(--breadCrumbs);
+    font-family: var(--font-style-1) !important;
     @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
   }
   .s1:hover {
-    color: #eb7025;
+    color: var(--hover_text);
     transition: all 0.25s ease;
   }
   .s2:hover {
-    color: #eb7025;
+    color: var(--hover_text);
     transition: all 0.25s ease;
   }
-  .content-cart {
-    width: 150px;
-  }
+
   .content-addCart {
     width: 236px;
   }
@@ -1221,9 +1101,6 @@ export default {
   }
   .product-content {
     @apply w-9/5 grid grid-cols-2 gap-4 justify-start items-start;
-  }
-  .right {
-    @apply mt-40;
   }
   .section-suggesProduct {
     @apply w-9/5;
@@ -1244,30 +1121,16 @@ export default {
   .tab {
     @apply flex;
   }
-  .content-free-shipping {
-    width: 100%;
-  }
-  /* .product-content {
-    @apply gap-;
-  } */
   .content-direction-btns {
     @apply flex flex-col;
   }
 }
 @media (min-width: 1080px) {
-  .content-options,
-  .content-free-shipping {
+  .content-options {
     width: 100%;
   }
 }
-
 @media (max-width: 768px) {
-  /* .wrapper-left {
-    flex: 1;
-  } */
-  /* .photos {
-    margin-right: 10px;
-  } */
   .photos {
     display: none;
   }
@@ -1284,7 +1147,6 @@ export default {
     margin-bottom: 10px;
   }
 }
-
 @media (min-width: 1200px) {
   .product-content,
   .tab,

@@ -307,7 +307,7 @@ export default {
   @apply w-auto font-normal whitespace-nowrap uppercase py-20 px-30;
 }
 .btn:hover {
-  color: #767676;
+  color: var(--hover_text);
 }
 .item-header {
   @apply w-full flex flex-row justify-end items-center flex-1;
@@ -350,7 +350,7 @@ export default {
   @apply cursor-pointer;
 }
 .svg-search:hover {
-  fill: #767676;
+  fill: var(--hover_text);
 }
 .svg-shop,
 .icon-menu {
@@ -358,10 +358,10 @@ export default {
   @apply cursor-pointer;
 }
 .svg-shop:hover {
-  color: #767676;
+  color: var(--hover_text);
 }
 .icon-menu:hover {
-  color: #767676;
+  color: var(--hover_text);
 }
 .icon-shop {
   @apply w-auto flex flex-row justify-center items-center ml-20;

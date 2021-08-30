@@ -1,5 +1,16 @@
 <template>
-  <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+  <div
+    v-swiper:mySwiper="swiperOption"
+    ref="mySwiper"
+    :style="[
+      {
+        '--font-style-1':
+          this.settingGeneral && this.settingGeneral.fount_1
+            ? this.settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="swiper-wrapper z-auto">
       <a
         class="swiper-slide"
@@ -16,7 +27,10 @@
         <img
           class="slide-bgMovil"
           :src="idCloudinaryBanner(banner.url_img_background_res)"
-          alt="Bg-Image" /><CarouselContent class="absolute" :banner="banner"
+          alt="Bg-Image" /><CarouselContent
+          class="absolute"
+          :banner="banner"
+          :settingGeneral="settingGeneral"
       /></a>
     </div>
   </div>

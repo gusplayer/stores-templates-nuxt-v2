@@ -89,11 +89,12 @@ export default {
     color: var(--color_text_btn);
     background-color: var(--color_background_btn);
     font-size: 14px;
+    border-radius: var(--radius_btn);
     @apply font-normal leading-21 uppercase px-15 py-10 cursor-pointer;
   }
   .btn:hover {
-    color: #fff;
-    background-color: #000;
+    color: var(--hover_text_btn);
+    background-color: var(--hover_Bg_btn);
   }
   .separator {
     background: var(--color_border);

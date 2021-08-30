@@ -2,12 +2,19 @@
   <div class="content-acordion">
     <button class="accordion">{{ $t('productdetail_description') }}</button>
     <div class="panel">
-      <div
-        class="content_product_description"
-        v-html="data.info.descripcion"
-      ></div>
+      <div class="editor" v-if="data.info.descripcion">
+        <el-tiptap
+          v-model="data.info.descripcion"
+          :extensions="extensions"
+          :spellcheck="false"
+          :readonly="true"
+          :charCounterCount="false"
+          :tooltip="false"
+          :showMenubar="false"
+          :bubble="false"
+        />
+      </div>
     </div>
-
     <button class="accordion">{{ $t('productdetail_opcionesPago') }}</button>
     <div class="panel">
       <ul>
@@ -188,8 +195,46 @@
   </div>
 </template>
 <script>
+import {
+  Doc,
+  Paragraph,
+  Text,
+  Heading,
+  Bold,
+  Italic,
+  Underline,
+  Strike,
+  Code,
+  CodeBlock,
+  Blockquote,
+  Link,
+  BulletList,
+  OrderedList,
+  ListItem,
+  TodoList,
+  TodoItem,
+  Iframe,
+  Table,
+  TableHeader,
+  TableRow,
+  TableCell,
+  Image,
+  TextAlign,
+  LineHeight,
+  Indent,
+  HorizontalRule,
+  HardBreak,
+  TrailingNode,
+  History,
+  TextColor,
+  TextHighlight,
+  FormatClear,
+  FontSize,
+  Preview,
+  Print,
+  SelectAll,
+} from 'element-tiptap'
 export default {
-  components: {},
   props: {
     dataStore: Object,
     data: {},
@@ -198,7 +243,6 @@ export default {
   mounted() {
     var acc = document.getElementsByClassName('accordion')
     var i
-
     for (i = 0; i < acc.length; i++) {
       acc[i].addEventListener('click', function () {
         this.classList.toggle('active')
@@ -213,6 +257,119 @@ export default {
   },
   data() {
     return {
+      extensions: [
+        new Doc(),
+        new Paragraph(),
+        new Text(),
+        new Heading({ level: 5, bubble: true }),
+        new Bold({ bubble: true }),
+        new Italic({ bubble: true }),
+        new Underline({ bubble: true }),
+        new Strike({ bubble: true }),
+        new Code({ bubble: true }),
+        new CodeBlock({ bubble: true }),
+        new Blockquote({ bubble: true }),
+        new Link({ bubble: true }),
+        new BulletList({ bubble: true }),
+        new OrderedList({ bubble: true }),
+        new ListItem({ bubble: true }),
+        new TodoList({ bubble: true }),
+        new TodoItem({ bubble: true }),
+        new Iframe({ bubble: true }),
+        new Table({
+          resizable: true,
+          bubble: true,
+        }),
+        new TableHeader(),
+        new TableRow(),
+        new TableCell(),
+        new Image({
+          urlPattern: '',
+          uploadRequest: '',
+          bubble: true,
+        }),
+        new TextAlign({
+          alignments: ['left', 'center', 'right', 'justify'],
+          bubble: true,
+        }),
+        new LineHeight({
+          lineHeights: ['100%', '200%', '300%'],
+        }),
+        new Indent({
+          minIndent: 0,
+          maxIndent: 7,
+        }),
+        new HorizontalRule({ bubble: true }),
+        new HardBreak(),
+        new TrailingNode(),
+        new History(),
+        new TextColor({
+          colors: [
+            '#f44336',
+            '#e91e63',
+            '#9c27b0',
+            '#673ab7',
+            '#3f51b5',
+            '#2196f3',
+            '#03a9f4',
+            '#00bcd4',
+            '#009688',
+            '#4caf50',
+            '#8bc34a',
+            '#cddc39',
+            '#ffeb3b',
+            '#ffc107',
+            '#ff9800',
+            '#ff5722',
+            '#000000',
+          ],
+          bubble: true,
+        }),
+        new TextHighlight({
+          colors: [
+            '#f44336',
+            '#e91e63',
+            '#9c27b0',
+            '#673ab7',
+            '#3f51b5',
+            '#2196f3',
+            '#03a9f4',
+            '#00bcd4',
+            '#009688',
+            '#4caf50',
+            '#8bc34a',
+            '#cddc39',
+            '#ffeb3b',
+            '#ffc107',
+            '#ff9800',
+            '#ff5722',
+            '#000000',
+          ],
+          bubble: true,
+        }),
+        new FormatClear(),
+        new FontSize({
+          fontSizes: [
+            '8',
+            '10',
+            '12',
+            '14',
+            '16',
+            '18',
+            '20',
+            '24',
+            '30',
+            '36',
+            '48',
+            '60',
+            '72',
+          ],
+          bubble: true,
+        }),
+        new Preview(),
+        new Print(),
+        new SelectAll(),
+      ],
       medioEnvio: '',
       envioproducto: '',
       img1: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png',
@@ -261,11 +418,82 @@ export default {
 }
 </script>
 <style scoped>
+.editor {
+  width: 100%;
+}
+.editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
+  border: none;
+  padding: 0px 5px;
+  background-color: transparent;
+}
+.editor >>> .el-tiptap-editor__menu-bubble {
+  display: none;
+}
+.editor >>> .el-tiptap-editor__content h1 {
+  font-size: 2em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h2 {
+  font-size: 1.5em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h3 {
+  font-size: 1.17em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h4 {
+  font-size: 1.12em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h5 {
+  font-size: 0.83em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content p {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content span {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content blockquote {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content code {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content ul {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content ol {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content li {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content pre {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content strong {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content em {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content s {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content .image-view__body__image {
+  cursor: none;
+  pointer-events: none;
+}
+.editor >>> .el-popper.el-tiptap-image-popper {
+  display: none;
+}
 .content-acordion {
   @apply w-full flex flex-col justify-items-center items-start mt-40;
 }
 .accordion {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   background-color: #fff;
   font-size: 16px;
   letter-spacing: 1px;
@@ -301,7 +529,7 @@ export default {
   transition: max-height 0.2s ease-out;
 }
 .content_product_description {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   color: #333333;
   font-size: 14px;
   font-weight: 400;
@@ -313,16 +541,16 @@ export default {
   align-items: flex-start;
 }
 h3 {
-  color: #2c2930;
+  color: var(--color_text);
   font-size: 15px;
   font-weight: 600;
   text-transform: uppercase;
   align-self: flex-start;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
 }
 h4 {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-  color: #2c2930;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_text);
   font-size: 15px;
   font-weight: 600;
   line-height: 1.42857143;
@@ -334,16 +562,16 @@ h4 {
   margin-bottom: 5px;
 }
 li p {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-  color: #333;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
   margin-bottom: 15px;
 }
 .description-method {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-  color: #333;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;

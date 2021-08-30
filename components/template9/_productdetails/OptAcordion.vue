@@ -242,7 +242,6 @@ import {
   SelectAll,
 } from 'element-tiptap'
 export default {
-  components: {},
   props: {
     dataStore: Object,
     data: {},
@@ -251,7 +250,6 @@ export default {
   mounted() {
     var acc = document.getElementsByClassName('accordion')
     var i
-
     for (i = 0; i < acc.length; i++) {
       acc[i].addEventListener('click', function () {
         this.classList.toggle('active')
@@ -398,6 +396,7 @@ export default {
       }
     },
     envios() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },

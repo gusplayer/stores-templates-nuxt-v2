@@ -52,7 +52,7 @@ export default {
   align-items: center;
 }
 .title-ProductFavoritos {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   font-size: 18px;
   font-weight: bold;
   line-height: 1.4;
