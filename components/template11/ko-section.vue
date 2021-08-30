@@ -1,16 +1,18 @@
 <template>
-  <div class="content-section" :style="[settingKsection, settingGeneral]">
-    <div
-      class="content-wrapper"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Roboto',
-        },
-      ]"
-    >
+  <div
+    class="content-section"
+    :style="[
+      settingKsection,
+      settingGeneral,
+      {
+        '--font-style-1':
+          this.settingGeneral && this.settingGeneral.fount_1
+            ? this.settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
+    <div class="content-wrapper">
       <nuxt-link :to="this.settingKsection.values[0].url_redirect">
         <div class="wrapper-left">
           <img

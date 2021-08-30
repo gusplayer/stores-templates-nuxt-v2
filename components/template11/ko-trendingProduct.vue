@@ -1,16 +1,18 @@
 <template>
-  <div class="product-content" :style="[settingKtrending, settingGeneral]">
-    <div
-      class="producto-items-content"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Roboto',
-        },
-      ]"
-    >
+  <div
+    class="product-content"
+    :style="[
+      settingKtrending,
+      settingGeneral,
+      {
+        '--font-style-1':
+          this.settingGeneral && this.settingGeneral.fount_1
+            ? this.settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
+    <div class="producto-items-content">
       <div class="product-text">
         <div class="product-tittle">
           <p class="tittle">{{ settingKtrending.title }}</p>
@@ -27,6 +29,7 @@
             <KoproductCard
               :product="product"
               :settingKcardProduct="settingKcardProduct"
+              :settingGeneral="settingGeneral"
               class="gifyload"
             ></KoproductCard>
           </div>

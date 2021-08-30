@@ -4,20 +4,16 @@
     :style="[
       settingByTemplate11[0].setting11General,
       settingByTemplate11[0].productList,
+      {
+        '--font-style-1':
+          this.settingByTemplate11[0].setting11General &&
+          this.settingByTemplate11[0].setting11General.fount_1
+            ? this.settingByTemplate11[0].setting11General.fount_1
+            : 'Roboto',
+      },
     ]"
   >
-    <div
-      class="bannerProduct"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingByTemplate11[0].setting11General &&
-            this.settingByTemplate11[0].setting11General.fount_1
-              ? this.settingByTemplate11[0].setting11General.fount_1
-              : 'Roboto',
-        },
-      ]"
-    >
+    <div class="bannerProduct">
       <div class="crumb">
         <nuxt-link to="/">
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -190,12 +186,14 @@
                       v-if="!showinList"
                       class="product-list"
                       :settingKcardProduct="settingByTemplate11[0].cardProduct"
+                      :settingGeneral="settingByTemplate11[0].setting11General"
                     ></KoProdcutCardFilter>
                     <KoProdcutCardFilerList
                       :product="product"
                       v-if="showinList"
                       class="product-list"
                       :settingKcardProduct="settingByTemplate11[0].cardProduct"
+                      :settingGeneral="settingByTemplate11[0].setting11General"
                     ></KoProdcutCardFilerList>
                   </div>
                 </div>
@@ -1001,7 +999,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-products {
-  border-bottom: 0.5px solid #f2f2f2;
+  /* border-bottom: 0.5px solid #f2f2f2; */
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-products-empty {

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import KoSwipper from '../../../components/template10/_productofavorito/productSlide'
+import KoSwipper from '../_productofavorito/productSlide.vue'
 export default {
   name: 'suggestionsProducto',
   props: {
