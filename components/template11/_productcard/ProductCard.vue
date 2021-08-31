@@ -59,6 +59,14 @@
           <p class="txt-free">{{ $t('home_cardGratis') }}</p>
         </div>
       </div>
+      <div
+        class="cart-Shop-pro"
+        v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
+      >
+        <div class="text-cart">
+          <p class="w-full txt-add">{{ this.product.promocion_valor }}% OFF</p>
+        </div>
+      </div>
       <div class="overlay-polygon" v-if="getFreeShipping == false && !soldOut">
         <svg
           class="icon-overlay-free"
@@ -153,19 +161,7 @@
         </div>
       </div>
       <router-link :to="{ path: `/productos/` + product.slug }">
-        <div
-          class="overlay-bottom-promo"
-          v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
-        >
-          <div class="cart-Shop">
-            <div class="text-cart">
-              <p class="w-full txt-add">
-                {{ this.product.promocion_valor }}% OFF
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="overlay-bottom" v-else>
+        <div class="overlay-bottom">
           <div class="cart-Shop">
             <div class="text-cart">
               <p class="w-full txt-add">
@@ -177,9 +173,6 @@
       </router-link>
     </div>
     <div class="datos-producto">
-      <!-- <div class="categoria" v-if="this.product.categoria">
-        {{ this.product.categoria }}
-      </div> -->
       <router-link :to="{ path: `/productos/` + product.slug }">
         <div class="tittle tittle-xml">
           <p class="card-title" v-if="this.product.nombre.length >= 90">
@@ -206,7 +199,85 @@
           </p>
         </div>
       </router-link>
-      <div class="precio">
+      <div
+        class="precio"
+        v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
+      >
+        <div class="content-text-price" v-if="this.product.precio">
+          <div
+            class="wrapper-price"
+            v-if="this.estadoCart == true && this.minPrice != this.maxPrice"
+          >
+            <div class="content-price">
+              <div
+                class="text-price-promo"
+                v-if="this.product.precio > 0 || this.product.precio"
+              >
+                {{
+                  (this.product.tag_promocion == 1 &&
+                  this.product.promocion_valor
+                    ? Math.trunc(
+                        this.minPrice / (1 - this.product.promocion_valor / 100)
+                      )
+                    : 0) | currency
+                }}
+              </div>
+              <p class="separator-price">-</p>
+              <div
+                class="text-price-promo"
+                v-if="this.product.precio > 0 || this.product.precio"
+              >
+                {{
+                  (this.product.tag_promocion == 1 &&
+                  this.product.promocion_valor
+                    ? Math.trunc(
+                        this.maxPrice / (1 - this.product.promocion_valor / 100)
+                      )
+                    : 0) | currency
+                }}
+              </div>
+            </div>
+            <div class="content-price">
+              <div
+                class="text-price"
+                v-if="this.product.precio > 0 || this.product.precio"
+              >
+                {{ this.minPrice | currency }}
+              </div>
+              <p class="separator-price">-</p>
+              <div
+                class="text-price"
+                v-if="this.product.precio > 0 || this.product.precio"
+              >
+                {{ this.maxPrice | currency }}
+              </div>
+            </div>
+          </div>
+          <div v-else class="text-center">
+            <p
+              class="text-price-promo"
+              v-if="this.product.precio > 0 || this.product.precio"
+            >
+              {{
+                (this.product.tag_promocion == 1 && this.product.promocion_valor
+                  ? Math.trunc(
+                      this.product.precio /
+                        (1 - this.product.promocion_valor / 100)
+                    )
+                  : 0) | currency
+              }}
+            </p>
+            <p
+              class="text-price"
+              v-if="this.product.precio > 0 || this.product.precio"
+            >
+              {{ this.product.precio | currency }}
+            </p>
+          </div>
+        </div>
+        <div v-else class="h-27"></div>
+      </div>
+      <div class="precio" v-else>
         <div class="content-text-price" v-if="this.product.precio">
           <div
             class="content-price"
@@ -562,6 +633,13 @@ export default {
   line-height: 1.1;
   text-align: left;
 }
+.text-price-promo {
+  font-family: var(--font-style-1) !important;
+  text-decoration: line-through;
+  color: var(---color_price);
+  font-weight: 400;
+  font-size: 13px;
+}
 .text-free {
   color: white;
   position: absolute;
@@ -585,12 +663,16 @@ export default {
   transform: translate(-50%, -50%);
   white-space: nowrap;
 }
-.overlay-bottom-promo {
-  background-color: #35dd8d;
-  transition: all 200ms ease-in;
-}
-.overlay-bottom-promo:hover {
-  @apply bg-white-white;
+.cart-Shop {
+  font: inherit;
+  font-size: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  @apply absolute text-center transition-all ease-in duration-300 w-full;
 }
 .overlay-bottom {
   background-color: black;
@@ -614,6 +696,17 @@ export default {
   font-size: 15px;
   font-weight: 600;
 }
+.cart-Shop-pro {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 1px 5px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+  background: red;
+  right: auto;
+}
 @screen sm {
   .categoria {
     @apply mb-3;
@@ -627,11 +720,10 @@ export default {
   }
   .overlay-bottom,
   .overlay-bottom-promo {
-    @apply absolute right-0 overflow-hidden transition-all ease-in duration-100;
-    width: 110px;
+    @apply absolute overflow-hidden transition-all ease-in duration-100;
+    width: 100%;
     height: 0px;
-    left: 10px;
-    bottom: 10px;
+    bottom: 15px;
   }
   .producto:hover .overlay-bottom,
   .producto:hover .overlay-bottom-promo {
@@ -682,10 +774,14 @@ export default {
     width: 40px;
     height: 40px;
   }
+  .wrapper-price {
+    @apply flex flex-col justify-center items-center w-full;
+  }
   .content-price {
     @apply flex flex-row justify-center items-center w-full;
   }
   .separator-price {
+    font-size: var(--fontSizePretitle);
     @apply mx-1;
   }
 }
@@ -702,11 +798,10 @@ export default {
   }
   .overlay-bottom,
   .overlay-bottom-promo {
-    @apply absolute right-0 overflow-hidden transition-all ease-in duration-100;
-    width: 110px;
+    @apply absolute overflow-hidden transition-all ease-in duration-100;
+    width: 100%;
     height: 0px;
-    left: 10px;
-    bottom: 10px;
+    bottom: 15px;
   }
   .producto:hover .overlay-bottom,
   .producto:hover .overlay-bottom-promo {

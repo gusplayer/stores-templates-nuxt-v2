@@ -13,11 +13,6 @@
     ]"
   >
     <div class="producto-items-content">
-      <div class="product-text">
-        <div class="product-tittle">
-          <p class="tittle">{{ settingKtrending.title }}</p>
-        </div>
-      </div>
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper pb-10">
           <div
@@ -58,14 +53,14 @@ export default {
     settingGeneral: Object,
     settingKcardProduct: Object,
   },
-  name: 'Ko-trending',
+  name: 'Ko-List-Trending',
   data() {
     return {
       swiperOption: {
         slidesPerView: '',
         spaceBetween: '',
         autoplay: {
-          delay: 400000000,
+          delay: 4000,
           disableOnInteraction: false,
         },
         breakpoints: {
@@ -95,7 +90,7 @@ export default {
     },
     listProduct() {
       return this.fullProducts.filter((product) => {
-        if (product.tag_promocion != '1') {
+        if (product.tag_promocion == '1') {
           return product
         }
       })
@@ -110,7 +105,7 @@ export default {
 } */
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center w-full pb-40;
+  @apply flex flex-col justify-center items-center w-full pb-20 pt-50;
 }
 .product-text {
   @apply flex flex-col justify-center items-center w-full text-center;

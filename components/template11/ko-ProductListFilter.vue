@@ -1106,10 +1106,9 @@ export default {
 .product-list {
   @apply w-full;
 }
-.product-list:hover {
+/* .product-list:hover {
   @apply shadow-lg;
-}
-
+} */
 @screen sm {
   .product-conten-items {
     @apply w-full grid grid-cols-1;

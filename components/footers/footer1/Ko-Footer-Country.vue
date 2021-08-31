@@ -21,12 +21,19 @@
             ></country-flag>
           </client-only>
         </div>
-        <p class="text-country">{{ dataStore.tienda.pais }}</p>
+        <button @click="stateIdStore = !stateIdStore" class="text-country">
+          {{ dataStore.tienda.pais }}
+        </button>
         <p class="text-country text-margin">|</p>
         <p class="text-country">
           <strong style="margin-right: 1px">$</strong>
           {{ dataStore.tienda.moneda }}
         </p>
+        <div v-if="stateIdStore">
+          <p class="textid">
+            <strong>Store</strong>: {{ dataStore.tienda.id_tienda }}
+          </p>
+        </div>
       </div>
       <KoLanguage />
     </div>
@@ -44,6 +51,11 @@ export default {
   props: {
     dataStore: Object,
     valueWa: Boolean,
+  },
+  data() {
+    return {
+      stateIdStore: false,
+    }
   },
 }
 </script>
@@ -95,5 +107,10 @@ export default {
 .text-margin {
   margin-right: 5px;
   margin-left: 5px;
+}
+.textid {
+  margin-left: 10px;
+  font-size: 12px;
+  color: white;
 }
 </style>

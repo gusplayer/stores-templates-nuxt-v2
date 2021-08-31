@@ -141,6 +141,32 @@
               >
                 {{ salesData.precio | currency }}
               </p>
+              <div
+                class="flex flex-row justify-center items-center"
+                v-show="
+                  data.info.tag_promocion == 1 &&
+                  data.info.promocion_valor &&
+                  salesData.precio
+                "
+              >
+                <p class="card-discont">
+                  {{ data.info.promocion_valor }}% De Descuento
+                </p>
+                <p class="text-promocion">
+                  {{
+                    (data.info.tag_promocion == 1 && data.info.promocion_valor
+                      ? Math.trunc(
+                          salesData.precio /
+                            (1 - data.info.promocion_valor / 100)
+                        )
+                      : 0)
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
+                </p>
+              </div>
             </div>
             <div class="empty"></div>
             <div class="content-stock">
@@ -917,6 +943,20 @@ export default {
   fill: var(--color_text_btn);
   position: absolute;
   bottom: 0em;
+}
+.card-discont {
+  background: black;
+  color: white;
+  padding: 2px 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 16px;
+}
+.text-promocion {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color_subtext);
+  text-decoration: line-through;
 }
 @screen sm {
   .product-content {

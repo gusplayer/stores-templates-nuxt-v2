@@ -15,10 +15,6 @@
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-    <p class="separador"></p>
-    <p class="textid">
-      <strong>Store</strong>: {{ dataStore.tienda.id_tienda }}
-    </p>
   </div>
 </template>
 
@@ -99,13 +95,6 @@ export default {
   color: white;
   font-size: 12px;
   /* font-family: 'Poppins'; */
-}
-.textid {
-  font-size: 12px;
-  color: white;
-}
-.separador {
-  margin-left: 5px;
 }
 .el-dropdown {
   margin: 8px;

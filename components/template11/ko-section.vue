@@ -162,7 +162,7 @@ export default {
   transform: scale(1.1);
 }
 .txt-content {
-  padding: 0 20px;
+  padding: 20px 20px 0 20px;
   @apply absolute w-full h-full flex flex-col;
 }
 @screen sm {

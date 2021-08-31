@@ -37,6 +37,7 @@
         settingByTemplate11.parallax.visible
       "
     />
+    <KListtrending v-bind="componentsProps" />
     <KInformacion
       id="kInformationX"
       v-bind="componentsProps"
@@ -63,6 +64,7 @@ import Kcarousel from '../../components/template11/ko-carousel'
 import Ksection from '../../components/template11/ko-section'
 import Ktrending from '../../components/template11/ko-trendingProduct'
 import Kparallax from '../../components/template11/ko-parallax'
+import KListtrending from '../../components/template11/ko-listtrending.vue'
 import KInformacion from '../../components/template11/information.vue'
 import Kblog from '../../components/template11/ko-blog'
 
@@ -72,6 +74,7 @@ export default {
     Ksection,
     Ktrending,
     Kparallax,
+    KListtrending,
     KInformacion,
     Kblog,
   },

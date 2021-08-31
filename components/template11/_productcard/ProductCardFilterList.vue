@@ -178,26 +178,14 @@
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
             >
-              {{
-                this.minPrice
-                  | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
-                  )
-              }}
+              {{ this.minPrice | currency }}
             </div>
             <p class="separator-price mx-4">-</p>
             <div
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
             >
-              {{
-                this.maxPrice
-                  | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
-                  )
-              }}
+              {{ this.maxPrice | currency }}
             </div>
           </div>
           <div v-else>
@@ -205,13 +193,7 @@
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
             >
-              {{
-                this.product.precio
-                  | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
-                  )
-              }}
+              {{ this.product.precio | currency }}
             </p>
           </div>
         </div>
@@ -514,9 +496,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,
@@ -581,35 +562,11 @@ export default {
     },
   },
   filters: {
-    currency(value, codigo_pais, moneda) {
-      let resultCurrent
-      if (codigo_pais && moneda) {
-        if (value && codigo_pais == 'co' && moneda == 'COP') {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        } else if (codigo_pais == 'internacional') {
-          {
-            resultCurrent = new Intl.NumberFormat('en-IN', {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        } else {
-          {
-            resultCurrent = new Intl.NumberFormat(codigo_pais, {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        }
-      } else {
-        if (value) {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        }
+    currency(value) {
+      if (value) {
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
+      return ''
     },
   },
 }
@@ -663,26 +620,32 @@ export default {
   fill: white;
 }
 .card-title {
-  color: #333333;
+  color: var(--color_title);
+  font-weight: var(--fontWeighTitle);
+  font-size: var(--fontSizeTitle);
   font: inherit;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply font-semibold text-left;
+  font-family: var(--font-style-1) !important;
+  @apply text-left;
 }
 .categoria {
-  color: #bbbbbb;
+  font-weight: var(--fontWeighTitle);
+  color: var(--color_title);
   font: inherit;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply font-semibold;
 }
 .text-price {
-  color: #333333;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply pl-5 whitespace-nowrap font-semibold;
+  font-weight: var(--fontWeighPretitle);
+  font-size: var(--fontSizePretitle);
+  color: var(---color_price);
+  font-family: var(--font-style-1) !important;
+  @apply pl-5 whitespace-nowrap;
 }
 .separator-price {
-  color: #333;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply mb-10 font-semibold;
+  font-family: var(--font-style-1) !important;
+  font-size: var(--fontSizePretitle);
+  color: var(---color_price);
+  @apply mb-10;
 }
 .text-free {
   color: #fff;
@@ -710,7 +673,7 @@ export default {
 }
 .transport-icon {
   color: #00a650;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full flex justify-center items-center font-semibold mb-10;
 }
 .content_card-info {
@@ -719,7 +682,7 @@ export default {
 .text-card-info-sould {
   color: #ed2353;
   font-size: 16px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply ml-18 font-semibold;
 }
 .content-button {
@@ -732,7 +695,7 @@ export default {
   font-size: 15px;
   transition: color 0.25s ease, background-color 0.25s ease,
     border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-auto h-40 flex flex-row justify-center items-center tracking-1 cursor-pointer mt-2 px-15;
 }
 .btn:hover {
@@ -744,7 +707,7 @@ export default {
 
 .txt-btn-product {
   font-size: 12px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply font-semibold ml-10 tracking-1 leading-1 uppercase whitespace-nowrap;
 }
 .btn-disabled {
@@ -753,7 +716,7 @@ export default {
   background-color: gray;
   transition: color 0.25s ease, background-color 0.25s ease,
     border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply h-40 flex flex-row justify-center items-center cursor-pointer tracking-1 leading-1 capitalize ml-10 font-semibold whitespace-nowrap mt-2 px-15;
 }
 .datos-producto {
@@ -763,7 +726,7 @@ export default {
   color: #3f3f3f;
   font-size: 100%;
   font: inherit;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
 }
 
 @screen sm {
@@ -851,6 +814,7 @@ export default {
     @apply ml-auto mr-auto;
   }
   .producto {
+    background: var(--background_color_1);
     @apply w-full flex flex-row justify-center items-center cursor-pointer;
   }
   .product-image {
