@@ -879,6 +879,7 @@ export default {
       let resultproductList = productList.replace(/,/g, '%0A')
       let result = resultproductList.slice(1, -1)
       let text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20WhatsApp:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACelular%3A%20${this.identificacion}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
         if (this.mobileCheck()) {
@@ -886,7 +887,7 @@ export default {
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
             '_blank'
           )
-          if (navigator.platform == 'iPhone' || navigator.platform == 'iPad') {
+          if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
             window.location.href(
               `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
             )
@@ -896,7 +897,7 @@ export default {
             `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
             '_blank'
           )
-          if (navigator.platform == 'iPhone' || navigator.platform == 'iPad') {
+          if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
             window.location.href(
               `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
             )
@@ -908,7 +909,7 @@ export default {
             `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
             '_blank'
           )
-          if (navigator.platform == 'iPhone' || navigator.platform == 'iPad') {
+          if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
             window.location.href(
               `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`
             )
@@ -918,7 +919,7 @@ export default {
             `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
             '_blank'
           )
-          if (navigator.platform == 'iPhone' || navigator.platform == 'iPad') {
+          if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
             window.location.href(
               `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
             )
