@@ -841,15 +841,14 @@ export default {
 .wrapper-photo_main {
   position: relative;
   max-width: 650px;
-  height: 450px;
-  min-height: 450px;
+  max-height: 600px;
   width: 100%;
   margin-right: 25px;
 }
 .photo_main {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 10px;
 }

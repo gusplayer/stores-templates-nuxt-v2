@@ -75,6 +75,9 @@
               {{ $t('newsletter_msg') }}
             </p>
           </div>
+          <p class="text-error" v-if="stateChehed">
+            Marcar checkbox para poder suscribirse al boletín informativo
+          </p>
         </div>
 
         <div class="content-button">
@@ -114,6 +117,7 @@ export default {
       email: null,
       register: '',
       checked: false,
+      stateChehed: false,
     }
   },
   destroyed() {
@@ -159,6 +163,8 @@ export default {
           .catch((e) => {
             console.log(e)
           })
+      } else {
+        this.stateChehed = true
       }
     },
   },
@@ -204,7 +210,7 @@ export default {
   @apply flex flex-col justify-center;
 }
 .conten-input-check {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply w-full flex flex-col justify-center items-start;
 }
 .content-input {
   @apply w-full flex flex-row justify-start items-center;

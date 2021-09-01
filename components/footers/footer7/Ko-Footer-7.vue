@@ -49,7 +49,7 @@
               </div>
             </div>
             <div class="info-networks">
-              <button class="accordion btn">Siguenos</button>
+              <button class="accordion btn">Síguenos</button>
               <KoSocialNet
                 :footerIcon="this.settingByTemplate11[0].setting11Footer"
                 :dataStore="dataStore"

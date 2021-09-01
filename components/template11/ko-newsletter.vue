@@ -20,7 +20,7 @@
     >
       <div class="content-txt">
         <p class="txt-top">Para actualizaciones diarias</p>
-        <p class="txt-bottom">Suscríbete a nuestro boletin informativo</p>
+        <p class="txt-bottom">Suscríbete a nuestro boletín informativo</p>
         <div class="content-newsletter">
           <Newsletter
             :dataStore="dataStore"

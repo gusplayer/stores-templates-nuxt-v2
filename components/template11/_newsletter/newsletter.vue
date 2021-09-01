@@ -44,6 +44,9 @@
         {{ $t('newsletter_msg') }}
       </p>
     </div>
+    <p class="text-error" v-if="stateChehed">
+      Marcar checkbox para poder suscribirse al boletín informativo
+    </p>
   </div>
 </template>
 
@@ -66,6 +69,7 @@ export default {
       email: null,
       register: '',
       checked: false,
+      stateChehed: false,
     }
   },
   destroyed() {
@@ -79,6 +83,7 @@ export default {
   methods: {
     submitNewsletter() {
       if (this.checked == true) {
+        this.stateChehed = false
         this.$refs.validate
           .validate()
           .then((response) => {
@@ -111,10 +116,11 @@ export default {
           .catch((e) => {
             console.log(e)
           })
+      } else {
+        this.stateChehed = true
       }
     },
   },
-  watch: {},
 }
 </script>
 
