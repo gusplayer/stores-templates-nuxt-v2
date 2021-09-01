@@ -70,7 +70,7 @@ export default {
   .btn {
     font-size: 10px;
     border-radius: var(--radius_btn);
-    @apply font-normal leading-21 uppercase px-14 py-4;
+    @apply font-normal leading-21 uppercase px-15 py-10;
   }
   .btn:hover {
     color: var(--hover_text_btn);
