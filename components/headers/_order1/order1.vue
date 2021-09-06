@@ -1352,11 +1352,11 @@ export default {
 }
 .wrapper-Quotation {
   width: 100%;
-  padding: 0 30px;
+  /* padding: 0 30px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
+  align-items: center;
 }
 .Quotation-message {
   margin-top: 10px;
@@ -1366,7 +1366,7 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
-  max-width: 340px;
+  max-width: 350px;
   color: #2c2930;
   font-size: 14px;
   letter-spacing: 1px;
@@ -1504,13 +1504,13 @@ details[open] summary ~ * {
   animation: sweep 0.5s ease-in-out;
 }
 .continue_shopping_whatsapp {
-  width: 100%;
-  max-width: 340px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
   padding: 8px 10px;
+  width: 100%;
+  max-width: 350px;
   border-radius: var(--radius_btn);
   color: #fff;
   border: solid 2px #2c2930;
