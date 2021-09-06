@@ -11,6 +11,7 @@
             : 'Roboto',
       },
     ]"
+    v-if="listProduct"
   >
     <div class="producto-items-content">
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
