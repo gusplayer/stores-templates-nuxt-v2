@@ -537,6 +537,13 @@
                 </span>
               </template>
             </validation-provider>
+            <div class="mt-10 text-justify text-sm">
+              <p>
+                <strong>Advertencia:</strong> Los usuarios de iPhone si usan el
+                navegador Safari pueden presentar fallos en la compra, por lo
+                tanto, se les recomienda usar uno diferente.
+              </p>
+            </div>
           </ValidationObserver>
         </div>
         <button
@@ -665,10 +672,9 @@ export default {
           switch (shipping.envio_metodo) {
             case 'gratis':
               return 0
-              break
+
             case 'tarifa_plana':
               return shipping.valor
-              break
             case 'precio_ciudad':
               // eslint-disable-next-line no-case-declarations
               let result = shipping.rangos.find((rango) => {
@@ -684,7 +690,6 @@ export default {
               } else {
                 return 0
               }
-              break
             default:
               return 0
           }
@@ -1673,7 +1678,7 @@ details[open] summary ~ * {
 }
 .items-form {
   width: 100%;
-  padding: 10px 30px;
+  padding: 10px 25px;
 }
 .form_close {
   font-size: 30px;
