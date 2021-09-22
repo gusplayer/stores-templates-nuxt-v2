@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative;">
+  <div style="position: relative">
     <div class="wrapper_error">
       <div class="contenedor">
         <div class="content-left">
@@ -672,29 +672,18 @@
                 href="https://www.komercia.co"
                 rel="noreferrer noopener"
                 class="btn-komercia"
-                ><img
-                  v-lazy="
-                    `https://res.cloudinary.com/brahyanr10/image/upload/c_scale,w_240/v1621536560/Landing-komercia-v2/37_v2dlhk.png`
-                  "
-                  class="logokomerciaBtn"
-                  alt="Logo Komercia Botón"
-              /></a>
+                >Ir a Komercia</a
+              >
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="content-logo">
+    <!-- <div class="content-logo">
       <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
-        <img
-          v-lazy="
-            `https://res.cloudinary.com/brahyanr10/image/upload/c_scale,w_240/v1621536560/Landing-komercia-v2/37_v2dlhk.png`
-          "
-          class="logokomercia"
-          alt="Logo Komercia"
-        />
+        Komercia
       </a>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
