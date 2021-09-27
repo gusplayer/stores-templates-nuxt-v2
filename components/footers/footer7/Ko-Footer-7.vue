@@ -32,17 +32,26 @@
               <button class="accordion btn">Información de la tienda</button>
               <div class="footer-content-tienda panel">
                 <div class="content-direction">
-                  <p class="txt-direction txt">
+                  <p
+                    class="txt-direction txt"
+                    v-if="this.dataStore.geolocalizacion.length"
+                  >
                     {{ this.dataStore.geolocalizacion[0].direccion }}
                   </p>
                 </div>
                 <div class="content-number">
-                  <p class="txt-number txt">
+                  <p
+                    class="txt-number txt"
+                    v-if="this.dataStore.tienda.telefono"
+                  >
                     {{ this.dataStore.tienda.telefono }}
                   </p>
                 </div>
                 <div class="content-email">
-                  <p class="txt-email txt">
+                  <p
+                    class="txt-email txt"
+                    v-if="this.dataStore.tienda.email_tienda"
+                  >
                     {{ this.dataStore.tienda.email_tienda }}
                   </p>
                 </div>
@@ -75,17 +84,23 @@
               alt="Logo"
             />
             <div class="content-direction">
-              <p class="txt-direction txt">
+              <p
+                class="txt-direction txt"
+                v-if="this.dataStore.geolocalizacion.length"
+              >
                 {{ this.dataStore.geolocalizacion[0].direccion }}
               </p>
             </div>
             <div class="content-number">
-              <p class="txt-number txt">
+              <p class="txt-number txt" v-if="this.dataStore.tienda.telefono">
                 {{ this.dataStore.tienda.telefono }}
               </p>
             </div>
             <div class="content-email">
-              <p class="txt-email txt">
+              <p
+                class="txt-email txt"
+                v-if="this.dataStore.tienda.email_tienda"
+              >
                 {{ this.dataStore.tienda.email_tienda }}
               </p>
             </div>
