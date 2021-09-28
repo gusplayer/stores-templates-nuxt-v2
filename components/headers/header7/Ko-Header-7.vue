@@ -51,32 +51,31 @@
                 />
               </svg>
             </div>
-            <div class="item-btns">
+            <div
+              class="item-btns"
+              v-if="this.settingByTemplate11[0].pages.values"
+            >
               <div
                 class="content-btns"
-                v-for="(item, index) in secciones"
-                :key="`${index}${item.name}`"
+                v-for="(item, index) in this.settingByTemplate11[0].pages
+                  .values"
+                :key="`${index}${item.displayName}`"
               >
-                <nuxt-link :to="item.path" v-if="item.path">
-                  <button
-                    class="btn"
-                    :class="btnSelect == item.id ? 'btn-active' : ''"
-                  >
-                    {{ $t(`${item.name}`) }}
+                <nuxt-link :to="item.url" v-if="item.isExternalLink == false">
+                  <button class="btn">
+                    {{ item.displayName }}
                   </button>
                 </nuxt-link>
-
-                <nuxt-link
-                  :to="item.href"
-                  v-else-if="item.href && listArticulos > 0"
+                <a
+                  :href="item.url"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  v-else
                 >
-                  <button
-                    class="btn"
-                    :class="btnSelect == item.id ? 'btn-active' : ''"
-                  >
-                    {{ $t(`${item.name}`) }}
-                  </button>
-                </nuxt-link>
+                  <p class="btn">
+                    {{ item.displayName }}
+                  </p>
+                </a>
                 <div class="separator"></div>
               </div>
             </div>
@@ -178,32 +177,10 @@ export default {
   data() {
     return {
       searchSelect: true,
-      btnSelect: 1,
+
       resizehead: false,
       search: '',
       showSearch: false,
-      secciones: [
-        {
-          name: 'header_inicio',
-          path: '/',
-          id: 1,
-        },
-        {
-          name: 'header_productos',
-          path: '/productos',
-          id: 2,
-        },
-        {
-          name: 'header_contacto',
-          path: '/contacto',
-          id: 3,
-        },
-        {
-          name: 'header_blog',
-          href: '/blog',
-          id: 4,
-        },
-      ],
     }
   },
   computed: {

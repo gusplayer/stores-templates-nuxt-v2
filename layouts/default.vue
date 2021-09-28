@@ -640,6 +640,10 @@ export default {
                   this.settingByTemplate11.newsletter
                     ? this.settingByTemplate11.newsletter
                     : null,
+                pages:
+                  this.settingByTemplate11 && this.settingByTemplate11.pages
+                    ? this.settingByTemplate11.pages
+                    : null,
               },
             ]
           : null,

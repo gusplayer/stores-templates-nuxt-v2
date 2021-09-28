@@ -280,6 +280,9 @@ export const mutations = {
   SET_CURRENTSETTING11(state, value) {
     if (value && value.component) {
       switch (value.component) {
+        case 'pages':
+          state.settingByTemplate11.pages = value.setting
+          break
         case 'settingGeneral':
           state.settingByTemplate11.settingGeneral = value.setting
           break
