@@ -23,6 +23,10 @@ export default {
       data: [
         {
           photo:
+            'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1633014185/macroband/banner_03_lzwcca.png',
+        },
+        {
+          photo:
             'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,q_auto:best,f_auto/v1609802297/macroband/banner_02_lmmyse.png',
         },
         {
