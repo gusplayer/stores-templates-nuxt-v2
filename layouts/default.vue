@@ -235,7 +235,10 @@ export default {
       this.analytics_tagmanager.facebook_pixel_metatag_1
         ? this.analytics_tagmanager.facebook_pixel_metatag_1
         : ''
-    let googleMerchants = 'zl9aSE73XJX_tVA6qGiaEFpWpWAe2-hNBcCpHEXUTUw'
+    let googleMerchants =
+      this.analytics_tagmanager && this.analytics_tagmanager.google_merchant
+        ? this.analytics_tagmanager.google_merchant
+        : ''
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description =
       tienda && tienda.descripcion
@@ -360,7 +363,9 @@ export default {
         },
         {
           name: 'google-site-verification',
-          content: googleMerchants ? `${googleMerchants}` : '',
+          content: googleMerchants
+            ? `${googleMerchants}`
+            : 'ce4pJPC3AEQoDU6jNkAEqV-Dwa1OUU8GxtRTR0d_MM8',
         },
         {
           name: ' google',
