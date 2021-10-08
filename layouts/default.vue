@@ -235,6 +235,7 @@ export default {
       this.analytics_tagmanager.facebook_pixel_metatag_1
         ? this.analytics_tagmanager.facebook_pixel_metatag_1
         : ''
+    let googleMerchants = 'zl9aSE73XJX_tVA6qGiaEFpWpWAe2-hNBcCpHEXUTUw'
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
     let description =
       tienda && tienda.descripcion
@@ -356,6 +357,10 @@ export default {
         {
           name: 'facebook-domain-verification',
           content: FacebookPixel1 ? `${FacebookPixel1}` : '',
+        },
+        {
+          name: 'google-site-verification',
+          content: googleMerchants ? `${googleMerchants}` : '',
         },
         {
           name: ' google',
