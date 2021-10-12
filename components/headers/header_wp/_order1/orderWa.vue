@@ -1021,13 +1021,13 @@ export default {
           break
         //Argentina
         case 6:
-          this.placeholderBarrio = 'footer_formBarrio'
-          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          this.placeholderBarrio = 'footer_formComuna'
+          this.placeholderMsgBarrio = 'footer_formComunaMgs'
           break
         //Chile
         case 7:
-          this.placeholderBarrio = 'footer_formBarrio'
-          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          this.placeholderBarrio = 'footer_formComuna'
+          this.placeholderMsgBarrio = 'footer_formComunaMgs'
           break
       }
     },
