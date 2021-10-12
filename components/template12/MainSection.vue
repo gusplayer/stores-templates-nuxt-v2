@@ -17,22 +17,42 @@
             {{ category.nombre_categoria_producto }}
           </h2>
         </header>
-        <div class="products-wrapper">
-          <div
-            v-for="product in fullProducts"
-            :key="product.id"
-            @click="OpenModalproductDetails(product)"
-            v-show="product.categoria == category.nombre_categoria_producto"
-          >
-            <ProductCard
-              :product="
-                product.categoria == category.nombre_categoria_producto
-                  ? product
-                  : {}
+        <div
+          class="products-wrapper"
+          v-for="(subcategory, key) in dataStore.subcategorias"
+          :key="key"
+          v-show="subcategory.categoria == category.id"
+        >
+          <div class="subcategori-Content">
+            <p
+              class="text-subtitle"
+              :style="`color:${settingByTemplate12.titleColor};`"
+              v-if="subcategory.categoria == category.id"
+            >
+              {{ subcategory.nombre_subcategoria }}
+            </p>
+          </div>
+          <div class="products-content">
+            <div
+              v-for="product in fullProducts"
+              :key="product.id"
+              @click="OpenModalproductDetails(product)"
+              v-show="
+                product.categoria == category.nombre_categoria_producto &&
+                product.subcategoria == subcategory.id
               "
-              :dataStore="dataStore"
-              :settingByTemplate12="settingByTemplate12"
-            ></ProductCard>
+            >
+              <ProductCard
+                :product="
+                  product.categoria == category.nombre_categoria_producto &&
+                  product.subcategoria == subcategory.id
+                    ? product
+                    : {}
+                "
+                :dataStore="dataStore"
+                :settingByTemplate12="settingByTemplate12"
+              ></ProductCard>
+            </div>
           </div>
         </div>
       </div>
@@ -116,9 +136,20 @@ export default {
   margin: 0 auto;
 }
 .products-wrapper {
-  padding: 60px 10px 20px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.subcategori-Content {
   max-width: 940px;
   width: 100%;
+  padding: 30px 10px 20px;
+  margin: 0 auto;
+}
+.products-content {
+  max-width: 940px;
+  width: 100%;
+  padding: 10px 10px 20px;
   margin: 0 auto;
   display: grid;
   -ms-grid-columns: repeat(2, minmax(420px, 1fr));
@@ -134,6 +165,10 @@ export default {
 }
 .text-title {
   @apply font-semibold text-4xl uppercase;
+}
+.text-subtitle {
+  font-size: 22px;
+  @apply font-semibold uppercase;
 }
 @media (max-width: 800px) {
   .products-wrapper {

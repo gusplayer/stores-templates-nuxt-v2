@@ -3,7 +3,7 @@
     class="wrapper_card product_container"
     @mouseenter="() => (isHover = true)"
     @mouseleave="() => (isHover = false)"
-    v-show="product"
+    v-if="product"
   >
     <div
       class="content-img-prodcut"
