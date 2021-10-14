@@ -52,7 +52,15 @@
               </svg>
             </div>
             <div
+              class="btn-scroll"
+              @click="scrollLeft()"
+              v-if="this.settingByTemplate11[0].pages.values.length > 6"
+            >
+              <FlechaLeft-icon class="btn-scroll-icon" />
+            </div>
+            <div
               class="item-btns"
+              id="swiper-slide-categories"
               v-if="this.settingByTemplate11[0].pages.values"
             >
               <div
@@ -78,6 +86,13 @@
                 </a>
                 <div class="separator"></div>
               </div>
+            </div>
+            <div
+              class="btn-scroll"
+              @click="scrollRight()"
+              v-if="this.settingByTemplate11[0].pages.values.length > 6"
+            >
+              <FlechaRight-icon class="btn-scroll-icon" />
             </div>
             <div class="item-logo-md">
               <nuxt-link to="/">
@@ -237,6 +252,12 @@ export default {
         query: { search: search },
       })
     },
+    scrollLeft() {
+      document.getElementById('swiper-slide-categories').scrollLeft -= 300
+    },
+    scrollRight() {
+      document.getElementById('swiper-slide-categories').scrollLeft += 300
+    },
   },
   watch: {
     search(value) {
@@ -269,6 +290,31 @@ export default {
 }
 </script>
 <style scoped>
+.btn-scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  min-height: 50px;
+  padding: 0px 6px;
+  background: transparent;
+  cursor: pointer;
+}
+.btn-scroll-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: var(--color_tex);
+  bottom: 0.125em;
+}
+.btn-scroll-icon:hover {
+  color: var(--hover_text);
+}
+.item-btns {
+  max-width: 850px;
+}
 .content-header {
   background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
@@ -413,7 +459,29 @@ export default {
     @apply hidden;
   }
   .item-btns {
+    overflow-x: auto;
+    overflow-y: hidden;
     @apply w-auto flex flex-row justify-between items-center;
+  }
+  .item-btns::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+  }
+  .item-btns::-webkit-scrollbar {
+    background: transparent;
+    height: 5px;
+    border: 1px solid rgba(161, 161, 161, 0.589);
+  }
+  .item-btns::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px white;
+    border-radius: 10px;
+  }
+  .item-btns::-webkit-scrollbar-thumb {
+    background: #25d366;
+    border-radius: 10px;
+  }
+  .item-btns::-webkit-scrollbar-thumb:hover {
+    background: grey;
   }
   .separator {
     background-color: var(--color_border);
@@ -423,6 +491,11 @@ export default {
 @media (min-width: 1200px) {
   .wrapper-content-btns {
     max-width: 1200px;
+  }
+}
+@media (max-width: 1024px) {
+  .item-btns {
+    max-width: 700px;
   }
 }
 </style>
