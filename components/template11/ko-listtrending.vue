@@ -30,6 +30,11 @@
             ></KoproductCard>
           </div>
         </div>
+        <div class="btn-products">
+          <nuxt-link to="/productos">
+            <button class="btn">Ver todos los productos</button>
+          </nuxt-link>
+        </div>
         <div
           v-if="this.fullProducts.length == 0"
           class="content-products-empty"
@@ -104,6 +109,23 @@ export default {
 /* .gifyload:hover {
   @apply shadow-lg;
 } */
+.btn-products {
+  @apply w-full flex justify-center items-center;
+}
+.btn {
+  margin-bottom: 10px;
+  border: 1px solid var(--color_title);
+  padding: 8px 15px;
+  color: var(--color_title);
+  font-size: 16px;
+  font-family: var(--font-style-1);
+  @apply mr-20 px-8 font-semibold leading-20 transition-all ease-in duration-0.2;
+}
+.btn:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  @apply transition-all ease-in duration-0.2;
+}
 .product-content {
   background: var(--background_color_1);
   @apply flex flex-col justify-center items-center w-full pb-20 pt-50;
