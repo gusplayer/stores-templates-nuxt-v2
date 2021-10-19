@@ -577,6 +577,7 @@ export const actions = {
       let partsWapi = req.url.split('/')
       idWapi = partsWapi[2]
     } else if (
+      parts[1] == 'sweetlips' ||
       parts[1] == 'komercia' ||
       parts[1] == 'localhost:3000' ||
       parts[1] == 'unicentrovillavicencio'
