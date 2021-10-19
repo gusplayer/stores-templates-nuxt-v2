@@ -53,8 +53,6 @@ cache:
 
 prepare-files:
   stage: prepare-files
-  tags:
-    - processtempo
   script:
     - echo "fin"
     - tar czf buildRAD.tgz dist
