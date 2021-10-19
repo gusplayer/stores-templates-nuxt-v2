@@ -54,8 +54,6 @@ cache:
 prepare-files:
   stage: prepare-files
   script:
-    - echo "fin"
-    - tar czf buildRAD.tgz dist
     # - scp -o StrictHostKeyChecking=no ./buildRAD.tgz root@67.227.206.29:.
     - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "ls -l"
     # - ssh -o StrictHostKeyChecking=no root@67.227.206.29 "rm -rf build && tar xzf buildRAD.tgz && cd ./dist && ls -l"
