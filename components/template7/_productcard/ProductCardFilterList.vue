@@ -107,7 +107,13 @@
       <div
         class="overlay-bottom"
         v-on:click="addShoppingCart"
-        v-if="!this.estadoCart && !soldOut && !spent"
+        v-if="
+          !this.estadoCart &&
+          !soldOut &&
+          !spent &&
+          (this.product.tipo_servicio == null ||
+            this.product.tipo_servicio == '0')
+        "
       >
         <div class="cart-shop-mobile">
           <div class="icon-cart">
@@ -238,7 +244,7 @@
           </div>
         </div>
         <!-- Producto agotado -->
-        <div class="content_card-info" v-if="spent || product.stock == 0">
+        <div class="content_card-info" v-if="soldOut">
           <div class="icon-card-info-sould">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -331,7 +337,13 @@
         <button
           ref="colorBtn"
           class="btn"
-          v-if="!this.estadoCart && !soldOut && !spent"
+          v-if="
+            !this.estadoCart &&
+            !soldOut &&
+            !spent &&
+            (this.product.tipo_servicio == null ||
+              this.product.tipo_servicio == '0')
+          "
           v-on:click="addShoppingCart"
           id="AddToCartTag"
         >
@@ -339,9 +351,18 @@
             {{ $t('productdetail_añadiralcarrito') }}
           </p>
         </button>
-        <button disabled class="btn-disabled" v-else>
+        <button disabled class="btn-disabled" v-else-if="soldOut">
           <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
         </button>
+        <router-link
+          v-else
+          ref="colorBtn"
+          class="btn"
+          id="view_details"
+          :to="{ path: `/productos/` + product.slug }"
+        >
+          <p class="txt-btn-product">{{ $t('home_cardvermas') }}</p>
+        </router-link>
       </div>
     </div>
   </div>
@@ -485,9 +506,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,

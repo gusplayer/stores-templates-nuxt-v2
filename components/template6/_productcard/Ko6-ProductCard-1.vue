@@ -96,9 +96,15 @@
               <div
                 id="add_cart"
                 v-on:click="addShoppingCart"
-                v-if="!this.estadoCart && !soldOut && !spent"
+                v-if="
+                  !this.estadoCart &&
+                  !soldOut &&
+                  !spent &&
+                  (this.product.tipo_servicio == null ||
+                    this.product.tipo_servicio == '0')
+                "
               >
-                <p style="height: 23px;">
+                <p style="height: 23px">
                   <cartArrowDown /> {{ $t('home_cardAgregar') }}
                 </p>
               </div>
@@ -187,12 +193,28 @@
                 </p>
               </div>
             </router-link>
-            <div v-if="!this.estadoCart && !soldOut && !spent">
+            <div
+              v-if="
+                !this.estadoCart &&
+                !soldOut &&
+                !spent &&
+                (this.product.tipo_servicio == null ||
+                  this.product.tipo_servicio == '0')
+              "
+            >
               <cartArrowDown class="icon-cart" v-on:click="addShoppingCart" />
             </div>
           </div>
           <div class="separator-movil" v-else>
-            <div v-if="!this.estadoCart && !soldOut && !spent">
+            <div
+              v-if="
+                !this.estadoCart &&
+                !soldOut &&
+                !spent &&
+                (this.product.tipo_servicio == null ||
+                  this.product.tipo_servicio == '0')
+              "
+            >
               <cartArrowDown v-on:click="addShoppingCart" />
             </div>
           </div>
@@ -333,9 +355,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,

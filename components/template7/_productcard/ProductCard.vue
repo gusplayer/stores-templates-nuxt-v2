@@ -168,7 +168,13 @@
       <div
         class="overlay-bottom"
         v-on:click="addShoppingCart"
-        v-if="!this.estadoCart && !soldOut && !spent"
+        v-if="
+          !this.estadoCart &&
+          !soldOut &&
+          !spent &&
+          (this.product.tipo_servicio == null ||
+            this.product.tipo_servicio == '0')
+        "
       >
         <div class="cart-shop-mobile">
           <div class="icon-cart">
@@ -442,9 +448,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,

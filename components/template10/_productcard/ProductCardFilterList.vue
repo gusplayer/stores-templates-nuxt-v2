@@ -108,7 +108,13 @@
       <div
         class="overlay-bottom"
         v-on:click="addShoppingCart"
-        v-if="!this.estadoCart && !soldOut && !spent"
+        v-if="
+          !this.estadoCart &&
+          !soldOut &&
+          !spent &&
+          (this.product.tipo_servicio == null ||
+            this.product.tipo_servicio == '0')
+        "
       >
         <div class="cart-shop-mobile">
           <div class="icon-cart">
@@ -239,7 +245,7 @@
           </div>
         </div>
         <!-- Producto agotado -->
-        <div class="content_card-info" v-if="spent || product.stock == 0">
+        <div class="content_card-info" v-if="soldOut">
           <div class="icon-card-info-sould">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -332,7 +338,13 @@
         <button
           ref="colorBtn"
           class="btn"
-          v-if="product.stock > 0"
+          v-if="
+            !this.estadoCart &&
+            !soldOut &&
+            !spent &&
+            (this.product.tipo_servicio == null ||
+              this.product.tipo_servicio == '0')
+          "
           v-on:click="addShoppingCart"
           id="AddToCartTag"
         >
@@ -354,28 +366,18 @@
             {{ $t('productdetail_añadiralcarrito') }}
           </p>
         </button>
-        <button
-          disabled
-          class="btn-disabled"
-          v-if="product.stock == 0"
-          v-on:click="addShoppingCart"
-        >
-          <i class="header-content-cart">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              fill="currentColor"
-              class="minicart-icon-1"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
-              />
-            </svg>
-          </i>
+        <button disabled class="btn-disabled" v-else-if="soldOut">
           <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
         </button>
+        <router-link
+          v-else
+          ref="colorBtn"
+          class="btn"
+          id="view_details"
+          :to="{ path: `/productos/` + product.slug }"
+        >
+          <p class="txt-btn-product">{{ $t('home_cardvermas') }}</p>
+        </router-link>
       </div>
     </div>
   </div>
@@ -519,9 +521,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,

@@ -204,7 +204,13 @@
       <div class="content-btn">
         <button
           class="btn"
-          v-if="!this.estadoCart && !soldOut && !spent"
+          v-if="
+            !this.estadoCart &&
+            !soldOut &&
+            !spent &&
+            (this.product.tipo_servicio == null ||
+              this.product.tipo_servicio == '0')
+          "
           @click="addShoppingCart"
         >
           <div class="btn-content">

@@ -221,7 +221,7 @@
           </div>
         </div>
         <!-- Producto agotado -->
-        <div class="content_card-info" v-if="spent || product.stock == 0">
+        <div class="content_card-info" v-if="soldOut">
           <div class="icon-card-info-sould">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -314,7 +314,13 @@
         <button
           ref="colorBtn"
           class="btn"
-          v-if="product.stock > 0"
+          v-if="
+            !this.estadoCart &&
+            !soldOut &&
+            !spent &&
+            (this.product.tipo_servicio == null ||
+              this.product.tipo_servicio == '0')
+          "
           v-on:click="addShoppingCart"
           id="AddToCartTag"
         >
@@ -339,7 +345,7 @@
         <button
           disabled
           class="btn-disabled"
-          v-if="product.stock == 0"
+          v-else-if="soldOut"
           v-on:click="addShoppingCart"
         >
           <i class="header-content-cart">
@@ -358,6 +364,15 @@
           </i>
           <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
         </button>
+        <router-link
+          v-else
+          ref="colorBtn"
+          class="btn"
+          id="view_details"
+          :to="{ path: `/productos/` + product.slug }"
+        >
+          <p class="txt-btn-product">{{ $t('home_cardvermas') }}</p>
+        </router-link>
       </div>
     </div>
   </div>

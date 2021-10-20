@@ -309,9 +309,6 @@
             </transition>
           </div>
           <div style="width: 100%; margin-left: 10px">
-            <div class="content_buy_action-responsive" v-if="spent">
-              <p class="card-info-1-res">{{ $t('home_cardAgotado') }}</p>
-            </div>
             <button
               class="btn-responsive"
               ref="color2"
@@ -322,6 +319,7 @@
                   data.info.tipo_servicio == '0')
               "
               v-on:click="addShoppingCart"
+              id="AddToCartTag"
             >
               <cartArrowDown class="card-icon-cart" />{{
                 $t('productdetail_btnAgregar')
@@ -334,6 +332,18 @@
             >
               {{ $t('productdetail_btnANodisponible') }}
             </button>
+            <button
+              class="btn-responsive"
+              ref="color2"
+              v-else-if="!spent && data.info.tipo_servicio == '1'"
+              v-on:click="GoPayments"
+            >
+              {{ $t('productdetail_btnComprar') }}
+            </button>
+
+            <div class="content_buy_action-responsive" v-else-if="spent">
+              <p class="card-info-1-res">{{ $t('home_cardAgotado') }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -748,11 +758,9 @@ export default {
           this.salesData && this.salesData.combinacion
             ? this.salesData.combinacion
             : undefined,
-        promocion_valor: this.data.info.promocion_valor,
-        tag_promocion: this.data.info.tag_promocion,
       }
       let json = {
-        products: objeto,
+        products: [objeto],
         tienda: {
           id: this.$store.state.tienda.id_tienda,
         },

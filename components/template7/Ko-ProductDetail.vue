@@ -363,7 +363,12 @@
                   <button
                     ref="colorBtn"
                     class="btn"
-                    v-if="!spent && this.salesData.estado == true"
+                    v-if="
+                      !spent &&
+                      this.salesData.estado == true &&
+                      (data.info.tipo_servicio == null ||
+                        data.info.tipo_servicio == '0')
+                    "
                     v-on:click="addShoppingCart"
                   >
                     {{ $t('productdetail_añadiralcarrito') }}
@@ -374,6 +379,15 @@
                     v-else-if="this.salesData.estado == false"
                   >
                     {{ $t('productdetail_btnANodisponible') }}
+                  </button>
+                  <button
+                    ref="colorBtn"
+                    class="btn"
+                    v-else-if="!spent && data.info.tipo_servicio == '1'"
+                    v-on:click="GoPayments"
+                    id="AddToCartTag"
+                  >
+                    {{ $t('productdetail_btnComprar') }}
                   </button>
                   <button disabled class="btn-disabled" v-else-if="spent">
                     {{ $t('home_cardAgotado') }}
@@ -844,6 +858,38 @@ export default {
       this.$router.push('/')
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
+    },
+    GoPayments() {
+      let objeto = {
+        id: this.data.info.id,
+        cantidad: this.quantityValue,
+        combinacion:
+          this.salesData && this.salesData.combinacion
+            ? this.salesData.combinacion
+            : undefined,
+      }
+      let json = {
+        products: [objeto],
+        tienda: {
+          id: this.$store.state.tienda.id_tienda,
+        },
+      }
+      json = JSON.stringify(json)
+      if (json) {
+        if (this.layourUnicentro == true) {
+          window.open(`https://checkout.komercia.co/?params=${json}`)
+          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+            window.fbq('track', 'InitiateCheckout')
+          }
+          this.$gtm.push({ event: 'InitiateCheckout' })
+        } else {
+          location.href = `https://checkout.komercia.co/?params=${json}`
+          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+            window.fbq('track', 'InitiateCheckout')
+          }
+          this.$gtm.push({ event: 'InitiateCheckout' })
+        }
+      }
     },
     evalStock(mq, qv) {
       return !(mq - qv < 0)

@@ -119,7 +119,13 @@
               <div
                 id="add_cart"
                 v-on:click="addShoppingCart"
-                v-if="!this.estadoCart && !soldOut && !spent"
+                v-if="
+                  !this.estadoCart &&
+                  !soldOut &&
+                  !spent &&
+                  (this.product.tipo_servicio == null ||
+                    this.product.tipo_servicio == '0')
+                "
               >
                 <p style="height: 23px">
                   <cartArrowDown /> {{ $t('home_cardAgregar') }}
@@ -212,12 +218,28 @@
                 </p>
               </div>
             </router-link>
-            <div v-if="!this.estadoCart && !soldOut && !spent">
+            <div
+              v-if="
+                !this.estadoCart &&
+                !soldOut &&
+                !spent &&
+                (this.product.tipo_servicio == null ||
+                  this.product.tipo_servicio == '0')
+              "
+            >
               <cartArrowDown class="icon-cart" v-on:click="addShoppingCart" />
             </div>
           </div>
           <div class="separator-movil" v-else>
-            <div v-if="!this.estadoCart && !soldOut && !spent">
+            <div
+              v-if="
+                !this.estadoCart &&
+                !soldOut &&
+                !spent &&
+                (this.product.tipo_servicio == null ||
+                  this.product.tipo_servicio == '0')
+              "
+            >
               <cartArrowDown v-on:click="addShoppingCart" />
             </div>
           </div>

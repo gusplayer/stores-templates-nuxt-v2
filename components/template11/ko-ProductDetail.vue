@@ -236,7 +236,12 @@
                 <button
                   ref="colorBtn"
                   class="btn"
-                  v-if="!spent && this.salesData.estado == true"
+                  v-if="
+                    !spent &&
+                    this.salesData.estado == true &&
+                    (data.info.tipo_servicio == null ||
+                      data.info.tipo_servicio == '0')
+                  "
                   v-on:click="addShoppingCart"
                   id="AddToCartTag"
                 >
@@ -263,6 +268,29 @@
                 >
                   <p class="text-addCart">
                     {{ $t('productdetail_btnANodisponible') }}
+                  </p>
+                </button>
+                <button
+                  ref="colorBtn"
+                  class="btn"
+                  v-else-if="!spent && data.info.tipo_servicio == '1'"
+                  v-on:click="GoPayments"
+                  id="AddToCartTag"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="currentColor"
+                    class="minicart-icon"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+                    />
+                  </svg>
+                  <p class="text-addCart">
+                    {{ $t('productdetail_btnComprar') }}
                   </p>
                 </button>
                 <button disabled class="btn-disabled" v-else-if="spent">
@@ -682,6 +710,38 @@ export default {
       this.$router.push('/productos')
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
+    },
+    GoPayments() {
+      let objeto = {
+        id: this.data.info.id,
+        cantidad: this.quantityValue,
+        combinacion:
+          this.salesData && this.salesData.combinacion
+            ? this.salesData.combinacion
+            : undefined,
+      }
+      let json = {
+        products: [objeto],
+        tienda: {
+          id: this.$store.state.tienda.id_tienda,
+        },
+      }
+      json = JSON.stringify(json)
+      if (json) {
+        if (this.layourUnicentro == true) {
+          window.open(`https://checkout.komercia.co/?params=${json}`)
+          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+            window.fbq('track', 'InitiateCheckout')
+          }
+          this.$gtm.push({ event: 'InitiateCheckout' })
+        } else {
+          location.href = `https://checkout.komercia.co/?params=${json}`
+          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+            window.fbq('track', 'InitiateCheckout')
+          }
+          this.$gtm.push({ event: 'InitiateCheckout' })
+        }
+      }
     },
     evalStock(mq, qv) {
       return !(mq - qv < 0)
