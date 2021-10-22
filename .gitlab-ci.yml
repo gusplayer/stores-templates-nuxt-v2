@@ -55,7 +55,7 @@ prepare-files:
   stage: prepare-files
   script:
     # - scp -o StrictHostKeyChecking=no ./buildRAD.tgz root@67.227.206.29:.
-    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "ls -l"
+    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "sudo ./up.sh"
     # - ssh -o StrictHostKeyChecking=no root@67.227.206.29 "rm -rf build && tar xzf buildRAD.tgz && cd ./dist && ls -l"
     # - ssh -o StrictHostKeyChecking=no root@67.227.206.29 "cd ./dist; docker build -t processtempo:${VERSION_PT4_MS_WORKSPACES_DEV} ."
     # - ssh -o StrictHostKeyChecking=no root@67.227.206.29 "sudo docker login -u="processtempo+pablo" -p="H1YWUZUEUG6DA8PHR9O8RBFDURM80KN5C7K1HD0WC2J7OV1W8480PSVSF0YWNXRJ" registry.ford.com;

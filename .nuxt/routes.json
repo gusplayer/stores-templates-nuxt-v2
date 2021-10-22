@@ -2,155 +2,169 @@
   {
     "name": "blog",
     "path": "/blog",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\index.vue",
-    "chunkName": "pages/blog/index",
-    "_name": "_1393236f"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/blog/index.vue",
+    "chunkName": "pages/blog/index"
   },
   {
     "name": "cart",
     "path": "/cart",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\cart.vue",
-    "chunkName": "pages/cart",
-    "_name": "_5dd2ce31"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/cart.vue",
+    "chunkName": "pages/cart"
   },
   {
     "name": "catalogoPixel",
     "path": "/catalogoPixel",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\catalogoPixel\\\\index.vue",
-    "chunkName": "pages/catalogoPixel/index",
-    "_name": "_466cdeb3"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/catalogoPixel/index.vue",
+    "chunkName": "pages/catalogoPixel/index"
   },
   {
     "name": "constructor",
     "path": "/constructor",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\constructor\\\\index.vue",
-    "chunkName": "pages/constructor/index",
-    "_name": "_3960912e"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/constructor/index.vue",
+    "chunkName": "pages/constructor/index"
   },
   {
     "name": "contacto",
     "path": "/contacto",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\contacto.vue",
-    "chunkName": "pages/contacto",
-    "_name": "_d502c140"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/contacto.vue",
+    "chunkName": "pages/contacto"
   },
   {
     "name": "micompra",
     "path": "/micompra",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\micompra.vue",
-    "chunkName": "pages/micompra",
-    "_name": "_eab600aa"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/micompra.vue",
+    "chunkName": "pages/micompra"
   },
   {
     "name": "productos",
     "path": "/productos",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\index.vue",
-    "chunkName": "pages/productos/index",
-    "_name": "_40f254f0"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/productos/index.vue",
+    "chunkName": "pages/productos/index"
   },
   {
     "name": "template10",
     "path": "/template10",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template10\\\\index.vue",
-    "chunkName": "pages/template10/index",
-    "_name": "_1c4a2d58"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template10/index.vue",
+    "chunkName": "pages/template10/index"
+  },
+  {
+    "name": "template11",
+    "path": "/template11",
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template11/index.vue",
+    "chunkName": "pages/template11/index"
+  },
+  {
+    "name": "template12",
+    "path": "/template12",
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template12/index.vue",
+    "chunkName": "pages/template12/index"
   },
   {
     "name": "template5",
     "path": "/template5",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template5\\\\index.vue",
-    "chunkName": "pages/template5/index",
-    "_name": "_46ad27f0"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template5/index.vue",
+    "chunkName": "pages/template5/index"
   },
   {
     "name": "template6",
     "path": "/template6",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index.vue",
-    "chunkName": "pages/template6/index",
-    "_name": "_3749dd32"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template6/index.vue",
+    "chunkName": "pages/template6/index"
   },
   {
     "name": "template7",
     "path": "/template7",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template7\\\\index.vue",
-    "chunkName": "pages/template7/index",
-    "_name": "_27e69274"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template7/index.vue",
+    "chunkName": "pages/template7/index"
   },
   {
     "name": "template8",
     "path": "/template8",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template8\\\\index.vue",
-    "chunkName": "pages/template8/index",
-    "_name": "_188347b6"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template8/index.vue",
+    "chunkName": "pages/template8/index"
   },
   {
     "name": "template9",
     "path": "/template9",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template9\\\\index.vue",
-    "chunkName": "pages/template9/index",
-    "_name": "_091ffcf8"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template9/index.vue",
+    "chunkName": "pages/template9/index"
+  },
+  {
+    "name": "template99",
+    "path": "/template99",
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template99/index.vue",
+    "chunkName": "pages/template99/index"
   },
   {
     "name": "unicentro",
     "path": "/unicentro",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\unicentro\\\\index.vue",
-    "chunkName": "pages/unicentro/index",
-    "_name": "_146f03ee"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/unicentro/index.vue",
+    "chunkName": "pages/unicentro/index"
   },
   {
     "name": "template6-index_macrobrand",
     "path": "/template6/index_macrobrand",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index_macrobrand.vue",
-    "chunkName": "pages/template6/index_macrobrand",
-    "_name": "_3702577a"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template6/index_macrobrand.vue",
+    "chunkName": "pages/template6/index_macrobrand"
+  },
+  {
+    "name": "template99-templates-template1",
+    "path": "/template99/templates/template1",
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template99/templates/template1/index.vue",
+    "chunkName": "pages/template99/templates/template1/index"
+  },
+  {
+    "name": "template99-templates-template2",
+    "path": "/template99/templates/template2",
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template99/templates/template2/index.vue",
+    "chunkName": "pages/template99/templates/template2/index"
+  },
+  {
+    "name": "template99-templates-template3",
+    "path": "/template99/templates/template3",
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/template99/templates/template3/index.vue",
+    "chunkName": "pages/template99/templates/template3/index"
   },
   {
     "name": "blog-slug",
     "path": "/blog/:slug",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\_slug.vue",
-    "chunkName": "pages/blog/_slug",
-    "_name": "_11dc8227"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/blog/_slug.vue",
+    "chunkName": "pages/blog/_slug"
   },
   {
     "name": "productos-slug",
     "path": "/productos/:slug",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\_slug.vue",
-    "chunkName": "pages/productos/_slug",
-    "_name": "_3f3bb3a8"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/productos/_slug.vue",
+    "chunkName": "pages/productos/_slug"
   },
   {
     "name": "wa-slug",
     "path": "/wa/:slug",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\index.vue",
-    "chunkName": "pages/wa/_slug/index",
-    "_name": "_38e9a7e3"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/wa/_slug/index.vue",
+    "chunkName": "pages/wa/_slug/index"
   },
   {
     "name": "wp-slug",
     "path": "/wp/:slug",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wp\\\\_slug\\\\index.vue",
-    "chunkName": "pages/wp/_slug/index",
-    "_name": "_45e56232"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/wp/_slug/index.vue",
+    "chunkName": "pages/wp/_slug/index"
   },
   {
-    "name": "wa-slug-producto-slugProduct",
-    "path": "/wa/:slug?/producto/:slugProduct?",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\producto\\\\_slugProduct.vue",
-    "chunkName": "pages/wa/_slug/producto/_slugProduct",
-    "_name": "_9d100ab8"
+    "name": "wa-slug-productos-slugProduct",
+    "path": "/wa/:slug?/productos/:slugProduct?",
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/wa/_slug/productos/_slugProduct.vue",
+    "chunkName": "pages/wa/_slug/productos/_slugProduct"
   },
   {
     "name": "wp-slug-producto-slugProduct",
     "path": "/wp/:slug?/producto/:slugProduct?",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wp\\\\_slug\\\\producto\\\\_slugProduct.vue",
-    "chunkName": "pages/wp/_slug/producto/_slugProduct",
-    "_name": "_fda76f96"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/wp/_slug/producto/_slugProduct.vue",
+    "chunkName": "pages/wp/_slug/producto/_slugProduct"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\migue\\\\OneDrive\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_22530111"
+    "component": "/Users/pablotorres/Documents/komercia/template-nuxt-dokku/pages/index.vue",
+    "chunkName": "pages/index"
   }
 ]
