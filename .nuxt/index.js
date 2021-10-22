@@ -5,7 +5,7 @@ import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
 import { createRouter } from './router.js'
 import NuxtChild from './components/nuxt-child.js'
-import NuxtError from '..\\layouts\\error.vue'
+import NuxtError from '../layouts/error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData, normalizeError } from './utils'
@@ -13,24 +13,25 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_gtm_58e15c4e from 'nuxt_plugin_gtm_58e15c4e' // Source: .\\gtm.js (mode: 'all')
-import nuxt_plugin_workbox_2d6872c2 from 'nuxt_plugin_workbox_2d6872c2' // Source: .\\workbox.js (mode: 'client')
-import nuxt_plugin_metaplugin_00dca7c2 from 'nuxt_plugin_metaplugin_00dca7c2' // Source: .\\pwa\\meta.plugin.js (mode: 'all')
-import nuxt_plugin_corecomponentsnpm_428ce86c from 'nuxt_plugin_corecomponentsnpm_428ce86c' // Source: ..\\plugins\\core-components-npm (mode: 'all')
-import nuxt_plugin_element_f89b5a74 from 'nuxt_plugin_element_f89b5a74' // Source: ..\\plugins\\element (mode: 'all')
-import nuxt_plugin_mixinCommonMethods_b0161b88 from 'nuxt_plugin_mixinCommonMethods_b0161b88' // Source: ..\\plugins\\mixinCommonMethods (mode: 'all')
-import nuxt_plugin_materialicons_5694302c from 'nuxt_plugin_materialicons_5694302c' // Source: ..\\plugins\\material-icons (mode: 'all')
-import nuxt_plugin_validate_4442dcea from 'nuxt_plugin_validate_4442dcea' // Source: ..\\plugins\\validate.js (mode: 'all')
-import nuxt_plugin_i18n_6a80ea94 from 'nuxt_plugin_i18n_6a80ea94' // Source: ..\\plugins\\i18n (mode: 'all')
-import nuxt_plugin_fuse_6e95fa80 from 'nuxt_plugin_fuse_6e95fa80' // Source: ..\\plugins\\fuse.js (mode: 'client')
-import nuxt_plugin_swiper_68e7f06e from 'nuxt_plugin_swiper_68e7f06e' // Source: ..\\plugins\\swiper.js (mode: 'client')
-import nuxt_plugin_vuecarrusel_74d92192 from 'nuxt_plugin_vuecarrusel_74d92192' // Source: ..\\plugins\\vue-carrusel.js (mode: 'client')
-import nuxt_plugin_ga_fb0a2534 from 'nuxt_plugin_ga_fb0a2534' // Source: ..\\plugins\\ga.js (mode: 'client')
-import nuxt_plugin_gtm_5e4639ea from 'nuxt_plugin_gtm_5e4639ea' // Source: ..\\plugins\\gtm (mode: 'client')
-import nuxt_plugin_facebookpixel_58a6ac96 from 'nuxt_plugin_facebookpixel_58a6ac96' // Source: ..\\plugins\\facebook-pixel (mode: 'client')
-import nuxt_plugin_countryFlags_00220ce0 from 'nuxt_plugin_countryFlags_00220ce0' // Source: ..\\plugins\\countryFlags.js (mode: 'client')
-import nuxt_plugin_vuelazyload_d07c1d40 from 'nuxt_plugin_vuelazyload_d07c1d40' // Source: ..\\plugins\\vue-lazyload.js (mode: 'client')
-import nuxt_plugin_elementtiptap_3e05fbe2 from 'nuxt_plugin_elementtiptap_3e05fbe2' // Source: ..\\plugins\\element-tiptap (mode: 'client')
+import nuxt_plugin_gtm_98d8009c from 'nuxt_plugin_gtm_98d8009c' // Source: ./gtm.js (mode: 'all')
+import nuxt_plugin_workbox_8db84010 from 'nuxt_plugin_workbox_8db84010' // Source: ./workbox.js (mode: 'client')
+import nuxt_plugin_metaplugin_330ca1ea from 'nuxt_plugin_metaplugin_330ca1ea' // Source: ./pwa/meta.plugin.js (mode: 'all')
+import nuxt_plugin_corecomponentsnpm_428ce86c from 'nuxt_plugin_corecomponentsnpm_428ce86c' // Source: ../plugins/core-components-npm (mode: 'all')
+import nuxt_plugin_element_f89b5a74 from 'nuxt_plugin_element_f89b5a74' // Source: ../plugins/element (mode: 'all')
+import nuxt_plugin_mixinCommonMethods_b0161b88 from 'nuxt_plugin_mixinCommonMethods_b0161b88' // Source: ../plugins/mixinCommonMethods (mode: 'all')
+import nuxt_plugin_materialicons_5694302c from 'nuxt_plugin_materialicons_5694302c' // Source: ../plugins/material-icons (mode: 'all')
+import nuxt_plugin_validate_4442dcea from 'nuxt_plugin_validate_4442dcea' // Source: ../plugins/validate.js (mode: 'all')
+import nuxt_plugin_facebookpixel_58a6ac96 from 'nuxt_plugin_facebookpixel_58a6ac96' // Source: ../plugins/facebook-pixel (mode: 'all')
+import nuxt_plugin_i18n_6a80ea94 from 'nuxt_plugin_i18n_6a80ea94' // Source: ../plugins/i18n (mode: 'all')
+import nuxt_plugin_chatFacebook_4288b8c3 from 'nuxt_plugin_chatFacebook_4288b8c3' // Source: ../plugins/chatFacebook.js (mode: 'client')
+import nuxt_plugin_fuse_6e95fa80 from 'nuxt_plugin_fuse_6e95fa80' // Source: ../plugins/fuse.js (mode: 'client')
+import nuxt_plugin_swiper_68e7f06e from 'nuxt_plugin_swiper_68e7f06e' // Source: ../plugins/swiper.js (mode: 'client')
+import nuxt_plugin_vuecarrusel_74d92192 from 'nuxt_plugin_vuecarrusel_74d92192' // Source: ../plugins/vue-carrusel.js (mode: 'client')
+import nuxt_plugin_ga_fb0a2534 from 'nuxt_plugin_ga_fb0a2534' // Source: ../plugins/ga.js (mode: 'client')
+import nuxt_plugin_gtm_5e4639ea from 'nuxt_plugin_gtm_5e4639ea' // Source: ../plugins/gtm (mode: 'client')
+import nuxt_plugin_countryFlags_00220ce0 from 'nuxt_plugin_countryFlags_00220ce0' // Source: ../plugins/countryFlags.js (mode: 'client')
+import nuxt_plugin_vuelazyload_d07c1d40 from 'nuxt_plugin_vuelazyload_d07c1d40' // Source: ../plugins/vue-lazyload.js (mode: 'client')
+import nuxt_plugin_elementtiptap_3e05fbe2 from 'nuxt_plugin_elementtiptap_3e05fbe2' // Source: ../plugins/element-tiptap (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -59,7 +60,11 @@ Vue.component(Nuxt.name, Nuxt)
 
 Object.defineProperty(Vue.prototype, '$nuxt', {
   get() {
-    return this.$root.$options.$nuxt
+    const globalNuxt = this.$root.$options.$nuxt
+    if (process.client && !globalNuxt && typeof window !== 'undefined') {
+      return window.$nuxt
+    }
+    return globalNuxt
   },
   configurable: true
 })
@@ -94,7 +99,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"template-nuxt-dokku","htmlAttrs":{"lang":"es"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"google-site-verification","content":"ce4pJPC3AEQoDU6jNkAEqV-Dwa1OUU8GxtRTR0d_MM8"},{"hid":"description","name":"description","content":"Templates komercia"}],"link":[{"href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap","rel":"stylesheet"}],"style":[],"script":[]},
+    head: {"title":"template-nuxt-dokku","htmlAttrs":{"lang":"es"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Templates komercia"}],"link":[],"style":[],"script":[{"hid":"gtm-script","innerHTML":"if(!window._gtm_init){window._gtm_init=1;(function(w,n,d,m,e,p){w[d]=(w[d]==1||n[d]=='yes'||n[d]==1||n[m]==1||(w[e]&&w[e][p]&&w[e][p]()))?1:0})(window,navigator,'doNotTrack','msDoNotTrack','external','msTrackingProtectionEnabled');(function(w,d,s,l,x,y){w[x]={};w._gtm_inject=function(i){if(w.doNotTrack||w[x][i])return;w[x][i]=1;w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https:\u002F\u002Fwww.googletagmanager.com\u002Fgtm.js?id='+i;f.parentNode.insertBefore(j,f);}})(window,document,'script','dataLayer','_gtm_ids','_gtm_inject')}"}],"noscript":[{"hid":"gtm-noscript","pbody":true,"innerHTML":""}],"__dangerouslyDisableSanitizersByTagID":{"gtm-script":["innerHTML"],"gtm-noscript":["innerHTML"]}},
 
     store,
     router,
@@ -223,16 +228,16 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_gtm_58e15c4e === 'function') {
-    await nuxt_plugin_gtm_58e15c4e(app.context, inject)
+  if (typeof nuxt_plugin_gtm_98d8009c === 'function') {
+    await nuxt_plugin_gtm_98d8009c(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_workbox_2d6872c2 === 'function') {
-    await nuxt_plugin_workbox_2d6872c2(app.context, inject)
+  if (process.client && typeof nuxt_plugin_workbox_8db84010 === 'function') {
+    await nuxt_plugin_workbox_8db84010(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_metaplugin_00dca7c2 === 'function') {
-    await nuxt_plugin_metaplugin_00dca7c2(app.context, inject)
+  if (typeof nuxt_plugin_metaplugin_330ca1ea === 'function') {
+    await nuxt_plugin_metaplugin_330ca1ea(app.context, inject)
   }
 
   if (typeof nuxt_plugin_corecomponentsnpm_428ce86c === 'function') {
@@ -255,8 +260,16 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_validate_4442dcea(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_facebookpixel_58a6ac96 === 'function') {
+    await nuxt_plugin_facebookpixel_58a6ac96(app.context, inject)
+  }
+
   if (typeof nuxt_plugin_i18n_6a80ea94 === 'function') {
     await nuxt_plugin_i18n_6a80ea94(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_chatFacebook_4288b8c3 === 'function') {
+    await nuxt_plugin_chatFacebook_4288b8c3(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_fuse_6e95fa80 === 'function') {
@@ -279,10 +292,6 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_gtm_5e4639ea(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_facebookpixel_58a6ac96 === 'function') {
-    await nuxt_plugin_facebookpixel_58a6ac96(app.context, inject)
-  }
-
   if (process.client && typeof nuxt_plugin_countryFlags_00220ce0 === 'function') {
     await nuxt_plugin_countryFlags_00220ce0(app.context, inject)
   }
@@ -302,26 +311,33 @@ async function createApp(ssrContext, config = {}) {
     }
   }
 
-  // If server-side, wait for async component to be resolved first
-  if (process.server && ssrContext && ssrContext.url) {
-    await new Promise((resolve, reject) => {
-      router.push(ssrContext.url, resolve, (err) => {
-        // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
-        if (!err._isRouter) return reject(err)
-        if (err.type !== 2 /* NavigationFailureType.redirected */) return resolve()
+  // Wait for async component to be resolved first
+  await new Promise((resolve, reject) => {
+    // Ignore 404s rather than blindly replacing URL in browser
+    if (process.client) {
+      const { route } = router.resolve(app.context.route.fullPath)
+      if (!route.matched.length) {
+        return resolve()
+      }
+    }
+    router.replace(app.context.route.fullPath, resolve, (err) => {
+      // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
+      if (!err._isRouter) return reject(err)
+      if (err.type !== 2 /* NavigationFailureType.redirected */) return resolve()
 
-        // navigated to a different route in router guard
-        const unregister = router.afterEach(async (to, from) => {
+      // navigated to a different route in router guard
+      const unregister = router.afterEach(async (to, from) => {
+        if (process.server && ssrContext && ssrContext.url) {
           ssrContext.url = to.fullPath
-          app.context.route = await getRouteData(to)
-          app.context.params = to.params || {}
-          app.context.query = to.query || {}
-          unregister()
-          resolve()
-        })
+        }
+        app.context.route = await getRouteData(to)
+        app.context.params = to.params || {}
+        app.context.query = to.query || {}
+        unregister()
+        resolve()
       })
     })
-  }
+  })
 
   return {
     store,
