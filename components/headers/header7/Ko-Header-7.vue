@@ -152,7 +152,11 @@
         </div>
       </div>
       <KoOrder :dataStore="dataStore"></KoOrder>
-      <KoMenu :dataStore="dataStore" class="responsive" />
+      <KoMenu
+        :dataStore="dataStore"
+        :settingByTemplate11="settingByTemplate11"
+        class="responsive"
+      />
     </div>
   </div>
 </template>
@@ -192,7 +196,6 @@ export default {
   data() {
     return {
       searchSelect: true,
-
       resizehead: false,
       search: '',
       showSearch: false,

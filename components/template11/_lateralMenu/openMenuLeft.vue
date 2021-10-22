@@ -40,20 +40,31 @@
           </div> -->
 
           <div class="conten-Menu" v-if="!focusbtn">
-            <div class="header-content-buttons">
+            <div
+              class="header-content-buttons"
+              v-if="this.settingByTemplate11[0].pages.values"
+            >
               <div
-                v-for="(item, index) in secciones"
-                :key="`${index}${item.name}`"
+                v-for="(item, index) in this.settingByTemplate11[0].pages
+                  .values"
+                :key="`${index}${item.displayName}`"
               >
-                <nuxt-link :to="item.path" v-if="item.path" class="btn"
-                  >{{ $t(`${item.name}`) }}
-                </nuxt-link>
                 <nuxt-link
-                  :to="item.href"
-                  v-else-if="item.href && listArticulos > 0"
+                  :to="item.url"
+                  v-if="item.isExternalLink == false"
                   class="btn"
-                  >{{ $t(`${item.name}`) }}</nuxt-link
                 >
+                  {{ item.displayName }}
+                </nuxt-link>
+                <a
+                  class="btn"
+                  :href="item.url"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  v-else
+                >
+                  {{ item.displayName }}
+                </a>
               </div>
             </div>
           </div>
@@ -115,15 +126,16 @@
 </template>
 
 <script>
-import BaseAccordian from '../../template11/_lateralMenu/_BaseAccordion'
+// import BaseAccordian from '../../template11/_lateralMenu/_BaseAccordion'
 export default {
   name: 'KoMenuLeft',
   props: {
     dataStore: Object,
+    settingByTemplate11: Array,
   },
-  components: {
-    BaseAccordian,
-  },
+  // components: {
+  //   BaseAccordian,
+  // },
   data() {
     return {
       selecttag: 1,
@@ -139,32 +151,6 @@ export default {
       indexSelect: '',
       indexSelect2: '',
       getSubcategory: false,
-      secciones: [
-        {
-          name: 'header_inicio',
-          path: '/',
-          //icon: 'menu-icon',
-        },
-        {
-          name: 'header_productos',
-          path: '/productos',
-        },
-        {
-          name: 'header_contacto',
-          path: '/contacto',
-          //icon: 'account-icon',
-        },
-        {
-          name: 'header_blog',
-          path: '/blog',
-          //icon: 'account-icon',
-        },
-        {
-          name: 'header_carrito',
-          path: '/cart',
-          //icon: 'cart-icon',
-        },
-      ],
     }
   },
   computed: {
