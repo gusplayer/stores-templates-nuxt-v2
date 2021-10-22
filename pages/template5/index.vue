@@ -1,34 +1,30 @@
 <template lang="html">
   <div
     class="home"
-    :style="
-      this.settingByTemplate &&
-      this.settingByTemplate.settings &&
-      this.settingByTemplate.settings['--background_color_1']
-        ? this.settingByTemplate.settings
-        : this.settingBase
-    "
-  >
-    <div
-      :style="{
+    :style="[
+      {
         '--font-style':
           this.settingByTemplate &&
           this.settingByTemplate.settings &&
           this.settingByTemplate.settings.tipo_letra
             ? this.settingByTemplate.settings.tipo_letra
             : 'Roboto',
-      }"
-    >
-      <kBanner v-if="this.stateBanner"></kBanner>
-      <KComponent360 v-if="this.stateBanner" />
-      <KProductFavoritos v-if="this.stateBanner" />
-      <KProductList
-        :dataStore="dataStore"
-        :fullProducts="fullProducts"
-      ></KProductList>
-      <kBannerFooter />
-      <KNewsletter :dataStore="dataStore" />
-    </div>
+      },
+      this.settingByTemplate && this.settingByTemplate.settings
+        ? this.settingByTemplate.settings
+        : this.settingBase,
+    ]"
+  >
+    <kBanner v-if="this.stateBanner" id="KHeaderX" />
+    <KComponent360 v-if="this.stateBanner" />
+    <KProductFavoritos v-if="this.stateBanner" />
+    <KProductList
+      :dataStore="dataStore"
+      :fullProducts="fullProducts"
+      id="KProductX"
+    />
+    <kBannerFooter id="KFooterX" />
+    <KNewsletter :dataStore="dataStore" />
   </div>
 </template>
 
@@ -49,7 +45,10 @@ export default {
     KComponent360,
     kBannerFooter,
   },
-  mounted() {},
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenertemplate)
+  },
   computed: {
     template() {
       return this.$store.state.template
@@ -68,6 +67,35 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenertemplate)
+  },
+  methods: {
+    addEventListenertemplate(e) {
+      if (
+        e.origin.includes('https://panel.komercia.co') ||
+        e.origin.includes('http://localhost:8080')
+      ) {
+        if (e && e.data && e.data.componentToEdit) {
+          this.$store.commit('SET_CURRENTSETTING5', e.data)
+          switch (e.data.componentToEdit) {
+            case 'header':
+              this.moverseA('KHeaderX')
+              break
+            case 'prodcutList':
+              this.moverseA('KProductX')
+              break
+            case 'footer':
+              this.moverseA('KFooterX')
+              break
+          }
+        }
+      }
+    },
+    moverseA(idDelElemento) {
+      location.hash = '#' + idDelElemento
     },
   },
 }

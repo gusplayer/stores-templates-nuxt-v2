@@ -176,6 +176,11 @@ export const state = () => ({
   },
 })
 export const mutations = {
+  SET_CURRENTSETTING5(state, value) {
+    if (value && value.data) {
+      state.settingByTemplate = value.data
+    }
+  },
   SET_CURRENTSETTING09(state, value) {
     if (value) {
       if (value.component) {

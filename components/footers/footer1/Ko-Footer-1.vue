@@ -123,7 +123,10 @@ export default {
     settingByTemplate: Object,
   },
   mounted() {
-    if (this.settingByTemplate) {
+    if (
+      this.settingByTemplate &&
+      this.settingByTemplate['--background_color_1']
+    ) {
       this.setLogo()
     }
     if (
@@ -223,12 +226,15 @@ export default {
       this.links[4].link = this.dataStore.tienda.red_tiktok
     },
     settingByTemplate(value) {
-      let colorArray = value.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
+      if (value['--background_color_1']) {
+        let color = value['--background_color_1']
+        let colorArray = color.split(',')
+        let colorInt = parseInt(colorArray[2])
+        if (colorInt > 50) {
+          this.logo = true
+        } else {
+          this.logo = false
+        }
       }
     },
   },
