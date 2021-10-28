@@ -103,9 +103,7 @@
               </div>
               <iframe
                 v-show="existYoutube"
-                v-lazy="
-                  `https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`
-                "
+                :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
                 frameborder="0"
                 allowfullscreen
                 class="photo_main"
