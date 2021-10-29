@@ -15,14 +15,14 @@
     "deploy": "pm2 start npm --name template-nuxt-dokku -- start"
   },
   "dependencies": {
-    "@babel/core": "^7.15.5",
+    "@babel/core": "^7.15.8",
     "@babel/polyfill": "^7.12.1",
-    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-env": "^7.15.8",
     "@nuxtjs/gtm": "^2.4.0",
     "@nuxtjs/pwa": "^3.3.5",
-    "autoprefixer": "^10.3.5",
-    "axios": "^0.21.4",
-    "babel-loader": "^8.2.2",
+    "autoprefixer": "^10.4.0",
+    "axios": "^0.24.0",
+    "babel-loader": "^8.2.3",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
@@ -36,27 +36,27 @@
     "nuxt": "^2.15.8",
     "nuxt-facebook-pixel-module": "^1.5.0",
     "swiper": "^6.8.4",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.14",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "vee-validate": "^3.4.13",
     "vue": "^2.6.14",
-    "vue-template-compiler": "^2.6.14",
     "vue-awesome-swiper": "^3.1.3",
     "vue-carousel": "^0.18.0",
     "vue-country-flag": "^2.2.0",
     "vue-fb-customer-chat": "^0.2.0",
     "vue-gtag": "^1.16.1",
-    "vue-i18n": "^8.25.1",
+    "vue-i18n": "^8.26.5",
     "vue-lazyload": "^1.3.3",
     "vue-material-design-icons": "^4.13.0",
-    "vue-meta": "^2.4.0"
+    "vue-meta": "^2.4.0",
+    "vue-template-compiler": "^2.6.14"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^4.2.1",
     "babel-eslint": "^10.1.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.1",
-    "postcss": "^8.3.7",
+    "eslint-plugin-prettier": "^4.0.0",
+    "postcss": "^8.3.11",
     "prettier": "^2.4.1"
   }
 }
