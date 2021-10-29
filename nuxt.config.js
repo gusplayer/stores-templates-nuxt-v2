@@ -19,6 +19,31 @@ export default {
         name: 'description',
         content: process.env.npm_package_description || '',
       },
+      //quitar cache
+      {
+        hid: 'Expires',
+        'http-equiv': 'Expires',
+        content: '0',
+      },
+      {
+        hid: 'Last-Modified',
+        'http-equiv': 'Last-Modified',
+        content: '0',
+      },
+      {
+        hid: 'Cache-Control',
+        'http-equiv': 'Cache-Control',
+        content: 'no-cache, mustrevalidate',
+      },
+      {
+        hid: 'Pragma',
+        'http-equiv': 'Pragma',
+        content: 'no-cache',
+      },
+      {
+        name: ' google',
+        content: ' notranslate',
+      },
     ],
   },
   loading: {

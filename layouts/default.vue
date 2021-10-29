@@ -367,27 +367,6 @@ export default {
             ? `${googleMerchants}`
             : 'ce4pJPC3AEQoDU6jNkAEqV-Dwa1OUU8GxtRTR0d_MM8',
         },
-        {
-          name: ' google',
-          content: ' notranslate',
-        },
-        //quitar cache
-        {
-          name: 'Expires',
-          content: '0',
-        },
-        {
-          name: 'Last-Modified',
-          content: '0',
-        },
-        {
-          name: 'Cache-Control',
-          content: 'no-cache, mustrevalidate',
-        },
-        {
-          name: 'Pragma',
-          content: 'no-cache',
-        },
       ],
       script: [
         {
