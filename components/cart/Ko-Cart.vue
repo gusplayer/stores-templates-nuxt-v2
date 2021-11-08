@@ -21,7 +21,9 @@
           >
             <div class="product">
               <div
-                class="content-items-product content-items-product-resposive-img"
+                class="
+                  content-items-product content-items-product-resposive-img
+                "
               >
                 <img
                   v-lazy="idCloudinaryBanner(product.foto_cloudinary)"
@@ -57,7 +59,7 @@
                       v-for="(item, items) in product.combinacion"
                       :key="items"
                       class="text-variant"
-                      style="margin-top: 3px;"
+                      style="margin-top: 3px"
                     >
                       {{ item }}
                     </el-tag>
@@ -158,7 +160,7 @@
           </div>
           <div class="content-cart-product">
             <div class="cart-summary-items">
-              <p class="txt-cart-summary" style="font-weight: bold;">
+              <p class="txt-cart-summary" style="font-weight: bold">
                 {{ $t('cart_items') }}
               </p>
               <p class="txt_summary_price">
@@ -166,7 +168,7 @@
               </p>
             </div>
             <span class="cart-summary-items" v-if="this.shippingDescuento">
-              <p class="txt-cart-summary" style="font-weight: bold;">
+              <p class="txt-cart-summary" style="font-weight: bold">
                 {{ $t('footer_descuento') }}
               </p>
               <p
@@ -207,7 +209,7 @@
             </span>
             <div class="order_total">
               <div class="order_total_domicile">
-                <p class="txt_summary_tittle" style="font-weight: bold;">
+                <p class="txt_summary_tittle" style="font-weight: bold">
                   {{ $t('footer_costoDomicilio') }}
                 </p>
                 <details
@@ -219,8 +221,8 @@
                   "
                 >
                   <summary class="txt-cart-summary">
-                    {{ $t('footer_valorCiudad') }}</summary
-                  >
+                    {{ $t('footer_valorCiudad') }}
+                  </summary>
                   <section>
                     <ol class="scroll_cart_summary_items_cities">
                       <li
@@ -282,7 +284,7 @@
                     getFreeShipping == true &&
                     FreeShippingCart == false
                   "
-                  style="width: 100%;"
+                  style="width: 100%"
                 >
                   <div
                     class="content-Plana"
@@ -304,7 +306,7 @@
                     </p>
                   </div>
                   <p
-                    v-else-if="(this.shippingTarifaPrecio >= 0)"
+                    v-else-if="this.shippingTarifaPrecio >= 0"
                     class="txt_summary_price"
                   >
                     {{ $t('footer_tarifaPrecio') }}
@@ -351,7 +353,7 @@
               </div>
             </div>
             <div class="cart-summary-items">
-              <p class="txt-cart-summary" style="font-weight: bold;">
+              <p class="txt-cart-summary" style="font-weight: bold">
                 {{ $t('cart_subtotal') }}
               </p>
               <p class="txt_summary_price">
@@ -486,8 +488,7 @@ export default {
   },
   data() {
     return {
-      img:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
+      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
       envioProducto: '',
       layoutLogin: true,
       shippingCities: [],
@@ -583,6 +584,9 @@ export default {
             return true
             break
           case 'Chile':
+            return true
+            break
+          case 'Perú':
             return true
             break
           default:

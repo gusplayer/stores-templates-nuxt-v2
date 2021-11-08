@@ -713,6 +713,9 @@ export default {
           case 'Chile':
             return true
             break
+          case 'Perú':
+            return true
+            break
           default:
             return false
         }
