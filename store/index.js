@@ -338,6 +338,11 @@ export const mutations = {
       state.settingByTemplate12 = value.data
     }
   },
+  SET_CURRENTSETTING99: (state, value) => {
+    if (value && value.setting) {
+      state.settingByTemplate = value.setting
+    }
+  },
   SET_LAYOUTUNICENTRO(state, value) {
     state.layoutUnicentro = value
   },

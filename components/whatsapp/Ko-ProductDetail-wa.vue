@@ -432,13 +432,15 @@ export default {
     whatsapp() {
       return this.dataStore.tienda.whatsapp
     },
-    category() {
-      return this.productsData.filter(
-        (product) =>
-          product.categoria ==
-            this.data.detalle.categoria_producto.nombre_categoria_producto &&
-          product.id !== this.data.detalle.id
-      )
+    categorys() {
+      if (this.data && this.data.detalle) {
+        return this.productsData.filter(
+          (product) =>
+            product.categoria ==
+              this.data.detalle.categoria_producto.nombre_categoria_producto &&
+            product.id !== this.data.detalle.id
+        )
+      }
     },
     stateWapiME() {
       return this.$store.state.stateWapiME
@@ -848,8 +850,8 @@ export default {
 
 <style scoped>
 .wrapper-productDetail {
-  display: flex;
   width: 100%;
+  display: flex;
   background-color: #fafaf8;
   justify-content: center;
   align-items: flex-start;

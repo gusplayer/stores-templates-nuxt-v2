@@ -21,7 +21,7 @@
             <i class="material-icons">keyboard_backspace</i>
           </button>
           <iframe
-            style="max-width: 375px; width: 100%;"
+            style="max-width: 375px; width: 100%"
             height="375"
             :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
             frameborder="0"
@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="swiper-pagination" slot="pagination"></div> -->
+    <div class="swiper-pagination" slot="pagination" v-if="photos"></div>
   </div>
 </template>
 
@@ -114,7 +114,7 @@ export default {
   border-style: none;
   outline: none;
 }
-.swiper-pagination-bullet-active {
-  background: #0f2930;
+.swiper-pagination >>> .swiper-pagination-bullet-active {
+  background: rgb(12, 183, 89);
 }
 </style>
