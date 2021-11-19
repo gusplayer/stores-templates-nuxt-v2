@@ -284,6 +284,7 @@ export default {
     header_allProduct: 'All products',
     header_tiendaWa: 'WhatsApp Store',
     header_blog: 'Blog',
+    header_buscar_producto: 'Search product',
     //footer
     footer_inicio: 'Home',
     footer_carrito: 'Cart',
@@ -553,6 +554,7 @@ export default {
     header_allProduct: 'Todos os produtos',
     header_tiendaWa: 'WhatsApp Store',
     header_blog: 'Blog',
+    header_buscar_producto: 'Pesquisar produto',
     //footer
     footer_inicio: 'Home',
     footer_carrito: 'Carroça',
