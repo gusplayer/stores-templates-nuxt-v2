@@ -30,26 +30,27 @@ export default ({ app, store }) => {
       'ga'
     )
     ga('create', analytics, 'auto')
-    ga('create', 'UA-92934137-1', 'auto', 'clientTracker')
+    // ga('create', 'UA-92934137-1', 'auto', 'clientTracker')
     app.router.afterEach((to, from) => {
       ga('set', 'page', to.fullPath)
       ga('send', 'pageview')
-      ga('clientTracker.send', 'pageview', {
-        page: location.host + location.pathname,
-      })
+      // ga('clientTracker.send', 'pageview', {
+      //   page: location.host + location.pathname,
+      // })
     })
   } else {
     if (result[0] == 'G') {
       Vue.use(VueGtag, {
-        config: { id: 'UA-92934137-1' },
-        includes: [
-          {
-            id: analytics,
-            params: {
-              send_page_view: false,
-            },
-          },
-        ],
+        // config: { id: 'UA-92934137-1' },
+        config: { id: analytics },
+        // includes: [
+        //   {
+        //     id: analytics,
+        //     params: {
+        //       send_page_view: false,
+        //     },
+        //   },
+        // ],
       })
     }
   }
