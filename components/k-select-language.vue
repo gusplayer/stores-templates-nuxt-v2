@@ -35,6 +35,10 @@ export default {
         this.select.label = 'Portuguese (pt)'
         this.select.lng = 'pt'
         break
+      case 'fr':
+        this.select.label = 'Francés (fr)'
+        this.select.lng = 'fr'
+        break
     }
   },
   data() {
@@ -56,6 +60,10 @@ export default {
         {
           label: 'Portuguese (pt)',
           lng: 'pt',
+        },
+        {
+          label: 'Francés (fr)',
+          lng: 'fr',
         },
       ],
     }

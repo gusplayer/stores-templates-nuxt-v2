@@ -7,6 +7,7 @@ Vue.use(VueI18n)
 const en = [index.en]
 const es = [index.es]
 const pt = [index.pt]
+const fr = [index.fr]
 
 export default ({ app, store }) => {
   let lenguaje =
@@ -21,6 +22,7 @@ export default ({ app, store }) => {
       es: Object.assign({}, ...es),
       en: Object.assign({}, ...en),
       pt: Object.assign({}, ...pt),
+      fr: Object.assign({}, ...fr),
     },
   })
 }
