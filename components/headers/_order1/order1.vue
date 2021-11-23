@@ -364,7 +364,12 @@
                     {{ $t('footer_seguirCompra') }}
                   </button>
                 </nuxt-link>
-                <nuxt-link to="/cart" class="conten-btn" @click="closeOrder">
+                <nuxt-link
+                  to="/cart"
+                  class="conten-btn"
+                  @click="closeOrder"
+                  v-if="dataStore.tienda.template != 12"
+                >
                   <button class="continue_shopping2">
                     {{ $t('footer_irCarrito') }}
                   </button>
