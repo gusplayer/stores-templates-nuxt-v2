@@ -10,6 +10,7 @@ import Ko7ProductDetail from '../../components/template7/Ko-ProductDetail'
 import Ko9ProductDetail from '../../components/template9/Ko-ProductDetail'
 import Ko10ProductDetail from '../../components/template10/Ko-ProductDetail'
 import Ko11ProductDetail from '../../components/template11/ko-ProductDetail'
+import Ko11ProductDetailHoko from '../../components/template11/ko-ProductDetailHoko'
 
 export default {
   components: {
@@ -18,6 +19,7 @@ export default {
     Ko9ProductDetail,
     Ko10ProductDetail,
     Ko11ProductDetail,
+    Ko11ProductDetailHoko,
   },
   mounted() {
     window.parent.postMessage('message', '*')
@@ -55,10 +57,21 @@ export default {
           productListComponent = 'Ko10ProductDetail'
           break
         case 11:
-          productListComponent = 'Ko11ProductDetail'
+          if (
+            this.dataHoko.statehoko == true &&
+            this.dataStore.tienda.id_tienda == 1559
+          ) {
+            productListComponent = 'Ko11ProductDetailHoko'
+          } else {
+            productListComponent = 'Ko11ProductDetail'
+          }
+
           break
       }
       return productListComponent
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
     },
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7

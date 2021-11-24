@@ -10,6 +10,7 @@ import K07ProductList from '../../components/template7/Ko-ProductListFilter'
 import K09ProductList from '../../components/template9/Ko-ProductListFilter'
 import K10ProductList from '../../components/template10/Ko-ProductListFilter'
 import K11ProductList from '../../components/template11/ko-ProductListFilter'
+import K11ProductListHoko from '../../components/template11/ko-ProductListFilterHoko.vue'
 
 export default {
   components: {
@@ -18,6 +19,7 @@ export default {
     K09ProductList,
     K10ProductList,
     K11ProductList,
+    K11ProductListHoko,
   },
   mounted() {
     window.parent.postMessage('message', '*')
@@ -61,7 +63,14 @@ export default {
           productListComponent = 'K10ProductList'
           break
         case 11:
-          productListComponent = 'K11ProductList'
+          if (
+            this.dataHoko.statehoko == true &&
+            this.dataStore.tienda.id_tienda == 1559
+          ) {
+            productListComponent = 'K11ProductListHoko'
+          } else {
+            productListComponent = 'K11ProductList'
+          }
           break
       }
       return productListComponent
@@ -74,6 +83,9 @@ export default {
     },
     settingByTemplate11() {
       return this.$store.state.settingByTemplate11
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
     },
     componentsProps() {
       return {
