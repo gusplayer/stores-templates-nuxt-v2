@@ -1,6 +1,6 @@
 <template>
   <transition name="fade z-50">
-    <div class="order z-50" @click="closeOrder" v-show="openMenuLeft">
+    <div class="order z-50" v-show="openMenuLeft">
       <div class="order_content z-50">
         <div class="order_header">
           <div class="empty"></div>
@@ -21,24 +21,6 @@
           </div>
         </div>
         <div class="content-lateral-menu">
-          <!-- <div class="content-btns-lateral-menu">
-            <button
-              id="btnfocus"
-              class="btn-lateral-menu-left"
-              @click="selectTag1"
-              :class="selecttag == 1 ? 'show-select-active' : ''"
-            >
-              {{ $t('header_menu') }}
-            </button>
-            <button
-              class="btn-lateral-menu-right"
-              @click="selectTag2"
-              :class="selecttag == 2 ? 'show-select-active' : ''"
-            >
-              {{ $t('header_categorias') }}
-            </button>
-          </div> -->
-
           <div class="conten-Menu" v-if="!focusbtn">
             <div
               class="header-content-buttons"
@@ -48,6 +30,7 @@
                 v-for="(item, index) in this.settingByTemplate11[0].pages
                   .values"
                 :key="`${index}${item.displayName}`"
+                @click="closed"
               >
                 <nuxt-link
                   :to="item.url"
@@ -68,57 +51,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="content-Categorys" v-if="focusbtn">
-            <template>
-              <div class="wrapper-category-all">
-                <li @click="clear">
-                  <p class="btn-category-all">{{ $t('header_allProduct') }}</p>
-                </li>
-                <div v-for="categoria in categorias" :key="categoria.id">
-                  <BaseAccordian>
-                    <template v-slot:categorias>
-                      <li
-                        class="btn-category"
-                        @click="
-                          sendCategory(categoria, categoria.id, (ref = false))
-                        "
-                        :class="
-                          categoria.id == indexSelect
-                            ? 'text-categoria-active'
-                            : ''
-                        "
-                      >
-                        {{ categoria.nombre_categoria_producto }}
-                      </li>
-                    </template>
-                    <template v-slot:subcategorias
-                      ><template>
-                        <div
-                          v-for="(subcategory, key) in subcategories"
-                          :key="key"
-                        >
-                          <li
-                            v-if="subcategory.categoria == categoria.id"
-                            @click="Sendsubcategory(subcategory.id)"
-                            class="btn-category"
-                            :class="
-                              subcategory.id == indexSelect2
-                                ? 'text-subcategoria-active'
-                                : ''
-                            "
-                          >
-                            <p class="txt-sub-li">
-                              {{ subcategory.nombre_subcategoria }}
-                            </p>
-                          </li>
-                        </div>
-                      </template></template
-                    >
-                  </BaseAccordian>
-                </div>
-              </div>
-            </template>
-          </div> -->
         </div>
       </div>
     </div>
@@ -126,16 +58,12 @@
 </template>
 
 <script>
-// import BaseAccordian from '../../template11/_lateralMenu/_BaseAccordion'
 export default {
   name: 'KoMenuLeft',
   props: {
     dataStore: Object,
     settingByTemplate11: Array,
   },
-  // components: {
-  //   BaseAccordian,
-  // },
   data() {
     return {
       selecttag: 1,
@@ -160,130 +88,10 @@ export default {
     openMenuLeft() {
       return this.$store.state.openMenulateralLeft
     },
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    listArticulos() {
-      return this.$store.state.listArticulos.length
-    },
   },
   methods: {
-    selectTag1() {
-      this.selecttag = 1
-      this.focusbtn = false
-    },
-    selectTag2() {
-      this.selecttag = 2
-      this.focusbtn = true
-    },
-    getSearch(value) {
-      if (value) {
-        location.href = '?search=' + value
-        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-          window.fbq('track', 'Search', { value: value })
-        }
-      } else {
-        location.href = '?search=' + ''
-      }
-    },
-    Searchproduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
-    },
     closed() {
       this.$store.commit('SET_OPENORDERMENULEFT', false)
-    },
-    closeOrder(event) {
-      const element = event.target.className
-      if (
-        element === 'order responsive' ||
-        element === 'order_header_close' ||
-        element === 'continue_shopping' ||
-        element === 'continue_shopping2'
-      ) {
-        this.$store.commit('SET_OPENORDERMENULEFT', false)
-      }
-    },
-    Sendsubcategory(value) {
-      this.indexSelect2 = value
-      this.$router.push({
-        path: '/productos',
-      })
-      this.$store.commit('SET_STATEBANNER', false)
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
-      this.addClass()
-      this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.id == value
-      )
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
-      )
-      this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
-        filtradoCategorias.nombre_categoria_producto
-      )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
-      this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
-        data: value,
-      })
-    },
-    sendCategory(value, categoria, ref) {
-      this.indexSelect = categoria
-      // this.$router.push({
-      //   path: '/productos',
-      // })
-      this.$store.commit('SET_STATEBANNER', false)
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
-      this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
-        }
-      })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-        this.$store.commit('SET_OPENORDERMENULEFT', false)
-      }
-      if (ref) {
-        this.addClass()
-      }
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: value.nombre_categoria_producto,
-      })
-    },
-    addClass() {
-      this.add = !this.add
-    },
-    clear() {
-      this.$router.push({
-        path: '/productos',
-      })
-      this.showMenu = false
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: 'all',
-        data: '',
-      })
-      this.$emit('clear')
-      this.addClass()
-      this.nameCategory = ''
-    },
-  },
-  watch: {
-    search(value) {
-      this.Searchproduct(value)
     },
   },
 }
@@ -351,31 +159,6 @@ export default {
   object-fit: contain;
   object-position: left;
 }
-.wrapper-category-all {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  overflow-x: auto;
-}
-.text-categoria {
-  width: 100%;
-  font-size: 16px;
-  font-weight: bold;
-  color: #2c2930;
-}
-.text-subcategoria {
-  margin-left: 3px;
-  margin-bottom: 5px;
-  width: 100%;
-  font-size: 15px;
-  color: #2c2930;
-}
-.text-categoria-active {
-  color: #2c2930;
-}
-.text-subcategoria-active {
-  color: #2c2930;
-}
 .close-container {
   @apply relative h-50 cursor-pointer flex justify-center items-center;
 }
@@ -398,56 +181,11 @@ export default {
 .content-lateral-menu {
   @apply w-full flex flex-col justify-center items-center;
 }
-.content-btns-lateral-menu {
-  @apply w-full flex flex-row justify-center items-center;
-}
 .btn-lateral-menu-right:focus .conten-Menu {
   @apply hidden;
 }
-.btn-lateral-menu-left {
-  padding: 18px 15px;
-  max-width: 50%;
-  width: 50%;
-  color: #2c2930;
-  text-align: center;
-  letter-spacing: 0px;
-  font-weight: 600;
-  text-transform: capitalize;
-  font-size: 14px;
-  cursor: pointer;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  transition: background-color 0.25s ease, color 0.25s ease;
-  border-bottom: 3px solid #2c2930;
-}
-.btn-lateral-menu-right {
-  padding: 18px 15px;
-  max-width: 50%;
-  width: 50%;
-  color: #2c2930;
-  text-align: center;
-  letter-spacing: 0px;
-  font-weight: 600;
-  text-transform: capitalize;
-  font-size: 14px;
-  cursor: pointer;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  transition: background-color 0.25s ease, color 0.25s ease;
-  border-bottom: 3px solid #2c2930;
-}
-.show-select-active {
-  background-color: #2c2930;
-  color: #fff;
-}
-.conten-Menu,
-.content-Categorys {
+.conten-Menu {
   @apply w-full flex flex-col justify-start items-center;
-}
-.content-Categorys {
-  max-height: 670px;
-  overflow-y: scroll;
-}
-.collapse-category {
-  @apply w-full;
 }
 .header-content-buttons {
   @apply w-full grid grid-cols-1 justify-start items-center;
@@ -463,29 +201,6 @@ export default {
 .btn:hover {
   color: #767676;
 }
-.btn-category {
-  color: #2a363b;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply w-full flex justify-center items-center font-semibold tracking-wider py-3 pl-4;
-}
-.btn-category-all {
-  color: #2a363b;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply w-full flex font-semibold  tracking-wider py-3 pl-4;
-}
-.txt-sub-li {
-  font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  font-weight: 400;
-  color: #2a363b;
-}
-
 @media (min-width: 1280px) {
   .order {
     @apply hidden;

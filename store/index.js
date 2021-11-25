@@ -779,7 +779,7 @@ export const actions = {
         .post(`https://hoko.com.co/api/login`, params)
         .then((response) => {
           state.dataHoko.token = response.data.token
-          dispatch('GET_PRODUCTHOKO', 1)
+          dispatch('GET_PRODUCTSHOKO', 1)
         })
         .catch((error) => {
           if (error) {
@@ -790,20 +790,30 @@ export const actions = {
       console.log('error al loguear hoko')
     }
   },
-  GET_PRODUCTHOKO({ state }, id) {
-    let config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-        Authorization: `Bearer ${state.dataHoko.token}`,
-        'Access-Control-Allow-Origin': '*',
-      },
+  async AUTHTOKEN_HOKO({ state, dispatch }) {
+    let params = {
+      email: state.dataHoko.user,
+      password: state.dataHoko.pass,
     }
-    axios
-      .get(`https://hoko.com.co/api/member/product?page=${id}`, config)
-      .then((response) => {
-        state.producthoko = response.data
-      })
+    return await axios.post(`https://hoko.com.co/api/login`, params)
   },
+  GET_PRODUCTSHOKO({ state }, id) {
+    if (state.dataHoko && state.dataHoko.token) {
+      let config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Authorization: `Bearer ${state.dataHoko.token}`,
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+      axios
+        .get(`https://hoko.com.co/api/member/product?page=${id}`, config)
+        .then((response) => {
+          state.producthoko = response.data
+        })
+    }
+  },
+
   // async GET_DATAVALIENTA({ state, commit }) {
   //   const response = await axios.get(
   //     `https://gateway-service-api.prod.valienta.co/company-service-api/store/product`

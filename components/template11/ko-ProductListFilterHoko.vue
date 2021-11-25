@@ -129,7 +129,7 @@ export default {
   },
   methods: {
     currentChange(page) {
-      this.$store.dispatch('GET_PRODUCTHOKO', page)
+      this.$store.dispatch('GET_PRODUCTSHOKO', page)
       this.currentPage = page
     },
     mouseOver(index) {

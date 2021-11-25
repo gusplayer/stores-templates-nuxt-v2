@@ -13,7 +13,8 @@
       },
     ]"
   >
-    <div class="container-productDetail">
+    <div class="container-productDetail-loading" v-if="loading"></div>
+    <div class="container-productDetail" v-else>
       <div class="banner-detail">
         <div class="crumb">
           <nuxt-link to="/productos">
@@ -59,6 +60,9 @@
                   alt="Product Zoom"
                 />
               </div>
+            </div>
+            <div class="photos_responsive">
+              <ProductSlide :photos="data.images" />
             </div>
           </div>
         </div>
@@ -205,6 +209,7 @@ import axios from 'axios'
 import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
 import idCloudinary from '../../mixins/idCloudinary'
+import ProductSlide from './_productdetails/productSlideHoko.vue'
 
 export default {
   mixins: [idCloudinary],
@@ -220,34 +225,16 @@ export default {
   components: {
     OptionTab,
     KoSuggesProduct,
+    ProductSlide,
   },
-  mounted() {
-    this.$store.dispatch('LOGIN_HOKO')
-    if (this.dataHoko && this.dataHoko.token) {
-      this.getProductsHoko(this.$route.params.slug)
-    }
+  async mounted() {
+    this.asyncauthToken()
   },
   data() {
     return {
       data: {},
       loading: true,
       selectPhotoUrl: '',
-
-      idYoutube: '',
-      existYoutube: false,
-      maxQuantityValue: 1,
-      quantityValue: 1,
-      productIndexCart: null,
-      warranty: '',
-      productCart: {},
-      salesData: null,
-      spent: false,
-      envioproducto: '',
-      envio: {
-        titulo: '',
-        desc: '',
-      },
-      activeZoom: true,
       swiperOption: {
         direction: 'vertical',
         slidesPerView: 4,
@@ -273,22 +260,26 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    dataHoko() {
-      return this.$store.state.dataHoko
-    },
   },
   methods: {
-    getProductsHoko(id) {
+    async asyncauthToken() {
+      const response = await this.$store.dispatch('AUTHTOKEN_HOKO')
+      if (response) {
+        this.getProductsHoko(this.$route.params.slug, response.data.token)
+      }
+    },
+    async getProductsHoko(id, token) {
       let config = {
         headers: {
           'content-type': 'multipart/form-data',
-          Authorization: `Bearer ${this.dataHoko.token}`,
+          Authorization: `Bearer ${token}`,
           'Access-Control-Allow-Origin': '*',
         },
       }
-      axios
+      await axios
         .get(`https://hoko.com.co/api/member/product/${id}`, config)
         .then((response) => {
+          this.loading = false
           this.data = response.data.product
           if (this.data) {
             this.selectedPhoto(this.data.images[0])
@@ -308,7 +299,6 @@ export default {
       this.selectPhotoUrl = photo
     },
   },
-  watch: {},
   filters: {
     currency(value) {
       if (value) {
@@ -369,7 +359,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
 }
 .photos_responsive {
   display: none;
@@ -421,14 +411,6 @@ export default {
   border-radius: 6px;
   margin-bottom: 10px;
 }
-.video {
-  width: 100px;
-  height: 100px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  object-fit: cover;
-  object-position: center;
-}
 .wrapper-photo_main {
   position: relative;
   max-width: 650px;
@@ -442,18 +424,6 @@ export default {
   object-fit: contain;
   object-position: center;
   border-radius: 10px;
-}
-.photo_main_zoom {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 10px;
-  cursor: zoom-in;
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  transform: scale(1.2);
 }
 .wrapper-productDetail {
   background: var(--background_color_1);
@@ -473,98 +443,34 @@ export default {
 .left {
   @apply w-full flex flex-col justify-center items-center;
 }
-.content-images {
-  @apply w-full grid grid-cols-1 gap-4 justify-center items-center;
-}
-.content-variant {
-  @apply w-full flex flex-col justify-center items-start mt-30;
-}
-.content-items-variant {
-  margin-bottom: 8px;
-  @apply w-full flex flex-col justify-start items-start;
-}
-.img-list {
-  @apply w-auto h-auto object-cover overflow-hidden;
-}
-.aditional-images,
-.main-images,
-.youtuve-video {
-  @apply w-full flex justify-center items-center;
-}
 .right {
   @apply w-full flex flex-col justify-start items-start;
 }
-.content-category,
 .content-name,
 .content-price,
 .content-addCart {
   @apply w-full flex flex-row justify-start items-center;
 }
-.quantity {
-  @apply flex flex-row justify-center items-center;
-}
 .section-suggesProduct {
   @apply w-full my-40;
 }
-.content-quantity-boxes {
-  @apply w-full flex flex-row justify-start items-center;
-}
-.content-quantity-boxes {
-  @apply w-full flex justify-start items-center my-30;
-}
-.box-quantity {
-  background-color: transparent;
-  border: 1px solid var(--border);
-  @apply w-75 h-50 flex text-center justify-center items-center;
-}
-.box-quantity-btns {
-  background-color: var(--color_background_btn);
-  border: 1px solid var(--color_background_btn);
-  @apply w-25 h-50 flex flex-col text-center justify-center items-center;
-}
-.btn-quantity {
-  background-color: var(--color_background_btn);
-  border-color: var(--color_background_btn);
-  @apply w-25 h-25 flex justify-center items-center border-t border-r;
-}
 
-.card-discont {
-  background: black;
-  color: white;
-  padding: 2px 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-  font-size: 16px;
-}
-.text-promocion {
-  font-size: 14px;
-  font-weight: bold;
-  color: var(--color_subtext);
-  text-decoration: line-through;
-}
 @screen sm {
+  .wrapper-left {
+    padding-bottom: 15px;
+  }
   .product-content {
     @apply w-9/0 flex-col justify-center items-center mt-40;
   }
   .content-direction-btns {
     @apply w-full flex flex-col justify-start items-start;
   }
-  .video {
-    width: 100%;
-    height: 200px;
-  }
   .content-name,
   .content-price {
     @apply mb-30;
   }
-  .content-options {
-    @apply flex;
-  }
   .tab {
     @apply w-9/0 flex mt-40;
-  }
-  .content-options {
-    @apply w-full flex flex-col justify-start items-center;
   }
   .btn {
     color: var(--color_text_btn);
@@ -583,9 +489,6 @@ export default {
     background: var(--hover_Bg_btn);
     transition: all 0.15s ease-in;
   }
-  .quantity {
-    @apply w-full;
-  }
   .text-name {
     color: var(--color_text);
     /* font-size: 22px; */
@@ -600,28 +503,6 @@ export default {
     letter-spacing: 0.3px;
     font-family: var(--font-style-1) !important;
     @apply capitalize;
-  }
-  .text-stock {
-    color: #92bb35;
-    font-size: 14px;
-    line-height: 1.42857143;
-    letter-spacing: -0.02em;
-    font-family: var(--font-style-1) !important;
-    @apply capitalize font-semibold ml-30;
-  }
-  .text-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 34px;
-    cursor: pointer;
-    color: var(--color_text_btn);
-  }
-  .text-quantity_value {
-    padding: 0 35px;
-    border: none;
-    font-size: 21px;
-    @apply w-full flex justify-center items-center text-center font-semibold;
   }
   .text-addCart {
     font-family: var(--font-style-1) !important;
@@ -641,13 +522,6 @@ export default {
     font-family: var(--font-style-1) !important;
     @apply font-semibold mr-10;
   }
-  .text-option {
-    color: var(--color_subtext);
-    font-size: 16px;
-    transition: all 0.6s ease-in-out;
-    font-family: var(--font-style-1) !important;
-    @apply font-semibold;
-  }
   .banner-detail {
     @apply hidden;
   }
@@ -655,7 +529,7 @@ export default {
     @apply w-9/0;
   }
   .content-items-right {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply w-full flex flex-col justify-center items-center mb-20;
   }
   .empty {
     background-color: var(--border);
@@ -681,11 +555,6 @@ export default {
 @media (min-width: 425px) {
   .content-direction-btns {
     @apply flex flex-col;
-  }
-}
-@media (min-width: 480px) {
-  .video {
-    height: 250px;
   }
 }
 @screen md {
@@ -715,12 +584,8 @@ export default {
     color: var(--hover_text);
     transition: all 0.25s ease;
   }
-
   .content-addCart {
     width: 236px;
-  }
-  .video {
-    height: 400px;
   }
   .tab {
     @apply w-9/5;
@@ -732,28 +597,12 @@ export default {
     @apply w-9/5;
   }
 }
-@media (min-width: 850px) {
-  .video {
-    height: 480px;
-  }
-}
 @screen lg {
-  .video {
-    height: 300px;
-  }
-  .content-options {
-    @apply hidden;
-  }
   .tab {
     @apply flex;
   }
   .content-direction-btns {
     @apply flex flex-col;
-  }
-}
-@media (min-width: 1080px) {
-  .content-options {
-    width: 100%;
   }
 }
 @media (max-width: 768px) {
