@@ -9,14 +9,32 @@
           <client-only>
             <img
               v-if="!soldOut"
-              v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+              v-lazy="
+                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                  : idCloudinary(this.product.foto_cloudinary, 600, 600)
+              "
               class="product-image"
+              :class="
+                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'notproduct-image'
+                  : ''
+              "
               alt="Product Img"
             />
             <img
               v-if="soldOut"
-              v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+              v-lazy="
+                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                  : idCloudinary(this.product.foto_cloudinary, 600, 600)
+              "
               class="product-image-soldOut"
+              :class="
+                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'notproduct-image'
+                  : ''
+              "
               alt="Product Img"
             />
           </client-only>
@@ -143,13 +161,31 @@
           <client-only>
             <img
               v-if="!soldOut"
-              v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+              v-lazy="
+                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                  : idCloudinary(this.product.foto_cloudinary, 350, 350)
+              "
+              :class="
+                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'notproduct-image-res'
+                  : ''
+              "
               class="product-image"
               alt="Product Img"
             />
             <img
               v-if="soldOut"
-              v-lazy="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+              v-lazy="
+                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                  : idCloudinary(this.product.foto_cloudinary, 350, 350)
+              "
+              :class="
+                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'notproduct-image-res'
+                  : ''
+              "
               class="product-image-soldOut"
               alt="Product Img"
             />
@@ -526,6 +562,11 @@ export default {
   object-fit: cover;
   overflow: hidden;
 }
+.notproduct-image {
+  height: 294px;
+  max-height: 294px;
+  width: 300px;
+}
 .product-image-soldOut {
   filter: grayscale(100%);
   width: 100%;
@@ -850,8 +891,17 @@ export default {
     font-size: 10px;
     top: -22px;
   }
+  .notproduct-image-res {
+    height: 357px;
+    max-height: 357px;
+    width: 100%;
+  }
 }
 @media (max-width: 450px) {
+  .notproduct-image-res {
+    height: 170px;
+    max-height: 170px;
+  }
   .container-card {
     width: 100%;
     max-width: 200px;
