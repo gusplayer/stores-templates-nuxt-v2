@@ -178,7 +178,7 @@ export const state = () => ({
     user: 'miguel@komercia.co',
     pass: 'Samsung2094@',
     token: '',
-    statehoko: true,
+    statehoko: false,
   },
   producthoko: [],
 })
