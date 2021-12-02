@@ -91,7 +91,10 @@
             <div class="empty"></div>
             <div class="content-stock">
               <p class="stock-text-1">{{ $t('productdetail_stock') }}:</p>
-              <p class="stock-text-2">Unidades</p>
+              <p class="stock-text-2" v-if="!spent">
+                {{ data.stock.amount }} Unidades
+              </p>
+              <p class="stock-text-2" v-else>{{ $t('home_cardAgotado') }}</p>
             </div>
             <div class="empty"></div>
 
@@ -112,12 +115,26 @@
               </button>
             </div>
             <div class="content-direction-btns mt-10">
+              <div class="content-quantity-boxes">
+                <div class="box-quantity">
+                  <p class="txt-quantity">{{ quantityValue }}</p>
+                </div>
+                <div class="box-quantity-btns">
+                  <div class="btn-quantity btn1" v-on:click="addQuantity()">
+                    <FlechaUp-icon class="text-icon" />
+                  </div>
+                  <div class="btn-quantity btn2" v-on:click="removeQuantity()">
+                    <Flechadown-icon class="text-icon" />
+                  </div>
+                </div>
+              </div>
               <div class="content-addCart">
                 <button
                   ref="colorBtn"
                   class="btn"
-                  v-on:click="addShoppingCart"
+                  v-on:click="GoPayments"
                   id="AddToCartTag"
+                  v-if="!spent"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -132,15 +149,14 @@
                     />
                   </svg>
                   <p class="text-addCart">
-                    {{ $t('productdetail_añadiralcarrito') }}
+                    {{ $t('home_comprarAhora') }}
                   </p>
                 </button>
-
-                <!-- <button disabled class="btn-disabled" v-else-if="spent">
+                <button disabled class="btn-disabled" v-else-if="spent">
                   <p class="text-addCart">
                     {{ $t('home_cardAgotado') }}
                   </p>
-                </button> -->
+                </button>
               </div>
             </div>
           </div>
@@ -233,7 +249,10 @@ export default {
   data() {
     return {
       data: {},
+      maxQuantityValue: 1,
+      quantityValue: 1,
       loading: true,
+      spent: false,
       selectPhotoUrl: '',
       swiperOption: {
         direction: 'vertical',
@@ -283,8 +302,10 @@ export default {
           this.data = response.data.product
           if (this.data) {
             this.selectedPhoto(this.data.images[0])
-          }
-          if (this.data) {
+            this.maxQuantityValue = this.data.stock.amount
+            if (this.data.stock.amount == 0 || this.maxQuantityValue <= 0) {
+              this.spent = true
+            }
             this.sharing.url = window.location.href
             this.sharing.quote = `Explora%20el%20producto%20${this.data.name}%2C%20te%20van%20a%20encantar.%0ALink%20del%20producto%3A%20${this.sharing.url}`
             this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
@@ -294,9 +315,56 @@ export default {
     changeSlide() {
       this.swiper.slidePrev(700, false)
     },
-    addShoppingCart() {},
+    GoPayments() {
+      let objeto = {
+        id: this.data.id,
+        cantidad: this.quantityValue,
+        combinacion: undefined,
+      }
+      let json = {
+        products: [objeto],
+        tienda: {
+          id: this.$store.state.tienda.id_tienda,
+        },
+      }
+      json = JSON.stringify(json)
+      if (json) {
+        if (this.layourUnicentro == true) {
+          window.open(`https://checkout.komercia.co/?params=${json}`)
+          // if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          //   window.fbq('track', 'InitiateCheckout')
+          // }
+          // this.$gtm.push({ event: 'InitiateCheckout' })
+        } else {
+          location.href = `https://checkout.komercia.co/?params=${json}`
+          // if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          //   window.fbq('track', 'InitiateCheckout')
+          // }
+          // this.$gtm.push({ event: 'InitiateCheckout' })
+        }
+      }
+    },
+    addQuantity() {
+      if (this.maxQuantityValue > this.quantityValue) {
+        this.quantityValue++
+      } else {
+        console.log('Alerta de limite de sku')
+      }
+    },
+    removeQuantity() {
+      if (this.quantityValue >= 2) {
+        this.quantityValue--
+      }
+    },
     selectedPhoto(photo) {
       this.selectPhotoUrl = photo
+    },
+  },
+  watch: {
+    quantityValue(value) {
+      if (value > this.maxQuantityValue) {
+        this.quantityValue = this.maxQuantityValue
+      }
     },
   },
   filters: {
@@ -454,7 +522,32 @@ export default {
 .section-suggesProduct {
   @apply w-full my-40;
 }
-
+.content-quantity-boxes {
+  @apply w-full flex flex-row justify-start items-center my-30;
+}
+.box-quantity {
+  background-color: transparent;
+  border: 1px solid var(--border);
+  @apply w-75 h-50 flex text-center justify-center items-center;
+}
+.box-quantity-btns {
+  background-color: var(--color_background_btn);
+  border: 1px solid var(--color_background_btn);
+  @apply w-25 h-50 flex flex-col text-center justify-center items-center;
+}
+.btn-quantity {
+  background-color: var(--color_background_btn);
+  border-color: var(--color_background_btn);
+  @apply w-25 h-25 flex justify-center items-center border-t border-r;
+}
+.text-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34px;
+  cursor: pointer;
+  color: var(--color_text_btn);
+}
 @screen sm {
   .wrapper-left {
     padding-bottom: 15px;

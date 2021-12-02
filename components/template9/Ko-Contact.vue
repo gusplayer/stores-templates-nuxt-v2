@@ -18,30 +18,39 @@
         },
       ]"
     >
-      <div
-        class="banner-mapa"
-        v-if="
-          this.dataStore &&
-          this.dataStore.geolocalizacion &&
-          this.dataStore.geolocalizacion.length
-        "
-      >
-        <iframe
-          :src="`https://maps.google.com/maps?q=${this.dataStore.geolocalizacion[0].latitud},${this.dataStore.geolocalizacion[0].longitud}&hl=es;z=14&amp;output=embed`"
-          width="100%"
-          height="250"
-          frameborder="0"
-          style="border: 0;"
-          allowfullscreen
-        ></iframe>
+      <div class="banner-mapa">
+        <el-carousel
+          :interval="5000"
+          arrow="always"
+          height="250px"
+          style="width: 100%"
+          class="wrapperCarousel"
+          v-if="
+            this.dataStore &&
+            this.dataStore.geolocalizacion &&
+            this.dataStore.geolocalizacion.length
+          "
+        >
+          <el-carousel-item
+            v-for="(item, inggeo) in dataStore.geolocalizacion"
+            :key="inggeo"
+          >
+            <iframe
+              :src="`https://maps.google.com/maps?q=${item.latitud},${item.longitud}&hl=es;z=14&amp;output=embed`"
+              width="100%"
+              height="250"
+              frameborder="0"
+              style="border: 0"
+              allowfullscreen
+            ></iframe>
+          </el-carousel-item>
+        </el-carousel>
       </div>
       <div class="container-contact">
         <div class="content-grid">
           <div class="left">
             <div class="content-info">
-              <p class="txt-info">
-                Información
-              </p>
+              <p class="txt-info">Información</p>
             </div>
             <div
               class="content-locatioin"
@@ -358,6 +367,10 @@ export default {
 </script>
 
 <style scoped>
+.wrapperCarousel >>> .el-carousel__arrow {
+  background-color: var(--color_background_btn);
+  color: var(--color_text_btn);
+}
 .content-contact-template9 {
   @apply w-full flex flex-col justify-center items-center;
 }

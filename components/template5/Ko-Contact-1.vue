@@ -46,34 +46,42 @@
         </div>
         <div class="separator"></div>
         <div v-if="dataStore.geolocalizacion.length">
-          <div>
-            <p class="contact-text-sub">{{ $t('contact_vistaTienda') }}</p>
-
-            <p class="contact-text-subtitle2">
-              {{ this.dataStore.geolocalizacion[0].direccion }}
-            </p>
-          </div>
-          <iframe
-            :src="`https://maps.google.com/maps?q=${this.dataStore.geolocalizacion[0].latitud},${this.dataStore.geolocalizacion[0].longitud}&hl=es;z=14&amp;output=embed`"
-            width="100%"
-            height="250"
-            frameborder="0"
-            style="border: 0;"
-            allowfullscreen
-          ></iframe>
-          <div class="under-text">
-            <p class="contact-text-subtitle3">
-              {{ $t('contact_horarioAtencion') }}
-              <br />
-              {{ this.dataStore.geolocalizacion[0].horario }}
-            </p>
-            <a class="contact-text-subtitle4">
-              {{ $t('contact_comollegar') }}</a
+          <p class="contact-text-sub">{{ $t('contact_vistaTienda') }}</p>
+          <el-carousel
+            :interval="5000"
+            arrow="always"
+            height="350px"
+            class="wrapperCarousel"
+          >
+            <el-carousel-item
+              v-for="(item, inggeo) in dataStore.geolocalizacion"
+              :key="inggeo"
             >
-          </div>
+              <p class="contact-text-subtitle2">
+                Sede {{ inggeo + 1 }}: {{ item.nombre_sede }}
+              </p>
+              <iframe
+                :src="`https://maps.google.com/maps?q=${item.latitud},${item.longitud}&hl=es;z=14&amp;output=embed`"
+                width="100%"
+                height="250"
+                frameborder="0"
+                style="border: 0"
+                allowfullscreen
+              ></iframe>
+              <div class="under-text">
+                <p class="contact-text-subtitle3">
+                  {{ $t('contact_horarioAtencion') }}
+                  <br />
+                  {{ item.horario }}
+                </p>
+                <a class="contact-text-subtitle4">
+                  {{ $t('contact_comollegar') }}</a
+                >
+              </div>
+            </el-carousel-item>
+          </el-carousel>
         </div>
       </div>
-
       <div class="contact-content">
         <div class="contact-item-text">
           <p class="contact-text-title">{{ $t('contact_title2') }}</p>
@@ -293,6 +301,10 @@ export default {
 </script>
 
 <style scoped>
+.wrapperCarousel >>> .el-carousel__arrow {
+  background-color: var(--color_background_btn);
+  color: var(--color_text_btn);
+}
 .wrapper-contact {
   display: flex;
   justify-content: center;
@@ -361,17 +373,15 @@ export default {
   margin-top: 10px;
 }
 .contact-text-subtitle2 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_subtext); */
   color: rgba(21, 20, 57, 0.541);
   margin-top: 10px;
   margin-bottom: 10px;
-  text-align: center;
 }
 .contact-text-subtitle3 {
   font-size: 12px;

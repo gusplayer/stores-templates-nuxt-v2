@@ -4,6 +4,8 @@ import {
   Dialog,
   Drawer,
   Input,
+  Carousel,
+  CarouselItem,
   Checkbox,
   CheckboxButton,
   CheckboxGroup,
@@ -48,6 +50,8 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(ColorPicker)
 Vue.use(Tag)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 
 locale.use(lang)
 Vue.use(Loading.directive)

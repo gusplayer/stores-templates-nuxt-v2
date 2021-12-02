@@ -1,6 +1,12 @@
 <template>
-  <transition name="fade">
-    <div class="order" @click="closeOrder" v-show="openOrder">
+  <el-drawer
+    :visible.sync="openOrder"
+    :withHeader="false"
+    direction="rtl"
+    class="width-drawer"
+  >
+    <!-- <transition name="fade"> -->
+    <div @click="closeOrder" class="relative">
       <div class="order_content">
         <div class="order_header">
           <h3>{{ $t('footer_title') }} ({{ cantidadProductos }})</h3>
@@ -10,7 +16,7 @@
           </div>
         </div>
         <transition name="slide">
-          <template>
+          <template v-if="productsCart.length">
             <div class="order--wrapper">
               <div class="order_products">
                 <ul class="order_products_list">
@@ -73,12 +79,14 @@
                   </li>
                 </ul>
               </div>
-              <div v-if="productsCart.length" class="content-remove-cart">
-                <p class="remove-cart" @click="remove = !remove">
-                  {{ $t('footer_vaciarCarrito') }}
-                </p>
-              </div>
-              <template v-if="productsCart.length">
+
+              <div class="h-full flex flex-col justify-end">
+                <div class="content-remove-cart">
+                  <p class="remove-cart" @click="remove = !remove">
+                    {{ $t('footer_vaciarCarrito') }}
+                  </p>
+                </div>
+
                 <div class="order_total">
                   <span class="order_total_domicile">
                     <p style="font-weight: bold; font-size: 16px">
@@ -286,97 +294,116 @@
                     </p>
                   </span>
                 </div>
-              </template>
-              <template v-else>
-                <div class="order_products_list-empty">
-                  <div class="wrapper_photo">
-                    <img v-lazy="img" class="photo" alt="empty car" />
+
+                <div class="content-button">
+                  <div
+                    v-if="
+                      isQuotation() ||
+                      (countryStore == false && productsCart.length)
+                    "
+                    class="wrapper-Quotation"
+                  >
+                    <p class="Quotation-message">
+                      {{ $t('footer_contactoMgs') }}
+                    </p>
+                    <button
+                      class="continue_shopping_whatsapp"
+                      @click="formOrden = !formOrden"
+                    >
+                      <whatsapp-icon class="wp-icon" />
+                      {{ $t('footer_compraWhatsapp') }}
+                    </button>
                   </div>
-                  <p class="text-cart-empty">{{ $t('footer_carritoVacio') }}</p>
-                </div>
-              </template>
-              <div class="content-button">
-                <div
-                  v-if="
-                    isQuotation() ||
-                    (countryStore == false && productsCart.length)
-                  "
-                  class="wrapper-Quotation"
-                >
-                  <p class="Quotation-message">
-                    {{ $t('footer_contactoMgs') }}
+                  <p
+                    class="domicilio-message"
+                    v-if="
+                      productsCart.length &&
+                      this.shippingTarifaPrecio == 'empty' &&
+                      this.estadoShippingTarifaPrecio == true
+                    "
+                  >
+                    {{ $t('footer_contactoMgs2') }}
+                  </p>
+                  <p
+                    class="Quotation-message"
+                    v-if="dataStore.tienda.estado == 0"
+                  >
+                    {{ $t('footer_tiendaCerrada') }}
+                  </p>
+                  <p
+                    class="Quotation-message"
+                    v-if="!IsMinValorTotal() && productsCart.length"
+                  >
+                    La tienda tiene configurado un valor mínimo igual o mayores
+                    a
+                    {{
+                      this.dataStore.tienda.minimo_compra
+                        | currency(
+                          dataStore.tienda.codigo_pais,
+                          dataStore.tienda.moneda
+                        )
+                    }}
+                    para poder realizar la compra
                   </p>
                   <button
-                    class="continue_shopping_whatsapp"
-                    @click="formOrden = !formOrden"
+                    v-if="
+                      productsCart.length &&
+                      !isQuotation() &&
+                      dataStore.tienda.estado == 1 &&
+                      this.estadoShippingTarifaPrecio == false &&
+                      countryStore == true &&
+                      IsMinValorTotal()
+                    "
+                    class="continue_shopping"
+                    @click="GoPayments"
+                    id="InitiateCheckoutTag"
                   >
-                    <whatsapp-icon class="wp-icon" />
-                    {{ $t('footer_compraWhatsapp') }}
+                    {{ $t('footer_finalizarCompra') }}
                   </button>
+                  <nuxt-link class="conten-btn" to="/" @click="closeOrder">
+                    <button class="continue_shopping2">
+                      {{ $t('footer_seguirCompra') }}
+                    </button>
+                  </nuxt-link>
+                  <nuxt-link
+                    to="/cart"
+                    class="conten-btn"
+                    @click="closeOrder"
+                    v-if="dataStore.tienda.template != 12"
+                  >
+                    <button class="continue_shopping2">
+                      {{ $t('footer_irCarrito') }}
+                    </button>
+                  </nuxt-link>
                 </div>
-                <p
-                  class="domicilio-message"
-                  v-if="
-                    productsCart.length &&
-                    this.shippingTarifaPrecio == 'empty' &&
-                    this.estadoShippingTarifaPrecio == true
-                  "
-                >
-                  {{ $t('footer_contactoMgs2') }}
-                </p>
-                <p
-                  class="Quotation-message"
-                  v-if="dataStore.tienda.estado == 0"
-                >
-                  {{ $t('footer_tiendaCerrada') }}
-                </p>
-                <p
-                  class="Quotation-message"
-                  v-if="!IsMinValorTotal() && productsCart.length"
-                >
-                  La tienda tiene configurado un valor mínimo igual o mayores a
-                  {{
-                    this.dataStore.tienda.minimo_compra
-                      | currency(
-                        dataStore.tienda.codigo_pais,
-                        dataStore.tienda.moneda
-                      )
-                  }}
-                  para poder realizar la compra
-                </p>
-                <button
-                  v-if="
-                    productsCart.length &&
-                    !isQuotation() &&
-                    dataStore.tienda.estado == 1 &&
-                    this.estadoShippingTarifaPrecio == false &&
-                    countryStore == true &&
-                    IsMinValorTotal()
-                  "
-                  class="continue_shopping"
-                  @click="GoPayments"
-                  id="InitiateCheckoutTag"
-                >
-                  {{ $t('footer_finalizarCompra') }}
-                </button>
-                <nuxt-link class="conten-btn" to="/" @click="closeOrder">
-                  <button class="continue_shopping2">
-                    {{ $t('footer_seguirCompra') }}
-                  </button>
-                </nuxt-link>
-                <nuxt-link
-                  to="/cart"
-                  class="conten-btn"
-                  @click="closeOrder"
-                  v-if="dataStore.tienda.template != 12"
-                >
-                  <button class="continue_shopping2">
-                    {{ $t('footer_irCarrito') }}
-                  </button>
-                </nuxt-link>
               </div>
             </div>
           </template>
+          <div class="order--wrapper" v-else>
+            <div class="order_products_list-empty">
+              <div class="wrapper_photo">
+                <img v-lazy="img" class="photo" alt="empty car" />
+              </div>
+              <p class="text-cart-empty">{{ $t('footer_carritoVacio') }}</p>
+            </div>
+            <div>
+              <nuxt-link class="conten-btn" to="/" @click="closeOrder">
+                <button class="continue_shopping2">
+                  {{ $t('footer_seguirCompra') }}
+                </button>
+              </nuxt-link>
+              <nuxt-link
+                to="/cart"
+                class="conten-btn"
+                @click="closeOrder"
+                v-if="dataStore.tienda.template != 12"
+              >
+                <button class="continue_shopping2">
+                  {{ $t('footer_irCarrito') }}
+                </button>
+              </nuxt-link>
+            </div>
+          </div>
         </transition>
       </div>
       <div class="wrapper-items-remove" v-if="remove">
@@ -490,7 +517,8 @@
         </button>
       </div>
     </div>
-  </transition>
+    <!-- </transition> -->
+  </el-drawer>
 </template>
 
 <script>
@@ -986,22 +1014,15 @@ export default {
 </script>
 
 <style scoped>
-.order {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: flex-end;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 15;
-  transition: all 0.25s ease;
+.width-drawer >>> .el-drawer__open .el-drawer.rtl {
+  width: 410px !important;
+}
+@media (max-width: 800px) {
+  .width-drawer >>> .el-drawer__open .el-drawer.rtl {
+    width: 100% !important;
+  }
 }
 .order_content {
-  position: absolute;
-  right: 0px;
-  max-width: 400px;
   width: 100%;
   height: 100vh;
   background-color: #fff;
@@ -1011,17 +1032,9 @@ export default {
   flex: none;
   overflow: auto;
   box-sizing: border-box;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   animation: dispatch 0.2s linear 1;
   overflow: hidden;
-}
-@keyframes dispatch {
-  0% {
-    right: -400px;
-  }
-  100% {
-    right: 0px;
-  }
 }
 .order_content > div {
   width: 100%;
@@ -1060,10 +1073,10 @@ export default {
   color: gray;
 }
 .order--wrapper {
+  height: 100%;
   display: grid;
   overflow-y: auto;
 }
-
 .order_products_list-empty {
   height: 380px;
   display: flex;
@@ -1208,6 +1221,7 @@ export default {
 }
 .content-remove-cart {
   width: 100%;
+  max-height: 41px;
   padding: 10px 25px;
   display: flex;
   flex-direction: column;
@@ -1234,6 +1248,7 @@ export default {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
+  top: 0;
 }
 .content-items-remove {
   width: 100%;
@@ -1546,18 +1561,21 @@ details[open] summary ~ * {
   background-color: #25d366;
   color: #fff;
 }
+
 .wrapper-items-form {
+  position: absolute;
+  height: calc(100vh);
   width: 100%;
   max-width: 400px;
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  z-index: 1000;
-  padding: 20px 0 45px;
+  z-index: 10;
+  top: 0;
   overflow-y: auto;
+  padding: 20px 0 45px;
 }
 .content-items-form {
   width: 100%;
