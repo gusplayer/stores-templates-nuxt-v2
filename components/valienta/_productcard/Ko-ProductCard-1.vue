@@ -102,8 +102,9 @@
 
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
+import currency from '../../../mixins/formatCurrent'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinary, currency],
   name: 'Ko-ProductCard-1',
   props: { product: Object, dataStore: Object },
   mounted() {
@@ -225,9 +226,8 @@ export default {
             product.limitQuantity = this.product.stock
           }
           if (typeof this.productIndexCart === 'number') {
-            const mutableProduct = this.$store.state.productsCart[
-              this.productIndexCart
-            ]
+            const mutableProduct =
+              this.$store.state.productsCart[this.productIndexCart]
             mutableProduct.cantidad += 1
             this.$store.state.productsCart.splice(
               this.productIndexCart,
@@ -335,38 +335,6 @@ export default {
   watch: {
     productsCarts(value) {
       this.getDataProduct()
-    },
-  },
-  filters: {
-    currency(value, codigo_pais, moneda) {
-      let resultCurrent
-      if (codigo_pais && moneda) {
-        if (value && codigo_pais == 'co' && moneda == 'COP') {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        } else if (codigo_pais == 'internacional') {
-          {
-            resultCurrent = new Intl.NumberFormat('en-IN', {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        } else {
-          {
-            resultCurrent = new Intl.NumberFormat(codigo_pais, {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        }
-      } else {
-        if (value) {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        }
-      }
     },
   },
 }

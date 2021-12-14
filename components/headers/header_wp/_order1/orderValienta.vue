@@ -44,8 +44,9 @@
                         </span>
                         <div v-if="product.combinacion">
                           <el-tag
-                            v-for="(productCombinacion,
-                            index2) in product.combinacion"
+                            v-for="(
+                              productCombinacion, index2
+                            ) in product.combinacion"
                             :key="index2"
                             >{{ productCombinacion | capitalize }}</el-tag
                           >
@@ -291,7 +292,7 @@
         <button
           class="continue_shopping_form"
           v-on:click.prevent="redirectWP()"
-          style="margin-top: 15px;"
+          style="margin-top: 15px"
         >
           <whatsapp-icon class="wp-icon" /> {{ $t('footer_ordenFormbtn') }}
         </button>
@@ -302,9 +303,11 @@
 
 <script>
 import idCloudinary from '../../../../mixins/idCloudinary'
+import currency from '../../../../mixins/formatCurrent'
+
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinary, currency],
   name: 'koOrder1-cart',
   props: {
     dataStore: Object,
@@ -324,8 +327,7 @@ export default {
   },
   data() {
     return {
-      img:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
+      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
 
       shippingCities: [],
       rangosByCiudades: [],
@@ -523,7 +525,6 @@ export default {
               )
             }
           })
-
           let envio = ''
           if (this.rangosByCiudades && this.rangosByCiudades.valor > 0) {
             envio = this.rangosByCiudades.valor
@@ -594,36 +595,6 @@ export default {
     },
   },
   filters: {
-    currency(value, codigo_pais, moneda) {
-      let resultCurrent
-      if (codigo_pais && moneda) {
-        if (value && codigo_pais == 'co' && moneda == 'COP') {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        } else if (codigo_pais == 'internacional') {
-          {
-            resultCurrent = new Intl.NumberFormat('en-IN', {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        } else {
-          {
-            resultCurrent = new Intl.NumberFormat(codigo_pais, {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        }
-      } else {
-        if (value) {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        }
-      }
-    },
     capitalize(value) {
       if (value) {
         value = value.toLowerCase()

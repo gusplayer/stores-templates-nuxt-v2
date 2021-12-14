@@ -203,47 +203,10 @@ import axios from 'axios'
 import productSlide from './_productdetails/productSlide'
 import selectGroup from './_productdetails/selectGroup'
 import idCloudinary from '../../mixins/idCloudinary'
-import {
-  Doc,
-  Paragraph,
-  Text,
-  Heading,
-  Bold,
-  Italic,
-  Underline,
-  Strike,
-  Code,
-  CodeBlock,
-  Blockquote,
-  Link,
-  BulletList,
-  OrderedList,
-  ListItem,
-  TodoList,
-  TodoItem,
-  Iframe,
-  Table,
-  TableHeader,
-  TableRow,
-  TableCell,
-  Image,
-  TextAlign,
-  LineHeight,
-  Indent,
-  HorizontalRule,
-  HardBreak,
-  TrailingNode,
-  History,
-  TextColor,
-  TextHighlight,
-  FormatClear,
-  FontSize,
-  Preview,
-  Print,
-  SelectAll,
-} from 'element-tiptap'
+import currency from '../../mixins/formatCurrent'
+import extensions from '../../mixins/elemenTiptap.vue'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinary, currency, extensions],
   name: 'Ko-ProductDetail-wa',
   components: {
     selectGroup,
@@ -280,119 +243,6 @@ export default {
         desc: '',
       },
       activeZoom: true,
-      extensions: [
-        new Doc(),
-        new Paragraph(),
-        new Text(),
-        new Heading({ level: 5, bubble: true }),
-        new Bold({ bubble: true }),
-        new Italic({ bubble: true }),
-        new Underline({ bubble: true }),
-        new Strike({ bubble: true }),
-        new Code({ bubble: true }),
-        new CodeBlock({ bubble: true }),
-        new Blockquote({ bubble: true }),
-        new Link({ bubble: true }),
-        new BulletList({ bubble: true }),
-        new OrderedList({ bubble: true }),
-        new ListItem({ bubble: true }),
-        new TodoList({ bubble: true }),
-        new TodoItem({ bubble: true }),
-        new Iframe({ bubble: true }),
-        new Table({
-          resizable: true,
-          bubble: true,
-        }),
-        new TableHeader(),
-        new TableRow(),
-        new TableCell(),
-        new Image({
-          urlPattern: '',
-          uploadRequest: '',
-          bubble: true,
-        }),
-        new TextAlign({
-          alignments: ['left', 'center', 'right', 'justify'],
-          bubble: true,
-        }),
-        new LineHeight({
-          lineHeights: ['100%', '200%', '300%'],
-        }),
-        new Indent({
-          minIndent: 0,
-          maxIndent: 7,
-        }),
-        new HorizontalRule({ bubble: true }),
-        new HardBreak(),
-        new TrailingNode(),
-        new History(),
-        new TextColor({
-          colors: [
-            '#f44336',
-            '#e91e63',
-            '#9c27b0',
-            '#673ab7',
-            '#3f51b5',
-            '#2196f3',
-            '#03a9f4',
-            '#00bcd4',
-            '#009688',
-            '#4caf50',
-            '#8bc34a',
-            '#cddc39',
-            '#ffeb3b',
-            '#ffc107',
-            '#ff9800',
-            '#ff5722',
-            '#000000',
-          ],
-          bubble: true,
-        }),
-        new TextHighlight({
-          colors: [
-            '#f44336',
-            '#e91e63',
-            '#9c27b0',
-            '#673ab7',
-            '#3f51b5',
-            '#2196f3',
-            '#03a9f4',
-            '#00bcd4',
-            '#009688',
-            '#4caf50',
-            '#8bc34a',
-            '#cddc39',
-            '#ffeb3b',
-            '#ffc107',
-            '#ff9800',
-            '#ff5722',
-            '#000000',
-          ],
-          bubble: true,
-        }),
-        new FormatClear(),
-        new FontSize({
-          fontSizes: [
-            '8',
-            '10',
-            '12',
-            '14',
-            '16',
-            '18',
-            '20',
-            '24',
-            '30',
-            '36',
-            '48',
-            '60',
-            '72',
-          ],
-          bubble: true,
-        }),
-        new Preview(),
-        new Print(),
-        new SelectAll(),
-      ],
     }
   },
   computed: {
@@ -808,36 +658,6 @@ export default {
     },
   },
   filters: {
-    currency(value, codigo_pais, moneda) {
-      let resultCurrent
-      if (codigo_pais && moneda) {
-        if (value && codigo_pais == 'co' && moneda == 'COP') {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        } else if (codigo_pais == 'internacional') {
-          {
-            resultCurrent = new Intl.NumberFormat('en-IN', {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        } else {
-          {
-            resultCurrent = new Intl.NumberFormat(codigo_pais, {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        }
-      } else {
-        if (value) {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        }
-      }
-    },
     toLowerCase(value) {
       if (value) {
         return value.toLowerCase()

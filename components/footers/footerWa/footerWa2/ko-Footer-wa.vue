@@ -34,8 +34,10 @@
   </div>
 </template>
 <script>
+import currency from '../../../../mixins/formatCurrent'
 export default {
   name: 'FooterWa2',
+  mixins: [currency],
   props: {
     dataStore: Object,
     settingByTemplate: Object,
@@ -51,38 +53,6 @@ export default {
   methods: {
     openOrder() {
       this.$store.commit('SET_OPENORDER', true)
-    },
-  },
-  filters: {
-    currency(value, codigo_pais, moneda) {
-      let resultCurrent
-      if (codigo_pais && moneda) {
-        if (value && codigo_pais == 'co' && moneda == 'COP') {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        } else if (codigo_pais == 'internacional') {
-          {
-            resultCurrent = new Intl.NumberFormat('en-IN', {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        } else {
-          {
-            resultCurrent = new Intl.NumberFormat(codigo_pais, {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        }
-      } else {
-        if (value) {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        }
-      }
     },
   },
 }

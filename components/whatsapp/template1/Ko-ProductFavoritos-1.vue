@@ -81,8 +81,9 @@
 
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
+import currency from '../../../mixins/formatCurrent'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinary, currency],
   name: 'Ko-ProductFavoritos-1',
   props: { dataStore: Object, settingByTemplate: Object },
   computed: {
@@ -98,38 +99,6 @@ export default {
     },
     scrollRight() {
       document.getElementById('swiper-slide-favorite').scrollLeft += 300
-    },
-  },
-  filters: {
-    currency(value, codigo_pais, moneda) {
-      let resultCurrent
-      if (codigo_pais && moneda) {
-        if (value && codigo_pais == 'co' && moneda == 'COP') {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        } else if (codigo_pais == 'internacional') {
-          {
-            resultCurrent = new Intl.NumberFormat('en-IN', {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        } else {
-          {
-            resultCurrent = new Intl.NumberFormat(codigo_pais, {
-              style: 'currency',
-              currency: moneda,
-              minimumFractionDigits: 0,
-            }).format(value)
-            return resultCurrent
-          }
-        }
-      } else {
-        if (value) {
-          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-        }
-      }
     },
   },
 }
