@@ -4,6 +4,7 @@
     :withHeader="false"
     direction="rtl"
     class="width-drawer"
+    :modalAppendToBody="false"
   >
     <!-- <transition name="fade"> -->
     <div @click="closeOrder" class="relative">
@@ -206,6 +207,17 @@
                       "
                     >
                       {{ $t('footer_encioGratis') }}
+                    </p>
+                    <p
+                      class="without_shipping_cost"
+                      v-else-if="
+                        rangosByCiudad.envio_metodo === 'sintarifa' &&
+                        shippingCities.length <= 0 &&
+                        getFreeShipping == false &&
+                        FreeShippingCart == false
+                      "
+                    >
+                      {{ $t('footer_enviosPorPagar') }}
                     </p>
                     <p
                       class="without_shipping_cost"
@@ -575,8 +587,13 @@ export default {
     layourUnicentro() {
       return this.$store.state.layoutUnicentro
     },
-    openOrder() {
-      return this.$store.state.openOrder
+    openOrder: {
+      get() {
+        return this.$store.state.openOrder
+      },
+      set(value) {
+        this.$store.state.openOrder = value
+      },
     },
     totalCart() {
       return this.$store.state.totalCart
@@ -598,6 +615,9 @@ export default {
       if (this.rangosByCiudad.envio_metodo === 'precio') {
         free = true
       }
+      if (this.rangosByCiudad.envio_metodo === 'sintarifa') {
+        free = false
+      }
       return free
     },
     rangosByCiudad() {
@@ -615,6 +635,9 @@ export default {
         if (this.$store.state.envios.estado) {
           let shipping = JSON.parse(this.$store.state.envios.valores)
           switch (shipping.envio_metodo) {
+            case 'sintarifa':
+              return 0
+              break
             case 'gratis':
               return 0
               break

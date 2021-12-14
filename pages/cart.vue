@@ -1,15 +1,15 @@
 <template lang="html">
   <div>
-    <K05Cart :dataStore="dataStore" :cities="cities" />
+    <KCart :dataStore="dataStore" :cities="cities" />
   </div>
 </template>
 <script>
-import K05Cart from '../components/cart/Ko-Cart'
+import KCart from '../components/cart/Ko-Cart'
 export default {
   layout: 'default',
   name: 'ContentCart',
   components: {
-    K05Cart,
+    KCart,
   },
   mounted() {
     this.$store.dispatch('GET_CITIES')

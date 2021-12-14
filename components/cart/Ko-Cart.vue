@@ -21,9 +21,7 @@
           >
             <div class="product">
               <div
-                class="
-                  content-items-product content-items-product-resposive-img
-                "
+                class="content-items-product content-items-product-resposive-img"
               >
                 <img
                   v-lazy="idCloudinaryBanner(product.foto_cloudinary)"
@@ -339,7 +337,29 @@
                   <p class="txt_summary_tittle">
                     {{ $t('footer_encioGratis') }}
                   </p>
-                  <p class="txt_summary_price">$0</p>
+                  <p class="txt_summary_price">
+                    {{
+                      0
+                        | currency(
+                          dataStore.tienda.codigo_pais,
+                          dataStore.tienda.moneda
+                        )
+                    }}
+                  </p>
+                </div>
+                <div
+                  class="contet-free-delivery"
+                  v-else-if="
+                    rangosByCiudad.envio_metodo === 'sintarifa' &&
+                    shippingCities.length <= 0 &&
+                    getFreeShipping == false &&
+                    FreeShippingCart == false
+                  "
+                >
+                  <p class="txt_summary_tittle">
+                    {{ $t('footer_enviosPorPagar') }}
+                  </p>
+                  <p class="txt_summary_price">-</p>
                 </div>
                 <div
                   class="contet-free-delivery"
@@ -534,6 +554,9 @@ export default {
       if (this.rangosByCiudad.envio_metodo === 'precio') {
         free = true
       }
+      if (this.rangosByCiudad.envio_metodo === 'sintarifa') {
+        free = false
+      }
       return free
     },
     rangosByCiudad() {
@@ -548,6 +571,9 @@ export default {
         if (this.$store.state.envios.estado) {
           let shipping = JSON.parse(this.$store.state.envios.valores)
           switch (shipping.envio_metodo) {
+            case 'sintarifa':
+              return 0
+              break
             case 'gratis':
               return 0
               break
