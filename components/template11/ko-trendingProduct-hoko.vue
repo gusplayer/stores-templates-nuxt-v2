@@ -11,13 +11,17 @@
             : 'Roboto',
       },
     ]"
-    v-if="listProduct.length > 0"
   >
     <div class="producto-items-content">
+      <div class="product-text">
+        <div class="product-tittle">
+          <p class="tittle">{{ settingKtrending.title }}</p>
+        </div>
+      </div>
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper pb-10">
           <div
-            v-for="product in listProduct"
+            v-for="product in producthoko.data"
             :key="product.id"
             class="swiper-slide"
             style="margin-right: 40px; height: auto"
@@ -35,13 +39,19 @@
             <button class="btn">Ver todos los productos</button>
           </nuxt-link>
         </div>
+        <div
+          v-if="this.fullProducts.length == 0"
+          class="content-products-empty"
+        >
+          <p>{{ $t('home_msgCatalogo') }}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import KoproductCard from './_productcard/ProductCard'
+import KoproductCard from './_productcard/ProductCardHoko.vue'
 export default {
   components: {
     KoproductCard,
@@ -53,14 +63,15 @@ export default {
     settingGeneral: Object,
     settingKcardProduct: Object,
   },
-  name: 'Ko-List-Trending',
+  name: 'Ko-trending-hoko',
+
   data() {
     return {
       swiperOption: {
         slidesPerView: '',
         spaceBetween: '',
         autoplay: {
-          delay: 4000,
+          delay: 400000000,
           disableOnInteraction: false,
         },
         breakpoints: {
@@ -88,12 +99,8 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    listProduct() {
-      return this.fullProducts.filter((product) => {
-        if (product.tag_promocion == '1') {
-          return product
-        }
-      })
+    producthoko() {
+      return this.$store.state.producthoko
     },
   },
 }
@@ -122,7 +129,7 @@ export default {
 }
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center w-full pb-20 pt-50;
+  @apply flex flex-col justify-center items-center w-full pb-40;
 }
 .product-text {
   @apply flex flex-col justify-center items-center w-full text-center;

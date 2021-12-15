@@ -173,12 +173,7 @@ export const state = () => ({
     pago_online: 1,
     tema: 1,
   },
-  dataHoko: {
-    user: 'miguel@komercia.co',
-    pass: 'Samsung2094@',
-    token: '',
-    statehoko: false,
-  },
+  dataHoko: {},
   producthoko: [],
 })
 export const mutations = {
@@ -521,6 +516,9 @@ export const mutations = {
   SET_SAVEOPTION: (state, payload) => {
     state.beforeCombination.splice(payload.index, 1, payload.option.option)
   },
+  SET_DATA_HOKO(state, data) {
+    state.dataHoko = data
+  },
   // STOREDB: (state, { storeLayout, producto }) => {
   //   state.storeLayout = storeLayout.data
   //   state.detalleProducto = producto.data.detalle
@@ -632,6 +630,7 @@ export const actions = {
               'GET_SETTINGS_BY_TEMPLATE_11',
               state.dataStore.tienda
             )
+            await dispatch('GET_DATA_HOKO', state.dataStore.tienda.id_tienda)
           }
         } else if (id.data.data.template == 12) {
           if (state.dataStore && state.dataStore.tienda) {
@@ -768,33 +767,29 @@ export const actions = {
     )
     commit('SET_ARTICLES', response.data.blogs.data)
   },
-  LOGIN_HOKO({ state, dispatch }) {
-    if (state.dataHoko) {
-      let params = {
-        email: state.dataHoko.user,
-        password: state.dataHoko.pass,
-      }
-      axios
-        .post(`https://hoko.com.co/api/login`, params)
-        .then((response) => {
-          state.dataHoko.token = response.data.token
-          dispatch('GET_PRODUCTSHOKO', 1)
-        })
-        .catch((error) => {
-          if (error) {
-            console.log(error)
-          }
-        })
-    } else {
-      console.log('error al loguear hoko')
-    }
+  async GET_ARTICLES({ state, commit }, id) {
+    const response = await axios.get(
+      `${state.urlKomercia}/api/blogs/${id}?page=1`,
+      state.configAxios
+    )
+    commit('SET_ARTICLES', response.data.blogs.data)
   },
-  async AUTHTOKEN_HOKO({ state, dispatch }) {
-    let params = {
-      email: state.dataHoko.user,
-      password: state.dataHoko.pass,
-    }
-    return await axios.post(`https://hoko.com.co/api/login`, params)
+  async GET_DATA_HOKO({ dispatch, commit }, id) {
+    await axios
+      .get(`https://api2.komercia.co/api/hoko/${id}`)
+      .then((response) => {
+        if (response.data.data) {
+          dispatch('GET_PRODUCTSHOKO', 1)
+          commit('SET_DATA_HOKO', response.data.data)
+        } else {
+          console.log('No tiene Hoko registrado')
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          console.log(error)
+        }
+      })
   },
   GET_PRODUCTSHOKO({ state }, id) {
     if (state.dataHoko && state.dataHoko.token) {

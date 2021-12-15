@@ -25,7 +25,18 @@
       v-if="
         settingByTemplate11 &&
         settingByTemplate11.trending &&
-        settingByTemplate11.trending.visible
+        settingByTemplate11.trending.visible &&
+        dataHoko.statehoko == 0
+      "
+    />
+    <KtrendingHoko
+      id="kTredingX"
+      v-bind="componentsProps"
+      v-else-if="
+        settingByTemplate11 &&
+        settingByTemplate11.trending &&
+        settingByTemplate11.trending.visible &&
+        dataHoko.statehoko == 1
       "
     />
     <Kparallax
@@ -37,7 +48,7 @@
         settingByTemplate11.parallax.visible
       "
     />
-    <KListtrending v-bind="componentsProps" />
+    <KListtrending v-bind="componentsProps" v-if="dataHoko.statehoko == 0" />
     <KInformacion
       id="kInformationX"
       v-bind="componentsProps"
@@ -63,6 +74,7 @@
 import Kcarousel from '../../components/template11/ko-carousel'
 import Ksection from '../../components/template11/ko-section'
 import Ktrending from '../../components/template11/ko-trendingProduct'
+import KtrendingHoko from '../../components/template11/ko-trendingProduct-hoko'
 import Kparallax from '../../components/template11/ko-parallax'
 import KListtrending from '../../components/template11/ko-listtrending.vue'
 import KInformacion from '../../components/template11/information.vue'
@@ -73,6 +85,7 @@ export default {
     Kcarousel,
     Ksection,
     Ktrending,
+    KtrendingHoko,
     Kparallax,
     KListtrending,
     KInformacion,
@@ -145,6 +158,9 @@ export default {
             ? this.settingByTemplate11.trending
             : null,
       }
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
     },
   },
   beforeDestroy() {

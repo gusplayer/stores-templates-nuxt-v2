@@ -90,7 +90,6 @@ export default {
   },
   name: 'Ko-ProductList-Filter',
   mounted() {
-    this.$store.dispatch('LOGIN_HOKO')
     if (this.previousPage) {
       this.currentPage = this.previousPage
     }
@@ -112,14 +111,6 @@ export default {
     }
   },
   computed: {
-    products: {
-      get() {
-        return this.dataStore.productos
-      },
-      set(value) {
-        this.dataStore.productos = value
-      },
-    },
     previousPage() {
       return this.$store.state.previousPage
     },

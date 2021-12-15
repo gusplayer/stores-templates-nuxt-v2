@@ -279,12 +279,14 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
+    dataHoko() {
+      return this.$store.state.dataHoko
+    },
   },
   methods: {
     async asyncauthToken() {
-      const response = await this.$store.dispatch('AUTHTOKEN_HOKO')
-      if (response) {
-        this.getProductsHoko(this.$route.params.slug, response.data.token)
+      if (this.dataHoko.token) {
+        this.getProductsHoko(this.$route.params.slug, this.dataHoko.token)
       }
     },
     async getProductsHoko(id, token) {
