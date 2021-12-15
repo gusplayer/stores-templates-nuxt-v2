@@ -30,7 +30,13 @@
             <td>{{ product.stock }}</td>
             <td>This is a product</td>
             <td>
-              {{ product.precio | currency(dataStore.tienda.moneda) }}
+              {{
+                product.precio
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
             </td>
             <td>{{ product.marca }}</td>
             <td>G{{ index }}</td>
@@ -78,8 +84,11 @@
 </template>
 
 <script>
+import currency from '../../mixins/formatCurrent'
 export default {
   layout: 'default',
+  mixins: [currency],
+
   mounted() {
     this.url = window.location.host
   },
@@ -121,13 +130,6 @@ export default {
     },
   },
   filters: {
-    currency(value, moneda) {
-      if (moneda) {
-        return `${value
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')} ${moneda}`
-      }
-    },
     currencyShipping(value, codigo_pais, moneda) {
       if (codigo_pais) {
         return `${codigo_pais.toUpperCase()}:::${value

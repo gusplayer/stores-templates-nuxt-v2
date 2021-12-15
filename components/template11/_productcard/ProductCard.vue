@@ -302,7 +302,13 @@
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
             >
-              {{ this.product.precio | currency }}
+              {{
+                this.product.precio
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
             </p>
           </div>
         </div>
@@ -314,8 +320,10 @@
 
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
+import currency from '../../../mixins/formatCurrent'
+
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinary, currency],
   name: 'Ko-ProductCard-1',
   props: {
     product: Object,
@@ -518,14 +526,6 @@ export default {
   watch: {
     productsCarts(value) {
       this.getDataProduct()
-    },
-  },
-  filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-      return ''
     },
   },
 }

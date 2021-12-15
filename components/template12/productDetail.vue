@@ -45,7 +45,11 @@
                     ? Math.trunc(
                         salesData.precio / (1 - data.info.promocion_valor / 100)
                       )
-                    : 0) | currency
+                    : 0)
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
                 }}
               </p>
               <div
@@ -55,7 +59,13 @@
                 "
               >
                 <p class="text-precio" v-show="salesData.precio">
-                  {{ salesData.precio | currency }}
+                  {{
+                    salesData.precio
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
                 </p>
                 <p
                   class="card-descuento"
@@ -223,6 +233,8 @@ import productSlide from '../whatsapp/_productdetails/productSlide.vue'
 import selectGroup from '../whatsapp/_productdetails/selectGroup'
 import idCloudinary from '../../mixins/idCloudinary'
 import extensions from '../../mixins/elemenTiptap.vue'
+import currency from '../../mixins/formatCurrent'
+
 export default {
   name: 'Ko-ProductDetail',
   props: {
@@ -230,7 +242,7 @@ export default {
     tempData: Object,
     settingByTemplate12: Object,
   },
-  mixins: [idCloudinary, extensions],
+  mixins: [idCloudinary, extensions, currency],
   components: {
     selectGroup,
     productSlide,
@@ -686,12 +698,6 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-      return ''
-    },
     toLowerCase(value) {
       if (value) {
         return value.toLowerCase()

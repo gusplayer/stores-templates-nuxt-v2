@@ -179,7 +179,11 @@
           {{ $t('productdetail_opinionesEnvioMsg2') }}
         </p>
         <p class="price">
-          {{ $t('cart_precio') }} {{ this.envios.valor | currency }}
+          {{ $t('cart_precio') }}
+          {{
+            this.envios.valor
+              | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
+          }}
         </p>
       </div>
       <div v-if="this.envios.envio_metodo === 'precio'" class="wrapper-method">
@@ -196,8 +200,10 @@
   </div>
 </template>
 <script>
+import currency from '../../../mixins/formatCurrent'
+
 export default {
-  components: {},
+  mixins: [currency],
   props: {
     dataStore: Object,
     data: {},
@@ -245,11 +251,6 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-    },
     capitalize(value) {
       if (value) {
         value = value.toLowerCase()

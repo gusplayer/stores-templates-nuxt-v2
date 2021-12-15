@@ -29,7 +29,7 @@
         class="item-content descripcion"
         v-html="data.info.descripcion"
         v-if="focusbtn1"
-        style="color: #777;"
+        style="color: #777"
       ></div>
       <div class="item-content opcpago" v-if="focusbtn2">
         <ul>
@@ -204,7 +204,14 @@
               {{ $t('productdetail_opinionesEnvioMsg2') }}
             </p>
             <p class="price">
-              {{ $t('cart_precio') }} {{ this.envios.valor | currency }}
+              {{ $t('cart_precio') }}
+              {{
+                this.envios.valor
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
             </p>
           </div>
           <div
@@ -231,7 +238,10 @@
   </div>
 </template>
 <script>
+import currency from '../../../mixins/formatCurrent'
 export default {
+  mixins: [currency],
+
   components: {},
   props: {
     dataStore: Object,
@@ -269,11 +279,6 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-    },
     capitalize(value) {
       if (value) {
         value = value.toLowerCase()

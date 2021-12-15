@@ -202,7 +202,14 @@
             {{ $t('productdetail_opinionesEnvioMsg2') }}
           </p>
           <p class="price">
-            {{ $t('cart_precio') }} {{ this.envios.valor | currency }}
+            {{ $t('cart_precio') }}
+            {{
+              this.envios.valor
+                | currency(
+                  dataStore.tienda.codigo_pais,
+                  dataStore.tienda.moneda
+                )
+            }}
           </p>
         </div>
         <div
@@ -227,8 +234,9 @@
 </template>
 <script>
 import extensions from '../../../mixins/elemenTiptap.vue'
+import currency from '../../../mixins/formatCurrent'
 export default {
-  mixins: [extensions],
+  mixins: [extensions, currency],
   name: 'descriptionProduct',
   props: {
     dataStore: Object,
@@ -262,11 +270,6 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-    },
     capitalize(value) {
       if (value) {
         value = value.toLowerCase()

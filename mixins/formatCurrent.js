@@ -18,7 +18,7 @@ export default {
               currency: moneda,
               minimumFractionDigits: 0,
             }).format(value)
-            return resultCurrent
+            return `$ ${resultCurrent}`
           }
         } else {
           {
@@ -27,7 +27,7 @@ export default {
               currency: moneda,
               minimumFractionDigits: 0,
             }).format(value)
-            return resultCurrent
+            return `$ ${resultCurrent}`
           }
         }
       } else {

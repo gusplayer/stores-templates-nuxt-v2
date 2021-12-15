@@ -67,7 +67,10 @@
         class="font-semibold"
         :style="`color:${settingByTemplate12.priceColor};`"
       >
-        {{ product.precio | currency }}
+        {{
+          product.precio
+            | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
+        }}
       </span>
     </div>
   </div>
@@ -75,9 +78,12 @@
 
 <script>
 import idCloudinary from '../../mixins/idCloudinary'
+import currency from '../../mixins/formatCurrent'
+
 export default {
   name: 'ProductCard',
-  mixins: [idCloudinary],
+  mixins: [idCloudinary, currency],
+
   props: { product: Object, dataStore: Object, settingByTemplate12: Object },
   mounted() {
     this.idSlug = this.product.id
@@ -269,14 +275,6 @@ export default {
       this.getDataProduct()
     },
   },
-  filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-      return ''
-    },
-  },
 }
 </script>
 
@@ -291,7 +289,7 @@ export default {
   max-width: 100px;
 }
 .wrapper_card > div:nth-child(3) {
-  max-width: 100px;
+  max-width: 130px;
 }
 .product_container .content-img-prodcut > img,
 .product_container .product_header,
@@ -328,7 +326,7 @@ export default {
   filter: grayscale(100%);
 }
 .wrapper-price {
-  /* width: 100%; */
+  width: 100%;
   display: flex;
   justify-content: flex-end;
 }

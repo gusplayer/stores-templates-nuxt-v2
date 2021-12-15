@@ -178,14 +178,26 @@
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
             >
-              {{ this.minPrice | currency }}
+              {{
+                this.minPrice
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
             </div>
             <p class="separator-price mx-4">-</p>
             <div
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
             >
-              {{ this.maxPrice | currency }}
+              {{
+                this.maxPrice
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
             </div>
           </div>
           <div v-else>
@@ -193,7 +205,13 @@
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
             >
-              {{ this.product.precio | currency }}
+              {{
+                this.product.precio
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
             </p>
           </div>
         </div>
@@ -380,8 +398,9 @@
 
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
+import currency from '../../../mixins/formatCurrent'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinary, currency],
   name: 'Ko-ProductCardFilterList',
   props: { product: Object },
 
@@ -574,14 +593,6 @@ export default {
   watch: {
     productsCarts(value) {
       this.getDataProduct()
-    },
-  },
-  filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-      return ''
     },
   },
 }

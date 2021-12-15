@@ -366,9 +366,9 @@ import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
 import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
-
+import currency from '../../mixins/formatCurrent'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinary, currency],
   name: 'Ko-ProductDetail',
   props: {
     dataStore: Object,
@@ -843,12 +843,6 @@ export default {
     },
   },
   filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-      return ''
-    },
     toLowerCase(value) {
       if (value) {
         return value.toLowerCase()
