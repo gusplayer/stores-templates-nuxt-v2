@@ -64,7 +64,9 @@ export default {
     settingKcardProduct: Object,
   },
   name: 'Ko-trending-hoko',
-
+  mounted() {
+    this.currentChange(1)
+  },
   data() {
     return {
       swiperOption: {
@@ -101,6 +103,12 @@ export default {
     },
     producthoko() {
       return this.$store.state.producthoko
+    },
+  },
+  methods: {
+    currentChange(page) {
+      this.$store.dispatch('GET_PRODUCTSHOKO', page)
+      this.currentPage = page
     },
   },
 }

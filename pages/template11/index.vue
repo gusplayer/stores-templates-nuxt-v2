@@ -19,26 +19,28 @@
         settingByTemplate11.section.visible
       "
     />
-    <Ktrending
+    <KtrendingHoko
       id="kTredingX"
       v-bind="componentsProps"
       v-if="
         settingByTemplate11 &&
         settingByTemplate11.trending &&
         settingByTemplate11.trending.visible &&
-        dataHoko.statehoko == 0
-      "
-    />
-    <KtrendingHoko
-      id="kTredingX"
-      v-bind="componentsProps"
-      v-else-if="
-        settingByTemplate11 &&
-        settingByTemplate11.trending &&
-        settingByTemplate11.trending.visible &&
+        dataHoko &&
         dataHoko.statehoko == 1
       "
     />
+    <div v-else>
+      <Ktrending
+        id="kTredingX"
+        v-bind="componentsProps"
+        v-if="
+          settingByTemplate11 &&
+          settingByTemplate11.trending &&
+          settingByTemplate11.trending.visible
+        "
+      />
+    </div>
     <Kparallax
       id="kParallaxX"
       v-bind="componentsProps"
@@ -48,7 +50,10 @@
         settingByTemplate11.parallax.visible
       "
     />
-    <KListtrending v-bind="componentsProps" v-if="dataHoko.statehoko == 0" />
+    <KListtrending
+      v-bind="componentsProps"
+      v-if="dataHoko.length == 0 || dataHoko.statehoko == 0"
+    />
     <KInformacion
       id="kInformationX"
       v-bind="componentsProps"
