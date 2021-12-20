@@ -97,17 +97,7 @@ export default {
   },
   data() {
     return {
-      rangeSlide: [0, 1000000],
-      price: [0, 1000000],
-      range: {
-        max: 0,
-      },
       currentPage: 1,
-      sub: -1,
-      show: false,
-      value: 1,
-      valuesub: '',
-      numVistas: 16,
     }
   },
   computed: {
@@ -122,14 +112,6 @@ export default {
     currentChange(page) {
       this.$store.dispatch('GET_PRODUCTSHOKO', page)
       this.currentPage = page
-    },
-    mouseOver(index) {
-      this.sub = index
-      this.show = true
-    },
-    mouseLeave() {
-      this.sub = -1
-      this.show = false
     },
   },
   watch: {

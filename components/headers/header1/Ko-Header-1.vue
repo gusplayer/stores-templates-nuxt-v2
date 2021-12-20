@@ -43,7 +43,11 @@
                 >
                 <div v-else>
                   <div
-                    v-if="dataStore.categorias.length > 0 && item.ref"
+                    v-if="
+                      dataStore.categorias.length > 0 &&
+                      item.ref &&
+                      (dataHoko.statehoko == 0 || dataHoko.length == 0)
+                    "
                     style="
                       margin-right: 20px;
                       display: flex;
@@ -89,7 +93,10 @@
               <search-icon class="header-icon-cart" />
             </div>
           </div>
-          <div class="header-content-icon">
+          <div
+            class="header-content-icon"
+            v-if="dataHoko.statehoko == 0 || dataHoko.length == 0"
+          >
             <div
               class="header-content-cart"
               @click="openOrder"
@@ -298,6 +305,9 @@ export default {
     },
     listArticulos() {
       return this.$store.state.listArticulos.length
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
     },
   },
   methods: {

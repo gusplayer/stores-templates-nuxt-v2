@@ -81,7 +81,10 @@
             </div>
           </div>
           <div class="empty" v-if="showSearch"></div>
-          <div class="header-content-icon">
+          <div
+            class="header-content-icon"
+            v-if="dataHoko.statehoko == 0 || dataHoko.length == 0"
+          >
             <div class="header-content-cart" @click="openOrder">
               <svg
                 class="icon-shop"
@@ -258,6 +261,9 @@ export default {
     },
     listArticulos() {
       return this.$store.state.listArticulos.length
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
     },
   },
   methods: {

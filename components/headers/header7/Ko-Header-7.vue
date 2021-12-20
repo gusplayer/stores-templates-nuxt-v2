@@ -125,7 +125,10 @@
                   />
                 </svg>
               </div>
-              <div class="icon-shop">
+              <div
+                class="icon-shop"
+                v-if="dataHoko.statehoko == 0 || dataHoko.length == 0"
+              >
                 <svg
                   @click="openOrder"
                   class="svg-shop"
@@ -210,6 +213,9 @@ export default {
     },
     listArticulos() {
       return this.$store.state.listArticulos.length
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
     },
   },
   methods: {

@@ -18,11 +18,21 @@
     <kBanner v-if="this.stateBanner" id="KHeaderX" />
     <KComponent360 v-if="this.stateBanner" />
     <KProductFavoritos v-if="this.stateBanner" />
-    <KProductList
+    <KProductListHoko
       :dataStore="dataStore"
       :fullProducts="fullProducts"
       id="KProductX"
+      v-if="dataHoko && dataHoko.statehoko == 1"
     />
+
+    <div v-else>
+      <KProductList
+        :dataStore="dataStore"
+        :fullProducts="fullProducts"
+        id="KProductX"
+      />
+    </div>
+
     <kBannerFooter id="KFooterX" />
     <KNewsletter :dataStore="dataStore" />
   </div>
@@ -33,6 +43,7 @@ import kBanner from '../../components/template5/ko-Banner-1'
 import kBannerFooter from '../../components/template5/ko-BannerFooter-1'
 import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
 import KProductList from '../../components/template5/Ko-ProductList-1'
+import KProductListHoko from '../../components/template5/Ko-ProductListHoko-1.vue'
 import KNewsletter from '../../components/template5/Ko-Newsletter-1'
 import KComponent360 from '../../components/template5/Ko-Content360-1'
 export default {
@@ -40,6 +51,7 @@ export default {
   components: {
     kBanner,
     KProductList,
+    KProductListHoko,
     KNewsletter,
     KProductFavoritos,
     KComponent360,
@@ -67,6 +79,9 @@ export default {
     },
     settingByTemplate() {
       return this.$store.state.settingByTemplate
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
     },
   },
   beforeDestroy() {

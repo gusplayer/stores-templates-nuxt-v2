@@ -67,7 +67,7 @@
                       x="0"
                       y="0"
                       viewBox="0 0 512 512"
-                      style="enable-background: new 0 0 512 512;"
+                      style="enable-background: new 0 0 512 512"
                       xml:space="preserve"
                     >
                       <title>Search</title>
@@ -103,7 +103,11 @@
                 </div>
               </div>
               <div class="empty" v-if="showSearch"></div>
-              <div class="header-content-icon" @click="openOrder">
+              <div
+                class="header-content-icon"
+                @click="openOrder"
+                v-if="dataHoko.statehoko == 0 || dataHoko.length == 0"
+              >
                 <i class="header-content-cart">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -211,6 +215,9 @@ export default {
     },
     listArticulos() {
       return this.$store.state.listArticulos.length
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
     },
   },
   methods: {

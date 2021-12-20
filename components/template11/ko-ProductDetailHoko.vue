@@ -243,7 +243,7 @@ export default {
     KoSuggesProduct,
     ProductSlide,
   },
-  async mounted() {
+  mounted() {
     this.asyncauthToken()
   },
   data() {

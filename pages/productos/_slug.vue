@@ -6,6 +6,7 @@
 
 <script>
 import Ko5ProductDetail from '../../components/template5/Ko-ProductDetail-1'
+import Ko5ProductDetailHoko from '../../components/template5/Ko-ProductDetailHoko-1.vue'
 import Ko7ProductDetail from '../../components/template7/Ko-ProductDetail'
 import Ko9ProductDetail from '../../components/template9/Ko-ProductDetail'
 import Ko10ProductDetail from '../../components/template10/Ko-ProductDetail'
@@ -15,6 +16,7 @@ import Ko11ProductDetailHoko from '../../components/template11/ko-ProductDetailH
 export default {
   components: {
     Ko5ProductDetail,
+    Ko5ProductDetailHoko,
     Ko7ProductDetail,
     Ko9ProductDetail,
     Ko10ProductDetail,
@@ -39,10 +41,18 @@ export default {
       let productListComponent = ''
       switch (this.template) {
         case 3:
-          productListComponent = 'Ko5ProductDetail'
+          if (this.dataHoko && this.dataHoko.statehoko == true) {
+            productListComponent = 'Ko5ProductDetailHoko'
+          } else {
+            productListComponent = 'Ko5ProductDetail'
+          }
           break
         case 5:
-          productListComponent = 'Ko5ProductDetail'
+          if (this.dataHoko && this.dataHoko.statehoko == true) {
+            productListComponent = 'Ko5ProductDetailHoko'
+          } else {
+            productListComponent = 'Ko5ProductDetail'
+          }
           break
         case 6:
           productListComponent = 'Ko5ProductDetail'
@@ -57,15 +67,11 @@ export default {
           productListComponent = 'Ko10ProductDetail'
           break
         case 11:
-          if (
-            this.dataHoko.statehoko == true &&
-            this.dataStore.tienda.id_tienda == 1559
-          ) {
+          if (this.dataHoko && this.dataHoko.statehoko == true) {
             productListComponent = 'Ko11ProductDetailHoko'
           } else {
             productListComponent = 'Ko11ProductDetail'
           }
-
           break
       }
       return productListComponent

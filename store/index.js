@@ -616,6 +616,9 @@ export const actions = {
         await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
         await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
         await dispatch('GET_ARTICLES', id.data.data.id)
+        if (state.dataStore && state.dataStore.tienda) {
+          await dispatch('GET_DATA_HOKO', state.dataStore.tienda.id_tienda)
+        }
         if (id.data.data.template == 7) {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch('GET_SETTINGS_BY_TEMPLATE_7', state.dataStore.tienda)
@@ -630,7 +633,6 @@ export const actions = {
               'GET_SETTINGS_BY_TEMPLATE_11',
               state.dataStore.tienda
             )
-            await dispatch('GET_DATA_HOKO', state.dataStore.tienda.id_tienda)
           }
         } else if (id.data.data.template == 12) {
           if (state.dataStore && state.dataStore.tienda) {
