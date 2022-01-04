@@ -99,7 +99,8 @@ export default {
       return this.$refs.mySwiper.swiper
     },
     listProduct() {
-      return this.fullProducts.filter((product) => {
+      let tempfullProducts = this.fullProducts.slice(0, 20)
+      return tempfullProducts.filter((product) => {
         if (product.tag_promocion != '1') {
           return product
         }
