@@ -165,7 +165,7 @@
 </template>
 <script>
 import KoOrder from '../_order1/order1'
-import KoMenu from '../../../components/template11/_lateralMenu/openMenuLeft'
+import KoMenu from '../../../components/template9/_lateralMenu/openMenuLeft.vue'
 
 export default {
   name: 'Ko-Header-7',

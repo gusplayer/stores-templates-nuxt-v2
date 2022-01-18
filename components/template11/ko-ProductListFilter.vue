@@ -1114,7 +1114,8 @@ export default {
     @apply w-full grid grid-cols-1;
   }
   .btn-tittle-shop {
-    font-size: 36px;
+    font-size: 16px;
+    @apply mb-10;
   }
   .content-shop-items {
     @apply w-9/0 flex flex-row justify-start items-start;
@@ -1136,9 +1137,6 @@ export default {
   }
   .content-banner-shop {
     @apply justify-start items-start my-8 pl-20;
-  }
-  .content-banner-shop-r {
-    @apply hidden;
   }
   .bannerProduct {
     @apply hidden;
@@ -1162,6 +1160,10 @@ export default {
   }
 }
 @screen md {
+  .btn-tittle-shop {
+    font-size: 36px;
+    @apply mb-0;
+  }
   .content-shop-items {
     @apply w-9/3;
   }

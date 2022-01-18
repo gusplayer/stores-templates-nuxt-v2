@@ -28,7 +28,7 @@
               @click="selectTag1"
               :class="selecttag == 1 ? 'show-select-active' : ''"
             >
-              {{ $t('header_menu') }}
+              {{ $t('header_inicio') }}
             </button>
             <button
               class="btn-lateral-menu-right"
