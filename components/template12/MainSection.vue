@@ -4,48 +4,71 @@
       class="pt-20 section-with-title_container"
       :style="`background:${settingByTemplate12.backgroundColor};`"
     >
-      <div
-        class="pt-4 pb-4"
-        v-for="category in dataStore.categorias"
-        :key="category.id"
-      >
-        <header class="text-center">
-          <h2
-            class="text-title"
-            :style="`color:${settingByTemplate12.titleColor};`"
-          >
-            {{ category.nombre_categoria_producto }}
-          </h2>
-        </header>
+      <div v-if="dataStore.categorias.length > 0">
         <div
-          class="products-wrapper"
-          v-for="(subcategory, key) in dataStore.subcategorias"
-          :key="key"
-          v-show="subcategory.categoria == category.id"
+          class="pt-4 pb-4"
+          v-for="category in dataStore.categorias"
+          :key="category.id"
         >
-          <div class="subcategori-Content">
-            <p
-              class="text-subtitle"
+          <header class="text-center">
+            <h2
+              class="text-title"
               :style="`color:${settingByTemplate12.titleColor};`"
-              v-if="subcategory.categoria == category.id"
             >
-              {{ subcategory.nombre_subcategoria }}
-            </p>
+              {{ category.nombre_categoria_producto }}
+            </h2>
+          </header>
+
+          <div v-if="dataStore.subcategorias.length > 0">
+            <div
+              class="products-wrapper"
+              v-for="(subcategory, key) in dataStore.subcategorias"
+              :key="key"
+              v-show="subcategory.categoria == category.id"
+            >
+              <div class="subcategori-Content">
+                <p
+                  class="text-subtitle"
+                  :style="`color:${settingByTemplate12.titleColor};`"
+                  v-if="subcategory.categoria == category.id"
+                >
+                  {{ subcategory.nombre_subcategoria }}
+                </p>
+              </div>
+              <div class="products-content">
+                <div
+                  v-for="product in fullProducts"
+                  :key="product.id"
+                  @click="OpenModalproductDetails(product)"
+                  v-show="
+                    product.categoria == category.nombre_categoria_producto &&
+                    product.subcategoria == subcategory.id
+                  "
+                >
+                  <ProductCard
+                    :product="
+                      product.categoria == category.nombre_categoria_producto &&
+                      product.subcategoria == subcategory.id
+                        ? product
+                        : {}
+                    "
+                    :dataStore="dataStore"
+                    :settingByTemplate12="settingByTemplate12"
+                  ></ProductCard>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="products-content">
+          <div class="products-content" v-else>
             <div
               v-for="product in fullProducts"
               :key="product.id"
               @click="OpenModalproductDetails(product)"
-              v-show="
-                product.categoria == category.nombre_categoria_producto &&
-                product.subcategoria == subcategory.id
-              "
+              v-show="product.categoria == category.nombre_categoria_producto"
             >
               <ProductCard
                 :product="
-                  product.categoria == category.nombre_categoria_producto &&
-                  product.subcategoria == subcategory.id
+                  product.categoria == category.nombre_categoria_producto
                     ? product
                     : {}
                 "
@@ -53,6 +76,29 @@
                 :settingByTemplate12="settingByTemplate12"
               ></ProductCard>
             </div>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <header class="text-center">
+          <h2
+            class="text-title"
+            :style="`color:${settingByTemplate12.titleColor};`"
+          >
+            {{ $t('header_productos') }}
+          </h2>
+        </header>
+        <div class="products-content">
+          <div
+            v-for="product in fullProducts"
+            :key="product.id"
+            @click="OpenModalproductDetails(product)"
+          >
+            <ProductCard
+              :product="product"
+              :dataStore="dataStore"
+              :settingByTemplate12="settingByTemplate12"
+            ></ProductCard>
           </div>
         </div>
       </div>
