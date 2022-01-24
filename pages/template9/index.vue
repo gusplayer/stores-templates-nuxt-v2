@@ -44,15 +44,28 @@
         settingByTemplate9.koffers.visible
       "
     />
-    <Kproductlist
+    <KproductlistHoko
       id="KproductlistX"
       v-bind="componentsProps"
       v-if="
         settingByTemplate9 &&
         settingByTemplate9.productList &&
-        settingByTemplate9.productList.visible
+        settingByTemplate9.productList.visible &&
+        dataHoko &&
+        dataHoko.statehoko == 1
       "
     />
+    <div v-else>
+      <Kproductlist
+        id="KproductlistX"
+        v-bind="componentsProps"
+        v-if="
+          settingByTemplate9 &&
+          settingByTemplate9.productList &&
+          settingByTemplate9.productList.visible
+        "
+      />
+    </div>
     <Kblog
       id="KblogX"
       v-bind="componentsProps"
@@ -88,6 +101,7 @@
 import Kbanner from '../../components/template9/ko-carousel'
 import Koffers from '../../components/template9/ko-offers'
 import Kproductlist from '../../components/template9/Ko-ProductList'
+import KproductlistHoko from '../../components/template9/Ko-ProductListHoko.vue'
 import Kblog from '../../components/template9/ko-blog'
 import KWrapper from '../../components/template9/Ko-wrapper'
 import KNews from '../../components/template9/Ko-Newsletter'
@@ -97,6 +111,7 @@ export default {
     Kbanner,
     Koffers,
     Kproductlist,
+    KproductlistHoko,
     Kblog,
     KWrapper,
     KNews,
@@ -160,6 +175,9 @@ export default {
             ? this.settingByTemplate9.wrapper
             : null,
       }
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
     },
   },
   beforeDestroy() {

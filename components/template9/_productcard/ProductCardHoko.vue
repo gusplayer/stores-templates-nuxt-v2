@@ -1,18 +1,16 @@
 <template>
-  <div
-    class="producto"
-    :style="[
-      settingKcardProduct,
-      settingGeneral,
-      {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
-      },
-    ]"
-  >
-    <div class="container">
+  <div class="producto" :style="[productListCard, settingGeneral]">
+    <div
+      class="container"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
       <router-link :to="{ path: `/productos/` + product.id }">
         <client-only>
           <img
@@ -36,10 +34,23 @@
         </div>
       </router-link>
     </div>
-    <div class="datos-producto">
+    <div
+      class="datos-producto"
+      :style="[
+        {
+          '--font-style-2':
+            this.settingGeneral && this.settingGeneral.fount_2
+              ? this.settingGeneral.fount_2
+              : 'Roboto',
+        },
+      ]"
+    >
+      <!-- <div class="categoria" v-if="this.product.model_type">
+        {{ this.product.model_type }}
+      </div> -->
       <router-link :to="{ path: `/productos/` + product.id }">
         <div class="tittle tittle-xml">
-          <p class="card-title" v-if="this.product.name >= 90">
+          <p class="card-title" v-if="this.product.name.length >= 90">
             {{ `${this.product.name.slice(0, 90)}...` }}
           </p>
           <p class="card-title" v-else>
@@ -47,7 +58,7 @@
           </p>
         </div>
         <div class="tittle tittle-lg">
-          <p class="card-title" v-if="this.product.name >= 54">
+          <p class="card-title" v-if="this.product.name.length >= 54">
             {{ `${this.product.name.slice(0, 54)}...` }}
           </p>
           <p class="card-title" v-else>
@@ -55,7 +66,7 @@
           </p>
         </div>
         <div class="tittle tittle-sm">
-          <p class="card-title" v-if="this.product.name >= 30">
+          <p class="card-title" v-if="this.product.name.length >= 30">
             {{ `${this.product.name.slice(0, 30)}...` }}
           </p>
           <p class="card-title" v-else>
@@ -80,11 +91,29 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-1',
-  props: {
-    product: Object,
-    settingGeneral: Object,
-    settingKcardProduct: Object,
+  props: { product: Object, settingGeneral: Object, productListCard: Object },
+
+  data() {
+    return {
+      hover: false,
+      estadoCart: false,
+      minPrice: '',
+      maxPrice: '',
+      idSlug: '',
+      maxQuantityValue: 0,
+      productIndexCart: null,
+      productCart: {},
+      salesData: null,
+      spent: false,
+      active: true,
+    }
   },
+  computed: {
+    dataStore() {
+      return this.$store.state.dataStore
+    },
+  },
+
   filters: {
     currency(value) {
       if (value) {
@@ -103,16 +132,15 @@ export default {
   overflow: hidden;
 }
 .producto {
-  background: var(--background_color_1);
+  background: var(--background_color_card);
   @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
 .datos-producto {
-  @apply w-full flex flex-col justify-center items-center my-24 cursor-default;
+  @apply w-full flex flex-col justify-center items-start my-24 cursor-default;
 }
 .container {
   @apply relative max-w-full;
 }
-
 .cart-Shop {
   font: inherit;
   font-size: 100%;
@@ -126,7 +154,7 @@ export default {
 }
 .tittle {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
   font: inherit;
   font-size: 100%;
   min-height: 49px;
@@ -141,47 +169,42 @@ export default {
 .tittle-sm {
   display: none;
 }
+.categoria {
+  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+  font-family: var(--font-style-2) !important;
+  color: var(--color_category);
+  font: inherit;
+  font-weight: 600;
+}
 .card-title {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-1) !important;
-  color: var(--color_title);
+  font-family: var(--font-style-2) !important;
+  color: var(--color_text_card);
   font: inherit;
-  font-weight: var(--fontWeighTitle);
+  font-weight: 800;
   text-align: left;
-  font-size: var(--fontSizeTitle);
 }
 .producto:hover .text-price {
   color: #333333;
 }
 .text-price {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-1) !important;
-  font-size: var(--fontSizePretitle);
-  color: var(---color_price);
+  font-family: var(--font-style-2) !important;
+  font-size: 16px;
+  color: var(--color_price_card);
   white-space: nowrap;
-  font-weight: var(--fontWeighPretitle);
+  font-weight: 600;
   line-height: 1.1;
   text-align: left;
 }
-.cart-Shop {
-  font: inherit;
-  font-size: 100%;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  text-align: center;
-  @apply absolute text-center transition-all ease-in duration-300 w-full;
-}
 .overlay-bottom {
-  background-color: black;
+  background-color: var(--color_background_btn);
 }
 .overlay-bottom:hover {
   background-color: #3d3d3d;
 }
 .txt-add {
-  color: white;
+  color: var(--color_text_btn);
   font-size: 15px;
   letter-spacing: 1px;
   text-transform: capitalize;
@@ -193,35 +216,45 @@ export default {
   transition: all 200ms ease-in;
 }
 @screen sm {
+  .categoria {
+    @apply mb-3;
+    font-size: 13px;
+  }
   .card-title {
     font-size: 16px;
   }
   .precio {
     font-size: 16px;
   }
-  .overlay-bottom,
-  .overlay-bottom-promo {
-    @apply absolute overflow-hidden transition-all ease-in duration-100;
-    width: 100%;
+  .overlay-bottom {
+    @apply absolute right-0 overflow-hidden transition-all ease-in duration-100;
+    width: 110px;
     height: 0px;
-    bottom: 15px;
+    left: 10px;
+    bottom: 10px;
   }
-  .producto:hover .overlay-bottom,
-  .producto:hover .overlay-bottom-promo {
+  .producto:hover .overlay-bottom {
     height: 30px;
+  }
+  .content-price {
+    @apply flex flex-row justify-center items-center w-full;
   }
 }
 @screen md {
-  .overlay-bottom,
-  .overlay-bottom-promo {
-    @apply absolute overflow-hidden transition-all ease-in duration-100;
-    width: 100%;
+  .overlay-bottom {
+    @apply absolute right-0 overflow-hidden transition-all ease-in duration-100;
+    width: 110px;
     height: 0px;
-    bottom: 15px;
+    left: 10px;
+    bottom: 10px;
   }
-  .producto:hover .overlay-bottom,
-  .producto:hover .overlay-bottom-promo {
+  .producto:hover .overlay-bottom {
     height: 40px;
+  }
+}
+@screen mlg {
+  .text-cart {
+    @apply block;
   }
 }
 @media (max-width: 1125px) {

@@ -39,10 +39,7 @@
             <button class="btn">Ver todos los productos</button>
           </nuxt-link>
         </div>
-        <div
-          v-if="this.fullProducts.length == 0"
-          class="content-products-empty"
-        >
+        <div v-if="producthoko.total == 0" class="content-products-empty">
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
@@ -58,7 +55,6 @@ export default {
   },
   props: {
     dataStore: Object,
-    fullProducts: {},
     settingKtrending: Object,
     settingGeneral: Object,
     settingKcardProduct: Object,
@@ -108,7 +104,6 @@ export default {
   methods: {
     currentChange(page) {
       this.$store.dispatch('GET_PRODUCTSHOKO', page)
-      this.currentPage = page
     },
   },
 }
