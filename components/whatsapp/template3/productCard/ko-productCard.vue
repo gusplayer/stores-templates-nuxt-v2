@@ -2,7 +2,8 @@
   <div class="content-productCard">
     <div class="content-itemsCard">
       <router-link
-        class="content-img-prodcut"
+        class="content-img-prodcut relative"
+        id="product-card"
         :to="{
           path: `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
         }"
@@ -19,6 +20,28 @@
           class="product-image product-image-soldOut"
           alt="Product-Img"
         />
+        <div
+          v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
+        >
+          <div class="overlay-top">
+            <div>
+              <p>{{ this.product.promocion_valor }}% OFF</p>
+            </div>
+          </div>
+          <div class="overlay-free">
+            <p class="txt-free">{{ $t('home_pdescuento') }}</p>
+          </div>
+          <div class="overlay-polygon">
+            <svg
+              class="icon-overlay-free"
+              width="12px"
+              height="12px"
+              viewBox="0 0 255 255"
+            >
+              <polygon points="0,0 127.5,127.5 255,0" />
+            </svg>
+          </div>
+        </div>
       </router-link>
       <div class="content-right-data">
         <router-link
@@ -37,6 +60,14 @@
             {{ `${this.product.nombre.slice(0, 42)}` }}
           </p>
           <div class="content-price-product">
+            <div
+              class="card-descuento"
+              v-if="
+                this.product.tag_promocion == 1 && this.product.promocion_valor
+              "
+            >
+              <p>{{ this.product.promocion_valor }}% OFF</p>
+            </div>
             <div
               class="item-price-product"
               v-if="estadoCart && this.minPrice != this.maxPrice"
@@ -161,7 +192,7 @@
 import idCloudinary from '../../../../mixins/idCloudinary'
 import currency from '../../../../mixins/formatCurrent'
 export default {
-  name: 'ProductCardWa',
+  name: 'ProductCardWa3',
   mixins: [idCloudinary, currency],
   props: { product: Object, dataStore: Object },
   mounted() {
@@ -404,6 +435,65 @@ export default {
 }
 </script>
 <style scoped>
+.overlay-top {
+  top: 47px;
+  left: 100%;
+  right: 0;
+  width: 0;
+  height: 29px;
+  padding: 5px;
+  font-size: 13px;
+  background: white;
+  color: #25d366;
+  @apply absolute overflow-hidden rounded-md shadow-md transition-all ease-in duration-300;
+}
+#product-card:hover .overlay-top {
+  width: 67px;
+  left: 63%;
+}
+.overlay-free {
+  position: absolute;
+  background-color: #25d366;
+  color: white;
+  overflow: hidden;
+  transition: 0.5s ease;
+  top: 5px;
+  left: 100%;
+  right: 0;
+  width: 0;
+  height: 35px;
+  text-align: center;
+  @apply rounded;
+}
+.txt-free {
+  line-height: 12px;
+  font-size: 13px;
+  margin-top: 5px;
+}
+#product-card:hover .overlay-free {
+  width: 125px;
+  left: 35%;
+  transition-delay: 700ms;
+}
+.overlay-polygon {
+  position: absolute;
+  top: 39px;
+  left: 100%;
+  right: 0;
+  background-color: transparent;
+  overflow: hidden;
+  width: 0;
+  height: 5%;
+  fill: #25d366;
+}
+#product-card:hover .overlay-polygon {
+  width: 5%;
+  left: 88%;
+  transition-delay: 950ms;
+}
+.card-descuento {
+  display: none;
+}
 .content-productCard {
   @apply w-full h-full flex flex-col justify-start items-center;
 }
@@ -435,7 +525,7 @@ export default {
     @apply w-full flex flex-col justify-center items-start font-medium;
   }
   .content-price-product {
-    @apply w-auto flex flex-col justify-center items-center;
+    @apply w-auto flex flex-col justify-center items-start;
   }
   .item-price-product {
     @apply w-full flex flex-row justify-start items-center gap-1;
@@ -480,6 +570,18 @@ export default {
   }
   .txt-product-price {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-descuento {
+    display: initial;
+    font-size: 12px;
+    color: white;
+    background: #35dd8d;
+    border-radius: 3px;
+    padding: 0px 5px;
+    margin-top: 3px;
   }
 }
 </style>

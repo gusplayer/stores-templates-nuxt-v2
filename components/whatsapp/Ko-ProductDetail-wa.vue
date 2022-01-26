@@ -30,7 +30,31 @@
             <p class="text-marca">
               <strong>{{ data.info.marca }}</strong>
             </p>
-            <div class="wrapper-price">
+
+            <p
+              class="text-promocion"
+              v-show="
+                data.info.tag_promocion == 1 &&
+                data.info.promocion_valor &&
+                salesData.precio
+              "
+            >
+              {{
+                (data.info.tag_promocion == 1 && data.info.promocion_valor
+                  ? Math.trunc(
+                      salesData.precio / (1 - data.info.promocion_valor / 100)
+                    )
+                  : 0)
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
+            </p>
+            <div
+              class="wrapper-price"
+              :class="data.info.tag_promocion == 1 ? '' : 'wrapper-price_space'"
+            >
               <p class="text-precio" v-show="salesData.precio">
                 {{
                   salesData.precio
@@ -40,7 +64,16 @@
                     )
                 }}
               </p>
-              <!-- <p class="card-descuento">-50%</p> -->
+              <p
+                class="card-descuento"
+                v-show="
+                  data.info.tag_promocion == 1 &&
+                  data.info.promocion_valor &&
+                  salesData.precio
+                "
+              >
+                {{ data.info.promocion_valor }}% OFF
+              </p>
             </div>
             <div class="content_buy_action">
               <div v-if="envio.titulo == 'Envío gratis'">
@@ -784,10 +817,9 @@ export default {
   margin-left: 5px;
 }
 .text-precio {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: #0f2930;
-  margin-top: 5px;
 }
 .card-descuento {
   font-size: 12px;
@@ -795,7 +827,7 @@ export default {
   background: #35dd8d;
   border-radius: 3px;
   padding: 0px 5px;
-  margin-top: 10px;
+  margin-top: 3px;
 }
 .text-variant {
   font-weight: 600;
@@ -834,6 +866,7 @@ export default {
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-top: 15px;
 }
 .content_card-info {
   display: initial;
@@ -848,6 +881,7 @@ export default {
   color: white;
   font-size: 12px;
   margin-bottom: 10px;
+  margin-top: 15px;
 }
 .content-description {
   width: 100%;
