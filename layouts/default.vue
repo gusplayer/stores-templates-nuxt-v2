@@ -196,11 +196,11 @@ export default {
       case 10:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
-            : 'Poppins'
+          this.settingByTemplate10 &&
+          this.settingByTemplate10.settingGeneral &&
+          this.settingByTemplate10.settingGeneral.fount_1
+            ? this.settingByTemplate10.settingGeneral.fount_1
+            : 'Roboto'
         break
       case 11:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -551,6 +551,9 @@ export default {
     settingByTemplate9() {
       return this.$store.state.settingByTemplate9
     },
+    settingByTemplate10() {
+      return this.$store.state.settingByTemplate10
+    },
     settingByTemplate11() {
       return this.$store.state.settingByTemplate11
     },
@@ -604,6 +607,29 @@ export default {
                   this.settingByTemplate9 &&
                   this.settingByTemplate9.settingGeneral
                     ? this.settingByTemplate9.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate10: this.settingByTemplate10
+          ? [
+              {
+                setting10Header:
+                  this.settingByTemplate10 && this.settingByTemplate10.header
+                    ? this.settingByTemplate10.header
+                    : null,
+                setting10Footer:
+                  this.settingByTemplate10 && this.settingByTemplate10.footer
+                    ? this.settingByTemplate10.footer
+                    : null,
+                setting10General:
+                  this.settingByTemplate10 &&
+                  this.settingByTemplate10.settingGeneral
+                    ? this.settingByTemplate10.settingGeneral
+                    : null,
+                pages:
+                  this.settingByTemplate10 && this.settingByTemplate10.pages
+                    ? this.settingByTemplate10.pages
                     : null,
               },
             ]
@@ -726,6 +752,29 @@ html {
   outline: none !important;
   /* overflow-x: hidden; */
 }
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+::-webkit-scrollbar-button:increment,
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
 .el-popover {
   display: none;
 }

@@ -12,9 +12,7 @@
           Disculpa, no podrá realizar compras por el momento,
         </p>
         <p class="subtitle-noti">¿Deseas continuar?</p>
-        <button class="btn-acceptM" @click="acceptClose()">
-          Aceptar
-        </button>
+        <button class="btn-acceptM" @click="acceptClose()">Aceptar</button>
       </div>
     </div>
     <div class="wrapper-notificacion-wa" v-if="dataStore.tienda.whatsapp == ''">
@@ -161,8 +159,7 @@ export default {
       ],
       script: [
         {
-          src:
-            'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
+          src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
       ],
       link: [
@@ -173,8 +170,7 @@ export default {
         },
         {
           rel: 'stylesheet',
-          href:
-            'https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap',
+          href: 'https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap',
         },
         {
           rel: 'stylesheet',
