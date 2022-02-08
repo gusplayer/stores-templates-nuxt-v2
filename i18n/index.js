@@ -143,6 +143,7 @@ export default {
     mcompra_pPMercadoCuentaAhorros: 'PSE - Cuenta de Ahorros y corriente',
     mcompra_pDaviplata: 'Daviplata',
     mcompra_pNequi: 'Nequi',
+    mcompra_pcanaldeVenta: 'Canal de venta: ',
     // Carrito
     cart_variante: 'Variante:',
     cart_items: 'Número de items:',
@@ -414,6 +415,7 @@ export default {
     mcompra_pPMercadoCuentaAhorros: 'PSE - Checking and Savings Account',
     mcompra_pDaviplata: 'Daviplata',
     mcompra_pNequi: 'Nequi',
+    mcompra_pcanaldeVenta: 'Sales channel: ',
     // Carrito
     cart_variante: 'Variant:',
     cart_items: 'Number of items:',
@@ -685,6 +687,7 @@ export default {
     mcompra_pPMercadoCuentaAhorros: 'PSE - Conta Corrente e Poupança',
     mcompra_pDaviplata: 'Daviplata',
     mcompra_pNequi: 'Nequi',
+    mcompra_pcanaldeVenta: 'Canal de vendas: ',
     // Carrito
     cart_variante: 'Variante:',
     cart_items: 'Número de itens:',
@@ -957,6 +960,7 @@ export default {
     mcompra_pPMercadoCuentaAhorros: 'PSE - Compte de chèques et d´épargne',
     mcompra_pDaviplata: 'Daviplata',
     mcompra_pNequi: 'Nequi',
+    mcompra_pcanaldeVenta: 'Canal de vente: ',
     // Carrito
     cart_variante: 'Variante :',
     cart_items: 'Nombre d´articles :',

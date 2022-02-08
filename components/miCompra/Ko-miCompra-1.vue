@@ -95,10 +95,10 @@
         </div>
         <div class="content-info-orden" v-if="orden.venta">
           <div class="info-left">
-            <p class="title-info-orden" v-if="orden.venta.cupon != 'null'">
+            <!-- <p class="title-info-orden" v-if="orden.venta.cupon != 'null'">
               {{ $t('mcompra_cupon') }}
               <span class="value-info-orden">{{ orden.venta.cupon }}</span>
-            </p>
+            </p> -->
             <p
               class="title-info-orden"
               v-if="orden.venta.cupon == 'null' || orden.venta.cupon == null"
