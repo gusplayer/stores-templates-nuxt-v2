@@ -14,7 +14,6 @@ import KoTemplate10 from './template10/index'
 import KoTemplate11 from './template11/index'
 import KoTemplate12 from './template12/index'
 import KoTemplateWhatsapp from './template99/index'
-
 export default {
   components: {
     KoTemplate5,
