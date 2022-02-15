@@ -24,7 +24,7 @@
         :newsletter="settingByTemplate11[0].newsletter"
         :setting11General="settingByTemplate11[0].setting11General"
         :dataStore="dataStore"
-      ></KoNewsLetter>
+      />
       <div class="content-footer-items">
         <div class="content-items-sm">
           <div class="content-store-sm">
@@ -261,7 +261,7 @@ export default {
     },
   },
   watch: {
-    settingByTemplate9() {
+    settingByTemplate11() {
       if (
         this.settingByTemplate11 &&
         this.settingByTemplate11[0].setting11Footer

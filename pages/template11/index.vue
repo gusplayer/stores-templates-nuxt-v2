@@ -25,7 +25,7 @@
       v-if="
         settingByTemplate11 &&
         settingByTemplate11.trending &&
-        settingByTemplate11.trending.visible &&
+        settingByTemplate11.trending.visible == true &&
         dataHoko &&
         dataHoko.statehoko == 1
       "
@@ -37,7 +37,7 @@
         v-if="
           settingByTemplate11 &&
           settingByTemplate11.trending &&
-          settingByTemplate11.trending.visible
+          settingByTemplate11.trending.visible == true
         "
       />
     </div>

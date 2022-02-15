@@ -50,7 +50,7 @@
       v-if="
         settingByTemplate9 &&
         settingByTemplate9.productList &&
-        settingByTemplate9.productList.visible &&
+        settingByTemplate9.productList.visible == true &&
         dataHoko &&
         dataHoko.statehoko == 1
       "
@@ -62,7 +62,7 @@
         v-if="
           settingByTemplate9 &&
           settingByTemplate9.productList &&
-          settingByTemplate9.productList.visible
+          settingByTemplate9.productList.visible == true
         "
       />
     </div>

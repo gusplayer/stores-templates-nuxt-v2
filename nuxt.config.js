@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // const isProd = process.env.NODE_ENV === 'production'
 export default {
-  mode: 'universal',
+  // mode: 'universal',
   head: {
     title: process.env.npm_package_name || '',
     htmlAttrs: {
@@ -53,9 +53,6 @@ export default {
   ],
   modules: ['@nuxtjs/pwa', '@nuxtjs/gtm'],
   buildModules: ['@nuxtjs/tailwindcss'],
-  tailwindcss: {
-    jit: true,
-  },
   debug: {
     enabled: true,
   },
