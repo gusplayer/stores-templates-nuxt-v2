@@ -870,6 +870,22 @@ input::-webkit-input-placeholder {
 .search_res {
   display: none;
 }
+@media (max-width: 1024px) {
+  .wrapper-meni-grid {
+    max-height: 540px;
+  }
+}
+@media (max-height: 700px) {
+  .wrapper-meni-grid {
+    max-height: 500px;
+  }
+}
+@media (max-height: 580px) {
+  .wrapper-meni-grid {
+    max-height: 480px;
+  }
+}
+
 @media (max-width: 900px) {
   .header {
     padding: 10px 20px 0;
