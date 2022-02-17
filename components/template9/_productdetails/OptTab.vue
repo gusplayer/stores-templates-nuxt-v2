@@ -180,6 +180,60 @@
               />
             </a>
           </li>
+          <li v-if="mediospago.wepay4u == 1">
+            <h4>WePay4U</h4>
+            <p>
+              {{ $t('text_pago_WePay4U') }}
+            </p>
+            <a
+              href="https://wepay4u.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                class="logo-pasarela-wompi"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1639078440/wePay4u/powered_by_z7sgqp.png"
+                alt="wePay4u"
+                border="0"
+              />
+            </a>
+          </li>
+          <li v-if="mediospago.tu_compra == 1">
+            <h4>Tucompra</h4>
+            <p>
+              {{ $t('text_pago_Tucompra') }}
+            </p>
+            <a
+              href="https://tucompra.com.co/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                class="logo-pasarela-wompi"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/tucompra_ss0oys.png"
+                alt="tu_compra"
+                border="0"
+              />
+            </a>
+          </li>
+          <li v-if="mediospago.flow == 1">
+            <h4>Tucompra</h4>
+            <p>
+              {{ $t('text_pago_flowInfo') }}
+            </p>
+            <a
+              href="https://www.flow.cl/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                class="logo-pasarela-wompi"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/flow_jevnwy.png"
+                alt="flow"
+                border="0"
+              />
+            </a>
+          </li>
         </ul>
       </div>
       <div class="item-content opcenvio" v-if="focusbtn3">

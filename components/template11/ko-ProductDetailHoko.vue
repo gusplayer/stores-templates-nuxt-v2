@@ -162,14 +162,18 @@
           </div>
         </div>
       </div>
+      <div class="tab">
+        <OptionTab
+          :dataStore="dataStore"
+          :data="data.stock.product"
+        ></OptionTab>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import axios from 'axios'
-
-import OptionTab from './_productdetails/OptTab'
-import KoSuggesProduct from './_productdetails/suggestionsProducto'
+import OptionTab from './_productdetails/OptTab-hoko'
 import idCloudinary from '../../mixins/idCloudinary'
 import ProductSlide from './_productdetails/productSlideHoko.vue'
 
@@ -186,7 +190,6 @@ export default {
   },
   components: {
     OptionTab,
-    KoSuggesProduct,
     ProductSlide,
   },
   mounted() {

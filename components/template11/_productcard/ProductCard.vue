@@ -583,7 +583,7 @@ export default {
 }
 .tittle {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-1) !important;
   font: inherit;
   font-size: 100%;
   min-height: 49px;

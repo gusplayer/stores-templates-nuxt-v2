@@ -149,6 +149,15 @@
                 </div>
               </div>
             </div>
+            <div class="content-options">
+              <OptionAcordion
+                :dataStore="dataStore"
+                :data="data.stock.product"
+              />
+            </div>
+            <div class="tab">
+              <OptionTab :dataStore="dataStore" :data="data.stock.product" />
+            </div>
           </div>
         </div>
       </div>
@@ -157,7 +166,8 @@
 </template>
 <script>
 import axios from 'axios'
-
+import OptionAcordion from './_productdetails/OptAcordion-hoko'
+import OptionTab from './_productdetails/OptTab-hoko'
 export default {
   name: 'Ko-ProductDetail-1',
   props: {
@@ -167,6 +177,10 @@ export default {
     // envios: Object,
     facebooPixel: Object,
     settingByTemplate9: Array,
+  },
+  components: {
+    OptionAcordion,
+    OptionTab,
   },
   mounted() {
     this.asyncauthToken()

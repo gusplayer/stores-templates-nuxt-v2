@@ -1,5 +1,5 @@
 <template>
-  <div class="content-opt-tab">
+  <div class="content-tab">
     <div class="head-content">
       <div
         class="tab"
@@ -15,20 +15,12 @@
       >
         <p class="tittle">{{ $t('productdetail_opcionesPago') }}</p>
       </div>
-      <div
-        class="tab"
-        @click="selectTag3"
-        :class="selecttag == 3 ? 'show-select-active' : ''"
-      >
-        <p class="tittle">{{ $t('productdetail_opinionesEnvio') }}</p>
-      </div>
     </div>
-
     <div class="content-tab">
       <div class="editor" v-if="focusbtn1">
-        <div v-if="data.info.descripcion">
+        <div v-if="data.description">
           <el-tiptap
-            v-model="data.info.descripcion"
+            v-model="data.description"
             :extensions="extensions"
             :spellcheck="false"
             :readonly="true"
@@ -237,73 +229,15 @@
           </li>
         </ul>
       </div>
-      <div class="item-content opcenvio" v-if="focusbtn3">
-        <div class="deliverys section" v-if="this.envios.envio_metodo">
-          <div class="content">
-            <h3 class="title-section">
-              {{ $t('productdetail_opinionesEnvio') }}
-            </h3>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'precio_ciudad'"
-            class="wrapper-method"
-          >
-            <h4 class="capitalize">
-              • {{ this.envios.envio_metodo.replace('_', ' por ') }}
-            </h4>
-            <p class="description-method">
-              {{ $t('productdetail_opinionesEnvioMsg1') }}
-            </p>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'tarifa_plana'"
-            class="wrapper-method"
-          >
-            <h4 class="capitalize">
-              {{ this.envios.envio_metodo.replace('_', ' ') }}
-            </h4>
-            <p class="description-method">
-              {{ $t('productdetail_opinionesEnvioMsg2') }}
-            </p>
-            <p class="price">
-              {{ $t('cart_precio') }}
-              {{
-                this.envios.valor
-                  | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
-                  )
-              }}
-            </p>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'precio'"
-            class="wrapper-method"
-          >
-            <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
-            <p class="description-method">
-              {{ $t('productdetail_precioTotalCompraMsg') }}
-            </p>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'gratis'"
-            class="wrapper-method"
-          >
-            <h4>{{ $t('productdetail_gratis') }}</h4>
-            <p class="description-method">
-              {{ $t('productdetail_gratisMsg') }}
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 <script>
 import extensions from '../../../mixins/elemenTiptap.vue'
 import currency from '../../../mixins/formatCurrent'
+
 export default {
-  mixins: [currency, extensions],
+  mixins: [extensions, currency],
   props: {
     dataStore: Object,
     data: {},
@@ -325,10 +259,7 @@ export default {
       return this.dataStore.medios_pago
     },
     activeClass() {
-      if (
-        this.data.info.descripcion == '' ||
-        this.data.info.descripcion == null
-      ) {
+      if (this.data.description == '' || this.data.description == null) {
         return true
       } else {
         return false
@@ -442,50 +373,81 @@ export default {
 .editor >>> .el-popper.el-tiptap-image-popper {
   display: none;
 }
-.tab {
-  @apply w-auto flex flex-col justify-center items-center cursor-pointer;
+.content-tab {
+  border-bottom: 1px solid #ededed;
+  @apply w-full flex flex-col justify-center items-center mt-24;
 }
-
+.head-content {
+  border-bottom: 1px solid #ededed;
+  @apply w-full flex flex-row justify-start items-start;
+}
+.tab {
+  @apply w-auto flex flex-col justify-center items-center px-16 cursor-pointer;
+}
+.show-select-active {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-bottom: 2px solid #000;
+}
+.tittle {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  color: #000;
+  height: 40px;
+  font-size: 15px;
+  font-weight: 800;
+  /* line-height: 30px; */
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  @apply flex justify-center items-center;
+}
 .item-content {
-  @apply w-full flex flex-col justify-start items-start pb-4;
+  @apply w-full flex flex-col justify-start items-start pb-16;
 }
 
 .content_product_description {
-  color: var(--color_subtext);
+  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  color: #333333;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.42857143;
-  font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-col justify-center items-start;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 h3 {
-  color: var(--color_text);
+  color: #2c2930;
   font-size: 15px;
   font-weight: 600;
   text-transform: uppercase;
   align-self: flex-start;
-  font-family: var(--font-style-1) !important;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
 }
 h4 {
-  font-family: var(--font-style-1) !important;
-  color: var(--color_text);
+  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  color: #2c2930;
   font-size: 15px;
   font-weight: 600;
   line-height: 1.42857143;
-  @apply w-full flex flex-col justify-center items-start mb-5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 5px;
 }
 li p {
-  font-family: var(--font-style-1) !important;
-  color: var(--color_subtext);
+  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  color: #333;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
   margin-bottom: 15px;
 }
-.description-method,
-.price {
-  font-family: var(--font-style-1) !important;
-  color: var(--color_subtext);
+.description-method {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  color: #333;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
@@ -495,76 +457,5 @@ img {
   max-width: 300px;
   width: 30%;
   margin-top: 15px;
-}
-@screen sm {
-  .content-opt-tab {
-    @apply w-full flex flex-col justify-center items-center;
-  }
-  .content-tab {
-    border-color: var(--border);
-    @apply w-full flex flex-col justify-center items-center mt-6 border p-20;
-  }
-  .head-content {
-    @apply w-full grid grid-cols-1 gap-2 justify-center items-center;
-  }
-  .tittle {
-    color: var(--color_subtext);
-    font-size: 14px;
-    background-color: transparent;
-    font-family: var(--font-style-1) !important;
-    @apply w-full h-40 flex justify-center items-center font-normal uppercase transition-all ease-in duration-0.2;
-  }
-  .show-select-active {
-    background-color: var(--color_gb_tabs);
-  }
-  .show-select-active .tittle {
-    color: var(--color_text_tabs);
-  }
-}
-@media (min-width: 425px) {
-  .head-content {
-    @apply grid grid-cols-3 mb-40;
-  }
-  .tittle {
-    font-size: 12px;
-    @apply text-center;
-  }
-}
-@screen md {
-  .content-opt-tab {
-    @apply flex flex-col justify-start items-start mt-0;
-  }
-  .head-content {
-    @apply w-full flex flex-row justify-start items-start mb-0;
-    border-bottom: 1px solid transparent;
-  }
-  .head-content {
-    @apply w-full flex flex-row justify-start items-start mb-0 gap-0;
-  }
-  .tab {
-    @apply w-full flex justify-start items-center;
-  }
-  .content-tab {
-    border-color: var(--border);
-    @apply w-full flex flex-row justify-start items-start mt-0 border transition-all ease-in duration-0.2;
-  }
-  .tittle {
-    font-size: 14px;
-    @apply w-full h-50 text-center justify-center items-center;
-  }
-  .show-select-active {
-    background-color: var(--color_gb_tabs);
-  }
-  .show-select-active .tittle {
-    color: var(--color_text_tabs);
-  }
-  .content-tab {
-    @apply p-40;
-  }
-}
-@screen lg {
-  .head-content {
-    @apply w-6/0;
-  }
 }
 </style>

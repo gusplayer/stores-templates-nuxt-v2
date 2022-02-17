@@ -2,9 +2,9 @@
   <div class="content-acordion">
     <button class="accordion">{{ $t('productdetail_description') }}</button>
     <div class="panel">
-      <div class="editor" v-if="data.info.descripcion">
+      <div class="editor" v-if="data.description">
         <el-tiptap
-          v-model="data.info.descripcion"
+          v-model="data.description"
           :extensions="extensions"
           :spellcheck="false"
           :readonly="true"
@@ -210,53 +210,6 @@
         </li>
       </ul>
     </div>
-    <button class="accordion">{{ $t('productdetail_opinionesEnvio') }}</button>
-    <div class="deliverys section panel" v-if="this.envios.envio_metodo">
-      <div class="content">
-        <h3 class="title-section">
-          {{ $t('productdetail_opinionesEnvio') }}
-        </h3>
-      </div>
-      <div
-        v-if="this.envios.envio_metodo === 'precio_ciudad'"
-        class="wrapper-method"
-      >
-        <h4 class="capitalize">
-          • {{ this.envios.envio_metodo.replace('_', ' por ') }}
-        </h4>
-        <p class="description-method">
-          {{ $t('productdetail_opinionesEnvioMsg1') }}
-        </p>
-      </div>
-      <div
-        v-if="this.envios.envio_metodo === 'tarifa_plana'"
-        class="wrapper-method"
-      >
-        <h4 class="capitalize">
-          {{ this.envios.envio_metodo.replace('_', ' ') }}
-        </h4>
-        <p class="description-method">
-          {{ $t('productdetail_opinionesEnvioMsg2') }}
-        </p>
-        <p class="price">
-          {{ $t('cart_precio') }}
-          {{
-            this.envios.valor
-              | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
-          }}
-        </p>
-      </div>
-      <div v-if="this.envios.envio_metodo === 'precio'" class="wrapper-method">
-        <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
-        <p class="description-method">
-          {{ $t('productdetail_precioTotalCompraMsg') }}
-        </p>
-      </div>
-      <div v-if="this.envios.envio_metodo === 'gratis'" class="wrapper-method">
-        <h4>{{ $t('productdetail_gratis') }}</h4>
-        <p class="description-method">{{ $t('productdetail_gratisMsg') }}</p>
-      </div>
-    </div>
   </div>
 </template>
 <script>
@@ -295,10 +248,7 @@ export default {
       return this.dataStore.medios_pago
     },
     activeClass() {
-      if (
-        this.data.info.descripcion == '' ||
-        this.data.info.descripcion == null
-      ) {
+      if (this.data.description == '' || this.data.description == null) {
         return true
       } else {
         return false

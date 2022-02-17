@@ -79,6 +79,17 @@
                   <span class="alerta"> {{ $t('cart_ultimaUnidad') }}</span>
                 </div>
               </div>
+              <div
+                v-if="data.stock.product.warranty"
+                class="content_buy_action"
+              >
+                <p class="text-unidades">
+                  {{ $t('productdetail_garantia') }}
+                </p>
+                <span class="text-garantia">{{
+                  data.stock.product.warranty
+                }}</span>
+              </div>
               <div class="item-info-product">
                 <div class="content-button">
                   <button
@@ -114,6 +125,14 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="features">
+          <ko-description
+            :dataStore="dataStore"
+            :data="data.stock.product"
+          ></ko-description>
         </div>
       </div>
       <div class="responsive-purchase">
@@ -159,6 +178,7 @@
 <script>
 import axios from 'axios'
 import productSlide from './_productdetails/productSlideHoko.vue'
+import koDescription from './_productdetails/descriptionProduct-hoko.vue'
 export default {
   name: 'Ko-ProductDetail-1',
   props: {
@@ -171,6 +191,7 @@ export default {
   },
   components: {
     productSlide,
+    koDescription,
   },
   mounted() {
     this.asyncauthToken()
@@ -478,8 +499,15 @@ export default {
   font-weight: bold;
   /* color: var(--color_subtext); */
   color: rgba(21, 20, 57, 0.541);
-
   margin-top: 5px;
+}
+.text-garantia {
+  font-size: 14px;
+  font-weight: bold;
+  /* color: var(--color_text); */
+  color: #000000;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 .item-info-product {
   margin-top: 10px;
@@ -627,6 +655,12 @@ export default {
   /* color: var(--color_text); */
   color: #000000;
 }
+.features {
+  width: 100%;
+  display: flex;
+  /* border-top: 1px solid var(--color_border); */
+  border-top: 1px solid rgba(127, 127, 139, 0.342);
+}
 .responsive-purchase {
   display: none;
 }
@@ -648,6 +682,11 @@ export default {
   text-align: center;
   padding: 5px 5px;
   text-transform: capitalize;
+}
+.content_buy_action {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
 }
 @media (max-width: 1250px) {
   .photo_main {
@@ -706,6 +745,9 @@ export default {
   }
 }
 @media (max-width: 725px) {
+  .features {
+    border-top: none;
+  }
   .container-productDetail {
     padding: 0px;
     align-items: center;

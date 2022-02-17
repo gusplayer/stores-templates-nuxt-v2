@@ -269,6 +269,12 @@ export default {
     productdetail_Consignacionnequi: 'Pago con Nequi',
     productdetail_ConsignacionnequiMsg: 'Transferencia a una cuenta de Nequi.',
     productdetail_Consignacionwompi: 'Pago con Wompi',
+    text_pago_WePay4U:
+      'Con la tecnología de Wepay4U hemos integrado la pasarela de pagos SafetyPay que permite recibir pagos en todo el país',
+    text_pago_flowInfo:
+      'Flow es una plataforma de pagos online donde podrás pagar y recibir pagos de forma rápida y segura mediante:',
+    text_pago_Tucompra:
+      'Son la nueva era de pagos en Latinoamérica, crean soluciones de recaudo modernas, eficientes, seguras y rápidas, totalmente competentes para acelerar tu negocio y abren nuevos nichos de mercado, gracias a las nuevas tecnologías. Tu Compra, Tu aliado seguro en el recaudo.',
     //wa
     productdetail_solicitarInfo: 'Solicitar información',
     productdetail_cotizar: 'Cotizar',
@@ -542,6 +548,12 @@ export default {
     productdetail_Consignacionnequi: 'Paying with Nequi',
     productdetail_ConsignacionnequiMsg: 'Transfer to a Nequi account.',
     productdetail_Consignacionwompi: 'Paying with Wompi',
+    text_pago_WePay4U:
+      'With Wepay4U´s technology we have integrated the SafetyPay payment gateway that allows receiving payments nationwide.',
+    text_pago_flowInfo:
+      'Flow is an online payment platform where you can pay and receive payments quickly and securely using:',
+    text_pago_Tucompra:
+      'They are the new era of payments in Latin America, creating modern, efficient, secure and fast collection solutions, fully competent to accelerate your business and open new market niches, thanks to new technologies. Tu Compra, Your secure partner in the collection.',
     productdetail_solicitarInfo: 'Request information',
     productdetail_cotizar: 'Quote',
     productdetail_productoAgotado: 'Product sold out',
@@ -815,6 +827,12 @@ export default {
     productdetail_Consignacionnequi: 'Pagamento com Nequi',
     productdetail_ConsignacionnequiMsg: 'Transferência para uma conta Nequi.',
     productdetail_Consignacionwompi: 'Pagamento com Wompi',
+    text_pago_WePay4U:
+      'Com a tecnologia da Wepay4U integramos o gateway de pagamento SafetyPay que permite receber pagamentos em todo o país.',
+    text_pago_flowInfo:
+      'Flow é uma plataforma de pagamento on-line onde você pode pagar e receber pagamentos de forma rápida e segura:',
+    text_pago_Tucompra:
+      'Eles são a nova era de pagamentos na América Latina, criando soluções modernas, eficientes, seguras e rápidas de cobrança, totalmente competentes para acelerar seus negócios e abrir novos nichos de mercado, graças às novas tecnologias. Tu Compra, seu parceiro seguro na cobrança.',
     productdetail_solicitarInfo: 'Solicitar informações',
     productdetail_cotizar: 'Citação',
     productdetail_productoAgotado: 'Produto esgotado',
@@ -1089,6 +1107,12 @@ export default {
     productdetail_Consignacionnequi: 'Paiement avec Nequi',
     productdetail_ConsignacionnequiMsg: 'Virement sur un compte Nequi.',
     productdetail_Consignacionwompi: 'Paiement avec Wompi',
+    text_pago_WePay4U:
+      'Avec la technologie de Wepay4U, nous avons intégré la passerelle de paiement SafetyPay qui permet de recevoir des paiements dans tout le pays.',
+    text_pago_flowInfo:
+      'Flow est une plateforme de paiement en ligne où vous pouvez payer et recevoir des paiements rapidement et en toute sécurité en utilisant',
+    text_pago_Tucompra:
+      ' Ils sont la nouvelle ère des paiements en Amérique latine, créant des solutions de recouvrement modernes, efficaces, sécurisées et rapides, entièrement compétentes pour accélérer votre activité et ouvrir de nouvelles niches de marché, grâce aux nouvelles technologies. Tu Compra, Votre partenaire sûr dans le recouvrement.',
     productdetail_solicitarInfo: 'RDemander des informations',
     productdetail_cotizar: 'Quote',
     productdetail_productoAgotado: 'Produit épuisé',
