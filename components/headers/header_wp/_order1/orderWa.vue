@@ -810,6 +810,7 @@ export default {
         tienda: {
           id: this.$store.state.tienda.id_tienda,
         },
+        canal: 'KOMERCIA',
       }
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {

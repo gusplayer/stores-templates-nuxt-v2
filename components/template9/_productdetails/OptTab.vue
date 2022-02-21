@@ -335,6 +335,7 @@ export default {
       }
     },
     envios() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },

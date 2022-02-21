@@ -308,6 +308,7 @@ export default {
         tienda: {
           id: this.$store.state.tienda.id_tienda,
         },
+        canal: 'HOKO',
       }
       json = JSON.stringify(json)
       if (json) {
