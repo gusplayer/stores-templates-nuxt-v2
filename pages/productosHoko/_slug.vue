@@ -5,31 +5,23 @@
 </template>
 
 <script>
-import K05ProductList from '../../components/template6/Ko6-ProductList-2'
-import K07ProductList from '../../components/template7/Ko-ProductListFilter'
-import K09ProductList from '../../components/template9/Ko-ProductListFilter'
-import K10ProductList from '../../components/template10/Ko-ProductListFilter'
-import K11ProductList from '../../components/template11/ko-ProductListFilter'
+import Ko5ProductDetailHoko from '../../components/template5/Ko-ProductDetailHoko-1.vue'
+import Ko9ProductDetailhoko from '../../components/template9/Ko-ProductDetailHoko.vue'
+import Ko11ProductDetailHoko from '../../components/template11/ko-ProductDetailHoko'
+import KoNodisponibleHoko from '../../components/Hoko/Ko-nodisponible.vue'
 
 export default {
   components: {
-    K05ProductList,
-    K07ProductList,
-    K09ProductList,
-    K10ProductList,
-    K11ProductList,
+    Ko5ProductDetailHoko,
+    Ko9ProductDetailhoko,
+    Ko11ProductDetailHoko,
+    KoNodisponibleHoko,
   },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
     settingBase() {
       return this.$store.state.settingBase
     },
@@ -43,29 +35,31 @@ export default {
       let productListComponent = ''
       switch (this.template) {
         case 3:
-          productListComponent = 'K05ProductList'
+          productListComponent = 'Ko5ProductDetailHoko'
           break
         case 5:
-          productListComponent = 'K05ProductList'
+          productListComponent = 'Ko5ProductDetailHoko'
           break
         case 6:
-          productListComponent = 'K05ProductList'
+          productListComponent = 'KoNodisponibleHoko'
           break
         case 7:
-          productListComponent = 'K07ProductList'
+          productListComponent = 'KoNodisponibleHoko'
           break
         case 9:
-          productListComponent = 'K09ProductList'
-
+          productListComponent = 'Ko9ProductDetailhoko'
           break
         case 10:
-          productListComponent = 'K10ProductList'
+          productListComponent = 'KoNodisponibleHoko'
           break
         case 11:
-          productListComponent = 'K11ProductList'
+          productListComponent = 'Ko11ProductDetailHoko'
           break
       }
       return productListComponent
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
     },
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
@@ -79,10 +73,28 @@ export default {
     settingByTemplate11() {
       return this.$store.state.settingByTemplate11
     },
+    dataStore() {
+      return this.$store.state.dataStore
+    },
+    fullProducts() {
+      return this.$store.getters['products/filterProducts']
+    },
+    whatsapp() {
+      return this.dataStore.tienda.whatsapp
+    },
+    envios() {
+      return this.dataStore.medios_envio
+    },
+    integracioneStore() {
+      return this.$store.state.analytics_tagmanager
+    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
+        productsData: this.fullProducts,
+        whatsapp: this.whatsapp,
+        envios: this.envios,
+        facebooPixel: this.integracioneStore,
         settingByTemplate:
           this.settingByTemplate &&
           this.settingByTemplate.settings &&
@@ -97,10 +109,10 @@ export default {
                   this.settingByTemplate7.settingGeneral
                     ? this.settingByTemplate7.settingGeneral
                     : null,
-                settingK07ProductList:
+                settingK07DetailsProduct:
                   this.settingByTemplate7 &&
-                  this.settingByTemplate7.productListFilter
-                    ? this.settingByTemplate7.productListFilter
+                  this.settingByTemplate7.detailsProduct
+                    ? this.settingByTemplate7.detailsProduct
                     : null,
                 settingKProdutCard:
                   this.settingByTemplate7 && this.settingByTemplate7.card
@@ -116,10 +128,10 @@ export default {
                   this.settingByTemplate9 && this.settingByTemplate9.cardProduct
                     ? this.settingByTemplate9.cardProduct
                     : null,
-                productListFilter:
+                detailsProduct:
                   this.settingByTemplate9 &&
-                  this.settingByTemplate9.productListFilter
-                    ? this.settingByTemplate9.productListFilter
+                  this.settingByTemplate9.detailsProduct
+                    ? this.settingByTemplate9.detailsProduct
                     : null,
                 setting9General:
                   this.settingByTemplate9 &&
@@ -138,12 +150,12 @@ export default {
                   this.settingByTemplate10.cardProduct
                     ? this.settingByTemplate10.cardProduct
                     : null,
-                productListFilter:
+                detailsProduct:
                   this.settingByTemplate10 &&
-                  this.settingByTemplate10.productListFilter
-                    ? this.settingByTemplate10.productListFilter
+                  this.settingByTemplate10.detailsProduct
+                    ? this.settingByTemplate10.detailsProduct
                     : null,
-                setting9General:
+                setting10General:
                   this.settingByTemplate10 &&
                   this.settingByTemplate10.settingGeneral
                     ? this.settingByTemplate10.settingGeneral
@@ -154,10 +166,10 @@ export default {
         settingByTemplate11: this.settingByTemplate11
           ? [
               {
-                productList:
+                detailsProduct:
                   this.settingByTemplate11 &&
-                  this.settingByTemplate11.productList
-                    ? this.settingByTemplate11.productList
+                  this.settingByTemplate11.detailsProduct
+                    ? this.settingByTemplate11.detailsProduct
                     : null,
                 cardProduct:
                   this.settingByTemplate11 &&
@@ -204,3 +216,5 @@ export default {
   },
 }
 </script>
+
+<style></style>

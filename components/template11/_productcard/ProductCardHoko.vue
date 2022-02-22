@@ -13,7 +13,7 @@
     ]"
   >
     <div class="container">
-      <router-link :to="{ path: `/productos/` + product.id }">
+      <router-link :to="{ path: `/productosHoko/` + product.id }">
         <client-only>
           <img
             v-lazy="product.images[0]"
@@ -24,7 +24,7 @@
         <div class="image_overlay"></div>
       </router-link>
 
-      <router-link :to="{ path: `/productos/` + product.id }">
+      <router-link :to="{ path: `/productosHoko/` + product.id }">
         <div class="overlay-bottom">
           <div class="cart-Shop">
             <div class="text-cart">
@@ -37,7 +37,7 @@
       </router-link>
     </div>
     <div class="datos-producto">
-      <router-link :to="{ path: `/productos/` + product.id }">
+      <router-link :to="{ path: `/productosHoko/` + product.id }">
         <div class="tittle tittle-xml">
           <p class="card-title" v-if="this.product.name >= 90">
             {{ `${this.product.name.slice(0, 90)}...` }}

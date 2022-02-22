@@ -25,22 +25,20 @@
       v-if="
         settingByTemplate11 &&
         settingByTemplate11.trending &&
-        settingByTemplate11.trending.visible == true &&
+        settingByTemplate11.trending.visible == 'true' &&
         dataHoko &&
         dataHoko.statehoko == 1
       "
     />
-    <div v-else>
-      <Ktrending
-        id="kTredingX"
-        v-bind="componentsProps"
-        v-if="
-          settingByTemplate11 &&
-          settingByTemplate11.trending &&
-          settingByTemplate11.trending.visible == true
-        "
-      />
-    </div>
+    <Ktrending
+      id="kTredingX"
+      v-bind="componentsProps"
+      v-if="
+        settingByTemplate11 &&
+        settingByTemplate11.trending &&
+        settingByTemplate11.trending.visible == 'true'
+      "
+    />
     <Kparallax
       id="kParallaxX"
       v-bind="componentsProps"

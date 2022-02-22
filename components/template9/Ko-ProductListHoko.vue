@@ -35,7 +35,7 @@
               />
             </div>
           </div>
-          <nuxt-link to="/productos" class="cont-product">
+          <nuxt-link to="/productosHoko" class="cont-product">
             <button class="btn-products">
               {{ $t('home_allproducts') }}
             </button>

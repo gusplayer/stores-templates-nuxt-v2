@@ -45,7 +45,7 @@
       "
     />
     <KproductlistHoko
-      id="KproductlistX"
+      id="KproductlistHokoX"
       v-bind="componentsProps"
       v-if="
         settingByTemplate9 &&
@@ -55,17 +55,15 @@
         dataHoko.statehoko == 1
       "
     />
-    <div v-else>
-      <Kproductlist
-        id="KproductlistX"
-        v-bind="componentsProps"
-        v-if="
-          settingByTemplate9 &&
-          settingByTemplate9.productList &&
-          settingByTemplate9.productList.visible == true
-        "
-      />
-    </div>
+    <Kproductlist
+      id="KproductlistX"
+      v-bind="componentsProps"
+      v-if="
+        settingByTemplate9 &&
+        settingByTemplate9.productList &&
+        settingByTemplate9.productList.visible == true
+      "
+    />
     <Kblog
       id="KblogX"
       v-bind="componentsProps"
@@ -101,7 +99,7 @@
 import Kbanner from '../../components/template9/ko-carousel'
 import Koffers from '../../components/template9/ko-offers'
 import Kproductlist from '../../components/template9/Ko-ProductList'
-import KproductlistHoko from '../../components/template9/Ko-ProductListHoko.vue'
+import KproductlistHoko from '../../components/template9/Ko-slider-hoko.vue'
 import Kblog from '../../components/template9/ko-blog'
 import KWrapper from '../../components/template9/Ko-wrapper'
 import KNews from '../../components/template9/Ko-Newsletter'

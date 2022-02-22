@@ -1,17 +1,28 @@
 <template>
-  <div class="wrapper-productlist">
+  <div
+    class="wrapper-productlist"
+    :style="[
+      settingByTemplate,
+      {
+        '--font-style':
+          this.settingByTemplate && this.settingByTemplate.tipo_letra
+            ? this.settingByTemplate.tipo_letra
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="container-productlist">
-      <div class="content-title"></div>
+      <div class="content-title" />
       <br />
       <div class="content-items-categorias">
         <div class="content-items-categorias-text">
           <p class="text-categorias">
-            {{ $t('home_catalogo') }}
+            {{ $t('home_catalogo_hoko') }}
           </p>
         </div>
       </div>
       <div class="content-item">
-        <div class="content-item-productos">
+        <div class="content-item-productos" v-if="producthoko">
           <div class="grid-products">
             <div
               v-for="product in producthoko.data"
@@ -38,6 +49,9 @@
             </div>
           </div>
         </div>
+        <!-- <div v-else class="content-products-empty">
+          <p>{{ $t('home_msgCatalogo') }}</p>
+        </div> -->
       </div>
     </div>
   </div>
@@ -52,6 +66,7 @@ export default {
   props: {
     dataStore: Object,
     fullProducts: {},
+    settingByTemplate: Object,
   },
   name: 'Ko-ProductListHoko-1',
   mounted() {

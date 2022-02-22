@@ -11,7 +11,7 @@
         },
       ]"
     >
-      <router-link :to="{ path: `/productos/` + product.id }">
+      <router-link :to="{ path: `/productosHoko/` + product.id }">
         <client-only>
           <img
             v-lazy="product.images[0]"
@@ -22,7 +22,7 @@
         <div class="image_overlay"></div>
       </router-link>
 
-      <router-link :to="{ path: `/productos/` + product.id }">
+      <router-link :to="{ path: `/productosHoko/` + product.id }">
         <div class="overlay-bottom">
           <div class="cart-Shop">
             <div class="text-cart">
@@ -48,7 +48,7 @@
       <!-- <div class="categoria" v-if="this.product.model_type">
         {{ this.product.model_type }}
       </div> -->
-      <router-link :to="{ path: `/productos/` + product.id }">
+      <router-link :to="{ path: `/productosHoko/` + product.id }">
         <div class="tittle tittle-xml">
           <p class="card-title" v-if="this.product.name.length >= 90">
             {{ `${this.product.name.slice(0, 90)}...` }}
@@ -128,10 +128,13 @@ export default {
 <style scoped>
 .product-image {
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   overflow: hidden;
+  min-height: 444px;
+  max-height: 444px;
 }
 .producto {
+  height: 100%;
   background: var(--background_color_card);
   @apply w-full flex flex-col justify-center items-center cursor-pointer;
 }
@@ -268,6 +271,24 @@ export default {
     display: none;
   }
 }
+@media (max-width: 1366px) {
+  .product-image {
+    min-height: 360px;
+    max-height: 360px;
+  }
+}
+@media (max-width: 1280px) {
+  .product-image {
+    min-height: 320px;
+    max-height: 320px;
+  }
+}
+@media (max-width: 1024px) {
+  .product-image {
+    min-height: 320px;
+    max-height: 320px;
+  }
+}
 @media (max-width: 400px) {
   .tittle-xml {
     display: none;
@@ -277,6 +298,10 @@ export default {
   }
   .tittle-sm {
     display: initial;
+  }
+  .product-image {
+    min-height: 220px;
+    max-height: 220px;
   }
 }
 </style>

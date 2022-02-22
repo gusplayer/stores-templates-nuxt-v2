@@ -17,7 +17,7 @@
     <div class="container-productDetail" v-else>
       <div class="banner-detail">
         <div class="crumb">
-          <nuxt-link to="/productos">
+          <nuxt-link to="/productosHoko">
             <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
           </nuxt-link>
           <p class="separatorCrumb">/</p>
@@ -168,6 +168,7 @@
           :data="data.stock.product"
         ></OptionTab>
       </div>
+      <div class="mb-20"></div>
     </div>
   </div>
 </template>

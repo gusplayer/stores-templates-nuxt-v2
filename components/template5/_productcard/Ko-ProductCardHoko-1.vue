@@ -3,7 +3,7 @@
     <div class="container-card" id="product-card">
       <div class="wrapper">
         <router-link
-          :to="{ path: `/productos/` + product.id }"
+          :to="{ path: `/productosHoko/` + product.id }"
           class="wrapper-image"
         >
           <client-only>
@@ -36,7 +36,7 @@
             <div class="wrapper-btn-icon">
               <router-link
                 id="view_details"
-                :to="{ path: `/productos/` + product.id }"
+                :to="{ path: `/productosHoko/` + product.id }"
               >
                 <p>{{ $t('home_cardvermas') }}</p>
               </router-link>
@@ -47,7 +47,7 @@
       </div>
       <div class="wrapper-movil">
         <router-link
-          :to="{ path: `/productos/` + product.slug }"
+          :to="{ path: `/productosHoko/` + product.slug }"
           class="wrapper-image"
         >
           <img
@@ -58,7 +58,7 @@
         </router-link>
         <div class="content-card-items">
           <router-link
-            :to="{ path: `/productos/` + product.id }"
+            :to="{ path: `/productosHoko/` + product.id }"
             class="content-name-product"
           >
             <p class="card-title" v-if="this.product.name >= 25">
@@ -69,7 +69,7 @@
             </p>
           </router-link>
           <div class="content-text-price" v-if="this.product.price">
-            <router-link :to="{ path: `/productos/` + product.id }">
+            <router-link :to="{ path: `/productosHoko/` + product.id }">
               <p class="text-price">
                 {{ this.product.price | currency }}
               </p>
@@ -129,7 +129,8 @@ export default {
   justify-content: center;
   overflow: hidden;
   width: 100%;
-  min-height: 250px;
+  height: 294px;
+  min-height: 294px;
   max-height: 300px;
 }
 .product-image {
@@ -475,7 +476,7 @@ export default {
 }
 @media (max-width: 450px) {
   .notproduct-image-res {
-    height: 170px;
+    height: 175px;
     max-height: 170px;
   }
   .container-card {
@@ -483,7 +484,8 @@ export default {
     max-width: 200px;
   }
   .wrapper-image {
-    min-height: 170px;
+    min-height: 120px;
+    height: 175px;
   }
 }
 </style>

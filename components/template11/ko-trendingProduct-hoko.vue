@@ -15,7 +15,7 @@
     <div class="producto-items-content">
       <div class="product-text">
         <div class="product-tittle">
-          <p class="tittle">{{ settingKtrending.title }}</p>
+          <p class="tittle">{{ $t('home_productos_hoko') }}</p>
         </div>
       </div>
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="btn-products">
-          <nuxt-link to="/productos">
+          <nuxt-link to="/productosHoko">
             <button class="btn">Ver todos los productos</button>
           </nuxt-link>
         </div>

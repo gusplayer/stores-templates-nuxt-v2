@@ -6,24 +6,18 @@
 
 <script>
 import Ko5ProductDetail from '../../components/template5/Ko-ProductDetail-1'
-import Ko5ProductDetailHoko from '../../components/template5/Ko-ProductDetailHoko-1.vue'
 import Ko7ProductDetail from '../../components/template7/Ko-ProductDetail'
 import Ko9ProductDetail from '../../components/template9/Ko-ProductDetail'
-import Ko9ProductDetailhoko from '../../components/template9/Ko-ProductDetailHoko.vue'
 import Ko10ProductDetail from '../../components/template10/Ko-ProductDetail'
 import Ko11ProductDetail from '../../components/template11/ko-ProductDetail'
-import Ko11ProductDetailHoko from '../../components/template11/ko-ProductDetailHoko'
 
 export default {
   components: {
     Ko5ProductDetail,
-    Ko5ProductDetailHoko,
     Ko7ProductDetail,
     Ko9ProductDetail,
-    Ko9ProductDetailhoko,
     Ko10ProductDetail,
     Ko11ProductDetail,
-    Ko11ProductDetailHoko,
   },
   mounted() {
     window.parent.postMessage('message', '*')
@@ -43,18 +37,10 @@ export default {
       let productListComponent = ''
       switch (this.template) {
         case 3:
-          if (this.dataHoko && this.dataHoko.statehoko == true) {
-            productListComponent = 'Ko5ProductDetailHoko'
-          } else {
-            productListComponent = 'Ko5ProductDetail'
-          }
+          productListComponent = 'Ko5ProductDetail'
           break
         case 5:
-          if (this.dataHoko && this.dataHoko.statehoko == true) {
-            productListComponent = 'Ko5ProductDetailHoko'
-          } else {
-            productListComponent = 'Ko5ProductDetail'
-          }
+          productListComponent = 'Ko5ProductDetail'
           break
         case 6:
           productListComponent = 'Ko5ProductDetail'
@@ -63,33 +49,26 @@ export default {
           productListComponent = 'Ko7ProductDetail'
           break
         case 9:
-          if (this.dataHoko && this.dataHoko.statehoko == true) {
-            productListComponent = 'Ko9ProductDetailhoko'
-          } else {
-            productListComponent = 'Ko9ProductDetail'
-          }
+          productListComponent = 'Ko9ProductDetail'
           break
         case 10:
           productListComponent = 'Ko10ProductDetail'
           break
         case 11:
-          if (this.dataHoko && this.dataHoko.statehoko == true) {
-            productListComponent = 'Ko11ProductDetailHoko'
-          } else {
-            productListComponent = 'Ko11ProductDetail'
-          }
+          productListComponent = 'Ko11ProductDetail'
           break
       }
       return productListComponent
     },
-    dataHoko() {
-      return this.$store.state.dataHoko
-    },
+
     settingByTemplate7() {
       return this.$store.state.settingByTemplate7
     },
     settingByTemplate9() {
       return this.$store.state.settingByTemplate9
+    },
+    settingByTemplate10() {
+      return this.$store.state.settingByTemplate10
     },
     settingByTemplate11() {
       return this.$store.state.settingByTemplate11
@@ -162,6 +141,28 @@ export default {
               },
             ]
           : null,
+
+        settingByTemplate10: this.settingByTemplate10
+          ? [
+              {
+                cardProduct:
+                  this.settingByTemplate10 &&
+                  this.settingByTemplate10.cardProduct
+                    ? this.settingByTemplate10.cardProduct
+                    : null,
+                detailsProduct:
+                  this.settingByTemplate10 &&
+                  this.settingByTemplate10.detailsProduct
+                    ? this.settingByTemplate10.detailsProduct
+                    : null,
+                setting10General:
+                  this.settingByTemplate10 &&
+                  this.settingByTemplate10.settingGeneral
+                    ? this.settingByTemplate10.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
         settingByTemplate11: this.settingByTemplate11
           ? [
               {
@@ -202,6 +203,8 @@ export default {
             this.$store.commit('SET_CURRENTSETTING07', e.data)
           } else if (e.data.template == 11) {
             this.$store.commit('SET_CURRENTSETTING11', e.data)
+          } else if (e.data.template == 10) {
+            this.$store.commit('SET_CURRENTSETTING10', e.data)
           }
         } else if (e && e.data && e.data.returnHome == true) {
           this.$router.push({

@@ -5,19 +5,17 @@
 </template>
 
 <script>
-import K05ProductList from '../../components/template6/Ko6-ProductList-2'
-import K07ProductList from '../../components/template7/Ko-ProductListFilter'
-import K09ProductList from '../../components/template9/Ko-ProductListFilter'
-import K10ProductList from '../../components/template10/Ko-ProductListFilter'
-import K11ProductList from '../../components/template11/ko-ProductListFilter'
+import K05ProductListHoko from '../../components/template5/Ko-ProductListHoko-1.vue'
+import K09ProductListHoko from '../../components/template9/Ko-ProductListFilterHoko.vue'
+import K11ProductListHoko from '../../components/template11/ko-ProductListFilterHoko.vue'
+import KoNodisponibleHoko from '../../components/Hoko/Ko-nodisponible.vue'
 
 export default {
   components: {
-    K05ProductList,
-    K07ProductList,
-    K09ProductList,
-    K10ProductList,
-    K11ProductList,
+    K05ProductListHoko,
+    K09ProductListHoko,
+    K11ProductListHoko,
+    KoNodisponibleHoko,
   },
   mounted() {
     window.parent.postMessage('message', '*')
@@ -43,26 +41,26 @@ export default {
       let productListComponent = ''
       switch (this.template) {
         case 3:
-          productListComponent = 'K05ProductList'
+          productListComponent = 'K05ProductListHoko'
           break
         case 5:
-          productListComponent = 'K05ProductList'
+          productListComponent = 'K05ProductListHoko'
           break
         case 6:
-          productListComponent = 'K05ProductList'
+          productListComponent = 'KoNodisponibleHoko'
           break
         case 7:
-          productListComponent = 'K07ProductList'
+          productListComponent = 'KoNodisponibleHoko'
           break
         case 9:
-          productListComponent = 'K09ProductList'
-
+          productListComponent = 'K09ProductListHoko'
+          break
           break
         case 10:
-          productListComponent = 'K10ProductList'
+          productListComponent = 'KoNodisponibleHoko'
           break
         case 11:
-          productListComponent = 'K11ProductList'
+          productListComponent = 'K11ProductListHoko'
           break
       }
       return productListComponent

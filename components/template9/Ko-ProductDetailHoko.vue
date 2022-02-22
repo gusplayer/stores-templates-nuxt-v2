@@ -22,7 +22,7 @@
       ]"
     >
       <div class="crumb">
-        <nuxt-link to="/">
+        <nuxt-link to="/productosHoko">
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
         </nuxt-link>
         <p class="txt-crumb">/</p>

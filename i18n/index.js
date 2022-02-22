@@ -186,6 +186,8 @@ export default {
     // General
     home_destacados: 'Destacados',
     home_catalogo: 'Catálogo',
+    home_catalogo_hoko: 'Catálogo dropshipping',
+    home_productos_hoko: 'Productos dropshipping',
     home_msgCatalogo: 'No se encontraron productos relacionados.',
     home_cardAgotado: 'Agotado',
     home_cardGratis: 'Envío gratis!',
@@ -464,6 +466,8 @@ export default {
     // General
     home_destacados: 'Featured Products',
     home_catalogo: 'Catalog',
+    home_catalogo_hoko: 'Catalog dropshipping',
+    home_productos_hoko: 'Products dropshipping',
     home_msgCatalogo: 'No related products were found.',
     home_cardAgotado: 'Sold out',
     home_cardGratis: 'Free delivery!',
@@ -743,6 +747,8 @@ export default {
     // General
     home_destacados: 'Destacados',
     home_catalogo: 'Catálogo',
+    home_catalogo_hoko: 'Catálogo dropshipping',
+    home_productos_hoko: 'Produtos dropshipping',
     home_msgCatalogo: 'Nenhum produto relacionado foi encontrado',
     home_cardAgotado: 'Vendido',
     home_cardGratis: 'Entrega gratuita!',
@@ -1023,6 +1029,8 @@ export default {
     // General
     home_destacados: 'Produits en vedette',
     home_catalogo: 'Catalogue',
+    home_catalogo_hoko: 'Catalogue dropshipping',
+    home_productos_hoko: 'Produits  dropshipping',
     home_msgCatalogo: 'Aucun produit apparenté n´a été trouvé.',
     home_cardAgotado: 'Sold out',
     home_cardGratis: 'Livraison gratuite !',
