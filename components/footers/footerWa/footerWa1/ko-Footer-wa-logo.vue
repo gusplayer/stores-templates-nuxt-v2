@@ -24,7 +24,11 @@
       </div>
       <div
         class="under-footer"
-        v-if="dataStore.entidades.length && dataStore.entidades[0].id == 17"
+        v-if="
+          dataStore.entidades.length &&
+          dataStore.entidades[0].id == 17 &&
+          settingByTemplate.watermark == 0
+        "
       >
         <p>{{ $t('footer_desarrollado') }}</p>
         <a
@@ -41,21 +45,23 @@
           />
         </a>
       </div>
-      <div class="under-footer" v-else>
-        <p>{{ $t('footer_desarrollado') }}</p>
-        <a
-          href="https://komercia.co/"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <img
-            v-lazy="
-              `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
-            "
-            class="logo-wapi"
-            alt="Logo Img"
-          />
-        </a>
+      <div v-else>
+        <div class="under-footer" v-if="settingByTemplate.watermark == 0">
+          <p>{{ $t('footer_desarrollado') }}</p>
+          <a
+            href="https://komercia.co/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img
+              v-lazy="
+                `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
+              "
+              class="logo-wapi"
+              alt="Logo Img"
+            />
+          </a>
+        </div>
       </div>
     </div>
   </div>

@@ -71,6 +71,7 @@ export const state = () => ({
   settingByTemplate: '',
   settingByTemplate7: '',
   settingByTemplate9: '',
+  settingByTemplate10: '',
   settingByTemplate11: '',
   settingByTemplate12: '',
   category_producto_header: '',
@@ -172,6 +173,7 @@ export const state = () => ({
     mensaje_principal: '',
     pago_online: 1,
     tema: 1,
+    watermark: 0,
   },
   dataHoko: {},
   producthoko: [],
@@ -334,6 +336,11 @@ export const mutations = {
       }
     }
   },
+  SET_CURRENTSETTING10(state, value) {
+    if (value && value.data) {
+      state.settingByTemplate10 = value.data
+    }
+  },
   SET_CURRENTSETTING12(state, value) {
     if (value && value.data) {
       state.settingByTemplate12 = value.data
@@ -460,6 +467,9 @@ export const mutations = {
   },
   SET_SETTINGS_BY_TEMPLATE_9: (state, value) => {
     state.settingByTemplate9 = value
+  },
+  SET_SETTINGS_BY_TEMPLATE_10: (state, value) => {
+    state.settingByTemplate10 = value
   },
   SET_SETTINGS_BY_TEMPLATE_11: (state, value) => {
     state.settingByTemplate11 = value
@@ -627,6 +637,13 @@ export const actions = {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch('GET_SETTINGS_BY_TEMPLATE_9', state.dataStore.tienda)
           }
+        } else if (id.data.data.template == 10) {
+          if (state.dataStore && state.dataStore.tienda) {
+            await dispatch(
+              'GET_SETTINGS_BY_TEMPLATE_10',
+              state.dataStore.tienda
+            )
+          }
         } else if (id.data.data.template == 11) {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch(
@@ -705,6 +722,12 @@ export const actions = {
     )
     commit('SET_SETTINGS_BY_TEMPLATE_9', response.data.body)
   },
+  async GET_SETTINGS_BY_TEMPLATE_10({ commit }, store) {
+    const response = await axios.get(
+      `https://node.komercia.co/template10?id=${store.id_tienda}`
+    )
+    commit('SET_SETTINGS_BY_TEMPLATE_10', response.data.body)
+  },
   async GET_SETTINGS_BY_TEMPLATE_11({ commit }, store) {
     const response = await axios.get(
       `https://node.komercia.co/template11?id=${store.id_tienda}`
@@ -761,13 +784,6 @@ export const actions = {
           return prev.cantidad_productos - next.cantidad_productos
         })
       })
-  },
-  async GET_ARTICLES({ state, commit }, id) {
-    const response = await axios.get(
-      `${state.urlKomercia}/api/blogs/${id}?page=1`,
-      state.configAxios
-    )
-    commit('SET_ARTICLES', response.data.blogs.data)
   },
   async GET_ARTICLES({ state, commit }, id) {
     const response = await axios.get(

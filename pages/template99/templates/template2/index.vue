@@ -194,6 +194,10 @@ export default {
               this.moverseA('KListX')
               this.$store.commit('SET_OPENORDER', false)
               break
+            case 'footer':
+              this.moverseA('KfooterX')
+              this.$store.commit('SET_OPENORDER', false)
+              break
           }
         }
       }
