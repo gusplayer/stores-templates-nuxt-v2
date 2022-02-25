@@ -101,6 +101,8 @@ export default {
   width: 100%;
   object-fit: cover;
   overflow: hidden;
+  min-height: 373px;
+  max-height: 373px;
 }
 .producto {
   background: var(--background_color_1);
