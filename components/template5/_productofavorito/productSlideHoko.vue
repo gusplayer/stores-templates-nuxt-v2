@@ -82,7 +82,7 @@ export default {
             spaceBetween: 15,
           },
           375: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 20,
           },
           320: {

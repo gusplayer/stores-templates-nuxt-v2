@@ -61,7 +61,8 @@
       v-if="
         settingByTemplate9 &&
         settingByTemplate9.productList &&
-        settingByTemplate9.productList.visible == true
+        settingByTemplate9.productList.visible == true &&
+        this.fullProducts.length > 0
       "
     />
     <Kblog

@@ -34,16 +34,16 @@
             ></KoproductCard>
           </div>
         </div>
-        <div class="btn-products">
-          <nuxt-link to="/productos">
-            <button class="btn">Ver todos los productos</button>
-          </nuxt-link>
-        </div>
         <div
           v-if="this.fullProducts.length == 0"
           class="content-products-empty"
         >
           <p>{{ $t('home_msgCatalogo') }}</p>
+        </div>
+        <div class="btn-products">
+          <nuxt-link to="/productos">
+            <button class="btn">Ver todos los productos</button>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -141,6 +141,20 @@ export default {
 .product-tittle,
 .tittle {
   @apply flex flex-col justify-center items-center text-center;
+}
+.content-products-empty {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.content-products-empty p {
+  font-size: 18px;
+  opacity: 0.6;
+  font-weight: bold;
+  color: var(--color_subtext);
+  margin-bottom: 20px;
 }
 @screen sm {
   .producto-items-content {

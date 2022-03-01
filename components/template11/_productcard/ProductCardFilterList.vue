@@ -663,14 +663,14 @@ export default {
 .text-price {
   font-weight: var(--fontWeighPretitle);
   font-size: var(--fontSizePretitle);
-  color: var(---color_price);
+  color: var(--color_price);
   font-family: var(--font-style-1) !important;
   @apply pl-5 whitespace-nowrap;
 }
 .separator-price {
   font-family: var(--font-style-1) !important;
   font-size: var(--fontSizePretitle);
-  color: var(---color_price);
+  color: var(--color_price);
   @apply mb-10;
 }
 .text-free {

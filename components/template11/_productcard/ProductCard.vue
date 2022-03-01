@@ -621,13 +621,13 @@ export default {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-1) !important;
   font-size: var(--fontSizePretitle);
-  color: var(---color_price);
+  color: var(--color_price);
 }
 .text-price {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-1) !important;
   font-size: var(--fontSizePretitle);
-  color: var(---color_price);
+  color: var(--color_price);
   white-space: nowrap;
   font-weight: var(--fontWeighPretitle);
   line-height: 1.1;
@@ -636,7 +636,7 @@ export default {
 .text-price-promo {
   font-family: var(--font-style-1) !important;
   text-decoration: line-through;
-  color: var(---color_price);
+  color: var(--color_price);
   font-weight: 400;
   font-size: 13px;
 }

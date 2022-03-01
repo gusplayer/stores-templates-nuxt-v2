@@ -36,7 +36,8 @@
       v-if="
         settingByTemplate11 &&
         settingByTemplate11.trending &&
-        settingByTemplate11.trending.visible == true
+        settingByTemplate11.trending.visible == true &&
+        this.fullProducts.length > 0
       "
     />
     <Kparallax

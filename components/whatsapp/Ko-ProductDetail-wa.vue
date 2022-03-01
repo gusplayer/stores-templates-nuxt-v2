@@ -123,7 +123,10 @@
         </div>
       </div>
       <div class="content-description">
-        <div v-if="data.info.descripcion" class="wrapper-description">
+        <div
+          v-if="data.info.descripcion && data.info.descripcion.length > 7"
+          class="wrapper-description"
+        >
           <h3 class="text-variant">{{ $t('productdetail_description') }}</h3>
           <div class="editor content-text-desc" v-if="data.info.descripcion">
             <el-tiptap

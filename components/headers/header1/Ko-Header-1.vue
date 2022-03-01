@@ -31,13 +31,13 @@
               <div @click="openMenu(item.name)">
                 <nuxt-link
                   :to="item.path"
-                  v-if="item.path"
+                  v-if="item.path && item.state"
                   class="header-text-center"
                   >{{ $t(`${item.name}`) }}</nuxt-link
                 >
                 <nuxt-link
                   :to="item.href"
-                  v-else-if="item.href && listArticulos > 0"
+                  v-else-if="item.href && listArticulos > 0 && item.state"
                   class="header-text-center"
                   >{{ $t(`${item.name}`) }}</nuxt-link
                 >
@@ -198,6 +198,7 @@ export default {
     settingByTemplate: Object,
   },
   mounted() {
+    this.setHoko()
     this.toggle = true
     let domain = this.$route.fullPath
     let searchCategory = domain.slice(0, [11])
@@ -254,20 +255,29 @@ export default {
         {
           name: 'header_inicio',
           path: '/',
+          state: true,
         },
         {
           name: 'header_categorias',
           iconOpen: 'Flechadown-icon',
           iconClose: 'FlechaUp-icon',
           ref: 'categorias',
+          state: true,
+        },
+        {
+          name: 'header_productos_hoko',
+          path: '/productosHoko',
+          state: false,
         },
         {
           name: 'header_contacto',
           path: '/contacto',
+          state: true,
         },
         {
           name: 'header_blog',
           href: '/blog',
+          state: true,
         },
       ],
       add: true,
@@ -299,8 +309,18 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos.length
     },
+    dataHoko() {
+      return this.$store.state.dataHoko
+    },
   },
   methods: {
+    setHoko() {
+      if (this.dataHoko && this.dataHoko.statehoko == 1) {
+        this.secciones[2].state = true
+      } else {
+        this.secciones[2].state = false
+      }
+    },
     openSearch() {
       this.$store.commit('SET_OPENSEARCH', true)
     },
@@ -464,6 +484,9 @@ export default {
     },
   },
   watch: {
+    dataHoko() {
+      this.setHoko()
+    },
     'dataStore.tienda'() {
       this.links[0].link = this.dataStore.tienda.red_facebook
       this.links[1].link = this.dataStore.tienda.red_twitter

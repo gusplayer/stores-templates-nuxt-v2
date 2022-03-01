@@ -159,7 +159,7 @@ export default {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-1) !important;
   font-size: var(--fontSizePretitle);
-  color: var(---color_price);
+  color: var(--color_price);
   white-space: nowrap;
   font-weight: var(--fontWeighPretitle);
   line-height: 1.1;
