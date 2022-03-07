@@ -1,16 +1,23 @@
 <template>
-  <div class="product-content">
+  <div
+    class="product-content"
+    :style="[
+      settingGeneral,
+      trending,
+      {
+        '--font-style-1': settingGeneral.fount_1
+          ? settingGeneral.fount_1
+          : 'Roboto',
+      },
+    ]"
+  >
     <div class="producto-items-content">
       <div class="product-text">
         <div class="product-tittle">
-          <span class="tittle">Tendencias de esta semana</span>
+          <span class="tittle">{{ trending.title }}</span>
         </div>
         <div class="product-subtittle">
-          <span class="subtittle"
-            >Encuentre un brillante ideal que se adapte a sus gustos con nuestra
-            gran selección de lámparas de suspensión, de pared, de piso y de
-            mesa.</span
-          >
+          <span class="subtittle">{{ trending.description }}</span>
         </div>
       </div>
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
@@ -20,21 +27,24 @@
             :key="product.id"
             class="swiper-slide"
           >
-            <KoproductCard :product="product" class="gifyload"></KoproductCard>
+            <KoproductCard
+              :product="product"
+              :cardProduct="cardProduct"
+              :settingGeneral="settingGeneral"
+              class="gifyload"
+            />
           </div>
         </div>
         <div
-          v-if="(this.fullProducts.length == 0)"
+          v-if="this.fullProducts.length == 0"
           class="content-products-empty"
         >
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
-      <div class="btn-products">
-        <nuxt-link to="/productos">
-          <button class="btn">
-            + Ver todos los productos
-          </button>
+      <div class="btn-products" v-if="trending.visibleBtn">
+        <nuxt-link :to="trending.url">
+          <button class="btn">+ Ver todos los productos</button>
         </nuxt-link>
       </div>
     </div>
@@ -48,6 +58,9 @@ export default {
     KoproductCard,
   },
   props: {
+    trending: Array,
+    settingGeneral: Object,
+    cardProduct: Object,
     dataStore: Object,
     fullProducts: {},
   },
@@ -98,6 +111,7 @@ export default {
   @apply shadow-lg;
 }
 .product-content {
+  background: var(--background_color_1);
   @apply flex flex-col justify-center items-center w-full my-80;
 }
 .product-text {
@@ -109,14 +123,13 @@ export default {
 .subtittle {
   @apply flex flex-col justify-center items-center text-center;
 }
-
 .tittle {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #222222;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_title);
 }
 .subtittle {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #666666;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_Description);
 }
 .btn-products {
   @apply w-full flex justify-center items-center mt-80;
@@ -124,8 +137,8 @@ export default {
 .btn {
   color: #222222;
   font-size: 16px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  box-shadow: inset 0px -50px 0px -41px rgba(235, 112, 37, 0.3);
+  font-family: var(--font-style-1) !important;
+  box-shadow: inset 0px -50px 0px -41px var(--color_border);
   @apply mr-20 px-8 font-semibold leading-20 transition-all ease-in duration-0.2;
 }
 .btn:hover {
@@ -138,11 +151,13 @@ export default {
     @apply w-9/0;
   }
   .tittle {
-    font-size: 35px;
+    font-size: var(--fontSize);
+    font-weight: var(--fontWeightTitle);
     @apply font-semibold;
   }
   .subtittle {
-    font-size: 14px;
+    font-weight: var(--fontWeightDescription);
+    font-size: var(--fontSizeDescription);
   }
   .product-text {
     @apply mb-40;
@@ -167,12 +182,14 @@ export default {
   }
   .tittle {
     font-size: 42px;
-    @apply pb-10 leading-50;
+    margin-bottom: var(--marginbottomTitle);
+    @apply leading-50;
   }
   .subtittle {
     font-size: 15px;
     max-width: 560px;
-    @apply w-full mb-50 leading-25;
+    margin-bottom: var(--marginbottomDescription);
+    @apply w-full leading-25;
   }
 }
 </style>

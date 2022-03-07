@@ -1,5 +1,17 @@
 <template>
-  <div class="producto h-full">
+  <div
+    class="producto h-full"
+    :style="[
+      cardProduct,
+      settingGeneral,
+      {
+        '--font-style-1':
+          this.settingGeneral && this.settingGeneral.fount_1
+            ? this.settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="container">
       <router-link
         :to="{ path: `/productos/` + product.slug }"
@@ -271,8 +283,7 @@ import currency from '../../../mixins/formatCurrent'
 export default {
   mixins: [idCloudinary, currency],
   name: 'Ko-ProductCard-1',
-  props: { product: Object },
-
+  props: { product: Object, cardProduct: Object, settingGeneral: Object },
   data() {
     return {
       hover: false,
@@ -481,6 +492,7 @@ export default {
   @apply w-full object-cover overflow-hidden;
 }
 .producto {
+  background: var(--background_color_1);
   @apply w-full flex flex-col justify-start items-center cursor-pointer;
 }
 .datos-producto {
@@ -510,35 +522,37 @@ export default {
   fill: white;
 }
 .tittle {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #3f3f3f;
+  font-family: var(--font-style-1) !important;
+  /* color: #3f3f3f; */
   font: inherit;
   font-size: 100%;
   @apply w-full flex justify-center items-center;
 }
 .card-title {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #222;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_title);
+  font-weight: var(--fontWeighTitle);
+  font-size: var(--fontSizeTitle);
   font: inherit;
-  @apply font-semibold pt-10 transition-all ease-out duration-0.2;
+  @apply pt-10 transition-all ease-out duration-0.2;
 }
 .card-title:hover {
-  color: #eb7025;
+  color: var(--hover_text);
   @apply transition-all ease-out duration-0.2;
 }
 .separator-price {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  font-size: 16px;
-  color: #222;
+  font-family: var(--font-style-1) !important;
+  font-size: var(--fontSizePretitle);
+  color: var(--color_price);
   margin-top: 10px;
 }
 .text-price {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   margin-top: 10px;
-  font-size: 16px;
-  color: #000;
+  color: var(--color_price);
+  font-weight: var(--fontSizePretitle);
+  font-size: var(--fontSizePretitle);
   white-space: nowrap;
-  font-weight: 400;
   text-align: left;
 }
 .text-free {
@@ -571,12 +585,13 @@ export default {
   @apply w-full flex flex-row justify-center items-center;
 }
 .btn {
+  border-radius: var(--radius_btn);
   background-color: #222;
   color: #fff;
   @apply w-auto h-40 px-20 my-20 transition-all ease-in duration-0.2;
 }
 .btn:hover {
-  background-color: #eb7025;
+  background-color: var(--hover_Bg_btn);
   @apply transition-all ease-in duration-0.2;
 }
 .txt-btn {
@@ -659,7 +674,6 @@ export default {
     @apply mx-4;
   }
 }
-
 @screen mlg {
   .icon {
     margin-top: 0px;

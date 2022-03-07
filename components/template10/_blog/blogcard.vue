@@ -1,5 +1,17 @@
 <template>
-  <div class="producto">
+  <div
+    class="producto"
+    :style="[
+      blog,
+      settingGeneral,
+      {
+        '--font-style-1':
+          this.settingGeneral && this.settingGeneral.fount_1
+            ? this.settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div
       class="container"
       @mouseover="hover = true"
@@ -70,7 +82,7 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko-Blogcard',
-  props: { article: Object },
+  props: { article: Object, blog: Object, settingGeneral: Object },
   mounted() {
     if (this.article.created_at) {
       let domain = this.article.created_at
@@ -133,7 +145,7 @@ export default {
 <style scoped>
 .producto {
   @apply w-full flex flex-col justify-center items-center;
-  background-color: #fff;
+  background-color: var(--background_color_1);
 }
 .container {
   @apply relative;
@@ -163,13 +175,13 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1);
   @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
 }
 .txt-day,
 .txt-month {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #333333;
+  font-family: var(--font-style-1);
+  color: var(--color_text_date);
   font-weight: 600;
 }
 .txt-day {
@@ -188,21 +200,26 @@ export default {
 .content-date-aticle {
   @apply w-full flex flex-row justify-start items-start;
 }
-
 .txt-article-day,
-.txt-article-month,
-.txt-article-create,
+.txt-article-month {
+  color: var(--ColorText_Date);
+  font-family: var(--font-style-1);
+}
+.txt-article-create {
+  color: var(--CardTitle);
+  font-family: var(--font-style-1);
+}
 .txt-article-abstract {
-  color: #666;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--CardDescription);
+  font-family: var(--font-style-1);
 }
 .content-button-article {
   @apply h-50;
 }
 .btn {
-  color: #222;
-  box-shadow: inset 0px -50px 0px -41px rgba(235, 112, 37, 0.3);
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--color_title);
+  box-shadow: inset 0px -50px 0px -41px var(--color_border);
+  font-family: var(--font-style-1);
   @apply w-auto flex flex-col text-center font-semibold px-10 cursor-pointer transition-all ease-in duration-0.2;
 }
 .btn:hover {
@@ -228,7 +245,8 @@ export default {
     font-size: 10px;
   }
   .overlay-top {
-    @apply absolute overflow-hidden shadow-md bg-white-white rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
+    background-color: var(--ColorBg_Date);
+    @apply absolute overflow-hidden shadow-md rounded-2 max-w-full max-h-full transition-all ease-in duration-300;
     top: 10px;
     left: 10px;
     right: 0;
@@ -237,9 +255,9 @@ export default {
   }
   .txt-article-tittle {
     font-size: 20px;
-    color: #222;
+    color: var(--CardTitle);
     letter-spacing: 0.2px;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-style-1);
     @apply w-full flex justify-start items-start font-semibold mt-20 mb-15 cursor-pointer text-left  transition-all ease-in duration-0.5;
   }
   .txt-article-tittle:hover {
@@ -256,7 +274,7 @@ export default {
     @apply mb-15;
   }
   .content-border-article {
-    background-color: #eee;
+    background-color: var(--Card_border);
     @apply w-60 h-1 mb-15;
   }
   .txt-article-abstract {

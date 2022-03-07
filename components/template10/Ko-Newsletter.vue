@@ -1,5 +1,19 @@
 <template>
-  <div class="wrapper_newsletter">
+  <div
+    class="wrapper_newsletter"
+    :style="[
+      settingByTemplate10[0].setting10Footer,
+      settingByTemplate10[0].setting10General,
+      {
+        '--font-style-1':
+          this.settingByTemplate10 &&
+          this.settingByTemplate10[0].setting10General &&
+          this.settingByTemplate10[0].setting10General.fount_1
+            ? this.settingByTemplate10[0].setting10General.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="wrapper-items-content">
       <div class="product-tittle">
         <span class="tittle txt-1">Inscríbase al boletín</span>
@@ -29,7 +43,6 @@
                     width="100%"
                     height="100%"
                     viewBox="0 0 24 24"
-                    color="#2c2930"
                     class="icon-msg"
                   >
                     <path
@@ -86,6 +99,7 @@ export default {
   name: 'Ko-Newsletter-1',
   props: {
     dataStore: Object,
+    settingByTemplate10: Array,
   },
   components: {
     ValidationObserver,
@@ -155,7 +169,7 @@ export default {
 
 <style scoped>
 .wrapper_newsletter {
-  background-color: #fff;
+  background-color: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-start;
 }
 .wrapper-items-content {
@@ -164,7 +178,7 @@ export default {
 .content-bttns-shop {
   background-color: transparent;
   padding: 12px 20px;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid var(--color_border);
   @apply flex justify-center items-center uppercase transition-all ease-out duration-0.2;
 }
 .content-bttns-shop:hover {
@@ -172,13 +186,13 @@ export default {
   @apply transition-all ease-in duration-0.2;
 }
 .content-textbutton-shop {
-  color: #222;
+  color: var(--color_title);
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply tracking-1 leading-16 font-semibold whitespace-nowrap;
 }
 .content-bttns-shop:hover .content-textbutton-shop {
-  color: #eb7025;
+  color: var(--hover_text);
   @apply transition-all ease-in duration-0.2;
 }
 .conten-input-check {
@@ -193,18 +207,21 @@ export default {
 .input-text {
   padding: 0 25px;
   font-size: 14px;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid var(--color_border);
   transition: border-color 0.2s ease;
   background-color: transparent;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-9/5 h-42 flex justify-start items-center;
 }
+.input-text {
+  color: var(--color_text);
+}
 .input-text:hover {
-  border-bottom: 2px solid #eb7025;
+  border-bottom: 2px solid var(--hover_text);
   transition: border-color 0.2s ease;
 }
 .input-text:focus {
-  border-bottom: 2px solid #eb7025;
+  border-bottom: 2px solid var(--hover_text);
   transition: border-color 0.6s ease;
 }
 .input-text::placeholder {
@@ -215,7 +232,7 @@ export default {
   font-size: 12px;
   color: #ed2353;
   width: auto;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
 }
 .content-button {
   @apply w-auto flex items-start;
@@ -229,13 +246,12 @@ export default {
 .text-checkbox {
   margin-left: 5px;
   font-size: 13px;
-  color: #2c2930;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--color_text);
+  font-family: var(--font-style-1) !important;
 }
 #checkbox:focus {
   background-color: #2c2930;
 }
-
 .product-tittle {
   @apply flex flex-col justify-center items-start;
 }
@@ -243,16 +259,16 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .txt-1 {
-  color: #222;
+  color: var(--color_title);
   font-size: 16px;
   @apply mb-50 font-semibold;
 }
 .txt-2 {
-  color: #666;
+  color: var(--color_text);
   font-size: 15px;
 }
 .icon-msg {
-  fill: var(--color_subtext);
+  fill: var(--color_icon);
   @apply w-20 -mt-2 -mr-20 relative;
 }
 .input-icon {
@@ -285,16 +301,14 @@ export default {
     letter-spacing: 0px;
   }
   .txt-1 {
-    color: #222;
     font-size: 16px;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply mb-30;
   }
   .txt-2 {
-    color: #666;
     font-size: 15px;
     line-height: 1.55;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply mb-10 font-light;
   }
   .wrapper_newsletter {
@@ -306,7 +320,6 @@ export default {
     @apply flex flex-row;
   }
 }
-
 @screen mlg {
   .wrapper-items-content {
     @apply w-9/5;

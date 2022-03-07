@@ -1,30 +1,63 @@
 <template>
-  <div class="content">
+  <div
+    class="content"
+    :style="[
+      settingGeneral,
+      {
+        '--font-style-1':
+          this.settingGeneral && this.settingGeneral.fount_1
+            ? this.settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="content-items-top">
-      <div class="empty-border-left fadeInLeft"></div>
+      <div
+        class="empty-border-left fadeInLeft"
+        :style="`background-color: ${banner.color_border};`"
+      ></div>
       <div class="content-text-top">
         <div class="txt-banner-top">
-          <p class="txt-1 fadeInLeft">{{ banner.txt1 }}</p>
+          <p
+            class="txt-1 fadeInLeft"
+            :style="`color: ${banner.colorPretitle};`"
+          >
+            {{ banner.pretitle.replace(/&nbsp;/g, ' ') }}
+          </p>
         </div>
         <div class="txt-banner-top">
-          <p class="txt-2 fadeInLeft">{{ banner.txt2 }}</p>
+          <p
+            class="txt-2 fadeInLeft"
+            :style="`color: ${banner.colorPretitle};`"
+          >
+            {{ banner.date }}
+          </p>
         </div>
       </div>
     </div>
     <div class="content-text-medium">
-      <p class="txt-3 fadeInRight">{{ banner.txt3 }}</p>
+      <p class="txt-3 fadeInRight" :style="`color: ${banner.colorTitle};`">
+        {{ banner.title.replace(/&nbsp;/g, ' ') }}
+      </p>
     </div>
     <div class="content-text-bottom">
       <div class="txt-banner-bottom">
-        <p class="txt-4 fadeInLeft">{{ banner.txt4 }}</p>
+        <p class="txt-4 fadeInLeft" :style="`color: ${banner.colorPrice};`">
+          Desde
+        </p>
       </div>
       <div class="txt-banner-bottom">
-        <p class="txt-5 fadeInRight">{{ banner.txt5 }}</p>
+        <p class="txt-5 fadeInRight" :style="`color: ${banner.colorPrice};`">
+          {{ banner.price }}
+        </p>
       </div>
     </div>
-    <div class="content-buttom">
-      <nuxt-link to="/productos">
-        <button class="btn">
+    <div class="content-buttom" v-if="banner.visbleBtn">
+      <nuxt-link :to="banner.url_redirect">
+        <button
+          class="btn"
+          :style="`border-color: ${banner.color_border_btn}; color: ${banner.color_text_btn};`"
+        >
           {{ $t('home_comprarAhora') }}
         </button>
       </nuxt-link>
@@ -35,6 +68,7 @@
 export default {
   props: {
     banner: {},
+    settingGeneral: Object,
   },
 }
 </script>
@@ -47,8 +81,7 @@ export default {
 .txt-3,
 .txt-4,
 .txt-5 {
-  color: #222222;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply uppercase z-20;
 }
 
@@ -101,7 +134,6 @@ export default {
     @apply w-8/5;
   }
   .empty-border-left {
-    background-color: #222222;
     @apply h-22 w-1;
   }
   .content-items-top {
@@ -118,15 +150,13 @@ export default {
   }
   .btn {
     font-size: 10px;
-    color: #222222;
-    border-color: #222222;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-style-1) !important;
+    border-radius: var(--radius_btn);
     @apply px-10 py-2 border font-semibold truncate;
   }
   .btn:hover {
-    color: #fff;
-    border-color: #eb7025;
-    background-color: #eb7025;
+    color: var(--hover_text_btn);
+    border-color: var(--hover_Bg_btn);
     @apply border;
   }
   .txt-1,
@@ -201,7 +231,6 @@ export default {
   }
   .txt-4 {
     font-size: 10px;
-    color: #777777;
     @apply pr-5 pb-2;
   }
   .txt-5 {

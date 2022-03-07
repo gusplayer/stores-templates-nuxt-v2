@@ -1,6 +1,27 @@
 <template>
-  <div class="header-container" id="navbar" :style="settingByTemplate">
-    <div class="wrapper-header" id="headbg">
+  <div
+    class="header-container"
+    id="navbar"
+    :style="[
+      settingByTemplate10[0].setting10Header,
+      settingByTemplate10[0].setting10General,
+    ]"
+    v-if="settingByTemplate10"
+  >
+    <div
+      class="wrapper-header"
+      id="headbg"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate10 &&
+            this.settingByTemplate10[0].setting10General &&
+            this.settingByTemplate10[0].setting10General.fount_1
+              ? this.settingByTemplate10[0].setting10General.fount_1
+              : 'Roboto',
+        },
+      ]"
+    >
       <div class="header" id="headerid">
         <KoOrder :dataStore="dataStore" />
 
@@ -19,14 +40,18 @@
             <menu-icon class="header-icon-menu" />
           </button>
           <div class="contents">
-            <div class="header-content-buttons">
+            <div
+              class="header-content-buttons"
+              v-if="this.settingByTemplate10[0].pages.values"
+            >
               <div
-                v-for="(item, index) in secciones"
-                :key="`${index}${item.name}`"
+                v-for="(item, index) in this.settingByTemplate10[0].pages
+                  .values"
+                :key="`${index}${item.displayName}`"
               >
                 <nuxt-link
-                  :to="item.path"
-                  v-if="item.path"
+                  :to="item.url"
+                  v-if="item.isExternalLink == false"
                   class="content-button"
                 >
                   <p
@@ -34,22 +59,20 @@
                     @click="btnActivate(item.id)"
                     :class="btnSelect == item.id ? 'btn-active' : ''"
                   >
-                    {{ $t(`${item.name}`) }}
+                    {{ item.displayName }}
                   </p>
                 </nuxt-link>
-
-                <nuxt-link
-                  :to="item.href"
-                  v-else-if="item.href && listArticulos > 0"
+                <a
+                  :href="item.url"
+                  target="_blank"
+                  rel="noreferrer noopener"
                   class="content-button"
-                  ><p
-                    class="btn"
-                    @click="btnActivate(item.id)"
-                    :class="btnSelect == item.id ? 'btn-active' : ''"
-                  >
-                    {{ $t(`${item.name}`) }}
+                  v-else
+                >
+                  <p class="btn">
+                    {{ item.displayName }}
                   </p>
-                </nuxt-link>
+                </a>
               </div>
             </div>
             <div class="header-content-items">
@@ -103,11 +126,7 @@
                 </div>
               </div>
               <div class="empty" v-if="showSearch"></div>
-              <div
-                class="header-content-icon"
-                @click="openOrder"
-                v-if="dataHoko.statehoko == 0 || dataHoko.length == 0"
-              >
+              <div class="header-content-icon" @click="openOrder">
                 <i class="header-content-cart">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +150,11 @@
           </div>
         </div>
         <KoSearch :dataStore="dataStore" />
-        <KoMenu :dataStore="dataStore" class="responsive" />
+        <KoMenu
+          :dataStore="dataStore"
+          class="responsive"
+          :settingByTemplate10="settingByTemplate10"
+        />
       </div>
     </div>
   </div>
@@ -151,7 +174,7 @@ export default {
   name: 'Ko-Header-6',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingByTemplate10: Array,
   },
   mounted() {
     let domain = this.$route.fullPath
@@ -182,28 +205,6 @@ export default {
       resizehead: false,
       search: '',
       showSearch: false,
-      secciones: [
-        {
-          name: 'header_inicio',
-          path: '/',
-          id: 1,
-        },
-        {
-          name: 'header_productos',
-          path: '/productos',
-          id: 2,
-        },
-        {
-          name: 'header_contacto',
-          path: '/contacto',
-          id: 3,
-        },
-        {
-          name: 'header_blog',
-          href: '/blog',
-          id: 4,
-        },
-      ],
     }
   },
   computed: {
@@ -215,9 +216,6 @@ export default {
     },
     listArticulos() {
       return this.$store.state.listArticulos.length
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
     },
   },
   methods: {
@@ -314,32 +312,36 @@ export default {
 
 <style scoped>
 .header-container {
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center z-10 transition-all ease-in-out duration-0.5;
 }
 .wrapper-header {
-  background-color: #fff;
+  background-color: var(--background_color_1);
   @apply flex flex-col w-full justify-between items-center fixed top-0 z-30 shadow-lg;
 }
 .header {
-  background-color: #fff;
+  background-color: var(--background_color_1);
   @apply flex w-full justify-between;
 }
 .header-item-menu {
   @apply hidden;
 }
 .header-icon-menu {
-  color: #222222;
+  color: var(--color_icon);
+  fill: var(--color_icon);
   @apply w-auto h-30 font-normal;
 }
 .header-content-logo {
   @apply flex justify-center items-center py-1;
 }
 .wrapper-logo {
-  @apply w-full;
+  max-width: var(--with_logo);
+  margin-top: var(--padding_logo);
+  margin-bottom: var(--padding_logo);
+  @apply w-full flex justify-center items-center;
 }
 .header-logo {
-  @apply object-contain object-left max-h-16;
+  @apply object-contain object-left w-full;
 }
 .header-contet {
   @apply flex flex-row justify-between items-center;
@@ -348,17 +350,17 @@ export default {
   @apply w-auto flex flex-wrap gap-0 justify-center items-center;
 }
 .btn-active {
-  box-shadow: inset 0px -50px 0px -44px rgba(235, 112, 37, 0.3);
+  box-shadow: inset 0px -50px 0px -44px var(--color_border);
 }
 .btn {
-  color: #222222;
+  color: var(--color_text);
   font-size: 16px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply mr-20 px-8 font-semibold leading-22 transition-all ease-in duration-0.3;
 }
 .btn:hover {
-  color: #eb7025;
-  box-shadow: inset 0px -50px 0px -44px rgba(235, 112, 37, 0.3);
+  color: var(--hover_text);
+  box-shadow: inset 0px -50px 0px -44px var(--color_border);
   @apply transition-all ease-in duration-0.3;
 }
 .header-content-items {
@@ -367,13 +369,13 @@ export default {
 .header-search-icon {
   @apply w-36 h-auto flex justify-center items-center;
 }
-
 .search-header {
-  color: #222222;
+  /* color: var(--color_icon); */
+  fill: var(--color_icon) !important;
   @apply cursor-pointer transition-all ease-in duration-0.2;
 }
 .search-header:hover {
-  color: #eb7025;
+  color: var(--color_border);
   @apply transition-all ease-in duration-0.2;
 }
 .empty {
@@ -386,21 +388,21 @@ export default {
   @apply w-36 h-auto flex justify-center items-center relative cursor-pointer;
 }
 .icon-shop {
-  fill: #222222;
+  fill: var(--color_icon);
   @apply transition-all ease-in duration-0.2;
 }
 .header-content-icon:hover .icon-shop {
-  fill: #eb7025;
+  fill: var(--color_border);
   @apply transition-all ease-in duration-0.2;
 }
 .border-num-items {
-  background: #eb7025;
+  background: var(--color_border);
   @apply w-auto h-12 flex justify-center items-center rounded-full -mt-20 -ml-8;
 }
 .num-items {
-  color: #fff;
+  color: var(--background_color_1);
   font-size: 8px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply pt-1 px-5 leading-12 capitalize tracking-0 font-semibold;
 }
 /* ***** */
@@ -424,10 +426,10 @@ export default {
     @apply flex flex-col justify-center items-center;
   }
   .header-item-menu:focus {
-    background-color: #eb7025;
+    background-color: var(--color_border);
   }
   .header-item-menu:focus .header-icon-menu {
-    color: #fff;
+    color: var(--color_icon);
   }
   .header-icon-menu {
     @apply text-35;

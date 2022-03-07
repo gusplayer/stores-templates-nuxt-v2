@@ -1,10 +1,21 @@
 <template>
-  <div class="product-content">
+  <div
+    class="product-content"
+    :style="[
+      settingGeneral,
+      productList,
+      {
+        '--font-style-1': settingGeneral.fount_1
+          ? settingGeneral.fount_1
+          : 'Roboto',
+      },
+    ]"
+  >
     <div class="producto-items-content">
       <div class="product-text">
         <div class="product-tittle">
-          <p class="tittle">Productos Destacados</p>
-          <nuxt-link to="/productos">
+          <p class="tittle">{{ productList.title }}</p>
+          <nuxt-link :to="productList.url" v-if="productList.visibleBtn">
             <p class="txt-newProducts">Nuevos Productos</p>
           </nuxt-link>
         </div>
@@ -16,11 +27,16 @@
             :key="product.id"
             class="swiper-slide"
           >
-            <KoproductCard :product="product" class="gifyload"></KoproductCard>
+            <KoproductCard
+              :product="product"
+              :settingGeneral="settingGeneral"
+              :cardProduct="cardProduct"
+              class="gifyload"
+            />
           </div>
         </div>
         <div
-          v-if="(this.fullProducts.length == 0)"
+          v-if="this.fullProducts.length == 0"
           class="content-products-empty"
         >
           <p>{{ $t('home_msgCatalogo') }}</p>
@@ -37,6 +53,9 @@ export default {
     KoproductCard,
   },
   props: {
+    productList: Array,
+    settingGeneral: Object,
+    cardProduct: Object,
     dataStore: Object,
     fullProducts: {},
   },
@@ -83,6 +102,7 @@ export default {
 
 <style scoped>
 .product-content {
+  background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center my-60;
 }
 .product-text {
@@ -95,7 +115,7 @@ export default {
   @apply w-auto flex flex-col text-center;
 }
 .txt-newProducts {
-  box-shadow: inset 0px -50px 0px -41px rgba(235, 112, 37, 0.3);
+  box-shadow: inset 0px -50px 0px -41px var(--color_border);
   @apply w-auto h-full flex flex-row text-center font-semibold px-10 cursor-pointer transition-all ease-in duration-0.2;
 }
 .txt-newProducts:hover {
@@ -105,8 +125,7 @@ export default {
 }
 .tittle,
 .txt-newProducts {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #222222;
+  font-family: var(--font-style-1) !important;
 }
 .gifyload:hover {
   @apply shadow-lg;
@@ -116,15 +135,17 @@ export default {
     @apply w-9/0;
   }
   .tittle {
-    color: #222222;
+    color: var(--color_title);
+    font-weight: var(--fontWeightTitle);
     font-size: 25px;
-    @apply justify-center items-center font-semibold mb-50;
+    @apply justify-center items-center mb-50;
   }
   .txt-newProducts {
+    color: var(--color_title);
     @apply justify-center items-center;
   }
   .product-text {
-    @apply mb-40;
+    margin-bottom: var(--marginbottomTitle);
   }
   .product-tittle {
     @apply w-full flex flex-col justify-center items-center text-center;
@@ -154,7 +175,7 @@ export default {
     width: 1400px;
   }
   .tittle {
-    font-size: 40px;
+    font-size: var(--fontSizeTitle);
     @apply leading-50 mb-0;
   }
   .txt-newProducts {

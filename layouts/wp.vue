@@ -13,9 +13,7 @@
           Disculpa, no podrá realizar compras por el momento,
         </p>
         <p class="subtitle-noti">¿Deseas continuar?</p>
-        <button class="btn-acceptM" @click="acceptClose()">
-          Aceptar
-        </button>
+        <button class="btn-acceptM" @click="acceptClose()">Aceptar</button>
       </div>
     </div>
     <div
@@ -27,9 +25,7 @@
         <p class="text-noti">
           Disculpa, no podrá realizar compras por el momento,
         </p>
-        <p class="subtitle-noti-valienta">
-          La tienda no es de
-        </p>
+        <p class="subtitle-noti-valienta">La tienda no es de</p>
         <a
           href="https://valienta.com/"
           target="_blank"
@@ -56,8 +52,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
-    let domain = this.$route.fullPath
-    if (domain == '/?clearCart=true') {
+    let domain = this.$route.query
+    if (domain.clearCart == 'true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
@@ -178,8 +174,7 @@ export default {
       ],
       script: [
         {
-          src:
-            'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
+          src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
         },
       ],
       link: [
@@ -190,8 +185,7 @@ export default {
         },
         {
           rel: 'stylesheet',
-          href:
-            'https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap',
+          href: 'https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap',
         },
         {
           rel: 'stylesheet',

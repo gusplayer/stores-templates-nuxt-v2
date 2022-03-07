@@ -1,45 +1,70 @@
 <template>
-  <div class="content-deal">
+  <div
+    class="content-deal"
+    :style="[
+      offers,
+      settingGeneral,
+      {
+        '--font-style-1':
+          this.settingGeneral && this.settingGeneral.fount_1
+            ? this.settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="content-grid">
       <div class="grid-left">
         <div class="bg-left"></div>
         <div class="content-image-left">
-          <img
-            class="img-left"
-            src="https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1614111820/Deal/home1-banner1_mydyc4.jpg"
-            alt="img-left"
-          />
+          <img class="img-left" :src="offers.url_img_right" alt="img-left" />
         </div>
       </div>
-      <div class="grid-right">
+      <div
+        class="grid-right"
+        :style="`background-image: url(${idCloudinaryBanner(
+          offers.url_img_left
+        )});`"
+      >
         <div class="grid-item-tittle">
-          <p class="txt-tittle">Ofertas de los días</p>
+          <p class="txt-tittle">{{ offers.title }}</p>
         </div>
         <div class="grid-item-border"></div>
         <div class="grid-item-subtittle">
-          <p class="txt-subtittle">Caducado</p>
+          <p class="txt-subtittle">{{ offers.subtitle }}</p>
         </div>
         <div class="grid-item-price">
-          <p class="txt-price-1">$100 <span class="txt-price-2">$500</span></p>
+          <p class="txt-price-1">
+            {{ offers.Price }}
+            <span class="txt-price-2">{{ offers.Offerts }}</span>
+          </p>
         </div>
-        <div class="grid-item-button">
-          <button class="btn">
+        <div class="grid-item-button" v-if="offers.visibleBtn">
+          <nuxt-link class="btn" :to="offers.url">
             {{ $t('home_comprarAhora') }}
-          </button>
+          </nuxt-link>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {}
+import idCloudinaryBanner from '../../mixins/idCloudinary'
+export default {
+  name: 'Ko-deal-offers',
+  props: {
+    offers: Object,
+    settingGeneral: Array,
+  },
+  mixins: [idCloudinaryBanner],
+}
 </script>
 <style scoped>
 .content-deal {
+  background: var(--background_color_1);
   @apply w-full flex flex-col justify-items-center items-center my-40;
 }
 .content-grid {
-  border-color: #eeeeee;
+  border-color: var(--color_border);
   @apply justify-center items-center pb-90 border-b;
 }
 .grid-left,
@@ -58,7 +83,6 @@ export default {}
   transform: scale(1.1);
 }
 .grid-right {
-  background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1614111820/Deal/bg-deal_xeg4hu.png');
   @apply bg-no-repeat  bg-center;
 }
 .grid-item-tittle,
@@ -70,34 +94,35 @@ export default {}
 .txt-subtittle,
 .txt-price-1,
 .txt-price-2 {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
 }
 @screen sm {
   .content-grid {
     @apply w-9/0 grid grid-cols-1 gap-4;
   }
   .txt-tittle {
-    font-size: 35px;
-    color: #222222;
+    font-size: var(--fontSizeTitle);
+    color: var(--color_title);
+    font-weight: var(--fontWeightTitle);
     @apply my-30 font-semibold;
   }
   .grid-item-border {
-    background-color: #e6e6e6;
+    background-color: var(--color_border);
     @apply w-60 h-2 mb-30;
   }
   .txt-subtittle {
     font-size: 15px;
-    color: #666666;
+    color: var(--color_subtitle);
     @apply mb-30;
   }
   .txt-price-1 {
     font-size: 28px;
-    color: #eb7025;
+    color: var(--color_price);
     @apply font-semibold leading-1;
   }
   .txt-price-2 {
     font-size: 18px;
-    color: #999999;
+    color: var(--color_offerts);
     @apply font-medium leading-1 line-through;
   }
   .grid-item-price {
@@ -105,15 +130,15 @@ export default {}
   }
   .btn {
     height: 58px;
-    border-color: #222222;
-    color: #222222;
+    border-color: var(--colorBorderBTn);
+    color: var(--colorTextBTn);
     font-size: 16px;
     @apply w-auto px-60 border font-semibold;
   }
   .btn:hover {
-    background-color: #eb7025;
-    border-color: #eb7025;
-    color: #fff;
+    background-color: var(--hover_Bg_btn);
+    border-color: var(--hover_Bg_btn);
+    color: var(--hover_text_btn);
   }
 }
 @screen md {

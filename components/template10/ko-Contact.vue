@@ -1,26 +1,58 @@
 <template>
-  <div calss="content-contact">
+  <div
+    calss="content-contact"
+    :style="[
+      settingByTemplate10[0].contact,
+      settingByTemplate10[0].setting10General,
+      {
+        '--font-style-1':
+          this.settingByTemplate10[0].setting10General &&
+          this.settingByTemplate10[0].setting10General.fount_1
+            ? this.settingByTemplate10[0].setting10General.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="content-form-contact">
-      <div class="banner-mapa" v-if="dataStore.geolocalizacion.length">
-        <iframe
-          :src="`https://maps.google.com/maps?q=${this.dataStore.geolocalizacion[0].latitud},${this.dataStore.geolocalizacion[0].longitud}&hl=es;z=14&amp;output=embed`"
-          width="100%"
-          height="250"
-          frameborder="0"
-          style="border: 0;"
-          allowfullscreen
-        ></iframe>
+      <div class="banner-mapa">
+        <el-carousel
+          :interval="5000"
+          arrow="always"
+          height="250px"
+          style="width: 100%"
+          class="wrapperCarousel"
+          v-if="
+            this.dataStore &&
+            this.dataStore.geolocalizacion &&
+            this.dataStore.geolocalizacion.length
+          "
+        >
+          <el-carousel-item
+            v-for="(item, inggeo) in dataStore.geolocalizacion"
+            :key="inggeo"
+          >
+            <iframe
+              :src="`https://maps.google.com/maps?q=${item.latitud},${item.longitud}&hl=es;z=14&amp;output=embed`"
+              width="100%"
+              height="250"
+              frameborder="0"
+              style="border: 0"
+              allowfullscreen
+            ></iframe>
+          </el-carousel-item>
+        </el-carousel>
       </div>
 
       <div class="container-contact">
         <div class="content-grid">
           <div class="left">
             <div class="content-info">
-              <p class="txt-info">
-                Información
-              </p>
+              <p class="txt-info">Información</p>
             </div>
-            <div class="content-locatioin">
+            <div
+              class="content-locatioin"
+              v-if="this.dataStore.geolocalizacion.length"
+            >
               <svg
                 class="icon-left"
                 xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +119,7 @@
                         <input
                           name="nombre"
                           type="text"
-                          v-model="Nombre"
+                          v-model="nombre"
                           class="input-text"
                           :placeholder="$t('contact_nombrePlacer')"
                           id="ContactName"
@@ -189,7 +221,7 @@ export default {
   name: 'Ko-Contact',
   props: {
     dataStore: Object,
-    // settingByTemplate: Object,
+    settingByTemplate10: Array,
   },
   components: {
     ValidationObserver,
@@ -304,7 +336,12 @@ export default {
 </script>
 
 <style scoped>
+.wrapperCarousel >>> .el-carousel__arrow {
+  background-color: var(--color_background_btn);
+  color: var(--color_text_btn);
+}
 .content-contact {
+  background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-form-contact {
@@ -314,12 +351,13 @@ export default {
   @apply w-full justify-center items-center;
 }
 .empty {
-  background-color: #dbdbdb;
+  background-color: var(--border);
   @apply w-full h-1 my-20;
 }
 @screen sm {
   .banner-mapa {
-    @apply hidden;
+    /* margin-top: 30px; */
+    @apply flex w-full;
   }
   .container-contact {
     margin-top: 140px;
@@ -335,9 +373,9 @@ export default {
     @apply w-full flex justify-start items-center mb-30;
   }
   .txt-info {
-    color: #414141;
+    color: var(--color_text);
     font-size: 14px;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply uppercase font-semibold tracking-1;
   }
   .content-locatioin,
@@ -345,10 +383,10 @@ export default {
     @apply w-full flex flex-row justify-start items-center;
   }
   .icon-left {
-    fill: #878787;
+    fill: var(--color_subtext);
   }
   .txt-left {
-    color: #414141;
+    color: var(--color_subtext);
     font-size: 14px;
     @apply w-full flex justify-start items-center pl-20;
   }
@@ -362,8 +400,8 @@ export default {
     @apply w-full flex flex-col justify-start items-center my-40;
   }
   .contact-content-rigth {
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: var(--background_color_2);
+    border: 1px solid var(--border);
     @apply w-full flex flex-col justify-start items-start shadow-xl;
   }
   .content-form {
@@ -373,7 +411,7 @@ export default {
     @apply w-full flex justify-start items-center mb-40;
   }
   .txt-contactus {
-    color: #414141;
+    color: var(--color_title_form);
     font-size: 18px;
     @apply w-full justify-center items-center uppercase font-semibold;
   }
@@ -402,7 +440,7 @@ export default {
     @apply w-full h-100 pl-10 pt-10;
   }
   .txt-input {
-    color: #414141;
+    color: var(--color_text_form);
     font-size: 13px;
     @apply w-full justify-center items-center capitalize;
   }
@@ -410,13 +448,15 @@ export default {
     @apply w-full flex justify-start items-center;
   }
   .btn {
-    background-color: #333b48;
+    background-color: var(--color_background_btn);
     font-size: 14px;
-    color: #fff;
-    @apply w-auto h-35 border mt-20 px-20;
+    color: var(--color_text_btn);
+    border-radius: var(--radius_btn);
+    @apply w-auto h-35 mt-20 px-20;
   }
   .btn:hover {
-    background-color: #eb7025;
+    color: var(--hover_text_btn);
+    background-color: var(--hover_Bg_btn);
   }
   .form-cont {
     @apply w-full flex flex-col justify-start items-center;
@@ -427,7 +467,7 @@ export default {
 }
 @screen md {
   .banner-mapa {
-    margin-top: 140px;
+    /* margin-top: 140px; */
     @apply w-full flex;
   }
   .container-contact {

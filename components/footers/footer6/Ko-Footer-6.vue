@@ -1,12 +1,27 @@
 <template>
-  <div class="footer-container" ref="background" :style="settingByTemplate">
+  <div
+    class="footer-container"
+    ref="background"
+    :style="[
+      settingByTemplate10[0].setting10Footer,
+      settingByTemplate10[0].setting10General,
+      {
+        '--font-style-1':
+          this.settingByTemplate10 &&
+          this.settingByTemplate10[0].setting10General &&
+          this.settingByTemplate10[0].setting10General.fount_1
+            ? this.settingByTemplate10[0].setting10General.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="footer-content">
       <div class="footer-content-items">
         <div class="footer-content-tienda">
           <div class="content-image">
             <img
               class="img-logo"
-              v-lazy="`https://api2.komercia.co/logos/582-Txm0318.png`"
+              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
               alt="Logo"
             />
           </div>
@@ -76,7 +91,10 @@
         <div class="footer-acordion-bttns">
           <button class="accordion">Nuestras redes</button>
           <div class="panel">
-            <KoSocialNet :dataStore="dataStore"></KoSocialNet>
+            <KoSocialNet
+              :dataStore="dataStore"
+              :settingByTemplate10="this.settingByTemplate10"
+            />
           </div>
           <button class="accordion">Enlaces</button>
           <div class="panel">
@@ -102,13 +120,22 @@
           </div>
         </div>
         <div class="footer-content-newsLetters">
-          <KoNewsLetter></KoNewsLetter>
+          <KoNewsLetter
+            :settingByTemplate10="this.settingByTemplate10"
+            :dataStore="dataStore"
+          />
         </div>
       </div>
       <div class="footer-content-newsLetters-hid">
-        <KoNewsLetter></KoNewsLetter>
+        <KoNewsLetter
+          :settingByTemplate10="this.settingByTemplate10"
+          :dataStore="dataStore"
+        />
       </div>
-      <div class="madebyKomercia">
+      <div
+        class="madebyKomercia"
+        v-if="settingByTemplate10[0].setting10Footer.watermark == true"
+      >
         <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
         <a
           href="https://komercia.co/"
@@ -157,10 +184,13 @@ export default {
   name: 'Ko-Footer-6',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingByTemplate10: Array,
   },
   mounted() {
-    if (this.settingByTemplate) {
+    if (
+      this.settingByTemplate10 &&
+      this.settingByTemplate10[0].setting10Footer
+    ) {
       this.setLogo()
     }
   },
@@ -217,13 +247,20 @@ export default {
     },
   },
   watch: {
-    settingByTemplate(value) {
-      let colorArray = value.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
+    settingByTemplate11() {
+      if (
+        this.settingByTemplate10 &&
+        this.settingByTemplate10[0].setting10Footer
+      ) {
+        let color =
+          this.settingByTemplate10[0].setting10Footer['--background_color_1']
+        let colorArray = color.split(',')
+        let colorInt = parseInt(colorArray[2])
+        if (colorInt > 50) {
+          this.logo = true
+        } else {
+          this.logo = false
+        }
       }
     },
   },
@@ -232,7 +269,8 @@ export default {
 
 <style scoped>
 .footer-container {
-  border-color: #eee;
+  background: var(--background_color_1);
+  border-color: var(--color_border);
   @apply w-full flex flex-col justify-center items-center border-t;
 }
 .footer-content {
@@ -245,12 +283,12 @@ export default {
   @apply w-full grid grid-cols-2 gap-4;
 }
 .madebyKomercia {
-  border-color: #eee;
+  border-color: var(--color_border);
   @apply w-full flex flex-col justify-center items-center border-t-2;
 }
 .txt-devBy {
   font-size: 14px;
-  color: #666;
+  color: var(--color_text);
 }
 .logo2 {
   width: 100px;
@@ -260,23 +298,23 @@ export default {
 .txt-number,
 .txt-email,
 .btn {
-  color: #222;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--color_text);
+  font-family: var(--font-style-1) !important;
   @apply pb-20;
 }
 .txt-btns {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   font-size: 15px;
   @apply w-auto mb-5 transition-all ease-in duration-0.2;
 }
 .txt-btns:hover {
-  color: #eb7025;
+  color: var(--hover_text);
   @apply transition-all ease-in duration-0.2;
 }
 .accordion {
   color: #222;
   transition: 0.4s;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full text-left mb-0 border-none outline-none cursor-pointer;
 }
 .accordion:after {
@@ -300,13 +338,13 @@ export default {
   @apply w-auto flex flex-col justify-start items-center;
 }
 .txt-pol-term {
-  color: #222;
+  color: var(--color_text);
   font-size: 15px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply text-left;
 }
 .txt-pol-term:hover {
-  color: #eb7025;
+  color: var(--hover_text);
 }
 .modal {
   padding-top: 200px;
@@ -316,7 +354,7 @@ export default {
 }
 @screen sm {
   .img-logo {
-    @apply object-contain h-90;
+    @apply object-contain object-left w-full;
   }
   .footer-content {
     @apply w-9/0;
@@ -348,6 +386,7 @@ export default {
     @apply mb-10;
   }
   .content-image {
+    max-width: var(--with_logo);
     @apply w-full flex justify-center items-center mb-20;
   }
   .madebyKomercia {
@@ -370,7 +409,8 @@ export default {
   }
   .content-txt-redes,
   .content-txt-btns {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    color: var(--color_title);
+    font-family: var(--font-style-1) !important;
     @apply mb-20;
   }
   .content-buttons {
@@ -397,10 +437,9 @@ export default {
   .txt-redes,
   .txt-btn {
     font-size: 15px;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-style-1) !important;
     @apply font-semibold;
   }
-
   .txt-direction,
   .txt-number,
   .txt-email {

@@ -574,10 +574,8 @@ export default {
       let baseUrlPc = 'https://web.whatsapp.com/send?phone='
       let urlProduct = window.location.href
       let text = `Hola 😀, %0AEstoy en tu tienda ${this.dataStore.tienda.nombre} y me interesa el producto: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
-
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,

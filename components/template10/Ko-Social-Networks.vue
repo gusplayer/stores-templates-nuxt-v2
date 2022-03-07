@@ -1,5 +1,19 @@
 <template>
-  <div class="content-SocialNet">
+  <div
+    class="content-SocialNet"
+    :style="[
+      this.settingByTemplate10 ? settingByTemplate10[0].setting10Footer : null,
+      this.settingByTemplate10 ? settingByTemplate10[0].setting10General : null,
+      {
+        '--font-style-1':
+          this.settingByTemplate10 &&
+          this.settingByTemplate10[0].setting10General &&
+          this.settingByTemplate10[0].setting10General.fount_1
+            ? this.settingByTemplate10[0].setting10General.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="icon-social">
       <div class="icons-networks" v-if="dataStore.tienda.red_facebook != null">
         <a
@@ -18,7 +32,7 @@
             x="0"
             y="0"
             viewBox="0 0 112.196 112.196"
-            style="enable-background: new 0 0 512 512;"
+            style="enable-background: new 0 0 512 512"
             xml:space="preserve"
             class="facebook-icon"
           >
@@ -89,7 +103,7 @@
             x="0"
             y="0"
             viewBox="0 0 112.197 112.197"
-            style="enable-background: new 0 0 512 512;"
+            style="enable-background: new 0 0 512 512"
             xml:space="preserve"
             class="twitter-icon"
           >
@@ -164,7 +178,7 @@
             x="0"
             y="0"
             viewBox="0 0 512 512"
-            style="enable-background: new 0 0 512 512;"
+            style="enable-background: new 0 0 512 512"
             xml:space="preserve"
             class="instagram-icon"
           >
@@ -291,7 +305,7 @@
             x="0"
             y="0"
             viewBox="0 0 473.931 473.931"
-            style="enable-background: new 0 0 512 512;"
+            style="enable-background: new 0 0 512 512"
             xml:space="preserve"
             class="youtube-icon"
           >
@@ -369,8 +383,9 @@ export default {
   name: 'Ko-Social-Networks',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingByTemplate10: Array,
   },
+
   data() {
     return {
       hover: false,
@@ -450,28 +465,31 @@ export default {
 }
 .txt-social {
   font-size: 15px;
-  color: #222;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--color_text);
+  font-family: var(--font-style-1) !important;
   @apply w-100 ml-5 transition-all ease-in duration-0.2;
 }
 .txt-social:hover {
-  color: #eb7025;
+  color: var(--hover_text);
   @apply transition-all ease-in duration-0.2;
 }
 .facebook-icon:hover .txt-social {
-  color: #eb7025;
+  color: var(--hover_text);
   @apply transition-all ease-in duration-0.2;
 }
 .twitter-icon:hover .txt-social {
-  color: #eb7025;
+  color: var(--hover_text);
   @apply transition-all ease-in duration-0.2;
 }
 .instagram-icon:hover .txt-social {
-  color: #eb7025;
+  color: var(--hover_text);
   @apply transition-all ease-in duration-0.2;
 }
 .youtube-icon:hover .txt-social {
-  color: #eb7025;
+  color: var(--hover_text);
   @apply transition-all ease-in duration-0.2;
+}
+.iconBg {
+  fill: var(--color_icon);
 }
 </style>

@@ -1,14 +1,24 @@
 <template>
-  <div class="wrapper-content">
+  <div
+    class="wrapper-content"
+    :style="[
+      settingGeneral,
+      blog,
+      {
+        '--font-style-1': settingGeneral.fount_1
+          ? settingGeneral.fount_1
+          : 'Roboto',
+      },
+    ]"
+  >
     <div class="wrapper-items-content">
       <div class="product-text">
         <div class="product-tittle">
-          <p class="tittle">Nuestros blogs</p>
+          <p class="tittle">{{ blog.title }}</p>
         </div>
         <div class="product-subtittle">
           <p class="subtittle">
-            Encuentra un brillante ideal que se adapte a tu gusto con nuestra
-            gran selección
+            {{ blog.description }}
           </p>
         </div>
       </div>
@@ -21,7 +31,12 @@
             :key="article.id"
             :class="`swiper-slide wrapper-${index + 1}`"
           >
-            <Kblog v-if="article.estado == 1" :article="article"></Kblog>
+            <Kblog
+              v-if="article.estado == 1"
+              :article="article"
+              :blog="blog"
+              :settingGeneral="settingGeneral"
+            />
           </div>
         </div>
       </div>
@@ -36,8 +51,9 @@ export default {
     Kblog,
   },
   props: {
+    blog: Object,
     dataStore: Object,
-    settingByTemplate: Object,
+    settingGeneral: Object,
   },
   data() {
     return {
@@ -100,7 +116,7 @@ export default {
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #fff;
+  background: var(--background_color_1);
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -119,12 +135,11 @@ export default {
 .wrapper-content {
   @apply w-full flex flex-col justify-center items-center;
   padding-bottom: 64px;
-  background-color: #fff;
+  background-color: var(--background_color_1);
 }
 .wrapper-items-content {
   @apply flex flex-col justify-center items-center;
 }
-
 .product-text {
   @apply w-full flex flex-col justify-center items-center mb-30 text-center;
 }
@@ -133,9 +148,12 @@ export default {
 }
 .tittle {
   @apply flex flex-col justify-center items-center;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #333333;
-  font-weight: 700;
+  font-family: var(--font-style-1) !important;
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+}
+.subtittle {
+  font-size: var(--font-size-d);
 }
 @screen sm {
   .wrapper-items-content,
@@ -145,11 +163,14 @@ export default {
   .tittle {
     line-height: 34px;
     font-size: 30px;
-    @apply mb-20;
+    color: var(--color_title);
+    margin-bottom: var(--marginbottomTitle);
   }
   .subtittle {
-    color: #666666;
+    color: var(--color_description);
     font-size: 15px;
+    font-weight: var(--font-weight-d);
+    margin-bottom: var(--marginbottomDescription);
   }
 }
 @screen md {

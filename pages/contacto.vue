@@ -68,6 +68,9 @@ export default {
     settingByTemplate9() {
       return this.$store.state.settingByTemplate9
     },
+    settingByTemplate10() {
+      return this.$store.state.settingByTemplate10
+    },
     settingByTemplate11() {
       return this.$store.state.settingByTemplate11
     },
@@ -110,6 +113,22 @@ export default {
               },
             ]
           : null,
+
+        settingByTemplate10: this.settingByTemplate10
+          ? [
+              {
+                contact:
+                  this.settingByTemplate10 && this.settingByTemplate10.contact
+                    ? this.settingByTemplate10.contact
+                    : null,
+                setting10General:
+                  this.settingByTemplate10 &&
+                  this.settingByTemplate10.settingGeneral
+                    ? this.settingByTemplate10.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
         settingByTemplate11: this.settingByTemplate11
           ? [
               {
@@ -144,6 +163,8 @@ export default {
             this.$store.commit('SET_CURRENTSETTING07', e.data)
           } else if (e.data.template == 11) {
             this.$store.commit('SET_CURRENTSETTING11', e.data)
+          } else if (e.data.template == 10) {
+            this.$store.commit('SET_CURRENTSETTING10', e.data)
           }
         } else if (e && e.data && e.data.returnHome == true) {
           this.$router.push({

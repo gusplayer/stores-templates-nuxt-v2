@@ -863,18 +863,41 @@ export default {
           let productList = productString.replace(/"/g, '')
           let resultproductList = productList.replace(/,/g, '%0A')
           let result = resultproductList.slice(1, -1)
-
           var text = ''
+          let textFreeShippingCart
           if (this.dataStore.tienda.lenguaje == 'es') {
-            text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACostos%20de%20Env%C3%ADo%20por%20separado%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}`
+            if (
+              this.rangosByCiudades &&
+              this.rangosByCiudades.envio_metodo == 'gratis'
+            ) {
+              textFreeShippingCart = 'Env%C3%ADo%20gratis'
+            } else {
+              textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
+            }
+            text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
           }
           if (this.dataStore.tienda.lenguaje == 'en') {
-            text = `Hello%2C%20I%20am%20${this.nombre}%2C%0AI%20made%20this%20order%20at%20your%20store%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACost%20from%20shipping%20by%20separately%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20information%3A%0AName%3A%20${this.nombre}%0ACity%3A%20${this.ciudad}%0ANeighborhood%3A%20${this.barrio}%0AAddres%3A%20${this.dirreccion}`
+            if (
+              this.rangosByCiudades &&
+              this.rangosByCiudades.envio_metodo == 'gratis'
+            ) {
+              textFreeShippingCart = 'Free%20shippings'
+            } else {
+              textFreeShippingCart = 'Shipping%20cost%20separately'
+            }
+            text = `Hello%2C%20I%20am%20${this.nombre}%2C%0AI%20made%20this%20order%20at%20your%20store%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20information%3A%0AName%3A%20${this.nombre}%0ACity%3A%20${this.ciudad}%0ANeighborhood%3A%20${this.barrio}%0AAddres%3A%20${this.dirreccion}%0A%0back%20to%20the%20storea%3A%20${window.location}?clearCart=true`
           }
           if (this.dataStore.tienda.lenguaje == 'pt') {
-            text = `Olá%2C%20aqui%20é%20${this.nombre}%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0ACustos%20de%20envio%20negociar%20a%20parte%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20Minhas%20informaçãoes%3A%0ANome%3A%20${this.nombre}%0ACidade%3A%20${this.ciudad}%0ABairro%3A%20${this.barrio}%0AEndereço%3A%20${this.dirreccion}`
+            if (
+              this.rangosByCiudades &&
+              this.rangosByCiudades.envio_metodo == 'gratis'
+            ) {
+              textFreeShippingCart = 'Frete%20gr%C3%A1tis'
+            } else {
+              textFreeShippingCart = 'Custo%20de%20frete%20separadamente'
+            }
+            text = `Olá%2C%20aqui%20é%20${this.nombre}%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20Minhas%20informaçãoes%3A%0ANome%3A%20${this.nombre}%0ACidade%3A%20${this.ciudad}%0ABairro%3A%20${this.barrio}%0AEndereço%3A%20${this.dirreccion}%0A%0Ade%20volta%20%C3%A0%20loja%3A%20${window.location}?clearCart=true`
           }
-
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'Purchase', {
               description: 'Compra WhatsApp',
@@ -886,27 +909,15 @@ export default {
           if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
             let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
             if (this.mobileCheck()) {
-              window.open(
-                `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
-                '_blank'
-              )
+              window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
             } else {
-              window.open(
-                `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
-                '_blank'
-              )
+              window.location.href = `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
             }
           } else {
             if (this.mobileCheck()) {
-              window.open(
-                `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-                '_blank'
-              )
+              window.location.href = `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`
             } else {
-              window.open(
-                `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-                '_blank'
-              )
+              window.location.href = `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
             }
           }
         }

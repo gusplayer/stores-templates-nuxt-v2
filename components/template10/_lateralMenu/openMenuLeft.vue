@@ -44,12 +44,15 @@
                 v-for="(item, index) in secciones"
                 :key="`${index}${item.name}`"
               >
-                <nuxt-link :to="item.path" v-if="item.path" class="btn"
+                <nuxt-link
+                  :to="item.path"
+                  v-if="item.path && item.state"
+                  class="btn"
                   >{{ $t(`${item.name}`) }}
                 </nuxt-link>
                 <nuxt-link
                   :to="item.href"
-                  v-else-if="item.href && listArticulos > 0"
+                  v-else-if="item.href && listArticulos > 0 && item.state"
                   class="btn"
                   >{{ $t(`${item.name}`) }}</nuxt-link
                 >
@@ -123,6 +126,9 @@ export default {
   components: {
     BaseAccordian,
   },
+  mounted() {
+    this.setHoko()
+  },
   data() {
     return {
       selecttag: 1,
@@ -142,24 +148,34 @@ export default {
         {
           name: 'header_inicio',
           path: '/',
+          state: true,
           //icon: 'menu-icon',
         },
         {
           name: 'header_productos',
           path: '/productos',
+          state: true,
+        },
+        {
+          name: 'header_productos_hoko',
+          path: '/productosHoko',
+          state: false,
         },
         {
           name: 'header_contacto',
           path: '/contacto',
+          state: true,
           //icon: 'account-icon',
         },
         {
           name: 'header_carrito',
           path: '/cart',
+          state: true,
         },
         {
           name: 'header_blog',
           href: '/blog',
+          state: true,
           //icon: 'account-icon',
         },
       ],
@@ -181,8 +197,18 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos.length
     },
+    dataHoko() {
+      return this.$store.state.dataHoko
+    },
   },
   methods: {
+    setHoko() {
+      if (this.dataHoko && this.dataHoko.statehoko == 1) {
+        this.secciones[2].state = true
+      } else {
+        this.secciones[2].state = false
+      }
+    },
     selectTag1() {
       this.selecttag = 1
       this.focusbtn = false
@@ -296,6 +322,9 @@ export default {
   watch: {
     search(value) {
       this.Searchproduct(value)
+    },
+    dataHoko() {
+      this.setHoko()
     },
   },
 }

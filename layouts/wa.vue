@@ -37,8 +37,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
-    let domain = this.$route.fullPath
-    if (domain == '/?clearCart=true') {
+    let domain = this.$route.query
+    if (domain.clearCart == 'true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
