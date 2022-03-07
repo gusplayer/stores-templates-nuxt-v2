@@ -337,8 +337,51 @@ export const mutations = {
     }
   },
   SET_CURRENTSETTING10(state, value) {
-    if (value && value.data) {
-      state.settingByTemplate10 = value.data
+    if (value && value.component) {
+      switch (value.component) {
+        case 'banner':
+          state.settingByTemplate10.banner = value.setting
+          break
+        case 'pages':
+          state.settingByTemplate10.pages = value.setting
+          break
+        case 'settingGeneral':
+          state.settingByTemplate10.settingGeneral = value.setting
+          break
+        case 'header':
+          state.settingByTemplate10.header = value.setting
+          break
+        case 'section':
+          state.settingByTemplate10.section = value.setting
+          break
+        case 'treding':
+          state.settingByTemplate10.trending = value.setting
+          break
+        case 'offers':
+          state.settingByTemplate10.offers = value.setting
+          break
+        case 'productDestacados':
+          state.settingByTemplate10.productList = value.setting
+          break
+        case 'blog':
+          state.settingByTemplate10.blog = value.setting
+          break
+        case 'footer':
+          state.settingByTemplate10.footer = value.setting
+          break
+        case 'contact':
+          state.settingByTemplate10.contact = value.setting
+          break
+        case 'productListFilter':
+          state.settingByTemplate10.productListFilter = value.setting
+          break
+        case 'card':
+          state.settingByTemplate10.cardProduct = value.setting
+          break
+        case 'detailsProduct':
+          state.settingByTemplate10.detailsProduct = value.setting
+          break
+      }
     }
   },
   SET_CURRENTSETTING12(state, value) {
