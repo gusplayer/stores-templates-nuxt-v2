@@ -278,7 +278,7 @@
                 </div>
               </div>
               <div
-                v-if="(this.fullProducts.length == 0)"
+                v-if="this.fullProducts.length == 0"
                 class="content-products-empty"
               >
                 <div class="header-content-logo">
@@ -418,7 +418,7 @@ export default {
     subcategories() {
       return this.dataStore.subcategorias
     },
-    ggetProductsCategorie() {
+    getProductsCategorie() {
       const initial = this.currentPage * 16 - 16
       const final = initial + 16
       return this.fullProducts

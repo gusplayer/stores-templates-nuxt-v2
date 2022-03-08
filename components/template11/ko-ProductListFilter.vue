@@ -349,7 +349,7 @@ export default {
     subcategories() {
       return this.dataStore.subcategorias
     },
-    ggetProductsCategorie() {
+    getProductsCategorie() {
       const initial = this.currentPage * 16 - 16
       const final = initial + 16
       return this.fullProducts
