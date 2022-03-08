@@ -50,7 +50,7 @@
       "
     />/>
     <Kfeatured
-      id="productDestacados"
+      id="KproductDestacadosX"
       v-bind="componentsProps"
       v-if="
         settingByTemplate10 &&
@@ -199,7 +199,7 @@ export default {
               this.moverseA('kOffersX')
               break
             case 'productDestacados':
-              this.moverseA('productDestacados')
+              this.moverseA('KproductDestacadosX')
               break
             case 'blog':
               this.moverseA('KblogX')
