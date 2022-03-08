@@ -39,7 +39,7 @@ export default {
     if (route.query.orden) {
       return axios
         .get(
-          `https://api2.komercia.co/api/orden/${store.state.tienda.id_tienda}/${route.query.orden}`,
+          `${this.$store.state.urlKomercia}/api/orden/${store.state.tienda.id_tienda}/${route.query.orden}`,
           {
             headers: {
               'content-type': 'application/json',

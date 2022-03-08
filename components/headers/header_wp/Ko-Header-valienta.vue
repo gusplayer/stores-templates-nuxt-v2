@@ -104,18 +104,18 @@
           class="containt-image"
         >
           <img
-            :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+            :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
             class="header-logo"
             alt="Logovalienta"
           />
         </nuxt-link>
-        <div style="width: 100%;">
+        <div style="width: 100%">
           <p class="header-text">
             {{ dataStore.tienda.nombre }}
           </p>
           <div v-if="dataStore.tienda.descripcion">
             <div
-              style="margin-top: 5px;"
+              style="margin-top: 5px"
               class="header-direccion"
               v-html="dataStore.tienda.descripcion"
             ></div>

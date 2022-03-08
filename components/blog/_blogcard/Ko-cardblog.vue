@@ -65,7 +65,7 @@
               <span class="flex-shrink-0 mx-1">
                 <img
                   class="h-30 w-30 rounded-full mr-4"
-                  v-lazy="`https://api2.komercia.co/users/user.jpg`"
+                  v-lazy="`${this.$store.state.urlKomercia}/users/user.jpg`"
                   alt=""
                 />
               </span>

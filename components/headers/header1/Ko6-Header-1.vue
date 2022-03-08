@@ -6,7 +6,7 @@
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
             <img
-              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
               class="header-logo"
               alt="Logo Img"
             />
@@ -28,11 +28,7 @@
               <div v-else>
                 <div
                   v-if="dataStore.categorias.length > 0"
-                  style="
-                    margin-right: 20px;
-                    display: flex;
-                    flex-direction: row;
-                  "
+                  style="margin-right: 20px; display: flex; flex-direction: row"
                 >
                   <p class="header-text-center-icon">
                     {{ $t(`${item.name}`) }}
@@ -44,7 +40,7 @@
         </div>
         <div class="prueba" v-if="showSearch">
           <div class="search">
-            <form id="demo-2" style="position: relative;">
+            <form id="demo-2" style="position: relative">
               <search-icon class="icon-s" @click="focusInput" />
               <input
                 type="search"

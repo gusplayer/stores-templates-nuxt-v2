@@ -48,7 +48,7 @@
                   <nuxt-link to="/productos" class="wrapper-logo">
                     <img
                       v-lazy="
-                        `https://api2.komercia.co/logos/${dataStore.tienda.logo}`
+                        `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
                       "
                       class="header-logo"
                       alt="Logo Img"

@@ -18,7 +18,7 @@
           </h2>
           <div class="prueba">
             <div class="search">
-              <form id="demo-2" style="position: relative;">
+              <form id="demo-2" style="position: relative">
                 <search-icon class="icon-s" @click="focusInput" />
                 <input
                   type="search"
@@ -41,12 +41,12 @@
             ></KoProductCard1>
           </div>
         </div>
-        <div v-if="(filteredList.length == 0)" class="content-products-empty">
+        <div v-if="filteredList.length == 0" class="content-products-empty">
           <div class="wrapper_logo">
             <nuxt-link to="/">
               <img
                 v-lazy="
-                  `https://api2.komercia.co/logos/${dataStore.tienda.logo}`
+                  `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
                 "
                 alt="Logo Img"
               />

@@ -7,7 +7,7 @@
             <nuxt-link to="/" class="content-logo">
               <img
                 v-lazy="
-                  `https://api2.komercia.co/logos/${dataStore.tienda.logo}`
+                  `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
                 "
                 class="logo"
                 alt="Logo Img"
@@ -96,7 +96,7 @@
         <div class="item-movil-top">
           <div class="left-logo-movil">
             <img
-              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
               class="logo"
               alt="Logo Img"
             />
@@ -374,7 +374,10 @@ export default {
                 tienda: this.dataStore.tienda.id_tienda,
               }
               axios
-                .post('https://templates.komercia.co/api/suscriptores', params)
+                .post(
+                  `${this.$store.state.urlTemplate}/api/suscriptores`,
+                  params
+                )
                 .then((result) => {
                   this.register = 'Tu correo ha sido registrado'
                   this.$message.success('Tu suscripción esta activa')

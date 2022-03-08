@@ -10,7 +10,7 @@
         :style="`max-width:${settingByTemplate12.logoSize};`"
       >
         <img
-          :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+          :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
           class="header-logo"
           alt="Logo Img"
         />
@@ -48,12 +48,7 @@
       </div>
     </div>
     <div
-      class="
-        footer_resources
-        w-full
-        text-gray-400 text-center text-sm
-        font-normal
-      "
+      class="footer_resources w-full text-gray-400 text-center text-sm font-normal"
     >
       <hr class="border-t border-gray-200 w-full" />
       <div class="madebyKomercia">

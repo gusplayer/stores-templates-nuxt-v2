@@ -54,7 +54,9 @@ export const state = () => ({
   errorSettingsByComponent: null,
   productInfo: '',
   urlKomercia: 'https://api2.komercia.co',
+  // urlKomercia: 'https://apiaws.komercia.co',
   urlTemplate: 'https://templates.komercia.co',
+  urlNodeSettings: 'https://node.komercia.co',
   configAxios: {
     headers: {
       'content-type': 'application/json',
@@ -548,7 +550,7 @@ export const mutations = {
     }
     axios({
       method: 'get',
-      url: 'https://api2.komercia.co/api/user',
+      url: `${state.urlKomercia}/api/user`,
       headers,
     }).then((response) => {
       state.userData = response.data.data
@@ -649,11 +651,11 @@ export const actions = {
       parts[1] == 'localhost:3000' ||
       parts[1] == 'unicentrovillavicencio'
     ) {
-      id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+      id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
         name: `${subdomain}.komercia.co/`,
       })
     } else {
-      id = await axios.post(`https://api2.komercia.co/api/tienda/info/by/url`, {
+      id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
         name: `https://${full}`,
       })
     }
@@ -738,64 +740,62 @@ export const actions = {
   GET_DATA({ commit }) {
     commit('SET_DATA')
   },
-  GET_CITIES({ commit }) {
-    axios.get(`https://api2.komercia.co/api/ciudades`).then((response) => {
+  GET_CITIES({ commit, state }) {
+    axios.get(`${state.urlKomercia}/api/ciudades`).then((response) => {
       commit('SET_CITIES', response.data.data)
     })
   },
-  async GET_SETTINGS_BY_TEMPLATE({ commit }, store) {
+  async GET_SETTINGS_BY_TEMPLATE({ commit, state }, store) {
     let template = store.template
     await axios
       .get(
-        `https://api2.komercia.co/api/template/${template}/settings/${store.id_tienda}`
+        `${state.urlKomercia}/api/template/${template}/settings/${store.id_tienda}`
       )
       .then((response) => {
         commit('SET_SETTINGS_BY_TEMPLATE', response.data.data)
       })
   },
-  async GET_SETTINGS_BY_TEMPLATE_7({ commit }, store) {
+  async GET_SETTINGS_BY_TEMPLATE_7({ commit, state }, store) {
     const response = await axios.get(
-      `https://node.komercia.co/template7?id=${store.id_tienda}`
+      `${state.urlNodeSettings}/template7?id=${store.id_tienda}`
     )
     commit('SET_SETTINGS_BY_TEMPLATE_7', response.data.body)
   },
-  async GET_SETTINGS_BY_TEMPLATE_9({ commit }, store) {
+  async GET_SETTINGS_BY_TEMPLATE_9({ commit, state }, store) {
     const response = await axios.get(
-      `https://node.komercia.co/template9?id=${store.id_tienda}`
+      `${state.urlNodeSettings}/template9?id=${store.id_tienda}`
     )
     commit('SET_SETTINGS_BY_TEMPLATE_9', response.data.body)
   },
-  async GET_SETTINGS_BY_TEMPLATE_10({ commit }, store) {
+  async GET_SETTINGS_BY_TEMPLATE_10({ commit, state }, store) {
     const response = await axios.get(
-      `https://node.komercia.co/template10?id=${store.id_tienda}`
+      `${state.urlNodeSettings}/template10?id=${store.id_tienda}`
     )
     commit('SET_SETTINGS_BY_TEMPLATE_10', response.data.body)
   },
-  async GET_SETTINGS_BY_TEMPLATE_11({ commit }, store) {
+  async GET_SETTINGS_BY_TEMPLATE_11({ commit, state }, store) {
     const response = await axios.get(
-      `https://node.komercia.co/template11?id=${store.id_tienda}`
+      `${state.urlNodeSettings}/template11?id=${store.id_tienda}`
     )
     commit('SET_SETTINGS_BY_TEMPLATE_11', response.data.body)
   },
-  async GET_SETTINGS_BY_TEMPLATE_12({ commit }, store) {
+  async GET_SETTINGS_BY_TEMPLATE_12({ commit, state }, store) {
     const response = await axios.get(
-      `https://node.komercia.co/template12?id=${store.id_tienda}`
+      `${state.urlNodeSettings}/template12?id=${store.id_tienda}`
     )
     commit('SET_SETTINGS_BY_TEMPLATE_12', response.data.body)
   },
   async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit, state }, idWapi) {
     let template = state.template ? state.template : 99
     await axios
-      .get(
-        `https://api2.komercia.co/api/template/${template}/settings/${idWapi}`
-      )
+      .get(`${state.urlKomercia}/api/template/${template}/settings/${idWapi}`)
       .then((response) => {
         commit('SET_SETTINGS_BY_TEMPLATE', response.data.data)
       })
   },
-  async GET_ANALYTICS_TAGMANAGER({ commit }, id) {
+  async GET_ANALYTICS_TAGMANAGER({ commit, state }, id) {
     const response = await axios.get(
-      `https://api2.komercia.co/api/apis/tienda/${id}`
+      `${state.urlKomercia}/api/apis/tienda/${id}`
     )
     commit('SET_ANALITICS_TAGMANAGER', response.data.data)
   },
@@ -835,9 +835,9 @@ export const actions = {
     )
     commit('SET_ARTICLES', response.data.blogs.data)
   },
-  async GET_DATA_HOKO({ dispatch, commit }, id) {
+  async GET_DATA_HOKO({ dispatch, commit, state }, id) {
     await axios
-      .get(`https://api2.komercia.co/api/hoko/${id}`)
+      .get(`${state.urlKomercia}/api/hoko/${id}`)
       .then((response) => {
         if (response.data.data) {
           dispatch('GET_PRODUCTSHOKO', 1)

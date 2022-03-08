@@ -7,7 +7,7 @@
             <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
               <img
                 v-lazy="
-                  `https://api2.komercia.co/logos/${dataStore.tienda.logo}`
+                  `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
                 "
                 class="header-logo"
                 alt="Logo Img"
@@ -24,7 +24,7 @@
               v-for="(item, index) in secciones"
               :key="`${index}${item.name}`"
               @click="closed"
-              style="margin-bottom: 20px;"
+              style="margin-bottom: 20px"
             >
               <nuxt-link :to="item.path" class="text-secciones">
                 <div v-if="item.path" :is="item.icon" class="icon" />

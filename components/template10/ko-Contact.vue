@@ -301,7 +301,10 @@ export default {
               tienda: this.dataStore.tienda.id_tienda,
             }
             axios
-              .post('https://templates.komercia.co/api/mensaje-contacto', json)
+              .post(
+                `${this.$store.state.urlTemplate}/api/mensaje-contacto`,
+                json
+              )
               .then((response) => {
                 this.$message.success('Comentario enviado!')
                 if (

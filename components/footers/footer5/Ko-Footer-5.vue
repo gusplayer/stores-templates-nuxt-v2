@@ -26,7 +26,7 @@
           <img
             class="footer-logo"
             v-lazy="
-              `https://api2.komercia.co/logos/${this.dataStore.tienda.logo}`
+              `${this.$store.state.urlKomercia}/logos/${this.dataStore.tienda.logo}`
             "
             alt="logotienda"
           />
@@ -156,9 +156,8 @@ export default {
         this.settingByTemplate9 &&
         this.settingByTemplate9[0].setting9Footer
       ) {
-        let color = this.settingByTemplate9[0].setting9Footer[
-          '--background_color_1'
-        ]
+        let color =
+          this.settingByTemplate9[0].setting9Footer['--background_color_1']
         let colorArray = color.split(',')
         let colorInt = parseInt(colorArray[2])
         if (colorInt > 50) {
@@ -175,9 +174,8 @@ export default {
         this.settingByTemplate9 &&
         this.settingByTemplate9[0].setting9Footer
       ) {
-        let color = this.settingByTemplate9[0].setting9Footer[
-          '--background_color_1'
-        ]
+        let color =
+          this.settingByTemplate9[0].setting9Footer['--background_color_1']
         let colorArray = color.split(',')
         let colorInt = parseInt(colorArray[2])
         if (colorInt > 50) {

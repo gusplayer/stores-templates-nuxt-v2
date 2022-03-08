@@ -496,7 +496,7 @@ export default {
             this.$router.replace({ query: {} })
             return axios
               .get(
-                `https://api2.komercia.co/api/orden/${this.dataStore.tienda.id_tienda}/${this.numOrden}`,
+                `${this.$store.state.urlKomercia}/api/orden/${this.dataStore.tienda.id_tienda}/${this.numOrden}`,
                 {
                   headers: {
                     'content-type': 'application/json',

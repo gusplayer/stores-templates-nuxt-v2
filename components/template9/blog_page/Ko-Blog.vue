@@ -100,16 +100,16 @@
                 :article="article"
                 :blog="settingByTemplate9[0].blog"
                 :settingGeneral="settingByTemplate9[0].settingGeneral"
-                style="max-height: 560px;"
+                style="max-height: 560px"
               ></KoblogCard>
             </div>
           </div>
-          <div v-if="(filteredList.length == 0)" class="content-products-empty">
+          <div v-if="filteredList.length == 0" class="content-products-empty">
             <div class="header-content-logo">
               <nuxt-link to="/" class="wrapper-logo">
                 <img
                   v-lazy="
-                    `https://api2.komercia.co/logos/${dataStore.tienda.logo}`
+                    `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
                   "
                   class="header-logo"
                   alt="Logo Img"

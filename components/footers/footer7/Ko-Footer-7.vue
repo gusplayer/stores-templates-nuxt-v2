@@ -80,7 +80,7 @@
           <div class="info-btn-footer gap-2">
             <img
               class="img-logo"
-              :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
               alt="Logo"
             />
             <div class="content-direction">

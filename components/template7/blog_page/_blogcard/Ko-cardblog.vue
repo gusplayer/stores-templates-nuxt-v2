@@ -66,7 +66,7 @@
               <span class="flex-shrink-0 mx-1">
                 <img
                   class="h-20 w-20 rounded-full"
-                  src="https://api2.komercia.co/users/user.jpg"
+                  src="${this.$store.state.urlKomercia}/users/user.jpg"
                   alt=""
                 />
               </span>

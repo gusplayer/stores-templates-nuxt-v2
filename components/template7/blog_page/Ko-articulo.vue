@@ -113,7 +113,7 @@
               <a href="#">
                 <img
                   class="h-40 w-40 rounded-full"
-                  v-lazy="`https://api2.komercia.co/users/user.jpg`"
+                  v-lazy="`${this.$store.state.urlKomercia}/users/user.jpg`"
                   alt=""
                 />
               </a>

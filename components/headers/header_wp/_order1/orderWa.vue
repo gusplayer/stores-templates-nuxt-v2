@@ -967,7 +967,7 @@ export default {
             tipo: 0,
           }
           axios
-            .post('https://api2.komercia.co/api/usuario/orden', params)
+            .post('${this.$store.state.urlKomercia}/api/usuario/orden', params)
             .then(() => {
               this.redirectWP()
               this.closedOder()

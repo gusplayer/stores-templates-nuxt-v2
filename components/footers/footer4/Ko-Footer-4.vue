@@ -31,7 +31,7 @@
             <img
               class="footer-logo"
               v-lazy="
-                `https://api2.komercia.co/logos/${this.dataStore.tienda.logo}`
+                `${this.$store.state.urlKomercia}/logos/${this.dataStore.tienda.logo}`
               "
               alt="logotienda"
             />

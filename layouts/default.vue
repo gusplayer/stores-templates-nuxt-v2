@@ -315,7 +315,7 @@ export default {
         {
           hid: 'og:image',
           name: 'og:image',
-          content: `https://api2.komercia.co/logos/${tienda.logo}`,
+          content: `${this.$store.state.urlKomercia}/logos/${tienda.logo}`,
         },
         {
           hid: 'og:site_name',
@@ -380,7 +380,7 @@ export default {
         {
           rel: 'icon',
           type: 'image/x-icon',
-          href: `https://api2.komercia.co/logos/${tienda.logo}`,
+          href: `${this.$store.state.urlKomercia}/logos/${tienda.logo}`,
         },
         {
           href:

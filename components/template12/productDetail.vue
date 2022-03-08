@@ -331,7 +331,7 @@ export default {
       const idOfSlug = this.tempData.id
       if (idOfSlug) {
         axios
-          .get(`https://templates.komercia.co/api/producto/${idOfSlug}`)
+          .get(`${this.$store.state.urlTemplate}/api/producto/${idOfSlug}`)
           .then((response) => {
             this.selectedPhoto(response.data.detalle.foto_cloudinary)
             this.videoYoutube(response.data.info.video)

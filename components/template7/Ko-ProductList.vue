@@ -54,13 +54,13 @@
             </div>
           </div>
           <div
-            v-if="(this.listProducts.length == 0)"
+            v-if="this.listProducts.length == 0"
             class="content-products-empty"
           >
             <div class="header-content-logo">
               <nuxt-link to="/productos" class="wrapper-logo">
                 <img
-                  :src="`https://api2.komercia.co/logos/${dataStore.tienda.logo}`"
+                  :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
                   class="header-logo"
                   alt="Logo Img"
                   @click="clear"

@@ -93,7 +93,10 @@ export default {
                 tienda: this.dataStore.tienda.id_tienda,
               }
               axios
-                .post('https://api2.komercia.co/api/tienda/suscriptor', json)
+                .post(
+                  '${this.$store.state.urlKomercia}/api/tienda/suscriptor',
+                  json
+                )
                 .then((res) => {
                   if (
                     this.facebooPixel &&
