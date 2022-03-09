@@ -569,6 +569,9 @@
           <whatsapp-icon class="wp-icon" /> {{ $t('footer_ordenFormbtn') }}
         </button>
       </div>
+      <div class="modal-confirmation" v-if="this.modalConfirmation == true">
+        <p>Enviando información!</p>
+      </div>
     </div>
   </transition>
 </template>
@@ -606,7 +609,6 @@ export default {
   data() {
     return {
       img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
-
       shippingCities: [],
       rangosByCiudades: [],
       remove: false,
@@ -626,6 +628,7 @@ export default {
       statusorden: false,
       placeholderBarrio: 'footer_formBarrio',
       placeholderMsgBarrio: 'footer_formBarrioMgs',
+      modalConfirmation: false,
     }
   },
   computed: {
@@ -674,7 +677,6 @@ export default {
           switch (shipping.envio_metodo) {
             case 'gratis':
               return 0
-
             case 'tarifa_plana':
               return shipping.valor
             case 'precio_ciudad':
@@ -901,8 +903,7 @@ export default {
           textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
         }
         text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
-      }
-      if (this.dataStore.tienda.lenguaje == 'en') {
+      } else if (this.dataStore.tienda.lenguaje == 'en') {
         if (
           this.rangosByCiudades &&
           this.rangosByCiudades.envio_metodo == 'gratis'
@@ -912,8 +913,7 @@ export default {
           textFreeShippingCart = 'Shipping%20cost%20separately'
         }
         text = `Hello%2C%20I%20am%20${this.nombre}%2C%0AI%20made%20this%20order%20at%20your%20store%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20information%3A%0AName%3A%20${this.nombre}%0ACity%3A%20${this.ciudad}%0ANeighborhood%3A%20${this.barrio}%0AAddres%3A%20${this.dirreccion}%0A%0back%20to%20the%20storea%3A%20${window.location}?clearCart=true`
-      }
-      if (this.dataStore.tienda.lenguaje == 'pt') {
+      } else if (this.dataStore.tienda.lenguaje == 'pt') {
         if (
           this.rangosByCiudades &&
           this.rangosByCiudades.envio_metodo == 'gratis'
@@ -923,6 +923,16 @@ export default {
           textFreeShippingCart = 'Custo%20de%20frete%20separadamente'
         }
         text = `Olá%2C%20aqui%20é%20${this.nombre}%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20Minhas%20informaçãoes%3A%0ANome%3A%20${this.nombre}%0ACidade%3A%20${this.ciudad}%0ABairro%3A%20${this.barrio}%0AEndereço%3A%20${this.dirreccion}%0A%0Ade%20volta%20%C3%A0%20loja%3A%20${window.location}?clearCart=true`
+      } else {
+        if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'gratis'
+        ) {
+          textFreeShippingCart = 'Env%C3%ADo%20gratis'
+        } else {
+          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
+        }
+        text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
       }
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
@@ -938,9 +948,11 @@ export default {
           window.location.href = `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
         }
       }
+      this.modalConfirmation = false
       // this.removeCartItems()
     },
     setOrder() {
+      this.modalConfirmation = true
       this.$refs.observer.validate().then((response) => {
         if (response) {
           let temp = {
@@ -1641,6 +1653,18 @@ details[open] summary ~ * {
   z-index: 1000;
   padding: 20px 0 45px;
   overflow-y: auto;
+}
+.modal-confirmation {
+  width: 100%;
+  height: 100vh;
+  max-width: 400px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.87);
+  color: white;
+  z-index: 1001;
 }
 .content-items-form {
   width: 100%;
