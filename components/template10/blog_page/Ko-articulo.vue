@@ -27,7 +27,7 @@
             <a href="#">
               <img
                 class="h-10 w-10 rounded-full"
-                src="${this.$store.state.urlKomercia}/users/user.jpg"
+                :src="`${this.$store.state.urlKomercia}/users/user.jpg`"
                 alt=""
               />
             </a>

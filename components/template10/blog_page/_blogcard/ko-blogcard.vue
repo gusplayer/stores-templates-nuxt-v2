@@ -31,7 +31,7 @@
           <span class="flex-shrink-0 mx-1">
             <img
               class="h-15 w-15 rounded-full mr-5"
-              src="${this.$store.state.urlKomercia}/users/user.jpg"
+              :src="`${this.$store.state.urlKomercia}/users/user.jpg`"
               alt=""
             />
           </span>

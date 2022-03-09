@@ -136,7 +136,7 @@ export default {
               }
               axios
                 .post(
-                  '${this.$store.state.urlKomercia}/api/tienda/suscriptor',
+                  `${this.$store.state.urlKomercia}/api/tienda/suscriptor`,
                   json
                 )
                 .then((res) => {
