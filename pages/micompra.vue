@@ -39,7 +39,7 @@ export default {
     if (route.query.orden) {
       return axios
         .get(
-          `${this.$store.state.urlKomercia}/api/orden/${store.state.tienda.id_tienda}/${route.query.orden}`,
+          `${store.state.urlKomercia}/api/orden/${store.state.tienda.id_tienda}/${route.query.orden}`,
           {
             headers: {
               'content-type': 'application/json',
@@ -57,13 +57,13 @@ export default {
             return { orden }
           } else {
             const orden = {}
-            orden.message = 'No exite esta orden'
+            orden.message = 'No existe esta orden'
             return { orden }
           }
         })
         .catch(() => {
           const orden = {}
-          orden.message = 'No exite esta orden'
+          orden.message = 'No existe esta orden'
           return { orden }
         })
     } else {
