@@ -457,6 +457,26 @@
                 </span>
               </template>
             </validation-provider>
+            <p class="form-subtext">{{ $t('footer_formPhone') }}</p>
+            <validation-provider
+              name="identificacion"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  name="identificacion"
+                  type="text"
+                  v-model="identificacion"
+                  class="input-text"
+                  :placeholder="$t('footer_formPhoneMgs')"
+                  id="Contactidentificacion"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
             <P class="form-subtext"> {{ $t('footer_formCiudad') }}</P>
             <validation-provider
               name="ciudad"
@@ -522,10 +542,21 @@
         </div>
         <button
           class="continue_shopping_form"
-          v-on:click.prevent="redirectWP()"
+          v-on:click.prevent="setOrderWa()"
           style="margin-top: 15px"
         >
           <whatsapp-icon class="wp-icon" /> {{ $t('footer_finalizarCompra') }}
+        </button>
+      </div>
+      <div class="modal-confirmation" v-if="this.modalConfirmation == true">
+        <p>{{ this.textConfirmation }}</p>
+        <button
+          class="continue_form_confirmation"
+          @click="redirectWP"
+          style="margin-top: 15px"
+          v-if="stateBtnConfirmation"
+        >
+          <whatsapp-icon class="wp-icon" /> Enviar información al WhatsApp
         </button>
       </div>
     </div>
@@ -534,6 +565,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import idCloudinary from '../../../mixins/idCloudinary'
 import currency from '../../../mixins/formatCurrent'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
@@ -573,7 +605,7 @@ export default {
       estadoShippingTarifaPrecio: false,
       formOrden: false,
       nombre: '',
-      numberphone: '',
+      identificacion: '',
       ciudad: '',
       barrio: '',
       dirreccion: '',
@@ -582,6 +614,9 @@ export default {
       cantidadProductos: 0,
       placeholderBarrio: 'footer_formBarrio',
       placeholderMsgBarrio: 'footer_formBarrioMgs',
+      stateBtnConfirmation: false,
+      textConfirmation: '!Generando orden de compra!',
+      modalConfirmation: false,
     }
   },
   computed: {
@@ -828,109 +863,145 @@ export default {
       return window.mobilecheck()
     },
     redirectWP() {
-      this.$refs.observer.validate().then((response) => {
-        if (response) {
-          let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
-          let baseUrlPc = 'https://web.whatsapp.com/send?phone='
-          let urlProduct
-          if (this.dataStore.tienda.dominio) {
-            urlProduct = `${this.dataStore.tienda.dominio}wa`
-          } else {
-            urlProduct = `http://${this.dataStore.tienda.subdominio}.komercia.store/wa`
-          }
-          let productosCart = []
-          this.$store.state.productsCart.map((element) => {
-            if (element.combinacion) {
-              let combiString = JSON.stringify(element.combinacion)
-              let combiList = combiString.replace(/"/g, '')
-              let resultcombitList = combiList.replace(/,/g, ' - ')
-              productosCart.push(
-                `${element.cantidad} x ${
-                  element.nombre
-                } = Variantes: ${resultcombitList} -> Valor: ${
-                  element.cantidad * element.precio
-                }`
-              )
-            } else {
-              productosCart.push(
-                `${element.cantidad} x ${element.nombre} -> Valor: ${
-                  element.cantidad * element.precio
-                }`
-              )
-            }
-          })
-          let productString = JSON.stringify(productosCart)
-          let productList = productString.replace(/"/g, '')
-          let resultproductList = productList.replace(/,/g, '%0A')
-          let result = resultproductList.slice(1, -1)
-          var text = ''
-          let textFreeShippingCart
-          if (this.dataStore.tienda.lenguaje == 'es') {
-            if (
-              this.rangosByCiudades &&
-              this.rangosByCiudades.envio_metodo == 'gratis'
-            ) {
-              textFreeShippingCart = 'Env%C3%ADo%20gratis'
-            } else {
-              textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
-            }
-            text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
-          } else if (this.dataStore.tienda.lenguaje == 'en') {
-            if (
-              this.rangosByCiudades &&
-              this.rangosByCiudades.envio_metodo == 'gratis'
-            ) {
-              textFreeShippingCart = 'Free%20shippings'
-            } else {
-              textFreeShippingCart = 'Shipping%20cost%20separately'
-            }
-            text = `Hello%2C%20I%20am%20${this.nombre}%2C%0AI%20made%20this%20order%20at%20your%20store%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20information%3A%0AName%3A%20${this.nombre}%0ACity%3A%20${this.ciudad}%0ANeighborhood%3A%20${this.barrio}%0AAddres%3A%20${this.dirreccion}%0A%0back%20to%20the%20storea%3A%20${window.location}?clearCart=true`
-          } else if (this.dataStore.tienda.lenguaje == 'pt') {
-            if (
-              this.rangosByCiudades &&
-              this.rangosByCiudades.envio_metodo == 'gratis'
-            ) {
-              textFreeShippingCart = 'Frete%20gr%C3%A1tis'
-            } else {
-              textFreeShippingCart = 'Custo%20de%20frete%20separadamente'
-            }
-            text = `Olá%2C%20aqui%20é%20${this.nombre}%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20Minhas%20informaçãoes%3A%0ANome%3A%20${this.nombre}%0ACidade%3A%20${this.ciudad}%0ABairro%3A%20${this.barrio}%0AEndereço%3A%20${this.dirreccion}%0A%0Ade%20volta%20%C3%A0%20loja%3A%20${window.location}?clearCart=true`
-          } else {
-            if (
-              this.rangosByCiudades &&
-              this.rangosByCiudades.envio_metodo == 'gratis'
-            ) {
-              textFreeShippingCart = 'Env%C3%ADo%20gratis'
-            } else {
-              textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
-            }
-            text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
-          }
-          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-            window.fbq('track', 'Purchase', {
-              description: 'Compra WhatsApp',
-              value: this.totalCart,
-              currency: this.dataStore.tienda.moneda,
-            })
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
-          if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-            let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-            if (this.mobileCheck()) {
-              window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
-            } else {
-              window.location.href = `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
-            }
-          } else {
-            if (this.mobileCheck()) {
-              window.location.href = `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`
-            } else {
-              window.location.href = `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
-            }
-          }
+      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
+      let baseUrlPc = 'https://web.whatsapp.com/send?phone='
+      let productosCart = []
+      this.$store.state.productsCart.map((element) => {
+        if (element.combinacion) {
+          let combiString = JSON.stringify(element.combinacion)
+          let combiList = combiString.replace(/"/g, '')
+          let resultcombitList = combiList.replace(/,/g, ' - ')
+          productosCart.push(
+            `${element.cantidad} x ${
+              element.nombre
+            } = Variantes: ${resultcombitList} -> Valor: ${
+              element.cantidad * element.precio
+            }`
+          )
+        } else {
+          productosCart.push(
+            `${element.cantidad} x ${element.nombre} -> Valor: ${
+              element.cantidad * element.precio
+            }`
+          )
         }
       })
+      let productString = JSON.stringify(productosCart)
+      let productList = productString.replace(/"/g, '')
+      let resultproductList = productList.replace(/,/g, '%0A')
+      let result = resultproductList.slice(1, -1)
+      var text = ''
+      let textFreeShippingCart
+      if (this.dataStore.tienda.lenguaje == 'es') {
+        if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'gratis'
+        ) {
+          textFreeShippingCart = 'Env%C3%ADo%20gratis'
+        } else {
+          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
+        }
+        text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
+      } else if (this.dataStore.tienda.lenguaje == 'en') {
+        if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'gratis'
+        ) {
+          textFreeShippingCart = 'Free%20shippings'
+        } else {
+          textFreeShippingCart = 'Shipping%20cost%20separately'
+        }
+        text = `Hello%2C%20I%20am%20${this.nombre}%2C%0AI%20made%20this%20order%20at%20your%20store%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20information%3A%0AName%3A%20${this.nombre}%0ACity%3A%20${this.ciudad}%0ANeighborhood%3A%20${this.barrio}%0AAddres%3A%20${this.dirreccion}%0A%0back%20to%20the%20storea%3A%20${window.location}?clearCart=true`
+      } else if (this.dataStore.tienda.lenguaje == 'pt') {
+        if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'gratis'
+        ) {
+          textFreeShippingCart = 'Frete%20gr%C3%A1tis'
+        } else {
+          textFreeShippingCart = 'Custo%20de%20frete%20separadamente'
+        }
+        text = `Olá%2C%20aqui%20é%20${this.nombre}%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20Minhas%20informaçãoes%3A%0ANome%3A%20${this.nombre}%0ACidade%3A%20${this.ciudad}%0ABairro%3A%20${this.barrio}%0AEndereço%3A%20${this.dirreccion}%0A%0Ade%20volta%20%C3%A0%20loja%3A%20${window.location}?clearCart=true`
+      } else {
+        if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'gratis'
+        ) {
+          textFreeShippingCart = 'Env%C3%ADo%20gratis'
+        } else {
+          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
+        }
+        text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
+      }
+      if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
+        let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+        if (this.mobileCheck()) {
+          window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
+        } else {
+          window.location.href = `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
+        }
+      } else {
+        if (this.mobileCheck()) {
+          window.location.href = `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`
+        } else {
+          window.location.href = `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
+        }
+      }
+      setTimeout(() => {
+        this.modalConfirmation = false
+        this.closedOder()
+        this.$message({
+          showClose: true,
+          message:
+            '¡Por falta de permisos no fue posible abrir WhatsApp para enviar la información!',
+          type: 'error',
+          duration: 9000,
+        })
+        this.removeCartItems()
+      }, 5000)
       this.formOrden = !this.formOrden
+    },
+    setOrderWa() {
+      this.modalConfirmation = true
+      this.$refs.observer.validate().then((response) => {
+        if (response) {
+          let temp = {
+            nombre: this.nombre,
+            identificacion: this.identificacion,
+            ciudad: this.ciudad,
+            barrio: this.barrio,
+            direccion: this.dirreccion,
+          }
+          const myJSON = JSON.stringify(temp)
+          const params = {
+            usuario: 30866,
+            tienda: this.dataStore.tienda.id_tienda,
+            total: this.totalCart,
+            direccion_entrega: {
+              type: 0,
+              value: null,
+            },
+            productos: this.productsCart,
+            metodo_pago: 7,
+            canal: 1,
+            comentario: myJSON,
+            costo_envio: 0,
+            tipo: 0,
+          }
+          axios
+            .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
+            .then(() => {
+              // this.closedOder()
+              // this.$message.success('Datos enviados correctamente!')
+              this.textConfirmation =
+                '¡Información enviada correctamente a la tienda!'
+              this.stateBtnConfirmation = true
+            })
+            .catch(() => {
+              this.$message.error('Error al enviar los datos!')
+            })
+        }
+      })
     },
     listaDescuentos() {
       this.cantidadProductos = 0
@@ -1687,5 +1758,44 @@ details[open] summary ~ * {
   border: solid 2px #ccc;
   background-color: #fff;
   color: #2c2930;
+}
+.continue_form_confirmation {
+  font-size: 16px;
+  padding: 8px 10px;
+  width: 100%;
+  height: 44px;
+  max-width: 340px;
+  font-weight: 400;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: var(--radius_btn);
+  color: #fff;
+  border: solid 2px #2c2930;
+  background-color: #2c2930;
+}
+.continue_form_confirmation:hover {
+  border: solid 2px #ccc;
+  background-color: #fff;
+  color: #2c2930;
+}
+.modal-confirmation {
+  width: 100%;
+  height: 100vh;
+  max-width: 400px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.87);
+  color: white;
+  z-index: 1001;
+  top: 0;
 }
 </style>

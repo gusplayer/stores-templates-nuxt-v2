@@ -570,7 +570,30 @@
         </button>
       </div>
       <div class="modal-confirmation" v-if="this.modalConfirmation == true">
-        <p>Enviando información!</p>
+        <p>{{ this.textConfirmation }}</p>
+        <button
+          class="continue_form_confirmation"
+          :style="`background: ${
+            settingByTemplate && settingByTemplate.color_primario
+              ? settingByTemplate.color_primario
+              : '#25D366'
+          }; color:${
+            settingByTemplate && settingByTemplate.color_secundario
+              ? settingByTemplate.color_secundario
+              : '#FFFFFF'
+          };
+          border:2px solid ${
+            settingByTemplate && settingByTemplate.color_primario
+              ? settingByTemplate.color_primario
+              : '#25D366'
+          };          
+          `"
+          @click="redirectWP"
+          style="margin-top: 15px"
+          v-if="stateBtnConfirmation"
+        >
+          <whatsapp-icon class="wp-icon" /> Enviar información al WhatsApp
+        </button>
       </div>
     </div>
   </transition>
@@ -579,7 +602,6 @@
 import axios from 'axios'
 import idCloudinary from '../../../../mixins/idCloudinary'
 import currency from '../../../../mixins/formatCurrent'
-
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   mixins: [idCloudinary, currency],
@@ -608,6 +630,8 @@ export default {
   },
   data() {
     return {
+      stateBtnConfirmation: false,
+      textConfirmation: '!Generando orden de compra!',
       img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
       shippingCities: [],
       rangosByCiudades: [],
@@ -948,13 +972,23 @@ export default {
           window.location.href = `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
         }
       }
-      this.modalConfirmation = false
-      // this.removeCartItems()
+      setTimeout(() => {
+        this.modalConfirmation = false
+        this.closedOder()
+        this.$message({
+          showClose: true,
+          message:
+            '¡Por falta de permisos no fue posible abrir WhatsApp para enviar la información!',
+          type: 'error',
+          duration: 9000,
+        })
+        this.removeCartItems()
+      }, 5000)
     },
     setOrder() {
+      this.modalConfirmation = true
       this.$refs.observer.validate().then((response) => {
         if (response) {
-          this.modalConfirmation = true
           let temp = {
             nombre: this.nombre,
             identificacion: this.identificacion,
@@ -981,9 +1015,11 @@ export default {
           axios
             .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
             .then(() => {
-              this.redirectWP()
-              this.closedOder()
-              this.$message.success('Datos enviados correctamente!')
+              // this.closedOder()
+              // this.$message.success('Datos enviados correctamente!')
+              this.textConfirmation =
+                '¡Información enviada correctamente a la tienda!'
+              this.stateBtnConfirmation = true
             })
             .catch(() => {
               this.$message.error('Error al enviar los datos!')
@@ -1660,8 +1696,10 @@ details[open] summary ~ * {
   max-width: 400px;
   position: absolute;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-color: rgba(0, 0, 0, 0.87);
   color: white;
   z-index: 1001;
@@ -1763,13 +1801,29 @@ details[open] summary ~ * {
   text-align: center;
   align-items: center;
   border-radius: 5px;
-  color: #fff;
-  border: solid 2px #2c2930;
-  background-color: #2c2930;
+  /* color: #fff; */
+  /* border: solid 2px #2c2930; */
+  /* background-color: #2c2930; */
 }
 .continue_shopping_form:hover {
   border: solid 2px #ccc;
   background-color: #fff;
   color: #2c2930;
+}
+.continue_form_confirmation {
+  font-size: 16px;
+  padding: 8px 10px;
+  width: 100%;
+  height: 44px;
+  max-width: 340px;
+  font-weight: 400;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-top: 20px;
 }
 </style>
