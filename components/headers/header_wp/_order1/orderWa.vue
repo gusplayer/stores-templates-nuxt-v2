@@ -952,9 +952,9 @@ export default {
       // this.removeCartItems()
     },
     setOrder() {
-      this.modalConfirmation = true
       this.$refs.observer.validate().then((response) => {
         if (response) {
+          this.modalConfirmation = true
           let temp = {
             nombre: this.nombre,
             identificacion: this.identificacion,
