@@ -537,13 +537,13 @@
                 </span>
               </template>
             </validation-provider>
-            <div class="mt-10 text-justify text-sm">
+            <!-- <div class="mt-10 text-justify text-sm">
               <p>
                 <strong>Advertencia:</strong> Los usuarios de iPhone si usan el
                 navegador Safari pueden presentar fallos en la compra, por lo
                 tanto, se les recomienda usar uno diferente.
               </p>
-            </div>
+            </div> -->
           </ValidationObserver>
         </div>
         <button
