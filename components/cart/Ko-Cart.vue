@@ -432,9 +432,9 @@
               <p class="Quotation-message" v-if="dataStore.tienda.estado == 0">
                 {{ $t('footer_tiendaCerrada') }}
               </p>
-              <p class="Quotation-message" v-if="!stateModalPwd">
+              <!-- <p class="Quotation-message" v-if="!stateModalPwd">
                 {{ $t('footer_tiendaPwd') }}
-              </p>
+              </p> -->
               <p
                 class="Quotation-message"
                 v-if="!IsMinValorTotal() && productsCart.length"
@@ -459,8 +459,7 @@
                   dataStore.tienda.estado == 1 &&
                   this.estadoShippingTarifaPrecio == false &&
                   countryStore == true &&
-                  IsMinValorTotal() &&
-                  stateModalPwd
+                  IsMinValorTotal()
                 "
               >
                 {{ $t('footer_finalizarCompra') }}
@@ -527,9 +526,9 @@ export default {
     }
   },
   computed: {
-    stateModalPwd() {
-      return this.$store.state.stateModalPwd
-    },
+    // stateModalPwd() {
+    //   return this.$store.state.stateModalPwd
+    // },
     template() {
       return this.$store.state.template
     },

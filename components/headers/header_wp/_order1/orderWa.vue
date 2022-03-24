@@ -326,9 +326,9 @@
                 >
                   {{ $t('footer_tiendaCerrada') }}
                 </p>
-                <p class="Quotation-message" v-if="!stateModalPwd">
+                <!-- <p class="Quotation-message" v-if="!stateModalPwd">
                   {{ $t('footer_tiendaPwd') }}
-                </p>
+                </p> -->
                 <p
                   class="Quotation-message"
                   v-if="!IsMinValorTotal() && productsCart.length"
@@ -351,8 +351,7 @@
                     this.estadoShippingTarifaPrecio == false &&
                     countryStore == true &&
                     IsMinValorTotal() &&
-                    settingByTemplate.pago_online == 1 &&
-                    stateModalPwd
+                    settingByTemplate.pago_online == 1
                   "
                   class="continue_shopping2"
                   :style="`color: ${
@@ -374,8 +373,7 @@
                     productsCart.length &&
                     !isQuotation() &&
                     dataStore.tienda.estado == 1 &&
-                    dataStore.tienda.whatsapp &&
-                    stateModalPwd
+                    dataStore.tienda.whatsapp
                   "
                   class="continue_shopping"
                   :style="`background: ${
@@ -661,9 +659,9 @@ export default {
     }
   },
   computed: {
-    stateModalPwd() {
-      return this.$store.state.stateModalPwd
-    },
+    // stateModalPwd() {
+    //   return this.$store.state.stateModalPwd
+    // },
     layourUnicentro() {
       return this.$store.state.layoutUnicentro
     },

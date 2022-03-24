@@ -1,162 +1,38 @@
 <template>
   <div>
     <div class="general-container" v-if="dataStore">
-      <nuxt />
-      <div
-        class="wrapper-notificacion"
-        id="modalNotificacion"
-        v-if="dataStore.tienda.estado == 0"
-      >
-        <div class="content-notificacion">
-          <koTiendaCerrada />
-          <p class="text-noti">
-            Disculpa, no podrá realizar compras por el momento,
-          </p>
-          <p class="subtitle-noti">¿Deseas continuar?</p>
-          <button class="btn-acceptM" @click="acceptClose()">Aceptar</button>
-        </div>
-      </div>
-      <div
-        class="wrapper-notificacion-wa"
-        v-if="dataStore.tienda.whatsapp == ''"
-      >
-        <div class="content-notificacion">
-          <koTiendaCerrada />
-          <p class="text-noti">
-            Disculpa, no podrá realizar compras por el momento,
-          </p>
-          <p class="subtitle-noti">
-            La tienda no tiene configurado un número de WhatsApp
-          </p>
-        </div>
-      </div>
-      <div
-        class="wrapper-security-modal"
-        :style="`background: ${
-          dataStore.modal && dataStore.modal.colorBg_1
-            ? dataStore.modal.colorBg_1
-            : 'rgba(5, 5, 5, 0.897)'
-        };`"
-        v-if="
-          dataStore.modal && dataStore.modal.stateModal == 1 && !stateModalPwd
-        "
-      >
+      <div v-if="stateModalPwd">
+        <nuxt />
         <div
-          class="content-security-modal"
-          :style="`background: ${
-            dataStore.modal && dataStore.modal.colorBg_2
-              ? dataStore.modal.colorBg_2
-              : 'White'
-          };`"
+          class="wrapper-notificacion"
+          id="modalNotificacion"
+          v-if="dataStore.tienda.estado == 0"
         >
-          <img
-            v-if="dataStore.modal && dataStore.modal.img"
-            :src="dataStore.modal.img"
-            alt="img-modal-block"
-            :style="`width: ${
-              dataStore.modal && dataStore.modal.width_img
-                ? dataStore.modal.width_img
-                : '120px'
-            };
-           margin-bottom: ${
-             dataStore.modal && dataStore.modal.marginBottomImg
-               ? dataStore.modal.marginBottomImg
-               : '10px'
-           };
-          `"
-          />
-          <p
-            :style="`color: ${
-              dataStore.modal && dataStore.modal.colorTitle
-                ? dataStore.modal.colorTitle
-                : 'White'
-            };
-             font-size: ${
-               dataStore.modal && dataStore.modal.fontSizeTitle
-                 ? dataStore.modal.fontSizeTitle
-                 : '20px'
-             };
-            font-weight: ${
-              dataStore.modal && dataStore.modal.fontWeighTitle
-                ? dataStore.modal.fontWeighTitle
-                : 'Bold'
-            };
-            margin-bottom: ${
-              dataStore.modal && dataStore.modal.marginBottomTitle
-                ? dataStore.modal.marginBottomTitle
-                : '15px'
-            };            
-            `"
-          >
-            {{ dataStore.modal.title }}
-          </p>
-          <p
-            :style="`color: ${
-              dataStore.modal && dataStore.modal.colorDescription
-                ? dataStore.modal.colorDescription
-                : 'White'
-            };
-            font-size: ${
-              dataStore.modal && dataStore.modal.fontSizeDescription
-                ? dataStore.modal.fontSizeDescription
-                : '16px'
-            };
-            font-weight: ${
-              dataStore.modal && dataStore.modal.fontWeighDescription
-                ? dataStore.modal.fontWeighDescription
-                : '400'
-            };
-            margin-bottom: ${
-              dataStore.modal && dataStore.modal.marginBottomDescription
-                ? dataStore.modal.marginBottomDescription
-                : '20px'
-            };
-            `"
-          >
-            {{ dataStore.modal.description }}
-          </p>
-
-          <div class="inputBox">
-            <input
-              name="password"
-              type="password"
-              v-model="pwd"
-              class="input-text"
-              :style="`color: ${
-                dataStore.modal && dataStore.modal.colorBorder
-                  ? dataStore.modal.colorBorder
-                  : 'Black'
-              }; border: solid 2px ${
-                dataStore.modal && dataStore.modal.colorBorder
-                  ? dataStore.modal.colorBorder
-                  : 'Black'
-              };`"
-              placeholder="Ingresar contraseña"
-              id="password"
-            />
-            <div id="toggle" @click="switchVisibility()">
-              <i class="el-icon-view" />
-            </div>
+          <div class="content-notificacion">
+            <koTiendaCerrada />
+            <p class="text-noti">
+              Disculpa, no podrá realizar compras por el momento,
+            </p>
+            <p class="subtitle-noti">¿Deseas continuar?</p>
+            <button class="btn-acceptM" @click="acceptClose()">Aceptar</button>
           </div>
-          <button
-            class="btn-acceptModal"
-            :style="`color: ${
-              dataStore.modal && dataStore.modal.colorTextBtn
-                ? dataStore.modal.colorTextBtn
-                : 'White'
-            }; 
-          background-color: ${
-            dataStore.modal && dataStore.modal.colorBgBtn
-              ? dataStore.modal.colorBgBtn
-              : 'Black'
-          };          
-          `"
-            @click="closedModal"
-          >
-            Ingresar
-          </button>
+        </div>
+        <div
+          class="wrapper-notificacion-wa"
+          v-if="dataStore.tienda.whatsapp == ''"
+        >
+          <div class="content-notificacion">
+            <koTiendaCerrada />
+            <p class="text-noti">
+              Disculpa, no podrá realizar compras por el momento,
+            </p>
+            <p class="subtitle-noti">
+              La tienda no tiene configurado un número de WhatsApp
+            </p>
+          </div>
         </div>
       </div>
+      <koModalsecurity :dataStore="dataStore" v-else />
     </div>
     <div v-else>
       <koTiendaError />
@@ -167,10 +43,12 @@
 <script>
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
 import koTiendaError from '../components/Ko-errorStore'
+import koModalsecurity from '../components/modal/Ko-modal-security.vue'
 export default {
   components: {
     koTiendaCerrada,
     koTiendaError,
+    koModalsecurity,
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
@@ -186,9 +64,6 @@ export default {
       window.fbq('track', 'PageView', {
         description: 'StoreKomerciaWhatsapp',
       })
-    }
-    if (this.dataStore.modal && this.dataStore.modal.stateModal == 1) {
-      this.$store.commit('SET_STATE_MODAL_PWD', false)
     }
   },
   head() {
@@ -335,21 +210,6 @@ export default {
       document.getElementById('modalNotificacion').style.zIndex = '-2'
       document.getElementById('modalNotificacion').style.opacity = '0'
     },
-    closedModal() {
-      if (this.dataStore.modal && this.dataStore.modal.password) {
-        if (this.dataStore.modal.password == this.pwd) {
-          this.$store.commit('SET_STATE_MODAL_PWD', true)
-        }
-      }
-    },
-    switchVisibility() {
-      const password = document.getElementById('password')
-      if (password.type === 'password') {
-        password.setAttribute('type', 'text')
-      } else {
-        password.setAttribute('type', 'password')
-      }
-    },
   },
 }
 </script>
@@ -432,78 +292,5 @@ export default {
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
   transition: all 200ms ease-in;
-}
-.wrapper-security-modal {
-  top: 0;
-  opacity: 1;
-  z-index: 99999;
-  width: 100%;
-  height: calc(100vh);
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* background: rgba(5, 5, 5, 0.897); */
-  transition: all 200ms ease-in;
-}
-.content-security-modal {
-  padding: 30px 20px;
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* background: white; */
-  border-radius: 5px;
-  -webkit-box-shadow: 0px 0px 47px 11px rgba(87, 87, 87, 0.4);
-  box-shadow: 0px 0px 47px 11px rgba(87, 87, 87, 0.4);
-}
-.btn-acceptModal {
-  width: 100%;
-  max-width: 250px;
-  border-radius: 5px;
-  padding: 8px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.input-text {
-  margin-bottom: 10px;
-  font-size: 14px;
-  border-radius: 5px;
-  background-color: transparent;
-  padding: 8px 14px;
-  width: 100%;
-}
-.input-text::placeholder {
-  opacity: 0.7;
-}
-.input-text:-internal-autofill-selected {
-  -webkit-appearance: menulist-button;
-  background-color: transparent !important;
-  background-image: none !important;
-  color: -internal-light-dark-color(black, white) !important;
-}
-.input-text:focus,
-.input-text:active {
-  outline: 0;
-  border: solid 2px rgba(127, 127, 139, 0.342);
-}
-.inputBox {
-  max-width: 250px;
-  width: 100%;
-  position: relative;
-}
-#toggle {
-  position: absolute;
-  top: 20%;
-  right: 10px;
-  cursor: pointer;
-}
-@media (max-width: 500px) {
-  .content-security-modal {
-    max-width: 350px;
-  }
 }
 </style>

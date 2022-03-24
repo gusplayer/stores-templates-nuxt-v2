@@ -1,43 +1,55 @@
 <template>
-  <div class="general-container">
-    <koHeaderValienta :dataStore="dataStore" />
-    <nuxt />
-    <div
-      class="wrapper-notificacion"
-      id="modalNotificacion"
-      v-if="dataStore.tienda.estado == 0"
-    >
-      <div class="content-notificacion">
-        <koTiendaCerrada />
-        <p class="text-noti">
-          Disculpa, no podrá realizar compras por el momento,
-        </p>
-        <p class="subtitle-noti">¿Deseas continuar?</p>
-        <button class="btn-acceptM" @click="acceptClose()">Aceptar</button>
+  <div>
+    <div v-if="dataStore">
+      <div v-if="stateModalPwd">
+        <div class="general-container">
+          <koHeaderValienta :dataStore="dataStore" />
+          <nuxt />
+          <div
+            class="wrapper-notificacion"
+            id="modalNotificacion"
+            v-if="dataStore.tienda.estado == 0"
+          >
+            <div class="content-notificacion">
+              <koTiendaCerrada />
+              <p class="text-noti">
+                Disculpa, no podrá realizar compras por el momento,
+              </p>
+              <p class="subtitle-noti">¿Deseas continuar?</p>
+              <button class="btn-acceptM" @click="acceptClose()">
+                Aceptar
+              </button>
+            </div>
+          </div>
+          <div
+            class="wrapper-notificacion-valienta"
+            v-if="dataStore.entidades[0].id != 16"
+          >
+            <div class="content-notificacion-valienta">
+              <koTiendaCerrada />
+              <p class="text-noti">
+                Disculpa, no podrá realizar compras por el momento,
+              </p>
+              <p class="subtitle-noti-valienta">La tienda no es de</p>
+              <a
+                href="https://valienta.com/"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <img
+                  src="https://valienta.com/wp-content/uploads/2020/01/logo-v1.svg"
+                  class="logo2"
+                  alt="Logo Img"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
+      <koModalsecurity :dataStore="dataStore" v-else />
     </div>
-    <div
-      class="wrapper-notificacion-valienta"
-      v-if="dataStore.entidades[0].id != 16"
-    >
-      <div class="content-notificacion-valienta">
-        <koTiendaCerrada />
-        <p class="text-noti">
-          Disculpa, no podrá realizar compras por el momento,
-        </p>
-        <p class="subtitle-noti-valienta">La tienda no es de</p>
-        <a
-          href="https://valienta.com/"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <img
-            src="https://valienta.com/wp-content/uploads/2020/01/logo-v1.svg"
-            class="logo2"
-            alt="Logo Img"
-          />
-        </a>
-      </div>
+    <div v-else>
+      <koTiendaError />
     </div>
   </div>
 </template>
@@ -45,10 +57,14 @@
 <script>
 import koHeaderValienta from '../components/headers/header_wp/Ko-Header-valienta'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
+import koModalsecurity from '../components/modal/Ko-modal-security.vue'
+import koTiendaError from '../components/Ko-errorStore'
 export default {
   components: {
     koTiendaCerrada,
     koHeaderValienta,
+    koModalsecurity,
+    koTiendaError,
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
@@ -195,6 +211,9 @@ export default {
     }
   },
   computed: {
+    stateModalPwd() {
+      return this.$store.state.stateModalPwd
+    },
     dataStore() {
       return this.$store.state.dataStore
     },

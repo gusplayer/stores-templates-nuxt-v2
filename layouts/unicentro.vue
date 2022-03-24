@@ -1,37 +1,51 @@
 <template>
-  <div
-    :style="{
-      '--font-style':
-        this.settingByTemplate &&
-        this.settingByTemplate.settings &&
-        this.settingByTemplate.settings.tipo_letra
-          ? this.settingByTemplate.settings.tipo_letra
-          : 'Roboto',
-    }"
-  >
-    <component v-bind="componentsProps" :is="headerTemplate" />
-    <nuxt />
-    <component v-bind="componentsProps" :is="footerTemplate" />
-    <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
-      <div @click="redirectWhatsapp()">
-        <koWhatsapp class="button-whatsapp" /><span
-          >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
+  <div>
+    <div v-if="dataStore">
+      <div v-if="stateModalPwd">
+        <div
+          :style="{
+            '--font-style':
+              this.settingByTemplate &&
+              this.settingByTemplate.settings &&
+              this.settingByTemplate.settings.tipo_letra
+                ? this.settingByTemplate.settings.tipo_letra
+                : 'Roboto',
+          }"
         >
+          <component v-bind="componentsProps" :is="headerTemplate" />
+          <nuxt />
+          <component v-bind="componentsProps" :is="footerTemplate" />
+          <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
+            <div @click="redirectWhatsapp()">
+              <koWhatsapp class="button-whatsapp" /><span
+                >WhatsApp<br /><small>{{
+                  dataStore.tienda.whatsapp
+                }}</small></span
+              >
+            </div>
+          </div>
+          <div
+            class="wrapper-notificacion"
+            id="modalNotificacion"
+            v-if="dataStore.tienda.estado == 0"
+          >
+            <div class="content-notificacion">
+              <koTiendaCerrada />
+              <p class="text-noti">
+                Disculpa, no podrá realizar compras por el momento,
+              </p>
+              <p class="subtitle-noti">¿Deseas continuar?</p>
+              <button class="btn-acceptM" @click="acceptClose()">
+                Aceptar
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+      <koModalsecurity :dataStore="dataStore" v-else />
     </div>
-    <div
-      class="wrapper-notificacion"
-      id="modalNotificacion"
-      v-if="dataStore.tienda.estado == 0"
-    >
-      <div class="content-notificacion">
-        <koTiendaCerrada />
-        <p class="text-noti">
-          Disculpa, no podrá realizar compras por el momento,
-        </p>
-        <p class="subtitle-noti">¿Deseas continuar?</p>
-        <button class="btn-acceptM" @click="acceptClose()">Aceptar</button>
-      </div>
+    <div v-else>
+      <koTiendaError />
     </div>
   </div>
 </template>
@@ -53,6 +67,8 @@ import KoFooter6 from '../components/footers/footer6/Ko-Footer-6'
 import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
+
+import koModalsecurity from '../components/modal/Ko-modal-security.vue'
 
 //template6
 // import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
@@ -76,6 +92,7 @@ export default {
     koTiendaCerrada,
     // Ko6Header1,
     // Ko6Footer1,
+    koModalsecurity,
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES')
@@ -360,6 +377,9 @@ export default {
     }
   },
   computed: {
+    stateModalPwd() {
+      return this.$store.state.stateModalPwd
+    },
     dataCookies() {
       return this.$store.state.dataCookies
     },
