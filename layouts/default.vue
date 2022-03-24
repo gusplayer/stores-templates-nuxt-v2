@@ -744,6 +744,11 @@ export default {
       ) {
         if (e && e.data) {
           this.$store.commit('SET_CURRENTSETTINGMODAL', e.data)
+          if (e.data.data && e.data.data.stateModal == 1) {
+            this.$store.commit('SET_STATE_MODAL_PWD', false)
+          } else if (e.data.data.stateModal == 0) {
+            this.$store.commit('SET_STATE_MODAL_PWD', true)
+          }
         }
       }
     },
