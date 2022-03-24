@@ -147,6 +147,7 @@ export default {
   top: 0;
   position: sticky;
   z-index: 10;
+  box-sizing: border-box;
   @apply w-full flex justify-center items-center bg-white-white py-5;
 }
 
