@@ -326,6 +326,9 @@
                 >
                   {{ $t('footer_tiendaCerrada') }}
                 </p>
+                <p class="Quotation-message" v-if="!stateModalPwd">
+                  {{ $t('footer_tiendaPwd') }}
+                </p>
                 <p
                   class="Quotation-message"
                   v-if="!IsMinValorTotal() && productsCart.length"
@@ -348,7 +351,8 @@
                     this.estadoShippingTarifaPrecio == false &&
                     countryStore == true &&
                     IsMinValorTotal() &&
-                    settingByTemplate.pago_online == 1
+                    settingByTemplate.pago_online == 1 &&
+                    stateModalPwd
                   "
                   class="continue_shopping2"
                   :style="`color: ${
@@ -370,7 +374,8 @@
                     productsCart.length &&
                     !isQuotation() &&
                     dataStore.tienda.estado == 1 &&
-                    dataStore.tienda.whatsapp
+                    dataStore.tienda.whatsapp &&
+                    stateModalPwd
                   "
                   class="continue_shopping"
                   :style="`background: ${
@@ -656,6 +661,9 @@ export default {
     }
   },
   computed: {
+    stateModalPwd() {
+      return this.$store.state.stateModalPwd
+    },
     layourUnicentro() {
       return this.$store.state.layoutUnicentro
     },
@@ -944,7 +952,7 @@ export default {
         ) {
           textFreeShippingCart = 'Frete%20gr%C3%A1tis'
         } else {
-          textFreeShippingCart = 'Custo%20de%20frete%20separadamente'
+          textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
         }
         text = `Olá%2C%20aqui%20é%20${this.nombre}%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20Minhas%20informaçãoes%3A%0ANome%3A%20${this.nombre}%0ACidade%3A%20${this.ciudad}%0ABairro%3A%20${this.barrio}%0AEndereço%3A%20${this.dirreccion}%0A%0Ade%20volta%20%C3%A0%20loja%3A%20${window.location}?clearCart=true`
       } else {

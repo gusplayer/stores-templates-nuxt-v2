@@ -179,6 +179,7 @@ export const state = () => ({
   },
   dataHoko: {},
   producthoko: [],
+  stateModalPwd: true,
 })
 export const mutations = {
   SET_CURRENTSETTING5(state, value) {
@@ -391,6 +392,11 @@ export const mutations = {
       state.settingByTemplate12 = value.data
     }
   },
+  SET_CURRENTSETTINGMODAL(state, value) {
+    if (value && value.data) {
+      state.dataStore.modal = value.data
+    }
+  },
   SET_CURRENTSETTING99: (state, value) => {
     if (value && value.setting) {
       state.settingByTemplate = value.setting
@@ -573,6 +579,9 @@ export const mutations = {
   },
   SET_DATA_HOKO(state, data) {
     state.dataHoko = data
+  },
+  SET_STATE_MODAL_PWD(state, data) {
+    state.stateModalPwd = data
   },
   // STOREDB: (state, { storeLayout, producto }) => {
   //   state.storeLayout = storeLayout.data

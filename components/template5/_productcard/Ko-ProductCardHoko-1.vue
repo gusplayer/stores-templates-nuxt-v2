@@ -47,7 +47,7 @@
       </div>
       <div class="wrapper-movil">
         <router-link
-          :to="{ path: `/productosHoko/` + product.slug }"
+          :to="{ path: `/productosHoko/` + product.id }"
           class="wrapper-image"
         >
           <img

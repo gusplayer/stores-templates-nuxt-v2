@@ -6,7 +6,7 @@
         class="wrapper-back"
       >
         <arrow-left-icon class="icon-back" />
-        <p class="back-text">Volver al inicio</p>
+        <p class="back-text">{{ $t('productdetail_Back') }}</p>
       </nuxt-link>
       <div class="section">
         <div class="wrapper-left">

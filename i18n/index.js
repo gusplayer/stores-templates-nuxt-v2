@@ -58,6 +58,8 @@ export default {
     footer_contactoMgs2:
       'Contacte con la tienda, Rango de precios del domicilio no está definido.',
     footer_tiendaCerrada: 'Tienda cerrada',
+    footer_tiendaPwd:
+      'La tienda tiene bloqueo por contraseña, contacte con la tienda',
     footer_finalizarCompra: 'Finalizar compra',
     footer_seguirCompra: 'Seguir comprando',
     footer_irCarrito: 'Ir al carrito',
@@ -94,7 +96,6 @@ export default {
       ' La tienda no tiene configurado un número de WhatsApp',
     footer_categorias: 'Categorias',
     footer_blog: 'Blog',
-
     // Micompra
     mcompra_title: 'Seguimiento de tu compra',
     mcompra_inputtitle: 'Número de Orden',
@@ -220,6 +221,7 @@ export default {
     home_tuCarrito: 'Tu carrito',
     home_pdescuento: 'Producto Con descuento',
     //productdetail
+    productdetail_Back: 'Volver al inicio',
     productdetail_name: 'Detalle de producto',
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
@@ -340,6 +342,7 @@ export default {
       'Contact the store for product prices or ask for country coverage.',
     footer_compraWhatsapp: 'Shop by WhatsApp',
     footer_contactoMgs2: 'Contact the store, Home price range is not defined.',
+    footer_tiendaPwd: 'Store is password locked, contact the store.',
     footer_tiendaCerrada: 'Closed store',
     footer_finalizarCompra: 'Finalize purchase',
     footer_seguirCompra: 'Continue shopping',
@@ -371,6 +374,7 @@ export default {
     footer_formDetallesMgs: 'Neighborhood - apartment - House',
     footer_formDireccion: 'Address',
     footer_formDireccionMgs: 'Your address',
+    footer_ordenFormbtn: 'Checkout',
     footer_pedidoWhatsapp: 'WhatsApp Order',
     footer_noTieneWhatsapp:
       'The store does not have a WhatsApp number configured',
@@ -501,6 +505,7 @@ export default {
     home_tuCarrito: 'Your cart',
     home_pdescuento: 'Product Discount',
     //productdetail
+    productdetail_Back: 'Back to home',
     productdetail_name: 'Product detail',
     productdetail_garantia: 'Warranty:',
     productdetail_btnComprar: 'Purchase',
@@ -603,9 +608,9 @@ export default {
     footer_email: 'Endereço de e-mail',
     footer_enviar: 'Enviar',
     // OrderCart
-    footer_title: 'Seu pedido',
-    footer_vaciarCarrito: 'Vaciar carrito de compras',
-    footer_costoDomicilio: 'Custo do domicílio',
+    footer_title: 'Pedido',
+    footer_vaciarCarrito: 'Esvaziar carrinho de comprar',
+    footer_costoDomicilio: 'Custo de entrega',
     footer_valorCiudad: 'Valor por cidade:',
     footer_tarifaPlana: 'Taxa fixa:',
     footer_Porprecio: 'Taxa por preço:',
@@ -622,6 +627,8 @@ export default {
     footer_compraWhatsapp: 'Comprar por WhatsApp',
     footer_contactoMgs2:
       'Contate a loja, faixa de preço residencial não definida.',
+    footer_tiendaPwd:
+      'A loja está bloqueada por senha, entre em contato com a loja.',
     footer_tiendaCerrada: 'Loja fechada',
     footer_finalizarCompra: 'Finalizar a compra',
     footer_seguirCompra: 'Continuar comprando',
@@ -643,16 +650,17 @@ export default {
     footer_formPhone: 'Número de telefone',
     footer_formPhoneMgs: 'Seu número de telefone',
     footer_formCiudadMgs: 'Sua cidade',
-    footer_formBarrio: 'Vizinhança',
-    footer_formBarrioMgs: 'Sua vizinhança',
+    footer_formBarrio: 'Bairro',
+    footer_formBarrioMgs: 'Sua bairro',
     footer_formComuna: 'Comuna',
     footer_formComunaMgs: 'Sua Comuna ou Setor',
     footer_formColonia: 'Colônia',
     footer_formColoniaMgs: 'Sua Colônia',
     footer_formDetalles: 'Detalhes',
     footer_formDetallesMgs: 'Bairro - apartamento - Casa',
-    footer_formDireccion: 'Endereço',
+    footer_formDireccion: 'Endereço completo',
     footer_formDireccionMgs: 'Sua Endereço',
+    footer_ordenFormbtn: 'Finalização do pagamento',
     footer_pedidoWhatsapp: 'WhatsApp Order',
     footer_noTieneWhatsapp: 'A loja não tem um número WhatsApp configurado',
     footer_categorias: 'Categorias',
@@ -758,7 +766,7 @@ export default {
     home_cardvermas: 'Veja mais',
     home_cardAgregar: 'Adicione',
     home_destacadosMsg: 'Produtos relacionados que possam lhe interessar',
-    home_todo: 'Todo',
+    home_todo: 'Todos',
     home_poteado: 'Postado por: ',
     home_filtrarpor: 'Filtrado por ',
     home_preciofilt: 'Preço',
@@ -783,6 +791,7 @@ export default {
     home_tuCarrito: 'Seu carrinho',
     home_pdescuento: 'Desconto de produto',
     //productdetail
+    productdetail_Back: 'Voltar ao início',
     productdetail_name: 'Detalhe do produto',
     productdetail_garantia: 'Garantía:',
     productdetail_btnComprar: 'Comprar',
@@ -905,6 +914,8 @@ export default {
     footer_contactoMgs2:
       'Contactez le magasin, la gamme de prix de la maison n´est pas définie.',
     footer_tiendaCerrada: 'Magasin fermé',
+    footer_tiendaPwd:
+      'Le magasin est verrouillé par un mot de passe, contactez le magasin.',
     footer_finalizarCompra: 'Finaliser l´achat',
     footer_seguirCompra: 'Continuer les achats',
     footer_irCarrito: 'Aller au panier',
@@ -935,6 +946,7 @@ export default {
     footer_formDetallesMgs: 'Quartier - Appartement - Maison',
     footer_formDireccion: 'Adresse',
     footer_formDireccionMgs: 'Votre adresse',
+    footer_ordenFormbtn: 'Checkout',
     footer_pedidoWhatsapp: 'Commande WhatsApp',
     footer_noTieneWhatsapp: 'Le magasin n´a pas de numéro WhatsApp configuré',
     footer_categorias: 'Catégories',
@@ -1066,6 +1078,7 @@ export default {
     home_tuCarrito: 'Votre panier',
     home_pdescuento: 'Remise sur le produit',
     //productdetail
+    productdetail_Back: 'Retour à l´accueil',
     productdetail_name: 'Détail du produit',
     productdetail_garantia: 'Garantie :',
     productdetail_btnComprar: 'Acheter',
