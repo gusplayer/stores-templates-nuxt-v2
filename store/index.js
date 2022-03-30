@@ -996,6 +996,79 @@ export const actions = {
   // },
 }
 export const getters = {
+  subtotalCart(state) {
+    return state.totalCart
+  },
+  cantidadProductos(state) {
+    let cantidadProductos = 0
+    state.productsCart.filter((value) => {
+      cantidadProductos += value.cantidad
+    })
+    return cantidadProductos
+  },
+  listaDescuentosProductos(state, getters) {
+    if (state.listDescuentos) {
+      let restulDesc
+      state.listDescuentos.filter((element) => {
+        if (element.tipo == 0 && element.estado == 1) {
+          if (getters.cantidadProductos >= element.cantidad_productos) {
+            restulDesc = element
+          }
+        }
+      })
+      if (restulDesc) {
+        if (restulDesc.opcion == 1) {
+          let data = {
+            cantidad: restulDesc.cantidad_productos,
+            valor: restulDesc.valor_descuento,
+            tipo: restulDesc.opcion,
+          }
+          return data
+        } else if (restulDesc.opcion == 0) {
+          let data = {
+            cantidad: restulDesc.cantidad_productos,
+            valor: restulDesc.porcentaje_descuento,
+            tipo: restulDesc.opcion,
+          }
+          return data
+        }
+      } else {
+        return ''
+      }
+    }
+  },
+  listaDescuentosPrecio(state) {
+    if (state.listDescuentos) {
+      let restulDesc
+      state.listDescuentos.filter((element) => {
+        if (element.tipo == 1 && element.estado == 1) {
+          let rangosByDisconunt = JSON.parse(element.rangos_precios)
+          if (rangosByDisconunt) {
+            rangosByDisconunt.find((rango) => {
+              if (
+                state.totalCart >= rango['inicial'] &&
+                state.totalCart <= rango['final']
+              ) {
+                restulDesc = rango
+              }
+            })
+          }
+        }
+      })
+      if (restulDesc) {
+        return restulDesc
+      } else {
+        return ''
+      }
+    }
+  },
+  total(state, getters) {
+    if (getters.subtotalCart) {
+      return getters.subtotalCart
+    } else {
+      return 0
+    }
+  },
   // getSettingsCSS: (state, getters) => {
   //   if (state.SettingsValues.length) {
   //     state.valuesCSS = []

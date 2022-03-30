@@ -226,36 +226,29 @@
                       {{ $t('footer_tarifaPrecio') }}
                     </p>
                   </span>
-                  <span class="order_total_net" v-if="this.shippingDescuento">
+                  <span
+                    class="order_total_net"
+                    v-if="this.shippingDescuento || this.shippingDescuento2"
+                  >
                     <p>{{ $t('footer_descuento') }}</p>
-                    <p
-                      v-if="
-                        this.shippingDescuento &&
-                        this.shippingDescuento.valor_descuento
-                      "
-                    >
+                    <p>
                       -
                       {{
-                        this.shippingDescuento.valor_descuento
-                          | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
-                          )
-                      }}
-                    </p>
-                    <p
-                      v-if="
-                        this.shippingDescuento &&
-                        this.shippingDescuento.porcentaje_descuento
-                      "
-                    >
-                      -
-                      {{
-                        Math.trunc(
-                          (totalCart *
-                            this.shippingDescuento.porcentaje_descuento) /
-                            100
-                        )
+                        ((this.shippingDescuento &&
+                        this.shippingDescuento.valor &&
+                        this.shippingDescuento.tipo == 1
+                          ? this.shippingDescuento.valor
+                          : this.shippingDescuento &&
+                            this.shippingDescuento.valor &&
+                            this.shippingDescuento.tipo == 0
+                          ? Math.trunc(
+                              (totalCart * this.shippingDescuento.valor) / 100
+                            )
+                          : 0) +
+                          (this.shippingDescuento2 &&
+                          this.shippingDescuento2.precio
+                            ? this.shippingDescuento2.precio
+                            : 0))
                           | currency(
                             dataStore.tienda.codigo_pais,
                             dataStore.tienda.moneda
@@ -286,18 +279,21 @@
                           this.FreeShippingCart == false
                             ? this.shippingTarifaPrecio
                             : 0) -
-                          (this.shippingDescuento &&
-                          this.shippingDescuento.valor_descuento
-                            ? this.shippingDescuento.valor_descuento
-                            : 0) -
-                          (this.shippingDescuento &&
-                          this.shippingDescuento.porcentaje_descuento
+                          ((this.shippingDescuento &&
+                          this.shippingDescuento.valor &&
+                          this.shippingDescuento.tipo == 1
+                            ? this.shippingDescuento.valor
+                            : this.shippingDescuento &&
+                              this.shippingDescuento.valor &&
+                              this.shippingDescuento.tipo == 0
                             ? Math.trunc(
-                                (totalCart *
-                                  this.shippingDescuento.porcentaje_descuento) /
-                                  100
+                                (totalCart * this.shippingDescuento.valor) / 100
                               )
-                            : 0))
+                            : 0) +
+                            (this.shippingDescuento2 &&
+                            this.shippingDescuento2.precio
+                              ? this.shippingDescuento2.precio
+                              : 0)))
                           | currency(
                             dataStore.tienda.codigo_pais,
                             dataStore.tienda.moneda
@@ -600,7 +596,6 @@ export default {
   data() {
     return {
       img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
-
       shippingCities: [],
       rangosByCiudades: [],
       remove: false,
@@ -612,9 +607,7 @@ export default {
       ciudad: '',
       barrio: '',
       dirreccion: '',
-      shippingDescuento: '',
       FreeShippingCart: false,
-      cantidadProductos: 0,
       placeholderBarrio: 'footer_formBarrio',
       placeholderMsgBarrio: 'footer_formBarrioMgs',
       stateBtnConfirmation: false,
@@ -633,6 +626,15 @@ export default {
       set(value) {
         this.$store.state.openOrder = value
       },
+    },
+    cantidadProductos() {
+      return this.$store.getters.cantidadProductos
+    },
+    shippingDescuento() {
+      return this.$store.getters.listaDescuentosProductos
+    },
+    shippingDescuento2() {
+      return this.$store.getters.listaDescuentosPrecio
     },
     totalCart() {
       return this.$store.state.totalCart
@@ -709,9 +711,6 @@ export default {
     },
     facebooPixel() {
       return this.$store.state.analytics_tagmanager
-    },
-    listDescuentos() {
-      return this.$store.state.listDescuentos
     },
     countryStore() {
       if (this.dataStore && this.dataStore.tienda.pais) {
@@ -1009,25 +1008,6 @@ export default {
         }
       })
     },
-    listaDescuentos() {
-      this.cantidadProductos = 0
-      this.productsCart.filter((value) => {
-        this.cantidadProductos += value.cantidad
-      })
-      if (this.listDescuentos) {
-        let restulDesc
-        this.listDescuentos.filter((element) => {
-          if (this.cantidadProductos >= element.cantidad_productos) {
-            restulDesc = element
-          }
-        })
-        if (restulDesc) {
-          this.shippingDescuento = restulDesc
-        } else {
-          this.shippingDescuento = ''
-        }
-      }
-    },
     productsFreeShippingCart() {
       if (this.productsCart) {
         let result = this.productsCart.filter((rango) => {
@@ -1080,17 +1060,12 @@ export default {
       if (this.productsCart) {
         this.tempCart = this.productsCart
         this.shippingPrecio()
-        this.listaDescuentos()
         this.productsFreeShippingCart()
       }
     },
     totalCart() {
-      this.listaDescuentos()
       this.shippingPrecio()
       this.IsMinValorTotal()
-    },
-    listDescuentos() {
-      this.listaDescuentos()
     },
   },
   filters: {

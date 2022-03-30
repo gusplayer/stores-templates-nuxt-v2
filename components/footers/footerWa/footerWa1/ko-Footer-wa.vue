@@ -13,14 +13,14 @@
           : '#FFFFFF'
       };`"
     >
-      <p class="unidades" v-if="productsCart.length > 0">
-        ({{ productsCart.length }}) item
+      <p class="unidades" v-if="cantidadProductos > 0">
+        ({{ cantidadProductos }}) item
       </p>
       <p class="carrito">
         <whatsapp-icon class="wp-icon" />
         {{ $t('productdetail_btnComprar') }}
       </p>
-      <p class="text-footer-wapi valor" v-if="productsCart.length > 0">
+      <p class="text-footer-wapi valor" v-if="cantidadProductos > 0">
         <span class="valor">
           {{
             this.totalCart
@@ -43,8 +43,8 @@ export default {
     settingByTemplate: Object,
   },
   computed: {
-    productsCart() {
-      return this.$store.state.productsCart
+    cantidadProductos() {
+      return this.$store.getters.cantidadProductos
     },
     totalCart() {
       return this.$store.state.totalCart

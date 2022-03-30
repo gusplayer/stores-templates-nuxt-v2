@@ -1,10 +1,10 @@
 <template>
   <div class="content-footer">
     <footer class="content-items-footer">
-      <div class="item-footer" v-if="productsCart.length > 0">
+      <div class="item-footer" v-if="cantidadProductos > 0">
         <p class="text-items-cart">
           Tu orden
-          <span class="text-items-cart ml-2">({{ productsCart.length }})</span>
+          <span class="text-items-cart ml-2">({{ cantidadProductos }})</span>
         </p>
       </div>
       <div
@@ -18,11 +18,11 @@
             ? settingByTemplate.color_secundario
             : '#FFFFFF'
         };`"
-        :class="productsCart.length > 0 ? 'button-footer' : 'button-footer-out'"
+        :class="cantidadProductos > 0 ? 'button-footer' : 'button-footer-out'"
       >
         <p class="text-items-button">Realizar pedido</p>
       </div>
-      <div class="item-footer" v-if="productsCart.length > 0">
+      <div class="item-footer" v-if="cantidadProductos > 0">
         <p class="text-items-cart">
           {{
             this.totalCart
@@ -43,8 +43,8 @@ export default {
     settingByTemplate: Object,
   },
   computed: {
-    productsCart() {
-      return this.$store.state.productsCart
+    cantidadProductos() {
+      return this.$store.getters.cantidadProductos
     },
     totalCart() {
       return this.$store.state.totalCart

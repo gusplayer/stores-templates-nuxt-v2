@@ -165,39 +165,30 @@
                 {{ this.cantidadProductos }}
               </p>
             </div>
-            <span class="cart-summary-items" v-if="this.shippingDescuento">
+            <span
+              class="cart-summary-items"
+              v-if="this.shippingDescuento || this.shippingDescuento2"
+            >
               <p class="txt-cart-summary" style="font-weight: bold">
                 {{ $t('footer_descuento') }}
               </p>
-              <p
-                class="txt_summary_price"
-                v-if="
-                  this.shippingDescuento &&
-                  this.shippingDescuento.valor_descuento
-                "
-              >
+              <p class="txt_summary_price">
                 -
                 {{
-                  this.shippingDescuento.valor_descuento
-                    | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
-                    )
-                }}
-              </p>
-              <p
-                class="txt_summary_price"
-                v-if="
-                  this.shippingDescuento &&
-                  this.shippingDescuento.porcentaje_descuento
-                "
-              >
-                -
-                {{
-                  Math.trunc(
-                    (totalCart * this.shippingDescuento.porcentaje_descuento) /
-                      100
-                  )
+                  ((this.shippingDescuento &&
+                  this.shippingDescuento.valor &&
+                  this.shippingDescuento.tipo == 1
+                    ? this.shippingDescuento.valor
+                    : this.shippingDescuento &&
+                      this.shippingDescuento.valor &&
+                      this.shippingDescuento.tipo == 0
+                    ? Math.trunc(
+                        (this.totalCart * this.shippingDescuento.valor) / 100
+                      )
+                    : 0) +
+                    (this.shippingDescuento2 && this.shippingDescuento2.precio
+                      ? this.shippingDescuento2.precio
+                      : 0))
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -337,7 +328,10 @@
                   <p class="txt_summary_tittle">
                     {{ $t('footer_encioGratis') }}
                   </p>
-                  <p class="txt_summary_price">
+                  <p
+                    class="txt_summary_price"
+                    style="width: 100%; max-width: 180px"
+                  >
                     {{
                       0
                         | currency(
@@ -401,18 +395,21 @@
                       this.FreeShippingCart == false
                         ? this.shippingTarifaPrecio
                         : 0) -
-                      (this.shippingDescuento &&
-                      this.shippingDescuento.valor_descuento
-                        ? this.shippingDescuento.valor_descuento
-                        : 0) -
-                      (this.shippingDescuento &&
-                      this.shippingDescuento.porcentaje_descuento
+                      ((this.shippingDescuento &&
+                      this.shippingDescuento.valor &&
+                      this.shippingDescuento.tipo == 1
+                        ? this.shippingDescuento.valor
+                        : this.shippingDescuento &&
+                          this.shippingDescuento.valor &&
+                          this.shippingDescuento.tipo == 0
                         ? Math.trunc(
-                            (totalCart *
-                              this.shippingDescuento.porcentaje_descuento) /
-                              100
+                            (totalCart * this.shippingDescuento.valor) / 100
                           )
-                        : 0))
+                        : 0) +
+                        (this.shippingDescuento2 &&
+                        this.shippingDescuento2.precio
+                          ? this.shippingDescuento2.precio
+                          : 0)))
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -509,7 +506,6 @@ export default {
     }
     this.productsFreeShippingCart()
     this.IsMinValorTotal()
-    this.listaDescuentos()
   },
   data() {
     return {
@@ -520,15 +516,16 @@ export default {
       rangosByCiudades: [],
       shippingTarifaPrecio: '',
       estadoShippingTarifaPrecio: false,
-      shippingDescuento: '',
       FreeShippingCart: false,
-      cantidadProductos: 0,
     }
   },
   computed: {
     // stateModalPwd() {
     //   return this.$store.state.stateModalPwd
     // },
+    cantidadProductos() {
+      return this.$store.getters.cantidadProductos
+    },
     template() {
       return this.$store.state.template
     },
@@ -630,12 +627,14 @@ export default {
         return false
       }
     },
-
-    listDescuentos() {
-      return this.$store.state.listDescuentos
-    },
     productsCart() {
       return this.$store.state.productsCart
+    },
+    shippingDescuento() {
+      return this.$store.getters.listaDescuentosProductos
+    },
+    shippingDescuento2() {
+      return this.$store.getters.listaDescuentosPrecio
     },
   },
   methods: {
@@ -724,39 +723,23 @@ export default {
           (this.shippingTarifaPrecio && this.shippingTarifaPrecio != 'empty'
             ? this.shippingTarifaPrecio
             : 0) -
-          (this.shippingDescuento && this.shippingDescuento.valor_descuento
-            ? this.shippingDescuento.valor_descuento
-            : 0) -
-          (this.shippingDescuento && this.shippingDescuento.porcentaje_descuento
-            ? Math.trunc(
-                (this.totalCart * this.shippingDescuento.porcentaje_descuento) /
-                  100
-              )
-            : 0)
+          ((this.shippingDescuento &&
+          this.shippingDescuento.valor &&
+          this.shippingDescuento.tipo == 1
+            ? this.shippingDescuento.valor
+            : this.shippingDescuento &&
+              this.shippingDescuento.valor &&
+              this.shippingDescuento.tipo == 0
+            ? Math.trunc((this.totalCart * this.shippingDescuento.valor) / 100)
+            : 0) +
+            (this.shippingDescuento2 && this.shippingDescuento2.precio
+              ? this.shippingDescuento2.precio
+              : 0))
         if (tempTotal >= this.dataStore.tienda.minimo_compra) {
           result = true
         }
       }
       return result
-    },
-    listaDescuentos() {
-      this.cantidadProductos = 0
-      this.productsCart.filter((value) => {
-        this.cantidadProductos += value.cantidad
-      })
-      if (this.listDescuentos) {
-        let restulDesc
-        this.listDescuentos.filter((element) => {
-          if (this.cantidadProductos >= element.cantidad_productos) {
-            restulDesc = element
-          }
-        })
-        if (restulDesc) {
-          this.shippingDescuento = restulDesc
-        } else {
-          this.shippingDescuento = ''
-        }
-      }
     },
     productsFreeShippingCart() {
       if (this.productsCart) {
@@ -784,17 +767,12 @@ export default {
     },
     productsCart() {
       if (this.productsCart) {
-        this.listaDescuentos()
         this.productsFreeShippingCart()
       }
     },
     totalCart() {
-      this.listaDescuentos()
       this.shippingPrecio()
       this.IsMinValorTotal()
-    },
-    listDescuentos() {
-      this.listaDescuentos()
     },
   },
   filters: {
