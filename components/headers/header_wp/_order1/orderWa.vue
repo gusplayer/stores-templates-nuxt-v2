@@ -992,9 +992,9 @@ export default {
       }, 5000)
     },
     setOrder() {
-      this.modalConfirmation = true
       this.$refs.observer.validate().then((response) => {
         if (response) {
+          this.modalConfirmation = true
           let temp = {
             nombre: this.nombre,
             identificacion: this.identificacion,
@@ -1807,5 +1807,10 @@ details[open] summary ~ * {
   align-items: center;
   border-radius: 5px;
   margin-top: 20px;
+}
+@media (max-width: 500px) {
+  .wrapper-items-form {
+    padding: 20px 0 300px;
+  }
 }
 </style>

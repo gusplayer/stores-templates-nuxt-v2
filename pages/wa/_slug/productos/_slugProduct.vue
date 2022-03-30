@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="Wrapper-KoProductDetail-Slug-wapi">
+  <div class="Wrapper-KoProductDetail-Slug-wapi" id="width">
     <KoProductDetail />
   </div>
 </template>
@@ -12,6 +12,20 @@ export default {
   name: 'WapiMEDetail',
   components: {
     KoProductDetail,
+  },
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize)
+  },
+  methods: {
+    onResize() {
+      const widthOutput = document.querySelector('#width')
+      widthOutput.style.width = window.innerWidth + 'px'
+      widthOutput.style.maxWidth = window.innerWidth + 'px'
+    },
   },
 }
 </script>
