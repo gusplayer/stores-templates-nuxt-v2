@@ -45,7 +45,10 @@
         <div
           class="wrapper-notificacion"
           id="modalNotificacion"
-          v-if="dataStore.tienda.estado == 0"
+          v-if="
+            dataStore.tienda.estado == 0 ||
+            !expiredDate(dataStore.tienda.fecha_expiracion)
+          "
         >
           <div class="content-notificacion">
             <koTiendaCerrada />
@@ -83,6 +86,7 @@ import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
 import koTiendaError from '../components/Ko-errorStore'
 import koModalsecurity from '../components/modal/Ko-modal-security.vue'
+import expiredDate from '../mixins/expiredDate'
 
 //template6
 // import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
@@ -110,6 +114,7 @@ export default {
     koTiendaError,
     koModalsecurity,
   },
+  mixins: [expiredDate],
   mounted() {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_SHOPPING_CART')

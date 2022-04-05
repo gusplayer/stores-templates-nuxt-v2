@@ -316,7 +316,8 @@
                     this.estadoShippingTarifaPrecio == false &&
                     countryStore == true &&
                     IsMinValorTotal() &&
-                    settingByTemplate.pago_online == 1
+                    settingByTemplate.pago_online == 1 &&
+                    expiredDate(dataStore.tienda.fecha_expiracion)
                   "
                   class="continue_shopping2"
                   :style="`color: ${
@@ -570,9 +571,10 @@
 import axios from 'axios'
 import idCloudinary from '../../../../mixins/idCloudinary'
 import currency from '../../../../mixins/formatCurrent'
+import expiredDate from '../../../../mixins/expiredDate'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  mixins: [idCloudinary, currency],
+  mixins: [idCloudinary, currency, expiredDate],
   name: 'koOrder1-cart-wapi',
   props: {
     dataStore: Object,

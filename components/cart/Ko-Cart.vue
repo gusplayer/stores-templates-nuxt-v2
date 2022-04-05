@@ -426,7 +426,8 @@
                   dataStore.tienda.estado == 1 &&
                   this.estadoShippingTarifaPrecio == false &&
                   countryStore == true &&
-                  IsMinValorTotal()
+                  IsMinValorTotal() &&
+                  expiredDate(dataStore.tienda.fecha_expiracion)
                 "
               >
                 {{ $t('footer_finalizarCompra') }}
@@ -456,9 +457,9 @@
 <script>
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
-
+import expiredDate from '../../mixins/expiredDate'
 export default {
-  mixins: [idCloudinary, currency],
+  mixins: [idCloudinary, currency, expiredDate],
   name: 'Cart',
   props: {
     dataStore: Object,
