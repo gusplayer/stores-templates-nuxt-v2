@@ -4,9 +4,16 @@
       <div class="itens-slide-categories">
         <div class="wrapper-img-text" @click="clear">
           <img
-            src="https://res.cloudinary.com/komerciaacademico/image/upload/v1649380123/2544056_ri6jae.png"
+            src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649430112/Xiaomi_logo__2021_ejxsbk.png"
             class="product-image"
             alt="icon all"
+            v-if="dataStore.tienda.id_tienda == 12664"
+          />
+          <img
+            src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649430214/2549900_umsosz.png"
+            class="product-image"
+            alt="icon all"
+            v-else
           />
 
           <div class="tag">
