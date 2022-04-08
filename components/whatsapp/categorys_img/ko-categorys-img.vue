@@ -2,35 +2,78 @@
   <div class="content-slide-categorys">
     <div class="content-categories">
       <div class="itens-slide-categories">
-        <div
-          class="tag"
-          :class="idCategory == '' ? 'active-tag' : 'disable-tag'"
-          @click="clear"
-        >
-          <p class="txt-category" @click="sendCategory('', '', (ref = false))">
-            {{ $t('home_todo') }}
-          </p>
+        <div class="wrapper-img-text" @click="clear">
+          <img
+            src="https://res.cloudinary.com/komerciaacademico/image/upload/v1649380123/2544056_ri6jae.png"
+            class="product-image"
+            alt="icon all"
+          />
+
+          <div class="tag">
+            <p
+              :style="`border-color: ${
+                settingByTemplate &&
+                settingByTemplate.color_primario &&
+                idCategory == ''
+                  ? settingByTemplate.color_primario
+                  : '#25D366'
+              };`"
+              :class="idCategory == '' ? 'active-tag ' : 'disable-tag'"
+              class="txt-category"
+              @click="sendCategory('', '', (ref = false))"
+            >
+              {{ $t('home_todo') }}
+            </p>
+          </div>
         </div>
         <div
-          class="tag"
-          :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
+          class="wrapper-img-text"
           v-for="categoria in categories"
           :key="categoria.id"
           @click="sendCategory(categoria, categoria.id, (ref = false))"
         >
-          <p class="txt-category">
-            {{ categoria.nombre_categoria_producto }}
-          </p>
+          <img
+            v-lazy="
+              categoria.imagen_cloudinary == null
+                ? 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649367838/2659360_s1ap5f.png'
+                : idCloudinary(categoria.imagen_cloudinary, 80, 80)
+            "
+            :class="
+              categoria.imagen_cloudinary == 'sin_foto.jpeg'
+                ? 'notproduct-image-res'
+                : ''
+            "
+            class="product-image"
+            alt="icon category"
+          />
+          <div class="tag">
+            <p
+              :style="`border-color: ${
+                settingByTemplate &&
+                settingByTemplate.color_primario &&
+                categoria.id == idCategory
+                  ? settingByTemplate.color_primario
+                  : '#25D366'
+              };`"
+              class="txt-category"
+              :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
+            >
+              {{ categoria.nombre_categoria_producto }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  name: 'CategorySlideWa',
+  name: 'CategorySlideWa-4',
+  mixins: [idCloudinary],
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   data() {
     return {
@@ -146,7 +189,31 @@ export default {
   box-sizing: border-box;
   @apply w-full flex justify-center items-center bg-white-white py-5;
 }
+.notproduct-image-res {
+  height: 100%;
+  max-height: 80px;
+  max-width: 80px;
+  width: 100%;
+}
+.product-image {
+  width: 100%;
+  min-width: 80px;
+  max-width: 80px;
+  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
+  object-fit: cover;
+  overflow: hidden;
+}
+.wrapper-img-text {
+  width: 100%;
+  height: 129px;
+  max-height: 129px;
+  transition: all 600ms ease-in;
+  white-space: nowrap;
 
+  @apply flex flex-col items-center justify-center cursor-pointer mr-10;
+}
 @screen sm {
   .content-categories {
     border-color: #d6d6d6;
@@ -160,11 +227,10 @@ export default {
     @apply hidden;
   }
   .active-tag {
-    background-color: #eaeaea;
-    @apply w-full flex justify-center items-center cursor-pointer mr-18 rounded-md px-8;
+    @apply w-full flex justify-center items-center cursor-pointer px-5 border-b-4;
   }
   .disable-tag {
-    @apply w-full flex justify-center items-center cursor-pointer mr-18 rounded-full px-8;
+    @apply w-full flex justify-center items-center cursor-pointer rounded-full px-5;
   }
   .txt-category {
     font-size: 14px;
@@ -173,18 +239,10 @@ export default {
     @apply w-full flex flex-col justify-center items-center font-medium;
   }
   .tag {
-    display: flex;
-    align-items: center;
     color: black;
-    background-color: white;
-    padding: 3px 12px;
+    margin-top: 5px;
     font-size: 12px;
-    height: 50px;
     font-weight: 600;
-    cursor: pointer;
-    margin-right: 5px;
-    transition: all 600ms ease-in;
-    white-space: nowrap;
   }
 }
 @media (min-width: 768px) {
@@ -192,8 +250,8 @@ export default {
     font-size: 16px;
   }
   .active-tag {
-    background-color: #eaeaea;
-    @apply py-4;
+    /* background-color: #eaeaea; */
+    /* @apply py-10; */
   }
 }
 </style>

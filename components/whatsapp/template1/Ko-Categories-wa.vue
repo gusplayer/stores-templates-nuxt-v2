@@ -45,7 +45,7 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
-  name: 'Ko-Categories-wa',
+  name: 'Ko-Categories-wa-1',
   props: {
     dataStore: Object,
     settingByTemplate: Object,

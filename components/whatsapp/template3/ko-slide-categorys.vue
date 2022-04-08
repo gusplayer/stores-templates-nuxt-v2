@@ -3,6 +3,7 @@
     <div class="content-categories">
       <div class="itens-slide-categories" id="swiper-slide-categories">
         <div
+          class="tags"
           :class="idCategory == '' ? 'active-tag' : 'disable-tag'"
           @click="clear"
         >
@@ -11,6 +12,7 @@
           </p>
         </div>
         <div
+          class="tags"
           :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
           v-for="categoria in categories"
           :key="categoria.id"
@@ -28,7 +30,7 @@
 </template>
 <script>
 export default {
-  name: 'CategorySlideWa',
+  name: 'CategorySlideWa-3',
   props: {
     dataStore: Object,
   },
@@ -180,6 +182,18 @@ export default {
     color: #3d3d3d;
     font-family: 'Poppins', sans-serif !important;
     @apply w-full flex flex-col justify-center items-center font-medium;
+  }
+  .tags {
+    display: flex;
+    align-items: center;
+    padding: 3px 12px;
+    font-size: 12px;
+    height: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: all 600ms ease-in;
+    white-space: nowrap;
   }
 }
 @media (min-width: 768px) {

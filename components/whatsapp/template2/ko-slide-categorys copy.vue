@@ -28,7 +28,7 @@
 </template>
 <script>
 export default {
-  name: 'CategorySlideWa',
+  name: 'CategorySlideWa-2',
   props: {
     dataStore: Object,
   },
