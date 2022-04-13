@@ -26,7 +26,13 @@
         </button>
         <p class="text-country text-margin">|</p>
         <p class="text-country">
-          <strong style="margin-right: 1px">$</strong>
+          <strong
+            style="margin-right: 1px"
+            v-if="dataStore.tienda.moneda == 'PEN'"
+            >S/</strong
+          >
+          <strong style="margin-right: 1px" v-else>$</strong>
+
           {{ dataStore.tienda.moneda }}
         </p>
         <div v-if="stateIdStore">

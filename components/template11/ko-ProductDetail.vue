@@ -137,7 +137,13 @@
                 :style="`font-size:${this.settingByTemplate11[0].detailsProduct['--fontSizePrice']}; font-weight:${this.settingByTemplate11[0].detailsProduct['--fontWeighPrice']};`"
                 v-show="salesData.precio"
               >
-                {{ salesData.precio | currency }}
+                {{
+                  salesData.precio
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
               </p>
               <div
                 class="flex flex-row justify-center items-center"

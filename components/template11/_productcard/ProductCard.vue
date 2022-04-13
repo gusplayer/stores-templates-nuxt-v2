@@ -219,7 +219,11 @@
                     ? Math.trunc(
                         this.minPrice / (1 - this.product.promocion_valor / 100)
                       )
-                    : 0) | currency
+                    : 0)
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
                 }}
               </div>
               <p class="separator-price">-</p>
@@ -233,7 +237,11 @@
                     ? Math.trunc(
                         this.maxPrice / (1 - this.product.promocion_valor / 100)
                       )
-                    : 0) | currency
+                    : 0)
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
                 }}
               </div>
             </div>
@@ -242,14 +250,26 @@
                 class="text-price"
                 v-if="this.product.precio > 0 || this.product.precio"
               >
-                {{ this.minPrice | currency }}
+                {{
+                  this.minPrice
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
               </div>
               <p class="separator-price">-</p>
               <div
                 class="text-price"
                 v-if="this.product.precio > 0 || this.product.precio"
               >
-                {{ this.maxPrice | currency }}
+                {{
+                  this.maxPrice
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
               </div>
             </div>
           </div>
@@ -264,14 +284,24 @@
                       this.product.precio /
                         (1 - this.product.promocion_valor / 100)
                     )
-                  : 0) | currency
+                  : 0)
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
               }}
             </p>
             <p
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
             >
-              {{ this.product.precio | currency }}
+              {{
+                this.product.precio
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
             </p>
           </div>
         </div>
@@ -287,14 +317,26 @@
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
             >
-              {{ this.minPrice | currency }}
+              {{
+                this.minPrice
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
             </div>
             <p class="separator-price">-</p>
             <div
               class="text-price"
               v-if="this.product.precio > 0 || this.product.precio"
             >
-              {{ this.maxPrice | currency }}
+              {{
+                this.maxPrice
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
             </div>
           </div>
           <div v-else>
