@@ -150,18 +150,18 @@ export default {
   },
   methods: {
     initHeader() {
-      let domain = this.$route.fullPath
-      let searchCategory = domain.slice(10, [21])
-      let searchSubCategory = domain.slice(10, [24])
-      let search = domain.slice(10, [19])
-      if (domain == '/productos') {
+      if (this.$route.fullPath == '/') {
+        this.$store.commit('SET_STATEBANNER', true)
         this.showSearch = true
-      } else if (searchCategory === '/?category=') {
+      } else if (this.$route.query && this.$route.query.category) {
+        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
-      } else if (searchSubCategory === '/?subcategory=') {
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.$store.commit('SET_STATEBANNER', false)
         this.showSearch = true
-      } else if (search === '/?search=') {
-        this.setSearch(domain)
+      } else if (this.$route.query && this.$route.query.search) {
+        this.$store.commit('SET_STATEBANNER', false)
+        this.setSearch(this.$route.query.search)
         this.showSearch = true
       } else {
         this.showSearch = false
@@ -192,8 +192,7 @@ export default {
       }
     },
     setSearch(value) {
-      let category = value.split('=')
-      let urlFiltrada = decodeURIComponent(category[category.length - 1])
+      let urlFiltrada = decodeURIComponent(value)
       this.search = urlFiltrada
     },
     focusInput() {

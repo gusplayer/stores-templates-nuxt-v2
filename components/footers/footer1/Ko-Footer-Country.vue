@@ -5,21 +5,20 @@
   >
     <div class="content-footer-country" v-if="dataStore.tienda.pais">
       <div class="content-item-flag">
-        <div
-          v-if="dataStore.tienda.pais == 'Internacional'"
-          style="display: flex"
-        >
-          <client-only>
-            <country-flag country="un" size="normal"></country-flag>
-          </client-only>
-        </div>
-        <div v-else class="content-flag">
-          <client-only>
-            <country-flag
-              :country="`${dataStore.tienda.codigo_pais}`"
-              size="normal"
-            ></country-flag>
-          </client-only>
+        <div class="content-flag">
+          <div v-if="dataStore.tienda.pais == 'Internacional'">
+            <client-only>
+              <country-flag country="un" size="normal"></country-flag>
+            </client-only>
+          </div>
+          <div v-else>
+            <client-only>
+              <country-flag
+                :country="`${dataStore.tienda.codigo_pais}`"
+                size="normal"
+              ></country-flag>
+            </client-only>
+          </div>
         </div>
         <button @click="stateIdStore = !stateIdStore" class="text-country">
           {{ dataStore.tienda.pais }}
@@ -90,13 +89,14 @@ export default {
 }
 .content-flag {
   display: flex;
+  margin-right: 5px;
   align-items: center;
-  height: 20px;
-  width: 45px;
+  height: 38px;
+  /* width: 45px; */
 }
 .content-flag >>> .flag {
   width: 55px;
-  height: 35px;
+  height: 38px;
 }
 .text-country {
   color: white;

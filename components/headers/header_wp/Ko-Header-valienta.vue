@@ -152,7 +152,6 @@ export default {
       this.setSearch(resulSearch[resulSearch.length - 1])
     }
   },
-
   data() {
     return {
       showInfo: true,

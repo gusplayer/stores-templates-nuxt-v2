@@ -110,11 +110,6 @@ export default {
         location.href = '?search=' + ''
       }
     },
-    setSearch(value) {
-      let category = value.replace('/?search=', '')
-      let urlFiltrada = decodeURIComponent(category)
-      this.search = urlFiltrada
-    },
     toggleItem: function () {
       this.show = !this.show
     },

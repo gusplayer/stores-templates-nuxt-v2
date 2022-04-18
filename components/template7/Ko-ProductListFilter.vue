@@ -319,6 +319,8 @@
 <script>
 import KoProdcutCardFilter from './_productcard/ProductCard'
 import KoProdcutCardFilerList from './_productcard/ProductCardFilterList'
+import sendCategoryUrl from '../../mixins/sendCategoryUrl'
+import SendsubcategoryUrl from '../../mixins/SendsubcategoryUrl'
 export default {
   components: {
     KoProdcutCardFilter,
@@ -329,6 +331,7 @@ export default {
     fullProducts: {},
     settingByTemplate7: Array,
   },
+  mixins: [sendCategoryUrl, SendsubcategoryUrl],
   name: 'Ko-ProductList-Filter',
   mounted() {
     if (
@@ -351,14 +354,15 @@ export default {
         }
       })
     }
-    let domain = this.$route.fullPath
-    let searchCategory = domain.slice(0, [20])
-    let searchSubCategory = domain.slice(0, [23])
-    if (searchCategory === '/productos?category=') {
-      this.sendCategoryUrl(domain)
-    } else if (searchSubCategory === '/productos?subcategory=') {
-      this.SendsubcategoryUrl(domain)
-    } else if (domain == '/productos') {
+    if (this.$route.query && this.$route.query.category) {
+      this.sendCategoryUrl(this.$route.query.category)
+    } else if (this.$route.query && this.$route.query.subcategory) {
+      this.SendsubcategoryUrl(
+        this.$route.query.subcategory,
+        this.categorias,
+        this.subcategories
+      )
+    } else if (this.$route.fullPath == '/') {
       this.Allcategories()
     }
     if (this.previousPage) {
@@ -669,63 +673,6 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
-    sendCategoryUrl(value) {
-      let category = value.split('=')
-      let urlFiltrada = decodeURIComponent(category[category.length - 1])
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: urlFiltrada,
-      })
-      if (this.$store.getters['products/filterProducts'].length) {
-        this.$store.commit('SET_CATEGORY_PRODCUTRO', urlFiltrada)
-      } else {
-        this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      }
-    },
-    SendsubcategoryUrl(value) {
-      let subcategory = value.split('=')
-      let urlFiltradaTemp = decodeURIComponent(
-        subcategory[subcategory.length - 1]
-      )
-      let resTemp = urlFiltradaTemp.split('^')
-      let urlFiltrada = decodeURIComponent(resTemp[0])
-      let filtradoSubCategoria = this.subcategories.find((element) => {
-        if (
-          element.categoria == parseInt(resTemp[1]) &&
-          element.nombre_subcategoria == urlFiltrada
-        ) {
-          return element
-        }
-      })
-      if (filtradoSubCategoria) {
-        let filtradoCategorias = this.categorias.find(
-          (element) => element.id == parseInt(resTemp[1])
-        )
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: filtradoSubCategoria.id,
-        })
-
-        if (this.$store.getters['products/filterProducts'].length) {
-          this.$store.commit(
-            'SET_CATEGORY_PRODCUTRO',
-            filtradoCategorias.nombre_categoria_producto
-          )
-          this.$store.commit(
-            'SET_SUBCATEGORY_PRODCUTRO',
-            filtradoSubCategoria.nombre_subcategoria
-          )
-        } else {
-          this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-          this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-        }
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: '',
-        })
-      }
-    },
     setBg() {
       if (this.settingByTemplate7[0].settingK07ProductList.url_img) {
         var imagen = document.getElementById('BgProductlistF')
@@ -779,14 +726,15 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
-      let domain = this.$route.fullPath
-      let searchCategory = domain.slice(0, [20])
-      let searchSubCategory = domain.slice(0, [23])
-      if (searchCategory === '/productos?category=') {
-        this.sendCategoryUrl(domain)
-      } else if (searchSubCategory === '/productos?subcategory=') {
-        this.SendsubcategoryUrl(domain)
-      } else if (domain == '/productos') {
+      if (this.$route.query && this.$route.query.category) {
+        this.sendCategoryUrl(this.$route.query.category)
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.SendsubcategoryUrl(
+          this.$route.query.subcategory,
+          this.categorias,
+          this.subcategories
+        )
+      } else if (this.$route.fullPath == '/') {
         this.Allcategories()
       }
     },

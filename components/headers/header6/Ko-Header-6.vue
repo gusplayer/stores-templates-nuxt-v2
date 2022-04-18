@@ -177,26 +177,7 @@ export default {
     settingByTemplate10: Array,
   },
   mounted() {
-    let domain = this.$route.fullPath
-    let searchCategory = domain.slice(0, [11])
-    let searchSubCategory = domain.slice(0, [14])
-    let search = domain.slice(0, [9])
-    if (domain == '/') {
-      this.$store.commit('SET_STATEBANNER', true)
-      this.showSearch = true
-    } else if (searchCategory === '/?category=') {
-      this.$store.commit('SET_STATEBANNER', false)
-      this.showSearch = true
-    } else if (searchSubCategory === '/?subcategory=') {
-      this.$store.commit('SET_STATEBANNER', false)
-      this.showSearch = true
-    } else if (search === '/?search=') {
-      this.$store.commit('SET_STATEBANNER', false)
-      this.setSearch(domain)
-      this.showSearch = true
-    } else {
-      this.showSearch = false
-    }
+    this.initHeader()
   },
   data() {
     return {
@@ -219,6 +200,24 @@ export default {
     },
   },
   methods: {
+    initHeader() {
+      if (this.$route.fullPath == '/') {
+        this.$store.commit('SET_STATEBANNER', true)
+        this.showSearch = true
+      } else if (this.$route.query && this.$route.query.category) {
+        this.$store.commit('SET_STATEBANNER', false)
+        this.showSearch = true
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.$store.commit('SET_STATEBANNER', false)
+        this.showSearch = true
+      } else if (this.$route.query && this.$route.query.search) {
+        this.$store.commit('SET_STATEBANNER', false)
+        this.setSearch(this.$route.query.search)
+        this.showSearch = true
+      } else {
+        this.showSearch = false
+      }
+    },
     btnActivate(value) {
       if (value == 1) {
         this.btnSelect = 1
@@ -270,9 +269,7 @@ export default {
       }
     },
     setSearch(value) {
-      let category = value.replace('/?search=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
+      let urlFiltrada = decodeURIComponent(value)
       this.search = urlFiltrada
     },
     focusInput() {
@@ -285,26 +282,7 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
-      let domain = this.$route.fullPath
-      let searchCategory = domain.slice(0, [11])
-      let searchSubCategory = domain.slice(0, [14])
-      let search = domain.slice(0, [9])
-      if (domain == '/') {
-        this.$store.commit('SET_STATEBANNER', true)
-        this.showSearch = true
-      } else if (searchCategory === '/?category=') {
-        this.$store.commit('SET_STATEBANNER', false)
-        this.showSearch = true
-      } else if (searchSubCategory === '/?subcategory=') {
-        this.$store.commit('SET_STATEBANNER', false)
-        this.showSearch = true
-      } else if (search === '/?search=') {
-        this.$store.commit('SET_STATEBANNER', false)
-        this.setSearch(domain)
-        this.showSearch = true
-      } else {
-        this.showSearch = false
-      }
+      this.initHeader()
     },
   },
 }

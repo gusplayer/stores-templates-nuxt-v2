@@ -55,15 +55,24 @@
 <script>
 import ProductCard from '../template3/productCard/ko-productCard'
 import KoSearch from '../searchWa.vue'
+import sendCategoryUrl from '../../../mixins/sendCategoryUrl'
+import SendsubcategoryUrl from '../../../mixins/SendsubcategoryUrl'
 export default {
-  name: 'ProductListWa',
+  name: 'ProductListWa-3',
   props: {
     dataStore: Object,
     fullProducts: {},
   },
+  mixins: [sendCategoryUrl, SendsubcategoryUrl],
   components: { ProductCard, KoSearch },
   mounted() {
-    this.$store.commit('products/SET_FILTER', this.$route.query)
+    if (this.$route.query && this.$route.query.category) {
+      this.sendCategoryUrl(this.$route.query.category)
+    } else if (this.$route.query && this.$route.query.subcategory) {
+      this.SendsubcategoryUrl(this.$route.query.subcategory)
+    } else {
+      this.Allcategories()
+    }
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
       let maxTMP = 0
@@ -206,9 +215,7 @@ export default {
       this.nameCategory = ''
     },
     sendCategoryUrl(value) {
-      let category = value.replace('/?category=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
+      let urlFiltrada = decodeURIComponent(value)
       this.$store.commit('products/FILTER_BY', {
         type: 'category',
         data: urlFiltrada,
@@ -220,24 +227,26 @@ export default {
       }
     },
     SendsubcategoryUrl(value) {
-      let subcategory = value.replace('/?subcategory=', '')
-      let UrlSubCategory = subcategory.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlSubCategory)
-
-      this.selectSubcategory = urlFiltrada
-
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.nombre_subcategoria == urlFiltrada
-      )
+      let urlFiltradaTemp = decodeURIComponent(value)
+      let resTemp = urlFiltradaTemp.split('^')
+      let urlFiltrada = decodeURIComponent(resTemp[0])
+      let filtradoSubCategoria = this.subcategories.find((element) => {
+        if (
+          element.categoria == parseInt(resTemp[1]) &&
+          element.nombre_subcategoria == urlFiltrada
+        ) {
+          return element
+        }
+      })
       if (filtradoSubCategoria) {
         let filtradoCategorias = this.categorias.find(
-          (element) => element.id == filtradoSubCategoria.categoria
+          (element) => element.id == parseInt(resTemp[1])
         )
-
         this.$store.commit('products/FILTER_BY', {
           type: 'subcategory',
           data: filtradoSubCategoria.id,
         })
+
         if (this.$store.getters['products/filterProducts'].length) {
           this.$store.commit(
             'SET_CATEGORY_PRODCUTRO',
@@ -295,6 +304,20 @@ export default {
     },
     searchValue(value) {
       this.Searchproduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      if (this.$route.query && this.$route.query.category) {
+        this.sendCategoryUrl(this.$route.query.category)
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.SendsubcategoryUrl(
+          this.$route.query.subcategory,
+          this.categorias,
+          this.subcategories
+        )
+      } else if (this.$route.fullPath == '/') {
+        this.Allcategories()
+      }
     },
   },
 }

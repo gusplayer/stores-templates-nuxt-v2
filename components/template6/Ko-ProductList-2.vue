@@ -73,7 +73,7 @@
             </div>
           </div>
           <div
-            v-if="(this.fullProducts.length == 0)"
+            v-if="this.fullProducts.length == 0"
             class="content-products-empty"
           >
             <p>No se encontraron productos relacionados.</p>
@@ -99,6 +99,8 @@
 <script>
 import KoProductCard1 from '../template5/_productcard/Ko-ProductCard-1'
 import BaseAccordian from '../headers/_order1/_AccordionList'
+import sendCategoryUrl from '../../mixins/sendCategoryUrl'
+import SendsubcategoryUrl from '../../mixins/SendsubcategoryUrl'
 
 export default {
   components: {
@@ -109,6 +111,7 @@ export default {
     dataStore: Object,
     fullProducts: {},
   },
+  mixins: [sendCategoryUrl, SendsubcategoryUrl],
   name: 'Ko-ProductList-1',
   mounted() {
     // this.$store.commit('products/SET_FILTER', this.$route.query)
@@ -123,14 +126,15 @@ export default {
         }
       })
     }
-    let domain = this.$route.fullPath
-    let searchCategory = domain.slice(0, [11])
-    let searchSubCategory = domain.slice(0, [14])
-    if (searchCategory === '/?category=') {
-      this.sendCategoryUrl(domain)
-    } else if (searchSubCategory === '/?subcategory=') {
-      this.SendsubcategoryUrl(domain)
-    } else if (domain == '/') {
+    if (this.$route.query && this.$route.query.category) {
+      this.sendCategoryUrl(this.$route.query.category)
+    } else if (this.$route.query && this.$route.query.subcategory) {
+      this.SendsubcategoryUrl(
+        this.$route.query.subcategory,
+        this.categorias,
+        this.subcategories
+      )
+    } else if (this.$route.fullPath == '/') {
       this.Allcategories()
     }
     if (this.previousPage) {
@@ -325,60 +329,6 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
-    sendCategoryUrl(value) {
-      let category = value.replace('/?category=', '')
-      let urlFiltrada = decodeURIComponent(category)
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: urlFiltrada,
-      })
-      if (this.$store.getters['products/filterProducts'].length) {
-        this.$store.commit('SET_CATEGORY_PRODCUTRO', urlFiltrada)
-      } else {
-        this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      }
-    },
-    SendsubcategoryUrl(value) {
-      let subcategory = value.replace('/?subcategory=', '')
-      let resTemp = subcategory.split('%5E')
-      let urlFiltrada = decodeURIComponent(resTemp[0])
-      let filtradoSubCategoria = this.subcategories.find((element) => {
-        if (
-          element.categoria == parseInt(resTemp[1]) &&
-          element.nombre_subcategoria == urlFiltrada
-        ) {
-          return element
-        }
-      })
-      if (filtradoSubCategoria) {
-        let filtradoCategorias = this.categorias.find(
-          (element) => element.id == parseInt(resTemp[1])
-        )
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: filtradoSubCategoria.id,
-        })
-
-        if (this.$store.getters['products/filterProducts'].length) {
-          this.$store.commit(
-            'SET_CATEGORY_PRODCUTRO',
-            filtradoCategorias.nombre_categoria_producto
-          )
-          this.$store.commit(
-            'SET_SUBCATEGORY_PRODCUTRO',
-            filtradoSubCategoria.nombre_subcategoria
-          )
-        } else {
-          this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-          this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-        }
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: '',
-        })
-      }
-    },
   },
   watch: {
     fullProducts(value) {
@@ -412,14 +362,15 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
-      let domain = this.$route.fullPath
-      let searchCategory = domain.slice(0, [11])
-      let searchSubCategory = domain.slice(0, [14])
-      if (searchCategory === '/?category=') {
-        this.sendCategoryUrl(domain)
-      } else if (searchSubCategory === '/?subcategory=') {
-        this.SendsubcategoryUrl(domain)
-      } else if (domain == '/') {
+      if (this.$route.query && this.$route.query.category) {
+        this.sendCategoryUrl(this.$route.query.category)
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.SendsubcategoryUrl(
+          this.$route.query.subcategory,
+          this.categorias,
+          this.subcategories
+        )
+      } else if (this.$route.fullPath == '/') {
         this.Allcategories()
       }
     },

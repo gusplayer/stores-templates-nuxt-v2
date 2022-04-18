@@ -33,7 +33,7 @@
           </div>
         </div>
         <div
-          v-if="(this.fullProducts.length == 0)"
+          v-if="this.fullProducts.length == 0"
           class="content-products-empty"
         >
           <p>{{ $t('home_msgCatalogo') }}</p>
@@ -65,7 +65,6 @@ export default {
   },
   name: 'Ko-ProductList-valienta',
   mounted() {
-    this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
       let maxTMP = 0
@@ -200,59 +199,6 @@ export default {
       })
       this.$emit('clear')
       this.nameCategory = ''
-    },
-    sendCategoryUrl(value) {
-      let category = value.replace('/?category=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: urlFiltrada,
-      })
-      if (this.$store.getters['products/filterProducts'].length) {
-        this.$store.commit('SET_CATEGORY_PRODCUTRO', urlFiltrada)
-      } else {
-        this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      }
-    },
-    SendsubcategoryUrl(value) {
-      let subcategory = value.replace('/?subcategory=', '')
-      let UrlSubCategory = subcategory.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlSubCategory)
-
-      this.selectSubcategory = urlFiltrada
-
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.nombre_subcategoria == urlFiltrada
-      )
-      if (filtradoSubCategoria) {
-        let filtradoCategorias = this.categorias.find(
-          (element) => element.id == filtradoSubCategoria.categoria
-        )
-
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: filtradoSubCategoria.id,
-        })
-        if (this.$store.getters['products/filterProducts'].length) {
-          this.$store.commit(
-            'SET_CATEGORY_PRODCUTRO',
-            filtradoCategorias.nombre_categoria_producto
-          )
-          this.$store.commit(
-            'SET_SUBCATEGORY_PRODCUTRO',
-            filtradoSubCategoria.nombre_subcategoria
-          )
-        } else {
-          this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-          this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-        }
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: '',
-        })
-      }
     },
   },
   watch: {

@@ -138,14 +138,11 @@ export default {
     } else {
       colorBg = '#ffffff'
     }
-    let domain = this.$route.fullPath
-    let result = domain.split('/')
-    let search = result[result.length - 1].slice(0, [8])
-    if (domain == '/') {
+    if (this.$route.fullPath == '/') {
       this.showSearch = true
-    } else if (search == '?search=') {
+    } else if (this.$route.query && this.$route.query.search) {
       this.showSearch = true
-      this.setSearch(domain)
+      this.setSearch(this.$route.query.search)
     } else {
       this.showSearch = false
     }
@@ -297,9 +294,7 @@ export default {
     },
     setSearch(value) {
       this.openSearch()
-      let category = value.replace('/?search=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
+      let urlFiltrada = decodeURIComponent(value)
       this.search = urlFiltrada
     },
     focusInput() {
@@ -312,14 +307,11 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
-      let domain = this.$route.fullPath
-      let result = domain.split('/')
-      let search = result[result.length - 1].slice(0, [8])
-      if (domain == '/') {
+      if (this.$route.fullPath == '/') {
         this.showSearch = true
-      } else if (search == '?search=') {
+      } else if (this.$route.query && this.$route.query.search) {
         this.showSearch = true
-        this.setSearch(domain)
+        this.setSearch(this.$route.query.search)
       } else {
         this.showSearch = false
       }

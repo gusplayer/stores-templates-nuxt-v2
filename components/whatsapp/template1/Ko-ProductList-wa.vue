@@ -73,6 +73,8 @@
 
 <script>
 import KoProductCard1 from './_productcard/Ko-ProductCard-1'
+import sendCategoryUrl from '../../../mixins/sendCategoryUrl'
+import SendsubcategoryUrl from '../../../mixins/SendsubcategoryUrl'
 export default {
   components: {
     KoProductCard1,
@@ -82,9 +84,16 @@ export default {
     fullProducts: {},
     settingByTemplate: Object,
   },
-  name: 'Ko-ProductList-1',
+  mixins: [sendCategoryUrl, SendsubcategoryUrl],
+  name: 'ProductGridWa-1',
   mounted() {
-    this.$store.commit('products/SET_FILTER', this.$route.query)
+    if (this.$route.query && this.$route.query.category) {
+      this.sendCategoryUrl(this.$route.query.category)
+    } else if (this.$route.query && this.$route.query.subcategory) {
+      this.SendsubcategoryUrl(this.$route.query.subcategory)
+    } else {
+      this.Allcategories()
+    }
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
       let maxTMP = 0
@@ -220,59 +229,6 @@ export default {
       this.$emit('clear')
       this.nameCategory = ''
     },
-    sendCategoryUrl(value) {
-      let category = value.replace('/?category=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: urlFiltrada,
-      })
-      if (this.$store.getters['products/filterProducts'].length) {
-        this.$store.commit('SET_CATEGORY_PRODCUTRO', urlFiltrada)
-      } else {
-        this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      }
-    },
-    SendsubcategoryUrl(value) {
-      let subcategory = value.replace('/?subcategory=', '')
-      let UrlSubCategory = subcategory.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlSubCategory)
-
-      this.selectSubcategory = urlFiltrada
-
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.nombre_subcategoria == urlFiltrada
-      )
-      if (filtradoSubCategoria) {
-        let filtradoCategorias = this.categorias.find(
-          (element) => element.id == filtradoSubCategoria.categoria
-        )
-
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: filtradoSubCategoria.id,
-        })
-        if (this.$store.getters['products/filterProducts'].length) {
-          this.$store.commit(
-            'SET_CATEGORY_PRODCUTRO',
-            filtradoCategorias.nombre_categoria_producto
-          )
-          this.$store.commit(
-            'SET_SUBCATEGORY_PRODCUTRO',
-            filtradoSubCategoria.nombre_subcategoria
-          )
-        } else {
-          this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-          this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-        }
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: '',
-        })
-      }
-    },
   },
   watch: {
     fullProducts(value) {
@@ -310,6 +266,20 @@ export default {
     },
     searchValue(value) {
       this.Searchproduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      if (this.$route.query && this.$route.query.category) {
+        this.sendCategoryUrl(this.$route.query.category)
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.SendsubcategoryUrl(
+          this.$route.query.subcategory,
+          this.categorias,
+          this.subcategories
+        )
+      } else if (this.$route.fullPath == '/') {
+        this.Allcategories()
+      }
     },
   },
 }

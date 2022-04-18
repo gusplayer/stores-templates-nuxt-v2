@@ -25,12 +25,10 @@
       v-if="dataHoko && dataHoko.statehoko == 1 && this.stateBanner"
     />
     <KProductList
-      v-if="this.fullProducts.length > 0"
       :dataStore="dataStore"
       :fullProducts="fullProducts"
       id="KProductX"
     />
-
     <kBannerFooter id="KFooterX" />
     <KNewsletter :dataStore="dataStore" />
   </div>

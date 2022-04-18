@@ -156,22 +156,7 @@ export default {
   },
   mounted() {
     this.setHoko()
-    let domain = this.$route.fullPath
-    let searchCategory = domain.slice(0, [11])
-    let searchSubCategory = domain.slice(0, [14])
-    let search = domain.slice(0, [9])
-    if (domain == '/') {
-      this.showSearch = true
-    } else if (searchCategory === '/?category=') {
-      this.showSearch = true
-    } else if (searchSubCategory === '/?subcategory=') {
-      this.showSearch = true
-    } else if (search === '/?search=') {
-      this.setSearch(domain)
-      this.showSearch = true
-    } else {
-      this.showSearch = false
-    }
+    this.initHeader()
     window.addEventListener('scroll', function () {
       var navbar = document.getElementById('navbar')
       if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
@@ -230,6 +215,20 @@ export default {
     },
   },
   methods: {
+    initHeader() {
+      if (this.$route.fullPath == '/') {
+        this.showSearch = true
+      } else if (this.$route.query && this.$route.query.category) {
+        this.showSearch = true
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.showSearch = true
+      } else if (this.$route.query && this.$route.query.search) {
+        this.setSearch(this.$route.query.search)
+        this.showSearch = true
+      } else {
+        this.showSearch = false
+      }
+    },
     setHoko() {
       if (this.dataHoko && this.dataHoko.statehoko == 1) {
         this.secciones[2].state = true
@@ -271,9 +270,7 @@ export default {
       }
     },
     setSearch(value) {
-      let category = value.replace('/?search=', '')
-      let UrlCategory = category.replace(/-/g, ' ')
-      let urlFiltrada = decodeURIComponent(UrlCategory)
+      let urlFiltrada = decodeURIComponent(value)
       this.search = urlFiltrada
     },
     focusInput() {
@@ -289,22 +286,7 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
-      let domain = this.$route.fullPath
-      let searchCategory = domain.slice(0, [11])
-      let searchSubCategory = domain.slice(0, [14])
-      let search = domain.slice(0, [9])
-      if (domain == '/') {
-        this.showSearch = true
-      } else if (searchCategory === '/?category=') {
-        this.showSearch = true
-      } else if (searchSubCategory === '/?subcategory=') {
-        this.showSearch = true
-      } else if (search === '/?search=') {
-        this.setSearch(domain)
-        this.showSearch = true
-      } else {
-        this.showSearch = false
-      }
+      this.initHeader()
     },
   },
 }

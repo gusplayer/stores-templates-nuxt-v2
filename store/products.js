@@ -1,8 +1,4 @@
 import Fuse from 'fuse.js'
-
-// if (process.client) {
-//   new Fuse([], {});
-// }
 export const state = () => ({
   type: '',
   payload: '',
