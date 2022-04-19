@@ -5,76 +5,15 @@
     </div>
     <div class="container-favorite" id="swiper-slide-favorite">
       <div
-        class="card-favorite"
         v-for="product in dataProductFavorite"
         :key="product.id"
+        class="content-products"
       >
-        <router-link
-          :to="{
-            path: `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
-          }"
-        >
-          <div class="wrapper-img">
-            <img
-              :src="idCloudinary(product.foto_cloudinary, 250, 250)"
-              class="card_favorite_img"
-              alt="Product Img"
-            />
-          </div>
-          <p class="card-text-movil-title" v-if="product.nombre.length >= 15">
-            {{ `${product.nombre.slice(0, 15)}..` }}
-          </p>
-          <p class="card-text-movil-title" v-else>
-            {{ `${product.nombre.slice(0, 39)}` }}
-          </p>
-          <div>
-            <div v-if="product.precio">
-              <!-- <p class="card-price-1-movil" v-if="product.precio > 0">
-                  $ {{ product.precio }}
-              </p>-->
-
-              <p class="card-price-2" v-if="product.precio > 0">
-                {{
-                  product.precio
-                    | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
-                    )
-                }}
-              </p>
-            </div>
-            <div v-else class="separador-price"></div>
-          </div>
-          <div
-            class="card-button"
-            :style="`background: ${
-              settingByTemplate && settingByTemplate.color_primario
-                ? settingByTemplate.color_primario
-                : '#25D366'
-            }; color:${
-              settingByTemplate && settingByTemplate.color_secundario
-                ? settingByTemplate.color_secundario
-                : '#FFFFFF'
-            };`"
-          >
-            <p>{{ $t('productdetail_btnComprar') }}</p>
-          </div>
-        </router-link>
+        <KoProductCard1
+          :product="product"
+          :dataStore="dataStore"
+        ></KoProductCard1>
       </div>
-    </div>
-    <div
-      class="btn-scroll icon-prev"
-      @click="scrollLeft()"
-      v-if="dataProductFavorite.length > 6"
-    >
-      <FlechaLeft-icon class="btn-scroll-icon" />
-    </div>
-    <div
-      class="btn-scroll icon-next"
-      @click="scrollRight()"
-      v-if="dataProductFavorite.length > 6"
-    >
-      <FlechaRight-icon class="btn-scroll-icon" />
     </div>
   </div>
 </template>
@@ -82,7 +21,11 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 import currency from '../../../mixins/formatCurrent'
+import KoProductCard1 from '../template2/productCard/ko-productCard.vue'
 export default {
+  components: {
+    KoProductCard1,
+  },
   mixins: [idCloudinary, currency],
   name: 'Ko-ProductFavoritos-1',
   props: { dataStore: Object, settingByTemplate: Object },
@@ -91,14 +34,6 @@ export default {
       return this.$store.state.products.fullProducts.filter(
         (product) => product.favorito === 1
       )
-    },
-  },
-  methods: {
-    scrollLeft() {
-      document.getElementById('swiper-slide-favorite').scrollLeft -= 300
-    },
-    scrollRight() {
-      document.getElementById('swiper-slide-favorite').scrollLeft += 300
     },
   },
 }
@@ -116,15 +51,6 @@ export default {
   box-sizing: border-box;
   /* padding-top: 10px; */
   transition: all 200ms ease-in;
-}
-.swiper-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px 20px 20px 20px;
-  margin-right: 10px;
 }
 .content-title-ProductFavoritos {
   width: 100%;
@@ -144,17 +70,36 @@ export default {
   color: #4c4c4c;
   cursor: pointer;
 }
+.container-favorite::-webkit-scrollbar {
+  @apply w-5;
+}
+.container-favorite::-webkit-scrollbar-thumb {
+  margin-top: 5px;
+  background: #a3a3a3;
+  border-radius: 4px;
+}
+.container-favorite::-webkit-scrollbar-thumb:active {
+  margin-top: 5px;
+  background-color: #777777;
+}
+.container-favorite::-webkit-scrollbar-thumb:hover {
+  margin-top: 5px;
+  background: #686868;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.401);
+}
 .container-favorite {
+  width: 95%;
   display: flex;
   flex-direction: row;
-  overflow: scroll;
-  width: 100%;
-  padding: 0px 20px;
-  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: auto;
+  overflow-y: hidden;
+  justify-content: flex-start;
+  align-items: center;
 }
-.container-favorite::-webkit-scrollbar {
-  width: 0 !important;
-  display: none;
+.content-products {
+  max-width: 269px;
+  min-width: 269px;
+  margin-right: 20px;
 }
 .btn-scroll {
   display: initial;
@@ -180,89 +125,24 @@ export default {
   color: black;
   bottom: 0.125em;
 }
-.card-button {
-  margin-top: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  padding: 6px 0px;
-  font-weight: 700;
-  font-size: 13px;
-  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.card-favorite {
-  margin: 6px;
-  margin-left: 10px;
-  width: 140px;
-}
-.wrapper-img {
-  width: 100%;
-  max-width: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.card_favorite_img {
-  width: 100%;
-  max-width: 100px;
-  max-height: 90px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 5px;
-}
-.card-text-movil-title {
-  text-align: center;
-  font-size: 11px;
-  height: 34px;
-  text-decoration: none;
-  color: black;
-}
-.card-price-2 {
-  font-size: 13px;
-  color: black;
-  font-weight: 700;
-  text-align: center;
-}
-.separador-price {
-  height: 19px;
-  width: 100%;
-  background-color: transparent;
-}
+
 @media (max-width: 770px) {
-  .swiper-container {
-    padding: 20px 8px;
-  }
   .content-title-ProductFavoritos {
     padding: 10px 20px;
   }
   .btn-scroll {
     display: none;
   }
-  .wrapper-img {
-    max-width: 70px;
-  }
-  .card_favorite_img {
-    max-width: 70px;
-    max-height: 70px;
-  }
-}
-@media (max-width: 500px) {
-  .card_favorite_img {
-    max-width: 60px;
-    max-height: 60px;
-  }
-  .wrapper-img {
-    max-width: 60px;
+  .content-products {
+    max-width: 225px;
+    min-width: 225px;
+    margin-right: 15px;
   }
 }
 @media (max-width: 380px) {
-  .swiper-container {
-    padding: 20px 5px;
-  }
-  .container-favorite {
-    padding: 0px 5px;
+  .content-products {
+    max-width: 168.13px;
+    min-width: 168.13px;
   }
 }
 </style>

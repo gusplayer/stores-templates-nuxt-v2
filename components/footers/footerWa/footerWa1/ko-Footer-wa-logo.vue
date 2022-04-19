@@ -22,6 +22,20 @@
           </a>
         </div>
       </div>
+
+      <button
+        class="text-politics"
+        @click="OpenModalPolitics"
+        v-if="dataStore.politicas"
+      >
+        {{ $t('footer_politicasyterminos') }}
+      </button>
+
+      <div v-if="showModal">
+        <div class="modal" v-if="dataStore.politicas">
+          <KoTermsConditions :dataStore="dataStore" />
+        </div>
+      </div>
       <div
         class="under-footer"
         v-if="
@@ -68,8 +82,13 @@
 </template>
 
 <script>
+import KoTermsConditions from '../../ko-TermsAndConditions'
+
 export default {
   name: 'Ko-Footer-Wa',
+  components: {
+    KoTermsConditions,
+  },
   props: {
     dataStore: Object,
     settingByTemplate: Object,
@@ -100,6 +119,16 @@ export default {
       ],
     }
   },
+  computed: {
+    showModal() {
+      return this.$store.state.modalpolitics05
+    },
+  },
+  methods: {
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
+    },
+  },
 }
 </script>
 
@@ -121,6 +150,16 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.text-politics {
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: black;
 }
 .under-footer {
   display: flex;
@@ -162,5 +201,11 @@ export default {
 }
 .icon-wapi:hover {
   color: #445a64;
+}
+.modal {
+  padding-top: 50px;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  @apply w-full h-full fixed z-10 left-0 overflow-auto top-0;
 }
 </style>
