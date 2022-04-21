@@ -327,12 +327,12 @@
                   </span>
                 </div>
                 <div class="content-button">
+                  <!-- verifyProducts == 1 && -->
                   <div
                     v-if="
                       isQuotation() ||
                       (countryStore == false &&
                         productsCart.length &&
-                        verifyProducts == 1 &&
                         expiredDate(dataStore.tienda.fecha_expiracion) &&
                         dataStore.tienda.estado == 1)
                     "
@@ -365,9 +365,10 @@
                   >
                     {{ $t('footer_tiendaCerrada') }}
                   </p>
-                  <p class="Quotation-message" v-if="verifyProducts == 0">
+                  <!-- <p class="Quotation-message" v-if="verifyProducts == 0">
                     {{ $t('cart_limitProductos') }}
-                  </p>
+                  </p> -->
+
                   <!-- <p class="Quotation-message" v-if="!stateModalPwd">
                     {{ $t('footer_tiendaPwd') }}
                   </p> -->
@@ -385,6 +386,7 @@
                     }}
                     {{ $t('cart_minimovalorProductos2') }}
                   </p>
+                  <!-- && verifyProducts == 1 -->
                   <button
                     v-if="
                       productsCart.length &&
@@ -393,8 +395,7 @@
                       this.estadoShippingTarifaPrecio == false &&
                       countryStore == true &&
                       IsMinValorTotal() &&
-                      expiredDate(dataStore.tienda.fecha_expiracion) &&
-                      verifyProducts == 1
+                      expiredDate(dataStore.tienda.fecha_expiracion)
                     "
                     class="continue_shopping"
                     @click="GoPayments"
@@ -663,9 +664,9 @@ export default {
         this.$store.state.openOrder = value
       },
     },
-    verifyProducts() {
-      return this.$store.getters.verifyProducts
-    },
+    // verifyProducts() {
+    //   return this.$store.getters.verifyProducts
+    // },
     cantidadProductos() {
       return this.$store.getters.cantidadProductos
     },

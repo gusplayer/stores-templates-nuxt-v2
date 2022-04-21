@@ -410,9 +410,9 @@
               <!-- <p class="Quotation-message" v-if="!stateModalPwd">
                 {{ $t('footer_tiendaPwd') }}
               </p> -->
-              <p class="Quotation-message" v-if="verifyProducts == 0">
+              <!-- <p class="Quotation-message" v-if="verifyProducts == 0">
                 {{ $t('cart_limitProductos') }}
-              </p>
+              </p> -->
               <p
                 class="Quotation-message"
                 v-if="!IsMinValorTotal() && productsCart.length"
@@ -427,6 +427,7 @@
                 }}
                 {{ $t('cart_minimovalorProductos2') }}
               </p>
+              <!-- && verifyProducts == 1 -->
               <button
                 ref="colorBtn"
                 class="btn-buy-1"
@@ -438,8 +439,7 @@
                   this.estadoShippingTarifaPrecio == false &&
                   countryStore == true &&
                   IsMinValorTotal() &&
-                  expiredDate(dataStore.tienda.fecha_expiracion) &&
-                  verifyProducts == 1
+                  expiredDate(dataStore.tienda.fecha_expiracion)
                 "
               >
                 {{ $t('footer_finalizarCompra') }}

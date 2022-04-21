@@ -341,9 +341,9 @@
                 >
                   {{ $t('footer_tiendaCerrada') }}
                 </p>
-                <p class="Quotation-message" v-if="verifyProducts == 0">
+                <!-- <p class="Quotation-message" v-if="verifyProducts == 0">
                   {{ $t('cart_limitProductos') }}
-                </p>
+                </p> -->
                 <!-- <p class="Quotation-message" v-if="!stateModalPwd">
                   {{ $t('footer_tiendaPwd') }}
                 </p> -->
@@ -361,6 +361,7 @@
                   }}
                   {{ $t('cart_minimovalorProductos2') }}
                 </p>
+                <!-- && verifyProducts == 1 -->
                 <button
                   v-if="
                     productsCart.length &&
@@ -370,8 +371,7 @@
                     countryStore == true &&
                     IsMinValorTotal() &&
                     settingByTemplate.pago_online == 1 &&
-                    expiredDate(dataStore.tienda.fecha_expiracion) &&
-                    verifyProducts == 1
+                    expiredDate(dataStore.tienda.fecha_expiracion)
                   "
                   class="continue_shopping2"
                   :style="`color: ${
@@ -388,13 +388,13 @@
                 >
                   {{ $t('footer_finalizarCompra') }}
                 </button>
+                <!-- && verifyProducts == 1 -->
                 <button
                   v-if="
                     productsCart.length &&
                     !isQuotation() &&
                     dataStore.tienda.estado == 1 &&
-                    dataStore.tienda.whatsapp &&
-                    verifyProducts == 1
+                    dataStore.tienda.whatsapp
                   "
                   class="continue_shopping"
                   :style="`background: ${
