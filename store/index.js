@@ -811,7 +811,7 @@ export const actions = {
     )
     commit('SET_ANALITICS_TAGMANAGER', response.data.data)
   },
-  GET_SHOPPING_CART({ state, commit }) {
+  GET_SHOPPING_CART({ state, commit, dispatch }) {
     if (
       localStorage.getItem(`ShoppingCart/${state.dataStore.tienda.id_tienda}`)
     ) {
@@ -824,6 +824,83 @@ export const actions = {
         )
       )
     }
+    dispatch('VERIFY_PRODUCTS')
+  },
+  async VERIFY_PRODUCTS({ state, commit }) {
+    let idProducts = state.productsCart.map((a) => a.id.toString())
+    if (idProducts.length == 1) {
+      idProducts = [idProducts]
+    }
+    let data = {
+      id_tienda: state.dataStore.tienda.id_tienda,
+      ids: idProducts,
+    }
+    const response = await axios.post(
+      `${state.urlKomercia}/api/ids/por/productos`,
+      data,
+      state.configAxios
+    )
+    let productServer = response.data.data
+    let merged = []
+    for (let i = 0; i < productServer.length; i++) {
+      merged.push({
+        ...state.productsCart[i],
+        ...productServer[i],
+      })
+    }
+    const productsFinal = merged.map((product) => {
+      if (product.con_variante && product.variantes && product.variantes[0]) {
+        let variantesConSplit =
+          product.variantes[0].combinaciones[0].combinaciones
+        variantesConSplit = variantesConSplit.toString().slice(1, -1)
+        let arrayObtain = JSON.parse('[' + variantesConSplit + ']')
+        let filterCombination = arrayObtain.filter((item) => {
+          if (item.combinacion.toString() == product.combinacion.toString()) {
+            return item
+          }
+        })
+        const newProduct = {
+          cantidad: product.cantidad,
+          combinacion: filterCombination[0].combinacion,
+          envio_gratis: product.envio_gratis,
+          foto_cloudinary: product.foto_cloudinary,
+          id: product.id,
+          limitQuantity: parseInt(filterCombination[0].unidades),
+          nombre: product.nombre,
+          precio: filterCombination[0].precio,
+          promocion_valor: product.promocion_valor,
+          tag_promocion: product.tag_promocion,
+          activo: product.activo,
+          stock_disponible: 1,
+        }
+        if (filterCombination[0].estado == false) {
+          newProduct.activo = 0
+        }
+        if (filterCombination[0].unidades == 0) {
+          newProduct.activo = 0
+        } else {
+          if (newProduct.cantidad > newProduct.limitQuantity) {
+            newProduct.stock_disponible = 0
+          }
+        }
+        return newProduct
+      } else {
+        product.stock_disponible = 1
+        product.limitQuantity = product.informacion_producto[0].inventario
+        if (product.informacion_producto[0].inventario == 0) {
+          product.activo = 0
+        } else {
+          if (product.cantidad > product.limitQuantity) {
+            product.stock_disponible = 0
+          } else if (product.cantidad <= product.limitQuantity) {
+            product.stock_disponible = 1
+          }
+        }
+        return product
+      }
+    })
+    commit('SET_SHOPPING_CART', productsFinal)
+    // commit('UPDATE_CONTENTCART', 1)
   },
   GET_DESCUENTOS({ state }) {
     axios
@@ -880,7 +957,6 @@ export const actions = {
         })
     }
   },
-
   // async GET_DATAVALIENTA({ state, commit }) {
   //   const response = await axios.get(
   //     `https://gateway-service-api.prod.valienta.co/company-service-api/store/product`
@@ -1065,6 +1141,19 @@ export const getters = {
   total(state, getters) {
     if (getters.subtotalCart) {
       return getters.subtotalCart
+    } else {
+      return 0
+    }
+  },
+  verifyProducts(state) {
+    let resutlVerify = []
+    state.productsCart.filter((product) => {
+      if (product.activo == 1 && product.stock_disponible == 1) {
+        resutlVerify.push(product)
+      }
+    })
+    if ((resutlVerify && resutlVerify.length) == state.productsCart.length) {
+      return 1
     } else {
       return 0
     }

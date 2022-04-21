@@ -60,9 +60,12 @@
       <div class="bar-body" v-if="orden && orden.venta">
         <div class="content-title">
           <p>{{ $t('mcompra_title2') }}</p>
-          <p>No. {{ orden.venta.id }}</p>
+          <p v-if="orden.venta.id">No. {{ orden.venta.id }}</p>
         </div>
-        <div class="content-card">
+        <div
+          class="content-card"
+          v-if="orden.productos && orden.productos.length > 0"
+        >
           <div
             class="card"
             v-for="(item, index) in orden.productos"
@@ -93,12 +96,86 @@
             </div>
           </div>
         </div>
+        <div class="content-info-orden" v-else>
+          <div class="info-left">
+            <p class="title-info-orden">
+              Compra dropshipping (Hoko)
+              <i class="el-icon-refresh" @click="getproductHoko" />
+            </p>
+            <div v-if="productDataHoko" class="wrapper-hoko">
+              <div>
+                <div
+                  v-if="productDataHoko.delivery_state"
+                  class="mt-4 flex flex-row items-center"
+                >
+                  <p
+                    class="title-info-orden"
+                    v-if="productDataHoko.delivery_state"
+                  >
+                    Estado del proceso con Hoko:
+                  </p>
+                  <el-tag
+                    size="medium"
+                    :color="
+                      saleStateHoko[
+                        productDataHoko.delivery_state.valueOf(str) - 1
+                      ].color
+                    "
+                    effect="dark"
+                    style="margin-left: 10px"
+                    >{{
+                      $t(
+                        saleStateHoko[
+                          productDataHoko.delivery_state.valueOf(str) - 1
+                        ].state
+                      )
+                    }}</el-tag
+                  >
+                </div>
+                <div class="mt-4 flex flex-row items-center">
+                  <p class="title-info-orden">Estado del proceso con Hoko:</p>
+                  <div class="ml-2">
+                    <span
+                      class="value-info-orden"
+                      v-if="productDataHoko.courier_id == 21"
+                    >
+                      Mensajería MEDELLIN RR
+                    </span>
+                    <span
+                      class="value-info-orden"
+                      v-else-if="productDataHoko.courier_id == 44"
+                    >
+                      Envía E-commerce CR
+                    </span>
+                    <span
+                      class="value-info-orden"
+                      v-else-if="productDataHoko.courier_id == 45"
+                    >
+                      Envía E-commerce CR
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4" v-if="this.orden && this.orden.mensajes">
+                <a
+                  class="btn_url"
+                  :href="`https://hoko.com.co/admin/resources/orders/${parseInt(
+                    this.orden.mensajes[0].mensaje
+                  )}`"
+                  target="_blank"
+                >
+                  Ver detalle de la orden Hoko
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="content-info-orden" v-if="orden.venta">
           <div class="info-left">
-            <!-- <p class="title-info-orden" v-if="orden.venta.cupon != 'null'">
+            <p class="title-info-orden" v-if="orden.venta.cupon != null">
               {{ $t('mcompra_cupon') }}
               <span class="value-info-orden">{{ orden.venta.cupon }}</span>
-            </p> -->
+            </p>
             <p
               class="title-info-orden"
               v-if="orden.venta.cupon == 'null' || orden.venta.cupon == null"
@@ -106,11 +183,20 @@
               {{ $t('mcompra_cupon') }}
               <span class="value-info-orden">N/A</span>
             </p>
-            <p class="title-info-orden" v-if="orden.venta.costo_envio">
+            <p
+              class="title-info-orden"
+              v-if="orden.venta.costo_envio && stateHoko == false"
+            >
               {{ $t('mcompra_valorEnvio') }}
               <span class="value-info-orden">{{
                 orden.venta.costo_envio | currency
               }}</span>
+            </p>
+            <p class="title-info-orden" v-else>
+              {{ $t('mcompra_valorEnvio') }}
+              <span class="value-info-orden"
+                >Envío por Hoko (Pago contraentrega)</span
+              >
             </p>
             <p class="title-info-orden" v-if="orden.venta.total">
               {{ $t('mcompra_totalOrden') }}
@@ -131,6 +217,10 @@
             <p class="title-info-orden" v-if="choicePayment">
               {{ $t('mcompra_horaCompra') }}
               <span class="value-info-orden">{{ this.horaState }}</span>
+            </p>
+            <p class="title-info-orden" v-if="choicePayment">
+              {{ $t('mcompra_pcanaldeVenta') }}
+              <span class="value-info-orden">Venta generada por WhatsApp</span>
             </p>
           </div>
           <div class="content-state-top">
@@ -155,7 +245,42 @@
         <div class="content-sections">
           <el-collapse>
             <el-collapse-item :title="$t('mcompra_infoComprador')" name="1">
-              <div class="content-info-buyer" v-if="orden.venta.usuario">
+              <div class="content-info-buyer" v-if="orden.usuario == 30866">
+                <p class="name" v-if="mensajeWa && mensajeWa.nombre">
+                  {{ $t('mcompra_nombre') }}
+                  <span class="value-data">{{ mensajeWa.nombre }}</span>
+                </p>
+                <!-- <p
+                  class="name"
+                  v-if="this.cityComprador && this.cityComprador.departamento"
+                >
+                  {{ $t('mcompra_departamento') }}
+                  <span class="value-data">{{
+                    this.cityComprador.departamento.nombre_dep
+                  }}</span>
+                </p> -->
+                <p class="name" v-if="mensajeWa && mensajeWa.ciudad">
+                  {{ $t('mcompra_ciudad') }}
+                  <span class="value-data">{{ mensajeWa.ciudad }}</span>
+                </p>
+                <p class="name" v-if="mensajeWa && mensajeWa.barrio">
+                  {{ $t('mcompra_barrio') }}
+                  <span class="value-data">{{ mensajeWa.barrio }}</span>
+                </p>
+                <p class="address">
+                  {{ $t('mcompra_direccion') }}
+                  <span
+                    class="value-data"
+                    v-if="mensajeWa && mensajeWa.direccion"
+                    >{{ mensajeWa.direccion }}</span
+                  >
+                  <span class="value-data" v-else>N/A</span>
+                </p>
+              </div>
+              <div
+                class="content-info-buyer"
+                v-else-if="orden.venta.usuario && orden.usuario != 30866"
+              >
                 <p class="name">
                   {{ $t('mcompra_nombre') }}
                   <span class="value-data">{{
@@ -320,6 +445,10 @@ export default {
     if (this.orden && this.orden.venta && this.orden.venta.usuario) {
       this.numOrden = this.orden.venta.id
       this.cedula = this.orden.venta.usuario.identificacion
+      if (this.dataHoko && this.orden.productos.length == 0) {
+        this.getproductHoko()
+        this.stateHoko = true
+      }
     } else {
       this.numOrden = ''
       this.cedula = ''
@@ -331,6 +460,7 @@ export default {
         this.fechaState = result[0]
         this.horaState = result[1]
       }
+      this.mensajeWa = JSON.parse(this.orden.venta.comentario)
     }
   },
   destroyed() {
@@ -338,6 +468,7 @@ export default {
   },
   data() {
     return {
+      mensajeWa: '',
       fechaState: '',
       horaState: '',
       toggleArrow: false,
@@ -489,10 +620,59 @@ export default {
           ref: 'Entregado',
         },
       ],
+      productDataHoko: {},
+      stateHoko: false,
+      saleStateHoko: [
+        {
+          id: 1,
+          state: 'Creada',
+          color: '#30C46F',
+          type: 'success',
+        },
+        {
+          id: 2,
+          state: 'En proceso',
+          color: '#4B9DEB',
+          type: 'info',
+        },
+        {
+          id: 3,
+          state: 'Despachada',
+          color: '#30C46F',
+          type: 'success',
+        },
+        {
+          id: 4,
+          state: 'Finalizada',
+          color: '#30C46F',
+          type: 'success',
+        },
+        {
+          id: 5,
+          state: 'Cancelada',
+          color: '#EB4D4B',
+          type: 'danger',
+        },
+        {
+          id: 6,
+          state: 'En Novedad',
+          color: '#EBC44B',
+          type: 'warning',
+        },
+        {
+          id: 7,
+          state: 'Error',
+          color: '#EB4D4B',
+          type: 'danger',
+        },
+      ],
       direccion_entrega: {},
     }
   },
   computed: {
+    dataHoko() {
+      return this.$store.state.dataHoko
+    },
     choicePayment() {
       return this.payments.find(
         (payment) => payment.id === this.orden.venta.metodo_pago
@@ -511,6 +691,20 @@ export default {
     },
   },
   methods: {
+    getproductHoko() {
+      let id = parseInt(this.orden.mensajes[0].mensaje)
+      let config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Authorization: `Bearer ${this.dataHoko.token}`,
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+      let url = 'https://hoko.com.co/api/member/order/'
+      axios.get(`${url}${id}`, config).then((response) => {
+        this.productDataHoko = response.data
+      })
+    },
     shippingDireccion() {
       this.direccion_entrega = JSON.parse(
         this.orden && this.orden.venta && this.orden.venta.direccion_entrega
@@ -562,6 +756,8 @@ export default {
                   this.cedula == response.data.data.venta.usuario.identificacion
                 ) {
                   this.$emit('update', response.data.data)
+                  this.setCity()
+                  this.$emit('update', response.data.data)
                 } else {
                   this.$emit('update', {})
                   this.errorMessageTwo()
@@ -573,7 +769,7 @@ export default {
               })
           }
         })
-        .catch((e) => {
+        .catch(() => {
           this.errorMessageTwo()
         })
     },
@@ -652,7 +848,7 @@ export default {
   width: 100%;
   height: 100%;
   min-height: calc(100vh - 282px);
-  background-color: var(--background_color_2);
+  background-color: #efefef;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -771,8 +967,8 @@ export default {
 }
 .content-btn .el-button--primary {
   color: #fff;
-  background-color: var(--color_background_btn);
-  border-color: var(--color_background_btn);
+  background-color: #000000;
+  border-color: #000000;
   border-radius: 5px;
   width: 100%;
   height: 40px;
@@ -986,7 +1182,24 @@ export default {
 .value-data {
   font-weight: normal;
 }
-
+.btn_url {
+  border: 1px solid var(--purple);
+  background: var(--purple);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+.btn_url:hover {
+  border: 1px solid var(--green);
+  background: var(--green);
+  color: var(--purple);
+}
+.wrapper-hoko {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
 @media (max-width: 863px) {
   .form {
     flex: 1;

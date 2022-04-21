@@ -157,6 +157,11 @@ export default {
     cart_subtotal: 'Subtotal:',
     cart_totalpagar: 'Total a pagar:',
     cart_agregarProductos: 'Agregar productos',
+    cart_limitProductos:
+      'Verificar productos del carrito, puede que alguno este agotado o el stock no está disponible con la cantidad seleccionada',
+    cart_minimovalorProductos1:
+      'La tienda tiene configurado un valor mínimo igual o mayores a',
+    cart_minimovalorProductos2: ' para poder realizar la compra',
     // Contact
     contact_title: 'Contáctanos',
     contact_subtitle:
@@ -441,6 +446,11 @@ export default {
     cart_subtotal: 'Subtotal:',
     cart_totalpagar: 'Total to pay:',
     cart_agregarProductos: 'Add products',
+    cart_limitProductos:
+      'Check the products in the cart, some may be out of stock or the stock is not available with the quantity.',
+    cart_minimovalorProductos1:
+      'The store has configured a minimum value equal to or greater than ',
+    cart_minimovalorProductos2: ' to be able to make the purchase.',
     // Contact
     contact_title: 'Contact us',
     contact_subtitle:
@@ -726,6 +736,11 @@ export default {
     cart_subtotal: 'Subtotal:',
     cart_totalpagar: 'Total a pagar:',
     cart_agregarProductos: 'Adicionar produtos',
+    cart_limitProductos:
+      'Verifique os produtos no carrinho, alguns podem estar fora de estoque ou o estoque não está disponível com a quantidade.',
+    cart_minimovalorProductos1:
+      'A loja estabeleceu um valor mínimo igual ou maior que',
+    cart_minimovalorProductos2: ' para poder efetuar a compra.',
     // Contact
     contact_title: 'Contate-nos',
     contact_subtitle:
@@ -1012,6 +1027,11 @@ export default {
     cart_subtotal: 'Sous-total :',
     cart_totalpagar: 'Total à payer :',
     cart_agregarProductos: 'Ajouter des produits',
+    cart_limitProductos:
+      'Vérifiez les produits dans le panier, certains peuvent être en rupture de stock ou le stock n´est pas disponible avec la quantité.',
+    cart_minimovalorProductos1:
+      'Le magasin a fixé une valeur minimale égale ou supérieure à',
+    cart_minimovalorProductos2: ' pour pouvoir effectuer l´achat.',
     // Contact
     contact_title: 'Nous contacter',
     contact_subtitle:

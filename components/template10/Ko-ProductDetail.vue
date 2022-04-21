@@ -317,12 +317,12 @@
 </template>
 <script>
 import axios from 'axios'
-import ProductSlide from './_productdetails/productSlide'
+// import ProductSlide from './_productdetails/productSlide'
 import SelectGroup from './_productdetails/selectGroup'
-import OptionAcordion from './_productdetails/OptAcordion'
+// import OptionAcordion from './_productdetails/OptAcordion'
 import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
-import Zoom from './_productdetails/zoomImg'
+// import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
@@ -336,12 +336,12 @@ export default {
     facebooPixel: Object,
   },
   components: {
-    OptionAcordion,
+    // OptionAcordion,
     OptionTab,
     SelectGroup,
     KoSuggesProduct,
-    ProductSlide,
-    Zoom,
+    // ProductSlide,
+    // Zoom,
   },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -740,10 +740,10 @@ export default {
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
     },
-    productsData(value) {
+    productsData() {
       this.getDataProduct()
     },
-    envios(value) {
+    envios() {
       this.setOptionEnvio()
     },
     quantityValue(value) {

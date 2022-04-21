@@ -32,33 +32,84 @@
                         alt="Product Img"
                       />
                     </div>
-                    <div class="name">
-                      <p class="order-text" style="font-weight: bold">
-                        {{ product.nombre | capitalize }}
-                      </p>
-                      <span v-if="product.precio">
-                        <b class="unidades"
-                          >{{ $t('cart_cantidad') }} {{ product.cantidad }}</b
+                    <div class="w-full flex flex-col">
+                      <div class="name">
+                        <p class="order-text" style="font-weight: bold">
+                          {{ product.nombre | capitalize }}
+                        </p>
+                        <span v-if="product.precio">
+                          <b class="unidades"
+                            >{{ $t('cart_cantidad') }} {{ product.cantidad }}</b
+                          >
+                          <b class="unidades"
+                            >X{{
+                              product.precio
+                                | currency(
+                                  dataStore.tienda.codigo_pais,
+                                  dataStore.tienda.moneda
+                                )
+                            }}</b
+                          >
+                        </span>
+                        <div
+                          class="w-full flex flex-col justify-center items-start mb-5"
                         >
-                        <b class="unidades"
-                          >X{{
-                            product.precio
-                              | currency(
-                                dataStore.tienda.codigo_pais,
-                                dataStore.tienda.moneda
-                              )
-                          }}</b
+                          <div
+                            class="flex flex-row relative box-border content-quantity"
+                          >
+                            <button
+                              class="bg-transparent quantity_remove"
+                              v-on:click="removeQuantity(product)"
+                            >
+                              <menos-icon class="icon-quantity" />
+                            </button>
+                            <p
+                              class="flex items-center justify-center bg-transparent quantity_value"
+                            >
+                              {{ product.cantidad }}
+                            </p>
+                            <button
+                              class="bg-transparent quantity_add"
+                              v-on:click="addQuantity(product)"
+                            >
+                              <mas-icon class="icon-quantity" />
+                            </button>
+
+                            <div
+                              class="container-alerta"
+                              v-if="product.limitQuantity == product.cantidad"
+                            >
+                              <span class="alerta">
+                                {{ $t('cart_ultimaUnidad') }}</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          v-if="product.combinacion"
+                          class="grid grid-flow-col auto-cols-max mb-5"
                         >
-                      </span>
-                      <div v-if="product.combinacion">
+                          <el-tag
+                            v-for="(
+                              productCombinacion, index2
+                            ) in product.combinacion"
+                            :key="index2"
+                          >
+                            {{ productCombinacion | capitalize }}
+                          </el-tag>
+                        </div>
                         <el-tag
-                          v-for="(
-                            productCombinacion, index2
-                          ) in product.combinacion"
-                          :key="index2"
+                          type="danger"
+                          v-if="product.activo == 0"
+                          style="background-color: rgb(223, 62, 62)"
+                          >Producto agotado!</el-tag
                         >
-                          {{ productCombinacion | capitalize }}
-                        </el-tag>
+                        <el-tag
+                          type="danger"
+                          style="background-color: rgb(223, 62, 62)"
+                          v-if="product.stock_disponible == 0"
+                          >¡No tiene las unidades disponibles!</el-tag
+                        >
                       </div>
                     </div>
                     <div class="price" v-if="product.precio > 0">
@@ -72,7 +123,7 @@
                         }}
                       </p>
                     </div>
-                    <div v-else class="price"></div>
+                    <div v-else class="price" />
                     <boteBasura-icon
                       class="icon-delete"
                       v-on:click="deleteItemCart(index)"
@@ -80,14 +131,18 @@
                   </li>
                 </ul>
               </div>
-
               <div class="h-full flex flex-col justify-end">
-                <div class="content-remove-cart">
-                  <p class="remove-cart" @click="remove = !remove">
-                    {{ $t('footer_vaciarCarrito') }}
-                  </p>
+                <div class="w-full flex justify-center items-center">
+                  <div
+                    class="w-full flex flex-row justify-center items-center text-center cursor-pointer content-remove-cart"
+                    @click="remove = !remove"
+                  >
+                    <cart-icon class="header-icon-cart" />
+                    <p>
+                      {{ $t('footer_vaciarCarrito') }}
+                    </p>
+                  </div>
                 </div>
-
                 <div class="order_total">
                   <span class="order_total_domicile">
                     <p style="font-weight: bold; font-size: 16px">
@@ -271,12 +326,15 @@
                     </p>
                   </span>
                 </div>
-
                 <div class="content-button">
                   <div
                     v-if="
                       isQuotation() ||
-                      (countryStore == false && productsCart.length)
+                      (countryStore == false &&
+                        productsCart.length &&
+                        verifyProducts == 1 &&
+                        expiredDate(dataStore.tienda.fecha_expiracion) &&
+                        dataStore.tienda.estado == 1)
                     "
                     class="wrapper-Quotation"
                   >
@@ -307,6 +365,9 @@
                   >
                     {{ $t('footer_tiendaCerrada') }}
                   </p>
+                  <p class="Quotation-message" v-if="verifyProducts == 0">
+                    {{ $t('cart_limitProductos') }}
+                  </p>
                   <!-- <p class="Quotation-message" v-if="!stateModalPwd">
                     {{ $t('footer_tiendaPwd') }}
                   </p> -->
@@ -314,8 +375,7 @@
                     class="Quotation-message"
                     v-if="!IsMinValorTotal() && productsCart.length"
                   >
-                    La tienda tiene configurado un valor mínimo igual o mayores
-                    a
+                    {{ $t('cart_minimovalorProductos1') }}
                     {{
                       this.dataStore.tienda.minimo_compra
                         | currency(
@@ -323,7 +383,7 @@
                           dataStore.tienda.moneda
                         )
                     }}
-                    para poder realizar la compra
+                    {{ $t('cart_minimovalorProductos2') }}
                   </p>
                   <button
                     v-if="
@@ -333,7 +393,8 @@
                       this.estadoShippingTarifaPrecio == false &&
                       countryStore == true &&
                       IsMinValorTotal() &&
-                      expiredDate(dataStore.tienda.fecha_expiracion)
+                      expiredDate(dataStore.tienda.fecha_expiracion) &&
+                      verifyProducts == 1
                     "
                     class="continue_shopping"
                     @click="GoPayments"
@@ -587,6 +648,7 @@ export default {
       textConfirmation: '!Generando orden de compra!',
       modalConfirmation: false,
       discountDescuentos: 0,
+      stateProductCart: 1,
     }
   },
   computed: {
@@ -600,6 +662,9 @@ export default {
       set(value) {
         this.$store.state.openOrder = value
       },
+    },
+    verifyProducts() {
+      return this.$store.getters.verifyProducts
     },
     cantidadProductos() {
       return this.$store.getters.cantidadProductos
@@ -652,12 +717,15 @@ export default {
           switch (shipping.envio_metodo) {
             case 'sintarifa':
               return 0
+              // eslint-disable-next-line no-unreachable
               break
             case 'gratis':
               return 0
+              // eslint-disable-next-line no-unreachable
               break
             case 'tarifa_plana':
               return shipping.valor
+              // eslint-disable-next-line no-unreachable
               break
             case 'precio_ciudad':
               // eslint-disable-next-line no-case-declarations
@@ -674,6 +742,7 @@ export default {
               } else {
                 return 0
               }
+              // eslint-disable-next-line no-unreachable
               break
             default:
               return 0
@@ -691,12 +760,15 @@ export default {
         switch (this.dataStore.tienda.pais) {
           case 'Colombia':
             return true
+            // eslint-disable-next-line no-unreachable
             break
           case 'Chile':
             return true
+            // eslint-disable-next-line no-unreachable
             break
           case 'Perú':
             return true
+            // eslint-disable-next-line no-unreachable
             break
           default:
             return false
@@ -705,7 +777,6 @@ export default {
         return false
       }
     },
-
     // stateModalPwd() {
     //   return this.$store.state.stateModalPwd
     // },
@@ -775,15 +846,33 @@ export default {
       }
       return result
     },
+    addQuantity(product) {
+      if (product.limitQuantity > product.cantidad) {
+        product.cantidad++
+        this.$store.commit('UPDATE_CONTENTCART')
+        this.$store.commit('CALCULATE_TOTALCART')
+        this.$store.dispatch('VERIFY_PRODUCTS')
+      }
+    },
+    removeQuantity(product) {
+      if (product.cantidad >= 2) {
+        product.cantidad--
+        this.$store.commit('UPDATE_CONTENTCART')
+        this.$store.commit('CALCULATE_TOTALCART')
+        this.$store.dispatch('VERIFY_PRODUCTS')
+      }
+    },
     deleteItemCart(i) {
       this.$store.commit('DELETEITEMCART', i)
       this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.dispatch('VERIFY_PRODUCTS')
     },
     removeCartItems() {
       this.remove = false
       location.reload(true)
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.dispatch('VERIFY_PRODUCTS')
     },
     closeOrder(event) {
       const element = event.target.className
@@ -1149,15 +1238,23 @@ export default {
   display: grid;
   overflow-y: auto;
 }
+@media (max-height: 740px) {
+  .order_products_list {
+    max-height: 380px;
+  }
+  .order_products_list-empty {
+    height: 380px;
+  }
+}
 .order_products_list-empty {
-  height: 380px;
+  height: 480px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
 }
 .order_products_list {
-  max-height: 380px;
+  max-height: 480px;
   overflow-y: auto;
   overflow-x: hidden;
   list-style: none;
@@ -1212,6 +1309,7 @@ export default {
 .order_products_list_item .name {
   max-width: 190px;
   width: 100%;
+  box-sizing: border-box;
 }
 .name >>> .el-tag {
   border-color: #2c2930;
@@ -1238,7 +1336,6 @@ export default {
   font-size: 13px;
   font-weight: 500;
 }
-
 .order-combincacion {
   width: 100%;
   max-width: 180px;
@@ -1292,23 +1389,26 @@ export default {
   color: #2c2930;
 }
 .content-remove-cart {
-  width: 100%;
-  max-height: 41px;
-  padding: 10px 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  max-width: 350px;
+  padding: 8px 10px;
+  background: #2c2930;
+  transition: all ease 0.3s;
+  border-radius: var(--radius_btn);
+  margin-bottom: 6px;
 }
-.remove-cart {
-  color: #2c2930;
+.content-remove-cart p {
+  color: white;
   font-weight: 300;
   font-size: 14px;
-  cursor: pointer;
-  transition: all ease 0.3s;
 }
-.remove-cart:hover {
-  color: #2c2930;
+.header-icon-cart {
+  font-size: 14px;
+  margin-right: 5px;
+  color: white;
+  bottom: 0.125em;
+}
+.content-remove-cart:hover {
+  background: rgb(223, 62, 62);
 }
 .wrapper-items-remove {
   position: absolute;
@@ -1784,5 +1884,64 @@ details[open] summary ~ * {
   color: white;
   z-index: 1001;
   top: 0;
+}
+
+.content-quantity {
+  /* margin-top: 10px; */
+  max-width: 126px;
+  /* background: #f4f4f4; */
+}
+.quantity_remove {
+  border: 1px #2c2930;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-style: solid none solid solid;
+  height: 30px;
+  width: 41px;
+}
+.quantity_value {
+  font-size: 1em;
+  color: #2c2930;
+  border: 1px #2c2930;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-style: solid none solid none;
+  height: 30px;
+  width: 41px;
+}
+.quantity_add {
+  border: 1px #2c2930;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-style: solid solid solid none;
+  height: 30px;
+  width: 41px;
+}
+.icon-quantity {
+  color: #2c2930;
+  @apply cursor-pointer;
+}
+.icon-quantity:hover {
+  color: #eb7025;
+  @apply cursor-pointer;
+}
+.container-alerta {
+  position: absolute;
+  bottom: 0px;
+  right: -133px;
+  width: 130px;
+  background-color: rgb(250, 232, 75);
+  border: 1px solid rgb(230, 213, 66);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: black;
+}
+.alerta {
+  text-align: center;
+  padding: 4px 5px;
+  text-transform: capitalize;
 }
 </style>

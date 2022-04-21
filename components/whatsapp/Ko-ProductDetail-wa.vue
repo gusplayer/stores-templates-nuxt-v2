@@ -318,6 +318,7 @@ export default {
     whatsapp() {
       return this.dataStore.tienda.whatsapp
     },
+    // eslint-disable-next-line vue/return-in-computed-property
     categorys() {
       if (this.data && this.data.detalle) {
         return this.productsData.filter(
@@ -343,8 +344,9 @@ export default {
     searchIdForSlug() {
       let domain = this.$route.fullPath
       let result = domain.split('/')
+      let result2 = result[4].split('?')
       const product = this.productsData.filter(
-        (product) => product.slug === result[4]
+        (product) => product.slug === result2[0]
       )
       if (product.length) {
         return product[0].id

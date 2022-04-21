@@ -76,6 +76,14 @@
                       </p>
                     </div>
                   </div>
+                  <div class="wrapper-tag">
+                    <el-tag type="danger" v-if="product.activo == 0"
+                      >Producto agotado!</el-tag
+                    >
+                    <el-tag type="danger" v-if="product.stock_disponible == 0"
+                      >¡No tiene las unidades disponibles!</el-tag
+                    >
+                  </div>
                   <div class="product-quiantity">
                     <div class="txt-tittle-quantity">
                       {{ $t('cart_cantidad') }}
@@ -402,11 +410,14 @@
               <!-- <p class="Quotation-message" v-if="!stateModalPwd">
                 {{ $t('footer_tiendaPwd') }}
               </p> -->
+              <p class="Quotation-message" v-if="verifyProducts == 0">
+                {{ $t('cart_limitProductos') }}
+              </p>
               <p
                 class="Quotation-message"
                 v-if="!IsMinValorTotal() && productsCart.length"
               >
-                La tienda tiene configurado un valor mínimo igual o mayores a
+                {{ $t('cart_minimovalorProductos1') }}
                 {{
                   this.dataStore.tienda.minimo_compra
                     | currency(
@@ -414,7 +425,7 @@
                       dataStore.tienda.moneda
                     )
                 }}
-                para poder realizar la compra
+                {{ $t('cart_minimovalorProductos2') }}
               </p>
               <button
                 ref="colorBtn"
@@ -427,7 +438,8 @@
                   this.estadoShippingTarifaPrecio == false &&
                   countryStore == true &&
                   IsMinValorTotal() &&
-                  expiredDate(dataStore.tienda.fecha_expiracion)
+                  expiredDate(dataStore.tienda.fecha_expiracion) &&
+                  verifyProducts == 1
                 "
               >
                 {{ $t('footer_finalizarCompra') }}
@@ -496,6 +508,9 @@ export default {
     // stateModalPwd() {
     //   return this.$store.state.stateModalPwd
     // },
+    verifyProducts() {
+      return this.$store.getters.verifyProducts
+    },
     cantidadProductos() {
       return this.$store.getters.cantidadProductos
     },
@@ -551,14 +566,18 @@ export default {
           switch (shipping.envio_metodo) {
             case 'sintarifa':
               return 0
+              // eslint-disable-next-line no-unreachable
               break
             case 'gratis':
               return 0
+              // eslint-disable-next-line no-unreachable
               break
             case 'tarifa_plana':
               return shipping.valor
+              // eslint-disable-next-line no-unreachable
               break
             case 'precio_ciudad':
+              // eslint-disable-next-line no-case-declarations
               let result = shipping.rangos.find((rango) => {
                 if (
                   this.totalCart >= rango.inicial &&
@@ -572,6 +591,7 @@ export default {
               } else {
                 return 0
               }
+              // eslint-disable-next-line no-unreachable
               break
             default:
               return 0
@@ -586,12 +606,15 @@ export default {
         switch (this.dataStore.tienda.pais) {
           case 'Colombia':
             return true
+            // eslint-disable-next-line no-unreachable
             break
           case 'Chile':
             return true
+            // eslint-disable-next-line no-unreachable
             break
           case 'Perú':
             return true
+            // eslint-disable-next-line no-unreachable
             break
           default:
             return false
@@ -666,6 +689,7 @@ export default {
         product.cantidad++
         this.$store.commit('UPDATE_CONTENTCART')
         this.$store.commit('CALCULATE_TOTALCART')
+        this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     removeQuantity(product) {
@@ -673,11 +697,13 @@ export default {
         product.cantidad--
         this.$store.commit('UPDATE_CONTENTCART')
         this.$store.commit('CALCULATE_TOTALCART')
+        this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     deleteItemCart(i) {
       this.$store.state.productsCart.splice(i, 1)
       this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.dispatch('VERIFY_PRODUCTS')
     },
     GoPayments() {
       let json = {
@@ -903,6 +929,22 @@ export default {
 .product-variant >>> .el-tag {
   border-color: #2c2930;
   background-color: #2c2930;
+  color: #fff;
+  display: inline-block;
+  height: 28px;
+  margin-left: 2px;
+  padding: 0 2px;
+  font-size: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.wrapper-tag >>> .el-tag {
+  border-color: rgb(223, 62, 62);
+  background-color: rgb(223, 62, 62);
   color: #fff;
   display: inline-block;
   height: 28px;

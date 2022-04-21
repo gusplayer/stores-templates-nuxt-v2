@@ -292,8 +292,9 @@ export default {
     searchIdForSlug() {
       let domain = this.$route.fullPath
       let result = domain.split('/')
+      let result2 = result[4].split('?')
       const product = this.productsData.filter(
-        (product) => product.slug === result[4]
+        (product) => product.slug === result2[0]
       )
       if (product.length) {
         return product[0].id
