@@ -440,6 +440,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },
@@ -537,10 +538,10 @@ export default {
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
               content_type: 'product',
-              content_ids: this.data.detalle.id,
+              content_ids: this.product.id,
               value: this.salesData.precio,
-              num_items: this.data.cantidad,
-              content_name: this.data.detalle.nombre,
+              num_items: 1,
+              content_name: this.product.nombre,
               currency: this.dataStore.tienda.moneda,
               description: 'Agregar al carrito el producto',
             })
@@ -702,9 +703,9 @@ export default {
   @apply flex flex-row pb-20;
 }
 .btn {
-  color: #fff;
-  fill: #fff;
-  background-color: #222;
+  color: var(--color_text_btn);
+  fill: var(--color_text_btn);
+  background-color: var(--color_background_btn);
   font-size: 15px;
   transition: color 0.25s ease, background-color 0.25s ease,
     border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
@@ -724,9 +725,9 @@ export default {
   @apply font-semibold ml-10 tracking-1 leading-1 uppercase whitespace-nowrap;
 }
 .btn-disabled {
-  fill: #fff;
-  color: #fff;
-  background-color: gray;
+  color: var(--color_text_btn);
+  fill: var(--color_text_btn);
+  background-color: var(--color_background_btn);
   transition: color 0.25s ease, background-color 0.25s ease,
     border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;

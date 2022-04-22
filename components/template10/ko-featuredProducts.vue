@@ -15,8 +15,11 @@
       <div class="product-text">
         <div class="product-tittle">
           <p class="tittle">{{ productList.title }}</p>
-          <nuxt-link :to="productList.url" v-if="productList.visibleBtn">
-            <p class="txt-newProducts">Nuevos Productos</p>
+          <nuxt-link
+            :to="productList.url_redirect"
+            v-if="productList.visibleBtn"
+          >
+            <p class="txt-newProducts">{{ productList.displayName }}</p>
           </nuxt-link>
         </div>
       </div>
@@ -53,7 +56,7 @@ export default {
     KoproductCard,
   },
   props: {
-    productList: Array,
+    productList: Object,
     settingGeneral: Object,
     cardProduct: Object,
     dataStore: Object,
@@ -141,7 +144,7 @@ export default {
     @apply justify-center items-center mb-50;
   }
   .txt-newProducts {
-    color: var(--color_title);
+    color: var(--color_text_btn);
     @apply justify-center items-center;
   }
   .product-text {

@@ -43,8 +43,8 @@
         </div>
       </div>
       <div class="btn-products" v-if="trending.visibleBtn">
-        <nuxt-link :to="trending.url">
-          <button class="btn">+ Ver todos los productos</button>
+        <nuxt-link to="/productos">
+          <button class="btn">{{ trending.displayName }}</button>
         </nuxt-link>
       </div>
     </div>
@@ -58,7 +58,7 @@ export default {
     KoproductCard,
   },
   props: {
-    trending: Array,
+    trending: Object,
     settingGeneral: Object,
     cardProduct: Object,
     dataStore: Object,
@@ -135,7 +135,7 @@ export default {
   @apply w-full flex justify-center items-center mt-80;
 }
 .btn {
-  color: #222222;
+  color: var(--colorTextBTn);
   font-size: 16px;
   font-family: var(--font-style-1) !important;
   box-shadow: inset 0px -50px 0px -41px var(--color_border);

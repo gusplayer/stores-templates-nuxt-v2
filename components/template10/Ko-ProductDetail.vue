@@ -890,7 +890,7 @@ export default {
 .material-design-icon > .material-design-icon__svg {
   height: 1em;
   width: 1em;
-  fill: #666;
+  fill: var(--color_icon);
   position: absolute;
   bottom: 0em;
 }
@@ -906,7 +906,7 @@ export default {
 .twitter-icon,
 .instagram-icon,
 .youtube-icon {
-  fill: #666;
+  fill: var(--color_icon);
   @apply transition-all ease-in duration-0.2 cursor-pointer;
 }
 .facebook-icon:hover {

@@ -87,7 +87,7 @@ import koTiendaCerrada from '../assets/img/tiendaCerrada'
 import koTiendaError from '../components/Ko-errorStore'
 import koModalsecurity from '../components/modal/Ko-modal-security.vue'
 import expiredDate from '../mixins/expiredDate'
-
+import { mapState } from 'vuex'
 //template6
 // import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
 // import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'
@@ -118,8 +118,7 @@ export default {
   mounted() {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_SHOPPING_CART')
-    let domain = this.$route.query
-    if (domain.clearCart == 'true') {
+    if (this.$route.query && this.$route.query.clearCart == 'true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
@@ -455,18 +454,20 @@ export default {
     }
   },
   computed: {
-    stateModalPwd() {
-      return this.$store.state.stateModalPwd
-    },
-    dataCookies() {
-      return this.$store.state.dataCookies
-    },
-    template() {
-      return this.$store.state.template
-    },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState([
+      'template',
+      'dataStore',
+      'dataCookies',
+      'settingBase',
+      'stateModalPwd',
+      'settingByTemplate',
+      'settingByTemplate7',
+      'settingByTemplate9',
+      'settingByTemplate10',
+      'settingByTemplate11',
+      'settingByTemplate12',
+      'analytics_tagmanager',
+    ]),
     headerTemplate() {
       // let headerComp = ''
       let headerComponent = ''
@@ -553,30 +554,6 @@ export default {
           break
       }
       return footerComponent
-    },
-    analytics_tagmanager() {
-      return this.$store.state.analytics_tagmanager
-    },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    settingByTemplate7() {
-      return this.$store.state.settingByTemplate7
-    },
-    settingByTemplate9() {
-      return this.$store.state.settingByTemplate9
-    },
-    settingByTemplate10() {
-      return this.$store.state.settingByTemplate10
-    },
-    settingByTemplate11() {
-      return this.$store.state.settingByTemplate11
-    },
-    settingByTemplate12() {
-      return this.$store.state.settingByTemplate12
     },
     componentsProps() {
       return {

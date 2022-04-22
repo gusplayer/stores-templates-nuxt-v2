@@ -657,6 +657,7 @@ export const actions = {
     } else if (
       parts[1] == 'sweetlips' ||
       parts[1] == 'komercia' ||
+      parts[1] == 'keepbuy' ||
       parts[1] == 'localhost:3000' ||
       parts[1] == 'unicentrovillavicencio'
     ) {

@@ -429,10 +429,10 @@ export default {
           if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
               content_type: 'product',
-              content_ids: this.data.detalle.id,
+              content_ids: this.product.id,
               value: this.salesData.precio,
-              num_items: this.data.cantidad,
-              content_name: this.data.detalle.nombre,
+              num_items: 1,
+              content_name: this.product.nombre,
               currency: this.dataStore.tienda.moneda,
               description: 'Agregar al carrito el producto',
             })
@@ -586,8 +586,8 @@ export default {
 }
 .btn {
   border-radius: var(--radius_btn);
-  background-color: #222;
-  color: #fff;
+  background-color: var(--color_background_btn);
+  color: var(--color_text_btn);
   @apply w-auto h-40 px-20 my-20 transition-all ease-in duration-0.2;
 }
 .btn:hover {
@@ -595,12 +595,12 @@ export default {
   @apply transition-all ease-in duration-0.2;
 }
 .txt-btn {
-  color: #fff;
+  color: var(--color_text_btn);
   font-size: 12px;
   @apply uppercase;
 }
 .icon-shop {
-  fill: #fff;
+  fill: var(--color_text_btn);
   @apply mr-5 mb-5;
 }
 @screen sm {

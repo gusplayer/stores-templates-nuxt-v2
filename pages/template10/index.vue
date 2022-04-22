@@ -48,7 +48,7 @@
         settingByTemplate10.offers &&
         settingByTemplate10.offers.visible
       "
-    />/>
+    />
     <Kfeatured
       id="KproductDestacadosX"
       v-bind="componentsProps"

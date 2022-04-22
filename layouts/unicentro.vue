@@ -57,19 +57,16 @@ import KoHeader3 from '../components/headers/header3/Ko-Header-3'
 import KoHeader4 from '../components/headers/header4/Ko-Header-4'
 import KoHeader5 from '../components/headers/header5/Ko-Header-5'
 import KoHeader6 from '../components/headers/header6/Ko-Header-6'
-
 import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
 import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
 import KoFooter4 from '../components/footers/footer4/Ko-Footer-4'
 import KoFooter5 from '../components/footers/footer5/Ko-Footer-5'
 import KoFooter6 from '../components/footers/footer6/Ko-Footer-6'
-
 import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
 import koWhatsapp from '../components/whatsapp/whatsapp'
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
-
 import koModalsecurity from '../components/modal/Ko-modal-security.vue'
-
+import { mapState } from 'vuex'
 //template6
 // import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
 // import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'
@@ -97,8 +94,7 @@ export default {
   mounted() {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_SHOPPING_CART')
-    let domain = this.$route.query
-    if (domain.clearCart == 'true') {
+    if (this.$route.query && this.$route.query.clearCart == 'true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
@@ -377,18 +373,20 @@ export default {
     }
   },
   computed: {
-    stateModalPwd() {
-      return this.$store.state.stateModalPwd
-    },
-    dataCookies() {
-      return this.$store.state.dataCookies
-    },
-    template() {
-      return this.$store.state.template
-    },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState([
+      'template',
+      'dataStore',
+      'dataCookies',
+      'settingBase',
+      'stateModalPwd',
+      'settingByTemplate',
+      'settingByTemplate7',
+      'settingByTemplate9',
+      'settingByTemplate10',
+      'settingByTemplate11',
+      'settingByTemplate12',
+      'analytics_tagmanager',
+    ]),
     headerTemplate() {
       // let headerComp = ''
       let headerComponent = ''
@@ -426,6 +424,9 @@ export default {
           break
         case 10:
           headerComponent = 'KoHeader6'
+          break
+        case 11:
+          headerComponent = 'KoHeader7'
           break
       }
       return headerComponent
@@ -467,20 +468,11 @@ export default {
         case 10:
           footerComponent = 'KoFooter6'
           break
+        case 11:
+          footerComponent = 'KoFooter7'
+          break
       }
       return footerComponent
-    },
-    analytics_tagmanager() {
-      return this.$store.state.analytics_tagmanager
-    },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    settingByTemplate7() {
-      return this.$store.state.settingByTemplate7
     },
     componentsProps() {
       return {
@@ -491,18 +483,99 @@ export default {
           this.settingByTemplate.settings['--background_color_1']
             ? this.settingByTemplate.settings
             : this.settingBase,
-        settingByTemplate7h:
-          this.settingByTemplate7 && this.settingByTemplate7.header
-            ? this.settingByTemplate7.header
-            : null,
-        settingByTemplate7f:
-          this.settingByTemplate7 && this.settingByTemplate7.footer
-            ? this.settingByTemplate7.footer
-            : null,
-        settingByTemplate7General:
-          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
-            ? this.settingByTemplate7.settingGeneral
-            : null,
+        settingByTemplate7: this.settingByTemplate7
+          ? [
+              {
+                setting7Header:
+                  this.settingByTemplate7 && this.settingByTemplate7.header
+                    ? this.settingByTemplate7.header
+                    : null,
+                setting7Footer:
+                  this.settingByTemplate7 && this.settingByTemplate7.footer
+                    ? this.settingByTemplate7.footer
+                    : null,
+                setting7General:
+                  this.settingByTemplate7 &&
+                  this.settingByTemplate7.settingGeneral
+                    ? this.settingByTemplate7.settingGeneral
+                    : null,
+                settingKProdutCard:
+                  this.settingByTemplate7 && this.settingByTemplate7.card
+                    ? this.settingByTemplate7.card
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate9: this.settingByTemplate9
+          ? [
+              {
+                setting9Header:
+                  this.settingByTemplate9 && this.settingByTemplate9.header
+                    ? this.settingByTemplate9.header
+                    : null,
+                setting9Footer:
+                  this.settingByTemplate9 && this.settingByTemplate9.footer
+                    ? this.settingByTemplate9.footer
+                    : null,
+                setting9General:
+                  this.settingByTemplate9 &&
+                  this.settingByTemplate9.settingGeneral
+                    ? this.settingByTemplate9.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate10: this.settingByTemplate10
+          ? [
+              {
+                setting10Header:
+                  this.settingByTemplate10 && this.settingByTemplate10.header
+                    ? this.settingByTemplate10.header
+                    : null,
+                setting10Footer:
+                  this.settingByTemplate10 && this.settingByTemplate10.footer
+                    ? this.settingByTemplate10.footer
+                    : null,
+                setting10General:
+                  this.settingByTemplate10 &&
+                  this.settingByTemplate10.settingGeneral
+                    ? this.settingByTemplate10.settingGeneral
+                    : null,
+                pages:
+                  this.settingByTemplate10 && this.settingByTemplate10.pages
+                    ? this.settingByTemplate10.pages
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate11: this.settingByTemplate11
+          ? [
+              {
+                setting11Header:
+                  this.settingByTemplate11 && this.settingByTemplate11.header
+                    ? this.settingByTemplate11.header
+                    : null,
+                setting11Footer:
+                  this.settingByTemplate11 && this.settingByTemplate11.footer
+                    ? this.settingByTemplate11.footer
+                    : null,
+                setting11General:
+                  this.settingByTemplate11 &&
+                  this.settingByTemplate11.settingGeneral
+                    ? this.settingByTemplate11.settingGeneral
+                    : null,
+                newsletter:
+                  this.settingByTemplate11 &&
+                  this.settingByTemplate11.newsletter
+                    ? this.settingByTemplate11.newsletter
+                    : null,
+                pages:
+                  this.settingByTemplate11 && this.settingByTemplate11.pages
+                    ? this.settingByTemplate11.pages
+                    : null,
+              },
+            ]
+          : null,
       }
     },
   },

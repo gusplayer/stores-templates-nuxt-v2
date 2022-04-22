@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'k-select-language',
   mounted() {
@@ -69,9 +70,7 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState(['dataStore']),
   },
   methods: {
     chooseLanguage(option) {

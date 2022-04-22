@@ -235,6 +235,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import axios from 'axios'
 import productSlide from './_productdetails/productSlide'
 import selectGroup from './_productdetails/selectGroup'
@@ -282,11 +283,14 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    productsData() {
-      return this.dataStore.productos
+    ...mapState([
+      'dataStore',
+      'stateWapiME',
+      'productsData',
+      'beforeCombination',
+    ]),
+    envios() {
+      return this.dataStore.medios_envio
     },
     existPayments() {
       const mediospago = this.dataStore.medios_pago
@@ -301,11 +305,8 @@ export default {
       }
       return false
     },
-    beforeCombination() {
-      return this.$store.state.beforeCombination
-    },
-    envios() {
-      return this.dataStore.medios_envio
+    whatsapp() {
+      return this.dataStore.tienda.whatsapp
     },
     // eslint-disable-next-line vue/return-in-computed-property
     precio() {
@@ -314,9 +315,6 @@ export default {
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       }
-    },
-    whatsapp() {
-      return this.dataStore.tienda.whatsapp
     },
     // eslint-disable-next-line vue/return-in-computed-property
     categorys() {
@@ -328,9 +326,6 @@ export default {
             product.id !== this.data.detalle.id
         )
       }
-    },
-    stateWapiME() {
-      return this.$store.state.stateWapiME
     },
     settingByTemplate() {
       if (this.$store.state.settingByTemplate) {

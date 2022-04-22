@@ -12,26 +12,32 @@
     ]"
   >
     <div class="swiper-wrapper z-auto">
-      <a
-        class="swiper-slide"
-        v-for="(banner, index) in this.settingKbanner.values"
-        :key="index"
-        :class="banner.visbleBtn ? 'pointer-events-none' : 'cursorPointer'"
-        :href="`${banner.visbleBtn ? '' : banner.url_redirect}`"
-        rel="noreferrer noopener"
-      >
-        <img
-          class="slide-bgWeb"
-          :src="idCloudinaryBanner(banner.url_img_background)"
-          alt="Bg-Image" />
-        <img
-          class="slide-bgMovil"
-          :src="idCloudinaryBanner(banner.url_img_background_res)"
-          alt="Bg-Image" /><CarouselContent
-          class="absolute"
-          :banner="banner"
-          :settingGeneral="settingGeneral"
-      /></a>
+      <client-only>
+        <a
+          class="swiper-slide"
+          v-for="(banner, index) in this.settingKbanner.values"
+          :key="index"
+          :class="banner.visbleBtn ? 'pointer-events-none' : 'cursorPointer'"
+          :href="`${banner.visbleBtn ? '' : banner.url_redirect}`"
+          rel="noreferrer noopener"
+        >
+          <img
+            class="slide-bgWeb"
+            :src="idCloudinaryBanner(banner.url_img_background)"
+            alt="Bg-Image"
+          />
+          <img
+            class="slide-bgMovil"
+            :src="idCloudinaryBanner(banner.url_img_background_res)"
+            alt="Bg-Image"
+          />
+          <CarouselContent
+            class="absolute"
+            :banner="banner"
+            :settingGeneral="settingGeneral"
+          />
+        </a>
+      </client-only>
     </div>
   </div>
 </template>
@@ -87,7 +93,9 @@ export default {
   display: none;
 }
 @media (min-width: 1400px) {
-  .slide-bgWeb,
+  .slide-bgWeb {
+    max-height: 732px;
+  }
   .slide-bgMovil {
     max-height: 732px;
   }

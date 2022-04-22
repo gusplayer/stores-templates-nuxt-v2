@@ -39,8 +39,8 @@
           </p>
         </div>
         <div class="grid-item-button" v-if="offers.visibleBtn">
-          <nuxt-link class="btn" :to="offers.url">
-            {{ $t('home_comprarAhora') }}
+          <nuxt-link class="btn" :to="offers.url_redirect">
+            {{ offers.displayName }}
           </nuxt-link>
         </div>
       </div>
@@ -53,7 +53,7 @@ export default {
   name: 'Ko-deal-offers',
   props: {
     offers: Object,
-    settingGeneral: Array,
+    settingGeneral: Object,
   },
   mixins: [idCloudinaryBanner],
 }

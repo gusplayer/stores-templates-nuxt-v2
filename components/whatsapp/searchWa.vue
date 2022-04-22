@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'KoSearchWa',
   props: {
@@ -75,9 +76,7 @@ export default {
     }
   },
   computed: {
-    openSearch() {
-      return this.$store.state.openSearch
-    },
+    ...mapState(['openSearch']),
   },
   methods: {
     closedSearch() {

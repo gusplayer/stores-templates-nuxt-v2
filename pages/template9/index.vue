@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 import Kbanner from '../../components/template9/ko-carousel'
 import Koffers from '../../components/template9/ko-offers'
 import Kproductlist from '../../components/template9/Ko-ProductList'
@@ -125,18 +126,13 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    settingByTemplate9() {
-      return this.$store.state.settingByTemplate9
-    },
+    ...mapState([
+      'dataStore',
+      'listArticulos',
+      'settingByTemplate9',
+      'dataHoko',
+    ]),
+    ...mapGetters(['products/filterProducts']),
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -174,9 +170,6 @@ export default {
             ? this.settingByTemplate9.wrapper
             : null,
       }
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
     },
   },
   beforeDestroy() {

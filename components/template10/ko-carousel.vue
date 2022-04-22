@@ -1,14 +1,14 @@
 <template>
-  <div class="carousel-content">
-    <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-      <div class="swiper-wrapper z-auto">
+  <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+    <div class="swiper-wrapper z-auto">
+      <client-only>
         <a
           class="swiper-slide"
-          :id="`slide${index + 1}`"
           v-for="(banner, index) in banner.values"
-          :key="index"
           :class="banner.visbleBtn ? 'pointer-events-none' : 'cursorPointer'"
           :href="`${banner.visbleBtn ? '' : banner.url_redirect}`"
+          :key="index"
+          :id="`slide${index + 1}`"
           rel="noreferrer noopener"
         >
           <img
@@ -20,7 +20,8 @@
             class="slide-bgMovil"
             :src="idCloudinaryBanner(banner.url_img_background_res)"
             alt="Bg-Image"
-          /><CarouselContent
+          />
+          <CarouselContent
             class="absolute"
             :banner="banner"
             :settingGeneral="settingGeneral"
@@ -31,7 +32,7 @@
             :settingGeneral="settingGeneral"
           />
         </a>
-      </div>
+      </client-only>
     </div>
   </div>
 </template>
@@ -72,10 +73,6 @@ export default {
 }
 </script>
 <style scoped>
-.content-carousel {
-  @apply w-full flex flex-col justify-center items-center;
-}
-
 .swiper-slide {
   @apply w-full flex justify-center items-center z-10;
 }
@@ -88,7 +85,9 @@ export default {
 }
 
 @media (min-width: 1400px) {
-  .slide-bgWeb,
+  .slide-bgWeb {
+    max-height: 732px;
+  }
   .slide-bgMovil {
     max-height: 732px;
   }

@@ -44,6 +44,7 @@
 import koTiendaCerrada from '../assets/img/tiendaCerrada'
 import koTiendaError from '../components/Ko-errorStore'
 import koModalsecurity from '../components/modal/Ko-modal-security.vue'
+import { mapState } from 'vuex'
 export default {
   components: {
     koTiendaCerrada,
@@ -52,8 +53,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('GET_SHOPPING_CART')
-    let domain = this.$route.query
-    if (domain.clearCart == 'true') {
+    if (this.$route.query && this.$route.query.clearCart == 'true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
@@ -195,15 +195,7 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    analytics_tagmanager() {
-      return this.$store.state.analytics_tagmanager
-    },
-    stateModalPwd() {
-      return this.$store.state.stateModalPwd
-    },
+    ...mapState(['dataStore', 'stateModalPwd', 'analytics_tagmanager']),
   },
   methods: {
     acceptClose() {
