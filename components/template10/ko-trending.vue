@@ -112,7 +112,7 @@ export default {
 }
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center w-full my-80;
+  @apply flex flex-col justify-center items-center w-full py-80;
 }
 .product-text {
   @apply flex flex-col justify-center items-center w-full text-center;
@@ -126,10 +126,16 @@ export default {
 .tittle {
   font-family: var(--font-style-1) !important;
   color: var(--color_title);
+  font-size: var(--fontSize);
+  font-weight: var(--fontWeightTitle);
+  margin-bottom: var(--marginbottomTitle);
 }
 .subtittle {
   font-family: var(--font-style-1) !important;
   color: var(--color_Description);
+  font-weight: var(--fontWeightDescription);
+  font-size: var(--fontSizeDescription);
+  margin-bottom: var(--marginbottomDescription);
 }
 .btn-products {
   @apply w-full flex justify-center items-center mt-80;
@@ -149,15 +155,6 @@ export default {
 @screen sm {
   .producto-items-content {
     @apply w-9/0;
-  }
-  .tittle {
-    font-size: var(--fontSize);
-    font-weight: var(--fontWeightTitle);
-    @apply font-semibold;
-  }
-  .subtittle {
-    font-weight: var(--fontWeightDescription);
-    font-size: var(--fontSizeDescription);
   }
   .product-text {
     @apply mb-40;
@@ -181,14 +178,13 @@ export default {
     width: 1400px;
   }
   .tittle {
-    font-size: 42px;
-    margin-bottom: var(--marginbottomTitle);
+    /* font-size: 42px; */
     @apply leading-50;
   }
   .subtittle {
-    font-size: 15px;
+    /* font-size: 15px; */
     max-width: 560px;
-    margin-bottom: var(--marginbottomDescription);
+
     @apply w-full leading-25;
   }
 }

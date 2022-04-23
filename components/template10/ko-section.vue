@@ -113,8 +113,8 @@ export default {
 <style scoped>
 .content-section {
   background: var(--background_color_1);
-  margin-top: var(--margintop);
-  margin-bottom: var(--marginBottom);
+  padding-top: var(--margintop);
+  padding-bottom: var(--margin-bottom);
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-wrapper {
@@ -166,13 +166,13 @@ export default {
     /* color: #222222; */
     font-size: 25px;
     font-family: var(--font-style-1) !important;
-    @apply mt-50 ml-35 pb-10 font-semibold;
+    @apply mt-50 mx-35 pb-10 font-semibold;
   }
   .txt-subtittle {
     /* color: #777777; */
     font-size: 12px;
     font-family: var(--font-style-1) !important;
-    @apply ml-35;
+    @apply mx-35;
   }
 }
 @screen md {

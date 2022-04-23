@@ -164,7 +164,6 @@
 import KoOrder from '../_order1/order1'
 import KoMenu from '../../template10/_lateralMenu/openMenuLeft'
 import KoSearch from '../../template10/_lateralMenu/searchDown'
-
 export default {
   components: {
     KoOrder,
@@ -178,6 +177,14 @@ export default {
   },
   mounted() {
     this.initHeader()
+    window.addEventListener('scroll', function () {
+      var navbar = document.getElementById('navbar')
+      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
+        navbar.style.position = 'fixed'
+      } else {
+        navbar.style.position = 'static'
+      }
+    })
   },
   data() {
     return {
@@ -291,11 +298,14 @@ export default {
 <style scoped>
 .header-container {
   border-bottom: 1px solid var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center z-10 transition-all ease-in-out duration-0.5;
+  position: static;
+  @apply w-full flex flex-col justify-center items-center top-0 z-10 transition-all ease-in-out duration-0.5;
 }
 .wrapper-header {
+  margin-top: var(--padding_logo);
+  margin-bottom: var(--padding_logo);
   background-color: var(--background_color_1);
-  @apply flex flex-col w-full justify-between items-center fixed top-0 z-30 shadow-lg;
+  @apply flex flex-col w-full justify-between items-center z-10 shadow-lg;
 }
 .header {
   background-color: var(--background_color_1);
@@ -314,8 +324,6 @@ export default {
 }
 .wrapper-logo {
   max-width: var(--with_logo);
-  margin-top: var(--padding_logo);
-  margin-bottom: var(--padding_logo);
   @apply w-full flex justify-center items-center;
 }
 .header-logo {
@@ -426,11 +434,11 @@ export default {
 }
 @screen mlg {
   .header {
-    @apply w-9/5 h-100 flex flex-row justify-between px-0;
+    @apply w-9/5 flex flex-row justify-between px-0;
   }
   .header-container,
   .wrapper-header {
-    @apply h-100;
+    /* @apply h-100; */
   }
   .header-contet {
     @apply w-auto h-auto flex flex-row justify-between items-center;

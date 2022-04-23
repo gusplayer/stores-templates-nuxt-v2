@@ -34,6 +34,7 @@
         </a>
       </client-only>
     </div>
+    <div class="swiper-pagination" v-if="banner.visible_pagination"></div>
   </div>
 </template>
 <script>
@@ -73,6 +74,18 @@ export default {
 }
 </script>
 <style scoped>
+.carousel-content >>> .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #2c2930;
+}
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 2px;
+  display: inline-block;
+  border-radius: 100%;
+  background: white;
+  opacity: 0.2;
+}
 .swiper-slide {
   @apply w-full flex justify-center items-center z-10;
 }

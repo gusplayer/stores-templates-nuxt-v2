@@ -294,15 +294,14 @@ export default {
 
 <style scoped>
 .header-container {
-  transition: all 0.5s ease-in-out;
   border-bottom: 1px solid var(--background_color_1);
   background: var(--background_color_1);
   position: static;
-  @apply w-full flex flex-col justify-center items-center top-0 z-10;
+  @apply w-full flex flex-col justify-center items-center top-0 z-10 transition-all ease-in-out duration-0.5;
 }
 .wrapper-header {
   background: var(--background_color_1);
-  @apply flex flex-col w-full justify-between items-center;
+  @apply flex flex-col w-full justify-between items-center z-10 shadow-lg;
 }
 .header {
   background: var(--background_color_1);

@@ -344,11 +344,11 @@ export default {
   color: var(--color_text_btn);
 }
 .content-contact {
-  background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-form-contact {
   @apply w-full flex flex-col justify-center items-center;
+  background: var(--background_color_1);
 }
 .container-contact {
   @apply w-full justify-center items-center;

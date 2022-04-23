@@ -106,7 +106,7 @@ export default {
 <style scoped>
 .product-content {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center my-60;
+  @apply w-full flex flex-col justify-center items-center py-60;
 }
 .product-text {
   @apply w-full flex flex-col justify-start items-start;
@@ -118,6 +118,7 @@ export default {
   @apply w-auto flex flex-col text-center;
 }
 .txt-newProducts {
+  color: var(--colorTextBTn);
   box-shadow: inset 0px -50px 0px -41px var(--color_border);
   @apply w-auto h-full flex flex-row text-center font-semibold px-10 cursor-pointer transition-all ease-in duration-0.2;
 }
@@ -140,11 +141,10 @@ export default {
   .tittle {
     color: var(--color_title);
     font-weight: var(--fontWeightTitle);
-    font-size: 25px;
+    font-size: var(--fontSizeTitle);
     @apply justify-center items-center mb-50;
   }
   .txt-newProducts {
-    color: var(--color_text_btn);
     @apply justify-center items-center;
   }
   .product-text {
@@ -178,7 +178,6 @@ export default {
     width: 1400px;
   }
   .tittle {
-    font-size: var(--fontSizeTitle);
     @apply leading-50 mb-0;
   }
   .txt-newProducts {

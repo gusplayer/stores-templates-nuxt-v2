@@ -61,11 +61,10 @@ export default {
 <style scoped>
 .content-deal {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-items-center items-center my-40;
+  @apply w-full flex flex-col justify-items-center items-center py-40;
 }
 .content-grid {
-  border-color: var(--color_border);
-  @apply justify-center items-center pb-90 border-b;
+  @apply justify-center items-center pb-90;
 }
 .grid-left,
 .grid-right {
@@ -104,7 +103,7 @@ export default {
     font-size: var(--fontSizeTitle);
     color: var(--color_title);
     font-weight: var(--fontWeightTitle);
-    @apply my-30 font-semibold;
+    @apply my-30;
   }
   .grid-item-border {
     background-color: var(--color_border);
@@ -130,10 +129,11 @@ export default {
   }
   .btn {
     height: 58px;
+    border-radius: var(--radius_btn);
     border-color: var(--colorBorderBTn);
     color: var(--colorTextBTn);
     font-size: 16px;
-    @apply w-auto px-60 border font-semibold;
+    @apply flex justify-center items-center w-auto px-60 border font-semibold;
   }
   .btn:hover {
     background-color: var(--hover_Bg_btn);
@@ -155,9 +155,6 @@ export default {
 @screen lg {
   .content-grid {
     @apply grid grid-cols-2;
-  }
-  .txt-tittle {
-    font-size: 42px;
   }
   .btn {
     @apply w-auto px-40 border;
