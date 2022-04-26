@@ -1,5 +1,11 @@
 <template>
-  <div class="content-opt-tab">
+  <div
+    class="content-opt-tab"
+    :style="[
+      settingByTemplate10[0].detailsProduct,
+      settingByTemplate10[0].setting10General,
+    ]"
+  >
     <div class="head-content">
       <div
         class="tab"
@@ -247,6 +253,7 @@ export default {
     dataStore: Object,
     data: {},
     envio: {},
+    settingByTemplate10: Array,
   },
   mounted() {},
   data() {
@@ -274,6 +281,7 @@ export default {
       }
     },
     envios() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },
@@ -309,6 +317,77 @@ export default {
 }
 </script>
 <style scoped>
+.editor {
+  width: 100%;
+}
+.editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
+  border: none;
+  padding: 0px 5px;
+  background-color: transparent;
+}
+.editor >>> .el-tiptap-editor__menu-bubble {
+  display: none;
+}
+.editor >>> .el-tiptap-editor__content h1 {
+  font-size: 2em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h2 {
+  font-size: 1.5em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h3 {
+  font-size: 1.17em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h4 {
+  font-size: 1.12em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h5 {
+  font-size: 0.83em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content p {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content span {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content blockquote {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content code {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content ul {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content ol {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content li {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content pre {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content strong {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content em {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content s {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content .image-view__body__image {
+  cursor: none;
+  pointer-events: none;
+}
+.editor >>> .el-popper.el-tiptap-image-popper {
+  display: none;
+}
 .tab {
   @apply w-auto flex flex-col justify-center items-center px-4 cursor-pointer;
 }
@@ -316,34 +395,41 @@ export default {
 .item-content {
   @apply w-full flex flex-col justify-start items-start pb-4;
 }
-
 .content_product_description {
-  color: #77777;
+  color: var(--color_subtext);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.42857143;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
+  @apply w-full flex flex-col justify-center items-start;
+}
+.content_product_description {
+  color: var(--color_subtext);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  font-family: var(--font-style-1) !important;
   @apply w-full flex flex-col justify-center items-start;
 }
 h3 {
-  color: #606060;
+  color: var(--color_subtext);
   font-size: 15px;
   font-weight: 600;
   text-transform: uppercase;
   align-self: flex-start;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
 }
 h4 {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #606060;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
   font-size: 15px;
   font-weight: 600;
   line-height: 1.42857143;
   @apply w-full flex flex-col justify-center items-start mb-5;
 }
 li p {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #777;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
@@ -351,8 +437,9 @@ li p {
 }
 .description-method,
 .price {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #777;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
+
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
@@ -368,25 +455,24 @@ img {
     @apply w-full flex flex-col justify-center items-center;
   }
   .content-tab {
+    border-color: var(--border);
     @apply w-full flex flex-col justify-center items-center mt-6;
-    border-bottom: 1px solid #ededed;
   }
   .head-content {
     @apply w-full grid grid-cols-1 gap-2 justify-center items-center mb-40;
   }
   .tittle {
-    color: #888;
+    color: var(--color_subtext);
     font-size: 14px;
-    background-color: #f9f9f9;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    background-color: transparent;
+    font-family: var(--font-style-1) !important;
     @apply w-full h-40 flex justify-center items-center font-semibold uppercase transition-all ease-in duration-0.2;
   }
   .show-select-active {
-    background-color: #f9f9f9;
-    border-bottom: 2px solid #eb7025;
+    background-color: var(--color_gb_tabs);
   }
   .show-select-active .tittle {
-    color: #eb7025;
+    color: var(--color_text_tabs);
   }
 }
 @media (min-width: 425px) {
@@ -395,43 +481,37 @@ img {
   }
   .tittle {
     font-size: 12px;
-    background-color: #fff;
     @apply text-center;
   }
 }
 @screen md {
   .content-opt-tab {
-    border-color: #ededed;
     @apply flex flex-row justify-start items-start border mt-0;
   }
   .head-content {
     @apply w-full flex flex-row justify-start items-start mb-0;
-    border-bottom: 1px solid #ededed;
+    border-bottom: 1px solid transparent;
   }
   .head-content {
     @apply w-6/0 flex flex-col justify-start items-start mb-0 gap-0;
   }
   .tab {
-    border-bottom: 1px solid #ededed;
     @apply w-full flex justify-start items-center;
   }
   .tittle {
     font-size: 14px;
-    background-color: #fff;
     @apply w-full h-50 text-center justify-start items-center pl-20;
   }
   .content-tab {
-    border-color: #ededed;
+    border-color: var(--border);
     @apply w-full flex flex-row justify-start items-start mt-0 border transition-all ease-in duration-0.2;
   }
   .show-select-active {
-    background-color: #fff;
-    border-color: #eb7025;
-    border-bottom: 1px solid #ededed;
+    background-color: var(--color_gb_tabs);
     @apply border-l-4 w-full;
   }
   .show-select-active .tittle {
-    color: #eb7025;
+    color: var(--color_text_tabs);
   }
   .content-tab {
     @apply p-40;

@@ -181,7 +181,7 @@ export default {
               this.moverseA('kbannerX')
               break
             case 'footer':
-              this.moverseA('kBlogX')
+              this.moverseA('KblogX')
               break
             case 'banner':
               this.moverseA('kbannerX')

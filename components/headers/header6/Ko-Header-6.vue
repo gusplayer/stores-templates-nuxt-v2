@@ -39,40 +39,57 @@
           <button class="header-item-menu" @click="openMenulateral">
             <menu-icon class="header-icon-menu" />
           </button>
-          <div class="contents">
-            <div
-              class="header-content-buttons"
-              v-if="this.settingByTemplate10[0].pages.values"
-            >
+          <div class="flex flex-row justify-between">
+            <div class="flex flex-row mr-20">
               <div
-                v-for="(item, index) in this.settingByTemplate10[0].pages
-                  .values"
-                :key="`${index}${item.displayName}`"
+                class="btn-scroll"
+                @click="scrollLeft()"
+                v-if="this.settingByTemplate10[0].pages.values.length > 6"
               >
-                <nuxt-link
-                  :to="item.url"
-                  v-if="item.isExternalLink == false"
-                  class="content-button"
+                <FlechaLeft-icon class="btn-scroll-icon" />
+              </div>
+              <div
+                class="header-content-buttons"
+                id="swiper-slide-categories"
+                v-if="this.settingByTemplate10[0].pages.values"
+              >
+                <div
+                  v-for="(item, index) in this.settingByTemplate10[0].pages
+                    .values"
+                  :key="`${index}${item.displayName}`"
                 >
-                  <p
-                    class="btn"
-                    @click="btnActivate(item.id)"
-                    :class="btnSelect == item.id ? 'btn-active' : ''"
+                  <nuxt-link
+                    :to="item.url"
+                    v-if="item.isExternalLink == false"
+                    class="content-button"
                   >
-                    {{ item.displayName }}
-                  </p>
-                </nuxt-link>
-                <a
-                  :href="item.url"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  class="content-button"
-                  v-else
-                >
-                  <p class="btn">
-                    {{ item.displayName }}
-                  </p>
-                </a>
+                    <p
+                      class="btn"
+                      @click="btnActivate(item.id)"
+                      :class="btnSelect == item.id ? 'btn-active' : ''"
+                    >
+                      {{ item.displayName }}
+                    </p>
+                  </nuxt-link>
+                  <a
+                    :href="item.url"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    class="content-button"
+                    v-else
+                  >
+                    <p class="btn">
+                      {{ item.displayName }}
+                    </p>
+                  </a>
+                </div>
+              </div>
+              <div
+                class="btn-scroll"
+                @click="scrollRight()"
+                v-if="this.settingByTemplate10[0].pages.values.length > 6"
+              >
+                <FlechaRight-icon class="btn-scroll-icon" />
               </div>
             </div>
             <div class="header-content-items">
@@ -282,6 +299,12 @@ export default {
     focusInput() {
       document.getElementById('SearchHeader').focus()
     },
+    scrollLeft() {
+      document.getElementById('swiper-slide-categories').scrollLeft -= 300
+    },
+    scrollRight() {
+      document.getElementById('swiper-slide-categories').scrollLeft += 300
+    },
   },
   watch: {
     search(value) {
@@ -296,14 +319,39 @@ export default {
 </script>
 
 <style scoped>
+.btn-scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  min-height: 50px;
+  padding: 0px 6px;
+  background: transparent;
+  cursor: pointer;
+}
+.btn-scroll-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: var(--color_tex);
+  bottom: 0.125em;
+}
+.btn-scroll-icon:hover {
+  color: var(--hover_text);
+}
+.item-btns {
+  max-width: 850px;
+}
 .header-container {
   border-bottom: 1px solid var(--background_color_1);
   position: static;
   @apply w-full flex flex-col justify-center items-center top-0 z-10 transition-all ease-in-out duration-0.5;
 }
 .wrapper-header {
-  margin-top: var(--padding_logo);
-  margin-bottom: var(--padding_logo);
+  padding-top: var(--padding_logo);
+  padding-bottom: var(--padding_logo);
   background-color: var(--background_color_1);
   @apply flex flex-col w-full justify-between items-center z-10 shadow-lg;
 }
@@ -330,10 +378,19 @@ export default {
   @apply object-contain object-left w-full;
 }
 .header-contet {
-  @apply flex flex-row justify-between items-center;
+  @apply w-full flex flex-col justify-center items-center;
 }
 .header-content-buttons {
-  @apply w-auto flex flex-wrap gap-0 justify-center items-center;
+  max-width: 850px !important;
+  box-sizing: border-box;
+  z-index: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  @apply flex flex-row justify-start items-center;
+}
+.header-content-buttons::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
 }
 .btn-active {
   box-shadow: inset 0px -50px 0px -44px var(--color_border);
@@ -350,6 +407,8 @@ export default {
   @apply transition-all ease-in duration-0.3;
 }
 .header-content-items {
+  z-index: 3;
+  background-color: var(--background_color_1);
   @apply flex flex-row justify-between items-center;
 }
 .header-search-icon {
@@ -442,9 +501,6 @@ export default {
   }
   .header-contet {
     @apply w-auto h-auto flex flex-row justify-between items-center;
-  }
-  .header-content-buttons {
-    @apply mr-60;
   }
 }
 @media (max-width: 768px) {

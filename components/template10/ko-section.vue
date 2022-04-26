@@ -114,7 +114,7 @@ export default {
 .content-section {
   background: var(--background_color_1);
   padding-top: var(--margintop);
-  padding-bottom: var(--margin-bottom);
+  padding-bottom: var(--marginBottom);
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-wrapper {

@@ -8,7 +8,10 @@
         style="margin-right: 40px; height: auto"
       >
         <client-only>
-          <KoProductCard1 :product="product"></KoProductCard1>
+          <KoProductCard1
+            :product="product"
+            :cardProduct="cardProduct"
+          ></KoProductCard1>
         </client-only>
       </div>
     </div>
@@ -36,6 +39,7 @@ export default {
   },
   props: {
     products: {},
+    cardProduct: Object,
   },
   data() {
     return {

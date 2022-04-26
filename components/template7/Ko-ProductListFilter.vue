@@ -339,7 +339,9 @@ export default {
       this.settingByTemplate7[0].settingK07ProductList &&
       this.settingByTemplate7[0].settingK07ProductList.img_background == true
     ) {
-      this.setBg()
+      this.setBg(1)
+    } else {
+      this.setBg(2)
     }
     // this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
@@ -673,21 +675,29 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
-    setBg() {
-      if (this.settingByTemplate7[0].settingK07ProductList.url_img) {
-        var imagen = document.getElementById('BgProductlistF')
-        imagen.style.backgroundImage = `url(${this.settingByTemplate7[0].settingK07ProductList.url_img})`
+    setBg(value) {
+      var imagen = document.getElementById('BgProductlistF')
+      if (value == 1) {
+        if (this.settingByTemplate7[0].settingK07ProductList.url_img) {
+          imagen.style.backgroundImage = `url(${this.settingByTemplate7[0].settingK07ProductList.url_img})`
+        } else {
+          imagen.style.backgroundImage = `url(https://res.cloudinary.com/brahyanr10/image/upload/v1611623008/Komercia/Shop/flowers-shoppage_jwuds4.jpg)`
+        }
+      } else if (value == 2) {
+        imagen.style.backgroundImage = ''
       }
     },
   },
   watch: {
-    banner() {
+    settingByTemplate7() {
       if (
         this.settingByTemplate7[0] &&
         this.settingByTemplate7[0].settingK07ProductList &&
         this.settingByTemplate7[0].settingK07ProductList.img_background == true
       ) {
-        this.setBg()
+        this.setBg(1)
+      } else {
+        this.setBg(2)
       }
     },
     fullProducts(value) {
@@ -751,6 +761,7 @@ export default {
   background: var(--background_color_2);
 }
 .content-banner-shop {
+  background: var(--background_color_1);
   @apply w-full flex justify-center items-center bg-cover bg-no-repeat;
   /* background-image: var(--url_img); */
 }

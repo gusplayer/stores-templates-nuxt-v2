@@ -189,7 +189,7 @@ export default {
   @apply transition-all ease-in duration-0.2;
 }
 .content-textbutton-shop {
-  color: var(--color_title);
+  color: var(--colorTextBTn);
   font-size: 14px;
   font-family: var(--font-style-1) !important;
   @apply tracking-1 leading-16 font-semibold whitespace-nowrap;

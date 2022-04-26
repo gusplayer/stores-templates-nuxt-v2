@@ -46,7 +46,7 @@
 <script>
 import Kblog from '../template10/_blog/blogcard'
 export default {
-  name: 'ko-Blog',
+  name: 'ko-Blog-landing',
   components: {
     Kblog,
   },
@@ -117,7 +117,6 @@ export default {
   text-align: center;
   font-size: 18px;
   background: var(--background_color_1);
-
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
@@ -133,8 +132,7 @@ export default {
   align-items: center;
 }
 .wrapper-content {
-  @apply w-full flex flex-col justify-center items-center;
-  padding-bottom: 64px;
+  @apply w-full flex flex-col justify-center items-center py-40;
   background-color: var(--background_color_1);
 }
 .wrapper-items-content {
@@ -161,14 +159,14 @@ export default {
     @apply w-9/0;
   }
   .tittle {
-    line-height: 34px;
-    font-size: 30px;
+    /* line-height: 34px; */
+    /* font-size: 30px; */
     color: var(--color_title);
     margin-bottom: var(--marginbottomTitle);
   }
   .subtittle {
     color: var(--color_description);
-    font-size: 15px;
+    /* font-size: 15px; */
     font-weight: var(--font-weight-d);
     margin-bottom: var(--marginbottomDescription);
   }
@@ -190,8 +188,8 @@ export default {
     width: 100%;
   }
   .tittle {
-    line-height: 34px;
-    font-size: 36px;
+    /* line-height: 34px; */
+    /* font-size: 36px; */
   }
 }
 </style>

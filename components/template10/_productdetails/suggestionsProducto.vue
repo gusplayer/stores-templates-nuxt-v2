@@ -27,7 +27,7 @@ export default {
   display: flex;
   width: 100%;
   /* background-color: var(--background_color_2); */
-  background: #fff;
+  background: transparent;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -52,12 +52,12 @@ export default {
   align-items: center;
 }
 .title-ProductFavoritos {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   font-size: 18px;
   font-weight: bold;
   line-height: 1.4;
-  /* color: var(--color_subtext); */
-  color: #2c2930;
+  color: var(--color_subtext);
+  /* color: var(--color_text); */
   cursor: pointer;
 }
 @media (max-width: 770px) {

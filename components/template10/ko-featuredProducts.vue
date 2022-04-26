@@ -158,9 +158,9 @@ export default {
   .producto-items-content {
     @apply w-9/5;
   }
-  .product-text {
+  /* .product-text {
     @apply mb-0;
-  }
+  } */
   .product-tittle {
     @apply flex flex-row justify-between mb-60;
   }

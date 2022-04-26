@@ -382,8 +382,8 @@ export default {
   }
   .item-logo {
     max-width: var(--with_logo);
-    margin-top: var(--padding_logo);
-    margin-bottom: var(--padding_logo);
+    padding-top: var(--padding_logo);
+    padding-bottom: var(--padding_logo);
     @apply w-full flex flex-col justify-center items-center;
   }
   .header-logo {

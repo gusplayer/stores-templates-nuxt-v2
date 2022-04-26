@@ -1,6 +1,19 @@
 <template>
-  <div class="product-content">
-    <div class="bannerProduct">
+  <div
+    class="product-content"
+    :style="[
+      settingByTemplate10[0].setting10General,
+      settingByTemplate10[0].productListFilter,
+      {
+        '--font-style-1':
+          this.settingByTemplate10[0].setting10General &&
+          this.settingByTemplate10[0].setting10General.fount_1
+            ? this.settingByTemplate10[0].setting10General.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
+    <div class="bannerProduct" id="BgProductlistF">
       <div class="crumb">
         <nuxt-link to="/">
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -223,7 +236,6 @@
               </div>
             </div>
           </div>
-
           <div class="producto-items-content" id="section">
             <div class="content-item">
               <div class="content-item-productos">
@@ -237,11 +249,15 @@
                       :product="product"
                       v-if="!showinList"
                       class="product-list"
+                      :cardProduct="settingByTemplate10[0].cardProduct"
+                      :settingGeneral="settingByTemplate10[0].setting10General"
                     ></KoProdcutCardFilter>
                     <KoProdcutCardFilerList
                       :product="product"
                       v-if="showinList"
                       class="product-list"
+                      :cardProduct="settingByTemplate10[0].cardProduct"
+                      :settingGeneral="settingByTemplate10[0].setting10General"
                     ></KoProdcutCardFilerList>
                   </div>
                 </div>
@@ -300,10 +316,20 @@ export default {
   props: {
     dataStore: Object,
     fullProducts: {},
+    settingByTemplate10: Array,
   },
   mixins: [sendCategoryUrl, SendsubcategoryUrl],
   name: 'Ko-ProductList-Filter',
   mounted() {
+    if (
+      this.settingByTemplate10[0] &&
+      this.settingByTemplate10[0].productListFilter &&
+      this.settingByTemplate10[0].productListFilter.visible_bg == true
+    ) {
+      this.setBg(1)
+    } else {
+      this.setBg(2)
+    }
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
       let maxTMP = 0
@@ -433,6 +459,18 @@ export default {
     },
   },
   methods: {
+    setBg(value) {
+      var imagen = document.getElementById('BgProductlistF')
+      if (value == 1) {
+        if (this.settingByTemplate10[0].productListFilter.url_img_bg) {
+          imagen.style.backgroundImage = `url(${this.settingByTemplate10[0].productListFilter.url_img_bg})`
+        } else {
+          imagen.style.backgroundImage = `url(https://res.cloudinary.com/brahyanr10/image/upload/v1614233821/Temp10/Productos/bg-beagrumb_gxvk1i.jpg)`
+        }
+      } else if (value == 2) {
+        imagen.style.backgroundImage = ''
+      }
+    },
     filterProductPrice() {
       let result = {}
       if (this.filterProduct && this.value) {
@@ -674,6 +712,17 @@ export default {
     },
   },
   watch: {
+    settingByTemplate10() {
+      if (
+        this.settingByTemplate10[0] &&
+        this.settingByTemplate10[0].productListFilter &&
+        this.settingByTemplate10[0].productListFilter.visible_bg == true
+      ) {
+        this.setBg(1)
+      } else {
+        this.setBg(2)
+      }
+    },
     fullProducts(value) {
       this.products = value
       let maxTMP = 0
@@ -735,10 +784,8 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .product-content {
-  @apply flex flex-col justify-center items-center w-full mb-80;
-}
-.content-banner-shop {
-  @apply w-full flex flex-col;
+  background: var(--background_color_1);
+  @apply flex flex-col justify-center items-center w-full pb-80;
 }
 .content-banner-shop-r {
   @apply w-full flex flex-col justify-start items-start;
@@ -754,9 +801,9 @@ export default {
   /* border-bottom: 2px solid #2c2930; */
 }
 .txt-tittles {
-  color: #222;
+  color: var(--color_text);
   font-size: 15px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full flex justify-start items-center font-semibold tracking-0 cursor-pointer uppercase transition-all ease-in duration-0.2;
 }
 .value-range-slide {
@@ -768,7 +815,7 @@ export default {
 .value-price {
   color: #717171;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-auto pr-1 cursor-default transition-all ease-in duration-0.2;
 }
 .value-precio-change {
@@ -777,7 +824,7 @@ export default {
 .price {
   color: #2d2a2a;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply flex flex-row justify-start items-center font-semibold transition-all ease-in duration-0.2 cursor-default;
 }
 .item-tittle {
@@ -785,7 +832,7 @@ export default {
 }
 .empty {
   margin-bottom: 30px;
-  border-color: rgba(129, 129, 129, 0.2);
+  border-color: var(--border);
   @apply w-full mb-30 border-b;
 }
 .btn-slider {
@@ -797,7 +844,7 @@ export default {
   border-radius: 35px;
   padding: 10px 14px;
   letter-spacing: 0.3px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply flex justify-center items-center text-center uppercase font-semibold cursor-pointer transition-all ease-in duration-0.2;
 }
 .btn-items-left:hover {
@@ -812,43 +859,43 @@ export default {
 .text-categorias {
   color: #333333;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-auto flex flex-row mr-6 font-semibold cursor-pointer;
 }
 .separator-breadCrumbs {
   color: #8e8e8e;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-auto mr-6 ml-6 cursor-pointer transition-all ease-in duration-0.2;
 }
 .product-stock-text {
   color: #8e8e8e;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply font-semibold;
 }
 .product-stock-active {
   color: #000;
   font-size: 15px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply font-semibold;
 }
 .text-categorias-select {
   color: #8e8e8e;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full flex flex-row mr-6 font-normal cursor-pointer transition-all ease-in duration-0.2;
 }
 #statecate {
   color: #333;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full font-semibold cursor-pointer;
 }
 #statesubcate {
   color: #333;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full ml-6 font-semibold cursor-pointer transition-all ease-in duration-0.2;
 }
 .top-content {
@@ -907,22 +954,22 @@ export default {
   @apply w-full flex flex-col justify-start items-center;
 }
 .txt-categorys {
-  color: #333;
+  color: var(--color_subtext);
   font-size: 15px;
   line-height: 1.3;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
 }
 .txt-categorys:hover {
   color: #eb7025;
 }
 .txt-categorys-active {
-  color: #eb7025;
+  color: var(--color_icon);
   font-size: 14px;
   @apply w-full flex flex-row justify-start items-center pr-1 transition-all ease-in duration-0.2 font-semibold cursor-pointer;
 }
 .txt-categorys:hover .rounded-list {
-  background-color: #eb7025;
+  background-color: var(--color_icon);
   @apply transition-all ease-in duration-0.2;
 }
 .rounded-list {
@@ -930,13 +977,13 @@ export default {
   @apply w-10 h-10 rounded-full mr-10 transition-all ease-in duration-0.2;
 }
 .txt-rounded-list-active {
-  background-color: #eb7025;
+  background-color: var(--color_icon);
   @apply transition-all ease-in duration-0.2;
 }
 .product-stock {
   color: #333;
   font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply mr-6 font-semibold cursor-pointer transition-all ease-in duration-0.2;
 }
 .show-view-per-list {
@@ -946,16 +993,16 @@ export default {
   @apply w-full cursor-pointer mt-4;
 }
 .show-icon {
-  fill: #8e8e8e;
+  fill: var(--color_icon);
   @apply p-3;
 }
 .show-icon-active {
-  fill: #000;
-  background-color: #f8f8f8;
+  fill: var(--breadCrumbs);
+  background-color: var(--background_color_1);
 }
 .show-icon:hover {
   fill: #eb7025;
-  background-color: #f8f8f8;
+  background-color: var(--background_color_1);
 }
 .show:focus .show-icon {
   fill: #000;
@@ -967,8 +1014,8 @@ export default {
   @apply w-full flex justify-start items-start;
 }
 .btn-tittle-shop {
-  color: #000;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--color_text);
+  font-family: var(--font-style-1) !important;
   @apply font-semibold uppercase justify-start items-start;
 }
 .product-text {
@@ -988,7 +1035,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-products {
-  border-bottom: 0.5px solid #f2f2f2;
+  border-bottom: 0.5px solid var(--border);
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-products-empty {
@@ -998,7 +1045,7 @@ export default {
 .txt-products-empty {
   font-size: 20px;
   color: #3f3f3f;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-1) !important;
   @apply mt-6 font-semibold;
 }
 .pagination-medium {
@@ -1007,38 +1054,38 @@ export default {
 }
 .pagination {
   font-size: 18px;
-  color: #222;
+  color: var(--pagination_Color);
   background: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .btn-next {
-  color: #222;
+  color: var(--pagination_Color);
   background-color: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .btn-prev {
-  color: #222;
+  color: var(--pagination_Color);
   background-color: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .el-pager li {
-  color: #222;
+  color: var(--pagination_Color);
   background-color: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: #eb7025;
+  color: var(--pagination_Color);
 }
 .product_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: #eb7025;
+  color: var(--pagination_Color);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled):hover {
-  color: #eb7025;
+  color: var(--pagination_Color);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled).active {
-  background-color: #eb7025;
+  background-color: var(--pagination_Color);
   color: #fff;
 }
 .show-number-items,
@@ -1051,14 +1098,14 @@ export default {
 }
 .separatorCrumb {
   font-size: 9px;
-  color: #222;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--breadCrumbs);
+  font-family: var(--font-style-1) !important;
   @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
 }
 .txt-crumb {
   font-size: 15px;
-  color: #222;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: var(--breadCrumbs);
+  font-family: var(--font-style-1) !important;
   @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
 }
 .s1:hover {
@@ -1076,7 +1123,7 @@ export default {
 }
 .accordion:after {
   content: '\002B';
-  color: #000;
+  color: var(--color_icon);
   font-weight: bold;
   float: right;
 }
@@ -1140,7 +1187,7 @@ export default {
     @apply w-full flex flex-col justify-start items-start;
   }
   .txt-content-home {
-    color: #222;
+    color: var(--color_text);
     font-size: 16px;
     line-height: 1.1;
     @apply w-auto py-20 uppercase font-semibold cursor-pointer;
@@ -1160,7 +1207,7 @@ export default {
   }
   .bannerProduct {
     height: 220px;
-    background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/v1614233821/Temp10/Productos/bg-beagrumb_gxvk1i.jpg');
+    background-color: var(--background_color_2);
     @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center;
   }
 }
@@ -1187,7 +1234,7 @@ export default {
     font-size: 20px;
   }
   .top-content {
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid var(--border);
     @apply flex pt-0 pb-5;
   }
   .content-left {

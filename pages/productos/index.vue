@@ -143,7 +143,7 @@ export default {
                   this.settingByTemplate10.productListFilter
                     ? this.settingByTemplate10.productListFilter
                     : null,
-                setting9General:
+                setting10General:
                   this.settingByTemplate10 &&
                   this.settingByTemplate10.settingGeneral
                     ? this.settingByTemplate10.settingGeneral

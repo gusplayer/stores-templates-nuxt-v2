@@ -524,8 +524,8 @@ export default {
 .tittle {
   font-family: var(--font-style-1) !important;
   /* color: #3f3f3f; */
-  font: inherit;
-  font-size: 100%;
+  /* font: inherit; */
+  /* font-size: 100%; */
   @apply w-full flex justify-center items-center;
 }
 .card-title {
@@ -533,7 +533,7 @@ export default {
   color: var(--color_title);
   font-weight: var(--fontWeighTitle);
   font-size: var(--fontSizeTitle);
-  font: inherit;
+  /* font: inherit; */
   @apply pt-10 transition-all ease-out duration-0.2;
 }
 .card-title:hover {
@@ -550,7 +550,7 @@ export default {
   font-family: var(--font-style-1) !important;
   margin-top: 10px;
   color: var(--color_price);
-  font-weight: var(--fontSizePretitle);
+  font-weight: var(--fontWeighPretitle);
   font-size: var(--fontSizePretitle);
   white-space: nowrap;
   text-align: left;
@@ -605,10 +605,10 @@ export default {
 }
 @screen sm {
   .card-title {
-    font-size: 16px;
+    /* font-size: 16px; */
   }
   .precio {
-    font-size: 16px;
+    /* font-size: 16px; */
   }
   .overlay-top {
     @apply absolute overflow-hidden rounded-md bg-white-white shadow-md transition-all ease-in duration-300;

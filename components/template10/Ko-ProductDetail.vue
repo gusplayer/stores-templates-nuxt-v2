@@ -1,8 +1,14 @@
 <template>
-  <div class="wrapper-productDetail">
+  <div
+    class="wrapper-productDetail"
+    :style="[
+      settingByTemplate10[0].detailsProduct,
+      settingByTemplate10[0].setting10General,
+    ]"
+  >
     <div class="container-productDetail-loading" v-if="loading"></div>
     <div class="container-productDetail" v-else>
-      <div class="banner-detail">
+      <div class="banner-detail" id="BgProductlistF">
         <div class="crumb">
           <nuxt-link to="/productos">
             <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -261,11 +267,15 @@
           :dataStore="dataStore"
           :data="data"
           :envio="envio"
+          :settingByTemplate10="settingByTemplate10"
         ></OptionTab>
       </div>
       <!-- Productos relacionados  -->
       <div class="section-suggesProduct">
-        <KoSuggesProduct :category="this.category.slice(0, 8)" />
+        <KoSuggesProduct
+          :category="this.category.slice(0, 8)"
+          :cardProduct="settingByTemplate10[0].cardProduct"
+        />
       </div>
       <!-- Metas -->
       <div itemscope itemtype="http://schema.org/Product">
@@ -334,6 +344,7 @@ export default {
     whatsapp: String,
     envios: Object,
     facebooPixel: Object,
+    settingByTemplate10: Array,
   },
   components: {
     // OptionAcordion,
@@ -344,6 +355,15 @@ export default {
     // Zoom,
   },
   mounted() {
+    if (
+      this.settingByTemplate10[0] &&
+      this.settingByTemplate10[0].detailsProduct &&
+      this.settingByTemplate10[0].detailsProduct.visible_bg == true
+    ) {
+      this.setBg(1)
+    } else {
+      this.setBg(2)
+    }
     this.$store.state.beforeCombination = []
     if (this.dataStore.productos.length) {
       this.getDataProduct()
@@ -464,6 +484,20 @@ export default {
     },
   },
   methods: {
+    setBg(value) {
+      var imagen = document.getElementById('BgProductlistF')
+      if (imagen && imagen.style) {
+        if (value == 1) {
+          if (this.settingByTemplate10[0].detailsProduct.url_img_bg) {
+            imagen.style.backgroundImage = `url(${this.settingByTemplate10[0].detailsProduct.url_img_bg})`
+          } else {
+            imagen.style.backgroundImage = `url(https://res.cloudinary.com/brahyanr10/image/upload/v1614233821/Temp10/Productos/bg-beagrumb_gxvk1i.jpg)`
+          }
+        } else if (value == 2) {
+          imagen.style.backgroundImage = ''
+        }
+      }
+    },
     changeSlide() {
       this.swiper.slidePrev(700, false)
     },
@@ -734,6 +768,17 @@ export default {
     },
   },
   watch: {
+    settingByTemplate10() {
+      if (
+        this.settingByTemplate10[0] &&
+        this.settingByTemplate10[0].detailsProduct &&
+        this.settingByTemplate10[0].detailsProduct.visible_bg == true
+      ) {
+        this.setBg(1)
+      } else {
+        this.setBg(2)
+      }
+    },
     'dataStore.tienda'() {
       this.links[0].link = this.dataStore.tienda.red_facebook
       this.links[1].link = this.dataStore.tienda.red_twitter
@@ -813,14 +858,15 @@ export default {
 
 <style scoped>
 .wrapper-productDetail {
-  background: #fff;
+  background: var(--background_color_1);
   @apply w-full flex justify-center items-center;
+  padding-bottom: 40px;
 }
 .container-productDetail-loading {
   height: calc(100vh - 420px);
   max-width: 1400px;
   padding: 50px 30px 30px 30px;
-  background: #fff;
+  background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
 }
 .container-productDetail {
@@ -860,6 +906,7 @@ export default {
   @apply flex flex-row justify-center items-center;
 }
 .section-suggesProduct {
+  background: var(--background_color_1);
   @apply w-full mt-40;
 }
 .content-quantity-boxes {
@@ -867,23 +914,26 @@ export default {
 }
 .txt-tittle-quantity {
   font-size: 12px;
-  color: #666;
+  color: var(--color_subtext);
   min-width: 70px;
   @apply w-auto font-semibold uppercase mr-10;
 }
 .box-quantity {
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: var(--color_subtext);
+  background-color: transparent;
+  border: 1px solid var(--border);
   @apply w-75 h-50 flex text-center justify-center items-center;
 }
 .box-quantity-btns {
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: var(--color_subtext);
+  background-color: transparent;
+  border: 1px solid var(--border);
   @apply w-25 h-50 flex flex-col text-center justify-center items-center;
 }
 .btn-quantity {
-  background-color: #fff;
-  border-color: rgba(0, 0, 0, 0.15);
+  color: var(--color_subtext);
+  background-color: transparent;
+  border-color: var(--border);
   @apply w-25 h-25 flex justify-center items-center border-t border-r;
 }
 
@@ -978,14 +1028,16 @@ export default {
   .content-options {
     @apply w-full flex flex-col justify-start items-center;
   }
-
+  .text-addCart {
+    color: var(--color_text_btn);
+  }
   .btn {
-    background-color: #222;
+    background-color: var(--color_background_btn);
     transition: all 0.15s ease-in;
     @apply w-full h-54 flex flex-row justify-center items-center;
   }
   .btn-disabled {
-    background-color: #2c2930;
+    background-color: var(--color_background_btn);
     transition: all 0.15s ease-in;
     @apply w-full h-54 flex flex-row justify-center items-center;
   }
@@ -993,7 +1045,7 @@ export default {
     background-color: #eb7025;
     transition: all 0.15s ease-in;
   }
-  .btn:hover .text-addCart {
+  .btn:hover {
     color: #fff;
     transition: all 0.15s ease-in;
   }
@@ -1010,23 +1062,26 @@ export default {
   }
 
   .text-name {
-    color: #222;
-    font-size: 24px;
+    margin-top: var(--marginTopTitle);
+    color: var(--color_text);
+    font-size: var(--fontSizeTitle);
+    font-weight: var(--fontWeighTitle);
     letter-spacing: 0px;
     line-height: 1;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-    @apply font-semibold uppercase;
+    font-family: var(--font-style-1) !important;
+    @apply uppercase;
   }
   .text-price {
-    color: #222;
-    font-size: 26px;
+    color: var(--color_price);
+    font-size: var(--fontSizePrice);
+    font-weight: var(--fontWeighPrice);
     line-height: 1;
     letter-spacing: -0.03em;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-    @apply capitalize font-semibold;
+    font-family: var(--font-style-1) !important;
+    @apply capitalize;
   }
   .text-stock {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-style-1) !important;
     color: #92bb35;
     font-size: 14px;
     line-height: 1.42857143;
@@ -1047,29 +1102,29 @@ export default {
     @apply w-full flex justify-center items-center text-center font-semibold;
   }
   .text-addCart {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-    color: #fff;
+    font-family: var(--font-style-1) !important;
+
     font-size: 12px;
     @apply font-semibold whitespace-nowrap uppercase;
   }
   .minicart-icon {
-    fill: #fff;
-    color: #fff;
+    fill: var(--color_text_btn);
+    color: var(--color_text_btn);
     @apply mr-10 mb-5;
   }
   .text-variant {
-    color: #222;
+    color: var(--color_subtext);
     font-size: 16px;
     font-weight: 600;
     transition: all 0.6s ease-in-out;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-style-1) !important;
   }
   .text-option {
-    color: #222;
+    color: var(--color_subtext);
     font-size: 16px;
     font-weight: 600;
     transition: all 0.6s ease-in-out;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-style-1) !important;
   }
   .banner-detail {
     @apply hidden;
@@ -1095,7 +1150,7 @@ export default {
 @screen md {
   .banner-detail {
     height: 220px;
-    background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/v1614233821/Temp10/Productos/bg-beagrumb_gxvk1i.jpg');
+    background-color: var(--background_color_2);
     @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center;
   }
   .crumb {
@@ -1103,14 +1158,14 @@ export default {
   }
   .separatorCrumb {
     font-size: 9px;
-    color: #222;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    color: var(--breadCrumbs);
+    font-family: var(--font-style-1) !important;
     @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
   }
   .txt-crumb {
     font-size: 15px;
-    color: #222;
-    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+    color: var(--breadCrumbs);
+    font-family: var(--font-style-1) !important;
     @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
   }
   .s1:hover {

@@ -112,7 +112,7 @@ export default {
 }
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center w-full py-80;
+  @apply flex flex-col justify-center items-center w-full py-40;
 }
 .product-text {
   @apply flex flex-col justify-center items-center w-full text-center;
@@ -165,7 +165,7 @@ export default {
     @apply w-9/5;
   }
   .subtittle {
-    font-size: 15px;
+    /* font-size: 15px; */
   }
 }
 @screen lg {
@@ -184,7 +184,6 @@ export default {
   .subtittle {
     /* font-size: 15px; */
     max-width: 560px;
-
     @apply w-full leading-25;
   }
 }

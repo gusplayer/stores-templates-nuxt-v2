@@ -145,9 +145,10 @@ export default {
 <style scoped>
 .producto {
   @apply w-full flex flex-col justify-center items-center;
-  background-color: var(--background_color_1);
+  /* background-color: var(--background_color_1); */
 }
 .container {
+  background: var(--CardBg);
   @apply relative;
 }
 .content-imge {
@@ -181,7 +182,7 @@ export default {
 .txt-day,
 .txt-month {
   font-family: var(--font-style-1);
-  color: var(--color_text_date);
+  color: var(--ColorBg_Date2);
   font-weight: 600;
 }
 .txt-day {
@@ -206,7 +207,7 @@ export default {
   font-family: var(--font-style-1);
 }
 .txt-article-create {
-  color: var(--CardTitle);
+  color: var(--ColorText_Date);
   font-family: var(--font-style-1);
 }
 .txt-article-abstract {
@@ -217,7 +218,7 @@ export default {
   @apply h-50;
 }
 .btn {
-  color: var(--color_title);
+  color: var(--colorTextBTn);
   box-shadow: inset 0px -50px 0px -41px var(--color_border);
   font-family: var(--font-style-1);
   @apply w-auto flex flex-col text-center font-semibold px-10 cursor-pointer transition-all ease-in duration-0.2;
@@ -261,7 +262,7 @@ export default {
     @apply w-full flex justify-start items-start font-semibold mt-20 mb-15 cursor-pointer text-left  transition-all ease-in duration-0.5;
   }
   .txt-article-tittle:hover {
-    color: #eb7025;
+    /* color: #eb7025; */
     @apply transition-all ease-in duration-0.2;
   }
   .txt-article-day,
