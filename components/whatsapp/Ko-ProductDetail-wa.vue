@@ -720,7 +720,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px 30px 80px 30px;
+  padding: 30px 30px 10px;
   position: relative;
 }
 .section {

@@ -492,7 +492,7 @@ export default {
       this.$refs.observer
         .validate()
         .then((response) => {
-          if (response) {
+          if (response && this.dataStore && this.dataStore.tienda) {
             this.$router.replace({ query: {} })
             return axios
               .get(

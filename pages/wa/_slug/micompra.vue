@@ -17,44 +17,15 @@ export default {
   components: {
     KoMicompra,
   },
-  asyncData({ route, store }) {
-    if (route.query.orden) {
-      return axios
-        .get(
-          `${this.$store.state.urlKomercia}/api/orden/${store.state.tienda.id_tienda}/${route.query.orden}`,
-          {
-            headers: {
-              'content-type': 'application/json',
-              'Access-Control-Allow-Origin': '*',
-            },
-          }
-        )
-        .then((response) => {
-          if (
-            route.query.orden == response.data.data.venta.id &&
-            route.query.usuario ==
-              response.data.data.venta.usuario.identificacion
-          ) {
-            const orden = response.data.data
-            return { orden }
-          } else {
-            const orden = {}
-            orden.message = 'No exite esta orden'
-            return { orden }
-          }
-        })
-        .catch(() => {
-          const orden = {}
-          orden.message = 'No exite esta orden'
-          return { orden }
-        })
-    } else {
-      const orden = {}
-      return { orden }
+  mounted() {
+    if (this.$route.query && this.$route.query.orden) {
+      this.asyncData()
     }
   },
-  created() {
-    this.$store.dispatch('GET_CITIES')
+  data() {
+    return {
+      orden: {},
+    }
   },
   computed: {
     template() {
@@ -70,6 +41,39 @@ export default {
   methods: {
     setDataOrder(value) {
       this.orden = value
+    },
+    asyncData() {
+      if (this.$route.query.orden) {
+        return axios
+          .get(
+            `${this.$store.state.urlKomercia}/api/orden/${this.dataStore.tienda.id_tienda}/${this.$route.query.orden}`,
+            {
+              headers: {
+                'content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+              },
+            }
+          )
+          .then((response) => {
+            if (
+              this.$route.query.orden == response.data.data.venta.id &&
+              this.$route.query.usuario ==
+                response.data.data.venta.usuario.identificacion
+            ) {
+              this.orden = response.data.data
+              return this.orden
+            } else {
+              this.orden.message = 'No exite esta orden'
+              return this.orden
+            }
+          })
+          .catch(() => {
+            this.orden.message = 'No exite esta orden'
+            return this.orden
+          })
+      } else {
+        return this.orden
+      }
     },
   },
 }

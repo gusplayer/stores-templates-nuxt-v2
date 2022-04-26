@@ -728,7 +728,7 @@ export const actions = {
     if (state.dataStore) {
       // await dispatch('GET_DATAVALIENTA')
       await dispatch('GET_SERVER_PATH', full)
-      if (state.dataStore.modal && state.dataStore.modal.stateModal == 1) {
+      if (state.dataStore.modal && state.dataStore.modal.stateModal === 1) {
         await commit('SET_STATE_MODAL_PWD', false)
       }
     }
