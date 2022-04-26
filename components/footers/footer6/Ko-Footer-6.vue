@@ -25,7 +25,14 @@
               alt="Logo"
             />
           </div>
-          <div class="content-direction">
+          <div
+            class="content-direction"
+            v-if="
+              this.dataStore &&
+              this.dataStore.geolocalizacion &&
+              this.dataStore.geolocalizacion.length
+            "
+          >
             <p class="txt-direction">
               {{ this.dataStore.geolocalizacion[0].direccion }}
             </p>

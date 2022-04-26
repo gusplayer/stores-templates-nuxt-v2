@@ -880,12 +880,14 @@ export default {
     deleteItemCart(i) {
       this.$store.commit('DELETEITEMCART', i)
       this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.dispatch('VERIFY_PRODUCTS')
     },
     removeCartItems() {
       this.remove = false
       location.reload(true)
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.dispatch('VERIFY_PRODUCTS')
     },
     closeOrder(event) {
       const element = event.target.className
@@ -900,12 +902,22 @@ export default {
       let objeto = {}
       objeto = JSON.parse(JSON.stringify(this.productsCart))
       objeto.map((element) => {
+        // DATOS IMPORTANTES A ENVIAR = ID - CANTIDAD - COMBINACION
         if (element.id) {
           delete element.envio_gratis
           delete element.foto_cloudinary
           delete element.limitQuantity
           delete element.nombre
           delete element.precio
+
+          delete element.activo
+          delete element.stock_disponible
+          delete element.con_variante
+          delete element.foto
+          delete element.informacion_producto
+          delete element.orden
+          delete element.tag
+          delete element.variantes
         }
       })
       let json = {

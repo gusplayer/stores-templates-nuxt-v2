@@ -886,18 +886,30 @@ export const actions = {
         }
         return newProduct
       } else {
-        product.stock_disponible = 1
-        product.limitQuantity = product.informacion_producto[0].inventario
-        if (product.informacion_producto[0].inventario == 0) {
-          product.activo = 0
+        const newProduct = {
+          cantidad: product.cantidad,
+          // combinacion: filterCombination[0].combinacion,
+          envio_gratis: product.envio_gratis,
+          foto_cloudinary: product.foto_cloudinary,
+          id: product.id,
+          limitQuantity: product.informacion_producto[0].inventario,
+          nombre: product.nombre,
+          precio: product.precio,
+          promocion_valor: product.promocion_valor,
+          tag_promocion: product.tag_promocion,
+          activo: product.activo,
+          stock_disponible: 1,
+        }
+        if (newProduct.cantidad == 0) {
+          newProduct.activo = 0
         } else {
-          if (product.cantidad > product.limitQuantity) {
-            product.stock_disponible = 0
-          } else if (product.cantidad <= product.limitQuantity) {
-            product.stock_disponible = 1
+          if (newProduct.cantidad > newProduct.limitQuantity) {
+            newProduct.stock_disponible = 0
+          } else if (newProduct.cantidad <= newProduct.limitQuantity) {
+            newProduct.stock_disponible = 1
           }
         }
-        return product
+        return newProduct
       }
     })
     commit('SET_SHOPPING_CART', productsFinal)

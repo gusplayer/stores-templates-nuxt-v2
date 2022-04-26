@@ -632,6 +632,9 @@ export default {
     shippingDescuento2() {
       return this.$store.getters.listaDescuentosPrecio
     },
+    facebooPixel() {
+      return this.$store.state.analytics_tagmanager
+    },
   },
   methods: {
     obtainDiscountValue() {
@@ -706,8 +709,29 @@ export default {
       this.$store.dispatch('VERIFY_PRODUCTS')
     },
     GoPayments() {
+      let objeto = {}
+      objeto = JSON.parse(JSON.stringify(this.productsCart))
+      objeto.map((element) => {
+        // DATOS IMPORTANTES A ENVIAR = ID - CANTIDAD - COMBINACION
+        if (element.id) {
+          delete element.envio_gratis
+          delete element.foto_cloudinary
+          delete element.limitQuantity
+          delete element.nombre
+          delete element.precio
+
+          delete element.activo
+          delete element.stock_disponible
+          delete element.con_variante
+          delete element.foto
+          delete element.informacion_producto
+          delete element.orden
+          delete element.tag
+          delete element.variantes
+        }
+      })
       let json = {
-        products: this.$store.state.productsCart,
+        products: objeto,
         tienda: {
           id: this.$store.state.tienda.id_tienda,
         },
@@ -715,7 +739,19 @@ export default {
       }
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
-        location.href = `https://checkout.komercia.co/?params=${json}`
+        if (this.layourUnicentro == true) {
+          window.open(`https://checkout.komercia.co/?params=${json}`)
+          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+            window.fbq('track', 'InitiateCheckout')
+          }
+          this.$gtm.push({ event: 'InitiateCheckout' })
+        } else {
+          location.href = `https://checkout.komercia.co/?params=${json}`
+          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+            window.fbq('track', 'InitiateCheckout')
+          }
+          this.$gtm.push({ event: 'InitiateCheckout' })
+        }
       }
     },
     filterCities() {

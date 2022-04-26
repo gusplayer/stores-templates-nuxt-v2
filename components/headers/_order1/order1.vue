@@ -892,12 +892,22 @@ export default {
       let objeto = {}
       objeto = JSON.parse(JSON.stringify(this.productsCart))
       objeto.map((element) => {
+        // DATOS IMPORTANTES A ENVIAR = ID - CANTIDAD - COMBINACION
         if (element.id) {
           delete element.envio_gratis
           delete element.foto_cloudinary
           delete element.limitQuantity
           delete element.nombre
           delete element.precio
+
+          delete element.activo
+          delete element.stock_disponible
+          delete element.con_variante
+          delete element.foto
+          delete element.informacion_producto
+          delete element.orden
+          delete element.tag
+          delete element.variantes
         }
       })
       let json = {
