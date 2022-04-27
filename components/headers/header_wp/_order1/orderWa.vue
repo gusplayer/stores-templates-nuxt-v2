@@ -252,6 +252,17 @@
                     </p>
                     <p
                       class="without_shipping_cost"
+                      v-else-if="
+                        rangosByCiudad.envio_metodo === 'sintarifa' &&
+                        shippingCities.length <= 0 &&
+                        getFreeShipping == false &&
+                        FreeShippingCart == false
+                      "
+                    >
+                      {{ $t('footer_enviosPorPagar') }}
+                    </p>
+                    <p
+                      class="without_shipping_cost"
                       v-else-if="FreeShippingCart == true"
                     >
                       {{ $t('footer_tarifaPrecio') }}
@@ -722,6 +733,9 @@ export default {
       if (this.rangosByCiudad.envio_metodo === 'precio') {
         free = true
       }
+      if (this.rangosByCiudad.envio_metodo === 'sintarifa') {
+        free = false
+      }
       return free
     },
     rangosByCiudad() {
@@ -739,6 +753,10 @@ export default {
         if (this.$store.state.envios.estado) {
           let shipping = JSON.parse(this.$store.state.envios.valores)
           switch (shipping.envio_metodo) {
+            case 'sintarifa':
+              return 0
+              // eslint-disable-next-line no-unreachable
+              break
             case 'gratis':
               return 0
             case 'tarifa_plana':
@@ -1012,40 +1030,206 @@ export default {
           this.rangosByCiudades.envio_metodo == 'gratis'
         ) {
           textFreeShippingCart = 'Env%C3%ADo%20gratis'
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'tarifa_plana'
+        ) {
+          textFreeShippingCart = `Costo%20domicilio:%20$${this.rangosByCiudades.valor}`
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'precio_ciudad'
+        ) {
+          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'precio'
+        ) {
+          textFreeShippingCart = `Costo%20domicilio:%20$${this.shippingTarifaPrecio}`
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'sintarifa'
+        ) {
+          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
         } else {
           textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
         }
-        text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
+        text = `Hola%2C%20soy%20${
+          this.nombre
+        }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${
+          this.dataStore.tienda.nombre
+        }:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${textFreeShippingCart}%0ADescuento%3A%20-$${
+          this.discountDescuentos ? this.discountDescuentos : 'No%20aplica'
+        }%0ASubtotal%3A%20$${this.totalCart}%0ATOTAL%3A%20$${
+          this.totalCart +
+          (this.shipping ? this.shipping : 0) +
+          (this.shippingTarifaPrecio &&
+          this.shippingTarifaPrecio != 'empty' &&
+          this.FreeShippingCart == false
+            ? this.shippingTarifaPrecio
+            : 0) -
+          this.discountDescuentos
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${
+          this.nombre
+        }%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${
+          this.barrio
+        }%0ADirección%3A%20${
+          this.dirreccion
+        }%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
       } else if (this.dataStore.tienda.lenguaje == 'en') {
         if (
           this.rangosByCiudades &&
           this.rangosByCiudades.envio_metodo == 'gratis'
         ) {
           textFreeShippingCart = 'Free%20shippings'
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'tarifa_plana'
+        ) {
+          textFreeShippingCart = `Shipping%cost:%20$${this.rangosByCiudades.valor}`
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'precio_ciudad'
+        ) {
+          textFreeShippingCart = 'Shipping%20cost%20separately'
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'precio'
+        ) {
+          textFreeShippingCart = `Shipping%cost:%20$${this.shippingTarifaPrecio}`
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'sintarifa'
+        ) {
+          textFreeShippingCart = 'Shipping%20cost%20separately'
         } else {
           textFreeShippingCart = 'Shipping%20cost%20separately'
         }
-        text = `Hello%2C%20I%20am%20${this.nombre}%2C%0AI%20made%20this%20order%20at%20your%20store%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20information%3A%0AName%3A%20${this.nombre}%0ACity%3A%20${this.ciudad}%0ANeighborhood%3A%20${this.barrio}%0AAddres%3A%20${this.dirreccion}%0A%0back%20to%20the%20storea%3A%20${window.location}?clearCart=true`
+        text = `Hello%2C%20I%20am%20${
+          this.nombre
+        }%2C%0AI%20made%20this%20order%20at%20your%20store%20${
+          this.dataStore.tienda.nombre
+        }:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${textFreeShippingCart}%0ADiscount%3A%20-$${
+          this.discountDescuentos ? this.discountDescuentos : 'Not%20applicable'
+        }%0ASubtotal%3A%20$${this.totalCart}%0ATOTAL%3A%20$${
+          this.totalCart +
+          (this.shipping ? this.shipping : 0) +
+          (this.shippingTarifaPrecio &&
+          this.shippingTarifaPrecio != 'empty' &&
+          this.FreeShippingCart == false
+            ? this.shippingTarifaPrecio
+            : 0) -
+          this.discountDescuentos
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20information%3A%0AName%3A%20${
+          this.nombre
+        }%0ACity%3A%20${this.ciudad}%0ANeighborhood%3A%20${
+          this.barrio
+        }%0AAddres%3A%20${this.dirreccion}%0A%0back%20to%20the%20storea%3A%20${
+          window.location
+        }?clearCart=true`
       } else if (this.dataStore.tienda.lenguaje == 'pt') {
         if (
           this.rangosByCiudades &&
           this.rangosByCiudades.envio_metodo == 'gratis'
         ) {
           textFreeShippingCart = 'Frete%20gr%C3%A1tis'
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'tarifa_plana'
+        ) {
+          textFreeShippingCart = `Custos%20envio:%20$${this.rangosByCiudades.valor}`
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'precio_ciudad'
+        ) {
+          textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'precio'
+        ) {
+          textFreeShippingCart = `Custos%20envio:%20$${this.shippingTarifaPrecio}`
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'sintarifa'
+        ) {
+          textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
         } else {
           textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
         }
-        text = `Olá%2C%20aqui%20é%20${this.nombre}%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20Minhas%20informaçãoes%3A%0ANome%3A%20${this.nombre}%0ACidade%3A%20${this.ciudad}%0ABairro%3A%20${this.barrio}%0AEndereço%3A%20${this.dirreccion}%0A%0Ade%20volta%20%C3%A0%20loja%3A%20${window.location}?clearCart=true`
+        text = `Olá%2C%20aqui%20é%20${
+          this.nombre
+        }%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${
+          this.dataStore.tienda.nombre
+        }:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${textFreeShippingCart}%0ADesconto%3A%20-$${
+          this.discountDescuentos ? this.discountDescuentos : 'Não%20aplicável'
+        }%0ASubtotal%3A%20$${this.totalCart}%0ATOTAL%3A%20$${
+          this.totalCart +
+          (this.shipping ? this.shipping : 0) +
+          (this.shippingTarifaPrecio &&
+          this.shippingTarifaPrecio != 'empty' &&
+          this.FreeShippingCart == false
+            ? this.shippingTarifaPrecio
+            : 0) -
+          this.discountDescuentos
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20Minhas%20informaçãoes%3A%0ANome%3A%20${
+          this.nombre
+        }%0ACidade%3A%20${this.ciudad}%0ABairro%3A%20${
+          this.barrio
+        }%0AEndereço%3A%20${
+          this.dirreccion
+        }%0A%0Ade%20volta%20%C3%A0%20loja%3A%20${
+          window.location
+        }?clearCart=true`
       } else {
         if (
           this.rangosByCiudades &&
           this.rangosByCiudades.envio_metodo == 'gratis'
         ) {
           textFreeShippingCart = 'Env%C3%ADo%20gratis'
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'tarifa_plana'
+        ) {
+          textFreeShippingCart = `Costo%20domicilio:%20$${this.rangosByCiudades.valor}`
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'precio_ciudad'
+        ) {
+          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'precio'
+        ) {
+          textFreeShippingCart = `Costo%20domicilio:%20$${this.shippingTarifaPrecio}`
+        } else if (
+          this.rangosByCiudades &&
+          this.rangosByCiudades.envio_metodo == 'sintarifa'
+        ) {
+          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
         } else {
           textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
         }
-        text = `Hola%2C%20soy%20${this.nombre}%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${this.dataStore.tienda.nombre}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATOTAL%3A%20${this.totalCart}%0A${textFreeShippingCart}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${this.nombre}%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${this.barrio}%0ADirección%3A%20${this.dirreccion}%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
+        text = `Hola%2C%20soy%20${
+          this.nombre
+        }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${
+          this.dataStore.tienda.nombre
+        }:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${textFreeShippingCart}%0ADescuento%3A%20-$${
+          this.discountDescuentos ? this.discountDescuentos : 'No%20aplica'
+        }%0ASubtotal%3A%20$${this.totalCart}%0ATOTAL%3A%20$${
+          this.totalCart +
+          (this.shipping ? this.shipping : 0) +
+          (this.shippingTarifaPrecio &&
+          this.shippingTarifaPrecio != 'empty' &&
+          this.FreeShippingCart == false
+            ? this.shippingTarifaPrecio
+            : 0) -
+          this.discountDescuentos
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${
+          this.nombre
+        }%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${
+          this.barrio
+        }%0ADirección%3A%20${
+          this.dirreccion
+        }%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
       }
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
@@ -1086,20 +1270,58 @@ export default {
             direccion: this.dirreccion,
           }
           const myJSON = JSON.stringify(temp)
+          let resultShipping
+          if (
+            this.rangosByCiudades &&
+            this.rangosByCiudades.envio_metodo == 'gratis'
+          ) {
+            resultShipping = 0
+          } else if (
+            this.rangosByCiudades &&
+            this.rangosByCiudades.envio_metodo == 'tarifa_plana'
+          ) {
+            resultShipping = this.rangosByCiudades.valor
+          } else if (
+            this.rangosByCiudades &&
+            this.rangosByCiudades.envio_metodo == 'precio_ciudad'
+          ) {
+            resultShipping = 0
+          } else if (
+            this.rangosByCiudades &&
+            this.rangosByCiudades.envio_metodo == 'precio'
+          ) {
+            resultShipping = this.shippingTarifaPrecio
+          } else if (
+            this.rangosByCiudades &&
+            this.rangosByCiudades.envio_metodo == 'sintarifa'
+          ) {
+            resultShipping = 0
+          } else {
+            resultShipping = 0
+          }
           const params = {
+            canal: 1,
             usuario: 30866,
+            tipo: 0,
             tienda: this.dataStore.tienda.id_tienda,
-            total: this.totalCart,
+            total:
+              this.totalCart +
+              (this.shipping ? this.shipping : 0) +
+              (this.shippingTarifaPrecio &&
+              this.shippingTarifaPrecio != 'empty' &&
+              this.FreeShippingCart == false
+                ? this.shippingTarifaPrecio
+                : 0) -
+              this.discountDescuentos,
             direccion_entrega: {
               type: 0,
               value: null,
             },
             productos: this.productsCart,
-            metodo_pago: 7,
-            canal: 1,
             comentario: myJSON,
-            costo_envio: 0,
-            tipo: 0,
+            costo_envio: resultShipping,
+            metodo_pago: 7,
+            descuento: this.discountDescuentos ? this.discountDescuentos : 0,
           }
           axios
             .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
