@@ -315,12 +315,20 @@
                 </div>
               </template>
               <template v-else>
-                <div class="order_products_list-empty">
+                <div
+                  class="w-full flex flex-col justify-center items-center"
+                  style="height: calc(100vh - 200px)"
+                >
                   <div class="wrapper_photo">
-                    <img v-lazy="img" class="photo" alt="empty car" />
+                    <img
+                      src="../../../../assets/img/icono cesta.png"
+                      class="photo"
+                      alt="Product img"
+                    />
                   </div>
-                  <p class="text-cart-empty">
-                    {{ $t('footer_carritoVacio') }}
+                  <p class="text-empty">{{ $t('footer_carritoVacio2') }}</p>
+                  <p class="text-empty2">
+                    {{ $t('footer_carritoVacio3') }}
                   </p>
                 </div>
               </template>
@@ -1494,27 +1502,31 @@ export default {
   display: grid;
   overflow-y: auto;
 }
-.order_products_list-empty {
-  height: 380px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-}
 .wrapper_photo {
-  width: 100%;
-  max-width: 200px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-self: center;
+  position: relative;
+  max-width: 600px;
+  max-height: 600px;
 }
 .photo {
-  width: 100%;
-  object-fit: contain;
+  /* width: 120px; */
+  height: 120px;
+  object-fit: cover;
   object-position: center;
+  border-radius: 10px;
 }
-.text-cart-empty {
+.text-empty {
+  color: #222;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.text-empty2 {
+  color: #222;
+  margin-bottom: 15px;
+  font-weight: 400;
+  font-size: 16px;
+  max-width: 300px;
   text-align: center;
 }
 .order_products_list {

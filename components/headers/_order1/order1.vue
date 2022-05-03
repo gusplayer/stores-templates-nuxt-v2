@@ -423,11 +423,18 @@
             </div>
           </template>
           <div class="order--wrapper" v-else>
-            <div class="order_products_list-empty">
+            <div class="w-full flex flex-col justify-center items-center">
               <div class="wrapper_photo">
-                <img v-lazy="img" class="photo" alt="empty car" />
+                <img
+                  src="../../../assets/img/icono cesta.png"
+                  class="photo"
+                  alt="Product img"
+                />
               </div>
-              <p class="text-cart-empty">{{ $t('footer_carritoVacio') }}</p>
+              <p class="text-empty">{{ $t('footer_carritoVacio2') }}</p>
+              <p class="text-empty2">
+                {{ $t('footer_carritoVacio3') }}
+              </p>
             </div>
             <div>
               <nuxt-link class="conten-btn" to="/" @click="closeOrder">
@@ -630,7 +637,7 @@ export default {
   },
   data() {
     return {
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
+      // img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
       shippingCities: [],
       rangosByCiudades: [],
       remove: false,
@@ -1853,17 +1860,29 @@ export default {
 }
 .wrapper_photo {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-self: center;
+  max-width: 600px;
+  max-height: 600px;
 }
 .photo {
-  width: 100%;
+  /* width: 120px; */
+  height: 120px;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
 }
-.text-cart-empty {
+.text-empty {
+  color: #222;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.text-empty2 {
+  color: #222;
+  margin-bottom: 15px;
+  font-weight: 400;
+  font-size: 16px;
+  max-width: 300px;
   text-align: center;
 }
 .fade-enter-active,

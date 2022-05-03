@@ -454,9 +454,16 @@
     </div>
     <div v-else class="contenedor-vacio">
       <div class="wrapper_photo">
-        <img v-lazy="img" class="photo" alt="Product img" />
+        <img
+          src="../../assets/img/icono cesta.png"
+          class="photo"
+          alt="Product img"
+        />
       </div>
-      <p class="text-empty">{{ $t('footer_carritoVacio') }}</p>
+      <p class="text-empty">{{ $t('footer_carritoVacio2') }}</p>
+      <p class="text-empty2">
+        {{ $t('footer_carritoVacio3') }}
+      </p>
       <nuxt-link :to="`${this.redirectCart}`">
         <button ref="colorBtn" class="btn3">
           {{ $t('cart_agregarProductos') }}
@@ -493,7 +500,7 @@ export default {
   },
   data() {
     return {
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
+      // img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
       envioProducto: '',
       layoutLogin: true,
       shippingCities: [],
@@ -1010,8 +1017,8 @@ export default {
 .product-photo {
   object-position: center;
   width: 100%;
-  max-height: 200px;
-  max-width: 200px;
+  /* max-height: 200px; */
+  /* max-width: 200px; */
   object-fit: cover;
   border-radius: 6px;
   @apply shadow-md;
@@ -1141,7 +1148,7 @@ details[open] summary ~ * {
   max-height: 600px;
 }
 .photo {
-  width: 120px;
+  /* width: 120px; */
   height: 120px;
   object-fit: cover;
   object-position: center;
@@ -1175,7 +1182,17 @@ details[open] summary ~ * {
 }
 .text-empty {
   color: #222;
-  margin-top: 10px;
+  margin-top: 15px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.text-empty2 {
+  color: #222;
+  margin-bottom: 15px;
+  font-weight: 400;
+  font-size: 16px;
+  max-width: 400px;
+  text-align: center;
 }
 @screen sm {
   .conten-items-cart {

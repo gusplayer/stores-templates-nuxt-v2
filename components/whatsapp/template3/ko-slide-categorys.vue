@@ -14,13 +14,38 @@
         <div
           class="tags"
           :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
-          v-for="categoria in categories"
+          v-for="categoria in categorias"
           :key="categoria.id"
           @click="sendCategory(categoria, categoria.id, (ref = false))"
         >
           <div>
             <p class="txt-category">
               {{ categoria.nombre_categoria_producto }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="content-categories"
+      v-if="
+        settingByTemplate.state_subcategorias == 1 &&
+        selectedSubcategories.length > 0
+      "
+    >
+      <div class="itens-slide-categories" id="swiper-slide-categories">
+        <div
+          class="tags"
+          :class="
+            subcategorys.id == idSubCategory ? 'active-tag' : 'disable-tag'
+          "
+          v-for="(subcategorys, index) in selectedSubcategories"
+          :key="index"
+          @click="Sendsubcategory(subcategorys.id)"
+        >
+          <div>
+            <p class="txt-category">
+              {{ subcategorys.nombre_subcategoria }}
             </p>
           </div>
         </div>
@@ -33,6 +58,7 @@ export default {
   name: 'CategorySlideWa-3',
   props: {
     dataStore: Object,
+    settingByTemplate: Object,
   },
   data() {
     return {
@@ -43,11 +69,11 @@ export default {
       selectedSubcategories: [],
       toggleCategories: true,
       idCategory: '',
-      indexSelect: '',
+      idSubCategory: '',
     }
   },
   computed: {
-    categories() {
+    categorias() {
       return this.dataStore.categorias
     },
     subcategories() {
@@ -62,7 +88,7 @@ export default {
   },
   methods: {
     Sendsubcategory(value) {
-      this.indexSelect = value
+      this.idSubCategory = value
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
@@ -70,24 +96,25 @@ export default {
       }
       this.$store.commit('SET_STATEBANNER', false)
       this.addClass()
-      this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.id == value
       )
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
-      )
-      this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
-        filtradoCategorias.nombre_categoria_producto
-      )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
-      this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
-        data: value,
-      })
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
+      if (filtradoSubCategoria && filtradoSubCategoria.categoria) {
+        let filtradoCategorias = this.categorias.find(
+          (element) => element.id == filtradoSubCategoria.categoria
+        )
+        this.$store.commit(
+          'SET_CATEGORY_PRODCUTRO',
+          filtradoCategorias.nombre_categoria_producto
+        )
+        this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+        this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+        this.$store.commit('products/FILTER_BY', {
+          type: 'subcategory',
+          data: value,
+        })
+        this.$store.commit('SET_PREVIOUSPAGE', 1)
+      }
     },
     sendCategory(value, categoria, ref) {
       this.idCategory = categoria
@@ -124,6 +151,8 @@ export default {
     },
     clear() {
       this.idCategory = ''
+      this.idSubCategory = ''
+      this.selectedSubcategories = ''
       this.$store.commit('SET_STATEBANNER', true)
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
@@ -137,24 +166,14 @@ export default {
       this.$emit('clear')
       this.addClass()
     },
-    scrollLeft() {
-      document.getElementById('swiper-slide-categories').scrollLeft -= 300
-    },
-    scrollRight() {
-      document.getElementById('swiper-slide-categories').scrollLeft += 300
-    },
   },
 }
 </script>
 <style scoped>
 .content-slide-categorys {
-  top: 0;
-  position: sticky;
   z-index: 10;
-  box-sizing: border-box;
-  @apply w-full flex justify-center items-center bg-white-white py-5;
+  @apply w-full flex flex-col justify-center items-center bg-white-white py-5 box-border sticky top-0;
 }
-
 @screen sm {
   .content-categories {
     border-color: #d6d6d6;

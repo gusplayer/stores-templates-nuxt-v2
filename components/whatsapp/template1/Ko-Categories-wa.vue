@@ -3,7 +3,7 @@
     <div class="content_Category">
       <div
         class="btn-scroll"
-        @click="scrollLeft()"
+        @click="scrollLeft(1)"
         v-if="this.categorias.length > 8"
       >
         <FlechaLeft-icon class="btn-scroll-icon" />
@@ -32,8 +32,46 @@
       </div>
       <div
         class="btn-scroll"
-        @click="scrollRight()"
+        @click="scrollRight(1)"
         v-if="this.categorias.length > 8"
+      >
+        <FlechaRight-icon class="btn-scroll-icon" />
+      </div>
+    </div>
+    <div
+      class="content_Category"
+      v-if="settingByTemplate.state_subcategorias == 1"
+    >
+      <div
+        class="btn-scroll"
+        @click="scrollLeft(2)"
+        v-if="this.selectedSubcategories.length > 8"
+      >
+        <FlechaLeft-icon class="btn-scroll-icon" />
+      </div>
+      <div class="content-item-category" id="swiper-slide-subcategories">
+        <div
+          v-for="(subcategorys, index) in selectedSubcategories"
+          :key="index"
+          class="tags"
+          :class="subcategorys.id == idSubCategory ? 'tags-active-wapi' : ''"
+        >
+          <div @click="Sendsubcategory(subcategorys.id)">
+            <p
+              class="name-category"
+              :class="
+                subcategorys.id == idSubCategory ? 'name-category-active' : ''
+              "
+            >
+              {{ subcategorys.nombre_subcategoria }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="btn-scroll"
+        @click="scrollRight(2)"
+        v-if="this.selectedSubcategories.length > 8"
       >
         <FlechaRight-icon class="btn-scroll-icon" />
       </div>
@@ -59,7 +97,7 @@ export default {
       selectedSubcategories: [],
       toggleCategories: true,
       idCategory: '',
-      indexSelect: '',
+      idSubCategory: '',
     }
   },
   computed: {
@@ -78,7 +116,7 @@ export default {
   },
   methods: {
     Sendsubcategory(value) {
-      this.indexSelect = value
+      this.idSubCategory = value
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
@@ -139,8 +177,10 @@ export default {
       this.add = !this.add
     },
     clear() {
-      this.$store.commit('SET_STATEBANNER', true)
       this.idCategory = ''
+      this.idSubCategory = ''
+      this.selectedSubcategories = ''
+      this.$store.commit('SET_STATEBANNER', true)
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
@@ -153,11 +193,19 @@ export default {
       this.$emit('clear')
       this.addClass()
     },
-    scrollLeft() {
-      document.getElementById('swiper-slide-categories').scrollLeft -= 300
+    scrollLeft(value) {
+      if (value == 1) {
+        document.getElementById('swiper-slide-categories').scrollLeft -= 300
+      } else if (value == 2) {
+        document.getElementById('swiper-slide-subcategories').scrollLeft -= 300
+      }
     },
-    scrollRight() {
-      document.getElementById('swiper-slide-categories').scrollLeft += 300
+    scrollRight(value) {
+      if (value == 1) {
+        document.getElementById('swiper-slide-categories').scrollLeft += 300
+      } else if (value == 2) {
+        document.getElementById('swiper-slide-subcategories').scrollLeft += 300
+      }
     },
   },
   watch: {},
@@ -166,21 +214,12 @@ export default {
 
 <style scoped>
 .wrapper_Category {
-  display: flex;
-  width: 100%;
-  background-color: white;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
   z-index: 3;
+  margin-bottom: 20px;
   margin-top: 16px;
   border-top: 1px solid rgba(213, 213, 213, 0.473);
   border-bottom: 1px solid rgba(213, 213, 213, 0.473);
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-  margin-bottom: 20px;
-  @apply shadow;
+  @apply shadow flex flex-col w-full justify-center items-center box-border sticky top-0 bg-white-white;
 }
 .content_Category {
   width: 100%;

@@ -12,7 +12,6 @@ export default {
         let x = date
         let d1 = new Date()
         let d2 = new Date(x)
-        d2 = d2.addDays(3)
         //Vencido
         if (d1 > d2) {
           return false

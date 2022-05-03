@@ -11,6 +11,10 @@
             <p class="txt-category" v-if="this.nameCategoryHeader">
               {{ this.nameCategoryHeader }}
             </p>
+            <p class="txt-category mx-2" v-if="this.nameSubCategoryHeader">/</p>
+            <p class="txt-category" v-if="this.nameSubCategoryHeader">
+              {{ this.nameSubCategoryHeader }}
+            </p>
           </div>
           <div>
             <search-icon class="icon-s" @click="openSearch" />

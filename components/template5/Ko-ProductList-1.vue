@@ -49,6 +49,19 @@
               ></el-pagination>
             </div>
           </div>
+          <div class="pagination-small">
+            <div class="product_pagination" v-if="products.length > 16">
+              <el-pagination
+                background
+                small
+                layout="prev, pager, next"
+                :total="products.length"
+                :page-size="16"
+                :current-page.sync="currentPage"
+                class="pagination"
+              ></el-pagination>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -587,8 +600,12 @@ export default {
   line-height: 26px;
 }
 .pagination-medium {
-  margin-top: 10px;
+  margin-top: 20px;
   background: transparent;
+  display: initial;
+}
+.pagination-small {
+  display: none;
 }
 .pagination {
   font-size: 18px;
@@ -741,6 +758,14 @@ export default {
   }
   .content-item-productos {
     padding: 5px;
+  }
+  .pagination-medium {
+    display: none;
+  }
+  .pagination-small {
+    margin-top: 20px;
+    background: transparent;
+    display: initial;
   }
 }
 </style>

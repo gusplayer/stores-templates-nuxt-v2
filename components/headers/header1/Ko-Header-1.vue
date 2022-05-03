@@ -950,7 +950,7 @@ input::-webkit-input-placeholder {
     padding: 10px 15px 0;
   }
   .header-logo {
-    max-width: 230px;
+    max-width: 180px;
   }
 }
 </style>
