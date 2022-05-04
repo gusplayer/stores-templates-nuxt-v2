@@ -57,6 +57,10 @@ export default {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
+    if (this.$route.query && this.$route.query.openCart == 'true') {
+      console.log('si')
+      this.$store.commit('SET_OPENORDER', true)
+    }
     if (
       this.analytics_tagmanager &&
       this.analytics_tagmanager.pixel_facebook != null

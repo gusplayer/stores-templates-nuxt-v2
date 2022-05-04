@@ -1611,26 +1611,25 @@ export default {
   color: #2c2930;
 }
 .content-remove-cart {
+  margin-top: 10px;
   max-width: 350px;
   padding: 8px 10px;
-  background: #2c2930;
   transition: all ease 0.3s;
-  border-radius: var(--radius_btn);
-  margin-bottom: 6px;
 }
 .content-remove-cart p {
-  color: white;
+  color: #2c2930;
   font-weight: 300;
   font-size: 14px;
+  text-decoration: underline #2c2930;
 }
 .header-icon-cart {
   font-size: 14px;
   margin-right: 5px;
-  color: white;
+  color: #2c2930;
   bottom: 0.125em;
 }
-.content-remove-cart:hover {
-  background: rgb(223, 62, 62);
+.content-remove-cart p:hover {
+  color: rgb(223, 62, 62);
 }
 .wrapper-items-remove {
   position: absolute;
@@ -1838,7 +1837,7 @@ export default {
 .continue_shopping2 {
   margin-top: 10px;
   font-weight: bold;
-  justify-self: center;
+  text-align: center;
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;

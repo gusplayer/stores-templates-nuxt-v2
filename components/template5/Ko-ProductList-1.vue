@@ -281,8 +281,25 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
+    Searchproduct(search) {
+      if (search.length) {
+        this.$store.commit('products/FILTER_BY', {
+          type: 'search',
+          data: search,
+        })
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: 'all',
+          data: '',
+        })
+      }
+      this.currentPage = 1
+    },
   },
   watch: {
+    searchValue(value) {
+      this.Searchproduct(value)
+    },
     fullProducts(value) {
       this.products = value
       let maxTMP = 0
@@ -313,6 +330,7 @@ export default {
     nameSubCategoryHeader(value) {
       return value
     },
+
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       if (this.$route.query && this.$route.query.category) {

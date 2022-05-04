@@ -98,6 +98,9 @@ export default {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
+    if (this.$route.query && this.$route.query.openCart == 'true') {
+      this.$store.commit('SET_OPENORDER', true)
+    }
     if (this.$nuxt.$data.layoutName == 'unicentro') {
       this.$store.commit('SET_LAYOUTUNICENTRO', true)
     }
