@@ -3,7 +3,7 @@
     class="home"
     :style="
       this.settingByTemplate.settings &&
-      this.settingByTemplate.settings['--background_color_1']
+      this.settingByTemplate.settings.tipo_letra
         ? this.settingByTemplate.settings
         : this.settingBase
     "

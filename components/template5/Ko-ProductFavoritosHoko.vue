@@ -37,7 +37,7 @@ export default {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-top: 20px;
+  padding: 40px 0px;
 }
 .swiper-container {
   width: 100%;

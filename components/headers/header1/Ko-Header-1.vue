@@ -68,7 +68,7 @@
               </div>
             </div>
           </div>
-          <div class="search" v-if="showSearch">
+          <div class="search" v-if="showSearch && product.length > 0">
             <form id="demo-2" style="position: relative">
               <search-icon class="icon-s" @click="focusInput" />
               <input
@@ -80,7 +80,7 @@
               />
             </form>
           </div>
-          <div class="search_res">
+          <div class="search_res" v-if="product.length > 0">
             <div
               class="header-content-cart"
               @click="openSearch"
@@ -89,7 +89,7 @@
               <search-icon class="header-icon-cart" />
             </div>
           </div>
-          <div class="header-content-icon">
+          <div class="header-content-icon" v-if="product.length > 0">
             <div
               class="header-content-cart"
               @click="openOrder"

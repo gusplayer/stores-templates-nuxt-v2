@@ -123,7 +123,7 @@ export default {
   left: 0;
   border-radius: 25px;
   padding: 0px 22px;
-  background: black;
+  background: var(--color_text);
   cursor: pointer;
 }
 .btnNext {
@@ -132,7 +132,7 @@ export default {
   right: 0;
   border-radius: 25px;
   padding: 0px 22px;
-  background: black;
+  background: var(--color_text);
   cursor: pointer;
 }
 .btn-icon {

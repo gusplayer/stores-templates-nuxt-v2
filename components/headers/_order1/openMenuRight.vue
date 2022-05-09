@@ -18,55 +18,104 @@
             <close-icon />
           </label>
         </div>
-        <template>
-          <div class="wrapper-category-all">
-            <li @click="clear">
-              <p class="name-category-all">{{ $t('header_allProduct') }}</p>
-            </li>
-            <div v-for="categoria in categorias" :key="categoria.id">
-              <BaseAccordian>
-                <template v-slot:categorias>
-                  <li
-                    class="text-categoria"
-                    @click="
-                      sendCategory(categoria, categoria.id, (ref = false))
-                    "
-                    :class="
-                      categoria.id == indexSelect ? 'text-categoria-active' : ''
-                    "
-                  >
-                    {{ categoria.nombre_categoria_producto }}
-                  </li>
-                </template>
-                <template v-slot:subcategorias
-                  ><template>
-                    <li
-                      class="close text-subcategoria-all"
-                      v-if="selectedSubcategories.length > 0"
-                      @click="closed()"
-                    >
-                      Ver todo
-                    </li>
-                    <div v-for="(subcategory, key) in subcategories" :key="key">
+        <div class="content-lateral-menu">
+          <div class="content-btns-lateral-menu">
+            <button
+              id="btnfocus"
+              class="btn-lateral-menu-left"
+              @click="selectTag1"
+              :class="selecttag == 1 ? 'show-select-active' : ''"
+            >
+              {{ $t('header_inicio') }}
+            </button>
+            <button
+              class="btn-lateral-menu-right"
+              @click="selectTag2"
+              :class="selecttag == 2 ? 'show-select-active' : ''"
+              v-if="categorias && categorias.length > 0"
+            >
+              {{ $t('header_categorias') }}
+            </button>
+          </div>
+          <div class="conten-Menu" v-if="!focusbtn">
+            <div class="header-content-buttons">
+              <div
+                v-for="(item, index) in secciones"
+                :key="`${index}${item.name}`"
+                @click="closed"
+              >
+                <nuxt-link
+                  :to="item.path"
+                  v-if="item.path && item.state"
+                  class="btn"
+                  >{{ $t(`${item.name}`) }}
+                </nuxt-link>
+                <nuxt-link
+                  :to="item.href"
+                  v-else-if="item.href && listArticulos > 0 && item.state"
+                  class="btn"
+                  >{{ $t(`${item.name}`) }}</nuxt-link
+                >
+              </div>
+            </div>
+          </div>
+          <div class="content-Categorys" v-if="focusbtn">
+            <template>
+              <div class="wrapper-category-all">
+                <li @click="clear">
+                  <p class="name-category-all">{{ $t('header_allProduct') }}</p>
+                </li>
+                <div v-for="categoria in categorias" :key="categoria.id">
+                  <BaseAccordian>
+                    <template v-slot:categorias>
                       <li
-                        v-if="subcategory.categoria == categoria.id"
-                        @click="Sendsubcategory(subcategory.id)"
-                        class="close text-subcategoria"
+                        class="text-categoria"
+                        @click="
+                          sendCategory(categoria, categoria.id, (ref = false))
+                        "
                         :class="
-                          subcategory.id == indexSelect2
-                            ? 'text-subcategoria-active'
+                          categoria.id == indexSelect
+                            ? 'text-categoria-active'
                             : ''
                         "
                       >
-                        {{ subcategory.nombre_subcategoria }}
+                        {{ categoria.nombre_categoria_producto }}
                       </li>
-                    </div>
-                  </template></template
-                >
-              </BaseAccordian>
-            </div>
+                    </template>
+                    <template v-slot:subcategorias
+                      ><template>
+                        <li
+                          class="close text-subcategoria-all"
+                          v-if="selectedSubcategories.length > 0"
+                          @click="closed()"
+                        >
+                          Ver todo
+                        </li>
+                        <div
+                          v-for="(subcategory, key) in subcategories"
+                          :key="key"
+                        >
+                          <li
+                            v-if="subcategory.categoria == categoria.id"
+                            @click="Sendsubcategory(subcategory.id)"
+                            class="close text-subcategoria"
+                            :class="
+                              subcategory.id == indexSelect2
+                                ? 'text-subcategoria-active'
+                                : ''
+                            "
+                          >
+                            {{ subcategory.nombre_subcategoria }}
+                          </li>
+                        </div>
+                      </template></template
+                    >
+                  </BaseAccordian>
+                </div>
+              </div>
+            </template>
           </div>
-        </template>
+        </div>
       </div>
     </div>
   </transition>
@@ -82,8 +131,19 @@ export default {
   components: {
     BaseAccordian,
   },
+  mounted() {
+    this.setHoko()
+    if (this.dataStore && this.dataStore.productos.length > 0) {
+      this.secciones[1].state = true
+    } else {
+      this.secciones[1].state = false
+    }
+  },
   data() {
     return {
+      selecttag: 1,
+      activeNames: [],
+      focusbtn: false,
       add: true,
       selectSubcategory: '',
       nameCategory: '',
@@ -93,6 +153,42 @@ export default {
       indexSelect: '',
       indexSelect2: '',
       getSubcategory: false,
+      secciones: [
+        {
+          name: 'header_inicio',
+          path: '/',
+          state: true,
+          //icon: 'menu-icon',
+        },
+        {
+          name: 'header_productos',
+          path: '/productos',
+          state: true,
+        },
+        {
+          name: 'header_productos_hoko',
+          path: '/productosHoko',
+          state: false,
+        },
+        {
+          name: 'header_contacto',
+          path: '/contacto',
+          state: true,
+          //icon: 'account-icon',
+        },
+        {
+          name: 'header_blog',
+          href: '/blog',
+          state: true,
+          //icon: 'account-icon',
+        },
+        {
+          name: 'header_carrito',
+          path: '/cart',
+          state: true,
+          //icon: 'cart-icon',
+        },
+      ],
     }
   },
   computed: {
@@ -108,8 +204,29 @@ export default {
     subcategories() {
       return this.dataStore.subcategorias
     },
+    listArticulos() {
+      return this.$store.state.listArticulos.length
+    },
+    dataHoko() {
+      return this.$store.state.dataHoko
+    },
   },
   methods: {
+    setHoko() {
+      if (this.dataHoko && this.dataHoko.statehoko == 1) {
+        this.secciones[2].state = true
+      } else {
+        this.secciones[2].state = false
+      }
+    },
+    selectTag1() {
+      this.selecttag = 1
+      this.focusbtn = false
+    },
+    selectTag2() {
+      this.selecttag = 2
+      this.focusbtn = true
+    },
     closed() {
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
     },
@@ -199,7 +316,11 @@ export default {
       this.nameCategory = ''
     },
   },
-  watch: {},
+  watch: {
+    dataHoko() {
+      this.setHoko()
+    },
+  },
 }
 </script>
 
@@ -283,9 +404,9 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100%;
-    overflow-x: auto;
-    padding: 10px 25px;
-    margin-top: 10px;
+    overflow-x: hidden;
+    /* padding: 10px 25px; */
+    /* margin-top: 10px; */
   }
   .name-category-all {
     font-weight: bold;
@@ -319,6 +440,73 @@ export default {
   }
   .text-subcategoria-active {
     color: var(--color_hover_text);
+  }
+  .content-lateral-menu {
+    @apply w-full flex flex-col justify-center items-center;
+  }
+  .content-btns-lateral-menu {
+    @apply w-full flex flex-row justify-start items-center;
+  }
+  .btn-lateral-menu-right:focus .conten-Menu {
+    @apply hidden;
+  }
+  .btn-lateral-menu-left {
+    padding: 18px 15px;
+    max-width: 50%;
+    width: 50%;
+    color: var(--color_text);
+    text-align: center;
+    letter-spacing: 0px;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    border-bottom: 3px solid var(--color_text);
+  }
+  .btn-lateral-menu-right {
+    padding: 18px 15px;
+    max-width: 50%;
+    width: 50%;
+    color: var(--color_text);
+    text-align: center;
+    letter-spacing: 0px;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    border-bottom: 3px solid var(--color_text);
+  }
+  .show-select-active {
+    background-color: var(--color_icon);
+    color: #fff;
+  }
+  .conten-Menu,
+  .content-Categorys {
+    margin-top: 20px;
+    @apply w-9/0 flex flex-col justify-start items-center;
+  }
+  .content-Categorys {
+    max-height: 670px;
+    overflow-y: scroll;
+  }
+  .collapse-category {
+    @apply w-full;
+  }
+  .header-content-buttons {
+    @apply w-full grid grid-cols-1 justify-start items-center;
+  }
+  .btn {
+    @apply w-full flex font-semibold tracking-wider py-2 pl-3;
+    color: var(--color_text);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0px;
+    /* border-bottom: 1px solid #2c2930; */
+  }
+  .btn:hover {
+    border-bottom: 2px solid var(--color_icon);
   }
 }
 </style>

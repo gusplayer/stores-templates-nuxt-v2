@@ -30,7 +30,11 @@ export default ({ store }) => {
       'script',
       'https://connect.facebook.net/en_US/fbevents.js'
     )
+    fbq('set', 'autoConfig', false, pixel_facebook)
+    //Insert Your Facebook Pixel ID below.
     fbq('init', pixel_facebook)
+    // fbq('track', 'PageView')
+    // fbq('init', pixel_facebook)
     // eslint-disable-next-line no-unused-vars
     // app.router.afterEach((to, from) => {
     //   fbq('track', 'PageView', {

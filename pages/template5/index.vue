@@ -28,6 +28,7 @@
       :dataStore="dataStore"
       :fullProducts="fullProducts"
       id="KProductX"
+      v-if="this.fullProducts.length > 0"
     />
     <kBannerFooter id="KFooterX" />
     <KNewsletter :dataStore="dataStore" />

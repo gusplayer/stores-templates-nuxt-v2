@@ -75,7 +75,7 @@ export default {
         settingK05Blog:
           this.settingByTemplate &&
           this.settingByTemplate.settings &&
-          this.settingByTemplate.settings['--background_color_1']
+          this.settingByTemplate.settings.tipo_letra
             ? this.settingByTemplate.settings
             : this.settingBase,
         settingByTemplate11: this.settingByTemplate11
