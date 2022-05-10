@@ -1,11 +1,28 @@
 <template>
-  <div class="wrapper-ProductFavoritos" v-if="category.length">
+  <div
+    class="wrapper-ProductFavoritos"
+    v-if="category.length"
+    :style="[
+      settingGeneral,
+      cardProduct,
+      {
+        '--font-style-1':
+          settingGeneral && settingGeneral.fount_1
+            ? settingGeneral.fount_1
+            : 'Roboto',
+      },
+    ]"
+  >
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">
         {{ $t('home_destacadosMsg') }}
       </p>
     </div>
-    <KoSwipper :products="category"></KoSwipper>
+    <KoSwipper
+      :products="category"
+      :settingGeneral="settingGeneral"
+      :cardProduct="cardProduct"
+    ></KoSwipper>
   </div>
 </template>
 
@@ -15,6 +32,8 @@ export default {
   name: 'suggestionsProducto',
   props: {
     category: {},
+    settingGeneral: Object,
+    cardProduct: Object,
   },
   components: {
     KoSwipper,

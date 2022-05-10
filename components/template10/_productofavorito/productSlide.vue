@@ -11,6 +11,7 @@
           <KoProductCard1
             :product="product"
             :cardProduct="cardProduct"
+            :settingGeneral="settingGeneral"
           ></KoProductCard1>
         </client-only>
       </div>
@@ -40,6 +41,7 @@ export default {
   props: {
     products: {},
     cardProduct: Object,
+    settingGeneral: Object,
   },
   data() {
     return {

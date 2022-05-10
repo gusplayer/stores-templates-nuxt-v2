@@ -35,7 +35,7 @@
         </div>
         <div
           class="wrapper-img-text"
-          v-for="categoria in categories"
+          v-for="categoria in categorias"
           :key="categoria.id"
           @click="sendCategory(categoria, categoria.id, (ref = false))"
         >
@@ -71,6 +71,54 @@
         </div>
       </div>
     </div>
+    <div
+      class="content-categories"
+      v-if="
+        settingByTemplate.state_subcategorias == 1 &&
+        selectedSubcategories.length > 0
+      "
+    >
+      <div class="itens-slide-categories">
+        <div
+          class="wrapper-img-text"
+          v-for="(subcategorys, index) in selectedSubcategories"
+          :key="index"
+          @click="Sendsubcategory(subcategorys.id)"
+        >
+          <img
+            v-lazy="
+              subcategorys.imagen_cloudinary == null
+                ? 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649367838/2659360_s1ap5f.png'
+                : idCloudinary(subcategorys.imagen_cloudinary, 80, 80)
+            "
+            :class="
+              subcategorys.imagen_cloudinary == 'sin_foto.jpeg'
+                ? 'notproduct-image-res'
+                : ''
+            "
+            class="product-image"
+            alt="icon category"
+          />
+          <div class="tag">
+            <p
+              :style="`border-color: ${
+                settingByTemplate &&
+                settingByTemplate.color_primario &&
+                subcategorys.id == idSubCategory
+                  ? settingByTemplate.color_primario
+                  : '#25D366'
+              };`"
+              class="txt-category"
+              :class="
+                subcategorys.id == idSubCategory ? 'active-tag' : 'disable-tag'
+              "
+            >
+              {{ subcategorys.nombre_subcategoria }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -91,11 +139,11 @@ export default {
       selectedSubcategories: [],
       toggleCategories: true,
       idCategory: '',
-      indexSelect: '',
+      idSubCategory: '',
     }
   },
   computed: {
-    categories() {
+    categorias() {
       return this.dataStore.categorias
     },
     subcategories() {
@@ -110,7 +158,7 @@ export default {
   },
   methods: {
     Sendsubcategory(value) {
-      this.indexSelect = value
+      this.idSubCategory = value
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
@@ -172,6 +220,8 @@ export default {
     },
     clear() {
       this.idCategory = ''
+      this.idSubCategory = ''
+      this.selectedSubcategories = ''
       this.$store.commit('SET_STATEBANNER', true)
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
@@ -190,36 +240,32 @@ export default {
 </script>
 <style scoped>
 .content-slide-categorys {
-  top: 0;
-  position: sticky;
   z-index: 10;
-  box-sizing: border-box;
-  @apply w-full flex justify-center items-center bg-white-white py-5;
+  @apply w-full flex flex-col justify-center items-center box-border sticky top-0 bg-white-white;
 }
 .notproduct-image-res {
   height: 100%;
-  max-height: 80px;
-  max-width: 80px;
+  max-height: 70px;
+  max-width: 70px;
   width: 100%;
 }
 .product-image {
   width: 100%;
-  min-width: 80px;
-  max-width: 80px;
-  height: 80px;
-  min-height: 80px;
-  max-height: 80px;
+  min-width: 70px;
+  max-width: 70px;
+  height: 70px;
+  min-height: 70px;
+  max-height: 70px;
   object-fit: cover;
   overflow: hidden;
 }
 .wrapper-img-text {
-  width: 100%;
-  height: 129px;
-  max-height: 129px;
+  /* width: 100%; */
+  height: 105px;
+  max-height: 105px;
   transition: all 600ms ease-in;
   white-space: nowrap;
-
-  @apply flex flex-col items-center justify-center cursor-pointer mr-10;
+  @apply flex flex-col items-center justify-start cursor-pointer mr-15;
 }
 @screen sm {
   .content-categories {
@@ -259,6 +305,23 @@ export default {
   .active-tag {
     /* background-color: #eaeaea; */
     /* @apply py-10; */
+  }
+}
+@media (max-width: 420px) {
+  .notproduct-image-res {
+    max-height: 50px;
+    max-width: 50px;
+  }
+  .product-image {
+    min-width: 50px;
+    max-width: 50px;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+  }
+  .wrapper-img-text {
+    height: 85px;
+    max-height: 85px;
   }
 }
 </style>

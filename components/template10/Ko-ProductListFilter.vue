@@ -405,7 +405,7 @@ export default {
       indexSelect2: '',
       indexshowList: 3,
       indexshowView: 3,
-      numVistas: 16,
+      numVistas: 15,
       pruebasss: [],
     }
   },
@@ -425,8 +425,8 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 15 - 15
+      const final = initial + 15
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
@@ -435,8 +435,8 @@ export default {
       return this.$store.state.listArticulos.length
     },
     filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 15 - 15
+      const final = initial + 15
       return this.products.slice(initial, final)
     },
     selectedCategory() {
@@ -797,6 +797,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .input-slide {
+  font-family: var(--font-style-1) !important;
   @apply w-full h-30 cursor-pointer border-none;
   /* border-bottom: 2px solid #2c2930; */
 }
@@ -1036,7 +1037,7 @@ export default {
 }
 .content-products {
   border-bottom: 0.5px solid var(--border);
-  @apply w-full flex flex-col justify-center items-center;
+  @apply w-full h-full flex flex-col justify-center items-center;
 }
 .content-products-empty {
   min-height: 200px;
@@ -1140,7 +1141,7 @@ export default {
   transition: max-height 0.4s ease-out;
 }
 .product-list {
-  @apply w-full;
+  @apply w-full h-full;
 }
 .product-list:hover {
   @apply shadow-lg;
@@ -1187,6 +1188,7 @@ export default {
     @apply w-full flex flex-col justify-start items-start;
   }
   .txt-content-home {
+    font-family: var(--font-style-1) !important;
     color: var(--color_text);
     font-size: 16px;
     line-height: 1.1;

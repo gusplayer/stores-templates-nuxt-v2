@@ -39,7 +39,7 @@
           <button class="header-item-menu" @click="openMenulateral">
             <menu-icon class="header-icon-menu" />
           </button>
-          <div class="flex flex-row justify-between">
+          <div class="flex flex-row justify-between w-full">
             <div class="flex flex-row mr-20">
               <div
                 class="btn-scroll"

@@ -69,7 +69,13 @@
             </div>
             <div class="container-opt">
               <div class="footer-socialNetworks">
-                <KoSocialNet :dataStore="dataStore"></KoSocialNet>
+                <KoSocialNet
+                  :dataStore="dataStore"
+                  :setting10Footer="this.settingByTemplate10[0].setting10Footer"
+                  :setting10General="
+                    this.settingByTemplate10[0].setting10General
+                  "
+                />
               </div>
               <div class="footer-content-button">
                 <div
@@ -100,7 +106,8 @@
           <div class="panel">
             <KoSocialNet
               :dataStore="dataStore"
-              :settingByTemplate10="this.settingByTemplate10"
+              :setting10Footer="this.settingByTemplate10[0].setting10Footer"
+              :setting10General="this.settingByTemplate10[0].setting10General"
             />
           </div>
           <button class="accordion">Enlaces</button>

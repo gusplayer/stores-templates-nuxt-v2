@@ -575,15 +575,11 @@ export default {
 
 <style scoped>
 .product-image {
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
+  @apply w-full object-cover overflow-hidden;
 }
 .product-image-soldOut {
   filter: grayscale(100%);
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
+  @apply w-full object-cover overflow-hidden;
 }
 .producto {
   background: var(--background_color_1);

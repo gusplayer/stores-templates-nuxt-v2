@@ -2,14 +2,12 @@
   <div
     class="content-SocialNet"
     :style="[
-      this.settingByTemplate10 ? settingByTemplate10[0].setting10Footer : null,
-      this.settingByTemplate10 ? settingByTemplate10[0].setting10General : null,
+      setting10Footer,
+      setting10General,
       {
         '--font-style-1':
-          this.settingByTemplate10 &&
-          this.settingByTemplate10[0].setting10General &&
-          this.settingByTemplate10[0].setting10General.fount_1
-            ? this.settingByTemplate10[0].setting10General.fount_1
+          setting10General && setting10General.fount_1
+            ? setting10General.fount_1
             : 'Roboto',
       },
     ]"
@@ -41,7 +39,6 @@
               r="56.098"
               cx="56.098"
               cy="56.098"
-              fill="#2c2930"
               shape="circle"
               transform="matrix(0.8,0,0,0.8,11.219599914550777,11.219599914550777)"
             />
@@ -54,7 +51,6 @@
                   cx="56.098"
                   cy="56.098"
                   r="56.098"
-                  fill="#2c2930"
                   data-original="#3b5998"
                   class="circle-facebook"
                 />
@@ -112,7 +108,6 @@
               r="56.0985"
               cx="56.0985"
               cy="56.0985"
-              fill="#2c2930"
               shape="circle"
               transform="matrix(0.8,0,0,0.8,11.21969985961914,11.21969985961914)"
             />
@@ -125,7 +120,6 @@
                   cx="56.099"
                   cy="56.098"
                   r="56.098"
-                  fill="#2c2930"
                   data-original="#55acee"
                   class="circle-twitter"
                 />
@@ -188,7 +182,7 @@
                 r="256"
                 cx="256"
                 cy="256"
-                fill="#2c2930"
+                :fill="`${this.setting10Footer['--color_icon']}`"
                 shape="circle"
                 transform="matrix(0.8,0,0,0.8,51.19999999999999,51.19999999999999)"
               />
@@ -200,7 +194,7 @@
                 cx="256"
                 cy="256"
                 fill="url(#a)"
-                data-original="#2c2930"
+                :data-original="`${this.setting10Footer['--color_icon']}`"
                 shape="circle"
                 transform="matrix(0.8,0,0,0.8,51.19999999999999,51.19999999999999)"
               />
@@ -233,7 +227,11 @@
                 y1="-21110"
                 y2="-21110"
               >
-                <stop stop-opacity="1" stop-color="#2c2930" offset="1" />
+                <stop
+                  stop-opacity="1"
+                  :stop-color="`${this.setting10Footer['--color_icon']}`"
+                  offset="1"
+                />
                 <stop stop-opacity="1" stop-color="#009eff" offset="1" />
               </linearGradient>
               <linearGradient
@@ -247,7 +245,11 @@
                 y1="-21110"
                 y2="-21110"
               >
-                <stop stop-opacity="1" stop-color="#2c2930" offset="0" />
+                <stop
+                  stop-opacity="1"
+                  :stop-color="`${this.setting10Footer['--color_icon']}`"
+                  offset="0"
+                />
                 <stop stop-opacity="1" stop-color="#ea00f3" offset="1" />
               </linearGradient>
 
@@ -314,7 +316,6 @@
               r="236.9655"
               cx="236.9655"
               cy="236.9655"
-              fill="#2c2930"
               shape="circle"
               transform="matrix(0.8,0,0,0.8,47.393099975585926,47.393099975585926)"
             />
@@ -327,7 +328,6 @@
                 cx="236.966"
                 cy="236.966"
                 r="236.966"
-                fill="#2c2930"
                 data-original="#d42428"
                 class="circle-youtube"
               />
@@ -335,7 +335,6 @@
                 xmlns="http://www.w3.org/2000/svg"
                 style=""
                 d="M404.518,69.38c92.541,92.549,92.549,242.593,0,335.142c-92.541,92.541-242.593,92.545-335.142,0  L404.518,69.38z"
-                fill="#2c2930"
                 data-original="#cc202d"
                 class="circle-youtube"
               />
@@ -343,7 +342,6 @@
                 xmlns="http://www.w3.org/2000/svg"
                 style=""
                 d="M469.168,284.426L351.886,167.148l-138.322,15.749l-83.669,129.532l156.342,156.338  C378.157,449.322,450.422,376.612,469.168,284.426z"
-                fill="#2c2930"
                 data-original="#ba202e"
                 class="circle-youtube"
               />
@@ -383,7 +381,8 @@ export default {
   name: 'Ko-Social-Networks',
   props: {
     dataStore: Object,
-    settingByTemplate10: Array,
+    setting10Footer: Object,
+    setting10General: Object,
   },
 
   data() {
@@ -428,6 +427,13 @@ export default {
 .youtube-icon-circle {
   transition: all 200ms ease-in;
 }
+
+.circle-facebook,
+.circle-twitter,
+.circle-youtube {
+  fill: var(--color_icon);
+}
+
 .twitter-icon:hover .circle-twitter {
   transition: all 200ms ease-in;
   fill: #00acee;

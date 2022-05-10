@@ -4,6 +4,13 @@
     :style="[
       settingByTemplate10[0].detailsProduct,
       settingByTemplate10[0].setting10General,
+      {
+        '--font-style-1':
+          this.settingByTemplate10[0].setting10General &&
+          this.settingByTemplate10[0].setting10General.fount_1
+            ? this.settingByTemplate10[0].setting10General.fount_1
+            : 'Roboto',
+      },
     ]"
   >
     <div class="container-productDetail-loading" v-if="loading"></div>
@@ -275,6 +282,7 @@
         <KoSuggesProduct
           :category="this.category.slice(0, 8)"
           :cardProduct="settingByTemplate10[0].cardProduct"
+          :settingGeneral="settingByTemplate10[0].setting10General"
         />
       </div>
       <!-- Metas -->
