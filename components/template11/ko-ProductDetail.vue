@@ -177,6 +177,10 @@
               <p class="stock-text-1">{{ $t('productdetail_stock') }}:</p>
               <p class="stock-text-2">{{ salesData.unidades }}</p>
             </div>
+            <div class="content-stock" v-if="data.info.descripcion_corta">
+              <p class="stock-text-1">{{ $t('productdetail_informacion') }}:</p>
+              <p class="stock-text-2">{{ data.info.descripcion_corta }}</p>
+            </div>
             <div class="empty"></div>
             <div
               class="content-variant"
@@ -1089,7 +1093,7 @@ export default {
   }
   .content-name,
   .content-price {
-    @apply mb-30;
+    @apply mb-20;
   }
   .content-options {
     @apply flex;
@@ -1197,13 +1201,13 @@ export default {
     @apply w-full h-1;
   }
   .content-stock {
-    @apply w-full flex flex-row justify-start items-center my-26;
+    @apply w-full flex flex-row justify-start items-center my-8;
   }
   .stock-text-1 {
     color: var(--color_subtext);
-    font-size: 15px;
+    font-size: 16px;
     font-family: var(--font-style-1) !important;
-    @apply font-normal text-left capitalize mr-20;
+    @apply font-semibold mr-10;
   }
   .stock-text-2 {
     color: var(--color_subtext);

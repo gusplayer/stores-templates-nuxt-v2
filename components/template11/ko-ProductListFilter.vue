@@ -270,19 +270,6 @@ export default {
         }
       })
     }
-    var acc = document.getElementsByClassName('accordion')
-    var i
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function () {
-        this.classList.toggle('active')
-        var panel = this.nextElementSibling
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 'px'
-        }
-      })
-    }
     if (this.$route.query && this.$route.query.category) {
       this.sendCategoryUrl(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
@@ -301,6 +288,19 @@ export default {
       this.$store.commit('SET_STATEBANNER', false)
     } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
       this.$store.commit('SET_STATEBANNER', false)
+    }
+    var acc = document.getElementsByClassName('accordion')
+    var i
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function () {
+        this.classList.toggle('active')
+        var panel = this.nextElementSibling
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 'px'
+        }
+      })
     }
   },
   data() {
@@ -703,6 +703,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .input-slide {
+  font-family: var(--font-style-1) !important;
   @apply w-full h-30 cursor-pointer border-none;
   /* border-bottom: 2px solid #2c2930; */
 }
@@ -1087,6 +1088,7 @@ export default {
     @apply w-full flex flex-col justify-start items-start;
   }
   .txt-content-home {
+    font-family: var(--font-style-1) !important;
     color: var(--color_text);
     font-size: 16px;
     line-height: 1.1;

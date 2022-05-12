@@ -182,10 +182,19 @@
             </div>
             <div class="content-direction-btns">
               <div
+                class="flex flex-col items-start"
+                v-if="data.info.descripcion_corta"
+              >
+                <div class="txt-tittle-quantity">
+                  {{ $t('productdetail_informacion') }}
+                </div>
+                <p class="txt-quantity">{{ data.info.descripcion_corta }}</p>
+              </div>
+              <div
                 class="content-quantity-boxes"
                 :class="{ disabled: !salesData.estado }"
               >
-                <div class="txt-tittle-quantity">Cantidad</div>
+                <div class="txt-tittle-quantity">Cantidad:</div>
                 <div class="box-quantity">
                   <p class="txt-quantity">{{ quantityValue }}</p>
                 </div>
@@ -921,10 +930,10 @@ export default {
   @apply w-full flex justify-start items-center my-30;
 }
 .txt-tittle-quantity {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--color_subtext);
   min-width: 70px;
-  @apply w-auto font-semibold uppercase mr-10;
+  @apply w-auto font-bold mr-10;
 }
 .box-quantity {
   color: var(--color_subtext);

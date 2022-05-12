@@ -69,6 +69,7 @@ export default {
     koTiendaError,
   },
   mounted() {
+    this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_SHOPPING_CART')
     if (this.$route.query && this.$route.query.clearCart == 'true') {
       this.$store.commit('DELETEALLITEMSCART')

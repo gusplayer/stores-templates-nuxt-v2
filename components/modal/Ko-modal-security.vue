@@ -149,6 +149,7 @@ export default {
       if (this.dataStore.modal && this.dataStore.modal.password) {
         if (this.dataStore.modal.password == this.pwd) {
           this.$store.commit('SET_STATE_MODAL_PWD', true)
+          this.setCookies(this.dataStore.modal.password)
         } else {
           this.stateMgs = true
         }
@@ -161,6 +162,9 @@ export default {
       } else {
         password.setAttribute('type', 'password')
       }
+    },
+    setCookies(value) {
+      document.cookie = `authPwd = ${value}; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;`
     },
   },
 }

@@ -116,6 +116,13 @@
                 {{ $t('productdetail_stock') }}
               </p>
             </div>
+            <div
+              class="flex flex-col mb-10 items-start"
+              v-if="data.info.descripcion_corta"
+            >
+              <p class="text-variant">{{ $t('productdetail_informacion') }}</p>
+              <p class="text-option2">{{ data.info.descripcion_corta }}</p>
+            </div>
             <!-- Variantes de prodcuto -->
             <div
               class="content-variant"
@@ -1227,6 +1234,14 @@ export default {
     color: #303030;
     font-size: 16px;
     font-weight: 700;
+    transition: all 0.6s ease-in-out;
+  }
+  .text-option2 {
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
+    font-family: var(--font-style-2);
+    color: #303030;
+    font-size: 15px;
+    font-weight: 500;
     transition: all 0.6s ease-in-out;
   }
   /* ------------------- DOWN ----------------------- */

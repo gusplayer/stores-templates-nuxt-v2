@@ -342,19 +342,6 @@ export default {
         }
       })
     }
-    var acc = document.getElementsByClassName('accordion')
-    var i
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function () {
-        this.classList.toggle('active')
-        var panel = this.nextElementSibling
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 'px'
-        }
-      })
-    }
     if (this.$route.query && this.$route.query.category) {
       this.sendCategoryUrl(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
@@ -373,6 +360,19 @@ export default {
       this.$store.commit('SET_STATEBANNER', false)
     } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
       this.$store.commit('SET_STATEBANNER', false)
+    }
+    var acc = document.getElementsByClassName('accordion')
+    var i
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function () {
+        this.classList.toggle('active')
+        var panel = this.nextElementSibling
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 'px'
+        }
+      })
     }
   },
   data() {

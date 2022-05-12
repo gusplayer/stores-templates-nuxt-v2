@@ -336,7 +336,6 @@
                 </SelectGroup>
               </div>
             </div>
-
             <div :class="{ disabled: !salesData.estado }">
               <!-- Div quanti y btn -->
               <div class="content-quanti-btnShop">
@@ -396,6 +395,17 @@
               </div>
               <!-- text de garantia -->
               <div class="item-info-product">
+                <div
+                  v-if="data.info.descripcion_corta"
+                  class="content_buy_action"
+                >
+                  <p class="text-unidades">
+                    {{ $t('productdetail_informacion') }}
+                  </p>
+                  <span class="text-garantia">{{
+                    data.info.descripcion_corta
+                  }}</span>
+                </div>
                 <div v-if="data.info.garantia" class="content_buy_action">
                   <p class="text-unidades">
                     {{ $t('productdetail_garantia') }}
@@ -1263,7 +1273,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
 }
 .transport-icon {
   width: 100%;

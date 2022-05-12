@@ -692,6 +692,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .input-slide {
+  font-family: var(--font-style-1) !important;
   @apply w-full cursor-pointer border-none;
   height: 30px;
   /* border-bottom: 2px solid #2c2930; */

@@ -52,13 +52,13 @@ export default {
     koModalsecurity,
   },
   mounted() {
+    this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_SHOPPING_CART')
     if (this.$route.query && this.$route.query.clearCart == 'true') {
       this.$store.commit('DELETEALLITEMSCART')
       this.$store.commit('UPDATE_CONTENTCART')
     }
     if (this.$route.query && this.$route.query.openCart == 'true') {
-      console.log('si')
       this.$store.commit('SET_OPENORDER', true)
     }
     if (
