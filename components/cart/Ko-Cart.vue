@@ -726,7 +726,6 @@ export default {
           delete element.limitQuantity
           delete element.nombre
           delete element.precio
-
           delete element.activo
           delete element.stock_disponible
           delete element.con_variante
@@ -735,6 +734,8 @@ export default {
           delete element.orden
           delete element.tag
           delete element.variantes
+          delete element.tag_promocion
+          delete element.promocion_valor
         }
       })
       let json = {
