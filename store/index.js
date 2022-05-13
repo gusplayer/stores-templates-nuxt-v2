@@ -641,10 +641,16 @@ export const actions = {
   },
   GET_COOKIES_PWD({ state, commit }) {
     const cookies = getCookie('authPwd')
-    if (cookies == state.dataStore.modal.password) {
-      commit('SET_STATE_MODAL_PWD', true)
-      // eslint-disable-next-line no-console
-      console.log('Cookie PWD Ok')
+    if (
+      state.dataStore &&
+      state.dataStore.modal &&
+      state.dataStore.modal.password
+    ) {
+      if (cookies == state.dataStore.modal.password) {
+        commit('SET_STATE_MODAL_PWD', true)
+        // eslint-disable-next-line no-console
+        console.log('Cookie PWD Ok')
+      }
     }
   },
   async nuxtServerInit({ commit, dispatch, state }, { req, route }) {
