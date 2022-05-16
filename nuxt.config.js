@@ -51,8 +51,7 @@ export default {
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/element-tiptap', ssr: false },
   ],
-  modules: ['@nuxtjs/pwa', '@nuxtjs/gtm'],
-  buildModules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/gtm', '@nuxtjs/tailwindcss'],
   debug: {
     enabled: true,
   },
