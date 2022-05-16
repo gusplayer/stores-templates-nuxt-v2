@@ -959,11 +959,13 @@ export const actions = {
           dispatch('GET_PRODUCTSHOKO', 1)
           commit('SET_DATA_HOKO', response.data.data)
         } else {
+          // eslint-disable-next-line no-console
           console.log('No tiene Hoko registrado')
         }
       })
       .catch((error) => {
         if (error) {
+          // eslint-disable-next-line no-console
           console.log(error)
         }
       })
