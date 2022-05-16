@@ -31,7 +31,7 @@ export default {
   },
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    'core-components-npm/dist/ko.css',
+    // 'core-components-npm/dist/ko.css',
   ],
   plugins: [
     '~/plugins/core-components-npm',
