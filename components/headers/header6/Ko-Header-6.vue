@@ -170,7 +170,7 @@
         <KoMenu
           :dataStore="dataStore"
           class="responsive"
-          :settingByTemplate10="settingByTemplate10"
+          :settingByTemplate="settingByTemplate10"
         />
       </div>
     </div>
@@ -179,8 +179,8 @@
 
 <script>
 import KoOrder from '../_order1/order1'
-import KoMenu from '../../template10/_lateralMenu/openMenuLeft'
-import KoSearch from '../../template10/_lateralMenu/searchDown'
+import KoMenu from '../_lateralMenu/_lateralMenu11/openMenuLeft.vue'
+import KoSearch from '../_lateralMenu/_lateralMenu10/searchDown.vue'
 export default {
   components: {
     KoOrder,

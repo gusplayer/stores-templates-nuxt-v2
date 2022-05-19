@@ -426,7 +426,7 @@
             <div class="w-full flex flex-col justify-center items-center">
               <div class="wrapper_photo">
                 <img
-                  src="../../../assets/img/icono cesta.png"
+                  src="../../../assets/img/icono_cesta.png"
                   class="photo"
                   alt="Product img"
                 />

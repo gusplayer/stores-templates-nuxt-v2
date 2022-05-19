@@ -29,12 +29,8 @@ export default {
     color: 'grey',
     height: '3px',
   },
-  css: [
-    'element-ui/lib/theme-chalk/index.css',
-    // 'core-components-npm/dist/ko.css',
-  ],
+  css: ['element-ui/lib/theme-chalk/index.css'],
   plugins: [
-    '~/plugins/core-components-npm',
     '~/plugins/element',
     '~/plugins/mixinCommonMethods',
     '~/plugins/material-icons',
@@ -51,7 +47,9 @@ export default {
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/element-tiptap', ssr: false },
   ],
-  modules: ['@nuxtjs/pwa', '@nuxtjs/gtm', '@nuxtjs/tailwindcss'],
+  // components: true,
+  buildModules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/gtm'],
   debug: {
     enabled: true,
   },

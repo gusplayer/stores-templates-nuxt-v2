@@ -3,11 +3,12 @@
     <div class="order" @click="closeOrder" v-show="openMenuLeft">
       <div class="order_content">
         <div class="order_header">
-          <div class="empty"></div>
           <div class="header-content-logo">
             <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
               <img
-                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+                v-lazy="
+                  `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+                "
                 class="header-logo"
                 alt="Logo Img"
               />
@@ -18,35 +19,6 @@
             <div class="rightleft"></div>
           </div>
         </div>
-        <div class="search-content">
-          <div class="search-input-content">
-            <form>
-              <input
-                type="text"
-                :placeholder="$t('header_buscar_producto')"
-                v-model="search"
-                @keyup.enter="getSearch(search)"
-                class="input-search"
-              />
-            </form>
-          </div>
-          <div class="search-icon-content" @click="getSearch(search)">
-            <svg
-              class="icon-search"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="{2}"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
-        </div>
         <div class="content-lateral-menu">
           <div class="content-btns-lateral-menu">
             <button
@@ -55,7 +27,7 @@
               @click="selectTag1"
               :class="selecttag == 1 ? 'show-select-active' : ''"
             >
-              {{ $t('header_menu') }}
+              {{ $t('header_inicio') }}
             </button>
             <button
               class="btn-lateral-menu-right"
@@ -66,26 +38,28 @@
               {{ $t('header_categorias') }}
             </button>
           </div>
-
           <div class="conten-Menu" v-if="!focusbtn">
             <div class="header-content-buttons">
               <div
-                v-for="(item, index) in secciones"
-                :key="`${index}${item.name}`"
+                v-for="(item, index) in this.settingByTemplate[0].pages.values"
+                :key="`${index}${item.displayName}`"
                 @click="closed"
               >
-                <nuxt-link
-                  :to="item.path"
-                  v-if="item.path && item.state"
-                  class="btn"
-                  >{{ $t(`${item.name}`) }}
+                <nuxt-link :to="item.url" v-if="item.isExternalLink == false">
+                  <button class="btn">
+                    {{ item.displayName }}
+                  </button>
                 </nuxt-link>
-                <nuxt-link
-                  :to="item.href"
-                  v-else-if="item.href && listArticulos > 0 && item.state"
-                  class="btn"
-                  >{{ $t(`${item.name}`) }}</nuxt-link
+                <a
+                  :href="item.url"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  v-else
                 >
+                  <p class="btn">
+                    {{ item.displayName }}
+                  </p>
+                </a>
               </div>
             </div>
           </div>
@@ -109,20 +83,18 @@
                             : ''
                         "
                       >
-                        <p>
-                          {{ categoria.nombre_categoria_producto }}
-                        </p>
+                        {{ categoria.nombre_categoria_producto }}
                       </li>
                     </template>
                     <template v-slot:subcategorias
                       ><template>
-                        <li
+                        <!-- <li
                           class="btn-category"
                           v-if="selectedSubcategories.length > 0"
                           @click="closed()"
                         >
                           Ver todo
-                        </li>
+                        </li> -->
                         <div
                           v-for="(subcategory, key) in subcategories"
                           :key="key"
@@ -137,7 +109,9 @@
                                 : ''
                             "
                           >
-                            {{ subcategory.nombre_subcategoria }}
+                            <p class="txt-sub-li">
+                              {{ subcategory.nombre_subcategoria }}
+                            </p>
                           </li>
                         </div>
                       </template></template
@@ -154,11 +128,12 @@
 </template>
 
 <script>
-import BaseAccordian from '../../template7/_lateralMenu/_BaseAccordion'
+import BaseAccordian from '../_BaseAccordion.vue'
 export default {
   name: 'KoMenuLeft',
   props: {
     dataStore: Object,
+    settingByTemplate: Array,
   },
   components: {
     BaseAccordian,
@@ -311,14 +286,14 @@ export default {
     },
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
-      this.$router.push({
-        path: '/productos',
-      })
-      this.$store.commit('SET_STATEBANNER', false)
       this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$router.push({
+        path: '/productos',
+        query: { category: this.nameCategory },
+      })
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -378,7 +353,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 6;
+  z-index: 99999;
   transition: all 0.25s ease;
 }
 .order_content {
@@ -412,10 +387,9 @@ export default {
   list-style: none;
 }
 .order_header {
-  padding: 5px 0px;
-  @apply grid grid-cols-3 gap-4;
-  justify-content: start;
-  align-items: center;
+  height: 80px;
+  max-height: 80px;
+  @apply relative flex flex-row justify-between items-center px-10;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
 .header-content-logo {
@@ -431,57 +405,35 @@ export default {
   object-fit: contain;
   object-position: left;
 }
-.order_header_close {
-  font-size: 30px;
-  color: var(--color_icon);
-  transition: 0.3s;
-  cursor: pointer;
-}
-.order_header_close:hover {
-  color: gray;
-}
 .wrapper-category-all {
   display: flex;
   flex-direction: column;
   width: 100%;
   overflow-x: auto;
-  /* padding: 10px 25px;
-  margin-top: 10px; */
-}
-.name-category-all {
-  font-weight: bold;
-  font-size: 16px;
-  margin-bottom: 5px;
 }
 .text-categoria {
   width: 100%;
   font-size: 16px;
   font-weight: bold;
-  color: var(--color_text);
-}
-.text-subcategoria-all {
-  margin-left: 3px;
-  margin-bottom: 5px;
-  width: 100%;
-  font-size: 15px;
-  font-weight: bold;
-  color: var(--color_text);
+  color: #2c2930;
 }
 .text-subcategoria {
   margin-left: 3px;
   margin-bottom: 5px;
   width: 100%;
   font-size: 15px;
-  color: var(--color_subtext);
+  color: #2c2930;
 }
 .text-categoria-active {
-  color: var(--color_hover_text);
+  color: #2c2930;
 }
 .text-subcategoria-active {
-  color: var(--color_hover_text);
+  color: #2c2930;
 }
 .close-container {
-  @apply relative h-40 cursor-pointer flex justify-center items-center;
+  right: 30px;
+  max-width: 50px;
+  @apply absolute h-50 cursor-pointer flex justify-center items-center;
 }
 .leftright {
   @apply h-4 w-30 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
@@ -490,33 +442,14 @@ export default {
   @apply h-4 w-30 absolute rounded-2 transform rotate-45 transition-all ease-in duration-200;
 }
 .close-container:hover .leftright {
-  @apply transform rotate-0 bg-red-btnhoverHeader;
+  @apply transform rotate-0 bg-black;
 }
 .close-container:hover .rightleft {
-  @apply transform rotate-0 bg-red-btnhoverHeader;
+  @apply transform rotate-0 bg-black;
 }
 .leftright,
 .rightleft {
-  @apply bg-gray-textHeader;
-}
-.search-content {
-  @apply flex flex-row w-full items-center shadow-xl py-14;
-}
-.search-input-content {
-  @apply w-full;
-}
-.input-search {
-  @apply px-10 py-2 w-full;
-}
-::-webkit-input-placeholder {
-  font-family: 'Lora' !important;
-  @apply text-gray-textHeader;
-}
-.search-icon-content {
-  @apply w-auto h-auto justify-center items-center px-12 cursor-pointer;
-}
-.icon-search {
-  @apply w-24 h-24 text-gray-textHeader;
+  background-color: #2c2930;
 }
 .content-lateral-menu {
   @apply w-full flex flex-col justify-center items-center;
@@ -531,45 +464,39 @@ export default {
   padding: 18px 15px;
   max-width: 50%;
   width: 50%;
-  color: #909090;
+  color: #2c2930;
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  font-weight: 900;
+  letter-spacing: 0px;
+  font-weight: 600;
+  text-transform: capitalize;
   font-size: 14px;
   cursor: pointer;
-  font-family: 'Lora' !important;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
   transition: background-color 0.25s ease, color 0.25s ease;
-  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
-  border-right: 1px solid rgba(129, 129, 129, 0.2);
+  border-bottom: 3px solid #2c2930;
 }
 .btn-lateral-menu-right {
   padding: 18px 15px;
   max-width: 50%;
   width: 50%;
-  color: #909090;
+  color: #2c2930;
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  font-weight: 900;
+  letter-spacing: 0px;
+  font-weight: 600;
+  text-transform: capitalize;
   font-size: 14px;
   cursor: pointer;
-  font-family: 'Lora' !important;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
   transition: background-color 0.25s ease, color 0.25s ease;
-  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
+  border-bottom: 3px solid #2c2930;
 }
 .show-select-active {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #333;
-  border-bottom: 2px solid #ed2353;
+  background-color: #2c2930;
+  color: #fff;
 }
-/* .btn-lateral-menu-right:focus {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #333;
-  border-bottom: 2px solid #ed2353;
-} */
 .conten-Menu,
 .content-Categorys {
+  margin-top: 20px;
   @apply w-full flex flex-col justify-start items-center;
 }
 .content-Categorys {
@@ -583,25 +510,41 @@ export default {
   @apply w-full grid grid-cols-1 justify-start items-center;
 }
 .btn {
-  @apply w-full flex font-semibold  uppercase tracking-wider py-15 pl-20;
-  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
-  font-family: 'Lora' !important;
-  color: #2d2a2a;
-  font-size: 13px;
+  @apply w-full flex font-semibold tracking-wider py-3 px-20;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  text-align: start;
+  border-bottom: 1px solid #e7e7e7;
+}
+.btn:hover {
+  border-bottom: 1px solid #000;
 }
 .btn-category {
-  @apply w-full flex font-semibold uppercase tracking-wider py-15 pl-20;
-  color: #2d2a2a;
-  font-size: 13px;
-  font-family: 'Lora' !important;
+  @apply w-full flex font-semibold  tracking-wider py-3 px-20;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
 }
 .btn-category-all {
-  @apply w-full flex font-semibold uppercase tracking-wider py-15 pl-20;
-  color: #2d2a2a;
-  font-size: 13px;
-  font-family: 'Lora' !important;
-  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
+  @apply w-full flex font-semibold  tracking-wider py-3 px-20;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
 }
+.txt-sub-li {
+  font-size: 14px;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-weight: 400;
+  color: #000;
+}
+
 @media (min-width: 1280px) {
   .order {
     @apply hidden;

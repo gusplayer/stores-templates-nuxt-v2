@@ -7,9 +7,7 @@
           <div class="header-content-logo">
             <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
               <img
-                v-lazy="
-                  `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
-                "
+                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
                 class="header-logo"
                 alt="Logo Img"
               />
@@ -20,6 +18,35 @@
             <div class="rightleft"></div>
           </div>
         </div>
+        <div class="search-content">
+          <div class="search-input-content">
+            <form>
+              <input
+                type="text"
+                :placeholder="$t('header_buscar_producto')"
+                v-model="search"
+                @keyup.enter="getSearch(search)"
+                class="input-search"
+              />
+            </form>
+          </div>
+          <div class="search-icon-content" @click="getSearch(search)">
+            <svg
+              class="icon-search"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="{2}"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </div>
+        </div>
         <div class="content-lateral-menu">
           <div class="content-btns-lateral-menu">
             <button
@@ -28,7 +55,7 @@
               @click="selectTag1"
               :class="selecttag == 1 ? 'show-select-active' : ''"
             >
-              {{ $t('header_inicio') }}
+              {{ $t('header_menu') }}
             </button>
             <button
               class="btn-lateral-menu-right"
@@ -39,6 +66,7 @@
               {{ $t('header_categorias') }}
             </button>
           </div>
+
           <div class="conten-Menu" v-if="!focusbtn">
             <div class="header-content-buttons">
               <div
@@ -81,18 +109,20 @@
                             : ''
                         "
                       >
-                        {{ categoria.nombre_categoria_producto }}
+                        <p>
+                          {{ categoria.nombre_categoria_producto }}
+                        </p>
                       </li>
                     </template>
                     <template v-slot:subcategorias
                       ><template>
-                        <!-- <li
+                        <li
                           class="btn-category"
                           v-if="selectedSubcategories.length > 0"
                           @click="closed()"
                         >
                           Ver todo
-                        </li> -->
+                        </li>
                         <div
                           v-for="(subcategory, key) in subcategories"
                           :key="key"
@@ -107,9 +137,7 @@
                                 : ''
                             "
                           >
-                            <p class="txt-sub-li">
-                              {{ subcategory.nombre_subcategoria }}
-                            </p>
+                            {{ subcategory.nombre_subcategoria }}
                           </li>
                         </div>
                       </template></template
@@ -126,7 +154,7 @@
 </template>
 
 <script>
-import BaseAccordian from '../../template9/_lateralMenu/_BaseAccordion'
+import BaseAccordian from '../_BaseAccordion.vue'
 export default {
   name: 'KoMenuLeft',
   props: {
@@ -283,14 +311,14 @@ export default {
     },
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
+      this.$router.push({
+        path: '/productos',
+      })
+      this.$store.commit('SET_STATEBANNER', false)
       this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-      this.$router.push({
-        path: '/productos',
-        query: { category: this.nameCategory },
-      })
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -350,7 +378,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 99999;
+  z-index: 6;
   transition: all 0.25s ease;
 }
 .order_content {
@@ -384,6 +412,7 @@ export default {
   list-style: none;
 }
 .order_header {
+  padding: 5px 0px;
   @apply grid grid-cols-3 gap-4;
   justify-content: start;
   align-items: center;
@@ -402,33 +431,57 @@ export default {
   object-fit: contain;
   object-position: left;
 }
+.order_header_close {
+  font-size: 30px;
+  color: var(--color_icon);
+  transition: 0.3s;
+  cursor: pointer;
+}
+.order_header_close:hover {
+  color: gray;
+}
 .wrapper-category-all {
   display: flex;
   flex-direction: column;
   width: 100%;
   overflow-x: auto;
+  /* padding: 10px 25px;
+  margin-top: 10px; */
+}
+.name-category-all {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
 }
 .text-categoria {
   width: 100%;
   font-size: 16px;
   font-weight: bold;
-  color: #2c2930;
+  color: var(--color_text);
+}
+.text-subcategoria-all {
+  margin-left: 3px;
+  margin-bottom: 5px;
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--color_text);
 }
 .text-subcategoria {
   margin-left: 3px;
   margin-bottom: 5px;
   width: 100%;
   font-size: 15px;
-  color: #2c2930;
+  color: var(--color_subtext);
 }
 .text-categoria-active {
-  color: #2c2930;
+  color: var(--color_hover_text);
 }
 .text-subcategoria-active {
-  color: #2c2930;
+  color: var(--color_hover_text);
 }
 .close-container {
-  @apply relative h-50 cursor-pointer flex justify-center items-center;
+  @apply relative h-40 cursor-pointer flex justify-center items-center;
 }
 .leftright {
   @apply h-4 w-30 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
@@ -437,14 +490,33 @@ export default {
   @apply h-4 w-30 absolute rounded-2 transform rotate-45 transition-all ease-in duration-200;
 }
 .close-container:hover .leftright {
-  @apply transform rotate-0 bg-black;
+  @apply transform rotate-0 bg-red-btnhoverHeader;
 }
 .close-container:hover .rightleft {
-  @apply transform rotate-0 bg-black;
+  @apply transform rotate-0 bg-red-btnhoverHeader;
 }
 .leftright,
 .rightleft {
-  background-color: #2c2930;
+  @apply bg-gray-textHeader;
+}
+.search-content {
+  @apply flex flex-row w-full items-center shadow-xl py-14;
+}
+.search-input-content {
+  @apply w-full;
+}
+.input-search {
+  @apply px-10 py-2 w-full;
+}
+::-webkit-input-placeholder {
+  font-family: 'Lora' !important;
+  @apply text-gray-textHeader;
+}
+.search-icon-content {
+  @apply w-auto h-auto justify-center items-center px-12 cursor-pointer;
+}
+.icon-search {
+  @apply w-24 h-24 text-gray-textHeader;
 }
 .content-lateral-menu {
   @apply w-full flex flex-col justify-center items-center;
@@ -459,40 +531,46 @@ export default {
   padding: 18px 15px;
   max-width: 50%;
   width: 50%;
-  color: #2c2930;
+  color: #909090;
   text-align: center;
-  letter-spacing: 0px;
-  font-weight: 600;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 900;
   font-size: 14px;
   cursor: pointer;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: 'Lora' !important;
   transition: background-color 0.25s ease, color 0.25s ease;
-  border-bottom: 3px solid #2c2930;
+  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
+  border-right: 1px solid rgba(129, 129, 129, 0.2);
 }
 .btn-lateral-menu-right {
   padding: 18px 15px;
   max-width: 50%;
   width: 50%;
-  color: #2c2930;
+  color: #909090;
   text-align: center;
-  letter-spacing: 0px;
-  font-weight: 600;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 900;
   font-size: 14px;
   cursor: pointer;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  font-family: 'Lora' !important;
   transition: background-color 0.25s ease, color 0.25s ease;
-  border-bottom: 3px solid #2c2930;
+  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
 .show-select-active {
-  background-color: #2c2930;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333;
+  border-bottom: 2px solid #ed2353;
 }
+/* .btn-lateral-menu-right:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333;
+  border-bottom: 2px solid #ed2353;
+} */
 .conten-Menu,
 .content-Categorys {
-  margin-top: 20px;
-  @apply w-8/0 flex flex-col justify-start items-center;
+  @apply w-full flex flex-col justify-start items-center;
 }
 .content-Categorys {
   max-height: 670px;
@@ -505,40 +583,25 @@ export default {
   @apply w-full grid grid-cols-1 justify-start items-center;
 }
 .btn {
-  @apply w-full flex font-semibold tracking-wider py-2 pl-3;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  color: #333;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0px;
-  /* border-bottom: 1px solid #2c2930; */
-}
-.btn:hover {
-  border-bottom: 2px solid #000;
+  @apply w-full flex font-semibold  uppercase tracking-wider py-15 pl-20;
+  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
+  font-family: 'Lora' !important;
+  color: #2d2a2a;
+  font-size: 13px;
 }
 .btn-category {
-  @apply w-full flex font-semibold  tracking-wider py-3 pl-4;
-  color: #333;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  @apply w-full flex font-semibold uppercase tracking-wider py-15 pl-20;
+  color: #2d2a2a;
+  font-size: 13px;
+  font-family: 'Lora' !important;
 }
 .btn-category-all {
-  @apply w-full flex font-semibold  tracking-wider py-3 pl-4;
-  color: #333;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  @apply w-full flex font-semibold uppercase tracking-wider py-15 pl-20;
+  color: #2d2a2a;
+  font-size: 13px;
+  font-family: 'Lora' !important;
+  border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
-.txt-sub-li {
-  font-size: 14px;
-  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  font-weight: 400;
-  color: #000;
-}
-
 @media (min-width: 1280px) {
   .order {
     @apply hidden;

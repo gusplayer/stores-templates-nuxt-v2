@@ -140,8 +140,8 @@
 
 <script>
 import KoOrder from '../_order1/order1'
-import KoMenu from '../../template9/_lateralMenu/openMenuLeft'
-import KoSearch from '../../template9/_lateralMenu/searchDown'
+import KoMenu from '../_lateralMenu/_lateralMenu/openMenuLeft.vue'
+import KoSearch from '../_lateralMenu/_lateralMenu/searchDown09.vue'
 
 export default {
   components: {

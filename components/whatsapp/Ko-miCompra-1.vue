@@ -153,14 +153,15 @@
           </div>
         </div>
         <div class="content-sections">
-          <el-collapse>
-            <el-collapse-item :title="$t('mcompra_infoComprador')" name="1">
-              <div class="content-info-buyer" v-if="orden.venta.usuario">
-                <p class="name" v-if="mensajeWa && mensajeWa.nombre">
-                  {{ $t('mcompra_nombre') }}
-                  <span class="value-data">{{ mensajeWa.nombre }}</span>
-                </p>
-                <!-- <p
+          <client-only>
+            <el-collapse>
+              <el-collapse-item :title="$t('mcompra_infoComprador')" name="1">
+                <div class="content-info-buyer" v-if="orden.venta.usuario">
+                  <p class="name" v-if="mensajeWa && mensajeWa.nombre">
+                    {{ $t('mcompra_nombre') }}
+                    <span class="value-data">{{ mensajeWa.nombre }}</span>
+                  </p>
+                  <!-- <p
                   class="name"
                   v-if="this.cityComprador && this.cityComprador.departamento"
                 >
@@ -169,71 +170,106 @@
                     this.cityComprador.departamento.nombre_dep
                   }}</span>
                 </p> -->
-                <p class="name" v-if="mensajeWa && mensajeWa.ciudad">
-                  {{ $t('mcompra_ciudad') }}
-                  <span class="value-data">{{ mensajeWa.ciudad }}</span>
-                </p>
-                <p class="name" v-if="mensajeWa && mensajeWa.barrio">
-                  {{ $t('mcompra_barrio') }}
-                  <span class="value-data">{{ mensajeWa.barrio }}</span>
-                </p>
-                <p class="address">
-                  {{ $t('mcompra_direccion') }}
-                  <span
-                    class="value-data"
-                    v-if="mensajeWa && mensajeWa.direccion"
-                    >{{ mensajeWa.direccion }}</span
+                  <p class="name" v-if="mensajeWa && mensajeWa.ciudad">
+                    {{ $t('mcompra_ciudad') }}
+                    <span class="value-data">{{ mensajeWa.ciudad }}</span>
+                  </p>
+                  <p class="name" v-if="mensajeWa && mensajeWa.barrio">
+                    {{ $t('mcompra_barrio') }}
+                    <span class="value-data">{{ mensajeWa.barrio }}</span>
+                  </p>
+                  <p class="address">
+                    {{ $t('mcompra_direccion') }}
+                    <span
+                      class="value-data"
+                      v-if="mensajeWa && mensajeWa.direccion"
+                      >{{ mensajeWa.direccion }}</span
+                    >
+                    <span class="value-data" v-else>N/A</span>
+                  </p>
+                </div>
+              </el-collapse-item>
+              <el-collapse-item :title="$t('mcompra_infoVendedor')" name="2">
+                <div class="content-info-buyer">
+                  <p
+                    class="city"
+                    v-if="
+                      city && city.departamento && city.departamento.nombre_dep
+                    "
                   >
-                  <span class="value-data" v-else>N/A</span>
-                </p>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item :title="$t('mcompra_infoVendedor')" name="2">
-              <div class="content-info-buyer">
-                <p
-                  class="city"
-                  v-if="
-                    city && city.departamento && city.departamento.nombre_dep
-                  "
-                >
-                  {{ $t('mcompra_departamento') }}
-                  <span class="value-data">{{
-                    city.departamento.nombre_dep
-                  }}</span>
-                </p>
-                <p class="city">
-                  {{ $t('mcompra_ciudad') }}
-                  <span class="value-data" v-if="city && city.nombre_ciu">{{
-                    city.nombre_ciu
-                  }}</span>
-                  <span class="value-data" v-else>N/A</span>
-                </p>
-                <p class="address">
-                  {{ $t('mcompra_direccion') }}
-                  <span
-                    class="value-data"
-                    v-if="dataStore.geolocalizacion.length"
-                    >{{ dataStore.geolocalizacion[0].direccion }}</span
+                    {{ $t('mcompra_departamento') }}
+                    <span class="value-data">{{
+                      city.departamento.nombre_dep
+                    }}</span>
+                  </p>
+                  <p class="city">
+                    {{ $t('mcompra_ciudad') }}
+                    <span class="value-data" v-if="city && city.nombre_ciu">{{
+                      city.nombre_ciu
+                    }}</span>
+                    <span class="value-data" v-else>N/A</span>
+                  </p>
+                  <p class="address">
+                    {{ $t('mcompra_direccion') }}
+                    <span
+                      class="value-data"
+                      v-if="dataStore.geolocalizacion.length"
+                      >{{ dataStore.geolocalizacion[0].direccion }}</span
+                    >
+                    <span class="value-data" v-else>N/A</span>
+                  </p>
+                  <p class="telephone">
+                    {{ $t('mcompra_telefono') }}
+                    <span class="value-data" v-if="dataStore.tienda.telefono">{{
+                      dataStore.tienda.telefono
+                    }}</span>
+                    <span class="value-data" v-else>N/A</span>
+                  </p>
+                  <p class="owner">
+                    {{ $t('mcompra_nombreTienda') }}
+                    <span class="value-data" v-if="dataStore.tienda.nombre">{{
+                      dataStore.tienda.nombre
+                    }}</span>
+                    <span class="value-data" v-else>N/A</span>
+                  </p>
+                </div>
+              </el-collapse-item>
+              <el-collapse-item
+                :title="$t('mcompra_infoTransporter')"
+                name="3"
+                v-if="dataTransporter"
+              >
+                <div class="content-info-buyer">
+                  <p
+                    class="city"
+                    v-if="dataTransporter && dataTransporter.name"
                   >
-                  <span class="value-data" v-else>N/A</span>
-                </p>
-                <p class="telephone">
-                  {{ $t('mcompra_telefono') }}
-                  <span class="value-data" v-if="dataStore.tienda.telefono">{{
-                    dataStore.tienda.telefono
-                  }}</span>
-                  <span class="value-data" v-else>N/A</span>
-                </p>
-                <p class="owner">
-                  {{ $t('mcompra_nombreTienda') }}
-                  <span class="value-data" v-if="dataStore.tienda.nombre">{{
-                    dataStore.tienda.nombre
-                  }}</span>
-                  <span class="value-data" v-else>N/A</span>
-                </p>
-              </div>
-            </el-collapse-item>
-          </el-collapse>
+                    {{ $t('mcompra_nombre') }}
+                    <span class="value-data">{{ dataTransporter.name }}</span>
+                  </p>
+                  <p
+                    class="city"
+                    v-if="dataTransporter && dataTransporter.guide"
+                  >
+                    {{ $t('mcompra_numeroGuia') }}
+                    <span class="value-data">{{ dataTransporter.guide }}</span>
+                  </p>
+                  <p
+                    class="city"
+                    v-if="dataTransporter && dataTransporter.link"
+                  >
+                    {{ $t('mcompra_linkGuia') }}
+                    <a
+                      :href="dataTransporter.link"
+                      target="_blank"
+                      class="value-data"
+                      >{{ dataTransporter.link }}</a
+                    >
+                  </p>
+                </div>
+              </el-collapse-item>
+            </el-collapse>
+          </client-only>
         </div>
       </div>
     </div>
@@ -278,6 +314,9 @@ export default {
         this.horaState = result[1]
       }
       this.mensajeWa = JSON.parse(this.orden.venta.comentario)
+      if (this.orden.venta.transportadora !== null) {
+        this.dataTransporter = JSON.parse(this.orden.venta.transportadora)
+      }
     }
   },
   destroyed() {
@@ -285,6 +324,7 @@ export default {
   },
   data() {
     return {
+      dataTransporter: '',
       mensajeWa: '',
       fechaState: '',
       horaState: '',

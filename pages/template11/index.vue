@@ -40,15 +40,17 @@
         this.fullProducts.length > 0
       "
     />
-    <Kparallax
-      id="kParallaxX"
-      v-bind="componentsProps"
-      v-if="
-        settingByTemplate11 &&
-        settingByTemplate11.parallax &&
-        settingByTemplate11.parallax.visible
-      "
-    />
+    <client-only>
+      <Kparallax
+        id="kParallaxX"
+        v-bind="componentsProps"
+        v-if="
+          settingByTemplate11 &&
+          settingByTemplate11.parallax &&
+          settingByTemplate11.parallax.visible
+        "
+      />
+    </client-only>
     <KListtrending
       v-bind="componentsProps"
       v-if="dataHoko.length == 0 || dataHoko.statehoko == 0"
@@ -177,6 +179,7 @@ export default {
         e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 11) {
+          console.log(e.data)
           this.$store.commit('SET_CURRENTSETTING11', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1

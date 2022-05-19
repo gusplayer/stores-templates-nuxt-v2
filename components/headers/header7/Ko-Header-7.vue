@@ -154,7 +154,7 @@
       <KoOrder :dataStore="dataStore"></KoOrder>
       <KoMenu
         :dataStore="dataStore"
-        :settingByTemplate11="settingByTemplate11"
+        :settingByTemplate="settingByTemplate11"
         class="responsive"
       />
     </div>
@@ -162,7 +162,7 @@
 </template>
 <script>
 import KoOrder from '../_order1/order1'
-import KoMenu from './_lateralMenu/openMenuLeft.vue'
+import KoMenu from '../_lateralMenu/_lateralMenu11/openMenuLeft.vue'
 
 export default {
   name: 'Ko-Header-7',

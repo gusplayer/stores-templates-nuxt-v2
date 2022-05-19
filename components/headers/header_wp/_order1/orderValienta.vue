@@ -131,7 +131,7 @@
                 <div class="order_products_list-empty">
                   <div class="wrapper_photo">
                     <img
-                      src="../../../../assets/img/empty-cart.png"
+                      src="../../../../assets/img/icono_cesta.png"
                       class="photo-carrito"
                       alt="empty car"
                     />

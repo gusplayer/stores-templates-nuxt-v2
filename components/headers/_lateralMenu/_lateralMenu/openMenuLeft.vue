@@ -3,11 +3,12 @@
     <div class="order" @click="closeOrder" v-show="openMenuLeft">
       <div class="order_content">
         <div class="order_header">
-          <div class="empty"></div>
           <div class="header-content-logo">
             <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
               <img
-                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+                v-lazy="
+                  `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+                "
                 class="header-logo"
                 alt="Logo Img"
               />
@@ -19,30 +20,30 @@
           </div>
         </div>
         <div class="content-lateral-menu">
-          <!-- <div class="content-btns-lateral-menu">
+          <div class="content-btns-lateral-menu">
             <button
               id="btnfocus"
               class="btn-lateral-menu-left"
               @click="selectTag1"
               :class="selecttag == 1 ? 'show-select-active' : ''"
             >
-              {{ $t('header_menu') }}
+              {{ $t('header_inicio') }}
             </button>
             <button
               class="btn-lateral-menu-right"
               @click="selectTag2"
               :class="selecttag == 2 ? 'show-select-active' : ''"
+              v-if="categorias && categorias.length > 0"
             >
               {{ $t('header_categorias') }}
             </button>
-          </div> -->
-
+          </div>
           <div class="conten-Menu" v-if="!focusbtn">
             <div class="header-content-buttons">
               <div
-                @click="closed"
                 v-for="(item, index) in secciones"
                 :key="`${index}${item.name}`"
+                @click="closed"
               >
                 <nuxt-link
                   :to="item.path"
@@ -59,7 +60,7 @@
               </div>
             </div>
           </div>
-          <!-- <div class="content-Categorys" v-if="focusbtn">
+          <div class="content-Categorys" v-if="focusbtn">
             <template>
               <div class="wrapper-category-all">
                 <li @click="clear">
@@ -84,6 +85,13 @@
                     </template>
                     <template v-slot:subcategorias
                       ><template>
+                        <!-- <li
+                          class="btn-category"
+                          v-if="selectedSubcategories.length > 0"
+                          @click="closed()"
+                        >
+                          Ver todo
+                        </li> -->
                         <div
                           v-for="(subcategory, key) in subcategories"
                           :key="key"
@@ -109,7 +117,7 @@
                 </div>
               </div>
             </template>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -117,7 +125,7 @@
 </template>
 
 <script>
-import BaseAccordian from '../../template10/_lateralMenu/_BaseAccordion'
+import BaseAccordian from '../_BaseAccordion.vue'
 export default {
   name: 'KoMenuLeft',
   props: {
@@ -168,15 +176,16 @@ export default {
           //icon: 'account-icon',
         },
         {
-          name: 'header_carrito',
-          path: '/cart',
-          state: true,
-        },
-        {
           name: 'header_blog',
           href: '/blog',
           state: true,
           //icon: 'account-icon',
+        },
+        {
+          name: 'header_carrito',
+          path: '/cart',
+          state: true,
+          //icon: 'cart-icon',
         },
       ],
     }
@@ -273,14 +282,14 @@ export default {
     },
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
-      // this.$router.push({
-      //   path: '/productos',
-      // })
-      this.$store.commit('SET_STATEBANNER', false)
       this.$store.commit('SET_PREVIOUSPAGE', 1)
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$router.push({
+        path: '/productos',
+        query: { category: this.nameCategory },
+      })
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -340,7 +349,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 6;
+  z-index: 99999;
   transition: all 0.25s ease;
 }
 .order_content {
@@ -374,9 +383,9 @@ export default {
   list-style: none;
 }
 .order_header {
-  @apply grid grid-cols-3 gap-4;
-  justify-content: start;
-  align-items: center;
+  height: 80px;
+  max-height: 80px;
+  @apply relative flex flex-row justify-between items-center px-10;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
 .header-content-logo {
@@ -418,7 +427,9 @@ export default {
   color: #2c2930;
 }
 .close-container {
-  @apply relative h-50 cursor-pointer flex justify-center items-center;
+  right: 30px;
+  max-width: 50px;
+  @apply absolute h-50 cursor-pointer flex justify-center items-center;
 }
 .leftright {
   @apply h-4 w-30 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
@@ -481,6 +492,7 @@ export default {
 }
 .conten-Menu,
 .content-Categorys {
+  margin-top: 20px;
   @apply w-full flex flex-col justify-start items-center;
 }
 .content-Categorys {
@@ -494,38 +506,39 @@ export default {
   @apply w-full grid grid-cols-1 justify-start items-center;
 }
 .btn {
-  color: #2a363b;
-  font-size: 14px;
-  letter-spacing: 0px;
-  border-bottom: 1px solid #eee;
+  @apply w-full flex font-semibold tracking-wider py-3 px-20;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply w-full h-50 flex justify-start items-center font-semibold tracking-wider pl-10 uppercase;
-  /* border-bottom: 1px solid #2c2930; */
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  text-align: start;
+  border-bottom: 1px solid #e7e7e7;
 }
 .btn:hover {
-  border-bottom: 2px solid #000;
+  border-bottom: 1px solid #000;
 }
 .btn-category {
-  color: #2a363b;
-  font-size: 20px;
+  @apply w-full flex font-semibold  tracking-wider py-3 px-20;
+  color: #333;
+  font-size: 18px;
   font-weight: 600;
   letter-spacing: 0px;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply w-full flex justify-center items-center font-semibold tracking-wider py-3 pl-4;
 }
 .btn-category-all {
-  color: #2a363b;
-  font-size: 20px;
+  @apply w-full flex font-semibold  tracking-wider py-3 px-20;
+  color: #333;
+  font-size: 18px;
   font-weight: 600;
   letter-spacing: 0px;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply w-full flex font-semibold  tracking-wider py-3 pl-4;
 }
 .txt-sub-li {
   font-size: 14px;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
   font-weight: 400;
-  color: #2a363b;
+  color: #000;
 }
 
 @media (min-width: 1280px) {

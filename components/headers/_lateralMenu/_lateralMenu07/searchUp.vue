@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import KProducts from '../../../components/template7/Ko-ProductListSearchUp'
+import KProducts from '../../../template7/Ko-ProductListSearchUp.vue'
 export default {
   name: 'KoSearch',
   props: {

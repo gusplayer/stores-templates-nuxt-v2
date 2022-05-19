@@ -25,11 +25,13 @@
             class="slide-bgWeb"
             :src="idCloudinaryBanner(banner.url_img_background)"
             alt="Bg-Image"
+            v-if="banner.url_img_background"
           />
           <img
             class="slide-bgMovil"
             :src="idCloudinaryBanner(banner.url_img_background_res)"
             alt="Bg-Image"
+            v-if="banner.url_img_background_res"
           />
           <CarouselContent
             class="absolute"

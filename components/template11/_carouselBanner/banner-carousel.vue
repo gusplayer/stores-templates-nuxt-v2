@@ -12,14 +12,19 @@
     ]"
   >
     <div class="content-txt">
-      <p class="txt-top" :style="`color: ${banner.colorPretitle};`">
+      <p
+        class="txt-top"
+        :style="`color: ${banner.colorPretitle};`"
+        v-if="banner.pretitle"
+      >
         {{ banner.pretitle.replace(/&nbsp;/g, ' ') }}
       </p>
-      <div
-        class="separator"
-        :style="`background: ${banner.color_border};`"
-      ></div>
-      <p class="txt-bottom" :style="`color: ${banner.colorTitle};`">
+      <div class="separator" :style="`background: ${banner.color_border};`" />
+      <p
+        class="txt-bottom"
+        :style="`color: ${banner.colorTitle};`"
+        v-if="banner.title"
+      >
         {{ banner.title.replace(/&nbsp;/g, ' ') }}
       </p>
     </div>
