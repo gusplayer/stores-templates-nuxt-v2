@@ -76,7 +76,6 @@
                   <li>Variante</li>
                   <li>Cantidad</li>
                   <li>Valor Unidad</li>
-                  <li>Total Orden</li>
                 </ul>
               </div>
               <div class="tbody">
@@ -202,16 +201,21 @@
         </div>
         <div class="content-info-orden" v-if="orden.venta">
           <div class="info-left">
-            <p class="title-info-orden" v-if="orden.venta.cupon != null">
+            <p
+              class="title-info-orden"
+              v-if="orden.venta.cupon && orden.venta.cupon !== 'null'"
+            >
               {{ $t('mcompra_cupon') }}
               <span class="value-info-orden">{{ orden.venta.cupon }}</span>
             </p>
             <p
               class="title-info-orden"
-              v-if="orden.venta.cupon == 'null' || orden.venta.cupon == null"
+              v-if="orden.venta.descuento && orden.venta.descuento !== 'null'"
             >
-              {{ $t('mcompra_cupon') }}
-              <span class="value-info-orden">N/A</span>
+              {{ $t('footer_descuento') }}
+              <span class="value-info-orden"
+                >- {{ orden.venta.descuento | currency }}</span
+              >
             </p>
             <p
               class="title-info-orden"
@@ -240,17 +244,21 @@
                 {{ $t(`${choicePayment.title}`) }}</span
               >
             </p>
-            <p class="title-info-orden" v-if="choicePayment">
+            <p class="title-info-orden" v-if="fechaState">
               {{ $t('mcompra_fechaCompra') }}
               <span class="value-info-orden">{{ this.fechaState }}</span>
             </p>
-            <p class="title-info-orden" v-if="choicePayment">
+            <p class="title-info-orden" v-if="horaState">
               {{ $t('mcompra_horaCompra') }}
               <span class="value-info-orden">{{ this.horaState }}</span>
             </p>
-            <p class="title-info-orden" v-if="choicePayment">
+            <p class="title-info-orden" v-if="orden && orden.usuario == 30866">
               {{ $t('mcompra_pcanaldeVenta') }}
               <span class="value-info-orden">Venta generada por WhatsApp</span>
+            </p>
+            <p class="title-info-orden" v-else>
+              {{ $t('mcompra_pcanaldeVenta') }}
+              <span class="value-info-orden">Venta generada por Checkout</span>
             </p>
           </div>
           <div class="content-state-top">

@@ -62,45 +62,85 @@
           <p>{{ $t('mcompra_title2') }}</p>
           <p>No. {{ orden.venta.id }}</p>
         </div>
-        <div class="content-card">
-          <div
-            class="card"
-            v-for="(item, index) in orden.productos"
-            :key="index.item"
-          >
-            <img
-              class="img-product"
-              v-lazy="idCloudinary(item.producto.foto_cloudinary, 300, 300)"
-              alt="Imagen del producto"
-            />
-            <div class="info">
-              <p class="name-product">{{ item.producto.nombre }}</p>
-              <p class="quantity-product">
-                {{ $t('mcompra_cantidad') }}{{ item.unidades }} X
-                {{ (item.unidades * item.precio_producto) | currency }}
-              </p>
-              <p class="price-product">{{ item.precio_producto | currency }}</p>
-              <div v-if="item.variantes">
-                <el-tag
-                  v-for="(productCombinacion, index2) in JSON.parse(
-                    item.variantes
-                  )"
-                  :key="index2"
-                >
-                  {{ productCombinacion | capitalize }}
-                </el-tag>
+        <div
+          class="content-card"
+          v-if="orden.productos && orden.productos.length > 0"
+        >
+          <client-only>
+            <table class="table table-striped">
+              <div class="thead">
+                <ul>
+                  <li></li>
+                  <li>Producto</li>
+                  <li>Variante</li>
+                  <li>Cantidad</li>
+                  <li>Valor Unidad</li>
+                </ul>
               </div>
-            </div>
-          </div>
+              <div class="tbody">
+                <ul v-for="(item, index) in orden.productos" :key="index.item">
+                  <li class="photo">
+                    <img
+                      class="img-product"
+                      v-lazy="
+                        idCloudinary(item.producto.foto_cloudinary, 300, 300)
+                      "
+                      alt="Imagen del producto"
+                    />
+                  </li>
+                  <li>
+                    <p class="text-table">
+                      {{ item.producto.nombre }}
+                    </p>
+                  </li>
+                  <li class="variants" v-if="item.variantes">
+                    <el-tag
+                      v-for="(productCombinacion, index2) in JSON.parse(
+                        item.variantes
+                      )"
+                      :key="index2"
+                    >
+                      {{ productCombinacion | capitalize }}
+                    </el-tag>
+                  </li>
+                  <li>
+                    <p class="text-table">
+                      {{ item.unidades }}
+                    </p>
+                  </li>
+                  <li>
+                    <p class="text-table">
+                      {{ item.precio_producto | currency }}
+                    </p>
+                  </li>
+                  <li>
+                    <p class="text-table">
+                      {{ (item.unidades * item.precio_producto) | currency }}
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </table>
+          </client-only>
+          <div class="w-full flex h-1 bg-gray-900"></div>
         </div>
         <div class="content-info-orden" v-if="orden.venta">
           <div class="info-left">
             <p
               class="title-info-orden"
-              v-if="orden.venta.cupon == 'null' || orden.venta.cupon == null"
+              v-if="orden.venta.cupon && orden.venta.cupon !== 'null'"
             >
               {{ $t('mcompra_cupon') }}
-              <span class="value-info-orden">N/A</span>
+              <span class="value-info-orden">{{ orden.venta.cupon }}</span>
+            </p>
+            <p
+              class="title-info-orden"
+              v-if="orden.venta.descuento && orden.venta.descuento !== 'null'"
+            >
+              {{ $t('footer_descuento') }}
+              <span class="value-info-orden"
+                >- {{ orden.venta.descuento | currency }}</span
+              >
             </p>
             <p class="title-info-orden">
               {{ $t('mcompra_pcanaldeVenta') }}
@@ -124,13 +164,21 @@
                 {{ $t(`${choicePayment.title}`) }}</span
               >
             </p>
-            <p class="title-info-orden" v-if="choicePayment">
+            <p class="title-info-orden" v-if="fechaState">
               {{ $t('mcompra_fechaCompra') }}
               <span class="value-info-orden">{{ this.fechaState }}</span>
             </p>
-            <p class="title-info-orden" v-if="choicePayment">
+            <p class="title-info-orden" v-if="horaState">
               {{ $t('mcompra_horaCompra') }}
               <span class="value-info-orden">{{ this.horaState }}</span>
+            </p>
+            <p class="title-info-orden" v-if="orden && orden.usuario == 30866">
+              {{ $t('mcompra_pcanaldeVenta') }}
+              <span class="value-info-orden">Venta generada por WhatsApp</span>
+            </p>
+            <p class="title-info-orden" v-else>
+              {{ $t('mcompra_pcanaldeVenta') }}
+              <span class="value-info-orden">Venta generada por Checkout</span>
             </p>
           </div>
           <div class="content-state-top">
@@ -639,6 +687,73 @@ export default {
 </script>
 
 <style scoped>
+.table-striped {
+  width: 100%;
+  display: grid;
+}
+.table-striped .thead {
+  width: 100%;
+}
+.table-striped .thead ul {
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 10px 0;
+  list-style: none;
+}
+.table-striped .tbody ul {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 10px 0;
+  list-style: none;
+}
+.table-striped .tbody ul:nth-of-type(odd) {
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.photo img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+td {
+  vertical-align: middle !important;
+}
+td.variants {
+  display: flex;
+}
+td.variants p ~ p {
+  margin-left: 10px;
+}
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.thead ul li {
+  color: gray;
+}
+.text-table {
+  color: var(--purple);
+  font-size: 14px;
+}
+.text-normal-table {
+  color: black;
+  font-size: 14px;
+}
+.text-variant {
+  color: black;
+  font-size: 14px;
+}
+.text-bold-table {
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: end;
+  padding-right: 15px;
+}
 .wrapper_micompra {
   display: flex;
   width: 100%;
@@ -817,7 +932,7 @@ export default {
   flex-wrap: wrap;
   display: flex;
   grid-column-gap: 60px;
-  grid-row-gap: 35px;
+  /* grid-row-gap: 35px; */
   align-items: center;
   margin-bottom: 20px;
 }
@@ -942,7 +1057,6 @@ export default {
 .content-sections >>> .el-icon-arrow-right {
   color: black;
 }
-
 .content-info-buyer {
   display: flex;
   grid-column-gap: 40px;
@@ -978,7 +1092,6 @@ export default {
 .value-data {
   font-weight: normal;
 }
-
 @media (max-width: 863px) {
   .form {
     flex: 1;
