@@ -20,7 +20,7 @@ deploy-production:
 deploy-develop:
   stage: deploy-develop
   script:
-    - ssh -o StrictHostKeyChecking=no ubuntu@13.59.90.192 "sudo ./up.sh"
+    - ssh -o StrictHostKeyChecking=no ubuntu@13.59.90.192 "./up.sh"
   only: 
     - develop
       
