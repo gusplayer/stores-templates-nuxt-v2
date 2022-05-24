@@ -20,7 +20,7 @@ deploy-production:
 deploy-develop:
   stage: deploy-develop
   script:
-    - ssh -o StrictHostKeyChecking=no ubuntu@13.59.90.192 "ls -l && node --version"
+    - ssh -o StrictHostKeyChecking=no ubuntu@13.59.90.192 "source ~/.nvm/nvm.sh && ls -l && node --version"
   only: 
     - develop
       
