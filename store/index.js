@@ -679,7 +679,8 @@ export const actions = {
       parts[1] == 'kom' ||
       parts[1] == 'keepbuy' ||
       parts[1] == 'localhost:3000' ||
-      parts[1] == 'unicentrovillavicencio'
+      parts[1] == 'unicentrovillavicencio' ||
+      parts[1] == 'template-nuxt-dokku-seven'
     ) {
       id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
         name: `${subdomain}.komercia.co/`,
@@ -765,11 +766,15 @@ export const actions = {
       id: id && id.data.data ? id.data.data : null,
       dataStore: state.dataStore ? state.dataStore : null,
     }
+    dispatch('GET_INFO', param)
     commit('SET_INFO', param)
     // const idSlug = route.path.split('-')
     // const producto = await axios.get(
     //   `https://templates.komercia.co/api/producto/${idSlug.pop()}`
     // )
+  },
+  GET_INFO({ commit }, value) {
+    console.log('get', value)
   },
   GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
