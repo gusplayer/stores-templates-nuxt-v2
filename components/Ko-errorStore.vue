@@ -653,13 +653,16 @@
         </div>
         <div class="content-right">
           <div>
-            <p class="title-error">404</p>
+            <p class="title-error" @click="stateIdStore = !stateIdStore">404</p>
             <p class="subtitle-error">¡OH! Se ha perdido.</p>
             <p class="description-error">
               La tienda que busca no existe. Cómo has llegado aquí es un
               misterio. Pero puedes hacer clic en el botón para ir a la página
               de Komercia o hablar con un asesor.
             </p>
+            <div v-if="stateIdStore">
+              <p v-if="this.tempInfo">{{ this.tempInfo }}</p>
+            </div>
           </div>
           <div class="content-btn">
             <div>
@@ -692,6 +695,16 @@ export default {
   name: 'error-noStoreFound',
   components: {
     koWhatsapp,
+  },
+  data() {
+    return {
+      stateIdStore: false,
+    }
+  },
+  computed: {
+    tempInfo() {
+      return this.$store.state.tempInfo
+    },
   },
   methods: {
     mobileCheck() {
@@ -783,10 +796,10 @@ export default {
 .content-btn {
   margin-top: 20px;
   width: 100%;
-  max-width: 492px;
+  max-width: 460px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .content-btn > div {
   flex: 1;

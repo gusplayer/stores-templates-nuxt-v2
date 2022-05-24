@@ -6,8 +6,8 @@
         <nuxt />
         <component v-bind="componentsProps" :is="footerTemplate" />
         <KoFooterCountry
-          v-bind="componentsProps"
           v-if="dataStore.tienda.template != 99"
+          :dataStore="dataStore"
           :valueWa="false"
         />
         <div
