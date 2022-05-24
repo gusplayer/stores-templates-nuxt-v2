@@ -767,9 +767,11 @@ export const actions = {
     commit('SET_TEMPLATE_STORE', value)
   },
   async GET_DATA_TIENDA_BY_ID({ commit }, idTienda) {
+    console.log(idTienda)
     const response = await axios.get(
       `https://templates.komercia.co/api/tienda/${idTienda}`
     )
+    console.log(response.data)
     commit('DATA', response.data)
     commit('SET_DATA')
   },
