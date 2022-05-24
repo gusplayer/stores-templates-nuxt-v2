@@ -49,26 +49,19 @@ export default {
   ],
   // components: true,
   buildModules: ['@nuxtjs/tailwindcss'],
-  modules: ['@nuxtjs/pwa', '@nuxtjs/gtm'],
+  modules: ['@nuxtjs/gtm'],
   debug: {
     enabled: true,
   },
-  pwa: {
-    icon: false,
-    meta: {
-      name: process.env.npm_package_name || '',
-      author: 'Komercia',
-      description:
-        'tienda, store, shop, shopping, tienda online, online, komercia, producto, articulo',
-      theme_color: '#E2E4E7',
-      lang: 'es',
-    },
-    manifest: {
-      name: process.env.npm_package_name || '',
-      short_name: process.env.npm_package_name || '',
-      start_url: '/',
-    },
-  },
+  // pwa: {
+  //   icon: false,
+  //   manifest: {
+  //     name: process.env.npm_package_name || '',
+  //     short_name: process.env.npm_package_name || '',
+  //     start_url: '/',
+  //     lang: 'es',
+  //   },
+  // },
   build: {
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],

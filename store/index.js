@@ -180,6 +180,7 @@ export const state = () => ({
   dataHoko: {},
   producthoko: [],
   stateModalPwd: true,
+  tempInfo: '',
 })
 export const mutations = {
   SET_CURRENTSETTING5(state, value) {
@@ -583,6 +584,10 @@ export const mutations = {
   SET_STATE_MODAL_PWD(state, data) {
     state.stateModalPwd = data
   },
+  SET_INFO(state, data) {
+    state.tempInfo = data
+  },
+
   // STOREDB: (state, { storeLayout, producto }) => {
   //   state.storeLayout = storeLayout.data
   //   state.detalleProducto = producto.data.detalle
@@ -660,7 +665,6 @@ export const actions = {
     let subdomain = parts[0]
     let id = 0
     let idWapi = 0
-    console.log(full)
     if (
       parts[0] == 'localhost:3000' ||
       parts[0] == 'wapi' ||
@@ -685,7 +689,7 @@ export const actions = {
         name: `https://${full}`,
       })
     }
-    console.log(id.data)
+
     if (idWapi) {
       await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
       await dispatch('GET_TEMPLATE_STORE', 99)
@@ -695,7 +699,6 @@ export const actions = {
       await commit('SET_STATE_WAPIME', true)
     } else {
       if (id && id.data.data && id.data.data.id) {
-        console.log('ingresa sin store')
         await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
         await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
         await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
@@ -705,7 +708,6 @@ export const actions = {
           state.dataStore.tienda &&
           state.dataStore.tienda.id_tienda
         ) {
-          console.log('ingresa con store', state.dataStore.tienda)
           await dispatch('GET_DATA_HOKO', state.dataStore.tienda.id_tienda)
         }
         if (id.data.data.template == 7) {
@@ -756,6 +758,14 @@ export const actions = {
         await commit('SET_STATE_MODAL_PWD', false)
       }
     }
+    let param = {
+      url: full,
+      parts: parts,
+      subdomain: subdomain,
+      id: id && id.data.data ? id.data.data : null,
+      dataStore: state.dataStore ? state.dataStore : null,
+    }
+    commit('SET_INFO', param)
     // const idSlug = route.path.split('-')
     // const producto = await axios.get(
     //   `https://templates.komercia.co/api/producto/${idSlug.pop()}`
@@ -768,11 +778,9 @@ export const actions = {
     commit('SET_TEMPLATE_STORE', value)
   },
   async GET_DATA_TIENDA_BY_ID({ commit }, idTienda) {
-    console.log(idTienda)
     const response = await axios.get(
       `https://templates.komercia.co/api/tienda/${idTienda}`
     )
-    console.log(response.data)
     commit('DATA', response.data)
     commit('SET_DATA')
   },

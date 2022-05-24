@@ -16,6 +16,9 @@ export default {
       default: () => {},
     },
   },
+  mounted() {
+    return this.$store.state.tempInfo
+  },
   components: {
     error404,
   },
