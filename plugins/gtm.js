@@ -4,5 +4,7 @@ export default function ({ $gtm, store }) {
     store.state.analytics_tagmanager.tag_manager
       ? store.state.analytics_tagmanager.tag_manager
       : ''
-  $gtm.init(tag_manager)
+  if (tag_manager) {
+    $gtm.init(tag_manager)
+  }
 }

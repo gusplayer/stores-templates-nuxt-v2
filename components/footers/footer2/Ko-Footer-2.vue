@@ -104,7 +104,7 @@
               class="items-iconos"
               v-for="(item, index) in links"
               :key="`${index}${item.icon}`"
-              v-if="item.link"
+              v-show="item.link"
             >
               <a
                 v-if="item.link"

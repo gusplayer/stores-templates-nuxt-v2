@@ -5,7 +5,7 @@
         <div
           v-for="(item, index) in links"
           :key="`${index}${item.icon}`"
-          v-if="item.link"
+          v-show="item.link"
         >
           <a
             v-if="item.link"
@@ -22,7 +22,24 @@
           </a>
         </div>
       </div>
-
+      <div class="footer-item-secciones">
+        <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
+          <nuxt-link
+            v-if="item.path"
+            :to="`/wa/${dataStore.tienda.id_tienda}${item.path}`"
+            class="text-secciones"
+          >
+            {{ $t(`${item.name}`) }}
+          </nuxt-link>
+          <nuxt-link
+            v-if="item.href && listArticulos > 0"
+            :to="item.href"
+            class="text-secciones"
+          >
+            {{ $t(`${item.name}`) }}
+          </nuxt-link>
+        </div>
+      </div>
       <button
         class="text-politics"
         @click="OpenModalPolitics"
@@ -117,11 +134,28 @@ export default {
           link: this.dataStore.tienda.red_youtube,
         },
       ],
+      secciones: [
+        {
+          name: 'footer_inicio',
+          path: '/',
+        },
+        {
+          name: 'footer_micompra',
+          path: '/micompra',
+        },
+        // {
+        //   name: 'header_blog',
+        //   href: '/blog',
+        // },
+      ],
     }
   },
   computed: {
     showModal() {
       return this.$store.state.modalpolitics05
+    },
+    listArticulos() {
+      return this.$store.state.listArticulos.length
     },
   },
   methods: {
@@ -154,12 +188,35 @@ export default {
 .text-politics {
   margin-bottom: 2px;
   font-size: 12px;
-  font-weight: normal;
+  font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
   color: black;
+}
+.text-politics:hover {
+  color: var(--color_hover_text);
+}
+.footer-item-secciones {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.text-secciones {
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--color_text);
+  margin-right: 10px;
+  /* text-align: center; */
+}
+.text-secciones:hover {
+  color: var(--color_hover_text);
 }
 .under-footer {
   display: flex;
