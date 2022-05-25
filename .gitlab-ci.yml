@@ -19,14 +19,13 @@ install-dependecies:
     - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "cd template-nuxt-dokku && sudo git pull --no-edit && npm install"
   only: 
     - master
-    - develop
+
 compile-files:
   stage: compile-files
   script:
     - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "sudo su && source ~/.nvm/nvm.sh && cd template-nuxt-dokku && node --version && nvm list  && nvm use 14  && npm run build -y"
   only: 
     - master
-    - develop
 
 deploy-production:
   stage: deploy-production
