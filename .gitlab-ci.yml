@@ -16,7 +16,7 @@ before_script:
 install-dependecies:
   stage: install-dependecies
   script:
-    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "source ~/.nvm/nvm.sh && cd template-nuxt-dokku && git pull --no-edit && npm install"
+    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "cd template-nuxt-dokku && git pull --no-edit && npm install"
   only: 
     - master
     - develop
