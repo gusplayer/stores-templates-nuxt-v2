@@ -1,6 +1,8 @@
 stages:
+  - install-dependecies
+  - compile-files
   - deploy-production
-  - deploy-develop
+  # - deploy-develop
 image: node
 before_script:
   - apk add openssh-client util-linux --update curl && rm -rf /var/cache/apk/*
@@ -11,16 +13,33 @@ before_script:
   - free -m | grep -v "Swap" # RAM
   - df -h| grep -E "Filesystem|overlay" # storage
   - lscpu | grep -E "^CPU\(s\)" # CPUs
+install-dependecies:
+  stage: install-dependecies
+  script:
+    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "cd template-nuxt-dokku && sudo git pull --no-edit && npm install"
+  only: 
+    - master
+    - develop
+compile-files:
+  stage: compile-files
+  script:
+    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "cd template-nuxt-dokku  && npm run build -y"
+  only: 
+    - master
+    - develop
+
 deploy-production:
   stage: deploy-production
   script:
-    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "sudo ./up.sh"
+    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "pm2 delete appnuxt && pm2 start npm --name "appnuxt" -- start"
   only: 
     - master
-deploy-develop:
-  stage: deploy-develop
-  script:
-    - ssh -o StrictHostKeyChecking=no ubuntu@13.59.90.192 "source ~/.nvm/nvm.sh && ./up.sh"
-  only: 
     - develop
+
+# deploy-develop:
+#   stage: deploy-develop
+#   script:
+#     - ssh -o StrictHostKeyChecking=no ubuntu@13.59.90.192 "source ~/.nvm/nvm.sh && ./up.sh"
+#   only: 
+#     - develop
       
