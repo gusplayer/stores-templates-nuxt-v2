@@ -34,9 +34,16 @@
 
           {{ dataStore.tienda.moneda }}
         </p>
-        <div v-if="stateIdStore">
+        <div v-if="stateIdStore" class="flex flex-row justify-start">
           <p class="textid">
-            <strong>Store</strong>: {{ dataStore.tienda.id_tienda }}
+            <strong>ID</strong>:
+            {{ dataStore.tienda.id_tienda }}
+          </p>
+          <p class="textid ml-5">
+            <strong>Temp</strong>: {{ dataStore.tienda.template }}
+          </p>
+          <p class="textid ml-5">
+            <strong>Hoko</strong>: {{ dataHoko.statehoko == 0 ? 'NO' : 'SI' }}
           </p>
         </div>
       </div>
@@ -61,6 +68,11 @@ export default {
     return {
       stateIdStore: false,
     }
+  },
+  computed: {
+    dataHoko() {
+      return this.$store.state.dataHoko
+    },
   },
 }
 </script>

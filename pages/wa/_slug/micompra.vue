@@ -11,7 +11,7 @@
 
 <script>
 import axios from 'axios'
-import KoMicompra from '../../../components/miCompra/Ko-miCompra-1.vue'
+import KoMicompra from '../../../components/whatsapp/Ko-miCompra-1.vue'
 
 export default {
   components: {

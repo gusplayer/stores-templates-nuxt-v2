@@ -180,6 +180,7 @@ export const state = () => ({
   dataHoko: {},
   producthoko: [],
   stateModalPwd: true,
+  tempInfo: '',
 })
 export const mutations = {
   SET_CURRENTSETTING5(state, value) {
@@ -583,6 +584,10 @@ export const mutations = {
   SET_STATE_MODAL_PWD(state, data) {
     state.stateModalPwd = data
   },
+  SET_INFO(state, data) {
+    state.tempInfo = data
+  },
+
   // STOREDB: (state, { storeLayout, producto }) => {
   //   state.storeLayout = storeLayout.data
   //   state.detalleProducto = producto.data.detalle
@@ -671,9 +676,11 @@ export const actions = {
     } else if (
       parts[1] == 'sweetlips' ||
       parts[1] == 'komercia' ||
+      parts[1] == 'kom' ||
       parts[1] == 'keepbuy' ||
       parts[1] == 'localhost:3000' ||
-      parts[1] == 'unicentrovillavicencio'
+      parts[1] == 'unicentrovillavicencio' ||
+      parts[1] == 'template-nuxt-dokku-seven'
     ) {
       id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
         name: `${subdomain}.komercia.co/`,
@@ -683,11 +690,13 @@ export const actions = {
         name: `https://${full}`,
       })
     }
+
     if (idWapi) {
       await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
       await dispatch('GET_TEMPLATE_STORE', 99)
       await dispatch('GET_ANALYTICS_TAGMANAGER', idWapi)
       await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
+      await dispatch('GET_ARTICLES', idWapi)
       await commit('SET_STATE_WAPIME', true)
     } else {
       if (id && id.data.data && id.data.data.id) {
@@ -695,7 +704,11 @@ export const actions = {
         await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
         await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
         await dispatch('GET_ARTICLES', id.data.data.id)
-        if (state.dataStore && state.dataStore.tienda) {
+        if (
+          state.dataStore &&
+          state.dataStore.tienda &&
+          state.dataStore.tienda.id_tienda
+        ) {
           await dispatch('GET_DATA_HOKO', state.dataStore.tienda.id_tienda)
         }
         if (id.data.data.template == 7) {
@@ -746,11 +759,23 @@ export const actions = {
         await commit('SET_STATE_MODAL_PWD', false)
       }
     }
+    let param = {
+      url: full,
+      parts: parts,
+      subdomain: subdomain,
+      id: id && id.data.data ? id.data.data : null,
+      dataStore: state.dataStore ? state.dataStore : null,
+    }
+    dispatch('GET_INFO', param)
+    commit('SET_INFO', param)
     // const idSlug = route.path.split('-')
     // const producto = await axios.get(
     //   `https://templates.komercia.co/api/producto/${idSlug.pop()}`
     // )
   },
+  // GET_INFO({ commit }, value) {
+  //   console.log('get', value)
+  // },
   GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
   },

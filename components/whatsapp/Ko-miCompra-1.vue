@@ -758,7 +758,7 @@ table {
   display: flex;
   width: 100%;
   height: 100%;
-  min-height: calc(100vh);
+  min-height: calc(100vh - 38px);
   background-color: var(--background_color_2);
   justify-content: center;
   align-items: center;

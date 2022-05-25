@@ -47,7 +47,7 @@
               small
               layout="prev, pager, next"
               :total="products.length"
-              :page-size="18"
+              :page-size="16"
               :current-page.sync="currentPage"
             ></el-pagination>
           </div>
