@@ -367,30 +367,6 @@
         </div>
         <meta itemprop="url" :content="`${this.sharing.url}`" />
       </div>
-      <div>
-        <meta property="product:catalog_id" :content="`${data.detalle.id}`" />
-        <meta property="og:title" :content="`${data.detalle.nombre}`" />
-        <meta property="product:brand" :content="`${data.info.marca}`" />
-        <meta
-          property="og:description"
-          :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
-        />
-        <meta
-          property="og:image"
-          :content="`${data.detalle.foto_cloudinary}`"
-        />
-        <meta property="product:availability" content="in stock" />
-        <meta property="product:condition" content="new" />
-        <meta
-          property="product:price:amount"
-          :content="`${this.salesData.precio}`"
-        />
-        <meta
-          property="product:price:currency"
-          :content="`${dataStore.tienda.moneda}`"
-        />
-        <meta property="og:url" :content="`${this.sharing.url}`" />
-      </div>
     </div>
   </div>
 </template>
@@ -432,6 +408,75 @@ export default {
     }
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
+    }
+  },
+  head() {
+    return {
+      meta: [
+        {
+          hid: 'product:catalog_id',
+          name: 'product:catalog_id',
+          content: this.data && this.data.detalle ? this.data.detalle.id : 'id',
+        },
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content:
+            this.data && this.data.detalle ? this.data.detalle.nombre : 'title',
+        },
+        {
+          hid: 'product:brand',
+          name: 'product:brand',
+          content: this.data && this.data.info ? this.data.info.marca : 'brand',
+        },
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          content:
+            this.dataStore && this.dataStore.tienda
+              ? `Producto de la tienda ${this.dataStore.tienda.nombre}`
+              : 'description',
+        },
+        {
+          hid: 'og:image',
+          name: 'og:image',
+          content:
+            this.data && this.data.detalle
+              ? this.data.detalle.foto_cloudinary
+              : 'image',
+        },
+        {
+          hid: 'product:availability',
+          name: 'product:availability',
+          content: 'in stock',
+        },
+        {
+          hid: 'product:condition',
+          name: 'product:condition',
+          content: 'new',
+        },
+        {
+          hid: 'product:price:amount',
+          name: 'product:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : 'price-amount',
+        },
+        {
+          hid: 'product:price:currency',
+          name: 'product:price:currency',
+          content:
+            this.dataStore && this.dataStore.tienda
+              ? this.dataStore.tienda.moneda
+              : 'price-currency',
+        },
+        {
+          hid: 'og:url',
+          name: 'og:url',
+          content: this.sharing && this.sharing.url ? this.sharing.url : 'url',
+        },
+      ],
     }
   },
   data() {
@@ -481,13 +526,13 @@ export default {
       return this.$refs.mySwiper.swiper
     },
     existPayments() {
-      const mediospago = this.dataStore.medios_pago
+      const mediosPago = this.dataStore.medios_pago
       if (
-        mediospago.consignacion ||
-        mediospago.convenir ||
-        mediospago.payco ||
-        mediospago.tienda ||
-        mediospago.efecty
+        mediosPago.consignacion ||
+        mediosPago.convenir ||
+        mediosPago.payco ||
+        mediosPago.tienda ||
+        mediosPago.efecty
       ) {
         return true
       }
@@ -604,7 +649,7 @@ export default {
       this.data.detalle = {
         foto_cloudinary:
           'https://vignette.wikia.nocookie.net/la-bitacora-del-capitan/images/6/67/Not_found.png/revision/latest?cb=20190509042801&path-prefix=es',
-        nombre: 'Producto de prueda',
+        nombre: 'Producto de prueba',
         precio: 29999,
       }
       this.data.info = {
@@ -644,13 +689,13 @@ export default {
             case 'precio':
               this.envio = {
                 titulo: 'Tarifa por precio',
-                desc: 'Segun la suma del costo de tus productos te cobraran el envio',
+                desc: 'Según la suma del costo de tus productos te cobraran el envio',
               }
               break
             case 'precio_ciudad':
               this.envio = {
                 titulo: 'Tarifa por ciudad',
-                desc: 'Segun la ciudad te cobraran el envio',
+                desc: 'Según la ciudad te cobraran el envio',
               }
               break
             case 'peso':

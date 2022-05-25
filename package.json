@@ -15,11 +15,10 @@
     "deploy": "pm2 start npm --name template-nuxt-dokku -- start"
   },
   "dependencies": {
-    "@babel/core": "^7.17.12",
+    "@babel/core": "^7.18.0",
     "@babel/polyfill": "^7.12.1",
-    "@babel/preset-env": "^7.17.12",
+    "@babel/preset-env": "^7.18.0",
     "@nuxtjs/gtm": "^2.4.0",
-    "@nuxtjs/pwa": "^3.3.5",
     "axios": "^0.25.0",
     "babel-loader": "^8.2.3",
     "babel-plugin-module-resolver": "^4.1.0",
