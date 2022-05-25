@@ -23,7 +23,7 @@ install-dependecies:
 compile-files:
   stage: compile-files
   script:
-    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "cd template-nuxt-dokku  && npm run build -y"
+    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "source ~/.nvm/nvm.sh && cd template-nuxt-dokku  && npm run build -y"
   only: 
     - master
     - develop
