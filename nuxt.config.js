@@ -53,15 +53,6 @@ export default {
   debug: {
     enabled: true,
   },
-  // pwa: {
-  //   icon: false,
-  //   manifest: {
-  //     name: process.env.npm_package_name || '',
-  //     short_name: process.env.npm_package_name || '',
-  //     start_url: '/',
-  //     lang: 'es',
-  //   },
-  // },
   build: {
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
