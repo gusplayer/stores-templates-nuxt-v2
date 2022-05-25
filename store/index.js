@@ -764,8 +764,8 @@ export const actions = {
       id: id && id.data.data ? id.data.data : null,
       dataStore: state.dataStore ? state.dataStore : null,
     }
-    dispatch('GET_INFO', param)
-    // commit('SET_INFO', param)
+    // dispatch('GET_INFO', param)
+    commit('SET_INFO', param)
     // const idSlug = route.path.split('-')
     // const producto = await axios.get(
     //   `https://templates.komercia.co/api/producto/${idSlug.pop()}`
