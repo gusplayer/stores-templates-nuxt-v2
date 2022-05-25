@@ -773,9 +773,9 @@ export const actions = {
     //   `https://templates.komercia.co/api/producto/${idSlug.pop()}`
     // )
   },
-  GET_INFO({ commit }, value) {
-    console.log('get', value)
-  },
+  // GET_INFO({ commit }, value) {
+  //   console.log('get', value)
+  // },
   GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
   },
