@@ -96,7 +96,7 @@ export default {
             case 'header':
               this.moverseA('KHeaderX')
               break
-            case 'prodcutList':
+            case 'productList':
               this.moverseA('KProductX')
               break
             case 'footer':

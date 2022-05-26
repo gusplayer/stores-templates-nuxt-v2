@@ -463,7 +463,6 @@ export default {
       'dataStore',
       'dataCookies',
       'settingBase',
-      'stateModalPwd',
       'settingByTemplate',
       'settingByTemplate7',
       'settingByTemplate9',
@@ -663,6 +662,14 @@ export default {
           : null,
       }
     },
+    stateModalPwd: {
+      get() {
+        return this.$store.state.stateModalPwd
+      },
+      set(value) {
+        this.$store.commit('SET_STATE_MODAL_PWD', value)
+      },
+    },
   },
   methods: {
     mobileCheck() {
@@ -729,22 +736,25 @@ export default {
         e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data) {
-          this.$store.commit('SET_CURRENTSETTINGMODAL', e.data)
-          if (
-            e.data.data &&
-            e.data.data.stateModal &&
-            e.data.data.stateModal == 1
-          ) {
-            this.$store.commit('SET_STATE_MODAL_PWD', false)
-          } else if (
-            e.data.data &&
-            e.data.data.stateModal &&
-            e.data.data.stateModal == 0
-          ) {
-            this.$store.commit('SET_STATE_MODAL_PWD', true)
+          if (e.data.type == 'settingModal') {
+            this.$store.commit('SET_CURRENTSETTINGMODAL', e.data)
+            if (
+              e.data.data &&
+              e.data.data.stateModal &&
+              e.data.data.stateModal == 1
+            ) {
+              this.stateModalPwd = false
+            } else {
+              this.stateModalPwd = true
+            }
           }
         }
       }
+    },
+  },
+  watch: {
+    stateModalPwd(value) {
+      console.log(value)
     },
   },
 }
