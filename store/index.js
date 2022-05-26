@@ -649,12 +649,12 @@ export const actions = {
     if (
       state.dataStore &&
       state.dataStore.modal &&
-      state.dataStore.modal.password
+      state.dataStore.modal.stateModal == 1
     ) {
-      if (cookies == state.dataStore.modal.password) {
-        commit('SET_STATE_MODAL_PWD', true)
-        // eslint-disable-next-line no-console
-        console.log('Cookie PWD Ok')
+      if (state.dataStore.modal.password) {
+        if (cookies == state.dataStore.modal.password) {
+          commit('SET_STATE_MODAL_PWD', true)
+        }
       }
     }
   },
@@ -764,16 +764,12 @@ export const actions = {
       id: id && id.data.data ? id.data.data : null,
       dataStore: state.dataStore ? state.dataStore : null,
     }
-    // dispatch('GET_INFO', param)
     commit('SET_INFO', param)
     // const idSlug = route.path.split('-')
     // const producto = await axios.get(
     //   `https://templates.komercia.co/api/producto/${idSlug.pop()}`
     // )
   },
-  // GET_INFO({ commit }, value) {
-  //   console.log('get', value)
-  // },
   GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
   },
