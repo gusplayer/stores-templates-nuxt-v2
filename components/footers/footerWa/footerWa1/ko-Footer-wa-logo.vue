@@ -143,10 +143,10 @@ export default {
           name: 'footer_micompra',
           path: '/micompra',
         },
-        // {
-        //   name: 'header_blog',
-        //   href: '/blog',
-        // },
+        {
+          name: 'header_blog',
+          href: `/wa/${this.dataStore.tienda.id_tienda}/blog`,
+        },
       ],
     }
   },

@@ -106,13 +106,41 @@
                 </div>
               </div>
             </div>
+            <!-- //Filtro precio} -->
+            <!-- <button class="item-tittle accordion">
+              <p class="txt-tittles">
+                {{ $t('home_fprecio') }}
+              </p>
+            </button>
+            <div class="categorys-list panel">
+              <button class="txt-Filter" @click="getProductsHigherNumber()">
+                {{ $t('home_fpreciom') }}
+              </button>
+              <button class="txt-Filter" @click="getProductsSmallerNumber()">
+                {{ $t('home_fprecioM') }}
+              </button>
+            </div>
+            <div class="empty"></div> -->
+            <!-- //Filtro por envio} -->
+            <button class="item-tittle accordion">
+              <p class="txt-tittles">
+                {{ $t('home_fenvio') }}
+              </p>
+            </button>
+            <div class="categorys-list panel">
+              <button class="txt-Filter" @click="getProductsShippingFree()">
+                {{ $t('home_gratis') }}
+              </button>
+              <button class="txt-Filter" @click="getProductsNoShippingFree()">
+                {{ $t('home_Singratis') }}
+              </button>
+            </div>
           </div>
           <div
             class="empty"
             v-if="showSubCategory && selectedSubcategories.length"
           ></div>
         </div>
-
         <div class="content-right">
           <nuxt-link class="content-home hidd" to="/productos">
             <p class="txt-content-home" @click="clear">
@@ -255,7 +283,6 @@ export default {
     fullProducts: {},
   },
   mixins: [sendCategoryUrl, SendsubcategoryUrl],
-
   name: 'Ko-ProductList-Filter',
   mounted() {
     if (this.$store.getters['products/filterProducts']) {
@@ -359,15 +386,11 @@ export default {
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
-    listArticulos() {
-      return this.$store.state.listArticulos.length
-    },
     filterProduct() {
       const initial = this.currentPage * 16 - 16
       const final = initial + 16
       return this.products.slice(initial, final)
     },
-
     selectedCategory() {
       return this.$store.state.products.payload
     },
@@ -388,6 +411,34 @@ export default {
     },
   },
   methods: {
+    getProductsShippingFree() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'ShippingFree',
+        data: '',
+      })
+      this.currentPage = 1
+    },
+    getProductsNoShippingFree() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'NoShippingFree',
+        data: '',
+      })
+      this.currentPage = 1
+    },
+    getProductsHigherNumber() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'higherNumber',
+        data: '',
+      })
+      this.currentPage = 1
+    },
+    getProductsSmallerNumber() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'smallerNumber',
+        data: '',
+      })
+      this.currentPage = 1
+    },
     filterProductPrice() {
       let result = {}
       if (this.filterProduct && this.value) {
@@ -859,6 +910,16 @@ export default {
 }
 .content-category-left {
   @apply w-full flex flex-col justify-start items-center;
+}
+.txt-Filter {
+  color: var(--color_subtext);
+  font-size: 15px;
+  line-height: 1.3;
+  font-family: var(--font-style-1) !important;
+  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+}
+.txt-Filter:hover {
+  color: #eb7025;
 }
 .txt-categorys {
   color: var(--color_subtext);

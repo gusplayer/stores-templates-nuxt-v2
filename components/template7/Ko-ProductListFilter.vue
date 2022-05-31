@@ -431,9 +431,6 @@ export default {
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
-    listArticulos() {
-      return this.$store.state.listArticulos.length
-    },
     filterProduct() {
       const initial = this.currentPage * 16 - 16
       const final = initial + 16
