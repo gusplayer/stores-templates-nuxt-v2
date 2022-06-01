@@ -30,7 +30,8 @@ compile-files:
 deploy-production:
   stage: deploy-production
   script:
-    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "sudo su && source ~/.nvm/nvm.sh && node --version && cd template-nuxt-dokku && sudo pm2 delete appnuxt && sudo pm2 start npm --name "appnuxt" -- start"
+  # sudo pm2 delete appnuxt && sudo pm2 start npm --name "appnuxt" -- start
+    - ssh -o StrictHostKeyChecking=no ubuntu@18.190.124.250 "sudo su && source ~/.nvm/nvm.sh && node --version && cd template-nuxt-dokku && pm2 restart appnuxt"
   only: 
     - master
 
