@@ -139,7 +139,7 @@
                     : '#FFFFFF'
                 };`"
               >
-                {{ $t('productdetail_btnComprar') }}</router-link
+                {{ $t('home_cardvermas') }}</router-link
               >
             </div>
             <router-link
@@ -159,7 +159,7 @@
                   : '#FFFFFF'
               };`"
             >
-              {{ $t('productdetail_btnComprar') }}</router-link
+              {{ $t('home_cardvermas') }}</router-link
             >
           </div>
         </div>

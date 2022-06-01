@@ -30,44 +30,46 @@
       <div class="product-content">
         <div class="left">
           <div class="wrapper-left">
-            <template>
-              <div
-                v-swiper:mySwiper="swiperOption"
-                ref="mySwiper"
-                class="photos"
-              >
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide photos_selected">
-                    <img
-                      @click="selectedPhoto(data.detalle.foto_cloudinary)"
-                      class="img-list"
-                      v-lazy="
-                        idCloudinary(data.detalle.foto_cloudinary, 120, 120)
-                      "
-                      alt="Product Img"
-                    />
+            <div class="photos">
+              <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+                <div class="swiper-wrapper h-full">
+                  <div class="swiper-slide">
+                    <div class="photos_selected">
+                      <img
+                        @click="selectedPhoto(data.detalle.foto_cloudinary)"
+                        class="img-list"
+                        v-lazy="
+                          idCloudinary(data.detalle.foto_cloudinary, 120, 120)
+                        "
+                        alt="Product Img"
+                      />
+                    </div>
                   </div>
                   <div
-                    class="swiper-slide photos_selected"
+                    class="swiper-slide h-full"
                     v-for="(foto, itemsfoto) in data.fotos"
                     :key="itemsfoto"
                   >
-                    <img
-                      @click="selectedPhoto(foto.foto_cloudinary)"
-                      class="img-list"
-                      v-lazy="foto.foto_cloudinary"
-                      alt="Product Img"
-                    />
+                    <div class="photos_selected">
+                      <img
+                        @click="selectedPhoto(foto.foto_cloudinary)"
+                        class="img-list"
+                        v-lazy="foto.foto_cloudinary"
+                        alt="Product Img"
+                      />
+                    </div>
                   </div>
-                  <div class="swiper-slide photos_selected">
-                    <img
-                      v-if="idYoutube"
-                      v-lazy="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
-                      v-show="idYoutube"
-                      v-on:mouseover="existYoutube = true"
-                      class="video"
-                      alt="Product Img"
-                    />
+                  <div class="swiper-slide h-full">
+                    <div class="photos_selected">
+                      <img
+                        v-if="idYoutube"
+                        v-lazy="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
+                        v-show="idYoutube"
+                        v-on:mouseover="existYoutube = true"
+                        class="video"
+                        alt="Product Img"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="swiper-prev" v-if="data.fotos.length > 3">
@@ -77,7 +79,7 @@
                   <Flechadown-icon class="icon-swiper" />
                 </div>
               </div>
-            </template>
+            </div>
             <div class="wrapper-photo_main">
               <div
                 v-if="this.activeZoom"
@@ -914,16 +916,26 @@ export default {
   display: none;
 }
 .photos {
-  display: flex;
-  margin-right: 30px;
+  min-width: 110px;
   max-width: 110px;
-  position: relative;
-  max-height: 427px;
-  overflow: hidden;
+  min-height: 442px;
+  max-height: 442px;
+  margin-right: 30px;
+  @apply w-full h-full flex relative overflow-hidden;
 }
-.swiper-wrapper {
-  width: 100%;
-  position: relative;
+.photos_selected {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  max-height: 100px;
+  max-width: 100px;
+  min-height: 100px;
+  min-width: 100px;
+  @apply w-full h-full;
+}
+.img-list {
+  vertical-align: top;
+  @apply w-full h-full cursor-pointer object-cover rounded-6 mb-10;
 }
 .swiper-prev {
   position: absolute;
@@ -946,23 +958,6 @@ export default {
 .icon-swiper:hover {
   color: var(--hover_text);
 }
-.photos_selected {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  max-height: 100px;
-}
-.img-list {
-  cursor: pointer;
-  vertical-align: top;
-  height: 100px;
-  min-height: 100px;
-  width: 100px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 10px;
-}
 .video {
   width: 100px;
   height: 100px;
@@ -977,7 +972,7 @@ export default {
   max-width: 650px;
   max-height: 600px;
   width: 100%;
-  margin-right: 25px;
+  margin-right: 10px;
 }
 .photo_main {
   width: 100%;
@@ -1013,9 +1008,6 @@ export default {
 .content-items-variant {
   margin-bottom: 8px;
   @apply w-full flex flex-col justify-start items-start;
-}
-.img-list {
-  @apply w-auto h-auto object-cover overflow-hidden;
 }
 .aditional-images,
 .main-images,

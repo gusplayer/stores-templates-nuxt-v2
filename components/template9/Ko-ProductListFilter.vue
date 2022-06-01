@@ -689,6 +689,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .input-slide {
+  color: var(--color_subtext);
   font-family: var(--font-style-1) !important;
   @apply w-full cursor-pointer border-none;
   height: 30px;

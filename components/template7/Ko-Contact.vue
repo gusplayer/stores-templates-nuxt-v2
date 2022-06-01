@@ -350,7 +350,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-self: end;
+  align-self: self-start;
 }
 .contact-item-text {
   width: 100%;
