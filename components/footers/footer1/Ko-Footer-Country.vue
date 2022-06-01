@@ -45,6 +45,7 @@
           <p class="textid ml-5">
             <strong>Hoko</strong>: {{ dataHoko.statehoko == 0 ? 'NO' : 'SI' }}
           </p>
+          <p class="textid ml-5"><strong>TEST</strong>:</p>
         </div>
       </div>
       <KoLanguage />
