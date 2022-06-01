@@ -92,13 +92,17 @@ export default {
 </script>
 <style scoped>
 .content-blog {
-  background: white;
+  /* background: white; */
   height: calc(100vh);
   @apply w-full flex flex-col justify-start items-center;
 }
 .wrapper-art-blog {
-  max-height: calc(100vh - 55px);
   overflow-y: auto;
+  height: calc(100vh - 55px);
+  max-width: 900px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: #fff;
   @apply w-full flex justify-center items-start;
 }
 .content-art-blog {
@@ -189,8 +193,11 @@ export default {
 }
 @screen sm {
   .bannerBlog {
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-color: #fff;
     max-width: 900px;
-    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center py-20 border-b;
+    @apply w-full flex justify-center items-center py-20 border-b;
   }
   .content-art-blog {
     @apply w-9/0;
@@ -202,7 +209,8 @@ export default {
     @apply w-full grid-cols-1 gap-8;
   }
   .content-products {
-    @apply h-full transition-all ease-in duration-0.2;
+    background-color: #f9f9f9;
+    @apply h-full transition-all ease-in duration-0.2 rounded-9 border;
   }
   .content-products:hover {
     @apply w-full transition-all ease-in duration-0.2;
@@ -237,16 +245,6 @@ export default {
   }
   .tittle-banner-blog {
     @apply w-auto flex flex-row justify-center items-center;
-  }
-}
-@media (min-width: 900px) {
-  .content-art-blog {
-    max-width: 900px;
-  }
-}
-@media (min-width: 500px) {
-  .content-art-blog {
-    max-width: 900px;
   }
 }
 </style>

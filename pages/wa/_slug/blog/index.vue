@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="home">
+  <div class="content-wa" id="width">
     <KBlogWapi />
   </div>
 </template>
@@ -11,5 +11,23 @@ export default {
   components: {
     KBlogWapi,
   },
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize)
+  },
+  methods: {
+    onResize() {
+      const widthOutput = document.querySelector('#width')
+      widthOutput.style.width = window.innerWidth + 'px'
+    },
+  },
 }
 </script>
+<style scoped>
+.content-wa {
+  @apply w-full flex flex-col justify-center items-center;
+}
+</style>

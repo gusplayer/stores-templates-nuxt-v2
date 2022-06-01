@@ -20,7 +20,7 @@
       <div class="content-img">
         <img
           class="img-aritcle"
-          v-lazy="dataArticle.imagen_principal_url"
+          :src="dataArticle.imagen_principal_url"
           alt="Image-Article"
         />
       </div>
@@ -106,8 +106,15 @@ export default {
 .content-article {
   max-width: 900px;
   height: calc(100vh);
-  overflow-y: auto;
   @apply w-full flex flex-col justify-start items-center;
+}
+.content-item-article {
+  overflow-y: auto;
+  height: calc(100vh - 55px);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: #fff;
+  @apply px-20;
 }
 .crumb {
   @apply w-full flex flex-row justify-center items-center;
@@ -120,7 +127,6 @@ export default {
 .txt-crumb {
   font-size: 15px;
   color: #222;
-
   @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
 }
 .s1:hover {
@@ -131,22 +137,96 @@ export default {
   color: #222;
   transition: all 0.25s ease;
 }
+.editor {
+  width: 100%;
+}
+.editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
+  border: none;
+  padding: 0px 5px;
+  background-color: transparent;
+}
+.editor >>> .el-tiptap-editor__menu-bubble {
+  display: none;
+}
+.editor >>> .el-tiptap-editor__content h1 {
+  font-size: 2em;
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content h2 {
+  font-size: 1.5em;
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content h3 {
+  font-size: 1.17em;
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content h4 {
+  font-size: 1.12em;
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content h5 {
+  font-size: 0.83em;
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content p {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content span {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content blockquote {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content code {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content ul {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content ol {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content li {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content pre {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content strong {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content em {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content s {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content .image-view__body__image {
+  cursor: none;
+  pointer-events: none;
+}
+.editor >>> .el-popper.el-tiptap-image-popper {
+  display: none;
+}
 @screen sm {
   .bannerBlog {
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-color: #fff;
     max-width: 900px;
-    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center py-20 border-b;
+    @apply w-full flex justify-center items-center py-20 border-b;
   }
   .crumb {
     @apply justify-center items-center;
   }
   .content-item-article {
-    @apply w-9/0 flex flex-col justify-start items-center mb-20;
+    @apply w-full flex flex-col justify-start items-center;
   }
   .tittle-blog {
     font-size: 16px;
     color: #191919;
     letter-spacing: 0.3px;
-    @apply w-full flex flex-col justify-center items-start font-medium my-20 leading-22;
+    @apply w-full flex flex-col justify-center items-start font-bold my-20 leading-22;
   }
   .content-img {
     @apply w-full flex flex-col justify-start items-center mb-20;
@@ -162,20 +242,11 @@ export default {
     color: #000;
     @apply font-normal capitalize;
   }
-  .editor {
-    @apply w-full max-w-full flex flex-col justify-center items-center overflow-hidden;
-  }
 }
 @screen md {
   .content-img {
-    width: 400px;
-    max-width: 400px;
-  }
-}
-@media (min-width: 900px) {
-  .content-item-article {
-    max-width: 900px;
-    height: calc(100vh - 55px);
+    width: 250px;
+    max-width: 250px;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="home">
+  <div class="content-wa" id="width">
     <KArticleWapi />
   </div>
 </template>
@@ -9,5 +9,23 @@ import KArticleWapi from '../../../../components/whatsapp/blog_page/Ko-articulo.
 export default {
   layout: 'wa',
   components: { KArticleWapi },
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize)
+  },
+  methods: {
+    onResize() {
+      const widthOutput = document.querySelector('#width')
+      widthOutput.style.width = window.innerWidth + 'px'
+    },
+  },
 }
 </script>
+<style scoped>
+.content-wa {
+  @apply w-full flex flex-col justify-center items-center;
+}
+</style>

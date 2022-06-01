@@ -116,14 +116,14 @@ export default {
 </script>
 <style scoped>
 .producto {
-  @apply w-full h-full flex flex-col justify-start items-center;
+  @apply w-full h-full flex flex-col justify-start items-center rounded-9;
   background-color: white;
 }
 .container {
   @apply relative;
 }
 .content-imge {
-  @apply w-full h-auto relative flex justify-start cursor-pointer overflow-hidden transition-all ease-in duration-0.2;
+  @apply w-full h-auto relative flex justify-start cursor-pointer overflow-hidden transition-all ease-in duration-0.2 rounded-t-9;
 }
 .images {
   @apply w-full object-cover overflow-hidden;
@@ -196,7 +196,7 @@ export default {
     right: 0;
     width: 40px;
     height: 45px;
-    background-color: white;
+    background-color: #fafafa;
   }
   .txt-article-tittle {
     font-size: 14px;
