@@ -34,6 +34,30 @@ export const getters = {
       return state.fullProducts.filter(
         (product) => product.categoria === state.payload
       )
+    } else if (state.type === 'ShippingFree') {
+      return state.fullProducts.filter((product) => {
+        if (product.envio_gratis === 1) {
+          return product
+        }
+      })
+    } else if (state.type === 'NoShippingFree') {
+      return state.fullProducts.filter((product) => {
+        if (product.envio_gratis === 0) {
+          return product
+        }
+      })
+    } else if (state.type === 'higherNumber') {
+      return state.fullProducts.filter((product) => {
+        if (product.envio_gratis === 0) {
+          return product
+        }
+      })
+    } else if (state.type === 'smallerNumber') {
+      return state.fullProducts.filter((product) => {
+        if (product.envio_gratis === 0) {
+          return product
+        }
+      })
     }
     return state.fullProducts.sort(function (prev, next) {
       return next.orden - prev.orden

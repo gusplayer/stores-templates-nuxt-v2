@@ -724,7 +724,7 @@ export default {
   font-family: var(--font-style-2);
   color: var(--color_text_card);
   font: inherit;
-  font-weight: 800;
+  font-weight: 500;
   text-align: left;
 }
 .categoria {

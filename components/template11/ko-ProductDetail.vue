@@ -908,6 +908,7 @@ export default {
   display: flex;
   flex-direction: row;
   padding-bottom: 10px;
+  align-items: flex-start;
 }
 .photos_responsive {
   display: none;
@@ -917,6 +918,8 @@ export default {
   margin-right: 30px;
   max-width: 110px;
   position: relative;
+  max-height: 427px;
+  overflow: hidden;
 }
 .swiper-wrapper {
   width: 100%;
@@ -954,6 +957,7 @@ export default {
   cursor: pointer;
   vertical-align: top;
   height: 100px;
+  min-height: 100px;
   width: 100px;
   object-fit: cover;
   border-radius: 6px;
@@ -962,6 +966,7 @@ export default {
 .video {
   width: 100px;
   height: 100px;
+  min-height: 100px;
   border-radius: 5px;
   margin-bottom: 10px;
   object-fit: cover;
@@ -980,18 +985,6 @@ export default {
   object-fit: contain;
   object-position: center;
   border-radius: 10px;
-}
-.photo_main_zoom {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 10px;
-  cursor: zoom-in;
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  transform: scale(1.2);
 }
 .wrapper-productDetail {
   background: var(--background_color_1);

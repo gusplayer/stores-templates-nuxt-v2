@@ -54,6 +54,7 @@ figure.zoom {
   overflow: hidden;
   cursor: zoom-in;
   margin-bottom: 10px;
+  border-radius: 10px;
 }
 figure.zoom img {
   max-width: 100%;

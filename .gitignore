@@ -86,3 +86,10 @@ sw.*
 # Vim swap files
 *.swp
 package-lock.json
+.nuxt/App.js
+.nuxt/index.js
+.nuxt/router.js
+.nuxt/routes.json
+.nuxt/store.js
+.nuxt/workbox.js
+.nuxt/components/nuxt.js
