@@ -154,7 +154,8 @@ export default {
     addEventListenertemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
-        e.origin.includes('http://localhost:8080')
+        e.origin.includes('http://localhost:8080') ||
+        e.origin.includes('https://panel.komercia.xyz')
       ) {
         if (e && e.data && e.data.component) {
           if (e.data.template == 9) {
