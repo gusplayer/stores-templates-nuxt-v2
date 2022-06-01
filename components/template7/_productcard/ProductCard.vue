@@ -542,7 +542,7 @@ export default {
   @apply h-full w-full;
 }
 .producto-productCard {
-  @apply flex flex-col justify-center items-center cursor-pointer mt-20;
+  @apply h-full flex flex-col justify-start items-center cursor-pointer mt-20;
 }
 .datos-producto {
   @apply w-full flex flex-col justify-center items-center pt-16;

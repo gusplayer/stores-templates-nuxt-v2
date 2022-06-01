@@ -22,13 +22,17 @@
         <a
           :href="`${settingKPromo.values[0].url_redirect}`"
           rel="noreferrer noopener"
+          class="content-1"
         >
-          <figure class="promo-banner-images content-1">
-            <img
-              id="images-1"
-              :src="settingKPromo.values[0].url_img"
-              alt="left-banner"
-            />
+          <figure class="promo-banner-images">
+            <div class="content-1">
+              <img
+                id="images-1"
+                v-lazy="settingKPromo.values[0].url_img"
+                alt="left-banner"
+                class="images"
+              />
+            </div>
             <div class="promo-banner-text" id="promo-banner-text-1">
               <p
                 class="promo-banner-tittle"
@@ -55,20 +59,20 @@
         </a>
       </div>
       <div class="banner-medium">
-        <div class="promo-banner-2" :style="settingKPromo.values[1]">
+        <div class="promo-banner-2 content-2" :style="settingKPromo.values[1]">
           <a
             :href="`${settingKPromo.values[1].url_redirect}`"
             rel="noreferrer noopener"
           >
-            <figure class="promo-banner-images content-2">
-              <img
-                id="images-2"
-                class="images"
-                width="384"
-                height="230"
-                :src="settingKPromo.values[1].url_img"
-                alt="medium-top-banner"
-              />
+            <figure class="promo-banner-images">
+              <div class="content-2">
+                <img
+                  id="images-2"
+                  class="images"
+                  v-lazy="settingKPromo.values[1].url_img"
+                  alt="medium-top-banner"
+                />
+              </div>
               <div class="promo-banner-text" id="promo-banner-text-2">
                 <p
                   class="promo-banner-tittle"
@@ -87,20 +91,20 @@
             </figure>
           </a>
         </div>
-        <div class="promo-banner-3" :style="settingKPromo.values[2]">
+        <div class="promo-banner-3 content-2" :style="settingKPromo.values[2]">
           <a
             :href="`${settingKPromo.values[2].url_redirect}`"
             rel="noreferrer noopener"
           >
-            <figure class="promo-banner-images content-2">
-              <img
-                id="images-3"
-                class="images"
-                width="384"
-                height="230"
-                :src="settingKPromo.values[2].url_img"
-                alt="medium-bottom-banner"
-              />
+            <figure class="promo-banner-images">
+              <div class="content-2">
+                <img
+                  id="images-3"
+                  class="images"
+                  v-lazy="settingKPromo.values[2].url_img"
+                  alt="medium-bottom-banner"
+                />
+              </div>
               <div class="promo-banner-text" id="promo-banner-text-3">
                 <p
                   class="promo-banner-tittle"
@@ -124,19 +128,17 @@
         <a
           :href="`${settingKPromo.values[3].url_redirect}`"
           rel="noreferrer noopener"
+          class="content-4"
         >
-          <figure
-            class="promo-banner-images content-4"
-            id="promo-banner-images-4"
-          >
-            <img
-              id="images-4"
-              class="images"
-              width="283"
-              height="480"
-              :src="settingKPromo.values[3].url_img"
-              alt="right-banner"
-            />
+          <figure class="promo-banner-images" id="promo-banner-images-4">
+            <div class="content-4">
+              <img
+                id="images-4"
+                class="images"
+                v-lazy="settingKPromo.values[3].url_img"
+                alt="right-banner"
+              />
+            </div>
             <div class="promo-banner-text text4" id="promo-banner-text-4">
               <p
                 class="promo-banner-tittle"
@@ -175,6 +177,11 @@ export default {
 </script>
 
 <style scoped>
+.images {
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
 .promo-banner-content {
   background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center pt-20 pb-20;
@@ -192,16 +199,19 @@ figure {
   @apply overflow-hidden m-0 p-0;
 }
 .content-1 {
-  max-width: 495px;
+  max-width: 485px;
   max-height: 480px;
+  @apply h-full w-full;
 }
 .content-2 {
   max-width: 384px;
   max-height: 230px;
+  @apply h-full w-full;
 }
 .content-4 {
   max-width: 283px;
   max-height: 480px;
+  @apply h-full w-full;
 }
 .promo-banner-items figure img {
   -webkit-transform: scale(1);

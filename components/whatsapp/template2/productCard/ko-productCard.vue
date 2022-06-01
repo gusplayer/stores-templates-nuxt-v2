@@ -147,7 +147,7 @@
             class="txt-btn-right"
             :style="`color:${settingByTemplate.color_secundario};`"
           >
-            {{ $t('productdetail_btnComprar') }}
+            {{ $t('home_cardvermas') }}
           </p>
         </router-link>
       </div>
@@ -167,7 +167,7 @@
           class="txt-btn-right"
           :style="`color:${settingByTemplate.color_secundario};`"
         >
-          {{ $t('productdetail_btnComprar') }}
+          {{ $t('home_cardvermas') }}
         </p>
       </router-link>
     </div>

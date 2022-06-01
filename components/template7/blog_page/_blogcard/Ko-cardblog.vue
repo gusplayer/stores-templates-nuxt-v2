@@ -173,10 +173,10 @@ export default {
 
 <style scoped>
 .producto {
-  @apply w-full relative justify-center items-center cursor-pointer;
+  @apply h-full w-full relative justify-start items-center cursor-pointer;
 }
 .content-product {
-  @apply w-full;
+  @apply h-full w-full;
 }
 .container {
   @apply relative shadow-2xl;
@@ -186,15 +186,12 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .wrapper-card {
-  width: 100%;
-  position: relative;
-  justify-content: center;
-  align-items: center;
   background: var(--color_background_card);
   box-sizing: border-box;
   border-radius: 5px;
   -webkit-box-shadow: 0px 10px 19px 7px rgba(107, 107, 107, 0.4);
   box-shadow: 0px 10px 19px 7px rgba(107, 107, 107, 0.4);
+  @apply w-full h-full relative justify-between items-center;
 }
 .wrapper-card:hover {
   transition: all 200ms ease-in;

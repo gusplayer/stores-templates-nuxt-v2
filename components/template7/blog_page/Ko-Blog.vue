@@ -160,7 +160,7 @@
             <div
               v-for="article in filteredList"
               :key="article.id"
-              class="content-products"
+              class="h-full"
             >
               <KoProductCard1
                 v-if="article.estado == 1"

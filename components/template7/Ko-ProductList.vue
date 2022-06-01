@@ -44,7 +44,7 @@
             <div
               v-for="product in listProducts"
               :key="product.id"
-              class="content-products"
+              class="h-full"
             >
               <KoProductCard
                 :product="product"

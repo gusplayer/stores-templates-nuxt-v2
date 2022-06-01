@@ -1092,6 +1092,7 @@ export default {
   box-sizing: border-box;
 }
 .content-products {
+  height: 100%;
   border-bottom: 0.5px solid #f2f2f2;
 }
 .content-products-empty {

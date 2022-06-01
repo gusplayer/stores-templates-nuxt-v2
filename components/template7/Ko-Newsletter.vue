@@ -78,7 +78,12 @@
           </ValidationProvider>
         </div>
         <div class="content-checkbox">
-          <input type="checkbox" id="checkbox" v-model="checked" />
+          <input
+            type="checkbox"
+            id="checkbox"
+            v-model="checked"
+            style="margin-top: 4px"
+          />
           <p class="text-checkbox">
             {{ $t('newsletter_msg') }}
           </p>
@@ -276,11 +281,11 @@ export default {
 }
 
 .content-checkbox {
-  @apply w-full flex justify-start items-center ml-32 mt-8;
+  @apply w-full flex justify-start items-start ml-32 mt-8;
 }
 .text-checkbox {
   margin-left: 5px;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--color_subtext);
 }
 @screen sm {

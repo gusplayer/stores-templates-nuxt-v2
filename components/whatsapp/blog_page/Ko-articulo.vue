@@ -17,12 +17,14 @@
     </div>
     <div class="content-item-article">
       <p class="tittle-blog">{{ dataArticle.titulo }}</p>
-      <div class="content-img">
-        <img
-          class="img-aritcle"
-          :src="dataArticle.imagen_principal_url"
-          alt="Image-Article"
-        />
+      <div class="w-full flex justify-start">
+        <div class="content-img">
+          <img
+            class="img-aritcle"
+            :src="dataArticle.imagen_principal_url"
+            alt="Image-Article"
+          />
+        </div>
       </div>
       <div class="content-data-article">
         <svg
@@ -229,7 +231,7 @@ export default {
     @apply w-full flex flex-col justify-center items-start font-bold my-20 leading-22;
   }
   .content-img {
-    @apply w-full flex flex-col justify-start items-center mb-20;
+    @apply w-full flex flex-col justify-start items-start mb-20;
   }
   .img-article {
     @apply w-full h-auto;
@@ -245,8 +247,8 @@ export default {
 }
 @screen md {
   .content-img {
-    width: 250px;
-    max-width: 250px;
+    width: 100%;
+    max-width: 350px;
   }
 }
 </style>
