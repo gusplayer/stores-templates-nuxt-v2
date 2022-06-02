@@ -6,7 +6,7 @@
         <p class="card-info-2" v-if="getFreeShipping == false">
           {{ $t('home_cardGratis') }}
         </p>
-        <router-link
+        <nuxt-link
           :to="{
             path: `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
           }"
@@ -24,9 +24,9 @@
             class="product-image product-image-soldOut"
             alt="Product Img"
           />
-        </router-link>
+        </nuxt-link>
         <div class="wrapper-text">
-          <router-link
+          <nuxt-link
             :to="{
               path:
                 `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
@@ -99,7 +99,7 @@
                 <!-- <p class="card-descuento">-50%</p> -->
               </div>
             </div>
-          </router-link>
+          </nuxt-link>
           <div class="Content-btn-movil">
             <div
               class="content-soldOut"
@@ -122,7 +122,7 @@
               >
                 <shopWa-icon class="wp-icon" />
               </div>
-              <router-link
+              <nuxt-link
                 :to="{
                   path:
                     `/wa/${dataStore.tienda.id_tienda}/productos/` +
@@ -139,10 +139,10 @@
                     : '#FFFFFF'
                 };`"
               >
-                {{ $t('home_cardvermas') }}</router-link
+                {{ $t('home_cardvermas') }}</nuxt-link
               >
             </div>
-            <router-link
+            <nuxt-link
               :to="{
                 path:
                   `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
@@ -159,7 +159,7 @@
                   : '#FFFFFF'
               };`"
             >
-              {{ $t('home_cardvermas') }}</router-link
+              {{ $t('home_cardvermas') }}</nuxt-link
             >
           </div>
         </div>

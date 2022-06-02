@@ -22,7 +22,7 @@
         },
       ]"
     >
-      <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
         <div class="figure-img">
           <figure class="content-imge">
             <img
@@ -35,8 +35,8 @@
             <div v-else class="empty"></div>
           </figure>
         </div>
-      </router-link>
-      <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+      </nuxt-link>
+      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
         <div class="overlay-top">
           <div class="text-tittle">
             <p class="txt-day">
@@ -47,11 +47,8 @@
             </p>
           </div>
         </div>
-      </router-link>
-      <router-link
-        :to="{ path: `/blog/` + article.slug }"
-        class="contet-bottom"
-      >
+      </nuxt-link>
+      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet-bottom">
         <div class="overlay-bottom z-20">
           <div class="content-bottom-titulo">
             <div class="text-cart">
@@ -69,7 +66,7 @@
           </div>
         </div>
         <div class="overlay-bottom-shadow"></div>
-      </router-link>
+      </nuxt-link>
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="content-productCard">
     <div class="content-items-productCard">
-      <router-link
+      <nuxt-link
         class="content-img-prodcut relative"
         id="product-card"
         :to="{
@@ -48,8 +48,8 @@
         >
           <p>{{ this.product.promocion_valor }}% OFF</p>
         </div>
-      </router-link>
-      <router-link
+      </nuxt-link>
+      <nuxt-link
         class="content-description-product"
         :to="{
           path: `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
@@ -107,7 +107,7 @@
             </p>
           </div>
         </div>
-      </router-link>
+      </nuxt-link>
       <div
         class="content-buttons"
         v-if="!this.estadoCart && !soldOut && !spent"
@@ -132,7 +132,7 @@
             />
           </svg>
         </div>
-        <router-link
+        <nuxt-link
           class="button-right"
           :style="`background: ${
             settingByTemplate && settingByTemplate.color_primario
@@ -149,9 +149,9 @@
           >
             {{ $t('home_cardvermas') }}
           </p>
-        </router-link>
+        </nuxt-link>
       </div>
-      <router-link
+      <nuxt-link
         v-else
         class="button-right"
         :style="`background: ${
@@ -169,7 +169,7 @@
         >
           {{ $t('home_cardvermas') }}
         </p>
-      </router-link>
+      </nuxt-link>
     </div>
   </div>
 </template>

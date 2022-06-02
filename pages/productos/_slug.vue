@@ -3,35 +3,41 @@
     <component :is="indexTemplate" v-bind="componentsProps" />
   </div>
 </template>
-
 <script>
-import Ko5ProductDetail from '../../components/template5/Ko-ProductDetail-1'
-import Ko7ProductDetail from '../../components/template7/Ko-ProductDetail'
-import Ko9ProductDetail from '../../components/template9/Ko-ProductDetail'
-import Ko10ProductDetail from '../../components/template10/Ko-ProductDetail'
-import Ko11ProductDetail from '../../components/template11/ko-ProductDetail'
-
+import { mapState } from 'vuex'
 export default {
   components: {
-    Ko5ProductDetail,
-    Ko7ProductDetail,
-    Ko9ProductDetail,
-    Ko10ProductDetail,
-    Ko11ProductDetail,
+    Ko5ProductDetail: () =>
+      import('../../components/template5/Ko-ProductDetail-1'),
+    Ko7ProductDetail: () =>
+      import('../../components/template7/Ko-ProductDetail'),
+    Ko9ProductDetail: () =>
+      import('../../components/template9/Ko-ProductDetail'),
+    Ko10ProductDetail: () =>
+      import('../../components/template10/Ko-ProductDetail'),
+    Ko11ProductDetail: () =>
+      import('../../components/template11/ko-ProductDetail'),
+    Ko13ProductDetail: () =>
+      import('../../components/template13/Ko-ProductDetail-1'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
   },
   computed: {
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    template() {
-      return this.$store.state.template
+    ...mapState([
+      'dataStore',
+      'settingBase',
+      'settingByTemplate',
+      'settingByTemplate7',
+      'settingByTemplate9',
+      'settingByTemplate10',
+      'settingByTemplate11',
+      'settingByTemplate13',
+      'template',
+    ]),
+    fullProducts() {
+      return this.$store.getters['products/filterProducts']
     },
     indexTemplate() {
       let productListComponent = ''
@@ -57,27 +63,11 @@ export default {
         case 11:
           productListComponent = 'Ko11ProductDetail'
           break
+        case 13:
+          productListComponent = 'Ko13ProductDetail'
+          break
       }
       return productListComponent
-    },
-
-    settingByTemplate7() {
-      return this.$store.state.settingByTemplate7
-    },
-    settingByTemplate9() {
-      return this.$store.state.settingByTemplate9
-    },
-    settingByTemplate10() {
-      return this.$store.state.settingByTemplate10
-    },
-    settingByTemplate11() {
-      return this.$store.state.settingByTemplate11
-    },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
     },
     whatsapp() {
       return this.dataStore.tienda.whatsapp

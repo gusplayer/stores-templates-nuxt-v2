@@ -4,37 +4,33 @@
   </div>
 </template>
 <script>
-import K05Contact from '../components/template5/Ko-Contact-1'
-import K07Contact from '../components/template7/Ko-Contact'
-import K09Contact from '../components/template9/Ko-Contact'
-import K10Contact from '../components/template10/ko-Contact'
-import K11Contact from '../components/template11/ko-Contact'
+import { mapState } from 'vuex'
 export default {
   layout: 'default',
   components: {
-    K05Contact,
-    K07Contact,
-    K09Contact,
-    K10Contact,
-    K11Contact,
+    K05Contact: () => import('../components/template5/Ko-Contact-1'),
+    K07Contact: () => import('../components/template7/Ko-Contact'),
+    K09Contact: () => import('../components/template9/Ko-Contact'),
+    K10Contact: () => import('../components/template10/ko-Contact'),
+    K11Contact: () => import('../components/template11/ko-Contact'),
+    K13Contact: () => import('../components/template13/Ko-Contact-1'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    template() {
-      return this.$store.state.template
-    },
+    ...mapState([
+      'dataStore',
+      'settingBase',
+      'settingByTemplate',
+      'settingByTemplate7',
+      'settingByTemplate9',
+      'settingByTemplate10',
+      'settingByTemplate11',
+      'settingByTemplate13',
+      'template',
+    ]),
     indexTemplate() {
       let productListComponent = ''
       switch (this.template) {
@@ -59,20 +55,11 @@ export default {
         case 11:
           productListComponent = 'K11Contact'
           break
+        case 13:
+          productListComponent = 'K13Contact'
+          break
       }
       return productListComponent
-    },
-    settingByTemplate7() {
-      return this.$store.state.settingByTemplate7
-    },
-    settingByTemplate9() {
-      return this.$store.state.settingByTemplate9
-    },
-    settingByTemplate10() {
-      return this.$store.state.settingByTemplate10
-    },
-    settingByTemplate11() {
-      return this.$store.state.settingByTemplate11
     },
     componentsProps() {
       return {

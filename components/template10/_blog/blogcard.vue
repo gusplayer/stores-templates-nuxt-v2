@@ -17,7 +17,7 @@
       @mouseover="hover = true"
       @mouseleave="hover = false"
     >
-      <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
         <div class="figure-img">
           <div class="content-imge">
             <img
@@ -30,8 +30,8 @@
             <div v-else class="empty"></div>
           </div>
         </div>
-      </router-link>
-      <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+      </nuxt-link>
+      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
         <div class="overlay-top">
           <div class="text-tittle">
             <p class="txt-day">
@@ -42,20 +42,17 @@
             </p>
           </div>
         </div>
-      </router-link>
+      </nuxt-link>
 
-      <router-link
-        :to="{ path: `/blog/` + article.slug }"
-        class="contet-bottom"
-      >
-      </router-link>
+      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet-bottom">
+      </nuxt-link>
       <div class="content-txt-article">
         <div class="content-tittle-article">
-          <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
             <span class="txt-article-tittle">
               {{ this.article.titulo }}
             </span>
-          </router-link>
+          </nuxt-link>
         </div>
         <div class="content-date-article">
           <span class="txt-article-day">{{ this.dayCreate }}</span>
@@ -69,9 +66,9 @@
           </span>
         </div>
         <div class="content-button-article">
-          <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
             <button class="btn">+ {{ $t('home_leerMas') }}</button>
-          </router-link>
+          </nuxt-link>
         </div>
       </div>
     </div>

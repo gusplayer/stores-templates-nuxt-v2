@@ -5,7 +5,7 @@
       @mouseover="hover = true"
       @mouseleave="hover = false"
     >
-      <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
         <div class="figure-img">
           <div class="content-imge">
             <img
@@ -17,8 +17,8 @@
             <div v-else class="empty"></div>
           </div>
         </div>
-      </router-link>
-      <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+      </nuxt-link>
+      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
         <div class="overlay-top">
           <div class="text-tittle">
             <p class="txt-day">
@@ -29,15 +29,15 @@
             </p>
           </div>
         </div>
-      </router-link>
+      </nuxt-link>
 
       <div class="content-txt-article">
         <div class="content-tittle-article">
-          <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
             <p class="txt-article-tittle">
               {{ this.article.titulo }}
             </p>
-          </router-link>
+          </nuxt-link>
         </div>
         <div class="content-abstract-article">
           <p class="txt-article-abstract">

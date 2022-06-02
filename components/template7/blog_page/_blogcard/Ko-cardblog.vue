@@ -19,7 +19,7 @@
     >
       <div class="wrapper-card">
         <div class="container">
-          <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
             <div class="figure-img">
               <figure class="content-imge">
                 <img
@@ -31,8 +31,8 @@
                 <div v-else class="empty"></div>
               </figure>
             </div>
-          </router-link>
-          <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          </nuxt-link>
+          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
             <div class="overlay-top">
               <div class="text-tittle">
                 <p class="txt-day">
@@ -43,7 +43,7 @@
                 </p>
               </div>
             </div>
-          </router-link>
+          </nuxt-link>
           <div class="overlay-bottom">
             <div class="content-bottom-titulo">
               <div class="text-cart">
@@ -54,10 +54,10 @@
         </div>
         <div class="container-properitys">
           <div class="content-tittle-article">
-            <router-link
+            <nuxt-link
               :to="{ path: `/blog/` + article.slug }"
               class="txt-tituloart"
-              >{{ this.article.titulo }}</router-link
+              >{{ this.article.titulo }}</nuxt-link
             >
           </div>
           <div class="content-autor">
@@ -79,7 +79,7 @@
             </p>
           </div>
           <div class="read-more">
-            <router-link
+            <nuxt-link
               :to="{ path: `/blog/` + article.slug }"
               class="txt-read-more"
             >
@@ -98,7 +98,7 @@
                     d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
                   /></svg
               ></span>
-            </router-link>
+            </nuxt-link>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Kcarousel
+    <KCarousel
       id="kCarouselX"
       v-bind="componentsProps"
       :key="bannerRendering"
@@ -10,7 +10,7 @@
         settingByTemplate11.banner.visible
       "
     />
-    <Ksection
+    <KSection
       id="kSectionX"
       v-bind="componentsProps"
       v-if="
@@ -19,7 +19,7 @@
         settingByTemplate11.section.visible
       "
     />
-    <KtrendingHoko
+    <KTrendingHoko
       id="kTredingX"
       v-bind="componentsProps"
       v-if="
@@ -30,7 +30,7 @@
         dataHoko.statehoko == 1
       "
     />
-    <Ktrending
+    <KTrending
       id="kTredingX"
       v-bind="componentsProps"
       v-if="
@@ -41,7 +41,7 @@
       "
     />
     <client-only>
-      <Kparallax
+      <KParallax
         id="kParallaxX"
         v-bind="componentsProps"
         v-if="
@@ -51,7 +51,7 @@
         "
       />
     </client-only>
-    <KListtrending
+    <KListTrending
       v-bind="componentsProps"
       v-if="dataHoko.length == 0 || dataHoko.statehoko == 0"
     />
@@ -64,7 +64,7 @@
         settingByTemplate11.information.visible
       "
     />
-    <Kblog
+    <KBlog
       id="kBlogX"
       v-bind="componentsProps"
       v-show="listArticulos.length > 0"
@@ -77,29 +77,24 @@
   </div>
 </template>
 <script>
-import Kcarousel from '../../components/template11/ko-carousel'
-import Ksection from '../../components/template11/ko-section'
-import Ktrending from '../../components/template11/ko-trendingProduct'
-import KtrendingHoko from '../../components/template11/ko-trendingProduct-hoko'
-import Kparallax from '../../components/template11/ko-parallax'
-import KListtrending from '../../components/template11/ko-listtrending.vue'
-import KInformacion from '../../components/template11/information.vue'
-import Kblog from '../../components/template11/ko-blog'
-
+import { mapState } from 'vuex'
 export default {
+  layout: 'default',
   components: {
-    Kcarousel,
-    Ksection,
-    Ktrending,
-    KtrendingHoko,
-    Kparallax,
-    KListtrending,
-    KInformacion,
-    Kblog,
+    KCarousel: () => import('../../components/template11/ko-carousel'),
+    KSection: () => import('../../components/template11/ko-section'),
+    KTrending: () => import('../../components/template11/ko-trendingProduct'),
+    KTrendingHoko: () =>
+      import('../../components/template11/ko-trendingProduct-hoko'),
+    KParallax: () => import('../../components/template11/ko-parallax'),
+    KListTrending: () =>
+      import('../../components/template11/ko-listtrending.vue'),
+    KInformacion: () => import('../../components/template11/information.vue'),
+    KBlog: () => import('../../components/template11/ko-blog'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   data() {
     return {
@@ -107,17 +102,14 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState([
+      'dataStore',
+      'listArticulos',
+      'settingByTemplate11',
+      'dataHoko',
+    ]),
     fullProducts() {
       return this.$store.getters['products/filterProducts']
-    },
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    settingByTemplate11() {
-      return this.$store.state.settingByTemplate11
     },
     componentsProps() {
       return {
@@ -170,10 +162,10 @@ export default {
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenertemplate(e) {
+    addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080') ||

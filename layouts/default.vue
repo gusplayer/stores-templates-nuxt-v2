@@ -15,7 +15,7 @@
           v-if="dataStore.tienda.whatsapp"
           @click="redirectWhatsapp()"
         >
-          <koWhatsapp class="button-whatsapp" />
+          <koWhatsApp class="button-whatsapp" />
           <span
             >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
           >
@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-      <koModalsecurity :dataStore="dataStore" v-else />
+      <koModalSecurity :dataStore="dataStore" v-else />
     </div>
     <div v-else>
       <koTiendaError />
@@ -68,51 +68,33 @@
   </div>
 </template>
 <script>
-import KoHeader1 from '../components/headers/header1/Ko-Header-1'
-import KoHeader2 from '../components/headers/header2/Ko-Header-2'
-import KoHeader3 from '../components/headers/header3/Ko-Header-3'
-import KoHeader4 from '../components/headers/header4/Ko-Header-4'
-import KoHeader5 from '../components/headers/header5/Ko-Header-5'
-import KoHeader6 from '../components/headers/header6/Ko-Header-6'
-import KoHeader7 from '../components/headers/header7/Ko-Header-7'
-import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
-import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
-import KoFooter4 from '../components/footers/footer4/Ko-Footer-4'
-import KoFooter5 from '../components/footers/footer5/Ko-Footer-5'
-import KoFooter6 from '../components/footers/footer6/Ko-Footer-6'
-import KoFooter7 from '../components/footers/footer7/Ko-Footer-7'
-import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
-import koWhatsapp from '../components/whatsapp/whatsapp'
-import koTiendaCerrada from '../assets/img/tiendaCerrada'
-import koTiendaError from '../components/Ko-errorStore'
-import koModalsecurity from '../components/modal/Ko-modal-security.vue'
 import expiredDate from '../mixins/expiredDate'
 import { mapState } from 'vuex'
-//template6
-// import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
-// import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'
 export default {
   components: {
-    KoHeader1,
-    KoHeader2,
-    KoHeader3,
-    KoHeader4,
-    KoHeader5,
-    KoHeader6,
-    KoHeader7,
-    KoFooter1,
-    KoFooter2,
-    KoFooter4,
-    KoFooter5,
-    KoFooter6,
-    KoFooter7,
-    KoFooterCountry,
-    koWhatsapp,
-    koTiendaCerrada,
-    // Ko6Header1,
-    // Ko6Footer1,
-    koTiendaError,
-    koModalsecurity,
+    KoHeader1: () => import('../components/headers/header1/Ko-Header-1'),
+    KoHeader2: () => import('../components/headers/header2/Ko-Header-2'),
+    KoHeader3: () => import('../components/headers/header3/Ko-Header-3'),
+    KoHeader4: () => import('../components/headers/header4/Ko-Header-4'),
+    KoHeader5: () => import('../components/headers/header5/Ko-Header-5'),
+    KoHeader6: () => import('../components/headers/header6/Ko-Header-6'),
+    KoHeader7: () => import('../components/headers/header7/Ko-Header-7'),
+    KoHeader8: () => import('../components/headers/header8/Ko-Header-8'),
+    KoFooter1: () => import('../components/footers/footer1/Ko-Footer-1'),
+    KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2'),
+    KoFooter4: () => import('../components/footers/footer4/Ko-Footer-4'),
+    KoFooter5: () => import('../components/footers/footer5/Ko-Footer-5'),
+    KoFooter6: () => import('../components/footers/footer6/Ko-Footer-6'),
+    KoFooter7: () => import('../components/footers/footer7/Ko-Footer-7'),
+    KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8'),
+    KoFooterCountry: () =>
+      import('../components/footers/footer1/Ko-Footer-Country'),
+    koWhatsApp: () => import('../components/whatsApp/whatsApp'),
+    koTiendaCerrada: () => import('../assets/img/tiendaCerrada'),
+    // Ko6Header1: () => import('../components/headers/header1/Ko6-Header-1'),
+    // Ko6Footer1: () => import('../components/footers/footer1/Ko6-Footer-1'),
+    koTiendaError: () => import('../components/Ko-errorStore'),
+    koModalSecurity: () => import('../components/modal/Ko-modal-security.vue'),
   },
   mixins: [expiredDate],
   mounted() {
@@ -239,6 +221,15 @@ export default {
           this.settingByTemplate12 && this.settingByTemplate12.fontFamily
             ? this.settingByTemplate12.fontFamily
             : 'Poppins'
+        break
+      case 13:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate13 &&
+          this.settingByTemplate13.settingGeneral &&
+          this.settingByTemplate13.settingGeneral.fount_1
+            ? this.settingByTemplate13.settingGeneral.fount_1
+            : 'Roboto'
         break
     }
     let tienda = this.$store.state.dataStore.tienda
@@ -454,6 +445,13 @@ export default {
               : '',
           rel: 'stylesheet',
         },
+        {
+          href:
+            this.template == 13
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
       ],
     }
   },
@@ -469,6 +467,7 @@ export default {
       'settingByTemplate10',
       'settingByTemplate11',
       'settingByTemplate12',
+      'settingByTemplate13',
       'analytics_tagmanager',
     ]),
     headerTemplate() {
@@ -512,6 +511,9 @@ export default {
         case 11:
           headerComponent = 'KoHeader7'
           break
+        case 13:
+          headerComponent = 'KoHeader8'
+          break
       }
       return headerComponent
     },
@@ -554,6 +556,9 @@ export default {
           break
         case 11:
           footerComponent = 'KoFooter7'
+          break
+        case 13:
+          footerComponent = 'KoFooter8'
           break
       }
       return footerComponent
@@ -660,6 +665,29 @@ export default {
               },
             ]
           : null,
+        settingByTemplate13: this.settingByTemplate13
+          ? [
+              {
+                setting13Header:
+                  this.settingByTemplate13 && this.settingByTemplate13.header
+                    ? this.settingByTemplate13.header
+                    : null,
+                setting13Footer:
+                  this.settingByTemplate13 && this.settingByTemplate13.footer
+                    ? this.settingByTemplate13.footer
+                    : null,
+                setting13General:
+                  this.settingByTemplate13 &&
+                  this.settingByTemplate13.settingGeneral
+                    ? this.settingByTemplate13.settingGeneral
+                    : null,
+                pages:
+                  this.settingByTemplate13 && this.settingByTemplate13.pages
+                    ? this.settingByTemplate13.pages
+                    : null,
+              },
+            ]
+          : null,
       }
     },
     stateModalPwd: {
@@ -751,11 +779,6 @@ export default {
           }
         }
       }
-    },
-  },
-  watch: {
-    stateModalPwd(value) {
-      console.log(value)
     },
   },
 }

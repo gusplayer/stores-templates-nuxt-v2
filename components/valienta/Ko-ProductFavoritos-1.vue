@@ -9,7 +9,7 @@
         v-for="product in dataProductFavorite"
         :key="product.id"
       >
-        <router-link
+        <nuxt-link
           :to="{
             path: `/wp/${dataStore.tienda.id_tienda}/producto/` + product.slug,
           }"
@@ -45,7 +45,7 @@
           <div class="card-button">
             <p>{{ $t('productdetail_btnComprar') }}</p>
           </div>
-        </router-link>
+        </nuxt-link>
       </div>
     </div>
     <div

@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper-productDetail">
-    <!-- <div v-if="true" v-loading="true"></div> -->
     <div class="container-productDetail" v-if="!loading" v-loading="loading">
       <nuxt-link
         :to="this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
@@ -112,13 +111,6 @@
                 </selectGroup>
               </div>
             </div>
-            <!-- <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
-              <button class="btn-whatsapp" @click="redirectWP()">
-                <whatsapp-icon class="wp-icon" />{{
-                  $t('productdetail_solicitarInfo')
-                }}
-              </button>
-            </div> -->
           </div>
         </div>
       </div>
@@ -140,7 +132,6 @@
               :bubble="false"
             />
           </div>
-          <!-- <div class="content-text-desc" v-html="data.info.descripcion"></div> -->
         </div>
       </div>
       <div class="responsive-purchase">
@@ -229,6 +220,35 @@
             </p>
           </div>
         </div>
+      </div>
+    </div>
+    <div v-else class="wrapper-item-skeleton">
+      <div class="w-full">
+        <el-skeleton style="width: 240px">
+          <template slot="template">
+            <el-skeleton-item
+              variant="image"
+              style="width: 240px; height: 240px"
+            />
+            <div style="padding: 14px">
+              <el-skeleton-item variant="p" style="width: 50%" />
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-items: space-between;
+                "
+              >
+                <el-skeleton-item variant="text" style="margin-right: 16px" />
+                <el-skeleton-item variant="text" style="width: 30%" />
+              </div>
+            </div>
+          </template>
+        </el-skeleton>
+      </div>
+      <div class="ml-10 w-full">
+        <el-skeleton :rows="6" animated />
+        <el-skeleton :rows="6" animated />
       </div>
     </div>
   </div>
@@ -702,6 +722,13 @@ export default {
 </script>
 
 <style scoped>
+.wrapper-item-skeleton {
+  max-width: 900px;
+  min-height: calc(100vh - 205px);
+  padding: 30px 30px 10px;
+  background-color: #fafaf8;
+  @apply w-full relative justify-between items-start flex flex-row;
+}
 .wrapper-productDetail {
   width: 100%;
   display: flex;
@@ -1140,6 +1167,9 @@ export default {
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 0 15px;
+  }
+  .wrapper-item-skeleton {
+    @apply w-full relative justify-between items-start flex flex-col;
   }
 }
 </style>

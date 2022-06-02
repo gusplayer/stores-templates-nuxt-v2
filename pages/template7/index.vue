@@ -26,18 +26,18 @@
     ]"
   >
     <KCarousel
-      id="kbannerX"
+      id="kBannerX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.banner.visible"
       :key="bannerRendering"
     />
     <KPromo
-      id="KoffersX"
+      id="KOffersX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.content.visible"
     />
     <KProductList
-      id="KproductlistX"
+      id="KProductListX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.productList.visible"
     />
@@ -51,13 +51,13 @@
       v-bind="componentsProps"
       v-if="settingByTemplate7.ProductFavorite.visible"
     />
-    <KHowwork
-      id="KHowworkX"
+    <KHowWork
+      id="KHowWork"
       v-bind="componentsProps"
       v-if="settingByTemplate7.howWork.visible"
     />
     <KBlog
-      id="KblogX"
+      id="KBlogX"
       v-bind="componentsProps"
       v-show="listArticulos.length > 0 && settingByTemplate7.blog.visible"
     />
@@ -75,32 +75,24 @@
 </template>
 
 <script>
-import KCarousel from '../../components/template7/_carouselBanner/ko-carousel'
-import KPromo from '../../components/template7/ko-Banner-Promo'
-import KProductList from '../../components/template7/Ko-ProductList'
-import KAdvertising from '../../components/template7/Ko-advertising'
-import KGify from '../../components/template7/Ko-gify'
-import KHowwork from '../../components/template7/Ko-how-we-work'
-import KNews from '../../components/template7/Ko-Newsletter'
-import KBlog from '../../components/template7/Ko-blog'
-import KWrapper from '../../components/template7/Ko-wrapper'
-
+import { mapState } from 'vuex'
 export default {
   layout: 'default',
   components: {
-    KCarousel,
-    KPromo,
-    KProductList,
-    KAdvertising,
-    KGify,
-    KHowwork,
-    KNews,
-    KBlog,
-    KWrapper,
+    KCarousel: () =>
+      import('../../components/template7/_carouselBanner/ko-carousel'),
+    KPromo: () => import('../../components/template7/ko-Banner-Promo'),
+    KProductList: () => import('../../components/template7/Ko-ProductList'),
+    KAdvertising: () => import('../../components/template7/Ko-advertising'),
+    KGify: () => import('../../components/template7/Ko-gify'),
+    KHowWork: () => import('../../components/template7/Ko-how-we-work'),
+    KNews: () => import('../../components/template7/Ko-Newsletter'),
+    KBlog: () => import('../../components/template7/Ko-blog'),
+    KWrapper: () => import('../../components/template7/Ko-wrapper'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate07)
+    window.addEventListener('message', this.addEventListenerTemplate07)
   },
   data() {
     return {
@@ -108,17 +100,9 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState(['dataStore', 'listArticulos', 'settingByTemplate7']),
     fullProducts() {
       return this.$store.getters['products/filterProducts']
-    },
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    settingByTemplate7() {
-      return this.$store.state.settingByTemplate7
     },
     componentsProps() {
       return {
@@ -172,10 +156,10 @@ export default {
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate07)
+    window.removeEventListener('message', this.addEventListenerTemplate07)
   },
   methods: {
-    addEventListenertemplate07(e) {
+    addEventListenerTemplate07(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080') ||
@@ -194,25 +178,25 @@ export default {
         ) {
           switch (e.data.componentToEdit) {
             case 'settingGeneral':
-              this.moverseA('kbannerX')
+              this.moverseA('kBannerX')
               break
             case 'header':
-              this.moverseA('kbannerX')
+              this.moverseA('kBannerX')
               break
             case 'footer':
               this.moverseA('KWrapperX')
               break
             case 'banner':
-              this.moverseA('kbannerX')
+              this.moverseA('kBannerX')
               break
             case 'content':
-              this.moverseA('KoffersX')
+              this.moverseA('KOffersX')
               break
             case 'productlist':
-              this.moverseA('KproductlistX')
+              this.moverseA('KProductListX')
               break
             case 'card':
-              this.moverseA('KproductlistX')
+              this.moverseA('KProductListX')
               break
             case 'advertising':
               this.moverseA('KAdvertisingX')
@@ -221,10 +205,10 @@ export default {
               this.moverseA('KGifyX')
               break
             case 'howwork':
-              this.moverseA('KHowworkX')
+              this.moverseA('KHowWork')
               break
             case 'blog':
-              this.moverseA('KblogX')
+              this.moverseA('KBlogX')
               break
             case 'newsletter':
               this.moverseA('KNewsX')

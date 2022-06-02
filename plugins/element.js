@@ -27,6 +27,8 @@ import {
   Step,
   Collapse,
   CollapseItem,
+  Skeleton,
+  SkeletonItem,
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/es'
 import locale from 'element-ui/lib/locale'
@@ -52,6 +54,8 @@ Vue.use(ColorPicker)
 Vue.use(Tag)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
+Vue.use(Skeleton)
+Vue.use(SkeletonItem)
 
 locale.use(lang)
 Vue.use(Loading.directive)

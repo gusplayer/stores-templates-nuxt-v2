@@ -1,7 +1,7 @@
 <template>
   <div class="producto">
     <div class="container">
-      <router-link
+      <nuxt-link
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
       >
@@ -20,7 +20,7 @@
           />
         </client-only>
         <div class="image_overlay"></div>
-      </router-link>
+      </nuxt-link>
 
       <div class="overlay-sould" v-if="soldOut">
         <div class="text-sould">
@@ -146,12 +146,9 @@
         </div>
         <div class="cart-Shop">
           <div class="text-cart">
-            <router-link
-              router-link
-              :to="{ path: `/productos/` + product.slug }"
-            >
+            <nuxt-link nuxt-link :to="{ path: `/productos/` + product.slug }">
               <p>{{ $t('home_cardvermas') }}</p>
-            </router-link>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -382,7 +379,7 @@
           </i>
           <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
         </button>
-        <router-link
+        <nuxt-link
           v-else
           ref="colorBtn"
           class="btn"
@@ -390,7 +387,7 @@
           :to="{ path: `/productos/` + product.slug }"
         >
           <p class="txt-btn-product">{{ $t('home_cardvermas') }}</p>
-        </router-link>
+        </nuxt-link>
       </div>
     </div>
   </div>

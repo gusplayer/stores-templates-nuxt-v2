@@ -2,7 +2,7 @@
   <div class="wrapper-card">
     <div class="container-card">
       <div class="wrapper-movil">
-        <router-link
+        <nuxt-link
           :to="{
             path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
           }"
@@ -24,7 +24,7 @@
           <p class="card-info-2" v-if="getFreeShipping == false">
             {{ $t('home_cardGratis') }}
           </p>
-        </router-link>
+        </nuxt-link>
         <div class="wrapper-text">
           <div class="content-name-product-movil">
             <p
@@ -40,7 +40,7 @@
               class="content-text-price-movil-cart"
               v-if="this.product.precio"
             >
-              <router-link
+              <nuxt-link
                 :to="{
                   path: `/wp/${dataStore.id_tienda}/producto/` + product.slug,
                 }"
@@ -84,7 +84,7 @@
                 </div>
                 <!-- </div> -->
                 <!-- <p class="card-descuento">-50%</p> -->
-              </router-link>
+              </nuxt-link>
               <div
                 v-if="!this.estadoCart && !soldOut && !spent"
                 v-on:click="addShoppingCart"

@@ -1,7 +1,7 @@
 <template>
   <div class="producto h-full">
-    <router-link
-      :to="{ path: `/wa/${dataStore.tienda.id_tienda}/blog/` + article.slug }"
+    <nuxt-link
+      :to="`/wa/${dataStore.tienda.id_tienda}/blog/${article.slug}`"
       class="container"
       @mouseover="hover = true"
       @mouseleave="hover = false"
@@ -31,7 +31,6 @@
           </div>
         </div>
       </div>
-
       <div class="content-txt-article">
         <div class="content-tittle-article">
           <div class="contet">
@@ -46,7 +45,7 @@
           </p>
         </div>
       </div>
-    </router-link>
+    </nuxt-link>
   </div>
 </template>
 <script>

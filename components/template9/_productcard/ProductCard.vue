@@ -11,7 +11,7 @@
         },
       ]"
     >
-      <router-link
+      <nuxt-link
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
       >
@@ -30,7 +30,7 @@
           />
         </client-only>
         <div class="image_overlay"></div>
-      </router-link>
+      </nuxt-link>
       <div class="overlay-top" v-if="getFreeShipping == false && !soldOut">
         <div class="icons-hover">
           <div class="transport-icon">
@@ -150,7 +150,7 @@
           </svg>
         </div>
       </div>
-      <router-link :to="{ path: `/productos/` + product.slug }">
+      <nuxt-link :to="{ path: `/productos/` + product.slug }">
         <div
           class="overlay-bottom-promo"
           v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
@@ -172,7 +172,7 @@
             </div>
           </div>
         </div>
-      </router-link>
+      </nuxt-link>
     </div>
     <div
       class="datos-producto"
@@ -188,7 +188,7 @@
       <div class="categoria" v-if="this.product.categoria">
         {{ this.product.categoria }}
       </div>
-      <router-link :to="{ path: `/productos/` + product.slug }">
+      <nuxt-link :to="{ path: `/productos/` + product.slug }">
         <div class="tittle tittle-xml">
           <p class="card-title" v-if="this.product.nombre.length >= 90">
             {{ `${this.product.nombre.slice(0, 90)}...` }}
@@ -213,7 +213,7 @@
             {{ `${this.product.nombre.slice(0, 30)}` }}
           </p>
         </div>
-      </router-link>
+      </nuxt-link>
       <div class="precio">
         <div class="content-text-price" v-if="this.product.precio">
           <div

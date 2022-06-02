@@ -33,7 +33,7 @@
           </nuxt-link>
           <nuxt-link
             v-if="item.href && listArticulos > 0"
-            :to="item.href"
+            :to="`/wa/${dataStore.tienda.id_tienda}${item.href}`"
             class="text-secciones"
           >
             {{ $t(`${item.name}`) }}
@@ -145,7 +145,7 @@ export default {
         },
         {
           name: 'header_blog',
-          href: `/wa/${this.dataStore.tienda.id_tienda}/blog`,
+          href: '/blog',
         },
       ],
     }
