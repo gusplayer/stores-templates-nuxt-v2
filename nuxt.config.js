@@ -47,7 +47,7 @@ export default {
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/element-tiptap', ssr: false },
   ],
-  // components: true,
+  components: true,
   buildModules: ['@nuxtjs/tailwindcss'],
   modules: ['@nuxtjs/gtm'],
   debug: {

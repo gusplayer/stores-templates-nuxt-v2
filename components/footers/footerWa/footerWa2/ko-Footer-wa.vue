@@ -36,7 +36,7 @@
 <script>
 import currency from '../../../../mixins/formatCurrent'
 export default {
-  name: 'FooterWa2',
+  name: 'Ko2-Footer-Wa',
   mixins: [currency],
   props: {
     dataStore: Object,

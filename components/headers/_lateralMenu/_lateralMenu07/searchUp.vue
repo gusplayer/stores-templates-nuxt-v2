@@ -33,7 +33,7 @@
 <script>
 import KProducts from '../../../template7/Ko-ProductListSearchUp.vue'
 export default {
-  name: 'KoSearch',
+  name: 'Ko-Search-7',
   props: {
     dataStore: Object,
     showMenu: Boolean,

@@ -237,7 +237,6 @@ import extensions from '../../../mixins/elemenTiptap.vue'
 import currency from '../../../mixins/formatCurrent'
 export default {
   mixins: [extensions, currency],
-  name: 'descriptionProduct',
   props: {
     dataStore: Object,
     data: {},

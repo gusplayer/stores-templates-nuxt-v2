@@ -182,7 +182,7 @@ export default {
     KoSocialNet,
     KoTermsConditions,
   },
-  name: 'Ko-Footer-6',
+  name: 'Ko-Footer-7',
   props: {
     dataStore: Object,
     settingByTemplate11: Array,

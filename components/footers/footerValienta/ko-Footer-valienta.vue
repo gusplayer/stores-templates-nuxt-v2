@@ -20,10 +20,8 @@
 
 <script>
 import currency from '../../../mixins/formatCurrent'
-
 export default {
   mixins: [currency],
-
   props: {
     dataStore: Object,
   },

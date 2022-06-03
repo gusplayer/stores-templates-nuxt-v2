@@ -331,7 +331,7 @@ import currency from '../../mixins/formatCurrent'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   mixins: [idCloudinary, currency],
-  name: 'Ko-miCompra-1',
+  name: 'Ko-miCompra-Wa',
   props: {
     dataStore: Object,
     orden: Object,

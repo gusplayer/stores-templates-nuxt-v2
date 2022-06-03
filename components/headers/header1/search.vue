@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: 'KoSearchWa',
+  name: 'Ko-SearchWa',
   data() {
     return {
       search: '',

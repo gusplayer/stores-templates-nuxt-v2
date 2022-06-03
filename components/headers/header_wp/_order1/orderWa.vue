@@ -649,7 +649,7 @@ import expiredDate from '../../../../mixins/expiredDate'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   mixins: [idCloudinary, currency, expiredDate],
-  name: 'koOrder1-cart-wapi',
+  nname: 'ko-Order1-cart-3',
   props: {
     dataStore: Object,
   },

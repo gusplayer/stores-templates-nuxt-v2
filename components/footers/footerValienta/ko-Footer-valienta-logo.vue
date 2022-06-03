@@ -5,7 +5,7 @@
         <div
           v-for="(item, index) in links"
           :key="`${index}${item.icon}`"
-          v-if="item.link"
+          v-show="item.link"
         >
           <a
             v-if="item.link"
@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: 'Ko-Footer-Wa',
+  name: 'Ko-Footer-VA',
   props: {
     dataStore: Object,
   },

@@ -3,7 +3,9 @@
     <div class="bannerBlog">
       <div class="crumb">
         <nuxt-link
-          :to="this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
+          :to="{
+            path: this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`,
+          }"
         >
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
         </nuxt-link>

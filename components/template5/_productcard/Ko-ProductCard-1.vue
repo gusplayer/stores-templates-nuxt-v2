@@ -298,7 +298,7 @@ import currency from '../../../mixins/formatCurrent'
 
 export default {
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductCard-1',
+  name: 'Ko-ProductCard-5',
   props: { product: Object },
   mounted() {
     this.idSlug = this.product.id

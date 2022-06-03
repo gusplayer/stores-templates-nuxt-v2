@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import KArticleWapi from '../../../../../components/whatsapp/blog_page/Ko-articulo.vue'
+import KArticleWapi from '../../../../components/whatsapp/blog_page/Ko-articulo.vue'
 export default {
   layout: 'wa',
   components: { KArticleWapi },

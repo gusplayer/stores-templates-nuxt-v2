@@ -69,7 +69,7 @@
         <div class="content-answers" v-if="!estado">
           <p
             class="title-answers"
-            style="font-weight: bold; margin-bottom: 10px;"
+            style="font-weight: bold; margin-bottom: 10px"
           >
             Últimas preguntas
           </p>
@@ -97,7 +97,7 @@
 // import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'commentsProduct',
+  name: 'Ko-commentsProduct-11',
   props: {
     dataStore: Object,
   },

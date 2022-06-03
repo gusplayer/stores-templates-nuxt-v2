@@ -112,7 +112,7 @@
 import extensions from '../../mixins/elemenTiptap.vue'
 export default {
   mixins: [extensions],
-  name: 'Ko-Blog',
+  name: 'Ko-BlogArticle-5',
   props: {
     dataStore: Object,
   },

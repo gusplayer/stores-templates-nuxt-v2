@@ -88,9 +88,9 @@
 </template>
 
 <script>
-import BaseAccordian from './_BaseAccordion'
+import BaseAccordian from './_BaseAccordion1'
 export default {
-  name: 'KoMenuLeft',
+  name: 'Ko-MenuLeft-2',
   props: {
     dataStore: Object,
     showMenu: Boolean,
