@@ -833,8 +833,8 @@ export default {
   color: var(--btnhover);
 }
 input[type='search']:focus {
-  background-color: #fff;
-  border-color: var(--btnhover);
+  background: transparent;
+  border: var(--color_icon) 2px solid;
 }
 input:-moz-placeholder {
   color: var(--color_text);
@@ -849,15 +849,19 @@ input::-webkit-input-placeholder {
   color: transparent;
   cursor: pointer;
   box-sizing: border-box;
+  background: transparent;
+  border: var(--color_icon) 2px solid;
+  border-radius: 50px;
+  transition: all 200ms ease-in;
 }
 #demo-2 input[type='search']:hover {
-  background-color: #fff;
+  background: transparent;
 }
 #demo-2 input[type='search']:focus {
   width: 160px;
   padding-left: 32px;
   color: var(--color_text);
-  background-color: #fff;
+  background: transparent;
   cursor: auto;
 }
 #demo-2 input:-moz-placeholder {

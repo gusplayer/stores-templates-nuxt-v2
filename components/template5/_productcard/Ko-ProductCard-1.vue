@@ -15,7 +15,7 @@
               v-lazy="
                 this.product.foto_cloudinary == 'sin_foto.jpeg'
                   ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                  : idCloudinary(this.product.foto_cloudinary, 600, 600)
+                  : idCloudinary(this.product.foto_cloudinary, 400, 400)
               "
               class="product-image"
               :class="
@@ -33,7 +33,7 @@
               v-lazy="
                 this.product.foto_cloudinary == 'sin_foto.jpeg'
                   ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                  : idCloudinary(this.product.foto_cloudinary, 600, 600)
+                  : idCloudinary(this.product.foto_cloudinary, 400, 400)
               "
               class="product-image-soldOut"
               :class="
@@ -166,6 +166,8 @@
         >
           <client-only>
             <img
+              width="294"
+              height="294"
               loading="lazy"
               v-if="!soldOut"
               v-lazy="
@@ -182,6 +184,9 @@
               alt="Product Img"
             />
             <img
+              width="294"
+              height="294"
+              loading="lazy"
               v-if="soldOut"
               v-lazy="
                 this.product.foto_cloudinary == 'sin_foto.jpeg'

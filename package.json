@@ -1,6 +1,6 @@
 {
   "name": "template-nuxt-dokku",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Templates Komercia",
   "author": "Miguel Moreno",
   "private": true,
@@ -8,7 +8,7 @@
     "dev": "nuxt",
     "devplus": "node --max-old-space-size=12000 node_modules/nuxt/bin/nuxt.js",
     "devIp": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3333 nuxt",
-    "build": "nuxt build ",
+    "build": "nuxt build",
     "static": "nuxt build --target static && nuxt export",
     "start": "nuxt start",
     "generate": "nuxt generate",
