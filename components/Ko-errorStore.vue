@@ -690,7 +690,7 @@
   </div>
 </template>
 <script>
-import koWhatsApp from '../components/whatsApp/whatsApp'
+import koWhatsApp from '../components/whatsapp/whatsApp'
 export default {
   name: 'error-noStoreFound',
   components: {
