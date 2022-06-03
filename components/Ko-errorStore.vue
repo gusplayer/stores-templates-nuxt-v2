@@ -690,11 +690,10 @@
   </div>
 </template>
 <script>
-import koWhatsApp from '../components/whatsapp/whatsApp'
 export default {
   name: 'error-noStoreFound',
   components: {
-    koWhatsApp,
+    koWhatsApp: () => import('../components/whatsapp/whatsApp.vue'),
   },
   data() {
     return {
