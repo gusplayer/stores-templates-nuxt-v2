@@ -86,7 +86,7 @@
             <div class="content-price-empty" v-else></div>
             <div class="wrapper-btn-icon">
               <nuxt-link
-                id="view_details_06"
+                class="view_details"
                 nuxt-link
                 :to="{ path: `/productos/` + product.slug }"
               >
@@ -629,7 +629,7 @@ export default {
   -o-transition: all 200ms ease-out;
   transition: all 200ms ease-out;
 }
-#view_details_06 {
+.view_details {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -651,13 +651,13 @@ export default {
   -o-transition: all 200ms ease-out;
   transition: all 200ms ease-out;
 }
-#view_details_06:hover {
+.view_details:hover {
   color: var(--btnhover);
   border: solid 2px var(--btnhover);
 
   cursor: pointer;
 }
-#product-card:hover #view_details_06 {
+#product-card:hover .view_details {
   opacity: 1;
   width: 152px;
   font-size: 15px;

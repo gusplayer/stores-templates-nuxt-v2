@@ -35,7 +35,7 @@
             <div class="content-price-empty" v-else></div>
             <div class="wrapper-btn-icon">
               <nuxt-link
-                :id="`view_details${product.slug}`"
+                class="view_details"
                 :to="{ path: `/productosHoko/` + product.id }"
               >
                 <p>{{ $t('home_cardvermas') }}</p>
@@ -312,7 +312,7 @@ export default {
   -o-transition: all 200ms ease-out;
   transition: all 200ms ease-out;
 }
-#view_details {
+.view_details {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -334,13 +334,13 @@ export default {
   -o-transition: all 200ms ease-out;
   transition: all 200ms ease-out;
 }
-#view_details:hover {
+.view_details:hover {
   color: var(--btnhover);
   border: solid 2px var(--btnhover);
 
   cursor: pointer;
 }
-#product-card:hover #view_details {
+#product-card:hover .view_details {
   opacity: 1;
   width: 152px;
   font-size: 15px;
