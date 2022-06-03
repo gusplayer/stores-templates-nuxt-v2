@@ -78,6 +78,7 @@ export default {
         e.origin.includes('https://panel.komercia.xyz')
       ) {
         if (e && e.data && e.data.componentToEdit) {
+          // console.log(e.data)
           this.$store.commit('SET_CURRENTSETTING5', e.data)
           switch (e.data.componentToEdit) {
             case 'header':

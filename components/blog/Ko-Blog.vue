@@ -194,6 +194,7 @@ export default {
   color: var(--btnhover);
 }
 input[type='search'] {
+  background: transparent;
   border: solid 2px black;
 }
 input[type='search']:focus {
@@ -213,15 +214,20 @@ input::-webkit-input-placeholder {
   color: transparent;
   cursor: pointer;
   box-sizing: border-box;
+
+  background: transparent;
+  border: black 2px solid;
+  border-radius: 50px;
+  transition: all 200ms ease-in;
 }
 #demo-2 input[type='search']:hover {
-  background-color: #fff;
+  background: transparent;
 }
 #demo-2 input[type='search']:focus {
   width: 200px;
   padding-left: 32px;
   color: black;
-  background-color: #fff;
+  background: transparent;
   cursor: auto;
 }
 #demo-2 input:-moz-placeholder {
