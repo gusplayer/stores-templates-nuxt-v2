@@ -75,7 +75,7 @@
 <script>
 import KoProductCard1 from './_blogcard/Ko-cardblog'
 export default {
-  name: 'Ko-Blog',
+  name: 'Ko-BlogIndex-5',
   components: {
     KoProductCard1,
   },

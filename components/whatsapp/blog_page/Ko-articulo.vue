@@ -3,9 +3,11 @@
     <div class="bannerBlog">
       <div class="crumb">
         <nuxt-link
-          :to="
-            this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/blog` : `/`
-          "
+          :to="{
+            path: this.stateWapiME
+              ? `/wa/${dataStore.tienda.id_tienda}/blog`
+              : `/`,
+          }"
         >
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
         </nuxt-link>
@@ -62,7 +64,7 @@ import { mapState } from 'vuex'
 import extensions from '../../../mixins/elemenTiptap.vue'
 export default {
   mixins: [extensions],
-  name: 'Ko-articulo',
+  name: 'Ko-articulo-wa',
   mounted() {
     if (this.listArticulos.length) {
       this.searchIdForSlug()

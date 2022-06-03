@@ -479,7 +479,7 @@ import currency from '../../mixins/formatCurrent'
 import expiredDate from '../../mixins/expiredDate'
 export default {
   mixins: [idCloudinary, currency, expiredDate],
-  name: 'Cart',
+  name: 'Ko-Cart-G',
   props: {
     dataStore: Object,
     cities: Array,

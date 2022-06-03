@@ -156,7 +156,7 @@
 <script>
 import BaseAccordian from '../_BaseAccordion.vue'
 export default {
-  name: 'KoMenuLeft',
+  name: 'Ko-MenuLeft-7',
   props: {
     dataStore: Object,
   },

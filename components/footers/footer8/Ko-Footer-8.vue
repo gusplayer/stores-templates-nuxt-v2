@@ -114,7 +114,7 @@
 import KoTermsConditions from '../ko-TermsAndConditions'
 
 export default {
-  name: 'Ko-Footer-1',
+  name: 'Ko-Footer-8',
   components: {
     KoTermsConditions,
   },

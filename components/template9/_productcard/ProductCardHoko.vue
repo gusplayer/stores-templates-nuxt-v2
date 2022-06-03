@@ -90,7 +90,7 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
-  name: 'Ko-ProductCard-1',
+  name: 'Ko-ProductCard-9-Ho',
   props: { product: Object, settingGeneral: Object, productListCard: Object },
 
   data() {

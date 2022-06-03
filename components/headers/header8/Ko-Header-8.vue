@@ -192,7 +192,7 @@ export default {
     KoMenu,
     KoSearch,
   },
-  name: 'Ko-Header-1',
+  name: 'Ko-Header-8',
   props: {
     dataStore: Object,
     settingByTemplate: Object,

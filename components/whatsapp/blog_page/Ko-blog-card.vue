@@ -1,7 +1,9 @@
 <template>
   <div class="producto h-full">
     <nuxt-link
-      :to="`/wa/${dataStore.tienda.id_tienda}/blog/${article.slug}`"
+      :to="{
+        path: '/wa/' + dataStore.tienda.id_tienda + '/blog/' + article.slug,
+      }"
       class="container"
       @mouseover="hover = true"
       @mouseleave="hover = false"

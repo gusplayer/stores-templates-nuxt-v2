@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  name: 'KoSearch',
+  name: 'Ko-Search',
   props: {
     showMenu: Boolean,
     settingByTemplate9: Array,

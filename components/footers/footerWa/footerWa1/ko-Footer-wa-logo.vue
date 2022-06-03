@@ -102,7 +102,7 @@
 import KoTermsConditions from '../../ko-TermsAndConditions'
 
 export default {
-  name: 'Ko-Footer-Wa',
+  name: 'Ko1-Footer-Wa',
   components: {
     KoTermsConditions,
   },

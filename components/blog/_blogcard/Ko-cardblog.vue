@@ -82,7 +82,7 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
-  name: 'Ko-ProductCard-1',
+  name: 'Ko-ProductCard-5',
   props: { article: Object },
   mounted() {
     if (this.article.updated_at) {

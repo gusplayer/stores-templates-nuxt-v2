@@ -66,7 +66,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'KoSearchWa',
+  name: 'Ko-SearchWa-2',
   props: {
     settingByTemplate: Object,
   },

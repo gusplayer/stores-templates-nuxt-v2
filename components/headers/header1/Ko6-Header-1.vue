@@ -76,7 +76,7 @@ export default {
     KoOrder,
     KoMenu,
   },
-  name: 'Ko-Header-1',
+  name: 'Ko-Header-6',
   props: {
     dataStore: Object,
     settingByTemplate: Object,

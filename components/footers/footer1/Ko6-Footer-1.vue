@@ -112,7 +112,7 @@
 
 <script>
 export default {
-  name: 'Ko-Footer-1',
+  name: 'Ko6-Footer-1',
   props: {
     dataStore: Object,
     settingByTemplate: Object,
