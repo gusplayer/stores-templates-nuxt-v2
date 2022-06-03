@@ -20,12 +20,9 @@
         </div>
       </div>
       <div class="content-info-blog">
-        <router-link
-          :to="{ path: `/blog/` + article.slug }"
-          class="cont-tittle"
-        >
+        <nuxt-link :to="{ path: `/blog/` + article.slug }" class="cont-tittle">
           <p class="txt-tittle">{{ this.article.titulo }}</p>
-        </router-link>
+        </nuxt-link>
 
         <div class="cont-autor">
           <span class="flex-shrink-0 mx-1">

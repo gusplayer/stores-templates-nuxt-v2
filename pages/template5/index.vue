@@ -36,56 +36,42 @@
 </template>
 
 <script>
-import kBanner from '../../components/template5/ko-Banner-1'
-import kBannerFooter from '../../components/template5/ko-BannerFooter-1'
-import KProductFavoritos from '../../components/template5/Ko-ProductFavoritos-1'
-import KProductList from '../../components/template5/Ko-ProductList-1'
-import KProductListHoko from '../../components/template5/Ko-ProductFavoritosHoko.vue'
-import KNewsletter from '../../components/template5/Ko-Newsletter-1'
-import KComponent360 from '../../components/template5/Ko-Content360-1'
+import { mapState } from 'vuex'
 export default {
   layout: 'default',
   components: {
-    kBanner,
-    KProductList,
-    KProductListHoko,
-    KNewsletter,
-    KProductFavoritos,
-    KComponent360,
-    kBannerFooter,
+    kBanner: () => import('../../components/template5/ko-Banner-1'),
+    kBannerFooter: () => import('../../components/template5/ko-BannerFooter-1'),
+    KProductFavoritos: () =>
+      import('../../components/template5/Ko-ProductFavoritos-1'),
+    KProductList: () => import('../../components/template5/Ko-ProductList-1'),
+    KProductListHoko: () =>
+      import('../../components/template5/Ko-ProductFavoritosHoko.vue'),
+    KNewsletter: () => import('../../components/template5/Ko-Newsletter-1'),
+    KComponent360: () => import('../../components/template5/Ko-Content360-1'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   computed: {
-    template() {
-      return this.$store.state.template
-    },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState([
+      'template',
+      'dataStore',
+      'settingBase',
+      'stateBanner',
+      'settingByTemplate',
+      'dataHoko',
+    ]),
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    stateBanner() {
-      return this.$store.state.stateBanner
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
-    },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenertemplate(e) {
+    addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080') ||

@@ -25,8 +25,8 @@
       },
     ]"
   >
-    <Kbanner
-      id="kbannerX"
+    <KBanner
+      id="kBannerX"
       v-bind="componentsProps"
       :key="bannerRendering"
       v-if="
@@ -35,8 +35,8 @@
         settingByTemplate9.banner.visible
       "
     />
-    <Koffers
-      id="KoffersX"
+    <KOffers
+      id="KOffersX"
       v-bind="componentsProps"
       v-if="
         settingByTemplate9 &&
@@ -44,8 +44,8 @@
         settingByTemplate9.koffers.visible
       "
     />
-    <KproductlistHoko
-      id="KproductlistHokoX"
+    <KProductListHoko
+      id="KProductListHokoX"
       v-bind="componentsProps"
       v-if="
         settingByTemplate9 &&
@@ -55,8 +55,8 @@
         dataHoko.statehoko == 1
       "
     />
-    <Kproductlist
-      id="KproductlistX"
+    <KProductList
+      id="KProductListX"
       v-bind="componentsProps"
       v-if="
         settingByTemplate9 &&
@@ -65,8 +65,8 @@
         this.fullProducts.length > 0
       "
     />
-    <Kblog
-      id="KblogX"
+    <KBlog
+      id="KBlogX"
       v-bind="componentsProps"
       v-show="
         listArticulos.length > 0 &&
@@ -97,29 +97,22 @@
 </template>
 
 <script>
-import Kbanner from '../../components/template9/ko-carousel'
-import Koffers from '../../components/template9/ko-offers'
-import Kproductlist from '../../components/template9/Ko-ProductList'
-import KproductlistHoko from '../../components/template9/Ko-slider-hoko.vue'
-import Kblog from '../../components/template9/ko-blog'
-import KWrapper from '../../components/template9/Ko-wrapper'
-import KNews from '../../components/template9/Ko-Newsletter'
 import { mapState } from 'vuex'
-
 export default {
   layout: 'default',
   components: {
-    Kbanner,
-    Koffers,
-    Kproductlist,
-    KproductlistHoko,
-    Kblog,
-    KWrapper,
-    KNews,
+    KBanner: () => import('../../components/template9/ko-carousel'),
+    KOffers: () => import('../../components/template9/ko-offers'),
+    KProductList: () => import('../../components/template9/Ko-ProductList'),
+    KProductListHoko: () =>
+      import('../../components/template9/Ko-slider-hoko.vue'),
+    KBlog: () => import('../../components/template9/ko-blog'),
+    KWrapper: () => import('../../components/template9/Ko-wrapper'),
+    KNews: () => import('../../components/template9/Ko-Newsletter'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate09)
+    window.addEventListener('message', this.addEventListenerTemplate09)
   },
   data() {
     return {
@@ -176,10 +169,10 @@ export default {
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate09)
+    window.removeEventListener('message', this.addEventListenerTemplate09)
   },
   methods: {
-    addEventListenertemplate09(e) {
+    addEventListenerTemplate09(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080') ||
@@ -198,22 +191,22 @@ export default {
         ) {
           switch (e.data.componentToEdit) {
             case 'settingGeneral':
-              this.moverseA('kbannerX')
+              this.moverseA('kBannerX')
               break
             case 'footer':
               this.moverseA('KNewsX')
               break
             case 'banner':
-              this.moverseA('kbannerX')
+              this.moverseA('kBannerX')
               break
             case 'koffers':
-              this.moverseA('KoffersX')
+              this.moverseA('KOffersX')
               break
             case 'productList':
-              this.moverseA('KproductlistX')
+              this.moverseA('KProductListX')
               break
             case 'blog':
-              this.moverseA('KblogX')
+              this.moverseA('KBlogX')
               break
             case 'wrapper':
               this.moverseA('KWrapperX')

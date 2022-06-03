@@ -5,39 +5,39 @@
 </template>
 
 <script>
-import K05ProductList from '../../components/template6/Ko6-ProductList-2'
-import K07ProductList from '../../components/template7/Ko-ProductListFilter'
-import K09ProductList from '../../components/template9/Ko-ProductListFilter'
-import K10ProductList from '../../components/template10/Ko-ProductListFilter'
-import K11ProductList from '../../components/template11/ko-ProductListFilter'
-
+import { mapState } from 'vuex'
 export default {
   components: {
-    K05ProductList,
-    K07ProductList,
-    K09ProductList,
-    K10ProductList,
-    K11ProductList,
+    K05ProductList: () =>
+      import('../../components/template6/Ko6-ProductList-2'),
+    K07ProductList: () =>
+      import('../../components/template7/Ko-ProductListFilter'),
+    K09ProductList: () =>
+      import('../../components/template9/Ko-ProductListFilter'),
+    K10ProductList: () =>
+      import('../../components/template10/Ko-ProductListFilter'),
+    K11ProductList: () =>
+      import('../../components/template11/ko-ProductListFilter'),
+    K13ProductList: () => import('../../components/template13/Ko-ProductList'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenertemplate)
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState([
+      'dataStore',
+      'settingBase',
+      'settingByTemplate',
+      'settingByTemplate7',
+      'settingByTemplate9',
+      'settingByTemplate10',
+      'settingByTemplate11',
+      'settingByTemplate13',
+      'template',
+    ]),
     fullProducts() {
       return this.$store.getters['products/filterProducts']
-    },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    template() {
-      return this.$store.state.template
     },
     indexTemplate() {
       let productListComponent = ''
@@ -64,20 +64,11 @@ export default {
         case 11:
           productListComponent = 'K11ProductList'
           break
+        case 13:
+          productListComponent = 'K13ProductList'
+          break
       }
       return productListComponent
-    },
-    settingByTemplate7() {
-      return this.$store.state.settingByTemplate7
-    },
-    settingByTemplate9() {
-      return this.$store.state.settingByTemplate9
-    },
-    settingByTemplate10() {
-      return this.$store.state.settingByTemplate10
-    },
-    settingByTemplate11() {
-      return this.$store.state.settingByTemplate11
     },
     componentsProps() {
       return {

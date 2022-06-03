@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   layout: 'default',
   components: {
@@ -38,14 +39,9 @@ export default {
     window.addEventListener('message', this.addEventListenertemplate)
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState(['dataStore', 'settingByTemplate12']),
     fullProducts() {
       return this.$store.getters['products/filterProducts']
-    },
-    settingByTemplate12() {
-      return this.$store.state.settingByTemplate12
     },
     componentsProps() {
       return {

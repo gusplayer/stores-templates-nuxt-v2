@@ -4,27 +4,19 @@
   </div>
 </template>
 <script>
-import KoTemplate5 from './template5/index'
-import KoTemplate6 from './template6/index_macrobrand'
 // import KoTemplate6 from './template6/index'
-import KoTemplate7 from './template7/index'
-import KoTemplate8 from './template8/index'
-import KoTemplate9 from './template9/index'
-import KoTemplate10 from './template10/index'
-import KoTemplate11 from './template11/index'
-import KoTemplate12 from './template12/index'
-import KoTemplateWhatsapp from './template99/index'
 export default {
   components: {
-    KoTemplate5,
-    KoTemplate6,
-    KoTemplate7,
-    KoTemplate8,
-    KoTemplate9,
-    KoTemplate10,
-    KoTemplate11,
-    KoTemplate12,
-    KoTemplateWhatsapp,
+    KoTemplate5: () => import('./template5/index'),
+    KoTemplate6: () => import('./template6/index_macrobrand'),
+    KoTemplate7: () => import('./template7/index'),
+    KoTemplate8: () => import('./template8/index'),
+    KoTemplate9: () => import('./template9/index'),
+    KoTemplate10: () => import('./template10/index'),
+    KoTemplate11: () => import('./template11/index'),
+    KoTemplate12: () => import('./template12/index'),
+    KoTemplate13: () => import('./template13/index'),
+    KoTemplateWhatsapp: () => import('./template99/index'),
   },
   computed: {
     template() {
@@ -59,6 +51,9 @@ export default {
           break
         case 12:
           productListComponent = 'KoTemplate12'
+          break
+        case 13:
+          productListComponent = 'KoTemplate13'
           break
         case 99:
           productListComponent = 'KoTemplateWhatsapp'

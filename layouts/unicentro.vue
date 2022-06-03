@@ -17,7 +17,7 @@
           <component v-bind="componentsProps" :is="footerTemplate" />
           <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
             <div @click="redirectWhatsapp()">
-              <koWhatsapp class="button-whatsapp" /><span
+              <koWhatsApp class="button-whatsapp" /><span
                 >WhatsApp<br /><small>{{
                   dataStore.tienda.whatsapp
                 }}</small></span
@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      <koModalsecurity :dataStore="dataStore" v-else />
+      <koModalSecurity :dataStore="dataStore" v-else />
     </div>
     <div v-else>
       <koTiendaError />
@@ -51,45 +51,32 @@
 </template>
 
 <script>
-import KoHeader1 from '../components/headers/header1/Ko-Header-1'
-import KoHeader2 from '../components/headers/header2/Ko-Header-2'
-import KoHeader3 from '../components/headers/header3/Ko-Header-3'
-import KoHeader4 from '../components/headers/header4/Ko-Header-4'
-import KoHeader5 from '../components/headers/header5/Ko-Header-5'
-import KoHeader6 from '../components/headers/header6/Ko-Header-6'
-import KoFooter1 from '../components/footers/footer1/Ko-Footer-1'
-import KoFooter2 from '../components/footers/footer2/Ko-Footer-2'
-import KoFooter4 from '../components/footers/footer4/Ko-Footer-4'
-import KoFooter5 from '../components/footers/footer5/Ko-Footer-5'
-import KoFooter6 from '../components/footers/footer6/Ko-Footer-6'
-import KoFooterCountry from '../components/footers/footer1/Ko-Footer-Country'
-import koWhatsapp from '../components/whatsapp/whatsapp'
-import koTiendaCerrada from '../assets/img/tiendaCerrada'
-import koModalsecurity from '../components/modal/Ko-modal-security.vue'
 import { mapState } from 'vuex'
-//template6
-// import Ko6Header1 from '../components/headers/header1/Ko6-Header-1'
-// import Ko6Footer1 from '../components/footers/footer1/Ko6-Footer-1'
-
 export default {
   components: {
-    KoHeader1,
-    KoHeader2,
-    KoHeader3,
-    KoHeader4,
-    KoHeader5,
-    KoHeader6,
-    KoFooter1,
-    KoFooter2,
-    KoFooter4,
-    KoFooter5,
-    KoFooter6,
-    KoFooterCountry,
-    koWhatsapp,
-    koTiendaCerrada,
-    // Ko6Header1,
-    // Ko6Footer1,
-    koModalsecurity,
+    KoHeader1: () => import('../components/headers/header1/Ko-Header-1'),
+    KoHeader2: () => import('../components/headers/header2/Ko-Header-2'),
+    KoHeader3: () => import('../components/headers/header3/Ko-Header-3'),
+    KoHeader4: () => import('../components/headers/header4/Ko-Header-4'),
+    KoHeader5: () => import('../components/headers/header5/Ko-Header-5'),
+    KoHeader6: () => import('../components/headers/header6/Ko-Header-6'),
+    KoHeader7: () => import('../components/headers/header7/Ko-Header-7'),
+    KoHeader8: () => import('../components/headers/header8/Ko-Header-8'),
+    KoFooter1: () => import('../components/footers/footer1/Ko-Footer-1'),
+    KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2'),
+    KoFooter4: () => import('../components/footers/footer4/Ko-Footer-4'),
+    KoFooter5: () => import('../components/footers/footer5/Ko-Footer-5'),
+    KoFooter6: () => import('../components/footers/footer6/Ko-Footer-6'),
+    KoFooter7: () => import('../components/footers/footer7/Ko-Footer-7'),
+    KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8'),
+    KoFooterCountry: () =>
+      import('../components/footers/footer1/Ko-Footer-Country'),
+    koWhatsApp: () => import('../components/whatsApp/whatsApp'),
+    koTiendaCerrada: () => import('../assets/img/tiendaCerrada'),
+    // Ko6Header1: () => import('../components/headers/header1/Ko6-Header-1'),
+    // Ko6Footer1: () => import('../components/footers/footer1/Ko6-Footer-1'),
+    koTiendaError: () => import('../components/Ko-errorStore'),
+    koModalSecurity: () => import('../components/modal/Ko-modal-security.vue'),
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES_PWD')

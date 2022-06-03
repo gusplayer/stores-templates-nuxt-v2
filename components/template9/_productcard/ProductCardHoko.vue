@@ -11,7 +11,7 @@
         },
       ]"
     >
-      <router-link :to="{ path: `/productosHoko/` + product.id }">
+      <nuxt-link :to="{ path: `/productosHoko/` + product.id }">
         <client-only>
           <img
             v-lazy="product.images[0]"
@@ -20,9 +20,9 @@
           />
         </client-only>
         <div class="image_overlay"></div>
-      </router-link>
+      </nuxt-link>
 
-      <router-link :to="{ path: `/productosHoko/` + product.id }">
+      <nuxt-link :to="{ path: `/productosHoko/` + product.id }">
         <div class="overlay-bottom">
           <div class="cart-Shop">
             <div class="text-cart">
@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-      </router-link>
+      </nuxt-link>
     </div>
     <div
       class="datos-producto"
@@ -48,7 +48,7 @@
       <!-- <div class="categoria" v-if="this.product.model_type">
         {{ this.product.model_type }}
       </div> -->
-      <router-link :to="{ path: `/productosHoko/` + product.id }">
+      <nuxt-link :to="{ path: `/productosHoko/` + product.id }">
         <div class="tittle tittle-xml">
           <p class="card-title" v-if="this.product.name.length >= 90">
             {{ `${this.product.name.slice(0, 90)}...` }}
@@ -73,7 +73,7 @@
             {{ `${this.product.name.slice(0, 30)}` }}
           </p>
         </div>
-      </router-link>
+      </nuxt-link>
       <div class="precio">
         <div class="content-text-price" v-if="this.product.price">
           <p class="text-price">

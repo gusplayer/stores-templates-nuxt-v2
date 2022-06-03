@@ -667,7 +667,7 @@
           <div class="content-btn">
             <div>
               <button @click="redirectWhatsapp()" class="btn-error">
-                <koWhatsapp class="icon-whatsapp" />Contactar a Komercia
+                <koWhatsApp class="icon-whatsapp" />Contactar a Komercia
               </button>
             </div>
             <div>
@@ -690,11 +690,11 @@
   </div>
 </template>
 <script>
-import koWhatsapp from '../components/whatsapp/whatsapp'
+import koWhatsApp from '../components/whatsApp/whatsApp'
 export default {
   name: 'error-noStoreFound',
   components: {
-    koWhatsapp,
+    koWhatsApp,
   },
   data() {
     return {

@@ -5,28 +5,33 @@
 </template>
 
 <script>
-import K05Article from '../../components/blog/Ko-articulo'
-import K07Article from '../../components/template7/blog_page/Ko-articulo'
-import K09Article from '../../components/template9/blog_page/Ko-articulo'
-import K10Article from '../../components/template10/blog_page/Ko-articulo'
-import K11Article from '../../components/template11/blog_page/Ko-articulo'
-
+import { mapState } from 'vuex'
 export default {
   layout: 'default',
-  components: { K05Article, K07Article, K09Article, K10Article, K11Article },
+  components: {
+    K05Article: () => import('../../components/blog/Ko-articulo'),
+    K07Article: () =>
+      import('../../components/template7/blog_page/Ko-articulo'),
+    K09Article: () =>
+      import('../../components/template9/blog_page/Ko-articulo'),
+    K10Article: () =>
+      import('../../components/template10/blog_page/Ko-articulo'),
+    K11Article: () =>
+      import('../../components/template11/blog_page/Ko-articulo'),
+    K13Article: () => import('../../components/blog/Ko-articulo'),
+  },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    template() {
-      return this.$store.state.template
-    },
+    ...mapState([
+      'dataStore',
+      'settingBase',
+      'settingByTemplate',
+      'settingByTemplate7',
+      'settingByTemplate9',
+      'settingByTemplate10',
+      'settingByTemplate11',
+      'settingByTemplate13',
+      'template',
+    ]),
     indexTemplate() {
       let productListComponent = ''
       switch (this.template) {
@@ -51,14 +56,11 @@ export default {
         case 11:
           productListComponent = 'K11Article'
           break
+        case 13:
+          productListComponent = 'K13Article'
+          break
       }
       return productListComponent
-    },
-    settingByTemplate7() {
-      return this.$store.state.settingByTemplate7
-    },
-    settingByTemplate11() {
-      return this.$store.state.settingByTemplate11
     },
     componentsProps() {
       return {

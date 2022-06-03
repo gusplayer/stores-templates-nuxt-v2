@@ -2,7 +2,7 @@
   <div class="wrapper-card">
     <div class="container-card" id="product-card">
       <div class="wrapper">
-        <router-link
+        <nuxt-link
           :to="{ path: `/productosHoko/` + product.id }"
           class="wrapper-image"
         >
@@ -14,7 +14,7 @@
             />
           </client-only>
           <div class="image_overlay"></div>
-        </router-link>
+        </nuxt-link>
 
         <div class="separador-stats"></div>
         <div class="stats">
@@ -34,19 +34,19 @@
             </div>
             <div class="content-price-empty" v-else></div>
             <div class="wrapper-btn-icon">
-              <router-link
+              <nuxt-link
                 id="view_details"
                 :to="{ path: `/productosHoko/` + product.id }"
               >
                 <p>{{ $t('home_cardvermas') }}</p>
-              </router-link>
+              </nuxt-link>
               <div class="separador-btn"></div>
             </div>
           </div>
         </div>
       </div>
       <div class="wrapper-movil">
-        <router-link
+        <nuxt-link
           :to="{ path: `/productosHoko/` + product.id }"
           class="wrapper-image"
         >
@@ -55,9 +55,9 @@
             class="product-image"
             alt="Product Img"
           />
-        </router-link>
+        </nuxt-link>
         <div class="content-card-items">
-          <router-link
+          <nuxt-link
             :to="{ path: `/productosHoko/` + product.id }"
             class="content-name-product"
           >
@@ -67,13 +67,13 @@
             <p class="card-title" v-else>
               {{ `${this.product.name.slice(0, 30)}` }}
             </p>
-          </router-link>
+          </nuxt-link>
           <div class="content-text-price" v-if="this.product.price">
-            <router-link :to="{ path: `/productosHoko/` + product.id }">
+            <nuxt-link :to="{ path: `/productosHoko/` + product.id }">
               <p class="text-price">
                 {{ this.product.price | currency }}
               </p>
-            </router-link>
+            </nuxt-link>
           </div>
         </div>
       </div>

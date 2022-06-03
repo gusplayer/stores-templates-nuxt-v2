@@ -3,7 +3,7 @@
     <div class="content-product">
       <div class="wrapper-card">
         <div class="container-blog">
-          <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
             <div class="figure-img">
               <figure class="content-imge">
                 <img
@@ -15,8 +15,8 @@
                 <div v-else class="empty"></div>
               </figure>
             </div>
-          </router-link>
-          <router-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          </nuxt-link>
+          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
             <div class="overlay-top">
               <div class="text-tittle">
                 <p class="txt-day">
@@ -30,21 +30,21 @@
                 </p>
               </div>
             </div>
-          </router-link>
+          </nuxt-link>
         </div>
         <div class="container-properitys">
           <div class="content-tittle-article">
-            <router-link
+            <nuxt-link
               :to="{ path: `/blog/` + article.slug }"
               class="txt-tituloart"
               v-if="this.article.titulo && this.article.titulo.length > 63"
-              >{{ `${this.article.titulo.slice(0, 63)}...` }}</router-link
+              >{{ `${this.article.titulo.slice(0, 63)}...` }}</nuxt-link
             >
-            <router-link
+            <nuxt-link
               :to="{ path: `/blog/` + article.slug }"
               class="txt-tituloart"
               v-else
-              >{{ `${this.article.titulo.slice(0, 63)}` }}</router-link
+              >{{ `${this.article.titulo.slice(0, 63)}` }}</nuxt-link
             >
           </div>
 

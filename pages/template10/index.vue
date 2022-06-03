@@ -71,23 +71,17 @@
   </div>
 </template>
 <script>
-import KbuttonCar from '../../components/template10/buttonCar'
-import Kcarousel from '../../components/template10/ko-carousel'
-import Ksection from '../../components/template10/ko-section'
-import Ktrending from '../../components/template10/ko-trending'
-import Kdeal from '../../components/template10/ko-deals'
-import Kfeatured from '../../components/template10/ko-featuredProducts'
-import Kblog from '../../components/template10/ko-blog'
-
+import { mapState } from 'vuex'
 export default {
+  layout: 'default',
   components: {
-    KbuttonCar,
-    Kcarousel,
-    Ksection,
-    Ktrending,
-    Kdeal,
-    Kfeatured,
-    Kblog,
+    KbuttonCar: () => import('../../components/template10/buttonCar'),
+    Kcarousel: () => import('../../components/template10/ko-carousel'),
+    Ksection: () => import('../../components/template10/ko-section'),
+    Ktrending: () => import('../../components/template10/ko-trending'),
+    Kdeal: () => import('../../components/template10/ko-deals'),
+    Kfeatured: () => import('../../components/template10/ko-featuredProducts'),
+    Kblog: () => import('../../components/template10/ko-blog'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
@@ -99,17 +93,14 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState([
+      'dataStore',
+      'listArticulos',
+      'settingByTemplate10',
+      'dataHoko',
+    ]),
     fullProducts() {
       return this.$store.getters['products/filterProducts']
-    },
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    settingByTemplate10() {
-      return this.$store.state.settingByTemplate10
     },
     componentsProps() {
       return {
@@ -148,9 +139,6 @@ export default {
             ? this.settingByTemplate10.blog
             : null,
       }
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
     },
   },
   beforeDestroy() {

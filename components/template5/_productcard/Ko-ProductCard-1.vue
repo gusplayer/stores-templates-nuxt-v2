@@ -2,7 +2,7 @@
   <div class="wrapper-card">
     <div class="container-card" id="product-card">
       <div class="wrapper">
-        <router-link
+        <nuxt-link
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
@@ -39,7 +39,7 @@
             />
           </client-only>
           <div class="image_overlay"></div>
-        </router-link>
+        </nuxt-link>
         <div
           v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
         >
@@ -127,12 +127,12 @@
             </div>
             <div class="content-price-empty" v-else></div>
             <div class="wrapper-btn-icon">
-              <router-link
+              <nuxt-link
                 id="view_details"
                 :to="{ path: `/productos/` + product.slug }"
               >
                 <p>{{ $t('home_cardvermas') }}</p>
-              </router-link>
+              </nuxt-link>
               <div class="separador-btn"></div>
               <div
                 id="add_cart"
@@ -154,7 +154,7 @@
         </div>
       </div>
       <div class="wrapper-movil">
-        <router-link
+        <nuxt-link
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
@@ -190,13 +190,13 @@
               alt="Product Img"
             />
           </client-only>
-        </router-link>
+        </nuxt-link>
         <div class="content-card-items">
           <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
           <p class="card-info-2" v-if="getFreeShipping == false">
             {{ $t('home_cardGratis') }}
           </p>
-          <router-link
+          <nuxt-link
             :to="{ path: `/productos/` + product.slug }"
             class="content-name-product"
           >
@@ -206,9 +206,9 @@
             <p class="card-title" v-else>
               {{ `${this.product.nombre.slice(0, 30)}` }}
             </p>
-          </router-link>
+          </nuxt-link>
           <div class="content-text-price" v-if="this.product.precio">
-            <router-link :to="{ path: `/productos/` + product.slug }">
+            <nuxt-link :to="{ path: `/productos/` + product.slug }">
               <div
                 class="content-price"
                 v-if="estadoCart && this.minPrice != this.maxPrice"
@@ -253,7 +253,7 @@
                   }}
                 </p>
               </div>
-            </router-link>
+            </nuxt-link>
             <div
               v-if="
                 !this.estadoCart &&

@@ -5,28 +5,28 @@
 </template>
 
 <script>
-import K05Blog from '../../components/blog/Ko-Blog'
-import K07Blog from '../../components/template7/blog_page/Ko-Blog'
-import K09Blog from '../../components/template9/blog_page/Ko-Blog'
-import K10Blog from '../../components/template10/blog_page/Ko-Blog'
-import K11Blog from '../../components/template11/blog_page/Ko-Blog'
-
+import { mapState } from 'vuex'
 export default {
   layout: 'default',
-  components: { K05Blog, K07Blog, K09Blog, K10Blog, K11Blog },
+  components: {
+    K05Blog: () => import('../../components/blog/Ko-Blog'),
+    K07Blog: () => import('../../components/template7/blog_page/Ko-Blog'),
+    K09Blog: () => import('../../components/template9/blog_page/Ko-Blog'),
+    K10Blog: () => import('../../components/template10/blog_page/Ko-Blog'),
+    K11Blog: () => import('../../components/template11/blog_page/Ko-Blog'),
+  },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    template() {
-      return this.$store.state.template
-    },
+    ...mapState([
+      'dataStore',
+      'settingBase',
+      'settingByTemplate',
+      'settingByTemplate7',
+      'settingByTemplate9',
+      'settingByTemplate10',
+      'settingByTemplate11',
+      'settingByTemplate13',
+      'template',
+    ]),
     indexTemplate() {
       let productListComponent = ''
       switch (this.template) {
@@ -53,15 +53,6 @@ export default {
           break
       }
       return productListComponent
-    },
-    settingByTemplate7() {
-      return this.$store.state.settingByTemplate7
-    },
-    settingByTemplate9() {
-      return this.$store.state.settingByTemplate9
-    },
-    settingByTemplate11() {
-      return this.$store.state.settingByTemplate11
     },
     componentsProps() {
       return {

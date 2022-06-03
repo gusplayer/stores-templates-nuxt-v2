@@ -26,7 +26,7 @@
         },
       ]"
     >
-      <router-link
+      <nuxt-link
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
       >
@@ -45,7 +45,7 @@
           />
         </client-only>
         <div class="image_overlay"></div>
-      </router-link>
+      </nuxt-link>
       <div class="overlay-top" v-if="getFreeShipping == false && !soldOut">
         <div class="icons-hover">
           <div class="transport-icon">
@@ -210,12 +210,9 @@
         </div>
         <div class="cart-Shop">
           <div class="text-cart">
-            <router-link
-              router-link
-              :to="{ path: `/productos/` + product.slug }"
-            >
+            <nuxt-link nuxt-link :to="{ path: `/productos/` + product.slug }">
               <p class="color_tex_btn">{{ $t('home_cardvermas') }}</p>
-            </router-link>
+            </nuxt-link>
           </div>
         </div>
       </div>
