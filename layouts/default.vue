@@ -89,7 +89,7 @@ export default {
     KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8'),
     KoFooterCountry: () =>
       import('../components/footers/footer1/Ko-Footer-Country'),
-    koWhatsApp: () => import('../components/whatsApp/whatsApp'),
+    koWhatsApp: () => import('../components/whatsapp/whatsApp.vue'),
     koTiendaCerrada: () => import('../assets/img/tiendaCerrada'),
     // Ko6Header1: () => import('../components/headers/header1/Ko6-Header-1'),
     // Ko6Footer1: () => import('../components/footers/footer1/Ko6-Footer-1'),
