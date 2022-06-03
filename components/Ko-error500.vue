@@ -669,10 +669,11 @@
   </div>
 </template>
 <script>
+import koWhatsApp from '../components/whatsapp/whatsApp.vue'
 export default {
   name: 'error-500',
   components: {
-    koWhatsApp: () => import('../components/whatsapp/whatsApp.vue'),
+    koWhatsApp,
   },
   methods: {
     mobileCheck() {

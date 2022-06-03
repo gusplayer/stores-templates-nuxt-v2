@@ -69,6 +69,7 @@
 </template>
 <script>
 import expiredDate from '../mixins/expiredDate'
+import koWhatsApp from '../components/whatsapp/whatsApp.vue'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -89,12 +90,12 @@ export default {
     KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8'),
     KoFooterCountry: () =>
       import('../components/footers/footer1/Ko-Footer-Country'),
-    koWhatsApp: () => import('../components/whatsapp/whatsApp.vue'),
     koTiendaCerrada: () => import('../assets/img/tiendaCerrada'),
     // Ko6Header1: () => import('../components/headers/header1/Ko6-Header-1'),
     // Ko6Footer1: () => import('../components/footers/footer1/Ko6-Footer-1'),
     koTiendaError: () => import('../components/Ko-errorStore'),
     koModalSecurity: () => import('../components/modal/Ko-modal-security.vue'),
+    koWhatsApp,
   },
   mixins: [expiredDate],
   mounted() {
