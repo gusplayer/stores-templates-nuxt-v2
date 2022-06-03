@@ -22,6 +22,7 @@
                   :key="itemsfoto"
                 >
                   <img
+                    loading="lazy"
                     @click="selectedPhoto(foto)"
                     class="img-list"
                     v-lazy="foto"
@@ -34,6 +35,7 @@
           <div class="wrapper-photo_main">
             <div v class="photo_main">
               <img
+                loading="lazy"
                 class="photo_main"
                 v-lazy="this.selectPhotoUrl"
                 alt="Product Zoom"

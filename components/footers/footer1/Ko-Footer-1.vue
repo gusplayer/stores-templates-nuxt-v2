@@ -66,6 +66,8 @@
         rel="noreferrer noopener"
       >
         <img
+          width="120"
+          loading="lazy"
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
           "
@@ -74,6 +76,8 @@
           alt="Logo Img"
         />
         <img
+          width="120"
+          loading="lazy"
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
           "
@@ -88,6 +92,8 @@
         v-if="this.showLogo == false"
       >
         <img
+          width="120"
+          loading="lazy"
           :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
           class="logo-tablada"
           alt="Logo Img"

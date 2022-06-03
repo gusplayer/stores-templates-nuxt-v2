@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import koWhatsApp from '../components/whatsapp/Ko-whatsApp.vue'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -77,7 +76,7 @@ export default {
     // Ko6Footer1: () => import('../components/footers/footer1/Ko6-Footer-1'),
     koTiendaError: () => import('../components/Ko-errorStore.vue'),
     koModalSecurity: () => import('../components/modal/Ko-modal-security.vue'),
-    koWhatsApp,
+    koWhatsApp: () => import('../components/whatsapp/Ko-whatsApp.vue'),
   },
   mounted() {
     this.$store.dispatch('GET_COOKIES_PWD')

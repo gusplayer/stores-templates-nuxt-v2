@@ -8,6 +8,7 @@
         >
           <client-only>
             <img
+              loading="lazy"
               v-lazy="product.images[0]"
               class="product-image"
               alt="Product Img"
@@ -15,7 +16,6 @@
           </client-only>
           <div class="image_overlay"></div>
         </nuxt-link>
-
         <div class="separador-stats"></div>
         <div class="stats">
           <div class="stats-container">
@@ -35,7 +35,7 @@
             <div class="content-price-empty" v-else></div>
             <div class="wrapper-btn-icon">
               <nuxt-link
-                id="view_details"
+                :id="`view_details${product.slug}`"
                 :to="{ path: `/productosHoko/` + product.id }"
               >
                 <p>{{ $t('home_cardvermas') }}</p>
@@ -51,6 +51,7 @@
           class="wrapper-image"
         >
           <img
+            loading="lazy"
             v-lazy="product.images[0]"
             class="product-image"
             alt="Product Img"

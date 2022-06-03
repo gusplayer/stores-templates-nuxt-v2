@@ -3,6 +3,7 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for="(photo, index) in photos" :key="index">
         <img
+          loading="lazy"
           :src="photo"
           class="photo w-full flex justify-center"
           alt="ProductHoko"

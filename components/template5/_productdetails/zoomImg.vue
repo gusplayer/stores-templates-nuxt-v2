@@ -1,6 +1,7 @@
 <template>
   <figure class="zoom" :style="setBackground(photo)" v-on:mousemove="zoom">
     <img
+      loading="lazy"
       class="photo_main"
       v-on:mouseover="activeZoom = !activeZoom"
       :src="idCloudinaryDetalle(photo, 645, 430)"
