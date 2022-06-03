@@ -304,6 +304,7 @@ export default {
           'http-equiv': 'Content-Language',
           content: 'es',
         },
+        //openGraph meta
         {
           hid: 'og:title',
           name: 'og:title',

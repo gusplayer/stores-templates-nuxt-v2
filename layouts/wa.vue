@@ -72,8 +72,13 @@ export default {
   },
   head() {
     let tienda = this.$store.state.dataStore.tienda
+      ? this.$store.state.dataStore.tienda
+      : ''
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
-    let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
+    let description =
+      tienda && tienda.descripcion
+        ? tienda.descripcion.replace(/<[^>]*>?/g, '')
+        : ''
     return {
       title: tienda.nombre ? tienda.nombre : 'Tienda',
       htmlAttrs: {
@@ -144,7 +149,11 @@ export default {
           name: 'og:image',
           content: `${this.$store.state.urlKomercia}/logos/${tienda.logo}`,
         },
-        { hid: 'og:site_name', name: 'og:site_name', content: tienda.nombre },
+        {
+          hid: 'og:site_name',
+          name: 'og:site_name',
+          content: tienda.nombre ? tienda.nombre : 'Tienda',
+        },
         {
           hid: 'og:description',
           name: 'og:description',
@@ -159,21 +168,34 @@ export default {
         {
           hid: 'og:latitude',
           name: 'og:latitude',
-          content: geolocalizacion.latitud,
+          content:
+            geolocalizacion && geolocalizacion.latitud
+              ? geolocalizacion.latitud
+              : '',
         },
         {
           hid: 'og:longitude',
           name: 'og:longitude',
-          content: geolocalizacion.longitud,
+          content:
+            geolocalizacion && geolocalizacion.longitud
+              ? geolocalizacion.longitud
+              : '',
         },
         {
           hid: 'og:street-address',
           name: 'og:street-address',
-          content: geolocalizacion.direccion,
+          content:
+            geolocalizacion && geolocalizacion.direccion
+              ? geolocalizacion.direccion
+              : '',
         },
         {
           name: ' google',
           content: ' notranslate',
+        },
+        {
+          name: 'Content-Security-Policy',
+          content: "script-src 'none'",
         },
       ],
       script: [
