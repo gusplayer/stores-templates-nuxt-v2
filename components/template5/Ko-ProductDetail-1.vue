@@ -18,6 +18,7 @@
               <div class="swiper-wrapper">
                 <div class="swiper-slide photos_selected">
                   <img
+                    loading="lazy"
                     @click="selectedPhoto(data.detalle.foto_cloudinary)"
                     class="img-list"
                     :src="idCloudinary(data.detalle.foto_cloudinary, 100, 100)"
@@ -30,6 +31,7 @@
                   :key="itemsfoto"
                 >
                   <img
+                    loading="lazy"
                     @click="selectedPhoto(foto.foto_cloudinary)"
                     class="img-list"
                     :src="idCloudinary(foto.foto_cloudinary, 100, 100)"
@@ -38,6 +40,7 @@
                 </div>
                 <div class="swiper-slide photos_selected">
                   <img
+                    loading="lazy"
                     v-if="idYoutube"
                     :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
                     v-show="idYoutube"
@@ -62,6 +65,7 @@
               class="photo_main"
             >
               <img
+                loading="lazy"
                 class="photo_main"
                 v-on:mouseover="activeZoom = !activeZoom"
                 :src="idCloudinaryDetalle(selectPhotoUrl, 645, 430)"

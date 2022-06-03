@@ -128,7 +128,7 @@
             <div class="content-price-empty" v-else></div>
             <div class="wrapper-btn-icon">
               <nuxt-link
-                id="view_details"
+                :id="`view_details${product.slug}`"
                 :to="{ path: `/productos/` + product.slug }"
               >
                 <p>{{ $t('home_cardvermas') }}</p>

@@ -15,6 +15,8 @@
           <div class="header-content-logo">
             <nuxt-link to="/" class="wrapper-logo">
               <img
+                loading="lazy"
+                width="120"
                 :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
                 class="header-logo"
                 alt="Logo Img"

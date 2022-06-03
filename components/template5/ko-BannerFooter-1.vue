@@ -4,6 +4,7 @@
       <div class="wrapper-banner" v-if="this.banner.banner_footer">
         <client-only>
           <img
+            loading="lazy"
             v-lazy="idCloudinaryBanner(this.banner.banner_footer)"
             class="banner"
             alt="Banner tienda"

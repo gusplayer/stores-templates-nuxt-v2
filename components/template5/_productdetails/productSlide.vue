@@ -3,6 +3,7 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide wrapper-image">
         <img
+          loading="lazy"
           :src="idCloudinary(photo, 600, 600)"
           class="photo"
           alt="Product img"
@@ -10,6 +11,7 @@
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
         <img
+          loading="lazy"
           :src="idCloudinary(photo.foto_cloudinary, 600, 600)"
           class="photo"
           alt="Product img"
@@ -21,7 +23,7 @@
             <i class="material-icons">keyboard_backspace</i>
           </button>
           <iframe
-            style="max-width: 375px; width: 100%;"
+            style="max-width: 375px; width: 100%"
             height="375"
             :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
             frameborder="0"

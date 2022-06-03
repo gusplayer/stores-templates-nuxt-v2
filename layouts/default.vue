@@ -69,7 +69,6 @@
 </template>
 <script>
 import expiredDate from '../mixins/expiredDate'
-import koWhatsApp from '../components/whatsapp/Ko-whatsApp.vue'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -95,7 +94,7 @@ export default {
     // Ko6Footer1: () => import('../components/footers/footer1/Ko6-Footer-1'),
     koTiendaError: () => import('../components/Ko-errorStore'),
     koModalSecurity: () => import('../components/modal/Ko-modal-security.vue'),
-    koWhatsApp,
+    koWhatsApp: () => import('../components/whatsapp/Ko-whatsApp.vue'),
   },
   mixins: [expiredDate],
   mounted() {
@@ -376,6 +375,10 @@ export default {
           content: googleMerchants
             ? `${googleMerchants}`
             : 'ce4pJPC3AEQoDU6jNkAEqV-Dwa1OUU8GxtRTR0d_MM8',
+        },
+        {
+          name: 'Content-Security-Policy',
+          content: "script-src 'none'",
         },
       ],
       script: [

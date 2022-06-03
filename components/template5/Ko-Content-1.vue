@@ -2,7 +2,7 @@
   <div class="wrapper-content">
     <div class="container-content">
       <div class="item item_image">
-        <img :src="setting.data[0].photo" />
+        <img loading="lazy" :src="setting.data[0].photo" alt="imgContentK5" />
       </div>
       <div class="item item_content">
         <div class="item texto">

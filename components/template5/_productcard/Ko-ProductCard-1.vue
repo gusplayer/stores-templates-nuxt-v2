@@ -8,6 +8,9 @@
         >
           <client-only>
             <img
+              width="294"
+              height="294"
+              loading="lazy"
               v-if="!soldOut"
               v-lazy="
                 this.product.foto_cloudinary == 'sin_foto.jpeg'
@@ -23,6 +26,9 @@
               alt="Product Img"
             />
             <img
+              width="294"
+              height="294"
+              loading="lazy"
               v-if="soldOut"
               v-lazy="
                 this.product.foto_cloudinary == 'sin_foto.jpeg'
@@ -128,7 +134,7 @@
             <div class="content-price-empty" v-else></div>
             <div class="wrapper-btn-icon">
               <nuxt-link
-                id="view_details"
+                :id="`view_details${product.slug}`"
                 :to="{ path: `/productos/` + product.slug }"
               >
                 <p>{{ $t('home_cardvermas') }}</p>
@@ -160,6 +166,7 @@
         >
           <client-only>
             <img
+              loading="lazy"
               v-if="!soldOut"
               v-lazy="
                 this.product.foto_cloudinary == 'sin_foto.jpeg'

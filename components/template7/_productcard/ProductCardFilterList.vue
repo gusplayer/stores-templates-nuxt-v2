@@ -355,7 +355,7 @@
           v-else
           ref="colorBtn"
           class="btn"
-          id="view_details"
+          :id="`view_details${product.slug}`"
           :to="{ path: `/productos/` + product.slug }"
         >
           <p class="txt-btn-product">{{ $t('home_cardvermas') }}</p>

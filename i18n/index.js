@@ -289,7 +289,7 @@ export default {
       'Paga con tu tarjeta hasta 24 cuotas o en efectivo en todo el país.',
     productdetail_Consignaciondaviplata: 'Pago con DAVIPLATA',
     productdetail_ConsignaciondaviplataMsg:
-      'Paga con tu tarjeta hasta 24 cuotas o en efectivo en todo el país.',
+      'Transferencia a una cuenta de DAVIPLATA',
     productdetail_Consignacionnequi: 'Pago con Nequi',
     productdetail_ConsignacionnequiMsg: 'Transferencia a una cuenta de Nequi.',
     productdetail_Consignacionwompi: 'Pago con Wompi',
@@ -590,8 +590,7 @@ export default {
     productdetail_ConsignacionCredibancoMsg:
       'Pay with your card up to 24 installments or cash nationwide.',
     productdetail_Consignaciondaviplata: 'Payment with DAVIPLATA',
-    productdetail_ConsignaciondaviplataMsg:
-      'Pay with your card up to 24 installments or cash nationwide.',
+    productdetail_ConsignaciondaviplataMsg: 'Transfer to a DAVIPLATA account.',
     productdetail_Consignacionnequi: 'Paying with Nequi',
     productdetail_ConsignacionnequiMsg: 'Transfer to a Nequi account.',
     productdetail_Consignacionwompi: 'Paying with Wompi',
@@ -894,7 +893,7 @@ export default {
       'Pague com seu cartão em até 24 parcelas ou à vista em todo o país.',
     productdetail_Consignaciondaviplata: 'Pagamento com DAVIPLATA',
     productdetail_ConsignaciondaviplataMsg:
-      'Pague com seu cartão em até 24 parcelas ou à vista em todo o país.',
+      'Transferência para uma conta DAVIPLATA',
     productdetail_Consignacionnequi: 'Pagamento com Nequi',
     productdetail_ConsignacionnequiMsg: 'Transferência para uma conta Nequi.',
     productdetail_Consignacionwompi: 'Pagamento com Wompi',
@@ -1184,7 +1183,7 @@ export default {
     productdetail_ConsignacionCredibanco: 'Payer avec Credibanco',
     productdetail_ConsignacionCredibancoMsg: `Payez avec votre carte jusqu'à 24 versements ou en espèces dans tout le pays.`,
     productdetail_Consignaciondaviplata: 'Paiement avec DAVIPLATA',
-    productdetail_ConsignaciondaviplataMsg: `Payez avec votre carte jusqu'à 24 versements ou en espèces dans tout le pays.`,
+    productdetail_ConsignaciondaviplataMsg: `Virement sur un compte DAVIPLATA.`,
     productdetail_Consignacionnequi: 'Paiement avec Nequi',
     productdetail_ConsignacionnequiMsg: 'Virement sur un compte Nequi.',
     productdetail_Consignacionwompi: 'Paiement avec Wompi',
