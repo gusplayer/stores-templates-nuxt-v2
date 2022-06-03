@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import koWhatsApp from '../components/whatsapp/whatsApp.vue'
+import koWhatsApp from '../components/whatsapp/Ko-whatsApp.vue'
 import { mapState } from 'vuex'
 export default {
   components: {
