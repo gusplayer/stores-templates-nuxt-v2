@@ -5,20 +5,13 @@
   >
     <div class="content-footer-country" v-if="dataStore.tienda.pais">
       <div class="content-item-flag">
-        <div class="content-flag">
-          <div v-if="dataStore.tienda.pais == 'Internacional'">
-            <client-only>
-              <country-flag country="un" size="normal"></country-flag>
-            </client-only>
-          </div>
-          <div v-else>
-            <client-only>
-              <country-flag
-                :country="`${dataStore.tienda.codigo_pais}`"
-                size="normal"
-              ></country-flag>
-            </client-only>
-          </div>
+        <div class="content-flag" v-if="selectOptionCountry">
+          <img
+            :src="this.selectOptionCountry.img"
+            width="30px"
+            class="mr-2"
+            alt="bandera pais"
+          />
         </div>
         <button @click="stateIdStore = !stateIdStore" class="text-country">
           {{ dataStore.tienda.pais }}
@@ -31,18 +24,17 @@
             >S/</strong
           >
           <strong style="margin-right: 1px" v-else>$</strong>
-
           {{ dataStore.tienda.moneda }}
         </p>
         <div v-if="stateIdStore" class="flex flex-row justify-start">
-          <p class="textid">
+          <p class="textId">
             <strong>ID</strong>:
             {{ dataStore.tienda.id_tienda }}
           </p>
-          <p class="textid ml-5">
+          <p class="textId ml-5">
             <strong>Temp</strong>: {{ dataStore.tienda.template }}
           </p>
-          <p class="textid ml-5">
+          <p class="textId ml-5">
             <strong>Hoko</strong>: {{ dataHoko.statehoko == 0 ? 'NO' : 'SI' }}
           </p>
         </div>
@@ -67,11 +59,82 @@ export default {
   data() {
     return {
       stateIdStore: false,
+      optionsCountry: [
+        {
+          id: 1,
+          name: 'co',
+          title: 'Colombia',
+          currencySign: '$',
+          simbolo: 'COP',
+          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Colombia_kz1t6d.png',
+        },
+        {
+          id: 2,
+          name: 'internacional',
+          title: 'Internacional',
+          currencySign: '$',
+          simbolo: 'USD',
+          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Internacional_rzalry.png',
+        },
+        {
+          id: 3,
+          name: 'mx',
+          title: 'México',
+          currencySign: '$',
+          simbolo: 'MXN',
+          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Mexico_dibihf.png',
+        },
+        {
+          id: 6,
+          name: 'ar',
+          title: 'Argentina',
+          currencySign: '$',
+          simbolo: 'ARS',
+          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417092/komerica/Banderas/Argentina_twinoc.png',
+        },
+        {
+          id: 7,
+          name: 'cl',
+          title: 'Chile',
+          currencySign: '$',
+          simbolo: 'CLP',
+          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1653417091/komerica/Banderas/Chile_rzygtf.png',
+        },
+        {
+          id: 8,
+          name: 'pr',
+          title: 'Puerto Rico',
+          currencySign: '$',
+          simbolo: 'USD',
+          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Puerto_Rico_uorvfh.png',
+        },
+        {
+          id: 9,
+          name: 'pe',
+          title: 'Perú',
+          currencySign: 'S/',
+          simbolo: '',
+          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Peru_v36g5q.png',
+        },
+        {
+          id: 10,
+          name: 'pan',
+          title: 'Panamá',
+          currencySign: '$',
+          simbolo: 'USD',
+          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Panama_pdney2.png',
+        },
+      ],
     }
   },
   computed: {
     dataHoko() {
       return this.$store.state.dataHoko
+    },
+    selectOptionCountry() {
+      return this.optionsCountry.find(
+        (country) => country.id === this.dataStore.tienda.id_pais
+      )
     },
   },
 }
@@ -109,12 +172,6 @@ export default {
   display: flex;
   margin-right: 5px;
   align-items: center;
-  height: 38px;
-  /* width: 45px; */
-}
-.content-flag >>> .flag {
-  width: 55px;
-  height: 38px;
 }
 .text-country {
   color: white;
@@ -126,7 +183,7 @@ export default {
   margin-right: 5px;
   margin-left: 5px;
 }
-.textid {
+.textId {
   margin-left: 10px;
   font-size: 12px;
   color: white;

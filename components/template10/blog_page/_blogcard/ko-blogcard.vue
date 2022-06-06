@@ -19,11 +19,13 @@
           </p>
         </div>
       </div>
-      <div class="content-info-blog">
-        <nuxt-link :to="{ path: `/blog/` + article.slug }" class="cont-tittle">
+      <nuxt-link
+        :to="{ path: `/blog/` + article.slug }"
+        class="content-info-blog"
+      >
+        <div class="cont-tittle">
           <p class="txt-tittle">{{ this.article.titulo }}</p>
-        </nuxt-link>
-
+        </div>
         <div class="cont-autor">
           <span class="flex-shrink-0 mx-1">
             <img
@@ -37,7 +39,7 @@
         <div class="cont-article">
           <p class="txt-article">{{ this.article.resumen }}</p>
         </div>
-      </div>
+      </nuxt-link>
       <div class="cont-date">
         <div class="cont-day">
           <p class="txt-day-create">

@@ -79,7 +79,7 @@
   </div>
 </template>
 <script>
-import KoblogCard from '../../../components/template11/_blog/blogcard.vue'
+import KoblogCard from '../_blog/blogcard.vue'
 export default {
   name: 'Ko-Blog',
   components: {

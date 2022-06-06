@@ -12,47 +12,39 @@
       },
     ]"
   >
-    <div
+    <nuxt-link
+      :to="{ path: `/blog/` + article.slug }"
       class="container"
       @mouseover="hover = true"
       @mouseleave="hover = false"
     >
-      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
-        <div class="figure-img">
-          <div class="content-imge">
-            <img
-              v-if="article.imagen_principal_url"
-              class="images"
-              :src="idCloudinaryBanner(this.article.imagen_principal_url)"
-              alt="right-banner"
-            />
+      <div class="figure-img">
+        <div class="content-imge">
+          <img
+            v-if="article.imagen_principal_url"
+            class="images"
+            :src="idCloudinaryBanner(this.article.imagen_principal_url)"
+            alt="right-banner"
+          />
 
-            <div v-else class="empty"></div>
-          </div>
+          <div v-else class="empty"></div>
         </div>
-      </nuxt-link>
-      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
-        <div class="overlay-top">
-          <div class="text-tittle">
-            <p class="txt-day">
-              {{ this.dayCreate }}
-            </p>
-            <p class="txt-month">
-              {{ this.nameMonth }}
-            </p>
-          </div>
+      </div>
+      <div class="overlay-top">
+        <div class="text-tittle">
+          <p class="txt-day">
+            {{ this.dayCreate }}
+          </p>
+          <p class="txt-month">
+            {{ this.nameMonth }}
+          </p>
         </div>
-      </nuxt-link>
-
-      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet-bottom">
-      </nuxt-link>
+      </div>
       <div class="content-txt-article">
         <div class="content-tittle-article">
-          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
-            <span class="txt-article-tittle">
-              {{ this.article.titulo }}
-            </span>
-          </nuxt-link>
+          <span class="txt-article-tittle">
+            {{ this.article.titulo }}
+          </span>
         </div>
         <div class="content-date-article">
           <span class="txt-article-day">{{ this.dayCreate }}</span>
@@ -66,12 +58,10 @@
           </span>
         </div>
         <div class="content-button-article">
-          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
-            <button class="btn">+ {{ $t('home_leerMas') }}</button>
-          </nuxt-link>
+          <button class="btn">+ {{ $t('home_leerMas') }}</button>
         </div>
       </div>
-    </div>
+    </nuxt-link>
   </div>
 </template>
 <script>

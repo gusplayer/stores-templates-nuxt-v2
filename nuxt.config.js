@@ -43,7 +43,6 @@ export default {
     { src: '~/plugins/vue-carrusel.js', ssr: false },
     { src: '~plugins/ga.js', ssr: false },
     { src: '~/plugins/gtm', ssr: false },
-    { src: '~/plugins/countryFlags.js', ssr: false },
     { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/element-tiptap', ssr: false },
   ],
