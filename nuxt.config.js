@@ -2,6 +2,7 @@
 // const isProd = process.env.NODE_ENV === 'production'
 export default {
   // mode: 'universal',
+  target: 'static',
   head: {
     title: process.env.npm_package_name || '',
     htmlAttrs: {
@@ -48,7 +49,11 @@ export default {
   ],
   components: true,
   buildModules: ['@nuxtjs/tailwindcss'],
-  modules: ['@nuxtjs/gtm'],
+  modules: ['@nuxtjs/gtm', '@nuxtjs/sitemap'],
+  sitemap: {
+    hostname: 'https://www.komercia.store/',
+    gzip: true,
+  },
   debug: {
     enabled: true,
   },
@@ -56,7 +61,7 @@ export default {
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
     },
-    publicPath: '/_nuxt/client/',
+    // publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
     extend(config, ctx) {
       if (ctx.isDev) {
