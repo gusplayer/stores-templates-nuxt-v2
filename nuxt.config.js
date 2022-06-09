@@ -2,7 +2,7 @@
 // const isProd = process.env.NODE_ENV === 'production'
 export default {
   // mode: 'universal',
-  target: 'static',
+  // target: 'static',
   head: {
     title: process.env.npm_package_name || '',
     htmlAttrs: {
