@@ -1,7 +1,7 @@
 <template>
   <main>
     <div
-      class="pt-20 section-with-title_container"
+      class="pt-20"
       :style="`background:${settingByTemplate12.backgroundColor};`"
     >
       <div v-if="dataStore.categorias.length > 0">
@@ -18,7 +18,6 @@
               {{ category.nombre_categoria_producto }}
             </h2>
           </header>
-
           <div v-if="dataStore.subcategorias.length > 0">
             <div
               class="products-wrapper"

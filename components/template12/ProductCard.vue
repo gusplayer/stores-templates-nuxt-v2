@@ -338,7 +338,7 @@ export default {
 }
 @media (max-width: 768px) {
   .wrapper_card {
-    @apply items-center justify-center;
+    @apply justify-start;
   }
 }
 @media (max-width: 450px) {
