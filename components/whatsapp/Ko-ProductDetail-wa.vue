@@ -143,7 +143,16 @@
             <button class="quantity_remove" v-on:click="removeQuantity()">
               <menos-icon class="icon" />
             </button>
-            <p class="quantity_value">{{ quantityValue }}</p>
+            <!-- <p class="quantity_value">{{ quantityValue }}</p> -->
+            <input
+              name="quantityValue"
+              class="quantity_value"
+              type="text"
+              placeholder=""
+              v-model="quantityValue"
+              id="InputQuantityValue"
+              onkeypress="return (event.charCode>47 && event.charCode<58)"
+            />
             <button class="quantity_add" v-on:click="addQuantity()">
               <mas-icon class="icon" />
             </button>
@@ -965,10 +974,11 @@ export default {
   border-style: solid none solid none;
   background: transparent;
   height: 38px;
-  width: 2.5em;
-  justify-content: center;
+  width: 50px;
+  /* justify-content: center;
   display: flex;
-  align-items: center;
+  align-items: center; */
+  text-align: center;
 }
 .quantity_add {
   border: 1px black;
