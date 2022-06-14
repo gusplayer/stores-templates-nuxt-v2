@@ -22,19 +22,21 @@
             ></div>
           </div>
         </div>
-        <div class="products-search">
+        <form class="products-search" onsubmit="return false">
           <div class="search-input-content">
-            <form class="form-search">
+            <div class="form-search">
               <div class="cont-search-up">
                 <p class="txt-search-up">{{ $t('home_buscar') }}</p>
               </div>
               <input
+                id="myInput"
                 type="search "
                 :placeholder="$t('home_buscar')"
                 v-model="search"
                 class="input-search"
               />
-            </form>
+              <!-- onkeypress="return (event.charCode != 13)" -->
+            </div>
           </div>
           <div class="cont-btn">
             <button
@@ -45,6 +47,7 @@
                   : '#25D366'
               };`"
               @click="closedSearch"
+              type="submit"
             >
               <span
                 class="btn-txt"
@@ -57,7 +60,7 @@
               >
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </transition>
@@ -88,7 +91,7 @@ export default {
         this.$store.commit('SET_OPENSEARCH', false)
       }
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
       if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
         window.fbq('track', 'Search', { value: search })
@@ -97,7 +100,7 @@ export default {
   },
   watch: {
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
   },
 }
