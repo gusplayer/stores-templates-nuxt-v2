@@ -666,8 +666,13 @@ export default {
       this.setOptionEnvio()
     },
     quantityValue(value) {
+      this.quantityValue = parseInt(value)
       if (value > this.maxQuantityValue) {
         this.quantityValue = this.maxQuantityValue
+      } else if (value == 0) {
+        this.quantityValue = 1
+      } else if (value == '') {
+        this.quantityValue = 1
       }
     },
     beforeCombination(value) {

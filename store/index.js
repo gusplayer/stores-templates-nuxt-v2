@@ -1126,7 +1126,7 @@ export const getters = {
   cantidadProductos(state) {
     let cantidadProductos = 0
     state.productsCart.filter((value) => {
-      cantidadProductos += value.cantidad
+      cantidadProductos += parseInt(value.cantidad)
     })
     return cantidadProductos
   },
