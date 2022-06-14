@@ -204,26 +204,17 @@
           <client-only>
             <el-collapse>
               <el-collapse-item :title="$t('mcompra_infoComprador')" name="1">
-                <div class="content-info-buyer" v-if="orden.venta.usuario">
+                <div class="content-info-buyer" v-if="orden.usuario == 30866">
                   <p class="name" v-if="mensajeWa && mensajeWa.nombre">
                     {{ $t('mcompra_nombre') }}
                     <span class="value-data">{{ mensajeWa.nombre }}</span>
                   </p>
-                  <!-- <p
-                  class="name"
-                  v-if="this.cityComprador && this.cityComprador.departamento"
-                >
-                  {{ $t('mcompra_departamento') }}
-                  <span class="value-data">{{
-                    this.cityComprador.departamento.nombre_dep
-                  }}</span>
-                </p> -->
                   <p class="name" v-if="mensajeWa && mensajeWa.ciudad">
-                    {{ $t('mcompra_ciudad') }}
+                    {{ $t('footer_formDepartamento') }}
                     <span class="value-data">{{ mensajeWa.ciudad }}</span>
                   </p>
                   <p class="name" v-if="mensajeWa && mensajeWa.barrio">
-                    {{ $t('mcompra_barrio') }}
+                    {{ $t('footer_formBarrio') }}
                     <span class="value-data">{{ mensajeWa.barrio }}</span>
                   </p>
                   <p class="address">
@@ -356,14 +347,10 @@ export default {
     }
     if (this.orden && this.orden.venta) {
       if (this.orden.venta.created_at) {
-        this.shippingDireccion()
+        this.shippingAddress()
         let result = this.orden.venta.created_at.split(' ')
         this.fechaState = result[0]
         this.horaState = result[1]
-      }
-      this.mensajeWa = JSON.parse(this.orden.venta.comentario)
-      if (this.orden.venta.transportadora !== null) {
-        this.dataTransporter = JSON.parse(this.orden.venta.transportadora)
       }
     }
   },
@@ -547,12 +534,10 @@ export default {
     },
   },
   methods: {
-    shippingDireccion() {
-      this.direccion_entrega = JSON.parse(
-        this.orden && this.orden.venta && this.orden.venta.direccion_entrega
-          ? this.orden.venta.direccion_entrega
-          : null
-      )
+    shippingAddress() {
+      if (this.orden && this.orden.mensajes.length > 0) {
+        this.mensajeWa = JSON.parse(this.orden.mensajes[0].mensaje)
+      }
       if (this.cities && this.direccion_entrega) {
         if (this.direccion_entrega.value) {
           this.cityComprador = this.cities.find((city) => {
@@ -617,7 +602,7 @@ export default {
           this.errorMessageTwo()
         })
     },
-    eventFacebooPixel() {
+    eventFacebookPixel() {
       if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
         window.fbq('track', 'Purchase', {
           content_ids: this.orden.venta.id,
@@ -661,13 +646,13 @@ export default {
     },
     cities() {
       this.setCity()
-      this.shippingDireccion()
+      this.shippingAddress()
     },
     orden() {
       if (this.orden.venta) {
         if (this.orden.venta.created_at) {
-          this.eventFacebooPixel()
-          this.shippingDireccion()
+          this.eventFacebookPixel()
+          this.shippingAddress()
           let result = this.orden.venta.created_at.split(' ')
           this.fechaState = result[0]
           this.horaState = result[1]

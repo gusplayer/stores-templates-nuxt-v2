@@ -480,6 +480,7 @@
                   class="input-text"
                   :placeholder="$t('footer_formNombreMgs')"
                   id="ContactName"
+                  onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
                 <span class="text-error" v-show="errors[0]">
                   {{ errors[0] }}
@@ -494,39 +495,21 @@
             >
               <template slot-scope="{ errors }">
                 <input
-                  name="identificacion"
+                  name="telephone"
                   type="text"
                   v-model="identificacion"
                   class="input-text"
                   :placeholder="$t('footer_formPhoneMgs')"
-                  id="Contactidentificacion"
+                  id="ContactTelephone"
+                  onkeypress="return ((event.charCode>47 && event.charCode<58))"
                 />
                 <span class="text-error" v-show="errors[0]">
                   {{ errors[0] }}
                 </span>
               </template>
             </validation-provider>
-            <!-- <p class="form-subtext">{{ $t('footer_formCorreo') }}</p>
-            <validation-provider
-              name="correo"
-              rules="required"
-              class="content-input"
-            >
-              <template slot-scope="{ errors }">
-                <input
-                  name="correo"
-                  type="text"
-                  v-model="correo"
-                  class="input-text"
-                  :placeholder="$t('footer_formCorreoMgs')"
-                  id="ContactName"
-                />
-                <span class="text-error" v-show="errors[0]">
-                  {{ errors[0] }}
-                </span>
-              </template>
-            </validation-provider> -->
-            <P class="form-subtext"> {{ $t('footer_formCiudad') }}</P>
+
+            <P class="form-subtext"> {{ $t(`${placeholderDepart}`) }}</P>
             <validation-provider
               name="ciudad"
               rules="required"
@@ -536,8 +519,9 @@
                 <input
                   class="input-text"
                   name="ciudad"
-                  :placeholder="$t('footer_formCiudadMgs')"
+                  :placeholder="$t('footer_formBarrioMgs')"
                   v-model="ciudad"
+                  onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
                 <span class="text-error" v-show="errors[0]">
                   {{ errors[0] }}
@@ -556,12 +540,14 @@
                   name="barrio"
                   :placeholder="$t(`${placeholderMsgBarrio}`)"
                   v-model="barrio"
+                  onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
                 <span class="text-error" v-show="errors[0]">
                   {{ errors[0] }}
                 </span>
               </template>
             </validation-provider>
+
             <P class="form-subtext"> {{ $t('footer_formDireccion') }}</P>
             <validation-provider
               name="dirreccion"
@@ -580,13 +566,6 @@
                 </span>
               </template>
             </validation-provider>
-            <!-- <div class="mt-10 text-justify text-sm">
-              <p>
-                <strong>Advertencia:</strong> Los usuarios de iPhone si usan el
-                navegador Safari pueden presentar fallos en la compra, por lo
-                tanto, se les recomienda usar uno diferente.
-              </p>
-            </div> -->
           </ValidationObserver>
         </div>
         <button
@@ -649,7 +628,7 @@ import expiredDate from '../../../../mixins/expiredDate'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   mixins: [idCloudinary, currency, expiredDate],
-  nname: 'ko-Order1-cart-3',
+  name: 'ko-Order1-cart-3',
   props: {
     dataStore: Object,
   },
@@ -697,6 +676,8 @@ export default {
       placeholderMsgBarrio: 'footer_formBarrioMgs',
       modalConfirmation: false,
       discountDescuentos: 0,
+      textDepartment: '',
+      textCiudad: '',
     }
   },
   computed: {
@@ -1033,42 +1014,80 @@ export default {
       let result = resultproductList.slice(1, -1)
       var text = ''
       let textFreeShippingCart
-      if (this.dataStore.tienda.lenguaje == 'es') {
-        if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'gratis'
-        ) {
+      // traduccion envios
+      if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'gratis'
+      ) {
+        if (this.dataStore.tienda.lenguaje == 'es') {
           textFreeShippingCart = 'Env%C3%ADo%20gratis'
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'tarifa_plana'
-        ) {
-          textFreeShippingCart = `Costo%20domicilio:%20$${this.rangosByCiudades.valor}`
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'precio_ciudad'
-        ) {
-          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'precio'
-        ) {
-          textFreeShippingCart = `Costo%20domicilio:%20$${this.shippingTarifaPrecio}`
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'sintarifa'
-        ) {
-          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
-        } else {
-          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
+        } else if (this.dataStore.tienda.lenguaje == 'en') {
+          textFreeShippingCart = 'Free%20shippings'
+        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+          textFreeShippingCart = 'Frete%20gr%C3%A1tis'
         }
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'tarifa_plana'
+      ) {
+        if (this.dataStore.tienda.lenguaje == 'es') {
+          textFreeShippingCart = `Costo%20domicilio:%20$-$${this.rangosByCiudades.valor}`
+        } else if (this.dataStore.tienda.lenguaje == 'en') {
+          textFreeShippingCart = `Shipping%cost:%20$-$${this.rangosByCiudades.valor}`
+        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+          textFreeShippingCart = `Custos%20envio:%20$-$${this.rangosByCiudades.valor}`
+        }
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'precio_ciudad'
+      ) {
+        if (this.dataStore.tienda.lenguaje == 'es') {
+          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
+        } else if (this.dataStore.tienda.lenguaje == 'en') {
+          textFreeShippingCart = 'Shipping%20cost%20separately'
+        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+          textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
+        }
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'precio'
+      ) {
+        if (this.dataStore.tienda.lenguaje == 'es') {
+          textFreeShippingCart = `Costo%20domicilio:%20$-$${this.shippingTarifaPrecio}`
+        } else if (this.dataStore.tienda.lenguaje == 'en') {
+          textFreeShippingCart = `Shipping%cost:%20$-$${this.shippingTarifaPrecio}`
+        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+          textFreeShippingCart = `Custos%20envio:%20$-$${this.shippingTarifaPrecio}`
+        }
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'sintarifa'
+      ) {
+        if (this.dataStore.tienda.lenguaje == 'es') {
+          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
+        } else if (this.dataStore.tienda.lenguaje == 'en') {
+          textFreeShippingCart = 'Shipping%20cost%20separately'
+        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+          textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
+        }
+      } else {
+        if (this.dataStore.tienda.lenguaje == 'es') {
+          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
+        } else if (this.dataStore.tienda.lenguaje == 'en') {
+          textFreeShippingCart = 'Shipping%20cost%20separately'
+        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+          textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
+        }
+      }
+      //traducción  texto
+      if (this.dataStore.tienda.lenguaje == 'es') {
         text = `Hola%2C%20soy%20${
           this.nombre
-        }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${
+        }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
           this.dataStore.tienda.nombre
-        }:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${textFreeShippingCart}%0ADescuento%3A%20-$${
+        )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
           this.discountDescuentos ? this.discountDescuentos : 'No%20aplica'
-        }%0ASubtotal%3A%20$${this.totalCart}%0ATOTAL%3A%20$${
+        }%0A%2ASubtotal%2A%3A%20$${this.totalCart}%0A%2ATOTAL%2A%3A%20$${
           this.totalCart +
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
@@ -1077,49 +1096,27 @@ export default {
             ? this.shippingTarifaPrecio
             : 0) -
           this.discountDescuentos
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A%2ANombre%2A%3A%20${
           this.nombre
-        }%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${
+        }%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
+          this.ciudad
+        )}%0A%2A${encodeURIComponent(
+          this.textCiudad
+        )}%2A%3A%20${encodeURIComponent(
           this.barrio
-        }%0ADirección%3A%20${
+        )}%0A%2ADirección%2A%3A%20${encodeURIComponent(
           this.dirreccion
-        }%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
+        )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
+          window.location
+        }?clearCart=true`
       } else if (this.dataStore.tienda.lenguaje == 'en') {
-        if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'gratis'
-        ) {
-          textFreeShippingCart = 'Free%20shippings'
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'tarifa_plana'
-        ) {
-          textFreeShippingCart = `Shipping%cost:%20$${this.rangosByCiudades.valor}`
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'precio_ciudad'
-        ) {
-          textFreeShippingCart = 'Shipping%20cost%20separately'
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'precio'
-        ) {
-          textFreeShippingCart = `Shipping%cost:%20$${this.shippingTarifaPrecio}`
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'sintarifa'
-        ) {
-          textFreeShippingCart = 'Shipping%20cost%20separately'
-        } else {
-          textFreeShippingCart = 'Shipping%20cost%20separately'
-        }
         text = `Hello%2C%20I%20am%20${
           this.nombre
-        }%2C%0AI%20made%20this%20order%20at%20your%20store%20${
+        }%2C%0AI%20made%20this%20order%20at%20your%20store%20${encodeURIComponent(
           this.dataStore.tienda.nombre
-        }:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${textFreeShippingCart}%0ADiscount%3A%20-$${
+        )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADiscount%2A%3A%20${
           this.discountDescuentos ? this.discountDescuentos : 'Not%20applicable'
-        }%0ASubtotal%3A%20$${this.totalCart}%0ATOTAL%3A%20$${
+        }%0A%2ASubtotal%2A%3A%20$${this.totalCart}%0A%2ATOTAL%2A%3A%20$${
           this.totalCart +
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
@@ -1128,49 +1125,25 @@ export default {
             ? this.shippingTarifaPrecio
             : 0) -
           this.discountDescuentos
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20information%3A%0AName%3A%20${
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20information%2A%3A%0A%2AName%2A%3A%20${
           this.nombre
-        }%0ACity%3A%20${this.ciudad}%0ANeighborhood%3A%20${
+        }%0A%2A${this.textDepartment}%2A%3A%20${
+          this.ciudad
+        }%0A%2A${encodeURIComponent(this.textCiudad)}%2A%3A%20${
           this.barrio
-        }%0AAddres%3A%20${this.dirreccion}%0A%0back%20to%20the%20storea%3A%20${
+        }%0A%2AAddres%2A%3A%20${encodeURIComponent(
+          this.dirreccion
+        )}%0A%0A%2Aback%20to%20the%20store%2A%3A%20${
           window.location
         }?clearCart=true`
       } else if (this.dataStore.tienda.lenguaje == 'pt') {
-        if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'gratis'
-        ) {
-          textFreeShippingCart = 'Frete%20gr%C3%A1tis'
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'tarifa_plana'
-        ) {
-          textFreeShippingCart = `Custos%20envio:%20$${this.rangosByCiudades.valor}`
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'precio_ciudad'
-        ) {
-          textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'precio'
-        ) {
-          textFreeShippingCart = `Custos%20envio:%20$${this.shippingTarifaPrecio}`
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'sintarifa'
-        ) {
-          textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
-        } else {
-          textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
-        }
         text = `Olá%2C%20aqui%20é%20${
           this.nombre
-        }%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${
+        }%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${encodeURIComponent(
           this.dataStore.tienda.nombre
-        }:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${textFreeShippingCart}%0ADesconto%3A%20-$${
+        )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADesconto%2A%3A%20${
           this.discountDescuentos ? this.discountDescuentos : 'Não%20aplicável'
-        }%0ASubtotal%3A%20$${this.totalCart}%0ATOTAL%3A%20$${
+        }%0A%2ASubtotal%2A%3A%20$${this.totalCart}%0A%2ATOTAL%2A%3A%20$${
           this.totalCart +
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
@@ -1179,51 +1152,25 @@ export default {
             ? this.shippingTarifaPrecio
             : 0) -
           this.discountDescuentos
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMy%20Minhas%20informaçãoes%3A%0ANome%3A%20${
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20Minhas%20informaçãoes%2A%3A%0A%2ANome%2A%3A%20${
           this.nombre
-        }%0ACidade%3A%20${this.ciudad}%0ABairro%3A%20${
+        }%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
+          this.ciudad
+        )}%0A%2A${encodeURIComponent(this.textCiudad)}%2A%3A%20${
           this.barrio
-        }%0AEndereço%3A%20${
+        }%0A%2AEndereço%2A%3A%20${encodeURIComponent(
           this.dirreccion
-        }%0A%0Ade%20volta%20%C3%A0%20loja%3A%20${
+        )}%0A%0A%2Ade%20volta%20%C3%A0%20loja%2A%3A%20${
           window.location
         }?clearCart=true`
       } else {
-        if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'gratis'
-        ) {
-          textFreeShippingCart = 'Env%C3%ADo%20gratis'
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'tarifa_plana'
-        ) {
-          textFreeShippingCart = `Costo%20domicilio:%20$${this.rangosByCiudades.valor}`
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'precio_ciudad'
-        ) {
-          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'precio'
-        ) {
-          textFreeShippingCart = `Costo%20domicilio:%20$${this.shippingTarifaPrecio}`
-        } else if (
-          this.rangosByCiudades &&
-          this.rangosByCiudades.envio_metodo == 'sintarifa'
-        ) {
-          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
-        } else {
-          textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
-        }
         text = `Hola%2C%20soy%20${
           this.nombre
-        }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${
+        }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
           this.dataStore.tienda.nombre
-        }:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${textFreeShippingCart}%0ADescuento%3A%20-$${
+        )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
           this.discountDescuentos ? this.discountDescuentos : 'No%20aplica'
-        }%0ASubtotal%3A%20$${this.totalCart}%0ATOTAL%3A%20$${
+        }%0A%2ASubtotal%2A%3A%20$${this.totalCart}%0A%2ATOTAL%2A%3A%20$${
           this.totalCart +
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
@@ -1232,13 +1179,19 @@ export default {
             ? this.shippingTarifaPrecio
             : 0) -
           this.discountDescuentos
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0AMi%20informaci%C3%B3n%3A%0ANombre%3A%20${
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A%2ANombre%2A%3A%20${
           this.nombre
-        }%0ACiudad%3A%20${this.ciudad}%0ABarrio%3A%20${
+        }%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
+          this.ciudad
+        )}%0A%2A${encodeURIComponent(
+          this.textCiudad
+        )}%2A%3A%20${encodeURIComponent(
           this.barrio
-        }%0ADirección%3A%20${
+        )}%0A%2ADirección%2A%3A%20${encodeURIComponent(
           this.dirreccion
-        }%0A%0Avolver%20a%20la%20tienda%3A%20${window.location}?clearCart=true`
+        )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
+          window.location
+        }?clearCart=true`
       }
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
@@ -1367,23 +1320,59 @@ export default {
       switch (this.dataStore.tienda.id_pais) {
         //colombia
         case 1:
+          this.placeholderDepart = 'footer_formDepartamento'
           this.placeholderBarrio = 'footer_formBarrio'
           this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          ;(this.textDepartment = 'Departamento'),
+            (this.textCiudad = 'Cuidad / Barrio / Zona')
           break
         //Mexico
         case 3:
-          this.placeholderBarrio = 'footer_formColonia'
-          this.placeholderMsgBarrio = 'footer_formColoniaMgs'
+          this.placeholderDepart = 'footer_formEstado'
+          this.placeholderBarrio = 'footer_formBarrio1'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          ;(this.textDepartment = 'Estado'),
+            (this.textCiudad = 'Cuidad / Colonia / Zona')
           break
         //Argentina
         case 6:
+          this.placeholderDepart = 'footer_formRegion'
           this.placeholderBarrio = 'footer_formComuna'
-          this.placeholderMsgBarrio = 'footer_formComunaMgs'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          ;(this.textDepartment = 'Región'),
+            (this.textCiudad = 'Provincia / Comuna / Sector')
           break
         //Chile
         case 7:
+          this.placeholderDepart = 'footer_formRegion'
           this.placeholderBarrio = 'footer_formComuna'
-          this.placeholderMsgBarrio = 'footer_formComunaMgs'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          ;(this.textDepartment = 'Región'),
+            (this.textCiudad = 'Provincia / Comuna / Sector')
+          break
+        //Puerto Rico
+        case 8:
+          this.placeholderDepart = 'footer_formMunicipios'
+          this.placeholderBarrio = 'footer_formComuna'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          ;(this.textDepartment = 'Municipio'),
+            (this.textCiudad = 'Provincia / Comuna / Sector')
+          break
+        //Perú
+        case 9:
+          this.placeholderDepart = 'footer_formDepartamento'
+          this.placeholderBarrio = 'footer_formBarrio3'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          ;(this.textDepartment = 'Departamento'),
+            (this.textCiudad = 'Provincia / Cuidad / Zona')
+          break
+        //Panama
+        case 10:
+          this.placeholderDepart = 'footer_formProvincia'
+          this.placeholderBarrio = 'footer_formBarrio2'
+          this.placeholderMsgBarrio = 'footer_formBarrioMgs'
+          ;(this.textDepartment = 'Provincia'),
+            (this.textCiudad = 'Distritos / Zona')
           break
       }
     },
