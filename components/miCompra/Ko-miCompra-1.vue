@@ -299,11 +299,11 @@
                   }}</span>
                 </p> -->
                   <p class="name" v-if="mensajeWa && mensajeWa.ciudad">
-                    {{ $t('mcompra_ciudad') }}
+                    {{ $t('footer_formDepartamento') }}
                     <span class="value-data">{{ mensajeWa.ciudad }}</span>
                   </p>
                   <p class="name" v-if="mensajeWa && mensajeWa.barrio">
-                    {{ $t('mcompra_barrio') }}
+                    {{ $t('footer_formBarrio') }}
                     <span class="value-data">{{ mensajeWa.barrio }}</span>
                   </p>
                   <p class="address">

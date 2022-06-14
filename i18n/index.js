@@ -39,6 +39,7 @@ export default {
     footer_enviar: 'Enviar',
     // OrderCart
     footer_title: 'Tu orden',
+    footer_title2: 'Realizar pedido',
     footer_vaciarCarrito: 'Vaciar carrito de compras',
     footer_costoDomicilio: 'Costo domicilio',
     footer_valorCiudad: 'Valor por Ciudad:',
@@ -82,13 +83,23 @@ export default {
     footer_formCiudad: 'Ciudad',
     footer_formPhone: 'Número telefónico',
     footer_formPhoneMgs: 'Tu número telefónico',
-    footer_formCiudadMgs: 'Tu ciudad',
-    footer_formBarrio: 'Barrio',
-    footer_formBarrioMgs: 'Tu barrio',
-    footer_formComuna: 'Comuna',
-    footer_formComunaMgs: 'Tu Comuna o Sector',
-    footer_formColonia: 'Colonia',
-    footer_formColoniaMgs: 'Tu colonia',
+    //Colombia
+    footer_formDepartamento: 'Departamento',
+    footer_formBarrio: 'Cuidad / Barrio / Zona',
+    //Mexico
+    footer_formEstado: 'Estado',
+    footer_formBarrio1: 'Cuidad / Colonia / Zona',
+    //Argentina -Chile
+    footer_formRegion: 'Región',
+    footer_formComuna: 'Provincia / Comuna / Sector',
+    //Puerto Rico
+    footer_formMunicipios: 'Municipio',
+    //Perú,
+    footer_formBarrio3: 'Provincia / Cuidad / Zona',
+    //Panama
+    footer_formProvincia: 'Provincia',
+    footer_formBarrio2: 'Distritos / Zona',
+    footer_formBarrioMgs: 'Agregar información',
     footer_formDetalles: 'Detalles',
     footer_formDetallesMgs: 'Barrio - Apto - Casa',
     footer_formDireccion: 'Dirección',
@@ -344,6 +355,7 @@ export default {
     footer_enviar: 'Send',
     // OrderCart
     footer_title: 'Your order',
+    footer_title2: 'Place an order',
     footer_vaciarCarrito: 'Empty Shopping Cart',
     footer_costoDomicilio: 'Cost of domicile',
     footer_valorCiudad: 'Value per City:',
@@ -384,13 +396,23 @@ export default {
     footer_formCiudad: 'City',
     footer_formPhone: 'Phone number',
     footer_formPhoneMgs: 'Your phone number',
-    footer_formCiudadMgs: 'Your city',
-    footer_formBarrio: 'Neighborhood',
-    footer_formBarrioMgs: 'Your neighborhood',
-    footer_formComuna: 'Commune',
-    footer_formComunaMgs: 'Your Commune or Sector',
-    footer_formColonia: 'Cologne',
-    footer_formColoniaMgs: 'Your cologne',
+    //Colombia
+    footer_formDepartamento: 'Department',
+    footer_formBarrio: 'City / Neighborhood / Zone',
+    //Mexico
+    footer_formEstado: 'State',
+    footer_formBarrio1: 'City / Neighborhood / Zone',
+    //Argentina -Chile
+    footer_formRegion: 'Region',
+    footer_formComuna: 'Province / Commune / Sector',
+    //Puerto Rico
+    footer_formMunicipios: 'Municipality',
+    //Perú
+    footer_formBarrio3: 'Province / City / Zone',
+    //Panama
+    footer_formProvincia: 'Province',
+    footer_formBarrio2: 'Districts / Zone',
+    footer_formBarrioMgs: 'Add information',
     footer_formDetalles: 'Details',
     footer_formDetallesMgs: 'Neighborhood - apartment - House',
     footer_formDireccion: 'Address',
@@ -644,6 +666,7 @@ export default {
     footer_enviar: 'Enviar',
     // OrderCart
     footer_title: 'Pedido',
+    footer_title2: 'Fazer um pedido',
     footer_vaciarCarrito: 'Esvaziar carrinho de comprar',
     footer_costoDomicilio: 'Custo de entrega',
     footer_valorCiudad: 'Valor por cidade:',
@@ -686,13 +709,23 @@ export default {
     footer_formCiudad: 'Cidade',
     footer_formPhone: 'Número de telefone',
     footer_formPhoneMgs: 'Seu número de telefone',
-    footer_formCiudadMgs: 'Sua cidade',
-    footer_formBarrio: 'Bairro',
-    footer_formBarrioMgs: 'Sua bairro',
-    footer_formComuna: 'Comuna',
-    footer_formComunaMgs: 'Sua Comuna ou Setor',
-    footer_formColonia: 'Colônia',
-    footer_formColoniaMgs: 'Sua Colônia',
+    //Colombia
+    footer_formDepartamento: 'Departamento',
+    footer_formBarrio: 'Cidade / Bairro / Zona',
+    //Mexico
+    footer_formEstado: 'Estado',
+    footer_formBarrio1: 'Cidade / Bairro / Zona',
+    //Argentina -Chile
+    footer_formRegion: 'Região',
+    footer_formComuna: ' Província / Município / Setor',
+    //Puerto Rico
+    footer_formMunicipios: 'Municipalidade',
+    //Perú
+    footer_formBarrio3: 'Província / Cidade / Zona',
+    //Panama
+    footer_formProvincia: 'Província',
+    footer_formBarrio2: 'Distritos / Zona',
+    footer_formBarrioMgs: 'Adicionar informações',
     footer_formDetalles: 'Detalhes',
     footer_formDetallesMgs: 'Bairro - apartamento - Casa',
     footer_formDireccion: 'Endereço completo',
@@ -945,6 +978,7 @@ export default {
     footer_enviar: 'Envoyer',
     // OrderCart
     footer_title: 'Votre commande',
+    footer_title2: 'Passer une commande',
     footer_vaciarCarrito: 'Panier vide',
     footer_costoDomicilio: 'Coût du domicile',
     footer_valorCiudad: 'Valeur par ville :',
@@ -986,13 +1020,23 @@ export default {
     footer_formCiudad: 'Ville',
     footer_formPhone: 'Numéro de téléphone',
     footer_formPhoneMgs: 'Votre numéro de téléphone',
-    footer_formCiudadMgs: 'Votre ville',
-    footer_formBarrio: 'Quartier',
-    footer_formBarrioMgs: 'Votre quartier',
-    footer_formComuna: 'Commune',
-    footer_formComunaMgs: 'Votre commune ou secteur',
-    footer_formColonia: 'Cologne',
-    footer_formColoniaMgs: 'Votre Cologne',
+    //Colombia
+    footer_formDepartamento: 'Département',
+    footer_formBarrio: 'Ville / Quartier / Zone',
+    //Mexico
+    footer_formEstado: 'État',
+    footer_formBarrio1: 'City / Neighborhood / Zone',
+    //Argentina -Chile
+    footer_formRegion: 'Région',
+    footer_formComuna: 'Province / Commune / Secteur',
+    //Puerto Rico
+    footer_formMunicipios: 'Municipalité',
+    //Perú
+    footer_formBarrio3: 'Province / Ville / Zone',
+    //Panama
+    footer_formProvincia: 'Province',
+    footer_formBarrio2: 'Districts / Zone',
+    footer_formBarrioMgs: 'Ajouter des informations',
     footer_formDetalles: 'Détails',
     footer_formDetallesMgs: 'Quartier - Appartement - Maison',
     footer_formDireccion: 'Adresse',

@@ -95,7 +95,17 @@
                       >
                         <menos-icon class="icon-quantity" />
                       </button>
-                      <p class="quantity_value">{{ product.cantidad }}</p>
+                      <!-- <p class="quantity_value">{{ product.cantidad }}</p> -->
+                      <input
+                        name="quantityValue"
+                        class="quantity_value"
+                        type="text"
+                        placeholder=""
+                        v-model="product.cantidad"
+                        id="InputQuantityValue"
+                        onkeypress="return (event.charCode>47 && event.charCode<58)"
+                        @input="limitQuantity(product)"
+                      />
                       <button
                         class="quantity_add"
                         v-on:click="addQuantity(product)"
@@ -477,6 +487,7 @@
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 import expiredDate from '../../mixins/expiredDate'
+import { Empty } from 'element-ui'
 export default {
   mixins: [idCloudinary, currency, expiredDate],
   name: 'Ko-Cart-G',
@@ -693,6 +704,16 @@ export default {
         if (product.precio === 0) result = true
       })
       return result
+    },
+    limitQuantity(product) {
+      product.cantidad = parseInt(product.cantidad)
+      if (product.cantidad > product.limitQuantity) {
+        product.cantidad = product.limitQuantity
+      } else if (product.cantidad == 0) {
+        product.cantidad = 1
+      } else if (product.cantidad == '') {
+        product.cantidad = 1
+      }
     },
     addQuantity(product) {
       if (product.limitQuantity > product.cantidad) {
@@ -930,9 +951,10 @@ export default {
   background: transparent;
   height: 41px;
   width: 55px;
-  justify-content: center;
+  /* justify-content: center;
   display: flex;
-  align-items: center;
+  align-items: center; */
+  text-align: center;
 }
 .quantity_add {
   border: 1px #f4f4f4;

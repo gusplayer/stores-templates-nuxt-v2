@@ -3,7 +3,7 @@
     <footer class="content-items-footer">
       <div class="item-footer" v-if="cantidadProductos > 0">
         <p class="text-items-cart">
-          Tu orden
+          {{ $t('footer_title') }}
           <span class="text-items-cart ml-2">({{ cantidadProductos }})</span>
         </p>
       </div>
@@ -20,7 +20,7 @@
         };`"
         :class="cantidadProductos > 0 ? 'button-footer' : 'button-footer-out'"
       >
-        <p class="text-items-button">Realizar pedido</p>
+        <p class="text-items-button">{{ $t('footer_title2') }}</p>
       </div>
       <div class="item-footer" v-if="cantidadProductos > 0">
         <p class="text-items-cart">
