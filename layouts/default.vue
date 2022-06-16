@@ -476,7 +476,6 @@ export default {
       'analytics_tagmanager',
     ]),
     headerTemplate() {
-      // let headerComp = ''
       let headerComponent = ''
       switch (this.template) {
         case 3:

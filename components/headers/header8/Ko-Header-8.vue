@@ -1,182 +1,177 @@
 <template>
-  <div class="header-container" :style="settingByTemplate">
+  <div
+    class="header-container"
+    id="navbar"
+    :style="[
+      settingByTemplate13[0].setting13Header,
+      settingByTemplate13[0].setting13General,
+    ]"
+    v-if="settingByTemplate13"
+  >
     <div
-      :style="{
-        '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
-            : 'Roboto',
-      }"
+      class="wrapper-header"
+      id="headbg"
+      :style="[
+        {
+          '--font-style-1':
+            this.settingByTemplate13 &&
+            this.settingByTemplate13[0].setting13General &&
+            this.settingByTemplate13[0].setting13General.fount_1
+              ? this.settingByTemplate13[0].setting13General.fount_1
+              : 'Roboto',
+        },
+      ]"
     >
-      <div class="wrapper-header" @click="closeMenuCategory">
-        <div class="header">
-          <KoOrder :dataStore="dataStore" />
-          <KoSearch />
-          <div class="header-content-logo">
-            <nuxt-link to="/" class="wrapper-logo">
-              <img
-                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
-                class="header-logo"
-                alt="Logo Img"
-                @click="clear"
-              />
-            </nuxt-link>
-          </div>
-          <div class="header-content-items">
-            <div
-              v-for="(item, index) in secciones"
-              :key="`${index}${item.name}`"
-              class="header-buttons"
-            >
-              <div @click="openMenu(item.name)">
-                <nuxt-link
-                  :to="item.path"
-                  v-if="item.path && item.state"
-                  class="header-text-center"
-                  >{{ $t(`${item.name}`) }}</nuxt-link
+      <div class="header" id="headerid">
+        <KoOrder :dataStore="dataStore" />
+
+        <div class="header-content-logo">
+          <nuxt-link to="/" class="wrapper-logo">
+            <img
+              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+              class="header-logo"
+              alt="Logo Img"
+              @click="clear"
+            />
+          </nuxt-link>
+        </div>
+        <div class="header-content">
+          <div class="w-full flex flex-row justify-end">
+            <button class="header-item-menu" @click="openMenuLateral">
+              <menu-icon class="header-icon-menu" />
+            </button>
+            <div class="flex flex-row mr-20">
+              <div
+                class="btn-scroll"
+                @click="scrollLeft()"
+                v-if="this.settingByTemplate13[0].pages.values.length > 6"
+              >
+                <FlechaLeft-icon class="btn-scroll-icon" />
+              </div>
+              <div
+                class="header-content-buttons"
+                id="swiper-slide-categories"
+                v-if="this.settingByTemplate13[0].pages.values"
+              >
+                <div
+                  v-for="(item, index) in this.settingByTemplate13[0].pages
+                    .values"
+                  :key="`${index}${item.displayName}`"
                 >
-                <nuxt-link
-                  :to="item.href"
-                  v-else-if="item.href && listArticulos > 0 && item.state"
-                  class="header-text-center"
-                  >{{ $t(`${item.name}`) }}</nuxt-link
-                >
-                <div v-else>
-                  <div
-                    v-if="dataStore.categorias.length > 0 && item.ref"
-                    style="
-                      margin-right: 20px;
-                      display: flex;
-                      flex-direction: row;
-                    "
+                  <nuxt-link
+                    :to="item.url"
+                    v-if="item.isExternalLink == false"
+                    class="content-button"
                   >
-                    <p class="header-text-center-icon">
-                      {{ $t(`${item.name}`) }}
+                    <p
+                      class="btn"
+                      @click="btnActivate(item.url)"
+                      :class="btnSelect == item.url ? 'btn-active' : ''"
+                    >
+                      {{ item.displayName }}
                     </p>
-                    <div
-                      class="header-text-center-icon"
-                      v-if="showMenu == false"
-                      :is="item.iconOpen"
+                  </nuxt-link>
+                  <a
+                    :href="item.url"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    class="content-button"
+                    v-else
+                  >
+                    <p class="btn">
+                      {{ item.displayName }}
+                    </p>
+                  </a>
+                </div>
+              </div>
+              <div
+                class="btn-scroll"
+                @click="scrollRight()"
+                v-if="this.settingByTemplate13[0].pages.values.length > 6"
+              >
+                <FlechaRight-icon class="btn-scroll-icon" />
+              </div>
+            </div>
+            <div class="header-content-items">
+              <div>
+                <div class="search" v-if="searchSelect">
+                  <i class="header-search-icon" @click="openSearch">
+                    <svg
+                      class="search-header"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xmlns:svgjs="http://svgjs.com/svgjs"
+                      version="1.1"
+                      width="20"
+                      height="20"
+                      x="0"
+                      y="0"
+                      viewBox="0 0 512 512"
+                      style="enable-background: new 0 0 512 512"
+                      xml:space="preserve"
+                    >
+                      <title>Search</title>
+                      <g
+                        transform="matrix(-1.8369701987210297e-16,-1,1,-1.8369701987210297e-16,9.536744585147972e-7,511.99998569488525)"
+                      >
+                        <path
+                          d="M447.615,64.386C406.095,22.866,350.892,0,292.175,0s-113.92,22.866-155.439,64.386    C95.217,105.905,72.35,161.108,72.35,219.824c0,53.683,19.124,104.421,54.132,144.458L4.399,486.366    c-5.864,5.864-5.864,15.371,0,21.236C7.331,510.533,11.174,512,15.016,512s7.686-1.466,10.617-4.399l122.084-122.083    c40.037,35.007,90.775,54.132,144.458,54.132c58.718,0,113.919-22.866,155.439-64.386c41.519-41.519,64.385-96.722,64.385-155.439    S489.134,105.905,447.615,64.386z M426.379,354.029c-74.001,74-194.406,74-268.407,0c-74-74-74-194.407,0-268.407    c37.004-37.004,85.596-55.5,134.204-55.5c48.596,0,97.208,18.505,134.204,55.5C500.378,159.621,500.378,280.028,426.379,354.029z"
+                        />
+                      </g>
+                    </svg>
+                  </i>
+                </div>
+                <div class="search" v-if="!searchSelect">
+                  <i class="header-search-icon" @click="closedSearch">
+                    <svg
+                      class="search-header"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      width="25"
+                      height="25"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </i>
+                </div>
+              </div>
+              <div class="empty" v-if="showSearch"></div>
+              <div class="header-content-icon" @click="openOrder">
+                <i class="header-content-cart">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="23"
+                    height="23"
+                    fill="currentColor"
+                    class="icon-shop"
+                    viewBox="0 0 16 16"
+                  >
+                    <title>Cart</title>
+                    <path
+                      d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
                     />
-                    <div
-                      class="header-text-center-icon"
-                      v-if="showMenu == true"
-                      :is="item.iconClose"
-                    />
-                  </div>
+                  </svg>
+                </i>
+                <div class="border-num-items">
+                  <span class="num-items">{{ productsCart }}</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="search" v-if="showSearch && product.length > 0">
-            <form id="demo-2" style="position: relative">
-              <search-icon class="icon-s" @click="focusInput" />
-              <input
-                type="search"
-                :placeholder="$t('header_search')"
-                v-model="search"
-                @keyup.enter="getSearch(search)"
-                id="SearchHeader"
-              />
-            </form>
-          </div>
-          <div class="search_res" v-if="product.length > 0">
-            <div
-              class="header-content-cart"
-              @click="openSearch"
-              id="OpenCartTag"
-            >
-              <search-icon class="header-icon-cart" />
-            </div>
-          </div>
-          <div class="header-content-icon" v-if="product.length > 0">
-            <div
-              class="header-content-cart"
-              @click="openOrder"
-              id="OpenCartTag"
-            >
-              <cart-icon class="header-icon-cart" />
-              <span class="num-items">{{ productsCart }}</span>
-            </div>
-          </div>
-          <div class="header-item-menu" @click="openMenulateral">
-            <menu-icon class="header-icon-menu nav-bar" />
-          </div>
-          <KoMenu :dataStore="dataStore" class="responsive" />
         </div>
-      </div>
-      <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
-        <div id="menu-collapse">
-          <div class="wrapper-meni-grid">
-            <li @click="clear">
-              <p
-                class="name-category-all"
-                :class="
-                  idCategory == '' && indexSelect == ''
-                    ? 'name-category-all-active'
-                    : ''
-                "
-              >
-                {{ $t('header_allProduct') }}
-              </p>
-            </li>
-            <div class="menu-grid">
-              <div v-for="categoria in categorias" :key="categoria.id">
-                <ul
-                  class="name-category"
-                  :class="
-                    categoria.id == idCategory ? 'name-category-active' : ''
-                  "
-                >
-                  <li
-                    @click="
-                      sendCategory(categoria, categoria.id, (ref = false))
-                    "
-                  >
-                    <p>
-                      {{ categoria.nombre_categoria_producto }}
-                    </p>
-                  </li>
-                  <ul class="subcategoria">
-                    <template>
-                      <div
-                        v-for="(subcategory, key) in subcategories"
-                        :key="key"
-                      >
-                        <li
-                          v-if="subcategory.categoria == categoria.id"
-                          @click="Sendsubcategory(subcategory.id)"
-                          class="text-subcategoria"
-                          :class="
-                            subcategory.id == indexSelect
-                              ? 'text-subcategoria-active'
-                              : ''
-                          "
-                        >
-                          {{ subcategory.nombre_subcategoria }}
-                        </li>
-                      </div>
-                    </template>
-                  </ul>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="product-img-container" v-if="product.length">
-            <div class="card-container">
-              <div class="img-logo" v-if="product[0]">
-                <img
-                  :src="product[0].foto_cloudinary"
-                  class="logo"
-                  alt="Product img"
-                />
-              </div>
-              <div class="btn-container">
-                <button @click="closeMenu()" class="btn">Comprar</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <KoSearch :dataStore="dataStore" />
+        <KoMenu
+          :dataStore="dataStore"
+          class="responsive"
+          :settingByTemplate="settingByTemplate13"
+        />
       </div>
     </div>
   </div>
@@ -184,8 +179,8 @@
 
 <script>
 import KoOrder from '../_order1/order1'
-import KoMenu from '../_order1/openMenuRight'
-import KoSearch from './search.vue'
+import KoMenu from '../_lateralMenu/_lateralMenu11/openMenuLeft.vue'
+import KoSearch from '../_lateralMenu/_lateralMenu10/searchDown.vue'
 export default {
   components: {
     KoOrder,
@@ -195,104 +190,37 @@ export default {
   name: 'Ko-Header-8',
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingByTemplate13: Array,
   },
   mounted() {
-    this.setHoko()
-    this.toggle = true
     this.initHeader()
+    window.addEventListener('scroll', function () {
+      var navbar = document.getElementById('navbar')
+      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
+        navbar.style.position = 'fixed'
+      } else {
+        navbar.style.position = 'static'
+      }
+    })
   },
   data() {
     return {
+      searchSelect: true,
+      btnSelect: '/',
       search: '',
-      toggle: false,
-      drawer: false,
-      direction: 'rtl',
-      showMenu: false,
       showSearch: false,
-      links: [
-        {
-          nombre: 'Facebook',
-          icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
-        },
-        {
-          nombre: 'Twitter',
-          icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
-        },
-        {
-          nombre: 'Instagram',
-          icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
-        },
-        {
-          nombre: 'Youtube',
-          icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
-        },
-      ],
-      secciones: [
-        {
-          name: 'header_inicio',
-          path: '/',
-          state: true,
-        },
-        {
-          name: 'header_categorias',
-          iconOpen: 'Flechadown-icon',
-          iconClose: 'FlechaUp-icon',
-          ref: 'categorias',
-          state: true,
-        },
-        {
-          name: 'header_productos_hoko',
-          path: '/productosHoko',
-          state: false,
-        },
-        {
-          name: 'header_contacto',
-          path: '/contacto',
-          state: true,
-        },
-        {
-          name: 'header_blog',
-          href: '/blog',
-          state: true,
-        },
-      ],
-      add: true,
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      idCategory: '',
-      toggleCategories: true,
-      indexSelect: '',
     }
   },
   computed: {
     productsCart() {
       return this.$store.state.productsCart.length
     },
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    product() {
-      return this.dataStore.productos
-    },
-    facebooPixel() {
+    FacebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
-    listArticulos() {
-      return this.$store.state.listArticulos.length
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
-    },
+    // listArticulos() {
+    //   return this.$store.state.listArticulos.length
+    // },
   },
   methods: {
     initHeader() {
@@ -313,165 +241,39 @@ export default {
         this.showSearch = false
       }
     },
-    setHoko() {
-      if (this.dataHoko && this.dataHoko.statehoko == 1) {
-        this.secciones[2].state = true
-      } else {
-        this.secciones[2].state = false
-      }
+    btnActivate(value) {
+      this.btnSelect = value
     },
     openSearch() {
+      this.searchSelect = false
       this.$store.commit('SET_OPENSEARCH', true)
     },
+    closedSearch() {
+      this.searchSelect = true
+      this.$store.commit('SET_OPENSEARCH', false)
+    },
     openOrder() {
-      this.$gtm.push({
-        event: 'OpenCart',
-        action: 'click',
-      })
-      this.showMenu = false
-      this.$store.state.openOrder = true
+      this.$store.commit('SET_OPENORDER', true)
     },
-    openMenulateral() {
-      this.showMenu = false
-      this.$store.state.openMenulateralRight = true
+    openMenuLateral() {
+      this.$store.commit('SET_OPENORDERMENULEFT', true)
     },
-    openMenu(name) {
-      var intro = document.getElementById('menu-collapse')
-      if (name == 'header_categorias') {
-        this.showMenu = !this.showMenu
-      }
-      if (this.showMenu == false) {
-        intro.style.display = 'none'
-      } else {
-        intro.style.display = 'flex'
-      }
-      if (name == 'header_inicio') {
-        this.clear()
-      }
-      if (name == 'header_contacto') {
-        this.showMenu = false
-      }
-    },
-    closeMenuCategory() {
-      var intro = document.getElementById('menu-collapse')
-      const element = event.target.className
-      if (
-        element === 'wrapper-header' ||
-        element === 'header' ||
-        element === 'header-content-items' ||
-        element === 'header-content-logo' ||
-        element === 'header-logo'
-      ) {
-        this.showMenu = false
-      }
-      if (this.showMenu == false) {
-        intro.style.display = 'none'
-      } else {
-        intro.style.display = 'flex'
-      }
-    },
-    closeMenu() {
-      this.showMenu = false
-      this.$router.push({
-        path: '/productos/' + this.product[0].slug,
-      })
-    },
-    Sendsubcategory(value) {
-      this.indexSelect = value
-      this.$store.commit('SET_STATEBANNER', false)
-      this.showMenu = false
-      this.addClass()
-      this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.id == value
-      )
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
-      )
-      this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
-        filtradoCategorias.nombre_categoria_producto
-      )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
-      this.$router.push({
-        path: '/',
-        query: {
-          subcategory: `${this.nameSubCategory}^${filtradoCategorias.id}`,
-        },
-      })
-      this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
-        data: value,
-      })
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
-    },
-    sendCategory(value, categoria, ref) {
-      this.idCategory = categoria
-      this.showMenu = false
-      this.$store.commit('SET_STATEBANNER', false)
-      this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
-        }
-      })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
-      this.$router.push({
-        path: '/',
-        query: { category: value.nombre_categoria_producto },
-      })
-      this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: value.nombre_categoria_producto,
-      })
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
-    },
-    addClass() {
-      this.add = !this.add
+    closed() {
+      this.$store.commit('SET_OPENORDERMENULEFT', false)
     },
     clear() {
-      this.idCategory = ''
-      this.indexSelect = ''
-      this.showMenu = false
       this.$router.push({
         path: '/',
-        query: '',
       })
       this.$store.commit('SET_STATEBANNER', true)
-      this.$store.commit('SET_OPENORDERMENURIGTH', false)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: 'all',
-        data: '',
-      })
-      this.$emit('clear')
-      this.addClass()
-      this.nameCategory = ''
     },
-    Searchproduct(search) {
-      if (search) {
-        this.$store.commit('SET_STATEBANNER', false)
-        this.$store.commit('SET_SEARCHVALUE', search)
-      } else {
-        this.$store.commit('SET_STATEBANNER', true)
-        this.$store.commit('SET_SEARCHVALUE', '')
-      }
+    SearchProduct(search) {
+      this.$store.commit('SET_SEARCHVALUE', search)
     },
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+        if (this.FacebookPixel && this.FacebookPixel.pixel_facebook != null) {
           window.fbq('track', 'Search', { value: value })
         }
       } else {
@@ -485,19 +287,16 @@ export default {
     focusInput() {
       document.getElementById('SearchHeader').focus()
     },
+    scrollLeft() {
+      document.getElementById('swiper-slide-categories').scrollLeft -= 300
+    },
+    scrollRight() {
+      document.getElementById('swiper-slide-categories').scrollLeft += 300
+    },
   },
   watch: {
-    dataHoko() {
-      this.setHoko()
-    },
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-    },
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
@@ -508,453 +307,194 @@ export default {
 </script>
 
 <style scoped>
-.header-container {
-  width: 100%;
-  height: 88px;
-  overflow: hidden;
-  background: var(--background_color_1);
-}
-.menu-container {
-  width: 100%;
-  background: var(--background_color_2);
-  top: 88px;
+.btn-scroll {
   display: flex;
-  transition: all ease 0.6s;
-  position: fixed;
-  height: auto;
-  z-index: 4;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  min-height: 50px;
+  padding: 0px 6px;
+  background: transparent;
+  cursor: pointer;
 }
-.hidden {
-  display: none;
+.btn-scroll-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: var(--color_tex);
+  bottom: 0.125em;
 }
-.animated {
-  opacity: 1;
+.btn-scroll-icon:hover {
+  color: var(--hover_text);
+}
+.item-btns {
+  max-width: 850px;
+}
+.header-container {
+  /* border-bottom: 1px solid var(--background_color_1); */
+  position: static;
+  @apply w-full flex flex-col justify-center items-center top-0 z-10 transition-all ease-in-out duration-0.5;
 }
 .wrapper-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: var(--background_color_1);
-  flex-direction: column;
-  transition: all ease 1s;
-  position: fixed;
-  top: 0px;
-  z-index: 4;
+  padding-top: var(--padding_logo);
+  padding-bottom: var(--padding_logo);
+  background-color: var(--background_color_1);
+  @apply flex flex-col w-full justify-between items-center z-10;
 }
 .header {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1300px;
-  padding: 10px 30px 0;
-}
-#menu-collapse {
-  display: none;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1300px;
-  padding: 10px 30px 10px 20px;
-  border-top: 1px solid #aba4a466;
-  margin: 0 auto;
-  list-style: none;
-}
-.wrapper-meni-grid {
-  flex: 2;
-  width: 100%;
-  max-width: 1000px;
-  max-height: 560px;
-  overflow-y: auto;
-}
-.wrapper-meni-grid::-webkit-scrollbar {
-  border: 1px solid rgba(202, 202, 202, 0.322);
-  background: transparent;
-  width: 6px;
-}
-.wrapper-meni-grid::-webkit-scrollbar-track {
-  border-radius: 10px;
-}
-.wrapper-meni-grid::-webkit-scrollbar-thumb {
-  background: rgb(44, 44, 44);
-}
-.wrapper-meni-grid::-webkit-scrollbar-thumb:hover {
-  background: rgb(102, 102, 102);
-  border-radius: 10px;
-}
-.menu-grid {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: stretch;
-}
-.name-category-all {
-  font-size: 16px;
-  font-weight: bold;
-  color: var(--color_text);
-  cursor: pointer;
-  padding: 10px 0px;
-}
-.name-category-all-active {
-  font-size: 16px;
-  font-weight: bold;
-  color: red;
-  cursor: pointer;
-  padding: 10px 0px;
-}
-.name-category-all:hover {
-  color: var(--btnhover);
-}
-.name-category {
-  color: var(--color_text);
-  cursor: pointer;
-  margin-right: 32px;
-  list-style: none;
-}
-.name-category-active {
-  color: red;
-  cursor: pointer;
-}
-.name-category li {
-  font-weight: bold;
-  padding: 10px 0px;
-  font-size: 16px;
-}
-.name-category li:hover {
-  color: var(--color_hover_text);
-}
-.subcategoria li {
-  padding: 0px;
-  margin-bottom: 8px;
-  margin-left: 7px;
-  font-size: 14px;
-  font-weight: 300;
-  list-style: none;
-}
-.text-subcategoria {
-  color: var(--color_subtext);
-}
-.text-subcategoria-active {
-  color: red;
-}
-.text-subcategoria:hover {
-  color: var(--color_hover_text);
-}
-.header-content-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2px 0px;
-}
-.wrapper-logo {
-  width: 100%;
-}
-.header-logo {
-  /* width: 100%; */
-  max-height: 74px;
-  object-fit: contain;
-  object-position: left;
-}
-.header-content-items {
-  display: flex;
-  flex: 1;
-  margin-left: 10px;
-  align-self: center;
-  justify-content: flex-end;
-  position: relative;
-  top: 3px;
-}
-.header-buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-.header-text-center {
-  font-size: 16px;
-  font-weight: normal;
-  color: var(--color_text);
-  margin-right: 20px;
-  cursor: pointer;
-}
-.header-text-center:hover {
-  color: var(--color_hover_text);
-}
-.header-text-center-icon {
-  font-size: 16px;
-  font-weight: normal;
-  color: var(--color_text);
-  cursor: pointer;
-  bottom: 2px;
-}
-.header-text-center-icon:hover {
-  color: var(--color_hover_text);
-}
-.header-content-icon {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.header-items-icons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-self: center;
-}
-.header-icon {
-  font-size: 18px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: var(--color_icon);
-  margin-left: 7px;
-  cursor: pointer;
-}
-.header-icon:hover {
-  color: var(--color_hover_text);
-}
-.header-content-cart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  width: 35px;
-  height: 35px;
-  border: var(--color_icon) 2px solid;
-  border-radius: 50%;
-  padding-bottom: 3px;
-  margin-left: 20px;
-  position: relative;
-  cursor: pointer;
-}
-.num-items {
-  font-size: 11px;
-  position: absolute;
-  right: -5px;
-  top: -5px;
-  color: var(--background_color_1);
-  background-color: var(--color_icon);
-  border: var(--color_icon) 1px;
-  border-radius: 10px;
-  line-height: 1;
-  display: flex;
-  padding: 3px;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-}
-.header-icon-cart {
-  font-size: 20px;
-  color: var(--color_icon);
-}
-.header-icon-cart:hover {
-  color: var(--btnhover);
+  background-color: var(--background_color_1);
+  @apply flex w-full justify-between;
 }
 .header-item-menu {
+  @apply hidden;
+}
+.header-icon-menu {
+  color: var(--color_icon);
+  fill: var(--color_icon);
+  @apply w-auto h-30 font-normal;
+}
+.header-content-logo {
+  @apply flex justify-center items-center py-1;
+}
+.wrapper-logo {
+  max-width: var(--with_logo);
+  @apply w-full flex justify-center items-center;
+}
+.header-logo {
+  @apply object-contain object-left w-full;
+}
+.header-content {
+  @apply w-full flex flex-row justify-center items-center;
+}
+.header-content-buttons {
+  max-width: 850px !important;
+  box-sizing: border-box;
+  z-index: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  @apply flex flex-row justify-start items-center;
+}
+.header-content-buttons::-webkit-scrollbar {
+  width: 0 !important;
   display: none;
 }
-.responsive {
-  display: none;
-}
-.product-img-container {
-  flex: 1;
-  max-width: 250px;
-}
-.card-container {
-  width: 100%;
-  height: 265px;
-  border-radius: 10px;
-  box-shadow: 0 0 22px 3px #efeeeeb3;
-  margin: 0 auto;
-  position: relative;
-}
-.img-logo {
-  height: 265px;
-  max-width: 250px;
-  width: 100%;
-  position: relative;
-}
-.logo {
-  height: 100%;
-  border-radius: 10px;
-  max-width: 250px;
-  width: 100%;
-  object-fit: cover;
-}
-.btn-container {
-  position: absolute;
-  bottom: 12px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.btn-active {
+  box-shadow: inset 0px -48px 0px -44px var(--color_border);
 }
 .btn {
-  color: var(--color_text_btn);
-  border-radius: var(--radius_btn);
-  border: solid 1px var(--color_background_btn);
-  background-color: var(--color_background_btn);
-  color: white;
-  padding: 8px 14px;
-  font-size: 14px;
-  width: 120px;
-  height: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-  text-decoration: none;
-  text-align: center;
+  color: var(--color_tex);
+  font-size: 16px;
+  font-family: var(--font-style-1) !important;
+  @apply mr-20 px-8 font-semibold leading-22 transition-all ease-in duration-0.3;
 }
 .btn:hover {
-  color: white;
-  background-color: var(--btnhover);
-  border: solid 1px var(--btnhover);
+  color: var(--hover_text);
+  box-shadow: inset 0px -48px 0px -44px var(--color_border);
+  @apply transition-all ease-in duration-0.3;
 }
-.card-container:hover,
-.content-products:focus {
-  box-shadow: 0px 0px 2px 1px var(--color_border);
+.header-content-items {
+  z-index: 3;
+  background-color: var(--background_color_1);
+  @apply flex flex-row justify-between items-center;
 }
-.icon-s {
-  font-size: 25px;
-  color: var(--color_icon);
-  position: absolute;
-  top: 3px;
-  left: 5px;
-  cursor: pointer;
+.header-search-icon {
+  @apply w-36 h-auto flex justify-center items-center;
 }
-.icon-s:hover {
-  color: var(--btnhover);
+.search-header {
+  /* color: var(--color_icon); */
+  fill: var(--color_icon) !important;
+  @apply cursor-pointer transition-all ease-in duration-0.2;
 }
-input[type='search']:focus {
-  background: transparent;
-  border-color: var(--btnhover);
+.search-header:hover {
+  color: var(--color_border);
+  @apply transition-all ease-in duration-0.2;
 }
-input:-moz-placeholder {
-  color: var(--color_text);
+.empty {
+  @apply mx-2;
 }
-input::-webkit-input-placeholder {
-  color: var(--color_text);
+.header-content-icon {
+  @apply flex flex-row justify-center items-center cursor-pointer;
 }
-#demo-2 input[type='search'] {
-  width: 35px;
-  height: 35px;
-  padding-left: 10px;
-  color: transparent;
-  cursor: pointer;
-  box-sizing: border-box;
-  background: transparent;
-  border: var(--color_icon) 2px solid;
-  border-radius: 50px;
-  transition: all 200ms ease-in;
+.header-content-cart {
+  @apply w-36 h-auto flex justify-center items-center relative cursor-pointer;
 }
-#demo-2 input[type='search']:hover {
-  background: transparent;
+.icon-shop {
+  fill: var(--color_icon);
+  @apply transition-all ease-in duration-0.2;
 }
-#demo-2 input[type='search']:focus {
-  width: 160px;
-  padding-left: 32px;
-  color: var(--color_text);
-  background: transparent;
-  cursor: auto;
+.header-content-icon:hover .icon-shop {
+  fill: var(--color_border);
+  @apply transition-all ease-in duration-0.2;
 }
-#demo-2 input:-moz-placeholder {
-  color: transparent;
+.border-num-items {
+  background: var(--color_border);
+  @apply w-auto h-15 flex justify-center items-center rounded-full -mt-20 -ml-8;
 }
-#demo-2 input::-webkit-input-placeholder {
-  color: transparent;
+.num-items {
+  color: var(--color_tex);
+  font-size: 10px;
+  font-family: var(--font-style-1) !important;
+  @apply pt-1 px-4 leading-12 capitalize tracking-0 font-semibold;
 }
-.search_res {
-  display: none;
-}
-@media (max-width: 1024px) {
-  .wrapper-meni-grid {
-    max-height: 540px;
-  }
-}
-@media (max-height: 700px) {
-  .wrapper-meni-grid {
-    max-height: 500px;
-  }
-}
-@media (max-height: 580px) {
-  .wrapper-meni-grid {
-    max-height: 480px;
-  }
-}
-
-@media (max-width: 900px) {
+/* ***** */
+@screen sm {
   .header {
-    padding: 10px 20px 0;
+    @apply w-full flex flex-row justify-center items-center px-10;
   }
-  .product-img-container {
-    display: none;
+  .header-container {
+    @apply w-full;
   }
-}
-@media (max-width: 700px) {
-  .header-buttons {
-    display: none;
+  .header-content {
+    @apply w-9/0 flex flex-row justify-between items-center;
   }
-  .header-items-icons {
-    display: none;
+  .header-content-buttons {
+    @apply hidden;
+  }
+  .header-content-cart {
+    @apply pb-0 ml-0;
   }
   .header-item-menu {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 20px;
+    @apply flex justify-center items-center mr-20;
   }
   .header-icon-menu {
-    font-size: 30px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: var(--color_text);
+    @apply text-35;
   }
-  .header-icon-menu > .material-design-icon__svg {
-    bottom: 0em;
-  }
-  .nav-bar {
-    width: 24px;
-    height: 24px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: var(--color_text);
-  }
-  .nav-bar > .material-design-icon__svg {
-    bottom: 0px;
-    width: 24px;
-    height: 24px;
-  }
-  .responsive {
-    display: initial;
-  }
-  .menu-container {
-    display: none;
+  .search-header {
+    @apply flex;
   }
 }
-@media (max-width: 500px) {
-  .search {
-    display: none;
+@screen lg {
+  .header-content-buttons {
+    @apply flex;
   }
-  .search_res {
-    display: flex;
+  .header-item-menu {
+    @apply hidden;
   }
+}
+@screen mlg {
   .header {
-    padding: 10px 15px 0;
+    @apply w-9/5 flex flex-row justify-between px-20;
   }
+  .header-container,
+  .wrapper-header {
+    /* @apply h-100; */
+  }
+  .header-content {
+    @apply w-auto h-auto flex flex-row justify-between items-center;
+  }
+}
+@media (max-width: 768px) {
   .header-logo {
-    max-width: 180px;
+    max-width: 230px;
+  }
+}
+@media (min-width: 1400px) {
+  .header {
+    @apply w-full;
+    padding: 0px 20px;
+    max-width: 1300px;
   }
 }
 </style>

@@ -1,130 +1,130 @@
 <template>
-  <div class="wrapper-productDetail" :style="settingByTemplate">
-    <div class="container-productDetail-loading" v-if="loading"></div>
-    <div
-      class="container-productDetail"
-      v-else
-      :style="{
-        '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
+  <div
+    class="wrapper-productDetail"
+    :style="[
+      settingByTemplate13[0].detailsProduct,
+      settingByTemplate13[0].setting13General,
+      {
+        '--font-style-1':
+          this.settingByTemplate13[0].setting13General &&
+          this.settingByTemplate13[0].setting13General.fount_1
+            ? this.settingByTemplate13[0].setting13General.fount_1
             : 'Roboto',
-      }"
-    >
-      <div class="section">
-        <div class="wrapper-left">
-          <template>
-            <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="photos">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide photos_selected">
-                  <img
-                    @click="selectedPhoto(data.detalle.foto_cloudinary)"
-                    class="img-list"
-                    :src="idCloudinary(data.detalle.foto_cloudinary, 100, 100)"
-                    alt="Product Img"
-                  />
+      },
+    ]"
+  >
+    <div class="container-productDetail-loading" v-if="loading"></div>
+    <div class="container-productDetail" v-else>
+      <div class="product-content">
+        <div class="left">
+          <div class="wrapper-left">
+            <div class="photos">
+              <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+                <div class="swiper-wrapper h-full">
+                  <div class="swiper-slide">
+                    <div class="photos_selected">
+                      <img
+                        @click="selectedPhoto(data.detalle.foto_cloudinary)"
+                        class="img-list"
+                        v-lazy="
+                          idCloudinary(data.detalle.foto_cloudinary, 120, 120)
+                        "
+                        alt="Product Img"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="swiper-slide h-full"
+                    v-for="(foto, itemsfoto) in data.fotos"
+                    :key="itemsfoto"
+                  >
+                    <div class="photos_selected">
+                      <img
+                        @click="selectedPhoto(foto.foto_cloudinary)"
+                        class="img-list"
+                        v-lazy="foto.foto_cloudinary"
+                        alt="Product Img"
+                      />
+                    </div>
+                  </div>
+                  <div class="swiper-slide h-full">
+                    <div class="photos_selected">
+                      <img
+                        v-if="idYoutube"
+                        v-lazy="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
+                        v-show="idYoutube"
+                        v-on:mouseover="existYoutube = true"
+                        class="video"
+                        alt="Product Img"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div
-                  class="swiper-slide photos_selected"
-                  v-for="(foto, itemsfoto) in data.fotos"
-                  :key="itemsfoto"
-                >
-                  <img
-                    @click="selectedPhoto(foto.foto_cloudinary)"
-                    class="img-list"
-                    :src="idCloudinary(foto.foto_cloudinary, 100, 100)"
-                    alt="Product Img"
-                  />
+                <div class="swiper-prev" v-if="data.fotos.length > 3">
+                  <FlechaUp-icon class="icon-swiper" />
                 </div>
-                <div class="swiper-slide photos_selected">
-                  <img
-                    v-if="idYoutube"
-                    :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
-                    v-show="idYoutube"
-                    v-on:mouseover="existYoutube = true"
-                    class="video"
-                    alt="Product Img"
-                  />
+                <div class="swiper-next" v-if="data.fotos.length > 3">
+                  <Flechadown-icon class="icon-swiper" />
                 </div>
-              </div>
-              <div class="swiper-prev" v-if="data.fotos.length > 3">
-                <FlechaUp-icon class="icon-swiper" />
-              </div>
-              <div class="swiper-next" v-if="data.fotos.length > 3">
-                <Flechadown-icon class="icon-swiper" />
               </div>
             </div>
-          </template>
-          <div class="wrapper-photo_main">
-            <div
-              v-if="this.activeZoom"
-              v-show="!existYoutube"
-              class="photo_main"
-            >
-              <img
+            <div class="wrapper-photo_main">
+              <div
+                v-if="this.activeZoom"
+                v-show="!existYoutube"
                 class="photo_main"
-                v-on:mouseover="activeZoom = !activeZoom"
-                :src="idCloudinaryDetalle(selectPhotoUrl, 645, 430)"
-                alt="Product Zoom"
-              />
+              >
+                <img
+                  class="photo_main"
+                  v-on:mouseover="activeZoom = !activeZoom"
+                  v-lazy="selectPhotoUrl"
+                  alt="Product Zoom"
+                />
+              </div>
+              <div
+                v-if="!this.activeZoom"
+                v-show="!existYoutube"
+                class="photo_main"
+              >
+                <zoom
+                  v-on:mouseleave="activeZoom = !activeZoom"
+                  :photo="selectPhotoUrl"
+                />
+              </div>
+              <iframe
+                v-show="existYoutube"
+                :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
+                frameborder="0"
+                allowfullscreen
+                class="photo_main"
+              ></iframe>
             </div>
-            <div
-              v-if="!this.activeZoom"
-              v-show="!existYoutube"
-              class="photo_main"
-            >
-              <zoom
-                v-on:mouseleave="activeZoom = !activeZoom"
-                :photo="selectPhotoUrl"
-              />
+            <div class="photos_responsive">
+              <ProductSlide
+                :photos="data.fotos"
+                :photo="data.detalle.foto_cloudinary"
+                :idYoutube="idYoutube"
+              ></ProductSlide>
             </div>
-            <iframe
-              v-show="existYoutube"
-              :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
-              frameborder="0"
-              allowfullscreen
-              class="photo_main"
-            ></iframe>
-          </div>
-          <div class="photos_responsive">
-            <productSlide
-              :photos="data.fotos"
-              :photo="data.detalle.foto_cloudinary"
-              :idYoutube="idYoutube"
-            ></productSlide>
           </div>
         </div>
-        <div class="wrapper-right">
-          <div class="content-right">
-            <p class="text-name">{{ data.detalle.nombre }}</p>
-            <p class="text-marca">
-              <strong>{{ data.info.marca }}</strong>
-            </p>
-            <p
-              class="text-promocion"
-              v-show="
-                data.info.tag_promocion == 1 &&
-                data.info.promocion_valor &&
-                salesData.precio
-              "
-            >
-              {{
-                (data.info.tag_promocion == 1 && data.info.promocion_valor
-                  ? Math.trunc(
-                      salesData.precio / (1 - data.info.promocion_valor / 100)
-                    )
-                  : 0)
-                  | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
-                  )
-              }}
-            </p>
-            <div
-              class="wrapper-price"
-              :class="data.info.tag_promocion == 1 ? '' : 'wrapper-price_space'"
-            >
-              <p class="text-precio" v-show="salesData.precio">
+
+        <div class="right">
+          <div class="content-items-right">
+            <div class="content-name">
+              <p
+                class="text-name"
+                :style="`font-size:${this.settingByTemplate13[0].detailsProduct['--fontSizeTitle']}; font-weight:${this.settingByTemplate13[0].detailsProduct['--fontWeighTitle']};`"
+              >
+                {{ data.detalle.nombre }}
+              </p>
+            </div>
+            <div class="content-price">
+              <p
+                class="text-price"
+                v-show="salesData.precio"
+                :style="`font-size:${this.settingByTemplate13[0].detailsProduct['--fontSizePrice']}; font-weight:${this.settingByTemplate13[0].detailsProduct['--fontWeighPrice']};`"
+              >
                 {{
                   salesData.precio
                     | currency(
@@ -133,219 +133,185 @@
                     )
                 }}
               </p>
-              <p
-                class="card-descuento"
+              <div
+                class="flex flex-row justify-center items-center"
                 v-show="
                   data.info.tag_promocion == 1 &&
                   data.info.promocion_valor &&
                   salesData.precio
                 "
               >
-                {{ data.info.promocion_valor }}% OFF
-              </p>
+                <p class="card-discont">
+                  {{ data.info.promocion_valor }}% De Descuento
+                </p>
+                <p class="text-promocion">
+                  {{
+                    (data.info.tag_promocion == 1 && data.info.promocion_valor
+                      ? Math.trunc(
+                          salesData.precio /
+                            (1 - data.info.promocion_valor / 100)
+                        )
+                      : 0)
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
+                </p>
+              </div>
             </div>
-            <div class="content_buy_action">
+            <div class="empty"></div>
+            <div class="content-stock">
+              <p class="stock-text-1">{{ $t('productdetail_stock') }}:</p>
+              <p class="stock-text-2">{{ salesData.unidades }}</p>
+            </div>
+            <div class="content-stock" v-if="data.info.descripcion_corta">
+              <p class="stock-text-1">{{ $t('productdetail_informacion') }}:</p>
+              <p class="stock-text-2">{{ data.info.descripcion_corta }}</p>
+            </div>
+            <div class="empty"></div>
+            <div
+              class="content-variant"
+              v-if="this.data.detalle.con_variante > 0"
+            >
               <div
-                v-if="envio.titulo == 'Envío gratis'"
-                class="content_buy_action"
+                class="content-items-variant"
+                v-for="(variant, index) in data.variantes"
+                :key="index"
               >
-                <p class="card-info-2">
-                  <svg
-                    class="transporte-icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    version="1.1"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3M5 10.5L6.5 9L8 10.5L11.5 7L13 8.5L8 13.5L5 10.5Z"
-                    /></svg
-                  >{{ $t('home_cardGratis') }}
-                </p>
-              </div>
-              <div class="content_card-info">
-                <p class="card-info-1" v-if="spent">
-                  {{ $t('home_cardAgotado') }}
-                </p>
-              </div>
-            </div>
-            <div v-if="data.info.descripcion_corta" style="margin-bottom: 5px">
-              <p class="text-marca">
-                <strong>{{ data.info.descripcion_corta }}</strong>
-              </p>
-            </div>
-            <div v-if="this.data.detalle.con_variante > 0">
-              <div v-for="(variant, index) in data.variantes" :key="index">
-                <label lang="es" for="variant name" class="text-variant"
+                <label for="variant name" class="text-variant"
                   >{{ variant.nombre }}:</label
                 >
-                <selectGroup :index="index" :variantes="data.variantes">
+                <SelectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"
                     :key="item.option"
                     :value="item.option"
                   >
-                    {{ item.option }}
+                    <p class="text-option">
+                      {{ item.option }}
+                    </p>
                   </option>
-                </selectGroup>
+                </SelectGroup>
               </div>
             </div>
-            <div :class="{ disabled: !salesData.estado }">
-              <div>
-                <div class="quantity">
-                  <p class="text-quantity">{{ $t('cart_cantidad') }}</p>
-                  <button class="quantity_remove" v-on:click="removeQuantity()">
-                    <menos-icon class="icon" />
-                  </button>
-                  <p class="quantity_value">{{ quantityValue }}</p>
-                  <button class="quantity_add" v-on:click="addQuantity()">
-                    <mas-icon class="icon" />
-                  </button>
-
-                  <div
-                    class="container-alerta"
-                    v-if="this.maxQuantityValue == this.quantityValue"
+            <div class="w-full flex flex-row items-center">
+              <p class="text-variant" style="margin-right: 10px">
+                {{ $t('productdetail_compartir') }}
+              </p>
+              <a
+                :href="this.sharingFacebook"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="btn-facebook"
+              >
+                <facebook-icon class="wp-icon" />
+              </a>
+              <button class="btn-whatsapp" @click="redirectWP()">
+                <whatsapp-icon class="wp-icon" />
+              </button>
+            </div>
+            <div class="content-direction-btns">
+              <div
+                class="content-quantity-boxes"
+                :class="{ disabled: !salesData.estado }"
+              >
+                <div class="box-quantity">
+                  <p class="txt-quantity">{{ quantityValue }}</p>
+                </div>
+                <div class="box-quantity-btns">
+                  <div class="btn-quantity btn1" v-on:click="addQuantity()">
+                    <FlechaUp-icon class="text-icon" />
+                  </div>
+                  <div class="btn-quantity btn2" v-on:click="removeQuantity()">
+                    <Flechadown-icon class="text-icon" />
+                  </div>
+                </div>
+              </div>
+              <div class="content-addCart">
+                <button
+                  ref="colorBtn"
+                  class="btn"
+                  v-if="
+                    !spent &&
+                    this.salesData.estado == true &&
+                    (data.info.tipo_servicio == null ||
+                      data.info.tipo_servicio == '0')
+                  "
+                  v-on:click="addShoppingCart"
+                  id="AddToCartTag"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="currentColor"
+                    class="minicart-icon"
+                    viewBox="0 0 16 16"
                   >
-                    <span class="alerta"> {{ $t('cart_ultimaUnidad') }}</span>
-                  </div>
-                </div>
-                <div class="item-info-product">
-                  <div v-if="data.info.garantia" class="content_buy_action">
-                    <p class="text-unidades">
-                      {{ $t('productdetail_garantia') }}
-                    </p>
-                    <span class="text-garantia">{{ data.info.garantia }}</span>
-                  </div>
-                  <!-- <div v-if="salesData.unidades" class="content_buy_action">
-                    <p class="text-unidades">Unidades disponibles:</p>
-                    <p class="text-garantia">{{ salesData.unidades }}</p>
-                  </div>-->
-                  <div class="content-button">
-                    <button
-                      ref="colorBtn"
-                      class="btn"
-                      v-if="
-                        !spent &&
-                        this.salesData.estado == true &&
-                        (data.info.tipo_servicio == null ||
-                          data.info.tipo_servicio == '0')
-                      "
-                      v-on:click="addShoppingCart"
-                      id="AddToCartTag"
-                    >
-                      {{ $t('productdetail_btnAgregar') }}
-                    </button>
-                    <button
-                      disabled
-                      class="btn-disabled"
-                      v-else-if="this.salesData.estado == false"
-                    >
-                      {{ $t('productdetail_btnANodisponible') }}
-                    </button>
-                    <button
-                      ref="colorBtn"
-                      class="btn"
-                      v-else-if="!spent && data.info.tipo_servicio == '1'"
-                      v-on:click="GoPayments"
-                      id="AddToCartTag"
-                    >
-                      {{ $t('productdetail_btnComprar') }}
-                    </button>
-                    <button disabled class="btn-disabled" v-else-if="spent">
-                      {{ $t('home_cardAgotado') }}
-                    </button>
-                  </div>
-                  <div class="content-shared">
-                    <p class="text-unidades" style="margin-right: 10px">
-                      {{ $t('productdetail_compartir') }}
-                    </p>
-                    <a
-                      :href="this.sharingFacebook"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      class="btn-facebook"
-                    >
-                      <facebook-icon class="wp-icon" />
-                    </a>
-                    <button class="btn-whatsapp" @click="redirectWP()">
-                      <whatsapp-icon class="wp-icon" />
-                    </button>
-                  </div>
-                </div>
+                    <path
+                      d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+                    />
+                  </svg>
+                  <p class="text-addCart">
+                    {{ $t('productdetail_añadiralcarrito') }}
+                  </p>
+                </button>
+                <button
+                  disabled
+                  class="btn-disabled"
+                  v-else-if="this.salesData.estado == false"
+                >
+                  <p class="text-addCart">
+                    {{ $t('productdetail_btnANodisponible') }}
+                  </p>
+                </button>
+                <button
+                  ref="colorBtn"
+                  class="btn"
+                  v-else-if="!spent && data.info.tipo_servicio == '1'"
+                  v-on:click="GoPayments"
+                  id="AddToCartTag"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="currentColor"
+                    class="minicart-icon"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+                    />
+                  </svg>
+                  <p class="text-addCart">
+                    {{ $t('productdetail_btnComprar') }}
+                  </p>
+                </button>
+                <button disabled class="btn-disabled" v-else-if="spent">
+                  <p class="text-addCart">
+                    {{ $t('home_cardAgotado') }}
+                  </p>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="section">
-        <div class="features">
-          <ko-description
-            :dataStore="dataStore"
-            :data="data"
-            :envio="envio"
-          ></ko-description>
-        </div>
+      <div class="tab">
+        <OptionTab
+          :dataStore="dataStore"
+          :data="data"
+          :envio="envio"
+        ></OptionTab>
       </div>
       <div class="section-suggesProduct">
-        <koSuggesProduct :category="this.category.slice(0, 8)" />
-      </div>
-      <div class="responsive-purchase">
-        <div class="ko-input">
-          <div class="quantity-resposive">
-            <button class="quantity_remove" v-on:click="removeQuantity()">
-              <menos-icon class="icon" />
-            </button>
-            <p class="quantity_value">{{ quantityValue }}</p>
-            <button class="quantity_add" v-on:click="addQuantity()">
-              <mas-icon class="icon" />
-            </button>
-            <transition name="slide-fade">
-              <div
-                class="container-alert"
-                v-show="quantityValue == maxQuantityValue"
-              >
-                <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
-              </div>
-            </transition>
-          </div>
-          <div style="width: 100%; margin-left: 10px">
-            <button
-              class="btn-responsive"
-              ref="color2"
-              v-if="
-                !spent &&
-                this.salesData.estado == true &&
-                (data.info.tipo_servicio == null ||
-                  data.info.tipo_servicio == '0')
-              "
-              v-on:click="addShoppingCart"
-              id="AddToCartTag"
-            >
-              <cartArrowDown class="card-icon-cart" />{{
-                $t('productdetail_btnAgregar')
-              }}
-            </button>
-            <button
-              disabled
-              class="btn-disabled"
-              v-if="this.salesData.estado == false"
-            >
-              {{ $t('productdetail_btnANodisponible') }}
-            </button>
-            <button
-              class="btn-responsive"
-              ref="color2"
-              v-else-if="!spent && data.info.tipo_servicio == '1'"
-              v-on:click="GoPayments"
-            >
-              {{ $t('productdetail_btnComprar') }}
-            </button>
-
-            <div class="content_buy_action-responsive" v-else-if="spent">
-              <p class="card-info-1-res">{{ $t('home_cardAgotado') }}</p>
-            </div>
-          </div>
-        </div>
+        <KoSuggesProduct
+          :category="this.category.slice(0, 12)"
+          :cardProduct="settingByTemplate13[0].cardProduct"
+          :settingGeneral="settingByTemplate13[0].setting13General"
+        />
       </div>
       <div itemscope itemtype="http://schema.org/Product">
         <meta itemprop="productID" :content="`${data.detalle.id}`" />
@@ -367,37 +333,59 @@
         </div>
         <meta itemprop="url" :content="`${this.sharing.url}`" />
       </div>
+      <div>
+        <meta property="product:catalog_id" :content="`${data.detalle.id}`" />
+        <meta property="og:title" :content="`${data.detalle.nombre}`" />
+        <meta property="product:brand" :content="`${data.info.marca}`" />
+        <meta
+          property="og:description"
+          :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
+        />
+        <meta
+          property="og:image"
+          :content="`${data.detalle.foto_cloudinary}`"
+        />
+        <meta property="product:availability" content="in stock" />
+        <meta property="product:condition" content="new" />
+        <meta
+          property="product:price:amount"
+          :content="`${this.salesData.precio}`"
+        />
+        <meta
+          property="product:price:currency"
+          :content="`${dataStore.tienda.moneda}`"
+        />
+        <meta property="og:url" :content="`${this.sharing.url}`" />
+      </div>
     </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios'
-import productSlide from './_productdetails/productSlide'
-import selectGroup from './_productdetails/selectGroup'
-import koDescription from './_productdetails/descriptionProduct.vue'
-import koSuggesProduct from './_productdetails/suggestionsProducto'
+import ProductSlide from './_productdetails/productSlide'
+import SelectGroup from './_productdetails/selectGroup'
+import OptionTab from './_productdetails/OptTab'
+import KoSuggesProduct from './_productdetails/suggestionsProducto'
+import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
-import idCloudinaryDetalle from '../../mixins/idCloudinary'
-import zoom from './_productdetails/zoomImg'
 import currency from '../../mixins/formatCurrent'
 export default {
-  mixins: [idCloudinary, idCloudinaryDetalle, currency],
-  name: 'Ko13-ProductDetail-1',
+  mixins: [idCloudinary, currency],
+  name: 'Ko-ProductDetail',
   props: {
     dataStore: Object,
     productsData: Array,
     whatsapp: String,
     envios: Object,
     facebooPixel: Object,
-    settingByTemplate: Object,
+    settingByTemplate13: Array,
   },
   components: {
-    selectGroup,
-    koDescription,
-    koSuggesProduct,
-    productSlide,
-    zoom,
+    OptionTab,
+    SelectGroup,
+    KoSuggesProduct,
+    ProductSlide,
+    Zoom,
   },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -408,75 +396,6 @@ export default {
     }
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
-    }
-  },
-  head() {
-    return {
-      meta: [
-        {
-          hid: 'product:catalog_id',
-          name: 'product:catalog_id',
-          content: this.data && this.data.detalle ? this.data.detalle.id : 'id',
-        },
-        {
-          hid: 'og:title',
-          name: 'og:title',
-          content:
-            this.data && this.data.detalle ? this.data.detalle.nombre : 'title',
-        },
-        {
-          hid: 'product:brand',
-          name: 'product:brand',
-          content: this.data && this.data.info ? this.data.info.marca : 'brand',
-        },
-        {
-          hid: 'og:description',
-          name: 'og:description',
-          content:
-            this.dataStore && this.dataStore.tienda
-              ? `Producto de la tienda ${this.dataStore.tienda.nombre}`
-              : 'description',
-        },
-        {
-          hid: 'og:image',
-          name: 'og:image',
-          content:
-            this.data && this.data.detalle
-              ? this.data.detalle.foto_cloudinary
-              : 'image',
-        },
-        {
-          hid: 'product:availability',
-          name: 'product:availability',
-          content: 'in stock',
-        },
-        {
-          hid: 'product:condition',
-          name: 'product:condition',
-          content: 'new',
-        },
-        {
-          hid: 'product:price:amount',
-          name: 'product:price:amount',
-          content:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : 'price-amount',
-        },
-        {
-          hid: 'product:price:currency',
-          name: 'product:price:currency',
-          content:
-            this.dataStore && this.dataStore.tienda
-              ? this.dataStore.tienda.moneda
-              : 'price-currency',
-        },
-        {
-          hid: 'og:url',
-          name: 'og:url',
-          content: this.sharing && this.sharing.url ? this.sharing.url : 'url',
-        },
-      ],
     }
   },
   data() {
@@ -526,13 +445,13 @@ export default {
       return this.$refs.mySwiper.swiper
     },
     existPayments() {
-      const mediosPago = this.dataStore.medios_pago
+      const mediospago = this.dataStore.medios_pago
       if (
-        mediosPago.consignacion ||
-        mediosPago.convenir ||
-        mediosPago.payco ||
-        mediosPago.tienda ||
-        mediosPago.efecty
+        mediospago.consignacion ||
+        mediospago.convenir ||
+        mediospago.payco ||
+        mediospago.tienda ||
+        mediospago.efecty
       ) {
         return true
       }
@@ -559,9 +478,6 @@ export default {
     },
   },
   methods: {
-    changeSlide() {
-      this.swiper.slidePrev(700, false)
-    },
     searchIdForSlug() {
       const product = this.productsData.filter(
         (product) => product.slug === this.id
@@ -649,7 +565,7 @@ export default {
       this.data.detalle = {
         foto_cloudinary:
           'https://vignette.wikia.nocookie.net/la-bitacora-del-capitan/images/6/67/Not_found.png/revision/latest?cb=20190509042801&path-prefix=es',
-        nombre: 'Producto de prueba',
+        nombre: 'Producto de prueda',
         precio: 29999,
       }
       this.data.info = {
@@ -689,13 +605,13 @@ export default {
             case 'precio':
               this.envio = {
                 titulo: 'Tarifa por precio',
-                desc: 'Según la suma del costo de tus productos te cobraran el envio',
+                desc: 'Segun la suma del costo de tus productos te cobraran el envio',
               }
               break
             case 'precio_ciudad':
               this.envio = {
                 titulo: 'Tarifa por ciudad',
-                desc: 'Según la ciudad te cobraran el envio',
+                desc: 'Segun la ciudad te cobraran el envio',
               }
               break
             case 'peso':
@@ -757,8 +673,6 @@ export default {
         nombre: this.data.detalle.nombre,
         combinacion: this.salesData.combinacion,
         envio_gratis: this.data.detalle.envio_gratis,
-        promocion_valor: this.data.info.promocion_valor,
-        tag_promocion: this.data.info.tag_promocion,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
@@ -790,7 +704,7 @@ export default {
       }
       this.$gtm.push({ event: 'AddToCart' })
       this.$store.commit('UPDATE_CONTENTCART')
-      this.$router.push('/')
+      this.$router.push('/productos')
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
     },
@@ -862,10 +776,16 @@ export default {
     },
   },
   watch: {
-    productsData(value) {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+    },
+    productsData() {
       this.getDataProduct()
     },
-    envios(value) {
+    envios() {
       this.setOptionEnvio()
     },
     quantityValue(value) {
@@ -934,308 +854,6 @@ export default {
 </script>
 
 <style scoped>
-.wrapper-productDetail {
-  display: flex;
-  width: 100%;
-  background: #efefef;
-  /* background: var(--background_color_2); */
-  justify-content: center;
-  align-items: center;
-}
-.container-productDetail-loading {
-  height: calc(100vh - 420px);
-  width: 100%;
-  display: flex;
-  max-width: 1300px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 50px 30px 30px 30px;
-  background: #efefef;
-}
-.container-productDetail {
-  position: relative;
-  display: flex;
-  width: 100%;
-  max-width: 1300px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 50px 30px 30px 30px;
-}
-.section {
-  width: 100%;
-  display: flex;
-  box-shadow: 10px 14px 28px #ededed, -10px -14px 28px #f1f1f1;
-}
-.section-suggesProduct {
-  z-index: 1 !important;
-  width: 100%;
-}
-.wrapper-category {
-  display: flex;
-  margin-bottom: 5px;
-}
-.text-category {
-  font-size: 14px;
-  font-weight: bold;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-}
-.wrapper-left {
-  flex: 2;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  /* margin-right: 25px; */
-  padding-bottom: 10px;
-}
-.photos_responsive {
-  display: none;
-}
-.photos {
-  display: flex;
-  margin-right: 30px;
-  max-height: 430px;
-  position: relative;
-}
-.swiper-wrapper {
-  width: 100%;
-  position: relative;
-}
-.swiper-prev {
-  position: absolute;
-  top: 0;
-  left: 20px;
-  z-index: 2;
-}
-.swiper-next {
-  position: absolute;
-  left: 20px;
-  bottom: 0;
-  z-index: 2;
-  font-size: 25px;
-}
-.icon-swiper {
-  color: var(--color_icon);
-  font-size: 60px;
-  cursor: pointer;
-}
-.icon-swiper:hover {
-  color: var(--btnhover);
-}
-.photos_selected {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  max-height: 100px;
-}
-.img-list {
-  cursor: pointer;
-  vertical-align: top;
-  height: 100px;
-  width: 100px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 10px;
-}
-.video {
-  width: 100px;
-  height: 100px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  object-fit: cover;
-  object-position: center;
-}
-.wrapper-photo_main {
-  position: relative;
-  max-width: 650px;
-  height: 450px;
-  min-height: 450px;
-  width: 100%;
-  margin-right: 25px;
-}
-.photo_main {
-  max-width: 645px;
-  max-height: 430px;
-  width: 100%;
-  height: 430px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-}
-.photo_main_zoom {
-  max-width: 645px;
-  max-height: 430px;
-  width: 100%;
-  height: 430px;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 10px;
-  cursor: zoom-in;
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  transform: scale(1.2);
-}
-.wrapper-right {
-  flex: 1;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  padding-bottom: 10px;
-  /* border-left: 1px solid var(--color_border); */
-  border-left: 1px solid rgba(127, 127, 139, 0.342);
-}
-.content-right {
-  margin-left: 20px;
-  position: sticky;
-  top: 88px;
-}
-i.close {
-  color: black;
-  align-self: flex-end;
-  cursor: pointer;
-}
-.text-name {
-  font-weight: bold;
-  font-size: 25px;
-  line-height: 24px;
-  color: #000000;
-  /* color: var(--color_text); */
-}
-.text-marca {
-  font-size: 16px;
-  font-stretch: semi-condensed;
-  font-style: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-}
-.text-promocion {
-  font-size: 14px;
-  font-weight: bold;
-  color: rgba(55, 4, 4, 0.61);
-  text-decoration: line-through;
-  margin-top: 10px;
-}
-.wrapper-price_space {
-  margin-top: 10px;
-}
-.wrapper-price {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: flex-start;
-  margin-bottom: 12px;
-}
-.wrapper-price > p:nth-child(2) {
-  margin-left: 5px;
-}
-.text-precio {
-  font-size: 30px;
-  font-weight: bold;
-  /* color: var(--color_text); */
-  color: #000000;
-  line-height: 24px;
-}
-.card-descuento {
-  font-size: 12px;
-  color: #00a650;
-  /* font-weight: bold; */
-  border-radius: 3px;
-}
-.content-text-desc {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.text-desc {
-  text-decoration-color: currentcolor;
-  text-decoration-style: solid;
-  text-decoration-line: none;
-  font-size: 14px;
-  font-weight: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-  line-height: 1.5;
-  text-decoration: none;
-}
-.text-variant {
-  font-size: 14px;
-  font-weight: bold;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-}
-.text-unidades {
-  font-size: 14px;
-  font-weight: bold;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-
-  margin-top: 5px;
-}
-.text-garantia {
-  font-size: 14px;
-  font-weight: bold;
-  /* color: var(--color_text); */
-  color: #000000;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-.content_buy_action {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 10px;
-}
-.content_card-info {
-  display: initial;
-}
-.card-info-1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #e71f77;
-  padding: 1px 4px;
-  border-radius: 5px;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  min-height: 24px;
-  max-height: 24px;
-}
-.card-info-2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #35dd8d;
-  padding: 1px 4px;
-  border-radius: 5px;
-  color: black;
-  margin-right: 10px;
-  font-size: 12px;
-  font-weight: bold;
-  min-height: 24px;
-  max-height: 24px;
-}
-.transporte-icon {
-  fill: black;
-  width: 22px;
-  height: 22px;
-  margin-right: 5px;
-}
-.item-info-product {
-  margin-top: 10px;
-}
-.content-button {
-  display: flex;
-  flex-direction: row;
-  margin-top: 15px;
-}
-.content-shared {
-  display: flex;
-  flex-direction: row;
-  margin-top: 15px;
-}
 .btn-facebook {
   color: #1877f2;
   border-radius: 5px;
@@ -1271,173 +889,355 @@ i.close {
 }
 .wp-icon {
   font-size: 27px;
-  bottom: 2px;
+  bottom: 3px;
 }
-
-.whatsapp {
-  fill: #27d367;
-  width: 30px;
-  cursor: pointer;
-  margin-left: 20px;
-}
-.btn {
-  border-radius: var(--radius_btn);
-  color: white;
-  border: solid 2px black;
-  background-color: black;
-  padding: 6px 14px;
-  width: 238px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.btn:hover {
-  color: white;
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
-}
-.btn-disabled {
-  border-radius: var(--radius_btn);
-  color: white;
-  border: solid 2px gray;
-  background-color: gray;
-  padding: 6px 14px;
-  width: 238px;
-  font-size: 16px;
-  font-weight: bold;
-}
-.quantity {
-  display: flex;
-  flex-direction: row;
-  margin-top: 10px;
-  position: relative;
-  box-sizing: border-box;
-  max-width: 240px;
-  /* margin-bottom: 25px; */
-}
-.text-quantity {
-  font-size: 14px;
-  font-weight: bold;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-  margin-right: 15px;
-  align-self: center;
-}
-.quantity_remove {
-  /* border: 2px var(--color_border); */
-  border: 2px rgba(127, 127, 139, 0.342);
-  border-top-left-radius: var(--radius_btn);
-  border-bottom-left-radius: var(--radius_btn);
-  border-style: solid none solid solid;
-  background: transparent;
-  height: 41px;
-  width: 55px;
-}
-.quantity_value {
-  font-size: 1em;
-  /* color: var(--color_text); */
-  color: #000000;
-  /* border: 2px var(--color_border); */
-  border: 2px rgba(127, 127, 139, 0.342);
-  padding-left: 10px;
-  padding-right: 10px;
-  border-style: solid none solid none;
-  background: transparent;
-  height: 41px;
-  width: 55px;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-}
-.quantity_add {
-  /* border: 2px var(--color_border); */
-  border: 2px rgba(127, 127, 139, 0.342);
-  border-top-right-radius: var(--radius_btn);
-  border-bottom-right-radius: var(--radius_btn);
-  border-style: solid solid solid none;
-  background: transparent;
-  height: 41px;
-  width: 55px;
-}
-.icon {
-  font-size: 16px;
-  /* color: var(--color_border); */
-  color: rgba(127, 127, 139, 0.342);
-  transition: all 200ms ease-in;
-}
-.icon:hover {
-  /* color: var(--color_text); */
-  color: #000000;
-}
-.features {
+.wrapper-left {
+  flex: 2;
   width: 100%;
   display: flex;
-  /* border-top: 1px solid var(--color_border); */
-  border-top: 1px solid rgba(127, 127, 139, 0.342);
+  flex-direction: row;
+  padding-bottom: 10px;
+  align-items: flex-start;
 }
-.responsive-purchase {
+.photos_responsive {
   display: none;
 }
-.container-alerta {
-  position: absolute;
-  bottom: -32px;
-  left: 95px;
-  width: 130px;
-  background-color: rgb(250, 232, 75);
-  border: 1px solid rgb(230, 213, 66);
-  border-radius: 6px;
+.photos {
+  min-width: 110px;
+  max-width: 110px;
+  min-height: 442px;
+  max-height: 442px;
+  margin-right: 30px;
+  @apply w-full h-full flex relative overflow-hidden;
+}
+.photos_selected {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: stretch;
+  max-height: 100px;
+  max-width: 100px;
+  min-height: 100px;
+  min-width: 100px;
+  @apply w-full h-full;
+}
+.img-list {
+  vertical-align: top;
+  @apply w-full h-full cursor-pointer object-cover rounded-6 mb-10;
+}
+.swiper-prev {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  z-index: 2;
+}
+.swiper-next {
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  z-index: 2;
+  font-size: 25px;
+}
+.icon-swiper {
+  color: var(--color_icon);
+  font-size: 60px;
+  cursor: pointer;
+}
+.icon-swiper:hover {
+  color: var(--hover_text);
+}
+.video {
+  width: 100px;
+  height: 100px;
+  min-height: 100px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  object-fit: cover;
+  object-position: center;
+}
+.wrapper-photo_main {
+  position: relative;
+  max-width: 650px;
+  max-height: 600px;
+  width: 100%;
+  margin-right: 10px;
+}
+.photo_main {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 10px;
+}
+.wrapper-productDetail {
+  background: var(--background_color_1);
+  @apply w-full flex justify-center items-center;
+}
+.container-productDetail-loading {
+  height: calc(100vh - 420px);
+  max-width: 1200px;
+  padding: 50px 30px 30px 30px;
+  background: var(--background_color_1);
+  @apply w-full flex flex-col justify-center items-center;
+}
+.container-productDetail {
+  background: var(--background_color_1);
+  @apply w-full h-full flex flex-col justify-center items-center;
+}
+.left {
+  @apply w-full flex flex-col justify-center items-center;
+}
+.content-images {
+  @apply w-full grid grid-cols-1 gap-4 justify-center items-center;
+}
+.content-variant {
+  @apply w-full flex flex-col justify-center items-start mt-30;
+}
+.content-items-variant {
+  margin-bottom: 8px;
+  @apply w-full flex flex-col justify-start items-start;
+}
+.aditional-images,
+.main-images,
+.youtuve-video {
+  @apply w-full flex justify-center items-center;
+}
+.right {
+  @apply w-full flex flex-col justify-start items-start mt-10;
+}
+.content-category,
+.content-name,
+.content-price,
+.content-addCart {
+  @apply w-full flex flex-row justify-start items-center;
+}
+.quantity {
+  @apply flex flex-row justify-center items-center;
+}
+.section-suggesProduct {
+  @apply w-full my-40;
+}
+.content-quantity-boxes {
+  @apply w-full flex flex-row justify-start items-center;
+}
+.content-quantity-boxes {
+  @apply w-full flex justify-start items-center my-30;
+}
+.box-quantity {
+  background-color: transparent;
+  border: 1px solid var(--border);
+  @apply w-75 h-50 flex text-center justify-center items-center;
+}
+.box-quantity-btns {
+  background-color: var(--color_background_btn);
+  border: 1px solid var(--color_background_btn);
+  @apply w-25 h-50 flex flex-col text-center justify-center items-center;
+}
+.btn-quantity {
+  background-color: var(--color_background_btn);
+  border-color: var(--color_background_btn);
+  @apply w-25 h-25 flex justify-center items-center border-t border-r;
+}
+
+.card-discont {
+  background: black;
+  color: white;
+  padding: 2px 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 16px;
+}
+.text-promocion {
   font-size: 14px;
-  color: black;
+  font-weight: bold;
+  color: var(--color_subtext);
+  text-decoration: line-through;
 }
-.alerta {
-  text-align: center;
-  padding: 5px 5px;
-  text-transform: capitalize;
-}
-@media (max-width: 1250px) {
-  .photo_main {
-    width: 600px;
+@screen sm {
+  .product-content {
+    @apply w-9/0 flex-col justify-center items-center mt-40;
+  }
+  .content-direction-btns {
+    @apply w-full flex flex-col justify-start items-start;
+  }
+  .video {
+    width: 100%;
+    height: 200px;
+  }
+  .content-name,
+  .content-price {
+    @apply mb-20;
+  }
+  .content-options {
+    @apply flex;
+  }
+  .tab {
+    @apply w-9/0 flex mt-40;
+  }
+  .content-options {
+    @apply w-full flex flex-col justify-start items-center;
+  }
+  .btn {
+    color: var(--color_text_btn);
+    background-color: var(--color_background_btn);
+    transition: all 0.15s ease-in;
+    @apply w-full h-54 flex flex-row justify-center items-center;
+  }
+  .btn-disabled {
+    color: var(--color_text_btn);
+    background-color: var(--color_background_btn);
+    transition: all 0.15s ease-in;
+    @apply w-full h-54 flex flex-row justify-center items-center;
+  }
+  .btn:hover .text-addCart {
+    color: var(--hover_text_btn);
+    background: var(--hover_Bg_btn);
+    transition: all 0.15s ease-in;
+  }
+  .quantity {
+    @apply w-full;
+  }
+  .text-name {
+    color: var(--color_text);
+    /* font-size: 22px; */
+    line-height: 1;
+    font-family: var(--font-style-1) !important;
+    @apply capitalize;
+  }
+  .text-price {
+    color: var(--color_price);
+    /* font-size: 20px; */
+    line-height: 26px;
+    letter-spacing: 0.3px;
+    font-family: var(--font-style-1) !important;
+    @apply capitalize;
+  }
+  .text-stock {
+    color: #92bb35;
+    font-size: 14px;
+    line-height: 1.42857143;
+    letter-spacing: -0.02em;
+    font-family: var(--font-style-1) !important;
+    @apply capitalize font-semibold ml-30;
+  }
+  .text-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    cursor: pointer;
+    color: var(--color_text_btn);
+  }
+  .text-quantity_value {
+    padding: 0 35px;
+    border: none;
+    font-size: 21px;
+    @apply w-full flex justify-center items-center text-center font-semibold;
+  }
+  .text-addCart {
+    font-family: var(--font-style-1) !important;
+    color: var(--color_text_btn);
+    font-size: 12px;
+    @apply font-semibold whitespace-nowrap uppercase;
+  }
+  .minicart-icon {
+    fill: var(--color_text_btn);
+    color: var(--color_text_btn);
+    @apply mr-10 mb-5;
+  }
+  .text-variant {
+    color: var(--color_subtext);
+    font-size: 16px;
+    transition: all 0.6s ease-in-out;
+    font-family: var(--font-style-1) !important;
+    @apply font-semibold mr-10;
+  }
+  .text-option {
+    color: var(--color_subtext);
+    font-size: 16px;
+    transition: all 0.6s ease-in-out;
+    font-family: var(--font-style-1) !important;
+    @apply font-semibold;
+  }
+
+  .section-suggesProduct {
+    @apply w-9/0;
+  }
+  .content-items-right {
+    @apply w-full flex flex-col justify-center items-center;
+  }
+  .empty {
+    background-color: var(--border);
+    max-width: 1200px;
+    @apply w-full h-1;
+  }
+  .content-stock {
+    @apply w-full flex flex-row justify-start items-center my-8;
+  }
+  .stock-text-1 {
+    color: var(--color_subtext);
+    font-size: 16px;
+    font-family: var(--font-style-1) !important;
+    @apply font-semibold mr-10;
+  }
+  .stock-text-2 {
+    color: var(--color_subtext);
+    font-size: 15px;
+    font-family: var(--font-style-1) !important;
+    @apply font-normal text-left;
   }
 }
-@media (max-width: 1185px) {
-  .photo_main {
-    width: 500px;
+@media (min-width: 425px) {
+  .content-direction-btns {
+    @apply flex flex-col;
   }
 }
-@media (max-width: 1035px) {
-  .photo_main {
-    width: 450px;
+@media (min-width: 480px) {
+  .video {
+    height: 250px;
   }
 }
-@media (max-width: 960px) {
-  .photo_main {
-    width: 400px;
+@screen md {
+  .content-addCart {
+    width: 236px;
+  }
+  .video {
+    height: 400px;
+  }
+  .tab {
+    @apply w-9/5;
+  }
+  .product-content {
+    @apply w-9/5 grid grid-cols-2 gap-4 justify-start items-start;
+  }
+  .section-suggesProduct {
+    @apply w-9/5;
   }
 }
-@media (max-width: 890px) {
-  .photo_main {
-    width: 350px;
+@media (min-width: 850px) {
+  .video {
+    height: 480px;
   }
 }
-@media (max-width: 810px) {
-  .photos {
-    margin-right: 10px;
+@screen lg {
+  .video {
+    height: 300px;
   }
-  .wrapper-left {
-    margin-right: 15px;
+  .content-options {
+    @apply hidden;
+  }
+  .tab {
+    @apply flex;
+  }
+  .content-direction-btns {
+    @apply flex flex-col;
+  }
+}
+@media (min-width: 1080px) {
+  .content-options {
+    width: 100%;
   }
 }
 @media (max-width: 768px) {
-  .wrapper-left {
-    flex: 1;
-  }
-  .photos {
-    margin-right: 10px;
-  }
   .photos {
     display: none;
   }
@@ -1454,189 +1254,11 @@ i.close {
     margin-bottom: 10px;
   }
 }
-@media (max-width: 725px) {
-  .container-productDetail {
-    padding: 0px;
-    align-items: center;
-    justify-content: center;
-  }
-  .section {
-    flex-direction: column;
-  }
-  .wrapper-left {
-    justify-content: center;
-    align-items: center;
-  }
-  .wrapper-right {
-    padding-bottom: 2px;
-    border-left: 0px;
-  }
-  .product {
-    position: relative;
-    width: 100%;
-    min-height: 97vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 70px;
-  }
-  i.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-  .wrapper {
-    padding: 15px;
-  }
-  .quantity {
-    display: none;
-  }
-  .content-button {
-    display: none;
-  }
-  .content_card-info {
-    display: none;
-  }
-  .responsive-purchase {
-    display: initial;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    box-shadow: 0 0 30px 50px rgba(96, 125, 139, 0.096);
-    background: var(--background_color_1);
-    z-index: 2;
-  }
-  .ko-input {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 5px;
-  }
-  .quantity-resposive {
-    display: flex;
-    flex-direction: row;
-  }
-  .text-quantity {
-    font-size: 14px;
-    font-weight: bold;
-    /* color: var(--color_subtext); */
-    color: rgba(21, 20, 57, 0.541);
-    margin-right: 5px;
-    align-self: center;
-  }
-  .quantity_remove {
-    /* border: 1px var(--color_border); */
-    border: 1px rgba(127, 127, 139, 0.342);
-    border-top-left-radius: var(--radius_btn);
-    border-bottom-left-radius: var(--radius_btn);
-    border-style: solid none solid solid;
-    background: transparent;
-    height: 38px;
-    width: 3em;
-  }
-  .quantity_value {
-    font-size: 1em;
-    /* color: var(--color_text); */
-    color: #000000;
-    /* border: 1px var(--color_border); */
-    border: 1px rgba(127, 127, 139, 0.342);
-    padding-left: 10px;
-    padding-right: 10px;
-    border-style: solid none solid none;
-    background: transparent;
-    height: 38px;
-    width: 2.5em;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-  }
-  .quantity_add {
-    /* border: 1px var(--color_border); */
-    border: 1px rgba(127, 127, 139, 0.342);
-    border-top-right-radius: var(--radius_btn);
-    border-bottom-right-radius: var(--radius_btn);
-    border-style: solid solid solid none;
-    background: transparent;
-    height: 38px;
-    width: 3em;
-  }
-  .icon {
-    font-size: 16px;
-  }
-  .content_buy_action-responsive {
-    display: flex;
-    width: 100%;
-  }
-  .card-info-1-res {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background: #e71f77; */
-    background: gray;
-    border: solid 1px gray;
-    padding: 8px 10px;
-    border-radius: var(--radius_btn);
-    color: white;
-    font-size: 16px;
-    width: 100%;
-  }
-  .btn-responsive {
-    border-radius: var(--radius_btn);
-    color: var(--color_text_btn);
-    border: solid 1px var(--color_background_btn);
-    background-color: var(--color_background_btn);
-    padding: 8px 10px;
-    width: 100%;
-    font-size: 16px;
-  }
-  .card-icon-cart {
-    font-size: 20px;
-    color: var(--color_text_btn);
-    margin-right: 4px;
-    cursor: pointer;
-  }
-  .container-alert {
-    position: absolute;
-    top: -55px;
-    left: 45px;
-    width: 80px;
-    background-color: rgb(250, 232, 75);
-    border: 1px solid rgb(230, 213, 66);
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    color: black;
-  }
-  .alert {
-    text-align: center;
-    padding: 5px 5px;
-    text-transform: capitalize;
-  }
-  .features {
-    border-top: none;
-  }
-}
-@media (max-width: 600px) {
-  .container-productDetail {
-    padding: 0px;
-  }
-  .wrapper-left {
-    padding-bottom: 0px;
-  }
-  .wrapper-right {
-    margin-bottom: 15px;
-  }
-  .content-right {
-    margin-left: 15px;
-    margin-right: 15px;
-  }
-  .text-name {
-    font-weight: 500;
-    font-size: 20px;
+@media (min-width: 1200px) {
+  .product-content,
+  .tab,
+  .section-suggesProduct {
+    max-width: 1200px;
   }
 }
 </style>

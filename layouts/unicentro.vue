@@ -15,19 +15,46 @@
           <component v-bind="componentsProps" :is="headerTemplate" />
           <nuxt />
           <component v-bind="componentsProps" :is="footerTemplate" />
-          <div class="wrapper-whatsapp" v-if="dataStore.tienda.whatsapp">
-            <div @click="redirectWhatsapp()">
-              <koWhatsApp class="button-whatsapp" /><span
-                >WhatsApp<br /><small>{{
-                  dataStore.tienda.whatsapp
-                }}</small></span
-              >
-            </div>
-          </div>
+          <KoFooterCountry
+            v-if="dataStore.tienda.template != 99"
+            :dataStore="dataStore"
+            :valueWa="false"
+          />
           <div
+            class="wrapper-whatsapp"
+            v-if="dataStore.tienda.whatsapp"
+            @click="redirectWhatsapp()"
+          >
+            <koWhatsApp class="button-whatsapp" />
+            <span
+              >WhatsApp<br /><small>{{
+                dataStore.tienda.whatsapp
+              }}</small></span
+            >
+          </div>
+          <!-- <div
             class="wrapper-notificacion"
             id="modalNotificacion"
             v-if="dataStore.tienda.estado == 0"
+          >
+            <div class="content-notificacion">
+              <koTiendaCerrada />
+              <p class="text-noti">
+                Disculpa, no podrá realizar compras por el momento,
+              </p>
+              <p class="subtitle-noti">¿Deseas continuar?</p>
+              <button class="btn-acceptM" @click="acceptClose()">
+                Aceptar
+              </button>
+            </div>
+          </div> -->
+          <div
+            class="wrapper-notificacion"
+            id="modalNotificacion"
+            v-if="
+              dataStore.tienda.estado == 0 ||
+              !expiredDate(dataStore.tienda.fecha_expiracion)
+            "
           >
             <div class="content-notificacion">
               <koTiendaCerrada />
@@ -51,6 +78,7 @@
 </template>
 
 <script>
+import expiredDate from '../mixins/expiredDate'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -78,9 +106,10 @@ export default {
     koModalSecurity: () => import('../components/modal/Ko-modal-security.vue'),
     koWhatsApp: () => import('../components/whatsapp/Ko-whatsApp.vue'),
   },
+  mixins: [expiredDate],
   mounted() {
-    this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_COOKIES')
+    this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_SHOPPING_CART')
     if (this.$route.query && this.$route.query.clearCart == 'true') {
       this.$store.commit('DELETEALLITEMSCART')
@@ -159,30 +188,61 @@ export default {
       case 9:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
-            : 'Roboto'
+          this.settingByTemplate9 &&
+          this.settingByTemplate9.settingGeneral &&
+          this.settingByTemplate9.settingGeneral.fount_1
+            ? this.settingByTemplate9.settingGeneral.fount_1
+            : 'Poppins'
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra2 =
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
-            : 'Poppins'
+          this.settingByTemplate9 &&
+          this.settingByTemplate9.settingGeneral &&
+          this.settingByTemplate9.settingGeneral.fount_2
+            ? this.settingByTemplate9.settingGeneral.fount_2
+            : 'Roboto'
         break
       case 10:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
+          this.settingByTemplate10 &&
+          this.settingByTemplate10.settingGeneral &&
+          this.settingByTemplate10.settingGeneral.fount_1
+            ? this.settingByTemplate10.settingGeneral.fount_1
+            : 'Roboto'
+        break
+      case 11:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate11 &&
+          this.settingByTemplate11.settingGeneral &&
+          this.settingByTemplate11.settingGeneral.fount_1
+            ? this.settingByTemplate11.settingGeneral.fount_1
+            : 'Roboto'
+        break
+      case 99:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra = 'Poppins'
+        break
+      case 12:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate12 && this.settingByTemplate12.fontFamily
+            ? this.settingByTemplate12.fontFamily
             : 'Poppins'
+        break
+      case 13:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate13 &&
+          this.settingByTemplate13.settingGeneral &&
+          this.settingByTemplate13.settingGeneral.fount_1
+            ? this.settingByTemplate13.settingGeneral.fount_1
+            : 'Roboto'
         break
     }
     let tienda = this.$store.state.dataStore.tienda
+      ? this.$store.state.dataStore.tienda
+      : ''
     let tidio =
       this.analytics_tagmanager && this.analytics_tagmanager.tidio_user
         ? this.analytics_tagmanager.tidio_user
@@ -192,10 +252,17 @@ export default {
       this.analytics_tagmanager.facebook_pixel_metatag_1
         ? this.analytics_tagmanager.facebook_pixel_metatag_1
         : ''
+    let googleMerchants =
+      this.analytics_tagmanager && this.analytics_tagmanager.google_merchant
+        ? this.analytics_tagmanager.google_merchant
+        : ''
     let geolocalizacion = this.$store.state.dataStore.geolocalizacion
-    let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
+    let description =
+      tienda && tienda.descripcion
+        ? tienda.descripcion.replace(/<[^>]*>?/g, '')
+        : ''
     return {
-      title: tienda.nombre ? tienda.nombre : 'Tienda',
+      title: tienda && tienda.nombre ? tienda.nombre : 'Tienda',
       htmlAttrs: {
         lang: 'es',
       },
@@ -245,6 +312,7 @@ export default {
           'http-equiv': 'Content-Language',
           content: 'es',
         },
+        //openGraph meta
         {
           hid: 'og:title',
           name: 'og:title',
@@ -286,25 +354,40 @@ export default {
         {
           hid: 'og:latitude',
           name: 'og:latitude',
-          content: geolocalizacion.latitud,
+          content:
+            geolocalizacion && geolocalizacion.latitud
+              ? geolocalizacion.latitud
+              : '',
         },
         {
           hid: 'og:longitude',
           name: 'og:longitude',
-          content: geolocalizacion.longitud,
+          content:
+            geolocalizacion && geolocalizacion.longitud
+              ? geolocalizacion.longitud
+              : '',
         },
         {
           hid: 'og:street-address',
           name: 'og:street-address',
-          content: geolocalizacion.direccion,
+          content:
+            geolocalizacion && geolocalizacion.direccion
+              ? geolocalizacion.direccion
+              : '',
         },
         {
           name: 'facebook-domain-verification',
           content: FacebookPixel1 ? `${FacebookPixel1}` : '',
         },
         {
-          name: ' google',
-          content: ' notranslate',
+          name: 'google-site-verification',
+          content: googleMerchants
+            ? `${googleMerchants}`
+            : 'ce4pJPC3AEQoDU6jNkAEqV-Dwa1OUU8GxtRTR0d_MM8',
+        },
+        {
+          name: 'Content-Security-Policy',
+          content: "script-src 'none'",
         },
       ],
       script: [
@@ -327,7 +410,8 @@ export default {
             this.template == 5 ||
             this.template == 6 ||
             this.template == 10 ||
-            this.template == 11
+            this.template == 99 ||
+            this.template == 12
               ? `https://fonts.googleapis.com/css?family=${tipo_letra}:100,200,300,400,500,600,700,800,900&display=swap`
               : '',
           rel: 'stylesheet',
@@ -356,7 +440,28 @@ export default {
         {
           href:
             this.template == 9
-              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&family=${tipo_letra2}@0;1&display=swap`
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 9
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra2}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 11
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
+              : '',
+          rel: 'stylesheet',
+        },
+        {
+          href:
+            this.template == 13
+              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
               : '',
           rel: 'stylesheet',
         },
@@ -376,10 +481,10 @@ export default {
       'settingByTemplate10',
       'settingByTemplate11',
       'settingByTemplate12',
+      'settingByTemplate13',
       'analytics_tagmanager',
     ]),
     headerTemplate() {
-      // let headerComp = ''
       let headerComponent = ''
       switch (this.template) {
         case 3:
@@ -418,6 +523,9 @@ export default {
           break
         case 11:
           headerComponent = 'KoHeader7'
+          break
+        case 13:
+          headerComponent = 'KoHeader8'
           break
       }
       return headerComponent
@@ -461,6 +569,9 @@ export default {
           break
         case 11:
           footerComponent = 'KoFooter7'
+          break
+        case 13:
+          footerComponent = 'KoFooter8'
           break
       }
       return footerComponent
@@ -567,6 +678,29 @@ export default {
               },
             ]
           : null,
+        settingByTemplate13: this.settingByTemplate13
+          ? [
+              {
+                setting13Header:
+                  this.settingByTemplate13 && this.settingByTemplate13.header
+                    ? this.settingByTemplate13.header
+                    : null,
+                setting13Footer:
+                  this.settingByTemplate13 && this.settingByTemplate13.footer
+                    ? this.settingByTemplate13.footer
+                    : null,
+                setting13General:
+                  this.settingByTemplate13 &&
+                  this.settingByTemplate13.settingGeneral
+                    ? this.settingByTemplate13.settingGeneral
+                    : null,
+                pages:
+                  this.settingByTemplate13 && this.settingByTemplate13.pages
+                    ? this.settingByTemplate13.pages
+                    : null,
+              },
+            ]
+          : null,
       }
     },
   },
@@ -643,15 +777,45 @@ export default {
   --btnhover: #929292;
   --radius_btn: 5px;
 }
+html {
+  scroll-behavior: smooth;
+}
 * {
+  scroll-behavior: smooth;
   margin: 0px;
   padding: 0px;
   font-family: var(--font-style);
   outline: none;
-  /* list-style: none; */
   text-decoration: none;
   box-sizing: border-box;
   outline: none !important;
+  /* overflow-x: hidden; */
+}
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+::-webkit-scrollbar-button:increment,
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.el-popover {
+  display: none;
 }
 .wrapper-whatsapp {
   position: fixed;

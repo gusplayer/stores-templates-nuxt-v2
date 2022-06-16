@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper-select">
-    <h4 class="title-input" lang="es">{{ label }}</h4>
+    <h4 class="title-input">{{ label }}</h4>
     <div class="select">
       <select
         name="format"
         ref="format"
         @change="updateValue()"
-        :style="value == -1 || !value ? 'color: rgba(21, 20, 57, 0.4);' : ''"
+        :class="value == -1 || !value ? 'colortext' : ''"
       >
         <option disabled>{{ $t('productdetail_seleccionarOpcion') }}</option>
         <slot></slot>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'selectGroup-details13',
+  name: 'selectGroup-details',
   props: ['options', 'label', 'value', 'index', 'variantes'],
   mounted() {
     this.saveOption()
@@ -61,12 +61,22 @@ select {
   border: 0 !important;
   background: transparent;
   background-image: none;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
+  font-size: 14px;
   font-weight: 600;
+  transition: all 0.6s ease-in-out;
 }
 select::-ms-expand {
   display: none;
+}
+.title-input {
+  font-family: var(--font-style-1) !important;
+  color: #222;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.6s ease-in-out;
+  text-transform: uppercase;
 }
 .select {
   position: relative;
@@ -75,19 +85,25 @@ select::-ms-expand {
   height: 40px;
   background: transparent;
   overflow: hidden;
-  /* border: 2px solid var(--color_border); */
-  border: 2px solid rgba(127, 127, 139, 0.342);
+  color: #222;
+  border: 2px solid var(--border);
   border-radius: var(--radius_btn);
+}
+.colortext {
+  color: var(--color_subtext);
 }
 select {
   flex: 1;
   padding: 0 0.5em 0 1em;
   cursor: pointer;
   font-size: 1em;
+  background-color: transparent;
+  color: #222;
 }
 .select::after {
-  content: url('data:image/svg+xml;charset=UTF-8, <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" fill="Indigo" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>');
+  content: url('data:image/svg+xml;charset=UTF-8, <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" fill="Dark Gray" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>');
   position: absolute;
+  color: var(--border);
   top: 0;
   right: 0;
   padding: 0.4em 1em;
@@ -95,16 +111,20 @@ select {
   pointer-events: none;
   transition: 0.25s all ease;
 }
-.select:hover::after {
-  content: url('data:image/svg+xml;charset=UTF-8, <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" fill="BlueViolet" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>');
-}
 option {
   /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  font-family: var(--font-style-1) !important;
+  color: #222;
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.6s ease-in-out;
 }
 option:disabled {
-  background: white;
-  color: black;
-  font-weight: bold;
+  background: #f8f8f8;
+  font-family: var(--font-style-1) !important;
+  color: #222;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.6s ease-in-out;
 }
 </style>

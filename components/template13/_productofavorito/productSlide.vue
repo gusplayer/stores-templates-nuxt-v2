@@ -11,7 +11,11 @@
         :key="index"
       >
         <client-only>
-          <KoProductCard1 :product="product"></KoProductCard1>
+          <KoProductCard1
+            :product="product"
+            :cardProduct="cardProduct"
+            :settingGeneral="settingGeneral"
+          ></KoProductCard1>
         </client-only>
       </div>
     </div>
@@ -32,9 +36,7 @@ export default {
   components: {
     KoProductCard1,
   },
-  props: {
-    products: {},
-  },
+  props: { products: {}, settingGeneral: Object, cardProduct: Object },
   data() {
     return {
       swiperOption: {

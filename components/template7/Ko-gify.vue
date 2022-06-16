@@ -53,7 +53,7 @@
           </div>
         </div>
         <div
-          v-if="(this.fullProducts.length == 0)"
+          v-if="this.fullProducts.length == 0"
           class="content-products-empty"
         >
           <p>{{ $t('home_msgCatalogo') }}</p>

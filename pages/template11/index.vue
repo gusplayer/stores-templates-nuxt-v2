@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="settingByTemplate11">
     <KCarousel
       id="kCarouselX"
       v-bind="componentsProps"

@@ -215,9 +215,6 @@ export default {
     }
   },
   computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper
-    },
     dataHoko() {
       return this.$store.state.dataHoko
     },
@@ -282,9 +279,6 @@ export default {
             this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
           }
         })
-    },
-    changeSlide() {
-      this.swiper.slidePrev(700, false)
     },
     GoPayments() {
       let objeto = {

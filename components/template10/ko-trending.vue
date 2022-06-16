@@ -23,7 +23,7 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper pb-10">
           <div
-            v-for="product in fullProducts"
+            v-for="product in fullProducts.slice(0, 11)"
             :key="product.id"
             class="swiper-slide"
           >
