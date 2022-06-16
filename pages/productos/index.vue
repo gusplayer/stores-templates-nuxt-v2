@@ -1,5 +1,5 @@
-<template lang="html">
-  <div class="home">
+<template>
+  <div>
     <component :is="indexTemplate" v-bind="componentsProps" />
   </div>
 </template>

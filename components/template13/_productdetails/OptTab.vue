@@ -1,302 +1,298 @@
 <template>
-  <div class="content-opt-tab">
-    <div class="head-content">
-      <div
-        class="tab"
-        @click="selectTag1"
-        :class="selecttag == 1 ? 'show-select-active' : ''"
-      >
-        <p class="tittle">{{ $t('productdetail_description') }}</p>
-      </div>
-      <div
-        class="tab"
-        @click="selectTag2"
-        :class="selecttag == 2 ? 'show-select-active' : ''"
-      >
-        <p class="tittle">{{ $t('productdetail_opcionesPago') }}</p>
-      </div>
-      <div
-        class="tab"
-        @click="selectTag3"
-        :class="selecttag == 3 ? 'show-select-active' : ''"
-      >
-        <p class="tittle">{{ $t('productdetail_opinionesEnvio') }}</p>
-      </div>
-    </div>
-
-    <div class="content-tab">
-      <div class="editor" v-if="focusbtn1">
-        <div v-if="data.info.descripcion">
-          <el-tiptap
-            v-model="data.info.descripcion"
-            :extensions="extensions"
-            :spellcheck="false"
-            :readonly="true"
-            :charCounterCount="false"
-            :tooltip="false"
-            :showMenubar="false"
-            :bubble="false"
-          />
-        </div>
-      </div>
-      <div class="item-content opcpago" v-if="focusbtn2">
-        <ul>
-          <li v-if="mediospago.consignacion == 1">
-            <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
-            <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
-          </li>
-          <li v-if="mediospago.contraentrega == 1">
-            <h4>{{ $t('productdetail_PagoContra') }}</h4>
-            <p>{{ $t('productdetail_PagoContraMsg') }}</p>
-          </li>
-          <li v-if="mediospago.convenir == 1">
-            <h4>{{ $t('productdetail_pagoConvenir') }}</h4>
-            <p>{{ $t('productdetail_pagoConvenirMsg') }}</p>
-          </li>
-          <li v-if="mediospago.credibanco == 1">
-            <h4>{{ $t('productdetail_ConsignacionCredibanco') }}</h4>
-            <p>
-              {{ $t('productdetail_ConsignacionCredibancoMsg') }}
-            </p>
-            <a
-              href="https://www.credibanco.com/"
-              target="_blank"
-              rel="noreferrer noopener"
-              class="cursor_point"
-            >
-              <img
-                class="logo-pasarela"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png"
-                alt="logo Credibanco"
-              />
-            </a>
-          </li>
-          <li v-if="mediospago.daviplata == 1">
-            <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>
-            <p>
-              {{ $t('productdetail_ConsignaciondaviplataMsg') }}
-            </p>
-            <img
-              class="logo-pasarela-daviplata"
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png"
-              alt="logo daviPlata"
+  <div
+    v-if="settingByTemplate13"
+    class="content-opt-tab"
+    :style="[
+      settingByTemplate13[0].detailsProduct,
+      settingByTemplate13[0].setting13General,
+      {
+        '--font-style-1':
+          this.settingByTemplate13[0].setting13General &&
+          this.settingByTemplate13[0].setting13General.fount_1
+            ? this.settingByTemplate13[0].setting13General.fount_1
+            : 'Poppins',
+      },
+    ]"
+  >
+    <el-collapse v-model="activeNames" @change="handleChange">
+      <el-collapse-item :title="$t('productdetail_description')" name="1">
+        <div class="editor">
+          <div v-if="data.info.descripcion">
+            <el-tiptap
+              v-model="data.info.descripcion"
+              :extensions="extensions"
+              :spellcheck="false"
+              :readonly="true"
+              :charCounterCount="false"
+              :tooltip="false"
+              :showMenubar="false"
+              :bubble="false"
             />
-          </li>
-          <li v-if="mediospago.efecty == 1">
-            <h4>{{ $t('productdetail_ConsignacionEfecty') }}</h4>
-            <p>{{ $t('productdetail_ConsignacionEfectyMsg') }}</p>
-            <a
-              href="https://www.efecty.com.co/web/"
-              target="_blank"
-              rel="noreferrer noopener"
-              class="cursor_point"
-            >
-              <img
-                class="logo-pasarela-efecty"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png"
-                alt="logo efecty"
-              />
-            </a>
-          </li>
-          <li v-if="mediospago.mercado_pago == 1">
-            <h4>{{ $t('productdetail_PasarelaMercado') }}</h4>
-            <p>
-              {{ $t('productdetail_PasarelaMercadoMsg') }}
-            </p>
-            <a
-              href="https://www.mercadopago.com"
-              target="_blank"
-              rel="noreferrer noopener"
-              class="cursor_point"
-            >
-              <img
-                class="logo-pasarela-daviplata"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png"
-                alt="logo mercadopago"
-              />
-            </a>
-          </li>
-          <li v-if="mediospago.nequi == 1">
-            <h4>{{ $t('productdetail_Consignacionnequi') }}</h4>
-            <p>
-              {{ $t('productdetail_ConsignacionnequiMsg') }}
-            </p>
-            <a
-              href="https://www.nequi.com.co/"
-              target="_blank"
-              rel="noreferrer noopener"
-              class="cursor_point"
-            >
-              <img
-                class="logo-pasarela-daviplata"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png"
-                alt="logo nequi"
-              />
-            </a>
-          </li>
-          <li v-if="mediospago.payco == 1">
-            <h4>{{ $t('productdetail_PasarelaEpayco') }}</h4>
-            <p>
-              {{ $t('productdetail_PasarelaEpaycoMsg') }}
-            </p>
-            <img
-              class="logo-pasarela-payco"
-              src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png"
-              alt="Pasarela de pagos epayco"
-            />
-          </li>
-          <li v-if="mediospago.payu == 1">
-            <h4>{{ $t('productdetail_PasarelaPayu') }}</h4>
-            <p>
-              {{ $t('productdetail_PasarelaPayuMsg') }}
-            </p>
-            <a
-              href="https://www.payulatam.com/co/"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <img
-                class="logo-pasarela-payu"
-                src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
-                alt="PayU"
-                border="0"
-              />
-            </a>
-          </li>
-          <li v-if="mediospago.wompi == 1">
-            <h4>{{ $t('productdetail_Consignacionwompi') }}</h4>
-            <p>
-              {{ $t('productdetail_PasarelaPayuMsg') }}
-            </p>
-            <a
-              href="https://wompi.co/"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <img
-                class="logo-pasarela-wompi"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png"
-                alt="wompi"
-                border="0"
-              />
-            </a>
-          </li>
-          <li v-if="mediospago.wepay4u == 1">
-            <h4>WePay4U</h4>
-            <p>
-              {{ $t('text_pago_WePay4U') }}
-            </p>
-            <a
-              href="https://wepay4u.com/"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <img
-                class="logo-pasarela-wompi"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1639078440/wePay4u/powered_by_z7sgqp.png"
-                alt="wePay4u"
-                border="0"
-              />
-            </a>
-          </li>
-          <li v-if="mediospago.tu_compra == 1">
-            <h4>Tucompra</h4>
-            <p>
-              {{ $t('text_pago_Tucompra') }}
-            </p>
-            <a
-              href="https://tucompra.com.co/"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <img
-                class="logo-pasarela-wompi"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/tucompra_ss0oys.png"
-                alt="tu_compra"
-                border="0"
-              />
-            </a>
-          </li>
-          <li v-if="mediospago.flow == 1">
-            <h4>Tucompra</h4>
-            <p>
-              {{ $t('text_pago_flowInfo') }}
-            </p>
-            <a
-              href="https://www.flow.cl/"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <img
-                class="logo-pasarela-wompi"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/flow_jevnwy.png"
-                alt="flow"
-                border="0"
-              />
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="item-content opcenvio" v-if="focusbtn3">
-        <div class="deliverys section" v-if="this.envios.envio_metodo">
-          <div class="content">
-            <h3 class="title-section">
-              {{ $t('productdetail_opinionesEnvio') }}
-            </h3>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'precio_ciudad'"
-            class="wrapper-method"
-          >
-            <h4 class="capitalize">
-              • {{ this.envios.envio_metodo.replace('_', ' por ') }}
-            </h4>
-            <p class="description-method">
-              {{ $t('productdetail_opinionesEnvioMsg1') }}
-            </p>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'tarifa_plana'"
-            class="wrapper-method"
-          >
-            <h4 class="capitalize">
-              {{ this.envios.envio_metodo.replace('_', ' ') }}
-            </h4>
-            <p class="description-method">
-              {{ $t('productdetail_opinionesEnvioMsg2') }}
-            </p>
-            <p class="price">
-              {{ $t('cart_precio') }}
-              {{
-                this.envios.valor
-                  | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
-                  )
-              }}
-            </p>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'precio'"
-            class="wrapper-method"
-          >
-            <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
-            <p class="description-method">
-              {{ $t('productdetail_precioTotalCompraMsg') }}
-            </p>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'gratis'"
-            class="wrapper-method"
-          >
-            <h4>{{ $t('productdetail_gratis') }}</h4>
-            <p class="description-method">
-              {{ $t('productdetail_gratisMsg') }}
-            </p>
           </div>
         </div>
-      </div>
-    </div>
+      </el-collapse-item>
+      <el-collapse-item :title="$t('productdetail_opcionesPago')" name="2">
+        <div class="item-content opcpago">
+          <ul>
+            <li v-if="mediospago.consignacion == 1">
+              <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
+              <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
+            </li>
+            <li v-if="mediospago.contraentrega == 1">
+              <h4>{{ $t('productdetail_PagoContra') }}</h4>
+              <p>{{ $t('productdetail_PagoContraMsg') }}</p>
+            </li>
+            <li v-if="mediospago.convenir == 1">
+              <h4>{{ $t('productdetail_pagoConvenir') }}</h4>
+              <p>{{ $t('productdetail_pagoConvenirMsg') }}</p>
+            </li>
+            <li v-if="mediospago.credibanco == 1">
+              <h4>{{ $t('productdetail_ConsignacionCredibanco') }}</h4>
+              <p>
+                {{ $t('productdetail_ConsignacionCredibancoMsg') }}
+              </p>
+              <a
+                href="https://www.credibanco.com/"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="cursor_point"
+              >
+                <img
+                  class="logo-pasarela"
+                  src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png"
+                  alt="logo Credibanco"
+                />
+              </a>
+            </li>
+            <li v-if="mediospago.daviplata == 1">
+              <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>
+              <p>
+                {{ $t('productdetail_ConsignaciondaviplataMsg') }}
+              </p>
+              <img
+                class="logo-pasarela-daviplata"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png"
+                alt="logo daviPlata"
+              />
+            </li>
+            <li v-if="mediospago.efecty == 1">
+              <h4>{{ $t('productdetail_ConsignacionEfecty') }}</h4>
+              <p>{{ $t('productdetail_ConsignacionEfectyMsg') }}</p>
+              <a
+                href="https://www.efecty.com.co/web/"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="cursor_point"
+              >
+                <img
+                  class="logo-pasarela-efecty"
+                  src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png"
+                  alt="logo efecty"
+                />
+              </a>
+            </li>
+            <li v-if="mediospago.mercado_pago == 1">
+              <h4>{{ $t('productdetail_PasarelaMercado') }}</h4>
+              <p>
+                {{ $t('productdetail_PasarelaMercadoMsg') }}
+              </p>
+              <a
+                href="https://www.mercadopago.com"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="cursor_point"
+              >
+                <img
+                  class="logo-pasarela-daviplata"
+                  src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png"
+                  alt="logo mercadopago"
+                />
+              </a>
+            </li>
+            <li v-if="mediospago.nequi == 1">
+              <h4>{{ $t('productdetail_Consignacionnequi') }}</h4>
+              <p>
+                {{ $t('productdetail_ConsignacionnequiMsg') }}
+              </p>
+              <a
+                href="https://www.nequi.com.co/"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="cursor_point"
+              >
+                <img
+                  class="logo-pasarela-daviplata"
+                  src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png"
+                  alt="logo nequi"
+                />
+              </a>
+            </li>
+            <li v-if="mediospago.payco == 1">
+              <h4>{{ $t('productdetail_PasarelaEpayco') }}</h4>
+              <p>
+                {{ $t('productdetail_PasarelaEpaycoMsg') }}
+              </p>
+              <img
+                class="logo-pasarela-payco"
+                src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png"
+                alt="Pasarela de pagos epayco"
+              />
+            </li>
+            <li v-if="mediospago.payu == 1">
+              <h4>{{ $t('productdetail_PasarelaPayu') }}</h4>
+              <p>
+                {{ $t('productdetail_PasarelaPayuMsg') }}
+              </p>
+              <a
+                href="https://www.payulatam.com/co/"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <img
+                  class="logo-pasarela-payu"
+                  src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
+                  alt="PayU"
+                  border="0"
+                />
+              </a>
+            </li>
+            <li v-if="mediospago.wompi == 1">
+              <h4>{{ $t('productdetail_Consignacionwompi') }}</h4>
+              <p>
+                {{ $t('productdetail_PasarelaPayuMsg') }}
+              </p>
+              <a
+                href="https://wompi.co/"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <img
+                  class="logo-pasarela-wompi"
+                  src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png"
+                  alt="wompi"
+                  border="0"
+                />
+              </a>
+            </li>
+            <li v-if="mediospago.wepay4u == 1">
+              <h4>WePay4U</h4>
+              <p>
+                {{ $t('text_pago_WePay4U') }}
+              </p>
+              <a
+                href="https://wepay4u.com/"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <img
+                  class="logo-pasarela-wompi"
+                  src="https://res.cloudinary.com/komerciaacademico/image/upload/v1639078440/wePay4u/powered_by_z7sgqp.png"
+                  alt="wePay4u"
+                  border="0"
+                />
+              </a>
+            </li>
+            <li v-if="mediospago.tu_compra == 1">
+              <h4>Tucompra</h4>
+              <p>
+                {{ $t('text_pago_Tucompra') }}
+              </p>
+              <a
+                href="https://tucompra.com.co/"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <img
+                  class="logo-pasarela-wompi"
+                  src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/tucompra_ss0oys.png"
+                  alt="tu_compra"
+                  border="0"
+                />
+              </a>
+            </li>
+            <li v-if="mediospago.flow == 1">
+              <h4>Tucompra</h4>
+              <p>
+                {{ $t('text_pago_flowInfo') }}
+              </p>
+              <a
+                href="https://www.flow.cl/"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <img
+                  class="logo-pasarela-wompi"
+                  src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/flow_jevnwy.png"
+                  alt="flow"
+                  border="0"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
+      <el-collapse-item :title="$t('productdetail_opinionesEnvio')" name="3">
+        <div class="item-content opcenvio">
+          <div class="deliverys section" v-if="this.envios.envio_metodo">
+            <div class="content">
+              <h3 class="title-section">
+                {{ $t('productdetail_opinionesEnvio') }}
+              </h3>
+            </div>
+            <div
+              v-if="this.envios.envio_metodo === 'precio_ciudad'"
+              class="wrapper-method"
+            >
+              <h4 class="capitalize">
+                • {{ this.envios.envio_metodo.replace('_', ' por ') }}
+              </h4>
+              <p class="description-method">
+                {{ $t('productdetail_opinionesEnvioMsg1') }}
+              </p>
+            </div>
+            <div
+              v-if="this.envios.envio_metodo === 'tarifa_plana'"
+              class="wrapper-method"
+            >
+              <h4 class="capitalize">
+                {{ this.envios.envio_metodo.replace('_', ' ') }}
+              </h4>
+              <p class="description-method">
+                {{ $t('productdetail_opinionesEnvioMsg2') }}
+              </p>
+              <p class="price">
+                {{ $t('cart_precio') }}
+                {{
+                  this.envios.valor
+                    | currency(
+                      dataStore.tienda.codigo_pais,
+                      dataStore.tienda.moneda
+                    )
+                }}
+              </p>
+            </div>
+            <div
+              v-if="this.envios.envio_metodo === 'precio'"
+              class="wrapper-method"
+            >
+              <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
+              <p class="description-method">
+                {{ $t('productdetail_precioTotalCompraMsg') }}
+              </p>
+            </div>
+            <div
+              v-if="this.envios.envio_metodo === 'gratis'"
+              class="wrapper-method"
+            >
+              <h4>{{ $t('productdetail_gratis') }}</h4>
+              <p class="description-method">
+                {{ $t('productdetail_gratisMsg') }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
   </div>
 </template>
 <script>
@@ -308,16 +304,11 @@ export default {
     dataStore: Object,
     data: {},
     envio: {},
+    settingByTemplate13: Array,
   },
-  mounted() {},
   data() {
     return {
-      medioEnvio: '',
-      envioproducto: '',
-      selecttag: 1,
-      focusbtn1: true,
-      focusbtn2: false,
-      focusbtn3: false,
+      activeNames: ['1'],
     }
   },
   computed: {
@@ -340,6 +331,11 @@ export default {
       return this.data.medioEnvio
     },
   },
+  methods: {
+    handleChange(val) {
+      // console.log(val);
+    },
+  },
   filters: {
     capitalize(value) {
       if (value) {
@@ -348,31 +344,12 @@ export default {
       }
     },
   },
-  methods: {
-    selectTag1() {
-      this.selecttag = 1
-      this.focusbtn1 = true
-      this.focusbtn2 = false
-      this.focusbtn3 = false
-    },
-    selectTag2() {
-      this.selecttag = 2
-      this.focusbtn1 = false
-      this.focusbtn2 = true
-      this.focusbtn3 = false
-    },
-    selectTag3() {
-      this.selecttag = 3
-      this.focusbtn1 = false
-      this.focusbtn2 = false
-      this.focusbtn3 = true
-    },
-  },
 }
 </script>
 <style scoped>
 .editor {
   width: 100%;
+  color: tras;
 }
 .editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
   border: none;
@@ -384,56 +361,56 @@ export default {
 }
 .editor >>> .el-tiptap-editor__content h1 {
   font-size: 2em;
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h2 {
   font-size: 1.5em;
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h3 {
   font-size: 1.17em;
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h4 {
   font-size: 1.12em;
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h5 {
   font-size: 0.83em;
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content p {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content span {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content blockquote {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content code {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content ul {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content ol {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content li {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content pre {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content strong {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content em {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content s {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content .image-view__body__image {
   cursor: none;
@@ -442,14 +419,36 @@ export default {
 .editor >>> .el-popper.el-tiptap-image-popper {
   display: none;
 }
-.tab {
-  @apply w-auto flex flex-col justify-center items-center cursor-pointer;
-}
 
 .item-content {
   @apply w-full flex flex-col justify-start items-start pb-4;
 }
 
+.content-opt-tab >>> .el-collapse {
+  border-top: transparent;
+  border-bottom: transparent;
+  @apply w-full;
+}
+
+.content-opt-tab >>> .el-collapse-item__wrap {
+  will-change: height;
+  background-color: transparent;
+  border-bottom: transparent;
+}
+.content-opt-tab >>> .el-collapse-item__header {
+  font-size: 16px;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_text);
+  background-color: transparent;
+  border-bottom: transparent;
+  @apply font-semibold;
+}
+.content-opt-tab >>> .el-collapse-item__header.is-active {
+  border-bottom: none;
+}
+.content-opt-tab >>> .el-collapse-item__arrow {
+  color: var(--border);
+}
 .content_product_description {
   color: var(--color_subtext);
   font-size: 14px;
@@ -500,25 +499,12 @@ img {
   .content-opt-tab {
     @apply w-full flex flex-col justify-center items-center;
   }
-  .content-tab {
-    border-color: var(--border);
-    @apply w-full flex flex-col justify-center items-center mt-6 border p-20;
-  }
-  .head-content {
-    @apply w-full grid grid-cols-1 gap-2 justify-center items-center;
-  }
   .tittle {
     color: var(--color_subtext);
     font-size: 14px;
     background-color: transparent;
     font-family: var(--font-style-1) !important;
     @apply w-full h-40 flex justify-center items-center font-normal uppercase transition-all ease-in duration-0.2;
-  }
-  .show-select-active {
-    background-color: var(--color_gb_tabs);
-  }
-  .show-select-active .tittle {
-    color: var(--color_text_tabs);
   }
 }
 @media (min-width: 425px) {
@@ -534,37 +520,9 @@ img {
   .content-opt-tab {
     @apply flex flex-col justify-start items-start mt-0;
   }
-  .head-content {
-    @apply w-full flex flex-row justify-start items-start mb-0;
-    border-bottom: 1px solid transparent;
-  }
-  .head-content {
-    @apply w-full flex flex-row justify-start items-start mb-0 gap-0;
-  }
-  .tab {
-    @apply w-full flex justify-start items-center;
-  }
-  .content-tab {
-    border-color: var(--border);
-    @apply w-full flex flex-row justify-start items-start mt-0 border transition-all ease-in duration-0.2;
-  }
   .tittle {
     font-size: 14px;
     @apply w-full h-50 text-center justify-center items-center;
-  }
-  .show-select-active {
-    background-color: var(--color_gb_tabs);
-  }
-  .show-select-active .tittle {
-    color: var(--color_text_tabs);
-  }
-  .content-tab {
-    @apply p-40;
-  }
-}
-@screen lg {
-  .head-content {
-    @apply w-6/0;
   }
 }
 </style>

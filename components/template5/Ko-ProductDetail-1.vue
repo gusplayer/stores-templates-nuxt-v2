@@ -354,6 +354,7 @@
           </div>
         </div>
       </div>
+      <!-- Metas -->
       <div itemscope itemtype="http://schema.org/Product">
         <meta itemprop="productID" :content="`${data.detalle.id}`" />
         <meta itemprop="name" :content="`${data.detalle.nombre}`" />
@@ -373,6 +374,30 @@
           />
         </div>
         <meta itemprop="url" :content="`${this.sharing.url}`" />
+      </div>
+      <div>
+        <meta property="product:catalog_id" :content="`${data.detalle.id}`" />
+        <meta property="og:title" :content="`${data.detalle.nombre}`" />
+        <meta property="product:brand" :content="`${data.info.marca}`" />
+        <meta
+          property="og:description"
+          :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
+        />
+        <meta
+          property="og:image"
+          :content="`${data.detalle.foto_cloudinary}`"
+        />
+        <meta property="product:availability" content="in stock" />
+        <meta property="product:condition" content="new" />
+        <meta
+          property="product:price:amount"
+          :content="`${this.salesData.precio}`"
+        />
+        <meta
+          property="product:price:currency"
+          :content="`${dataStore.tienda.moneda}`"
+        />
+        <meta property="og:url" :content="`${this.sharing.url}`" />
       </div>
     </div>
   </div>
@@ -415,75 +440,6 @@ export default {
     }
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
-    }
-  },
-  head() {
-    return {
-      meta: [
-        {
-          hid: 'product:catalog_id',
-          name: 'product:catalog_id',
-          content: this.data && this.data.detalle ? this.data.detalle.id : 'id',
-        },
-        {
-          hid: 'og:title',
-          name: 'og:title',
-          content:
-            this.data && this.data.detalle ? this.data.detalle.nombre : 'title',
-        },
-        {
-          hid: 'product:brand',
-          name: 'product:brand',
-          content: this.data && this.data.info ? this.data.info.marca : 'brand',
-        },
-        {
-          hid: 'og:description',
-          name: 'og:description',
-          content:
-            this.dataStore && this.dataStore.tienda
-              ? `Producto de la tienda ${this.dataStore.tienda.nombre}`
-              : 'description',
-        },
-        {
-          hid: 'og:image',
-          name: 'og:image',
-          content:
-            this.data && this.data.detalle
-              ? this.data.detalle.foto_cloudinary
-              : 'image',
-        },
-        {
-          hid: 'product:availability',
-          name: 'product:availability',
-          content: 'in stock',
-        },
-        {
-          hid: 'product:condition',
-          name: 'product:condition',
-          content: 'new',
-        },
-        {
-          hid: 'product:price:amount',
-          name: 'product:price:amount',
-          content:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : 'price-amount',
-        },
-        {
-          hid: 'product:price:currency',
-          name: 'product:price:currency',
-          content:
-            this.dataStore && this.dataStore.tienda
-              ? this.dataStore.tienda.moneda
-              : 'price-currency',
-        },
-        {
-          hid: 'og:url',
-          name: 'og:url',
-          content: this.sharing && this.sharing.url ? this.sharing.url : 'url',
-        },
-      ],
     }
   },
   data() {

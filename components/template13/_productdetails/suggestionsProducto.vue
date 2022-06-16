@@ -17,7 +17,12 @@
 import KoSwipper from '../_productofavorito/productSlide.vue'
 export default {
   name: 'suggestionsProducto13',
-  props: { category: {}, settingGeneral: Object, cardProduct: Object },
+  props: {
+    category: {},
+    settingGeneral: Object,
+    Object,
+    cardProduct: Object,
+  },
   components: {
     KoSwipper,
   },
@@ -29,7 +34,7 @@ export default {
   display: flex;
   width: 100%;
   /* background-color: var(--background_color_2); */
-  background: #fff;
+  background: transparent;
   flex-direction: column;
   justify-content: center;
   align-items: center;
