@@ -1033,7 +1033,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-products {
-  border-bottom: 0.5px solid var(--border);
+  /* border-bottom: 0.5px solid var(--border); */
   @apply w-full h-full flex flex-col justify-center items-center;
 }
 .content-products-empty {

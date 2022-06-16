@@ -344,12 +344,9 @@
 </template>
 <script>
 import axios from 'axios'
-// import ProductSlide from './_productdetails/productSlide'
 import SelectGroup from './_productdetails/selectGroup'
-// import OptionAcordion from './_productdetails/OptAcordion'
 import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
-// import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
@@ -364,12 +361,9 @@ export default {
     settingByTemplate10: Array,
   },
   components: {
-    // OptionAcordion,
     OptionTab,
     SelectGroup,
     KoSuggesProduct,
-    // ProductSlide,
-    // Zoom,
   },
   mounted() {
     if (
@@ -390,18 +384,6 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
-    // window.addEventListener('scroll', function () {
-    //   var sticky = document.getElementById('sticky')
-    //   if (window.pageYOffset >= 1 && screen.width > 725 && sticky) {
-    //     sticky.style.display = 'flex'
-    //     sticky.style.flexDirection = 'column'
-    //     sticky.style.position = 'fixed'
-    //     sticky.style.top = '160px'
-    //     sticky.style.width = '20%'
-    //     sticky.style.overflow = 'hidden'
-
-    //   }
-    // })
   },
   data() {
     return {

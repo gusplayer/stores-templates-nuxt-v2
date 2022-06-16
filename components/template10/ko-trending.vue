@@ -25,13 +25,13 @@
           <div
             v-for="product in fullProducts.slice(0, 11)"
             :key="product.id"
-            class="swiper-slide"
+            class="swiper-slide h-full"
           >
             <KoproductCard
               :product="product"
               :cardProduct="cardProduct"
               :settingGeneral="settingGeneral"
-              class="gifyload"
+              class="gifyload h-full"
             />
           </div>
         </div>

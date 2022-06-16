@@ -483,7 +483,7 @@ export default {
   },
   mounted() {
     this.idSlug = this.product.id
-    this.prodcutPrice()
+    this.productPrice()
     if (
       this.product.con_variante &&
       this.product.variantes[0].variantes !== '[object Object]'
@@ -627,7 +627,7 @@ export default {
         }
       }
     },
-    prodcutPrice() {
+    productPrice() {
       if (
         this.product.con_variante &&
         this.product.variantes[0].variantes !== '[object Object]'
@@ -637,10 +637,12 @@ export default {
           arrCombinations.length &&
           arrCombinations[0].variantes !== '[object Object]'
         ) {
+          this.productVariants = true
           if (this.product.combinaciones.length > 1) {
-            let arrPrice = this.product.combinaciones.map((products) => {
-              if (products.precio) {
-                return products.precio
+            let arrPrice = []
+            this.product.combinaciones.find((products) => {
+              if (products.precio && products.estado == true) {
+                arrPrice.push(products.precio)
               }
             })
             if (arrPrice) {
