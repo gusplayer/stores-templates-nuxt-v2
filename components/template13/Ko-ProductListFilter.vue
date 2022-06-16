@@ -26,114 +26,90 @@
               {{ $t('header_inicio') }}
             </p>
           </nuxt-link>
-          <div class="empty"></div>
-          <div class="content-input-slide">
-            <button class="item-tittle accordion">
-              <p class="txt-tittles">
-                {{ $t('header_buscar_producto') }}
-              </p>
-            </button>
-            <div class="itemLeft-range-slide panel">
+          <el-collapse v-model="activeNames" @change="handleChange">
+            <el-collapse-item :title="$t('header_buscar_producto')" name="1">
               <input
                 class="input-slide"
                 type="search"
                 v-model="search"
                 :placeholder="$t('header_search')"
               />
-            </div>
-          </div>
-          <div class="empty"></div>
-          <div class="content-category-left">
-            <button class="item-tittle accordion">
-              <p class="txt-tittles">
-                {{ $t('productdetail_categoria') }}
-              </p>
-            </button>
-            <div class="categorys-list panel">
+            </el-collapse-item>
+            <el-collapse-item :title="$t('productdetail_categoria')" name="2">
+              <div class="categorys-list">
+                <div
+                  v-for="(categorys, index) in categorias"
+                  :key="index"
+                  @click="showSubCategory = true"
+                >
+                  <div
+                    @click="
+                      sendCategory(categorys, categorys.id, (ref = false))
+                    "
+                  >
+                    <p
+                      class="txt-categorys"
+                      :class="
+                        categorys.id == indexSelect
+                          ? 'txt-categorys-active'
+                          : ''
+                      "
+                    >
+                      {{ categorys.nombre_categoria_producto }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item
+              :title="$t('home_subcategory')"
+              name="3"
+              v-show="showSubCategory && selectedSubcategories.length"
+            >
               <div
-                v-for="(categorys, index) in categorias"
-                :key="index"
-                @click="showSubCategory = true"
+                class="subcategory-list"
+                v-show="showSubCategory && selectedSubcategories.length"
               >
                 <div
-                  @click="sendCategory(categorys, categorys.id, (ref = false))"
+                  v-for="(subcategorys, index) in selectedSubcategories"
+                  :key="index"
                 >
-                  <p
-                    class="txt-categorys"
-                    :class="
-                      categorys.id == indexSelect ? 'txt-categorys-active' : ''
-                    "
-                  >
-                    {{ categorys.nombre_categoria_producto }}
-                  </p>
+                  <div @click="Sendsubcategory(subcategorys.id)">
+                    <p
+                      class="txt-categorys"
+                      :class="
+                        subcategorys.id == indexSelect2
+                          ? 'txt-categorys-active'
+                          : ''
+                      "
+                    >
+                      {{ subcategorys.nombre_subcategoria }}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="empty"></div>
-            <button
-              class="item-tittle accordion"
-              v-show="showSubCategory && selectedSubcategories.length"
-            >
-              <p class="txt-tittles">
-                {{ $t('home_subcategory') }}
-              </p>
-            </button>
-            <div
-              class="subcategory-list panel"
-              v-show="showSubCategory && selectedSubcategories.length"
-            >
-              <div
-                v-for="(subcategorys, index) in selectedSubcategories"
-                :key="index"
-              >
-                <div @click="Sendsubcategory(subcategorys.id)">
-                  <p
-                    class="txt-categorys"
-                    :class="
-                      subcategorys.id == indexSelect2
-                        ? 'txt-categorys-active'
-                        : ''
-                    "
-                  >
-                    {{ subcategorys.nombre_subcategoria }}
-                  </p>
-                </div>
+            </el-collapse-item>
+            <el-collapse-item :title="$t('home_fenvio')" name="4">
+              <div class="categorys-list">
+                <button class="txt-Filter" @click="getProductsShippingFree()">
+                  {{ $t('home_gratis') }}
+                </button>
+                <button class="txt-Filter" @click="getProductsNoShippingFree()">
+                  {{ $t('home_Singratis') }}
+                </button>
               </div>
-            </div>
-            <!-- //Filtro precio} -->
-            <!-- <button class="item-tittle accordion">
-              <p class="txt-tittles">
-                {{ $t('home_fprecio') }}
-              </p>
-            </button>
-            <div class="categorys-list panel">
-              <button class="txt-Filter" @click="getProductsHigherNumber()">
-                {{ $t('home_fpreciom') }}
-              </button>
-              <button class="txt-Filter" @click="getProductsSmallerNumber()">
-                {{ $t('home_fprecioM') }}
-              </button>
-            </div>
-            <div class="empty"></div> -->
-            <!-- //Filtro por envio} -->
-            <button class="item-tittle accordion">
-              <p class="txt-tittles">
-                {{ $t('home_fenvio') }}
-              </p>
-            </button>
-            <div class="categorys-list panel">
-              <button class="txt-Filter" @click="getProductsShippingFree()">
-                {{ $t('home_gratis') }}
-              </button>
-              <button class="txt-Filter" @click="getProductsNoShippingFree()">
-                {{ $t('home_Singratis') }}
-              </button>
-            </div>
-          </div>
-          <div
-            class="empty"
-            v-if="showSubCategory && selectedSubcategories.length"
-          ></div>
+            </el-collapse-item>
+            <el-collapse-item :title="$t('home_fprecio')" name="5">
+              <div class="categorys-list">
+                <button class="txt-Filter" @click="getProductsHigherNumber()">
+                  {{ $t('home_fpreciom') }}
+                </button>
+                <button class="txt-Filter" @click="getProductsSmallerNumber()">
+                  {{ $t('home_fprecioM') }}
+                </button>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
         </div>
         <div class="content-right">
           <nuxt-link class="content-home hidd" to="/productos">
@@ -147,9 +123,15 @@
               <p class="btn-tittle-shop" v-if="!this.nameCategoryHeader">
                 {{ $t('header_productos') }}
               </p>
-              <p class="btn-tittle-shop" v-else>
-                {{ this.nameCategoryHeader }}
-              </p>
+              <div class="flex flex-col justify-start" v-else>
+                <p class="btn-tittle-shop">
+                  {{ this.nameCategoryHeader }}
+                </p>
+                <!-- v-if="selectSubcategory" -->
+                <p class=".btn-tittle-shop text-12">
+                  {{ this.nameSubCategory }}
+                </p>
+              </div>
             </div>
           </div>
           <div class="producto-items-content" id="section">
@@ -298,6 +280,7 @@ export default {
       indexSelect2: '',
       numVistas: 15,
       filterPrice: [],
+      activeNames: ['1', '2', '4', '5'],
     }
   },
   computed: {
@@ -374,24 +357,6 @@ export default {
         data: '',
       })
       this.currentPage = 1
-    },
-    filterProductPrice() {
-      let result = {}
-      if (this.filterProduct && this.value) {
-        result = this.filterProduct.map((product) => {
-          if (product.precio >= 0 && product.precio <= this.value) {
-            return product
-          }
-        })
-        this.filterPrice = []
-        if (result) {
-          result.map((element) => {
-            if (element) {
-              this.filterPrice.push(element)
-            }
-          })
-        }
-      }
     },
     back() {
       this.clear()
@@ -551,6 +516,9 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
+    handleChange(val) {
+      // console.log(val);
+    },
   },
   watch: {
     fullProducts(value) {
@@ -623,22 +591,43 @@ export default {
 .content-banner-shop-r {
   @apply w-full flex flex-col justify-start items-start;
 }
-.itemLeft-range-slide {
+/* .itemLeft-range-slide {
   @apply w-full flex justify-center items-center mb-20;
-}
-.content-input-slide {
+} */
+/* .content-input-slide {
   @apply w-full flex flex-col justify-center items-center;
+} */
+.content-left >>> .el-collapse {
+  border-top: 1px solid var(--color_icon);
+  border-bottom: 1px solid var(--color_icon);
+  @apply w-full;
 }
-.input-slide {
-  font-family: var(--font-style-1) !important;
-  @apply w-full h-30 cursor-pointer border-none;
-  /* border-bottom: 2px solid #2c2930; */
+
+.content-left >>> .el-collapse-item__wrap {
+  will-change: height;
+  background-color: transparent;
+  border-bottom: 1px solid var(--color_icon);
 }
-.txt-tittles {
-  color: var(--color_text);
+.content-left >>> .el-collapse-item__header {
   font-size: 15px;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex justify-start items-center font-semibold tracking-0 cursor-pointer uppercase transition-all ease-in duration-0.2;
+  color: var(--color_text);
+  background-color: transparent;
+  border-bottom: 1px solid var(--color_icon);
+  @apply font-semibold;
+}
+.content-left >>> .el-collapse-item__header.is-active {
+  border-bottom: none;
+}
+
+.content-left >>> .el-collapse-item__arrow {
+  color: var(--color_icon);
+}
+.input-slide {
+  font-size: 15px;
+  color: var(--color_subtext);
+  font-family: var(--font-style-1) !important;
+  @apply w-full h-30 cursor-pointer border-none;
 }
 .value-range-slide {
   @apply w-full flex flex-row justify-start items-center;
@@ -660,14 +649,6 @@ export default {
   font-size: 14px;
   font-family: var(--font-style-1) !important;
   @apply flex flex-row justify-start items-center font-semibold transition-all ease-in duration-0.2 cursor-default;
-}
-.item-tittle {
-  @apply w-full flex justify-start items-center;
-}
-.empty {
-  margin-bottom: 30px;
-  border-color: var(--color_icon);
-  @apply w-full mb-30 border-b;
 }
 .btn-slider {
   @apply w-3/0 flex justify-center items-center;
@@ -737,52 +718,10 @@ export default {
   @apply w-full max-w-full flex justify-between items-center flex-wrap mb-20;
 }
 .categorys-list {
-  max-height: 300px;
-  @apply w-full grid grid-cols-1 gap-4 justify-start items-center overflow-auto;
+  @apply w-full grid grid-cols-1 gap-4 justify-start items-center;
 }
 .subcategory-list {
-  max-height: 300px;
-  @apply w-full grid grid-cols-1 gap-4 justify-start items-center overflow-auto;
-}
-.categorys-list::-webkit-scrollbar {
-  @apply w-3;
-}
-.categorys-list::-webkit-scrollbar-thumb {
-  background: #a3a3a3;
-  border-radius: 4px;
-}
-.categorys-list::-webkit-scrollbar-thumb:active {
-  background-color: #777777;
-}
-.categorys-list::-webkit-scrollbar-thumb:hover {
-  background: #686868;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.401);
-}
-.container::-webkit-scrollbar-track {
-  background: #323232;
-  border-radius: 4px;
-}
-.subcategory-list::-webkit-scrollbar {
-  @apply w-3;
-}
-.subcategory-list::-webkit-scrollbar-thumb {
-  background: #a3a3a3;
-  border-radius: 4px;
-}
-.subcategory-list::-webkit-scrollbar-thumb:active {
-  background-color: #777777;
-}
-.subcategory-list::-webkit-scrollbar-thumb:hover {
-  background: #686868;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.401);
-}
-.container::-webkit-scrollbar-track {
-  background: #323232;
-  border-radius: 4px;
-}
-.container::-webkit-scrollbar-track:hover,
-.container::-webkit-scrollbar-track:active {
-  background: #b52727;
+  @apply w-full grid grid-cols-1 gap-4 justify-start items-center transition-all ease-in duration-0.2;
 }
 .content-category-left {
   @apply w-full flex flex-col justify-start items-center;
@@ -932,57 +871,10 @@ export default {
   background-color: var(--pagination_color);
   color: #fff;
 }
-.show-number-items,
-.product-stock,
-.separator-breadCrumbs {
+.product-stock {
   cursor: default;
 }
-.crumb {
-  @apply w-full flex flex-row justify-center items-center;
-}
-.separatorCrumb {
-  font-size: 9px;
-  color: var(--breadCrumbs);
-  font-family: var(--font-style-1) !important;
-  @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
-}
-.txt-crumb {
-  font-size: 15px;
-  color: var(--breadCrumbs);
-  font-family: var(--font-style-1) !important;
-  @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
-}
-.s1:hover {
-  color: #000;
-  transition: all 0.25s ease;
-}
-.s2:hover {
-  color: #000;
-  transition: all 0.25s ease;
-}
-.accordion {
-  font-size: 20px;
-  transition: 0.4s;
-  @apply w-full mb-0 border-none text-left outline-none cursor-pointer;
-}
-.accordion:after {
-  content: '\002B';
-  color: var(--color_icon);
-  font-weight: bold;
-  float: right;
-}
-.active:after {
-  content: '\2212';
-}
-.panel {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 0 18px;
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-out;
-}
+
 .product-list {
   @apply w-full;
 }
@@ -1061,7 +953,7 @@ export default {
     @apply w-full;
   }
   .product-conten-items {
-    @apply grid grid-cols-3 gap-3;
+    @apply grid grid-cols-2 gap-8;
   }
   .content-items-categorias-text {
     @apply justify-start items-center;
@@ -1069,9 +961,7 @@ export default {
   .items-end {
     @apply flex pb-20;
   }
-  .show-number-items {
-    @apply w-full flex justify-end items-center;
-  }
+
   .show-view-per-list {
     @apply w-auto grid grid-cols-2 gap-0 justify-center items-center;
   }
@@ -1084,7 +974,8 @@ export default {
   }
   .content-left {
     width: 300px;
-    @apply mr-30 flex flex-col justify-between items-start;
+    top: 162px;
+    @apply mr-30 flex flex-col justify-between items-start sticky;
   }
   .content-banner-shop {
     @apply hidden;
@@ -1105,6 +996,9 @@ export default {
   }
   .content-left {
     width: 400px;
+  }
+  .product-conten-items {
+    @apply grid grid-cols-3 gap-2;
   }
 }
 </style>

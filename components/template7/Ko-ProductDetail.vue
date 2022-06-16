@@ -348,7 +348,6 @@
                   <button class="quantity_add" v-on:click="addQuantity()">
                     <mas-icon class="icon" />
                   </button>
-
                   <!-- Anuncio ult unidad -->
                   <!-- <div
                     class="container-alerta"

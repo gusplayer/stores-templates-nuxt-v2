@@ -47,16 +47,12 @@ export const getters = {
         }
       })
     } else if (state.type === 'higherNumber') {
-      return state.fullProducts.filter((product) => {
-        if (product.envio_gratis === 0) {
-          return product
-        }
+      return state.fullProducts.sort(function (prev, next) {
+        return next.precio - prev.precio
       })
     } else if (state.type === 'smallerNumber') {
-      return state.fullProducts.filter((product) => {
-        if (product.envio_gratis === 0) {
-          return product
-        }
+      return state.fullProducts.sort(function (prev, next) {
+        return prev.precio - next.precio
       })
     }
     return state.fullProducts.sort(function (prev, next) {

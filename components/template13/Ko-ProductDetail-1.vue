@@ -9,7 +9,7 @@
           this.settingByTemplate13[0].setting13General &&
           this.settingByTemplate13[0].setting13General.fount_1
             ? this.settingByTemplate13[0].setting13General.fount_1
-            : 'Roboto',
+            : 'Poppins',
       },
     ]"
   >
@@ -35,8 +35,8 @@
                   </div>
                   <div
                     class="swiper-slide h-full"
-                    v-for="(foto, itemsfoto) in data.fotos"
-                    :key="itemsfoto"
+                    v-for="(foto, itemsFoto) in data.fotos"
+                    :key="itemsFoto"
                   >
                     <div class="photos_selected">
                       <img
@@ -108,7 +108,6 @@
             </div>
           </div>
         </div>
-
         <div class="right">
           <div class="content-items-right">
             <div class="content-name">
@@ -160,7 +159,7 @@
                 </p>
               </div>
             </div>
-            <div class="empty"></div>
+            <!-- <div class="empty"></div> -->
             <div class="content-stock">
               <p class="stock-text-1">{{ $t('productdetail_stock') }}:</p>
               <p class="stock-text-2">{{ salesData.unidades }}</p>
@@ -169,7 +168,7 @@
               <p class="stock-text-1">{{ $t('productdetail_informacion') }}:</p>
               <p class="stock-text-2">{{ data.info.descripcion_corta }}</p>
             </div>
-            <div class="empty"></div>
+            <!-- <div class="empty"></div> -->
             <div
               class="content-variant"
               v-if="this.data.detalle.con_variante > 0"
@@ -195,7 +194,7 @@
                 </SelectGroup>
               </div>
             </div>
-            <div class="w-full flex flex-row items-center">
+            <div class="w-full flex flex-row items-center my-8">
               <p class="text-variant" style="margin-right: 10px">
                 {{ $t('productdetail_compartir') }}
               </p>
@@ -213,22 +212,39 @@
             </div>
             <div class="content-direction-btns">
               <div
-                class="content-quantity-boxes"
+                class="content-quantity-boxes relative"
                 :class="{ disabled: !salesData.estado }"
               >
-                <div class="box-quantity">
-                  <p class="txt-quantity">{{ quantityValue }}</p>
-                </div>
-                <div class="box-quantity-btns">
-                  <div class="btn-quantity btn1" v-on:click="addQuantity()">
-                    <FlechaUp-icon class="text-icon" />
-                  </div>
-                  <div class="btn-quantity btn2" v-on:click="removeQuantity()">
-                    <Flechadown-icon class="text-icon" />
-                  </div>
+                <button
+                  class="quantity_items quantity_remove"
+                  v-on:click="removeQuantity()"
+                >
+                  <menos-icon class="icon" />
+                </button>
+                <input
+                  name="quantityValue"
+                  class="quantity_items quantity_value"
+                  type="text"
+                  placeholder="#"
+                  v-model="quantityValue"
+                  id="InputQuantityValue"
+                  onkeypress="return (event.charCode>47 && event.charCode<58)"
+                />
+                <button
+                  class="quantity_items quantity_add"
+                  v-on:click="addQuantity()"
+                >
+                  <mas-icon class="icon" />
+                </button>
+                <!-- Anuncio ult unidad -->
+                <div
+                  class="container-alerta"
+                  v-if="this.maxQuantityValue == this.quantityValue"
+                >
+                  <span class="alerta"> {{ $t('cart_ultimaUnidad') }}</span>
                 </div>
               </div>
-              <div class="content-addCart">
+              <div class="content-addCart mt-10">
                 <button
                   ref="colorBtn"
                   class="btn"
@@ -304,10 +320,11 @@
           :dataStore="dataStore"
           :data="data"
           :envio="envio"
+          :settingByTemplate13="settingByTemplate13"
         ></OptionTab>
       </div>
-      <div class="section-suggesProduct">
-        <KoSuggesProduct
+      <div class="section-suggestProduct">
+        <KoSuggestProduct
           :category="this.category.slice(0, 12)"
           :cardProduct="settingByTemplate13[0].cardProduct"
           :settingGeneral="settingByTemplate13[0].setting13General"
@@ -365,7 +382,7 @@ import axios from 'axios'
 import ProductSlide from './_productdetails/productSlide'
 import SelectGroup from './_productdetails/selectGroup'
 import OptionTab from './_productdetails/OptTab'
-import KoSuggesProduct from './_productdetails/suggestionsProducto'
+import KoSuggestProduct from './_productdetails/suggestionsProducto'
 import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
@@ -383,7 +400,7 @@ export default {
   components: {
     OptionTab,
     SelectGroup,
-    KoSuggesProduct,
+    KoSuggestProduct,
     ProductSlide,
     Zoom,
   },
@@ -1013,29 +1030,11 @@ export default {
 .quantity {
   @apply flex flex-row justify-center items-center;
 }
-.section-suggesProduct {
+.section-suggestProduct {
   @apply w-full my-40;
 }
 .content-quantity-boxes {
-  @apply w-full flex flex-row justify-start items-center;
-}
-.content-quantity-boxes {
-  @apply w-full flex justify-start items-center my-30;
-}
-.box-quantity {
-  background-color: transparent;
-  border: 1px solid var(--border);
-  @apply w-75 h-50 flex text-center justify-center items-center;
-}
-.box-quantity-btns {
-  background-color: var(--color_background_btn);
-  border: 1px solid var(--color_background_btn);
-  @apply w-25 h-50 flex flex-col text-center justify-center items-center;
-}
-.btn-quantity {
-  background-color: var(--color_background_btn);
-  border-color: var(--color_background_btn);
-  @apply w-25 h-25 flex justify-center items-center border-t border-r;
+  @apply w-full flex flex-row justify-start items-center my-8;
 }
 
 .card-discont {
@@ -1051,6 +1050,62 @@ export default {
   font-weight: bold;
   color: var(--color_subtext);
   text-decoration: line-through;
+}
+
+.quantity {
+  max-width: 240px;
+  @apply flex flex-row box-border relative;
+}
+.text-quantity {
+  font-size: 14px;
+  font-weight: bold;
+  /* color: var(--color_subtext); */
+  color: var(--color_description);
+  margin-right: 15px;
+  align-self: center;
+}
+.quantity_items {
+  border: 2px solid var(--border);
+  width: 79px;
+  height: 52px;
+  background: transparent;
+  text-align: center;
+  font-size: 16px;
+}
+.quantity_remove {
+  border-top-left-radius: var(--radius_btn);
+  border-bottom-left-radius: var(--radius_btn);
+}
+.quantity_value {
+  color: var(--color_subtext);
+  border-style: solid none solid none;
+}
+.quantity_add {
+  border-top-right-radius: var(--radius_btn);
+  border-bottom-right-radius: var(--radius_btn);
+}
+.icon {
+  color: var(--color_subtext);
+}
+.quantity_add:hover,
+.quantity_remove:hover,
+.icon:hover {
+  color: var(--hover_text);
+}
+.container-alerta {
+  margin-bottom: 90px;
+  margin-left: 105px;
+  background-color: rgb(250, 232, 75);
+  border: 1px solid rgb(230, 213, 66);
+  border-radius: var(--radius_btn);
+  font-size: 14px;
+  width: 130px;
+  @apply absolute text-center text-black transition-all ease-in duration-0.2;
+}
+.alerta {
+  text-align: center;
+  padding: 5px 5px;
+  text-transform: capitalize;
 }
 @screen sm {
   .product-content {
@@ -1071,7 +1126,7 @@ export default {
     @apply flex;
   }
   .tab {
-    @apply w-9/0 flex mt-40;
+    @apply w-9/0 flex mt-20;
   }
   .content-options {
     @apply w-full flex flex-col justify-start items-center;
@@ -1080,12 +1135,14 @@ export default {
     color: var(--color_text_btn);
     background-color: var(--color_background_btn);
     transition: all 0.15s ease-in;
+    border-radius: var(--radius_btn);
     @apply w-full h-54 flex flex-row justify-center items-center;
   }
   .btn-disabled {
     color: var(--color_text_btn);
     background-color: var(--color_background_btn);
     transition: all 0.15s ease-in;
+    border-radius: var(--radius_btn);
     @apply w-full h-54 flex flex-row justify-center items-center;
   }
   .btn:hover .text-addCart {
@@ -1119,20 +1176,6 @@ export default {
     font-family: var(--font-style-1) !important;
     @apply capitalize font-semibold ml-30;
   }
-  .text-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 34px;
-    cursor: pointer;
-    color: var(--color_text_btn);
-  }
-  .text-quantity_value {
-    padding: 0 35px;
-    border: none;
-    font-size: 21px;
-    @apply w-full flex justify-center items-center text-center font-semibold;
-  }
   .text-addCart {
     font-family: var(--font-style-1) !important;
     color: var(--color_text_btn);
@@ -1159,17 +1202,17 @@ export default {
     @apply font-semibold;
   }
 
-  .section-suggesProduct {
+  .section-suggestProduct {
     @apply w-9/0;
   }
   .content-items-right {
     @apply w-full flex flex-col justify-center items-center;
   }
-  .empty {
+  /* .empty {
     background-color: var(--border);
     max-width: 1200px;
     @apply w-full h-1;
-  }
+  } */
   .content-stock {
     @apply w-full flex flex-row justify-start items-center my-8;
   }
@@ -1204,12 +1247,12 @@ export default {
     height: 400px;
   }
   .tab {
-    @apply w-9/5;
+    @apply w-9/5 mt-10;
   }
   .product-content {
     @apply w-9/5 grid grid-cols-2 gap-4 justify-start items-start;
   }
-  .section-suggesProduct {
+  .section-suggestProduct {
     @apply w-9/5;
   }
 }
@@ -1224,9 +1267,6 @@ export default {
   }
   .content-options {
     @apply hidden;
-  }
-  .tab {
-    @apply flex;
   }
   .content-direction-btns {
     @apply flex flex-col;
@@ -1257,7 +1297,7 @@ export default {
 @media (min-width: 1200px) {
   .product-content,
   .tab,
-  .section-suggesProduct {
+  .section-suggestProduct {
     max-width: 1200px;
   }
 }
