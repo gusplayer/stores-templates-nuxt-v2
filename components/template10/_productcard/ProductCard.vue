@@ -1,6 +1,6 @@
 <template>
   <div
-    class="producto h-full"
+    class="producto"
     :style="[
       cardProduct,
       settingGeneral,
@@ -165,15 +165,12 @@
         </div>
       </nuxt-link>
       <div class="precio">
-        <div class="content-text-price" v-if="this.product.precio">
+        <div class="content-text-price">
           <div
             class="content-price"
-            v-if="this.estadoCart == true && this.minPrice != this.maxPrice"
+            v-if="this.estadoCart == true && this.minPrice && this.maxPrice"
           >
-            <div
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <div class="text-price">
               {{
                 this.minPrice
                   | currency(
@@ -183,10 +180,7 @@
               }}
             </div>
             <p class="separator-price">-</p>
-            <div
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <div class="text-price">
               {{
                 this.maxPrice
                   | currency(
@@ -301,7 +295,7 @@ export default {
   },
   mounted() {
     this.idSlug = this.product.id
-    this.prodcutPrice()
+    this.productPrice()
     if (
       this.product.con_variante &&
       this.product.variantes[0].variantes !== '[object Object]'
@@ -445,7 +439,7 @@ export default {
         }
       }
     },
-    prodcutPrice() {
+    productPrice() {
       if (
         this.product.con_variante &&
         this.product.variantes[0].variantes !== '[object Object]'
@@ -455,10 +449,12 @@ export default {
           arrCombinations.length &&
           arrCombinations[0].variantes !== '[object Object]'
         ) {
+          this.productVariants = true
           if (this.product.combinaciones.length > 1) {
-            let arrPrice = this.product.combinaciones.map((products) => {
-              if (products.precio) {
-                return products.precio
+            let arrPrice = []
+            this.product.combinaciones.find((products) => {
+              if (products.precio && products.estado == true) {
+                arrPrice.push(products.precio)
               }
             })
             if (arrPrice) {
@@ -493,13 +489,13 @@ export default {
 }
 .producto {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-start items-center cursor-pointer;
+  @apply h-full w-full flex flex-col justify-start items-center cursor-pointer;
 }
 .datos-producto {
-  @apply w-full h-full flex flex-col justify-between items-center my-6  cursor-default;
+  @apply w-full h-full flex flex-col justify-between items-center my-6 mx-10 cursor-default;
 }
 .container {
-  @apply relative max-w-full;
+  @apply relative max-w-full h-full;
 }
 .image {
   @apply w-full h-auto;
@@ -534,7 +530,9 @@ export default {
   font-weight: var(--fontWeighTitle);
   font-size: var(--fontSizeTitle);
   /* font: inherit; */
-  @apply pt-10 transition-all ease-out duration-0.2;
+  min-height: 58px;
+  height: 58px;
+  @apply pt-10 transition-all ease-out duration-0.2 text-center;
 }
 .card-title:hover {
   color: var(--hover_text);
