@@ -6,29 +6,29 @@ import {
   Input,
   Carousel,
   CarouselItem,
-  Checkbox,
-  CheckboxButton,
-  CheckboxGroup,
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Select,
-  Option,
-  Button,
-  Tooltip,
-  Alert,
-  Row,
-  Col,
-  ColorPicker,
   Loading,
   Message,
   Tag,
-  Steps,
-  Step,
   Collapse,
   CollapseItem,
   Skeleton,
   SkeletonItem,
+  // Select,
+  // Option,
+  // Button,
+  // Tooltip,
+  // Alert,
+  // Row,
+  // Col,
+  // ColorPicker,
+  // Checkbox,
+  // CheckboxButton,
+  // CheckboxGroup,
+  // Steps,
+  // Step,
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/es'
 import locale from 'element-ui/lib/locale'
@@ -36,32 +36,31 @@ import locale from 'element-ui/lib/locale'
 Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Drawer)
+Vue.use(Input)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
-Vue.use(Input)
-Vue.use(Checkbox)
-Vue.use(CheckboxButton)
-Vue.use(CheckboxGroup)
-Vue.use(Select)
-Vue.use(Option)
-Vue.use(Button)
-Vue.use(Tooltip)
-Vue.use(Alert)
-Vue.use(Row)
-Vue.use(Col)
-Vue.use(ColorPicker)
-Vue.use(Tag)
-Vue.use(Carousel)
-Vue.use(CarouselItem)
-Vue.use(Skeleton)
-Vue.use(SkeletonItem)
 
-locale.use(lang)
 Vue.use(Loading.directive)
-
 Vue.prototype.$message = Message
-Vue.use(Steps)
-Vue.use(Step)
+locale.use(lang)
+Vue.use(Tag)
 Vue.use(Collapse)
 Vue.use(CollapseItem)
+Vue.use(Skeleton)
+Vue.use(SkeletonItem)
+// Vue.use(Checkbox)
+// Vue.use(CheckboxButton)
+// Vue.use(CheckboxGroup)
+// Vue.use(Select)
+// Vue.use(Option)
+// Vue.use(Button)
+// Vue.use(Tooltip)
+// Vue.use(Alert)
+// Vue.use(Row)
+// Vue.use(Col)
+// Vue.use(ColorPicker)
+// Vue.use(Steps)
+// Vue.use(Step)

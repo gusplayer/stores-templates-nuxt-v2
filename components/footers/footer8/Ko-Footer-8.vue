@@ -1,14 +1,22 @@
 <template>
-  <div class="wrapper-footer" ref="background" :style="settingByTemplate">
-    <div
-      :style="{
-        '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
+  <div
+    class="wrapper-footer"
+    ref="background"
+    :style="[
+      settingByTemplate13[0].setting13Footer,
+      settingByTemplate13[0].setting13General,
+      {
+        '--font-style-1':
+          this.settingByTemplate13 &&
+          this.settingByTemplate13[0].setting13General &&
+          this.settingByTemplate13[0].setting13General.fount_1
+            ? this.settingByTemplate13[0].setting13General.fount_1
             : 'Roboto',
-      }"
-      class="contenedor"
-    >
+      },
+    ]"
+    v-if="settingByTemplate13"
+  >
+    <div class="contenedor">
       <div class="content-items-iconos">
         <div
           v-for="(item, index) in links"
@@ -39,15 +47,7 @@
         </div>
       </div>
     </div>
-    <div
-      :style="{
-        '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
-            : 'Roboto',
-      }"
-      class="under-footer"
-    >
+    <div class="under-footer">
       <button
         class="contenedor-term-con"
         v-if="dataStore.politicas"
@@ -55,12 +55,26 @@
       >
         <p>{{ $t('footer_politicasyterminos') }}</p>
       </button>
-      <div class="separator"></div>
-      <p v-if="this.showLogo == true">
+      <div
+        class="separator"
+        v-if="
+          settingByTemplate13 &&
+          settingByTemplate13[0].setting13Footer.watermark == true
+        "
+      />
+      <p
+        v-if="
+          settingByTemplate13 &&
+          settingByTemplate13[0].setting13Footer.watermark == true
+        "
+      >
         {{ $t('footer_desarrollado') }}
       </p>
       <a
-        v-if="this.showLogo == true"
+        v-if="
+          settingByTemplate13 &&
+          settingByTemplate13[0].setting13Footer.watermark == true
+        "
         href="https://komercia.co/"
         target="_blank"
         rel="noreferrer noopener"
@@ -82,27 +96,8 @@
           alt="Logo Img"
         />
       </a>
-      <nuxt-link
-        to="/"
-        class="wrapper-logo-tablada"
-        v-if="this.showLogo == false"
-      >
-        <img
-          :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
-          class="logo-tablada"
-          alt="Logo Img"
-        />
-      </nuxt-link>
     </div>
-    <div
-      :style="{
-        '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
-            : 'Roboto',
-      }"
-      v-if="showModal"
-    >
+    <div v-if="showModal">
       <div class="modal" v-if="dataStore.politicas">
         <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
       </div>
@@ -120,26 +115,18 @@ export default {
   },
   props: {
     dataStore: Object,
-    settingByTemplate: Object,
+    settingByTemplate13: Array,
   },
   mounted() {
     if (
-      this.settingByTemplate &&
-      this.settingByTemplate['--background_color_1']
+      this.settingByTemplate13 &&
+      this.settingByTemplate13[0].setting13Footer
     ) {
       this.setLogo()
-    }
-    if (
-      this.dataStore.tienda.id_tienda == 5574 ||
-      this.dataStore.tienda.id_tienda == 5347 ||
-      this.dataStore.tienda.id_tienda == 6369
-    ) {
-      this.showLogo = false
     }
   },
   data() {
     return {
-      showLogo: true,
       logo: true,
       secciones: [
         {
@@ -225,9 +212,13 @@ export default {
       this.links[3].link = this.dataStore.tienda.red_youtube
       this.links[4].link = this.dataStore.tienda.red_tiktok
     },
-    settingByTemplate(value) {
-      if (value['--background_color_1']) {
-        let color = value['--background_color_1']
+    settingByTemplate13() {
+      if (
+        this.settingByTemplate13 &&
+        this.settingByTemplate13[0].setting13Footer
+      ) {
+        let color =
+          this.settingByTemplate13[0].setting13Footer['--background_color_1']
         let colorArray = color.split(',')
         let colorInt = parseInt(colorArray[2])
         if (colorInt > 50) {
@@ -291,7 +282,7 @@ export default {
 }
 .icon {
   margin-right: 10px;
-  font-size: 30px;
+  font-size: var(--with_logo);
   color: var(--color_icon);
   fill: var(--color_icon);
 }
@@ -347,8 +338,8 @@ export default {
   width: 100%;
   max-width: 400px;
   opacity: 0.5;
-  border: solid 1px var(--color_icon);
-  background: var(--color_icon);
+  border: solid 1px var(--color_border);
+  background: var(--color_border);
   margin-bottom: 10px;
 }
 .logo2 {

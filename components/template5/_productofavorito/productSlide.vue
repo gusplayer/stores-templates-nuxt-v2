@@ -2,7 +2,7 @@
   <div
     v-swiper:mySwiper="swiperOption"
     ref="mySwiper"
-    style="position: relative;"
+    style="position: relative"
   >
     <div class="swiper-wrapper">
       <div

@@ -1,35 +1,46 @@
 <template>
-  <div class="description">
-    <div class="left" v-if="!activeClass">
-      <h3 class="text-desc">
-        {{ $t('productdetail_description') }}
-      </h3>
-      <div class="editor" v-if="data.info.descripcion">
-        <el-tiptap
-          :readonly="true"
-          v-model="data.info.descripcion"
-          :extensions="extensions"
-          :spellcheck="false"
-          :charCounterCount="false"
-          :tooltip="true"
-          :showMenubar="false"
-          :bubble="false"
-        />
+  <div class="content-opt-tab">
+    <div class="head-content">
+      <div
+        class="tab"
+        @click="selectTag1"
+        :class="selecttag == 1 ? 'show-select-active' : ''"
+      >
+        <p class="tittle">{{ $t('productdetail_description') }}</p>
       </div>
-      <!-- <div class="wrapper-comments">
-        <KoComments :dataStore="dataStore" />
-      </div> -->
+      <div
+        class="tab"
+        @click="selectTag2"
+        :class="selecttag == 2 ? 'show-select-active' : ''"
+      >
+        <p class="tittle">{{ $t('productdetail_opcionesPago') }}</p>
+      </div>
+      <div
+        class="tab"
+        @click="selectTag3"
+        :class="selecttag == 3 ? 'show-select-active' : ''"
+      >
+        <p class="tittle">{{ $t('productdetail_opinionesEnvio') }}</p>
+      </div>
     </div>
-    <div class="left-empty" v-else></div>
-    <div class="right">
-      <div class="payments section">
-        <div class="content">
-          <h3 class="title-section">{{ $t('productdetail_opcionesPago') }}</h3>
+
+    <div class="content-tab">
+      <div class="editor" v-if="focusbtn1">
+        <div v-if="data.info.descripcion">
+          <el-tiptap
+            v-model="data.info.descripcion"
+            :extensions="extensions"
+            :spellcheck="false"
+            :readonly="true"
+            :charCounterCount="false"
+            :tooltip="false"
+            :showMenubar="false"
+            :bubble="false"
+          />
         </div>
-        <p>
-          {{ $t('productdetail_opcionesPagoMsg') }}
-        </p>
-        <ul style="list-style: none">
+      </div>
+      <div class="item-content opcpago" v-if="focusbtn2">
+        <ul>
           <li v-if="mediospago.consignacion == 1">
             <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
             <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
@@ -226,85 +237,87 @@
           </li>
         </ul>
       </div>
-      <div class="line"></div>
-      <div class="deliverys section" v-if="this.envios.envio_metodo">
-        <div class="content">
-          <h3 class="title-section">
-            {{ $t('productdetail_opinionesEnvio') }}
-          </h3>
-        </div>
-        <div
-          v-if="this.envios.envio_metodo === 'precio_ciudad'"
-          class="wrapper-method"
-        >
-          <h4 class="capitalize">
-            • {{ this.envios.envio_metodo.replace('_', ' por ') }}
-          </h4>
-          <p class="description-method">
-            {{ $t('productdetail_opinionesEnvioMsg1') }}
-          </p>
-        </div>
-        <div
-          v-if="this.envios.envio_metodo === 'tarifa_plana'"
-          class="wrapper-method"
-        >
-          <h4 class="capitalize">
-            {{ this.envios.envio_metodo.replace('_', ' ') }}
-          </h4>
-          <p class="description-method">
-            {{ $t('productdetail_opinionesEnvioMsg2') }}
-          </p>
-          <p class="price">
-            {{ $t('cart_precio') }}
-            {{
-              this.envios.valor
-                | currency(
-                  dataStore.tienda.codigo_pais,
-                  dataStore.tienda.moneda
-                )
-            }}
-          </p>
-        </div>
-        <div
-          v-if="this.envios.envio_metodo === 'precio'"
-          class="wrapper-method"
-        >
-          <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
-          <p class="description-method">
-            {{ $t('productdetail_precioTotalCompraMsg') }}
-          </p>
-        </div>
-        <div
-          v-if="this.envios.envio_metodo === 'gratis'"
-          class="wrapper-method"
-        >
-          <h4>{{ $t('productdetail_gratis') }}</h4>
-          <p class="description-method">{{ $t('productdetail_gratisMsg') }}</p>
+      <div class="item-content opcenvio" v-if="focusbtn3">
+        <div class="deliverys section" v-if="this.envios.envio_metodo">
+          <div class="content">
+            <h3 class="title-section">
+              {{ $t('productdetail_opinionesEnvio') }}
+            </h3>
+          </div>
+          <div
+            v-if="this.envios.envio_metodo === 'precio_ciudad'"
+            class="wrapper-method"
+          >
+            <h4 class="capitalize">
+              • {{ this.envios.envio_metodo.replace('_', ' por ') }}
+            </h4>
+            <p class="description-method">
+              {{ $t('productdetail_opinionesEnvioMsg1') }}
+            </p>
+          </div>
+          <div
+            v-if="this.envios.envio_metodo === 'tarifa_plana'"
+            class="wrapper-method"
+          >
+            <h4 class="capitalize">
+              {{ this.envios.envio_metodo.replace('_', ' ') }}
+            </h4>
+            <p class="description-method">
+              {{ $t('productdetail_opinionesEnvioMsg2') }}
+            </p>
+            <p class="price">
+              {{ $t('cart_precio') }}
+              {{
+                this.envios.valor
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
+            </p>
+          </div>
+          <div
+            v-if="this.envios.envio_metodo === 'precio'"
+            class="wrapper-method"
+          >
+            <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
+            <p class="description-method">
+              {{ $t('productdetail_precioTotalCompraMsg') }}
+            </p>
+          </div>
+          <div
+            v-if="this.envios.envio_metodo === 'gratis'"
+            class="wrapper-method"
+          >
+            <h4>{{ $t('productdetail_gratis') }}</h4>
+            <p class="description-method">
+              {{ $t('productdetail_gratisMsg') }}
+            </p>
+          </div>
         </div>
       </div>
-      <!-- <div class="line-comments"></div> -->
     </div>
-    <!-- <div class="wrapper-comments-responsive">
-      <KoComments :dataStore="dataStore" />
-    </div> -->
   </div>
 </template>
-
 <script>
 import extensions from '../../../mixins/elemenTiptap.vue'
 import currency from '../../../mixins/formatCurrent'
 export default {
-  mixins: [extensions, currency],
-  name: 'descriptionProduct13',
+  mixins: [currency, extensions],
   props: {
     dataStore: Object,
     data: {},
     envio: {},
   },
+  mounted() {},
   data() {
     return {
       medioEnvio: '',
       envioproducto: '',
+      selecttag: 1,
+      focusbtn1: true,
+      focusbtn2: false,
+      focusbtn3: false,
     }
   },
   computed: {
@@ -335,164 +348,29 @@ export default {
       }
     },
   },
+  methods: {
+    selectTag1() {
+      this.selecttag = 1
+      this.focusbtn1 = true
+      this.focusbtn2 = false
+      this.focusbtn3 = false
+    },
+    selectTag2() {
+      this.selecttag = 2
+      this.focusbtn1 = false
+      this.focusbtn2 = true
+      this.focusbtn3 = false
+    },
+    selectTag3() {
+      this.selecttag = 3
+      this.focusbtn1 = false
+      this.focusbtn2 = false
+      this.focusbtn3 = true
+    },
+  },
 }
 </script>
-
 <style scoped>
-.description {
-  display: flex;
-  width: 100%;
-  border-bottom: 1px solid rgba(127, 127, 139, 0.342);
-}
-.description div {
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-  line-height: 1.5;
-}
-.left {
-  flex: 2;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  /* margin-right: 25px; */
-  padding-bottom: 10px;
-  /* overflow: hidden; */
-}
-.left-empty {
-  flex: 2;
-  width: 100%;
-  display: flex;
-  padding-bottom: 10px;
-}
-.right {
-  flex: 1;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  padding-bottom: 10px;
-  /* border-left: 1px solid var(--color_border); */
-  border-left: 1px solid rgba(127, 127, 139, 0.342);
-}
-.title-section {
-  color: rgba(21, 20, 57, 0.541);
-  /* color: var(--color_subtext); */
-  font-size: 16px;
-  text-transform: uppercase;
-  align-self: flex-start;
-}
-.right img {
-  max-width: 320px;
-  width: 100%;
-  margin-top: 15px;
-}
-.section {
-  margin-left: 25px;
-  box-sizing: border-box;
-  margin-top: 20px;
-}
-.text-desc {
-  color: rgba(21, 20, 57, 0.541);
-  /* color: var(--color_subtext); */
-  font-size: 15px;
-  text-transform: uppercase;
-  align-self: flex-start;
-  margin-top: 20px;
-}
-.wrapper-comments {
-  border-top: 1px solid rgba(127, 127, 139, 0.342);
-  width: 100%;
-}
-h3 {
-  color: rgba(21, 20, 57, 0.541);
-  /* color: var(--color_subtext); */
-  font-size: 15px;
-  text-transform: uppercase;
-  align-self: flex-start;
-}
-h4 {
-  margin-top: 15px;
-  font-weight: bold;
-  color: rgba(21, 20, 57, 0.541);
-  /* color: var(--color_subtext); */
-  margin-bottom: 5px;
-}
-li p {
-  line-height: 1.4;
-  font-size: 14px;
-}
-.icon {
-  width: 50px;
-  vertical-align: middle;
-  margin-bottom: 10px;
-  align-self: flex-start;
-}
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-.payments {
-  margin-bottom: 20px;
-}
-.line {
-  /* border-top: 1px solid var(--color_border); */
-  border-top: 1px solid rgba(127, 127, 139, 0.342);
-  width: 100%;
-}
-.deliverys {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.stage {
-  display: flex;
-  border-left: 0;
-  flex: 1;
-}
-.logo-pasarela {
-  width: 160px !important;
-}
-.logo-pasarela-daviplata {
-  width: 120px !important;
-}
-.logo-pasarela-efecty {
-  width: 100px !important;
-}
-.logo-pasarela-wompi {
-  width: 220px !important;
-}
-.logo-pasarela-payu {
-  width: 300px !important;
-}
-.logo-pasarela-payco {
-  width: 280px !important;
-}
-.capitalize {
-  text-transform: capitalize;
-  font-weight: 600 !important;
-}
-.description-method {
-  line-height: 1.4;
-  font-size: 14px;
-}
-.price {
-  margin-top: 10px;
-  font-size: 14px;
-}
-.medios-mercadopago {
-  width: 100%;
-  display: block;
-  border-radius: 4px;
-}
-.wrapper-comments-responsive {
-  display: none;
-}
-.line-comments {
-  display: none;
-}
-.cursor_point {
-  cursor: pointer;
-}
 .editor {
   width: 100%;
 }
@@ -506,56 +384,56 @@ li p {
 }
 .editor >>> .el-tiptap-editor__content h1 {
   font-size: 2em;
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content h2 {
   font-size: 1.5em;
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content h3 {
   font-size: 1.17em;
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content h4 {
   font-size: 1.12em;
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content h5 {
   font-size: 0.83em;
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content p {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content span {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content blockquote {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content code {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content ul {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content ol {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content li {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content pre {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content strong {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content em {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content s {
-  font-family: var(--font-style-1);
+  font-family: var(--font-style-2);
 }
 .editor >>> .el-tiptap-editor__content .image-view__body__image {
   cursor: none;
@@ -564,87 +442,129 @@ li p {
 .editor >>> .el-popper.el-tiptap-image-popper {
   display: none;
 }
+.tab {
+  @apply w-auto flex flex-col justify-center items-center cursor-pointer;
+}
 
-@media (max-width: 810px) {
-  .left {
-    margin-right: 15px;
+.item-content {
+  @apply w-full flex flex-col justify-start items-start pb-4;
+}
+
+.content_product_description {
+  color: var(--color_subtext);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  font-family: var(--font-style-1) !important;
+  @apply w-full flex flex-col justify-center items-start;
+}
+h3 {
+  color: var(--color_text);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  align-self: flex-start;
+  font-family: var(--font-style-1) !important;
+}
+h4 {
+  font-family: var(--font-style-1) !important;
+  color: var(--color_text);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.42857143;
+  @apply w-full flex flex-col justify-center items-start mb-5;
+}
+li p {
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+.description-method,
+.price {
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+img {
+  max-width: 300px;
+  width: 30%;
+  margin-top: 15px;
+}
+@screen sm {
+  .content-opt-tab {
+    @apply w-full flex flex-col justify-center items-center;
+  }
+  .content-tab {
+    border-color: var(--border);
+    @apply w-full flex flex-col justify-center items-center mt-6 border p-20;
+  }
+  .head-content {
+    @apply w-full grid grid-cols-1 gap-2 justify-center items-center;
+  }
+  .tittle {
+    color: var(--color_subtext);
+    font-size: 14px;
+    background-color: transparent;
+    font-family: var(--font-style-1) !important;
+    @apply w-full h-40 flex justify-center items-center font-normal uppercase transition-all ease-in duration-0.2;
+  }
+  .show-select-active {
+    background-color: var(--color_gb_tabs);
+  }
+  .show-select-active .tittle {
+    color: var(--color_text_tabs);
   }
 }
-@media (max-width: 768px) {
-  .description {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    margin-right: 0px;
-    margin-left: 0px;
-    margin-bottom: 20px;
+@media (min-width: 425px) {
+  .head-content {
+    @apply grid grid-cols-3 mb-40;
   }
-  .section {
-    margin-left: 0px;
-  }
-  .left {
-    margin-right: 15px;
-    margin-right: 0px;
-    padding-bottom: 0px;
-    flex: 1;
-    /* height: 100%; */
-  }
-  .left-empty {
-    flex: 0;
-    width: 100%;
-    display: flex;
-    padding-bottom: 10px;
-  }
-  .right {
-    border-left: 0px;
-  }
-  .wrapper-comments-responsive {
-    display: initial;
-  }
-  .wrapper-comments {
-    display: none;
-  }
-  .line-comments {
-    display: initial;
-    border-top: 1px solid rgba(127, 127, 139, 0.342);
-    width: 100%;
+  .tittle {
+    font-size: 12px;
+    @apply text-center;
   }
 }
-@media (max-width: 725px) {
-  .editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
-    padding: 0px 15px;
+@screen md {
+  .content-opt-tab {
+    @apply flex flex-col justify-start items-start mt-0;
   }
-  .description {
-    margin-bottom: 0px;
+  .head-content {
+    @apply w-full flex flex-row justify-start items-start mb-0;
+    border-bottom: 1px solid transparent;
   }
-  .left {
-    padding-bottom: 10px;
-    flex: 1;
+  .head-content {
+    @apply w-full flex flex-row justify-start items-start mb-0 gap-0;
   }
-  .right {
-    border-left: 0px;
+  .tab {
+    @apply w-full flex justify-start items-center;
   }
-  .text-desc {
-    padding-right: 15px;
-    padding-left: 15px;
+  .content-tab {
+    border-color: var(--border);
+    @apply w-full flex flex-row justify-start items-start mt-0 border transition-all ease-in duration-0.2;
   }
-  .payments {
-    /* border-top: 1px solid var(--color_border); */
-    border-top: 1px solid rgba(127, 127, 139, 0.342);
-    margin-bottom: 10px;
-    padding-right: 15px;
-    padding-left: 15px;
+  .tittle {
+    font-size: 14px;
+    @apply w-full h-50 text-center justify-center items-center;
   }
-  .section {
-    margin-left: 0px;
-    margin-top: 0px;
-    padding-top: 10px;
+  .show-select-active {
+    background-color: var(--color_gb_tabs);
   }
-  .deliverys {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-right: 15px;
-    padding-left: 15px;
+  .show-select-active .tittle {
+    color: var(--color_text_tabs);
+  }
+  .content-tab {
+    @apply p-40;
+  }
+}
+@screen lg {
+  .head-content {
+    @apply w-6/0;
   }
 }
 </style>

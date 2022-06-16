@@ -470,9 +470,6 @@ export default {
     }
   },
   computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper
-    },
     existPayments() {
       const mediospago = this.dataStore.medios_pago
       if (
@@ -507,9 +504,6 @@ export default {
     },
   },
   methods: {
-    changeSlide() {
-      this.swiper.slidePrev(700, false)
-    },
     searchIdForSlug() {
       const product = this.productsData.filter(
         (product) => product.slug === this.id

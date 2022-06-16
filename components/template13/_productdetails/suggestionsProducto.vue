@@ -5,17 +5,19 @@
         {{ $t('home_destacadosMsg') }}
       </p>
     </div>
-    <KoSwipper :products="category"></KoSwipper>
+    <KoSwipper
+      :products="category"
+      :cardProduct="cardProduct"
+      :settingGeneral="settingGeneral"
+    />
   </div>
 </template>
 
 <script>
-import KoSwipper from '../_productofavorito/productSlide'
+import KoSwipper from '../_productofavorito/productSlide.vue'
 export default {
   name: 'suggestionsProducto13',
-  props: {
-    category: {},
-  },
+  props: { category: {}, settingGeneral: Object, cardProduct: Object },
   components: {
     KoSwipper,
   },
@@ -27,7 +29,7 @@ export default {
   display: flex;
   width: 100%;
   /* background-color: var(--background_color_2); */
-  background: #efefef;
+  background: #fff;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -40,31 +42,32 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  max-width: 1300px;
-  padding: 10px;
+  max-width: 1460px;
+  /* padding: 10px; */
 }
 .content-title-ProductFavoritos {
   width: 100%;
-  max-width: 1300px;
-  padding: 10px 20px;
+  max-width: 1460px;
+  padding-bottom: 30px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 .title-ProductFavoritos {
+  font-family: var(--font-style-1) !important;
   font-size: 18px;
   font-weight: bold;
   line-height: 1.4;
   /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: #2c2930;
   cursor: pointer;
 }
 @media (max-width: 770px) {
   .swiper-container {
-    padding: 20px 8px;
+    padding-top: 20px;
   }
   .content-title-ProductFavoritos {
-    padding: 10px 10px;
+    @apply py-10;
   }
 }
 @media (max-width: 380px) {

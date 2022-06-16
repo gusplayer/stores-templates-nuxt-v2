@@ -1,6 +1,10 @@
 <template>
-  <div class="wrapper_newsletter">
-    <div class="contenedor">
+  <div
+    class="wrapper_newsletter"
+    :style="[newsletter, settingGeneral]"
+    v-if="newsletter"
+  >
+    <div class="contenedor px-20">
       <p class="subtext">{{ $t('newsletter_subtitle') }}</p>
       <p class="title">
         {{ $t('newsletter_title') }}
@@ -40,7 +44,7 @@
         </label>
       </div>
       <div class="content-checkbox">
-        <p class="text-error" v-if="stateChehed" style="max-width: 340px">
+        <p class="text-error" v-if="stateChecked" style="max-width: 340px">
           Marcar checkbox para poder suscribirse al boletín informativo
         </p>
       </div>
@@ -55,6 +59,8 @@ export default {
   name: 'Ko13-Newsletter-1',
   props: {
     dataStore: Object,
+    newsletter: Object,
+    settingGeneral: Object,
   },
   components: {
     ValidationObserver,
@@ -67,7 +73,7 @@ export default {
       email: null,
       register: '',
       checked: false,
-      stateChehed: false,
+      stateChecked: false,
     }
   },
   destroyed() {
@@ -117,7 +123,7 @@ export default {
             console.log(e)
           })
       } else {
-        this.stateChehed = true
+        this.stateChecked = true
       }
     },
   },
@@ -129,7 +135,7 @@ export default {
 .wrapper_newsletter {
   display: flex;
   width: 100%;
-  background-color: var(--background_color_2);
+  background-color: var(--background_color_1);
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -137,7 +143,8 @@ export default {
 .contenedor {
   width: 100%;
   max-width: 1300px;
-  padding: 60px 20px 60px 20px;
+  padding-bottom: var(--padding);
+  padding-top: var(--padding);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -145,18 +152,18 @@ export default {
 }
 .subtext {
   text-align: center;
-  color: var(--color_subtext);
-  font-size: 16px;
-  font-weight: bold;
+  color: var(--color_pretitle);
+  font-size: var(--fontSizepreTitle);
+  font-weight: var(--fontWeighpreTitle);
 }
 .title {
-  font-size: 38px;
-  font-weight: bold;
+  font-size: var(--fontSizeTitle);
+  font-weight: var(--fontWeighTitle);
   font-stretch: normal;
   font-style: normal;
   line-height: 1.24;
   letter-spacing: -0.4px;
-  color: var(--color_text);
+  color: var(--color_title);
   text-align: center;
   width: 600px;
   padding-bottom: 50px;
@@ -170,8 +177,8 @@ export default {
 }
 .input-text {
   font-size: 14px;
-  color: var(--color_subtext);
-  border: solid 2px #afafaf;
+  color: var(--color_pretitle);
+  border: solid 2px var(--color_border);
   border-radius: var(--radius_btn);
   background-color: transparent;
   padding: 12px 14px;
@@ -179,7 +186,7 @@ export default {
   height: 100%;
 }
 .input-text::placeholder {
-  color: var(--color_subtext);
+  color: var(--color_pretitle);
   opacity: 0.7;
 }
 .input-text:focus,
@@ -198,9 +205,9 @@ export default {
   margin-left: 10px;
 }
 .btn {
-  color: var(--color-text-b-tn);
-  /* border: solid 2px var(--color_border); */
-  background-color: transparent;
+  color: var(--color_text_btn);
+  background-color: var(--color_background_btn);
+  border: 1px solid var(--color_border_btn);
   padding: 8px 14px;
   font-size: 14px;
   width: 220px;
@@ -210,10 +217,12 @@ export default {
   cursor: pointer;
   max-height: 50px;
   transition: all 200ms ease-in;
+  border-radius: var(--radius_btn);
 }
 .btn:hover {
-  background-color: var(--btnhover);
-  border: solid 2px var(--btnhover);
+  color: var(--hover_text_btn);
+  background-color: var(--hover_text_btn);
+  border: 1px solid var(--hover_Border_btn);
 }
 .content-checkbox {
   width: 100%;
@@ -224,7 +233,7 @@ export default {
 .text-checkbox {
   margin-left: 5px;
   font-size: 13px;
-  color: var(--color_subtext);
+  color: var(--color_pretitle);
 }
 @media (max-width: 600px) {
   .title {
@@ -243,7 +252,7 @@ export default {
     font-size: 12px;
   }
   .input-text {
-    width: 190px;
+    width: 230px;
   }
   .btn {
     width: 100px;

@@ -76,6 +76,7 @@ export const state = () => ({
   settingByTemplate10: '',
   settingByTemplate11: '',
   settingByTemplate12: '',
+  settingByTemplate13: '',
   category_producto_header: '',
   subcategory_producto_header: '',
   analytics_tagmanager: '',
@@ -393,6 +394,52 @@ export const mutations = {
       state.settingByTemplate12 = value.data
     }
   },
+  SET_CURRENTSETTING13(state, value) {
+    if (value && value.component) {
+      console.log(value)
+      switch (value.component) {
+        case 'banner':
+          state.settingByTemplate13.banner = value.setting
+          break
+        case 'cardProduct':
+          state.settingByTemplate13.cardProduct = value.setting
+          break
+        case 'contact':
+          state.settingByTemplate13.contact = value.setting
+          break
+        case 'detailsProduct':
+          state.settingByTemplate13.detailsProduct = value.setting
+          break
+        case 'footer':
+          state.settingByTemplate13.footer = value.setting
+          break
+        case 'header':
+          state.settingByTemplate13.header = value.setting
+          break
+        case 'information':
+          state.settingByTemplate13.information = value.setting
+          break
+        case 'infoText':
+          state.settingByTemplate13.infoText = value.setting
+          break
+        case 'newsLetter':
+          state.settingByTemplate13.newsletter = value.setting
+          break
+        case 'pages':
+          state.settingByTemplate13.pages = value.setting
+          break
+        case 'productList':
+          state.settingByTemplate13.productList = value.setting
+          break
+        case 'productListFilter':
+          state.settingByTemplate13.productListFilter = value.setting
+          break
+        case 'settingGeneral':
+          state.settingByTemplate13.settingGeneral = value.setting
+          break
+      }
+    }
+  },
   SET_CURRENTSETTINGMODAL(state, value) {
     if (value && value.data) {
       state.dataStore.modal = value.data
@@ -528,6 +575,9 @@ export const mutations = {
   },
   SET_SETTINGS_BY_TEMPLATE_12: (state, value) => {
     state.settingByTemplate12 = value
+  },
+  SET_SETTINGS_BY_TEMPLATE_13: (state, value) => {
+    state.settingByTemplate13 = value
   },
   SET_STATE_WAPIME: (state, value) => {
     state.stateWapiME = value
@@ -709,32 +759,17 @@ export const actions = {
         ) {
           await dispatch('GET_DATA_HOKO', state.dataStore.tienda.id_tienda)
         }
-        if (id.data.data.template == 7) {
-          if (state.dataStore && state.dataStore.tienda) {
-            await dispatch('GET_SETTINGS_BY_TEMPLATE_7', state.dataStore.tienda)
-          }
-        } else if (id.data.data.template == 9) {
-          if (state.dataStore && state.dataStore.tienda) {
-            await dispatch('GET_SETTINGS_BY_TEMPLATE_9', state.dataStore.tienda)
-          }
-        } else if (id.data.data.template == 10) {
-          if (state.dataStore && state.dataStore.tienda) {
-            await dispatch(
-              'GET_SETTINGS_BY_TEMPLATE_10',
-              state.dataStore.tienda
-            )
-          }
-        } else if (id.data.data.template == 11) {
+        if (
+          id.data.data.template == 7 ||
+          id.data.data.template == 9 ||
+          id.data.data.template == 10 ||
+          id.data.data.template == 11 ||
+          id.data.data.template == 12 ||
+          id.data.data.template == 13
+        ) {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch(
-              'GET_SETTINGS_BY_TEMPLATE_11',
-              state.dataStore.tienda
-            )
-          }
-        } else if (id.data.data.template == 12) {
-          if (state.dataStore && state.dataStore.tienda) {
-            await dispatch(
-              'GET_SETTINGS_BY_TEMPLATE_12',
+              'GET_SETTINGS_BY_TEMPLATE_NODE',
               state.dataStore.tienda
             )
           }
@@ -801,35 +836,11 @@ export const actions = {
         commit('SET_SETTINGS_BY_TEMPLATE', response.data.data)
       })
   },
-  async GET_SETTINGS_BY_TEMPLATE_7({ commit, state }, store) {
+  async GET_SETTINGS_BY_TEMPLATE_NODE({ commit, state }, store) {
     const response = await axios.get(
-      `${state.urlNodeSettings}/template7?id=${store.id_tienda}`
+      `${state.urlNodeSettings}/template${store.template}?id=${store.id_tienda}`
     )
-    commit('SET_SETTINGS_BY_TEMPLATE_7', response.data.body)
-  },
-  async GET_SETTINGS_BY_TEMPLATE_9({ commit, state }, store) {
-    const response = await axios.get(
-      `${state.urlNodeSettings}/template9?id=${store.id_tienda}`
-    )
-    commit('SET_SETTINGS_BY_TEMPLATE_9', response.data.body)
-  },
-  async GET_SETTINGS_BY_TEMPLATE_10({ commit, state }, store) {
-    const response = await axios.get(
-      `${state.urlNodeSettings}/template10?id=${store.id_tienda}`
-    )
-    commit('SET_SETTINGS_BY_TEMPLATE_10', response.data.body)
-  },
-  async GET_SETTINGS_BY_TEMPLATE_11({ commit, state }, store) {
-    const response = await axios.get(
-      `${state.urlNodeSettings}/template11?id=${store.id_tienda}`
-    )
-    commit('SET_SETTINGS_BY_TEMPLATE_11', response.data.body)
-  },
-  async GET_SETTINGS_BY_TEMPLATE_12({ commit, state }, store) {
-    const response = await axios.get(
-      `${state.urlNodeSettings}/template12?id=${store.id_tienda}`
-    )
-    commit('SET_SETTINGS_BY_TEMPLATE_12', response.data.body)
+    commit(`SET_SETTINGS_BY_TEMPLATE_${store.template}`, response.data.body)
   },
   async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit, state }, idWapi) {
     let template = state.template ? state.template : 99

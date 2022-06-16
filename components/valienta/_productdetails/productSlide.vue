@@ -27,7 +27,7 @@
             <i class="material-icons">keyboard_backspace</i>
           </button>
           <iframe
-            style="max-width: 375px; width: 100%;"
+            style="max-width: 375px; width: 100%"
             height="375"
             :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
             frameborder="0"
@@ -37,8 +37,8 @@
       </div>
     </div>
     <div class="swiper-pagination" slot="pagination" v-if="photos.length"></div>
-    <!-- <div class="swiper-pagination" slot="pagination"></div> -->
   </div>
+  <!-- <div class="swiper-pagination" slot="pagination"></div> -->
 </template>
 
 <script>

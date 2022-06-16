@@ -97,7 +97,7 @@
 // import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko-commentsProduct-13',
+  name: 'Ko-commentsProduct-11',
   props: {
     dataStore: Object,
   },

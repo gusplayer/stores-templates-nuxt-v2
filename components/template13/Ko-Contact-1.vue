@@ -1,14 +1,19 @@
 <template>
-  <div class="wrapper-contact" :style="settingK05Contact">
-    <div
-      class="contact"
-      :style="{
-        '--font-style':
-          this.settingK05Contact && this.settingK05Contact.tipo_letra
-            ? this.settingK05Contact.tipo_letra
-            : 'Roboto',
-      }"
-    >
+  <div
+    class="wrapper-contact"
+    :style="[
+      settingByTemplate13[0].contact,
+      settingByTemplate13[0].settingGeneral,
+      {
+        '--font-style-1':
+          this.settingByTemplate13[0].settingGeneral &&
+          this.settingByTemplate13[0].settingGeneral.fount_1
+            ? this.settingByTemplate13[0].settingGeneral.fount_1
+            : 'Poppins',
+      },
+    ]"
+  >
+    <div class="contact">
       <div class="contact-content">
         <div>
           <p class="contact-text-title">{{ $t('contact_title') }}</p>
@@ -47,6 +52,7 @@
         <div class="separator"></div>
         <div v-if="dataStore.geolocalizacion.length">
           <p class="contact-text-sub">{{ $t('contact_vistaTienda') }}</p>
+
           <el-carousel
             :interval="5000"
             arrow="always"
@@ -176,7 +182,7 @@ export default {
   name: 'Ko13-Contact-1',
   props: {
     dataStore: Object,
-    settingK05Contact: Object,
+    settingByTemplate13: Array,
   },
   components: {
     ValidationObserver,
@@ -184,6 +190,7 @@ export default {
   },
   data() {
     return {
+      stateBtn: true,
       nombre: '',
       email: '',
       numberphone: '',
@@ -229,7 +236,6 @@ export default {
           icon: 'email-icon',
         },
       ],
-      stateBtn: true,
     }
   },
   destroyed() {
@@ -313,18 +319,18 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* background: var(--background_color_2); */
-  background: #efefef;
+  background: var(--background_color_1);
   box-sizing: border-box;
 }
 .contact {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  max-width: 1300px;
   align-items: center;
   justify-content: space-between;
   padding: 30px 30px;
+  margin-bottom: 40px;
+  /* -webkit-box-shadow: 0px 8px 15px -7px rgba(0, 0, 0, 0.76);
+  box-shadow: 0px 8px 15px -7px rgba(0, 0, 0, 0.76); */
 }
 .contact > div {
   flex: 1;
@@ -338,30 +344,31 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-self: end;
+  align-self: self-start;
 }
 .contact-item-text {
   width: 100%;
 }
 .contact-text-title {
+  font-family: var(--font-style-1) !important ;
   font-size: 35px;
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: -0.4px;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
 }
 .contact-text-subtitle {
+  font-family: var(--font-style-1) !important ;
+
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_subtext);
   margin-top: 10px;
 }
 .contact-text-subtitles {
@@ -371,41 +378,44 @@ export default {
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_subtext);
   margin-top: 10px;
 }
 .contact-text-subtitle2 {
-  font-size: 15px;
+  font-family: var(--font-style-1) !important ;
+  font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_subtext);
   margin-top: 10px;
   margin-bottom: 10px;
+  /* text-align: center; */
 }
 .contact-text-subtitle3 {
+  font-family: var(--font-style-1) !important ;
+
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1;
   letter-spacing: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_subtext);
   margin-top: 10px;
 }
 .contact-text-subtitle4 {
+  font-family: var(--font-style-1) !important ;
+
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1;
   letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
   margin-top: 10px;
   text-align: right;
 }
@@ -414,34 +424,39 @@ export default {
   flex-direction: column;
 }
 .contact-icon {
+  font-family: var(--font-style-1) !important ;
+
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 2.11;
   letter-spacing: normal;
-  /* color: var(--color_icon); */
-  color: #25dac5;
+  color: var(--color_icon);
 }
 .text-icon {
+  font-family: var(--font-style-1) !important ;
+
   display: flex;
   flex-direction: row;
-  /* color: var(--color_icon); */
-  color: #25dac5;
+  color: var(--color_icon);
 }
 .text-icon a:hover {
+  font-family: var(--font-style-1) !important ;
+
   cursor: pointer;
-  color: var(--btnhover);
+  color: var(--hover_text);
 }
 .text-icon a {
+  font-family: var(--font-style-1) !important ;
+
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
   margin-top: 5px;
   margin-left: 7px;
 }
@@ -449,32 +464,34 @@ export default {
   font-size: 17px;
 }
 .contact-text-sub {
+  font-family: var(--font-style-1) !important ;
+
   font-size: 22px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
   margin-top: 10px;
 }
 .contact-text-sub2 {
+  font-family: var(--font-style-1) !important ;
+
   font-size: 22px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
   margin-top: 10px;
 }
 .separator {
   margin-top: 15px;
   width: 100%;
-  /* border: solid 1.5px var(--color_border); */
-  border: solid 1.5px rgba(255, 255, 255, 1);
+  background: var(--color_icon);
+  border: solid 1.5px var(--color_icon);
 }
 .text-icon {
   display: flex;
@@ -485,20 +502,19 @@ export default {
 }
 .contact-content-rigth {
   border-radius: 10px;
-  /* background-color: var(--background_color_1); */
-  background-color: rgb(223, 223, 223);
+  background-color: var(--background_color_2);
   padding: 30px 30px 50px 30px;
   margin-top: 20px;
 }
 .contact-content-rigth p {
+  font-family: var(--font-style-1) !important ;
   font-size: 14px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.86;
   letter-spacing: 2px;
-  /* color: var(--color_text); */
-  color: #000000;
+  color: var(--color_text);
   margin: 10px;
   margin-left: 0px;
 }
@@ -518,9 +534,9 @@ export default {
   flex-direction: row;
 }
 .input-text {
+  font-family: var(--font-style-1) !important ;
   font-size: 14px;
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_text);
   border: solid 2px #afafaf;
   border-radius: var(--radius_btn);
   background-color: transparent;
@@ -528,8 +544,8 @@ export default {
   width: 100%;
 }
 .input-text::placeholder {
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
+  font-family: var(--font-style-1) !important ;
+  color: var(--color_text);
   opacity: 0.7;
 }
 .input-text:-internal-autofill-selected {
@@ -541,18 +557,17 @@ export default {
 .input-text:focus,
 .input-text:active {
   outline: 0;
-  /* border: solid 2px var(--color_border); */
-  border: solid 2px rgba(127, 127, 139, 0.342);
+  border: solid 2px var(--color_background_btn);
 }
 .input-text-rectangule {
+  font-family: var(--font-style-1) !important ;
   font-size: 14px;
   font-weight: 400;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.4;
   letter-spacing: normal;
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
+  color: var(--color_text);
   border: solid 2px #afafaf;
   border-radius: var(--radius_btn);
   background-color: transparent;
@@ -564,8 +579,8 @@ export default {
   min-height: 80px;
 }
 .input-text-rectangule::placeholder {
-  /* color: var(--color_border); */
-  color: rgba(21, 20, 57, 0.541);
+  font-family: var(--font-style-1) !important ;
+  color: var(--color_text);
   opacity: 0.7;
 }
 
@@ -589,6 +604,7 @@ export default {
   background: rgb(138, 138, 138);
 }
 .text-error {
+  font-family: var(--font-style-1) !important ;
   font-size: 12px;
   color: #cb2027;
   width: 100%;
@@ -598,7 +614,8 @@ export default {
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
   border: solid 2px var(--color_background_btn);
-  background-color: var(--color_background_btn);
+  background: var(--color_background_btn);
+  font-family: var(--font-style-1) !important ;
   padding: 8px 14px;
   font-size: 16px;
   width: 50%;
@@ -610,22 +627,29 @@ export default {
 }
 .btn:hover {
   color: white;
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
+  border: solid 2px var(--hover_text);
+  background-color: var(--hover_text);
 }
 .btn2 {
   color: black;
   border-radius: var(--radius_btn);
   border: solid 2px grey;
-  background-color: grey;
+  background: grey;
+  font-family: var(--font-style-1) !important ;
   padding: 8px 14px;
   font-size: 16px;
   width: 50%;
   height: 41px;
   font-weight: bold;
+  cursor: pointer;
   margin-left: 20px;
+  transition: all 200ms ease-in;
 }
-
+@screen sm {
+  .contact {
+    @apply w-9/0;
+  }
+}
 @media (max-width: 700px) {
   .contact {
     flex-direction: column;
@@ -659,6 +683,21 @@ export default {
   }
   .contact-content-rigth {
     padding: 20px 15px 20px 15px;
+  }
+}
+@screen md {
+  .contact {
+    @apply w-9/5;
+  }
+}
+@screen mlg {
+  .contact {
+    @apply w-9/3;
+  }
+}
+@media (min-width: 1192px) {
+  .contact {
+    width: 1192px;
   }
 }
 </style>

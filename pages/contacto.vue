@@ -17,7 +17,7 @@ export default {
   },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   computed: {
     ...mapState([
@@ -131,14 +131,29 @@ export default {
               },
             ]
           : null,
+        settingByTemplate13: this.settingByTemplate13
+          ? [
+              {
+                contact:
+                  this.settingByTemplate13 && this.settingByTemplate13.contact
+                    ? this.settingByTemplate13.contact
+                    : null,
+                settingGeneral:
+                  this.settingByTemplate13 &&
+                  this.settingByTemplate13.settingGeneral
+                    ? this.settingByTemplate13.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
       }
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenertemplate(e) {
+    addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080') ||
@@ -153,6 +168,8 @@ export default {
             this.$store.commit('SET_CURRENTSETTING11', e.data)
           } else if (e.data.template == 10) {
             this.$store.commit('SET_CURRENTSETTING10', e.data)
+          } else if (e.data.template == 13) {
+            this.$store.commit('SET_CURRENTSETTING13', e.data)
           }
         } else if (e && e.data && e.data.returnHome == true) {
           this.$router.push({

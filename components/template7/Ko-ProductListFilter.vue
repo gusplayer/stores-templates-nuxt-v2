@@ -45,6 +45,21 @@
         v-if="this.categorias && this.categorias.length > 0"
       >
         <div class="content-category-left">
+          <button class="item-tittle">
+            <p class="txt-tittles">
+              {{ $t('header_buscar_producto') }}
+            </p>
+          </button>
+          <div class="itemLeft-range-slide">
+            <input
+              class="input-slide"
+              type="search"
+              v-model="search"
+              :placeholder="$t('header_search')"
+            />
+          </div>
+        </div>
+        <div class="content-category-left">
           <div class="item-tittle">
             <p class="txt-tittles">
               {{ $t('productdetail_categoria') }}

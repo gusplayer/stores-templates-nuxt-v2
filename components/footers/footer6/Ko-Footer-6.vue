@@ -261,7 +261,7 @@ export default {
     },
   },
   watch: {
-    settingByTemplate11() {
+    settingByTemplate10() {
       if (
         this.settingByTemplate10 &&
         this.settingByTemplate10[0].setting10Footer

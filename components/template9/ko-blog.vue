@@ -30,7 +30,7 @@
                 :article="article"
                 :blog="blog"
                 :settingGeneral="settingGeneral"
-                style="max-height: 560px;"
+                style="max-height: 560px"
               ></Kblog>
             </div>
           </div>

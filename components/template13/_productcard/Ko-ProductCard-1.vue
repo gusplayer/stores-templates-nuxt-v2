@@ -1,5 +1,16 @@
 <template>
-  <div class="wrapper-card">
+  <div
+    class="wrapper-card"
+    :style="[
+      settingGeneral,
+      cardProduct,
+      {
+        '--font-style-1': settingGeneral.fount_1
+          ? settingGeneral.fount_1
+          : 'Poppins',
+      },
+    ]"
+  >
     <div class="container-card" id="product-card">
       <div class="wrapper">
         <nuxt-link
@@ -292,10 +303,10 @@ import currency from '../../../mixins/formatCurrent'
 export default {
   mixins: [idCloudinary, currency],
   name: 'Ko-ProductCard-13',
-  props: { product: Object },
+  props: { product: Object, settingGeneral: Object, cardProduct: Object },
   mounted() {
     this.idSlug = this.product.id
-    this.prodcutPrice()
+    this.productPrice()
     if (
       this.product.con_variante &&
       this.product.variantes[0].variantes !== '[object Object]'
@@ -388,7 +399,6 @@ export default {
           estado: true,
         }
         this.maxQuantityValue = this.product.stock
-
         this.productsCarts.find((productCart, index) => {
           if (productCart.id == this.product.id) {
             this.productIndexCart = index
@@ -425,7 +435,6 @@ export default {
           } else {
             product.limitQuantity = this.product.stock
           }
-
           if (typeof this.productIndexCart === 'number') {
             const mutableProduct =
               this.$store.state.productsCart[this.productIndexCart]
@@ -451,13 +460,12 @@ export default {
           }
           this.$gtm.push({ event: 'AddToCart' })
           this.$store.commit('UPDATE_CONTENTCART')
-          // this.$router.push('/')
           this.$store.state.openOrder = true
           this.$store.state.orderComponent = true
         }
       }
     },
-    prodcutPrice() {
+    productPrice() {
       if (
         this.product.con_variante &&
         this.product.variantes[0].variantes !== '[object Object]'
@@ -488,7 +496,7 @@ export default {
     },
   },
   watch: {
-    productsCarts(value) {
+    productsCarts() {
       this.getDataProduct()
     },
   },
@@ -497,40 +505,21 @@ export default {
 
 <style scoped>
 .wrapper-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  /* background: var(--background_color_1); */
-  background: white;
-  box-sizing: border-box;
+  background: var(--background_color_1);
   border-radius: 5px;
-  box-shadow: rgb(226, 226, 226) 0 1px 1px;
-  border: 1px solid rgba(243, 243, 243, 0.637);
+  @apply w-full flex justify-center items-center shadow box-border;
 }
 .container-card {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  width: 100%;
   border-radius: 5px;
-  overflow: hidden;
-  position: relative;
+  @apply w-full flex flex-col items-center relative overflow-hidden;
 }
 .wrapper-image {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  width: 100%;
   min-height: 250px;
   max-height: 300px;
+  @apply w-full flex items-center justify-center relative overflow-hidden;
 }
 .product-image {
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
+  @apply overflow-hidden object-cover w-full;
 }
 .notproduct-image {
   height: 294px;
@@ -539,9 +528,7 @@ export default {
 }
 .product-image-soldOut {
   filter: grayscale(100%);
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
+  @apply w-full object-cover overflow-hidden;
 }
 .image_overlay {
   position: absolute;
@@ -624,10 +611,9 @@ export default {
   text-align: center;
 }
 .card-title {
-  font-size: 15px;
-  font-weight: 500;
-  /* color: var(--color_text); */
-  color: rgb(63, 63, 63);
+  font-size: var(--fontSizeTitle);
+  font-weight: var(--fontWeighTitle);
+  color: var(--color_title);
 }
 .content-text-price {
   width: 100%;
@@ -652,15 +638,13 @@ export default {
 }
 .text-price {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: var(--fontWeighPrice);
   line-height: 1.4;
-  /* color: var(--color_subtext); */
-  color: rgb(70, 70, 70);
+  color: var(--color_price);
   text-align: center;
 }
 .separator-price {
-  /* color: var(--color_text); */
-  color: rgb(70, 70, 70);
+  color: var(--color_price);
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -685,7 +669,7 @@ export default {
   height: 41px;
   color: var(--color_text_btn);
   border-radius: var(--radius_btn);
-  border: solid 2px var(--color_background_btn);
+  border: solid 2px var(--color_border_btn);
   background-color: var(--color_background_btn);
   -webkit-transition: all 200ms ease-out;
   -moz-transition: all 200ms ease-out;
@@ -693,8 +677,9 @@ export default {
   transition: all 200ms ease-out;
 }
 #add_cart:hover {
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
+  color: var(--hover_text_btn);
+  border: solid 2px var(--hover_Border_btn);
+  background-color: var(--hover_Bg_btn);
   cursor: pointer;
 }
 #product-card:hover #add_cart {
@@ -719,9 +704,9 @@ export default {
   width: 130px;
   opacity: 0;
   height: 41px;
-  color: var(--color_background_btn);
+  color: var(--color_border_btn);
   border-radius: var(--radius_btn);
-  border: solid 2px var(--color_background_btn);
+  border: solid 2px var(--color_border_btn);
   background-color: transparent;
   -webkit-transition: all 200ms ease-out;
   -moz-transition: all 200ms ease-out;
@@ -729,9 +714,8 @@ export default {
   transition: all 200ms ease-out;
 }
 .view_details:hover {
-  color: var(--btnhover);
-  border: solid 2px var(--btnhover);
-
+  color: var(--hover_Border_btn);
+  border: solid 2px var(--hover_Border_btn);
   cursor: pointer;
 }
 #product-card:hover .view_details {
@@ -754,7 +738,7 @@ export default {
   display: none;
 }
 .card-icon-cart-movil:hover {
-  color: var(--btnhover);
+  color: var(--hover_text_btn);
 }
 /*Comienzo de animacion*/
 .overlay-top {

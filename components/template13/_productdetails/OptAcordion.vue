@@ -1,0 +1,437 @@
+<template>
+  <div class="content-acordion">
+    <button class="accordion">{{ $t('productdetail_description') }}</button>
+    <div class="panel">
+      <div class="editor" v-if="data.info.descripcion">
+        <el-tiptap
+          v-model="data.info.descripcion"
+          :extensions="extensions"
+          :spellcheck="false"
+          :readonly="true"
+          :charCounterCount="false"
+          :tooltip="false"
+          :showMenubar="false"
+          :bubble="false"
+        />
+      </div>
+    </div>
+    <button class="accordion">{{ $t('productdetail_opcionesPago') }}</button>
+    <div class="panel">
+      <ul>
+        <li v-if="mediospago.consignacion == 1">
+          <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
+          <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
+        </li>
+        <li v-if="mediospago.contraentrega == 1">
+          <h4>{{ $t('productdetail_PagoContra') }}</h4>
+          <p>{{ $t('productdetail_PagoContraMsg') }}</p>
+        </li>
+        <li v-if="mediospago.convenir == 1">
+          <h4>{{ $t('productdetail_pagoConvenir') }}</h4>
+          <p>{{ $t('productdetail_pagoConvenirMsg') }}</p>
+        </li>
+        <li v-if="mediospago.credibanco == 1">
+          <h4>{{ $t('productdetail_ConsignacionCredibanco') }}</h4>
+          <p>
+            {{ $t('productdetail_ConsignacionCredibancoMsg') }}
+          </p>
+          <a
+            href="https://www.credibanco.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="cursor_point"
+          >
+            <img class="logo-pasarela" v-lazy="img1" alt="logo Credibanco" />
+          </a>
+        </li>
+        <li v-if="mediospago.daviplata == 1">
+          <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>
+          <p>
+            {{ $t('productdetail_ConsignaciondaviplataMsg') }}
+          </p>
+          <img
+            class="logo-pasarela-daviplata"
+            v-lazy="img2"
+            alt="logo daviPlata"
+          />
+        </li>
+        <li v-if="mediospago.efecty == 1">
+          <h4>{{ $t('productdetail_ConsignacionEfecty') }}</h4>
+          <p>{{ $t('productdetail_ConsignacionEfectyMsg') }}</p>
+          <a
+            href="https://www.efecty.com.co/web/"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="cursor_point"
+          >
+            <img class="logo-pasarela-efecty" v-lazy="img3" alt="logo efecty" />
+          </a>
+        </li>
+        <li v-if="mediospago.mercado_pago == 1">
+          <h4>{{ $t('productdetail_PasarelaMercado') }}</h4>
+          <p>
+            {{ $t('productdetail_PasarelaMercadoMsg') }}
+          </p>
+          <a
+            href="https://www.mercadopago.com"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="cursor_point"
+          >
+            <img
+              class="logo-pasarela-daviplata"
+              v-lazy="img4"
+              alt="logo mercadopago"
+            />
+          </a>
+        </li>
+        <li v-if="mediospago.nequi == 1">
+          <h4>{{ $t('productdetail_Consignacionnequi') }}</h4>
+          <p>
+            {{ $t('productdetail_ConsignacionnequiMsg') }}
+          </p>
+          <a
+            href="https://www.nequi.com.co/"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="cursor_point"
+          >
+            <img
+              class="logo-pasarela-daviplata"
+              v-lazy="img5"
+              alt="logo nequi"
+            />
+          </a>
+        </li>
+        <li v-if="mediospago.payco == 1">
+          <h4>{{ $t('productdetail_PasarelaEpayco') }}</h4>
+          <p>
+            {{ $t('productdetail_PasarelaEpaycoMsg') }}
+          </p>
+          <img
+            class="logo-pasarela-payco"
+            v-lazy="img6"
+            alt="Pasarela de pagos epayco"
+          />
+        </li>
+        <li v-if="mediospago.payu == 1">
+          <h4>{{ $t('productdetail_PasarelaPayu') }}</h4>
+          <p>
+            {{ $t('productdetail_PasarelaPayuMsg') }}
+          </p>
+          <a
+            href="https://www.payulatam.com/co/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img
+              class="logo-pasarela-payu"
+              v-lazy="img7"
+              alt="PayU"
+              border="0"
+            />
+          </a>
+        </li>
+        <li v-if="mediospago.wompi == 1">
+          <h4>{{ $t('productdetail_Consignacionwompi') }}</h4>
+          <p>
+            {{ $t('productdetail_PasarelaPayuMsg') }}
+          </p>
+          <a href="https://wompi.co/" target="_blank" rel="noreferrer noopener">
+            <img
+              class="logo-pasarela-wompi"
+              v-lazy="img8"
+              alt="wompi"
+              border="0"
+            />
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <button class="accordion">{{ $t('productdetail_opinionesEnvio') }}</button>
+    <div class="deliverys section panel" v-if="this.envios.envio_metodo">
+      <div class="content">
+        <h3 class="title-section">
+          {{ $t('productdetail_opinionesEnvio') }}
+        </h3>
+      </div>
+      <div
+        v-if="this.envios.envio_metodo === 'precio_ciudad'"
+        class="wrapper-method"
+      >
+        <h4 class="capitalize">
+          • {{ this.envios.envio_metodo.replace('_', ' por ') }}
+        </h4>
+        <p class="description-method">
+          {{ $t('productdetail_opinionesEnvioMsg1') }}
+        </p>
+      </div>
+      <div
+        v-if="this.envios.envio_metodo === 'tarifa_plana'"
+        class="wrapper-method"
+      >
+        <h4 class="capitalize">
+          {{ this.envios.envio_metodo.replace('_', ' ') }}
+        </h4>
+        <p class="description-method">
+          {{ $t('productdetail_opinionesEnvioMsg2') }}
+        </p>
+        <p class="price">
+          {{ $t('cart_precio') }}
+          {{
+            this.envios.valor
+              | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
+          }}
+        </p>
+      </div>
+      <div v-if="this.envios.envio_metodo === 'precio'" class="wrapper-method">
+        <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
+        <p class="description-method">
+          {{ $t('productdetail_precioTotalCompraMsg') }}
+        </p>
+      </div>
+      <div v-if="this.envios.envio_metodo === 'gratis'" class="wrapper-method">
+        <h4>{{ $t('productdetail_gratis') }}</h4>
+        <p class="description-method">{{ $t('productdetail_gratisMsg') }}</p>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import extensions from '../../../mixins/elemenTiptap.vue'
+import currency from '../../../mixins/formatCurrent'
+
+export default {
+  mixins: [extensions, currency],
+
+  props: {
+    dataStore: Object,
+    data: {},
+    envio: {},
+  },
+  mounted() {
+    var acc = document.getElementsByClassName('accordion')
+    var i
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function () {
+        this.classList.toggle('active')
+        var panel = this.nextElementSibling
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 'px'
+        }
+      })
+    }
+  },
+  data() {
+    return {
+      medioEnvio: '',
+      envioproducto: '',
+      img1: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png',
+      img2: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png',
+      img3: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png',
+      img4: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png',
+      img5: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png',
+      img6: 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png',
+      img7: 'https://ecommerce.payulatam.com/logos/PayU_CO.png',
+      img8: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png',
+    }
+  },
+  computed: {
+    mediospago() {
+      return this.dataStore.medios_pago
+    },
+    activeClass() {
+      if (
+        this.data.info.descripcion == '' ||
+        this.data.info.descripcion == null
+      ) {
+        return true
+      } else {
+        return false
+      }
+    },
+    envios() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
+      return this.data.medioEnvio
+    },
+  },
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      }
+    },
+  },
+}
+</script>
+<style scoped>
+.editor {
+  width: 100%;
+}
+.editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
+  border: none;
+  padding: 0px 5px;
+  background-color: transparent;
+}
+.editor >>> .el-tiptap-editor__menu-bubble {
+  display: none;
+}
+.editor >>> .el-tiptap-editor__content h1 {
+  font-size: 2em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h2 {
+  font-size: 1.5em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h3 {
+  font-size: 1.17em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h4 {
+  font-size: 1.12em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content h5 {
+  font-size: 0.83em;
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content p {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content span {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content blockquote {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content code {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content ul {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content ol {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content li {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content pre {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content strong {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content em {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content s {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content .image-view__body__image {
+  cursor: none;
+  pointer-events: none;
+}
+.editor >>> .el-popper.el-tiptap-image-popper {
+  display: none;
+}
+.content-acordion {
+  @apply w-full flex flex-col justify-items-center items-start mt-40;
+}
+.accordion {
+  font-family: var(--font-style-1) !important;
+  background-color: #fff;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #000;
+  cursor: pointer;
+  font-weight: 800;
+  line-height: 38px;
+  height: 62px;
+  width: 100%;
+  text-transform: capitalize;
+  border: none;
+  text-align: left;
+  transition: 0.4s;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.accordion:after {
+  @apply flex justify-center items-center;
+  content: '\002B';
+  color: #000;
+  font-size: 22px;
+  font-weight: 400;
+  float: left;
+  margin-right: 10px;
+}
+.active:after {
+  content: '\2212';
+}
+.panel {
+  /* padding: 0 18px; */
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.content_product_description {
+  font-family: var(--font-style-1) !important;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+h3 {
+  color: var(--color_text);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  align-self: flex-start;
+  font-family: var(--font-style-1) !important;
+}
+h4 {
+  font-family: var(--font-style-1) !important;
+  color: var(--color_text);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.42857143;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 5px;
+}
+li p {
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+.description-method {
+  font-family: var(--font-style-1) !important;
+  color: var(--color_subtext);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+img {
+  max-width: 320px;
+  width: 50%;
+  margin-top: 15px;
+}
+</style>

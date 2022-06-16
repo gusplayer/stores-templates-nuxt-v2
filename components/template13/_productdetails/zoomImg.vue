@@ -3,17 +3,17 @@
     <img
       class="photo_main"
       v-on:mouseover="activeZoom = !activeZoom"
-      :src="idCloudinaryDetalle(photo, 645, 430)"
+      :src="photo"
       alt="Product Img"
     />
   </figure>
 </template>
 
 <script>
-import idCloudinaryDetalle from '../../../mixins/idCloudinary'
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinaryDetalle],
-  name: 'zoomImg-details13',
+  mixins: [idCloudinary],
+  name: 'zoomImg-details',
   props: ['photo'],
   data() {
     return {
@@ -54,6 +54,7 @@ figure.zoom {
   overflow: hidden;
   cursor: zoom-in;
   margin-bottom: 10px;
+  border-radius: 10px;
 }
 figure.zoom img {
   max-width: 100%;
