@@ -18,7 +18,8 @@ export default {
       import('../../components/template10/blog_page/Ko-articulo'),
     K11Article: () =>
       import('../../components/template11/blog_page/Ko-articulo'),
-    K13Article: () => import('../../components/blog/Ko-articulo'),
+    K13Article: () =>
+      import('../../components/template13/_blog/Ko-articulo.vue'),
   },
   computed: {
     ...mapState([

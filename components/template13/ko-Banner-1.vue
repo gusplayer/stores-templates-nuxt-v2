@@ -9,6 +9,7 @@
         :interval="banner.intervalo"
         class="w-full h-full"
         :height="checkMobile ? banner.with_banner_res : banner.with_banner"
+        :key="bannerRendering"
       >
         <el-carousel-item v-for="(item, i) in this.banner.values" :key="i">
           <a
@@ -55,6 +56,7 @@ export default {
   data() {
     return {
       checkMobile: false,
+      bannerRendering: 0,
     }
   },
   methods: {

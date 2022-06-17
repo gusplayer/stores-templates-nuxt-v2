@@ -181,13 +181,9 @@ export default {
   line-height: 48px;
 }
 .wrapper-blog {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
   min-height: calc(72vh);
   background: white;
+  @apply w-full flex flex-col justify-start items-center;
 }
 .container-article {
   @apply flex justify-center items-center;

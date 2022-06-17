@@ -396,7 +396,6 @@ export const mutations = {
   },
   SET_CURRENTSETTING13(state, value) {
     if (value && value.component) {
-      console.log(value)
       switch (value.component) {
         case 'banner':
           state.settingByTemplate13.banner = value.setting
@@ -1143,27 +1142,27 @@ export const getters = {
   },
   listaDescuentosProductos(state, getters) {
     if (state.listDescuentos) {
-      let restulDesc
+      let resultDesc
       state.listDescuentos.filter((element) => {
         if (element.tipo == 0 && element.estado == 1) {
           if (getters.cantidadProductos >= element.cantidad_productos) {
-            restulDesc = element
+            resultDesc = element
           }
         }
       })
-      if (restulDesc) {
-        if (restulDesc.opcion == 1) {
+      if (resultDesc) {
+        if (resultDesc.opcion == 1) {
           let data = {
-            cantidad: restulDesc.cantidad_productos,
-            valor: restulDesc.valor_descuento,
-            tipo: restulDesc.opcion,
+            cantidad: resultDesc.cantidad_productos,
+            valor: resultDesc.valor_descuento,
+            tipo: resultDesc.opcion,
           }
           return data
-        } else if (restulDesc.opcion == 0) {
+        } else if (resultDesc.opcion == 0) {
           let data = {
-            cantidad: restulDesc.cantidad_productos,
-            valor: restulDesc.porcentaje_descuento,
-            tipo: restulDesc.opcion,
+            cantidad: resultDesc.cantidad_productos,
+            valor: resultDesc.porcentaje_descuento,
+            tipo: resultDesc.opcion,
           }
           return data
         }
@@ -1174,7 +1173,7 @@ export const getters = {
   },
   listaDescuentosPrecio(state) {
     if (state.listDescuentos) {
-      let restulDesc
+      let resultDesc
       state.listDescuentos.filter((element) => {
         if (element.tipo == 1 && element.estado == 1) {
           let rangosByDisconunt = JSON.parse(element.rangos_precios)
@@ -1184,14 +1183,14 @@ export const getters = {
                 state.totalCart >= rango['inicial'] &&
                 state.totalCart <= rango['final']
               ) {
-                restulDesc = rango
+                resultDesc = rango
               }
             })
           }
         }
       })
-      if (restulDesc) {
-        return restulDesc
+      if (resultDesc) {
+        return resultDesc
       } else {
         return ''
       }

@@ -531,8 +531,8 @@ export default {
   font-size: var(--fontSizeTitle);
   /* font: inherit; */
   min-height: 58px;
-  height: 58px;
-  @apply pt-10 transition-all ease-out duration-0.2 text-center;
+  max-height: 58px;
+  @apply h-full pt-10 transition-all ease-out duration-0.2 text-center;
 }
 .card-title:hover {
   color: var(--hover_text);

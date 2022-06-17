@@ -138,7 +138,7 @@ export default {
   margin-bottom: var(--marginbottomDescription);
 }
 .btn-products {
-  @apply w-full flex justify-center items-center mt-80;
+  @apply w-full flex justify-center items-center;
 }
 .btn {
   color: var(--colorTextBTn);
@@ -159,13 +159,16 @@ export default {
   .product-text {
     @apply mb-40;
   }
+  .btn-products {
+    @apply mt-20;
+  }
 }
 @screen md {
   .producto-items-content {
     @apply w-9/5;
   }
-  .subtittle {
-    /* font-size: 15px; */
+  .btn-products {
+    @apply mt-30;
   }
 }
 @screen lg {

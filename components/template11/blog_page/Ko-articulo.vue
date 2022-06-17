@@ -120,7 +120,140 @@ export default {
     @apply font-normal capitalize;
   }
   .editor {
-    @apply w-full max-w-full flex flex-col justify-center items-center overflow-hidden;
+    width: 100%;
+    background: white;
+    border-radius: 5px;
+    padding: 15px;
+    position: relative;
+    margin-top: 5px;
+  }
+  .editor__content {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    outline: none;
+    padding-top: 10px;
+  }
+  .editor__content >>> * {
+    caret-color: black;
+    outline: none;
+  }
+  .editor__content >>> pre {
+    padding: 0.7rem 1rem;
+    border-radius: 5px;
+    background: black;
+    color: green;
+    font-size: 0.8rem;
+    overflow-x: auto;
+  }
+  .editor__content >>> pre code {
+    display: block;
+  }
+  .editor__content >>> p code {
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.8);
+  }
+  .editor__content >>> ul,
+  .editor__content >>> ol {
+    padding-left: 1rem;
+  }
+  .editor__content >>> li > p,
+  .editor__content >>> li > ol,
+  .editor__content >>> li > ul {
+    margin: 0;
+  }
+  .editor__content >>> ul {
+    color: black;
+    list-style-type: disc;
+  }
+  .editor__content >>> ol {
+    color: black;
+    list-style-type: decimal;
+  }
+  .editor__content >>> a {
+    color: rgb(68, 68, 211);
+  }
+  .editor__content >>> h1 {
+    font-weight: bold;
+    font-size: 2em;
+  }
+  .editor__content >>> h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  .editor__content >>> h3 {
+    font-weight: bold;
+    font-size: 1.17em;
+  }
+  .editor__content >>> blockquote {
+    border-left: 3px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.8);
+    padding-left: 0.8rem;
+    font-style: italic;
+  }
+  .editor__content >>> blockquote p {
+    margin: 0;
+  }
+  .editor__content >>> img {
+    /* width: 100%; */
+    /* margin: 0; */
+    max-width: 100%;
+    border-radius: 3px;
+  }
+  .editor__content >>> img {
+    /* width: 100%; */
+    /* margin: 0; */
+    max-width: 100%;
+    border-radius: 3px;
+  }
+  .editor__content >>> table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+  .editor__content >>> table td,
+  .editor__content >>> table th {
+    min-width: 1em;
+    border: 2px solid grey;
+    padding: 3px 5px;
+    vertical-align: top;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .editor__content >>> table td > *,
+  .editor__content >>> table th > * {
+    margin-bottom: 0;
+  }
+  .editor__content >>> table th {
+    font-weight: bold;
+    text-align: left;
+  }
+  .editor__content >>> table .selectedCell:after {
+    z-index: 2;
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(200, 200, 255, 0.4);
+    pointer-events: none;
+  }
+  .editor__content >>> table .column-resize-handle {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    z-index: 20;
+    background-color: #adf;
+    pointer-events: none;
   }
 }
 @screen md {

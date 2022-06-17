@@ -172,15 +172,12 @@
         </p>
       </div>
       <div class="precio">
-        <div class="content-text-price" v-if="this.product.precio">
+        <div class="content-text-price">
           <div
             class="content-price"
-            v-if="this.estadoCart == true && this.minPrice != this.maxPrice"
+            v-if="this.estadoCart == true && this.minPrice && this.maxPrice"
           >
-            <div
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <div class="text-price">
               {{
                 this.minPrice
                   | currency(
@@ -190,10 +187,7 @@
               }}
             </div>
             <p class="separator-price mx-4">-</p>
-            <div
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <div class="text-price">
               {{
                 this.maxPrice
                   | currency(
@@ -218,7 +212,7 @@
             </p>
           </div>
         </div>
-        <div v-else class="h-20"></div>
+        <!-- <div v-else class="h-20"></div> -->
       </div>
       <!-- Envios gratis -->
       <div class="content_buy_action">

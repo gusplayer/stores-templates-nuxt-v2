@@ -627,6 +627,7 @@ export default {
   font-size: 15px;
   color: var(--color_subtext);
   font-family: var(--font-style-1) !important;
+  background: transparent;
   @apply w-full h-30 cursor-pointer border-none;
 }
 .value-range-slide {
