@@ -11,7 +11,7 @@
           this.settingByTemplate13[0].setting13General &&
           this.settingByTemplate13[0].setting13General.fount_1
             ? this.settingByTemplate13[0].setting13General.fount_1
-            : 'Roboto',
+            : 'Poppins',
       },
     ]"
     v-if="settingByTemplate13"

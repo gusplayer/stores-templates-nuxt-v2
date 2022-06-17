@@ -61,10 +61,10 @@ export default {
 <style scoped>
 .content-deal {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-items-center items-center py-40;
+  @apply w-full flex flex-col justify-items-center items-center;
 }
 .content-grid {
-  @apply justify-center items-center pb-90;
+  @apply justify-center items-center;
 }
 .grid-left,
 .grid-right {
@@ -94,6 +94,7 @@ export default {
 .txt-price-1,
 .txt-price-2 {
   font-family: var(--font-style-1) !important;
+  @apply text-center;
 }
 @screen sm {
   .content-grid {
@@ -140,6 +141,12 @@ export default {
     border-color: var(--hover_Bg_btn);
     color: var(--hover_text_btn);
   }
+  .grid-right {
+    @apply px-10 pb-20;
+  }
+  .content-deal {
+    @apply py-20;
+  }
 }
 @screen md {
   .content-grid {
@@ -150,6 +157,12 @@ export default {
   }
   .grid-item-price {
     @apply mb-80;
+  }
+  .grid-right {
+    @apply px-20 pb-0;
+  }
+  .content-deal {
+    @apply py-40;
   }
 }
 @screen lg {

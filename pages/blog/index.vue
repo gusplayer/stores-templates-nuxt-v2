@@ -14,6 +14,7 @@ export default {
     K09Blog: () => import('../../components/template9/blog_page/Ko-Blog'),
     K10Blog: () => import('../../components/template10/blog_page/Ko-Blog'),
     K11Blog: () => import('../../components/template11/blog_page/Ko-Blog'),
+    K13Blog: () => import('../../components/template13/_blog/Ko-Blog'),
   },
   computed: {
     ...mapState([
@@ -50,6 +51,9 @@ export default {
           break
         case 11:
           productListComponent = 'K11Blog'
+          break
+        case 13:
+          productListComponent = 'K13Blog'
           break
       }
       return productListComponent
@@ -107,6 +111,17 @@ export default {
                   this.settingByTemplate11 &&
                   this.settingByTemplate11.settingGeneral
                     ? this.settingByTemplate11.settingGeneral
+                    : null,
+              },
+            ]
+          : null,
+        settingByTemplate13: this.settingByTemplate13
+          ? [
+              {
+                setting13General:
+                  this.settingByTemplate13 &&
+                  this.settingByTemplate13.settingGeneral
+                    ? this.settingByTemplate13.settingGeneral
                     : null,
               },
             ]
