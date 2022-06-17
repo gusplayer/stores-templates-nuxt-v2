@@ -396,7 +396,6 @@ export const mutations = {
   },
   SET_CURRENTSETTING13(state, value) {
     if (value && value.component) {
-      console.log(value)
       switch (value.component) {
         case 'banner':
           state.settingByTemplate13.banner = value.setting

@@ -41,8 +41,7 @@ export default {
 .setting_text {
   font-size: var(--fontSizeTitle);
   font-weight: var(--fontWeighTitle);
-  /* color: var(--colorText); */
-  color: #b2a466;
+  color: var(--colorText);
 }
 @media (max-width: 600px) {
   .content-wrapper {

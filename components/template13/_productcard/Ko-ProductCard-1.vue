@@ -553,7 +553,7 @@ export default {
   width: 100%;
 }
 .stats-container {
-  background: #fff;
+  background: var(--background_color_1);
   position: absolute;
   top: 288px;
   left: 0;
