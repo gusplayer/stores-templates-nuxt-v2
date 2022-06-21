@@ -734,9 +734,16 @@ export const actions = {
         name: `${subdomain}.komercia.co/`,
       })
     } else {
-      id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
-        name: `https://${full}`,
-      })
+      let getDomain = full.split('/?')
+      if (getDomain.length > 1) {
+        id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
+          name: `https://${getDomain[0]}`,
+        })
+      } else {
+        id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
+          name: `https://${getDomain}`,
+        })
+      }
     }
     if (idWapi) {
       await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
