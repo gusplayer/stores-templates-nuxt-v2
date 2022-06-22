@@ -735,14 +735,11 @@ export const actions = {
       })
     } else {
       let getDomain = full.split('/?')
-      console.log(getDomain)
       if (getDomain.length > 1) {
-        console.log('Si entra', getDomain)
         id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
           name: `https://${getDomain[0]}`,
         })
       } else {
-        console.log('No entra', getDomain)
         id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
           name: `https://${getDomain}`,
         })
