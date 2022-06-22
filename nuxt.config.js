@@ -30,6 +30,7 @@ export default {
     height: '3px',
   },
   css: ['element-ui/lib/theme-chalk/index.css'],
+  components: true,
   plugins: [
     '~/plugins/element',
     '~/plugins/mixinCommonMethods',
@@ -45,12 +46,33 @@ export default {
     { src: '~/plugins/vueLazyLoad.js', ssr: false },
     { src: '~/plugins/elementTipTap', ssr: false },
   ],
-  components: true,
-  buildModules: ['@nuxtjs/tailwindcss'],
+  buildModules: ['@nuxtjs/tailwindcss', '@/modules/generator'],
   modules: ['@nuxtjs/gtm', '@nuxtjs/sitemap'],
   sitemap: {
-    hostname: 'https://www.komercia.store/',
+    // generate: false,
     gzip: true,
+    defaults: {
+      priority: 1,
+      lastmod: new Date(),
+    },
+    exclude: [
+      '/template10',
+      '/template11',
+      '/template12',
+      '/template13',
+      '/template5',
+      '/template6',
+      '/template7',
+      '/template8',
+      '/template9',
+      '/template99',
+      '/unicentro',
+      '/template6/index_macrobrand',
+      '/template99/templates/template1',
+      '/template99/templates/template2',
+      '/template99/templates/template3',
+    ],
+    // routes: ['/blog/_slug', '/productos/_slug', '/productosHoko/_slug'],
   },
   debug: {
     enabled: true,
@@ -61,6 +83,8 @@ export default {
     },
     // publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
+    optimizeCSS: true,
+    parallel: true,
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
