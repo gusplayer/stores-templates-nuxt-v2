@@ -133,6 +133,10 @@ export default {
   props: {
     dataStore: Object,
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
   data() {
     return {
       pwd: null,
@@ -144,6 +148,9 @@ export default {
       return this.$store.state.stateModalPwd
     },
   },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenerTemplate)
+  },
   methods: {
     closedModal() {
       if (this.dataStore.modal && this.dataStore.modal.password) {
@@ -152,6 +159,17 @@ export default {
           this.setCookies(this.dataStore.modal.password)
         } else {
           this.stateMgs = true
+        }
+      }
+    },
+    addEventListenerTemplate(e) {
+      if (
+        e.origin.includes('https://panel.komercia.co') ||
+        e.origin.includes('http://localhost:8080') ||
+        e.origin.includes('https://panel.komercia.xyz')
+      ) {
+        if (e && e.data && e.data.modalSecurity === true) {
+          this.$store.commit('SET_STATE_MODAL_PWD', true)
         }
       }
     },
