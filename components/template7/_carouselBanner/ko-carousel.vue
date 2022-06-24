@@ -77,6 +77,11 @@ export default {
       },
     }
   },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
+  },
   methods: {
     autoplayBanner() {
       if (this.settingKCarousel && this.settingKCarousel.values.length == 1) {
