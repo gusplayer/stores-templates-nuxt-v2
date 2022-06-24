@@ -12,11 +12,14 @@
     ]"
   >
     <div class="swiper-wrapper z-auto">
-      <client-only>
+      <div
+        class="swiper-slide w-full flex justify-center items-center z-10"
+        :id="`slide${index + 1}`"
+        v-for="(banner, index) in this.settingKbanner.values"
+        :key="index"
+      >
         <a
-          class="swiper-slide"
-          v-for="(banner, index) in this.settingKbanner.values"
-          :key="index"
+          class="w-full flex justify-center items-center z-10"
           :class="banner.visbleBtn ? 'pointer-events-none' : 'cursorPointer'"
           :href="`${banner.visbleBtn ? '' : banner.url_redirect}`"
           rel="noreferrer noopener"
@@ -39,7 +42,7 @@
             :settingGeneral="settingGeneral"
           />
         </a>
-      </client-only>
+      </div>
     </div>
   </div>
 </template>
@@ -56,6 +59,9 @@ export default {
     settingGeneral: Object,
   },
   mixins: [idCloudinaryBanner],
+  mounted() {
+    this.autoplayBanner()
+  },
   data() {
     return {
       swiperOption: {
@@ -78,15 +84,34 @@ export default {
       },
     }
   },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
+  },
+  methods: {
+    autoplayBanner() {
+      if (this.settingKCarousel && this.settingKCarousel.values.length == 1) {
+        this.swiperOption.autoplay.delay = 900000000000000000
+      } else {
+        this.swiperOption.autoplay.delay = 6000
+      }
+    },
+  },
+  watch: {
+    'settingKCarousel.values'() {
+      this.autoplayBanner()
+    },
+  },
 }
 </script>
 <style scoped>
 .content-carousel {
   @apply w-full flex flex-col justify-center items-center;
 }
-.swiper-slide {
+/* .swiper-slide {
   @apply w-full flex justify-center items-center z-10;
-}
+} */
 .slide-bgWeb {
   display: initial;
   @apply w-full object-center object-cover;

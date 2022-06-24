@@ -1,14 +1,16 @@
 <template>
   <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
     <div class="swiper-wrapper z-auto">
-      <client-only>
+      <div
+        class="swiper-slide w-full flex justify-center items-center z-10"
+        v-for="(banner, index) in banner.values"
+        :key="index"
+        :id="`slide${index + 1}`"
+      >
         <a
-          class="swiper-slide"
-          v-for="(banner, index) in banner.values"
-          :class="banner.visbleBtn ? 'pointer-events-none' : 'cursorPointer'"
+          class="w-full flex justify-center items-center z-10"
           :href="`${banner.visbleBtn ? '' : banner.url_redirect}`"
-          :key="index"
-          :id="`slide${index + 1}`"
+          :class="banner.visbleBtn ? 'pointer-events-none' : 'cursorPointer'"
           rel="noreferrer noopener"
         >
           <img
@@ -26,13 +28,8 @@
             :banner="banner"
             :settingGeneral="settingGeneral"
           />
-          <CarouselContent
-            class="absolute"
-            :banner="banner"
-            :settingGeneral="settingGeneral"
-          />
         </a>
-      </client-only>
+      </div>
     </div>
     <div class="swiper-pagination" v-if="banner.visible_pagination"></div>
   </div>
@@ -49,6 +46,9 @@ export default {
     settingGeneral: Object,
   },
   mixins: [idCloudinaryBanner],
+  mounted() {
+    this.autoplayBanner()
+  },
   data() {
     return {
       swiperOption: {
@@ -71,6 +71,25 @@ export default {
       },
     }
   },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
+  },
+  methods: {
+    autoplayBanner() {
+      if (this.settingKCarousel && this.settingKCarousel.values.length == 1) {
+        this.swiperOption.autoplay.delay = 900000000000000000
+      } else {
+        this.swiperOption.autoplay.delay = 6000
+      }
+    },
+  },
+  watch: {
+    'settingKCarousel.values'() {
+      this.autoplayBanner()
+    },
+  },
 }
 </script>
 <style scoped>
@@ -86,9 +105,9 @@ export default {
   background: white;
   opacity: 0.2;
 }
-.swiper-slide {
+/* .swiper-slide {
   @apply w-full flex justify-center items-center z-10;
-}
+} */
 .slide-bgWeb {
   display: initial;
   @apply w-full object-center object-cover;
