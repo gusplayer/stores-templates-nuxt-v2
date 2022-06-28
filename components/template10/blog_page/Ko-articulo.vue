@@ -24,20 +24,17 @@
 
         <div class="content-date">
           <div class="flex-shrink-0">
-            <a href="#">
-              <img
-                class="h-10 w-10 rounded-full"
-                :src="`${this.$store.state.urlKomercia}/users/user.jpg`"
-                alt=""
-              />
-            </a>
+            <img
+              class="h-30 w-30 rounded-full"
+              :src="`${this.$store.state.urlKomercia}/users/user.jpg`"
+              alt=""
+            />
           </div>
           <div class="content-date-items">
             <p>{{ dataArticle.autor }}</p>
             <p>{{ this.shippingCreated }}</p>
           </div>
         </div>
-        <!-- <div class="wrapper-articulo" v-html="dataArticle.contenido"></div> -->
         <div class="editor" v-if="dataArticle.contenido">
           <el-tiptap
             v-model="dataArticle.contenido"
@@ -128,15 +125,15 @@ export default {
 .wrapper-blog {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   min-height: calc(64vh);
   background: #fff;
-  padding-bottom: 40px;
+  @apply py-30;
 }
 .content-blog {
-  @apply p-4;
+  @apply py-15 px-20;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -193,6 +190,10 @@ export default {
   padding: 15px;
   position: relative;
   margin-top: 5px;
+}
+.editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
+  border: 1px solid transparent;
+  padding: 0px;
 }
 .editor__content {
   overflow-wrap: break-word;
