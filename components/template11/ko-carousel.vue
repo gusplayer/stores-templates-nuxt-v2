@@ -12,37 +12,37 @@
     ]"
   >
     <div class="swiper-wrapper z-auto">
-      <div
+      <!-- <div
+        
+      > -->
+      <a
         class="swiper-slide w-full flex justify-center items-center z-10"
         :id="`slide${index + 1}`"
-        v-for="(banner, index) in this.settingKbanner.values"
+        v-for="(item, index) in this.settingKbanner.values"
         :key="index"
+        :class="item.visbleBtn ? 'pointer-events-none' : 'cursorPointer'"
+        :href="`${item.visbleBtn ? '' : item.url_redirect}`"
+        rel="noreferrer noopener"
       >
-        <a
-          class="w-full flex justify-center items-center z-10"
-          :class="banner.visbleBtn ? 'pointer-events-none' : 'cursorPointer'"
-          :href="`${banner.visbleBtn ? '' : banner.url_redirect}`"
-          rel="noreferrer noopener"
-        >
-          <img
-            class="slide-bgWeb"
-            :src="idCloudinaryBanner(banner.url_img_background)"
-            alt="Bg-Image"
-            v-if="banner.url_img_background"
-          />
-          <img
-            class="slide-bgMovil"
-            :src="idCloudinaryBanner(banner.url_img_background_res)"
-            alt="Bg-Image"
-            v-if="banner.url_img_background_res"
-          />
-          <CarouselContent
-            class="absolute"
-            :banner="banner"
-            :settingGeneral="settingGeneral"
-          />
-        </a>
-      </div>
+        <img
+          class="slide-bgWeb"
+          :src="idCloudinaryBanner(item.url_img_background)"
+          alt="Bg-Image"
+          v-if="item.url_img_background"
+        />
+        <img
+          class="slide-bgMovil"
+          :src="idCloudinaryBanner(item.url_img_background_res)"
+          alt="Bg-Image"
+          v-if="item.url_img_background_res"
+        />
+        <CarouselContent
+          class="absolute"
+          :banner="item"
+          :settingGeneral="settingGeneral"
+        />
+      </a>
+      <!-- </div> -->
     </div>
   </div>
 </template>
