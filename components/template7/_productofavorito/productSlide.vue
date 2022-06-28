@@ -29,7 +29,7 @@
 import KoProductCard1 from '../../../components/template7/_productcard/ProductCard'
 
 export default {
-  name: 'productSlide-productFavorito',
+  name: 'Ko7-productSlide-productFavorito',
   components: {
     KoProductCard1,
   },

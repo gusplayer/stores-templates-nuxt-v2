@@ -370,7 +370,7 @@ import currency from '../../../mixins/formatCurrent'
 
 export default {
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductCard-1',
+  name: 'Ko7-ProductCard-1',
   props: { product: Object },
 
   data() {
