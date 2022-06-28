@@ -16,39 +16,14 @@
         <div class="tittle-banner-blog">
           <p class="txt-banner">Últimos blogs</p>
         </div>
+        <input
+          type="search"
+          :placeholder="$t('header_search')"
+          v-model="search"
+          @keyup.enter="getSearch(search)"
+        />
       </div>
       <div class="contenedor">
-        <!-- <div class="content-search-blog">
-          <div class="empty-space"></div>
-          <div class="content-tittle">
-            <div class="input-animated">
-              <input
-                type="text"
-                v-model="search"
-                class="input-text"
-                placeholder="¿Que deseas buscar?"
-              />
-              <span class="search-icon">
-                <svg
-                  class="search-header"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  width="20px"
-                  height="20px"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </span>
-            </div>
-          </div>
-        </div> -->
         <div class="content-item w-full">
           <div class="content-item-productos">
             <div class="grid-products">
@@ -141,7 +116,7 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .contenedor {
-  @apply w-full flex flex-col justify-center items-center mt-30;
+  @apply w-full flex justify-start items-center mt-30;
 }
 .content-item-productos {
   @apply w-full flex flex-col justify-center items-center;
@@ -199,19 +174,11 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .banner-blog {
-  @apply w-full flex flex-col justify-center items-start pt-8 z-10;
+  @apply w-full flex flex-row justify-center items-start pt-8 z-10;
   /* background-color: #efefef; */
 }
 #separator {
   margin-left: 20px;
-}
-.content-tittle {
-  width: auto;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  border-radius: 5px;
-  background: white;
 }
 .title {
   font-size: 25px;
@@ -220,71 +187,6 @@ export default {
   color: #2c2930;
   margin-bottom: 20px;
 }
-.content-search-blog {
-  @apply flex flex-row  items-center;
-  border-bottom: 1px solid gray;
-  margin-bottom: 30px;
-  height: 30px;
-}
-.input-animated {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  transform: translate(-0%, -50%);
-  margin-bottom: -20px;
-  border-radius: 50px;
-  background: white;
-  border: 2px solid #303030;
-
-  /* -webkit-box-shadow: 0px 5px 12px 5px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 5px 12px 5px rgba(0, 0, 0, 0.2); */
-}
-.input-animated:hover > .input-text {
-  width: 240px;
-  padding: 0 15px;
-  color: #303030;
-  font-size: 16px;
-}
-.input-text:focus {
-  width: 240px;
-  padding: 0 15px;
-  color: #303030;
-  font-size: 16px;
-}
-
-.input-animated:hover > .search-icon {
-  background: #fff;
-  cursor: pointer;
-  color: #000;
-}
-.search-icon {
-  color: #303030;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-.input-text {
-  border: none;
-  background: none;
-  outline: none;
-  color: #303030;
-  font-size: 0px;
-  transition: 0.4s;
-  width: 0px;
-  font-family: 'Poppins' !important ;
-}
-.input-text:focus {
-  border: none;
-}
-.empty-space {
-  @apply mx-2;
-}
-
 .crumb {
   @apply w-full flex flex-row justify-center items-center;
 }
@@ -308,6 +210,9 @@ export default {
   color: #eb7025;
   transition: all 0.25s ease;
 }
+.input-text {
+  @apply mt-8;
+}
 
 @screen sm {
   .bannerBlog {
@@ -318,7 +223,7 @@ export default {
     @apply w-9/0;
   }
   .tittle-banner-blog {
-    @apply justify-start items-start mt-20;
+    @apply flex justify-between items-start;
   }
   .grid-products {
     @apply w-full grid-cols-1 gap-8;
@@ -337,22 +242,9 @@ export default {
   #separator {
     margin-left: 10px;
   }
-  .content-search-blog {
-    @apply w-9/0 justify-center flex;
-  }
-  .input-text {
-    width: 240px;
-    color: #303030;
-    padding: 0 15px;
-    font-size: 16px;
-  }
   .title {
     @apply hidden;
   }
-  .empty-space {
-    @apply hidden;
-  }
-
   .crumb {
     @apply justify-center items-center;
   }
@@ -362,31 +254,15 @@ export default {
     @apply grid-cols-2 justify-start items-start;
   }
   .bannerBlog {
-    height: 220px;
-    background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/v1614233821/Temp10/Productos/bg-beagrumb_gxvk1i.jpg');
-    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center;
+    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center py-30;
   }
   #separator {
     margin-left: 10px;
-  }
-  .content-search-blog {
-    @apply w-7/0 justify-center;
-  }
-  .empty-space {
-    @apply flex;
   }
 }
 @screen lg {
   .grid-products {
     @apply grid-cols-3 gap-4;
-  }
-}
-@media (min-width: 1025px) {
-  .content-search-blog {
-    @apply hidden;
-  }
-  .tittle-banner-blog {
-    @apply justify-start items-start;
   }
 }
 @screen mlg {
@@ -396,15 +272,8 @@ export default {
   .grid-products {
     @apply w-full gap-8;
   }
-  .tittle-banner-blog {
-    @apply w-auto flex flex-row justify-center items-center;
-  }
-
   #separator {
     margin-left: 20px;
-  }
-  .content-search-blog {
-    @apply w-6/0;
   }
 }
 @media (min-width: 1400px) {

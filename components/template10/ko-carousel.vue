@@ -8,7 +8,7 @@
         :id="`slide${index + 1}`"
         :href="`${item.visbleBtn == true ? '' : item.url_redirect}`"
         :class="
-          item.visbleBtn == true ? 'pointer-events-none' : 'cursorPointer'
+          item.visbleBtn == true ? 'pointer-events-none' : 'cursor-pointer'
         "
         rel="noreferrer noopener"
       >
