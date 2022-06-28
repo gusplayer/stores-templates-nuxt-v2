@@ -122,224 +122,229 @@
           v-if="showSubCategory && selectedSubcategories.length"
         ></div>
       </div>
-      <div class="content-right">
-        <div class="top-content">
-          <div class="content-items-categorias">
-            <div class="content-items-categorias-text">
-              <p class="text-categorias" id="homeCate" @click="clear">
-                {{ $t('home_catalogo') }}
+      <client-only>
+        <div class="content-right">
+          <div class="top-content">
+            <div class="content-items-categorias">
+              <div class="content-items-categorias-text">
+                <p class="text-categorias" id="homeCate07" @click="clear">
+                  {{ $t('home_catalogo') }}
+                </p>
                 <span
                   v-if="this.nameCategoryHeader"
                   class="separator-breadCrumbs"
-                  >/</span
+                  >/
+                </span>
+                <p
+                  class="text-categorias-select"
+                  v-if="this.nameCategoryHeader"
+                  @click="breadcrumbsSendCategory(nameCategoryHeader)"
+                  id="stateCate07"
                 >
-              </p>
-              <p
-                class="text-categorias-select"
-                v-if="this.nameCategoryHeader"
-                @click="breadcrumbsSendCategory(nameCategoryHeader)"
-              >
-                <span id="statecate">{{ this.nameCategoryHeader }}</span>
-              </p>
-              <span
-                v-if="this.nameSubCategoryHeader"
-                class="separator-breadCrumbs"
-                >/
-              </span>
-              <p
-                class="text-categorias-select"
-                v-if="this.nameSubCategoryHeader"
-              >
-                <span id="statesubcate">{{ this.nameSubCategoryHeader }}</span>
-              </p>
-            </div>
-
-            <div class="items-end">
-              <div class="show-view-per-list">
-                <button class="show">
-                  <svg
-                    @click="showList"
-                    class="show-icon"
-                    :class="indexshowList == 1 ? 'show-icon-active' : ''"
-                    version="1.1"
-                    id="list-view"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    enable-background="new 0 0 18 18"
-                    xml:space="preserve"
-                  >
-                    <rect width="18" height="2"></rect>
-                    <rect y="16" width="18" height="2"></rect>
-                    <rect y="8" width="18" height="2"></rect>
-                  </svg>
-                </button>
-                <button class="show">
-                  <svg
-                    @click="showGrid2"
-                    class="show-icon"
-                    :class="indexshowList == 2 ? 'show-icon-active' : ''"
-                    version="1.1"
-                    id="Layer_1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    width="19px"
-                    height="19px"
-                    viewBox="0 0 19 19"
-                    enable-background="new 0 0 19 19"
-                    xml:space="preserve"
-                  >
-                    <path d="M7,2v5H2V2H7 M9,0H0v9h9V0L9,0z"></path>
-                    <path d="M17,2v5h-5V2H17 M19,0h-9v9h9V0L19,0z"></path>
-                    <path d="M7,12v5H2v-5H7 M9,10H0v9h9V10L9,10z"></path>
-                    <path d="M17,12v5h-5v-5H17 M19,10h-9v9h9V10L19,10z"></path>
-                  </svg>
-                </button>
-                <button class="show">
-                  <svg
-                    @click="showGrid3"
-                    :class="indexshowList == 3 ? 'show-icon-active' : ''"
-                    class="show-icon"
-                    version="1.1"
-                    id="Layer_2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    width="19px"
-                    height="19px"
-                    viewBox="0 0 19 19"
-                    enable-background="new 0 0 19 19"
-                    xml:space="preserve"
-                  >
-                    <rect width="5" height="5"></rect>
-                    <rect x="7" width="5" height="5"></rect>
-                    <rect x="14" width="5" height="5"></rect>
-                    <rect y="7" width="5" height="5"></rect>
-                    <rect x="7" y="7" width="5" height="5"></rect>
-                    <rect x="14" y="7" width="5" height="5"></rect>
-                    <rect y="14" width="5" height="5"></rect>
-                    <rect x="7" y="14" width="5" height="5"></rect>
-                    <rect x="14" y="14" width="5" height="5"></rect>
-                  </svg>
-                </button>
-                <button class="show">
-                  <svg
-                    @click="showGrid4"
-                    :class="indexshowList == 4 ? 'show-icon-active' : ''"
-                    class="show-icon"
-                    version="1.1"
-                    id="Layer_3"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    width="19px"
-                    height="19px"
-                    viewBox="0 0 19 19"
-                    enable-background="new 0 0 19 19"
-                    xml:space="preserve"
-                  >
-                    <rect width="4" height="4"></rect>
-                    <rect x="5" width="4" height="4"></rect>
-                    <rect x="10" width="4" height="4"></rect>
-                    <rect x="15" width="4" height="4"></rect>
-                    <rect y="5" width="4" height="4"></rect>
-                    <rect x="5" y="5" width="4" height="4"></rect>
-                    <rect x="10" y="5" width="4" height="4"></rect>
-                    <rect x="15" y="5" width="4" height="4"></rect>
-                    <rect y="15" width="4" height="4"></rect>
-                    <rect x="5" y="15" width="4" height="4"></rect>
-                    <rect x="10" y="15" width="4" height="4"></rect>
-                    <rect x="15" y="15" width="4" height="4"></rect>
-                    <rect y="10" width="4" height="4"></rect>
-                    <rect x="5" y="10" width="4" height="4"></rect>
-                    <rect x="10" y="10" width="4" height="4"></rect>
-                    <rect x="15" y="10" width="4" height="4"></rect>
-                  </svg>
-                </button>
+                  {{ this.nameCategoryHeader }}
+                </p>
+                <span
+                  v-if="this.nameSubCategoryHeader"
+                  class="separator-breadCrumbs"
+                  >/
+                </span>
+                <p
+                  class="text-categorias-select"
+                  v-if="this.nameSubCategoryHeader"
+                  id="stateSubCate"
+                >
+                  {{ this.nameSubCategoryHeader }}
+                </p>
+              </div>
+              <div class="items-end">
+                <div class="show-view-per-list">
+                  <button class="show">
+                    <svg
+                      @click="showList"
+                      class="show-icon"
+                      :class="indexshowList == 1 ? 'show-icon-active' : ''"
+                      version="1.1"
+                      id="list-view"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      enable-background="new 0 0 18 18"
+                      xml:space="preserve"
+                    >
+                      <rect width="18" height="2"></rect>
+                      <rect y="16" width="18" height="2"></rect>
+                      <rect y="8" width="18" height="2"></rect>
+                    </svg>
+                  </button>
+                  <button class="show">
+                    <svg
+                      @click="showGrid2"
+                      class="show-icon"
+                      :class="indexshowList == 2 ? 'show-icon-active' : ''"
+                      version="1.1"
+                      id="Layer_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      width="19px"
+                      height="19px"
+                      viewBox="0 0 19 19"
+                      enable-background="new 0 0 19 19"
+                      xml:space="preserve"
+                    >
+                      <path d="M7,2v5H2V2H7 M9,0H0v9h9V0L9,0z"></path>
+                      <path d="M17,2v5h-5V2H17 M19,0h-9v9h9V0L19,0z"></path>
+                      <path d="M7,12v5H2v-5H7 M9,10H0v9h9V10L9,10z"></path>
+                      <path
+                        d="M17,12v5h-5v-5H17 M19,10h-9v9h9V10L19,10z"
+                      ></path>
+                    </svg>
+                  </button>
+                  <button class="show">
+                    <svg
+                      @click="showGrid3"
+                      :class="indexshowList == 3 ? 'show-icon-active' : ''"
+                      class="show-icon"
+                      version="1.1"
+                      id="Layer_2"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      width="19px"
+                      height="19px"
+                      viewBox="0 0 19 19"
+                      enable-background="new 0 0 19 19"
+                      xml:space="preserve"
+                    >
+                      <rect width="5" height="5"></rect>
+                      <rect x="7" width="5" height="5"></rect>
+                      <rect x="14" width="5" height="5"></rect>
+                      <rect y="7" width="5" height="5"></rect>
+                      <rect x="7" y="7" width="5" height="5"></rect>
+                      <rect x="14" y="7" width="5" height="5"></rect>
+                      <rect y="14" width="5" height="5"></rect>
+                      <rect x="7" y="14" width="5" height="5"></rect>
+                      <rect x="14" y="14" width="5" height="5"></rect>
+                    </svg>
+                  </button>
+                  <button class="show">
+                    <svg
+                      @click="showGrid4"
+                      :class="indexshowList == 4 ? 'show-icon-active' : ''"
+                      class="show-icon"
+                      version="1.1"
+                      id="Layer_3"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      width="19px"
+                      height="19px"
+                      viewBox="0 0 19 19"
+                      enable-background="new 0 0 19 19"
+                      xml:space="preserve"
+                    >
+                      <rect width="4" height="4"></rect>
+                      <rect x="5" width="4" height="4"></rect>
+                      <rect x="10" width="4" height="4"></rect>
+                      <rect x="15" width="4" height="4"></rect>
+                      <rect y="5" width="4" height="4"></rect>
+                      <rect x="5" y="5" width="4" height="4"></rect>
+                      <rect x="10" y="5" width="4" height="4"></rect>
+                      <rect x="15" y="5" width="4" height="4"></rect>
+                      <rect y="15" width="4" height="4"></rect>
+                      <rect x="5" y="15" width="4" height="4"></rect>
+                      <rect x="10" y="15" width="4" height="4"></rect>
+                      <rect x="15" y="15" width="4" height="4"></rect>
+                      <rect y="10" width="4" height="4"></rect>
+                      <rect x="5" y="10" width="4" height="4"></rect>
+                      <rect x="10" y="10" width="4" height="4"></rect>
+                      <rect x="15" y="10" width="4" height="4"></rect>
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="producto-items-content" id="section">
-          <div class="content-item">
-            <div class="content-item-productos">
-              <div class="product-conten-items" id="grid-selection">
-                <div
-                  v-for="product in filterProduct"
-                  :key="product.id"
-                  class="content-products"
-                >
-                  <KoProdcutCardFilter
-                    :product="product"
-                    v-if="!showinList"
-                    class="product-nolist"
-                    :settingGeneral="settingByTemplate7[0].settingGeneral"
-                    :settingKProdutCard="
-                      settingByTemplate7[0].settingKProdutCard
-                    "
-                  ></KoProdcutCardFilter>
-                  <KoProdcutCardFilerList
-                    :product="product"
-                    v-if="showinList"
-                  ></KoProdcutCardFilerList>
-                </div>
-              </div>
-              <div
-                v-if="this.fullProducts.length == 0"
-                class="content-products-empty"
-              >
-                <div class="header-content-logo">
-                  <nuxt-link to="/productos" class="wrapper-logo">
-                    <img
-                      :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
-                      class="header-logo"
-                      alt="Logo Img"
-                      @click="clear"
+          <div class="producto-items-content" id="section">
+            <div class="content-item">
+              <div class="content-item-productos">
+                <div class="product-content-items" id="grid-selection">
+                  <div
+                    v-for="product in filterProduct"
+                    :key="product.id"
+                    class="content-products"
+                  >
+                    <KoProductCardFilter
+                      :product="product"
+                      v-if="!showinList"
+                      class="product-nolist"
+                      :settingGeneral="settingByTemplate7[0].settingGeneral"
+                      :settingKProdutCard="
+                        settingByTemplate7[0].settingKProdutCard
+                      "
                     />
-                  </nuxt-link>
+                    <KoProductCardFilerList
+                      :product="product"
+                      v-if="showinList"
+                    />
+                  </div>
                 </div>
-                <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
-              </div>
-              <div class="pagination-medium">
                 <div
-                  class="product_pagination"
-                  v-if="products.length > this.numVistas"
+                  v-if="this.fullProducts.length == 0"
+                  class="content-products-empty"
                 >
-                  <el-pagination
-                    background
-                    layout="prev, pager, next"
-                    :total="products.length"
-                    :page-size="this.numVistas"
-                    :current-page.sync="currentPage"
-                    class="pagination"
-                  ></el-pagination>
+                  <div class="header-content-logo">
+                    <nuxt-link to="/productos" class="wrapper-logo">
+                      <img
+                        :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+                        class="header-logo"
+                        alt="Logo Img"
+                        @click="clear"
+                      />
+                    </nuxt-link>
+                  </div>
+                  <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
+                </div>
+                <div class="pagination-medium">
+                  <div
+                    class="product_pagination"
+                    v-if="products.length > this.numVistas"
+                  >
+                    <el-pagination
+                      background
+                      layout="prev, pager, next"
+                      :total="products.length"
+                      :page-size="this.numVistas"
+                      :current-page.sync="currentPage"
+                      class="pagination"
+                    ></el-pagination>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </client-only>
     </div>
   </div>
 </template>
 
 <script>
-import KoProdcutCardFilter from './_productcard/ProductCard'
-import KoProdcutCardFilerList from './_productcard/ProductCardFilterList'
+import KoProductCardFilter from './_productcard/ProductCard'
+import KoProductCardFilerList from './_productcard/ProductCardFilterList'
 import sendCategoryUrl from '../../mixins/sendCategoryUrl'
 import SendsubcategoryUrl from '../../mixins/SendsubcategoryUrl'
 export default {
   components: {
-    KoProdcutCardFilter,
-    KoProdcutCardFilerList,
+    KoProductCardFilter,
+    KoProductCardFilerList,
   },
   props: {
     dataStore: Object,
@@ -347,7 +352,7 @@ export default {
     settingByTemplate7: Array,
   },
   mixins: [sendCategoryUrl, SendsubcategoryUrl],
-  name: 'Ko-ProductList-Filter',
+  name: 'Ko7-ProductList-Filter',
   mounted() {
     if (
       this.settingByTemplate7[0] &&
@@ -570,7 +575,7 @@ export default {
     },
     Sendsubcategory(value) {
       this.statesub = false
-      var stateCategory = document.getElementById('statecate')
+      var stateCategory = document.getElementById('stateCate07')
       if (this.statesub == false && stateCategory) {
         stateCategory.style.color = '#8e8e8e'
         stateCategory.style.fontWeight = '100'
@@ -603,8 +608,8 @@ export default {
     },
     sendCategory(value, categoria, index, ref) {
       this.statesub = true
-      var stateCategory = document.getElementById('statecate')
-      var catalogo = document.getElementById('homeCate')
+      var stateCategory = document.getElementById('stateCate07')
+      var catalogo = document.getElementById('homeCate07')
       if (catalogo) {
         catalogo.style.color = '#8e8e8e'
         catalogo.style.fontWeight = '100'
@@ -642,8 +647,8 @@ export default {
     },
     breadcrumbsSendCategory(value) {
       this.statesub = true
-      var stateCategory = document.getElementById('statecate')
-      var catalogo = document.getElementById('homeCate')
+      var stateCategory = document.getElementById('stateCate07')
+      var catalogo = document.getElementById('homeCate07')
 
       if (this.statesub == true && stateCategory) {
         catalogo.style.color = '#8e8e8e'
@@ -665,7 +670,7 @@ export default {
       })
     },
     clear() {
-      var catalogo = document.getElementById('homeCate')
+      var catalogo = document.getElementById('homeCate07')
       if (catalogo) {
         catalogo.style.color = '#333333'
         catalogo.style.fontWeight = '600'
@@ -911,7 +916,7 @@ export default {
   font-family: var(--font-style-3) !important ;
   cursor: pointer;
 }
-#statecate {
+#stateCate07 {
   width: 100%;
   color: #333;
   font-weight: 600;
@@ -919,7 +924,7 @@ export default {
   font-family: var(--font-style-3) !important ;
   cursor: pointer;
 }
-#statesubcate {
+#stateSubCate07 {
   width: 100%;
   margin-left: 6px;
   transition: all 0.25s ease;
@@ -1053,7 +1058,7 @@ export default {
 .product-text {
   @apply flex flex-col justify-center items-center w-full;
 }
-.product-conten-items {
+.product-content-items {
   @apply flex flex-col justify-start items-start text-center  w-full;
 }
 .product-tittle,
@@ -1079,7 +1084,7 @@ export default {
   font-family: var(--font-style-3) !important ;
   color: #777;
 }
-.product-conten-items {
+.product-content-items {
   @apply gap-4;
 }
 .content-item {
@@ -1210,7 +1215,7 @@ export default {
   }
 }
 @screen md {
-  .product-conten-items {
+  .product-content-items {
     @apply grid grid-cols-3;
   }
   #grid-selection {
@@ -1221,7 +1226,7 @@ export default {
   .product-text {
     @apply w-full;
   }
-  .product-conten-items {
+  .product-content-items {
     @apply grid grid-cols-3;
   }
   .content-items-categorias-text {
@@ -1269,7 +1274,7 @@ export default {
   .text-categorias,
   .separator-breadCrumbs,
   ..text-categorias-select,
-  #statecate {
+  #stateCate07 {
     margin-bottom: 20px;
   }
 }
