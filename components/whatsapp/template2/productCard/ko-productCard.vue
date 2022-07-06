@@ -147,7 +147,11 @@
             class="txt-btn-right"
             :style="`color:${settingByTemplate.color_secundario};`"
           >
-            {{ $t('home_cardvermas') }}
+            {{
+              dataStore.tienda.id_tienda == 13015
+                ? $t('productdetail_btnComprar')
+                : $t('home_cardvermas')
+            }}
           </p>
         </nuxt-link>
       </div>
@@ -167,7 +171,11 @@
           class="txt-btn-right"
           :style="`color:${settingByTemplate.color_secundario};`"
         >
-          {{ $t('home_cardvermas') }}
+          {{
+            dataStore.tienda.id_tienda == 13015
+              ? $t('productdetail_btnComprar')
+              : $t('home_cardvermas')
+          }}
         </p>
       </nuxt-link>
     </div>

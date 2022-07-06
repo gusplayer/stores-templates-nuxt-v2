@@ -139,8 +139,12 @@
                     : '#FFFFFF'
                 };`"
               >
-                {{ $t('home_cardvermas') }}</nuxt-link
-              >
+                {{
+                  dataStore.tienda.id_tienda == 13015
+                    ? $t('productdetail_btnComprar')
+                    : $t('home_cardvermas')
+                }}
+              </nuxt-link>
             </div>
             <nuxt-link
               :to="{
@@ -159,8 +163,12 @@
                   : '#FFFFFF'
               };`"
             >
-              {{ $t('home_cardvermas') }}</nuxt-link
-            >
+              {{
+                dataStore.tienda.id_tienda == 13015
+                  ? $t('productdetail_btnComprar')
+                  : $t('home_cardvermas')
+              }}
+            </nuxt-link>
           </div>
         </div>
       </div>
