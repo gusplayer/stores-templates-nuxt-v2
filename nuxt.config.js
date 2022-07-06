@@ -46,10 +46,11 @@ export default {
     { src: '~/plugins/vueLazyLoad.js', ssr: false },
     { src: '~/plugins/elementTipTap', ssr: false },
   ],
-  buildModules: ['@nuxtjs/tailwindcss', '@/modules/generator'],
+  // '@/modules/generator'
+  buildModules: ['@nuxtjs/tailwindcss'],
   modules: ['@nuxtjs/gtm', '@nuxtjs/sitemap'],
   sitemap: {
-    // generate: false,
+    hostname: 'https://komercia.store',
     gzip: true,
     defaults: {
       priority: 1,
@@ -72,7 +73,6 @@ export default {
       '/template99/templates/template2',
       '/template99/templates/template3',
     ],
-    // routes: ['/blog/_slug', '/productos/_slug', '/productosHoko/_slug'],
   },
   debug: {
     enabled: true,

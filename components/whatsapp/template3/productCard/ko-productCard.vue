@@ -155,7 +155,11 @@
                   : '#FFFFFF'
               };`"
             >
-              {{ $t('home_cardvermas') }}
+              {{
+                dataStore.tienda.id_tienda == 13015
+                  ? $t('productdetail_btnComprar')
+                  : $t('home_cardvermas')
+              }}
             </p>
           </nuxt-link>
         </div>
@@ -180,7 +184,11 @@
                   : '#FFFFFF'
               };`"
             >
-              {{ $t('home_cardvermas') }}
+              {{
+                dataStore.tienda.id_tienda == 13015
+                  ? $t('productdetail_btnComprar')
+                  : $t('home_cardvermas')
+              }}
             </p>
           </nuxt-link>
         </div>
