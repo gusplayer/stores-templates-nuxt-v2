@@ -15,7 +15,6 @@
             alt="icon all"
             v-else
           />
-
           <div class="tag">
             <p
               :style="`border-color: ${

@@ -42,6 +42,7 @@ import KoHeaderWa from '../../../../components/headers/header_wp/header_wp2/Ko-H
 import KCategory01 from '../../../../components/whatsapp/template1/Ko-Categories-wa'
 import KCategory02 from '../../../../components/whatsapp/template2/ko-slide-categorys'
 import KCategory03 from '../../../../components/whatsapp/template3/ko-slide-categorys'
+import KCategory04 from '../../../../components/whatsapp/categorys_img/ko-categorys-img.vue'
 import KProductFavoritos from '../../../../components/whatsapp/template1/Ko-ProductFavoritos-1'
 import KProductList from '../../../../components/whatsapp/template1/Ko-ProductList-wa.vue'
 import KProductList2 from '../../../../components/whatsapp/template2/ko-productList.vue'
@@ -56,6 +57,7 @@ export default {
     KCategory01,
     KCategory02,
     KCategory03,
+    KCategory04,
     KProductFavoritos,
     KProductList,
     KProductList2,
@@ -80,6 +82,9 @@ export default {
             break
           case 3:
             componentTemplate = 'KCategory03'
+            break
+          case 4:
+            componentTemplate = 'KCategory04'
             break
         }
       }
