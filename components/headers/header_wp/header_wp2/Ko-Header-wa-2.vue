@@ -64,32 +64,18 @@
           <p v-else class="txt-seeMore" @click="showInfoStore = false">
             Ver menos
           </p>
-          <svg
-            v-if="!showInfoStore"
-            @click="showInfoStore = true"
-            class="svg-arrow"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            version="1.1"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path d="M7,10L12,15L17,10H7Z" />
-          </svg>
-          <svg
-            v-else
-            @click="showInfoStore = false"
-            class="svg-arrow"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            version="1.1"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path d="M7,15L12,10L17,15H7Z" />
-          </svg>
+          <div>
+            <Flechadown-icon
+              class="svg-arrow"
+              v-if="!showInfoStore"
+              @click="showInfoStore = true"
+            />
+            <FlechaUp-icon
+              class="svg-arrow"
+              v-else
+              @click="showInfoStore = false"
+            />
+          </div>
         </div>
         <div class="content-infoStore" v-if="showInfoStore">
           <div
@@ -225,8 +211,9 @@ export default {
     @apply w-auto flex flex-col justify-center items-center font-medium pl-5;
   }
   .svg-arrow {
+    color: #3d3d3d;
     fill: #3d3d3d;
-    @apply w-auto h-auto flex flex-col justify-center items-center;
+    bottom: 1px;
   }
   .content-infoStore {
     background-color: #eaeaea;
