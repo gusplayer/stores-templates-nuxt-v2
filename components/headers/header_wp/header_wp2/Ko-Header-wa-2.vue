@@ -53,7 +53,10 @@
             {{ this.settingByTemplate.mensaje_principal }}
           </p>
         </div>
-        <div class="content-seeMore">
+        <div
+          class="content-seeMore"
+          v-if="this.settingByTemplate && this.settingByTemplate.descripcion"
+        >
           <p
             v-if="!showInfoStore"
             class="txt-seeMore"
