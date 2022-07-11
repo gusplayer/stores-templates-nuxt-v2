@@ -100,6 +100,7 @@
 import { mapState } from 'vuex'
 export default {
   layout: 'default',
+  name: 'Ko-template9',
   components: {
     KBanner: () => import('../../components/template9/ko-carousel'),
     KOffers: () => import('../../components/template9/ko-offers'),

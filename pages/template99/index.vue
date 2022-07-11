@@ -12,7 +12,7 @@ import WCountry from '../../components/footers/footer1/Ko-Footer-Country.vue'
 
 export default {
   layout: 'wa',
-  name: 'templateWhatsapp',
+  name: 'templateWhatsApp',
   components: { WaTemplate1, WaTemplate2, WaTemplate3, WCountry },
   computed: {
     dataStore() {

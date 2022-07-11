@@ -7,6 +7,7 @@
 <script>
 export default {
   layout: 'default',
+  name: 'Ko-template8',
   mounted() {},
   data() {
     return {}

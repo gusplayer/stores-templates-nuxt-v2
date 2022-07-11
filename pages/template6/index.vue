@@ -40,6 +40,7 @@ import k6NewsLetter from '../../components/template6/Ko6-Newsletter-1'
 
 export default {
   layout: 'default',
+  name: 'Ko-template6',
   components: {
     k6Banner,
     k6ProductFavoritos,

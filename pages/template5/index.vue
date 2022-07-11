@@ -39,6 +39,7 @@
 import { mapState } from 'vuex'
 export default {
   layout: 'default',
+  name: 'Ko-template5',
   components: {
     kBanner: () => import('../../components/template5/ko-Banner-1'),
     kBannerFooter: () => import('../../components/template5/ko-BannerFooter-1'),

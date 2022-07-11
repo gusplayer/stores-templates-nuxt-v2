@@ -72,6 +72,7 @@
 import { mapState } from 'vuex'
 export default {
   layout: 'default',
+  name: 'Ko-template13',
   components: {
     koBanner: () => import('../../components/template13/ko-Banner-1.vue'),
     // KoProductFavoritos: () =>
