@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="dataStore">
+    <!-- <div v-if="dataStore">
       <div v-if="stateModalPwd">
         <div class="general-container">
           <koHeaderValienta :dataStore="dataStore" />
@@ -50,182 +50,185 @@
     </div>
     <div v-else>
       <koTiendaError />
+    </div> -->
+    <div class="w-full h-screen flex justify-center items-center">
+      <p>No disponible en el momento</p>
     </div>
   </div>
 </template>
 
 <script>
-import koHeaderValienta from '../components/headers/header_wp/Ko-Header-valienta'
-import koTiendaCerrada from '../assets/img/tiendaCerrada'
-import koModalsecurity from '../components/modal/Ko-modal-security.vue'
-import koTiendaError from '../components/Ko-errorStore'
-import { mapState } from 'vuex'
+// import koHeaderValienta from '../components/headers/header_wp/Ko-Header-valienta'
+// import koTiendaCerrada from '../assets/img/tiendaCerrada'
+// import koModalsecurity from '../components/modal/Ko-modal-security.vue'
+// import koTiendaError from '../components/Ko-errorStore'
+// import { mapState } from 'vuex'
 
 export default {
-  components: {
-    koTiendaCerrada,
-    koHeaderValienta,
-    koModalsecurity,
-    koTiendaError,
-  },
-  mounted() {
-    this.$store.dispatch('GET_COOKIES_PWD')
-    this.$store.dispatch('GET_SHOPPING_CART')
-    if (this.$route.query && this.$route.query.clearCart == 'true') {
-      this.$store.commit('DELETEALLITEMSCART')
-      this.$store.commit('UPDATE_CONTENTCART')
-    }
-    if (
-      this.analytics_tagmanager &&
-      this.analytics_tagmanager.pixel_facebook != null
-    ) {
-      window.fbq('track', 'PageView', {
-        description: 'StoreKomerciaValienta',
-      })
-    }
-  },
-  head() {
-    let tienda = this.$store.state.dataStore.tienda
-    let geolocalizacion = this.$store.state.dataStore.geolocalizacion
-    let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
-    return {
-      title: tienda.nombre ? tienda.nombre : 'Tienda',
-      htmlAttrs: {
-        lang: 'es',
-      },
-      meta: [
-        { hid: 'utf-8', charset: 'utf-8' },
-        {
-          hid: 'x-ua-compatible',
-          'http-equiv': 'x-ua-compatible',
-          content: 'ie=edge',
-        },
-        {
-          hid: 'viewport',
-          name: 'viewport',
-          content:
-            'width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0',
-        },
-        {
-          hid: 'description',
-          name: 'description',
-          content: description ? description : 'Tienda Online',
-        },
-        { hid: 'subject', name: 'subject', content: 'Tienda Online' },
-        {
-          hid: 'summary',
-          name: 'summary',
-          content: description ? description : 'Tienda Online',
-        },
-        {
-          hid: 'url',
-          name: 'url',
-          content: tienda.dominio
-            ? tienda.dominio
-            : `https://${tienda.subdominio}.komercia.co`,
-        },
-        { hid: 'language', name: 'language', content: 'ES' },
-        { hid: 'author', name: 'author', content: 'Komercia' },
-        { hid: 'robots', name: 'robots', content: 'index,follow' },
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content:
-            'tienda, store, shop, shopping, tienda online, online, komercia, producto, articulo',
-        },
-        { hid: 'distribution', name: 'distribution', content: 'global' },
-        {
-          hid: 'Content-Language',
-          'http-equiv': 'Content-Language',
-          content: 'es',
-        },
-        //openGraph meta
-        { hid: 'og:title', name: 'og:title', content: tienda.nombre },
-        {
-          hid: 'og:type',
-          name: 'og:type',
-          content: `Tienda online ${tienda.nombre}`,
-        },
-        {
-          hid: 'og:url',
-          name: 'og:url',
-          content: tienda.dominio
-            ? tienda.dominio
-            : `https://${tienda.subdominio}.komercia.co`,
-        },
-        {
-          hid: 'og:image',
-          name: 'og:image',
-          content: `${this.$store.state.urlKomercia}/logos/${tienda.logo}`,
-        },
-        { hid: 'og:site_name', name: 'og:site_name', content: tienda.nombre },
-        {
-          hid: 'og:description',
-          name: 'og:description',
-          content: description ? description : 'Tienda Online',
-        },
-        { hid: 'og:email', name: 'og:email', content: tienda.email_tienda },
-        {
-          hid: 'og:phone_number',
-          name: 'og:phone_number',
-          content: `${tienda.telefono}`,
-        },
-        {
-          hid: 'og:latitude',
-          name: 'og:latitude',
-          content: geolocalizacion.latitud,
-        },
-        {
-          hid: 'og:longitude',
-          name: 'og:longitude',
-          content: geolocalizacion.longitud,
-        },
-        {
-          hid: 'og:street-address',
-          name: 'og:street-address',
-          content: geolocalizacion.direccion,
-        },
-        {
-          name: ' google',
-          content: ' notranslate',
-        },
-      ],
-      script: [
-        {
-          src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
-        },
-      ],
-      link: [
-        {
-          rel: 'icon',
-          type: 'image/x-icon',
-          href: `${this.$store.state.urlKomercia}/logos/${tienda.logo}`,
-        },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap',
-        },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap',
-        },
-      ],
-    }
-  },
-  computed: {
-    ...mapState(['dataStore', 'stateModalPwd', 'analytics_tagmanager']),
-  },
-  methods: {
-    acceptClose() {
-      document.getElementById('modalNotificacion').style.zIndex = '-2'
-      document.getElementById('modalNotificacion').style.opacity = '0'
-    },
-  },
+  // components: {
+  //   koTiendaCerrada,
+  //   koHeaderValienta,
+  //   koModalsecurity,
+  //   koTiendaError,
+  // },
+  // mounted() {
+  //   this.$store.dispatch('GET_COOKIES_PWD')
+  //   this.$store.dispatch('GET_SHOPPING_CART')
+  //   if (this.$route.query && this.$route.query.clearCart == 'true') {
+  //     this.$store.commit('DELETEALLITEMSCART')
+  //     this.$store.commit('UPDATE_CONTENTCART')
+  //   }
+  //   if (
+  //     this.analytics_tagmanager &&
+  //     this.analytics_tagmanager.pixel_facebook != null
+  //   ) {
+  //     window.fbq('track', 'PageView', {
+  //       description: 'StoreKomerciaValienta',
+  //     })
+  //   }
+  // },
+  // head() {
+  //   let tienda = this.$store.state.dataStore.tienda
+  //   let geolocalizacion = this.$store.state.dataStore.geolocalizacion
+  //   let description = tienda.descripcion.replace(/<[^>]*>?/g, '')
+  //   return {
+  //     title: tienda.nombre ? tienda.nombre : 'Tienda',
+  //     htmlAttrs: {
+  //       lang: 'es',
+  //     },
+  //     meta: [
+  //       { hid: 'utf-8', charset: 'utf-8' },
+  //       {
+  //         hid: 'x-ua-compatible',
+  //         'http-equiv': 'x-ua-compatible',
+  //         content: 'ie=edge',
+  //       },
+  //       {
+  //         hid: 'viewport',
+  //         name: 'viewport',
+  //         content:
+  //           'width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0',
+  //       },
+  //       {
+  //         hid: 'description',
+  //         name: 'description',
+  //         content: description ? description : 'Tienda Online',
+  //       },
+  //       { hid: 'subject', name: 'subject', content: 'Tienda Online' },
+  //       {
+  //         hid: 'summary',
+  //         name: 'summary',
+  //         content: description ? description : 'Tienda Online',
+  //       },
+  //       {
+  //         hid: 'url',
+  //         name: 'url',
+  //         content: tienda.dominio
+  //           ? tienda.dominio
+  //           : `https://${tienda.subdominio}.komercia.co`,
+  //       },
+  //       { hid: 'language', name: 'language', content: 'ES' },
+  //       { hid: 'author', name: 'author', content: 'Komercia' },
+  //       { hid: 'robots', name: 'robots', content: 'index,follow' },
+  //       {
+  //         hid: 'keywords',
+  //         name: 'keywords',
+  //         content:
+  //           'tienda, store, shop, shopping, tienda online, online, komercia, producto, articulo',
+  //       },
+  //       { hid: 'distribution', name: 'distribution', content: 'global' },
+  //       {
+  //         hid: 'Content-Language',
+  //         'http-equiv': 'Content-Language',
+  //         content: 'es',
+  //       },
+  //       //openGraph meta
+  //       { hid: 'og:title', name: 'og:title', content: tienda.nombre },
+  //       {
+  //         hid: 'og:type',
+  //         name: 'og:type',
+  //         content: `Tienda online ${tienda.nombre}`,
+  //       },
+  //       {
+  //         hid: 'og:url',
+  //         name: 'og:url',
+  //         content: tienda.dominio
+  //           ? tienda.dominio
+  //           : `https://${tienda.subdominio}.komercia.co`,
+  //       },
+  //       {
+  //         hid: 'og:image',
+  //         name: 'og:image',
+  //         content: `${this.$store.state.urlKomercia}/logos/${tienda.logo}`,
+  //       },
+  //       { hid: 'og:site_name', name: 'og:site_name', content: tienda.nombre },
+  //       {
+  //         hid: 'og:description',
+  //         name: 'og:description',
+  //         content: description ? description : 'Tienda Online',
+  //       },
+  //       { hid: 'og:email', name: 'og:email', content: tienda.email_tienda },
+  //       {
+  //         hid: 'og:phone_number',
+  //         name: 'og:phone_number',
+  //         content: `${tienda.telefono}`,
+  //       },
+  //       {
+  //         hid: 'og:latitude',
+  //         name: 'og:latitude',
+  //         content: geolocalizacion.latitud,
+  //       },
+  //       {
+  //         hid: 'og:longitude',
+  //         name: 'og:longitude',
+  //         content: geolocalizacion.longitud,
+  //       },
+  //       {
+  //         hid: 'og:street-address',
+  //         name: 'og:street-address',
+  //         content: geolocalizacion.direccion,
+  //       },
+  //       {
+  //         name: ' google',
+  //         content: ' notranslate',
+  //       },
+  //     ],
+  //     script: [
+  //       {
+  //         src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
+  //       },
+  //     ],
+  //     link: [
+  //       {
+  //         rel: 'icon',
+  //         type: 'image/x-icon',
+  //         href: `${this.$store.state.urlKomercia}/logos/${tienda.logo}`,
+  //       },
+  //       {
+  //         rel: 'stylesheet',
+  //         href: 'https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap',
+  //       },
+  //       {
+  //         rel: 'stylesheet',
+  //         href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap',
+  //       },
+  //     ],
+  //   }
+  // },
+  // computed: {
+  //   ...mapState(['dataStore', 'stateModalPwd', 'analytics_tagmanager']),
+  // },
+  // methods: {
+  //   acceptClose() {
+  //     document.getElementById('modalNotificacion').style.zIndex = '-2'
+  //     document.getElementById('modalNotificacion').style.opacity = '0'
+  //   },
+  // },
 }
 </script>
 
 <style scoped>
-* {
+/* * {
   font-family: 'Poppins', sans-serif !important;
 }
 .general-container {
@@ -305,9 +308,8 @@ export default {
   border: none;
 }
 .logo2 {
-  /* margin-top: 5px; */
   width: 100px;
   opacity: 0.7;
   margin-bottom: 15px;
-}
+} */
 </style>

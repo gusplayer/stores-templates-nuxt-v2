@@ -1,7 +1,14 @@
 <template>
   <div class="content-slide-categorys">
     <div class="content-categories">
-      <div class="itens-slide-categories">
+      <div
+        class="btn-scroll mr-10"
+        @click="scrollLeft(1)"
+        v-if="this.categorias.length > 5"
+      >
+        <FlechaLeft-icon class="btn-scroll-icon" />
+      </div>
+      <div class="itens-slide-categories" id="swiper-slide-categories">
         <div class="wrapper-img-text" @click="clear">
           <img
             src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649430112/Xiaomi_logo__2021_ejxsbk.png"
@@ -68,6 +75,13 @@
             </p>
           </div>
         </div>
+      </div>
+      <div
+        class="btn-scroll ml-10"
+        @click="scrollRight(1)"
+        v-if="this.categorias.length > 5"
+      >
+        <FlechaRight-icon class="btn-scroll-icon" />
       </div>
     </div>
     <div
@@ -234,6 +248,20 @@ export default {
       this.$emit('clear')
       this.addClass()
     },
+    scrollLeft(value) {
+      if (value == 1) {
+        document.getElementById('swiper-slide-categories').scrollLeft -= 300
+      } else if (value == 2) {
+        document.getElementById('swiper-slide-subcategories').scrollLeft -= 300
+      }
+    },
+    scrollRight(value) {
+      if (value == 1) {
+        document.getElementById('swiper-slide-categories').scrollLeft += 300
+      } else if (value == 2) {
+        document.getElementById('swiper-slide-subcategories').scrollLeft += 300
+      }
+    },
   },
 }
 </script>
@@ -266,10 +294,23 @@ export default {
   white-space: nowrap;
   @apply flex flex-col items-center justify-start cursor-pointer mr-15;
 }
+.btn-scroll {
+  top: 50%;
+  @apply flex justify-center items-center cursor-pointer;
+}
+.btn-scroll-icon {
+  font-size: 20px;
+  color: black;
+  bottom: 0.125em;
+  @apply w-full flex justify-center items-center;
+}
+.btn-scroll-icon:hover {
+  color: #25d366;
+}
 @screen sm {
   .content-categories {
     border-color: #d6d6d6;
-    @apply w-9/0 flex flex-row justify-center items-center border-b pb-10 mb-10;
+    @apply w-9/5 flex flex-row justify-center items-center border-b pb-10 mb-10;
   }
   .itens-slide-categories {
     @apply w-full flex flex-row items-center overflow-x-auto overflow-y-hidden;

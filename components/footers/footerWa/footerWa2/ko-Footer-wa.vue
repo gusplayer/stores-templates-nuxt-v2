@@ -1,37 +1,50 @@
 <template>
-  <div class="content-footer">
-    <footer class="content-items-footer">
-      <div class="item-footer" v-if="cantidadProductos > 0">
-        <p class="text-items-cart">
-          {{ $t('footer_title') }}
-          <span class="text-items-cart ml-2">({{ cantidadProductos }})</span>
+  <client-only>
+    <div
+      :class="cantidadProductos > 0 ? 'content-footer' : 'content-footer-none'"
+    >
+      <footer class="content-items-footer">
+        <div class="item-footer" v-if="cantidadProductos > 0">
+          <p class="text-items-cart">
+            {{ $t('footer_title') }}
+            <span class="text-items-cart ml-2">({{ cantidadProductos }})</span>
+          </p>
+        </div>
+        <button
+          v-if="cantidadProductos > 0"
+          @click="openOrder"
+          :style="`background: ${
+            settingByTemplate && settingByTemplate.color_primario
+              ? settingByTemplate.color_primario
+              : '#25D366'
+          }; color:${
+            settingByTemplate && settingByTemplate.color_secundario
+              ? settingByTemplate.color_secundario
+              : '#FFFFFF'
+          };`"
+          class="button-footer"
+        >
+          <p class="text-items-button">{{ $t('footer_title2') }}</p>
+        </button>
+
+        <p v-else class="button-footer-out">
+          {{ $t('footer_carritoVacio2') }}
         </p>
-      </div>
-      <div
-        @click="openOrder"
-        :style="`background: ${
-          settingByTemplate && settingByTemplate.color_primario
-            ? settingByTemplate.color_primario
-            : '#25D366'
-        }; color:${
-          settingByTemplate && settingByTemplate.color_secundario
-            ? settingByTemplate.color_secundario
-            : '#FFFFFF'
-        };`"
-        :class="cantidadProductos > 0 ? 'button-footer' : 'button-footer-out'"
-      >
-        <p class="text-items-button">{{ $t('footer_title2') }}</p>
-      </div>
-      <div class="item-footer" v-if="cantidadProductos > 0">
-        <p class="text-items-cart">
-          {{
-            this.totalCart
-              | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
-          }}
-        </p>
-      </div>
-    </footer>
-  </div>
+
+        <div class="item-footer" v-if="cantidadProductos > 0">
+          <p class="text-items-cart">
+            {{
+              this.totalCart
+                | currency(
+                  dataStore.tienda.codigo_pais,
+                  dataStore.tienda.moneda
+                )
+            }}
+          </p>
+        </div>
+      </footer>
+    </div>
+  </client-only>
 </template>
 <script>
 import currency from '../../../../mixins/formatCurrent'
@@ -65,8 +78,10 @@ export default {
   bottom: 0;
   max-width: 900px;
   height: 60px;
-
   @apply w-full flex flex-col justify-center items-center;
+}
+.content-footer-none {
+  display: none;
 }
 @screen sm {
   .content-items-footer {
@@ -85,12 +100,12 @@ export default {
   .button-footer {
     height: 37px;
     width: 130px;
-    @apply flex flex-col justify-center items-center py-7 rounded-md cursor-pointer;
+    @apply flex flex-col justify-center items-center py-7 rounded-md;
   }
   .button-footer-out {
-    height: 37px;
     width: 161px;
-    @apply flex flex-col justify-center items-center py-7 rounded-md;
+    color: #fff;
+    @apply text-center;
   }
   .text-items-button {
     font-size: 14px;

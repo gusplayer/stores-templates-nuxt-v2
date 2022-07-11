@@ -23,23 +23,25 @@ import { mapState } from 'vuex'
 export default {
   name: 'k-select-language',
   mounted() {
-    switch (this.dataStore.tienda.lenguaje.toLowerCase()) {
-      case 'es':
-        this.select.label = 'Spanish (es)'
-        this.select.lng = 'es'
-        break
-      case 'en':
-        this.select.label = 'English (en)'
-        this.select.lng = 'en'
-        break
-      case 'pt':
-        this.select.label = 'Portuguese (pt)'
-        this.select.lng = 'pt'
-        break
-      case 'fr':
-        this.select.label = 'Francés (fr)'
-        this.select.lng = 'fr'
-        break
+    if (this.dataStore && this.dataStore.tienda) {
+      switch (this.dataStore.tienda.lenguaje.toLowerCase()) {
+        case 'es':
+          this.select.label = 'Spanish (es)'
+          this.select.lng = 'es'
+          break
+        case 'en':
+          this.select.label = 'English (en)'
+          this.select.lng = 'en'
+          break
+        case 'pt':
+          this.select.label = 'Portuguese (pt)'
+          this.select.lng = 'pt'
+          break
+        case 'fr':
+          this.select.label = 'Francés (fr)'
+          this.select.lng = 'fr'
+          break
+      }
     }
   },
   data() {

@@ -96,7 +96,6 @@
 </template>
 <script>
 import KoOrderWa from '../_order1/orderWa'
-
 import idCloudinary from '../../../../mixins/idCloudinary'
 export default {
   name: 'HeaderWa2',

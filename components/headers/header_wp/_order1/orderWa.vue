@@ -11,7 +11,7 @@
         </div>
         <transition name="slide">
           <template>
-            <div class="order--wrapper">
+            <div class="order__wrapper">
               <div class="order_products">
                 <ul class="order_products_list">
                   <li
@@ -41,8 +41,8 @@
                                   dataStore.tienda.codigo_pais,
                                   dataStore.tienda.moneda
                                 )
-                            }}</b
-                          >
+                            }}
+                          </b>
                         </span>
                         <div
                           class="w-full flex flex-col justify-center items-start mb-5"
@@ -67,14 +67,13 @@
                             >
                               <mas-icon class="icon-quantity" />
                             </button>
-
                             <div
                               class="container-alerta"
                               v-if="product.limitQuantity == product.cantidad"
                             >
                               <span class="alerta">
-                                {{ $t('cart_ultimaUnidad') }}</span
-                              >
+                                {{ $t('cart_ultimaUnidad') }}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -95,14 +94,14 @@
                           type="danger"
                           v-if="product.activo == 0"
                           style="background-color: rgb(223, 62, 62)"
-                          >Producto agotado!</el-tag
-                        >
+                          >Producto agotado!
+                        </el-tag>
                         <el-tag
                           type="danger"
                           style="background-color: rgb(223, 62, 62)"
                           v-if="product.stock_disponible == 0"
-                          >¡No tiene las unidades disponibles!</el-tag
-                        >
+                          >¡No tiene las unidades disponibles!
+                        </el-tag>
                       </div>
                     </div>
                     <div class="price" v-if="product.precio > 0">
@@ -508,7 +507,6 @@
                 </span>
               </template>
             </validation-provider>
-
             <P class="form-subtext"> {{ $t(`${placeholderDepart}`) }}</P>
             <validation-provider
               name="ciudad"
@@ -547,7 +545,6 @@
                 </span>
               </template>
             </validation-provider>
-
             <P class="form-subtext"> {{ $t('footer_formDireccion') }}</P>
             <validation-provider
               name="dirreccion"
@@ -1488,7 +1485,7 @@ export default {
 .order_header_close:hover {
   color: gray;
 }
-.order--wrapper {
+.order__wrapper {
   display: grid;
   overflow-y: auto;
 }
