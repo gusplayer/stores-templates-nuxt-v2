@@ -32,7 +32,6 @@
     <KoFooterWa
       :dataStore="dataStore"
       :settingByTemplate="settingByTemplate"
-      v-if="productsCart.length > 0"
       id="KfooterX"
     />
   </div>
@@ -67,7 +66,7 @@ export default {
   },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   computed: {
     indexCategory() {
@@ -140,10 +139,10 @@ export default {
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenertemplate(e) {
+    addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080') ||
