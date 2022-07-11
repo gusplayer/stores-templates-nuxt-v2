@@ -1497,10 +1497,10 @@ export default {
   height: 42px;
 }
 .quantity_add:hover {
-  @apply bg-red-btnbannershop;
+  background: var(--hover_card);
 }
 .quantity_remove:hover {
-  @apply bg-red-btnbannershop;
+  background: var(--hover_card);
 }
 .icon {
   font-size: 16px;
