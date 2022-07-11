@@ -1,6 +1,8 @@
 <template>
   <client-only>
-    <div class="content-footer">
+    <div
+      :class="cantidadProductos > 0 ? 'content-footer' : 'content-footer-none'"
+    >
       <footer class="content-items-footer">
         <div class="item-footer" v-if="cantidadProductos > 0">
           <p class="text-items-cart">
@@ -76,8 +78,10 @@ export default {
   bottom: 0;
   max-width: 900px;
   height: 60px;
-
   @apply w-full flex flex-col justify-center items-center;
+}
+.content-footer-none {
+  display: none;
 }
 @screen sm {
   .content-items-footer {
