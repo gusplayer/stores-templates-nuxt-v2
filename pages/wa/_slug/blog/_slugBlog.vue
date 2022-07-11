@@ -19,7 +19,11 @@ export default {
   methods: {
     onResize() {
       const widthOutput = document.querySelector('#width')
-      widthOutput.style.width = window.innerWidth + 'px'
+      if (window.innerWidth > 1300) {
+        widthOutput.style.width = '900px'
+      } else {
+        widthOutput.style.width = window.innerWidth + 'px'
+      }
     },
   },
 }

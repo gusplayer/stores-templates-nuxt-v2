@@ -14,6 +14,7 @@ import axios from 'axios'
 import KoMicompra from '../components/miCompra/Ko-miCompra-1'
 
 export default {
+  name: 'K0-indexMiCompra',
   components: {
     KoMicompra,
   },

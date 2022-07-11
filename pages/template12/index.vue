@@ -27,6 +27,7 @@
 import { mapState } from 'vuex'
 export default {
   layout: 'default',
+  name: 'Ko-template12',
   components: {
     IHeader: () => import('../../components/template12/Header'),
     IFooter: () => import('../../components/template12/Footer'),

@@ -655,7 +655,7 @@ export default {
     @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
   }
   .overlay-bottom:hover {
-    @apply bg-red-btnbannershop;
+    background: var(--hover_card);
   }
   .overlay-top {
     top: 8%;
@@ -768,7 +768,7 @@ export default {
     bottom: 10px;
   }
   .overlay-bottom:hover {
-    @apply bg-red-btnbannershop;
+    background: var(--hover_card);
   }
   .cart-shop-mobile {
     @apply flex;
@@ -785,7 +785,8 @@ export default {
     @apply absolute w-full left-0 right-0 bottom-0 overflow-hidden h-0 transition-all ease-in duration-300;
   }
   .overlay-bottom:hover {
-    @apply bg-red-btnbannershop transition-all ease-in duration-300;
+    background: var(--hover_card);
+    @apply transition-all ease-in duration-300;
   }
   .container-productCard:hover .overlay-bottom {
     height: 12%;

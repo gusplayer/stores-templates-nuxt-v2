@@ -80,6 +80,7 @@
 import { mapState } from 'vuex'
 export default {
   layout: 'default',
+  name: 'Ko-template11',
   components: {
     KCarousel: () => import('../../components/template11/ko-carousel'),
     KSection: () => import('../../components/template11/ko-section'),

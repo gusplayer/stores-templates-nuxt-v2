@@ -1142,9 +1142,11 @@ export const getters = {
   },
   cantidadProductos(state) {
     let cantidadProductos = 0
-    state.productsCart.filter((value) => {
-      cantidadProductos += parseInt(value.cantidad)
-    })
+    if (state.productsCart) {
+      state.productsCart.filter((value) => {
+        cantidadProductos += parseInt(value.cantidad)
+      })
+    }
     return cantidadProductos
   },
   listaDescuentosProductos(state, getters) {
@@ -1212,11 +1214,13 @@ export const getters = {
   },
   verifyProducts(state) {
     let resutlVerify = []
-    state.productsCart.filter((product) => {
-      if (product.activo == 1 && product.stock_disponible == 1) {
-        resutlVerify.push(product)
-      }
-    })
+    if (state.productsCart) {
+      state.productsCart.filter((product) => {
+        if (product.activo == 1 && product.stock_disponible == 1) {
+          resutlVerify.push(product)
+        }
+      })
+    }
     if ((resutlVerify && resutlVerify.length) == state.productsCart.length) {
       return 1
     } else {

@@ -54,6 +54,7 @@ import kBannerFooter from '../../components/template5/ko-BannerFooter-1'
 
 export default {
   layout: 'default',
+  name: 'Ko-template6-m',
   components: {
     kBanner,
     KProductList,

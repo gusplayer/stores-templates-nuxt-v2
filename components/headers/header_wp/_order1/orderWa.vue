@@ -2119,11 +2119,6 @@ details[open] summary ~ * {
   border-radius: 5px;
   margin-top: 20px;
 }
-@media (max-width: 500px) {
-  .wrapper-items-form {
-    padding: 20px 0 300px;
-  }
-}
 .content-quantity {
   /* margin-top: 10px; */
   max-width: 126px;
@@ -2181,5 +2176,16 @@ details[open] summary ~ * {
   text-align: center;
   padding: 4px 5px;
   text-transform: capitalize;
+}
+@media (max-width: 800px) {
+  .wrapper-items-form {
+    max-width: 100%;
+    padding: 20px 0 45px;
+  }
+}
+@media (max-width: 500px) {
+  .wrapper-items-form {
+    padding: 20px 0 300px;
+  }
 }
 </style>

@@ -30,7 +30,7 @@ export default {
     height: '3px',
   },
   css: ['element-ui/lib/theme-chalk/index.css'],
-  components: true,
+  // components: true,
   plugins: [
     '~/plugins/element',
     '~/plugins/mixinCommonMethods',

@@ -74,6 +74,7 @@
 import { mapState } from 'vuex'
 export default {
   layout: 'default',
+  name: 'Ko-template10',
   components: {
     KbuttonCar: () => import('../../components/template10/buttonCar'),
     Kcarousel: () => import('../../components/template10/ko-carousel'),

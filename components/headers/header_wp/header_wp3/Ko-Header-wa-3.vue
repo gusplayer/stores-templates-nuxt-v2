@@ -88,8 +88,8 @@
   </div>
 </template>
 <script>
-import KoOrderWa from '../_order1/orderWa'
-
+// import KoOrderWa from '../_order1/orderWa'
+import KoOrderWa from '../../_order1/order1.vue'
 import idCloudinary from '../../../../mixins/idCloudinary'
 export default {
   name: 'HeaderWa3',
