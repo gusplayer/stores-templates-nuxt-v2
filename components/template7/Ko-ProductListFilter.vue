@@ -65,7 +65,15 @@
               {{ $t('productdetail_categoria') }}
             </p>
           </div>
-          <div class="categorys-list">
+          <div
+            class="btn-scroll"
+            @click="scrollCategories(1)"
+            v-if="this.categorias.length > 7"
+          >
+            <FlechaUp-icon class="btn-scroll-icon" />
+          </div>
+          <div class="categorys-list" id="swiper-slide-categories">
+            <p class="txt-categorys" @click="clear">Todos los productos</p>
             <div
               v-for="(categorys, index) in categorias"
               :key="index"
@@ -85,6 +93,13 @@
               </div>
             </div>
           </div>
+          <div
+            class="btn-scroll"
+            @click="scrollCategories(2)"
+            v-if="this.categorias.length > 7"
+          >
+            <Flechadown-icon class="btn-scroll-icon" />
+          </div>
           <div class="empty"></div>
           <div
             class="item-tittle"
@@ -95,7 +110,15 @@
             </p>
           </div>
           <div
+            class="btn-scroll"
+            @click="scrollSubCategories(1)"
+            v-if="this.selectedSubcategories.length > 7"
+          >
+            <FlechaUp-icon class="btn-scroll-icon" />
+          </div>
+          <div
             class="subcategory-list"
+            id="swiper-slide-Subcategories"
             v-if="showSubCategory && selectedSubcategories.length"
           >
             <div
@@ -116,11 +139,50 @@
               </div>
             </div>
           </div>
+          <div
+            class="btn-scroll"
+            @click="scrollSubCategories(2)"
+            v-if="this.selectedSubcategories.length > 7"
+          >
+            <Flechadown-icon class="btn-scroll-icon" />
+          </div>
         </div>
         <div
           class="empty"
           v-if="showSubCategory && selectedSubcategories.length"
         ></div>
+        <div class="content-category-left">
+          <button class="item-tittle">
+            <p class="txt-tittles">
+              {{ $t('home_fenvio') }}
+            </p>
+          </button>
+          <div class="categorys-list">
+            <button class="txt-categorys" @click="getProductsShippingFree()">
+              {{ $t('home_gratis') }}
+            </button>
+            <button class="txt-categorys" @click="getProductsNoShippingFree()">
+              {{ $t('home_Singratis') }}
+            </button>
+          </div>
+        </div>
+        <div class="empty"></div>
+        <div class="content-category-left">
+          <button class="item-tittle">
+            <p class="txt-tittles">
+              {{ $t('home_fprecio') }}
+            </p>
+          </button>
+          <div class="categorys-list">
+            <button class="txt-categorys" @click="getProductsHigherNumber()">
+              {{ $t('home_fpreciom') }}
+            </button>
+            <button class="txt-categorys" @click="getProductsSmallerNumber()">
+              {{ $t('home_fprecioM') }}
+            </button>
+          </div>
+        </div>
+        <div class="empty"></div>
       </div>
       <client-only>
         <div class="content-right">
@@ -476,6 +538,34 @@ export default {
     },
   },
   methods: {
+    getProductsShippingFree() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'ShippingFree',
+        data: '',
+      })
+      this.currentPage = 1
+    },
+    getProductsNoShippingFree() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'NoShippingFree',
+        data: '',
+      })
+      this.currentPage = 1
+    },
+    getProductsHigherNumber() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'higherNumber',
+        data: '',
+      })
+      this.currentPage = 1
+    },
+    getProductsSmallerNumber() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'smallerNumber',
+        data: '',
+      })
+      this.currentPage = 1
+    },
     showList() {
       this.indexshowList = 1
       this.showinList = true
@@ -704,6 +794,20 @@ export default {
         imagen.style.backgroundImage = ''
       }
     },
+    scrollCategories(value) {
+      if (value == 1) {
+        document.getElementById('swiper-slide-categories').scrollTop -= 300
+      } else if (value == 2) {
+        document.getElementById('swiper-slide-categories').scrollTop += 300
+      }
+    },
+    scrollSubCategories(value) {
+      if (value == 1) {
+        document.getElementById('swiper-slide-Subcategories').scrollTop -= 300
+      } else if (value == 2) {
+        document.getElementById('swiper-slide-Subcategories').scrollTop += 300
+      }
+    },
   },
   watch: {
     settingByTemplate7() {
@@ -773,6 +877,18 @@ export default {
 </script>
 
 <style scoped>
+.btn-scroll {
+  @apply w-full flex justify-center items-center cursor-pointer;
+}
+.btn-scroll-icon {
+  font-size: 20px;
+  color: var(--color_text);
+  bottom: 0.125em;
+  @apply w-full flex justify-center items-center;
+}
+.btn-scroll-icon:hover {
+  color: var(--hover_text);
+}
 .product-content {
   @apply flex flex-col justify-center items-center w-full mb-80;
   background: var(--background_color_2);
@@ -837,8 +953,8 @@ export default {
 }
 .empty {
   @apply w-full;
-  margin-bottom: 30px;
-  padding-bottom: 30px;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
   border-bottom: 1px solid;
   border-color: rgba(129, 129, 129, 0.2);
 }
@@ -946,7 +1062,7 @@ export default {
 }
 .categorys-list {
   @apply w-full grid grid-cols-1 gap-4 justify-start items-center;
-  overflow: auto;
+  overflow-y: auto;
   max-height: 300px;
 }
 .subcategory-list {
