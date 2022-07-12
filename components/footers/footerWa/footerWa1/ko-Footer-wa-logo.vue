@@ -16,6 +16,10 @@
               settingByTemplate && settingByTemplate.color_primario
                 ? settingByTemplate.color_primario
                 : '#25D366'
+            }; fill: ${
+              settingByTemplate && settingByTemplate.color_primario
+                ? settingByTemplate.color_primario
+                : '#25D366'
             };`"
           >
             <div :is="item.icon" class="icon-wapi" />
@@ -132,6 +136,11 @@ export default {
           nombre: 'Youtube',
           icon: 'youtube-icon',
           link: this.dataStore.tienda.red_youtube,
+        },
+        {
+          nombre: 'Tiktok',
+          icon: 'tiktok2-icon',
+          link: this.dataStore.tienda.red_tiktok,
         },
       ],
       secciones: [
@@ -255,9 +264,12 @@ export default {
   cursor: pointer;
   margin-right: 10px;
   font-size: 20px;
+  height: 15px;
+  width: 15px;
 }
 .icon-wapi:hover {
   color: #445a64;
+  fill: #445a64;
 }
 .modal {
   padding-top: 50px;

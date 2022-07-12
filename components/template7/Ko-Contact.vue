@@ -226,6 +226,11 @@ export default {
           icon: 'youtube-icon',
           link: this.dataStore.tienda.red_youtube,
         },
+        {
+          nombre: 'Tiktok',
+          icon: 'tiktok2-icon',
+          link: this.dataStore.tienda.red_tiktok,
+        },
       ],
       dataContact: [
         {
@@ -306,6 +311,7 @@ export default {
       this.links[1].link = this.dataStore.tienda.red_twitter
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
       this.dataContact[0].dato = this.dataStore.tienda.telefono
       this.dataContact[1].dato = this.dataStore.tienda.whatsapp
       this.dataContact[2].dato = this.dataStore.tienda.email_tienda
@@ -367,7 +373,6 @@ export default {
 }
 .contact-text-subtitle {
   font-family: var(--font-style-3) !important ;
-
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -402,7 +407,6 @@ export default {
 }
 .contact-text-subtitle3 {
   font-family: var(--font-style-3) !important ;
-
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -431,7 +435,6 @@ export default {
 }
 .contact-icon {
   font-family: var(--font-style-3) !important ;
-
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
@@ -442,20 +445,19 @@ export default {
 }
 .text-icon {
   font-family: var(--font-style-3) !important ;
-
   display: flex;
   flex-direction: row;
+  align-items: center;
   color: var(--color_icon);
+  fill: var(--color_text);
 }
 .text-icon a:hover {
   font-family: var(--font-style-3) !important ;
-
   cursor: pointer;
   color: var(--hover_text);
 }
 .text-icon a {
   font-family: var(--font-style-3) !important ;
-
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -468,10 +470,12 @@ export default {
 }
 .icon {
   font-size: 17px;
+  height: 15px;
+  width: 15px;
+  fill: var(--color_icon);
 }
 .contact-text-sub {
   font-family: var(--font-style-3) !important ;
-
   font-size: 22px;
   font-weight: 600;
   font-stretch: normal;
@@ -483,7 +487,6 @@ export default {
 }
 .contact-text-sub2 {
   font-family: var(--font-style-3) !important ;
-
   font-size: 22px;
   font-weight: 600;
   font-stretch: normal;
