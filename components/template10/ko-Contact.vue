@@ -259,6 +259,11 @@ export default {
           icon: 'youtube-icon',
           link: this.dataStore.tienda.red_youtube,
         },
+        {
+          nombre: 'Tiktok',
+          icon: 'tiktok-icon',
+          link: this.dataStore.tienda.red_tiktok,
+        },
       ],
       dataContact: [
         {
@@ -330,6 +335,7 @@ export default {
       this.links[1].link = this.dataStore.tienda.red_twitter
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
       this.dataContact[0].dato = this.dataStore.tienda.telefono
       this.dataContact[1].dato = this.dataStore.tienda.whatsapp
       this.dataContact[2].dato = this.dataStore.tienda.email_tienda

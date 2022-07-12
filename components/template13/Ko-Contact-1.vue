@@ -221,6 +221,11 @@ export default {
           icon: 'youtube-icon',
           link: this.dataStore.tienda.red_youtube,
         },
+        {
+          nombre: 'Tiktok',
+          icon: 'tiktok2-icon',
+          link: this.dataStore.tienda.red_tiktok,
+        },
       ],
       dataContact: [
         {
@@ -301,6 +306,7 @@ export default {
       this.links[1].link = this.dataStore.tienda.red_twitter
       this.links[2].link = this.dataStore.tienda.red_instagram
       this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
       this.dataContact[0].dato = this.dataStore.tienda.telefono
       this.dataContact[1].dato = this.dataStore.tienda.whatsapp
       this.dataContact[2].dato = this.dataStore.tienda.email_tienda
@@ -436,20 +442,19 @@ export default {
 }
 .text-icon {
   font-family: var(--font-style-1) !important ;
-
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   flex-direction: row;
   color: var(--color_icon);
 }
 .text-icon a:hover {
   font-family: var(--font-style-1) !important ;
-
   cursor: pointer;
   color: var(--hover_text);
 }
 .text-icon a {
   font-family: var(--font-style-1) !important ;
-
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -462,10 +467,12 @@ export default {
 }
 .icon {
   font-size: 17px;
+  height: 15px;
+  width: 15px;
+  fill: var(--hover_text);
 }
 .contact-text-sub {
   font-family: var(--font-style-1) !important ;
-
   font-size: 22px;
   font-weight: 600;
   font-stretch: normal;

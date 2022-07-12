@@ -20,8 +20,9 @@
             :href="item.link"
             target="_blank "
             rel="noreferrer noopener"
-            ><div class="icon" :is="item.icon"
-          /></a>
+          >
+            <div class="icon" :is="item.icon" />
+          </a>
         </div>
       </div>
       <div class="footer-item-secciones">

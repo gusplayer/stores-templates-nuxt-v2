@@ -38,6 +38,7 @@ import ShoppingSearch from 'vue-material-design-icons/ShoppingSearch.vue'
 import FormatListBulletedSquare from 'vue-material-design-icons/FormatListBulletedSquare.vue'
 import CloudDownload from 'vue-material-design-icons/CloudDownload.vue'
 import tiktok from '../assets/img/tiktok.vue'
+import tiktok2 from '../assets/img/tiktok2.vue'
 
 Vue.component('menu-icon', MenuIcon)
 Vue.component('account-icon', Account)
@@ -50,6 +51,7 @@ Vue.component('youtube-icon', Youtube)
 Vue.component('linkedin-icon', Linkedin)
 Vue.component('whatsapp-icon', Whatsapp)
 Vue.component('tiktok-icon', tiktok)
+Vue.component('tiktok2-icon', tiktok2)
 
 Vue.component('cart-icon', Cart)
 Vue.component('cartShop-icon', CartShop)
