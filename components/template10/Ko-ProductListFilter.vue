@@ -121,7 +121,6 @@
               </div>
             </div>
             <div class="empty"></div>
-
             <button
               class="item-tittle accordion"
               v-show="showSubCategory && selectedSubcategories.length"
@@ -159,6 +158,36 @@
                   </p>
                 </div>
               </div>
+            </div>
+            <button class="item-tittle accordion">
+              <p class="txt-tittles">
+                {{ $t('home_fenvio') }}
+              </p>
+            </button>
+            <div class="categorys-list panel">
+              <button class="txt-categorys" @click="getProductsShippingFree()">
+                {{ $t('home_gratis') }}
+              </button>
+              <button
+                class="txt-categorys"
+                @click="getProductsNoShippingFree()"
+              >
+                {{ $t('home_Singratis') }}
+              </button>
+            </div>
+            <div class="empty"></div>
+            <button class="item-tittle accordion">
+              <p class="txt-tittles">
+                {{ $t('home_fprecio') }}
+              </p>
+            </button>
+            <div class="categorys-list panel">
+              <button class="txt-categorys" @click="getProductsHigherNumber()">
+                {{ $t('home_fpreciom') }}
+              </button>
+              <button class="txt-categorys" @click="getProductsSmallerNumber()">
+                {{ $t('home_fprecioM') }}
+              </button>
             </div>
           </div>
           <div
@@ -456,6 +485,34 @@ export default {
     },
   },
   methods: {
+    getProductsShippingFree() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'ShippingFree',
+        data: '',
+      })
+      this.currentPage = 1
+    },
+    getProductsNoShippingFree() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'NoShippingFree',
+        data: '',
+      })
+      this.currentPage = 1
+    },
+    getProductsHigherNumber() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'higherNumber',
+        data: '',
+      })
+      this.currentPage = 1
+    },
+    getProductsSmallerNumber() {
+      this.$store.commit('products/FILTER_BY', {
+        type: 'smallerNumber',
+        data: '',
+      })
+      this.currentPage = 1
+    },
     setBg(value) {
       var imagen = document.getElementById('BgProductlistF')
       if (value == 1) {

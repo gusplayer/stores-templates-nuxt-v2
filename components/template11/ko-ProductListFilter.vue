@@ -106,22 +106,6 @@
                 </div>
               </div>
             </div>
-            <!-- //Filtro precio} -->
-            <!-- <button class="item-tittle accordion">
-              <p class="txt-tittles">
-                {{ $t('home_fprecio') }}
-              </p>
-            </button>
-            <div class="categorys-list panel">
-              <button class="txt-Filter" @click="getProductsHigherNumber()">
-                {{ $t('home_fpreciom') }}
-              </button>
-              <button class="txt-Filter" @click="getProductsSmallerNumber()">
-                {{ $t('home_fprecioM') }}
-              </button>
-            </div>
-            <div class="empty"></div> -->
-            <!-- //Filtro por envio} -->
             <button class="item-tittle accordion">
               <p class="txt-tittles">
                 {{ $t('home_fenvio') }}
@@ -133,6 +117,20 @@
               </button>
               <button class="txt-Filter" @click="getProductsNoShippingFree()">
                 {{ $t('home_Singratis') }}
+              </button>
+            </div>
+            <div class="empty"></div>
+            <button class="item-tittle accordion">
+              <p class="txt-tittles">
+                {{ $t('home_fprecio') }}
+              </p>
+            </button>
+            <div class="categorys-list panel">
+              <button class="txt-Filter" @click="getProductsHigherNumber()">
+                {{ $t('home_fpreciom') }}
+              </button>
+              <button class="txt-Filter" @click="getProductsSmallerNumber()">
+                {{ $t('home_fprecioM') }}
               </button>
             </div>
           </div>
