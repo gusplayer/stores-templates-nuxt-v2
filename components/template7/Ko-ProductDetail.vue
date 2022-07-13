@@ -1013,9 +1013,7 @@ export default {
   display: flex;
   width: 100%;
   /* background: #fff; */
-  background: var(--color_background_btn);
   background: var(--background_color_1);
-
   justify-content: center;
   align-items: center;
   padding-top: 120px;
@@ -1029,7 +1027,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 50px 30px 30px 30px;
-  background: var(--color_background_btn);
+  background: var(--background_color_1);
 }
 .container-productDetail {
   position: relative;
