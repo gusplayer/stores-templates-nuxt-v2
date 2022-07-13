@@ -77,111 +77,99 @@
       ]"
     >
       <div class="content-left">
-        <div class="content-input-slide">
-          <button class="item-tittle accordion">
-            <p class="txt-tittles">
-              {{ $t('header_buscar_producto') }}
-            </p>
-          </button>
-          <div class="itemLeft-range-slide panel">
+        <nuxt-link class="content-home" to="/productos">
+          <p class="txt-content-home" @click="clear">
+            {{ $t('header_inicio') }}
+          </p>
+        </nuxt-link>
+        <el-collapse v-model="activeNames" @change="handleChange">
+          <el-collapse-item :title="$t('header_buscar_producto')" name="1">
             <input
               class="input-slide"
               type="search"
               v-model="search"
               :placeholder="$t('header_search')"
             />
-          </div>
-        </div>
-        <div class="empty"></div>
-        <div class="content-category-left">
-          <button class="item-tittle accordion">
-            <p class="txt-tittles">
-              {{ $t('productdetail_categoria') }}
-            </p>
-          </button>
-          <div class="categorys-list panel">
+          </el-collapse-item>
+          <el-collapse-item
+            :title="$t('productdetail_categoria')"
+            name="2"
+            v-show="categorias.length > 0"
+          >
+            <div class="categorys-list">
+              <div
+                v-for="(categorys, index) in categorias"
+                :key="index"
+                @click="showSubCategory = true"
+              >
+                <div
+                  @click="sendCategory(categorys, categorys.id, (ref = false))"
+                >
+                  <p
+                    class="txt-categorys"
+                    :class="
+                      categorys.id == indexSelect ? 'txt-categorys-active' : ''
+                    "
+                  >
+                    {{ categorys.nombre_categoria_producto }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </el-collapse-item>
+          <el-collapse-item
+            :title="$t('home_subcategory')"
+            name="3"
+            v-show="showSubCategory && selectedSubcategories.length"
+          >
             <div
-              v-for="(categorys, index) in categorias"
-              :key="index"
-              @click="showSubCategory = true"
+              class="subcategory-list"
+              v-show="showSubCategory && selectedSubcategories.length"
             >
               <div
-                @click="sendCategory(categorys, categorys.id, (ref = false))"
+                v-for="(subcategorys, index) in selectedSubcategories"
+                :key="index"
               >
-                <p
-                  class="txt-categorys"
-                  :class="
-                    categorys.id == indexSelect ? 'txt-categorys-active' : ''
-                  "
-                >
-                  {{ categorys.nombre_categoria_producto }}
-                </p>
+                <div @click="Sendsubcategory(subcategorys.id)">
+                  <p
+                    class="txt-categorys"
+                    :class="
+                      subcategorys.id == indexSelect2
+                        ? 'txt-categorys-active'
+                        : ''
+                    "
+                  >
+                    {{ subcategorys.nombre_subcategoria }}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="empty"></div>
-          <button
-            class="item-tittle accordion"
-            v-show="showSubCategory && selectedSubcategories.length"
+          </el-collapse-item>
+          <el-collapse-item
+            :title="$t('home_fenvio')"
+            name="4"
+            v-show="stateShipping == false"
           >
-            <p class="txt-tittles">
-              {{ $t('home_subcategory') }}
-            </p>
-          </button>
-          <div
-            class="subcategory-list panel"
-            v-show="showSubCategory && selectedSubcategories.length"
-          >
-            <div
-              v-for="(subcategorys, index) in selectedSubcategories"
-              :key="index"
-            >
-              <div @click="Sendsubcategory(subcategorys.id)">
-                <p
-                  class="txt-categorys"
-                  :class="
-                    subcategorys.id == indexSelect2
-                      ? 'txt-categorys-active'
-                      : ''
-                  "
-                >
-                  {{ subcategorys.nombre_subcategoria }}
-                </p>
-              </div>
+            <div class="categorys-list">
+              <button class="txt-Filter" @click="getProductsShippingFree()">
+                {{ $t('home_gratis') }}
+              </button>
+              <button class="txt-Filter" @click="getProductsNoShippingFree()">
+                {{ $t('home_Singratis') }}
+              </button>
             </div>
-          </div>
-          <button class="item-tittle accordion">
-            <p class="txt-tittles">
-              {{ $t('home_fenvio') }}
-            </p>
-          </button>
-          <div class="categorys-list panel">
-            <button class="txt-categorys" @click="getProductsShippingFree()">
-              {{ $t('home_gratis') }}
-            </button>
-            <button class="txt-categorys" @click="getProductsNoShippingFree()">
-              {{ $t('home_Singratis') }}
-            </button>
-          </div>
-          <div class="empty"></div>
-          <button class="item-tittle accordion">
-            <p class="txt-tittles">
-              {{ $t('home_fprecio') }}
-            </p>
-          </button>
-          <div class="categorys-list panel">
-            <button class="txt-categorys" @click="getProductsHigherNumber()">
-              {{ $t('home_fpreciom') }}
-            </button>
-            <button class="txt-categorys" @click="getProductsSmallerNumber()">
-              {{ $t('home_fprecioM') }}
-            </button>
-          </div>
-        </div>
-        <div
-          class="empty"
-          v-if="showSubCategory && selectedSubcategories.length"
-        ></div>
+          </el-collapse-item>
+          <el-collapse-item :title="$t('home_fprecio')" name="5">
+            <div class="categorys-list">
+              <button class="txt-Filter" @click="getProductsHigherNumber()">
+                {{ $t('home_fpreciom') }}
+              </button>
+              <button class="txt-Filter" @click="getProductsSmallerNumber()">
+                {{ $t('home_fprecioM') }}
+              </button>
+            </div>
+          </el-collapse-item>
+        </el-collapse>
       </div>
       <div class="content-right">
         <div class="content-banner-shop-r">
@@ -334,6 +322,7 @@ export default {
   mixins: [sendCategoryUrl, SendsubcategoryUrl],
   name: 'Ko-ProductList-Filter',
   mounted() {
+    this.setOptionShipping()
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
       let maxTMP = 0
@@ -343,19 +332,6 @@ export default {
           this.rangeSlide[1] = product.precio
           this.range.max = parseInt(product.precio)
           maxTMP = product.precio
-        }
-      })
-    }
-    var acc = document.getElementsByClassName('accordion')
-    var i
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function () {
-        this.classList.toggle('active')
-        var panel = this.nextElementSibling
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 'px'
         }
       })
     }
@@ -405,7 +381,8 @@ export default {
       indexshowList: 3,
       indexshowView: 3,
       numVistas: 18,
-      pruebasss: [],
+      stateShipping: false,
+      activeNames: ['1', '2', '3', '4', '5'],
     }
   },
   computed: {
@@ -455,6 +432,32 @@ export default {
     },
   },
   methods: {
+    setOptionShipping() {
+      if (this.dataStore && this.dataStore.medios_envio) {
+        let shipping = JSON.parse(this.dataStore.medios_envio.valores)
+        switch (shipping.envio_metodo) {
+          case 'sintarifa':
+            this.stateShipping = false
+            break
+          case 'gratis':
+            this.stateShipping = true
+            break
+          case 'tarifa_plana':
+            this.stateShipping = false
+            break
+          case 'precio':
+            this.stateShipping = false
+            break
+          case 'precio_ciudad':
+            this.stateShipping = false
+            break
+          case 'peso':
+            this.stateShipping = false
+            break
+          default:
+        }
+      }
+    },
     getProductsShippingFree() {
       this.$store.commit('products/FILTER_BY', {
         type: 'ShippingFree',
@@ -482,24 +485,6 @@ export default {
         data: '',
       })
       this.currentPage = 1
-    },
-    filterProductPrice() {
-      let result = {}
-      if (this.filterProduct && this.value) {
-        result = this.filterProduct.map((product) => {
-          if (product.precio >= 0 && product.precio <= this.value) {
-            return product
-          }
-        })
-        this.pruebasss = []
-        if (result) {
-          result.map((element) => {
-            if (element) {
-              this.pruebasss.push(element)
-            }
-          })
-        }
-      }
     },
     showList() {
       this.indexshowList = 1
@@ -667,6 +652,9 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
+    handleChange(val) {
+      // console.log(val);
+    },
   },
   watch: {
     fullProducts(value) {
@@ -740,8 +728,35 @@ export default {
   @apply w-full flex justify-center items-center;
   margin-bottom: 20px;
 }
-.content-input-slide {
-  @apply w-full flex flex-col justify-center items-center;
+.content-left >>> .el-collapse {
+  border-top: 1px solid var(--color_icon);
+  border-bottom: 1px solid var(--color_icon);
+  @apply w-full;
+}
+.content-left >>> .el-collapse-item__wrap {
+  will-change: height;
+  background-color: transparent;
+  border-bottom: 1px solid var(--color_icon);
+  margin-left: 10px;
+}
+.content-left >>> .el-collapse-item__header {
+  color: var(--color_text);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0;
+  transition: all 0.25s ease;
+  font-family: var(--font-style-1);
+  cursor: pointer;
+}
+.content-left >>> .el-collapse-item__header.is-active {
+  border-bottom: none;
+}
+.content-left >>> .el-collapse-item__arrow {
+  color: var(--color_icon);
 }
 .input-slide {
   color: var(--color_subtext);
@@ -760,15 +775,6 @@ export default {
   /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-1);
   cursor: pointer;
-}
-.item-tittle {
-  @apply w-full flex justify-start items-center;
-}
-.empty {
-  @apply w-full;
-  margin-bottom: 30px;
-  border-bottom: 1px solid;
-  border-color: var(--color_icon);
 }
 .content-items-categorias {
   @apply w-full flex flex-row justify-between items-center;
@@ -836,8 +842,15 @@ export default {
 .container::-webkit-scrollbar-track:active {
   background: #b52727;
 }
-.content-category-left {
-  @apply w-full flex flex-col justify-start items-center;
+.txt-Filter {
+  color: var(--color_subtext);
+  font-size: 15px;
+  line-height: 1.3;
+  font-family: var(--font-style-1) !important;
+  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+}
+.txt-Filter:hover {
+  color: #eb7025;
 }
 .txt-categorys {
   color: var(--color_subtext);
@@ -1019,40 +1032,29 @@ export default {
   color: #fff;
   transition: all 0.25s ease;
 }
-.accordion {
-  cursor: pointer;
-  margin-bottom: 0px;
-  width: 100%;
-  font-size: 20px;
-  border: none;
-  text-align: left;
-  outline: none;
-  transition: 0.4s;
-  margin-bottom: 0px;
-}
-.accordion:after {
-  content: '\002B';
-  color: var(--color_icon);
-  font-weight: bold;
-  float: right;
-  /* margin-left: 5px; */
-}
-.active:after {
-  content: '\2212';
-}
-.panel {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 0 18px;
-  background-color: transparent;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-out;
-}
 .content-left {
   position: sticky;
   top: 130px;
   transition: all 0.25s ease;
+}
+.content-home {
+  @apply w-full flex flex-col justify-start items-start;
+}
+.txt-content-home {
+  color: var(--color_text);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0;
+  transition: all 0.25s ease;
+  font-family: var(--font-style-1);
+  cursor: pointer;
+}
+.txt-content-home:hover {
+  color: #000;
 }
 @screen sm {
   .product-conten-items {

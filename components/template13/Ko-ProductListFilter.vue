@@ -35,7 +35,11 @@
                 :placeholder="$t('header_search')"
               />
             </el-collapse-item>
-            <el-collapse-item :title="$t('productdetail_categoria')" name="2">
+            <el-collapse-item
+              :title="$t('productdetail_categoria')"
+              name="2"
+              v-show="categorias.length > 0"
+            >
               <div class="categorys-list">
                 <div
                   v-for="(categorys, index) in categorias"
@@ -89,7 +93,11 @@
                 </div>
               </div>
             </el-collapse-item>
-            <el-collapse-item :title="$t('home_fenvio')" name="4">
+            <el-collapse-item
+              :title="$t('home_fenvio')"
+              name="4"
+              v-show="stateShipping == false"
+            >
               <div class="categorys-list">
                 <button class="txt-Filter" @click="getProductsShippingFree()">
                   {{ $t('home_gratis') }}
@@ -209,6 +217,7 @@ export default {
   mixins: [sendCategoryUrl, SendsubcategoryUrl],
   name: 'Ko13-ProductList-Filter',
   mounted() {
+    this.setOptionShipping()
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
       let maxTMP = 0
@@ -240,19 +249,6 @@ export default {
     } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
       this.$store.commit('SET_STATEBANNER', false)
     }
-    var acc = document.getElementsByClassName('accordion')
-    var i
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function () {
-        this.classList.toggle('active')
-        var panel = this.nextElementSibling
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 'px'
-        }
-      })
-    }
   },
   data() {
     return {
@@ -261,26 +257,22 @@ export default {
       rangeSlide: [0, 1000000],
       add: true,
       search: '',
-      productsCategory: [],
       price: [0, 1000000],
       range: {
         max: 0,
       },
       currentPage: 1,
       sub: -1,
-      show: false,
-      value: 1,
       selectSubcategory: '',
       nameCategory: '',
       nameSubCategory: '',
       selectedSubcategories: [],
       toggleCategories: true,
-      indexCategory: 0,
       indexSelect: '',
       indexSelect2: '',
       numVistas: 15,
-      filterPrice: [],
-      activeNames: ['1', '2', '4', '5'],
+      activeNames: ['1', '2', '3', '4', '5'],
+      stateShipping: false,
     }
   },
   computed: {
@@ -330,6 +322,32 @@ export default {
     },
   },
   methods: {
+    setOptionShipping() {
+      if (this.dataStore && this.dataStore.medios_envio) {
+        let shipping = JSON.parse(this.dataStore.medios_envio.valores)
+        switch (shipping.envio_metodo) {
+          case 'sintarifa':
+            this.stateShipping = false
+            break
+          case 'gratis':
+            this.stateShipping = true
+            break
+          case 'tarifa_plana':
+            this.stateShipping = false
+            break
+          case 'precio':
+            this.stateShipping = false
+            break
+          case 'precio_ciudad':
+            this.stateShipping = false
+            break
+          case 'peso':
+            this.stateShipping = false
+            break
+          default:
+        }
+      }
+    },
     getProductsShippingFree() {
       this.$store.commit('products/FILTER_BY', {
         type: 'ShippingFree',
@@ -962,7 +980,6 @@ export default {
   .items-end {
     @apply flex pb-20;
   }
-
   .show-view-per-list {
     @apply w-auto grid grid-cols-2 gap-0 justify-center items-center;
   }

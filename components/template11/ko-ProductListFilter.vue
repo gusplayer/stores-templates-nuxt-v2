@@ -32,112 +32,98 @@
               {{ $t('header_inicio') }}
             </p>
           </nuxt-link>
-          <div class="empty"></div>
-          <div class="content-input-slide">
-            <button class="item-tittle accordion">
-              <p class="txt-tittles">
-                {{ $t('header_buscar_producto') }}
-              </p>
-            </button>
-            <div class="itemLeft-range-slide panel">
+          <el-collapse v-model="activeNames" @change="handleChange">
+            <el-collapse-item :title="$t('header_buscar_producto')" name="1">
               <input
                 class="input-slide"
                 type="search"
                 v-model="search"
                 :placeholder="$t('header_search')"
               />
-            </div>
-          </div>
-          <div class="empty"></div>
-          <div class="content-category-left">
-            <button class="item-tittle accordion">
-              <p class="txt-tittles">
-                {{ $t('productdetail_categoria') }}
-              </p>
-            </button>
-            <div class="categorys-list panel">
+            </el-collapse-item>
+            <el-collapse-item
+              :title="$t('productdetail_categoria')"
+              name="2"
+              v-show="categorias.length > 0"
+            >
+              <div class="categorys-list">
+                <div
+                  v-for="(categorys, index) in categorias"
+                  :key="index"
+                  @click="showSubCategory = true"
+                >
+                  <div
+                    @click="
+                      sendCategory(categorys, categorys.id, (ref = false))
+                    "
+                  >
+                    <p
+                      class="txt-categorys"
+                      :class="
+                        categorys.id == indexSelect
+                          ? 'txt-categorys-active'
+                          : ''
+                      "
+                    >
+                      {{ categorys.nombre_categoria_producto }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item
+              :title="$t('home_subcategory')"
+              name="3"
+              v-show="showSubCategory && selectedSubcategories.length"
+            >
               <div
-                v-for="(categorys, index) in categorias"
-                :key="index"
-                @click="showSubCategory = true"
+                class="subcategory-list"
+                v-show="showSubCategory && selectedSubcategories.length"
               >
                 <div
-                  @click="sendCategory(categorys, categorys.id, (ref = false))"
+                  v-for="(subcategorys, index) in selectedSubcategories"
+                  :key="index"
                 >
-                  <p
-                    class="txt-categorys"
-                    :class="
-                      categorys.id == indexSelect ? 'txt-categorys-active' : ''
-                    "
-                  >
-                    {{ categorys.nombre_categoria_producto }}
-                  </p>
+                  <div @click="Sendsubcategory(subcategorys.id)">
+                    <p
+                      class="txt-categorys"
+                      :class="
+                        subcategorys.id == indexSelect2
+                          ? 'txt-categorys-active'
+                          : ''
+                      "
+                    >
+                      {{ subcategorys.nombre_subcategoria }}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="empty"></div>
-            <button
-              class="item-tittle accordion"
-              v-show="showSubCategory && selectedSubcategories.length"
+            </el-collapse-item>
+            <el-collapse-item
+              :title="$t('home_fenvio')"
+              name="4"
+              v-show="stateShipping == false"
             >
-              <p class="txt-tittles">
-                {{ $t('home_subcategory') }}
-              </p>
-            </button>
-            <div
-              class="subcategory-list panel"
-              v-show="showSubCategory && selectedSubcategories.length"
-            >
-              <div
-                v-for="(subcategorys, index) in selectedSubcategories"
-                :key="index"
-              >
-                <div @click="Sendsubcategory(subcategorys.id)">
-                  <p
-                    class="txt-categorys"
-                    :class="
-                      subcategorys.id == indexSelect2
-                        ? 'txt-categorys-active'
-                        : ''
-                    "
-                  >
-                    {{ subcategorys.nombre_subcategoria }}
-                  </p>
-                </div>
+              <div class="categorys-list">
+                <button class="txt-Filter" @click="getProductsShippingFree()">
+                  {{ $t('home_gratis') }}
+                </button>
+                <button class="txt-Filter" @click="getProductsNoShippingFree()">
+                  {{ $t('home_Singratis') }}
+                </button>
               </div>
-            </div>
-            <button class="item-tittle accordion">
-              <p class="txt-tittles">
-                {{ $t('home_fenvio') }}
-              </p>
-            </button>
-            <div class="categorys-list panel">
-              <button class="txt-Filter" @click="getProductsShippingFree()">
-                {{ $t('home_gratis') }}
-              </button>
-              <button class="txt-Filter" @click="getProductsNoShippingFree()">
-                {{ $t('home_Singratis') }}
-              </button>
-            </div>
-            <div class="empty"></div>
-            <button class="item-tittle accordion">
-              <p class="txt-tittles">
-                {{ $t('home_fprecio') }}
-              </p>
-            </button>
-            <div class="categorys-list panel">
-              <button class="txt-Filter" @click="getProductsHigherNumber()">
-                {{ $t('home_fpreciom') }}
-              </button>
-              <button class="txt-Filter" @click="getProductsSmallerNumber()">
-                {{ $t('home_fprecioM') }}
-              </button>
-            </div>
-          </div>
-          <div
-            class="empty"
-            v-if="showSubCategory && selectedSubcategories.length"
-          ></div>
+            </el-collapse-item>
+            <el-collapse-item :title="$t('home_fprecio')" name="5">
+              <div class="categorys-list">
+                <button class="txt-Filter" @click="getProductsHigherNumber()">
+                  {{ $t('home_fpreciom') }}
+                </button>
+                <button class="txt-Filter" @click="getProductsSmallerNumber()">
+                  {{ $t('home_fprecioM') }}
+                </button>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
         </div>
         <div class="content-right">
           <nuxt-link class="content-home hidd" to="/productos">
@@ -283,6 +269,7 @@ export default {
   mixins: [sendCategoryUrl, SendsubcategoryUrl],
   name: 'Ko-ProductList-Filter',
   mounted() {
+    this.setOptionShipping()
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
       let maxTMP = 0
@@ -313,19 +300,6 @@ export default {
       this.$store.commit('SET_STATEBANNER', false)
     } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
       this.$store.commit('SET_STATEBANNER', false)
-    }
-    var acc = document.getElementsByClassName('accordion')
-    var i
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function () {
-        this.classList.toggle('active')
-        var panel = this.nextElementSibling
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 'px'
-        }
-      })
     }
   },
   data() {
@@ -358,8 +332,9 @@ export default {
       indexSelect2: '',
       indexshowList: 3,
       indexshowView: 3,
-      numVistas: 16,
-      pruebasss: [],
+      numVistas: 15,
+      stateShipping: false,
+      activeNames: ['1', '2', '3', '4', '5'],
     }
   },
   computed: {
@@ -378,15 +353,15 @@ export default {
       return this.dataStore.subcategorias
     },
     getProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 15 - 15
+      const final = initial + 15
       return this.fullProducts
         .filter((product) => product.categoria == this.select)
         .slice(initial, final)
     },
     filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
+      const initial = this.currentPage * 15 - 15
+      const final = initial + 15
       return this.products.slice(initial, final)
     },
     selectedCategory() {
@@ -409,6 +384,32 @@ export default {
     },
   },
   methods: {
+    setOptionShipping() {
+      if (this.dataStore && this.dataStore.medios_envio) {
+        let shipping = JSON.parse(this.dataStore.medios_envio.valores)
+        switch (shipping.envio_metodo) {
+          case 'sintarifa':
+            this.stateShipping = false
+            break
+          case 'gratis':
+            this.stateShipping = true
+            break
+          case 'tarifa_plana':
+            this.stateShipping = false
+            break
+          case 'precio':
+            this.stateShipping = false
+            break
+          case 'precio_ciudad':
+            this.stateShipping = false
+            break
+          case 'peso':
+            this.stateShipping = false
+            break
+          default:
+        }
+      }
+    },
     getProductsShippingFree() {
       this.$store.commit('products/FILTER_BY', {
         type: 'ShippingFree',
@@ -436,24 +437,6 @@ export default {
         data: '',
       })
       this.currentPage = 1
-    },
-    filterProductPrice() {
-      let result = {}
-      if (this.filterProduct && this.value) {
-        result = this.filterProduct.map((product) => {
-          if (product.precio >= 0 && product.precio <= this.value) {
-            return product
-          }
-        })
-        this.pruebasss = []
-        if (result) {
-          result.map((element) => {
-            if (element) {
-              this.pruebasss.push(element)
-            }
-          })
-        }
-      }
     },
     showList() {
       this.indexshowList = 1
@@ -673,6 +656,9 @@ export default {
       this.addClass()
       this.nameCategory = ''
     },
+    handleChange(val) {
+      // console.log(val);
+    },
   },
   watch: {
     fullProducts(value) {
@@ -748,8 +734,31 @@ export default {
 .itemLeft-range-slide {
   @apply w-full flex justify-center items-center mb-20;
 }
-.content-input-slide {
-  @apply w-full flex flex-col justify-center items-center;
+.content-left >>> .el-collapse {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  @apply w-full;
+}
+.content-left >>> .el-collapse-item__wrap {
+  will-change: height;
+  background-color: transparent;
+  border-bottom: 1px solid var(--border);
+  margin-left: 10px;
+}
+.content-left >>> .el-collapse-item__header {
+  font-size: 16px;
+  font-family: var(--font-style-1) !important;
+  color: var(--color_text);
+  background-color: transparent;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  @apply font-semibold;
+}
+.content-left >>> .el-collapse-item__header.is-active {
+  border-bottom: none;
+}
+.content-left >>> .el-collapse-item__arrow {
+  color: var(--color_icon);
 }
 .input-slide {
   font-family: var(--font-style-1) !important;
@@ -783,14 +792,7 @@ export default {
   font-family: var(--font-style-1) !important;
   @apply flex flex-row justify-start items-center font-semibold transition-all ease-in duration-0.2 cursor-default;
 }
-.item-tittle {
-  @apply w-full flex justify-start items-center;
-}
-.empty {
-  margin-bottom: 30px;
-  border-color: var(--border);
-  @apply w-full mb-30 border-b;
-}
+
 .btn-slider {
   @apply w-3/0 flex justify-center items-center;
 }
@@ -906,9 +908,7 @@ export default {
 .container::-webkit-scrollbar-track:active {
   background: #b52727;
 }
-.content-category-left {
-  @apply w-full flex flex-col justify-start items-center;
-}
+
 .txt-Filter {
   color: var(--color_subtext);
   font-size: 15px;
@@ -1081,29 +1081,6 @@ export default {
 .s2:hover {
   color: #000;
   transition: all 0.25s ease;
-}
-.accordion {
-  font-size: 20px;
-  transition: 0.4s;
-  @apply w-full mb-0 border-none text-left outline-none cursor-pointer;
-}
-.accordion:after {
-  content: '\002B';
-  color: var(--border);
-  font-weight: bold;
-  float: right;
-}
-.active:after {
-  content: '\2212';
-}
-.panel {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 0 18px;
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-out;
 }
 .product-list {
   @apply w-full;
