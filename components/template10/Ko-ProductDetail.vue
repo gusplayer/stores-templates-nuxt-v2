@@ -28,14 +28,13 @@
       </div>
       <div class="product-content">
         <div class="left">
-          <div class="content-images">
-            <div class="main-images">
-              <img
-                class="img-list"
-                :src="idCloudinaryBanner(data.detalle.foto_cloudinary)"
-                alt="Product Img"
-              />
-            </div>
+          <div class="main-images">
+            <productSlide
+              class="w-auto h-auto object-cover overflow-hidden"
+              :photos="data.fotos"
+              :photo="data.detalle.foto_cloudinary"
+              :idYoutube="idYoutube"
+            />
           </div>
         </div>
         <div class="right">
@@ -347,6 +346,8 @@ import axios from 'axios'
 import SelectGroup from './_productdetails/selectGroup'
 import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
+import productSlide from './_productdetails/productSlide'
+
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
@@ -364,6 +365,7 @@ export default {
     OptionTab,
     SelectGroup,
     KoSuggesProduct,
+    productSlide,
   },
   mounted() {
     if (
@@ -872,21 +874,14 @@ export default {
 .left {
   @apply w-full flex flex-col justify-center items-center;
 }
-.content-images {
-  @apply w-full grid grid-cols-1 gap-4 justify-center items-center;
-}
 .content-variant {
   @apply w-auto flex flex-col justify-center items-start mb-8;
-}
-.img-list {
-  @apply w-auto h-auto object-cover overflow-hidden;
 }
 .aditional-images,
 .main-images,
 .youtuve-video {
   @apply w-full flex justify-center items-center;
 }
-
 .right {
   @apply w-full flex flex-col justify-start items-start;
 }
@@ -930,7 +925,6 @@ export default {
   border-color: var(--border);
   @apply w-25 h-25 flex justify-center items-center border-t border-r;
 }
-
 .material-design-icon > .material-design-icon__svg {
   height: 1em;
   width: 1em;
@@ -945,7 +939,6 @@ export default {
 .social-networks {
   @apply w-auto flex flex-row justify-start items-start mr-20;
 }
-
 .facebook-icon,
 .twitter-icon,
 .instagram-icon,
@@ -988,7 +981,6 @@ export default {
     width: 100%;
     height: 200px;
   }
-
   .content-name,
   .content-price {
     @apply mb-30;
@@ -1043,7 +1035,6 @@ export default {
     color: #fff;
     transition: all 0.15s ease-in;
   }
-
   .quantity {
     @apply w-full;
   }
@@ -1054,7 +1045,6 @@ export default {
     align-items: center;
     background: #f4f4f4;
   }
-
   .text-name {
     margin-top: var(--marginTopTitle);
     color: var(--color_text);
@@ -1097,7 +1087,6 @@ export default {
   }
   .text-addCart {
     font-family: var(--font-style-1) !important;
-
     font-size: 12px;
     @apply font-semibold whitespace-nowrap uppercase;
   }
@@ -1183,7 +1172,7 @@ export default {
     @apply w-9/5;
   }
   .product-content {
-    @apply w-9/5 grid grid-cols-2 gap-4 justify-start items-start mt-60;
+    @apply w-9/5 grid grid-cols-2 gap-4 justify-start items-start mt-20;
   }
   .right {
     @apply mt-40;
@@ -1236,7 +1225,6 @@ export default {
     height: 420px;
   }
 }
-
 @media (min-width: 1350px) {
   .video {
     height: 480px;
