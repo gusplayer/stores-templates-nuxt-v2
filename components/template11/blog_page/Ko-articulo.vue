@@ -117,7 +117,7 @@ export default {
   .txt-created {
     font-size: 13px;
     color: #000;
-    @apply font-normal capitalize;
+    @apply font-normal;
   }
   .editor {
     width: 100%;

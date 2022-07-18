@@ -478,7 +478,7 @@ li p {
   width: 280px !important;
 }
 .capitalize {
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   font-weight: 600 !important;
 }
 .description-method {

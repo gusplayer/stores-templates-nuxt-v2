@@ -396,7 +396,7 @@ export default {
   font-size: 15px;
   font-weight: 800;
   /* line-height: 30px; */
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   letter-spacing: 1px;
   @apply flex justify-center items-center;
 }

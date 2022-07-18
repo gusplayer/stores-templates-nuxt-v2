@@ -210,7 +210,7 @@ export default {
   font-family: var(--font-style-1);
   color: var(--color_title_card);
   font-weight: 600;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 .text-cart-read {
   @apply text-left;

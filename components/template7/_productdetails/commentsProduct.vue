@@ -274,8 +274,8 @@ export default {
 }
 .btn:hover {
   color: white;
-  border: solid 2px var(--btnhover);
-  background-color: var(--btnhover);
+  border: solid 2px var(--hover_card);
+  background-color: var(--hover_card);
 }
 .wrapper-answers {
   width: 100%;

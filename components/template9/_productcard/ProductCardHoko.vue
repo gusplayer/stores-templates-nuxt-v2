@@ -210,7 +210,7 @@ export default {
   color: var(--color_text_btn);
   font-size: 15px;
   letter-spacing: 1px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   font-weight: 800;
   transition: all 200ms ease-in;
 }

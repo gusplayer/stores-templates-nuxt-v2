@@ -356,7 +356,7 @@ export default {
   /* line-height: 38px; */
   height: 62px;
   width: 100%;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   border: none;
   text-align: left;
   transition: 0.4s;

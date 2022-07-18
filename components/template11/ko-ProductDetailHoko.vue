@@ -570,7 +570,6 @@ export default {
     /* font-size: 22px; */
     line-height: 1;
     font-family: var(--font-style-1) !important;
-    @apply capitalize;
   }
   .text-price {
     color: var(--color_price);
@@ -578,7 +577,6 @@ export default {
     line-height: 26px;
     letter-spacing: 0.3px;
     font-family: var(--font-style-1) !important;
-    @apply capitalize;
   }
   .text-addCart {
     font-family: var(--font-style-1) !important;
@@ -619,7 +617,7 @@ export default {
     color: var(--color_subtext);
     font-size: 15px;
     font-family: var(--font-style-1) !important;
-    @apply font-normal text-left capitalize mr-20;
+    @apply font-normal text-left mr-20;
   }
   .stock-text-2 {
     color: var(--color_subtext);

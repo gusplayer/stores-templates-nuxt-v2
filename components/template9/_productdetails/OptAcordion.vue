@@ -221,9 +221,7 @@
         v-if="this.envios.envio_metodo === 'precio_ciudad'"
         class="wrapper-method"
       >
-        <h4 class="capitalize">
-          • {{ this.envios.envio_metodo.replace('_', ' por ') }}
-        </h4>
+        <h4>• {{ this.envios.envio_metodo.replace('_', ' por ') }}</h4>
         <p class="description-method">
           {{ $t('productdetail_opinionesEnvioMsg1') }}
         </p>
@@ -232,7 +230,7 @@
         v-if="this.envios.envio_metodo === 'tarifa_plana'"
         class="wrapper-method"
       >
-        <h4 class="capitalize">
+        <h4>
           {{ this.envios.envio_metodo.replace('_', ' ') }}
         </h4>
         <p class="description-method">
@@ -406,7 +404,7 @@ export default {
   /* line-height: 38px; */
   height: 62px;
   width: 100%;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   border: none;
   text-align: left;
   transition: 0.4s;

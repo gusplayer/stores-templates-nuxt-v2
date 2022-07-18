@@ -150,7 +150,7 @@ export default {
     font-size: 20px;
     font-family: var(--font-style-1);
     font-weight: var(--fontWeight);
-    @apply tracking-0 capitalize;
+    @apply tracking-0;
   }
   .product-text {
     margin-bottom: var(--marginbottomTitle);

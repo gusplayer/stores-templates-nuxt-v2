@@ -528,13 +528,13 @@ export default {
   overflow: hidden;
 }
 .transporte-icon:hover {
-  fill: #ed2353;
+  fill: var(--hover_card);
 }
 .block-icon:hover {
-  fill: #ed2353;
+  fill: var(--hover_card);
 }
 .hearts-icon:hover {
-  @apply text-red-btnbannershop;
+  color: var(--hover_text);
 }
 .hearts-icon {
   color: #333;

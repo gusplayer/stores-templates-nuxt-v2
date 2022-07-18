@@ -1125,7 +1125,7 @@ export default {
     font-weight: 700;
     letter-spacing: 0px;
     line-height: 1;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
   }
   .text-price {
     /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
@@ -1135,7 +1135,7 @@ export default {
     font-weight: 600;
     line-height: 1;
     letter-spacing: -0.03em;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
   }
   .text-stock {
     /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
@@ -1146,7 +1146,7 @@ export default {
     /* line-height: 1.42857143;
     letter-spacing: -0.02em; */
     /* margin-left: 30px; */
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
   }
   .text-price-promo {
     /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
@@ -1167,7 +1167,7 @@ export default {
     /* line-height: 1.42857143; */
     /* letter-spacing: -0.02em; */
     /* margin-left: 100px; */
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
   }
   .text-icon {
     display: flex;
@@ -1198,7 +1198,7 @@ export default {
     line-height: 54px;
     letter-spacing: 1px;
     white-space: nowrap;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
   }
   .minicart-icon {
     fill: var(--color_text_btn);
@@ -1212,7 +1212,7 @@ export default {
     font-weight: 700;
     line-height: 1px;
     margin-left: 10px;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
   }
   .text-variant {
     /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
@@ -1478,7 +1478,7 @@ export default {
   .alert {
     text-align: center;
     padding: 5px 5px;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
   }
   .features {
     border-top: none;

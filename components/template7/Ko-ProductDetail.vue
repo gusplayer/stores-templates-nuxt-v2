@@ -1087,7 +1087,7 @@ export default {
   cursor: pointer;
 }
 .icon-swiper:hover {
-  color: var(--btnhover);
+  color: var(--hover_card);
 }
 .photos_selected {
   width: 100%;
@@ -1199,7 +1199,7 @@ export default {
   @apply flex flex-row justify-start items-center w-full;
 }
 .icon-stock {
-  fill: #ed2353;
+  fill: var(--color_title);
   margin-right: 5px;
 }
 .content-quanti-btnShop {
@@ -1505,10 +1505,10 @@ export default {
   color: var(--color_price);
 }
 .quantity_add:hover .icon {
-  color: var(--color_title);
+  color: var(--hover_text);
 }
 .quantity_remove:hover .icon {
-  color: var(--color_title);
+  color: var(--hover_text);
 }
 .features {
   width: 100%;
@@ -1533,7 +1533,7 @@ export default {
 .alerta {
   text-align: center;
   padding: 5px 5px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 @media (max-width: 1250px) {
   .photo_main {

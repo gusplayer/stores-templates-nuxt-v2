@@ -576,13 +576,13 @@ export default {
 
 <style scoped>
 .transporte-icon:hover {
-  fill: #ed2353;
+  fill: var(--hover_card);
 }
 .block-icon:hover {
-  fill: #ed2353;
+  fill: var(--hover_card);
 }
 .hearts-icon:hover {
-  @apply text-red-btnbannershop;
+  color: var(--hover_text);
 }
 .hearts-icon {
   @apply h-full w-full;

@@ -66,7 +66,7 @@ export default {
 @screen sm {
   .txt-top {
     font-size: 12px;
-    @apply font-light tracking-1 capitalize;
+    @apply font-light tracking-1;
   }
   .txt-bottom {
     font-size: 16px;
