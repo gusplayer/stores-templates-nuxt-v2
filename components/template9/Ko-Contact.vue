@@ -481,7 +481,7 @@ export default {
     font-family: var(--font-style-1) !important;
     color: var(--color_text);
     font-size: 13px;
-    @apply w-full justify-center items-center capitalize;
+    @apply w-full justify-center items-center;
   }
   .content-bn {
     @apply w-full flex justify-start items-center;

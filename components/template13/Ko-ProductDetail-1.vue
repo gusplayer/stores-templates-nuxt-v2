@@ -1105,7 +1105,7 @@ export default {
 .alerta {
   text-align: center;
   padding: 5px 5px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 @screen sm {
   .product-content {
@@ -1158,7 +1158,6 @@ export default {
     /* font-size: 22px; */
     line-height: 1;
     font-family: var(--font-style-1) !important;
-    @apply capitalize;
   }
   .text-price {
     color: var(--color_price);
@@ -1166,7 +1165,6 @@ export default {
     line-height: 26px;
     letter-spacing: 0.3px;
     font-family: var(--font-style-1) !important;
-    @apply capitalize;
   }
   .text-stock {
     color: #92bb35;
@@ -1174,7 +1172,7 @@ export default {
     line-height: 1.42857143;
     letter-spacing: -0.02em;
     font-family: var(--font-style-1) !important;
-    @apply capitalize font-semibold ml-30;
+    @apply font-semibold ml-30;
   }
   .text-addCart {
     font-family: var(--font-style-1) !important;

@@ -95,13 +95,13 @@ export default {
 </script>
 <style scoped>
 .shares-icon:hover {
-  @apply text-red-btnbannershop;
+  background: var(--hover_card);
 }
 .searchs-icon:hover {
-  @apply text-red-btnbannershop;
+  background: var(--hover_card);
 }
 .hearts-icon:hover {
-  @apply text-red-btnbannershop;
+  background: var(--hover_card);
 }
 .shares-icon,
 .searchs-icon,
@@ -125,7 +125,8 @@ export default {
   @apply absolute w-full left-0 right-0 bottom-0 overflow-hidden h-0 transition-all ease-in duration-300  bg-red-btnhoverproducts;
 }
 .overlay-bottoms:hover {
-  @apply bg-red-btnbannershop transition-all ease-in duration-300;
+  background: var(--hover_card);
+  @apply transition-all ease-in duration-300;
 }
 .container-gify:hover .overlay-bottoms {
   height: 10%;

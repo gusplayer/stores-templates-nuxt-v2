@@ -637,7 +637,7 @@ export default {
 .btn:hover {
   color: white;
   border: solid 2px var(--hover_text);
-  background-color: var(--hover_text);
+  background-color: var(--hover_card);
 }
 .btn2 {
   color: black;

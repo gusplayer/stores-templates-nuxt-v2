@@ -132,7 +132,7 @@ export default {
   @apply mt-20;
 }
 .content-bttns-shop:hover {
-  @apply bg-red-btnbannershophover;
+  background: var(--hover_card);
   transition: all 0.2s ease-out;
 }
 .content-textbutton-shop {

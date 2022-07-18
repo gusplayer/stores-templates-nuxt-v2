@@ -76,7 +76,7 @@ export default {
     font-size: 14px;
     font-family: var(--font-style-1);
     font-weight: var(--fontWeighPretitle);
-    @apply tracking-1 capitalize text-center;
+    @apply tracking-1 text-center;
   }
   .txt-bottom {
     color: var(--colorTitle);

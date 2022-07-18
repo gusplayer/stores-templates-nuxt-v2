@@ -684,7 +684,7 @@ export default {
 .alerta {
   text-align: center;
   padding: 5px 5px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 .content_buy_action {
   display: flex;
@@ -895,7 +895,7 @@ export default {
   .alert {
     text-align: center;
     padding: 5px 5px;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
   }
 }
 @media (max-width: 600px) {

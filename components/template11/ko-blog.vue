@@ -142,7 +142,7 @@ export default {
   color: var(--color_title);
   font-weight: var(--fontWeight);
   font-family: var(--font-style-1);
-  @apply flex flex-col justify-center items-center capitalize text-center;
+  @apply flex flex-col justify-center items-center text-center;
 }
 @screen sm {
   .wrapper-items-content,

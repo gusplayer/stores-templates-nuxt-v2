@@ -741,7 +741,7 @@ export default {
   transition: color 0.25s ease, background-color 0.25s ease,
     border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
   font-family: var(--font-style-1) !important;
-  @apply h-40 flex flex-row justify-center items-center cursor-pointer tracking-1 leading-1 capitalize ml-10 font-semibold whitespace-nowrap mt-2 px-15;
+  @apply h-40 flex flex-row justify-center items-center cursor-pointer tracking-1 leading-1 ml-10 font-semibold whitespace-nowrap mt-2 px-15;
 }
 .datos-producto {
   @apply w-full flex flex-col justify-center items-start my-6 ml-2 cursor-default;

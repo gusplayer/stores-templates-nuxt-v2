@@ -61,7 +61,7 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 1em;
-  text-transform: capitalize !important;
+  /* text-transform: capitalize !important; */
   color: black;
   border: 2px solid rgba(127, 127, 139, 0.342);
   border-radius: 5px;

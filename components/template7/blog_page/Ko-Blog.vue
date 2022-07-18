@@ -398,7 +398,7 @@ export default {
 .input-animated:hover > .search-icon {
   background: #fff;
   cursor: pointer;
-  color: #ed2353;
+  color: var(--hover_text);
 }
 .search-icon {
   color: #7f7f7f;

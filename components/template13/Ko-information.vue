@@ -135,7 +135,7 @@ export default {
   line-height: 26px;
   font-weight: 500;
   letter-spacing: 0.3px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   text-align: center;
 }
 .text-description {

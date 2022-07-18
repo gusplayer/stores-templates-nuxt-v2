@@ -860,7 +860,7 @@ export default {
 .txt-btn-product {
   font-size: 15px;
   white-space: nowrap;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   font-weight: 800;
   margin-left: 10px;
   letter-spacing: 1px;
@@ -874,7 +874,7 @@ export default {
   background-color: gray;
   height: 40px;
   white-space: nowrap;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   font-weight: 800;
   margin-left: 10px;
   letter-spacing: 1px;

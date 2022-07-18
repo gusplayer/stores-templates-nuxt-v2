@@ -1359,7 +1359,7 @@ i.close {
 .alerta {
   text-align: center;
   padding: 5px 5px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 @media (max-width: 1250px) {
   .photo_main {
@@ -1577,7 +1577,7 @@ i.close {
   .alert {
     text-align: center;
     padding: 5px 5px;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
   }
   .features {
     border-top: none;
