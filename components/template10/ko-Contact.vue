@@ -451,7 +451,7 @@ export default {
   .txt-input {
     color: var(--color_text_form);
     font-size: 13px;
-    @apply w-full justify-center items-center capitalize;
+    @apply w-full justify-center items-center;
   }
   .content-bn {
     @apply w-full flex justify-start items-center;

@@ -1062,7 +1062,6 @@ export default {
     line-height: 1;
     letter-spacing: -0.03em;
     font-family: var(--font-style-1) !important;
-    @apply capitalize;
   }
   .text-stock {
     font-family: var(--font-style-1) !important;
@@ -1070,7 +1069,7 @@ export default {
     font-size: 14px;
     line-height: 1.42857143;
     letter-spacing: -0.02em;
-    @apply capitalize font-semibold ml-30;
+    @apply font-semibold ml-30;
   }
   .text-icon {
     display: flex;

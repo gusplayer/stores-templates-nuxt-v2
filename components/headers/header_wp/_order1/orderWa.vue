@@ -2175,7 +2175,7 @@ details[open] summary ~ * {
 .alerta {
   text-align: center;
   padding: 4px 5px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 @media (max-width: 800px) {
   .wrapper-items-form {
