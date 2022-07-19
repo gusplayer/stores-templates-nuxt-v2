@@ -990,7 +990,7 @@ export default {
 .alerta {
   text-align: center;
   padding: 5px 5px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 .product-variant >>> .el-tag {
   border-color: #2c2930;

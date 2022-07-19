@@ -73,7 +73,7 @@ export default {
     color: var(--color_title);
     font-size: 20px;
     font-family: var(--font-style-1);
-    @apply w-full font-bold capitalize tracking-0 text-center mb-27 mt-20;
+    @apply w-full font-bold tracking-0 text-center mb-27 mt-20;
   }
   .btn {
     color: #000;

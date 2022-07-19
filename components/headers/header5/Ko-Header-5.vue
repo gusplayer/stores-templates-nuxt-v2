@@ -440,7 +440,7 @@ export default {
   font-size: 14px;
   line-height: 12px;
   font-weight: 600;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   letter-spacing: 0px;
   padding-left: 10px;
   padding-right: 15px;
