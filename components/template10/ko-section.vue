@@ -13,7 +13,14 @@
     ]"
   >
     <div class="content-wrapper">
-      <nuxt-link :to="this.section.values[0].url_redirect">
+      <a
+        :href="
+          this.section.values[0].url_redirect
+            ? this.section.values[0].url_redirect
+            : ''
+        "
+        rel="noreferrer noopener"
+      >
         <div class="wrapper-left">
           <img
             class="img-left"
@@ -40,8 +47,15 @@
             </p>
           </div>
         </div>
-      </nuxt-link>
-      <nuxt-link :to="this.section.values[1].url_redirect">
+      </a>
+      <a
+        :href="
+          this.section.values[1].url_redirect
+            ? this.section.values[1].url_redirect
+            : ''
+        "
+        rel="noreferrer noopener"
+      >
         <div class="wrapper-center">
           <img
             class="img-center"
@@ -68,8 +82,15 @@
             </p>
           </div>
         </div>
-      </nuxt-link>
-      <nuxt-link :to="this.section.values[2].url_redirect">
+      </a>
+      <a
+        :href="
+          this.section.values[2].url_redirect
+            ? this.section.values[2].url_redirect
+            : ''
+        "
+        rel="noreferrer noopener"
+      >
         <div class="wrapper-right">
           <img
             class="img-right"
@@ -96,7 +117,7 @@
             </p>
           </div>
         </div>
-      </nuxt-link>
+      </a>
     </div>
   </div>
 </template>

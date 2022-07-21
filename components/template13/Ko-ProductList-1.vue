@@ -37,9 +37,12 @@
         </div>
       </div>
       <div class="btn-products" v-if="productList.visibleBtn">
-        <nuxt-link :to="productList.url_redirect">
+        <a
+          :href="productList.url_redirect ? productList.url_redirect : ''"
+          rel="noreferrer noopener"
+        >
           <button class="btn">{{ productList.displayName }}</button>
-        </nuxt-link>
+        </a>
       </div>
     </div>
   </div>

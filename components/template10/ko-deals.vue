@@ -39,9 +39,13 @@
           </p>
         </div>
         <div class="grid-item-button" v-if="offers.visibleBtn">
-          <nuxt-link class="btn" :to="offers.url_redirect">
+          <a
+            class="btn"
+            :href="offers.url_redirect ? offers.url_redirect : ''"
+            rel="noreferrer noopener"
+          >
             {{ offers.displayName }}
-          </nuxt-link>
+          </a>
         </div>
       </div>
     </div>

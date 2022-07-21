@@ -32,9 +32,14 @@
           {{ settingKparallax.title.replace(/&nbsp;/g, ' ') }}
         </p>
         <div class="content-btn" v-if="settingKparallax.visbleBtn">
-          <nuxt-link :to="settingKparallax.url_redirect">
+          <a
+            :href="
+              settingKparallax.url_redirect ? settingKparallax.url_redirect : ''
+            "
+            rel="noreferrer noopener"
+          >
             <button class="btn">{{ $t('home_comprarAhora') }}</button>
-          </nuxt-link>
+          </a>
         </div>
       </div>
     </a>

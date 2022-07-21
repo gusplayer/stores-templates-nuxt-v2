@@ -29,14 +29,17 @@
       </p>
     </div>
     <div class="content-btn" v-if="banner.visbleBtn">
-      <nuxt-link :to="banner.url_redirect">
+      <a
+        :href="banner.url_redirect ? banner.url_redirect : ''"
+        rel="noreferrer noopener"
+      >
         <button
           class="btn"
           :style="`background: ${banner.color_background_btn}; color: ${banner.color_text_btn}; margin-top:${banner.marginTopBtn};`"
         >
           {{ $t('home_comprarAhora') }}
         </button>
-      </nuxt-link>
+      </a>
     </div>
   </div>
 </template>
