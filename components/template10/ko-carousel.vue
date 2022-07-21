@@ -67,10 +67,11 @@
               </p>
             </div>
           </div>
-          <nuxt-link
-            :to="item.url_redirect"
+          <a
+            :href="item.url_redirect ? item.url_redirect : ''"
             v-if="item.visbleBtn"
             class="cursor-pointer"
+            rel="noreferrer noopener"
           >
             <div
               class="btn"
@@ -78,7 +79,7 @@
             >
               <p>{{ $t('home_comprarAhora') }}</p>
             </div>
-          </nuxt-link>
+          </a>
         </div>
       </a>
     </div>

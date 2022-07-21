@@ -36,13 +36,19 @@
         >
           {{ settingKinformation.values[0].description }}
         </p>
-        <nuxt-link
+        <a
           v-if="settingKinformation.values[0].visbleBtn"
-          :to="settingKinformation.values[0].url_redirect"
+          :href="
+            settingKinformation.values[0].url_redirect
+              ? settingKinformation.values[0].url_redirect
+              : ''
+          "
           class="btn"
           :style="`color: ${settingKinformation.values[0].colorBtn};`"
-          >{{ settingKinformation.values[0].textBtn }}</nuxt-link
+          rel="noreferrer noopener"
         >
+          {{ settingKinformation.values[0].textBtn }}
+        </a>
       </div>
       <div
         class="wrapper-content-items"
@@ -69,13 +75,19 @@
         >
           {{ settingKinformation.values[1].description }}
         </p>
-        <nuxt-link
+        <a
           v-if="settingKinformation.values[1].visbleBtn"
-          :to="settingKinformation.values[1].url_redirect"
+          :href="
+            settingKinformation.values[1].url_redirect
+              ? settingKinformation.values[1].url_redirect
+              : ''
+          "
           class="btn"
           :style="`color: ${settingKinformation.values[1].colorBtn};`"
-          >{{ settingKinformation.values[1].textBtn }}</nuxt-link
+          rel="noreferrer noopener"
         >
+          {{ settingKinformation.values[1].textBtn }}
+        </a>
       </div>
       <div
         class="wrapper-content-items"
@@ -104,11 +116,17 @@
         </p>
         <nuxt-link
           v-if="settingKinformation.values[2].visbleBtn"
-          :to="settingKinformation.values[2].url_redirect"
+          :href="
+            settingKinformation.values[2].url_redirect
+              ? settingKinformation.values[2].url_redirect
+              : ''
+          "
           class="btn"
           :style="`color: ${settingKinformation.values[2].colorBtn};`"
-          >{{ settingKinformation.values[2].textBtn }}</nuxt-link
+          rel="noreferrer noopener"
         >
+          {{ settingKinformation.values[2].textBtn }}
+        </nuxt-link>
       </div>
     </div>
   </div>

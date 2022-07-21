@@ -33,14 +33,19 @@
         >
           {{ information.values[0].description }}
         </p>
-        <nuxt-link
+        <a
+          :href="
+            information.values[0].url_redirect
+              ? information.values[0].url_redirect
+              : ''
+          "
           v-if="information.values[0].visbleBtn"
-          :to="information.values[0].url_redirect"
           class="btn"
           :style="`color: ${information.values[0].colorBtn};`"
+          rel="noreferrer noopener"
         >
           {{ information.values[0].textBtn }}
-        </nuxt-link>
+        </a>
       </div>
       <div class="wrapper-content-items">
         <img
@@ -60,13 +65,19 @@
         >
           {{ information.values[1].description }}
         </p>
-        <nuxt-link
+        <a
+          :href="
+            information.values[1].url_redirect
+              ? information.values[1].url_redirect
+              : ''
+          "
           v-if="information.values[1].visbleBtn"
-          :to="information.values[1].url_redirect"
           class="btn"
           :style="`color: ${information.values[1].colorBtn};`"
-          >{{ information.values[1].textBtn }}</nuxt-link
+          rel="noreferrer noopener"
         >
+          {{ information.values[1].textBtn }}
+        </a>
       </div>
       <div class="wrapper-content-items">
         <img
@@ -86,13 +97,19 @@
         >
           {{ information.values[2].description }}
         </p>
-        <nuxt-link
+        <a
           v-if="information.values[2].visbleBtn"
-          :to="information.values[2].url_redirect"
+          :href="
+            information.values[2].url_redirect
+              ? information.values[2].url_redirect
+              : ''
+          "
           class="btn"
           :style="`color: ${information.values[2].colorBtn};`"
-          >{{ information.values[2].textBtn }}</nuxt-link
+          rel="noreferrer noopener"
         >
+          {{ information.values[2].textBtn }}
+        </a>
       </div>
     </div>
   </div>
