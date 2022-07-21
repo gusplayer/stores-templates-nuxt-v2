@@ -114,7 +114,7 @@
         >
           {{ settingKinformation.values[2].description }}
         </p>
-        <nuxt-link
+        <a
           v-if="settingKinformation.values[2].visbleBtn"
           :href="
             settingKinformation.values[2].url_redirect
@@ -126,7 +126,7 @@
           rel="noreferrer noopener"
         >
           {{ settingKinformation.values[2].textBtn }}
-        </nuxt-link>
+        </a>
       </div>
     </div>
   </div>
