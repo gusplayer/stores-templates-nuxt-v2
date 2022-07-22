@@ -15,13 +15,13 @@
       <div class="product-text">
         <div class="product-tittle">
           <p class="tittle">{{ productList.title }}</p>
-          <nuxt-link
+          <a
             :href="productList.url_redirect ? productList.url_redirect : ''"
             v-if="productList.visibleBtn"
             rel="noreferrer noopener"
           >
             <p class="txt-newProducts">{{ productList.displayName }}</p>
-          </nuxt-link>
+          </a>
         </div>
       </div>
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
