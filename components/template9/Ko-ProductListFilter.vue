@@ -1129,8 +1129,8 @@ export default {
     padding-bottom: 5px;
   }
   .content-left {
-    @apply mr-70 flex flex-col justify-between items-start;
-    width: 15vw;
+    @apply mr-20 flex flex-col justify-between items-start;
+    width: 250px;
   }
   .content-banner-shop {
     @apply hidden;
@@ -1141,6 +1141,12 @@ export default {
   .content-shop-items {
     @apply flex flex-row justify-start items-start mt-40;
     width: 95vw;
+  }
+}
+@screen mlg {
+  .content-left {
+    @apply mr-20;
+    width: 250px;
   }
 }
 @media (min-width: 3000px) {
