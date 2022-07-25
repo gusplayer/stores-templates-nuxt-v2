@@ -165,7 +165,7 @@ export default {
           return item.path === this.$route.path
         }
       })
-      this.btnSelect = item.path
+      this.btnSelect = item && item.path ? item.path : ''
     }
     window.addEventListener('scroll', function () {
       var navbar = document.getElementById('navbar')

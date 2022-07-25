@@ -198,7 +198,7 @@ export default {
       let item = this.settingByTemplate13[0].pages.values.find(
         (item) => item.url == this.$route.path
       )
-      this.btnSelect = item.url
+      this.btnSelect = item && item.url ? item.url : ''
     }
     window.addEventListener('scroll', function () {
       var navbar = document.getElementById('navbar')

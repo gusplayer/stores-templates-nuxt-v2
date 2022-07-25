@@ -177,7 +177,6 @@ export default {
   data() {
     return {
       searchSelect: true,
-      resizehead: false,
       search: '',
       showSearch: false,
     }
