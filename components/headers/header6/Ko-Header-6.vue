@@ -177,7 +177,7 @@ export default {
       let item = this.settingByTemplate10[0].pages.values.find(
         (item) => item.url == this.$route.path
       )
-      this.btnSelect = item.url
+      this.btnSelect = item && item.url ? item.url : ''
     }
     this.initHeader()
     window.addEventListener('scroll', function () {
