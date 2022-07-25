@@ -535,13 +535,13 @@ export default {
       if (json) {
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
-          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
             window.fbq('track', 'InitiateCheckout')
           }
           this.$gtm.push({ event: 'InitiateCheckout' })
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
-          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
             window.fbq('track', 'InitiateCheckout')
           }
           this.$gtm.push({ event: 'InitiateCheckout' })

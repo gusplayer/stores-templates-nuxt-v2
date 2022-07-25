@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     openOrder() {
-      this.$store.commit('SET_OPENORDER', true)
+      this.$store.commit('SET_OPEN_ORDER', true)
     },
   },
 }

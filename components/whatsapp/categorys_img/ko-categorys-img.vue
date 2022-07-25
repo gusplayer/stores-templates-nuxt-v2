@@ -96,7 +96,7 @@
           class="wrapper-img-text"
           v-for="(subcategorys, index) in selectedSubcategories"
           :key="index"
-          @click="Sendsubcategory(subcategorys.id)"
+          @click="SendSubCategory(subcategorys.id)"
         >
           <img
             v-lazy="
@@ -170,14 +170,14 @@ export default {
     },
   },
   methods: {
-    Sendsubcategory(value) {
+    SendSubCategory(value) {
       this.idSubCategory = value
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
         this.$router.push(`/`)
       }
-      this.$store.commit('SET_STATEBANNER', false)
+      this.$store.commit('SET_STATE_BANNER', false)
       this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
@@ -187,16 +187,16 @@ export default {
         (element) => element.id == filtradoSubCategoria.categoria
       )
       this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
+        'SET_CATEGORY_PRODUCTO',
         filtradoCategorias.nombre_categoria_producto
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
+      this.$store.commit('SET_PREVIOUS_PAGE', 1)
     },
     sendCategory(value, categoria, ref) {
       this.idCategory = categoria
@@ -205,10 +205,10 @@ export default {
       } else {
         this.$router.push(`/`)
       }
-      this.$store.commit('SET_STATEBANNER', false)
+      this.$store.commit('SET_STATE_BANNER', false)
       this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -223,10 +223,10 @@ export default {
         this.addClass()
       }
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
+      this.$store.commit('SET_PREVIOUS_PAGE', 1)
     },
     addClass() {
       this.add = !this.add
@@ -235,14 +235,14 @@ export default {
       this.idCategory = ''
       this.idSubCategory = ''
       this.selectedSubcategories = ''
-      this.$store.commit('SET_STATEBANNER', true)
+      this.$store.commit('SET_STATE_BANNER', true)
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
         this.$router.push(`/`)
       }
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')

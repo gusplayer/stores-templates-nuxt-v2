@@ -83,17 +83,17 @@ export default {
   },
   methods: {
     closedSearch() {
-      this.$store.commit('SET_OPENSEARCH', false)
+      this.$store.commit('SET_OPEN_SEARCH', false)
     },
     closeOrder(event) {
       const element = event.target.className
       if (element === 'order') {
-        this.$store.commit('SET_OPENSEARCH', false)
+        this.$store.commit('SET_OPEN_SEARCH', false)
       }
     },
     SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
-      if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Search', { value: search })
       }
     },

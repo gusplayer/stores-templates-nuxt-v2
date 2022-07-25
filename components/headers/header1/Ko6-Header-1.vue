@@ -58,7 +58,7 @@
             <span class="num-items">{{ productsCart }}</span>
           </div>
         </div>
-        <div class="header-item-menu" @click="openMenulateral">
+        <div class="header-item-menu" @click="openMenuLateral">
           <menu-icon class="header-icon-menu nav-bar" />
         </div>
         <KoMenu :dataStore="dataStore" class="responsive" />
@@ -144,23 +144,23 @@ export default {
     productsCart() {
       return this.$store.state.productsCart.length
     },
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
   },
   methods: {
     initHeader() {
       if (this.$route.fullPath == '/') {
-        this.$store.commit('SET_STATEBANNER', true)
+        this.$store.commit('SET_STATE_BANNER', true)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.category) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.search) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.setSearch(this.$route.query.search)
         this.showSearch = true
       } else {
@@ -174,17 +174,17 @@ export default {
       this.showMenu = false
       this.$store.state.openOrder = true
     },
-    openMenulateral() {
+    openMenuLateral() {
       this.showMenu = false
       this.$store.state.openMenulateralRight = true
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
     },
     getSearch(value) {
       if (value) {
         location.href = '/productos/?search=' + value
-        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
           window.fbq('track', 'Search', { value: value })
         }
       } else {
@@ -207,7 +207,7 @@ export default {
       this.links[3].link = this.dataStore.tienda.red_youtube
     },
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {

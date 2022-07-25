@@ -194,6 +194,12 @@ export default {
   },
   mounted() {
     this.initHeader()
+    if (this.$route.path) {
+      let item = this.settingByTemplate13[0].pages.values.find(
+        (item) => item.url == this.$route.path
+      )
+      this.btnSelect = item.url
+    }
     window.addEventListener('scroll', function () {
       var navbar = document.getElementById('navbar')
       if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
@@ -206,7 +212,7 @@ export default {
   data() {
     return {
       searchSelect: true,
-      btnSelect: '/',
+      btnSelect: '',
       search: '',
       showSearch: false,
     }
@@ -225,16 +231,16 @@ export default {
   methods: {
     initHeader() {
       if (this.$route.fullPath == '/') {
-        this.$store.commit('SET_STATEBANNER', true)
+        this.$store.commit('SET_STATE_BANNER', true)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.category) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.search) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.setSearch(this.$route.query.search)
         this.showSearch = true
       } else {
@@ -246,14 +252,14 @@ export default {
     },
     openSearch() {
       this.searchSelect = false
-      this.$store.commit('SET_OPENSEARCH', true)
+      this.$store.commit('SET_OPEN_SEARCH', true)
     },
     closedSearch() {
       this.searchSelect = true
-      this.$store.commit('SET_OPENSEARCH', false)
+      this.$store.commit('SET_OPEN_SEARCH', false)
     },
     openOrder() {
-      this.$store.commit('SET_OPENORDER', true)
+      this.$store.commit('SET_OPEN_ORDER', true)
     },
     openMenuLateral() {
       this.$store.commit('SET_OPENORDERMENULEFT', true)
@@ -265,7 +271,7 @@ export default {
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', true)
+      this.$store.commit('SET_STATE_BANNER', true)
     },
     SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
@@ -436,7 +442,7 @@ export default {
   color: var(--color_tex);
   font-size: 10px;
   font-family: var(--font-style-1) !important;
-  @apply pt-1 px-4 leading-12 capitalize tracking-0 font-semibold;
+  @apply pt-1 px-4 leading-12 tracking-0 font-semibold;
 }
 /* ***** */
 @screen sm {

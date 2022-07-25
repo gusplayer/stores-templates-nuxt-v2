@@ -59,7 +59,7 @@ export default {
       this.$store.commit('UPDATE_CONTENTCART')
     }
     if (this.$route.query && this.$route.query.openCart == 'true') {
-      this.$store.commit('SET_OPENORDER', true)
+      this.$store.commit('SET_OPEN_ORDER', true)
     }
     if (
       this.analytics_tagmanager &&

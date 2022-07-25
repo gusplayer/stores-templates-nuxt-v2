@@ -79,10 +79,10 @@ export default {
         action: 'click',
       })
       this.showMenu = false
-      this.$store.commit('SET_OPENORDER', true)
+      this.$store.commit('SET_OPEN_ORDER', true)
     },
     openSearch() {
-      this.$store.commit('SET_OPENSEARCH', true)
+      this.$store.commit('SET_OPEN_SEARCH', true)
     },
   },
 }

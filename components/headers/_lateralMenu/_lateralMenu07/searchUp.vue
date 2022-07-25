@@ -66,7 +66,7 @@ export default {
     // getSearch(value) {
     //   if (value) {
     //     location.href = '?search=' + value
-    //     if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+    //     if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
     //       window.fbq('track', 'Search', { value: value })
     //     }
     //   } else {
@@ -75,7 +75,7 @@ export default {
     //   this.closedSearch()
     // },
     closedSearch() {
-      this.$store.commit('SET_OPENSEARCH', false)
+      this.$store.commit('SET_OPEN_SEARCH', false)
     },
     SearchProduct(search) {
       if (search.length) {
@@ -85,12 +85,12 @@ export default {
           query: { search: search },
         })
         this.$store.commit('products/FILTER_BY', {
-          type: 'search',
+          type: ['search'],
           data: search,
         })
       } else {
         this.$store.commit('products/FILTER_BY', {
-          type: 'all',
+          type: ['all'],
           data: '',
         })
       }

@@ -288,7 +288,7 @@ export default {
     this.comment = ''
   },
   computed: {
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
   },
@@ -313,8 +313,8 @@ export default {
               .then((response) => {
                 this.$message.success('Comentario enviado!')
                 if (
-                  this.facebooPixel &&
-                  this.facebooPixel.pixel_facebook != null
+                  this.facebookPixel &&
+                  this.facebookPixel.pixel_facebook != null
                 ) {
                   window.fbq('track', 'Contact', {
                     name: this.nombre,

@@ -149,55 +149,55 @@ export default {
           switch (e.data.component) {
             case 'Banner':
               this.moverseA('KHeaderX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'Logo':
               this.moverseA('KHeaderX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'mensaje_principal':
               this.moverseA('KHeaderX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'descripcion':
               this.moverseA('KHeaderX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'tema':
               this.moverseA('KHeaderX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'estilo_categorias':
               this.moverseA('KHeaderX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'estilo_productos':
               this.moverseA('KListX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'pago_online':
               this.moverseA('KHeaderX')
               if (e.data.setting.pago_online == 1) {
-                this.$store.commit('SET_OPENORDER', true)
+                this.$store.commit('SET_OPEN_ORDER', true)
               } else {
-                this.$store.commit('SET_OPENORDER', false)
+                this.$store.commit('SET_OPEN_ORDER', false)
               }
               break
             case 'color_primario':
               this.moverseA('KListX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'color_secundario':
               this.moverseA('KListX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'color_icon':
               this.moverseA('KListX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'footer':
               this.moverseA('KfooterX')
-              this.$store.commit('SET_OPENORDER', false)
+              this.$store.commit('SET_OPEN_ORDER', false)
               break
           }
         }

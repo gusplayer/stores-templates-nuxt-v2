@@ -32,7 +32,7 @@
     >
       <div class="header" id="headerid">
         <KoOrder :dataStore="dataStore" />
-        <div class="header-item-menu" @click="openMenulateral">
+        <div class="header-item-menu" @click="openMenuLateral">
           <menu-icon class="header-icon-menu nav-bar" />
           <span class="header-text-menu">{{ $t('header_menu') }}</span>
         </div>
@@ -250,7 +250,7 @@ export default {
     productsCart() {
       return this.$store.state.productsCart.length
     },
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
     listArticulos() {
@@ -259,15 +259,15 @@ export default {
   },
   methods: {
     openSearch() {
-      this.$store.commit('SET_OPENSEARCH', true)
+      this.$store.commit('SET_OPEN_SEARCH', true)
     },
     closedSearch() {
-      this.$store.commit('SET_OPENSEARCH', false)
+      this.$store.commit('SET_OPEN_SEARCH', false)
     },
     openOrder() {
-      this.$store.commit('SET_OPENORDER', true)
+      this.$store.commit('SET_OPEN_ORDER', true)
     },
-    openMenulateral() {
+    openMenuLateral() {
       this.$store.commit('SET_OPENORDERMENULEFT', true)
     },
     closed() {
@@ -277,15 +277,15 @@ export default {
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', true)
+      this.$store.commit('SET_STATE_BANNER', true)
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
     },
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
           window.fbq('track', 'Search', { value: value })
         }
       } else {
@@ -303,7 +303,7 @@ export default {
   },
   watch: {
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {

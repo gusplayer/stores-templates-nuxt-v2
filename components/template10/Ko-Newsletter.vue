@@ -119,7 +119,7 @@ export default {
     this.email = ''
   },
   computed: {
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
   },
@@ -141,8 +141,8 @@ export default {
                 )
                 .then((res) => {
                   if (
-                    this.facebooPixel &&
-                    this.facebooPixel.pixel_facebook != null
+                    this.facebookPixel &&
+                    this.facebookPixel.pixel_facebook != null
                   ) {
                     window.fbq('track', 'Lead', { value: this.email })
                   }

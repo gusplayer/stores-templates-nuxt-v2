@@ -100,7 +100,7 @@
           >
             <Flechadown-icon class="btn-scroll-icon" />
           </div>
-          <div class="empty"></div>
+
           <div
             class="item-tittle"
             v-if="showSubCategory && selectedSubcategories.length"
@@ -125,7 +125,7 @@
               v-for="(subcategorys, index) in selectedSubcategories"
               :key="index"
             >
-              <div @click="Sendsubcategory(subcategorys.id)">
+              <div @click="SendSubCategory(subcategorys.id)">
                 <p
                   class="txt-categorys"
                   :class="
@@ -147,26 +147,27 @@
             <Flechadown-icon class="btn-scroll-icon" />
           </div>
         </div>
-        <div
-          class="empty"
-          v-if="showSubCategory && selectedSubcategories.length"
-        ></div>
-        <div class="content-category-left">
+        <div class="content-category-left" v-if="stateShipping == false">
           <button class="item-tittle">
             <p class="txt-tittles">
               {{ $t('home_fenvio') }}
             </p>
           </button>
           <div class="categorys-list">
-            <button class="txt-categorys" @click="getProductsShippingFree()">
+            <button
+              class="txt-categorys"
+              @click="getProductsFilter('ShippingFree')"
+            >
               {{ $t('home_gratis') }}
             </button>
-            <button class="txt-categorys" @click="getProductsNoShippingFree()">
+            <button
+              class="txt-categorys"
+              @click="getProductsFilter('NoShippingFree')"
+            >
               {{ $t('home_Singratis') }}
             </button>
           </div>
         </div>
-        <div class="empty"></div>
         <div class="content-category-left">
           <button class="item-tittle">
             <p class="txt-tittles">
@@ -174,15 +175,20 @@
             </p>
           </button>
           <div class="categorys-list">
-            <button class="txt-categorys" @click="getProductsHigherNumber()">
+            <button
+              class="txt-categorys"
+              @click="getProductsFilter('higherNumber')"
+            >
               {{ $t('home_fpreciom') }}
             </button>
-            <button class="txt-categorys" @click="getProductsSmallerNumber()">
+            <button
+              class="txt-categorys"
+              @click="getProductsFilter('smallerNumber')"
+            >
               {{ $t('home_fprecioM') }}
             </button>
           </div>
         </div>
-        <div class="empty"></div>
       </div>
       <client-only>
         <div class="content-right">
@@ -224,7 +230,7 @@
                     <svg
                       @click="showList"
                       class="show-icon"
-                      :class="indexshowList == 1 ? 'show-icon-active' : ''"
+                      :class="indexShowList == 1 ? 'show-icon-active' : ''"
                       version="1.1"
                       id="list-view"
                       xmlns="http://www.w3.org/2000/svg"
@@ -246,7 +252,7 @@
                     <svg
                       @click="showGrid2"
                       class="show-icon"
-                      :class="indexshowList == 2 ? 'show-icon-active' : ''"
+                      :class="indexShowList == 2 ? 'show-icon-active' : ''"
                       version="1.1"
                       id="Layer_1"
                       xmlns="http://www.w3.org/2000/svg"
@@ -270,7 +276,7 @@
                   <button class="show">
                     <svg
                       @click="showGrid3"
-                      :class="indexshowList == 3 ? 'show-icon-active' : ''"
+                      :class="indexShowList == 3 ? 'show-icon-active' : ''"
                       class="show-icon"
                       version="1.1"
                       id="Layer_2"
@@ -298,7 +304,7 @@
                   <button class="show">
                     <svg
                       @click="showGrid4"
-                      :class="indexshowList == 4 ? 'show-icon-active' : ''"
+                      :class="indexShowList == 4 ? 'show-icon-active' : ''"
                       class="show-icon"
                       version="1.1"
                       id="Layer_3"
@@ -345,7 +351,7 @@
                   >
                     <KoProductCardFilter
                       :product="product"
-                      v-if="!showinList"
+                      v-if="!showInList"
                       class="product-nolist"
                       :settingGeneral="settingByTemplate7[0].settingGeneral"
                       :settingKProdutCard="
@@ -354,7 +360,7 @@
                     />
                     <KoProductCardFilerList
                       :product="product"
-                      v-if="showinList"
+                      v-if="showInList"
                     />
                   </div>
                 </div>
@@ -401,8 +407,7 @@
 <script>
 import KoProductCardFilter from './_productcard/ProductCard'
 import KoProductCardFilerList from './_productcard/ProductCardFilterList'
-import sendCategoryUrl from '../../mixins/sendCategoryUrl'
-import SendsubcategoryUrl from '../../mixins/SendsubcategoryUrl'
+import filterProducts from '../../mixins/filterProducts'
 export default {
   components: {
     KoProductCardFilter,
@@ -413,9 +418,10 @@ export default {
     fullProducts: {},
     settingByTemplate7: Array,
   },
-  mixins: [sendCategoryUrl, SendsubcategoryUrl],
+  mixins: [filterProducts],
   name: 'Ko7-ProductList-Filter',
   mounted() {
+    this.setOptionShipping()
     if (
       this.settingByTemplate7[0] &&
       this.settingByTemplate7[0].settingK07ProductList &&
@@ -425,70 +431,42 @@ export default {
     } else {
       this.setBg(2)
     }
-    // this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
-      let maxTMP = 0
-      this.products.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.rangeSlide[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
     }
     if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrl(this.$route.query.category)
+      this.sendCategoryUrlMix(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendsubcategoryUrl(
+      this.SendSubCategoryUrlMix(
         this.$route.query.subcategory,
         this.categorias,
         this.subcategories
       )
     } else if (this.$route.fullPath == '/') {
-      this.Allcategories()
+      this.allCategories()
     }
     if (this.previousPage) {
       this.currentPage = this.previousPage
     }
-    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('SET_STATEBANNER', false)
-    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      this.$store.commit('SET_STATEBANNER', false)
-    }
   },
   data() {
     return {
-      showinList: false,
+      showInList: false,
       showSubCategory: false,
-      statesub: false,
-      rangeSlide: [0, 1000000],
-      drawerleft: false,
-      directionleft: 'ltr',
-      add: true,
+      stateSub: false,
       search: '',
-      productsCategory: [],
-      price: [0, 1000000],
-      range: {
-        max: 0,
-      },
       currentPage: 1,
-      sub: -1,
       show: false,
       value: '',
-      valuesub: '',
       selectSubcategory: '',
       nameCategory: '',
       nameSubCategory: '',
       selectedSubcategories: [],
-      toggleCategories: true,
-      indexCategory: 0,
       indexSelect: '',
       indexSelect2: '',
-      indexshowList: 4,
-      indexshowView: 4,
+      indexShowList: 4,
       numVistas: 16,
+      stateShipping: false,
     }
   },
   computed: {
@@ -538,225 +516,180 @@ export default {
     },
   },
   methods: {
-    getProductsShippingFree() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'ShippingFree',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    getProductsNoShippingFree() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'NoShippingFree',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    getProductsHigherNumber() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'higherNumber',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    getProductsSmallerNumber() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'smallerNumber',
-        data: '',
-      })
-      this.currentPage = 1
+    setOptionShipping() {
+      if (this.dataStore && this.dataStore.medios_envio) {
+        let shipping = JSON.parse(this.dataStore.medios_envio.valores)
+        switch (shipping.envio_metodo) {
+          case 'sintarifa':
+            this.stateShipping = false
+            break
+          case 'gratis':
+            this.stateShipping = true
+            break
+          case 'tarifa_plana':
+            this.stateShipping = false
+            break
+          case 'precio':
+            this.stateShipping = false
+            break
+          case 'precio_ciudad':
+            this.stateShipping = false
+            break
+          case 'peso':
+            this.stateShipping = false
+            break
+          default:
+        }
+      }
     },
     showList() {
-      this.indexshowList = 1
-      this.showinList = true
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
+      this.indexShowList = 1
+      this.showInList = true
+      var gridSelector = document.getElementById('grid-selection')
+      if (gridSelector) {
+        gridSelector.setAttribute(
           'style',
           'grid-template-columns: repeat(1, minmax(0, 1fr))'
         )
       }
     },
-    shoView2() {
-      this.indexshowView = 1
-    },
-    shoView4() {
-      this.indexshowView = 2
-    },
-    shoView16() {
-      this.indexshowView = 3
-    },
     showGrid2() {
-      this.indexshowList = 2
-      this.showinList = false
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
+      this.indexShowList = 2
+      this.showInList = false
+      var gridSelector = document.getElementById('grid-selection')
+      if (gridSelector) {
+        gridSelector.setAttribute(
           'style',
           'grid-template-columns: repeat(2, minmax(0, 1fr))'
         )
       }
     },
     showGrid3() {
-      this.indexshowList = 3
-      this.showinList = false
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
+      this.indexShowList = 3
+      this.showInList = false
+      var gridSelector = document.getElementById('grid-selection')
+      if (gridSelector) {
+        gridSelector.setAttribute(
           'style',
           'grid-template-columns: repeat(3, minmax(0, 1fr))'
         )
       }
     },
     showGrid4() {
-      this.indexshowList = 4
-      this.showinList = false
+      this.indexShowList = 4
+      this.showInList = false
       var dimension = screen.width
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
+      var gridSelector = document.getElementById('grid-selection')
+      if (gridSelector) {
+        gridSelector.setAttribute(
           'style',
           'grid-template-columns: repeat(4, minmax(0, 1fr))'
         )
-        if (gridselector && dimension < 768) {
-          gridselector.setAttribute(
+        if (gridSelector && dimension < 768) {
+          gridSelector.setAttribute(
             'style',
             'grid-template-columns: repeat(2, minmax(0, 1fr))'
           )
         }
       }
     },
-    back() {
-      this.clear()
-      this.toggleCategories = true
-      this.nameCategory = ''
-    },
-    Allcategories() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'all',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    Searchproduct(search) {
+    SearchProduct2(search) {
       if (search.length) {
         this.$store.commit('products/FILTER_BY', {
-          type: 'search',
+          type: ['search'],
           data: search,
         })
       } else {
         this.$store.commit('products/FILTER_BY', {
-          type: 'all',
+          type: ['all'],
           data: '',
         })
       }
       this.currentPage = 1
     },
-    addClass() {
-      this.add = !this.add
-    },
-    mouseOver(index) {
-      this.sub = index
-      this.show = true
-    },
-    mouseLeave() {
-      this.sub = -1
-      this.show = false
-    },
-    Sendsubcategory(value) {
-      this.statesub = false
+    SendSubCategory(value) {
+      this.stateSub = false
       var stateCategory = document.getElementById('stateCate07')
-      if (this.statesub == false && stateCategory) {
+      if (this.stateSub == false && stateCategory) {
         stateCategory.style.color = '#8e8e8e'
         stateCategory.style.fontWeight = '100'
       }
       this.indexSelect2 = value
-      this.addClass()
       this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
+      let filtradoSubCategory = this.subcategories.find(
         (element) => element.id == value
       )
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
+      let filtradoCategories = this.categorias.find(
+        (element) => element.id == filtradoSubCategory.categoria
       )
       this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
-        filtradoCategorias.nombre_categoria_producto
+        'SET_CATEGORY_PRODUCTO',
+        filtradoCategories.nombre_categoria_producto
       )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
       this.$router.push({
         path: '',
         query: {
-          subcategory: `${this.nameSubCategory}^${filtradoCategorias.id}`,
+          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
         },
       })
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
     },
     sendCategory(value, categoria, index, ref) {
-      this.statesub = true
+      this.indexSelect = categoria
+      this.currentPage = 1
+      this.stateSub = true
       var stateCategory = document.getElementById('stateCate07')
       var catalogo = document.getElementById('homeCate07')
       if (catalogo) {
         catalogo.style.color = '#8e8e8e'
         catalogo.style.fontWeight = '100'
       }
-      if (this.statesub == true && stateCategory) {
+      if (this.stateSub == true && stateCategory) {
         stateCategory.style.color = '#333333'
         stateCategory.style.fontWeight = '600'
       }
-      this.indexSelect = categoria
-      this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$router.push({
         path: '',
         query: { category: this.nameCategory },
       })
       this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
+      this.subcategories.find((subcategory) => {
+        if (subcategory.categoria === categoria) {
+          this.selectedSubcategories.push(subcategory)
         }
       })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
     },
     breadcrumbsSendCategory(value) {
-      this.statesub = true
+      this.stateSub = true
       var stateCategory = document.getElementById('stateCate07')
       var catalogo = document.getElementById('homeCate07')
-
-      if (this.statesub == true && stateCategory) {
+      if (this.stateSub == true && stateCategory) {
         catalogo.style.color = '#8e8e8e'
         catalogo.style.fontWeight = '100'
-
         stateCategory.style.color = '#333333'
         stateCategory.style.fontWeight = '600'
       }
-
-      let filtradoCategorias = this.categorias.find((element) => {
+      let filtradoCategories = this.categorias.find((element) => {
         if (element.nombre_categoria_producto == value) {
           return element
         }
       })
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: filtradoCategorias.nombre_categoria_producto,
+        type: ['category'],
+        data: filtradoCategories.nombre_categoria_producto,
       })
     },
     clear() {
@@ -765,21 +698,21 @@ export default {
         catalogo.style.color = '#333333'
         catalogo.style.fontWeight = '600'
       }
+      this.showSubCategory = false
+      this.selectedSubcategories = []
       this.indexSelect = ''
       this.indexSelect2 = ''
       this.$router.push({
         path: '',
         query: {},
       })
-      this.$store.commit('SET_STATEBANNER', true)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')
-      this.addClass()
       this.nameCategory = ''
     },
     setBg(value) {
@@ -823,21 +756,12 @@ export default {
     },
     fullProducts(value) {
       this.products = value
-      let maxTMP = 0
-      value.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.rangeSlide[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
     },
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct2(value)
     },
     currentPage() {
-      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
@@ -858,19 +782,19 @@ export default {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrl(this.$route.query.category)
+        this.sendCategoryUrlMix(this.$route.query.category)
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendsubcategoryUrl(
+        this.SendSubCategoryUrlMix(
           this.$route.query.subcategory,
           this.categorias,
           this.subcategories
         )
       } else if (this.$route.fullPath == '/') {
-        this.Allcategories()
+        this.allCategories()
       }
     },
     searchValue(value) {
-      this.Searchproduct(value)
+      this.SearchProduct2(value)
     },
   },
 }
@@ -909,8 +833,7 @@ export default {
   @apply w-full cursor-pointer;
 }
 .txt-tittles {
-  @apply w-full flex justify-start items-center;
-  margin-bottom: 20px;
+  @apply w-full flex justify-start items-center py-20;
   color: var(--color_text);
   text-transform: uppercase;
   font-weight: 600;
@@ -950,13 +873,6 @@ export default {
 }
 .item-tittle {
   @apply w-full flex justify-start items-center;
-}
-.empty {
-  @apply w-full;
-  margin-bottom: 25px;
-  padding-bottom: 25px;
-  border-bottom: 1px solid;
-  border-color: rgba(129, 129, 129, 0.2);
 }
 .btn-slider {
   @apply w-3/0 flex justify-center items-center;
@@ -1033,17 +949,7 @@ export default {
   cursor: pointer;
 }
 #stateCate07 {
-  width: 100%;
-  color: #333;
-  font-weight: 600;
-  font-size: 14px;
-  font-family: var(--font-style-3) !important ;
-  cursor: pointer;
-}
-#stateSubCate07 {
-  width: 100%;
-  margin-left: 6px;
-  transition: all 0.25s ease;
+  /* width: 100%; */
   color: #333;
   font-weight: 600;
   font-size: 14px;
@@ -1269,22 +1175,22 @@ export default {
   background-color: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: #ed2353;
+  color: var(--hover_card);
 }
 .product_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: #ed2353;
+  color: var(--hover_card);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled):hover {
-  color: #ed2353;
+  color: var(--hover_card);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled).active {
-  background-color: #ed2353;
+  background-color: var(--hover_card);
   color: white;
 }
 

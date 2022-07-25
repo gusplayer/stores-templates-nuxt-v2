@@ -33,7 +33,7 @@
         </div>
         <div class="content-items-btns">
           <div class="wrapper-content-btns">
-            <div class="item-menu" @click="openMenulateral">
+            <div class="item-menu" @click="openMenuLateral">
               <svg
                 class="icon-menu"
                 xmlns="http://www.w3.org/2000/svg"
@@ -186,7 +186,7 @@ export default {
     productsCart() {
       return this.$store.state.productsCart.length
     },
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
     listArticulos() {
@@ -196,16 +196,16 @@ export default {
   methods: {
     initHeader() {
       if (this.$route.fullPath == '/') {
-        this.$store.commit('SET_STATEBANNER', true)
+        this.$store.commit('SET_STATE_BANNER', true)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.category) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.search) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.setSearch(this.$route.query.search)
         this.showSearch = true
       } else {
@@ -227,24 +227,24 @@ export default {
       }
     },
     openOrder() {
-      this.$store.commit('SET_OPENORDER', true)
+      this.$store.commit('SET_OPEN_ORDER', true)
     },
-    openMenulateral() {
+    openMenuLateral() {
       this.$store.commit('SET_OPENORDERMENULEFT', true)
     },
     clear() {
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', true)
+      this.$store.commit('SET_STATE_BANNER', true)
     },
     setSearch(value) {
       let urlFiltrada = decodeURIComponent(value)
       this.search = urlFiltrada
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
-      if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Search', { value: search })
       }
       this.$router.push({
@@ -261,7 +261,7 @@ export default {
   },
   watch: {
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {

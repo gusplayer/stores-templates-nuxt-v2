@@ -26,7 +26,7 @@
         <div class="header-item-menu">
           <menu-icon
             class="header-icon-menu nav-bar"
-            @click="openMenulateral"
+            @click="openMenuLateral"
           />
           <svg
             @click="openSearch"
@@ -51,12 +51,14 @@
         </div>
         <div class="header-content-buttons">
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-            <nuxt-link
-              :to="item.path"
+            <button
               v-if="item.path && item.state"
               class="btn"
-              >{{ $t(`${item.name}`) }}
-            </nuxt-link>
+              @click="btnActivate(item.path)"
+              :class="btnSelect == item.path ? 'btn-active' : ''"
+            >
+              {{ $t(`${item.name}`) }}
+            </button>
             <nuxt-link
               :to="item.href"
               v-else-if="item.href && listArticulos > 0 && item.state"
@@ -157,6 +159,14 @@ export default {
   mounted() {
     this.setHoko()
     this.initHeader()
+    if (this.$route.path) {
+      let item = this.secciones.find((item) => {
+        if (item && item.path) {
+          return item.path === this.$route.path
+        }
+      })
+      this.btnSelect = item.path
+    }
     window.addEventListener('scroll', function () {
       var navbar = document.getElementById('navbar')
       if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
@@ -168,7 +178,7 @@ export default {
   },
   data() {
     return {
-      resizehead: false,
+      btnSelect: '',
       search: '',
       showSearch: false,
       secciones: [
@@ -204,7 +214,7 @@ export default {
     productsCart() {
       return this.$store.state.productsCart.length
     },
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
     listArticulos() {
@@ -229,6 +239,12 @@ export default {
         this.showSearch = false
       }
     },
+    btnActivate(value) {
+      this.$router.push({
+        path: value,
+      })
+      this.btnSelect = value
+    },
     setHoko() {
       if (this.dataHoko && this.dataHoko.statehoko == 1) {
         this.secciones[2].state = true
@@ -237,15 +253,15 @@ export default {
       }
     },
     openSearch() {
-      this.$store.commit('SET_OPENSEARCH', true)
+      this.$store.commit('SET_OPEN_SEARCH', true)
     },
     closedSearch() {
-      this.$store.commit('SET_OPENSEARCH', false)
+      this.$store.commit('SET_OPEN_SEARCH', false)
     },
     openOrder() {
-      this.$store.commit('SET_OPENORDER', true)
+      this.$store.commit('SET_OPEN_ORDER', true)
     },
-    openMenulateral() {
+    openMenuLateral() {
       this.$store.commit('SET_OPENORDERMENULEFT', true)
     },
     closed() {
@@ -256,13 +272,13 @@ export default {
         path: '/',
       })
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
     },
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
           window.fbq('track', 'Search', { value: value })
         }
       } else {
@@ -282,7 +298,7 @@ export default {
       this.setHoko()
     },
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
@@ -364,6 +380,11 @@ export default {
   font-size: 14px;
   color: var(--color_text);
   font-weight: 600;
+}
+.btn-active {
+  color: var(--hover_text);
+  transition: all 0.1s ease;
+  border-bottom: 2px solid #000;
 }
 .btn:hover {
   color: var(--hover_text);

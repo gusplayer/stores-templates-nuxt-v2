@@ -764,7 +764,7 @@ export default {
     cities() {
       return this.$store.state.cities
     },
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
   },
@@ -852,7 +852,7 @@ export default {
         })
     },
     eventFacebooPixel() {
-      if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Purchase', {
           content_ids: this.orden.venta.id,
           description: this.choiceState.ref,

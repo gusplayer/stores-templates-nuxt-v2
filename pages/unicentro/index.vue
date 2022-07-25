@@ -63,7 +63,7 @@ export default {
     stateBanner() {
       return this.$store.state.stateBanner
     },
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
     settingByTemplate() {
@@ -71,14 +71,14 @@ export default {
     },
   },
   methods: {
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.search = search
       this.$store.commit('SET_SEARCHVALUE', this.search)
     },
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
           window.fbq('track', 'Search', { value: value })
         }
       } else {
@@ -88,7 +88,7 @@ export default {
   },
   watch: {
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
   },
 }

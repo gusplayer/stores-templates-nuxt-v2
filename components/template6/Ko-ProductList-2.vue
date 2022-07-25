@@ -46,7 +46,7 @@
                   <div v-for="(subcategory, key) in subcategories" :key="key">
                     <li
                       v-if="subcategory.categoria == categoria.id"
-                      @click="Sendsubcategory(subcategory.id)"
+                      @click="SendSubCategory(subcategory.id)"
                       class="text-subcategoria"
                       :class="
                         subcategory.id == indexSelect2
@@ -99,8 +99,7 @@
 <script>
 import KoProductCard1 from '../template5/_productcard/Ko-ProductCard-1'
 import BaseAccordian from '../headers/_order1/_AccordionList'
-import sendCategoryUrl from '../../mixins/sendCategoryUrl'
-import SendsubcategoryUrl from '../../mixins/SendsubcategoryUrl'
+import filterProducts from '../../mixins/filterProducts'
 
 export default {
   components: {
@@ -111,39 +110,31 @@ export default {
     dataStore: Object,
     fullProducts: {},
   },
-  mixins: [sendCategoryUrl, SendsubcategoryUrl],
+  mixins: [filterProducts],
   name: 'Ko-ProductList-1',
   mounted() {
     // this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
-      let maxTMP = 0
-      this.products.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
     }
     if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrl(this.$route.query.category)
+      this.sendCategoryUrlMix(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendsubcategoryUrl(
+      this.SendSubCategoryUrlMix(
         this.$route.query.subcategory,
         this.categorias,
         this.subcategories
       )
     } else if (this.$route.fullPath == '/') {
-      this.Allcategories()
+      this.allCategories()
     }
     if (this.previousPage) {
       this.currentPage = this.previousPage
     }
     if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('SET_STATEBANNER', false)
+      this.$store.commit('SET_STATE_BANNER', false)
     } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      this.$store.commit('SET_STATEBANNER', false)
+      this.$store.commit('SET_STATE_BANNER', false)
     }
   },
   data() {
@@ -220,62 +211,37 @@ export default {
     },
   },
   methods: {
-    back() {
-      this.clear()
-      this.toggleCategories = true
-      this.nameCategory = ''
-    },
-    Allcategories() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'all',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    Searchproduct(search) {
+    SearchProduct2(search) {
       if (search.length) {
         this.$store.commit('products/FILTER_BY', {
-          type: 'search',
+          type: ['search'],
           data: search,
         })
       } else {
         this.$store.commit('products/FILTER_BY', {
-          type: 'all',
+          type: ['all'],
           data: '',
         })
       }
       this.currentPage = 1
     },
-    addClass() {
-      this.add = !this.add
-    },
-    mouseOver(index) {
-      this.sub = index
-      this.show = true
-    },
-    mouseLeave() {
-      this.sub = -1
-      this.show = false
-    },
-    Sendsubcategory(value) {
+    SendSubCategory(value) {
       this.indexSelect2 = value
-      this.addClass()
       this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
+      let filtradoSubCategory = this.subcategories.find(
         (element) => element.id == value
       )
-
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
+      let filtradoCategories = this.categorias.find(
+        (element) => element.id == filtradoSubCategory.categoria
       )
       this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
-        filtradoCategorias.nombre_categoria_producto
+        'SET_CATEGORY_PRODUCTO',
+        filtradoCategories.nombre_categoria_producto
       )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
     },
@@ -283,70 +249,55 @@ export default {
       this.indexSelect = categoria
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
+      this.subcategories.find((subcategory) => {
+        if (subcategory.categoria === categoria) {
           this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
+          this.selectedSubcategories.push(subcategory)
         }
       })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
     },
     breadcrumbsSendCategory(value) {
-      let filtradoCategorias = this.categorias.find((element) => {
+      let filtradoCategories = this.categorias.find((element) => {
         if (element.nombre_categoria_producto == value) {
           return element
         }
       })
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: filtradoCategorias.nombre_categoria_producto,
+        type: ['category'],
+        data: filtradoCategories.nombre_categoria_producto,
       })
     },
     clear() {
       this.indexSelect = ''
       this.indexSelect2 = ''
-      this.$store.commit('SET_STATEBANNER', true)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_STATE_BANNER', true)
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')
-      this.addClass()
       this.nameCategory = ''
     },
   },
   watch: {
     fullProducts(value) {
       this.products = value
-      let maxTMP = 0
-      value.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
     },
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct2(value)
     },
     currentPage() {
-      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
       window.scrollBy(0, -3300)
     },
     previousPage() {
@@ -363,19 +314,19 @@ export default {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrl(this.$route.query.category)
+        this.sendCategoryUrlMix(this.$route.query.category)
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendsubcategoryUrl(
+        this.SendSubCategoryUrlMix(
           this.$route.query.subcategory,
           this.categorias,
           this.subcategories
         )
       } else if (this.$route.fullPath == '/') {
-        this.Allcategories()
+        this.allCategories()
       }
     },
     searchValue(value) {
-      this.Searchproduct(value)
+      this.SearchProduct2(value)
     },
   },
 }

@@ -140,23 +140,23 @@ export default {
     fullPathServer() {
       return this.$store.state.fullPathServer
     },
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
   },
   methods: {
     initHeader() {
       if (this.$route.fullPath == '/') {
-        this.$store.commit('SET_STATEBANNER', true)
+        this.$store.commit('SET_STATE_BANNER', true)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.category) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.search) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.setSearch(this.$route.query.search)
         this.showSearch = true
       } else {
@@ -174,13 +174,13 @@ export default {
       this.$store.state.openMenulateralLeft = true
       this.$store.state.openMenulateralRight = true
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
     },
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
           window.fbq('track', 'Search', { value: value })
         }
       } else {
@@ -195,10 +195,10 @@ export default {
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', true)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_STATE_BANNER', true)
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
     },
@@ -215,7 +215,7 @@ export default {
       this.links[4].link = this.dataStore.tienda.red_tiktok
     },
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
