@@ -452,10 +452,10 @@ export const mutations = {
   SET_LAYOUTUNICENTRO(state, value) {
     state.layoutUnicentro = value
   },
-  SET_PREVIOUSPAGE(state, value) {
+  SET_PREVIOUS_PAGE(state, value) {
     state.previousPage = value
   },
-  SET_STATEBANNER(state, value) {
+  SET_STATE_BANNER(state, value) {
     state.stateBanner = value
   },
   SET_SEARCHVALUE(state, value) {
@@ -464,10 +464,10 @@ export const mutations = {
   SET_ACCESSTOKEN(state, value) {
     state.accessToken = value
   },
-  SET_CATEGORY_PRODCUTRO(state, value) {
+  SET_CATEGORY_PRODUCTO(state, value) {
     state.category_producto_header = value
   },
-  SET_SUBCATEGORY_PRODCUTRO(state, value) {
+  SET_SUBCATEGORY_PRODUCTO(state, value) {
     state.subcategory_producto_header = value
   },
   DELETEITEMCART: (state, index) => {
@@ -476,10 +476,10 @@ export const mutations = {
   DELETEALLITEMSCART: (state) => {
     state.productsCart = []
   },
-  SET_OPENORDER: (state, value) => {
+  SET_OPEN_ORDER: (state, value) => {
     state.openOrder = value
   },
-  SET_OPENSEARCH: (state, value) => {
+  SET_OPEN_SEARCH: (state, value) => {
     state.openSearch = value
   },
   SET_OPENORDER_VALIENTA: (state, value) => {
@@ -517,6 +517,8 @@ export const mutations = {
         }
       }
     })
+    state.products.tags =
+      state.dataStore && state.dataStore.tags ? state.dataStore.tags : []
     state.products.fullProducts = state.productsData
     state.categorias = state.dataStore.categorias
     state.subcategorias = state.dataStore.subcategorias
@@ -831,6 +833,20 @@ export const actions = {
     axios.get(`${state.urlKomercia}/api/ciudades`).then((response) => {
       commit('SET_CITIES', response.data.data)
     })
+  },
+  GET_ALL_PRODUCTS({ state }, id_tienda) {
+    axios
+      .get(`${state.urlTemplate}/api/productos/${id_tienda}`, state.configAxios)
+      .then((response) => {
+        if (response && response.data) {
+          state.products.fullProducts2 = response.data.sort(function (
+            prev,
+            next
+          ) {
+            return prev.orden - next.orden
+          })
+        }
+      })
   },
   async GET_SETTINGS_BY_TEMPLATE({ commit, state }, store) {
     let template = store.template

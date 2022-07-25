@@ -52,8 +52,7 @@
 
 <script>
 import KoProductCard from './_productcard/ProductCard'
-import SendsubcategoryUrl from '../../mixins/SendsubcategoryUrl'
-import sendCategoryUrl from '../../mixins/sendCategoryUrl'
+import filterProducts from '../../mixins/filterProducts'
 export default {
   components: {
     KoProductCard,
@@ -64,24 +63,12 @@ export default {
     settingGeneral: Object,
     settingKProdutCard: Object,
   },
-  mixins: [sendCategoryUrl, SendsubcategoryUrl],
+  mixins: [filterProducts],
   name: 'Ko-ProductList-1',
   data() {
     return {
-      drawerleft: false,
-      directionleft: 'ltr',
-      add: true,
       search: '',
-      productsCategory: [],
-      price: [0, 1000000],
-      range: {
-        max: 0,
-      },
       currentPage: 1,
-      sub: -1,
-      show: false,
-      value: '',
-      valuesub: '',
       selectSubcategory: '',
       nameCategory: '',
       nameSubCategory: '',
@@ -93,50 +80,42 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit('products/SET_FILTER', this.$route.query)
+    // this.$store.commit('products/SET_FILTER', this.$route.query)
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
-      let maxTMP = 0
-      this.products.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
     }
     if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrl(this.$route.query.category)
+      this.sendCategoryUrlMix(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendsubcategoryUrl(
+      this.SendSubCategoryUrlMix(
         this.$route.query.subcategory,
         this.categorias,
         this.subcategories
       )
     } else if (this.$route.fullPath == '/') {
-      this.Allcategories()
+      this.allCategories()
     }
     if (this.previousPage) {
       this.currentPage = this.previousPage
     }
     if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('SET_STATEBANNER', false)
+      this.$store.commit('SET_STATE_BANNER', false)
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: this.nameCategoryHeader,
       })
     } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      this.$store.commit('SET_STATEBANNER', false)
-      let filtradoSubCategoria = this.subcategories.find(
+      this.$store.commit('SET_STATE_BANNER', false)
+      let filtradoSubCategory = this.subcategories.find(
         (element) => element.nombre_subcategoria == this.nameSubCategoryHeader
       )
-      if (filtradoSubCategoria) {
+      if (filtradoSubCategory) {
         this.categorias.find(
-          (element) => element.id == filtradoSubCategoria.categoria
+          (element) => element.id == filtradoSubCategory.categoria
         )
         this.$store.commit('products/FILTER_BY', {
-          type: 'subcategory',
-          data: filtradoSubCategoria.id,
+          type: ['subcategory'],
+          data: filtradoSubCategory.id,
         })
       }
     }
@@ -191,53 +170,29 @@ export default {
     },
   },
   methods: {
-    back() {
-      this.clear()
-      this.toggleCategories = true
-      this.nameCategory = ''
-    },
-    Allcategories() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'all',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    Searchproduct(search) {
+    SearchProduct2(search) {
       if (search.length) {
         this.$store.commit('products/FILTER_BY', {
-          type: 'search',
+          type: ['search'],
           data: search,
         })
       } else {
         this.$store.commit('products/FILTER_BY', {
-          type: 'all',
+          type: ['all'],
           data: '',
         })
       }
       this.currentPage = 1
     },
-    addClass() {
-      this.add = !this.add
-    },
-    mouseOver(index) {
-      this.sub = index
-      this.show = true
-    },
-    mouseLeave() {
-      this.sub = -1
-      this.show = false
-    },
-    Sendsubcategory(value) {
+    SendSubCategory(value) {
       this.indexSelect2 = value
-      this.addClass()
       this.selectSubcategory = value
-      let filtradoCategoria = this.subcategories.find(
+      let filtradoCategory = this.subcategories.find(
         (element) => element.id == value
       )
-      this.nameSubCategory = filtradoCategoria.nombre_subcategoria
+      this.nameSubCategory = filtradoCategory.nombre_subcategoria
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
     },
@@ -247,65 +202,50 @@ export default {
       this.nameCategory = value.nombre_categoria_producto
       this.indexCategory = index
       this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
+      this.subcategories.find((subcategory) => {
+        if (subcategory.categoria === categoria) {
           this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
+          this.selectedSubcategories.push(subcategory)
         }
       })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
     },
     breadcrumbsSendCategory(value) {
-      let filtradoCategorias = this.categorias.find((element) => {
+      let filtradoCategories = this.categorias.find((element) => {
         if (element.nombre_categoria_producto == value) {
           return element
         }
       })
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: filtradoCategorias.nombre_categoria_producto,
+        type: ['category'],
+        data: filtradoCategories.nombre_categoria_producto,
       })
     },
     clear() {
-      this.$store.commit('SET_STATEBANNER', true)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_STATE_BANNER', true)
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')
-      this.addClass()
       this.nameCategory = ''
     },
   },
   watch: {
     fullProducts(value) {
       this.products = value
-      let maxTMP = 0
-      value.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
     },
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct2(value)
     },
     currentPage() {
-      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
@@ -326,19 +266,19 @@ export default {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrl(this.$route.query.category)
+        this.sendCategoryUrlMix(this.$route.query.category)
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendsubcategoryUrl(
+        this.SendSubCategoryUrlMix(
           this.$route.query.subcategory,
           this.categorias,
           this.subcategories
         )
       } else if (this.$route.fullPath == '/') {
-        this.Allcategories()
+        this.allCategories()
       }
     },
     searchValue(value) {
-      this.Searchproduct(value)
+      this.SearchProduct2(value)
     },
   },
 }
@@ -441,22 +381,22 @@ export default {
   background-color: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: #ed2353;
+  color: var(--hover_card);
 }
 .product_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: #ed2353;
+  color: var(--hover_card);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled):hover {
-  color: #ed2353;
+  color: var(--hover_card);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled).active {
-  background-color: #ed2353;
+  background-color: var(--hover_card);
   color: white;
 }
 @screen sm {

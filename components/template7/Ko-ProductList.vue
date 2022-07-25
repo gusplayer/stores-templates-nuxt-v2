@@ -104,10 +104,10 @@ export default {
   },
   methods: {
     clear() {
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
     },

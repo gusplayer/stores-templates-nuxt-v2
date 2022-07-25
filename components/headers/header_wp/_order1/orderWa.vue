@@ -770,7 +770,7 @@ export default {
         }
       }
     },
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
     countryStore() {
@@ -896,11 +896,11 @@ export default {
     closeOrder(event) {
       const element = event.target.className
       if (element === 'order' || element === 'continue_shopping2') {
-        this.$store.commit('SET_OPENORDER', false)
+        this.$store.commit('SET_OPEN_ORDER', false)
       }
     },
     closedOder() {
-      this.$store.commit('SET_OPENORDER', false)
+      this.$store.commit('SET_OPEN_ORDER', false)
     },
     GoPayments() {
       let objeto = {}
@@ -936,13 +936,13 @@ export default {
       if (this.$store.state.productsCart.length != 0) {
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
-          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
             window.fbq('track', 'InitiateCheckout')
           }
           this.$gtm.push({ event: 'InitiateCheckout' })
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
-          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
             window.fbq('track', 'InitiateCheckout')
           }
           this.$gtm.push({ event: 'InitiateCheckout' })

@@ -133,17 +133,17 @@ export default {
       document.getElementById('SearchHeader').focus()
     },
     closedSearch() {
-      this.$store.commit('SET_OPENSEARCH', false)
+      this.$store.commit('SET_OPEN_SEARCH', false)
     },
     closeOrder(event) {
       const element = event.target.className
       if (element === 'order' || element === 'order_content') {
-        this.$store.commit('SET_OPENSEARCH', false)
+        this.$store.commit('SET_OPEN_SEARCH', false)
       }
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
-      if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Search', { value: search })
       }
       this.$router.push({
@@ -151,13 +151,13 @@ export default {
         query: { search: search },
       })
     },
-    Sendsubcategory(value) {
+    SendSubCategory(value) {
       this.indexSelect2 = value
       this.$router.push({
         path: '/productos',
       })
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
-      this.$store.commit('SET_OPENSEARCH', false)
+      this.$store.commit('SET_PREVIOUS_PAGE', 1)
+      this.$store.commit('SET_OPEN_SEARCH', false)
       this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
@@ -168,13 +168,13 @@ export default {
         (element) => element.id == filtradoSubCategoria.categoria
       )
       this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
+        'SET_CATEGORY_PRODUCTO',
         filtradoCategorias.nombre_categoria_producto
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
     },
@@ -183,10 +183,10 @@ export default {
       this.$router.push({
         path: '/productos',
       })
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
+      this.$store.commit('SET_PREVIOUS_PAGE', 1)
       this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -201,7 +201,7 @@ export default {
         this.addClass()
       }
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
     },
@@ -214,9 +214,9 @@ export default {
       })
       this.showMenu = false
       this.$store.commit('SET_OPENORDERMENULEFT', false)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')
@@ -226,7 +226,7 @@ export default {
   },
   watch: {
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
   },
 }

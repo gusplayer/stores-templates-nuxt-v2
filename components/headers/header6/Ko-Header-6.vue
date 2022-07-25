@@ -36,7 +36,7 @@
           </nuxt-link>
         </div>
         <div class="header-contet">
-          <button class="header-item-menu" @click="openMenulateral">
+          <button class="header-item-menu" @click="openMenuLateral">
             <menu-icon class="header-icon-menu" />
           </button>
           <div class="flex flex-row justify-between w-full">
@@ -65,8 +65,8 @@
                   >
                     <p
                       class="btn"
-                      @click="btnActivate(item.id)"
-                      :class="btnSelect == item.id ? 'btn-active' : ''"
+                      @click="btnActivate(item.url)"
+                      :class="btnSelect == item.url ? 'btn-active' : ''"
                     >
                       {{ item.displayName }}
                     </p>
@@ -121,26 +121,6 @@
                     </svg>
                   </i>
                 </div>
-                <div class="search" v-if="!searchSelect">
-                  <i class="header-search-icon" @click="closedSearch">
-                    <svg
-                      class="search-header"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      width="25"
-                      height="25"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </i>
-                </div>
               </div>
               <div class="empty" v-if="showSearch"></div>
               <div class="header-content-icon" @click="openOrder">
@@ -166,7 +146,7 @@
             </div>
           </div>
         </div>
-        <KoSearch :dataStore="dataStore" />
+        <!-- <KoSearch :dataStore="dataStore" /> -->
         <KoMenu
           :dataStore="dataStore"
           class="responsive"
@@ -180,12 +160,12 @@
 <script>
 import KoOrder from '../_order1/order1'
 import KoMenu from '../_lateralMenu/_lateralMenu11/openMenuLeft.vue'
-import KoSearch from '../_lateralMenu/_lateralMenu10/searchDown.vue'
+// import KoSearch from '../_lateralMenu/_lateralMenu10/searchDown.vue'
 export default {
   components: {
     KoOrder,
     KoMenu,
-    KoSearch,
+    // KoSearch,
   },
   name: 'Ko-Header-6',
   props: {
@@ -193,6 +173,12 @@ export default {
     settingByTemplate10: Array,
   },
   mounted() {
+    if (this.$route.path) {
+      let item = this.settingByTemplate10[0].pages.values.find(
+        (item) => item.url == this.$route.path
+      )
+      this.btnSelect = item.url
+    }
     this.initHeader()
     window.addEventListener('scroll', function () {
       var navbar = document.getElementById('navbar')
@@ -206,8 +192,7 @@ export default {
   data() {
     return {
       searchSelect: true,
-      btnSelect: 1,
-      resizehead: false,
+      btnSelect: '',
       search: '',
       showSearch: false,
     }
@@ -216,7 +201,7 @@ export default {
     productsCart() {
       return this.$store.state.productsCart.length
     },
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
     listArticulos() {
@@ -226,16 +211,16 @@ export default {
   methods: {
     initHeader() {
       if (this.$route.fullPath == '/') {
-        this.$store.commit('SET_STATEBANNER', true)
+        this.$store.commit('SET_STATE_BANNER', true)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.category) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.search) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.setSearch(this.$route.query.search)
         this.showSearch = true
       } else {
@@ -243,31 +228,17 @@ export default {
       }
     },
     btnActivate(value) {
-      if (value == 1) {
-        this.btnSelect = 1
-      }
-      if (value == 2) {
-        this.btnSelect = 2
-      }
-      if (value == 3) {
-        this.btnSelect = 3
-      }
-      if (value == 4) {
-        this.btnSelect = 4
-      }
+      this.btnSelect = value
     },
     openSearch() {
-      this.searchSelect = false
-      this.$store.commit('SET_OPENSEARCH', true)
-    },
-    closedSearch() {
-      this.searchSelect = true
-      this.$store.commit('SET_OPENSEARCH', false)
+      this.$router.push({
+        path: '/productos',
+      })
     },
     openOrder() {
-      this.$store.commit('SET_OPENORDER', true)
+      this.$store.commit('SET_OPEN_ORDER', true)
     },
-    openMenulateral() {
+    openMenuLateral() {
       this.$store.commit('SET_OPENORDERMENULEFT', true)
     },
     closed() {
@@ -277,20 +248,17 @@ export default {
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', true)
+      this.$store.commit('SET_STATE_BANNER', true)
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
-    },
-    getSearch(value) {
-      if (value) {
-        location.href = '?search=' + value
-        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
-          window.fbq('track', 'Search', { value: value })
-        }
-      } else {
-        location.href = '?search=' + ''
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+        window.fbq('track', 'Search', { value: search })
       }
+      this.$router.push({
+        path: '/productos',
+        query: { search: search },
+      })
     },
     setSearch(value) {
       let urlFiltrada = decodeURIComponent(value)
@@ -308,7 +276,7 @@ export default {
   },
   watch: {
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
@@ -448,7 +416,7 @@ export default {
   color: var(--background_color_1);
   font-size: 8px;
   font-family: var(--font-style-1) !important;
-  @apply pt-1 px-5 leading-12 capitalize tracking-0 font-semibold;
+  @apply pt-1 px-5 leading-12 tracking-0 font-semibold;
 }
 /* ***** */
 @screen sm {

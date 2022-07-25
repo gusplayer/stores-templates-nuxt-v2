@@ -195,7 +195,7 @@ export default {
     openOrder() {
       this.$store.commit('SET_OPENORDER_VALIENTA', true)
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
     },
     getSearch(value) {
@@ -220,7 +220,7 @@ export default {
       this.links[4].link = this.dataStore.tienda.red_tiktok
     },
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     $route(to, from) {
       let domain = this.$route.fullPath

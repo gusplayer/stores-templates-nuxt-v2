@@ -78,7 +78,7 @@
                   v-for="(subcategorys, index) in selectedSubcategories"
                   :key="index"
                 >
-                  <div @click="Sendsubcategory(subcategorys.id)">
+                  <div @click="SendSubCategory(subcategorys.id)">
                     <p
                       class="txt-categorys"
                       :class="
@@ -93,26 +93,65 @@
                 </div>
               </div>
             </el-collapse-item>
+            <!-- <div
+              v-for="(itemsTags, index) in allTags"
+              :key="index"
+              v-show="allTags && allTags.length > 0"
+            >
+              <el-collapse-item
+                :title="itemsTags.name"
+                :name="6 + index"
+                v-if="
+                  itemsTags &&
+                  itemsTags.status === 1 &&
+                  itemsTags.properties.length > 0
+                "
+              >
+                <div class="categorys-list">
+                  <button
+                    class="txt-Filter"
+                    v-for="itemsProperties in itemsTags.properties"
+                    :key="itemsProperties.id"
+                    v-show="itemsProperties.status === 1"
+                    @click="getProductsFilter('tag', itemsProperties.id)"
+                  >
+                    {{ itemsProperties.name }}
+                  </button>
+                </div>
+              </el-collapse-item>
+            </div> -->
             <el-collapse-item
               :title="$t('home_fenvio')"
               name="4"
               v-show="stateShipping == false"
             >
               <div class="categorys-list">
-                <button class="txt-Filter" @click="getProductsShippingFree()">
+                <button
+                  class="txt-Filter"
+                  @click="getProductsFilter('ShippingFree')"
+                >
                   {{ $t('home_gratis') }}
                 </button>
-                <button class="txt-Filter" @click="getProductsNoShippingFree()">
+                <button
+                  class="txt-Filter"
+                  @click="getProductsFilter('NoShippingFree')"
+                >
                   {{ $t('home_Singratis') }}
                 </button>
               </div>
             </el-collapse-item>
             <el-collapse-item :title="$t('home_fprecio')" name="5">
               <div class="categorys-list">
-                <button class="txt-Filter" @click="getProductsHigherNumber()">
+                <button
+                  class="txt-Filter"
+                  @click="getProductsFilter('higherNumber')"
+                >
                   {{ $t('home_fpreciom') }}
                 </button>
-                <button class="txt-Filter" @click="getProductsSmallerNumber()">
+                <button
+                  class="txt-Filter"
+                  @click="getProductsFilter('smallerNumber')"
+                >
                   {{ $t('home_fprecioM') }}
                 </button>
               </div>
@@ -145,7 +184,7 @@
           <div class="producto-items-content" id="section">
             <div class="content-item">
               <div class="content-item-productos">
-                <div class="product-conten-items" id="grid-selection">
+                <div class="product-content-items" id="grid-selection">
                   <div
                     v-for="product in filterProduct"
                     :key="product.id"
@@ -203,8 +242,7 @@
 
 <script>
 import KoProductCardFilter from './_productcard/Ko-ProductCard-1.vue'
-import sendCategoryUrl from '../../mixins/sendCategoryUrl'
-import SendsubcategoryUrl from '../../mixins/SendsubcategoryUrl'
+import filterProducts from '../../mixins/filterProducts'
 export default {
   components: {
     KoProductCardFilter,
@@ -213,61 +251,39 @@ export default {
     settingByTemplate13: Array,
     dataStore: Object,
     fullProducts: {},
+    allTags: Array,
   },
-  mixins: [sendCategoryUrl, SendsubcategoryUrl],
+  mixins: [filterProducts],
   name: 'Ko13-ProductList-Filter',
   mounted() {
     this.setOptionShipping()
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
-      let maxTMP = 0
-      this.products.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.rangeSlide[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
     }
     if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrl(this.$route.query.category)
+      this.sendCategoryUrlMix(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendsubcategoryUrl(
+      this.SendSubCategoryUrlMix(
         this.$route.query.subcategory,
         this.categorias,
         this.subcategories
       )
     } else if (this.$route.fullPath == '/') {
-      this.AllCategories()
+      this.allCategories()
     }
     if (this.previousPage) {
       this.currentPage = this.previousPage
     }
-    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('SET_STATEBANNER', false)
-    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      this.$store.commit('SET_STATEBANNER', false)
-    }
   },
   data() {
     return {
-      showSubCategory: false,
-      stateSub: false,
-      rangeSlide: [0, 1000000],
-      add: true,
       search: '',
-      price: [0, 1000000],
-      range: {
-        max: 0,
-      },
       currentPage: 1,
-      sub: -1,
+      showSubCategory: false,
       selectSubcategory: '',
       nameCategory: '',
       nameSubCategory: '',
       selectedSubcategories: [],
-      toggleCategories: true,
       indexSelect: '',
       indexSelect2: '',
       numVistas: 15,
@@ -290,7 +306,7 @@ export default {
     subcategories() {
       return this.dataStore.subcategorias
     },
-    getProductsCategorie() {
+    getProductsCategories() {
       const initial = this.currentPage * 15 - 15
       const final = initial + 15
       return this.fullProducts
@@ -348,191 +364,82 @@ export default {
         }
       }
     },
-    getProductsShippingFree() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'ShippingFree',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    getProductsNoShippingFree() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'NoShippingFree',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    getProductsHigherNumber() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'higherNumber',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    getProductsSmallerNumber() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'smallerNumber',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    back() {
-      this.clear()
-      this.toggleCategories = true
-      this.nameCategory = ''
-    },
-    AllCategories() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'all',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    SearchProduct(search) {
-      if (search.length) {
-        this.search = search
-        this.$router.push({
-          path: '',
-          query: { search: search },
-        })
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
-    },
-    addClass() {
-      this.add = !this.add
-    },
-    mouseOver(index) {
-      this.sub = index
-      this.show = true
-    },
-    mouseLeave() {
-      this.sub = -1
-      this.show = false
-    },
-    Sendsubcategory(value) {
-      this.stateSub = false
-      var stateCategory = document.getElementById('statecate')
-      if (this.stateSub == false && stateCategory) {
-        stateCategory.style.color = '#8e8e8e'
-        stateCategory.style.fontWeight = '100'
-      }
+    SendSubCategory(value) {
       this.indexSelect2 = value
-      this.addClass()
       this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
+      let filtradoSubCategory = this.subcategories.find(
         (element) => element.id == value
       )
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
+      let filtradoCategories = this.categorias.find(
+        (element) => element.id == filtradoSubCategory.categoria
       )
       this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
-        filtradoCategorias.nombre_categoria_producto
+        'SET_CATEGORY_PRODUCTO',
+        filtradoCategories.nombre_categoria_producto
       )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
       this.$router.push({
         path: '',
         query: {
-          subcategory: `${this.nameSubCategory}^${filtradoCategorias.id}`,
+          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
         },
       })
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
     },
     sendCategory(value, categoria, index, ref) {
-      this.stateSub = true
-      var stateCategory = document.getElementById('statecate')
-      var catalogo = document.getElementById('homeCate')
-      if (catalogo) {
-        catalogo.style.color = '#8e8e8e'
-        catalogo.style.fontWeight = '100'
-      }
-      if (this.stateSub == true && stateCategory) {
-        stateCategory.style.color = '#333333'
-        stateCategory.style.fontWeight = '600'
-      }
       this.indexSelect = categoria
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$router.push({
         path: '',
         query: { category: this.nameCategory },
       })
       this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
+      this.subcategories.find((subcategory) => {
+        if (subcategory.categoria === categoria) {
+          this.selectedSubcategories.push(subcategory)
         }
       })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
     },
     breadcrumbsSendCategory(value) {
-      this.stateSub = true
-      var stateCategory = document.getElementById('statecate')
-      var catalogo = document.getElementById('homeCate')
-      if (this.stateSub == true && stateCategory) {
-        catalogo.style.color = '#8e8e8e'
-        catalogo.style.fontWeight = '100'
-        stateCategory.style.color = '#333333'
-        stateCategory.style.fontWeight = '600'
-      }
-      let filtradoCategorias = this.categorias.find((element) => {
+      let filtradoCategories = this.categorias.find((element) => {
         if (element.nombre_categoria_producto == value) {
           return element
         }
       })
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: filtradoCategorias.nombre_categoria_producto,
+        type: ['category'],
+        data: filtradoCategories.nombre_categoria_producto,
       })
     },
     clear() {
-      var catalogo = document.getElementById('homeCate')
-      if (catalogo) {
-        catalogo.style.color = '#333333'
-        catalogo.style.fontWeight = '600'
-      }
       this.indexSelect = ''
       this.indexSelect2 = ''
       this.$router.push({
         path: '',
         query: {},
       })
-      this.$store.commit('SET_STATEBANNER', true)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')
-      this.addClass()
       this.nameCategory = ''
+      this.showSubCategory = false
+      this.selectedSubcategories = []
     },
     handleChange(val) {
       // console.log(val);
@@ -541,21 +448,12 @@ export default {
   watch: {
     fullProducts(value) {
       this.products = value
-      let maxTMP = 0
-      value.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.rangeSlide[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
     },
     search(value) {
       this.SearchProduct(value)
     },
     currentPage() {
-      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
@@ -576,15 +474,15 @@ export default {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrl(this.$route.query.category)
+        this.sendCategoryUrlMix(this.$route.query.category)
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendsubcategoryUrl(
+        this.SendSubCategoryUrlMix(
           this.$route.query.subcategory,
           this.categorias,
           this.subcategories
         )
       } else if (this.$route.fullPath == '/') {
-        this.AllCategories()
+        this.allCategories()
       }
     },
     searchValue(value) {
@@ -720,18 +618,6 @@ export default {
   font-family: var(--font-style-1) !important;
   @apply w-full flex flex-row mr-6 font-normal cursor-pointer transition-all ease-in duration-0.2;
 }
-#statecate {
-  color: #333;
-  font-size: 14px;
-  font-family: var(--font-style-1) !important;
-  @apply w-full font-semibold cursor-pointer;
-}
-#statesubcate {
-  color: #333;
-  font-size: 14px;
-  font-family: var(--font-style-1) !important;
-  @apply w-full ml-6 font-semibold cursor-pointer transition-all ease-in duration-0.2;
-}
 .top-content {
   font-size: 100%;
   @apply w-full max-w-full flex justify-between items-center flex-wrap mb-20;
@@ -824,7 +710,7 @@ export default {
   @apply flex flex-col justify-center items-center w-full;
 }
 
-.product-conten-items {
+.product-content-items {
   @apply justify-center items-center text-center gap-4;
 }
 .producto-items-content {
@@ -901,7 +787,7 @@ export default {
   @apply shadow-lg;
 } */
 @screen sm {
-  .product-conten-items {
+  .product-content-items {
     @apply w-full grid grid-cols-2;
   }
   .btn-tittle-shop {
@@ -947,7 +833,7 @@ export default {
   }
 }
 @media (min-width: 440px) {
-  .product-conten-items {
+  .product-content-items {
     @apply grid grid-cols-2;
   }
 }
@@ -963,7 +849,7 @@ export default {
     border-color: var(--color_icon);
     @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center py-20 border-b;
   }
-  .product-conten-items {
+  .product-content-items {
     @apply grid grid-cols-3;
   }
 }
@@ -971,7 +857,7 @@ export default {
   .product-text {
     @apply w-full;
   }
-  .product-conten-items {
+  .product-content-items {
     @apply grid grid-cols-2 gap-8;
   }
   .content-items-categorias-text {
@@ -1015,7 +901,7 @@ export default {
   .content-left {
     width: 400px;
   }
-  .product-conten-items {
+  .product-content-items {
     @apply grid grid-cols-3 gap-2;
   }
 }

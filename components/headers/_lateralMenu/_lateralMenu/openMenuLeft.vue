@@ -98,7 +98,7 @@
                         >
                           <li
                             v-if="subcategory.categoria == categoria.id"
-                            @click="Sendsubcategory(subcategory.id)"
+                            @click="SendSubCategory(subcategory.id)"
                             class="btn-category"
                             :class="
                               subcategory.id == indexSelect2
@@ -229,14 +229,14 @@ export default {
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
           window.fbq('track', 'Search', { value: value })
         }
       } else {
         location.href = '?search=' + ''
       }
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       this.$store.commit('SET_SEARCHVALUE', search)
     },
     closed() {
@@ -253,13 +253,13 @@ export default {
         this.$store.commit('SET_OPENORDERMENULEFT', false)
       }
     },
-    Sendsubcategory(value) {
+    SendSubCategory(value) {
       this.indexSelect2 = value
       this.$router.push({
         path: '/productos',
       })
-      this.$store.commit('SET_STATEBANNER', false)
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
+      this.$store.commit('SET_STATE_BANNER', false)
+      this.$store.commit('SET_PREVIOUS_PAGE', 1)
       this.$store.commit('SET_OPENORDERMENULEFT', false)
       this.addClass()
       this.selectSubcategory = value
@@ -270,22 +270,22 @@ export default {
         (element) => element.id == filtradoSubCategoria.categoria
       )
       this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
+        'SET_CATEGORY_PRODUCTO',
         filtradoCategorias.nombre_categoria_producto
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
     },
     sendCategory(value, categoria, ref) {
       this.indexSelect = categoria
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
+      this.$store.commit('SET_PREVIOUS_PAGE', 1)
       this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$router.push({
         path: '/productos',
         query: { category: this.nameCategory },
@@ -305,7 +305,7 @@ export default {
         this.addClass()
       }
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
     },
@@ -318,9 +318,9 @@ export default {
       })
       this.showMenu = false
       this.$store.commit('SET_OPENORDERMENULEFT', false)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')
@@ -330,7 +330,7 @@ export default {
   },
   watch: {
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     dataHoko() {
       this.setHoko()
@@ -464,7 +464,7 @@ export default {
   text-align: center;
   letter-spacing: 0px;
   font-weight: 600;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   font-size: 14px;
   cursor: pointer;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
@@ -479,7 +479,7 @@ export default {
   text-align: center;
   letter-spacing: 0px;
   font-weight: 600;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   font-size: 14px;
   cursor: pointer;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;

@@ -130,7 +130,7 @@
                 v-for="(subcategorys, index) in selectedSubcategories"
                 :key="index"
               >
-                <div @click="Sendsubcategory(subcategorys.id)">
+                <div @click="SendSubCategory(subcategorys.id)">
                   <p
                     class="txt-categorys"
                     :class="
@@ -151,20 +151,32 @@
             v-show="stateShipping == false"
           >
             <div class="categorys-list">
-              <button class="txt-Filter" @click="getProductsShippingFree()">
+              <button
+                class="txt-Filter"
+                @click="getProductsFilter('ShippingFree')"
+              >
                 {{ $t('home_gratis') }}
               </button>
-              <button class="txt-Filter" @click="getProductsNoShippingFree()">
+              <button
+                class="txt-Filter"
+                @click="getProductsFilter('NoShippingFree')"
+              >
                 {{ $t('home_Singratis') }}
               </button>
             </div>
           </el-collapse-item>
           <el-collapse-item :title="$t('home_fprecio')" name="5">
             <div class="categorys-list">
-              <button class="txt-Filter" @click="getProductsHigherNumber()">
+              <button
+                class="txt-Filter"
+                @click="getProductsFilter('higherNumber')"
+              >
                 {{ $t('home_fpreciom') }}
               </button>
-              <button class="txt-Filter" @click="getProductsSmallerNumber()">
+              <button
+                class="txt-Filter"
+                @click="getProductsFilter('smallerNumber')"
+              >
                 {{ $t('home_fprecioM') }}
               </button>
             </div>
@@ -213,7 +225,7 @@
                   <svg
                     @click="showGrid3"
                     class="show-icon"
-                    :class="indexshowList == 3 ? 'show-icon-active' : ''"
+                    :class="indexShowList == 3 ? 'show-icon-active' : ''"
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -230,7 +242,7 @@
                 <button class="show">
                   <svg
                     @click="showList"
-                    :class="indexshowList == 1 ? 'show-icon-active' : ''"
+                    :class="indexShowList == 1 ? 'show-icon-active' : ''"
                     class="show-icon"
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
@@ -264,14 +276,14 @@
                     :settingGeneral="settingByTemplate9[0].setting9General"
                     :productListCard="settingByTemplate9[0].cardProduct"
                     :product="product"
-                    v-if="!showinList"
+                    v-if="!showInList"
                     class="product-nolist"
                   ></KoProdcutCardFilter>
                   <KoProdcutCardFilerList
                     :settingGeneral="settingByTemplate9[0].setting9General"
                     :productListCard="settingByTemplate9[0].cardProduct"
                     :product="product"
-                    v-if="showinList"
+                    v-if="showInList"
                   ></KoProdcutCardFilerList>
                 </div>
               </div>
@@ -307,8 +319,7 @@
 <script>
 import KoProdcutCardFilter from './_productcard/ProductCard'
 import KoProdcutCardFilerList from './_productcard/ProductCardFilterList'
-import sendCategoryUrl from '../../mixins/sendCategoryUrl'
-import SendsubcategoryUrl from '../../mixins/SendsubcategoryUrl'
+import filterProducts from '../../mixins/filterProducts'
 export default {
   components: {
     KoProdcutCardFilter,
@@ -319,32 +330,23 @@ export default {
     fullProducts: {},
     settingByTemplate9: Array,
   },
-  mixins: [sendCategoryUrl, SendsubcategoryUrl],
+  mixins: [filterProducts],
   name: 'Ko-ProductList-Filter',
   mounted() {
     this.setOptionShipping()
     if (this.$store.getters['products/filterProducts']) {
       this.products = this.$store.getters['products/filterProducts']
-      let maxTMP = 0
-      this.products.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.rangeSlide[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
     }
     if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrl(this.$route.query.category)
+      this.sendCategoryUrlMix(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendsubcategoryUrl(
+      this.SendSubCategoryUrlMix(
         this.$route.query.subcategory,
         this.categorias,
         this.subcategories
       )
     } else if (this.$route.fullPath == '/') {
-      this.Allcategories()
+      this.allCategories()
     }
     if (this.previousPage) {
       this.currentPage = this.previousPage
@@ -352,34 +354,19 @@ export default {
   },
   data() {
     return {
-      showinList: false,
+      showInList: false,
       showSubCategory: false,
-      statesub: false,
-      rangeSlide: [0, 1000000],
-      drawerleft: false,
-      directionleft: 'ltr',
-      add: true,
+      stateSub: false,
       search: '',
-      productsCategory: [],
-      price: [0, 1000000],
-      range: {
-        max: 0,
-      },
       currentPage: 1,
-      sub: -1,
-      show: false,
-      value: 1,
-      valuesub: '',
       selectSubcategory: '',
       nameCategory: '',
       nameSubCategory: '',
       selectedSubcategories: [],
       toggleCategories: true,
-      indexCategory: 0,
       indexSelect: '',
       indexSelect2: '',
-      indexshowList: 3,
-      indexshowView: 3,
+      indexShowList: 3,
       numVistas: 18,
       stateShipping: false,
       activeNames: ['1', '2', '3', '4', '5'],
@@ -458,176 +445,99 @@ export default {
         }
       }
     },
-    getProductsShippingFree() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'ShippingFree',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    getProductsNoShippingFree() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'NoShippingFree',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    getProductsHigherNumber() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'higherNumber',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    getProductsSmallerNumber() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'smallerNumber',
-        data: '',
-      })
-      this.currentPage = 1
-    },
     showList() {
-      this.indexshowList = 1
-      this.showinList = true
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
+      this.indexShowList = 1
+      this.showInList = true
+      var gridSelector = document.getElementById('grid-selection')
+      if (gridSelector) {
+        gridSelector.setAttribute(
           'style',
           'grid-template-columns: repeat(1, minmax(0, 1fr))'
         )
       }
     },
     showGrid3() {
-      this.indexshowList = 3
-      this.showinList = false
-      var gridselector = document.getElementById('grid-selection')
-      if (gridselector) {
-        gridselector.setAttribute(
+      this.indexShowList = 3
+      this.showInList = false
+      var gridSelector = document.getElementById('grid-selection')
+      if (gridSelector) {
+        gridSelector.setAttribute(
           'style',
           'grid-template-columns: repeat(3, minmax(0, 1fr))'
         )
       }
     },
-    back() {
-      this.clear()
-      this.toggleCategories = true
-      this.nameCategory = ''
-    },
-    Allcategories() {
-      this.$store.commit('products/FILTER_BY', {
-        type: 'all',
-        data: '',
-      })
-      this.currentPage = 1
-    },
-    Searchproduct(search) {
-      if (search.length) {
-        this.search = search
-        this.$router.push({
-          path: '',
-          query: { search: search },
-        })
-        this.$store.commit('products/FILTER_BY', {
-          type: 'search',
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: 'all',
-          data: '',
-        })
-      }
-      this.currentPage = 1
-    },
-    addClass() {
-      this.add = !this.add
-    },
-    mouseOver(index) {
-      this.sub = index
-      this.show = true
-    },
-    mouseLeave() {
-      this.sub = -1
-      this.show = false
-    },
-    Sendsubcategory(value) {
-      this.statesub = false
+    SendSubCategory(value) {
+      this.stateSub = false
       this.indexSelect2 = value
-      this.addClass()
       this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
+      let filtradoSubCategory = this.subcategories.find(
         (element) => element.id == value
       )
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
+      let filtradoCategories = this.categorias.find(
+        (element) => element.id == filtradoSubCategory.categoria
       )
       this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
-        filtradoCategorias.nombre_categoria_producto
+        'SET_CATEGORY_PRODUCTO',
+        filtradoCategories.nombre_categoria_producto
       )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
       this.$router.push({
         path: '',
         query: {
-          subcategory: `${this.nameSubCategory}^${filtradoCategorias.id}`,
+          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
         },
       })
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
     },
     sendCategory(value, categoria, index, ref) {
-      this.statesub = true
+      this.stateSub = true
+      this.indexSelect = categoria
+      this.currentPage = 1
       var catalogo = document.getElementById('homeCate')
       if (catalogo) {
         catalogo.style.color = '#8e8e8e'
         catalogo.style.fontWeight = '100'
       }
-      this.indexSelect = categoria
-      this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$router.push({
         path: '',
         query: { category: this.nameCategory },
       })
       this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
+      this.subcategories.find((subcategory) => {
+        if (subcategory.categoria === categoria) {
           this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
+          this.selectedSubcategories.push(subcategory)
         }
       })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
     },
     breadcrumbsSendCategory(value) {
-      this.statesub = true
+      this.stateSub = true
       var catalogo = document.getElementById('homeCate')
-      if (this.statesub == true) {
+      if (this.stateSub == true) {
         catalogo.style.color = '#8e8e8e'
         catalogo.style.fontWeight = '100'
       }
-      let filtradoCategorias = this.categorias.find((element) => {
+      let filtradoCategories = this.categorias.find((element) => {
         if (element.nombre_categoria_producto == value) {
           return element
         }
       })
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
-        data: filtradoCategorias.nombre_categoria_producto,
+        type: ['category'],
+        data: filtradoCategories.nombre_categoria_producto,
       })
     },
     clear() {
@@ -642,15 +552,16 @@ export default {
         path: '',
         query: {},
       })
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')
-      this.addClass()
       this.nameCategory = ''
+      this.showSubCategory = false
+      this.selectedSubcategories = []
     },
     handleChange(val) {
       // console.log(val);
@@ -659,21 +570,12 @@ export default {
   watch: {
     fullProducts(value) {
       this.products = value
-      let maxTMP = 0
-      value.forEach((product) => {
-        if (maxTMP <= product.precio) {
-          this.price[1] = product.precio
-          this.rangeSlide[1] = product.precio
-          this.range.max = parseInt(product.precio)
-          maxTMP = product.precio
-        }
-      })
     },
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     currentPage() {
-      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null
@@ -694,19 +596,19 @@ export default {
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
       if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrl(this.$route.query.category)
+        this.sendCategoryUrlMix(this.$route.query.category)
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendsubcategoryUrl(
+        this.SendSubCategoryUrlMix(
           this.$route.query.subcategory,
           this.categorias,
           this.subcategories
         )
       } else if (this.$route.fullPath == '/') {
-        this.Allcategories()
+        this.allCategories()
       }
     },
     searchValue(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
   },
 }

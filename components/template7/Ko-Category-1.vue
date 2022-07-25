@@ -46,11 +46,11 @@
         <div
           v-for="(subcategory, key) in subcategories"
           :key="key"
-          style="margin-top: 10px; margin-bottom: 10px;"
+          style="margin-top: 10px; margin-bottom: 10px"
         >
           <div
             v-if="subcategory.categoria == idCategory"
-            @click="Sendsubcategory(subcategory.id)"
+            @click="SendSubCategory(subcategory.id)"
           >
             <button
               class="tags"
@@ -97,12 +97,12 @@ export default {
     },
   },
   methods: {
-    Sendsubcategory(value) {
+    SendSubCategory(value) {
       this.indexSelect = value
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', false)
+      this.$store.commit('SET_STATE_BANNER', false)
       this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
@@ -112,13 +112,13 @@ export default {
         (element) => element.id == filtradoSubCategoria.categoria
       )
       this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
+        'SET_CATEGORY_PRODUCTO',
         filtradoCategorias.nombre_categoria_producto
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
     },
@@ -127,10 +127,10 @@ export default {
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', false)
+      this.$store.commit('SET_STATE_BANNER', false)
       this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -145,7 +145,7 @@ export default {
         this.addClass()
       }
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
     },
@@ -158,12 +158,12 @@ export default {
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', true)
+      this.$store.commit('SET_STATE_BANNER', true)
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')
@@ -272,7 +272,7 @@ export default {
   text-align: center;
 }
 .name-category:hover {
-  color: var(--btnhover);
+  color: var(--hover_text);
 }
 .tags {
   border-radius: 10px;
@@ -289,7 +289,7 @@ export default {
   white-space: nowrap;
 }
 .tags:hover {
-  color: var(--btnhover);
+  background: var(--hover_card);
   border: solid 1px var(--color_border);
 }
 .tags-active {

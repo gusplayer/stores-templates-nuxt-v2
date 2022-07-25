@@ -387,7 +387,7 @@ export default {
     productsData: Array,
     whatsapp: String,
     envios: Object,
-    facebooPixel: Object,
+    facebookPixel: Object,
     settingByTemplate11: Array,
   },
   components: {
@@ -537,7 +537,10 @@ export default {
               this.spent = true
             }
             this.loading = false
-            if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+            if (
+              this.facebookPixel &&
+              this.facebookPixel.pixel_facebook != null
+            ) {
               window.fbq('track', 'ViewContent', {
                 content_type: 'product',
                 content_ids: this.data.detalle.id,
@@ -704,7 +707,7 @@ export default {
       } else {
         this.$store.state.productsCart.push(product)
       }
-      if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'AddToCart', {
           content_type: 'product',
           content_ids: this.data.detalle.id,
@@ -741,13 +744,13 @@ export default {
       if (json) {
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
-          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
             window.fbq('track', 'InitiateCheckout')
           }
           this.$gtm.push({ event: 'InitiateCheckout' })
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
-          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
             window.fbq('track', 'InitiateCheckout')
           }
           this.$gtm.push({ event: 'InitiateCheckout' })

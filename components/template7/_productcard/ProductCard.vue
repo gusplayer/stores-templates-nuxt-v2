@@ -344,7 +344,7 @@ export default {
     }
   },
   computed: {
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
     dataStore() {
@@ -457,7 +457,7 @@ export default {
           } else {
             this.$store.state.productsCart.push(product)
           }
-          if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
             window.fbq('track', 'AddToCart', {
               content_type: 'product',
               content_ids: this.product.id,

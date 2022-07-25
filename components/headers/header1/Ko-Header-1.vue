@@ -101,7 +101,7 @@
               <span class="num-items">{{ productsCart }}</span>
             </div>
           </div>
-          <div class="header-item-menu" @click="openMenulateral">
+          <div class="header-item-menu" @click="openMenuLateral">
             <menu-icon class="header-icon-menu nav-bar" />
           </div>
           <KoMenu :dataStore="dataStore" class="responsive" />
@@ -147,7 +147,7 @@
                       >
                         <li
                           v-if="subcategory.categoria == categoria.id"
-                          @click="Sendsubcategory(subcategory.id)"
+                          @click="SendSubCategory(subcategory.id)"
                           class="text-subcategoria"
                           :class="
                             subcategory.id == indexSelect
@@ -291,7 +291,7 @@ export default {
     product() {
       return this.dataStore.productos
     },
-    facebooPixel() {
+    facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
     listArticulos() {
@@ -304,16 +304,16 @@ export default {
   methods: {
     initHeader() {
       if (this.$route.fullPath == '/') {
-        this.$store.commit('SET_STATEBANNER', true)
+        this.$store.commit('SET_STATE_BANNER', true)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.category) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.subcategory) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.showSearch = true
       } else if (this.$route.query && this.$route.query.search) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.setSearch(this.$route.query.search)
         this.showSearch = true
       } else {
@@ -328,7 +328,7 @@ export default {
       }
     },
     openSearch() {
-      this.$store.commit('SET_OPENSEARCH', true)
+      this.$store.commit('SET_OPEN_SEARCH', true)
     },
     openOrder() {
       this.$gtm.push({
@@ -338,7 +338,7 @@ export default {
       this.showMenu = false
       this.$store.state.openOrder = true
     },
-    openMenulateral() {
+    openMenuLateral() {
       this.showMenu = false
       this.$store.state.openMenulateralRight = true
     },
@@ -383,9 +383,9 @@ export default {
         path: '/productos/' + this.product[0].slug,
       })
     },
-    Sendsubcategory(value) {
+    SendSubCategory(value) {
       this.indexSelect = value
-      this.$store.commit('SET_STATEBANNER', false)
+      this.$store.commit('SET_STATE_BANNER', false)
       this.showMenu = false
       this.addClass()
       this.selectSubcategory = value
@@ -396,11 +396,11 @@ export default {
         (element) => element.id == filtradoSubCategoria.categoria
       )
       this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
+        'SET_CATEGORY_PRODUCTO',
         filtradoCategorias.nombre_categoria_producto
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$router.push({
         path: '/',
         query: {
@@ -408,18 +408,18 @@ export default {
         },
       })
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
+      this.$store.commit('SET_PREVIOUS_PAGE', 1)
     },
     sendCategory(value, categoria, ref) {
       this.idCategory = categoria
       this.showMenu = false
-      this.$store.commit('SET_STATEBANNER', false)
+      this.$store.commit('SET_STATE_BANNER', false)
       this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -438,10 +438,10 @@ export default {
         query: { category: value.nombre_categoria_producto },
       })
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
+      this.$store.commit('SET_PREVIOUS_PAGE', 1)
     },
     addClass() {
       this.add = !this.add
@@ -454,31 +454,31 @@ export default {
         path: '/',
         query: '',
       })
-      this.$store.commit('SET_STATEBANNER', true)
+      this.$store.commit('SET_STATE_BANNER', true)
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')
       this.addClass()
       this.nameCategory = ''
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       if (search) {
-        this.$store.commit('SET_STATEBANNER', false)
+        this.$store.commit('SET_STATE_BANNER', false)
         this.$store.commit('SET_SEARCHVALUE', search)
       } else {
-        this.$store.commit('SET_STATEBANNER', true)
+        this.$store.commit('SET_STATE_BANNER', true)
         this.$store.commit('SET_SEARCHVALUE', '')
       }
     },
     getSearch(value) {
       if (value) {
         location.href = '?search=' + value
-        if (this.facebooPixel && this.facebooPixel.pixel_facebook != null) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
           window.fbq('track', 'Search', { value: value })
         }
       } else {
@@ -505,7 +505,7 @@ export default {
       this.links[4].link = this.dataStore.tienda.red_tiktok
     },
     search(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {

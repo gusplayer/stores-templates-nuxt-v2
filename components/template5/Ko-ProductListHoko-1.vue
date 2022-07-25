@@ -77,28 +77,8 @@ export default {
   },
   data() {
     return {
-      drawerleft: false,
-      directionleft: 'ltr',
-      add: true,
       search: '',
-      productsCategory: [],
-      price: [0, 1000000],
-      range: {
-        max: 0,
-      },
       currentPage: 1,
-      sub: -1,
-      show: false,
-      value: '',
-      valuesub: '',
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      toggleCategories: true,
-      indexCategory: 0,
-      indexSelect: '',
-      indexSelect2: '',
     }
   },
   computed: {
@@ -117,7 +97,7 @@ export default {
   },
   watch: {
     currentPage() {
-      this.$store.commit('SET_PREVIOUSPAGE', this.currentPage)
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
       let timerTimeout = null
       timerTimeout = setTimeout(() => {
         timerTimeout = null

@@ -66,7 +66,7 @@
                     <div v-for="(subcategory, key) in subcategories" :key="key">
                       <li
                         v-if="subcategory.categoria == categoria.id"
-                        @click="Sendsubcategory(subcategory.id)"
+                        @click="SendSubCategory(subcategory.id)"
                         class="close text-subcategoria"
                         :class="
                           subcategory.id == indexSelect2
@@ -179,13 +179,13 @@ export default {
         this.$store.commit('SET_OPENORDERMENURIGTH', false)
       }
     },
-    Sendsubcategory(value) {
+    SendSubCategory(value) {
       this.indexSelect2 = value
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', false)
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
+      this.$store.commit('SET_STATE_BANNER', false)
+      this.$store.commit('SET_PREVIOUS_PAGE', 1)
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
       this.addClass()
       this.selectSubcategory = value
@@ -196,13 +196,13 @@ export default {
         (element) => element.id == filtradoSubCategoria.categoria
       )
       this.$store.commit(
-        'SET_CATEGORY_PRODCUTRO',
+        'SET_CATEGORY_PRODUCTO',
         filtradoCategorias.nombre_categoria_producto
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', this.nameSubCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
-        type: 'subcategory',
+        type: ['subcategory'],
         data: value,
       })
     },
@@ -211,11 +211,11 @@ export default {
       this.$router.push({
         path: '/',
       })
-      this.$store.commit('SET_STATEBANNER', false)
-      this.$store.commit('SET_PREVIOUSPAGE', 1)
+      this.$store.commit('SET_STATE_BANNER', false)
+      this.$store.commit('SET_PREVIOUS_PAGE', 1)
       this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -231,7 +231,7 @@ export default {
         this.addClass()
       }
       this.$store.commit('products/FILTER_BY', {
-        type: 'category',
+        type: ['category'],
         data: value.nombre_categoria_producto,
       })
     },
@@ -244,9 +244,9 @@ export default {
       })
       this.showMenu = false
       this.$store.commit('SET_OPENORDERMENURIGTH', false)
-      this.$store.commit('SET_CATEGORY_PRODCUTRO', '')
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.$emit('clear')

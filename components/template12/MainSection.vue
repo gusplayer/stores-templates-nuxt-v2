@@ -38,7 +38,7 @@
                 <div
                   v-for="product in fullProducts"
                   :key="product.id"
-                  @click="OpenModalproductDetails(product)"
+                  @click="OpenModalProductDetails(product)"
                   v-show="
                     product.categoria == category.nombre_categoria_producto &&
                     product.subcategoria == subcategory.id
@@ -62,7 +62,7 @@
             <div
               v-for="product in fullProducts"
               :key="product.id"
-              @click="OpenModalproductDetails(product)"
+              @click="OpenModalProductDetails(product)"
               v-show="product.categoria == category.nombre_categoria_producto"
             >
               <ProductCard
@@ -91,7 +91,7 @@
           <div
             v-for="product in fullProducts"
             :key="product.id"
-            @click="OpenModalproductDetails(product)"
+            @click="OpenModalProductDetails(product)"
           >
             <ProductCard
               :product="product"
@@ -145,19 +145,19 @@ export default {
     },
   },
   methods: {
-    OpenModalproductDetails(value) {
+    OpenModalProductDetails(value) {
       this.tempData = value
       this.$store.state.modalproductDetails = true
     },
-    Searchproduct(search) {
+    SearchProduct(search) {
       if (search.length) {
         this.$store.commit('products/FILTER_BY', {
-          type: 'search',
+          type: ['search'],
           data: search,
         })
       } else {
         this.$store.commit('products/FILTER_BY', {
-          type: 'all',
+          type: ['all'],
           data: '',
         })
       }
@@ -165,7 +165,7 @@ export default {
   },
   watch: {
     searchValue(value) {
-      this.Searchproduct(value)
+      this.SearchProduct(value)
     },
   },
 }

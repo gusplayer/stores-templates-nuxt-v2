@@ -94,7 +94,7 @@ export default {
         productsData: this.fullProducts,
         whatsapp: this.whatsapp,
         envios: this.envios,
-        facebooPixel: this.integracioneStore,
+        facebookPixel: this.integracioneStore,
         settingByTemplate:
           this.settingByTemplate &&
           this.settingByTemplate.settings &&
