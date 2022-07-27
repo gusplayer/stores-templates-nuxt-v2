@@ -346,6 +346,7 @@ export default {
       this.cedula = ''
     }
     if (this.orden && this.orden.venta) {
+      this.eventFacebookPixel()
       if (this.orden.venta.created_at) {
         this.shippingAddress()
         let result = this.orden.venta.created_at.split(' ')
@@ -603,10 +604,24 @@ export default {
         })
     },
     eventFacebookPixel() {
+      let array = []
+      let content = []
+      this.orden.productos.map((element) => {
+        if (element) {
+          array.push(`${element.carrito}`)
+          let temp = {
+            id: `${element.carrito}`,
+            quantity: element.unidades,
+          }
+          content.push(temp)
+        }
+      })
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Purchase', {
-          content_ids: this.orden.venta.id,
-          description: this.choiceState.ref,
+          content_type: 'Product',
+          content_ids: array,
+          contents: content,
+          description: `Estado de la venta: ${this.choiceState.ref}`,
           value: this.orden.venta.total,
           currency: this.dataStore.tienda.moneda,
         })
