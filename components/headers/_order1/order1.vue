@@ -16,6 +16,7 @@
             <div class="rightleft"></div>
           </div>
         </div>
+        <!-- <button @click="setCartFacebook()">test</button> -->
         <transition name="slide">
           <template v-if="productsCart.length">
             <div class="order--wrapper">
@@ -1048,6 +1049,7 @@ export default {
       }
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
+        this.setCartFacebook()
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
           if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
@@ -1304,6 +1306,7 @@ export default {
           window.location
         }?clearCart=true`
       }
+      this.setCartFacebook()
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
         if (this.mobileCheck()) {
@@ -1486,6 +1489,32 @@ export default {
             (this.textCiudad = 'Distritos / Zona')
           break
       }
+    },
+    setCartFacebook() {
+      let array = []
+      let content = []
+      this.productsCart.map((element) => {
+        if (element) {
+          array.push(`${element.id}`)
+          let temp = {
+            id: `${element.id}`,
+            quantity: element.cantidad,
+          }
+          content.push(temp)
+        }
+      })
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+        window.fbq('track', 'AddToCart', {
+          content_type: 'Product',
+          content_ids: array,
+          contents: content,
+          currency: this.dataStore.tienda.moneda,
+          value: this.totalCart ? this.totalCart : '',
+          num_items: this.productsCart.length,
+          description: 'Productos agregados al carrito',
+        })
+      }
+      this.$gtm.push({ event: 'AddToCart' })
     },
   },
   watch: {

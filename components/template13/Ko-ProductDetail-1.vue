@@ -330,50 +330,6 @@
           :settingGeneral="settingByTemplate13[0].setting13General"
         />
       </div>
-      <div itemscope itemtype="http://schema.org/Product">
-        <meta itemprop="productID" :content="`${data.detalle.id}`" />
-        <meta itemprop="name" :content="`${data.detalle.nombre}`" />
-        <meta itemprop="brand" :content="`${data.info.marca}`" />
-        <meta
-          itemprop="description"
-          :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
-        />
-        <meta itemprop="image" :content="`${data.detalle.foto_cloudinary}`" />
-        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-          <link itemprop="availability" href="in stock" />
-          <link itemprop="itemCondition" href="new" />
-          <meta itemprop="price" :content="`${this.salesData.precio}`" />
-          <meta
-            itemprop="priceCurrency"
-            :content="`${dataStore.tienda.moneda}`"
-          />
-        </div>
-        <meta itemprop="url" :content="`${this.sharing.url}`" />
-      </div>
-      <div>
-        <meta property="product:catalog_id" :content="`${data.detalle.id}`" />
-        <meta property="og:title" :content="`${data.detalle.nombre}`" />
-        <meta property="product:brand" :content="`${data.info.marca}`" />
-        <meta
-          property="og:description"
-          :content="`Producto de la tienda ${dataStore.tienda.nombre}`"
-        />
-        <meta
-          property="og:image"
-          :content="`${data.detalle.foto_cloudinary}`"
-        />
-        <meta property="product:availability" content="in stock" />
-        <meta property="product:condition" content="new" />
-        <meta
-          property="product:price:amount"
-          :content="`${this.salesData.precio}`"
-        />
-        <meta
-          property="product:price:currency"
-          :content="`${dataStore.tienda.moneda}`"
-        />
-        <meta property="og:url" :content="`${this.sharing.url}`" />
-      </div>
     </div>
   </div>
 </template>
@@ -546,8 +502,8 @@ export default {
               this.facebookPixel.pixel_facebook != null
             ) {
               window.fbq('track', 'ViewContent', {
-                content_type: 'product',
-                content_ids: this.data.detalle.id,
+                content_type: 'Product',
+                content_ids: [`${this.data.detalle.id}`],
                 value: this.salesData.precio ? this.salesData.precio : 0,
                 content_name: this.data.detalle.nombre,
                 currency: this.dataStore.tienda.moneda,
@@ -711,18 +667,6 @@ export default {
       } else {
         this.$store.state.productsCart.push(product)
       }
-      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-        window.fbq('track', 'AddToCart', {
-          content_type: 'product',
-          content_ids: this.data.detalle.id,
-          value: this.salesData.precio,
-          num_items: this.data.cantidad,
-          content_name: this.data.detalle.nombre,
-          currency: this.dataStore.tienda.moneda,
-          description: 'Agregar al carrito el producto',
-        })
-      }
-      this.$gtm.push({ event: 'AddToCart' })
       this.$store.commit('UPDATE_CONTENTCART')
       this.$router.push('/productos')
       this.$store.state.openOrder = true
@@ -746,6 +690,7 @@ export default {
       }
       json = JSON.stringify(json)
       if (json) {
+        this.setCartFacebook()
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
           if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
@@ -760,6 +705,25 @@ export default {
           this.$gtm.push({ event: 'InitiateCheckout' })
         }
       }
+    },
+    setCartFacebook() {
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+        window.fbq('track', 'AddToCart', {
+          content_type: 'Product',
+          content_ids: [`${this.data.info.id}`],
+          contents: {
+            id: `${this.data.info.id}`,
+            quantity: this.quantityValue,
+          },
+          currency: this.dataStore.tienda.moneda,
+          value: this.salesData.precio
+            ? this.salesData.precio * this.quantityValue
+            : 0,
+          num_items: this.quantityValue,
+          description: 'Productos agregados al carrito',
+        })
+      }
+      this.$gtm.push({ event: 'AddToCart' })
     },
     evalStock(mq, qv) {
       return !(mq - qv < 0)
@@ -869,6 +833,177 @@ export default {
       }
       return ''
     },
+  },
+  head() {
+    return {
+      title: `Vista del producto ${
+        this.data && this.data.detalle ? this.data.detalle.nombre : ''
+      }`,
+      meta: [
+        {
+          hid: 'product:catalog_id',
+          property: 'product:catalog_id',
+          content: this.data && this.data.detalle ? this.data.detalle.id : '',
+        },
+
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            this.data && this.data.detalle ? this.data.detalle.nombre : '',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: this.sharing && this.sharing.url ? this.sharing.url : '',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            this.data && this.data.info ? this.data.info.descripcion_corta : '',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content:
+            this.data && this.data.detalle
+              ? this.data.detalle.foto_cloudinary
+              : '',
+        },
+        {
+          hid: 'og:price:amount',
+          property: 'og:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+        },
+        {
+          hid: 'og:price:currency',
+          property: 'og:price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+        {
+          hid: 'product:brand',
+          property: 'product:brand',
+          content:
+            this.data && this.data.info && this.data.info.marca
+              ? this.data.info.marca
+              : '',
+        },
+        {
+          hid: 'product:availability',
+          property: 'product:availability',
+          content:
+            this.salesData && this.salesData.unidades > 0
+              ? 'in stock'
+              : 'out of stock',
+        },
+        {
+          hid: 'product:condition',
+          property: 'product:condition',
+          content: 'new',
+        },
+        {
+          hid: 'product:price:amount',
+          property: 'product:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+        },
+        {
+          hid: 'product:price:currency',
+          property: 'product:price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+        {
+          hid: 'product:sale_price:amount',
+          property: 'product:sale_price:amount',
+          content:
+            this.data &&
+            this.data.info &&
+            this.data.info.tag_promocion == 1 &&
+            this.data.info.promocion_valor
+              ? Math.trunc(
+                  this.salesData.precio /
+                    (1 - this.data.info.promocion_valor / 100)
+                )
+              : '',
+        },
+        {
+          hid: 'product:sale_price:currency',
+          property: 'product:sale_price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+      ],
+    }
+  },
+  jsonld() {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      productID:
+        this.data && this.data.detalle && this.data.detalle.id
+          ? this.data.detalle.id
+          : '',
+      name:
+        this.data && this.data.detalle && this.data.detalle.nombre
+          ? this.data.detalle.nombre.slice(0, 149)
+          : '',
+      description:
+        this.data && this.data.info && this.data.info.descripcion_corta
+          ? this.data.info.descripcion_corta.slice(0, 9998)
+          : `Producto de la tienda ${this.dataStore.tienda.nombre}`,
+      url: this.sharing && this.sharing.url ? this.sharing.url : '',
+      image:
+        this.data && this.data.detalle && this.data.detalle.foto_cloudinary
+          ? this.data.detalle.foto_cloudinary
+          : '',
+      brand:
+        this.data && this.data.info && this.data.info.marca
+          ? this.data.info.marca
+          : '',
+      sku:
+        this.salesData && this.salesData.unidades
+          ? this.salesData.unidades
+          : '',
+      offers: [
+        {
+          '@type': 'Offer',
+          price:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+          priceCurrency: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+          itemCondition: 'https://schema.org/NewCondition',
+          availability:
+            this.salesData && this.salesData.unidades > 0
+              ? 'https://schema.org/InStock'
+              : 'https://schema.org/OutOfStock',
+        },
+      ],
+      additionalProperty: [
+        {
+          '@type': 'PropertyValue',
+          propertyID: 'item_group_id',
+          value:
+            this.data && this.data.detalle
+              ? `FB${this.data.detalle.categoria_producto.id}_${this.data.detalle.categoria_producto.nombre_categoria_producto}`
+              : '',
+          status: 'active',
+        },
+      ],
+    }
   },
 }
 </script>

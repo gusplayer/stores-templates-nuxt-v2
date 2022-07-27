@@ -528,8 +528,9 @@ export default {
       this.cedula = ''
     }
     if (this.orden && this.orden.venta) {
+      this.eventFacebookPixel()
       if (this.orden.venta.created_at) {
-        this.shippingDireccion()
+        this.shippingAddress()
         let result = this.orden.venta.created_at.split(' ')
         this.fechaState = result[0]
         this.horaState = result[1]
@@ -783,7 +784,7 @@ export default {
         this.productDataHoko = response.data
       })
     },
-    shippingDireccion() {
+    shippingAddress() {
       this.direccion_entrega = JSON.parse(
         this.orden && this.orden.venta && this.orden.venta.direccion_entrega
           ? this.orden.venta.direccion_entrega
@@ -851,11 +852,25 @@ export default {
           this.errorMessageTwo()
         })
     },
-    eventFacebooPixel() {
+    eventFacebookPixel() {
+      let array = []
+      let content = []
+      this.orden.productos.map((element) => {
+        if (element) {
+          array.push(`${element.carrito}`)
+          let temp = {
+            id: `${element.carrito}`,
+            quantity: element.unidades,
+          }
+          content.push(temp)
+        }
+      })
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Purchase', {
-          content_ids: this.orden.venta.id,
-          description: this.choiceState.ref,
+          content_type: 'Product',
+          content_ids: array,
+          contents: content,
+          description: `Estado de la venta: ${this.choiceState.ref}`,
           value: this.orden.venta.total,
           currency: this.dataStore.tienda.moneda,
         })
@@ -895,13 +910,13 @@ export default {
     },
     cities() {
       this.setCity()
-      this.shippingDireccion()
+      this.shippingAddress()
     },
     orden() {
       if (this.orden.venta) {
         if (this.orden.venta.created_at) {
-          this.eventFacebooPixel()
-          this.shippingDireccion()
+          this.eventFacebookPixel()
+          this.shippingAddress()
           let result = this.orden.venta.created_at.split(' ')
           this.fechaState = result[0]
           this.horaState = result[1]

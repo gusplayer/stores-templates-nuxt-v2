@@ -576,7 +576,7 @@ export default {
               this.facebookPixel.pixel_facebook != null
             ) {
               window.fbq('track', 'ViewContent', {
-                content_type: 'product',
+                content_type: 'Product',
                 content_ids: this.data.detalle.id,
                 value: this.salesData.precio ? this.salesData.precio : 0,
                 content_name: this.data.detalle.nombre,
@@ -743,18 +743,6 @@ export default {
       } else {
         this.$store.state.productsCart.push(product)
       }
-      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-        window.fbq('track', 'AddToCart', {
-          content_type: 'product',
-          content_ids: this.data.detalle.id,
-          value: this.salesData.precio,
-          num_items: this.data.cantidad,
-          content_name: this.data.detalle.nombre,
-          currency: this.dataStore.tienda.moneda,
-          description: 'Agregar al carrito el producto',
-        })
-      }
-      this.$gtm.push({ event: 'AddToCart' })
       this.$store.commit('UPDATE_CONTENTCART')
       this.$router.push('/')
       this.$store.state.openOrder = true
@@ -778,6 +766,7 @@ export default {
       }
       json = JSON.stringify(json)
       if (json) {
+        this.setCartFacebook()
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
           if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
@@ -792,6 +781,21 @@ export default {
           this.$gtm.push({ event: 'InitiateCheckout' })
         }
       }
+    },
+    setCartFacebook() {
+      let array = []
+      this.productsCart.map((element) => {
+        if (element) {
+          array.push(`${element.id}`)
+        }
+      })
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+        window.fbq('track', 'AddToCart', {
+          content_type: 'Product',
+          content_ids: array,
+        })
+      }
+      this.$gtm.push({ event: 'AddToCart' })
     },
     evalStock(mq, qv) {
       return !(mq - qv < 0)

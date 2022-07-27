@@ -32,6 +32,7 @@ export default {
   css: ['element-ui/lib/theme-chalk/index.css'],
   // components: true,
   plugins: [
+    '~/plugins/jsonld',
     '~/plugins/element',
     '~/plugins/mixinCommonMethods',
     '~/plugins/material-icons',
