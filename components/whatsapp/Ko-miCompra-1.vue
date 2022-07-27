@@ -552,7 +552,7 @@ export default {
       let result = domain.split('&')
       if (result[result.length - 1] == 'clearCart=true') {
         this.$store.commit('DELETEALLITEMSCART')
-        this.$store.commit('UPDATE_CONTENTCART')
+        this.$store.commit('UPDATE_CONTENT_CART')
       }
     },
     routePrev() {

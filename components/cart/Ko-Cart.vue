@@ -501,7 +501,7 @@ export default {
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
       this.filterCities()
     }
-    this.$store.commit('CALCULATE_TOTALCART')
+    this.$store.commit('CALCULATE_TOTAL_CART')
     if (this.rangosByCiudades.envio_metodo == 'precio') {
       this.shippingPrecio()
     }
@@ -718,22 +718,22 @@ export default {
     addQuantity(product) {
       if (product.limitQuantity > product.cantidad) {
         product.cantidad++
-        this.$store.commit('UPDATE_CONTENTCART')
-        this.$store.commit('CALCULATE_TOTALCART')
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('CALCULATE_TOTAL_CART')
         this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     removeQuantity(product) {
       if (product.cantidad >= 2) {
         product.cantidad--
-        this.$store.commit('UPDATE_CONTENTCART')
-        this.$store.commit('CALCULATE_TOTALCART')
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('CALCULATE_TOTAL_CART')
         this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     deleteItemCart(i) {
       this.$store.state.productsCart.splice(i, 1)
-      this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.commit('UPDATE_CONTENT_CART')
       this.$store.dispatch('VERIFY_PRODUCTS')
     },
     GoPayments() {
@@ -770,16 +770,10 @@ export default {
       if (this.$store.state.productsCart.length != 0) {
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
-          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-            window.fbq('track', 'InitiateCheckout')
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
+          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
-          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-            window.fbq('track', 'InitiateCheckout')
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
+          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         }
       }
     },

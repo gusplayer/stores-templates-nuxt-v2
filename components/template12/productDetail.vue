@@ -510,10 +510,11 @@ export default {
       } else {
         this.$store.state.productsCart.push(product)
       }
-      this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.commit('UPDATE_CONTENT_CART')
       this.$store.state.modalproductDetails = false
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
+      this.$store.dispatch('SEND_ADD_TO_CART', 1)
     },
     GoPayments() {
       let objeto = {
@@ -535,16 +536,10 @@ export default {
       if (json) {
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
-          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-            window.fbq('track', 'InitiateCheckout')
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
+          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
-          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-            window.fbq('track', 'InitiateCheckout')
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
+          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         }
       }
     },
@@ -608,7 +603,6 @@ export default {
       let text = `Hola%20%F0%9F%98%80%2C%0AEstoy%20en%20tu%20tienda%20%2A${this.dataStore.tienda.nombre}%2A%20y%20quiero%20cotizar%20este%20producto%3A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.data.detalle.nombre}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ALink%3A%20${urlProduct}`
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,

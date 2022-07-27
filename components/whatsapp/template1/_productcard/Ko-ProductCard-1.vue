@@ -320,13 +320,14 @@ export default {
           } else {
             this.$store.state.productsCart.push(product)
           }
-          this.$store.commit('UPDATE_CONTENTCART')
+          this.$store.commit('UPDATE_CONTENT_CART')
           // this.$router.push('/')
           this.$message({
             showClose: true,
             message: 'Se agregó el producto correctamente',
             type: 'success',
           })
+          this.$store.dispatch('SEND_ADD_TO_CART', 1)
         }
       }
     },

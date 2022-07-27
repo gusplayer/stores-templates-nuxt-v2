@@ -16,7 +16,6 @@
             <div class="rightleft"></div>
           </div>
         </div>
-        <!-- <button @click="setCartFacebook()">test</button> -->
         <transition name="slide">
           <template v-if="productsCart.length">
             <div class="order--wrapper">
@@ -739,7 +738,7 @@ export default {
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
       this.filterCities()
     }
-    this.$store.commit('CALCULATE_TOTALCART')
+    this.$store.commit('CALCULATE_TOTAL_CART')
     if (this.rangosByCiudades.envio_metodo == 'precio') {
       this.shippingPrecio()
     }
@@ -979,29 +978,29 @@ export default {
     addQuantity(product) {
       if (product.limitQuantity > product.cantidad) {
         product.cantidad++
-        this.$store.commit('UPDATE_CONTENTCART')
-        this.$store.commit('CALCULATE_TOTALCART')
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('CALCULATE_TOTAL_CART')
         this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     removeQuantity(product) {
       if (product.cantidad >= 2) {
         product.cantidad--
-        this.$store.commit('UPDATE_CONTENTCART')
-        this.$store.commit('CALCULATE_TOTALCART')
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('CALCULATE_TOTAL_CART')
         this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     deleteItemCart(i) {
       this.$store.commit('DELETEITEMCART', i)
-      this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.commit('UPDATE_CONTENT_CART')
       this.$store.dispatch('VERIFY_PRODUCTS')
     },
     removeCartItems() {
       this.remove = false
       location.reload(true)
       this.$store.commit('DELETEALLITEMSCART')
-      this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.commit('UPDATE_CONTENT_CART')
       this.$store.dispatch('VERIFY_PRODUCTS')
     },
     closeOrder(event) {
@@ -1049,19 +1048,12 @@ export default {
       }
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
-        this.setCartFacebook()
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
-          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-            window.fbq('track', 'InitiateCheckout')
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
+          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
-          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-            window.fbq('track', 'InitiateCheckout')
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
+          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         }
       }
     },
@@ -1306,7 +1298,6 @@ export default {
           window.location
         }?clearCart=true`
       }
-      this.setCartFacebook()
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
         if (this.mobileCheck()) {
@@ -1375,6 +1366,7 @@ export default {
           } else {
             resultShipping = 0
           }
+          this.eventFacebookPixel()
           const params = {
             canal: 1,
             usuario: 30866,
@@ -1399,6 +1391,7 @@ export default {
             metodo_pago: 7,
             descuento: this.discountDescuentos ? this.discountDescuentos : 0,
           }
+
           axios
             .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
             .then(() => {
@@ -1409,10 +1402,43 @@ export default {
               this.stateBtnConfirmation = true
             })
             .catch(() => {
+              this.textConfirmation = 'Error al enviar los datos!'
               this.$message.error('Error al enviar los datos!')
             })
         }
       })
+    },
+    eventFacebookPixel() {
+      let array = []
+      let content = []
+      this.productsCart.map((element) => {
+        if (element) {
+          array.push(`${element.id}`)
+          let temp = {
+            id: `${element.id}`,
+            quantity: element.cantidad,
+          }
+          content.push(temp)
+        }
+      })
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+        window.fbq('track', 'Purchase', {
+          content_type: 'Product',
+          content_ids: array,
+          contents: content,
+          description: `Comprar finalizada WhatsApp`,
+          value:
+            this.totalCart +
+            (this.shipping ? this.shipping : 0) +
+            (this.shippingTarifaPrecio &&
+            this.shippingTarifaPrecio != 'empty' &&
+            this.FreeShippingCart == false
+              ? this.shippingTarifaPrecio
+              : 0) -
+            this.discountDescuentos,
+          currency: this.dataStore.tienda.moneda,
+        })
+      }
     },
     productsFreeShippingCart() {
       if (this.productsCart) {
@@ -1489,32 +1515,6 @@ export default {
             (this.textCiudad = 'Distritos / Zona')
           break
       }
-    },
-    setCartFacebook() {
-      let array = []
-      let content = []
-      this.productsCart.map((element) => {
-        if (element) {
-          array.push(`${element.id}`)
-          let temp = {
-            id: `${element.id}`,
-            quantity: element.cantidad,
-          }
-          content.push(temp)
-        }
-      })
-      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-        window.fbq('track', 'AddToCart', {
-          content_type: 'Product',
-          content_ids: array,
-          contents: content,
-          currency: this.dataStore.tienda.moneda,
-          value: this.totalCart ? this.totalCart : '',
-          num_items: this.productsCart.length,
-          description: 'Productos agregados al carrito',
-        })
-      }
-      this.$gtm.push({ event: 'AddToCart' })
     },
   },
   watch: {

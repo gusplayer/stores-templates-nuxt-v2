@@ -540,7 +540,7 @@ export const mutations = {
   SET_SHOPPING_CART(state, value) {
     state.productsCart = value || []
   },
-  UPDATE_CONTENTCART(state) {
+  UPDATE_CONTENT_CART(state) {
     state.totalCart = 0
     localStorage.setItem(
       `ShoppingCart/${state.dataStore.tienda.id_tienda}`,
@@ -550,7 +550,7 @@ export const mutations = {
       state.totalCart += product.precio * product.cantidad
     })
   },
-  CALCULATE_TOTALCART(state) {
+  CALCULATE_TOTAL_CART(state) {
     state.totalCart = 0
     state.productsCart.forEach((product) => {
       state.totalCart += product.precio * product.cantidad
@@ -638,7 +638,6 @@ export const mutations = {
   SET_INFO(state, data) {
     state.tempInfo = data
   },
-
   // STOREDB: (state, { storeLayout, producto }) => {
   //   state.storeLayout = storeLayout.data
   //   state.detalleProducto = producto.data.detalle
@@ -979,7 +978,7 @@ export const actions = {
       }
     })
     commit('SET_SHOPPING_CART', productsFinal)
-    // commit('UPDATE_CONTENTCART', 1)
+    // commit('UPDATE_CONTENT_CART', 1)
   },
   GET_DESCUENTOS({ state }) {
     axios
@@ -1036,6 +1035,51 @@ export const actions = {
         .then((response) => {
           state.producthoko = response.data
         })
+    }
+  },
+  SEND_ADD_TO_CART({ state, getters }, value) {
+    let eventFacebook = ''
+    if (value === 1) {
+      eventFacebook = 'AddToCart'
+    } else if (value === 2) {
+      eventFacebook = 'InitiateCheckout'
+    }
+    if (eventFacebook) {
+      let array = []
+      let content = []
+      if (state.productsCart && state.productsCart.length > 0) {
+        if (
+          state.analytics_tagmanager &&
+          state.analytics_tagmanager.pixel_facebook != null
+        ) {
+          state.productsCart.map((element) => {
+            if (element) {
+              array.push(`${element.id}`)
+              let temp = {
+                id: `${element.id}`,
+                quantity: element.cantidad,
+              }
+              content.push(temp)
+            }
+          })
+          if (array && content) {
+            window.fbq('track', eventFacebook, {
+              content_type: 'Product',
+              content_ids: array,
+              contents: content,
+              currency: state.dataStore.tienda.moneda,
+              value: getters.total ? getters.total : 0,
+              num_items: getters.cantidadProductos,
+              description: 'Productos agregados al carrito',
+            })
+          }
+          this.$gtm.push({ event: eventFacebook })
+        } else {
+          // console.log('no tiene pixel')
+        }
+      } else {
+        // console.log('no tiene productos en el carrito')
+      }
     }
   },
   // async GET_DATAVALIENTA({ state, commit }) {
@@ -1243,6 +1287,7 @@ export const getters = {
       return 0
     }
   },
+
   // getSettingsCSS: (state, getters) => {
   //   if (state.SettingsValues.length) {
   //     state.valuesCSS = []
