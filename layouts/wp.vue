@@ -76,7 +76,7 @@ export default {
   //   this.$store.dispatch('GET_SHOPPING_CART')
   //   if (this.$route.query && this.$route.query.clearCart == 'true') {
   //     this.$store.commit('DELETEALLITEMSCART')
-  //     this.$store.commit('UPDATE_CONTENTCART')
+  //     this.$store.commit('UPDATE_CONTENT_CART')
   //   }
   //   if (
   //     this.analytics_tagmanager &&

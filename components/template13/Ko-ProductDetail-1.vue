@@ -541,7 +541,7 @@ export default {
       this.data.detalle = {
         foto_cloudinary:
           'https://vignette.wikia.nocookie.net/la-bitacora-del-capitan/images/6/67/Not_found.png/revision/latest?cb=20190509042801&path-prefix=es',
-        nombre: 'Producto de prueda',
+        nombre: 'Producto de prueba',
         precio: 29999,
       }
       this.data.info = {
@@ -581,13 +581,13 @@ export default {
             case 'precio':
               this.envio = {
                 titulo: 'Tarifa por precio',
-                desc: 'Segun la suma del costo de tus productos te cobraran el envio',
+                desc: 'Según la suma del costo de tus productos te cobraran el envio',
               }
               break
             case 'precio_ciudad':
               this.envio = {
                 titulo: 'Tarifa por ciudad',
-                desc: 'Segun la ciudad te cobraran el envio',
+                desc: 'Según la ciudad te cobraran el envio',
               }
               break
             case 'peso':
@@ -667,10 +667,11 @@ export default {
       } else {
         this.$store.state.productsCart.push(product)
       }
-      this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.commit('UPDATE_CONTENT_CART')
       this.$router.push('/productos')
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
+      this.$store.dispatch('SEND_ADD_TO_CART', 1)
     },
     GoPayments() {
       let objeto = {
@@ -690,40 +691,14 @@ export default {
       }
       json = JSON.stringify(json)
       if (json) {
-        this.setCartFacebook()
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
-          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-            window.fbq('track', 'InitiateCheckout')
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
+          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
-          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-            window.fbq('track', 'InitiateCheckout')
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
+          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         }
       }
-    },
-    setCartFacebook() {
-      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-        window.fbq('track', 'AddToCart', {
-          content_type: 'Product',
-          content_ids: [`${this.data.info.id}`],
-          contents: {
-            id: `${this.data.info.id}`,
-            quantity: this.quantityValue,
-          },
-          currency: this.dataStore.tienda.moneda,
-          value: this.salesData.precio
-            ? this.salesData.precio * this.quantityValue
-            : 0,
-          num_items: this.quantityValue,
-          description: 'Productos agregados al carrito',
-        })
-      }
-      this.$gtm.push({ event: 'AddToCart' })
     },
     evalStock(mq, qv) {
       return !(mq - qv < 0)

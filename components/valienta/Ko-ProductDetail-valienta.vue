@@ -490,7 +490,7 @@ export default {
       } else {
         this.$store.state.productsCart.push(product)
       }
-      this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.commit('UPDATE_CONTENT_CART')
       this.$router.push(`/wp/${this.dataStore.tienda.id_tienda}`)
       this.$store.state.openOrder = true
       this.$store.state.orderComponent = true
@@ -499,6 +499,7 @@ export default {
         message: 'Se agregó el producto correctamente',
         type: 'success',
       })
+      this.$store.dispatch('SEND_ADD_TO_CART', 1)
     },
     evalStock(mq, qv) {
       return !(mq - qv < 0)

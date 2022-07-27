@@ -641,7 +641,7 @@ export default {
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
       this.filterCities()
     }
-    this.$store.commit('CALCULATE_TOTALCART')
+    this.$store.commit('CALCULATE_TOTAL_CART')
     if (this.rangosByCiudades.envio_metodo == 'precio') {
       this.shippingPrecio()
     }
@@ -868,29 +868,29 @@ export default {
     addQuantity(product) {
       if (product.limitQuantity > product.cantidad) {
         product.cantidad++
-        this.$store.commit('UPDATE_CONTENTCART')
-        this.$store.commit('CALCULATE_TOTALCART')
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('CALCULATE_TOTAL_CART')
         this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     removeQuantity(product) {
       if (product.cantidad >= 2) {
         product.cantidad--
-        this.$store.commit('UPDATE_CONTENTCART')
-        this.$store.commit('CALCULATE_TOTALCART')
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('CALCULATE_TOTAL_CART')
         this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     deleteItemCart(i) {
       this.$store.commit('DELETEITEMCART', i)
-      this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.commit('UPDATE_CONTENT_CART')
       this.$store.dispatch('VERIFY_PRODUCTS')
     },
     removeCartItems() {
       this.remove = false
       location.reload(true)
       this.$store.commit('DELETEALLITEMSCART')
-      this.$store.commit('UPDATE_CONTENTCART')
+      this.$store.commit('UPDATE_CONTENT_CART')
       this.$store.dispatch('VERIFY_PRODUCTS')
     },
     closeOrder(event) {
@@ -936,16 +936,10 @@ export default {
       if (this.$store.state.productsCart.length != 0) {
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
-          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-            window.fbq('track', 'InitiateCheckout')
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
+          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
-          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-            window.fbq('track', 'InitiateCheckout')
-          }
-          this.$gtm.push({ event: 'InitiateCheckout' })
+          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         }
       }
     },
@@ -1282,6 +1276,7 @@ export default {
             metodo_pago: 7,
             descuento: this.discountDescuentos ? this.discountDescuentos : 0,
           }
+          this.eventFacebookPixel()
           axios
             .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
             .then(() => {
@@ -1296,6 +1291,38 @@ export default {
             })
         }
       })
+    },
+    eventFacebookPixel() {
+      let array = []
+      let content = []
+      this.productsCart.map((element) => {
+        if (element) {
+          array.push(`${element.id}`)
+          let temp = {
+            id: `${element.id}`,
+            quantity: element.cantidad,
+          }
+          content.push(temp)
+        }
+      })
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+        window.fbq('track', 'Purchase', {
+          content_type: 'Product',
+          content_ids: array,
+          contents: content,
+          description: `Comprar finalizada WhatsApp`,
+          value:
+            this.totalCart +
+            (this.shipping ? this.shipping : 0) +
+            (this.shippingTarifaPrecio &&
+            this.shippingTarifaPrecio != 'empty' &&
+            this.FreeShippingCart == false
+              ? this.shippingTarifaPrecio
+              : 0) -
+            this.discountDescuentos,
+          currency: this.dataStore.tienda.moneda,
+        })
+      }
     },
     productsFreeShippingCart() {
       if (this.productsCart) {
