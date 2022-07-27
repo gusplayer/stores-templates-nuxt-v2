@@ -207,7 +207,7 @@ export default {
   },
   mounted() {
     this.$store.state.beforeCombination = []
-    if (this.dataStore.productos.length) {
+    if (this.productsData.length) {
       this.getDataProduct()
     } else {
       this.getDataProductPrev()
@@ -248,7 +248,7 @@ export default {
       return this.$store.state.dataStore
     },
     productsData() {
-      return this.dataStore.productos
+      return this.$store.getters['products/filterProducts']
     },
     existPayments() {
       const mediospago = this.dataStore.medios_pago

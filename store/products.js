@@ -63,9 +63,11 @@ export const getters = {
           getters.allProduct.filter((product) => {
             if (product && product.tags && product.tags.length > 0) {
               return product.tags.filter((itemTag) => {
-                if (itemTag.tag_property_id === state.payloadTag) {
-                  return product
-                }
+                return itemTag.properties.filter((itemTag) => {
+                  if (itemTag.id === state.payloadTag) {
+                    return product
+                  }
+                })
               })
             }
           })

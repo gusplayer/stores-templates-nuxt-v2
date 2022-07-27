@@ -495,29 +495,6 @@ export const mutations = {
     state.listArticulos = value
   },
   SET_DATA(state) {
-    // state.productsData = state.dataStore.productos.sort((a, b) => {
-    //   if (a.nombre < b.nombre) return -1
-    //   if (a.nombre > b.nombre) return 1
-    //   return 0
-    // })
-    // state.productsData.map((product) => {
-    //   if (product.variantes.length) {
-    //     try {
-    //       product.combinaciones = JSON.parse(
-    //         product.variantes[0].combinaciones[0].combinaciones
-    //       )
-    //     } catch (err) {
-    //       // console.warn(product.id)
-    //     }
-    //     if (product.combinaciones.length && product.con_variante > 0) {
-    //       const arrPrices = product.combinaciones.map(
-    //         (combinacion) => combinacion.precio
-    //       )
-    //       product.precio = Math.min(...arrPrices)
-    //     }
-    //   }
-    // })
-    // state.products.fullProducts = state.productsData
     state.products.tags =
       state.dataStore && state.dataStore.tags ? state.dataStore.tags : []
     state.categorias = state.dataStore.categorias

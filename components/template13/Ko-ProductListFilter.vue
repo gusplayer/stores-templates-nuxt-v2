@@ -93,7 +93,7 @@
                 </div>
               </div>
             </el-collapse-item>
-            <!-- <div
+            <div
               v-for="(itemsTags, index) in allTags"
               :key="index"
               v-show="allTags && allTags.length > 0"
@@ -119,7 +119,7 @@
                   </button>
                 </div>
               </el-collapse-item>
-            </div> -->
+            </div>
             <el-collapse-item
               :title="$t('home_fenvio')"
               name="4"
@@ -294,10 +294,10 @@ export default {
   computed: {
     products: {
       get() {
-        return this.dataStore.productos
+        return this.$store.getters['products/filterProducts']
       },
       set(value) {
-        this.dataStore.productos = value
+        this.productsData = value
       },
     },
     categorias() {

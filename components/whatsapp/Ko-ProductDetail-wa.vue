@@ -280,7 +280,7 @@ export default {
   },
   mounted() {
     this.$store.state.beforeCombination = []
-    if (this.dataStore.productos.length) {
+    if (this.fullProducts.length) {
       this.getDataProduct()
     } else {
       this.getDataProductPrev()
@@ -312,6 +312,9 @@ export default {
     }
   },
   computed: {
+    fullProducts() {
+      return this.$store.getters['products/filterProducts']
+    },
     ...mapState([
       'dataStore',
       'stateWapiME',

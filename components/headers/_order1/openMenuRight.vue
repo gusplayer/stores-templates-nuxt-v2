@@ -133,7 +133,7 @@ export default {
   },
   mounted() {
     this.setHoko()
-    if (this.dataStore && this.dataStore.productos.length > 0) {
+    if (this.fullProducts && this.fullProducts.length > 0) {
       this.secciones[1].state = true
     } else {
       this.secciones[1].state = false
@@ -192,6 +192,9 @@ export default {
     }
   },
   computed: {
+    fullProducts() {
+      return this.$store.getters['products/filterProducts']
+    },
     logoImg() {
       return this.$store.state.dataStore.tienda.logo
     },
