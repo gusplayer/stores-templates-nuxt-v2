@@ -252,7 +252,12 @@ export default {
           arrCombinations[0].variantes !== '[object Object]'
         ) {
           this.productVariants = true
-          if (this.product.combinaciones.length > 1) {
+          if (
+            this.product &&
+            this.product.combinaciones &&
+            this.product.combinaciones.length &&
+            this.product.combinaciones.length > 1
+          ) {
             let arrPrice = []
             this.product.combinaciones.find((products) => {
               if (products.precio && products.estado == true) {

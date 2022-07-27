@@ -34,13 +34,16 @@
             ></KoproductCard>
           </div>
         </div>
+        <div
+          v-if="producthoko.total == 0"
+          class="w-full flex justify-center items-center text-center mb-20"
+        >
+          <p>{{ $t('home_msgCatalogo') }}</p>
+        </div>
         <div class="btn-products">
           <nuxt-link to="/productosHoko">
             <button class="btn">Ver todos los productos</button>
           </nuxt-link>
-        </div>
-        <div v-if="producthoko.total == 0" class="content-products-empty">
-          <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
     </div>

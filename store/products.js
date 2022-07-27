@@ -4,8 +4,7 @@ export const state = () => ({
   payload: '',
   payloadTag: '',
   tags: [],
-  fullProducts: {},
-  fullProducts2: {},
+  fullProducts: [],
   options: {
     shouldSort: true,
     threshold: 0.6,
@@ -61,7 +60,7 @@ export const getters = {
             return prev.precio - next.precio
           })
         } else if (state.type[0] === 'tag') {
-          state.fullProducts2.filter((product) => {
+          getters.allProduct.filter((product) => {
             if (product && product.tags && product.tags.length > 0) {
               return product.tags.filter((itemTag) => {
                 if (itemTag.tag_property_id === state.payloadTag) {
