@@ -177,7 +177,7 @@
                 <p class="product-stock">
                   {{ $t('home_mostrar') }}
                   <span class="separator-breadCrumbs">/</span>
-                  {{ dataStore.productos.length }}
+                  {{ fullProducts.length }}
                   <span class="separator-breadCrumbs">/</span>
                 </p>
               </div> -->
@@ -357,10 +357,10 @@ export default {
   computed: {
     products: {
       get() {
-        return this.dataStore.productos
+        return this.$store.getters['products/filterProducts']
       },
       set(value) {
-        this.dataStore.productos = value
+        this.productsData = value
       },
     },
     categorias() {

@@ -56,6 +56,7 @@ export default {
     },
     // filtro mayor o menor numero
     getProductsFilter(value, tag_id) {
+      console.log(value, tag_id)
       let type = this.$store.state.products.type
       let payload = this.$store.state.products.payload
       this.$store.state.products.payloadTag = tag_id ? tag_id : ''

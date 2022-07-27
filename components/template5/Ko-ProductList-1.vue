@@ -122,10 +122,10 @@ export default {
   computed: {
     products: {
       get() {
-        return this.dataStore.productos
+        return this.$store.getters['products/filterProducts']
       },
       set(value) {
-        this.dataStore.productos = value
+        this.productsData = value
       },
     },
     categorias() {

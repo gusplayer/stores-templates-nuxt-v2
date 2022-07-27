@@ -135,7 +135,7 @@ export default {
       return this.dataStore.subcategorias
     },
     product() {
-      return this.dataStore.productos
+      return this.$store.getters['products/filterProducts']
     },
     fullPathServer() {
       return this.$store.state.fullPathServer
