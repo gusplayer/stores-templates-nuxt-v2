@@ -22,9 +22,6 @@ export default {
       import('../../components/template13/Ko-ProductListFilter'),
   },
   mounted() {
-    if (this.dataStore) {
-      this.$store.dispatch('GET_ALL_PRODUCTS', this.dataStore.tienda.id_tienda)
-    }
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)
   },
@@ -42,9 +39,6 @@ export default {
     ]),
     fullProducts() {
       return this.$store.getters['products/filterProducts']
-    },
-    fullProducts2() {
-      return this.$store.state.products.fullProducts2
     },
     allTags() {
       return this.$store.getters['products/filterTags']

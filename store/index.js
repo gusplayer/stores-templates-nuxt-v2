@@ -495,31 +495,31 @@ export const mutations = {
     state.listArticulos = value
   },
   SET_DATA(state) {
-    state.productsData = state.dataStore.productos.sort((a, b) => {
-      if (a.nombre < b.nombre) return -1
-      if (a.nombre > b.nombre) return 1
-      return 0
-    })
-    state.productsData.map((product) => {
-      if (product.variantes.length) {
-        try {
-          product.combinaciones = JSON.parse(
-            product.variantes[0].combinaciones[0].combinaciones
-          )
-        } catch (err) {
-          // console.warn(product.id)
-        }
-        if (product.combinaciones.length && product.con_variante > 0) {
-          const arrPrices = product.combinaciones.map(
-            (combinacion) => combinacion.precio
-          )
-          product.precio = Math.min(...arrPrices)
-        }
-      }
-    })
+    // state.productsData = state.dataStore.productos.sort((a, b) => {
+    //   if (a.nombre < b.nombre) return -1
+    //   if (a.nombre > b.nombre) return 1
+    //   return 0
+    // })
+    // state.productsData.map((product) => {
+    //   if (product.variantes.length) {
+    //     try {
+    //       product.combinaciones = JSON.parse(
+    //         product.variantes[0].combinaciones[0].combinaciones
+    //       )
+    //     } catch (err) {
+    //       // console.warn(product.id)
+    //     }
+    //     if (product.combinaciones.length && product.con_variante > 0) {
+    //       const arrPrices = product.combinaciones.map(
+    //         (combinacion) => combinacion.precio
+    //       )
+    //       product.precio = Math.min(...arrPrices)
+    //     }
+    //   }
+    // })
+    // state.products.fullProducts = state.productsData
     state.products.tags =
       state.dataStore && state.dataStore.tags ? state.dataStore.tags : []
-    state.products.fullProducts = state.productsData
     state.categorias = state.dataStore.categorias
     state.subcategorias = state.dataStore.subcategorias
     state.geolocalizacion = state.dataStore.geolocalizacion
@@ -818,10 +818,11 @@ export const actions = {
   GET_TEMPLATE_STORE({ commit }, value) {
     commit('SET_TEMPLATE_STORE', value)
   },
-  async GET_DATA_TIENDA_BY_ID({ commit }, idTienda) {
+  async GET_DATA_TIENDA_BY_ID({ commit, dispatch }, idTienda) {
     const response = await axios.get(
       `https://templates.komercia.co/api/tienda/${idTienda}`
     )
+    dispatch('GET_ALL_PRODUCTS', idTienda)
     commit('DATA', response.data)
     commit('SET_DATA')
   },
@@ -838,12 +839,31 @@ export const actions = {
       .get(`${state.urlTemplate}/api/productos/${id_tienda}`, state.configAxios)
       .then((response) => {
         if (response && response.data) {
-          state.products.fullProducts2 = response.data.sort(function (
-            prev,
-            next
-          ) {
-            return prev.orden - next.orden
+          state.productsData = response.data.sort((a, b) => {
+            if (a.nombre < b.nombre) return -1
+            if (a.nombre > b.nombre) return 1
+            return 0
           })
+          state.productsData.map((product) => {
+            if (product.variantes.length) {
+              try {
+                product.combinaciones = JSON.parse(
+                  product.variantes[0].combinaciones[0].combinaciones
+                )
+              } catch (err) {
+                // console.warn(product.id)
+              }
+              if (product.combinaciones.length && product.con_variante > 0) {
+                const arrPrices = product.combinaciones.map(
+                  (combinacion) => combinacion.precio
+                )
+                product.precio = Math.min(...arrPrices)
+              }
+            }
+          })
+          state.products.fullProducts = state.productsData
+            ? state.productsData
+            : []
         }
       })
   },
