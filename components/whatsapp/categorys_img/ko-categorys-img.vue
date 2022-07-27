@@ -163,7 +163,7 @@ export default {
       return this.dataStore.subcategorias
     },
     product() {
-      return this.$store.getters['products/filterProducts']
+      return this.$store.getters['products/allProduct']
     },
     stateWapiME() {
       return this.$store.state.stateWapiME

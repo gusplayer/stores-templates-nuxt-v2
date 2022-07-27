@@ -355,7 +355,11 @@ export default {
   },
   mounted() {
     this.$store.state.beforeCombination = []
-    if (this.fullProducts.length) {
+    if (
+      this.productsData &&
+      this.productsData.length &&
+      this.productsData.length > 0
+    ) {
       this.getDataProduct()
     } else {
       this.getDataProductPrev()
@@ -407,9 +411,6 @@ export default {
     }
   },
   computed: {
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
     swiper() {
       return this.$refs.mySwiper.swiper
     },

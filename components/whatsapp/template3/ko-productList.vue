@@ -95,7 +95,7 @@ export default {
         return this.$store.getters['products/filterProducts']
       },
       set(value) {
-        this.productsData = value
+        this.$store.state.products.fullProducts = value
       },
     },
     categorias() {

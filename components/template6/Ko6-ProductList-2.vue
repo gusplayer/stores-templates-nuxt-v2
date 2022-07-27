@@ -160,10 +160,10 @@ export default {
   computed: {
     products: {
       get() {
-        return this.$store.getters['products/filterProducts']
+        return this.$store.getters['products/allProduct']
       },
       set(value) {
-        this.productsData = value
+        this.$store.state.products.fullProducts = value
       },
     },
     categorias() {
