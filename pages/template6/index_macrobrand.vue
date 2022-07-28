@@ -76,7 +76,7 @@ export default {
       return this.$store.state.dataStore
     },
     fullProducts() {
-      return this.$store.getters['products/allProduct']
+      return this.$store.getters['products/filterProducts']
     },
     settingBase() {
       return this.$store.state.settingBase

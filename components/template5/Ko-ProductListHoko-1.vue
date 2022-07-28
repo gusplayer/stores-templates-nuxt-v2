@@ -65,7 +65,6 @@ export default {
   },
   props: {
     dataStore: Object,
-    fullProducts: {},
     settingByTemplate: Object,
   },
   name: 'Ko-ProductListHoko-1',
