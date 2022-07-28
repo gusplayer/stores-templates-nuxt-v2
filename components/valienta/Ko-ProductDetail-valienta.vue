@@ -248,7 +248,7 @@ export default {
       return this.$store.state.dataStore
     },
     productsData() {
-      return this.$store.getters['products/filterProducts']
+      return this.$store.getters['products/allProduct']
     },
     existPayments() {
       const mediospago = this.dataStore.medios_pago

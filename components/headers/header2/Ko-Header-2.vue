@@ -275,7 +275,7 @@ export default {
       return this.dataStore.subcategorias
     },
     product() {
-      return this.$store.getters['products/filterProducts']
+      return this.$store.getters['products/allProduct']
     },
     facebookPixel() {
       return this.$store.state.analytics_tagmanager

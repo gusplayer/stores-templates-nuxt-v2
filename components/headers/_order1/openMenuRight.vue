@@ -193,7 +193,7 @@ export default {
   },
   computed: {
     fullProducts() {
-      return this.$store.getters['products/filterProducts']
+      return this.$store.state.products.fullProducts
     },
     logoImg() {
       return this.$store.state.dataStore.tienda.logo
