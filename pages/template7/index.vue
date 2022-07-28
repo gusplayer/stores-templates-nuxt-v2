@@ -103,7 +103,7 @@ export default {
   computed: {
     ...mapState(['dataStore', 'listArticulos', 'settingByTemplate7']),
     fullProducts() {
-      return this.$store.getters['products/filterProducts']
+      return this.$store.getters['products/allProduct']
     },
     componentsProps() {
       return {

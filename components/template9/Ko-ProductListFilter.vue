@@ -296,12 +296,12 @@
               <div class="pagination-medium">
                 <div
                   class="product_pagination"
-                  v-if="products.length > this.numVistas"
+                  v-if="fullProducts.length > this.numVistas"
                 >
                   <el-pagination
                     background
                     layout="prev, pager, next"
-                    :total="products.length"
+                    :total="fullProducts.length"
                     :page-size="this.numVistas"
                     :current-page.sync="currentPage"
                     class="pagination"
@@ -334,9 +334,6 @@ export default {
   name: 'Ko-ProductList-Filter',
   mounted() {
     this.setOptionShipping()
-    if (this.$store.getters['products/filterProducts']) {
-      this.products = this.$store.getters['products/filterProducts']
-    }
     if (this.$route.query && this.$route.query.category) {
       this.sendCategoryUrlMix(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
@@ -373,14 +370,6 @@ export default {
     }
   },
   computed: {
-    products: {
-      get() {
-        return this.$store.getters['products/allProduct']
-      },
-      set(value) {
-        this.$store.state.products.fullProducts = value
-      },
-    },
     categorias() {
       return this.dataStore.categorias
     },
@@ -397,7 +386,7 @@ export default {
     filterProduct() {
       const initial = this.currentPage * 18 - 18
       const final = initial + 18
-      return this.products.slice(initial, final)
+      return this.fullProducts.slice(initial, final)
     },
     selectedCategory() {
       return this.$store.state.products.payload
@@ -568,9 +557,6 @@ export default {
     },
   },
   watch: {
-    fullProducts(value) {
-      this.products = value
-    },
     search(value) {
       this.SearchProduct(value)
     },

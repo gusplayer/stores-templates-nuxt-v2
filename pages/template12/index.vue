@@ -42,7 +42,7 @@ export default {
   computed: {
     ...mapState(['dataStore', 'settingByTemplate12']),
     fullProducts() {
-      return this.$store.getters['products/filterProducts']
+      return this.$store.getters['products/allProduct']
     },
     componentsProps() {
       return {

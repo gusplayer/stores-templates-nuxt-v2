@@ -37,7 +37,7 @@ export default {
       'template',
     ]),
     fullProducts() {
-      return this.$store.getters['products/filterProducts']
+      return this.$store.getters['products/allProduct']
     },
     indexTemplate() {
       let productListComponent = ''

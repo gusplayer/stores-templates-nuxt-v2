@@ -38,11 +38,11 @@
             <p>{{ $t('home_msgCatalogo') }}</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 16">
+            <div class="product_pagination" v-if="fullProducts.length > 16">
               <el-pagination
                 background
                 layout="prev, pager, next"
-                :total="products.length"
+                :total="fullProducts.length"
                 :page-size="16"
                 :current-page.sync="currentPage"
                 class="pagination"
@@ -50,12 +50,12 @@
             </div>
           </div>
           <div class="pagination-small">
-            <div class="product_pagination" v-if="products.length > 16">
+            <div class="product_pagination" v-if="fullProducts.length > 16">
               <el-pagination
                 background
                 small
                 layout="prev, pager, next"
-                :total="products.length"
+                :total="fullProducts.length"
                 :page-size="16"
                 :current-page.sync="currentPage"
                 class="pagination"
@@ -82,9 +82,6 @@ export default {
   mixins: [filterProducts],
   name: 'Ko-ProductList-1',
   mounted() {
-    if (this.$store.getters['products/filterProducts']) {
-      this.products = this.$store.getters['products/filterProducts']
-    }
     if (this.$route.query && this.$route.query.category) {
       this.sendCategoryUrlMix(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
@@ -120,14 +117,6 @@ export default {
     }
   },
   computed: {
-    products: {
-      get() {
-        return this.$store.getters['products/allProduct']
-      },
-      set(value) {
-        this.$store.state.products.fullProducts = value
-      },
-    },
     categorias() {
       return this.dataStore.categorias
     },
@@ -144,7 +133,7 @@ export default {
     filterProduct() {
       const initial = this.currentPage * 16 - 16
       const final = initial + 16
-      return this.products.slice(initial, final)
+      return this.fullProducts.slice(initial, final)
     },
     selectedCategory() {
       return this.$store.state.products.payload
@@ -247,9 +236,6 @@ export default {
   watch: {
     searchValue(value) {
       this.SearchProduct2(value)
-    },
-    fullProducts(value) {
-      this.products = value
     },
     currentPage() {
       this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
