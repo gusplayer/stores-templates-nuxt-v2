@@ -20,7 +20,6 @@
     <KProductFavoritos v-if="this.stateBanner" />
     <KProductListHoko
       :dataStore="dataStore"
-      :fullProducts="fullProducts"
       id="KProductX"
       v-if="dataHoko && dataHoko.statehoko == 1 && this.stateBanner"
     />
@@ -28,7 +27,6 @@
       :dataStore="dataStore"
       :fullProducts="fullProducts"
       id="KProductX"
-      v-if="this.fullProducts.length > 0"
     />
     <kBannerFooter id="KFooterX" />
     <KNewsletter :dataStore="dataStore" />
@@ -65,7 +63,7 @@ export default {
       'dataHoko',
     ]),
     fullProducts() {
-      return this.$store.getters['products/allProduct']
+      return this.$store.getters['products/filterProducts']
     },
   },
   beforeDestroy() {
