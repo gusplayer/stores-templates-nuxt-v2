@@ -2,6 +2,7 @@ export default {
   methods: {
     // filtro categoria
     sendCategoryUrlMix(value) {
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       let urlFiltrada = decodeURIComponent(value)
       this.$store.commit('products/FILTER_BY', {
         type: ['category'],
@@ -55,16 +56,50 @@ export default {
       }
     },
     // filtro mayor o menor numero
-    getProductsFilter(value, tag_id) {
+    getProductsFilter(value, tag_id, tag_Name) {
       let type = this.$store.state.products.type
       let payload = this.$store.state.products.payload
-      this.$store.state.products.payloadTag = tag_id ? tag_id : ''
+      if (type.length < 2) {
+        this.$store.state.products.payloadTag = tag_id
+          ? tag_id
+          : this.$store.state.products.payloadTag
+          ? this.$store.state.products.payloadTag
+          : ''
+
+        this.$store.state.products.payloadTagName = tag_Name
+          ? tag_Name
+          : this.$store.state.products.payloadTagName
+          ? this.$store.state.products.payloadTagName
+          : ''
+      }
       if (type && type.length >= 1) {
-        if (type[0] == 'category' || type[0] == 'subcategory') {
+        if (
+          type[0] == 'category' ||
+          type[0] == 'subcategory' ||
+          type[0] == 'tag'
+        ) {
           this.$store.commit('products/FILTER_BY', {
             type: [type[0], `${value}`],
             data: payload,
           })
+        }
+        if (type[0] == 'category' || type[0] == 'subcategory') {
+          if (type[1] == 'tag') {
+            this.$store.commit('products/FILTER_BY', {
+              type: [type[0], type[1], `${value}`],
+              data: payload,
+            })
+            this.$store.state.products.payloadTag2 = tag_id
+              ? tag_id
+              : this.$store.state.products.payloadTag2
+              ? this.$store.state.products.payloadTag2
+              : ''
+            this.$store.state.products.payloadTag2Name = tag_Name
+              ? tag_Name
+              : this.$store.state.products.payloadTag2Name
+              ? this.$store.state.products.payloadTag2Name
+              : ''
+          }
         } else {
           this.$store.state.products.type = []
           this.$store.commit('products/FILTER_BY', {
