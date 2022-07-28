@@ -100,7 +100,6 @@
           >
             <Flechadown-icon class="btn-scroll-icon" />
           </div>
-
           <div
             class="item-tittle"
             v-if="showSubCategory && selectedSubcategories.length"
@@ -145,6 +144,40 @@
             v-if="this.selectedSubcategories.length > 7"
           >
             <Flechadown-icon class="btn-scroll-icon" />
+          </div>
+        </div>
+        <div
+          v-for="(itemsTags, index) in allTags"
+          :key="index"
+          v-show="allTags && allTags.length > 0"
+        >
+          <div
+            v-if="
+              itemsTags &&
+              itemsTags.status === 1 &&
+              itemsTags.properties.length > 0
+            "
+          >
+            <div class="txt-tittles">
+              {{ itemsTags.name }}
+            </div>
+            <div class="categorys-list">
+              <button
+                class="txt-categorys"
+                v-for="itemsProperties in itemsTags.properties"
+                :key="itemsProperties.id"
+                v-show="itemsProperties.status === 1"
+                @click="
+                  getProductsFilter(
+                    'tag',
+                    itemsProperties.id,
+                    itemsProperties.name
+                  )
+                "
+              >
+                {{ itemsProperties.name }}
+              </button>
+            </div>
           </div>
         </div>
         <div class="content-category-left" v-if="stateShipping == false">
@@ -198,31 +231,72 @@
                 <p class="text-categorias" id="homeCate07" @click="clear">
                   {{ $t('home_catalogo') }}
                 </p>
-                <span
-                  v-if="this.nameCategoryHeader"
-                  class="separator-breadCrumbs"
-                  >/
-                </span>
-                <p
-                  class="text-categorias-select"
-                  v-if="this.nameCategoryHeader"
-                  @click="breadcrumbsSendCategory(nameCategoryHeader)"
-                  id="stateCate07"
+                <div
+                  class="flex flex-row justify-center"
+                  v-if="
+                    this.etiqueta1 &&
+                    this.nameCategoryHeader == '' &&
+                    this.nameSubCategoryHeader == ''
+                  "
                 >
-                  {{ this.nameCategoryHeader }}
-                </p>
-                <span
-                  v-if="this.nameSubCategoryHeader"
-                  class="separator-breadCrumbs"
-                  >/
-                </span>
-                <p
-                  class="text-categorias-select"
-                  v-if="this.nameSubCategoryHeader"
-                  id="stateSubCate"
-                >
-                  {{ this.nameSubCategoryHeader }}
-                </p>
+                  <span v-if="this.etiqueta1" class="separator-breadCrumbs"
+                    >/
+                  </span>
+                  <p
+                    class="text-categorias-select"
+                    v-if="this.etiqueta1"
+                    id="stateCate07"
+                  >
+                    {{ this.etiqueta1 }}
+                  </p>
+                </div>
+                <div v-else class="flex flex-row justify-center">
+                  <span
+                    v-if="this.nameCategoryHeader"
+                    class="separator-breadCrumbs"
+                    >/
+                  </span>
+                  <p
+                    class="text-categorias-select"
+                    v-if="this.nameCategoryHeader"
+                    @click="breadcrumbsSendCategory(nameCategoryHeader)"
+                    id="stateCate07"
+                  >
+                    {{ this.nameCategoryHeader }}
+                  </p>
+                  <span
+                    v-if="this.nameSubCategoryHeader"
+                    class="separator-breadCrumbs"
+                    >/
+                  </span>
+                  <p
+                    class="text-categorias-select"
+                    v-if="this.nameSubCategoryHeader"
+                    id="stateSubCate"
+                  >
+                    {{ this.nameSubCategoryHeader }}
+                  </p>
+                  <span v-if="this.etiqueta1" class="separator-breadCrumbs"
+                    >/
+                  </span>
+                  <p
+                    class="text-categorias-select"
+                    v-if="this.etiqueta1"
+                    id="stateSubCate"
+                  >
+                    {{ this.etiqueta1 }}
+                  </p>
+                  <span v-if="this.etiqueta2" class="separator-breadCrumbs"
+                    >/
+                  </span>
+                  <p
+                    class="text-categorias-select"
+                    v-if="this.etiqueta2"
+                    id="stateSubCate"
+                  >
+                    {{ this.etiqueta2 }}
+                  </p>
+                </div>
               </div>
               <div class="items-end">
                 <div class="show-view-per-list">
@@ -417,6 +491,7 @@ export default {
     dataStore: Object,
     fullProducts: {},
     settingByTemplate7: Array,
+    allTags: Array,
   },
   mixins: [filterProducts],
   name: 'Ko7-ProductList-Filter',
@@ -502,6 +577,12 @@ export default {
     },
     previousPage() {
       return this.$store.state.previousPage
+    },
+    etiqueta1() {
+      return this.$store.state.products.payloadTagName
+    },
+    etiqueta2() {
+      return this.$store.state.products.payloadTag2Name
     },
   },
   methods: {
@@ -597,6 +678,8 @@ export default {
       this.currentPage = 1
     },
     SendSubCategory(value) {
+      this.$store.commit('products/SET_PAYLOAD_TAG', '')
+      this.$store.commit('products/SET_PAYLOAD_TAG2', '')
       this.stateSub = false
       var stateCategory = document.getElementById('stateCate07')
       if (this.stateSub == false && stateCategory) {
@@ -643,8 +726,11 @@ export default {
         stateCategory.style.fontWeight = '600'
       }
       this.nameCategory = value.nombre_categoria_producto
+      this.nameSubCategory = ''
       this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
+      this.$store.commit('products/SET_PAYLOAD_TAG', '')
+      this.$store.commit('products/SET_PAYLOAD_TAG2', '')
       this.$router.push({
         path: '',
         query: { category: this.nameCategory },

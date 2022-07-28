@@ -13,6 +13,8 @@ export default {
     header_blog: 'Blog',
     header_menu: 'Menú',
     header_buscar_producto: 'Buscar producto',
+    header_buscar_producto: 'Buscar producto',
+    header_buscar_limpiar: 'Limpiar Filtros',
     //footer
     footer_inicio: 'Inicio',
     footer_carrito: 'Carrito',
@@ -23,14 +25,14 @@ export default {
     footer_condicionesLegales: 'Condiciones legales',
     footer_politicaCambio: 'Política de cambio',
     footer_politicaTratamientos: 'Políticas de tratamiento de datos',
-    footer_politicaDevoluciones: 'Politica de devoluciones / retracto',
-    footer_politicaGarantia: 'Politica de garantia',
-    footer_politicaEnvios: 'Politica de envios',
-    footer_politicaPagos: 'Politica de pagos',
+    footer_politicaDevoluciones: 'Política de devoluciones / retracto',
+    footer_politicaGarantia: 'Política de garantía',
+    footer_politicaEnvios: 'Política de envíos',
+    footer_politicaPagos: 'Política de pagos',
     footer_secciones: 'Secciones',
     footer_siguenos: 'Síguenos',
     footer_suscribete: 'Suscríbete',
-    footer_suscribete2: 'Suscríbite a nuestras promociones',
+    footer_suscribete2: 'Suscríbete a nuestras promociones',
     footer_msg:
       'Registra tu correo para recibir información sobre promociones y nuevos productos.',
     footer_checkbox:
@@ -46,7 +48,7 @@ export default {
     footer_tarifaPlana: 'Tarifa plana:',
     footer_Porprecio: 'Tarifa por precio:',
     footer_tarifaPrecio: 'Envío gratis',
-    footer_enviosPorPagar: 'Envios por pagar',
+    footer_enviosPorPagar: 'Envíos por pagar',
     footer_encioNoconfig: 'Envío no configurado',
     footer_encioGratis: 'Envío gratis en toda la tienda',
     footer_totalPagar: 'Total a pagar',
@@ -108,7 +110,7 @@ export default {
     footer_pedidoWhatsapp: 'Pedido por WhatsApp',
     footer_noTieneWhatsapp:
       ' La tienda no tiene configurado un número de WhatsApp',
-    footer_categorias: 'Categorias',
+    footer_categorias: 'Categorías',
     footer_blog: 'Blog',
     // Micompra
     mcompra_title: 'Seguimiento de tu compra',
@@ -156,7 +158,7 @@ export default {
     mcompra_pSafetyPat: 'SafetyPay (Banca internacional)',
     mcompra_pContraEntrega: 'Pago Contra-Entrega',
     mcompra_pmercadoPago: 'Mercadopago',
-    mcompra_pTarjetaCreditoM: 'Tarjeta de Credito',
+    mcompra_pTarjetaCreditoM: 'Tarjeta de Crédito',
     mcompra_pEfectivo: 'Efectivo',
     mcompra_pPayuCuentaAhorros: 'PSE - Cuenta de Ahorros y corriente',
     mcompra_pPMercadoCuentaAhorros: 'PSE - Cuenta de Ahorros y corriente',
@@ -182,7 +184,7 @@ export default {
     // Contact
     contact_title: 'Contáctanos',
     contact_subtitle:
-      'Siempre estamos atentos a escuchar nuestros clientes, por favor cuentanos tus opiniones y dudas.',
+      'Siempre estamos atentos a escuchar nuestros clientes, por favor cuéntanos tus opiniones y dudas.',
     contact_vistaTienda: 'Visita nuestra tienda',
     contact_horarioAtencion: 'Horario de atención:',
     contact_comollegar: '¿Cómo llegar?',
@@ -223,7 +225,7 @@ export default {
     home_filtrarpor: 'Filtrar por ',
     home_preciofilt: 'Precio',
     home_filtrar: 'Filtrar',
-    home_subcategory: 'Subcategoria',
+    home_subcategory: 'Subcategoría',
     home_mostrar: 'Mostrar: ',
     home_by: 'Por',
     home_continuar_leyendo: 'Continuar leyendo',
@@ -239,7 +241,7 @@ export default {
     home_email: 'Email',
     home_mensaje: 'Mensaje',
     home_telefono: 'Teléfono',
-    home_valorEnvio: 'Valor de envio',
+    home_valorEnvio: 'Valor de envió',
     home_tuCarrito: 'Tu carrito',
     home_pdescuento: 'Producto Con descuento',
     home_fprecio: 'Filtro por precio',
@@ -248,7 +250,6 @@ export default {
     home_fenvio: 'Costo de envío',
     home_gratis: 'Envío gratis',
     home_Singratis: 'Sin envío gratis',
-
     //productdetail
     productdetail_Back: 'Volver al inicio',
     productdetail_name: 'Detalle de producto',
@@ -329,6 +330,7 @@ export default {
     header_tiendaWa: 'WhatsApp Store',
     header_blog: 'Blog',
     header_buscar_producto: 'Search product',
+    header_buscar_limpiar: 'Clear Search Filters',
     //footer
     footer_inicio: 'Home',
     footer_carrito: 'Cart',
@@ -640,6 +642,7 @@ export default {
     header_tiendaWa: 'WhatsApp Store',
     header_blog: 'Blog',
     header_buscar_producto: 'Pesquisar produto',
+    header_buscar_limpiar: 'Limpar filtros de busca',
     //footer
     footer_inicio: 'Home',
     footer_carrito: 'Carroça',
@@ -953,6 +956,8 @@ export default {
     header_allProduct: 'Tous les produits',
     header_tiendaWa: 'Boutique WhatsApp',
     header_blog: 'Blog',
+    header_buscar_producto: 'Recherche de produits',
+    header_buscar_limpiar: 'Effacer les filtres de recherche',
     //footer
     footer_inicio: 'Accueil',
     footer_carrito: 'Panier',

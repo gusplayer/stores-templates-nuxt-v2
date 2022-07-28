@@ -29,7 +29,7 @@
         <div class="content-left">
           <nuxt-link class="content-home" to="/productos">
             <p class="txt-content-home" @click="clear">
-              {{ $t('header_inicio') }}
+              {{ $t('header_buscar_limpiar') }}
             </p>
           </nuxt-link>
           <el-collapse v-model="activeNames" @change="handleChange">
@@ -115,6 +115,39 @@
                 </div>
               </div>
             </el-collapse-item>
+            <div
+              v-for="(itemsTags, index) in allTags"
+              :key="index"
+              v-show="allTags && allTags.length > 0"
+            >
+              <el-collapse-item
+                :title="itemsTags.name"
+                :name="6 + index"
+                v-if="
+                  itemsTags &&
+                  itemsTags.status === 1 &&
+                  itemsTags.properties.length > 0
+                "
+              >
+                <div class="categorys-list">
+                  <button
+                    class="txt-Filter"
+                    v-for="itemsProperties in itemsTags.properties"
+                    :key="itemsProperties.id"
+                    v-show="itemsProperties.status === 1"
+                    @click="
+                      getProductsFilter(
+                        'tag',
+                        itemsProperties.id,
+                        itemsProperties.name
+                      )
+                    "
+                  >
+                    {{ itemsProperties.name }}
+                  </button>
+                </div>
+              </el-collapse-item>
+            </div>
             <el-collapse-item
               :title="$t('home_fenvio')"
               name="4"
@@ -165,9 +198,41 @@
               <p class="btn-tittle-shop" v-if="!this.nameCategoryHeader">
                 {{ $t('header_productos') }}
               </p>
-              <p class="btn-tittle-shop" v-else>
-                {{ this.nameCategoryHeader }}
-              </p>
+              <div class="flex flex-col justify-start" v-else>
+                <p class="btn-tittle-shop">
+                  {{ this.nameCategoryHeader }}
+                </p>
+                <!-- v-if="selectSubcategory" -->
+                <div class="flex flex-row">
+                  <p class="text-12 mr-4" v-if="this.nameSubCategoryHeader">
+                    {{ this.nameSubCategoryHeader }}
+                  </p>
+                  <p
+                    class="text-12 mr-4"
+                    v-if="this.nameSubCategoryHeader && this.etiqueta1"
+                  >
+                    /
+                  </p>
+                  <p class="text-12" v-if="this.etiqueta1">
+                    {{ this.etiqueta1 }}
+                  </p>
+                  <p class="ml-4 text-12" v-if="this.etiqueta2">
+                    / {{ this.etiqueta2 }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex flex-col justify-start"
+                v-if="
+                  this.etiqueta1 &&
+                  this.nameCategoryHeader == '' &&
+                  this.nameSubCategoryHeader == ''
+                "
+              >
+                <p class="text-12" v-if="this.etiqueta1">
+                  {{ this.etiqueta1 }}
+                </p>
+              </div>
             </div>
           </div>
           <div class="top-content">
@@ -301,6 +366,7 @@ export default {
     dataStore: Object,
     fullProducts: {},
     settingByTemplate10: Array,
+    allTags: Array,
   },
   mixins: [filterProducts],
   name: 'Ko-ProductList-Filter',
@@ -388,6 +454,12 @@ export default {
     previousPage() {
       return this.$store.state.previousPage
     },
+    etiqueta1() {
+      return this.$store.state.products.payloadTagName
+    },
+    etiqueta2() {
+      return this.$store.state.products.payloadTag2Name
+    },
   },
   methods: {
     setOptionShipping() {
@@ -451,6 +523,8 @@ export default {
       }
     },
     SendSubCategory(value) {
+      this.$store.commit('products/SET_PAYLOAD_TAG', '')
+      this.$store.commit('products/SET_PAYLOAD_TAG2', '')
       this.stateSub = false
       this.indexSelect2 = value
       this.selectSubcategory = value
@@ -482,8 +556,11 @@ export default {
       this.indexSelect = categoria
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto
+      this.nameSubCategory = ''
       this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
+      this.$store.commit('products/SET_PAYLOAD_TAG', '')
+      this.$store.commit('products/SET_PAYLOAD_TAG2', '')
       this.$router.push({
         path: '',
         query: { category: this.nameCategory },
