@@ -39,11 +39,11 @@
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
         <br />
-        <div class="pagination-medium" v-if="products.length > 16">
+        <div class="pagination-medium" v-if="fullProducts.length > 16">
           <el-pagination
             background
             layout="prev, pager, next"
-            :total="products.length"
+            :total="fullProducts.length"
             :page-size="16"
             :current-page.sync="currentPage"
           ></el-pagination>
@@ -65,9 +65,6 @@ export default {
   },
   name: 'Ko-ProductList-valienta',
   mounted() {
-    if (this.$store.getters['products/filterProducts']) {
-      this.products = this.$store.getters['products/filterProducts']
-    }
     if (this.previousPage) {
       this.currentPage = this.previousPage
     }
@@ -79,14 +76,6 @@ export default {
     }
   },
   computed: {
-    products: {
-      get() {
-        return this.$store.getters['products/allProduct']
-      },
-      set(value) {
-        this.$store.state.products.fullProducts = value
-      },
-    },
     categorias() {
       return this.dataStore.categorias
     },
@@ -103,7 +92,7 @@ export default {
     filterProduct() {
       const initial = this.currentPage * 16 - 16
       const final = initial + 16
-      return this.products.slice(initial, final)
+      return this.fullProducts.slice(initial, final)
     },
     selectedCategory() {
       return this.$store.state.products.payload
@@ -173,9 +162,6 @@ export default {
     },
   },
   watch: {
-    fullProducts(value) {
-      this.products = value
-    },
     search(value) {
       this.SearchProduct(value)
     },

@@ -79,11 +79,11 @@
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="products.length > 24">
+            <div class="product_pagination" v-if="fullProducts.length > 24">
               <el-pagination
                 background
                 layout="prev, pager, next"
-                :total="products.length"
+                :total="fullProducts.length"
                 :page-size="24"
                 :current-page.sync="currentPage"
                 class="pagination"
@@ -113,10 +113,6 @@ export default {
   mixins: [filterProducts],
   name: 'Ko-ProductList-1',
   mounted() {
-    // this.$store.commit('products/SET_FILTER', this.$route.query)
-    if (this.$store.getters['products/filterProducts']) {
-      this.products = this.$store.getters['products/filterProducts']
-    }
     if (this.$route.query && this.$route.query.category) {
       this.sendCategoryUrlMix(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
@@ -162,14 +158,6 @@ export default {
     }
   },
   computed: {
-    products: {
-      get() {
-        return this.$store.getters['products/allProduct']
-      },
-      set(value) {
-        this.$store.state.products.fullProducts = value
-      },
-    },
     categorias() {
       return this.dataStore.categorias
     },
@@ -186,7 +174,7 @@ export default {
     filterProduct() {
       const initial = this.currentPage * 24 - 24
       const final = initial + 24
-      return this.products.slice(initial, final)
+      return this.fullProducts.slice(initial, final)
     },
     selectedCategory() {
       return this.$store.state.products.payload
@@ -290,9 +278,6 @@ export default {
     },
   },
   watch: {
-    fullProducts(value) {
-      this.products = value
-    },
     search(value) {
       this.SearchProduct2(value)
     },

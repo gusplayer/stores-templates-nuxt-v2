@@ -62,7 +62,7 @@ export default {
       return this.$store.state.dataStore
     },
     fullProducts() {
-      return this.$store.getters['products/filterProducts']
+      return this.$store.getters['products/allProduct']
     },
     facebookPixel() {
       return this.$store.state.analytics_tagmanager

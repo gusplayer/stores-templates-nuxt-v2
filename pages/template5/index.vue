@@ -65,7 +65,7 @@ export default {
       'dataHoko',
     ]),
     fullProducts() {
-      return this.$store.getters['products/filterProducts']
+      return this.$store.getters['products/allProduct']
     },
   },
   beforeDestroy() {
