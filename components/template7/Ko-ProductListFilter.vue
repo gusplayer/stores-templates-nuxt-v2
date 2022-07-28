@@ -388,7 +388,7 @@
                     <el-pagination
                       background
                       layout="prev, pager, next"
-                      :total="fullProductsfullProducts.length"
+                      :total="fullProducts.length"
                       :page-size="this.numVistas"
                       :current-page.sync="currentPage"
                       class="pagination"
