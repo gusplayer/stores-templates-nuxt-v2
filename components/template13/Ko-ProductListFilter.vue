@@ -120,6 +120,13 @@
                         itemsProperties.name
                       )
                     "
+                    :class="
+                      itemsProperties.name == etiqueta1
+                        ? 'txt-categorys-active'
+                        : '' || itemsProperties.name == etiqueta2
+                        ? 'txt-categorys-active'
+                        : ''
+                    "
                   >
                     {{ itemsProperties.name }}
                   </button>
