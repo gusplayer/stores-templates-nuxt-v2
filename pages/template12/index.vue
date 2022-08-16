@@ -41,13 +41,9 @@ export default {
   },
   computed: {
     ...mapState(['dataStore', 'settingByTemplate12']),
-    fullProducts() {
-      return this.$store.getters['products/allProduct']
-    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
         settingByTemplate12: this.settingByTemplate12
           ? this.settingByTemplate12
           : null,
