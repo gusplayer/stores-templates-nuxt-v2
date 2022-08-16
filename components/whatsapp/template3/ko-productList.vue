@@ -72,7 +72,11 @@ export default {
     if (this.$route.query && this.$route.query.category) {
       this.sendCategoryUrlMix(this.$route.query.category)
     } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendSubCategoryUrlMix(this.$route.query.subcategory)
+      this.SendSubCategoryUrlMix(
+        this.$route.query.subcategory,
+        this.categorias,
+        this.subcategories
+      )
     } else {
       this.allCategories()
     }

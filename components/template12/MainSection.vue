@@ -122,7 +122,6 @@ import ProductDetail from './productDetail.vue'
 export default {
   name: 'ISection',
   mixins: [settingsProps],
-  props: { fullProducts: Array },
   components: {
     ProductCard,
     ProductDetail,
@@ -137,6 +136,9 @@ export default {
     }
   },
   computed: {
+    fullProducts() {
+      return this.$store.getters['products/allProduct']
+    },
     searchValue() {
       return this.$store.state.searchValue
     },
