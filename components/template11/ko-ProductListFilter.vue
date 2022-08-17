@@ -664,6 +664,7 @@ export default {
 .input-slide {
   font-family: var(--font-style-1) !important;
   @apply w-full h-30 cursor-pointer border-none;
+  background: transparent;
   /* border-bottom: 2px solid #2c2930; */
 }
 .txt-tittles {

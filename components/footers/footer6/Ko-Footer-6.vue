@@ -102,34 +102,44 @@
           </div>
         </div>
         <div class="footer-acordion-bttns">
-          <button class="accordion">Nuestras redes</button>
-          <div class="panel">
-            <KoSocialNet
-              :dataStore="dataStore"
-              :setting10Footer="this.settingByTemplate10[0].setting10Footer"
-              :setting10General="this.settingByTemplate10[0].setting10General"
-            />
-          </div>
-          <button class="accordion">Enlaces</button>
-          <div class="panel">
-            <div
-              v-for="(item, index) in secciones"
-              :key="`${index}${item.name}`"
-            >
-              <nuxt-link :to="item.path" v-if="item.path" class="btn pb-5">
-                <p class="txt-btns">
-                  {{ $t(`${item.name}`) }}
-                </p>
-              </nuxt-link>
-              <nuxt-link
-                :to="item.href"
-                v-else-if="item.href && listArticulos > 0"
-                class="btn pb-5"
-              >
-                <p class="txt-btns">
-                  {{ $t(`${item.name}`) }}
-                </p>
-              </nuxt-link>
+          <div class="tabs">
+            <div class="tab">
+              <input type="checkbox" id="chck1" />
+              <label class="tab-label" for="chck1">Nuestras redes</label>
+              <div class="tab-content">
+                <KoSocialNet
+                  :dataStore="dataStore"
+                  :setting10Footer="this.settingByTemplate10[0].setting10Footer"
+                  :setting10General="
+                    this.settingByTemplate10[0].setting10General
+                  "
+                />
+              </div>
+            </div>
+            <div class="tab">
+              <input type="checkbox" id="chck2" />
+              <label class="tab-label" for="chck2">Enlaces</label>
+              <div class="tab-content">
+                <div
+                  v-for="(item, index) in secciones"
+                  :key="`${index}${item.name}`"
+                >
+                  <nuxt-link :to="item.path" v-if="item.path" class="btn pb-5">
+                    <p class="txt-btns">
+                      {{ $t(`${item.name}`) }}
+                    </p>
+                  </nuxt-link>
+                  <nuxt-link
+                    :to="item.href"
+                    v-else-if="item.href && listArticulos > 0"
+                    class="btn pb-5"
+                  >
+                    <p class="txt-btns">
+                      {{ $t(`${item.name}`) }}
+                    </p>
+                  </nuxt-link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -325,29 +335,6 @@ export default {
   color: var(--hover_text);
   @apply transition-all ease-in duration-0.2;
 }
-.accordion {
-  color: #222;
-  transition: 0.4s;
-  font-family: var(--font-style-1) !important;
-  @apply w-full text-left mb-0 border-none outline-none cursor-pointer;
-}
-.accordion:after {
-  content: '\276F';
-  color: #000;
-  font-weight: bold;
-  float: right;
-  /* margin-left: 5px; */
-  @apply transition-all ease-in duration-0.2;
-}
-.active:after {
-  transform: rotate(90deg);
-  @apply transition-all ease-in duration-0.2;
-}
-.panel {
-  background-color: #fff;
-  transition: 0.4s ease-out;
-  @apply w-full max-h-0 justify-start items-center mt-10 mb-10 overflow-hidden;
-}
 .content-Pliticas-Terminos {
   @apply w-auto flex flex-col justify-start items-center;
 }
@@ -365,6 +352,55 @@ export default {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
   @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+}
+input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.tabs {
+  width: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+.tab {
+  width: 100%;
+  color: rgb(0, 0, 0);
+  overflow: hidden;
+}
+.tab-label {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+.tab-label::after {
+  text-align: center;
+  transition: all 0.35s;
+  content: '\02795';
+  color: var(--color_icon);
+}
+.tab-content {
+  max-height: 0;
+  color: #000000;
+  transition: all 0.35s;
+}
+.tab-close {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em;
+  font-size: 0.75em;
+  cursor: pointer;
+}
+input:checked + .tab-label::after {
+  transition: all 0.35s;
+  content: '\2796';
+  color: var(--color_icon);
+}
+input:checked ~ .tab-content {
+  max-height: 100vh;
 }
 @screen sm {
   .img-logo {
@@ -389,10 +425,6 @@ export default {
   .footer-content-newsLetters {
     @apply w-full flex flex-col justify-start items-center;
   }
-  .accordion {
-    font-size: 15px;
-    @apply font-semibold;
-  }
   .txt-direction,
   .txt-number,
   .txt-email {
@@ -416,7 +448,7 @@ export default {
 @screen md {
   .container-txt,
   .container-opt {
-    @apply w-full grid grid-cols-2 gap-4 justify-start items-center;
+    @apply w-full grid grid-cols-2 gap-4 justify-start items-start;
   }
   .container-txt {
     @apply mt-20;
