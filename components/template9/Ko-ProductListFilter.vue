@@ -770,6 +770,8 @@ export default {
   transition: all 0.25s ease;
   font-family: var(--font-style-1);
   cursor: pointer;
+  background: transparent;
+  border-bottom: 1px solid var(--color_icon);
 }
 .content-left >>> .el-collapse-item__header.is-active {
   border-bottom: none;
@@ -782,6 +784,7 @@ export default {
   font-family: var(--font-style-1) !important;
   @apply w-full cursor-pointer border-none;
   height: 30px;
+  background: transparent;
   /* border-bottom: 2px solid #2c2930; */
 }
 .txt-tittles {

@@ -893,7 +893,7 @@ export default {
   color: var(--hover_text);
 }
 .product-content {
-  @apply flex flex-col justify-center items-center w-full mb-80;
+  @apply flex flex-col justify-center items-center w-full pb-80;
   background: var(--background_color_2);
 }
 .content-banner-shop {
@@ -1160,7 +1160,7 @@ export default {
   @apply flex flex-col justify-center items-center w-full;
 }
 .product-content-items {
-  @apply flex flex-col justify-start items-start text-center  w-full;
+  @apply flex flex-col justify-start items-start text-center w-full;
 }
 .product-tittle,
 .product-subtittle,
