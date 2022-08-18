@@ -535,7 +535,9 @@ export default {
         this.fechaState = result[0]
         this.horaState = result[1]
       }
-      this.mensajeWa = JSON.parse(this.orden.venta.comentario)
+      if (this.orden.usuario === 30866) {
+        this.mensajeWa = JSON.parse(this.orden.venta.comentario)
+      }
       if (this.orden.venta.transportadora !== null) {
         this.dataTransporter = JSON.parse(this.orden.venta.transportadora)
       }
