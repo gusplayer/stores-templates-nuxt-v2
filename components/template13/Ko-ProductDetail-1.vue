@@ -1098,6 +1098,8 @@ export default {
 .photo_main {
   width: 100%;
   height: 100%;
+  max-width: 650px;
+  max-height: 600px;
   object-fit: contain;
   object-position: center;
   border-radius: 10px;
