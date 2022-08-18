@@ -536,7 +536,7 @@ export default {
   },
   methods: {
     shippingAddress() {
-      if (this.orden && this.orden.mensajes.length > 0) {
+      if (this.orden && this.orden.usuario === 30866) {
         this.mensajeWa = JSON.parse(this.orden.mensajes[0].mensaje)
       }
       if (this.cities && this.direccion_entrega) {
