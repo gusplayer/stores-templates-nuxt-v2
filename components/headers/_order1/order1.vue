@@ -564,9 +564,10 @@
                   id="ContactName"
                   onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
-                <span class="text-error" v-show="errors[0]">
+                <span class="text-error" v-if="errors[0]">
                   {{ errors[0] }}
                 </span>
+                <div v-else style="margin-bottom: 18px"></div>
               </template>
             </validation-provider>
 
@@ -586,9 +587,10 @@
                   id="ContactId"
                   onkeypress="return ((event.charCode>47 && event.charCode<58))"
                 />
-                <span class="text-error" v-show="errors[0]">
+                <span class="text-error" v-if="errors[0]">
                   {{ errors[0] }}
                 </span>
+                <div v-else style="margin-bottom: 18px"></div>
               </template>
             </validation-provider>
 
@@ -605,9 +607,10 @@
                   :placeholder="$t('footer_formCorreoMgs')"
                   id="ContactEmail"
                 />
-                <span class="text-error" v-show="errors[0]">
+                <span class="text-error" v-if="errors[0]">
                   {{ errors[0] }}
                 </span>
+                <div v-else style="margin-bottom: 18px"></div>
               </template>
             </validation-provider>
 
@@ -627,9 +630,10 @@
                   id="ContactTelephone"
                   onkeypress="return ((event.charCode>47 && event.charCode<58))"
                 />
-                <span class="text-error" v-show="errors[0]">
+                <span class="text-error" v-if="errors[0]">
                   {{ errors[0] }}
                 </span>
+                <div v-else style="margin-bottom: 18px"></div>
               </template>
             </validation-provider>
             <P class="form-subtext"> {{ $t(`${placeholderDepart}`) }}</P>
@@ -646,9 +650,10 @@
                   v-model="form.ciudad"
                   onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
-                <span class="text-error" v-show="errors[0]">
+                <span class="text-error" v-if="errors[0]">
                   {{ errors[0] }}
                 </span>
+                <div v-else style="margin-bottom: 18px"></div>
               </template>
             </validation-provider>
             <P class="form-subtext"> {{ $t(`${placeholderBarrio}`) }}</P>
@@ -665,9 +670,10 @@
                   v-model="form.barrio"
                   onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
-                <span class="text-error" v-show="errors[0]">
+                <span class="text-error" v-if="errors[0]">
                   {{ errors[0] }}
                 </span>
+                <div v-else style="margin-bottom: 18px"></div>
               </template>
             </validation-provider>
             <P class="form-subtext"> {{ $t('footer_formDireccion') }}</P>
@@ -683,9 +689,10 @@
                   :placeholder="$t('footer_formDireccionMgs')"
                   v-model="form.dirreccion"
                 />
-                <span class="text-error" v-show="errors[0]">
+                <span class="text-error" v-if="errors[0]">
                   {{ errors[0] }}
                 </span>
+                <div v-else style="margin-bottom: 18px"></div>
               </template>
             </validation-provider>
           </ValidationObserver>
@@ -2234,9 +2241,10 @@ details[open] summary ~ * {
   margin-bottom: 15px;
 }
 .form-subtext {
-  color: black;
-  font-size: 15px;
-  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #7e7e7e;
+  margin-bottom: 2px;
 }
 .content-input {
   width: 100%;
@@ -2244,12 +2252,12 @@ details[open] summary ~ * {
   flex-direction: column;
 }
 .input-text {
-  font-size: 14px;
-  color: rgba(21, 20, 57, 0.541);
-  border: solid 2px #afafaf;
-  border-radius: 5px;
+  font-size: 13px;
+  color: #7e7e7e;
+  border: solid 2px #c9c9c9;
+  border-radius: 8px;
   background-color: transparent;
-  padding: 8px 14px;
+  padding: 5px 14px;
   width: 100%;
 }
 .input-text::placeholder {
