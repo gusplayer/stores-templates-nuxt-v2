@@ -440,6 +440,7 @@
                       stateOrderWapi &&
                       productsCart.length &&
                       !isQuotation() &&
+                      IsMinValorTotal() &&
                       dataStore.tienda.estado == 1 &&
                       dataStore.tienda.whatsapp
                     "
@@ -557,7 +558,7 @@
                 <input
                   name="nombre"
                   type="text"
-                  v-model="nombre"
+                  v-model="form.nombre"
                   class="input-text"
                   :placeholder="$t('footer_formNombreMgs')"
                   id="ContactName"
@@ -568,9 +569,51 @@
                 </span>
               </template>
             </validation-provider>
+
+            <p class="form-subtext">{{ $t('footer_formIdenti') }}</p>
+            <validation-provider
+              name="id"
+              rules="required"
+              class="content-input"
+            >
+              <template slot-scope="{ errors }">
+                <input
+                  name="id"
+                  type="number"
+                  v-model="form.phone"
+                  class="input-text"
+                  :placeholder="$t('footer_formIdentiMgs')"
+                  id="ContactId"
+                  onkeypress="return ((event.charCode>47 && event.charCode<58))"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
+
+            <p class="form-subtext">
+              {{ $t('footer_formCorreo') }} ({{ $t('footer_norquerido') }})
+            </p>
+            <validation-provider name="email" class="content-input">
+              <template slot-scope="{ errors }">
+                <input
+                  name="email"
+                  type="text"
+                  v-model="form.email"
+                  class="input-text"
+                  :placeholder="$t('footer_formCorreoMgs')"
+                  id="ContactEmail"
+                />
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
+              </template>
+            </validation-provider>
+
             <p class="form-subtext">{{ $t('footer_formPhone') }}</p>
             <validation-provider
-              name="identificacion"
+              name="phone"
               rules="required"
               class="content-input"
             >
@@ -578,7 +621,7 @@
                 <input
                   name="telephone"
                   type="text"
-                  v-model="identificacion"
+                  v-model="form.identificacion"
                   class="input-text"
                   :placeholder="$t('footer_formPhoneMgs')"
                   id="ContactTelephone"
@@ -589,7 +632,6 @@
                 </span>
               </template>
             </validation-provider>
-
             <P class="form-subtext"> {{ $t(`${placeholderDepart}`) }}</P>
             <validation-provider
               name="ciudad"
@@ -601,7 +643,7 @@
                   class="input-text"
                   name="ciudad"
                   :placeholder="$t('footer_formBarrioMgs')"
-                  v-model="ciudad"
+                  v-model="form.ciudad"
                   onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -620,7 +662,7 @@
                   class="input-text"
                   name="barrio"
                   :placeholder="$t(`${placeholderMsgBarrio}`)"
-                  v-model="barrio"
+                  v-model="form.barrio"
                   onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
                 <span class="text-error" v-show="errors[0]">
@@ -628,7 +670,6 @@
                 </span>
               </template>
             </validation-provider>
-
             <P class="form-subtext"> {{ $t('footer_formDireccion') }}</P>
             <validation-provider
               name="dirreccion"
@@ -640,7 +681,7 @@
                   class="input-text"
                   name="dirreccion"
                   :placeholder="$t('footer_formDireccionMgs')"
-                  v-model="dirreccion"
+                  v-model="form.dirreccion"
                 />
                 <span class="text-error" v-show="errors[0]">
                   {{ errors[0] }}
@@ -755,11 +796,15 @@ export default {
       shippingTarifaPrecio: '',
       estadoShippingTarifaPrecio: false,
       formOrden: false,
-      nombre: '',
-      identificacion: '',
-      ciudad: '',
-      barrio: '',
-      dirreccion: '',
+      form: {
+        nombre: '',
+        identificacion: '',
+        phone: '',
+        email: '',
+        ciudad: '',
+        barrio: '',
+        dirreccion: '',
+      },
       FreeShippingCart: false,
       placeholderBarrio: 'footer_formBarrio',
       placeholderMsgBarrio: 'footer_formBarrioMgs',
@@ -768,7 +813,6 @@ export default {
       modalConfirmation: false,
       discountDescuentos: 0,
       stateProductCart: 1,
-
       textDepartment: '',
       textCiudad: '',
     }
@@ -1187,7 +1231,7 @@ export default {
       //traducción  texto
       if (this.dataStore.tienda.lenguaje == 'es') {
         text = `Hola%2C%20soy%20${
-          this.nombre
+          this.form.nombre
         }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
           this.dataStore.tienda.nombre
         )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
@@ -1202,21 +1246,25 @@ export default {
             : 0) -
           this.discountDescuentos
         }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A%2ANombre%2A%3A%20${
-          this.nombre
-        }%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
-          this.ciudad
+          this.form.nombre
+        }%0A%2AIdentificación%2A%3A%20${encodeURIComponent(
+          this.form.phone
+        )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
+          this.form.email ? this.form.email : ''
+        )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
+          this.form.ciudad
         )}%0A%2A${encodeURIComponent(
           this.textCiudad
         )}%2A%3A%20${encodeURIComponent(
-          this.barrio
+          this.form.barrio
         )}%0A%2ADirección%2A%3A%20${encodeURIComponent(
-          this.dirreccion
+          this.form.dirreccion
         )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
           window.location
         }?clearCart=true`
       } else if (this.dataStore.tienda.lenguaje == 'en') {
         text = `Hello%2C%20I%20am%20${
-          this.nombre
+          this.form.nombre
         }%2C%0AI%20made%20this%20order%20at%20your%20store%20${encodeURIComponent(
           this.dataStore.tienda.nombre
         )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADiscount%2A%3A%20${
@@ -1231,19 +1279,23 @@ export default {
             : 0) -
           this.discountDescuentos
         }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20information%2A%3A%0A%2AName%2A%3A%20${
-          this.nombre
-        }%0A%2A${this.textDepartment}%2A%3A%20${
-          this.ciudad
+          this.form.nombre
+        }%0A%2AIdentification%2A%3A%20${encodeURIComponent(
+          this.form.phone
+        )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
+          this.form.email ? this.form.email : ''
+        )}%0A%2A${this.textDepartment}%2A%3A%20${
+          this.form.ciudad
         }%0A%2A${encodeURIComponent(this.textCiudad)}%2A%3A%20${
-          this.barrio
+          this.form.barrio
         }%0A%2AAddres%2A%3A%20${encodeURIComponent(
-          this.dirreccion
+          this.form.dirreccion
         )}%0A%0A%2Aback%20to%20the%20store%2A%3A%20${
           window.location
         }?clearCart=true`
       } else if (this.dataStore.tienda.lenguaje == 'pt') {
         text = `Olá%2C%20aqui%20é%20${
-          this.nombre
+          this.form.nombre
         }%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${encodeURIComponent(
           this.dataStore.tienda.nombre
         )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADesconto%2A%3A%20${
@@ -1258,19 +1310,23 @@ export default {
             : 0) -
           this.discountDescuentos
         }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20Minhas%20informaçãoes%2A%3A%0A%2ANome%2A%3A%20${
-          this.nombre
-        }%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
-          this.ciudad
+          this.form.nombre
+        }%0A%2Aidentificação%2A%3A%20${encodeURIComponent(
+          this.form.phone
+        )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
+          this.form.email ? this.form.email : ''
+        )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
+          this.form.ciudad
         )}%0A%2A${encodeURIComponent(this.textCiudad)}%2A%3A%20${
-          this.barrio
+          this.form.barrio
         }%0A%2AEndereço%2A%3A%20${encodeURIComponent(
-          this.dirreccion
+          this.form.dirreccion
         )}%0A%0A%2Ade%20volta%20%C3%A0%20loja%2A%3A%20${
           window.location
         }?clearCart=true`
       } else {
         text = `Hola%2C%20soy%20${
-          this.nombre
+          this.form.nombre
         }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
           this.dataStore.tienda.nombre
         )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
@@ -1285,15 +1341,19 @@ export default {
             : 0) -
           this.discountDescuentos
         }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A%2ANombre%2A%3A%20${
-          this.nombre
-        }%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
-          this.ciudad
+          this.form.nombre
+        }%0A%2AIdentificación%2A%3A%20${encodeURIComponent(
+          this.form.phone
+        )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
+          this.form.email ? this.form.email : ''
+        )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
+          this.form.ciudad
         )}%0A%2A${encodeURIComponent(
           this.textCiudad
         )}%2A%3A%20${encodeURIComponent(
-          this.barrio
+          this.form.barrio
         )}%0A%2ADirección%2A%3A%20${encodeURIComponent(
-          this.dirreccion
+          this.form.dirreccion
         )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
           window.location
         }?clearCart=true`
@@ -1330,11 +1390,13 @@ export default {
         if (response) {
           this.modalConfirmation = true
           let temp = {
-            nombre: this.nombre,
-            identificacion: this.identificacion,
-            ciudad: this.ciudad,
-            barrio: this.barrio,
-            direccion: this.dirreccion,
+            nombre: this.form.nombre,
+            phone: this.form.phone, // Es la cedula
+            correo: this.form.email,
+            identificacion: this.form.identificacion, //Es el telefono
+            ciudad: this.form.ciudad,
+            barrio: this.form.barrio,
+            direccion: this.form.dirreccion,
           }
           const myJSON = JSON.stringify(temp)
           let resultShipping
@@ -1391,7 +1453,6 @@ export default {
             metodo_pago: 7,
             descuento: this.discountDescuentos ? this.discountDescuentos : 0,
           }
-
           axios
             .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
             .then(() => {

@@ -209,6 +209,20 @@
                     {{ $t('mcompra_nombre') }}
                     <span class="value-data">{{ mensajeWa.nombre }}</span>
                   </p>
+                  <p class="name" v-if="mensajeWa && mensajeWa.phone">
+                    {{ $t('footer_formIdenti') }}
+                    <span class="value-data">{{ mensajeWa.phone }}</span>
+                  </p>
+                  <p class="name" v-if="mensajeWa && mensajeWa.correo">
+                    {{ $t('footer_formCorreo') }}
+                    <span class="value-data">{{ mensajeWa.correo }}</span>
+                  </p>
+                  <p class="name" v-if="mensajeWa && mensajeWa.identificacion">
+                    {{ $t('footer_formPhone') }}
+                    <span class="value-data">{{
+                      mensajeWa.identificacion
+                    }}</span>
+                  </p>
                   <p class="name" v-if="mensajeWa && mensajeWa.ciudad">
                     {{ $t('footer_formDepartamento') }}
                     <span class="value-data">{{ mensajeWa.ciudad }}</span>
