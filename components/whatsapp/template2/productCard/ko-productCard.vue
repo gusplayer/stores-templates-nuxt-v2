@@ -42,6 +42,12 @@
             </svg>
           </div>
         </div>
+        <p class="card_info card_soldOut" v-if="soldOut">
+          {{ $t('home_cardAgotado') }}
+        </p>
+        <p class="card_info card_freeShipping" v-if="getFreeShipping == false">
+          {{ $t('home_cardGratis') }}
+        </p>
         <div
           class="card-descuento"
           v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
@@ -436,6 +442,25 @@ export default {
 }
 </script>
 <style scoped>
+.card_info {
+  @apply flex justify-center items-center font-bold text-10 absolute;
+}
+.card_soldOut {
+  background: #e71f77;
+  padding: 1px 2px;
+  border-radius: 4px;
+  color: white;
+  bottom: 30px;
+  right: 10px;
+}
+.card_freeShipping {
+  background: #35dd8d;
+  padding: 1px 2px;
+  border-radius: 4px;
+  color: black;
+  bottom: 10px;
+  right: 10px;
+}
 .overlay-top {
   top: 50px;
   left: 100%;
