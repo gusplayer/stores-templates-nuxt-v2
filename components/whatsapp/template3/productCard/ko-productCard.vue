@@ -110,6 +110,15 @@
               </p>
             </div>
           </div>
+          <p
+            class="card_info card_freeShipping"
+            v-if="getFreeShipping == false"
+          >
+            {{ $t('home_cardGratis') }}
+          </p>
+          <p class="card_info card_soldOut" v-if="soldOut">
+            {{ $t('home_cardAgotado') }}
+          </p>
         </nuxt-link>
         <div
           class="content-buttons"
@@ -452,6 +461,21 @@ export default {
 }
 </script>
 <style scoped>
+.card_info {
+  @apply flex justify-center items-center font-bold text-10;
+}
+.card_soldOut {
+  background: #e71f77;
+  padding: 1px 2px;
+  border-radius: 4px;
+  color: white;
+}
+.card_freeShipping {
+  background: #35dd8d;
+  padding: 1px 2px;
+  border-radius: 4px;
+  color: black;
+}
 .overlay-top {
   top: 47px;
   left: 100%;
