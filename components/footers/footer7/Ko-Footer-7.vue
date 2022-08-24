@@ -21,6 +21,7 @@
       ]"
     >
       <KoNewsLetter
+        v-if="settingByTemplate11[0].newsletter.visible"
         :newsletter="settingByTemplate11[0].newsletter"
         :setting11General="settingByTemplate11[0].setting11General"
         :dataStore="dataStore"
