@@ -86,9 +86,24 @@
               </p>
             </div>
             <div class="content-text-price" v-if="this.product.precio">
+              <div v-if="this.estadoCart == true && this.equalsPrice">
+                <p class="text-price" v-if="this.minPrice">
+                  {{
+                    this.minPrice
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
+                </p>
+              </div>
               <div
                 class="content-price"
-                v-if="this.estadoCart == true && this.minPrice != this.maxPrice"
+                v-else-if="
+                  this.estadoCart == true &&
+                  this.minPrice != this.maxPrice &&
+                  !this.equalsPrice
+                "
               >
                 <div
                   class="text-price"
@@ -221,9 +236,24 @@
           </nuxt-link>
           <div class="content-text-price" v-if="this.product.precio">
             <nuxt-link :to="{ path: `/productos/` + product.slug }">
+              <div v-if="this.estadoCart == true && this.equalsPrice">
+                <p class="text-price" v-if="this.minPrice">
+                  {{
+                    this.minPrice
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
+                </p>
+              </div>
               <div
                 class="content-price"
-                v-if="estadoCart && this.minPrice != this.maxPrice"
+                v-else-if="
+                  estadoCart &&
+                  this.minPrice != this.maxPrice &&
+                  !this.equalsPrice
+                "
               >
                 <div
                   class="text-price"
@@ -330,6 +360,7 @@ export default {
       salesData: null,
       spent: false,
       active: true,
+      equalsPrice: false,
     }
   },
   computed: {
@@ -397,7 +428,6 @@ export default {
           estado: true,
         }
         this.maxQuantityValue = this.product.stock
-
         this.productsCarts.find((productCart, index) => {
           if (productCart.id == this.product.id) {
             this.productIndexCart = index
@@ -433,7 +463,6 @@ export default {
           } else {
             product.limitQuantity = this.product.stock
           }
-
           if (typeof this.productIndexCart === 'number') {
             const mutableProduct =
               this.$store.state.productsCart[this.productIndexCart]
@@ -484,6 +513,11 @@ export default {
               if (resultPrice[resultPrice.length - 1]) {
                 this.minPrice = resultPrice[0]
                 this.maxPrice = resultPrice[resultPrice.length - 1]
+                if (this.minPrice === this.maxPrice) {
+                  this.equalsPrice = true
+                } else {
+                  this.equalsPrice = false
+                }
               }
             }
           }

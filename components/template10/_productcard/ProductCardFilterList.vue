@@ -173,9 +173,25 @@
       </div>
       <div class="precio">
         <div class="content-text-price">
+          <div v-if="this.estadoCart == true && this.equalsPrice">
+            <p class="text-price" v-if="this.minPrice">
+              {{
+                this.minPrice
+                  | currency(
+                    dataStore.tienda.codigo_pais,
+                    dataStore.tienda.moneda
+                  )
+              }}
+            </p>
+          </div>
           <div
             class="content-price"
-            v-if="this.estadoCart == true && this.minPrice && this.maxPrice"
+            v-else-if="
+              this.estadoCart == true &&
+              this.minPrice &&
+              this.maxPrice &&
+              !this.equalsPrice
+            "
           >
             <div class="text-price">
               {{
@@ -395,6 +411,7 @@ export default {
       salesData: null,
       spent: false,
       active: true,
+      equalsPrice: false,
     }
   },
   mounted() {
@@ -560,6 +577,11 @@ export default {
               if (resultPrice[resultPrice.length - 1]) {
                 this.minPrice = resultPrice[0]
                 this.maxPrice = resultPrice[resultPrice.length - 1]
+                if (this.minPrice === this.maxPrice) {
+                  this.equalsPrice = true
+                } else {
+                  this.equalsPrice = false
+                }
               }
             }
           }
