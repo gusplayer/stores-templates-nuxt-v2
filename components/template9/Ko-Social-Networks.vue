@@ -1,7 +1,13 @@
 <template>
   <div class="content-SocialNet" :style="setting9Footer">
     <div class="icon-social">
-      <div class="icons-networks" v-if="dataStore.tienda.red_facebook != null">
+      <div
+        class="icons-networks"
+        v-if="
+          dataStore.tienda.red_facebook != null &&
+          dataStore.tienda.red_facebook != ''
+        "
+      >
         <a
           target="_blank"
           rel="noreferrer noopener"
@@ -66,7 +72,13 @@
           </svg>
         </a>
       </div>
-      <div class="icons-networks" v-if="dataStore.tienda.red_twitter != null">
+      <div
+        class="icons-networks"
+        v-if="
+          dataStore.tienda.red_twitter != null &&
+          dataStore.tienda.red_twitter != ''
+        "
+      >
         <a
           target="_blank"
           rel="noreferrer noopener"
@@ -132,7 +144,13 @@
           </svg>
         </a>
       </div>
-      <div class="icons-networks" v-if="dataStore.tienda.red_instagram != null">
+      <div
+        class="icons-networks"
+        v-if="
+          dataStore.tienda.red_instagram != null &&
+          dataStore.tienda.red_instagram != ''
+        "
+      >
         <a
           target="_blank"
           rel="noreferrer noopener"
@@ -248,7 +266,13 @@
           </svg>
         </a>
       </div>
-      <div class="icons-networks" v-if="dataStore.tienda.red_youtube != null">
+      <div
+        class="icons-networks"
+        v-if="
+          dataStore.tienda.red_youtube != null &&
+          dataStore.tienda.red_youtube != ''
+        "
+      >
         <a
           target="_blank"
           rel="noreferrer noopener"
@@ -328,7 +352,13 @@
           </svg>
         </a>
       </div>
-      <div class="icons-networks" v-if="dataStore.tienda.red_tiktok != null">
+      <div
+        class="icons-networks"
+        v-if="
+          dataStore.tienda.red_tiktok != null &&
+          dataStore.tienda.red_tiktok != ''
+        "
+      >
         <a
           target="_blank"
           rel="noreferrer noopener"
