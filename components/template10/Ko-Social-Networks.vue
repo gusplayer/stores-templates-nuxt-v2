@@ -13,7 +13,13 @@
     ]"
   >
     <div class="icon-social">
-      <div class="icons-networks" v-if="dataStore.tienda.red_facebook != null">
+      <div
+        class="icons-networks"
+        v-if="
+          dataStore.tienda.red_facebook != null &&
+          dataStore.tienda.red_facebook != ''
+        "
+      >
         <a
           class="social facebook-icon"
           target="_blank"
@@ -82,7 +88,13 @@
           <p class="txt-social">Facebook</p>
         </a>
       </div>
-      <div class="icons-networks" v-if="dataStore.tienda.red_twitter != null">
+      <div
+        class="icons-networks"
+        v-if="
+          dataStore.tienda.red_twitter != null &&
+          dataStore.tienda.red_twitter != ''
+        "
+      >
         <a
           class="social twitter-icon"
           target="_blank"
@@ -153,7 +165,13 @@
           <p class="txt-social">Twitter</p>
         </a>
       </div>
-      <div class="icons-networks" v-if="dataStore.tienda.red_instagram != null">
+      <div
+        class="icons-networks"
+        v-if="
+          dataStore.tienda.red_instagram != null &&
+          dataStore.tienda.red_instagram != ''
+        "
+      >
         <a
           class="social instagram-icon"
           target="_blank"
@@ -261,7 +279,6 @@
                 data-original="url(#a)"
                 style=""
               />
-
               <g xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="m329.636719 433h-147.273438c-56.996093 0-103.363281-46.367188-103.363281-103.363281v-147.273438c0-56.996093 46.367188-103.363281 103.363281-103.363281h147.273438c56.996093 0 103.363281 46.367188 103.363281 103.363281v147.273438c0 56.996093-46.367188 103.363281-103.363281 103.363281zm-147.273438-324c-40.453125 0-73.363281 32.910156-73.363281 73.363281v147.273438c0 40.453125 32.910156 73.363281 73.363281 73.363281h147.273438c40.453125 0 73.363281-32.910156 73.363281-73.363281v-147.273438c0-40.453125-32.910156-73.363281-73.363281-73.363281zm0 0"
@@ -290,7 +307,13 @@
           <p class="txt-social">Instagram</p>
         </a>
       </div>
-      <div class="icons-networks" v-if="dataStore.tienda.red_youtube != null">
+      <div
+        class="icons-networks"
+        v-if="
+          dataStore.tienda.red_youtube != null &&
+          dataStore.tienda.red_youtube != ''
+        "
+      >
         <a
           class="social youtube-icon"
           target="_blank"
@@ -373,7 +396,13 @@
           <p class="txt-social">Youtube</p>
         </a>
       </div>
-      <div class="icons-networks" v-if="dataStore.tienda.red_tiktok != null">
+      <div
+        class="icons-networks"
+        v-if="
+          dataStore.tienda.red_tiktok != null &&
+          dataStore.tienda.red_tiktok != ''
+        "
+      >
         <a
           class="social instagram-icon"
           target="_blank"
