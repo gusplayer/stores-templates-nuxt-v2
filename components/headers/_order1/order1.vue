@@ -1153,14 +1153,14 @@ export default {
             `${element.cantidad} x ${
               element.nombre
             } = Variantes: ${resultcombitList} -> Valor: ${
-              element.cantidad * element.precio
-            }`
+              this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            }${element.cantidad * element.precio}`
           )
         } else {
           productosCart.push(
             `${element.cantidad} x ${element.nombre} -> Valor: ${
-              element.cantidad * element.precio
-            }`
+              this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            }${element.cantidad * element.precio}`
           )
         }
       })
@@ -1242,8 +1242,16 @@ export default {
         }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
           this.dataStore.tienda.nombre
         )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
-          this.discountDescuentos ? this.discountDescuentos : 'No%20aplica'
-        }%0A%2ASubtotal%2A%3A%20$${this.totalCart}%0A%2ATOTAL%2A%3A%20$${
+          this.discountDescuentos
+            ? this.dataStore.tienda.moneda == 'PEN'
+              ? 'S/'
+              : '$' + this.discountDescuentos
+            : 'No%20aplica'
+        }%0A%2ASubtotal%2A%3A%20${
+          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+        }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+        }${
           this.totalCart +
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
@@ -1275,8 +1283,16 @@ export default {
         }%2C%0AI%20made%20this%20order%20at%20your%20store%20${encodeURIComponent(
           this.dataStore.tienda.nombre
         )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADiscount%2A%3A%20${
-          this.discountDescuentos ? this.discountDescuentos : 'Not%20applicable'
-        }%0A%2ASubtotal%2A%3A%20$${this.totalCart}%0A%2ATOTAL%2A%3A%20$${
+          this.discountDescuentos
+            ? this.dataStore.tienda.moneda == 'PEN'
+              ? 'S/'
+              : '$' + this.discountDescuentos
+            : 'Not%20applicable'
+        }%0A%2ASubtotal%2A%3A%20${
+          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+        }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+        }${
           this.totalCart +
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
@@ -1306,8 +1322,16 @@ export default {
         }%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${encodeURIComponent(
           this.dataStore.tienda.nombre
         )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADesconto%2A%3A%20${
-          this.discountDescuentos ? this.discountDescuentos : 'Não%20aplicável'
-        }%0A%2ASubtotal%2A%3A%20$${this.totalCart}%0A%2ATOTAL%2A%3A%20$${
+          this.discountDescuentos
+            ? this.dataStore.tienda.moneda == 'PEN'
+              ? 'S/'
+              : '$' + this.discountDescuentos
+            : 'Não%20aplicável'
+        }%0A%2ASubtotal%2A%3A%20${
+          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+        }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+        }${
           this.totalCart +
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
@@ -1337,8 +1361,16 @@ export default {
         }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
           this.dataStore.tienda.nombre
         )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
-          this.discountDescuentos ? this.discountDescuentos : 'No%20aplica'
-        }%0A%2ASubtotal%2A%3A%20$${this.totalCart}%0A%2ATOTAL%2A%3A%20$${
+          this.discountDescuentos
+            ? this.dataStore.tienda.moneda == 'PEN'
+              ? 'S/'
+              : '$' + this.discountDescuentos
+            : 'No%20aplica'
+        }%0A%2ASubtotal%2A%3A%20${
+          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+        }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+        }${
           this.totalCart +
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
