@@ -144,15 +144,49 @@
               </a>
             </div>
             <div class="content-price">
-              <p class="text-price" v-show="salesData.precio">
-                {{
+              <p
+                v-show="
+                  data.info.tag_promocion == 1 &&
+                  data.info.promocion_valor &&
                   salesData.precio
+                "
+                class="text-promo"
+              >
+                {{
+                  (data.info.tag_promocion == 1 && data.info.promocion_valor
+                    ? Math.trunc(
+                        salesData.precio / (1 - data.info.promocion_valor / 100)
+                      )
+                    : 0)
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
                     )
                 }}
               </p>
+
+              <div class="flex flex-row justify-start items-center">
+                <p class="text-price" v-show="salesData.precio">
+                  {{
+                    salesData.precio
+                      | currency(
+                        dataStore.tienda.codigo_pais,
+                        dataStore.tienda.moneda
+                      )
+                  }}
+                </p>
+                <p
+                  v-show="
+                    data.info.tag_promocion == 1 &&
+                    data.info.promocion_valor &&
+                    salesData.precio
+                  "
+                  class="ml-10 bg-black text-white-white px-2 py-2 text-14"
+                >
+                  {{ data.info.promocion_valor }}% De Descuento
+                </p>
+              </div>
+
               <!-- <p class="text-stock" v-if="salesData.unidades > 0">
                 {{ $t('productdetail_stock') }}
               </p> -->
@@ -997,12 +1031,12 @@ export default {
 .youtuve-video {
   @apply w-full flex justify-center items-center;
 }
+.content-price,
 .right {
   @apply w-full flex flex-col justify-start items-start;
 }
 .content-category,
 .content-name,
-.content-price,
 .content-addCart {
   @apply w-full flex flex-row justify-start items-center;
 }
@@ -1176,6 +1210,13 @@ export default {
     font-weight: var(--fontWeighPrice);
     line-height: 1;
     letter-spacing: -0.03em;
+    font-family: var(--font-style-1) !important;
+  }
+  .text-promo {
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: line-through;
+    color: var(--color_subtext);
     font-family: var(--font-style-1) !important;
   }
   .text-stock {
