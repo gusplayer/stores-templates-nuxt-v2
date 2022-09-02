@@ -59,6 +59,14 @@
           <p class="txt-free">{{ $t('home_cardGratis') }}</p>
         </div>
       </div>
+      <div
+        class="cart-Shop-pro"
+        v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
+      >
+        <div class="text-cart">
+          <p>{{ this.product.promocion_valor }}% OFF</p>
+        </div>
+      </div>
       <div class="overlay-polygon" v-if="getFreeShipping == false && !soldOut">
         <svg
           class="icon-overlay-free"
@@ -614,6 +622,29 @@ export default {
   fill: var(--color_text_btn);
   @apply mr-5 mb-5;
 }
+.wrapper-descuento {
+}
+.cart-Shop-pro {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 1px 5px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+  background: red;
+  right: auto;
+}
+.text-cart {
+  @apply block;
+}
+.txt-add {
+  color: white;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
 @screen sm {
   .card-title {
     /* font-size: 16px; */
