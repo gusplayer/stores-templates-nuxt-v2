@@ -65,7 +65,6 @@ export default {
           : this.$store.state.products.payloadTag
           ? this.$store.state.products.payloadTag
           : ''
-
         this.$store.state.products.payloadTagName = tag_Name
           ? tag_Name
           : this.$store.state.products.payloadTagName
@@ -117,7 +116,7 @@ export default {
     },
     allCategories() {
       this.$store.commit('products/FILTER_BY', {
-        type: 'all',
+        type: ['all'],
         data: '',
       })
       this.currentPage = 1
