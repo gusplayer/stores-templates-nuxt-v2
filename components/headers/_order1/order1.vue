@@ -1187,11 +1187,17 @@ export default {
         this.rangosByCiudades.envio_metodo == 'tarifa_plana'
       ) {
         if (this.dataStore.tienda.lenguaje == 'es') {
-          textFreeShippingCart = `Costo%20domicilio:%20$-$${this.rangosByCiudades.valor}`
+          textFreeShippingCart = `Costo%20domicilio:%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.rangosByCiudades.valor}`
         } else if (this.dataStore.tienda.lenguaje == 'en') {
-          textFreeShippingCart = `Shipping%cost:%20$-$${this.rangosByCiudades.valor}`
+          textFreeShippingCart = `Shipping%cost:%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.rangosByCiudades.valor}`
         } else if (this.dataStore.tienda.lenguaje == 'pt') {
-          textFreeShippingCart = `Custos%20envio:%20$-$${this.rangosByCiudades.valor}`
+          textFreeShippingCart = `Custos%20envio:%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.rangosByCiudades.valor}`
         }
       } else if (
         this.rangosByCiudades &&
@@ -1209,11 +1215,17 @@ export default {
         this.rangosByCiudades.envio_metodo == 'precio'
       ) {
         if (this.dataStore.tienda.lenguaje == 'es') {
-          textFreeShippingCart = `Costo%20domicilio:%20$-$${this.shippingTarifaPrecio}`
+          textFreeShippingCart = `Costo%20domicilio:%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.shippingTarifaPrecio}`
         } else if (this.dataStore.tienda.lenguaje == 'en') {
-          textFreeShippingCart = `Shipping%cost:%20$-$${this.shippingTarifaPrecio}`
+          textFreeShippingCart = `Shipping%cost:%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.shippingTarifaPrecio}`
         } else if (this.dataStore.tienda.lenguaje == 'pt') {
-          textFreeShippingCart = `Custos%20envio:%20$-$${this.shippingTarifaPrecio}`
+          textFreeShippingCart = `Custos%20envio:%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.shippingTarifaPrecio}`
         }
       } else if (
         this.rangosByCiudades &&
