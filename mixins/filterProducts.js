@@ -1,6 +1,15 @@
 export default {
   methods: {
-    // filtro categoria
+    // filtro etiqueta URL
+    sendTagUrlMix(tag_id, tag_Name) {
+      this.$store.commit('products/FILTER_BY', {
+        type: ['tag'],
+        data: '',
+      })
+      this.$store.state.products.payloadTag = parseInt(tag_id)
+      this.$store.state.products.payloadTagName = tag_Name
+    },
+    // filtro categoría URL
     sendCategoryUrlMix(value) {
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       let urlFiltrada = decodeURIComponent(value)
@@ -14,7 +23,7 @@ export default {
         this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       }
     },
-    // filtro subcategoria
+    // filtro subcategoría URL
     SendSubCategoryUrlMix(value, categories, subcategories) {
       let urlFiltradaTemp = decodeURIComponent(value)
       let resTemp = urlFiltradaTemp.split('^')
@@ -55,7 +64,7 @@ export default {
         })
       }
     },
-    // filtro mayor o menor numero
+    // filtro categoría, subcategoría y etiqueta
     getProductsFilter(value, tag_id, tag_Name, Lateral) {
       let type = this.$store.state.products.type
       let payload = this.$store.state.products.payload

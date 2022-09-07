@@ -363,6 +363,12 @@ export default {
         this.categorias,
         this.subcategories
       )
+    } else if (
+      this.$route.query &&
+      this.$route.query.tagId &&
+      this.$route.query.tagName
+    ) {
+      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
     } else if (this.$route.fullPath == '/') {
       this.allCategories()
     }
@@ -607,6 +613,12 @@ export default {
           this.categorias,
           this.subcategories
         )
+      } else if (
+        this.$route.query &&
+        this.$route.query.tagId &&
+        this.$route.query.tagName
+      ) {
+        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
       } else if (this.$route.fullPath == '/') {
         this.allCategories()
       }
