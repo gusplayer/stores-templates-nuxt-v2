@@ -77,7 +77,13 @@ export default {
         this.categorias,
         this.subcategories
       )
-    } else {
+    } else if (
+      this.$route.query &&
+      this.$route.query.tagId &&
+      this.$route.query.tagName
+    ) {
+      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
+    } else if (this.$route.fullPath == '/') {
       this.allCategories()
     }
     if (this.previousPage) {
@@ -205,6 +211,12 @@ export default {
           this.categorias,
           this.subcategories
         )
+      } else if (
+        this.$route.query &&
+        this.$route.query.tagId &&
+        this.$route.query.tagName
+      ) {
+        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
       } else if (this.$route.fullPath == '/') {
         this.allCategories()
       }
