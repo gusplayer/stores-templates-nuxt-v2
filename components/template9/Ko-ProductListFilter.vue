@@ -169,7 +169,8 @@
                     getProductsFilter(
                       'tag',
                       itemsProperties.id,
-                      itemsProperties.name
+                      itemsProperties.name,
+                      false
                     )
                   "
                   :class="

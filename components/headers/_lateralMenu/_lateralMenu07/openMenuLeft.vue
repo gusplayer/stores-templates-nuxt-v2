@@ -114,8 +114,8 @@
                         </p>
                       </li>
                     </template>
-                    <template v-slot:subcategorias
-                      ><template>
+                    <template v-slot:subcategorias>
+                      <template>
                         <li
                           class="btn-category"
                           v-if="selectedSubcategories.length > 0"
@@ -140,8 +140,59 @@
                             {{ subcategory.nombre_subcategoria }}
                           </li>
                         </div>
-                      </template></template
-                    >
+                      </template>
+                    </template>
+                  </BaseAccordian>
+                </div>
+                <div
+                  v-for="(itemsTags, index) in allTags"
+                  :key="index"
+                  v-show="allTags && allTags.length > 0"
+                >
+                  <BaseAccordian
+                    v-if="
+                      itemsTags &&
+                      itemsTags.status === 1 &&
+                      itemsTags.properties.length > 0
+                    "
+                  >
+                    <template v-slot:categorias>
+                      <li class="btn-category">
+                        {{ itemsTags.name }}
+                      </li>
+                    </template>
+                    <template v-slot:subcategorias>
+                      <template>
+                        <div
+                          v-for="itemsProperties in itemsTags.properties"
+                          :key="itemsProperties.id"
+                          v-show="itemsProperties.status === 1"
+                        >
+                          <li
+                            class="btn-category"
+                            @click="
+                              getProductsFilter(
+                                'tag',
+                                itemsProperties.id,
+                                itemsProperties.name,
+                                true
+                              )
+                            "
+                            :class="
+                              itemsProperties.name == etiqueta1
+                                ? 'text-subcategoria-active'
+                                : '' || itemsProperties.name == etiqueta2
+                                ? 'text-subcategoria-active'
+                                : ''
+                            "
+                          >
+                            <p class="txt-sub-li">
+                              {{ itemsProperties.name }}
+                            </p>
+                          </li>
+                        </div>
+                      </template>
+                    </template>
                   </BaseAccordian>
                 </div>
               </div>
@@ -155,11 +206,13 @@
 
 <script>
 import BaseAccordian from '../_BaseAccordion.vue'
+import filterProducts from '../../../../mixins/filterProducts'
 export default {
   name: 'Ko-MenuLeft-7',
   props: {
     dataStore: Object,
   },
+  mixins: [filterProducts],
   components: {
     BaseAccordian,
   },
@@ -172,7 +225,6 @@ export default {
       activeNames: [],
       focusbtn: false,
       search: '',
-      add: true,
       selectSubcategory: '',
       nameCategory: '',
       nameSubCategory: '',
@@ -238,6 +290,15 @@ export default {
     dataHoko() {
       return this.$store.state.dataHoko
     },
+    etiqueta1() {
+      return this.$store.state.products.payloadTagName
+    },
+    etiqueta2() {
+      return this.$store.state.products.payloadTag2Name
+    },
+    allTags() {
+      return this.$store.getters['products/filterTags']
+    },
   },
   methods: {
     setHoko() {
@@ -290,7 +351,6 @@ export default {
       this.$store.commit('SET_STATE_BANNER', false)
       this.$store.commit('SET_PREVIOUS_PAGE', 1)
       this.$store.commit('SET_OPENORDERMENULEFT', false)
-      this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.id == value
@@ -327,19 +387,12 @@ export default {
         }
       })
       if (this.selectedSubcategories.length === 0) {
-        this.addClass()
         this.$store.commit('SET_OPENORDERMENULEFT', false)
-      }
-      if (ref) {
-        this.addClass()
       }
       this.$store.commit('products/FILTER_BY', {
         type: ['category'],
         data: value.nombre_categoria_producto,
       })
-    },
-    addClass() {
-      this.add = !this.add
     },
     clear() {
       this.$router.push({
@@ -353,7 +406,6 @@ export default {
         data: '',
       })
       this.$emit('clear')
-      this.addClass()
       this.nameCategory = ''
     },
   },
