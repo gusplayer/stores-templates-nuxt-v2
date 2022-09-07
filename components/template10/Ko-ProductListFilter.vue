@@ -139,7 +139,8 @@
                       getProductsFilter(
                         'tag',
                         itemsProperties.id,
-                        itemsProperties.name
+                        itemsProperties.name,
+                        false
                       )
                     "
                     :class="
@@ -1072,13 +1073,13 @@ export default {
     @apply justify-start items-start my-8 pl-20;
   }
   .content-banner-shop-r {
-    @apply hidden;
+    @apply mb-10;
   }
   .bannerProduct {
     @apply hidden;
   }
   .product-content {
-    margin-top: 140px;
+    margin-top: 20px;
   }
   .content-home {
     @apply w-full flex flex-col justify-start items-start;
@@ -1158,6 +1159,11 @@ export default {
   }
   .content-left {
     width: 400px;
+  }
+}
+@media (max-width: 440px) {
+  .btn-tittle-shop {
+    font-size: 22px;
   }
 }
 </style>

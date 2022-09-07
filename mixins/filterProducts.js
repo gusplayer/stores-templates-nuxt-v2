@@ -56,7 +56,7 @@ export default {
       }
     },
     // filtro mayor o menor numero
-    getProductsFilter(value, tag_id, tag_Name) {
+    getProductsFilter(value, tag_id, tag_Name, Lateral) {
       let type = this.$store.state.products.type
       let payload = this.$store.state.products.payload
       if (type.length < 2) {
@@ -113,6 +113,12 @@ export default {
         })
       }
       this.currentPage = 1
+      if (Lateral === true) {
+        this.$router.push({
+          path: '/productos',
+        })
+        this.$store.commit('SET_OPENORDERMENULEFT', false)
+      }
     },
     allCategories() {
       this.$store.commit('products/FILTER_BY', {
