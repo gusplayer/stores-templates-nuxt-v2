@@ -363,7 +363,6 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 import currency from '../../../mixins/formatCurrent'
-
 export default {
   mixins: [idCloudinary, currency],
   name: 'Ko-ProductCard-11',

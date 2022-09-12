@@ -2,30 +2,48 @@
   <div class="content-wrapp">
     <div class="content-wrapp-left">
       <figure class="promo-banner-images">
-        <img class="images" :src="this.ban.backgroundBanner1" alt="" />
+        <img
+          class="images"
+          :src="idCloudinaryBanner(this.ban.backgroundBanner1)"
+          alt=""
+        />
       </figure>
     </div>
     <div class="content-wrapp-medium border">
       <div class="images">
         <figure class="promo-banner-images">
-          <img class="images" :src="this.ban.backgroundBanner2" alt="" />
+          <img
+            class="images"
+            :src="idCloudinaryBanner(this.ban.backgroundBanner2)"
+            alt=""
+          />
         </figure>
       </div>
       <div class="images">
         <figure class="promo-banner-images">
-          <img class="images" :src="this.ban.backgroundBanner3" alt="" />
+          <img
+            class="images"
+            :src="idCloudinaryBanner(this.ban.backgroundBanner3)"
+            alt=""
+          />
         </figure>
       </div>
     </div>
     <div class="content-wrapp-right">
       <figure class="promo-banner-images">
-        <img class="images" :src="this.ban.backgroundBanner4" alt="" />
+        <img
+          class="images"
+          :src="idCloudinaryBanner(this.ban.backgroundBanner4)"
+          alt=""
+        />
       </figure>
     </div>
   </div>
 </template>
 <script>
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   props: {
     ban: {},
   },

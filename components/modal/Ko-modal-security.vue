@@ -18,7 +18,7 @@
     >
       <img
         v-if="dataStore.modal && dataStore.modal.img"
-        :src="dataStore.modal.img"
+        v-lazy="idCloudinaryBanner(dataStore.modal.img)"
         alt="img-modal-block"
         :style="`width: ${
           dataStore.modal && dataStore.modal.width_img
@@ -82,7 +82,6 @@
       >
         {{ dataStore.modal.description }}
       </p>
-
       <div class="inputBox">
         <input
           name="password"
@@ -129,7 +128,9 @@
   </div>
 </template>
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   props: {
     dataStore: Object,
   },

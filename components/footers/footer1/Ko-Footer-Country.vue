@@ -7,10 +7,10 @@
       <div class="content-item-flag">
         <div class="content-flag" v-if="selectOptionCountry">
           <img
-            :src="this.selectOptionCountry.img"
+            v-lazy="this.selectOptionCountry.img"
             width="30px"
             class="mr-2"
-            alt="bandera pais"
+            alt="bandera país"
           />
         </div>
         <button @click="stateIdStore = !stateIdStore" class="text-country">
@@ -98,7 +98,7 @@ export default {
           title: 'Chile',
           currencySign: '$',
           simbolo: 'CLP',
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1653417091/komerica/Banderas/Chile_rzygtf.png',
+          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Chile_rzygtf.png',
         },
         {
           id: 8,

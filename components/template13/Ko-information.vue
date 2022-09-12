@@ -17,7 +17,7 @@
     >
       <div class="wrapper-content-items">
         <img
-          v-lazy="information.values[0].url_img"
+          v-lazy="idCloudinary(information.values[0].url_img, 500, 500)"
           alt="imgInfo1"
           class="contentImg"
         />
@@ -49,7 +49,7 @@
       </div>
       <div class="wrapper-content-items">
         <img
-          v-lazy="information.values[1].url_img"
+          v-lazy="idCloudinary(information.values[1].url_img, 500, 500)"
           alt="imgInfo2"
           class="contentImg"
         />
@@ -81,7 +81,7 @@
       </div>
       <div class="wrapper-content-items">
         <img
-          v-lazy="information.values[2].url_img"
+          v-lazy="idCloudinary(information.values[2].url_img, 500, 500)"
           alt="imgInfo3"
           class="contentImg"
         />
@@ -115,7 +115,9 @@
   </div>
 </template>
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   name: 'Ko13-information',
   props: {
     information: Object,

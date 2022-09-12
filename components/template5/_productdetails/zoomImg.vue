@@ -4,16 +4,16 @@
       loading="lazy"
       class="photo_main"
       v-on:mouseover="activeZoom = !activeZoom"
-      :src="idCloudinaryDetalle(photo, 645, 430)"
+      :src="idCloudinary(photo, 645, 430)"
       alt="Product Img"
     />
   </figure>
 </template>
 
 <script>
-import idCloudinaryDetalle from '../../../mixins/idCloudinary'
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinaryDetalle],
+  mixins: [idCloudinary],
   name: 'zoomImg-details',
   props: ['photo'],
   data() {

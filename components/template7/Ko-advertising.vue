@@ -27,16 +27,16 @@
           <div class="wrapper-img">
             <img
               class="max-w-auto"
-              :src="settingKAdvertising.ur_img_card"
+              v-lazy="idCloudinaryBanner(settingKAdvertising.ur_img_card)"
               alt="icon"
             />
           </div>
           <div class="advertising-text">
             <span class="tittle">{{ settingKAdvertising.title }}</span>
             <div class="subtittles-items">
-              <span class="subtittle">{{
-                settingKAdvertising.description
-              }}</span>
+              <span class="subtittle">
+                {{ settingKAdvertising.description }}
+              </span>
             </div>
           </div>
           <button class="content-bttns-shop">
@@ -56,7 +56,9 @@
   </div>
 </template>
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   name: 'Ko-advertising',
   props: {
     dataStore: Object,

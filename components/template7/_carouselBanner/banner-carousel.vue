@@ -38,7 +38,7 @@
         <div class="banner-img" v-if="banner.url_img_right">
           <img
             class="img-girl"
-            :src="banner.url_img_right"
+            :src="idCloudinaryBanner(banner.url_img_right)"
             alt="banner-carousel"
           />
         </div>
@@ -47,7 +47,9 @@
   </div>
 </template>
 <script>
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   props: {
     banner: Object,
     settingKCarousel: Object,

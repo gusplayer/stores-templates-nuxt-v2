@@ -12,9 +12,6 @@
     ]"
   >
     <div class="swiper-wrapper z-auto">
-      <!-- <div
-        
-      > -->
       <a
         class="swiper-slide w-full flex justify-center items-center z-10"
         :id="`slide${index + 1}`"
@@ -42,7 +39,6 @@
           :settingGeneral="settingGeneral"
         />
       </a>
-      <!-- </div> -->
     </div>
   </div>
 </template>

@@ -23,7 +23,7 @@
           <img
             v-if="article.imagen_principal_url"
             class="images"
-            :src="idCloudinaryBanner(this.article.imagen_principal_url)"
+            v-lazy="idCloudinaryBanner(this.article.imagen_principal_url)"
             alt="right-banner"
           />
 

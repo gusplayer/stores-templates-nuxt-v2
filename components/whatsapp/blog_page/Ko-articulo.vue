@@ -23,7 +23,7 @@
         <div class="content-img">
           <img
             class="img-aritcle"
-            :src="dataArticle.imagen_principal_url"
+            v-lazy="idCloudinaryBanner(dataArticle.imagen_principal_url)"
             alt="Image-Article"
           />
         </div>
@@ -62,8 +62,9 @@
 <script>
 import { mapState } from 'vuex'
 import extensions from '../../../mixins/elemenTiptap.vue'
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  mixins: [extensions],
+  mixins: [extensions, idCloudinary],
   name: 'Ko-articulo-wa',
   mounted() {
     if (this.listArticulos.length) {

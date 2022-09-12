@@ -34,9 +34,7 @@
             <div class="main-images">
               <img
                 class="img-list"
-                v-lazy="
-                  idCloudinaryDetalle(data.detalle.foto_cloudinary, 1000, 1000)
-                "
+                v-lazy="idCloudinary(data.detalle.foto_cloudinary, 1000, 1000)"
                 alt="Product Img"
               />
             </div>
@@ -47,7 +45,7 @@
             >
               <img
                 class="img-list"
-                v-lazy="idCloudinaryDetalle(foto.foto_cloudinary, 1000, 1000)"
+                v-lazy="idCloudinary(foto.foto_cloudinary, 1000, 1000)"
                 alt="Product Img"
               />
             </div>
@@ -346,10 +344,10 @@ import SelectGroup from './_productdetails/selectGroup'
 import OptionAcordion from './_productdetails/OptAcordion'
 import OptionTab from './_productdetails/OptTab'
 import KoSuggesProduct from './_productdetails/suggestionsProducto'
-import idCloudinaryDetalle from '../../mixins/idCloudinary'
+import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
-  mixins: [idCloudinaryDetalle, currency],
+  mixins: [idCloudinary, currency],
   name: 'Ko-ProductDetail-1',
   props: {
     dataStore: Object,

@@ -7,7 +7,9 @@
           <div class="header-content-logo">
             <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
               <img
-                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+                v-lazy="
+                  `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+                "
                 class="header-logo"
                 alt="Logo Img"
               />

@@ -68,7 +68,7 @@
                 loading="lazy"
                 class="photo_main"
                 v-on:mouseover="activeZoom = !activeZoom"
-                :src="idCloudinaryDetalle(selectPhotoUrl, 645, 430)"
+                :src="idCloudinary(selectPhotoUrl, 645, 430)"
                 alt="Product Zoom"
               />
             </div>
@@ -365,11 +365,10 @@ import selectGroup from './_productdetails/selectGroup'
 import koDescription from './_productdetails/descriptionProduct.vue'
 import koSuggesProduct from './_productdetails/suggestionsProducto'
 import idCloudinary from '../../mixins/idCloudinary'
-import idCloudinaryDetalle from '../../mixins/idCloudinary'
 import zoom from './_productdetails/zoomImg'
 import currency from '../../mixins/formatCurrent'
 export default {
-  mixins: [idCloudinary, idCloudinaryDetalle, currency],
+  mixins: [idCloudinary, currency],
   name: 'Ko-ProductDetail-1',
   props: {
     dataStore: Object,
