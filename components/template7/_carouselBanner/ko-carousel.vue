@@ -17,13 +17,19 @@
           >
             <img
               class="banner"
-              :src="settingKCarousel.values[index].url_img_background"
+              :src="
+                idCloudinaryBanner(
+                  settingKCarousel.values[index].url_img_background
+                )
+              "
               alt="bg"
               v-if="settingKCarousel.values[index].url_img_background"
             />
             <img
               class="banner-responsive"
-              :src="settingKCarousel.values[index].url_img_movil"
+              :src="
+                idCloudinaryBanner(settingKCarousel.values[index].url_img_movil)
+              "
               alt="bg"
               v-if="settingKCarousel.values[index].url_img_movil"
             />
@@ -43,7 +49,9 @@
 
 <script>
 import KObanner from '../../../components/template7/_carouselBanner/banner-carousel'
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   components: {
     KObanner,
   },

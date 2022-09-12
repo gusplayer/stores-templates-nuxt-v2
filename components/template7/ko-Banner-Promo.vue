@@ -28,7 +28,7 @@
             <div class="content-1">
               <img
                 id="images-1"
-                v-lazy="settingKPromo.values[0].url_img"
+                v-lazy="idCloudinary(settingKPromo.values[0].url_img, 500, 500)"
                 alt="left-banner"
                 class="images"
               />
@@ -69,7 +69,9 @@
                 <img
                   id="images-2"
                   class="images"
-                  v-lazy="settingKPromo.values[1].url_img"
+                  v-lazy="
+                    idCloudinary(settingKPromo.values[1].url_img, 400, 400)
+                  "
                   alt="medium-top-banner"
                 />
               </div>
@@ -101,7 +103,9 @@
                 <img
                   id="images-3"
                   class="images"
-                  v-lazy="settingKPromo.values[2].url_img"
+                  v-lazy="
+                    idCloudinary(settingKPromo.values[2].url_img, 400, 400)
+                  "
                   alt="medium-bottom-banner"
                 />
               </div>
@@ -135,7 +139,7 @@
               <img
                 id="images-4"
                 class="images"
-                v-lazy="settingKPromo.values[3].url_img"
+                :src="idCloudinaryBanner(settingKPromo.values[3].url_img)"
                 alt="right-banner"
               />
             </div>
@@ -163,7 +167,9 @@
 </template>
 
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   name: 'ko-Banner-Promo',
   props: {
     settingKPromo: Object,

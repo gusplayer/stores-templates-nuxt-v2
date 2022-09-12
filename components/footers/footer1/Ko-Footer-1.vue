@@ -95,7 +95,9 @@
         <img
           width="120"
           loading="lazy"
-          :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+          v-lazy="
+            `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+          "
           class="logo-tablada"
           alt="Logo Img"
         />

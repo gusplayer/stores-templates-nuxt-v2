@@ -1,7 +1,7 @@
 <template>
   <div class="gify-content">
     <div class="container-gify">
-      <img class="image" :src="gify.photo" alt="gify" />
+      <img class="image" v-lazy="idCloudinaryBanner(gify.photo)" alt="gify" />
       <div class="overlay-tops">
         <div class="icons-hover">
           <div class="share-icon">
@@ -77,7 +77,9 @@
   </div>
 </template>
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   data() {
     return {
       hover: true,

@@ -20,7 +20,9 @@
         }; background:${settingKinformation.values[0].color_bg}; `"
       >
         <img
-          v-lazy="settingKinformation.values[0].url_img_Top"
+          v-lazy="
+            idCloudinary(settingKinformation.values[0].url_img_Top, 500, 500)
+          "
           alt="imgInfo1"
           class="contentimg"
         />
@@ -59,7 +61,9 @@
         }; background:${settingKinformation.values[1].color_bg}; `"
       >
         <img
-          v-lazy="settingKinformation.values[1].url_img_Top"
+          v-lazy="
+            idCloudinary(settingKinformation.values[1].url_img_Top, 500, 500)
+          "
           alt="imgInfo2"
           class="contentimg"
         />
@@ -98,7 +102,9 @@
         }; background:${settingKinformation.values[2].color_bg}; `"
       >
         <img
-          v-lazy="settingKinformation.values[2].url_img_Top"
+          v-lazy="
+            idCloudinary(settingKinformation.values[2].url_img_Top, 500, 500)
+          "
           alt="imgInfo3"
           class="contentimg"
         />
@@ -132,7 +138,9 @@
   </div>
 </template>
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   name: 'Ko-information',
   props: {
     settingKinformation: Object,

@@ -68,7 +68,7 @@
             >
               <img
                 class="img-wrapp"
-                :src="imagen.url_img"
+                v-lazy="idCloudinary(imagen.url_img, 500, 500)"
                 alt="imagenes de instagram"
               />
             </a>
@@ -79,7 +79,9 @@
   </div>
 </template>
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   name: 'Ko-wrapper',
   props: {
     dataStore: Object,

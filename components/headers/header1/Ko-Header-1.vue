@@ -168,7 +168,7 @@
             <div class="card-container">
               <div class="img-logo" v-if="product[0]">
                 <img
-                  :src="product[0].foto_cloudinary"
+                  v-lazy="idCloudinary(product[0].foto_cloudinary, 500, 500)"
                   class="logo"
                   alt="Product img"
                 />
@@ -188,7 +188,9 @@
 import KoOrder from '../_order1/order1'
 import KoMenu from '../_order1/openMenuRight'
 import KoSearch from './search.vue'
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   components: {
     KoOrder,
     KoMenu,

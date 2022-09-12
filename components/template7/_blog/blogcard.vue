@@ -22,7 +22,6 @@
               :src="idCloudinaryBanner(this.article.imagen_principal_url)"
               alt="right-banner"
             />
-
             <div v-else class="empty"></div>
           </figure>
         </div>

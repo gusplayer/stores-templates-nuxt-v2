@@ -33,7 +33,7 @@
               v-lazy="
                 `${this.$store.state.urlKomercia}/logos/${this.dataStore.tienda.logo}`
               "
-              alt="logotienda"
+              alt="logo_tienda"
             />
           </div>
           <div class="footer-content-button">

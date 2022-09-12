@@ -45,19 +45,19 @@
             :style="settingKHowwork.values[0]"
           >
             <img
-              :src="settingKHowwork.values[0].url_img"
+              v-lazy="idCloudinary(settingKHowwork.values[0].url_img, 400, 400)"
               alt="imageshwork-1"
               class="img-kohow"
             />
             <div class="hwork-tittle">
-              <span class="tittle-h">{{
-                settingKHowwork.values[0].title_product
-              }}</span>
+              <span class="tittle-h">
+                {{ settingKHowwork.values[0].title_product }}
+              </span>
             </div>
             <div class="hwork-description">
-              <span class="description-h"
-                >{{ settingKHowwork.values[0].description_product }}.</span
-              >
+              <spa class="description-h">
+                {{ settingKHowwork.values[0].description_product }}
+              </spa>
             </div>
             <div class="hwork-seemore">
               <span class="seemore-h">{{ $t('home_cardvermas') }}</span>
@@ -69,19 +69,19 @@
             :style="settingKHowwork.values[1]"
           >
             <img
-              :src="settingKHowwork.values[1].url_img"
+              v-lazy="idCloudinary(settingKHowwork.values[1].url_img, 400, 400)"
               alt="imageshwork-2"
               class="img-kohow"
             />
             <div class="hwork-tittle">
-              <span class="tittle-h">{{
-                settingKHowwork.values[1].title_product
-              }}</span>
+              <span class="tittle-h">
+                {{ settingKHowwork.values[1].title_product }}
+              </span>
             </div>
             <div class="hwork-description">
-              <span class="description-h">{{
-                settingKHowwork.values[1].description_product
-              }}</span>
+              <span class="description-h">
+                {{ settingKHowwork.values[1].description_product }}
+              </span>
             </div>
             <div class="hwork-seemore">
               <span class="seemore-h">{{ $t('home_cardvermas') }}</span>
@@ -93,19 +93,19 @@
             :style="settingKHowwork.values[2]"
           >
             <img
-              :src="settingKHowwork.values[2].url_img"
+              v-lazy="idCloudinary(settingKHowwork.values[2].url_img, 400, 400)"
               alt="imageshwork-3"
               class="img-kohow"
             />
             <div class="hwork-tittle">
-              <span class="tittle-h">{{
-                settingKHowwork.values[2].title_product
-              }}</span>
+              <span class="tittle-h">
+                {{ settingKHowwork.values[2].title_product }}
+              </span>
             </div>
             <div class="hwork-description">
-              <span class="description-h">{{
-                settingKHowwork.values[2].description_product
-              }}</span>
+              <span class="description-h">
+                {{ settingKHowwork.values[2].description_product }}
+              </span>
             </div>
             <div class="hwork-seemore">
               <span class="seemore-h">{{ $t('home_cardvermas') }}</span>
@@ -117,7 +117,9 @@
   </div>
 </template>
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  mixins: [idCloudinary],
   name: 'Ko-how-we-work',
   props: {
     settingKHowwork: Object,

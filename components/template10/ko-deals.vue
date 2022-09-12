@@ -16,7 +16,11 @@
       <div class="grid-left">
         <div class="bg-left"></div>
         <div class="content-image-left">
-          <img class="img-left" :src="offers.url_img_right" alt="img-left" />
+          <img
+            class="img-left"
+            v-lazy="idCloudinaryBanner(offers.url_img_right)"
+            alt="img-left"
+          />
         </div>
       </div>
       <div
