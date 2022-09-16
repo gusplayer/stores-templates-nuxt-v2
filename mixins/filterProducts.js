@@ -114,12 +114,14 @@ export default {
             type: [`${value}`],
             data: '',
           })
+          this.setURlTag(tag_id, tag_Name)
         }
       } else {
         this.$store.commit('products/FILTER_BY', {
           type: [`${value}`],
           data: '',
         })
+        this.setURlTag(tag_id, tag_Name)
       }
       this.currentPage = 1
       if (Lateral === true) {
@@ -154,6 +156,21 @@ export default {
         })
       }
       this.currentPage = 1
+    },
+    setURlTag(id, name) {
+      if (this.$store.state.products.type[0] == 'tag') {
+        this.$router.push({
+          path: '',
+          query: {},
+        })
+        this.$router.push({
+          path: '',
+          query: {
+            tagId: id,
+            tagName: name,
+          },
+        })
+      }
     },
   },
 }
