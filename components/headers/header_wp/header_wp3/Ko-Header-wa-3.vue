@@ -84,7 +84,7 @@
         </p>
       </div>
     </div>
-    <KoOrderWa :dataStore="dataStore" />
+    <KoOrderWa :dataStore="dataStore" :stateOrderWapi="true" />
   </div>
 </template>
 <script>
