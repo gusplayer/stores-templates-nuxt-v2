@@ -570,7 +570,6 @@
                 <div v-else style="margin-bottom: 18px"></div>
               </template>
             </validation-provider>
-
             <p class="form-subtext">{{ $t('footer_formIdenti') }}</p>
             <validation-provider
               name="id"
