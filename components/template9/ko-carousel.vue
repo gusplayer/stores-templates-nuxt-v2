@@ -1,7 +1,7 @@
 <template>
-  <div class="contein-carousel" :style="[banner, settingGeneral]">
+  <div class="contein-carousel h-full" :style="[banner, settingGeneral]">
     <div
-      class="carousel-content"
+      class="carousel-content h-full"
       :style="[
         {
           '--font-style-1':
@@ -22,13 +22,13 @@
         <div class="swiper-wrapper" v-if="this.banner.values">
           <div
             class="swiper-slide"
-            v-for="(elementBannner, index) in this.banner.values"
+            v-for="(elementBanner, index) in this.banner.values"
             :key="index"
           >
             <div
               class="swiper-slide-1"
               :style="`background-image: url(${idCloudinaryBanner(
-                elementBannner['url_img_background']
+                elementBanner['url_img_background']
               )})`"
             >
               <div class="banner-content-items-1">
@@ -36,34 +36,34 @@
                   <div class="text-top">
                     <p
                       class="banner-text-top"
-                      :style="`color: ${elementBannner['--color_pretitle']};`"
+                      :style="`color: ${elementBanner['--color_pretitle']};`"
                     >
-                      {{ elementBannner.pretitle }}
+                      {{ elementBanner.pretitle }}
                     </p>
                   </div>
                   <div class="text-medium">
                     <p
                       class="banner-text-medium"
-                      :style="`color: ${elementBannner['--color_title']};`"
+                      :style="`color: ${elementBanner['--color_title']};`"
                     >
-                      {{ elementBannner.title }}
+                      {{ elementBanner.title }}
                     </p>
                   </div>
                   <div class="text-bottom">
                     <p
                       class="banner-text-bottom"
-                      :style="`color: ${elementBannner['--color_description']};`"
+                      :style="`color: ${elementBanner['--color_description']};`"
                     >
-                      {{ elementBannner.description }}
+                      {{ elementBanner.description }}
                     </p>
                   </div>
-                  <div class="banner-button" v-if="elementBannner.url_redirect">
+                  <div class="banner-button" v-if="elementBanner.url_redirect">
                     <a
-                      :href="`${elementBannner.url_redirect}`"
+                      :href="`${elementBanner.url_redirect}`"
                       rel="noreferrer noopener"
                       class="btn-shop"
                       :class="
-                        elementBannner.url_redirect ? 'cursorPointer' : null
+                        elementBanner.url_redirect ? 'cursorPointer' : null
                       "
                     >
                       <span class="text-button">
@@ -109,20 +109,20 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-        autoplay: {
-          delay: 6000,
-          disableOnInteraction: false,
-        },
+        // autoplay: {
+        //   delay: 6000,
+        //   disableOnInteraction: false,
+        // },
       },
     }
   },
   methods: {
     autoplayBanner() {
-      if (this.banner && this.banner.values.length == 1) {
-        this.swiperOption.autoplay.delay = 900000000000000000
-      } else {
-        this.swiperOption.autoplay.delay = 6000
-      }
+      // if (this.banner && this.banner.values.length == 1) {
+      //   this.swiperOption.autoplay.delay = 900000000000000000
+      // } else {
+      //   this.swiperOption.autoplay.delay = 6000
+      // }
     },
   },
   watch: {
@@ -133,6 +133,9 @@ export default {
 }
 </script>
 <style scoped>
+.swiper-slide {
+  height: 100%;
+}
 .contein-carousel {
   @apply w-full flex flex-col justify-center items-center;
   /* margin-top: 72px; */
@@ -151,8 +154,8 @@ export default {
   /* height: 831px; */
   height: 50vw;
   object-fit: contain;
-  width: 100vw;
-  background-size: cover;
+  width: 100%;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -320,9 +323,13 @@ export default {
     font-size: 90px;
   }
 }
-/* @media (max-width: 500px) {
-  .banner-content-items-1 {
-    display: none;
+@media (max-width: 1366px) {
+  .swiper-slide,
+  .swiper-wrapper,
+  .swiper-slide-1 {
+    max-height: 600px;
+    /* height: 831px; */
+    height: 50vw;
   }
-} */
+}
 </style>
