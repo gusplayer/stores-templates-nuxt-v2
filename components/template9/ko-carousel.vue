@@ -1,7 +1,7 @@
 <template>
-  <div class="contein-carousel h-full" :style="[banner, settingGeneral]">
+  <div class="contein-carousel" :style="[banner, settingGeneral]">
     <div
-      class="carousel-content h-full"
+      class="carousel-content"
       :style="[
         {
           '--font-style-1':
@@ -109,20 +109,20 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-        // autoplay: {
-        //   delay: 6000,
-        //   disableOnInteraction: false,
-        // },
+        autoplay: {
+          delay: 6000,
+          disableOnInteraction: false,
+        },
       },
     }
   },
   methods: {
     autoplayBanner() {
-      // if (this.banner && this.banner.values.length == 1) {
-      //   this.swiperOption.autoplay.delay = 900000000000000000
-      // } else {
-      //   this.swiperOption.autoplay.delay = 6000
-      // }
+      if (this.banner && this.banner.values.length == 1) {
+        this.swiperOption.autoplay.delay = 900000000000000000
+      } else {
+        this.swiperOption.autoplay.delay = 6000
+      }
     },
   },
   watch: {
@@ -133,9 +133,6 @@ export default {
 }
 </script>
 <style scoped>
-.swiper-slide {
-  height: 100%;
-}
 .contein-carousel {
   @apply w-full flex flex-col justify-center items-center;
   /* margin-top: 72px; */
@@ -154,8 +151,8 @@ export default {
   /* height: 831px; */
   height: 50vw;
   object-fit: contain;
-  width: 100%;
-  background-size: contain;
+  width: 100vw;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -323,13 +320,9 @@ export default {
     font-size: 90px;
   }
 }
-@media (max-width: 1366px) {
-  .swiper-slide,
-  .swiper-wrapper,
-  .swiper-slide-1 {
-    max-height: 600px;
-    /* height: 831px; */
-    height: 50vw;
+/* @media (max-width: 500px) {
+  .banner-content-items-1 {
+    display: none;
   }
-}
+} */
 </style>
