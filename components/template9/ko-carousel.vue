@@ -21,56 +21,52 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper" v-if="this.banner.values">
           <div
-            class="swiper-slide"
+            class="swiper-slide swiper-slide w-full flex justify-center items-center"
             v-for="(elementBanner, index) in this.banner.values"
             :key="index"
           >
-            <div
-              class="swiper-slide-1"
-              :style="`background-image: url(${idCloudinaryBanner(
-                elementBanner['url_img_background']
-              )})`"
-            >
-              <div class="banner-content-items-1">
-                <div class="content-items-1">
-                  <div class="text-top">
-                    <p
-                      class="banner-text-top"
-                      :style="`color: ${elementBanner['--color_pretitle']};`"
-                    >
-                      {{ elementBanner.pretitle }}
-                    </p>
-                  </div>
-                  <div class="text-medium">
-                    <p
-                      class="banner-text-medium"
-                      :style="`color: ${elementBanner['--color_title']};`"
-                    >
-                      {{ elementBanner.title }}
-                    </p>
-                  </div>
-                  <div class="text-bottom">
-                    <p
-                      class="banner-text-bottom"
-                      :style="`color: ${elementBanner['--color_description']};`"
-                    >
-                      {{ elementBanner.description }}
-                    </p>
-                  </div>
-                  <div class="banner-button" v-if="elementBanner.url_redirect">
-                    <a
-                      :href="`${elementBanner.url_redirect}`"
-                      rel="noreferrer noopener"
-                      class="btn-shop"
-                      :class="
-                        elementBanner.url_redirect ? 'cursorPointer' : null
-                      "
-                    >
-                      <span class="text-button">
-                        {{ $t('home_comprarAhora') }}
-                      </span>
-                    </a>
-                  </div>
+            <img
+              class="slide-bgWeb"
+              :src="idCloudinaryBanner(elementBanner['url_img_background'])"
+              :alt="`img_banner_${index}`"
+            />
+            <div class="banner-content-items-1 absolute">
+              <div class="content-items-1">
+                <div class="text-top">
+                  <p
+                    class="banner-text-top"
+                    :style="`color: ${elementBanner['--color_pretitle']};`"
+                  >
+                    {{ elementBanner.pretitle }}
+                  </p>
+                </div>
+                <div class="text-medium">
+                  <p
+                    class="banner-text-medium"
+                    :style="`color: ${elementBanner['--color_title']};`"
+                  >
+                    {{ elementBanner.title }}
+                  </p>
+                </div>
+                <div class="text-bottom">
+                  <p
+                    class="banner-text-bottom"
+                    :style="`color: ${elementBanner['--color_description']};`"
+                  >
+                    {{ elementBanner.description }}
+                  </p>
+                </div>
+                <div class="banner-button" v-if="elementBanner.url_redirect">
+                  <a
+                    :href="`${elementBanner.url_redirect}`"
+                    rel="noreferrer noopener"
+                    class="btn-shop"
+                    :class="elementBanner.url_redirect ? 'cursorPointer' : null"
+                  >
+                    <span class="text-button">
+                      {{ $t('home_comprarAhora') }}
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -146,16 +142,16 @@ export default {
 .swiper-wrapper {
   @apply z-auto;
 }
-.swiper-slide-1 {
+/* .swiper-slide-1 {
   max-height: 831px;
-  /* height: 831px; */
+  height: 831px;
   height: 50vw;
   object-fit: contain;
   width: 100vw;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
+} */
 .text-button {
   color: var(--color_text_btn);
 }
@@ -184,10 +180,14 @@ export default {
 .banner-content-items-1 {
   padding: 20px;
 }
+.slide-bgWeb {
+  display: initial;
+  @apply w-full object-center object-cover;
+}
 @screen sm {
-  .swiper-slide-1 {
+  /* .swiper-slide-1 {
     @apply flex flex-col justify-center items-center z-auto;
-  }
+  } */
   .banner-content-items-1 {
     @apply w-9/0 flex flex-col justify-center items-center;
   }
@@ -277,9 +277,9 @@ export default {
   }
 }
 @screen lg {
-  .swiper-slide-1 {
+  /* .swiper-slide-1 {
     @apply justify-center items-center z-auto;
-  }
+  } */
   .banner-content-items-1 {
     @apply w-9/8 justify-start items-start;
   }
@@ -320,9 +320,9 @@ export default {
     font-size: 90px;
   }
 }
-/* @media (max-width: 500px) {
-  .banner-content-items-1 {
-    display: none;
-  }
-} */
+@media (min-width: 1400px) {
+  /* .slide-bgWeb {
+    max-height: 732px;
+  } */
+}
 </style>
