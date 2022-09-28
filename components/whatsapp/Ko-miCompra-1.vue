@@ -395,7 +395,7 @@ export default {
           id: '2',
           tag: 'payco',
           title: 'mcompra_pPase1',
-          description: 'Paga con tu cuenta bancaria o tarjeta debito',
+          description: 'Paga con tu cuenta bancaria o tarjeta débito',
         },
         {
           id: '3',
@@ -420,20 +420,20 @@ export default {
           tag: 'tienda',
           title: 'mcompra_pRecogerTienda',
           description:
-            'Si estas cerca a nuestro negocio, acercate a realizar el pago y recoger tu producto. Escribe abajo en los comentarios cuando vendrías a nuestra tienda para tener tu compra lista.',
+            'Si estas cerca a nuestro negocio, acércate a realizar el pago y recoger tu producto. Escribe abajo en los comentarios cuando vendrías a nuestra tienda para tener tu compra lista.',
         },
         {
           id: '7',
           tag: 'convenir',
           title: 'mcompra_pPagoConvenir',
           description:
-            'Al finalizar tu compra, te contactaremos o puedes comunicarte con nosostros por algunos de nuestros medios de comunicación para que organicemos la forma de pago de tu compra. ',
+            'Al finalizar tu compra, te contactaremos o puedes comunicarte con nosotros por algunos de nuestros medios de comunicación para que organicemos la forma de pago de tu compra. ',
         },
         {
           id: '8',
           tag: 'payco',
           title: 'mcompra_pSafetyPat',
-          description: 'Banca y efectivo internacinal',
+          description: 'Banca y efectivo internacional',
         },
         {
           id: '9',
@@ -445,7 +445,7 @@ export default {
           id: '10',
           tag: 'mercadopago',
           title: 'mcompra_pmercadoPago',
-          description: 'Tu cliente ha seleccionado mercadopago para pagar',
+          description: 'Tu cliente ha seleccionado mercadoPago para pagar',
         },
         {
           id: '11',
@@ -528,6 +528,12 @@ export default {
           color: '#4429AE',
           title: 'mcompra_entregado',
           ref: 'Entregado',
+        },
+        {
+          id: '10',
+          color: '#EB4D4B',
+          title: 'mcompra_rechazado',
+          ref: 'Rechazada',
         },
       ],
       direccion_entrega: {},

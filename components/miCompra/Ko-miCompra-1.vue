@@ -152,14 +152,15 @@
                     "
                     effect="dark"
                     style="margin-left: 10px"
-                    >{{
+                  >
+                    {{
                       $t(
                         saleStateHoko[
                           productDataHoko.delivery_state.valueOf(str) - 1
                         ].state
                       )
-                    }}</el-tag
-                  >
+                    }}
+                  </el-tag>
                 </div>
                 <div class="mt-4 flex flex-row items-center">
                   <p class="title-info-orden">Estado del proceso con Hoko:</p>
@@ -299,9 +300,9 @@
                   </p>
                   <p class="name" v-if="mensajeWa && mensajeWa.identificacion">
                     {{ $t('footer_formPhone') }}
-                    <span class="value-data">{{
-                      mensajeWa.identificacion
-                    }}</span>
+                    <span class="value-data">
+                      {{ mensajeWa.identificacion }}
+                    </span>
                   </p>
                   <p class="name" v-if="mensajeWa && mensajeWa.ciudad">
                     {{ $t('footer_formDepartamento') }}
@@ -316,8 +317,9 @@
                     <span
                       class="value-data"
                       v-if="mensajeWa && mensajeWa.direccion"
-                      >{{ mensajeWa.direccion }}</span
                     >
+                      {{ mensajeWa.direccion }}
+                    </span>
                     <span class="value-data" v-else>N/A</span>
                   </p>
                 </div>
@@ -327,27 +329,27 @@
                 >
                   <p class="name">
                     {{ $t('mcompra_nombre') }}
-                    <span class="value-data">{{
-                      orden.venta.usuario.nombre
-                    }}</span>
+                    <span class="value-data">
+                      {{ orden.venta.usuario.nombre }}
+                    </span>
                   </p>
                   <p
                     class="name"
                     v-if="this.cityComprador && this.cityComprador.departamento"
                   >
                     {{ $t('mcompra_departamento') }}
-                    <span class="value-data">{{
-                      this.cityComprador.departamento.nombre_dep
-                    }}</span>
+                    <span class="value-data">
+                      {{ this.cityComprador.departamento.nombre_dep }}
+                    </span>
                   </p>
                   <p
                     class="name"
                     v-if="this.cityComprador && this.cityComprador.nombre_ciu"
                   >
                     {{ $t('mcompra_ciudad') }}
-                    <span class="value-data">{{
-                      this.cityComprador.nombre_ciu
-                    }}</span>
+                    <span class="value-data">
+                      {{ this.cityComprador.nombre_ciu }}
+                    </span>
                   </p>
                   <p
                     class="name"
@@ -358,9 +360,9 @@
                     "
                   >
                     {{ $t('mcompra_barrio') }}
-                    <span class="value-data">{{
-                      this.direccion_entrega.value.barrio
-                    }}</span>
+                    <span class="value-data">
+                      {{ this.direccion_entrega.value.barrio }}
+                    </span>
                   </p>
                   <p class="address">
                     {{ $t('mcompra_direccion') }}
@@ -371,15 +373,17 @@
                         this.direccion_entrega.value &&
                         this.direccion_entrega.value.direccion
                       "
-                      >{{ this.direccion_entrega.value.direccion }}</span
                     >
+                      {{ this.direccion_entrega.value.direccion }}
+                    </span>
                     <span
                       class="value-data"
                       v-else-if="
                         orden && orden.venta.usuario.user_info[0].direccion
                       "
-                      >{{ orden.venta.usuario.user_info[0].direccion }}</span
                     >
+                      {{ orden.venta.usuario.user_info[0].direccion }}
+                    </span>
                     <span class="value-data" v-else>N/A</span>
                   </p>
                   <p class="telephone">
@@ -391,22 +395,23 @@
                         orden.venta.usuario.user_info[0].telefono != 'null' &&
                         orden.venta.usuario.user_info[0].telefono != ''
                       "
-                      >{{ orden.venta.usuario.user_info[0].telefono }}</span
                     >
+                      {{ orden.venta.usuario.user_info[0].telefono }}
+                    </span>
                     <span class="value-data" v-else>N/A</span>
                   </p>
                   <p class="email-address">
                     {{ $t('mcompra_correo') }}
-                    <span class="value-data" v-if="orden.venta.usuario.email">{{
-                      orden.venta.usuario.email
-                    }}</span>
+                    <span class="value-data" v-if="orden.venta.usuario.email">
+                      {{ orden.venta.usuario.email }}
+                    </span>
                     <span class="value-data" v-else>N/A</span>
                   </p>
                   <p class="messege">
                     {{ $t('mcompra_mensaje') }}
-                    <span class="value-data" v-if="orden.mensajes.length">{{
-                      orden.mensajes[0].mensaje
-                    }}</span>
+                    <span class="value-data" v-if="orden.mensajes.length">
+                      {{ orden.mensajes[0].mensaje }}
+                    </span>
                     <span class="value-data" v-else>N/A</span>
                   </p>
                 </div>
@@ -420,15 +425,15 @@
                     "
                   >
                     {{ $t('mcompra_departamento') }}
-                    <span class="value-data">{{
-                      city.departamento.nombre_dep
-                    }}</span>
+                    <span class="value-data">
+                      {{ city.departamento.nombre_dep }}
+                    </span>
                   </p>
                   <p class="city">
                     {{ $t('mcompra_ciudad') }}
-                    <span class="value-data" v-if="city && city.nombre_ciu">{{
-                      city.nombre_ciu
-                    }}</span>
+                    <span class="value-data" v-if="city && city.nombre_ciu">
+                      {{ city.nombre_ciu }}
+                    </span>
                     <span class="value-data" v-else>N/A</span>
                   </p>
                   <p class="address">
@@ -436,22 +441,23 @@
                     <span
                       class="value-data"
                       v-if="dataStore.geolocalizacion.length"
-                      >{{ dataStore.geolocalizacion[0].direccion }}</span
                     >
+                      {{ dataStore.geolocalizacion[0].direccion }}
+                    </span>
                     <span class="value-data" v-else>N/A</span>
                   </p>
                   <p class="telephone">
                     {{ $t('mcompra_telefono') }}
-                    <span class="value-data" v-if="dataStore.tienda.telefono">{{
-                      dataStore.tienda.telefono
-                    }}</span>
+                    <span class="value-data" v-if="dataStore.tienda.telefono">
+                      {{ dataStore.tienda.telefono }}
+                    </span>
                     <span class="value-data" v-else>N/A</span>
                   </p>
                   <p class="owner">
                     {{ $t('mcompra_nombreTienda') }}
-                    <span class="value-data" v-if="dataStore.tienda.nombre">{{
-                      dataStore.tienda.nombre
-                    }}</span>
+                    <span class="value-data" v-if="dataStore.tienda.nombre">
+                      {{ dataStore.tienda.nombre }}
+                    </span>
                     <span class="value-data" v-else>N/A</span>
                   </p>
                 </div>
@@ -485,8 +491,9 @@
                       :href="dataTransporter.link"
                       target="_blank"
                       class="value-data"
-                      >{{ dataTransporter.link }}</a
                     >
+                      {{ dataTransporter.link }}
+                    </a>
                   </p>
                 </div>
               </el-collapse-item>
@@ -571,7 +578,7 @@ export default {
           id: '2',
           tag: 'payco',
           title: 'mcompra_pPase1',
-          description: 'Paga con tu cuenta bancaria o tarjeta debito',
+          description: 'Paga con tu cuenta bancaria o tarjeta débito',
         },
         {
           id: '3',
@@ -596,20 +603,20 @@ export default {
           tag: 'tienda',
           title: 'mcompra_pRecogerTienda',
           description:
-            'Si estas cerca a nuestro negocio, acercate a realizar el pago y recoger tu producto. Escribe abajo en los comentarios cuando vendrías a nuestra tienda para tener tu compra lista.',
+            'Si estas cerca a nuestro negocio, acércate a realizar el pago y recoger tu producto. Escribe abajo en los comentarios cuando vendrías a nuestra tienda para tener tu compra lista.',
         },
         {
           id: '7',
           tag: 'convenir',
           title: 'mcompra_pPagoConvenir',
           description:
-            'Al finalizar tu compra, te contactaremos o puedes comunicarte con nosostros por algunos de nuestros medios de comunicación para que organicemos la forma de pago de tu compra. ',
+            'Al finalizar tu compra, te contactaremos o puedes comunicarte con nosotros por algunos de nuestros medios de comunicación para que organicemos la forma de pago de tu compra. ',
         },
         {
           id: '8',
           tag: 'payco',
           title: 'mcompra_pSafetyPat',
-          description: 'Banca y efectivo internacinal',
+          description: 'Banca y efectivo internacional',
         },
         {
           id: '9',
@@ -621,7 +628,7 @@ export default {
           id: '10',
           tag: 'mercadopago',
           title: 'mcompra_pmercadoPago',
-          description: 'Tu cliente ha seleccionado mercadopago para pagar',
+          description: 'Tu cliente ha seleccionado mercadoPago para pagar',
         },
         {
           id: '11',
@@ -704,6 +711,12 @@ export default {
           color: '#4429AE',
           title: 'mcompra_entregado',
           ref: 'Entregado',
+        },
+        {
+          id: '10',
+          color: '#EB4D4B',
+          title: 'mcompra_rechazado',
+          ref: 'Rechazada',
         },
       ],
       productDataHoko: {},
