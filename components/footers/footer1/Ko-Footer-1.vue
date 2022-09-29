@@ -57,11 +57,11 @@
         <p>{{ $t('footer_politicasyterminos') }}</p>
       </button>
       <div class="separator"></div>
-      <p v-if="this.showLogo == true">
+      <p v-if="this.showLogo">
         {{ $t('footer_desarrollado') }}
       </p>
       <a
-        v-if="this.showLogo == true"
+        v-if="this.showLogo"
         href="https://komercia.co/"
         target="_blank"
         rel="noreferrer noopener"
@@ -72,7 +72,7 @@
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
           "
-          v-if="logo == true"
+          v-if="logo"
           class="logo2"
           alt="Logo Img"
         />

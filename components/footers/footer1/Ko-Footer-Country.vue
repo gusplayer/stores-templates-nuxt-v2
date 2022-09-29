@@ -1,7 +1,7 @@
 <template>
   <div
     class="wrapper-footer-country"
-    :class="valueWa == true ? 'content-footer-country-wa' : ''"
+    :class="valueWa ? 'content-footer-country-wa' : ''"
   >
     <div class="content-footer-country" v-if="dataStore.tienda.pais">
       <div class="content-item-flag">
@@ -21,8 +21,9 @@
           <strong
             style="margin-right: 1px"
             v-if="dataStore.tienda.moneda == 'PEN'"
-            >S/</strong
           >
+            S/
+          </strong>
           <strong style="margin-right: 1px" v-else>$</strong>
           {{ dataStore.tienda.moneda }}
         </p>

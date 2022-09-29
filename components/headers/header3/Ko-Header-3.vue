@@ -3,7 +3,7 @@
     <div class="wrapper-header">
       <div class="header">
         <KoOrder :dataStore="dataStore" />
-        <div class="header-items-icon-menu" @click="openMenulateralLeft">
+        <div class="header-items-icon-menu" @click="openMenuLateralLeft">
           <menu-icon class="header-icon-menu nav-bar" />
         </div>
         <div class="header-content-logo">
@@ -46,7 +46,7 @@
             <span class="num-items">{{ productsCart }}</span>
           </div>
         </div>
-        <div class="header-item-menu" @click="openMenulateralRight">
+        <div class="header-item-menu" @click="openMenuLateralRight">
           <menu-icon class="header-icon-menu nav-bar" />
         </div>
         <KoMenuRight class="responsive" :dataStore="dataStore" />
@@ -166,16 +166,16 @@ export default {
     openOrder() {
       this.$store.state.openOrder = true
     },
-    openMenulateralLeft() {
-      this.$store.state.openMenulateralRight = true
-      this.$store.state.openMenulateralLeft = true
+    openMenuLateralLeft() {
+      this.$store.state.openMenuLateralRight = true
+      this.$store.state.openMenuLateralLeft = true
     },
-    openMenulateralRight() {
-      this.$store.state.openMenulateralLeft = true
-      this.$store.state.openMenulateralRight = true
+    openMenuLateralRight() {
+      this.$store.state.openMenuLateralLeft = true
+      this.$store.state.openMenuLateralRight = true
     },
     SearchProduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.$store.commit('SET_SEARCH_VALUE', search)
     },
     getSearch(value) {
       if (value) {
@@ -188,8 +188,7 @@ export default {
       }
     },
     setSearch(value) {
-      let urlFiltrada = decodeURIComponent(value)
-      this.search = urlFiltrada
+      this.search = decodeURIComponent(value)
     },
     clear() {
       this.$router.push({

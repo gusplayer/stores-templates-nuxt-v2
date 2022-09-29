@@ -239,10 +239,10 @@ export default {
       this.$store.commit('SET_OPEN_ORDER', true)
     },
     openMenuLateral() {
-      this.$store.commit('SET_OPENORDERMENULEFT', true)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
     },
     closed() {
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
     },
     clear() {
       this.$router.push({
@@ -251,7 +251,7 @@ export default {
       this.$store.commit('SET_STATE_BANNER', true)
     },
     SearchProduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.$store.commit('SET_SEARCH_VALUE', search)
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Search', { value: search })
       }
@@ -261,8 +261,7 @@ export default {
       })
     },
     setSearch(value) {
-      let urlFiltrada = decodeURIComponent(value)
-      this.search = urlFiltrada
+      this.search = decodeURIComponent(value)
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()

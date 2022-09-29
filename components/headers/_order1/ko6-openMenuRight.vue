@@ -33,8 +33,8 @@
             </div>
           </div>
         </template>
-        <div class="line-separator" v-if="this.showCategories == true"></div>
-        <template v-if="this.showCategories == true">
+        <div class="line-separator" v-if="this.showCategories"></div>
+        <template v-if="this.showCategories">
           <div class="wrapper-category-all">
             <li @click="clear">
               <p class="name-category-all">{{ $t('header_allProduct') }}</p>
@@ -147,7 +147,7 @@ export default {
       return this.$store.state.dataStore.tienda.logo
     },
     openMenuRight() {
-      return this.$store.state.openMenulateralRight
+      return this.$store.state.openMenuLateralRight
     },
     categorias() {
       return this.dataStore.categorias
@@ -166,7 +166,7 @@ export default {
       }
     },
     closed() {
-      this.$store.commit('SET_OPENORDERMENURIGTH', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_RIGHT', false)
     },
     closeOrder(event) {
       const element = event.target.className
@@ -176,7 +176,7 @@ export default {
         element === 'continue_shopping' ||
         element === 'continue_shopping2'
       ) {
-        this.$store.commit('SET_OPENORDERMENURIGTH', false)
+        this.$store.commit('SET_OPEN_ORDER_MENU_RIGHT', false)
       }
     },
     SendSubCategory(value) {
@@ -186,7 +186,7 @@ export default {
       })
       this.$store.commit('SET_STATE_BANNER', false)
       this.$store.commit('SET_PREVIOUS_PAGE', 1)
-      this.$store.commit('SET_OPENORDERMENURIGTH', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_RIGHT', false)
       this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
@@ -225,7 +225,7 @@ export default {
       })
       if (this.selectedSubcategories.length === 0) {
         this.addClass()
-        this.$store.commit('SET_OPENORDERMENURIGTH', false)
+        this.$store.commit('SET_OPEN_ORDER_MENU_RIGHT', false)
       }
       if (ref) {
         this.addClass()
@@ -243,7 +243,7 @@ export default {
         path: '/',
       })
       this.showMenu = false
-      this.$store.commit('SET_OPENORDERMENURIGTH', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_RIGHT', false)
       this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
         type: ['all'],

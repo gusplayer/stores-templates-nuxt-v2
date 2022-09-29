@@ -128,7 +128,7 @@ export default {
         this.$router.push({
           path: '/productos',
         })
-        this.$store.commit('SET_OPENORDERMENULEFT', false)
+        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       }
     },
     allCategories() {

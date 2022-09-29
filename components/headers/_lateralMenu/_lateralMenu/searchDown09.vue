@@ -135,7 +135,7 @@ export default {
       }
     },
     SearchProduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.$store.commit('SET_SEARCH_VALUE', search)
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Search', { value: search })
       }
@@ -206,7 +206,7 @@ export default {
         path: '/',
       })
       this.showMenu = false
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
         type: ['all'],

@@ -667,7 +667,7 @@
           <div class="content-btn">
             <div>
               <button @click="redirectWhatsapp()" class="btn-error">
-                <koWhatsApp class="icon-whatsapp" />Contactar a Komercia
+                <koWhatsApp class="icon-whatsapp" />Contactar soporte
               </button>
             </div>
             <div>
@@ -742,34 +742,21 @@ export default {
 </script>
 <style scoped>
 .wrapper_error {
-  display: flex;
-  width: 100%;
-  background-color: white;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
+  @apply w-full flex justify-center items-center box-border bg-white-white;
 }
 .contenedor {
-  width: 100%;
   max-width: 1300px;
   min-height: calc(100vh);
   padding: 10px 20px;
   justify-content: center;
   align-items: center;
-  @apply grid grid-flow-col grid-cols-2;
+  @apply w-full grid grid-flow-col grid-cols-2;
 }
 .content-left {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @apply w-full flex justify-center items-center;
 }
 .content-right {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  @apply w-full flex flex-col justify-center items-start;
 }
 .logokomercia {
   width: 200px;
@@ -806,45 +793,31 @@ export default {
   max-width: 225px;
 }
 .btn-komercia {
-  display: flex;
-  justify-content: center;
   border-radius: 5px;
   padding: 8px 12px;
   font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-  width: 100%;
-  font-weight: bold;
-  color: white;
   background: #4429b4;
   border: solid 2px #4429b4;
-  font-size: 16px;
   min-height: 47px;
   max-height: 47px;
+  transition: all 200ms ease-in;
+  @apply w-full flex justify-center items-center font-bold text-16 text-white-white;
 }
 .btn-komercia:hover {
   background: #623bfc;
   border: solid 2px #623bfc;
 }
 .btn-error {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-self: center;
   border-radius: 5px;
   background-color: white;
-  padding: 8px 12px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+  padding: 8px 0px;
   transition: all 200ms ease-in;
-  width: 100%;
   color: #25d366;
   border: solid 2px #25d366;
   fill: #25d366;
   min-height: 47px;
   max-height: 47px;
+  @apply w-full flex flex-row justify-center items-center font-bold text-16;
 }
 .btn-error:hover {
   color: #4429b4;

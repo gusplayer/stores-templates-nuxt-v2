@@ -296,18 +296,7 @@ export default {
   mixins: [filterProducts],
   name: 'Ko13-ProductList-Filter',
   mounted() {
-    this.setOptionShipping()
-    if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrlMix(this.$route.query.category)
-    } else if (
-      this.$route.query &&
-      this.$route.query.tagId &&
-      this.$route.query.tagName
-    ) {
-      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-    } else if (this.$route.fullPath == '/') {
-      this.allCategories()
-    }
+    this.getQuery()
     if (this.previousPage) {
       this.currentPage = this.previousPage
     }
@@ -373,6 +362,27 @@ export default {
     },
   },
   methods: {
+    getQuery() {
+      if (this.$route.query && this.$route.query.category) {
+        this.sendCategoryUrlMix(this.$route.query.category)
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.SendSubCategoryUrlMix(
+          this.$route.query.subcategory,
+          this.categorias,
+          this.subcategories
+        )
+      } else if (
+        this.$route.query &&
+        this.$route.query.tagId &&
+        this.$route.query.tagName
+      ) {
+        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
+      } else if (this.$route.query && this.$route.query.search) {
+        this.SearchProduct(decodeURIComponent(this.$route.query.search))
+      } else if (this.$route.fullPath == '/') {
+        this.allCategories()
+      }
+    },
     setOptionShipping() {
       if (this.dataStore && this.dataStore.medios_envio) {
         let shipping = JSON.parse(this.dataStore.medios_envio.valores)
@@ -498,23 +508,7 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
-      if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrlMix(this.$route.query.category)
-      } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendSubCategoryUrlMix(
-          this.$route.query.subcategory,
-          this.categorias,
-          this.subcategories
-        )
-      } else if (
-        this.$route.query &&
-        this.$route.query.tagId &&
-        this.$route.query.tagName
-      ) {
-        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-      } else if (this.$route.fullPath == '/') {
-        this.allCategories()
-      }
+      this.getQuery()
     },
     searchValue(value) {
       this.SearchProduct(value)

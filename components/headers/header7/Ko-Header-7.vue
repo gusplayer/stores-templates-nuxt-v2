@@ -229,7 +229,7 @@ export default {
       this.$store.commit('SET_OPEN_ORDER', true)
     },
     openMenuLateral() {
-      this.$store.commit('SET_OPENORDERMENULEFT', true)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
     },
     clear() {
       this.$router.push({
@@ -238,11 +238,10 @@ export default {
       this.$store.commit('SET_STATE_BANNER', true)
     },
     setSearch(value) {
-      let urlFiltrada = decodeURIComponent(value)
-      this.search = urlFiltrada
+      this.search = decodeURIComponent(value)
     },
     SearchProduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.$store.commit('SET_SEARCH_VALUE', search)
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Search', { value: search })
       }

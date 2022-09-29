@@ -255,7 +255,7 @@ export default {
       return this.$store.state.dataStore.tienda.logo
     },
     openMenuLeft() {
-      return this.$store.state.openMenulateralLeft
+      return this.$store.state.openMenuLateralLeft
     },
     categorias() {
       return this.dataStore.categorias
@@ -303,10 +303,10 @@ export default {
       }
     },
     SearchProduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.$store.commit('SET_SEARCH_VALUE', search)
     },
     closed() {
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
     },
     closeOrder(event) {
       const element = event.target.className
@@ -316,7 +316,7 @@ export default {
         element === 'continue_shopping' ||
         element === 'continue_shopping2'
       ) {
-        this.$store.commit('SET_OPENORDERMENULEFT', false)
+        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       }
     },
     SendSubCategory(value) {
@@ -326,7 +326,7 @@ export default {
       })
       this.$store.commit('SET_STATE_BANNER', false)
       this.$store.commit('SET_PREVIOUS_PAGE', 1)
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.id == value
@@ -363,7 +363,7 @@ export default {
         }
       })
       if (this.selectedSubcategories.length === 0) {
-        this.$store.commit('SET_OPENORDERMENULEFT', false)
+        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       }
       this.$store.commit('products/FILTER_BY', {
         type: ['category'],
@@ -375,7 +375,7 @@ export default {
         path: '/productos',
       })
       this.showMenu = false
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
         type: ['all'],

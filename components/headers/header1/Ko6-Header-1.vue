@@ -176,10 +176,10 @@ export default {
     },
     openMenuLateral() {
       this.showMenu = false
-      this.$store.state.openMenulateralRight = true
+      this.$store.state.openMenuLateralRight = true
     },
     SearchProduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.$store.commit('SET_SEARCH_VALUE', search)
     },
     getSearch(value) {
       if (value) {
@@ -192,8 +192,7 @@ export default {
       }
     },
     setSearch(value) {
-      let urlFiltrada = decodeURIComponent(value)
-      this.search = urlFiltrada
+      this.search = decodeURIComponent(value)
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()

@@ -248,8 +248,8 @@
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'tarifa_plana' &&
                     shipping > 0 &&
-                    getFreeShipping == true &&
-                    FreeShippingCart == false
+                    getFreeShipping &&
+                    !FreeShippingCart
                   "
                 >
                   <div class="content-list">
@@ -272,8 +272,8 @@
                 <div
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'precio' &&
-                    getFreeShipping == true &&
-                    FreeShippingCart == false
+                    getFreeShipping &&
+                    !FreeShippingCart
                   "
                   style="width: 100%"
                 >
@@ -357,10 +357,7 @@
                   </p>
                   <p class="txt_summary_price">-</p>
                 </div>
-                <div
-                  class="contet-free-delivery"
-                  v-else-if="FreeShippingCart == true"
-                >
+                <div class="contet-free-delivery" v-else-if="FreeShippingCart">
                   <p class="txt_summary_tittle">
                     {{ $t('footer_tarifaPrecio') }}
                   </p>
@@ -447,7 +444,7 @@
                   !isQuotation() &&
                   dataStore.tienda.estado == 1 &&
                   this.estadoShippingTarifaPrecio == false &&
-                  countryStore == true &&
+                  countryStore &&
                   IsMinValorTotal() &&
                   expiredDate(dataStore.tienda.fecha_expiracion)
                 "
@@ -576,7 +573,7 @@ export default {
       return this.rangosByCiudades
     },
     shipping() {
-      if (this.FreeShippingCart == true) {
+      if (this.FreeShippingCart) {
         return 0
       } else {
         if (this.$store.state.envios.estado) {
@@ -768,7 +765,7 @@ export default {
       }
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
-        if (this.layourUnicentro == true) {
+        if (this.layourUnicentro) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
           this.$store.dispatch('SEND_ADD_TO_CART', 2)
         } else {
