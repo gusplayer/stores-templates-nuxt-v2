@@ -153,7 +153,7 @@ export default {
     if (
       this.settingByTemplate7 &&
       this.settingByTemplate7[0].setting7Header &&
-      this.settingByTemplate7[0].setting7Header.transparente == true
+      this.settingByTemplate7[0].setting7Header.transparente
     ) {
       header.style.backgroundColor = 'transparent'
       window.onscroll = function () {
@@ -268,10 +268,10 @@ export default {
       this.$store.commit('SET_OPEN_ORDER', true)
     },
     openMenuLateral() {
-      this.$store.commit('SET_OPENORDERMENULEFT', true)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
     },
     closed() {
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
     },
     clear() {
       this.$router.push({
@@ -280,7 +280,7 @@ export default {
       this.$store.commit('SET_STATE_BANNER', true)
     },
     SearchProduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.$store.commit('SET_SEARCH_VALUE', search)
     },
     getSearch(value) {
       if (value) {
@@ -294,8 +294,7 @@ export default {
     },
     setSearch(value) {
       this.openSearch()
-      let urlFiltrada = decodeURIComponent(value)
-      this.search = urlFiltrada
+      this.search = decodeURIComponent(value)
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()

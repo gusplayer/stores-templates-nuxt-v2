@@ -62,7 +62,7 @@
                     />
                     <div
                       class="header-text-center-icon"
-                      v-if="showMenu == true"
+                      v-if="showMenu"
                       :is="item.iconClose"
                     />
                   </div>
@@ -342,14 +342,14 @@ export default {
     },
     openMenuLateral() {
       this.showMenu = false
-      this.$store.state.openMenulateralRight = true
+      this.$store.state.openMenuLateralRight = true
     },
     openMenu(name) {
       var intro = document.getElementById('menu-collapse')
       if (name == 'header_categorias') {
         this.showMenu = !this.showMenu
       }
-      if (this.showMenu == false) {
+      if (!this.showMenu) {
         intro.style.display = 'none'
       } else {
         intro.style.display = 'flex'
@@ -373,7 +373,7 @@ export default {
       ) {
         this.showMenu = false
       }
-      if (this.showMenu == false) {
+      if (!this.showMenu) {
         intro.style.display = 'none'
       } else {
         intro.style.display = 'flex'
@@ -429,12 +429,6 @@ export default {
           this.selectedSubcategories.push(subcategoria)
         }
       })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
       this.$router.push({
         path: '/',
         query: { category: value.nombre_categoria_producto },
@@ -445,9 +439,6 @@ export default {
       })
       this.$store.commit('SET_PREVIOUS_PAGE', 1)
     },
-    addClass() {
-      this.add = !this.add
-    },
     clear() {
       this.idCategory = ''
       this.indexSelect = ''
@@ -457,7 +448,7 @@ export default {
         query: '',
       })
       this.$store.commit('SET_STATE_BANNER', true)
-      this.$store.commit('SET_OPENORDERMENURIGTH', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_RIGHT', false)
       this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
@@ -465,16 +456,15 @@ export default {
         data: '',
       })
       this.$emit('clear')
-      this.addClass()
       this.nameCategory = ''
     },
     SearchProduct(search) {
       if (search) {
         this.$store.commit('SET_STATE_BANNER', false)
-        this.$store.commit('SET_SEARCHVALUE', search)
+        this.$store.commit('SET_SEARCH_VALUE', search)
       } else {
         this.$store.commit('SET_STATE_BANNER', true)
-        this.$store.commit('SET_SEARCHVALUE', '')
+        this.$store.commit('SET_SEARCH_VALUE', '')
       }
     },
     getSearch(value) {
@@ -488,8 +478,7 @@ export default {
       }
     },
     setSearch(value) {
-      let urlFiltrada = decodeURIComponent(value)
-      this.search = urlFiltrada
+      this.search = decodeURIComponent(value)
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()

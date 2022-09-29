@@ -133,7 +133,7 @@ export default {
       return this.$store.state.dataStore.tienda.logo
     },
     openMenuLeft() {
-      return this.$store.state.openMenulateralLeft
+      return this.$store.state.openMenuLateralLeft
     },
     categorias() {
       return this.dataStore.categorias
@@ -144,7 +144,7 @@ export default {
   },
   methods: {
     closed() {
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
     },
     closeOrder(event) {
       const element = event.target.className
@@ -154,7 +154,7 @@ export default {
         element === 'continue_shopping' ||
         element === 'continue_shopping2'
       ) {
-        this.$store.commit('SET_OPENORDERMENULEFT', false)
+        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       }
     },
     SendSubCategory(value) {
@@ -163,7 +163,7 @@ export default {
         path: '/',
       })
       this.$store.commit('SET_PREVIOUS_PAGE', 1)
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
@@ -219,7 +219,7 @@ export default {
         path: '/',
       })
       this.showMenu = false
-      this.$store.commit('SET_OPENORDERMENULEFT', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
         type: ['all'],

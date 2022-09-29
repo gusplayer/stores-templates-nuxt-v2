@@ -191,7 +191,7 @@
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'tarifa_plana' &&
                         shipping > 0 &&
-                        getFreeShipping == true &&
+                        getFreeShipping &&
                         FreeShippingCart == false
                       "
                     >
@@ -209,7 +209,7 @@
                     <div
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'precio' &&
-                        getFreeShipping == true &&
+                        getFreeShipping &&
                         FreeShippingCart == false
                       "
                     >
@@ -275,7 +275,7 @@
                     </p>
                     <p
                       class="without_shipping_cost"
-                      v-else-if="FreeShippingCart == true"
+                      v-else-if="FreeShippingCart"
                     >
                       {{ $t('footer_tarifaPrecio') }}
                     </p>
@@ -355,7 +355,7 @@
                     v-if="
                       productsCart.length &&
                       this.shippingTarifaPrecio == 'empty' &&
-                      this.estadoShippingTarifaPrecio == true
+                      this.estadoShippingTarifaPrecio
                     "
                   >
                     {{ $t('footer_contactoMgs2') }}
@@ -396,7 +396,7 @@
                       !isQuotation() &&
                       dataStore.tienda.estado == 1 &&
                       this.estadoShippingTarifaPrecio == false &&
-                      countryStore == true &&
+                      countryStore &&
                       IsMinValorTotal() &&
                       expiredDate(dataStore.tienda.fecha_expiracion)
                     "
@@ -414,7 +414,7 @@
                       !isQuotation() &&
                       dataStore.tienda.estado == 1 &&
                       this.estadoShippingTarifaPrecio == false &&
-                      countryStore == true &&
+                      countryStore &&
                       IsMinValorTotal() &&
                       settingByTemplate.pago_online == 1 &&
                       expiredDate(dataStore.tienda.fecha_expiracion)
@@ -726,7 +726,7 @@
           <whatsapp-icon class="wp-icon" /> {{ $t('footer_finalizarCompra') }}
         </button>
       </div>
-      <div class="modal-confirmation" v-if="this.modalConfirmation == true">
+      <div class="modal-confirmation" v-if="this.modalConfirmation">
         <p>{{ this.textConfirmation }}</p>
         <button
           class="continue_form_confirmation"
@@ -881,7 +881,7 @@ export default {
       return this.$store.state.cities
     },
     shipping() {
-      if (this.FreeShippingCart == true) {
+      if (this.FreeShippingCart) {
         return 0
       } else {
         if (this.$store.state.envios.estado) {
@@ -1098,7 +1098,7 @@ export default {
       }
       json = JSON.stringify(json)
       if (this.$store.state.productsCart.length != 0) {
-        if (this.layourUnicentro == true) {
+        if (this.layourUnicentro) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
           this.$store.dispatch('SEND_ADD_TO_CART', 2)
         } else {

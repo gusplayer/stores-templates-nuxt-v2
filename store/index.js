@@ -27,8 +27,8 @@ export const state = () => ({
   geolocalizacion: [],
   openOrder: false,
   openOrderValienta: false,
-  openMenulateralRight: false,
-  openMenulateralLeft: false,
+  openMenuLateralRight: false,
+  openMenuLateralLeft: false,
   openSearch: false,
   stateBanner: true,
   mediospago: {
@@ -458,7 +458,7 @@ export const mutations = {
   SET_STATE_BANNER(state, value) {
     state.stateBanner = value
   },
-  SET_SEARCHVALUE(state, value) {
+  SET_SEARCH_VALUE(state, value) {
     state.searchValue = value
   },
   SET_ACCESSTOKEN(state, value) {
@@ -485,11 +485,11 @@ export const mutations = {
   SET_OPENORDER_VALIENTA: (state, value) => {
     state.openOrderValienta = value
   },
-  SET_OPENORDERMENURIGTH: (state, value) => {
-    state.openMenulateralRight = value
+  SET_OPEN_ORDER_MENU_RIGHT: (state, value) => {
+    state.openMenuLateralRight = value
   },
-  SET_OPENORDERMENULEFT: (state, value) => {
-    state.openMenulateralLeft = value
+  SET_OPEN_ORDER_MENU_LEFT: (state, value) => {
+    state.openMenuLateralLeft = value
   },
   SET_ARTICLES(state, value) {
     state.listArticulos = value

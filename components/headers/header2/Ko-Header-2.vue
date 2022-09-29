@@ -59,7 +59,7 @@
                     />
                     <div
                       class="header-text-center-icon"
-                      v-if="showMenu == true"
+                      v-if="showMenu"
                       :is="item.iconClose"
                     />
                   </div>
@@ -309,7 +309,7 @@ export default {
     },
     openMenuLateral() {
       this.showMenu = false
-      this.$store.state.openMenulateralRight = true
+      this.$store.state.openMenuLateralRight = true
     },
     openMenu(name) {
       var intro = document.getElementById('menu-collapse')
@@ -425,7 +425,7 @@ export default {
         path: '/',
       })
       this.$store.commit('SET_STATE_BANNER', true)
-      this.$store.commit('SET_OPENORDERMENURIGTH', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_RIGHT', false)
       this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {
         type: ['all'],
@@ -436,7 +436,7 @@ export default {
       this.nameCategory = ''
     },
     SearchProduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.$store.commit('SET_SEARCH_VALUE', search)
     },
     getSearch(value) {
       if (value) {
@@ -449,8 +449,7 @@ export default {
       }
     },
     setSearch(value) {
-      let urlFiltrada = decodeURIComponent(value)
-      this.search = urlFiltrada
+      this.search = decodeURIComponent(value)
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()

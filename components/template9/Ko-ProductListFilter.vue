@@ -469,6 +469,8 @@ export default {
       this.$route.query.tagName
     ) {
       this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
+    } else if (this.$route.query && this.$route.query.search) {
+      this.SearchProduct(decodeURIComponent(this.$route.query.search))
     } else if (this.$route.fullPath == '/') {
       this.allCategories()
     }
@@ -698,6 +700,9 @@ export default {
     search(value) {
       this.SearchProduct(value)
     },
+    searchValue(value) {
+      this.SearchProduct(value)
+    },
     currentPage() {
       this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
       let timerTimeout = null
@@ -733,12 +738,11 @@ export default {
         this.$route.query.tagName
       ) {
         this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
+      } else if (this.$route.query && this.$route.query.search) {
+        this.SearchProduct(decodeURIComponent(this.$route.query.search))
       } else if (this.$route.fullPath == '/') {
         this.allCategories()
       }
-    },
-    searchValue(value) {
-      this.SearchProduct(value)
     },
   },
 }

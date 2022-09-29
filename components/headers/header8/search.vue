@@ -57,7 +57,7 @@ export default {
       }
     },
     SearchProduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.$store.commit('SET_SEARCH_VALUE', search)
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Search', { value: search })
       }

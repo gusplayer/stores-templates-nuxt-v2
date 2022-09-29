@@ -196,7 +196,7 @@ export default {
       this.$store.commit('SET_OPENORDER_VALIENTA', true)
     },
     SearchProduct(search) {
-      this.$store.commit('SET_SEARCHVALUE', search)
+      this.$store.commit('SET_SEARCH_VALUE', search)
     },
     getSearch(value) {
       if (value) {

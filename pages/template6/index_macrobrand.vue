@@ -94,7 +94,7 @@ export default {
   methods: {
     SearchProduct(search) {
       this.search = search
-      this.$store.commit('SET_SEARCHVALUE', this.search)
+      this.$store.commit('SET_SEARCH_VALUE', this.search)
     },
     getSearch(value) {
       if (value) {

@@ -159,7 +159,7 @@ export default {
         path: '/',
       })
       this.$store.commit('SET_STATE_BANNER', true)
-      this.$store.commit('SET_OPENORDERMENURIGTH', false)
+      this.$store.commit('SET_OPEN_ORDER_MENU_RIGHT', false)
       this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.$store.commit('products/FILTER_BY', {

@@ -158,7 +158,7 @@
       </div>
       <div
         class="madebyKomercia"
-        v-if="settingByTemplate10[0].setting10Footer.watermark == true"
+        v-if="settingByTemplate10[0].setting10Footer.watermark"
       >
         <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
         <a
@@ -170,7 +170,7 @@
             v-lazy="
               `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
             "
-            v-if="logo == true"
+            v-if="logo"
             class="logo2"
             alt="Logo Img"
           />
