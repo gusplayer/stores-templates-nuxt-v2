@@ -130,7 +130,6 @@ export default {
         },
       ],
       cat: [],
-      add: true,
       selectSubcategory: '',
       nameCategory: '',
       nameSubCategory: '',
