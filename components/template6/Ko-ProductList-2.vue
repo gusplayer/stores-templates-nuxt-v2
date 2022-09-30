@@ -141,7 +141,6 @@ export default {
   },
   data() {
     return {
-      add: true,
       search: '',
       productsCategory: [],
       price: [0, 1000000],

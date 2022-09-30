@@ -270,7 +270,7 @@ export default {
           state: true,
         },
       ],
-      add: true,
+
       selectSubcategory: '',
       nameCategory: '',
       nameSubCategory: '',
@@ -389,7 +389,6 @@ export default {
       this.indexSelect = value
       this.$store.commit('SET_STATE_BANNER', false)
       this.showMenu = false
-      this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.id == value

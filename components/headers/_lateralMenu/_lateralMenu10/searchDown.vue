@@ -71,8 +71,6 @@ export default {
 
   data() {
     return {
-      add: true,
-      show: false,
       selectSubcategory: '',
       nameCategory: '',
       nameSubCategory: '',
@@ -126,9 +124,6 @@ export default {
     },
   },
   methods: {
-    toggleItem: function () {
-      this.show = !this.show
-    },
     focusInput() {
       document.getElementById('SearchHeader').focus()
     },
@@ -158,7 +153,6 @@ export default {
       })
       this.$store.commit('SET_PREVIOUS_PAGE', 1)
       this.$store.commit('SET_OPEN_SEARCH', false)
-      this.addClass()
       this.selectSubcategory = value
       let filtradoSubCategoria = this.subcategories.find(
         (element) => element.id == value
@@ -194,19 +188,10 @@ export default {
           this.selectedSubcategories.push(subcategoria)
         }
       })
-      if (this.selectedSubcategories.length === 0) {
-        this.addClass()
-      }
-      if (ref) {
-        this.addClass()
-      }
       this.$store.commit('products/FILTER_BY', {
         type: ['category'],
         data: value.nombre_categoria_producto,
       })
-    },
-    addClass() {
-      this.add = !this.add
     },
     clear() {
       this.$router.push({
@@ -220,7 +205,6 @@ export default {
         data: '',
       })
       this.$emit('clear')
-      this.addClass()
       this.nameCategory = ''
     },
   },
