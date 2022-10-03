@@ -82,26 +82,24 @@
             </div>
             <div class="wrapper-photo_main">
               <div
+                v-on:mouseover="activeZoom = !activeZoom"
                 v-if="this.activeZoom"
                 v-show="!existYoutube"
                 class="photo_main"
               >
                 <img
                   class="photo_main"
-                  v-on:mouseover="activeZoom = !activeZoom"
-                  v-lazy="selectPhotoUrl"
+                  :src="idCloudinary(selectPhotoUrl, 442, 564)"
                   alt="Product Zoom"
                 />
               </div>
               <div
+                v-on:mouseleave="activeZoom = !activeZoom"
                 v-if="!this.activeZoom"
                 v-show="!existYoutube"
                 class="photo_main"
               >
-                <zoom
-                  v-on:mouseleave="activeZoom = !activeZoom"
-                  :photo="selectPhotoUrl"
-                />
+                <zoom :photo="selectPhotoUrl" />
               </div>
               <iframe
                 v-show="existYoutube"
@@ -1086,8 +1084,8 @@ export default {
 }
 .wrapper-photo_main {
   position: relative;
-  max-width: 650px;
-  max-height: 600px;
+  max-width: 442px;
+  max-height: 442px;
   width: 100%;
   margin-right: 10px;
 }
@@ -1097,6 +1095,7 @@ export default {
   object-fit: contain;
   object-position: center;
   border-radius: 10px;
+  max-height: 442px;
 }
 .wrapper-productDetail {
   background: var(--background_color_1);

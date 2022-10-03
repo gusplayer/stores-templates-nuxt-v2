@@ -42,7 +42,7 @@
                       <img
                         @click="selectedPhoto(foto.foto_cloudinary)"
                         class="img-list"
-                        v-lazy="foto.foto_cloudinary"
+                        v-lazy="idCloudinary(foto.foto_cloudinary, 645, 430)"
                         alt="Product Img"
                       />
                     </div>
@@ -71,25 +71,23 @@
             <div class="wrapper-photo_main">
               <div
                 v-if="this.activeZoom"
+                v-on:mouseover="activeZoom = !activeZoom"
                 v-show="!existYoutube"
                 class="photo_main"
               >
                 <img
                   class="photo_main"
-                  v-on:mouseover="activeZoom = !activeZoom"
-                  v-lazy="selectPhotoUrl"
+                  :src="idCloudinary(selectPhotoUrl, 645, 450)"
                   alt="Product Zoom"
                 />
               </div>
               <div
                 v-if="!this.activeZoom"
+                v-on:mouseleave="activeZoom = !activeZoom"
                 v-show="!existYoutube"
                 class="photo_main"
               >
-                <zoom
-                  v-on:mouseleave="activeZoom = !activeZoom"
-                  :photo="selectPhotoUrl"
-                />
+                <zoom :photo="selectPhotoUrl" />
               </div>
               <iframe
                 v-show="existYoutube"
@@ -1091,16 +1089,18 @@ export default {
 .wrapper-photo_main {
   position: relative;
   max-width: 650px;
-  max-height: 600px;
+  max-height: 500px;
+  height: 500px;
+  min-height: 500px;
   width: 100%;
   margin-right: 10px;
 }
 .photo_main {
   width: 100%;
-  height: 100%;
+  height: 500px;
   max-width: 650px;
-  max-height: 600px;
-  object-fit: contain;
+  max-height: 500px;
+  object-fit: cover;
   object-position: center;
   border-radius: 10px;
 }
