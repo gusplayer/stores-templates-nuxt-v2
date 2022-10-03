@@ -1,5 +1,9 @@
 <template>
-  <figure class="zoom" :style="setBackground(photo)" v-on:mousemove="zoom">
+  <figure
+    class="zoom"
+    :style="setBackground(idCloudinaryBanner(photo, 645, 430))"
+    v-on:mousemove="zoom"
+  >
     <img
       class="photo_main"
       v-on:mouseover="activeZoom = !activeZoom"
@@ -11,7 +15,6 @@
 
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
-
 export default {
   mixins: [idCloudinary],
   name: 'zoomImg-details',
