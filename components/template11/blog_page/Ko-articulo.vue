@@ -4,7 +4,8 @@
       <p class="tittle-blog">{{ dataArticle.titulo }}</p>
       <div class="content-img">
         <img
-          class="img-aritcle"
+          v-if="dataArticle && dataArticle.imagen_principal_url"
+          class="img-article"
           v-lazy="idCloudinaryBanner(dataArticle.imagen_principal_url)"
           alt="Image-Article"
         />
@@ -41,10 +42,10 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
-import extensions from '../../../mixins/elemenTiptap.vue'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
+import extensions from '@/mixins/elemenTiptap.vue'
 export default {
-  mixins: [extensions, idCloudinary],
+  mixins: [extensions, idCloudinaryBanner],
   name: 'Ko-Blog',
   props: {
     dataStore: Object,
