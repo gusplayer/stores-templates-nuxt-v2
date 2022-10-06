@@ -332,7 +332,6 @@
                       isQuotation() ||
                       (countryStore == false &&
                         productsCart.length &&
-                        expiredDate(dataStore.tienda.fecha_expiracion) &&
                         dataStore.tienda.estado == 1)
                     "
                     class="wrapper-Quotation"
@@ -341,7 +340,10 @@
                       {{ $t('footer_contactoMgs') }}
                     </p>
                     <button
-                      v-if="!stateOrderWapi"
+                      v-if="
+                        !stateOrderWapi &&
+                        expiredDate(dataStore.tienda.fecha_expiracion)
+                      "
                       class="continue_shopping_whatsapp"
                       @click="formOrden = !formOrden"
                     >
@@ -442,7 +444,8 @@
                       !isQuotation() &&
                       IsMinValorTotal() &&
                       dataStore.tienda.estado == 1 &&
-                      dataStore.tienda.whatsapp
+                      dataStore.tienda.whatsapp &&
+                      expiredDate(dataStore.tienda.fecha_expiracion)
                     "
                     class="continue_shopping_whatsapp"
                     :style="`background: ${

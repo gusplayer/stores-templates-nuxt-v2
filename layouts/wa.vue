@@ -3,34 +3,6 @@
     <div class="general-container" v-if="dataStore">
       <div v-if="stateModalPwd">
         <nuxt />
-        <div
-          class="wrapper-notificacion"
-          id="modalNotificacion"
-          v-if="dataStore.tienda.estado == 0"
-        >
-          <div class="content-notificacion">
-            <koTiendaCerrada />
-            <p class="text-noti">
-              Disculpa, no podrá realizar compras por el momento,
-            </p>
-            <p class="subtitle-noti">¿Deseas continuar?</p>
-            <button class="btn-acceptM" @click="acceptClose()">Aceptar</button>
-          </div>
-        </div>
-        <div
-          class="wrapper-notificacion-wa"
-          v-if="dataStore.tienda.whatsapp == ''"
-        >
-          <div class="content-notificacion">
-            <koTiendaCerrada />
-            <p class="text-noti">
-              Disculpa, no podrá realizar compras por el momento,
-            </p>
-            <p class="subtitle-noti">
-              La tienda no tiene configurado un número de WhatsApp
-            </p>
-          </div>
-        </div>
       </div>
       <koModalsecurity :dataStore="dataStore" v-else />
     </div>
@@ -41,13 +13,11 @@
 </template>
 
 <script>
-import koTiendaCerrada from '../assets/img/tiendaCerrada'
 import koTiendaError from '../components/Ko-errorStore'
 import koModalsecurity from '../components/modal/Ko-modal-security.vue'
 import { mapState } from 'vuex'
 export default {
   components: {
-    koTiendaCerrada,
     koTiendaError,
     koModalsecurity,
   },
@@ -223,12 +193,6 @@ export default {
   computed: {
     ...mapState(['dataStore', 'stateModalPwd', 'analytics_tagmanager']),
   },
-  methods: {
-    acceptClose() {
-      document.getElementById('modalNotificacion').style.zIndex = '-2'
-      document.getElementById('modalNotificacion').style.opacity = '0'
-    },
-  },
 }
 </script>
 
@@ -242,73 +206,5 @@ export default {
   align-items: center;
   justify-content: center;
   background-color: #f0f0f0;
-}
-.wrapper-notificacion {
-  top: 0;
-  opacity: 1;
-  z-index: 9998;
-  width: 100%;
-  height: calc(100vh);
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  transition: all 200ms ease-in;
-}
-.content-notificacion {
-  padding: 30px 20px;
-  width: 100%;
-  max-width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: white;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
-  box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
-}
-.text-noti {
-  margin-top: 15px;
-  letter-spacing: 0px;
-  font-size: 16px;
-  color: rgb(75, 75, 75);
-  width: 160px;
-}
-.subtitle-noti {
-  font-weight: bold;
-  font-size: 17px;
-  color: #ff314d;
-  margin-bottom: 15px;
-}
-.btn-acceptM {
-  width: 110px;
-  border-radius: 5px;
-  color: white;
-  border: solid 2px black;
-  background-color: black;
-  padding: 4px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.btn-acceptM:hover {
-  border: solid 2px gray;
-  background-color: gray;
-}
-.wrapper-notificacion-wa {
-  top: 0;
-  opacity: 1;
-  z-index: 9999;
-  width: 100%;
-  height: calc(100vh);
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  transition: all 200ms ease-in;
 }
 </style>

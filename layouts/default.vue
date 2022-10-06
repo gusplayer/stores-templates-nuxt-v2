@@ -16,9 +16,11 @@
           @click="redirectWhatsapp()"
         >
           <koWhatsApp class="button-whatsapp" />
-          <span
-            >WhatsApp<br /><small>{{ dataStore.tienda.whatsapp }}</small></span
-          >
+          <span>
+            WhatsApp<br /><small>
+              {{ dataStore.tienda.whatsapp }}
+            </small>
+          </span>
         </div>
         <!-- <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
       <div class="content-cookie">
