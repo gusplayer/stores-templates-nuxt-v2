@@ -631,6 +631,10 @@ export default {
             return true
             // eslint-disable-next-line no-unreachable
             break
+          case 'Panamá':
+            return true
+            // eslint-disable-next-line no-unreachable
+            break
           default:
             return false
         }
