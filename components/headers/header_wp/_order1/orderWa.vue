@@ -778,12 +778,19 @@ export default {
         switch (this.dataStore.tienda.pais) {
           case 'Colombia':
             return true
+            // eslint-disable-next-line no-unreachable
             break
           case 'Chile':
             return true
+            // eslint-disable-next-line no-unreachable
             break
           case 'Perú':
             return true
+            // eslint-disable-next-line no-unreachable
+            break
+          case 'Panamá':
+            return true
+            // eslint-disable-next-line no-unreachable
             break
           default:
             return false
