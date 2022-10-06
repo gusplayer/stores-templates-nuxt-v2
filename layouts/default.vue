@@ -99,6 +99,15 @@ export default {
     koWhatsApp: () => import('../components/whatsapp/Ko-whatsApp.vue'),
   },
   mixins: [expiredDate],
+  beforeMount() {
+    if (this.dataStore.tienda.dominio) {
+      caches.keys().then(function (names) {
+        for (let name of names) caches.delete(name)
+      })
+    } else {
+      console.log('Subdominio')
+    }
+  },
   mounted() {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_COOKIES_PWD')
