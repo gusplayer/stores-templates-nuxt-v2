@@ -21,6 +21,13 @@ export default {
     koTiendaError,
     koModalsecurity,
   },
+  beforeMount() {
+    if (this.dataStore.tienda.dominio) {
+      caches.keys().then(function (names) {
+        for (let name of names) caches.delete(name)
+      })
+    }
+  },
   mounted() {
     this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_SHOPPING_CART')
