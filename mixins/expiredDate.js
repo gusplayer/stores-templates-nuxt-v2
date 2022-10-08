@@ -13,7 +13,7 @@ export default {
         let d1 = new Date()
         let d2 = new Date(x)
         //Vencido
-        if (d1 > d2) {
+        if (d1 > this.sumarDias(d2, 2)) {
           return false
         }
         //Activo
@@ -21,6 +21,10 @@ export default {
           return true
         }
       }
+    },
+    sumarDias(fecha, date) {
+      fecha.setDate(fecha.getDate() + date)
+      return fecha
     },
   },
 }
