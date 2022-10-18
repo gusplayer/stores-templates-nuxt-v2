@@ -53,7 +53,7 @@
                     "
                     :dataStore="dataStore"
                     :settingByTemplate12="settingByTemplate12"
-                  ></ProductCard>
+                  />
                 </div>
               </div>
             </div>
@@ -73,7 +73,7 @@
                 "
                 :dataStore="dataStore"
                 :settingByTemplate12="settingByTemplate12"
-              ></ProductCard>
+              />
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@
               :product="product"
               :dataStore="dataStore"
               :settingByTemplate12="settingByTemplate12"
-            ></ProductCard>
+            />
           </div>
         </div>
       </div>
