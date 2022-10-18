@@ -68,8 +68,8 @@
             >
               <img
                 class="img-wrapp"
-                v-lazy="idCloudinary(imagen.url_img, 500, 500)"
-                alt="imagenes de instagram"
+                v-lazy="idCloudinary(imagen.url_img, 550, 550)"
+                alt="imágenes de Instagram"
               />
             </a>
           </div>

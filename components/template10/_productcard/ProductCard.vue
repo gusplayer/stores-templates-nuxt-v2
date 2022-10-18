@@ -20,13 +20,13 @@
         <client-only>
           <img
             v-if="!soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            v-lazy="idCloudinary(this.product.foto_cloudinary, 400, 400)"
             class="product-image"
             alt="Product Img"
           />
           <img
             v-if="soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            v-lazy="idCloudinary(this.product.foto_cloudinary, 400, 400)"
             class="product-image-soldOut"
             alt="Product Img"
           />

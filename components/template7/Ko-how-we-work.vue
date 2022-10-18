@@ -55,9 +55,9 @@
               </span>
             </div>
             <div class="hwork-description">
-              <spa class="description-h">
+              <span class="description-h">
                 {{ settingKHowwork.values[0].description_product }}
-              </spa>
+              </span>
             </div>
             <div class="hwork-seemore">
               <span class="seemore-h">{{ $t('home_cardvermas') }}</span>

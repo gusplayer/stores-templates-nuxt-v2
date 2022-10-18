@@ -49,7 +49,7 @@
             v-lazy="
               categoria.imagen_cloudinary == null
                 ? 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649367838/2659360_s1ap5f.png'
-                : idCloudinary(categoria.imagen_cloudinary, 80, 80)
+                : idCloudinary(categoria.imagen_cloudinary, 150, 150)
             "
             :class="
               categoria.imagen_cloudinary == 'sin_foto.jpeg'
@@ -102,7 +102,7 @@
             v-lazy="
               subcategorys.imagen_cloudinary == null
                 ? 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649367838/2659360_s1ap5f.png'
-                : idCloudinary(subcategorys.imagen_cloudinary, 80, 80)
+                : idCloudinary(subcategorys.imagen_cloudinary, 150, 150)
             "
             :class="
               subcategorys.imagen_cloudinary == 'sin_foto.jpeg'

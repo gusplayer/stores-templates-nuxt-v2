@@ -29,7 +29,7 @@
           >
             <img
               class="img-wrapp"
-              v-lazy="idCloudinary(imagen.url_img, 800, 800)"
+              v-lazy="idCloudinary(imagen.url_img, 850, 850)"
               alt="wrapper-images"
             />
           </div>

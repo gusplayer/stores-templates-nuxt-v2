@@ -80,9 +80,9 @@
 </template>
 
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+// import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary],
+  // mixins: [idCloudinary],
   name: 'Ko-Categories-wa-1',
   props: {
     dataStore: Object,

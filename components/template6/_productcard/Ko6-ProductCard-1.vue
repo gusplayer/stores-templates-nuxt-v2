@@ -8,13 +8,13 @@
         >
           <img
             v-if="!soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            :src="idCloudinary(this.product.foto_cloudinary, 550, 550)"
             class="product-image"
             alt="Product Img"
           />
           <img
             v-if="soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 600, 600)"
+            :src="idCloudinary(this.product.foto_cloudinary, 550, 550)"
             class="product-image-soldOut"
             alt="Product Img"
           />
@@ -119,13 +119,13 @@
         >
           <img
             v-if="!soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+            :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
             class="product-image"
             alt="Product Img"
           />
           <img
             v-if="soldOut"
-            :src="idCloudinary(this.product.foto_cloudinary, 350, 350)"
+            :src="idCloudinary(this.product.foto_cloudinary, 400, 400)"
             class="product-image-soldOut"
             alt="Product Img"
           />

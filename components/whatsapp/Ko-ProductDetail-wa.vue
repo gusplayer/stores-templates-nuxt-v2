@@ -29,7 +29,6 @@
             <p class="text-marca">
               <strong>{{ data.info.marca }}</strong>
             </p>
-
             <p
               class="text-promocion"
               v-show="
@@ -268,11 +267,11 @@ import { mapState } from 'vuex'
 import axios from 'axios'
 import productSlide from './_productdetails/productSlide'
 import selectGroup from './_productdetails/selectGroup'
-import idCloudinary from '../../mixins/idCloudinary'
+// import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 import extensions from '../../mixins/elemenTiptap.vue'
 export default {
-  mixins: [idCloudinary, currency, extensions],
+  mixins: [currency, extensions],
   name: 'Ko-ProductDetail-wa',
   components: {
     selectGroup,

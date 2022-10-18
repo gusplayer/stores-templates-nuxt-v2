@@ -18,7 +18,7 @@
     >
       <img
         v-if="dataStore.modal && dataStore.modal.img"
-        v-lazy="idCloudinaryBanner(dataStore.modal.img)"
+        v-lazy="idCloudinary(dataStore.modal.img, 550, 550)"
         alt="img-modal-block"
         :style="`width: ${
           dataStore.modal && dataStore.modal.width_img

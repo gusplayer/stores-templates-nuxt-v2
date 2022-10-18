@@ -16,7 +16,7 @@
         <div class="items-left">
           <img
             class="image-left"
-            :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
+            :src="idCloudinary(koffers.values[0].url_img_background, 550, 550)"
             alt="image-left"
             v-if="koffers.values[0].url_img_background"
           />
@@ -47,8 +47,9 @@
                   <span
                     class="txt-btn-left"
                     :style="`color: ${koffers.values[0]['--color_text_btn']};`"
-                    >{{ $t('home_comprarAhora') }}</span
                   >
+                    {{ $t('home_comprarAhora') }}
+                  </span>
                 </a>
               </div>
             </div>
@@ -64,7 +65,9 @@
           <div class="image-static" v-if="!hover">
             <img
               class="image"
-              :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
+              :src="
+                idCloudinary(koffers.values[1].url_img_background, 550, 550)
+              "
               v-if="koffers.values[1].url_img_background"
               alt="imagen center static"
             />
@@ -72,7 +75,9 @@
           <div class="image-gif" v-if="hover">
             <img
               class="image"
-              :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
+              :src="
+                idCloudinary(koffers.values[1].url_gift_background, 550, 550)
+              "
               v-if="koffers.values[1].url_gift_background"
               alt="imagen center gift"
             />
@@ -81,7 +86,7 @@
         <div class="items-right">
           <img
             class="image-right"
-            :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
+            :src="idCloudinary(koffers.values[2].url_img_background, 550, 550)"
             v-if="koffers.values[2].url_img_background"
             alt="image-right"
           />
@@ -136,8 +141,9 @@
                   <span
                     class="txt-btn-right"
                     :style="`color: ${koffers.values[2]['--color_text_btn']};`"
-                    >{{ $t('home_comprarAhora') }}</span
                   >
+                    {{ $t('home_comprarAhora') }}
+                  </span>
                 </a>
               </div>
             </div>
@@ -148,9 +154,9 @@
   </div>
 </template>
 <script>
-import idCloudinaryBanner from '../../mixins/idCloudinary'
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinaryBanner],
+  mixins: [idCloudinary],
   props: {
     dataStore: Object,
     koffers: Object,

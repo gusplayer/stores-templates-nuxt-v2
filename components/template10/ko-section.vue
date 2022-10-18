@@ -25,7 +25,7 @@
           <img
             class="img-left"
             v-lazy="
-              idCloudinaryBanner(this.section.values[0].url_img_background)
+              idCloudinary(this.section.values[0].url_img_background, 550, 550)
             "
             alt="banner-1"
           />
@@ -60,7 +60,7 @@
           <img
             class="img-center"
             v-lazy="
-              idCloudinaryBanner(this.section.values[1].url_img_background)
+              idCloudinary(this.section.values[1].url_img_background, 550, 550)
             "
             alt="banner-2"
           />
@@ -95,7 +95,7 @@
           <img
             class="img-right"
             v-lazy="
-              idCloudinaryBanner(this.section.values[2].url_img_background)
+              idCloudinary(this.section.values[2].url_img_background, 550, 550)
             "
             alt="banner-3"
           />

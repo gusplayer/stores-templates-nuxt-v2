@@ -28,7 +28,7 @@
             <div class="content-1">
               <img
                 id="images-1"
-                v-lazy="idCloudinary(settingKPromo.values[0].url_img, 500, 500)"
+                v-lazy="idCloudinary(settingKPromo.values[0].url_img, 550, 550)"
                 alt="left-banner"
                 class="images"
               />
@@ -87,8 +87,9 @@
                   class="promo-banner-subtittle"
                   id="promo-banner-subtittle-medium"
                   :style="`color: ${settingKPromo.values[1]['--color_subtext']};`"
-                  >{{ settingKPromo.values[1].description }}</span
                 >
+                  {{ settingKPromo.values[1].description }}
+                </span>
               </div>
             </figure>
           </a>
@@ -121,8 +122,9 @@
                   class="promo-banner-subtittle"
                   id="promo-banner-subtittle-medium"
                   :style="`color: ${settingKPromo.values[2]['--color_subtext']};`"
-                  >{{ settingKPromo.values[2].description }}</span
                 >
+                  {{ settingKPromo.values[2].description }}
+                </span>
               </div>
             </figure>
           </a>
@@ -155,8 +157,9 @@
                 class="promo-banner-subtittle"
                 id="promo-banner-subtittle-4"
                 :style="`color: ${settingKPromo.values[3]['--color_subtext']};`"
-                >{{ settingKPromo.values[3].description }}</span
               >
+                {{ settingKPromo.values[3].description }}
+              </span>
             </div>
             <div class="banner-border-2"></div>
           </figure>

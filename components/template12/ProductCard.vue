@@ -15,7 +15,7 @@
     >
       <img
         v-if="!soldOut"
-        v-lazy="idCloudinary(product.foto_cloudinary, 350, 350)"
+        v-lazy="idCloudinary(product.foto_cloudinary, 400, 400)"
         role="presentation"
         class="product-image"
         alt="Product Img"
@@ -27,7 +27,7 @@
       />
       <img
         v-if="soldOut"
-        v-lazy="product.foto_cloudinary"
+        v-lazy="idCloudinary(product.foto_cloudinary, 400, 400)"
         role="presentation"
         class="product-image product-image-soldOut"
         alt="Product Img"

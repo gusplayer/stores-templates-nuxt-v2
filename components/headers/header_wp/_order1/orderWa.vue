@@ -21,7 +21,7 @@
                   >
                     <div class="photo">
                       <img
-                        v-lazy="idCloudinary(product.foto_cloudinary, 100, 100)"
+                        v-lazy="idCloudinary(product.foto_cloudinary, 150, 150)"
                         alt="Product Img"
                       />
                     </div>
@@ -94,7 +94,8 @@
                           type="danger"
                           v-if="product.activo == 0"
                           style="background-color: rgb(223, 62, 62)"
-                          >Producto agotado!
+                        >
+                          Producto agotado!
                         </el-tag>
                         <el-tag
                           type="danger"

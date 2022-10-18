@@ -2,18 +2,18 @@
   <div class="wrapper-banner">
     <div class="header-content-logo">
       <div class="wrapper-banner">
-        <KoSwipper :products="data"></KoSwipper>
+        <KoSwipper :products="data" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+// import idCloudinary from '../../mixins/idCloudinary'
 import KoSwipper from './bannerMacrobrad/productslideBanner'
 
 export default {
-  mixins: [idCloudinary],
+  // mixins: [idCloudinary],
   name: 'Ko-Banner-macrobrand',
   components: {
     KoSwipper,
