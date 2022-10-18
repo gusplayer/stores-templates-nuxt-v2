@@ -2,23 +2,12 @@
   <div class="w-full hero-image_container">
     <div class="relative h-inherit flex items-center justify-center">
       <img
-        :src="imageSrc"
+        :src="idCloudinaryBanner(imageSrc)"
         alt="img banner"
         class="hero_image_bg h-inherit w-full"
       />
       <div
-        class="
-          hidden
-          lg:flex
-          justify-center
-          h-inherit
-          items-center
-          flex-col
-          text-gray-100
-          ease
-          duration-300
-          content-text
-        "
+        class="hidden lg:flex justify-center h-inherit items-center flex-col text-gray-100 ease duration-300 content-text"
         :class="{
           'opacity-40 ': shouldChangeOpacity,
         }"
@@ -41,10 +30,11 @@
 </template>
 
 <script>
+import idCloudinary from '../../mixins/idCloudinary'
 import settingsProps from './mixins/ComponentProps'
 export default {
   name: 'HeroImage',
-  mixins: [settingsProps],
+  mixins: [settingsProps, idCloudinary],
   data: () => ({
     shouldChangeOpacity: false,
   }),

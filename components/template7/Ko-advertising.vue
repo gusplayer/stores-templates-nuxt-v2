@@ -1,11 +1,11 @@
 <template>
   <div
-    class="advertising-wrapper"
+    class="wrapper-item-advertising"
     :style="[settingKAdvertising, settingGeneral]"
   >
-    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
+    <div class="separador-blog" v-if="!settingKAdvertising.visible"></div>
     <div
-      class="advertising-background"
+      class="advertising-content-background"
       id="BgAdvertising"
       :style="[
         {
@@ -56,15 +56,13 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary],
+  mixins: [idCloudinaryBanner],
   name: 'Ko-advertising',
   props: {
-    dataStore: Object,
     settingGeneral: Object,
     settingKAdvertising: Object,
-    settingKCarousel: Object,
   },
   mounted() {
     if (
@@ -78,7 +76,9 @@ export default {
     setBg() {
       if (this.settingKAdvertising['--url_img_background']) {
         var imagen = document.getElementById('BgAdvertising')
-        imagen.style.backgroundImage = `url(${this.settingKAdvertising['--url_img_background']})`
+        imagen.style.backgroundImage = `url(${this.idCloudinaryBanner(
+          this.settingKAdvertising['--url_img_background']
+        )})`
       }
     },
   },
@@ -95,16 +95,15 @@ export default {
 }
 </script>
 <style scoped>
-.advertising-wrapper {
+.wrapper-item-advertising {
   background: var(--background_color_1);
   padding: 40px 0;
-  flex-direction: column;
-  @apply w-full flex justify-center items-center;
+  @apply w-full flex flex-col justify-center items-center;
 }
 .separador-blog {
   padding-top: 100px;
 }
-.advertising-background {
+.advertising-content-background {
   @apply flex justify-center items-center bg-cover z-auto;
   padding-top: 66px;
   padding-bottom: 66px;
@@ -164,7 +163,7 @@ export default {
   @apply flex flex-col justify-center items-center pb-4 w-full;
 }
 @screen sm {
-  .advertising-background {
+  .advertising-content-background {
     @apply w-9/0 h-full;
   }
   .advertising-items {
@@ -180,7 +179,7 @@ export default {
   }
 }
 @screen md {
-  .advertising-background {
+  .advertising-content-background {
     @apply w-9/5 h-full;
   }
   .advertising-items {
@@ -196,7 +195,7 @@ export default {
   }
 }
 @screen lg {
-  .advertising-background {
+  .advertising-content-background {
     @apply w-9/7 h-full;
   }
   .advertising-items {
@@ -212,7 +211,7 @@ export default {
   }
 }
 @screen mlg {
-  .advertising-background {
+  .advertising-content-background {
     @apply w-9/3 h-full;
   }
   .advertising-items {
@@ -220,7 +219,7 @@ export default {
   }
 }
 @media (min-width: 1192px) {
-  .advertising-background {
+  .advertising-content-background {
     width: 1192px;
   }
 }

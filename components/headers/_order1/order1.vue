@@ -28,7 +28,7 @@
                   >
                     <div class="photo">
                       <img
-                        v-lazy="idCloudinary(product.foto_cloudinary, 100, 100)"
+                        v-lazy="idCloudinary(product.foto_cloudinary, 150, 150)"
                         alt="Product Img"
                       />
                     </div>

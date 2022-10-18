@@ -25,8 +25,10 @@
           <img
             class="img-left"
             v-lazy="
-              idCloudinaryBanner(
-                this.settingKsection.values[0].url_img_background
+              idCloudinary(
+                this.settingKsection.values[0].url_img_background,
+                400,
+                400
               )
             "
             alt="imagen-1"
@@ -64,8 +66,10 @@
           <img
             class="img-center"
             v-lazy="
-              idCloudinaryBanner(
-                this.settingKsection.values[1].url_img_background
+              idCloudinary(
+                this.settingKsection.values[1].url_img_background,
+                400,
+                400
               )
             "
             alt="imagen-2"
@@ -103,8 +107,10 @@
           <img
             class="img-right"
             v-lazy="
-              idCloudinaryBanner(
-                this.settingKsection.values[2].url_img_background
+              idCloudinary(
+                this.settingKsection.values[2].url_img_background,
+                400,
+                400
               )
             "
             alt="imagen-3"
@@ -134,14 +140,14 @@
   </div>
 </template>
 <script>
-import idCloudinaryBanner from '../../mixins/idCloudinary'
+import idCloudinary from '../../mixins/idCloudinary'
 export default {
   name: 'Ko-Section',
   props: {
     settingKsection: Object,
     settingGeneral: Object,
   },
-  mixins: [idCloudinaryBanner],
+  mixins: [idCloudinary],
 }
 </script>
 <style scoped>

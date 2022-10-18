@@ -168,7 +168,7 @@
             <div class="card-container">
               <div class="img-logo" v-if="product[0]">
                 <img
-                  v-lazy="idCloudinary(product[0].foto_cloudinary, 500, 500)"
+                  v-lazy="idCloudinary(product[0].foto_cloudinary, 400, 400)"
                   class="logo"
                   alt="Product img"
                 />

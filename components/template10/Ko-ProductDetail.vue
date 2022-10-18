@@ -191,15 +191,15 @@
                 {{ $t('productdetail_stock') }}
               </p> -->
             </div>
-            <!-- Variantes de prodcuto -->
+            <!-- Variantes de producto -->
             <div
               class="content-variant"
               v-if="this.data.detalle.con_variante > 0"
             >
               <div v-for="(variant, index) in data.variantes" :key="index">
-                <label for="variant name" class="text-variant"
-                  >{{ variant.nombre }}:</label
-                >
+                <label for="variant name" class="text-variant">
+                  {{ variant.nombre }}:
+                </label>
                 <SelectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"

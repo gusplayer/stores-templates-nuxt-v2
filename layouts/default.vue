@@ -100,7 +100,7 @@ export default {
   },
   mixins: [expiredDate],
   beforeMount() {
-    if (this.dataStore.tienda.dominio && this.mobileCheck()) {
+    if (this.dataStore.tienda.dominio) {
       caches.keys().then(function (names) {
         for (let name of names) caches.delete(name)
       })

@@ -21,7 +21,7 @@
       >
         <img
           v-lazy="
-            idCloudinary(settingKinformation.values[0].url_img_Top, 500, 500)
+            idCloudinary(settingKinformation.values[0].url_img_Top, 550, 550)
           "
           alt="imgInfo1"
           class="contentimg"
@@ -62,7 +62,7 @@
       >
         <img
           v-lazy="
-            idCloudinary(settingKinformation.values[1].url_img_Top, 500, 500)
+            idCloudinary(settingKinformation.values[1].url_img_Top, 550, 550)
           "
           alt="imgInfo2"
           class="contentimg"
@@ -103,7 +103,7 @@
       >
         <img
           v-lazy="
-            idCloudinary(settingKinformation.values[2].url_img_Top, 500, 500)
+            idCloudinary(settingKinformation.values[2].url_img_Top, 550, 550)
           "
           alt="imgInfo3"
           class="contentimg"

@@ -84,7 +84,7 @@
                     <img
                       class="img-product"
                       v-lazy="
-                        idCloudinary(item.producto.foto_cloudinary, 300, 300)
+                        idCloudinary(item.producto.foto_cloudinary, 400, 400)
                       "
                       alt="Imagen del producto"
                     />

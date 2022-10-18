@@ -28,7 +28,7 @@
             <img
               v-if="article.imagen_principal_url"
               class="images"
-              v-lazy="idCloudinaryBanner(this.article.imagen_principal_url)"
+              v-lazy="idCloudinary(this.article.imagen_principal_url, 550, 550)"
               alt="right-banner"
             />
 
@@ -71,9 +71,9 @@
   </div>
 </template>
 <script>
-import idCloudinaryBanner from '../../../mixins/idCloudinary'
+import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinaryBanner],
+  mixins: [idCloudinary],
   name: 'Ko-Blogcard',
   props: {
     article: Object,

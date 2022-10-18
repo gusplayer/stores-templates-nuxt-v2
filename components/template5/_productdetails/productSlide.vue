@@ -4,7 +4,7 @@
       <div class="swiper-slide wrapper-image">
         <img
           loading="lazy"
-          :src="idCloudinary(photo, 600, 600)"
+          :src="idCloudinary(photo, 550, 550)"
           class="photo"
           alt="Product img"
         />
@@ -12,7 +12,7 @@
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
         <img
           loading="lazy"
-          :src="idCloudinary(photo.foto_cloudinary, 600, 600)"
+          :src="idCloudinary(photo.foto_cloudinary, 550, 550)"
           class="photo"
           alt="Product img"
         />

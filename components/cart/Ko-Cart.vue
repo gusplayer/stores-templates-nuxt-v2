@@ -24,7 +24,7 @@
                 class="content-items-product content-items-product-resposive-img"
               >
                 <img
-                  v-lazy="idCloudinaryBanner(product.foto_cloudinary)"
+                  v-lazy="idCloudinary(product.foto_cloudinary, 400, 400)"
                   class="product-photo"
                   :alt="product.nombre"
                 />
@@ -78,11 +78,11 @@
                   </div>
                   <div class="wrapper-tag">
                     <el-tag type="danger" v-if="product.activo == 0"
-                      >Producto agotado!</el-tag
-                    >
-                    <el-tag type="danger" v-if="product.stock_disponible == 0"
-                      >¡No tiene las unidades disponibles!</el-tag
-                    >
+                      >Producto agotado!
+                    </el-tag>
+                    <el-tag type="danger" v-if="product.stock_disponible == 0">
+                      ¡No tiene las unidades disponibles!
+                    </el-tag>
                   </div>
                   <div class="product-quiantity">
                     <div class="txt-tittle-quantity">
@@ -112,14 +112,13 @@
                       >
                         <mas-icon class="icon-quantity" />
                       </button>
-
                       <div
                         class="container-alerta"
                         v-if="product.limitQuantity == product.cantidad"
                       >
                         <span class="alerta">
-                          {{ $t('cart_ultimaUnidad') }}</span
-                        >
+                          {{ $t('cart_ultimaUnidad') }}
+                        </span>
                       </div>
                     </div>
                   </div>

@@ -66,9 +66,9 @@
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+// import idCloudinary from '../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary],
+  // mixins: [idCloudinary],
   name: 'Ko-Category-1',
   props: {
     dataStore: Object,

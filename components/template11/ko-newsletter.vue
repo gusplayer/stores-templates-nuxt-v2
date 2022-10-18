@@ -22,10 +22,7 @@
         <p class="txt-top">Para actualizaciones diarias</p>
         <p class="txt-bottom">Suscríbete a nuestro boletín informativo</p>
         <div class="content-newsletter">
-          <Newsletter
-            :dataStore="dataStore"
-            :newsletter="newsletter"
-          ></Newsletter>
+          <Newsletter :dataStore="dataStore" :newsletter="newsletter" />
         </div>
       </div>
     </div>

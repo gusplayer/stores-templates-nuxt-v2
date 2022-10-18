@@ -39,7 +39,7 @@
                   <img
                     @click="selectedPhoto(data.detalle.foto_cloudinary)"
                     class="img-list"
-                    :src="idCloudinary(data.detalle.foto_cloudinary, 120, 120)"
+                    :src="idCloudinary(data.detalle.foto_cloudinary, 150, 150)"
                     alt="Product Img"
                   />
                 </div>
@@ -51,7 +51,7 @@
                   <img
                     @click="selectedPhoto(foto.foto_cloudinary)"
                     class="img-list"
-                    :src="idCloudinary(foto.foto_cloudinary, 120, 120)"
+                    :src="idCloudinary(foto.foto_cloudinary, 150, 150)"
                     alt="Product Img"
                   />
                 </div>
@@ -78,25 +78,23 @@
           <div class="wrapper-photo_main">
             <div
               v-if="this.activeZoom"
+              v-on:mouseover="activeZoom = !activeZoom"
               v-show="!existYoutube"
               class="photo_main"
             >
               <img
                 class="photo_main"
-                v-on:mouseover="activeZoom = !activeZoom"
-                :src="idCloudinary(selectPhotoUrl, 645, 430)"
+                v-lazy="idCloudinary(selectPhotoUrl, 550, 550)"
                 alt="Product Zoom"
               />
             </div>
             <div
+              v-on:mouseleave="activeZoom = !activeZoom"
               v-if="!this.activeZoom"
               v-show="!existYoutube"
               class="photo_main"
             >
-              <zoom
-                v-on:mouseleave="activeZoom = !activeZoom"
-                :photo="selectPhotoUrl"
-              />
+              <zoom :photo="selectPhotoUrl" />
             </div>
             <iframe
               v-show="existYoutube"

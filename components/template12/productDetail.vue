@@ -231,7 +231,7 @@
 import axios from 'axios'
 import productSlide from '../whatsapp/_productdetails/productSlide.vue'
 import selectGroup from '../whatsapp/_productdetails/selectGroup'
-import idCloudinary from '../../mixins/idCloudinary'
+// import idCloudinary from '../../mixins/idCloudinary'
 import extensions from '../../mixins/elemenTiptap.vue'
 import currency from '../../mixins/formatCurrent'
 
@@ -242,7 +242,7 @@ export default {
     tempData: Object,
     settingByTemplate12: Object,
   },
-  mixins: [idCloudinary, extensions, currency],
+  mixins: [extensions, currency],
   components: {
     selectGroup,
     productSlide,

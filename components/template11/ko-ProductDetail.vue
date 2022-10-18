@@ -39,7 +39,7 @@
                         @click="selectedPhoto(data.detalle.foto_cloudinary)"
                         class="img-list"
                         v-lazy="
-                          idCloudinary(data.detalle.foto_cloudinary, 120, 120)
+                          idCloudinary(data.detalle.foto_cloudinary, 150, 150)
                         "
                         alt="Product Img"
                       />
@@ -54,7 +54,7 @@
                       <img
                         @click="selectedPhoto(foto.foto_cloudinary)"
                         class="img-list"
-                        v-lazy="foto.foto_cloudinary"
+                        v-lazy="idCloudinary(foto.foto_cloudinary, 850, 850)"
                         alt="Product Img"
                       />
                     </div>
@@ -89,7 +89,7 @@
               >
                 <img
                   class="photo_main"
-                  :src="idCloudinary(selectPhotoUrl, 442, 564)"
+                  v-lazy="idCloudinary(selectPhotoUrl, 550, 550)"
                   alt="Product Zoom"
                 />
               </div>

@@ -19,15 +19,7 @@
     </div>
     <div class="content-item-article">
       <p class="tittle-blog">{{ dataArticle.titulo }}</p>
-      <div class="w-full flex justify-start">
-        <div class="content-img">
-          <img
-            class="img-aritcle"
-            v-lazy="idCloudinaryBanner(dataArticle.imagen_principal_url)"
-            alt="Image-Article"
-          />
-        </div>
-      </div>
+      <br />
       <div class="content-data-article">
         <svg
           fill="#3a3a3a"
@@ -91,10 +83,10 @@ export default {
   },
   methods: {
     searchIdForSlug() {
-      let domain = this.$route.fullPath
-      let result = domain.split('/')
+      let domain = this.$route.params.slugBlog
+
       this.listArticulos.filter((product) => {
-        if (product.slug === result[result.length - 1]) {
+        if (product.slug === domain) {
           this.dataArticle = product
         }
       })

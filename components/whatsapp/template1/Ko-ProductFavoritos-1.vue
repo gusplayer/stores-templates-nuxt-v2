@@ -9,24 +9,21 @@
         :key="product.id"
         class="content-products"
       >
-        <KoProductCard1
-          :product="product"
-          :dataStore="dataStore"
-        ></KoProductCard1>
+        <KoProductCard1 :product="product" :dataStore="dataStore" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
-import currency from '../../../mixins/formatCurrent'
+// import idCloudinary from '../../../mixins/idCloudinary'
+// import currency from '../../../mixins/formatCurrent'
 import KoProductCard1 from '../template2/productCard/ko-productCard.vue'
 export default {
   components: {
     KoProductCard1,
   },
-  mixins: [idCloudinary, currency],
+  // mixins: [idCloudinary, currency],
   name: 'Ko-ProductFavoritos-1',
   props: { dataStore: Object, settingByTemplate: Object },
   computed: {

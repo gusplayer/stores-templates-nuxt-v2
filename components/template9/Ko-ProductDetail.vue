@@ -34,7 +34,7 @@
             <div class="main-images">
               <img
                 class="img-list"
-                v-lazy="idCloudinary(data.detalle.foto_cloudinary, 1000, 1000)"
+                v-lazy="idCloudinary(data.detalle.foto_cloudinary, 850, 850)"
                 alt="Product Img"
               />
             </div>
@@ -45,7 +45,7 @@
             >
               <img
                 class="img-list"
-                v-lazy="idCloudinary(foto.foto_cloudinary, 1000, 1000)"
+                v-lazy="idCloudinary(foto.foto_cloudinary, 850, 850)"
                 alt="Product Img"
               />
             </div>
@@ -127,9 +127,9 @@
               v-if="this.data.detalle.con_variante > 0"
             >
               <div v-for="(variant, index) in data.variantes" :key="index">
-                <label for="variant name" class="text-variant"
-                  >{{ variant.nombre }}:</label
-                >
+                <label for="variant name" class="text-variant">
+                  {{ variant.nombre }}:
+                </label>
                 <SelectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"
@@ -296,14 +296,10 @@
                 :dataStore="dataStore"
                 :data="data"
                 :envio="envio"
-              ></OptionAcordion>
+              />
             </div>
             <div class="tab">
-              <OptionTab
-                :dataStore="dataStore"
-                :data="data"
-                :envio="envio"
-              ></OptionTab>
+              <OptionTab :dataStore="dataStore" :data="data" :envio="envio" />
             </div>
             <div
               class="content-free-shipping"

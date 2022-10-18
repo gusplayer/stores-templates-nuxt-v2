@@ -14,7 +14,7 @@
             <img
               v-if="article.imagen_principal_url"
               class="images"
-              v-lazy="idCloudinaryBanner(this.article.imagen_principal_url)"
+              v-lazy="idCloudinary(this.article.imagen_principal_url, 400, 400)"
               alt="right-banner"
             />
             <div v-else class="empty"></div>
