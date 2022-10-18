@@ -15,7 +15,7 @@
     >
       <img
         v-if="!soldOut"
-        v-lazy="product.foto_cloudinary"
+        v-lazy="idCloudinary(product.foto_cloudinary, 150, 150)"
         role="presentation"
         class="product-image"
         alt="Product Img"
@@ -30,7 +30,7 @@
         v-lazy="product.foto_cloudinary"
         role="presentation"
         class="product-image product-image-soldOut"
-        alt="Product Img"
+        alt="Product Img soldOut"
         :class="
           settingByTemplate12.roundedImages == true
             ? 'img_rounded'
@@ -41,6 +41,7 @@
     <div class="wrapper-text">
       <div class="product_header mb-1">
         <h3
+          v-if="product.nombre"
           class="product_name font-semibold text-md"
           :style="`color:${settingByTemplate12.textColor};`"
         >
@@ -49,12 +50,14 @@
       </div>
       <div class="product_description">
         <p
+          v-if="product.categoria"
           class="font-normal text-sm"
           :style="`color:${settingByTemplate12.descriptionColor};`"
         >
           {{ product.categoria }}
         </p>
         <p
+          v-if="product.marca"
           class="font-normal text-xs"
           :style="`color:${settingByTemplate12.descriptionColor};`"
         >
@@ -83,7 +86,6 @@ import currency from '../../mixins/formatCurrent'
 export default {
   name: 'ProductCard',
   mixins: [idCloudinary, currency],
-
   props: { product: Object, dataStore: Object, settingByTemplate12: Object },
   mounted() {
     this.idSlug = this.product.id
