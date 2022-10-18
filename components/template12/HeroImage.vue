@@ -2,7 +2,7 @@
   <div class="w-full hero-image_container">
     <div class="relative h-inherit flex items-center justify-center">
       <img
-        :src="idCloudinaryBanner(imageSrc)"
+        :src="imageSrc"
         alt="img banner"
         class="hero_image_bg h-inherit w-full"
       />
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+// import idCloudinary from '../../mixins/idCloudinary'
 import settingsProps from './mixins/ComponentProps'
 export default {
   name: 'HeroImage',
-  mixins: [settingsProps, idCloudinary],
+  mixins: [settingsProps],
   data: () => ({
     shouldChangeOpacity: false,
   }),
