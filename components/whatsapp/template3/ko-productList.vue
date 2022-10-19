@@ -4,7 +4,7 @@
       <div class="content-items-product">
         <div class="content-categories">
           <div class="content-items-categorias-text">
-            <p class="txt-catalogo">
+            <p class="txt-catalogo" @click="clear">
               {{ $t('home_catalogo') }}
             </p>
             <p class="txt-category mx-2" v-if="this.nameCategoryHeader">/</p>
@@ -18,6 +18,10 @@
           </div>
           <div>
             <search-icon class="icon-s" @click="openSearch" />
+            <menu-icon
+              class="icon-s icon-responsive"
+              @click="openMenuLateral"
+            />
           </div>
         </div>
         <KoSearch :settingByTemplate="settingByTemplate" />
@@ -27,10 +31,7 @@
             v-for="product in filterProduct"
             :key="product.id"
           >
-            <ProductCard
-              :product="product"
-              :dataStore="dataStore"
-            ></ProductCard>
+            <ProductCard :product="product" :dataStore="dataStore" />
           </div>
         </div>
         <div
@@ -49,7 +50,7 @@
               :total="fullProducts.length"
               :page-size="16"
               :current-page.sync="currentPage"
-            ></el-pagination>
+            />
           </div>
         </div>
       </div>
@@ -60,6 +61,7 @@
 import ProductCard from '../template3/productCard/ko-productCard'
 import KoSearch from '../searchWa.vue'
 import filterProducts from '../../../mixins/filterProducts'
+import KoMenu from '../../headers/_lateralMenu/_lateralMenu/openMenuLeftWapi.vue'
 export default {
   name: 'ProductListWa-3',
   props: {
@@ -67,25 +69,9 @@ export default {
     fullProducts: {},
   },
   mixins: [filterProducts],
-  components: { ProductCard, KoSearch },
+  components: { ProductCard, KoSearch, KoMenu },
   mounted() {
-    if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrlMix(this.$route.query.category)
-    } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendSubCategoryUrlMix(
-        this.$route.query.subcategory,
-        this.categorias,
-        this.subcategories
-      )
-    } else if (
-      this.$route.query &&
-      this.$route.query.tagId &&
-      this.$route.query.tagName
-    ) {
-      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-    } else if (this.$route.fullPath == '/') {
-      this.allCategories()
-    }
+    this.getQuery()
     if (this.previousPage) {
       this.currentPage = this.previousPage
     }
@@ -141,6 +127,27 @@ export default {
     },
   },
   methods: {
+    getQuery() {
+      if (this.$route.query && this.$route.query.category) {
+        this.sendCategoryUrlMix(this.$route.query.category)
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.SendSubCategoryUrlMix(
+          this.$route.query.subcategory,
+          this.categorias,
+          this.subcategories
+        )
+      } else if (
+        this.$route.query &&
+        this.$route.query.tagId &&
+        this.$route.query.tagName
+      ) {
+        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
+      } else if (this.$route.query && this.$route.query.search) {
+        this.SearchProduct(decodeURIComponent(this.$route.query.search))
+      } else if (this.$route.fullPath == '/') {
+        this.allCategories()
+      }
+    },
     openSearch() {
       this.$store.commit('SET_OPEN_SEARCH', true)
     },
@@ -261,23 +268,7 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     $route(to, from) {
-      if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrlMix(this.$route.query.category)
-      } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendSubCategoryUrlMix(
-          this.$route.query.subcategory,
-          this.categorias,
-          this.subcategories
-        )
-      } else if (
-        this.$route.query &&
-        this.$route.query.tagId &&
-        this.$route.query.tagName
-      ) {
-        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-      } else if (this.$route.fullPath == '/') {
-        this.allCategories()
-      }
+      this.getQuery()
     },
   },
 }

@@ -169,7 +169,6 @@
         <KoSearch :dataStore="dataStore" />
         <KoMenu
           :dataStore="dataStore"
-          class="responsive"
           :settingByTemplate="settingByTemplate13"
         />
       </div>

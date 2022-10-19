@@ -189,6 +189,12 @@ export default {
         filtradoCategorias.nombre_categoria_producto
       )
       this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.$router.push({
+        path: '',
+        query: {
+          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
+        },
+      })
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
         type: ['subcategory'],
@@ -207,6 +213,10 @@ export default {
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
+      this.$router.push({
+        path: '',
+        query: { category: this.nameCategory },
+      })
       this.selectedSubcategories = []
       this.subcategories.find((subcategoria) => {
         if (subcategoria.categoria === categoria) {
@@ -225,6 +235,10 @@ export default {
       this.idSubCategory = ''
       this.selectedSubcategories = ''
       this.$store.commit('SET_STATE_BANNER', true)
+      this.$router.push({
+        path: '',
+        query: {},
+      })
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
