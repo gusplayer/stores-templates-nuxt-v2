@@ -67,66 +67,17 @@ export default {
   props: {
     showMenu: Boolean,
   },
-  components: {},
-
   data() {
     return {
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      toggleCategories: true,
-      indexSelect: '',
       search: '',
-      indexSelect2: '',
-      secciones: [
-        {
-          name: 'header_inicio',
-          path: '/',
-          //icon: 'menu-icon',
-        },
-        {
-          name: 'header_contacto',
-          path: '/contacto',
-          //icon: 'account-icon',
-        },
-        {
-          name: 'header_blog',
-          path: '/blog',
-          //icon: 'account-icon',
-        },
-        {
-          name: 'header_carrito',
-          path: '/cart',
-          //icon: 'cart-icon',
-        },
-      ],
     }
   },
   computed: {
-    logoImg() {
-      return this.$store.state.dataStore.tienda.logo
-    },
     openSearch() {
       return this.$store.state.openSearch
     },
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
   },
   methods: {
-    focusInput() {
-      document.getElementById('SearchHeader').focus()
-    },
     closedSearch() {
       this.$store.commit('SET_OPEN_SEARCH', false)
     },
@@ -145,67 +96,6 @@ export default {
         path: '/productos',
         query: { search: search },
       })
-    },
-    SendSubCategory(value) {
-      this.indexSelect2 = value
-      this.$router.push({
-        path: '/productos',
-      })
-      this.$store.commit('SET_PREVIOUS_PAGE', 1)
-      this.$store.commit('SET_OPEN_SEARCH', false)
-      this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.id == value
-      )
-
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
-      )
-      this.$store.commit(
-        'SET_CATEGORY_PRODUCTO',
-        filtradoCategorias.nombre_categoria_producto
-      )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
-      this.$store.commit('products/FILTER_BY', {
-        type: ['subcategory'],
-        data: value,
-      })
-    },
-    sendCategory(value, categoria, ref) {
-      this.indexSelect = categoria
-      this.$router.push({
-        path: '/productos',
-      })
-      this.$store.commit('SET_PREVIOUS_PAGE', 1)
-      this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
-        }
-      })
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: value.nombre_categoria_producto,
-      })
-    },
-    clear() {
-      this.$router.push({
-        path: '/',
-      })
-      this.showMenu = false
-      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
-      this.$emit('clear')
-      this.nameCategory = ''
     },
   },
   watch: {
