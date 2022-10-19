@@ -156,7 +156,7 @@ export default {
           this.$store.commit('SET_CURRENTSETTING13', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1
-            console.log(this.bannerRendering)
+            // console.log(this.bannerRendering)
           }
         } else if (
           e &&

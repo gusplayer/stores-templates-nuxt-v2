@@ -316,24 +316,27 @@ export default {
     },
     SendSubCategory(value) {
       this.indexSelect2 = value
-      this.$router.push({
-        path: '/productos',
-      })
       this.$store.commit('SET_STATE_BANNER', false)
       this.$store.commit('SET_PREVIOUS_PAGE', 1)
       this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
+      let filtradoSubCategory = this.subcategories.find(
         (element) => element.id == value
       )
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
+      let filtradoCategories = this.categorias.find(
+        (element) => element.id == filtradoSubCategory.categoria
       )
       this.$store.commit(
         'SET_CATEGORY_PRODUCTO',
-        filtradoCategorias.nombre_categoria_producto
+        filtradoCategories.nombre_categoria_producto
       )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
+      this.$router.push({
+        path: '/productos',
+        query: {
+          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
+        },
+      })
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
         type: ['subcategory'],
@@ -368,6 +371,7 @@ export default {
     clear() {
       this.$router.push({
         path: '/productos',
+        query: {},
       })
       this.showMenu = false
       this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)

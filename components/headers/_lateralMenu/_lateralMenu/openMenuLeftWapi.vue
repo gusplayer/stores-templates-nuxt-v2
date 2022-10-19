@@ -261,7 +261,6 @@ export default {
     },
     closeOrder(event) {
       const element = event.target.className
-      console.log(element)
       if (
         element === 'order ' ||
         element === 'leftright' ||

@@ -390,22 +390,22 @@ export default {
       this.$store.commit('SET_STATE_BANNER', false)
       this.showMenu = false
       this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
+      let filtradoSubCategory = this.subcategories.find(
         (element) => element.id == value
       )
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
+      let filtradoCategories = this.categorias.find(
+        (element) => element.id == filtradoSubCategory.categoria
       )
       this.$store.commit(
         'SET_CATEGORY_PRODUCTO',
-        filtradoCategorias.nombre_categoria_producto
+        filtradoCategories.nombre_categoria_producto
       )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$router.push({
         path: '/',
         query: {
-          subcategory: `${this.nameSubCategory}^${filtradoCategorias.id}`,
+          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
         },
       })
       this.$store.commit('products/FILTER_BY', {
@@ -422,10 +422,10 @@ export default {
       this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
+      this.subcategories.find((subcategory) => {
+        if (subcategory.categoria === categoria) {
           this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
+          this.selectedSubcategories.push(subcategory)
         }
       })
       this.$router.push({
@@ -444,7 +444,7 @@ export default {
       this.showMenu = false
       this.$router.push({
         path: '/',
-        query: '',
+        query: {},
       })
       this.$store.commit('SET_STATE_BANNER', true)
       this.$store.commit('SET_OPEN_ORDER_MENU_RIGHT', false)
