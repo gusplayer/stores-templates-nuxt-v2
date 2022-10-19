@@ -2,7 +2,19 @@
   <div class="wrapper_micompra">
     <div class="contenedor">
       <div class="wrapper-form">
-        <h1 class="title-form">{{ $t('mcompra_title') }}</h1>
+        <div class="w-full flex flex-row justify-center items-center">
+          <nuxt-link
+            :to="{
+              path: this.stateWapiME
+                ? `/wa/${dataStore.tienda.id_tienda}/blog`
+                : `/`,
+            }"
+          >
+            <p class="title-form">{{ $t('header_inicio') }}</p>
+          </nuxt-link>
+          <p class="separatorCrumb">></p>
+          <h1 class="title-form">{{ $t('mcompra_title') }}</h1>
+        </div>
         <div class="content-form">
           <ValidationObserver ref="observer" tag="form" class="form">
             <div class="content-input">
@@ -333,6 +345,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import axios from 'axios'
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
@@ -540,6 +553,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['stateWapiME']),
     choicePayment() {
       return this.payments.find(
         (payment) => payment.id === this.orden.venta.metodo_pago
@@ -710,6 +724,12 @@ export default {
 </script>
 
 <style scoped>
+.separatorCrumb {
+  font-size: 24px;
+  color: black;
+  margin-bottom: 25px;
+  @apply mx-4;
+}
 .table-striped {
   width: 100%;
   display: grid;
@@ -778,15 +798,10 @@ table {
   padding-right: 15px;
 }
 .wrapper_micompra {
-  display: flex;
-  width: 100%;
-  height: 100%;
   min-height: calc(100vh - 38px);
   background-color: var(--background_color_2);
-  justify-content: center;
-  align-items: center;
   box-sizing: border-box;
-  height: 100%;
+  @apply flex w-full h-full justify-center items-center;
 }
 .contenedor {
   width: 100%;
