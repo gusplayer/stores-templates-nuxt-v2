@@ -122,19 +122,24 @@ export default {
         this.$router.push(`/`)
       }
       this.$store.commit('SET_STATE_BANNER', false)
-
       this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
+      let filtradoSubCategory = this.subcategories.find(
         (element) => element.id == value
       )
-      let filtradoCategorias = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
+      let filtradoCategories = this.categorias.find(
+        (element) => element.id == filtradoSubCategory.categoria
       )
       this.$store.commit(
         'SET_CATEGORY_PRODUCTO',
-        filtradoCategorias.nombre_categoria_producto
+        filtradoCategories.nombre_categoria_producto
       )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
+      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
+      this.$router.push({
+        path: '',
+        query: {
+          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
+        },
+      })
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
       this.$store.commit('products/FILTER_BY', {
         type: ['subcategory'],
@@ -153,11 +158,15 @@ export default {
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
+      this.$router.push({
+        path: '',
+        query: { category: this.nameCategory },
+      })
       this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
+      this.subcategories.find((subcategory) => {
+        if (subcategory.categoria === categoria) {
           this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
+          this.selectedSubcategories.push(subcategory)
         }
       })
       this.$store.commit('products/FILTER_BY', {
@@ -173,6 +182,10 @@ export default {
       this.$store.commit('SET_STATE_BANNER', true)
       this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
+      this.$router.push({
+        path: '',
+        query: {},
+      })
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
