@@ -13,7 +13,7 @@
       },
     ]"
   >
-    <div class="bannerProduct" id="BgProductlistF10">
+    <!-- <div class="bannerProduct" id="BgProductlistF10">
       <div class="crumb">
         <nuxt-link to="/">
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -23,7 +23,7 @@
           {{ $t('header_productos') }}
         </p>
       </div>
-    </div>
+    </div> -->
     <div class="container-product-max-w">
       <div class="content-shop-items">
         <div class="content-left">
@@ -380,16 +380,16 @@ export default {
   name: 'Ko-ProductList-Filter',
   mounted() {
     this.setOptionShipping()
-    if (
-      this.settingByTemplate10 &&
-      this.settingByTemplate10[0] &&
-      this.settingByTemplate10[0].productListFilter &&
-      this.settingByTemplate10[0].productListFilter.visible_bg == true
-    ) {
-      this.setBg(1)
-    } else {
-      this.setBg(2)
-    }
+    // if (
+    //   this.settingByTemplate10 &&
+    //   this.settingByTemplate10[0] &&
+    //   this.settingByTemplate10[0].productListFilter &&
+    //   this.settingByTemplate10[0].productListFilter.visible_bg == true
+    // ) {
+    //   this.setBg(1)
+    // } else {
+    //   this.setBg(2)
+    // }
     this.getQuery()
     if (this.previousPage) {
       this.currentPage = this.previousPage
@@ -635,18 +635,18 @@ export default {
     },
   },
   watch: {
-    settingByTemplate10() {
-      if (
-        this.settingByTemplate10 &&
-        this.settingByTemplate10[0] &&
-        this.settingByTemplate10[0].productListFilter &&
-        this.settingByTemplate10[0].productListFilter.visible_bg == true
-      ) {
-        this.setBg(1)
-      } else {
-        this.setBg(2)
-      }
-    },
+    // settingByTemplate10() {
+    //   if (
+    //     this.settingByTemplate10 &&
+    //     this.settingByTemplate10[0] &&
+    //     this.settingByTemplate10[0].productListFilter &&
+    //     this.settingByTemplate10[0].productListFilter.visible_bg == true
+    //   ) {
+    //     this.setBg(1)
+    //   } else {
+    //     this.setBg(2)
+    //   }
+    // },
     search(value) {
       this.SearchProduct(value)
     },
