@@ -1082,7 +1082,7 @@ export default {
   @apply w-auto flex flex-col justify-center items-start mb-20;
 }
 .img-list {
-  object-fit: cover;
+  object-fit: contain;
   overflow: hidden;
   width: auto;
   height: auto;

@@ -1214,7 +1214,7 @@ export default {
   vertical-align: top;
   height: 100px;
   width: 100px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 6px;
   margin-bottom: 10px;
 }
@@ -1239,7 +1239,7 @@ export default {
   max-height: 430px;
   width: 100%;
   height: 430px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 10px;
 }

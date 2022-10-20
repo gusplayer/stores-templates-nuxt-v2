@@ -421,7 +421,7 @@ export default {
       activeZoom: true,
       swiperOption: {
         direction: 'vertical',
-        slidesPerView: 4,
+        slidesPerView: 5,
         spaceBetween: 10,
         mousewheel: true,
         pagination: {
@@ -431,6 +431,12 @@ export default {
         navigation: {
           nextEl: '.swiper-next',
           prevEl: '.swiper-prev',
+        },
+        breakpoints: {
+          1100: {
+            slidesPerView: 4,
+            spaceBetween: 17,
+          },
         },
       },
       sharing: {
@@ -1072,7 +1078,7 @@ export default {
 .photos {
   display: flex;
   margin-right: 30px;
-  max-height: 430px;
+  max-height: 550px;
   position: relative;
 }
 .swiper-wrapper {
@@ -1112,7 +1118,7 @@ export default {
   vertical-align: top;
   height: 100px;
   width: 100px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 6px;
   margin-bottom: 10px;
 }
@@ -1126,26 +1132,26 @@ export default {
 }
 .wrapper-photo_main {
   position: relative;
-  max-width: 650px;
-  height: 450px;
-  min-height: 450px;
+  max-width: 550px;
+  height: 550px;
+  min-height: 550px;
   width: 100%;
   margin-right: 25px;
 }
 .photo_main {
-  max-width: 645px;
-  max-height: 430px;
+  max-width: 550px;
+  max-height: 550px;
   width: 100%;
-  height: 430px;
-  object-fit: cover;
+  height: 550px;
+  object-fit: contain;
   object-position: center;
   border-radius: 10px;
 }
 .photo_main_zoom {
-  max-width: 645px;
-  max-height: 430px;
+  max-width: 550px;
+  max-height: 550px;
   width: 100%;
-  height: 430px;
+  height: 550px;
   object-fit: contain;
   object-position: center;
   border-radius: 10px;
@@ -1474,29 +1480,25 @@ i.close {
   padding: 5px 5px;
   /* text-transform: capitalize; */
 }
-@media (max-width: 1250px) {
-  .photo_main {
-    width: 600px;
+@media (max-width: 1100px) {
+  .photos {
+    margin-right: 20px;
   }
 }
-@media (max-width: 1185px) {
-  .photo_main {
-    width: 500px;
+@media (max-width: 1100px) {
+  .photos {
+    margin-right: 20px;
+    max-height: 450px;
   }
-}
-@media (max-width: 1035px) {
-  .photo_main {
-    width: 450px;
+  .wrapper-photo_main {
+    max-width: 450px;
+    height: 450px;
+    min-height: 450px;
   }
-}
-@media (max-width: 960px) {
   .photo_main {
-    width: 400px;
-  }
-}
-@media (max-width: 890px) {
-  .photo_main {
-    width: 350px;
+    max-width: 450px;
+    max-height: 450px;
+    height: 450px;
   }
 }
 @media (max-width: 810px) {

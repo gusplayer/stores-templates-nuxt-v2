@@ -458,7 +458,7 @@ export default {
   vertical-align: top;
   height: 100px;
   width: 100px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 6px;
   margin-bottom: 10px;
 }
