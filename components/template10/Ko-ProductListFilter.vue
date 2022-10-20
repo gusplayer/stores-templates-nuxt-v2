@@ -13,7 +13,7 @@
       },
     ]"
   >
-    <div class="bannerProduct" id="BgProductlistF">
+    <div class="bannerProduct" id="BgProductlistF10">
       <div class="crumb">
         <nuxt-link to="/">
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -298,7 +298,7 @@
           <div class="producto-items-content" id="section">
             <div class="content-item">
               <div class="content-item-productos">
-                <div class="product-conten-items" id="grid-selection">
+                <div class="product-conten-items" id="grid-selection10">
                   <div
                     v-for="product in filterProduct"
                     :key="product.id"
@@ -371,9 +371,9 @@ export default {
     KoProdcutCardFilerList,
   },
   props: {
+    settingByTemplate10: Array,
     dataStore: Object,
     fullProducts: {},
-    settingByTemplate10: Array,
     allTags: Array,
   },
   mixins: [filterProducts],
@@ -381,6 +381,7 @@ export default {
   mounted() {
     this.setOptionShipping()
     if (
+      this.settingByTemplate10 &&
       this.settingByTemplate10[0] &&
       this.settingByTemplate10[0].productListFilter &&
       this.settingByTemplate10[0].productListFilter.visible_bg == true
@@ -508,21 +509,23 @@ export default {
       }
     },
     setBg(value) {
-      var imagen = document.getElementById('BgProductlistF')
-      if (value == 1) {
-        if (this.settingByTemplate10[0].productListFilter.url_img_bg) {
-          imagen.style.backgroundImage = `url(${this.settingByTemplate10[0].productListFilter.url_img_bg})`
-        } else {
-          imagen.style.backgroundImage = `url(https://res.cloudinary.com/brahyanr10/image/upload/v1614233821/Temp10/Productos/bg-beagrumb_gxvk1i.jpg)`
+      var imagen = document.getElementById('BgProductlistF10')
+      if (this.settingByTemplate10) {
+        if (value == 1) {
+          if (this.settingByTemplate10[0].productListFilter.url_img_bg) {
+            imagen.style.backgroundImage = `url(${this.settingByTemplate10[0].productListFilter.url_img_bg})`
+          } else {
+            imagen.style.backgroundImage = `url(https://res.cloudinary.com/brahyanr10/image/upload/v1614233821/Temp10/Productos/bg-beagrumb_gxvk1i.jpg)`
+          }
+        } else if (value == 2) {
+          imagen.style.backgroundImage = ''
         }
-      } else if (value == 2) {
-        imagen.style.backgroundImage = ''
       }
     },
     showList() {
       this.indexShowList = 1
       this.showInList = true
-      var gridSelector = document.getElementById('grid-selection')
+      var gridSelector = document.getElementById('grid-selection10')
       if (gridSelector) {
         gridSelector.setAttribute(
           'style',
@@ -533,7 +536,7 @@ export default {
     showGrid3() {
       this.indexShowList = 3
       this.showInList = false
-      var gridSelector = document.getElementById('grid-selection')
+      var gridSelector = document.getElementById('grid-selection10')
       if (gridSelector) {
         gridSelector.setAttribute(
           'style',
@@ -634,6 +637,7 @@ export default {
   watch: {
     settingByTemplate10() {
       if (
+        this.settingByTemplate10 &&
         this.settingByTemplate10[0] &&
         this.settingByTemplate10[0].productListFilter &&
         this.settingByTemplate10[0].productListFilter.visible_bg == true
