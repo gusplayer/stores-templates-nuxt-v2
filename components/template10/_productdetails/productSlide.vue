@@ -7,11 +7,11 @@
     <el-carousel-item class="w-full h-full">
       <img
         loading="lazy"
-        v-lazy="idCloudinary(photo, 850, 850)"
+        v-lazy="idCloudinary(photo, 550, 550)"
         class="photo"
         alt="Product img"
-        height="600px"
-        width="600px"
+        height="550px"
+        width="550px"
       />
     </el-carousel-item>
     <el-carousel-item
@@ -21,11 +21,11 @@
     >
       <img
         loading="lazy"
-        v-lazy="idCloudinary(photo.foto_cloudinary, 850, 850)"
+        v-lazy="idCloudinary(photo.foto_cloudinary, 550, 550)"
         class="photo"
         alt="Product img"
-        height="600px"
-        width="600px"
+        height="550px"
+        width="550px"
       />
     </el-carousel-item>
     <el-carousel-item v-if="idYoutube && idYoutube !== ''">
@@ -34,8 +34,8 @@
           <i class="material-icons">keyboard_backspace</i>
         </button>
         <iframe
-          height="600px"
-          width="600px"
+          height="550px"
+          width="550px"
           :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
           frameborder="0"
           allowfullscreen
@@ -56,22 +56,26 @@ export default {
 
 <style scoped>
 .photo {
-  height: 600px;
-  width: 600px;
+  height: 550px;
+  width: 550px;
   overflow: hidden;
   -o-object-fit: cover;
-  object-fit: cover;
+  object-fit: contain;
   /* @apply w-full h-full; */
 }
 .wrapper-carouse {
-  height: 620px;
+  max-width: 550px;
+  max-height: 550px;
+  height: 550px;
 }
 .wrapper-carouse >>> .el-carousel__container {
-  height: 620px;
+  height: 550px;
+  max-width: 550px;
+  max-height: 550px;
 }
 .youtube {
   width: 99%;
-  max-width: 400px;
+  max-width: 550px;
   display: grid;
   justify-items: start;
   grid-gap: 5px;
@@ -84,27 +88,24 @@ export default {
 }
 @media (max-width: 850px) {
   .wrapper-carouse {
-    height: 420px;
+    max-width: 400px;
+    max-height: 400px;
+    height: 400px;
   }
   .wrapper-carouse >>> .el-carousel__container {
-    height: 420px;
+    max-width: 400px;
+    max-height: 400px;
+    height: 400px;
   }
   .photo {
-    height: 420px;
-    width: 420px;
+    max-width: 400px;
+    max-height: 400px;
+    height: 400px;
   }
 }
 @media (max-width: 500px) {
   .wrapper-carouse {
-    height: 400px;
     margin-top: 20px;
-  }
-  .wrapper-carouse >>> .el-carousel__container {
-    height: 400px;
-  }
-  .photo {
-    height: 400px;
-    width: 400px;
   }
 }
 </style>

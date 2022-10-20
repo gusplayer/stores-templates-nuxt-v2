@@ -1081,27 +1081,27 @@ export default {
   width: 100px;
   height: 100px;
   min-height: 100px;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-bottom: 10px;
   object-fit: cover;
   object-position: center;
 }
 .wrapper-photo_main {
   position: relative;
-  max-width: 650px;
-  max-height: 500px;
-  height: 500px;
-  min-height: 500px;
+  max-width: 442px;
+  max-height: 442px;
+  height: 442px;
+  min-height: 442px;
   width: 100%;
   margin-right: 10px;
 }
 .photo_main {
   width: 100%;
-  height: 500px;
-  max-width: 650px;
-  max-height: 500px;
-  object-fit: cover;
-  object-position: center;
+  height: 442px;
+  max-width: 442px;
+  max-height: 442px;
+  object-fit: contain;
+  object-position: top;
   border-radius: 10px;
 }
 .wrapper-productDetail {
@@ -1364,7 +1364,7 @@ export default {
     height: 400px;
   }
   .tab {
-    @apply w-9/5 mt-10;
+    @apply w-9/5;
   }
   .product-content {
     @apply w-9/5 grid grid-cols-2 gap-4 justify-start items-start;
