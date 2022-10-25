@@ -25,6 +25,8 @@
           height="250px"
           style="width: 100%"
           class="wrapperCarousel"
+          :setActiveItem="positionLocation"
+          @change="changeLocation"
           v-if="
             this.dataStore &&
             this.dataStore.geolocalizacion &&
@@ -74,7 +76,11 @@
                 />
               </svg>
               <p class="txt-left">
-                {{ this.dataStore.geolocalizacion[0].direccion }}
+                Sede {{ this.positionLocation + 1 }}:
+                {{
+                  this.dataStore.geolocalizacion[this.positionLocation]
+                    .direccion
+                }}
               </p>
             </div>
             <div
@@ -107,7 +113,7 @@
                 />
               </svg>
               <div class="email">
-                <p class="txt-left">Envíenos un correo electronico</p>
+                <p class="txt-left">Envíenos un correo electrónico</p>
                 <p class="txt-left">
                   {{ this.dataStore.tienda.email_tienda }}
                 </p>
@@ -163,9 +169,9 @@
                           class="input-text"
                           id="ContactEmail"
                         />
-                        <span class="text-error" v-show="errors[0]">{{
-                          errors[0]
-                        }}</span>
+                        <span class="text-error" v-show="errors[0]">
+                          {{ errors[0] }}
+                        </span>
                       </template>
                     </validation-provider>
                   </div>
@@ -183,9 +189,9 @@
                           :placeholder="$t('contact_mensalePlacer')"
                           v-model="comment"
                         ></textarea>
-                        <span class="text-error" v-show="errors[0]">{{
-                          errors[0]
-                        }}</span>
+                        <span class="text-error" v-show="errors[0]">
+                          {{ errors[0] }}
+                        </span>
                       </template>
                     </validation-provider>
                   </div>
@@ -206,9 +212,9 @@
                             v-model="numberphone"
                             id="ContactPhone"
                           />
-                          <span class="text-error" v-show="errors[0]">{{
-                            errors[0]
-                          }}</span>
+                          <span class="text-error" v-show="errors[0]">
+                            {{ errors[0] }}
+                          </span>
                         </template>
                       </validation-provider>
                     </div>
@@ -296,6 +302,7 @@ export default {
         },
       ],
       stateBtn: true,
+      positionLocation: 0,
     }
   },
   destroyed() {
@@ -310,6 +317,9 @@ export default {
     },
   },
   methods: {
+    changeLocation(value) {
+      this.positionLocation = value
+    },
     submitContact() {
       this.$refs.observer
         .validate()

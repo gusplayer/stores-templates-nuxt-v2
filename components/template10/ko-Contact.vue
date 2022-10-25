@@ -21,6 +21,8 @@
           height="250px"
           style="width: 100%"
           class="wrapperCarousel"
+          @change="changeLocation"
+          :setActiveItem="positionLocation"
           v-if="
             this.dataStore &&
             this.dataStore.geolocalizacion &&
@@ -66,7 +68,11 @@
                 />
               </svg>
               <p class="txt-left">
-                {{ this.dataStore.geolocalizacion[0].direccion }}
+                Sede {{ this.positionLocation + 1 }}:
+                {{
+                  this.dataStore.geolocalizacion[this.positionLocation]
+                    .direccion
+                }}
               </p>
             </div>
             <div class="empty"></div>
@@ -84,7 +90,7 @@
                 />
               </svg>
               <div class="email">
-                <p class="txt-left">Envíenos un correo electronico</p>
+                <p class="txt-left">Envíenos un correo electrónico</p>
                 <p class="txt-left">
                   {{ this.dataStore.tienda.email_tienda }}
                 </p>
@@ -279,6 +285,7 @@ export default {
           icon: 'email-icon',
         },
       ],
+      positionLocation: 0,
     }
   },
   destroyed() {
@@ -293,6 +300,9 @@ export default {
     },
   },
   methods: {
+    changeLocation(value) {
+      this.positionLocation = value
+    },
     submitContact() {
       this.$refs.observer
         .validate()

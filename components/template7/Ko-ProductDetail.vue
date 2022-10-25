@@ -1243,20 +1243,6 @@ export default {
   object-position: center;
   border-radius: 10px;
 }
-.photo_main_zoom {
-  max-width: 645px;
-  max-height: 430px;
-  width: 100%;
-  height: 430px;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 10px;
-  cursor: zoom-in;
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  transform: scale(1.2);
-}
 .wrapper-right {
   flex: 1;
   display: flex;
