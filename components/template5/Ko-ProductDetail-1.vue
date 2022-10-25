@@ -365,6 +365,7 @@ import koSuggesProduct from './_productdetails/suggestionsProducto'
 import idCloudinary from '../../mixins/idCloudinary'
 import zoom from './_productdetails/zoomImg'
 import currency from '../../mixins/formatCurrent'
+
 export default {
   mixins: [idCloudinary, currency],
   name: 'Ko-ProductDetail-1',
@@ -1017,60 +1018,34 @@ export default {
 
 <style scoped>
 .wrapper-productDetail {
-  display: flex;
-  width: 100%;
   background: #efefef;
-  /* background: var(--background_color_2); */
-  justify-content: center;
-  align-items: center;
+  @apply w-full flex justify-center items-center;
 }
 .container-productDetail-loading {
   height: calc(100vh - 420px);
-  width: 100%;
-  display: flex;
   max-width: 1300px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   padding: 50px 30px 30px 30px;
   background: #efefef;
+  @apply w-full flex flex-col justify-between items-center;
 }
 .container-productDetail {
-  position: relative;
-  display: flex;
-  width: 100%;
   max-width: 1300px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   padding: 50px 30px 30px 30px;
+  @apply w-full flex flex-col relative justify-between items-center;
 }
 .section {
-  width: 100%;
-  display: flex;
+  @apply w-full flex;
   box-shadow: 10px 14px 28px #ededed, -10px -14px 28px #f1f1f1;
 }
 .section-suggesProduct {
   z-index: 1 !important;
   width: 100%;
 }
-.wrapper-category {
-  display: flex;
-  margin-bottom: 5px;
-}
-.text-category {
-  font-size: 14px;
-  font-weight: bold;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-}
 .wrapper-left {
   flex: 2;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  /* margin-right: 25px; */
   padding-bottom: 10px;
+  /* margin-right: 25px; */
+  @apply w-full flex flex-row;
 }
 .photos_responsive {
   display: none;
@@ -1107,11 +1082,8 @@ export default {
   color: var(--btnhover);
 }
 .photos_selected {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
   max-height: 100px;
+  @apply w-full flex flex-col justify-items-stretch;
 }
 .img-list {
   cursor: pointer;
@@ -1146,20 +1118,6 @@ export default {
   object-fit: contain;
   object-position: center;
   border-radius: 10px;
-}
-.photo_main_zoom {
-  max-width: 550px;
-  max-height: 550px;
-  width: 100%;
-  height: 550px;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 10px;
-  cursor: zoom-in;
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  transform: scale(1.2);
 }
 .wrapper-right {
   flex: 1;
@@ -1226,21 +1184,6 @@ i.close {
   color: #00a650;
   /* font-weight: bold; */
   border-radius: 3px;
-}
-.content-text-desc {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.text-desc {
-  text-decoration-color: currentcolor;
-  text-decoration-style: solid;
-  text-decoration-line: none;
-  font-size: 14px;
-  font-weight: normal;
-  /* color: var(--color_subtext); */
-  color: rgba(21, 20, 57, 0.541);
-  line-height: 1.5;
-  text-decoration: none;
 }
 .text-variant {
   font-size: 14px;
@@ -1354,13 +1297,6 @@ i.close {
 .wp-icon {
   font-size: 27px;
   bottom: 2px;
-}
-
-.whatsapp {
-  fill: #27d367;
-  width: 30px;
-  cursor: pointer;
-  margin-left: 20px;
 }
 .btn {
   border-radius: var(--radius_btn);
@@ -1562,9 +1498,6 @@ i.close {
     position: absolute;
     top: 10px;
     right: 10px;
-  }
-  .wrapper {
-    padding: 15px;
   }
   .quantity {
     display: none;
