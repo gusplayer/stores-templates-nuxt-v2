@@ -1,8 +1,10 @@
 <template>
   <div class="modal-content">
     <div class="modal-header">
-      <p class="txt-Legal">{{ $t('footer_condicionesLegales') }}</p>
-      <span class="close" @click="closeModalpolitics">&times;</span>
+      <nuxt-link to="/termsandconditions" class="txt-Legal">
+        {{ $t('footer_condicionesLegales') }}
+      </nuxt-link>
+      <span class="close" @click="closeModalPolitics">&times;</span>
     </div>
     <div class="content-items-modal">
       <button
@@ -16,7 +18,6 @@
         v-html="this.dataStore.politicas.datos"
         v-if="this.dataStore.politicas.datos"
       ></div>
-
       <button
         class="content-modal accordion"
         v-if="this.dataStore.politicas.garantia"
@@ -28,7 +29,6 @@
         v-html="this.dataStore.politicas.garantia"
         v-if="this.dataStore.politicas.garantia"
       ></div>
-
       <button
         class="content-modal accordion"
         v-if="this.dataStore.politicas.devolucion"
@@ -40,7 +40,6 @@
         v-html="this.dataStore.politicas.devolucion"
         v-if="this.dataStore.politicas.devolucion"
       ></div>
-
       <button
         class="content-modal accordion"
         v-if="this.dataStore.politicas.cambio"
@@ -52,7 +51,6 @@
         v-html="this.dataStore.politicas.cambio"
         v-if="this.dataStore.politicas.cambio"
       ></div>
-
       <button
         class="content-modal accordion"
         v-if="this.dataStore.politicas.envios"
@@ -76,6 +74,11 @@
         v-html="this.dataStore.politicas.pagos"
         v-if="this.dataStore.politicas.pagos"
       ></div>
+    </div>
+    <div class="px-10 py-4" style="background-color: #222">
+      <button @click="goRouter" class="txt-Legal">
+        🔗 {{ $t('footer_irPagina') }}
+      </button>
     </div>
   </div>
 </template>
@@ -105,8 +108,14 @@ export default {
     }
   },
   methods: {
-    closeModalpolitics() {
+    closeModalPolitics() {
       this.$store.state.modalpolitics05 = false
+    },
+    goRouter() {
+      this.$router.push({
+        path: '/termsandconditions',
+      })
+      this.closeModalPolitics()
     },
   },
 }
