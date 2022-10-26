@@ -66,6 +66,7 @@ export default {
     },
     // filtro categoría, subcategoría y etiqueta
     getProductsFilter(value, tag_id, tag_Name, Lateral) {
+      this.$store.commit('SET_STATE_BANNER', false)
       let type = this.$store.state.products.type
       let payload = this.$store.state.products.payload
       if (type.length < 2) {
