@@ -20,158 +20,114 @@
           </div>
         </div>
         <div class="content-lateral-menu">
-          <div class="content-btns-lateral-menu">
-            <button
-              id="btnfocus"
-              class="btn-lateral-menu-left"
-              @click="selectTag1"
-              :class="selecttag == 1 ? 'show-select-active' : ''"
-            >
-              {{ $t('header_inicio') }}
-            </button>
-            <button
-              class="btn-lateral-menu-right"
-              @click="selectTag2"
-              :class="selecttag == 2 ? 'show-select-active' : ''"
-              v-if="categorias && categorias.length > 0"
-            >
-              {{ $t('header_categorias') }}
-            </button>
-          </div>
-          <div class="conten-Menu" v-if="!focusbtn">
-            <div class="header-content-buttons">
-              <div
-                v-for="(item, index) in secciones"
-                :key="`${index}${item.name}`"
-                @click="closed"
-              >
-                <nuxt-link
-                  :to="`/wa/${dataStore.tienda.id_tienda}${item.path}`"
-                  v-if="item.path && item.state"
-                  class="btn"
-                >
-                  {{ $t(`${item.name}`) }}
-                </nuxt-link>
-                <nuxt-link
-                  :to="`/wa/${dataStore.tienda.id_tienda}${item.href}`"
-                  v-else-if="item.href && listArticulos > 0 && item.state"
-                  class="btn"
-                >
-                  {{ $t(`${item.name}`) }}
-                </nuxt-link>
-              </div>
-            </div>
-          </div>
-          <div class="content-Categorys" v-if="focusbtn">
-            <template>
-              <div class="wrapper-category-all">
-                <li @click="clear">
-                  <p class="btn-category-all">
-                    {{ $t('header_buscar_limpiar') }}
-                  </p>
-                </li>
-                <div v-for="categoria in categorias" :key="categoria.id">
-                  <BaseAccordian>
-                    <template v-slot:categorias>
-                      <li
-                        class="btn-category"
-                        @click="
-                          sendCategory(categoria, categoria.id, (ref = false))
-                        "
-                        :class="
-                          categoria.id == indexSelect
-                            ? 'text-categoria-active'
-                            : ''
-                        "
-                      >
-                        {{ categoria.nombre_categoria_producto }}
-                      </li>
-                    </template>
-                    <template v-slot:subcategorias>
-                      <template>
-                        <!-- <li
+          <div class="content-Categorys">
+            <div class="wrapper-category-all">
+              <li @click="clear">
+                <p class="btn-category-all">
+                  {{ $t('header_buscar_limpiar') }}
+                </p>
+              </li>
+              <div v-for="categoria in categorias" :key="categoria.id">
+                <BaseAccordian>
+                  <template v-slot:categorias>
+                    <li
+                      class="btn-category"
+                      @click="
+                        sendCategory(categoria, categoria.id, (ref = false))
+                      "
+                      :class="
+                        categoria.id == indexSelect
+                          ? 'text-categoria-active'
+                          : ''
+                      "
+                    >
+                      {{ categoria.nombre_categoria_producto }}
+                    </li>
+                  </template>
+                  <template v-slot:subcategorias>
+                    <template>
+                      <!-- <li
                           class="btn-category"
                           v-if="selectedSubcategories.length > 0"
                           @click="closed()"
                         >
                           Ver todo
                         </li> -->
-                        <div
-                          v-for="(subcategory, key) in subcategories"
-                          :key="key"
+                      <div
+                        v-for="(subcategory, key) in subcategories"
+                        :key="key"
+                      >
+                        <li
+                          v-if="subcategory.categoria == categoria.id"
+                          @click="SendSubCategory(subcategory.id)"
+                          class="btn-category"
+                          :class="
+                            subcategory.id == indexSelect2
+                              ? 'text-subcategoria-active'
+                              : ''
+                          "
                         >
-                          <li
-                            v-if="subcategory.categoria == categoria.id"
-                            @click="SendSubCategory(subcategory.id)"
-                            class="btn-category"
-                            :class="
-                              subcategory.id == indexSelect2
-                                ? 'text-subcategoria-active'
-                                : ''
-                            "
-                          >
-                            <p class="txt-sub-li">
-                              {{ subcategory.nombre_subcategoria }}
-                            </p>
-                          </li>
-                        </div>
-                      </template>
+                          <p class="txt-sub-li">
+                            {{ subcategory.nombre_subcategoria }}
+                          </p>
+                        </li>
+                      </div>
                     </template>
-                  </BaseAccordian>
-                </div>
-                <div
-                  v-for="(itemsTags, index) in allTags"
-                  :key="index"
-                  v-show="allTags && allTags.length > 0"
-                >
-                  <BaseAccordian
-                    v-if="
-                      itemsTags &&
-                      itemsTags.status === 1 &&
-                      itemsTags.properties.length > 0
-                    "
-                  >
-                    <template v-slot:categorias>
-                      <li class="btn-category">
-                        {{ itemsTags.name }}
-                      </li>
-                    </template>
-                    <template v-slot:subcategorias>
-                      <template>
-                        <div
-                          v-for="itemsProperties in itemsTags.properties"
-                          :key="itemsProperties.id"
-                          v-show="itemsProperties.status === 1"
-                        >
-                          <li
-                            class="btn-category"
-                            @click="
-                              getProductsFilter(
-                                'tag',
-                                itemsProperties.id,
-                                itemsProperties.name,
-                                false
-                              )
-                            "
-                            :class="
-                              itemsProperties.name == etiqueta1
-                                ? 'text-subcategoria-active'
-                                : '' || itemsProperties.name == etiqueta2
-                                ? 'text-subcategoria-active'
-                                : ''
-                            "
-                          >
-                            <p class="txt-sub-li">
-                              {{ itemsProperties.name }}
-                            </p>
-                          </li>
-                        </div>
-                      </template>
-                    </template>
-                  </BaseAccordian>
-                </div>
+                  </template>
+                </BaseAccordian>
               </div>
-            </template>
+              <div
+                v-for="(itemsTags, index) in allTags"
+                :key="index"
+                v-show="allTags && allTags.length > 0"
+              >
+                <BaseAccordian
+                  v-if="
+                    itemsTags &&
+                    itemsTags.status === 1 &&
+                    itemsTags.properties.length > 0
+                  "
+                >
+                  <template v-slot:categorias>
+                    <li class="btn-category">
+                      {{ itemsTags.name }}
+                    </li>
+                  </template>
+                  <template v-slot:subcategorias>
+                    <template>
+                      <div
+                        v-for="itemsProperties in itemsTags.properties"
+                        :key="itemsProperties.id"
+                        v-show="itemsProperties.status === 1"
+                      >
+                        <li
+                          class="btn-category"
+                          @click="
+                            getProductsFilter(
+                              'tag',
+                              itemsProperties.id,
+                              itemsProperties.name,
+                              false
+                            )
+                          "
+                          :class="
+                            itemsProperties.name == etiqueta1
+                              ? 'text-subcategoria-active'
+                              : '' || itemsProperties.name == etiqueta2
+                              ? 'text-subcategoria-active'
+                              : ''
+                          "
+                        >
+                          <p class="txt-sub-li" @click="closed">
+                            {{ itemsProperties.name }}
+                          </p>
+                        </li>
+                      </div>
+                    </template>
+                  </template>
+                </BaseAccordian>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -193,8 +149,6 @@ export default {
   },
   data() {
     return {
-      selecttag: 1,
-      focusbtn: false,
       selectSubcategory: '',
       nameCategory: '',
       nameSubCategory: '',
@@ -202,23 +156,6 @@ export default {
       toggleCategories: true,
       indexSelect: '',
       indexSelect2: '',
-      secciones: [
-        {
-          name: 'header_inicio',
-          path: '/',
-          state: true,
-        },
-        {
-          name: 'header_blog',
-          href: '/blog',
-          state: true,
-        },
-        {
-          name: 'footer_micompra',
-          path: '/micompra',
-          state: true,
-        },
-      ],
     }
   },
   computed: {
@@ -248,14 +185,6 @@ export default {
     },
   },
   methods: {
-    selectTag1() {
-      this.selecttag = 1
-      this.focusbtn = false
-    },
-    selectTag2() {
-      this.selecttag = 2
-      this.focusbtn = true
-    },
     closed() {
       this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
     },
