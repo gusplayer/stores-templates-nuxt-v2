@@ -7,8 +7,8 @@
           <ValidationObserver ref="observer" tag="form" class="form">
             <div class="content-input">
               <label for="numOrden" class="input-label">
-                {{ $t('mcompra_inputtitle') }}</label
-              >
+                {{ $t('mcompra_inputtitle') }}
+              </label>
               <validation-provider
                 name="número de orden"
                 rules="required|numeric"
@@ -21,16 +21,16 @@
                     v-model="numOrden"
                     class="input-text"
                   />
-                  <span class="text-error" v-show="errors[0]">{{
-                    errors[0]
-                  }}</span>
+                  <span class="text-error" v-show="errors[0]">
+                    {{ errors[0] }}
+                  </span>
                 </template>
               </validation-provider>
             </div>
             <div class="content-input">
               <label for="numId" class="input-label">
-                {{ $t('mcompra_inputId') }}</label
-              >
+                {{ $t('mcompra_inputId') }}
+              </label>
               <validation-provider
                 name="cédula del comprador"
                 rules="required|numeric"
@@ -43,9 +43,9 @@
                     v-model="cedula"
                     class="input-text"
                   />
-                  <span class="text-error" v-show="errors[0]">{{
-                    errors[0]
-                  }}</span>
+                  <span class="text-error" v-show="errors[0]">
+                    {{ errors[0] }}
+                  </span>
                 </template>
               </validation-provider>
             </div>
@@ -62,7 +62,6 @@
           <p>{{ $t('mcompra_title2') }}</p>
           <p v-if="orden.venta.id">No. {{ orden.venta.id }}</p>
         </div>
-
         <div
           class="content-card"
           v-if="orden.productos && orden.productos.length > 0"
@@ -214,36 +213,36 @@
               v-if="orden.venta.descuento && orden.venta.descuento !== 'null'"
             >
               {{ $t('footer_descuento') }}
-              <span class="value-info-orden"
-                >- {{ orden.venta.descuento | currency }}</span
-              >
+              <span class="value-info-orden">
+                - {{ orden.venta.descuento | currency }}
+              </span>
             </p>
             <p
               class="title-info-orden"
               v-if="orden.venta.costo_envio && stateHoko == false"
             >
               {{ $t('mcompra_valorEnvio') }}
-              <span class="value-info-orden">{{
-                orden.venta.costo_envio | currency
-              }}</span>
+              <span class="value-info-orden">
+                {{ orden.venta.costo_envio | currency }}
+              </span>
             </p>
             <p class="title-info-orden" v-else>
               {{ $t('mcompra_valorEnvio') }}
-              <span class="value-info-orden"
-                >Envío por Hoko (Pago contraentrega)</span
-              >
+              <span class="value-info-orden">
+                Envío por Hoko (Pago contraentrega)
+              </span>
             </p>
             <p class="title-info-orden" v-if="orden.venta.total">
               {{ $t('mcompra_totalOrden') }}
-              <span class="value-info-orden">{{
-                orden.venta.total | currency
-              }}</span>
+              <span class="value-info-orden">
+                {{ orden.venta.total | currency }}
+              </span>
             </p>
             <p class="title-info-orden" v-if="choicePayment">
               {{ $t('mcompra_metodoPago') }}
               <span class="value-info-orden">
-                {{ $t(`${choicePayment.title}`) }}</span
-              >
+                {{ $t(`${choicePayment.title}`) }}
+              </span>
             </p>
             <p class="title-info-orden" v-if="fechaState">
               {{ $t('mcompra_fechaCompra') }}
@@ -253,14 +252,34 @@
               {{ $t('mcompra_horaCompra') }}
               <span class="value-info-orden">{{ this.horaState }}</span>
             </p>
-            <p class="title-info-orden" v-if="orden && orden.usuario == 30866">
+            <p class="title-info-orden">
               {{ $t('mcompra_pcanaldeVenta') }}
-              <span class="value-info-orden">Venta generada por WhatsApp</span>
+              <span
+                :style="`color: ${
+                  channelBuy[parseInt(orden.venta.canal) - 1].color
+                };`"
+              >
+                {{ channelBuy[parseInt(orden.venta.canal) - 1].name }}
+              </span>
             </p>
-            <p class="title-info-orden" v-else>
-              {{ $t('mcompra_pcanaldeVenta') }}
-              <span class="value-info-orden">Venta generada por Checkout</span>
-            </p>
+            <div
+              class="mt-4 flex flex-row items-center"
+              v-if="orden.venta.delivery_status_id !== null"
+            >
+              <p class="title-info-orden">
+                {{ $t('mcompra_pcCanalEnvio') }}
+              </p>
+              <el-tag
+                size="medium"
+                effect="dark"
+                :color="shippingState[orden.venta.delivery_status_id - 1].color"
+                class="tag-state"
+              >
+                {{
+                  $t(shippingState[orden.venta.delivery_status_id - 1].state)
+                }}
+              </el-tag>
+            </div>
           </div>
           <div class="content-state-top">
             <div class="content-item-state">
@@ -509,9 +528,10 @@
 import axios from 'axios'
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
+import states from '../../mixins/states'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  mixins: [idCloudinary, currency],
+  mixins: [idCloudinary, currency, states],
   name: 'Ko-miCompra-G',
   props: {
     dataStore: Object,
@@ -567,204 +587,10 @@ export default {
       toggleArrow: false,
       numOrden: '',
       cedula: '',
-      payments: [
-        {
-          id: '1',
-          tag: 'payco',
-          title: 'mcompra_pTarjetaCredito',
-          description: 'Pago realizado por ePayco',
-        },
-        {
-          id: '2',
-          tag: 'payco',
-          title: 'mcompra_pPase1',
-          description: 'Paga con tu cuenta bancaria o tarjeta débito',
-        },
-        {
-          id: '3',
-          tag: 'payco',
-          title: 'mcompra_pPagoEfectivo',
-          description: 'Mas de 14.000 puntos en todo el país',
-        },
-        {
-          id: '4',
-          tag: 'consignacion',
-          title: 'mcompra_pConsigancionBancaria',
-          description: 'Transferencia o consignación a nuestra cuenta bancaria',
-        },
-        {
-          id: '5',
-          tag: 'efecty',
-          title: 'mcompra_pGiroEfecty',
-          description: 'Transferencia o consignación a nuestra cuenta',
-        },
-        {
-          id: '6',
-          tag: 'tienda',
-          title: 'mcompra_pRecogerTienda',
-          description:
-            'Si estas cerca a nuestro negocio, acércate a realizar el pago y recoger tu producto. Escribe abajo en los comentarios cuando vendrías a nuestra tienda para tener tu compra lista.',
-        },
-        {
-          id: '7',
-          tag: 'convenir',
-          title: 'mcompra_pPagoConvenir',
-          description:
-            'Al finalizar tu compra, te contactaremos o puedes comunicarte con nosotros por algunos de nuestros medios de comunicación para que organicemos la forma de pago de tu compra. ',
-        },
-        {
-          id: '8',
-          tag: 'payco',
-          title: 'mcompra_pSafetyPat',
-          description: 'Banca y efectivo internacional',
-        },
-        {
-          id: '9',
-          tag: 'contraentrega',
-          title: 'mcompra_pContraEntrega',
-          description: 'Pagas en el momento que recibas tu compra',
-        },
-        {
-          id: '10',
-          tag: 'mercadopago',
-          title: 'mcompra_pmercadoPago',
-          description: 'Tu cliente ha seleccionado mercadoPago para pagar',
-        },
-        {
-          id: '11',
-          tag: 'payu',
-          title: 'mcompra_pTarjetaCreditoM',
-          description: 'Paga con tu tarjeta hasta en 24 cuotas',
-        },
-        {
-          id: '12',
-          tag: 'payu',
-          title: 'mcompra_pEfectivo',
-          description: 'Tu cliente ha seleccionado PayU para pagar',
-        },
-        {
-          id: '13',
-          tag: 'payu',
-          title: 'mcompra_pPayuCuentaAhorros',
-          description: 'Tu cliente ha seleccionado PayU para pagar',
-        },
-        {
-          id: '14',
-          tag: 'mercadopago',
-          title: 'mcompra_pPMercadoCuentaAhorros',
-          description: 'Tu cliente ha seleccionado Mercado Pago para pagar',
-        },
-        {
-          id: '15',
-          tag: 'Daviplata',
-          title: 'mcompra_pDaviplata',
-          description: 'Tu cliente ha seleccionado Daviplata para pagar',
-        },
-        {
-          id: '16',
-          tag: 'Nequi',
-          title: 'mcompra_pNequi',
-          description: 'Tu cliente ha seleccionado Nequi para pagar',
-        },
-      ],
       city: {},
       cityComprador: {},
-      statusUpdate: [
-        {
-          id: '0',
-          color: '#FFA801',
-          title: 'mcompra_sinPagar',
-          ref: 'Sin pagar',
-        },
-        {
-          id: '1',
-          color: '#30c490',
-          title: 'mcompra_pagada',
-          ref: 'Pagada',
-        },
-        {
-          id: '2',
-          color: '',
-          title: '',
-          ref: '',
-        },
-        {
-          id: '3',
-          color: '#EB4D4B',
-          title: 'mcompra_cancelada',
-          ref: 'Cancelada',
-        },
-        {
-          id: '4',
-          color: '#0000FF',
-          title: 'mcompra_despachada',
-          ref: 'Despachada',
-        },
-        {
-          id: '5',
-          color: '',
-          title: '',
-          ref: '',
-        },
-        {
-          id: '6',
-          color: '#4429AE',
-          title: 'mcompra_entregado',
-          ref: 'Entregado',
-        },
-        {
-          id: '10',
-          color: '#EB4D4B',
-          title: 'mcompra_rechazado',
-          ref: 'Rechazada',
-        },
-      ],
       productDataHoko: {},
       stateHoko: false,
-      saleStateHoko: [
-        {
-          id: 1,
-          state: 'Creada',
-          color: '#30C46F',
-          type: 'success',
-        },
-        {
-          id: 2,
-          state: 'En proceso',
-          color: '#4B9DEB',
-          type: 'info',
-        },
-        {
-          id: 3,
-          state: 'Despachada',
-          color: '#30C46F',
-          type: 'success',
-        },
-        {
-          id: 4,
-          state: 'Finalizada',
-          color: '#30C46F',
-          type: 'success',
-        },
-        {
-          id: 5,
-          state: 'Cancelada',
-          color: '#EB4D4B',
-          type: 'danger',
-        },
-        {
-          id: 6,
-          state: 'En Novedad',
-          color: '#EBC44B',
-          type: 'warning',
-        },
-        {
-          id: 7,
-          state: 'Error',
-          color: '#EB4D4B',
-          type: 'danger',
-        },
-      ],
       direccion_entrega: {},
     }
   },
@@ -956,6 +782,10 @@ export default {
 </script>
 
 <style scoped>
+.tag-state {
+  color: white;
+  margin-left: 10px;
+}
 .table-striped {
   width: 100%;
   display: grid;
