@@ -16,6 +16,8 @@ import {
   CollapseItem,
   Skeleton,
   SkeletonItem,
+  Tabs,
+  TabPane,
   // Select,
   // Option,
   // Button,
@@ -51,6 +53,9 @@ Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Skeleton)
 Vue.use(SkeletonItem)
+
+Vue.use(Tabs)
+Vue.use(TabPane)
 // Vue.use(Checkbox)
 // Vue.use(CheckboxButton)
 // Vue.use(CheckboxGroup)

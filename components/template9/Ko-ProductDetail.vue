@@ -276,9 +276,8 @@
                     v-if="!spent && this.salesData.estado == true"
                     v-on:click="addShoppingCart"
                   >
-                    <cartArrowDown class="card-icon-cart" />{{
-                      $t('home_cardAgregar')
-                    }}
+                    <cartArrowDown class="card-icon-cart" />
+                    {{ $t('home_cardAgregar') }}
                   </button>
                   <div
                     class="content_buy_action-responsive"
@@ -296,10 +295,16 @@
                 :dataStore="dataStore"
                 :data="data"
                 :envio="envio"
+                :settingByGeneral="this.settingByTemplate9[0].setting9General"
               />
             </div>
             <div class="tab">
-              <OptionTab :dataStore="dataStore" :data="data" :envio="envio" />
+              <OptionTab
+                :dataStore="dataStore"
+                :data="data"
+                :envio="envio"
+                :settingByGeneral="this.settingByTemplate9[0].setting9General"
+              />
             </div>
             <div
               class="content-free-shipping"
@@ -1193,15 +1198,16 @@ export default {
     transition: all 0.15s ease-in;
   }
   .btn:hover {
-    background-color: #f4f4f4;
+    background-color: var(--hover_bg);
+    color: var(--hover_text);
     transition: all 0.15s ease-in;
   }
   .btn:hover .text-addCart {
-    color: #2c2930;
+    color: var(--hover_text);
     transition: all 0.15s ease-in;
   }
   .btn:hover .minicart-icon {
-    fill: #2c2930;
+    fill: var(--hover_text);
     transition: all 0.15s ease-in;
   }
   .quantity {
