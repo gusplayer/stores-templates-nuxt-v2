@@ -272,6 +272,8 @@ export default {
     productdetail_stock: 'Disponible',
     productdetail_categoria: 'Categoría',
     productdetail_añadiralcarrito: 'Añadir al carrito',
+    productdetail_notdescription: 'No tiene descripción',
+    productdetail_notShipping: 'No tiene método envio configurado',
     productdetail_opcionesPagoMsg:
       'Puedes elegir cualquiera de estos medios. Es rápido, seguro y no tiene costo adicional.',
     productdetail_PasarelaEpayco: 'Pasarela de pagos Epayco',
@@ -593,6 +595,8 @@ export default {
     productdetail_stock: 'Available',
     productdetail_categoria: 'Category',
     productdetail_añadiralcarrito: 'Add to cart',
+    productdetail_notdescription: 'No description',
+    productdetail_notShipping: 'No shipping method configured',
     productdetail_opcionesPagoMsg:
       'You can choose any of these means. It is fast, safe and has no additional cost.',
     productdetail_PasarelaEpayco: 'Payment Gateway Epayco ',
@@ -915,6 +919,8 @@ export default {
     productdetail_stock: 'Disponíve',
     productdetail_categoria: 'Categoria',
     productdetail_añadiralcarrito: 'Adicionar ao carrinho',
+    productdetail_notdescription: 'Sem descrição',
+    productdetail_notShipping: 'Nenhum método de envio configurado',
     productdetail_opcionesPagoMsg:
       'Você pode escolher qualquer um desses meios. É rápido, seguro e não tem custo adicional.',
     productdetail_PasarelaEpayco: 'Portal de Pagamento Epayco',
@@ -1233,7 +1239,9 @@ export default {
     productdetail_opcionesPago: 'Options de paiement',
     productdetail_stock: 'Disponible sur',
     productdetail_categoria: 'Catégorie',
-    productdetail_añadiralcarrito: 'Ajouter au panier',
+    productdetail_añadiralcarrito: 'Pas de description',
+    productdetail_notdescription: `Aucune méthode d'expédition configurée`,
+    productdetail_notShipping: 'Nenhum método de envio configurado',
     productdetail_opcionesPagoMsg: `Vous pouvez choisir l'un de ces moyens. C'est rapide, sûr et sans coût supplémentaire.`,
     productdetail_PasarelaEpayco: 'Passerelle de paiement Epayco ',
     productdetail_PasarelaEpaycoMsg: `Payez avec votre carte jusqu'à 24 versements ou en espèces dans plus de 14 000 points dans tout le pays.`,
