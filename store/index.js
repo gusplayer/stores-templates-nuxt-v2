@@ -497,7 +497,9 @@ export const mutations = {
   SET_DATA(state) {
     state.products.tags =
       state.dataStore && state.dataStore.tags ? state.dataStore.tags : []
-    state.categorias = state.dataStore.categorias
+    state.categorias = state.dataStore.categorias.sort(function (prev, next) {
+      return next.orden - prev.orden
+    })
     state.subcategorias = state.dataStore.subcategorias
     state.geolocalizacion = state.dataStore.geolocalizacion
     state.mediospago = state.dataStore.medios_pago || {
