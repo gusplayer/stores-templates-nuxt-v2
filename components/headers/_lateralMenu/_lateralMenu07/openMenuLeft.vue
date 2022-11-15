@@ -581,7 +581,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-btns-lateral-menu {
-  @apply w-full flex flex-row justify-center items-center;
+  @apply w-full flex flex-row justify-between items-center;
 }
 .btn-lateral-menu-right:focus .conten-Menu {
   @apply hidden;

@@ -730,30 +730,41 @@
         </button>
       </div>
       <div class="modal-confirmation" v-if="this.modalConfirmation">
-        <p>{{ this.textConfirmation }}</p>
-        <button
-          class="continue_form_confirmation"
-          :style="`background: ${
-            settingByTemplate && settingByTemplate.color_primario
-              ? settingByTemplate.color_primario
-              : '#25D366'
-          }; color:${
-            settingByTemplate && settingByTemplate.color_secundario
-              ? settingByTemplate.color_secundario
-              : '#FFFFFF'
-          };
+        <p class="text-16">{{ this.textConfirmation }}</p>
+        <div
+          class="flex flex-col justify-center items-center my-2"
+          v-if="stateBtnConfirmation"
+        >
+          <p class="text-14 text-red-500">
+            Es importante enviar la información al whatsApp dueño.
+          </p>
+          <span class="text-14 text-gray-200 w-9/12 mt-3">
+            Si no abre whatsApp escribirle al dueño de la tienda por tu numero
+            de order: {{ this.numberOrder }}
+          </span>
+          <button
+            class="continue_form_confirmation"
+            :style="`background: ${
+              settingByTemplate && settingByTemplate.color_primario
+                ? settingByTemplate.color_primario
+                : '#25D366'
+            }; color:${
+              settingByTemplate && settingByTemplate.color_secundario
+                ? settingByTemplate.color_secundario
+                : '#FFFFFF'
+            };
           border:2px solid ${
             settingByTemplate && settingByTemplate.color_primario
               ? settingByTemplate.color_primario
               : '#25D366'
           };          
           `"
-          @click="redirectWP"
-          style="margin-top: 15px"
-          v-if="stateBtnConfirmation"
-        >
-          <whatsapp-icon class="wp-icon" /> Enviar información al WhatsApp
-        </button>
+            @click="redirectWP"
+            style="margin-top: 15px"
+          >
+            <whatsapp-icon class="wp-icon" /> Enviar información al WhatsApp
+          </button>
+        </div>
       </div>
     </div>
     <!-- </transition> -->
@@ -824,6 +835,7 @@ export default {
       stateProductCart: 1,
       textDepartment: '',
       textCiudad: '',
+      numberOrder: null,
     }
   },
   computed: {
@@ -1259,7 +1271,11 @@ export default {
           this.form.nombre
         }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
           this.dataStore.tienda.nombre
-        )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
+        )}%0ANumero%20de%20orden%3A%20${
+          this.numberOrder
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${encodeURIComponent(
+          result
+        )}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
           this.discountDescuentos
             ? this.dataStore.tienda.moneda == 'PEN'
               ? 'S/'
@@ -1300,7 +1316,11 @@ export default {
           this.form.nombre
         }%2C%0AI%20made%20this%20order%20at%20your%20store%20${encodeURIComponent(
           this.dataStore.tienda.nombre
-        )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADiscount%2A%3A%20${
+        )}%0AOrder%20number%3A%20${
+          this.numberOrder
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${encodeURIComponent(
+          result
+        )}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADiscount%2A%3A%20${
           this.discountDescuentos
             ? this.dataStore.tienda.moneda == 'PEN'
               ? 'S/'
@@ -1339,7 +1359,11 @@ export default {
           this.form.nombre
         }%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${encodeURIComponent(
           this.dataStore.tienda.nombre
-        )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADesconto%2A%3A%20${
+        )}%0AN%C3%BAmero%20do%20pedido%3A%20${
+          this.numberOrder
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${encodeURIComponent(
+          result
+        )}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADesconto%2A%3A%20${
           this.discountDescuentos
             ? this.dataStore.tienda.moneda == 'PEN'
               ? 'S/'
@@ -1378,7 +1402,11 @@ export default {
           this.form.nombre
         }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
           this.dataStore.tienda.nombre
-        )}:%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
+        )}%0ANumero%20de%20orden%3A%20${
+          this.numberOrder
+        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${encodeURIComponent(
+          result
+        )}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
           this.discountDescuentos
             ? this.dataStore.tienda.moneda == 'PEN'
               ? 'S/'
@@ -1512,9 +1540,8 @@ export default {
           }
           axios
             .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
-            .then(() => {
-              // this.closedOder()
-              // this.$message.success('Datos enviados correctamente!')
+            .then((response) => {
+              this.numberOrder = response.data.data.id
               this.textConfirmation =
                 '¡Información enviada correctamente a la tienda!'
               this.stateBtnConfirmation = true

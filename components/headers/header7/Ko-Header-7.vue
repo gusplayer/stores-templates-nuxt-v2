@@ -387,9 +387,11 @@ export default {
   .header-logo {
     @apply object-contain object-left w-full;
   }
-  .item-btns {
+  .item-btns,
+  .btn-scroll {
     @apply hidden;
   }
+
   .item-menu {
     @apply w-auto flex flex-col justify-center items-start flex-1;
   }
@@ -436,6 +438,9 @@ export default {
   }
   .item-menu {
     @apply hidden;
+  }
+  .btn-scroll {
+    @apply flex;
   }
   .item-btns {
     overflow-x: auto;

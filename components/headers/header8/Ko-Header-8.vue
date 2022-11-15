@@ -453,7 +453,8 @@ export default {
   .header-content {
     @apply w-9/0 flex flex-row justify-between items-center;
   }
-  .header-content-buttons {
+  .header-content-buttons,
+  .btn-scroll {
     @apply hidden;
   }
   .header-content-cart {
@@ -470,7 +471,8 @@ export default {
   }
 }
 @screen lg {
-  .header-content-buttons {
+  .header-content-buttons,
+  .btn-scroll {
     @apply flex;
   }
   .header-item-menu {
