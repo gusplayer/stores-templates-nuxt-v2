@@ -76,13 +76,13 @@ export default {
 
 <style scoped>
 .swiper-wrapper {
-  max-width: 360px;
-  height: 360px;
+  /* max-width: 360px;
+  height: 360px; */
 }
 .swiper-slide {
   width: 100%;
   max-width: 360px;
-  height: 360px;
+  /* height: 360px; */
   /* position: relative; */
   display: flex;
   align-items: center;
@@ -91,7 +91,7 @@ export default {
   overflow: hidden;
 }
 .photo {
-  width: fit-content;
+  width: 100%;
   object-fit: cover;
   overflow: hidden;
 }

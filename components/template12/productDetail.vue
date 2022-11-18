@@ -384,7 +384,7 @@ export default {
       this.data.detalle = {
         foto_cloudinary:
           'https://vignette.wikia.nocookie.net/la-bitacora-del-capitan/images/6/67/Not_found.png/revision/latest?cb=20190509042801&path-prefix=es',
-        nombre: 'Producto de prueda',
+        nombre: 'Producto de prueba',
         precio: 29999,
       }
       this.data.info = {
@@ -424,13 +424,13 @@ export default {
             case 'precio':
               this.envio = {
                 titulo: 'Tarifa por precio',
-                desc: 'Segun la suma del costo de tus productos te cobraran el envio',
+                desc: 'Según la suma del costo de tus productos te cobraran el envio',
               }
               break
             case 'precio_ciudad':
               this.envio = {
                 titulo: 'Tarifa por ciudad',
-                desc: 'Segun la ciudad te cobraran el envio',
+                desc: 'Según la ciudad te cobraran el envio',
               }
               break
             case 'peso':
