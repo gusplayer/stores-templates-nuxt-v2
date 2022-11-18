@@ -29,7 +29,7 @@
     "cross-env": "^7.0.3",
     "current-script-polyfill": "^1.0.0",
     "element-tiptap": "^1.27.1",
-    "element-ui": "^2.15.10",
+    "element-ui": "^2.15.12",
     "fuse.js": "^6.6.2",
     "nuxt": "^2.15.8",
     "nuxt-facebook-pixel-module": "^1.5.0",

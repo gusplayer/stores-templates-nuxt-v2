@@ -3,14 +3,14 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide wrapper-image">
         <img
-          :src="idCloudinary(photo, 550, 550)"
+          v-lazy="idCloudinary(photo, 550, 550)"
           class="photo"
           alt="Product img"
         />
       </div>
       <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
         <img
-          :src="idCloudinary(photo.foto_cloudinary, 550, 550)"
+          v-lazy="idCloudinary(photo.foto_cloudinary, 550, 550)"
           class="photo"
           alt="Product img"
         />
@@ -92,7 +92,7 @@ export default {
 }
 .photo {
   width: fit-content;
-  object-fit: contain;
+  object-fit: cover;
   overflow: hidden;
 }
 .photos .responsive .swiper-pagination-bullet {
