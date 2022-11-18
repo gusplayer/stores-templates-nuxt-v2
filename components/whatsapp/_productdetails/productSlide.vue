@@ -76,24 +76,17 @@ export default {
 
 <style scoped>
 .swiper-wrapper {
-  /* max-width: 360px;
-  height: 360px; */
+  max-width: 360px;
+  height: 360px;
+  @apply w-full h-full;
 }
 .swiper-slide {
-  width: 100%;
   max-width: 360px;
-  /* height: 360px; */
-  /* position: relative; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  overflow: hidden;
+  height: 360px;
+  @apply w-full h-full flex items-center justify-center box-border overflow-hidden relative;
 }
 .photo {
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
+  @apply w-full h-full overflow-hidden object-cover;
 }
 .photos .responsive .swiper-pagination-bullet {
   background-color: rgba(255, 255, 255, 0.5);
