@@ -265,7 +265,7 @@
 <script>
 import { mapState } from 'vuex'
 import axios from 'axios'
-import productSlide from '../template13/_productdetails/productSlide.vue'
+import productSlide from './_productdetails/productSlide.vue'
 import selectGroup from './_productdetails/selectGroup'
 // import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
