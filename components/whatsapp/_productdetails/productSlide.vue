@@ -1,21 +1,26 @@
 <template>
-  <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide wrapper-image">
+  <div class="wrapper-slider w-full h-full">
+    <el-carousel
+      height="400px"
+      :indicator-position="true"
+      :interval="8000"
+      class="w-full h-full"
+    >
+      <el-carousel-item>
         <img
-          v-lazy="idCloudinary(photo, 550, 550)"
+          v-lazy="idCloudinary(photo, 400, 400)"
+          alt="Product img"
+          class="photo"
+        />
+      </el-carousel-item>
+      <el-carousel-item v-for="photo in photos" :key="photo.id">
+        <img
+          v-lazy="idCloudinary(photo.foto_cloudinary, 400, 400)"
           class="photo"
           alt="Product img"
         />
-      </div>
-      <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
-        <img
-          v-lazy="idCloudinary(photo.foto_cloudinary, 550, 550)"
-          class="photo"
-          alt="Product img"
-        />
-      </div>
-      <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">
+      </el-carousel-item>
+      <el-carousel-item v-if="idYoutube && idYoutube !== ''">
         <div class="youtube">
           <button class="youtube__action_back" @click="changeSlide()">
             <i class="material-icons">keyboard_backspace</i>
@@ -28,9 +33,8 @@
             allowfullscreen
           ></iframe>
         </div>
-      </div>
-    </div>
-    <div class="swiper-pagination" slot="pagination" v-if="photos"></div>
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
@@ -40,53 +44,20 @@ export default {
   mixins: [idCloudinary],
   name: 'productSlide-details',
   props: ['photos', 'photo', 'idYoutube'],
-  data() {
-    return {
-      swiperOption: {
-        slidesPerView: 'auto',
-        direction: 'horizontal',
-        pagination: {
-          el: '.swiper-pagination',
-        },
-        setWrapperSize: true,
-        paginationClickable: true,
-        grabCursor: true,
-        // autoplay: {
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // },
-      },
-    }
-  },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper
-    },
-  },
   methods: {
     setPhoto(photo) {
       return photo
-    },
-    changeSlide() {
-      this.swiper.slidePrev(500, false)
     },
   },
 }
 </script>
 
 <style scoped>
-.swiper-wrapper {
-  max-width: 360px;
-  height: 360px;
-  @apply w-full h-full;
-}
-.swiper-slide {
-  max-width: 360px;
-  height: 360px;
-  @apply w-full h-full flex items-center justify-center box-border overflow-hidden relative;
+.wrapper-slider >>> .el-carousel__container {
+  height: 400px;
 }
 .photo {
-  @apply w-full h-full overflow-hidden object-cover;
+  @apply w-full h-full object-contain;
 }
 .photos .responsive .swiper-pagination-bullet {
   background-color: rgba(255, 255, 255, 0.5);
@@ -107,7 +78,14 @@ export default {
   border-style: none;
   outline: none;
 }
-.swiper-pagination >>> .swiper-pagination-bullet-active {
-  background: rgb(12, 183, 89);
+.wrapper-slider >>> .el-carousel__arrow {
+  background-color: rgb(12, 183, 89);
+  color: #fff;
+}
+.wrapper-slider >>> .el-carousel__button {
+  background-color: rgb(12, 183, 89);
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
 }
 </style>
