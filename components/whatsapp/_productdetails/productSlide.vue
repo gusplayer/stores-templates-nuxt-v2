@@ -83,7 +83,7 @@ export default {
 .swiper-slide {
   max-width: 360px;
   height: 360px;
-  @apply w-full h-full flex items-center justify-center box-border overflow-hidden;
+  @apply w-full h-full flex items-center justify-center box-border overflow-hidden relative;
 }
 .photo {
   @apply w-full h-full overflow-hidden object-cover;
