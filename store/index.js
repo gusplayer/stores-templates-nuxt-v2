@@ -1030,7 +1030,7 @@ export const actions = {
         },
       }
       axios
-        .get(`https://hoko.com.co/api/member/product?page=${id}`, config)
+        .get(`https://hoko.com.co/api/member/myproducts?page=${id}`, config)
         .then((response) => {
           state.producthoko = response.data
         })
