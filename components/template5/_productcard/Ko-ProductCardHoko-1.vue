@@ -11,6 +11,7 @@
               loading="lazy"
               v-lazy="product.images[0]"
               class="product-image"
+              :class="soldOut ? 'product-image-soldOut' : ''"
               alt="Product Img"
             />
           </client-only>
@@ -19,6 +20,9 @@
         <div class="separador-stats"></div>
         <div class="stats">
           <div class="stats-container">
+            <p class="card-info-1" v-if="soldOut">
+              {{ $t('home_cardAgotado') }}
+            </p>
             <div class="content-name-product">
               <p class="card-title" v-if="this.product.name >= 90">
                 {{ `${this.product.name.slice(0, 90)}...` }}
@@ -88,6 +92,15 @@ export default {
   mixins: [idCloudinary],
   name: 'Ko-ProductCard-5-Ho',
   props: { product: Object },
+  computed: {
+    soldOut() {
+      if (this.product && this.product.stock_amount === 0) {
+        return true
+      } else {
+        return false
+      }
+    },
+  },
   filters: {
     currency(value) {
       if (value) {
@@ -146,9 +159,6 @@ export default {
 }
 .product-image-soldOut {
   filter: grayscale(100%);
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
 }
 .image_overlay {
   position: absolute;

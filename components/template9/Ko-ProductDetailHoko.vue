@@ -264,7 +264,7 @@ export default {
         },
       }
       await axios
-        .get(`https://hoko.com.co/api/member/product/${id}`, config)
+        .get(`https://hoko.com.co/api/member/myproducts/${id}`, config)
         .then((response) => {
           this.loading = false
           this.data = response.data.product

@@ -18,6 +18,7 @@
           <img
             v-lazy="product.images[0]"
             class="product-image"
+            :class="soldOut ? 'product-image-soldOut' : ''"
             alt="Product Img"
           />
         </client-only>
@@ -84,6 +85,15 @@ export default {
     product: Object,
     settingGeneral: Object,
     settingKcardProduct: Object,
+  },
+  computed: {
+    soldOut() {
+      if (this.product && this.product.stock_amount === 0) {
+        return true
+      } else {
+        return false
+      }
+    },
   },
   filters: {
     currency(value) {
@@ -193,6 +203,9 @@ export default {
 .overlay-bottom:hover .txt-add {
   color: white;
   transition: all 200ms ease-in;
+}
+.product-image-soldOut {
+  filter: grayscale(100%);
 }
 @screen sm {
   .card-title {

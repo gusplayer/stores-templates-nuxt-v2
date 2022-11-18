@@ -17,6 +17,7 @@
             v-lazy="product.images[0]"
             class="product-image"
             alt="Product Img"
+            :class="soldOut ? 'product-image-soldOut' : ''"
           />
         </client-only>
         <div class="image_overlay"></div>
@@ -111,6 +112,13 @@ export default {
   computed: {
     dataStore() {
       return this.$store.state.dataStore
+    },
+    soldOut() {
+      if (this.product && this.product.stock_amount === 0) {
+        return true
+      } else {
+        return false
+      }
     },
   },
 
@@ -217,6 +225,9 @@ export default {
 .overlay-bottom:hover .txt-add {
   color: white;
   transition: all 200ms ease-in;
+}
+.product-image-soldOut {
+  filter: grayscale(100%);
 }
 @screen sm {
   .categoria {
