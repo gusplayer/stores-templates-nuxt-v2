@@ -797,84 +797,128 @@ export const actions = {
   GET_TEMPLATE_STORE({ commit }, value) {
     commit('SET_TEMPLATE_STORE', value)
   },
-  async GET_DATA_TIENDA_BY_ID({ commit, dispatch }, idTienda) {
-    const response = await axios.get(
-      `https://templates.komercia.co/api/tienda/${idTienda}`
-    )
-    dispatch('GET_ALL_PRODUCTS', idTienda)
-    commit('DATA', response.data)
-    commit('SET_DATA')
+  async GET_DATA_TIENDA_BY_ID({ state, commit, dispatch }, idTienda) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlTemplate}/api/tienda/${idTienda}`,
+      })
+      if (data && data.estado == 200) {
+        dispatch('GET_ALL_PRODUCTS', data.data.tienda.id_tienda)
+        commit('DATA', data)
+        commit('SET_DATA')
+      }
+    } catch (err) {
+      console.log('Data store', err.response)
+    }
   },
   GET_DATA({ commit }) {
     commit('SET_DATA')
   },
-  GET_CITIES({ commit, state }) {
-    axios.get(`${state.urlKomercia}/api/ciudades`).then((response) => {
-      commit('SET_CITIES', response.data.data)
-    })
-  },
-  GET_ALL_PRODUCTS({ state }, id_tienda) {
-    axios
-      .get(`${state.urlTemplate}/api/productos/${id_tienda}`, state.configAxios)
-      .then((response) => {
-        if (response && response.data) {
-          state.productsData = response.data.sort((a, b) => {
-            if (a.nombre < b.nombre) return -1
-            if (a.nombre > b.nombre) return 1
-            return 0
-          })
-          state.productsData.map((product) => {
-            if (product.variantes.length) {
-              try {
-                product.combinaciones = JSON.parse(
-                  product.variantes[0].combinaciones[0].combinaciones
-                )
-              } catch (err) {
-                // console.warn(product.id)
-              }
-              if (product.combinaciones.length && product.con_variante > 0) {
-                const arrPrices = product.combinaciones.map(
-                  (combinacion) => combinacion.precio
-                )
-                product.precio = Math.min(...arrPrices)
-              }
-            }
-          })
-          state.products.fullProducts = state.productsData
-            ? state.productsData
-            : []
-        }
+  async GET_CITIES({ commit, state }) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/ciudades`,
       })
+      if (data) {
+        commit('SET_CITIES', data.data)
+      }
+    } catch (err) {
+      console.log('Data cities', err.response)
+    }
+  },
+  async GET_ALL_PRODUCTS({ state }, id_tienda) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlTemplate}/api/productos/${id_tienda}`,
+        headers: state.configAxios,
+      })
+      if (data) {
+        state.productsData = data.sort((a, b) => {
+          if (a.nombre < b.nombre) return -1
+          if (a.nombre > b.nombre) return 1
+          return 0
+        })
+        state.productsData.map((product) => {
+          if (product.variantes.length) {
+            try {
+              product.combinaciones = JSON.parse(
+                product.variantes[0].combinaciones[0].combinaciones
+              )
+            } catch (err) {
+              // console.warn(product.id)
+            }
+            if (product.combinaciones.length && product.con_variante > 0) {
+              const arrPrices = product.combinaciones.map(
+                (combinacion) => combinacion.precio
+              )
+              product.precio = Math.min(...arrPrices)
+            }
+          }
+        })
+        state.products.fullProducts = state.productsData
+          ? state.productsData
+          : []
+      }
+    } catch (err) {
+      console.log('All products store', err.response)
+    }
   },
   async GET_SETTINGS_BY_TEMPLATE({ commit, state }, store) {
     let template = store.template
-    await axios
-      .get(
-        `${state.urlKomercia}/api/template/${template}/settings/${store.id_tienda}`
-      )
-      .then((response) => {
-        commit('SET_SETTINGS_BY_TEMPLATE', response.data.data)
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/template/${template}/settings/${store.id_tienda}`,
       })
+      if (data) {
+        commit('SET_SETTINGS_BY_TEMPLATE', data.data)
+      }
+    } catch (err) {
+      console.log('Data setting Laravel', err.response)
+    }
   },
   async GET_SETTINGS_BY_TEMPLATE_NODE({ commit, state }, store) {
-    const response = await axios.get(
-      `${state.urlNodeSettings}/template${store.template}?id=${store.id_tienda}`
-    )
-    commit(`SET_SETTINGS_BY_TEMPLATE_${store.template}`, response.data.body)
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlNodeSettings}/template${store.template}?id=${store.id_tienda}`,
+      })
+      if (data) {
+        commit(`SET_SETTINGS_BY_TEMPLATE_${store.template}`, data.body)
+      }
+    } catch (err) {
+      console.log('Data setting NODE', err.response)
+    }
   },
   async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit, state }, idWapi) {
     let template = state.template ? state.template : 99
-    await axios
-      .get(`${state.urlKomercia}/api/template/${template}/settings/${idWapi}`)
-      .then((response) => {
-        commit('SET_SETTINGS_BY_TEMPLATE', response.data.data)
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/template/${template}/settings/${idWapi}`,
       })
+      if (data) {
+        commit('SET_SETTINGS_BY_TEMPLATE', data.data)
+      }
+    } catch (err) {
+      console.log('Data setting wapi', err.response)
+    }
   },
   async GET_ANALYTICS_TAGMANAGER({ commit, state }, id) {
-    const response = await axios.get(
-      `${state.urlKomercia}/api/apis/tienda/${id}`
-    )
-    commit('SET_ANALITICS_TAGMANAGER', response.data.data)
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/apis/tienda/${id}`,
+      })
+      if (data) {
+        commit('SET_ANALITICS_TAGMANAGER', data.data)
+      }
+    } catch (err) {
+      console.log('Data integraciones', err.response)
+    }
   },
   GET_SHOPPING_CART({ state, commit, dispatch }) {
     if (
@@ -979,61 +1023,70 @@ export const actions = {
     commit('SET_SHOPPING_CART', productsFinal)
     // commit('UPDATE_CONTENT_CART', 1)
   },
-  GET_DESCUENTOS({ state }) {
-    axios
-      .get(
-        `${state.urlKomercia}/api/descuentos/${state.dataStore.tienda.id_tienda}?page=1`,
-        state.configAxios
-      )
-      .then((response) => {
-        state.listDescuentos = response.data.descuentos.data.sort(function (
-          prev,
-          next
-        ) {
+  async GET_DESCUENTOS({ state }) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/descuentos/${state.dataStore.tienda.id_tienda}?page=1`,
+        headers: state.configAxios,
+      })
+      if (data) {
+        state.listDescuentos = data.descuentos.data.sort(function (prev, next) {
           return prev.cantidad_productos - next.cantidad_productos
         })
-      })
+      }
+    } catch (err) {
+      console.log('Data descuentos', err.response)
+    }
   },
   async GET_ARTICLES({ state, commit }, id) {
-    const response = await axios.get(
-      `${state.urlKomercia}/api/blogs/${id}?page=1`,
-      state.configAxios
-    )
-    commit('SET_ARTICLES', response.data.blogs.data)
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/blogs/${id}?page=1`,
+        headers: state.configAxios,
+      })
+      if (data) {
+        commit('SET_ARTICLES', data.blogs.data)
+      }
+    } catch (err) {
+      console.log('Data blog tienda', err.response)
+    }
   },
   async GET_DATA_HOKO({ dispatch, commit, state }, id) {
-    await axios
-      .get(`${state.urlKomercia}/api/hoko/${id}`)
-      .then((response) => {
-        if (response.data.data) {
-          dispatch('GET_PRODUCTSHOKO', 1)
-          commit('SET_DATA_HOKO', response.data.data)
-        } else {
-          // eslint-disable-next-line no-console
-          console.log('No tiene Hoko registrado')
-        }
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/hoko/${id}`,
       })
-      .catch((error) => {
-        if (error) {
-          // eslint-disable-next-line no-console
-          console.log(error)
-        }
-      })
-  },
-  GET_PRODUCTSHOKO({ state }, id) {
-    if (state.dataHoko && state.dataHoko.token) {
-      let config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-          Authorization: `Bearer ${state.dataHoko.token}`,
-          'Access-Control-Allow-Origin': '*',
-        },
+      if (data.data) {
+        dispatch('GET_PRODUCTSHOKO', 1)
+        commit('SET_DATA_HOKO', data.data)
+      } else {
+        console.log('No tiene Hoko registrado')
       }
-      axios
-        .get(`https://hoko.com.co/api/member/myproducts?page=${id}`, config)
-        .then((response) => {
-          state.producthoko = response.data
+    } catch (err) {
+      console.log('Data hoko', err.response)
+    }
+  },
+  async GET_PRODUCTSHOKO({ state }, id) {
+    if (state.dataHoko && state.dataHoko.token) {
+      try {
+        const { data } = await axios({
+          method: 'GET',
+          url: `https://hoko.com.co/api/member/myproducts?page=${id}`,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Authorization: `Bearer ${state.dataHoko.token}`,
+            'Access-Control-Allow-Origin': '*',
+          },
         })
+        if (data) {
+          state.producthoko = data
+        }
+      } catch (err) {
+        console.log('Listado prodcutos Hoko', err.response)
+      }
     }
   },
   SEND_ADD_TO_CART({ state, getters }, value) {
