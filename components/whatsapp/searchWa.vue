@@ -56,8 +56,9 @@
                     ? settingByTemplate.color_secundario
                     : '#FFFFFF'
                 };`"
-                >{{ $t('home_vamos') }}</span
               >
+                {{ $t('home_vamos') }}
+              </span>
             </button>
           </div>
         </form>
@@ -96,6 +97,10 @@ export default {
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Search', { value: search })
       }
+      this.$router.push({
+        path: '',
+        query: { search: search },
+      })
     },
   },
   watch: {
