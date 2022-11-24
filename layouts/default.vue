@@ -737,26 +737,52 @@ export default {
         if (phone_number_whatsapp.charAt(0) === '+') {
           phone_number_whatsapp = phone_number_whatsapp.slice(1)
         }
+        var text = ''
+        if (this.dataStore.tienda.lenguaje == 'es') {
+          text = `Hola%20vengo%20de%20tu%20tienda%20online%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%20y%20me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20%0AURL%3A%20${encodeURIComponent(
+            window.location
+          )}`
+        } else if (this.dataStore.tienda.lenguaje == 'en') {
+          text = `Hi%2C%20I%20came%20from%20your%20online%20store%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%20and%20I%20would%20like%20to%20receive%20more%20information.%20%0AURL%3A%20${encodeURIComponent(
+            window.location
+          )}`
+        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+          text = `Ol%C3%A1%2C%20vim%20de%20sua%20loja%20virtual%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%20e%20gostaria%20de%20receber%20mais%20informa%C3%A7%C3%B5es.%20%0AURL%3A%20${encodeURIComponent(
+            window.location
+          )}`
+        } else {
+          text = `Hola%20vengo%20de%20tu%20tienda%20online%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%20y%20me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20%0AURL%3A%20${encodeURIComponent(
+            window.location
+          )}`
+        }
         if (this.mobileCheck()) {
           window.open(
-            `https://wa.me/${phone_number_whatsapp}/?text=Hola%20vengo%20de%20tu%20tienda%20online%20y%20me%20gustaría%20recibir%20mas%20información`,
+            `https://wa.me/${phone_number_whatsapp}/?text=${text}`,
             '_blank'
           )
         } else {
           window.open(
-            `https://web.whatsapp.com/send?phone=${phone_number_whatsapp}&text=Hola%20vengo%20de%20tu%20tienda%20online%20y%20me%20gustaría%20recibir%20mas%20información%20${window.location}`,
+            `https://web.whatsapp.com/send?phone=${phone_number_whatsapp}&text=${text}`,
             '_blank'
           )
         }
       } else {
         if (this.mobileCheck()) {
           window.open(
-            `https://wa.me/57${this.dataStore.tienda.whatsapp}/?text=Hola%20vengo%20de%20tu%20tienda%20online%20y%20me%20gustaría%20recibir%20mas%20información`,
+            `https://wa.me/57${this.dataStore.tienda.whatsapp}/?text=${text}`,
             '_blank'
           )
         } else {
           window.open(
-            `https://web.whatsapp.com/send?phone=57${this.dataStore.tienda.whatsapp}&text=Hola%20vengo%20de%20tu%20tienda%20online%20y%20me%20gustaría%20recibir%20mas%20información%20${window.location}`,
+            `https://web.whatsapp.com/send?phone=57${this.dataStore.tienda.whatsapp}&text=${text}`,
             '_blank'
           )
         }
