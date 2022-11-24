@@ -51,7 +51,7 @@ export default {
   buildModules: ['@nuxtjs/tailwindcss'],
   modules: ['@nuxtjs/gtm', '@nuxtjs/sitemap'],
   sitemap: {
-    hostname: 'https://komercia.store',
+    // hostname: 'https://komercia.store',
     gzip: true,
     defaults: {
       priority: 1,
