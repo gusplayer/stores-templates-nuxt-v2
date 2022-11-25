@@ -45,7 +45,7 @@
         <p class="card_info card_soldOut" v-if="soldOut">
           {{ $t('home_cardAgotado') }}
         </p>
-        <p class="card_info card_freeShipping" v-if="getFreeShipping == false">
+        <p class="card_info card_freeShipping" v-if="!getFreeShipping">
           {{ $t('home_cardGratis') }}
         </p>
         <div

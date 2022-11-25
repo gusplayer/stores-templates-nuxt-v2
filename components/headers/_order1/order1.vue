@@ -151,8 +151,8 @@
                       v-if="
                         rangosByCiudad.envio_metodo === 'precio_ciudad' &&
                         shippingCities.length > 0 &&
-                        getFreeShipping == false &&
-                        FreeShippingCart == false
+                        !getFreeShipping &&
+                        !FreeShippingCart
                       "
                     >
                       <summary class="text-color">
@@ -192,7 +192,7 @@
                         rangosByCiudad.envio_metodo === 'tarifa_plana' &&
                         shipping > 0 &&
                         getFreeShipping &&
-                        FreeShippingCart == false
+                        !FreeShippingCart
                       "
                     >
                       <li class="text-color" style="list-style: none">
@@ -210,7 +210,7 @@
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'precio' &&
                         getFreeShipping &&
-                        FreeShippingCart == false
+                        !FreeShippingCart
                       "
                     >
                       <div v-if="this.shippingTarifaPrecio > 0">
@@ -256,8 +256,8 @@
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'gratis' &&
                         shippingCities.length <= 0 &&
-                        getFreeShipping == false &&
-                        FreeShippingCart == false
+                        !getFreeShipping &&
+                        !FreeShippingCart
                       "
                     >
                       {{ $t('footer_encioGratis') }}
@@ -267,8 +267,8 @@
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'sintarifa' &&
                         shippingCities.length <= 0 &&
-                        getFreeShipping == false &&
-                        FreeShippingCart == false
+                        !getFreeShipping &&
+                        !FreeShippingCart
                       "
                     >
                       {{ $t('footer_enviosPorPagar') }}
@@ -313,7 +313,7 @@
                           (this.shipping ? this.shipping : 0) +
                           (this.shippingTarifaPrecio &&
                           this.shippingTarifaPrecio != 'empty' &&
-                          this.FreeShippingCart == false
+                          !this.FreeShippingCart
                             ? this.shippingTarifaPrecio
                             : 0) -
                           this.discountDescuentos)
@@ -330,7 +330,7 @@
                   <div
                     v-if="
                       isQuotation() ||
-                      (countryStore == false &&
+                      (!countryStore &&
                         productsCart.length &&
                         dataStore.tienda.estado == 1)
                     "
@@ -397,7 +397,7 @@
                       productsCart.length &&
                       !isQuotation() &&
                       dataStore.tienda.estado == 1 &&
-                      this.estadoShippingTarifaPrecio == false &&
+                      !this.estadoShippingTarifaPrecio &&
                       countryStore &&
                       IsMinValorTotal() &&
                       expiredDate(dataStore.tienda.fecha_expiracion)
@@ -415,7 +415,7 @@
                       productsCart.length &&
                       !isQuotation() &&
                       dataStore.tienda.estado == 1 &&
-                      this.estadoShippingTarifaPrecio == false &&
+                      !this.estadoShippingTarifaPrecio &&
                       countryStore &&
                       IsMinValorTotal() &&
                       settingByTemplate.pago_online == 1 &&
@@ -791,13 +791,15 @@ export default {
     ValidationObserver,
     ValidationProvider,
   },
-  mounted() {
+  async mounted() {
     this.setPlaceholderDep()
     this.$store.dispatch('GET_DESCUENTOS')
     this.$store.dispatch('GET_SHOPPING_CART')
-    this.$store.dispatch('GET_CITIES')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
-      this.filterCities()
+      const { success } = await this.$store.dispatch('GET_CITIES')
+      if (success) {
+        this.filterCities()
+      }
     }
     this.$store.commit('CALCULATE_TOTAL_CART')
     if (this.rangosByCiudades.envio_metodo == 'precio') {
@@ -1290,7 +1292,7 @@ export default {
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
           this.shippingTarifaPrecio != 'empty' &&
-          this.FreeShippingCart == false
+          !this.FreeShippingCart
             ? this.shippingTarifaPrecio
             : 0) -
           this.discountDescuentos
@@ -1335,7 +1337,7 @@ export default {
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
           this.shippingTarifaPrecio != 'empty' &&
-          this.FreeShippingCart == false
+          !this.FreeShippingCart
             ? this.shippingTarifaPrecio
             : 0) -
           this.discountDescuentos
@@ -1378,7 +1380,7 @@ export default {
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
           this.shippingTarifaPrecio != 'empty' &&
-          this.FreeShippingCart == false
+          !this.FreeShippingCart
             ? this.shippingTarifaPrecio
             : 0) -
           this.discountDescuentos
@@ -1421,7 +1423,7 @@ export default {
           (this.shipping ? this.shipping : 0) +
           (this.shippingTarifaPrecio &&
           this.shippingTarifaPrecio != 'empty' &&
-          this.FreeShippingCart == false
+          !this.FreeShippingCart
             ? this.shippingTarifaPrecio
             : 0) -
           this.discountDescuentos
@@ -1524,7 +1526,7 @@ export default {
               (this.shipping ? this.shipping : 0) +
               (this.shippingTarifaPrecio &&
               this.shippingTarifaPrecio != 'empty' &&
-              this.FreeShippingCart == false
+              !this.FreeShippingCart
                 ? this.shippingTarifaPrecio
                 : 0) -
               this.discountDescuentos,
@@ -1577,7 +1579,7 @@ export default {
             (this.shipping ? this.shipping : 0) +
             (this.shippingTarifaPrecio &&
             this.shippingTarifaPrecio != 'empty' &&
-            this.FreeShippingCart == false
+            !this.FreeShippingCart
               ? this.shippingTarifaPrecio
               : 0) -
             this.discountDescuentos,

@@ -17,10 +17,7 @@
         },
       ]"
     >
-      <div
-        class="separador-blog"
-        v-if="settingKCarousel.visible == false"
-      ></div>
+      <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
       <div class="wrapper-content-items">
         <div class="wrapper-items-text">
           <div class="tittle">

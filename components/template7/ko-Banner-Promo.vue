@@ -1,6 +1,6 @@
 <template>
   <div class="promo-banner-content" :style="[settingKPromo, settingGeneral]">
-    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
+    <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
     <div
       class="promo-banner-items"
       :style="[

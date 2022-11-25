@@ -33,12 +33,12 @@
         </client-only>
         <div class="image_overlay"></div>
       </nuxt-link>
-      <div class="overlay-top" v-if="getFreeShipping == false && !soldOut">
+      <div class="overlay-top" v-if="!getFreeShipping && !soldOut">
         <div class="icons-hover">
           <div class="transport-icon">
             <svg
               class="transporte-icon"
-              v-if="getFreeShipping == false && !soldOut"
+              v-if="!getFreeShipping && !soldOut"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               version="1.1"
@@ -54,7 +54,7 @@
           </div>
         </div>
       </div>
-      <div class="overlay-free" v-if="getFreeShipping == false && !soldOut">
+      <div class="overlay-free" v-if="!getFreeShipping && !soldOut">
         <div class="text-free">
           <p class="txt-free">{{ $t('home_cardGratis') }}</p>
         </div>
@@ -67,7 +67,7 @@
           <p>{{ this.product.promocion_valor }}% OFF</p>
         </div>
       </div>
-      <div class="overlay-polygon" v-if="getFreeShipping == false && !soldOut">
+      <div class="overlay-polygon" v-if="!getFreeShipping && !soldOut">
         <svg
           class="icon-overlay-free"
           width="12px"

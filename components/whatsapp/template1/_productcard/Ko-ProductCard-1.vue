@@ -3,7 +3,7 @@
     <div class="container-card">
       <div class="wrapper-movil">
         <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
-        <p class="card-info-2" v-if="getFreeShipping == false">
+        <p class="card-info-2" v-if="!getFreeShipping">
           {{ $t('home_cardGratis') }}
         </p>
         <nuxt-link

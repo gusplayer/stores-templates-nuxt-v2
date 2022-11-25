@@ -77,8 +77,8 @@
                     </div>
                   </div>
                   <div class="wrapper-tag">
-                    <el-tag type="danger" v-if="product.activo == 0"
-                      >Producto agotado!
+                    <el-tag type="danger" v-if="product.activo == 0">
+                      Producto agotado!
                     </el-tag>
                     <el-tag type="danger" v-if="product.stock_disponible == 0">
                       ¡No tiene las unidades disponibles!
@@ -206,8 +206,8 @@
                   v-if="
                     rangosByCiudad.envio_metodo === 'precio_ciudad' &&
                     shippingCities.length > 0 &&
-                    getFreeShipping == false &&
-                    FreeShippingCart == false
+                    !getFreeShipping &&
+                    !FreeShippingCart
                   "
                 >
                   <summary class="txt-cart-summary">
@@ -306,7 +306,7 @@
                   </p>
                 </div>
                 <p
-                  v-else-if="shipping && getFreeShipping == false"
+                  v-else-if="shipping && !getFreeShipping"
                   class="txt_summary_price"
                 >
                   {{
@@ -322,8 +322,8 @@
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'gratis' &&
                     shippingCities.length <= 0 &&
-                    getFreeShipping == false &&
-                    FreeShippingCart == false
+                    !getFreeShipping &&
+                    !FreeShippingCart
                   "
                 >
                   <p class="txt_summary_tittle">
@@ -347,8 +347,8 @@
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'sintarifa' &&
                     shippingCities.length <= 0 &&
-                    getFreeShipping == false &&
-                    FreeShippingCart == false
+                    !getFreeShipping &&
+                    !FreeShippingCart
                   "
                 >
                   <p class="txt_summary_tittle">
@@ -390,7 +390,7 @@
                       (this.shipping ? this.shipping : 0) +
                       (this.shippingTarifaPrecio &&
                       this.shippingTarifaPrecio != 'empty' &&
-                      this.FreeShippingCart == false
+                      !this.FreeShippingCart
                         ? this.shippingTarifaPrecio
                         : 0) -
                       discountDescuentos)
@@ -403,10 +403,7 @@
               </div>
               <p
                 class="Quotation-message"
-                v-if="
-                  isQuotation() ||
-                  (countryStore == false && productsCart.length)
-                "
+                v-if="isQuotation() || (!countryStore && productsCart.length)"
               >
                 {{ $t('footer_contactoMgs') }}
               </p>
@@ -442,7 +439,7 @@
                   productsCart.length &&
                   !isQuotation() &&
                   dataStore.tienda.estado == 1 &&
-                  this.estadoShippingTarifaPrecio == false &&
+                  !this.estadoShippingTarifaPrecio &&
                   countryStore &&
                   IsMinValorTotal() &&
                   expiredDate(dataStore.tienda.fecha_expiracion)
@@ -483,19 +480,21 @@
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 import expiredDate from '../../mixins/expiredDate'
-import { Empty } from 'element-ui'
+// import { Empty } from 'element-ui'
 export default {
   mixins: [idCloudinary, currency, expiredDate],
   name: 'Ko-Cart-G',
   props: {
     dataStore: Object,
-    cities: Array,
   },
-  mounted() {
+  async mounted() {
     this.$store.dispatch('GET_DESCUENTOS')
     this.$store.dispatch('GET_SHOPPING_CART')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
-      this.filterCities()
+      const { success } = await this.$store.dispatch('GET_CITIES')
+      if (success) {
+        this.filterCities()
+      }
     }
     this.$store.commit('CALCULATE_TOTAL_CART')
     if (this.rangosByCiudades.envio_metodo == 'precio') {
@@ -522,6 +521,9 @@ export default {
     // stateModalPwd() {
     //   return this.$store.state.stateModalPwd
     // },
+    cities() {
+      return this.$store.state.cities
+    },
     verifyProducts() {
       return this.$store.getters.verifyProducts
     },

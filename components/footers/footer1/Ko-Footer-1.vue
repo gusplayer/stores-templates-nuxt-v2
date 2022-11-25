@@ -87,11 +87,7 @@
           alt="Logo Img"
         />
       </a>
-      <nuxt-link
-        to="/"
-        class="wrapper-logo-tablada"
-        v-if="this.showLogo == false"
-      >
+      <nuxt-link to="/" class="wrapper-logo-tablada" v-if="!this.showLogo">
         <img
           width="120"
           loading="lazy"

@@ -117,7 +117,7 @@ export default {
     if (
       this.settingByTemplate7 &&
       this.settingByTemplate7[0].setting7Footer &&
-      this.settingByTemplate7[0].setting7Footer.img_background == false
+      !this.settingByTemplate7[0].setting7Footer.img_background
     ) {
       this.setLogo()
     }
@@ -179,7 +179,7 @@ export default {
       if (
         this.settingByTemplate7 &&
         this.settingByTemplate7[0].setting7Footer &&
-        this.settingByTemplate7[0].setting7Footer.img_background == false
+        !this.settingByTemplate7[0].setting7Footer.img_background
       ) {
         let color = getComputedStyle(this.$refs.background).getPropertyValue(
           '--background_color_1'

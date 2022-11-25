@@ -60,7 +60,7 @@
                 >
                   <nuxt-link
                     :to="item.url"
-                    v-if="item.isExternalLink == false"
+                    v-if="!item.isExternalLink"
                     class="content-button"
                   >
                     <p

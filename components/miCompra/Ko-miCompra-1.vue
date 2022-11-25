@@ -219,7 +219,7 @@
             </p>
             <p
               class="title-info-orden"
-              v-if="orden.venta.costo_envio && stateHoko == false"
+              v-if="orden.venta.costo_envio && !stateHoko"
             >
               {{ $t('mcompra_valorEnvio') }}
               <span class="value-info-orden">

@@ -194,7 +194,7 @@
             <button
               disabled
               class="btn-responsive"
-              v-else-if="this.salesData.estado == false"
+              v-else-if="!this.salesData.estado"
             >
               <span>
                 {{ $t('productdetail_btnANodisponible') }}

@@ -54,7 +54,7 @@
                     </p>
                     <div
                       class="header-text-center-icon"
-                      v-if="showMenu == false"
+                      v-if="!showMenu"
                       :is="item.iconOpen"
                     />
                     <div
@@ -315,7 +315,7 @@ export default {
       if (name == 'header_categorias') {
         this.showMenu = !this.showMenu
       }
-      if (this.showMenu == false) {
+      if (!this.showMenu) {
         intro.style.display = 'none'
       } else {
         intro.style.display = 'flex'
@@ -339,7 +339,7 @@ export default {
       ) {
         this.showMenu = false
       }
-      if (this.showMenu == false) {
+      if (!this.showMenu) {
         intro.style.display = 'none'
       } else {
         intro.style.display = 'flex'

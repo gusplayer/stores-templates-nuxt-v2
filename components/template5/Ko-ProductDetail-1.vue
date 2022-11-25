@@ -231,7 +231,7 @@
                       class="btn"
                       v-if="
                         !spent &&
-                        this.salesData.estado == true &&
+                        this.salesData.estado &&
                         (data.info.tipo_servicio == null ||
                           data.info.tipo_servicio == '0')
                       "
@@ -243,7 +243,7 @@
                     <button
                       disabled
                       class="btn-disabled"
-                      v-else-if="this.salesData.estado == false"
+                      v-else-if="!this.salesData.estado"
                     >
                       {{ $t('productdetail_btnANodisponible') }}
                     </button>
@@ -319,7 +319,7 @@
               ref="color2"
               v-if="
                 !spent &&
-                this.salesData.estado == true &&
+                this.salesData.estado &&
                 (data.info.tipo_servicio == null ||
                   data.info.tipo_servicio == '0')
               "
@@ -330,11 +330,7 @@
                 $t('productdetail_btnAgregar')
               }}
             </button>
-            <button
-              disabled
-              class="btn-disabled"
-              v-if="this.salesData.estado == false"
-            >
+            <button disabled class="btn-disabled" v-if="!this.salesData.estado">
               {{ $t('productdetail_btnANodisponible') }}
             </button>
             <button

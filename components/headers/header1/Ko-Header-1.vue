@@ -57,7 +57,7 @@
                     </p>
                     <div
                       class="header-text-center-icon"
-                      v-if="showMenu == false"
+                      v-if="!showMenu"
                       :is="item.iconOpen"
                     />
                     <div

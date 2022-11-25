@@ -188,7 +188,7 @@
             </div>
           </div>
         </div>
-        <div class="content-category-left" v-if="stateShipping == false">
+        <div class="content-category-left" v-if="!stateShipping">
           <button class="item-tittle">
             <p class="txt-tittles">
               {{ $t('home_fenvio') }}
@@ -701,7 +701,7 @@ export default {
       this.$store.commit('products/SET_PAYLOAD_TAG2', '')
       this.stateSub = false
       var stateCategory = document.getElementById('stateCate07')
-      if (this.stateSub == false && stateCategory) {
+      if (!this.stateSub && stateCategory) {
         stateCategory.style.color = '#8e8e8e'
         stateCategory.style.fontWeight = '100'
       }

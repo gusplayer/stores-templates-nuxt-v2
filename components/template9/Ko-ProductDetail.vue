@@ -210,7 +210,7 @@
                 <button
                   disabled
                   class="btn-disabled"
-                  v-else-if="this.salesData.estado == false"
+                  v-else-if="!this.salesData.estado"
                 >
                   <p class="text-addCart">
                     {{ $t('productdetail_btnANodisponible') }}
@@ -273,7 +273,7 @@
                   </div>
                   <button
                     class="btn-responsive"
-                    v-if="!spent && this.salesData.estado == true"
+                    v-if="!spent && this.salesData.estado"
                     v-on:click="addShoppingCart"
                   >
                     <cartArrowDown class="card-icon-cart" />
@@ -281,7 +281,7 @@
                   </button>
                   <div
                     class="content_buy_action-responsive"
-                    v-if="this.salesData.estado == false"
+                    v-if="!this.salesData.estado"
                   >
                     <p class="card-info-1-res">
                       {{ $t('productdetail_btnANodisponible') }}
