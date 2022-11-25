@@ -45,7 +45,7 @@
                 :key="`${index}${item.displayName}`"
                 @click="closed"
               >
-                <nuxt-link :to="item.url" v-if="item.isExternalLink == false">
+                <nuxt-link :to="item.url" v-if="!item.isExternalLink">
                   <button class="btn">
                     {{ item.displayName }}
                   </button>

@@ -1,6 +1,6 @@
 <template>
   <div class="product-content" :style="[settingKGify, settingGeneral]">
-    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
+    <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
     <div
       class="producto-items-content"
       :style="[

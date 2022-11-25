@@ -823,6 +823,7 @@ export const actions = {
       })
       if (data) {
         commit('SET_CITIES', data.data)
+        return { success: true, data: data }
       }
     } catch (err) {
       console.log('Data cities', err.response)
@@ -982,7 +983,7 @@ export const actions = {
           activo: product.activo,
           stock_disponible: 1,
         }
-        if (filterCombination[0].estado == false) {
+        if (!filterCombination[0].estado) {
           newProduct.activo = 0
         }
         if (filterCombination[0].unidades == 0) {

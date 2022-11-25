@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <KCart :dataStore="dataStore" :cities="cities" />
+    <KCart :dataStore="dataStore" />
   </div>
 </template>
 <script>
@@ -11,15 +11,9 @@ export default {
   components: {
     KCart,
   },
-  mounted() {
-    this.$store.dispatch('GET_CITIES')
-  },
   computed: {
     dataStore() {
       return this.$store.state.dataStore
-    },
-    cities() {
-      return this.$store.state.cities
     },
   },
 }

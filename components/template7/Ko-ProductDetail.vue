@@ -361,7 +361,7 @@
                     class="btn"
                     v-if="
                       !spent &&
-                      this.salesData.estado == true &&
+                      this.salesData.estado &&
                       (data.info.tipo_servicio == null ||
                         data.info.tipo_servicio == '0')
                     "
@@ -372,7 +372,7 @@
                   <button
                     disabled
                     class="btn-disabled"
-                    v-else-if="this.salesData.estado == false"
+                    v-else-if="!this.salesData.estado"
                   >
                     {{ $t('productdetail_btnANodisponible') }}
                   </button>

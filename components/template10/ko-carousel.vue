@@ -6,10 +6,8 @@
         v-for="(item, index) in banner.values"
         :key="index"
         :id="`slide${index + 1}`"
-        :href="`${item.visbleBtn == true ? '' : item.url_redirect}`"
-        :class="
-          item.visbleBtn == true ? 'pointer-events-none' : 'cursor-pointer'
-        "
+        :href="`${item.visbleBtn ? '' : item.url_redirect}`"
+        :class="item.visbleBtn ? 'pointer-events-none' : 'cursor-pointer'"
         rel="noreferrer noopener"
       >
         <img

@@ -69,7 +69,7 @@
                   .values"
                 :key="`${index}${item.displayName}`"
               >
-                <nuxt-link :to="item.url" v-if="item.isExternalLink == false">
+                <nuxt-link :to="item.url" v-if="!item.isExternalLink">
                   <button class="btn">
                     {{ item.displayName }}
                   </button>

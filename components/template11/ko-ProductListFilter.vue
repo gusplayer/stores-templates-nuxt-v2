@@ -143,7 +143,7 @@
             <el-collapse-item
               :title="$t('home_fenvio')"
               name="4"
-              v-show="stateShipping == false"
+              v-show="!stateShipping"
             >
               <div class="categorys-list">
                 <button

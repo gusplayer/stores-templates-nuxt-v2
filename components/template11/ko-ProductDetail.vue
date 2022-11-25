@@ -272,7 +272,7 @@
                 <button
                   disabled
                   class="btn-disabled"
-                  v-else-if="this.salesData.estado == false"
+                  v-else-if="!this.salesData.estado"
                 >
                   <p class="text-addCart">
                     {{ $t('productdetail_btnANodisponible') }}

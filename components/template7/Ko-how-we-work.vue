@@ -1,6 +1,6 @@
 <template>
   <div class="hwwork-content" :style="[settingKHowwork, settingGeneral]">
-    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
+    <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
     <div
       class="hwwork-content-items"
       :style="[

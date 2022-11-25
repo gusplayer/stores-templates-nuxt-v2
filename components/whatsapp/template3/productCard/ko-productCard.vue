@@ -110,10 +110,7 @@
               </p>
             </div>
           </div>
-          <p
-            class="card_info card_freeShipping"
-            v-if="getFreeShipping == false"
-          >
+          <p class="card_info card_freeShipping" v-if="!getFreeShipping">
             {{ $t('home_cardGratis') }}
           </p>
           <p class="card_info card_soldOut" v-if="soldOut">

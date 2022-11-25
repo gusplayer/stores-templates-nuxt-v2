@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-content" :style="[settingKBlog, settingGeneral]">
-    <div class="separador-blog" v-if="settingKCarousel.visible == false"></div>
+    <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
     <div
       class="wrapper-items-content"
       :style="[

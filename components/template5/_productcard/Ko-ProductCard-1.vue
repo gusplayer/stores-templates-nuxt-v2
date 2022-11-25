@@ -74,7 +74,7 @@
             <p class="card-info-1" v-if="soldOut">
               {{ $t('home_cardAgotado') }}
             </p>
-            <p class="card-info-2" v-if="getFreeShipping == false">
+            <p class="card-info-2" v-if="!getFreeShipping">
               {{ $t('home_cardGratis') }}
             </p>
             <div class="content-name-product">
@@ -220,7 +220,7 @@
         </nuxt-link>
         <div class="content-card-items">
           <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
-          <p class="card-info-2" v-if="getFreeShipping == false">
+          <p class="card-info-2" v-if="!getFreeShipping">
             {{ $t('home_cardGratis') }}
           </p>
           <nuxt-link

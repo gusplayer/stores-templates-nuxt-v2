@@ -216,7 +216,7 @@
                 ? settingByTemplate.color_secundario
                 : '#FFFFFF'
             };`"
-            v-else-if="this.salesData.estado == false"
+            v-else-if="!this.salesData.estado"
           >
             <span>
               {{ $t('productdetail_btnANodisponible') }}
