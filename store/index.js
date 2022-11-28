@@ -726,18 +726,16 @@ export const actions = {
       }
     }
     if (idWapi) {
-      await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
       await dispatch('GET_TEMPLATE_STORE', 99)
-      await dispatch('GET_ANALYTICS_TAGMANAGER', idWapi)
       await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
-      await dispatch('GET_ARTICLES', idWapi)
+      await dispatch('GET_ALL_PRODUCTS', idWapi)
+      await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
       await commit('SET_STATE_WAPIME', true)
     } else {
       if (id && id.data.data && id.data.data.id) {
-        await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
         await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
-        await dispatch('GET_ANALYTICS_TAGMANAGER', id.data.data.id)
-        await dispatch('GET_ARTICLES', id.data.data.id)
+        await dispatch('GET_ALL_PRODUCTS', id.data.data.id)
+        await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
         if (
           state.dataStore &&
           state.dataStore.tienda &&
@@ -804,7 +802,9 @@ export const actions = {
         url: `${state.urlTemplate}/api/tienda/${idTienda}`,
       })
       if (data && data.estado == 200) {
-        dispatch('GET_ALL_PRODUCTS', data.data.tienda.id_tienda)
+        // dispatch('GET_ALL_PRODUCTS', data.data.tienda.id_tienda)
+        await dispatch('GET_ANALYTICS_TAGMANAGER', data.data.tienda.id_tienda)
+        await dispatch('GET_ARTICLES', data.data.tienda.id_tienda)
         commit('DATA', data)
         commit('SET_DATA')
       }
@@ -1052,6 +1052,20 @@ export const actions = {
       }
     } catch (err) {
       console.log('Data blog tienda', err.response)
+    }
+  },
+  async GET_DATA_ARTICLE({ state, commit }, params) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/blog/${params.idStore}/${params.idBlog}`,
+        headers: state.configAxios,
+      })
+      if (data) {
+        return { success: true, data: data }
+      }
+    } catch (err) {
+      console.log('Data articulo tienda', err.response)
     }
   },
   async GET_DATA_HOKO({ dispatch, commit, state }, id) {

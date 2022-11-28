@@ -40,10 +40,9 @@
                 class="content-products"
               >
                 <KoblogCard
-                  v-if="article.estado == 1"
                   :article="article"
                   :settingKblog="settingByTemplate11[0].blog"
-                ></KoblogCard>
+                />
               </div>
             </div>
             <div v-if="filteredList.length == 0" class="content-products-empty">
@@ -69,7 +68,7 @@
                   :page-size="12"
                   :current-page.sync="currentPage"
                   class="pagination"
-                ></el-pagination>
+                />
               </div>
             </div>
           </div>

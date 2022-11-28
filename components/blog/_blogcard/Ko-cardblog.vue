@@ -3,7 +3,13 @@
     <div class="content-product">
       <div class="wrapper-card">
         <div class="container-blog">
-          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          <nuxt-link
+            :to="{
+              path: `/blog/` + article.slug,
+              query: { idBlog: article.id },
+            }"
+            class="contet"
+          >
             <div class="figure-img">
               <figure class="content-imge">
                 <img
@@ -18,7 +24,13 @@
               </figure>
             </div>
           </nuxt-link>
-          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          <nuxt-link
+            :to="{
+              path: `/blog/` + article.slug,
+              query: { idBlog: article.id },
+            }"
+            class="contet"
+          >
             <div class="overlay-top">
               <div class="text-tittle">
                 <p class="txt-day">
@@ -37,14 +49,20 @@
         <div class="container-properitys">
           <div class="content-tittle-article">
             <nuxt-link
-              :to="{ path: `/blog/` + article.slug }"
+              :to="{
+                path: `/blog/` + article.slug,
+                query: { idBlog: article.id },
+              }"
               class="txt-tituloart"
               v-if="this.article.titulo && this.article.titulo.length > 63"
             >
               {{ `${this.article.titulo.slice(0, 63)}...` }}</nuxt-link
             >
             <nuxt-link
-              :to="{ path: `/blog/` + article.slug }"
+              :to="{
+                path: `/blog/` + article.slug,
+                query: { idBlog: article.id },
+              }"
               class="txt-tituloart"
               v-else
             >
@@ -63,7 +81,6 @@
               {{ `${this.article.resumen.slice(0, 175)}` }}
             </p>
           </div>
-
           <div class="content-autor">
             <p class="text-autor">
               <span class="flex-shrink-0 mx-1">

@@ -163,11 +163,10 @@
               class="h-full"
             >
               <KoProductCard1
-                v-if="article.estado == 1"
                 :article="article"
                 :settingK07Blog="settingByTemplate7[0].settingK07Blog"
                 :settingGeneral="settingByTemplate7[0].settingGeneral"
-              ></KoProductCard1>
+              />
             </div>
           </div>
           <div v-if="filteredList.length == 0" class="content-products-empty">
@@ -191,7 +190,7 @@
                 :page-size="12"
                 :current-page.sync="currentPage"
                 class="pagination"
-              ></el-pagination>
+              />
             </div>
           </div>
         </div>

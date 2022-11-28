@@ -33,11 +33,7 @@
                 :key="article.id"
                 class="content-products"
               >
-                <KoBlogCard
-                  v-if="article.estado == 1"
-                  :article="article"
-                  class="h-full"
-                />
+                <KoBlogCard :article="article" class="h-full" />
               </div>
             </div>
             <div v-if="filteredList.length == 0" class="content-products-empty">
@@ -65,7 +61,7 @@
                   :page-size="12"
                   :current-page.sync="currentPage"
                   class="pagination"
-                ></el-pagination>
+                />
               </div>
             </div>
           </div>

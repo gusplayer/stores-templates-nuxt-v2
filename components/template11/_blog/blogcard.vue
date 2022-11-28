@@ -5,7 +5,10 @@
       @mouseover="hover = true"
       @mouseleave="hover = false"
     >
-      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
+      <nuxt-link
+        :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
+        class="contet"
+      >
         <div class="figure-img">
           <div class="content-imge">
             <img
@@ -18,7 +21,10 @@
           </div>
         </div>
       </nuxt-link>
-      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
+      <nuxt-link
+        :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
+        class="contet"
+      >
         <div class="overlay-top">
           <div class="text-tittle">
             <p class="txt-day">
@@ -33,7 +39,13 @@
 
       <div class="content-txt-article">
         <div class="content-tittle-article">
-          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          <nuxt-link
+            :to="{
+              path: `/blog/` + article.slug,
+              query: { idBlog: article.id },
+            }"
+            class="contet"
+          >
             <p class="txt-article-tittle">
               {{ this.article.titulo }}
             </p>

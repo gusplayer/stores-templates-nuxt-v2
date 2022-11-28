@@ -164,6 +164,10 @@
         </div>
       </div>
     </div>
+    <div v-else>
+      <el-skeleton :rows="6" animated />
+      <el-skeleton :rows="6" animated />
+    </div>
   </div>
 </template>
 <script>
@@ -179,14 +183,6 @@ export default {
   mounted() {
     if (this.listArticulos.length) {
       this.searchIdForSlug()
-    }
-    if (this.dataArticle && this.dataArticle.created_at) {
-      let dateCreated = this.dataArticle.created_at
-      let resultCreated = dateCreated.split(' ')
-      this.shippingCreated = resultCreated[0]
-      let dateUpdate = this.dataArticle.updated_at
-      let resultUpdate = dateUpdate.split(' ')
-      this.shippingUpdated = resultUpdate[0]
     }
     if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
       this.setBg()
@@ -218,14 +214,26 @@ export default {
     },
   },
   methods: {
-    searchIdForSlug() {
-      let domain = this.$route.fullPath
-      let result = domain.split('/')
-      this.listArticulos.filter((product) => {
-        if (product.slug === result[result.length - 1]) {
-          this.dataArticle = product
-        }
+    async searchIdForSlug() {
+      let idBlog = this.$route.query.idBlog
+      const { data } = await this.$store.dispatch('GET_DATA_ARTICLE', {
+        idBlog: idBlog,
+        idStore: this.dataStore.tienda.id_tienda,
       })
+      if (data) {
+        this.dataArticle = data.data
+        this.getDataArticle()
+        if (this.dataArticle && this.dataArticle.created_at) {
+          let dateCreated = this.dataArticle.created_at
+          let resultCreated = dateCreated.split(' ')
+          this.shippingCreated = resultCreated[0]
+          let dateUpdate = this.dataArticle.updated_at
+          let resultUpdate = dateUpdate.split(' ')
+          this.shippingUpdated = resultUpdate[0]
+        }
+      }
+    },
+    getDataArticle() {
       this.sharing.url = window.location.href
       this.sharing.quote = `${this.dataArticle.titulo}%0A%0A${this.dataArticle.resumen}`
       this.sharing.quoteTwitter = `${this.dataArticle.titulo}%20by%20${this.dataArticle.autor}%0A`
