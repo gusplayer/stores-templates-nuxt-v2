@@ -1,6 +1,6 @@
 <template>
   <div class="content-article">
-    <div class="content-item-article">
+    <div class="content-item-article" v-if="dataArticle">
       <p class="tittle-blog">{{ dataArticle.titulo }}</p>
       <div class="content-img">
         <img
@@ -39,6 +39,10 @@
         />
       </div>
     </div>
+    <div v-else>
+      <el-skeleton :rows="6" animated />
+      <el-skeleton :rows="6" animated />
+    </div>
   </div>
 </template>
 <script>
@@ -54,14 +58,6 @@ export default {
     if (this.listArticulos.length) {
       this.searchIdForSlug()
     }
-    if (this.dataArticle && this.dataArticle.created_at) {
-      let dateCreated = this.dataArticle.created_at
-      let resultCreated = dateCreated.split(' ')
-      this.shippingCreated = resultCreated[0]
-      let dateUpdate = this.dataArticle.updated_at
-      let resultUpdate = dateUpdate.split(' ')
-      this.shippingUpdated = resultUpdate[0]
-    }
   },
   data() {
     return {
@@ -76,14 +72,24 @@ export default {
     },
   },
   methods: {
-    searchIdForSlug() {
-      let domain = this.$route.fullPath
-      let result = domain.split('/')
-      this.listArticulos.filter((product) => {
-        if (product.slug === result[result.length - 1]) {
-          this.dataArticle = product
-        }
+    async searchIdForSlug() {
+      let idBlog = this.$route.query.idBlog
+      const { data } = await this.$store.dispatch('GET_DATA_ARTICLE', {
+        idBlog: idBlog,
+        idStore: this.dataStore.tienda.id_tienda,
       })
+      if (data) {
+        this.dataArticle = data.data
+        this.getDataArticle()
+        if (this.dataArticle && this.dataArticle.created_at) {
+          let dateCreated = this.dataArticle.created_at
+          let resultCreated = dateCreated.split(' ')
+          this.shippingCreated = resultCreated[0]
+          let dateUpdate = this.dataArticle.updated_at
+          let resultUpdate = dateUpdate.split(' ')
+          this.shippingUpdated = resultUpdate[0]
+        }
+      }
     },
   },
   watch: {

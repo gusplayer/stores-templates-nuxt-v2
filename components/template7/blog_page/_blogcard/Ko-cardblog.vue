@@ -19,7 +19,13 @@
     >
       <div class="wrapper-card">
         <div class="container">
-          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          <nuxt-link
+            :to="{
+              path: `/blog/` + article.slug,
+              query: { idBlog: article.id },
+            }"
+            class="contet"
+          >
             <div class="figure-img">
               <figure class="content-imge">
                 <img
@@ -34,7 +40,13 @@
               </figure>
             </div>
           </nuxt-link>
-          <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
+          <nuxt-link
+            :to="{
+              path: `/blog/` + article.slug,
+              query: { idBlog: article.id },
+            }"
+            class="contet"
+          >
             <div class="overlay-top">
               <div class="text-tittle">
                 <p class="txt-day">
@@ -57,10 +69,14 @@
         <div class="container-properitys">
           <div class="content-tittle-article">
             <nuxt-link
-              :to="{ path: `/blog/` + article.slug }"
+              :to="{
+                path: `/blog/` + article.slug,
+                query: { idBlog: article.id },
+              }"
               class="txt-tituloart"
-              >{{ this.article.titulo }}</nuxt-link
             >
+              {{ this.article.titulo }}
+            </nuxt-link>
           </div>
           <div class="content-autor">
             <p class="text-autor">
@@ -82,7 +98,10 @@
           </div>
           <div class="read-more">
             <nuxt-link
-              :to="{ path: `/blog/` + article.slug }"
+              :to="{
+                path: `/blog/` + article.slug,
+                query: { idBlog: article.id },
+              }"
               class="txt-read-more"
             >
               {{ $t('home_continuar_leyendo') }}

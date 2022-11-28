@@ -32,7 +32,6 @@
             :class="`swiper-slide wrapper-${index + 1}`"
           >
             <Kblog
-              v-if="article.estado == 1"
               :article="article"
               :blog="blog"
               :settingGeneral="settingGeneral"

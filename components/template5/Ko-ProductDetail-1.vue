@@ -93,7 +93,7 @@
               :photos="data.fotos"
               :photo="data.detalle.foto_cloudinary"
               :idYoutube="idYoutube"
-            ></productSlide>
+            />
           </div>
         </div>
         <div class="wrapper-right">
@@ -284,11 +284,7 @@
       </div>
       <div class="section">
         <div class="features">
-          <ko-description
-            :dataStore="dataStore"
-            :data="data"
-            :envio="envio"
-          ></ko-description>
+          <ko-description :dataStore="dataStore" :data="data" :envio="envio" />
         </div>
       </div>
       <div class="section-suggesProduct">

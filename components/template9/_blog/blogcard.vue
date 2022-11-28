@@ -22,7 +22,10 @@
         },
       ]"
     >
-      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
+      <nuxt-link
+        :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
+        class="contet"
+      >
         <div class="figure-img">
           <figure class="content-imge">
             <img
@@ -36,7 +39,10 @@
           </figure>
         </div>
       </nuxt-link>
-      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet">
+      <nuxt-link
+        :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
+        class="contet"
+      >
         <div class="overlay-top">
           <div class="text-tittle">
             <p class="txt-day">
@@ -48,7 +54,10 @@
           </div>
         </div>
       </nuxt-link>
-      <nuxt-link :to="{ path: `/blog/` + article.slug }" class="contet-bottom">
+      <nuxt-link
+        :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
+        class="contet-bottom"
+      >
         <div class="overlay-bottom z-20">
           <div class="content-bottom-titulo">
             <div class="text-cart">

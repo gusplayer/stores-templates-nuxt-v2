@@ -31,11 +31,7 @@
                   :key="article.id"
                   class="content-products"
                 >
-                  <KoBlogCard
-                    v-if="article.estado == 1"
-                    :article="article"
-                    :dataStore="dataStore"
-                  />
+                  <KoBlogCard :article="article" :dataStore="dataStore" />
                 </div>
               </div>
               <div class="pagination-medium">
@@ -47,7 +43,7 @@
                     :page-size="12"
                     :current-page.sync="currentPage"
                     class="pagination"
-                  ></el-pagination>
+                  />
                 </div>
               </div>
             </div>

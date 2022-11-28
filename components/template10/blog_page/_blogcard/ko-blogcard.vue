@@ -20,7 +20,7 @@
         </div>
       </div>
       <nuxt-link
-        :to="{ path: `/blog/` + article.slug }"
+        :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
         class="content-info-blog"
       >
         <div class="cont-tittle">

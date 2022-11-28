@@ -28,11 +28,7 @@
             :class="`swiper-slide wrapper-${index + 1}`"
             style="height: auto"
           >
-            <Kblog
-              v-if="article.estado == 1"
-              :article="article"
-              :settingKblog="settingKblog"
-            ></Kblog>
+            <Kblog :article="article" :settingKblog="settingKblog" />
           </div>
         </div>
       </div>

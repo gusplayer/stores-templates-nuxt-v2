@@ -13,7 +13,7 @@
     ]"
   >
     <nuxt-link
-      :to="{ path: `/blog/` + article.slug }"
+      :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
       class="container"
       @mouseover="hover = true"
       @mouseleave="hover = false"
