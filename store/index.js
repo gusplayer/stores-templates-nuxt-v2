@@ -726,14 +726,14 @@ export const actions = {
       }
     }
     if (idWapi) {
-      await dispatch('GET_TEMPLATE_STORE', 99)
+      commit('SET_TEMPLATE_STORE', 99)
       await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
       await dispatch('GET_ALL_PRODUCTS', idWapi)
       await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
       await commit('SET_STATE_WAPIME', true)
     } else {
       if (id && id.data.data && id.data.data.id) {
-        await dispatch('GET_TEMPLATE_STORE', id.data.data.template)
+        commit('SET_TEMPLATE_STORE', id.data.data.template)
         await dispatch('GET_ALL_PRODUCTS', id.data.data.id)
         await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
         if (
@@ -792,9 +792,9 @@ export const actions = {
   GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
   },
-  GET_TEMPLATE_STORE({ commit }, value) {
-    commit('SET_TEMPLATE_STORE', value)
-  },
+  // GET_TEMPLATE_STORE({ commit }, value) {
+  //   commit('SET_TEMPLATE_STORE', value)
+  // },
   async GET_DATA_TIENDA_BY_ID({ state, commit, dispatch }, idTienda) {
     try {
       const { data } = await axios({
