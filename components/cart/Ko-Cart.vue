@@ -488,14 +488,9 @@ export default {
     dataStore: Object,
   },
   async mounted() {
+    this.filterCities()
     this.$store.dispatch('GET_DESCUENTOS')
     this.$store.dispatch('GET_SHOPPING_CART')
-    if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
-      const { success } = await this.$store.dispatch('GET_CITIES')
-      if (success) {
-        this.filterCities()
-      }
-    }
     this.$store.commit('CALCULATE_TOTAL_CART')
     if (this.rangosByCiudades.envio_metodo == 'precio') {
       this.shippingPrecio()
@@ -779,18 +774,23 @@ export default {
         }
       }
     },
-    filterCities() {
-      if (
-        this.rangosByCiudad.envio_metodo === 'precio_ciudad' &&
-        this.cities.length > 0
-      ) {
-        this.rangosByCiudad.rangos.forEach((rango, index) => {
-          this.cities.filter((city) => {
-            if (city.id === this.rangosByCiudad.rangos[index].id) {
-              this.shippingCities.push(city)
-            }
-          })
-        })
+    async filterCities() {
+      if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
+        const { success } = await this.$store.dispatch('GET_CITIES')
+        if (success) {
+          if (
+            this.rangosByCiudad.envio_metodo === 'precio_ciudad' &&
+            this.cities.length > 0
+          ) {
+            this.rangosByCiudad.rangos.forEach((rango, index) => {
+              this.cities.filter((city) => {
+                if (city.id === this.rangosByCiudad.rangos[index].id) {
+                  this.shippingCities.push(city)
+                }
+              })
+            })
+          }
+        }
       }
     },
     IsMinValorTotal() {

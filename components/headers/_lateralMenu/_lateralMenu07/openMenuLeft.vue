@@ -63,7 +63,10 @@
               class="btn-lateral-menu-right"
               @click="selectTag2"
               :class="selecttag == 2 ? 'show-select-active' : ''"
-              v-if="categorias && categorias.length > 0"
+              v-if="
+                (categorias && categorias.length > 0) ||
+                (allTags && allTags.length > 0)
+              "
             >
               {{ $t('header_categorias') }}
             </button>
