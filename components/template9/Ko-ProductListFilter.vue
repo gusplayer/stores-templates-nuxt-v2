@@ -762,18 +762,15 @@ export default {
 }
 .content-left >>> .el-collapse-item__header {
   color: var(--color_text);
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: flex-start;
   font-weight: 600;
   font-size: 20px;
   letter-spacing: 0;
+  line-height: 21px;
   transition: all 0.25s ease;
   font-family: var(--font-style-1);
-  cursor: pointer;
   background: transparent;
   border-bottom: 1px solid var(--color_icon);
+  @apply h-full w-full flex items-center justify-start cursor-pointer py-15;
 }
 .content-left >>> .el-collapse-item__header.is-active {
   border-bottom: none;

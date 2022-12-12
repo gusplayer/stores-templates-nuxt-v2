@@ -25,20 +25,23 @@
               id="btnfocus"
               class="btn-lateral-menu-left"
               @click="selectTag1"
-              :class="selecttag == 1 ? 'show-select-active' : ''"
+              :class="selectTag == 1 ? 'show-select-active' : ''"
             >
               {{ $t('header_inicio') }}
             </button>
             <button
               class="btn-lateral-menu-right"
               @click="selectTag2"
-              :class="selecttag == 2 ? 'show-select-active' : ''"
-              v-if="categorias && categorias.length > 0"
+              :class="selectTag == 2 ? 'show-select-active' : ''"
+              v-if="
+                (categorias && categorias.length > 0) ||
+                (allTags && allTags.length > 0)
+              "
             >
               {{ $t('header_categorias') }}
             </button>
           </div>
-          <div class="conten-Menu" v-if="!focusbtn">
+          <div class="conten-Menu" v-if="!focusBtn">
             <div class="header-content-buttons">
               <div
                 v-for="(item, index) in secciones"
@@ -60,7 +63,7 @@
               </div>
             </div>
           </div>
-          <div class="content-Categorys" v-if="focusbtn">
+          <div class="content-Categorys" v-if="focusBtn">
             <template>
               <div class="wrapper-category-all">
                 <li @click="clear">
@@ -192,9 +195,9 @@ export default {
   },
   data() {
     return {
-      selecttag: 1,
+      selectTag: 1,
       activeNames: [],
-      focusbtn: false,
+      focusBtn: false,
       search: '',
       selectSubcategory: '',
       nameCategory: '',
@@ -280,12 +283,12 @@ export default {
       }
     },
     selectTag1() {
-      this.selecttag = 1
-      this.focusbtn = false
+      this.selectTag = 1
+      this.focusBtn = false
     },
     selectTag2() {
-      this.selecttag = 2
-      this.focusbtn = true
+      this.selectTag = 2
+      this.focusBtn = true
     },
     getSearch(value) {
       if (value) {
