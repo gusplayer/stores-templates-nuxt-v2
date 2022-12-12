@@ -1,54 +1,41 @@
 <template>
-  <div class="wrapper-component">
-    <div class="content-component">
+  <div class="wrapper-component-terms">
+    <div class="content-component-terms">
       <h1 class="text-20 font-bold mb-30">
         {{ $t('footer_condicionesLegales') }}
       </h1>
-
-      <div v-if="this.dataStore.politicas.datos" class="mb-15">
+      <div v-if="this.dataStore.politicas.datos" class="item-text-terms">
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaTratamientos') }}
         </p>
-        <div v-html="this.dataStore.politicas.datos" class="text-justify"></div>
+        <div v-html="this.dataStore.politicas.datos"></div>
       </div>
 
-      <div v-if="this.dataStore.politicas.garantia" class="mb-15">
+      <div v-if="this.dataStore.politicas.garantia" class="item-text-terms">
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaGarantia') }}
         </p>
-        <div
-          v-html="this.dataStore.politicas.garantia"
-          class="text-justify"
-        ></div>
+        <div v-html="this.dataStore.politicas.garantia"></div>
       </div>
 
-      <div v-if="this.dataStore.politicas.devolucion" class="mb-15">
+      <div v-if="this.dataStore.politicas.devolucion" class="item-text-terms">
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaDevoluciones') }}
         </p>
-        <div
-          v-html="this.dataStore.politicas.devolucion"
-          class="text-justify"
-        ></div>
+        <div v-html="this.dataStore.politicas.devolucion"></div>
       </div>
 
-      <div v-if="this.dataStore.politicas.cambio" class="mb-15">
+      <div v-if="this.dataStore.politicas.cambio" class="item-text-terms">
         <p class="text-17 font-bold mb-10">{{ $t('footer_politicaCambio') }}</p>
-        <div
-          v-html="this.dataStore.politicas.cambio"
-          class="text-justify"
-        ></div>
+        <div v-html="this.dataStore.politicas.cambio"></div>
       </div>
 
-      <div v-if="this.dataStore.politicas.envios" class="mb-15">
+      <div v-if="this.dataStore.politicas.envios" class="item-text-terms">
         <p class="text-17 font-bold mb-10">{{ $t('footer_politicaEnvios') }}</p>
-        <div
-          v-html="this.dataStore.politicas.envios"
-          class="text-justify"
-        ></div>
+        <div v-html="this.dataStore.politicas.envios"></div>
       </div>
 
-      <div v-if="this.dataStore.politicas.pagos" class="mb-15">
+      <div v-if="this.dataStore.politicas.pagos" class="item-text-terms">
         <p class="text-16 font-bold mb-10">{{ $t('footer_politicaPagos') }}</p>
         <div v-html="this.dataStore.politicas.pagos" class="text-justify"></div>
       </div>
@@ -68,12 +55,17 @@ export default {
 }
 </script>
 <style scoped>
-.wrapper-component {
+.wrapper-component-terms {
   background: #d1d1d1;
-  @apply w-full flex justify-center items-start box-border;
+  @apply w-full flex justify-center items-start;
 }
-.content-component {
-  padding: 30px 30px 0px;
-  @apply w-full max-w-5/0 flex flex-col justify-center items-center shadow-md bg-white-white my-30;
+.content-component-terms {
+  padding: 30px 0px 0px;
+  max-width: 900px;
+  @apply w-full flex flex-col justify-center items-center shadow-md bg-white-white my-30;
+}
+.item-text-terms {
+  max-width: 900px;
+  @apply mb-15 px-30;
 }
 </style>
