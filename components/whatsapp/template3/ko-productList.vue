@@ -127,6 +127,9 @@ export default {
     },
   },
   methods: {
+    openMenuLateral() {
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
+    },
     getQuery() {
       if (this.$route.query && this.$route.query.category) {
         this.sendCategoryUrlMix(this.$route.query.category)

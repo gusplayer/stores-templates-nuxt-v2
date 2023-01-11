@@ -165,6 +165,26 @@
             </transition>
           </div>
           <button
+            class="btn-responsive flex justify-center items-center"
+            :style="`background: ${
+              settingByTemplate && settingByTemplate.color_primario
+                ? settingByTemplate.color_primario
+                : '#25D366'
+            }; color:${
+              settingByTemplate && settingByTemplate.color_secundario
+                ? settingByTemplate.color_secundario
+                : '#FFFFFF'
+            };`"
+            ref="color2"
+            v-if="this.sellers && this.sellers.state"
+            v-on:click="addShoppingCartWhatsApp"
+          >
+            <span>
+              <whatsapp-icon class="wp-icon2" />
+              {{ $t('productdetail_btnComprar') }}
+            </span>
+          </button>
+          <button
             class="btn-responsive"
             :style="`background: ${
               settingByTemplate && settingByTemplate.color_primario
@@ -176,8 +196,11 @@
                 : '#FFFFFF'
             };`"
             ref="color2"
-            v-if="
-              !spent && salesData.precio > 0 && this.salesData.estado == true
+            v-else-if="
+              !spent &&
+              salesData.precio > 0 &&
+              this.salesData.estado == true &&
+              !this.sellers.state
             "
             v-on:click="addShoppingCart"
           >
@@ -197,7 +220,7 @@
                 : '#FFFFFF'
             };`"
             ref="color2"
-            v-else-if="salesData.precio == 0 && !spent"
+            v-else-if="salesData.precio == 0 && !spent && !this.sellers.state"
             v-on:click="WPQuotation()"
           >
             <span>
@@ -216,13 +239,13 @@
                 ? settingByTemplate.color_secundario
                 : '#FFFFFF'
             };`"
-            v-else-if="!this.salesData.estado"
+            v-else-if="!this.salesData.estado && !this.sellers.state"
           >
             <span>
               {{ $t('productdetail_btnANodisponible') }}
             </span>
           </button>
-          <div v-else-if="spent" class="wrapper-btn">
+          <div v-else-if="spent && !this.sellers.state" class="wrapper-btn">
             <p class="card-info-1-res">
               😥 {{ $t('productdetail_productoAgotado') }}
             </p>
@@ -308,6 +331,12 @@ export default {
         desc: '',
       },
       activeZoom: true,
+      sellers: {
+        state: false,
+        name: '',
+        phone: '',
+        prefix: '',
+      },
     }
   },
   computed: {
@@ -333,26 +362,12 @@ export default {
       }
       return false
     },
-    whatsapp() {
-      return this.dataStore.tienda.whatsapp
-    },
     // eslint-disable-next-line vue/return-in-computed-property
     precio() {
       if (this.data.detalle.precio) {
         return `$${this.data.detalle.precio
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-    },
-    // eslint-disable-next-line vue/return-in-computed-property
-    categorys() {
-      if (this.data && this.data.detalle) {
-        return this.productsData.filter(
-          (product) =>
-            product.categoria ==
-              this.data.detalle.categoria_producto.nombre_categoria_producto &&
-            product.id !== this.data.detalle.id
-        )
       }
     },
     settingByTemplate() {
@@ -406,6 +421,13 @@ export default {
             }
             if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
               this.spent = true
+            }
+            if (this.data && this.data.info.dealer_whatsapp) {
+              let temp = JSON.parse(this.data.info.dealer_whatsapp)
+              this.sellers.name = temp.name
+              this.sellers.phone = temp.phone
+              this.sellers.prefix = temp.prefix
+              this.sellers.state = true
             }
             this.loading = false
           })
@@ -622,6 +644,49 @@ export default {
             '_blank'
           )
         }
+      }
+    },
+    addShoppingCartWhatsApp() {
+      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
+      let baseUrlPc = 'https://web.whatsapp.com/send?phone='
+      let urlProduct = window.location.href
+      let text = ''
+      if (this.dataStore.tienda.lenguaje == 'es') {
+        text = `Hola%20${encodeURIComponent(
+          this.sellers.name
+        )}%2C%20vengo%20de%20la%20${encodeURIComponent(
+          this.dataStore.tienda.nombre
+        )}.%0A%0AMe%20interesa%20este%20producto%20${urlProduct}%2C%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n.`
+      } else if (this.dataStore.tienda.lenguaje == 'en') {
+        text = `Hello%20${encodeURIComponent(
+          this.sellers.name
+        )}%2C%20I%20come%20from%20the%20${encodeURIComponent(
+          this.dataStore.tienda.nombre
+        )}.%0A%0AI%20am%20interested%20in%20this%20product%20${urlProduct}%2C%20I%20would%20like%20to%20receive%20more%20information.`
+      } else if (this.dataStore.tienda.lenguaje == 'pt') {
+        text = `Ol%C3%A1%20${encodeURIComponent(
+          this.sellers.name
+        )}%2C%20venho%20da%20${encodeURIComponent(
+          this.dataStore.tienda.nombre
+        )}.%0A%0AEstou%20interessado%20neste%20produto%20${urlProduct}%2C%20eu%20gostaria%20de%20receber%20mais%20informa%C3%A7%C3%B5es.`
+      } else {
+        text = `Hola%20${encodeURIComponent(
+          this.sellers.name
+        )}%2C%20vengo%20de%20la%20${encodeURIComponent(
+          this.dataStore.tienda.nombre
+        )}.%0A%0AMe%20interesa%20este%20producto%20${urlProduct}%2C%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n.`
+      }
+      let prefix = this.sellers.prefix.slice(1)
+      if (this.mobileCheck()) {
+        window.open(
+          `${baseUrlMovil}${prefix}${this.sellers.phone}&text=${text}`,
+          '_blank'
+        )
+      } else {
+        window.open(
+          `${baseUrlPc}${prefix}${this.sellers.phone}&text=${text}`,
+          '_blank'
+        )
       }
     },
     WPQuotation() {
@@ -1093,6 +1158,11 @@ export default {
 .wp-icon {
   font-size: 16px;
   bottom: 4px;
+  margin-right: 4px;
+  margin-bottom: -2px;
+}
+.wp-icon2 {
+  font-size: 20px !important;
   margin-right: 4px;
   margin-bottom: -2px;
 }

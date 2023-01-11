@@ -73,6 +73,7 @@
 import expiredDate from '../mixins/expiredDate'
 import { mapState } from 'vuex'
 export default {
+  name: 'default',
   components: {
     KoHeader1: () => import('../components/headers/header1/Ko-Header-1'),
     KoHeader2: () => import('../components/headers/header2/Ko-Header-2'),

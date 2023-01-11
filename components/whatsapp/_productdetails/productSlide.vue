@@ -1,11 +1,6 @@
 <template>
   <div class="wrapper-slider w-full h-full">
-    <el-carousel
-      height="400px"
-      :indicator-position="true"
-      :interval="8000"
-      class="w-full h-full"
-    >
+    <el-carousel height="400px" :interval="8000" class="w-full h-full">
       <el-carousel-item>
         <img
           v-lazy="idCloudinary(photo, 400, 400)"
