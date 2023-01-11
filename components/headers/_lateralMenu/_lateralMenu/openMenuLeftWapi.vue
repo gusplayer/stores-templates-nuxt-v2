@@ -85,7 +85,8 @@
                   v-if="
                     itemsTags &&
                     itemsTags.status === 1 &&
-                    itemsTags.properties.length > 0
+                    itemsTags.properties.length > 0 &&
+                    itemsTags.visible === 1
                   "
                 >
                   <template v-slot:categorias>
@@ -139,7 +140,7 @@
 import BaseAccordian from '../_BaseAccordion.vue'
 import filterProducts from '../../../../mixins/filterProducts'
 export default {
-  name: 'Ko-MenuLeft-1',
+  name: 'Ko-MenuLeft-wapi',
   props: {
     dataStore: Object,
   },

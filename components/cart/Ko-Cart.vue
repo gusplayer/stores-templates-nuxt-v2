@@ -846,9 +846,9 @@ export default {
     rangosByCiudad() {
       this.filterCities()
     },
-    cities() {
-      this.filterCities()
-    },
+    // cities() {
+    //   this.filterCities()
+    // },
     productsCart() {
       if (this.productsCart) {
         this.productsFreeShippingCart()
