@@ -567,9 +567,7 @@ export default {
         this.fechaState = result[0]
         this.horaState = result[1]
       }
-      if (this.orden.usuario === 30866) {
-        this.mensajeWa = JSON.parse(this.orden.venta.comentario)
-      }
+      this.setUser()
       this.setTransportadora()
       this.$store.dispatch('GET_CITIES')
     }
@@ -615,6 +613,11 @@ export default {
     },
   },
   methods: {
+    setUser() {
+      if (this.orden.usuario === 30866) {
+        this.mensajeWa = JSON.parse(this.orden.venta.comentario)
+      }
+    },
     setTransportadora() {
       if (this.orden.venta.transportadora !== null) {
         this.dataTransporter = JSON.parse(this.orden.venta.transportadora)
@@ -768,6 +771,7 @@ export default {
           this.eventFacebookPixel()
           this.shippingAddress()
           this.setTransportadora()
+          this.setUser()
           let result = this.orden.venta.created_at.split(' ')
           this.fechaState = result[0]
           this.horaState = result[1]
