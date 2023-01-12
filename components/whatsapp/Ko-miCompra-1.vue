@@ -392,6 +392,10 @@ export default {
     if (this.orden && this.orden.venta && this.orden.venta.usuario) {
       this.numOrden = this.orden.venta.id
       this.cedula = this.orden.venta.usuario.identificacion
+      if (this.dataHoko && this.orden.productos.length == 0) {
+        this.getproductHoko()
+        this.stateHoko = true
+      }
     } else {
       this.numOrden = ''
       this.cedula = ''
@@ -404,6 +408,10 @@ export default {
         this.fechaState = result[0]
         this.horaState = result[1]
       }
+      if (this.orden.usuario === 30866) {
+        this.mensajeWa = JSON.parse(this.orden.venta.comentario)
+      }
+      this.setTransportadora()
     }
   },
   destroyed() {
@@ -420,11 +428,16 @@ export default {
       cedula: '',
       city: {},
       cityComprador: {},
+      productDataHoko: {},
+      stateHoko: false,
       direccion_entrega: {},
     }
   },
   computed: {
     ...mapState(['stateWapiME']),
+    dataHoko() {
+      return this.$store.state.dataHoko
+    },
     choicePayment() {
       return this.payments.find(
         (payment) => payment.id === this.orden.venta.metodo_pago
@@ -443,10 +456,31 @@ export default {
     },
   },
   methods: {
-    shippingAddress() {
-      if (this.orden && this.orden.usuario === 30866) {
-        this.mensajeWa = JSON.parse(this.orden.mensajes[0].mensaje)
+    setTransportadora() {
+      if (this.orden.venta.transportadora !== null) {
+        this.dataTransporter = JSON.parse(this.orden.venta.transportadora)
       }
+    },
+    getproductHoko() {
+      let id = parseInt(this.orden.mensajes[0].mensaje)
+      let config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Authorization: `Bearer ${this.dataHoko.token}`,
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+      let url = 'https://hoko.com.co/api/member/order/'
+      axios.get(`${url}${id}`, config).then((response) => {
+        this.productDataHoko = response.data
+      })
+    },
+    shippingAddress() {
+      this.direccion_entrega = JSON.parse(
+        this.orden && this.orden.venta && this.orden.venta.direccion_entrega
+          ? this.orden.venta.direccion_entrega
+          : null
+      )
       if (this.cities && this.direccion_entrega) {
         if (this.direccion_entrega.value) {
           this.cityComprador = this.cities.find((city) => {
@@ -576,6 +610,7 @@ export default {
         if (this.orden.venta.created_at) {
           this.eventFacebookPixel()
           this.shippingAddress()
+          this.setTransportadora()
           let result = this.orden.venta.created_at.split(' ')
           this.fechaState = result[0]
           this.horaState = result[1]

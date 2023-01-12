@@ -116,7 +116,7 @@
       </nuxt-link>
       <div
         class="content-buttons"
-        v-if="!this.estadoCart && !soldOut && !spent"
+        v-if="!this.estadoCart && !soldOut && !spent && stateSeller"
       >
         <div
           class="button-left"
@@ -273,6 +273,28 @@ export default {
         return !inventario
       } else {
         return !this.product.stock
+      }
+    },
+    stateSeller() {
+      if (
+        this.dataStore.tienda.id_tienda === 1559 ||
+        this.dataStore.tienda.id_tienda === 16436
+      ) {
+        if (
+          this.product.dealer_whatsapp == '[object Object]' ||
+          this.product.dealer_whatsapp != null
+        ) {
+          let temp = JSON.parse(this.product.dealer_whatsapp)
+          if (temp && temp.state) {
+            return false
+          } else {
+            return true
+          }
+        } else {
+          return true
+        }
+      } else {
+        return true
       }
     },
   },
