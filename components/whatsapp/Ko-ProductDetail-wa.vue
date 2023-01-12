@@ -377,6 +377,31 @@ export default {
         return this.$store.state.settingBaseWapir
       }
     },
+    rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
+      return this.rangosByCiudades
+    },
+    shippingPrecio() {
+      if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'precio'
+      ) {
+        let tempTotal = this.salesData.precio * this.quantityValue
+        let result = this.rangosByCiudades.rangos.find((rango) => {
+          if (tempTotal >= rango.inicial && tempTotal <= rango.final) {
+            return rango
+          }
+        })
+        if (result) {
+          return result.precio
+        } else {
+          return 0
+        }
+      } else {
+        return 0
+      }
+    },
   },
   methods: {
     searchIdForSlug() {
@@ -427,7 +452,7 @@ export default {
               this.sellers.name = temp.name
               this.sellers.phone = temp.phone
               this.sellers.prefix = temp.prefix
-              this.sellers.state = true
+              this.sellers.state = temp.state
             }
             this.loading = false
           })
@@ -617,10 +642,8 @@ export default {
       let baseUrlPc = 'https://web.whatsapp.com/send?phone='
       let urlProduct = window.location.href
       let text = `Hola 😀, %0AEstoy en tu tienda ${this.dataStore.tienda.nombre} y me interesa el producto: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
-
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
@@ -677,6 +700,7 @@ export default {
         )}.%0A%0AMe%20interesa%20este%20producto%20${urlProduct}%2C%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n.`
       }
       let prefix = this.sellers.prefix.slice(1)
+      this.setOrderWa()
       if (this.mobileCheck()) {
         window.open(
           `${baseUrlMovil}${prefix}${this.sellers.phone}&text=${text}`,
@@ -689,6 +713,77 @@ export default {
         )
       }
     },
+    setOrderWa() {
+      let resultShipping
+      if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'gratis'
+      ) {
+        resultShipping = 0
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'tarifa_plana'
+      ) {
+        resultShipping = this.rangosByCiudades.valor
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'precio_ciudad'
+      ) {
+        resultShipping = 0
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'precio'
+      ) {
+        resultShipping = this.shippingPrecio
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'sintarifa'
+      ) {
+        resultShipping = 0
+      } else {
+        resultShipping = 0
+      }
+      let tempTotal =
+        this.salesData.precio * this.quantityValue + resultShipping
+      const params = {
+        canal: 1,
+        comentario: `Compra realizada al vendedor ${this.sellers.name} con telefono (${this.sellers.prefix})${this.sellers.phone}`,
+        costo_envio: resultShipping,
+        descuento: 0,
+        direccion_entrega: {
+          type: 0,
+          value: null,
+        },
+        metodo_pago: 7,
+        productos: [
+          {
+            cantidad: this.quantityValue,
+            envio_gratis: this.data.detalle.envio_gratis,
+            foto_cloudinary: this.data.detalle.foto_cloudinary,
+            id: this.data.detalle.id,
+            limitQuantity: this.salesData.unidades,
+            nombre: this.data.detalle.nombre,
+            precio: this.salesData.precio,
+          },
+        ],
+        tienda: this.dataStore.tienda.id_tienda,
+        tipo: 0,
+        total: tempTotal,
+        usuario: 30866,
+      }
+      axios
+        .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
+        .then((response) => {
+          this.numberOrder = response.data.data.id
+          this.textConfirmation =
+            '¡Información enviada correctamente a la tienda!'
+          this.stateBtnConfirmation = true
+        })
+        .catch(() => {
+          this.textConfirmation = 'Error al enviar los datos!'
+          this.$message.error('Error al enviar los datos!')
+        })
+    },
     WPQuotation() {
       let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
       let baseUrlPc = 'https://web.whatsapp.com/send?phone='
@@ -696,7 +791,6 @@ export default {
       let text = `Hola%20%F0%9F%98%80%2C%0AEstoy%20en%20tu%20tienda%20%2A${this.dataStore.tienda.nombre}%2A%20y%20quiero%20cotizar%20este%20producto%3A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.data.detalle.nombre}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ALink%3A%20${urlProduct}`
       if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
