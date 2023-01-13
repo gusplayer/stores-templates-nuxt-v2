@@ -69,9 +69,7 @@
                 <img
                   id="images-2"
                   class="images"
-                  v-lazy="
-                    idCloudinary(settingKPromo.values[1].url_img, 400, 400)
-                  "
+                  v-lazy="idCloudinaryBanner(settingKPromo.values[1].url_img)"
                   alt="medium-top-banner"
                 />
               </div>
@@ -104,9 +102,7 @@
                 <img
                   id="images-3"
                   class="images"
-                  v-lazy="
-                    idCloudinary(settingKPromo.values[2].url_img, 400, 400)
-                  "
+                  v-lazy="idCloudinaryBanner(settingKPromo.values[2].url_img)"
                   alt="medium-bottom-banner"
                 />
               </div>
@@ -188,7 +184,7 @@ export default {
 <style scoped>
 .images {
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   overflow: hidden;
 }
 .promo-banner-content {
