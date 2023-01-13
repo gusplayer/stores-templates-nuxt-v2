@@ -69,7 +69,17 @@
                 <img
                   id="images-2"
                   class="images"
+                  v-lazy="
+                    idCloudinary(settingKPromo.values[1].url_img, 400, 400)
+                  "
+                  v-if="this.dataStore.tienda.id_tienda != 10260"
+                  alt="medium-top-banner"
+                />
+                <img
+                  id="images-2"
+                  class="images"
                   v-lazy="idCloudinaryBanner(settingKPromo.values[1].url_img)"
+                  v-else
                   alt="medium-top-banner"
                 />
               </div>
@@ -102,8 +112,18 @@
                 <img
                   id="images-3"
                   class="images"
+                  v-lazy="
+                    idCloudinary(settingKPromo.values[2].url_img, 400, 400)
+                  "
+                  v-if="this.dataStore.tienda.id_tienda != 10260"
+                  alt="medium-top-banner"
+                />
+                <img
+                  id="images-3"
+                  class="images"
                   v-lazy="idCloudinaryBanner(settingKPromo.values[2].url_img)"
-                  alt="medium-bottom-banner"
+                  v-else
+                  alt="medium-top-banner"
                 />
               </div>
               <div class="promo-banner-text" id="promo-banner-text-3">
@@ -174,6 +194,7 @@ export default {
     settingKPromo: Object,
     settingGeneral: Object,
     settingKCarousel: Object,
+    dataStore: Object,
   },
   data() {
     return {}
@@ -184,7 +205,7 @@ export default {
 <style scoped>
 .images {
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
   overflow: hidden;
 }
 .promo-banner-content {
