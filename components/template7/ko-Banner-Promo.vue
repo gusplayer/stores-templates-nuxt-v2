@@ -28,7 +28,7 @@
             <div class="content-1">
               <img
                 id="images-1"
-                v-lazy="idCloudinary(settingKPromo.values[0].url_img, 550, 550)"
+                v-lazy="idCloudinaryBanner(settingKPromo.values[0].url_img)"
                 alt="left-banner"
                 class="images"
               />
@@ -69,17 +69,7 @@
                 <img
                   id="images-2"
                   class="images"
-                  v-lazy="
-                    idCloudinary(settingKPromo.values[1].url_img, 400, 400)
-                  "
-                  v-if="this.dataStore.tienda.id_tienda != 10260"
-                  alt="medium-top-banner"
-                />
-                <img
-                  id="images-2"
-                  class="images"
                   v-lazy="idCloudinaryBanner(settingKPromo.values[1].url_img)"
-                  v-else
                   alt="medium-top-banner"
                 />
               </div>
@@ -112,17 +102,7 @@
                 <img
                   id="images-3"
                   class="images"
-                  v-lazy="
-                    idCloudinary(settingKPromo.values[2].url_img, 400, 400)
-                  "
-                  v-if="this.dataStore.tienda.id_tienda != 10260"
-                  alt="medium-top-banner"
-                />
-                <img
-                  id="images-3"
-                  class="images"
                   v-lazy="idCloudinaryBanner(settingKPromo.values[2].url_img)"
-                  v-else
                   alt="medium-top-banner"
                 />
               </div>

@@ -16,7 +16,7 @@
         <div class="items-left">
           <img
             class="image-left"
-            :src="idCloudinary(koffers.values[0].url_img_background, 550, 550)"
+            :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
             alt="image-left"
             v-if="koffers.values[0].url_img_background"
           />
@@ -65,9 +65,7 @@
           <div class="image-static" v-if="!hover">
             <img
               class="image"
-              :src="
-                idCloudinary(koffers.values[1].url_img_background, 550, 550)
-              "
+              :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
               v-if="koffers.values[1].url_img_background"
               alt="imagen center static"
             />
@@ -75,9 +73,7 @@
           <div class="image-gif" v-if="hover">
             <img
               class="image"
-              :src="
-                idCloudinary(koffers.values[1].url_gift_background, 550, 550)
-              "
+              :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
               v-if="koffers.values[1].url_gift_background"
               alt="imagen center gift"
             />
@@ -86,7 +82,7 @@
         <div class="items-right">
           <img
             class="image-right"
-            :src="idCloudinary(koffers.values[2].url_img_background, 550, 550)"
+            :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
             v-if="koffers.values[2].url_img_background"
             alt="image-right"
           />
