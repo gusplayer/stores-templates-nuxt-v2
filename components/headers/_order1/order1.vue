@@ -553,7 +553,8 @@
           <ValidationObserver
             v-if="
               (inputCheckoutWPP && inputCheckoutWPP.length === 0) ||
-              inputCheckoutWPP === null
+              inputCheckoutWPP === null ||
+              inputCheckoutWPP === undefined
             "
             ref="observer"
             tag="form"
@@ -603,7 +604,6 @@
                 <div v-else style="margin-bottom: 18px"></div>
               </template>
             </validation-provider>
-
             <p class="form-subtext">
               {{ $t('footer_formCorreo') }} ({{ $t('footer_norquerido') }})
             </p>
@@ -623,7 +623,6 @@
                 <div v-else style="margin-bottom: 18px"></div>
               </template>
             </validation-provider>
-
             <p class="form-subtext">{{ $t('footer_formPhone') }}</p>
             <validation-provider
               name="phone"
