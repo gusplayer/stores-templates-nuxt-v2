@@ -1554,54 +1554,54 @@ export default {
             }?clearCart=true`
           }
         }
-        if (
-          this.quickSale &&
-          this.quickSale.dataSeller &&
-          this.quickSale.dataSeller.state
-        ) {
-          if (this.quickSale && this.quickSale.state) {
-            if (this.quickSale.dataSeller.prefix.charAt(0) == '+') {
-              console.log(this.quickSale.dataSeller.prefix)
-              if (this.mobileCheck()) {
-                window.location.href = `${baseUrlMovil}${this.quickSale.dataSeller.prefix.slice(
-                  1
-                )}${this.quickSale.dataSeller.phone}&text=${text}`
-              } else {
-                window.location.href = `${baseUrlPc}${this.quickSale.dataSeller.prefix.slice(
-                  1
-                )}${this.quickSale.dataSeller.phone}&text=${text}`
-              }
-            }
-          }
-        } else {
-          if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-            let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+      }
+      if (
+        this.quickSale &&
+        this.quickSale.dataSeller &&
+        this.quickSale.dataSeller.state
+      ) {
+        if (this.quickSale && this.quickSale.state) {
+          if (this.quickSale.dataSeller.prefix.charAt(0) == '+') {
+            console.log(this.quickSale.dataSeller.prefix)
             if (this.mobileCheck()) {
-              window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
+              window.location.href = `${baseUrlMovil}${this.quickSale.dataSeller.prefix.slice(
+                1
+              )}${this.quickSale.dataSeller.phone}&text=${text}`
             } else {
-              window.location.href = `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
-            }
-          } else {
-            if (this.mobileCheck()) {
-              window.location.href = `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`
-            } else {
-              window.location.href = `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
+              window.location.href = `${baseUrlPc}${this.quickSale.dataSeller.prefix.slice(
+                1
+              )}${this.quickSale.dataSeller.phone}&text=${text}`
             }
           }
         }
-        setTimeout(() => {
-          this.modalConfirmation = false
-          this.closedOder()
-          this.$message({
-            showClose: true,
-            message:
-              '¡Por falta de permisos no fue posible abrir WhatsApp para enviar la información!',
-            type: 'error',
-            duration: 9000,
-          })
-          this.removeCartItems()
-        }, 5000)
+      } else {
+        if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
+          let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+          if (this.mobileCheck()) {
+            window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
+          } else {
+            window.location.href = `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
+          }
+        } else {
+          if (this.mobileCheck()) {
+            window.location.href = `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`
+          } else {
+            window.location.href = `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
+          }
+        }
       }
+      setTimeout(() => {
+        this.modalConfirmation = false
+        this.closedOder()
+        this.$message({
+          showClose: true,
+          message:
+            '¡Por falta de permisos no fue posible abrir WhatsApp para enviar la información!',
+          type: 'error',
+          duration: 9000,
+        })
+        this.removeCartItems()
+      }, 5000)
     },
     setOrderWa() {
       this.$refs.observer.validate().then((response) => {
