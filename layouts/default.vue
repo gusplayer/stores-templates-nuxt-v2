@@ -112,7 +112,7 @@ export default {
     this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_SHOPPING_CART')
     if (this.$route.query && this.$route.query.clearCart == 'true') {
-      this.$store.commit('DELETEALLITEMSCART')
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
       this.$store.commit('UPDATE_CONTENT_CART')
     }
     if (this.$route.query && this.$route.query.openCart == 'true') {
@@ -127,10 +127,10 @@ export default {
       })
     }
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   head() {
     let tipo_letra
@@ -798,7 +798,7 @@ export default {
       document.getElementById('modalNotificacion').style.zIndex = '-2'
       document.getElementById('modalNotificacion').style.opacity = '0'
     },
-    addEventListenertemplate(e) {
+    addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080') ||

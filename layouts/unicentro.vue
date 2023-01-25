@@ -81,6 +81,7 @@
 import expiredDate from '../mixins/expiredDate'
 import { mapState } from 'vuex'
 export default {
+  name: 'defaultUniCentro',
   components: {
     KoHeader1: () => import('../components/headers/header1/Ko-Header-1'),
     KoHeader2: () => import('../components/headers/header2/Ko-Header-2'),
@@ -119,7 +120,7 @@ export default {
     this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_SHOPPING_CART')
     if (this.$route.query && this.$route.query.clearCart == 'true') {
-      this.$store.commit('DELETEALLITEMSCART')
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
       this.$store.commit('UPDATE_CONTENT_CART')
     }
     if (this.$route.query && this.$route.query.openCart == 'true') {

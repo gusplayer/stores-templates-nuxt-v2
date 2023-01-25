@@ -675,8 +675,8 @@ export default {
       }
       this.$store.commit('UPDATE_CONTENT_CART')
       this.$router.push('/productos')
-      this.$store.state.openOrder = true
-      this.$store.state.orderComponent = true
+      this.$store.commit('SET_OPEN_ORDER', true)
+      // this.$store.state.orderComponent = true
       this.$store.dispatch('SEND_ADD_TO_CART', 1)
     },
     GoPayments() {

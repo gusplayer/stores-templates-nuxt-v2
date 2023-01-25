@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="home">
     <component :is="indexTemplate" v-bind="componentsProps" />
   </div>

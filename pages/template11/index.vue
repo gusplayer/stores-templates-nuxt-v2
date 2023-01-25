@@ -116,46 +116,16 @@ export default {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral:
-          this.settingByTemplate11 && this.settingByTemplate11.settingGeneral
-            ? this.settingByTemplate11.settingGeneral
-            : null,
-        settingKbanner:
-          this.settingByTemplate11 && this.settingByTemplate11.banner
-            ? this.settingByTemplate11.banner
-            : null,
-        settingKblog:
-          this.settingByTemplate11 && this.settingByTemplate11.blog
-            ? this.settingByTemplate11.blog
-            : null,
-        settingKcardProduct:
-          this.settingByTemplate11 && this.settingByTemplate11.cardProduct
-            ? this.settingByTemplate11.cardProduct
-            : null,
-        settingKcontact:
-          this.settingByTemplate11 && this.settingByTemplate11.contact
-            ? this.settingByTemplate11.contact
-            : null,
-        settingKinformation:
-          this.settingByTemplate11 && this.settingByTemplate11.information
-            ? this.settingByTemplate11.information
-            : null,
-        settingKparallax:
-          this.settingByTemplate11 && this.settingByTemplate11.parallax
-            ? this.settingByTemplate11.parallax
-            : null,
-        settingKproductList:
-          this.settingByTemplate11 && this.settingByTemplate11.productList
-            ? this.settingByTemplate11.productList
-            : null,
-        settingKsection:
-          this.settingByTemplate11 && this.settingByTemplate11.section
-            ? this.settingByTemplate11.section
-            : null,
-        settingKtrending:
-          this.settingByTemplate11 && this.settingByTemplate11.trending
-            ? this.settingByTemplate11.trending
-            : null,
+        settingGeneral: this.settingByTemplate11?.settingGeneral ?? null,
+        settingKbanner: this.settingByTemplate11?.banner ?? null,
+        settingKblog: this.settingByTemplate11?.blog ?? null,
+        settingKcardProduct: this.settingByTemplate11?.cardProduct ?? null,
+        settingKcontact: this.settingByTemplate11?.contact ?? null,
+        settingKinformation: this.settingByTemplate11?.information ?? null,
+        settingKparallax: this.settingByTemplate11?.parallax ?? null,
+        settingKproductList: this.settingByTemplate11?.productList ?? null,
+        settingKsection: this.settingByTemplate11?.section ?? null,
+        settingKtrending: this.settingByTemplate11?.trending ?? null,
       }
     },
     dataHoko() {

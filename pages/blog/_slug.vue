@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="home">
     <component :is="indexTemplate" v-bind="componentsProps" />
   </div>
@@ -67,32 +67,16 @@ export default {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral:
-          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
-            ? this.settingByTemplate7.settingGeneral
-            : null,
-        settingK07Blog:
-          this.settingByTemplate7 && this.settingByTemplate7.blog1
-            ? this.settingByTemplate7.blog1
-            : null,
+        settingGeneral: this.settingByTemplate7?.settingGeneral || null,
+        settingK07Blog: this.settingByTemplate7?.blog1 || null,
         settingK05Blog:
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings
-            : this.settingBase,
+          this.settingByTemplate?.settings?.tipo_letra || this.settingBase,
         settingByTemplate11: this.settingByTemplate11
           ? [
               {
-                cardProduct:
-                  this.settingByTemplate11 && this.settingByTemplate11.blog
-                    ? this.settingByTemplate11.blog
-                    : null,
+                cardProduct: this.settingByTemplate11?.blog || null,
                 setting11General:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.settingGeneral
-                    ? this.settingByTemplate11.settingGeneral
-                    : null,
+                  this.settingByTemplate11?.settingGeneral || null,
               },
             ]
           : null,

@@ -108,34 +108,13 @@ export default {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral:
-          this.settingByTemplate13 && this.settingByTemplate13.settingGeneral
-            ? this.settingByTemplate13.settingGeneral
-            : null,
-        banner:
-          this.settingByTemplate13 && this.settingByTemplate13.banner
-            ? this.settingByTemplate13.banner
-            : null,
-        productList:
-          this.settingByTemplate13 && this.settingByTemplate13.productList
-            ? this.settingByTemplate13.productList
-            : null,
-        information:
-          this.settingByTemplate13 && this.settingByTemplate13.information
-            ? this.settingByTemplate13.information
-            : null,
-        infoText:
-          this.settingByTemplate13 && this.settingByTemplate13.infoText
-            ? this.settingByTemplate13.infoText
-            : null,
-        cardProduct:
-          this.settingByTemplate13 && this.settingByTemplate13.cardProduct
-            ? this.settingByTemplate13.cardProduct
-            : null,
-        newsletter:
-          this.settingByTemplate13 && this.settingByTemplate13.newsletter
-            ? this.settingByTemplate13.newsletter
-            : null,
+        settingGeneral: this.settingByTemplate13?.settingGeneral ?? null,
+        banner: this.settingByTemplate13?.banner ?? null,
+        productList: this.settingByTemplate13?.productList ?? null,
+        information: this.settingByTemplate13?.information ?? null,
+        infoText: this.settingByTemplate13?.infoText ?? null,
+        cardProduct: this.settingByTemplate13?.cardProduct ?? null,
+        newsletter: this.settingByTemplate13?.newsletter ?? null,
       }
     },
     dataHoko() {

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="content-wa" id="width">
     <KArticleWapi />
   </div>

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="Wrapper-KoProductDetail-Slug-wapi" id="width">
     <KoProductDetail />
     <KFooterWaLogo v-bind="componentsProps" />

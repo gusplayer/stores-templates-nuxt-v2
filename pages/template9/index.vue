@@ -134,38 +134,14 @@ export default {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral:
-          this.settingByTemplate9 && this.settingByTemplate9.settingGeneral
-            ? this.settingByTemplate9.settingGeneral
-            : null,
-        banner:
-          this.settingByTemplate9 && this.settingByTemplate9.banner
-            ? this.settingByTemplate9.banner
-            : null,
-        koffers:
-          this.settingByTemplate9 && this.settingByTemplate9.koffers
-            ? this.settingByTemplate9.koffers
-            : null,
-        productList:
-          this.settingByTemplate9 && this.settingByTemplate9.productList
-            ? this.settingByTemplate9.productList
-            : null,
-        productListCard:
-          this.settingByTemplate9 && this.settingByTemplate9.cardProduct
-            ? this.settingByTemplate9.cardProduct
-            : null,
-        blog:
-          this.settingByTemplate9 && this.settingByTemplate9.blog
-            ? this.settingByTemplate9.blog
-            : null,
-        newsletter:
-          this.settingByTemplate9 && this.settingByTemplate9.newsletter
-            ? this.settingByTemplate9.newsletter
-            : null,
-        wrapper:
-          this.settingByTemplate9 && this.settingByTemplate9.wrapper
-            ? this.settingByTemplate9.wrapper
-            : null,
+        settingGeneral: this.settingByTemplate9?.settingGeneral ?? null,
+        banner: this.settingByTemplate9?.banner ?? null,
+        koffers: this.settingByTemplate9?.koffers ?? null,
+        productList: this.settingByTemplate9?.productList ?? null,
+        productListCard: this.settingByTemplate9?.cardProduct ?? null,
+        blog: this.settingByTemplate9?.blog ?? null,
+        newsletter: this.settingByTemplate9?.newsletter ?? null,
+        wrapper: this.settingByTemplate9?.wrapper ?? null,
       }
     },
   },

@@ -1,9 +1,9 @@
-<template lang="html">
+<template>
   <div>
     <KoMicompra
+      v-if="orden"
       :dataStore="dataStore"
       :orden="orden"
-      v-if="orden"
       @update="setDataOrder"
     />
   </div>

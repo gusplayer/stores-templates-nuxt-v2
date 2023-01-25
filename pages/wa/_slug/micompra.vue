@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div :style="this.settingBase ? this.settingBase : null">
     <KoMicompra
       :dataStore="dataStore"

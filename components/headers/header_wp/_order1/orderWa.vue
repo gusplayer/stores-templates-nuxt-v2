@@ -835,21 +835,12 @@ export default {
     },
     shippingPrecio() {
       if (this.rangosByCiudades.envio_metodo == 'precio') {
-        let result = this.rangosByCiudades.rangos.find((rango) => {
-          if (
-            this.totalCart >= rango.inicial &&
-            this.totalCart <= rango.final
-          ) {
-            return rango
-          }
-        })
-        if (result) {
-          this.shippingTarifaPrecio = result.precio
-          this.estadoShippingTarifaPrecio = false
-        } else {
-          this.shippingTarifaPrecio = 'empty'
-          this.estadoShippingTarifaPrecio = true
-        }
+        let result = this.rangosByCiudades.rangos.find(
+          (rango) =>
+            this.totalCart >= rango.inicial && this.totalCart <= rango.final
+        )
+        this.shippingTarifaPrecio = result ? result.precio : 'empty'
+        this.estadoShippingTarifaPrecio = !result
       }
     },
     isQuotation() {
@@ -897,7 +888,7 @@ export default {
     removeCartItems() {
       this.remove = false
       location.reload(true)
-      this.$store.commit('DELETEALLITEMSCART')
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
       this.$store.commit('UPDATE_CONTENT_CART')
       this.$store.dispatch('VERIFY_PRODUCTS')
     },

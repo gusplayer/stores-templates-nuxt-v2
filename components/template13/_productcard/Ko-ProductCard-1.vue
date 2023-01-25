@@ -477,8 +477,8 @@ export default {
             this.$store.state.productsCart.push(product)
           }
           this.$store.commit('UPDATE_CONTENT_CART')
-          this.$store.state.openOrder = true
-          this.$store.state.orderComponent = true
+          this.$store.commit('SET_OPEN_ORDER', true)
+          // this.$store.state.orderComponent = true
           this.$store.dispatch('SEND_ADD_TO_CART', 1)
         }
       }

@@ -4,7 +4,7 @@
       <div v-if="stateModalPwd">
         <nuxt />
       </div>
-      <koModalsecurity :dataStore="dataStore" v-else />
+      <koModalSecurity :dataStore="dataStore" v-else />
     </div>
     <div v-else>
       <koTiendaError />
@@ -14,12 +14,13 @@
 
 <script>
 import koTiendaError from '../components/Ko-errorStore'
-import koModalsecurity from '../components/modal/Ko-modal-security.vue'
+import koModalSecurity from '../components/modal/Ko-modal-security.vue'
 import { mapState } from 'vuex'
 export default {
+  name: 'defaultWa',
   components: {
     koTiendaError,
-    koModalsecurity,
+    koModalSecurity,
   },
   beforeMount() {
     if (this.dataStore.tienda.dominio) {
@@ -32,7 +33,7 @@ export default {
     this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_SHOPPING_CART')
     if (this.$route.query && this.$route.query.clearCart == 'true') {
-      this.$store.commit('DELETEALLITEMSCART')
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
       this.$store.commit('UPDATE_CONTENT_CART')
     }
     if (this.$route.query && this.$route.query.openCart == 'true') {

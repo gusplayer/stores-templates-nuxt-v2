@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div>
     <KCart :dataStore="dataStore" />
   </div>

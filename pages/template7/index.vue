@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div
     v-if="settingByTemplate7"
     :style="[
@@ -109,50 +109,17 @@ export default {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral:
-          this.settingByTemplate7 && this.settingByTemplate7.settingGeneral
-            ? this.settingByTemplate7.settingGeneral
-            : null,
-        settingKCarousel:
-          this.settingByTemplate7 && this.settingByTemplate7.banner
-            ? this.settingByTemplate7.banner
-            : null,
-        settingKPromo:
-          this.settingByTemplate7 && this.settingByTemplate7.content
-            ? this.settingByTemplate7.content
-            : null,
-        settingKProductList:
-          this.settingByTemplate7 && this.settingByTemplate7.productList
-            ? this.settingByTemplate7.productList
-            : null,
-        settingKProdutCard:
-          this.settingByTemplate7 && this.settingByTemplate7.card
-            ? this.settingByTemplate7.card
-            : null,
-        settingKGify:
-          this.settingByTemplate7 && this.settingByTemplate7.ProductFavorite
-            ? this.settingByTemplate7.ProductFavorite
-            : null,
-        settingKHowwork:
-          this.settingByTemplate7 && this.settingByTemplate7.howWork
-            ? this.settingByTemplate7.howWork
-            : null,
-        settingKNews:
-          this.settingByTemplate7 && this.settingByTemplate7.newsletter
-            ? this.settingByTemplate7.newsletter
-            : null,
-        settingKWrapper:
-          this.settingByTemplate7 && this.settingByTemplate7.contentImg
-            ? this.settingByTemplate7.contentImg
-            : null,
-        settingKAdvertising:
-          this.settingByTemplate7 && this.settingByTemplate7.advertising
-            ? this.settingByTemplate7.advertising
-            : null,
-        settingKBlog:
-          this.settingByTemplate7 && this.settingByTemplate7.blog
-            ? this.settingByTemplate7.blog
-            : null,
+        settingGeneral: this.settingByTemplate7?.settingGeneral ?? null,
+        settingKCarousel: this.settingByTemplate7?.banner ?? null,
+        settingKPromo: this.settingByTemplate7?.content ?? null,
+        settingKProductList: this.settingByTemplate7?.productList ?? null,
+        settingKProdutCard: this.settingByTemplate7?.card ?? null,
+        settingKGify: this.settingByTemplate7?.ProductFavorite ?? null,
+        settingKHowwork: this.settingByTemplate7?.howWork ?? null,
+        settingKNews: this.settingByTemplate7?.newsletter ?? null,
+        settingKWrapper: this.settingByTemplate7?.contentImg ?? null,
+        settingKAdvertising: this.settingByTemplate7?.advertising ?? null,
+        settingKBlog: this.settingByTemplate7?.blog ?? null,
       }
     },
   },

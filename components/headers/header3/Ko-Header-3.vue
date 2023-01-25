@@ -164,7 +164,7 @@ export default {
       }
     },
     openOrder() {
-      this.$store.state.openOrder = true
+      this.$store.commit('SET_OPEN_ORDER', true)
     },
     openMenuLateralLeft() {
       this.$store.state.openMenuLateralRight = true
