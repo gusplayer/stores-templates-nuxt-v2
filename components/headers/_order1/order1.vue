@@ -1262,7 +1262,8 @@ export default {
       var text = ''
       if (
         (this.inputCheckoutWPP && this.inputCheckoutWPP.length === 0) ||
-        this.inputCheckoutWPP === null
+        this.inputCheckoutWPP === null ||
+        inputCheckoutWPP === undefined
       ) {
         if (this.dataStore.tienda.lenguaje == 'es') {
           text = `Hola%2C%20soy%20${
@@ -1608,7 +1609,8 @@ export default {
           this.modalConfirmation = true
           if (
             (this.inputCheckoutWPP && this.inputCheckoutWPP.length === 0) ||
-            this.inputCheckoutWPP === null
+            this.inputCheckoutWPP === null ||
+            inputCheckoutWPP === undefined
           ) {
             let temp = {
               nombre: this.form.nombre,
