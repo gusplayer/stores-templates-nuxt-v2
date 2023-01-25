@@ -655,7 +655,7 @@ export default {
       let domain = this.$route.fullPath
       let result = domain.split('&')
       if (result[result.length - 1] == 'clearCart=true') {
-        this.$store.commit('DELETEALLITEMSCART')
+        this.$store.commit('DELETE_ALL_ITEMS_CART')
         this.$store.commit('UPDATE_CONTENT_CART')
       }
     },

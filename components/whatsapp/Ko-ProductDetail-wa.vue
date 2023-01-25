@@ -20,7 +20,7 @@
               :photos="data.fotos"
               :photo="data.detalle.foto_cloudinary"
               :idYoutube="idYoutube"
-            ></productSlide>
+            />
           </div>
         </div>
         <div class="wrapper-right">
@@ -282,6 +282,12 @@
         <el-skeleton :rows="6" animated />
       </div>
     </div>
+    <KoOrderWa
+      v-if="quickSale.state"
+      :dataStore="dataStore"
+      :stateOrderWapi="true"
+      :quickSale="quickSale"
+    />
   </div>
 </template>
 
@@ -293,12 +299,14 @@ import selectGroup from './_productdetails/selectGroup'
 // import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 import extensions from '../../mixins/elemenTiptap.vue'
+import KoOrderWa from '../headers/_order1/order1.vue'
 export default {
   mixins: [currency, extensions],
   name: 'Ko-ProductDetail-wa',
   components: {
     selectGroup,
     productSlide,
+    KoOrderWa,
   },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -337,6 +345,10 @@ export default {
         phone: '',
         prefix: '',
       },
+      quickSale: {
+        state: false,
+        dataSeller: {},
+      },
     }
   },
   computed: {
@@ -362,14 +374,14 @@ export default {
       }
       return false
     },
-    // eslint-disable-next-line vue/return-in-computed-property
-    precio() {
-      if (this.data.detalle.precio) {
-        return `$${this.data.detalle.precio
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-    },
+    // // eslint-disable-next-line vue/return-in-computed-property
+    // precio() {
+    //   if (this.data.detalle.precio) {
+    //     return `$${this.data.detalle.precio
+    //       .toString()
+    //       .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+    //   }
+    // },
     settingByTemplate() {
       if (this.$store.state.settingByTemplate) {
         return this.$store.state.settingByTemplate
@@ -612,9 +624,10 @@ export default {
       } else {
         this.$router.push(`/`)
       }
-      this.$store.state.openOrder = true
-      this.$store.state.orderComponent = true
+      // this.$store.commit('SET_OPEN_ORDER', true) = true
+      // this.$store.state.orderComponent = true
       this.$store.dispatch('SEND_ADD_TO_CART', 1)
+      this.$store.commit('SET_OPEN_ORDER', true)
     },
     evalStock(mq, qv) {
       return !(mq - qv < 0)
@@ -669,48 +682,50 @@ export default {
         }
       }
     },
+    removeItemsCart() {
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
+      this.$store.commit('UPDATE_CONTENT_CART')
+      this.$store.commit('SET_OPEN_ORDER', false)
+      this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', false)
+      return true
+    },
     addShoppingCartWhatsApp() {
-      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
-      let baseUrlPc = 'https://web.whatsapp.com/send?phone='
-      let urlProduct = window.location.href
-      let text = ''
-      if (this.dataStore.tienda.lenguaje == 'es') {
-        text = `Hola%20${encodeURIComponent(
-          this.sellers.name
-        )}%2C%20vengo%20de%20la%20${encodeURIComponent(
-          this.dataStore.tienda.nombre
-        )}.%0A%0AMe%20interesa%20este%20producto%20${urlProduct}%2C%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n.`
-      } else if (this.dataStore.tienda.lenguaje == 'en') {
-        text = `Hello%20${encodeURIComponent(
-          this.sellers.name
-        )}%2C%20I%20come%20from%20the%20${encodeURIComponent(
-          this.dataStore.tienda.nombre
-        )}.%0A%0AI%20am%20interested%20in%20this%20product%20${urlProduct}%2C%20I%20would%20like%20to%20receive%20more%20information.`
-      } else if (this.dataStore.tienda.lenguaje == 'pt') {
-        text = `Ol%C3%A1%20${encodeURIComponent(
-          this.sellers.name
-        )}%2C%20venho%20da%20${encodeURIComponent(
-          this.dataStore.tienda.nombre
-        )}.%0A%0AEstou%20interessado%20neste%20produto%20${urlProduct}%2C%20eu%20gostaria%20de%20receber%20mais%20informa%C3%A7%C3%B5es.`
-      } else {
-        text = `Hola%20${encodeURIComponent(
-          this.sellers.name
-        )}%2C%20vengo%20de%20la%20${encodeURIComponent(
-          this.dataStore.tienda.nombre
-        )}.%0A%0AMe%20interesa%20este%20producto%20${urlProduct}%2C%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n.`
-      }
-      let prefix = this.sellers.prefix.slice(1)
-      this.setOrderWa()
-      if (this.mobileCheck()) {
-        window.open(
-          `${baseUrlMovil}${prefix}${this.sellers.phone}&text=${text}`,
-          '_blank'
-        )
-      } else {
-        window.open(
-          `${baseUrlPc}${prefix}${this.sellers.phone}&text=${text}`,
-          '_blank'
-        )
+      if (this.removeItemsCart()) {
+        if (!this.data.cantidad) {
+          this.data.cantidad = this.quantityValue
+        }
+        const product = {
+          id: this.data.detalle.id,
+          precio: this.salesData.precio,
+          cantidad: this.data.cantidad,
+          foto_cloudinary: this.data.detalle.foto_cloudinary,
+          nombre: this.data.detalle.nombre,
+          combinacion: this.salesData.combinacion,
+          envio_gratis: this.data.detalle.envio_gratis,
+        }
+        if (this.salesData) {
+          product.limitQuantity = this.salesData.unidades
+        } else {
+          product.limitQuantity = this.data.info.inventario
+        }
+        if (typeof this.productIndexCart === 'number') {
+          const mutableProduct =
+            this.$store.state.productsCart[this.productIndexCart]
+          mutableProduct.cantidad += this.data.cantidad
+          this.$store.state.productsCart.splice(
+            this.productIndexCart,
+            1,
+            mutableProduct
+          )
+        } else {
+          this.$store.state.productsCart.push(product)
+        }
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.quickSale.state = true
+        this.quickSale.dataSeller = this.sellers
+        this.$store.dispatch('SEND_ADD_TO_CART', 1)
+        this.$store.commit('SET_OPEN_ORDER', true)
+        this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', true)
       }
     },
     setOrderWa() {

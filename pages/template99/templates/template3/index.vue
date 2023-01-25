@@ -27,12 +27,12 @@
     <KFooterWaLogo
       :dataStore="dataStore"
       :settingByTemplate="settingByTemplate"
-      id="KfooterX"
+      id="KFooterX"
     />
     <KoFooterWa
       :dataStore="dataStore"
       :settingByTemplate="settingByTemplate"
-      id="KfooterX"
+      id="KFooterX"
     />
   </div>
 </template>
@@ -144,6 +144,7 @@ export default {
         e.origin.includes('http://localhost:8080') ||
         e.origin.includes('https://panel.komercia.xyz')
       ) {
+        console.log('3', e)
         if (e && e.data && e.data.component) {
           this.$store.commit('SET_CURRENTSETTING99', e.data)
           switch (e.data.component) {
@@ -196,7 +197,7 @@ export default {
               this.$store.commit('SET_OPEN_ORDER', false)
               break
             case 'footer':
-              this.moverseA('KfooterX')
+              this.moverseA('KFooterX')
               this.$store.commit('SET_OPEN_ORDER', false)
               break
           }

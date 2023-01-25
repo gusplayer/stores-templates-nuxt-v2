@@ -345,7 +345,7 @@
                         expiredDate(dataStore.tienda.fecha_expiracion)
                       "
                       class="continue_shopping_whatsapp"
-                      @click="formOrden = !formOrden"
+                      @click="modalBehaviorWhatsApp(true)"
                     >
                       <whatsapp-icon class="wp-icon" />
                       {{ $t('footer_compraWhatsapp') }}
@@ -463,7 +463,7 @@
                       : '#25D366'
                   };                  
                   `"
-                    @click="formOrden = !formOrden"
+                    @click="modalBehaviorWhatsApp(true)"
                   >
                     <whatsapp-icon class="wp-icon" />
                     {{ $t('footer_pedidoWhatsapp') }}
@@ -547,10 +547,18 @@
           </div>
         </div>
       </div>
-      <div class="wrapper-items-form" v-if="formOrden">
+      <div class="wrapper-items-form" v-if="formOrdenWhatsAPP">
         <div class="content-items-form">
           <p class="form-text">{{ $t('footer_formtittle') }}</p>
-          <ValidationObserver ref="observer" tag="form" class="items-form">
+          <ValidationObserver
+            v-if="
+              (inputCheckoutWPP && inputCheckoutWPP.length === 0) ||
+              inputCheckoutWPP === null
+            "
+            ref="observer"
+            tag="form"
+            class="items-form"
+          >
             <p class="form-subtext">{{ $t('footer_formNombre') }}</p>
             <validation-provider
               name="nombre"
@@ -698,9 +706,44 @@
               </template>
             </validation-provider>
           </ValidationObserver>
+          <div v-else class="items-form">
+            <ValidationObserver ref="observer" tag="form" class="w-full">
+              <div
+                v-for="(item, index) in inputCheckoutWPP"
+                :key="index"
+                class="w-full"
+              >
+                <label
+                  class="form-subtext"
+                  :class="item.requerid ? 'is-required' : ''"
+                >
+                  {{ item.textInput }}
+                </label>
+                <validation-provider class="content-input">
+                  <template
+                    slot-scope="{ errors }"
+                    :name="item.id"
+                    rules="required"
+                  >
+                    <input
+                      :type="item.type"
+                      :name="item.textInput"
+                      v-model="item.value"
+                      class="input-text"
+                      :required="item.requerid ? true : false"
+                    />
+                    <span class="text-error" v-if="errors[0]">
+                      {{ errors[0] }}
+                    </span>
+                    <div v-else style="margin-bottom: 18px"></div>
+                  </template>
+                </validation-provider>
+              </div>
+            </ValidationObserver>
+          </div>
           <label
             for="order_close"
-            @click="formOrden = !formOrden"
+            @click="modalBehaviorWhatsApp(false)"
             class="form_close"
           >
             <close-icon />
@@ -781,10 +824,19 @@ export default {
   mixins: [idCloudinary, currency, expiredDate],
   name: 'ko-Order1-cart-2',
   props: {
-    dataStore: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
     stateOrderWapi: {
       type: Boolean,
+      required: false,
       default: () => false,
+    },
+    quickSale: {
+      type: Object,
+      required: false,
+      default: () => ({}),
     },
   },
   components: {
@@ -812,7 +864,7 @@ export default {
       remove: false,
       shippingTarifaPrecio: '',
       estadoShippingTarifaPrecio: false,
-      formOrden: false,
+      // formOrden: false,
       form: {
         nombre: '',
         identificacion: '',
@@ -822,6 +874,7 @@ export default {
         barrio: '',
         dirreccion: '',
       },
+      formStringify: '',
       FreeShippingCart: false,
       placeholderBarrio: 'footer_formBarrio',
       placeholderMsgBarrio: 'footer_formBarrioMgs',
@@ -836,7 +889,7 @@ export default {
     }
   },
   computed: {
-    layourUnicentro() {
+    layoutUniCentro() {
       return this.$store.state.layoutUnicentro
     },
     openOrder: {
@@ -847,9 +900,20 @@ export default {
         this.$store.state.openOrder = value
       },
     },
+    formOrdenWhatsAPP: {
+      get() {
+        return this.$store.state.formOrdenWhatsAPP
+      },
+      set(value) {
+        this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', value)
+      },
+    },
     // verifyProducts() {
     //   return this.$store.getters.verifyProducts
     // },
+    locationStore() {
+      return this.$store.getters.locationStore
+    },
     cantidadProductos() {
       return this.$store.getters.cantidadProductos
     },
@@ -972,11 +1036,32 @@ export default {
         return this.$store.state.settingBaseWapir
       }
     },
+    inputCheckoutWPP() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      if (
+        this.dataStore &&
+        this.dataStore.whatsapp_checkout &&
+        this.dataStore.whatsapp_checkout.configuration
+      ) {
+        let myJSON = JSON.parse(this.dataStore.whatsapp_checkout.configuration)
+        return myJSON
+      }
+    },
     // stateModalPwd() {
     //   return this.$store.state.stateModalPwd
     // },
   },
   methods: {
+    modalBehaviorWhatsApp(value) {
+      if (this.quickSale && this.quickSale.state) {
+        this.$store.commit('DELETE_ALL_ITEMS_CART')
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('SET_OPEN_ORDER', false)
+        this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', false)
+      } else {
+        this.formOrdenWhatsAPP = value
+      }
+    },
     obtainDiscountValue() {
       let value1 = 0
       let value2 = 0
@@ -1002,42 +1087,29 @@ export default {
       this.discountDescuentos = value1 + value2
     },
     shippingPrecio() {
-      if (this.rangosByCiudades.envio_metodo == 'precio') {
-        let result = this.rangosByCiudades.rangos.find((rango) => {
-          if (
-            this.totalCart >= rango.inicial &&
-            this.totalCart <= rango.final
-          ) {
-            return rango
-          }
-        })
-        if (result) {
-          this.shippingTarifaPrecio = result.precio
-          this.estadoShippingTarifaPrecio = false
-        } else {
-          this.shippingTarifaPrecio = 'empty'
-          this.estadoShippingTarifaPrecio = true
+      if (!this.FreeShippingCart) {
+        if (this.rangosByCiudades.envio_metodo == 'precio') {
+          let result = this.rangosByCiudades.rangos.find(
+            (rango) =>
+              this.totalCart >= rango.inicial && this.totalCart <= rango.final
+          )
+          this.shippingTarifaPrecio = result ? result.precio : 'empty'
+          this.estadoShippingTarifaPrecio = !result
         }
       }
     },
     isQuotation() {
-      let result = false
-      this.productsCart.forEach((product) => {
-        if (product.precio === 0) result = true
-      })
+      let result = this.productsCart.some((product) => product.precio === 0)
       return result
     },
     IsMinValorTotal() {
       let result = false
       if (
         this.dataStore.tienda.minimo_compra == 0 ||
-        this.dataStore.tienda.minimo_compra == null
+        this.dataStore.tienda.minimo_compra == null ||
+        this.totalCart >= this.dataStore.tienda.minimo_compra
       ) {
         result = true
-      } else {
-        if (this.totalCart >= this.dataStore.tienda.minimo_compra) {
-          result = true
-        }
       }
       return result
     },
@@ -1065,7 +1137,7 @@ export default {
     removeCartItems() {
       this.remove = false
       location.reload(true)
-      this.$store.commit('DELETEALLITEMSCART')
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
       this.$store.commit('UPDATE_CONTENT_CART')
       this.$store.dispatch('VERIFY_PRODUCTS')
     },
@@ -1113,8 +1185,8 @@ export default {
         canal: 'KOMERCIA',
       }
       json = JSON.stringify(json)
-      if (this.$store.state.productsCart.length != 0) {
-        if (this.layourUnicentro) {
+      if (this.productsCart.length != 0) {
+        if (this.layoutUniCentro) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
           this.$store.dispatch('SEND_ADD_TO_CART', 2)
         } else {
@@ -1164,7 +1236,7 @@ export default {
       let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
       let baseUrlPc = 'https://web.whatsapp.com/send?phone='
       let productosCart = []
-      this.$store.state.productsCart.map((element) => {
+      this.productsCart.map((element) => {
         if (element.combinacion) {
           let combiString = JSON.stringify(element.combinacion)
           let combiList = combiString.replace(/"/g, '')
@@ -1189,8 +1261,443 @@ export default {
       let resultproductList = productList.replace(/,/g, '%0A')
       let result = resultproductList.slice(1, -1)
       var text = ''
+      if (
+        (this.inputCheckoutWPP && this.inputCheckoutWPP.length === 0) ||
+        this.inputCheckoutWPP === null
+      ) {
+        if (this.dataStore.tienda.lenguaje == 'es') {
+          text = `Hola%2C%20soy%20${
+            this.form.nombre
+          }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%0ANumero%20de%20orden%3A%20${
+            this.numberOrder
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20-${
+            this.discountDescuentos
+              ? this.dataStore.tienda.moneda == 'PEN'
+                ? 'S/'
+                : '$' + this.discountDescuentos
+              : 'No%20aplica'
+          }%0A%2ASubtotal%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${
+            this.totalCart +
+            (this.shipping ? this.shipping : 0) +
+            (this.shippingTarifaPrecio &&
+            this.shippingTarifaPrecio != 'empty' &&
+            !this.FreeShippingCart
+              ? this.shippingTarifaPrecio
+              : 0) -
+            this.discountDescuentos
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A%2ANombre%2A%3A%20${
+            this.form.nombre
+          }%0A%2AIdentificación%2A%3A%20${encodeURIComponent(
+            this.form.phone
+          )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
+            this.form.email ? this.form.email : ''
+          )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
+            this.form.ciudad
+          )}%0A%2A${encodeURIComponent(
+            this.textCiudad
+          )}%2A%3A%20${encodeURIComponent(
+            this.form.barrio
+          )}%0A%2ADirección%2A%3A%20${encodeURIComponent(
+            this.form.dirreccion
+          )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
+            window.location
+          }?clearCart=true`
+        } else if (this.dataStore.tienda.lenguaje == 'en') {
+          text = `Hello%2C%20I%20am%20${
+            this.form.nombre
+          }%2C%0AI%20made%20this%20order%20at%20your%20store%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%0AOrder%20number%3A%20${
+            this.numberOrder
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADiscount%2A%3A%20-${
+            this.discountDescuentos
+              ? this.dataStore.tienda.moneda == 'PEN'
+                ? 'S/'
+                : '$' + this.discountDescuentos
+              : 'Not%20applicable'
+          }%0A%2ASubtotal%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${
+            this.totalCart +
+            (this.shipping ? this.shipping : 0) +
+            (this.shippingTarifaPrecio &&
+            this.shippingTarifaPrecio != 'empty' &&
+            !this.FreeShippingCart
+              ? this.shippingTarifaPrecio
+              : 0) -
+            this.discountDescuentos
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20information%2A%3A%0A%2AName%2A%3A%20${
+            this.form.nombre
+          }%0A%2AIdentification%2A%3A%20${encodeURIComponent(
+            this.form.phone
+          )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
+            this.form.email ? this.form.email : ''
+          )}%0A%2A${this.textDepartment}%2A%3A%20${
+            this.form.ciudad
+          }%0A%2A${encodeURIComponent(this.textCiudad)}%2A%3A%20${
+            this.form.barrio
+          }%0A%2AAddres%2A%3A%20${encodeURIComponent(
+            this.form.dirreccion
+          )}%0A%0A%2Aback%20to%20the%20store%2A%3A%20${
+            window.location
+          }?clearCart=true`
+        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+          text = `Olá%2C%20aqui%20é%20${
+            this.form.nombre
+          }%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%0AN%C3%BAmero%20do%20pedido%3A%20${
+            this.numberOrder
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADesconto%2A%3A%20-${
+            this.discountDescuentos
+              ? this.dataStore.tienda.moneda == 'PEN'
+                ? 'S/'
+                : '$' + this.discountDescuentos
+              : 'Não%20aplicável'
+          }%0A%2ASubtotal%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${
+            this.totalCart +
+            (this.shipping ? this.shipping : 0) +
+            (this.shippingTarifaPrecio &&
+            this.shippingTarifaPrecio != 'empty' &&
+            !this.FreeShippingCart
+              ? this.shippingTarifaPrecio
+              : 0) -
+            this.discountDescuentos
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20Minhas%20informaçãoes%2A%3A%0A%2ANome%2A%3A%20${
+            this.form.nombre
+          }%0A%2Aidentificação%2A%3A%20${encodeURIComponent(
+            this.form.phone
+          )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
+            this.form.email ? this.form.email : ''
+          )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
+            this.form.ciudad
+          )}%0A%2A${encodeURIComponent(this.textCiudad)}%2A%3A%20${
+            this.form.barrio
+          }%0A%2AEndereço%2A%3A%20${encodeURIComponent(
+            this.form.dirreccion
+          )}%0A%0A%2Ade%20volta%20%C3%A0%20loja%2A%3A%20${
+            window.location
+          }?clearCart=true`
+        } else {
+          text = `Hola%2C%20soy%20${
+            this.form.nombre
+          }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%0ANumero%20de%20orden%3A%20${
+            this.numberOrder
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20-${
+            this.discountDescuentos
+              ? this.dataStore.tienda.moneda == 'PEN'
+                ? 'S/'
+                : '$' + this.discountDescuentos
+              : 'No%20aplica'
+          }%0A%2ASubtotal%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${
+            this.totalCart +
+            (this.shipping ? this.shipping : 0) +
+            (this.shippingTarifaPrecio &&
+            this.shippingTarifaPrecio != 'empty' &&
+            !this.FreeShippingCart
+              ? this.shippingTarifaPrecio
+              : 0) -
+            this.discountDescuentos
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A%2ANombre%2A%3A%20${
+            this.form.nombre
+          }%0A%2AIdentificación%2A%3A%20${encodeURIComponent(
+            this.form.phone
+          )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
+            this.form.email ? this.form.email : ''
+          )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
+            this.form.ciudad
+          )}%0A%2A${encodeURIComponent(
+            this.textCiudad
+          )}%2A%3A%20${encodeURIComponent(
+            this.form.barrio
+          )}%0A%2ADirección%2A%3A%20${encodeURIComponent(
+            this.form.dirreccion
+          )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
+            window.location
+          }?clearCart=true`
+        }
+      } else {
+        if (this.dataStore.tienda.lenguaje == 'es') {
+          text = `Hola%20%F0%9F%91%8B.%0AHice%20este%20pedido%20%F0%9F%93%A6%20en%20tu%20tienda%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%0ANumero%20de%20orden%3A%20${
+            this.numberOrder
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20-${
+            this.discountDescuentos
+              ? this.dataStore.tienda.moneda == 'PEN'
+                ? 'S/'
+                : '$' + this.discountDescuentos
+              : 'No%20aplica'
+          }%0A%2ASubtotal%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${
+            this.totalCart +
+            (this.shipping ? this.shipping : 0) +
+            (this.shippingTarifaPrecio &&
+            this.shippingTarifaPrecio != 'empty' &&
+            !this.FreeShippingCart
+              ? this.shippingTarifaPrecio
+              : 0) -
+            this.discountDescuentos
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A${this.formatDataCheckout()}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
+            this.quickSale && this.quickSale.state
+              ? this.locationStore
+              : window.location
+          }?clearCart=true`
+        } else if (this.dataStore.tienda.lenguaje == 'en') {
+          text = `Hello%20%F0%9F%91%8B.%0AI%20placed%20this%20order%20%F0%9F%93%A6%20in%20your%20store.%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%0AOrder%20number%3A%20${
+            this.numberOrder
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADiscount%2A%3A%20-${
+            this.discountDescuentos
+              ? this.dataStore.tienda.moneda == 'PEN'
+                ? 'S/'
+                : '$' + this.discountDescuentos
+              : 'Not%20applicable'
+          }%0A%2ASubtotal%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${
+            this.totalCart +
+            (this.shipping ? this.shipping : 0) +
+            (this.shippingTarifaPrecio &&
+            this.shippingTarifaPrecio != 'empty' &&
+            !this.FreeShippingCart
+              ? this.shippingTarifaPrecio
+              : 0) -
+            this.discountDescuentos
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20information%2A%3A%0A${this.formatDataCheckout()}%0A%0A%2Aback%20to%20the%20store%2A%3A%20${
+            this.quickSale && this.quickSale.state
+              ? this.locationStore
+              : window.location
+          }?clearCart=true`
+        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+          text = `Ol%C3%A1%20%F0%9F%91%8B.%0AEu%20coloquei%20este%20pedido%20%F0%9F%93%A6%20em%20sua%20loja.%20${encodeURIComponent(
+            this.dataStore.tienda.nombre
+          )}%0AN%C3%BAmero%20do%20pedido%3A%20${
+            this.numberOrder
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADesconto%2A%3A%20-${
+            this.discountDescuentos
+              ? this.dataStore.tienda.moneda == 'PEN'
+                ? 'S/'
+                : '$' + this.discountDescuentos
+              : 'Não%20aplicável'
+          }%0A%2ASubtotal%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+          }${
+            this.totalCart +
+            (this.shipping ? this.shipping : 0) +
+            (this.shippingTarifaPrecio &&
+            this.shippingTarifaPrecio != 'empty' &&
+            !this.FreeShippingCart
+              ? this.shippingTarifaPrecio
+              : 0) -
+            this.discountDescuentos
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20Minhas%20informaçãoes%2A%3A%0A${this.formatDataCheckout()}%0A%0A%2Ade%20volta%20%C3%A0%20loja%2A%3A%20${
+            this.quickSale && this.quickSale.state
+              ? this.locationStore
+              : window.location
+          }?clearCart=true`
+        } else {
+          if (this.dataStore.tienda.lenguaje == 'es') {
+            text = `Hola%20%F0%9F%91%8B.%0AHice%20este%20pedido%20%F0%9F%93%A6%20en%20tu%20tienda%20${encodeURIComponent(
+              this.dataStore.tienda.nombre
+            )}%0ANumero%20de%20orden%3A%20${
+              this.numberOrder
+            }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20-${
+              this.discountDescuentos
+                ? this.dataStore.tienda.moneda == 'PEN'
+                  ? 'S/'
+                  : '$' + this.discountDescuentos
+                : 'No%20aplica'
+            }%0A%2ASubtotal%2A%3A%20${
+              this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
+              this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            }${
+              this.totalCart +
+              (this.shipping ? this.shipping : 0) +
+              (this.shippingTarifaPrecio &&
+              this.shippingTarifaPrecio != 'empty' &&
+              !this.FreeShippingCart
+                ? this.shippingTarifaPrecio
+                : 0) -
+              this.discountDescuentos
+            }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A${this.formatDataCheckout()}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
+              this.quickSale && this.quickSale.state
+                ? this.locationStore
+                : window.location
+            }?clearCart=true`
+          }
+        }
+        if (
+          this.quickSale &&
+          this.quickSale.dataSeller &&
+          this.quickSale.dataSeller.state
+        ) {
+          if (this.quickSale && this.quickSale.state) {
+            if (this.quickSale.dataSeller.prefix.charAt(0) == '+') {
+              console.log(this.quickSale.dataSeller.prefix)
+              if (this.mobileCheck()) {
+                window.location.href = `${baseUrlMovil}${this.quickSale.dataSeller.prefix.slice(
+                  1
+                )}${this.quickSale.dataSeller.phone}&text=${text}`
+              } else {
+                window.location.href = `${baseUrlPc}${this.quickSale.dataSeller.prefix.slice(
+                  1
+                )}${this.quickSale.dataSeller.phone}&text=${text}`
+              }
+            }
+          }
+        } else {
+          if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
+            let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+            if (this.mobileCheck()) {
+              window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
+            } else {
+              window.location.href = `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
+            }
+          } else {
+            if (this.mobileCheck()) {
+              window.location.href = `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`
+            } else {
+              window.location.href = `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
+            }
+          }
+        }
+        setTimeout(() => {
+          this.modalConfirmation = false
+          this.closedOder()
+          this.$message({
+            showClose: true,
+            message:
+              '¡Por falta de permisos no fue posible abrir WhatsApp para enviar la información!',
+            type: 'error',
+            duration: 9000,
+          })
+          this.removeCartItems()
+        }, 5000)
+      }
+    },
+    setOrderWa() {
+      this.$refs.observer.validate().then((response) => {
+        if (response) {
+          this.modalConfirmation = true
+          if (
+            (this.inputCheckoutWPP && this.inputCheckoutWPP.length === 0) ||
+            this.inputCheckoutWPP === null
+          ) {
+            let temp = {
+              nombre: this.form.nombre,
+              phone: this.form.phone, // Es la cedula
+              correo: this.form.email,
+              identificacion: this.form.identificacion, //Es el telefono
+              ciudad: this.form.ciudad,
+              barrio: this.form.barrio,
+              direccion: this.form.dirreccion,
+            }
+            this.formStringify = JSON.stringify(temp)
+          } else {
+            this.formStringify = JSON.stringify(this.inputCheckoutWPP)
+          }
+          this.eventFacebookPixel()
+          const params = {
+            canal: 1,
+            usuario: 30866,
+            tipo: 0,
+            tienda: this.dataStore.tienda.id_tienda,
+            total:
+              this.totalCart +
+              (this.shipping ? this.shipping : 0) +
+              (this.shippingTarifaPrecio &&
+              this.shippingTarifaPrecio != 'empty' &&
+              !this.FreeShippingCart
+                ? this.shippingTarifaPrecio
+                : 0) -
+              this.discountDescuentos,
+            direccion_entrega: {
+              type: 0,
+              value: null,
+            },
+            productos: this.productsCart,
+            comentario: this.formStringify,
+            costo_envio: this.setShipping(),
+            metodo_pago: 7,
+            descuento: this.discountDescuentos ? this.discountDescuentos : 0,
+          }
+          axios
+            .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
+            .then((response) => {
+              this.numberOrder = response.data.data.id
+              this.textConfirmation =
+                '¡Información enviada correctamente a la tienda!'
+              this.stateBtnConfirmation = true
+            })
+            .catch(() => {
+              this.textConfirmation = 'Error al enviar los datos!'
+              this.$message.error('Error al enviar los datos!')
+            })
+        }
+      })
+    },
+    setShipping() {
+      let resultShipping
+      if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'gratis'
+      ) {
+        resultShipping = 0
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'tarifa_plana'
+      ) {
+        resultShipping = this.rangosByCiudades.valor
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'precio_ciudad'
+      ) {
+        resultShipping = 0
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'precio'
+      ) {
+        resultShipping = this.shippingTarifaPrecio
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'sintarifa'
+      ) {
+        resultShipping = 0
+      } else {
+        resultShipping = 0
+      }
+      return resultShipping
+    },
+    translateDeliveryMethod() {
       let textFreeShippingCart
-      // traduccion envios
       if (
         this.rangosByCiudades &&
         this.rangosByCiudades.envio_metodo == 'gratis'
@@ -1267,293 +1774,14 @@ export default {
           textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
         }
       }
-      //traducción  texto
-      if (this.dataStore.tienda.lenguaje == 'es') {
-        text = `Hola%2C%20soy%20${
-          this.form.nombre
-        }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
-          this.dataStore.tienda.nombre
-        )}%0ANumero%20de%20orden%3A%20${
-          this.numberOrder
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${encodeURIComponent(
-          result
-        )}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
-          this.discountDescuentos
-            ? this.dataStore.tienda.moneda == 'PEN'
-              ? 'S/'
-              : '$' + this.discountDescuentos
-            : 'No%20aplica'
-        }%0A%2ASubtotal%2A%3A%20${
-          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-        }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-        }${
-          this.totalCart +
-          (this.shipping ? this.shipping : 0) +
-          (this.shippingTarifaPrecio &&
-          this.shippingTarifaPrecio != 'empty' &&
-          !this.FreeShippingCart
-            ? this.shippingTarifaPrecio
-            : 0) -
-          this.discountDescuentos
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A%2ANombre%2A%3A%20${
-          this.form.nombre
-        }%0A%2AIdentificación%2A%3A%20${encodeURIComponent(
-          this.form.phone
-        )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
-          this.form.email ? this.form.email : ''
-        )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
-          this.form.ciudad
-        )}%0A%2A${encodeURIComponent(
-          this.textCiudad
-        )}%2A%3A%20${encodeURIComponent(
-          this.form.barrio
-        )}%0A%2ADirección%2A%3A%20${encodeURIComponent(
-          this.form.dirreccion
-        )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
-          window.location
-        }?clearCart=true`
-      } else if (this.dataStore.tienda.lenguaje == 'en') {
-        text = `Hello%2C%20I%20am%20${
-          this.form.nombre
-        }%2C%0AI%20made%20this%20order%20at%20your%20store%20${encodeURIComponent(
-          this.dataStore.tienda.nombre
-        )}%0AOrder%20number%3A%20${
-          this.numberOrder
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${encodeURIComponent(
-          result
-        )}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADiscount%2A%3A%20${
-          this.discountDescuentos
-            ? this.dataStore.tienda.moneda == 'PEN'
-              ? 'S/'
-              : '$' + this.discountDescuentos
-            : 'Not%20applicable'
-        }%0A%2ASubtotal%2A%3A%20${
-          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-        }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-        }${
-          this.totalCart +
-          (this.shipping ? this.shipping : 0) +
-          (this.shippingTarifaPrecio &&
-          this.shippingTarifaPrecio != 'empty' &&
-          !this.FreeShippingCart
-            ? this.shippingTarifaPrecio
-            : 0) -
-          this.discountDescuentos
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20information%2A%3A%0A%2AName%2A%3A%20${
-          this.form.nombre
-        }%0A%2AIdentification%2A%3A%20${encodeURIComponent(
-          this.form.phone
-        )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
-          this.form.email ? this.form.email : ''
-        )}%0A%2A${this.textDepartment}%2A%3A%20${
-          this.form.ciudad
-        }%0A%2A${encodeURIComponent(this.textCiudad)}%2A%3A%20${
-          this.form.barrio
-        }%0A%2AAddres%2A%3A%20${encodeURIComponent(
-          this.form.dirreccion
-        )}%0A%0A%2Aback%20to%20the%20store%2A%3A%20${
-          window.location
-        }?clearCart=true`
-      } else if (this.dataStore.tienda.lenguaje == 'pt') {
-        text = `Olá%2C%20aqui%20é%20${
-          this.form.nombre
-        }%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${encodeURIComponent(
-          this.dataStore.tienda.nombre
-        )}%0AN%C3%BAmero%20do%20pedido%3A%20${
-          this.numberOrder
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${encodeURIComponent(
-          result
-        )}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADesconto%2A%3A%20${
-          this.discountDescuentos
-            ? this.dataStore.tienda.moneda == 'PEN'
-              ? 'S/'
-              : '$' + this.discountDescuentos
-            : 'Não%20aplicável'
-        }%0A%2ASubtotal%2A%3A%20${
-          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-        }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-        }${
-          this.totalCart +
-          (this.shipping ? this.shipping : 0) +
-          (this.shippingTarifaPrecio &&
-          this.shippingTarifaPrecio != 'empty' &&
-          !this.FreeShippingCart
-            ? this.shippingTarifaPrecio
-            : 0) -
-          this.discountDescuentos
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20Minhas%20informaçãoes%2A%3A%0A%2ANome%2A%3A%20${
-          this.form.nombre
-        }%0A%2Aidentificação%2A%3A%20${encodeURIComponent(
-          this.form.phone
-        )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
-          this.form.email ? this.form.email : ''
-        )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
-          this.form.ciudad
-        )}%0A%2A${encodeURIComponent(this.textCiudad)}%2A%3A%20${
-          this.form.barrio
-        }%0A%2AEndereço%2A%3A%20${encodeURIComponent(
-          this.form.dirreccion
-        )}%0A%0A%2Ade%20volta%20%C3%A0%20loja%2A%3A%20${
-          window.location
-        }?clearCart=true`
-      } else {
-        text = `Hola%2C%20soy%20${
-          this.form.nombre
-        }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
-          this.dataStore.tienda.nombre
-        )}%0ANumero%20de%20orden%3A%20${
-          this.numberOrder
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${encodeURIComponent(
-          result
-        )}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${textFreeShippingCart}%2A%0A%2ADescuento%2A%3A%20${
-          this.discountDescuentos
-            ? this.dataStore.tienda.moneda == 'PEN'
-              ? 'S/'
-              : '$' + this.discountDescuentos
-            : 'No%20aplica'
-        }%0A%2ASubtotal%2A%3A%20${
-          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-        }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-          this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-        }${
-          this.totalCart +
-          (this.shipping ? this.shipping : 0) +
-          (this.shippingTarifaPrecio &&
-          this.shippingTarifaPrecio != 'empty' &&
-          !this.FreeShippingCart
-            ? this.shippingTarifaPrecio
-            : 0) -
-          this.discountDescuentos
-        }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A%2ANombre%2A%3A%20${
-          this.form.nombre
-        }%0A%2AIdentificación%2A%3A%20${encodeURIComponent(
-          this.form.phone
-        )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
-          this.form.email ? this.form.email : ''
-        )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
-          this.form.ciudad
-        )}%0A%2A${encodeURIComponent(
-          this.textCiudad
-        )}%2A%3A%20${encodeURIComponent(
-          this.form.barrio
-        )}%0A%2ADirección%2A%3A%20${encodeURIComponent(
-          this.form.dirreccion
-        )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
-          window.location
-        }?clearCart=true`
-      }
-      if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-        if (this.mobileCheck()) {
-          window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
-        } else {
-          window.location.href = `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
-        }
-      } else {
-        if (this.mobileCheck()) {
-          window.location.href = `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`
-        } else {
-          window.location.href = `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
-        }
-      }
-      setTimeout(() => {
-        this.modalConfirmation = false
-        this.closedOder()
-        this.$message({
-          showClose: true,
-          message:
-            '¡Por falta de permisos no fue posible abrir WhatsApp para enviar la información!',
-          type: 'error',
-          duration: 9000,
-        })
-        this.removeCartItems()
-      }, 5000)
+      return textFreeShippingCart
     },
-    setOrderWa() {
-      this.$refs.observer.validate().then((response) => {
-        if (response) {
-          this.modalConfirmation = true
-          let temp = {
-            nombre: this.form.nombre,
-            phone: this.form.phone, // Es la cedula
-            correo: this.form.email,
-            identificacion: this.form.identificacion, //Es el telefono
-            ciudad: this.form.ciudad,
-            barrio: this.form.barrio,
-            direccion: this.form.dirreccion,
-          }
-          const myJSON = JSON.stringify(temp)
-          let resultShipping
-          if (
-            this.rangosByCiudades &&
-            this.rangosByCiudades.envio_metodo == 'gratis'
-          ) {
-            resultShipping = 0
-          } else if (
-            this.rangosByCiudades &&
-            this.rangosByCiudades.envio_metodo == 'tarifa_plana'
-          ) {
-            resultShipping = this.rangosByCiudades.valor
-          } else if (
-            this.rangosByCiudades &&
-            this.rangosByCiudades.envio_metodo == 'precio_ciudad'
-          ) {
-            resultShipping = 0
-          } else if (
-            this.rangosByCiudades &&
-            this.rangosByCiudades.envio_metodo == 'precio'
-          ) {
-            resultShipping = this.shippingTarifaPrecio
-          } else if (
-            this.rangosByCiudades &&
-            this.rangosByCiudades.envio_metodo == 'sintarifa'
-          ) {
-            resultShipping = 0
-          } else {
-            resultShipping = 0
-          }
-          this.eventFacebookPixel()
-          const params = {
-            canal: 1,
-            usuario: 30866,
-            tipo: 0,
-            tienda: this.dataStore.tienda.id_tienda,
-            total:
-              this.totalCart +
-              (this.shipping ? this.shipping : 0) +
-              (this.shippingTarifaPrecio &&
-              this.shippingTarifaPrecio != 'empty' &&
-              !this.FreeShippingCart
-                ? this.shippingTarifaPrecio
-                : 0) -
-              this.discountDescuentos,
-            direccion_entrega: {
-              type: 0,
-              value: null,
-            },
-            productos: this.productsCart,
-            comentario: myJSON,
-            costo_envio: resultShipping,
-            metodo_pago: 7,
-            descuento: this.discountDescuentos ? this.discountDescuentos : 0,
-          }
-          axios
-            .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
-            .then((response) => {
-              this.numberOrder = response.data.data.id
-              this.textConfirmation =
-                '¡Información enviada correctamente a la tienda!'
-              this.stateBtnConfirmation = true
-            })
-            .catch(() => {
-              this.textConfirmation = 'Error al enviar los datos!'
-              this.$message.error('Error al enviar los datos!')
-            })
-        }
-      })
+    formatDataCheckout() {
+      const temp = this.inputCheckoutWPP
+        .filter((item) => item.value)
+        .map((item) => `\n${item.textInput}: ${item.value}`)
+        .join('')
+      return encodeURIComponent(temp)
     },
     eventFacebookPixel() {
       let array = []
@@ -1589,18 +1817,10 @@ export default {
     },
     productsFreeShippingCart() {
       if (this.productsCart) {
-        let result = this.productsCart.filter((rango) => {
-          if (rango.envio_gratis === 1) {
-            return rango
-          }
-        })
-        if (this.productsCart.length == result.length) {
-          this.FreeShippingCart = true
-          // this.rangosByCiudad.envio_metodo = 'gratis'
-        } else {
-          this.FreeShippingCart = false
-          // this.rangosByCiudad.envio_metodo = this.rangosByCiudad.envio_metodo
-        }
+        let result = this.productsCart.filter(
+          (rango) => rango.envio_gratis === 1
+        )
+        this.FreeShippingCart = this.productsCart.length == result.length
       }
     },
     setPlaceholderDep() {
@@ -1688,6 +1908,14 @@ export default {
     },
     shippingDescuento2() {
       this.obtainDiscountValue()
+    },
+    openOrder(value) {
+      if (!value && this.quickSale && this.quickSale.state) {
+        this.$store.commit('DELETE_ALL_ITEMS_CART')
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('SET_OPEN_ORDER', false)
+        this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', false)
+      }
     },
   },
   filters: {
@@ -1820,18 +2048,18 @@ export default {
   background: #2c2930;
   border-radius: 10px;
 }
-.order_products_list_item .photo {
-  width: 60px;
+.photo {
+  width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .order_products_list_item .photo img {
-  max-width: 60px;
-  max-height: 60px;
+  max-width: 50px;
+  max-height: 50px;
   border-radius: 5px;
   object-fit: cover;
-  margin-right: 8px;
+  margin-right: 5px;
 }
 .order_products_list_item .name {
   max-width: 190px;
@@ -2329,6 +2557,12 @@ details[open] summary ~ * {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+.is-required:after {
+  content: '*';
+  margin-left: 3px;
+  color: red;
+  font-weight: bold;
 }
 .input-text {
   font-size: 13px;

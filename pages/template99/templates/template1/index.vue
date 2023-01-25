@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="container-home" v-loading="loading">
     <KoHeaderWp v-bind="componentsProps" id="KHeaderX" />
     <component
@@ -197,6 +197,14 @@ export default {
               this.$store.commit('SET_OPEN_ORDER', false)
               break
           }
+        }
+        if (e && e.data && e.data.checkout) {
+          if (e.data.setting) {
+            this.$store.state.dataStore.whatsapp_checkout.configuration =
+              e.data.setting
+          }
+          this.$store.commit('SET_OPEN_ORDER', true)
+          this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', true)
         }
       }
     },

@@ -181,6 +181,7 @@ export const state = () => ({
   dataHoko: {},
   producthoko: [],
   stateModalPwd: true,
+  formOrdenWhatsAPP: false,
   tempInfo: '',
 })
 export const mutations = {
@@ -473,7 +474,7 @@ export const mutations = {
   DELETEITEMCART: (state, index) => {
     state.productsCart.splice(index, 1)
   },
-  DELETEALLITEMSCART: (state) => {
+  DELETE_ALL_ITEMS_CART: (state) => {
     state.productsCart = []
   },
   SET_OPEN_ORDER: (state, value) => {
@@ -613,6 +614,9 @@ export const mutations = {
   },
   SET_STATE_MODAL_PWD(state, data) {
     state.stateModalPwd = data
+  },
+  SET_STATE_FORM_MODAL_WHATS_APP(state, data) {
+    state.formOrdenWhatsAPP = data
   },
   SET_INFO(state, data) {
     state.tempInfo = data
@@ -921,6 +925,86 @@ export const actions = {
       console.log('Data integraciones', err.response)
     }
   },
+  async GET_DESCUENTOS({ state }) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/descuentos/${state.dataStore.tienda.id_tienda}?page=1`,
+        headers: state.configAxios,
+      })
+      if (data) {
+        state.listDescuentos = data.descuentos.data.sort(function (prev, next) {
+          return prev.cantidad_productos - next.cantidad_productos
+        })
+      }
+    } catch (err) {
+      console.log('Data descuentos', err.response)
+    }
+  },
+  async GET_ARTICLES({ state, commit }, id) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/blogs/${id}?page=1`,
+        headers: state.configAxios,
+      })
+      if (data) {
+        commit('SET_ARTICLES', data.blogs.data)
+      }
+    } catch (err) {
+      console.log('Data blog tienda', err.response)
+    }
+  },
+  async GET_DATA_ARTICLE({ state, commit }, params) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/blog/${params.idStore}/${params.idBlog}`,
+        headers: state.configAxios,
+      })
+      if (data) {
+        return { success: true, data: data }
+      }
+    } catch (err) {
+      console.log('Data articulo tienda', err.response)
+    }
+  },
+  async GET_DATA_HOKO({ dispatch, commit, state }, id) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/hoko/${id}`,
+      })
+      if (data.data) {
+        dispatch('GET_PRODUCTSHOKO', 1)
+        commit('SET_DATA_HOKO', data.data)
+      } else {
+        console.log('No tiene Hoko registrado')
+      }
+    } catch (err) {
+      console.log('Data hoko', err.response)
+    }
+  },
+  async GET_PRODUCTSHOKO({ state }, id) {
+    if (state.dataHoko && state.dataHoko.token) {
+      try {
+        const { data } = await axios({
+          method: 'GET',
+          url: `https://hoko.com.co/api/member/myproducts?page=${id}`,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Authorization: `Bearer ${state.dataHoko.token}`,
+            'Access-Control-Allow-Origin': '*',
+          },
+        })
+        if (data) {
+          state.producthoko = data
+        }
+      } catch (err) {
+        console.log('Listado prodcutos Hoko', err.response)
+      }
+    }
+  },
   GET_SHOPPING_CART({ state, commit, dispatch }) {
     if (
       localStorage.getItem(`ShoppingCart/${state.dataStore.tienda.id_tienda}`)
@@ -1023,86 +1107,6 @@ export const actions = {
     })
     commit('SET_SHOPPING_CART', productsFinal)
     // commit('UPDATE_CONTENT_CART', 1)
-  },
-  async GET_DESCUENTOS({ state }) {
-    try {
-      const { data } = await axios({
-        method: 'GET',
-        url: `${state.urlKomercia}/api/descuentos/${state.dataStore.tienda.id_tienda}?page=1`,
-        headers: state.configAxios,
-      })
-      if (data) {
-        state.listDescuentos = data.descuentos.data.sort(function (prev, next) {
-          return prev.cantidad_productos - next.cantidad_productos
-        })
-      }
-    } catch (err) {
-      console.log('Data descuentos', err.response)
-    }
-  },
-  async GET_ARTICLES({ state, commit }, id) {
-    try {
-      const { data } = await axios({
-        method: 'GET',
-        url: `${state.urlKomercia}/api/blogs/${id}?page=1`,
-        headers: state.configAxios,
-      })
-      if (data) {
-        commit('SET_ARTICLES', data.blogs.data)
-      }
-    } catch (err) {
-      console.log('Data blog tienda', err.response)
-    }
-  },
-  async GET_DATA_ARTICLE({ state, commit }, params) {
-    try {
-      const { data } = await axios({
-        method: 'GET',
-        url: `${state.urlKomercia}/api/blog/${params.idStore}/${params.idBlog}`,
-        headers: state.configAxios,
-      })
-      if (data) {
-        return { success: true, data: data }
-      }
-    } catch (err) {
-      console.log('Data articulo tienda', err.response)
-    }
-  },
-  async GET_DATA_HOKO({ dispatch, commit, state }, id) {
-    try {
-      const { data } = await axios({
-        method: 'GET',
-        url: `${state.urlKomercia}/api/hoko/${id}`,
-      })
-      if (data.data) {
-        dispatch('GET_PRODUCTSHOKO', 1)
-        commit('SET_DATA_HOKO', data.data)
-      } else {
-        console.log('No tiene Hoko registrado')
-      }
-    } catch (err) {
-      console.log('Data hoko', err.response)
-    }
-  },
-  async GET_PRODUCTSHOKO({ state }, id) {
-    if (state.dataHoko && state.dataHoko.token) {
-      try {
-        const { data } = await axios({
-          method: 'GET',
-          url: `https://hoko.com.co/api/member/myproducts?page=${id}`,
-          headers: {
-            'content-type': 'multipart/form-data',
-            Authorization: `Bearer ${state.dataHoko.token}`,
-            'Access-Control-Allow-Origin': '*',
-          },
-        })
-        if (data) {
-          state.producthoko = data
-        }
-      } catch (err) {
-        console.log('Listado prodcutos Hoko', err.response)
-      }
-    }
   },
   SEND_ADD_TO_CART({ state, getters }, value) {
     let eventFacebook = ''
@@ -1325,11 +1329,7 @@ export const getters = {
           }
         }
       })
-      if (resultDesc) {
-        return resultDesc
-      } else {
-        return ''
-      }
+      return resultDesc ? resultDesc : ''
     }
   },
   total(state, getters) {
@@ -1352,6 +1352,20 @@ export const getters = {
       return 1
     } else {
       return 0
+    }
+  },
+  locationStore(state) {
+    if (state.dataStore) {
+      if (state.dataStore.tienda.template == 99) {
+        return `https://wapi.me/wa/${state.dataStore.tienda.id_tienda}`
+      } else {
+        const suffix = state.dataStore.tienda.template !== 3 ? 'store' : 'co'
+        if (state.dataStore.tienda.dominio) {
+          return `${state.dataStore.tienda.dominio}`
+        } else {
+          return `https://${state.dataStore.tienda.subdominio}.komercia.${suffix}`
+        }
+      }
     }
   },
 

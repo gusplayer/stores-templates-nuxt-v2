@@ -338,7 +338,7 @@ export default {
         action: 'click',
       })
       this.showMenu = false
-      this.$store.state.openOrder = true
+      this.$store.commit('SET_OPEN_ORDER', true)
     },
     openMenuLateral() {
       this.showMenu = false

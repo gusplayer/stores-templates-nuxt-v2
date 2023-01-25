@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="home">
     <component :is="indexTemplate" v-bind="componentsProps" />
   </div>
@@ -65,38 +65,21 @@ export default {
       return {
         dataStore: this.dataStore,
         settingK05Contact:
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings
-            : this.settingBase,
+          this.settingByTemplate?.settings?.tipo_letra ?? this.settingBase,
         settingByTemplate7: this.settingByTemplate7
           ? [
               {
-                settingK07Contact:
-                  this.settingByTemplate7 && this.settingByTemplate7.contact
-                    ? this.settingByTemplate7.contact
-                    : null,
-                settingGeneral:
-                  this.settingByTemplate7 &&
-                  this.settingByTemplate7.settingGeneral
-                    ? this.settingByTemplate7.settingGeneral
-                    : null,
+                settingK07Contact: this.settingByTemplate7?.contact ?? null,
+                settingGeneral: this.settingByTemplate7?.settingGeneral ?? null,
               },
             ]
           : null,
         settingByTemplate9: this.settingByTemplate9
           ? [
               {
-                cardProduct:
-                  this.settingByTemplate9 && this.settingByTemplate9.contact
-                    ? this.settingByTemplate9.contact
-                    : null,
+                cardProduct: this.settingByTemplate9?.contact ?? null,
                 setting9General:
-                  this.settingByTemplate9 &&
-                  this.settingByTemplate9.settingGeneral
-                    ? this.settingByTemplate9.settingGeneral
-                    : null,
+                  this.settingByTemplate9?.settingGeneral ?? null,
               },
             ]
           : null,
@@ -104,45 +87,29 @@ export default {
         settingByTemplate10: this.settingByTemplate10
           ? [
               {
-                contact:
-                  this.settingByTemplate10 && this.settingByTemplate10.contact
-                    ? this.settingByTemplate10.contact
-                    : null,
+                contact: this.settingByTemplate10?.contact ?? null,
                 setting10General:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.settingGeneral
-                    ? this.settingByTemplate10.settingGeneral
-                    : null,
+                  this.settingByTemplate10?.settingGeneral ?? null,
               },
             ]
           : null,
+
         settingByTemplate11: this.settingByTemplate11
           ? [
               {
-                contact:
-                  this.settingByTemplate11 && this.settingByTemplate11.contact
-                    ? this.settingByTemplate11.contact
-                    : null,
+                contact: this.settingByTemplate11?.contact ?? null,
                 setting11General:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.settingGeneral
-                    ? this.settingByTemplate11.settingGeneral
-                    : null,
+                  this.settingByTemplate11?.settingGeneral ?? null,
               },
             ]
           : null,
+
         settingByTemplate13: this.settingByTemplate13
           ? [
               {
-                contact:
-                  this.settingByTemplate13 && this.settingByTemplate13.contact
-                    ? this.settingByTemplate13.contact
-                    : null,
+                contact: this.settingByTemplate13?.contact ?? null,
                 settingGeneral:
-                  this.settingByTemplate13 &&
-                  this.settingByTemplate13.settingGeneral
-                    ? this.settingByTemplate13.settingGeneral
-                    : null,
+                  this.settingByTemplate13?.settingGeneral ?? null,
               },
             ]
           : null,
