@@ -305,42 +305,91 @@
             <el-collapse>
               <el-collapse-item :title="$t('mcompra_infoComprador')" name="1">
                 <div class="content-info-buyer" v-if="orden.usuario == 30866">
-                  <p class="name" v-if="mensajeWa && mensajeWa.nombre">
-                    {{ $t('mcompra_nombre') }}
-                    <span class="value-data">{{ mensajeWa.nombre }}</span>
-                  </p>
-                  <p class="name" v-if="mensajeWa && mensajeWa.phone">
-                    {{ $t('footer_formIdenti') }}
-                    <span class="value-data">{{ mensajeWa.phone }}</span>
-                  </p>
-                  <p class="name" v-if="mensajeWa && mensajeWa.correo">
-                    {{ $t('footer_formCorreo') }}
-                    <span class="value-data">{{ mensajeWa.correo }}</span>
-                  </p>
-                  <p class="name" v-if="mensajeWa && mensajeWa.identificacion">
-                    {{ $t('footer_formPhone') }}
-                    <span class="value-data">
-                      {{ mensajeWa.identificacion }}
-                    </span>
-                  </p>
-                  <p class="name" v-if="mensajeWa && mensajeWa.ciudad">
-                    {{ $t('footer_formDepartamento') }}
-                    <span class="value-data">{{ mensajeWa.ciudad }}</span>
-                  </p>
-                  <p class="name" v-if="mensajeWa && mensajeWa.barrio">
-                    {{ $t('footer_formBarrio') }}
-                    <span class="value-data">{{ mensajeWa.barrio }}</span>
-                  </p>
-                  <p class="address">
-                    {{ $t('mcompra_direccion') }}
-                    <span
-                      class="value-data"
-                      v-if="mensajeWa && mensajeWa.direccion"
+                  <div
+                    class="content-info-buyer"
+                    v-if="tempData && tempData.state"
+                  >
+                    <p
+                      class="name"
+                      v-if="tempData && tempData.dataCustomer.nombre"
                     >
-                      {{ mensajeWa.direccion }}
-                    </span>
+                      {{ $t('mcompra_nombre') }}
+                      <span class="value-data">
+                        {{ tempData.dataCustomer.nombre }}
+                      </span>
+                    </p>
                     <span class="value-data" v-else>N/A</span>
-                  </p>
+                    <p
+                      class="name"
+                      v-if="tempData && tempData.dataCustomer.phone"
+                    >
+                      {{ $t('footer_formIdenti') }}
+                      <span class="value-data">
+                        {{ tempData.dataCustomer.phone }}
+                      </span>
+                    </p>
+                    <span class="value-data" v-else>N/A</span>
+                    <p
+                      class="name"
+                      v-if="tempData && tempData.dataCustomer.correo"
+                    >
+                      {{ $t('footer_formCorreo') }}
+                      <span class="value-data">
+                        {{ tempData.dataCustomer.correo }}
+                      </span>
+                    </p>
+                    <span class="value-data" v-else>N/A</span>
+                    <p
+                      class="name"
+                      v-if="tempData && tempData.dataCustomer.identificacion"
+                    >
+                      {{ $t('footer_formPhone') }}
+                      <span class="value-data">
+                        {{ tempData.dataCustomer.identificacion }}
+                      </span>
+                    </p>
+                    <span class="value-data" v-else>N/A</span>
+                    <p
+                      class="name"
+                      v-if="tempData && tempData.dataCustomer.ciudad"
+                    >
+                      {{ $t('footer_formDepartamento') }}
+                      <span class="value-data">
+                        {{ tempData.dataCustomer.ciudad }}
+                      </span>
+                    </p>
+                    <span class="value-data" v-else>N/A</span>
+                    <p
+                      class="name"
+                      v-if="tempData && tempData.dataCustomer.barrio"
+                    >
+                      {{ $t('footer_formBarrio') }}
+                      <span class="value-data">
+                        {{ tempData.dataCustomer.barrio }}
+                      </span>
+                    </p>
+                    <span class="value-data" v-else>N/A</span>
+                    <p class="address">
+                      {{ $t('mcompra_direccion') }}
+                      <span
+                        class="value-data"
+                        v-if="tempData && tempData.dataCustomer.direccion"
+                      >
+                        {{ tempData.dataCustomer.direccion }}
+                      </span>
+                      <span class="value-data" v-else>N/A</span>
+                    </p>
+                  </div>
+                  <div
+                    v-for="(items, index) in tempData.dataCustomer"
+                    v-else
+                    :key="index"
+                  >
+                    <p class="name" v-if="items.textInput && items.value">
+                      {{ items.textInput }}
+                      <span class="value-data">{{ items.value }}</span>
+                    </p>
+                  </div>
                 </div>
                 <div
                   class="content-info-buyer"
@@ -589,6 +638,10 @@ export default {
       productDataHoko: {},
       stateHoko: false,
       direccion_entrega: {},
+      tempData: {
+        state: false,
+        dataCustomer: {},
+      },
     }
   },
   computed: {
@@ -614,8 +667,25 @@ export default {
   },
   methods: {
     setUser() {
-      if (this.orden.usuario === 30866) {
-        this.mensajeWa = JSON.parse(this.orden.venta.comentario)
+      if (this.orden.usuario == 30866) {
+        if (this.orden.mensajes && this.orden.mensajes.length > 0) {
+          this.tempData.dataCustomer = JSON.parse(this.orden.venta.comentario)
+          if (
+            this.tempData.dataCustomer.nombre &&
+            this.tempData.dataCustomer.phone &&
+            this.tempData.dataCustomer.identificacion &&
+            this.tempData.dataCustomer.direccion &&
+            this.tempData.dataCustomer.barrio &&
+            this.tempData.dataCustomer.ciudad
+          ) {
+            this.tempData.state = true
+          } else {
+            this.tempData.state = false
+          }
+        } else {
+          this.tempData.dataCustomer = null
+          this.tempData.state = false
+        }
       }
     },
     setTransportadora() {
