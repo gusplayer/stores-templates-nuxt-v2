@@ -691,13 +691,10 @@ export default {
     },
     addShoppingCartWhatsApp() {
       if (this.removeItemsCart()) {
-        if (!this.data.cantidad) {
-          this.data.cantidad = this.quantityValue
-        }
         const product = {
           id: this.data.detalle.id,
           precio: this.salesData.precio,
-          cantidad: this.data.cantidad,
+          cantidad: this.quantityValue,
           foto_cloudinary: this.data.detalle.foto_cloudinary,
           nombre: this.data.detalle.nombre,
           combinacion: this.salesData.combinacion,
