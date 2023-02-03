@@ -144,7 +144,6 @@ export default {
         e.origin.includes('http://localhost:8080') ||
         e.origin.includes('https://panel.komercia.xyz')
       ) {
-        console.log('3', e)
         if (e && e.data && e.data.component) {
           this.$store.commit('SET_CURRENTSETTING99', e.data)
           switch (e.data.component) {
@@ -201,6 +200,14 @@ export default {
               this.$store.commit('SET_OPEN_ORDER', false)
               break
           }
+        }
+        if (e && e.data && e.data.checkout) {
+          if (e.data.setting) {
+            this.$store.state.dataStore.whatsapp_checkout.configuration =
+              e.data.setting
+          }
+          this.$store.commit('SET_OPEN_ORDER', true)
+          this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', true)
         }
       }
     },
