@@ -26,12 +26,11 @@
                     v-for="(product, index) in productsCart"
                     :key="index"
                   >
-                    <div class="photo">
-                      <img
-                        v-lazy="idCloudinary(product.foto_cloudinary, 150, 150)"
-                        alt="Product Img"
-                      />
-                    </div>
+                    <img
+                      v-lazy="idCloudinary(product.foto_cloudinary, 150, 150)"
+                      alt="Product Img"
+                      class="img_product"
+                    />
                     <div class="w-full flex flex-col">
                       <div class="name">
                         <p class="order-text" style="font-weight: bold">
@@ -41,8 +40,8 @@
                           <b class="unidades"
                             >{{ $t('cart_cantidad') }} {{ product.cantidad }}</b
                           >
-                          <b class="unidades"
-                            >X{{
+                          <b class="unidades">
+                            X{{
                               product.precio
                                 | currency(
                                   dataStore.tienda.codigo_pais,
@@ -101,13 +100,15 @@
                           type="danger"
                           v-if="product.activo == 0"
                           style="background-color: rgb(223, 62, 62)"
-                          >Producto agotado!
+                        >
+                          Producto agotado!
                         </el-tag>
                         <el-tag
                           type="danger"
                           style="background-color: rgb(223, 62, 62)"
                           v-if="product.stock_disponible == 0"
-                          >¡No tiene las unidades disponibles!
+                        >
+                          ¡No tiene las unidades disponibles!
                         </el-tag>
                       </div>
                     </div>
@@ -500,13 +501,12 @@
           </template>
           <div class="order--wrapper" v-else>
             <div class="w-full flex flex-col justify-center items-center">
-              <div class="wrapper_photo">
-                <img
-                  src="../../../assets/img/icono_cesta.png"
-                  class="photo"
-                  alt="Product img"
-                />
-              </div>
+              <img
+                src="../../../assets/img/icono_cesta.png"
+                style="width: 220px"
+                class="object-cover object-bottom"
+                alt="Product img"
+              />
               <p class="text-empty">{{ $t('footer_carritoVacio2') }}</p>
               <p class="text-empty2">
                 {{ $t('footer_carritoVacio3') }}
@@ -1962,7 +1962,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ededed;
-  padding: 15px 25px;
+  padding: 15px 23px;
   flex: none;
 }
 .leftright,
@@ -2033,7 +2033,7 @@ export default {
   align-items: center;
   justify-content: space-around;
   border-bottom: 1px solid #ededed;
-  padding: 10px 25px;
+  padding: 10px 23px;
   overflow-x: auto;
 }
 .order_products_list_item::-webkit-scrollbar {
@@ -2049,13 +2049,7 @@ export default {
   background: #2c2930;
   border-radius: 10px;
 }
-.photo {
-  width: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.order_products_list_item .photo img {
+.img_product {
   max-width: 50px;
   max-height: 50px;
   border-radius: 5px;
@@ -2146,7 +2140,7 @@ export default {
 }
 .content-remove-cart {
   margin-top: 10px;
-  max-width: 350px;
+  max-width: 364px;
   padding: 8px 10px;
   transition: all ease 0.3s;
 }
@@ -2242,7 +2236,7 @@ export default {
 }
 .order_total {
   border-top: 1px solid #ededed;
-  padding: 0 25px;
+  padding: 0 23px;
 }
 .order_total_domicile,
 .order_total_net {
@@ -2325,7 +2319,7 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
-  max-width: 350px;
+  max-width: 364px;
   color: #2c2930;
   font-size: 14px;
   letter-spacing: 1px;
@@ -2339,7 +2333,7 @@ export default {
 }
 .continue_shopping {
   width: 100%;
-  max-width: 350px;
+  max-width: 364px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2375,7 +2369,7 @@ export default {
   background-color: transparent;
   padding: 8px 10px;
   width: 100%;
-  max-width: 350px;
+  max-width: 364px;
   color: #2c2930;
   border: 2px solid #2c2930;
   border-radius: var(--radius_btn);
@@ -2390,11 +2384,6 @@ export default {
 .continue_shopping2:hover {
   color: #a1a1a1;
   border: 2px solid #a1a1a1;
-}
-.wrapper_photo {
-  position: relative;
-  max-width: 600px;
-  max-height: 600px;
 }
 .photo {
   /* width: 120px; */
@@ -2425,7 +2414,6 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
 .slide-enter-active {
   transition: all 0.3s ease;
 }
@@ -2481,7 +2469,7 @@ details[open] summary ~ * {
   margin-top: 10px;
   padding: 8px 10px;
   width: 100%;
-  max-width: 350px;
+  max-width: 364px;
   border-radius: var(--radius_btn);
   color: #fff;
   border: solid 2px #2c2930;
@@ -2500,7 +2488,6 @@ details[open] summary ~ * {
   background-color: #25d366;
   color: #fff;
 }
-
 .wrapper-items-form {
   position: absolute;
   height: calc(100vh);
