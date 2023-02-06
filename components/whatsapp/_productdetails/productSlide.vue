@@ -3,14 +3,14 @@
     <el-carousel height="400px" :interval="8000" class="w-full h-full">
       <el-carousel-item>
         <img
-          v-lazy="idCloudinary(photo, 400, 400)"
+          v-lazy="idCloudinary(photo, 850, 850)"
           alt="Product img"
           class="photo"
         />
       </el-carousel-item>
       <el-carousel-item v-for="photo in photos" :key="photo.id">
         <img
-          v-lazy="idCloudinary(photo.foto_cloudinary, 400, 400)"
+          v-lazy="idCloudinary(photo.foto_cloudinary, 850, 850)"
           class="photo"
           alt="Product img"
         />
