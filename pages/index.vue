@@ -5,6 +5,7 @@
 </template>
 <script>
 // import KoTemplate6 from './template6/index'
+import { mapState } from 'vuex'
 export default {
   components: {
     KoTemplate5: () => import('./template5/index'),
@@ -19,9 +20,7 @@ export default {
     KoTemplateWhatsApp: () => import('./template99/index'),
   },
   computed: {
-    template() {
-      return this.$store.state.template
-    },
+    ...mapState(['template']),
     indexTemplate() {
       let productListComponent = ''
       switch (this.template) {

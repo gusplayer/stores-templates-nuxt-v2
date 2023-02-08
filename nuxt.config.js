@@ -37,7 +37,7 @@ export default {
     '~/plugins/mixinCommonMethods',
     '~/plugins/material-icons',
     '~plugins/validate.js',
-    '~/plugins/FacebookPixel',
+    // '~/plugins/FacebookPixel',
     { src: '~/plugins/i18n' },
     { src: '~/plugins/chatFacebook.js', ssr: false },
     { src: '~/plugins/fuse.js', ssr: false },
@@ -49,7 +49,12 @@ export default {
   ],
   // '@/modules/generator'
   buildModules: ['@nuxtjs/tailwindcss'],
-  modules: ['@nuxtjs/gtm', '@nuxtjs/sitemap'],
+  modules: ['@nuxtjs/gtm', '@nuxtjs/sitemap', 'nuxt-facebook-pixel-module'],
+  facebook: {
+    /* module options */
+    pixelId: '671820736795254',
+    autoPageView: true,
+  },
   sitemap: {
     // hostname: 'https://komercia.store',
     gzip: true,
