@@ -30,6 +30,14 @@ export default {
     }
   },
   mounted() {
+    if (
+      this.analytics_tagmanager &&
+      this.analytics_tagmanager.pixel_facebook != null
+    ) {
+      this.$fb.setPixelId(this.analytics_tagmanager.pixel_facebook)
+      this.$fb.track('PageView')
+      this.$fb.enable()
+    }
     this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_SHOPPING_CART')
     if (this.$route.query && this.$route.query.clearCart == 'true') {
@@ -38,14 +46,6 @@ export default {
     }
     if (this.$route.query && this.$route.query.openCart == 'true') {
       this.$store.commit('SET_OPEN_ORDER', true)
-    }
-    if (
-      this.analytics_tagmanager &&
-      this.analytics_tagmanager.pixel_facebook != null
-    ) {
-      window.fbq('track', 'PageView', {
-        description: 'StoreKomerciaWhatsapp',
-      })
     }
   },
   head() {
