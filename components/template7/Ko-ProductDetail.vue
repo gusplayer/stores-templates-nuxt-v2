@@ -835,12 +835,11 @@ export default {
       }
       json = JSON.stringify(json)
       if (json) {
+        this.$store.dispatch('SEND_ADD_TO_CART', 2)
         if (this.layourUnicentro == true) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
-          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
-          this.$store.dispatch('SEND_ADD_TO_CART', 2)
         }
       }
     },
