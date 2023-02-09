@@ -184,7 +184,7 @@ export default {
       if (value) {
         location.href = '/productos/?search=' + value
         if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-          window.fbq('track', 'Search', { value: value })
+          window.fbq('track', 'Search', { search_string: value })
         }
       } else {
         location.href = '/productos/?search=' + ''

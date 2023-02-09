@@ -11,6 +11,7 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import KoMicompra from '../components/miCompra/Ko-miCompra-1'
 
 export default {
@@ -55,12 +56,7 @@ export default {
     }
   },
   computed: {
-    template() {
-      return this.$store.state.template
-    },
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState(['template', 'dataStore']),
   },
   methods: {
     setDataOrder(value) {

@@ -59,7 +59,7 @@ export default {
     SearchProduct(search) {
       this.$store.commit('SET_SEARCH_VALUE', search)
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-        window.fbq('track', 'Search', { value: search })
+        window.fbq('track', 'Search', { search_string: search })
       }
     },
   },

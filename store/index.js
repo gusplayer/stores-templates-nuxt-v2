@@ -1135,7 +1135,7 @@ export const actions = {
           })
           if (array && content) {
             window.fbq('track', eventFacebook, {
-              content_type: 'Product',
+              content_type: 'product',
               content_ids: array,
               contents: content,
               currency: state.dataStore.tienda.moneda,
