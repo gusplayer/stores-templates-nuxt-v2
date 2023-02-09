@@ -628,9 +628,9 @@ export default {
       let content = []
       this.orden.productos.map((element) => {
         if (element) {
-          array.push(`${element.carrito}`)
+          array.push(`${element.producto.id}`)
           let temp = {
-            id: `${element.carrito}`,
+            id: `${element.producto.id}`,
             quantity: element.unidades,
           }
           content.push(temp)
