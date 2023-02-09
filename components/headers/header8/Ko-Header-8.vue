@@ -279,7 +279,7 @@ export default {
       if (value) {
         location.href = '?search=' + value
         if (this.FacebookPixel && this.FacebookPixel.pixel_facebook != null) {
-          window.fbq('track', 'Search', { value: value })
+          window.fbq('track', 'Search', { search_string: value })
         }
       } else {
         location.href = '?search=' + ''

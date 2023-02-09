@@ -591,6 +591,11 @@ export default {
     ValidationProvider,
   },
   mounted() {
+    if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+      this.$fb.setPixelId(this.facebookPixel.pixel_facebook)
+      this.$fb.track('PageView')
+      this.$fb.enable()
+    }
     this.routePrev()
     this.setCity()
     this.clearCart()
@@ -780,9 +785,9 @@ export default {
       let content = []
       this.orden.productos.map((element) => {
         if (element) {
-          array.push(`${element.carrito}`)
+          array.push(`${element.producto.id}`)
           let temp = {
-            id: `${element.carrito}`,
+            id: `${element.producto.id}`,
             quantity: element.unidades,
           }
           content.push(temp)
@@ -790,12 +795,12 @@ export default {
       })
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Purchase', {
-          content_type: 'Product',
+          content_type: 'product',
           content_ids: array,
           contents: content,
-          description: `Estado de la venta: ${this.choiceState.ref}`,
           value: this.orden.venta.total,
           currency: this.dataStore.tienda.moneda,
+          description: `Orden: ${this.numOrden}, Estado de la venta: ${this.choiceState.ref}`,
         })
       }
     },

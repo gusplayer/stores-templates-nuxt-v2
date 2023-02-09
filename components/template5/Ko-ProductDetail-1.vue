@@ -337,7 +337,6 @@
             >
               {{ $t('productdetail_btnComprar') }}
             </button>
-
             <div class="content_buy_action-responsive" v-else-if="spent">
               <p class="card-info-1-res">{{ $t('home_cardAgotado') }}</p>
             </div>
@@ -531,18 +530,18 @@ export default {
               this.facebookPixel.pixel_facebook != null
             ) {
               window.fbq('track', 'ViewContent', {
-                content_type: 'Product',
+                content_type: 'product',
                 content_ids: [`${this.data.detalle.id}`],
+                contents: [
+                  {
+                    id: `${this.data.detalle.id}`,
+                    quantity: this.quantityValue,
+                  },
+                ],
                 value: this.salesData.precio ? this.salesData.precio : 0,
-                content_name: this.data.detalle.nombre,
                 currency: this.dataStore.tienda.moneda,
-                content_category:
-                  this.data.detalle.categoria_producto &&
-                  this.data.detalle.categoria_producto.nombre_categoria_producto
-                    ? this.data.detalle.categoria_producto
-                        .nombre_categoria_producto
-                    : 'category',
-                description: 'Description Product',
+                content_name: this.data.detalle.nombre,
+                content_category: 'otro',
               })
             }
           })
@@ -845,7 +844,6 @@ export default {
           property: 'product:catalog_id',
           content: this.data && this.data.detalle ? this.data.detalle.id : '',
         },
-
         {
           hid: 'og:title',
           property: 'og:title',

@@ -561,17 +561,18 @@ export default {
               this.facebookPixel.pixel_facebook != null
             ) {
               window.fbq('track', 'ViewContent', {
-                content_name: this.data.detalle.nombre,
+                content_type: 'product',
                 content_ids: [`${this.data.detalle.id}`],
-                content_type: 'Product',
+                contents: [
+                  {
+                    id: `${this.data.detalle.id}`,
+                    quantity: this.quantityValue,
+                  },
+                ],
                 value: this.salesData.precio ? this.salesData.precio : 0,
                 currency: this.dataStore.tienda.moneda,
-                content_category:
-                  this.data.detalle.categoria_producto &&
-                  this.data.detalle.categoria_producto.nombre_categoria_producto
-                    ? this.data.detalle.categoria_producto
-                        .nombre_categoria_producto
-                    : 'category',
+                content_name: this.data.detalle.nombre,
+                content_category: 'otro',
               })
             }
           })

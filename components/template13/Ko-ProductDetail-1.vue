@@ -504,18 +504,18 @@ export default {
               this.facebookPixel.pixel_facebook != null
             ) {
               window.fbq('track', 'ViewContent', {
-                content_type: 'Product',
+                content_type: 'product',
                 content_ids: [`${this.data.detalle.id}`],
+                contents: [
+                  {
+                    id: `${this.data.detalle.id}`,
+                    quantity: this.quantityValue,
+                  },
+                ],
                 value: this.salesData.precio ? this.salesData.precio : 0,
-                content_name: this.data.detalle.nombre,
                 currency: this.dataStore.tienda.moneda,
-                content_category:
-                  this.data.detalle.categoria_producto &&
-                  this.data.detalle.categoria_producto.nombre_categoria_producto
-                    ? this.data.detalle.categoria_producto
-                        .nombre_categoria_producto
-                    : 'category',
-                description: 'Description Product',
+                content_name: this.data.detalle.nombre,
+                content_category: 'otro',
               })
             }
           })
@@ -728,7 +728,6 @@ export default {
       let baseUrlPc = 'https://web.whatsapp.com/send?'
       let urlProduct = window.location.href
       let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, seguro te va a encantar: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
-
       if (this.mobileCheck()) {
         window.open(`${baseUrlMovil}text=${text}`, '_blank')
       } else {

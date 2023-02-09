@@ -1799,7 +1799,7 @@ export default {
       })
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
         window.fbq('track', 'Purchase', {
-          content_type: 'Product',
+          content_type: 'product',
           content_ids: array,
           contents: content,
           description: `Comprar finalizada WhatsApp`,
