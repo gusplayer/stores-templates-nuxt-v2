@@ -358,6 +358,9 @@ export default {
       'productsData',
       'beforeCombination',
     ]),
+    FacebookPixel() {
+      return this.$store.state.analytics_tagmanager
+    },
     envios() {
       return this.dataStore.medios_envio
     },
@@ -467,6 +470,25 @@ export default {
               this.sellers.state = temp.state
             }
             this.loading = false
+            if (
+              this.FacebookPixel &&
+              this.FacebookPixel.pixel_facebook != null
+            ) {
+              window.fbq('track', 'ViewContent', {
+                content_type: 'product',
+                content_ids: [`${this.data.detalle.id}`],
+                contents: [
+                  {
+                    id: `${this.data.detalle.id}`,
+                    quantity: this.quantityValue,
+                  },
+                ],
+                value: this.salesData.precio ? this.salesData.precio : 0,
+                currency: this.dataStore.tienda.moneda,
+                content_name: this.data.detalle.nombre,
+                content_category: 'otro',
+              })
+            }
           })
       } else {
         this.selectedPhoto(this.productsData[0].foto_cloudinary)
@@ -902,6 +924,177 @@ export default {
       }
       return ''
     },
+  },
+  head() {
+    return {
+      title: `Vista del producto ${
+        this.data && this.data.detalle ? this.data.detalle.nombre : ''
+      }`,
+      meta: [
+        {
+          hid: 'product:catalog_id',
+          property: 'product:catalog_id',
+          content: this.data && this.data.detalle ? this.data.detalle.id : '',
+        },
+
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            this.data && this.data.detalle ? this.data.detalle.nombre : '',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: this.sharing && this.sharing.url ? this.sharing.url : '',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            this.data && this.data.info ? this.data.info.descripcion_corta : '',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content:
+            this.data && this.data.detalle
+              ? this.data.detalle.foto_cloudinary
+              : '',
+        },
+        {
+          hid: 'og:price:amount',
+          property: 'og:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+        },
+        {
+          hid: 'og:price:currency',
+          property: 'og:price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+        {
+          hid: 'product:brand',
+          property: 'product:brand',
+          content:
+            this.data && this.data.info && this.data.info.marca
+              ? this.data.info.marca
+              : '',
+        },
+        {
+          hid: 'product:availability',
+          property: 'product:availability',
+          content:
+            this.salesData && this.salesData.unidades > 0
+              ? 'in stock'
+              : 'out of stock',
+        },
+        {
+          hid: 'product:condition',
+          property: 'product:condition',
+          content: 'new',
+        },
+        {
+          hid: 'product:price:amount',
+          property: 'product:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+        },
+        {
+          hid: 'product:price:currency',
+          property: 'product:price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+        {
+          hid: 'product:sale_price:amount',
+          property: 'product:sale_price:amount',
+          content:
+            this.data &&
+            this.data.info &&
+            this.data.info.tag_promocion == 1 &&
+            this.data.info.promocion_valor
+              ? Math.trunc(
+                  this.salesData.precio /
+                    (1 - this.data.info.promocion_valor / 100)
+                )
+              : '',
+        },
+        {
+          hid: 'product:sale_price:currency',
+          property: 'product:sale_price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+      ],
+    }
+  },
+  jsonld() {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      productID:
+        this.data && this.data.detalle && this.data.detalle.id
+          ? this.data.detalle.id
+          : '',
+      name:
+        this.data && this.data.detalle && this.data.detalle.nombre
+          ? this.data.detalle.nombre.slice(0, 149)
+          : '',
+      description:
+        this.data && this.data.info && this.data.info.descripcion_corta
+          ? this.data.info.descripcion_corta.slice(0, 9998)
+          : `Producto de la tienda ${this.dataStore.tienda.nombre}`,
+      url: this.sharing && this.sharing.url ? this.sharing.url : '',
+      image:
+        this.data && this.data.detalle && this.data.detalle.foto_cloudinary
+          ? this.data.detalle.foto_cloudinary
+          : '',
+      brand:
+        this.data && this.data.info && this.data.info.marca
+          ? this.data.info.marca
+          : '',
+      sku:
+        this.salesData && this.salesData.unidades
+          ? this.salesData.unidades
+          : '',
+      offers: [
+        {
+          '@type': 'Offer',
+          price:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+          priceCurrency: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+          itemCondition: 'https://schema.org/NewCondition',
+          availability:
+            this.salesData && this.salesData.unidades > 0
+              ? 'https://schema.org/InStock'
+              : 'https://schema.org/OutOfStock',
+        },
+      ],
+      additionalProperty: [
+        {
+          '@type': 'PropertyValue',
+          propertyID: 'item_group_id',
+          value:
+            this.data && this.data.detalle
+              ? `FB${this.data.detalle.categoria_producto.id}_${this.data.detalle.categoria_producto.nombre_categoria_producto}`
+              : '',
+          status: 'active',
+        },
+      ],
+    }
   },
 }
 </script>
