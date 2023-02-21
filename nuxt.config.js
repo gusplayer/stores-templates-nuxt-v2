@@ -49,7 +49,12 @@ export default {
   ],
   // '@/modules/generator'
   buildModules: ['@nuxtjs/tailwindcss'],
-  modules: ['@nuxtjs/gtm', '@nuxtjs/sitemap', 'nuxt-facebook-pixel-module'],
+  modules: [
+    '@nuxtjs/gtm',
+    '@nuxtjs/sitemap',
+    'nuxt-facebook-pixel-module',
+    ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
+  ],
   facebook: {
     /* module options */
     pixelId: '671820736795254',
