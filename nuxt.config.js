@@ -61,7 +61,6 @@ export default {
     autoPageView: true,
   },
   sitemap: {
-    // hostname: 'https://komercia.store',
     gzip: true,
     defaults: {
       priority: 1,
@@ -92,7 +91,6 @@ export default {
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
     },
-    // publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
     optimizeCSS: true,
     parallel: true,
