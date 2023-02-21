@@ -49,14 +49,18 @@ export default {
   ],
   // '@/modules/generator'
   buildModules: ['@nuxtjs/tailwindcss'],
-  modules: ['@nuxtjs/gtm', '@nuxtjs/sitemap', 'nuxt-facebook-pixel-module'],
+  modules: [
+    '@nuxtjs/gtm',
+    '@nuxtjs/sitemap',
+    'nuxt-facebook-pixel-module',
+    ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
+  ],
   facebook: {
     /* module options */
     pixelId: '671820736795254',
     autoPageView: true,
   },
   sitemap: {
-    // hostname: 'https://komercia.store',
     gzip: true,
     defaults: {
       priority: 1,
@@ -87,7 +91,6 @@ export default {
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
     },
-    // publicPath: '/_nuxt/client/',
     transpile: ['vee-validate/dist/rules'],
     optimizeCSS: true,
     parallel: true,
