@@ -34,7 +34,9 @@
             <div class="main-images">
               <img
                 class="img-list"
-                v-lazy="idCloudinary(data.detalle.foto_cloudinary, 850, 850)"
+                v-lazy="
+                  idCloudinaryQuality(data.detalle.foto_cloudinary, 850, 850)
+                "
                 alt="Product Img"
               />
             </div>
@@ -45,7 +47,7 @@
             >
               <img
                 class="img-list"
-                v-lazy="idCloudinary(foto.foto_cloudinary, 850, 850)"
+                v-lazy="idCloudinaryQuality(foto.foto_cloudinary, 850, 850)"
                 alt="Product Img"
               />
             </div>

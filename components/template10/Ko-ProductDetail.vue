@@ -317,7 +317,7 @@
           :data="data"
           :envio="envio"
           :settingByTemplate10="settingByTemplate10"
-        ></OptionTab>
+        />
       </div>
       <!-- Productos relacionados  -->
       <div class="section-suggesProduct">

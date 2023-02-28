@@ -54,7 +54,9 @@
                       <img
                         @click="selectedPhoto(foto.foto_cloudinary)"
                         class="img-list"
-                        v-lazy="idCloudinary(foto.foto_cloudinary, 850, 850)"
+                        v-lazy="
+                          idCloudinaryQuality(foto.foto_cloudinary, 850, 850)
+                        "
                         alt="Product Img"
                       />
                     </div>
@@ -89,7 +91,7 @@
               >
                 <img
                   class="photo_main"
-                  v-lazy="idCloudinary(selectPhotoUrl, 550, 550)"
+                  v-lazy="idCloudinaryQuality(selectPhotoUrl, 850, 850)"
                   alt="Product Zoom"
                 />
               </div>
@@ -114,7 +116,7 @@
                 :photos="data.fotos"
                 :photo="data.detalle.foto_cloudinary"
                 :idYoutube="idYoutube"
-              ></ProductSlide>
+              />
             </div>
           </div>
         </div>
@@ -312,11 +314,7 @@
         </div>
       </div>
       <div class="tab">
-        <OptionTab
-          :dataStore="dataStore"
-          :data="data"
-          :envio="envio"
-        ></OptionTab>
+        <OptionTab :dataStore="dataStore" :data="data" :envio="envio" />
       </div>
       <div class="section-suggesProduct">
         <KoSuggesProduct :category="this.category.slice(0, 8)" />

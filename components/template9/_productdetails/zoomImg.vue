@@ -1,13 +1,13 @@
 <template>
   <figure
     class="zoom"
-    :style="setBackground(idCloudinary(photo, 550, 550))"
+    :style="setBackground(idCloudinary(photo, 850, 850))"
     v-on:mousemove="zoom"
   >
     <img
       class="photo_main"
       v-on:mouseover="activeZoom = !activeZoom"
-      v-lazy="idCloudinary(photo, 550, 550)"
+      v-lazy="idCloudinary(photo, 850, 850)"
       alt="Product Img"
     />
   </figure>
