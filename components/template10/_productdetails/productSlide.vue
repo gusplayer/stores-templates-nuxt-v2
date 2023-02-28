@@ -7,7 +7,7 @@
     <el-carousel-item class="w-full h-full">
       <img
         loading="lazy"
-        v-lazy="idCloudinary(photo, 550, 550)"
+        v-lazy="idCloudinaryQuality(photo, 850, 850)"
         class="photo"
         alt="Product img"
         height="550px"
@@ -21,7 +21,7 @@
     >
       <img
         loading="lazy"
-        v-lazy="idCloudinary(photo.foto_cloudinary, 550, 550)"
+        v-lazy="idCloudinaryQuality(photo.foto_cloudinary, 850, 850)"
         class="photo"
         alt="Product img"
         height="550px"

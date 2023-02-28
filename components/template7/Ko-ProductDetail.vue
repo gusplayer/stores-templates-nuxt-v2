@@ -84,7 +84,7 @@
             >
               <img
                 class="photo_main"
-                v-lazy="idCloudinary(selectPhotoUrl, 550, 550)"
+                v-lazy="idCloudinaryQuality(selectPhotoUrl, 850, 850)"
                 alt="Product Zoom"
               />
             </div>
@@ -109,7 +109,7 @@
               :photos="data.fotos"
               :photo="data.detalle.foto_cloudinary"
               :idYoutube="idYoutube"
-            ></ProductSlide>
+            />
           </div>
         </div>
         <!-- Datos derecha -->
@@ -444,11 +444,7 @@
       </div>
       <div class="section">
         <div class="features">
-          <KoDescription
-            :dataStore="dataStore"
-            :data="data"
-            :envio="envio"
-          ></KoDescription>
+          <KoDescription :dataStore="dataStore" :data="data" :envio="envio" />
         </div>
       </div>
       <!-- Productos relacionados -->

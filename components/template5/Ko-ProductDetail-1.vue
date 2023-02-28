@@ -68,7 +68,7 @@
               <img
                 loading="lazy"
                 class="photo_main"
-                v-lazy="idCloudinary(selectPhotoUrl, 550, 550)"
+                v-lazy="idCloudinaryQuality(selectPhotoUrl, 850, 850)"
                 alt="Product Zoom"
               />
             </div>
