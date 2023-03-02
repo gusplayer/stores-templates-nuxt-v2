@@ -635,5 +635,8 @@ li p {
     padding-right: 15px;
     padding-left: 15px;
   }
+  .content_product_description {
+    max-height: 600px;
+  }
 }
 </style>

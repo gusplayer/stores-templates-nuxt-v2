@@ -267,7 +267,7 @@ figure {
   .overlay-bottom {
     @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
     width: 60%;
-    height: 15%;
+    height: 26%;
     left: 20%;
     bottom: 35%;
   }
@@ -300,7 +300,7 @@ figure {
   .overlay-bottom {
     @apply absolute right-0 bottom-0 overflow-hidden transition-all ease-in duration-300;
     width: 60%;
-    height: 15%;
+    height: 26%;
     left: 20%;
     bottom: 35%;
   }
