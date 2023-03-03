@@ -50,6 +50,8 @@
             />
           </div>
         </div>
+        <div class="swiper-button-prev" v-if="filteredList.length > 3" />
+        <div class="swiper-button-next" v-if="filteredList.length > 3" />
       </div>
     </div>
   </div>
@@ -70,7 +72,8 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: '',
+        slidesPerView: 'auto',
+        loop: true,
         spaceBetween: 20,
         breakpoints: {
           10000: {
@@ -89,11 +92,18 @@ export default {
             slidesPerView: 2,
             spaceBetween: 30,
           },
-
           580: {
             slidesPerView: 1,
             spaceBetween: 10,
           },
+        },
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
       },
     }
@@ -178,6 +188,10 @@ export default {
 .description-text {
   font-family: var(--font-style-3) !important;
   color: var(--color_description);
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: var(--color_background_card) !important;
 }
 @screen sm {
   .wrapper-items-content {
