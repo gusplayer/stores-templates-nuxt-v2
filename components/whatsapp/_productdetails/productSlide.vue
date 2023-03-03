@@ -18,7 +18,7 @@
       <el-carousel-item v-if="idYoutube && idYoutube !== ''">
         <div class="youtube">
           <button class="youtube__action_back" @click="changeSlide()">
-            <i class="material-icons">keyboard_backspace</i>
+            <i class="material-icons"></i>
           </button>
           <iframe
             style="max-width: 375px; width: 100%"
