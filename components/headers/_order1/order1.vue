@@ -910,6 +910,9 @@ export default {
     // verifyProducts() {
     //   return this.$store.getters.verifyProducts
     // },
+    userDropshipping() {
+      return this.$store.getters.userDropshipping
+    },
     locationStore() {
       return this.$store.getters.locationStore
     },
@@ -1648,6 +1651,9 @@ export default {
             costo_envio: this.setShipping(),
             metodo_pago: 7,
             descuento: this.discountDescuentos ? this.discountDescuentos : 0,
+            reseller: this.userDropshipping
+              ? Number(this.userDropshipping)
+              : null,
           }
           axios
             .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)

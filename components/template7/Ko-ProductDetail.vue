@@ -420,6 +420,14 @@
                     }}
                   </p>
                 </div>
+                <div class="category_product" v-if="userDropshipping.userName">
+                  <p class="category-beffore" style="margin-right: 10px">
+                    {{ $t('productdetail_dropshipping') }}
+                  </p>
+                  <p class="category-text">
+                    {{ userDropshipping.userName }}
+                  </p>
+                </div>
                 <!-- Compartir Redes -->
                 <div class="content-shared">
                   <p class="text-unidades" style="margin-right: 10px">
@@ -495,6 +503,14 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
+    if (
+      this.$route.query &&
+      this.$route.query.userId &&
+      this.$route.query.userName
+    ) {
+      this.userDropshipping.userId = this.$route.query.userId
+      this.userDropshipping.userName = this.$route.query.userName
+    }
     // window.addEventListener('scroll', function () {
     //   var sticky = document.getElementById('sticky')
     //   if (window.pageYOffset >= 1 && screen.width > 725 && sticky) {
@@ -548,6 +564,10 @@ export default {
         quote: '',
       },
       sharingFacebook: '',
+      userDropshipping: {
+        userId: '',
+        userName: '',
+      },
     }
   },
   computed: {
@@ -789,6 +809,9 @@ export default {
         nombre: this.data.detalle.nombre,
         combinacion: this.salesData.combinacion,
         envio_gratis: this.data.detalle.envio_gratis,
+        promocion_valor: this.data.info.promocion_valor,
+        tag_promocion: this.data.info.tag_promocion,
+        dropshipping: this.userDropshipping.userId,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
@@ -821,6 +844,7 @@ export default {
           this.salesData && this.salesData.combinacion
             ? this.salesData.combinacion
             : undefined,
+        dropshipping: this.userDropshipping.userId,
       }
       let json = {
         products: [objeto],
@@ -865,7 +889,6 @@ export default {
       let baseUrlPc = 'https://web.whatsapp.com/send?'
       let urlProduct = window.location.href
       let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, seguro te va a encantar: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
-
       if (this.mobileCheck()) {
         window.open(`${baseUrlMovil}text=${text}`, '_blank')
       } else {

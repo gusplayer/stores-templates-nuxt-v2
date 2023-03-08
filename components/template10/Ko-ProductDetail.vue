@@ -164,7 +164,6 @@
                     )
                 }}
               </p>
-
               <div class="flex flex-row justify-start items-center">
                 <p class="text-price" v-show="salesData.precio">
                   {{
@@ -181,7 +180,7 @@
                     data.info.promocion_valor &&
                     salesData.precio
                   "
-                  class="ml-10 bg-black text-white-white px-2 py-2 text-14"
+                  class="card-discont"
                 >
                   {{ data.info.promocion_valor }}% De Descuento
                 </p>
@@ -222,6 +221,17 @@
                   {{ $t('productdetail_informacion') }}
                 </div>
                 <p class="txt-quantity">{{ data.info.descripcion_corta }}</p>
+              </div>
+              <div
+                class="w-full flex flex-row items-center my-8"
+                v-if="userDropshipping.userName"
+              >
+                <p class="text-variant" style="margin-right: 10px">
+                  {{ $t('productdetail_dropshipping') }}
+                </p>
+                <p class="txt-quantity">
+                  {{ userDropshipping.userName }}
+                </p>
               </div>
               <div
                 class="content-quantity-boxes"
@@ -379,6 +389,14 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
+    if (
+      this.$route.query &&
+      this.$route.query.userId &&
+      this.$route.query.userName
+    ) {
+      this.userDropshipping.userId = this.$route.query.userId
+      this.userDropshipping.userName = this.$route.query.userName
+    }
   },
   data() {
     return {
@@ -420,6 +438,11 @@ export default {
         title: '',
         description: '',
         quote: '',
+      },
+      sharingFacebook: '',
+      userDropshipping: {
+        userId: '',
+        userName: '',
       },
       networks: [
         {
@@ -708,6 +731,9 @@ export default {
         nombre: this.data.detalle.nombre,
         combinacion: this.salesData.combinacion,
         envio_gratis: this.data.detalle.envio_gratis,
+        promocion_valor: this.data.info.promocion_valor,
+        tag_promocion: this.data.info.tag_promocion,
+        dropshipping: this.userDropshipping.userId,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
@@ -740,6 +766,7 @@ export default {
           this.salesData && this.salesData.combinacion
             ? this.salesData.combinacion
             : undefined,
+        dropshipping: this.userDropshipping.userId,
       }
       let json = {
         products: [objeto],
@@ -1140,6 +1167,14 @@ export default {
   fill: #eb7025;
   transform: scale(1.5);
   @apply transition-all ease-in duration-0.2;
+}
+.card-discont {
+  color: var(--color_text_btn);
+  background-color: var(--color_background_btn);
+  padding: 2px 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 16px;
 }
 @screen sm {
   .product-content {
