@@ -178,9 +178,9 @@
                 v-for="(variant, index) in data.variantes"
                 :key="index"
               >
-                <label for="variant name" class="text-variant"
-                  >{{ variant.nombre }}:</label
-                >
+                <label for="variant name" class="text-variant">
+                  {{ variant.nombre }}:
+                </label>
                 <SelectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"
@@ -193,6 +193,17 @@
                   </option>
                 </SelectGroup>
               </div>
+            </div>
+            <div
+              class="w-full flex flex-row items-center my-8"
+              v-if="userDropshipping.userName"
+            >
+              <p class="text-variant" style="margin-right: 10px">
+                {{ $t('productdetail_dropshipping') }}
+              </p>
+              <p class="stock-text-2">
+                {{ userDropshipping.userName }}
+              </p>
             </div>
             <div class="w-full flex flex-row items-center my-8">
               <p class="text-variant" style="margin-right: 10px">
@@ -374,6 +385,14 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
+    if (
+      this.$route.query &&
+      this.$route.query.userId &&
+      this.$route.query.userName
+    ) {
+      this.userDropshipping.userId = this.$route.query.userId
+      this.userDropshipping.userName = this.$route.query.userName
+    }
   },
   data() {
     return {
@@ -415,6 +434,10 @@ export default {
         quote: '',
       },
       sharingFacebook: '',
+      userDropshipping: {
+        userId: '',
+        userName: '',
+      },
     }
   },
   computed: {
@@ -653,6 +676,9 @@ export default {
         nombre: this.data.detalle.nombre,
         combinacion: this.salesData.combinacion,
         envio_gratis: this.data.detalle.envio_gratis,
+        promocion_valor: this.data.info.promocion_valor,
+        tag_promocion: this.data.info.tag_promocion,
+        dropshipping: this.userDropshipping.userId,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
@@ -685,6 +711,7 @@ export default {
           this.salesData && this.salesData.combinacion
             ? this.salesData.combinacion
             : undefined,
+        dropshipping: this.userDropshipping.userId,
       }
       let json = {
         products: [objeto],
@@ -1155,14 +1182,14 @@ export default {
 .content-quantity-boxes {
   @apply w-full flex flex-row justify-start items-center my-8;
 }
-
 .card-discont {
-  background: black;
-  color: white;
+  color: var(--color_text_btn);
+  background-color: var(--color_background_btn);
   padding: 2px 10px;
   margin-left: 5px;
   margin-right: 5px;
   font-size: 16px;
+  border-radius: var(--radius_btn);
 }
 .text-promocion {
   font-size: 14px;

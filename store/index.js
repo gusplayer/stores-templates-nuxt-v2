@@ -1066,6 +1066,7 @@ export const actions = {
           tag_promocion: product.tag_promocion,
           activo: product.activo,
           stock_disponible: 1,
+          dropshipping: product.dropshipping,
         }
         if (!filterCombination[0].estado) {
           newProduct.activo = 0
@@ -1092,6 +1093,7 @@ export const actions = {
           tag_promocion: product.tag_promocion,
           activo: product.activo,
           stock_disponible: 1,
+          dropshipping: product.dropshipping,
         }
         if (newProduct.cantidad == 0) {
           newProduct.activo = 0
@@ -1367,6 +1369,17 @@ export const getters = {
         }
       }
     }
+  },
+  userDropshipping(state) {
+    let userID = null
+    if (state.productsCart) {
+      state.productsCart.filter((value) => {
+        if (value.dropshipping) {
+          userID = value.dropshipping
+        }
+      })
+    }
+    return userID
   },
 
   // getSettingsCSS: (state, getters) => {

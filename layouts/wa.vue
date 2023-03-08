@@ -175,6 +175,14 @@ export default {
           name: 'Content-Security-Policy',
           content: "script-src 'none'",
         },
+        {
+          name: 'Cache-control',
+          content: 'no-cache, no-store, must-revalidate',
+        },
+        {
+          name: 'Pragma',
+          content: 'no-cache',
+        },
       ],
       script: [
         {

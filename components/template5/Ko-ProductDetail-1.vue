@@ -260,6 +260,17 @@
                       {{ $t('home_cardAgotado') }}
                     </button>
                   </div>
+                  <div
+                    class="w-full flex flex-row items-center my-10"
+                    v-if="userDropshipping.userName"
+                  >
+                    <p class="text-variant" style="margin-right: 10px">
+                      {{ $t('productdetail_dropshipping') }}
+                    </p>
+                    <p class="text-marca">
+                      {{ userDropshipping.userName }}
+                    </p>
+                  </div>
                   <div class="content-shared">
                     <p class="text-unidades" style="margin-right: 10px">
                       {{ $t('productdetail_compartir') }}
@@ -389,6 +400,14 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
+    if (
+      this.$route.query &&
+      this.$route.query.userId &&
+      this.$route.query.userName
+    ) {
+      this.userDropshipping.userId = this.$route.query.userId
+      this.userDropshipping.userName = this.$route.query.userName
+    }
   },
   data() {
     return {
@@ -436,6 +455,10 @@ export default {
         quote: '',
       },
       sharingFacebook: '',
+      userDropshipping: {
+        userId: '',
+        userName: '',
+      },
     }
   },
   computed: {
@@ -679,6 +702,7 @@ export default {
         envio_gratis: this.data.detalle.envio_gratis,
         promocion_valor: this.data.info.promocion_valor,
         tag_promocion: this.data.info.tag_promocion,
+        dropshipping: this.userDropshipping.userId,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
@@ -711,12 +735,14 @@ export default {
           this.salesData && this.salesData.combinacion
             ? this.salesData.combinacion
             : undefined,
+        dropshipping: this.userDropshipping.userId,
       }
       let json = {
         products: [objeto],
         tienda: {
           id: this.$store.state.tienda.id_tienda,
         },
+
         canal: 'KOMERCIA',
       }
       json = JSON.stringify(json)
@@ -755,7 +781,6 @@ export default {
       let baseUrlPc = 'https://web.whatsapp.com/send?'
       let urlProduct = window.location.href
       let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, seguro te va a encantar: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
-
       if (this.mobileCheck()) {
         window.open(`${baseUrlMovil}text=${text}`, '_blank')
       } else {

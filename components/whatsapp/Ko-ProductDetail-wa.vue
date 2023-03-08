@@ -92,13 +92,24 @@
               </p>
             </div>
             <div
+              class="w-full flex flex-row items-center my-8"
+              v-if="userDropshipping.userName"
+            >
+              <p class="text-marca" style="margin-right: 10px">
+                <strong>{{ $t('productdetail_dropshipping') }}</strong>
+              </p>
+              <p class="text-marca">
+                {{ userDropshipping.userName }}
+              </p>
+            </div>
+            <div
               v-if="this.data.detalle.con_variante > 0"
               class="container-variants"
             >
               <div v-for="(variant, index) in data.variantes" :key="index">
-                <label for="variant name" class="text-variant-type"
-                  >{{ variant.nombre }}:</label
-                >
+                <label for="variant name" class="text-variant-type">
+                  {{ variant.nombre }}:
+                </label>
                 <selectGroup :index="index" :variantes="data.variantes">
                   <option
                     v-for="item in variant.valores"
@@ -318,6 +329,14 @@ export default {
     if (Object.keys(this.dataStore.medios_envio).length) {
       this.setOptionEnvio()
     }
+    if (
+      this.$route.query &&
+      this.$route.query.userId &&
+      this.$route.query.userName
+    ) {
+      this.userDropshipping.userId = this.$route.query.userId
+      this.userDropshipping.userName = this.$route.query.userName
+    }
   },
   data() {
     return {
@@ -348,6 +367,10 @@ export default {
       quickSale: {
         state: false,
         dataSeller: {},
+      },
+      userDropshipping: {
+        userId: '',
+        userName: '',
       },
     }
   },
@@ -622,6 +645,9 @@ export default {
         nombre: this.data.detalle.nombre,
         combinacion: this.salesData.combinacion,
         envio_gratis: this.data.detalle.envio_gratis,
+        promocion_valor: this.data.info.promocion_valor,
+        tag_promocion: this.data.info.tag_promocion,
+        dropshipping: this.userDropshipping.userId,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
@@ -721,6 +747,9 @@ export default {
           nombre: this.data.detalle.nombre,
           combinacion: this.salesData.combinacion,
           envio_gratis: this.data.detalle.envio_gratis,
+          promocion_valor: this.data.info.promocion_valor,
+          tag_promocion: this.data.info.tag_promocion,
+          dropshipping: this.userDropshipping.userId,
         }
         if (this.salesData) {
           product.limitQuantity = this.salesData.unidades
