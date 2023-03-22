@@ -83,6 +83,24 @@
                 </p>
               </div>
             </div>
+
+            <div
+              class="w-full flex flex-row items-center my-8"
+              v-if="data.info.condicion"
+            >
+              <p class="text-marca" style="margin-right: 10px">
+                <strong>{{ $t('productdetail_condicion') }}:</strong>
+              </p>
+              <p class="text-marca">
+                <strong>
+                  {{
+                    data.info.condicion == 1
+                      ? $t('productdetail_condicionNuevo')
+                      : $t('productdetail_condicionUsado')
+                  }}
+                </strong>
+              </p>
+            </div>
             <div
               v-if="data.info.descripcion_corta"
               style="margin-top: 10px; margin-bottom: 5px"

@@ -42,14 +42,14 @@
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
         <br />
-        <div class="wrapper-pagination" v-if="fullProducts.length > 16">
+        <div class="wrapper-pagination" v-if="fullProducts.length > 18">
           <div class="pagination-medium">
             <el-pagination
               background
               small
               layout="prev, pager, next"
               :total="fullProducts.length"
-              :page-size="16"
+              :page-size="18"
               :current-page.sync="currentPage"
             />
           </div>

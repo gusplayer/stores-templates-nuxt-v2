@@ -327,6 +327,9 @@ export default {
     productdetail_cotizar: 'Cotizar',
     productdetail_productoAgotado: 'Producto agotado',
     productdetail_seleccionarOpcion: 'Seleccionar opción',
+    productdetail_condicion: 'Condición',
+    productdetail_condicionNuevo: 'Nuevo',
+    productdetail_condicionUsado: 'Usado',
   },
   en: {
     // header
@@ -650,6 +653,9 @@ export default {
     productdetail_cotizar: 'Quote',
     productdetail_productoAgotado: 'Product sold out',
     productdetail_seleccionarOpcion: 'Select option',
+    productdetail_condicion: 'Condition',
+    productdetail_condicionNuevo: 'New',
+    productdetail_condicionUsado: 'Used',
   },
   pt: {
     // header
@@ -976,6 +982,9 @@ export default {
     productdetail_cotizar: 'Citação',
     productdetail_productoAgotado: 'Produto esgotado',
     productdetail_seleccionarOpcion: 'Selecione a opção',
+    productdetail_condicion: 'Condição',
+    productdetail_condicionNuevo: 'Novo',
+    productdetail_condicionUsado: 'Usado',
   },
   fr: {
     // header
@@ -1290,5 +1299,8 @@ export default {
     productdetail_cotizar: 'Quote',
     productdetail_productoAgotado: 'Produit épuisé',
     productdetail_seleccionarOpcion: 'Sélectionnez une option',
+    productdetail_condicion: 'Condition',
+    productdetail_condicionNuevo: 'Nouveau',
+    productdetail_condicionUsado: 'Utilisé',
   },
 }
