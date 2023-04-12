@@ -15,7 +15,7 @@ import { mapState } from 'vuex'
 import KoMicompra from '../components/miCompra/Ko-miCompra-1'
 
 export default {
-  name: 'K0-indexMiCompraG',
+  name: 'K0-indexMiCompra',
   components: {
     KoMicompra,
   },
