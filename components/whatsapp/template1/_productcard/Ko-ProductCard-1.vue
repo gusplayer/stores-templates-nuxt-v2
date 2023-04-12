@@ -103,7 +103,7 @@
           <div class="Content-btn-movil">
             <div
               class="content-soldOut"
-              v-if="!this.estadoCart && !soldOut && !spent && stateSeller"
+              v-if="!this.estadoCart && !soldOut && !spent"
             >
               <div
                 v-if="this.product.precio > 0"
@@ -264,28 +264,20 @@ export default {
         return this.$store.state.settingBaseWapir
       }
     },
-    stateSeller() {
-      if (
-        this.dataStore.tienda.id_tienda === 1559 ||
-        this.dataStore.tienda.id_tienda === 16436
-      ) {
-        if (
-          this.product.dealer_whatsapp == '[object Object]' ||
-          this.product.dealer_whatsapp != null
-        ) {
-          let temp = JSON.parse(this.product.dealer_whatsapp)
-          if (temp && temp.state) {
-            return false
-          } else {
-            return true
-          }
-        } else {
-          return true
-        }
-      } else {
-        return true
-      }
-    },
+    // stateSeller() {
+    //   if (
+    //     this.dataStore.tienda.id_tienda === 1559 ||
+    //     this.dataStore.tienda.id_tienda === 16436
+    //   ) {
+    //     if (this.product.dealer_whatsapp) {
+    //       return true
+    //     } else {
+    //       return false
+    //     }
+    //   } else {
+    //     return false
+    //   }
+    // },
   },
   methods: {
     getDataProduct() {
