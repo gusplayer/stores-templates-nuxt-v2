@@ -11,8 +11,8 @@ import WaTemplate3 from './templates/template3/index'
 import WCountry from '../../components/footers/footer1/Ko-Footer-Country.vue'
 
 export default {
-  name: 'templateWhatsApp',
   layout: 'wa',
+  name: 'templateWhatsApp',
   components: { WaTemplate1, WaTemplate2, WaTemplate3, WCountry },
   computed: {
     dataStore() {
