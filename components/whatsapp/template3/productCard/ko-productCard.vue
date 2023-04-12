@@ -465,7 +465,7 @@ export default {
     },
   },
   watch: {
-    productsCarts(value) {
+    productsCarts() {
       this.getDataProduct()
     },
   },
