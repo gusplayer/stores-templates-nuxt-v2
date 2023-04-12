@@ -1274,11 +1274,11 @@ export default {
             this.dataStore.tienda.nombre
           )}%0ANumero%20de%20orden%3A%20${
             this.numberOrder
-          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20-${
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20${
             this.discountDescuentos
               ? this.dataStore.tienda.moneda == 'PEN'
-                ? 'S/'
-                : '$' + this.discountDescuentos
+                ? '- S/'
+                : '- $' + this.discountDescuentos
               : 'No%20aplica'
           }%0A%2ASubtotal%2A%3A%20${
             this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
@@ -1317,11 +1317,11 @@ export default {
             this.dataStore.tienda.nombre
           )}%0AOrder%20number%3A%20${
             this.numberOrder
-          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADiscount%2A%3A%20-${
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADiscount%2A%3A%20${
             this.discountDescuentos
               ? this.dataStore.tienda.moneda == 'PEN'
-                ? 'S/'
-                : '$' + this.discountDescuentos
+                ? '- S/'
+                : '- $' + this.discountDescuentos
               : 'Not%20applicable'
           }%0A%2ASubtotal%2A%3A%20${
             this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
@@ -1358,11 +1358,11 @@ export default {
             this.dataStore.tienda.nombre
           )}%0AN%C3%BAmero%20do%20pedido%3A%20${
             this.numberOrder
-          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADesconto%2A%3A%20-${
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADesconto%2A%3A%20${
             this.discountDescuentos
               ? this.dataStore.tienda.moneda == 'PEN'
-                ? 'S/'
-                : '$' + this.discountDescuentos
+                ? '- S/'
+                : '- $' + this.discountDescuentos
               : 'Não%20aplicável'
           }%0A%2ASubtotal%2A%3A%20${
             this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
@@ -1399,11 +1399,11 @@ export default {
             this.dataStore.tienda.nombre
           )}%0ANumero%20de%20orden%3A%20${
             this.numberOrder
-          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20-${
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20${
             this.discountDescuentos
               ? this.dataStore.tienda.moneda == 'PEN'
-                ? 'S/'
-                : '$' + this.discountDescuentos
+                ? '- S/'
+                : '- $' + this.discountDescuentos
               : 'No%20aplica'
           }%0A%2ASubtotal%2A%3A%20${
             this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
@@ -1471,11 +1471,11 @@ export default {
             this.dataStore.tienda.nombre
           )}%0AOrder%20number%3A%20${
             this.numberOrder
-          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADiscount%2A%3A%20-${
+          }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADiscount%2A%3A%20${
             this.discountDescuentos
               ? this.dataStore.tienda.moneda == 'PEN'
-                ? 'S/'
-                : '$' + this.discountDescuentos
+                ? '- S/'
+                : '- $' + this.discountDescuentos
               : 'Not%20applicable'
           }%0A%2ASubtotal%2A%3A%20${
             this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
@@ -1530,11 +1530,11 @@ export default {
               this.dataStore.tienda.nombre
             )}%0ANumero%20de%20orden%3A%20${
               this.numberOrder
-            }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20-${
+            }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20${
               this.discountDescuentos
                 ? this.dataStore.tienda.moneda == 'PEN'
-                  ? 'S/'
-                  : '$' + this.discountDescuentos
+                  ? '- S/'
+                  : '- $' + this.discountDescuentos
                 : 'No%20aplica'
             }%0A%2ASubtotal%2A%3A%20${
               this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
@@ -1559,20 +1559,16 @@ export default {
       }
       if (
         this.quickSale &&
-        this.quickSale.dataSeller &&
-        this.quickSale.dataSeller.state
+        this.quickSale.state &&
+        this.quickSale.dataSeller.phone
       ) {
         if (this.quickSale && this.quickSale.state) {
-          if (this.quickSale.dataSeller.prefix.charAt(0) == '+') {
-            console.log(this.quickSale.dataSeller.prefix)
+          if (this.quickSale.dataSeller.phone.charAt(0) == '+') {
+            let phone_number_whatsapp = this.quickSale.dataSeller.phone.slice(1)
             if (this.mobileCheck()) {
-              window.location.href = `${baseUrlMovil}${this.quickSale.dataSeller.prefix.slice(
-                1
-              )}${this.quickSale.dataSeller.phone}&text=${text}`
+              window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
             } else {
-              window.location.href = `${baseUrlPc}${this.quickSale.dataSeller.prefix.slice(
-                1
-              )}${this.quickSale.dataSeller.phone}&text=${text}`
+              window.location.href = `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
             }
           }
         }
