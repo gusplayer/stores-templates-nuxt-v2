@@ -205,7 +205,7 @@
                 : '#FFFFFF'
             };`"
             ref="color2"
-            v-if="data.info.dealer_whatsapp"
+            v-if="this.sellers && this.sellers.state"
             v-on:click="addShoppingCartWhatsApp"
           >
             <span>
@@ -229,7 +229,7 @@
               !spent &&
               salesData.precio > 0 &&
               this.salesData.estado == true &&
-              !data.info.dealer_whatsapp
+              !this.sellers.state
             "
             v-on:click="addShoppingCart"
           >
@@ -249,9 +249,7 @@
                 : '#FFFFFF'
             };`"
             ref="color2"
-            v-else-if="
-              salesData.precio == 0 && !spent && !data.info.dealer_whatsapp
-            "
+            v-else-if="salesData.precio == 0 && !spent && !this.sellers.state"
             v-on:click="WPQuotation()"
           >
             <span>
@@ -270,16 +268,13 @@
                 ? settingByTemplate.color_secundario
                 : '#FFFFFF'
             };`"
-            v-else-if="!this.salesData.estado && !data.info.dealer_whatsapp"
+            v-else-if="!this.salesData.estado && !this.sellers.state"
           >
             <span>
               {{ $t('productdetail_btnANodisponible') }}
             </span>
           </button>
-          <div
-            v-else-if="spent && !data.info.dealer_whatsapp"
-            class="wrapper-btn"
-          >
+          <div v-else-if="spent && !this.sellers.state" class="wrapper-btn">
             <p class="card-info-1-res">
               😥 {{ $t('productdetail_productoAgotado') }}
             </p>
@@ -317,6 +312,7 @@
       </div>
     </div>
     <KoOrderWa
+      v-if="quickSale.state"
       :dataStore="dataStore"
       :stateOrderWapi="true"
       :quickSale="quickSale"
@@ -379,14 +375,17 @@ export default {
         titulo: '',
         desc: '',
       },
+      activeZoom: true,
+      sellers: {
+        state: false,
+        name: '',
+        phone: '',
+        prefix: '',
+      },
       quickSale: {
         state: false,
-        dataSeller: {
-          name: '',
-          phone: '',
-        },
+        dataSeller: {},
       },
-      activeZoom: true,
       userDropshipping: {
         userId: '',
         userName: '',
@@ -503,6 +502,13 @@ export default {
             }
             if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
               this.spent = true
+            }
+            if (this.data && this.data.info.dealer_whatsapp) {
+              let temp = JSON.parse(this.data.info.dealer_whatsapp)
+              this.sellers.name = temp.name
+              this.sellers.phone = temp.phone
+              this.sellers.prefix = temp.prefix
+              this.sellers.state = temp.state
             }
             this.loading = false
             if (
@@ -780,10 +786,9 @@ export default {
         } else {
           this.$store.state.productsCart.push(product)
         }
-        this.quickSale.state = true
-        this.quickSale.dataSeller.name = this.salesData.combinacion[0]
-        this.quickSale.dataSeller.phone = this.salesData.sku
         this.$store.commit('UPDATE_CONTENT_CART')
+        this.quickSale.state = true
+        this.quickSale.dataSeller = this.sellers
         this.$store.dispatch('SEND_ADD_TO_CART', 1)
         this.$store.commit('SET_OPEN_ORDER', true)
         this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', true)
