@@ -27,9 +27,9 @@
           >
             <koWhatsApp class="button-whatsapp" />
             <span
-              >WhatsApp<br /><small>{{
-                dataStore.tienda.whatsapp
-              }}</small></span
+              >WhatsApp<br /><small>
+                {{ dataStore.tienda.whatsapp }}
+              </small></span
             >
           </div>
           <!-- <div
