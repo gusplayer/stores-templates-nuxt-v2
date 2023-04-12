@@ -849,13 +849,22 @@ export const actions = {
         state.productsData.map((product) => {
           if (product.variantes.length) {
             try {
-              product.combinaciones = JSON.parse(
-                product.variantes[0].combinaciones[0].combinaciones
-              )
+              if (
+                product.variantes[0].combinaciones[0].combinaciones &&
+                product.variantes[0].combinaciones[0].combinaciones !== 'Array'
+              ) {
+                product.combinaciones = JSON.parse(
+                  product.variantes[0].combinaciones[0].combinaciones
+                )
+              }
             } catch (err) {
-              // console.warn(product.id)
+              console.warn('Error producto especifico', product.id)
             }
-            if (product.combinaciones.length && product.con_variante > 0) {
+            if (
+              product.combinaciones &&
+              product.combinaciones.length &&
+              product.con_variante > 0
+            ) {
               const arrPrices = product.combinaciones.map(
                 (combinacion) => combinacion.precio
               )
