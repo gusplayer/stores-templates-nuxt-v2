@@ -32,7 +32,7 @@
     "element-tiptap": "^1.27.1",
     "element-ui": "^2.15.13",
     "fuse.js": "^6.6.2",
-    "nuxt": "^2.16.3",
+    "nuxt": "^2.15.8",
     "nuxt-facebook-pixel-module": "^1.6.0",
     "nuxt-jsonld": "^1.5.7",
     "swiper": "^6.8.4",
