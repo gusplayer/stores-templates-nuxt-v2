@@ -39,7 +39,7 @@
                 </template>
               </validation-provider>
             </div>
-            <div class="content-input">
+            <div class="content-input" v-if="!stateId">
               <label for="numId" class="input-label">
                 {{ $t('mcompra_inputId') }}
               </label>
@@ -432,6 +432,15 @@ export default {
     ValidationProvider,
   },
   mounted() {
+    if (this.$route.name == 'wa-slug-micompra') {
+      this.cedula = '1003915188'
+      this.stateId = true
+    } else {
+      this.stateId = false
+    }
+    if (this.$route.query.orden) {
+      this.numOrden = this.$route.query.orden
+    }
     if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
       this.$fb.setPixelId(this.facebookPixel.pixel_facebook)
       this.$fb.track('PageView')
@@ -450,10 +459,11 @@ export default {
         this.getproductHoko()
         this.stateHoko = true
       }
-    } else {
-      this.numOrden = ''
-      this.cedula = ''
     }
+    // else {
+    //   this.numOrden = ''
+    //   this.cedula = ''
+    // }
     if (this.orden && this.orden.venta) {
       this.eventFacebookPixel()
       if (this.orden.venta.created_at) {
@@ -471,6 +481,7 @@ export default {
   },
   data() {
     return {
+      stateId: false,
       dataTransporter: '',
       mensajeWa: '',
       fechaState: '',
@@ -491,6 +502,9 @@ export default {
   },
   computed: {
     ...mapState(['stateWapiME']),
+    stateLayoutWa() {
+      return this.$store.state.layoutWa
+    },
     dataHoko() {
       return this.$store.state.dataHoko
     },
@@ -787,7 +801,7 @@ table {
   padding-right: 15px;
 }
 .wrapper_micompra {
-  min-height: calc(100vh - 38px);
+  min-height: calc(100vh - 36px);
   background-color: var(--background_color_2);
   box-sizing: border-box;
   @apply flex w-full h-full justify-center items-center;
