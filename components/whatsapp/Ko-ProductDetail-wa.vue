@@ -205,7 +205,7 @@
                 : '#FFFFFF'
             };`"
             ref="color2"
-            v-if="data.info.dealer_whatsapp"
+            v-if="data.info.dealer_whatsapp === '1'"
             v-on:click="addShoppingCartWhatsApp"
           >
             <span>
@@ -229,7 +229,9 @@
               !spent &&
               salesData.precio > 0 &&
               this.salesData.estado == true &&
-              !data.info.dealer_whatsapp
+              (data.info.dealer_whatsapp === '0' ||
+                data.info.dealer_whatsapp === null ||
+                data.info.dealer_whatsapp === '')
             "
             v-on:click="addShoppingCart"
           >
@@ -250,7 +252,11 @@
             };`"
             ref="color2"
             v-else-if="
-              salesData.precio == 0 && !spent && !data.info.dealer_whatsapp
+              salesData.precio == 0 &&
+              !spent &&
+              (data.info.dealer_whatsapp === '0' ||
+                data.info.dealer_whatsapp === null ||
+                data.info.dealer_whatsapp === '')
             "
             v-on:click="WPQuotation()"
           >
@@ -270,14 +276,24 @@
                 ? settingByTemplate.color_secundario
                 : '#FFFFFF'
             };`"
-            v-else-if="!this.salesData.estado && !data.info.dealer_whatsapp"
+            v-else-if="
+              !this.salesData.estado &&
+              (data.info.dealer_whatsapp === '0' ||
+                data.info.dealer_whatsapp === null ||
+                data.info.dealer_whatsapp === '')
+            "
           >
             <span>
               {{ $t('productdetail_btnANodisponible') }}
             </span>
           </button>
           <div
-            v-else-if="spent && !data.info.dealer_whatsapp"
+            v-else-if="
+              spent &&
+              (data.info.dealer_whatsapp === '0' ||
+                data.info.dealer_whatsapp === null ||
+                data.info.dealer_whatsapp === '')
+            "
             class="wrapper-btn"
           >
             <p class="card-info-1-res">
