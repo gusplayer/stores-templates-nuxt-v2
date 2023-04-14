@@ -47,7 +47,6 @@ export default {
     { src: '~/plugins/vueLazyLoad.js', ssr: false },
     { src: '~/plugins/elementTipTap', ssr: false },
   ],
-  // '@/modules/generator'
   buildModules: ['@nuxtjs/tailwindcss'],
   modules: [
     '@nuxtjs/gtm',
