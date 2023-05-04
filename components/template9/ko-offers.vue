@@ -13,7 +13,11 @@
       class="wrapper-items"
     >
       <div class="content-items">
-        <div class="items-left">
+        <a
+          :href="`${koffers.values[0].url_redirect}`"
+          class="items-left"
+          rel="noreferrer noopener"
+        >
           <img
             class="image-left"
             :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
@@ -54,32 +58,39 @@
               </div>
             </div>
           </div>
-        </div>
+        </a>
         <a
           :href="`${koffers.values[1].url_redirect}`"
           rel="noreferrer noopener"
-          class="items-center"
-          @mouseover="hover = true"
-          @mouseleave="hover = false"
         >
-          <div class="image-static" v-if="!hover">
-            <img
-              class="image"
-              :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
-              v-if="koffers.values[1].url_img_background"
-              alt="imagen center static"
-            />
-          </div>
-          <div class="image-gif" v-if="hover">
-            <img
-              class="image"
-              :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
-              v-if="koffers.values[1].url_gift_background"
-              alt="imagen center gift"
-            />
+          <div
+            class="items-center"
+            @mouseover="hover = true"
+            @mouseleave="hover = false"
+          >
+            <div class="image-static" v-if="!hover">
+              <img
+                class="image"
+                :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
+                v-if="koffers.values[1].url_img_background"
+                alt="imagen center static"
+              />
+            </div>
+            <div class="image-gif" v-if="hover">
+              <img
+                class="image"
+                :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
+                v-if="koffers.values[1].url_gift_background"
+                alt="imagen center gift"
+              />
+            </div>
           </div>
         </a>
-        <div class="items-right">
+        <a
+          :href="`${koffers.values[2].url_redirect}`"
+          rel="noreferrer noopener"
+          class="items-right"
+        >
           <img
             class="image-right"
             :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
@@ -144,7 +155,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
