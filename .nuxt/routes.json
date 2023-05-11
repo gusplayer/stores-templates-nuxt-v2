@@ -4,239 +4,208 @@
     "path": "/blog",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/blog/index.vue",
     "chunkName": "pages/blog/index",
-    "url": "/blog",
-    "_name": "_2154b4ee"
+    "url": "/blog"
   },
   {
     "name": "cart",
     "path": "/cart",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/cart.vue",
     "chunkName": "pages/cart",
-    "url": "/cart",
-    "_name": "_2c48b804"
+    "url": "/cart"
   },
   {
     "name": "contacto",
     "path": "/contacto",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/contacto.vue",
     "chunkName": "pages/contacto",
-    "url": "/contacto",
-    "_name": "_007567b3"
+    "url": "/contacto"
   },
   {
     "name": "micompra",
     "path": "/micompra",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/micompra.vue",
     "chunkName": "pages/micompra",
-    "url": "/micompra",
-    "_name": "_14c87004"
+    "url": "/micompra"
   },
   {
     "name": "productos",
     "path": "/productos",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/productos/index.vue",
     "chunkName": "pages/productos/index",
-    "url": "/productos",
-    "_name": "_2b6d84a2"
+    "url": "/productos"
   },
   {
     "name": "productosHoko",
     "path": "/productosHoko",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/productosHoko/index.vue",
     "chunkName": "pages/productosHoko/index",
-    "url": "/productosHoko",
-    "_name": "_4640dfa6"
+    "url": "/productosHoko"
   },
   {
     "name": "template10",
     "path": "/template10",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template10/index.vue",
     "chunkName": "pages/template10/index",
-    "url": "/template10",
-    "_name": "_58ebff80"
+    "url": "/template10"
   },
   {
     "name": "template11",
     "path": "/template11",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template11/index.vue",
     "chunkName": "pages/template11/index",
-    "url": "/template11",
-    "_name": "_686eb301"
+    "url": "/template11"
   },
   {
     "name": "template12",
     "path": "/template12",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template12/index.vue",
     "chunkName": "pages/template12/index",
-    "url": "/template12",
-    "_name": "_0559347c"
+    "url": "/template12"
   },
   {
     "name": "template13",
     "path": "/template13",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template13/index.vue",
     "chunkName": "pages/template13/index",
-    "url": "/template13",
-    "_name": "_db8fcefa"
+    "url": "/template13"
   },
   {
     "name": "template5",
     "path": "/template5",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template5/index.vue",
     "chunkName": "pages/template5/index",
-    "url": "/template5",
-    "_name": "_0f6b2a8a"
+    "url": "/template5"
   },
   {
     "name": "template6",
     "path": "/template6",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template6/index.vue",
     "chunkName": "pages/template6/index",
-    "url": "/template6",
-    "_name": "_b760456a"
+    "url": "/template6"
   },
   {
     "name": "template7",
     "path": "/template7",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template7/index.vue",
     "chunkName": "pages/template7/index",
-    "url": "/template7",
-    "_name": "_3934900c"
+    "url": "/template7"
   },
   {
     "name": "template8",
     "path": "/template8",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template8/index.vue",
     "chunkName": "pages/template8/index",
-    "url": "/template8",
-    "_name": "_63cd7a66"
+    "url": "/template8"
   },
   {
     "name": "template9",
     "path": "/template9",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template9/index.vue",
     "chunkName": "pages/template9/index",
-    "url": "/template9",
-    "_name": "_62fdf58e"
+    "url": "/template9"
   },
   {
     "name": "template99",
     "path": "/template99",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template99/index.vue",
     "chunkName": "pages/template99/index",
-    "url": "/template99",
-    "_name": "_4d217401"
+    "url": "/template99"
   },
   {
     "name": "termsandconditions",
     "path": "/termsandconditions",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/termsandconditions.vue",
     "chunkName": "pages/termsandconditions",
-    "url": "/termsandconditions",
-    "_name": "_6debfd8c"
+    "url": "/termsandconditions"
   },
   {
     "name": "unicentro",
     "path": "/unicentro",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/unicentro/index.vue",
     "chunkName": "pages/unicentro/index",
-    "url": "/unicentro",
-    "_name": "_323ffde4"
+    "url": "/unicentro"
   },
   {
     "name": "template6-index_macrobrand",
     "path": "/template6/index_macrobrand",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template6/index_macrobrand.vue",
     "chunkName": "pages/template6/index_macrobrand",
-    "url": "/template6/index_macrobrand",
-    "_name": "_1c6471df"
+    "url": "/template6/index_macrobrand"
   },
   {
     "name": "template99-templates-template1",
     "path": "/template99/templates/template1",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template99/templates/template1/index.vue",
     "chunkName": "pages/template99/templates/template1/index",
-    "url": "/template99/templates/template1",
-    "_name": "_07b6ecda"
+    "url": "/template99/templates/template1"
   },
   {
     "name": "template99-templates-template2",
     "path": "/template99/templates/template2",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template99/templates/template2/index.vue",
     "chunkName": "pages/template99/templates/template2/index",
-    "url": "/template99/templates/template2",
-    "_name": "_dded8758"
+    "url": "/template99/templates/template2"
   },
   {
     "name": "template99-templates-template3",
     "path": "/template99/templates/template3",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/template99/templates/template3/index.vue",
     "chunkName": "pages/template99/templates/template3/index",
-    "url": "/template99/templates/template3",
-    "_name": "_25edef15"
+    "url": "/template99/templates/template3"
   },
   {
     "name": "blog-slug",
     "path": "/blog/:slug",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/blog/_slug.vue",
-    "chunkName": "pages/blog/_slug",
-    "_name": "_24c1f77e"
+    "chunkName": "pages/blog/_slug"
   },
   {
     "name": "productos-slug",
     "path": "/productos/:slug",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/productos/_slug.vue",
-    "chunkName": "pages/productos/_slug",
-    "_name": "_29b6e35a"
+    "chunkName": "pages/productos/_slug"
   },
   {
     "name": "productosHoko-slug",
     "path": "/productosHoko/:slug",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/productosHoko/_slug.vue",
-    "chunkName": "pages/productosHoko/_slug",
-    "_name": "_49ae2236"
+    "chunkName": "pages/productosHoko/_slug"
   },
   {
     "name": "wa-slug",
     "path": "/wa/:slug",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/wa/_slug/index.vue",
-    "chunkName": "pages/wa/_slug/index",
-    "_name": "_7c49c82c"
+    "chunkName": "pages/wa/_slug/index"
   },
   {
     "name": "wa-slug-blog",
     "path": "/wa/:slug?/blog",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/wa/_slug/blog/index.vue",
-    "chunkName": "pages/wa/_slug/blog/index",
-    "_name": "_cd9fd08a"
+    "chunkName": "pages/wa/_slug/blog/index"
   },
   {
     "name": "wa-slug-micompra",
     "path": "/wa/:slug?/micompra",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/wa/_slug/micompra.vue",
-    "chunkName": "pages/wa/_slug/micompra",
-    "_name": "_811dc2a0"
+    "chunkName": "pages/wa/_slug/micompra"
   },
   {
     "name": "wa-slug-blog-slugBlog",
     "path": "/wa/:slug?/blog/:slugBlog",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/wa/_slug/blog/_slugBlog.vue",
-    "chunkName": "pages/wa/_slug/blog/_slugBlog",
-    "_name": "_8a9bf896"
+    "chunkName": "pages/wa/_slug/blog/_slugBlog"
   },
   {
     "name": "wa-slug-productos-slugProduct",
     "path": "/wa/:slug?/productos/:slugProduct?",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/wa/_slug/productos/_slugProduct.vue",
-    "chunkName": "pages/wa/_slug/productos/_slugProduct",
-    "_name": "_5f34a017"
+    "chunkName": "pages/wa/_slug/productos/_slugProduct"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/gustavomoreno/Documents/template-nuxt-dokku/pages/index.vue",
     "chunkName": "pages/index",
-    "url": "/",
-    "_name": "_229a519e"
+    "url": "/"
   }
 ]
