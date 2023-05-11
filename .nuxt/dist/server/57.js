@@ -39,7 +39,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "66f90fcc"
+  "f6585df8"
   
 )
 
@@ -142,7 +142,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/_productdetails/productSlide.vue?vue&type=template&id=05d48802&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/_productdetails/productSlide.vue?vue&type=template&id=05d48802&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -284,7 +284,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "05d48802",
-  "3dc7d948"
+  "65f816de"
   
 )
 
@@ -297,7 +297,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/_productdetails/selectGroup.vue?vue&type=template&id=359a9396&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/_productdetails/selectGroup.vue?vue&type=template&id=359a9396&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -377,7 +377,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "359a9396",
-  "6e68a3f9"
+  "201d2837"
   
 )
 
@@ -575,7 +575,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "f9b99f58"
+  "445de0a8"
   
 )
 
@@ -681,7 +681,7 @@ module.exports = __webpack_require__.p + "img/gradient-line.cf353c7.png";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template12/MainSection.vue?vue&type=template&id=2f79592e&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template12/MainSection.vue?vue&type=template&id=2f79592e&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -731,7 +731,7 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/template12/MainSection.vue?vue&type=template&id=2f79592e&scoped=true&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template12/ProductCard.vue?vue&type=template&id=49661101&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template12/ProductCard.vue?vue&type=template&id=49661101&scoped=true&
 var ProductCardvue_type_template_id_49661101_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1059,7 +1059,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "49661101",
-  "6e59239b"
+  "283a07a6"
   
 )
 
@@ -1067,7 +1067,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // EXTERNAL MODULE: ./components/template12/mixins/ComponentProps.vue + 2 modules
 var ComponentProps = __webpack_require__(171);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template12/productDetail.vue?vue&type=template&id=45483c4c&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template12/productDetail.vue?vue&type=template&id=45483c4c&scoped=true&
 var productDetailvue_type_template_id_45483c4c_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1809,7 +1809,7 @@ var productDetail_component = Object(componentNormalizer["a" /* default */])(
   false,
   productDetail_injectStyles,
   "45483c4c",
-  "2c4647bc"
+  "1d0355f2"
   
 )
 
@@ -2009,7 +2009,7 @@ var MainSection_component = Object(componentNormalizer["a" /* default */])(
   false,
   MainSection_injectStyles,
   "2f79592e",
-  "35673130"
+  "c1a5691a"
   
 )
 

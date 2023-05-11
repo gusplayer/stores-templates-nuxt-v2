@@ -51,7 +51,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_productcard/ProductCard.vue?vue&type=template&id=47d45862&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_productcard/ProductCard.vue?vue&type=template&id=47d45862&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -694,7 +694,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "47d45862",
-  "6a7bedb6"
+  "00c161a6"
   
 )
 
@@ -996,7 +996,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-ProductListFilter.vue?vue&type=template&id=44622b60&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-ProductListFilter.vue?vue&type=template&id=44622b60&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1274,7 +1274,7 @@ var staticRenderFns = [];
 // EXTERNAL MODULE: ./components/template11/_productcard/ProductCard.vue + 4 modules
 var ProductCard = __webpack_require__(170);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_productcard/ProductCardFilterList.vue?vue&type=template&id=e4111a90&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_productcard/ProductCardFilterList.vue?vue&type=template&id=e4111a90&scoped=true&
 var ProductCardFilterListvue_type_template_id_e4111a90_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1942,7 +1942,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "e4111a90",
-  "e1559b8a"
+  "43f88e43"
   
 )
 
@@ -2570,7 +2570,7 @@ var ko_ProductListFilter_component = Object(componentNormalizer["a" /* default *
   false,
   ko_ProductListFilter_injectStyles,
   "44622b60",
-  "56a871b1"
+  "bea02bf4"
   
 )
 

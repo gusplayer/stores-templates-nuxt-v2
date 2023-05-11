@@ -143,7 +143,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/wa/_slug/blog/index.vue?vue&type=template&id=ef045136&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/wa/_slug/blog/index.vue?vue&type=template&id=ef045136&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -158,7 +158,7 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./pages/wa/_slug/blog/index.vue?vue&type=template&id=ef045136&scoped=true&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/blog_page/Ko-Blog.vue?vue&type=template&id=cd491306&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/blog_page/Ko-Blog.vue?vue&type=template&id=cd491306&scoped=true&
 var Ko_Blogvue_type_template_id_cd491306_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -205,7 +205,7 @@ var Ko_Blogvue_type_template_id_cd491306_scoped_true_staticRenderFns = [];
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/blog_page/Ko-blog-card.vue?vue&type=template&id=13816893&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/blog_page/Ko-blog-card.vue?vue&type=template&id=13816893&scoped=true&
 var Ko_blog_cardvue_type_template_id_13816893_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -421,7 +421,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "13816893",
-  "38ae5d9c"
+  "324eb874"
   
 )
 
@@ -536,7 +536,7 @@ var Ko_Blog_component = Object(componentNormalizer["a" /* default */])(
   false,
   Ko_Blog_injectStyles,
   "cd491306",
-  "3a132f8a"
+  "faad008e"
   
 )
 
@@ -595,7 +595,7 @@ var blog_component = Object(componentNormalizer["a" /* default */])(
   false,
   blog_injectStyles,
   "ef045136",
-  "3b4ee09b"
+  "11e9c246"
   
 )
 

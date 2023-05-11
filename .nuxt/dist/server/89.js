@@ -98,7 +98,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/blog_page/Ko-Blog.vue?vue&type=template&id=9edb7c28&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/blog_page/Ko-Blog.vue?vue&type=template&id=9edb7c28&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -159,7 +159,7 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/template7/blog_page/Ko-Blog.vue?vue&type=template&id=9edb7c28&scoped=true&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/blog_page/_blogcard/Ko-cardblog.vue?vue&type=template&id=5e91565b&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/blog_page/_blogcard/Ko-cardblog.vue?vue&type=template&id=5e91565b&scoped=true&
 var Ko_cardblogvue_type_template_id_5e91565b_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -478,7 +478,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "5e91565b",
-  "0fdabca8"
+  "949341ae"
   
 )
 
@@ -751,7 +751,7 @@ var Ko_Blog_component = Object(componentNormalizer["a" /* default */])(
   false,
   Ko_Blog_injectStyles,
   "9edb7c28",
-  "3a33e276"
+  "ce40f578"
   
 )
 
