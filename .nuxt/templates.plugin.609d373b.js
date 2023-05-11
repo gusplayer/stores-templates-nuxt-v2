@@ -129,7 +129,7 @@ function log (...messages) {
 }
 
 export default (ctx, inject) => {
-  const parsedOptions = {"pixelId":"671820736795254","track":"PageView","autoPageView":true,"version":"2.0","pixels":[],"manualMode":false,"disabled":false,"debug":false,"dev":true}
+  const parsedOptions = {"pixelId":"671820736795254","track":"PageView","autoPageView":true,"version":"2.0","pixels":[],"manualMode":false,"disabled":false,"debug":false,"dev":false}
   const isDev = parsedOptions.dev && !parsedOptions.debug
 
   if (isDev) log('You are running in development mode. Set "debug: true" in your nuxt.config.js if you would like to trigger tracking events in local.')
