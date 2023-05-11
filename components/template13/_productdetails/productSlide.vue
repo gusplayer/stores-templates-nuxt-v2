@@ -1,5 +1,5 @@
 <template>
-  <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+  <div v-swiper:mySwiper="swiperOption" class="wrapper-slider" ref="mySwiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide wrapper-image">
         <img
@@ -30,7 +30,9 @@
         </div>
       </div>
     </div>
-    <!-- <div class="swiper-pagination" slot="pagination"></div> -->
+    <div class="swiper-button-prev" v-if="photos.length > 0" />
+    <div class="swiper-button-next" v-if="photos.length > 0" />
+    <div class="swiper-pagination" />
   </div>
 </template>
 
@@ -43,18 +45,21 @@ export default {
   data() {
     return {
       swiperOption: {
+        effect: 'fade',
         slidesPerView: 'auto',
-        direction: 'horizontal',
+        loop: true,
         pagination: {
           el: '.swiper-pagination',
+          clickable: true,
         },
-        setWrapperSize: true,
-        paginationClickable: true,
-        grabCursor: true,
-        // autoplay: {
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
       },
     }
   },
@@ -67,16 +72,11 @@ export default {
     setPhoto(photo) {
       return photo
     },
-    changeSlide() {
-      this.swiper.slidePrev(500, false)
-    },
   },
 }
 </script>
 
 <style scoped>
-.swiper-wrapper {
-}
 .swiper-slide {
   width: 100%;
   max-width: 375px;
@@ -110,5 +110,13 @@ export default {
   color: var(--color_text_btn);
   border-style: none;
   outline: none;
+}
+.wrapper-slider >>> .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--color_background_btn);
+}
+.wrapper-slider >>> .swiper-button-prev,
+.wrapper-slider >>> .swiper-button-next {
+  color: var(--color_background_btn) !important;
 }
 </style>

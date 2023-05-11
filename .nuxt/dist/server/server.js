@@ -13412,6 +13412,15 @@ const actions = {
         });
       }
     }
+    // let idWapi = ''
+    // let id = {
+    //   data: {
+    //     data: {
+    //       id: 14513,
+    //       template: 13,
+    //     },
+    //   },
+    // }
     if (idWapi) {
       commit('SET_TEMPLATE_STORE', 99);
       await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi);

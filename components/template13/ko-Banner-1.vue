@@ -1,44 +1,39 @@
 <template>
-  <div class="wrapper-banner" v-if="this.banner" :style="banner">
-    <div class="content-banner">
-      <el-carousel
-        v-if="this.banner.values"
-        :indicator-position="
-          this.banner.visible_pagination == true ? '' : 'none'
-        "
-        :interval="banner.intervalo"
-        class="w-full h-full"
-        :height="checkMobile ? banner.with_banner_res : banner.with_banner"
-        :key="bannerRendering"
+  <div
+    v-if="banner"
+    ref="mySwiper"
+    v-swiper:mySwiper="swiperOption"
+    class="wrapper-banner"
+    :style="banner"
+  >
+    <div class="swiper-wrapper z-auto">
+      <a
+        :id="`slide${index + 1}`"
+        :key="index"
+        v-for="(item, index) in this.banner.values"
+        :href="item.url_redirect"
+        class="swiper-slide w-full flex justify-center items-center z-10"
+        rel="noreferrer noopener"
       >
-        <el-carousel-item v-for="(item, i) in this.banner.values" :key="i">
-          <a
-            :href="item ? item.url_redirect : ''"
-            rel="noreferrer noopener"
+        <picture>
+          <source
+            media="(max-width: 799px)"
+            :srcset="idCloudinaryBanner(item.url_img_background_res)"
+          />
+          <source
+            media="(min-width: 800px)"
+            :srcset="idCloudinaryBanner(item.url_img_background)"
+          />
+          <img
+            v-lazy="idCloudinaryBanner(item.url_img_background)"
+            alt="banner template13"
             class="w-full h-full"
-          >
-            <picture>
-              <source
-                media="(max-width: 799px)"
-                :srcset="idCloudinaryBanner(item.url_img_background_res)"
-              />
-              <source
-                media="(min-width: 800px)"
-                :srcset="idCloudinaryBanner(item.url_img_background)"
-              />
-              <img
-                v-lazy="idCloudinaryBanner(item.url_img_background)"
-                alt="banner template13"
-                class="w-full h-full"
-                :height="
-                  checkMobile ? banner.with_banner_res : banner.with_banner
-                "
-              />
-            </picture>
-          </a>
-        </el-carousel-item>
-      </el-carousel>
+            :height="checkMobile ? banner.with_banner_res : banner.with_banner"
+          />
+        </picture>
+      </a>
     </div>
+    <div v-if="banner.visible_pagination" class="swiper-pagination" />
   </div>
 </template>
 <script>
@@ -52,14 +47,44 @@ export default {
   mixins: [idCloudinaryBanner],
   mounted() {
     this.mobileCheck()
+    this.autoplayBanner()
   },
   data() {
     return {
       checkMobile: false,
-      bannerRendering: 0,
+      swiperOption: {
+        autoHeight: true,
+        effect: 'fade',
+        slidesPerView: 'auto',
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+          delay: 6000,
+          disableOnInteraction: false,
+        },
+      },
     }
   },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
+  },
   methods: {
+    autoplayBanner() {
+      if (this.banner && this.banner.values.length == 1) {
+        this.swiperOption.autoplay.delay = 900000000000000000
+      } else {
+        this.swiperOption.autoplay.delay = this.banner.intervalo
+      }
+    },
     mobileCheck() {
       window.mobilecheck = function () {
         var check = false
@@ -79,28 +104,17 @@ export default {
       this.checkMobile = window.mobilecheck()
     },
   },
+  watch: {
+    banner() {
+      this.autoplayBanner()
+    },
+  },
 }
 </script>
 
 <style scoped>
-.wrapper-banner {
-  background: transparent;
-  @apply w-full h-full flex justify-center items-center;
-}
-.content-banner {
-  @apply w-full h-full flex justify-center items-center;
-}
-.content-banner >>> .el-carousel__button {
-  background-color: var(--pagination_color);
-}
-.content-banner >>> .el-carousel__arrow {
-  background-color: var(--pagination_color);
-  color: var(--color_arrow);
-}
-.content-banner >>> .el-carousel__arrow--left {
-  z-index: 3;
-}
-.content-banner >>> .el-carousel__arrow--right {
-  z-index: 3;
+.wrapper-banner >>> .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--pagination_color);
 }
 </style>
