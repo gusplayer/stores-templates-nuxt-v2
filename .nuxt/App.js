@@ -5,9 +5,9 @@ import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch,
 import NuxtError from '..\\layouts\\error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '..\\assets\\css\\tailwind.css'
-
 import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
+
+import '..\\assets\\css\\tailwind.css'
 
 import _6f6c098b from '..\\layouts\\default.vue'
 import _6541a79f from '..\\layouts\\unicentro.vue'
@@ -189,10 +189,6 @@ export default {
     },
 
     setLayout (layout) {
-      if(layout && typeof layout !== 'string') {
-        throw new Error('[nuxt] Avoid using non-string value as layout property.')
-      }
-
       if (!layout || !layouts['_' + layout]) {
         layout = 'default'
       }

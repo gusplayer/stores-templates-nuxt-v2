@@ -59,33 +59,28 @@
             </div>
           </div>
         </a>
-        <a
-          :href="`${koffers.values[1].url_redirect}`"
+        <button
+          class="items-center"
           rel="noreferrer noopener"
+          @click="sendUrl(koffers.values[1].url_redirect)"
         >
-          <div
-            class="items-center"
-            @mouseover="hover = true"
-            @mouseleave="hover = false"
-          >
-            <div class="image-static" v-if="!hover">
-              <img
-                class="image"
-                :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
-                v-if="koffers.values[1].url_img_background"
-                alt="imagen center static"
-              />
-            </div>
-            <div class="image-gif" v-if="hover">
-              <img
-                class="image"
-                :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
-                v-if="koffers.values[1].url_gift_background"
-                alt="imagen center gift"
-              />
-            </div>
+          <div class="image-static" v-if="!hover">
+            <img
+              class="image"
+              :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
+              v-if="koffers.values[1].url_img_background"
+              alt="imagen center static"
+            />
           </div>
-        </a>
+          <div class="image-gif" v-if="hover">
+            <img
+              class="image"
+              :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
+              v-if="koffers.values[1].url_gift_background"
+              alt="imagen center gift"
+            />
+          </div>
+        </button>
         <a
           :href="`${koffers.values[2].url_redirect}`"
           rel="noreferrer noopener"
@@ -173,6 +168,11 @@ export default {
     return {
       hover: false,
     }
+  },
+  methods: {
+    sendUrl(value) {
+      window.location = value
+    },
   },
 }
 </script>

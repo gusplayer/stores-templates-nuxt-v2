@@ -43,18 +43,18 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: 'auto',
-        direction: 'horizontal',
-        pagination: {
-          el: '.swiper-pagination',
-        },
+        effect: 'fade',
+        slidesPerView: '1',
         setWrapperSize: true,
-        paginationClickable: true,
         grabCursor: true,
-        // autoplay: {
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
       },
     }
   },
