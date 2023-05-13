@@ -4,37 +4,37 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _794f6fae = () => interopDefault(import('..\\pages\\blog\\index.vue' /* webpackChunkName: "pages/blog/index" */))
-const _39b826b7 = () => interopDefault(import('..\\pages\\cart.vue' /* webpackChunkName: "pages/cart" */))
-const _534f7634 = () => interopDefault(import('..\\pages\\contacto.vue' /* webpackChunkName: "pages/contacto" */))
-const _6902b59e = () => interopDefault(import('..\\pages\\micompra.vue' /* webpackChunkName: "pages/micompra" */))
-const _50291476 = () => interopDefault(import('..\\pages\\productos\\index.vue' /* webpackChunkName: "pages/productos/index" */))
-const _0f3a28cb = () => interopDefault(import('..\\pages\\productosHoko\\index.vue' /* webpackChunkName: "pages/productosHoko/index" */))
-const _182942dc = () => interopDefault(import('..\\pages\\template10\\index.vue' /* webpackChunkName: "pages/template10/index" */))
-const _08c5f81e = () => interopDefault(import('..\\pages\\template11\\index.vue' /* webpackChunkName: "pages/template11/index" */))
-const _034ea950 = () => interopDefault(import('..\\pages\\template12\\index.vue' /* webpackChunkName: "pages/template12/index" */))
-const _0b004eaf = () => interopDefault(import('..\\pages\\template13\\index.vue' /* webpackChunkName: "pages/template13/index" */))
-const _283fa8e4 = () => interopDefault(import('..\\pages\\template5\\index.vue' /* webpackChunkName: "pages/template5/index" */))
-const _18dc5e26 = () => interopDefault(import('..\\pages\\template6\\index.vue' /* webpackChunkName: "pages/template6/index" */))
-const _09791368 = () => interopDefault(import('..\\pages\\template7\\index.vue' /* webpackChunkName: "pages/template7/index" */))
-const _02f51bab = () => interopDefault(import('..\\pages\\template8\\index.vue' /* webpackChunkName: "pages/template8/index" */))
-const _0aa6c10a = () => interopDefault(import('..\\pages\\template9\\index.vue' /* webpackChunkName: "pages/template9/index" */))
-const _a57b3a1e = () => interopDefault(import('..\\pages\\template99\\index.vue' /* webpackChunkName: "pages/template99/index" */))
-const _2da39202 = () => interopDefault(import('..\\pages\\termsandconditions.vue' /* webpackChunkName: "pages/termsandconditions" */))
-const _23a5c374 = () => interopDefault(import('..\\pages\\unicentro\\index.vue' /* webpackChunkName: "pages/unicentro/index" */))
-const _2e317606 = () => interopDefault(import('..\\pages\\template6\\index_macrobrand.vue' /* webpackChunkName: "pages/template6/index_macrobrand" */))
-const _18d692d3 = () => interopDefault(import('..\\pages\\template99\\templates\\template1\\index.vue' /* webpackChunkName: "pages/template99/templates/template1/index" */))
-const _20883832 = () => interopDefault(import('..\\pages\\template99\\templates\\template2\\index.vue' /* webpackChunkName: "pages/template99/templates/template2/index" */))
-const _2839dd91 = () => interopDefault(import('..\\pages\\template99\\templates\\template3\\index.vue' /* webpackChunkName: "pages/template99/templates/template3/index" */))
-const _7cbcb23e = () => interopDefault(import('..\\pages\\blog\\_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
-const _4e72732e = () => interopDefault(import('..\\pages\\productos\\_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
-const _0d838783 = () => interopDefault(import('..\\pages\\productosHoko\\_slug.vue' /* webpackChunkName: "pages/productosHoko/_slug" */))
-const _48206769 = () => interopDefault(import('..\\pages\\wa\\_slug\\index.vue' /* webpackChunkName: "pages/wa/_slug/index" */))
-const _533f3072 = () => interopDefault(import('..\\pages\\wa\\_slug\\blog\\index.vue' /* webpackChunkName: "pages/wa/_slug/blog/index" */))
-const _b7844b5a = () => interopDefault(import('..\\pages\\wa\\_slug\\micompra.vue' /* webpackChunkName: "pages/wa/_slug/micompra" */))
-const _47e36dc1 = () => interopDefault(import('..\\pages\\wa\\_slug\\blog\\_slugBlog.vue' /* webpackChunkName: "pages/wa/_slug/blog/_slugBlog" */))
-const _ee0775a2 = () => interopDefault(import('..\\pages\\wa\\_slug\\productos\\_slugProduct.vue' /* webpackChunkName: "pages/wa/_slug/productos/_slugProduct" */))
-const _79ce8d6a = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _2154b4ee = () => interopDefault(import('../pages/blog/index.vue' /* webpackChunkName: "pages/blog/index" */))
+const _2c48b804 = () => interopDefault(import('../pages/cart.vue' /* webpackChunkName: "pages/cart" */))
+const _007567b3 = () => interopDefault(import('../pages/contacto.vue' /* webpackChunkName: "pages/contacto" */))
+const _14c87004 = () => interopDefault(import('../pages/micompra.vue' /* webpackChunkName: "pages/micompra" */))
+const _2b6d84a2 = () => interopDefault(import('../pages/productos/index.vue' /* webpackChunkName: "pages/productos/index" */))
+const _4640dfa6 = () => interopDefault(import('../pages/productosHoko/index.vue' /* webpackChunkName: "pages/productosHoko/index" */))
+const _58ebff80 = () => interopDefault(import('../pages/template10/index.vue' /* webpackChunkName: "pages/template10/index" */))
+const _686eb301 = () => interopDefault(import('../pages/template11/index.vue' /* webpackChunkName: "pages/template11/index" */))
+const _0559347c = () => interopDefault(import('../pages/template12/index.vue' /* webpackChunkName: "pages/template12/index" */))
+const _db8fcefa = () => interopDefault(import('../pages/template13/index.vue' /* webpackChunkName: "pages/template13/index" */))
+const _0f6b2a8a = () => interopDefault(import('../pages/template5/index.vue' /* webpackChunkName: "pages/template5/index" */))
+const _b760456a = () => interopDefault(import('../pages/template6/index.vue' /* webpackChunkName: "pages/template6/index" */))
+const _3934900c = () => interopDefault(import('../pages/template7/index.vue' /* webpackChunkName: "pages/template7/index" */))
+const _63cd7a66 = () => interopDefault(import('../pages/template8/index.vue' /* webpackChunkName: "pages/template8/index" */))
+const _62fdf58e = () => interopDefault(import('../pages/template9/index.vue' /* webpackChunkName: "pages/template9/index" */))
+const _4d217401 = () => interopDefault(import('../pages/template99/index.vue' /* webpackChunkName: "pages/template99/index" */))
+const _6debfd8c = () => interopDefault(import('../pages/termsandconditions.vue' /* webpackChunkName: "pages/termsandconditions" */))
+const _323ffde4 = () => interopDefault(import('../pages/unicentro/index.vue' /* webpackChunkName: "pages/unicentro/index" */))
+const _1c6471df = () => interopDefault(import('../pages/template6/index_macrobrand.vue' /* webpackChunkName: "pages/template6/index_macrobrand" */))
+const _07b6ecda = () => interopDefault(import('../pages/template99/templates/template1/index.vue' /* webpackChunkName: "pages/template99/templates/template1/index" */))
+const _dded8758 = () => interopDefault(import('../pages/template99/templates/template2/index.vue' /* webpackChunkName: "pages/template99/templates/template2/index" */))
+const _25edef15 = () => interopDefault(import('../pages/template99/templates/template3/index.vue' /* webpackChunkName: "pages/template99/templates/template3/index" */))
+const _24c1f77e = () => interopDefault(import('../pages/blog/_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
+const _29b6e35a = () => interopDefault(import('../pages/productos/_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
+const _49ae2236 = () => interopDefault(import('../pages/productosHoko/_slug.vue' /* webpackChunkName: "pages/productosHoko/_slug" */))
+const _7c49c82c = () => interopDefault(import('../pages/wa/_slug/index.vue' /* webpackChunkName: "pages/wa/_slug/index" */))
+const _cd9fd08a = () => interopDefault(import('../pages/wa/_slug/blog/index.vue' /* webpackChunkName: "pages/wa/_slug/blog/index" */))
+const _811dc2a0 = () => interopDefault(import('../pages/wa/_slug/micompra.vue' /* webpackChunkName: "pages/wa/_slug/micompra" */))
+const _8a9bf896 = () => interopDefault(import('../pages/wa/_slug/blog/_slugBlog.vue' /* webpackChunkName: "pages/wa/_slug/blog/_slugBlog" */))
+const _5f34a017 = () => interopDefault(import('../pages/wa/_slug/productos/_slugProduct.vue' /* webpackChunkName: "pages/wa/_slug/productos/_slugProduct" */))
+const _229a519e = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -49,127 +49,127 @@ export const routerOptions = {
 
   routes: [{
     path: "/blog",
-    component: _794f6fae,
+    component: _2154b4ee,
     name: "blog"
   }, {
     path: "/cart",
-    component: _39b826b7,
+    component: _2c48b804,
     name: "cart"
   }, {
     path: "/contacto",
-    component: _534f7634,
+    component: _007567b3,
     name: "contacto"
   }, {
     path: "/micompra",
-    component: _6902b59e,
+    component: _14c87004,
     name: "micompra"
   }, {
     path: "/productos",
-    component: _50291476,
+    component: _2b6d84a2,
     name: "productos"
   }, {
     path: "/productosHoko",
-    component: _0f3a28cb,
+    component: _4640dfa6,
     name: "productosHoko"
   }, {
     path: "/template10",
-    component: _182942dc,
+    component: _58ebff80,
     name: "template10"
   }, {
     path: "/template11",
-    component: _08c5f81e,
+    component: _686eb301,
     name: "template11"
   }, {
     path: "/template12",
-    component: _034ea950,
+    component: _0559347c,
     name: "template12"
   }, {
     path: "/template13",
-    component: _0b004eaf,
+    component: _db8fcefa,
     name: "template13"
   }, {
     path: "/template5",
-    component: _283fa8e4,
+    component: _0f6b2a8a,
     name: "template5"
   }, {
     path: "/template6",
-    component: _18dc5e26,
+    component: _b760456a,
     name: "template6"
   }, {
     path: "/template7",
-    component: _09791368,
+    component: _3934900c,
     name: "template7"
   }, {
     path: "/template8",
-    component: _02f51bab,
+    component: _63cd7a66,
     name: "template8"
   }, {
     path: "/template9",
-    component: _0aa6c10a,
+    component: _62fdf58e,
     name: "template9"
   }, {
     path: "/template99",
-    component: _a57b3a1e,
+    component: _4d217401,
     name: "template99"
   }, {
     path: "/termsandconditions",
-    component: _2da39202,
+    component: _6debfd8c,
     name: "termsandconditions"
   }, {
     path: "/unicentro",
-    component: _23a5c374,
+    component: _323ffde4,
     name: "unicentro"
   }, {
     path: "/template6/index_macrobrand",
-    component: _2e317606,
+    component: _1c6471df,
     name: "template6-index_macrobrand"
   }, {
     path: "/template99/templates/template1",
-    component: _18d692d3,
+    component: _07b6ecda,
     name: "template99-templates-template1"
   }, {
     path: "/template99/templates/template2",
-    component: _20883832,
+    component: _dded8758,
     name: "template99-templates-template2"
   }, {
     path: "/template99/templates/template3",
-    component: _2839dd91,
+    component: _25edef15,
     name: "template99-templates-template3"
   }, {
     path: "/blog/:slug",
-    component: _7cbcb23e,
+    component: _24c1f77e,
     name: "blog-slug"
   }, {
     path: "/productos/:slug",
-    component: _4e72732e,
+    component: _29b6e35a,
     name: "productos-slug"
   }, {
     path: "/productosHoko/:slug",
-    component: _0d838783,
+    component: _49ae2236,
     name: "productosHoko-slug"
   }, {
     path: "/wa/:slug",
-    component: _48206769,
+    component: _7c49c82c,
     name: "wa-slug"
   }, {
     path: "/wa/:slug?/blog",
-    component: _533f3072,
+    component: _cd9fd08a,
     name: "wa-slug-blog"
   }, {
     path: "/wa/:slug?/micompra",
-    component: _b7844b5a,
+    component: _811dc2a0,
     name: "wa-slug-micompra"
   }, {
     path: "/wa/:slug?/blog/:slugBlog",
-    component: _47e36dc1,
+    component: _8a9bf896,
     name: "wa-slug-blog-slugBlog"
   }, {
     path: "/wa/:slug?/productos/:slugProduct?",
-    component: _ee0775a2,
+    component: _5f34a017,
     name: "wa-slug-productos-slugProduct"
   }, {
     path: "/",
-    component: _79ce8d6a,
+    component: _229a519e,
     name: "index"
   }],
 
