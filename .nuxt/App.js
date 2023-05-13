@@ -5,8 +5,6 @@ import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch,
 import NuxtError from '../layouts/error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '../assets/css/tailwind.css'
-
 import '../node_modules/element-ui/lib/theme-chalk/index.css'
 
 import '../assets/css/tailwind.css'
