@@ -32,7 +32,6 @@
     </div>
     <div class="swiper-button-prev" v-if="photos.length > 0" />
     <div class="swiper-button-next" v-if="photos.length > 0" />
-    <div class="swiper-pagination" />
   </div>
 </template>
 
@@ -46,12 +45,9 @@ export default {
     return {
       swiperOption: {
         effect: 'fade',
-        slidesPerView: 'auto',
-        loop: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
+        slidesPerView: '1',
+        setWrapperSize: true,
+        grabCursor: true,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',

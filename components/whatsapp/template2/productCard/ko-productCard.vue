@@ -537,13 +537,15 @@ export default {
 .content-productCard {
   @apply w-full h-full flex flex-col justify-start items-center;
 }
+
 @screen sm {
   .content-items-productCard {
     max-width: 350px;
     @apply w-full flex flex-col justify-center items-center;
   }
   .content-img-prodcut {
-    max-width: 350px;
+    max-height: 175px;
+    max-width: 175px;
     background-color: #f9f9f9;
     @apply w-full flex flex-col justify-center items-center rounded-9 border overflow-hidden;
   }
@@ -604,6 +606,10 @@ export default {
 @media (min-width: 500px) {
   .content-description-product {
     @apply h-45;
+  }
+  .content-img-prodcut {
+    max-height: 267px;
+    max-width: 267px;
   }
 }
 @media (min-width: 600px) {

@@ -27,8 +27,7 @@
           <img
             v-lazy="idCloudinaryBanner(item.url_img_background)"
             alt="banner template13"
-            class="w-full h-full"
-            :height="checkMobile ? banner.with_banner_res : banner.with_banner"
+            class="w-full"
           />
         </picture>
       </a>

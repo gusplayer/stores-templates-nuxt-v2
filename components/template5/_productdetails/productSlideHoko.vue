@@ -26,7 +26,7 @@ export default {
         spaceBetween: 0,
         loop: true,
         grabCursor: true,
-        slidesPerView: 'auto',
+        slidesPerView: '1',
         direction: 'horizontal',
         pagination: {
           el: '.swiper-pagination',

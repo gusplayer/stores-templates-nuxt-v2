@@ -2,16 +2,16 @@ import Vue from 'vue'
 import { decode, parsePath, withoutBase, withoutTrailingSlash, normalizeURL } from 'ufo'
 
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
-import NuxtError from '../layouts/error.vue'
+import NuxtError from '..\\layouts\\error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '../assets/css/tailwind.css'
+import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
 
-import '../node_modules/element-ui/lib/theme-chalk/index.css'
+import '..\\assets\\css\\tailwind.css'
 
-import _6f6c098b from '../layouts/default.vue'
-import _6541a79f from '../layouts/unicentro.vue'
-import _6c337540 from '../layouts/wa.vue'
+import _6f6c098b from '..\\layouts\\default.vue'
+import _6541a79f from '..\\layouts\\unicentro.vue'
+import _6c337540 from '..\\layouts\\wa.vue'
 
 const layouts = { "_default": sanitizeComponent(_6f6c098b),"_unicentro": sanitizeComponent(_6541a79f),"_wa": sanitizeComponent(_6c337540) }
 
@@ -189,10 +189,6 @@ export default {
     },
 
     setLayout (layout) {
-      if(layout && typeof layout !== 'string') {
-        throw new Error('[nuxt] Avoid using non-string value as layout property.')
-      }
-
       if (!layout || !layouts['_' + layout]) {
         layout = 'default'
       }

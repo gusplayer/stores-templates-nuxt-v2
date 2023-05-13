@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 // const isProd = process.env.NODE_ENV === 'production'
 export default {
-  // mode: 'universal',
   head: {
     title: process.env.npm_package_name || '',
     htmlAttrs: {
@@ -29,8 +28,7 @@ export default {
     color: 'grey',
     height: '3px',
   },
-  css: ['element-ui/lib/theme-chalk/index.css'],
-  // components: true,
+  css: ['element-ui/lib/theme-chalk/index.css', '@/assets/css/tailwind.css'],
   plugins: [
     '~/plugins/jsonld',
     '~/plugins/element',
@@ -83,10 +81,18 @@ export default {
       '/template99/templates/template3',
     ],
   },
-  debug: {
-    enabled: true,
-  },
+  // debug: {
+  //   enabled: true,
+  // },
   build: {
+    postcss: {
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
+        },
+      },
+    },
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
     },

@@ -1599,7 +1599,7 @@ export default {
           duration: 9000,
         })
         this.removeCartItems()
-      }, 5000)
+      }, 9000)
     },
     setOrderWa() {
       this.$refs.observer.validate().then((response) => {
