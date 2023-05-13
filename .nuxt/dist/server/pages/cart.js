@@ -102,7 +102,11 @@ module.exports = __webpack_require__.p + "img/icono_cesta.60de836.png";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/cart.vue?vue&type=template&id=78c20f92&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/cart.vue?vue&type=template&id=78c20f92&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -116,7 +120,11 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./pages/cart.vue?vue&type=template&id=78c20f92&
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/cart/Ko-Cart.vue?vue&type=template&id=7705688a&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/cart/Ko-Cart.vue?vue&type=template&id=7705688a&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var Ko_Cartvue_type_template_id_7705688a_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -564,7 +572,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "7705688a",
-  "2a0bc315"
+  "515a5f8a"
   
 )
 
@@ -600,7 +608,7 @@ var cart_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "2fde2e74"
+  "936569b8"
   
 )
 

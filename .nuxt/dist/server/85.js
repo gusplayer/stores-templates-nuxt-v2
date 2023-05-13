@@ -98,7 +98,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-carousel.vue?vue&type=template&id=2e988b86&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-carousel.vue?vue&type=template&id=2e988b86&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -128,7 +132,11 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/template11/ko-carousel.vue?vue&type=template&id=2e988b86&scoped=true&
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_carouselBanner/banner-carousel.vue?vue&type=template&id=18954948&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_carouselBanner/banner-carousel.vue?vue&type=template&id=18954948&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var banner_carouselvue_type_template_id_18954948_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -175,7 +183,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "18954948",
-  "52d76176"
+  "67697b90"
   
 )
 
@@ -263,7 +271,7 @@ var ko_carousel_component = Object(componentNormalizer["a" /* default */])(
   false,
   ko_carousel_injectStyles,
   "2e988b86",
-  "47b05062"
+  "2246f3c4"
   
 )
 

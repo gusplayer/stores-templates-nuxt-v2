@@ -51,7 +51,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productcard/ProductCardHoko.vue?vue&type=template&id=43eb9e7d&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productcard/ProductCardHoko.vue?vue&type=template&id=43eb9e7d&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -200,7 +204,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "43eb9e7d",
-  "3c554353"
+  "c8e756ca"
   
 )
 
@@ -305,7 +309,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-slider-hoko.vue?vue&type=template&id=7fbf5994&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-slider-hoko.vue?vue&type=template&id=7fbf5994&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -334,7 +342,11 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/template9/Ko-slider-hoko.vue?vue&type=template&id=7fbf5994&scoped=true&
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productofavorito/productSlidehoko.vue?vue&type=template&id=77a6df33&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productofavorito/productSlidehoko.vue?vue&type=template&id=77a6df33&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var productSlidehokovue_type_template_id_77a6df33_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -473,7 +485,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "77a6df33",
-  "9e9c15ae"
+  "5cad3592"
   
 )
 
@@ -521,7 +533,7 @@ var Ko_slider_hoko_component = Object(componentNormalizer["a" /* default */])(
   false,
   Ko_slider_hoko_injectStyles,
   "7fbf5994",
-  "4f9f469a"
+  "79a9dfee"
   
 )
 

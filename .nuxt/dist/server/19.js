@@ -186,7 +186,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/footers/ko-TermsAndConditions.vue?vue&type=template&id=79b91b5c&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/footers/ko-TermsAndConditions.vue?vue&type=template&id=79b91b5c&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -265,7 +269,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "79b91b5c",
-  "51d0ea75"
+  "c6dc964c"
   
 )
 
@@ -280,7 +284,11 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/footers/footer6/Ko-Footer-6.vue?vue&type=template&id=461bc226&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/footers/footer6/Ko-Footer-6.vue?vue&type=template&id=461bc226&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -376,7 +384,11 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/footers/footer6/Ko-Footer-6.vue?vue&type=template&id=461bc226&scoped=true&
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template10/Ko-Newsletter.vue?vue&type=template&id=10b91602&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template10/Ko-Newsletter.vue?vue&type=template&id=10b91602&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var Ko_Newslettervue_type_template_id_10b91602_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -546,12 +558,16 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "10b91602",
-  "b7b991b2"
+  "4229ac48"
   
 )
 
 /* harmony default export */ var Ko_Newsletter = (component.exports);
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template10/Ko-Social-Networks.vue?vue&type=template&id=d92c4dae&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template10/Ko-Social-Networks.vue?vue&type=template&id=d92c4dae&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var Ko_Social_Networksvue_type_template_id_d92c4dae_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -681,7 +697,7 @@ var Ko_Social_Networks_component = Object(componentNormalizer["a" /* default */]
   false,
   Ko_Social_Networks_injectStyles,
   "d92c4dae",
-  "06971ff2"
+  "e01e331c"
   
 )
 
@@ -790,7 +806,7 @@ var Ko_Footer_6_component = Object(componentNormalizer["a" /* default */])(
   false,
   Ko_Footer_6_injectStyles,
   "461bc226",
-  "b27894e0"
+  "54e9d502"
   
 )
 

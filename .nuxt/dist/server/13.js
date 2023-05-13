@@ -358,7 +358,11 @@ module.exports.__inject__ = function (context) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_order1/order1.vue?vue&type=template&id=1b3a5262&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_order1/order1.vue?vue&type=template&id=74455744&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1918,8 +1922,13 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
+<<<<<<< HEAD
   "1b3a5262",
   "ffae0c0a"
+=======
+  "74455744",
+  "19c57b49"
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
   
 )
 
@@ -2011,7 +2020,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_lateralMenu/_BaseAccordion.vue?vue&type=template&id=1a947fb4&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_lateralMenu/_BaseAccordion.vue?vue&type=template&id=1a947fb4&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2068,7 +2081,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "1a947fb4",
-  "24d871cf"
+  "7b8824f2"
   
 )
 
@@ -2083,7 +2096,11 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/header5/Ko-Header-5.vue?vue&type=template&id=01a51e92&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/header5/Ko-Header-5.vue?vue&type=template&id=01a51e92&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2144,7 +2161,11 @@ var staticRenderFns = [];
 // EXTERNAL MODULE: ./components/headers/_order1/order1.vue + 4 modules
 var order1 = __webpack_require__(68);
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_lateralMenu/_lateralMenu/openMenuLeft.vue?vue&type=template&id=6f7f7992&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_lateralMenu/_lateralMenu/openMenuLeft.vue?vue&type=template&id=6f7f7992&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var openMenuLeftvue_type_template_id_6f7f7992_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2572,12 +2593,16 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "6f7f7992",
-  "1b4c7de4"
+  "454387ae"
   
 )
 
 /* harmony default export */ var openMenuLeft = (component.exports);
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_lateralMenu/_lateralMenu/searchDown09.vue?vue&type=template&id=5408d6d0&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_lateralMenu/_lateralMenu/searchDown09.vue?vue&type=template&id=5408d6d0&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var searchDown09vue_type_template_id_5408d6d0_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2834,7 +2859,7 @@ var searchDown09_component = Object(componentNormalizer["a" /* default */])(
   false,
   searchDown09_injectStyles,
   "5408d6d0",
-  "cecd79de"
+  "f8c483a8"
   
 )
 
@@ -3021,7 +3046,7 @@ var Ko_Header_5_component = Object(componentNormalizer["a" /* default */])(
   false,
   Ko_Header_5_injectStyles,
   "01a51e92",
-  "1ef027c8"
+  "c2a3e8e4"
   
 )
 

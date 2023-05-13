@@ -231,7 +231,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/footers/ko-TermsAndConditions.vue?vue&type=template&id=79b91b5c&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/footers/ko-TermsAndConditions.vue?vue&type=template&id=79b91b5c&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -310,7 +314,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "79b91b5c",
-  "51d0ea75"
+  "c6dc964c"
   
 )
 
@@ -325,7 +329,11 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/footers/footer7/Ko-Footer-7.vue?vue&type=template&id=a7f971ea&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/footers/footer7/Ko-Footer-7.vue?vue&type=template&id=a7f971ea&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -385,7 +393,11 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/footers/footer7/Ko-Footer-7.vue?vue&type=template&id=a7f971ea&scoped=true&
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-newsletter.vue?vue&type=template&id=5b2860aa&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-newsletter.vue?vue&type=template&id=5b2860aa&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var ko_newslettervue_type_template_id_5b2860aa_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -405,7 +417,11 @@ var ko_newslettervue_type_template_id_5b2860aa_scoped_true_staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/template11/ko-newsletter.vue?vue&type=template&id=5b2860aa&scoped=true&
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_newsletter/newsletter.vue?vue&type=template&id=6f3bdb4d&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_newsletter/newsletter.vue?vue&type=template&id=6f3bdb4d&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var newslettervue_type_template_id_6f3bdb4d_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -557,7 +573,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "6f3bdb4d",
-  "538243f2"
+  "24a27985"
   
 )
 
@@ -602,12 +618,16 @@ var ko_newsletter_component = Object(componentNormalizer["a" /* default */])(
   false,
   ko_newsletter_injectStyles,
   "5b2860aa",
-  "7a7ae630"
+  "04eb00c6"
   
 )
 
 /* harmony default export */ var ko_newsletter = (ko_newsletter_component.exports);
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-socialnet.vue?vue&type=template&id=2409c6e2&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-socialnet.vue?vue&type=template&id=2409c6e2&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var ko_socialnetvue_type_template_id_2409c6e2_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -664,7 +684,7 @@ var ko_socialnet_component = Object(componentNormalizer["a" /* default */])(
   false,
   ko_socialnet_injectStyles,
   "2409c6e2",
-  "1e0b1e9e"
+  "6ebed35c"
   
 )
 
@@ -786,7 +806,7 @@ var Ko_Footer_7_component = Object(componentNormalizer["a" /* default */])(
   false,
   Ko_Footer_7_injectStyles,
   "a7f971ea",
-  "1108a9dc"
+  "b4bc6af8"
   
 )
 

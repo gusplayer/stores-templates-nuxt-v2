@@ -249,7 +249,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "513b63ee"
+  "643d2296"
   
 )
 
@@ -351,7 +351,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/micompra.vue?vue&type=template&id=78ced8a5&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/micompra.vue?vue&type=template&id=78ced8a5&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -376,7 +380,11 @@ var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_)
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
 
+<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/miCompra/Ko-miCompra-1.vue?vue&type=template&id=0c1af965&scoped=true&
+=======
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/miCompra/Ko-miCompra-1.vue?vue&type=template&id=0c1af965&scoped=true&
+>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var Ko_miCompra_1vue_type_template_id_0c1af965_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1020,7 +1028,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "0c1af965",
-  "78feb10d"
+  "4fc5e47c"
   
 )
 
@@ -1097,7 +1105,7 @@ var micompra_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "3c79c7c0"
+  "123c69c4"
   
 )
 
