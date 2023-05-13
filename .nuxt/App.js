@@ -2,10 +2,9 @@ import Vue from 'vue'
 import { decode, parsePath, withoutBase, withoutTrailingSlash, normalizeURL } from 'ufo'
 
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
-import NuxtError from '../layouts/error.vue'
+import NuxtError from '..\\layouts\\error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-<<<<<<< HEAD
 import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
 
 import '..\\assets\\css\\tailwind.css'
@@ -13,15 +12,6 @@ import '..\\assets\\css\\tailwind.css'
 import _6f6c098b from '..\\layouts\\default.vue'
 import _6541a79f from '..\\layouts\\unicentro.vue'
 import _6c337540 from '..\\layouts\\wa.vue'
-=======
-import '../assets/css/tailwind.css'
-
-import '../node_modules/element-ui/lib/theme-chalk/index.css'
-
-import _6f6c098b from '../layouts/default.vue'
-import _6541a79f from '../layouts/unicentro.vue'
-import _6c337540 from '../layouts/wa.vue'
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 
 const layouts = { "_default": sanitizeComponent(_6f6c098b),"_unicentro": sanitizeComponent(_6541a79f),"_wa": sanitizeComponent(_6c337540) }
 

@@ -199,7 +199,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "16b879c9"
+  "b301bb58"
   
 )
 
@@ -212,11 +212,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 "use strict";
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productcard/Ko-ProductCardHoko-1.vue?vue&type=template&id=48b83b34&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productcard/Ko-ProductCardHoko-1.vue?vue&type=template&id=48b83b34&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -349,7 +345,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "48b83b34",
-  "244ad340"
+  "351bcab0"
   
 )
 
@@ -362,11 +358,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 "use strict";
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productcard/ProductCardHoko.vue?vue&type=template&id=43eb9e7d&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productcard/ProductCardHoko.vue?vue&type=template&id=43eb9e7d&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -515,7 +507,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "43eb9e7d",
-  "c8e756ca"
+  "3c554353"
   
 )
 
@@ -528,11 +520,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 "use strict";
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productcard/ProductCardFilterList.vue?vue&type=template&id=5203a30a&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productcard/ProductCardFilterList.vue?vue&type=template&id=5203a30a&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -809,7 +797,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "5203a30a",
-  "10b394a6"
+  "0c0c995e"
   
 )
 
@@ -822,11 +810,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 "use strict";
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_productcard/ProductCardHoko.vue?vue&type=template&id=3c3e1aca&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_productcard/ProductCardHoko.vue?vue&type=template&id=3c3e1aca&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -955,7 +939,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "3c3e1aca",
-  "24c505f0"
+  "7e0007f8"
   
 )
 
@@ -1147,11 +1131,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/index.vue?vue&type=template&id=eb583d48&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/index.vue?vue&type=template&id=eb583d48&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1165,11 +1145,7 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./pages/productosHoko/index.vue?vue&type=template&id=eb583d48&
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductListHoko-1.vue?vue&type=template&id=66d7c0d4&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductListHoko-1.vue?vue&type=template&id=66d7c0d4&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var Ko_ProductListHoko_1vue_type_template_id_66d7c0d4_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1283,16 +1259,12 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "66d7c0d4",
-  "81f580d2"
+  "4a2b56c8"
   
 )
 
 /* harmony default export */ var Ko_ProductListHoko_1 = (component.exports);
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-ProductListFilterHoko.vue?vue&type=template&id=17ba5ba0&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-ProductListFilterHoko.vue?vue&type=template&id=17ba5ba0&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var Ko_ProductListFilterHokovue_type_template_id_17ba5ba0_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1430,16 +1402,12 @@ var Ko_ProductListFilterHoko_component = Object(componentNormalizer["a" /* defau
   false,
   Ko_ProductListFilterHoko_injectStyles,
   "17ba5ba0",
-  "277a8e72"
+  "94487968"
   
 )
 
 /* harmony default export */ var Ko_ProductListFilterHoko = (Ko_ProductListFilterHoko_component.exports);
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-ProductListFilterHoko.vue?vue&type=template&id=c6334424&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-ProductListFilterHoko.vue?vue&type=template&id=c6334424&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var ko_ProductListFilterHokovue_type_template_id_c6334424_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1574,7 +1542,7 @@ var ko_ProductListFilterHoko_component = Object(componentNormalizer["a" /* defau
   false,
   ko_ProductListFilterHoko_injectStyles,
   "c6334424",
-  "0eec487c"
+  "c5b4e35e"
   
 )
 
@@ -1724,7 +1692,7 @@ var productosHoko_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "7efe590d"
+  "5324659e"
   
 )
 

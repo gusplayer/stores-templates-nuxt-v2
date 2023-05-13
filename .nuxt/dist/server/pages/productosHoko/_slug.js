@@ -19,7 +19,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "16b879c9"
+  "b301bb58"
   
 )
 
@@ -568,7 +568,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "f9b99f58"
+  "445de0a8"
   
 )
 
@@ -583,11 +583,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/_slug.vue?vue&type=template&id=6bc56c28&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/_slug.vue?vue&type=template&id=6bc56c28&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -601,11 +597,7 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./pages/productosHoko/_slug.vue?vue&type=template&id=6bc56c28&
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductDetailHoko-1.vue?vue&type=template&id=61b2a665&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductDetailHoko-1.vue?vue&type=template&id=61b2a665&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var Ko_ProductDetailHoko_1vue_type_template_id_61b2a665_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -704,13 +696,8 @@ var Ko_ProductDetailHoko_1vue_type_template_id_61b2a665_scoped_true_staticRender
 var external_axios_ = __webpack_require__(3);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/productSlideHoko.vue?vue&type=template&id=0bd79579&scoped=true&
 var productSlideHokovue_type_template_id_0bd79579_scoped_true_render = function render() {
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/productSlideHoko.vue?vue&type=template&id=71afa96d&scoped=true&
-var productSlideHokovue_type_template_id_71afa96d_scoped_true_render = function render() {
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -789,22 +776,13 @@ var component = Object(componentNormalizer["a" /* default */])(
   productSlideHokovue_type_template_id_0bd79579_scoped_true_staticRenderFns,
   false,
   injectStyles,
-<<<<<<< HEAD
   "0bd79579",
   "7e492900"
-=======
-  "71afa96d",
-  "72e94bce"
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
   
 )
 
 /* harmony default export */ var productSlideHoko = (component.exports);
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/descriptionProduct-hoko.vue?vue&type=template&id=4011b9c6&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/descriptionProduct-hoko.vue?vue&type=template&id=4011b9c6&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var descriptionProduct_hokovue_type_template_id_4011b9c6_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -891,7 +869,7 @@ var descriptionProduct_hoko_component = Object(componentNormalizer["a" /* defaul
   false,
   descriptionProduct_hoko_injectStyles,
   "4011b9c6",
-  "4db1c2f4"
+  "372a0982"
   
 )
 
@@ -1098,16 +1076,12 @@ var Ko_ProductDetailHoko_1_component = Object(componentNormalizer["a" /* default
   false,
   Ko_ProductDetailHoko_1_injectStyles,
   "61b2a665",
-  "ce9981ec"
+  "4fa726cf"
   
 )
 
 /* harmony default export */ var Ko_ProductDetailHoko_1 = (Ko_ProductDetailHoko_1_component.exports);
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-ProductDetailHoko.vue?vue&type=template&id=c0e88226&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-ProductDetailHoko.vue?vue&type=template&id=c0e88226&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var Ko_ProductDetailHokovue_type_template_id_c0e88226_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1165,11 +1139,7 @@ var Ko_ProductDetailHokovue_type_template_id_c0e88226_scoped_true_staticRenderFn
 
 // CONCATENATED MODULE: ./components/template9/Ko-ProductDetailHoko.vue?vue&type=template&id=c0e88226&scoped=true&
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productdetails/OptAcordion-hoko.vue?vue&type=template&id=7f60baff&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productdetails/OptAcordion-hoko.vue?vue&type=template&id=7f60baff&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var OptAcordion_hokovue_type_template_id_7f60baff_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1277,16 +1247,12 @@ var OptAcordion_hoko_component = Object(componentNormalizer["a" /* default */])(
   false,
   OptAcordion_hoko_injectStyles,
   "7f60baff",
-  "3bf4a4f9"
+  "4754822b"
   
 )
 
 /* harmony default export */ var OptAcordion_hoko = (OptAcordion_hoko_component.exports);
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productdetails/OptTab-hoko.vue?vue&type=template&id=03f8f368&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productdetails/OptTab-hoko.vue?vue&type=template&id=03f8f368&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var OptTab_hokovue_type_template_id_03f8f368_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1404,7 +1370,7 @@ var OptTab_hoko_component = Object(componentNormalizer["a" /* default */])(
   false,
   OptTab_hoko_injectStyles,
   "03f8f368",
-  "64224ba9"
+  "33557737"
   
 )
 
@@ -1605,16 +1571,12 @@ var Ko_ProductDetailHoko_component = Object(componentNormalizer["a" /* default *
   false,
   Ko_ProductDetailHoko_injectStyles,
   "c0e88226",
-  "1b80593c"
+  "0e24e867"
   
 )
 
 /* harmony default export */ var Ko_ProductDetailHoko = (Ko_ProductDetailHoko_component.exports);
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-ProductDetailHoko.vue?vue&type=template&id=18de0135&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-ProductDetailHoko.vue?vue&type=template&id=18de0135&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var ko_ProductDetailHokovue_type_template_id_18de0135_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1688,11 +1650,7 @@ var ko_ProductDetailHokovue_type_template_id_18de0135_scoped_true_staticRenderFn
 
 // CONCATENATED MODULE: ./components/template11/ko-ProductDetailHoko.vue?vue&type=template&id=18de0135&scoped=true&
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_productdetails/OptTab-hoko.vue?vue&type=template&id=642527bc&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_productdetails/OptTab-hoko.vue?vue&type=template&id=642527bc&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var OptTab_hokovue_type_template_id_642527bc_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1810,7 +1768,7 @@ var _productdetails_OptTab_hoko_component = Object(componentNormalizer["a" /* de
   false,
   _productdetails_OptTab_hoko_injectStyles,
   "642527bc",
-  "79139bb4"
+  "4ac5ec1c"
   
 )
 
@@ -1818,11 +1776,7 @@ var _productdetails_OptTab_hoko_component = Object(componentNormalizer["a" /* de
 // EXTERNAL MODULE: ./mixins/idCloudinary.js
 var idCloudinary = __webpack_require__(15);
 
-<<<<<<< HEAD
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_productdetails/productSlideHoko.vue?vue&type=template&id=8f4791b2&scoped=true&
-=======
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/webpack/node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/_productdetails/productSlideHoko.vue?vue&type=template&id=8f4791b2&scoped=true&
->>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48
 var productSlideHokovue_type_template_id_8f4791b2_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1900,7 +1854,7 @@ var productSlideHoko_component = Object(componentNormalizer["a" /* default */])(
   false,
   productSlideHoko_injectStyles,
   "8f4791b2",
-  "2f4c85c2"
+  "335185a1"
   
 )
 
@@ -2109,7 +2063,7 @@ var ko_ProductDetailHoko_component = Object(componentNormalizer["a" /* default *
   false,
   ko_ProductDetailHoko_injectStyles,
   "18de0135",
-  "11278597"
+  "5b2efdec"
   
 )
 
@@ -2276,7 +2230,7 @@ var _slug_component = Object(componentNormalizer["a" /* default */])(
   false,
   _slug_injectStyles,
   null,
-  "7d47b7c5"
+  "516dc456"
   
 )
 

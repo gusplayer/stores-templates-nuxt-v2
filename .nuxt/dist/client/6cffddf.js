@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:.nuxt/dist/client/6cffddf.js
-(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{1285:function(t,n,e){"use strict";e.r(n);e(4),e(5),e(6),e(7);var o={layout:"default",name:"Ko-template8",mounted:function(){},data:function(){return{}}},c=e(8),component=Object(c.a)(o,(function(){this._self._c;return this._m(0)}),[function(){var t=this._self._c;return t("div",{staticClass:"home"},[t("p",[this._v("Template8")])])}],!1,null,"00a1f619",null);n.default=component.exports}}]);
-========
-(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{1284:function(t,n,e){"use strict";e.r(n);e(6),e(7),e(8),e(9);var o={layout:"default",name:"Ko-template8",mounted:function(){},data:function(){return{}}},c=e(4),component=Object(c.a)(o,(function(){this._self._c;return this._m(0)}),[function(){var t=this._self._c;return t("div",{staticClass:"home"},[t("p",[this._v("Template8")])])}],!1,null,"00a1f619",null);n.default=component.exports}}]);
->>>>>>>> 8fc64a3b0afecc12b7dc65aa7021e406232a9a48:.nuxt/dist/client/e8335b4.js
