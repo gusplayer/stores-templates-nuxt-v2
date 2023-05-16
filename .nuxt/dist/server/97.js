@@ -7,7 +7,7 @@ exports.modules = {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(759);
+var content = __webpack_require__(760);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -113,7 +113,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "f9b99f58"
+  "445de0a8"
   
 )
 
@@ -121,7 +121,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 758:
+/***/ 759:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -133,14 +133,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 759:
+/***/ 760:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".txt-banner[data-v-7186421c]{color:var(--color_title);font-family:\"David libre\"!important;font-weight:400}.tittle-banner-blog[data-v-7186421c]{flex-direction:row;margin-bottom:12px;margin-top:12px}.banner-blog[data-v-7186421c],.tittle-banner-blog[data-v-7186421c]{align-items:center;display:flex;justify-content:center;width:100%}.banner-blog[data-v-7186421c]{background-repeat:no-repeat;background-size:cover;flex-direction:column}#separator[data-v-7186421c]{margin-left:20px}.size_title[data-v-7186421c]{color:#000;font-size:48px;font-weight:700;line-height:48px}.wrapper-blog[data-v-7186421c]{align-items:center;background:#fff;display:flex;flex-direction:column;justify-content:center;min-height:72vh;width:100%}.container-article[data-v-7186421c]{align-items:center;display:flex;justify-content:center}.content-blog[data-v-7186421c]{align-self:flex-start;box-sizing:content-box;display:flex;flex-direction:column;justify-content:center;padding:4px;width:100%}.content-date[data-v-7186421c]{display:flex;flex-direction:row;margin-bottom:20px;margin-top:10px;width:100%}.content-date-items[data-v-7186421c]{display:flex;flex-direction:column;margin-left:10px;width:100%}.content-date-items p[data-v-7186421c]{color:rgba(58,69,87,.733);font-size:14px}.content-date-items p[data-v-7186421c]:first-child{font-weight:700}.editor[data-v-7186421c] .el-tiptap-editor>.el-tiptap-editor__content{border:none;padding:10px 5px}.editor[data-v-7186421c] .el-tiptap-editor__menu-bubble{display:none}.editor[data-v-7186421c] .el-tiptap-editor__content h1{font-size:2em}.editor[data-v-7186421c] .el-tiptap-editor__content h2{font-size:1.5em}.editor[data-v-7186421c] .el-tiptap-editor__content h3{font-size:1.17em}.editor[data-v-7186421c] .el-tiptap-editor__content h4{font-size:1.12em}.editor[data-v-7186421c] .el-tiptap-editor__content h5{font-size:.83em}.wp-icon[data-v-7186421c]{bottom:2px;color:#757575;cursor:pointer;font-size:25px}.wp-icon[data-v-7186421c]:hover{color:#494949}.marginIcon[data-v-7186421c]{margin-left:8px}@media (min-width:300px){.container-article[data-v-7186421c]{width:95%}.icon-blog[data-v-7186421c]{margin-bottom:40px;width:10%}#separator[data-v-7186421c]{margin-left:10px}.banner-blog[data-v-7186421c]{padding-top:80px}.txt-banner[data-v-7186421c]{font-size:36px}}@media (max-width:425px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:8%}.size_title[data-v-7186421c]{font-size:25px}}@media (max-width:490px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:7%}}@media (max-width:576px){.grid-products[data-v-7186421c]{grid-template-columns:repeat(2,minmax(0,1fr));width:95%}.tittle-banner-blog[data-v-7186421c]{width:95%}}@media (max-width:600px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:6%}.size_title[data-v-7186421c]{font-size:28px;line-height:35px}}@media (min-width:768px){.container-article[data-v-7186421c]{width:95%}.icon-blog[data-v-7186421c]{margin-bottom:40px;width:5%}.banner-blog[data-v-7186421c]{padding-top:90px}.txt-banner[data-v-7186421c]{font-size:36px}#separator[data-v-7186421c]{margin-left:10px}}@media (max-width:900px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:4%}}@media (min-width:1024px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:4%}}@media (max-width:1100px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:3%}}@media (min-width:1280px){.container-article[data-v-7186421c]{width:78%}.icon-blog[data-v-7186421c]{margin-bottom:80px;width:5%}.banner-blog[data-v-7186421c]{padding-top:120px}.tittle-banner-blog[data-v-7186421c]{align-items:center;display:flex;flex-direction:row;justify-content:center;margin-bottom:48px;margin-top:48px;width:93%}.txt-banner[data-v-7186421c]{font-size:78px}#separator[data-v-7186421c]{margin-left:20px}}@media (min-width:1440px){.container-article[data-v-7186421c]{width:48%}.tittle-banner-blog[data-v-7186421c]{width:83%}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".txt-banner[data-v-7186421c]{color:var(--color_title);font-family:\"David libre\"!important;font-weight:400}.tittle-banner-blog[data-v-7186421c]{flex-direction:row;margin-bottom:12px;margin-top:12px}.banner-blog[data-v-7186421c],.tittle-banner-blog[data-v-7186421c]{align-items:center;display:flex;justify-content:center;width:100%}.banner-blog[data-v-7186421c]{background-repeat:no-repeat;background-size:cover;flex-direction:column}#separator[data-v-7186421c]{margin-left:20px}.size_title[data-v-7186421c]{color:#000;font-size:48px;font-weight:700;line-height:48px}.wrapper-blog[data-v-7186421c]{align-items:center;background:#fff;display:flex;flex-direction:column;justify-content:center;min-height:72vh;width:100%}.container-article[data-v-7186421c]{align-items:center;display:flex;justify-content:center}.content-blog[data-v-7186421c]{align-self:flex-start;box-sizing:content-box;display:flex;flex-direction:column;justify-content:center;padding:4px;width:100%}.content-date[data-v-7186421c]{display:flex;flex-direction:row;margin-bottom:20px;margin-top:10px;width:100%}.content-date-items[data-v-7186421c]{display:flex;flex-direction:column;margin-left:10px;width:100%}.content-date-items p[data-v-7186421c]{color:rgba(58,69,87,.733);font-size:14px}.content-date-items p[data-v-7186421c]:first-child{font-weight:700}.editor[data-v-7186421c] .el-tiptap-editor>.el-tiptap-editor__content{border:none;padding:10px 5px}.editor[data-v-7186421c] .el-tiptap-editor__menu-bubble{display:none}.editor[data-v-7186421c] .el-tiptap-editor__content h1{font-size:2em}.editor[data-v-7186421c] .el-tiptap-editor__content h2{font-size:1.5em}.editor[data-v-7186421c] .el-tiptap-editor__content h3{font-size:1.17em}.editor[data-v-7186421c] .el-tiptap-editor__content h4{font-size:1.12em}.editor[data-v-7186421c] .el-tiptap-editor__content h5{font-size:.83em}.wp-icon[data-v-7186421c]{bottom:2px;color:#757575;cursor:pointer;font-size:25px}.wp-icon[data-v-7186421c]:hover{color:#494949}.marginIcon[data-v-7186421c]{margin-left:8px}@media (min-width:300px){.container-article[data-v-7186421c]{width:95%}.icon-blog[data-v-7186421c]{margin-bottom:40px;width:10%}#separator[data-v-7186421c]{margin-left:10px}.banner-blog[data-v-7186421c]{padding-top:80px}.txt-banner[data-v-7186421c]{font-size:36px}}@media (max-width:425px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:8%}.size_title[data-v-7186421c]{font-size:25px}}@media (max-width:490px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:7%}}@media (max-width:576px){.grid-products[data-v-7186421c]{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-products[data-v-7186421c],.tittle-banner-blog[data-v-7186421c]{width:95%}}@media (max-width:600px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:6%}.size_title[data-v-7186421c]{font-size:28px;line-height:35px}}@media (min-width:768px){.container-article[data-v-7186421c]{width:95%}.icon-blog[data-v-7186421c]{margin-bottom:40px;width:5%}.banner-blog[data-v-7186421c]{padding-top:90px}.txt-banner[data-v-7186421c]{font-size:36px}#separator[data-v-7186421c]{margin-left:10px}}@media (max-width:900px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:4%}}@media (min-width:1024px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:4%}}@media (max-width:1100px){.icon-blog[data-v-7186421c]{margin-bottom:40px;width:3%}}@media (min-width:1280px){.container-article[data-v-7186421c]{width:78%}.icon-blog[data-v-7186421c]{margin-bottom:80px;width:5%}.banner-blog[data-v-7186421c]{padding-top:120px}.tittle-banner-blog[data-v-7186421c]{align-items:center;display:flex;flex-direction:row;justify-content:center;margin-bottom:48px;margin-top:48px;width:93%}.txt-banner[data-v-7186421c]{font-size:78px}#separator[data-v-7186421c]{margin-left:20px}}@media (min-width:1440px){.container-article[data-v-7186421c]{width:48%}.tittle-banner-blog[data-v-7186421c]{width:83%}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -148,14 +148,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 956:
+/***/ 957:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/blog_page/Ko-articulo.vue?vue&type=template&id=7186421c&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/blog_page/Ko-articulo.vue?vue&type=template&id=7186421c&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -369,7 +369,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(758)
+  var style0 = __webpack_require__(759)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -383,7 +383,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "7186421c",
-  "106ddde2"
+  "01aac646"
   
 )
 

@@ -1,14 +1,14 @@
 exports.ids = [2];
 exports.modules = {
 
-/***/ 888:
+/***/ 889:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=template&id=aa2b9190&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=template&id=aa2b9190&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -62,14 +62,14 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template11',
   components: {
-    KCarousel: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 879)),
-    KSection: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 926)),
-    KTrending: () => __webpack_require__.e(/* import() */ 72).then(__webpack_require__.bind(null, 927)),
-    KTrendingHoko: () => __webpack_require__.e(/* import() */ 79).then(__webpack_require__.bind(null, 928)),
-    KParallax: () => __webpack_require__.e(/* import() */ 106).then(__webpack_require__.bind(null, 929)),
-    KListTrending: () => __webpack_require__.e(/* import() */ 71).then(__webpack_require__.bind(null, 930)),
-    KInformacion: () => __webpack_require__.e(/* import() */ 104).then(__webpack_require__.bind(null, 931)),
-    KBlog: () => __webpack_require__.e(/* import() */ 78).then(__webpack_require__.bind(null, 932))
+    KCarousel: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 880)),
+    KSection: () => __webpack_require__.e(/* import() */ 108).then(__webpack_require__.bind(null, 927)),
+    KTrending: () => __webpack_require__.e(/* import() */ 72).then(__webpack_require__.bind(null, 928)),
+    KTrendingHoko: () => __webpack_require__.e(/* import() */ 79).then(__webpack_require__.bind(null, 929)),
+    KParallax: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 930)),
+    KListTrending: () => __webpack_require__.e(/* import() */ 71).then(__webpack_require__.bind(null, 931)),
+    KInformacion: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 932)),
+    KBlog: () => __webpack_require__.e(/* import() */ 78).then(__webpack_require__.bind(null, 933))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -205,7 +205,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "198f9621"
+  "0cba9994"
   
 )
 

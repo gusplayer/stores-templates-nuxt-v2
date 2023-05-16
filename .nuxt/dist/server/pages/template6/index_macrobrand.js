@@ -1,4 +1,4 @@
-exports.ids = [40,62,116,117];
+exports.ids = [40,62,117,118];
 exports.modules = {
 
 /***/ 109:
@@ -6,7 +6,7 @@ exports.modules = {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productcard/Ko-ProductCard-1.vue?vue&type=template&id=1617f7c9&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productcard/Ko-ProductCard-1.vue?vue&type=template&id=1617f7c9&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -338,7 +338,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "1617f7c9",
-  "35f63356"
+  "5d59ce9d"
   
 )
 
@@ -441,7 +441,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productofavorito/productSlide.vue?vue&type=template&id=1d5997fa&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productofavorito/productSlide.vue?vue&type=template&id=1d5997fa&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -579,7 +579,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "1d5997fa",
-  "087892e0"
+  "16660f82"
   
 )
 
@@ -675,7 +675,7 @@ module.exports.__inject__ = function (context) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductFavoritos-1.vue?vue&type=template&id=f043c2f2&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductFavoritos-1.vue?vue&type=template&id=f043c2f2&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -732,7 +732,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "f043c2f2",
-  "12008ed2"
+  "57bd4432"
   
 )
 
@@ -826,7 +826,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_order1/_AccordionList.vue?vue&type=template&id=6ee55808&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_order1/_AccordionList.vue?vue&type=template&id=6ee55808&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -883,7 +883,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "6ee55808",
-  "28e8708d"
+  "42831d3f"
   
 )
 
@@ -988,7 +988,7 @@ module.exports.__inject__ = function (context) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/ko-Banner-1.vue?vue&type=template&id=651f936d&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/ko-Banner-1.vue?vue&type=template&id=651f936d&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1046,7 +1046,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "651f936d",
-  "4a965a45"
+  "23659ba0"
   
 )
 
@@ -1061,7 +1061,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/ko-BannerFooter-1.vue?vue&type=template&id=b5e62e88&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/ko-BannerFooter-1.vue?vue&type=template&id=b5e62e88&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1124,7 +1124,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "b5e62e88",
-  "37f8ce00"
+  "2f15abca"
   
 )
 
@@ -1482,14 +1482,14 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 854:
+/***/ 855:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template6/index_macrobrand.vue?vue&type=template&id=6e75e806&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template6/index_macrobrand.vue?vue&type=template&id=6e75e806&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1514,7 +1514,7 @@ var staticRenderFns = [];
 // EXTERNAL MODULE: ./components/template5/ko-Banner-1.vue + 4 modules
 var ko_Banner_1 = __webpack_require__(457);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/ko-Banner-macrobrand.vue?vue&type=template&id=6231a394&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/ko-Banner-macrobrand.vue?vue&type=template&id=6231a394&scoped=true&
 var ko_Banner_macrobrandvue_type_template_id_6231a394_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1530,7 +1530,7 @@ var ko_Banner_macrobrandvue_type_template_id_6231a394_scoped_true_staticRenderFn
 
 // CONCATENATED MODULE: ./components/template6/ko-Banner-macrobrand.vue?vue&type=template&id=6231a394&scoped=true&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/bannerMacrobrad/productslideBanner.vue?vue&type=template&id=50edb4f6&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/bannerMacrobrad/productslideBanner.vue?vue&type=template&id=50edb4f6&scoped=true&
 var productslideBannervue_type_template_id_50edb4f6_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1610,7 +1610,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "50edb4f6",
-  "02aca1e6"
+  "9cf1f082"
   
 )
 
@@ -1673,7 +1673,7 @@ var ko_Banner_macrobrand_component = Object(componentNormalizer["a" /* default *
   false,
   ko_Banner_macrobrand_injectStyles,
   "6231a394",
-  "68ac32f6"
+  "f6dd700a"
   
 )
 
@@ -1681,7 +1681,7 @@ var ko_Banner_macrobrand_component = Object(componentNormalizer["a" /* default *
 // EXTERNAL MODULE: ./components/template5/Ko-ProductFavoritos-1.vue + 4 modules
 var Ko_ProductFavoritos_1 = __webpack_require__(223);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/Ko-ProductList-2.vue?vue&type=template&id=8021eaac&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/Ko-ProductList-2.vue?vue&type=template&id=8021eaac&scoped=true&
 var Ko_ProductList_2vue_type_template_id_8021eaac_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1987,12 +1987,12 @@ var Ko_ProductList_2_component = Object(componentNormalizer["a" /* default */])(
   false,
   Ko_ProductList_2_injectStyles,
   "8021eaac",
-  "50fe952c"
+  "27d8f4b1"
   
 )
 
 /* harmony default export */ var Ko_ProductList_2 = (Ko_ProductList_2_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/Ko-Content-macrobrand.vue?vue&type=template&id=492ae75c&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/Ko-Content-macrobrand.vue?vue&type=template&id=492ae75c&scoped=true&
 var Ko_Content_macrobrandvue_type_template_id_492ae75c_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2055,7 +2055,7 @@ var Ko_Content_macrobrand_component = Object(componentNormalizer["a" /* default 
   false,
   Ko_Content_macrobrand_injectStyles,
   "492ae75c",
-  "77e8ca65"
+  "4eb35400"
   
 )
 
@@ -2155,7 +2155,7 @@ var index_macrobrand_component = Object(componentNormalizer["a" /* default */])(
   false,
   index_macrobrand_injectStyles,
   null,
-  "4c9becff"
+  "0f61ecce"
   
 )
 

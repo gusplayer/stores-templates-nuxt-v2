@@ -25,7 +25,25 @@
             v-for="(elementBanner, index) in this.banner.values"
             :key="index"
           >
+            <picture v-if="dataStore.tienda.id_tienda === 889">
+              <source
+                media="(max-width: 799px)"
+                srcset="../../assets/img/perfecta/banner1.png"
+              />
+              <source
+                media="(min-width: 800px)"
+                :srcset="
+                  idCloudinaryBanner(elementBanner['url_img_background'])
+                "
+              />
+              <img
+                v-lazy="idCloudinaryBanner(elementBanner['url_img_background'])"
+                class="slide-bgWeb"
+                alt="banner template13"
+              />
+            </picture>
             <img
+              v-else
               class="slide-bgWeb"
               :src="idCloudinaryBanner(elementBanner['url_img_background'])"
               :alt="`img_banner_${index}`"
@@ -72,7 +90,7 @@
             </div>
           </div>
         </div>
-        <div class="swiper-pagination"></div>
+        <div class="swiper-pagination" />
       </div>
     </div>
   </div>

@@ -1,14 +1,14 @@
 exports.ids = [5];
 exports.modules = {
 
-/***/ 891:
+/***/ 892:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template5/index.vue?vue&type=template&id=2c3821b0&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template5/index.vue?vue&type=template&id=2c3821b0&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -55,13 +55,13 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template5',
   components: {
-    kBanner: () => __webpack_require__.e(/* import() */ 116).then(__webpack_require__.bind(null, 457)),
-    kBannerFooter: () => __webpack_require__.e(/* import() */ 117).then(__webpack_require__.bind(null, 458)),
+    kBanner: () => __webpack_require__.e(/* import() */ 117).then(__webpack_require__.bind(null, 457)),
+    kBannerFooter: () => __webpack_require__.e(/* import() */ 118).then(__webpack_require__.bind(null, 458)),
     KProductFavoritos: () => __webpack_require__.e(/* import() */ 62).then(__webpack_require__.bind(null, 223)),
     KProductList: () => __webpack_require__.e(/* import() */ 67).then(__webpack_require__.bind(null, 455)),
-    KProductListHoko: () => __webpack_require__.e(/* import() */ 64).then(__webpack_require__.bind(null, 880)),
-    KNewsletter: () => __webpack_require__.e(/* import() */ 115).then(__webpack_require__.bind(null, 456)),
-    KComponent360: () => __webpack_require__.e(/* import() */ 114).then(__webpack_require__.bind(null, 941))
+    KProductListHoko: () => __webpack_require__.e(/* import() */ 64).then(__webpack_require__.bind(null, 881)),
+    KNewsletter: () => __webpack_require__.e(/* import() */ 116).then(__webpack_require__.bind(null, 456)),
+    KComponent360: () => __webpack_require__.e(/* import() */ 115).then(__webpack_require__.bind(null, 942))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -121,7 +121,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "59dd392c"
+  "89a5a20a"
   
 )
 
