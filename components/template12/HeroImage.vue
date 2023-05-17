@@ -2,7 +2,7 @@
   <div class="w-full hero-image_container">
     <div class="relative h-inherit flex items-center justify-center">
       <img
-        :src="idCloudinaryBanner(imageSrc)"
+        :src="idCloudinaryBanner(imageSrc, 'banner')"
         alt="img banner"
         class="hero_image_bg h-inherit w-full"
       />

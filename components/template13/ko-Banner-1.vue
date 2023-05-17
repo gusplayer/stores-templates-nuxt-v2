@@ -18,14 +18,16 @@
         <picture>
           <source
             media="(max-width: 799px)"
-            :srcset="idCloudinaryBanner(item.url_img_background_res)"
+            :srcset="
+              idCloudinaryBanner(item.url_img_background_res, 'bannerRes', 800)
+            "
           />
           <source
             media="(min-width: 800px)"
-            :srcset="idCloudinaryBanner(item.url_img_background)"
+            :srcset="idCloudinaryBanner(item.url_img_background, 'banner')"
           />
           <img
-            v-lazy="idCloudinaryBanner(item.url_img_background)"
+            v-lazy="idCloudinaryBanner(item.url_img_background, 'banner')"
             alt="banner template13"
             class="w-full"
           />
@@ -112,6 +114,9 @@ export default {
 </script>
 
 <style scoped>
+picture {
+  width: 100%;
+}
 .wrapper-banner >>> .swiper-pagination-bullet-active {
   opacity: 1;
   background: var(--pagination_color);

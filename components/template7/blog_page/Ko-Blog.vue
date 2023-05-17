@@ -34,7 +34,10 @@
     >
       <div
         class="banner-blog"
-        :style="`background-image: url(${this.settingByTemplate7[0].settingK07Blog1['--url_img']})`"
+        :style="`background-image: url(${idCloudinaryBanner(
+          settingByTemplate7[0].settingK07Blog1['--url_img'],
+          'banner'
+        )});`"
       >
         <div class="tittle-banner-blog">
           <p class="txt-banner">{{ dataStore.tienda.nombre }}</p>
@@ -200,6 +203,7 @@
 </template>
 <script>
 import KoProductCard1 from '../../../components/template7/blog_page/_blogcard/Ko-cardblog'
+import idCloudinaryBanner from '../../../mixins/idCloudinary'
 export default {
   name: 'Ko-Blog',
   components: {
@@ -209,6 +213,7 @@ export default {
     dataStore: Object,
     settingByTemplate7: Array,
   },
+  mixins: [idCloudinaryBanner],
   data() {
     return {
       currentPage: 1,

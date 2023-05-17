@@ -307,7 +307,7 @@ export default {
           hid: 'keywords',
           name: 'keywords',
           content:
-            'tienda, store, shop, shopping, tienda online, online, komercia, producto, articulo',
+            'tienda, store, shop, shopping, tienda online, online, Komercia, producto, articulo',
         },
         { hid: 'distribution', name: 'distribution', content: 'global' },
         {

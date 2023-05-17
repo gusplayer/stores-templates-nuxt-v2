@@ -8,7 +8,12 @@
           alt="Product img"
         />
       </div>
-      <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
+      <div
+        v-show="photos && photos.length > 0"
+        class="swiper-slide"
+        v-for="photo in photos"
+        :key="photo.id"
+      >
         <img
           v-lazy="idCloudinary(photo.foto_cloudinary, 550, 550)"
           class="photo"
@@ -39,7 +44,7 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
-  name: 'productSlide-details',
+  name: 'productSlide-details11',
   props: ['photos', 'photo', 'idYoutube'],
   data() {
     return {
@@ -68,23 +73,15 @@ export default {
     setPhoto(photo) {
       return photo
     },
-    changeSlide() {
-      this.swiper.slidePrev(500, false)
-    },
   },
 }
 </script>
 
 <style scoped>
-.swiper-wrapper {
-}
 .swiper-slide {
-  width: 100%;
+  width: 375px;
   max-width: 375px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-position: center;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -111,6 +108,10 @@ export default {
   color: var(--color_text_btn);
   border-style: none;
   outline: none;
+}
+.wrapper-slider >>> .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--color_background_btn);
 }
 .wrapper-slider >>> .swiper-button-prev,
 .wrapper-slider >>> .swiper-button-next {

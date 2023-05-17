@@ -1,6 +1,7 @@
 <template>
   <div class="container-offers" :style="[settingGeneral]">
     <div
+      v-if="koffers"
       :style="[
         {
           '--font-style-1':
@@ -9,7 +10,6 @@
               : 'Poppins',
         },
       ]"
-      v-if="koffers"
       class="wrapper-items"
     >
       <div class="content-items">
@@ -19,10 +19,12 @@
           rel="noreferrer noopener"
         >
           <img
-            class="image-left"
-            :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
-            alt="image-left"
             v-if="koffers.values[0].url_img_background"
+            class="image-left"
+            :src="
+              idCloudinaryBanner(koffers.values[0].url_img_background, 'banner')
+            "
+            alt="image-left"
           />
           <div class="content-txt-left">
             <div class="left">
@@ -34,10 +36,10 @@
                 {{ koffers.values[0].title }}
               </p>
               <p
-                class="txt-left"
                 v-if="koffers.values[0].description"
-                :style="`color: ${koffers.values[0]['--color_title']};`"
+                class="txt-left"
                 style="margin-bottom: 10px"
+                :style="`color: ${koffers.values[0]['--color_title']};`"
               >
                 {{ koffers.values[0].description }}
               </p>
@@ -67,7 +69,12 @@
           <div class="image-static" v-if="!hover">
             <img
               class="image"
-              :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
+              :src="
+                idCloudinaryBanner(
+                  koffers.values[1].url_img_background,
+                  'banner'
+                )
+              "
               v-if="koffers.values[1].url_img_background"
               alt="imagen center static"
             />
@@ -75,8 +82,13 @@
           <div class="image-gif" v-if="hover">
             <img
               class="image"
-              :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
               v-if="koffers.values[1].url_gift_background"
+              :src="
+                idCloudinaryBanner(
+                  koffers.values[1].url_gift_background,
+                  'banner'
+                )
+              "
               alt="imagen center gift"
             />
           </div>
@@ -145,9 +157,11 @@
           class="items-right px-10 pt-5 pb-15 md:px-0 md:pt-0 md:pb-0"
         >
           <img
-            class="image-right"
-            :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
             v-if="koffers.values[2].url_img_background"
+            class="image-right"
+            :src="
+              idCloudinaryBanner(koffers.values[2].url_img_background, 'banner')
+            "
             alt="image-right"
           />
           <div class="content-txt-right">

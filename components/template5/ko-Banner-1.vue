@@ -1,17 +1,24 @@
 <template>
-  <div class="wrapper-banner">
-    <div class="header-content-logo" v-if="this.banner">
-      <div class="wrapper-banner" v-if="this.banner.banner">
-        <client-only>
-          <img
-            loading="lazy"
-            :src="idCloudinaryBanner(this.banner.banner)"
-            class="banner"
-            alt="Banner tienda"
-          />
-        </client-only>
-      </div>
-    </div>
+  <div
+    v-if="banner && banner.banner"
+    class="w-full h-full flex justify-center items-center"
+  >
+    <picture>
+      <source
+        media="(max-width: 799px)"
+        :srcset="idCloudinaryBanner(banner.banner, 'bannerRes', 800)"
+      />
+      <source
+        media="(min-width: 800px)"
+        :srcset="idCloudinaryBanner(banner.banner, 'banner')"
+      />
+      <img
+        loading="lazy"
+        v-lazy="idCloudinaryBanner(banner.banner, 'banner')"
+        class="w-full h-full object-cover object-center"
+        alt="Banner_tienda_template5"
+      />
+    </picture>
   </div>
 </template>
 
@@ -29,26 +36,10 @@ export default {
 </script>
 
 <style scoped>
-.wrapper-banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+picture {
   width: 100%;
+}
+.wrapper-banner {
   background: var(--background_color_2);
-}
-.header-content-logo {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-}
-.wrapper-banner {
-  width: 100%;
-}
-.banner {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
 }
 </style>

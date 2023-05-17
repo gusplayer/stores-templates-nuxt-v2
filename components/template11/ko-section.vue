@@ -26,7 +26,8 @@
             class="img-left"
             v-lazy="
               idCloudinaryBanner(
-                this.settingKsection.values[0].url_img_background
+                this.settingKsection.values[0].url_img_background,
+                'banner'
               )
             "
             alt="imagen-1"
@@ -65,7 +66,8 @@
             class="img-center"
             v-lazy="
               idCloudinaryBanner(
-                this.settingKsection.values[1].url_img_background
+                this.settingKsection.values[1].url_img_background,
+                'banner'
               )
             "
             alt="imagen-2"
@@ -104,7 +106,8 @@
             class="img-right"
             v-lazy="
               idCloudinaryBanner(
-                this.settingKsection.values[2].url_img_background
+                this.settingKsection.values[2].url_img_background,
+                'banner'
               )
             "
             alt="imagen-3"

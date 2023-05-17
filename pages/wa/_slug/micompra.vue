@@ -63,12 +63,12 @@ export default {
               this.orden = response.data.data
               return this.orden
             } else {
-              this.orden.message = 'No exite esta orden'
+              this.orden.message = 'No existe esta orden'
               return this.orden
             }
           })
           .catch(() => {
-            this.orden.message = 'No exite esta orden'
+            this.orden.message = 'No existe esta orden'
             return this.orden
           })
       } else {

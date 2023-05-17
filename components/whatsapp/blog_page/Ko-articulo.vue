@@ -58,9 +58,9 @@
 <script>
 import { mapState } from 'vuex'
 import extensions from '../../../mixins/elemenTiptap.vue'
-import idCloudinary from '../../../mixins/idCloudinary'
+// import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  mixins: [extensions, idCloudinary],
+  mixins: [extensions],
   name: 'Ko-articulo-wa',
   mounted() {
     if (this.listArticulos.length) {
