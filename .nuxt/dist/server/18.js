@@ -466,7 +466,7 @@ var newslettervue_type_template_id_6f3bdb4d_scoped_true_staticRenderFns = [];
 // CONCATENATED MODULE: ./components/template11/_newsletter/newsletter.vue?vue&type=template&id=6f3bdb4d&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(3);
+var external_axios_ = __webpack_require__(2);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: external "vee-validate"

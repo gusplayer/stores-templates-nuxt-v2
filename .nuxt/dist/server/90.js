@@ -871,7 +871,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/headers/_order1/order1.vue?vue&type=template&id=1b3a5262&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(3);
+var external_axios_ = __webpack_require__(2);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: ./mixins/idCloudinary.js

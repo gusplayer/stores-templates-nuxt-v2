@@ -372,7 +372,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/wa/_slug/micompra.vue?vue&type=template&id=1a68475c&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(3);
+var external_axios_ = __webpack_require__(2);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/Ko-miCompra-1.vue?vue&type=template&id=02215daa&scoped=true&

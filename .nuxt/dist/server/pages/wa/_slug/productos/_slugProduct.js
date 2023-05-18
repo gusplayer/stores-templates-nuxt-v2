@@ -1392,7 +1392,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/headers/_order1/order1.vue?vue&type=template&id=1b3a5262&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(3);
+var external_axios_ = __webpack_require__(2);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: ./mixins/idCloudinary.js
@@ -2667,7 +2667,7 @@ var Ko_ProductDetail_wavue_type_template_id_cae1cbf0_scoped_true_staticRenderFns
 var external_vuex_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(3);
+var external_axios_ = __webpack_require__(2);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: ./components/whatsapp/_productdetails/productSlide.vue + 4 modules
