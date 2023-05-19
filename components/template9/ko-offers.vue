@@ -1,6 +1,7 @@
 <template>
   <div class="container-offers" :style="[settingGeneral]">
     <div
+      v-if="koffers"
       :style="[
         {
           '--font-style-1':
@@ -9,20 +10,21 @@
               : 'Poppins',
         },
       ]"
-      v-if="koffers"
       class="wrapper-items"
     >
       <div class="content-items">
         <a
           :href="`${koffers.values[0].url_redirect}`"
-          class="items-left"
+          class="items-left px-10 pt-15 pb-5 md:px-0 md:pt-0 md:pb-0"
           rel="noreferrer noopener"
         >
           <img
-            class="image-left"
-            :src="idCloudinaryBanner(koffers.values[0].url_img_background)"
-            alt="image-left"
             v-if="koffers.values[0].url_img_background"
+            class="image-left"
+            :src="
+              idCloudinaryBanner(koffers.values[0].url_img_background, 'banner')
+            "
+            alt="image-left"
           />
           <div class="content-txt-left">
             <div class="left">
@@ -34,10 +36,10 @@
                 {{ koffers.values[0].title }}
               </p>
               <p
-                class="txt-left"
                 v-if="koffers.values[0].description"
-                :style="`color: ${koffers.values[0]['--color_title']};`"
+                class="txt-left"
                 style="margin-bottom: 10px"
+                :style="`color: ${koffers.values[0]['--color_title']};`"
               >
                 {{ koffers.values[0].description }}
               </p>
@@ -60,14 +62,19 @@
           </div>
         </a>
         <button
-          class="items-center"
+          class="items-center px-10 pt-5 pb-5 md:px-0 md:pt-0 md:pb-0 relative"
           rel="noreferrer noopener"
           @click="sendUrl(koffers.values[1].url_redirect)"
         >
           <div class="image-static" v-if="!hover">
             <img
               class="image"
-              :src="idCloudinaryBanner(koffers.values[1].url_img_background)"
+              :src="
+                idCloudinaryBanner(
+                  koffers.values[1].url_img_background,
+                  'banner'
+                )
+              "
               v-if="koffers.values[1].url_img_background"
               alt="imagen center static"
             />
@@ -75,21 +82,86 @@
           <div class="image-gif" v-if="hover">
             <img
               class="image"
-              :src="idCloudinaryBanner(koffers.values[1].url_gift_background)"
               v-if="koffers.values[1].url_gift_background"
+              :src="
+                idCloudinaryBanner(
+                  koffers.values[1].url_gift_background,
+                  'banner'
+                )
+              "
               alt="imagen center gift"
             />
+          </div>
+          <div
+            v-if="dataStore.tienda.id_tienda === 889"
+            class="content-txt-right top-0"
+          >
+            <div class="right">
+              <div class="container">
+                <p
+                  class="txt-right"
+                  v-if="koffers.values[2].title"
+                  :style="`color: ${koffers.values[2]['--color_title']};`"
+                >
+                  Collares
+                </p>
+                <div class="overlay-1">
+                  <p
+                    class="txt-right"
+                    v-if="koffers.values[2].title"
+                    :style="`color: ${koffers.values[2]['--color_title']};`"
+                  >
+                    Collares
+                  </p>
+                </div>
+              </div>
+              <div class="container">
+                <p
+                  class="txt-right"
+                  v-if="koffers.values[2].description"
+                  :style="`color: ${koffers.values[0]['--color_title']};`"
+                >
+                  {{ koffers.values[0].description }}
+                </p>
+                <div class="overlay-2">
+                  <p
+                    class="txt-right"
+                    v-if="koffers.values[2].description"
+                    :style="`color: ${koffers.values[2]['--color_title']};`"
+                  >
+                    {{ koffers.values[0].description }}
+                  </p>
+                </div>
+              </div>
+              <div class="item-button-right">
+                <a
+                  href="https://www.perfectaaccesorios.com/productos?category=Collares"
+                  rel="noreferrer noopener"
+                  class="btn-right"
+                  :style="`background: ${koffers.values[2]['--color_background_btn']};`"
+                >
+                  <span
+                    class="txt-btn-right"
+                    :style="`color: ${koffers.values[2]['--color_text_btn']};`"
+                  >
+                    {{ $t('home_comprarAhora') }}
+                  </span>
+                </a>
+              </div>
+            </div>
           </div>
         </button>
         <a
           :href="`${koffers.values[2].url_redirect}`"
           rel="noreferrer noopener"
-          class="items-right"
+          class="items-right px-10 pt-5 pb-15 md:px-0 md:pt-0 md:pb-0"
         >
           <img
-            class="image-right"
-            :src="idCloudinaryBanner(koffers.values[2].url_img_background)"
             v-if="koffers.values[2].url_img_background"
+            class="image-right"
+            :src="
+              idCloudinaryBanner(koffers.values[2].url_img_background, 'banner')
+            "
             alt="image-right"
           />
           <div class="content-txt-right">

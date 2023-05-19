@@ -15,7 +15,8 @@
     <div
       class="content-bg"
       :style="`background-image: url(${idCloudinaryBanner(
-        newsletter.url_img_background
+        newsletter.url_img_background,
+        'banner'
       )});`"
     >
       <div class="content-txt">

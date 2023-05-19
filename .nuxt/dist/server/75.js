@@ -33,7 +33,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/_productcard/ProductCard.vue?vue&type=template&id=75667e8a&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/_productcard/ProductCard.vue?vue&type=template&id=75667e8a&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -303,7 +303,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "75667e8a",
-  "7e3fe3dc"
+  "311d18ca"
   
 )
 
@@ -398,14 +398,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 945:
+/***/ 946:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/Ko-gify.vue?vue&type=template&id=7fbdb95c&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/Ko-gify.vue?vue&type=template&id=7fbdb95c&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -534,7 +534,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "7fbdb95c",
-  "61c0e66c"
+  "59050d47"
   
 )
 

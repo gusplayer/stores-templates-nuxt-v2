@@ -6,7 +6,7 @@ exports.modules = {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productcard/Ko-ProductCard-1.vue?vue&type=template&id=1617f7c9&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productcard/Ko-ProductCard-1.vue?vue&type=template&id=1617f7c9&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -338,7 +338,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "1617f7c9",
-  "35f63356"
+  "5d59ce9d"
   
 )
 
@@ -423,7 +423,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productofavorito/productSlide.vue?vue&type=template&id=1d5997fa&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productofavorito/productSlide.vue?vue&type=template&id=1d5997fa&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -561,7 +561,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "1d5997fa",
-  "087892e0"
+  "16660f82"
   
 )
 
@@ -575,7 +575,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(769);
+var content = __webpack_require__(770);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -593,7 +593,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(771);
+var content = __webpack_require__(772);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -611,7 +611,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(773);
+var content = __webpack_require__(774);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -629,7 +629,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(775);
+var content = __webpack_require__(776);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -647,7 +647,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(777);
+var content = __webpack_require__(778);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -665,7 +665,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(779);
+var content = __webpack_require__(780);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -813,7 +813,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "f9b99f58"
+  "445de0a8"
   
 )
 
@@ -821,7 +821,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 768:
+/***/ 769:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -833,7 +833,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 769:
+/***/ 770:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -848,7 +848,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 770:
+/***/ 771:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -860,7 +860,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 771:
+/***/ 772:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -875,7 +875,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 772:
+/***/ 773:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -887,7 +887,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 773:
+/***/ 774:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -902,7 +902,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 774:
+/***/ 775:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -914,7 +914,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 775:
+/***/ 776:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -929,7 +929,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 776:
+/***/ 777:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -941,7 +941,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 777:
+/***/ 778:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -956,7 +956,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 778:
+/***/ 779:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -968,7 +968,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 779:
+/***/ 780:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1001,14 +1001,14 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 851:
+/***/ 852:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductDetail-1.vue?vue&type=template&id=659f50f3&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductDetail-1.vue?vue&type=template&id=659f50f3&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1130,10 +1130,10 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/template5/Ko-ProductDetail-1.vue?vue&type=template&id=659f50f3&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(3);
+var external_axios_ = __webpack_require__(2);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/productSlide.vue?vue&type=template&id=5221f8fe&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/productSlide.vue?vue&type=template&id=5221f8fe&scoped=true&
 var productSlidevue_type_template_id_5221f8fe_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1206,7 +1206,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(768)
+  var style0 = __webpack_require__(769)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1220,12 +1220,12 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "5221f8fe",
-  "f38023fa"
+  "c51b9796"
   
 )
 
 /* harmony default export */ var productSlide = (component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/selectGroup.vue?vue&type=template&id=eedf2ea6&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/selectGroup.vue?vue&type=template&id=eedf2ea6&scoped=true&
 var selectGroupvue_type_template_id_eedf2ea6_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1270,7 +1270,7 @@ var selectGroupvue_type_template_id_eedf2ea6_scoped_true_staticRenderFns = [];
 
 function selectGroup_injectStyles (context) {
   
-  var style0 = __webpack_require__(770)
+  var style0 = __webpack_require__(771)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1284,12 +1284,12 @@ var selectGroup_component = Object(componentNormalizer["a" /* default */])(
   false,
   selectGroup_injectStyles,
   "eedf2ea6",
-  "20c94f1c"
+  "8262f800"
   
 )
 
 /* harmony default export */ var selectGroup = (selectGroup_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/descriptionProduct.vue?vue&type=template&id=28c68c33&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/descriptionProduct.vue?vue&type=template&id=28c68c33&scoped=true&
 var descriptionProductvue_type_template_id_28c68c33_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1374,7 +1374,7 @@ var formatCurrent = __webpack_require__(63);
 
 function descriptionProduct_injectStyles (context) {
   
-  var style0 = __webpack_require__(772)
+  var style0 = __webpack_require__(773)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1388,12 +1388,12 @@ var descriptionProduct_component = Object(componentNormalizer["a" /* default */]
   false,
   descriptionProduct_injectStyles,
   "28c68c33",
-  "83f5cbd8"
+  "70e272c6"
   
 )
 
 /* harmony default export */ var descriptionProduct = (descriptionProduct_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/suggestionsProducto.vue?vue&type=template&id=2cf310cc&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/suggestionsProducto.vue?vue&type=template&id=2cf310cc&scoped=true&
 var suggestionsProductovue_type_template_id_2cf310cc_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1431,7 +1431,7 @@ var _productofavorito_productSlide = __webpack_require__(168);
 
 function suggestionsProducto_injectStyles (context) {
   
-  var style0 = __webpack_require__(774)
+  var style0 = __webpack_require__(775)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1445,12 +1445,12 @@ var suggestionsProducto_component = Object(componentNormalizer["a" /* default */
   false,
   suggestionsProducto_injectStyles,
   "2cf310cc",
-  "7df589fe"
+  "26c3478c"
   
 )
 
 /* harmony default export */ var suggestionsProducto = (suggestionsProducto_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/zoomImg.vue?vue&type=template&id=45ffdea8&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productdetails/zoomImg.vue?vue&type=template&id=45ffdea8&scoped=true&
 var zoomImgvue_type_template_id_45ffdea8_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -1504,7 +1504,7 @@ var zoomImgvue_type_template_id_45ffdea8_scoped_true_staticRenderFns = [];
 
 function zoomImg_injectStyles (context) {
   
-  var style0 = __webpack_require__(776)
+  var style0 = __webpack_require__(777)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1518,7 +1518,7 @@ var zoomImg_component = Object(componentNormalizer["a" /* default */])(
   false,
   zoomImg_injectStyles,
   "45ffdea8",
-  "426bd57f"
+  "77a20fe6"
   
 )
 
@@ -2049,7 +2049,7 @@ var zoomImg_component = Object(componentNormalizer["a" /* default */])(
 
 function Ko_ProductDetail_1_injectStyles (context) {
   
-  var style0 = __webpack_require__(778)
+  var style0 = __webpack_require__(779)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2063,7 +2063,7 @@ var Ko_ProductDetail_1_component = Object(componentNormalizer["a" /* default */]
   false,
   Ko_ProductDetail_1_injectStyles,
   "659f50f3",
-  "7ddf1802"
+  "4ad10644"
   
 )
 

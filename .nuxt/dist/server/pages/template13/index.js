@@ -46,14 +46,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 890:
+/***/ 891:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template13/index.vue?vue&type=template&id=d59cfcae&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template13/index.vue?vue&type=template&id=d59cfcae&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -97,15 +97,15 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template13',
   components: {
-    koBanner: () => __webpack_require__.e(/* import() */ 112).then(__webpack_require__.bind(null, 936)),
+    koBanner: () => __webpack_require__.e(/* import() */ 113).then(__webpack_require__.bind(null, 937)),
     // KoProductFavoritos: () =>
     //   import('../../components/template13/ko-BannerFooter-1'),
-    KoProductList: () => __webpack_require__.e(/* import() */ 73).then(__webpack_require__.bind(null, 937)),
+    KoProductList: () => __webpack_require__.e(/* import() */ 73).then(__webpack_require__.bind(null, 938)),
     // KoProductListHoko: () =>
     //   import('../../components/template13/Ko-ProductFavoritosHoko.vue'),
-    KoInformation: () => __webpack_require__.e(/* import() */ 111).then(__webpack_require__.bind(null, 938)),
-    KoInfoText: () => __webpack_require__.e(/* import() */ 110).then(__webpack_require__.bind(null, 939)),
-    KoNewsletter: () => __webpack_require__.e(/* import() */ 109).then(__webpack_require__.bind(null, 940))
+    KoInformation: () => __webpack_require__.e(/* import() */ 112).then(__webpack_require__.bind(null, 939)),
+    KoInfoText: () => __webpack_require__.e(/* import() */ 111).then(__webpack_require__.bind(null, 940)),
+    KoNewsletter: () => __webpack_require__.e(/* import() */ 110).then(__webpack_require__.bind(null, 941))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -240,7 +240,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "d59cfcae",
-  "4358fba3"
+  "236c18b8"
   
 )
 

@@ -4,10 +4,10 @@
       <div class="content-banner">
         <div class="content-banner-items">
           <img
-            v-if="this.settingByTemplate && this.settingByTemplate.banner"
+            v-if="settingByTemplate && settingByTemplate.banner"
             class="banner-image"
             :src="
-              idCloudinaryBannerResponsive(this.settingByTemplate.banner, 1000)
+              idCloudinaryBanner(settingByTemplate.banner, 'bannerRes', 900)
             "
             alt="banner-store"
           />
@@ -21,10 +21,10 @@
       </div>
       <div class="content-data-store">
         <nuxt-link
-          :to="this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
+          :to="stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
           class="data-item-logo"
           :class="
-            this.settingByTemplate.logo_cuadrado == 1
+            settingByTemplate.logo_cuadrado == 1
               ? `imagen-cuadrado`
               : `imagen-redondo`
           "
@@ -32,11 +32,11 @@
           <img
             class="logo-img"
             :class="
-              this.settingByTemplate.logo_cuadrado == 1
+              settingByTemplate.logo_cuadrado == 1
                 ? `imagen-cuadrado`
                 : `imagen-redondo`
             "
-            :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+            :src="`${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
             alt="logo-Store"
           />
         </nuxt-link>
@@ -46,16 +46,14 @@
           </p>
           <p
             class="category-store"
-            v-if="
-              this.settingByTemplate && this.settingByTemplate.mensaje_principal
-            "
+            v-if="settingByTemplate && settingByTemplate.mensaje_principal"
           >
-            {{ this.settingByTemplate.mensaje_principal }}
+            {{ settingByTemplate.mensaje_principal }}
           </p>
         </div>
         <div
           class="content-seeMore"
-          v-if="this.settingByTemplate && this.settingByTemplate.descripcion"
+          v-if="settingByTemplate && settingByTemplate.descripcion"
         >
           <p
             v-if="!showInfoStore"
@@ -81,11 +79,9 @@
           </div>
         </div>
         <div class="content-infoStore" v-if="showInfoStore">
-          <div
-            v-if="this.settingByTemplate && this.settingByTemplate.descripcion"
-          >
+          <div v-if="settingByTemplate && settingByTemplate.descripcion">
             <p class="txt-direccion">
-              {{ this.settingByTemplate.descripcion }}
+              {{ settingByTemplate.descripcion }}
             </p>
           </div>
         </div>

@@ -1,14 +1,14 @@
 exports.ids = [32];
 exports.modules = {
 
-/***/ 885:
+/***/ 886:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=template&id=25b64833&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=template&id=25b64833&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -30,12 +30,12 @@ var external_vuex_ = __webpack_require__(7);
 /* harmony default export */ var contactovue_type_script_lang_js_ = ({
   layout: 'default',
   components: {
-    K05Contact: () => __webpack_require__.e(/* import() */ 113).then(__webpack_require__.bind(null, 911)),
-    K07Contact: () => __webpack_require__.e(/* import() */ 118).then(__webpack_require__.bind(null, 912)),
-    K09Contact: () => __webpack_require__.e(/* import() */ 124).then(__webpack_require__.bind(null, 913)),
-    K10Contact: () => __webpack_require__.e(/* import() */ 100).then(__webpack_require__.bind(null, 914)),
-    K11Contact: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 915)),
-    K13Contact: () => __webpack_require__.e(/* import() */ 108).then(__webpack_require__.bind(null, 916))
+    K05Contact: () => __webpack_require__.e(/* import() */ 114).then(__webpack_require__.bind(null, 912)),
+    K07Contact: () => __webpack_require__.e(/* import() */ 119).then(__webpack_require__.bind(null, 913)),
+    K09Contact: () => __webpack_require__.e(/* import() */ 125).then(__webpack_require__.bind(null, 914)),
+    K10Contact: () => __webpack_require__.e(/* import() */ 101).then(__webpack_require__.bind(null, 915)),
+    K11Contact: () => __webpack_require__.e(/* import() */ 106).then(__webpack_require__.bind(null, 916)),
+    K13Contact: () => __webpack_require__.e(/* import() */ 109).then(__webpack_require__.bind(null, 917))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -148,7 +148,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "01bb6ad3"
+  "47536775"
   
 )
 

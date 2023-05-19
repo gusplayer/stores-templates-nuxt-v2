@@ -111,13 +111,12 @@
                 class="photo_main"
               ></iframe>
             </div>
-            <div class="photos_responsive">
-              <ProductSlide
-                :photos="data.fotos"
-                :photo="data.detalle.foto_cloudinary"
-                :idYoutube="idYoutube"
-              />
-            </div>
+            <ProductSlide
+              class="w-full h-full box-border"
+              :photos="data.fotos"
+              :photo="data.detalle.foto_cloudinary"
+              :idYoutube="idYoutube"
+            />
           </div>
         </div>
         <div

@@ -19,7 +19,8 @@
               class="banner"
               :src="
                 idCloudinaryBanner(
-                  settingKCarousel.values[index].url_img_background
+                  settingKCarousel.values[index].url_img_background,
+                  'banner'
                 )
               "
               alt="bg"
@@ -28,7 +29,10 @@
             <img
               class="banner-responsive"
               :src="
-                idCloudinaryBanner(settingKCarousel.values[index].url_img_movil)
+                idCloudinaryBanner(
+                  settingKCarousel.values[index].url_img_movil,
+                  'banner'
+                )
               "
               alt="bg"
               v-if="settingKCarousel.values[index].url_img_movil"
@@ -38,11 +42,11 @@
               :banner="banner"
               :settingKCarousel="settingKCarousel"
               :settingGeneral="settingGeneral"
-            ></KObanner>
+            />
           </a>
         </div>
       </div>
-      <div class="swiper-pagination"></div>
+      <div class="swiper-pagination" />
     </div>
   </div>
 </template>

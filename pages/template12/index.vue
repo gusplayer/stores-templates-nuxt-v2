@@ -18,7 +18,7 @@
         <i-main-section v-bind="componentsProps" id="KProductX" />
       </div>
       <i-footer v-bind="componentsProps" id="KFooterX" />
-      <i-button-car></i-button-car>
+      <i-button-car />
     </div>
   </div>
 </template>

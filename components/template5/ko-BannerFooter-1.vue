@@ -1,25 +1,32 @@
 <template>
-  <div class="wrapper-banner">
-    <div class="header-content-logo" v-if="this.banner">
-      <div class="wrapper-banner" v-if="this.banner.banner_footer">
-        <client-only>
-          <img
-            loading="lazy"
-            v-lazy="idCloudinaryBanner(this.banner.banner_footer)"
-            class="banner"
-            alt="Banner tienda"
-          />
-        </client-only>
-      </div>
-    </div>
+  <div
+    v-if="banner && banner.banner_footer"
+    class="w-full h-full flex justify-center items-center"
+  >
+    <picture>
+      <source
+        media="(max-width: 799px)"
+        :srcset="idCloudinaryBanner(banner.banner_footer, 'bannerRes', 800)"
+      />
+      <source
+        media="(min-width: 800px)"
+        :srcset="idCloudinaryBanner(banner.banner_footer, 'banner')"
+      />
+      <img
+        loading="lazy"
+        v-lazy="idCloudinaryBanner(banner.banner_footer, 'banner')"
+        class="w-full h-full object-cover object-center"
+        alt="Banner_tienda_template5"
+      />
+    </picture>
   </div>
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary],
-  name: 'Ko-BannerFooter-1',
+  mixins: [idCloudinaryBanner],
+  name: 'Ko-Banner-1',
   computed: {
     banner() {
       return this.$store.state.settingByTemplate
@@ -29,26 +36,10 @@ export default {
 </script>
 
 <style scoped>
-.wrapper-banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+picture {
   width: 100%;
+}
+.wrapper-banner {
   background: var(--background_color_2);
-}
-.header-content-logo {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-}
-.wrapper-banner {
-  width: 100%;
-}
-.banner {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
 }
 </style>

@@ -8,36 +8,36 @@
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaTratamientos') }}
         </p>
-        <div v-html="this.dataStore.politicas.datos"></div>
+        <div v-html="this.dataStore.politicas.datos" />
       </div>
 
       <div v-if="this.dataStore.politicas.garantia" class="item-text-terms">
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaGarantia') }}
         </p>
-        <div v-html="this.dataStore.politicas.garantia"></div>
+        <div v-html="this.dataStore.politicas.garantia" />
       </div>
 
       <div v-if="this.dataStore.politicas.devolucion" class="item-text-terms">
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaDevoluciones') }}
         </p>
-        <div v-html="this.dataStore.politicas.devolucion"></div>
+        <div v-html="this.dataStore.politicas.devolucion" />
       </div>
 
       <div v-if="this.dataStore.politicas.cambio" class="item-text-terms">
         <p class="text-17 font-bold mb-10">{{ $t('footer_politicaCambio') }}</p>
-        <div v-html="this.dataStore.politicas.cambio"></div>
+        <div v-html="this.dataStore.politicas.cambio" />
       </div>
 
       <div v-if="this.dataStore.politicas.envios" class="item-text-terms">
         <p class="text-17 font-bold mb-10">{{ $t('footer_politicaEnvios') }}</p>
-        <div v-html="this.dataStore.politicas.envios"></div>
+        <div v-html="this.dataStore.politicas.envios" />
       </div>
 
       <div v-if="this.dataStore.politicas.pagos" class="item-text-terms">
         <p class="text-16 font-bold mb-10">{{ $t('footer_politicaPagos') }}</p>
-        <div v-html="this.dataStore.politicas.pagos" class="text-justify"></div>
+        <div v-html="this.dataStore.politicas.pagos" class="text-justify" />
       </div>
     </div>
   </div>

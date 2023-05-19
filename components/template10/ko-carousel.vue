@@ -10,22 +10,30 @@
         :class="item.visbleBtn ? 'pointer-events-none' : 'cursor-pointer'"
         rel="noreferrer noopener"
       >
-        <img
-          class="slide-bgWeb"
-          :src="idCloudinaryBanner(item.url_img_background)"
-          alt="Bg-Image"
-        />
-        <img
-          class="slide-bgMovil"
-          :src="idCloudinaryBanner(item.url_img_background_res)"
-          alt="Bg-Image"
-        />
+        <picture>
+          <source
+            media="(max-width: 799px)"
+            :srcset="
+              idCloudinaryBanner(item.url_img_background_res, 'bannerRes', 800)
+            "
+          />
+          <source
+            media="(min-width: 800px)"
+            :srcset="idCloudinaryBanner(item.url_img_background, 'banner')"
+          />
+          <img
+            loading="lazy"
+            v-lazy="idCloudinaryBanner(item.url_img_background, 'banner')"
+            class="w-full h-full object-cover object-center"
+            alt="Banner_tienda_template10"
+          />
+        </picture>
         <div class="content absolute">
           <div class="content-items-top">
             <div
               class="empty-border-left fadeInLeft"
               :style="`background-color: ${item.color_border};`"
-            ></div>
+            />
             <div class="content-text-top">
               <div class="txt-banner-top">
                 <p
@@ -81,7 +89,7 @@
         </div>
       </a>
     </div>
-    <div class="swiper-pagination" v-if="banner.visible_pagination"></div>
+    <div class="swiper-pagination" v-if="banner.visible_pagination" />
   </div>
 </template>
 <script>
@@ -151,33 +159,8 @@ export default {
   background: white;
   opacity: 0.2;
 }
-/* .swiper-slide {
-  @apply w-full flex justify-center items-center z-10;
-} */
-.slide-bgWeb {
-  display: initial;
-  @apply w-full object-center object-cover;
-}
-.slide-bgMovil {
-  display: none;
-}
-
-@media (min-width: 1400px) {
-  .slide-bgWeb {
-    max-height: 732px;
-  }
-  .slide-bgMovil {
-    max-height: 732px;
-  }
-}
-@media (max-width: 768px) {
-  .slide-bgWeb {
-    display: none;
-  }
-  .slide-bgMovil {
-    display: initial;
-    @apply w-full object-center object-cover;
-  }
+picture {
+  width: 100%;
 }
 .content {
   z-index: 20 !important;

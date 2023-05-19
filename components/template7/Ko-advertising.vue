@@ -27,7 +27,9 @@
           <div class="wrapper-img">
             <img
               class="max-w-auto"
-              v-lazy="idCloudinaryBanner(settingKAdvertising.ur_img_card)"
+              v-lazy="
+                idCloudinaryBanner(settingKAdvertising.ur_img_card, 'banner')
+              "
               alt="icon"
             />
           </div>
@@ -79,7 +81,8 @@ export default {
           if (this.settingKAdvertising['--url_img_background']) {
             var imagen = document.getElementById('BgAdvertising')
             imagen.style.backgroundImage = `url(${this.idCloudinaryBanner(
-              this.settingKAdvertising['--url_img_background']
+              this.settingKAdvertising['--url_img_background'],
+              'banner'
             )})`
           }
         }

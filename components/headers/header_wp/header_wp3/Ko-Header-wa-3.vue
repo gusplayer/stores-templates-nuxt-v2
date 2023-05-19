@@ -3,7 +3,11 @@
     <div class="content-header-items">
       <div
         class="content-banner-items"
-        :style="`background-image: url(${this.bannerUrl})`"
+        :style="`background-image: url(${idCloudinaryBanner(
+          bannerUrl,
+          'bannerRes',
+          900
+        )});`"
       >
         <div
           class="content-data-store"
@@ -11,12 +15,10 @@
         >
           <div class="content-logo-name">
             <nuxt-link
-              :to="
-                this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`
-              "
+              :to="stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
               class="data-item-logo"
               :class="
-                this.settingByTemplate.logo_cuadrado == 1
+                settingByTemplate.logo_cuadrado == 1
                   ? `imagen-cuadrado`
                   : `imagen-redondo`
               "
@@ -24,11 +26,11 @@
               <img
                 class="logo-img"
                 :class="
-                  this.settingByTemplate.logo_cuadrado == 1
+                  settingByTemplate.logo_cuadrado == 1
                     ? `imagen-cuadrado`
                     : `imagen-redondo`
                 "
-                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+                :src="`${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
                 alt="logo-Store"
               />
             </nuxt-link>
@@ -38,18 +40,15 @@
               </p>
               <p
                 class="category-store"
-                v-if="
-                  this.settingByTemplate &&
-                  this.settingByTemplate.mensaje_principal
-                "
+                v-if="settingByTemplate && settingByTemplate.mensaje_principal"
               >
-                {{ this.settingByTemplate.mensaje_principal }}
+                {{ settingByTemplate.mensaje_principal }}
               </p>
             </div>
           </div>
           <div
             class="content-seeMore"
-            v-if="this.settingByTemplate && this.settingByTemplate.descripcion"
+            v-if="settingByTemplate && settingByTemplate.descripcion"
           >
             <p
               v-if="!showInfoStore"
@@ -78,9 +77,9 @@
       </div>
     </div>
     <div class="content-infoStore" v-if="showInfoStore">
-      <div v-if="this.settingByTemplate && this.settingByTemplate.descripcion">
+      <div v-if="settingByTemplate && settingByTemplate.descripcion">
         <p class="txt-direccion">
-          {{ this.settingByTemplate.descripcion }}
+          {{ settingByTemplate.descripcion }}
         </p>
       </div>
     </div>
@@ -89,6 +88,7 @@
 </template>
 <script>
 import KoOrderWa from '../../_order1/order1.vue'
+import idCloudinaryBanner from '../../../../mixins/idCloudinary'
 export default {
   name: 'HeaderWa3',
   components: { KoOrderWa },
@@ -96,6 +96,7 @@ export default {
     dataStore: Object,
     settingByTemplate: Object,
   },
+  mixins: [idCloudinaryBanner],
   mounted() {
     if (this.settingByTemplate && this.settingByTemplate.banner) {
       this.bannerUrl = this.settingByTemplate.banner

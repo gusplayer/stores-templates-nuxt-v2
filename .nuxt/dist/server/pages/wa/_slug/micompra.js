@@ -249,7 +249,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "643d2296"
+  "513b63ee"
   
 )
 
@@ -344,14 +344,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 864:
+/***/ 865:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/wa/_slug/micompra.vue?vue&type=template&id=11f14ef4&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/wa/_slug/micompra.vue?vue&type=template&id=1a68475c&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -369,13 +369,13 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/wa/_slug/micompra.vue?vue&type=template&id=11f14ef4&
+// CONCATENATED MODULE: ./pages/wa/_slug/micompra.vue?vue&type=template&id=1a68475c&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(3);
+var external_axios_ = __webpack_require__(2);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/Ko-miCompra-1.vue?vue&type=template&id=02215daa&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/Ko-miCompra-1.vue?vue&type=template&id=02215daa&scoped=true&
 var Ko_miCompra_1vue_type_template_id_02215daa_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -992,7 +992,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "02215daa",
-  "0974c71a"
+  "ab532b36"
   
 )
 
@@ -1041,11 +1041,11 @@ var component = Object(componentNormalizer["a" /* default */])(
             this.orden = response.data.data;
             return this.orden;
           } else {
-            this.orden.message = 'No exite esta orden';
+            this.orden.message = 'No existe esta orden';
             return this.orden;
           }
         }).catch(() => {
-          this.orden.message = 'No exite esta orden';
+          this.orden.message = 'No existe esta orden';
           return this.orden;
         });
       } else {
@@ -1071,7 +1071,7 @@ var micompra_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "326c9f90"
+  "3c850cc8"
   
 )
 

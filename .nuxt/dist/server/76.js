@@ -51,7 +51,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productcard/ProductCard.vue?vue&type=template&id=19bc9669&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/_productcard/ProductCard.vue?vue&type=template&id=19bc9669&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -346,7 +346,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "19bc9669",
-  "7b8d3560"
+  "32767008"
   
 )
 
@@ -360,7 +360,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(745);
+var content = __webpack_require__(746);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -414,7 +414,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 744:
+/***/ 745:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -426,14 +426,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 745:
+/***/ 746:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".product-content[data-v-115a94ee]{background:var(--background_color_1);padding-top:70px}.product-content[data-v-115a94ee],.producto-items-content[data-v-115a94ee]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}.producto-items-content[data-v-115a94ee]{text-align:center}.product-conten-items[data-v-115a94ee]{align-items:flex-start;display:flex;flex-direction:column;justify-content:flex-start}.product-text[data-v-115a94ee]{margin-bottom:30px;max-width:470px;text-align:center;width:100%}.tittle[data-v-115a94ee]{color:var(--color_title);font-family:var(--font-style-1);font-weight:700}.content-item[data-v-115a94ee]{flex-direction:row;margin-bottom:40px}.content-item[data-v-115a94ee],.content-item-productos[data-v-115a94ee]{align-items:center;display:flex;justify-content:center;width:100%}.content-item-productos[data-v-115a94ee]{flex-direction:column}.btn-products[data-v-115a94ee]{border:2px solid var(--color_background_btn);color:var(--color_text_btn);font-family:var(--font-style-2);font-size:15px;font-weight:800;height:45px;letter-spacing:1px;margin-top:80px;padding-left:5px;padding-right:5px;transition:all .15s ease-in;width:auto}.btn-products[data-v-115a94ee]:hover{background-color:#2c2930;color:#fff;transition:all .15s ease-in}@media (min-width:300px){.product-conten-items[data-v-115a94ee]{grid-gap:1rem;display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr));width:95%}.tittle[data-v-115a94ee]{font-size:30px;line-height:34px}}@media (min-width:500px){.product-conten-items[data-v-115a94ee]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:90%}}@media (min-width:1024px){.product-conten-items[data-v-115a94ee]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}}@media (min-width:1000px){.product-conten-items[data-v-115a94ee]{width:95%}}@media (min-width:1160px){.product-conten-items[data-v-115a94ee]{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:95vw}}@media (min-width:1920px){.tittle[data-v-115a94ee]{font-size:36px;line-height:34px}}@media (min-width:2560px){.product-conten-items[data-v-115a94ee]{gap:2.5rem}}@media (max-width:460px){.product-text[data-v-115a94ee]{width:90%}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".product-content[data-v-115a94ee]{background:var(--background_color_1);padding-top:70px}.product-content[data-v-115a94ee],.producto-items-content[data-v-115a94ee]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}.producto-items-content[data-v-115a94ee]{text-align:center}.product-conten-items[data-v-115a94ee]{align-items:flex-start;display:flex;flex-direction:column;justify-content:flex-start}.product-text[data-v-115a94ee]{margin-bottom:30px;max-width:470px;text-align:center;width:100%}.tittle[data-v-115a94ee]{color:var(--color_title);font-family:var(--font-style-1);font-weight:700}.content-item[data-v-115a94ee]{flex-direction:row;margin-bottom:40px}.content-item[data-v-115a94ee],.content-item-productos[data-v-115a94ee]{align-items:center;display:flex;justify-content:center;width:100%}.content-item-productos[data-v-115a94ee]{flex-direction:column}.btn-products[data-v-115a94ee]{border:2px solid var(--color_background_btn);color:var(--color_text_btn);font-family:var(--font-style-2);font-size:15px;font-weight:800;height:45px;letter-spacing:1px;margin-top:80px;padding-left:5px;padding-right:5px;width:auto}.btn-products[data-v-115a94ee],.btn-products[data-v-115a94ee]:hover{transition:all .15s ease-in}.btn-products[data-v-115a94ee]:hover{background-color:#2c2930;color:#fff}@media (min-width:300px){.product-conten-items[data-v-115a94ee]{grid-gap:1rem;display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr));width:95%}.tittle[data-v-115a94ee]{font-size:30px;line-height:34px}}@media (min-width:500px){.product-conten-items[data-v-115a94ee]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:90%}}@media (min-width:1024px){.product-conten-items[data-v-115a94ee]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}}@media (min-width:1000px){.product-conten-items[data-v-115a94ee]{width:95%}}@media (min-width:1160px){.product-conten-items[data-v-115a94ee]{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:95vw}}@media (min-width:1920px){.tittle[data-v-115a94ee]{font-size:36px;line-height:34px}}@media (min-width:2560px){.product-conten-items[data-v-115a94ee]{gap:2.5rem}}@media (max-width:460px){.product-text[data-v-115a94ee]{width:90%}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -441,14 +441,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 951:
+/***/ 952:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-ProductList.vue?vue&type=template&id=115a94ee&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-ProductList.vue?vue&type=template&id=115a94ee&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -535,7 +535,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(744)
+  var style0 = __webpack_require__(745)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -549,7 +549,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "115a94ee",
-  "b8630638"
+  "0254f9a9"
   
 )
 

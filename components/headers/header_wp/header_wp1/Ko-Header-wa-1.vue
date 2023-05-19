@@ -2,11 +2,11 @@
   <div class="header-container">
     <div class="wrapper-header">
       <KoOrderWa :dataStore="dataStore" :stateOrderWapi="true" />
-      <div v-if="this.settingByTemplate && this.settingByTemplate.banner">
-        <div class="wrapper-banner-img" v-if="this.settingByTemplate.banner">
+      <div v-if="settingByTemplate && settingByTemplate.banner">
+        <div class="wrapper-banner-img" v-if="settingByTemplate.banner">
           <img
             :src="
-              idCloudinaryBannerResponsive(this.settingByTemplate.banner, 1000)
+              idCloudinaryBanner(settingByTemplate.banner, 'bannerRes', 900)
             "
             class="banner"
             alt="Banner-wapi"
@@ -24,16 +24,16 @@
       </div>
       <div class="header">
         <nuxt-link
-          :to="this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
+          :to="stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
           class="containt-image"
           :class="
-            this.settingByTemplate.logo_cuadrado == 1
+            settingByTemplate.logo_cuadrado == 1
               ? `imagen-cuadrado`
               : `imagen-redondo`
           "
         >
           <img
-            :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+            :src="`${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
             class="header-logo"
             alt="Logo Img"
           />
@@ -44,17 +44,13 @@
           </p>
           <p
             class="header-subtitle"
-            v-if="
-              this.settingByTemplate && this.settingByTemplate.mensaje_principal
-            "
+            v-if="settingByTemplate && settingByTemplate.mensaje_principal"
           >
-            {{ this.settingByTemplate.mensaje_principal }}
+            {{ settingByTemplate.mensaje_principal }}
           </p>
-          <div
-            v-if="this.settingByTemplate && this.settingByTemplate.descripcion"
-          >
+          <div v-if="settingByTemplate && settingByTemplate.descripcion">
             <p class="header-description">
-              {{ this.settingByTemplate.descripcion }}
+              {{ settingByTemplate.descripcion }}
             </p>
           </div>
         </div>

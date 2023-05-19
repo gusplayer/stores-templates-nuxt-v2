@@ -20,7 +20,8 @@
       rel="noreferrer noopener"
       class="content-bg"
       :style="`background-image: url(${idCloudinaryBanner(
-        settingKparallax.url_img_background
+        settingKparallax.url_img_background,
+        'banner'
       )});`"
     >
       <div class="content-txt">

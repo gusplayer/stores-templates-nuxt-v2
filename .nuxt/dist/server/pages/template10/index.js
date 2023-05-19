@@ -1,14 +1,14 @@
 exports.ids = [1];
 exports.modules = {
 
-/***/ 887:
+/***/ 888:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template10/index.vue?vue&type=template&id=6c551205&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template10/index.vue?vue&type=template&id=6c551205&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -62,13 +62,13 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template10',
   components: {
-    KbuttonCar: () => __webpack_require__.e(/* import() */ 26).then(__webpack_require__.bind(null, 920)),
-    Kcarousel: () => __webpack_require__.e(/* import() */ 101).then(__webpack_require__.bind(null, 921)),
-    Ksection: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 922)),
-    Ktrending: () => __webpack_require__.e(/* import() */ 70).then(__webpack_require__.bind(null, 923)),
-    Kdeal: () => __webpack_require__.e(/* import() */ 102).then(__webpack_require__.bind(null, 924)),
-    Kfeatured: () => __webpack_require__.e(/* import() */ 69).then(__webpack_require__.bind(null, 925)),
-    Kblog: () => __webpack_require__.e(/* import() */ 83).then(__webpack_require__.bind(null, 878))
+    KbuttonCar: () => __webpack_require__.e(/* import() */ 26).then(__webpack_require__.bind(null, 921)),
+    Kcarousel: () => __webpack_require__.e(/* import() */ 102).then(__webpack_require__.bind(null, 922)),
+    Ksection: () => __webpack_require__.e(/* import() */ 104).then(__webpack_require__.bind(null, 923)),
+    Ktrending: () => __webpack_require__.e(/* import() */ 70).then(__webpack_require__.bind(null, 924)),
+    Kdeal: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 925)),
+    Kfeatured: () => __webpack_require__.e(/* import() */ 69).then(__webpack_require__.bind(null, 926)),
+    Kblog: () => __webpack_require__.e(/* import() */ 83).then(__webpack_require__.bind(null, 879))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -195,7 +195,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "f6aa3940"
+  "64be0075"
   
 )
 

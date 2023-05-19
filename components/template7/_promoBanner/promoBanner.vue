@@ -4,7 +4,7 @@
       <figure class="promo-banner-images">
         <img
           class="images"
-          :src="idCloudinaryBanner(this.ban.backgroundBanner1)"
+          :src="idCloudinaryBanner(this.ban.backgroundBanner1, 'banner')"
           alt=""
         />
       </figure>
@@ -14,7 +14,7 @@
         <figure class="promo-banner-images">
           <img
             class="images"
-            :src="idCloudinaryBanner(this.ban.backgroundBanner2)"
+            :src="idCloudinaryBanner(this.ban.backgroundBanner2, 'banner')"
             alt=""
           />
         </figure>
@@ -23,7 +23,7 @@
         <figure class="promo-banner-images">
           <img
             class="images"
-            :src="idCloudinaryBanner(this.ban.backgroundBanner3)"
+            :src="idCloudinaryBanner(this.ban.backgroundBanner3, 'banner')"
             alt=""
           />
         </figure>
@@ -33,7 +33,7 @@
       <figure class="promo-banner-images">
         <img
           class="images"
-          :src="idCloudinaryBanner(this.ban.backgroundBanner4)"
+          :src="idCloudinaryBanner(this.ban.backgroundBanner4, 'banner')"
           alt=""
         />
       </figure>

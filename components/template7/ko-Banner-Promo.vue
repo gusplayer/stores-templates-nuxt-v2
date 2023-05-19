@@ -28,7 +28,9 @@
             <div class="content-1">
               <img
                 id="images-1"
-                v-lazy="idCloudinaryBanner(settingKPromo.values[0].url_img)"
+                v-lazy="
+                  idCloudinaryBanner(settingKPromo.values[0].url_img, 'banner')
+                "
                 alt="left-banner"
                 class="images"
               />
@@ -69,7 +71,12 @@
                 <img
                   id="images-2"
                   class="images"
-                  v-lazy="idCloudinaryBanner(settingKPromo.values[1].url_img)"
+                  v-lazy="
+                    idCloudinaryBanner(
+                      settingKPromo.values[1].url_img,
+                      'banner'
+                    )
+                  "
                   alt="medium-top-banner"
                 />
               </div>
@@ -102,7 +109,12 @@
                 <img
                   id="images-3"
                   class="images"
-                  v-lazy="idCloudinaryBanner(settingKPromo.values[2].url_img)"
+                  v-lazy="
+                    idCloudinaryBanner(
+                      settingKPromo.values[2].url_img,
+                      'banner'
+                    )
+                  "
                   alt="medium-top-banner"
                 />
               </div>
@@ -137,7 +149,9 @@
               <img
                 id="images-4"
                 class="images"
-                :src="idCloudinaryBanner(settingKPromo.values[3].url_img)"
+                :src="
+                  idCloudinaryBanner(settingKPromo.values[3].url_img, 'banner')
+                "
                 alt="right-banner"
               />
             </div>

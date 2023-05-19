@@ -33,7 +33,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/_productcard/ProductCard.vue?vue&type=template&id=75667e8a&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/_productcard/ProductCard.vue?vue&type=template&id=75667e8a&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -303,7 +303,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "75667e8a",
-  "7e3fe3dc"
+  "311d18ca"
   
 )
 
@@ -390,7 +390,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".product-content[data-v-2cb6c031]{align-items:center;background:var(--background_color_1);display:flex;flex-direction:column;justify-content:center;padding-bottom:50px;padding-top:50px;width:100%}.separador-blog[data-v-2cb6c031]{padding-top:100px}.product-text[data-v-2cb6c031]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}.product-conten-items[data-v-2cb6c031]{align-items:flex-start;display:flex;flex-direction:column;justify-content:flex-start;margin-top:30px}.description[data-v-2cb6c031],.product-description[data-v-2cb6c031],.product-subtittle[data-v-2cb6c031],.product-tittle[data-v-2cb6c031],.producto-items-content[data-v-2cb6c031],.subtittle[data-v-2cb6c031],.tittle[data-v-2cb6c031]{align-items:center;display:flex;flex-direction:column;justify-content:center;text-align:center}.tittle[data-v-2cb6c031]{color:var(--color_pre_title);font-family:var(--font-style-2)!important}.subtittle[data-v-2cb6c031]{color:var(--color_title);font-family:var(--font-style-1)!important}.description[data-v-2cb6c031]{color:var(--color_description);font-family:var(--font-style-3)!important}.product-conten-items[data-v-2cb6c031]{gap:1rem}.content-item[data-v-2cb6c031]{align-items:center;display:flex;flex-direction:row;justify-content:space-between;margin-bottom:40px}.content-item-productos[data-v-2cb6c031],.content-products-empty[data-v-2cb6c031]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}.content-products-empty[data-v-2cb6c031]{min-height:200px;text-align:center}.txt-products-empty[data-v-2cb6c031]{color:#3f3f3f;font-family:\"David Libre\"!important;font-size:20px;font-weight:600;margin-top:6px}@media (min-width:300px){.producto-items-content[data-v-2cb6c031]{width:95%}.product-conten-items[data-v-2cb6c031]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.tittle[data-v-2cb6c031]{font-size:24px;line-height:34px}.subtittle[data-v-2cb6c031]{font-size:32px;line-height:42px}.description[data-v-2cb6c031]{font-size:14px;line-height:24px}}@media (min-width:768px){.product-conten-items[data-v-2cb6c031]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.subtittle[data-v-2cb6c031]{font-size:36px;line-height:46px}}@media (min-width:1024px){.product-text[data-v-2cb6c031]{width:100%}.product-conten-items[data-v-2cb6c031]{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:1280px){.producto-items-content[data-v-2cb6c031]{width:93%}}@media (min-width:1192px){.producto-items-content[data-v-2cb6c031]{width:1192px}}@media (min-width:1920px){.tittle[data-v-2cb6c031]{font-size:24px;line-height:34px}.subtittle[data-v-2cb6c031]{font-size:36px;line-height:46px}.description[data-v-2cb6c031]{font-size:14px;line-height:24px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".product-content[data-v-2cb6c031]{align-items:center;background:var(--background_color_1);display:flex;flex-direction:column;justify-content:center;padding-bottom:50px;padding-top:50px;width:100%}.separador-blog[data-v-2cb6c031]{padding-top:100px}.product-text[data-v-2cb6c031]{align-items:center;justify-content:center;width:100%}.product-conten-items[data-v-2cb6c031],.product-text[data-v-2cb6c031]{display:flex;flex-direction:column}.product-conten-items[data-v-2cb6c031]{align-items:flex-start;justify-content:flex-start;margin-top:30px}.description[data-v-2cb6c031],.product-description[data-v-2cb6c031],.product-subtittle[data-v-2cb6c031],.product-tittle[data-v-2cb6c031],.producto-items-content[data-v-2cb6c031],.subtittle[data-v-2cb6c031],.tittle[data-v-2cb6c031]{align-items:center;display:flex;flex-direction:column;justify-content:center;text-align:center}.tittle[data-v-2cb6c031]{color:var(--color_pre_title);font-family:var(--font-style-2)!important}.subtittle[data-v-2cb6c031]{color:var(--color_title);font-family:var(--font-style-1)!important}.description[data-v-2cb6c031]{color:var(--color_description);font-family:var(--font-style-3)!important}.product-conten-items[data-v-2cb6c031]{gap:1rem}.content-item[data-v-2cb6c031]{align-items:center;display:flex;flex-direction:row;justify-content:space-between;margin-bottom:40px}.content-item-productos[data-v-2cb6c031],.content-products-empty[data-v-2cb6c031]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}.content-products-empty[data-v-2cb6c031]{min-height:200px;text-align:center}.txt-products-empty[data-v-2cb6c031]{color:#3f3f3f;font-family:\"David Libre\"!important;font-size:20px;font-weight:600;margin-top:6px}@media (min-width:300px){.producto-items-content[data-v-2cb6c031]{width:95%}.product-conten-items[data-v-2cb6c031]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.tittle[data-v-2cb6c031]{font-size:24px;line-height:34px}.subtittle[data-v-2cb6c031]{font-size:32px;line-height:42px}.description[data-v-2cb6c031]{font-size:14px;line-height:24px}}@media (min-width:768px){.product-conten-items[data-v-2cb6c031]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.subtittle[data-v-2cb6c031]{font-size:36px;line-height:46px}}@media (min-width:1024px){.product-text[data-v-2cb6c031]{width:100%}.product-conten-items[data-v-2cb6c031]{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:1280px){.producto-items-content[data-v-2cb6c031]{width:93%}}@media (min-width:1192px){.producto-items-content[data-v-2cb6c031]{width:1192px}}@media (min-width:1920px){.tittle[data-v-2cb6c031]{font-size:24px;line-height:34px}.subtittle[data-v-2cb6c031]{font-size:36px;line-height:46px}.description[data-v-2cb6c031]{font-size:14px;line-height:24px}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -398,14 +398,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 943:
+/***/ 944:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/Ko-ProductList.vue?vue&type=template&id=2cb6c031&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/Ko-ProductList.vue?vue&type=template&id=2cb6c031&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -519,7 +519,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "2cb6c031",
-  "56ea5fb4"
+  "33114ceb"
   
 )
 

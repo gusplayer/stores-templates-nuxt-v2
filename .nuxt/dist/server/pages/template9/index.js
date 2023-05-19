@@ -1,14 +1,14 @@
 exports.ids = [8];
 exports.modules = {
 
-/***/ 894:
+/***/ 895:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template9/index.vue?vue&type=template&id=0ad4cff6&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template9/index.vue?vue&type=template&id=0ad4cff6&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -70,13 +70,13 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template9',
   components: {
-    KBanner: () => __webpack_require__.e(/* import() */ 127).then(__webpack_require__.bind(null, 949)),
-    KOffers: () => __webpack_require__.e(/* import() */ 128).then(__webpack_require__.bind(null, 950)),
-    KProductList: () => __webpack_require__.e(/* import() */ 76).then(__webpack_require__.bind(null, 951)),
-    KProductListHoko: () => __webpack_require__.e(/* import() */ 65).then(__webpack_require__.bind(null, 883)),
-    KBlog: () => __webpack_require__.e(/* import() */ 81).then(__webpack_require__.bind(null, 952)),
-    KWrapper: () => __webpack_require__.e(/* import() */ 126).then(__webpack_require__.bind(null, 953)),
-    KNews: () => __webpack_require__.e(/* import() */ 125).then(__webpack_require__.bind(null, 954))
+    KBanner: () => __webpack_require__.e(/* import() */ 99).then(__webpack_require__.bind(null, 950)),
+    KOffers: () => __webpack_require__.e(/* import() */ 128).then(__webpack_require__.bind(null, 951)),
+    KProductList: () => __webpack_require__.e(/* import() */ 76).then(__webpack_require__.bind(null, 952)),
+    KProductListHoko: () => __webpack_require__.e(/* import() */ 65).then(__webpack_require__.bind(null, 884)),
+    KBlog: () => __webpack_require__.e(/* import() */ 81).then(__webpack_require__.bind(null, 953)),
+    KWrapper: () => __webpack_require__.e(/* import() */ 127).then(__webpack_require__.bind(null, 954)),
+    KNews: () => __webpack_require__.e(/* import() */ 126).then(__webpack_require__.bind(null, 955))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -197,7 +197,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "26a42e6e"
+  "0ebff9ff"
   
 )
 

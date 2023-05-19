@@ -38,7 +38,7 @@
         <div class="banner-img" v-if="banner.url_img_right">
           <img
             class="img-girl"
-            :src="idCloudinaryBanner(banner.url_img_right)"
+            :src="idCloudinaryBanner(banner.url_img_right, 'banner')"
             alt="banner-carousel"
           />
         </div>

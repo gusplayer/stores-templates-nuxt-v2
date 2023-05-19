@@ -1,14 +1,14 @@
 exports.ids = [6];
 exports.modules = {
 
-/***/ 892:
+/***/ 893:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template7/index.vue?vue&type=template&id=a47c06d4&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template7/index.vue?vue&type=template&id=a47c06d4&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -78,15 +78,15 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template7',
   components: {
-    KCarousel: () => __webpack_require__.e(/* import() */ 88).then(__webpack_require__.bind(null, 881)),
-    KPromo: () => __webpack_require__.e(/* import() */ 123).then(__webpack_require__.bind(null, 942)),
-    KProductList: () => __webpack_require__.e(/* import() */ 74).then(__webpack_require__.bind(null, 943)),
-    KAdvertising: () => __webpack_require__.e(/* import() */ 120).then(__webpack_require__.bind(null, 944)),
-    KGify: () => __webpack_require__.e(/* import() */ 75).then(__webpack_require__.bind(null, 945)),
-    KHowWork: () => __webpack_require__.e(/* import() */ 121).then(__webpack_require__.bind(null, 946)),
-    KNews: () => __webpack_require__.e(/* import() */ 119).then(__webpack_require__.bind(null, 947)),
-    KBlog: () => __webpack_require__.e(/* import() */ 87).then(__webpack_require__.bind(null, 882)),
-    KWrapper: () => __webpack_require__.e(/* import() */ 122).then(__webpack_require__.bind(null, 948))
+    KCarousel: () => __webpack_require__.e(/* import() */ 88).then(__webpack_require__.bind(null, 882)),
+    KPromo: () => __webpack_require__.e(/* import() */ 124).then(__webpack_require__.bind(null, 943)),
+    KProductList: () => __webpack_require__.e(/* import() */ 74).then(__webpack_require__.bind(null, 944)),
+    KAdvertising: () => __webpack_require__.e(/* import() */ 121).then(__webpack_require__.bind(null, 945)),
+    KGify: () => __webpack_require__.e(/* import() */ 75).then(__webpack_require__.bind(null, 946)),
+    KHowWork: () => __webpack_require__.e(/* import() */ 122).then(__webpack_require__.bind(null, 947)),
+    KNews: () => __webpack_require__.e(/* import() */ 120).then(__webpack_require__.bind(null, 948)),
+    KBlog: () => __webpack_require__.e(/* import() */ 87).then(__webpack_require__.bind(null, 883)),
+    KWrapper: () => __webpack_require__.e(/* import() */ 123).then(__webpack_require__.bind(null, 949))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -228,7 +228,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   null,
-  "064a6e28"
+  "3612d706"
   
 )
 

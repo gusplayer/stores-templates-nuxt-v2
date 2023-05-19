@@ -28,20 +28,19 @@ export default {
         return url
       }
     },
-    idCloudinaryBanner(url) {
+    idCloudinaryBanner(url, type, width) {
       let fitImage = url.split('/upload/')
       let fitImage2 = url.split('/')
-      if (fitImage2[2] == 'res.cloudinary.com') {
-        return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/dpr_auto,q_auto:best,c_crop,g_custom/${fitImage[1]}`
-      } else {
-        return url
+      let fitImage3
+      if (fitImage && fitImage.length > 1) {
+        fitImage3 = fitImage[1].split('.')
       }
-    },
-    idCloudinaryBannerResponsive(url, width) {
-      let fitImage = url.split('/upload/')
-      let fitImage2 = url.split('/')
       if (fitImage2[2] == 'res.cloudinary.com') {
-        return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/dpr_auto,q_auto:best,c_crop,g_custom/c_scale,w_${width}/${fitImage[1]}`
+        if (type == 'banner') {
+          return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/dpr_auto,q_auto:best,c_crop,g_custom/${fitImage3[0]}.webp`
+        } else if (type == 'bannerRes') {
+          return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/dpr_auto,q_auto:best,c_crop,g_custom/c_scale,w_${width}/${fitImage3[0]}.webp`
+        }
       } else {
         return url
       }

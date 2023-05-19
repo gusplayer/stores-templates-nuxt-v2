@@ -128,6 +128,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 import idCloudinary from '../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
@@ -153,14 +154,34 @@ export default {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    closedModal() {
+    async closedModal() {
       if (this.dataStore.modal && this.dataStore.modal.password) {
-        if (this.dataStore.modal.password == this.pwd) {
-          this.$store.commit('SET_STATE_MODAL_PWD', true)
-          this.setCookies(this.dataStore.modal.password)
-        } else {
-          this.stateMgs = true
+        if (this.pwd) {
+          try {
+            const { data } = await axios({
+              method: 'GET',
+              url: `${this.$store.state.urlKomercia}/api/access-code/${this.dataStore.tienda.id_tienda}?code=${this.pwd}`,
+              headers: this.$store.state.configAxios,
+            })
+            if (data && data.code === true && data.estado === 200) {
+              this.$store.commit('SET_STATE_MODAL_PWD', true)
+              this.setCookies(this.pwd)
+            } else {
+              this.passwordStore()
+            }
+          } catch (err) {
+            console.log('No tiene usuario asignado', err.response)
+            this.passwordStore()
+          }
         }
+      }
+    },
+    passwordStore() {
+      if (this.dataStore.modal.password == this.pwd) {
+        this.$store.commit('SET_STATE_MODAL_PWD', true)
+        this.setCookies(this.dataStore.modal.password)
+      } else {
+        this.stateMgs = true
       }
     },
     addEventListenerTemplate(e) {
@@ -183,7 +204,9 @@ export default {
       }
     },
     setCookies(value) {
-      document.cookie = `authPwd = ${value}; path=/; expires=Thu, 01 Dec 2050 00:00:00 UTC;`
+      var expires = new Date()
+      expires.setDate(expires.getDate() + 1)
+      document.cookie = `authPwd = ${value}; path=/; expires=${expires.toUTCString()};`
     },
   },
 }

@@ -23,10 +23,7 @@
       </form>
     </div>
     <KProductFavoritos v-if="this.stateBanner" />
-    <KProductList
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
-    ></KProductList>
+    <KProductList :dataStore="dataStore" :fullProducts="fullProducts" />
     <KNewsletter :dataStore="dataStore" />
   </div>
 </template>

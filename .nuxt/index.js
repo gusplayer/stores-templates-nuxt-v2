@@ -5,7 +5,7 @@ import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
 import { createRouter } from './router.js'
 import NuxtChild from './components/nuxt-child.js'
-import NuxtError from '../layouts/error.vue'
+import NuxtError from '..\\layouts\\error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData, normalizeError } from './utils'
@@ -13,21 +13,21 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_templatesplugin2e4bbc89_415b19cd from 'nuxt_plugin_templatesplugin2e4bbc89_415b19cd' // Source: ./templates.plugin.2e4bbc89.js (mode: 'client')
-import nuxt_plugin_gtm_839b45d4 from 'nuxt_plugin_gtm_839b45d4' // Source: ./gtm.js (mode: 'all')
-import nuxt_plugin_jsonld_593ee954 from 'nuxt_plugin_jsonld_593ee954' // Source: ../plugins/jsonld (mode: 'all')
-import nuxt_plugin_element_f89b5a74 from 'nuxt_plugin_element_f89b5a74' // Source: ../plugins/element (mode: 'all')
-import nuxt_plugin_mixinCommonMethods_b0161b88 from 'nuxt_plugin_mixinCommonMethods_b0161b88' // Source: ../plugins/mixinCommonMethods (mode: 'all')
-import nuxt_plugin_materialicons_5694302c from 'nuxt_plugin_materialicons_5694302c' // Source: ../plugins/material-icons (mode: 'all')
-import nuxt_plugin_validate_4442dcea from 'nuxt_plugin_validate_4442dcea' // Source: ../plugins/validate.js (mode: 'all')
-import nuxt_plugin_i18n_6a80ea94 from 'nuxt_plugin_i18n_6a80ea94' // Source: ../plugins/i18n (mode: 'all')
-import nuxt_plugin_chatFacebook_4288b8c3 from 'nuxt_plugin_chatFacebook_4288b8c3' // Source: ../plugins/chatFacebook.js (mode: 'client')
-import nuxt_plugin_fuse_6e95fa80 from 'nuxt_plugin_fuse_6e95fa80' // Source: ../plugins/fuse.js (mode: 'client')
-import nuxt_plugin_vueawesomeswiper_5ce03f58 from 'nuxt_plugin_vueawesomeswiper_5ce03f58' // Source: ../plugins/vue-awesome-swiper.js (mode: 'client')
-import nuxt_plugin_ga_fb0a2534 from 'nuxt_plugin_ga_fb0a2534' // Source: ../plugins/ga.js (mode: 'client')
-import nuxt_plugin_gtm_5e4639ea from 'nuxt_plugin_gtm_5e4639ea' // Source: ../plugins/gtm (mode: 'client')
-import nuxt_plugin_vueLazyLoad_cba2be66 from 'nuxt_plugin_vueLazyLoad_cba2be66' // Source: ../plugins/vueLazyLoad.js (mode: 'client')
-import nuxt_plugin_elementTipTap_96dce124 from 'nuxt_plugin_elementTipTap_96dce124' // Source: ../plugins/elementTipTap (mode: 'client')
+import nuxt_plugin_templatesplugin609d373b_04107159 from 'nuxt_plugin_templatesplugin609d373b_04107159' // Source: .\\templates.plugin.609d373b.js (mode: 'client')
+import nuxt_plugin_gtm_370e8597 from 'nuxt_plugin_gtm_370e8597' // Source: .\\gtm.js (mode: 'all')
+import nuxt_plugin_jsonld_593ee954 from 'nuxt_plugin_jsonld_593ee954' // Source: ..\\plugins\\jsonld (mode: 'all')
+import nuxt_plugin_element_f89b5a74 from 'nuxt_plugin_element_f89b5a74' // Source: ..\\plugins\\element (mode: 'all')
+import nuxt_plugin_mixinCommonMethods_b0161b88 from 'nuxt_plugin_mixinCommonMethods_b0161b88' // Source: ..\\plugins\\mixinCommonMethods (mode: 'all')
+import nuxt_plugin_materialicons_5694302c from 'nuxt_plugin_materialicons_5694302c' // Source: ..\\plugins\\material-icons (mode: 'all')
+import nuxt_plugin_validate_4442dcea from 'nuxt_plugin_validate_4442dcea' // Source: ..\\plugins\\validate.js (mode: 'all')
+import nuxt_plugin_i18n_6a80ea94 from 'nuxt_plugin_i18n_6a80ea94' // Source: ..\\plugins\\i18n (mode: 'all')
+import nuxt_plugin_chatFacebook_4288b8c3 from 'nuxt_plugin_chatFacebook_4288b8c3' // Source: ..\\plugins\\chatFacebook.js (mode: 'client')
+import nuxt_plugin_fuse_6e95fa80 from 'nuxt_plugin_fuse_6e95fa80' // Source: ..\\plugins\\fuse.js (mode: 'client')
+import nuxt_plugin_vueawesomeswiper_5ce03f58 from 'nuxt_plugin_vueawesomeswiper_5ce03f58' // Source: ..\\plugins\\vue-awesome-swiper.js (mode: 'client')
+import nuxt_plugin_ga_fb0a2534 from 'nuxt_plugin_ga_fb0a2534' // Source: ..\\plugins\\ga.js (mode: 'client')
+import nuxt_plugin_gtm_5e4639ea from 'nuxt_plugin_gtm_5e4639ea' // Source: ..\\plugins\\gtm (mode: 'client')
+import nuxt_plugin_vueLazyLoad_cba2be66 from 'nuxt_plugin_vueLazyLoad_cba2be66' // Source: ..\\plugins\\vueLazyLoad.js (mode: 'client')
+import nuxt_plugin_elementTipTap_96dce124 from 'nuxt_plugin_elementTipTap_96dce124' // Source: ..\\plugins\\elementTipTap (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -225,12 +225,12 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (process.client && typeof nuxt_plugin_templatesplugin2e4bbc89_415b19cd === 'function') {
-    await nuxt_plugin_templatesplugin2e4bbc89_415b19cd(app.context, inject)
+  if (process.client && typeof nuxt_plugin_templatesplugin609d373b_04107159 === 'function') {
+    await nuxt_plugin_templatesplugin609d373b_04107159(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_gtm_839b45d4 === 'function') {
-    await nuxt_plugin_gtm_839b45d4(app.context, inject)
+  if (typeof nuxt_plugin_gtm_370e8597 === 'function') {
+    await nuxt_plugin_gtm_370e8597(app.context, inject)
   }
 
   if (typeof nuxt_plugin_jsonld_593ee954 === 'function') {

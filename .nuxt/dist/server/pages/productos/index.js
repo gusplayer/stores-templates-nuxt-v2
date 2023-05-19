@@ -1,14 +1,14 @@
 exports.ids = [36];
 exports.modules = {
 
-/***/ 886:
+/***/ 887:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/index.vue?vue&type=template&id=78ec9a2c&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/index.vue?vue&type=template&id=78ec9a2c&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -27,12 +27,12 @@ var external_vuex_ = __webpack_require__(7);
 
 /* harmony default export */ var productosvue_type_script_lang_js_ = ({
   components: {
-    K05ProductList: () => __webpack_require__.e(/* import() */ 58).then(__webpack_require__.bind(null, 917)),
-    K07ProductList: () => __webpack_require__.e(/* import() */ 63).then(__webpack_require__.bind(null, 875)),
-    K09ProductList: () => __webpack_require__.e(/* import() */ 59).then(__webpack_require__.bind(null, 918)),
-    K10ProductList: () => __webpack_require__.e(/* import() */ 60).then(__webpack_require__.bind(null, 876)),
-    K11ProductList: () => __webpack_require__.e(/* import() */ 61).then(__webpack_require__.bind(null, 877)),
-    K13ProductList: () => __webpack_require__.e(/* import() */ 66).then(__webpack_require__.bind(null, 919))
+    K05ProductList: () => __webpack_require__.e(/* import() */ 58).then(__webpack_require__.bind(null, 918)),
+    K07ProductList: () => __webpack_require__.e(/* import() */ 63).then(__webpack_require__.bind(null, 876)),
+    K09ProductList: () => __webpack_require__.e(/* import() */ 59).then(__webpack_require__.bind(null, 919)),
+    K10ProductList: () => __webpack_require__.e(/* import() */ 60).then(__webpack_require__.bind(null, 877)),
+    K11ProductList: () => __webpack_require__.e(/* import() */ 61).then(__webpack_require__.bind(null, 878)),
+    K13ProductList: () => __webpack_require__.e(/* import() */ 66).then(__webpack_require__.bind(null, 920))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -157,7 +157,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "21d884fc"
+  "51a0edda"
   
 )
 
