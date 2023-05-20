@@ -31,7 +31,7 @@ export default {
         pagination: {
           el: '.swiper-pagination',
         },
-        setWrapperSize: true,
+        // setWrapperSize: true,
         paginationClickable: true,
         grabCursor: true,
         // autoplay: {

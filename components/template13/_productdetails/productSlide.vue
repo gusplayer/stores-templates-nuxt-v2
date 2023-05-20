@@ -46,7 +46,7 @@ export default {
       swiperOption: {
         effect: 'fade',
         slidesPerView: '1',
-        setWrapperSize: true,
+        // setWrapperSize: true,
         grabCursor: true,
         navigation: {
           nextEl: '.swiper-button-next',
@@ -74,12 +74,9 @@ export default {
 
 <style scoped>
 .swiper-slide {
-  width: 100%;
+  width: 375px;
   max-width: 375px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-position: center;
   box-sizing: border-box;
   overflow: hidden;
 }
