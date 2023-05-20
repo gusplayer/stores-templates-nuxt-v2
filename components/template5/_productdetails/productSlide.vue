@@ -47,7 +47,7 @@ export default {
       swiperOption: {
         effect: 'fade',
         slidesPerView: '1',
-        setWrapperSize: true,
+        // setWrapperSize: true,
         grabCursor: true,
         navigation: {
           nextEl: '.swiper-button-next',

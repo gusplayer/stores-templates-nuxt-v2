@@ -112,7 +112,7 @@
               ></iframe>
             </div>
             <ProductSlide
-              class="w-full h-full box-border"
+              class="w-full h-full box-border photos_responsive"
               :photos="data.fotos"
               :photo="data.detalle.foto_cloudinary"
               :idYoutube="idYoutube"
@@ -1423,13 +1423,13 @@ export default {
     display: none;
   }
   .photos_responsive {
-    width: 100%;
+    /* width: 100%;
     height: 375px;
-    max-width: 400px;
+    max-width: 400px; */
     display: flex;
-    box-sizing: border-box;
+    /* box-sizing: border-box;
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 10px; */
   }
 }
 @media (min-width: 1200px) {
