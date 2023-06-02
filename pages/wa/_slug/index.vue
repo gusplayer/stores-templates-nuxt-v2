@@ -3,21 +3,43 @@
     <component :is="indexTemplate" />
     <WCountry :dataStore="dataStore" :valueWa="true" />
     <div
-      style="z-index: 9998"
-      class="wrapper-notificacion"
       id="modalNotificacion"
       v-if="
         dataStore.tienda.estado == 0 ||
         !expiredDate(dataStore.tienda.fecha_expiracion)
       "
+      class="w-full h-screen fixed top-0 flex justify-center items-center"
+      style="z-index: 9998"
     >
-      <div class="content-notificacion">
+      <div
+        class="w-full h-screen top-0 absolute backdrop-blur"
+        style="background-color: rgba(0, 0, 0, 0.767)"
+      />
+      <div
+        class="w-full py-20 px-30 flex flex-col justify-center items-center bg-white-white rounded-10 shadow-md z-100"
+        style="max-width: 250px"
+      >
         <koTiendaCerrada />
-        <p class="text-noti">
+        <p
+          class="mt-15 text-base text-gray-500 text-center"
+          style="max-width: 220px"
+        >
           Disculpa, no podrá realizar compras por el momento,
         </p>
-        <p class="subtitle-noti">¿Deseas continuar?</p>
-        <button class="btn-acceptM" @click="acceptClose()">Aceptar</button>
+        <p
+          v-if="expiredDate(dataStore.tienda.fecha_expiracion)"
+          class="font-bold text-17 mt-15"
+          style="color: #ff314d"
+        >
+          ¿Deseas continuar?
+        </p>
+        <button
+          v-if="expiredDate(dataStore.tienda.fecha_expiracion)"
+          class="w-full py-4 mt-15 text-base rounded-10 bg-black text-white-white hover:bg-slate-300 hover:text-black transition ease-in-out delay-75"
+          @click="acceptClose()"
+        >
+          Aceptar
+        </button>
       </div>
     </div>
     <div
@@ -110,47 +132,5 @@ export default {
 <style scoped>
 .content-wa {
   @apply w-full flex flex-col justify-center items-center;
-}
-.wrapper-notificacion {
-  height: calc(100vh);
-  background: rgba(0, 0, 0, 0.5);
-  transition: all 200ms ease-in;
-  @apply w-full fixed flex justify-center items-center top-0 opacity-100;
-}
-.content-notificacion {
-  padding: 30px 20px;
-  max-width: 250px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
-  box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
-  @apply w-full flex flex-col justify-center items-center text-center bg-white-white;
-}
-.text-noti {
-  margin-top: 15px;
-  letter-spacing: 0px;
-  font-size: 16px;
-  color: rgb(75, 75, 75);
-  width: 160px;
-}
-.subtitle-noti {
-  font-weight: bold;
-  font-size: 17px;
-  color: #ff314d;
-  margin-bottom: 15px;
-}
-.btn-acceptM {
-  width: 110px;
-  border-radius: 5px;
-  color: white;
-  border: solid 2px black;
-  background-color: black;
-  padding: 4px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.btn-acceptM:hover {
-  border: solid 2px gray;
-  background-color: gray;
 }
 </style>

@@ -1,7 +1,7 @@
 exports.ids = [2];
 exports.modules = {
 
-/***/ 889:
+/***/ 898:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62,14 +62,14 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template11',
   components: {
-    KCarousel: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 880)),
-    KSection: () => __webpack_require__.e(/* import() */ 108).then(__webpack_require__.bind(null, 927)),
-    KTrending: () => __webpack_require__.e(/* import() */ 72).then(__webpack_require__.bind(null, 928)),
-    KTrendingHoko: () => __webpack_require__.e(/* import() */ 79).then(__webpack_require__.bind(null, 929)),
-    KParallax: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 930)),
-    KListTrending: () => __webpack_require__.e(/* import() */ 71).then(__webpack_require__.bind(null, 931)),
-    KInformacion: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 932)),
-    KBlog: () => __webpack_require__.e(/* import() */ 78).then(__webpack_require__.bind(null, 933))
+    KCarousel: () => __webpack_require__.e(/* import() */ 86).then(__webpack_require__.bind(null, 889)),
+    KSection: () => __webpack_require__.e(/* import() */ 109).then(__webpack_require__.bind(null, 937)),
+    KTrending: () => __webpack_require__.e(/* import() */ 73).then(__webpack_require__.bind(null, 938)),
+    KTrendingHoko: () => __webpack_require__.e(/* import() */ 80).then(__webpack_require__.bind(null, 939)),
+    KParallax: () => __webpack_require__.e(/* import() */ 108).then(__webpack_require__.bind(null, 940)),
+    KListTrending: () => __webpack_require__.e(/* import() */ 72).then(__webpack_require__.bind(null, 941)),
+    KInformacion: () => __webpack_require__.e(/* import() */ 106).then(__webpack_require__.bind(null, 942)),
+    KBlog: () => __webpack_require__.e(/* import() */ 79).then(__webpack_require__.bind(null, 943))
   },
   mounted() {
     window.parent.postMessage('message', '*');

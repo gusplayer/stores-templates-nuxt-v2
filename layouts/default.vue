@@ -22,43 +22,43 @@
             </small>
           </span>
         </div>
-        <!-- <div class="wrapper-cookie" id="modalCookies" v-if="!dataCookies">
-      <div class="content-cookie">
-        <p class="title">
-          Este sitio web utiliza cookies para su funcionar correctamente y
-          brindarte una mejor experiencia.
-        </p>
-        <div class="wrapper-btn">
-          <div class="content-btn">
-            <button class="btn-accept" @click="acceptCookies()">
-              Acepto cookies
-            </button>
-            <a
-              class="_link"
-              href="http://www.allaboutcookies.org/"
-              target="_blank"
-              rel="noreferrer noopener"
-              >¿Qué son las cookies?</a
-            >
-          </div>
-        </div>
-      </div>
-    </div> -->
         <div
-          class="wrapper-notificacion"
           id="modalNotificacion"
           v-if="
             dataStore.tienda.estado == 0 ||
             !expiredDate(dataStore.tienda.fecha_expiracion)
           "
+          class="w-full h-screen fixed top-0 flex justify-center items-center z-100"
         >
-          <div class="content-notificacion">
+          <div
+            class="w-full h-screen top-0 absolute backdrop-blur"
+            style="background-color: rgba(0, 0, 0, 0.767)"
+          />
+          <div
+            class="w-full py-20 px-30 flex flex-col justify-center items-center bg-white-white rounded-10 shadow-md z-100"
+            style="max-width: 250px"
+          >
             <koTiendaCerrada />
-            <p class="text-noti">
+            <p
+              class="mt-15 text-base text-gray-500 text-center"
+              style="max-width: 220px"
+            >
               Disculpa, no podrá realizar compras por el momento,
             </p>
-            <p class="subtitle-noti">¿Deseas continuar?</p>
-            <button class="btn-acceptM" @click="acceptClose()">Aceptar</button>
+            <p
+              v-if="expiredDate(dataStore.tienda.fecha_expiracion)"
+              class="font-bold text-17 mt-15"
+              style="color: #ff314d"
+            >
+              ¿Deseas continuar?
+            </p>
+            <button
+              v-if="expiredDate(dataStore.tienda.fecha_expiracion)"
+              class="w-full py-4 mt-15 text-base rounded-10 bg-black text-white-white hover:bg-slate-300 hover:text-black transition ease-in-out delay-75"
+              @click="acceptClose()"
+            >
+              Aceptar
+            </button>
           </div>
         </div>
       </div>
@@ -860,26 +860,21 @@ html {
 ::-webkit-scrollbar {
   -webkit-appearance: none;
 }
-
 ::-webkit-scrollbar:vertical {
   width: 11px;
 }
-
 ::-webkit-scrollbar-button:increment,
 ::-webkit-scrollbar-button {
   display: none;
 }
-
 ::-webkit-scrollbar:horizontal {
   height: 10px;
 }
-
 ::-webkit-scrollbar-thumb {
   background-color: #797979;
   border-radius: 20px;
   border: 2px solid #f1f2f3;
 }
-
 .el-popover {
   display: none;
 }
@@ -926,139 +921,5 @@ html {
 }
 .button-whatsapp:hover {
   transform: rotate(360deg);
-}
-.wrapper-cookie {
-  z-index: 3;
-  position: fixed;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 0px;
-  background: transparent;
-  transition: all 200ms ease-in;
-}
-.content-cookie {
-  padding: 10px;
-  width: 100%;
-  max-width: 1300px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: #53585ee5;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  -webkit-box-shadow: 3px 3px 28px 3px rgba(0, 0, 0, 0.46);
-  box-shadow: 3px 3px 28px 3px rgba(0, 0, 0, 0.46);
-}
-.title {
-  font-size: 16px;
-  color: white;
-}
-.wrapper-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.content-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.btn-accept {
-  max-height: 29px;
-  width: 140px;
-  border-radius: 5px;
-  color: white;
-  border: solid 2px black;
-  background-color: black;
-  padding: 4px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.btn-accept:hover {
-  color: white;
-  border: solid 2px gray;
-  background-color: gray;
-}
-._link {
-  width: 149px;
-  margin-left: 10px;
-  font-size: 12px;
-  font-weight: bold;
-  color: #41aaf0;
-  text-align: center;
-  text-decoration: none;
-}
-._link:hover {
-  color: #2c85c0;
-}
-.wrapper-notificacion {
-  top: 0;
-  opacity: 1;
-  z-index: 9999;
-  width: 100%;
-  height: calc(100vh);
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  transition: all 200ms ease-in;
-}
-.content-notificacion {
-  padding: 30px 20px;
-  width: 100%;
-  max-width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: white;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
-  box-shadow: 0px 0px 27px 11px rgba(87, 87, 87, 0.4);
-}
-.text-noti {
-  margin-top: 15px;
-  letter-spacing: 0px;
-  font-size: 16px;
-  color: rgb(75, 75, 75);
-  width: 160px;
-}
-.subtitle-noti {
-  font-weight: bold;
-  font-size: 17px;
-  color: #ff314d;
-  margin-bottom: 15px;
-}
-.btn-acceptM {
-  width: 110px;
-  border-radius: 5px;
-  color: white;
-  border: solid 2px black;
-  background-color: black;
-  padding: 4px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-}
-.btn-acceptM:hover {
-  border: solid 2px gray;
-  background-color: gray;
-}
-@media (max-width: 700px) {
-  .content-cookie {
-    flex-direction: column;
-  }
-  .title {
-    font-size: 14px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
 }
 </style>
