@@ -1,7 +1,7 @@
-exports.ids = [5];
+exports.ids = [6];
 exports.modules = {
 
-/***/ 892:
+/***/ 902:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55,13 +55,13 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template5',
   components: {
-    kBanner: () => __webpack_require__.e(/* import() */ 117).then(__webpack_require__.bind(null, 457)),
-    kBannerFooter: () => __webpack_require__.e(/* import() */ 118).then(__webpack_require__.bind(null, 458)),
-    KProductFavoritos: () => __webpack_require__.e(/* import() */ 62).then(__webpack_require__.bind(null, 223)),
-    KProductList: () => __webpack_require__.e(/* import() */ 67).then(__webpack_require__.bind(null, 455)),
-    KProductListHoko: () => __webpack_require__.e(/* import() */ 64).then(__webpack_require__.bind(null, 881)),
-    KNewsletter: () => __webpack_require__.e(/* import() */ 116).then(__webpack_require__.bind(null, 456)),
-    KComponent360: () => __webpack_require__.e(/* import() */ 115).then(__webpack_require__.bind(null, 942))
+    kBanner: () => __webpack_require__.e(/* import() */ 120).then(__webpack_require__.bind(null, 460)),
+    kBannerFooter: () => __webpack_require__.e(/* import() */ 121).then(__webpack_require__.bind(null, 461)),
+    KProductFavoritos: () => __webpack_require__.e(/* import() */ 63).then(__webpack_require__.bind(null, 223)),
+    KProductList: () => __webpack_require__.e(/* import() */ 68).then(__webpack_require__.bind(null, 458)),
+    KProductListHoko: () => __webpack_require__.e(/* import() */ 65).then(__webpack_require__.bind(null, 890)),
+    KNewsletter: () => __webpack_require__.e(/* import() */ 119).then(__webpack_require__.bind(null, 459)),
+    KComponent360: () => __webpack_require__.e(/* import() */ 118).then(__webpack_require__.bind(null, 960))
   },
   mounted() {
     window.parent.postMessage('message', '*');

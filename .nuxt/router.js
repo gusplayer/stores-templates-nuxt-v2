@@ -14,6 +14,7 @@ const _182942dc = () => interopDefault(import('..\\pages\\template10\\index.vue'
 const _08c5f81e = () => interopDefault(import('..\\pages\\template11\\index.vue' /* webpackChunkName: "pages/template11/index" */))
 const _034ea950 = () => interopDefault(import('..\\pages\\template12\\index.vue' /* webpackChunkName: "pages/template12/index" */))
 const _0b004eaf = () => interopDefault(import('..\\pages\\template13\\index.vue' /* webpackChunkName: "pages/template13/index" */))
+const _12b1f40e = () => interopDefault(import('..\\pages\\template14\\index.vue' /* webpackChunkName: "pages/template14/index" */))
 const _283fa8e4 = () => interopDefault(import('..\\pages\\template5\\index.vue' /* webpackChunkName: "pages/template5/index" */))
 const _18dc5e26 = () => interopDefault(import('..\\pages\\template6\\index.vue' /* webpackChunkName: "pages/template6/index" */))
 const _09791368 = () => interopDefault(import('..\\pages\\template7\\index.vue' /* webpackChunkName: "pages/template7/index" */))
@@ -87,6 +88,10 @@ export const routerOptions = {
     path: "/template13",
     component: _0b004eaf,
     name: "template13"
+  }, {
+    path: "/template14",
+    component: _12b1f40e,
+    name: "template14"
   }, {
     path: "/template5",
     component: _283fa8e4,

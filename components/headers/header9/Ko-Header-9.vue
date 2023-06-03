@@ -1,0 +1,265 @@
+<template>
+  <div
+    id="navbar"
+    v-if="settingByTemplate14"
+    class="w-full flex justify-center items-center"
+    :style="[
+      settingByTemplate14[0].setting14Header,
+      settingByTemplate14[0].setting14General,
+    ]"
+  >
+    <div
+      id="headbg"
+      class="w-full max-w-7xl flex justify-center items-center"
+      :style="[
+        {
+          '--font-style-1':
+            settingByTemplate14 &&
+            settingByTemplate14[0].setting14General &&
+            settingByTemplate14[0].setting14General.fount_1
+              ? settingByTemplate14[0].setting14General.fount_1
+              : 'Poppins',
+        },
+      ]"
+    >
+      <KoOrder :dataStore="dataStore" />
+      <div class="flex justify-center items-center py-1">
+        <nuxt-link
+          to="/"
+          class="w-full flex justify-center items-center"
+          style="max-width: var(--with_logo)"
+        >
+          <img
+            :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+            class="w-full object-contain object-left"
+            alt="LogoStore"
+            @click="clear"
+          />
+        </nuxt-link>
+      </div>
+      <div
+        v-if="settingByTemplate14[0].pages.values"
+        class="flex flex-row justify-start items-center box-sizing: border-box;"
+        id="swiper-slide-categories"
+      >
+        <div
+          v-for="(item, index) in settingByTemplate14[0].pages.values"
+          :key="`${index}${item.displayName}`"
+        >
+          <nuxt-link
+            v-if="!item.isExternalLink"
+            :to="item.url"
+            class="content-button"
+          >
+            <p
+              class="mr-20 px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
+              :class="btnSelect == item.url ? 'btn-active' : ''"
+              @click="btnActivate(item.url)"
+            >
+              {{ item.displayName }}
+            </p>
+          </nuxt-link>
+          <a
+            v-else
+            :href="item.url"
+            class="content-button"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            <p class="btn">
+              {{ item.displayName }}
+            </p>
+          </a>
+        </div>
+      </div>
+      <div
+        class="flex flex-row justify-center items-center cursor-pointer header-content-icon"
+        @click="openOrder"
+      >
+        <i
+          class="w-36 h-auto flex justify-center items-center relative cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="23"
+            height="23"
+            fill="currentColor"
+            class="transition-all ease-in duration-0.2 icon-shop"
+            viewBox="0 0 16 16"
+            style="fill: var(--color_icon)"
+          >
+            <title>Cart</title>
+            <path
+              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+            />
+          </svg>
+        </i>
+        <div
+          class="w-auto h-15 flex justify-center items-center rounded-full -mt-20 -ml-8"
+          style="background-color: var(--color_border)"
+        >
+          <span
+            class="pt-1 px-4 text-white-white text-10 leading-12 tracking-0 font-semibold num-items"
+          >
+            {{ productsCart }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  components: {
+    KoOrder: () => import('../_order1/order1'),
+  },
+  name: 'Ko-Header-9',
+  props: {
+    settingByTemplate14: Array,
+    dataStore: Object,
+  },
+  mounted() {
+    // this.initHeader()
+    // if (this.$route.path) {
+    //   let item = this.settingByTemplate13[0].pages.values.find(
+    //     (item) => item.url == this.$route.path
+    //   )
+    //   this.btnSelect = item && item.url ? item.url : ''
+    // }
+    // window.addEventListener('scroll', function () {
+    //   var navbar = document.getElementById('navbar')
+    //   if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
+    //     navbar.style.position = 'fixed'
+    //   } else {
+    //     navbar.style.position = 'static'
+    //   }
+    // })
+  },
+  data() {
+    return {
+      searchSelect: true,
+      btnSelect: '',
+      search: '',
+      showSearch: false,
+    }
+  },
+  computed: {
+    productsCart() {
+      return this.$store.state.productsCart.length
+    },
+    FacebookPixel() {
+      return this.$store.state.analytics_tagmanager
+    },
+    // listArticulos() {
+    //   return this.$store.state.listArticulos.length
+    // },
+  },
+  methods: {
+    initHeader() {
+      if (this.$route.fullPath == '/') {
+        this.$store.commit('SET_STATE_BANNER', true)
+        this.showSearch = true
+      } else if (this.$route.query && this.$route.query.category) {
+        this.$store.commit('SET_STATE_BANNER', false)
+        this.showSearch = true
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.$store.commit('SET_STATE_BANNER', false)
+        this.showSearch = true
+      } else if (this.$route.query && this.$route.query.search) {
+        this.$store.commit('SET_STATE_BANNER', false)
+        this.setSearch(this.$route.query.search)
+        this.showSearch = true
+      } else {
+        this.showSearch = false
+      }
+    },
+    btnActivate(value) {
+      this.btnSelect = value
+    },
+    openSearch() {
+      this.searchSelect = false
+      this.$store.commit('SET_OPEN_SEARCH', true)
+    },
+    closedSearch() {
+      this.searchSelect = true
+      this.$store.commit('SET_OPEN_SEARCH', false)
+    },
+    openOrder() {
+      this.$store.commit('SET_OPEN_ORDER', true)
+    },
+    openMenuLateral() {
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
+    },
+    closed() {
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
+    },
+    clear() {
+      this.$router.push({
+        path: '/',
+      })
+      this.$store.commit('SET_STATE_BANNER', true)
+    },
+    SearchProduct(search) {
+      this.$store.commit('SET_SEARCH_VALUE', search)
+    },
+    getSearch(value) {
+      if (value) {
+        location.href = '?search=' + value
+        if (this.FacebookPixel && this.FacebookPixel.pixel_facebook != null) {
+          window.fbq('track', 'Search', { search_string: value })
+        }
+      } else {
+        location.href = '?search=' + ''
+      }
+    },
+    setSearch(value) {
+      this.search = decodeURIComponent(value)
+    },
+    focusInput() {
+      document.getElementById('SearchHeader').focus()
+    },
+    scrollLeft() {
+      document.getElementById('swiper-slide-categories').scrollLeft -= 300
+    },
+    scrollRight() {
+      document.getElementById('swiper-slide-categories').scrollLeft += 300
+    },
+  },
+  watch: {
+    // search(value) {
+    //   this.SearchProduct(value)
+    // },
+    // // eslint-disable-next-line no-unused-vars
+    // $route(to, from) {
+    //   this.initHeader()
+    // },
+  },
+}
+</script>
+
+<style scoped>
+.wrapper-header {
+  background-color: var(--background_color_1);
+}
+.btn-active {
+  box-shadow: inset 0px -48px 0px -44px var(--color_border);
+}
+.btn {
+  color: var(--color_text);
+  font-family: var(--font-style-1) !important;
+}
+.btn:hover {
+  color: var(--hover_text);
+  box-shadow: inset 0px -48px 0px -44px var(--color_border);
+}
+
+.header-content-icon:hover .icon-shop {
+  fill: var(--color_border);
+  @apply transition-all ease-in duration-0.2;
+}
+.num-items {
+  /* color: var(--color_text); */
+  font-family: var(--font-style-1) !important;
+}
+</style>

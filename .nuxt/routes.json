@@ -80,6 +80,14 @@
     "_name": "_0b004eaf"
   },
   {
+    "name": "template14",
+    "path": "/template14",
+    "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template14\\\\index.vue",
+    "chunkName": "pages/template14/index",
+    "url": "/template14",
+    "_name": "_12b1f40e"
+  },
+  {
     "name": "template5",
     "path": "/template5",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template5\\\\index.vue",

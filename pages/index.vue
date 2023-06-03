@@ -17,6 +17,7 @@ export default {
     KoTemplate11: () => import('./template11/index'),
     KoTemplate12: () => import('./template12/index'),
     KoTemplate13: () => import('./template13/index'),
+    KoTemplate14: () => import('./template14/index'),
     KoTemplateWhatsApp: () => import('./template99/index'),
   },
   computed: {
@@ -31,15 +32,9 @@ export default {
           productListComponent = 'KoTemplate5'
           break
         // Espacio para nueva plantillas 6 - 8
-        // case 6:
-        //   productListComponent = 'KoTemplate5'
-        //   break
         case 7:
           productListComponent = 'KoTemplate7'
           break
-        // case 8:
-        //   productListComponent = 'KoTemplate8'
-        //   break
         case 9:
           productListComponent = 'KoTemplate9'
           break
@@ -54,6 +49,9 @@ export default {
           break
         case 13:
           productListComponent = 'KoTemplate13'
+          break
+        case 14:
+          productListComponent = 'KoTemplate14'
           break
         case 99:
           productListComponent = 'KoTemplateWhatsApp'

@@ -1,52 +1,114 @@
 exports.ids = [27];
 exports.modules = {
 
-/***/ 460:
+/***/ 361:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(661);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add CSS to SSR context
+var add = __webpack_require__(6).default
+module.exports.__inject__ = function (context) {
+  add("57687924", content, true, context)
+};
+
+/***/ }),
+
+/***/ 660:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_buttonCar_vue_vue_type_style_index_0_id_1b749c4c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(361);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_buttonCar_vue_vue_type_style_index_0_id_1b749c4c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_buttonCar_vue_vue_type_style_index_0_id_1b749c4c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_buttonCar_vue_vue_type_style_index_0_id_1b749c4c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_buttonCar_vue_vue_type_style_index_0_id_1b749c4c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ 661:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".content-button-car[data-v-1b749c4c]{align-items:center;bottom:30px;display:flex;flex-direction:row;height:50px;justify-content:flex-start;left:30px;position:fixed;width:100px;z-index:50}.header-content-icon[data-v-1b749c4c]{align-items:center;background-color:#fff;border-radius:100px;box-shadow:0 2px 6px 0 #7f7f7f;color:#222;cursor:pointer;display:flex;height:42px;justify-content:center;width:42px}.header-content-icon[data-v-1b749c4c]:hover{box-shadow:0 2px 49px 0 #7f7f7f;color:#eb7025}.border-num-items[data-v-1b749c4c]{margin-left:-15px;margin-top:-30px;position:relative}.num-items[data-v-1b749c4c]{background-color:#222;border-radius:100px;color:#fff;font-size:12px;padding:1px 6px}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 931:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./assets/img/tiendaCerrada.vue?vue&type=template&id=23e0f514&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template10/buttonCar.vue?vue&type=template&id=1b749c4c&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('svg', {
-    attrs: {
-      "xmlns": "http://www.w3.org/2000/svg",
-      "width": "135.705",
-      "height": "106.285",
-      "viewBox": "0 0 135.705 106.285"
-    }
-  }, [_vm._ssrNode("<g id=\"Grupo_44\" data-name=\"Grupo 44\" transform=\"translate(-616 -247.358)\"><g id=\"Grupo_42\" data-name=\"Grupo 42\" transform=\"translate(1 -83)\"><text id=\"Tienda\" transform=\"translate(657 401)\" font-size=\"15\" font-family=\"Poppins-SemiBold, Poppins\" font-weight=\"600\"><tspan x=\"0\" y=\"0\">Tienda</tspan></text> <text id=\"Cerrada\" transform=\"translate(638 418)\" font-size=\"21\" font-family=\"Poppins-ExtraBold, Poppins\" font-weight=\"800\"><tspan x=\"0\" y=\"0\">Cerrada</tspan></text> <g id=\"Grupo_41\" data-name=\"Grupo 41\" transform=\"translate(615 274.858)\"><g id=\"Grupo_40\" data-name=\"Grupo 40\" transform=\"translate(0 55.5)\"><path id=\"Trazado_31\" data-name=\"Trazado 31\" d=\"M31.988,293.269A1.988,1.988,0,0,0,30,295.257v30.277a3.052,3.052,0,0,0,3.048,3.048h82.345a1.988,1.988,0,1,0,0-3.976H33.976V295.257a1.988,1.988,0,0,0-1.988-1.988Z\" transform=\"translate(-22.049 -230.249)\" fill=\"#ff314d\"></path> <path id=\"Trazado_32\" data-name=\"Trazado 32\" d=\"M123.766,294.944h22.988A3.052,3.052,0,0,0,149.8,291.9V250.548a3.052,3.052,0,0,0-3.048-3.048H33.048A3.052,3.052,0,0,0,30,250.548v2.65a1.988,1.988,0,1,0,3.976,0v-1.723H145.826v39.492h-22.06a1.988,1.988,0,1,0,0,3.976Z\" transform=\"translate(-22.049 -196.611)\" fill=\"#ff314d\"></path> <path id=\"Trazado_33\" data-name=\"Trazado 33\" d=\"M128.681,98.438h-2.416a1.988,1.988,0,0,0,0,3.976h2.416a3.052,3.052,0,0,1,3.048,3.048v49.3a3.052,3.052,0,0,1-3.048,3.048H7.024a3.052,3.052,0,0,1-3.048-3.048v-49.3a3.052,3.052,0,0,1,3.048-3.048H117.551a1.988,1.988,0,0,0,0-3.976h-5.787L77.819,72.006a11.264,11.264,0,1,0-19.932,0L23.94,98.438H7.024A7.032,7.032,0,0,0,0,105.462v49.3a7.032,7.032,0,0,0,7.024,7.024H128.681a7.032,7.032,0,0,0,7.024-7.024v-49.3A7.032,7.032,0,0,0,128.681,98.438ZM67.852,59.476a7.289,7.289,0,1,1-7.289,7.289A7.3,7.3,0,0,1,67.852,59.476ZM60.331,75.141a11.239,11.239,0,0,0,15.044,0l29.919,23.3H30.411Z\" transform=\"translate(0 -55.5)\" fill=\"#ff314d\"></path></g></g></g> <circle id=\"Elipse_7\" data-name=\"Elipse 7\" cx=\"3.5\" cy=\"3.5\" r=\"3.5\" transform=\"translate(680 255)\"></circle></g>")]);
+  return _c('div', {
+    staticClass: "content-button-car"
+  }, [_vm._ssrNode("<div class=\"header-content-icon\" data-v-1b749c4c><i class=\"header-content-cart\" data-v-1b749c4c><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19\" height=\"19\" fill=\"currentColor\" viewBox=\"0 0 16 16\" class=\"icon-shop\" data-v-1b749c4c><title data-v-1b749c4c>Cart</title> <path d=\"M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z\" data-v-1b749c4c></path></svg></i></div> <div class=\"border-num-items\" data-v-1b749c4c><span class=\"num-items\" data-v-1b749c4c>" + _vm._ssrEscape(_vm._s(_vm.productsCart)) + "</span></div>")]);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./assets/img/tiendaCerrada.vue?vue&type=template&id=23e0f514&
+// CONCATENATED MODULE: ./components/template10/buttonCar.vue?vue&type=template&id=1b749c4c&scoped=true&
 
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template10/buttonCar.vue?vue&type=script&lang=js&
+/* harmony default export */ var buttonCarvue_type_script_lang_js_ = ({
+  name: 'Ko-buttonCar',
+  computed: {
+    productsCart() {
+      return this.$store.state.productsCart.length;
+    }
+  },
+  methods: {
+    openOrder() {
+      this.$store.commit('SET_OPEN_ORDER', true);
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/template10/buttonCar.vue?vue&type=script&lang=js&
+ /* harmony default export */ var template10_buttonCarvue_type_script_lang_js_ = (buttonCarvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(1);
 
-// CONCATENATED MODULE: ./assets/img/tiendaCerrada.vue
+// CONCATENATED MODULE: ./components/template10/buttonCar.vue
 
-var script = {}
 
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(660)
+if (style0.__inject__) style0.__inject__(context)
+
+}
 
 /* normalize component */
 
 var component = Object(componentNormalizer["a" /* default */])(
-  script,
+  template10_buttonCarvue_type_script_lang_js_,
   render,
   staticRenderFns,
   false,
-  null,
-  null,
-  "2d9b6406"
+  injectStyles,
+  "1b749c4c",
+  "b3d08fb2"
   
 )
 
-/* harmony default export */ var tiendaCerrada = __webpack_exports__["default"] = (component.exports);
+/* harmony default export */ var buttonCar = __webpack_exports__["default"] = (component.exports);
 
 /***/ })
 
