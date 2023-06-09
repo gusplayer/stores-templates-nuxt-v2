@@ -195,6 +195,12 @@
         <h4>{{ $t('productdetail_gratis') }}</h4>
         <p class="description-method">{{ $t('productdetail_gratisMsg') }}</p>
       </div>
+      <div
+        v-if="this.envios.envio_metodo === 'sinEnvio'"
+        class="wrapper-method"
+      >
+        <p class="description-method">Pasas a recoger tu compra</p>
+      </div>
     </div>
   </div>
 </template>

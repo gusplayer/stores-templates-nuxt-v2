@@ -276,6 +276,16 @@
                     </p>
                     <p
                       class="without_shipping_cost"
+                      v-else-if="
+                        rangosByCiudad.envio_metodo === 'sinEnvio' &&
+                        shippingCities.length <= 0 &&
+                        !getFreeShipping
+                      "
+                    >
+                      Pasas a recoger tu compra
+                    </p>
+                    <p
+                      class="without_shipping_cost"
                       v-else-if="FreeShippingCart"
                     >
                       {{ $t('footer_tarifaPrecio') }}
@@ -948,6 +958,9 @@ export default {
       if (this.rangosByCiudad.envio_metodo === 'sintarifa') {
         free = false
       }
+      if (this.rangosByCiudad.envio_metodo === 'sinEnvio') {
+        free = false
+      }
       return free
     },
     rangosByCiudad() {
@@ -965,6 +978,10 @@ export default {
         if (this.$store.state.envios.estado) {
           let shipping = JSON.parse(this.$store.state.envios.valores)
           switch (shipping.envio_metodo) {
+            case 'sinEnvio':
+              return 0
+              // eslint-disable-next-line no-unreachable
+              break
             case 'sintarifa':
               return 0
               // eslint-disable-next-line no-unreachable
@@ -1673,6 +1690,11 @@ export default {
         this.rangosByCiudades.envio_metodo == 'gratis'
       ) {
         resultShipping = 0
+      } else if (
+        this.rangosByCiudades &&
+        this.rangosByCiudades.envio_metodo == 'sinEnvio'
+      ) {
+        resultShipping = this.rangosByCiudades.valor
       } else if (
         this.rangosByCiudades &&
         this.rangosByCiudades.envio_metodo == 'tarifa_plana'

@@ -64,6 +64,7 @@ export const state = () => ({
   settingByTemplate11: '',
   settingByTemplate12: '',
   settingByTemplate13: '',
+  settingByTemplate14: '',
   category_producto_header: '',
   subcategory_producto_header: '',
   analytics_tagmanager: '',
@@ -104,347 +105,347 @@ export const state = () => ({
   stateModalPwd: true,
   formOrdenWhatsAPP: false,
   tempInfo: '',
-  settingByTemplate14: {
-    header: {
-      '--background_color_1': '#FFFFFF',
-      '--background_color_2': '#FFFFFF',
-      '--color_text': '#222222',
-      '--color_icon': '#222222',
-      '--color_border': '#222222',
-      '--padding_logo': '0px',
-      '--with_logo': '120px',
-    },
-    pages: {
-      values: [
-        { displayName: 'Inicio', isExternalLink: false, tipo: 3, url: '/' },
-        {
-          displayName: 'Productos',
-          isExternalLink: false,
-          tipo: 3,
-          url: '/productos',
-        },
-        {
-          displayName: 'Contacto',
-          isExternalLink: false,
-          tipo: 3,
-          url: '/contacto',
-        },
-      ],
-    },
-    information: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      values: [
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1654118556/komerica/icon/411776_n7lhrp.png',
-          title: 'Free Shipping',
-          text: 'On All Orders',
-          color_title: '#222222',
-          color_text: '#222222',
-          fontWeighTitle: '600',
-          fontWeighText: '500',
-          fontSizeTitle: '20px',
-          fontSizeText: '14px',
-          color_border: '#222222',
-          url_redirect: '',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921638/template14/hanr_nwbgwq.png',
-          title: '100% Money Back',
-          text: 'Within 30 Days Guaranted',
-          color_title: '#222222',
-          color_text: '#222222',
-          fontWeighTitle: '600',
-          fontWeighText: '500',
-          fontSizeTitle: '20px',
-          fontSizeText: '14px',
-          color_border: '#222222',
-          url_redirect: '',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921638/template14/card_zo71ie.png',
-          title: 'Secure Payment',
-          text: '100% secure payment',
-          color_title: '#222222',
-          color_text: '#222222',
-          fontWeighTitle: '600',
-          fontWeighText: '500',
-          fontSizeTitle: '20px',
-          fontSizeText: '14px',
-          color_border: '#222222',
-          url_redirect: '',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/help_qxrixa.png',
-          title: '24/7 Live Support',
-          text: 'Get Help When You Need',
-          color_title: '#222222',
-          color_text: '#222222',
-          fontWeighTitle: '600',
-          fontWeighText: '500',
-          fontSizeTitle: '20px',
-          fontSizeText: '14px',
-          color_border: '#222222',
-          url_redirect: '',
-        },
-      ],
-    },
-    banner: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      values: [
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921790/template14/banner-7-2_hjitqa.jpg',
-          img_res:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921790/template14/banner-7-2_hjitqa.jpg',
-          title: 'Hanging Flat Light',
-          subTitle: 'Trend 2023',
-          text: 'Chair unknown printer took a galley of type scrambled  it to make a type specimenbook survived.',
-          price: '$299.00 ',
-          color_title: '#111111',
-          color_subTitle: '#111111',
-          color_text: '#111111',
-          color_price: '#111111',
-          fontWeighTitle: '600',
-          fontWeighSubTitle: '600',
-          fontWeighText: '500',
-          fontWeighPrice: '500',
-          fontSizeTitle: '48px',
-          fontSizeSubTitle: '18px',
-          fontSizeText: '16px',
-          fontSizePrice: '40px',
-          color_border: '#111111',
-          url_redirect: '/productos',
-        },
-      ],
-    },
-    offers: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      values: [
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/3_j7cp3a.png',
-          title: 'Mate Lights',
-          subTitle: 'Collections',
-          color_title: '#222222',
-          color_text: '#666666',
-          fontWeighTitle: '600',
-          fontWeighText: '500',
-          fontSizeTitle: '26px',
-          fontSizeText: '20px',
-          color_border: '#222222',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/2_vjkzdm.png',
-          title: 'Core Table',
-          subTitle: 'Collections',
-          color_title: '#222222',
-          color_text: '#666666',
-          fontWeighTitle: '600',
-          fontWeighText: '500',
-          fontSizeTitle: '26px',
-          fontSizeText: '20px',
-          color_border: '#222222',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/2_vjkzdm.png',
-          title: 'Smart Chair',
-          subTitle: 'Collections',
-          color_title: '#222222',
-          color_text: '#666666',
-          fontWeighTitle: '600',
-          fontWeighText: '500',
-          fontSizeTitle: '26px',
-          fontSizeText: '20px',
-          color_border: '#222222',
-          url_redirect: '/productos',
-        },
-      ],
-    },
-    listProductsHome: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'Top Selling Products',
-      color_title: '#111111',
-      fontWeighTitle: '600',
-      fontSizeTitle: '28px',
-      text_btn: 'See More',
-      color_text_btn: '#111111',
-      fontWeighTextBtn: '500',
-      fontSizeTextBtn: '16px',
-      url_redirect: '/productos',
-      visible_btn: true,
-    },
-    cardProducts: {
-      '--background_color_1': '#FFFFFF',
-      color_title: '#666666',
-      color_price: '#111111',
-      fontWeighTitle: '500',
-      fontWeighPrice: '600',
-      fontSizeTitle: '18px',
-      fontSizePrice: '20px',
-      color_icon: '#111111',
-      color_btn: '#FFFFFF',
-    },
-    offersProduct: {
-      '--background_color_1': '#FFFFFF',
-      '--background_color_2': '#F5F5F5',
-      visible: true,
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/m-view-7_fjn6xs.png',
-      img_res:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/m-view-7_fjn6xs.png',
-      color_title: '#222222',
-      color_border: '#242424',
-      price: '#111111',
-      price_descount: '#8D8D8D',
-      fontWeighTitle: '600',
-      fontWeighPrice: '600',
-      fontWeighPriceDescount: '500',
-      fontSizeTitle: '36px',
-      fontSizePrice: '30px',
-      fontSizePriceDescount: '18px',
-    },
-    Newsletter: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'SignUp For Newsletter',
-      subTitle: 'Follow when an unknown printer took a galley of type.',
-      color_title: '#000000',
-      color_text: '#444444',
-      color_border: '#444444',
-      color_input: '#6a6a6a',
-      color_text_input: '#000000',
-      color_icon: '#a8a8a8',
-      color_border_component: '#E7E7E7',
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/news-latter_yvbtaj.png',
-      img_res:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/news-latter_yvbtaj.png',
-    },
-    listBlogHome: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'Latest Blog',
-      color_title: '#111111',
-      fontWeighTitle: '600',
-      fontSizeTitle: '28px',
-      text_btn: 'See More',
-      color_text_btn: '#111111',
-      fontWeighTextBtn: '500',
-      fontSizeTextBtn: '16px',
-      url_redirect: '/blog',
-      visible_btn: true,
-    },
-    cardBlog: {
-      '--background_color_1': '#FFFFFF',
-      color_title: '#000000',
-      color_text: '#444444',
-      fontWeighTitle: '600',
-      fontWeighText: '500',
-      fontSizeTitle: '24px',
-      fontSizeText: '18px',
-      color_date: '#111111',
-      color_bg_date: '#FFFFFF',
-    },
-    logos: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      color_border: '#646464',
-      values: [
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand1_otiyjj.png',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand5_btpk3b.png',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand4_uh96xb.png',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand6_tr41jb.png',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand4_uh96xb.png',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921974/template14/brand2_tahozz.png',
-          url_redirect: '/productos',
-        },
-      ],
-    },
-    footer: {
-      '--background_color_1': '#FFFFFF',
-      '--with_logo': '120px',
-      '--color_icon': '#FFFFFF',
-      '--color_title': '#FFFFFF',
-      '--color_text': '#FFFFFF',
-      watermark: true,
-    },
-    listProductsFilter: {
-      '--background_color_1': '#FFFFFF',
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
-      visible_img: true,
-      color_breadCrumbs: '#646464',
-      title: 'Shop',
-      color_title: '#000000',
-      color_categories: '#000000',
-      color_subCategories: '#111111',
-      color_icon: '#111111',
-      color_border: '#111111',
-      count: '#a7a6a6',
-      color_pagination: '#111111',
-    },
-    detailsProducts: {
-      '--background_color_1': '#FFFFFF',
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
-      visible_img: true,
-      color_breadCrumbs: '#646464',
-      color_border: '#ececec',
-      color_title: '#010101',
-      color_price: '#111111',
-      color_priceDescount: '#646464',
-      color_text: '#646464',
-      color_subText: '#111111',
-      color_btn: '#111111',
-      color_text_btn: '#FFFFFF',
-      color_icon: '#646464',
-      fontWeighTitle: '600',
-      fontWeighPrice: '600',
-      fontWeighPriceDescount: '500',
-      fontSizeTitle: '30px',
-      fontSizePrice: '24px',
-      fontSizePriceDescount: '24px',
-    },
-    contact: {
-      '--background_color_1': '#FFFFFF',
-      '--background_color_2': '#f2f2f2',
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
-      visible_img: true,
-      color_breadCrumbs: '#646464',
-      color_title: '#000000',
-      color_text: '#646464',
-      color_icon: '#444444',
-      color_title_form: '#111111',
-      color_bg_form: '#FFFFFF',
-      color_border_input: '#444444',
-      color_btn_form: '#111111',
-      color_text_btn_form: '#FFFFFF',
-    },
-    settingsGeneral: {
-      '--hover_Bg_btn': 'transparent',
-      '--hover_Border_btn': '#E64956',
-      '--hover_text': 'hsla(48.8, 33%, 55%, 1)',
-      '--hover_text_btn': '#E64956',
-      '--radius_btn': '8px',
-      fount_1: 'Poppins',
-    },
-  },
+  // settingByTemplate14: {
+  //   header: {
+  //     '--background_color_1': '#FFFFFF',
+  //     '--background_color_2': '#FFFFFF',
+  //     '--color_text': '#222222',
+  //     '--color_icon': '#222222',
+  //     '--color_border': '#222222',
+  //     '--padding_logo': '0px',
+  //     '--with_logo': '120px',
+  //   },
+  //   pages: {
+  //     values: [
+  //       { displayName: 'Inicio', isExternalLink: false, tipo: 3, url: '/' },
+  //       {
+  //         displayName: 'Productos',
+  //         isExternalLink: false,
+  //         tipo: 3,
+  //         url: '/productos',
+  //       },
+  //       {
+  //         displayName: 'Contacto',
+  //         isExternalLink: false,
+  //         tipo: 3,
+  //         url: '/contacto',
+  //       },
+  //     ],
+  //   },
+  //   information: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     values: [
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1654118556/komerica/icon/411776_n7lhrp.png',
+  //         title: 'Free Shipping',
+  //         text: 'On All Orders',
+  //         color_title: '#222222',
+  //         color_text: '#222222',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '20px',
+  //         fontSizeText: '14px',
+  //         color_border: '#222222',
+  //         url_redirect: '',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921638/template14/hanr_nwbgwq.png',
+  //         title: '100% Money Back',
+  //         text: 'Within 30 Days Guaranted',
+  //         color_title: '#222222',
+  //         color_text: '#222222',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '20px',
+  //         fontSizeText: '14px',
+  //         color_border: '#222222',
+  //         url_redirect: '',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921638/template14/card_zo71ie.png',
+  //         title: 'Secure Payment',
+  //         text: '100% secure payment',
+  //         color_title: '#222222',
+  //         color_text: '#222222',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '20px',
+  //         fontSizeText: '14px',
+  //         color_border: '#222222',
+  //         url_redirect: '',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/help_qxrixa.png',
+  //         title: '24/7 Live Support',
+  //         text: 'Get Help When You Need',
+  //         color_title: '#222222',
+  //         color_text: '#222222',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '20px',
+  //         fontSizeText: '14px',
+  //         color_border: '#222222',
+  //         url_redirect: '',
+  //       },
+  //     ],
+  //   },
+  //   banner: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     values: [
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921790/template14/banner-7-2_hjitqa.jpg',
+  //         img_res:
+  //           'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921790/template14/banner-7-2_hjitqa.jpg',
+  //         title: 'Hanging Flat Light',
+  //         subTitle: 'Trend 2023',
+  //         text: 'Chair unknown printer took a galley of type scrambled  it to make a type specimenbook survived.',
+  //         price: '$299.00 ',
+  //         color_title: '#111111',
+  //         color_subTitle: '#111111',
+  //         color_text: '#111111',
+  //         color_price: '#111111',
+  //         fontWeighTitle: '600',
+  //         fontWeighSubTitle: '600',
+  //         fontWeighText: '500',
+  //         fontWeighPrice: '500',
+  //         fontSizeTitle: '48px',
+  //         fontSizeSubTitle: '18px',
+  //         fontSizeText: '16px',
+  //         fontSizePrice: '40px',
+  //         color_border: '#111111',
+  //         url_redirect: '/productos',
+  //       },
+  //     ],
+  //   },
+  //   offers: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     values: [
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/3_j7cp3a.png',
+  //         title: 'Mate Lights',
+  //         subTitle: 'Collections',
+  //         color_title: '#222222',
+  //         color_text: '#666666',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '26px',
+  //         fontSizeText: '20px',
+  //         color_border: '#222222',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/2_vjkzdm.png',
+  //         title: 'Core Table',
+  //         subTitle: 'Collections',
+  //         color_title: '#222222',
+  //         color_text: '#666666',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '26px',
+  //         fontSizeText: '20px',
+  //         color_border: '#222222',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/2_vjkzdm.png',
+  //         title: 'Smart Chair',
+  //         subTitle: 'Collections',
+  //         color_title: '#222222',
+  //         color_text: '#666666',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '26px',
+  //         fontSizeText: '20px',
+  //         color_border: '#222222',
+  //         url_redirect: '/productos',
+  //       },
+  //     ],
+  //   },
+  //   listProductsHome: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     title: 'Top Selling Products',
+  //     color_title: '#111111',
+  //     fontWeighTitle: '600',
+  //     fontSizeTitle: '28px',
+  //     text_btn: 'See More',
+  //     color_text_btn: '#111111',
+  //     fontWeighTextBtn: '500',
+  //     fontSizeTextBtn: '16px',
+  //     url_redirect: '/productos',
+  //     visible_btn: true,
+  //   },
+  //   cardProducts: {
+  //     '--background_color_1': '#FFFFFF',
+  //     color_title: '#666666',
+  //     color_price: '#111111',
+  //     fontWeighTitle: '500',
+  //     fontWeighPrice: '600',
+  //     fontSizeTitle: '18px',
+  //     fontSizePrice: '20px',
+  //     color_icon: '#111111',
+  //     color_btn: '#FFFFFF',
+  //   },
+  //   offersProduct: {
+  //     '--background_color_1': '#FFFFFF',
+  //     '--background_color_2': '#F5F5F5',
+  //     visible: true,
+  //     img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/m-view-7_fjn6xs.png',
+  //     img_res:
+  //       'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/m-view-7_fjn6xs.png',
+  //     color_title: '#222222',
+  //     color_border: '#242424',
+  //     price: '#111111',
+  //     price_descount: '#8D8D8D',
+  //     fontWeighTitle: '600',
+  //     fontWeighPrice: '600',
+  //     fontWeighPriceDescount: '500',
+  //     fontSizeTitle: '36px',
+  //     fontSizePrice: '30px',
+  //     fontSizePriceDescount: '18px',
+  //   },
+  //   Newsletter: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     title: 'SignUp For Newsletter',
+  //     subTitle: 'Follow when an unknown printer took a galley of type.',
+  //     color_title: '#000000',
+  //     color_text: '#444444',
+  //     color_border: '#444444',
+  //     color_input: '#6a6a6a',
+  //     color_text_input: '#000000',
+  //     color_icon: '#a8a8a8',
+  //     color_border_component: '#E7E7E7',
+  //     img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/news-latter_yvbtaj.png',
+  //     img_res:
+  //       'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/news-latter_yvbtaj.png',
+  //   },
+  //   listBlogHome: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     title: 'Latest Blog',
+  //     color_title: '#111111',
+  //     fontWeighTitle: '600',
+  //     fontSizeTitle: '28px',
+  //     text_btn: 'See More',
+  //     color_text_btn: '#111111',
+  //     fontWeighTextBtn: '500',
+  //     fontSizeTextBtn: '16px',
+  //     url_redirect: '/blog',
+  //     visible_btn: true,
+  //   },
+  //   cardBlog: {
+  //     '--background_color_1': '#FFFFFF',
+  //     color_title: '#000000',
+  //     color_text: '#444444',
+  //     fontWeighTitle: '600',
+  //     fontWeighText: '500',
+  //     fontSizeTitle: '24px',
+  //     fontSizeText: '18px',
+  //     color_date: '#111111',
+  //     color_bg_date: '#FFFFFF',
+  //   },
+  //   logos: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     color_border: '#646464',
+  //     values: [
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand1_otiyjj.png',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand5_btpk3b.png',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand4_uh96xb.png',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand6_tr41jb.png',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand4_uh96xb.png',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921974/template14/brand2_tahozz.png',
+  //         url_redirect: '/productos',
+  //       },
+  //     ],
+  //   },
+  //   footer: {
+  //     '--background_color_1': '#FFFFFF',
+  //     '--with_logo': '120px',
+  //     '--color_icon': '#FFFFFF',
+  //     '--color_title': '#FFFFFF',
+  //     '--color_text': '#FFFFFF',
+  //     watermark: true,
+  //   },
+  //   listProductsFilter: {
+  //     '--background_color_1': '#FFFFFF',
+  //     img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
+  //     visible_img: true,
+  //     color_breadCrumbs: '#646464',
+  //     title: 'Shop',
+  //     color_title: '#000000',
+  //     color_categories: '#000000',
+  //     color_subCategories: '#111111',
+  //     color_icon: '#111111',
+  //     color_border: '#111111',
+  //     count: '#a7a6a6',
+  //     color_pagination: '#111111',
+  //   },
+  //   detailsProducts: {
+  //     '--background_color_1': '#FFFFFF',
+  //     img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
+  //     visible_img: true,
+  //     color_breadCrumbs: '#646464',
+  //     color_border: '#ececec',
+  //     color_title: '#010101',
+  //     color_price: '#111111',
+  //     color_priceDescount: '#646464',
+  //     color_text: '#646464',
+  //     color_subText: '#111111',
+  //     color_btn: '#111111',
+  //     color_text_btn: '#FFFFFF',
+  //     color_icon: '#646464',
+  //     fontWeighTitle: '600',
+  //     fontWeighPrice: '600',
+  //     fontWeighPriceDescount: '500',
+  //     fontSizeTitle: '30px',
+  //     fontSizePrice: '24px',
+  //     fontSizePriceDescount: '24px',
+  //   },
+  //   contact: {
+  //     '--background_color_1': '#FFFFFF',
+  //     '--background_color_2': '#f2f2f2',
+  //     img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
+  //     visible_img: true,
+  //     color_breadCrumbs: '#646464',
+  //     color_title: '#000000',
+  //     color_text: '#646464',
+  //     color_icon: '#444444',
+  //     color_title_form: '#111111',
+  //     color_bg_form: '#FFFFFF',
+  //     color_border_input: '#444444',
+  //     color_btn_form: '#111111',
+  //     color_text_btn_form: '#FFFFFF',
+  //   },
+  //   settingsGeneral: {
+  //     '--hover_Bg_btn': 'transparent',
+  //     '--hover_Border_btn': '#E64956',
+  //     '--hover_text': 'hsla(48.8, 33%, 55%, 1)',
+  //     '--hover_text_btn': '#E64956',
+  //     '--radius_btn': '8px',
+  //     fount_1: 'Poppins',
+  //   },
+  // },
   // components: null,
   // sections: null,
   // storesDB: '',
@@ -874,6 +875,9 @@ export const mutations = {
   SET_SETTINGS_BY_TEMPLATE_13: (state, value) => {
     state.settingByTemplate13 = value
   },
+  SET_SETTINGS_BY_TEMPLATE_14: (state, value) => {
+    state.settingByTemplate14 = value
+  },
   SET_STATE_WAPIME: (state, value) => {
     state.stateWapiME = value
   },
@@ -991,16 +995,25 @@ export const actions = {
       state.dataCookies = true
     }
   },
-  GET_COOKIES_PWD({ state, commit }) {
+  async GET_COOKIES_PWD({ state, commit, dispatch }) {
     const cookies = getCookie('authPwd')
     if (
       state.dataStore &&
       state.dataStore.modal &&
-      state.dataStore.modal.stateModal == 1
+      state.dataStore.modal.stateModal == 1 &&
+      state.dataStore.modal.password
     ) {
-      if (state.dataStore.modal.password) {
-        if (cookies == state.dataStore.modal.password) {
+      if (cookies) {
+        const { success } = await dispatch('GET_ACCESS_CODE', {
+          id_tienda: state.dataStore.tienda.id_tienda,
+          pwd: cookies,
+        })
+        if (success) {
           commit('SET_STATE_MODAL_PWD', true)
+        } else {
+          if (cookies == state.dataStore.modal.password) {
+            commit('SET_STATE_MODAL_PWD', true)
+          }
         }
       }
     }
@@ -1076,7 +1089,8 @@ export const actions = {
           id.data.data.template == 10 ||
           id.data.data.template == 11 ||
           id.data.data.template == 12 ||
-          id.data.data.template == 13
+          id.data.data.template == 13 ||
+          id.data.data.template == 14
         ) {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch(
@@ -1287,7 +1301,7 @@ export const actions = {
       console.log('Data blog tienda', err.response)
     }
   },
-  async GET_DATA_ARTICLE({ state, commit }, params) {
+  async GET_DATA_ARTICLE({ state }, params) {
     try {
       const { data } = await axios({
         method: 'GET',
@@ -1317,7 +1331,7 @@ export const actions = {
       console.log('Data hoko', err.response)
     }
   },
-  async GET_PRODUCTSHOKO({ state }, id) {
+  async GET_PRODUCTSHOKO({ state, commit }, id) {
     if (state.dataHoko && state.dataHoko.token) {
       try {
         const { data } = await axios({
@@ -1335,6 +1349,22 @@ export const actions = {
       } catch (err) {
         console.log('Listado prodcutos Hoko', err.response)
       }
+    }
+  },
+  async GET_ACCESS_CODE({ state, commit }, params) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/access-code/${params.id_tienda}?code=${params.pwd}`,
+        headers: state.configAxios,
+      })
+      if (data && data.code === true && data.estado === 200) {
+        commit('SET_STATE_MODAL_PWD', true)
+        return { success: true, data: data }
+      }
+    } catch (err) {
+      console.error('Ocurrió un error al realizar la solicitud:', err)
+      return { success: false, data: null }
     }
   },
   GET_SHOPPING_CART({ state, commit, dispatch }) {

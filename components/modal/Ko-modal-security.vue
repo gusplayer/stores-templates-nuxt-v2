@@ -157,20 +157,14 @@ export default {
     async closedModal() {
       if (this.dataStore.modal && this.dataStore.modal.password) {
         if (this.pwd) {
-          try {
-            const { data } = await axios({
-              method: 'GET',
-              url: `${this.$store.state.urlKomercia}/api/access-code/${this.dataStore.tienda.id_tienda}?code=${this.pwd}`,
-              headers: this.$store.state.configAxios,
-            })
-            if (data && data.code === true && data.estado === 200) {
-              this.$store.commit('SET_STATE_MODAL_PWD', true)
-              this.setCookies(this.pwd)
-            } else {
-              this.passwordStore()
-            }
-          } catch (err) {
-            console.log('No tiene usuario asignado', err.response)
+          const { success } = await this.$store.dispatch('GET_ACCESS_CODE', {
+            id_tienda: this.dataStore.tienda.id_tienda,
+            pwd: this.pwd,
+          })
+          console.log(success)
+          if (success) {
+            this.setCookies(this.pwd)
+          } else {
             this.passwordStore()
           }
         }

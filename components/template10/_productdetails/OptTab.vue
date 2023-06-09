@@ -238,6 +238,12 @@
               {{ $t('productdetail_gratisMsg') }}
             </p>
           </div>
+          <div
+            v-if="this.envios.envio_metodo === 'sinEnvio'"
+            class="wrapper-method"
+          >
+            <p class="description-method">Pasas a recoger tu compra</p>
+          </div>
         </div>
       </div>
     </div>

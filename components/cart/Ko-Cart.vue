@@ -356,6 +356,16 @@
                   </p>
                   <p class="txt_summary_price">-</p>
                 </div>
+                <div
+                  class="contet-free-delivery"
+                  v-else-if="
+                    rangosByCiudad.envio_metodo === 'sinEnvio' &&
+                    shippingCities.length <= 0 &&
+                    !getFreeShipping
+                  "
+                >
+                  <p class="txt_summary_tittle">Pasas a recoger tu compra</p>
+                </div>
                 <div class="contet-free-delivery" v-else-if="FreeShippingCart">
                   <p class="txt_summary_tittle">
                     {{ $t('footer_tarifaPrecio') }}
@@ -561,6 +571,9 @@ export default {
       if (this.rangosByCiudad.envio_metodo === 'sintarifa') {
         free = false
       }
+      if (this.rangosByCiudad.envio_metodo === 'sinEnvio') {
+        free = false
+      }
       return free
     },
     rangosByCiudad() {
@@ -575,6 +588,10 @@ export default {
         if (this.$store.state.envios.estado) {
           let shipping = JSON.parse(this.$store.state.envios.valores)
           switch (shipping.envio_metodo) {
+            case 'sinEnvio':
+              return 0
+              // eslint-disable-next-line no-unreachable
+              break
             case 'sintarifa':
               return 0
               // eslint-disable-next-line no-unreachable
