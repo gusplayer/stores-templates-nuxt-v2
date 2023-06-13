@@ -161,7 +161,6 @@ export default {
             id_tienda: this.dataStore.tienda.id_tienda,
             pwd: this.pwd,
           })
-          console.log(success)
           if (success) {
             this.setCookies(this.pwd)
           } else {

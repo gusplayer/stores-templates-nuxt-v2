@@ -1361,6 +1361,8 @@ export const actions = {
       if (data && data.code === true && data.estado === 200) {
         commit('SET_STATE_MODAL_PWD', true)
         return { success: true, data: data }
+      } else {
+        return { success: false, data: null }
       }
     } catch (err) {
       console.error('Ocurrió un error al realizar la solicitud:', err)
