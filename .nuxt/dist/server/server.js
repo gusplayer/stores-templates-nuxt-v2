@@ -690,7 +690,7 @@ if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(6).default
 module.exports.__inject__ = function (context) {
-  add("f5280f88", content, true, context)
+  add("7ebb66c7", content, true, context)
 };
 
 /***/ }),
@@ -851,14 +851,14 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/modal/Ko-modal-security.vue?vue&type=template&id=07f3e826&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/modal/Ko-modal-security.vue?vue&type=template&id=724d237a&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _vm.dataStore.modal && _vm.dataStore.modal.stateModal == 1 && !_vm.stateModalPwd ? _c('div', {
     staticClass: "wrapper-security-modal",
     style: `background: ${_vm.dataStore.modal && _vm.dataStore.modal.colorBg_1 ? _vm.dataStore.modal.colorBg_1 : 'rgba(5, 5, 5, 0.897)'};`
-  }, [_vm._ssrNode("<div class=\"content-security-modal\"" + _vm._ssrStyle(null, `background: ${_vm.dataStore.modal && _vm.dataStore.modal.colorBg_2 ? _vm.dataStore.modal.colorBg_2 : 'White'};`, null) + " data-v-07f3e826>", "</div>", [_vm.dataStore.modal && _vm.dataStore.modal.img ? _c('img', {
+  }, [_vm._ssrNode("<div class=\"content-security-modal\"" + _vm._ssrStyle(null, `background: ${_vm.dataStore.modal && _vm.dataStore.modal.colorBg_2 ? _vm.dataStore.modal.colorBg_2 : 'White'};`, null) + " data-v-724d237a>", "</div>", [_vm.dataStore.modal && _vm.dataStore.modal.img ? _c('img', {
     directives: [{
       name: "lazy",
       rawName: "v-lazy",
@@ -875,21 +875,20 @@ var render = function render() {
            font-size: ${_vm.dataStore.modal && _vm.dataStore.modal.fontSizeTitle ? _vm.dataStore.modal.fontSizeTitle : '20px'};
           font-weight: ${_vm.dataStore.modal && _vm.dataStore.modal.fontWeighTitle ? _vm.dataStore.modal.fontWeighTitle : 'Bold'};
           margin-bottom: ${_vm.dataStore.modal && _vm.dataStore.modal.marginBottomTitle ? _vm.dataStore.modal.marginBottomTitle : '15px'};            
-          `, null) + " data-v-07f3e826>" + _vm._ssrEscape("\n      " + _vm._s(_vm.dataStore.modal.title) + "\n    ") + "</p> <p" + _vm._ssrStyle(null, `color: ${_vm.dataStore.modal && _vm.dataStore.modal.colorDescription ? _vm.dataStore.modal.colorDescription : 'White'};
+          `, null) + " data-v-724d237a>" + _vm._ssrEscape("\n      " + _vm._s(_vm.dataStore.modal.title) + "\n    ") + "</p> <p" + _vm._ssrStyle(null, `color: ${_vm.dataStore.modal && _vm.dataStore.modal.colorDescription ? _vm.dataStore.modal.colorDescription : 'White'};
           font-size: ${_vm.dataStore.modal && _vm.dataStore.modal.fontSizeDescription ? _vm.dataStore.modal.fontSizeDescription : '16px'};
           font-weight: ${_vm.dataStore.modal && _vm.dataStore.modal.fontWeighDescription ? _vm.dataStore.modal.fontWeighDescription : '400'};
           margin-bottom: ${_vm.dataStore.modal && _vm.dataStore.modal.marginBottomDescription ? _vm.dataStore.modal.marginBottomDescription : '20px'};
-          `, null) + " data-v-07f3e826>" + _vm._ssrEscape("\n      " + _vm._s(_vm.dataStore.modal.description) + "\n    ") + "</p> <div class=\"inputBox\" data-v-07f3e826><input name=\"password\" type=\"password\" placeholder=\"Ingresar contraseña\" id=\"password\"" + _vm._ssrAttr("value", _vm.pwd) + " class=\"input-text\"" + _vm._ssrStyle(null, `color: ${_vm.dataStore.modal && _vm.dataStore.modal.colorBorder ? _vm.dataStore.modal.colorBorder : 'Black'}; border: solid 2px ${_vm.dataStore.modal && _vm.dataStore.modal.colorBorder ? _vm.dataStore.modal.colorBorder : 'Black'};`, null) + " data-v-07f3e826> <div id=\"toggle\" data-v-07f3e826><i class=\"el-icon-view\" data-v-07f3e826></i></div></div> " + (_vm.stateMgs ? "<p class=\"alert-modal\" data-v-07f3e826>\n      Contraseña incorrecta, intente de nuevo\n    </p>" : "<!---->") + " <button class=\"btn-acceptModal mt-10\"" + _vm._ssrStyle(null, `color: ${_vm.dataStore.modal && _vm.dataStore.modal.colorTextBtn ? _vm.dataStore.modal.colorTextBtn : 'White'}; 
+          `, null) + " data-v-724d237a>" + _vm._ssrEscape("\n      " + _vm._s(_vm.dataStore.modal.description) + "\n    ") + "</p> <div class=\"inputBox\" data-v-724d237a><input name=\"password\" type=\"password\" placeholder=\"Ingresar contraseña\" id=\"password\"" + _vm._ssrAttr("value", _vm.pwd) + " class=\"input-text\"" + _vm._ssrStyle(null, `color: ${_vm.dataStore.modal && _vm.dataStore.modal.colorBorder ? _vm.dataStore.modal.colorBorder : 'Black'}; border: solid 2px ${_vm.dataStore.modal && _vm.dataStore.modal.colorBorder ? _vm.dataStore.modal.colorBorder : 'Black'};`, null) + " data-v-724d237a> <div id=\"toggle\" data-v-724d237a><i class=\"el-icon-view\" data-v-724d237a></i></div></div> " + (_vm.stateMgs ? "<p class=\"alert-modal\" data-v-724d237a>\n      Contraseña incorrecta, intente de nuevo\n    </p>" : "<!---->") + " <button class=\"btn-acceptModal mt-10\"" + _vm._ssrStyle(null, `color: ${_vm.dataStore.modal && _vm.dataStore.modal.colorTextBtn ? _vm.dataStore.modal.colorTextBtn : 'White'}; 
         background-color: ${_vm.dataStore.modal && _vm.dataStore.modal.colorBgBtn ? _vm.dataStore.modal.colorBgBtn : 'Black'};          
-        `, null) + " data-v-07f3e826>\n      Ingresar\n    </button>")], 2)]) : _vm._e();
+        `, null) + " data-v-724d237a>\n      Ingresar\n    </button>")], 2)]) : _vm._e();
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/modal/Ko-modal-security.vue?vue&type=template&id=07f3e826&scoped=true&
+// CONCATENATED MODULE: ./components/modal/Ko-modal-security.vue?vue&type=template&id=724d237a&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
 var external_axios_ = __webpack_require__(2);
-var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: ./mixins/idCloudinary.js
 var idCloudinary = __webpack_require__(15);
@@ -924,22 +923,16 @@ var idCloudinary = __webpack_require__(15);
     async closedModal() {
       if (this.dataStore.modal && this.dataStore.modal.password) {
         if (this.pwd) {
-          try {
-            const {
-              data
-            } = await external_axios_default()({
-              method: 'GET',
-              url: `${this.$store.state.urlKomercia}/api/access-code/${this.dataStore.tienda.id_tienda}?code=${this.pwd}`,
-              headers: this.$store.state.configAxios
-            });
-            if (data && data.code === true && data.estado === 200) {
-              this.$store.commit('SET_STATE_MODAL_PWD', true);
-              this.setCookies(this.pwd);
-            } else {
-              this.passwordStore();
-            }
-          } catch (err) {
-            console.log('No tiene usuario asignado', err.response);
+          const {
+            success
+          } = await this.$store.dispatch('GET_ACCESS_CODE', {
+            id_tienda: this.dataStore.tienda.id_tienda,
+            pwd: this.pwd
+          });
+          console.log(success);
+          if (success) {
+            this.setCookies(this.pwd);
+          } else {
             this.passwordStore();
           }
         }
@@ -999,7 +992,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "07f3e826",
+  "724d237a",
   "356a8422"
   
 )
@@ -1280,9 +1273,9 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_modal_security_vue_vue_type_style_index_0_id_07f3e826_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_modal_security_vue_vue_type_style_index_0_id_07f3e826_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_modal_security_vue_vue_type_style_index_0_id_07f3e826_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_modal_security_vue_vue_type_style_index_0_id_07f3e826_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_modal_security_vue_vue_type_style_index_0_id_07f3e826_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_modal_security_vue_vue_type_style_index_0_id_724d237a_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_modal_security_vue_vue_type_style_index_0_id_724d237a_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_modal_security_vue_vue_type_style_index_0_id_724d237a_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_modal_security_vue_vue_type_style_index_0_id_724d237a_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_modal_security_vue_vue_type_style_index_0_id_724d237a_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
@@ -1293,7 +1286,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".wrapper-security-modal[data-v-07f3e826]{height:100vh;opacity:1;position:fixed;top:0;transition:all .2s ease-in;z-index:99999}.content-security-modal[data-v-07f3e826],.wrapper-security-modal[data-v-07f3e826]{align-items:center;display:flex;justify-content:center;width:100%}.content-security-modal[data-v-07f3e826]{border-radius:5px;box-shadow:0 0 47px 11px rgba(87,87,87,.4);flex-direction:column;max-width:400px;padding:30px 20px}.btn-acceptModal[data-v-07f3e826]{cursor:pointer;max-width:250px;transition:all .2s ease-in}.btn-acceptModal[data-v-07f3e826],.input-text[data-v-07f3e826]{border-radius:5px;font-size:14px;padding:8px 14px;width:100%}.input-text[data-v-07f3e826]{background-color:transparent}.input-text[data-v-07f3e826]::-moz-placeholder{opacity:.7}.input-text[data-v-07f3e826]::placeholder{opacity:.7}.input-text[data-v-07f3e826]:-internal-autofill-selected{background-color:transparent!important;background-image:none!important;color:-internal-light-dark-color(#000,#fff)!important}.input-text[data-v-07f3e826]:-internal-autofill-selected{-webkit-appearance:menulist-button}.input-text[data-v-07f3e826]:active,.input-text[data-v-07f3e826]:focus{border:2px solid hsla(240,5%,52%,.342);outline:0}.inputBox[data-v-07f3e826]{max-width:250px;position:relative;width:100%}#toggle[data-v-07f3e826]{cursor:pointer;position:absolute;right:10px;top:20%}.alert-modal[data-v-07f3e826]{color:red;font-size:14px}@media (max-width:500px){.content-security-modal[data-v-07f3e826]{max-width:350px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".wrapper-security-modal[data-v-724d237a]{height:100vh;opacity:1;position:fixed;top:0;transition:all .2s ease-in;z-index:99999}.content-security-modal[data-v-724d237a],.wrapper-security-modal[data-v-724d237a]{align-items:center;display:flex;justify-content:center;width:100%}.content-security-modal[data-v-724d237a]{border-radius:5px;box-shadow:0 0 47px 11px rgba(87,87,87,.4);flex-direction:column;max-width:400px;padding:30px 20px}.btn-acceptModal[data-v-724d237a]{cursor:pointer;max-width:250px;transition:all .2s ease-in}.btn-acceptModal[data-v-724d237a],.input-text[data-v-724d237a]{border-radius:5px;font-size:14px;padding:8px 14px;width:100%}.input-text[data-v-724d237a]{background-color:transparent}.input-text[data-v-724d237a]::-moz-placeholder{opacity:.7}.input-text[data-v-724d237a]::placeholder{opacity:.7}.input-text[data-v-724d237a]:-internal-autofill-selected{background-color:transparent!important;background-image:none!important;color:-internal-light-dark-color(#000,#fff)!important}.input-text[data-v-724d237a]:-internal-autofill-selected{-webkit-appearance:menulist-button}.input-text[data-v-724d237a]:active,.input-text[data-v-724d237a]:focus{border:2px solid hsla(240,5%,52%,.342);outline:0}.inputBox[data-v-724d237a]{max-width:250px;position:relative;width:100%}#toggle[data-v-724d237a]{cursor:pointer;position:absolute;right:10px;top:20%}.alert-modal[data-v-724d237a]{color:red;font-size:14px}@media (max-width:500px){.content-security-modal[data-v-724d237a]{max-width:350px}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -9817,6 +9810,7 @@ const store_state = () => ({
   settingByTemplate11: '',
   settingByTemplate12: '',
   settingByTemplate13: '',
+  settingByTemplate14: '',
   category_producto_header: '',
   subcategory_producto_header: '',
   analytics_tagmanager: '',
@@ -9856,328 +9850,348 @@ const store_state = () => ({
   producthoko: [],
   stateModalPwd: true,
   formOrdenWhatsAPP: false,
-  tempInfo: '',
-  settingByTemplate14: {
-    header: {
-      '--background_color_1': '#FFFFFF',
-      '--background_color_2': '#FFFFFF',
-      '--color_text': '#222222',
-      '--color_icon': '#222222',
-      '--color_border': '#222222',
-      '--padding_logo': '0px',
-      '--with_logo': '120px'
-    },
-    pages: {
-      values: [{
-        displayName: 'Inicio',
-        isExternalLink: false,
-        tipo: 3,
-        url: '/'
-      }, {
-        displayName: 'Productos',
-        isExternalLink: false,
-        tipo: 3,
-        url: '/productos'
-      }, {
-        displayName: 'Contacto',
-        isExternalLink: false,
-        tipo: 3,
-        url: '/contacto'
-      }]
-    },
-    information: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      values: [{
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1654118556/komerica/icon/411776_n7lhrp.png',
-        title: 'Free Shipping',
-        text: 'On All Orders',
-        color_title: '#222222',
-        color_text: '#222222',
-        fontWeighTitle: '600',
-        fontWeighText: '500',
-        fontSizeTitle: '20px',
-        fontSizeText: '14px',
-        color_border: '#222222',
-        url_redirect: ''
-      }, {
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921638/template14/hanr_nwbgwq.png',
-        title: '100% Money Back',
-        text: 'Within 30 Days Guaranted',
-        color_title: '#222222',
-        color_text: '#222222',
-        fontWeighTitle: '600',
-        fontWeighText: '500',
-        fontSizeTitle: '20px',
-        fontSizeText: '14px',
-        color_border: '#222222',
-        url_redirect: ''
-      }, {
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921638/template14/card_zo71ie.png',
-        title: 'Secure Payment',
-        text: '100% secure payment',
-        color_title: '#222222',
-        color_text: '#222222',
-        fontWeighTitle: '600',
-        fontWeighText: '500',
-        fontSizeTitle: '20px',
-        fontSizeText: '14px',
-        color_border: '#222222',
-        url_redirect: ''
-      }, {
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/help_qxrixa.png',
-        title: '24/7 Live Support',
-        text: 'Get Help When You Need',
-        color_title: '#222222',
-        color_text: '#222222',
-        fontWeighTitle: '600',
-        fontWeighText: '500',
-        fontSizeTitle: '20px',
-        fontSizeText: '14px',
-        color_border: '#222222',
-        url_redirect: ''
-      }]
-    },
-    banner: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      values: [{
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921790/template14/banner-7-2_hjitqa.jpg',
-        img_res: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921790/template14/banner-7-2_hjitqa.jpg',
-        title: 'Hanging Flat Light',
-        subTitle: 'Trend 2023',
-        text: 'Chair unknown printer took a galley of type scrambled  it to make a type specimenbook survived.',
-        price: '$299.00 ',
-        color_title: '#111111',
-        color_subTitle: '#111111',
-        color_text: '#111111',
-        color_price: '#111111',
-        fontWeighTitle: '600',
-        fontWeighSubTitle: '600',
-        fontWeighText: '500',
-        fontWeighPrice: '500',
-        fontSizeTitle: '48px',
-        fontSizeSubTitle: '18px',
-        fontSizeText: '16px',
-        fontSizePrice: '40px',
-        color_border: '#111111',
-        url_redirect: '/productos'
-      }]
-    },
-    offers: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      values: [{
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/3_j7cp3a.png',
-        title: 'Mate Lights',
-        subTitle: 'Collections',
-        color_title: '#222222',
-        color_text: '#666666',
-        fontWeighTitle: '600',
-        fontWeighText: '500',
-        fontSizeTitle: '26px',
-        fontSizeText: '20px',
-        color_border: '#222222',
-        url_redirect: '/productos'
-      }, {
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/2_vjkzdm.png',
-        title: 'Core Table',
-        subTitle: 'Collections',
-        color_title: '#222222',
-        color_text: '#666666',
-        fontWeighTitle: '600',
-        fontWeighText: '500',
-        fontSizeTitle: '26px',
-        fontSizeText: '20px',
-        color_border: '#222222',
-        url_redirect: '/productos'
-      }, {
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/2_vjkzdm.png',
-        title: 'Smart Chair',
-        subTitle: 'Collections',
-        color_title: '#222222',
-        color_text: '#666666',
-        fontWeighTitle: '600',
-        fontWeighText: '500',
-        fontSizeTitle: '26px',
-        fontSizeText: '20px',
-        color_border: '#222222',
-        url_redirect: '/productos'
-      }]
-    },
-    listProductsHome: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'Top Selling Products',
-      color_title: '#111111',
-      fontWeighTitle: '600',
-      fontSizeTitle: '28px',
-      text_btn: 'See More',
-      color_text_btn: '#111111',
-      fontWeighTextBtn: '500',
-      fontSizeTextBtn: '16px',
-      url_redirect: '/productos',
-      visible_btn: true
-    },
-    cardProducts: {
-      '--background_color_1': '#FFFFFF',
-      color_title: '#666666',
-      color_price: '#111111',
-      fontWeighTitle: '500',
-      fontWeighPrice: '600',
-      fontSizeTitle: '18px',
-      fontSizePrice: '20px',
-      color_icon: '#111111',
-      color_btn: '#FFFFFF'
-    },
-    offersProduct: {
-      '--background_color_1': '#FFFFFF',
-      '--background_color_2': '#F5F5F5',
-      visible: true,
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/m-view-7_fjn6xs.png',
-      img_res: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/m-view-7_fjn6xs.png',
-      color_title: '#222222',
-      color_border: '#242424',
-      price: '#111111',
-      price_descount: '#8D8D8D',
-      fontWeighTitle: '600',
-      fontWeighPrice: '600',
-      fontWeighPriceDescount: '500',
-      fontSizeTitle: '36px',
-      fontSizePrice: '30px',
-      fontSizePriceDescount: '18px'
-    },
-    Newsletter: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'SignUp For Newsletter',
-      subTitle: 'Follow when an unknown printer took a galley of type.',
-      color_title: '#000000',
-      color_text: '#444444',
-      color_border: '#444444',
-      color_input: '#6a6a6a',
-      color_text_input: '#000000',
-      color_icon: '#a8a8a8',
-      color_border_component: '#E7E7E7',
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/news-latter_yvbtaj.png',
-      img_res: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/news-latter_yvbtaj.png'
-    },
-    listBlogHome: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'Latest Blog',
-      color_title: '#111111',
-      fontWeighTitle: '600',
-      fontSizeTitle: '28px',
-      text_btn: 'See More',
-      color_text_btn: '#111111',
-      fontWeighTextBtn: '500',
-      fontSizeTextBtn: '16px',
-      url_redirect: '/blog',
-      visible_btn: true
-    },
-    cardBlog: {
-      '--background_color_1': '#FFFFFF',
-      color_title: '#000000',
-      color_text: '#444444',
-      fontWeighTitle: '600',
-      fontWeighText: '500',
-      fontSizeTitle: '24px',
-      fontSizeText: '18px',
-      color_date: '#111111',
-      color_bg_date: '#FFFFFF'
-    },
-    logos: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      color_border: '#646464',
-      values: [{
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand1_otiyjj.png',
-        url_redirect: '/productos'
-      }, {
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand5_btpk3b.png',
-        url_redirect: '/productos'
-      }, {
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand4_uh96xb.png',
-        url_redirect: '/productos'
-      }, {
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand6_tr41jb.png',
-        url_redirect: '/productos'
-      }, {
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand4_uh96xb.png',
-        url_redirect: '/productos'
-      }, {
-        img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921974/template14/brand2_tahozz.png',
-        url_redirect: '/productos'
-      }]
-    },
-    footer: {
-      '--background_color_1': '#FFFFFF',
-      '--with_logo': '120px',
-      '--color_icon': '#FFFFFF',
-      '--color_title': '#FFFFFF',
-      '--color_text': '#FFFFFF',
-      watermark: true
-    },
-    listProductsFilter: {
-      '--background_color_1': '#FFFFFF',
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
-      visible_img: true,
-      color_breadCrumbs: '#646464',
-      title: 'Shop',
-      color_title: '#000000',
-      color_categories: '#000000',
-      color_subCategories: '#111111',
-      color_icon: '#111111',
-      color_border: '#111111',
-      count: '#a7a6a6',
-      color_pagination: '#111111'
-    },
-    detailsProducts: {
-      '--background_color_1': '#FFFFFF',
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
-      visible_img: true,
-      color_breadCrumbs: '#646464',
-      color_border: '#ececec',
-      color_title: '#010101',
-      color_price: '#111111',
-      color_priceDescount: '#646464',
-      color_text: '#646464',
-      color_subText: '#111111',
-      color_btn: '#111111',
-      color_text_btn: '#FFFFFF',
-      color_icon: '#646464',
-      fontWeighTitle: '600',
-      fontWeighPrice: '600',
-      fontWeighPriceDescount: '500',
-      fontSizeTitle: '30px',
-      fontSizePrice: '24px',
-      fontSizePriceDescount: '24px'
-    },
-    contact: {
-      '--background_color_1': '#FFFFFF',
-      '--background_color_2': '#f2f2f2',
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
-      visible_img: true,
-      color_breadCrumbs: '#646464',
-      color_title: '#000000',
-      color_text: '#646464',
-      color_icon: '#444444',
-      color_title_form: '#111111',
-      color_bg_form: '#FFFFFF',
-      color_border_input: '#444444',
-      color_btn_form: '#111111',
-      color_text_btn_form: '#FFFFFF'
-    },
-    settingsGeneral: {
-      '--hover_Bg_btn': 'transparent',
-      '--hover_Border_btn': '#E64956',
-      '--hover_text': 'hsla(48.8, 33%, 55%, 1)',
-      '--hover_text_btn': '#E64956',
-      '--radius_btn': '8px',
-      fount_1: 'Poppins'
-    }
-  }
+  tempInfo: ''
+  // settingByTemplate14: {
+  //   header: {
+  //     '--background_color_1': '#FFFFFF',
+  //     '--background_color_2': '#FFFFFF',
+  //     '--color_text': '#222222',
+  //     '--color_icon': '#222222',
+  //     '--color_border': '#222222',
+  //     '--padding_logo': '0px',
+  //     '--with_logo': '120px',
+  //   },
+  //   pages: {
+  //     values: [
+  //       { displayName: 'Inicio', isExternalLink: false, tipo: 3, url: '/' },
+  //       {
+  //         displayName: 'Productos',
+  //         isExternalLink: false,
+  //         tipo: 3,
+  //         url: '/productos',
+  //       },
+  //       {
+  //         displayName: 'Contacto',
+  //         isExternalLink: false,
+  //         tipo: 3,
+  //         url: '/contacto',
+  //       },
+  //     ],
+  //   },
+  //   information: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     values: [
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1654118556/komerica/icon/411776_n7lhrp.png',
+  //         title: 'Free Shipping',
+  //         text: 'On All Orders',
+  //         color_title: '#222222',
+  //         color_text: '#222222',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '20px',
+  //         fontSizeText: '14px',
+  //         color_border: '#222222',
+  //         url_redirect: '',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921638/template14/hanr_nwbgwq.png',
+  //         title: '100% Money Back',
+  //         text: 'Within 30 Days Guaranted',
+  //         color_title: '#222222',
+  //         color_text: '#222222',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '20px',
+  //         fontSizeText: '14px',
+  //         color_border: '#222222',
+  //         url_redirect: '',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921638/template14/card_zo71ie.png',
+  //         title: 'Secure Payment',
+  //         text: '100% secure payment',
+  //         color_title: '#222222',
+  //         color_text: '#222222',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '20px',
+  //         fontSizeText: '14px',
+  //         color_border: '#222222',
+  //         url_redirect: '',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/help_qxrixa.png',
+  //         title: '24/7 Live Support',
+  //         text: 'Get Help When You Need',
+  //         color_title: '#222222',
+  //         color_text: '#222222',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '20px',
+  //         fontSizeText: '14px',
+  //         color_border: '#222222',
+  //         url_redirect: '',
+  //       },
+  //     ],
+  //   },
+  //   banner: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     values: [
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921790/template14/banner-7-2_hjitqa.jpg',
+  //         img_res:
+  //           'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921790/template14/banner-7-2_hjitqa.jpg',
+  //         title: 'Hanging Flat Light',
+  //         subTitle: 'Trend 2023',
+  //         text: 'Chair unknown printer took a galley of type scrambled  it to make a type specimenbook survived.',
+  //         price: '$299.00 ',
+  //         color_title: '#111111',
+  //         color_subTitle: '#111111',
+  //         color_text: '#111111',
+  //         color_price: '#111111',
+  //         fontWeighTitle: '600',
+  //         fontWeighSubTitle: '600',
+  //         fontWeighText: '500',
+  //         fontWeighPrice: '500',
+  //         fontSizeTitle: '48px',
+  //         fontSizeSubTitle: '18px',
+  //         fontSizeText: '16px',
+  //         fontSizePrice: '40px',
+  //         color_border: '#111111',
+  //         url_redirect: '/productos',
+  //       },
+  //     ],
+  //   },
+  //   offers: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     values: [
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/3_j7cp3a.png',
+  //         title: 'Mate Lights',
+  //         subTitle: 'Collections',
+  //         color_title: '#222222',
+  //         color_text: '#666666',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '26px',
+  //         fontSizeText: '20px',
+  //         color_border: '#222222',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/2_vjkzdm.png',
+  //         title: 'Core Table',
+  //         subTitle: 'Collections',
+  //         color_title: '#222222',
+  //         color_text: '#666666',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '26px',
+  //         fontSizeText: '20px',
+  //         color_border: '#222222',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683922126/template14/2_vjkzdm.png',
+  //         title: 'Smart Chair',
+  //         subTitle: 'Collections',
+  //         color_title: '#222222',
+  //         color_text: '#666666',
+  //         fontWeighTitle: '600',
+  //         fontWeighText: '500',
+  //         fontSizeTitle: '26px',
+  //         fontSizeText: '20px',
+  //         color_border: '#222222',
+  //         url_redirect: '/productos',
+  //       },
+  //     ],
+  //   },
+  //   listProductsHome: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     title: 'Top Selling Products',
+  //     color_title: '#111111',
+  //     fontWeighTitle: '600',
+  //     fontSizeTitle: '28px',
+  //     text_btn: 'See More',
+  //     color_text_btn: '#111111',
+  //     fontWeighTextBtn: '500',
+  //     fontSizeTextBtn: '16px',
+  //     url_redirect: '/productos',
+  //     visible_btn: true,
+  //   },
+  //   cardProducts: {
+  //     '--background_color_1': '#FFFFFF',
+  //     color_title: '#666666',
+  //     color_price: '#111111',
+  //     fontWeighTitle: '500',
+  //     fontWeighPrice: '600',
+  //     fontSizeTitle: '18px',
+  //     fontSizePrice: '20px',
+  //     color_icon: '#111111',
+  //     color_btn: '#FFFFFF',
+  //   },
+  //   offersProduct: {
+  //     '--background_color_1': '#FFFFFF',
+  //     '--background_color_2': '#F5F5F5',
+  //     visible: true,
+  //     img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/m-view-7_fjn6xs.png',
+  //     img_res:
+  //       'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/m-view-7_fjn6xs.png',
+  //     color_title: '#222222',
+  //     color_border: '#242424',
+  //     price: '#111111',
+  //     price_descount: '#8D8D8D',
+  //     fontWeighTitle: '600',
+  //     fontWeighPrice: '600',
+  //     fontWeighPriceDescount: '500',
+  //     fontSizeTitle: '36px',
+  //     fontSizePrice: '30px',
+  //     fontSizePriceDescount: '18px',
+  //   },
+  //   Newsletter: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     title: 'SignUp For Newsletter',
+  //     subTitle: 'Follow when an unknown printer took a galley of type.',
+  //     color_title: '#000000',
+  //     color_text: '#444444',
+  //     color_border: '#444444',
+  //     color_input: '#6a6a6a',
+  //     color_text_input: '#000000',
+  //     color_icon: '#a8a8a8',
+  //     color_border_component: '#E7E7E7',
+  //     img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/news-latter_yvbtaj.png',
+  //     img_res:
+  //       'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/news-latter_yvbtaj.png',
+  //   },
+  //   listBlogHome: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     title: 'Latest Blog',
+  //     color_title: '#111111',
+  //     fontWeighTitle: '600',
+  //     fontSizeTitle: '28px',
+  //     text_btn: 'See More',
+  //     color_text_btn: '#111111',
+  //     fontWeighTextBtn: '500',
+  //     fontSizeTextBtn: '16px',
+  //     url_redirect: '/blog',
+  //     visible_btn: true,
+  //   },
+  //   cardBlog: {
+  //     '--background_color_1': '#FFFFFF',
+  //     color_title: '#000000',
+  //     color_text: '#444444',
+  //     fontWeighTitle: '600',
+  //     fontWeighText: '500',
+  //     fontSizeTitle: '24px',
+  //     fontSizeText: '18px',
+  //     color_date: '#111111',
+  //     color_bg_date: '#FFFFFF',
+  //   },
+  //   logos: {
+  //     '--background_color_1': '#FFFFFF',
+  //     visible: true,
+  //     color_border: '#646464',
+  //     values: [
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand1_otiyjj.png',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand5_btpk3b.png',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand4_uh96xb.png',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand6_tr41jb.png',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921975/template14/brand4_uh96xb.png',
+  //         url_redirect: '/productos',
+  //       },
+  //       {
+  //         img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921974/template14/brand2_tahozz.png',
+  //         url_redirect: '/productos',
+  //       },
+  //     ],
+  //   },
+  //   footer: {
+  //     '--background_color_1': '#FFFFFF',
+  //     '--with_logo': '120px',
+  //     '--color_icon': '#FFFFFF',
+  //     '--color_title': '#FFFFFF',
+  //     '--color_text': '#FFFFFF',
+  //     watermark: true,
+  //   },
+  //   listProductsFilter: {
+  //     '--background_color_1': '#FFFFFF',
+  //     img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
+  //     visible_img: true,
+  //     color_breadCrumbs: '#646464',
+  //     title: 'Shop',
+  //     color_title: '#000000',
+  //     color_categories: '#000000',
+  //     color_subCategories: '#111111',
+  //     color_icon: '#111111',
+  //     color_border: '#111111',
+  //     count: '#a7a6a6',
+  //     color_pagination: '#111111',
+  //   },
+  //   detailsProducts: {
+  //     '--background_color_1': '#FFFFFF',
+  //     img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
+  //     visible_img: true,
+  //     color_breadCrumbs: '#646464',
+  //     color_border: '#ececec',
+  //     color_title: '#010101',
+  //     color_price: '#111111',
+  //     color_priceDescount: '#646464',
+  //     color_text: '#646464',
+  //     color_subText: '#111111',
+  //     color_btn: '#111111',
+  //     color_text_btn: '#FFFFFF',
+  //     color_icon: '#646464',
+  //     fontWeighTitle: '600',
+  //     fontWeighPrice: '600',
+  //     fontWeighPriceDescount: '500',
+  //     fontSizeTitle: '30px',
+  //     fontSizePrice: '24px',
+  //     fontSizePriceDescount: '24px',
+  //   },
+  //   contact: {
+  //     '--background_color_1': '#FFFFFF',
+  //     '--background_color_2': '#f2f2f2',
+  //     img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1683921639/template14/banner_as2xzy.jpg',
+  //     visible_img: true,
+  //     color_breadCrumbs: '#646464',
+  //     color_title: '#000000',
+  //     color_text: '#646464',
+  //     color_icon: '#444444',
+  //     color_title_form: '#111111',
+  //     color_bg_form: '#FFFFFF',
+  //     color_border_input: '#444444',
+  //     color_btn_form: '#111111',
+  //     color_text_btn_form: '#FFFFFF',
+  //   },
+  //   settingsGeneral: {
+  //     '--hover_Bg_btn': 'transparent',
+  //     '--hover_Border_btn': '#E64956',
+  //     '--hover_text': 'hsla(48.8, 33%, 55%, 1)',
+  //     '--hover_text_btn': '#E64956',
+  //     '--radius_btn': '8px',
+  //     fount_1: 'Poppins',
+  //   },
+  // },
   // components: null,
   // sections: null,
   // storesDB: '',
@@ -10602,6 +10616,9 @@ const mutations = {
   SET_SETTINGS_BY_TEMPLATE_13: (state, value) => {
     state.settingByTemplate13 = value;
   },
+  SET_SETTINGS_BY_TEMPLATE_14: (state, value) => {
+    state.settingByTemplate14 = value;
+  },
   SET_STATE_WAPIME: (state, value) => {
     state.stateWapiME = value;
   },
@@ -10722,15 +10739,26 @@ const actions = {
       state.dataCookies = true;
     }
   },
-  GET_COOKIES_PWD({
+  async GET_COOKIES_PWD({
     state,
-    commit
+    commit,
+    dispatch
   }) {
     const cookies = getCookie('authPwd');
-    if (state.dataStore && state.dataStore.modal && state.dataStore.modal.stateModal == 1) {
-      if (state.dataStore.modal.password) {
-        if (cookies == state.dataStore.modal.password) {
+    if (state.dataStore && state.dataStore.modal && state.dataStore.modal.stateModal == 1 && state.dataStore.modal.password) {
+      if (cookies) {
+        const {
+          success
+        } = await dispatch('GET_ACCESS_CODE', {
+          id_tienda: state.dataStore.tienda.id_tienda,
+          pwd: cookies
+        });
+        if (success) {
           commit('SET_STATE_MODAL_PWD', true);
+        } else {
+          if (cookies == state.dataStore.modal.password) {
+            commit('SET_STATE_MODAL_PWD', true);
+          }
         }
       }
     }
@@ -10791,7 +10819,7 @@ const actions = {
         if (state.dataStore && state.dataStore.tienda && state.dataStore.tienda.id_tienda) {
           await dispatch('GET_DATA_HOKO', state.dataStore.tienda.id_tienda);
         }
-        if (id.data.data.template == 7 || id.data.data.template == 9 || id.data.data.template == 10 || id.data.data.template == 11 || id.data.data.template == 12 || id.data.data.template == 13) {
+        if (id.data.data.template == 7 || id.data.data.template == 9 || id.data.data.template == 10 || id.data.data.template == 11 || id.data.data.template == 12 || id.data.data.template == 13 || id.data.data.template == 14) {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', state.dataStore.tienda);
           }
@@ -11034,8 +11062,7 @@ const actions = {
     }
   },
   async GET_DATA_ARTICLE({
-    state,
-    commit
+    state
   }, params) {
     try {
       const {
@@ -11078,7 +11105,8 @@ const actions = {
     }
   },
   async GET_PRODUCTSHOKO({
-    state
+    state,
+    commit
   }, id) {
     if (state.dataHoko && state.dataHoko.token) {
       try {
@@ -11099,6 +11127,33 @@ const actions = {
       } catch (err) {
         console.log('Listado prodcutos Hoko', err.response);
       }
+    }
+  },
+  async GET_ACCESS_CODE({
+    state,
+    commit
+  }, params) {
+    try {
+      const {
+        data
+      } = await external_axios_default()({
+        method: 'GET',
+        url: `${state.urlKomercia}/api/access-code/${params.id_tienda}?code=${params.pwd}`,
+        headers: state.configAxios
+      });
+      if (data && data.code === true && data.estado === 200) {
+        commit('SET_STATE_MODAL_PWD', true);
+        return {
+          success: true,
+          data: data
+        };
+      }
+    } catch (err) {
+      console.error('Ocurrió un error al realizar la solicitud:', err);
+      return {
+        success: false,
+        data: null
+      };
     }
   },
   GET_SHOPPING_CART({

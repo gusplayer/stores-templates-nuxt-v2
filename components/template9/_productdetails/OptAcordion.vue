@@ -271,6 +271,12 @@
               {{ $t('productdetail_gratisMsg') }}
             </p>
           </div>
+          <div
+            v-if="this.envios.envio_metodo === 'SinEnvio'"
+            class="wrapper-method"
+          >
+            <p class="description-method">Pasas a recoger tu compra</p>
+          </div>
         </div>
         <div v-else>
           <p>{{ $t('productdetail_notShipping') }}</p>

@@ -415,6 +415,12 @@ export default {
                 desc: 'Disfruta de este obsequio por parte de la tienda.',
               }
               break
+            case 'sinEnvio':
+              this.envio = {
+                titulo: 'Sin envio',
+                desc: 'Tienes que acercarte a la tienda a recoger tu pedido.',
+              }
+              break
             case 'tarifa_plana':
               this.envio = {
                 titulo: 'Tarifa plana',
