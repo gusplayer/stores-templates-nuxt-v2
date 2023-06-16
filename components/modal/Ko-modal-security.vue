@@ -198,8 +198,9 @@ export default {
     },
     setCookies(value) {
       var expires = new Date()
-      expires.setDate(expires.getDate() + 1)
-      document.cookie = `authPwd = ${value}; path=/; expires=${expires.toUTCString()};`
+      date.setTime(date.getTime() + 12 * 60 * 60 * 1000)
+      var expires = date.toUTCString()
+      document.cookie = `authPwd = ${value}; path=/; expires=${expires};`
     },
   },
 }
