@@ -2,16 +2,16 @@
   <div
     v-if="information"
     :style="[information, settingGeneral]"
-    class="w-full flex justify-center items-center py-15 lg:py-20"
+    class="w-full flex justify-center items-center py-15 lg:py-20 px-10 md:px-0"
     style="background-color: var(--background_color_1)"
   >
     <div
-      class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-4 gap-5 md:gap-3 items-center"
+      class="max-w-7xl grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-4 gap-5 md:gap-4 items-center justify-center"
     >
       <div
         v-for="(items, index) in information.values"
         :key="index"
-        class="flex flex-row items-center justify-center"
+        class="flex flex-row items-center justify-start"
       >
         <img
           v-lazy="idCloudinary(items.img, 150, 150)"
@@ -19,7 +19,7 @@
           height="40px"
           class="object-contain object-center"
           :class="`contentImg${index}`"
-          :alt="imgInfo1"
+          :alt="`imgInfo${index}`"
         />
         <div
           class="h-35 border-l-2 border-l-black ml-20 pr-20 leading-25"

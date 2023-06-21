@@ -1,5 +1,8 @@
 <template>
-  <div class="w-full justify-center items-center py-20">
+  <div
+    class="w-full justify-center items-center py-20"
+    :style="`background-color: ${banner['--background_color_1']}`"
+  >
     <div
       v-if="banner"
       ref="mySwiper"
@@ -17,14 +20,51 @@
           rel="noreferrer noopener"
         >
           <picture>
-            <source media="(max-width: 799px)" :srcset="item.img_res" />
-            <!-- :srcset="idCloudinaryBanner(item.img_res, 'bannerRes', 800)" -->
-
-            <source media="(min-width: 800px)" :srcset="item.img" />
-            <!-- :srcset="idCloudinaryBanner(item.img, 'banner')" -->
-
-            <img v-lazy="item.img" alt="banner template13" class="w-full" />
+            <source
+              media="(max-width: 799px)"
+              :srcset="idCloudinaryBanner(item.img_res, 'bannerRes', 800)"
+            />
+            <source
+              media="(min-width: 800px)"
+              :srcset="idCloudinaryBanner(item.img, 'banner')"
+            />
+            <img v-lazy="item.img" alt="banner template14" class="w-full" />
           </picture>
+          <div
+            class="w-8/5 flex flex-col justify-center items-start absolute"
+            style="z-index: 20"
+          >
+            <p
+              v-if="item?.title"
+              class="mb-5 md:mb-10"
+              :style="`color: ${item.color_title}; font-size: ${item.fontSizeTitle}; font-weight: ${item.fontWeighTitle};`"
+            >
+              {{ item.title }}
+            </p>
+            <p
+              v-if="item?.subTitle"
+              :style="`color: ${item.color_subTitle}; font-size: ${item.fontSizeSubTitle}; font-weight: ${item.fontWeighSubTitle};`"
+            >
+              {{ item.subTitle }}
+            </p>
+            <div
+              class="border h-2 w-50 my-18 md:my-25"
+              :style="`border-color: ${item.color_border};`"
+            />
+            <p
+              v-if="item?.text"
+              class="mb-15 md:mb-20 max-w-xs md:max-w-md"
+              :style="`color: ${item.color_text}; font-size: ${item.fontSizeText}; font-weight: ${item.fontWeighText};`"
+            >
+              {{ item.text }}
+            </p>
+            <p
+              v-if="item?.price"
+              :style="`color: ${item.color_price}; font-size: ${item.fontSizePrice}; font-weight: ${item.fontWeighPrice};`"
+            >
+              {{ item.price }}
+            </p>
+          </div>
         </a>
       </div>
       <div class="swiper-pagination" />
@@ -73,6 +113,6 @@ picture {
 }
 .wrapper-banner >>> .swiper-pagination-bullet-active {
   opacity: 1;
-  background: var(--pagination_color);
+  background: black;
 }
 </style>

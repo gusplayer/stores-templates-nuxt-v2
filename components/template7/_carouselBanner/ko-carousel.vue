@@ -71,8 +71,8 @@ export default {
     return {
       swiperOption: {
         autoHeight: true,
-        effect: 'fade',
-        slidesPerView: 'auto',
+        // effect: 'fade',
+        // slidesPerView: 'auto',
         loop: true,
         pagination: {
           el: '.swiper-pagination',

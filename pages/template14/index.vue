@@ -4,85 +4,50 @@
     :style="[
       {
         '--font-style-1':
-          settingByTemplate14.settingsGeneral &&
-          settingByTemplate14.settingsGeneral.fount_1
-            ? settingByTemplate14.settingsGeneral.fount_1
-            : 'Poppins',
+          settingByTemplate14?.settingsGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
     <ko-information
       id="kInformationX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate14 &&
-        settingByTemplate14.information &&
-        settingByTemplate14.information.visible
-      "
+      v-if="settingByTemplate14?.information?.visible"
     />
     <ko-banner
       id="kBannerX"
       v-bind="componentsProps"
       :key="bannerRendering"
-      v-if="
-        settingByTemplate14 &&
-        settingByTemplate14.banner &&
-        settingByTemplate14.banner.visible
-      "
+      v-if="settingByTemplate14?.banner?.visible"
     />
     <ko-offers
       id="kOffersX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate14 &&
-        settingByTemplate14.offers &&
-        settingByTemplate14.offers.visible
-      "
+      v-if="settingByTemplate14?.offers?.visible"
     />
     <ko-listProductsHome
       id="kListProductX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate14 &&
-        settingByTemplate14.listProductsHome &&
-        settingByTemplate14.listProductsHome.visible
-      "
+      v-if="settingByTemplate14?.listProductsHome?.visible"
     />
     <Ko-offersProduct
       id="kOffersProductX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate14 &&
-        settingByTemplate14.offersProduct &&
-        settingByTemplate14.offersProduct.visible
-      "
+      v-if="settingByTemplate14?.offersProduct?.visible"
     />
     <Ko-newsletter
       id="kNewsletterX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate14 &&
-        settingByTemplate14.Newsletter &&
-        settingByTemplate14.Newsletter.visible
-      "
+      v-if="settingByTemplate14?.newsletter?.visible"
     />
     <Ko-listBlogHome
       id="kListBlogX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate14 &&
-        settingByTemplate14.listBlogHome &&
-        settingByTemplate14.listBlogHome.visible
-      "
+      v-if="settingByTemplate14?.listBlogHome?.visible"
     />
     <Ko-logos
       id="kLogosX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate14 &&
-        settingByTemplate14.logos &&
-        settingByTemplate14.logos.visible
-      "
+      v-if="settingByTemplate14?.logos?.visible"
     />
   </div>
 </template>
@@ -137,7 +102,7 @@ export default {
         listProductsHome: this.settingByTemplate14?.listProductsHome ?? null,
         cardProducts: this.settingByTemplate14?.cardProducts ?? null,
         offersProduct: this.settingByTemplate14?.offersProduct ?? null,
-        Newsletter: this.settingByTemplate14?.Newsletter ?? null,
+        newsletter: this.settingByTemplate14?.newsletter ?? null,
         listBlogHome: this.settingByTemplate14?.listBlogHome ?? null,
         cardBlog: this.settingByTemplate14?.cardBlog ?? null,
         logos: this.settingByTemplate14?.logos ?? null,

@@ -1,5 +1,5 @@
 <template>
-  <div :style="this.settingBase ? this.settingBase : null">
+  <div :style="this.settingBase ?? null">
     <KoMicompra
       :dataStore="dataStore"
       :orden="orden"
