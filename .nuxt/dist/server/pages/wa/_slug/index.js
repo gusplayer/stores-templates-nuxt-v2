@@ -1,4 +1,4 @@
-exports.ids = [49,25,28,42,43,44,92];
+exports.ids = [49,25,28,42,43,44,94];
 exports.modules = {
 
 /***/ 100:
@@ -4780,7 +4780,7 @@ var Ko_Footer_Country_component = Object(componentNormalizer["a" /* default */])
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(545);
+var content = __webpack_require__(551);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4792,7 +4792,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 473:
+/***/ 479:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4841,7 +4841,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 544:
+/***/ 550:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4853,7 +4853,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 545:
+/***/ 551:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -7312,7 +7312,43 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 918:
+/***/ 92:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(138);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add CSS to SSR context
+var add = __webpack_require__(6).default
+module.exports.__inject__ = function (context) {
+  add("ed88d900", content, true, context)
+};
+
+/***/ }),
+
+/***/ 93:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(140);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add CSS to SSR context
+var add = __webpack_require__(6).default
+module.exports.__inject__ = function (context) {
+  add("659c7938", content, true, context)
+};
+
+/***/ }),
+
+/***/ 938:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7357,7 +7393,7 @@ var template3 = __webpack_require__(224);
 var Ko_Footer_Country = __webpack_require__(225);
 
 // EXTERNAL MODULE: ./assets/img/tiendaCerrada.vue + 2 modules
-var tiendaCerrada = __webpack_require__(473);
+var tiendaCerrada = __webpack_require__(479);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/wa/_slug/index.vue?vue&type=script&lang=js&
 
@@ -7437,7 +7473,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(544)
+  var style0 = __webpack_require__(550)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -7456,42 +7492,6 @@ var component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var _slug = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ 92:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(138);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(6).default
-module.exports.__inject__ = function (context) {
-  add("ed88d900", content, true, context)
-};
-
-/***/ }),
-
-/***/ 93:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(140);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(6).default
-module.exports.__inject__ = function (context) {
-  add("659c7938", content, true, context)
-};
 
 /***/ }),
 

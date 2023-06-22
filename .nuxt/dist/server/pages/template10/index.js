@@ -1,7 +1,7 @@
 exports.ids = [1];
 exports.modules = {
 
-/***/ 904:
+/***/ 924:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62,13 +62,13 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template10',
   components: {
-    KbuttonCar: () => __webpack_require__.e(/* import() */ 27).then(__webpack_require__.bind(null, 940)),
-    Kcarousel: () => __webpack_require__.e(/* import() */ 104).then(__webpack_require__.bind(null, 941)),
-    Ksection: () => __webpack_require__.e(/* import() */ 106).then(__webpack_require__.bind(null, 942)),
-    Ktrending: () => __webpack_require__.e(/* import() */ 72).then(__webpack_require__.bind(null, 943)),
-    Kdeal: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 944)),
-    Kfeatured: () => __webpack_require__.e(/* import() */ 71).then(__webpack_require__.bind(null, 945)),
-    Kblog: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 895))
+    KbuttonCar: () => __webpack_require__.e(/* import() */ 27).then(__webpack_require__.bind(null, 960)),
+    Kcarousel: () => __webpack_require__.e(/* import() */ 106).then(__webpack_require__.bind(null, 961)),
+    Ksection: () => __webpack_require__.e(/* import() */ 108).then(__webpack_require__.bind(null, 962)),
+    Ktrending: () => __webpack_require__.e(/* import() */ 72).then(__webpack_require__.bind(null, 963)),
+    Kdeal: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 964)),
+    Kfeatured: () => __webpack_require__.e(/* import() */ 71).then(__webpack_require__.bind(null, 965)),
+    Kblog: () => __webpack_require__.e(/* import() */ 86).then(__webpack_require__.bind(null, 913))
   },
   mounted() {
     window.parent.postMessage('message', '*');

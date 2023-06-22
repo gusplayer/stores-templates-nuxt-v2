@@ -1,7 +1,7 @@
 exports.ids = [34];
 exports.modules = {
 
-/***/ 919:
+/***/ 939:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30,17 +30,17 @@ var external_vuex_ = __webpack_require__(7);
 
 /* harmony default export */ var lib_vue_loader_options_pagesvue_type_script_lang_js_ = ({
   components: {
-    KoTemplate5: () => __webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(null, 909)),
+    KoTemplate5: () => __webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(null, 929)),
     // KoTemplate6: () => import('./template6/index_macrobrand'),
-    KoTemplate7: () => __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(null, 910)),
-    KoTemplate8: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 911)),
-    KoTemplate9: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 912)),
-    KoTemplate10: () => __webpack_require__.e(/* import() */ 1).then(__webpack_require__.bind(null, 904)),
-    KoTemplate11: () => __webpack_require__.e(/* import() */ 2).then(__webpack_require__.bind(null, 905)),
-    KoTemplate12: () => __webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(null, 906)),
-    KoTemplate13: () => __webpack_require__.e(/* import() */ 4).then(__webpack_require__.bind(null, 907)),
-    KoTemplate14: () => __webpack_require__.e(/* import() */ 5).then(__webpack_require__.bind(null, 908)),
-    KoTemplateWhatsApp: () => __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(null, 913))
+    KoTemplate7: () => __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(null, 930)),
+    KoTemplate8: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 931)),
+    KoTemplate9: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 932)),
+    KoTemplate10: () => __webpack_require__.e(/* import() */ 1).then(__webpack_require__.bind(null, 924)),
+    KoTemplate11: () => __webpack_require__.e(/* import() */ 2).then(__webpack_require__.bind(null, 925)),
+    KoTemplate12: () => __webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(null, 926)),
+    KoTemplate13: () => __webpack_require__.e(/* import() */ 4).then(__webpack_require__.bind(null, 927)),
+    KoTemplate14: () => __webpack_require__.e(/* import() */ 5).then(__webpack_require__.bind(null, 928)),
+    KoTemplateWhatsApp: () => __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(null, 933))
   },
   computed: {
     ...Object(external_vuex_["mapState"])(['template']),

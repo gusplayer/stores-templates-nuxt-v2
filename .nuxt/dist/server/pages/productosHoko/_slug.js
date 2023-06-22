@@ -33,7 +33,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(527);
+var content = __webpack_require__(533);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -51,7 +51,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(529);
+var content = __webpack_require__(535);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -69,7 +69,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(531);
+var content = __webpack_require__(537);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -87,7 +87,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(533);
+var content = __webpack_require__(539);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -105,7 +105,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(535);
+var content = __webpack_require__(541);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -123,7 +123,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(537);
+var content = __webpack_require__(543);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -141,7 +141,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(539);
+var content = __webpack_require__(545);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -159,7 +159,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(541);
+var content = __webpack_require__(547);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -177,7 +177,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(543);
+var content = __webpack_require__(549);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -189,7 +189,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 526:
+/***/ 532:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -201,7 +201,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 527:
+/***/ 533:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -216,7 +216,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 528:
+/***/ 534:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -228,7 +228,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 529:
+/***/ 535:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -243,7 +243,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 530:
+/***/ 536:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -255,7 +255,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 531:
+/***/ 537:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -270,7 +270,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 532:
+/***/ 538:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -282,7 +282,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 533:
+/***/ 539:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -297,7 +297,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 534:
+/***/ 540:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -309,7 +309,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 535:
+/***/ 541:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -324,7 +324,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 536:
+/***/ 542:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -336,7 +336,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 537:
+/***/ 543:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -351,7 +351,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 538:
+/***/ 544:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -363,7 +363,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 539:
+/***/ 545:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -378,7 +378,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 540:
+/***/ 546:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -390,7 +390,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 541:
+/***/ 547:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -405,7 +405,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 542:
+/***/ 548:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -417,7 +417,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 543:
+/***/ 549:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -576,7 +576,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 865:
+/***/ 883:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -763,7 +763,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(526)
+  var style0 = __webpack_require__(532)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -855,7 +855,7 @@ var formatCurrent = __webpack_require__(63);
 
 function descriptionProduct_hoko_injectStyles (context) {
   
-  var style0 = __webpack_require__(528)
+  var style0 = __webpack_require__(534)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1062,7 +1062,7 @@ var descriptionProduct_hoko_component = Object(componentNormalizer["a" /* defaul
 
 function Ko_ProductDetailHoko_1_injectStyles (context) {
   
-  var style0 = __webpack_require__(530)
+  var style0 = __webpack_require__(536)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1233,7 +1233,7 @@ var OptAcordion_hokovue_type_template_id_7f60baff_scoped_true_staticRenderFns = 
 
 function OptAcordion_hoko_injectStyles (context) {
   
-  var style0 = __webpack_require__(532)
+  var style0 = __webpack_require__(538)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1356,7 +1356,7 @@ var OptTab_hokovue_type_template_id_03f8f368_scoped_true_staticRenderFns = [];
 
 function OptTab_hoko_injectStyles (context) {
   
-  var style0 = __webpack_require__(534)
+  var style0 = __webpack_require__(540)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1557,7 +1557,7 @@ var OptTab_hoko_component = Object(componentNormalizer["a" /* default */])(
 
 function Ko_ProductDetailHoko_injectStyles (context) {
   
-  var style0 = __webpack_require__(536)
+  var style0 = __webpack_require__(542)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1754,7 +1754,7 @@ var OptTab_hokovue_type_template_id_642527bc_scoped_true_staticRenderFns = [];
 
 function _productdetails_OptTab_hoko_injectStyles (context) {
   
-  var style0 = __webpack_require__(538)
+  var style0 = __webpack_require__(544)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1840,7 +1840,7 @@ var productSlideHokovue_type_template_id_8f4791b2_scoped_true_staticRenderFns = 
 
 function productSlideHoko_injectStyles (context) {
   
-  var style0 = __webpack_require__(540)
+  var style0 = __webpack_require__(546)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2049,7 +2049,7 @@ var productSlideHoko_component = Object(componentNormalizer["a" /* default */])(
 
 function ko_ProductDetailHoko_injectStyles (context) {
   
-  var style0 = __webpack_require__(542)
+  var style0 = __webpack_require__(548)
 if (style0.__inject__) style0.__inject__(context)
 
 }

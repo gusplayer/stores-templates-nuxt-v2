@@ -62,6 +62,9 @@ export default {
     let tienda = this.$store.state?.dataStore?.tienda ?? ''
     let geolocation = this.$store.state.dataStore.geolocalizacion
     let description = tienda?.descripcion?.replace(/<[^>]*>?/g, '') ?? ''
+    let FacebookPixel1 =
+      this.analytics_tagmanager?.facebook_pixel_metatag_1 ?? ''
+    let googleMerchants = this.analytics_tagmanager?.google_merchant ?? ''
     return {
       title: tienda.nombre ? tienda.nombre : 'Tienda',
       htmlAttrs: {

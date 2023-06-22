@@ -1,4 +1,4 @@
-exports.ids = [51,92];
+exports.ids = [51,94];
 exports.modules = {
 
 /***/ 110:
@@ -318,7 +318,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(559);
+var content = __webpack_require__(565);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -336,7 +336,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(561);
+var content = __webpack_require__(567);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -348,7 +348,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 558:
+/***/ 564:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -360,7 +360,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 559:
+/***/ 565:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -375,7 +375,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 560:
+/***/ 566:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -387,7 +387,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 561:
+/***/ 567:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2498,7 +2498,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 883:
+/***/ 901:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3332,7 +3332,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(558)
+  var style0 = __webpack_require__(564)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -3401,7 +3401,7 @@ var ko_Footer_wa_logo = __webpack_require__(81);
 
 function _slugProduct_injectStyles (context) {
   
-  var style0 = __webpack_require__(560)
+  var style0 = __webpack_require__(566)
 if (style0.__inject__) style0.__inject__(context)
 
 }

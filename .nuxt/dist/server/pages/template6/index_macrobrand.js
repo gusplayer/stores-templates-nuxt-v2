@@ -1,4 +1,4 @@
-exports.ids = [41,64,122,123];
+exports.ids = [41,64,126,127];
 exports.modules = {
 
 /***/ 109:
@@ -899,7 +899,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(517);
+var content = __webpack_require__(523);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -917,7 +917,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(519);
+var content = __webpack_require__(525);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -935,7 +935,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(521);
+var content = __webpack_require__(527);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -953,7 +953,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(523);
+var content = __webpack_require__(529);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -971,7 +971,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(525);
+var content = __webpack_require__(531);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -983,7 +983,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 470:
+/***/ 476:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1061,7 +1061,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 471:
+/***/ 477:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1139,7 +1139,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 516:
+/***/ 522:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1151,7 +1151,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 517:
+/***/ 523:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1166,7 +1166,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 518:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1178,7 +1178,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 519:
+/***/ 525:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1193,7 +1193,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 520:
+/***/ 526:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1205,7 +1205,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 521:
+/***/ 527:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1220,7 +1220,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 522:
+/***/ 528:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1232,7 +1232,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 523:
+/***/ 529:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1247,7 +1247,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 524:
+/***/ 530:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1259,7 +1259,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 525:
+/***/ 531:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1489,7 +1489,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 872:
+/***/ 890:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1519,7 +1519,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/template6/index_macrobrand.vue?vue&type=template&id=6e75e806&
 
 // EXTERNAL MODULE: ./components/template5/ko-Banner-1.vue + 4 modules
-var ko_Banner_1 = __webpack_require__(470);
+var ko_Banner_1 = __webpack_require__(476);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/ko-Banner-macrobrand.vue?vue&type=template&id=6231a394&scoped=true&
 var ko_Banner_macrobrandvue_type_template_id_6231a394_scoped_true_render = function render() {
@@ -1603,7 +1603,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(516)
+  var style0 = __webpack_require__(522)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1666,7 +1666,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 function ko_Banner_macrobrand_injectStyles (context) {
   
-  var style0 = __webpack_require__(518)
+  var style0 = __webpack_require__(524)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1980,7 +1980,7 @@ var filterProducts = __webpack_require__(64);
 
 function Ko_ProductList_2_injectStyles (context) {
   
-  var style0 = __webpack_require__(520)
+  var style0 = __webpack_require__(526)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2048,7 +2048,7 @@ var Ko_Content_macrobrandvue_type_template_id_492ae75c_scoped_true_staticRenderF
 
 function Ko_Content_macrobrand_injectStyles (context) {
   
-  var style0 = __webpack_require__(522)
+  var style0 = __webpack_require__(528)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2068,7 +2068,7 @@ var Ko_Content_macrobrand_component = Object(componentNormalizer["a" /* default 
 
 /* harmony default export */ var Ko_Content_macrobrand = (Ko_Content_macrobrand_component.exports);
 // EXTERNAL MODULE: ./components/template5/ko-BannerFooter-1.vue + 4 modules
-var ko_BannerFooter_1 = __webpack_require__(471);
+var ko_BannerFooter_1 = __webpack_require__(477);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/template6/index_macrobrand.vue?vue&type=script&lang=js&
 
@@ -2148,7 +2148,7 @@ var ko_BannerFooter_1 = __webpack_require__(471);
 
 function index_macrobrand_injectStyles (context) {
   
-  var style0 = __webpack_require__(524)
+  var style0 = __webpack_require__(530)
 if (style0.__inject__) style0.__inject__(context)
 
 }

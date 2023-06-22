@@ -34,15 +34,15 @@
       v-bind="componentsProps"
       v-if="settingByTemplate14?.offersProduct?.visible"
     />
-    <Ko-newsletter
-      id="kNewsletterX"
-      v-bind="componentsProps"
-      v-if="settingByTemplate14?.newsletter?.visible"
-    />
     <Ko-listBlogHome
       id="kListBlogX"
       v-bind="componentsProps"
       v-if="settingByTemplate14?.listBlogHome?.visible"
+    />
+    <Ko-newsletter
+      id="kNewsletterX"
+      v-bind="componentsProps"
+      v-if="settingByTemplate14?.newsletter?.visible"
     />
     <Ko-logos
       id="kLogosX"
