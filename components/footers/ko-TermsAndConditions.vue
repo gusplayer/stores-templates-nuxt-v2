@@ -157,7 +157,7 @@ export default {
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s;
-  @apply relative m-auto p-0 overflow-y-scroll;
+  @apply relative m-auto p-0 overflow-y-auto;
 }
 
 .modal-content::-webkit-scrollbar {

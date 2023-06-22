@@ -90,6 +90,7 @@ export default {
     KoFooter6: () => import('../components/footers/footer6/Ko-Footer-6'),
     KoFooter7: () => import('../components/footers/footer7/Ko-Footer-7'),
     KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8'),
+    KoFooter9: () => import('../components/footers/K14_footer9/Ko-Footer-9'),
     KoFooterCountry: () =>
       import('../components/footers/footer1/Ko-Footer-Country'),
     koTiendaCerrada: () => import('../assets/img/tiendaCerrada'),
@@ -108,10 +109,7 @@ export default {
     }
   },
   mounted() {
-    if (
-      this.analytics_tagmanager &&
-      this.analytics_tagmanager.pixel_facebook != null
-    ) {
+    if (this.analytics_tagmanager?.pixel_facebook != null) {
       this.$fb.setPixelId(this.analytics_tagmanager.pixel_facebook)
       this.$fb.track('PageView')
       this.$fb.enable()
@@ -119,11 +117,11 @@ export default {
     this.$store.dispatch('GET_COOKIES')
     this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_SHOPPING_CART')
-    if (this.$route.query && this.$route.query.clearCart == 'true') {
+    if (this.$route.query?.clearCart == 'true') {
       this.$store.commit('DELETE_ALL_ITEMS_CART')
       this.$store.commit('UPDATE_CONTENT_CART')
     }
-    if (this.$route.query && this.$route.query.openCart == 'true') {
+    if (this.$route.query?.openCart == 'true') {
       this.$store.commit('SET_OPEN_ORDER', true)
     }
 
@@ -140,87 +138,43 @@ export default {
     switch (this.template) {
       case 3:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
-            : 'Roboto'
+        tipo_letra = this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto'
         break
       case 5:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
-            : 'Roboto'
+        tipo_letra = this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto'
         break
       case 6:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
-            : 'Roboto'
+        tipo_letra = this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto'
         break
       case 7:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate7 &&
-          this.settingByTemplate7.settingGeneral &&
-          this.settingByTemplate7.settingGeneral.fount_1
-            ? this.settingByTemplate7.settingGeneral.fount_1
-            : 'David Libre'
+          this.settingByTemplate7?.settingGeneral?.fount_1 ?? 'David Libre'
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra2 =
-          this.settingByTemplate7 &&
-          this.settingByTemplate7.settingGeneral &&
-          this.settingByTemplate7.settingGeneral.fount_2
-            ? this.settingByTemplate7.settingGeneral.fount_2
-            : 'Great Vibes'
+          this.settingByTemplate7?.settingGeneral?.fount_2 ?? 'Great Vibes'
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra3 =
-          this.settingByTemplate7 &&
-          this.settingByTemplate7.settingGeneral &&
-          this.settingByTemplate7.settingGeneral.fount_3
-            ? this.settingByTemplate7.settingGeneral.fount_3
-            : 'Lora'
+        tipo_letra3 = this.settingByTemplate7?.settingGeneral?.fount_3 ?? 'Lora'
         break
       case 9:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate9 &&
-          this.settingByTemplate9.settingGeneral &&
-          this.settingByTemplate9.settingGeneral.fount_1
-            ? this.settingByTemplate9.settingGeneral.fount_1
-            : 'Poppins'
+          this.settingByTemplate9?.settingGeneral?.fount_1 ?? 'Poppins'
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra2 =
-          this.settingByTemplate9 &&
-          this.settingByTemplate9.settingGeneral &&
-          this.settingByTemplate9.settingGeneral.fount_2
-            ? this.settingByTemplate9.settingGeneral.fount_2
-            : 'Roboto'
+          this.settingByTemplate9?.settingGeneral?.fount_2 ?? 'Roboto'
         break
       case 10:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate10 &&
-          this.settingByTemplate10.settingGeneral &&
-          this.settingByTemplate10.settingGeneral.fount_1
-            ? this.settingByTemplate10.settingGeneral.fount_1
-            : 'Roboto'
+          this.settingByTemplate10?.settingGeneral?.fount_1 ?? 'Roboto'
         break
       case 11:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate11 &&
-          this.settingByTemplate11.settingGeneral &&
-          this.settingByTemplate11.settingGeneral.fount_1
-            ? this.settingByTemplate11.settingGeneral.fount_1
-            : 'Roboto'
+          this.settingByTemplate11?.settingGeneral?.fount_1 ?? 'Roboto'
         break
       case 99:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -228,44 +182,28 @@ export default {
         break
       case 12:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate12 && this.settingByTemplate12.fontFamily
-            ? this.settingByTemplate12.fontFamily
-            : 'Poppins'
+        tipo_letra = this.settingByTemplate12?.fontFamily ?? 'Poppins'
         break
       case 13:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate13 &&
-          this.settingByTemplate13.settingGeneral &&
-          this.settingByTemplate13.settingGeneral.fount_1
-            ? this.settingByTemplate13.settingGeneral.fount_1
-            : 'Roboto'
+          this.settingByTemplate13?.settingGeneral?.fount_1 ?? 'Roboto'
+        break
+      case 14:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate14?.settingsGeneral?.fount_1 ?? 'Roboto'
         break
     }
-    let tienda = this.$store.state.dataStore.tienda
-      ? this.$store.state.dataStore.tienda
-      : ''
-    let tidio =
-      this.analytics_tagmanager && this.analytics_tagmanager.tidio_user
-        ? this.analytics_tagmanager.tidio_user
-        : ''
+    let tienda = this.$store.state?.dataStore?.tienda ?? ''
+    let tidio = this.analytics_tagmanager?.tidio_user ?? ''
     let FacebookPixel1 =
-      this.analytics_tagmanager &&
-      this.analytics_tagmanager.facebook_pixel_metatag_1
-        ? this.analytics_tagmanager.facebook_pixel_metatag_1
-        : ''
-    let googleMerchants =
-      this.analytics_tagmanager && this.analytics_tagmanager.google_merchant
-        ? this.analytics_tagmanager.google_merchant
-        : ''
-    let geolocalizacion = this.$store.state.dataStore.geolocalizacion
-    let description =
-      tienda && tienda.descripcion
-        ? tienda.descripcion.replace(/<[^>]*>?/g, '')
-        : ''
+      this.analytics_tagmanager?.facebook_pixel_metatag_1 ?? ''
+    let googleMerchants = this.analytics_tagmanager?.google_merchant ?? ''
+    let geolocation = this.$store.state.dataStore.geolocalizacion
+    let description = tienda?.descripcion?.replace(/<[^>]*>?/g, '') ?? ''
     return {
-      title: tienda && tienda.nombre ? tienda.nombre : 'Tienda',
+      title: tienda?.nombre ?? 'Tienda Online',
       htmlAttrs: {
         lang: 'es',
       },
@@ -285,20 +223,19 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: description ? description : 'Tienda Online',
+          content: description ?? 'Tienda Online',
         },
         { hid: 'subject', name: 'subject', content: 'Tienda Online' },
         {
           hid: 'summary',
           name: 'summary',
-          content: description ? description : 'Tienda Online',
+          content: description ?? 'Tienda Online',
         },
         {
           hid: 'url',
           name: 'url',
-          content: tienda.dominio
-            ? tienda.dominio
-            : `https://${tienda.subdominio}.komercia.co`,
+          content:
+            tienda?.dominio ?? `https://${tienda.subdominio}.komercia.co`,
         },
         { hid: 'language', name: 'language', content: 'ES' },
         { hid: 'author', name: 'author', content: 'Komercia' },
@@ -319,7 +256,7 @@ export default {
         {
           hid: 'og:title',
           name: 'og:title',
-          content: tienda.nombre ? tienda.nombre : 'Tienda',
+          content: tienda?.nombre ?? 'Tienda',
         },
         {
           hid: 'og:type',
@@ -329,9 +266,8 @@ export default {
         {
           hid: 'og:url',
           name: 'og:url',
-          content: tienda.dominio
-            ? tienda.dominio
-            : `https://${tienda.subdominio}.komercia.co`,
+          content:
+            tienda?.dominio ?? `https://${tienda.subdominio}.komercia.co`,
         },
         {
           hid: 'og:image',
@@ -341,7 +277,7 @@ export default {
         {
           hid: 'og:site_name',
           name: 'og:site_name',
-          content: tienda.nombre ? tienda.nombre : 'Tienda',
+          content: tienda?.nombre ?? 'Tienda',
         },
         {
           hid: 'og:description',
@@ -357,36 +293,26 @@ export default {
         {
           hid: 'og:latitude',
           name: 'og:latitude',
-          content:
-            geolocalizacion && geolocalizacion.latitud
-              ? geolocalizacion.latitud
-              : '',
+          content: geolocation?.latitud ?? '',
         },
         {
           hid: 'og:longitude',
           name: 'og:longitude',
-          content:
-            geolocalizacion && geolocalizacion.longitud
-              ? geolocalizacion.longitud
-              : '',
+          content: geolocation?.longitud ?? '',
         },
         {
           hid: 'og:street-address',
           name: 'og:street-address',
-          content:
-            geolocalizacion && geolocalizacion.direccion
-              ? geolocalizacion.direccion
-              : '',
+          content: geolocation?.direccion ?? '',
         },
         {
           name: 'facebook-domain-verification',
-          content: FacebookPixel1 ? `${FacebookPixel1}` : '',
+          content: FacebookPixel1 ?? '',
         },
         {
           name: 'google-site-verification',
-          content: googleMerchants
-            ? `${googleMerchants}`
-            : 'ce4pJPC3AEQoDU6jNkAEqV-Dwa1OUU8GxtRTR0d_MM8',
+          content:
+            googleMerchants ?? 'ce4pJPC3AEQoDU6jNkAEqV-Dwa1OUU8GxtRTR0d_MM8',
         },
         {
           name: 'Content-Security-Policy',
@@ -420,23 +346,21 @@ export default {
             this.template == 3 ||
             this.template == 5 ||
             this.template == 6 ||
+            this.template == 7 ||
+            this.template == 9 ||
             this.template == 10 ||
-            this.template == 99 ||
-            this.template == 12
-              ? `https://fonts.googleapis.com/css?family=${tipo_letra}:100,200,300,400,500,600,700,800,900&display=swap`
-              : '',
-          rel: 'stylesheet',
-        },
-        {
-          href:
-            this.template == 7
+            this.template == 11 ||
+            this.template == 13 ||
+            this.template == 12 ||
+            this.template == 14 ||
+            this.template == 99
               ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
               : '',
           rel: 'stylesheet',
         },
         {
           href:
-            this.template == 7
+            this.template == 7 || this.template == 9
               ? `https://fonts.googleapis.com/css2?family=${tipo_letra2}&display=swap`
               : '',
           rel: 'stylesheet',
@@ -445,34 +369,6 @@ export default {
           href:
             this.template == 7
               ? `https://fonts.googleapis.com/css2?family=${tipo_letra3}&display=swap`
-              : '',
-          rel: 'stylesheet',
-        },
-        {
-          href:
-            this.template == 9
-              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
-              : '',
-          rel: 'stylesheet',
-        },
-        {
-          href:
-            this.template == 9
-              ? `https://fonts.googleapis.com/css2?family=${tipo_letra2}&display=swap`
-              : '',
-          rel: 'stylesheet',
-        },
-        {
-          href:
-            this.template == 11
-              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
-              : '',
-          rel: 'stylesheet',
-        },
-        {
-          href:
-            this.template == 13
-              ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
               : '',
           rel: 'stylesheet',
         },
@@ -492,6 +388,7 @@ export default {
       'settingByTemplate11',
       'settingByTemplate12',
       'settingByTemplate13',
+      'settingByTemplate14',
       'analytics_tagmanager',
     ]),
     headerTemplate() {
@@ -583,131 +480,79 @@ export default {
         case 13:
           footerComponent = 'KoFooter8'
           break
+        case 14:
+          footerComponent = 'KoFooter9'
+          break
       }
       return footerComponent
     },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        settingByTemplate:
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings
-            : this.settingBase,
+        settingByTemplate: this.settingByTemplate?.settings ?? this.settingBase,
         settingByTemplate7: this.settingByTemplate7
           ? [
               {
-                setting7Header:
-                  this.settingByTemplate7 && this.settingByTemplate7.header
-                    ? this.settingByTemplate7.header
-                    : null,
-                setting7Footer:
-                  this.settingByTemplate7 && this.settingByTemplate7.footer
-                    ? this.settingByTemplate7.footer
-                    : null,
+                setting7Header: this.settingByTemplate7?.header ?? null,
+                setting7Footer: this.settingByTemplate7?.footer ?? null,
                 setting7General:
-                  this.settingByTemplate7 &&
-                  this.settingByTemplate7.settingGeneral
-                    ? this.settingByTemplate7.settingGeneral
-                    : null,
-                settingKProdutCard:
-                  this.settingByTemplate7 && this.settingByTemplate7.card
-                    ? this.settingByTemplate7.card
-                    : null,
+                  this.settingByTemplate7?.settingGeneral ?? null,
+                settingKProdutCard: this.settingByTemplate7?.card ?? null,
               },
             ]
           : null,
         settingByTemplate9: this.settingByTemplate9
           ? [
               {
-                setting9Header:
-                  this.settingByTemplate9 && this.settingByTemplate9.header
-                    ? this.settingByTemplate9.header
-                    : null,
-                setting9Footer:
-                  this.settingByTemplate9 && this.settingByTemplate9.footer
-                    ? this.settingByTemplate9.footer
-                    : null,
+                setting9Header: this.settingByTemplate9?.header ?? null,
+                setting9Footer: this.settingByTemplate9?.footer ?? null,
                 setting9General:
-                  this.settingByTemplate9 &&
-                  this.settingByTemplate9.settingGeneral
-                    ? this.settingByTemplate9.settingGeneral
-                    : null,
+                  this.settingByTemplate9?.settingGeneral ?? null,
               },
             ]
           : null,
         settingByTemplate10: this.settingByTemplate10
           ? [
               {
-                setting10Header:
-                  this.settingByTemplate10 && this.settingByTemplate10.header
-                    ? this.settingByTemplate10.header
-                    : null,
-                setting10Footer:
-                  this.settingByTemplate10 && this.settingByTemplate10.footer
-                    ? this.settingByTemplate10.footer
-                    : null,
+                setting10Header: this.settingByTemplate10?.header ?? null,
+                setting10Footer: this.settingByTemplate10?.footer ?? null,
                 setting10General:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.settingGeneral
-                    ? this.settingByTemplate10.settingGeneral
-                    : null,
-                pages:
-                  this.settingByTemplate10 && this.settingByTemplate10.pages
-                    ? this.settingByTemplate10.pages
-                    : null,
+                  this.settingByTemplate10?.settingGeneral ?? null,
+                pages: this.settingByTemplate10?.pages ?? null,
               },
             ]
           : null,
         settingByTemplate11: this.settingByTemplate11
           ? [
               {
-                setting11Header:
-                  this.settingByTemplate11 && this.settingByTemplate11.header
-                    ? this.settingByTemplate11.header
-                    : null,
-                setting11Footer:
-                  this.settingByTemplate11 && this.settingByTemplate11.footer
-                    ? this.settingByTemplate11.footer
-                    : null,
+                setting11Header: this.settingByTemplate11?.header ?? null,
+                setting11Footer: this.settingByTemplate11?.footer ?? null,
                 setting11General:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.settingGeneral
-                    ? this.settingByTemplate11.settingGeneral
-                    : null,
-                newsletter:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.newsletter
-                    ? this.settingByTemplate11.newsletter
-                    : null,
-                pages:
-                  this.settingByTemplate11 && this.settingByTemplate11.pages
-                    ? this.settingByTemplate11.pages
-                    : null,
+                  this.settingByTemplate11?.settingGeneral ?? null,
+                newsletter: this.settingByTemplate11?.newsletter ?? null,
+                pages: this.settingByTemplate11?.pages ?? null,
               },
             ]
           : null,
         settingByTemplate13: this.settingByTemplate13
           ? [
               {
-                setting13Header:
-                  this.settingByTemplate13 && this.settingByTemplate13.header
-                    ? this.settingByTemplate13.header
-                    : null,
-                setting13Footer:
-                  this.settingByTemplate13 && this.settingByTemplate13.footer
-                    ? this.settingByTemplate13.footer
-                    : null,
+                setting13Header: this.settingByTemplate13?.header ?? null,
+                setting13Footer: this.settingByTemplate13?.footer ?? null,
                 setting13General:
-                  this.settingByTemplate13 &&
-                  this.settingByTemplate13.settingGeneral
-                    ? this.settingByTemplate13.settingGeneral
-                    : null,
-                pages:
-                  this.settingByTemplate13 && this.settingByTemplate13.pages
-                    ? this.settingByTemplate13.pages
-                    : null,
+                  this.settingByTemplate13?.settingGeneral ?? null,
+                pages: this.settingByTemplate13?.pages ?? null,
+              },
+            ]
+          : null,
+        settingByTemplate14: this.settingByTemplate14
+          ? [
+              {
+                setting14Header: this.settingByTemplate14?.header ?? null,
+                setting14Footer: this.settingByTemplate14?.footer ?? null,
+                setting14General:
+                  this.settingByTemplate14?.settingsGeneral ?? null,
+                pages: this.settingByTemplate14?.pages ?? null,
               },
             ]
           : null,

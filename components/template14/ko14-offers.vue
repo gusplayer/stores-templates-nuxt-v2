@@ -1,141 +1,104 @@
 <template>
-  <div>offers</div>
-  <!-- <div
-    class="content-section"
-    :style="[
-      settingKsection,
-      settingGeneral,
-      {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
-      },
-    ]"
+  <div
+    class="content-section w-full flex flex-col justify-center items-center py-20"
+    :style="[offers, settingGeneral]"
   >
-    <div class="content-wrapper">
+    <div
+      class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4 items-center justify-center"
+    >
       <a
-        :href="
-          this.settingKsection.values[0].url_redirect
-            ? this.settingKsection.values[0].url_redirect
-            : ''
-        "
+        class="w-full"
+        :href="this.offers.values[0]?.url_redirect ?? ''"
         rel="noreferrer noopener"
       >
         <div class="wrapper-left">
           <img
             class="img-left"
-            v-lazy="
-              idCloudinaryBanner(
-                this.settingKsection.values[0].url_img_background,
-                'banner'
-              )
-            "
+            v-lazy="idCloudinaryBanner(this.offers.values[0].img, 'banner')"
             alt="imagen-1"
           />
           <div
-            class="txt-content"
-            :style="`justify-content: ${this.settingKsection.values[0].justingText}; align-items: ${this.settingKsection.values[0].alingText};`"
+            class="absolute w-full h-full flex flex-col justify-center items-start pl-40 pr-10"
           >
             <p
-              class="txt-top"
-              :style="`color: ${this.settingKsection.values[0].colorPretitle}; margin-bottom:${this.settingKsection.values[0].marginbottomPretitle};`"
+              :style="`color: ${this.offers.values[0].color_title}; font-size: ${this.offers.values[0].fontSizeTitle}; font-weight: ${this.offers.values[0].fontWeighTitle};`"
             >
-              {{
-                this.settingKsection.values[0].pretitle.replace(/&nbsp;/g, ' ')
-              }}
+              {{ this.offers.values[0].title.replace(/&nbsp;/g, ' ') }}
             </p>
             <p
-              class="txt-bottom"
-              :style="`color: ${this.settingKsection.values[0].colorTitle}; margin-bottom:${this.settingKsection.values[0].marginbottomTitle};`"
+              :style="`color: ${this.offers.values[0].color_text}; font-size: ${this.offers.values[0].fontSizeText}; font-weight: ${this.offers.values[0].fontWeighText};`"
             >
-              {{ this.settingKsection.values[0].title.replace(/&nbsp;/g, ' ') }}
+              {{ this.offers.values[0].subTitle.replace(/&nbsp;/g, ' ') }}
             </p>
+            <div
+              class="border h-2 mt-5 md:mt-10 border-hover"
+              :style="`border-color: ${this.offers.values[0].color_border};`"
+            />
           </div>
         </div>
       </a>
       <a
-        :href="
-          this.settingKsection.values[1].url_redirect
-            ? this.settingKsection.values[1].url_redirect
-            : ''
-        "
+        :href="this.offers.values[1]?.url_redirect ?? ''"
         rel="noreferrer noopener"
       >
         <div class="wrapper-center">
           <img
             class="img-center"
-            v-lazy="
-              idCloudinaryBanner(
-                this.settingKsection.values[1].url_img_background,
-                'banner'
-              )
-            "
+            v-lazy="idCloudinaryBanner(this.offers.values[1].img, 'banner')"
             alt="imagen-2"
           />
           <div
-            class="txt-content"
-            :style="`justify-content: ${this.settingKsection.values[1].justingText}; align-items: ${this.settingKsection.values[1].alingText};`"
+            class="absolute w-full h-full flex flex-col justify-center items-start pl-40 pr-10"
           >
             <p
-              class="txt-top"
-              :style="`color: ${this.settingKsection.values[1].colorPretitle}; margin-bottom:${this.settingKsection.values[1].marginbottomPretitle};`"
+              :style="`color: ${this.offers.values[1].color_title}; font-size: ${this.offers.values[1].fontSizeTitle}; font-weight: ${this.offers.values[1].fontWeighTitle};`"
             >
-              {{
-                this.settingKsection.values[1].pretitle.replace(/&nbsp;/g, ' ')
-              }}
+              {{ this.offers.values[1].title.replace(/&nbsp;/g, ' ') }}
             </p>
             <p
-              class="txt-bottom"
-              :style="`color: ${this.settingKsection.values[1].colorTitle}; margin-bottom:${this.settingKsection.values[1].marginbottomTitle};`"
+              :style="`color: ${this.offers.values[1].color_text}; font-size: ${this.offers.values[1].fontSizeText}; font-weight: ${this.offers.values[1].fontWeighText};`"
             >
-              {{ this.settingKsection.values[1].title.replace(/&nbsp;/g, ' ') }}
+              {{ this.offers.values[1].subTitle.replace(/&nbsp;/g, ' ') }}
             </p>
+            <div
+              class="border h-2 mt-5 md:mt-10 border-hover"
+              :style="`border-color: ${this.offers.values[1].color_border};`"
+            />
           </div>
         </div>
       </a>
       <a
-        :href="
-          this.settingKsection.values[2].url_redirect
-            ? this.settingKsection.values[2].url_redirect
-            : ''
-        "
+        :href="this.offers.values[2]?.url_redirect ?? ''"
         rel="noreferrer noopener"
       >
         <div class="wrapper-right">
           <img
             class="img-right"
-            v-lazy="
-              idCloudinaryBanner(
-                this.settingKsection.values[2].url_img_background,
-                'banner'
-              )
-            "
+            v-lazy="idCloudinaryBanner(this.offers.values[2].img, 'banner')"
             alt="imagen-3"
           />
           <div
-            class="txt-content"
-            :style="`justify-content: ${this.settingKsection.values[2].justingText}; align-items: ${this.settingKsection.values[2].alingText};`"
+            class="absolute w-full h-full flex flex-col justify-center items-start pl-40 pr-10"
           >
             <p
-              class="txt-top"
-              :style="`color: ${this.settingKsection.values[2].colorPretitle}; margin-bottom:${this.settingKsection.values[2].marginbottomPretitle};`"
+              :style="`color: ${this.offers.values[2].color_title}; font-size: ${this.offers.values[2].fontSizeTitle}; font-weight: ${this.offers.values[2].fontWeighTitle};`"
             >
-              {{
-                this.settingKsection.values[2].pretitle.replace(/&nbsp;/g, ' ')
-              }}
+              {{ this.offers.values[2].title.replace(/&nbsp;/g, ' ') }}
             </p>
             <p
-              class="txt-bottom"
-              :style="`color: ${this.settingKsection.values[2].colorTitle}; margin-bottom:${this.settingKsection.values[2].marginbottomTitle};`"
+              :style="`color: ${this.offers.values[2].color_text}; font-size: ${this.offers.values[2].fontSizeText}; font-weight: ${this.offers.values[2].fontWeighText};`"
             >
-              {{ this.settingKsection.values[2].title.replace(/&nbsp;/g, ' ') }}
+              {{ this.offers.values[2].subTitle.replace(/&nbsp;/g, ' ') }}
             </p>
+            <div
+              class="border h-2 mt-5 md:mt-10 border-hover"
+              :style="`border-color: ${this.offers.values[2].color_border};`"
+            />
           </div>
         </div>
       </a>
     </div>
-  </div> -->
+  </div>
 </template>
 <script>
 import idCloudinary from '../../mixins/idCloudinary'
@@ -152,10 +115,6 @@ export default {
 <style scoped>
 .content-section {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center py-40;
-}
-.content-wrapper {
-  @apply justify-center items-center;
 }
 .wrapper-left,
 .wrapper-center,
@@ -187,41 +146,14 @@ export default {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-.txt-content {
-  padding: 20px 20px 0 20px;
-  @apply absolute w-full h-full flex flex-col;
+.wrapper-right:hover .border-hover,
+.wrapper-center:hover .border-hover,
+.wrapper-left:hover .border-hover {
+  @apply w-100;
+  -webkit-transition: all 600ms ease 0s;
 }
-@screen sm {
-  .content-wrapper {
-    @apply w-9/0 grid grid-cols-1 gap-6;
-  }
-  .txt-top {
-    font-size: 13px;
-    font-family: var(--font-style-1);
-    @apply uppercase font-normal tracking-1;
-  }
-  .txt-bottom {
-    font-size: 25px;
-    font-family: var(--font-style-1);
-    @apply font-bold uppercase;
-  }
-}
-@screen md {
-  .content-wrapper {
-    @apply w-9/5 grid grid-cols-3 gap-6;
-  }
-  .txt-bottom {
-    font-size: 20px;
-  }
-}
-@screen lg {
-  .txt-bottom {
-    font-size: 25px;
-  }
-}
-@media (min-width: 1400px) {
-  .content-wrapper {
-    max-width: 1200px;
-  }
+.border-hover {
+  @apply w-50;
+  -webkit-transition: all 600ms ease 0s;
 }
 </style>

@@ -117,7 +117,6 @@
 
 <script>
 import KoTermsConditions from '../ko-TermsAndConditions'
-
 export default {
   name: 'Ko-Footer-1',
   components: {

@@ -247,7 +247,9 @@ export default {
               JSON.parse(
                 arrCombinations[0].combinaciones[0].combinaciones
               ).forEach((item) => {
-                inventario += parseInt(item.unidades)
+                if (item.unidades) {
+                  inventario += parseInt(item.unidades)
+                }
               })
             }
           }

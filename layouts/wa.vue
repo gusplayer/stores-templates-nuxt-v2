@@ -43,33 +43,25 @@ export default {
     }
   },
   mounted() {
-    if (
-      this.analytics_tagmanager &&
-      this.analytics_tagmanager.pixel_facebook != null
-    ) {
+    if (this.analytics_tagmanager?.pixel_facebook != null) {
       this.$fb.setPixelId(this.analytics_tagmanager.pixel_facebook)
       this.$fb.track('PageView')
       this.$fb.enable()
     }
     this.$store.dispatch('GET_COOKIES_PWD')
     this.$store.dispatch('GET_SHOPPING_CART')
-    if (this.$route.query && this.$route.query.clearCart == 'true') {
+    if (this.$route.query?.clearCart == 'true') {
       this.$store.commit('DELETE_ALL_ITEMS_CART')
       this.$store.commit('UPDATE_CONTENT_CART')
     }
-    if (this.$route.query && this.$route.query.openCart == 'true') {
+    if (this.$route.query?.openCart == 'true') {
       this.$store.commit('SET_OPEN_ORDER', true)
     }
   },
   head() {
-    let tienda = this.$store.state.dataStore.tienda
-      ? this.$store.state.dataStore.tienda
-      : ''
-    let geolocalizacion = this.$store.state.dataStore.geolocalizacion
-    let description =
-      tienda && tienda.descripcion
-        ? tienda.descripcion.replace(/<[^>]*>?/g, '')
-        : ''
+    let tienda = this.$store.state?.dataStore?.tienda ?? ''
+    let geolocation = this.$store.state.dataStore.geolocalizacion
+    let description = tienda?.descripcion?.replace(/<[^>]*>?/g, '') ?? ''
     return {
       title: tienda.nombre ? tienda.nombre : 'Tienda',
       htmlAttrs: {
@@ -91,20 +83,19 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: description ? description : 'Tienda Online',
+          content: description ?? 'Tienda Online',
         },
         { hid: 'subject', name: 'subject', content: 'Tienda Online' },
         {
           hid: 'summary',
           name: 'summary',
-          content: description ? description : 'Tienda Online',
+          content: description ?? 'Tienda Online',
         },
         {
           hid: 'url',
           name: 'url',
-          content: tienda.dominio
-            ? tienda.dominio
-            : `https://${tienda.subdominio}.komercia.co`,
+          content:
+            tienda?.dominio ?? `https://${tienda.subdominio}.komercia.co`,
         },
         { hid: 'language', name: 'language', content: 'ES' },
         { hid: 'author', name: 'author', content: 'Komercia' },
@@ -113,7 +104,7 @@ export default {
           hid: 'keywords',
           name: 'keywords',
           content:
-            'tienda, store, shop, shopping, tienda online, online, komercia, producto, articulo',
+            'tienda, store, shop, shopping, tienda online, online, Komercia, producto, articulo',
         },
         { hid: 'distribution', name: 'distribution', content: 'global' },
         {
@@ -122,7 +113,11 @@ export default {
           content: 'es',
         },
         //openGraph meta
-        { hid: 'og:title', name: 'og:title', content: tienda.nombre },
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: tienda?.nombre ?? 'Tienda',
+        },
         {
           hid: 'og:type',
           name: 'og:type',
@@ -131,9 +126,8 @@ export default {
         {
           hid: 'og:url',
           name: 'og:url',
-          content: tienda.dominio
-            ? tienda.dominio
-            : `https://${tienda.subdominio}.komercia.co`,
+          content:
+            tienda?.dominio ?? `https://${tienda.subdominio}.komercia.co`,
         },
         {
           hid: 'og:image',
@@ -143,7 +137,7 @@ export default {
         {
           hid: 'og:site_name',
           name: 'og:site_name',
-          content: tienda.nombre ? tienda.nombre : 'Tienda',
+          content: tienda?.nombre ?? 'Tienda',
         },
         {
           hid: 'og:description',
@@ -159,30 +153,26 @@ export default {
         {
           hid: 'og:latitude',
           name: 'og:latitude',
-          content:
-            geolocalizacion && geolocalizacion.latitud
-              ? geolocalizacion.latitud
-              : '',
+          content: geolocation?.latitud ?? '',
         },
         {
           hid: 'og:longitude',
           name: 'og:longitude',
-          content:
-            geolocalizacion && geolocalizacion.longitud
-              ? geolocalizacion.longitud
-              : '',
+          content: geolocation?.longitud ?? '',
         },
         {
           hid: 'og:street-address',
           name: 'og:street-address',
-          content:
-            geolocalizacion && geolocalizacion.direccion
-              ? geolocalizacion.direccion
-              : '',
+          content: geolocation?.direccion ?? '',
         },
         {
-          name: ' google',
-          content: ' notranslate',
+          name: 'facebook-domain-verification',
+          content: FacebookPixel1 ?? '',
+        },
+        {
+          name: 'google-site-verification',
+          content:
+            googleMerchants ?? 'ce4pJPC3AEQoDU6jNkAEqV-Dwa1OUU8GxtRTR0d_MM8',
         },
         {
           name: 'Content-Security-Policy',
@@ -210,11 +200,11 @@ export default {
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=Poppins&display=swap',
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap',
         },
       ],
     }
