@@ -1,7 +1,7 @@
 exports.ids = [36];
 exports.modules = {
 
-/***/ 917:
+/***/ 937:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27,12 +27,12 @@ var external_vuex_ = __webpack_require__(7);
 
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   components: {
-    Ko5ProductDetail: () => __webpack_require__.e(/* import() */ 52).then(__webpack_require__.bind(null, 869)),
-    Ko7ProductDetail: () => __webpack_require__.e(/* import() */ 55).then(__webpack_require__.bind(null, 866)),
-    Ko9ProductDetail: () => __webpack_require__.e(/* import() */ 56).then(__webpack_require__.bind(null, 870)),
-    Ko10ProductDetail: () => __webpack_require__.e(/* import() */ 57).then(__webpack_require__.bind(null, 871)),
-    Ko11ProductDetail: () => __webpack_require__.e(/* import() */ 53).then(__webpack_require__.bind(null, 867)),
-    Ko13ProductDetail: () => __webpack_require__.e(/* import() */ 54).then(__webpack_require__.bind(null, 868))
+    Ko5ProductDetail: () => __webpack_require__.e(/* import() */ 52).then(__webpack_require__.bind(null, 887)),
+    Ko7ProductDetail: () => __webpack_require__.e(/* import() */ 55).then(__webpack_require__.bind(null, 884)),
+    Ko9ProductDetail: () => __webpack_require__.e(/* import() */ 56).then(__webpack_require__.bind(null, 888)),
+    Ko10ProductDetail: () => __webpack_require__.e(/* import() */ 57).then(__webpack_require__.bind(null, 889)),
+    Ko11ProductDetail: () => __webpack_require__.e(/* import() */ 53).then(__webpack_require__.bind(null, 885)),
+    Ko13ProductDetail: () => __webpack_require__.e(/* import() */ 54).then(__webpack_require__.bind(null, 886))
   },
   mounted() {
     window.parent.postMessage('message', '*');
