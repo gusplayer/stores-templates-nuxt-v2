@@ -2,7 +2,7 @@
   <div
     class="wrapper-contact"
     :style="[
-      settingByTemplate7[0].settingK07Contact,
+      settingByTemplate7[0].contact,
       settingByTemplate7[0].settingGeneral,
     ]"
   >

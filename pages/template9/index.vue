@@ -4,24 +4,15 @@
     :style="[
       {
         '--font-style-1':
-          this.settingByTemplate9.settingGeneral &&
-          this.settingByTemplate9.settingGeneral.fount_1
-            ? this.settingByTemplate9.settingGeneral.fount_1
-            : 'David Libre',
+          this.settingByTemplate9?.settingGeneral?.fount_1 ?? 'David Libre',
       },
       {
         '--font-style-2':
-          this.settingByTemplate9.settingGeneral &&
-          this.settingByTemplate9.settingGeneral.fount_2
-            ? this.settingByTemplate9.settingGeneral.fount_2
-            : 'Great Vibes',
+          this.settingByTemplate9?.settingGeneral?.fount_2 ?? 'Great Vibes',
       },
       {
         '--font-style-3':
-          this.settingByTemplate9.settingGeneral &&
-          this.settingByTemplate9.settingGeneral.fount_3
-            ? this.settingByTemplate9.settingGeneral.fount_3
-            : 'Lora',
+          this.settingByTemplate9?.settingGeneral?.fount_3 ?? 'Lora',
       },
     ]"
   >

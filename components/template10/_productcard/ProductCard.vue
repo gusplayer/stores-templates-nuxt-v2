@@ -263,11 +263,7 @@
             </p>
           </div>
         </button>
-        <nuxt-link
-          nuxt-link
-          v-else
-          :to="{ path: `/productos/` + product.slug }"
-        >
+        <nuxt-link v-else :to="{ path: `/productos/` + product.slug }">
           <button class="btn">
             <div class="btn-content">
               <i class="header-content-cart">

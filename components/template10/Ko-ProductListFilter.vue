@@ -2,14 +2,11 @@
   <div
     class="product-content"
     :style="[
-      settingByTemplate10[0].setting10General,
+      settingByTemplate10[0].settingGeneral,
       settingByTemplate10[0].productListFilter,
       {
         '--font-style-1':
-          this.settingByTemplate10[0].setting10General &&
-          this.settingByTemplate10[0].setting10General.fount_1
-            ? this.settingByTemplate10[0].setting10General.fount_1
-            : 'Roboto',
+          this.settingByTemplate10[0]?.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -309,15 +306,15 @@
                       v-if="!showInList"
                       class="product-list"
                       :cardProduct="settingByTemplate10[0].cardProduct"
-                      :settingGeneral="settingByTemplate10[0].setting10General"
-                    ></KoProdcutCardFilter>
+                      :settingGeneral="settingByTemplate10[0].settingGeneral"
+                    />
                     <KoProdcutCardFilerList
                       :product="product"
                       v-if="showInList"
                       class="product-list"
                       :cardProduct="settingByTemplate10[0].cardProduct"
-                      :settingGeneral="settingByTemplate10[0].setting10General"
-                    ></KoProdcutCardFilerList>
+                      :settingGeneral="settingByTemplate10[0].settingGeneral"
+                    />
                   </div>
                 </div>
                 <div

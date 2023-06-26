@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <KoMicompra
-      v-if="orden"
-      :dataStore="dataStore"
-      :orden="orden"
-      @update="setDataOrder"
-    />
-  </div>
+  <KoMicompra
+    v-if="orden"
+    :dataStore="dataStore"
+    :orden="orden"
+    @update="setDataOrder"
+  />
 </template>
 
 <script>

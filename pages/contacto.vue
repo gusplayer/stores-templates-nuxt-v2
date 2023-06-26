@@ -1,23 +1,45 @@
 <template>
-  <div class="home">
-    <component :is="indexTemplate" v-bind="componentsProps" />
-  </div>
+  <component :is="indexTemplate" v-bind="componentsProps" />
 </template>
 <script>
 import { mapState } from 'vuex'
 export default {
   layout: 'default',
   components: {
-    K05Contact: () => import('../components/template5/Ko-Contact-1'),
-    K07Contact: () => import('../components/template7/Ko-Contact'),
-    K09Contact: () => import('../components/template9/Ko-Contact'),
-    K10Contact: () => import('../components/template10/ko-Contact'),
-    K11Contact: () => import('../components/template11/ko-Contact'),
-    K13Contact: () => import('../components/template13/Ko-Contact-1'),
+    K05Contact: () => import('@/components/template5/Ko-Contact-1'),
+    K07Contact: () => import('@/components/template7/Ko-Contact'),
+    K09Contact: () => import('@/components/template9/Ko-Contact'),
+    K10Contact: () => import('@/components/template10/ko-Contact'),
+    K11Contact: () => import('@/components/template11/ko-Contact'),
+    K13Contact: () => import('@/components/template13/Ko-Contact-1'),
+    K14Contact: () => import('@/components/template14/Ko-Contact-1'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)
+  },
+  data() {
+    return {
+      componentMapping: {
+        3: 'K05Contact',
+        5: 'K05Contact',
+        6: 'K05Contact',
+        7: 'K07Contact',
+        9: 'K09Contact',
+        10: 'K10Contact',
+        11: 'K11Contact',
+        13: 'K13Contact',
+        14: 'K14Contact',
+      },
+      templateMapping: {
+        9: 'SET_CURRENTSETTING09',
+        7: 'SET_CURRENTSETTING07',
+        11: 'SET_CURRENTSETTING11',
+        10: 'SET_CURRENTSETTING10',
+        13: 'SET_CURRENTSETTING13',
+        14: 'SET_CURRENTSETTING14',
+      },
+    }
   },
   computed: {
     ...mapState([
@@ -29,90 +51,50 @@ export default {
       'settingByTemplate10',
       'settingByTemplate11',
       'settingByTemplate13',
+      'settingByTemplate14',
       'template',
     ]),
     indexTemplate() {
       let productListComponent = ''
-      switch (this.template) {
-        case 3:
-          productListComponent = 'K05Contact'
-          break
-        case 5:
-          productListComponent = 'K05Contact'
-          break
-        case 6:
-          productListComponent = 'K05Contact'
-          break
-        case 7:
-          productListComponent = 'K07Contact'
-          break
-        case 9:
-          productListComponent = 'K09Contact'
-          break
-        case 10:
-          productListComponent = 'K10Contact'
-          break
-        case 11:
-          productListComponent = 'K11Contact'
-          break
-        case 13:
-          productListComponent = 'K13Contact'
-          break
+      if (this.componentMapping.hasOwnProperty(this.template)) {
+        productListComponent = this.componentMapping[parseInt(this.template)]
       }
       return productListComponent
     },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        settingK05Contact:
-          this.settingByTemplate?.settings?.tipo_letra ?? this.settingBase,
-        settingByTemplate7: this.settingByTemplate7
-          ? [
-              {
-                settingK07Contact: this.settingByTemplate7?.contact ?? null,
-                settingGeneral: this.settingByTemplate7?.settingGeneral ?? null,
-              },
-            ]
-          : null,
-        settingByTemplate9: this.settingByTemplate9
-          ? [
-              {
-                cardProduct: this.settingByTemplate9?.contact ?? null,
-                setting9General:
-                  this.settingByTemplate9?.settingGeneral ?? null,
-              },
-            ]
-          : null,
-
-        settingByTemplate10: this.settingByTemplate10
-          ? [
-              {
-                contact: this.settingByTemplate10?.contact ?? null,
-                setting10General:
-                  this.settingByTemplate10?.settingGeneral ?? null,
-              },
-            ]
-          : null,
-
-        settingByTemplate11: this.settingByTemplate11
-          ? [
-              {
-                contact: this.settingByTemplate11?.contact ?? null,
-                setting11General:
-                  this.settingByTemplate11?.settingGeneral ?? null,
-              },
-            ]
-          : null,
-
-        settingByTemplate13: this.settingByTemplate13
-          ? [
-              {
-                contact: this.settingByTemplate13?.contact ?? null,
-                settingGeneral:
-                  this.settingByTemplate13?.settingGeneral ?? null,
-              },
-            ]
-          : null,
+        settingK05Contact: this.settingByTemplate?.settings ?? this.settingBase,
+        settingByTemplate7: this.createSettingByTemplate(
+          this.settingByTemplate7,
+          'contact',
+          'settingGeneral'
+        ),
+        settingByTemplate9: this.createSettingByTemplate(
+          this.settingByTemplate9,
+          'contact',
+          'settingGeneral'
+        ),
+        settingByTemplate10: this.createSettingByTemplate(
+          this.settingByTemplate10,
+          'contact',
+          'settingGeneral'
+        ),
+        settingByTemplate11: this.createSettingByTemplate(
+          this.settingByTemplate11,
+          'contact',
+          'settingGeneral'
+        ),
+        settingByTemplate13: this.createSettingByTemplate(
+          this.settingByTemplate13,
+          'contact',
+          'settingGeneral'
+        ),
+        settingByTemplate14: this.createSettingByTemplate(
+          this.settingByTemplate14,
+          'contact',
+          'settingsGeneral'
+        ),
       }
     },
   },
@@ -120,6 +102,17 @@ export default {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
+    createSettingByTemplate(settingByTemplate, contactKey, settingGeneralKey) {
+      if (settingByTemplate) {
+        return [
+          {
+            [contactKey]: settingByTemplate[contactKey] ?? null,
+            [settingGeneralKey]: settingByTemplate[settingGeneralKey] ?? null,
+          },
+        ]
+      }
+      return null
+    },
     addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
@@ -127,16 +120,10 @@ export default {
         e.origin.includes('https://panel.komercia.xyz')
       ) {
         if (e && e.data && e.data.component) {
-          if (e.data.template == 9) {
-            this.$store.commit('SET_CURRENTSETTING09', e.data)
-          } else if (e.data.template == 7) {
-            this.$store.commit('SET_CURRENTSETTING07', e.data)
-          } else if (e.data.template == 11) {
-            this.$store.commit('SET_CURRENTSETTING11', e.data)
-          } else if (e.data.template == 10) {
-            this.$store.commit('SET_CURRENTSETTING10', e.data)
-          } else if (e.data.template == 13) {
-            this.$store.commit('SET_CURRENTSETTING13', e.data)
+          const template = e.data.template
+          if (this.templateMapping.hasOwnProperty(template)) {
+            const commitAction = this.templateMapping[template]
+            this.$store.commit(commitAction, e.data)
           }
         } else if (e && e.data && e.data.returnHome == true) {
           this.$router.push({

@@ -1,18 +1,11 @@
 <template>
   <div
-    class="home"
     :style="[
       {
         '--font-style':
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
-            : 'Roboto',
+          this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto',
       },
-      this.settingByTemplate && this.settingByTemplate.settings
-        ? this.settingByTemplate.settings
-        : this.settingBase,
+      this.settingByTemplate?.settings ?? this.settingBase,
     ]"
   >
     <kBanner v-if="this.stateBanner" id="KHeaderX" />

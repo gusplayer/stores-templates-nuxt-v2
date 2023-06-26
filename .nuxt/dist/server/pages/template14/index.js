@@ -1,13 +1,13 @@
 exports.ids = [5];
 exports.modules = {
 
-/***/ 281:
+/***/ 279:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(495);
+var content = __webpack_require__(498);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -19,19 +19,19 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 494:
+/***/ 497:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_400b885e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(281);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_400b885e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(279);
 /* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_400b885e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_400b885e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_400b885e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_400b885e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 495:
+/***/ 498:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -46,7 +46,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 928:
+/***/ 959:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110,14 +110,14 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template14',
   components: {
-    koInformation: () => __webpack_require__.e(/* import() */ 138).then(__webpack_require__.bind(null, 981)),
-    koBanner: () => __webpack_require__.e(/* import() */ 118).then(__webpack_require__.bind(null, 982)),
-    KoOffers: () => __webpack_require__.e(/* import() */ 121).then(__webpack_require__.bind(null, 983)),
-    koListProductsHome: () => __webpack_require__.e(/* import() */ 82).then(__webpack_require__.bind(null, 915)),
-    KoOffersProduct: () => __webpack_require__.e(/* import() */ 122).then(__webpack_require__.bind(null, 984)),
-    KoNewsletter: () => __webpack_require__.e(/* import() */ 119).then(__webpack_require__.bind(null, 985)),
-    KoListBlogHome: () => __webpack_require__.e(/* import() */ 90).then(__webpack_require__.bind(null, 916)),
-    KoLogos: () => __webpack_require__.e(/* import() */ 120).then(__webpack_require__.bind(null, 986))
+    koInformation: () => __webpack_require__.e(/* import() */ 159).then(__webpack_require__.bind(null, 1021)),
+    koBanner: () => __webpack_require__.e(/* import() */ 137).then(__webpack_require__.bind(null, 1022)),
+    KoOffers: () => __webpack_require__.e(/* import() */ 141).then(__webpack_require__.bind(null, 1023)),
+    koListProductsHome: () => __webpack_require__.e(/* import() */ 143).then(__webpack_require__.bind(null, 1024)),
+    KoOffersProduct: () => __webpack_require__.e(/* import() */ 142).then(__webpack_require__.bind(null, 1025)),
+    KoNewsletter: () => __webpack_require__.e(/* import() */ 138).then(__webpack_require__.bind(null, 1026)),
+    KoListBlogHome: () => __webpack_require__.e(/* import() */ 139).then(__webpack_require__.bind(null, 1027)),
+    KoLogos: () => __webpack_require__.e(/* import() */ 140).then(__webpack_require__.bind(null, 1028))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -224,7 +224,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(494)
+  var style0 = __webpack_require__(497)
 if (style0.__inject__) style0.__inject__(context)
 
 }

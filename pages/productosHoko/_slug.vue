@@ -1,77 +1,56 @@
 <template>
-  <div class="home">
-    <component :is="indexTemplate" v-bind="componentsProps" />
-  </div>
+  <component :is="indexTemplate" v-bind="componentsProps" />
 </template>
-
 <script>
-import Ko5ProductDetailHoko from '../../components/template5/Ko-ProductDetailHoko-1.vue'
-import Ko9ProductDetailhoko from '../../components/template9/Ko-ProductDetailHoko.vue'
-import Ko11ProductDetailHoko from '../../components/template11/ko-ProductDetailHoko'
-import KoNodisponibleHoko from '../../components/Hoko/Ko-nodisponible.vue'
-
+import { mapState } from 'vuex'
 export default {
   components: {
-    Ko5ProductDetailHoko,
-    Ko9ProductDetailhoko,
-    Ko11ProductDetailHoko,
-    KoNodisponibleHoko,
+    Ko5ProductDetailHoko: () =>
+      import('../../components/template5/Ko-ProductDetailHoko-1.vue'),
+    Ko9ProductDetailHoko: () =>
+      import('../../components/template9/Ko-ProductDetailHoko.vue'),
+    Ko11ProductDetailHoko: () =>
+      import('../../components/template11/ko-ProductDetailHoko'),
+    KoNoDisponibleHoko: () =>
+      import('../../components/Hoko/Ko-nodisponible.vue'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
+  data() {
+    return {
+      componentMapping: {
+        3: 'Ko5ProductDetailHoko',
+        5: 'Ko5ProductDetailHoko',
+        6: 'KoNoDisponibleHoko',
+        7: 'KoNoDisponibleHoko',
+        9: 'Ko9ProductDetailHoko',
+        10: 'KoNoDisponibleHoko',
+        11: 'Ko11ProductDetailHoko',
+        13: 'KoNoDisponibleHoko',
+        14: 'KoNoDisponibleHoko',
+      },
+    }
   },
   computed: {
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    template() {
-      return this.$store.state.template
-    },
+    ...mapState([
+      'dataStore',
+      'settingBase',
+      'settingByTemplate',
+      'settingByTemplate7',
+      'settingByTemplate9',
+      'settingByTemplate10',
+      'settingByTemplate11',
+      'template',
+      'dataHoko',
+    ]),
     indexTemplate() {
       let productListComponent = ''
-      switch (this.template) {
-        case 3:
-          productListComponent = 'Ko5ProductDetailHoko'
-          break
-        case 5:
-          productListComponent = 'Ko5ProductDetailHoko'
-          break
-        case 6:
-          productListComponent = 'KoNodisponibleHoko'
-          break
-        case 7:
-          productListComponent = 'KoNodisponibleHoko'
-          break
-        case 9:
-          productListComponent = 'Ko9ProductDetailhoko'
-          break
-        case 10:
-          productListComponent = 'KoNodisponibleHoko'
-          break
-        case 11:
-          productListComponent = 'Ko11ProductDetailHoko'
-          break
+      if (this.componentMapping.hasOwnProperty(this.template)) {
+        productListComponent = this.componentMapping[parseInt(this.template)]
       }
       return productListComponent
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
-    },
-    settingByTemplate7() {
-      return this.$store.state.settingByTemplate7
-    },
-    settingByTemplate9() {
-      return this.$store.state.settingByTemplate9
-    },
-    settingByTemplate10() {
-      return this.$store.state.settingByTemplate10
-    },
-    settingByTemplate11() {
-      return this.$store.state.settingByTemplate11
     },
     dataStore() {
       return this.$store.state.dataStore
@@ -95,103 +74,66 @@ export default {
         whatsapp: this.whatsapp,
         envios: this.envios,
         facebookPixel: this.integracioneStore,
-        settingByTemplate:
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings
-            : this.settingBase,
-        settingByTemplate7: this.settingByTemplate7
-          ? [
-              {
-                settingGeneral:
-                  this.settingByTemplate7 &&
-                  this.settingByTemplate7.settingGeneral
-                    ? this.settingByTemplate7.settingGeneral
-                    : null,
-                settingK07DetailsProduct:
-                  this.settingByTemplate7 &&
-                  this.settingByTemplate7.detailsProduct
-                    ? this.settingByTemplate7.detailsProduct
-                    : null,
-                settingKProdutCard:
-                  this.settingByTemplate7 && this.settingByTemplate7.card
-                    ? this.settingByTemplate7.card
-                    : null,
-              },
-            ]
-          : null,
-        settingByTemplate9: this.settingByTemplate9
-          ? [
-              {
-                cardProduct:
-                  this.settingByTemplate9 && this.settingByTemplate9.cardProduct
-                    ? this.settingByTemplate9.cardProduct
-                    : null,
-                detailsProduct:
-                  this.settingByTemplate9 &&
-                  this.settingByTemplate9.detailsProduct
-                    ? this.settingByTemplate9.detailsProduct
-                    : null,
-                setting9General:
-                  this.settingByTemplate9 &&
-                  this.settingByTemplate9.settingGeneral
-                    ? this.settingByTemplate9.settingGeneral
-                    : null,
-              },
-            ]
-          : null,
-
-        settingByTemplate10: this.settingByTemplate10
-          ? [
-              {
-                cardProduct:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.cardProduct
-                    ? this.settingByTemplate10.cardProduct
-                    : null,
-                detailsProduct:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.detailsProduct
-                    ? this.settingByTemplate10.detailsProduct
-                    : null,
-                setting10General:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.settingGeneral
-                    ? this.settingByTemplate10.settingGeneral
-                    : null,
-              },
-            ]
-          : null,
-        settingByTemplate11: this.settingByTemplate11
-          ? [
-              {
-                detailsProduct:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.detailsProduct
-                    ? this.settingByTemplate11.detailsProduct
-                    : null,
-                cardProduct:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.cardProduct
-                    ? this.settingByTemplate11.cardProduct
-                    : null,
-                setting11General:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.settingGeneral
-                    ? this.settingByTemplate11.settingGeneral
-                    : null,
-              },
-            ]
-          : null,
+        settingByTemplate: this.createSettingByTemplate(
+          this.settingByTemplate,
+          'settings',
+          'tipo_letra',
+          this.settingBase
+        ),
+        settingByTemplate7: this.createNestedSetting(
+          this.settingByTemplate7,
+          ['settingGeneral', 'detailsProduct', 'card'],
+          null
+        ),
+        settingByTemplate9: this.createNestedSetting(
+          this.settingByTemplate9,
+          ['cardProduct', 'detailsProduct', 'settingGeneral'],
+          null
+        ),
+        settingByTemplate10: this.createNestedSetting(
+          this.settingByTemplate10,
+          ['cardProduct', 'detailsProduct', 'settingGeneral'],
+          null
+        ),
+        settingByTemplate11: this.createNestedSetting(
+          this.settingByTemplate11,
+          ['detailsProduct', 'cardProduct', 'settingGeneral'],
+          null
+        ),
       }
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenertemplate(e) {
+    createSettingByTemplate(
+      settingByTemplate,
+      property1,
+      property2,
+      defaultValue
+    ) {
+      if (
+        settingByTemplate &&
+        settingByTemplate[property1] &&
+        settingByTemplate[property1][property2]
+      ) {
+        return settingByTemplate[property1]
+      }
+      return defaultValue
+    },
+    createNestedSetting(setting, properties, defaultValue) {
+      if (setting) {
+        const nestedSetting = {}
+        properties.forEach((property) => {
+          nestedSetting[property] =
+            setting && setting[property] ? setting[property] : null
+        })
+        return [nestedSetting]
+      }
+      return null
+    },
+    addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080') ||
@@ -217,5 +159,3 @@ export default {
   },
 }
 </script>
-
-<style></style>

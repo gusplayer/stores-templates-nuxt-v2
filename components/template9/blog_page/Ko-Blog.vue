@@ -8,10 +8,7 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate9[0].settingGeneral &&
-            this.settingByTemplate9[0].settingGeneral.fount_1
-              ? this.settingByTemplate9[0].settingGeneral.fount_1
-              : 'Poppins',
+            this.settingByTemplate9[0]?.settingGeneral?.fount_1 ?? 'Poppins',
         },
       ]"
     >
@@ -46,10 +43,7 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate9[0].settingGeneral &&
-            this.settingByTemplate9[0].settingGeneral.fount_1
-              ? this.settingByTemplate9[0].settingGeneral.fount_1
-              : 'Poppins',
+            this.settingByTemplate9[0]?.settingGeneral?.fount_1 ?? 'Poppins',
         },
       ]"
     >

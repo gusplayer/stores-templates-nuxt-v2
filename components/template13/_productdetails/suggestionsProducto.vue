@@ -20,7 +20,6 @@ export default {
   props: {
     category: {},
     settingGeneral: Object,
-    Object,
     cardProduct: Object,
   },
   components: {

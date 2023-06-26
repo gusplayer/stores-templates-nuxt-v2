@@ -1,6 +1,5 @@
 <template>
   <div
-    class="home"
     :style="
       this.settingByTemplate &&
       this.settingByTemplate.settings &&

@@ -4,22 +4,19 @@
     :style="[
       {
         '--font-style-1':
-          this.settingByTemplate13.settingGeneral &&
-          this.settingByTemplate13.settingGeneral.fount_1
-            ? this.settingByTemplate13.settingGeneral.fount_1
-            : 'Poppins',
+          this.settingByTemplate13?.settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
     <ko-Banner
       id="kBannerX"
-      v-bind="componentsProps"
-      :key="bannerRendering"
       v-if="
         settingByTemplate13 &&
         settingByTemplate13.banner &&
         settingByTemplate13.banner.visible
       "
+      v-bind="componentsProps"
+      :key="bannerRendering"
     />
 
     <!-- <KProductFavoritos v-if="this.stateBanner" /> -->
@@ -31,39 +28,39 @@
     /> -->
     <ko-ProductList
       id="kListX"
-      v-bind="componentsProps"
       v-if="
         settingByTemplate13 &&
         settingByTemplate13.productList &&
         settingByTemplate13.productList.visible
       "
+      v-bind="componentsProps"
     />
     <ko-InfoText
       id="kInfoTextX"
-      v-bind="componentsProps"
       v-if="
         settingByTemplate13 &&
         settingByTemplate13.infoText &&
         settingByTemplate13.infoText.visible
       "
+      v-bind="componentsProps"
     />
     <ko-Information
       id="kInformationX"
-      v-bind="componentsProps"
       v-if="
         settingByTemplate13 &&
         settingByTemplate13.information &&
         settingByTemplate13.information.visible
       "
+      v-bind="componentsProps"
     />
     <ko-Newsletter
       id="kNewsLetterX"
-      v-bind="componentsProps"
       v-if="
         settingByTemplate13 &&
         settingByTemplate13.newsletter &&
         settingByTemplate13.newsletter.visible
       "
+      v-bind="componentsProps"
     />
   </div>
 </template>

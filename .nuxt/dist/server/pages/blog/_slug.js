@@ -1,26 +1,24 @@
-exports.ids = [30];
+exports.ids = [34];
 exports.modules = {
 
-/***/ 936:
+/***/ 967:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/_slug.vue?vue&type=template&id=a7eb9438&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/_slug.vue?vue&type=template&id=778c4e4b&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', {
-    staticClass: "home"
-  }, [_c(_vm.indexTemplate, _vm._b({
+  return _c(_vm.indexTemplate, _vm._b({
     tag: "component"
-  }, 'component', _vm.componentsProps, false))], 1);
+  }, 'component', _vm.componentsProps, false));
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/blog/_slug.vue?vue&type=template&id=a7eb9438&
+// CONCATENATED MODULE: ./pages/blog/_slug.vue?vue&type=template&id=778c4e4b&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -30,42 +28,35 @@ var external_vuex_ = __webpack_require__(7);
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   layout: 'default',
   components: {
-    K05Article: () => __webpack_require__.e(/* import() */ 95).then(__webpack_require__.bind(null, 1001)),
-    K07Article: () => __webpack_require__.e(/* import() */ 101).then(__webpack_require__.bind(null, 1002)),
-    K09Article: () => __webpack_require__.e(/* import() */ 102).then(__webpack_require__.bind(null, 1003)),
-    K10Article: () => __webpack_require__.e(/* import() */ 96).then(__webpack_require__.bind(null, 1004)),
-    K11Article: () => __webpack_require__.e(/* import() */ 97).then(__webpack_require__.bind(null, 1005)),
-    K13Article: () => __webpack_require__.e(/* import() */ 100).then(__webpack_require__.bind(null, 1006))
+    K05Article: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 1043)),
+    K07Article: () => __webpack_require__.e(/* import() */ 112).then(__webpack_require__.bind(null, 1044)),
+    K09Article: () => __webpack_require__.e(/* import() */ 113).then(__webpack_require__.bind(null, 1045)),
+    K10Article: () => __webpack_require__.e(/* import() */ 104).then(__webpack_require__.bind(null, 1046)),
+    K11Article: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 1047)),
+    K13Article: () => __webpack_require__.e(/* import() */ 108).then(__webpack_require__.bind(null, 1048))
   },
+  data() {
+    return {
+      componentMapping: {
+        3: 'K05Article',
+        5: 'K05Article',
+        6: 'K05Article',
+        7: 'K07Article',
+        9: 'K09Article',
+        10: 'K10Article',
+        11: 'K11Article',
+        13: 'K13Article'
+        // 14: 'K14Contact',
+      }
+    };
+  },
+
   computed: {
     ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'template']),
     indexTemplate() {
       let productListComponent = '';
-      switch (this.template) {
-        case 3:
-          productListComponent = 'K05Article';
-          break;
-        case 5:
-          productListComponent = 'K05Article';
-          break;
-        case 6:
-          productListComponent = 'K05Article';
-          break;
-        case 7:
-          productListComponent = 'K07Article';
-          break;
-        case 9:
-          productListComponent = 'K09Article';
-          break;
-        case 10:
-          productListComponent = 'K10Article';
-          break;
-        case 11:
-          productListComponent = 'K11Article';
-          break;
-        case 13:
-          productListComponent = 'K13Article';
-          break;
+      if (this.componentMapping.hasOwnProperty(this.template)) {
+        productListComponent = this.componentMapping[parseInt(this.template)];
       }
       return productListComponent;
     },
@@ -73,7 +64,6 @@ var external_vuex_ = __webpack_require__(7);
       var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6;
       return {
         dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
         settingGeneral: ((_this$settingByTempla = this.settingByTemplate7) === null || _this$settingByTempla === void 0 ? void 0 : _this$settingByTempla.settingGeneral) || null,
         settingK07Blog: ((_this$settingByTempla2 = this.settingByTemplate7) === null || _this$settingByTempla2 === void 0 ? void 0 : _this$settingByTempla2.blog1) || null,
         settingK05Blog: ((_this$settingByTempla3 = this.settingByTemplate) === null || _this$settingByTempla3 === void 0 ? void 0 : (_this$settingByTempla4 = _this$settingByTempla3.settings) === null || _this$settingByTempla4 === void 0 ? void 0 : _this$settingByTempla4.tipo_letra) || this.settingBase,

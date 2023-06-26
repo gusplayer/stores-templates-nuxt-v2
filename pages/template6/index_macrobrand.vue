@@ -1,6 +1,5 @@
 <template>
   <div
-    class="home"
     :style="
       this.$store.state.settingByTemplate &&
       this.$store.state.settingByTemplate['--background_color_1']

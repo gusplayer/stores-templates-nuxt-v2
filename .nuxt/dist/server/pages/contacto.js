@@ -1,26 +1,24 @@
-exports.ids = [33];
+exports.ids = [37];
 exports.modules = {
 
-/***/ 922:
+/***/ 952:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=template&id=25b64833&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=template&id=d8f76d7c&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', {
-    staticClass: "home"
-  }, [_c(_vm.indexTemplate, _vm._b({
+  return _c(_vm.indexTemplate, _vm._b({
     tag: "component"
-  }, 'component', _vm.componentsProps, false))], 1);
+  }, 'component', _vm.componentsProps, false));
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/contacto.vue?vue&type=template&id=25b64833&
+// CONCATENATED MODULE: ./pages/contacto.vue?vue&type=template&id=d8f76d7c&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -30,74 +28,61 @@ var external_vuex_ = __webpack_require__(7);
 /* harmony default export */ var contactovue_type_script_lang_js_ = ({
   layout: 'default',
   components: {
-    K05Contact: () => __webpack_require__.e(/* import() */ 123).then(__webpack_require__.bind(null, 951)),
-    K07Contact: () => __webpack_require__.e(/* import() */ 128).then(__webpack_require__.bind(null, 952)),
-    K09Contact: () => __webpack_require__.e(/* import() */ 134).then(__webpack_require__.bind(null, 953)),
-    K10Contact: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 954)),
-    K11Contact: () => __webpack_require__.e(/* import() */ 110).then(__webpack_require__.bind(null, 955)),
-    K13Contact: () => __webpack_require__.e(/* import() */ 113).then(__webpack_require__.bind(null, 956))
+    K05Contact: () => __webpack_require__.e(/* import() */ 144).then(__webpack_require__.bind(null, 986)),
+    K07Contact: () => __webpack_require__.e(/* import() */ 149).then(__webpack_require__.bind(null, 987)),
+    K09Contact: () => __webpack_require__.e(/* import() */ 155).then(__webpack_require__.bind(null, 988)),
+    K10Contact: () => __webpack_require__.e(/* import() */ 117).then(__webpack_require__.bind(null, 989)),
+    K11Contact: () => __webpack_require__.e(/* import() */ 122).then(__webpack_require__.bind(null, 990)),
+    K13Contact: () => __webpack_require__.e(/* import() */ 125).then(__webpack_require__.bind(null, 991)),
+    K14Contact: () => __webpack_require__.e(/* import() */ 130).then(__webpack_require__.bind(null, 992))
   },
   mounted() {
     window.parent.postMessage('message', '*');
     window.addEventListener('message', this.addEventListenerTemplate);
   },
+  data() {
+    return {
+      componentMapping: {
+        3: 'K05Contact',
+        5: 'K05Contact',
+        6: 'K05Contact',
+        7: 'K07Contact',
+        9: 'K09Contact',
+        10: 'K10Contact',
+        11: 'K11Contact',
+        13: 'K13Contact',
+        14: 'K14Contact'
+      },
+      templateMapping: {
+        9: 'SET_CURRENTSETTING09',
+        7: 'SET_CURRENTSETTING07',
+        11: 'SET_CURRENTSETTING11',
+        10: 'SET_CURRENTSETTING10',
+        13: 'SET_CURRENTSETTING13',
+        14: 'SET_CURRENTSETTING14'
+      }
+    };
+  },
   computed: {
-    ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'template']),
+    ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'settingByTemplate14', 'template']),
     indexTemplate() {
       let productListComponent = '';
-      switch (this.template) {
-        case 3:
-          productListComponent = 'K05Contact';
-          break;
-        case 5:
-          productListComponent = 'K05Contact';
-          break;
-        case 6:
-          productListComponent = 'K05Contact';
-          break;
-        case 7:
-          productListComponent = 'K07Contact';
-          break;
-        case 9:
-          productListComponent = 'K09Contact';
-          break;
-        case 10:
-          productListComponent = 'K10Contact';
-          break;
-        case 11:
-          productListComponent = 'K11Contact';
-          break;
-        case 13:
-          productListComponent = 'K13Contact';
-          break;
+      if (this.componentMapping.hasOwnProperty(this.template)) {
+        productListComponent = this.componentMapping[parseInt(this.template)];
       }
       return productListComponent;
     },
     componentsProps() {
-      var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6, _this$settingByTempla7, _this$settingByTempla8, _this$settingByTempla9, _this$settingByTempla10, _this$settingByTempla11, _this$settingByTempla12, _this$settingByTempla13, _this$settingByTempla14, _this$settingByTempla15, _this$settingByTempla16, _this$settingByTempla17, _this$settingByTempla18, _this$settingByTempla19, _this$settingByTempla20, _this$settingByTempla21, _this$settingByTempla22, _this$settingByTempla23;
+      var _this$settingByTempla, _this$settingByTempla2;
       return {
         dataStore: this.dataStore,
-        settingK05Contact: (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settings) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.tipo_letra) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : this.settingBase,
-        settingByTemplate7: this.settingByTemplate7 ? [{
-          settingK07Contact: (_this$settingByTempla4 = (_this$settingByTempla5 = this.settingByTemplate7) === null || _this$settingByTempla5 === void 0 ? void 0 : _this$settingByTempla5.contact) !== null && _this$settingByTempla4 !== void 0 ? _this$settingByTempla4 : null,
-          settingGeneral: (_this$settingByTempla6 = (_this$settingByTempla7 = this.settingByTemplate7) === null || _this$settingByTempla7 === void 0 ? void 0 : _this$settingByTempla7.settingGeneral) !== null && _this$settingByTempla6 !== void 0 ? _this$settingByTempla6 : null
-        }] : null,
-        settingByTemplate9: this.settingByTemplate9 ? [{
-          cardProduct: (_this$settingByTempla8 = (_this$settingByTempla9 = this.settingByTemplate9) === null || _this$settingByTempla9 === void 0 ? void 0 : _this$settingByTempla9.contact) !== null && _this$settingByTempla8 !== void 0 ? _this$settingByTempla8 : null,
-          setting9General: (_this$settingByTempla10 = (_this$settingByTempla11 = this.settingByTemplate9) === null || _this$settingByTempla11 === void 0 ? void 0 : _this$settingByTempla11.settingGeneral) !== null && _this$settingByTempla10 !== void 0 ? _this$settingByTempla10 : null
-        }] : null,
-        settingByTemplate10: this.settingByTemplate10 ? [{
-          contact: (_this$settingByTempla12 = (_this$settingByTempla13 = this.settingByTemplate10) === null || _this$settingByTempla13 === void 0 ? void 0 : _this$settingByTempla13.contact) !== null && _this$settingByTempla12 !== void 0 ? _this$settingByTempla12 : null,
-          setting10General: (_this$settingByTempla14 = (_this$settingByTempla15 = this.settingByTemplate10) === null || _this$settingByTempla15 === void 0 ? void 0 : _this$settingByTempla15.settingGeneral) !== null && _this$settingByTempla14 !== void 0 ? _this$settingByTempla14 : null
-        }] : null,
-        settingByTemplate11: this.settingByTemplate11 ? [{
-          contact: (_this$settingByTempla16 = (_this$settingByTempla17 = this.settingByTemplate11) === null || _this$settingByTempla17 === void 0 ? void 0 : _this$settingByTempla17.contact) !== null && _this$settingByTempla16 !== void 0 ? _this$settingByTempla16 : null,
-          setting11General: (_this$settingByTempla18 = (_this$settingByTempla19 = this.settingByTemplate11) === null || _this$settingByTempla19 === void 0 ? void 0 : _this$settingByTempla19.settingGeneral) !== null && _this$settingByTempla18 !== void 0 ? _this$settingByTempla18 : null
-        }] : null,
-        settingByTemplate13: this.settingByTemplate13 ? [{
-          contact: (_this$settingByTempla20 = (_this$settingByTempla21 = this.settingByTemplate13) === null || _this$settingByTempla21 === void 0 ? void 0 : _this$settingByTempla21.contact) !== null && _this$settingByTempla20 !== void 0 ? _this$settingByTempla20 : null,
-          settingGeneral: (_this$settingByTempla22 = (_this$settingByTempla23 = this.settingByTemplate13) === null || _this$settingByTempla23 === void 0 ? void 0 : _this$settingByTempla23.settingGeneral) !== null && _this$settingByTempla22 !== void 0 ? _this$settingByTempla22 : null
-        }] : null
+        settingK05Contact: (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate) === null || _this$settingByTempla2 === void 0 ? void 0 : _this$settingByTempla2.settings) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : this.settingBase,
+        settingByTemplate7: this.createSettingByTemplate(this.settingByTemplate7, 'contact', 'settingGeneral'),
+        settingByTemplate9: this.createSettingByTemplate(this.settingByTemplate9, 'contact', 'settingGeneral'),
+        settingByTemplate10: this.createSettingByTemplate(this.settingByTemplate10, 'contact', 'settingGeneral'),
+        settingByTemplate11: this.createSettingByTemplate(this.settingByTemplate11, 'contact', 'settingGeneral'),
+        settingByTemplate13: this.createSettingByTemplate(this.settingByTemplate13, 'contact', 'settingGeneral'),
+        settingByTemplate14: this.createSettingByTemplate(this.settingByTemplate14, 'contact', 'settingsGeneral')
       };
     }
   },
@@ -105,19 +90,23 @@ var external_vuex_ = __webpack_require__(7);
     window.removeEventListener('message', this.addEventListenerTemplate);
   },
   methods: {
+    createSettingByTemplate(settingByTemplate, contactKey, settingGeneralKey) {
+      if (settingByTemplate) {
+        var _settingByTemplate$co, _settingByTemplate$se;
+        return [{
+          [contactKey]: (_settingByTemplate$co = settingByTemplate[contactKey]) !== null && _settingByTemplate$co !== void 0 ? _settingByTemplate$co : null,
+          [settingGeneralKey]: (_settingByTemplate$se = settingByTemplate[settingGeneralKey]) !== null && _settingByTemplate$se !== void 0 ? _settingByTemplate$se : null
+        }];
+      }
+      return null;
+    },
     addEventListenerTemplate(e) {
       if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080') || e.origin.includes('https://panel.komercia.xyz')) {
         if (e && e.data && e.data.component) {
-          if (e.data.template == 9) {
-            this.$store.commit('SET_CURRENTSETTING09', e.data);
-          } else if (e.data.template == 7) {
-            this.$store.commit('SET_CURRENTSETTING07', e.data);
-          } else if (e.data.template == 11) {
-            this.$store.commit('SET_CURRENTSETTING11', e.data);
-          } else if (e.data.template == 10) {
-            this.$store.commit('SET_CURRENTSETTING10', e.data);
-          } else if (e.data.template == 13) {
-            this.$store.commit('SET_CURRENTSETTING13', e.data);
+          const template = e.data.template;
+          if (this.templateMapping.hasOwnProperty(template)) {
+            const commitAction = this.templateMapping[template];
+            this.$store.commit(commitAction, e.data);
           }
         } else if (e && e.data && e.data.returnHome == true) {
           this.$router.push({

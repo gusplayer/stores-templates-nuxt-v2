@@ -70,11 +70,12 @@
   </div>
 </template>
 <script>
-import expiredDate from '../mixins/expiredDate'
 import { mapState } from 'vuex'
+import expiredDate from '@/mixins/expiredDate'
 export default {
   name: 'default',
   components: {
+    // HEADER
     KoHeader1: () => import('../components/headers/header1/Ko-Header-1'),
     KoHeader2: () => import('../components/headers/header2/Ko-Header-2'),
     KoHeader3: () => import('../components/headers/header3/Ko-Header-3'),
@@ -83,6 +84,8 @@ export default {
     KoHeader6: () => import('../components/headers/header6/Ko-Header-6'),
     KoHeader7: () => import('../components/headers/header7/Ko-Header-7'),
     KoHeader8: () => import('../components/headers/header8/Ko-Header-8'),
+    KoHeader9: () => import('../components/headers/header9/Ko-Header-9'),
+    // FOOTER
     KoFooter1: () => import('../components/footers/footer1/Ko-Footer-1'),
     KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2'),
     KoFooter4: () => import('../components/footers/footer4/Ko-Footer-4'),
@@ -91,11 +94,10 @@ export default {
     KoFooter7: () => import('../components/footers/footer7/Ko-Footer-7'),
     KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8'),
     KoFooter9: () => import('../components/footers/K14_footer9/Ko-Footer-9'),
+    // OTROS
     KoFooterCountry: () =>
       import('../components/footers/footer1/Ko-Footer-Country'),
     koTiendaCerrada: () => import('../assets/img/tiendaCerrada'),
-    // Ko6Header1: () => import('../components/headers/header1/Ko6-Header-1'),
-    // Ko6Footer1: () => import('../components/footers/footer1/Ko6-Footer-1'),
     koTiendaError: () => import('../components/Ko-errorStore'),
     koModalSecurity: () => import('../components/modal/Ko-modal-security.vue'),
     koWhatsApp: () => import('../components/whatsapp/Ko-whatsApp.vue'),
@@ -192,7 +194,7 @@ export default {
       case 14:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate14?.settingsGeneral?.fount_1 ?? 'Roboto'
+          this.settingByTemplate14?.settingsGeneral?.fount_1 ?? 'Poppins'
         break
     }
     let tienda = this.$store.state?.dataStore?.tienda ?? ''
@@ -375,6 +377,34 @@ export default {
       ],
     }
   },
+  data() {
+    return {
+      headerComponentMap: {
+        3: 'KoHeader1',
+        5: 'KoHeader1',
+        6: 'KoHeader2',
+        7: 'KoHeader4',
+        8: 'KoHeader3',
+        9: 'KoHeader5',
+        10: 'KoHeader6',
+        11: 'KoHeader7',
+        13: 'KoHeader8',
+        14: 'KoHeader9',
+      },
+      footerComponentMap: {
+        3: 'KoFooter1',
+        5: 'KoFooter1',
+        6: 'KoFooter2',
+        7: 'KoFooter4',
+        8: 'KoFooter1',
+        9: 'KoFooter5',
+        10: 'KoFooter6',
+        11: 'KoFooter7',
+        13: 'KoFooter8',
+        14: 'KoFooter9',
+      },
+    }
+  },
   computed: {
     ...mapState([
       'template',
@@ -392,98 +422,13 @@ export default {
       'analytics_tagmanager',
     ]),
     headerTemplate() {
-      let headerComponent = ''
-      switch (this.template) {
-        case 3:
-          headerComponent = 'KoHeader1'
-          break
-        case 5:
-          headerComponent = 'KoHeader1'
-          break
-        case 6:
-          headerComponent = 'KoHeader2'
-          break
-        // case 6:
-        //   if (this.settingByTemplate.header) {
-        //     switch (this.settingByTemplate.header) {
-        //       case 1:
-        //         headerComp = 'Ko6Header1'
-        //         break
-        //       case 2:
-        //         headerComp = 'KoHeader2'
-        //         break
-        //     }
-        //     return headerComp
-        //   }
-        //   break
-        case 7:
-          headerComponent = 'KoHeader4'
-          break
-        case 8:
-          headerComponent = 'KoHeader3'
-          break
-        case 9:
-          headerComponent = 'KoHeader5'
-          break
-        case 10:
-          headerComponent = 'KoHeader6'
-          break
-        case 11:
-          headerComponent = 'KoHeader7'
-          break
-        case 13:
-          headerComponent = 'KoHeader8'
-          break
-      }
+      const headerComponent =
+        this.headerComponentMap[parseInt(this.template)] || ''
       return headerComponent
     },
     footerTemplate() {
-      let footerComponent = ''
-      switch (this.template) {
-        case 3:
-          footerComponent = 'KoFooter1'
-          break
-        case 5:
-          footerComponent = 'KoFooter1'
-          break
-        case 6:
-          footerComponent = 'KoFooter2'
-          break
-        // case 6:
-        //   if (this.settingByTemplate.footer) {
-        //     switch (this.settingByTemplate.footer) {
-        //       case 1:
-        //         footerComp = 'Ko6Footer1'
-        //         break
-        //       case 2:
-        //         footerComp = 'KoFooter2'
-        //         break
-        //     }
-        //     return footerComp
-        //   }
-        //   break
-        case 7:
-          footerComponent = 'KoFooter4'
-          break
-        case 8:
-          footerComponent = 'KoFooter1'
-          break
-        case 9:
-          footerComponent = 'KoFooter5'
-          break
-        case 10:
-          footerComponent = 'KoFooter6'
-          break
-        case 11:
-          footerComponent = 'KoFooter7'
-          break
-        case 13:
-          footerComponent = 'KoFooter8'
-          break
-        case 14:
-          footerComponent = 'KoFooter9'
-          break
-      }
+      const footerComponent =
+        this.footerComponentMap[parseInt(this.template)] || ''
       return footerComponent
     },
     componentsProps() {
@@ -701,6 +646,22 @@ html {
   box-sizing: border-box;
   outline: none !important;
   /* overflow-x: hidden; */
+}
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 0.5s;
+}
+.layout-enter,
+.layout-leave-to {
+  opacity: 0;
 }
 ::-webkit-scrollbar {
   -webkit-appearance: none;

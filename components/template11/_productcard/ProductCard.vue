@@ -5,10 +5,7 @@
       settingKcardProduct,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': this.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >

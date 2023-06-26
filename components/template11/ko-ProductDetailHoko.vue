@@ -3,13 +3,10 @@
     class="wrapper-productDetail"
     :style="[
       settingByTemplate11[0].detailsProduct,
-      settingByTemplate11[0].setting11General,
+      settingByTemplate11[0].settingGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate11[0].setting11General &&
-          this.settingByTemplate11[0].setting11General.fount_1
-            ? this.settingByTemplate11[0].setting11General.fount_1
-            : 'Roboto',
+          this.settingByTemplate11[0]?.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >

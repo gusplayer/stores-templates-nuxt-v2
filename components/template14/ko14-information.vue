@@ -15,9 +15,9 @@
       >
         <img
           v-lazy="idCloudinary(items.img, 150, 150)"
-          width="40px"
-          height="40px"
-          class="object-contain object-center"
+          width="40"
+          height="40"
+          class="object-contain object-center max-w-[40px] max-h-[40px]"
           :class="`contentImg${index}`"
           :alt="`imgInfo${index}`"
         />
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'Ko14-information',
   mixins: [idCloudinary],

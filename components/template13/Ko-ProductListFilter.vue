@@ -2,7 +2,7 @@
   <div
     class="product-content"
     :style="[
-      settingByTemplate13[0].setting13General,
+      settingByTemplate13[0].settingGeneral,
       settingByTemplate13[0].productListFilter,
     ]"
     v-if="settingByTemplate13"
@@ -12,10 +12,7 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate13[0].setting13General &&
-            this.settingByTemplate13[0].setting13General.fount_1
-              ? this.settingByTemplate13[0].setting13General.fount_1
-              : 'Poppins',
+            this.settingByTemplate13[0]?.settingGeneral?.fount_1 ?? 'Poppins',
         },
       ]"
     >
@@ -234,7 +231,7 @@
                       :product="product"
                       class="product-list"
                       :cardProduct="settingByTemplate13[0].cardProduct"
-                      :settingGeneral="settingByTemplate13[0].setting13General"
+                      :settingGeneral="settingByTemplate13[0].settingGeneral"
                     ></KoProductCardFilter>
                   </div>
                 </div>

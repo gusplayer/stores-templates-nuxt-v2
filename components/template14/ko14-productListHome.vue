@@ -13,16 +13,15 @@
         >
           {{ listProductsHome.title }}
         </p>
-        <a
-          v-if="listProductsHome.visible_btn"
-          :href="listProductsHome?.url_redirect ?? ''"
+        <nuxt-link
+          :to="{ path: `/productos` }"
           :style="`color: ${listProductsHome.color_text_btn}; font-size: ${listProductsHome.fontSizeTextBtn}; font-weight: ${listProductsHome.fontWeighTextBtn};`"
         >
           {{ listProductsHome.text_btn }}
           <FlechaRight-icon
             :style="`color: ${listProductsHome.color_text_btn}; font-size: ${listProductsHome.fontSizeTextBtn}; font-weight: ${listProductsHome.fontWeighTextBtn};`"
           />
-        </a>
+        </nuxt-link>
       </div>
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
@@ -33,7 +32,7 @@
           >
             <KoProductCard
               :product="product"
-              :cardProduct="cardProduct"
+              :cardProducts="cardProducts"
               :settingGeneral="settingGeneral"
               class="giftLoad"
             />
@@ -45,28 +44,42 @@
 </template>
 
 <script>
-import KoProductCard from './_cardProduct/ProductCard.vue'
 export default {
   name: 'Ko14-productListHome',
   props: {
-    listProductsHome: Object,
-    settingGeneral: Object,
-    cardProducts: Object,
-    dataStore: Object,
-    fullProducts: {},
+    listProductsHome: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    cardProducts: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
   },
   components: {
-    KoProductCard,
+    KoProductCard: () => import('./_cardProduct/ProductCard'),
   },
   data() {
     return {
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: '',
-        autoplay: {
-          delay: 7000,
-          disableOnInteraction: false,
-        },
+        // autoplay: {
+        //   delay: 7000,
+        //   disableOnInteraction: false,
+        // },
         breakpoints: {
           10000: {
             slidesPerView: 4,

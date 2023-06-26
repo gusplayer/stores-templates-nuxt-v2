@@ -37,6 +37,7 @@ import MessageReplyText from 'vue-material-design-icons/MessageReplyText.vue'
 import ShoppingSearch from 'vue-material-design-icons/ShoppingSearch.vue'
 import FormatListBulletedSquare from 'vue-material-design-icons/FormatListBulletedSquare.vue'
 import CloudDownload from 'vue-material-design-icons/CloudDownload.vue'
+import EyeOutline from 'vue-material-design-icons/EyeOutline.vue'
 import tiktok from '../assets/img/tiktok.vue'
 import tiktok2 from '../assets/img/tiktok2.vue'
 
@@ -84,3 +85,4 @@ Vue.component('Message-question-icon', MessageProcessing)
 Vue.component('Message-answer-icon', MessageReplyText)
 
 Vue.component('cloud-download-icon', CloudDownload)
+Vue.component('eye-outline-icon', EyeOutline)

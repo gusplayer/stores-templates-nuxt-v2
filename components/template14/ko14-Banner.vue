@@ -28,7 +28,11 @@
               media="(min-width: 800px)"
               :srcset="idCloudinaryBanner(item.img, 'banner')"
             />
-            <img v-lazy="item.img" alt="banner template14" class="w-full" />
+            <img
+              v-lazy="item.img"
+              alt="banner template14"
+              class="w-full max-w-[1280px]"
+            />
           </picture>
           <div
             class="w-8/5 flex flex-col justify-center items-start absolute"
@@ -72,7 +76,7 @@
   </div>
 </template>
 <script>
-import idCloudinaryBanner from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
   name: 'Ko14-Banner',
   props: {

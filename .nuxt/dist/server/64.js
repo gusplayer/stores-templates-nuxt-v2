@@ -375,62 +375,44 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 114:
+/***/ 194:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(163);
+var content = __webpack_require__(235);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(6).default
 module.exports.__inject__ = function (context) {
-  add("74be56a6", content, true, context)
+  add("6ae4f155", content, true, context)
 };
 
 /***/ }),
 
-/***/ 156:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(194);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(6).default
-module.exports.__inject__ = function (context) {
-  add("5dc06203", content, true, context)
-};
-
-/***/ }),
-
-/***/ 162:
+/***/ 234:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlide_vue_vue_type_style_index_0_id_1d5997fa_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(114);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlide_vue_vue_type_style_index_0_id_1d5997fa_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlide_vue_vue_type_style_index_0_id_1d5997fa_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlide_vue_vue_type_style_index_0_id_1d5997fa_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlide_vue_vue_type_style_index_0_id_1d5997fa_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AccordionList_vue_vue_type_style_index_0_id_6ee55808_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(194);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AccordionList_vue_vue_type_style_index_0_id_6ee55808_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AccordionList_vue_vue_type_style_index_0_id_6ee55808_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AccordionList_vue_vue_type_style_index_0_id_6ee55808_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AccordionList_vue_vue_type_style_index_0_id_6ee55808_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 163:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".swiper-slide[data-v-1d5997fa],.swiper-wrapper[data-v-1d5997fa]{width:100%}.btnPrev[data-v-1d5997fa]{left:0}.btnNext[data-v-1d5997fa],.btnPrev[data-v-1d5997fa]{background:#000;border-radius:25px;cursor:pointer;padding:0 22px;position:absolute;z-index:10}.btnNext[data-v-1d5997fa]{right:0}.btn-icon[data-v-1d5997fa]{align-items:center;bottom:.125em;color:#fff;display:flex;font-size:45px;justify-content:center;width:100%}.btn-icon[data-v-1d5997fa]:hover{color:grey}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".wrapper[data-v-6ee55808]{background:transparent;padding:5px 0;width:100%}.accordion[data-v-6ee55808]{cursor:pointer;margin:0}.accordion[data-v-6ee55808],.accordion-items[data-v-6ee55808]{align-items:center;display:flex;flex-direction:row;justify-content:space-between;width:100%}.accordion-items[data-v-6ee55808]{padding-top:3px}.content[data-v-6ee55808]{align-items:flex-start;display:flex;flex-direction:column;margin-top:10px;padding-left:2px;width:100%}.icon[data-v-6ee55808]{color:var(--color_icon);font-size:24px;position:relative;top:-3px}.icon[data-v-6ee55808]:hover{color:var(--color_hover_text)}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -438,136 +420,55 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 168:
+/***/ 265:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productofavorito/productSlide.vue?vue&type=template&id=1d5997fa&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_order1/_AccordionList.vue?vue&type=template&id=6ee55808&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
-    directives: [{
-      name: "swiper",
-      rawName: "v-swiper:mySwiper",
-      value: _vm.swiperOption,
-      expression: "swiperOption",
-      arg: "mySwiper"
-    }],
-    ref: "mySwiper",
-    staticStyle: {
-      "position": "relative"
-    }
-  }, [_vm._ssrNode("<div class=\"swiper-wrapper\" data-v-1d5997fa>", "</div>", _vm._l(this.products, function (product, index) {
-    return _vm._ssrNode("<div class=\"swiper-slide\" data-v-1d5997fa>", "</div>", [_c('client-only', [_c('KoProductCard1', {
-      attrs: {
-        "product": product
-      }
-    })], 1)], 1);
-  }), 0), _vm._ssrNode(" "), this.products.length > 1 ? _vm._ssrNode("<div class=\"prev btnPrev\" data-v-1d5997fa>", "</div>", [_c('FlechaLeft-icon', {
-    staticClass: "btn-icon"
-  })], 1) : _vm._e(), _vm._ssrNode(" "), this.products.length > 1 ? _vm._ssrNode("<div class=\"next btnNext\" data-v-1d5997fa>", "</div>", [_c('FlechaRight-icon', {
-    staticClass: "btn-icon"
-  })], 1) : _vm._e()], 2);
+    staticClass: "wrapper"
+  }, [_vm._ssrNode("<div class=\"accordion\" data-v-6ee55808>", "</div>", [_vm._ssrNode("<div class=\"accordion-items\" data-v-6ee55808>", "</div>", [_vm._t("categorias"), _vm._ssrNode(" "), !_vm.show ? _c('Flechadown-icon', {
+    staticClass: "icon"
+  }) : _vm._e(), _vm._ssrNode(" "), _vm.show ? _c('FlechaUp-icon', {
+    staticClass: "icon"
+  }) : _vm._e()], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content\"" + _vm._ssrStyle(null, null, {
+    display: _vm.show ? '' : 'none'
+  }) + " data-v-6ee55808>", "</div>", [_vm._t("subcategorias")], 2)], 2);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/template5/_productofavorito/productSlide.vue?vue&type=template&id=1d5997fa&scoped=true&
+// CONCATENATED MODULE: ./components/headers/_order1/_AccordionList.vue?vue&type=template&id=6ee55808&scoped=true&
 
-// EXTERNAL MODULE: ./components/template5/_productcard/Ko-ProductCard-1.vue + 4 modules
-var Ko_ProductCard_1 = __webpack_require__(109);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productofavorito/productSlide.vue?vue&type=script&lang=js&
-
-/* harmony default export */ var productSlidevue_type_script_lang_js_ = ({
-  name: 'productSlide-productFavorito',
-  components: {
-    KoProductCard1: Ko_ProductCard_1["a" /* default */]
-  },
-  props: {
-    products: {}
-  },
-  data() {
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/headers/_order1/_AccordionList.vue?vue&type=script&lang=js&
+/* harmony default export */ var _AccordionListvue_type_script_lang_js_ = ({
+  name: 'AccordionList-header',
+  data: function () {
     return {
-      swiperOption: {
-        direction: 'horizontal',
-        pagination: {
-          el: '.swiper-pagination'
-        },
-        setWrapperSize: true,
-        paginationClickable: true,
-        slidesPerView: 4,
-        spaceBetween: 22,
-        grabCursor: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false
-        },
-        breakpoints: {
-          1250: {
-            slidesPerView: 3,
-            spaceBetween: 35
-          },
-          1060: {
-            slidesPerView: 3,
-            spaceBetween: 50
-          },
-          1000: {
-            slidesPerView: 3,
-            spaceBetween: 20
-          },
-          990: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
-          790: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
-          770: {
-            slidesPerView: 2,
-            spaceBetween: 15
-          },
-          375: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 10
-          }
-        },
-        navigation: {
-          nextEl: '.next',
-          prevEl: '.prev'
-        }
-      }
+      show: false
     };
   },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
-  },
   methods: {
-    changeSlide() {
-      this.swiper.slidePrev(700, false);
+    toggleItem: function () {
+      this.show = !this.show;
     }
   }
 });
-// CONCATENATED MODULE: ./components/template5/_productofavorito/productSlide.vue?vue&type=script&lang=js&
- /* harmony default export */ var _productofavorito_productSlidevue_type_script_lang_js_ = (productSlidevue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./components/headers/_order1/_AccordionList.vue?vue&type=script&lang=js&
+ /* harmony default export */ var _order1_AccordionListvue_type_script_lang_js_ = (_AccordionListvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(1);
 
-// CONCATENATED MODULE: ./components/template5/_productofavorito/productSlide.vue
+// CONCATENATED MODULE: ./components/headers/_order1/_AccordionList.vue
 
 
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(162)
+  var style0 = __webpack_require__(234)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -575,116 +476,35 @@ if (style0.__inject__) style0.__inject__(context)
 /* normalize component */
 
 var component = Object(componentNormalizer["a" /* default */])(
-  _productofavorito_productSlidevue_type_script_lang_js_,
+  _order1_AccordionListvue_type_script_lang_js_,
   render,
   staticRenderFns,
   false,
   injectStyles,
-  "1d5997fa",
-  "16660f82"
+  "6ee55808",
+  "42831d3f"
   
 )
 
-/* harmony default export */ var productSlide = __webpack_exports__["a"] = (component.exports);
+/* harmony default export */ var _AccordionList = __webpack_exports__["a"] = (component.exports);
 
 /***/ }),
 
-/***/ 193:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritos_1_vue_vue_type_style_index_0_id_f043c2f2_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(156);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritos_1_vue_vue_type_style_index_0_id_f043c2f2_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritos_1_vue_vue_type_style_index_0_id_f043c2f2_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritos_1_vue_vue_type_style_index_0_id_f043c2f2_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritos_1_vue_vue_type_style_index_0_id_f043c2f2_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 194:
+/***/ 354:
 /***/ (function(module, exports, __webpack_require__) {
 
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".wrapper-ProductFavoritos[data-v-f043c2f2]{align-items:center;background-color:var(--background_color_2);box-sizing:border-box;padding-top:20px}.swiper-container[data-v-f043c2f2],.wrapper-ProductFavoritos[data-v-f043c2f2]{display:flex;flex-direction:column;justify-content:center;width:100%}.swiper-container[data-v-f043c2f2]{align-items:flex-start;max-width:1300px;padding:10px 20px;z-index:1}.content-title-ProductFavoritos[data-v-f043c2f2]{align-items:center;display:flex;justify-content:flex-start;max-width:1300px;padding:10px 20px;width:100%}.title-ProductFavoritos[data-v-f043c2f2]{background:transparent;color:var(--color_subtext);cursor:pointer;font-size:18px;font-weight:700;line-height:1.4}@media (max-width:770px){.swiper-container[data-v-f043c2f2]{padding:20px 8px}.content-title-ProductFavoritos[data-v-f043c2f2]{padding:10px}}@media (max-width:380px){.swiper-container[data-v-f043c2f2]{padding:20px 5px}}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-
-/***/ }),
-
-/***/ 226:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductFavoritos-1.vue?vue&type=template&id=f043c2f2&scoped=true&
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _vm.dataProductFavorite.length ? _c('div', {
-    staticClass: "wrapper-ProductFavoritos"
-  }, [_vm._ssrNode("<div class=\"content-title-ProductFavoritos\" data-v-f043c2f2><p class=\"title-ProductFavoritos\" data-v-f043c2f2>" + _vm._ssrEscape(_vm._s(_vm.$t('home_destacados'))) + "</p></div> "), _c('KoSwipper', {
-    attrs: {
-      "products": _vm.dataProductFavorite
-    }
-  })], 2) : _vm._e();
+// load the styles
+var content = __webpack_require__(648);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add CSS to SSR context
+var add = __webpack_require__(6).default
+module.exports.__inject__ = function (context) {
+  add("24fad781", content, true, context)
 };
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/template5/Ko-ProductFavoritos-1.vue?vue&type=template&id=f043c2f2&scoped=true&
-
-// EXTERNAL MODULE: ./components/template5/_productofavorito/productSlide.vue + 4 modules
-var productSlide = __webpack_require__(168);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductFavoritos-1.vue?vue&type=script&lang=js&
-
-/* harmony default export */ var Ko_ProductFavoritos_1vue_type_script_lang_js_ = ({
-  name: 'Ko-ProductFavoritos-1',
-  components: {
-    KoSwipper: productSlide["a" /* default */]
-  },
-  computed: {
-    dataProductFavorite() {
-      return this.$store.state.products.fullProducts.filter(product => product.favorito === 1);
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/template5/Ko-ProductFavoritos-1.vue?vue&type=script&lang=js&
- /* harmony default export */ var template5_Ko_ProductFavoritos_1vue_type_script_lang_js_ = (Ko_ProductFavoritos_1vue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./components/template5/Ko-ProductFavoritos-1.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(193)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  template5_Ko_ProductFavoritos_1vue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "f043c2f2",
-  "57bd4432"
-  
-)
-
-/* harmony default export */ var Ko_ProductFavoritos_1 = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -730,6 +550,188 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
+/***/ 64:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+  methods: {
+    // filtro etiqueta URL
+    sendTagUrlMix(tag_id, tag_Name) {
+      this.$store.commit('products/FILTER_BY', {
+        type: ['tag'],
+        data: ''
+      });
+      this.$store.state.products.payloadTag = parseInt(tag_id);
+      this.$store.state.products.payloadTagName = tag_Name;
+    },
+    // filtro categoría URL
+    sendCategoryUrlMix(value) {
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '');
+      let urlFiltrada = decodeURIComponent(value);
+      this.$store.commit('products/FILTER_BY', {
+        type: ['category'],
+        data: urlFiltrada
+      });
+      if (this.$store.getters['products/filterProducts'].length) {
+        this.$store.commit('SET_CATEGORY_PRODUCTO', urlFiltrada);
+      } else {
+        this.$store.commit('SET_CATEGORY_PRODUCTO', '');
+      }
+    },
+    // filtro subcategoría URL
+    SendSubCategoryUrlMix(value, categories, subcategories) {
+      let urlFiltradaTemp = decodeURIComponent(value);
+      let resTemp = urlFiltradaTemp.split('^');
+      let urlFiltrada = decodeURIComponent(resTemp[0]);
+      let filtradoSubCategories = subcategories.find(element => {
+        if (element.categoria == parseInt(resTemp[1]) && element.nombre_subcategoria == urlFiltrada) {
+          return element;
+        }
+      });
+      if (filtradoSubCategories) {
+        let filtradoCategories = categories.find(element => element.id == parseInt(resTemp[1]));
+        this.$store.commit('products/FILTER_BY', {
+          type: ['subcategory'],
+          data: filtradoSubCategories.id
+        });
+        if (this.$store.getters['products/filterProducts'].length) {
+          this.$store.commit('SET_CATEGORY_PRODUCTO', filtradoCategories.nombre_categoria_producto);
+          this.$store.commit('SET_SUBCATEGORY_PRODUCTO', filtradoSubCategories.nombre_subcategoria);
+        } else {
+          this.$store.commit('SET_CATEGORY_PRODUCTO', '');
+          this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '');
+        }
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: ['subcategory'],
+          data: ''
+        });
+      }
+    },
+    // filtro categoría, subcategoría y etiqueta
+    getProductsFilter(value, tag_id, tag_Name, Lateral) {
+      this.$store.commit('SET_STATE_BANNER', false);
+      let type = this.$store.state.products.type;
+      let payload = this.$store.state.products.payload;
+      if (type.length < 2) {
+        this.$store.state.products.payloadTag = tag_id ? tag_id : this.$store.state.products.payloadTag ? this.$store.state.products.payloadTag : '';
+        this.$store.state.products.payloadTagName = tag_Name ? tag_Name : this.$store.state.products.payloadTagName ? this.$store.state.products.payloadTagName : '';
+      }
+      if (type && type.length >= 1) {
+        if (type[0] == 'category' || type[0] == 'subcategory' || type[0] == 'tag') {
+          this.$store.commit('products/FILTER_BY', {
+            type: [type[0], `${value}`],
+            data: payload
+          });
+        }
+        if (type[0] == 'category' || type[0] == 'subcategory') {
+          if (type[1] == 'tag') {
+            this.$store.commit('products/FILTER_BY', {
+              type: [type[0], type[1], `${value}`],
+              data: payload
+            });
+            this.$store.state.products.payloadTag2 = tag_id ? tag_id : this.$store.state.products.payloadTag2 ? this.$store.state.products.payloadTag2 : '';
+            this.$store.state.products.payloadTag2Name = tag_Name ? tag_Name : this.$store.state.products.payloadTag2Name ? this.$store.state.products.payloadTag2Name : '';
+          }
+        } else {
+          this.$store.state.products.type = [];
+          this.$store.commit('products/FILTER_BY', {
+            type: [`${value}`],
+            data: ''
+          });
+          this.setURlTag(tag_id, tag_Name);
+        }
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: [`${value}`],
+          data: ''
+        });
+        this.setURlTag(tag_id, tag_Name);
+      }
+      this.currentPage = 1;
+      if (Lateral === true) {
+        this.$router.push({
+          path: '/productos'
+        });
+        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false);
+      }
+    },
+    allCategories() {
+      this.$store.commit('products/FILTER_BY', {
+        type: ['all'],
+        data: ''
+      });
+      this.currentPage = 1;
+    },
+    SearchProduct(search) {
+      if (search.length) {
+        this.search = search;
+        this.$router.push({
+          path: '',
+          query: {
+            search: search
+          }
+        });
+        this.$store.commit('products/FILTER_BY', {
+          type: ['search'],
+          data: search
+        });
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: ['all'],
+          data: ''
+        });
+      }
+      this.currentPage = 1;
+    },
+    setURlTag(id, name) {
+      if (this.$store.state.products.type[0] == 'tag') {
+        this.$router.push({
+          path: '',
+          query: {}
+        });
+        this.$router.push({
+          path: '',
+          query: {
+            tagId: id,
+            tagName: name
+          }
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ 647:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko6_ProductList_2_vue_vue_type_style_index_0_id_62ecb9f6_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(354);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko6_ProductList_2_vue_vue_type_style_index_0_id_62ecb9f6_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko6_ProductList_2_vue_vue_type_style_index_0_id_62ecb9f6_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko6_ProductList_2_vue_vue_type_style_index_0_id_62ecb9f6_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko6_ProductList_2_vue_vue_type_style_index_0_id_62ecb9f6_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ 648:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".text-macrobrand[data-v-62ecb9f6]{align-items:center;display:flex;flex-direction:column;justify-content:center;margin-bottom:30px;margin-top:0}.text-macrobrand>p[data-v-62ecb9f6]{color:var(--color_text);font-size:20px;font-weight:700;padding:5px 20px;text-align:center}.wrapper-productlist[data-v-62ecb9f6]{align-items:center;background:var(--background_color_2);box-sizing:border-box}.container-productlist[data-v-62ecb9f6],.wrapper-productlist[data-v-62ecb9f6]{display:flex;justify-content:center;width:100%}.container-productlist[data-v-62ecb9f6]{flex-direction:column;max-width:1300px;padding:40px 20px}.content-sticky[data-v-62ecb9f6]{position:sticky;top:118px;width:100%}.content-item[data-v-62ecb9f6]{display:flex;flex-direction:row;justify-content:space-between}.content-item>div[data-v-62ecb9f6]:first-child{flex:1;max-width:300px}.content-item>div[data-v-62ecb9f6]:nth-child(2){flex:2}.wrapper-filter[data-v-62ecb9f6]{align-items:flex-start;display:flex;flex-direction:column;justify-content:flex-start;list-style:none;width:100%}.content-categoria[data-v-62ecb9f6]{padding-right:20px;width:100%}.text-categoria[data-v-62ecb9f6]{color:var(--color_text);font-size:16px;width:100%}.text-subcategoria[data-v-62ecb9f6]{color:var(--color_subtext);cursor:pointer;font-size:16px;margin-bottom:10px;margin-left:5px;width:100%}.text-categoria-active[data-v-62ecb9f6],.text-subcategoria-active[data-v-62ecb9f6]{color:var(--color_hover_text)}.content-items-categorias-text[data-v-62ecb9f6]{display:flex;flex-direction:row;margin-bottom:15px;position:sticky;top:88px}.text-categorias[data-v-62ecb9f6]{font-size:18px}.text-categorias[data-v-62ecb9f6],.text-categorias-select[data-v-62ecb9f6]{align-self:flex-start;background:transparent;color:var(--color_subtext);cursor:pointer;display:flex;font-weight:700;line-height:1.4;margin-right:2px}.text-categorias-select[data-v-62ecb9f6]{font-size:16px;margin-left:5px;opacity:.6}.content-item-productos[data-v-62ecb9f6]{align-items:center;display:flex;flex-direction:column;justify-content:flex-start;width:100%}.grid-products[data-v-62ecb9f6]{grid-column-gap:25px;grid-row-gap:30px;box-sizing:border-box;display:grid;grid-template-columns:repeat(3,minmax(250px,2fr));margin:0 auto;width:100%}.content-products-empty[data-v-62ecb9f6]{align-items:center;display:flex;justify-content:center;min-height:calc(100vh - 461px);text-align:center;width:100%}.content-products-empty p[data-v-62ecb9f6]{color:var(--color_subtext);font-size:18px;font-weight:700;opacity:.6}.pagination-medium[data-v-62ecb9f6]{background:transparent;margin-top:10px}.pagination[data-v-62ecb9f6]{background:transparent;color:var(--color_text);font-size:18px}.product_pagination[data-v-62ecb9f6] .el-pagination.is-background .btn-next,.product_pagination[data-v-62ecb9f6] .el-pagination.is-background .btn-prev,.product_pagination[data-v-62ecb9f6] .el-pagination.is-background .el-pager li{background-color:transparent;color:var(--color_text)}.product_pagination[data-v-62ecb9f6] .el-pagination.is-background .btn-next:hover,.product_pagination[data-v-62ecb9f6] .el-pagination.is-background .btn-prev:hover,.product_pagination[data-v-62ecb9f6] .el-pagination.is-background .el-pager li:not(.disabled):hover{color:var(--btnhover)}.product_pagination[data-v-62ecb9f6] .el-pagination.is-background .el-pager li:not(.disabled).active{background-color:var(--color_icon);color:#fff}@media (max-width:1290px){.grid-products[data-v-62ecb9f6]{grid-column-gap:15px;grid-row-gap:30px;grid-template-columns:repeat(3,minmax(240px,2fr))}}@media (max-width:1265px){.grid-products[data-v-62ecb9f6]{grid-column-gap:10px;grid-row-gap:30px;grid-template-columns:repeat(3,minmax(240px,2fr))}}@media (max-width:1250px){.grid-products[data-v-62ecb9f6]{grid-column-gap:25px;grid-row-gap:30px;grid-template-columns:repeat(3,minmax(250px,2fr))}}@media (max-width:1060px){.grid-products[data-v-62ecb9f6]{grid-column-gap:20px;grid-row-gap:30px;grid-template-columns:repeat(3,minmax(250px,2fr))}}@media (max-width:1050px){.grid-products[data-v-62ecb9f6]{grid-column-gap:20px;grid-row-gap:30px;grid-template-columns:repeat(3,minmax(240px,2fr))}}@media (max-width:1020px){.grid-products[data-v-62ecb9f6]{grid-column-gap:15px;grid-row-gap:30px;grid-template-columns:repeat(3,minmax(240px,2fr))}}@media (max-width:1010px){.grid-products[data-v-62ecb9f6]{grid-column-gap:10px;grid-row-gap:30px;grid-template-columns:repeat(3,minmax(240px,2fr))}}@media (max-width:1000px){.grid-products[data-v-62ecb9f6]{grid-column-gap:25px;grid-row-gap:30px;grid-template-columns:repeat(2,minmax(250px,2fr))}}@media (max-width:790px){.grid-products[data-v-62ecb9f6]{grid-column-gap:20px;grid-row-gap:30px;grid-template-columns:repeat(2,minmax(250px,2fr))}}@media (max-width:780px){.grid-products[data-v-62ecb9f6]{grid-column-gap:16px;grid-row-gap:30px;grid-template-columns:repeat(2,minmax(250px,2fr))}}@media (max-width:775px){.grid-products[data-v-62ecb9f6]{grid-column-gap:20px;grid-row-gap:20px;grid-template-columns:repeat(2,minmax(250px,2fr))}}@media (max-width:770px){.container-productlist[data-v-62ecb9f6]{padding:0}.content-items-categorias-text[data-v-62ecb9f6]{padding:20px 10px 10px}.content-item-productos[data-v-62ecb9f6]{padding:0 15px}.grid-products[data-v-62ecb9f6]{grid-template-columns:repeat(2,minmax(10px,2fr))}.wrapper-filter[data-v-62ecb9f6]{padding-left:10px}.content-categoria[data-v-62ecb9f6]{padding-right:0}}@media (max-width:700px){.content-items-categorias[data-v-62ecb9f6]{margin-bottom:0;margin-left:5px}.wrapper-filter[data-v-62ecb9f6]{display:none}}@media (max-width:450px){.grid-products[data-v-62ecb9f6]{grid-template-columns:repeat(2,minmax(160px,1fr))}.content-item-productos[data-v-62ecb9f6]{padding:5px}.text-macrobrand>p[data-v-62ecb9f6]{font-size:16px}.text-macrobrand[data-v-62ecb9f6]{margin-bottom:10px}}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
 /***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -745,6 +747,323 @@ var add = __webpack_require__(6).default
 module.exports.__inject__ = function (context) {
   add("58421daa", content, true, context)
 };
+
+/***/ }),
+
+/***/ 993:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/Ko6-ProductList-2.vue?vue&type=template&id=62ecb9f6&scoped=true&
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "wrapper-productlist"
+  }, [_vm._ssrNode("<div class=\"container-productlist\" data-v-62ecb9f6>", "</div>", [_vm._ssrNode("<div class=\"content-items-categorias-text\" data-v-62ecb9f6><p class=\"text-categorias\" data-v-62ecb9f6>Catálogo</p> " + (this.nameCategoryHeader ? "<p class=\"text-categorias-select\" data-v-62ecb9f6>" + _vm._ssrEscape("\n        > " + _vm._s(this.nameCategoryHeader) + "\n      ") + "</p>" : "<!---->") + " " + (this.nameSubCategoryHeader ? "<p class=\"text-categorias-select\" data-v-62ecb9f6>" + _vm._ssrEscape("\n        > " + _vm._s(this.nameSubCategoryHeader) + "\n      ") + "</p>" : "<!---->") + "</div> "), _vm._ssrNode("<div class=\"content-item\" data-v-62ecb9f6>", "</div>", [_vm._ssrNode("<div class=\"wrapper-filter\" data-v-62ecb9f6>", "</div>", [_vm._ssrNode("<div class=\"content-sticky\" data-v-62ecb9f6>", "</div>", _vm._l(_vm.categorias, function (categoria) {
+    return _vm._ssrNode("<div class=\"content-categoria\" data-v-62ecb9f6>", "</div>", [_c('BaseAccordian', {
+      scopedSlots: _vm._u([{
+        key: "categorias",
+        fn: function () {
+          return [_c('li', {
+            staticClass: "text-categoria",
+            class: categoria.id == _vm.indexSelect ? 'text-categoria-active' : '',
+            on: {
+              "click": function ($event) {
+                _vm.sendCategory(categoria, categoria.id, _vm.index, _vm.ref = false);
+              }
+            }
+          }, [_vm._v("\n                  " + _vm._s(categoria.nombre_categoria_producto) + "\n                ")])];
+        },
+        proxy: true
+      }, {
+        key: "subcategorias",
+        fn: function () {
+          return [_vm._l(_vm.subcategories, function (subcategory, key) {
+            return _c('div', {
+              key: key
+            }, [subcategory.categoria == categoria.id ? _c('li', {
+              staticClass: "text-subcategoria",
+              class: subcategory.id == _vm.indexSelect2 ? 'text-subcategoria-active' : '',
+              on: {
+                "click": function ($event) {
+                  return _vm.SendSubCategory(subcategory.id);
+                }
+              }
+            }, [_vm._v("\n                      " + _vm._s(subcategory.nombre_subcategoria) + "\n                    ")]) : _vm._e()]);
+          })];
+        },
+        proxy: true
+      }], null, true)
+    })], 1);
+  }), 0)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-item-productos\" data-v-62ecb9f6>", "</div>", [_vm._ssrNode("<div class=\"grid-products\" data-v-62ecb9f6>", "</div>", _vm._l(_vm.filterProduct, function (product) {
+    return _vm._ssrNode("<div class=\"content-products\" data-v-62ecb9f6>", "</div>", [_c('KoProductCard1', {
+      attrs: {
+        "product": product
+      }
+    })], 1);
+  }), 0), _vm._ssrNode(" " + (this.fullProducts.length == 0 ? "<div class=\"content-products-empty\" data-v-62ecb9f6><p data-v-62ecb9f6>No se encontraron productos relacionados.</p></div>" : "<!---->") + " "), _vm._ssrNode("<div class=\"pagination-medium\" data-v-62ecb9f6>", "</div>", [_vm.fullProducts.length > 24 ? _vm._ssrNode("<div class=\"product_pagination\" data-v-62ecb9f6>", "</div>", [_c('el-pagination', {
+    staticClass: "pagination",
+    attrs: {
+      "background": "",
+      "layout": "prev, pager, next",
+      "total": _vm.fullProducts.length,
+      "page-size": 24,
+      "current-page": _vm.currentPage
+    },
+    on: {
+      "update:currentPage": function ($event) {
+        _vm.currentPage = $event;
+      },
+      "update:current-page": function ($event) {
+        _vm.currentPage = $event;
+      }
+    }
+  })], 1) : _vm._e()])], 2)], 2)], 2)]);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/template6/Ko6-ProductList-2.vue?vue&type=template&id=62ecb9f6&scoped=true&
+
+// EXTERNAL MODULE: ./components/template5/_productcard/Ko-ProductCard-1.vue + 4 modules
+var Ko_ProductCard_1 = __webpack_require__(109);
+
+// EXTERNAL MODULE: ./components/headers/_order1/_AccordionList.vue + 4 modules
+var _AccordionList = __webpack_require__(265);
+
+// EXTERNAL MODULE: ./mixins/filterProducts.js
+var filterProducts = __webpack_require__(64);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template6/Ko6-ProductList-2.vue?vue&type=script&lang=js&
+
+
+
+/* harmony default export */ var Ko6_ProductList_2vue_type_script_lang_js_ = ({
+  components: {
+    KoProductCard1: Ko_ProductCard_1["a" /* default */],
+    BaseAccordian: _AccordionList["a" /* default */]
+  },
+  props: {
+    dataStore: Object,
+    fullProducts: {}
+  },
+  mixins: [filterProducts["a" /* default */]],
+  name: 'Ko6-ProductList-1',
+  mounted() {
+    if (this.$route.query && this.$route.query.category) {
+      this.sendCategoryUrlMix(this.$route.query.category);
+    } else if (this.$route.query && this.$route.query.subcategory) {
+      this.SendSubCategoryUrlMix(this.$route.query.subcategory, this.categorias, this.subcategories);
+    } else if (this.$route.query && this.$route.query.tagId && this.$route.query.tagName) {
+      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName);
+    } else if (this.$route.fullPath == '/') {
+      this.allCategories();
+    }
+    if (this.previousPage) {
+      this.currentPage = this.previousPage;
+    }
+    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
+      this.$store.commit('products/FILTER_BY', {
+        type: ['category'],
+        data: this.nameCategoryHeader
+      });
+    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
+      let filtradoSubCategory = this.subcategories.find(element => element.nombre_subcategoria == this.nameSubCategoryHeader);
+      if (filtradoSubCategory) {
+        this.categorias.find(element => element.id == filtradoSubCategory.categoria);
+        this.$store.commit('products/FILTER_BY', {
+          type: ['subcategory'],
+          data: filtradoSubCategory.id
+        });
+      }
+    }
+  },
+  data() {
+    return {
+      search: '',
+      currentPage: 1
+    };
+  },
+  computed: {
+    categorias() {
+      return this.dataStore.categorias;
+    },
+    subcategories() {
+      return this.dataStore.subcategorias;
+    },
+    getProductsCategorie() {
+      const initial = this.currentPage * 24 - 24;
+      const final = initial + 24;
+      return this.fullProducts.filter(product => product.categoria == this.select).slice(initial, final);
+    },
+    filterProduct() {
+      const initial = this.currentPage * 24 - 24;
+      const final = initial + 24;
+      return this.fullProducts.slice(initial, final);
+    },
+    selectedCategory() {
+      return this.$store.state.products.payload;
+    },
+    selectedType() {
+      return this.$store.state.products.type;
+    },
+    heightHeader() {
+      return this.$refs.header.offsetHeight;
+    },
+    nameCategoryHeader() {
+      return this.$store.state.category_producto_header;
+    },
+    nameSubCategoryHeader() {
+      return this.$store.state.subcategory_producto_header;
+    },
+    searchValue() {
+      return this.$store.state.searchValue;
+    },
+    previousPage() {
+      return this.$store.state.previousPage;
+    }
+  },
+  methods: {
+    SearchProduct2(search) {
+      if (search.length) {
+        this.$store.commit('products/FILTER_BY', {
+          type: ['search'],
+          data: search
+        });
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: ['all'],
+          data: ''
+        });
+      }
+      this.currentPage = 1;
+    },
+    SendSubCategory(value) {
+      this.indexSelect2 = value;
+      this.selectSubcategory = value;
+      let filtradoSubCategoria = this.subcategories.find(element => element.id == value);
+      let filtradoCategories = this.categorias.find(element => element.id == filtradoSubCategoria.categoria);
+      this.$store.commit('SET_CATEGORY_PRODUCTO', filtradoCategories.nombre_categoria_producto);
+      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria;
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory);
+      this.$store.commit('products/FILTER_BY', {
+        type: ['subcategory'],
+        data: value
+      });
+    },
+    sendCategory(value, categoria, index, ref) {
+      this.indexSelect = categoria;
+      this.currentPage = 1;
+      this.nameCategory = value.nombre_categoria_producto;
+      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory);
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '');
+      this.selectedSubcategories = [];
+      this.subcategories.find(subcategoria => {
+        if (subcategoria.categoria === categoria) {
+          this.toggleCategories = false;
+          this.selectedSubcategories.push(subcategoria);
+        }
+      });
+      this.$store.commit('products/FILTER_BY', {
+        type: ['category'],
+        data: value.nombre_categoria_producto
+      });
+    },
+    breadcrumbsSendCategory(value) {
+      let filtradoCategories = this.categorias.find(element => {
+        if (element.nombre_categoria_producto == value) {
+          return element;
+        }
+      });
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '');
+      this.$store.commit('products/FILTER_BY', {
+        type: ['category'],
+        data: filtradoCategories.nombre_categoria_producto
+      });
+    },
+    clear() {
+      this.indexSelect = '';
+      this.indexSelect2 = '';
+      this.$store.commit('SET_STATE_BANNER', true);
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '');
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '');
+      this.$store.commit('products/FILTER_BY', {
+        type: ['all'],
+        data: ''
+      });
+      this.$emit('clear');
+      this.nameCategory = '';
+    }
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct2(value);
+    },
+    currentPage() {
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage);
+      window.scrollBy(0, -3300);
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage;
+      }
+    },
+    nameCategoryHeader(value) {
+      return value;
+    },
+    nameSubCategoryHeader(value) {
+      return value;
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      if (this.$route.query && this.$route.query.category) {
+        this.sendCategoryUrlMix(this.$route.query.category);
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.SendSubCategoryUrlMix(this.$route.query.subcategory, this.categorias, this.subcategories);
+      } else if (this.$route.query && this.$route.query.tagId && this.$route.query.tagName) {
+        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName);
+      } else if (this.$route.fullPath == '/') {
+        this.allCategories();
+      }
+    },
+    searchValue(value) {
+      this.SearchProduct2(value);
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/template6/Ko6-ProductList-2.vue?vue&type=script&lang=js&
+ /* harmony default export */ var template6_Ko6_ProductList_2vue_type_script_lang_js_ = (Ko6_ProductList_2vue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./components/template6/Ko6-ProductList-2.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(647)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  template6_Ko6_ProductList_2vue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "62ecb9f6",
+  "43db637f"
+  
+)
+
+/* harmony default export */ var Ko6_ProductList_2 = __webpack_exports__["default"] = (component.exports);
 
 /***/ })
 

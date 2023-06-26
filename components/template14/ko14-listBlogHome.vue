@@ -13,29 +13,32 @@
         >
           {{ listBlogHome.title }}
         </p>
-        <a
-          v-if="listBlogHome.visible_btn"
-          :href="listBlogHome?.url_redirect ?? ''"
+        <nuxt-link
+          :to="{ path: `/blog` }"
           :style="`color: ${listBlogHome.color_text_btn}; font-size: ${listBlogHome.fontSizeTextBtn}; font-weight: ${listBlogHome.fontWeighTextBtn};`"
         >
           {{ listBlogHome.text_btn }}
           <FlechaRight-icon
             :style="`color: ${listBlogHome.color_text_btn}; font-size: ${listBlogHome.fontSizeTextBtn}; font-weight: ${listBlogHome.fontWeighTextBtn};`"
           />
-        </a>
+        </nuxt-link>
       </div>
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-        <div class="swiper-wrapper">
+      <div
+        ref="mySwiper"
+        v-swiper:mySwiper="swiperOption"
+        class="w-full h-full"
+      >
+        <div class="swiper-wrapper w-full h-full">
           <div
             v-for="article in listArticulos"
             :key="article.id"
-            class="swiper-slide"
+            class="swiper-slide w-full h-full"
           >
             <KoBlogCard
               :article="article"
               :settingGeneral="settingGeneral"
               :cardBlog="cardBlog"
-              class="giftLoad"
+              class="giftLoad w-full h-full"
             />
           </div>
         </div>
@@ -45,7 +48,6 @@
 </template>
 
 <script>
-import KoBlogCard from './_cardBlog/blogcard.vue'
 export default {
   name: 'Ko14-listBlogHome',
   props: {
@@ -55,7 +57,7 @@ export default {
     cardBlog: Object,
   },
   components: {
-    KoBlogCard,
+    KoBlogCard: () => import('./_cardBlog/blogCard'),
   },
   data() {
     return {

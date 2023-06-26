@@ -1,14 +1,11 @@
 <template>
   <div
+    v-if="settingByTemplate12"
     :style="[
       {
-        '--font-style-1':
-          this.settingByTemplate12 && this.settingByTemplate12.fontFamily
-            ? this.settingByTemplate12.fontFamily
-            : 'Poppins',
+        '--font-style-1': this.settingByTemplate12?.fontFamily ?? 'Poppins',
       },
     ]"
-    v-if="settingByTemplate12"
   >
     <div class="main-wrapper overflow-hidden">
       <i-header v-bind="componentsProps" id="KHeaderX" />

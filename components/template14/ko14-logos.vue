@@ -18,7 +18,9 @@
             >
               <img
                 :src="idCloudinary(imagen.img, 550, 550)"
-                class="h-full w-full remove_bg"
+                class="h-full w-full remove_bg max-w-[147px] max-h-[147px]"
+                width="147"
+                height="147"
                 :alt="`imágenes logos${index}`"
               />
             </a>
@@ -29,7 +31,7 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   name: 'Ko14-Logos',

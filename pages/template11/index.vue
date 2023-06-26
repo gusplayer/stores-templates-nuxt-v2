@@ -55,7 +55,7 @@
       v-bind="componentsProps"
       v-if="dataHoko.length == 0 || dataHoko.statehoko == 0"
     />
-    <KInformacion
+    <KInformation
       id="kInformationX"
       v-bind="componentsProps"
       v-if="
@@ -90,7 +90,7 @@ export default {
     KParallax: () => import('../../components/template11/ko-parallax'),
     KListTrending: () =>
       import('../../components/template11/ko-listtrending.vue'),
-    KInformacion: () => import('../../components/template11/information.vue'),
+    KInformation: () => import('../../components/template11/information.vue'),
     KBlog: () => import('../../components/template11/ko-blog'),
   },
   mounted() {

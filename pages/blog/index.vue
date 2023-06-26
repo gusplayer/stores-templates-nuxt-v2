@@ -1,9 +1,6 @@
 <template>
-  <div class="home">
-    <component :is="indexTemplate" v-bind="componentsProps" />
-  </div>
+  <component :is="indexTemplate" v-bind="componentsProps" />
 </template>
-
 <script>
 import { mapState } from 'vuex'
 export default {
@@ -15,6 +12,22 @@ export default {
     K10Blog: () => import('../../components/template10/blog_page/Ko-Blog'),
     K11Blog: () => import('../../components/template11/blog_page/Ko-Blog'),
     K13Blog: () => import('../../components/template13/_blog/Ko-Blog'),
+    K14Blog: () => import('../../components/template14/_cardBlog/Ko-index.vue'),
+  },
+  data() {
+    return {
+      componentMapping: {
+        3: 'K05Blog',
+        5: 'K05Blog',
+        6: 'K05Blog',
+        7: 'K07Blog',
+        9: 'K09Blog',
+        10: 'K10Blog',
+        11: 'K11Blog',
+        13: 'K13Blog',
+        14: 'K14Blog',
+      },
+    }
   },
   computed: {
     ...mapState([
@@ -26,92 +39,43 @@ export default {
       'settingByTemplate10',
       'settingByTemplate11',
       'settingByTemplate13',
+      'settingByTemplate14',
       'template',
     ]),
     indexTemplate() {
       let productListComponent = ''
-      switch (this.template) {
-        case 3:
-          productListComponent = 'K05Blog'
-          break
-        case 5:
-          productListComponent = 'K05Blog'
-          break
-        case 6:
-          productListComponent = 'K05Blog'
-          break
-        case 7:
-          productListComponent = 'K07Blog'
-          break
-        case 9:
-          productListComponent = 'K09Blog'
-          break
-        case 10:
-          productListComponent = 'K10Blog'
-          break
-        case 11:
-          productListComponent = 'K11Blog'
-          break
-        case 13:
-          productListComponent = 'K13Blog'
-          break
+      if (this.componentMapping.hasOwnProperty(this.template)) {
+        productListComponent = this.componentMapping[parseInt(this.template)]
       }
       return productListComponent
     },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
-        settingK05Blog:
-          this.settingByTemplate && this.settingByTemplate.settings
-            ? this.settingByTemplate.settings
-            : this.settingBase,
+        settingK05Blog: this.settingByTemplate?.settings ?? this.settingBase,
         settingByTemplate7: this.settingByTemplate7
           ? [
               {
-                settingGeneral:
-                  this.settingByTemplate7 &&
-                  this.settingByTemplate7.settingGeneral
-                    ? this.settingByTemplate7.settingGeneral
-                    : null,
-                settingK07Blog:
-                  this.settingByTemplate7 && this.settingByTemplate7.blog1
-                    ? this.settingByTemplate7.blog1
-                    : null,
-                settingK07Blog1:
-                  this.settingByTemplate7 && this.settingByTemplate7.blog
-                    ? this.settingByTemplate7.blog
-                    : null,
+                settingGeneral: this.settingByTemplate7?.settingGeneral ?? null,
+                settingK07Blog: this.settingByTemplate7?.blog1 ?? null,
+                settingK07Blog1: this.settingByTemplate7?.blog ?? null,
               },
             ]
           : null,
         settingByTemplate9: this.settingByTemplate9
           ? [
               {
-                blog:
-                  this.settingByTemplate9 && this.settingByTemplate9.blog
-                    ? this.settingByTemplate9.blog
-                    : null,
-                settingGeneral:
-                  this.settingByTemplate9 &&
-                  this.settingByTemplate9.settingGeneral
-                    ? this.settingByTemplate9.settingGeneral
-                    : null,
+                blog: this.settingByTemplate9?.blog ?? null,
+                settingGeneral: this.settingByTemplate9?.settingGeneral ?? null,
               },
             ]
           : null,
         settingByTemplate11: this.settingByTemplate11
           ? [
               {
-                blog:
-                  this.settingByTemplate11 && this.settingByTemplate11.blog
-                    ? this.settingByTemplate11.blog
-                    : null,
+                blog: this.settingByTemplate11?.blog ?? null,
                 setting11General:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.settingGeneral
-                    ? this.settingByTemplate11.settingGeneral
-                    : null,
+                  this.settingByTemplate11?.settingGeneral ?? null,
               },
             ]
           : null,
@@ -119,10 +83,16 @@ export default {
           ? [
               {
                 setting13General:
-                  this.settingByTemplate13 &&
-                  this.settingByTemplate13.settingGeneral
-                    ? this.settingByTemplate13.settingGeneral
-                    : null,
+                  this.settingByTemplate13?.settingGeneral ?? null,
+              },
+            ]
+          : null,
+        settingByTemplate14: this.settingByTemplate14
+          ? [
+              {
+                settingGeneral:
+                  this.settingByTemplate14?.settingGeneral ?? null,
+                cardBlog: this.settingByTemplate14?.cardBlog ?? null,
               },
             ]
           : null,
@@ -131,5 +101,3 @@ export default {
   },
 }
 </script>
-
-<style></style>

@@ -1,9 +1,6 @@
 <template>
-  <div class="home">
-    <component :is="indexTemplate" v-bind="componentsProps" />
-  </div>
+  <component :is="indexTemplate" v-bind="componentsProps" />
 </template>
-
 <script>
 import { mapState } from 'vuex'
 export default {
@@ -21,6 +18,21 @@ export default {
     K13Article: () =>
       import('../../components/template13/_blog/Ko-articulo.vue'),
   },
+  data() {
+    return {
+      componentMapping: {
+        3: 'K05Article',
+        5: 'K05Article',
+        6: 'K05Article',
+        7: 'K07Article',
+        9: 'K09Article',
+        10: 'K10Article',
+        11: 'K11Article',
+        13: 'K13Article',
+        // 14: 'K14Contact',
+      },
+    }
+  },
   computed: {
     ...mapState([
       'dataStore',
@@ -35,38 +47,14 @@ export default {
     ]),
     indexTemplate() {
       let productListComponent = ''
-      switch (this.template) {
-        case 3:
-          productListComponent = 'K05Article'
-          break
-        case 5:
-          productListComponent = 'K05Article'
-          break
-        case 6:
-          productListComponent = 'K05Article'
-          break
-        case 7:
-          productListComponent = 'K07Article'
-          break
-        case 9:
-          productListComponent = 'K09Article'
-          break
-        case 10:
-          productListComponent = 'K10Article'
-          break
-        case 11:
-          productListComponent = 'K11Article'
-          break
-        case 13:
-          productListComponent = 'K13Article'
-          break
+      if (this.componentMapping.hasOwnProperty(this.template)) {
+        productListComponent = this.componentMapping[parseInt(this.template)]
       }
       return productListComponent
     },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
         settingGeneral: this.settingByTemplate7?.settingGeneral || null,
         settingK07Blog: this.settingByTemplate7?.blog1 || null,
         settingK05Blog:

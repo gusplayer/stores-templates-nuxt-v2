@@ -2,9 +2,9 @@
   <div
     class="wrapper-productDetail"
     :style="[
-      settingByTemplate7[0].settingK07DetailsProduct,
+      settingByTemplate7[0].detailsProduct,
       settingByTemplate7[0].settingGeneral,
-      settingByTemplate7[0].settingKProdutCard,
+      settingByTemplate7[0].card,
     ]"
   >
     <div class="container-productDetail-loading" v-if="loading"></div>
@@ -14,19 +14,11 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate7 &&
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_1
-              ? this.settingByTemplate7[0].settingGeneral.fount_1
-              : 'David libre',
+            this.settingByTemplate7?.settingGeneral?.fount_1 ?? 'David libre',
         },
         {
           '--font-style-3':
-            this.settingByTemplate7 &&
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_3
-              ? this.settingByTemplate7[0].settingGeneral.fount_3
-              : 'Lora',
+            this.settingByTemplate7?.settingGeneral?.fount_3 ?? 'Lora',
         },
       ]"
     >

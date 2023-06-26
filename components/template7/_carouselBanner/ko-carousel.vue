@@ -1,9 +1,9 @@
 <template>
   <div class="carousel-content" :style="settingKCarousel">
-    <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-      <div class="swiper-wrapper z-auto">
+    <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full">
+      <div class="swiper-wrapper z-auto w-full">
         <div
-          class="swiper-slide img-bg"
+          class="swiper-slide img-bg w-full"
           :id="`slide${index + 1}`"
           v-for="(banner, index) in this.settingKCarousel.values"
           :key="index"
@@ -13,6 +13,7 @@
               banner && banner.url_redirect ? banner.url_redirect : ''
             }`"
             rel="noreferrer noopener"
+            class="w-full"
             :class="banner && banner.url_redirect ? 'cursor-pointer' : ''"
           >
             <img
