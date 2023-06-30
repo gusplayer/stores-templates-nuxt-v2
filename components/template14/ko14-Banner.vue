@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full justify-center items-center py-20"
+    class="w-full justify-center items-center"
     :style="`background-color: ${banner['--background_color_1']}`"
   >
     <div
@@ -13,8 +13,8 @@
       <div class="z-auto swiper-wrapper">
         <a
           :id="`slide${index + 1}`"
-          :key="index"
           v-for="(item, index) in banner.values"
+          :key="index"
           :href="item.url_redirect"
           class="swiper-slide w-full flex justify-center items-center z-10"
           rel="noreferrer noopener"
@@ -31,7 +31,7 @@
             <img
               v-lazy="item.img"
               alt="banner template14"
-              class="w-full max-w-[1280px]"
+              class="w-full object-cover max-w-[1280px]"
             />
           </picture>
           <div

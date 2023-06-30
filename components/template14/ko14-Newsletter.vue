@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex justify-center items-center py-15 lg:py-20 px-10 md:px-0"
+    class="w-full flex justify-center items-center py-15 lg:py-20 px-10"
     :style="`background-color: ${newsletter['--background_color_1']}`"
   >
     <div
@@ -28,7 +28,7 @@
           />
           <div class="w-full flex flex-col justify-center">
             <div
-              class="flex flex-row py-10 px-10 rounded-2"
+              class="flex flex-col md:flex-row py-10 px-10 rounded-2"
               :style="`background-color: ${newsletter.color_input};`"
             >
               <ValidationProvider
@@ -47,6 +47,7 @@
                         width="20px"
                         height="20px"
                         viewBox="0 0 24 24"
+                        :fill="newsletter.color_icon"
                         :color="newsletter.color_icon"
                       >
                         <path
@@ -76,8 +77,8 @@
                 </template>
               </ValidationProvider>
               <button
-                class="bg-transparent font-bold px-15"
-                :style="`color: ${newsletter.color_text_input};`"
+                class="w-full md:w-0 font-bold px-15 mt-5 md:mt-0"
+                :style="`color: ${newsletter.color_text_input};background-color: ${newsletter.color_input};`"
                 @click="submitNewsletter"
               >
                 {{ $t('newsletter_btn') }}

@@ -1,221 +1,26 @@
 exports.ids = [110];
 exports.modules = {
 
-/***/ 363:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(666);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(6).default
-module.exports.__inject__ = function (context) {
-  add("00165cec", content, true, context)
-};
-
-/***/ }),
-
-/***/ 64:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-  methods: {
-    // filtro etiqueta URL
-    sendTagUrlMix(tag_id, tag_Name) {
-      this.$store.commit('products/FILTER_BY', {
-        type: ['tag'],
-        data: ''
-      });
-      this.$store.state.products.payloadTag = parseInt(tag_id);
-      this.$store.state.products.payloadTagName = tag_Name;
-    },
-    // filtro categoría URL
-    sendCategoryUrlMix(value) {
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '');
-      let urlFiltrada = decodeURIComponent(value);
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: urlFiltrada
-      });
-      if (this.$store.getters['products/filterProducts'].length) {
-        this.$store.commit('SET_CATEGORY_PRODUCTO', urlFiltrada);
-      } else {
-        this.$store.commit('SET_CATEGORY_PRODUCTO', '');
-      }
-    },
-    // filtro subcategoría URL
-    SendSubCategoryUrlMix(value, categories, subcategories) {
-      let urlFiltradaTemp = decodeURIComponent(value);
-      let resTemp = urlFiltradaTemp.split('^');
-      let urlFiltrada = decodeURIComponent(resTemp[0]);
-      let filtradoSubCategories = subcategories.find(element => {
-        if (element.categoria == parseInt(resTemp[1]) && element.nombre_subcategoria == urlFiltrada) {
-          return element;
-        }
-      });
-      if (filtradoSubCategories) {
-        let filtradoCategories = categories.find(element => element.id == parseInt(resTemp[1]));
-        this.$store.commit('products/FILTER_BY', {
-          type: ['subcategory'],
-          data: filtradoSubCategories.id
-        });
-        if (this.$store.getters['products/filterProducts'].length) {
-          this.$store.commit('SET_CATEGORY_PRODUCTO', filtradoCategories.nombre_categoria_producto);
-          this.$store.commit('SET_SUBCATEGORY_PRODUCTO', filtradoSubCategories.nombre_subcategoria);
-        } else {
-          this.$store.commit('SET_CATEGORY_PRODUCTO', '');
-          this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '');
-        }
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['subcategory'],
-          data: ''
-        });
-      }
-    },
-    // filtro categoría, subcategoría y etiqueta
-    getProductsFilter(value, tag_id, tag_Name, Lateral) {
-      this.$store.commit('SET_STATE_BANNER', false);
-      let type = this.$store.state.products.type;
-      let payload = this.$store.state.products.payload;
-      if (type.length < 2) {
-        this.$store.state.products.payloadTag = tag_id ? tag_id : this.$store.state.products.payloadTag ? this.$store.state.products.payloadTag : '';
-        this.$store.state.products.payloadTagName = tag_Name ? tag_Name : this.$store.state.products.payloadTagName ? this.$store.state.products.payloadTagName : '';
-      }
-      if (type && type.length >= 1) {
-        if (type[0] == 'category' || type[0] == 'subcategory' || type[0] == 'tag') {
-          this.$store.commit('products/FILTER_BY', {
-            type: [type[0], `${value}`],
-            data: payload
-          });
-        }
-        if (type[0] == 'category' || type[0] == 'subcategory') {
-          if (type[1] == 'tag') {
-            this.$store.commit('products/FILTER_BY', {
-              type: [type[0], type[1], `${value}`],
-              data: payload
-            });
-            this.$store.state.products.payloadTag2 = tag_id ? tag_id : this.$store.state.products.payloadTag2 ? this.$store.state.products.payloadTag2 : '';
-            this.$store.state.products.payloadTag2Name = tag_Name ? tag_Name : this.$store.state.products.payloadTag2Name ? this.$store.state.products.payloadTag2Name : '';
-          }
-        } else {
-          this.$store.state.products.type = [];
-          this.$store.commit('products/FILTER_BY', {
-            type: [`${value}`],
-            data: ''
-          });
-          this.setURlTag(tag_id, tag_Name);
-        }
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: [`${value}`],
-          data: ''
-        });
-        this.setURlTag(tag_id, tag_Name);
-      }
-      this.currentPage = 1;
-      if (Lateral === true) {
-        this.$router.push({
-          path: '/productos'
-        });
-        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false);
-      }
-    },
-    allCategories() {
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: ''
-      });
-      this.currentPage = 1;
-    },
-    SearchProduct(search) {
-      if (search.length) {
-        this.search = search;
-        this.$router.push({
-          path: '',
-          query: {
-            search: search
-          }
-        });
-        this.$store.commit('products/FILTER_BY', {
-          type: ['search'],
-          data: search
-        });
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['all'],
-          data: ''
-        });
-      }
-      this.currentPage = 1;
-    },
-    setURlTag(id, name) {
-      if (this.$store.state.products.type[0] == 'tag') {
-        this.$router.push({
-          path: '',
-          query: {}
-        });
-        this.$router.push({
-          path: '',
-          query: {
-            tagId: id,
-            tagName: name
-          }
-        });
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ 665:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductListFilter_vue_vue_type_style_index_0_id_5b17c8da_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(363);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductListFilter_vue_vue_type_style_index_0_id_5b17c8da_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductListFilter_vue_vue_type_style_index_0_id_5b17c8da_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductListFilter_vue_vue_type_style_index_0_id_5b17c8da_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductListFilter_vue_vue_type_style_index_0_id_5b17c8da_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 666:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".product-content[data-v-5b17c8da]{background:var(--background_color_1)}.content-left[data-v-5b17c8da] .el-collapse{border-bottom:1px solid var(--color_icon);border-top:1px solid var(--color_icon);width:100%}.content-left[data-v-5b17c8da] .el-collapse-item__wrap{background-color:transparent;border-bottom:1px solid var(--color_icon);will-change:height}.content-left[data-v-5b17c8da] .el-collapse-item__header{background-color:transparent;border-bottom:1px solid var(--color_icon);color:var(--color_text);font-family:var(--font-style-1)!important;font-size:15px;font-weight:600}.content-left[data-v-5b17c8da] .el-collapse-item__header.is-active{border-bottom:none}.content-left[data-v-5b17c8da] .el-collapse-item__arrow{color:var(--color_icon)}.input-slide[data-v-5b17c8da]{background:transparent;border-style:none;color:var(--color_subtext);cursor:pointer;font-family:var(--font-style-1)!important;font-size:15px;height:30px;width:100%}.categorys-list[data-v-5b17c8da],.subcategory-list[data-v-5b17c8da]{grid-gap:1rem;align-items:center;display:grid;gap:1rem;grid-template-columns:repeat(1,minmax(0,1fr));justify-content:flex-start;width:100%}.subcategory-list[data-v-5b17c8da]{transition-duration:.15s;transition-duration:.2s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1)}.txt-Filter[data-v-5b17c8da]{align-items:center;color:var(--color_subtext);cursor:pointer;display:flex;flex-direction:row;font-family:var(--font-style-1)!important;font-size:15px;font-weight:400;justify-content:flex-start;line-height:1.3;padding-right:1px;transition-duration:.15s;transition-duration:.2s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1);width:100%}.txt-Filter[data-v-5b17c8da]:hover{color:#eb7025}.txt-categorys[data-v-5b17c8da]{align-items:center;color:var(--color_subtext);cursor:pointer;display:flex;flex-direction:row;font-family:var(--font-style-1)!important;font-size:15px;font-weight:400;justify-content:flex-start;line-height:1.3;padding-right:1px;transition-duration:.15s;transition-duration:.2s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1);width:100%}.txt-categorys[data-v-5b17c8da]:hover{color:#eb7025}.pagination[data-v-5b17c8da]{background:transparent;color:#222;font-size:18px}.wrapper_pagination[data-v-5b17c8da] .el-pagination.is-background .btn-next,.wrapper_pagination[data-v-5b17c8da] .el-pagination.is-background .btn-prev,.wrapper_pagination[data-v-5b17c8da] .el-pagination.is-background .el-pager li{background-color:transparent;color:#222}.wrapper_pagination[data-v-5b17c8da] .el-pagination.is-background .btn-next:hover,.wrapper_pagination[data-v-5b17c8da] .el-pagination.is-background .btn-prev:hover,.wrapper_pagination[data-v-5b17c8da] .el-pagination.is-background .el-pager li:not(.disabled):hover{color:#222}.wrapper_pagination[data-v-5b17c8da] .el-pagination.is-background .el-pager li:not(.disabled).active{background-color:#222;color:#fff}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 996:
+/***/ 1002:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template14/Ko-ProductListFilter.vue?vue&type=template&id=5b17c8da&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template14/Ko-ProductListFilter.vue?vue&type=template&id=72a2c162&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _vm.settingByTemplate14 ? _c('div', {
     staticClass: "w-full pb-80 flex flex-col justify-center items-center product-content",
     style: [_vm.settingByTemplate14[0].settingsGeneral, _vm.settingByTemplate14[0].listProductsFilter]
-  }, [_vm._ssrNode("<div class=\"w-full flex flex-col items-center justify-center\" data-v-5b17c8da>", "</div>", [_vm._ssrNode("<div class=\"w-full relative box-content hidden md:flex\" data-v-5b17c8da>", "</div>", [_vm.settingByTemplate14[0].listProductsFilter.visible_img ? _vm._ssrNode("<div data-v-5b17c8da>", "</div>", [_vm._ssrNode("<picture data-v-5b17c8da>", "</picture>", [_vm._ssrNode("<source media=\"(max-width: 799px)\"" + _vm._ssrAttr("srcset", _vm.idCloudinaryBanner(_vm.settingByTemplate14[0].listProductsFilter.img, 'bannerRes', 400)) + " data-v-5b17c8da> <source media=\"(min-width: 800px)\"" + _vm._ssrAttr("srcset", _vm.idCloudinaryBanner(_vm.settingByTemplate14[0].listProductsFilter.img, 'banner')) + " data-v-5b17c8da> "), _c('img', {
+  }, [_c('Ko14MenuLateral', {
+    attrs: {
+      "dataStore": _vm.dataStore,
+      "settingByTemplate": _vm.settingByTemplate14
+    }
+  }), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"w-full flex flex-col items-center justify-center\" data-v-72a2c162>", "</div>", [_vm._ssrNode("<div class=\"w-full relative box-content hidden md:flex\" data-v-72a2c162>", "</div>", [_vm.settingByTemplate14[0].listProductsFilter.visible_img ? _vm._ssrNode("<div data-v-72a2c162>", "</div>", [_vm._ssrNode("<picture data-v-72a2c162>", "</picture>", [_vm._ssrNode("<source media=\"(max-width: 799px)\"" + _vm._ssrAttr("srcset", _vm.idCloudinaryBanner(_vm.settingByTemplate14[0].listProductsFilter.img, 'bannerRes', 400)) + " data-v-72a2c162> <source media=\"(min-width: 800px)\"" + _vm._ssrAttr("srcset", _vm.idCloudinaryBanner(_vm.settingByTemplate14[0].listProductsFilter.img, 'banner')) + " data-v-72a2c162> "), _c('img', {
     directives: [{
       name: "lazy",
       rawName: "v-lazy",
@@ -226,13 +31,15 @@ var render = function render() {
     attrs: {
       "alt": "banner template14"
     }
-  }, [])], 2)]) : _vm._ssrNode("<div class=\"w-full h-100\" data-v-5b17c8da></div>"), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex flex-col items-center\" data-v-5b17c8da>", "</div>", [_vm._ssrNode("<p class=\"font-bold text-30 mb-10\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate14[0].listProductsFilter.color_title};`, null) + " data-v-5b17c8da>" + _vm._ssrEscape("\n          " + _vm._s(_vm.settingByTemplate14[0].listProductsFilter.title) + "\n        ") + "</p> "), _vm._ssrNode("<div class=\"flex flex-row items-center justify-center\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate14[0].listProductsFilter.color_breadCrumbs};`, null) + " data-v-5b17c8da>", "</div>", [_c('nuxt-link', {
+  }, [])], 2)]) : _vm._ssrNode("<div class=\"w-full h-100\" data-v-72a2c162></div>"), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex flex-col items-center\" data-v-72a2c162>", "</div>", [_vm._ssrNode("<p class=\"font-bold text-30 mb-10\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate14[0].listProductsFilter.color_title};`, null) + " data-v-72a2c162>" + _vm._ssrEscape("\n          " + _vm._s(_vm.settingByTemplate14[0].listProductsFilter.title) + "\n        ") + "</p> "), _vm._ssrNode("<div class=\"flex flex-row items-center justify-center\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate14[0].listProductsFilter.color_breadCrumbs};`, null) + " data-v-72a2c162>", "</div>", [_c('nuxt-link', {
     staticClass: "text-14",
     attrs: {
       "to": "/"
     }
-  }, [_vm._v("\n            " + _vm._s(_vm.$t('header_inicio')) + "\n          ")]), _vm._ssrNode(" <p class=\"px-10 text-14 font-bold\" data-v-5b17c8da>&gt;</p> <p class=\"text-14 font-bold\" data-v-5b17c8da>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('header_productos')) + "\n          ") + "</p>")], 2)], 2)], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"w-full h-full flex flex-row justify-start items-start px-10 md:px-5 mt-40 max-w-7xl\" data-v-5b17c8da>", "</div>", [_vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-center items-center mr-0 md:mr-20\" data-v-5b17c8da>", "</div>", [_vm._ssrNode("<div class=\"w-full flex flex-col justify-start items-start pb-25\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate14[0].listProductsFilter.color_categories};`, null) + " data-v-5b17c8da>" + (!_vm.nameCategoryHeader ? "<p class=\"font-semibold uppercase justify-start items-start\" data-v-5b17c8da>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('header_productos')) + "\n          ") + "</p>" : "<div class=\"flex flex-col justify-start\" data-v-5b17c8da><p class=\"font-semibold uppercase justify-start items-start\" data-v-5b17c8da>" + _vm._ssrEscape("\n              " + _vm._s(_vm.nameCategoryHeader) + "\n            ") + "</p> <div class=\"flex flex-row\" data-v-5b17c8da>" + (_vm.nameSubCategoryHeader ? "<p class=\"text-12 mr-4\" data-v-5b17c8da>" + _vm._ssrEscape("\n                " + _vm._s(_vm.nameSubCategoryHeader) + "\n              ") + "</p>" : "<!---->") + " " + (_vm.nameSubCategoryHeader && _vm.etiqueta1 ? "<p class=\"text-12 mr-4\" data-v-5b17c8da>\n                /\n              </p>" : "<!---->") + " " + (_vm.etiqueta1 ? "<p class=\"text-12\" data-v-5b17c8da>" + _vm._ssrEscape("\n                " + _vm._s(_vm.etiqueta1) + "\n              ") + "</p>" : "<!---->") + " " + (_vm.etiqueta2 ? "<p class=\"ml-4 text-12\" data-v-5b17c8da>" + _vm._ssrEscape("/ " + _vm._s(_vm.etiqueta2)) + "</p>" : "<!---->") + "</div></div>") + " " + (_vm.etiqueta1 && _vm.nameCategoryHeader == '' && _vm.nameSubCategoryHeader == '' ? "<div class=\"flex flex-col justify-start\" data-v-5b17c8da><p class=\"text-12\" data-v-5b17c8da>" + _vm._ssrEscape("\n              " + _vm._s(_vm.etiqueta1) + "\n            ") + "</p></div>" : "<!---->") + "</div> "), _vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-center items-center\" data-v-5b17c8da>", "</div>", [_vm._ssrNode("<div class=\"w-full grid grid-cols-2 md:grid-cols-3 gap-4 justify-center items-center text-center\" data-v-5b17c8da>", "</div>", _vm._l(_vm.filterProduct, function (product) {
-    return _vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-center items-center\" data-v-5b17c8da>", "</div>", [_c('Ko14ProductCard', {
+  }, [_vm._v("\n            " + _vm._s(_vm.$t('header_inicio')) + "\n          ")]), _vm._ssrNode(" <p class=\"px-10 text-14 font-bold\" data-v-72a2c162>&gt;</p> <p class=\"text-14 font-bold\" data-v-72a2c162>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('header_productos')) + "\n          ") + "</p>")], 2)], 2)], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"w-full h-full flex flex-row justify-start items-start px-10 md:px-5 mt-40 max-w-7xl\" data-v-72a2c162>", "</div>", [_vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-center items-center mr-0 md:mr-20\" data-v-72a2c162>", "</div>", [_vm._ssrNode("<div class=\"w-full flex flex-row justify-between items-center pb-25\" data-v-72a2c162>", "</div>", [_vm._ssrNode("<div class=\"w-full flex flex-col justify-start items-start\" data-v-72a2c162>" + (!_vm.nameCategoryHeader ? "<p class=\"font-semibold uppercase justify-start items-start\" data-v-72a2c162>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('header_productos')) + "\n            ") + "</p>" : "<div class=\"flex flex-col justify-start\" data-v-72a2c162><p class=\"font-semibold uppercase justify-start items-start\" data-v-72a2c162>" + _vm._ssrEscape("\n                " + _vm._s(_vm.nameCategoryHeader) + "\n              ") + "</p> <div class=\"flex flex-row\" data-v-72a2c162>" + (_vm.nameSubCategoryHeader ? "<p class=\"text-12 mr-4\" data-v-72a2c162>" + _vm._ssrEscape("\n                  " + _vm._s(_vm.nameSubCategoryHeader) + "\n                ") + "</p>" : "<!---->") + " " + (_vm.nameSubCategoryHeader && _vm.etiqueta1 ? "<p class=\"text-12 mr-4\" data-v-72a2c162>\n                  /\n                </p>" : "<!---->") + " " + (_vm.etiqueta1 ? "<p class=\"text-12\" data-v-72a2c162>" + _vm._ssrEscape("\n                  " + _vm._s(_vm.etiqueta1) + "\n                ") + "</p>" : "<!---->") + " " + (_vm.etiqueta2 ? "<p class=\"ml-4 text-12\" data-v-72a2c162>" + _vm._ssrEscape("/ " + _vm._s(_vm.etiqueta2)) + "</p>" : "<!---->") + "</div></div>") + " " + (_vm.etiqueta1 && _vm.nameCategoryHeader == '' && _vm.nameSubCategoryHeader == '' ? "<div class=\"flex flex-col justify-start\" data-v-72a2c162><p class=\"text-12\" data-v-72a2c162>" + _vm._ssrEscape("\n                " + _vm._s(_vm.etiqueta1) + "\n              ") + "</p></div>" : "<!---->") + "</div> "), _vm._ssrNode("<button class=\"flex md:hidden\" data-v-72a2c162>", "</button>", [_c('menu-icon', {
+    staticClass: "text-25"
+  })], 1)], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-center items-center\" data-v-72a2c162>", "</div>", [_vm._ssrNode("<div class=\"w-full grid grid-cols-2 md:grid-cols-3 gap-4 justify-center items-center text-center\" data-v-72a2c162>", "</div>", _vm._l(_vm.filterProduct, function (product) {
+    return _vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-center items-center\" data-v-72a2c162>", "</div>", [_c('Ko14ProductCard', {
       staticClass: "w-full",
       attrs: {
         "product": product,
@@ -240,7 +47,7 @@ var render = function render() {
         "settingsGeneral": _vm.settingByTemplate14[0].settingsGeneral
       }
     })], 1);
-  }), 0), _vm._ssrNode(" "), _vm.fullProducts.length == 0 ? _vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-center items-center text-center\" data-v-5b17c8da>", "</div>", [_c('nuxt-link', {
+  }), 0), _vm._ssrNode(" "), _vm.fullProducts.length == 0 ? _vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-center items-center text-center\" data-v-72a2c162>", "</div>", [_c('nuxt-link', {
     attrs: {
       "to": "/productos"
     }
@@ -259,7 +66,7 @@ var render = function render() {
     on: {
       "click": _vm.clear
     }
-  })]), _vm._ssrNode(" <p class=\"my-15 font-semibold text-20 text-gray-600\" data-v-5b17c8da>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('home_msgCatalogo')) + "\n            ") + "</p>")], 2) : _vm._e(), _vm._ssrNode(" "), _vm.fullProducts.length > _vm.numVistas ? _vm._ssrNode("<div class=\"w-full flex justify-center items-center wrapper_pagination mt-20\" data-v-5b17c8da>", "</div>", [_c('el-pagination', {
+  })]), _vm._ssrNode(" <p class=\"my-15 font-semibold text-20 text-gray-600\" data-v-72a2c162>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('home_msgCatalogo')) + "\n            ") + "</p>")], 2) : _vm._e(), _vm._ssrNode(" "), _vm.fullProducts.length > _vm.numVistas ? _vm._ssrNode("<div class=\"w-full flex justify-center items-center wrapper_pagination mt-20\" data-v-72a2c162>", "</div>", [_c('el-pagination', {
     staticClass: "pagination",
     attrs: {
       "background": "",
@@ -276,7 +83,7 @@ var render = function render() {
         _vm.currentPage = $event;
       }
     }
-  })], 1) : _vm._e()], 2)], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"hidden mr-30 md:flex flex-col justify-between items-start sticky top-20 w-full max-w-[250px] lg:max-w-[300px] transition-all ease-in duration-0.3 content-left\" data-v-5b17c8da>", "</div>", [_vm._ssrNode("<p class=\"w-auto pb-10 uppercase font-semibold cursor-pointer text-16\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate14[0].listProductsFilter.color_categories};`, null) + " data-v-5b17c8da>" + _vm._ssrEscape("\n          " + _vm._s(_vm.$t('header_buscar_limpiar')) + "\n        ") + "</p> "), _c('el-collapse', {
+  })], 1) : _vm._e()], 2)], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"hidden mr-30 md:flex flex-col justify-between items-start sticky w-full max-w-[250px] lg:max-w-[300px] transition-all ease-in duration-0.3 content-left\" style=\"top: 140px\" data-v-72a2c162>", "</div>", [_vm._ssrNode("<p class=\"w-auto pb-10 uppercase font-semibold cursor-pointer text-16\" data-v-72a2c162>" + _vm._ssrEscape("\n          " + _vm._s(_vm.$t('header_buscar_limpiar')) + "\n        ") + "</p> "), _c('el-collapse', {
     model: {
       value: _vm.activeNames,
       callback: function ($$v) {
@@ -455,11 +262,11 @@ var render = function render() {
         return _vm.getProductsFilter('smallerNumber');
       }
     }
-  }, [_vm._v("\n                " + _vm._s(_vm.$t('home_fprecioM')) + "\n              ")])])])], 2)], 2)], 2)], 2)]) : _vm._e();
+  }, [_vm._v("\n                " + _vm._s(_vm.$t('home_fprecioM')) + "\n              ")])])])], 2)], 2)], 2)], 2)], 2) : _vm._e();
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/template14/Ko-ProductListFilter.vue?vue&type=template&id=5b17c8da&scoped=true&
+// CONCATENATED MODULE: ./components/template14/Ko-ProductListFilter.vue?vue&type=template&id=72a2c162&scoped=true&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -478,7 +285,8 @@ var idCloudinary = __webpack_require__(15);
   name: 'Ko14-ProductList-Filter',
   mixins: [filterProducts["a" /* default */], idCloudinary["a" /* default */]],
   components: {
-    Ko14ProductCard: () => __webpack_require__.e(/* import() */ 27).then(__webpack_require__.bind(null, 911))
+    Ko14ProductCard: () => __webpack_require__.e(/* import() */ 27).then(__webpack_require__.bind(null, 917)),
+    Ko14MenuLateral: () => __webpack_require__.e(/* import() */ 134).then(__webpack_require__.bind(null, 1057))
   },
   props: {
     dataStore: Object,
@@ -546,6 +354,9 @@ var idCloudinary = __webpack_require__(15);
     }
   },
   methods: {
+    openMenuLateral() {
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true);
+    },
     getQuery() {
       if (this.$route.query && this.$route.query.category) {
         this.sendCategoryUrlMix(this.$route.query.category);
@@ -694,7 +505,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(665)
+  var style0 = __webpack_require__(667)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -707,12 +518,212 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "5b17c8da",
+  "72a2c162",
   "260a0783"
   
 )
 
 /* harmony default export */ var Ko_ProductListFilter = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ 363:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(668);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add CSS to SSR context
+var add = __webpack_require__(6).default
+module.exports.__inject__ = function (context) {
+  add("536b4d5b", content, true, context)
+};
+
+/***/ }),
+
+/***/ 64:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+  methods: {
+    // filtro etiqueta URL
+    sendTagUrlMix(tag_id, tag_Name) {
+      this.$store.commit('products/FILTER_BY', {
+        type: ['tag'],
+        data: ''
+      });
+      this.$store.state.products.payloadTag = parseInt(tag_id);
+      this.$store.state.products.payloadTagName = tag_Name;
+    },
+    // filtro categoría URL
+    sendCategoryUrlMix(value) {
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '');
+      let urlFiltrada = decodeURIComponent(value);
+      this.$store.commit('products/FILTER_BY', {
+        type: ['category'],
+        data: urlFiltrada
+      });
+      if (this.$store.getters['products/filterProducts'].length) {
+        this.$store.commit('SET_CATEGORY_PRODUCTO', urlFiltrada);
+      } else {
+        this.$store.commit('SET_CATEGORY_PRODUCTO', '');
+      }
+    },
+    // filtro subcategoría URL
+    SendSubCategoryUrlMix(value, categories, subcategories) {
+      let urlFiltradaTemp = decodeURIComponent(value);
+      let resTemp = urlFiltradaTemp.split('^');
+      let urlFiltrada = decodeURIComponent(resTemp[0]);
+      let filtradoSubCategories = subcategories.find(element => {
+        if (element.categoria == parseInt(resTemp[1]) && element.nombre_subcategoria == urlFiltrada) {
+          return element;
+        }
+      });
+      if (filtradoSubCategories) {
+        let filtradoCategories = categories.find(element => element.id == parseInt(resTemp[1]));
+        this.$store.commit('products/FILTER_BY', {
+          type: ['subcategory'],
+          data: filtradoSubCategories.id
+        });
+        if (this.$store.getters['products/filterProducts'].length) {
+          this.$store.commit('SET_CATEGORY_PRODUCTO', filtradoCategories.nombre_categoria_producto);
+          this.$store.commit('SET_SUBCATEGORY_PRODUCTO', filtradoSubCategories.nombre_subcategoria);
+        } else {
+          this.$store.commit('SET_CATEGORY_PRODUCTO', '');
+          this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '');
+        }
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: ['subcategory'],
+          data: ''
+        });
+      }
+    },
+    // filtro categoría, subcategoría y etiqueta
+    getProductsFilter(value, tag_id, tag_Name, Lateral) {
+      this.$store.commit('SET_STATE_BANNER', false);
+      let type = this.$store.state.products.type;
+      let payload = this.$store.state.products.payload;
+      if (type.length < 2) {
+        this.$store.state.products.payloadTag = tag_id ? tag_id : this.$store.state.products.payloadTag ? this.$store.state.products.payloadTag : '';
+        this.$store.state.products.payloadTagName = tag_Name ? tag_Name : this.$store.state.products.payloadTagName ? this.$store.state.products.payloadTagName : '';
+      }
+      if (type && type.length >= 1) {
+        if (type[0] == 'category' || type[0] == 'subcategory' || type[0] == 'tag') {
+          this.$store.commit('products/FILTER_BY', {
+            type: [type[0], `${value}`],
+            data: payload
+          });
+        }
+        if (type[0] == 'category' || type[0] == 'subcategory') {
+          if (type[1] == 'tag') {
+            this.$store.commit('products/FILTER_BY', {
+              type: [type[0], type[1], `${value}`],
+              data: payload
+            });
+            this.$store.state.products.payloadTag2 = tag_id ? tag_id : this.$store.state.products.payloadTag2 ? this.$store.state.products.payloadTag2 : '';
+            this.$store.state.products.payloadTag2Name = tag_Name ? tag_Name : this.$store.state.products.payloadTag2Name ? this.$store.state.products.payloadTag2Name : '';
+          }
+        } else {
+          this.$store.state.products.type = [];
+          this.$store.commit('products/FILTER_BY', {
+            type: [`${value}`],
+            data: ''
+          });
+          this.setURlTag(tag_id, tag_Name);
+        }
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: [`${value}`],
+          data: ''
+        });
+        this.setURlTag(tag_id, tag_Name);
+      }
+      this.currentPage = 1;
+      if (Lateral === true) {
+        this.$router.push({
+          path: '/productos'
+        });
+        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false);
+      }
+    },
+    allCategories() {
+      this.$store.commit('products/FILTER_BY', {
+        type: ['all'],
+        data: ''
+      });
+      this.currentPage = 1;
+    },
+    SearchProduct(search) {
+      if (search.length) {
+        this.search = search;
+        this.$router.push({
+          path: '',
+          query: {
+            search: search
+          }
+        });
+        this.$store.commit('products/FILTER_BY', {
+          type: ['search'],
+          data: search
+        });
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: ['all'],
+          data: ''
+        });
+      }
+      this.currentPage = 1;
+    },
+    setURlTag(id, name) {
+      if (this.$store.state.products.type[0] == 'tag') {
+        this.$router.push({
+          path: '',
+          query: {}
+        });
+        this.$router.push({
+          path: '',
+          query: {
+            tagId: id,
+            tagName: name
+          }
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ 667:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductListFilter_vue_vue_type_style_index_0_id_72a2c162_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(363);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductListFilter_vue_vue_type_style_index_0_id_72a2c162_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductListFilter_vue_vue_type_style_index_0_id_72a2c162_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductListFilter_vue_vue_type_style_index_0_id_72a2c162_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductListFilter_vue_vue_type_style_index_0_id_72a2c162_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ 668:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".product-content[data-v-72a2c162]{background:var(--background_color_1)}.content-left[data-v-72a2c162] .el-collapse{border-bottom:1px solid var(--color_icon);border-top:1px solid var(--color_icon);width:100%}.content-left[data-v-72a2c162] .el-collapse-item__wrap{background-color:transparent;border-bottom:1px solid var(--color_icon);will-change:height}.content-left[data-v-72a2c162] .el-collapse-item__header{background-color:transparent;border-bottom:1px solid var(--color_icon);color:var(--color_subCategories);font-size:15px;font-weight:600}.content-left[data-v-72a2c162] .el-collapse-item__header.is-active{border-bottom:none}.content-left[data-v-72a2c162] .el-collapse-item__arrow{color:var(--color_icon)}.input-slide[data-v-72a2c162]{background:transparent;border-style:none;color:var(--color_categories);cursor:pointer;font-size:15px;height:30px;width:100%}.categorys-list[data-v-72a2c162],.subcategory-list[data-v-72a2c162]{grid-gap:1rem;align-items:center;display:grid;gap:1rem;grid-template-columns:repeat(1,minmax(0,1fr));justify-content:flex-start;width:100%}.subcategory-list[data-v-72a2c162],.txt-Filter[data-v-72a2c162]{transition-duration:.15s;transition-duration:.2s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1)}.txt-Filter[data-v-72a2c162]{align-items:center;color:var(--color_categories);cursor:pointer;display:flex;flex-direction:row;font-size:15px;font-weight:400;justify-content:flex-start;line-height:1.3;padding-right:1px;width:100%}.txt-Filter[data-v-72a2c162]:hover{color:#eb7025}.txt-categorys[data-v-72a2c162]{align-items:center;color:var(--color_categories);cursor:pointer;display:flex;flex-direction:row;font-size:15px;font-weight:400;justify-content:flex-start;line-height:1.3;padding-right:1px;transition-duration:.15s;transition-duration:.2s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1);width:100%}.txt-categorys[data-v-72a2c162]:hover{color:#eb7025}.pagination[data-v-72a2c162]{background:transparent;color:var(--color_pagination);font-size:18px}.wrapper_pagination[data-v-72a2c162] .el-pagination.is-background .btn-next,.wrapper_pagination[data-v-72a2c162] .el-pagination.is-background .btn-prev,.wrapper_pagination[data-v-72a2c162] .el-pagination.is-background .el-pager li{background-color:transparent;color:var(--color_pagination)}.wrapper_pagination[data-v-72a2c162] .el-pagination.is-background .btn-next:hover,.wrapper_pagination[data-v-72a2c162] .el-pagination.is-background .btn-prev:hover,.wrapper_pagination[data-v-72a2c162] .el-pagination.is-background .el-pager li:not(.disabled):hover{color:var(--color_pagination)}.wrapper_pagination[data-v-72a2c162] .el-pagination.is-background .el-pager li:not(.disabled).active{background-color:var(--color_pagination);color:#fff}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
 
 /***/ })
 

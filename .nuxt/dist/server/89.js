@@ -1,6 +1,160 @@
 exports.ids = [89];
 exports.modules = {
 
+/***/ 1005:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-ProductListFilterHoko.vue?vue&type=template&id=192afca7&scoped=true&
+var render = function render() {
+  var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3;
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "product-content",
+    style: [_vm.settingByTemplate11[0].settingGeneral, _vm.settingByTemplate11[0].productList, {
+      '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate11[0]) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settingGeneral) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'Roboto'
+    }]
+  }, [_vm._ssrNode("<div class=\"bannerProduct\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div class=\"crumb\" data-v-192afca7>", "</div>", [_c('nuxt-link', {
+    attrs: {
+      "to": "/"
+    }
+  }, [_c('p', {
+    staticClass: "txt-crumb s1"
+  }, [_vm._v(_vm._s(_vm.$t('header_inicio')))])]), _vm._ssrNode(" <p class=\"separatorCrumb\" data-v-192afca7>/</p> <p class=\"txt-crumb s2\" data-v-192afca7>" + _vm._ssrEscape("\n        " + _vm._s(_vm.$t('header_productos')) + "\n      ") + "</p>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"container-product-max-w\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div class=\"content-shop-items\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div id=\"section\" class=\"producto-items-content\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div class=\"content-item\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div class=\"content-item-productos\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div id=\"grid-selection\" class=\"product-conten-items\" data-v-192afca7>", "</div>", _vm._l(_vm.producthoko.data, function (product) {
+    return _vm._ssrNode("<div class=\"content-products h-full\" data-v-192afca7>", "</div>", [_c('KoProdcutCardFilter', {
+      staticClass: "product-list",
+      attrs: {
+        "product": product,
+        "settingKcardProduct": _vm.settingByTemplate11[0].cardProduct,
+        "settingGeneral": _vm.settingByTemplate11[0].settingGeneral
+      }
+    })], 1);
+  }), 0), _vm._ssrNode(" "), _vm.producthoko.total == 0 ? _vm._ssrNode("<div class=\"content-products-empty\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div class=\"header-content-logo\" data-v-192afca7>", "</div>", [_c('nuxt-link', {
+    staticClass: "wrapper-logo",
+    attrs: {
+      "to": "/productos"
+    }
+  }, [_c('img', {
+    directives: [{
+      name: "lazy",
+      rawName: "v-lazy",
+      value: `${this.$store.state.urlKomercia}/logos/${_vm.dataStore.tienda.logo}`,
+      expression: "\n                      `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`\n                    "
+    }],
+    staticClass: "header-logo",
+    attrs: {
+      "alt": "Logo Img"
+    }
+  })])], 1), _vm._ssrNode(" <p class=\"txt-products-empty\" data-v-192afca7>" + _vm._ssrEscape(_vm._s(_vm.$t('home_msgCatalogo'))) + "</p>")], 2) : _vm._e(), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"pagination-medium\" data-v-192afca7>", "</div>", [_vm.producthoko.total > 10 ? _vm._ssrNode("<div class=\"product_pagination\" data-v-192afca7>", "</div>", [_c('el-pagination', {
+    staticClass: "pagination",
+    attrs: {
+      "background": "",
+      "layout": "prev, pager, next",
+      "hide-on-single-page": true,
+      "page-count": _vm.producthoko.last_page,
+      "current-page": _vm.currentPage
+    },
+    on: {
+      "current-change": _vm.currentChange
+    }
+  })], 1) : _vm._e()])], 2)])])])])], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/template11/ko-ProductListFilterHoko.vue?vue&type=template&id=192afca7&scoped=true&
+
+// EXTERNAL MODULE: ./components/template11/_productcard/ProductCardHoko.vue + 4 modules
+var ProductCardHoko = __webpack_require__(274);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-ProductListFilterHoko.vue?vue&type=script&lang=js&
+
+/* harmony default export */ var ko_ProductListFilterHokovue_type_script_lang_js_ = ({
+  components: {
+    KoProdcutCardFilter: ProductCardHoko["a" /* default */]
+  },
+  props: {
+    settingByTemplate11: Array,
+    dataStore: Object
+  },
+  name: 'Ko-ProductList-Filter',
+  mounted() {
+    if (this.previousPage) {
+      this.currentPage = this.previousPage;
+    }
+    this.currentChange(1);
+  },
+  data() {
+    return {
+      currentPage: 1
+    };
+  },
+  computed: {
+    previousPage() {
+      return this.$store.state.previousPage;
+    },
+    producthoko() {
+      return this.$store.state.producthoko;
+    }
+  },
+  methods: {
+    currentChange(page) {
+      this.$store.dispatch('GET_PRODUCTSHOKO', page);
+      this.currentPage = page;
+    }
+  },
+  watch: {
+    currentPage() {
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage);
+      let timerTimeout = null;
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null;
+        window.scrollBy(0, -1500);
+      }, 250);
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage;
+      }
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/template11/ko-ProductListFilterHoko.vue?vue&type=script&lang=js&
+ /* harmony default export */ var template11_ko_ProductListFilterHokovue_type_script_lang_js_ = (ko_ProductListFilterHokovue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./components/template11/ko-ProductListFilterHoko.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(673)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  template11_ko_ProductListFilterHokovue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "192afca7",
+  "c5b4e35e"
+  
+)
+
+/* harmony default export */ var ko_ProductListFilterHoko = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ 217:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -194,7 +348,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(672);
+var content = __webpack_require__(674);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -206,7 +360,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 671:
+/***/ 673:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -218,7 +372,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 672:
+/***/ 674:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -230,160 +384,6 @@ ___CSS_LOADER_EXPORT___.push([module.i, ".product-content[data-v-192afca7]{backg
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
 
-
-/***/ }),
-
-/***/ 999:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-ProductListFilterHoko.vue?vue&type=template&id=192afca7&scoped=true&
-var render = function render() {
-  var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3;
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', {
-    staticClass: "product-content",
-    style: [_vm.settingByTemplate11[0].settingGeneral, _vm.settingByTemplate11[0].productList, {
-      '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate11[0]) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settingGeneral) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'Roboto'
-    }]
-  }, [_vm._ssrNode("<div class=\"bannerProduct\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div class=\"crumb\" data-v-192afca7>", "</div>", [_c('nuxt-link', {
-    attrs: {
-      "to": "/"
-    }
-  }, [_c('p', {
-    staticClass: "txt-crumb s1"
-  }, [_vm._v(_vm._s(_vm.$t('header_inicio')))])]), _vm._ssrNode(" <p class=\"separatorCrumb\" data-v-192afca7>/</p> <p class=\"txt-crumb s2\" data-v-192afca7>" + _vm._ssrEscape("\n        " + _vm._s(_vm.$t('header_productos')) + "\n      ") + "</p>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"container-product-max-w\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div class=\"content-shop-items\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div id=\"section\" class=\"producto-items-content\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div class=\"content-item\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div class=\"content-item-productos\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div id=\"grid-selection\" class=\"product-conten-items\" data-v-192afca7>", "</div>", _vm._l(_vm.producthoko.data, function (product) {
-    return _vm._ssrNode("<div class=\"content-products h-full\" data-v-192afca7>", "</div>", [_c('KoProdcutCardFilter', {
-      staticClass: "product-list",
-      attrs: {
-        "product": product,
-        "settingKcardProduct": _vm.settingByTemplate11[0].cardProduct,
-        "settingGeneral": _vm.settingByTemplate11[0].settingGeneral
-      }
-    })], 1);
-  }), 0), _vm._ssrNode(" "), _vm.producthoko.total == 0 ? _vm._ssrNode("<div class=\"content-products-empty\" data-v-192afca7>", "</div>", [_vm._ssrNode("<div class=\"header-content-logo\" data-v-192afca7>", "</div>", [_c('nuxt-link', {
-    staticClass: "wrapper-logo",
-    attrs: {
-      "to": "/productos"
-    }
-  }, [_c('img', {
-    directives: [{
-      name: "lazy",
-      rawName: "v-lazy",
-      value: `${this.$store.state.urlKomercia}/logos/${_vm.dataStore.tienda.logo}`,
-      expression: "\n                      `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`\n                    "
-    }],
-    staticClass: "header-logo",
-    attrs: {
-      "alt": "Logo Img"
-    }
-  })])], 1), _vm._ssrNode(" <p class=\"txt-products-empty\" data-v-192afca7>" + _vm._ssrEscape(_vm._s(_vm.$t('home_msgCatalogo'))) + "</p>")], 2) : _vm._e(), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"pagination-medium\" data-v-192afca7>", "</div>", [_vm.producthoko.total > 10 ? _vm._ssrNode("<div class=\"product_pagination\" data-v-192afca7>", "</div>", [_c('el-pagination', {
-    staticClass: "pagination",
-    attrs: {
-      "background": "",
-      "layout": "prev, pager, next",
-      "hide-on-single-page": true,
-      "page-count": _vm.producthoko.last_page,
-      "current-page": _vm.currentPage
-    },
-    on: {
-      "current-change": _vm.currentChange
-    }
-  })], 1) : _vm._e()])], 2)])])])])], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/template11/ko-ProductListFilterHoko.vue?vue&type=template&id=192afca7&scoped=true&
-
-// EXTERNAL MODULE: ./components/template11/_productcard/ProductCardHoko.vue + 4 modules
-var ProductCardHoko = __webpack_require__(274);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template11/ko-ProductListFilterHoko.vue?vue&type=script&lang=js&
-
-/* harmony default export */ var ko_ProductListFilterHokovue_type_script_lang_js_ = ({
-  components: {
-    KoProdcutCardFilter: ProductCardHoko["a" /* default */]
-  },
-  props: {
-    settingByTemplate11: Array,
-    dataStore: Object
-  },
-  name: 'Ko-ProductList-Filter',
-  mounted() {
-    if (this.previousPage) {
-      this.currentPage = this.previousPage;
-    }
-    this.currentChange(1);
-  },
-  data() {
-    return {
-      currentPage: 1
-    };
-  },
-  computed: {
-    previousPage() {
-      return this.$store.state.previousPage;
-    },
-    producthoko() {
-      return this.$store.state.producthoko;
-    }
-  },
-  methods: {
-    currentChange(page) {
-      this.$store.dispatch('GET_PRODUCTSHOKO', page);
-      this.currentPage = page;
-    }
-  },
-  watch: {
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage);
-      let timerTimeout = null;
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null;
-        window.scrollBy(0, -1500);
-      }, 250);
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage;
-      }
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/template11/ko-ProductListFilterHoko.vue?vue&type=script&lang=js&
- /* harmony default export */ var template11_ko_ProductListFilterHokovue_type_script_lang_js_ = (ko_ProductListFilterHokovue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./components/template11/ko-ProductListFilterHoko.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(671)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  template11_ko_ProductListFilterHokovue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "192afca7",
-  "c5b4e35e"
-  
-)
-
-/* harmony default export */ var ko_ProductListFilterHoko = __webpack_exports__["default"] = (component.exports);
 
 /***/ })
 

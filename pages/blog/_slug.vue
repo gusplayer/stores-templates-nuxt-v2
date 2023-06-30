@@ -29,7 +29,7 @@ export default {
         10: 'K10Article',
         11: 'K11Article',
         13: 'K13Article',
-        // 14: 'K14Contact',
+        14: 'K13Article',
       },
     }
   },

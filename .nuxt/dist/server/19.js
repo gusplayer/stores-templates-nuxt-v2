@@ -542,7 +542,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(556);
+var content = __webpack_require__(558);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -554,7 +554,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 555:
+/***/ 557:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -566,7 +566,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 556:
+/***/ 558:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -629,7 +629,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(71);
+var content = __webpack_require__(72);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -641,7 +641,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 68:
+/***/ 69:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -916,7 +916,7 @@ var render = function render() {
       "width": "220px"
     },
     attrs: {
-      "src": __webpack_require__(69),
+      "src": __webpack_require__(70),
       "alt": "Product img"
     }
   }), _vm._v(" "), _c('p', {
@@ -2206,7 +2206,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(70)
+  var style0 = __webpack_require__(71)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2228,14 +2228,14 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 69:
+/***/ 70:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/icono_cesta.1a31c64.png";
 
 /***/ }),
 
-/***/ 70:
+/***/ 71:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2247,7 +2247,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 71:
+/***/ 72:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2262,7 +2262,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 973:
+/***/ 979:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2352,7 +2352,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/headers/header2/Ko-Header-2.vue?vue&type=template&id=36fe611d&scoped=true&
 
 // EXTERNAL MODULE: ./components/headers/_order1/order1.vue + 4 modules
-var order1 = __webpack_require__(68);
+var order1 = __webpack_require__(69);
 
 // EXTERNAL MODULE: ./components/headers/_order1/openMenuRight.vue + 4 modules
 var openMenuRight = __webpack_require__(219);
@@ -2620,7 +2620,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(555)
+  var style0 = __webpack_require__(557)
 if (style0.__inject__) style0.__inject__(context)
 
 }

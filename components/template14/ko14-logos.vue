@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex justify-center items-center py-30 px-10 md:px-0"
+    class="w-full flex justify-center items-center py-30 px-10"
     :style="`background-color: ${logos['--background_color_1']}`"
   >
     <div class="w-full max-w-7xl flex justify-center items-center">

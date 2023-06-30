@@ -1,14 +1,14 @@
 exports.ids = [7];
 exports.modules = {
 
-/***/ 961:
+/***/ 967:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template7/index.vue?vue&type=template&id=3d2652a4&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template7/index.vue?vue&type=template&id=aa9d580c&
 var render = function render() {
   var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6, _this$settingByTempla7, _this$settingByTempla8, _this$settingByTempla9;
   var _vm = this,
@@ -68,7 +68,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template7/index.vue?vue&type=template&id=3d2652a4&
+// CONCATENATED MODULE: ./pages/template7/index.vue?vue&type=template&id=aa9d580c&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -79,15 +79,15 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template7',
   components: {
-    KCarousel: () => __webpack_require__.e(/* import() */ 100).then(__webpack_require__.bind(null, 947)),
-    KPromo: () => __webpack_require__.e(/* import() */ 154).then(__webpack_require__.bind(null, 1030)),
-    KProductList: () => __webpack_require__.e(/* import() */ 84).then(__webpack_require__.bind(null, 1031)),
-    KAdvertising: () => __webpack_require__.e(/* import() */ 151).then(__webpack_require__.bind(null, 1032)),
-    KGify: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 1033)),
-    KHowWork: () => __webpack_require__.e(/* import() */ 152).then(__webpack_require__.bind(null, 1034)),
-    KNews: () => __webpack_require__.e(/* import() */ 150).then(__webpack_require__.bind(null, 1035)),
-    KBlog: () => __webpack_require__.e(/* import() */ 99).then(__webpack_require__.bind(null, 948)),
-    KWrapper: () => __webpack_require__.e(/* import() */ 153).then(__webpack_require__.bind(null, 1036))
+    KCarousel: () => __webpack_require__.e(/* import() */ 100).then(__webpack_require__.bind(null, 953)),
+    KPromo: () => __webpack_require__.e(/* import() */ 157).then(__webpack_require__.bind(null, 1036)),
+    KProductList: () => __webpack_require__.e(/* import() */ 84).then(__webpack_require__.bind(null, 1037)),
+    KAdvertising: () => __webpack_require__.e(/* import() */ 154).then(__webpack_require__.bind(null, 1038)),
+    KGify: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 1039)),
+    KHowWork: () => __webpack_require__.e(/* import() */ 155).then(__webpack_require__.bind(null, 1040)),
+    KNews: () => __webpack_require__.e(/* import() */ 153).then(__webpack_require__.bind(null, 1041)),
+    KBlog: () => __webpack_require__.e(/* import() */ 99).then(__webpack_require__.bind(null, 954)),
+    KWrapper: () => __webpack_require__.e(/* import() */ 156).then(__webpack_require__.bind(null, 1042))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -127,7 +127,7 @@ var external_vuex_ = __webpack_require__(7);
   },
   methods: {
     addEventListenerTemplate07(e) {
-      if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080') || e.origin.includes('https://panel.komercia.xyz')) {
+      if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
         if (e && e.data && e.data.component && e.data.template == 7) {
           this.$store.commit('SET_CURRENTSETTING07', e.data);
           if (e.data.component == 'banner') {

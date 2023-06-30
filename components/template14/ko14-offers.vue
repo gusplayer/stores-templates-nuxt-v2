@@ -1,10 +1,10 @@
 <template>
   <div
-    class="content-section w-full flex flex-col justify-center items-center py-20"
+    class="content-section w-full flex flex-col justify-center items-center py-20 px-10"
     :style="[offers, settingGeneral]"
   >
     <div
-      class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4 items-center justify-center"
+      class="md:w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4 items-center justify-center"
     >
       <a
         class="w-full"

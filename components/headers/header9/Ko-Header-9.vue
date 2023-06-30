@@ -2,7 +2,7 @@
   <div
     id="navbar"
     v-if="settingByTemplate14"
-    class="w-full flex justify-center items-center sticky top-0 wrapper-header"
+    class="w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center sticky top-0 px-10 wrapper-header"
     :style="[
       settingByTemplate14[0].setting14Header,
       settingByTemplate14[0].setting14General,
@@ -14,7 +14,7 @@
   >
     <div id="headbg" class="w-full max-w-7xl flex justify-between items-center">
       <KoOrder :dataStore="dataStore" />
-      <div class="flex justify-center items-center py-1">
+      <div class="flex justify-center items-center max-h-[120px] md:max-h-10/0">
         <nuxt-link
           to="/"
           class="w-full flex justify-center items-center"
@@ -31,17 +31,13 @@
       <div
         id="swiper-slide-categories"
         v-if="settingByTemplate14[0].pages.values"
-        class="flex flex-row justify-start items-center box-border;"
+        class="hidden md:flex flex-row justify-start items-center box-border"
       >
         <div
           v-for="(item, index) in settingByTemplate14[0].pages.values"
           :key="`${index}${item.displayName}`"
         >
-          <nuxt-link
-            v-if="!item.isExternalLink"
-            :to="item.url"
-            class="content-button"
-          >
+          <nuxt-link v-if="!item.isExternalLink" :to="item.url">
             <p
               class="mr-20 px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
               :class="btnSelect == item.url ? 'btn-active' : ''"
@@ -50,13 +46,7 @@
               {{ item.displayName }}
             </p>
           </nuxt-link>
-          <a
-            v-else
-            :href="item.url"
-            class="content-button"
-            rel="noreferrer noopener"
-            target="_blank"
-          >
+          <a v-else :href="item.url" rel="noreferrer noopener" target="_blank">
             <p class="btn">
               {{ item.displayName }}
             </p>
@@ -64,7 +54,7 @@
         </div>
       </div>
       <div
-        class="flex flex-row justify-center items-center cursor-pointer transition-all ease-in duration-0.3"
+        class="hidden md:flex flex-row justify-center items-center cursor-pointer transition-all ease-in duration-0.3"
         @click="openOrder"
       >
         <i
@@ -95,6 +85,59 @@
           </span>
         </div>
       </div>
+      <button class="flex md:hidden" @click="stateMenu = !stateMenu">
+        <menu-icon class="text-25" />
+      </button>
+      <el-drawer
+        :visible.sync="stateMenu"
+        direction="ttb"
+        :withHeader="false"
+        :modal-append-to-body="false"
+        size="23%"
+      >
+        <div class="w-full flex flex-col justify-center items-center h-full">
+          <div
+            v-if="settingByTemplate14[0].pages.values"
+            class="w-full h-full max-h-[100px] max-w-[300px] flex flex-col justify-center items-center overflow-y-auto"
+          >
+            <div
+              v-for="(item, index) in settingByTemplate14[0].pages.values"
+              :key="`${index}${item.displayName}`"
+            >
+              <nuxt-link
+                v-if="!item.isExternalLink"
+                :to="item.url"
+                class="my-5 block"
+              >
+                <p
+                  class="px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
+                  :class="btnSelect == item.url ? 'btn-active' : ''"
+                  @click="btnActivate(item.url)"
+                >
+                  {{ item.displayName }}
+                </p>
+              </nuxt-link>
+              <a
+                v-else
+                :href="item.url"
+                rel="noreferrer noopener"
+                class="my-5 block"
+                target="_blank"
+              >
+                <p class="btn">
+                  {{ item.displayName }}
+                </p>
+              </a>
+            </div>
+          </div>
+          <button
+            class="w-full max-w-[300px] text-center bg-red-500 text-white-white rounded-8 px-5 py-3 mt-20"
+            @click="stateMenu = !stateMenu"
+          >
+            Cerrar
+          </button>
+        </div>
+      </el-drawer>
     </div>
   </div>
 </template>
@@ -115,6 +158,7 @@ export default {
       btnSelect: '',
       search: '',
       showSearch: false,
+      stateMenu: false,
     }
   },
   computed: {
@@ -208,6 +252,8 @@ export default {
   z-index: 99999999999 !important;
 }
 .btn-active {
+  padding-top: var(--padding_logo);
+  padding-bottom: var(--padding_logo);
   box-shadow: inset 0px -48px 0px -44px var(--color_border);
 }
 .btn {

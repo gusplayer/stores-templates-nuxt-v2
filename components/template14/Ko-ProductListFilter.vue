@@ -7,6 +7,10 @@
       settingByTemplate14[0].listProductsFilter,
     ]"
   >
+    <Ko14MenuLateral
+      :dataStore="dataStore"
+      :settingByTemplate="settingByTemplate14"
+    />
     <div class="w-full flex flex-col items-center justify-center">
       <div class="w-full relative box-content hidden md:flex">
         <div v-if="settingByTemplate14[0].listProductsFilter.visible_img">
@@ -67,48 +71,50 @@
         <div
           class="w-full h-full flex flex-col justify-center items-center mr-0 md:mr-20"
         >
-          <div
-            class="w-full flex flex-col justify-start items-start pb-25"
-            :style="`color: ${settingByTemplate14[0].listProductsFilter.color_categories};`"
-          >
-            <p
-              class="font-semibold uppercase justify-start items-start"
-              v-if="!nameCategoryHeader"
-            >
-              {{ $t('header_productos') }}
-            </p>
-            <div class="flex flex-col justify-start" v-else>
-              <p class="font-semibold uppercase justify-start items-start">
-                {{ nameCategoryHeader }}
+          <div class="w-full flex flex-row justify-between items-center pb-25">
+            <div class="w-full flex flex-col justify-start items-start">
+              <p
+                class="font-semibold uppercase justify-start items-start"
+                v-if="!nameCategoryHeader"
+              >
+                {{ $t('header_productos') }}
               </p>
-              <div class="flex flex-row">
-                <p class="text-12 mr-4" v-if="nameSubCategoryHeader">
-                  {{ nameSubCategoryHeader }}
+              <div class="flex flex-col justify-start" v-else>
+                <p class="font-semibold uppercase justify-start items-start">
+                  {{ nameCategoryHeader }}
                 </p>
-                <p
-                  class="text-12 mr-4"
-                  v-if="nameSubCategoryHeader && etiqueta1"
-                >
-                  /
-                </p>
-                <p class="text-12" v-if="etiqueta1">
+                <div class="flex flex-row">
+                  <p class="text-12 mr-4" v-if="nameSubCategoryHeader">
+                    {{ nameSubCategoryHeader }}
+                  </p>
+                  <p
+                    class="text-12 mr-4"
+                    v-if="nameSubCategoryHeader && etiqueta1"
+                  >
+                    /
+                  </p>
+                  <p class="text-12" v-if="etiqueta1">
+                    {{ etiqueta1 }}
+                  </p>
+                  <p class="ml-4 text-12" v-if="etiqueta2">/ {{ etiqueta2 }}</p>
+                </div>
+              </div>
+              <div
+                class="flex flex-col justify-start"
+                v-if="
+                  etiqueta1 &&
+                  nameCategoryHeader == '' &&
+                  nameSubCategoryHeader == ''
+                "
+              >
+                <p class="text-12">
                   {{ etiqueta1 }}
                 </p>
-                <p class="ml-4 text-12" v-if="etiqueta2">/ {{ etiqueta2 }}</p>
               </div>
             </div>
-            <div
-              class="flex flex-col justify-start"
-              v-if="
-                etiqueta1 &&
-                nameCategoryHeader == '' &&
-                nameSubCategoryHeader == ''
-              "
-            >
-              <p class="text-12">
-                {{ etiqueta1 }}
-              </p>
-            </div>
+            <button class="flex md:hidden" @click="openMenuLateral">
+              <menu-icon class="text-25" />
+            </button>
           </div>
           <div class="w-full h-full flex flex-col justify-center items-center">
             <div
@@ -162,11 +168,11 @@
           </div>
         </div>
         <div
-          class="hidden mr-30 md:flex flex-col justify-between items-start sticky top-20 w-full max-w-[250px] lg:max-w-[300px] transition-all ease-in duration-0.3 content-left"
+          class="hidden mr-30 md:flex flex-col justify-between items-start sticky w-full max-w-[250px] lg:max-w-[300px] transition-all ease-in duration-0.3 content-left"
+          style="top: 140px"
         >
           <p
             class="w-auto pb-10 uppercase font-semibold cursor-pointer text-16"
-            :style="`color: ${settingByTemplate14[0].listProductsFilter.color_categories};`"
             @click="clear"
           >
             {{ $t('header_buscar_limpiar') }}
@@ -331,6 +337,7 @@ export default {
   mixins: [filterProducts, idCloudinaryBanner],
   components: {
     Ko14ProductCard: () => import('./_cardProduct/ProductCard.vue'),
+    Ko14MenuLateral: () => import('./_lateral/_lateralMenu.vue'),
   },
   props: {
     dataStore: Object,
@@ -400,6 +407,9 @@ export default {
     },
   },
   methods: {
+    openMenuLateral() {
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
+    },
     getQuery() {
       if (this.$route.query && this.$route.query.category) {
         this.sendCategoryUrlMix(this.$route.query.category)
@@ -569,8 +579,7 @@ export default {
 }
 .content-left >>> .el-collapse-item__header {
   font-size: 15px;
-  font-family: var(--font-style-1) !important;
-  color: var(--color_text);
+  color: var(--color_subCategories);
   background-color: transparent;
   border-bottom: 1px solid var(--color_icon);
   @apply font-semibold;
@@ -583,8 +592,7 @@ export default {
 }
 .input-slide {
   font-size: 15px;
-  color: var(--color_subtext);
-  font-family: var(--font-style-1) !important;
+  color: var(--color_categories);
   background: transparent;
   @apply w-full h-30 cursor-pointer border-none;
 }
@@ -595,20 +603,18 @@ export default {
   @apply w-full grid grid-cols-1 gap-4 justify-start items-center transition-all ease-in duration-0.2;
 }
 .txt-Filter {
-  color: var(--color_subtext);
+  color: var(--color_categories);
   font-size: 15px;
   line-height: 1.3;
-  font-family: var(--font-style-1) !important;
   @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
 }
 .txt-Filter:hover {
   color: #eb7025;
 }
 .txt-categorys {
-  color: var(--color_subtext);
+  color: var(--color_categories);
   font-size: 15px;
   line-height: 1.3;
-  font-family: var(--font-style-1) !important;
   @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
 }
 .txt-categorys:hover {
@@ -616,38 +622,38 @@ export default {
 }
 .pagination {
   font-size: 18px;
-  color: #222;
+  color: var(--color_pagination);
   background: transparent;
 }
 .wrapper_pagination >>> .el-pagination.is-background .btn-next {
-  color: #222;
+  color: var(--color_pagination);
   background-color: transparent;
 }
 .wrapper_pagination >>> .el-pagination.is-background .btn-prev {
-  color: #222;
+  color: var(--color_pagination);
   background-color: transparent;
 }
 .wrapper_pagination >>> .el-pagination.is-background .el-pager li {
-  color: #222;
+  color: var(--color_pagination);
   background-color: transparent;
 }
 .wrapper_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: #222;
+  color: var(--color_pagination);
 }
 .wrapper_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: #222;
+  color: var(--color_pagination);
 }
 .wrapper_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled):hover {
-  color: #222;
+  color: var(--color_pagination);
 }
 .wrapper_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled).active {
-  background-color: #222;
+  background-color: var(--color_pagination);
   color: #fff;
 }
 </style>

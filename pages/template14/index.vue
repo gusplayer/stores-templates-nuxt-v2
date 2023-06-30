@@ -119,14 +119,12 @@ export default {
     addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
-        e.origin.includes('http://localhost:8080') ||
-        e.origin.includes('https://panel.komercia.xyz')
+        e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 14) {
           this.$store.commit('SET_CURRENTSETTING14', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1
-            // console.log(this.bannerRendering)
           }
         } else if (
           e &&
@@ -135,19 +133,49 @@ export default {
           e.data.template == 14
         ) {
           switch (e.data.componentToEdit) {
-            case 'settingGeneral':
-              this.moverseA('kBannerX')
-              break
-            case 'header':
-              this.moverseA('kBannerX')
-              break
-            case 'footer':
-              this.moverseA('kNewsLetterX')
-              break
             case 'banner':
               this.moverseA('kBannerX')
               break
-            case 'detailsProduct':
+            case 'information':
+              this.moverseA('kInformationX')
+              break
+            case 'offers':
+              this.moverseA('kOffersX')
+              break
+            case 'listProductsHome':
+              this.moverseA('kListProductX')
+              break
+            case 'cardProducts':
+              this.moverseA('kListProductX')
+              break
+            case 'offersProduct':
+              this.moverseA('kOffersProductX')
+              break
+            case 'newsletter':
+              this.moverseA('kNewsletterX')
+              break
+            case 'newsletter':
+              this.moverseA('kNewsletterX')
+              break
+            case 'listBlogHome':
+              this.moverseA('kListBlogX')
+              break
+            case 'cardBlog':
+              this.moverseA('kListBlogX')
+              break
+            case 'logos':
+              this.moverseA('kLogosX')
+              break
+            case 'settingsGeneral':
+              this.moverseA('kInformationX')
+              break
+            case 'header':
+              this.moverseA('kInformationX')
+              break
+            case 'footer':
+              this.moverseA('kLogosX')
+              break
+            case 'detailsProducts':
               if (this.fullProducts) {
                 this.$router.push({
                   path: '/productos/' + this.fullProducts[0].slug,

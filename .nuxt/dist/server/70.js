@@ -1,6 +1,163 @@
 exports.ids = [70];
 exports.modules = {
 
+/***/ 1004:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-ProductListFilterHoko.vue?vue&type=template&id=076767ec&scoped=true&
+var render = function render() {
+  var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6, _this$settingByTempla7, _this$settingByTempla8, _this$settingByTempla9, _this$settingByTempla10, _this$settingByTempla11, _this$settingByTempla12;
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "product-content",
+    style: [_vm.settingByTemplate9[0].settingGeneral, _vm.settingByTemplate9[0].productListFilter]
+  }, [_vm._ssrNode("<div class=\"content-banner-shop\"" + _vm._ssrStyle(null, [{
+    '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate9[0]) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settingGeneral) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'Poppins'
+  }, {
+    '--font-style-2': (_this$settingByTempla4 = (_this$settingByTempla5 = this.settingByTemplate9[0]) === null || _this$settingByTempla5 === void 0 ? void 0 : (_this$settingByTempla6 = _this$settingByTempla5.settingGeneral) === null || _this$settingByTempla6 === void 0 ? void 0 : _this$settingByTempla6.fount_2) !== null && _this$settingByTempla4 !== void 0 ? _this$settingByTempla4 : 'Roboto'
+  }], null) + " data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"crumb\" data-v-076767ec>", "</div>", [_c('nuxt-link', {
+    attrs: {
+      "to": "/"
+    }
+  }, [_c('p', {
+    staticClass: "txt-crumb s1",
+    style: `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`
+  }, [_vm._v("\n          " + _vm._s(_vm.$t('header_inicio')) + "\n        ")])]), _vm._ssrNode(" <p class=\"txt-crumb\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`, null) + " data-v-076767ec>\n        /\n      </p> <p class=\"txt-crumb s2\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`, null) + " data-v-076767ec>" + _vm._ssrEscape("\n        " + _vm._s(_vm.$t('header_productos')) + "\n      ") + "</p>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-shop-items\"" + _vm._ssrStyle(null, [{
+    '--font-style-1': (_this$settingByTempla7 = (_this$settingByTempla8 = this.settingByTemplate9[0]) === null || _this$settingByTempla8 === void 0 ? void 0 : (_this$settingByTempla9 = _this$settingByTempla8.settingGeneral) === null || _this$settingByTempla9 === void 0 ? void 0 : _this$settingByTempla9.fount_1) !== null && _this$settingByTempla7 !== void 0 ? _this$settingByTempla7 : 'Poppins'
+  }, {
+    '--font-style-2': (_this$settingByTempla10 = (_this$settingByTempla11 = this.settingByTemplate9[0]) === null || _this$settingByTempla11 === void 0 ? void 0 : (_this$settingByTempla12 = _this$settingByTempla11.settingGeneral) === null || _this$settingByTempla12 === void 0 ? void 0 : _this$settingByTempla12.fount_2) !== null && _this$settingByTempla10 !== void 0 ? _this$settingByTempla10 : 'Roboto'
+  }], null) + " data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"content-right\" data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"content-banner-shop-r\" data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"crumb\" data-v-076767ec>", "</div>", [_c('nuxt-link', {
+    attrs: {
+      "to": "/"
+    }
+  }, [_c('p', {
+    staticClass: "txt-crumb s1",
+    style: `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('header_inicio')) + "\n            ")])]), _vm._ssrNode(" <p class=\"txt-crumb\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`, null) + " data-v-076767ec>\n            /\n          </p> <p class=\"txt-crumb s2\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`, null) + " data-v-076767ec>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('header_productos')) + "\n          ") + "</p>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div id=\"section\" class=\"producto-items-content\" data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"content-item\" data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"content-item-productos\" data-v-076767ec>", "</div>", [_vm._ssrNode("<div id=\"grid-selection\" class=\"product-conten-items\" data-v-076767ec>", "</div>", _vm._l(_vm.producthoko.data, function (product) {
+    return _vm._ssrNode("<div class=\"content-products\" data-v-076767ec>", "</div>", [_c('KoProdcutCardFilter', {
+      staticClass: "product-nolist",
+      attrs: {
+        "settingGeneral": _vm.settingByTemplate9[0].settingGeneral,
+        "productListCard": _vm.settingByTemplate9[0].cardProduct,
+        "product": product
+      }
+    })], 1);
+  }), 0), _vm._ssrNode(" " + (_vm.producthoko.total == 0 ? "<div class=\"content-products-empty\" data-v-076767ec><p class=\"txt-products-empty\" data-v-076767ec>" + _vm._ssrEscape(_vm._s(_vm.$t('home_msgCatalogo'))) + "</p></div>" : "<!---->") + " "), _vm._ssrNode("<div class=\"pagination-medium\" data-v-076767ec>", "</div>", [_vm.producthoko.total > 10 ? _vm._ssrNode("<div class=\"product_pagination\" data-v-076767ec>", "</div>", [_c('el-pagination', {
+    staticClass: "pagination",
+    attrs: {
+      "background": "",
+      "layout": "prev, pager, next",
+      "hide-on-single-page": true,
+      "page-count": _vm.producthoko.last_page,
+      "current-page": _vm.currentPage
+    },
+    on: {
+      "current-change": _vm.currentChange
+    }
+  })], 1) : _vm._e()])], 2)])])], 2)])], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/template9/Ko-ProductListFilterHoko.vue?vue&type=template&id=076767ec&scoped=true&
+
+// EXTERNAL MODULE: ./components/template9/_productcard/ProductCardHoko.vue + 4 modules
+var ProductCardHoko = __webpack_require__(273);
+
+// EXTERNAL MODULE: ./components/template9/_productcard/ProductCardFilterList.vue + 4 modules
+var ProductCardFilterList = __webpack_require__(271);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-ProductListFilterHoko.vue?vue&type=script&lang=js&
+
+
+/* harmony default export */ var Ko_ProductListFilterHokovue_type_script_lang_js_ = ({
+  components: {
+    KoProdcutCardFilter: ProductCardHoko["a" /* default */],
+    KoProdcutCardFilerList: ProductCardFilterList["a" /* default */]
+  },
+  props: {
+    dataStore: Object,
+    settingByTemplate9: Array
+  },
+  name: 'Ko-ProductList-Filter-hoko',
+  mounted() {
+    if (this.previousPage) {
+      this.currentPage = this.previousPage;
+    }
+    this.currentChange(1);
+  },
+  data() {
+    return {
+      currentPage: 1
+    };
+  },
+  computed: {
+    previousPage() {
+      return this.$store.state.previousPage;
+    },
+    producthoko() {
+      return this.$store.state.producthoko;
+    }
+  },
+  methods: {
+    currentChange(page) {
+      this.$store.dispatch('GET_PRODUCTSHOKO', page);
+      this.currentPage = page;
+    }
+  },
+  watch: {
+    currentPage() {
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage);
+      let timerTimeout = null;
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null;
+        window.scrollBy(0, -1500);
+      }, 250);
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage;
+      }
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/template9/Ko-ProductListFilterHoko.vue?vue&type=script&lang=js&
+ /* harmony default export */ var template9_Ko_ProductListFilterHokovue_type_script_lang_js_ = (Ko_ProductListFilterHokovue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./components/template9/Ko-ProductListFilterHoko.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(671)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  template9_Ko_ProductListFilterHokovue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "076767ec",
+  "94487968"
+  
+)
+
+/* harmony default export */ var Ko_ProductListFilterHoko = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ 212:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -56,7 +213,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".container[data-v-20fe0982]{background:var(--background_color_card);max-width:100%;position:relative}.image[data-v-20fe0982]{height:auto;width:100%}.icon[data-v-20fe0982]{--tw-text-opacity:1;color:#00a650;color:#fff;color:rgb(255 255 255/var(--tw-text-opacity));font-size:1.5rem}.cart-Shop[data-v-20fe0982],.cart-Shop-mobile[data-v-20fe0982]{color:#00a650;font:inherit;font-size:100%;left:50%;position:absolute;text-align:center;top:50%;transform:translate(-50%,-50%);transition-duration:.3s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1);width:100%}.cart-Shop-mobile[data-v-20fe0982]{justify-column:center;--tw-text-opacity:1;color:#fff;color:rgb(255 255 255/var(--tw-text-opacity))}.icons-hover[data-v-20fe0982]{grid-gap:0;--tw-text-opacity:1;color:#3f3f3f;color:rgb(63 63 63/var(--tw-text-opacity));display:grid;font:inherit;font-size:100%;gap:0;grid-template-columns:repeat(1,minmax(0,1fr));left:50%;position:absolute;text-align:center;top:50%;transform:translate(-50%,-50%);transition-duration:.3s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1)}.icon-show-mobile[data-v-20fe0982]{fill:#fff}.card-title[data-v-20fe0982]{color:var(--color_text_card);font:inherit;font-weight:500;text-align:left}.card-title[data-v-20fe0982],.categoria[data-v-20fe0982]{font-family:var(--font-style-2)}.categoria[data-v-20fe0982]{color:var(--color_category);font:inherit;font-weight:600}.text-price[data-v-20fe0982]{color:var(--color_price_card);padding-left:5px;white-space:nowrap}.separator-price[data-v-20fe0982],.text-price[data-v-20fe0982]{font-family:var(--font-style-2);font-weight:600}.separator-price[data-v-20fe0982]{color:#333;margin-bottom:10px}.text-free[data-v-20fe0982]{color:#fff;left:50%;position:absolute;top:50%;transform:translate(-50%,-50%);white-space:nowrap}.icon-overlay-free[data-v-20fe0982]{color:#25db37}.text-sould[data-v-20fe0982]{color:#fff;left:50%;position:absolute;top:50%;transform:translate(-50%,-50%);white-space:nowrap}.content_buy_action[data-v-20fe0982]{align-items:center;display:flex;flex-direction:row;justify-content:flex-start}.transport-icon[data-v-20fe0982]{align-items:center;color:#00a650;display:flex;font-family:var(--font-style-2);font-weight:700;justify-content:center;margin-bottom:10px;width:100%}.content_card-info[data-v-20fe0982]{align-items:flex-end;display:flex;flex-direction:row;justify-content:flex-start;margin-bottom:10px;width:100%}.text-card-info-sould[data-v-20fe0982]{color:#ed2353;font-family:var(--font-style-2);font-size:16px;font-weight:700;margin-left:8px}.content-button[data-v-20fe0982]{display:flex;flex-direction:column;padding-bottom:20px;width:100%}.btn-view[data-v-20fe0982]{background-color:transparent;border:2px solid var(--color_background_btn);color:var(--color_background_btn)}.btn[data-v-20fe0982],.btn-view[data-v-20fe0982]{align-items:center;cursor:pointer;display:flex;flex-direction:row;font-family:var(--font-style-2);font-size:15px;justify-content:center;justify-items:center;letter-spacing:1px;margin-top:8px;max-height:40px;min-height:40px;padding-left:16px;padding-right:16px;transition:color .25s ease,background-color .25s ease,border-color .25s ease,box-shadow .25s ease,opacity .25s ease;width:100%}.btn[data-v-20fe0982]{fill:var(--color_text_btn);background-color:var(--color_background_btn);color:var(--color_text_btn)}.btn[data-v-20fe0982]:hover{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color);fill:#2c2930;background-color:#f8f8f8;box-shadow:0 0 transparent,0 0 transparent,0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);color:#fff;color:#2c2930}.txt-btn-product[data-v-20fe0982]{font-size:15px}.btn-disabled[data-v-20fe0982],.txt-btn-product[data-v-20fe0982]{font-weight:800;letter-spacing:1px;line-height:1;margin-left:10px;white-space:nowrap}.btn-disabled[data-v-20fe0982]{fill:#fff;align-items:center;background-color:gray;color:#fff;cursor:pointer;display:flex;flex-direction:row;font-family:var(--font-style-2);height:40px;justify-content:center;justify-items:center;margin-top:8px;padding-left:16px;padding-right:16px;transition:color .25s ease,background-color .25s ease,border-color .25s ease,box-shadow .25s ease,opacity .25s ease}.datos-producto[data-v-20fe0982]{align-items:flex-start;cursor:default;display:flex;flex-direction:column;justify-content:center;margin-bottom:24px;margin-left:8px;margin-top:24px;width:100%}.tittle[data-v-20fe0982]{color:#3f3f3f;font-family:var(--font-style-2);font:inherit;font-size:100%}@media (min-width:300px){.overlay-bottom[data-v-20fe0982],.text-cart[data-v-20fe0982]{display:none}.overlay-top[data-v-20fe0982]{--tw-bg-opacity:1;--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);background-color:#fff;background-color:rgb(255 255 255/var(--tw-bg-opacity));border-radius:.375rem;box-shadow:0 0 transparent,0 0 transparent,0 25px 50px -12px rgba(0,0,0,.25);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);height:20%;max-height:100%;max-width:100%;overflow:hidden;position:absolute;right:0;top:8%;transition-duration:.3s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1)}.container:hover .overlay-top[data-v-20fe0982],.overlay-top[data-v-20fe0982]{left:80%;width:20%}.overlay-free[data-v-20fe0982]{background-color:#25db37;border-radius:.25rem;height:10%;left:45%;overflow:hidden;position:absolute;right:0;top:0;transition:.5s ease;width:50%}.container:hover .overlay-free[data-v-20fe0982]{left:45%;transition-delay:.7s;width:50%}.text-free[data-v-20fe0982]{font-size:75%}.overlay-polygon[data-v-20fe0982]{background-color:transparent;height:5%;overflow:hidden;position:absolute;right:0;top:10%}.container:hover .overlay-polygon[data-v-20fe0982],.overlay-polygon[data-v-20fe0982]{left:85%;width:5%}.overlay-sould[data-v-20fe0982]{align-items:center;border-bottom-left-radius:.5rem;border-top-left-radius:.5rem;display:flex;height:20%;justify-content:center;overflow:hidden;position:absolute;right:0;top:0;transition:.5s ease}.container:hover .overlay-sould[data-v-20fe0982],.overlay-sould[data-v-20fe0982]{left:60%;width:35%}.container:hover .overlay-sould[data-v-20fe0982]{transition-delay:.7s}.svg-sould-out[data-v-20fe0982]{height:40px;width:40px}.cart-shop[data-v-20fe0982]{clip:rect(0,0,0,0);border-width:0;display:none;height:1px;margin:-1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}.cart-shop[data-v-20fe0982],.cart-shop-mobile[data-v-20fe0982]{padding:0}.cart-shop-mobile[data-v-20fe0982]{clip:auto;display:block;height:auto;margin:0;overflow:visible;position:static;white-space:normal;width:auto}.icon-show-mobile[data-v-20fe0982]{margin-left:auto;margin-right:auto;margin-top:2.5px}.producto[data-v-20fe0982]{grid-gap:1rem;align-items:center;background:var(--background_color_card);cursor:pointer;display:grid;gap:1rem;grid-template-columns:repeat(1,minmax(0,1fr));justify-content:center;width:90%}.product-image[data-v-20fe0982],.product-image-soldOut[data-v-20fe0982]{-o-object-fit:cover;object-fit:cover;overflow:hidden;width:100%}.product-image-soldOut[data-v-20fe0982]{filter:grayscale(100%)}.card-title[data-v-20fe0982]{font-size:18px}.categoria[data-v-20fe0982]{font-size:13px;margin-bottom:2px}.precio[data-v-20fe0982]{font-size:16px}.text-price[data-v-20fe0982]{font-size:24px;margin-top:10px}.separator-price[data-v-20fe0982]{font-size:20px}.content_card-info[data-v-20fe0982],.transport-icon[data-v-20fe0982]{display:none}.content-price[data-v-20fe0982]{align-items:center;display:flex;flex-direction:row;justify-content:center;width:100%}.datos-producto-right[data-v-20fe0982]{display:none}}@media (min-width:500px){.producto[data-v-20fe0982]{width:95%}}@media (max-width:640px){.content-button[data-v-20fe0982]{flex-direction:row}}@media (min-width:640px){.producto[data-v-20fe0982]{cursor:pointer;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:flex-start;padding-bottom:32px;padding-top:16px}.datos-producto-right[data-v-20fe0982],.producto[data-v-20fe0982]{align-items:flex-start}.datos-producto-right[data-v-20fe0982]{display:flex;flex-direction:column;justify-items:center;width:100%}.product-image[data-v-20fe0982]{height:auto;width:auto}.hid[data-v-20fe0982]{display:none}.text-price[data-v-20fe0982]{padding-left:0}.datos-producto[data-v-20fe0982],.text-price[data-v-20fe0982]{margin:0}}@media (min-width:768px){.text-free[data-v-20fe0982]{font-size:100%}.svg-sould-out[data-v-20fe0982]{height:60px;width:60px}.icon[data-v-20fe0982]{margin-top:2px}}@media (min-width:780px){.content_card-info[data-v-20fe0982],.transport-icon[data-v-20fe0982]{display:flex}}@media (min-width:1280px){.icon[data-v-20fe0982]{margin-top:0}.text-cart[data-v-20fe0982]{display:block}.overlay-top[data-v-20fe0982]{--tw-bg-opacity:1;--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);background-color:#fff;background-color:rgb(255 255 255/var(--tw-bg-opacity));border-radius:.375rem;box-shadow:0 0 transparent,0 0 transparent,0 25px 50px -12px rgba(0,0,0,.25);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);height:20%;left:80%;overflow:hidden;position:absolute;right:0;top:6%;transition-duration:.3s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1);width:0}.container:hover .overlay-top[data-v-20fe0982]{left:65%;width:15%}.overlay-free[data-v-20fe0982]{background-color:#25db37;border-radius:.25rem;height:10%;left:80%;overflow:hidden;position:absolute;right:0;top:0;transition:.5s ease;width:0}.container:hover .overlay-free[data-v-20fe0982]{left:35%;transition-delay:.7s;width:44%}.text-free[data-v-20fe0982]{font-size:100%}.overlay-polygon[data-v-20fe0982]{background-color:transparent;height:5%;left:100%;overflow:hidden;position:absolute;right:0;top:10%;width:0}.container:hover .overlay-polygon[data-v-20fe0982]{left:70%;transition-delay:.95s;width:5%}.overlay-sould[data-v-20fe0982]{align-items:center;border-bottom-left-radius:.5rem;border-top-left-radius:.5rem;display:flex;height:20%;justify-content:center;left:75%;overflow:hidden;position:absolute;right:0;top:5%;transition:.5s ease;width:0}.container:hover .overlay-sould[data-v-20fe0982]{left:50%;transition-delay:.7s;width:35%}.svg-sould-out[data-v-20fe0982]{height:60px;width:60px}.cart-shop[data-v-20fe0982]{clip:auto;display:block;height:auto;margin:0;overflow:visible;position:static;white-space:normal;width:auto}.cart-shop[data-v-20fe0982],.cart-shop-mobile[data-v-20fe0982]{padding:0}.cart-shop-mobile[data-v-20fe0982]{clip:rect(0,0,0,0);border-width:0;display:none;height:1px;margin:-1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}.text-price[data-v-20fe0982]{margin-bottom:10px}.separator-price[data-v-20fe0982]{font-size:20px}.transport-icon[data-v-20fe0982]{margin-bottom:20px}.content-button[data-v-20fe0982]{width:100%}.tittle[data-v-20fe0982]{padding-bottom:2px}.btn[data-v-20fe0982],.btn-disabled[data-v-20fe0982],.producto[data-v-20fe0982]{width:100%}}@media (min-width:3000px){.container[data-v-20fe0982]{background:var(--background_color_card)}.container[data-v-20fe0982],.wrapper-image[data-v-20fe0982]{align-items:center;justify-content:center}.wrapper-image[data-v-20fe0982]{display:flex}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".container[data-v-20fe0982]{background:var(--background_color_card);max-width:100%;position:relative}.image[data-v-20fe0982]{height:auto;width:100%}.icon[data-v-20fe0982]{--tw-text-opacity:1;color:#00a650;color:#fff;font-size:1.5rem}@supports (color:rgb(0 0 0/0)) and (top:var(--f )){.icon[data-v-20fe0982]{color:rgb(255 255 255/var(--tw-text-opacity))}}.cart-Shop[data-v-20fe0982],.cart-Shop-mobile[data-v-20fe0982]{color:#00a650;font:inherit;font-size:100%;left:50%;position:absolute;text-align:center;top:50%;transform:translate(-50%,-50%);transition-duration:.3s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1);width:100%}.cart-Shop-mobile[data-v-20fe0982]{justify-column:center;--tw-text-opacity:1;color:#fff}@supports (color:rgb(0 0 0/0)) and (top:var(--f )){.cart-Shop-mobile[data-v-20fe0982]{color:rgb(255 255 255/var(--tw-text-opacity))}}.icons-hover[data-v-20fe0982]{grid-gap:0;--tw-text-opacity:1;color:#3f3f3f;color:rgba(63,63,63,var(--tw-text-opacity));display:grid;font:inherit;font-size:100%;gap:0;grid-template-columns:repeat(1,minmax(0,1fr));left:50%;position:absolute;text-align:center;top:50%;transform:translate(-50%,-50%);transition-duration:.3s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1)}.icon-show-mobile[data-v-20fe0982]{fill:#fff}.card-title[data-v-20fe0982]{color:var(--color_text_card);font:inherit;font-weight:500;text-align:left}.card-title[data-v-20fe0982],.categoria[data-v-20fe0982]{font-family:var(--font-style-2)}.categoria[data-v-20fe0982]{color:var(--color_category);font:inherit;font-weight:600}.text-price[data-v-20fe0982]{color:var(--color_price_card);padding-left:5px;white-space:nowrap}.separator-price[data-v-20fe0982],.text-price[data-v-20fe0982]{font-family:var(--font-style-2);font-weight:600}.separator-price[data-v-20fe0982]{color:#333;margin-bottom:10px}.text-free[data-v-20fe0982]{color:#fff;left:50%;position:absolute;top:50%;transform:translate(-50%,-50%);white-space:nowrap}.icon-overlay-free[data-v-20fe0982]{color:#25db37}.text-sould[data-v-20fe0982]{color:#fff;left:50%;position:absolute;top:50%;transform:translate(-50%,-50%);white-space:nowrap}.content_buy_action[data-v-20fe0982]{align-items:center;display:flex;flex-direction:row;justify-content:flex-start}.transport-icon[data-v-20fe0982]{align-items:center;color:#00a650;display:flex;font-family:var(--font-style-2);font-weight:700;justify-content:center;margin-bottom:10px;width:100%}.content_card-info[data-v-20fe0982]{align-items:flex-end;display:flex;flex-direction:row;justify-content:flex-start;margin-bottom:10px;width:100%}.text-card-info-sould[data-v-20fe0982]{color:#ed2353;font-family:var(--font-style-2);font-size:16px;font-weight:700;margin-left:8px}.content-button[data-v-20fe0982]{display:flex;flex-direction:column;padding-bottom:20px;width:100%}.btn-view[data-v-20fe0982]{background-color:transparent;border:2px solid var(--color_background_btn);color:var(--color_background_btn)}.btn[data-v-20fe0982],.btn-view[data-v-20fe0982]{align-items:center;cursor:pointer;display:flex;flex-direction:row;font-family:var(--font-style-2);font-size:15px;justify-content:center;justify-items:center;letter-spacing:1px;margin-top:8px;max-height:40px;min-height:40px;padding-left:16px;padding-right:16px;transition:color .25s ease,background-color .25s ease,border-color .25s ease,box-shadow .25s ease,opacity .25s ease;width:100%}.btn[data-v-20fe0982]{fill:var(--color_text_btn);background-color:var(--color_background_btn);color:var(--color_text_btn)}.btn[data-v-20fe0982]:hover{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color);fill:#2c2930;background-color:#f8f8f8;box-shadow:0 0 transparent,0 0 transparent,0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow);color:#fff;color:#2c2930}.txt-btn-product[data-v-20fe0982]{font-size:15px}.btn-disabled[data-v-20fe0982],.txt-btn-product[data-v-20fe0982]{font-weight:800;letter-spacing:1px;line-height:1;margin-left:10px;white-space:nowrap}.btn-disabled[data-v-20fe0982]{fill:#fff;align-items:center;background-color:gray;color:#fff;cursor:pointer;display:flex;flex-direction:row;font-family:var(--font-style-2);height:40px;justify-content:center;justify-items:center;margin-top:8px;padding-left:16px;padding-right:16px;transition:color .25s ease,background-color .25s ease,border-color .25s ease,box-shadow .25s ease,opacity .25s ease}.datos-producto[data-v-20fe0982]{align-items:flex-start;cursor:default;display:flex;flex-direction:column;justify-content:center;margin-bottom:24px;margin-left:8px;margin-top:24px;width:100%}.tittle[data-v-20fe0982]{color:#3f3f3f;font-family:var(--font-style-2);font:inherit;font-size:100%}@media (min-width:300px){.overlay-bottom[data-v-20fe0982],.text-cart[data-v-20fe0982]{display:none}.overlay-top[data-v-20fe0982]{--tw-bg-opacity:1;--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity));border-radius:.375rem;box-shadow:0 0 transparent,0 0 transparent,0 25px 50px -12px rgba(0,0,0,.25);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow);height:20%;max-height:100%;max-width:100%;overflow:hidden;position:absolute;right:0;top:8%;transition-duration:.3s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1)}.container:hover .overlay-top[data-v-20fe0982],.overlay-top[data-v-20fe0982]{left:80%;width:20%}.overlay-free[data-v-20fe0982]{background-color:#25db37;border-radius:.25rem;height:10%;left:45%;overflow:hidden;position:absolute;right:0;top:0;transition:.5s ease;width:50%}.container:hover .overlay-free[data-v-20fe0982]{left:45%;transition-delay:.7s;width:50%}.text-free[data-v-20fe0982]{font-size:75%}.overlay-polygon[data-v-20fe0982]{background-color:transparent;height:5%;overflow:hidden;position:absolute;right:0;top:10%}.container:hover .overlay-polygon[data-v-20fe0982],.overlay-polygon[data-v-20fe0982]{left:85%;width:5%}.overlay-sould[data-v-20fe0982]{align-items:center;border-bottom-left-radius:.5rem;border-top-left-radius:.5rem;display:flex;height:20%;justify-content:center;overflow:hidden;position:absolute;right:0;top:0;transition:.5s ease}.container:hover .overlay-sould[data-v-20fe0982],.overlay-sould[data-v-20fe0982]{left:60%;width:35%}.container:hover .overlay-sould[data-v-20fe0982]{transition-delay:.7s}.svg-sould-out[data-v-20fe0982]{height:40px;width:40px}.cart-shop[data-v-20fe0982]{clip:rect(0,0,0,0);border-width:0;display:none;height:1px;margin:-1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}.cart-shop[data-v-20fe0982],.cart-shop-mobile[data-v-20fe0982]{padding:0}.cart-shop-mobile[data-v-20fe0982]{clip:auto;display:block;height:auto;margin:0;overflow:visible;position:static;white-space:normal;width:auto}.icon-show-mobile[data-v-20fe0982]{margin-left:auto;margin-right:auto;margin-top:2.5px}.producto[data-v-20fe0982]{grid-gap:1rem;align-items:center;background:var(--background_color_card);cursor:pointer;display:grid;gap:1rem;grid-template-columns:repeat(1,minmax(0,1fr));justify-content:center;width:90%}.product-image[data-v-20fe0982],.product-image-soldOut[data-v-20fe0982]{-o-object-fit:cover;object-fit:cover;overflow:hidden;width:100%}.product-image-soldOut[data-v-20fe0982]{filter:grayscale(100%)}.card-title[data-v-20fe0982]{font-size:18px}.categoria[data-v-20fe0982]{font-size:13px;margin-bottom:2px}.precio[data-v-20fe0982]{font-size:16px}.text-price[data-v-20fe0982]{font-size:24px;margin-top:10px}.separator-price[data-v-20fe0982]{font-size:20px}.content_card-info[data-v-20fe0982],.transport-icon[data-v-20fe0982]{display:none}.content-price[data-v-20fe0982]{align-items:center;display:flex;flex-direction:row;justify-content:center;width:100%}.datos-producto-right[data-v-20fe0982]{display:none}}@media (min-width:500px){.producto[data-v-20fe0982]{width:95%}}@media (max-width:640px){.content-button[data-v-20fe0982]{flex-direction:row}}@media (min-width:640px){.producto[data-v-20fe0982]{cursor:pointer;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:flex-start;padding-bottom:32px;padding-top:16px}.datos-producto-right[data-v-20fe0982],.producto[data-v-20fe0982]{align-items:flex-start}.datos-producto-right[data-v-20fe0982]{display:flex;flex-direction:column;justify-items:center;width:100%}.product-image[data-v-20fe0982]{height:auto;width:auto}.hid[data-v-20fe0982]{display:none}.text-price[data-v-20fe0982]{padding-left:0}.datos-producto[data-v-20fe0982],.text-price[data-v-20fe0982]{margin:0}}@media (min-width:768px){.text-free[data-v-20fe0982]{font-size:100%}.svg-sould-out[data-v-20fe0982]{height:60px;width:60px}.icon[data-v-20fe0982]{margin-top:2px}}@media (min-width:780px){.content_card-info[data-v-20fe0982],.transport-icon[data-v-20fe0982]{display:flex}}@media (min-width:1280px){.icon[data-v-20fe0982]{margin-top:0}.text-cart[data-v-20fe0982]{display:block}.overlay-top[data-v-20fe0982]{--tw-bg-opacity:1;--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity));border-radius:.375rem;box-shadow:0 0 transparent,0 0 transparent,0 25px 50px -12px rgba(0,0,0,.25);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow);height:20%;left:80%;overflow:hidden;position:absolute;right:0;top:6%;transition-duration:.3s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1);width:0}.container:hover .overlay-top[data-v-20fe0982]{left:65%;width:15%}.overlay-free[data-v-20fe0982]{background-color:#25db37;border-radius:.25rem;height:10%;left:80%;overflow:hidden;position:absolute;right:0;top:0;transition:.5s ease;width:0}.container:hover .overlay-free[data-v-20fe0982]{left:35%;transition-delay:.7s;width:44%}.text-free[data-v-20fe0982]{font-size:100%}.overlay-polygon[data-v-20fe0982]{background-color:transparent;height:5%;left:100%;overflow:hidden;position:absolute;right:0;top:10%;width:0}.container:hover .overlay-polygon[data-v-20fe0982]{left:70%;transition-delay:.95s;width:5%}.overlay-sould[data-v-20fe0982]{align-items:center;border-bottom-left-radius:.5rem;border-top-left-radius:.5rem;display:flex;height:20%;justify-content:center;left:75%;overflow:hidden;position:absolute;right:0;top:5%;transition:.5s ease;width:0}.container:hover .overlay-sould[data-v-20fe0982]{left:50%;transition-delay:.7s;width:35%}.svg-sould-out[data-v-20fe0982]{height:60px;width:60px}.cart-shop[data-v-20fe0982]{clip:auto;display:block;height:auto;margin:0;overflow:visible;position:static;white-space:normal;width:auto}.cart-shop[data-v-20fe0982],.cart-shop-mobile[data-v-20fe0982]{padding:0}.cart-shop-mobile[data-v-20fe0982]{clip:rect(0,0,0,0);border-width:0;display:none;height:1px;margin:-1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}.text-price[data-v-20fe0982]{margin-bottom:10px}.separator-price[data-v-20fe0982]{font-size:20px}.transport-icon[data-v-20fe0982]{margin-bottom:20px}.content-button[data-v-20fe0982]{width:100%}.tittle[data-v-20fe0982]{padding-bottom:2px}.btn[data-v-20fe0982],.btn-disabled[data-v-20fe0982],.producto[data-v-20fe0982]{width:100%}}@media (min-width:3000px){.container[data-v-20fe0982]{background:var(--background_color_card)}.container[data-v-20fe0982],.wrapper-image[data-v-20fe0982]{align-items:center;justify-content:center}.wrapper-image[data-v-20fe0982]{display:flex}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -551,7 +708,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(670);
+var content = __webpack_require__(672);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -605,7 +762,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 669:
+/***/ 671:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -617,7 +774,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 670:
+/***/ 672:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -629,163 +786,6 @@ ___CSS_LOADER_EXPORT___.push([module.i, ".product-content[data-v-076767ec]{align
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
 
-
-/***/ }),
-
-/***/ 998:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-ProductListFilterHoko.vue?vue&type=template&id=076767ec&scoped=true&
-var render = function render() {
-  var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6, _this$settingByTempla7, _this$settingByTempla8, _this$settingByTempla9, _this$settingByTempla10, _this$settingByTempla11, _this$settingByTempla12;
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', {
-    staticClass: "product-content",
-    style: [_vm.settingByTemplate9[0].settingGeneral, _vm.settingByTemplate9[0].productListFilter]
-  }, [_vm._ssrNode("<div class=\"content-banner-shop\"" + _vm._ssrStyle(null, [{
-    '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate9[0]) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settingGeneral) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'Poppins'
-  }, {
-    '--font-style-2': (_this$settingByTempla4 = (_this$settingByTempla5 = this.settingByTemplate9[0]) === null || _this$settingByTempla5 === void 0 ? void 0 : (_this$settingByTempla6 = _this$settingByTempla5.settingGeneral) === null || _this$settingByTempla6 === void 0 ? void 0 : _this$settingByTempla6.fount_2) !== null && _this$settingByTempla4 !== void 0 ? _this$settingByTempla4 : 'Roboto'
-  }], null) + " data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"crumb\" data-v-076767ec>", "</div>", [_c('nuxt-link', {
-    attrs: {
-      "to": "/"
-    }
-  }, [_c('p', {
-    staticClass: "txt-crumb s1",
-    style: `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`
-  }, [_vm._v("\n          " + _vm._s(_vm.$t('header_inicio')) + "\n        ")])]), _vm._ssrNode(" <p class=\"txt-crumb\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`, null) + " data-v-076767ec>\n        /\n      </p> <p class=\"txt-crumb s2\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`, null) + " data-v-076767ec>" + _vm._ssrEscape("\n        " + _vm._s(_vm.$t('header_productos')) + "\n      ") + "</p>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-shop-items\"" + _vm._ssrStyle(null, [{
-    '--font-style-1': (_this$settingByTempla7 = (_this$settingByTempla8 = this.settingByTemplate9[0]) === null || _this$settingByTempla8 === void 0 ? void 0 : (_this$settingByTempla9 = _this$settingByTempla8.settingGeneral) === null || _this$settingByTempla9 === void 0 ? void 0 : _this$settingByTempla9.fount_1) !== null && _this$settingByTempla7 !== void 0 ? _this$settingByTempla7 : 'Poppins'
-  }, {
-    '--font-style-2': (_this$settingByTempla10 = (_this$settingByTempla11 = this.settingByTemplate9[0]) === null || _this$settingByTempla11 === void 0 ? void 0 : (_this$settingByTempla12 = _this$settingByTempla11.settingGeneral) === null || _this$settingByTempla12 === void 0 ? void 0 : _this$settingByTempla12.fount_2) !== null && _this$settingByTempla10 !== void 0 ? _this$settingByTempla10 : 'Roboto'
-  }], null) + " data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"content-right\" data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"content-banner-shop-r\" data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"crumb\" data-v-076767ec>", "</div>", [_c('nuxt-link', {
-    attrs: {
-      "to": "/"
-    }
-  }, [_c('p', {
-    staticClass: "txt-crumb s1",
-    style: `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`
-  }, [_vm._v("\n              " + _vm._s(_vm.$t('header_inicio')) + "\n            ")])]), _vm._ssrNode(" <p class=\"txt-crumb\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`, null) + " data-v-076767ec>\n            /\n          </p> <p class=\"txt-crumb s2\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate9[0].productListFilter.breadcrumbs};`, null) + " data-v-076767ec>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('header_productos')) + "\n          ") + "</p>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div id=\"section\" class=\"producto-items-content\" data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"content-item\" data-v-076767ec>", "</div>", [_vm._ssrNode("<div class=\"content-item-productos\" data-v-076767ec>", "</div>", [_vm._ssrNode("<div id=\"grid-selection\" class=\"product-conten-items\" data-v-076767ec>", "</div>", _vm._l(_vm.producthoko.data, function (product) {
-    return _vm._ssrNode("<div class=\"content-products\" data-v-076767ec>", "</div>", [_c('KoProdcutCardFilter', {
-      staticClass: "product-nolist",
-      attrs: {
-        "settingGeneral": _vm.settingByTemplate9[0].settingGeneral,
-        "productListCard": _vm.settingByTemplate9[0].cardProduct,
-        "product": product
-      }
-    })], 1);
-  }), 0), _vm._ssrNode(" " + (_vm.producthoko.total == 0 ? "<div class=\"content-products-empty\" data-v-076767ec><p class=\"txt-products-empty\" data-v-076767ec>" + _vm._ssrEscape(_vm._s(_vm.$t('home_msgCatalogo'))) + "</p></div>" : "<!---->") + " "), _vm._ssrNode("<div class=\"pagination-medium\" data-v-076767ec>", "</div>", [_vm.producthoko.total > 10 ? _vm._ssrNode("<div class=\"product_pagination\" data-v-076767ec>", "</div>", [_c('el-pagination', {
-    staticClass: "pagination",
-    attrs: {
-      "background": "",
-      "layout": "prev, pager, next",
-      "hide-on-single-page": true,
-      "page-count": _vm.producthoko.last_page,
-      "current-page": _vm.currentPage
-    },
-    on: {
-      "current-change": _vm.currentChange
-    }
-  })], 1) : _vm._e()])], 2)])])], 2)])], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/template9/Ko-ProductListFilterHoko.vue?vue&type=template&id=076767ec&scoped=true&
-
-// EXTERNAL MODULE: ./components/template9/_productcard/ProductCardHoko.vue + 4 modules
-var ProductCardHoko = __webpack_require__(273);
-
-// EXTERNAL MODULE: ./components/template9/_productcard/ProductCardFilterList.vue + 4 modules
-var ProductCardFilterList = __webpack_require__(271);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template9/Ko-ProductListFilterHoko.vue?vue&type=script&lang=js&
-
-
-/* harmony default export */ var Ko_ProductListFilterHokovue_type_script_lang_js_ = ({
-  components: {
-    KoProdcutCardFilter: ProductCardHoko["a" /* default */],
-    KoProdcutCardFilerList: ProductCardFilterList["a" /* default */]
-  },
-  props: {
-    dataStore: Object,
-    settingByTemplate9: Array
-  },
-  name: 'Ko-ProductList-Filter-hoko',
-  mounted() {
-    if (this.previousPage) {
-      this.currentPage = this.previousPage;
-    }
-    this.currentChange(1);
-  },
-  data() {
-    return {
-      currentPage: 1
-    };
-  },
-  computed: {
-    previousPage() {
-      return this.$store.state.previousPage;
-    },
-    producthoko() {
-      return this.$store.state.producthoko;
-    }
-  },
-  methods: {
-    currentChange(page) {
-      this.$store.dispatch('GET_PRODUCTSHOKO', page);
-      this.currentPage = page;
-    }
-  },
-  watch: {
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage);
-      let timerTimeout = null;
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null;
-        window.scrollBy(0, -1500);
-      }, 250);
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage;
-      }
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/template9/Ko-ProductListFilterHoko.vue?vue&type=script&lang=js&
- /* harmony default export */ var template9_Ko_ProductListFilterHokovue_type_script_lang_js_ = (Ko_ProductListFilterHokovue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./components/template9/Ko-ProductListFilterHoko.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(669)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  template9_Ko_ProductListFilterHokovue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "076767ec",
-  "94487968"
-  
-)
-
-/* harmony default export */ var Ko_ProductListFilterHoko = __webpack_exports__["default"] = (component.exports);
 
 /***/ })
 

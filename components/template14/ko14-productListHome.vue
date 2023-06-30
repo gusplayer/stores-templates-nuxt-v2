@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="this.fullProducts.length > 0"
-    class="w-full flex justify-center items-center py-15 lg:py-20 px-10 md:px-0"
+    class="w-full flex justify-center items-center py-15 lg:py-20 px-10"
     :style="`background-color: ${listProductsHome['--background_color_1']}`"
   >
     <div
@@ -74,12 +74,8 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: 'auto',
+        slidesPerView: '',
         spaceBetween: '',
-        // autoplay: {
-        //   delay: 7000,
-        //   disableOnInteraction: false,
-        // },
         breakpoints: {
           10000: {
             slidesPerView: 4,
@@ -87,15 +83,17 @@ export default {
           },
           900: {
             slidesPerView: 3,
+            slidesPerGroup: 3,
             spaceBetween: 30,
           },
           640: {
             slidesPerView: 2,
+            slidesPerGroup: 2,
             spaceBetween: 10,
           },
           425: {
-            slidesPerView: 2,
-            spaceBetween: 5,
+            slidesPerGroup: 1,
+            spaceBetween: 10,
           },
         },
       },

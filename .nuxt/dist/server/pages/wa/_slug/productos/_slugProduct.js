@@ -318,7 +318,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(550);
+var content = __webpack_require__(552);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -336,7 +336,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(552);
+var content = __webpack_require__(554);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -348,7 +348,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 549:
+/***/ 551:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -360,7 +360,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 550:
+/***/ 552:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -375,7 +375,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 551:
+/***/ 553:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -387,7 +387,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 552:
+/***/ 554:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -450,7 +450,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(71);
+var content = __webpack_require__(72);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -582,7 +582,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 68:
+/***/ 69:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -857,7 +857,7 @@ var render = function render() {
       "width": "220px"
     },
     attrs: {
-      "src": __webpack_require__(69),
+      "src": __webpack_require__(70),
       "alt": "Product img"
     }
   }), _vm._v(" "), _c('p', {
@@ -2147,7 +2147,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(70)
+  var style0 = __webpack_require__(71)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2169,14 +2169,14 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 69:
+/***/ 70:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/icono_cesta.1a31c64.png";
 
 /***/ }),
 
-/***/ 70:
+/***/ 71:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2188,7 +2188,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 71:
+/***/ 72:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2498,7 +2498,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 932:
+/***/ 938:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2694,7 +2694,7 @@ var formatCurrent = __webpack_require__(63);
 var elemenTiptap = __webpack_require__(67);
 
 // EXTERNAL MODULE: ./components/headers/_order1/order1.vue + 4 modules
-var order1 = __webpack_require__(68);
+var order1 = __webpack_require__(69);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/whatsapp/Ko-ProductDetail-wa.vue?vue&type=script&lang=js&
 
@@ -3332,7 +3332,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(549)
+  var style0 = __webpack_require__(551)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -3401,7 +3401,7 @@ var ko_Footer_wa_logo = __webpack_require__(81);
 
 function _slugProduct_injectStyles (context) {
   
-  var style0 = __webpack_require__(551)
+  var style0 = __webpack_require__(553)
 if (style0.__inject__) style0.__inject__(context)
 
 }

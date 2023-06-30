@@ -7,7 +7,7 @@ exports.modules = {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(522);
+var content = __webpack_require__(524);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -19,7 +19,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 521:
+/***/ 523:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31,14 +31,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 522:
+/***/ 524:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".wrapper-component-terms[data-v-69854d1d]{align-items:flex-start;background:#d1d1d1;display:flex;justify-content:center;width:100%}.content-component-terms[data-v-69854d1d]{--tw-bg-opacity:1;--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color);align-items:center;background-color:#fff;background-color:rgb(255 255 255/var(--tw-bg-opacity));box-shadow:0 0 transparent,0 0 transparent,0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);display:flex;flex-direction:column;justify-content:center;margin-bottom:30px;margin-top:30px;max-width:900px;padding:30px 0 0;width:100%}.item-text-terms[data-v-69854d1d]{margin-bottom:15px;max-width:900px;padding-left:30px;padding-right:30px}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".wrapper-component-terms[data-v-69854d1d]{align-items:flex-start;background:#d1d1d1;display:flex;justify-content:center;width:100%}.content-component-terms[data-v-69854d1d]{--tw-bg-opacity:1;--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color);align-items:center;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity));box-shadow:0 0 transparent,0 0 transparent,0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow);display:flex;flex-direction:column;justify-content:center;margin-bottom:30px;margin-top:30px;max-width:900px;padding:30px 0 0;width:100%}.item-text-terms[data-v-69854d1d]{margin-bottom:15px;max-width:900px;padding-left:30px;padding-right:30px}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -46,7 +46,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 965:
+/***/ 971:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -87,7 +87,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(521)
+  var style0 = __webpack_require__(523)
 if (style0.__inject__) style0.__inject__(context)
 
 }

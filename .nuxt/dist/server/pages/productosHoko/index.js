@@ -1,14 +1,14 @@
 exports.ids = [43];
 exports.modules = {
 
-/***/ 954:
+/***/ 960:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/index.vue?vue&type=template&id=5ee0adb2&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/index.vue?vue&type=template&id=d7918620&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,7 +18,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/productosHoko/index.vue?vue&type=template&id=5ee0adb2&
+// CONCATENATED MODULE: ./pages/productosHoko/index.vue?vue&type=template&id=d7918620&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -27,10 +27,10 @@ var external_vuex_ = __webpack_require__(7);
 
 /* harmony default export */ var productosHokovue_type_script_lang_js_ = ({
   components: {
-    K05ProductListHoko: () => __webpack_require__.e(/* import() */ 91).then(__webpack_require__.bind(null, 997)),
-    K09ProductListHoko: () => __webpack_require__.e(/* import() */ 70).then(__webpack_require__.bind(null, 998)),
-    K11ProductListHoko: () => __webpack_require__.e(/* import() */ 89).then(__webpack_require__.bind(null, 999)),
-    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 32).then(__webpack_require__.bind(null, 912))
+    K05ProductListHoko: () => __webpack_require__.e(/* import() */ 91).then(__webpack_require__.bind(null, 1003)),
+    K09ProductListHoko: () => __webpack_require__.e(/* import() */ 70).then(__webpack_require__.bind(null, 1004)),
+    K11ProductListHoko: () => __webpack_require__.e(/* import() */ 89).then(__webpack_require__.bind(null, 1005)),
+    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 32).then(__webpack_require__.bind(null, 918))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -96,7 +96,7 @@ var external_vuex_ = __webpack_require__(7);
       return null;
     },
     addEventListenerTemplate(e) {
-      if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080') || e.origin.includes('https://panel.komercia.xyz')) {
+      if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
         if (e && e.data && e.data.component) {
           if (e.data.template == 9) {
             this.$store.commit('SET_CURRENTSETTING09', e.data);

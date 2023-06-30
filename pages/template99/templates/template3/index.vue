@@ -141,8 +141,7 @@ export default {
     addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
-        e.origin.includes('http://localhost:8080') ||
-        e.origin.includes('https://panel.komercia.xyz')
+        e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component) {
           this.$store.commit('SET_CURRENTSETTING99', e.data)

@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="this.listArticulos.length > 0"
-    class="w-full flex justify-center items-center py-15 lg:py-20 px-10 md:px-0"
+    class="w-full flex justify-center items-center py-15 lg:py-20 px-10"
     :style="`background-color: ${listBlogHome['--background_color_1']}`"
   >
     <div

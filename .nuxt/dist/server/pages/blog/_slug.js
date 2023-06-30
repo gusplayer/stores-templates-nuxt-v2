@@ -1,14 +1,14 @@
 exports.ids = [34];
 exports.modules = {
 
-/***/ 967:
+/***/ 974:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/_slug.vue?vue&type=template&id=778c4e4b&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/_slug.vue?vue&type=template&id=7082e82c&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,7 +18,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/blog/_slug.vue?vue&type=template&id=778c4e4b&
+// CONCATENATED MODULE: ./pages/blog/_slug.vue?vue&type=template&id=7082e82c&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -28,12 +28,12 @@ var external_vuex_ = __webpack_require__(7);
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   layout: 'default',
   components: {
-    K05Article: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 1043)),
-    K07Article: () => __webpack_require__.e(/* import() */ 112).then(__webpack_require__.bind(null, 1044)),
-    K09Article: () => __webpack_require__.e(/* import() */ 113).then(__webpack_require__.bind(null, 1045)),
-    K10Article: () => __webpack_require__.e(/* import() */ 104).then(__webpack_require__.bind(null, 1046)),
-    K11Article: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 1047)),
-    K13Article: () => __webpack_require__.e(/* import() */ 108).then(__webpack_require__.bind(null, 1048))
+    K05Article: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 1049)),
+    K07Article: () => __webpack_require__.e(/* import() */ 112).then(__webpack_require__.bind(null, 1050)),
+    K09Article: () => __webpack_require__.e(/* import() */ 113).then(__webpack_require__.bind(null, 1051)),
+    K10Article: () => __webpack_require__.e(/* import() */ 104).then(__webpack_require__.bind(null, 1052)),
+    K11Article: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 1053)),
+    K13Article: () => __webpack_require__.e(/* import() */ 108).then(__webpack_require__.bind(null, 1054))
   },
   data() {
     return {
@@ -45,12 +45,11 @@ var external_vuex_ = __webpack_require__(7);
         9: 'K09Article',
         10: 'K10Article',
         11: 'K11Article',
-        13: 'K13Article'
-        // 14: 'K14Contact',
+        13: 'K13Article',
+        14: 'K13Article'
       }
     };
   },
-
   computed: {
     ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'template']),
     indexTemplate() {

@@ -445,38 +445,38 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(608);
+var content = __webpack_require__(610);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(6).default
 module.exports.__inject__ = function (context) {
-  add("32a75185", content, true, context)
+  add("f3449c94", content, true, context)
 };
 
 /***/ }),
 
-/***/ 607:
+/***/ 609:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_Footer_9_vue_vue_type_style_index_0_id_70e40412_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(334);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_Footer_9_vue_vue_type_style_index_0_id_70e40412_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_Footer_9_vue_vue_type_style_index_0_id_70e40412_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_Footer_9_vue_vue_type_style_index_0_id_70e40412_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_Footer_9_vue_vue_type_style_index_0_id_70e40412_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_Footer_9_vue_vue_type_style_index_0_id_18aeada1_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(334);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_Footer_9_vue_vue_type_style_index_0_id_18aeada1_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_Footer_9_vue_vue_type_style_index_0_id_18aeada1_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_Footer_9_vue_vue_type_style_index_0_id_18aeada1_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_Footer_9_vue_vue_type_style_index_0_id_18aeada1_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 608:
+/***/ 610:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".wrapper-footer[data-v-70e40412]{background:var(--background_color_1)}.content-footer[data-v-70e40412]{background:var(--background_color_1)}.content-footer[data-v-70e40412],.content-footer-items[data-v-70e40412]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}.content-footer-items[data-v-70e40412]{max-width:80rem}.modal[data-v-70e40412]{background-color:#000;background-color:rgba(0,0,0,.4);height:100%;left:0;overflow:auto;padding-top:200px;position:fixed;top:0;width:100%;z-index:10}.empty[data-v-70e40412]{align-items:center;background-color:var(--color_border);display:flex;flex-direction:column;height:1px;justify-content:center;width:100%}@media (min-width:300px){.content-items-sm[data-v-70e40412]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}.content-store-sm[data-v-70e40412]{width:90%}.content-direction[data-v-70e40412],.content-email[data-v-70e40412],.content-number[data-v-70e40412],.content-store-sm[data-v-70e40412]{align-items:flex-start;display:flex;flex-direction:column;justify-content:center}.content-direction[data-v-70e40412],.content-email[data-v-70e40412],.content-number[data-v-70e40412]{width:100%}.info-legal-sm[data-v-70e40412],.info-networks[data-v-70e40412],.info-store-sm[data-v-70e40412]{align-items:flex-start;display:flex;flex-direction:column;justify-content:center;width:100%}.btn[data-v-70e40412]{color:var(--color_title);font-size:18px;padding-bottom:10px}.btn[data-v-70e40412],.txt[data-v-70e40412]{font-family:var(--font-style-1)!important}.txt[data-v-70e40412]{color:var(--color_text);font-size:14px}.btns[data-v-70e40412]:hover{color:var(--hover_text)}.btn-legal[data-v-70e40412]{align-items:flex-start;display:flex;flex-direction:column;justify-content:center}.accordion[data-v-70e40412],.btn-legal[data-v-70e40412]{text-align:left;width:100%}.accordion[data-v-70e40412]{border-style:none;cursor:pointer;margin-bottom:0;outline:2px solid transparent;outline-offset:2px;transition:.4s}.accordion[data-v-70e40412]:after{color:#fff;content:\"\\276F\";float:right;font-weight:700}.accordion[data-v-70e40412]:after,.active[data-v-70e40412]:after{transition-duration:.15s;transition-duration:.2s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1)}.active[data-v-70e40412]:after{transform:rotate(90deg)}.panel[data-v-70e40412]{align-items:center;justify-content:flex-start;margin-bottom:10px;max-height:0;overflow:hidden;transition:.4s ease-out;width:100%}.content-items-lg[data-v-70e40412]{display:none}.madebyKomercia[data-v-70e40412]{align-items:center;display:flex;flex-direction:column;justify-content:center;padding-bottom:20px;padding-top:20px;width:100%}.txt-devBy[data-v-70e40412]{color:var(--color_text);font-size:14px}.logo2[data-v-70e40412]{opacity:.5;width:100px}}@media (min-width:1024px){.content-items-sm[data-v-70e40412]{display:none}.content-items-lg[data-v-70e40412]{grid-gap:1rem;align-items:flex-start;display:grid;gap:1rem;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:center;width:90%}.img-logo[data-v-70e40412]{max-width:var(--with_logo);-o-object-fit:contain;object-fit:contain;width:100%}.content-image[data-v-70e40412]{align-items:center;justify-content:flex-start;margin-bottom:20px}.content-image[data-v-70e40412],.info-btn-footer[data-v-70e40412]{display:flex;flex-direction:column;width:100%}.info-btn-footer[data-v-70e40412]{align-items:flex-start;justify-content:center}.btns[data-v-70e40412]{color:var(--color_text);font-family:var(--font-style-1)!important;font-size:14px}.btns[data-v-70e40412]:hover{color:var(--hover_text)}}@media (min-width:1200px){.content-items-lg[data-v-70e40412]{max-width:80rem;width:100%}.content-footer-items[data-v-70e40412]{padding-bottom:60px;padding-top:40px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".content-footer[data-v-18aeada1],.wrapper-footer[data-v-18aeada1]{background:var(--background_color_1)}.content-footer[data-v-18aeada1]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}.modal[data-v-18aeada1]{background-color:#000;background-color:rgba(0,0,0,.4);height:100%;left:0;overflow:auto;padding-top:200px;position:fixed;top:0;width:100%;z-index:10}.empty[data-v-18aeada1]{align-items:center;background-color:var(--color_border);display:flex;flex-direction:column;height:1px;justify-content:center;width:100%}@media (min-width:300px){.content-items-sm[data-v-18aeada1]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}.content-store-sm[data-v-18aeada1]{width:90%}.content-direction[data-v-18aeada1],.content-email[data-v-18aeada1],.content-number[data-v-18aeada1],.content-store-sm[data-v-18aeada1]{align-items:flex-start;display:flex;flex-direction:column;justify-content:center}.content-direction[data-v-18aeada1],.content-email[data-v-18aeada1],.content-number[data-v-18aeada1]{width:100%}.info-legal-sm[data-v-18aeada1],.info-networks[data-v-18aeada1],.info-store-sm[data-v-18aeada1]{align-items:flex-start;display:flex;flex-direction:column;justify-content:center;width:100%}.btn[data-v-18aeada1]{color:var(--color_title);font-size:18px;padding-bottom:10px}.btn[data-v-18aeada1],.txt[data-v-18aeada1]{font-family:var(--font-style-1)!important}.txt[data-v-18aeada1]{color:var(--color_text);font-size:14px}.btns[data-v-18aeada1]:hover{color:var(--hover_text)}.btn-legal[data-v-18aeada1]{align-items:flex-start;display:flex;flex-direction:column;justify-content:center}.accordion[data-v-18aeada1],.btn-legal[data-v-18aeada1]{text-align:left;width:100%}.accordion[data-v-18aeada1]{border-style:none;cursor:pointer;margin-bottom:0;outline:2px solid transparent;outline-offset:2px;transition:.4s}.accordion[data-v-18aeada1]:after{color:#fff;content:\"\\276F\";float:right;font-weight:700}.accordion[data-v-18aeada1]:after,.active[data-v-18aeada1]:after{transition-duration:.15s;transition-duration:.2s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1)}.active[data-v-18aeada1]:after{transform:rotate(90deg)}.panel[data-v-18aeada1]{align-items:center;justify-content:flex-start;margin-bottom:10px;max-height:0;overflow:hidden;transition:.4s ease-out;width:100%}.content-items-lg[data-v-18aeada1]{display:none}.madebyKomercia[data-v-18aeada1]{align-items:center;display:flex;flex-direction:column;justify-content:center;padding-bottom:20px;padding-top:20px;width:100%}.txt-devBy[data-v-18aeada1]{color:var(--color_text);font-size:14px}.logo2[data-v-18aeada1]{opacity:.5;width:100px}}@media (min-width:1024px){.content-items-sm[data-v-18aeada1]{display:none}.content-items-lg[data-v-18aeada1]{grid-gap:1rem;align-items:flex-start;display:grid;gap:1rem;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:center;width:90%}.img-logo[data-v-18aeada1]{max-width:var(--with_logo);-o-object-fit:contain;object-fit:contain;width:100%}.content-image[data-v-18aeada1]{align-items:center;justify-content:flex-start;margin-bottom:20px}.content-image[data-v-18aeada1],.info-btn-footer[data-v-18aeada1]{display:flex;flex-direction:column;width:100%}.info-btn-footer[data-v-18aeada1]{align-items:flex-start;justify-content:center}.btns[data-v-18aeada1]{color:var(--color_text);font-family:var(--font-style-1)!important;font-size:14px}.btns[data-v-18aeada1]:hover{color:var(--hover_text)}}@media (min-width:1200px){.content-items-lg[data-v-18aeada1]{max-width:80rem;width:100%}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -621,14 +621,14 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 981:
+/***/ 987:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/footers/K14_footer9/Ko-Footer-9.vue?vue&type=template&id=70e40412&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/footers/K14_footer9/Ko-Footer-9.vue?vue&type=template&id=18aeada1&scoped=true&
 var render = function render() {
   var _this$settingByTempla, _this$settingByTempla2;
   var _vm = this,
@@ -639,19 +639,19 @@ var render = function render() {
     style: [_vm.settingByTemplate14[0].setting14Footer, _vm.settingByTemplate14[0].setting14General, {
       '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate14[0].setting14General) === null || _this$settingByTempla2 === void 0 ? void 0 : _this$settingByTempla2.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'Roboto'
     }]
-  }, [_vm._ssrNode("<div class=\"content-footer\" data-v-70e40412>", "</div>", [_vm._ssrNode("<div class=\"content-footer-items\" data-v-70e40412>", "</div>", [_vm._ssrNode("<div class=\"content-items-sm\" data-v-70e40412>", "</div>", [_vm._ssrNode("<div class=\"content-store-sm\" data-v-70e40412>", "</div>", [_vm._ssrNode("<div class=\"info-store-sm\" data-v-70e40412><button class=\"accordion btn\" data-v-70e40412>Información de la tienda</button> <div class=\"footer-content-tienda panel\" data-v-70e40412><div class=\"content-direction\" data-v-70e40412>" + (this.dataStore.geolocalizacion.length ? "<p class=\"txt-direction txt\" data-v-70e40412>" + _vm._ssrEscape("\n                  " + _vm._s(this.dataStore.geolocalizacion[0].direccion) + "\n                ") + "</p>" : "<!---->") + "</div> <div class=\"content-number\" data-v-70e40412>" + (this.dataStore.tienda.telefono ? "<p class=\"txt-number txt\" data-v-70e40412>" + _vm._ssrEscape("\n                  " + _vm._s(this.dataStore.tienda.telefono) + "\n                ") + "</p>" : "<!---->") + "</div> <div class=\"content-email\" data-v-70e40412>" + (this.dataStore.tienda.email_tienda ? "<p class=\"txt-email txt\" data-v-70e40412>" + _vm._ssrEscape("\n                  " + _vm._s(this.dataStore.tienda.email_tienda) + "\n                ") + "</p>" : "<!---->") + "</div></div></div> "), _vm._ssrNode("<div class=\"info-networks\" data-v-70e40412>", "</div>", [_vm._ssrNode("<button class=\"accordion btn\" data-v-70e40412>Síguenos</button> "), _c('KoSocialNet', {
+  }, [_vm._ssrNode("<div class=\"content-footer\" data-v-18aeada1>", "</div>", [_vm._ssrNode("<div class=\"w-full max-w-7xl flex flex-col justify-center items-center pt-50 pb-10 md:pb-50\" data-v-18aeada1>", "</div>", [_vm._ssrNode("<div class=\"content-items-sm\" data-v-18aeada1>", "</div>", [_vm._ssrNode("<div class=\"content-store-sm\" data-v-18aeada1>", "</div>", [_vm._ssrNode("<div class=\"info-store-sm\" data-v-18aeada1><button class=\"accordion btn\" data-v-18aeada1>Información de la tienda</button> <div class=\"footer-content-tienda panel\" data-v-18aeada1><div class=\"content-direction\" data-v-18aeada1>" + (this.dataStore.geolocalizacion.length ? "<p class=\"txt-direction txt\" data-v-18aeada1>" + _vm._ssrEscape("\n                  " + _vm._s(this.dataStore.geolocalizacion[0].direccion) + "\n                ") + "</p>" : "<!---->") + "</div> <div class=\"content-number\" data-v-18aeada1>" + (this.dataStore.tienda.telefono ? "<p class=\"txt-number txt\" data-v-18aeada1>" + _vm._ssrEscape("\n                  " + _vm._s(this.dataStore.tienda.telefono) + "\n                ") + "</p>" : "<!---->") + "</div> <div class=\"content-email\" data-v-18aeada1>" + (this.dataStore.tienda.email_tienda ? "<p class=\"txt-email txt\" data-v-18aeada1>" + _vm._ssrEscape("\n                  " + _vm._s(this.dataStore.tienda.email_tienda) + "\n                ") + "</p>" : "<!---->") + "</div></div></div> "), _vm._ssrNode("<div class=\"info-networks\" data-v-18aeada1>", "</div>", [_vm._ssrNode("<button class=\"accordion btn\" data-v-18aeada1>Síguenos</button> "), _c('KoSocialNet', {
     staticClass: "panel",
     attrs: {
       "footerIcon": this.settingByTemplate14[0].setting14Footer,
       "dataStore": _vm.dataStore
     }
-  })], 2), _vm._ssrNode(" <div class=\"info-legal-sm\" data-v-70e40412>" + (_vm.dataStore.politicas ? "<button class=\"btn-legal btn\" data-v-70e40412>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('footer_politicasyterminos')) + "\n            ") + "</button>" : "<!---->") + "</div>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-items-lg\" data-v-70e40412>", "</div>", [_vm._ssrNode("<div class=\"info-btn-footer gap-2\" data-v-70e40412>", "</div>", [_vm._ssrNode("<img" + _vm._ssrAttr("src", `${this.$store.state.urlKomercia}/logos/${_vm.dataStore.tienda.logo}`) + " alt=\"Logo\" class=\"img-logo\" data-v-70e40412> <div class=\"content-direction\" data-v-70e40412>" + (this.dataStore.geolocalizacion.length ? "<p class=\"txt-direction txt\" data-v-70e40412>" + _vm._ssrEscape("\n              " + _vm._s(this.dataStore.geolocalizacion[0].direccion) + "\n            ") + "</p>" : "<!---->") + "</div> <div class=\"content-number\" data-v-70e40412>" + (this.dataStore.tienda.telefono ? "<p class=\"txt-number txt\" data-v-70e40412>" + _vm._ssrEscape("\n              " + _vm._s(this.dataStore.tienda.telefono) + "\n            ") + "</p>" : "<!---->") + "</div> <div class=\"content-email\" data-v-70e40412>" + (this.dataStore.tienda.email_tienda ? "<p class=\"txt-email txt\" data-v-70e40412>" + _vm._ssrEscape("\n              " + _vm._s(this.dataStore.tienda.email_tienda) + "\n            ") + "</p>" : "<!---->") + "</div> "), _vm._ssrNode("<div class=\"info-networkss\" data-v-70e40412>", "</div>", [_c('KoSocialNet', {
+  })], 2), _vm._ssrNode(" <div class=\"info-legal-sm\" data-v-18aeada1>" + (_vm.dataStore.politicas ? "<button class=\"btn-legal btn\" data-v-18aeada1>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('footer_politicasyterminos')) + "\n            ") + "</button>" : "<!---->") + "</div>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-items-lg\" data-v-18aeada1>", "</div>", [_vm._ssrNode("<div class=\"info-btn-footer gap-2\" data-v-18aeada1>", "</div>", [_vm._ssrNode("<img" + _vm._ssrAttr("src", `${this.$store.state.urlKomercia}/logos/${_vm.dataStore.tienda.logo}`) + " alt=\"Logo\" class=\"img-logo\" data-v-18aeada1> <div class=\"content-direction\" data-v-18aeada1>" + (this.dataStore.geolocalizacion.length ? "<p class=\"txt-direction txt\" data-v-18aeada1>" + _vm._ssrEscape("\n              " + _vm._s(this.dataStore.geolocalizacion[0].direccion) + "\n            ") + "</p>" : "<!---->") + "</div> <div class=\"content-number\" data-v-18aeada1>" + (this.dataStore.tienda.telefono ? "<p class=\"txt-number txt\" data-v-18aeada1>" + _vm._ssrEscape("\n              " + _vm._s(this.dataStore.tienda.telefono) + "\n            ") + "</p>" : "<!---->") + "</div> <div class=\"content-email\" data-v-18aeada1>" + (this.dataStore.tienda.email_tienda ? "<p class=\"txt-email txt\" data-v-18aeada1>" + _vm._ssrEscape("\n              " + _vm._s(this.dataStore.tienda.email_tienda) + "\n            ") + "</p>" : "<!---->") + "</div> "), _vm._ssrNode("<div class=\"info-networkss\" data-v-18aeada1>", "</div>", [_c('KoSocialNet', {
     attrs: {
       "footerIcon": this.settingByTemplate14[0].setting14Footer,
       "dataStore": _vm.dataStore
     }
-  })], 1)], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"info-btn-footer\" data-v-70e40412>", "</div>", [_vm._ssrNode("<p class=\"btn\" data-v-70e40412>Enlaces</p> "), _vm._l(_vm.secciones, function (item, index) {
-    return _vm._ssrNode("<div data-v-70e40412>", "</div>", [item.path ? _c('nuxt-link', {
+  })], 1)], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"info-btn-footer\" data-v-18aeada1>", "</div>", [_vm._ssrNode("<p class=\"btn\" data-v-18aeada1>Enlaces</p> "), _vm._l(_vm.secciones, function (item, index) {
+    return _vm._ssrNode("<div data-v-18aeada1>", "</div>", [item.path ? _c('nuxt-link', {
       staticClass: "btns",
       attrs: {
         "to": item.path
@@ -662,7 +662,7 @@ var render = function render() {
         "to": item.href
       }
     }, [_vm._v("\n              " + _vm._s(_vm.$t(`${item.name}`)) + "\n            ")]) : _vm._e()], 1);
-  })], 2), _vm._ssrNode(" <div class=\"info-btn-footer\" data-v-70e40412><p class=\"btn\" data-v-70e40412>Nuestra empresa</p> " + (_vm.dataStore.politicas ? "<button class=\"btn-legal btns\" data-v-70e40412>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('footer_politicasyterminos')) + "\n          ") + "</button>" : "<!---->") + "</div>")], 2)], 2), _vm._ssrNode(" " + (this.settingByTemplate14[0].setting14Footer.watermark ? "<div class=\"empty\" data-v-70e40412></div>" : "<!---->") + " "), this.settingByTemplate14[0].setting14Footer.watermark ? _vm._ssrNode("<div class=\"madebyKomercia\" data-v-70e40412>", "</div>", [_vm._ssrNode("<p class=\"txt-devBy\" data-v-70e40412>" + _vm._ssrEscape(_vm._s(_vm.$t('footer_desarrollado'))) + "</p> "), _vm._ssrNode("<a href=\"https://komercia.co/\" target=\"_blank\" rel=\"noreferrer noopener\" data-v-70e40412>", "</a>", [_c('img', {
+  })], 2), _vm._ssrNode(" <div class=\"info-btn-footer\" data-v-18aeada1><p class=\"btn\" data-v-18aeada1>Nuestra empresa</p> " + (_vm.dataStore.politicas ? "<button class=\"btn-legal btns\" data-v-18aeada1>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('footer_politicasyterminos')) + "\n          ") + "</button>" : "<!---->") + "</div>")], 2)], 2), _vm._ssrNode(" " + (this.settingByTemplate14[0].setting14Footer.watermark ? "<div class=\"empty\" data-v-18aeada1></div>" : "<!---->") + " "), this.settingByTemplate14[0].setting14Footer.watermark ? _vm._ssrNode("<div class=\"madebyKomercia\" data-v-18aeada1>", "</div>", [_vm._ssrNode("<p class=\"txt-devBy\" data-v-18aeada1>" + _vm._ssrEscape(_vm._s(_vm.$t('footer_desarrollado'))) + "</p> "), _vm._ssrNode("<a href=\"https://komercia.co/\" target=\"_blank\" rel=\"noreferrer noopener\" data-v-18aeada1>", "</a>", [_c('img', {
     directives: [{
       name: "lazy",
       rawName: "v-lazy",
@@ -673,7 +673,7 @@ var render = function render() {
     attrs: {
       "alt": "Logo Img"
     }
-  }, [])])], 2) : _vm._e(), _vm._ssrNode(" "), _vm.showModal ? _vm._ssrNode("<div data-v-70e40412>", "</div>", [_vm.dataStore.politicas ? _vm._ssrNode("<div class=\"modal\" data-v-70e40412>", "</div>", [_c('KoTermsConditions', {
+  }, [])])], 2) : _vm._e(), _vm._ssrNode(" "), _vm.showModal ? _vm._ssrNode("<div data-v-18aeada1>", "</div>", [_vm.dataStore.politicas ? _vm._ssrNode("<div class=\"modal\" data-v-18aeada1>", "</div>", [_c('KoTermsConditions', {
     attrs: {
       "dataStore": _vm.dataStore
     }
@@ -681,7 +681,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/footers/K14_footer9/Ko-Footer-9.vue?vue&type=template&id=70e40412&scoped=true&
+// CONCATENATED MODULE: ./components/footers/K14_footer9/Ko-Footer-9.vue?vue&type=template&id=18aeada1&scoped=true&
 
 // EXTERNAL MODULE: ./components/template11/ko-newsletter.vue + 9 modules
 var ko_newsletter = __webpack_require__(264);
@@ -795,7 +795,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(607)
+  var style0 = __webpack_require__(609)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -808,7 +808,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "70e40412",
+  "18aeada1",
   "21202af6"
   
 )
