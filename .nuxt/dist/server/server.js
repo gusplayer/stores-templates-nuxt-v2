@@ -10584,6 +10584,7 @@ const actions = {
       });
       if (data) {
         commit('SET_CITIES', data.data);
+        localStorage.setItem('storeCities', JSON.stringify(state.cities));
         return {
           success: true,
           data: data
