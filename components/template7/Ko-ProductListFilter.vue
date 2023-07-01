@@ -2,7 +2,7 @@
   <div
     class="product-content"
     :style="[
-      settingByTemplate7[0].settingK07ProductList,
+      settingByTemplate7[0].productListFilter,
       settingByTemplate7[0].settingGeneral,
     ]"
   >
@@ -12,30 +12,23 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_1
-              ? this.settingByTemplate7[0].settingGeneral.fount_1
-              : 'David Libre',
+            this.settingByTemplate7[0]?.settingGeneral?.fount_1 ??
+            'David Libre',
         },
         {
           '--font-style-2':
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_2
-              ? this.settingByTemplate7[0].settingGeneral.fount_2
-              : 'Great Vibes',
+            this.settingByTemplate7[0]?.settingGeneral?.fount_2 ??
+            'Great Vibes',
         },
         {
           '--font-style-3':
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_3
-              ? this.settingByTemplate7[0].settingGeneral.fount_3
-              : 'Lora',
+            this.settingByTemplate7[0]?.settingGeneral?.fount_3 ?? 'Lora',
         },
       ]"
     >
       <div class="tittle-banner-shop">
         <p class="btn-tittle-shop">
-          {{ settingByTemplate7[0].settingK07ProductList.title }}
+          {{ settingByTemplate7[0].productListFilter.title }}
         </p>
       </div>
     </div>
@@ -507,8 +500,8 @@ export default {
     this.setOptionShipping()
     if (
       this.settingByTemplate7[0] &&
-      this.settingByTemplate7[0].settingK07ProductList &&
-      this.settingByTemplate7[0].settingK07ProductList.img_background == true
+      this.settingByTemplate7[0].productListFilter &&
+      this.settingByTemplate7[0].productListFilter.img_background == true
     ) {
       this.setBg(1)
     } else {
@@ -814,8 +807,8 @@ export default {
         if (!this.mobileCheck()) {
           var imagen = document.getElementById('BgProductlistF')
           if (value == 1) {
-            if (this.settingByTemplate7[0].settingK07ProductList.url_img) {
-              imagen.style.backgroundImage = `url(${this.settingByTemplate7[0].settingK07ProductList.url_img})`
+            if (this.settingByTemplate7[0].productListFilter.url_img) {
+              imagen.style.backgroundImage = `url(${this.settingByTemplate7[0].productListFilter.url_img})`
             } else {
               imagen.style.backgroundImage = `url(https://res.cloudinary.com/brahyanr10/image/upload/v1611623008/Komercia/Shop/flowers-shoppage_jwuds4.jpg)`
             }
@@ -862,8 +855,8 @@ export default {
     settingByTemplate7() {
       if (
         this.settingByTemplate7[0] &&
-        this.settingByTemplate7[0].settingK07ProductList &&
-        this.settingByTemplate7[0].settingK07ProductList.img_background == true
+        this.settingByTemplate7[0].productListFilter &&
+        this.settingByTemplate7[0].productListFilter.img_background == true
       ) {
         this.setBg(1)
       } else {

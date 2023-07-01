@@ -5,10 +5,7 @@
       blog,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': this.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -72,59 +69,35 @@ export default {
   props: { article: Object, blog: Object, settingGeneral: Object },
   mounted() {
     if (this.article.created_at) {
-      let domain = this.article.created_at
-      let result = domain.split(' ')
-      this.shippingCreated = result[0]
-      let data = this.shippingCreated.split('-')
-      this.dayCreate = data[2]
-      this.monthCreate = data[1]
-      this.yearCreate = data[0]
+      const [shippingCreated] = this.article.created_at.split(' ')
+      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
+      this.dayCreate = dayCreate
+      this.monthCreate = monthCreate
+      this.yearCreate = yearCreate
     }
-    if (this.monthCreate == 1) {
-      this.nameMonth = 'Ene'
-    }
-    if (this.monthCreate == 2) {
-      this.nameMonth = 'Feb'
-    }
-    if (this.monthCreate == 3) {
-      this.nameMonth = 'Mar'
-    }
-    if (this.monthCreate == 4) {
-      this.nameMonth = 'Abr'
-    }
-    if (this.monthCreate == 5) {
-      this.nameMonth = 'May'
-    }
-    if (this.monthCreate == 6) {
-      this.nameMonth = 'Jun'
-    }
-    if (this.monthCreate == 7) {
-      this.nameMonth = 'Jul'
-    }
-    if (this.monthCreate == 8) {
-      this.nameMonth = 'Ago'
-    }
-    if (this.monthCreate == 9) {
-      this.nameMonth = 'Sep'
-    }
-    if (this.monthCreate == 10) {
-      this.nameMonth = 'Oct'
-    }
-    if (this.monthCreate == 11) {
-      this.nameMonth = 'Nov'
-    }
-    if (this.monthCreate == 12) {
-      this.nameMonth = 'Dic'
-    }
+    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
   },
   data() {
     return {
-      hover: false,
       shippingCreated: '',
       dayCreate: '',
       monthCreate: '',
       yearCreate: '',
       nameMonth: '',
+      monthNames: {
+        1: 'Ene',
+        2: 'Feb',
+        3: 'Mar',
+        4: 'Abr',
+        5: 'May',
+        6: 'Jun',
+        7: 'Jul',
+        8: 'Ago',
+        9: 'Sep',
+        10: 'Oct',
+        11: 'Nov',
+        12: 'Dic',
+      },
     }
   },
 }

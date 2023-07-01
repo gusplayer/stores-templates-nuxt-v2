@@ -4,16 +4,10 @@
       class="producto-items-content"
       :style="[
         {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Poppins',
+          '--font-style-1': this.settingGeneral?.fount_1 ?? 'Poppins',
         },
         {
-          '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
-              : 'Roboto',
+          '--font-style-2': this.settingGeneral?.fount_2 ?? 'Roboto',
         },
       ]"
     >

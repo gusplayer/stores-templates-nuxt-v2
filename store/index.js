@@ -363,6 +363,63 @@ export const mutations = {
       }
     }
   },
+  SET_CURRENTSETTING14(state, value) {
+    if (value && value.component) {
+      switch (value.component) {
+        case 'banner':
+          state.settingByTemplate14.banner = value.setting
+          break
+        case 'cardBlog':
+          state.settingByTemplate14.cardBlog = value.setting
+          break
+        case 'cardProducts':
+          state.settingByTemplate14.cardProducts = value.setting
+          break
+        case 'contact':
+          state.settingByTemplate14.contact = value.setting
+          break
+        case 'detailsProducts':
+          state.settingByTemplate14.detailsProducts = value.setting
+          break
+        case 'footer':
+          state.settingByTemplate14.footer = value.setting
+          break
+        case 'header':
+          state.settingByTemplate14.header = value.setting
+          break
+        case 'information':
+          state.settingByTemplate14.information = value.setting
+          break
+        case 'listBlogHome':
+          state.settingByTemplate14.listBlogHome = value.setting
+          break
+        case 'productListFilter':
+          state.settingByTemplate14.listProductsFilter = value.setting
+          break
+        case 'listProductsHome':
+          state.settingByTemplate14.listProductsHome = value.setting
+          break
+        case 'logos':
+          state.settingByTemplate14.logos = value.setting
+          break
+        case 'newsletter':
+          state.settingByTemplate14.newsletter = value.setting
+          break
+        case 'offers':
+          state.settingByTemplate14.offers = value.setting
+          break
+        case 'offersProduct':
+          state.settingByTemplate14.offersProduct = value.setting
+          break
+        case 'pages':
+          state.settingByTemplate14.pages = value.setting
+          break
+        case 'settingsGeneral':
+          state.settingByTemplate14.settingsGeneral = value.setting
+          break
+      }
+    }
+  },
   SET_CURRENTSETTINGMODAL(state, value) {
     if (value && value.data) {
       state.dataStore.modal = value.data
@@ -772,6 +829,7 @@ export const actions = {
       })
       if (data) {
         commit('SET_CITIES', data.data)
+        localStorage.setItem('storeCities', JSON.stringify(state.cities))
         return { success: true, data: data }
       }
     } catch (err) {

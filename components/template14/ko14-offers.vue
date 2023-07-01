@@ -1,10 +1,10 @@
 <template>
   <div
-    class="content-section w-full flex flex-col justify-center items-center py-20"
+    class="content-section w-full flex flex-col justify-center items-center py-20 px-10"
     :style="[offers, settingGeneral]"
   >
     <div
-      class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4 items-center justify-center"
+      class="md:w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4 items-center justify-center"
     >
       <a
         class="w-full"
@@ -13,7 +13,7 @@
       >
         <div class="wrapper-left">
           <img
-            class="img-left"
+            class="img-left max-w-[416px] max-h-[238px]"
             v-lazy="idCloudinaryBanner(this.offers.values[0].img, 'banner')"
             alt="imagen-1"
           />
@@ -43,7 +43,7 @@
       >
         <div class="wrapper-center">
           <img
-            class="img-center"
+            class="img-center max-w-[416px] max-h-[238px]"
             v-lazy="idCloudinaryBanner(this.offers.values[1].img, 'banner')"
             alt="imagen-2"
           />
@@ -73,7 +73,7 @@
       >
         <div class="wrapper-right">
           <img
-            class="img-right"
+            class="img-right max-w-[416px] max-h-[238px]"
             v-lazy="idCloudinaryBanner(this.offers.values[2].img, 'banner')"
             alt="imagen-3"
           />
@@ -101,7 +101,7 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'Ko14-Offers',
   props: {

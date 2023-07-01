@@ -27,6 +27,7 @@ const _2e317606 = () => interopDefault(import('..\\pages\\template6\\index_macro
 const _18d692d3 = () => interopDefault(import('..\\pages\\template99\\templates\\template1\\index.vue' /* webpackChunkName: "pages/template99/templates/template1/index" */))
 const _20883832 = () => interopDefault(import('..\\pages\\template99\\templates\\template2\\index.vue' /* webpackChunkName: "pages/template99/templates/template2/index" */))
 const _2839dd91 = () => interopDefault(import('..\\pages\\template99\\templates\\template3\\index.vue' /* webpackChunkName: "pages/template99/templates/template3/index" */))
+const _79ce8d6a = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 const _7cbcb23e = () => interopDefault(import('..\\pages\\blog\\_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
 const _4e72732e = () => interopDefault(import('..\\pages\\productos\\_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
 const _0d838783 = () => interopDefault(import('..\\pages\\productosHoko\\_slug.vue' /* webpackChunkName: "pages/productosHoko/_slug" */))
@@ -35,7 +36,6 @@ const _533f3072 = () => interopDefault(import('..\\pages\\wa\\_slug\\blog\\index
 const _b7844b5a = () => interopDefault(import('..\\pages\\wa\\_slug\\micompra.vue' /* webpackChunkName: "pages/wa/_slug/micompra" */))
 const _47e36dc1 = () => interopDefault(import('..\\pages\\wa\\_slug\\blog\\_slugBlog.vue' /* webpackChunkName: "pages/wa/_slug/blog/_slugBlog" */))
 const _ee0775a2 = () => interopDefault(import('..\\pages\\wa\\_slug\\productos\\_slugProduct.vue' /* webpackChunkName: "pages/wa/_slug/productos/_slugProduct" */))
-const _79ce8d6a = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -141,6 +141,10 @@ export const routerOptions = {
     component: _2839dd91,
     name: "template99-templates-template3"
   }, {
+    path: "/",
+    component: _79ce8d6a,
+    name: "index"
+  }, {
     path: "/blog/:slug",
     component: _7cbcb23e,
     name: "blog-slug"
@@ -172,10 +176,6 @@ export const routerOptions = {
     path: "/wa/:slug?/productos/:slugProduct?",
     component: _ee0775a2,
     name: "wa-slug-productos-slugProduct"
-  }, {
-    path: "/",
-    component: _79ce8d6a,
-    name: "index"
   }],
 
   fallback: false

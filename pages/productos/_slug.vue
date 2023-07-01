@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <component :is="indexTemplate" v-bind="componentsProps" />
-  </div>
+  <component :is="indexTemplate" v-bind="componentsProps" />
 </template>
 <script>
 import { mapState } from 'vuex'
@@ -19,10 +17,35 @@ export default {
       import('../../components/template11/ko-ProductDetail'),
     Ko13ProductDetail: () =>
       import('../../components/template13/Ko-ProductDetail-1.vue'),
+    Ko14ProductDetail: () =>
+      import('../../components/template14/Ko-ProductDetail-1.vue'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)
+  },
+  data() {
+    return {
+      componentMapping: {
+        3: 'Ko5ProductDetail',
+        5: 'Ko5ProductDetail',
+        6: 'Ko5ProductDetail',
+        7: 'Ko7ProductDetail',
+        9: 'Ko9ProductDetail',
+        10: 'Ko10ProductDetail',
+        11: 'Ko11ProductDetail',
+        13: 'Ko13ProductDetail',
+        14: 'Ko14ProductDetail',
+      },
+      templateMapping: {
+        9: 'SET_CURRENTSETTING09',
+        7: 'SET_CURRENTSETTING07',
+        11: 'SET_CURRENTSETTING11',
+        10: 'SET_CURRENTSETTING10',
+        13: 'SET_CURRENTSETTING13',
+        14: 'SET_CURRENTSETTING14',
+      },
+    }
   },
   computed: {
     ...mapState([
@@ -34,6 +57,7 @@ export default {
       'settingByTemplate10',
       'settingByTemplate11',
       'settingByTemplate13',
+      'settingByTemplate14',
       'template',
     ]),
     fullProducts() {
@@ -41,159 +65,54 @@ export default {
     },
     indexTemplate() {
       let productListComponent = ''
-      switch (this.template) {
-        case 3:
-          productListComponent = 'Ko5ProductDetail'
-          break
-        case 5:
-          productListComponent = 'Ko5ProductDetail'
-          break
-        case 6:
-          productListComponent = 'Ko5ProductDetail'
-          break
-        case 7:
-          productListComponent = 'Ko7ProductDetail'
-          break
-        case 9:
-          productListComponent = 'Ko9ProductDetail'
-          break
-        case 10:
-          productListComponent = 'Ko10ProductDetail'
-          break
-        case 11:
-          productListComponent = 'Ko11ProductDetail'
-          break
-        case 13:
-          productListComponent = 'Ko13ProductDetail'
-          break
+      if (this.componentMapping.hasOwnProperty(this.template)) {
+        productListComponent = this.componentMapping[parseInt(this.template)]
       }
       return productListComponent
-    },
-    whatsapp() {
-      return this.dataStore.tienda.whatsapp
-    },
-    envios() {
-      return this.dataStore.medios_envio
-    },
-    integracioneStore() {
-      return this.$store.state.analytics_tagmanager
     },
     componentsProps() {
       return {
         dataStore: this.dataStore,
         productsData: this.fullProducts,
-        whatsapp: this.whatsapp,
-        envios: this.envios,
-        facebookPixel: this.integracioneStore,
-        settingByTemplate:
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings
-            : this.settingBase,
-        settingByTemplate7: this.settingByTemplate7
-          ? [
-              {
-                settingGeneral:
-                  this.settingByTemplate7 &&
-                  this.settingByTemplate7.settingGeneral
-                    ? this.settingByTemplate7.settingGeneral
-                    : null,
-                settingK07DetailsProduct:
-                  this.settingByTemplate7 &&
-                  this.settingByTemplate7.detailsProduct
-                    ? this.settingByTemplate7.detailsProduct
-                    : null,
-                settingKProdutCard:
-                  this.settingByTemplate7 && this.settingByTemplate7.card
-                    ? this.settingByTemplate7.card
-                    : null,
-              },
-            ]
-          : null,
-        settingByTemplate9: this.settingByTemplate9
-          ? [
-              {
-                cardProduct:
-                  this.settingByTemplate9 && this.settingByTemplate9.cardProduct
-                    ? this.settingByTemplate9.cardProduct
-                    : null,
-                detailsProduct:
-                  this.settingByTemplate9 &&
-                  this.settingByTemplate9.detailsProduct
-                    ? this.settingByTemplate9.detailsProduct
-                    : null,
-                setting9General:
-                  this.settingByTemplate9 &&
-                  this.settingByTemplate9.settingGeneral
-                    ? this.settingByTemplate9.settingGeneral
-                    : null,
-              },
-            ]
-          : null,
-        settingByTemplate10: this.settingByTemplate10
-          ? [
-              {
-                cardProduct:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.cardProduct
-                    ? this.settingByTemplate10.cardProduct
-                    : null,
-                detailsProduct:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.detailsProduct
-                    ? this.settingByTemplate10.detailsProduct
-                    : null,
-                setting10General:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.settingGeneral
-                    ? this.settingByTemplate10.settingGeneral
-                    : null,
-              },
-            ]
-          : null,
-        settingByTemplate11: this.settingByTemplate11
-          ? [
-              {
-                detailsProduct:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.detailsProduct
-                    ? this.settingByTemplate11.detailsProduct
-                    : null,
-                cardProduct:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.cardProduct
-                    ? this.settingByTemplate11.cardProduct
-                    : null,
-                setting11General:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.settingGeneral
-                    ? this.settingByTemplate11.settingGeneral
-                    : null,
-              },
-            ]
-          : null,
-        settingByTemplate13: this.settingByTemplate13
-          ? [
-              {
-                detailsProduct:
-                  this.settingByTemplate13 &&
-                  this.settingByTemplate13.detailsProduct
-                    ? this.settingByTemplate13.detailsProduct
-                    : null,
-                cardProduct:
-                  this.settingByTemplate13 &&
-                  this.settingByTemplate13.cardProduct
-                    ? this.settingByTemplate13.cardProduct
-                    : null,
-                setting13General:
-                  this.settingByTemplate13 &&
-                  this.settingByTemplate13.settingGeneral
-                    ? this.settingByTemplate13.settingGeneral
-                    : null,
-              },
-            ]
-          : null,
+        whatsapp: this.dataStore.tienda.whatsapp,
+        envios: this.dataStore.medios_envio,
+        facebookPixel: this.$store.state.analytics_tagmanager,
+        settingByTemplate: this.createSettingByTemplate(
+          this.settingByTemplate,
+          'settings',
+          'tipo_letra',
+          this.settingBase
+        ),
+        settingByTemplate7: this.createNestedSetting(
+          this.settingByTemplate7,
+          ['settingGeneral', 'detailsProduct', 'card'],
+          null
+        ),
+        settingByTemplate9: this.createNestedSetting(
+          this.settingByTemplate9,
+          ['cardProduct', 'detailsProduct', 'settingGeneral'],
+          null
+        ),
+        settingByTemplate10: this.createNestedSetting(
+          this.settingByTemplate10,
+          ['cardProduct', 'detailsProduct', 'settingGeneral'],
+          null
+        ),
+        settingByTemplate11: this.createNestedSetting(
+          this.settingByTemplate11,
+          ['detailsProduct', 'cardProduct', 'settingGeneral'],
+          null
+        ),
+        settingByTemplate13: this.createNestedSetting(
+          this.settingByTemplate13,
+          ['detailsProduct', 'cardProduct', 'settingsGeneral'],
+          null
+        ),
+        settingByTemplate14: this.createNestedSetting(
+          this.settingByTemplate14,
+          ['detailsProducts', 'cardProducts', 'settingsGeneral'],
+          null
+        ),
       }
     },
   },
@@ -201,23 +120,42 @@ export default {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
+    createSettingByTemplate(
+      settingByTemplate,
+      property1,
+      property2,
+      defaultValue
+    ) {
+      if (
+        settingByTemplate &&
+        settingByTemplate[property1] &&
+        settingByTemplate[property1][property2]
+      ) {
+        return settingByTemplate[property1]
+      }
+      return defaultValue
+    },
+    createNestedSetting(setting, properties, defaultValue) {
+      if (setting) {
+        const nestedSetting = {}
+        properties.forEach((property) => {
+          nestedSetting[property] =
+            setting && setting[property] ? setting[property] : null
+        })
+        return [nestedSetting]
+      }
+      return null
+    },
     addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
-        e.origin.includes('http://localhost:8080') ||
-        e.origin.includes('https://panel.komercia.xyz')
+        e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component) {
-          if (e.data.template == 9) {
-            this.$store.commit('SET_CURRENTSETTING09', e.data)
-          } else if (e.data.template == 7) {
-            this.$store.commit('SET_CURRENTSETTING07', e.data)
-          } else if (e.data.template == 11) {
-            this.$store.commit('SET_CURRENTSETTING11', e.data)
-          } else if (e.data.template == 10) {
-            this.$store.commit('SET_CURRENTSETTING10', e.data)
-          } else if (e.data.template == 13) {
-            this.$store.commit('SET_CURRENTSETTING13', e.data)
+          const template = e.data.template
+          if (this.templateMapping.hasOwnProperty(template)) {
+            const commitAction = this.templateMapping[template]
+            this.$store.commit(commitAction, e.data)
           }
         } else if (e && e.data && e.data.returnHome == true) {
           this.$router.push({

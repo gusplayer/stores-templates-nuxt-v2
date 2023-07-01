@@ -23,7 +23,7 @@ export default {
     },
     indexTemplate() {
       let componentTemplate = ''
-      if (this.settingByTemplate && this.settingByTemplate.tema) {
+      if (this.settingByTemplate?.tema) {
         switch (this.settingByTemplate.tema) {
           case 1:
             componentTemplate = 'WaTemplate1'

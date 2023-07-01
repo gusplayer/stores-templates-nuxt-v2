@@ -1,18 +1,11 @@
 <template>
   <div
-    class="home"
     :style="[
       {
         '--font-style':
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings.tipo_letra
-            : 'Roboto',
+          this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto',
       },
-      this.settingByTemplate && this.settingByTemplate.settings
-        ? this.settingByTemplate.settings
-        : this.settingBase,
+      this.settingByTemplate?.settings ?? this.settingBase,
     ]"
   >
     <kBanner v-if="this.stateBanner" id="KHeaderX" />
@@ -73,8 +66,7 @@ export default {
     addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
-        e.origin.includes('http://localhost:8080') ||
-        e.origin.includes('https://panel.komercia.xyz')
+        e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.componentToEdit) {
           // console.log(e.data)

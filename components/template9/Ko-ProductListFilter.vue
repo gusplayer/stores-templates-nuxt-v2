@@ -2,7 +2,7 @@
   <div
     class="product-content"
     :style="[
-      settingByTemplate9[0].setting9General,
+      settingByTemplate9[0].settingGeneral,
       settingByTemplate9[0].productListFilter,
     ]"
   >
@@ -11,17 +11,11 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate9[0].setting9General &&
-            this.settingByTemplate9[0].setting9General.fount_1
-              ? this.settingByTemplate9[0].setting9General.fount_1
-              : 'Poppins',
+            this.settingByTemplate9[0]?.settingGeneral?.fount_1 ?? 'Poppins',
         },
         {
           '--font-style-2':
-            this.settingByTemplate9[0].setting9General &&
-            this.settingByTemplate9[0].setting9General.fount_2
-              ? this.settingByTemplate9[0].setting9General.fount_2
-              : 'Roboto',
+            this.settingByTemplate9[0]?.settingGeneral?.fount_2 ?? 'Roboto',
         },
       ]"
     >
@@ -62,17 +56,11 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate9[0].setting9General &&
-            this.settingByTemplate9[0].setting9General.fount_1
-              ? this.settingByTemplate9[0].setting9General.fount_1
-              : 'Poppins',
+            this.settingByTemplate9[0]?.settingGeneral?.fount_1 ?? 'Poppins',
         },
         {
           '--font-style-2':
-            this.settingByTemplate9[0].setting9General &&
-            this.settingByTemplate9[0].setting9General.fount_2
-              ? this.settingByTemplate9[0].setting9General.fount_2
-              : 'Roboto',
+            this.settingByTemplate9[0]?.settingGeneral?.fount_2 ?? 'Roboto',
         },
       ]"
     >
@@ -393,18 +381,18 @@
                   class="content-products"
                 >
                   <KoProdcutCardFilter
-                    :settingGeneral="settingByTemplate9[0].setting9General"
+                    :settingGeneral="settingByTemplate9[0].settingGeneral"
                     :productListCard="settingByTemplate9[0].cardProduct"
                     :product="product"
                     v-if="!showInList"
                     class="product-nolist"
-                  ></KoProdcutCardFilter>
+                  />
                   <KoProdcutCardFilerList
-                    :settingGeneral="settingByTemplate9[0].setting9General"
+                    :settingGeneral="settingByTemplate9[0].settingGeneral"
                     :productListCard="settingByTemplate9[0].cardProduct"
                     :product="product"
                     v-if="showInList"
-                  ></KoProdcutCardFilerList>
+                  />
                 </div>
               </div>
               <div
@@ -425,7 +413,7 @@
                     :page-size="this.numVistas"
                     :current-page.sync="currentPage"
                     class="pagination"
-                  ></el-pagination>
+                  />
                 </div>
               </div>
             </div>

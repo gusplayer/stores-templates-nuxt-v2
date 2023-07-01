@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="this.fullProducts.length > 0"
-    class="w-full flex justify-center items-center py-15 lg:py-20 px-10 md:px-0"
+    class="w-full flex justify-center items-center py-15 lg:py-20 px-10"
     :style="`background-color: ${listProductsHome['--background_color_1']}`"
   >
     <div
@@ -13,16 +13,15 @@
         >
           {{ listProductsHome.title }}
         </p>
-        <a
-          v-if="listProductsHome.visible_btn"
-          :href="listProductsHome?.url_redirect ?? ''"
+        <nuxt-link
+          :to="{ path: `/productos` }"
           :style="`color: ${listProductsHome.color_text_btn}; font-size: ${listProductsHome.fontSizeTextBtn}; font-weight: ${listProductsHome.fontWeighTextBtn};`"
         >
           {{ listProductsHome.text_btn }}
           <FlechaRight-icon
             :style="`color: ${listProductsHome.color_text_btn}; font-size: ${listProductsHome.fontSizeTextBtn}; font-weight: ${listProductsHome.fontWeighTextBtn};`"
           />
-        </a>
+        </nuxt-link>
       </div>
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
@@ -33,7 +32,7 @@
           >
             <KoProductCard
               :product="product"
-              :cardProduct="cardProduct"
+              :cardProducts="cardProducts"
               :settingGeneral="settingGeneral"
               class="giftLoad"
             />
@@ -45,28 +44,38 @@
 </template>
 
 <script>
-import KoProductCard from './_cardProduct/ProductCard.vue'
 export default {
   name: 'Ko14-productListHome',
   props: {
-    listProductsHome: Object,
-    settingGeneral: Object,
-    cardProducts: Object,
-    dataStore: Object,
-    fullProducts: {},
+    listProductsHome: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    cardProducts: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
   },
   components: {
-    KoProductCard,
+    KoProductCard: () => import('./_cardProduct/ProductCard'),
   },
   data() {
     return {
       swiperOption: {
-        slidesPerView: 'auto',
+        slidesPerView: '',
         spaceBetween: '',
-        autoplay: {
-          delay: 7000,
-          disableOnInteraction: false,
-        },
         breakpoints: {
           10000: {
             slidesPerView: 4,
@@ -74,15 +83,17 @@ export default {
           },
           900: {
             slidesPerView: 3,
+            slidesPerGroup: 3,
             spaceBetween: 30,
           },
           640: {
             slidesPerView: 2,
+            slidesPerGroup: 2,
             spaceBetween: 10,
           },
           425: {
-            slidesPerView: 2,
-            spaceBetween: 5,
+            slidesPerGroup: 1,
+            spaceBetween: 10,
           },
         },
       },

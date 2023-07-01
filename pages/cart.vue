@@ -1,15 +1,12 @@
 <template>
-  <div>
-    <KCart :dataStore="dataStore" />
-  </div>
+  <KCart :dataStore="dataStore" />
 </template>
 <script>
-import KCart from '../components/cart/Ko-Cart'
 export default {
   layout: 'default',
   name: 'ContentCart',
   components: {
-    KCart,
+    KCart: () => import('../components/cart/Ko-Cart'),
   },
   computed: {
     dataStore() {

@@ -4,16 +4,13 @@
     :style="[
       {
         '--font-style-1':
-          this.settingByTemplate10.settingGeneral &&
-          this.settingByTemplate10.settingGeneral.fount_1
-            ? this.settingByTemplate10.settingGeneral.fount_1
-            : 'Roboto',
+          this.settingByTemplate10?.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
-    <KbuttonCar />
-    <Kcarousel
-      id="kbannerX"
+    <KButtonCart />
+    <KCarousel
+      id="kBannerX"
       v-bind="componentsProps"
       :key="bannerRendering"
       v-if="
@@ -22,7 +19,7 @@
         settingByTemplate10.banner.visible
       "
     />
-    <Ksection
+    <KSection
       id="kSectionX"
       v-bind="componentsProps"
       v-if="
@@ -31,7 +28,7 @@
         settingByTemplate10.section.visible
       "
     />
-    <Ktrending
+    <KTrending
       id="kTrendingX"
       v-bind="componentsProps"
       v-if="
@@ -40,7 +37,7 @@
         settingByTemplate10.trending.visible
       "
     />
-    <Kdeal
+    <KDeal
       id="kOffersX"
       v-bind="componentsProps"
       v-if="
@@ -49,8 +46,8 @@
         settingByTemplate10.offers.visible
       "
     />
-    <Kfeatured
-      id="KproductDestacadosX"
+    <KFeatured
+      id="KProductDestacadosX"
       v-bind="componentsProps"
       v-if="
         settingByTemplate10 &&
@@ -58,8 +55,8 @@
         settingByTemplate10.productList.visible
       "
     />
-    <Kblog
-      id="KblogX"
+    <KBlog
+      id="KBlogX"
       v-bind="componentsProps"
       v-show="
         listArticulos.length > 0 &&
@@ -76,17 +73,17 @@ export default {
   layout: 'default',
   name: 'Ko-template10',
   components: {
-    KbuttonCar: () => import('../../components/template10/buttonCar'),
-    Kcarousel: () => import('../../components/template10/ko-carousel'),
-    Ksection: () => import('../../components/template10/ko-section'),
-    Ktrending: () => import('../../components/template10/ko-trending'),
-    Kdeal: () => import('../../components/template10/ko-deals'),
-    Kfeatured: () => import('../../components/template10/ko-featuredProducts'),
-    Kblog: () => import('../../components/template10/ko-blog'),
+    KButtonCart: () => import('../../components/template10/buttonCar'),
+    KCarousel: () => import('../../components/template10/ko-carousel'),
+    KSection: () => import('../../components/template10/ko-section'),
+    KTrending: () => import('../../components/template10/ko-trending'),
+    KDeal: () => import('../../components/template10/ko-deals'),
+    KFeatured: () => import('../../components/template10/ko-featuredProducts'),
+    KBlog: () => import('../../components/template10/ko-blog'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   data() {
     return {
@@ -119,14 +116,13 @@ export default {
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenertemplate(e) {
+    addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
-        e.origin.includes('http://localhost:8080') ||
-        e.origin.includes('https://panel.komercia.xyz')
+        e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 10) {
           this.$store.commit('SET_CURRENTSETTING10', e.data)
@@ -141,16 +137,16 @@ export default {
         ) {
           switch (e.data.componentToEdit) {
             case 'settingGeneral':
-              this.moverseA('kbannerX')
+              this.moverseA('kBannerX')
               break
             case 'header':
-              this.moverseA('kbannerX')
+              this.moverseA('kBannerX')
               break
             case 'footer':
-              this.moverseA('KblogX')
+              this.moverseA('KBlogX')
               break
             case 'banner':
-              this.moverseA('kbannerX')
+              this.moverseA('kBannerX')
               break
             case 'section':
               this.moverseA('kSectionX')
@@ -165,10 +161,10 @@ export default {
               this.moverseA('kOffersX')
               break
             case 'productDestacados':
-              this.moverseA('KproductDestacadosX')
+              this.moverseA('KProductDestacadosX')
               break
             case 'blog':
-              this.moverseA('KblogX')
+              this.moverseA('KBlogX')
               break
             case 'detailsProduct':
               if (this.fullProducts) {

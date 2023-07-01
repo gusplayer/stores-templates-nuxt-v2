@@ -2,14 +2,11 @@
   <div
     class="product-content"
     :style="[
-      settingByTemplate11[0].setting11General,
+      settingByTemplate11[0].settingGeneral,
       settingByTemplate11[0].productList,
       {
         '--font-style-1':
-          this.settingByTemplate11[0].setting11General &&
-          this.settingByTemplate11[0].setting11General.fount_1
-            ? this.settingByTemplate11[0].setting11General.fount_1
-            : 'Roboto',
+          this.settingByTemplate11[0]?.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -39,7 +36,7 @@
                     :product="product"
                     class="product-list"
                     :settingKcardProduct="settingByTemplate11[0].cardProduct"
-                    :settingGeneral="settingByTemplate11[0].setting11General"
+                    :settingGeneral="settingByTemplate11[0].settingGeneral"
                   ></KoProdcutCardFilter>
                 </div>
               </div>

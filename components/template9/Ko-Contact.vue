@@ -2,8 +2,8 @@
   <div
     calss="content-contact-template9"
     :style="[
-      settingByTemplate9[0].cardProduct,
-      settingByTemplate9[0].setting9General,
+      settingByTemplate9[0].contact,
+      settingByTemplate9[0].settingGeneral,
     ]"
   >
     <div
@@ -11,10 +11,7 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate9[0].setting9General &&
-            this.settingByTemplate9[0].setting9General.fount_1
-              ? this.settingByTemplate9[0].setting9General.fount_1
-              : 'Poppins',
+            this.settingByTemplate9[0]?.settingGeneral?.fount_1 ?? 'Poppins',
         },
       ]"
     >
@@ -388,7 +385,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .content-form-contact {
-  padding-top: 20px;
+  /* padding-top: 20px; */
   background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
 }

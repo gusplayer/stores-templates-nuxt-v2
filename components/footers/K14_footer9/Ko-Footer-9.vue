@@ -12,7 +12,9 @@
     ]"
   >
     <div class="content-footer">
-      <div class="content-footer-items">
+      <div
+        class="w-full max-w-7xl flex flex-col justify-center items-center pt-50 pb-10 md:pb-50"
+      >
         <div class="content-items-sm">
           <div class="content-store-sm">
             <div class="info-store-sm">
@@ -276,9 +278,7 @@ export default {
   background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
 }
-.content-footer-items {
-  @apply w-full max-w-7xl flex flex-col justify-center items-center;
-}
+
 .modal {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
@@ -385,9 +385,6 @@ export default {
 @media (min-width: 1200px) {
   .content-items-lg {
     @apply w-full max-w-7xl;
-  }
-  .content-footer-items {
-    @apply pt-40 pb-60;
   }
 }
 </style>

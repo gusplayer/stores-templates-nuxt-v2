@@ -1,43 +1,44 @@
 exports.ids = [1];
 exports.modules = {
 
-/***/ 924:
+/***/ 961:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template10/index.vue?vue&type=template&id=6c551205&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template10/index.vue?vue&type=template&id=5d708698&
 var render = function render() {
+  var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3;
   var _vm = this,
     _c = _vm._self._c;
   return _vm.settingByTemplate10 ? _c('div', {
     style: [{
-      '--font-style-1': this.settingByTemplate10.settingGeneral && this.settingByTemplate10.settingGeneral.fount_1 ? this.settingByTemplate10.settingGeneral.fount_1 : 'Roboto'
+      '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate10) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settingGeneral) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'Roboto'
     }]
-  }, [_c('KbuttonCar'), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.banner && _vm.settingByTemplate10.banner.visible ? _c('Kcarousel', _vm._b({
+  }, [_c('KButtonCart'), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.banner && _vm.settingByTemplate10.banner.visible ? _c('KCarousel', _vm._b({
     key: _vm.bannerRendering,
     attrs: {
-      "id": "kbannerX"
+      "id": "kBannerX"
     }
-  }, 'Kcarousel', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.section && _vm.settingByTemplate10.section.visible ? _c('Ksection', _vm._b({
+  }, 'KCarousel', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.section && _vm.settingByTemplate10.section.visible ? _c('KSection', _vm._b({
     attrs: {
       "id": "kSectionX"
     }
-  }, 'Ksection', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.trending && _vm.settingByTemplate10.trending.visible ? _c('Ktrending', _vm._b({
+  }, 'KSection', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.trending && _vm.settingByTemplate10.trending.visible ? _c('KTrending', _vm._b({
     attrs: {
       "id": "kTrendingX"
     }
-  }, 'Ktrending', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.offers && _vm.settingByTemplate10.offers.visible ? _c('Kdeal', _vm._b({
+  }, 'KTrending', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.offers && _vm.settingByTemplate10.offers.visible ? _c('KDeal', _vm._b({
     attrs: {
       "id": "kOffersX"
     }
-  }, 'Kdeal', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.productList && _vm.settingByTemplate10.productList.visible ? _c('Kfeatured', _vm._b({
+  }, 'KDeal', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.productList && _vm.settingByTemplate10.productList.visible ? _c('KFeatured', _vm._b({
     attrs: {
-      "id": "KproductDestacadosX"
+      "id": "KProductDestacadosX"
     }
-  }, 'Kfeatured', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('Kblog', _vm._b({
+  }, 'KFeatured', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('KBlog', _vm._b({
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -45,13 +46,13 @@ var render = function render() {
       expression: "\n      listArticulos.length > 0 &&\n      settingByTemplate10 &&\n      settingByTemplate10.blog &&\n      settingByTemplate10.blog.visible\n    "
     }],
     attrs: {
-      "id": "KblogX"
+      "id": "KBlogX"
     }
-  }, 'Kblog', _vm.componentsProps, false))], 2) : _vm._e();
+  }, 'KBlog', _vm.componentsProps, false))], 2) : _vm._e();
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template10/index.vue?vue&type=template&id=6c551205&
+// CONCATENATED MODULE: ./pages/template10/index.vue?vue&type=template&id=5d708698&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -62,17 +63,17 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template10',
   components: {
-    KbuttonCar: () => __webpack_require__.e(/* import() */ 27).then(__webpack_require__.bind(null, 960)),
-    Kcarousel: () => __webpack_require__.e(/* import() */ 106).then(__webpack_require__.bind(null, 961)),
-    Ksection: () => __webpack_require__.e(/* import() */ 108).then(__webpack_require__.bind(null, 962)),
-    Ktrending: () => __webpack_require__.e(/* import() */ 72).then(__webpack_require__.bind(null, 963)),
-    Kdeal: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 964)),
-    Kfeatured: () => __webpack_require__.e(/* import() */ 71).then(__webpack_require__.bind(null, 965)),
-    Kblog: () => __webpack_require__.e(/* import() */ 86).then(__webpack_require__.bind(null, 913))
+    KButtonCart: () => __webpack_require__.e(/* import() */ 29).then(__webpack_require__.bind(null, 1006)),
+    KCarousel: () => __webpack_require__.e(/* import() */ 119).then(__webpack_require__.bind(null, 1007)),
+    KSection: () => __webpack_require__.e(/* import() */ 121).then(__webpack_require__.bind(null, 1008)),
+    KTrending: () => __webpack_require__.e(/* import() */ 80).then(__webpack_require__.bind(null, 1009)),
+    KDeal: () => __webpack_require__.e(/* import() */ 120).then(__webpack_require__.bind(null, 1010)),
+    KFeatured: () => __webpack_require__.e(/* import() */ 79).then(__webpack_require__.bind(null, 1011)),
+    KBlog: () => __webpack_require__.e(/* import() */ 95).then(__webpack_require__.bind(null, 950))
   },
   mounted() {
     window.parent.postMessage('message', '*');
-    window.addEventListener('message', this.addEventListenertemplate);
+    window.addEventListener('message', this.addEventListenerTemplate);
   },
   data() {
     return {
@@ -101,11 +102,11 @@ var external_vuex_ = __webpack_require__(7);
     }
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate);
+    window.removeEventListener('message', this.addEventListenerTemplate);
   },
   methods: {
-    addEventListenertemplate(e) {
-      if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080') || e.origin.includes('https://panel.komercia.xyz')) {
+    addEventListenerTemplate(e) {
+      if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
         if (e && e.data && e.data.component && e.data.template == 10) {
           this.$store.commit('SET_CURRENTSETTING10', e.data);
           if (e.data.component == 'banner') {
@@ -114,16 +115,16 @@ var external_vuex_ = __webpack_require__(7);
         } else if (e && e.data && e.data.componentToEdit && e.data.template == 10) {
           switch (e.data.componentToEdit) {
             case 'settingGeneral':
-              this.moverseA('kbannerX');
+              this.moverseA('kBannerX');
               break;
             case 'header':
-              this.moverseA('kbannerX');
+              this.moverseA('kBannerX');
               break;
             case 'footer':
-              this.moverseA('KblogX');
+              this.moverseA('KBlogX');
               break;
             case 'banner':
-              this.moverseA('kbannerX');
+              this.moverseA('kBannerX');
               break;
             case 'section':
               this.moverseA('kSectionX');
@@ -138,10 +139,10 @@ var external_vuex_ = __webpack_require__(7);
               this.moverseA('kOffersX');
               break;
             case 'productDestacados':
-              this.moverseA('KproductDestacadosX');
+              this.moverseA('KProductDestacadosX');
               break;
             case 'blog':
-              this.moverseA('KblogX');
+              this.moverseA('KBlogX');
               break;
             case 'detailsProduct':
               if (this.fullProducts) {

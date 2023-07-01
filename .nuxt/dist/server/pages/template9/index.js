@@ -1,24 +1,25 @@
 exports.ids = [9];
 exports.modules = {
 
-/***/ 932:
+/***/ 969:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template9/index.vue?vue&type=template&id=0ad4cff6&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template9/index.vue?vue&type=template&id=4c34011a&
 var render = function render() {
+  var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6, _this$settingByTempla7, _this$settingByTempla8, _this$settingByTempla9;
   var _vm = this,
     _c = _vm._self._c;
   return _vm.settingByTemplate9 ? _c('div', {
     style: [{
-      '--font-style-1': this.settingByTemplate9.settingGeneral && this.settingByTemplate9.settingGeneral.fount_1 ? this.settingByTemplate9.settingGeneral.fount_1 : 'David Libre'
+      '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate9) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settingGeneral) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'David Libre'
     }, {
-      '--font-style-2': this.settingByTemplate9.settingGeneral && this.settingByTemplate9.settingGeneral.fount_2 ? this.settingByTemplate9.settingGeneral.fount_2 : 'Great Vibes'
+      '--font-style-2': (_this$settingByTempla4 = (_this$settingByTempla5 = this.settingByTemplate9) === null || _this$settingByTempla5 === void 0 ? void 0 : (_this$settingByTempla6 = _this$settingByTempla5.settingGeneral) === null || _this$settingByTempla6 === void 0 ? void 0 : _this$settingByTempla6.fount_2) !== null && _this$settingByTempla4 !== void 0 ? _this$settingByTempla4 : 'Great Vibes'
     }, {
-      '--font-style-3': this.settingByTemplate9.settingGeneral && this.settingByTemplate9.settingGeneral.fount_3 ? this.settingByTemplate9.settingGeneral.fount_3 : 'Lora'
+      '--font-style-3': (_this$settingByTempla7 = (_this$settingByTempla8 = this.settingByTemplate9) === null || _this$settingByTempla8 === void 0 ? void 0 : (_this$settingByTempla9 = _this$settingByTempla8.settingGeneral) === null || _this$settingByTempla9 === void 0 ? void 0 : _this$settingByTempla9.fount_3) !== null && _this$settingByTempla7 !== void 0 ? _this$settingByTempla7 : 'Lora'
     }]
   }, [_vm.settingByTemplate9 && _vm.settingByTemplate9.banner && _vm.settingByTemplate9.banner.visible ? _c('KBanner', _vm._b({
     key: _vm.bannerRendering,
@@ -59,7 +60,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template9/index.vue?vue&type=template&id=0ad4cff6&
+// CONCATENATED MODULE: ./pages/template9/index.vue?vue&type=template&id=4c34011a&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -70,13 +71,13 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template9',
   components: {
-    KBanner: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 995)),
-    KOffers: () => __webpack_require__.e(/* import() */ 137).then(__webpack_require__.bind(null, 996)),
-    KProductList: () => __webpack_require__.e(/* import() */ 78).then(__webpack_require__.bind(null, 997)),
-    KProductListHoko: () => __webpack_require__.e(/* import() */ 67).then(__webpack_require__.bind(null, 920)),
-    KBlog: () => __webpack_require__.e(/* import() */ 84).then(__webpack_require__.bind(null, 998)),
-    KWrapper: () => __webpack_require__.e(/* import() */ 136).then(__webpack_require__.bind(null, 999)),
-    KNews: () => __webpack_require__.e(/* import() */ 135).then(__webpack_require__.bind(null, 1000))
+    KBanner: () => __webpack_require__.e(/* import() */ 114).then(__webpack_require__.bind(null, 1043)),
+    KOffers: () => __webpack_require__.e(/* import() */ 161).then(__webpack_require__.bind(null, 1044)),
+    KProductList: () => __webpack_require__.e(/* import() */ 86).then(__webpack_require__.bind(null, 1045)),
+    KProductListHoko: () => __webpack_require__.e(/* import() */ 75).then(__webpack_require__.bind(null, 955)),
+    KBlog: () => __webpack_require__.e(/* import() */ 93).then(__webpack_require__.bind(null, 1046)),
+    KWrapper: () => __webpack_require__.e(/* import() */ 160).then(__webpack_require__.bind(null, 1047)),
+    KNews: () => __webpack_require__.e(/* import() */ 159).then(__webpack_require__.bind(null, 1048))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -113,7 +114,7 @@ var external_vuex_ = __webpack_require__(7);
   },
   methods: {
     addEventListenerTemplate09(e) {
-      if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080') || e.origin.includes('https://panel.komercia.xyz')) {
+      if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
         if (e && e.data && e.data.component && e.data.template == 9) {
           this.$store.commit('SET_CURRENTSETTING09', e.data);
           if (e.data.component == 'banner') {

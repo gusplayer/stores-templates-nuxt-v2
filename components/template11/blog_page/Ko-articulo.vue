@@ -80,14 +80,11 @@ export default {
       })
       if (data) {
         this.dataArticle = data.data
-        this.getDataArticle()
-        if (this.dataArticle && this.dataArticle.created_at) {
-          let dateCreated = this.dataArticle.created_at
-          let resultCreated = dateCreated.split(' ')
-          this.shippingCreated = resultCreated[0]
-          let dateUpdate = this.dataArticle.updated_at
-          let resultUpdate = dateUpdate.split(' ')
-          this.shippingUpdated = resultUpdate[0]
+        if (this.dataArticle) {
+          const dateCreated = this.dataArticle.created_at
+          this.shippingCreated = dateCreated.split(' ')[0]
+          const dateUpdate = this.dataArticle.updated_at
+          this.shippingUpdated = dateUpdate.split(' ')[0]
         }
       }
     },

@@ -623,7 +623,12 @@ export default {
       }
       this.setUser()
       this.setTransportadora()
-      this.$store.dispatch('GET_CITIES')
+      const storeCities = JSON.parse(localStorage.getItem('storeCities'))
+      if (storeCities) {
+        this.$store.commit('SET_CITIES', storeCities)
+      } else {
+        this.$store.dispatch('GET_CITIES')
+      }
     }
   },
   destroyed() {

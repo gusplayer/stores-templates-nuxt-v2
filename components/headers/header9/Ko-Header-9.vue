@@ -2,28 +2,19 @@
   <div
     id="navbar"
     v-if="settingByTemplate14"
-    class="w-full flex justify-center items-center"
+    class="w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center sticky top-0 px-10 wrapper-header"
     :style="[
       settingByTemplate14[0].setting14Header,
       settingByTemplate14[0].setting14General,
+      {
+        '--font-style-1':
+          settingByTemplate14?.setting14General?.fount_1 ?? 'Poppins',
+      },
     ]"
   >
-    <div
-      id="headbg"
-      class="w-full max-w-7xl flex justify-center items-center"
-      :style="[
-        {
-          '--font-style-1':
-            settingByTemplate14 &&
-            settingByTemplate14[0].setting14General &&
-            settingByTemplate14[0].setting14General.fount_1
-              ? settingByTemplate14[0].setting14General.fount_1
-              : 'Poppins',
-        },
-      ]"
-    >
+    <div id="headbg" class="w-full max-w-7xl flex justify-between items-center">
       <KoOrder :dataStore="dataStore" />
-      <div class="flex justify-center items-center py-1">
+      <div class="flex justify-center items-center max-h-[120px] md:max-h-10/0">
         <nuxt-link
           to="/"
           class="w-full flex justify-center items-center"
@@ -38,19 +29,15 @@
         </nuxt-link>
       </div>
       <div
-        v-if="settingByTemplate14[0].pages.values"
-        class="flex flex-row justify-start items-center box-sizing: border-box;"
         id="swiper-slide-categories"
+        v-if="settingByTemplate14[0].pages.values"
+        class="hidden md:flex flex-row justify-start items-center box-border"
       >
         <div
           v-for="(item, index) in settingByTemplate14[0].pages.values"
           :key="`${index}${item.displayName}`"
         >
-          <nuxt-link
-            v-if="!item.isExternalLink"
-            :to="item.url"
-            class="content-button"
-          >
+          <nuxt-link v-if="!item.isExternalLink" :to="item.url">
             <p
               class="mr-20 px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
               :class="btnSelect == item.url ? 'btn-active' : ''"
@@ -59,13 +46,7 @@
               {{ item.displayName }}
             </p>
           </nuxt-link>
-          <a
-            v-else
-            :href="item.url"
-            class="content-button"
-            rel="noreferrer noopener"
-            target="_blank"
-          >
+          <a v-else :href="item.url" rel="noreferrer noopener" target="_blank">
             <p class="btn">
               {{ item.displayName }}
             </p>
@@ -73,7 +54,7 @@
         </div>
       </div>
       <div
-        class="flex flex-row justify-center items-center cursor-pointer header-content-icon"
+        class="hidden md:flex flex-row justify-center items-center cursor-pointer transition-all ease-in duration-0.3"
         @click="openOrder"
       >
         <i
@@ -83,10 +64,9 @@
             xmlns="http://www.w3.org/2000/svg"
             width="23"
             height="23"
-            fill="currentColor"
+            :fill="settingByTemplate14[0].setting14Header['--color_icon']"
             class="transition-all ease-in duration-0.2 icon-shop"
             viewBox="0 0 16 16"
-            style="fill: var(--color_icon)"
           >
             <title>Cart</title>
             <path
@@ -105,6 +85,59 @@
           </span>
         </div>
       </div>
+      <button class="flex md:hidden" @click="stateMenu = !stateMenu">
+        <menu-icon class="text-25" />
+      </button>
+      <el-drawer
+        :visible.sync="stateMenu"
+        direction="ttb"
+        :withHeader="false"
+        :modal-append-to-body="false"
+        size="23%"
+      >
+        <div class="w-full flex flex-col justify-center items-center h-full">
+          <div
+            v-if="settingByTemplate14[0].pages.values"
+            class="w-full h-full max-h-[100px] max-w-[300px] flex flex-col justify-center items-center overflow-y-auto"
+          >
+            <div
+              v-for="(item, index) in settingByTemplate14[0].pages.values"
+              :key="`${index}${item.displayName}`"
+            >
+              <nuxt-link
+                v-if="!item.isExternalLink"
+                :to="item.url"
+                class="my-5 block"
+              >
+                <p
+                  class="px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
+                  :class="btnSelect == item.url ? 'btn-active' : ''"
+                  @click="btnActivate(item.url)"
+                >
+                  {{ item.displayName }}
+                </p>
+              </nuxt-link>
+              <a
+                v-else
+                :href="item.url"
+                rel="noreferrer noopener"
+                class="my-5 block"
+                target="_blank"
+              >
+                <p class="btn">
+                  {{ item.displayName }}
+                </p>
+              </a>
+            </div>
+          </div>
+          <button
+            class="w-full max-w-[300px] text-center bg-red-500 text-white-white rounded-8 px-5 py-3 mt-20"
+            @click="stateMenu = !stateMenu"
+          >
+            Cerrar
+          </button>
+        </div>
+      </el-drawer>
     </div>
   </div>
 </template>
@@ -119,29 +152,13 @@ export default {
     settingByTemplate14: Array,
     dataStore: Object,
   },
-  mounted() {
-    // this.initHeader()
-    // if (this.$route.path) {
-    //   let item = this.settingByTemplate13[0].pages.values.find(
-    //     (item) => item.url == this.$route.path
-    //   )
-    //   this.btnSelect = item && item.url ? item.url : ''
-    // }
-    // window.addEventListener('scroll', function () {
-    //   var navbar = document.getElementById('navbar')
-    //   if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
-    //     navbar.style.position = 'fixed'
-    //   } else {
-    //     navbar.style.position = 'static'
-    //   }
-    // })
-  },
   data() {
     return {
       searchSelect: true,
       btnSelect: '',
       search: '',
       showSearch: false,
+      stateMenu: false,
     }
   },
   computed: {
@@ -151,9 +168,6 @@ export default {
     FacebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
-    // listArticulos() {
-    //   return this.$store.state.listArticulos.length
-    // },
   },
   methods: {
     initHeader() {
@@ -226,40 +240,27 @@ export default {
       document.getElementById('swiper-slide-categories').scrollLeft += 300
     },
   },
-  watch: {
-    // search(value) {
-    //   this.SearchProduct(value)
-    // },
-    // // eslint-disable-next-line no-unused-vars
-    // $route(to, from) {
-    //   this.initHeader()
-    // },
-  },
 }
 </script>
 
 <style scoped>
+* {
+  font-family: var(--font-style-1) !important;
+}
 .wrapper-header {
   background-color: var(--background_color_1);
+  z-index: 99999999999 !important;
 }
 .btn-active {
+  padding-top: var(--padding_logo);
+  padding-bottom: var(--padding_logo);
   box-shadow: inset 0px -48px 0px -44px var(--color_border);
 }
 .btn {
   color: var(--color_text);
-  font-family: var(--font-style-1) !important;
 }
 .btn:hover {
   color: var(--hover_text);
   box-shadow: inset 0px -48px 0px -44px var(--color_border);
-}
-
-.header-content-icon:hover .icon-shop {
-  fill: var(--color_border);
-  @apply transition-all ease-in duration-0.2;
-}
-.num-items {
-  /* color: var(--color_text); */
-  font-family: var(--font-style-1) !important;
 }
 </style>

@@ -4,24 +4,15 @@
     :style="[
       {
         '--font-style-1':
-          this.settingByTemplate7.settingGeneral &&
-          this.settingByTemplate7.settingGeneral.fount_1
-            ? this.settingByTemplate7.settingGeneral.fount_1
-            : 'David Libre',
+          this.settingByTemplate7?.settingGeneral?.fount_1 ?? 'David Libre',
       },
       {
         '--font-style-2':
-          this.settingByTemplate7.settingGeneral &&
-          this.settingByTemplate7.settingGeneral.fount_2
-            ? this.settingByTemplate7.settingGeneral.fount_2
-            : 'Great Vibes',
+          this.settingByTemplate7?.settingGeneral?.fount_2 ?? 'Great Vibes',
       },
       {
         '--font-style-3':
-          this.settingByTemplate7.settingGeneral &&
-          this.settingByTemplate7.settingGeneral.fount_3
-            ? this.settingByTemplate7.settingGeneral.fount_3
-            : 'Lora',
+          this.settingByTemplate7?.settingGeneral?.fount_3 ?? 'Lora',
       },
     ]"
   >
@@ -130,8 +121,7 @@ export default {
     addEventListenerTemplate07(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
-        e.origin.includes('http://localhost:8080') ||
-        e.origin.includes('https://panel.komercia.xyz')
+        e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 7) {
           this.$store.commit('SET_CURRENTSETTING07', e.data)

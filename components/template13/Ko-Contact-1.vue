@@ -6,10 +6,7 @@
       settingByTemplate13[0].settingGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate13[0].settingGeneral &&
-          this.settingByTemplate13[0].settingGeneral.fount_1
-            ? this.settingByTemplate13[0].settingGeneral.fount_1
-            : 'Poppins',
+          this.settingByTemplate13[0]?.settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >

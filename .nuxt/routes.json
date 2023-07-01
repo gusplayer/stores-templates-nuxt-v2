@@ -184,6 +184,14 @@
     "_name": "_2839dd91"
   },
   {
+    "name": "index",
+    "path": "/",
+    "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "url": "/",
+    "_name": "_79ce8d6a"
+  },
+  {
     "name": "blog-slug",
     "path": "/blog/:slug",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\_slug.vue",
@@ -238,13 +246,5 @@
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\productos\\\\_slugProduct.vue",
     "chunkName": "pages/wa/_slug/productos/_slugProduct",
     "_name": "_ee0775a2"
-  },
-  {
-    "name": "index",
-    "path": "/",
-    "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "url": "/",
-    "_name": "_79ce8d6a"
   }
 ]

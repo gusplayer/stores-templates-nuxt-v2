@@ -1,187 +1,128 @@
 <template>
-  <div class="home">
-    <component :is="indexTemplate" v-bind="componentsProps" />
-  </div>
+  <component :is="indexTemplate" v-bind="componentsProps" />
 </template>
 
 <script>
-import K05ProductListHoko from '../../components/template5/Ko-ProductListHoko-1.vue'
-import K09ProductListHoko from '../../components/template9/Ko-ProductListFilterHoko.vue'
-import K11ProductListHoko from '../../components/template11/ko-ProductListFilterHoko.vue'
-import KoNodisponibleHoko from '../../components/Hoko/Ko-nodisponible.vue'
-
+import { mapState } from 'vuex'
 export default {
   components: {
-    K05ProductListHoko,
-    K09ProductListHoko,
-    K11ProductListHoko,
-    KoNodisponibleHoko,
+    K05ProductListHoko: () =>
+      import('../../components/template5/Ko-ProductListHoko-1.vue'),
+    K09ProductListHoko: () =>
+      import('../../components/template9/Ko-ProductListFilterHoko.vue'),
+    K11ProductListHoko: () =>
+      import('../../components/template11/ko-ProductListFilterHoko.vue'),
+    KoNoDisponibleHoko: () =>
+      import('../../components/Hoko/Ko-nodisponible.vue'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
+  data() {
+    return {
+      componentMapping: {
+        3: 'K05ProductListHoko',
+        5: 'K05ProductListHoko',
+        6: 'KoNoDisponibleHoko',
+        7: 'KoNoDisponibleHoko',
+        9: 'K09ProductListHoko',
+        10: 'KoNoDisponibleHoko',
+        11: 'K11ProductListHoko',
+        13: 'KoNoDisponibleHoko',
+        14: 'KoNoDisponibleHoko',
+      },
+    }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
+    ...mapState([
+      'dataStore',
+      'settingBase',
+      'settingByTemplate',
+      'settingByTemplate7',
+      'settingByTemplate9',
+      'settingByTemplate10',
+      'settingByTemplate11',
+      'template',
+      'dataHoko',
+    ]),
     fullProducts() {
       return this.$store.getters['products/filterProducts']
     },
-    settingBase() {
-      return this.$store.state.settingBase
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    template() {
-      return this.$store.state.template
-    },
     indexTemplate() {
       let productListComponent = ''
-      switch (this.template) {
-        case 3:
-          productListComponent = 'K05ProductListHoko'
-          break
-        case 5:
-          productListComponent = 'K05ProductListHoko'
-          break
-        case 6:
-          productListComponent = 'KoNodisponibleHoko'
-          break
-        case 7:
-          productListComponent = 'KoNodisponibleHoko'
-          break
-        case 9:
-          productListComponent = 'K09ProductListHoko'
-          break
-          break
-        case 10:
-          productListComponent = 'KoNodisponibleHoko'
-          break
-        case 11:
-          productListComponent = 'K11ProductListHoko'
-          break
+      if (this.componentMapping.hasOwnProperty(this.template)) {
+        productListComponent = this.componentMapping[parseInt(this.template)]
       }
       return productListComponent
-    },
-    settingByTemplate7() {
-      return this.$store.state.settingByTemplate7
-    },
-    settingByTemplate9() {
-      return this.$store.state.settingByTemplate9
-    },
-    settingByTemplate10() {
-      return this.$store.state.settingByTemplate10
-    },
-    settingByTemplate11() {
-      return this.$store.state.settingByTemplate11
     },
     componentsProps() {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingByTemplate:
-          this.settingByTemplate &&
-          this.settingByTemplate.settings &&
-          this.settingByTemplate.settings.tipo_letra
-            ? this.settingByTemplate.settings
-            : this.settingBase,
-        settingByTemplate7: this.settingByTemplate7
-          ? [
-              {
-                settingGeneral:
-                  this.settingByTemplate7 &&
-                  this.settingByTemplate7.settingGeneral
-                    ? this.settingByTemplate7.settingGeneral
-                    : null,
-                settingK07ProductList:
-                  this.settingByTemplate7 &&
-                  this.settingByTemplate7.productListFilter
-                    ? this.settingByTemplate7.productListFilter
-                    : null,
-                settingKProdutCard:
-                  this.settingByTemplate7 && this.settingByTemplate7.card
-                    ? this.settingByTemplate7.card
-                    : null,
-              },
-            ]
-          : null,
-        settingByTemplate9: this.settingByTemplate9
-          ? [
-              {
-                cardProduct:
-                  this.settingByTemplate9 && this.settingByTemplate9.cardProduct
-                    ? this.settingByTemplate9.cardProduct
-                    : null,
-                productListFilter:
-                  this.settingByTemplate9 &&
-                  this.settingByTemplate9.productListFilter
-                    ? this.settingByTemplate9.productListFilter
-                    : null,
-                setting9General:
-                  this.settingByTemplate9 &&
-                  this.settingByTemplate9.settingGeneral
-                    ? this.settingByTemplate9.settingGeneral
-                    : null,
-              },
-            ]
-          : null,
-
-        settingByTemplate10: this.settingByTemplate10
-          ? [
-              {
-                cardProduct:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.cardProduct
-                    ? this.settingByTemplate10.cardProduct
-                    : null,
-                productListFilter:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.productListFilter
-                    ? this.settingByTemplate10.productListFilter
-                    : null,
-                setting9General:
-                  this.settingByTemplate10 &&
-                  this.settingByTemplate10.settingGeneral
-                    ? this.settingByTemplate10.settingGeneral
-                    : null,
-              },
-            ]
-          : null,
-        settingByTemplate11: this.settingByTemplate11
-          ? [
-              {
-                productList:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.productList
-                    ? this.settingByTemplate11.productList
-                    : null,
-                cardProduct:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.cardProduct
-                    ? this.settingByTemplate11.cardProduct
-                    : null,
-                setting11General:
-                  this.settingByTemplate11 &&
-                  this.settingByTemplate11.settingGeneral
-                    ? this.settingByTemplate11.settingGeneral
-                    : null,
-              },
-            ]
-          : null,
+        settingByTemplate: this.createSettingByTemplate(
+          this.settingByTemplate,
+          'settings',
+          'tipo_letra',
+          this.settingBase
+        ),
+        settingByTemplate7: this.createNestedSetting(
+          this.settingByTemplate7,
+          ['settingGeneral', 'productListFilter', 'card'],
+          null
+        ),
+        settingByTemplate9: this.createNestedSetting(
+          this.settingByTemplate9,
+          ['cardProduct', 'productListFilter', 'settingGeneral'],
+          null
+        ),
+        settingByTemplate10: this.createNestedSetting(
+          this.settingByTemplate10,
+          ['cardProduct', 'productListFilter', 'settingGeneral'],
+          null
+        ),
+        settingByTemplate11: this.createNestedSetting(
+          this.settingByTemplate11,
+          ['productList', 'cardProduct', 'settingGeneral'],
+          null
+        ),
       }
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenertemplate(e) {
+    createSettingByTemplate(
+      settingByTemplate,
+      property1,
+      property2,
+      defaultValue
+    ) {
+      if (
+        settingByTemplate &&
+        settingByTemplate[property1] &&
+        settingByTemplate[property1][property2]
+      ) {
+        return settingByTemplate[property1]
+      }
+      return defaultValue
+    },
+    createNestedSetting(setting, properties, defaultValue) {
+      if (setting) {
+        const nestedSetting = {}
+        properties.forEach((property) => {
+          nestedSetting[property] =
+            setting && setting[property] ? setting[property] : null
+        })
+        return [nestedSetting]
+      }
+      return null
+    },
+    addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
-        e.origin.includes('http://localhost:8080') ||
-        e.origin.includes('https://panel.komercia.xyz')
+        e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component) {
           if (e.data.template == 9) {

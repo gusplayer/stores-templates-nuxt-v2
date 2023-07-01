@@ -1,6 +1,5 @@
 <template>
   <div
-    class="home"
     :style="
       this.settingByTemplate.settings &&
       this.settingByTemplate.settings.tipo_letra

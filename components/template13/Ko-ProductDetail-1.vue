@@ -3,13 +3,10 @@
     class="wrapper-productDetail"
     :style="[
       settingByTemplate13[0].detailsProduct,
-      settingByTemplate13[0].setting13General,
+      settingByTemplate13[0].settingGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate13[0].setting13General &&
-          this.settingByTemplate13[0].setting13General.fount_1
-            ? this.settingByTemplate13[0].setting13General.fount_1
-            : 'Poppins',
+          this.settingByTemplate13[0]?.settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -339,7 +336,7 @@
         <KoSuggestProduct
           :category="this.category.slice(0, 12)"
           :cardProduct="settingByTemplate13[0].cardProduct"
-          :settingGeneral="settingByTemplate13[0].setting13General"
+          :settingGeneral="settingByTemplate13[0].settingGeneral"
         />
       </div>
     </div>
@@ -600,7 +597,7 @@ export default {
                 desc: 'Disfruta de este obsequio por parte de la tienda.',
               }
               break
-              case 'sinEnvio':
+            case 'sinEnvio':
               this.envio = {
                 titulo: 'Sin envio',
                 desc: 'Tienes que acercarte a la tienda a recoger tu pedido.',
