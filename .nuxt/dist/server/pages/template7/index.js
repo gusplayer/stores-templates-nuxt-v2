@@ -1,7 +1,7 @@
 exports.ids = [7];
 exports.modules = {
 
-/***/ 967:
+/***/ 964:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79,15 +79,15 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template7',
   components: {
-    KCarousel: () => __webpack_require__.e(/* import() */ 100).then(__webpack_require__.bind(null, 953)),
-    KPromo: () => __webpack_require__.e(/* import() */ 157).then(__webpack_require__.bind(null, 1036)),
-    KProductList: () => __webpack_require__.e(/* import() */ 84).then(__webpack_require__.bind(null, 1037)),
-    KAdvertising: () => __webpack_require__.e(/* import() */ 154).then(__webpack_require__.bind(null, 1038)),
-    KGify: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 1039)),
-    KHowWork: () => __webpack_require__.e(/* import() */ 155).then(__webpack_require__.bind(null, 1040)),
-    KNews: () => __webpack_require__.e(/* import() */ 153).then(__webpack_require__.bind(null, 1041)),
-    KBlog: () => __webpack_require__.e(/* import() */ 99).then(__webpack_require__.bind(null, 954)),
-    KWrapper: () => __webpack_require__.e(/* import() */ 156).then(__webpack_require__.bind(null, 1042))
+    KCarousel: () => __webpack_require__.e(/* import() */ 100).then(__webpack_require__.bind(null, 950)),
+    KPromo: () => __webpack_require__.e(/* import() */ 156).then(__webpack_require__.bind(null, 1033)),
+    KProductList: () => __webpack_require__.e(/* import() */ 84).then(__webpack_require__.bind(null, 1034)),
+    KAdvertising: () => __webpack_require__.e(/* import() */ 153).then(__webpack_require__.bind(null, 1035)),
+    KGify: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 1036)),
+    KHowWork: () => __webpack_require__.e(/* import() */ 154).then(__webpack_require__.bind(null, 1037)),
+    KNews: () => __webpack_require__.e(/* import() */ 152).then(__webpack_require__.bind(null, 1038)),
+    KBlog: () => __webpack_require__.e(/* import() */ 99).then(__webpack_require__.bind(null, 951)),
+    KWrapper: () => __webpack_require__.e(/* import() */ 155).then(__webpack_require__.bind(null, 1039))
   },
   mounted() {
     window.parent.postMessage('message', '*');

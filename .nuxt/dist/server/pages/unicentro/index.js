@@ -1,4 +1,4 @@
-exports.ids = [50,68,77,149];
+exports.ids = [50,68,77,148];
 exports.modules = {
 
 /***/ 109:
@@ -784,7 +784,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(526);
+var content = __webpack_require__(525);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -796,7 +796,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 487:
+/***/ 486:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1093,7 +1093,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 488:
+/***/ 487:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1259,7 +1259,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 525:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1271,7 +1271,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 526:
+/***/ 525:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1501,7 +1501,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 972:
+/***/ 969:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1535,10 +1535,10 @@ var staticRenderFns = [];
 var Ko_ProductFavoritos_1 = __webpack_require__(227);
 
 // EXTERNAL MODULE: ./components/template5/Ko-ProductList-1.vue + 4 modules
-var Ko_ProductList_1 = __webpack_require__(487);
+var Ko_ProductList_1 = __webpack_require__(486);
 
 // EXTERNAL MODULE: ./components/template5/Ko-Newsletter-1.vue + 4 modules
-var Ko_Newsletter_1 = __webpack_require__(488);
+var Ko_Newsletter_1 = __webpack_require__(487);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/unicentro/index.vue?vue&type=script&lang=js&
 
@@ -1614,7 +1614,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(525)
+  var style0 = __webpack_require__(524)
 if (style0.__inject__) style0.__inject__(context)
 
 }

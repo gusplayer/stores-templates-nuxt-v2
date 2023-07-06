@@ -337,7 +337,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(716);
+var content = __webpack_require__(715);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -355,7 +355,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(718);
+var content = __webpack_require__(717);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -373,7 +373,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(720);
+var content = __webpack_require__(719);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -529,7 +529,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 715:
+/***/ 714:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -541,7 +541,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 716:
+/***/ 715:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -556,7 +556,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 717:
+/***/ 716:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -568,7 +568,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 718:
+/***/ 717:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -583,7 +583,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 719:
+/***/ 718:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -595,13 +595,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 720:
+/***/ 719:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_GET_URL_IMPORT___ = __webpack_require__(33);
-var ___CSS_LOADER_URL_IMPORT_0___ = __webpack_require__(721);
+var ___CSS_LOADER_URL_IMPORT_0___ = __webpack_require__(720);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_0___);
 // Module
@@ -613,14 +613,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 721:
+/***/ 720:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/gradient-line.cf353c7.png";
 
 /***/ }),
 
-/***/ 931:
+/***/ 928:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -911,7 +911,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(715)
+  var style0 = __webpack_require__(714)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1437,7 +1437,7 @@ var elemenTiptap = __webpack_require__(67);
 
 function productDetail_injectStyles (context) {
   
-  var style0 = __webpack_require__(717)
+  var style0 = __webpack_require__(716)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1520,7 +1520,7 @@ var productDetail_component = Object(componentNormalizer["a" /* default */])(
 
 function MainSection_injectStyles (context) {
   
-  var style0 = __webpack_require__(719)
+  var style0 = __webpack_require__(718)
 if (style0.__inject__) style0.__inject__(context)
 
 }

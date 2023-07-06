@@ -1,17 +1,17 @@
 <template>
   <div
     v-if="information"
-    class="w-full flex justify-center items-center py-15 lg:py-20 px-10"
+    class="w-full flex justify-center items-center py-30 lg:py-40 px-10"
     style="background-color: var(--background_color_1)"
     :style="[information, settingGeneral]"
   >
     <div
-      class="max-w-7xl grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-4 gap-5 md:gap-4 items-center justify-center"
+      class="max-w-7xl mlg:w-full grid grid-cols-1 lg:grid-cols-2 mlg:grid-cols-4 gap-5 md:gap-4 items-center justify-center"
     >
       <div
         v-for="(items, index) in information.values"
         :key="index"
-        class="hidden w-full md:flex flex-row items-center justify-start"
+        class="hidden w-full lg:flex flex-row items-center justify-start"
       >
         <img
           v-lazy="idCloudinary(items.img, 150, 150)"
@@ -27,6 +27,7 @@
         />
         <div class="w-full">
           <p
+            class="mb-5"
             :style="`color: ${items.color_title}; font-size: ${items.fontSizeTitle}; font-weight: ${items.fontWeighTitle};`"
           >
             {{ items.title }}
@@ -41,7 +42,7 @@
       <div
         v-swiper:mySwiper="swiperOption"
         ref="mySwiper"
-        class="max-w-[350px] flex md:hidden items-center justify-start"
+        class="max-w-[350px] flex lg:hidden items-center justify-start"
       >
         <div class="swiper-wrapper">
           <div
@@ -63,6 +64,7 @@
             />
             <div class="w-full">
               <p
+                class="mb-5"
                 :style="`color: ${items.color_title}; font-size: ${items.fontSizeTitle}; font-weight: ${items.fontWeighTitle};`"
               >
                 {{ items.title }}

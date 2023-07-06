@@ -4,14 +4,14 @@
       path: `/blog/` + article.slug,
       query: { idBlog: article.id },
     }"
-    class="w-full h-full flex flex-col justify-center items-center wrapper_border"
+    class="w-full h-full flex flex-col justify-center items-start wrapper_border"
     :style="`background-color: ${cardBlog['--background_color_1']}`"
   >
     <div class="relative rounded-5 wrapper-img">
       <img
         v-if="article.imagen_principal_url"
-        class="rounded-5 effect-img max-h-[250px] max-w-[300px]"
-        width="300"
+        class="rounded-5 w-full effect-img max-h-[250px] max-w-[400px]"
+        width="400"
         height="250"
         v-lazy="idCloudinary(this.article.imagen_principal_url, 400, 400)"
         alt="right-banner"
@@ -29,8 +29,23 @@
         </p>
       </div>
     </div>
-    <p class="my-10 font-bold text-14">{{ this.article.titulo }}</p>
-    <p class="text-14 text-justify">{{ this.article.resumen }}</p>
+    <p
+      class="justify-start mb-10 mt-20"
+      :style="`color: ${cardBlog.color_text}; font-size: ${cardBlog.fontSizeText}; font-weight: ${cardBlog.fontWeighText};`"
+    >
+      Autor: {{ this.article.autor }}
+    </p>
+    <p
+      :style="`color: ${cardBlog.color_title}; font-size: ${cardBlog.fontSizeTitle}; font-weight: ${cardBlog.fontWeighTitle};`"
+    >
+      {{ this.article.titulo }}
+    </p>
+    <!-- <p
+      class="text-justify"
+      :style="`color: ${cardBlog.color_text}; font-size: ${cardBlog.fontSizeText}; font-weight: ${cardBlog.fontWeighText};`"
+    >
+      {{ this.article.resumen }}
+    </p> -->
   </nuxt-link>
 </template>
 <script>
@@ -83,7 +98,7 @@ export default {
   @apply relative overflow-hidden;
   -webkit-transition: all 600ms ease 0s;
   -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(3deg);
 }
 .effect-img {
   -webkit-transition: all 600ms ease 0s;

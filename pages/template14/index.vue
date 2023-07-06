@@ -136,9 +136,9 @@ export default {
             case 'banner':
               this.moverseA('kBannerX')
               break
-            case 'information':
-              this.moverseA('kInformationX')
-              break
+            // case 'information':
+            //   this.moverseA('kInformationX')
+            //   break
             case 'offers':
               this.moverseA('kOffersX')
               break

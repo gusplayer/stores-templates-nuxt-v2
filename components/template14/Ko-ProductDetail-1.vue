@@ -43,7 +43,7 @@
       </div>
       <div v-else class="w-full h-100" />
       <div
-        class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex flex-col items-center"
+        class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/2 flex flex-col items-center"
       >
         <p
           class="font-bold text-30 mb-10"
@@ -227,36 +227,73 @@
                 </p>
               </div>
             </div>
-            <div class="w-full flex flex-row justify-start items-center mb-15">
-              <p
-                class="text-16 font-bold mr-10"
-                :style="`color:${settingByTemplate14[0].detailsProducts.color_text};`"
+            <div class="w-full flex flex-wrap gap-x-5 gap-y-2 mb-15">
+              <div
+                v-if="salesData.unidades > 0"
+                class="flex flex-row justify-start items-center"
               >
-                {{ $t('productdetail_stock') }}:
-              </p>
-              <p
-                class="text-14"
-                :style="` color:${settingByTemplate14[0].detailsProducts.color_subtext};`"
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${settingByTemplate14[0].detailsProducts.color_text};`"
+                >
+                  {{ $t('productdetail_stock') }}:
+                </p>
+                <p
+                  class="text-14"
+                  :style="`color:${settingByTemplate14[0].detailsProducts.color_subtext};`"
+                >
+                  {{ salesData.unidades }}
+                </p>
+              </div>
+              <div
+                v-if="
+                  data.detalle?.categoria_producto?.nombre_categoria_producto
+                "
+                class="flex flex-row justify-start items-center"
               >
-                {{ salesData.unidades }}
-              </p>
-            </div>
-            <div
-              class="w-full flex flex-row justify-start items-center mb-15"
-              v-if="data.info.descripcion_corta"
-            >
-              <p
-                class="text-16 font-bold mr-10"
-                :style="` color:${settingByTemplate14[0].detailsProducts.color_text};`"
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${settingByTemplate14[0].detailsProducts.color_text};`"
+                >
+                  {{ $t('productdetail_categoria') }}:
+                </p>
+                <p
+                  class="text-14"
+                  :style="`color:${settingByTemplate14[0].detailsProducts.color_subtext};`"
+                >
+                  {{
+                    data.detalle.categoria_producto.nombre_categoria_producto
+                  }}
+                </p>
+              </div>
+              <div
+                v-if="data.detalle?.subcategoria_producto?.nombre_subcategoria"
+                class="flex flex-row justify-start items-center"
               >
-                {{ $t('productdetail_informacion') }}:
-              </p>
-              <p
-                class="text-14"
-                :style="` color:${settingByTemplate14[0].detailsProducts.color_subtext};`"
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${settingByTemplate14[0].detailsProducts.color_text};`"
+                >
+                  {{ $t('home_subcategory') }}:
+                </p>
+                <p
+                  class="text-14"
+                  :style="`color:${settingByTemplate14[0].detailsProducts.color_subtext};`"
+                >
+                  {{ data.detalle.subcategoria_producto.nombre_subcategoria }}
+                </p>
+              </div>
+              <div
+                v-if="data.detalle?.subcategoria_producto?.nombre_subcategoria"
+                class="flex flex-row justify-start items-center"
               >
-                {{ data.info.descripcion_corta }}
-              </p>
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${settingByTemplate14[0].detailsProducts.color_text};`"
+                >
+                  {{ $t('home_cardGratis') }}
+                </p>
+              </div>
             </div>
             <div v-if="this.data.detalle.con_variante > 0" class="w-full mb-15">
               <div
@@ -291,7 +328,6 @@
                 </SelectGroup>
               </div>
             </div>
-
             <div
               class="w-full flex flex-row items-center mb-15"
               v-if="userDropshipping.userName"
@@ -309,7 +345,131 @@
                 {{ userDropshipping.userName }}
               </p>
             </div>
-            <div class="w-full flex flex-row items-center mb-15">
+            <div
+              v-if="data.info.descripcion_corta"
+              class="w-full mb-30 border-t pt-15"
+              :style="`border-color: ${settingByTemplate14[0].detailsProducts.color_border};`"
+            >
+              <p
+                class="text-14"
+                :style="` color:${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
+                {{ data.info.descripcion_corta }}
+              </p>
+            </div>
+            <div class="w-full flex flex-row justify-start items-center">
+              <div
+                class="flex flex-row justify-center items-center mr-20"
+                :class="{ disabled: !salesData.estado }"
+              >
+                <input
+                  v-model="quantityValue"
+                  name="quantityValue"
+                  class="bg-transparent text-center text-14 border-2 py-11 px-10 max-w-[68px]"
+                  :style="`border-color:${settingByTemplate14[0].detailsProducts.color_border};`"
+                  type="text"
+                  onkeypress="return (event.charCode>47 && event.charCode<58)"
+                />
+                <div
+                  class="flex flex-col items-center justify-center border-t-2 border-b-2 border-r-2"
+                  :style="`border-color:${settingByTemplate14[0].detailsProducts.color_border};`"
+                >
+                  <button
+                    class="text-center text-14 border-b px-15"
+                    :style="`border-color:${settingByTemplate14[0].detailsProducts.color_border};`"
+                    @click="removeQuantity()"
+                  >
+                    <menos-icon
+                      class="icon"
+                      :style="`color:${settingByTemplate14[0].detailsProducts.color_icon};`"
+                    />
+                  </button>
+                  <button
+                    class="bg-transparent text-center text-14 px-15"
+                    @click="addQuantity()"
+                  >
+                    <mas-icon
+                      class="icon"
+                      :style="`color:${settingByTemplate14[0].detailsProducts.color_icon};`"
+                    />
+                  </button>
+                </div>
+                <!-- Anuncio ult unidad -->
+                <div
+                  v-if="this.maxQuantityValue == this.quantityValue"
+                  class="absolute py-3 px-5 bg-yellow-300 rounded-4 -bottom-35 w-full max-w-[300px] text-center"
+                >
+                  <span class="text-14 text-black">
+                    {{ $t('cart_ultimaUnidad') }}</span
+                  >
+                </div>
+              </div>
+              <button
+                id="AddToCartTag"
+                v-if="
+                  !spent &&
+                  salesData.estado == true &&
+                  (data.info.tipo_servicio == null ||
+                    data.info.tipo_servicio == '0')
+                "
+                ref="colorBtn"
+                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
+                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
+                @click="addShoppingCart"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="mx-5"
+                  width="18"
+                  height="18"
+                  :fill="settingByTemplate14[0].detailsProducts.color_icon"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+                  />
+                </svg>
+                {{ $t('productdetail_añadiralcarrito') }}
+              </button>
+              <button
+                disabled
+                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
+                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
+                v-else-if="!this.salesData.estado"
+              >
+                {{ $t('productdetail_btnANodisponible') }}
+              </button>
+              <button
+                id="AddToCartTag"
+                v-else-if="!spent && data.info.tipo_servicio == '1'"
+                ref="colorBtn"
+                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
+                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
+                @click="GoPayments"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  :fill="settingByTemplate14[0].detailsProducts.color_icon"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+                  />
+                </svg>
+                {{ $t('productdetail_btnComprar') }}
+              </button>
+              <button
+                v-else-if="spent"
+                disabled
+                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
+                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
+              >
+                {{ $t('home_cardAgotado') }}
+              </button>
+            </div>
+            <div class="w-full flex flex-row items-center mt-30">
               <p
                 class="text-16 font-bold mr-10"
                 :style="`color:${settingByTemplate14[0].detailsProducts.color_text};`"
@@ -328,109 +488,6 @@
                 <whatsapp-icon class="wp-icon" />
               </button>
             </div>
-            <div class="w-full mb-8 relative">
-              <div
-                class="w-full max-w-[300px] flex flex-row justify-center items-center border-2 rounded-4 py-5"
-                :style="`border-color:${settingByTemplate14[0].detailsProducts.color_border};`"
-                :class="{ disabled: !salesData.estado }"
-              >
-                <button class="text-center text-14" @click="removeQuantity()">
-                  <menos-icon
-                    class="icon"
-                    :style="`color:${settingByTemplate14[0].detailsProducts.color_icon};`"
-                  />
-                </button>
-                <input
-                  v-model="quantityValue"
-                  name="quantityValue"
-                  class="bg-transparent text-center text-14"
-                  type="text"
-                  onkeypress="return (event.charCode>47 && event.charCode<58)"
-                />
-                <button
-                  class="bg-transparent text-center text-14"
-                  @click="addQuantity()"
-                >
-                  <mas-icon
-                    class="icon"
-                    :style="`color:${settingByTemplate14[0].detailsProducts.color_icon};`"
-                  />
-                </button>
-                <!-- Anuncio ult unidad -->
-                <div
-                  v-if="this.maxQuantityValue == this.quantityValue"
-                  class="absolute py-3 px-5 bg-yellow-300 rounded-4 -bottom-35 w-full max-w-[300px] text-center"
-                >
-                  <span class="text-14 text-black">
-                    {{ $t('cart_ultimaUnidad') }}</span
-                  >
-                </div>
-              </div>
-            </div>
-            <button
-              id="AddToCartTag"
-              v-if="
-                !spent &&
-                salesData.estado == true &&
-                (data.info.tipo_servicio == null ||
-                  data.info.tipo_servicio == '0')
-              "
-              ref="colorBtn"
-              class="w-full flex justify-center items-center max-w-[300px] py-5 px-10 rounded-5 my-20"
-              :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
-              @click="addShoppingCart"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="mx-5"
-                width="18"
-                height="18"
-                :fill="settingByTemplate14[0].detailsProducts.color_icon"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
-                />
-              </svg>
-              {{ $t('productdetail_añadiralcarrito') }}
-            </button>
-            <button
-              disabled
-              class="w-full flex justify-center items-center max-w-[300px] py-5 px-10 rounded-5 my-20"
-              :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
-              v-else-if="!this.salesData.estado"
-            >
-              {{ $t('productdetail_btnANodisponible') }}
-            </button>
-            <button
-              id="AddToCartTag"
-              v-else-if="!spent && data.info.tipo_servicio == '1'"
-              ref="colorBtn"
-              class="w-full flex justify-center items-center max-w-[300px] py-5 px-10 rounded-5 my-20"
-              :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
-              @click="GoPayments"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                :fill="settingByTemplate14[0].detailsProducts.color_icon"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
-                />
-              </svg>
-              {{ $t('productdetail_btnComprar') }}
-            </button>
-            <button
-              v-else-if="spent"
-              disabled
-              class="w-full flex justify-center items-center max-w-[300px] py-5 px-10 rounded-5 my-20"
-              :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
-            >
-              {{ $t('home_cardAgotado') }}
-            </button>
           </div>
         </div>
         <OptionTab

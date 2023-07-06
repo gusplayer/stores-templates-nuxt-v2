@@ -46,36 +46,22 @@ export default {
           disableOnInteraction: false,
         },
         breakpoints: {
-          1250: {
+          10000: {
+            slidesPerView: 4,
+            spaceBetween: 25,
+          },
+          900: {
             slidesPerView: 3,
-            spaceBetween: 35,
+            slidesPerGroup: 3,
+            spaceBetween: 30,
           },
-          1060: {
-            slidesPerView: 3,
-            spaceBetween: 50,
-          },
-          1000: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          990: {
+          640: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            slidesPerGroup: 2,
+            spaceBetween: 10,
           },
-          790: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          770: {
-            slidesPerView: 2,
-            spaceBetween: 15,
-          },
-          375: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          320: {
-            slidesPerView: 1,
+          425: {
+            slidesPerGroup: 1,
             spaceBetween: 10,
           },
         },

@@ -1,13 +1,13 @@
 <template>
   <div
     v-if="this.listArticulos.length > 0"
-    class="w-full flex justify-center items-center py-15 lg:py-20 px-10"
+    class="w-full flex justify-center items-center py-20 lg:py-30 px-10"
     :style="`background-color: ${listBlogHome['--background_color_1']}`"
   >
     <div
       class="w-full h-auto relative max-w-7xl flex flex-col items-center justify-center overflow-hidden"
     >
-      <div class="w-full flex flex-row justify-between items-center mb-20">
+      <div class="w-full flex flex-row justify-between items-center mb-25">
         <p
           :style="`color: ${listBlogHome.color_title}; font-size: ${listBlogHome.fontSizeTitle}; font-weight: ${listBlogHome.fontWeighTitle};`"
         >
@@ -62,12 +62,12 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: 'auto',
-        spaceBetween: '',
-        autoplay: {
-          delay: 7000,
-          disableOnInteraction: false,
-        },
+        slidesPerView: 3,
+        spaceBetween: 30,
+        // autoplay: {
+        //   delay: 7000,
+        //   disableOnInteraction: false,
+        // },
         breakpoints: {
           10000: {
             slidesPerView: 3,
@@ -77,7 +77,6 @@ export default {
             slidesPerView: 2,
             spaceBetween: 30,
           },
-
           580: {
             slidesPerView: 1,
             spaceBetween: 10,
@@ -96,10 +95,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.giftLoad,
-.swiper-slide {
-  max-width: 300px;
-}
-</style>
