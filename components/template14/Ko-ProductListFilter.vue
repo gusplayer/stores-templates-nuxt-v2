@@ -171,12 +171,13 @@
           class="hidden mr-30 md:flex flex-col justify-between items-start sticky w-full max-w-[250px] lg:max-w-[300px] transition-all ease-in duration-0.3 content-left"
           style="top: 140px"
         >
-          <p
-            class="w-auto pb-10 uppercase font-semibold cursor-pointer text-16"
+          <button
+            class="w-full flex justify-between items-center pb-10 uppercase font-semibold cursor-pointer text-16 my-5"
             @click="clear"
           >
             {{ $t('header_buscar_limpiar') }}
-          </p>
+            <close-icon class="color_icon" />
+          </button>
           <el-collapse v-model="activeNames">
             <el-collapse-item :title="$t('header_buscar_producto')" name="1">
               <input
@@ -616,6 +617,9 @@ export default {
   font-size: 15px;
   line-height: 1.3;
   @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+}
+.color_icon {
+  color: var(--color_icon);
 }
 .txt-categorys:hover {
   color: #eb7025;

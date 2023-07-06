@@ -637,11 +637,18 @@ export default {
     this.$store.dispatch('GET_DESCUENTOS')
     this.$store.dispatch('GET_SHOPPING_CART')
     if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
-      const storeCities = JSON.parse(localStorage.getItem('storeCities'))
-      if (storeCities) {
-        this.$store.commit('SET_CITIES', storeCities)
-        this.filterCities()
-      } else {
+      try {
+        const storeCities = JSON.parse(localStorage.getItem('storeCities'))
+        if (storeCities) {
+          this.$store.commit('SET_CITIES', storeCities)
+          this.filterCities()
+        } else {
+          const { success } = await this.$store.dispatch('GET_CITIES')
+          if (success) {
+            this.filterCities()
+          }
+        }
+      } catch (err) {
         const { success } = await this.$store.dispatch('GET_CITIES')
         if (success) {
           this.filterCities()

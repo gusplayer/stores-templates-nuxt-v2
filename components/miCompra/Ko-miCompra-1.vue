@@ -590,7 +590,7 @@ export default {
     ValidationObserver,
     ValidationProvider,
   },
-  mounted() {
+  async mounted() {
     if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
       this.$fb.setPixelId(this.facebookPixel.pixel_facebook)
       this.$fb.track('PageView')
@@ -623,10 +623,14 @@ export default {
       }
       this.setUser()
       this.setTransportadora()
-      const storeCities = JSON.parse(localStorage.getItem('storeCities'))
-      if (storeCities) {
-        this.$store.commit('SET_CITIES', storeCities)
-      } else {
+      try {
+        const storeCities = JSON.parse(localStorage.getItem('storeCities'))
+        if (storeCities) {
+          this.$store.commit('SET_CITIES', storeCities)
+        } else {
+          this.$store.dispatch('GET_CITIES')
+        }
+      } catch (err) {
         this.$store.dispatch('GET_CITIES')
       }
     }

@@ -1,29 +1,35 @@
 <template>
   <div
-    class="w-full flex justify-center items-center py-30 px-10"
+    class="w-full flex justify-center items-center py-40 px-10"
     :style="`background-color: ${logos['--background_color_1']}`"
   >
-    <div class="w-full max-w-7xl flex justify-center items-center">
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-        <div class="swiper-wrapper">
-          <div
-            v-for="(imagen, index) in logos.values"
-            :key="index"
-            class="swiper-slide cursor-pointer h-full w-full"
-          >
-            <a
-              :href="imagen.url_redirect"
-              rel="noreferrer noopener"
-              class="h-full w-full"
+    <div class="w-full max-w-7xl flex flex-col justify-center items-center">
+      <!-- <div
+        class="w-full pb-30 border-t"
+        :style="`border-color: ${logos.color_border};`"
+      /> -->
+      <div class="w-full flex justify-center items-center">
+        <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+          <div class="swiper-wrapper">
+            <div
+              v-for="(imagen, index) in logos.values"
+              :key="index"
+              class="swiper-slide cursor-pointer h-full w-full"
             >
-              <img
-                :src="idCloudinary(imagen.img, 550, 550)"
-                class="h-full w-full remove_bg max-w-[147px] max-h-[147px]"
-                width="147"
-                height="147"
-                :alt="`imágenes logos${index}`"
-              />
-            </a>
+              <a
+                :href="imagen.url_redirect"
+                rel="noreferrer noopener"
+                class="h-full w-full"
+              >
+                <img
+                  :src="idCloudinary(imagen.img, 550, 550)"
+                  class="h-full w-full remove_bg max-w-[110px] max-h-[110px]"
+                  width="110"
+                  height="110"
+                  :alt="`imágenes logos${index}`"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>

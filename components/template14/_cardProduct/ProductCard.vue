@@ -381,7 +381,7 @@ export default {
   /* background-color: var(--background_color_1); */
 }
 #product-card:hover .wrapper_btn {
-  @apply transition-all ease-in duration-0.3 bottom-3 opacity-100;
+  @apply transition-all ease-in duration-0.3 bottom-5 opacity-100;
 }
 #product-card:hover .wrapper_blur {
   @apply transition-all ease-in duration-0.3 opacity-100;

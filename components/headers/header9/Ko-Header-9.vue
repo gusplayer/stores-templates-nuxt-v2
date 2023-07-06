@@ -39,7 +39,7 @@
         >
           <nuxt-link v-if="!item.isExternalLink" :to="item.url">
             <p
-              class="mr-20 px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
+              class="mr-20 px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3 btn"
               :class="btnSelect == item.url ? 'btn-active' : ''"
               @click="btnActivate(item.url)"
             >
@@ -248,12 +248,13 @@ export default {
   font-family: var(--font-style-1) !important;
 }
 .wrapper-header {
+  padding-top: var(--padding_logo);
+  padding-bottom: var(--padding_logo);
   background-color: var(--background_color_1);
   z-index: 99999999999 !important;
 }
+
 .btn-active {
-  padding-top: var(--padding_logo);
-  padding-bottom: var(--padding_logo);
   box-shadow: inset 0px -48px 0px -44px var(--color_border);
 }
 .btn {

@@ -7,7 +7,7 @@ exports.modules = {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(496);
+var content = __webpack_require__(495);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -19,7 +19,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 495:
+/***/ 494:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31,7 +31,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 496:
+/***/ 495:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -46,7 +46,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 963:
+/***/ 960:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -89,11 +89,11 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template12',
   components: {
-    IHeader: () => __webpack_require__.e(/* import() */ 106).then(__webpack_require__.bind(null, 1019)),
-    IFooter: () => __webpack_require__.e(/* import() */ 78).then(__webpack_require__.bind(null, 1020)),
-    IHeroImage: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 1021)),
-    IMainSection: () => __webpack_require__.e(/* import() */ 62).then(__webpack_require__.bind(null, 931)),
-    IButtonCar: () => __webpack_require__.e(/* import() */ 29).then(__webpack_require__.bind(null, 1006))
+    IHeader: () => __webpack_require__.e(/* import() */ 106).then(__webpack_require__.bind(null, 1016)),
+    IFooter: () => __webpack_require__.e(/* import() */ 78).then(__webpack_require__.bind(null, 1017)),
+    IHeroImage: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 1018)),
+    IMainSection: () => __webpack_require__.e(/* import() */ 62).then(__webpack_require__.bind(null, 928)),
+    IButtonCar: () => __webpack_require__.e(/* import() */ 29).then(__webpack_require__.bind(null, 1003))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -146,7 +146,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(495)
+  var style0 = __webpack_require__(494)
 if (style0.__inject__) style0.__inject__(context)
 
 }

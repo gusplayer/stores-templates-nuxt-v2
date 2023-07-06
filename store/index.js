@@ -41,15 +41,13 @@ export const state = () => ({
   whatsapp: '',
   totalCart: 0,
   dataStore: '',
-  urlComponents: 'https://components.komercia.co',
   token:
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI3MmU0ZDc1NmM2NDFjMGM5N2VlMTQzYjc1OTg3NDg1MDI3YzVjYzhhZDNiNTdjMTM1ZjFhNDY2MGIzMTExODMwMWIxYTcxYTk0MGRjYTcyIn0.eyJhdWQiOiIyIiwianRpIjoiMjcyZTRkNzU2YzY0MWMwYzk3ZWUxNDNiNzU5ODc0ODUwMjdjNWNjOGFkM2I1N2MxMzVmMWE0NjYwYjMxMTE4MzAxYjFhNzFhOTQwZGNhNzIiLCJpYXQiOjE1OTA1MTMyNTMsIm5iZiI6MTU5MDUxMzI1MywiZXhwIjoxNTkzMTA1MjUzLCJzdWIiOiIzNDgwIiwic2NvcGVzIjpbXX0.qbFxfGqpayFbPSXy01sygMXWq4fLTqLXpjeksrdT-Pxo9k129iWxFi3XnJ6uYh7LE6frYUMJNiETa3CWA5CJ2ebQk2UGx310sZl5H0Io1oz5KicwJUpq2OgwNLkjg0d_VcvRJTO5aT2gmnwPJbMuz_Y3OHbgFO5zCb2u1SqDSepnxEFl83iR-BKiJ7vESeZlUcHT-xR1SQQClmj4PnLhCeV5MRYFS-ui-TmImheJe8SoQLs-ly9cRTk1u-GYrLskL3yI0z9aOKi6UNXUoe4y8Ji3p8odfJk5ZinX7koXWrPqiBqp15Q2oE763gCnGPQeWE-Tz7QLJJSGeVGHe5xKawjGLRIK57MNG5QttFT5nYpwh1zQZ3jqY2v5JFM2wrLzOUOcAtvR48bFxBe-ea3NkBuLo7V0mJGjpng1rdeCPBV2NwQQTPqmgSAUrFZvX81T5cLfyNmyUVRmJnojelLoiKaaU2ASEBOGt1GFmtw5tbgeXjrFBlPzoWUCRKZyq9qdJyeKbTZbaTD7rewvGZCh9iyjt_Mey3l5-2CJE_csIInAEkFc9i07HrSFuv8pmVrfy1LEDoJwoik5pv39WlIrXtD8bc5maJ-smX8JDeAMMfFhNmjtcbWt1qDaiJYApVDSGPNe5Rw6Uu_bOWyPkKQjXPwbcOSRJT_OihlnCfe1z6M',
   accessToken: '',
   urlKomercia: 'https://api2.komercia.co',
-  // urlKomercia: 'https://apiaws.komercia.co',
-  urlTemplate: 'https://templates.komercia.co',
   urlNodeSettings: 'https://node.komercia.co',
-  // urlNodeSettings: 'http://167.71.252.26',
+  urlTemplate: 'https://templates.komercia.co',
+  urlComponents: 'https://components.komercia.co',
   configAxios: {
     headers: {
       'content-type': 'application/json',
@@ -898,13 +896,10 @@ export const actions = {
     }
   },
   async GET_SETTINGS_BY_TEMPLATE_NODE({ commit, state }, store) {
-    // Cambiar URl cuando este subido los cambios del template 14
-    let url =
-      store.template === 14 ? 'http://167.71.252.26' : state.urlNodeSettings
     try {
       const { data } = await axios({
         method: 'GET',
-        url: `${url}/template${store.template}?id=${store.id_tienda}`,
+        url: `${state.urlNodeSettings}/template${store.template}?id=${store.id_tienda}`,
       })
       if (data) {
         commit(`SET_SETTINGS_BY_TEMPLATE_${store.template}`, data.body)
