@@ -498,6 +498,8 @@ export default {
                 setting14General:
                   this.settingByTemplate14?.settingsGeneral ?? null,
                 pages: this.settingByTemplate14?.pages ?? null,
+                listProductsFilter:
+                  this.settingByTemplate14?.listProductsFilter ?? null,
               },
             ]
           : null,

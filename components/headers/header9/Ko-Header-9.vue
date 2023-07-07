@@ -8,12 +8,11 @@
       settingByTemplate14[0].setting14General,
       {
         '--font-style-1':
-          settingByTemplate14?.setting14General?.fount_1 ?? 'Poppins',
+          settingByTemplate14[0]?.setting14General?.fount_1 ?? 'Poppins',
       },
     ]"
   >
     <div id="headbg" class="w-full max-w-7xl flex justify-between items-center">
-      <KoOrder :dataStore="dataStore" />
       <div class="flex justify-center items-center max-h-[120px] md:max-h-10/0">
         <nuxt-link
           to="/"
@@ -53,41 +52,52 @@
           </a>
         </div>
       </div>
-      <div
-        class="hidden md:flex flex-row justify-center items-center cursor-pointer transition-all ease-in duration-0.3"
-        @click="openOrder"
-      >
-        <i
-          class="w-36 h-auto flex justify-center items-center relative cursor-pointer"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            :fill="settingByTemplate14[0].setting14Header['--color_icon']"
-            class="transition-all ease-in duration-0.2 icon-shop"
-            viewBox="0 0 16 16"
-          >
-            <title>Cart</title>
-            <path
-              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
-            />
-          </svg>
-        </i>
-        <div
-          class="w-auto h-15 flex justify-center items-center rounded-full -mt-20 -ml-8"
-          style="background-color: var(--color_border)"
-        >
-          <span
-            class="pt-1 px-4 text-white-white text-10 leading-12 tracking-0 font-semibold num-items"
-          >
-            {{ productsCart }}
-          </span>
+      <div class="flex items-center">
+        <div class="mr-10" @click="openSearch">
+          <search-icon class="text-25" />
         </div>
+        <div
+          class="flex flex-row justify-center items-center cursor-pointer transition-all ease-in duration-0.3"
+          @click="openOrder"
+        >
+          <i
+            class="w-36 h-auto flex justify-center items-center relative cursor-pointer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              :fill="settingByTemplate14[0].setting14Header['--color_icon']"
+              class="transition-all ease-in duration-0.2 icon-shop"
+              viewBox="0 0 16 16"
+            >
+              <title>Cart</title>
+              <path
+                d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+              />
+            </svg>
+          </i>
+          <div
+            class="w-auto h-15 flex justify-center items-center rounded-full -mt-20 -ml-8"
+            style="background-color: var(--color_border)"
+          >
+            <span
+              class="pt-1 px-4 text-white-white text-10 leading-12 tracking-0 font-semibold num-items"
+            >
+              {{ productsCart }}
+            </span>
+          </div>
+        </div>
+        <button class="flex md:hidden ml-10" @click="stateMenu = !stateMenu">
+          <menu-icon class="text-25" />
+        </button>
       </div>
-      <button class="flex md:hidden" @click="stateMenu = !stateMenu">
-        <menu-icon class="text-25" />
-      </button>
+      <KoOrder :dataStore="dataStore" />
+      <KoSearch />
+      <Ko14MenuLateral
+        :dataStore="dataStore"
+        :settingByTemplate="settingByTemplate14[0].listProductsFilter"
+      />
       <el-drawer
         :visible.sync="stateMenu"
         direction="ttb"
@@ -146,6 +156,8 @@
 export default {
   components: {
     KoOrder: () => import('../_order1/order1'),
+    KoSearch: () => import('../_lateralMenu/_lateralMenu/searchDown14'),
+    Ko14MenuLateral: () => import('../../template14/_lateral/_lateralMenu.vue'),
   },
   name: 'Ko-Header-9',
   props: {
@@ -156,8 +168,6 @@ export default {
     return {
       searchSelect: true,
       btnSelect: '',
-      search: '',
-      showSearch: false,
       stateMenu: false,
     }
   },
@@ -165,29 +175,8 @@ export default {
     productsCart() {
       return this.$store.state.productsCart.length
     },
-    FacebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
   },
   methods: {
-    initHeader() {
-      if (this.$route.fullPath == '/') {
-        this.$store.commit('SET_STATE_BANNER', true)
-        this.showSearch = true
-      } else if (this.$route.query && this.$route.query.category) {
-        this.$store.commit('SET_STATE_BANNER', false)
-        this.showSearch = true
-      } else if (this.$route.query && this.$route.query.subcategory) {
-        this.$store.commit('SET_STATE_BANNER', false)
-        this.showSearch = true
-      } else if (this.$route.query && this.$route.query.search) {
-        this.$store.commit('SET_STATE_BANNER', false)
-        this.setSearch(this.$route.query.search)
-        this.showSearch = true
-      } else {
-        this.showSearch = false
-      }
-    },
     btnActivate(value) {
       this.btnSelect = value
     },
@@ -195,43 +184,14 @@ export default {
       this.searchSelect = false
       this.$store.commit('SET_OPEN_SEARCH', true)
     },
-    closedSearch() {
-      this.searchSelect = true
-      this.$store.commit('SET_OPEN_SEARCH', false)
-    },
     openOrder() {
       this.$store.commit('SET_OPEN_ORDER', true)
-    },
-    openMenuLateral() {
-      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
-    },
-    closed() {
-      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
     },
     clear() {
       this.$router.push({
         path: '/',
       })
       this.$store.commit('SET_STATE_BANNER', true)
-    },
-    SearchProduct(search) {
-      this.$store.commit('SET_SEARCH_VALUE', search)
-    },
-    getSearch(value) {
-      if (value) {
-        location.href = '?search=' + value
-        if (this.FacebookPixel && this.FacebookPixel.pixel_facebook != null) {
-          window.fbq('track', 'Search', { search_string: value })
-        }
-      } else {
-        location.href = '?search=' + ''
-      }
-    },
-    setSearch(value) {
-      this.search = decodeURIComponent(value)
-    },
-    focusInput() {
-      document.getElementById('SearchHeader').focus()
     },
     scrollLeft() {
       document.getElementById('swiper-slide-categories').scrollLeft -= 300

@@ -6,18 +6,18 @@
         :style="[
           {
             '--font-style-1':
-              this.settingByTemplate9 &&
-              this.settingByTemplate9[0].setting9General &&
-              this.settingByTemplate9[0].setting9General.fount_1
-                ? this.settingByTemplate9[0].setting9General.fount_1
+              settingByTemplate9 &&
+              settingByTemplate9[0].setting9General &&
+              settingByTemplate9[0].setting9General.fount_1
+                ? settingByTemplate9[0].setting9General.fount_1
                 : 'Poppins',
           },
           {
             '--font-style-2':
-              this.settingByTemplate9 &&
-              this.settingByTemplate9[0].setting9General &&
-              this.settingByTemplate9[0].setting9General.fount_2
-                ? this.settingByTemplate9[0].setting9General.fount_2
+              settingByTemplate9 &&
+              settingByTemplate9[0].setting9General &&
+              settingByTemplate9[0].setting9General.fount_2
+                ? settingByTemplate9[0].setting9General.fount_2
                 : 'Roboto',
           },
         ]"

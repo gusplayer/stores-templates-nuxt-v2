@@ -8,91 +8,85 @@
     >
       <a
         class="w-full"
-        :href="this.offers.values[0]?.url_redirect ?? ''"
+        :href="offers.values[0]?.url_redirect ?? ''"
         rel="noreferrer noopener"
       >
         <div class="wrapper-left">
           <img
             class="img-left max-w-[416px] max-h-[238px]"
-            v-lazy="idCloudinaryBanner(this.offers.values[0].img, 'banner')"
+            v-lazy="idCloudinaryBanner(offers.values[0].img, 'banner')"
             alt="imagen-1"
           />
           <div
             class="absolute w-full h-full flex flex-col justify-center items-start pl-40 pr-10"
           >
             <p
-              :style="`color: ${this.offers.values[0].color_title}; font-size: ${this.offers.values[0].fontSizeTitle}; font-weight: ${this.offers.values[0].fontWeighTitle};`"
+              :style="`color: ${offers.values[0].color_title}; font-size: ${offers.values[0].fontSizeTitle}; font-weight: ${offers.values[0].fontWeighTitle};`"
             >
-              {{ this.offers.values[0].title.replace(/&nbsp;/g, ' ') }}
+              {{ offers.values[0].title.replace(/&nbsp;/g, ' ') }}
             </p>
             <p
-              :style="`color: ${this.offers.values[0].color_text}; font-size: ${this.offers.values[0].fontSizeText}; font-weight: ${this.offers.values[0].fontWeighText};`"
+              :style="`color: ${offers.values[0].color_text}; font-size: ${offers.values[0].fontSizeText}; font-weight: ${offers.values[0].fontWeighText};`"
             >
-              {{ this.offers.values[0].subTitle.replace(/&nbsp;/g, ' ') }}
+              {{ offers.values[0].subTitle.replace(/&nbsp;/g, ' ') }}
             </p>
             <div
               class="border h-2 mt-5 md:mt-10 border-hover"
-              :style="`border-color: ${this.offers.values[0].color_border};`"
+              :style="`border-color: ${offers.values[0].color_border};`"
             />
           </div>
         </div>
       </a>
-      <a
-        :href="this.offers.values[1]?.url_redirect ?? ''"
-        rel="noreferrer noopener"
-      >
+      <a :href="offers.values[1]?.url_redirect ?? ''" rel="noreferrer noopener">
         <div class="wrapper-center">
           <img
             class="img-center max-w-[416px] max-h-[238px]"
-            v-lazy="idCloudinaryBanner(this.offers.values[1].img, 'banner')"
+            v-lazy="idCloudinaryBanner(offers.values[1].img, 'banner')"
             alt="imagen-2"
           />
           <div
             class="absolute w-full h-full flex flex-col justify-center items-start pl-40 pr-10"
           >
             <p
-              :style="`color: ${this.offers.values[1].color_title}; font-size: ${this.offers.values[1].fontSizeTitle}; font-weight: ${this.offers.values[1].fontWeighTitle};`"
+              :style="`color: ${offers.values[1].color_title}; font-size: ${offers.values[1].fontSizeTitle}; font-weight: ${offers.values[1].fontWeighTitle};`"
             >
-              {{ this.offers.values[1].title.replace(/&nbsp;/g, ' ') }}
+              {{ offers.values[1].title.replace(/&nbsp;/g, ' ') }}
             </p>
             <p
-              :style="`color: ${this.offers.values[1].color_text}; font-size: ${this.offers.values[1].fontSizeText}; font-weight: ${this.offers.values[1].fontWeighText};`"
+              :style="`color: ${offers.values[1].color_text}; font-size: ${offers.values[1].fontSizeText}; font-weight: ${offers.values[1].fontWeighText};`"
             >
-              {{ this.offers.values[1].subTitle.replace(/&nbsp;/g, ' ') }}
+              {{ offers.values[1].subTitle.replace(/&nbsp;/g, ' ') }}
             </p>
             <div
               class="border h-2 mt-5 md:mt-10 border-hover"
-              :style="`border-color: ${this.offers.values[1].color_border};`"
+              :style="`border-color: ${offers.values[1].color_border};`"
             />
           </div>
         </div>
       </a>
-      <a
-        :href="this.offers.values[2]?.url_redirect ?? ''"
-        rel="noreferrer noopener"
-      >
+      <a :href="offers.values[2]?.url_redirect ?? ''" rel="noreferrer noopener">
         <div class="wrapper-right">
           <img
             class="img-right max-w-[416px] max-h-[238px]"
-            v-lazy="idCloudinaryBanner(this.offers.values[2].img, 'banner')"
+            v-lazy="idCloudinaryBanner(offers.values[2].img, 'banner')"
             alt="imagen-3"
           />
           <div
             class="absolute w-full h-full flex flex-col justify-center items-start pl-40 pr-10"
           >
             <p
-              :style="`color: ${this.offers.values[2].color_title}; font-size: ${this.offers.values[2].fontSizeTitle}; font-weight: ${this.offers.values[2].fontWeighTitle};`"
+              :style="`color: ${offers.values[2].color_title}; font-size: ${offers.values[2].fontSizeTitle}; font-weight: ${offers.values[2].fontWeighTitle};`"
             >
-              {{ this.offers.values[2].title.replace(/&nbsp;/g, ' ') }}
+              {{ offers.values[2].title.replace(/&nbsp;/g, ' ') }}
             </p>
             <p
-              :style="`color: ${this.offers.values[2].color_text}; font-size: ${this.offers.values[2].fontSizeText}; font-weight: ${this.offers.values[2].fontWeighText};`"
+              :style="`color: ${offers.values[2].color_text}; font-size: ${offers.values[2].fontSizeText}; font-weight: ${offers.values[2].fontWeighText};`"
             >
-              {{ this.offers.values[2].subTitle.replace(/&nbsp;/g, ' ') }}
+              {{ offers.values[2].subTitle.replace(/&nbsp;/g, ' ') }}
             </p>
             <div
               class="border h-2 mt-5 md:mt-10 border-hover"
-              :style="`border-color: ${this.offers.values[2].color_border};`"
+              :style="`border-color: ${offers.values[2].color_border};`"
             />
           </div>
         </div>

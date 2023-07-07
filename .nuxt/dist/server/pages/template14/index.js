@@ -7,7 +7,7 @@ exports.modules = {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(499);
+var content = __webpack_require__(498);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -19,7 +19,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 498:
+/***/ 497:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31,7 +31,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 499:
+/***/ 498:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -46,7 +46,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 962:
+/***/ 959:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110,14 +110,14 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template14',
   components: {
-    koInformation: () => __webpack_require__.e(/* import() */ 141).then(__webpack_require__.bind(null, 1024)),
-    koBanner: () => __webpack_require__.e(/* import() */ 139).then(__webpack_require__.bind(null, 1025)),
-    KoOffers: () => __webpack_require__.e(/* import() */ 143).then(__webpack_require__.bind(null, 1026)),
-    koListProductsHome: () => __webpack_require__.e(/* import() */ 145).then(__webpack_require__.bind(null, 1027)),
-    KoOffersProduct: () => __webpack_require__.e(/* import() */ 144).then(__webpack_require__.bind(null, 1028)),
-    KoNewsletter: () => __webpack_require__.e(/* import() */ 140).then(__webpack_require__.bind(null, 1029)),
-    KoListBlogHome: () => __webpack_require__.e(/* import() */ 161).then(__webpack_require__.bind(null, 1030)),
-    KoLogos: () => __webpack_require__.e(/* import() */ 142).then(__webpack_require__.bind(null, 1031))
+    koInformation: () => __webpack_require__.e(/* import() */ 141).then(__webpack_require__.bind(null, 1021)),
+    koBanner: () => __webpack_require__.e(/* import() */ 139).then(__webpack_require__.bind(null, 1022)),
+    KoOffers: () => __webpack_require__.e(/* import() */ 143).then(__webpack_require__.bind(null, 1023)),
+    koListProductsHome: () => __webpack_require__.e(/* import() */ 145).then(__webpack_require__.bind(null, 1024)),
+    KoOffersProduct: () => __webpack_require__.e(/* import() */ 144).then(__webpack_require__.bind(null, 1025)),
+    KoNewsletter: () => __webpack_require__.e(/* import() */ 140).then(__webpack_require__.bind(null, 1026)),
+    KoListBlogHome: () => __webpack_require__.e(/* import() */ 162).then(__webpack_require__.bind(null, 1027)),
+    KoLogos: () => __webpack_require__.e(/* import() */ 142).then(__webpack_require__.bind(null, 1028))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -253,7 +253,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(498)
+  var style0 = __webpack_require__(497)
 if (style0.__inject__) style0.__inject__(context)
 
 }

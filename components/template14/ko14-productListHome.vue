@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="this.fullProducts.length > 0"
+    v-if="fullProducts.length > 0"
     class="w-full flex justify-center items-center py-15 lg:py-20 px-10"
     :style="`background-color: ${listProductsHome['--background_color_1']}`"
   >

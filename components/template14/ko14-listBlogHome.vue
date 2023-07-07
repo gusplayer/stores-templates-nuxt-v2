@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="this.listArticulos.length > 0"
+    v-if="listArticulos.length > 0"
     class="w-full flex justify-center items-center py-20 lg:py-30 px-10"
     :style="`background-color: ${listBlogHome['--background_color_1']}`"
   >
