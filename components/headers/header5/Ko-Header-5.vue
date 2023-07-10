@@ -255,9 +255,9 @@ export default {
     openSearch() {
       this.$store.commit('SET_OPEN_SEARCH', true)
     },
-    closedSearch() {
-      this.$store.commit('SET_OPEN_SEARCH', false)
-    },
+    // closedSearch() {
+    //   this.$store.commit('SET_OPEN_SEARCH', false)
+    // },
     openOrder() {
       this.$store.commit('SET_OPEN_ORDER', true)
     },

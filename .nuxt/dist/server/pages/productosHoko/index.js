@@ -1,7 +1,7 @@
 exports.ids = [43];
 exports.modules = {
 
-/***/ 957:
+/***/ 954:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27,10 +27,10 @@ var external_vuex_ = __webpack_require__(7);
 
 /* harmony default export */ var productosHokovue_type_script_lang_js_ = ({
   components: {
-    K05ProductListHoko: () => __webpack_require__.e(/* import() */ 91).then(__webpack_require__.bind(null, 1000)),
-    K09ProductListHoko: () => __webpack_require__.e(/* import() */ 70).then(__webpack_require__.bind(null, 1001)),
-    K11ProductListHoko: () => __webpack_require__.e(/* import() */ 89).then(__webpack_require__.bind(null, 1002)),
-    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 32).then(__webpack_require__.bind(null, 915))
+    K05ProductListHoko: () => __webpack_require__.e(/* import() */ 91).then(__webpack_require__.bind(null, 997)),
+    K09ProductListHoko: () => __webpack_require__.e(/* import() */ 70).then(__webpack_require__.bind(null, 998)),
+    K11ProductListHoko: () => __webpack_require__.e(/* import() */ 89).then(__webpack_require__.bind(null, 999)),
+    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 32).then(__webpack_require__.bind(null, 912))
   },
   mounted() {
     window.parent.postMessage('message', '*');

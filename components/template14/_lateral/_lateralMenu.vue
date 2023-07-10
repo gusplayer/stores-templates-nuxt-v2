@@ -7,7 +7,7 @@
     :modal-append-to-body="false"
   >
     <div
-      class="mt-15 px-10 pb-10 flex flex-col justify-between items-start w-full content-left"
+      class="my-20 px-15 flex flex-col justify-between items-start w-full content-left"
     >
       <div class="w-full flex justify-between items-center pb-10">
         <p
@@ -21,15 +21,6 @@
         </button>
       </div>
       <el-collapse v-model="activeNames">
-        <el-collapse-item :title="$t('header_buscar_producto')" name="1">
-          <input
-            v-model="search"
-            type="search"
-            class="text-15 w-full h-30 cursor-pointer border-none bg-transparent"
-            style="color: #222"
-            :placeholder="$t('header_search')"
-          />
-        </el-collapse-item>
         <el-collapse-item
           :title="$t('productdetail_categoria')"
           name="2"
@@ -185,10 +176,9 @@ export default {
   },
   data() {
     return {
-      search: '',
+      // search: '',
       currentPage: 1,
       showSubCategory: false,
-
       nameCategory: '',
       nameSubCategory: '',
       selectedSubcategories: [],
@@ -222,19 +212,6 @@ export default {
   methods: {
     closed() {
       this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
-    },
-    getSearch(value) {
-      if (value) {
-        location.href = '?search=' + value
-        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-          window.fbq('track', 'Search', { search_string: value })
-        }
-      } else {
-        location.href = '?search=' + ''
-      }
-    },
-    SearchProduct(search) {
-      this.$store.commit('SET_SEARCH_VALUE', search)
     },
     SendSubCategory(value) {
       this.indexSelect2 = value
@@ -302,44 +279,37 @@ export default {
       this.nameCategory = ''
     },
   },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
-    },
-  },
 }
 </script>
 
 <style scoped>
-.el-drawer__wrapper {
-  top: 120px;
-}
 .content-left >>> .el-collapse {
-  border-top: 1px solid #222;
-  border-bottom: 1px solid #222;
-  @apply w-full;
+  background: var(--background_color_1);
+  border-top: 1px solid var(--color_icon);
+  border-bottom: 1px solid var(--color_icon);
+  width: 100%;
 }
 .content-left >>> .el-collapse-item__wrap {
   will-change: height;
   background-color: transparent;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid var(--color_icon);
 }
 .content-left >>> .el-collapse-item__header {
   font-size: 15px;
-  color: #222;
+  color: var(--color_subCategories);
   background-color: transparent;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid var(--color_icon);
   @apply font-semibold;
 }
 .content-left >>> .el-collapse-item__header.is-active {
   border-bottom: none;
 }
 .content-left >>> .el-collapse-item__arrow {
-  color: #222;
+  color: var(--color_icon);
 }
 
 .txt-Filter {
-  color: #222;
+  color: var(--color_categories);
   font-size: 15px;
   line-height: 1.3;
   @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
@@ -348,48 +318,12 @@ export default {
   color: #eb7025;
 }
 .txt-categorys {
-  color: #222;
+  color: var(--color_categories);
   font-size: 15px;
   line-height: 1.3;
   @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
 }
 .txt-categorys:hover {
   color: #eb7025;
-}
-.pagination {
-  font-size: 18px;
-  color: #222;
-  background: transparent;
-}
-.wrapper_pagination >>> .el-pagination.is-background .btn-next {
-  color: #222;
-  background-color: transparent;
-}
-.wrapper_pagination >>> .el-pagination.is-background .btn-prev {
-  color: #222;
-  background-color: transparent;
-}
-.wrapper_pagination >>> .el-pagination.is-background .el-pager li {
-  color: #222;
-  background-color: transparent;
-}
-.wrapper_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: #222;
-}
-.wrapper_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: #222;
-}
-.wrapper_pagination
-  >>> .el-pagination.is-background
-  .el-pager
-  li:not(.disabled):hover {
-  color: #222;
-}
-.wrapper_pagination
-  >>> .el-pagination.is-background
-  .el-pager
-  li:not(.disabled).active {
-  background-color: #222;
-  color: #fff;
 }
 </style>

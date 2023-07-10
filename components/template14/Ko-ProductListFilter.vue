@@ -7,10 +7,6 @@
       settingByTemplate14[0].listProductsFilter,
     ]"
   >
-    <Ko14MenuLateral
-      :dataStore="dataStore"
-      :settingByTemplate="settingByTemplate14"
-    />
     <div class="w-full flex flex-col items-center justify-center">
       <div class="w-full relative box-content hidden md:flex">
         <div v-if="settingByTemplate14[0].listProductsFilter.visible_img">
@@ -112,9 +108,10 @@
                 </p>
               </div>
             </div>
-            <button class="flex md:hidden" @click="openMenuLateral">
-              <menu-icon class="text-25" />
-            </button>
+            <filterOutLine-icon
+              class="flex md:hidden text-25"
+              @click="openMenuLateral"
+            />
           </div>
           <div class="w-full h-full flex flex-col justify-center items-center">
             <div
@@ -328,7 +325,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { mapState } from 'vuex'
 import filterProducts from '@/mixins/filterProducts'
@@ -338,7 +334,6 @@ export default {
   mixins: [filterProducts, idCloudinaryBanner],
   components: {
     Ko14ProductCard: () => import('./_cardProduct/ProductCard.vue'),
-    Ko14MenuLateral: () => import('./_lateral/_lateralMenu.vue'),
   },
   props: {
     dataStore: Object,

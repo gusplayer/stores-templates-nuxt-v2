@@ -7,7 +7,7 @@
       settingByTemplate14[0].setting14General,
       {
         '--font-style-1':
-          this.settingByTemplate14[0].setting14General?.fount_1 ?? 'Roboto',
+          this.settingByTemplate14[0].setting14General?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -17,47 +17,64 @@
       >
         <div class="content-items-sm">
           <div class="content-store-sm">
-            <div class="info-store-sm">
-              <button class="accordion btn">Información de la tienda</button>
-              <div class="footer-content-tienda panel">
+            <div class="info-store-sm mb-20">
+              <p class="btn">Enlaces</p>
+              <div class="w-full flex flex-wrap gap-x-4 gap-y-3">
+                <div
+                  v-for="(item, index) in secciones"
+                  :key="`${index}${item.name}`"
+                >
+                  <nuxt-link
+                    v-if="item.path"
+                    :to="item.path"
+                    class="txt-number txt"
+                  >
+                    {{ $t(`${item.name}`) }}
+                  </nuxt-link>
+                  <nuxt-link
+                    v-else-if="item.href && listArticulos > 0"
+                    :to="item.href"
+                    class="txt-number txt"
+                  >
+                    {{ $t(`${item.name}`) }}
+                  </nuxt-link>
+                </div>
+              </div>
+            </div>
+            <div class="info-store-sm mb-20">
+              <p class="btn">Información de la tienda</p>
+              <div class="footer-content-tienda">
                 <div class="content-direction">
                   <p
+                    v-if="dataStore.geolocalizacion.length"
                     class="txt-direction txt"
-                    v-if="this.dataStore.geolocalizacion.length"
                   >
-                    {{ this.dataStore.geolocalizacion[0].direccion }}
+                    {{ dataStore.geolocalizacion[0].direccion }}
                   </p>
                 </div>
                 <div class="content-number">
-                  <p
-                    class="txt-number txt"
-                    v-if="this.dataStore.tienda.telefono"
-                  >
-                    {{ this.dataStore.tienda.telefono }}
+                  <p v-if="dataStore.tienda.telefono" class="txt-number txt">
+                    {{ dataStore.tienda.telefono }}
                   </p>
                 </div>
                 <div class="content-email">
-                  <p
-                    class="txt-email txt"
-                    v-if="this.dataStore.tienda.email_tienda"
-                  >
-                    {{ this.dataStore.tienda.email_tienda }}
+                  <p v-if="dataStore.tienda.email_tienda" class="txt-email txt">
+                    {{ dataStore.tienda.email_tienda }}
                   </p>
                 </div>
               </div>
             </div>
-            <div class="info-networks">
-              <button class="accordion btn">Síguenos</button>
+            <div class="info-networks mb-20">
+              <p class="btn">Síguenos</p>
               <KoSocialNet
-                :footerIcon="this.settingByTemplate14[0].setting14Footer"
+                :footerIcon="settingByTemplate14[0].setting14Footer"
                 :dataStore="dataStore"
-                class="panel"
-              ></KoSocialNet>
+              />
             </div>
             <div class="info-legal-sm">
               <button
-                class="btn-legal btn"
                 v-if="dataStore.politicas"
+                class="btn-legal btn"
                 @click="OpenModalPolitics"
               >
                 {{ $t('footer_politicasyterminos') }}
@@ -69,35 +86,32 @@
           <div class="info-btn-footer gap-2">
             <img
               class="img-logo"
-              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+              :src="`${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
               alt="Logo"
             />
             <div class="content-direction">
               <p
+                v-if="dataStore.geolocalizacion.length"
                 class="txt-direction txt"
-                v-if="this.dataStore.geolocalizacion.length"
               >
-                {{ this.dataStore.geolocalizacion[0].direccion }}
+                {{ dataStore.geolocalizacion[0].direccion }}
               </p>
             </div>
             <div class="content-number">
-              <p class="txt-number txt" v-if="this.dataStore.tienda.telefono">
-                {{ this.dataStore.tienda.telefono }}
+              <p v-if="dataStore.tienda.telefono" class="txt-number txt">
+                {{ dataStore.tienda.telefono }}
               </p>
             </div>
             <div class="content-email">
-              <p
-                class="txt-email txt"
-                v-if="this.dataStore.tienda.email_tienda"
-              >
-                {{ this.dataStore.tienda.email_tienda }}
+              <p v-if="dataStore.tienda.email_tienda" class="txt-email txt">
+                {{ dataStore.tienda.email_tienda }}
               </p>
             </div>
             <div class="info-networkss">
               <KoSocialNet
-                :footerIcon="this.settingByTemplate14[0].setting14Footer"
+                :footerIcon="settingByTemplate14[0].setting14Footer"
                 :dataStore="dataStore"
-              ></KoSocialNet>
+              />
             </div>
           </div>
           <div class="info-btn-footer">
@@ -106,12 +120,12 @@
               v-for="(item, index) in secciones"
               :key="`${index}${item.name}`"
             >
-              <nuxt-link :to="item.path" v-if="item.path" class="btns">
+              <nuxt-link v-if="item.path" :to="item.path" class="btns">
                 {{ $t(`${item.name}`) }}
               </nuxt-link>
               <nuxt-link
-                :to="item.href"
                 v-else-if="item.href && listArticulos > 0"
+                :to="item.href"
                 class="btns"
               >
                 {{ $t(`${item.name}`) }}
@@ -121,8 +135,8 @@
           <div class="info-btn-footer">
             <p class="btn">Nuestra empresa</p>
             <button
-              class="btn-legal btns"
               v-if="dataStore.politicas"
+              class="btn-legal btns"
               @click="OpenModalPolitics"
             >
               {{ $t('footer_politicasyterminos') }}
@@ -132,11 +146,11 @@
       </div>
       <div
         class="empty"
-        v-if="this.settingByTemplate14[0].setting14Footer.watermark"
+        v-if="settingByTemplate14[0].setting14Footer.watermark"
       />
       <div
         class="madebyKomercia"
-        v-if="this.settingByTemplate14[0].setting14Footer.watermark"
+        v-if="settingByTemplate14[0].setting14Footer.watermark"
       >
         <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
         <a
@@ -155,7 +169,7 @@
       </div>
       <div v-if="showModal">
         <div class="modal" v-if="dataStore.politicas">
-          <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+          <KoTermsConditions :dataStore="dataStore" />
         </div>
       </div>
     </div>
@@ -278,7 +292,6 @@ export default {
   background: var(--background_color_1);
   @apply w-full flex flex-col justify-center items-center;
 }
-
 .modal {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
@@ -324,23 +337,6 @@ export default {
   .btn-legal {
     @apply w-full flex flex-col justify-center items-start text-left;
   }
-  .accordion {
-    transition: 0.4s;
-    @apply w-full text-left mb-0 border-none outline-none cursor-pointer;
-  }
-  .accordion:after {
-    content: '\276F';
-    color: #fff;
-    @apply font-bold float-right transition-all ease-in duration-0.2;
-  }
-  .active:after {
-    transform: rotate(90deg);
-    @apply transition-all ease-in duration-0.2;
-  }
-  .panel {
-    transition: 0.4s ease-out;
-    @apply w-full max-h-0 justify-start items-center mb-10 overflow-hidden;
-  }
   .content-items-lg {
     @apply hidden;
   }
@@ -366,9 +362,6 @@ export default {
   .img-logo {
     max-width: var(--with_logo);
     @apply w-full object-contain;
-  }
-  .content-image {
-    @apply w-full flex flex-col justify-start items-center mb-20;
   }
   .info-btn-footer {
     @apply w-full flex flex-col justify-center items-start;
