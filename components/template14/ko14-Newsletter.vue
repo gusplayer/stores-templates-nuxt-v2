@@ -28,7 +28,7 @@
           />
           <div class="w-full flex flex-col justify-center">
             <div
-              class="flex flex-col md:flex-row py-10 px-10 rounded-2"
+              class="w-full flex flex-col justify-between md:flex-row py-10 px-10 rounded-2"
               :style="`background-color: ${newsletter.color_input};`"
             >
               <ValidationProvider
@@ -76,8 +76,9 @@
                   </span>
                 </template>
               </ValidationProvider>
+
               <button
-                class="w-full md:w-0 font-bold px-15 mt-5 md:mt-0"
+                class="w-full max-w-full md:max-w-[130px] font-bold px-15 mt-5 md:mt-0"
                 :style="`color: ${newsletter.color_text_input};background-color: ${newsletter.color_input};`"
                 @click="submitNewsletter"
               >

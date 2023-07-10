@@ -2,8 +2,8 @@
   <div
     class="content-opt-tab"
     :style="[
-      settingByTemplate14[0].detailsProducts,
       settingByTemplate14[0].settingsGeneral,
+      settingByTemplate14[0].detailsProducts,
       {
         '--font-style-1':
           this.settingByTemplate14[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
@@ -11,7 +11,11 @@
     ]"
   >
     <el-collapse v-model="activeNames" @change="handleChange">
-      <el-collapse-item :title="$t('productdetail_description')" name="1">
+      <el-collapse-item
+        :title="$t('productdetail_description')"
+        name="1"
+        :style="`color: ${settingByTemplate14[0].detailsProducts.color_text}; border-color:${settingByTemplate14[0].detailsProducts.color_border}`"
+      >
         <div v-if="data.info.descripcion" class="editor">
           <el-tiptap
             v-model="data.info.descripcion"
@@ -25,24 +29,58 @@
           />
         </div>
       </el-collapse-item>
-      <el-collapse-item :title="$t('productdetail_opcionesPago')" name="2">
+      <el-collapse-item
+        :title="$t('productdetail_opcionesPago')"
+        name="2"
+        :style="`color: ${settingByTemplate14[0].detailsProducts.color_text}; border-color:${settingByTemplate14[0].detailsProducts.color_border}`"
+      >
         <div class="item-content opcpago">
           <ul>
             <li v-if="mediospago.consignacion == 1">
-              <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
-              <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_consignacionBancaria') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
+                {{ $t('productdetail_consignacionBancariaMsg') }}
+              </p>
             </li>
             <li v-if="mediospago.contraentrega == 1">
-              <h4>{{ $t('productdetail_PagoContra') }}</h4>
-              <p>{{ $t('productdetail_PagoContraMsg') }}</p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_PagoContra') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
+                {{ $t('productdetail_PagoContraMsg') }}
+              </p>
             </li>
             <li v-if="mediospago.convenir == 1">
-              <h4>{{ $t('productdetail_pagoConvenir') }}</h4>
-              <p>{{ $t('productdetail_pagoConvenirMsg') }}</p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_pagoConvenir') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
+                {{ $t('productdetail_pagoConvenirMsg') }}
+              </p>
             </li>
             <li v-if="mediospago.credibanco == 1">
-              <h4>{{ $t('productdetail_ConsignacionCredibanco') }}</h4>
-              <p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_ConsignacionCredibanco') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_ConsignacionCredibancoMsg') }}
               </p>
               <a
@@ -59,8 +97,14 @@
               </a>
             </li>
             <li v-if="mediospago.daviplata == 1">
-              <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>
-              <p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_Consignaciondaviplata') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_ConsignaciondaviplataMsg') }}
               </p>
               <img
@@ -70,8 +114,16 @@
               />
             </li>
             <li v-if="mediospago.efecty == 1">
-              <h4>{{ $t('productdetail_ConsignacionEfecty') }}</h4>
-              <p>{{ $t('productdetail_ConsignacionEfectyMsg') }}</p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_ConsignacionEfecty') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
+                {{ $t('productdetail_ConsignacionEfectyMsg') }}
+              </p>
               <a
                 href="https://www.efecty.com.co/web/"
                 target="_blank"
@@ -86,8 +138,14 @@
               </a>
             </li>
             <li v-if="mediospago.mercado_pago == 1">
-              <h4>{{ $t('productdetail_PasarelaMercado') }}</h4>
-              <p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_PasarelaMercado') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_PasarelaMercadoMsg') }}
               </p>
               <a
@@ -104,8 +162,14 @@
               </a>
             </li>
             <li v-if="mediospago.nequi == 1">
-              <h4>{{ $t('productdetail_Consignacionnequi') }}</h4>
-              <p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_Consignacionnequi') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_ConsignacionnequiMsg') }}
               </p>
               <a
@@ -122,8 +186,14 @@
               </a>
             </li>
             <li v-if="mediospago.payco == 1">
-              <h4>{{ $t('productdetail_PasarelaEpayco') }}</h4>
-              <p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_PasarelaEpayco') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_PasarelaEpaycoMsg') }}
               </p>
               <img
@@ -133,8 +203,14 @@
               />
             </li>
             <li v-if="mediospago.payu == 1">
-              <h4>{{ $t('productdetail_PasarelaPayu') }}</h4>
-              <p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_PasarelaPayu') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_PasarelaPayuMsg') }}
               </p>
               <a
@@ -151,8 +227,14 @@
               </a>
             </li>
             <li v-if="mediospago.wompi == 1">
-              <h4>{{ $t('productdetail_Consignacionwompi') }}</h4>
-              <p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_Consignacionwompi') }}
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_PasarelaPayuMsg') }}
               </p>
               <a
@@ -169,8 +251,14 @@
               </a>
             </li>
             <li v-if="mediospago.wepay4u == 1">
-              <h4>WePay4U</h4>
-              <p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                WePay4U
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('text_pago_WePay4U') }}
               </p>
               <a
@@ -187,8 +275,14 @@
               </a>
             </li>
             <li v-if="mediospago.tu_compra == 1">
-              <h4>Tucompra</h4>
-              <p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                Tucompra
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('text_pago_Tucompra') }}
               </p>
               <a
@@ -205,8 +299,14 @@
               </a>
             </li>
             <li v-if="mediospago.flow == 1">
-              <h4>Tucompra</h4>
-              <p>
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                Tucompra
+              </h4>
+              <p
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('text_pago_flowInfo') }}
               </p>
               <a
@@ -225,11 +325,18 @@
           </ul>
         </div>
       </el-collapse-item>
-      <el-collapse-item :title="$t('productdetail_opinionesEnvio')" name="3">
+      <el-collapse-item
+        :title="$t('productdetail_opinionesEnvio')"
+        name="3"
+        :style="`color: ${settingByTemplate14[0].detailsProducts.color_text}; border-color:${settingByTemplate14[0].detailsProducts.color_border}`"
+      >
         <div class="item-content opcenvio">
           <div class="deliverys section" v-if="this.envios.envio_metodo">
             <div class="content">
-              <h3 class="title-section">
+              <h3
+                class="title-section"
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
                 {{ $t('productdetail_opinionesEnvio') }}
               </h3>
             </div>
@@ -237,10 +344,16 @@
               v-if="this.envios.envio_metodo === 'precio_ciudad'"
               class="wrapper-method"
             >
-              <h4 class="capitalize">
+              <h4
+                class="capitalize"
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
                 • {{ this.envios.envio_metodo.replace('_', ' por ') }}
               </h4>
-              <p class="description-method">
+              <p
+                class="description-method"
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_opinionesEnvioMsg1') }}
               </p>
             </div>
@@ -248,13 +361,22 @@
               v-if="this.envios.envio_metodo === 'tarifa_plana'"
               class="wrapper-method"
             >
-              <h4 class="capitalize">
+              <h4
+                class="capitalize"
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
                 {{ this.envios.envio_metodo.replace('_', ' ') }}
               </h4>
-              <p class="description-method">
+              <p
+                class="description-method"
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_opinionesEnvioMsg2') }}
               </p>
-              <p class="price">
+              <p
+                class="price"
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('cart_precio') }}
                 {{
                   this.envios.valor
@@ -269,8 +391,15 @@
               v-if="this.envios.envio_metodo === 'precio'"
               class="wrapper-method"
             >
-              <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
-              <p class="description-method">
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_precioTotalCompra') }}
+              </h4>
+              <p
+                class="description-method"
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_precioTotalCompraMsg') }}
               </p>
             </div>
@@ -278,14 +407,22 @@
               v-if="this.envios.envio_metodo === 'gratis'"
               class="wrapper-method"
             >
-              <h4>{{ $t('productdetail_gratis') }}</h4>
-              <p class="description-method">
+              <h4
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
+              >
+                {{ $t('productdetail_gratis') }}
+              </h4>
+              <p
+                class="description-method"
+                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
+              >
                 {{ $t('productdetail_gratisMsg') }}
               </p>
             </div>
             <div
               v-if="this.envios.envio_metodo === 'sinEnvio'"
               class="wrapper-method"
+              :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
             >
               <p class="description-method">Pasas a recoger tu compra</p>
             </div>
@@ -438,7 +575,7 @@ export default {
 .content-opt-tab >>> .el-collapse-item__header {
   font-size: 16px;
   font-family: var(--font-style-1) !important;
-  color: var(--color_text);
+  color: currentColor;
   background-color: transparent;
   border-bottom: transparent;
   @apply font-semibold;
@@ -447,18 +584,11 @@ export default {
   border-bottom: none;
 }
 .content-opt-tab >>> .el-collapse-item__arrow {
-  color: var(--border);
+  color: currentColor;
 }
-.content_product_description {
-  color: var(--color_subtext);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.42857143;
-  font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-col justify-center items-start;
-}
+
 h3 {
-  color: var(--color_text);
+  color: currentColor;
   font-size: 15px;
   font-weight: 600;
   text-transform: uppercase;
@@ -467,7 +597,7 @@ h3 {
 }
 h4 {
   font-family: var(--font-style-1) !important;
-  color: var(--color_text);
+  color: currentColor;
   font-size: 15px;
   font-weight: 600;
   line-height: 1.42857143;
@@ -475,7 +605,7 @@ h4 {
 }
 li p {
   font-family: var(--font-style-1) !important;
-  color: var(--color_subtext);
+  color: currentColor;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
@@ -484,7 +614,7 @@ li p {
 .description-method,
 .price {
   font-family: var(--font-style-1) !important;
-  color: var(--color_subtext);
+  color: currentColor;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;

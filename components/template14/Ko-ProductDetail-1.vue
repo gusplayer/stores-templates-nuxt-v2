@@ -41,7 +41,7 @@
           />
         </picture>
       </div>
-      <div v-else class="w-full h-100" />
+      <div v-else class="w-full h-[240px]" />
       <div
         class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/2 flex flex-col items-center"
       >
