@@ -54,7 +54,10 @@
       </div>
       <div class="flex items-center">
         <div class="mr-10" @click="openSearch">
-          <search-icon class="text-25" />
+          <search-icon
+            class="text-25"
+            :style="`color: ${settingByTemplate14[0].setting14Header['--color_icon']} ;`"
+          />
         </div>
         <div
           class="flex flex-row justify-center items-center cursor-pointer transition-all ease-in duration-0.3"
@@ -89,7 +92,10 @@
           </div>
         </div>
         <button class="flex md:hidden ml-10" @click="stateMenu = !stateMenu">
-          <menu-icon class="text-25" />
+          <menu-icon
+            class="text-25"
+            :style="`color: ${settingByTemplate14[0].setting14Header['--color_icon']} ;`"
+          />
         </button>
       </div>
       <KoOrder :dataStore="dataStore" />
@@ -103,12 +109,14 @@
         direction="ttb"
         :withHeader="false"
         :modal-append-to-body="false"
-        size="23%"
+        size="25%"
       >
-        <div class="w-full flex flex-col justify-center items-center h-full">
+        <div
+          class="w-full flex flex-col justify-center items-center h-full py-5"
+        >
           <div
             v-if="settingByTemplate14[0].pages.values"
-            class="w-full h-full max-h-[100px] max-w-[300px] flex flex-col justify-center items-center overflow-y-auto"
+            class="w-full h-full max-h-[150px] max-w-[300px] flex flex-col justify-center items-center overflow-y-auto py-10"
           >
             <div
               v-for="(item, index) in settingByTemplate14[0].pages.values"
@@ -141,7 +149,7 @@
             </div>
           </div>
           <button
-            class="w-full max-w-[300px] text-center bg-red-500 text-white-white rounded-8 px-5 py-3 mt-20"
+            class="w-full max-w-[300px] text-center bg-red-500 text-white-white rounded-8 px-5 py-3 mt-15"
             @click="stateMenu = !stateMenu"
           >
             Cerrar

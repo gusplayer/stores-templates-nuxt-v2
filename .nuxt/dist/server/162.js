@@ -8,14 +8,15 @@ exports.modules = {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template14/ko14-listBlogHome.vue?vue&type=template&id=0522ffa4&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template14/ko14-listBlogHome.vue?vue&type=template&id=542d8c27&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _vm.listArticulos.length > 0 ? _c('div', {
     staticClass: "w-full flex justify-center items-center py-20 lg:py-30 px-10",
     style: `background-color: ${_vm.listBlogHome['--background_color_1']}`
-  }, [_vm._ssrNode("<div class=\"w-full h-auto relative max-w-7xl flex flex-col items-center justify-center overflow-hidden\">", "</div>", [_vm._ssrNode("<div class=\"w-full flex flex-row justify-between items-center mb-25\">", "</div>", [_vm._ssrNode("<p" + _vm._ssrStyle(null, `color: ${_vm.listBlogHome.color_title}; font-size: ${_vm.listBlogHome.fontSizeTitle}; font-weight: ${_vm.listBlogHome.fontWeighTitle};`, null) + ">" + _vm._ssrEscape("\n        " + _vm._s(_vm.listBlogHome.title) + "\n      ") + "</p> "), _c('nuxt-link', {
+  }, [_vm._ssrNode("<div class=\"w-full h-auto relative max-w-7xl flex flex-col items-center justify-center overflow-hidden\">", "</div>", [_vm._ssrNode("<div class=\"w-full flex flex-row justify-between items-start md:items-center mb-25\">", "</div>", [_vm._ssrNode("<p class=\"w-full text-start\"" + _vm._ssrStyle(null, `color: ${_vm.listBlogHome.color_title}; font-size: ${_vm.listBlogHome.fontSizeTitle}; font-weight: ${_vm.listBlogHome.fontWeighTitle};`, null) + ">" + _vm._ssrEscape("\n        " + _vm._s(_vm.listBlogHome.title) + "\n      ") + "</p> "), _c('nuxt-link', {
+    staticClass: "w-full text-end",
     style: `color: ${_vm.listBlogHome.color_text_btn}; font-size: ${_vm.listBlogHome.fontSizeTextBtn}; font-weight: ${_vm.listBlogHome.fontWeighTextBtn};`,
     attrs: {
       "to": {
@@ -47,7 +48,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/template14/ko14-listBlogHome.vue?vue&type=template&id=0522ffa4&
+// CONCATENATED MODULE: ./components/template14/ko14-listBlogHome.vue?vue&type=template&id=542d8c27&
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template14/ko14-listBlogHome.vue?vue&type=script&lang=js&
 /* harmony default export */ var ko14_listBlogHomevue_type_script_lang_js_ = ({

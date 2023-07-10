@@ -37,7 +37,7 @@
             />
           </picture>
         </div>
-        <div v-else class="w-full h-100" />
+        <div v-else class="w-full h-[240px]" />
         <div
           class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex flex-col items-center"
         >
@@ -70,12 +70,13 @@
           <div class="w-full flex flex-row justify-between items-center pb-25">
             <div class="w-full flex flex-col justify-start items-start">
               <p
-                class="font-semibold uppercase justify-start items-start"
                 v-if="!nameCategoryHeader"
+                class="font-semibold uppercase justify-start items-start"
+                :style="`color: ${settingByTemplate14[0].listProductsFilter['--color_subCategories']};`"
               >
                 {{ $t('header_productos') }}
               </p>
-              <div class="flex flex-col justify-start" v-else>
+              <div v-else class="flex flex-col justify-start">
                 <p class="font-semibold uppercase justify-start items-start">
                   {{ nameCategoryHeader }}
                 </p>
@@ -84,15 +85,15 @@
                     {{ nameSubCategoryHeader }}
                   </p>
                   <p
-                    class="text-12 mr-4"
                     v-if="nameSubCategoryHeader && etiqueta1"
+                    class="text-12 mr-4"
                   >
                     /
                   </p>
-                  <p class="text-12" v-if="etiqueta1">
+                  <p v-if="etiqueta1" class="text-12">
                     {{ etiqueta1 }}
                   </p>
-                  <p class="ml-4 text-12" v-if="etiqueta2">/ {{ etiqueta2 }}</p>
+                  <p v-if="etiqueta2" class="ml-4 text-12">/ {{ etiqueta2 }}</p>
                 </div>
               </div>
               <div
@@ -170,6 +171,7 @@
         >
           <button
             class="w-full flex justify-between items-center pb-10 uppercase font-semibold cursor-pointer text-16 my-5"
+            :style="`color: ${settingByTemplate14[0].listProductsFilter['--color_subCategories']};`"
             @click="clear"
           >
             {{ $t('header_buscar_limpiar') }}
@@ -563,21 +565,21 @@ export default {
   background: var(--background_color_1);
 }
 .content-left >>> .el-collapse {
-  border-top: 1px solid var(--color_icon);
-  border-bottom: 1px solid var(--color_icon);
+  border-top: 1px solid var(--color_border);
+  border-bottom: 1px solid var(--color_border);
   @apply w-full;
 }
 
 .content-left >>> .el-collapse-item__wrap {
   will-change: height;
   background-color: transparent;
-  border-bottom: 1px solid var(--color_icon);
+  border-bottom: 1px solid var(--color_border);
 }
 .content-left >>> .el-collapse-item__header {
   font-size: 15px;
   color: var(--color_subCategories);
   background-color: transparent;
-  border-bottom: 1px solid var(--color_icon);
+  border-bottom: 1px solid var(--color_border);
   @apply font-semibold;
 }
 .content-left >>> .el-collapse-item__header.is-active {

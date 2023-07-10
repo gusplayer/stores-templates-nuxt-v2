@@ -5,8 +5,8 @@
   >
     <a
       :href="offersProduct?.url_redirect ?? ''"
-      class="w-full max-w-7xl flex items-center justify-center border wrapper_border cursor-pointer"
-      :style="`border-color: ${offersProduct.color_border_component}; background-color: ${offersProduct['--background_color_2']}`"
+      class="w-full max-w-7xl flex items-center justify-center wrapper_border cursor-pointer"
+      :style="`background-color: ${offersProduct['--background_color_2']}`"
     >
       <div
         class="w-full grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-0 justify-between items-center"

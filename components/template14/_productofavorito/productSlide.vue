@@ -1,8 +1,8 @@
 <template>
-  <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="relative">
-    <div class="swiper-wrapper">
+  <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full relative">
+    <div class="swiper-wrapper w-full">
       <div
-        class="swiper-slide"
+        class="swiper-slide w-full"
         v-for="(product, index) in this.products"
         :key="index"
       >
@@ -10,6 +10,7 @@
           :product="product"
           :cardProducts="cardProducts"
           :settingsGeneral="settingsGeneral"
+          class="w-full"
         />
       </div>
     </div>
@@ -39,29 +40,43 @@ export default {
         setWrapperSize: true,
         paginationClickable: true,
         slidesPerView: 4,
-        spaceBetween: 22,
+        spaceBetween: 26,
         grabCursor: true,
         autoplay: {
           delay: 3000,
           disableOnInteraction: false,
         },
         breakpoints: {
-          10000: {
-            slidesPerView: 4,
-            spaceBetween: 25,
-          },
-          900: {
+          1250: {
             slidesPerView: 3,
-            slidesPerGroup: 3,
-            spaceBetween: 30,
+            spaceBetween: 35,
           },
-          640: {
+          1060: {
+            slidesPerView: 3,
+            spaceBetween: 50,
+          },
+          1000: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          990: {
             slidesPerView: 2,
-            slidesPerGroup: 2,
-            spaceBetween: 10,
+            spaceBetween: 20,
           },
-          425: {
-            slidesPerGroup: 1,
+          790: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          770: {
+            slidesPerView: 2,
+            spaceBetween: 15,
+          },
+          375: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          320: {
+            slidesPerView: 1,
             spaceBetween: 10,
           },
         },
@@ -86,12 +101,6 @@ export default {
 </script>
 
 <style scoped>
-.swiper-wrapper {
-  width: 100%;
-}
-.swiper-slide {
-  width: 100%;
-}
 .btnPrev {
   position: absolute;
   z-index: 10;

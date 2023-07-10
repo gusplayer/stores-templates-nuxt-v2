@@ -2,7 +2,6 @@
   <div
     class="w-full flex justify-center items-center"
     :style="[
-      `background-color: ${settingByTemplate14[0].contact['--background_color_1']}`,
       {
         '--font-style-1':
           this.settingByTemplate14[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
@@ -11,6 +10,7 @@
   >
     <div
       class="w-full h-auto relative flex flex-col items-center justify-center overflow-hidden"
+      :style="`background-color: ${settingByTemplate14[0].contact['--background_color_1']}`"
     >
       <div class="w-full relative box-content hidden md:flex">
         <div v-if="settingByTemplate14[0].contact.visible_img">
@@ -38,7 +38,7 @@
             />
           </picture>
         </div>
-        <div v-else class="w-full h-100" />
+        <div v-else class="w-full h-[240px]" />
         <div
           class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex flex-col items-center"
         >
@@ -245,7 +245,7 @@
         :style="`background-color: ${settingByTemplate14[0].contact['--background_color_2']}`"
       >
         <div
-          class="w-full max-w-7xl flex flex-col my-40 md:my-80 border px-40 py-35 justify-center"
+          class="w-full max-w-7xl flex flex-col my-40 md:my-80 px-40 py-35 justify-center"
           :style="`background-color: ${settingByTemplate14[0].contact.color_bg_form};`"
         >
           <p

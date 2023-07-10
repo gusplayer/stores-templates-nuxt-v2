@@ -7,14 +7,18 @@
     <div
       class="w-full h-auto relative max-w-7xl flex flex-col items-center justify-center overflow-hidden"
     >
-      <div class="w-full flex flex-row justify-between items-center mb-20">
+      <div
+        class="w-full flex flex-row justify-between items-start md:items-center mb-25"
+      >
         <p
+          class="w-full text-start"
           :style="`color: ${listProductsHome.color_title}; font-size: ${listProductsHome.fontSizeTitle}; font-weight: ${listProductsHome.fontWeighTitle};`"
         >
           {{ listProductsHome.title }}
         </p>
         <nuxt-link
           :to="{ path: `/productos` }"
+          class="w-full text-end"
           :style="`color: ${listProductsHome.color_text_btn}; font-size: ${listProductsHome.fontSizeTextBtn}; font-weight: ${listProductsHome.fontWeighTextBtn};`"
         >
           {{ listProductsHome.text_btn }}

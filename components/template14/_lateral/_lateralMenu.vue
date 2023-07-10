@@ -8,6 +8,7 @@
   >
     <div
       class="my-20 px-15 flex flex-col justify-between items-start w-full content-left"
+      :style="[settingByTemplate]"
     >
       <div class="w-full flex justify-between items-center pb-10">
         <p
@@ -168,7 +169,7 @@ export default {
   mixins: [filterProducts],
   props: {
     dataStore: Object,
-    settingByTemplate: Array,
+    settingByTemplate: Object,
   },
   components: {
     BaseAccordion: () =>

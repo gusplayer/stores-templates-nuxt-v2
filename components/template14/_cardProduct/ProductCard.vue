@@ -98,13 +98,13 @@
       >
         <nuxt-link
           :to="{ path: `/productos/` + product.slug }"
-          class="px-12 py-8 shadow-lg border rounded-full btn"
+          class="px-12 py-8 shadow-lg rounded-full btn"
           :style="`background-color:${cardProducts.color_btn};color:${cardProducts.color_icon};`"
         >
           <eye-outline-icon />
         </nuxt-link>
         <button
-          class="ml-10 px-12 py-8 shadow-lg border rounded-full btn"
+          class="ml-10 px-12 py-8 shadow-lg rounded-full btn"
           :style="`background-color:${cardProducts.color_btn};color:${cardProducts.color_icon};`"
           v-if="
             !estadoCart &&
