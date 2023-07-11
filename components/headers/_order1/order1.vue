@@ -491,7 +491,7 @@
                     </button>
                   </nuxt-link>
                   <!-- ir al carrito componente -->
-                  <nuxt-link
+                  <!-- <nuxt-link
                     to="/cart"
                     class="conten-btn"
                     @click="closeOrder"
@@ -504,7 +504,7 @@
                     <button class="continue_shopping2">
                       {{ $t('footer_irCarrito') }}
                     </button>
-                  </nuxt-link>
+                  </nuxt-link> -->
                 </div>
               </div>
             </div>
@@ -528,7 +528,7 @@
                   {{ $t('footer_seguirCompra') }}
                 </button>
               </nuxt-link>
-              <nuxt-link
+              <!-- <nuxt-link
                 to="/cart"
                 class="conten-btn"
                 @click="closeOrder"
@@ -537,7 +537,7 @@
                 <button class="continue_shopping2">
                   {{ $t('footer_irCarrito') }}
                 </button>
-              </nuxt-link>
+              </nuxt-link> -->
             </div>
           </div>
         </transition>

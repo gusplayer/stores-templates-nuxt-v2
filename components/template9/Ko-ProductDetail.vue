@@ -6,18 +6,14 @@
       settingByTemplate9[0].setting9General,
     ]"
   >
-    <div class="container-productDetail-loading" v-if="loading"></div>
+    <div v-if="loading" class="container-productDetail-loading" />
     <div
-      class="container-productDetail"
       v-else
+      class="container-productDetail"
       :style="[
         {
           '--font-style-2':
-            this.settingByTemplate9 &&
-            this.settingByTemplate9[0].setting9General &&
-            this.settingByTemplate9[0].setting9General.fount_2
-              ? this.settingByTemplate9[0].setting9General.fount_2
-              : 'Roboto',
+            this.settingByTemplate9[0]?.setting9General?.fount_2 ?? 'Roboto',
         },
       ]"
     >
@@ -354,15 +350,11 @@
 </template>
 <script>
 import axios from 'axios'
-import SelectGroup from './_productdetails/selectGroup'
-import OptionAcordion from './_productdetails/OptAcordion'
-import OptionTab from './_productdetails/OptTab'
-import KoSuggesProduct from './_productdetails/suggestionsProducto'
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
+  name: 'Ko9-ProductDetail-1',
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductDetail-1',
   props: {
     dataStore: Object,
     productsData: Array,
@@ -372,12 +364,10 @@ export default {
     settingByTemplate9: Array,
   },
   components: {
-    OptionAcordion,
-    OptionTab,
-    SelectGroup,
-    KoSuggesProduct,
-    // ProductSlide,
-    // Zoom,
+    OptionAcordion: () => import('./_productdetails/OptAcordion'),
+    OptionTab: () => import('./_productdetails/OptTab'),
+    SelectGroup: () => import('./_productdetails/selectGroup'),
+    KoSuggesProduct: () => import('./_productdetails/suggestionsProducto'),
   },
   mounted() {
     this.$store.state.beforeCombination = []

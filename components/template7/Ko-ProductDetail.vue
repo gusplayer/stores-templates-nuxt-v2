@@ -7,10 +7,10 @@
       settingByTemplate7[0].card,
     ]"
   >
-    <div class="container-productDetail-loading" v-if="loading"></div>
+    <div v-if="loading" class="container-productDetail-loading" />
     <div
-      class="container-productDetail"
       v-else
+      class="container-productDetail"
       :style="[
         {
           '--font-style-1':
@@ -456,16 +456,18 @@
 </template>
 <script>
 import axios from 'axios'
-import ProductSlide from './_productdetails/productSlide'
-import SelectGroup from './_productdetails/selectGroup'
-import KoDescription from './_productdetails/descriptionProduct'
-import KoSuggesProduct from './_productdetails/suggestionsProducto'
-import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
+  name: 'Ko7-ProductDetail-1',
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductDetail-1',
+  components: {
+    SelectGroup: () => import('./_productdetails/selectGroup'),
+    KoDescription: () => import('./_productdetails/descriptionProduct'),
+    KoSuggesProduct: () => import('./_productdetails/suggestionsProducto'),
+    ProductSlide: () => import('./_productdetails/productSlide'),
+    Zoom: () => import('./_productdetails/zoomImg'),
+  },
   props: {
     dataStore: Object,
     productsData: Array,
@@ -473,13 +475,6 @@ export default {
     envios: Object,
     facebookPixel: Object,
     settingByTemplate7: Array,
-  },
-  components: {
-    SelectGroup,
-    KoDescription,
-    KoSuggesProduct,
-    ProductSlide,
-    Zoom,
   },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -503,18 +498,6 @@ export default {
       this.userDropshipping.userId = this.$route.query.userId
       this.userDropshipping.userName = this.$route.query.userName
     }
-    // window.addEventListener('scroll', function () {
-    //   var sticky = document.getElementById('sticky')
-    //   if (window.pageYOffset >= 1 && screen.width > 725 && sticky) {
-    //     sticky.style.display = 'flex'
-    //     sticky.style.flexDirection = 'column'
-    //     sticky.style.position = 'fixed'
-    //     sticky.style.top = '160px'
-    //     sticky.style.width = '20%'
-    //     sticky.style.overflow = 'hidden'
-
-    //   }
-    // })
   },
   data() {
     return {
@@ -829,7 +812,7 @@ export default {
         this.$store.state.productsCart.push(product)
       }
       this.$store.commit('UPDATE_CONTENT_CART')
-      this.$router.push('/')
+      this.$router.push('/productos')
       this.$store.commit('SET_OPEN_ORDER', true)
       // this.$store.state.orderComponent = true
       this.$store.dispatch('SEND_ADD_TO_CART', 1)

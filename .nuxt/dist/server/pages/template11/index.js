@@ -1,7 +1,7 @@
 exports.ids = [2];
 exports.modules = {
 
-/***/ 956:
+/***/ 958:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62,14 +62,14 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template11',
   components: {
-    KCarousel: () => __webpack_require__.e(/* import() */ 97).then(__webpack_require__.bind(null, 945)),
-    KSection: () => __webpack_require__.e(/* import() */ 126).then(__webpack_require__.bind(null, 1006)),
-    KTrending: () => __webpack_require__.e(/* import() */ 82).then(__webpack_require__.bind(null, 1007)),
-    KTrendingHoko: () => __webpack_require__.e(/* import() */ 90).then(__webpack_require__.bind(null, 1008)),
-    KParallax: () => __webpack_require__.e(/* import() */ 125).then(__webpack_require__.bind(null, 1009)),
-    KListTrending: () => __webpack_require__.e(/* import() */ 81).then(__webpack_require__.bind(null, 1010)),
-    KInformation: () => __webpack_require__.e(/* import() */ 123).then(__webpack_require__.bind(null, 1011)),
-    KBlog: () => __webpack_require__.e(/* import() */ 88).then(__webpack_require__.bind(null, 1012))
+    KCarousel: () => __webpack_require__.e(/* import() */ 97).then(__webpack_require__.bind(null, 942)),
+    KSection: () => __webpack_require__.e(/* import() */ 142).then(__webpack_require__.bind(null, 1008)),
+    KTrending: () => __webpack_require__.e(/* import() */ 82).then(__webpack_require__.bind(null, 1009)),
+    KTrendingHoko: () => __webpack_require__.e(/* import() */ 90).then(__webpack_require__.bind(null, 1010)),
+    KParallax: () => __webpack_require__.e(/* import() */ 141).then(__webpack_require__.bind(null, 1011)),
+    KListTrending: () => __webpack_require__.e(/* import() */ 81).then(__webpack_require__.bind(null, 1012)),
+    KInformation: () => __webpack_require__.e(/* import() */ 139).then(__webpack_require__.bind(null, 1013)),
+    KBlog: () => __webpack_require__.e(/* import() */ 88).then(__webpack_require__.bind(null, 1014))
   },
   mounted() {
     window.parent.postMessage('message', '*');

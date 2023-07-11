@@ -2,12 +2,10 @@
   <div
     class="content-cart"
     :class="
-      this.template == 7
-        ? 'margintopbytemplate07'
-        : 'margintopbytemplategeneral'
+      template == 7 ? 'margintopbytemplate07' : 'margintopbytemplategeneral'
     "
   >
-    <div v-if="this.productsCart.length" class="conten-items-cart">
+    <div v-if="productsCart.length" class="conten-items-cart">
       <div class="cart-tittle">
         <cart-icon class="header-icon-cart" />
         <p class="txt-cart">{{ $t('home_tuCarrito') }}</p>
@@ -179,7 +177,7 @@
                 {{ $t('cart_items') }}
               </p>
               <p class="txt_summary_price">
-                {{ this.cantidadProductos }}
+                {{ cantidadProductos }}
               </p>
             </div>
             <span class="cart-summary-items" v-if="discountDescuentos">
@@ -276,10 +274,7 @@
                   "
                   style="width: 100%"
                 >
-                  <div
-                    class="content-Plana"
-                    v-if="this.shippingTarifaPrecio > 0"
-                  >
+                  <div class="content-Plana" v-if="shippingTarifaPrecio > 0">
                     <div class="content-list">
                       <p class="txt_summary_tittle">
                         {{ $t('footer_Porprecio') }}
@@ -287,7 +282,7 @@
                     </div>
                     <p class="txt_summary_price">
                       {{
-                        this.shippingTarifaPrecio
+                        shippingTarifaPrecio
                           | currency(
                             dataStore.tienda.codigo_pais,
                             dataStore.tienda.moneda
@@ -296,7 +291,7 @@
                     </p>
                   </div>
                   <p
-                    v-else-if="this.shippingTarifaPrecio >= 0"
+                    v-else-if="shippingTarifaPrecio >= 0"
                     class="txt_summary_price"
                   >
                     {{ $t('footer_tarifaPrecio') }}
@@ -329,7 +324,7 @@
                   <p class="txt_summary_tittle">
                     {{ $t('footer_encioGratis') }}
                   </p>
-                  <p
+                  <!-- <p
                     class="txt_summary_price"
                     style="width: 100%; max-width: 180px"
                   >
@@ -340,7 +335,7 @@
                           dataStore.tienda.moneda
                         )
                     }}
-                  </p>
+                  </p> -->
                 </div>
                 <div
                   class="contet-free-delivery"
@@ -397,11 +392,11 @@
                 <p class="txt_summary_price">
                   {{
                     (totalCart +
-                      (this.shipping ? this.shipping : 0) +
-                      (this.shippingTarifaPrecio &&
-                      this.shippingTarifaPrecio != 'empty' &&
-                      !this.FreeShippingCart
-                        ? this.shippingTarifaPrecio
+                      (shipping ? shipping : 0) +
+                      (shippingTarifaPrecio &&
+                      shippingTarifaPrecio != 'empty' &&
+                      !FreeShippingCart
+                        ? shippingTarifaPrecio
                         : 0) -
                       discountDescuentos)
                       | currency(
@@ -432,7 +427,7 @@
               >
                 {{ $t('cart_minimovalorProductos1') }}
                 {{
-                  this.dataStore.tienda.minimo_compra
+                  dataStore.tienda.minimo_compra
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -449,7 +444,7 @@
                   productsCart.length &&
                   !isQuotation() &&
                   dataStore.tienda.estado == 1 &&
-                  !this.estadoShippingTarifaPrecio &&
+                  !estadoShippingTarifaPrecio &&
                   countryStore &&
                   IsMinValorTotal() &&
                   expiredDate(dataStore.tienda.fecha_expiracion)
@@ -457,7 +452,7 @@
               >
                 {{ $t('footer_finalizarCompra') }}
               </button>
-              <nuxt-link :to="`${this.redirectCart}`" class="btn-buy-2">
+              <nuxt-link :to="`${redirectCart}`" class="btn-buy-2">
                 {{ $t('footer_seguirCompra') }}
               </nuxt-link>
             </div>
@@ -477,7 +472,7 @@
       <p class="text-empty2">
         {{ $t('footer_carritoVacio3') }}
       </p>
-      <nuxt-link :to="`${this.redirectCart}`">
+      <nuxt-link :to="`${redirectCart}`">
         <button ref="colorBtn" class="btn3">
           {{ $t('cart_agregarProductos') }}
         </button>
@@ -543,13 +538,14 @@ export default {
     },
     redirectCart() {
       let resultURl
-      if (this.template == 5 || this.template == 6) {
-        resultURl = '/'
-      } else if (
-        this.template == 7 ||
-        this.template == 9 ||
-        this.template == 10
+      if (
+        this.template == 5 ||
+        this.template == 6 ||
+        this.template == 99 ||
+        this.template == 12
       ) {
+        resultURl = '/'
+      } else {
         resultURl = '/productos'
       }
       return resultURl

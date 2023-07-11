@@ -1,7 +1,7 @@
 exports.ids = [37];
 exports.modules = {
 
-/***/ 952:
+/***/ 954:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28,13 +28,13 @@ var external_vuex_ = __webpack_require__(7);
 /* harmony default export */ var contactovue_type_script_lang_js_ = ({
   layout: 'default',
   components: {
-    K05Contact: () => __webpack_require__.e(/* import() */ 146).then(__webpack_require__.bind(null, 986)),
-    K07Contact: () => __webpack_require__.e(/* import() */ 151).then(__webpack_require__.bind(null, 987)),
-    K09Contact: () => __webpack_require__.e(/* import() */ 157).then(__webpack_require__.bind(null, 988)),
-    K10Contact: () => __webpack_require__.e(/* import() */ 119).then(__webpack_require__.bind(null, 989)),
-    K11Contact: () => __webpack_require__.e(/* import() */ 124).then(__webpack_require__.bind(null, 990)),
-    K13Contact: () => __webpack_require__.e(/* import() */ 127).then(__webpack_require__.bind(null, 991)),
-    K14Contact: () => __webpack_require__.e(/* import() */ 132).then(__webpack_require__.bind(null, 992))
+    K05Contact: () => __webpack_require__.e(/* import() */ 166).then(__webpack_require__.bind(null, 988)),
+    K07Contact: () => __webpack_require__.e(/* import() */ 171).then(__webpack_require__.bind(null, 989)),
+    K09Contact: () => __webpack_require__.e(/* import() */ 180).then(__webpack_require__.bind(null, 990)),
+    K10Contact: () => __webpack_require__.e(/* import() */ 132).then(__webpack_require__.bind(null, 991)),
+    K11Contact: () => __webpack_require__.e(/* import() */ 140).then(__webpack_require__.bind(null, 992)),
+    K13Contact: () => __webpack_require__.e(/* import() */ 144).then(__webpack_require__.bind(null, 993)),
+    K14Contact: () => __webpack_require__.e(/* import() */ 152).then(__webpack_require__.bind(null, 994))
   },
   mounted() {
     window.parent.postMessage('message', '*');

@@ -3,10 +3,7 @@
     class="modal-content"
     :style="[
       {
-        '--font-style-1':
-          this.settingByTemplate12 && this.settingByTemplate12.fontFamily
-            ? this.settingByTemplate12.fontFamily
-            : 'Poppins',
+        '--font-style-1': this.settingByTemplate12?.fontFamily ?? 'Poppins',
       },
     ]"
   >
@@ -15,16 +12,14 @@
       <span class="close" @click="closeModalpolitics">&times;</span>
     </div>
     <div v-if="tempData">
-      <div class="container-productDetail" v-if="!loading" v-loading="loading">
+      <div v-if="!loading" v-loading="loading" class="container-productDetail">
         <div class="section">
           <div class="wrapper-left">
-            <div class="photos_responsive">
-              <productSlide
-                :photos="data.fotos"
-                :photo="data.detalle.foto_cloudinary"
-                :idYoutube="idYoutube"
-              ></productSlide>
-            </div>
+            <productSlide
+              :photos="data.fotos"
+              :photo="data.detalle.foto_cloudinary"
+              :idYoutube="idYoutube"
+            />
           </div>
           <div class="wrapper-right">
             <div class="content-right">
@@ -33,12 +28,12 @@
                 <strong>{{ data.info.marca }}</strong>
               </p>
               <p
-                class="text-promocion"
                 v-show="
                   data.info.tag_promocion == 1 &&
                   data.info.promocion_valor &&
                   salesData.precio
                 "
+                class="text-promocion"
               >
                 {{
                   (data.info.tag_promocion == 1 && data.info.promocion_valor
@@ -58,7 +53,7 @@
                   data.info.tag_promocion == 1 ? '' : 'wrapper-price_space'
                 "
               >
-                <p class="text-precio" v-show="salesData.precio">
+                <p v-show="salesData.precio" class="text-precio">
                   {{
                     salesData.precio
                       | currency(
@@ -68,12 +63,12 @@
                   }}
                 </p>
                 <p
-                  class="card-descuento"
                   v-show="
                     data.info.tag_promocion == 1 &&
                     data.info.promocion_valor &&
                     salesData.precio
                   "
+                  class="card-descuento"
                 >
                   {{ data.info.promocion_valor }}% OFF
                 </p>
@@ -83,7 +78,7 @@
                   <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
                 </div>
                 <div class="content_card-info">
-                  <p class="card-info-1" v-if="spent">
+                  <p v-if="spent" class="card-info-1">
                     {{ $t('home_cardAgotado') }}
                   </p>
                 </div>
@@ -101,9 +96,9 @@
                 class="container-variants"
               >
                 <div v-for="(variant, index) in data.variantes" :key="index">
-                  <label for="variant name" class="text-variant-type"
-                    >{{ variant.nombre }}:</label
-                  >
+                  <label for="variant name" class="text-variant-type">
+                    {{ variant.nombre }}:
+                  </label>
                   <selectGroup :index="index" :variantes="data.variantes">
                     <option
                       v-for="item in variant.valores"
@@ -128,7 +123,7 @@
         <div class="content-description">
           <div v-if="data.info.descripcion" class="wrapper-description">
             <h3 class="text-variant">{{ $t('productdetail_description') }}</h3>
-            <div class="editor content-text-desc" v-if="data.info.descripcion">
+            <div v-if="data.info.descripcion" class="editor content-text-desc">
               <el-tiptap
                 v-model="data.info.descripcion"
                 :extensions="extensions"
@@ -146,28 +141,26 @@
         <div class="responsive-purchase">
           <div class="ko-input">
             <div
-              class="quantity-resposive"
               v-if="!spent && this.salesData.estado == true"
+              class="quantity-resposive"
             >
-              <button class="quantity_remove" v-on:click="removeQuantity()">
+              <button class="quantity_remove" @click="removeQuantity()">
                 <menos-icon class="icon" />
               </button>
               <p class="quantity_value">{{ quantityValue }}</p>
-              <button class="quantity_add" v-on:click="addQuantity()">
+              <button class="quantity_add" @click="addQuantity()">
                 <mas-icon class="icon" />
               </button>
               <transition name="slide-fade">
                 <div
-                  class="container-alert"
                   v-show="quantityValue == maxQuantityValue"
+                  class="container-alert"
                 >
                   <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
                 </div>
               </transition>
             </div>
             <button
-              class="btn-responsive"
-              ref="color2"
               v-if="
                 !spent &&
                 salesData.precio > 0 &&
@@ -175,26 +168,28 @@
                 (data.info.tipo_servicio == null ||
                   data.info.tipo_servicio == '0')
               "
-              v-on:click="addShoppingCart"
+              ref="color2"
+              class="btn-responsive"
+              @click="addShoppingCart"
             >
               <span>
                 {{ $t('productdetail_btnComprar') }}
               </span>
             </button>
             <button
+              v-else-if="salesData.precio == 0 && !spent"
               class="btn-responsive"
               ref="color2"
-              v-else-if="salesData.precio == 0 && !spent"
-              v-on:click="WPQuotation()"
+              @click="WPQuotation()"
             >
               <span>
                 {{ $t('productdetail_cotizar') }}
               </span>
             </button>
             <button
-              disabled
-              class="btn-responsive"
               v-else-if="!this.salesData.estado"
+              class="btn-responsive"
+              disabled
             >
               <span>
                 {{ $t('productdetail_btnANodisponible') }}
@@ -204,7 +199,7 @@
               class="btn-responsive"
               ref="color2"
               v-else-if="!spent && data.info.tipo_servicio == '1'"
-              v-on:click="GoPayments"
+              @click="GoPayments"
               id="AddToCartTag"
             >
               {{ $t('productdetail_btnComprar') }}
@@ -217,7 +212,7 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col justify-center w-full items-center" v-else>
+      <div v-else class="flex flex-col justify-center w-full items-center">
         <div class="spinner">
           <div class="dot1"></div>
           <div class="dot2"></div>
@@ -229,23 +224,20 @@
 </template>
 <script>
 import axios from 'axios'
-import productSlide from '../whatsapp/_productdetails/productSlide.vue'
-import selectGroup from '../whatsapp/_productdetails/selectGroup'
-// import idCloudinary from '../../mixins/idCloudinary'
 import extensions from '../../mixins/elemenTiptap.vue'
 import currency from '../../mixins/formatCurrent'
 
 export default {
-  name: 'Ko-ProductDetail',
+  name: 'Ko12-ProductDetail',
+  mixins: [extensions, currency],
   props: {
     dataStore: Object,
     tempData: Object,
     settingByTemplate12: Object,
   },
-  mixins: [extensions, currency],
   components: {
-    selectGroup,
-    productSlide,
+    selectGroup: () => import('../whatsapp/_productdetails/selectGroup'),
+    ProductSlide: () => import('./_items/productSlide.vue'),
   },
   mounted() {
     this.$store.state.beforeCombination = []
@@ -735,43 +727,6 @@ export default {
   flex-direction: row;
   margin-right: 15px;
   padding-bottom: 10px;
-  position: relative;
-}
-.wrapper-back {
-  width: 100%;
-  padding: 10px 10px 5px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-.icon-back {
-  font-weight: normal;
-  font-size: 18px;
-  bottom: 3px;
-  cursor: pointer;
-  margin-right: 5px;
-}
-.back-button p:hover {
-  color: white;
-}
-.breadcrumb {
-  margin-left: 5px;
-}
-.breadcrumb > p:nth-child(1) {
-  color: #c2c8ca;
-  cursor: pointer;
-}
-.breadcrumb > p:nth-child(2) {
-  margin-left: 5px;
-  color: #c2c8ca;
-}
-.photos_responsive {
-  width: 100%;
-  display: flex;
-  box-sizing: border-box;
-  overflow: hidden;
-  margin-top: 5px;
 }
 .wrapper-right {
   flex: 1;
@@ -907,13 +862,6 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.text-quantity {
-  font-size: 14px;
-  font-weight: bold;
-  color: rgba(21, 20, 57, 0.541);
-  margin-right: 5px;
-  align-self: center;
-}
 .quantity_remove {
   border: 1px black;
   border-top-left-radius: var(--radius_btn);
@@ -995,12 +943,6 @@ export default {
   width: 100%;
   height: 36px;
 }
-.card-icon-cart {
-  font-size: 20px;
-  color: white;
-  margin-right: 4px;
-  cursor: pointer;
-}
 .container-alert {
   position: absolute;
   top: -33px;
@@ -1020,43 +962,6 @@ export default {
   padding: 5px 5px;
   /* text-transform: capitalize; */
 }
-.content-btn-whatsapp {
-  display: flex;
-  margin-top: 10px;
-}
-.btn-whatsapp {
-  color: white;
-  border-radius: 5px;
-  background-color: #445a64;
-  padding: 8px 10px;
-  width: 100%;
-  font-weight: 400;
-  cursor: pointer;
-  transition: all 200ms ease-in;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  border: 0px;
-}
-.btn-whatsapp:hover {
-  background-color: #128c7e;
-}
-.content-btn-whatsapp-res {
-  display: none;
-}
-.wp-icon {
-  font-size: 16px;
-  bottom: 4px;
-  margin-right: 4px;
-  margin-bottom: -2px;
-}
-.swiper-container {
-  border-radius: 6px;
-}
-.swiper-pagination-bullet-active {
-  background: black;
-}
 .container-variants {
   margin-top: 15px;
 }
@@ -1064,9 +969,13 @@ export default {
   font-size: 14px;
   color: #0f2930;
 }
+.editor {
+  width: 100%;
+  color: transparent;
+}
 .editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
   border: none;
-  padding: 0px;
+  padding: 0px 5px;
   background-color: transparent;
 }
 .editor >>> .el-tiptap-editor__menu-bubble {
@@ -1074,19 +983,65 @@ export default {
 }
 .editor >>> .el-tiptap-editor__content h1 {
   font-size: 2em;
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h2 {
   font-size: 1.5em;
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h3 {
   font-size: 1.17em;
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h4 {
   font-size: 1.12em;
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h5 {
   font-size: 0.83em;
+  font-family: var(--font-style-1);
 }
+.editor >>> .el-tiptap-editor__content p {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content span {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content blockquote {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content code {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content ul {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content ol {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content li {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content pre {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content strong {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content em {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content s {
+  font-family: var(--font-style-1);
+}
+.editor >>> .el-tiptap-editor__content .image-view__body__image {
+  cursor: none;
+  pointer-events: none;
+}
+.editor >>> .el-popper.el-tiptap-image-popper {
+  display: none;
+}
+
 @media (max-width: 685px) {
   .container-productDetail {
     padding: 0px;
@@ -1095,11 +1050,7 @@ export default {
     flex-direction: column;
     justify-content: center;
   }
-  .wrapper-left {
-    justify-content: center;
-    padding-bottom: 0px;
-    margin-right: 0px;
-  }
+
   .wrapper-right {
     padding-bottom: 0px;
     justify-content: center;
@@ -1122,21 +1073,6 @@ export default {
   }
 }
 @media (max-width: 500px) {
-  .content-btn-whatsapp {
-    display: none;
-  }
-  .content-btn-whatsapp-res {
-    width: 100%;
-    padding: 0 10px;
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-  .photos_responsive {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 0 15px;
-  }
   .ko-input {
     padding: 12px 10px;
   }
@@ -1152,7 +1088,7 @@ export default {
   animation-name: animatetop;
   animation-duration: 0.4s;
   overflow-y: auto;
-  @apply relative m-auto p-0;
+  @apply relative m-auto p-0 rounded-8;
 }
 .modal-content::-webkit-scrollbar {
   @apply w-10;
