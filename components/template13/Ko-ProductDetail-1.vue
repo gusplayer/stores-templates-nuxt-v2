@@ -10,8 +10,8 @@
       },
     ]"
   >
-    <div class="container-productDetail-loading" v-if="loading"></div>
-    <div class="container-productDetail" v-else>
+    <div v-if="loading" class="container-productDetail-loading" />
+    <div v-else class="container-productDetail">
       <div class="product-content">
         <div class="left">
           <div class="wrapper-left">
@@ -344,11 +344,6 @@
 </template>
 <script>
 import axios from 'axios'
-import ProductSlide from './_productdetails/productSlide'
-import SelectGroup from './_productdetails/selectGroup'
-import OptionTab from './_productdetails/OptTab'
-import KoSuggestProduct from './_productdetails/suggestionsProducto'
-import Zoom from './_productdetails/zoomImg'
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
@@ -363,11 +358,11 @@ export default {
     settingByTemplate13: Array,
   },
   components: {
-    OptionTab,
-    SelectGroup,
-    KoSuggestProduct,
-    ProductSlide,
-    Zoom,
+    OptionTab: () => import('./_productdetails/OptTab'),
+    SelectGroup: () => import('./_productdetails/selectGroup'),
+    KoSuggestProduct: () => import('./_productdetails/suggestionsProducto'),
+    ProductSlide: () => import('./_productdetails/productSlide'),
+    Zoom: () => import('./_productdetails/zoomImg'),
   },
   mounted() {
     this.$store.state.beforeCombination = []

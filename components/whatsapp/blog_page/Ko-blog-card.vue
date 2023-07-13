@@ -3,6 +3,7 @@
     <nuxt-link
       :to="{
         path: '/wa/' + dataStore.tienda.id_tienda + '/blog/' + article.slug,
+        query: { idBlog: article.id },
       }"
       class="container"
       @mouseover="hover = true"

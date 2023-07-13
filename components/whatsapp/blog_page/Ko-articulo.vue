@@ -86,7 +86,7 @@ export default {
       })
       if (data) {
         this.dataArticle = data.data
-        this.getDataArticle()
+        // this.getDataArticle()
         if (this.dataArticle && this.dataArticle.created_at) {
           let dateCreated = this.dataArticle.created_at
           let resultCreated = dateCreated.split(' ')
@@ -109,7 +109,7 @@ export default {
 .content-article {
   max-width: 900px;
   height: calc(100vh);
-  @apply w-full flex flex-col justify-start items-center;
+  @apply w-full flex flex-col justify-start items-center pb-40;
 }
 .content-item-article {
   overflow-y: auto;

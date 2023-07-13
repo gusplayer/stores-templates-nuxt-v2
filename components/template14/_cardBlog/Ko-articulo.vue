@@ -71,7 +71,7 @@ export default {
       })
       if (data) {
         this.dataArticle = data.data
-        this.getDataArticle()
+        // this.getDataArticle()
         if (this.dataArticle && this.dataArticle.created_at) {
           let dateCreated = this.dataArticle.created_at
           let resultCreated = dateCreated.split(' ')

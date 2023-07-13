@@ -10,8 +10,8 @@
       },
     ]"
   >
-    <div class="container-productDetail-loading" v-if="loading"></div>
-    <div class="container-productDetail" v-else>
+    <div v-if="loading" class="container-productDetail-loading" />
+    <div v-else class="container-productDetail">
       <div class="banner-detail" id="BgProductlistF">
         <div class="crumb">
           <nuxt-link to="/productos">
@@ -339,11 +339,6 @@
 </template>
 <script>
 import axios from 'axios'
-import SelectGroup from './_productdetails/selectGroup'
-import OptionTab from './_productdetails/OptTab'
-import KoSuggesProduct from './_productdetails/suggestionsProducto'
-import productSlide from './_productdetails/productSlide'
-
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
@@ -358,10 +353,10 @@ export default {
     settingByTemplate10: Array,
   },
   components: {
-    OptionTab,
-    SelectGroup,
-    KoSuggesProduct,
-    productSlide,
+    OptionTab: () => import('./_productdetails/OptTab'),
+    SelectGroup: () => import('./_productdetails/selectGroup'),
+    KoSuggesProduct: () => import('./_productdetails/suggestionsProducto'),
+    productSlide: () => import('./_productdetails/productSlide'),
   },
   mounted() {
     if (
@@ -890,7 +885,6 @@ export default {
           property: 'product:catalog_id',
           content: this.data && this.data.detalle ? this.data.detalle.id : '',
         },
-
         {
           hid: 'og:title',
           property: 'og:title',

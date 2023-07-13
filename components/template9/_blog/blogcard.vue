@@ -9,16 +9,10 @@
       @mouseleave="hover = false"
       :style="[
         {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Poppins',
+          '--font-style-1': this.settingGeneral?.fount_1 ?? 'Poppins',
         },
         {
-          '--font-style-1':
-            this.currentsettingGeneral && this.currentsettingGeneral.fount_1
-              ? this.currentsettingGeneral.fount_1
-              : 'Poppins',
+          '--font-style-1': this.currentsettingGeneral?.fount_1 ?? 'Poppins',
         },
       ]"
     >

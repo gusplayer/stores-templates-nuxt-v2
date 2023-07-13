@@ -1,9 +1,6 @@
 <template>
   <nuxt-link
-    :to="{
-      path: `/blog/` + article.slug,
-      query: { idBlog: article.id },
-    }"
+    :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
     class="w-full h-full flex flex-col justify-center items-start wrapper_border"
     :style="`background-color: ${cardBlog['--background_color_1']}`"
   >

@@ -264,7 +264,7 @@ export default {
             }
             axios
               .post(
-                `${this.$store.state.urlTemplate}/api/mensaje-contacto`,
+                `${this.$store.state.urlKomercia}/api/mensaje-contacto`,
                 json
               )
               .then((response) => {

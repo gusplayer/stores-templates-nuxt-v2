@@ -1,7 +1,7 @@
 exports.ids = [34];
 exports.modules = {
 
-/***/ 968:
+/***/ 970:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28,12 +28,12 @@ var external_vuex_ = __webpack_require__(7);
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   layout: 'default',
   components: {
-    K05Article: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 1043)),
-    K07Article: () => __webpack_require__.e(/* import() */ 113).then(__webpack_require__.bind(null, 1044)),
-    K09Article: () => __webpack_require__.e(/* import() */ 114).then(__webpack_require__.bind(null, 1045)),
-    K10Article: () => __webpack_require__.e(/* import() */ 104).then(__webpack_require__.bind(null, 1046)),
-    K11Article: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 1047)),
-    K13Article: () => __webpack_require__.e(/* import() */ 108).then(__webpack_require__.bind(null, 1048))
+    K05Article: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 1045)),
+    K07Article: () => __webpack_require__.e(/* import() */ 120).then(__webpack_require__.bind(null, 1046)),
+    K09Article: () => __webpack_require__.e(/* import() */ 124).then(__webpack_require__.bind(null, 1047)),
+    K10Article: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 1048)),
+    K11Article: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 1049)),
+    K13Article: () => __webpack_require__.e(/* import() */ 112).then(__webpack_require__.bind(null, 1050))
   },
   data() {
     return {
