@@ -6,10 +6,7 @@
       @mouseleave="hover = false"
       :style="[
         {
-          '--font-style-3':
-            this.settingGeneral && this.settingGeneral.fount_3
-              ? this.settingGeneral.fount_3
-              : 'Lora',
+          '--font-style-3': this.settingGeneral?.fount_3 ?? 'Lora',
         },
       ]"
     >

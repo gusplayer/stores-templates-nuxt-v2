@@ -4,247 +4,215 @@
     "path": "/blog",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\index.vue",
     "chunkName": "pages/blog/index",
-    "url": "/blog",
-    "_name": "_794f6fae"
+    "url": "/blog"
   },
   {
     "name": "cart",
     "path": "/cart",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\cart.vue",
     "chunkName": "pages/cart",
-    "url": "/cart",
-    "_name": "_39b826b7"
+    "url": "/cart"
   },
   {
     "name": "contacto",
     "path": "/contacto",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\contacto.vue",
     "chunkName": "pages/contacto",
-    "url": "/contacto",
-    "_name": "_534f7634"
+    "url": "/contacto"
   },
   {
     "name": "micompra",
     "path": "/micompra",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\micompra.vue",
     "chunkName": "pages/micompra",
-    "url": "/micompra",
-    "_name": "_6902b59e"
+    "url": "/micompra"
   },
   {
     "name": "productos",
     "path": "/productos",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\index.vue",
     "chunkName": "pages/productos/index",
-    "url": "/productos",
-    "_name": "_50291476"
+    "url": "/productos"
   },
   {
     "name": "productosHoko",
     "path": "/productosHoko",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productosHoko\\\\index.vue",
     "chunkName": "pages/productosHoko/index",
-    "url": "/productosHoko",
-    "_name": "_0f3a28cb"
+    "url": "/productosHoko"
   },
   {
     "name": "template10",
     "path": "/template10",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template10\\\\index.vue",
     "chunkName": "pages/template10/index",
-    "url": "/template10",
-    "_name": "_182942dc"
+    "url": "/template10"
   },
   {
     "name": "template11",
     "path": "/template11",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template11\\\\index.vue",
     "chunkName": "pages/template11/index",
-    "url": "/template11",
-    "_name": "_08c5f81e"
+    "url": "/template11"
   },
   {
     "name": "template12",
     "path": "/template12",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template12\\\\index.vue",
     "chunkName": "pages/template12/index",
-    "url": "/template12",
-    "_name": "_034ea950"
+    "url": "/template12"
   },
   {
     "name": "template13",
     "path": "/template13",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template13\\\\index.vue",
     "chunkName": "pages/template13/index",
-    "url": "/template13",
-    "_name": "_0b004eaf"
+    "url": "/template13"
   },
   {
     "name": "template14",
     "path": "/template14",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template14\\\\index.vue",
     "chunkName": "pages/template14/index",
-    "url": "/template14",
-    "_name": "_12b1f40e"
+    "url": "/template14"
   },
   {
     "name": "template5",
     "path": "/template5",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template5\\\\index.vue",
     "chunkName": "pages/template5/index",
-    "url": "/template5",
-    "_name": "_283fa8e4"
+    "url": "/template5"
   },
   {
     "name": "template6",
     "path": "/template6",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index.vue",
     "chunkName": "pages/template6/index",
-    "url": "/template6",
-    "_name": "_18dc5e26"
+    "url": "/template6"
   },
   {
     "name": "template7",
     "path": "/template7",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template7\\\\index.vue",
     "chunkName": "pages/template7/index",
-    "url": "/template7",
-    "_name": "_09791368"
+    "url": "/template7"
   },
   {
     "name": "template8",
     "path": "/template8",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template8\\\\index.vue",
     "chunkName": "pages/template8/index",
-    "url": "/template8",
-    "_name": "_02f51bab"
+    "url": "/template8"
   },
   {
     "name": "template9",
     "path": "/template9",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template9\\\\index.vue",
     "chunkName": "pages/template9/index",
-    "url": "/template9",
-    "_name": "_0aa6c10a"
+    "url": "/template9"
   },
   {
     "name": "template99",
     "path": "/template99",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template99\\\\index.vue",
     "chunkName": "pages/template99/index",
-    "url": "/template99",
-    "_name": "_a57b3a1e"
+    "url": "/template99"
   },
   {
     "name": "termsandconditions",
     "path": "/termsandconditions",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\termsandconditions.vue",
     "chunkName": "pages/termsandconditions",
-    "url": "/termsandconditions",
-    "_name": "_2da39202"
+    "url": "/termsandconditions"
   },
   {
     "name": "unicentro",
     "path": "/unicentro",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\unicentro\\\\index.vue",
     "chunkName": "pages/unicentro/index",
-    "url": "/unicentro",
-    "_name": "_23a5c374"
+    "url": "/unicentro"
   },
   {
     "name": "template6-index_macrobrand",
     "path": "/template6/index_macrobrand",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index_macrobrand.vue",
     "chunkName": "pages/template6/index_macrobrand",
-    "url": "/template6/index_macrobrand",
-    "_name": "_2e317606"
+    "url": "/template6/index_macrobrand"
   },
   {
     "name": "template99-templates-template1",
     "path": "/template99/templates/template1",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template99\\\\templates\\\\template1\\\\index.vue",
     "chunkName": "pages/template99/templates/template1/index",
-    "url": "/template99/templates/template1",
-    "_name": "_18d692d3"
+    "url": "/template99/templates/template1"
   },
   {
     "name": "template99-templates-template2",
     "path": "/template99/templates/template2",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template99\\\\templates\\\\template2\\\\index.vue",
     "chunkName": "pages/template99/templates/template2/index",
-    "url": "/template99/templates/template2",
-    "_name": "_20883832"
+    "url": "/template99/templates/template2"
   },
   {
     "name": "template99-templates-template3",
     "path": "/template99/templates/template3",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template99\\\\templates\\\\template3\\\\index.vue",
     "chunkName": "pages/template99/templates/template3/index",
-    "url": "/template99/templates/template3",
-    "_name": "_2839dd91"
+    "url": "/template99/templates/template3"
   },
   {
     "name": "index",
     "path": "/",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "url": "/",
-    "_name": "_79ce8d6a"
+    "url": "/"
   },
   {
     "name": "blog-slug",
     "path": "/blog/:slug",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\_slug.vue",
-    "chunkName": "pages/blog/_slug",
-    "_name": "_7cbcb23e"
+    "chunkName": "pages/blog/_slug"
   },
   {
     "name": "productos-slug",
     "path": "/productos/:slug",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\_slug.vue",
-    "chunkName": "pages/productos/_slug",
-    "_name": "_4e72732e"
+    "chunkName": "pages/productos/_slug"
   },
   {
     "name": "productosHoko-slug",
     "path": "/productosHoko/:slug",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productosHoko\\\\_slug.vue",
-    "chunkName": "pages/productosHoko/_slug",
-    "_name": "_0d838783"
+    "chunkName": "pages/productosHoko/_slug"
   },
   {
     "name": "wa-slug",
     "path": "/wa/:slug",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\index.vue",
-    "chunkName": "pages/wa/_slug/index",
-    "_name": "_48206769"
+    "chunkName": "pages/wa/_slug/index"
   },
   {
     "name": "wa-slug-blog",
     "path": "/wa/:slug?/blog",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\blog\\\\index.vue",
-    "chunkName": "pages/wa/_slug/blog/index",
-    "_name": "_533f3072"
+    "chunkName": "pages/wa/_slug/blog/index"
   },
   {
     "name": "wa-slug-micompra",
     "path": "/wa/:slug?/micompra",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\micompra.vue",
-    "chunkName": "pages/wa/_slug/micompra",
-    "_name": "_b7844b5a"
+    "chunkName": "pages/wa/_slug/micompra"
   },
   {
     "name": "wa-slug-blog-slugBlog",
     "path": "/wa/:slug?/blog/:slugBlog",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\blog\\\\_slugBlog.vue",
-    "chunkName": "pages/wa/_slug/blog/_slugBlog",
-    "_name": "_47e36dc1"
+    "chunkName": "pages/wa/_slug/blog/_slugBlog"
   },
   {
     "name": "wa-slug-productos-slugProduct",
     "path": "/wa/:slug?/productos/:slugProduct?",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\productos\\\\_slugProduct.vue",
-    "chunkName": "pages/wa/_slug/productos/_slugProduct",
-    "_name": "_ee0775a2"
+    "chunkName": "pages/wa/_slug/productos/_slugProduct"
   }
 ]
