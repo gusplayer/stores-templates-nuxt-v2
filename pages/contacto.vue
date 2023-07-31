@@ -13,6 +13,7 @@ export default {
     K11Contact: () => import('@/components/template11/ko-Contact'),
     K13Contact: () => import('@/components/template13/Ko-Contact-1'),
     K14Contact: () => import('@/components/template14/Ko-Contact-1'),
+    K15Contact: () => import('@/components/template15/Ko15-Contact'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
@@ -30,6 +31,7 @@ export default {
         11: 'K11Contact',
         13: 'K13Contact',
         14: 'K14Contact',
+        15: 'K15Contact',
       },
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
@@ -38,6 +40,7 @@ export default {
         10: 'SET_CURRENTSETTING10',
         13: 'SET_CURRENTSETTING13',
         14: 'SET_CURRENTSETTING14',
+        15: 'SET_CURRENTSETTING15',
       },
     }
   },
@@ -52,6 +55,7 @@ export default {
       'settingByTemplate11',
       'settingByTemplate13',
       'settingByTemplate14',
+      'settingByTemplate15',
       'template',
     ]),
     indexTemplate() {
@@ -92,6 +96,11 @@ export default {
         ),
         settingByTemplate14: this.createSettingByTemplate(
           this.settingByTemplate14,
+          'contact',
+          'settingsGeneral'
+        ),
+        settingByTemplate15: this.createSettingByTemplate(
+          this.settingByTemplate15,
           'contact',
           'settingsGeneral'
         ),

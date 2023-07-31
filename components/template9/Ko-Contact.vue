@@ -220,12 +220,12 @@
                     <button
                       ref="colorBtn"
                       class="btn"
-                      v-on:click.prevent="submitContact"
-                      v-if="stateBtn == true"
+                      :class="
+                        !stateBtn ? ' cursor-not-allowed' : 'cursor-pointer'
+                      "
+                      :disabled="stateBtn ? true : false"
+                      @click="submitContact"
                     >
-                      {{ $t('contact_enviar') }}
-                    </button>
-                    <button ref="colorBtn" class="btn2" disabled v-else>
                       {{ $t('contact_enviar') }}
                     </button>
                   </div>
@@ -320,22 +320,22 @@ export default {
     submitContact() {
       this.$refs.observer
         .validate()
-        .then((response) => {
+        .then(async (response) => {
           this.stateBtn = false
           if (response) {
-            const json = {
-              nombre: this.nombre,
-              correo: this.email,
-              celular: this.numberphone,
-              comentario: this.comment,
-              tienda: this.dataStore.tienda.id_tienda,
-            }
-            axios
-              .post(
-                `${this.$store.state.urlKomercia}/api/mensaje-contacto`,
-                json
-              )
-              .then((response) => {
+            try {
+              const { data } = await axios({
+                method: 'POST',
+                url: `  ${this.$store.state.urlKomerciaV3}/api/contact/message`,
+                data: {
+                  nombre: this.nombre,
+                  correo: this.email,
+                  celular: this.numberphone,
+                  comentario: this.comment,
+                  tienda: this.dataStore.tienda.id_tienda,
+                },
+              })
+              if (data && data.estado == 200) {
                 this.$message.success('Comentario enviado!')
                 this.stateBtn = true
                 if (
@@ -347,19 +347,16 @@ export default {
                     description: this.email,
                   })
                 }
-                this.formDatareset()
-              })
+              }
+            } catch (err) {
+              this.$message.error(err.response)
+            }
           }
         })
         .catch((e) => {
+          this.stateBtn = true
           this.$message.error('error')
         })
-    },
-    formDatareset() {
-      this.nombre = ''
-      this.email = ''
-      this.numberphone = ''
-      this.comment = ''
     },
   },
   watch: {

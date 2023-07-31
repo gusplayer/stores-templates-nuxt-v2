@@ -1,102 +1,717 @@
 exports.ids = [119];
 exports.modules = {
 
-/***/ 1061:
+/***/ 1109:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/_productdetails/descriptionProduct.vue?vue&type=template&id=51eff8c0&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template14/Ko-ProductDetail-1.vue?vue&type=template&id=726ebbe3&scoped=true&
 var render = function render() {
+  var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _vm$data, _vm$data$detalle, _vm$data$detalle2, _vm$data$detalle2$cat, _vm$data$detalle3, _vm$data$detalle3$sub, _vm$data$detalle4, _vm$data$detalle4$sub;
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
-    staticClass: "description"
-  }, [_vm._ssrNode("<div class=\"left\" data-v-51eff8c0>", "</div>", [_vm._ssrNode("<div class=\"content-tittle-description\" data-v-51eff8c0><span class=\"tittle-description\" data-v-51eff8c0>" + _vm._ssrEscape("\n        " + _vm._s(_vm.$t('productdetail_description')) + "\n      ") + "</span></div> "), _vm.data.info.descripcion ? _vm._ssrNode("<div class=\"editor content_product_description\" data-v-51eff8c0>", "</div>", [_c('el-tiptap', {
-    attrs: {
-      "extensions": _vm.extensions,
-      "spellcheck": false,
-      "readonly": true,
-      "charCounterCount": false,
-      "tooltip": false,
-      "showMenubar": false,
-      "bubble": false
+    staticClass: "w-full flex flex-col justify-center items-center",
+    staticStyle: {
+      "background-color": "var(--background_color_1)"
     },
-    model: {
-      value: _vm.data.info.descripcion,
-      callback: function ($$v) {
-        _vm.$set(_vm.data.info, "descripcion", $$v);
-      },
-      expression: "data.info.descripcion"
+    style: [_vm.settingByTemplate14[0].detailsProducts, _vm.settingByTemplate14[0].settingsGeneral, {
+      '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate14[0]) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settingsGeneral) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'Poppins'
+    }]
+  }, [_vm._ssrNode((_vm.loading ? "<div data-v-726ebbe3></div>" : "<!---->") + " "), _vm._ssrNode("<div class=\"w-full relative box-content hidden md:flex\" data-v-726ebbe3>", "</div>", [_vm.settingByTemplate14[0].detailsProducts.visible_img ? _vm._ssrNode("<div data-v-726ebbe3>", "</div>", [_vm._ssrNode("<picture data-v-726ebbe3>", "</picture>", [_vm._ssrNode("<source media=\"(max-width: 799px)\"" + _vm._ssrAttr("srcset", _vm.idCloudinaryBanner(_vm.settingByTemplate14[0].detailsProducts.img, 'bannerRes', 400)) + " data-v-726ebbe3> <source media=\"(min-width: 800px)\"" + _vm._ssrAttr("srcset", _vm.idCloudinaryBanner(_vm.settingByTemplate14[0].detailsProducts.img, 'banner')) + " data-v-726ebbe3> "), _c('img', {
+    directives: [{
+      name: "lazy",
+      rawName: "v-lazy",
+      value: _vm.settingByTemplate14[0].detailsProducts.img,
+      expression: "settingByTemplate14[0].detailsProducts.img"
+    }],
+    staticClass: "object-cover h-full",
+    attrs: {
+      "alt": "banner template14"
     }
-  })], 1) : _vm._e()], 2), _vm._ssrNode(" <div class=\"right\" data-v-51eff8c0><div class=\"payments section\" data-v-51eff8c0><div class=\"content\" data-v-51eff8c0><h3 class=\"title-section\" data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_opcionesPago'))) + "</h3></div> <p class=\"text-method-payment\" data-v-51eff8c0>" + _vm._ssrEscape("\n        " + _vm._s(_vm.$t('productdetail_opcionesPagoMsg')) + "\n      ") + "</p> <ul data-v-51eff8c0>" + (_vm.mediospago.consignacion == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_consignacionBancaria'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_consignacionBancariaMsg'))) + "</p></li>" : "<!---->") + " " + (_vm.mediospago.contraentrega == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_PagoContra'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_PagoContraMsg'))) + "</p></li>" : "<!---->") + " " + (_vm.mediospago.convenir == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_pagoConvenir'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_pagoConvenirMsg'))) + "</p></li>" : "<!---->") + " " + (_vm.mediospago.credibanco == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_ConsignacionCredibanco'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_ConsignacionCredibancoMsg')) + "\n          ") + "</p> <a href=\"https://www.credibanco.com/\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"cursor_point\" data-v-51eff8c0><img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png\" alt=\"logo Credibanco\" class=\"logo-pasarela\" data-v-51eff8c0></a></li>" : "<!---->") + " " + (_vm.mediospago.daviplata == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_Consignaciondaviplata'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_ConsignaciondaviplataMsg')) + "\n          ") + "</p> <img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png\" alt=\"logo daviPlata\" class=\"logo-pasarela-daviplata\" data-v-51eff8c0></li>" : "<!---->") + " " + (_vm.mediospago.efecty == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_ConsignacionEfecty'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_ConsignacionEfectyMsg'))) + "</p> <a href=\"https://www.efecty.com.co/web/\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"cursor_point\" data-v-51eff8c0><img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png\" alt=\"logo efecty\" class=\"logo-pasarela-efecty\" data-v-51eff8c0></a></li>" : "<!---->") + " " + (_vm.mediospago.mercado_pago == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_PasarelaMercado'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_PasarelaMercadoMsg')) + "\n          ") + "</p> <a href=\"https://www.mercadopago.com\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"cursor_point\" data-v-51eff8c0><img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png\" alt=\"logo mercadopago\" class=\"logo-pasarela-daviplata\" data-v-51eff8c0></a></li>" : "<!---->") + " " + (_vm.mediospago.nequi == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_Consignacionnequi'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_ConsignacionnequiMsg')) + "\n          ") + "</p> <a href=\"https://www.nequi.com.co/\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"cursor_point\" data-v-51eff8c0><img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png\" alt=\"logo nequi\" class=\"logo-pasarela-daviplata\" data-v-51eff8c0></a></li>" : "<!---->") + " " + (_vm.mediospago.payco == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_PasarelaEpayco'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_PasarelaEpaycoMsg')) + "\n          ") + "</p> <img src=\"https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png\" alt=\"Pasarela de pagos epayco\" class=\"logo-pasarela-payco\" data-v-51eff8c0></li>" : "<!---->") + " " + (_vm.mediospago.payu == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_PasarelaPayu'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_PasarelaPayuMsg')) + "\n          ") + "</p> <a href=\"https://www.payulatam.com/co/\" target=\"_blank\" rel=\"noreferrer noopener\" data-v-51eff8c0><img src=\"https://ecommerce.payulatam.com/logos/PayU_CO.png\" alt=\"PayU\" border=\"0\" class=\"logo-pasarela-payu\" data-v-51eff8c0></a></li>" : "<!---->") + " " + (_vm.mediospago.wompi == 1 ? "<li data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_Consignacionwompi'))) + "</h4> <p data-v-51eff8c0>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_PasarelaPayuMsg')) + "\n          ") + "</p> <a href=\"https://wompi.co/\" target=\"_blank\" rel=\"noreferrer noopener\" data-v-51eff8c0><img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png\" alt=\"wompi\" border=\"0\" class=\"logo-pasarela-wompi\" data-v-51eff8c0></a></li>" : "<!---->") + "</ul></div> " + (this.envios.envio_metodo ? "<div class=\"deliverys section\" data-v-51eff8c0><div class=\"content\" data-v-51eff8c0><h3 class=\"title-section\" data-v-51eff8c0>" + _vm._ssrEscape("\n          " + _vm._s(_vm.$t('productdetail_opinionesEnvio')) + "\n        ") + "</h3></div> " + (this.envios.envio_metodo === 'precio_ciudad' ? "<div class=\"wrapper-method\" data-v-51eff8c0><h4 class=\"capitalize\" data-v-51eff8c0>" + _vm._ssrEscape("\n          • " + _vm._s(this.envios.envio_metodo.replace('_', ' por ')) + "\n        ") + "</h4> <p class=\"description-method\" data-v-51eff8c0>" + _vm._ssrEscape("\n          " + _vm._s(_vm.$t('productdetail_opinionesEnvioMsg1')) + "\n        ") + "</p></div>" : "<!---->") + " " + (this.envios.envio_metodo === 'tarifa_plana' ? "<div class=\"wrapper-method\" data-v-51eff8c0><h4 class=\"capitalize\" data-v-51eff8c0>" + _vm._ssrEscape("\n          " + _vm._s(this.envios.envio_metodo.replace('_', ' ')) + "\n        ") + "</h4> <p class=\"description-method\" data-v-51eff8c0>" + _vm._ssrEscape("\n          " + _vm._s(_vm.$t('productdetail_opinionesEnvioMsg2')) + "\n        ") + "</p> <p class=\"price\" data-v-51eff8c0>" + _vm._ssrEscape("\n          " + _vm._s(_vm.$t('cart_precio')) + "\n          " + _vm._s(_vm._f("currency")(this.envios.valor, _vm.dataStore.tienda.codigo_pais, _vm.dataStore.tienda.moneda)) + "\n        ") + "</p></div>" : "<!---->") + " " + (this.envios.envio_metodo === 'precio' ? "<div class=\"wrapper-method\" data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_precioTotalCompra'))) + "</h4> <p class=\"description-method\" data-v-51eff8c0>" + _vm._ssrEscape("\n          " + _vm._s(_vm.$t('productdetail_precioTotalCompraMsg')) + "\n        ") + "</p></div>" : "<!---->") + " " + (this.envios.envio_metodo === 'gratis' ? "<div class=\"wrapper-method\" data-v-51eff8c0><h4 data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_gratis'))) + "</h4> <p class=\"description-method\" data-v-51eff8c0>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_gratisMsg'))) + "</p></div>" : "<!---->") + " " + (this.envios.envio_metodo === 'sinEnvio' ? "<div class=\"wrapper-method\" data-v-51eff8c0><p class=\"description-method\" data-v-51eff8c0>Pasas a recoger tu compra</p></div>" : "<!---->") + "</div>" : "<!---->") + "</div>")], 2);
+  }, [])], 2)]) : _vm._ssrNode("<div class=\"w-full h-[240px]\" data-v-726ebbe3></div>"), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/2 flex flex-col items-center\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<p class=\"font-bold text-30 mb-10\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate14[0].detailsProducts.color_title};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n        " + _vm._s(_vm.$t('productdetail_name')) + "\n      ") + "</p> "), _vm._ssrNode("<div class=\"flex flex-row items-center justify-center\"" + _vm._ssrStyle(null, `color: ${_vm.settingByTemplate14[0].detailsProducts.color_breadCrumbs};`, null) + " data-v-726ebbe3>", "</div>", [_c('nuxt-link', {
+    staticClass: "text-14",
+    attrs: {
+      "to": "/"
+    }
+  }, [_vm._v("\n          " + _vm._s(_vm.$t('header_inicio')) + "\n        ")]), _vm._ssrNode(" <p class=\"px-10 text-14 font-bold\" data-v-726ebbe3>&gt;</p> "), _c('nuxt-link', {
+    staticClass: "text-14 font-bold",
+    attrs: {
+      "to": "/productos"
+    }
+  }, [_vm._v("\n          " + _vm._s(_vm.$t('header_productos')) + "\n        ")]), _vm._ssrNode(" <p class=\"px-10 text-14 font-bold\" data-v-726ebbe3>&gt;</p> " + (!_vm.loading ? "<p class=\"text-14 font-bold\" data-v-726ebbe3>" + _vm._ssrEscape("\n          " + _vm._s((_vm$data = _vm.data) === null || _vm$data === void 0 ? void 0 : (_vm$data$detalle = _vm$data.detalle) === null || _vm$data$detalle === void 0 ? void 0 : _vm$data$detalle.nombre) + "\n        ") + "</p>" : "<!---->"))], 2)], 2)], 2), _vm._ssrNode(" "), !_vm.loading ? _vm._ssrNode("<div class=\"w-full h-full flex justify-center items-center px-10 md:px-5 mt-40 max-w-7xl\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-center items-center\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<div class=\"w-full grid grid-cols-1 md:grid-cols-2 gap-4 justify-center items-start\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<div class=\"w-full flex flex-col justify-center items-center\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<div class=\"w-full flex flex-row items-start pb-10\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<div class=\"hidden md:flex w-full h-full relative overflow-hidden mr-30 max-w-[110px] max-h-[442px] min-h-[442px]\" data-v-726ebbe3>", "</div>", [_c('div', {
+    directives: [{
+      name: "swiper",
+      rawName: "v-swiper:mySwiper",
+      value: _vm.swiperOption,
+      expression: "swiperOption",
+      arg: "mySwiper"
+    }],
+    ref: "mySwiper"
+  }, [_vm._ssrNode("<div class=\"swiper-wrapper w-full h-full\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<div class=\"swiper-slide w-full h-full\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-stretch max-h-[100px] max-w-[100px]\" data-v-726ebbe3>", "</div>", [_c('img', {
+    directives: [{
+      name: "lazy",
+      rawName: "v-lazy",
+      value: _vm.idCloudinary(_vm.data.detalle.foto_cloudinary, 150, 150),
+      expression: "\n                          idCloudinary(data.detalle.foto_cloudinary, 150, 150)\n                        "
+    }],
+    staticClass: "w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top",
+    attrs: {
+      "width": "100",
+      "height": "100",
+      "alt": "Product Img"
+    },
+    on: {
+      "click": function ($event) {
+        return _vm.selectedPhoto(_vm.data.detalle.foto_cloudinary);
+      }
+    }
+  }, [])])]), _vm._ssrNode(" "), _vm._l(_vm.data.fotos, function (foto, itemsFoto) {
+    return _vm._ssrNode("<div class=\"swiper-slide w-full h-full\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-stretch max-h-[100px] max-w-[100px]\" data-v-726ebbe3>", "</div>", [_c('img', {
+      directives: [{
+        name: "lazy",
+        rawName: "v-lazy",
+        value: _vm.idCloudinaryQuality(foto.foto_cloudinary, 850, 850),
+        expression: "\n                          idCloudinaryQuality(foto.foto_cloudinary, 850, 850)\n                        "
+      }],
+      staticClass: "w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top",
+      attrs: {
+        "alt": "Product Img"
+      },
+      on: {
+        "click": function ($event) {
+          return _vm.selectedPhoto(foto.foto_cloudinary);
+        }
+      }
+    }, [])])]);
+  }), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"swiper-slide w-full h-full\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<div class=\"w-full h-full flex flex-col justify-stretch max-h-[100px] max-w-[100px]\" data-v-726ebbe3>", "</div>", [_vm.idYoutube ? _c('img', {
+    directives: [{
+      name: "lazy",
+      rawName: "v-lazy",
+      value: `https://img.youtube.com/vi/${_vm.idYoutube}/0.jpg`,
+      expression: "\n                          `https://img.youtube.com/vi/${idYoutube}/0.jpg`\n                        "
+    }],
+    staticClass: "w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top",
+    attrs: {
+      "alt": "Product video"
+    },
+    on: {
+      "mouseover": function ($event) {
+        _vm.existYoutube = true;
+      }
+    }
+  }, []) : _vm._e()])])], 2), _vm._ssrNode(" "), _vm.data.fotos.length > 3 ? _vm._ssrNode("<div class=\"swiper-prev\" data-v-726ebbe3>", "</div>", [_c('FlechaUp-icon', {
+    staticClass: "icon-swiper"
+  })], 1) : _vm._e(), _vm._ssrNode(" "), _vm.data.fotos.length > 3 ? _vm._ssrNode("<div class=\"swiper-next\" data-v-726ebbe3>", "</div>", [_c('Flechadown-icon', {
+    staticClass: "icon-swiper"
+  })], 1) : _vm._e()], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"relative hidden md:flex w-full h-full max-w-[375px] max-h-[375px] mr-10\" data-v-726ebbe3>", "</div>", [this.activeZoom && !_vm.existYoutube ? _vm._ssrNode("<div class=\"w-full h-full max-w-[375px] max-h-[375px] object-contain rounded-10 object-top\" data-v-726ebbe3>", "</div>", [_c('img', {
+    directives: [{
+      name: "lazy",
+      rawName: "v-lazy",
+      value: _vm.idCloudinaryQuality(_vm.selectPhotoUrl, 850, 850),
+      expression: "idCloudinaryQuality(selectPhotoUrl, 850, 850)"
+    }],
+    staticClass: "w-full h-full max-w-[375px] max-h-[375px] object-contain rounded-10 object-top",
+    attrs: {
+      "alt": "ProductImg grande"
+    }
+  }, [])]) : _vm._e(), _vm._ssrNode(" <iframe" + _vm._ssrAttr("src", `https://www.youtube.com/embed/${_vm.idYoutube}?rel=0&controls=0&showinfo=0`) + " frameborder=\"0\" allowfullscreen=\"allowfullscreen\" class=\"w-full h-full max-w-[375px] max-h-[375px] object-contain rounded-10 object-top\"" + _vm._ssrStyle(null, null, {
+    display: _vm.existYoutube ? '' : 'none'
+  }) + " data-v-726ebbe3></iframe>")], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"w-full h-full box-border flex md:hidden justify-start items-center\" data-v-726ebbe3>", "</div>", [_c('ProductSlide', {
+    staticClass: "w-full h-full max-w-[375px]",
+    attrs: {
+      "photos": _vm.data.fotos,
+      "photo": _vm.data.detalle.foto_cloudinary,
+      "idYoutube": _vm.idYoutube
+    }
+  })], 1)], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"w-full flex flex-col justify-start items-start\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<p class=\"mb-20\"" + _vm._ssrStyle(null, `font-size:${_vm.settingByTemplate14[0].detailsProducts.fontSizeTitle} !important; font-weight:${_vm.settingByTemplate14[0].detailsProducts.fontWeighTitle}; color:${_vm.settingByTemplate14[0].detailsProducts.color_text};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n            " + _vm._s(_vm.data.detalle.nombre) + "\n          ") + "</p> <div class=\"w-full flex flex-row justify-start items-center mb-20\" data-v-726ebbe3>" + (_vm.salesData.precio ? "<p" + _vm._ssrStyle(null, `font-size:${_vm.settingByTemplate14[0].detailsProducts.fontSizePrice}; font-weight:${_vm.settingByTemplate14[0].detailsProducts.fontWeighPrice}; color:${_vm.settingByTemplate14[0].detailsProducts.color_price};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n              " + _vm._s(_vm._f("currency")(_vm.salesData.precio, _vm.dataStore.tienda.codigo_pais, _vm.dataStore.tienda.moneda)) + "\n            ") + "</p>" : "<!---->") + " " + (_vm.data.info.tag_promocion == 1 && _vm.data.info.promocion_valor && _vm.salesData.precio ? "<div class=\"w-full flex flex-row justify-start items-center\" data-v-726ebbe3><p class=\"text-12 mx-5 bg-red-500 text-white-white px-3 py-5 rounded-4\" data-v-726ebbe3>" + _vm._ssrEscape("\n                " + _vm._s(_vm.data.info.promocion_valor) + "% De Descuento\n              ") + "</p> <p class=\"line-through\"" + _vm._ssrStyle(null, `font-size:${_vm.settingByTemplate14[0].detailsProducts.fontSizePriceDescount}; font-weight:${_vm.settingByTemplate14[0].detailsProducts.fontWeighPriceDescount}; color:${_vm.settingByTemplate14[0].detailsProducts.color_priceDescount};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n                " + _vm._s(_vm._f("currency")(_vm.data.info.tag_promocion == 1 && _vm.data.info.promocion_valor ? Math.trunc(_vm.salesData.precio / (1 - _vm.data.info.promocion_valor / 100)) : 0, _vm.dataStore.tienda.codigo_pais, _vm.dataStore.tienda.moneda)) + "\n              ") + "</p></div>" : "<!---->") + "</div> <div class=\"w-full flex flex-wrap gap-x-5 gap-y-2 mb-15\" data-v-726ebbe3>" + (_vm.salesData.unidades > 0 ? "<div class=\"flex flex-row justify-start items-center\" data-v-726ebbe3><p class=\"text-16 font-bold mr-10\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_text};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n                " + _vm._s(_vm.$t('productdetail_stock')) + ":\n              ") + "</p> <p class=\"text-14\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n                " + _vm._s(_vm.salesData.unidades) + "\n              ") + "</p></div>" : "<!---->") + " " + ((_vm$data$detalle2 = _vm.data.detalle) !== null && _vm$data$detalle2 !== void 0 && (_vm$data$detalle2$cat = _vm$data$detalle2.categoria_producto) !== null && _vm$data$detalle2$cat !== void 0 && _vm$data$detalle2$cat.nombre_categoria_producto ? "<div class=\"flex flex-row justify-start items-center\" data-v-726ebbe3><p class=\"text-16 font-bold mr-10\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_text};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n                " + _vm._s(_vm.$t('productdetail_categoria')) + ":\n              ") + "</p> <p class=\"text-14\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n                " + _vm._s(_vm.data.detalle.categoria_producto.nombre_categoria_producto) + "\n              ") + "</p></div>" : "<!---->") + " " + ((_vm$data$detalle3 = _vm.data.detalle) !== null && _vm$data$detalle3 !== void 0 && (_vm$data$detalle3$sub = _vm$data$detalle3.subcategoria_producto) !== null && _vm$data$detalle3$sub !== void 0 && _vm$data$detalle3$sub.nombre_subcategoria ? "<div class=\"flex flex-row justify-start items-center\" data-v-726ebbe3><p class=\"text-16 font-bold mr-10\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_text};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n                " + _vm._s(_vm.$t('home_subcategory')) + ":\n              ") + "</p> <p class=\"text-14\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n                " + _vm._s(_vm.data.detalle.subcategoria_producto.nombre_subcategoria) + "\n              ") + "</p></div>" : "<!---->") + " " + ((_vm$data$detalle4 = _vm.data.detalle) !== null && _vm$data$detalle4 !== void 0 && (_vm$data$detalle4$sub = _vm$data$detalle4.subcategoria_producto) !== null && _vm$data$detalle4$sub !== void 0 && _vm$data$detalle4$sub.nombre_subcategoria ? "<div class=\"flex flex-row justify-start items-center\" data-v-726ebbe3><p class=\"text-16 font-bold mr-10\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_text};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n                " + _vm._s(_vm.$t('home_cardGratis')) + "\n              ") + "</p></div>" : "<!---->") + "</div> "), this.data.detalle.con_variante > 0 ? _vm._ssrNode("<div class=\"w-full mb-15\" data-v-726ebbe3>", "</div>", _vm._l(_vm.data.variantes, function (variant, index) {
+    return _vm._ssrNode("<div class=\"flex flex-col justify-center items-start\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<label for=\"variant name\" class=\"text-16 font-bold\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_text};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n                " + _vm._s(variant.nombre) + ":\n              ") + "</label> "), _c('SelectGroup', {
+      attrs: {
+        "index": index,
+        "variantes": _vm.data.variantes,
+        "detailsProducts": _vm.settingByTemplate14[0].detailsProducts
+      }
+    }, _vm._l(variant.valores, function (item) {
+      return _c('option', {
+        key: item.option,
+        domProps: {
+          "value": item.option
+        }
+      }, [_c('p', {
+        staticClass: "text-14",
+        style: `color:${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+      }, [_vm._v("\n                    " + _vm._s(item.option) + "\n                  ")])]);
+    }), 0)], 2);
+  }), 0) : _vm._e(), _vm._ssrNode(" " + (_vm.userDropshipping.userName ? "<div class=\"w-full flex flex-row items-center mb-15\" data-v-726ebbe3><p class=\"text-16 font-bold mr-10\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_text};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('productdetail_dropshipping')) + "\n            ") + "</p> <p class=\"text-14\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n              " + _vm._s(_vm.userDropshipping.userName) + "\n            ") + "</p></div>" : "<!---->") + " " + (_vm.data.info.descripcion_corta ? "<div class=\"w-full mb-30 border-t pt-15\"" + _vm._ssrStyle(null, `border-color: ${_vm.settingByTemplate14[0].detailsProducts.color_border};`, null) + " data-v-726ebbe3><p class=\"text-14\"" + _vm._ssrStyle(null, ` color:${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n              " + _vm._s(_vm.data.info.descripcion_corta) + "\n            ") + "</p></div>" : "<!---->") + " "), _vm._ssrNode("<div class=\"w-full flex flex-row justify-start items-center\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<div" + _vm._ssrClass("flex flex-row justify-center items-center mr-20", {
+    disabled: !_vm.salesData.estado
+  }) + " data-v-726ebbe3>", "</div>", [_vm._ssrNode("<input name=\"quantityValue\" type=\"text\" onkeypress=\"return (event.charCode>47 && event.charCode<58)\"" + _vm._ssrAttr("value", _vm.quantityValue) + " class=\"bg-transparent text-center text-14 border-2 py-11 px-10 max-w-[68px]\"" + _vm._ssrStyle(null, `border-color:${_vm.settingByTemplate14[0].detailsProducts.color_border};`, null) + " data-v-726ebbe3> "), _vm._ssrNode("<div class=\"flex flex-col items-center justify-center border-t-2 border-b-2 border-r-2\"" + _vm._ssrStyle(null, `border-color:${_vm.settingByTemplate14[0].detailsProducts.color_border};`, null) + " data-v-726ebbe3>", "</div>", [_vm._ssrNode("<button class=\"text-center text-14 border-b px-15\"" + _vm._ssrStyle(null, `border-color:${_vm.settingByTemplate14[0].detailsProducts.color_border};`, null) + " data-v-726ebbe3>", "</button>", [_c('menos-icon', {
+    staticClass: "icon",
+    style: `color:${_vm.settingByTemplate14[0].detailsProducts.color_icon};`
+  })], 1), _vm._ssrNode(" "), _vm._ssrNode("<button class=\"bg-transparent text-center text-14 px-15\" data-v-726ebbe3>", "</button>", [_c('mas-icon', {
+    staticClass: "icon",
+    style: `color:${_vm.settingByTemplate14[0].detailsProducts.color_icon};`
+  })], 1)], 2), _vm._ssrNode(" " + (this.maxQuantityValue == this.quantityValue ? "<div class=\"absolute py-3 px-5 bg-yellow-300 rounded-4 -bottom-35 w-full max-w-[300px] text-center\" data-v-726ebbe3><span class=\"text-14 text-black\" data-v-726ebbe3>" + _vm._ssrEscape("\n                  " + _vm._s(_vm.$t('cart_ultimaUnidad'))) + "</span></div>" : "<!---->"))], 2), _vm._ssrNode(" " + (!_vm.spent && _vm.salesData.estado == true && (_vm.data.info.tipo_servicio == null || _vm.data.info.tipo_servicio == '0') ? "<button id=\"AddToCartTag\" class=\"w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5\"" + _vm._ssrStyle(null, `background-color: ${_vm.settingByTemplate14[0].detailsProducts.color_btn}; color: ${_vm.settingByTemplate14[0].detailsProducts.color_text_btn};`, null) + " data-v-726ebbe3><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\"" + _vm._ssrAttr("fill", _vm.settingByTemplate14[0].detailsProducts.color_icon) + " viewBox=\"0 0 16 16\" class=\"mx-5\" data-v-726ebbe3><path d=\"M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z\" data-v-726ebbe3></path></svg>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('productdetail_añadiralcarrito')) + "\n            ") + "</button>" : !this.salesData.estado ? "<button disabled=\"disabled\" class=\"w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5\"" + _vm._ssrStyle(null, `background-color: ${_vm.settingByTemplate14[0].detailsProducts.color_btn}; color: ${_vm.settingByTemplate14[0].detailsProducts.color_text_btn};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('productdetail_btnANodisponible')) + "\n            ") + "</button>" : !_vm.spent && _vm.data.info.tipo_servicio == '1' ? "<button id=\"AddToCartTag\" class=\"w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5\"" + _vm._ssrStyle(null, `background-color: ${_vm.settingByTemplate14[0].detailsProducts.color_btn}; color: ${_vm.settingByTemplate14[0].detailsProducts.color_text_btn};`, null) + " data-v-726ebbe3><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\"" + _vm._ssrAttr("fill", _vm.settingByTemplate14[0].detailsProducts.color_icon) + " viewBox=\"0 0 16 16\" data-v-726ebbe3><path d=\"M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z\" data-v-726ebbe3></path></svg>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('productdetail_btnComprar')) + "\n            ") + "</button>" : _vm.spent ? "<button disabled=\"disabled\" class=\"w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5\"" + _vm._ssrStyle(null, `background-color: ${_vm.settingByTemplate14[0].detailsProducts.color_btn}; color: ${_vm.settingByTemplate14[0].detailsProducts.color_text_btn};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('home_cardAgotado')) + "\n            ") + "</button>" : "<!---->"))], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"w-full flex flex-row items-center mt-30\" data-v-726ebbe3>", "</div>", [_vm._ssrNode("<p class=\"text-16 font-bold mr-10\"" + _vm._ssrStyle(null, `color:${_vm.settingByTemplate14[0].detailsProducts.color_text};`, null) + " data-v-726ebbe3>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('productdetail_compartir')) + "\n            ") + "</p> "), _vm._ssrNode("<a" + _vm._ssrAttr("href", this.sharingFacebook) + " target=\"_blank\" rel=\"noreferrer noopener\" class=\"btn-facebook\" data-v-726ebbe3>", "</a>", [_c('facebook-icon', {
+    staticClass: "wp-icon"
+  })], 1), _vm._ssrNode(" "), _vm._ssrNode("<button class=\"btn-whatsapp\" data-v-726ebbe3>", "</button>", [_c('whatsapp-icon', {
+    staticClass: "wp-icon"
+  })], 1)], 2)], 2)], 2), _vm._ssrNode(" "), _c('OptionTab', {
+    staticClass: "w-full",
+    attrs: {
+      "dataStore": _vm.dataStore,
+      "data": _vm.data,
+      "envio": _vm.envio,
+      "settingByTemplate14": _vm.settingByTemplate14
+    }
+  }), _vm._ssrNode(" "), _c('KoSuggestProduct', {
+    staticClass: "w-full py-40",
+    attrs: {
+      "category": this.category.slice(0, 12),
+      "cardProducts": _vm.settingByTemplate14[0].cardProducts,
+      "detailsProducts": _vm.settingByTemplate14[0].detailsProducts,
+      "settingsGeneral": _vm.settingByTemplate14[0].settingsGeneral
+    }
+  })], 2)]) : _vm._e()], 2);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/template7/_productdetails/descriptionProduct.vue?vue&type=template&id=51eff8c0&scoped=true&
+// CONCATENATED MODULE: ./components/template14/Ko-ProductDetail-1.vue?vue&type=template&id=726ebbe3&scoped=true&
 
-// EXTERNAL MODULE: ./mixins/elemenTiptap.vue + 2 modules
-var elemenTiptap = __webpack_require__(67);
+// EXTERNAL MODULE: external "axios"
+var external_axios_ = __webpack_require__(2);
+var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
+
+// EXTERNAL MODULE: ./mixins/idCloudinary.js
+var idCloudinary = __webpack_require__(15);
 
 // EXTERNAL MODULE: ./mixins/formatCurrent.js
 var formatCurrent = __webpack_require__(63);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template7/_productdetails/descriptionProduct.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template14/Ko-ProductDetail-1.vue?vue&type=script&lang=js&
 
 
-/* harmony default export */ var descriptionProductvue_type_script_lang_js_ = ({
-  mixins: [elemenTiptap["a" /* default */], formatCurrent["a" /* default */]],
+
+/* harmony default export */ var Ko_ProductDetail_1vue_type_script_lang_js_ = ({
+  mixins: [idCloudinary["a" /* default */], formatCurrent["a" /* default */]],
+  name: 'Ko-ProductDetail',
   props: {
     dataStore: Object,
-    data: {},
-    envio: {}
+    productsData: Array,
+    whatsapp: String,
+    envios: Object,
+    facebookPixel: Object,
+    settingByTemplate14: Array
+  },
+  components: {
+    OptionTab: () => __webpack_require__.e(/* import() */ 121).then(__webpack_require__.bind(null, 1132)),
+    SelectGroup: () => __webpack_require__.e(/* import() */ 162).then(__webpack_require__.bind(null, 1133)),
+    KoSuggestProduct: () => __webpack_require__.e(/* import() */ 163).then(__webpack_require__.bind(null, 1134)),
+    ProductSlide: () => __webpack_require__.e(/* import() */ 161).then(__webpack_require__.bind(null, 1135))
+  },
+  mounted() {
+    this.$store.state.beforeCombination = [];
+    if (this.productsData && this.productsData.length && this.productsData.length > 0) {
+      this.getDataProduct();
+    } else {
+      this.getDataProductPrev();
+    }
+    if (Object.keys(this.dataStore.medios_envio).length) {
+      this.setOptionShipping();
+    }
+    if (this.$route.query.userId && this.$route.query.userName) {
+      this.userDropshipping.userId = this.$route.query.userId;
+      this.userDropshipping.userName = this.$route.query.userName;
+    }
   },
   data() {
     return {
-      medioEnvio: '',
-      envioproducto: ''
+      id: this.$route.params.slug,
+      loading: true,
+      data: {},
+      selectPhotoUrl: '',
+      idYoutube: '',
+      existYoutube: false,
+      maxQuantityValue: 1,
+      quantityValue: 1,
+      productIndexCart: null,
+      warranty: '',
+      productCart: {},
+      salesData: null,
+      spent: false,
+      envioproducto: '',
+      envio: {
+        titulo: '',
+        desc: ''
+      },
+      activeZoom: true,
+      swiperOption: {
+        direction: 'vertical',
+        slidesPerView: 4,
+        spaceBetween: 10,
+        mousewheel: true,
+        navigation: {
+          nextEl: '.swiper-next',
+          prevEl: '.swiper-prev'
+        }
+      },
+      sharing: {
+        url: '',
+        quote: ''
+      },
+      sharingFacebook: '',
+      userDropshipping: {
+        userId: '',
+        userName: ''
+      }
     };
   },
   computed: {
-    mediospago() {
-      return this.dataStore.medios_pago;
+    swiper() {
+      return this.$refs.mySwiper.swiper;
     },
-    activeClass() {
-      if (this.data.info.descripcion == '' || this.data.info.descripcion == null) {
+    existPayments() {
+      const mediospago = this.dataStore.medios_pago;
+      if (mediospago.consignacion || mediospago.convenir || mediospago.payco || mediospago.tienda || mediospago.efecty) {
         return true;
-      } else {
-        return false;
+      }
+      return false;
+    },
+    beforeCombination() {
+      return this.$store.state.beforeCombination;
+    },
+    // eslint-disable-next-line vue/return-in-computed-property
+    precio() {
+      if (this.data.detalle.precio) {
+        return `$${this.data.detalle.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
       }
     },
+    category() {
+      return this.productsData.filter(product => product.categoria == this.data.detalle.categoria_producto.nombre_categoria_producto && product.id !== this.data.detalle.id);
+    }
+  },
+  methods: {
+    searchIdForSlug() {
+      const product = this.productsData.filter(product => product.slug === this.id);
+      if (product.length) {
+        return product[0].id;
+      }
+      return this.productsData[0].id;
+    },
+    getDataProduct() {
+      const idOfSlug = this.searchIdForSlug();
+      if (idOfSlug) {
+        external_axios_default.a.get(`${this.$store.state.urlTemplate}/api/producto/${idOfSlug}`).then(response => {
+          this.selectedPhoto(response.data.detalle.foto_cloudinary);
+          this.videoYoutube(response.data.info.video);
+          this.data = response.data;
+          this.salesData = {
+            precio: this.data.detalle.precio,
+            unidades: this.data.info.inventario,
+            sku: this.data.info.sku,
+            estado: true
+          };
+          if (response && response.data) {
+            this.sharing.url = window.location.href;
+            this.sharing.quote = `Explora%20el%20producto%20${response.data.detalle.nombre}%2C%20te%20van%20a%20encantar.%0ALink%20del%20producto%3A%20${this.sharing.url}`;
+            this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`;
+          }
+          this.maxQuantityValue = this.data.info.inventario;
+          this.setOptionShipping();
+          for (const [index, productCart] of this.$store.state.productsCart.entries()) {
+            if (this.data.detalle.id == productCart.id) {
+              this.productIndexCart = index;
+              this.productCart = productCart;
+              this.maxQuantityValue = this.data.info.inventario - productCart.cantidad;
+            }
+          }
+          if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
+            this.spent = true;
+          }
+          this.loading = false;
+          if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+            window.fbq('track', 'ViewContent', {
+              content_type: 'product',
+              content_ids: [`${this.data.detalle.id}`],
+              contents: [{
+                id: `${this.data.detalle.id}`,
+                quantity: this.quantityValue
+              }],
+              value: this.salesData.precio ? this.salesData.precio : 0,
+              currency: this.dataStore.tienda.moneda,
+              content_name: this.data.detalle.nombre,
+              content_category: 'otro'
+            });
+          }
+        });
+      } else {
+        this.selectedPhoto(this.productsData[0].foto_cloudinary);
+        this.data.detalle = {
+          foto_cloudinary: this.productsData[0].foto_cloudinary,
+          nombre: this.productsData[0].nombre,
+          precio: this.productsData[0].precio
+        };
+        this.data.info = {
+          marca: '',
+          descripcion: ''
+        };
+        this.maxQuantityValue = 0;
+        this.salesData = {
+          precio: 29998,
+          unidades: 0,
+          sku: '4a00'
+        };
+        this.spent = true;
+      }
+    },
+    getDataProductPrev() {
+      this.data.detalle = {
+        foto_cloudinary: 'https://vignette.wikia.nocookie.net/la-bitacora-del-capitan/images/6/67/Not_found.png/revision/latest?cb=20190509042801&path-prefix=es',
+        nombre: 'Producto de prueba',
+        precio: 29999
+      };
+      this.data.info = {
+        marca: 'Marca de prueba',
+        descripcion: 'Descripción de prueba'
+      };
+      this.maxQuantityValue = 0;
+      this.salesData = {
+        precio: 29999,
+        unidades: 0,
+        sku: '4a00'
+      };
+      this.spent = true;
+    },
+    setOptionShipping() {
+      if (this.data.detalle) {
+        if (this.data.detalle.envio_gratis == 1) {
+          this.envio = {
+            titulo: 'Envío gratis',
+            desc: 'Disfruta de este obsequio por parte de la tienda.'
+          };
+        } else {
+          this.data.envioproducto = JSON.parse(this.envios.valores);
+          switch (this.data.envioproducto.envio_metodo) {
+            case 'gratis':
+              this.envio = {
+                titulo: 'Envío gratis',
+                desc: 'Disfruta de este obsequio por parte de la tienda.'
+              };
+              break;
+            case 'sinEnvio':
+              this.envio = {
+                titulo: 'Sin envio',
+                desc: 'Tienes que acercarte a la tienda a recoger tu pedido.'
+              };
+              break;
+            case 'tarifa_plana':
+              this.envio = {
+                titulo: 'Tarifa plana',
+                desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.data.envioproducto.valor}`
+              };
+              break;
+            case 'precio':
+              this.envio = {
+                titulo: 'Tarifa por precio',
+                desc: 'Según la suma del costo de tus productos te cobraran el envio'
+              };
+              break;
+            case 'precio_ciudad':
+              this.envio = {
+                titulo: 'Tarifa por ciudad',
+                desc: 'Según la ciudad te cobraran el envio'
+              };
+              break;
+            case 'peso':
+              this.envio = {
+                titulo: 'Tarifa por peso',
+                desc: ''
+              };
+              break;
+            default:
+          }
+        }
+      }
+    },
+    quantity(productCart) {
+      this.quantityValue = productCart.cantidad;
+    },
+    addQuantity() {
+      if (this.maxQuantityValue > this.quantityValue) {
+        this.quantityValue++;
+        this.data.cantidad = this.quantityValue;
+      } else {
+        // Alerta de limite de sku
+      }
+    },
+    removeQuantity() {
+      if (this.data.cantidad >= 2) {
+        this.quantityValue--;
+        this.data.cantidad = this.quantityValue;
+      }
+    },
+    setMiniPhoto(photo) {
+      return photo;
+    },
+    selectedPhoto(photo) {
+      this.selectPhotoUrl = photo;
+      this.existYoutube = false;
+    },
+    videoYoutube(url) {
+      let myregexp = /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/;
+      let id = '';
+      if (url && url !== '' && url !== 'null') {
+        this.validVideo = true;
+        id = url.match(myregexp);
+        if (id) {
+          this.idYoutube = id[1];
+        }
+      }
+    },
+    addShoppingCart() {
+      if (!this.data.cantidad) {
+        this.data.cantidad = this.quantityValue;
+      }
+      const product = {
+        id: this.data.detalle.id,
+        precio: this.salesData.precio,
+        cantidad: this.data.cantidad,
+        foto_cloudinary: this.data.detalle.foto_cloudinary,
+        nombre: this.data.detalle.nombre,
+        combinacion: this.salesData.combinacion,
+        envio_gratis: this.data.detalle.envio_gratis,
+        promocion_valor: this.data.info.promocion_valor,
+        tag_promocion: this.data.info.tag_promocion,
+        dropshipping: this.userDropshipping.userId
+      };
+      if (this.salesData) {
+        product.limitQuantity = this.salesData.unidades;
+      } else {
+        product.limitQuantity = this.data.info.inventario;
+      }
+      if (typeof this.productIndexCart === 'number') {
+        const mutableProduct = this.$store.state.productsCart[this.productIndexCart];
+        mutableProduct.cantidad += this.data.cantidad;
+        this.$store.state.productsCart.splice(this.productIndexCart, 1, mutableProduct);
+      } else {
+        this.$store.state.productsCart.push(product);
+      }
+      this.$store.commit('UPDATE_CONTENT_CART');
+      this.$router.push('/productos');
+      this.$store.commit('SET_OPEN_ORDER', true);
+      // this.$store.state.orderComponent = true
+      this.$store.dispatch('SEND_ADD_TO_CART', 1);
+    },
+    GoPayments() {
+      let objeto = {
+        id: this.data.info.id,
+        cantidad: this.quantityValue,
+        combinacion: this.salesData && this.salesData.combinacion ? this.salesData.combinacion : undefined,
+        dropshipping: this.userDropshipping.userId
+      };
+      let json = {
+        products: [objeto],
+        tienda: {
+          id: this.$store.state.tienda.id_tienda
+        },
+        canal: 'KOMERCIA'
+      };
+      json = JSON.stringify(json);
+      if (json) {
+        this.$store.dispatch('SEND_ADD_TO_CART', 2);
+        if (this.layourUnicentro == true) {
+          window.open(`https://checkout.komercia.co/?params=${json}`);
+        } else {
+          location.href = `https://checkout.komercia.co/?params=${json}`;
+        }
+      }
+    },
+    evalStock(mq, qv) {
+      return !(mq - qv < 0);
+    },
+    mobileCheck() {
+      window.mobilecheck = function () {
+        var check = false;
+        (function (a) {
+          if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+        })(navigator.userAgent || navigator.vendor || window.opera);
+        return check;
+      };
+      return window.mobilecheck();
+    },
+    redirectWP() {
+      let baseUrlMovil = 'https://api.whatsapp.com/send?';
+      let baseUrlPc = 'https://web.whatsapp.com/send?';
+      let urlProduct = window.location.href;
+      let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, seguro te va a encantar: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`;
+      if (this.mobileCheck()) {
+        window.open(`${baseUrlMovil}text=${text}`, '_blank');
+      } else {
+        window.open(`${baseUrlPc}text=${text}`, '_blank');
+      }
+    }
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook;
+      this.links[1].link = this.dataStore.tienda.red_twitter;
+      this.links[2].link = this.dataStore.tienda.red_instagram;
+      this.links[3].link = this.dataStore.tienda.red_youtube;
+    },
+    productsData() {
+      this.getDataProduct();
+    },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores);
-      return this.data.medioEnvio;
+      this.setOptionShipping();
+    },
+    quantityValue(value) {
+      if (value > this.maxQuantityValue) {
+        this.quantityValue = this.maxQuantityValue;
+      }
+    },
+    beforeCombination(value) {
+      const combinationSelected = JSON.stringify(value);
+      if (this.data.combinaciones) {
+        if (this.data.combinaciones.combinaciones !== '[object Object]' && this.data.detalle.con_variante > 0) {
+          const combinaciones = JSON.parse(this.data.combinaciones.combinaciones);
+          const result = combinaciones.find(combinacion => JSON.stringify(combinacion.combinacion) == combinationSelected);
+          this.productCart = [];
+          this.productIndexCart = null;
+          for (const [index, productCart] of this.$store.state.productsCart.entries()) {
+            if (this.data.detalle.id == productCart.id && JSON.stringify(productCart.combinacion) == JSON.stringify(result.combinacion)) {
+              this.productIndexCart = index;
+              this.productCart = productCart;
+            }
+          }
+          if (result) {
+            this.spent = false;
+            this.maxQuantityValue = result.unidades;
+            if (result.unidades == 0) {
+              this.spent = true;
+            }
+            if (this.productCart.cantidad) {
+              this.maxQuantityValue = parseInt(result.unidades) - this.productCart.cantidad;
+              if (this.maxQuantityValue <= 0) {
+                this.spent = true;
+              }
+            }
+            this.salesData = result;
+            this.quantityValue = 1;
+          }
+        }
+      }
     }
   },
   filters: {
-    capitalize(value) {
+    toLowerCase(value) {
       if (value) {
-        value = value.toLowerCase();
-        return value.replace(/^\w|\s\w/g, l => l.toUpperCase());
+        return value.toLowerCase();
       }
+      return '';
     }
+  },
+  head() {
+    return {
+      title: `Vista del producto ${this.data && this.data.detalle ? this.data.detalle.nombre : ''}`,
+      meta: [{
+        hid: 'product:catalog_id',
+        property: 'product:catalog_id',
+        content: this.data && this.data.detalle ? this.data.detalle.id : ''
+      }, {
+        hid: 'og:title',
+        property: 'og:title',
+        content: this.data && this.data.detalle ? this.data.detalle.nombre : ''
+      }, {
+        hid: 'og:url',
+        property: 'og:url',
+        content: this.sharing && this.sharing.url ? this.sharing.url : ''
+      }, {
+        hid: 'og:description',
+        property: 'og:description',
+        content: this.data && this.data.info ? this.data.info.descripcion_corta : ''
+      }, {
+        hid: 'og:image',
+        property: 'og:image',
+        content: this.data && this.data.detalle ? this.data.detalle.foto_cloudinary : ''
+      }, {
+        hid: 'og:price:amount',
+        property: 'og:price:amount',
+        content: this.salesData && this.salesData.precio ? this.salesData.precio : ''
+      }, {
+        hid: 'og:price:currency',
+        property: 'og:price:currency',
+        content: this.dataStore.tienda.moneda ? this.dataStore.tienda.moneda : ''
+      }, {
+        hid: 'product:brand',
+        property: 'product:brand',
+        content: this.data && this.data.info && this.data.info.marca ? this.data.info.marca : ''
+      }, {
+        hid: 'product:availability',
+        property: 'product:availability',
+        content: this.salesData && this.salesData.unidades > 0 ? 'in stock' : 'out of stock'
+      }, {
+        hid: 'product:condition',
+        property: 'product:condition',
+        content: 'new'
+      }, {
+        hid: 'product:price:amount',
+        property: 'product:price:amount',
+        content: this.salesData && this.salesData.precio ? this.salesData.precio : ''
+      }, {
+        hid: 'product:price:currency',
+        property: 'product:price:currency',
+        content: this.dataStore.tienda.moneda ? this.dataStore.tienda.moneda : ''
+      }, {
+        hid: 'product:sale_price:amount',
+        property: 'product:sale_price:amount',
+        content: this.data && this.data.info && this.data.info.tag_promocion == 1 && this.data.info.promocion_valor ? Math.trunc(this.salesData.precio / (1 - this.data.info.promocion_valor / 100)) : ''
+      }, {
+        hid: 'product:sale_price:currency',
+        property: 'product:sale_price:currency',
+        content: this.dataStore.tienda.moneda ? this.dataStore.tienda.moneda : ''
+      }]
+    };
+  },
+  jsonld() {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      productID: this.data && this.data.detalle && this.data.detalle.id ? this.data.detalle.id : '',
+      name: this.data && this.data.detalle && this.data.detalle.nombre ? this.data.detalle.nombre.slice(0, 149) : '',
+      description: this.data && this.data.info && this.data.info.descripcion_corta ? this.data.info.descripcion_corta.slice(0, 9998) : `Producto de la tienda ${this.dataStore.tienda.nombre}`,
+      url: this.sharing && this.sharing.url ? this.sharing.url : '',
+      image: this.data && this.data.detalle && this.data.detalle.foto_cloudinary ? this.data.detalle.foto_cloudinary : '',
+      brand: this.data && this.data.info && this.data.info.marca ? this.data.info.marca : '',
+      sku: this.salesData && this.salesData.unidades ? this.salesData.unidades : '',
+      offers: [{
+        '@type': 'Offer',
+        price: this.salesData && this.salesData.precio ? this.salesData.precio : '',
+        priceCurrency: this.dataStore.tienda.moneda ? this.dataStore.tienda.moneda : '',
+        itemCondition: 'https://schema.org/NewCondition',
+        availability: this.salesData && this.salesData.unidades > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
+      }],
+      additionalProperty: [{
+        '@type': 'PropertyValue',
+        propertyID: 'item_group_id',
+        value: this.data && this.data.detalle ? `FB${this.data.detalle.categoria_producto.id}_${this.data.detalle.categoria_producto.nombre_categoria_producto}` : '',
+        status: 'active'
+      }]
+    };
   }
 });
-// CONCATENATED MODULE: ./components/template7/_productdetails/descriptionProduct.vue?vue&type=script&lang=js&
- /* harmony default export */ var _productdetails_descriptionProductvue_type_script_lang_js_ = (descriptionProductvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./components/template14/Ko-ProductDetail-1.vue?vue&type=script&lang=js&
+ /* harmony default export */ var template14_Ko_ProductDetail_1vue_type_script_lang_js_ = (Ko_ProductDetail_1vue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(1);
 
-// CONCATENATED MODULE: ./components/template7/_productdetails/descriptionProduct.vue
+// CONCATENATED MODULE: ./components/template14/Ko-ProductDetail-1.vue
 
 
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(849)
+  var style0 = __webpack_require__(857)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -104,160 +719,100 @@ if (style0.__inject__) style0.__inject__(context)
 /* normalize component */
 
 var component = Object(componentNormalizer["a" /* default */])(
-  _productdetails_descriptionProductvue_type_script_lang_js_,
+  template14_Ko_ProductDetail_1vue_type_script_lang_js_,
   render,
   staticRenderFns,
   false,
   injectStyles,
-  "51eff8c0",
-  "1f1e5484"
+  "726ebbe3",
+  "47504d42"
   
 )
 
-/* harmony default export */ var descriptionProduct = __webpack_exports__["default"] = (component.exports);
+/* harmony default export */ var Ko_ProductDetail_1 = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ 450:
+/***/ 443:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(850);
+var content = __webpack_require__(858);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(6).default
 module.exports.__inject__ = function (context) {
-  add("16e1f654", content, true, context)
+  add("7d2e6ebd", content, true, context)
 };
 
 /***/ }),
 
-/***/ 67:
+/***/ 63:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-// EXTERNAL MODULE: external "element-tiptap"
-var external_element_tiptap_ = __webpack_require__(62);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./mixins/elemenTiptap.vue?vue&type=script&lang=js&
-
-/* harmony default export */ var elemenTiptapvue_type_script_lang_js_ = ({
-  computed: {
-    extensions() {
-      return [new external_element_tiptap_["Doc"](), new external_element_tiptap_["Paragraph"](), new external_element_tiptap_["Text"](), new external_element_tiptap_["Heading"]({
-        level: 5,
-        bubble: true
-      }), new external_element_tiptap_["Bold"]({
-        bubble: true
-      }), new external_element_tiptap_["Italic"]({
-        bubble: true
-      }), new external_element_tiptap_["Underline"]({
-        bubble: true
-      }), new external_element_tiptap_["Strike"]({
-        bubble: true
-      }), new external_element_tiptap_["Code"]({
-        bubble: true
-      }), new external_element_tiptap_["CodeBlock"]({
-        bubble: true
-      }), new external_element_tiptap_["Blockquote"]({
-        bubble: true
-      }), new external_element_tiptap_["Link"]({
-        bubble: true
-      }), new external_element_tiptap_["BulletList"]({
-        bubble: true
-      }), new external_element_tiptap_["OrderedList"]({
-        bubble: true
-      }), new external_element_tiptap_["ListItem"]({
-        bubble: true
-      }), new external_element_tiptap_["TodoList"]({
-        bubble: true
-      }), new external_element_tiptap_["TodoItem"]({
-        bubble: true
-      }), new external_element_tiptap_["Iframe"]({
-        bubble: true
-      }), new external_element_tiptap_["Table"]({
-        resizable: true,
-        bubble: true
-      }), new external_element_tiptap_["TableHeader"](), new external_element_tiptap_["TableRow"](), new external_element_tiptap_["TableCell"](), new external_element_tiptap_["Image"]({
-        urlPattern: '',
-        uploadRequest: '',
-        bubble: true
-      }), new external_element_tiptap_["TextAlign"]({
-        alignments: ['left', 'center', 'right', 'justify'],
-        bubble: true
-      }), new external_element_tiptap_["LineHeight"]({
-        lineHeights: ['100%', '200%', '300%']
-      }), new external_element_tiptap_["Indent"]({
-        minIndent: 0,
-        maxIndent: 7
-      }), new external_element_tiptap_["HorizontalRule"]({
-        bubble: true
-      }), new external_element_tiptap_["HardBreak"](), new external_element_tiptap_["TrailingNode"](), new external_element_tiptap_["History"](), new external_element_tiptap_["TextColor"]({
-        colors: ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722', '#000000'],
-        bubble: true
-      }), new external_element_tiptap_["TextHighlight"]({
-        colors: ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722', '#000000'],
-        bubble: true
-      }), new external_element_tiptap_["FormatClear"](), new external_element_tiptap_["FontSize"]({
-        fontSizes: ['8', '10', '12', '14', '16', '18', '20', '24', '30', '36', '48', '60', '72'],
-        bubble: true
-      }), new external_element_tiptap_["Preview"](), new external_element_tiptap_["Print"](), new external_element_tiptap_["SelectAll"]()];
+/* harmony default export */ __webpack_exports__["a"] = ({
+  filters: {
+    currency(value, codigo_pais, moneda) {
+      let resultCurrent;
+      if (codigo_pais && moneda) {
+        if (value && codigo_pais == 'co' && moneda == 'COP') {
+          // return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+          return `$${new Intl.NumberFormat('de-DE').format(value)}`;
+        } else if (value && codigo_pais == 'pe' && moneda == 'PEN') {
+          // return `S/ ${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+          return `S/ ${new Intl.NumberFormat('es-PE').format(value)}`;
+        } else if (codigo_pais == 'internacional') {
+          resultCurrent = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: moneda,
+            minimumFractionDigits: 0
+          }).format(value);
+          return `${resultCurrent}`;
+        } else {
+          resultCurrent = new Intl.NumberFormat(codigo_pais, {
+            style: 'currency',
+            currency: moneda,
+            minimumFractionDigits: 0
+          }).format(value);
+          return `${resultCurrent}`;
+        }
+      } else {
+        if (value) {
+          // return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+          return `$${new Intl.NumberFormat('de-DE').format(value)}`;
+        }
+      }
     }
   }
 });
-// CONCATENATED MODULE: ./mixins/elemenTiptap.vue?vue&type=script&lang=js&
- /* harmony default export */ var mixins_elemenTiptapvue_type_script_lang_js_ = (elemenTiptapvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./mixins/elemenTiptap.vue
-var render, staticRenderFns
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  mixins_elemenTiptapvue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  "445de0a8"
-  
-)
-
-/* harmony default export */ var elemenTiptap = __webpack_exports__["a"] = (component.exports);
 
 /***/ }),
 
-/***/ 849:
+/***/ 857:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_descriptionProduct_vue_vue_type_style_index_0_id_51eff8c0_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(450);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_descriptionProduct_vue_vue_type_style_index_0_id_51eff8c0_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_descriptionProduct_vue_vue_type_style_index_0_id_51eff8c0_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_descriptionProduct_vue_vue_type_style_index_0_id_51eff8c0_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_descriptionProduct_vue_vue_type_style_index_0_id_51eff8c0_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductDetail_1_vue_vue_type_style_index_0_id_726ebbe3_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(443);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductDetail_1_vue_vue_type_style_index_0_id_726ebbe3_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductDetail_1_vue_vue_type_style_index_0_id_726ebbe3_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductDetail_1_vue_vue_type_style_index_0_id_726ebbe3_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductDetail_1_vue_vue_type_style_index_0_id_726ebbe3_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 850:
+/***/ 858:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".description[data-v-51eff8c0]{border-bottom:1px solid var(--color_border);display:flex;width:100%}.description div[data-v-51eff8c0]{color:var(--color_description);line-height:1.5}.left[data-v-51eff8c0]{align-items:center;flex:2;flex-direction:column;justify-content:flex-start;overflow:hidden}.left[data-v-51eff8c0],.left-empty[data-v-51eff8c0]{display:flex;padding-bottom:10px;width:100%}.left-empty[data-v-51eff8c0]{flex:2}.content-tittle-description[data-v-51eff8c0]{align-items:flex-start;justify-content:flex-start;margin-top:20px;width:100%}.tittle-description[data-v-51eff8c0]{align-self:flex-start;color:var(--color_description);font-family:var(--font-style-3);font-size:16px;font-weight:700;margin-bottom:20px;margin-top:20px;text-transform:uppercase}.content_product_description[data-v-51eff8c0],.right[data-v-51eff8c0]{width:100%}.right[data-v-51eff8c0]{border-left:1px solid var(--color_border);display:flex;flex:1;flex-direction:column;padding-bottom:10px}.title-section[data-v-51eff8c0]{align-self:flex-start;color:var(--color_description);font-family:var(--font-style-3);font-size:15px;font-weight:700;text-transform:uppercase}.right img[data-v-51eff8c0]{margin-top:15px;max-width:320px;width:100%}.section[data-v-51eff8c0]{box-sizing:border-box;margin-left:25px;margin-top:20px}.text-desc[data-v-51eff8c0]{align-self:flex-start;color:var(--color_description);font-family:var(--font-style-3);font-size:15px;margin-top:20px;text-transform:uppercase}.content-text-desc[data-v-51eff8c0]{margin-bottom:20px;margin-right:25px;min-height:300px}.wrapper-comments[data-v-51eff8c0]{border-top:1px solid var(--color_border);width:100%}.text-method-payment[data-v-51eff8c0]{font-family:var(--font-style-3);font-size:14px}h3[data-v-51eff8c0]{align-self:flex-start;font-size:15px;text-transform:uppercase}h3[data-v-51eff8c0],h4[data-v-51eff8c0]{color:var(--color_description);font-family:var(--font-style-3)}h4[data-v-51eff8c0]{font-weight:700;margin-bottom:5px;margin-top:15px}li p[data-v-51eff8c0]{font-family:var(--font-style-3);font-size:14px;line-height:1.4}.icon[data-v-51eff8c0]{align-self:flex-start;margin-bottom:10px;vertical-align:middle;width:50px}.content[data-v-51eff8c0]{align-items:center;display:flex;flex-direction:column;justify-content:flex-start}.payments[data-v-51eff8c0]{margin-bottom:20px}.line[data-v-51eff8c0]{border-top:1px solid var(--color_border);width:100%}.deliverys[data-v-51eff8c0]{margin-bottom:20px;margin-top:20px}.stage[data-v-51eff8c0]{border-left:0;display:flex;flex:1}.logo-pasarela[data-v-51eff8c0]{width:160px!important}.logo-pasarela-daviplata[data-v-51eff8c0]{width:120px!important}.logo-pasarela-efecty[data-v-51eff8c0]{width:100px!important}.logo-pasarela-wompi[data-v-51eff8c0]{width:220px!important}.logo-pasarela-payu[data-v-51eff8c0]{width:300px!important}.logo-pasarela-payco[data-v-51eff8c0]{width:280px!important}.capitalize[data-v-51eff8c0]{font-family:var(--font-style-3);font-weight:600!important}.description-method[data-v-51eff8c0]{font-family:var(--font-style-3);font-size:14px;line-height:1.4}.price[data-v-51eff8c0]{font-size:14px;margin-top:10px}.medios-mercadopago[data-v-51eff8c0]{border-radius:4px;display:block;width:100%}.line-comments[data-v-51eff8c0],.wrapper-comments-responsive[data-v-51eff8c0]{display:none}.cursor_point[data-v-51eff8c0]{cursor:pointer}.editor[data-v-51eff8c0] .el-tiptap-editor>.el-tiptap-editor__content{background-color:transparent;border:none;padding:0 5px}.editor[data-v-51eff8c0] .el-tiptap-editor__menu-bubble{display:none}.editor[data-v-51eff8c0] .el-tiptap-editor__content h1{font-family:var(--font-style-3);font-size:2em}.editor[data-v-51eff8c0] .el-tiptap-editor__content h2{font-family:var(--font-style-3);font-size:1.5em}.editor[data-v-51eff8c0] .el-tiptap-editor__content h3{font-family:var(--font-style-3);font-size:1.17em}.editor[data-v-51eff8c0] .el-tiptap-editor__content h4{font-family:var(--font-style-3);font-size:1.12em}.editor[data-v-51eff8c0] .el-tiptap-editor__content h5{font-family:var(--font-style-3);font-size:.83em}.editor[data-v-51eff8c0] .el-tiptap-editor__content blockquote,.editor[data-v-51eff8c0] .el-tiptap-editor__content code,.editor[data-v-51eff8c0] .el-tiptap-editor__content em,.editor[data-v-51eff8c0] .el-tiptap-editor__content li,.editor[data-v-51eff8c0] .el-tiptap-editor__content ol,.editor[data-v-51eff8c0] .el-tiptap-editor__content p,.editor[data-v-51eff8c0] .el-tiptap-editor__content pre,.editor[data-v-51eff8c0] .el-tiptap-editor__content s,.editor[data-v-51eff8c0] .el-tiptap-editor__content span,.editor[data-v-51eff8c0] .el-tiptap-editor__content strong,.editor[data-v-51eff8c0] .el-tiptap-editor__content ul{font-family:var(--font-style-3)}.editor[data-v-51eff8c0] .el-tiptap-editor__content .image-view__body__image{cursor:none;pointer-events:none}.editor[data-v-51eff8c0] .el-popper.el-tiptap-image-popper{display:none}@media (min-width:300px){.content-tittle-description[data-v-51eff8c0]{width:90%}}@media (min-width:768px){.left[data-v-51eff8c0]{align-items:flex-start}}@media (max-width:810px){.left[data-v-51eff8c0]{margin-right:15px}}@media (max-width:768px){.editor[data-v-51eff8c0] .el-tiptap-editor>.el-tiptap-editor__content{padding:0 15px}.description[data-v-51eff8c0]{display:flex;flex-direction:column;margin-bottom:20px;margin-right:0;width:100%}.description[data-v-51eff8c0],.section[data-v-51eff8c0]{margin-left:0}.left[data-v-51eff8c0]{flex:1;height:100%;margin-right:0;padding-bottom:0}.left-empty[data-v-51eff8c0]{display:flex;flex:0;padding-bottom:10px;width:100%}.right[data-v-51eff8c0]{border-left:0}.content-text-desc[data-v-51eff8c0]{border-bottom:1px solid var(--color_border);min-height:0;padding-bottom:20px}.wrapper-comments-responsive[data-v-51eff8c0]{display:inline;display:initial}.wrapper-comments[data-v-51eff8c0]{display:none}.line-comments[data-v-51eff8c0]{border-top:1px solid var(--color_border);display:inline;display:initial;width:100%}}@media (max-width:725px){.description[data-v-51eff8c0]{margin-bottom:0}.left[data-v-51eff8c0]{flex:1;padding-bottom:10px}.right[data-v-51eff8c0]{border-left:0}.payments[data-v-51eff8c0],.text-desc[data-v-51eff8c0]{padding-left:15px;padding-right:15px}.payments[data-v-51eff8c0]{border-top:1px solid var(--color_border);margin-bottom:10px}.section[data-v-51eff8c0]{margin-left:0;margin-top:0;padding-top:10px}.deliverys[data-v-51eff8c0]{margin-bottom:10px;margin-top:10px;padding-left:15px;padding-right:15px}.content_product_description[data-v-51eff8c0]{max-height:600px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "*[data-v-726ebbe3]{font-family:var(--font-style-1)!important}.btn-facebook[data-v-726ebbe3]{background-color:transparent;border-radius:5px;color:#1877f2;cursor:pointer;display:flex;justify-content:center;margin-right:20px;text-align:center;-webkit-text-decoration:none;text-decoration:none;transition:all .2s ease-in;width:10px}.btn-facebook[data-v-726ebbe3]:hover{color:#000}.btn-whatsapp[data-v-726ebbe3]{background-color:transparent;border-radius:5px;color:#25d366;cursor:pointer;display:flex;justify-content:center;text-align:center;-webkit-text-decoration:none;text-decoration:none;transition:all .2s ease-in;width:10px}.btn-whatsapp[data-v-726ebbe3]:hover{color:#000}.wp-icon[data-v-726ebbe3]{bottom:3px;font-size:27px}.swiper-prev[data-v-726ebbe3]{top:0}.swiper-next[data-v-726ebbe3],.swiper-prev[data-v-726ebbe3]{left:20px;position:absolute;z-index:2}.swiper-next[data-v-726ebbe3]{bottom:0;font-size:25px}.icon-swiper[data-v-726ebbe3]{color:var(--color_icon);cursor:pointer;font-size:60px}.icon-swiper[data-v-726ebbe3]:hover{color:var(--hover_text)}.video[data-v-726ebbe3]{border-radius:10px;height:100px;margin-bottom:10px;min-height:100px;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center;width:100px}.icon[data-v-726ebbe3]:hover{color:var(--hover_text)}@media (min-width:300px){.video[data-v-726ebbe3]{height:200px;width:100%}}@media (min-width:480px){.video[data-v-726ebbe3]{height:250px}}@media (min-width:768px){.video[data-v-726ebbe3]{height:400px}}@media (min-width:850px){.video[data-v-726ebbe3]{height:480px}}@media (min-width:1024px){.video[data-v-726ebbe3]{height:300px}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
