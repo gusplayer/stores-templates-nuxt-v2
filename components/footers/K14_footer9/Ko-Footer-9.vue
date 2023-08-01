@@ -176,12 +176,10 @@
   </div>
 </template>
 <script>
-import KoNewsLetter from '../../../components/template11/ko-newsletter'
 import KoSocialNet from '../../../components/template11/ko-socialnet'
 import KoTermsConditions from '../../../components/footers/ko-TermsAndConditions'
 export default {
   components: {
-    KoNewsLetter,
     KoSocialNet,
     KoTermsConditions,
   },

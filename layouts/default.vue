@@ -13,11 +13,13 @@
         <div
           class="wrapper-whatsapp"
           v-if="dataStore.tienda.whatsapp"
-          @click="redirectWhatsapp()"
+          @click="redirectWhatsApp()"
         >
           <koWhatsApp class="button-whatsapp" />
           <span>
-            WhatsApp<br /><small>
+            WhatsApp
+            <br />
+            <small>
               {{ dataStore.tienda.whatsapp }}
             </small>
           </span>
@@ -85,6 +87,7 @@ export default {
     KoHeader7: () => import('../components/headers/header7/Ko-Header-7'),
     KoHeader8: () => import('../components/headers/header8/Ko-Header-8'),
     KoHeader9: () => import('../components/headers/header9/Ko-Header-9'),
+    KoHeader10: () => import('../components/headers/Ko14_header/Ko-Header-10'),
     // FOOTER
     KoFooter1: () => import('../components/footers/footer1/Ko-Footer-1'),
     KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2'),
@@ -94,6 +97,7 @@ export default {
     KoFooter7: () => import('../components/footers/footer7/Ko-Footer-7'),
     KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8'),
     KoFooter9: () => import('../components/footers/K14_footer9/Ko-Footer-9'),
+    KoFooter10: () => import('../components/footers/K14_footer10/Ko-Footer-10'),
     // OTROS
     KoFooterCountry: () =>
       import('../components/footers/footer1/Ko-Footer-Country'),
@@ -195,6 +199,11 @@ export default {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
           this.settingByTemplate14?.settingsGeneral?.fount_1 ?? 'Poppins'
+        break
+      case 15:
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        tipo_letra =
+          this.settingByTemplate15?.settingsGeneral?.fount_1 ?? 'Poppins'
         break
     }
     let tienda = this.$store.state?.dataStore?.tienda ?? ''
@@ -355,6 +364,8 @@ export default {
             this.template == 13 ||
             this.template == 12 ||
             this.template == 14 ||
+            this.template == 15 ||
+            this.template == 16 ||
             this.template == 99
               ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
               : '',
@@ -390,6 +401,7 @@ export default {
         11: 'KoHeader7',
         13: 'KoHeader8',
         14: 'KoHeader9',
+        15: 'KoHeader10',
       },
       footerComponentMap: {
         3: 'KoFooter1',
@@ -402,6 +414,7 @@ export default {
         11: 'KoFooter7',
         13: 'KoFooter8',
         14: 'KoFooter9',
+        15: 'KoFooter10',
       },
     }
   },
@@ -419,6 +432,8 @@ export default {
       'settingByTemplate12',
       'settingByTemplate13',
       'settingByTemplate14',
+      'settingByTemplate15',
+      'settingByTemplate16',
       'analytics_tagmanager',
     ]),
     headerTemplate() {
@@ -498,8 +513,22 @@ export default {
                 setting14General:
                   this.settingByTemplate14?.settingsGeneral ?? null,
                 pages: this.settingByTemplate14?.pages ?? null,
-                listProductsFilter:
-                  this.settingByTemplate14?.listProductsFilter ?? null,
+                // listProductsFilter:
+                //   this.settingByTemplate14?.listProductsFilter ?? null,
+              },
+            ]
+          : null,
+        settingByTemplate15: this.settingByTemplate15
+          ? [
+              {
+                header: this.settingByTemplate15?.header ?? null,
+                footer: this.settingByTemplate15?.footer ?? null,
+                newsletter: this.settingByTemplate15?.newsletter ?? null,
+                settingsGeneral:
+                  this.settingByTemplate15?.settingsGeneral ?? null,
+                pages: this.settingByTemplate15?.pages ?? null,
+                // listProductsFilter:
+                //   this.settingByTemplate15?.listProductsFilter ?? null,
               },
             ]
           : null,
@@ -533,7 +562,7 @@ export default {
       }
       return window.mobilecheck()
     },
-    redirectWhatsapp() {
+    redirectWhatsApp() {
       if (this.dataStore.tienda.whatsapp.length > 10) {
         let phone_number_whatsapp = this.dataStore.tienda.whatsapp
         if (phone_number_whatsapp.charAt(0) === '+') {
@@ -606,7 +635,7 @@ export default {
       ) {
         if (e && e.data) {
           if (e.data.type == 'settingModal') {
-            this.$store.commit('SET_CURRENTSETTINGMODAL', e.data)
+            this.$store.commit('SET_CURRENT_SETTING_MODAL', e.data)
             if (
               e.data.data &&
               e.data.data.stateModal &&

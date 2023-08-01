@@ -362,18 +362,11 @@
               </div>
               <div class="w-full flex items-center justify-center mt-20">
                 <button
-                  v-if="stateBtn == true"
                   class="px-20 py-10"
                   :style="`color: ${settingByTemplate14[0].contact.color_text_btn_form}; background-color: ${settingByTemplate14[0].contact.color_btn_form};`"
+                  :class="!stateBtn ? ' cursor-not-allowed' : 'cursor-pointer'"
+                  :disabled="stateBtn ? true : false"
                   @click="submitContact"
-                >
-                  {{ $t('contact_enviar') }}
-                </button>
-                <button
-                  v-else
-                  disabled
-                  class="px-20 py-10"
-                  :style="`color: ${settingByTemplate14[0].contact.color_text_btn_form}; background-color: ${settingByTemplate14[0].contact.color_btn_form};`"
                 >
                   {{ $t('contact_enviar') }}
                 </button>
@@ -470,28 +463,27 @@ export default {
   },
   methods: {
     changeLocation(value) {
-      console.log(value)
       this.positionLocationStore = value
     },
     submitContact() {
       this.$refs.observer
         .validate()
-        .then((response) => {
+        .then(async (response) => {
           this.stateBtn = false
           if (response) {
-            const json = {
-              nombre: this.nombre,
-              correo: this.email,
-              celular: this.numberphone,
-              comentario: this.comment,
-              tienda: this.dataStore.tienda.id_tienda,
-            }
-            axios
-              .post(
-                `${this.$store.state.urlKomercia}/api/mensaje-contacto`,
-                json
-              )
-              .then((response) => {
+            try {
+              const { data } = await axios({
+                method: 'POST',
+                url: `  ${this.$store.state.urlKomerciaV3}/api/contact/message`,
+                data: {
+                  nombre: this.nombre,
+                  correo: this.email,
+                  celular: this.numberphone,
+                  comentario: this.comment,
+                  tienda: this.dataStore.tienda.id_tienda,
+                },
+              })
+              if (data && data.estado == 200) {
                 this.$message.success('Comentario enviado!')
                 this.stateBtn = true
                 if (
@@ -503,10 +495,14 @@ export default {
                     description: this.email,
                   })
                 }
-              })
+              }
+            } catch (err) {
+              this.$message.error(err.response)
+            }
           }
         })
         .catch((e) => {
+          this.stateBtn = true
           this.$message.error('error')
         })
     },

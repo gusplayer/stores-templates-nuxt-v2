@@ -1,14 +1,14 @@
-exports.ids = [37];
+exports.ids = [41];
 exports.modules = {
 
-/***/ 954:
+/***/ 994:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=template&id=0c6d30f8&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=template&id=2a854988&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,7 +18,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/contacto.vue?vue&type=template&id=0c6d30f8&
+// CONCATENATED MODULE: ./pages/contacto.vue?vue&type=template&id=2a854988&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -28,13 +28,14 @@ var external_vuex_ = __webpack_require__(7);
 /* harmony default export */ var contactovue_type_script_lang_js_ = ({
   layout: 'default',
   components: {
-    K05Contact: () => __webpack_require__.e(/* import() */ 166).then(__webpack_require__.bind(null, 988)),
-    K07Contact: () => __webpack_require__.e(/* import() */ 171).then(__webpack_require__.bind(null, 989)),
-    K09Contact: () => __webpack_require__.e(/* import() */ 180).then(__webpack_require__.bind(null, 990)),
-    K10Contact: () => __webpack_require__.e(/* import() */ 132).then(__webpack_require__.bind(null, 991)),
-    K11Contact: () => __webpack_require__.e(/* import() */ 140).then(__webpack_require__.bind(null, 992)),
-    K13Contact: () => __webpack_require__.e(/* import() */ 144).then(__webpack_require__.bind(null, 993)),
-    K14Contact: () => __webpack_require__.e(/* import() */ 152).then(__webpack_require__.bind(null, 994))
+    K05Contact: () => __webpack_require__.e(/* import() */ 179).then(__webpack_require__.bind(null, 1029)),
+    K07Contact: () => __webpack_require__.e(/* import() */ 184).then(__webpack_require__.bind(null, 1030)),
+    K09Contact: () => __webpack_require__.e(/* import() */ 193).then(__webpack_require__.bind(null, 1031)),
+    K10Contact: () => __webpack_require__.e(/* import() */ 138).then(__webpack_require__.bind(null, 1032)),
+    K11Contact: () => __webpack_require__.e(/* import() */ 146).then(__webpack_require__.bind(null, 1033)),
+    K13Contact: () => __webpack_require__.e(/* import() */ 150).then(__webpack_require__.bind(null, 1034)),
+    K14Contact: () => __webpack_require__.e(/* import() */ 158).then(__webpack_require__.bind(null, 1035)),
+    K15Contact: () => __webpack_require__.e(/* import() */ 172).then(__webpack_require__.bind(null, 1036))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -51,7 +52,8 @@ var external_vuex_ = __webpack_require__(7);
         10: 'K10Contact',
         11: 'K11Contact',
         13: 'K13Contact',
-        14: 'K14Contact'
+        14: 'K14Contact',
+        15: 'K15Contact'
       },
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
@@ -59,12 +61,13 @@ var external_vuex_ = __webpack_require__(7);
         11: 'SET_CURRENTSETTING11',
         10: 'SET_CURRENTSETTING10',
         13: 'SET_CURRENTSETTING13',
-        14: 'SET_CURRENTSETTING14'
+        14: 'SET_CURRENTSETTING14',
+        15: 'SET_CURRENTSETTING15'
       }
     };
   },
   computed: {
-    ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'settingByTemplate14', 'template']),
+    ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'settingByTemplate14', 'settingByTemplate15', 'template']),
     indexTemplate() {
       let productListComponent = '';
       if (this.componentMapping.hasOwnProperty(this.template)) {
@@ -82,7 +85,8 @@ var external_vuex_ = __webpack_require__(7);
         settingByTemplate10: this.createSettingByTemplate(this.settingByTemplate10, 'contact', 'settingGeneral'),
         settingByTemplate11: this.createSettingByTemplate(this.settingByTemplate11, 'contact', 'settingGeneral'),
         settingByTemplate13: this.createSettingByTemplate(this.settingByTemplate13, 'contact', 'settingGeneral'),
-        settingByTemplate14: this.createSettingByTemplate(this.settingByTemplate14, 'contact', 'settingsGeneral')
+        settingByTemplate14: this.createSettingByTemplate(this.settingByTemplate14, 'contact', 'settingsGeneral'),
+        settingByTemplate15: this.createSettingByTemplate(this.settingByTemplate15, 'contact', 'settingsGeneral')
       };
     }
   },

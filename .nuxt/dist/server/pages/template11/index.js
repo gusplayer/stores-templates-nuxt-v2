@@ -1,7 +1,7 @@
-exports.ids = [2];
+exports.ids = [4];
 exports.modules = {
 
-/***/ 958:
+/***/ 998:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62,14 +62,14 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template11',
   components: {
-    KCarousel: () => __webpack_require__.e(/* import() */ 97).then(__webpack_require__.bind(null, 942)),
-    KSection: () => __webpack_require__.e(/* import() */ 142).then(__webpack_require__.bind(null, 1008)),
-    KTrending: () => __webpack_require__.e(/* import() */ 82).then(__webpack_require__.bind(null, 1009)),
-    KTrendingHoko: () => __webpack_require__.e(/* import() */ 90).then(__webpack_require__.bind(null, 1010)),
-    KParallax: () => __webpack_require__.e(/* import() */ 141).then(__webpack_require__.bind(null, 1011)),
-    KListTrending: () => __webpack_require__.e(/* import() */ 81).then(__webpack_require__.bind(null, 1012)),
-    KInformation: () => __webpack_require__.e(/* import() */ 139).then(__webpack_require__.bind(null, 1013)),
-    KBlog: () => __webpack_require__.e(/* import() */ 88).then(__webpack_require__.bind(null, 1014))
+    KCarousel: () => __webpack_require__.e(/* import() */ 102).then(__webpack_require__.bind(null, 982)),
+    KSection: () => __webpack_require__.e(/* import() */ 148).then(__webpack_require__.bind(null, 1051)),
+    KTrending: () => __webpack_require__.e(/* import() */ 87).then(__webpack_require__.bind(null, 1052)),
+    KTrendingHoko: () => __webpack_require__.e(/* import() */ 95).then(__webpack_require__.bind(null, 1053)),
+    KParallax: () => __webpack_require__.e(/* import() */ 147).then(__webpack_require__.bind(null, 1054)),
+    KListTrending: () => __webpack_require__.e(/* import() */ 86).then(__webpack_require__.bind(null, 1055)),
+    KInformation: () => __webpack_require__.e(/* import() */ 145).then(__webpack_require__.bind(null, 1056)),
+    KBlog: () => __webpack_require__.e(/* import() */ 93).then(__webpack_require__.bind(null, 1057))
   },
   mounted() {
     window.parent.postMessage('message', '*');

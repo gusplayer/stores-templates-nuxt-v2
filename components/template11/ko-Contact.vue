@@ -196,7 +196,11 @@
                     <button
                       ref="colorBtn"
                       class="btn"
-                      v-on:click.prevent="submitContact"
+                      :class="
+                        !stateBtn ? ' cursor-not-allowed' : 'cursor-pointer'
+                      "
+                      :disabled="stateBtn ? true : false"
+                      @click="submitContact"
                     >
                       {{ $t('contact_enviar') }}
                     </button>
@@ -230,6 +234,7 @@ export default {
       numberphone: '',
       comment: '',
       messageFull: '',
+      stateBtn: true,
       message: {
         text: '',
         open: false,
@@ -291,22 +296,24 @@ export default {
     submitContact() {
       this.$refs.observer
         .validate()
-        .then((response) => {
+        .then(async (response) => {
+          this.stateBtn = false
           if (response) {
-            const json = {
-              nombre: this.nombre,
-              correo: this.email,
-              celular: this.numberphone,
-              comentario: this.comment,
-              tienda: this.dataStore.tienda.id_tienda,
-            }
-            axios
-              .post(
-                `${this.$store.state.urlKomercia}/api/mensaje-contacto`,
-                json
-              )
-              .then(() => {
+            try {
+              const { data } = await axios({
+                method: 'POST',
+                url: `  ${this.$store.state.urlKomerciaV3}/api/contact/message`,
+                data: {
+                  nombre: this.nombre,
+                  correo: this.email,
+                  celular: this.numberphone,
+                  comentario: this.comment,
+                  tienda: this.dataStore.tienda.id_tienda,
+                },
+              })
+              if (data && data.estado == 200) {
                 this.$message.success('Comentario enviado!')
+                this.stateBtn = true
                 if (
                   this.facebookPixel &&
                   this.facebookPixel.pixel_facebook != null
@@ -316,10 +323,14 @@ export default {
                     description: this.email,
                   })
                 }
-              })
+              }
+            } catch (err) {
+              this.$message.error(err.response)
+            }
           }
         })
         .catch((e) => {
+          this.stateBtn = true
           this.$message.error('error')
         })
     },
