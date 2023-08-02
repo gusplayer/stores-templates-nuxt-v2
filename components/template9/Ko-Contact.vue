@@ -223,7 +223,7 @@
                       :class="
                         !stateBtn ? ' cursor-not-allowed' : 'cursor-pointer'
                       "
-                      :disabled="stateBtn ? true : false"
+                      :disabled="stateBtn ? false : true"
                       @click="submitContact"
                     >
                       {{ $t('contact_enviar') }}
@@ -335,8 +335,11 @@ export default {
                   tienda: this.dataStore.tienda.id_tienda,
                 },
               })
-              if (data && data.estado == 200) {
-                this.$message.success('Comentario enviado!')
+              if (data.status == 200) {
+                this.$message.success({
+                  offset: 150,
+                  message: 'Comentario enviado!',
+                })
                 this.stateBtn = true
                 if (
                   this.facebookPixel &&
@@ -347,16 +350,30 @@ export default {
                     description: this.email,
                   })
                 }
+                this.deleteInputs()
               }
             } catch (err) {
-              this.$message.error(err.response)
+              this.stateBtn = true
+              this.$message.success({
+                offset: 150,
+                message: err.response,
+              })
             }
           }
         })
         .catch((e) => {
           this.stateBtn = true
-          this.$message.error('error')
+          this.$message.success({
+            offset: 150,
+            message: 'error',
+          })
         })
+    },
+    deleteInputs() {
+      this.nombre = ''
+      this.email = ''
+      this.numberphone = ''
+      this.comment = ''
     },
   },
   watch: {

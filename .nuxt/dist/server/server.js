@@ -4718,38 +4718,40 @@ var locale_default = /*#__PURE__*/__webpack_require__.n(locale_);
 
 
 
-external_vue_default.a.use(external_element_ui_["Pagination"]);
-external_vue_default.a.use(external_element_ui_["Dialog"]);
-external_vue_default.a.use(external_element_ui_["Drawer"]);
-external_vue_default.a.use(external_element_ui_["Input"]);
-external_vue_default.a.use(external_element_ui_["Carousel"]);
-external_vue_default.a.use(external_element_ui_["CarouselItem"]);
-external_vue_default.a.use(external_element_ui_["Dropdown"]);
-external_vue_default.a.use(external_element_ui_["DropdownMenu"]);
-external_vue_default.a.use(external_element_ui_["DropdownItem"]);
-external_vue_default.a.use(external_element_ui_["Loading"].directive);
-external_vue_default.a.prototype.$message = external_element_ui_["Message"];
-locale_default.a.use(es_default.a);
-external_vue_default.a.use(external_element_ui_["Tag"]);
-external_vue_default.a.use(external_element_ui_["Collapse"]);
-external_vue_default.a.use(external_element_ui_["CollapseItem"]);
-external_vue_default.a.use(external_element_ui_["Skeleton"]);
-external_vue_default.a.use(external_element_ui_["SkeletonItem"]);
-external_vue_default.a.use(external_element_ui_["Tabs"]);
-external_vue_default.a.use(external_element_ui_["TabPane"]);
-// Vue.use(Checkbox)
-// Vue.use(CheckboxButton)
-// Vue.use(CheckboxGroup)
-// Vue.use(Select)
-// Vue.use(Option)
-// Vue.use(Button)
-// Vue.use(Tooltip)
-// Vue.use(Alert)
-// Vue.use(Row)
-// Vue.use(Col)
-// Vue.use(ColorPicker)
-// Vue.use(Steps)
-// Vue.use(Step)
+/* harmony default export */ var plugins_element = (() => {
+  external_vue_default.a.use(external_element_ui_["Pagination"]);
+  external_vue_default.a.use(external_element_ui_["Dialog"]);
+  external_vue_default.a.use(external_element_ui_["Drawer"]);
+  external_vue_default.a.use(external_element_ui_["Input"]);
+  external_vue_default.a.use(external_element_ui_["Carousel"]);
+  external_vue_default.a.use(external_element_ui_["CarouselItem"]);
+  external_vue_default.a.use(external_element_ui_["Dropdown"]);
+  external_vue_default.a.use(external_element_ui_["DropdownMenu"]);
+  external_vue_default.a.use(external_element_ui_["DropdownItem"]);
+  locale_default.a.use(es_default.a);
+  external_vue_default.a.use(external_element_ui_["Tag"]);
+  external_vue_default.a.use(external_element_ui_["Collapse"]);
+  external_vue_default.a.use(external_element_ui_["CollapseItem"]);
+  external_vue_default.a.use(external_element_ui_["Skeleton"]);
+  external_vue_default.a.use(external_element_ui_["SkeletonItem"]);
+  external_vue_default.a.use(external_element_ui_["Tabs"]);
+  external_vue_default.a.use(external_element_ui_["TabPane"]);
+  external_vue_default.a.use(external_element_ui_["Loading"].directive);
+  external_vue_default.a.prototype.$message = external_element_ui_["Message"];
+  // Vue.use(Checkbox)
+  // Vue.use(CheckboxButton)
+  // Vue.use(CheckboxGroup)
+  // Vue.use(Select)
+  // Vue.use(Option)
+  // Vue.use(Button)
+  // Vue.use(Tooltip)
+  // Vue.use(Alert)
+  // Vue.use(Row)
+  // Vue.use(Col)
+  // Vue.use(ColorPicker)
+  // Vue.use(Steps)
+  // Vue.use(Step)
+});
 // CONCATENATED MODULE: ./plugins/mixinCommonMethods.js
 
 external_vue_default.a.mixin({
@@ -9433,8 +9435,8 @@ async function createApp(ssrContext, config = {}) {
   if (typeof /* Cannot get final name for export "default" in "./plugins/jsonld.js" (known exports: , known reexports: ) */ undefined === 'function') {
     await /* Cannot get final name for export "default" in "./plugins/jsonld.js" (known exports: , known reexports: ) */ undefined(app.context, inject);
   }
-  if (typeof /* Cannot get final name for export "default" in "./plugins/element.js" (known exports: , known reexports: ) */ undefined === 'function') {
-    await /* Cannot get final name for export "default" in "./plugins/element.js" (known exports: , known reexports: ) */ undefined(app.context, inject);
+  if (typeof plugins_element === 'function') {
+    await plugins_element(app.context, inject);
   }
   if (typeof /* Cannot get final name for export "default" in "./plugins/mixinCommonMethods.js" (known exports: , known reexports: ) */ undefined === 'function') {
     await /* Cannot get final name for export "default" in "./plugins/mixinCommonMethods.js" (known exports: , known reexports: ) */ undefined(app.context, inject);
