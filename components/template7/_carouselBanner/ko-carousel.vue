@@ -1,51 +1,58 @@
 <template>
-  <div class="carousel-content" :style="settingKCarousel">
-    <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full">
-      <div class="swiper-wrapper z-auto w-full">
-        <div
-          class="swiper-slide img-bg w-full"
+  <div class="w-full justify-center items-center" :style="settingKCarousel">
+    <div
+      ref="mySwiper"
+      v-swiper:mySwiper="swiperOption"
+      class="w-full justify-center items-center wrapper-banner"
+    >
+      <div class="z-auto swiper-wrapper">
+        <a
           :id="`slide${index + 1}`"
           v-for="(banner, index) in this.settingKCarousel.values"
           :key="index"
+          :href="`${banner && banner.url_redirect ? banner.url_redirect : ''}`"
+          rel="noreferrer noopener"
+          class="swiper-slide w-full flex justify-center items-center z-10"
+          :class="banner && banner.url_redirect ? 'cursor-pointer' : ''"
         >
-          <a
-            :href="`${
-              banner && banner.url_redirect ? banner.url_redirect : ''
-            }`"
-            rel="noreferrer noopener"
-            class="w-full"
-            :class="banner && banner.url_redirect ? 'cursor-pointer' : ''"
-          >
+          <picture>
+            <source
+              media="(max-width: 799px)"
+              :srcset="
+                idCloudinaryBanner(
+                  settingKCarousel.values[index].url_img_movil,
+                  'bannerRes',
+                  800
+                )
+              "
+            />
+            <source
+              media="(min-width: 800px)"
+              :srcset="
+                idCloudinaryBanner(
+                  settingKCarousel.values[index].url_img_background,
+                  'banner'
+                )
+              "
+            />
             <img
-              class="banner"
               :src="
                 idCloudinaryBanner(
                   settingKCarousel.values[index].url_img_background,
                   'banner'
                 )
               "
-              alt="bg"
-              v-if="settingKCarousel.values[index].url_img_background"
+              alt="banner template7"
+              class="w-full object-cover"
             />
-            <img
-              class="banner-responsive"
-              :src="
-                idCloudinaryBanner(
-                  settingKCarousel.values[index].url_img_movil,
-                  'banner'
-                )
-              "
-              alt="bg"
-              v-if="settingKCarousel.values[index].url_img_movil"
-            />
-            <KObanner
-              class="absolute top-0"
-              :banner="banner"
-              :settingKCarousel="settingKCarousel"
-              :settingGeneral="settingGeneral"
-            />
-          </a>
-        </div>
+          </picture>
+          <KObanner
+            class="absolute top-0"
+            :banner="banner"
+            :settingKCarousel="settingKCarousel"
+            :settingGeneral="settingGeneral"
+          />
+        </a>
       </div>
       <div class="swiper-pagination" />
     </div>
@@ -65,15 +72,12 @@ export default {
     settingKCarousel: Object,
     settingGeneral: Object,
   },
-  mounted() {
-    this.autoplayBanner()
-  },
   data() {
     return {
       swiperOption: {
         autoHeight: true,
-        // effect: 'fade',
-        // slidesPerView: 'auto',
+        effect: 'fade',
+        slidesPerView: 'auto',
         loop: true,
         pagination: {
           el: '.swiper-pagination',
@@ -95,91 +99,14 @@ export default {
       return this.$refs.mySwiper.swiper
     },
   },
-  methods: {
-    autoplayBanner() {
-      if (this.settingKCarousel && this.settingKCarousel.values.length == 1) {
-        this.swiperOption.autoplay.delay = 900000000000000000
-      } else {
-        this.swiperOption.autoplay.delay = 6000
-      }
-    },
-  },
-  watch: {
-    'settingKCarousel.values'() {
-      this.autoplayBanner()
-    },
-  },
 }
 </script>
 <style scoped>
-.carousel-content,
-.swiper-slide {
-  @apply w-full flex justify-center items-center z-auto;
-}
-#slide1 {
-  @apply bg-no-repeat bg-center bg-cover;
-}
-#slide2 {
-  @apply bg-no-repeat bg-center bg-cover;
-}
-#slide3 {
-  @apply bg-no-repeat bg-center bg-cover;
-}
-.swiper-pagination {
-  @apply flex justify-center items-center h-12;
-}
-.swiper-pagination-bullets {
-  @apply flex h-12;
-}
-.swiper-pagination-bullet-custom {
-  @apply bg-black;
-}
-.swiper-slide:hover .swiper-button-prev {
-  @apply transform -translate-x-2 border;
-}
-.swiper-wrapper:hover .swiper-button-next {
-  @apply transform translate-x-2;
-}
-.swiper-button-prev {
-  @apply transition-all ease-in duration-200 transform -translate-x-16;
-  left: 2%;
-}
-.swiper-button-next {
-  @apply transition-all ease-in duration-200 transform translate-x-16;
-  right: 2%;
-}
-.swiper-pagination >>> .swiper-pagination-bullet {
-  background-color: grey;
-}
-.swiper-pagination >>> .swiper-pagination-bullet-active {
-  background-color: var(--pagination_color);
-}
-.img-bg {
+picture {
   width: 100%;
-  object-fit: cover;
-  object-position: center;
-  box-sizing: content-box;
-  position: relative;
 }
-.banner {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.banner-responsive {
-  display: none;
-}
-@media (max-width: 950px) {
-  .banner {
-    display: none;
-  }
-  .banner-responsive {
-    display: initial;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
+.wrapper-banner >>> .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: black;
 }
 </style>

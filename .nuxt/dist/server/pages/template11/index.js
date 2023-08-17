@@ -1,14 +1,14 @@
 exports.ids = [4];
 exports.modules = {
 
-/***/ 998:
+/***/ 1023:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=template&id=5fcaa2b4&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=template&id=f004e716&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -51,7 +51,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template11/index.vue?vue&type=template&id=5fcaa2b4&
+// CONCATENATED MODULE: ./pages/template11/index.vue?vue&type=template&id=f004e716&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -62,14 +62,14 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template11',
   components: {
-    KCarousel: () => __webpack_require__.e(/* import() */ 102).then(__webpack_require__.bind(null, 982)),
-    KSection: () => __webpack_require__.e(/* import() */ 148).then(__webpack_require__.bind(null, 1051)),
-    KTrending: () => __webpack_require__.e(/* import() */ 87).then(__webpack_require__.bind(null, 1052)),
-    KTrendingHoko: () => __webpack_require__.e(/* import() */ 95).then(__webpack_require__.bind(null, 1053)),
-    KParallax: () => __webpack_require__.e(/* import() */ 147).then(__webpack_require__.bind(null, 1054)),
-    KListTrending: () => __webpack_require__.e(/* import() */ 86).then(__webpack_require__.bind(null, 1055)),
-    KInformation: () => __webpack_require__.e(/* import() */ 145).then(__webpack_require__.bind(null, 1056)),
-    KBlog: () => __webpack_require__.e(/* import() */ 93).then(__webpack_require__.bind(null, 1057))
+    KCarousel: () => __webpack_require__.e(/* import() */ 102).then(__webpack_require__.bind(null, 1007)),
+    KSection: () => __webpack_require__.e(/* import() */ 150).then(__webpack_require__.bind(null, 1077)),
+    KTrending: () => __webpack_require__.e(/* import() */ 87).then(__webpack_require__.bind(null, 1078)),
+    KTrendingHoko: () => __webpack_require__.e(/* import() */ 95).then(__webpack_require__.bind(null, 1079)),
+    KParallax: () => __webpack_require__.e(/* import() */ 149).then(__webpack_require__.bind(null, 1080)),
+    KListTrending: () => __webpack_require__.e(/* import() */ 86).then(__webpack_require__.bind(null, 1081)),
+    KInformation: () => __webpack_require__.e(/* import() */ 147).then(__webpack_require__.bind(null, 1082)),
+    KBlog: () => __webpack_require__.e(/* import() */ 93).then(__webpack_require__.bind(null, 1083))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -113,7 +113,6 @@ var external_vuex_ = __webpack_require__(7);
     addEventListenerTemplate(e) {
       if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
         if (e && e.data && e.data.component && e.data.template == 11) {
-          console.log(e.data);
           this.$store.commit('SET_CURRENTSETTING11', e.data);
           if (e.data.component == 'banner') {
             this.bannerRendering += 1;

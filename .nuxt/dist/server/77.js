@@ -1,13 +1,232 @@
 exports.ids = [77];
 exports.modules = {
 
+/***/ 1008:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductFavoritosHoko.vue?vue&type=template&id=8a8d595c&scoped=true&
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _vm.producthoko && _vm.producthoko.total > 0 ? _c('div', {
+    staticClass: "wrapper-ProductFavoritos"
+  }, [_vm._ssrNode("<div class=\"content-title-ProductFavoritos\" data-v-8a8d595c><p class=\"title-ProductFavoritos\" data-v-8a8d595c>" + _vm._ssrEscape(_vm._s(_vm.$t('home_productos_hoko'))) + "</p></div> "), _c('KoSwipper', {
+    attrs: {
+      "products": _vm.producthoko
+    }
+  })], 2) : _vm._e();
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/template5/Ko-ProductFavoritosHoko.vue?vue&type=template&id=8a8d595c&scoped=true&
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productofavorito/productSlideHoko.vue?vue&type=template&id=1dae1175&scoped=true&
+var productSlideHokovue_type_template_id_1dae1175_scoped_true_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    directives: [{
+      name: "swiper",
+      rawName: "v-swiper:mySwiper",
+      value: _vm.swiperOption,
+      expression: "swiperOption",
+      arg: "mySwiper"
+    }],
+    ref: "mySwiper",
+    staticStyle: {
+      "position": "relative"
+    }
+  }, [_vm._ssrNode("<div class=\"swiper-wrapper\" data-v-1dae1175>", "</div>", _vm._l(this.products.data, function (product, index) {
+    return _vm._ssrNode("<div class=\"swiper-slide\" data-v-1dae1175>", "</div>", [_c('client-only', [_c('KoProductCard1', {
+      attrs: {
+        "product": product
+      }
+    })], 1)], 1);
+  }), 0), _vm._ssrNode(" "), this.products.total > 1 ? _vm._ssrNode("<div class=\"prev btnPrev\" data-v-1dae1175>", "</div>", [_c('FlechaLeft-icon', {
+    staticClass: "btn-icon"
+  })], 1) : _vm._e(), _vm._ssrNode(" "), this.products.total > 1 ? _vm._ssrNode("<div class=\"next btnNext\" data-v-1dae1175>", "</div>", [_c('FlechaRight-icon', {
+    staticClass: "btn-icon"
+  })], 1) : _vm._e(), _vm._ssrNode(" "), _c('nuxt-link', {
+    staticClass: "w-full flex justify-center",
+    attrs: {
+      "to": "/productosHoko"
+    }
+  }, [_c('button', {
+    staticClass: "btn-products"
+  }, [_vm._v("\n      " + _vm._s(_vm.$t('home_allproducts')) + "\n    ")])])], 2);
+};
+var productSlideHokovue_type_template_id_1dae1175_scoped_true_staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/template5/_productofavorito/productSlideHoko.vue?vue&type=template&id=1dae1175&scoped=true&
+
+// EXTERNAL MODULE: ./components/template5/_productcard/Ko-ProductCardHoko-1.vue + 4 modules
+var Ko_ProductCardHoko_1 = __webpack_require__(263);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productofavorito/productSlideHoko.vue?vue&type=script&lang=js&
+
+/* harmony default export */ var productSlideHokovue_type_script_lang_js_ = ({
+  name: 'productSlide-productFavorito',
+  components: {
+    KoProductCard1: Ko_ProductCardHoko_1["a" /* default */]
+  },
+  props: {
+    products: {}
+  },
+  data() {
+    return {
+      swiperOption: {
+        direction: 'horizontal',
+        pagination: {
+          el: '.swiper-pagination'
+        },
+        setWrapperSize: true,
+        paginationClickable: true,
+        slidesPerView: 4,
+        spaceBetween: 22,
+        grabCursor: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
+        breakpoints: {
+          1250: {
+            slidesPerView: 3,
+            spaceBetween: 35
+          },
+          1060: {
+            slidesPerView: 3,
+            spaceBetween: 50
+          },
+          1000: {
+            slidesPerView: 3,
+            spaceBetween: 20
+          },
+          990: {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          790: {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          770: {
+            slidesPerView: 2,
+            spaceBetween: 15
+          },
+          375: {
+            slidesPerView: 1,
+            spaceBetween: 20
+          },
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10
+          }
+        },
+        navigation: {
+          nextEl: '.next',
+          prevEl: '.prev'
+        }
+      }
+    };
+  },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    }
+  },
+  methods: {
+    changeSlide() {
+      this.swiper.slidePrev(700, false);
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/template5/_productofavorito/productSlideHoko.vue?vue&type=script&lang=js&
+ /* harmony default export */ var _productofavorito_productSlideHokovue_type_script_lang_js_ = (productSlideHokovue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./components/template5/_productofavorito/productSlideHoko.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(790)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  _productofavorito_productSlideHokovue_type_script_lang_js_,
+  productSlideHokovue_type_template_id_1dae1175_scoped_true_render,
+  productSlideHokovue_type_template_id_1dae1175_scoped_true_staticRenderFns,
+  false,
+  injectStyles,
+  "1dae1175",
+  "581495cd"
+  
+)
+
+/* harmony default export */ var productSlideHoko = (component.exports);
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductFavoritosHoko.vue?vue&type=script&lang=js&
+
+/* harmony default export */ var Ko_ProductFavoritosHokovue_type_script_lang_js_ = ({
+  name: 'Ko-ProductFavoritos-1',
+  created() {
+    this.$store.dispatch('GET_PRODUCTSHOKO', 1);
+  },
+  components: {
+    KoSwipper: productSlideHoko
+  },
+  computed: {
+    producthoko() {
+      return this.$store.state.producthoko;
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/template5/Ko-ProductFavoritosHoko.vue?vue&type=script&lang=js&
+ /* harmony default export */ var template5_Ko_ProductFavoritosHokovue_type_script_lang_js_ = (Ko_ProductFavoritosHokovue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./components/template5/Ko-ProductFavoritosHoko.vue
+
+
+
+function Ko_ProductFavoritosHoko_injectStyles (context) {
+  
+  var style0 = __webpack_require__(792)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var Ko_ProductFavoritosHoko_component = Object(componentNormalizer["a" /* default */])(
+  template5_Ko_ProductFavoritosHokovue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  Ko_ProductFavoritosHoko_injectStyles,
+  "8a8d595c",
+  "ecd7d34e"
+  
+)
+
+/* harmony default export */ var Ko_ProductFavoritosHoko = __webpack_exports__["default"] = (Ko_ProductFavoritosHoko_component.exports);
+
+/***/ }),
+
 /***/ 214:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(249);
+var content = __webpack_require__(250);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -19,7 +238,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 248:
+/***/ 249:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31,7 +250,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 249:
+/***/ 250:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -46,7 +265,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 260:
+/***/ 263:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -170,7 +389,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(248)
+  var style0 = __webpack_require__(249)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -192,13 +411,13 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 404:
+/***/ 408:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(779);
+var content = __webpack_require__(791);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -210,13 +429,13 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 405:
+/***/ 409:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(781);
+var content = __webpack_require__(793);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -228,19 +447,19 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 778:
+/***/ 790:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlideHoko_vue_vue_type_style_index_0_id_1dae1175_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(404);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlideHoko_vue_vue_type_style_index_0_id_1dae1175_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(408);
 /* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlideHoko_vue_vue_type_style_index_0_id_1dae1175_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlideHoko_vue_vue_type_style_index_0_id_1dae1175_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlideHoko_vue_vue_type_style_index_0_id_1dae1175_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_productSlideHoko_vue_vue_type_style_index_0_id_1dae1175_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 779:
+/***/ 791:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -255,19 +474,19 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 780:
+/***/ 792:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritosHoko_vue_vue_type_style_index_0_id_8a8d595c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(405);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritosHoko_vue_vue_type_style_index_0_id_8a8d595c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(409);
 /* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritosHoko_vue_vue_type_style_index_0_id_8a8d595c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritosHoko_vue_vue_type_style_index_0_id_8a8d595c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritosHoko_vue_vue_type_style_index_0_id_8a8d595c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_ProductFavoritosHoko_vue_vue_type_style_index_0_id_8a8d595c_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 781:
+/***/ 793:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -279,225 +498,6 @@ ___CSS_LOADER_EXPORT___.push([module.i, ".wrapper-ProductFavoritos[data-v-8a8d59
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
 
-
-/***/ }),
-
-/***/ 983:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductFavoritosHoko.vue?vue&type=template&id=8a8d595c&scoped=true&
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _vm.producthoko && _vm.producthoko.total > 0 ? _c('div', {
-    staticClass: "wrapper-ProductFavoritos"
-  }, [_vm._ssrNode("<div class=\"content-title-ProductFavoritos\" data-v-8a8d595c><p class=\"title-ProductFavoritos\" data-v-8a8d595c>" + _vm._ssrEscape(_vm._s(_vm.$t('home_productos_hoko'))) + "</p></div> "), _c('KoSwipper', {
-    attrs: {
-      "products": _vm.producthoko
-    }
-  })], 2) : _vm._e();
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/template5/Ko-ProductFavoritosHoko.vue?vue&type=template&id=8a8d595c&scoped=true&
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productofavorito/productSlideHoko.vue?vue&type=template&id=1dae1175&scoped=true&
-var productSlideHokovue_type_template_id_1dae1175_scoped_true_render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', {
-    directives: [{
-      name: "swiper",
-      rawName: "v-swiper:mySwiper",
-      value: _vm.swiperOption,
-      expression: "swiperOption",
-      arg: "mySwiper"
-    }],
-    ref: "mySwiper",
-    staticStyle: {
-      "position": "relative"
-    }
-  }, [_vm._ssrNode("<div class=\"swiper-wrapper\" data-v-1dae1175>", "</div>", _vm._l(this.products.data, function (product, index) {
-    return _vm._ssrNode("<div class=\"swiper-slide\" data-v-1dae1175>", "</div>", [_c('client-only', [_c('KoProductCard1', {
-      attrs: {
-        "product": product
-      }
-    })], 1)], 1);
-  }), 0), _vm._ssrNode(" "), this.products.total > 1 ? _vm._ssrNode("<div class=\"prev btnPrev\" data-v-1dae1175>", "</div>", [_c('FlechaLeft-icon', {
-    staticClass: "btn-icon"
-  })], 1) : _vm._e(), _vm._ssrNode(" "), this.products.total > 1 ? _vm._ssrNode("<div class=\"next btnNext\" data-v-1dae1175>", "</div>", [_c('FlechaRight-icon', {
-    staticClass: "btn-icon"
-  })], 1) : _vm._e(), _vm._ssrNode(" "), _c('nuxt-link', {
-    staticClass: "w-full flex justify-center",
-    attrs: {
-      "to": "/productosHoko"
-    }
-  }, [_c('button', {
-    staticClass: "btn-products"
-  }, [_vm._v("\n      " + _vm._s(_vm.$t('home_allproducts')) + "\n    ")])])], 2);
-};
-var productSlideHokovue_type_template_id_1dae1175_scoped_true_staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/template5/_productofavorito/productSlideHoko.vue?vue&type=template&id=1dae1175&scoped=true&
-
-// EXTERNAL MODULE: ./components/template5/_productcard/Ko-ProductCardHoko-1.vue + 4 modules
-var Ko_ProductCardHoko_1 = __webpack_require__(260);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/_productofavorito/productSlideHoko.vue?vue&type=script&lang=js&
-
-/* harmony default export */ var productSlideHokovue_type_script_lang_js_ = ({
-  name: 'productSlide-productFavorito',
-  components: {
-    KoProductCard1: Ko_ProductCardHoko_1["a" /* default */]
-  },
-  props: {
-    products: {}
-  },
-  data() {
-    return {
-      swiperOption: {
-        direction: 'horizontal',
-        pagination: {
-          el: '.swiper-pagination'
-        },
-        setWrapperSize: true,
-        paginationClickable: true,
-        slidesPerView: 4,
-        spaceBetween: 22,
-        grabCursor: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false
-        },
-        breakpoints: {
-          1250: {
-            slidesPerView: 3,
-            spaceBetween: 35
-          },
-          1060: {
-            slidesPerView: 3,
-            spaceBetween: 50
-          },
-          1000: {
-            slidesPerView: 3,
-            spaceBetween: 20
-          },
-          990: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
-          790: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
-          770: {
-            slidesPerView: 2,
-            spaceBetween: 15
-          },
-          375: {
-            slidesPerView: 1,
-            spaceBetween: 20
-          },
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 10
-          }
-        },
-        navigation: {
-          nextEl: '.next',
-          prevEl: '.prev'
-        }
-      }
-    };
-  },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
-  },
-  methods: {
-    changeSlide() {
-      this.swiper.slidePrev(700, false);
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/template5/_productofavorito/productSlideHoko.vue?vue&type=script&lang=js&
- /* harmony default export */ var _productofavorito_productSlideHokovue_type_script_lang_js_ = (productSlideHokovue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./components/template5/_productofavorito/productSlideHoko.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(778)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  _productofavorito_productSlideHokovue_type_script_lang_js_,
-  productSlideHokovue_type_template_id_1dae1175_scoped_true_render,
-  productSlideHokovue_type_template_id_1dae1175_scoped_true_staticRenderFns,
-  false,
-  injectStyles,
-  "1dae1175",
-  "581495cd"
-  
-)
-
-/* harmony default export */ var productSlideHoko = (component.exports);
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./components/template5/Ko-ProductFavoritosHoko.vue?vue&type=script&lang=js&
-
-/* harmony default export */ var Ko_ProductFavoritosHokovue_type_script_lang_js_ = ({
-  name: 'Ko-ProductFavoritos-1',
-  created() {
-    this.$store.dispatch('GET_PRODUCTSHOKO', 1);
-  },
-  components: {
-    KoSwipper: productSlideHoko
-  },
-  computed: {
-    producthoko() {
-      return this.$store.state.producthoko;
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/template5/Ko-ProductFavoritosHoko.vue?vue&type=script&lang=js&
- /* harmony default export */ var template5_Ko_ProductFavoritosHokovue_type_script_lang_js_ = (Ko_ProductFavoritosHokovue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./components/template5/Ko-ProductFavoritosHoko.vue
-
-
-
-function Ko_ProductFavoritosHoko_injectStyles (context) {
-  
-  var style0 = __webpack_require__(780)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var Ko_ProductFavoritosHoko_component = Object(componentNormalizer["a" /* default */])(
-  template5_Ko_ProductFavoritosHokovue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  Ko_ProductFavoritosHoko_injectStyles,
-  "8a8d595c",
-  "ecd7d34e"
-  
-)
-
-/* harmony default export */ var Ko_ProductFavoritosHoko = __webpack_exports__["default"] = (Ko_ProductFavoritosHoko_component.exports);
 
 /***/ })
 

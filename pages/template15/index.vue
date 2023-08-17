@@ -4,7 +4,7 @@
     :style="[
       {
         '--font-style-1':
-          settingByTemplate15?.settingsGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate15?.settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -106,7 +106,7 @@ export default {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral: this.settingByTemplate15?.settingsGeneral ?? null,
+        settingGeneral: this.settingByTemplate15?.settingGeneral ?? null,
         banner: this.settingByTemplate15?.banner ?? null,
         categories: this.settingByTemplate15?.categories ?? null,
         content: this.settingByTemplate15?.content ?? null,
@@ -135,6 +135,7 @@ export default {
         e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 15) {
+          console.log(e.data.component)
           this.$store.commit('SET_CURRENTSETTING15', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1
@@ -164,6 +165,9 @@ export default {
             case 'informationLogos':
               this.moverseA('kInformationLogosX')
               break
+            case 'information2':
+              this.moverseA('kInformation2X')
+              break
             case 'listProductsOffers':
               this.moverseA('kListProductsOffersX')
               break
@@ -173,13 +177,19 @@ export default {
             case 'logos':
               this.moverseA('kLogosX')
               break
+            case 'cardProducts':
+              this.moverseA('kListProductsHomeX')
+              break
             case 'settingsGeneral':
               this.moverseA('kInformationX')
               break
             case 'header':
-              this.moverseA('kInformationX')
+              this.moverseA('kBannerX')
               break
             case 'footer':
+              this.moverseA('kLogosX')
+              break
+            case 'newsLetter':
               this.moverseA('kLogosX')
               break
             case 'detailsProducts':
@@ -197,6 +207,16 @@ export default {
             case 'contact':
               this.$router.push({
                 path: '/contacto',
+              })
+              break
+            case 'listBlogHome':
+              this.$router.push({
+                path: '/blog',
+              })
+              break
+            case 'cardBlog':
+              this.$router.push({
+                path: '/blog',
               })
               break
           }

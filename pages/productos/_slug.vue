@@ -19,6 +19,8 @@ export default {
       import('../../components/template13/Ko-ProductDetail-1.vue'),
     Ko14ProductDetail: () =>
       import('../../components/template14/Ko-ProductDetail-1.vue'),
+    Ko15ProductDetail: () =>
+      import('../../components/template15/Ko-ProductDetail-1.vue'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
@@ -36,6 +38,7 @@ export default {
         11: 'Ko11ProductDetail',
         13: 'Ko13ProductDetail',
         14: 'Ko14ProductDetail',
+        15: 'Ko15ProductDetail',
       },
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
@@ -44,6 +47,7 @@ export default {
         10: 'SET_CURRENTSETTING10',
         13: 'SET_CURRENTSETTING13',
         14: 'SET_CURRENTSETTING14',
+        15: 'SET_CURRENTSETTING15',
       },
     }
   },
@@ -58,6 +62,7 @@ export default {
       'settingByTemplate11',
       'settingByTemplate13',
       'settingByTemplate14',
+      'settingByTemplate15',
       'template',
     ]),
     fullProducts() {
@@ -111,6 +116,11 @@ export default {
         settingByTemplate14: this.createNestedSetting(
           this.settingByTemplate14,
           ['detailsProducts', 'cardProducts', 'settingsGeneral'],
+          null
+        ),
+        settingByTemplate15: this.createNestedSetting(
+          this.settingByTemplate15,
+          ['detailsProducts', 'cardProducts', 'settingGeneral'],
           null
         ),
       }

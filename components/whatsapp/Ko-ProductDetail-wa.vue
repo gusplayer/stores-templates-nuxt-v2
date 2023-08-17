@@ -77,11 +77,6 @@
               <div v-if="envio.titulo == 'Envío gratis'">
                 <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
               </div>
-              <div class="content_card-info">
-                <p class="card-info-1" v-if="spent">
-                  {{ $t('home_cardAgotado') }}
-                </p>
-              </div>
             </div>
 
             <div

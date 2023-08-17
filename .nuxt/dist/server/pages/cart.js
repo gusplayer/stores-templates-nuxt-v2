@@ -1,7 +1,7 @@
 exports.ids = [40];
 exports.modules = {
 
-/***/ 993:
+/***/ 1018:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27,7 +27,7 @@ var staticRenderFns = [];
   layout: 'default',
   name: 'ContentCart',
   components: {
-    KCart: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 1028))
+    KCart: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 1054))
   },
   computed: {
     dataStore() {

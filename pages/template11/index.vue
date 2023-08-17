@@ -142,7 +142,6 @@ export default {
         e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 11) {
-          console.log(e.data)
           this.$store.commit('SET_CURRENTSETTING11', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1

@@ -1,21 +1,21 @@
 exports.ids = [8];
 exports.modules = {
 
-/***/ 1002:
+/***/ 1027:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template15/index.vue?vue&type=template&id=30172ed0&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template15/index.vue?vue&type=template&id=43442186&scoped=true&
 var render = function render() {
   var _vm$settingByTemplate, _vm$settingByTemplate2, _vm$settingByTemplate3, _vm$settingByTemplate4, _vm$settingByTemplate5, _vm$settingByTemplate6, _vm$settingByTemplate7, _vm$settingByTemplate8, _vm$settingByTemplate9, _vm$settingByTemplate10, _vm$settingByTemplate11, _vm$settingByTemplate12, _vm$settingByTemplate13, _vm$settingByTemplate14, _vm$settingByTemplate15, _vm$settingByTemplate16, _vm$settingByTemplate17, _vm$settingByTemplate18, _vm$settingByTemplate19, _vm$settingByTemplate20, _vm$settingByTemplate21, _vm$settingByTemplate22, _vm$settingByTemplate23;
   var _vm = this,
     _c = _vm._self._c;
   return _vm.settingByTemplate15 ? _c('div', {
     style: [{
-      '--font-style-1': (_vm$settingByTemplate = (_vm$settingByTemplate2 = _vm.settingByTemplate15) === null || _vm$settingByTemplate2 === void 0 ? void 0 : (_vm$settingByTemplate3 = _vm$settingByTemplate2.settingsGeneral) === null || _vm$settingByTemplate3 === void 0 ? void 0 : _vm$settingByTemplate3.fount_1) !== null && _vm$settingByTemplate !== void 0 ? _vm$settingByTemplate : 'Poppins'
+      '--font-style-1': (_vm$settingByTemplate = (_vm$settingByTemplate2 = _vm.settingByTemplate15) === null || _vm$settingByTemplate2 === void 0 ? void 0 : (_vm$settingByTemplate3 = _vm$settingByTemplate2.settingGeneral) === null || _vm$settingByTemplate3 === void 0 ? void 0 : _vm$settingByTemplate3.fount_1) !== null && _vm$settingByTemplate !== void 0 ? _vm$settingByTemplate : 'Poppins'
     }]
   }, [(_vm$settingByTemplate4 = _vm.settingByTemplate15) !== null && _vm$settingByTemplate4 !== void 0 && (_vm$settingByTemplate5 = _vm$settingByTemplate4.banner) !== null && _vm$settingByTemplate5 !== void 0 && _vm$settingByTemplate5.visible ? _c('ko-banner', _vm._b({
     key: _vm.bannerRendering,
@@ -62,7 +62,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template15/index.vue?vue&type=template&id=30172ed0&scoped=true&
+// CONCATENATED MODULE: ./pages/template15/index.vue?vue&type=template&id=43442186&scoped=true&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -73,16 +73,16 @@ var external_vuex_ = __webpack_require__(7);
   layout: 'default',
   name: 'Ko-template15',
   components: {
-    koBanner: () => __webpack_require__.e(/* import() */ 173).then(__webpack_require__.bind(null, 1074)),
-    koCategories: () => __webpack_require__.e(/* import() */ 174).then(__webpack_require__.bind(null, 1075)),
-    koContent: () => __webpack_require__.e(/* import() */ 175).then(__webpack_require__.bind(null, 1076)),
-    koListProductsHome: () => __webpack_require__.e(/* import() */ 203).then(__webpack_require__.bind(null, 1077)),
-    koInformation: () => __webpack_require__.e(/* import() */ 201).then(__webpack_require__.bind(null, 1078)),
-    koInformationLogos: () => __webpack_require__.e(/* import() */ 176).then(__webpack_require__.bind(null, 1079)),
-    koInformation2: () => __webpack_require__.e(/* import() */ 202).then(__webpack_require__.bind(null, 1080)),
-    koListProductsOffers: () => __webpack_require__.e(/* import() */ 177).then(__webpack_require__.bind(null, 1081)),
-    koBanner2: () => __webpack_require__.e(/* import() */ 200).then(__webpack_require__.bind(null, 1082)),
-    koLogos: () => __webpack_require__.e(/* import() */ 178).then(__webpack_require__.bind(null, 1083))
+    koBanner: () => __webpack_require__.e(/* import() */ 182).then(__webpack_require__.bind(null, 1100)),
+    koCategories: () => __webpack_require__.e(/* import() */ 183).then(__webpack_require__.bind(null, 1101)),
+    koContent: () => __webpack_require__.e(/* import() */ 184).then(__webpack_require__.bind(null, 1102)),
+    koListProductsHome: () => __webpack_require__.e(/* import() */ 212).then(__webpack_require__.bind(null, 1103)),
+    koInformation: () => __webpack_require__.e(/* import() */ 210).then(__webpack_require__.bind(null, 1104)),
+    koInformationLogos: () => __webpack_require__.e(/* import() */ 185).then(__webpack_require__.bind(null, 1105)),
+    koInformation2: () => __webpack_require__.e(/* import() */ 211).then(__webpack_require__.bind(null, 1106)),
+    koListProductsOffers: () => __webpack_require__.e(/* import() */ 186).then(__webpack_require__.bind(null, 1107)),
+    koBanner2: () => __webpack_require__.e(/* import() */ 209).then(__webpack_require__.bind(null, 1108)),
+    koLogos: () => __webpack_require__.e(/* import() */ 187).then(__webpack_require__.bind(null, 1109))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -103,7 +103,7 @@ var external_vuex_ = __webpack_require__(7);
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral: (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate15) === null || _this$settingByTempla2 === void 0 ? void 0 : _this$settingByTempla2.settingsGeneral) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : null,
+        settingGeneral: (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate15) === null || _this$settingByTempla2 === void 0 ? void 0 : _this$settingByTempla2.settingGeneral) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : null,
         banner: (_this$settingByTempla3 = (_this$settingByTempla4 = this.settingByTemplate15) === null || _this$settingByTempla4 === void 0 ? void 0 : _this$settingByTempla4.banner) !== null && _this$settingByTempla3 !== void 0 ? _this$settingByTempla3 : null,
         categories: (_this$settingByTempla5 = (_this$settingByTempla6 = this.settingByTemplate15) === null || _this$settingByTempla6 === void 0 ? void 0 : _this$settingByTempla6.categories) !== null && _this$settingByTempla5 !== void 0 ? _this$settingByTempla5 : null,
         content: (_this$settingByTempla7 = (_this$settingByTempla8 = this.settingByTemplate15) === null || _this$settingByTempla8 === void 0 ? void 0 : _this$settingByTempla8.content) !== null && _this$settingByTempla7 !== void 0 ? _this$settingByTempla7 : null,
@@ -128,6 +128,7 @@ var external_vuex_ = __webpack_require__(7);
     addEventListenerTemplate(e) {
       if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
         if (e && e.data && e.data.component && e.data.template == 15) {
+          console.log(e.data.component);
           this.$store.commit('SET_CURRENTSETTING15', e.data);
           if (e.data.component == 'banner') {
             this.bannerRendering += 1;
@@ -152,6 +153,9 @@ var external_vuex_ = __webpack_require__(7);
             case 'informationLogos':
               this.moverseA('kInformationLogosX');
               break;
+            case 'information2':
+              this.moverseA('kInformation2X');
+              break;
             case 'listProductsOffers':
               this.moverseA('kListProductsOffersX');
               break;
@@ -161,13 +165,19 @@ var external_vuex_ = __webpack_require__(7);
             case 'logos':
               this.moverseA('kLogosX');
               break;
+            case 'cardProducts':
+              this.moverseA('kListProductsHomeX');
+              break;
             case 'settingsGeneral':
               this.moverseA('kInformationX');
               break;
             case 'header':
-              this.moverseA('kInformationX');
+              this.moverseA('kBannerX');
               break;
             case 'footer':
+              this.moverseA('kLogosX');
+              break;
+            case 'newsLetter':
               this.moverseA('kLogosX');
               break;
             case 'detailsProducts':
@@ -185,6 +195,16 @@ var external_vuex_ = __webpack_require__(7);
             case 'contact':
               this.$router.push({
                 path: '/contacto'
+              });
+              break;
+            case 'listBlogHome':
+              this.$router.push({
+                path: '/blog'
+              });
+              break;
+            case 'cardBlog':
+              this.$router.push({
+                path: '/blog'
               });
               break;
           }
@@ -213,7 +233,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(505)
+  var style0 = __webpack_require__(515)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -226,7 +246,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "30172ed0",
+  "43442186",
   "4d357e3a"
   
 )
@@ -235,44 +255,44 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 268:
+/***/ 271:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(506);
+var content = __webpack_require__(516);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(6).default
 module.exports.__inject__ = function (context) {
-  add("fb2c9ab0", content, true, context)
+  add("724c0922", content, true, context)
 };
 
 /***/ }),
 
-/***/ 505:
+/***/ 515:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_30172ed0_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(268);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_30172ed0_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_30172ed0_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_30172ed0_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_30172ed0_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_43442186_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(271);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_43442186_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_43442186_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_43442186_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_43442186_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 506:
+/***/ 516:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "*[data-v-30172ed0]{font-family:var(--font-style-1)!important}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "*[data-v-43442186]{font-family:var(--font-style-1)!important}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;

@@ -102,7 +102,7 @@ export default {
         settingByTemplate15: this.createSettingByTemplate(
           this.settingByTemplate15,
           'contact',
-          'settingsGeneral'
+          'settingGeneral'
         ),
       }
     },

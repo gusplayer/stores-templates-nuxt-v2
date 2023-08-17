@@ -27,7 +27,7 @@
               :src="idCloudinary(item.img, 550, 550)"
               alt="banner template15"
               class="w-full h-full object-cover"
-              :style="`border-radius: ${settingGeneral.radius};`"
+              :style="`border-radius: ${settingGeneral?.radius};`"
             />
             <div
               class="mt-10 text-center text-16 md:text-20 lg:text-22"

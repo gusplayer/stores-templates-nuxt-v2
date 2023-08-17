@@ -1,14 +1,14 @@
 exports.ids = [45];
 exports.modules = {
 
-/***/ 995:
+/***/ 1020:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/index.vue?vue&type=template&id=404bffe0&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/index.vue?vue&type=template&id=2a106e5a&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,7 +18,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/productos/index.vue?vue&type=template&id=404bffe0&
+// CONCATENATED MODULE: ./pages/productos/index.vue?vue&type=template&id=2a106e5a&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
@@ -27,14 +27,14 @@ var external_vuex_ = __webpack_require__(7);
 
 /* harmony default export */ var productosvue_type_script_lang_js_ = ({
   components: {
-    K05ProductList: () => __webpack_require__.e(/* import() */ 62).then(__webpack_require__.bind(null, 1037)),
-    K07ProductList: () => __webpack_require__.e(/* import() */ 68).then(__webpack_require__.bind(null, 978)),
-    K09ProductList: () => __webpack_require__.e(/* import() */ 64).then(__webpack_require__.bind(null, 1038)),
-    K10ProductList: () => __webpack_require__.e(/* import() */ 65).then(__webpack_require__.bind(null, 979)),
-    K11ProductList: () => __webpack_require__.e(/* import() */ 66).then(__webpack_require__.bind(null, 980)),
-    K13ProductList: () => __webpack_require__.e(/* import() */ 81).then(__webpack_require__.bind(null, 1039)),
-    K14ProductList: () => __webpack_require__.e(/* import() */ 120).then(__webpack_require__.bind(null, 1040)),
-    K15ProductList: () => __webpack_require__.e(/* import() */ 122).then(__webpack_require__.bind(null, 1041))
+    K05ProductList: () => __webpack_require__.e(/* import() */ 62).then(__webpack_require__.bind(null, 1063)),
+    K07ProductList: () => __webpack_require__.e(/* import() */ 68).then(__webpack_require__.bind(null, 1003)),
+    K09ProductList: () => __webpack_require__.e(/* import() */ 64).then(__webpack_require__.bind(null, 1064)),
+    K10ProductList: () => __webpack_require__.e(/* import() */ 65).then(__webpack_require__.bind(null, 1004)),
+    K11ProductList: () => __webpack_require__.e(/* import() */ 66).then(__webpack_require__.bind(null, 1005)),
+    K13ProductList: () => __webpack_require__.e(/* import() */ 81).then(__webpack_require__.bind(null, 1065)),
+    K14ProductList: () => __webpack_require__.e(/* import() */ 120).then(__webpack_require__.bind(null, 1066)),
+    K15ProductList: () => __webpack_require__.e(/* import() */ 123).then(__webpack_require__.bind(null, 1067))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -92,7 +92,7 @@ var external_vuex_ = __webpack_require__(7);
         settingByTemplate11: this.createNestedSetting(this.settingByTemplate11, ['productList', 'cardProduct', 'settingGeneral'], null),
         settingByTemplate13: this.createNestedSetting(this.settingByTemplate13, ['productListFilter', 'cardProduct', 'settingGeneral'], null),
         settingByTemplate14: this.createNestedSetting(this.settingByTemplate14, ['listProductsFilter', 'cardProducts', 'settingsGeneral'], null),
-        settingByTemplate15: this.createNestedSetting(this.settingByTemplate15, ['listProductsFilter', 'cardProducts', 'settingsGeneral'], null)
+        settingByTemplate15: this.createNestedSetting(this.settingByTemplate15, ['listProductsFilter', 'cardProducts', 'settingGeneral'], null)
       };
     }
   },

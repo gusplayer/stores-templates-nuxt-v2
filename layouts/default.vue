@@ -87,7 +87,7 @@ export default {
     KoHeader7: () => import('../components/headers/header7/Ko-Header-7'),
     KoHeader8: () => import('../components/headers/header8/Ko-Header-8'),
     KoHeader9: () => import('../components/headers/header9/Ko-Header-9'),
-    KoHeader10: () => import('../components/headers/Ko14_header/Ko-Header-10'),
+    KoHeader10: () => import('../components/headers/Ko15_header/Ko-Header-10'),
     // FOOTER
     KoFooter1: () => import('../components/footers/footer1/Ko-Footer-1'),
     KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2'),
@@ -97,7 +97,7 @@ export default {
     KoFooter7: () => import('../components/footers/footer7/Ko-Footer-7'),
     KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8'),
     KoFooter9: () => import('../components/footers/K14_footer9/Ko-Footer-9'),
-    KoFooter10: () => import('../components/footers/K14_footer10/Ko-Footer-10'),
+    KoFooter10: () => import('../components/footers/K15_footer10/Ko-Footer-10'),
     // OTROS
     KoFooterCountry: () =>
       import('../components/footers/footer1/Ko-Footer-Country'),
@@ -203,7 +203,7 @@ export default {
       case 15:
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         tipo_letra =
-          this.settingByTemplate15?.settingsGeneral?.fount_1 ?? 'Poppins'
+          this.settingByTemplate15?.settingGeneral?.fount_1 ?? 'Poppins'
         break
     }
     let tienda = this.$store.state?.dataStore?.tienda ?? ''
@@ -523,10 +523,10 @@ export default {
               {
                 header: this.settingByTemplate15?.header ?? null,
                 footer: this.settingByTemplate15?.footer ?? null,
-                newsletter: this.settingByTemplate15?.newsletter ?? null,
-                settingsGeneral:
-                  this.settingByTemplate15?.settingsGeneral ?? null,
-                pages: this.settingByTemplate15?.pages ?? null,
+                newsletter: this.settingByTemplate15?.newsLetter ?? null,
+                settingGeneral:
+                  this.settingByTemplate15?.settingGeneral ?? null,
+                pages: this.settingByTemplate15?.pageHeader ?? null,
                 // listProductsFilter:
                 //   this.settingByTemplate15?.listProductsFilter ?? null,
               },

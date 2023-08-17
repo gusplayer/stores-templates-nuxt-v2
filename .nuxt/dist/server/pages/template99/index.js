@@ -1,4 +1,4 @@
-exports.ids = [13,1,28,50,51,52,132];
+exports.ids = [13,1,28,50,51,52,134];
 exports.modules = {
 
 /***/ 100:
@@ -581,119 +581,6 @@ var Ko_ProductList_wa_component = Object(componentNormalizer["a" /* default */])
 )
 
 /* harmony default export */ var Ko_ProductList_wa = __webpack_exports__["a"] = (Ko_ProductList_wa_component.exports);
-
-/***/ }),
-
-/***/ 1007:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template99/index.vue?vue&type=template&id=09119562&scoped=true&
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', {
-    staticClass: "content-wa"
-  }, [_c(_vm.indexTemplate, {
-    tag: "component"
-  }), _vm._ssrNode(" "), _c('WCountry', {
-    attrs: {
-      "dataStore": _vm.dataStore
-    }
-  })], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./pages/template99/index.vue?vue&type=template&id=09119562&scoped=true&
-
-// EXTERNAL MODULE: ./pages/template99/templates/template1/index.vue + 9 modules
-var template1 = __webpack_require__(223);
-
-// EXTERNAL MODULE: ./pages/template99/templates/template2/index.vue + 9 modules
-var template2 = __webpack_require__(224);
-
-// EXTERNAL MODULE: ./pages/template99/templates/template3/index.vue + 9 modules
-var template3 = __webpack_require__(225);
-
-// EXTERNAL MODULE: ./components/footers/footer1/Ko-Footer-Country.vue + 9 modules
-var Ko_Footer_Country = __webpack_require__(226);
-
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/template99/index.vue?vue&type=script&lang=js&
-
-
-
-
-/* harmony default export */ var template99vue_type_script_lang_js_ = ({
-  name: 'templateWhatsApp',
-  layout: 'wa',
-  components: {
-    WaTemplate1: template1["default"],
-    WaTemplate2: template2["default"],
-    WaTemplate3: template3["default"],
-    WCountry: Ko_Footer_Country["default"]
-  },
-  computed: {
-    dataStore() {
-      return this.$store.state.dataStore;
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate;
-    },
-    indexTemplate() {
-      var _this$settingByTempla;
-      let componentTemplate = '';
-      if ((_this$settingByTempla = this.settingByTemplate) !== null && _this$settingByTempla !== void 0 && _this$settingByTempla.tema) {
-        switch (this.settingByTemplate.tema) {
-          case 1:
-            componentTemplate = 'WaTemplate1';
-            break;
-          case 2:
-            componentTemplate = 'WaTemplate2';
-            break;
-          case 3:
-            componentTemplate = 'WaTemplate3';
-            break;
-        }
-      } else {
-        return componentTemplate = 'WaTemplate1';
-      }
-      return componentTemplate;
-    }
-  }
-});
-// CONCATENATED MODULE: ./pages/template99/index.vue?vue&type=script&lang=js&
- /* harmony default export */ var pages_template99vue_type_script_lang_js_ = (template99vue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./pages/template99/index.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(527)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  pages_template99vue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "09119562",
-  "43551794"
-  
-)
-
-/* harmony default export */ var template99 = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -1718,6 +1605,119 @@ var component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var ko_slide_categorys = __webpack_exports__["a"] = (component.exports);
+
+/***/ }),
+
+/***/ 1032:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template99/index.vue?vue&type=template&id=09119562&scoped=true&
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "content-wa"
+  }, [_c(_vm.indexTemplate, {
+    tag: "component"
+  }), _vm._ssrNode(" "), _c('WCountry', {
+    attrs: {
+      "dataStore": _vm.dataStore
+    }
+  })], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./pages/template99/index.vue?vue&type=template&id=09119562&scoped=true&
+
+// EXTERNAL MODULE: ./pages/template99/templates/template1/index.vue + 9 modules
+var template1 = __webpack_require__(224);
+
+// EXTERNAL MODULE: ./pages/template99/templates/template2/index.vue + 9 modules
+var template2 = __webpack_require__(225);
+
+// EXTERNAL MODULE: ./pages/template99/templates/template3/index.vue + 9 modules
+var template3 = __webpack_require__(226);
+
+// EXTERNAL MODULE: ./components/footers/footer1/Ko-Footer-Country.vue + 9 modules
+var Ko_Footer_Country = __webpack_require__(227);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/template99/index.vue?vue&type=script&lang=js&
+
+
+
+
+/* harmony default export */ var template99vue_type_script_lang_js_ = ({
+  name: 'templateWhatsApp',
+  layout: 'wa',
+  components: {
+    WaTemplate1: template1["default"],
+    WaTemplate2: template2["default"],
+    WaTemplate3: template3["default"],
+    WCountry: Ko_Footer_Country["default"]
+  },
+  computed: {
+    dataStore() {
+      return this.$store.state.dataStore;
+    },
+    settingByTemplate() {
+      return this.$store.state.settingByTemplate;
+    },
+    indexTemplate() {
+      var _this$settingByTempla;
+      let componentTemplate = '';
+      if ((_this$settingByTempla = this.settingByTemplate) !== null && _this$settingByTempla !== void 0 && _this$settingByTempla.tema) {
+        switch (this.settingByTemplate.tema) {
+          case 1:
+            componentTemplate = 'WaTemplate1';
+            break;
+          case 2:
+            componentTemplate = 'WaTemplate2';
+            break;
+          case 3:
+            componentTemplate = 'WaTemplate3';
+            break;
+        }
+      } else {
+        return componentTemplate = 'WaTemplate1';
+      }
+      return componentTemplate;
+    }
+  }
+});
+// CONCATENATED MODULE: ./pages/template99/index.vue?vue&type=script&lang=js&
+ /* harmony default export */ var pages_template99vue_type_script_lang_js_ = (template99vue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./pages/template99/index.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(537)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  pages_template99vue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "09119562",
+  "43551794"
+  
+)
+
+/* harmony default export */ var template99 = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -3303,7 +3303,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 223:
+/***/ 224:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3727,7 +3727,7 @@ var template1_component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 224:
+/***/ 225:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4166,7 +4166,7 @@ var template2_component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 225:
+/***/ 226:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4609,7 +4609,7 @@ var template3_component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 226:
+/***/ 227:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4887,13 +4887,13 @@ var Ko_Footer_Country_component = Object(componentNormalizer["a" /* default */])
 
 /***/ }),
 
-/***/ 279:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(528);
+var content = __webpack_require__(538);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4905,19 +4905,19 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 527:
+/***/ 537:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_09119562_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(279);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_09119562_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(282);
 /* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_09119562_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_09119562_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_09119562_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_09119562_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 528:
+/***/ 538:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

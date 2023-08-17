@@ -20,7 +20,7 @@
           v-if="information.visible_btn"
           :href="information.url_redirect"
           class="px-20 py-5 md:py-8 mt-25 md:mt-20 lg:mt-40 mb-20 lg:mb-0 text-12 md:text-14 xl:text-16"
-          :style="`color: ${information.color_text_btn}; background-color: ${information.color_bg_btn}; border-radius: ${settingGeneral.radius};`"
+          :style="`color: ${information.color_text_btn}; background-color: ${information.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
         >
           {{ information.text_btn }}
         </a>

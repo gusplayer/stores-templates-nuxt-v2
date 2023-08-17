@@ -118,7 +118,7 @@ export default {
         ),
         settingByTemplate15: this.createNestedSetting(
           this.settingByTemplate15,
-          ['listProductsFilter', 'cardProducts', 'settingsGeneral'],
+          ['listProductsFilter', 'cardProducts', 'settingGeneral'],
           null
         ),
       }
