@@ -1,14 +1,14 @@
-exports.ids = [44];
+exports.ids = [163];
 exports.modules = {
 
-/***/ 1037:
+/***/ 1024:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/_slug.vue?vue&type=template&id=2760d9c9&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/_slug.vue?vue&type=template&id=39b10854&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,24 +18,27 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/productos/_slug.vue?vue&type=template&id=2760d9c9&
+// CONCATENATED MODULE: ./pages/productos/_slug.vue?vue&type=template&id=39b10854&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/_slug.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/_slug.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   components: {
-    Ko5ProductDetail: () => __webpack_require__.e(/* import() */ 60).then(__webpack_require__.bind(null, 979)),
-    Ko7ProductDetail: () => __webpack_require__.e(/* import() */ 125).then(__webpack_require__.bind(null, 1130)),
-    Ko9ProductDetail: () => __webpack_require__.e(/* import() */ 128).then(__webpack_require__.bind(null, 1131)),
-    Ko10ProductDetail: () => __webpack_require__.e(/* import() */ 109).then(__webpack_require__.bind(null, 1132)),
-    Ko11ProductDetail: () => __webpack_require__.e(/* import() */ 113).then(__webpack_require__.bind(null, 1133)),
-    Ko13ProductDetail: () => __webpack_require__.e(/* import() */ 116).then(__webpack_require__.bind(null, 1134)),
-    Ko14ProductDetail: () => __webpack_require__.e(/* import() */ 119).then(__webpack_require__.bind(null, 1135)),
-    Ko15ProductDetail: () => __webpack_require__.e(/* import() */ 122).then(__webpack_require__.bind(null, 1136))
+    Ko5ProductDetail: () => __webpack_require__.e(/* import() */ 19).then(__webpack_require__.bind(null, 1028)),
+    Ko7ProductDetail: () => __webpack_require__.e(/* import() */ 16).then(__webpack_require__.bind(null, 492)),
+    Ko9ProductDetail: () => __webpack_require__.e(/* import() */ 230).then(__webpack_require__.bind(null, 1164)),
+    Ko10ProductDetail: () => __webpack_require__.e(/* import() */ 216).then(__webpack_require__.bind(null, 1165)),
+    Ko11ProductDetail: () => __webpack_require__.e(/* import() */ 220).then(__webpack_require__.bind(null, 1166)),
+    Ko13ProductDetail: () => __webpack_require__.e(/* import() */ 221).then(__webpack_require__.bind(null, 1167)),
+    Ko14ProductDetail: () => __webpack_require__.e(/* import() */ 223).then(__webpack_require__.bind(null, 1168)),
+    Ko15ProductDetail: () => __webpack_require__.e(/* import() */ 226).then(__webpack_require__.bind(null, 1169))
+    // Ko16ProductDetail: () =>
+    // import('../../components/template16/Ko-ProductDetail-1.vue'),
   },
+
   mounted() {
     window.parent.postMessage('message', '*');
     window.addEventListener('message', this.addEventListenerTemplate);
@@ -53,7 +56,9 @@ var external_vuex_ = __webpack_require__(7);
         13: 'Ko13ProductDetail',
         14: 'Ko14ProductDetail',
         15: 'Ko15ProductDetail'
+        // 16: 'Ko16ProductDetail',
       },
+
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
         7: 'SET_CURRENTSETTING07',
@@ -61,12 +66,13 @@ var external_vuex_ = __webpack_require__(7);
         10: 'SET_CURRENTSETTING10',
         13: 'SET_CURRENTSETTING13',
         14: 'SET_CURRENTSETTING14',
-        15: 'SET_CURRENTSETTING15'
+        15: 'SET_CURRENTSETTING15',
+        16: 'SET_CURRENTSETTING16'
       }
     };
   },
   computed: {
-    ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'settingByTemplate14', 'settingByTemplate15', 'template']),
+    ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'settingByTemplate14', 'settingByTemplate15', 'settingByTemplate16', 'template']),
     fullProducts() {
       return this.$store.getters['products/allProduct'];
     },
@@ -91,7 +97,8 @@ var external_vuex_ = __webpack_require__(7);
         settingByTemplate11: this.createNestedSetting(this.settingByTemplate11, ['detailsProduct', 'cardProduct', 'settingGeneral'], null),
         settingByTemplate13: this.createNestedSetting(this.settingByTemplate13, ['detailsProduct', 'cardProduct', 'settingsGeneral'], null),
         settingByTemplate14: this.createNestedSetting(this.settingByTemplate14, ['detailsProducts', 'cardProducts', 'settingsGeneral'], null),
-        settingByTemplate15: this.createNestedSetting(this.settingByTemplate15, ['detailsProducts', 'cardProducts', 'settingGeneral'], null)
+        settingByTemplate15: this.createNestedSetting(this.settingByTemplate15, ['detailsProducts', 'cardProducts', 'settingGeneral'], null),
+        settingByTemplate16: this.createNestedSetting(this.settingByTemplate16, ['detailsProducts', 'cardProducts', 'settingsGeneral'], null)
       };
     }
   },
@@ -155,7 +162,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   null,
-  "550e306a"
+  "7b396338"
   
 )
 

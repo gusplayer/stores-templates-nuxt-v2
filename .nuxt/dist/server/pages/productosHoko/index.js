@@ -1,14 +1,14 @@
-exports.ids = [47];
+exports.ids = [166];
 exports.modules = {
 
-/***/ 1021:
+/***/ 1007:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/index.vue?vue&type=template&id=d7918620&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/index.vue?vue&type=template&id=50627c5c&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,19 +18,19 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/productosHoko/index.vue?vue&type=template&id=d7918620&
+// CONCATENATED MODULE: ./pages/productosHoko/index.vue?vue&type=template&id=50627c5c&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/index.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/index.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var productosHokovue_type_script_lang_js_ = ({
   components: {
-    K05ProductListHoko: () => __webpack_require__.e(/* import() */ 96).then(__webpack_require__.bind(null, 1068)),
-    K09ProductListHoko: () => __webpack_require__.e(/* import() */ 69).then(__webpack_require__.bind(null, 1069)),
-    K11ProductListHoko: () => __webpack_require__.e(/* import() */ 94).then(__webpack_require__.bind(null, 1070)),
-    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 35).then(__webpack_require__.bind(null, 977))
+    K05ProductListHoko: () => __webpack_require__.e(/* import() */ 27).then(__webpack_require__.bind(null, 1038)),
+    K09ProductListHoko: () => __webpack_require__.e(/* import() */ 21).then(__webpack_require__.bind(null, 1055)),
+    K11ProductListHoko: () => __webpack_require__.e(/* import() */ 210).then(__webpack_require__.bind(null, 1149)),
+    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 41).then(__webpack_require__.bind(null, 976))
   },
   mounted() {
     window.parent.postMessage('message', '*');
@@ -136,7 +136,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "5324659e"
+  "37a13aea"
   
 )
 

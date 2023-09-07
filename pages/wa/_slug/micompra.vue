@@ -28,9 +28,6 @@ export default {
     }
   },
   computed: {
-    template() {
-      return this.$store.state.template
-    },
     dataStore() {
       return this.$store.state.dataStore
     },

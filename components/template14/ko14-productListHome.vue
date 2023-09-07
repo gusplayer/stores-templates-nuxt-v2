@@ -53,7 +53,7 @@
 
 <script>
 export default {
-  name: 'Ko14-productListHome',
+  name: 'Ko15-productListHome',
   props: {
     listProductsHome: {
       type: Object,

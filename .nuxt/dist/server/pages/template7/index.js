@@ -1,14 +1,14 @@
-exports.ids = [10];
+exports.ids = [36];
 exports.modules = {
 
-/***/ 1029:
+/***/ 1017:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template7/index.vue?vue&type=template&id=aa9d580c&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template7/index.vue?vue&type=template&id=62e03136&
 var render = function render() {
   var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6, _this$settingByTempla7, _this$settingByTempla8, _this$settingByTempla9;
   var _vm = this,
@@ -21,32 +21,32 @@ var render = function render() {
     }, {
       '--font-style-3': (_this$settingByTempla7 = (_this$settingByTempla8 = this.settingByTemplate7) === null || _this$settingByTempla8 === void 0 ? void 0 : (_this$settingByTempla9 = _this$settingByTempla8.settingGeneral) === null || _this$settingByTempla9 === void 0 ? void 0 : _this$settingByTempla9.fount_3) !== null && _this$settingByTempla7 !== void 0 ? _this$settingByTempla7 : 'Lora'
     }]
-  }, [_vm.settingByTemplate7.banner.visible ? _c('KCarousel', _vm._b({
+  }, [_vm.settingByTemplate7.banner.visible ? _c('Ko7-ko-carousel', _vm._b({
     key: _vm.bannerRendering,
     attrs: {
       "id": "kBannerX"
     }
-  }, 'KCarousel', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.content.visible ? _c('KPromo', _vm._b({
+  }, 'Ko7-ko-carousel', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.content.visible ? _c('Ko7-Banner-Promo', _vm._b({
     attrs: {
       "id": "KOffersX"
     }
-  }, 'KPromo', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.productList.visible ? _c('KProductList', _vm._b({
+  }, 'Ko7-Banner-Promo', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.productList.visible ? _c('Ko7-ProductList', _vm._b({
     attrs: {
       "id": "KProductListX"
     }
-  }, 'KProductList', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.advertising.visible ? _c('KAdvertising', _vm._b({
+  }, 'Ko7-ProductList', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.advertising.visible ? _c('Ko7-advertising', _vm._b({
     attrs: {
       "id": "KAdvertisingX"
     }
-  }, 'KAdvertising', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.ProductFavorite.visible ? _c('KGify', _vm._b({
+  }, 'Ko7-advertising', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.ProductFavorite.visible ? _c('Ko7-gify', _vm._b({
     attrs: {
       "id": "KGifyX"
     }
-  }, 'KGify', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.howWork.visible ? _c('KHowWork', _vm._b({
+  }, 'Ko7-gify', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.howWork.visible ? _c('Ko7-howWeWork', _vm._b({
     attrs: {
       "id": "KHowWork"
     }
-  }, 'KHowWork', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('KBlog', _vm._b({
+  }, 'Ko7-howWeWork', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('Ko7-blog', _vm._b({
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -56,42 +56,31 @@ var render = function render() {
     attrs: {
       "id": "KBlogX"
     }
-  }, 'KBlog', _vm.componentsProps, false)), _vm._ssrNode(" "), _vm.settingByTemplate7.newsletter.visible ? _c('KNews', _vm._b({
+  }, 'Ko7-blog', _vm.componentsProps, false)), _vm._ssrNode(" "), _vm.settingByTemplate7.newsletter.visible ? _c('Ko7-Newsletter', _vm._b({
     attrs: {
       "id": "KNewsX"
     }
-  }, 'KNews', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.contentImg.visible ? _c('KWrapper', _vm._b({
+  }, 'Ko7-Newsletter', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate7.contentImg.visible ? _c('Ko7-wrapper', _vm._b({
     attrs: {
       "id": "KWrapperX"
     }
-  }, 'KWrapper', _vm.componentsProps, false)) : _vm._e()], 2) : _vm._e();
+  }, 'Ko7-wrapper', _vm.componentsProps, false)) : _vm._e()], 2) : _vm._e();
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template7/index.vue?vue&type=template&id=aa9d580c&
+// CONCATENATED MODULE: ./pages/template7/index.vue?vue&type=template&id=62e03136&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/template7/index.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template7/index.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var template7vue_type_script_lang_js_ = ({
   layout: 'default',
   name: 'Ko-template7',
-  components: {
-    KCarousel: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 1009)),
-    KPromo: () => __webpack_require__.e(/* import() */ 201).then(__webpack_require__.bind(null, 1111)),
-    KProductList: () => __webpack_require__.e(/* import() */ 89).then(__webpack_require__.bind(null, 1112)),
-    KAdvertising: () => __webpack_require__.e(/* import() */ 195).then(__webpack_require__.bind(null, 1113)),
-    KGify: () => __webpack_require__.e(/* import() */ 90).then(__webpack_require__.bind(null, 1114)),
-    KHowWork: () => __webpack_require__.e(/* import() */ 196).then(__webpack_require__.bind(null, 1115)),
-    KNews: () => __webpack_require__.e(/* import() */ 194).then(__webpack_require__.bind(null, 1116)),
-    KBlog: () => __webpack_require__.e(/* import() */ 104).then(__webpack_require__.bind(null, 1010)),
-    KWrapper: () => __webpack_require__.e(/* import() */ 197).then(__webpack_require__.bind(null, 1117))
-  },
   mounted() {
     window.parent.postMessage('message', '*');
-    window.addEventListener('message', this.addEventListenerTemplate07);
+    window.addEventListener('message', this.addEventListenerTemplate);
   },
   data() {
     return {
@@ -123,10 +112,10 @@ var external_vuex_ = __webpack_require__(7);
     }
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenerTemplate07);
+    window.removeEventListener('message', this.addEventListenerTemplate);
   },
   methods: {
-    addEventListenerTemplate07(e) {
+    addEventListenerTemplate(e) {
       if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
         if (e && e.data && e.data.component && e.data.template == 7) {
           this.$store.commit('SET_CURRENTSETTING07', e.data);
@@ -215,10 +204,7 @@ var componentNormalizer = __webpack_require__(1);
 
 
 
-function injectStyles (context) {
-  
-  
-}
+
 
 /* normalize component */
 
@@ -227,9 +213,9 @@ var component = Object(componentNormalizer["a" /* default */])(
   render,
   staticRenderFns,
   false,
-  injectStyles,
   null,
-  "3612d706"
+  null,
+  "ea91e02c"
   
 )
 

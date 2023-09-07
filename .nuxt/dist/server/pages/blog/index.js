@@ -1,14 +1,14 @@
-exports.ids = [39];
+exports.ids = [158];
 exports.modules = {
 
-/***/ 1017:
+/***/ 1003:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/index.vue?vue&type=template&id=31d1cdfa&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/index.vue?vue&type=template&id=31d1cdfa&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -23,19 +23,19 @@ var staticRenderFns = [];
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/index.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/index.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var blogvue_type_script_lang_js_ = ({
   layout: 'default',
   components: {
-    K05Blog: () => __webpack_require__.e(/* import() */ 99).then(__webpack_require__.bind(null, 999)),
-    K07Blog: () => __webpack_require__.e(/* import() */ 106).then(__webpack_require__.bind(null, 1000)),
-    K09Blog: () => __webpack_require__.e(/* import() */ 97).then(__webpack_require__.bind(null, 1050)),
-    K10Blog: () => __webpack_require__.e(/* import() */ 101).then(__webpack_require__.bind(null, 1001)),
-    K11Blog: () => __webpack_require__.e(/* import() */ 92).then(__webpack_require__.bind(null, 1051)),
-    K13Blog: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 1002)),
-    K14Blog: () => __webpack_require__.e(/* import() */ 161).then(__webpack_require__.bind(null, 1052)),
-    K15Blog: () => __webpack_require__.e(/* import() */ 175).then(__webpack_require__.bind(null, 1053))
+    K05Blog: () => __webpack_require__.e(/* import() */ 212).then(__webpack_require__.bind(null, 994)),
+    K07Blog: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 1052)),
+    K09Blog: () => __webpack_require__.e(/* import() */ 211).then(__webpack_require__.bind(null, 1137)),
+    K10Blog: () => __webpack_require__.e(/* import() */ 208).then(__webpack_require__.bind(null, 1138)),
+    K11Blog: () => __webpack_require__.e(/* import() */ 209).then(__webpack_require__.bind(null, 1139)),
+    K13Blog: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 987)),
+    K14Blog: () => __webpack_require__.e(/* import() */ 12).then(__webpack_require__.bind(null, 1102)),
+    K15Blog: () => __webpack_require__.e(/* import() */ 257).then(__webpack_require__.bind(null, 1140))
   },
   data() {
     return {
@@ -116,7 +116,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "30c8c184"
+  "53ccf3b1"
   
 )
 

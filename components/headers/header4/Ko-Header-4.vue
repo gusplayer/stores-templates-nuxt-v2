@@ -1,35 +1,30 @@
 <template>
   <div
-    class="header-container"
     id="navbar"
+    v-if="settingByTemplate7 && settingByTemplate7[0].setting7Header"
+    class="header-container"
     :style="[
       settingByTemplate7[0].setting7Header,
       settingByTemplate7[0].setting7General,
+      {
+        '--font-style-1':
+          this.settingByTemplate7 &&
+          this.settingByTemplate7[0].setting7General &&
+          this.settingByTemplate7[0].setting7General.fount_1
+            ? this.settingByTemplate7[0].setting7General.fount_1
+            : 'David libre',
+      },
+      {
+        '--font-style-3':
+          this.settingByTemplate7 &&
+          this.settingByTemplate7[0].setting7General &&
+          this.settingByTemplate7[0].setting7General.fount_3
+            ? this.settingByTemplate7[0].setting7General.fount_3
+            : 'Lora',
+      },
     ]"
-    v-if="settingByTemplate7 && settingByTemplate7[0].setting7Header"
   >
-    <div
-      class="wrapper-header"
-      id="headbg"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingByTemplate7 &&
-            this.settingByTemplate7[0].setting7General &&
-            this.settingByTemplate7[0].setting7General.fount_1
-              ? this.settingByTemplate7[0].setting7General.fount_1
-              : 'David libre',
-        },
-        {
-          '--font-style-3':
-            this.settingByTemplate7 &&
-            this.settingByTemplate7[0].setting7General &&
-            this.settingByTemplate7[0].setting7General.fount_3
-              ? this.settingByTemplate7[0].setting7General.fount_3
-              : 'Lora',
-        },
-      ]"
-    >
+    <div class="wrapper-header" id="headbg">
       <div class="header" id="headerid">
         <KoOrder :dataStore="dataStore" />
         <div class="header-item-menu" @click="openMenuLateral">

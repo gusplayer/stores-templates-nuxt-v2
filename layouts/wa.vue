@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="general-container" v-if="dataStore">
+    <div
+      class="w-full flex justify-center items-center bg-slate-100"
+      v-if="dataStore"
+    >
       <div v-if="stateModalPwd">
         <nuxt />
       </div>
@@ -8,7 +11,7 @@
       <div
         class="wrapper-whatsapp"
         v-if="dataStore.tienda.whatsapp && dataStore.tienda.id_tienda != 16436"
-        @click="redirectWhatsapp()"
+        @click="redirectWhatsApp()"
       >
         <koWhatsApp class="button-whatsapp" />
         <span>
@@ -42,19 +45,28 @@ export default {
       })
     }
   },
-  mounted() {
+  async mounted() {
+    // Configura y habilita el seguimiento de Facebook Pixel si está disponible
     if (this.analytics_tagmanager?.pixel_facebook != null) {
       this.$fb.setPixelId(this.analytics_tagmanager.pixel_facebook)
       this.$fb.track('PageView')
       this.$fb.enable()
     }
-    this.$store.dispatch('GET_COOKIES_PWD')
-    this.$store.dispatch('GET_SHOPPING_CART')
-    if (this.$route.query?.clearCart == 'true') {
+
+    // Ejecuta las acciones de forma concurrente usando Promise.all
+    await Promise.all([
+      this.$store.dispatch('GET_COOKIES_PWD'),
+      this.$store.dispatch('GET_SHOPPING_CART'),
+    ])
+
+    // Borra todos los elementos del carrito y actualiza el contenido si la query 'clearCart' es 'true'
+    if (this.$route.query?.clearCart === 'true') {
       this.$store.commit('DELETE_ALL_ITEMS_CART')
       this.$store.commit('UPDATE_CONTENT_CART')
     }
-    if (this.$route.query?.openCart == 'true') {
+
+    // Establece 'SET_OPEN_ORDER' en true si la query 'openCart' es 'true'
+    if (this.$route.query?.openCart === 'true') {
       this.$store.commit('SET_OPEN_ORDER', true)
     }
   },
@@ -234,61 +246,34 @@ export default {
       }
       return window.mobilecheck()
     },
-    redirectWhatsapp() {
-      if (this.dataStore.tienda.whatsapp.length > 10) {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp
-        if (phone_number_whatsapp.charAt(0) === '+') {
-          phone_number_whatsapp = phone_number_whatsapp.slice(1)
-        }
-        var text = ''
-        if (this.dataStore.tienda.lenguaje == 'es') {
-          text = `Hola%20vengo%20de%20tu%20tienda%20online%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
-          )}%20y%20me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20%0AURL%3A%20${encodeURIComponent(
-            window.location
-          )}`
-        } else if (this.dataStore.tienda.lenguaje == 'en') {
-          text = `Hi%2C%20I%20came%20from%20your%20online%20store%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
-          )}%20and%20I%20would%20like%20to%20receive%20more%20information.%20%0AURL%3A%20${encodeURIComponent(
-            window.location
-          )}`
-        } else if (this.dataStore.tienda.lenguaje == 'pt') {
-          text = `Ol%C3%A1%2C%20vim%20de%20sua%20loja%20virtual%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
-          )}%20e%20gostaria%20de%20receber%20mais%20informa%C3%A7%C3%B5es.%20%0AURL%3A%20${encodeURIComponent(
-            window.location
-          )}`
-        } else {
-          text = `Hola%20vengo%20de%20tu%20tienda%20online%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
-          )}%20y%20me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20%0AURL%3A%20${encodeURIComponent(
-            window.location
-          )}`
-        }
-        if (this.mobileCheck()) {
-          window.open(
-            `https://wa.me/${phone_number_whatsapp}/?text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `https://web.whatsapp.com/send?phone=${phone_number_whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
-      } else {
-        if (this.mobileCheck()) {
-          window.open(
-            `https://wa.me/57${this.dataStore.tienda.whatsapp}/?text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `https://web.whatsapp.com/send?phone=57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
+    redirectWhatsApp() {
+      let phone_number_whatsapp = this.dataStore.tienda.whatsapp
+      if (phone_number_whatsapp.charAt(0) === '+') {
+        phone_number_whatsapp = phone_number_whatsapp.slice(1)
+      }
+
+      const baseUrl = 'https://wa.me/'
+      const text = this.constructMessageText()
+
+      const whatsappUrl = this.mobileCheck()
+        ? `${baseUrl}${phone_number_whatsapp}/?text=${text}`
+        : `https://web.whatsapp.com/send?phone=${phone_number_whatsapp}&text=${text}`
+
+      window.open(whatsappUrl, '_blank')
+    },
+
+    constructMessageText() {
+      const tienda = this.dataStore.tienda
+      const nombre = encodeURIComponent(tienda.nombre)
+      const url = encodeURIComponent(window.location)
+
+      switch (tienda.lenguaje) {
+        case 'en':
+          return `Hi%2C%20I%20came%20from%20your%20online%20store%20${nombre}%20and%20I%20would%20like%20to%20receive%20more%20information.%20%0AURL%3A%20${url}`
+        case 'pt':
+          return `Ol%C3%A1%2C%20vim%20de%20sua%20loja%20virtual%20${nombre}%20e%20gostaria%20de%20receber%20mais%20informa%C3%A7%C3%B5es.%20%0AURL%3A%20${url}`
+        default:
+          return `Hola%20vengo%20de%20tu%20tienda%20online%20${nombre}%20y%20me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20%0AURL%3A%20${url}`
       }
     },
   },
@@ -298,12 +283,5 @@ export default {
 <style scoped>
 * {
   font-family: 'Poppins', sans-serif !important;
-}
-.general-container {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  background-color: #f0f0f0;
 }
 </style>

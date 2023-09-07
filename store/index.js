@@ -66,7 +66,7 @@ export const state = () => ({
   settingByTemplate12: '',
   settingByTemplate13: '',
   settingByTemplate14: '',
-  settingByTemplate15: {},
+  settingByTemplate15: '',
   settingByTemplate16: '',
   category_producto_header: '',
   subcategory_producto_header: '',
@@ -889,7 +889,8 @@ export const actions = {
           id.data.data.template == 11 ||
           id.data.data.template == 12 ||
           id.data.data.template == 13 ||
-          id.data.data.template == 14
+          id.data.data.template == 14 ||
+          id.data.data.template == 16
         ) {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch(

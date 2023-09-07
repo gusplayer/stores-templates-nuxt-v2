@@ -16,6 +16,7 @@ const _034ea950 = () => interopDefault(import('..\\pages\\template12\\index.vue'
 const _0b004eaf = () => interopDefault(import('..\\pages\\template13\\index.vue' /* webpackChunkName: "pages/template13/index" */))
 const _12b1f40e = () => interopDefault(import('..\\pages\\template14\\index.vue' /* webpackChunkName: "pages/template14/index" */))
 const _1a63996d = () => interopDefault(import('..\\pages\\template15\\index.vue' /* webpackChunkName: "pages/template15/index" */))
+const _22153ecc = () => interopDefault(import('..\\pages\\template16\\index.vue' /* webpackChunkName: "pages/template16/index" */))
 const _283fa8e4 = () => interopDefault(import('..\\pages\\template5\\index.vue' /* webpackChunkName: "pages/template5/index" */))
 const _18dc5e26 = () => interopDefault(import('..\\pages\\template6\\index.vue' /* webpackChunkName: "pages/template6/index" */))
 const _09791368 = () => interopDefault(import('..\\pages\\template7\\index.vue' /* webpackChunkName: "pages/template7/index" */))
@@ -23,11 +24,6 @@ const _02f51bab = () => interopDefault(import('..\\pages\\template8\\index.vue' 
 const _0aa6c10a = () => interopDefault(import('..\\pages\\template9\\index.vue' /* webpackChunkName: "pages/template9/index" */))
 const _a57b3a1e = () => interopDefault(import('..\\pages\\template99\\index.vue' /* webpackChunkName: "pages/template99/index" */))
 const _2da39202 = () => interopDefault(import('..\\pages\\termsandconditions.vue' /* webpackChunkName: "pages/termsandconditions" */))
-const _23a5c374 = () => interopDefault(import('..\\pages\\unicentro\\index.vue' /* webpackChunkName: "pages/unicentro/index" */))
-const _2e317606 = () => interopDefault(import('..\\pages\\template6\\index_macrobrand.vue' /* webpackChunkName: "pages/template6/index_macrobrand" */))
-const _18d692d3 = () => interopDefault(import('..\\pages\\template99\\templates\\template1\\index.vue' /* webpackChunkName: "pages/template99/templates/template1/index" */))
-const _20883832 = () => interopDefault(import('..\\pages\\template99\\templates\\template2\\index.vue' /* webpackChunkName: "pages/template99/templates/template2/index" */))
-const _2839dd91 = () => interopDefault(import('..\\pages\\template99\\templates\\template3\\index.vue' /* webpackChunkName: "pages/template99/templates/template3/index" */))
 const _79ce8d6a = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 const _7cbcb23e = () => interopDefault(import('..\\pages\\blog\\_slug.vue' /* webpackChunkName: "pages/blog/_slug" */))
 const _4e72732e = () => interopDefault(import('..\\pages\\productos\\_slug.vue' /* webpackChunkName: "pages/productos/_slug" */))
@@ -98,6 +94,10 @@ export const routerOptions = {
     component: _1a63996d,
     name: "template15"
   }, {
+    path: "/template16",
+    component: _22153ecc,
+    name: "template16"
+  }, {
     path: "/template5",
     component: _283fa8e4,
     name: "template5"
@@ -125,26 +125,6 @@ export const routerOptions = {
     path: "/termsandconditions",
     component: _2da39202,
     name: "termsandconditions"
-  }, {
-    path: "/unicentro",
-    component: _23a5c374,
-    name: "unicentro"
-  }, {
-    path: "/template6/index_macrobrand",
-    component: _2e317606,
-    name: "template6-index_macrobrand"
-  }, {
-    path: "/template99/templates/template1",
-    component: _18d692d3,
-    name: "template99-templates-template1"
-  }, {
-    path: "/template99/templates/template2",
-    component: _20883832,
-    name: "template99-templates-template2"
-  }, {
-    path: "/template99/templates/template3",
-    component: _2839dd91,
-    name: "template99-templates-template3"
   }, {
     path: "/",
     component: _79ce8d6a,

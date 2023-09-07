@@ -8,53 +8,53 @@
       },
     ]"
   >
-    <ko-banner
+    <ko15-Banner
       id="kBannerX"
       v-bind="componentsProps"
       :key="bannerRendering"
       v-if="settingByTemplate15?.banner?.visible"
     />
-    <ko-categories
+    <ko15-Categories
       id="kCategoriesX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.categories?.visible"
     />
-    <ko-content
+    <ko15-Content
       id="kContentX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.content?.visible"
     />
-    <ko-listProductsHome
+    <ko15-productListHome
       id="kListProductsHomeX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.listProductsHome?.visible"
     />
-    <ko-information
+    <ko15-information
       id="kInformationX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.information?.visible"
     />
-    <ko-informationLogos
+    <ko15-informationLogos
       id="kInformationLogosX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.informationLogos?.visible"
     />
-    <ko-information2
+    <ko15-information2
       id="kInformation2X"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.information2?.visible"
     />
-    <ko-listProductsOffers
+    <ko15-listProductsOffers
       id="kListProductsOffersX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.listProductsOffers?.visible"
     />
-    <ko-banner2
+    <ko15-Banner2
       id="kBanner2X"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.banner2?.visible"
     />
-    <ko-logos
+    <Ko15-logos
       id="kLogosX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.logos?.visible"
@@ -67,22 +67,6 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   name: 'Ko-template15',
-  components: {
-    koBanner: () => import('@/components/template15/ko15-Banner.vue'),
-    koCategories: () => import('@/components/template15/ko15-Categories.vue'),
-    koContent: () => import('@/components/template15/ko15-Content.vue'),
-    koListProductsHome: () =>
-      import('@/components/template15/ko15-productListHome'),
-    koInformation: () => import('@/components/template15/ko15-information.vue'),
-    koInformationLogos: () =>
-      import('@/components/template15/ko15-informationLogos.vue'),
-    koInformation2: () =>
-      import('@/components/template15/ko15-information2.vue'),
-    koListProductsOffers: () =>
-      import('@/components/template15/ko15-listProductsOffers'),
-    koBanner2: () => import('@/components/template15/ko15-Banner2.vue'),
-    koLogos: () => import('@/components/template15/ko15-logos.vue'),
-  },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)

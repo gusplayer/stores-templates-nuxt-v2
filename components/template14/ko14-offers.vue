@@ -97,7 +97,7 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko14-Offers',
+  name: 'Ko15-Offers',
   props: {
     offers: Object,
     settingGeneral: Object,

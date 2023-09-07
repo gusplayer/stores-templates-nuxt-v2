@@ -1,43 +1,43 @@
-exports.ids = [4];
+exports.ids = [29];
 exports.modules = {
 
-/***/ 1023:
+/***/ 1009:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=template&id=f004e716&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=template&id=9c8c4d5c&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.settingByTemplate11 ? _c('div', [_vm.settingByTemplate11 && _vm.settingByTemplate11.banner && _vm.settingByTemplate11.banner.visible ? _c('KCarousel', _vm._b({
+  return _vm.settingByTemplate11 ? _c('div', [_c('client-only', [_vm.settingByTemplate11 && _vm.settingByTemplate11.banner && _vm.settingByTemplate11.banner.visible ? _c('Ko11-carousel', _vm._b({
     key: _vm.bannerRendering,
     attrs: {
       "id": "kCarouselX"
     }
-  }, 'KCarousel', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.section && _vm.settingByTemplate11.section.visible ? _c('KSection', _vm._b({
+  }, 'Ko11-carousel', _vm.componentsProps, false)) : _vm._e()], 1), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.section && _vm.settingByTemplate11.section.visible ? _c('Ko11-section', _vm._b({
     attrs: {
       "id": "kSectionX"
     }
-  }, 'KSection', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.trending && _vm.settingByTemplate11.trending.visible == true && _vm.dataHoko && _vm.dataHoko.statehoko == 1 ? _c('KTrendingHoko', _vm._b({
+  }, 'Ko11-section', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.trending && _vm.settingByTemplate11.trending.visible == true && _vm.dataHoko && _vm.dataHoko.statehoko == 1 ? _c('Ko11-trendingProductHoko', _vm._b({
     attrs: {
       "id": "kTredingX"
     }
-  }, 'KTrendingHoko', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.trending && _vm.settingByTemplate11.trending.visible == true && this.fullProducts.length > 0 ? _c('KTrending', _vm._b({
+  }, 'Ko11-trendingProductHoko', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.trending && _vm.settingByTemplate11.trending.visible == true && this.fullProducts.length > 0 ? _c('Ko11-trendingProduct', _vm._b({
     attrs: {
       "id": "kTredingX"
     }
-  }, 'KTrending', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('client-only', [_vm.settingByTemplate11 && _vm.settingByTemplate11.parallax && _vm.settingByTemplate11.parallax.visible ? _c('KParallax', _vm._b({
+  }, 'Ko11-trendingProduct', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('client-only', [_vm.settingByTemplate11 && _vm.settingByTemplate11.parallax && _vm.settingByTemplate11.parallax.visible ? _c('Ko11-parallax', _vm._b({
     attrs: {
       "id": "kParallaxX"
     }
-  }, 'KParallax', _vm.componentsProps, false)) : _vm._e()], 1), _vm._ssrNode(" "), _vm.dataHoko.length == 0 || _vm.dataHoko.statehoko == 0 ? _c('KListTrending', _vm._b({}, 'KListTrending', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.information && _vm.settingByTemplate11.information.visible ? _c('KInformation', _vm._b({
+  }, 'Ko11-parallax', _vm.componentsProps, false)) : _vm._e()], 1), _vm._ssrNode(" "), _vm.dataHoko.length == 0 || _vm.dataHoko.statehoko == 0 ? _c('Ko11-listTrending', _vm._b({}, 'Ko11-listTrending', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.information && _vm.settingByTemplate11.information.visible ? _c('Ko11-information', _vm._b({
     attrs: {
       "id": "kInformationX"
     }
-  }, 'KInformation', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.blog && _vm.settingByTemplate11.blog.visible ? _c('KBlog', _vm._b({
+  }, 'Ko11-information', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.blog && _vm.settingByTemplate11.blog.visible ? _c('Ko11-blog', _vm._b({
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -47,30 +47,20 @@ var render = function render() {
     attrs: {
       "id": "kBlogX"
     }
-  }, 'KBlog', _vm.componentsProps, false)) : _vm._e()], 2) : _vm._e();
+  }, 'Ko11-blog', _vm.componentsProps, false)) : _vm._e()], 2) : _vm._e();
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template11/index.vue?vue&type=template&id=f004e716&
+// CONCATENATED MODULE: ./pages/template11/index.vue?vue&type=template&id=9c8c4d5c&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var template11vue_type_script_lang_js_ = ({
   layout: 'default',
   name: 'Ko-template11',
-  components: {
-    KCarousel: () => __webpack_require__.e(/* import() */ 102).then(__webpack_require__.bind(null, 1007)),
-    KSection: () => __webpack_require__.e(/* import() */ 150).then(__webpack_require__.bind(null, 1077)),
-    KTrending: () => __webpack_require__.e(/* import() */ 87).then(__webpack_require__.bind(null, 1078)),
-    KTrendingHoko: () => __webpack_require__.e(/* import() */ 95).then(__webpack_require__.bind(null, 1079)),
-    KParallax: () => __webpack_require__.e(/* import() */ 149).then(__webpack_require__.bind(null, 1080)),
-    KListTrending: () => __webpack_require__.e(/* import() */ 86).then(__webpack_require__.bind(null, 1081)),
-    KInformation: () => __webpack_require__.e(/* import() */ 147).then(__webpack_require__.bind(null, 1082)),
-    KBlog: () => __webpack_require__.e(/* import() */ 93).then(__webpack_require__.bind(null, 1083))
-  },
   mounted() {
     window.parent.postMessage('message', '*');
     window.addEventListener('message', this.addEventListenerTemplate);
@@ -204,7 +194,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "0cba9994"
+  "0bf1a569"
   
 )
 

@@ -78,7 +78,7 @@
 <script>
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko14-Banner',
+  name: 'Ko15-Banner',
   props: {
     banner: Object,
     settingGeneral: Object,

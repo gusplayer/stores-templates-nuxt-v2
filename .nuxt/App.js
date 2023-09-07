@@ -10,10 +10,9 @@ import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
 import '..\\assets\\css\\tailwind.css'
 
 import _6f6c098b from '..\\layouts\\default.vue'
-import _6541a79f from '..\\layouts\\unicentro.vue'
 import _6c337540 from '..\\layouts\\wa.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b),"_unicentro": sanitizeComponent(_6541a79f),"_wa": sanitizeComponent(_6c337540) }
+const layouts = { "_default": sanitizeComponent(_6f6c098b),"_wa": sanitizeComponent(_6c337540) }
 
 export default {
   render (h, props) {

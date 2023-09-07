@@ -125,7 +125,7 @@ import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko14-Newsletter',
+  name: 'Ko15-Newsletter',
   props: {
     newsletter: Object,
     settingGeneral: Object,

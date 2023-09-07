@@ -6,8 +6,9 @@
           <small
             class="inline-block font-normal italic text-sm normal-case text-gray-400"
           >
-            {{ subtitle }} </small
-          ><br />
+            {{ subtitle }}
+          </small>
+          <br />
           {{ title }}
         </h2>
       </header>

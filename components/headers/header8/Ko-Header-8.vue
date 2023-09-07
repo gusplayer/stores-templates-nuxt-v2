@@ -1,27 +1,22 @@
 <template>
   <div
-    class="header-container"
     id="navbar"
+    v-if="settingByTemplate13"
+    class="header-container"
     :style="[
       settingByTemplate13[0].setting13Header,
       settingByTemplate13[0].setting13General,
+      {
+        '--font-style-1':
+          this.settingByTemplate13 &&
+          this.settingByTemplate13[0].setting13General &&
+          this.settingByTemplate13[0].setting13General.fount_1
+            ? this.settingByTemplate13[0].setting13General.fount_1
+            : 'Poppins',
+      },
     ]"
-    v-if="settingByTemplate13"
   >
-    <div
-      class="wrapper-header"
-      id="headbg"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingByTemplate13 &&
-            this.settingByTemplate13[0].setting13General &&
-            this.settingByTemplate13[0].setting13General.fount_1
-              ? this.settingByTemplate13[0].setting13General.fount_1
-              : 'Poppins',
-        },
-      ]"
-    >
+    <div class="wrapper-header" id="headbg">
       <div class="header" id="headerid">
         <KoOrder :dataStore="dataStore" />
 

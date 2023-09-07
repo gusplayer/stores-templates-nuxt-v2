@@ -519,7 +519,7 @@ import idCloudinary from '@/mixins/idCloudinary'
 import currency from '@/mixins/formatCurrent'
 export default {
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductDetail',
+  name: 'Ko15-ProductDetail',
   props: {
     dataStore: Object,
     productsData: Array,

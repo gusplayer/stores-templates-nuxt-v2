@@ -13,7 +13,7 @@
 <script>
 import KoSwipper from './_productofavorito/productSlideHoko.vue'
 export default {
-  name: 'Ko-ProductFavoritos-1',
+  name: 'Ko5-ProductFavoritos',
   created() {
     this.$store.dispatch('GET_PRODUCTSHOKO', 1)
   },

@@ -1,181 +1,163 @@
 <template>
-  <div class="header-container" :style="settingByTemplate">
-    <div
-      :style="{
-        '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
-            : 'Roboto',
-      }"
-    >
-      <div class="wrapper-header" @click="closeMenuCategory">
-        <div class="header">
-          <KoOrder :dataStore="dataStore" />
-          <KoSearch />
-          <div class="header-content-logo">
-            <nuxt-link to="/" class="wrapper-logo">
-              <img
-                loading="lazy"
-                width="120"
-                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
-                class="header-logo"
-                alt="Logo Img"
-                @click="clear"
-              />
-            </nuxt-link>
-          </div>
-          <div class="header-content-items">
-            <div
-              v-for="(item, index) in secciones"
-              :key="`${index}${item.name}`"
-              class="header-buttons"
-            >
-              <div @click="openMenu(item.name)">
-                <nuxt-link
-                  :to="item.path"
-                  v-if="item.path && item.state"
-                  class="header-text-center"
-                  >{{ $t(`${item.name}`) }}</nuxt-link
+  <div
+    class="header-container"
+    :style="[
+      settingByTemplate,
+      {
+        '--font-style-1': settingByTemplate?.tipo_letra ?? 'Roboto',
+      },
+    ]"
+  >
+    <div class="wrapper-header" @click="closeMenuCategory">
+      <div class="header">
+        <KoOrder :dataStore="dataStore" />
+        <KoSearch />
+        <div class="header-content-logo">
+          <nuxt-link to="/" class="wrapper-logo">
+            <img
+              loading="lazy"
+              width="120"
+              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+              class="header-logo"
+              alt="Logo Img"
+              @click="clear"
+            />
+          </nuxt-link>
+        </div>
+        <div class="header-content-items">
+          <div
+            v-for="(item, index) in secciones"
+            :key="`${index}${item.name}`"
+            class="header-buttons"
+          >
+            <div @click="openMenu(item.name)">
+              <nuxt-link
+                :to="item.path"
+                v-if="item.path && item.state"
+                class="header-text-center"
+                >{{ $t(`${item.name}`) }}</nuxt-link
+              >
+              <nuxt-link
+                :to="item.href"
+                v-else-if="item.href && listArticulos > 0 && item.state"
+                class="header-text-center"
+                >{{ $t(`${item.name}`) }}</nuxt-link
+              >
+              <div v-else>
+                <div
+                  v-if="dataStore.categorias.length > 0 && item.ref"
+                  style="margin-right: 20px; display: flex; flex-direction: row"
                 >
-                <nuxt-link
-                  :to="item.href"
-                  v-else-if="item.href && listArticulos > 0 && item.state"
-                  class="header-text-center"
-                  >{{ $t(`${item.name}`) }}</nuxt-link
-                >
-                <div v-else>
+                  <p class="header-text-center-icon">
+                    {{ $t(`${item.name}`) }}
+                  </p>
                   <div
-                    v-if="dataStore.categorias.length > 0 && item.ref"
-                    style="
-                      margin-right: 20px;
-                      display: flex;
-                      flex-direction: row;
-                    "
-                  >
-                    <p class="header-text-center-icon">
-                      {{ $t(`${item.name}`) }}
-                    </p>
-                    <div
-                      class="header-text-center-icon"
-                      v-if="!showMenu"
-                      :is="item.iconOpen"
-                    />
-                    <div
-                      class="header-text-center-icon"
-                      v-if="showMenu"
-                      :is="item.iconClose"
-                    />
-                  </div>
+                    class="header-text-center-icon"
+                    v-if="!showMenu"
+                    :is="item.iconOpen"
+                  />
+                  <div
+                    class="header-text-center-icon"
+                    v-if="showMenu"
+                    :is="item.iconClose"
+                  />
                 </div>
               </div>
             </div>
           </div>
-          <div class="search" v-if="showSearch && product.length > 0">
-            <form id="demo-2" style="position: relative">
-              <search-icon class="icon-s" @click="focusInput" />
-              <input
-                type="search"
-                :placeholder="$t('header_search')"
-                v-model="search"
-                @keyup.enter="getSearch(search)"
-                id="SearchHeader"
-              />
-            </form>
-          </div>
-          <div class="search_res" v-if="product.length > 0">
-            <div
-              class="header-content-cart"
-              @click="openSearch"
-              id="OpenCartTag"
-            >
-              <search-icon class="header-icon-cart" />
-            </div>
-          </div>
-          <div class="header-content-icon" v-if="product.length > 0">
-            <div
-              class="header-content-cart"
-              @click="openOrder"
-              id="OpenCartTag"
-            >
-              <cart-icon class="header-icon-cart" />
-              <span class="num-items">{{ productsCart }}</span>
-            </div>
-          </div>
-          <div class="header-item-menu" @click="openMenuLateral">
-            <menu-icon class="header-icon-menu nav-bar" />
-          </div>
-          <KoMenu :dataStore="dataStore" class="responsive" />
         </div>
+        <div class="search" v-if="showSearch && product.length > 0">
+          <form id="demo-2" style="position: relative">
+            <search-icon class="icon-s" @click="focusInput" />
+            <input
+              type="search"
+              :placeholder="$t('header_search')"
+              v-model="search"
+              @keyup.enter="getSearch(search)"
+              id="SearchHeader"
+            />
+          </form>
+        </div>
+        <div class="search_res" v-if="product.length > 0">
+          <div class="header-content-cart" @click="openSearch" id="OpenCartTag">
+            <search-icon class="header-icon-cart" />
+          </div>
+        </div>
+        <div class="header-content-icon" v-if="product.length > 0">
+          <div class="header-content-cart" @click="openOrder" id="OpenCartTag">
+            <cart-icon class="header-icon-cart" />
+            <span class="num-items">{{ productsCart }}</span>
+          </div>
+        </div>
+        <div class="header-item-menu" @click="openMenuLateral">
+          <menu-icon class="header-icon-menu nav-bar" />
+        </div>
+        <KoMenu :dataStore="dataStore" class="responsive" />
       </div>
-      <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
-        <div id="menu-collapse">
-          <div class="wrapper-meni-grid">
-            <li @click="clear">
-              <p
-                class="name-category-all"
+    </div>
+    <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
+      <div id="menu-collapse">
+        <div class="wrapper-meni-grid">
+          <li @click="clear">
+            <p
+              class="name-category-all"
+              :class="
+                idCategory == '' && indexSelect == ''
+                  ? 'name-category-all-active'
+                  : ''
+              "
+            >
+              {{ $t('header_allProduct') }}
+            </p>
+          </li>
+          <div class="menu-grid">
+            <div v-for="categoria in categorias" :key="categoria.id">
+              <ul
+                class="name-category"
                 :class="
-                  idCategory == '' && indexSelect == ''
-                    ? 'name-category-all-active'
-                    : ''
+                  categoria.id == idCategory ? 'name-category-active' : ''
                 "
               >
-                {{ $t('header_allProduct') }}
-              </p>
-            </li>
-            <div class="menu-grid">
-              <div v-for="categoria in categorias" :key="categoria.id">
-                <ul
-                  class="name-category"
-                  :class="
-                    categoria.id == idCategory ? 'name-category-active' : ''
-                  "
+                <li
+                  @click="sendCategory(categoria, categoria.id, (ref = false))"
                 >
-                  <li
-                    @click="
-                      sendCategory(categoria, categoria.id, (ref = false))
-                    "
-                  >
-                    <p>
-                      {{ categoria.nombre_categoria_producto }}
-                    </p>
-                  </li>
-                  <ul class="subcategoria">
-                    <template>
-                      <div
-                        v-for="(subcategory, key) in subcategories"
-                        :key="key"
+                  <p>
+                    {{ categoria.nombre_categoria_producto }}
+                  </p>
+                </li>
+                <ul class="subcategoria">
+                  <template>
+                    <div v-for="(subcategory, key) in subcategories" :key="key">
+                      <li
+                        v-if="subcategory.categoria == categoria.id"
+                        @click="SendSubCategory(subcategory.id)"
+                        class="text-subcategoria"
+                        :class="
+                          subcategory.id == indexSelect
+                            ? 'text-subcategoria-active'
+                            : ''
+                        "
                       >
-                        <li
-                          v-if="subcategory.categoria == categoria.id"
-                          @click="SendSubCategory(subcategory.id)"
-                          class="text-subcategoria"
-                          :class="
-                            subcategory.id == indexSelect
-                              ? 'text-subcategoria-active'
-                              : ''
-                          "
-                        >
-                          {{ subcategory.nombre_subcategoria }}
-                        </li>
-                      </div>
-                    </template>
-                  </ul>
+                        {{ subcategory.nombre_subcategoria }}
+                      </li>
+                    </div>
+                  </template>
                 </ul>
-              </div>
+              </ul>
             </div>
           </div>
-          <div class="product-img-container" v-if="product.length">
-            <div class="card-container">
-              <div class="img-logo" v-if="product[0]">
-                <img
-                  v-lazy="idCloudinary(product[0].foto_cloudinary, 400, 400)"
-                  class="logo"
-                  alt="Product img"
-                />
-              </div>
-              <div class="btn-container">
-                <button @click="closeMenu()" class="btn">Comprar</button>
-              </div>
+        </div>
+        <div class="product-img-container" v-if="product.length">
+          <div class="card-container">
+            <div class="img-logo" v-if="product[0]">
+              <img
+                v-lazy="idCloudinary(product[0].foto_cloudinary, 400, 400)"
+                class="logo"
+                alt="Product img"
+              />
+            </div>
+            <div class="btn-container">
+              <button @click="closeMenu()" class="btn">Comprar</button>
             </div>
           </div>
         </div>
@@ -506,6 +488,9 @@ export default {
 </script>
 
 <style scoped>
+* {
+  font-family: var(--font-style-1) !important;
+}
 .header-container {
   width: 100%;
   height: 88px;

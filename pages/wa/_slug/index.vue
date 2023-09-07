@@ -1,7 +1,9 @@
 <template>
-  <div class="content-wa" id="width">
-    <component :is="indexTemplate" />
-    <WCountry :dataStore="dataStore" :valueWa="true" />
+  <div
+    class="w-full flex flex-col justify-center items-center bg-transparent"
+    id="width"
+  >
+    <waTemplate />
     <div
       id="modalNotificacion"
       v-if="
@@ -61,56 +63,25 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import expiredDate from '@/mixins/expiredDate'
-import WaTemplate1 from '../../template99/templates/template1/index'
-import WaTemplate2 from '../../template99/templates/template2/index'
-import WaTemplate3 from '../../template99/templates/template3/index'
-import WCountry from '../../../components/footers/footer1/Ko-Footer-Country.vue'
-import koTiendaCerrada from '../../../assets/img/tiendaCerrada'
 export default {
-  name: 'WapiME',
   layout: 'wa',
-  mixins: [expiredDate],
+  name: 'WapiME',
   components: {
-    koTiendaCerrada,
-    WaTemplate1,
-    WaTemplate2,
-    WaTemplate3,
-    WCountry,
+    waTemplate: () => import('../../template99/index.vue'),
+    koTiendaCerrada: () => import('@/assets/img/tiendaCerrada'),
   },
+  mixins: [expiredDate],
   mounted() {
     this.onResize()
     window.addEventListener('resize', this.onResize)
   },
+  computed: {
+    ...mapState(['dataStore']),
+  },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
-  },
-  computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
-    indexTemplate() {
-      let componentTemplate = ''
-      if (this.settingByTemplate && this.settingByTemplate.tema) {
-        switch (this.settingByTemplate.tema) {
-          case 1:
-            componentTemplate = 'WaTemplate1'
-            break
-          case 2:
-            componentTemplate = 'WaTemplate2'
-            break
-          case 3:
-            componentTemplate = 'WaTemplate3'
-            break
-        }
-      } else {
-        return (componentTemplate = 'WaTemplate1')
-      }
-      return componentTemplate
-    },
   },
   methods: {
     onResize() {
@@ -128,9 +99,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.content-wa {
-  @apply w-full flex flex-col justify-center items-center;
-}
-</style>

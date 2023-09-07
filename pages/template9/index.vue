@@ -10,13 +10,9 @@
         '--font-style-2':
           this.settingByTemplate9?.settingGeneral?.fount_2 ?? 'Great Vibes',
       },
-      {
-        '--font-style-3':
-          this.settingByTemplate9?.settingGeneral?.fount_3 ?? 'Lora',
-      },
     ]"
   >
-    <KBanner
+    <Ko9-Banner
       id="kBannerX"
       v-bind="componentsProps"
       :key="bannerRendering"
@@ -26,7 +22,7 @@
         settingByTemplate9.banner.visible
       "
     />
-    <KOffers
+    <Ko9-offers
       id="KOffersX"
       v-bind="componentsProps"
       v-if="
@@ -35,7 +31,7 @@
         settingByTemplate9.koffers.visible
       "
     />
-    <KProductListHoko
+    <Ko9-sliderHoko
       id="KProductListHokoX"
       v-bind="componentsProps"
       v-if="
@@ -46,7 +42,7 @@
         dataHoko.statehoko == 1
       "
     />
-    <KProductList
+    <Ko9-ProductList
       id="KProductListX"
       v-bind="componentsProps"
       v-if="
@@ -56,7 +52,7 @@
         this.fullProducts.length > 0
       "
     />
-    <KBlog
+    <Ko9-blog
       id="KBlogX"
       v-bind="componentsProps"
       v-show="
@@ -66,7 +62,7 @@
         settingByTemplate9.blog.visible
       "
     />
-    <KWrapper
+    <Ko9-wrapper
       id="KWrapperX"
       v-bind="componentsProps"
       v-if="
@@ -75,7 +71,7 @@
         settingByTemplate9.wrapper.visible
       "
     />
-    <KNews
+    <Ko9-Newsletter
       id="KNewsX"
       v-bind="componentsProps"
       v-if="
@@ -92,16 +88,6 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   name: 'Ko-template9',
-  components: {
-    KBanner: () => import('../../components/template9/ko-carousel'),
-    KOffers: () => import('../../components/template9/ko-offers'),
-    KProductList: () => import('../../components/template9/Ko-ProductList'),
-    KProductListHoko: () =>
-      import('../../components/template9/Ko-slider-hoko.vue'),
-    KBlog: () => import('../../components/template9/ko-blog'),
-    KWrapper: () => import('../../components/template9/Ko-wrapper'),
-    KNews: () => import('../../components/template9/Ko-Newsletter'),
-  },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate09)

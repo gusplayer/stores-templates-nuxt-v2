@@ -73,7 +73,7 @@ export default {
 <style scoped>
 .content-footer {
   background-color: #3d3d3d;
-  position: fixed;
+  position: sticky;
   z-index: 999;
   bottom: 0;
   max-width: 900px;

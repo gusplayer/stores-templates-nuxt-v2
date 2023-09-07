@@ -1,14 +1,14 @@
-exports.ids = [40];
+exports.ids = [159];
 exports.modules = {
 
-/***/ 1018:
+/***/ 1004:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/cart.vue?vue&type=template&id=51588243&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/cart.vue?vue&type=template&id=51588243&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -22,12 +22,12 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./pages/cart.vue?vue&type=template&id=51588243&
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/cart.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/cart.vue?vue&type=script&lang=js&
 /* harmony default export */ var cartvue_type_script_lang_js_ = ({
   layout: 'default',
   name: 'ContentCart',
   components: {
-    KCart: () => __webpack_require__.e(/* import() */ 107).then(__webpack_require__.bind(null, 1054))
+    KCart: () => __webpack_require__.e(/* import() */ 213).then(__webpack_require__.bind(null, 1141))
   },
   computed: {
     dataStore() {
@@ -55,7 +55,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "2fde2e74"
+  "51a9610e"
   
 )
 

@@ -182,7 +182,7 @@ import axios from 'axios'
 import productSlide from './_productdetails/productSlideHoko.vue'
 import koDescription from './_productdetails/descriptionProduct-hoko.vue'
 export default {
-  name: 'Ko-ProductDetail-1',
+  name: 'Ko5-ProductDetail',
   props: {
     dataStore: Object,
     // productsData: Array,

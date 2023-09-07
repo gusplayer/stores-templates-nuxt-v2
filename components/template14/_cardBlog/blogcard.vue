@@ -49,7 +49,7 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
-  name: 'Ko14-BlogCard',
+  name: 'Ko15-BlogCard',
   props: { article: Object, cardBlog: Object, settingGeneral: Object },
   mounted() {
     if (this.article.created_at) {

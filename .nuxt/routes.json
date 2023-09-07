@@ -96,6 +96,14 @@
     "_name": "_1a63996d"
   },
   {
+    "name": "template16",
+    "path": "/template16",
+    "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template16\\\\index.vue",
+    "chunkName": "pages/template16/index",
+    "url": "/template16",
+    "_name": "_22153ecc"
+  },
+  {
     "name": "template5",
     "path": "/template5",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template5\\\\index.vue",
@@ -150,46 +158,6 @@
     "chunkName": "pages/termsandconditions",
     "url": "/termsandconditions",
     "_name": "_2da39202"
-  },
-  {
-    "name": "unicentro",
-    "path": "/unicentro",
-    "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\unicentro\\\\index.vue",
-    "chunkName": "pages/unicentro/index",
-    "url": "/unicentro",
-    "_name": "_23a5c374"
-  },
-  {
-    "name": "template6-index_macrobrand",
-    "path": "/template6/index_macrobrand",
-    "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index_macrobrand.vue",
-    "chunkName": "pages/template6/index_macrobrand",
-    "url": "/template6/index_macrobrand",
-    "_name": "_2e317606"
-  },
-  {
-    "name": "template99-templates-template1",
-    "path": "/template99/templates/template1",
-    "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template99\\\\templates\\\\template1\\\\index.vue",
-    "chunkName": "pages/template99/templates/template1/index",
-    "url": "/template99/templates/template1",
-    "_name": "_18d692d3"
-  },
-  {
-    "name": "template99-templates-template2",
-    "path": "/template99/templates/template2",
-    "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template99\\\\templates\\\\template2\\\\index.vue",
-    "chunkName": "pages/template99/templates/template2/index",
-    "url": "/template99/templates/template2",
-    "_name": "_20883832"
-  },
-  {
-    "name": "template99-templates-template3",
-    "path": "/template99/templates/template3",
-    "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template99\\\\templates\\\\template3\\\\index.vue",
-    "chunkName": "pages/template99/templates/template3/index",
-    "url": "/template99/templates/template3",
-    "_name": "_2839dd91"
   },
   {
     "name": "index",

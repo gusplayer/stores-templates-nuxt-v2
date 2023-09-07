@@ -8,21 +8,21 @@
       this.settingByTemplate?.settings ?? this.settingBase,
     ]"
   >
-    <kBanner v-if="this.stateBanner" id="KHeaderX" />
-    <KComponent360 v-if="this.stateBanner" />
-    <KProductFavoritos v-if="this.stateBanner" />
-    <KProductListHoko
-      :dataStore="dataStore"
+    <Ko5-Banner id="KHeaderX" v-if="this.stateBanner" />
+    <Ko5-Component360 v-if="this.stateBanner" />
+    <Ko5-ProductFavoritos v-if="this.stateBanner" />
+    <Ko5-ProductListHomeHoko
       id="KProductX"
+      :dataStore="dataStore"
       v-if="dataHoko && dataHoko.statehoko == 1 && this.stateBanner"
     />
-    <KProductList
+    <Ko5-ProductListHome
+      id="KProductX"
       :dataStore="dataStore"
       :fullProducts="fullProducts"
-      id="KProductX"
     />
-    <kBannerFooter id="KFooterX" />
-    <KNewsletter :dataStore="dataStore" />
+    <Ko5-BannerFooter id="KFooterX" />
+    <Ko5-Newsletter :dataStore="dataStore" />
   </div>
 </template>
 
@@ -31,21 +31,6 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   name: 'Ko-template5',
-  components: {
-    kBanner: () => import('../../components/template5/ko-Banner-1'),
-    kBannerFooter: () => import('../../components/template5/ko-BannerFooter-1'),
-    KProductFavoritos: () =>
-      import('../../components/template5/Ko-ProductFavoritos-1'),
-    KProductList: () => import('../../components/template5/Ko-ProductList-1'),
-    KProductListHoko: () =>
-      import('../../components/template5/Ko-ProductFavoritosHoko.vue'),
-    KNewsletter: () => import('../../components/template5/Ko-Newsletter-1'),
-    KComponent360: () => import('../../components/template5/Ko-Content360-1'),
-  },
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
-  },
   computed: {
     ...mapState([
       'template',
@@ -59,6 +44,10 @@ export default {
       return this.$store.getters['products/filterProducts']
     },
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
@@ -68,8 +57,8 @@ export default {
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
       ) {
+        console.log(e.data)
         if (e && e.data && e.data.componentToEdit) {
-          // console.log(e.data)
           this.$store.commit('SET_CURRENTSETTING5', e.data)
           switch (e.data.componentToEdit) {
             case 'header':
@@ -91,3 +80,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+* {
+  font-family: var(--font-style-1) !important;
+}
+</style>

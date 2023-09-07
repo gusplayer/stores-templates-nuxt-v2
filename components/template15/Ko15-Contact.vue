@@ -387,7 +387,7 @@ import axios from 'axios'
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko14-Contact-1',
+  name: 'Ko15-Contact-1',
   props: {
     dataStore: Object,
     settingByTemplate15: Array,

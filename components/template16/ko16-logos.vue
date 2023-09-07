@@ -1,0 +1,122 @@
+<template>
+  <div
+    class="w-full flex justify-center items-center py-25 lg:py-40 px-10"
+    :style="`background-color: ${logos['--background_color_1']}`"
+  >
+    <div
+      class="w-full max-w-[1200px] h-auto flex flex-col items-center justify-center overflow-hidden"
+    >
+      <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full">
+        <div class="swiper-wrapper w-full">
+          <a
+            :id="`slide${index + 1}`"
+            v-for="(item, index) in logos.values"
+            :key="index"
+            :href="item.url_redirect"
+            class="swiper-slide w-full"
+            rel="noreferrer noopener"
+          >
+            <img
+              :src="idCloudinary(item.img, 550, 550)"
+              class="h-full w-full remove_bg max-w-[140px] max-h-[140px]"
+              width="140"
+              height="140"
+              :alt="`imágenes logos${index}`"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import idCloudinary from '@/mixins/idCloudinary'
+export default {
+  mixins: [idCloudinary],
+  name: 'Ko16-Logos',
+  props: {
+    logos: Object,
+    dataStore: Object,
+  },
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: 'auto',
+        loop: true,
+        autoplay: {
+          delay: 6000,
+          disableOnInteraction: false,
+        },
+        spaceBetween: 0,
+        breakpoints: {
+          1920: {
+            slidesPerView: 5,
+            spaceBetween: 80,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 80,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 60,
+          },
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+        },
+      },
+    }
+  },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
+  },
+}
+</script>
+<style scoped>
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.remove_bg {
+  filter: brightness(1.1);
+  mix-blend-mode: multiply;
+}
+.swiper-wrapper {
+  height: 100%;
+  max-height: 200px;
+}
+
+@media (max-width: 600px) {
+  .swiper-wrapper {
+    max-height: 170px;
+  }
+}
+@media (max-width: 500px) {
+  .swiper-wrapper {
+    max-height: 150px;
+  }
+}
+@media (max-width: 430px) {
+  .swiper-wrapper {
+    max-height: 125px;
+  }
+}
+</style>

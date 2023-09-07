@@ -1,0 +1,413 @@
+{
+  "BannerCarousel": {
+    "description": "Auto imported from components/template7/_carouselBanner/banner-carousel.vue"
+  },
+  "Ko7KoCarousel": {
+    "description": "Auto imported from components/template7/_carouselBanner/Ko7-ko-carousel.vue"
+  },
+  "KoProductDetail1": {
+    "description": "Auto imported from components/template5/Ko-ProductDetail-1.vue"
+  },
+  "KoProductDetailHoko1": {
+    "description": "Auto imported from components/template5/Ko-ProductDetailHoko-1.vue"
+  },
+  "KoProductFavoritosHoko": {
+    "description": "Auto imported from components/template5/Ko-ProductFavoritosHoko.vue"
+  },
+  "Ko5Banner": {
+    "description": "Auto imported from components/template5/Ko5-Banner.vue"
+  },
+  "Ko5BannerFooter": {
+    "description": "Auto imported from components/template5/Ko5-BannerFooter.vue"
+  },
+  "Ko5Component360": {
+    "description": "Auto imported from components/template5/Ko5-Component360.vue"
+  },
+  "Ko5Contact": {
+    "description": "Auto imported from components/template5/Ko5-Contact.vue"
+  },
+  "Ko5Newsletter": {
+    "description": "Auto imported from components/template5/Ko5-Newsletter.vue"
+  },
+  "Ko5ProductFavoritos": {
+    "description": "Auto imported from components/template5/Ko5-ProductFavoritos.vue"
+  },
+  "Ko5ProductList": {
+    "description": "Auto imported from components/template5/Ko5-ProductList.vue"
+  },
+  "Ko5ProductListHome": {
+    "description": "Auto imported from components/template5/Ko5-ProductListHome.vue"
+  },
+  "Ko5ProductListHomeHoko": {
+    "description": "Auto imported from components/template5/Ko5-ProductListHomeHoko.vue"
+  },
+  "ProductcardKoProductCard1": {
+    "description": "Auto imported from components/template5/_productcard/Ko-ProductCard-1.vue"
+  },
+  "ProductcardKoProductCardHoko1": {
+    "description": "Auto imported from components/template5/_productcard/Ko-ProductCardHoko-1.vue"
+  },
+  "ProductdetailsCommentsProduct": {
+    "description": "Auto imported from components/template5/_productdetails/commentsProduct.vue"
+  },
+  "ProductdetailsDescriptionProductHoko": {
+    "description": "Auto imported from components/template5/_productdetails/descriptionProduct-hoko.vue"
+  },
+  "ProductdetailsDescriptionProduct": {
+    "description": "Auto imported from components/template5/_productdetails/descriptionProduct.vue"
+  },
+  "ProductdetailsProductSlide": {
+    "description": "Auto imported from components/template5/_productdetails/productSlide.vue"
+  },
+  "ProductdetailsProductSlideHoko": {
+    "description": "Auto imported from components/template5/_productdetails/productSlideHoko.vue"
+  },
+  "ProductdetailsSelectGroup": {
+    "description": "Auto imported from components/template5/_productdetails/selectGroup.vue"
+  },
+  "ProductdetailsSuggestionsProducto": {
+    "description": "Auto imported from components/template5/_productdetails/suggestionsProducto.vue"
+  },
+  "ProductdetailsZoomImg": {
+    "description": "Auto imported from components/template5/_productdetails/zoomImg.vue"
+  },
+  "ProductofavoritoProductSlide": {
+    "description": "Auto imported from components/template5/_productofavorito/productSlide.vue"
+  },
+  "ProductofavoritoProductSlideHoko": {
+    "description": "Auto imported from components/template5/_productofavorito/productSlideHoko.vue"
+  },
+  "KoCategory1": {
+    "description": "Auto imported from components/template7/Ko-Category-1.vue"
+  },
+  "KoContact": {
+    "description": "Auto imported from components/template7/Ko-Contact.vue"
+  },
+  "KoProductDetail": {
+    "description": "Auto imported from components/template7/Ko-ProductDetail.vue"
+  },
+  "KoProductListFilter": {
+    "description": "Auto imported from components/template7/Ko-ProductListFilter.vue"
+  },
+  "KoProductListSearchUp": {
+    "description": "Auto imported from components/template7/Ko-ProductListSearchUp.vue"
+  },
+  "KoSocialNetworks": {
+    "description": "Auto imported from components/template7/Ko-Social-Networks.vue"
+  },
+  "Ko7Advertising": {
+    "description": "Auto imported from components/template7/Ko7-advertising.vue"
+  },
+  "Ko7BannerPromo": {
+    "description": "Auto imported from components/template7/Ko7-Banner-Promo.vue"
+  },
+  "Ko7Blog": {
+    "description": "Auto imported from components/template7/Ko7-blog.vue"
+  },
+  "Ko7Gify": {
+    "description": "Auto imported from components/template7/Ko7-gify.vue"
+  },
+  "Ko7HowWeWork": {
+    "description": "Auto imported from components/template7/Ko7-howWeWork.vue"
+  },
+  "Ko7Newsletter": {
+    "description": "Auto imported from components/template7/Ko7-Newsletter.vue"
+  },
+  "Ko7ProductList": {
+    "description": "Auto imported from components/template7/Ko7-ProductList.vue"
+  },
+  "Ko7Wrapper": {
+    "description": "Auto imported from components/template7/Ko7-wrapper.vue"
+  },
+  "BlogPageKoArticulo": {
+    "description": "Auto imported from components/template7/blog_page/Ko-articulo.vue"
+  },
+  "BlogPageKoBlog": {
+    "description": "Auto imported from components/template7/blog_page/Ko-Blog.vue"
+  },
+  "BlogBlogcard": {
+    "description": "Auto imported from components/template7/_blog/blogcard.vue"
+  },
+  "ProductcardProductCard": {
+    "description": "Auto imported from components/template7/_productcard/ProductCard.vue"
+  },
+  "ProductcardProductCardFilterList": {
+    "description": "Auto imported from components/template7/_productcard/ProductCardFilterList.vue"
+  },
+  "PromoBanner": {
+    "description": "Auto imported from components/template7/_promoBanner/promoBanner.vue"
+  },
+  "BlogPageBlogcardKoCardblog": {
+    "description": "Auto imported from components/template7/blog_page/_blogcard/Ko-cardblog.vue"
+  },
+  "KoProductDetailHoko": {
+    "description": "Auto imported from components/template9/Ko-ProductDetailHoko.vue"
+  },
+  "KoProductListFilterHoko": {
+    "description": "Auto imported from components/template9/Ko-ProductListFilterHoko.vue"
+  },
+  "KoProductListHoko": {
+    "description": "Auto imported from components/template9/Ko-ProductListHoko.vue"
+  },
+  "Ko9Banner": {
+    "description": "Auto imported from components/template9/Ko9-Banner.vue"
+  },
+  "Ko9Blog": {
+    "description": "Auto imported from components/template9/Ko9-blog.vue"
+  },
+  "Ko9Newsletter": {
+    "description": "Auto imported from components/template9/Ko9-Newsletter.vue"
+  },
+  "Ko9Offers": {
+    "description": "Auto imported from components/template9/Ko9-offers.vue"
+  },
+  "Ko9ProductList": {
+    "description": "Auto imported from components/template9/Ko9-ProductList.vue"
+  },
+  "Ko9SliderHoko": {
+    "description": "Auto imported from components/template9/Ko9-sliderHoko.vue"
+  },
+  "Ko9Wrapper": {
+    "description": "Auto imported from components/template9/Ko9-wrapper.vue"
+  },
+  "ProductcardProductCardHoko": {
+    "description": "Auto imported from components/template9/_productcard/ProductCardHoko.vue"
+  },
+  "ProductdetailsOptAcordionHoko": {
+    "description": "Auto imported from components/template9/_productdetails/OptAcordion-hoko.vue"
+  },
+  "ProductdetailsOptAcordion": {
+    "description": "Auto imported from components/template9/_productdetails/OptAcordion.vue"
+  },
+  "ProductdetailsOptTabHoko": {
+    "description": "Auto imported from components/template9/_productdetails/OptTab-hoko.vue"
+  },
+  "ProductdetailsOptTab": {
+    "description": "Auto imported from components/template9/_productdetails/OptTab.vue"
+  },
+  "ProductofavoritoProductSlidehoko": {
+    "description": "Auto imported from components/template9/_productofavorito/productSlidehoko.vue"
+  },
+  "KoNewsletter": {
+    "description": "Auto imported from components/template10/Ko-Newsletter.vue"
+  },
+  "Ko10Blog": {
+    "description": "Auto imported from components/template10/Ko10-blog.vue"
+  },
+  "Ko10ButtonCar": {
+    "description": "Auto imported from components/template10/Ko10-buttonCar.vue"
+  },
+  "Ko10Carousel": {
+    "description": "Auto imported from components/template10/Ko10-carousel.vue"
+  },
+  "Ko10Deals": {
+    "description": "Auto imported from components/template10/Ko10-deals.vue"
+  },
+  "Ko10FeaturedProducts": {
+    "description": "Auto imported from components/template10/Ko10-featuredProducts.vue"
+  },
+  "Ko10Section": {
+    "description": "Auto imported from components/template10/Ko10-section.vue"
+  },
+  "Ko10Trending": {
+    "description": "Auto imported from components/template10/Ko10-trending.vue"
+  },
+  "BlogPageBlogcardKoBlogcard": {
+    "description": "Auto imported from components/template10/blog_page/_blogcard/ko-blogcard.vue"
+  },
+  "KoSocialnet": {
+    "description": "Auto imported from components/template11/ko-socialnet.vue"
+  },
+  "Ko11Blog": {
+    "description": "Auto imported from components/template11/Ko11-blog.vue"
+  },
+  "Ko11Carousel": {
+    "description": "Auto imported from components/template11/Ko11-carousel.vue"
+  },
+  "Ko11Information": {
+    "description": "Auto imported from components/template11/Ko11-information.vue"
+  },
+  "Ko11ListTrending": {
+    "description": "Auto imported from components/template11/Ko11-listTrending.vue"
+  },
+  "Ko11Parallax": {
+    "description": "Auto imported from components/template11/Ko11-parallax.vue"
+  },
+  "Ko11Section": {
+    "description": "Auto imported from components/template11/Ko11-section.vue"
+  },
+  "Ko11TrendingProduct": {
+    "description": "Auto imported from components/template11/Ko11-trendingProduct.vue"
+  },
+  "Ko11TrendingProductHoko": {
+    "description": "Auto imported from components/template11/Ko11-trendingProductHoko.vue"
+  },
+  "Newsletter": {
+    "description": "Auto imported from components/template11/_newsletter/newsletter.vue"
+  },
+  "CarouselBannerCarousel": {
+    "description": "Auto imported from components/template11/_carouselBanner/banner-carousel.vue"
+  },
+  "Ko12IFooter": {
+    "description": "Auto imported from components/template12/Ko12-IFooter.vue"
+  },
+  "Ko12IHeader": {
+    "description": "Auto imported from components/template12/Ko12-IHeader.vue"
+  },
+  "Ko12IHeroImage": {
+    "description": "Auto imported from components/template12/Ko12-IHeroImage.vue"
+  },
+  "Ko12IMainSection": {
+    "description": "Auto imported from components/template12/Ko12-IMainSection.vue"
+  },
+  "ProductCard": {
+    "description": "Auto imported from components/template12/ProductCard.vue"
+  },
+  "ProductDetail": {
+    "description": "Auto imported from components/template12/productDetail.vue"
+  },
+  "SectionWithTitle": {
+    "description": "Auto imported from components/template12/SectionWithTitle.vue"
+  },
+  "MixinsComponentProps": {
+    "description": "Auto imported from components/template12/mixins/ComponentProps.vue"
+  },
+  "ItemsProductSlide": {
+    "description": "Auto imported from components/template12/_items/productSlide.vue"
+  },
+  "KoContact1": {
+    "description": "Auto imported from components/template13/Ko-Contact-1.vue"
+  },
+  "KoProductFavoritos1": {
+    "description": "Auto imported from components/template13/Ko-ProductFavoritos-1.vue"
+  },
+  "Ko13Banner": {
+    "description": "Auto imported from components/template13/Ko13-Banner.vue"
+  },
+  "Ko13Information": {
+    "description": "Auto imported from components/template13/Ko13-information.vue"
+  },
+  "Ko13InfoText": {
+    "description": "Auto imported from components/template13/Ko13-infoText.vue"
+  },
+  "Ko13Newsletter": {
+    "description": "Auto imported from components/template13/Ko13-Newsletter.vue"
+  },
+  "Ko13ProductList": {
+    "description": "Auto imported from components/template13/Ko13-ProductList.vue"
+  },
+  "BlogKoArticulo": {
+    "description": "Auto imported from components/template13/_blog/Ko-articulo.vue"
+  },
+  "BlogKoBlog": {
+    "description": "Auto imported from components/template13/_blog/Ko-Blog.vue"
+  },
+  "Ko14Banner": {
+    "description": "Auto imported from components/template14/ko14-Banner.vue"
+  },
+  "Ko14Information": {
+    "description": "Auto imported from components/template14/ko14-information.vue"
+  },
+  "Ko14ListBlogHome": {
+    "description": "Auto imported from components/template14/ko14-listBlogHome.vue"
+  },
+  "Ko14Logos": {
+    "description": "Auto imported from components/template14/ko14-logos.vue"
+  },
+  "Ko14Newsletter": {
+    "description": "Auto imported from components/template14/ko14-Newsletter.vue"
+  },
+  "Ko14Offers": {
+    "description": "Auto imported from components/template14/ko14-offers.vue"
+  },
+  "Ko14OffersProduct": {
+    "description": "Auto imported from components/template14/ko14-offersProduct.vue"
+  },
+  "Ko14ProductListHome": {
+    "description": "Auto imported from components/template14/ko14-productListHome.vue"
+  },
+  "CardBlogCard": {
+    "description": "Auto imported from components/template14/_cardBlog/blogCard.vue"
+  },
+  "CardBlogKoArticulo": {
+    "description": "Auto imported from components/template14/_cardBlog/Ko-articulo.vue"
+  },
+  "CardBlogKoIndex": {
+    "description": "Auto imported from components/template14/_cardBlog/Ko-index.vue"
+  },
+  "CardProductCard": {
+    "description": "Auto imported from components/template14/_cardProduct/ProductCard.vue"
+  },
+  "LateralMenu": {
+    "description": "Auto imported from components/template14/_lateral/_lateralMenu.vue"
+  },
+  "Ko15Banner": {
+    "description": "Auto imported from components/template15/ko15-Banner.vue"
+  },
+  "Ko15Banner2": {
+    "description": "Auto imported from components/template15/ko15-Banner2.vue"
+  },
+  "Ko15Categories": {
+    "description": "Auto imported from components/template15/ko15-Categories.vue"
+  },
+  "Ko15Contact": {
+    "description": "Auto imported from components/template15/Ko15-Contact.vue"
+  },
+  "Ko15Content": {
+    "description": "Auto imported from components/template15/ko15-Content.vue"
+  },
+  "Ko15Information": {
+    "description": "Auto imported from components/template15/ko15-information.vue"
+  },
+  "Ko15Information2": {
+    "description": "Auto imported from components/template15/ko15-information2.vue"
+  },
+  "Ko15InformationLogos": {
+    "description": "Auto imported from components/template15/ko15-informationLogos.vue"
+  },
+  "Ko15ListProductsOffers": {
+    "description": "Auto imported from components/template15/ko15-listProductsOffers.vue"
+  },
+  "Ko15Logos": {
+    "description": "Auto imported from components/template15/ko15-logos.vue"
+  },
+  "Ko15Newsletter": {
+    "description": "Auto imported from components/template15/Ko15-Newsletter.vue"
+  },
+  "Ko15ProductListFilter": {
+    "description": "Auto imported from components/template15/Ko15-ProductListFilter.vue"
+  },
+  "Ko15ProductListHome": {
+    "description": "Auto imported from components/template15/ko15-productListHome.vue"
+  },
+  "Ko16Banner": {
+    "description": "Auto imported from components/template16/ko16-Banner.vue"
+  },
+  "Ko16Categories": {
+    "description": "Auto imported from components/template16/ko16-Categories.vue"
+  },
+  "Ko16Contact": {
+    "description": "Auto imported from components/template16/Ko16-Contact.vue"
+  },
+  "Ko16Content": {
+    "description": "Auto imported from components/template16/ko16-Content.vue"
+  },
+  "Ko16Information": {
+    "description": "Auto imported from components/template16/ko16-Information.vue"
+  },
+  "Ko16InformationStore": {
+    "description": "Auto imported from components/template16/ko16-informationStore.vue"
+  },
+  "Ko16ListBlogHome": {
+    "description": "Auto imported from components/template16/ko16-listBlogHome.vue"
+  },
+  "Ko16Logos": {
+    "description": "Auto imported from components/template16/ko16-logos.vue"
+  },
+  "Ko16Offers": {
+    "description": "Auto imported from components/template16/ko16-Offers.vue"
+  },
+  "Ko16ProductListHome": {
+    "description": "Auto imported from components/template16/ko16-productListHome.vue"
+  }
+}
