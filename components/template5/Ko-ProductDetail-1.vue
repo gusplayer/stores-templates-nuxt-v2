@@ -370,7 +370,7 @@ import currency from '../../mixins/formatCurrent'
 
 export default {
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductDetail-1',
+  name: 'Ko5-ProductDetail',
   props: {
     dataStore: Object,
     productsData: Array,
@@ -623,7 +623,7 @@ export default {
                 desc: 'Disfruta de este obsequio por parte de la tienda.',
               }
               break
-              case 'sinEnvio':
+            case 'sinEnvio':
               this.envio = {
                 titulo: 'Sin envio',
                 desc: 'Tienes que acercarte a la tienda a recoger tu pedido.',

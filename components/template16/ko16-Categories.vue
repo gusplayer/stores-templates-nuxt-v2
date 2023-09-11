@@ -1,0 +1,119 @@
+<template>
+  <div
+    class="w-full flex justify-center items-center py-25 lg:py-40 px-10"
+    :style="`background-color: ${categories['--background_color_1']}`"
+  >
+    <div
+      class="w-full max-w-[1700px] h-auto flex flex-col items-center justify-center overflow-hidden"
+    >
+      <p
+        class="w-full text-center mb-25 text-25 md:text-30 lg:text-40"
+        :style="`color: ${categories.color_title_1}; font-weight: ${categories.fontWeighTitle};`"
+      >
+        {{ categories.title }}
+      </p>
+
+      <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full">
+        <div class="swiper-wrapper w-full">
+          <a
+            :id="`slide${index + 1}`"
+            v-for="(item, index) in categories.values"
+            :key="index"
+            :href="item.url_redirect"
+            class="swiper-slide w-full"
+            rel="noreferrer noopener"
+          >
+            <img
+              :src="idCloudinary(item.img, 550, 550)"
+              alt="banner template15"
+              width="405"
+              height="405"
+              class="w-full h-full object-cover relative"
+              :style="`border-radius: ${settingGeneral?.radius};`"
+            />
+            <div
+              class="absolute w-full h-full flex justify-center items-center top-0 z-10"
+            >
+              <p
+                class="px-10 py-15 md:py-8 text-12 md:text-14 w-full max-w-[250px] text-center"
+                :style="`color: ${item.color_title}; background-color: ${item.color_bg};  border-radius: ${settingGeneral?.radius};`"
+              >
+                {{ item.title }}
+              </p>
+            </div>
+          </a>
+        </div>
+        <div class="swiper-button-prev" v-if="categories.values.length > 1" />
+        <div class="swiper-button-next" v-if="categories.values.length > 1" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import idCloudinary from '@/mixins/idCloudinary'
+export default {
+  name: 'Ko16-categories',
+  mixins: [idCloudinary],
+  props: {
+    categories: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      swiperOption: {
+        direction: 'horizontal',
+        setWrapperSize: true,
+        paginationClickable: true,
+        slidesPerView: 4,
+        spaceBetween: 26,
+        grabCursor: true,
+        breakpoints: {
+          990: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+          790: {
+            slidesPerView: 3,
+            spaceBetween: 15,
+          },
+          500: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      },
+    }
+  },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
+  },
+}
+</script>
+
+<style scoped>
+.giftLoad,
+.swiper-slide {
+  max-width: 405px;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: #ed6436;
+}
+</style>

@@ -283,15 +283,20 @@
                   {{ data.detalle.subcategoria_producto.nombre_subcategoria }}
                 </p>
               </div>
-              <div
-                v-if="data.detalle?.subcategoria_producto?.nombre_subcategoria"
-                class="flex flex-row justify-start items-center"
-              >
+              <div class="flex flex-row justify-start items-center">
                 <p
+                  v-if="envio.titulo == 'Envío gratis'"
                   class="text-16 font-bold mr-10"
                   :style="`color:${settingByTemplate14[0].detailsProducts.color_text};`"
                 >
                   {{ $t('home_cardGratis') }}
+                </p>
+                <p
+                  v-if="spent"
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${settingByTemplate14[0].detailsProducts.color_text};`"
+                >
+                  {{ $t('home_cardAgotado') }}
                 </p>
               </div>
             </div>
@@ -514,7 +519,7 @@ import idCloudinary from '@/mixins/idCloudinary'
 import currency from '@/mixins/formatCurrent'
 export default {
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductDetail',
+  name: 'Ko15-ProductDetail',
   props: {
     dataStore: Object,
     productsData: Array,

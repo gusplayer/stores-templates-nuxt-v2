@@ -6,7 +6,7 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   components: {
-    K05Contact: () => import('@/components/template5/Ko-Contact-1'),
+    K05Contact: () => import('@/components/template5/Ko5-Contact'),
     K07Contact: () => import('@/components/template7/Ko-Contact'),
     K09Contact: () => import('@/components/template9/Ko-Contact'),
     K10Contact: () => import('@/components/template10/ko-Contact'),
@@ -14,6 +14,7 @@ export default {
     K13Contact: () => import('@/components/template13/Ko-Contact-1'),
     K14Contact: () => import('@/components/template14/Ko-Contact-1'),
     K15Contact: () => import('@/components/template15/Ko15-Contact'),
+    K16Contact: () => import('@/components/template16/Ko16-Contact'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
@@ -32,6 +33,7 @@ export default {
         13: 'K13Contact',
         14: 'K14Contact',
         15: 'K15Contact',
+        16: 'K16Contact',
       },
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
@@ -41,6 +43,7 @@ export default {
         13: 'SET_CURRENTSETTING13',
         14: 'SET_CURRENTSETTING14',
         15: 'SET_CURRENTSETTING15',
+        16: 'SET_CURRENTSETTING16',
       },
     }
   },
@@ -56,6 +59,7 @@ export default {
       'settingByTemplate13',
       'settingByTemplate14',
       'settingByTemplate15',
+      'settingByTemplate16',
       'template',
     ]),
     indexTemplate() {
@@ -101,6 +105,11 @@ export default {
         ),
         settingByTemplate15: this.createSettingByTemplate(
           this.settingByTemplate15,
+          'contact',
+          'settingGeneral'
+        ),
+        settingByTemplate16: this.createSettingByTemplate(
+          this.settingByTemplate16,
           'contact',
           'settingsGeneral'
         ),

@@ -87,7 +87,8 @@ export default {
     KoHeader7: () => import('../components/headers/header7/Ko-Header-7'),
     KoHeader8: () => import('../components/headers/header8/Ko-Header-8'),
     KoHeader9: () => import('../components/headers/header9/Ko-Header-9'),
-    KoHeader10: () => import('../components/headers/Ko14_header/Ko-Header-10'),
+    KoHeader10: () => import('../components/headers/Ko15_header/Ko-Header-10'),
+    KoHeader11: () => import('../components/headers/Ko16_header/Ko-Header-11'),
     // FOOTER
     KoFooter1: () => import('../components/footers/footer1/Ko-Footer-1'),
     KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2'),
@@ -97,7 +98,7 @@ export default {
     KoFooter7: () => import('../components/footers/footer7/Ko-Footer-7'),
     KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8'),
     KoFooter9: () => import('../components/footers/K14_footer9/Ko-Footer-9'),
-    KoFooter10: () => import('../components/footers/K14_footer10/Ko-Footer-10'),
+    KoFooter10: () => import('../components/footers/K15_footer10/Ko-Footer-10'),
     // OTROS
     KoFooterCountry: () =>
       import('../components/footers/footer1/Ko-Footer-Country'),
@@ -114,23 +115,33 @@ export default {
       })
     }
   },
-  mounted() {
+  async mounted() {
+    // Configura y habilita el seguimiento de Facebook Pixel si está disponible
     if (this.analytics_tagmanager?.pixel_facebook != null) {
       this.$fb.setPixelId(this.analytics_tagmanager.pixel_facebook)
       this.$fb.track('PageView')
       this.$fb.enable()
     }
-    this.$store.dispatch('GET_COOKIES')
-    this.$store.dispatch('GET_COOKIES_PWD')
-    this.$store.dispatch('GET_SHOPPING_CART')
-    if (this.$route.query?.clearCart == 'true') {
+
+    // Ejecuta las tres dispatches de manera concurrente
+    await Promise.all([
+      this.$store.dispatch('GET_COOKIES'),
+      this.$store.dispatch('GET_COOKIES_PWD'),
+      this.$store.dispatch('GET_SHOPPING_CART'),
+    ])
+
+    // Borra todos los elementos del carrito y actualiza el contenido si la query 'clearCart' es 'true'
+    if (this.$route.query?.clearCart === 'true') {
       this.$store.commit('DELETE_ALL_ITEMS_CART')
       this.$store.commit('UPDATE_CONTENT_CART')
     }
-    if (this.$route.query?.openCart == 'true') {
+
+    // Establece 'SET_OPEN_ORDER' en true si la query 'openCart' es 'true'
+    if (this.$route.query?.openCart === 'true') {
       this.$store.commit('SET_OPEN_ORDER', true)
     }
 
+    // Agrega un listener de mensajes
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)
   },
@@ -138,74 +149,6 @@ export default {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
   head() {
-    let tipo_letra
-    let tipo_letra2
-    let tipo_letra3
-    switch (this.template) {
-      case 3:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra = this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto'
-        break
-      case 5:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra = this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto'
-        break
-      case 6:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra = this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto'
-        break
-      case 7:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate7?.settingGeneral?.fount_1 ?? 'David Libre'
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra2 =
-          this.settingByTemplate7?.settingGeneral?.fount_2 ?? 'Great Vibes'
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra3 = this.settingByTemplate7?.settingGeneral?.fount_3 ?? 'Lora'
-        break
-      case 9:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate9?.settingGeneral?.fount_1 ?? 'Poppins'
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra2 =
-          this.settingByTemplate9?.settingGeneral?.fount_2 ?? 'Roboto'
-        break
-      case 10:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate10?.settingGeneral?.fount_1 ?? 'Roboto'
-        break
-      case 11:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate11?.settingGeneral?.fount_1 ?? 'Roboto'
-        break
-      case 99:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra = 'Poppins'
-        break
-      case 12:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra = this.settingByTemplate12?.fontFamily ?? 'Poppins'
-        break
-      case 13:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate13?.settingGeneral?.fount_1 ?? 'Roboto'
-        break
-      case 14:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate14?.settingsGeneral?.fount_1 ?? 'Poppins'
-        break
-      case 15:
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        tipo_letra =
-          this.settingByTemplate15?.settingsGeneral?.fount_1 ?? 'Poppins'
-        break
-    }
     let tienda = this.$store.state?.dataStore?.tienda ?? ''
     let tidio = this.analytics_tagmanager?.tidio_user ?? ''
     let FacebookPixel1 =
@@ -213,6 +156,41 @@ export default {
     let googleMerchants = this.analytics_tagmanager?.google_merchant ?? ''
     let geolocation = this.$store.state.dataStore.geolocalizacion
     let description = tienda?.descripcion?.replace(/<[^>]*>?/g, '') ?? ''
+    let tipo_letra, tipo_letra2, tipo_letra3
+
+    // Mapeo de las opciones de tipo de letra para cada template
+    const tipoLetraPorTemplate = {
+      5: this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto',
+      7: {
+        1: this.settingByTemplate7?.settingGeneral?.fount_1 ?? 'David Libre',
+        2: this.settingByTemplate7?.settingGeneral?.fount_2 ?? 'Great Vibes',
+        3: this.settingByTemplate7?.settingGeneral?.fount_3 ?? 'Lora',
+      },
+      9: {
+        1: this.settingByTemplate9?.settingGeneral?.fount_1 ?? 'Poppins',
+        2: this.settingByTemplate9?.settingGeneral?.fount_2 ?? 'Roboto',
+      },
+      10: this.settingByTemplate10?.settingGeneral?.fount_1 ?? 'Roboto',
+      11: this.settingByTemplate11?.settingGeneral?.fount_1 ?? 'Roboto',
+      99: 'Poppins',
+      12: this.settingByTemplate12?.fontFamily ?? 'Poppins',
+      13: this.settingByTemplate13?.settingGeneral?.fount_1 ?? 'Roboto',
+      14: this.settingByTemplate14?.settingsGeneral?.fount_1 ?? 'Poppins',
+      15: this.settingByTemplate15?.settingGeneral?.fount_1 ?? 'Poppins',
+      16: this.settingByTemplate16?.settingsGeneral?.fount_1 ?? 'Poppins',
+    }
+
+    // Verifica si el valor para el template actual es un objeto
+    const valor = tipoLetraPorTemplate[this.template]
+
+    if (typeof valor === 'object') {
+      tipo_letra = valor[1]
+      tipo_letra2 = valor[2]
+      tipo_letra3 = valor[3]
+    } else {
+      tipo_letra = valor
+    }
+
     return {
       title: tienda?.nombre ?? 'Tienda Online',
       htmlAttrs: {
@@ -354,9 +332,7 @@ export default {
         },
         {
           href:
-            this.template == 3 ||
             this.template == 5 ||
-            this.template == 6 ||
             this.template == 7 ||
             this.template == 9 ||
             this.template == 10 ||
@@ -402,6 +378,7 @@ export default {
         13: 'KoHeader8',
         14: 'KoHeader9',
         15: 'KoHeader10',
+        16: 'KoHeader11',
       },
       footerComponentMap: {
         3: 'KoFooter1',
@@ -523,12 +500,24 @@ export default {
               {
                 header: this.settingByTemplate15?.header ?? null,
                 footer: this.settingByTemplate15?.footer ?? null,
-                newsletter: this.settingByTemplate15?.newsletter ?? null,
-                settingsGeneral:
-                  this.settingByTemplate15?.settingsGeneral ?? null,
-                pages: this.settingByTemplate15?.pages ?? null,
+                newsletter: this.settingByTemplate15?.newsLetter ?? null,
+                settingGeneral:
+                  this.settingByTemplate15?.settingGeneral ?? null,
+                pages: this.settingByTemplate15?.pageHeader ?? null,
                 // listProductsFilter:
                 //   this.settingByTemplate15?.listProductsFilter ?? null,
+              },
+            ]
+          : null,
+        settingByTemplate16: this.settingByTemplate16
+          ? [
+              {
+                header: this.settingByTemplate16?.header ?? null,
+                footer: this.settingByTemplate16?.footer ?? null,
+                newsletter: this.settingByTemplate16?.newsletter ?? null,
+                settingGeneral:
+                  this.settingByTemplate16?.settingsGeneral ?? null,
+                pages: this.settingByTemplate16?.pageHeader ?? null,
               },
             ]
           : null,
@@ -563,60 +552,31 @@ export default {
       return window.mobilecheck()
     },
     redirectWhatsApp() {
-      if (this.dataStore.tienda.whatsapp.length > 10) {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp
-        if (phone_number_whatsapp.charAt(0) === '+') {
-          phone_number_whatsapp = phone_number_whatsapp.slice(1)
-        }
-        var text = ''
-        if (this.dataStore.tienda.lenguaje == 'es') {
-          text = `Hola%20vengo%20de%20tu%20tienda%20online%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
-          )}%20y%20me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20%0AURL%3A%20${encodeURIComponent(
-            window.location
-          )}`
-        } else if (this.dataStore.tienda.lenguaje == 'en') {
-          text = `Hi%2C%20I%20came%20from%20your%20online%20store%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
-          )}%20and%20I%20would%20like%20to%20receive%20more%20information.%20%0AURL%3A%20${encodeURIComponent(
-            window.location
-          )}`
-        } else if (this.dataStore.tienda.lenguaje == 'pt') {
-          text = `Ol%C3%A1%2C%20vim%20de%20sua%20loja%20virtual%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
-          )}%20e%20gostaria%20de%20receber%20mais%20informa%C3%A7%C3%B5es.%20%0AURL%3A%20${encodeURIComponent(
-            window.location
-          )}`
-        } else {
-          text = `Hola%20vengo%20de%20tu%20tienda%20online%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
-          )}%20y%20me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20%0AURL%3A%20${encodeURIComponent(
-            window.location
-          )}`
-        }
-        if (this.mobileCheck()) {
-          window.open(
-            `https://wa.me/${phone_number_whatsapp}/?text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `https://web.whatsapp.com/send?phone=${phone_number_whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
-      } else {
-        if (this.mobileCheck()) {
-          window.open(
-            `https://wa.me/57${this.dataStore.tienda.whatsapp}/?text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `https://web.whatsapp.com/send?phone=57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
+      let phone_number_whatsapp = this.dataStore.tienda.whatsapp
+      if (phone_number_whatsapp.charAt(0) === '+') {
+        phone_number_whatsapp = phone_number_whatsapp.slice(1)
+      }
+      const baseUrl = 'https://wa.me/'
+      const text = this.constructMessageText()
+
+      const whatsappUrl = this.mobileCheck()
+        ? `${baseUrl}${phone_number_whatsapp}/?text=${text}`
+        : `https://web.whatsapp.com/send?phone=${phone_number_whatsapp}&text=${text}`
+
+      window.open(whatsappUrl, '_blank')
+    },
+    constructMessageText() {
+      const tienda = this.dataStore.tienda
+      const nombre = encodeURIComponent(tienda.nombre)
+      const url = encodeURIComponent(window.location)
+
+      switch (tienda.lenguaje) {
+        case 'en':
+          return `Hi%2C%20I%20came%20from%20your%20online%20store%20${nombre}%20and%20I%20would%20like%20to%20receive%20more%20information.%20%0AURL%3A%20${url}`
+        case 'pt':
+          return `Ol%C3%A1%2C%20vim%20de%20sua%20loja%20virtual%20${nombre}%20e%20gostaria%20de%20receber%20mais%20informa%C3%A7%C3%B5es.%20%0AURL%3A%20${url}`
+        default:
+          return `Hola%20vengo%20de%20tu%20tienda%20online%20${nombre}%20y%20me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20%0AURL%3A%20${url}`
       }
     },
     acceptCookies() {
@@ -670,11 +630,11 @@ html {
   scroll-behavior: smooth;
   margin: 0px;
   padding: 0px;
-  font-family: var(--font-style);
   outline: none;
   text-decoration: none;
   box-sizing: border-box;
   outline: none !important;
+  /* font-family: var(--font-style); */
   /* overflow-x: hidden; */
 }
 .page-enter-active,

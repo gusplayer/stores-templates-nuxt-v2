@@ -11,7 +11,7 @@
     <picture>
       <source
         media="(max-width: 799px)"
-        :srcset="idCloudinaryBanner(banner2.imgBg_res, 'bannerRes', 800)"
+        :srcset="idCloudinaryBanner(banner2.imgBg, 'bannerRes', 800)"
       />
       <source
         media="(min-width: 800px)"
@@ -45,14 +45,14 @@
           <a
             :href="banner2.url_redirect_1"
             class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
-            :style="`color: ${banner2.color_text_btn_1}; background-color: ${banner2.color_bg_btn_1}; border-radius: ${settingGeneral.radius};`"
+            :style="`color: ${banner2.color_text_btn_1}; background-color: ${banner2.color_bg_btn_1}; border-radius: ${settingGeneral?.radius};`"
           >
             {{ banner2.text_btn_1 }}
           </a>
           <a
             :href="banner2.url_redirect_2"
             class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
-            :style="`color: ${banner2.color_text_btn_2}; background-color: ${banner2.color_bg_btn_2}; border-radius: ${settingGeneral.radius};`"
+            :style="`color: ${banner2.color_text_btn_2}; background-color: ${banner2.color_bg_btn_2}; border-radius: ${settingGeneral?.radius};`"
           >
             {{ banner2.text_btn_2 }}
           </a>

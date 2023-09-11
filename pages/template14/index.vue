@@ -8,46 +8,47 @@
       },
     ]"
   >
-    <ko-information
+    <Ko14-information
       id="kInformationX"
-      v-bind="componentsProps"
       v-if="settingByTemplate14?.information?.visible"
+      v-bind="componentsProps"
     />
-    <ko-banner
+    <Ko14-Banner
       id="kBannerX"
+      v-if="settingByTemplate14?.banner?.visible"
       v-bind="componentsProps"
       :key="bannerRendering"
-      v-if="settingByTemplate14?.banner?.visible"
     />
-    <ko-offers
+    <Ko14-offers
       id="kOffersX"
-      v-bind="componentsProps"
       v-if="settingByTemplate14?.offers?.visible"
+      v-bind="componentsProps"
     />
-    <ko-listProductsHome
+    <Ko14-productListHome
       id="kListProductX"
-      v-bind="componentsProps"
       v-if="settingByTemplate14?.listProductsHome?.visible"
+      v-bind="componentsProps"
     />
-    <Ko-offersProduct
+    <Ko14-offersProduct
       id="kOffersProductX"
-      v-bind="componentsProps"
       v-if="settingByTemplate14?.offersProduct?.visible"
+      v-bind="componentsProps"
     />
-    <Ko-listBlogHome
+    <Ko14-listBlogHome
       id="kListBlogX"
-      v-bind="componentsProps"
       v-if="settingByTemplate14?.listBlogHome?.visible"
+      v-bind="componentsProps"
     />
-    <Ko-newsletter
+    <Ko14-Newsletter
       id="kNewsletterX"
-      v-bind="componentsProps"
       v-if="settingByTemplate14?.newsletter?.visible"
-    />
-    <Ko-logos
-      id="kLogosX"
       v-bind="componentsProps"
+    />
+    <Ko14-logos
+      id="kLogosX"
       v-if="settingByTemplate14?.logos?.visible"
+      v-bind="componentsProps"
+      :key="LogosRendering"
     />
   </div>
 </template>
@@ -57,21 +58,6 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   name: 'Ko-template14',
-  components: {
-    koInformation: () =>
-      import('../../components/template14/ko14-information.vue'),
-    koBanner: () => import('../../components/template14/ko14-Banner.vue'),
-    KoOffers: () => import('../../components/template14/ko14-offers.vue'),
-    koListProductsHome: () =>
-      import('../../components/template14/ko14-productListHome.vue'),
-    KoOffersProduct: () =>
-      import('../../components/template14/ko14-offersProduct.vue'),
-    KoNewsletter: () =>
-      import('../../components/template14/ko14-Newsletter.vue'),
-    KoListBlogHome: () =>
-      import('../../components/template14/ko14-listBlogHome.vue'),
-    KoLogos: () => import('../../components/template14/ko14-logos.vue'),
-  },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)
@@ -79,6 +65,7 @@ export default {
   data() {
     return {
       bannerRendering: 0,
+      LogosRendering: 0,
     }
   },
   computed: {
@@ -125,6 +112,8 @@ export default {
           this.$store.commit('SET_CURRENTSETTING14', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1
+          } else if (e.data.component == 'logos') {
+            this.LogosRendering += 1
           }
         } else if (
           e &&

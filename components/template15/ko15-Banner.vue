@@ -63,7 +63,7 @@
               <p
                 v-if="item.visible_btn"
                 class="px-20 py-5 md:py-8 mt-16 md:mt-40 text-12 md:text-14 xl:text-16"
-                :style="`color: ${item.color_text_btn}; background-color: ${item.color_bg_btn}; border-radius: ${settingGeneral.radius};`"
+                :style="`color: ${item.color_text_btn}; background-color: ${item.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
               >
                 {{ item.textBtn }}
               </p>
@@ -86,7 +86,6 @@ export default {
   mixins: [idCloudinaryBanner],
   data() {
     return {
-      checkMobile: false,
       swiperOption: {
         autoHeight: true,
         effect: 'fade',

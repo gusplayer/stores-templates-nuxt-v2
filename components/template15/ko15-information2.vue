@@ -42,7 +42,7 @@
         <a
           :href="information2.url_redirect"
           class="px-20 py-5 md:py-8 mt-25 md:mt-40 mb-20 xl:mb-0 text-12 md:text-14 xl:text-16"
-          :style="`color: ${information2.color_text_btn}; background-color: ${information2.color_bg_btn}; border-radius: ${settingGeneral.radius};`"
+          :style="`color: ${information2.color_text_btn}; background-color: ${information2.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
         >
           {{ information2.text_btn }}
         </a>

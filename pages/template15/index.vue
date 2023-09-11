@@ -4,57 +4,57 @@
     :style="[
       {
         '--font-style-1':
-          settingByTemplate15?.settingsGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate15?.settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
-    <ko-banner
+    <ko15-Banner
       id="kBannerX"
       v-bind="componentsProps"
       :key="bannerRendering"
       v-if="settingByTemplate15?.banner?.visible"
     />
-    <ko-categories
+    <ko15-Categories
       id="kCategoriesX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.categories?.visible"
     />
-    <ko-content
+    <ko15-Content
       id="kContentX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.content?.visible"
     />
-    <ko-listProductsHome
+    <ko15-productListHome
       id="kListProductsHomeX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.listProductsHome?.visible"
     />
-    <ko-information
+    <ko15-information
       id="kInformationX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.information?.visible"
     />
-    <ko-informationLogos
+    <ko15-informationLogos
       id="kInformationLogosX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.informationLogos?.visible"
     />
-    <ko-information2
+    <ko15-information2
       id="kInformation2X"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.information2?.visible"
     />
-    <ko-listProductsOffers
+    <ko15-listProductsOffers
       id="kListProductsOffersX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.listProductsOffers?.visible"
     />
-    <ko-banner2
+    <ko15-Banner2
       id="kBanner2X"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.banner2?.visible"
     />
-    <ko-logos
+    <Ko15-logos
       id="kLogosX"
       v-bind="componentsProps"
       v-if="settingByTemplate15?.logos?.visible"
@@ -67,22 +67,6 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   name: 'Ko-template15',
-  components: {
-    koBanner: () => import('@/components/template15/ko15-Banner.vue'),
-    koCategories: () => import('@/components/template15/ko15-Categories.vue'),
-    koContent: () => import('@/components/template15/ko15-Content.vue'),
-    koListProductsHome: () =>
-      import('@/components/template15/ko15-productListHome'),
-    koInformation: () => import('@/components/template15/ko15-information.vue'),
-    koInformationLogos: () =>
-      import('@/components/template15/ko15-informationLogos.vue'),
-    koInformation2: () =>
-      import('@/components/template15/ko15-information2.vue'),
-    koListProductsOffers: () =>
-      import('@/components/template15/ko15-listProductsOffers'),
-    koBanner2: () => import('@/components/template15/ko15-Banner2.vue'),
-    koLogos: () => import('@/components/template15/ko15-logos.vue'),
-  },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)
@@ -106,7 +90,7 @@ export default {
       return {
         dataStore: this.dataStore,
         fullProducts: this.fullProducts,
-        settingGeneral: this.settingByTemplate15?.settingsGeneral ?? null,
+        settingGeneral: this.settingByTemplate15?.settingGeneral ?? null,
         banner: this.settingByTemplate15?.banner ?? null,
         categories: this.settingByTemplate15?.categories ?? null,
         content: this.settingByTemplate15?.content ?? null,
@@ -135,6 +119,7 @@ export default {
         e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 15) {
+          console.log(e.data.component)
           this.$store.commit('SET_CURRENTSETTING15', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1
@@ -164,6 +149,9 @@ export default {
             case 'informationLogos':
               this.moverseA('kInformationLogosX')
               break
+            case 'information2':
+              this.moverseA('kInformation2X')
+              break
             case 'listProductsOffers':
               this.moverseA('kListProductsOffersX')
               break
@@ -173,13 +161,19 @@ export default {
             case 'logos':
               this.moverseA('kLogosX')
               break
+            case 'cardProducts':
+              this.moverseA('kListProductsHomeX')
+              break
             case 'settingsGeneral':
               this.moverseA('kInformationX')
               break
             case 'header':
-              this.moverseA('kInformationX')
+              this.moverseA('kBannerX')
               break
             case 'footer':
+              this.moverseA('kLogosX')
+              break
+            case 'newsLetter':
               this.moverseA('kLogosX')
               break
             case 'detailsProducts':
@@ -197,6 +191,16 @@ export default {
             case 'contact':
               this.$router.push({
                 path: '/contacto',
+              })
+              break
+            case 'listBlogHome':
+              this.$router.push({
+                path: '/blog',
+              })
+              break
+            case 'cardBlog':
+              this.$router.push({
+                path: '/blog',
               })
               break
           }

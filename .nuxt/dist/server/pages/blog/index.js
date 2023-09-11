@@ -1,14 +1,14 @@
-exports.ids = [39];
+exports.ids = [158];
 exports.modules = {
 
-/***/ 992:
+/***/ 1003:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/index.vue?vue&type=template&id=114e3124&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/index.vue?vue&type=template&id=31d1cdfa&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,23 +18,24 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/blog/index.vue?vue&type=template&id=114e3124&
+// CONCATENATED MODULE: ./pages/blog/index.vue?vue&type=template&id=31d1cdfa&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/index.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/index.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var blogvue_type_script_lang_js_ = ({
   layout: 'default',
   components: {
-    K05Blog: () => __webpack_require__.e(/* import() */ 99).then(__webpack_require__.bind(null, 974)),
-    K07Blog: () => __webpack_require__.e(/* import() */ 106).then(__webpack_require__.bind(null, 975)),
-    K09Blog: () => __webpack_require__.e(/* import() */ 97).then(__webpack_require__.bind(null, 1025)),
-    K10Blog: () => __webpack_require__.e(/* import() */ 101).then(__webpack_require__.bind(null, 976)),
-    K11Blog: () => __webpack_require__.e(/* import() */ 92).then(__webpack_require__.bind(null, 1026)),
-    K13Blog: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 977)),
-    K14Blog: () => __webpack_require__.e(/* import() */ 159).then(__webpack_require__.bind(null, 1027))
+    K05Blog: () => __webpack_require__.e(/* import() */ 212).then(__webpack_require__.bind(null, 994)),
+    K07Blog: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 1052)),
+    K09Blog: () => __webpack_require__.e(/* import() */ 211).then(__webpack_require__.bind(null, 1137)),
+    K10Blog: () => __webpack_require__.e(/* import() */ 208).then(__webpack_require__.bind(null, 1138)),
+    K11Blog: () => __webpack_require__.e(/* import() */ 209).then(__webpack_require__.bind(null, 1139)),
+    K13Blog: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 987)),
+    K14Blog: () => __webpack_require__.e(/* import() */ 12).then(__webpack_require__.bind(null, 1102)),
+    K15Blog: () => __webpack_require__.e(/* import() */ 257).then(__webpack_require__.bind(null, 1140))
   },
   data() {
     return {
@@ -47,12 +48,13 @@ var external_vuex_ = __webpack_require__(7);
         10: 'K10Blog',
         11: 'K11Blog',
         13: 'K13Blog',
-        14: 'K14Blog'
+        14: 'K14Blog',
+        15: 'K15Blog'
       }
     };
   },
   computed: {
-    ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'settingByTemplate14', 'template']),
+    ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'settingByTemplate14', 'settingByTemplate15', 'template']),
     indexTemplate() {
       let productListComponent = '';
       if (this.componentMapping.hasOwnProperty(this.template)) {
@@ -61,7 +63,7 @@ var external_vuex_ = __webpack_require__(7);
       return productListComponent;
     },
     componentsProps() {
-      var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6, _this$settingByTempla7, _this$settingByTempla8, _this$settingByTempla9, _this$settingByTempla10, _this$settingByTempla11, _this$settingByTempla12, _this$settingByTempla13, _this$settingByTempla14, _this$settingByTempla15, _this$settingByTempla16, _this$settingByTempla17, _this$settingByTempla18, _this$settingByTempla19, _this$settingByTempla20, _this$settingByTempla21, _this$settingByTempla22;
+      var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6, _this$settingByTempla7, _this$settingByTempla8, _this$settingByTempla9, _this$settingByTempla10, _this$settingByTempla11, _this$settingByTempla12, _this$settingByTempla13, _this$settingByTempla14, _this$settingByTempla15, _this$settingByTempla16, _this$settingByTempla17, _this$settingByTempla18, _this$settingByTempla19, _this$settingByTempla20, _this$settingByTempla21, _this$settingByTempla22, _this$settingByTempla23, _this$settingByTempla24, _this$settingByTempla25, _this$settingByTempla26, _this$settingByTempla27, _this$settingByTempla28;
       return {
         dataStore: this.dataStore,
         settingK05Blog: (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate) === null || _this$settingByTempla2 === void 0 ? void 0 : _this$settingByTempla2.settings) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : this.settingBase,
@@ -84,6 +86,11 @@ var external_vuex_ = __webpack_require__(7);
         settingByTemplate14: this.settingByTemplate14 ? [{
           settingGeneral: (_this$settingByTempla19 = (_this$settingByTempla20 = this.settingByTemplate14) === null || _this$settingByTempla20 === void 0 ? void 0 : _this$settingByTempla20.settingGeneral) !== null && _this$settingByTempla19 !== void 0 ? _this$settingByTempla19 : null,
           cardBlog: (_this$settingByTempla21 = (_this$settingByTempla22 = this.settingByTemplate14) === null || _this$settingByTempla22 === void 0 ? void 0 : _this$settingByTempla22.cardBlog) !== null && _this$settingByTempla21 !== void 0 ? _this$settingByTempla21 : null
+        }] : null,
+        settingByTemplate15: this.settingByTemplate15 ? [{
+          settingGeneral: (_this$settingByTempla23 = (_this$settingByTempla24 = this.settingByTemplate15) === null || _this$settingByTempla24 === void 0 ? void 0 : _this$settingByTempla24.settingGeneral) !== null && _this$settingByTempla23 !== void 0 ? _this$settingByTempla23 : null,
+          listBlogHome: (_this$settingByTempla25 = (_this$settingByTempla26 = this.settingByTemplate15) === null || _this$settingByTempla26 === void 0 ? void 0 : _this$settingByTempla26.listBlogHome) !== null && _this$settingByTempla25 !== void 0 ? _this$settingByTempla25 : null,
+          cardBlog: (_this$settingByTempla27 = (_this$settingByTempla28 = this.settingByTemplate15) === null || _this$settingByTempla28 === void 0 ? void 0 : _this$settingByTempla28.cardBlogs) !== null && _this$settingByTempla27 !== void 0 ? _this$settingByTempla27 : null
         }] : null
       };
     }
@@ -109,7 +116,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "30c8c184"
+  "53ccf3b1"
   
 )
 

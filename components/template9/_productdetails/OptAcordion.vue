@@ -1,6 +1,6 @@
 <template>
   <div class="content-accordion" :style="settingByGeneral">
-    <el-collapse v-model="activeNames" @change="handleChange" class="w-full">
+    <el-collapse v-model="activeNames" class="w-full">
       <el-collapse-item :title="$t('productdetail_description')" name="1">
         <div class="editor" v-if="data.info.descripcion">
           <el-tiptap
@@ -309,11 +309,6 @@ export default {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
-    },
-  },
-  methods: {
-    handleChange(val) {
-      console.log(val)
     },
   },
   filters: {

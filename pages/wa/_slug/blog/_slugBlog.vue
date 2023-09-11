@@ -1,5 +1,5 @@
 <template>
-  <div class="content-wa" id="width">
+  <div class="w-full flex flex-col justify-center items-center" id="width">
     <KArticleWapi />
   </div>
 </template>
@@ -28,8 +28,3 @@ export default {
   },
 }
 </script>
-<style scoped>
-.content-wa {
-  @apply w-full flex flex-col justify-center items-center;
-}
-</style>

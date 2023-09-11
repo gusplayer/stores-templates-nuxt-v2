@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 // const isProd = process.env.NODE_ENV === 'production'
+import componentConfig from './utils/componentConfig'
+
 export default {
   head: {
     title: process.env.npm_package_name || '',
@@ -45,13 +47,15 @@ export default {
     { src: '~/plugins/vueLazyLoad.js', ssr: false },
     { src: '~/plugins/elementTipTap', ssr: false },
   ],
-  // buildModules: ['@nuxtjs/tailwindcss'],
   modules: [
     '@nuxtjs/gtm',
     '@nuxtjs/sitemap',
     'nuxt-facebook-pixel-module',
     ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
   ],
+  components: true,
+  buildModules: ['@nuxt/components'],
+  components: componentConfig,
   facebook: {
     /* module options */
     pixelId: '671820736795254',
@@ -68,6 +72,9 @@ export default {
       '/template11',
       '/template12',
       '/template13',
+      '/template14',
+      '/template15',
+      '/template16',
       '/template5',
       '/template6',
       '/template7',
@@ -75,10 +82,6 @@ export default {
       '/template9',
       '/template99',
       '/unicentro',
-      '/template6/index_macrobrand',
-      '/template99/templates/template1',
-      '/template99/templates/template2',
-      '/template99/templates/template3',
     ],
   },
   // debug: {
@@ -103,9 +106,15 @@ export default {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
+      if (ctx.isDev && ctx.isClient) {
+        config.optimization.minimize = true
+      }
     },
   },
   router: {
     base: '/',
   },
 }
+// Reducir tamaño de las respuestas
+// npm install compression --save
+// serverMiddleware: ['compression'],

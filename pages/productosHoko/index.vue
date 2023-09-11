@@ -7,7 +7,7 @@ import { mapState } from 'vuex'
 export default {
   components: {
     K05ProductListHoko: () =>
-      import('../../components/template5/Ko-ProductListHoko-1.vue'),
+      import('../../components/template5/Ko5-ProductListHomeHoko.vue'),
     K09ProductListHoko: () =>
       import('../../components/template9/Ko-ProductListFilterHoko.vue'),
     K11ProductListHoko: () =>

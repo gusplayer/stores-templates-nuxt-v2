@@ -8,7 +8,7 @@
       },
     ]"
   >
-    <ko-Banner
+    <Ko13-Banner
       id="kBannerX"
       v-if="
         settingByTemplate13 &&
@@ -18,7 +18,6 @@
       v-bind="componentsProps"
       :key="bannerRendering"
     />
-
     <!-- <KProductFavoritos v-if="this.stateBanner" /> -->
     <!-- <KProductListHoko
       :dataStore="dataStore"
@@ -26,7 +25,7 @@
       id="KProductX"
       v-if="dataHoko && dataHoko.statehoko == 1 && this.stateBanner"
     /> -->
-    <ko-ProductList
+    <Ko13-ProductList
       id="kListX"
       v-if="
         settingByTemplate13 &&
@@ -35,7 +34,7 @@
       "
       v-bind="componentsProps"
     />
-    <ko-InfoText
+    <Ko13-infoText
       id="kInfoTextX"
       v-if="
         settingByTemplate13 &&
@@ -44,7 +43,7 @@
       "
       v-bind="componentsProps"
     />
-    <ko-Information
+    <Ko13-information
       id="kInformationX"
       v-if="
         settingByTemplate13 &&
@@ -53,7 +52,7 @@
       "
       v-bind="componentsProps"
     />
-    <ko-Newsletter
+    <Ko13-Newsletter
       id="kNewsLetterX"
       v-if="
         settingByTemplate13 &&
@@ -70,18 +69,6 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   name: 'Ko-template13',
-  components: {
-    koBanner: () => import('../../components/template13/ko-Banner-1.vue'),
-    // KoProductFavoritos: () =>
-    //   import('../../components/template13/ko-BannerFooter-1'),
-    KoProductList: () => import('../../components/template13/Ko-ProductList-1'),
-    // KoProductListHoko: () =>
-    //   import('../../components/template13/Ko-ProductFavoritosHoko.vue'),
-    KoInformation: () =>
-      import('../../components/template13/Ko-information.vue'),
-    KoInfoText: () => import('../../components/template13//Ko-infoText.vue'),
-    KoNewsletter: () => import('../../components/template13/Ko-Newsletter-1'),
-  },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)

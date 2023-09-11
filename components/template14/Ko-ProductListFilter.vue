@@ -332,7 +332,7 @@ import { mapState } from 'vuex'
 import filterProducts from '@/mixins/filterProducts'
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko14-ProductList-Filter',
+  name: 'Ko15-ProductList-Filter',
   mixins: [filterProducts, idCloudinaryBanner],
   components: {
     Ko14ProductCard: () => import('./_cardProduct/ProductCard.vue'),

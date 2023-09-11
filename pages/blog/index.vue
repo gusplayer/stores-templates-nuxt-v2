@@ -13,6 +13,7 @@ export default {
     K11Blog: () => import('../../components/template11/blog_page/Ko-Blog'),
     K13Blog: () => import('../../components/template13/_blog/Ko-Blog'),
     K14Blog: () => import('../../components/template14/_cardBlog/Ko-index.vue'),
+    K15Blog: () => import('../../components/template15/_cardBlog/Ko-index.vue'),
   },
   data() {
     return {
@@ -26,6 +27,7 @@ export default {
         11: 'K11Blog',
         13: 'K13Blog',
         14: 'K14Blog',
+        15: 'K15Blog',
       },
     }
   },
@@ -40,6 +42,7 @@ export default {
       'settingByTemplate11',
       'settingByTemplate13',
       'settingByTemplate14',
+      'settingByTemplate15',
       'template',
     ]),
     indexTemplate() {
@@ -93,6 +96,16 @@ export default {
                 settingGeneral:
                   this.settingByTemplate14?.settingGeneral ?? null,
                 cardBlog: this.settingByTemplate14?.cardBlog ?? null,
+              },
+            ]
+          : null,
+        settingByTemplate15: this.settingByTemplate15
+          ? [
+              {
+                settingGeneral:
+                  this.settingByTemplate15?.settingGeneral ?? null,
+                listBlogHome: this.settingByTemplate15?.listBlogHome ?? null,
+                cardBlog: this.settingByTemplate15?.cardBlogs ?? null,
               },
             ]
           : null,

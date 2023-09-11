@@ -85,7 +85,7 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko14-information',
+  name: 'Ko15-information',
   mixins: [idCloudinary],
   props: {
     information: Object,

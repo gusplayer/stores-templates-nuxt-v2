@@ -15,7 +15,7 @@
           <img
             v-lazy="idCloudinaryBanner(content.values[0].img, 'banner')"
             class="img-left max-w-[560px] max-h-[387px]"
-            :style="`border-radius: ${settingGeneral.radius};`"
+            :style="`border-radius: ${settingGeneral?.radius};`"
             alt="imagen-1"
           />
           <div
@@ -36,7 +36,7 @@
             <p
               v-if="content.values[0].visible_btn"
               class="px-20 py-5 md:py-8 mt-20 md:mt-15 lg:mt-30 text-12 md:text-14 xl:text-16"
-              :style="`color: ${content.values[0].color_text_btn}; background-color: ${content.values[0].color_bg_btn}; border-radius: ${settingGeneral.radius};`"
+              :style="`color: ${content.values[0].color_text_btn}; background-color: ${content.values[0].color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
             >
               {{ content.values[0].text_btn }}
             </p>
@@ -52,7 +52,7 @@
           <img
             v-lazy="idCloudinaryBanner(content.values[1].img, 'banner')"
             class="img-left max-w-[560px] max-h-[387px]"
-            :style="`border-radius: ${settingGeneral.radius};`"
+            :style="`border-radius: ${settingGeneral?.radius};`"
             alt="imagen-1"
           />
           <div
@@ -73,7 +73,7 @@
             <p
               v-if="content.values[1].visible_btn"
               class="px-20 py-5 md:py-8 mt-20 md:mt-15 lg:mt-30 text-12 md:text-14 xl:text-16"
-              :style="`color: ${content.values[1].color_text_btn}; background-color: ${content.values[1].color_bg_btn}; border-radius: ${settingGeneral.radius};`"
+              :style="`color: ${content.values[1].color_text_btn}; background-color: ${content.values[1].color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
             >
               {{ content.values[1].text_btn }}
             </p>
@@ -89,7 +89,7 @@
           <img
             v-lazy="idCloudinaryBanner(content.values[2].img, 'banner')"
             class="img-left max-w-[560px] max-h-[387px]"
-            :style="`border-radius: ${settingGeneral.radius};`"
+            :style="`border-radius: ${settingGeneral?.radius};`"
             alt="imagen-1"
           />
           <div
@@ -110,7 +110,7 @@
             <p
               v-if="content.values[2].visible_btn"
               class="px-20 py-5 md:py-8 mt-20 md:mt-15 lg:mt-30 text-12 md:text-14 xl:text-16"
-              :style="`color: ${content.values[2].color_text_btn}; background-color: ${content.values[2].color_bg_btn}; border-radius: ${settingGeneral.radius};`"
+              :style="`color: ${content.values[2].color_text_btn}; background-color: ${content.values[2].color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
             >
               {{ content.values[2].text_btn }}
             </p>
@@ -123,7 +123,7 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko14-Offers',
+  name: 'Ko15-content',
   props: {
     content: Object,
     settingGeneral: Object,

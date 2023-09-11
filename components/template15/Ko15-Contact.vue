@@ -4,7 +4,7 @@
     :style="[
       {
         '--font-style-1':
-          this.settingByTemplate15[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
+          this.settingByTemplate15[0]?.settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -101,7 +101,7 @@
           </el-carousel>
           <div
             class="w-full max-w-[450px] my-20 md:my-0 flex flex-col justify-center items-center md:items-start px-20 py-20 md:absolute md:-left-[100px] lg:-left-[200px] top-3/0 z-10"
-            :style="`color: ${settingByTemplate15[0].contact.color_text}; background-color: ${settingByTemplate15[0].contact.color_Bg}; border-radius: ${settingByTemplate15[0].settingsGeneral.radius};`"
+            :style="`color: ${settingByTemplate15[0].contact.color_text}; background-color: ${settingByTemplate15[0].contact.color_Bg}; border-radius: ${settingByTemplate15[0].settingGeneral.radius};`"
           >
             <p class="text-25 font-bold mb-15">
               {{ $t('contact_title') }}
@@ -249,7 +249,7 @@
       >
         <div
           class="w-full max-w-7xl flex flex-col my-40 md:my-80 px-40 py-35 mx-20 md:mx-0 justify-center"
-          :style="`background-color: ${settingByTemplate15[0].contact['--background_color_1']}; border-radius: ${settingByTemplate15[0].settingsGeneral.radius};`"
+          :style="`background-color: ${settingByTemplate15[0].contact['--background_color_1']}; border-radius: ${settingByTemplate15[0].settingGeneral.radius};`"
         >
           <p
             class="text-25 font-bold mb-25 text-center"
@@ -366,7 +366,7 @@
               <div class="w-full flex items-center justify-center mt-20">
                 <button
                   class="px-20 py-10"
-                  :style="`color: ${settingByTemplate15[0].contact.color_text_btn_form}; background-color: ${settingByTemplate15[0].contact.color_btn_form};`"
+                  :style="`color: ${settingByTemplate15[0].contact.color_text_btn_form}; background-color: ${settingByTemplate15[0].contact.color_btn_form}; border-radius: ${settingByTemplate15[0].settingGeneral.radius}`"
                   :class="!stateBtn ? ' cursor-not-allowed' : 'cursor-pointer'"
                   :disabled="stateBtn ? false : true"
                   @click="submitContact"
@@ -387,7 +387,7 @@ import axios from 'axios'
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko14-Contact-1',
+  name: 'Ko15-Contact-1',
   props: {
     dataStore: Object,
     settingByTemplate15: Array,

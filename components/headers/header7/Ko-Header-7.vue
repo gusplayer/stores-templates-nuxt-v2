@@ -1,25 +1,21 @@
 <template>
   <div
+    v-if="settingByTemplate11"
     class="content-header"
     :style="[
       settingByTemplate11[0].setting11Header,
       settingByTemplate11[0].setting11General,
+      {
+        '--font-style-1':
+          this.settingByTemplate11 &&
+          this.settingByTemplate11[0].setting11General &&
+          this.settingByTemplate11[0].setting11General.fount_1
+            ? this.settingByTemplate11[0].setting11General.fount_1
+            : 'Roboto',
+      },
     ]"
-    v-if="settingByTemplate11"
   >
-    <div
-      class="content-header"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingByTemplate11 &&
-            this.settingByTemplate11[0].setting11General &&
-            this.settingByTemplate11[0].setting11General.fount_1
-              ? this.settingByTemplate11[0].setting11General.fount_1
-              : 'Roboto',
-        },
-      ]"
-    >
+    <div class="content-header">
       <div class="content-items-header">
         <div class="item-logo">
           <nuxt-link to="/">

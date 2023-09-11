@@ -5,7 +5,7 @@
 import { mapState } from 'vuex'
 export default {
   components: {
-    K05ProductList: () => import('@/components/template6/Ko6-ProductList-2'),
+    K05ProductList: () => import('@/components/template5/Ko5-ProductList'),
     K07ProductList: () => import('@/components/template7/Ko-ProductListFilter'),
     K09ProductList: () => import('@/components/template9/Ko-ProductListFilter'),
     K10ProductList: () =>
@@ -18,6 +18,8 @@ export default {
       import('@/components/template14/Ko-ProductListFilter'),
     K15ProductList: () =>
       import('@/components/template15/Ko15-ProductListFilter'),
+    // K16ProductList: () =>
+    // import('@/components/template16/Ko16-ProductListFilter'),
   },
   mounted() {
     window.parent.postMessage('message', '*')
@@ -36,6 +38,7 @@ export default {
         13: 'K13ProductList',
         14: 'K14ProductList',
         15: 'K15ProductList',
+        // 16: 'K16ProductList',
       },
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
@@ -44,6 +47,7 @@ export default {
         10: 'SET_CURRENTSETTING10',
         13: 'SET_CURRENTSETTING13',
         14: 'SET_CURRENTSETTING14',
+        15: 'SET_CURRENTSETTING15',
         15: 'SET_CURRENTSETTING15',
       },
     }
@@ -60,6 +64,7 @@ export default {
       'settingByTemplate13',
       'settingByTemplate14',
       'settingByTemplate15',
+      'settingByTemplate16',
       'template',
     ]),
     fullProducts() {
@@ -117,6 +122,11 @@ export default {
           null
         ),
         settingByTemplate15: this.createNestedSetting(
+          this.settingByTemplate15,
+          ['listProductsFilter', 'cardProducts', 'settingGeneral'],
+          null
+        ),
+        settingByTemplate16: this.createNestedSetting(
           this.settingByTemplate15,
           ['listProductsFilter', 'cardProducts', 'settingsGeneral'],
           null

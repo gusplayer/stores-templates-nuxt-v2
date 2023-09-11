@@ -16,48 +16,48 @@
       },
     ]"
   >
-    <KCarousel
+    <Ko7-ko-carousel
       id="kBannerX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.banner.visible"
       :key="bannerRendering"
     />
-    <KPromo
+    <Ko7-Banner-Promo
       id="KOffersX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.content.visible"
     />
-    <KProductList
+    <Ko7-ProductList
       id="KProductListX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.productList.visible"
     />
-    <KAdvertising
+    <Ko7-advertising
       id="KAdvertisingX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.advertising.visible"
     />
-    <KGify
+    <Ko7-gify
       id="KGifyX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.ProductFavorite.visible"
     />
-    <KHowWork
+    <Ko7-howWeWork
       id="KHowWork"
       v-bind="componentsProps"
       v-if="settingByTemplate7.howWork.visible"
     />
-    <KBlog
+    <Ko7-blog
       id="KBlogX"
       v-bind="componentsProps"
       v-show="listArticulos.length > 0 && settingByTemplate7.blog.visible"
     />
-    <KNews
+    <Ko7-Newsletter
       id="KNewsX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.newsletter.visible"
     />
-    <KWrapper
+    <Ko7-wrapper
       id="KWrapperX"
       v-bind="componentsProps"
       v-if="settingByTemplate7.contentImg.visible"
@@ -70,21 +70,9 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   name: 'Ko-template7',
-  components: {
-    KCarousel: () =>
-      import('../../components/template7/_carouselBanner/ko-carousel'),
-    KPromo: () => import('../../components/template7/ko-Banner-Promo'),
-    KProductList: () => import('../../components/template7/Ko-ProductList'),
-    KAdvertising: () => import('../../components/template7/Ko-advertising'),
-    KGify: () => import('../../components/template7/Ko-gify'),
-    KHowWork: () => import('../../components/template7/Ko-how-we-work'),
-    KNews: () => import('../../components/template7/Ko-Newsletter'),
-    KBlog: () => import('../../components/template7/Ko-blog'),
-    KWrapper: () => import('../../components/template7/Ko-wrapper'),
-  },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate07)
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   data() {
     return {
@@ -115,10 +103,10 @@ export default {
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenerTemplate07)
+    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenerTemplate07(e) {
+    addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
@@ -207,5 +195,3 @@ export default {
   },
 }
 </script>
-
-<style></style>

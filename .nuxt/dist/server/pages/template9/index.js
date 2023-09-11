@@ -1,16 +1,16 @@
-exports.ids = [12];
+exports.ids = [38];
 exports.modules = {
 
-/***/ 1006:
+/***/ 1019:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template9/index.vue?vue&type=template&id=4c34011a&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template9/index.vue?vue&type=template&id=18c8897d&
 var render = function render() {
-  var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6, _this$settingByTempla7, _this$settingByTempla8, _this$settingByTempla9;
+  var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3, _this$settingByTempla4, _this$settingByTempla5, _this$settingByTempla6;
   var _vm = this,
     _c = _vm._self._c;
   return _vm.settingByTemplate9 ? _c('div', {
@@ -18,27 +18,25 @@ var render = function render() {
       '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate9) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settingGeneral) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'David Libre'
     }, {
       '--font-style-2': (_this$settingByTempla4 = (_this$settingByTempla5 = this.settingByTemplate9) === null || _this$settingByTempla5 === void 0 ? void 0 : (_this$settingByTempla6 = _this$settingByTempla5.settingGeneral) === null || _this$settingByTempla6 === void 0 ? void 0 : _this$settingByTempla6.fount_2) !== null && _this$settingByTempla4 !== void 0 ? _this$settingByTempla4 : 'Great Vibes'
-    }, {
-      '--font-style-3': (_this$settingByTempla7 = (_this$settingByTempla8 = this.settingByTemplate9) === null || _this$settingByTempla8 === void 0 ? void 0 : (_this$settingByTempla9 = _this$settingByTempla8.settingGeneral) === null || _this$settingByTempla9 === void 0 ? void 0 : _this$settingByTempla9.fount_3) !== null && _this$settingByTempla7 !== void 0 ? _this$settingByTempla7 : 'Lora'
     }]
-  }, [_vm.settingByTemplate9 && _vm.settingByTemplate9.banner && _vm.settingByTemplate9.banner.visible ? _c('KBanner', _vm._b({
+  }, [_vm.settingByTemplate9 && _vm.settingByTemplate9.banner && _vm.settingByTemplate9.banner.visible ? _c('Ko9-Banner', _vm._b({
     key: _vm.bannerRendering,
     attrs: {
       "id": "kBannerX"
     }
-  }, 'KBanner', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate9 && _vm.settingByTemplate9.koffers && _vm.settingByTemplate9.koffers.visible ? _c('KOffers', _vm._b({
+  }, 'Ko9-Banner', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate9 && _vm.settingByTemplate9.koffers && _vm.settingByTemplate9.koffers.visible ? _c('Ko9-offers', _vm._b({
     attrs: {
       "id": "KOffersX"
     }
-  }, 'KOffers', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate9 && _vm.settingByTemplate9.productList && _vm.settingByTemplate9.productList.visible == true && _vm.dataHoko && _vm.dataHoko.statehoko == 1 ? _c('KProductListHoko', _vm._b({
+  }, 'Ko9-offers', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate9 && _vm.settingByTemplate9.productList && _vm.settingByTemplate9.productList.visible == true && _vm.dataHoko && _vm.dataHoko.statehoko == 1 ? _c('Ko9-sliderHoko', _vm._b({
     attrs: {
       "id": "KProductListHokoX"
     }
-  }, 'KProductListHoko', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate9 && _vm.settingByTemplate9.productList && _vm.settingByTemplate9.productList.visible == true && this.fullProducts.length > 0 ? _c('KProductList', _vm._b({
+  }, 'Ko9-sliderHoko', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate9 && _vm.settingByTemplate9.productList && _vm.settingByTemplate9.productList.visible == true && this.fullProducts.length > 0 ? _c('Ko9-ProductList', _vm._b({
     attrs: {
       "id": "KProductListX"
     }
-  }, 'KProductList', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('KBlog', _vm._b({
+  }, 'Ko9-ProductList', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('Ko9-blog', _vm._b({
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -48,37 +46,28 @@ var render = function render() {
     attrs: {
       "id": "KBlogX"
     }
-  }, 'KBlog', _vm.componentsProps, false)), _vm._ssrNode(" "), _vm.settingByTemplate9 && _vm.settingByTemplate9.wrapper && _vm.settingByTemplate9.wrapper.visible ? _c('KWrapper', _vm._b({
+  }, 'Ko9-blog', _vm.componentsProps, false)), _vm._ssrNode(" "), _vm.settingByTemplate9 && _vm.settingByTemplate9.wrapper && _vm.settingByTemplate9.wrapper.visible ? _c('Ko9-wrapper', _vm._b({
     attrs: {
       "id": "KWrapperX"
     }
-  }, 'KWrapper', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate9 && _vm.settingByTemplate9.newsletter && _vm.settingByTemplate9.newsletter.visible ? _c('KNews', _vm._b({
+  }, 'Ko9-wrapper', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate9 && _vm.settingByTemplate9.newsletter && _vm.settingByTemplate9.newsletter.visible ? _c('Ko9-Newsletter', _vm._b({
     attrs: {
       "id": "KNewsX"
     }
-  }, 'KNews', _vm.componentsProps, false)) : _vm._e()], 2) : _vm._e();
+  }, 'Ko9-Newsletter', _vm.componentsProps, false)) : _vm._e()], 2) : _vm._e();
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template9/index.vue?vue&type=template&id=4c34011a&
+// CONCATENATED MODULE: ./pages/template9/index.vue?vue&type=template&id=18c8897d&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/template9/index.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template9/index.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var template9vue_type_script_lang_js_ = ({
   layout: 'default',
   name: 'Ko-template9',
-  components: {
-    KBanner: () => __webpack_require__.e(/* import() */ 130).then(__webpack_require__.bind(null, 1092)),
-    KOffers: () => __webpack_require__.e(/* import() */ 197).then(__webpack_require__.bind(null, 1093)),
-    KProductList: () => __webpack_require__.e(/* import() */ 91).then(__webpack_require__.bind(null, 1094)),
-    KProductListHoko: () => __webpack_require__.e(/* import() */ 79).then(__webpack_require__.bind(null, 986)),
-    KBlog: () => __webpack_require__.e(/* import() */ 98).then(__webpack_require__.bind(null, 1095)),
-    KWrapper: () => __webpack_require__.e(/* import() */ 195).then(__webpack_require__.bind(null, 1096)),
-    KNews: () => __webpack_require__.e(/* import() */ 194).then(__webpack_require__.bind(null, 1097))
-  },
   mounted() {
     window.parent.postMessage('message', '*');
     window.addEventListener('message', this.addEventListenerTemplate09);
@@ -198,7 +187,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "0ebff9ff"
+  "96ff1528"
   
 )
 

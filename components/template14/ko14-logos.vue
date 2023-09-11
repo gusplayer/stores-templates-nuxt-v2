@@ -40,7 +40,7 @@
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
-  name: 'Ko14-Logos',
+  name: 'Ko15-Logos',
   props: {
     logos: Object,
     dataStore: Object,

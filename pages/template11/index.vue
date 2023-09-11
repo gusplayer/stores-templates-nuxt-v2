@@ -1,16 +1,18 @@
 <template>
   <div v-if="settingByTemplate11">
-    <KCarousel
-      id="kCarouselX"
-      v-bind="componentsProps"
-      :key="bannerRendering"
-      v-if="
-        settingByTemplate11 &&
-        settingByTemplate11.banner &&
-        settingByTemplate11.banner.visible
-      "
-    />
-    <KSection
+    <client-only>
+      <Ko11-carousel
+        id="kCarouselX"
+        v-bind="componentsProps"
+        :key="bannerRendering"
+        v-if="
+          settingByTemplate11 &&
+          settingByTemplate11.banner &&
+          settingByTemplate11.banner.visible
+        "
+      />
+    </client-only>
+    <Ko11-section
       id="kSectionX"
       v-bind="componentsProps"
       v-if="
@@ -19,7 +21,7 @@
         settingByTemplate11.section.visible
       "
     />
-    <KTrendingHoko
+    <Ko11-trendingProductHoko
       id="kTredingX"
       v-bind="componentsProps"
       v-if="
@@ -30,7 +32,7 @@
         dataHoko.statehoko == 1
       "
     />
-    <KTrending
+    <Ko11-trendingProduct
       id="kTredingX"
       v-bind="componentsProps"
       v-if="
@@ -41,7 +43,7 @@
       "
     />
     <client-only>
-      <KParallax
+      <Ko11-parallax
         id="kParallaxX"
         v-bind="componentsProps"
         v-if="
@@ -51,11 +53,11 @@
         "
       />
     </client-only>
-    <KListTrending
+    <Ko11-listTrending
       v-bind="componentsProps"
       v-if="dataHoko.length == 0 || dataHoko.statehoko == 0"
     />
-    <KInformation
+    <Ko11-information
       id="kInformationX"
       v-bind="componentsProps"
       v-if="
@@ -64,7 +66,7 @@
         settingByTemplate11.information.visible
       "
     />
-    <KBlog
+    <Ko11-blog
       id="kBlogX"
       v-bind="componentsProps"
       v-show="listArticulos.length > 0"
@@ -81,18 +83,6 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   name: 'Ko-template11',
-  components: {
-    KCarousel: () => import('../../components/template11/ko-carousel'),
-    KSection: () => import('../../components/template11/ko-section'),
-    KTrending: () => import('../../components/template11/ko-trendingProduct'),
-    KTrendingHoko: () =>
-      import('../../components/template11/ko-trendingProduct-hoko'),
-    KParallax: () => import('../../components/template11/ko-parallax'),
-    KListTrending: () =>
-      import('../../components/template11/ko-listtrending.vue'),
-    KInformation: () => import('../../components/template11/information.vue'),
-    KBlog: () => import('../../components/template11/ko-blog'),
-  },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)
@@ -142,7 +132,6 @@ export default {
         e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 11) {
-          console.log(e.data)
           this.$store.commit('SET_CURRENTSETTING11', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1

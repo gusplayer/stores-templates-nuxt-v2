@@ -3,7 +3,7 @@
     v-if="settingByTemplate15"
     class="w-full pb-80 flex flex-col justify-center items-center product-content"
     :style="[
-      settingByTemplate15[0].settingsGeneral,
+      settingByTemplate15[0].settingGeneral,
       settingByTemplate15[0].listProductsFilter,
     ]"
   >
@@ -127,7 +127,7 @@
                   class="w-full"
                   :product="product"
                   :cardProducts="settingByTemplate15[0].cardProducts"
-                  :settingsGeneral="settingByTemplate15[0].settingsGeneral"
+                  :settingGeneral="settingByTemplate15[0].settingGeneral"
                 />
               </div>
             </div>

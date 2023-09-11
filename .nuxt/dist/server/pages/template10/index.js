@@ -1,14 +1,14 @@
-exports.ids = [3];
+exports.ids = [28];
 exports.modules = {
 
-/***/ 997:
+/***/ 1008:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./pages/template10/index.vue?vue&type=template&id=5d708698&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template10/index.vue?vue&type=template&id=bf8c2c8e&
 var render = function render() {
   var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3;
   var _vm = this,
@@ -17,28 +17,28 @@ var render = function render() {
     style: [{
       '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate10) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settingGeneral) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'Roboto'
     }]
-  }, [_c('KButtonCart'), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.banner && _vm.settingByTemplate10.banner.visible ? _c('KCarousel', _vm._b({
+  }, [_c('Ko10-buttonCar'), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.banner && _vm.settingByTemplate10.banner.visible ? _c('Ko10-carousel', _vm._b({
     key: _vm.bannerRendering,
     attrs: {
       "id": "kBannerX"
     }
-  }, 'KCarousel', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.section && _vm.settingByTemplate10.section.visible ? _c('KSection', _vm._b({
+  }, 'Ko10-carousel', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.section && _vm.settingByTemplate10.section.visible ? _c('Ko10-section', _vm._b({
     attrs: {
       "id": "kSectionX"
     }
-  }, 'KSection', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.trending && _vm.settingByTemplate10.trending.visible ? _c('KTrending', _vm._b({
+  }, 'Ko10-section', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.trending && _vm.settingByTemplate10.trending.visible ? _c('Ko10-trending', _vm._b({
     attrs: {
       "id": "kTrendingX"
     }
-  }, 'KTrending', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.offers && _vm.settingByTemplate10.offers.visible ? _c('KDeal', _vm._b({
+  }, 'Ko10-trending', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.offers && _vm.settingByTemplate10.offers.visible ? _c('Ko10-deals', _vm._b({
     attrs: {
       "id": "kOffersX"
     }
-  }, 'KDeal', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.productList && _vm.settingByTemplate10.productList.visible ? _c('KFeatured', _vm._b({
+  }, 'Ko10-deals', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate10 && _vm.settingByTemplate10.productList && _vm.settingByTemplate10.productList.visible ? _c('Ko10-featuredProducts', _vm._b({
     attrs: {
       "id": "KProductDestacadosX"
     }
-  }, 'KFeatured', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('KBlog', _vm._b({
+  }, 'Ko10-featuredProducts', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('Ko10-blog', _vm._b({
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -48,29 +48,20 @@ var render = function render() {
     attrs: {
       "id": "KBlogX"
     }
-  }, 'KBlog', _vm.componentsProps, false))], 2) : _vm._e();
+  }, 'Ko10-blog', _vm.componentsProps, false))], 2) : _vm._e();
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template10/index.vue?vue&type=template&id=5d708698&
+// CONCATENATED MODULE: ./pages/template10/index.vue?vue&type=template&id=bf8c2c8e&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib??vue-loader-options!./pages/template10/index.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template10/index.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var template10vue_type_script_lang_js_ = ({
   layout: 'default',
   name: 'Ko-template10',
-  components: {
-    KButtonCart: () => __webpack_require__.e(/* import() */ 32).then(__webpack_require__.bind(null, 1045)),
-    KCarousel: () => __webpack_require__.e(/* import() */ 139).then(__webpack_require__.bind(null, 1046)),
-    KSection: () => __webpack_require__.e(/* import() */ 141).then(__webpack_require__.bind(null, 1047)),
-    KTrending: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 1048)),
-    KDeal: () => __webpack_require__.e(/* import() */ 140).then(__webpack_require__.bind(null, 1049)),
-    KFeatured: () => __webpack_require__.e(/* import() */ 84).then(__webpack_require__.bind(null, 1050)),
-    KBlog: () => __webpack_require__.e(/* import() */ 100).then(__webpack_require__.bind(null, 981))
-  },
   mounted() {
     window.parent.postMessage('message', '*');
     window.addEventListener('message', this.addEventListenerTemplate);
@@ -196,7 +187,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "64be0075"
+  "770cf2a8"
   
 )
 

@@ -8,14 +8,13 @@
     ]"
   >
     <div class="main-wrapper overflow-hidden">
-      <i-header v-bind="componentsProps" id="KHeaderX" />
-      <i-hero-image v-bind="componentsProps" />
-      <!-- <div class="divider mt-4 mb-14" /> -->
+      <Ko12-IHeader v-bind="componentsProps" id="KHeaderX" />
+      <Ko12-IHeroImage v-bind="componentsProps" />
       <div class="main-section_container">
-        <i-main-section v-bind="componentsProps" id="KProductX" />
+        <Ko12-IMainSection v-bind="componentsProps" id="KProductX" />
       </div>
-      <i-footer v-bind="componentsProps" id="KFooterX" />
-      <i-button-car />
+      <Ko12-IFooter v-bind="componentsProps" id="KFooterX" />
+      <Ko10-buttonCar />
     </div>
   </div>
 </template>
@@ -25,16 +24,9 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   name: 'Ko-template12',
-  components: {
-    IHeader: () => import('../../components/template12/Header'),
-    IFooter: () => import('../../components/template12/Footer'),
-    IHeroImage: () => import('../../components/template12/HeroImage'),
-    IMainSection: () => import('../../components/template12/MainSection'),
-    IButtonCar: () => import('../../components/template10/buttonCar.vue'),
-  },
   mounted() {
     window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenertemplate)
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   computed: {
     ...mapState(['dataStore', 'settingByTemplate12']),
@@ -48,10 +40,10 @@ export default {
     },
   },
   beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenertemplate)
+    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenertemplate(e) {
+    addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')

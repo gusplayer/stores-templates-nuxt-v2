@@ -8,8 +8,8 @@
       },
     ]"
   >
-    <KButtonCart />
-    <KCarousel
+    <Ko10-buttonCar />
+    <Ko10-carousel
       id="kBannerX"
       v-bind="componentsProps"
       :key="bannerRendering"
@@ -19,7 +19,7 @@
         settingByTemplate10.banner.visible
       "
     />
-    <KSection
+    <Ko10-section
       id="kSectionX"
       v-bind="componentsProps"
       v-if="
@@ -28,7 +28,7 @@
         settingByTemplate10.section.visible
       "
     />
-    <KTrending
+    <Ko10-trending
       id="kTrendingX"
       v-bind="componentsProps"
       v-if="
@@ -37,7 +37,7 @@
         settingByTemplate10.trending.visible
       "
     />
-    <KDeal
+    <Ko10-deals
       id="kOffersX"
       v-bind="componentsProps"
       v-if="
@@ -46,7 +46,7 @@
         settingByTemplate10.offers.visible
       "
     />
-    <KFeatured
+    <Ko10-featuredProducts
       id="KProductDestacadosX"
       v-bind="componentsProps"
       v-if="
@@ -55,7 +55,7 @@
         settingByTemplate10.productList.visible
       "
     />
-    <KBlog
+    <Ko10-blog
       id="KBlogX"
       v-bind="componentsProps"
       v-show="
@@ -72,15 +72,6 @@ import { mapState } from 'vuex'
 export default {
   layout: 'default',
   name: 'Ko-template10',
-  components: {
-    KButtonCart: () => import('../../components/template10/buttonCar'),
-    KCarousel: () => import('../../components/template10/ko-carousel'),
-    KSection: () => import('../../components/template10/ko-section'),
-    KTrending: () => import('../../components/template10/ko-trending'),
-    KDeal: () => import('../../components/template10/ko-deals'),
-    KFeatured: () => import('../../components/template10/ko-featuredProducts'),
-    KBlog: () => import('../../components/template10/ko-blog'),
-  },
   mounted() {
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)

@@ -49,6 +49,7 @@ export const state = () => ({
   urlNodeSettings: 'https://node.komercia.co',
   urlTemplate: 'https://templates.komercia.co',
   urlComponents: 'https://components.komercia.co',
+  urlAWSsettings: 'https://tp2qtsmpza.us-east-2.awsapprunner.com',
   configAxios: {
     headers: {
       'content-type': 'application/json',
@@ -65,510 +66,7 @@ export const state = () => ({
   settingByTemplate12: '',
   settingByTemplate13: '',
   settingByTemplate14: '',
-  settingByTemplate15: {
-    header: {
-      '--background_color_1': '#FFFFFF',
-      '--color_text': '#1f2021',
-      '--color_border': '#1f2021',
-      '--color_icon': '#ed6436',
-      '--padding_logo': '10px',
-      '--with_logo': '120px',
-    },
-    pages: {
-      values: [
-        {
-          displayName: 'Inicio',
-          isExternalLink: false,
-          tipo: '3',
-          url: '/',
-        },
-        {
-          displayName: 'Productos',
-          isExternalLink: false,
-          tipo: '3',
-          url: '/productos',
-        },
-        {
-          displayName: 'Contacto',
-          isExternalLink: false,
-          tipo: '3',
-          url: '/contacto',
-        },
-      ],
-    },
-    pageHeader: [
-      { displayName: 'Inicio', isExternalLink: false, tipo: 3, url: '/' },
-      {
-        displayName: 'Productos',
-        isExternalLink: false,
-        tipo: 3,
-        url: '/productos',
-      },
-      {
-        displayName: 'Contacto',
-        isExternalLink: false,
-        tipo: 3,
-        url: '/contacto',
-      },
-    ],
-    banner: {
-      '--background_color_1': '#FFFFFF',
-      '--color_pagination': '#323232',
-      visible: true,
-      values: [
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700300/template15/banner1_txrdvv.webp',
-          img_res:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700300/template15/banner1_txrdvv.webp',
-          title: 'HIGHT QUALITY',
-          subTitle: 'PET FOOD',
-          text: 'Sale up to 40% off today',
-          textBtn: 'SHOP NOW',
-          color_title: '#FFFFFF',
-          color_subTitle: '#FFFFFF',
-          color_text: '#FFFFFF',
-          fontSizeTitle: '45px',
-          fontSizeSubTitle: '100px',
-          fontSizeText: '18px',
-          fontWeighTitle: '600',
-          fontWeighSubTitle: '600',
-          fontWeighText: '400',
-          color_text_btn: '#FFFFFF',
-          color_bg_btn: '#000000',
-          url_redirect: '/productos',
-          visible_btn: true,
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700300/template15/banner2_ma1vak.webp',
-          img_res:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700300/template15/banner2_ma1vak.webp',
-          title: 'HIGHT QUALITY',
-          subTitle: 'PET CARE',
-          text: 'Sale up to 40% off today',
-          textBtn: 'SHOP NOW',
-          color_title: '#FFFFFF',
-          color_subTitle: '#FFFFFF',
-          color_text: '#FFFFFF',
-          fontSizeTitle: '45px',
-          fontSizeSubTitle: '100px',
-          fontSizeText: '18px',
-          fontWeighTitle: '600',
-          fontWeighSubTitle: '600',
-          fontWeighText: '400',
-          color_text_btn: '#FFFFFF',
-          color_bg_btn: '#000000',
-          url_redirect: '/productos',
-          visible_btn: true,
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700300/template15/banner3_vic8qp.jpg',
-          img_res:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700300/template15/banner3_vic8qp.jpg',
-          title: 'HIGHT QUALITY',
-          subTitle: 'PET TOYS',
-          text: 'Sale up to 40% off today',
-          textBtn: 'SHOP NOW',
-          color_title: '#FFFFFF',
-          color_subTitle: '#FFFFFF',
-          color_text: '#FFFFFF',
-          fontSizeTitle: '45px',
-          fontSizeSubTitle: '100px',
-          fontSizeText: '18px',
-          fontWeighTitle: '600',
-          fontWeighSubTitle: '600',
-          fontWeighText: '400',
-          color_text_btn: '#FFFFFF',
-          color_bg_btn: '#000000',
-          url_redirect: '/productos',
-          visible_btn: true,
-        },
-      ],
-    },
-    categories: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'Top categories',
-      color_title_1: '#ed6436',
-      color_title_2: '#1f2021',
-      fontSizeTitle: '40px',
-      fontWeighTitle: '600',
-      values: [
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700300/template15/card1_hmftph.jpg',
-          title: 'Cat Food',
-          color_title: '#1f2021',
-          url_redirect: '/productos',
-          fontWeighTitle: '600',
-          fontSizeTitle: '22px',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700301/template15/card2_ljms4t.jpg',
-          title: 'Cat Toys',
-          color_title: '#1f2021',
-          url_redirect: '/productos',
-          fontWeighTitle: '600',
-          fontSizeTitle: '22px',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700301/template15/card3_nqysys.jpg',
-          title: 'Dog Food',
-          color_title: '#1f2021',
-          url_redirect: '/productos',
-          fontWeighTitle: '600',
-          fontSizeTitle: '22px',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700301/template15/card4_tgmtf5.jpg',
-          title: 'Dog Toys',
-          color_title: '#1f2021',
-          url_redirect: '/productos',
-          fontWeighTitle: '600',
-          fontSizeTitle: '22px',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700301/template15/card5_t1amif.jpg',
-          title: 'Dog Suplements',
-          color_title: '#1f2021',
-          url_redirect: '/productos',
-          fontWeighTitle: '600',
-          fontSizeTitle: '22px',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700301/template15/card6_pwti7m.jpg',
-          title: 'Shop Cat',
-          color_title: '#1f2021',
-          url_redirect: '/productos',
-          fontWeighTitle: '600',
-          fontSizeTitle: '22px',
-        },
-      ],
-    },
-    content: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      values: [
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700302/template15/offers1_lzcbk3.webp',
-          title: 'Hot Summer Deals',
-          subTitle: 'SELECTED ITEMS. ONLINE ONLY.',
-          color_title: '#1f2021',
-          color_text: '#1f2021',
-          fontWeighTitle: '600',
-          fontWeighText: '600',
-          text_btn: 'Read More',
-          color_text_btn: '#FFFFFF',
-          color_bg_btn: '#ed6436',
-          url_redirect: '/productos',
-          visible_btn: true,
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700302/template15/offers2_cxgrhv.webp',
-          title: 'TREATS & GROOMING',
-          subTitle: 'Spoil your true love',
-          color_title: '#1f2021',
-          color_text: '#1f2021',
-          fontWeighTitle: '500',
-          fontWeighText: '600',
-          text_btn: 'Read More',
-          color_text_btn: '#FFFFFF',
-          color_bg_btn: '#ed6436',
-          url_redirect: '/productos',
-          visible_btn: true,
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700302/template15/offers3_j07u5c.webp',
-          title: 'OUR BRAND YOU WILL LOVE',
-          subTitle: 'New in this year',
-          color_title: '#1f2021',
-          color_text: '#1f2021',
-          fontWeighTitle: '500',
-          fontWeighText: '600',
-          text_btn: 'Read More',
-          color_text_btn: '#FFFFFF',
-          color_bg_btn: '#ed6436',
-          url_redirect: '/productos',
-          visible_btn: true,
-        },
-      ],
-    },
-    listProductsHome: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'Best Seller',
-      color_title_1: '#ed6436',
-      color_title_2: '#1f2021',
-      fontSizeTitle: '40px',
-      fontWeighTitle: '600',
-    },
-    listProductsOffers: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'Recommended For You',
-      color_title_1: '#ed6436',
-      color_title_2: '#1f2021',
-      fontSizeTitle: '40px',
-      fontWeighTitle: '600',
-    },
-    cardProducts: {
-      '--background_color_1': '#FFFFFF',
-      '--color_title': '#1f2021',
-      '--color_price': '#ed6436',
-      '--fontWeighTitle': '600',
-      '--fontWeighPrice': '600',
-      color_icon: '#ed6436',
-      color_btn: '#FFFFFF',
-      '--color_border': '#868686',
-    },
-    information: {
-      '--background_color_1': '#ed6436',
-      '--background_color_2': '#E7E6E4',
-      visible: true,
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700301/template15/information_jygwp8.jpg',
-      icon: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700302/template15/logoInformation_sdnrdx.png',
-      text: 'Save big annually with our veterinarian recommended wellness plan.',
-      color_text: '#ffffff',
-      fontWeighText: '500',
-      text_btn: 'enroll now',
-      color_text_btn: '#FFFFFF',
-      color_bg_btn: '#000000',
-      url_redirect: '/productos',
-      visible_btn: true,
-    },
-    informationLogos: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700537/template15/icon-1_temarf.png',
-      title: 'What your pet needs,  when they need it.',
-      color_title_1: '#ed6436',
-      color_title_2: '#1f2021',
-      fontSizeTitle: '40px',
-      fontWeighTitle: '600',
-      values: [
-        {
-          icono:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700636/template15/1_vzpzoa.png',
-          title: 'Free Same-Day Delivery',
-          text: 'Order by 2pm local time to get free delivery on orders $35+ today.',
-          color_title: '#1f2021',
-          color_text: '#999999',
-          fontSizeTitle: '24px',
-          fontSizeText: '15px',
-          fontWeighTitle: '600',
-          fontWeighText: '400',
-        },
-        {
-          icono:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700636/template15/2_xjhedm.png',
-          title: '30 Day Return',
-          text: '35% off your first order plus 5% off all future orders.',
-          color_title: '#1f2021',
-          color_text: '#999999',
-          fontSizeTitle: '24px',
-          fontSizeText: '15px',
-          fontWeighTitle: '600',
-          fontWeighText: '400',
-        },
-        {
-          icono:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700636/template15/3_qqegp4.avif',
-          title: 'Security payment',
-          text: '25% off your online order of $50+. Available at most locations.',
-          color_title: '#1f2021',
-          color_text: '#999999',
-          fontSizeTitle: '24px',
-          fontSizeText: '15px',
-          fontWeighTitle: '600',
-          fontWeighText: '400',
-        },
-        {
-          icono:
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700636/template15/service-4_70x70_cpslrx.webp',
-          title: '24/7 Support',
-          text: 'Shop online to get orders over $35 shipped fast and free.*',
-          color_title: '#1f2021',
-          color_text: '#999999',
-          fontSizeTitle: '24px',
-          fontSizeText: '15px',
-          fontWeighTitle: '600',
-          fontWeighText: '400',
-        },
-      ],
-    },
-    information2: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      imgBg:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700300/template15/bg_ps4jaj.webp',
-      imgLeft:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700301/template15/cat_nzkgpf.webp',
-      icon: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700301/template15/icon-2_xfvxuw.png',
-      title: 'Taste it, love it or we’ll replace it… Guaranteed!',
-      text: 'At Petio, we believe your dog and cat will love their food so much that if they don’t … we’ll help you find a replacement. That’s our taste guarantee.',
-      color_title: '#000000',
-      color_price: '#000000',
-      fontWeighTitle: '600',
-      fontWeighPrice: '500',
-      text_btn: 'Find out more',
-      color_text_btn: '#000000',
-      color_bg_btn: '#FFFFFF',
-      url_redirect: '/productos',
-    },
-    banner2: {
-      '--background_color_1': '#FFFFFF',
-      imgBg:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1689784141/template15/bg-1_tzi2i2.jpg',
-      imgBg_res:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1690562744/template15/Proyecto_nuevo_xeqvsd_fxiupj.png',
-      visible: true,
-      title: 'New Puppy or Kitten?',
-      text: 'iscover everything you need to make them feel at home',
-      color_title: '#FFFFFF',
-      color_text: '#FFFFFF',
-      fontSizeTitle: '80px',
-      fontSizeText: '24px',
-      fontWeighTitle: '600',
-      fontWeighText: '400',
-      text_btn_1: 'Shop Kitten',
-      color_text_btn_1: '#000000',
-      color_bg_btn_1: '#FFFFFF',
-      url_redirect_1: '/productos',
-      visible_btn_1: true,
-      text_btn_2: 'Shop Puppy',
-      color_text_btn_2: '#000000',
-      color_bg_btn_2: '#FFFFFF',
-      url_redirect_2: '/productos',
-      visible_btn_2: true,
-    },
-    logos: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'Popular Brands',
-      color_title_1: '#ed6436',
-      color_title_2: '#1f2021',
-      fontSizeTitle: '40px',
-      fontWeighTitle: '600',
-      values: [
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700302/template15/logo1_gpvq8j.avif',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700302/template15/logo2_rmjnaj.avif',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700302/template15/logo3_lunjj1.avif',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700302/template15/logo4_lunxgp.avif',
-          url_redirect: '/productos',
-        },
-        {
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700302/template15/logo5_fwzw4a.avif',
-          url_redirect: '/productos',
-        },
-      ],
-    },
-    listBlogHome: {
-      '--background_color_1': '#FFFFFF',
-      visible: true,
-      title: 'Latest Blog',
-      color_title_1: '#ed6436',
-      color_title_2: '#1f2021',
-      fontWeighTitle: '600',
-      fontSizeTitle: '40px',
-    },
-    cardBlog: {
-      '--background_color_1': '#FFFFFF',
-      color_title: '#1f2021',
-      color_text: '#ed6436',
-      fontWeighTitle: '500',
-      fontWeighText: '600',
-      color_icon: '#ed6436',
-      color_btn: '#FFFFFF',
-      color_border: '#868686',
-      color_date: '#ed6436',
-      color_bg_date: '#FFFFFF',
-    },
-    listProductsFilter: {
-      '--background_color_1': '#FFFFFF',
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1690493567/template15/contact_cjqh7q_ljwxcm.jpg',
-      color_breadCrumbs: '#646464',
-      visible_img: true,
-      color_title: '#000000',
-      '--color_categories': '#868686',
-      '--color_subCategories': '#ed6436',
-      '--color_icon': '#ed6436',
-      '--color_border': '#868686',
-      '--color_pagination': '#ed6436',
-    },
-    detailsProducts: {
-      '--background_color_1': '#FFFFFF',
-      '--background_color_2': '#accdd2',
-      color_breadCrumbs: '#FFFFFF',
-      color_border: '#868686',
-      color_title: '#1f2021',
-      color_price: '#ed6436',
-      color_priceDescount: '#ed6436',
-      color_text: '#1f2021',
-      color_subText: '#646464',
-      color_btn: '#FFFFFF',
-      color_text_btn: '#000000',
-      color_icon: '#ed6436',
-      fontWeighTitle: '600',
-      fontWeighPrice: '600',
-      fontWeighPriceDescount: '500',
-      fontSizeTitle: '28px',
-      fontSizePrice: '18px',
-      fontSizePriceDescount: '15px',
-    },
-    contact: {
-      '--background_color_1': '#FFFFFF',
-      visible_img: true,
-      img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1690493567/template15/contact_cjqh7q_ljwxcm.jpg',
-      color_breadCrumbs: '#646464',
-      color_Bg: '#F2F2F2',
-      color_title: '#000000',
-      color_text: '#868686',
-      color_icon: '#ed6436',
-      color_title_form: '#000000',
-      '--background_color_2': '#CAC1D6',
-      color_input: '#FFFFFF',
-      color_text_input: '#000000',
-      color_btn_form: '#000000',
-      color_text_btn_form: '#FFFFFF',
-    },
-    footer: {
-      '--background_color_1': '#111111',
-      visibleImg: true,
-      imgBg:
-        'https://res.cloudinary.com/komerciaacademico/image/upload/v1689700300/template15/bg2_ryrpoi.webp',
-      '--with_logo': '120px',
-      '--color_title': '#ffffff',
-      '--color_text': '#868686',
-      '--color_icon': '#ed6436',
-      watermark: true,
-    },
-    newsletter: {
-      title: 'SignUp For Newsletter',
-      subTitle: 'Follow when an unknown printer took a galley of type.',
-      color_title: '#ed6436',
-      color_text: '#ffffff',
-      color_border: '#ed6436',
-      color_input: '#4A4A4A',
-      color_text_input: '#ffffff',
-      colorBg_Btn: '#ed6436',
-      color_icon: '#FFFFFF',
-    },
-    settingsGeneral: {
-      font: 'Poppins',
-      radius: '25px',
-      hover_text_btn: '#FFFFFF',
-      hover_bg_btn: '#af4420',
-      hover_text: '#ed6436',
-    },
-  },
+  settingByTemplate15: '',
   settingByTemplate16: '',
   category_producto_header: '',
   subcategory_producto_header: '',
@@ -925,61 +423,73 @@ export const mutations = {
     }
   },
   SET_CURRENTSETTING15(state, value) {
-    // if (value && value.component) {
-    //   switch (value.component) {
-    //     case 'banner':
-    //       state.settingByTemplate14.banner = value.setting
-    //       break
-    //     case 'cardBlog':
-    //       state.settingByTemplate14.cardBlog = value.setting
-    //       break
-    //     case 'cardProducts':
-    //       state.settingByTemplate14.cardProducts = value.setting
-    //       break
-    //     case 'contact':
-    //       state.settingByTemplate14.contact = value.setting
-    //       break
-    //     case 'detailsProducts':
-    //       state.settingByTemplate14.detailsProducts = value.setting
-    //       break
-    //     case 'footer':
-    //       state.settingByTemplate14.footer = value.setting
-    //       break
-    //     case 'header':
-    //       state.settingByTemplate14.header = value.setting
-    //       break
-    //     case 'information':
-    //       state.settingByTemplate14.information = value.setting
-    //       break
-    //     case 'listBlogHome':
-    //       state.settingByTemplate14.listBlogHome = value.setting
-    //       break
-    //     case 'productListFilter':
-    //       state.settingByTemplate14.listProductsFilter = value.setting
-    //       break
-    //     case 'listProductsHome':
-    //       state.settingByTemplate14.listProductsHome = value.setting
-    //       break
-    //     case 'logos':
-    //       state.settingByTemplate14.logos = value.setting
-    //       break
-    //     case 'newsletter':
-    //       state.settingByTemplate14.newsletter = value.setting
-    //       break
-    //     case 'offers':
-    //       state.settingByTemplate14.offers = value.setting
-    //       break
-    //     case 'offersProduct':
-    //       state.settingByTemplate14.offersProduct = value.setting
-    //       break
-    //     case 'pages':
-    //       state.settingByTemplate14.pages = value.setting
-    //       break
-    //     case 'settingsGeneral':
-    //       state.settingByTemplate14.settingsGeneral = value.setting
-    //       break
-    //   }
-    // }
+    if (value && value.component) {
+      switch (value.component) {
+        case 'banner':
+          state.settingByTemplate15.banner = value.setting
+          break
+        case 'banner2':
+          state.settingByTemplate15.banner2 = value.setting
+          break
+        case 'categories':
+          state.settingByTemplate15.categories = value.setting
+          break
+        case 'content':
+          state.settingByTemplate15.content = value.setting
+          break
+        case 'cardBlog':
+          state.settingByTemplate15.cardBlogs = value.setting
+          break
+        case 'cardProducts':
+          state.settingByTemplate15.cardProducts = value.setting
+          break
+        case 'contact':
+          state.settingByTemplate15.contact = value.setting
+          break
+        case 'detailsProducts':
+          state.settingByTemplate15.detailsProducts = value.setting
+          break
+        case 'footer':
+          state.settingByTemplate15.footer = value.setting
+          break
+        case 'header':
+          state.settingByTemplate15.header = value.setting
+          break
+        case 'information':
+          state.settingByTemplate15.information = value.setting
+          break
+        case 'information2':
+          state.settingByTemplate15.information2 = value.setting
+          break
+        case 'informationLogos':
+          state.settingByTemplate15.informationLogos = value.setting
+          break
+        case 'listBlogHome':
+          state.settingByTemplate15.listBlogHome = value.setting
+          break
+        case 'productListFilter':
+          state.settingByTemplate15.listProductsFilter = value.setting
+          break
+        case 'listProductsHome':
+          state.settingByTemplate15.listProductsHome = value.setting
+          break
+        case 'listProductsOffers':
+          state.settingByTemplate15.listProductsOffers = value.setting
+          break
+        case 'logos':
+          state.settingByTemplate15.logos = value.setting
+          break
+        case 'newsLetter':
+          state.settingByTemplate15.newsLetter = value.setting
+          break
+        case 'pages':
+          state.settingByTemplate15.pageHeader = value.setting
+          break
+        case 'settingGeneral':
+          state.settingByTemplate15.settingGeneral = value.setting
+          break
+      }
+    }
   },
   SET_CURRENTSETTING16(state, value) {
     // if (value && value.component) {
@@ -1379,11 +889,19 @@ export const actions = {
           id.data.data.template == 11 ||
           id.data.data.template == 12 ||
           id.data.data.template == 13 ||
-          id.data.data.template == 14
+          id.data.data.template == 14 ||
+          id.data.data.template == 16
         ) {
           if (state.dataStore && state.dataStore.tienda) {
             await dispatch(
               'GET_SETTINGS_BY_TEMPLATE_NODE',
+              state.dataStore.tienda
+            )
+          }
+        } else if (id.data.data.template == 15) {
+          if (state.dataStore && state.dataStore.tienda) {
+            await dispatch(
+              'GET_SETTINGS_BY_TEMPLATE_AWS',
               state.dataStore.tienda
             )
           }
@@ -1529,6 +1047,22 @@ export const actions = {
       })
       if (data) {
         commit(`SET_SETTINGS_BY_TEMPLATE_${store.template}`, data.body)
+      }
+    } catch (err) {
+      console.log('Data setting NODE', err.response)
+    }
+  },
+  async GET_SETTINGS_BY_TEMPLATE_AWS({ commit, state }, store) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${store.subdominio}`,
+      })
+      if (data) {
+        commit(
+          `SET_SETTINGS_BY_TEMPLATE_${store.template}`,
+          data.data.webSiteTemplate
+        )
       }
     } catch (err) {
       console.log('Data setting NODE', err.response)

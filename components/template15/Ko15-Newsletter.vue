@@ -29,7 +29,7 @@
             name="email"
             rules="required|email"
             class="px-20 py-8 w-full"
-            :style="`background-color: ${settingByTemplate15[0].newsletter.color_input}; border-radius: ${settingByTemplate15[0].settingsGeneral.radius};`"
+            :style="`background-color: ${settingByTemplate15[0].newsletter.color_input}; border-radius: ${settingByTemplate15[0].settingGeneral.radius};`"
           >
             <template slot-scope="{ errors }">
               <input
@@ -63,7 +63,7 @@
         </div>
         <button
           class="px-20 py-8 ml-10"
-          :style="`background-color: ${settingByTemplate15[0].newsletter.colorBg_Btn};  border-radius: ${settingByTemplate15[0].settingsGeneral.radius}`"
+          :style="`background-color: ${settingByTemplate15[0].newsletter.colorBg_Btn};  border-radius: ${settingByTemplate15[0].settingGeneral.radius}`"
           @click="submitNewsletter"
         >
           <div>
