@@ -4,81 +4,53 @@
     :style="[
       {
         '--font-style-1':
-          this.settingByTemplate9?.settingGeneral?.fount_1 ?? 'David Libre',
+          settingByTemplate9?.settingGeneral?.fount_1 ?? 'David Libre',
       },
       {
         '--font-style-2':
-          this.settingByTemplate9?.settingGeneral?.fount_2 ?? 'Great Vibes',
+          settingByTemplate9?.settingGeneral?.fount_2 ?? 'Great Vibes',
       },
     ]"
   >
-    <Ko9-Banner
+    <K09-banner
+      v-if="settingByTemplate9?.banner?.visible"
       id="kBannerX"
-      v-bind="componentsProps"
       :key="bannerRendering"
-      v-if="
-        settingByTemplate9 &&
-        settingByTemplate9.banner &&
-        settingByTemplate9.banner.visible
-      "
+      v-bind="componentsProps"
     />
-    <Ko9-offers
+    <K09-offers
+      v-if="settingByTemplate9?.koffers?.visible"
       id="KOffersX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate9 &&
-        settingByTemplate9.koffers &&
-        settingByTemplate9.koffers.visible
-      "
     />
-    <Ko9-sliderHoko
+    <K09-sliderHoko
+      v-if="
+        settingByTemplate9?.productList?.visible && dataHoko?.statehoko === 1
+      "
       id="KProductListHokoX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate9 &&
-        settingByTemplate9.productList &&
-        settingByTemplate9.productList.visible == true &&
-        dataHoko &&
-        dataHoko.statehoko == 1
-      "
     />
-    <Ko9-ProductList
+    <K09-productList
+      v-if="
+        settingByTemplate9?.productList?.visible && fullProducts?.length > 0
+      "
       id="KProductListX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate9 &&
-        settingByTemplate9.productList &&
-        settingByTemplate9.productList.visible == true &&
-        this.fullProducts.length > 0
-      "
     />
-    <Ko9-blog
+    <K09-blog
+      v-if="listArticulos?.length > 0 && settingByTemplate9?.blog?.visible"
       id="KBlogX"
       v-bind="componentsProps"
-      v-show="
-        listArticulos.length > 0 &&
-        settingByTemplate9 &&
-        settingByTemplate9.blog &&
-        settingByTemplate9.blog.visible
-      "
     />
-    <Ko9-wrapper
+    <K09-wrapper
+      v-if="settingByTemplate9?.wrapper?.visible"
       id="KWrapperX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate9 &&
-        settingByTemplate9.wrapper &&
-        settingByTemplate9.wrapper.visible
-      "
     />
-    <Ko9-Newsletter
+    <K09-newsletter
+      v-if="settingByTemplate9?.newsletter?.visible"
       id="KNewsX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate9 &&
-        settingByTemplate9.newsletter &&
-        settingByTemplate9.newsletter.visible
-      "
     />
   </div>
 </template>
@@ -86,12 +58,17 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
-  name: 'Ko-template9',
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate09)
+  name: 'KoTemplate9',
+  components: {
+    K09Banner: () => import('@/components/template9/k09-Banner.vue'),
+    K09Offers: () => import('@/components/template9/k09-Offers.vue'),
+    K09SliderHoko: () => import('@/components/template9/k09-SliderHoko.vue'),
+    K09ProductList: () => import('@/components/template9/k09-ProductList.vue'),
+    K09Blog: () => import('@/components/template9/k09-Blog.vue'),
+    K09Wrapper: () => import('@/components/template9/K09-Wrapper.vue'),
+    K09Newsletter: () => import('@/components/template9/k09-Newsletter.vue'),
   },
+  layout: 'default',
   data() {
     return {
       bannerRendering: 0,
@@ -125,12 +102,17 @@ export default {
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate09)
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate09)
+  },
   methods: {
     addEventListenerTemplate09(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
       ) {
+        console.log(e.data)
         if (e && e.data && e.data.component && e.data.template == 9) {
           this.$store.commit('SET_CURRENTSETTING09', e.data)
           if (e.data.component == 'banner') {

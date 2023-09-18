@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-card">
-    <div class="container-card" id="product-card">
+    <div id="product-card" class="container-card">
       <div class="wrapper">
         <nuxt-link
           :to="{ path: `/productosHoko/` + product.id }"
@@ -8,8 +8,8 @@
         >
           <client-only>
             <img
-              loading="lazy"
               v-lazy="product.images[0]"
+              loading="lazy"
               class="product-image"
               :class="soldOut ? 'product-image-soldOut' : ''"
               alt="Product Img"
@@ -24,19 +24,19 @@
               {{ $t('home_cardAgotado') }}
             </p>
             <div class="content-name-product">
-              <p class="card-title" v-if="this.product.name >= 90">
-                {{ `${this.product.name.slice(0, 90)}...` }}
+              <p v-if="product.name >= 90" class="card-title">
+                {{ `${product.name.slice(0, 90)}...` }}
               </p>
-              <p class="card-title" v-else>
-                {{ `${this.product.name.slice(0, 90)}` }}
+              <p v-else class="card-title">
+                {{ `${product.name.slice(0, 90)}` }}
               </p>
             </div>
-            <div class="content-text-price" v-if="this.product.price">
+            <div v-if="product.price" class="content-text-price">
               <p class="text-price">
-                {{ this.product.price | currency }}
+                {{ product.price | currency }}
               </p>
             </div>
-            <div class="content-price-empty" v-else></div>
+            <div v-else class="content-price-empty"></div>
             <div class="wrapper-btn-icon">
               <nuxt-link
                 class="view_details"
@@ -55,8 +55,8 @@
           class="wrapper-image"
         >
           <img
-            loading="lazy"
             v-lazy="product.images[0]"
+            loading="lazy"
             class="product-image"
             alt="Product Img"
           />
@@ -66,17 +66,17 @@
             :to="{ path: `/productosHoko/` + product.id }"
             class="content-name-product"
           >
-            <p class="card-title" v-if="this.product.name >= 25">
-              {{ `${this.product.name.slice(0, 25)}..` }}
+            <p v-if="product.name >= 25" class="card-title">
+              {{ `${product.name.slice(0, 25)}..` }}
             </p>
-            <p class="card-title" v-else>
-              {{ `${this.product.name.slice(0, 30)}` }}
+            <p v-else class="card-title">
+              {{ `${product.name.slice(0, 30)}` }}
             </p>
           </nuxt-link>
-          <div class="content-text-price" v-if="this.product.price">
+          <div v-if="product.price" class="content-text-price">
             <nuxt-link :to="{ path: `/productosHoko/` + product.id }">
               <p class="text-price">
-                {{ this.product.price | currency }}
+                {{ product.price | currency }}
               </p>
             </nuxt-link>
           </div>
@@ -89,9 +89,22 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'Ko5ProductCardHoko',
+  filters: {
+    currency(value) {
+      if (value) {
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+      }
+      return ''
+    },
+  },
   mixins: [idCloudinary],
-  name: 'Ko-ProductCard-5-Ho',
-  props: { product: Object },
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+  },
   computed: {
     soldOut() {
       if (this.product && this.product.stock_amount === 0) {
@@ -99,14 +112,6 @@ export default {
       } else {
         return false
       }
-    },
-  },
-  filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-      return ''
     },
   },
 }

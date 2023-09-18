@@ -52,7 +52,7 @@
                     v-if="idYoutube"
                     :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
                     v-show="idYoutube"
-                    v-on:mouseover="existYoutube = true"
+                    @mouseover="existYoutube = true"
                     class="video"
                     alt="Product Img"
                   />
@@ -70,7 +70,7 @@
           <div class="wrapper-photo_main">
             <div
               v-if="this.activeZoom"
-              v-on:mouseover="activeZoom = !activeZoom"
+              @mouseover="activeZoom = !activeZoom"
               v-show="!existYoutube"
               class="photo_main"
             >
@@ -81,7 +81,7 @@
               />
             </div>
             <div
-              v-on:mouseleave="activeZoom = !activeZoom"
+              @mouseleave="activeZoom = !activeZoom"
               v-if="!this.activeZoom"
               v-show="!existYoutube"
               class="photo_main"
@@ -331,11 +331,11 @@
               <div class="content-quanti-btnShop">
                 <div class="quantity">
                   <!-- <p class="text-quantity">{{ $t('cart_cantidad') }}</p> -->
-                  <button class="quantity_remove" v-on:click="removeQuantity()">
+                  <button class="quantity_remove" @click="removeQuantity()">
                     <menos-icon class="icon" />
                   </button>
                   <p class="quantity_value">{{ quantityValue }}</p>
-                  <button class="quantity_add" v-on:click="addQuantity()">
+                  <button class="quantity_add" @click="addQuantity()">
                     <mas-icon class="icon" />
                   </button>
                   <!-- Anuncio ult unidad -->
@@ -357,7 +357,7 @@
                       (data.info.tipo_servicio == null ||
                         data.info.tipo_servicio == '0')
                     "
-                    v-on:click="addShoppingCart"
+                    @click="addShoppingCart"
                   >
                     {{ $t('productdetail_añadiralcarrito') }}
                   </button>
@@ -372,7 +372,7 @@
                     ref="colorBtn"
                     class="btn"
                     v-else-if="!spent && data.info.tipo_servicio == '1'"
-                    v-on:click="GoPayments"
+                    @click="GoPayments"
                     id="AddToCartTag"
                   >
                     {{ $t('productdetail_btnComprar') }}
@@ -459,7 +459,7 @@ import axios from 'axios'
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
-  name: 'Ko7-ProductDetail-1',
+  name: 'K07-ProductDetail-1',
   mixins: [idCloudinary, currency],
   components: {
     SelectGroup: () => import('./_productdetails/selectGroup'),

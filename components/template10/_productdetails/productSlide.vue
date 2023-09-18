@@ -1,13 +1,13 @@
 <template>
   <el-carousel
     indicator-position="outside"
-    interval="6000"
+    :interval="6000"
     class="w-full h-full wrapper-carouse"
   >
     <el-carousel-item class="w-full h-full">
       <img
-        loading="lazy"
         v-lazy="idCloudinaryQuality(photo, 850, 850)"
+        loading="lazy"
         class="photo"
         alt="Product img"
         height="550px"
@@ -20,8 +20,8 @@
       class="w-full h-full"
     >
       <img
-        loading="lazy"
         v-lazy="idCloudinaryQuality(photo.foto_cloudinary, 850, 850)"
+        loading="lazy"
         class="photo"
         alt="Product img"
         height="550px"
@@ -48,8 +48,8 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'ProductSlideDetails10',
   mixins: [idCloudinary],
-  name: 'productSlide-details-10',
   props: ['photos', 'photo', 'idYoutube'],
 }
 </script>

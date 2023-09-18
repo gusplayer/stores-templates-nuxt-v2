@@ -1,30 +1,27 @@
 <template>
-  <div class="wrapper-ProductFavoritos" v-if="dataProductFavorite.length">
+  <div v-if="dataProductFavorite.length" class="wrapper-ProductFavoritos">
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">{{ $t('home_destacados') }}</p>
     </div>
-    <div class="container-favorite" id="swiper-slide-favorite">
+    <div id="swiper-slide-favorite" class="container-favorite">
       <div
         v-for="product in dataProductFavorite"
         :key="product.id"
         class="content-products"
       >
-        <KoProductCard1 :product="product" :dataStore="dataStore" />
+        <KoProductCard1 :product="product" :data-store="dataStore" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import idCloudinary from '../../../mixins/idCloudinary'
-// import currency from '../../../mixins/formatCurrent'
 import KoProductCard1 from '../template2/productCard/ko-productCard.vue'
 export default {
+  name: 'KoProductFavoritosWa',
   components: {
     KoProductCard1,
   },
-  // mixins: [idCloudinary, currency],
-  name: 'Ko-ProductFavoritos-1',
   props: { dataStore: Object, settingByTemplate: Object },
   computed: {
     dataProductFavorite() {

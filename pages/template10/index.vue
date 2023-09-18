@@ -4,78 +4,60 @@
     :style="[
       {
         '--font-style-1':
-          this.settingByTemplate10?.settingGeneral?.fount_1 ?? 'Roboto',
+          settingByTemplate10?.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
-    <Ko10-buttonCar />
-    <Ko10-carousel
+    <K010-buttonCar />
+    <K010-carousel
+      v-if="settingByTemplate10?.banner?.visible"
       id="kBannerX"
-      v-bind="componentsProps"
       :key="bannerRendering"
-      v-if="
-        settingByTemplate10 &&
-        settingByTemplate10.banner &&
-        settingByTemplate10.banner.visible
-      "
+      v-bind="componentsProps"
     />
-    <Ko10-section
+    <K010-section
+      v-if="settingByTemplate10?.section?.visible"
       id="kSectionX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate10 &&
-        settingByTemplate10.section &&
-        settingByTemplate10.section.visible
-      "
     />
-    <Ko10-trending
+    <K010-trending
+      v-if="settingByTemplate10?.trending?.visible"
       id="kTrendingX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate10 &&
-        settingByTemplate10.trending &&
-        settingByTemplate10.trending.visible
-      "
     />
-    <Ko10-deals
+    <K010-deals
+      v-if="settingByTemplate10?.offers?.visible"
       id="kOffersX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate10 &&
-        settingByTemplate10.offers &&
-        settingByTemplate10.offers.visible
-      "
     />
-    <Ko10-featuredProducts
+    <K010-featuredProducts
+      v-if="settingByTemplate10?.productList?.visible"
       id="KProductDestacadosX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate10 &&
-        settingByTemplate10.productList &&
-        settingByTemplate10.productList.visible
-      "
     />
-    <Ko10-blog
+    <K010-blog
+      v-if="listArticulos?.length > 0 && settingByTemplate10?.blog?.visible"
       id="KBlogX"
       v-bind="componentsProps"
-      v-show="
-        listArticulos.length > 0 &&
-        settingByTemplate10 &&
-        settingByTemplate10.blog &&
-        settingByTemplate10.blog.visible
-      "
     />
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
-  name: 'Ko-template10',
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+  name: 'KoTemplate10',
+  components: {
+    K010ButtonCar: () => import('@/components/template10/Ko10-buttonCar.vue'),
+    K010Carousel: () => import('@/components/template10/Ko10-carousel.vue'),
+    K010Section: () => import('@/components/template10/Ko10-section.vue'),
+    K010Trending: () => import('@/components/template10/Ko10-trending.vue'),
+    K010Deals: () => import('@/components/template10/Ko10-deals.vue'),
+    K010FeaturedProducts: () =>
+      import('@/components/template10/Ko10-featuredProducts.vue'),
+    K010Blog: () => import('@/components/template10/Ko10-blog.vue'),
   },
+  layout: 'default',
+
   data() {
     return {
       bannerRendering: 0,
@@ -108,6 +90,10 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
     addEventListenerTemplate(e) {
@@ -142,16 +128,16 @@ export default {
             case 'section':
               this.moverseA('kSectionX')
               break
-            case 'treding':
+            case 'trending':
               this.moverseA('kTrendingX')
               break
-            case 'card':
+            case 'cardProduct':
               this.moverseA('kTrendingX')
               break
             case 'offers':
               this.moverseA('kOffersX')
               break
-            case 'productDestacados':
+            case 'productList':
               this.moverseA('KProductDestacadosX')
               break
             case 'blog':

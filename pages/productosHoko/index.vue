@@ -5,19 +5,15 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  name: 'ProductHokoIndex',
   components: {
     K05ProductListHoko: () =>
-      import('../../components/template5/Ko5-ProductListHomeHoko.vue'),
+      import('@/components/template5/Ko5-ProductListHomeHoko.vue'),
     K09ProductListHoko: () =>
-      import('../../components/template9/Ko-ProductListFilterHoko.vue'),
+      import('@/components/template9/k09-ProductListFilterHoko.vue'),
     K11ProductListHoko: () =>
-      import('../../components/template11/ko-ProductListFilterHoko.vue'),
-    KoNoDisponibleHoko: () =>
-      import('../../components/Hoko/Ko-nodisponible.vue'),
-  },
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+      import('@/components/template11/ko-ProductListFilterHoko.vue'),
+    KoNoDisponibleHoko: () => import('@/components/Hoko/Ko-nodisponible.vue'),
   },
   data() {
     return {
@@ -51,6 +47,7 @@ export default {
     },
     indexTemplate() {
       let productListComponent = ''
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)]
       }
@@ -92,6 +89,10 @@ export default {
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
   methods: {
     createSettingByTemplate(
       settingByTemplate,
@@ -108,6 +109,7 @@ export default {
       }
       return defaultValue
     },
+    // eslint-disable-next-line no-unused-vars
     createNestedSetting(setting, properties, defaultValue) {
       if (setting) {
         const nestedSetting = {}

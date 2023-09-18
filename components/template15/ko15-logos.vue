@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex justify-center items-center py-25 lg:py-40 px-10"
+    class="w-full flex justify-center items-center py-35 lg:py-50 px-10"
     :style="`background-color: ${logos['--background_color_1']}`"
   >
     <div
@@ -8,15 +8,15 @@
     >
       <p
         class="w-full text-center mb-25 text-25 md:text-30 lg:text-40"
-        :style="`color: ${logos.color_title_1}; font-weight: ${logos.fontWeighTitle};`"
+        :style="`color: ${logos.color_title_1}; font-weight: ${logos.fontWeightTitle};`"
       >
         {{ logos.title }}
       </p>
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full">
+      <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="w-full">
         <div class="swiper-wrapper w-full">
           <a
-            :id="`slide${index + 1}`"
             v-for="(item, index) in logos.values"
+            :id="`slide${index + 1}`"
             :key="index"
             :href="item.url_redirect"
             class="swiper-slide w-full"
@@ -38,8 +38,8 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
+  name: 'Ko15Logos',
   mixins: [idCloudinary],
-  name: 'Ko15-Logos',
   props: {
     logos: Object,
     dataStore: Object,

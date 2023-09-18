@@ -4,7 +4,7 @@
 
 <script>
 export default {
+  name: 'KoTemplate8',
   layout: 'default',
-  name: 'Ko-template8',
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="banner && banner.banner_footer"
+    v-if="banner?.banner_footer"
     class="w-full h-full flex justify-center items-center"
   >
     <picture>
@@ -25,8 +25,8 @@
 <script>
 import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
+  name: 'Ko5BannerFooter',
   mixins: [idCloudinaryBanner],
-  name: 'Ko5-BannerFooter',
   computed: {
     banner() {
       return this.$store.state.settingByTemplate

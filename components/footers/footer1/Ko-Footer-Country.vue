@@ -3,11 +3,11 @@
     class="wrapper-footer-country"
     :class="valueWa ? 'content-footer-country-wa' : ''"
   >
-    <div class="content-footer-country" v-if="dataStore.tienda.pais">
+    <div v-if="dataStore.tienda.pais" class="content-footer-country">
       <div class="content-item-flag">
-        <div class="content-flag" v-if="selectOptionCountry">
+        <div v-if="selectOptionCountry" class="content-flag">
           <img
-            v-lazy="this.selectOptionCountry.img"
+            v-lazy="selectOptionCountry.img"
             width="30px"
             class="mr-2"
             alt="bandera país"
@@ -19,12 +19,12 @@
         <p class="text-country text-margin">|</p>
         <p class="text-country">
           <strong
-            style="margin-right: 1px"
             v-if="dataStore.tienda.moneda == 'PEN'"
+            style="margin-right: 1px"
           >
             S/
           </strong>
-          <strong style="margin-right: 1px" v-else>$</strong>
+          <strong v-else style="margin-right: 1px">$</strong>
           {{ dataStore.tienda.moneda }}
         </p>
         <div v-if="stateIdStore" class="flex flex-row justify-start">
@@ -50,7 +50,7 @@
 import KoLanguage from '../../k-select-language'
 
 export default {
-  name: 'Ko-footer-flags',
+  name: 'KoFooterFlags',
   components: {
     KoLanguage,
   },

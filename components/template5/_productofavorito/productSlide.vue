@@ -1,24 +1,24 @@
 <template>
   <div
-    v-swiper:mySwiper="swiperOption"
     ref="mySwiper"
+    v-swiper:mySwiper="swiperOption"
     style="position: relative"
   >
     <div class="swiper-wrapper">
       <div
-        class="swiper-slide"
-        v-for="(product, index) in this.products"
+        v-for="(product, index) in products"
         :key="index"
+        class="swiper-slide"
       >
         <client-only>
-          <KoProductCard1 :product="product"></KoProductCard1>
+          <KoProductCard1 :product="product" />
         </client-only>
       </div>
     </div>
-    <div class="prev btnPrev" v-if="this.products.length > 1">
+    <div v-if="products.length > 1" class="prev btnPrev">
       <FlechaLeft-icon class="btn-icon" />
     </div>
-    <div class="next btnNext" v-if="this.products.length > 1">
+    <div v-if="products.length > 1" class="next btnNext">
       <FlechaRight-icon class="btn-icon" />
     </div>
   </div>
@@ -28,12 +28,15 @@
 import KoProductCard1 from '../_productcard/Ko-ProductCard-1'
 
 export default {
-  name: 'productSlide-productFavorito',
+  name: 'Ko5ProductSlideFavorite',
   components: {
     KoProductCard1,
   },
   props: {
-    products: {},
+    products: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import KoSwipper from '../../../components/template9/_productofavorito/productSlide'
+import KoSwipper from '../_productofavorito/productSlide'
 export default {
   name: 'suggestionsProducto',
   props: {

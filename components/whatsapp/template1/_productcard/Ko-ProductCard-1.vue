@@ -2,8 +2,8 @@
   <div class="wrapper-card">
     <div class="container-card">
       <div class="wrapper-movil">
-        <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
-        <p class="card-info-2" v-if="!getFreeShipping">
+        <p v-if="soldOut" class="card-info-1">{{ $t('home_cardAgotado') }}</p>
+        <p v-if="!getFreeShipping" class="card-info-2">
           {{ $t('home_cardGratis') }}
         </p>
         <nuxt-link
@@ -13,15 +13,16 @@
           class="wrapper-image"
         >
           <img
-            v-if="!soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 550, 550)"
+            v-lazy="
+              product?.foto_cloudinary == 'sin_foto.jpeg'
+                ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                : idCloudinary(product.foto_cloudinary, 550, 550)
+            "
+            width="265"
+            height="265"
+            loading="lazy"
             class="product-image"
-            alt="Product Img"
-          />
-          <img
-            v-if="soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 550, 550)"
-            class="product-image product-image-soldOut"
+            :class="!soldOut ? '' : 'grayscale'"
             alt="Product Img"
           />
         </nuxt-link>
@@ -33,37 +34,31 @@
             }"
             class="content-name-product-movil"
           >
-            <p
-              class="card-text-movil-title"
-              v-if="this.product.nombre.length >= 42"
-            >
-              {{ `${this.product.nombre.slice(0, 42)}..` }}
+            <p v-if="product.nombre.length >= 42" class="card-text-movil-title">
+              {{ `${product.nombre.slice(0, 42)}..` }}
             </p>
-            <p class="card-text-movil-title" v-else>
-              {{ `${this.product.nombre.slice(0, 42)}` }}
+            <p v-else class="card-text-movil-title">
+              {{ `${product.nombre.slice(0, 42)}` }}
             </p>
-            <p class="card-text-movil" v-if="this.product.marca">
-              {{ this.product.marca }}
+            <p v-if="product.marca" class="card-text-movil">
+              {{ product.marca }}
             </p>
-            <div
-              class="content-text-price-movil-cart"
-              v-if="this.product.precio"
-            >
+            <div v-if="product.precio" class="content-text-price-movil-cart">
               <div class="wrapper-price">
                 <!-- <div> -->
-                <!-- <p class="card-price-1-movil" v-if="this.product.precio > 0">
-                  $ {{ this.product.precio }}
+                <!-- <p class="card-price-1-movil" v-if="product.precio > 0">
+                  $ {{ product.precio }}
                   </p>-->
                 <div
+                  v-if="estadoCart && minPrice != maxPrice"
                   class="content-price"
-                  v-if="estadoCart && this.minPrice != this.maxPrice"
                 >
                   <p
+                    v-if="product.precio > 0 || product.precio"
                     class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
                   >
                     {{
-                      this.minPrice
+                      minPrice
                         | currency(
                           dataStore.tienda.codigo_pais,
                           dataStore.tienda.moneda
@@ -72,11 +67,11 @@
                   </p>
                   <p class="separator-price">-</p>
                   <p
+                    v-if="product.precio > 0 || product.precio"
                     class="card-price-2"
-                    v-if="this.product.precio > 0 || this.product.precio"
                   >
                     {{
-                      this.maxPrice
+                      maxPrice
                         | currency(
                           dataStore.tienda.codigo_pais,
                           dataStore.tienda.moneda
@@ -85,9 +80,9 @@
                   </p>
                 </div>
                 <div v-else>
-                  <p class="card-price-2" v-if="this.product.precio > 0">
+                  <p v-if="product.precio > 0" class="card-price-2">
                     {{
-                      this.product.precio
+                      product.precio
                         | currency(
                           dataStore.tienda.codigo_pais,
                           dataStore.tienda.moneda
@@ -102,12 +97,11 @@
           </nuxt-link>
           <div class="Content-btn-movil">
             <div
+              v-if="!estadoCart && !soldOut && !spent"
               class="content-soldOut"
-              v-if="!this.estadoCart && !soldOut && !spent"
             >
               <div
-                v-if="this.product.precio > 0"
-                v-on:click="addShoppingCart"
+                v-if="product.precio > 0"
                 class="btn"
                 :style="`background: ${
                   settingByTemplate && settingByTemplate.color_primario
@@ -119,6 +113,7 @@
                     : '#FFFFFF'
                 };`"
                 style="margin-right: 5px"
+                @click="addShoppingCart"
               >
                 <shopWa-icon class="wp-icon" />
               </div>
@@ -147,11 +142,11 @@
               </nuxt-link>
             </div>
             <nuxt-link
+              v-else
               :to="{
                 path:
                   `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
               }"
-              v-else
               class="btn"
               :style="`background: ${
                 settingByTemplate && settingByTemplate.color_primario
@@ -180,19 +175,9 @@
 import idCloudinary from '../../../../mixins/idCloudinary'
 import currency from '../../../../mixins/formatCurrent'
 export default {
+  name: 'KoWaProductCard1',
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductCard-Wa-1',
   props: { product: Object, dataStore: Object },
-  mounted() {
-    this.idSlug = this.product.id
-    this.productPrice()
-    if (
-      this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
-    ) {
-      this.estadoCart = true
-    }
-  },
   data() {
     return {
       estadoCart: false,
@@ -280,6 +265,21 @@ export default {
     //     return false
     //   }
     // },
+  },
+  watch: {
+    productsCarts() {
+      this.getDataProduct()
+    },
+  },
+  mounted() {
+    this.idSlug = this.product.id
+    this.productPrice()
+    if (
+      this.product.con_variante &&
+      this.product.variantes[0].variantes !== '[object Object]'
+    ) {
+      this.estadoCart = true
+    }
   },
   methods: {
     getDataProduct() {
@@ -439,11 +439,6 @@ export default {
       }
     },
   },
-  watch: {
-    productsCarts(value) {
-      this.getDataProduct()
-    },
-  },
 }
 </script>
 
@@ -474,6 +469,8 @@ export default {
   position: relative;
 }
 .wrapper-image {
+  width: 100%;
+  height: 100%;
   max-width: 110px;
   border-radius: 4px;
   margin-right: 5px;
@@ -481,13 +478,10 @@ export default {
 }
 .product-image {
   width: 100%;
-  /* height: 100%; */
+  height: 100%;
   object-fit: cover;
   object-position: center;
   border-radius: 6px;
-}
-.product-image-soldOut {
-  filter: grayscale(100%);
 }
 .card-info-1 {
   display: flex;

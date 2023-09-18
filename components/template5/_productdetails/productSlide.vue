@@ -9,7 +9,7 @@
           alt="Product img"
         />
       </div>
-      <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
+      <div v-for="photo in photos" class="swiper-slide" :key="photo.id">
         <img
           loading="lazy"
           :src="idCloudinary(photo.foto_cloudinary, 550, 550)"
@@ -17,7 +17,7 @@
           alt="Product img"
         />
       </div>
-      <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">
+      <div v-if="idYoutube && idYoutube !== ''" class="swiper-slide">
         <div class="youtube">
           <button class="youtube__action_back" @click="changeSlide()">
             <i class="material-icons"></i>
@@ -39,8 +39,8 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'Ko5ProductSlideDetails',
   mixins: [idCloudinary],
-  name: 'productSlide-details',
   props: ['photos', 'photo', 'idYoutube'],
   data() {
     return {

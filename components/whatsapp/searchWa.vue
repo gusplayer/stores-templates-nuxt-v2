@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="order" @click="closeOrder" v-if="openSearch">
+    <div v-if="openSearch" class="order" @click="closeOrder">
       <div class="order_content">
         <div class="close-container" @click="closedSearch">
           <div class="content-close">
@@ -46,8 +46,8 @@
                   ? settingByTemplate.color_primario
                   : '#25D366'
               };`"
-              @click="closedSearch"
               type="submit"
+              @click="closedSearch"
             >
               <span
                 class="btn-txt"
@@ -70,7 +70,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'Ko-SearchWa-2',
+  name: 'KoSearchWa',
   props: {
     settingByTemplate: Object,
   },
@@ -81,6 +81,11 @@ export default {
   },
   computed: {
     ...mapState(['openSearch']),
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct(value)
+    },
   },
   methods: {
     closedSearch() {
@@ -101,11 +106,6 @@ export default {
         path: '',
         query: { search: search },
       })
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
     },
   },
 }

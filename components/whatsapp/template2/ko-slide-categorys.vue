@@ -12,10 +12,10 @@
           </p>
         </div>
         <div
-          class="tag"
-          :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
           v-for="categoria in categorias"
           :key="categoria.id"
+          class="tag"
+          :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
           @click="sendCategory(categoria, categoria.id, (ref = false))"
         >
           <p class="txt-category">
@@ -25,20 +25,20 @@
       </div>
     </div>
     <div
-      class="content-categories"
       v-if="
         settingByTemplate.state_subcategorias == 1 &&
         selectedSubcategories.length > 0
       "
+      class="content-categories"
     >
       <div class="itens-slide-categories">
         <div
+          v-for="(subcategorys, index) in selectedSubcategories"
+          :key="index"
           class="tag"
           :class="
             subcategorys.id == idSubCategory ? 'active-tag' : 'disable-tag'
           "
-          v-for="(subcategorys, index) in selectedSubcategories"
-          :key="index"
         >
           <p class="txt-category" @click="SendSubCategory(subcategorys.id)">
             {{ subcategorys.nombre_subcategoria }}

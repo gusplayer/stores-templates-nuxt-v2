@@ -1,9 +1,9 @@
 <template>
-  <div :style="this.settingBase ?? null">
-    <KoMicompra
-      :dataStore="dataStore"
-      :orden="orden"
+  <div :style="settingBase ?? null">
+    <KoMiCompra
       v-if="orden"
+      :data-store="dataStore"
+      :orden="orden"
       @update="setDataOrder"
     />
   </div>
@@ -11,16 +11,12 @@
 
 <script>
 import axios from 'axios'
-import KoMicompra from '../../../components/whatsapp/Ko-miCompra-1.vue'
+import KoMiCompra from '../../../components/whatsapp/Ko-miCompra-1.vue'
 
 export default {
+  name: 'MiCompraWa',
   components: {
-    KoMicompra,
-  },
-  mounted() {
-    if (this.$route.query && this.$route.query.orden) {
-      this.asyncData()
-    }
+    KoMiCompra,
   },
   data() {
     return {
@@ -34,6 +30,12 @@ export default {
     settingBase() {
       return this.$store.state.settingBase
     },
+  },
+
+  mounted() {
+    if (this.$route.query && this.$route.query.orden) {
+      this.asyncData()
+    }
   },
   methods: {
     setDataOrder(value) {

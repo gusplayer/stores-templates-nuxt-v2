@@ -162,7 +162,7 @@
               <div class="separador-btn"></div>
               <div
                 id="add_cart"
-                v-on:click="addShoppingCart"
+                @click="addShoppingCart"
                 v-if="
                   !this.estadoCart &&
                   !soldOut &&
@@ -303,7 +303,7 @@
                   this.product.tipo_servicio == '0')
               "
             >
-              <cartArrowDown class="icon-cart" v-on:click="addShoppingCart" />
+              <cartArrowDown class="icon-cart" @click="addShoppingCart" />
             </div>
           </div>
           <div class="separator-movil" v-else>
@@ -316,7 +316,7 @@
                   this.product.tipo_servicio == '0')
               "
             >
-              <cartArrowDown v-on:click="addShoppingCart" />
+              <cartArrowDown @click="addShoppingCart" />
             </div>
           </div>
         </div>

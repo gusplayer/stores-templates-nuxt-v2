@@ -3,8 +3,8 @@
     <div
       :style="{
         '--font-style':
-          this.settingK05Blog && this.settingK05Blog.tipo_letra
-            ? this.settingK05Blog.tipo_letra
+          settingK05Blog && settingK05Blog.tipo_letra
+            ? settingK05Blog.tipo_letra
             : 'Roboto',
       }"
       class="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8"
@@ -21,11 +21,11 @@
               <form id="demo-2" style="position: relative">
                 <search-icon class="icon-s" @click="focusInput" />
                 <input
+                  id="SearchHeader"
+                  v-model="search"
                   type="search"
                   :placeholder="$t('header_search')"
-                  v-model="search"
                   @keyup.enter="getSearch(search)"
-                  id="SearchHeader"
                 />
               </form>
             </div>
@@ -53,7 +53,7 @@
         </div>
         <div class="w-full flex items-center justify-center">
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="filteredList.length > 12">
+            <div v-if="filteredList.length > 12" class="product_pagination">
               <el-pagination
                 background
                 layout="prev, pager, next"
@@ -72,7 +72,7 @@
 <script>
 import KoProductCard1 from './_blogcard/Ko-cardblog'
 export default {
-  name: 'Ko-BlogIndex-5',
+  name: 'KoBlogIndex5',
   components: {
     KoProductCard1,
   },

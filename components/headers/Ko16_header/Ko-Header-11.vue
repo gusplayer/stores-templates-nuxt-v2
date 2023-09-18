@@ -1,7 +1,7 @@
 <template>
   <div
-    id="navbar"
     v-if="settingByTemplate16"
+    id="navbar"
     class="w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center sticky top-0 px-10 wrapper-header"
     :style="[
       settingByTemplate16[0].header,
@@ -28,8 +28,8 @@
         </nuxt-link>
       </div>
       <div
-        id="swiper-slide-categories"
         v-if="settingByTemplate16[0].pages.values"
+        id="swiper-slide-categories"
         class="hidden md:flex flex-row justify-start items-center box-border"
       >
         <div
@@ -52,7 +52,7 @@
           </a>
         </div>
       </div>
-      <div class="flex items-center">
+      <div class="flex items-center justify-center">
         <div class="mr-10" @click="openSearch">
           <search-icon
             class="text-25"
@@ -91,86 +91,89 @@
             </span>
           </div>
         </div>
-        <button class="flex md:hidden ml-10" @click="stateMenu = !stateMenu">
-          <menu-icon
-            class="text-25"
-            :style="`color: ${settingByTemplate16[0].header['--color_icon']} ;`"
-          />
-        </button>
-      </div>
-      <KoOrder :dataStore="dataStore" />
-      <KoSearch />
-      <Ko14MenuLateral
-        :dataStore="dataStore"
-        :settingByTemplate="settingByTemplate16[0].listProductsFilter"
-      />
-      <el-drawer
-        :visible.sync="stateMenu"
-        direction="ttb"
-        :withHeader="false"
-        :modal-append-to-body="false"
-        size="25%"
-      >
-        <div
-          class="w-full flex flex-col justify-center items-center h-full py-5"
-        >
+        <div class="relative">
+          <button class="flex md:hidden ml-10" @click="stateMenu = !stateMenu">
+            <menu-icon
+              class="text-25"
+              :style="`color: ${settingByTemplate16[0].header['--color_icon']} ;`"
+            />
+          </button>
           <div
-            v-if="settingByTemplate16[0].pages.values"
-            class="w-full h-full max-h-[150px] max-w-[300px] flex flex-col justify-center items-center overflow-y-auto py-10"
+            v-if="stateMenu"
+            class="absolute right-2 top-30 z-20 py-20 px-20 overflow-hidden rounded-6 border"
+            style="background-color: var(--background_color_1)"
           >
             <div
-              v-for="(item, index) in settingByTemplate16[0].pages.values"
-              :key="`${index}${item.displayName}`"
+              v-if="settingByTemplate16[0].pages.values"
+              class="w-full h-full flex flex-col justify-start items-end overflow-y-auto"
             >
-              <nuxt-link
-                v-if="!item.isExternalLink"
-                :to="item.url"
-                class="my-5 block"
+              <div
+                v-for="(item, index) in settingByTemplate16[0].pages.values"
+                :key="`${index}${item.displayName}`"
               >
-                <p
-                  class="px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
-                  :class="btnSelect == item.url ? 'btn-active' : ''"
-                  @click="btnActivate(item.url)"
+                <nuxt-link
+                  v-if="!item.isExternalLink"
+                  :to="item.url"
+                  class="my-5 block"
                 >
-                  {{ item.displayName }}
-                </p>
-              </nuxt-link>
-              <a
-                v-else
-                :href="item.url"
-                rel="noreferrer noopener"
-                class="my-5 block"
-                target="_blank"
+                  <p
+                    class="w-full px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
+                    :class="btnSelect == item.url ? 'btn-active' : ''"
+                    @click="btnActivate(item.url)"
+                  >
+                    {{ item.displayName }}
+                  </p>
+                </nuxt-link>
+                <a
+                  v-else
+                  :href="item.url"
+                  rel="noreferrer noopener"
+                  class="my-5 block"
+                  target="_blank"
+                >
+                  <p class="btn">
+                    {{ item.displayName }}
+                  </p>
+                </a>
+              </div>
+            </div>
+            <div v-else>
+              <p
+                class="w-full px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
               >
-                <p class="btn">
-                  {{ item.displayName }}
-                </p>
-              </a>
+                No tiene paginas agregadas
+              </p>
             </div>
           </div>
-          <button
-            class="w-full max-w-[300px] text-center bg-red-500 text-white-white rounded-8 px-5 py-3 mt-15"
-            @click="stateMenu = !stateMenu"
-          >
-            Cerrar
-          </button>
         </div>
-      </el-drawer>
+      </div>
+      <KoOrder :data-store="dataStore" />
+      <KoSearch />
+      <Ko14MenuLateral
+        :data-store="dataStore"
+        :setting-by-template="settingByTemplate16[0].listProductsFilter"
+      />
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'KoHeader11',
   components: {
     KoOrder: () => import('../_order1/order1'),
     KoSearch: () => import('../_lateralMenu/_lateralMenu/searchDown14'),
     Ko14MenuLateral: () => import('../../template14/_lateral/_lateralMenu.vue'),
   },
-  name: 'Ko-Header-10',
   props: {
-    settingByTemplate16: Array,
-    dataStore: Object,
+    settingByTemplate16: {
+      type: Array,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

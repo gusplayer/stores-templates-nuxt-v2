@@ -58,7 +58,7 @@
               </validation-provider>
             </div>
             <div class="content-btn">
-              <button class="btn" v-on:click.prevent="submitComments">
+              <button class="btn" @click.prevent="submitComments">
                 Preguntar
               </button>
             </div>

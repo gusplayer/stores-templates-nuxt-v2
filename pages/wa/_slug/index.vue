@@ -1,15 +1,15 @@
 <template>
   <div
-    class="w-full flex flex-col justify-center items-center bg-transparent"
     id="width"
+    class="w-full flex flex-col justify-center items-center bg-transparent"
   >
     <waTemplate />
     <div
-      id="modalNotificacion"
       v-if="
         dataStore.tienda.estado == 0 ||
         !expiredDate(dataStore.tienda.fecha_expiracion)
       "
+      id="modalNotification"
       class="w-full h-screen fixed top-0 flex justify-center items-center"
       style="z-index: 9998"
     >
@@ -45,9 +45,9 @@
       </div>
     </div>
     <div
+      v-if="dataStore.tienda.whatsapp == ''"
       class="wrapper-notificacion"
       style="z-index: 9999"
-      v-if="dataStore.tienda.whatsapp == ''"
     >
       <div class="content-notificacion">
         <koTiendaCerrada />
@@ -66,22 +66,22 @@
 import { mapState } from 'vuex'
 import expiredDate from '@/mixins/expiredDate'
 export default {
-  layout: 'wa',
   name: 'WapiME',
   components: {
     waTemplate: () => import('../../template99/index.vue'),
     koTiendaCerrada: () => import('@/assets/img/tiendaCerrada'),
   },
   mixins: [expiredDate],
-  mounted() {
-    this.onResize()
-    window.addEventListener('resize', this.onResize)
-  },
+  layout: 'wa',
   computed: {
     ...mapState(['dataStore']),
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
+  },
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
   },
   methods: {
     onResize() {
@@ -93,8 +93,8 @@ export default {
       }
     },
     acceptClose() {
-      document.getElementById('modalNotificacion').style.zIndex = '-2'
-      document.getElementById('modalNotificacion').style.opacity = '0'
+      document.getElementById('modalNotification').style.zIndex = '-2'
+      document.getElementById('modalNotification').style.opacity = '0'
     },
   },
 }

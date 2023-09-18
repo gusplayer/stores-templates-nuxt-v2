@@ -13,13 +13,10 @@
                 :product="product"
                 :settingKProdutCard="settingKProdutCard"
                 :settingGeneral="settingGeneral"
-              ></KoProductCard>
+              />
             </div>
           </div>
-          <div
-            v-if="this.fullProducts.length == 0"
-            class="content-products-empty"
-          >
+          <div v-if="fullProducts.length == 0" class="content-products-empty">
             <div class="header-content-logo">
               <nuxt-link to="/productos" class="wrapper-logo">
                 <img
@@ -41,7 +38,7 @@
                 :page-size="16"
                 :current-page.sync="currentPage"
                 class="pagination"
-              ></el-pagination>
+              />
             </div>
           </div>
         </div>
@@ -54,6 +51,7 @@
 import KoProductCard from './_productcard/ProductCard'
 import filterProducts from '../../mixins/filterProducts'
 export default {
+  name: 'Ko7ProductList',
   components: {
     KoProductCard,
   },
@@ -64,7 +62,6 @@ export default {
     settingKProdutCard: Object,
   },
   mixins: [filterProducts],
-  name: 'Ko-ProductList-1',
   data() {
     return {
       search: '',

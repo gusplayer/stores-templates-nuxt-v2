@@ -9,22 +9,22 @@
     <div class="head-content">
       <div
         class="tab"
-        @click="selectTag1"
         :class="selecttag == 1 ? 'show-select-active' : ''"
+        @click="selectTag1"
       >
         <p class="tittle">{{ $t('productdetail_description') }}</p>
       </div>
       <div
         class="tab"
-        @click="selectTag2"
         :class="selecttag == 2 ? 'show-select-active' : ''"
+        @click="selectTag2"
       >
         <p class="tittle">{{ $t('productdetail_opcionesPago') }}</p>
       </div>
       <div
         class="tab"
-        @click="selectTag3"
         :class="selecttag == 3 ? 'show-select-active' : ''"
+        @click="selectTag3"
       >
         <p class="tittle">{{ $t('productdetail_opinionesEnvio') }}</p>
       </div>
@@ -32,9 +32,9 @@
 
     <div class="content-tab">
       <div
-        class="item-content descripcion"
-        v-html="data.info.descripcion"
         v-if="focusbtn1"
+        v-html="data.info.descripcion"
+        class="item-content descripcion"
         style="color: #777"
       ></div>
       <div class="item-content opcpago" v-if="focusbtn2">

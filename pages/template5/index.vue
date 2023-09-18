@@ -2,35 +2,48 @@
   <div
     :style="[
       {
-        '--font-style':
-          this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto',
+        '--font-style': settingByTemplate?.settings?.tipo_letra ?? 'Roboto',
       },
-      this.settingByTemplate?.settings ?? this.settingBase,
+      settingByTemplate?.settings ?? settingBase,
     ]"
   >
-    <Ko5-Banner id="KHeaderX" v-if="this.stateBanner" />
-    <Ko5-Component360 v-if="this.stateBanner" />
-    <Ko5-ProductFavoritos v-if="this.stateBanner" />
-    <Ko5-ProductListHomeHoko
+    <K05-banner v-if="stateBanner" id="KHeaderX" />
+    <K05-component360 v-if="stateBanner" />
+    <K05-productFavoritos v-if="stateBanner" />
+    <K05-productListHomeHoko
+      v-if="dataHoko?.statehoko == 1 && stateBanner"
       id="KProductX"
-      :dataStore="dataStore"
-      v-if="dataHoko && dataHoko.statehoko == 1 && this.stateBanner"
+      :data-store="dataStore"
     />
-    <Ko5-ProductListHome
+    <K05-productListHome
       id="KProductX"
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
+      :data-store="dataStore"
+      :full-products="fullProducts"
     />
-    <Ko5-BannerFooter id="KFooterX" />
-    <Ko5-Newsletter :dataStore="dataStore" />
+    <K05-bannerFooter id="KFooterX" />
+    <K05-newsletter :data-store="dataStore" />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 export default {
+  name: 'KoTemplate5',
+  components: {
+    K05Banner: () => import('@/components/template5/Ko5-Banner.vue'),
+    K05Component360: () =>
+      import('@/components/template5/Ko5-Component360.vue'),
+    K05ProductFavoritos: () =>
+      import('@/components/template5/Ko5-ProductFavoritos.vue'),
+    K05ProductListHomeHoko: () =>
+      import('@/components/template5/Ko5-ProductListHomeHoko.vue'),
+    K05ProductListHome: () =>
+      import('@/components/template5/Ko5-ProductListHome.vue'),
+    K05BannerFooter: () =>
+      import('@/components/template5/Ko5-BannerFooter.vue'),
+    K05Newsletter: () => import('@/components/template5/Ko5-Newsletter.vue'),
+  },
   layout: 'default',
-  name: 'Ko-template5',
   computed: {
     ...mapState([
       'template',

@@ -4,6 +4,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  name: 'PageIndex',
   components: {
     KoTemplate5: () => import('./template5/index'),
     KoTemplate7: () => import('./template7/index'),
@@ -39,6 +40,7 @@ export default {
     ...mapState(['template']),
     indexTemplate() {
       let productListComponent = ''
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)]
       }

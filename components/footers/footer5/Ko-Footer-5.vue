@@ -1,59 +1,54 @@
 <template>
   <div
-    class="footer-container"
+    v-if="settingByTemplate9 && settingByTemplate9[0].setting9Footer"
     ref="background"
+    class="footer-container"
     :style="[
       settingByTemplate9[0].setting9Footer,
       settingByTemplate9[0].setting9General,
+      {
+        '--font-style-1':
+          settingByTemplate9 && settingByTemplate9[0]?.setting9General?.fount_1
+            ? settingByTemplate9[0].setting9General.fount_1
+            : 'Poppins',
+      },
     ]"
-    v-if="settingByTemplate9 && settingByTemplate9[0].setting9Footer"
   >
-    <div
-      class="footer-content"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingByTemplate9 &&
-            this.settingByTemplate9[0].setting9General &&
-            this.settingByTemplate9[0].setting9General.fount_1
-              ? this.settingByTemplate9[0].setting9General.fount_1
-              : 'Poppins',
-        },
-      ]"
-    >
+    <div class="footer-content">
       <div class="footer-content-items">
         <div class="footer-content-logo">
           <img
-            class="footer-logo"
             v-lazy="
-              `${this.$store.state.urlKomercia}/logos/${this.dataStore.tienda.logo}`
+              `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
             "
+            class="footer-logo"
             alt="logo_tienda"
           />
         </div>
         <KoSocialNet
-          :dataStore="dataStore"
-          :setting9Footer="settingByTemplate9[0].setting9Footer"
-        ></KoSocialNet>
+          :data-store="dataStore"
+          :setting9-footer="settingByTemplate9[0].setting9Footer"
+        />
         <div class="footer-content-button">
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
             <nuxt-link :to="item.path" v-if="item.path" class="btn">
               {{ $t(`${item.name}`) }}
             </nuxt-link>
             <nuxt-link
-              :to="item.href"
               v-else-if="item.href && listArticulos > 0"
+              :to="item.href"
               class="btn"
-              >{{ $t(`${item.name}`) }}</nuxt-link
             >
+              {{ $t(`${item.name}`) }}
+            </nuxt-link>
           </div>
         </div>
       </div>
       <div class="content-Pliticas-Terminos">
         <button
+          v-if="dataStore.politicas"
           class="btn"
           @click="OpenModalPolitics"
-          v-if="dataStore.politicas"
         >
           {{ $t('footer_politicasyterminos') }}
         </button>
@@ -67,18 +62,18 @@
           rel="noreferrer noopener"
         >
           <img
+            v-if="logo"
             v-lazy="
               `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
             "
-            v-if="logo"
             class="logo2"
             alt="Logo Img"
           />
           <img
+            v-else
             v-lazy="
               `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
             "
-            v-else
             class="logo2"
             alt="Logo Img"
           />
@@ -86,32 +81,32 @@
       </div>
     </div>
     <div v-if="showModal">
-      <div class="modal" v-if="dataStore.politicas">
-        <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+      <div v-if="dataStore.politicas" class="modal">
+        <KoTermsConditions :data-store="dataStore" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import KoSocialNet from '../../../components/template9/Ko-Social-Networks'
-import KoTermsConditions from '../../../components/footers/ko-TermsAndConditions'
-
 export default {
+  name: 'K09Footer',
   components: {
-    KoSocialNet,
-    KoTermsConditions,
+    KoSocialNet: () => import('@/components/template9/k09-SocialNetworks.vue'),
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
-  name: 'Ko-Footer-5',
   props: {
-    dataStore: Object,
-    settingByTemplate9: Array,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate9: {
+      type: Array,
+      required: true,
+    },
   },
-  mounted() {
-    if (this.settingByTemplate9 && this.settingByTemplate9[0].setting9Footer) {
-      this.setLogo()
-    }
-  },
+
   data() {
     return {
       secciones: [
@@ -147,11 +142,8 @@ export default {
       return this.$store.state.modalpolitics05
     },
   },
-  methods: {
-    OpenModalPolitics() {
-      this.$store.state.modalpolitics05 = true
-    },
-    setLogo() {
+  watch: {
+    settingByTemplate9() {
       if (
         this.settingByTemplate9 &&
         this.settingByTemplate9[0].setting9Footer
@@ -168,8 +160,16 @@ export default {
       }
     },
   },
-  watch: {
-    settingByTemplate9() {
+  mounted() {
+    if (this.settingByTemplate9 && this.settingByTemplate9[0].setting9Footer) {
+      this.setLogo()
+    }
+  },
+  methods: {
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
+    },
+    setLogo() {
       if (
         this.settingByTemplate9 &&
         this.settingByTemplate9[0].setting9Footer

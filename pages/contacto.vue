@@ -1,25 +1,23 @@
 <template>
   <component :is="indexTemplate" v-bind="componentsProps" />
 </template>
+
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
+  name: 'KoContact',
   components: {
-    K05Contact: () => import('@/components/template5/Ko5-Contact'),
-    K07Contact: () => import('@/components/template7/Ko-Contact'),
-    K09Contact: () => import('@/components/template9/Ko-Contact'),
-    K10Contact: () => import('@/components/template10/ko-Contact'),
-    K11Contact: () => import('@/components/template11/ko-Contact'),
-    K13Contact: () => import('@/components/template13/Ko-Contact-1'),
-    K14Contact: () => import('@/components/template14/Ko-Contact-1'),
-    K15Contact: () => import('@/components/template15/Ko15-Contact'),
-    K16Contact: () => import('@/components/template16/Ko16-Contact'),
+    K05Contact: () => import('@/components/template5/Ko5-Contact.vue'),
+    K07Contact: () => import('@/components/template7/Ko-Contact.vue'),
+    K09Contact: () => import('@/components/template9/k09-Contact.vue'),
+    K10Contact: () => import('@/components/template10/ko-Contact.vue'),
+    K11Contact: () => import('@/components/template11/ko-Contact.vue'),
+    K13Contact: () => import('@/components/template13/Ko-Contact-1.vue'),
+    K14Contact: () => import('@/components/template14/Ko-Contact-1.vue'),
+    K15Contact: () => import('@/components/template15/Ko15-Contact.vue'),
+    K16Contact: () => import('@/components/template16/Ko16-Contact.vue'),
   },
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
-  },
+  layout: 'default',
   data() {
     return {
       componentMapping: {
@@ -64,6 +62,7 @@ export default {
     ]),
     indexTemplate() {
       let productListComponent = ''
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)]
       }
@@ -116,6 +115,11 @@ export default {
       }
     },
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
+
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
@@ -138,6 +142,7 @@ export default {
       ) {
         if (e && e.data && e.data.component) {
           const template = e.data.template
+          // eslint-disable-next-line no-prototype-builtins
           if (this.templateMapping.hasOwnProperty(template)) {
             const commitAction = this.templateMapping[template]
             this.$store.commit(commitAction, e.data)

@@ -1,10 +1,10 @@
 <template>
   <div class="description">
-    <div class="left" v-if="!activeClass">
+    <div v-if="!activeClass" class="left">
       <h3 class="text-desc">
         {{ $t('productdetail_description') }}
       </h3>
-      <div class="editor" v-if="data.description">
+      <div v-if="data.description" class="editor">
         <el-tiptap
           :readonly="true"
           v-model="data.description"
@@ -20,7 +20,7 @@
         <KoComments :dataStore="dataStore" />
       </div> -->
     </div>
-    <div class="left-empty" v-else></div>
+    <div v-else class="left-empty"></div>
     <div class="right">
       <div class="payments section">
         <div class="content">
@@ -242,13 +242,28 @@
 </template>
 
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 export default {
+  name: 'Ko5DescriptionProductHoko',
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      }
+    },
+  },
   mixins: [extensions, currency],
   props: {
-    dataStore: Object,
-    data: {},
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    data: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
     mediospago() {
@@ -259,14 +274,6 @@ export default {
         return true
       } else {
         return false
-      }
-    },
-  },
-  filters: {
-    capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
       }
     },
   },

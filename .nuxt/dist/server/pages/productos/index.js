@@ -1,14 +1,14 @@
-exports.ids = [164];
+exports.ids = [335];
 exports.modules = {
 
-/***/ 1006:
+/***/ 1104:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/index.vue?vue&type=template&id=903cddc6&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/index.vue?vue&type=template&id=46797762&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,30 +18,25 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/productos/index.vue?vue&type=template&id=903cddc6&
+// CONCATENATED MODULE: ./pages/productos/index.vue?vue&type=template&id=46797762&
 
 // EXTERNAL MODULE: external "vuex"
-var external_vuex_ = __webpack_require__(7);
+var external_vuex_ = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productos/index.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var productosvue_type_script_lang_js_ = ({
+  name: 'ProductIndex',
   components: {
-    K05ProductList: () => __webpack_require__.e(/* import() */ 26).then(__webpack_require__.bind(null, 985)),
-    K07ProductList: () => __webpack_require__.e(/* import() */ 20).then(__webpack_require__.bind(null, 1042)),
-    K09ProductList: () => __webpack_require__.e(/* import() */ 187).then(__webpack_require__.bind(null, 1146)),
-    K10ProductList: () => __webpack_require__.e(/* import() */ 188).then(__webpack_require__.bind(null, 995)),
-    K11ProductList: () => __webpack_require__.e(/* import() */ 189).then(__webpack_require__.bind(null, 996)),
-    K13ProductList: () => __webpack_require__.e(/* import() */ 202).then(__webpack_require__.bind(null, 1147)),
-    K14ProductList: () => __webpack_require__.e(/* import() */ 224).then(__webpack_require__.bind(null, 1148)),
-    K15ProductList: () => __webpack_require__.e(/* import() */ 23).then(__webpack_require__.bind(null, 1112))
-    // K16ProductList: () =>
-    // import('@/components/template16/Ko16-ProductListFilter'),
-  },
-
-  mounted() {
-    window.parent.postMessage('message', '*');
-    window.addEventListener('message', this.addEventListenerTemplate);
+    K05ProductList: () => __webpack_require__.e(/* import() */ 140).then(__webpack_require__.bind(null, 1215)),
+    K07ProductList: () => __webpack_require__.e(/* import() */ 155).then(__webpack_require__.bind(null, 1229)),
+    K09ProductList: () => __webpack_require__.e(/* import() */ 167).then(__webpack_require__.bind(null, 1238)),
+    K10ProductList: () => __webpack_require__.e(/* import() */ 44).then(__webpack_require__.bind(null, 1136)),
+    K11ProductList: () => __webpack_require__.e(/* import() */ 57).then(__webpack_require__.bind(null, 1147)),
+    K13ProductList: () => __webpack_require__.e(/* import() */ 77).then(__webpack_require__.bind(null, 1165)),
+    K14ProductList: () => __webpack_require__.e(/* import() */ 87).then(__webpack_require__.bind(null, 1173)),
+    K15ProductList: () => __webpack_require__.e(/* import() */ 112).then(__webpack_require__.bind(null, 1193)),
+    K16ProductList: () => __webpack_require__.e(/* import() */ 127).then(__webpack_require__.bind(null, 1205))
   },
   data() {
     return {
@@ -55,10 +50,9 @@ var external_vuex_ = __webpack_require__(7);
         11: 'K11ProductList',
         13: 'K13ProductList',
         14: 'K14ProductList',
-        15: 'K15ProductList'
-        // 16: 'K16ProductList',
+        15: 'K15ProductList',
+        16: 'K16ProductList'
       },
-
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
         7: 'SET_CURRENTSETTING07',
@@ -67,7 +61,7 @@ var external_vuex_ = __webpack_require__(7);
         13: 'SET_CURRENTSETTING13',
         14: 'SET_CURRENTSETTING14',
         15: 'SET_CURRENTSETTING15',
-        15: 'SET_CURRENTSETTING15'
+        16: 'SET_CURRENTSETTING16'
       }
     };
   },
@@ -81,6 +75,7 @@ var external_vuex_ = __webpack_require__(7);
     },
     indexTemplate() {
       let productListComponent = '';
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)];
       }
@@ -99,12 +94,16 @@ var external_vuex_ = __webpack_require__(7);
         settingByTemplate13: this.createNestedSetting(this.settingByTemplate13, ['productListFilter', 'cardProduct', 'settingGeneral'], null),
         settingByTemplate14: this.createNestedSetting(this.settingByTemplate14, ['listProductsFilter', 'cardProducts', 'settingsGeneral'], null),
         settingByTemplate15: this.createNestedSetting(this.settingByTemplate15, ['listProductsFilter', 'cardProducts', 'settingGeneral'], null),
-        settingByTemplate16: this.createNestedSetting(this.settingByTemplate15, ['listProductsFilter', 'cardProducts', 'settingsGeneral'], null)
+        settingByTemplate16: this.createNestedSetting(this.settingByTemplate16, ['listProductsFilter', 'cardProducts', 'settingsGeneral'], null)
       };
     }
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate);
+  },
+  mounted() {
+    window.parent.postMessage('message', '*');
+    window.addEventListener('message', this.addEventListenerTemplate);
   },
   methods: {
     createSettingByTemplate(settingByTemplate, property1, property2, defaultValue) {
@@ -113,6 +112,7 @@ var external_vuex_ = __webpack_require__(7);
       }
       return defaultValue;
     },
+    // eslint-disable-next-line no-unused-vars
     createNestedSetting(setting, properties, defaultValue) {
       if (setting) {
         const nestedSetting = {};
@@ -127,6 +127,7 @@ var external_vuex_ = __webpack_require__(7);
       if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
         if (e && e.data && e.data.component) {
           const template = e.data.template;
+          // eslint-disable-next-line no-prototype-builtins
           if (this.templateMapping.hasOwnProperty(template)) {
             const commitAction = this.templateMapping[template];
             this.$store.commit(commitAction, e.data);

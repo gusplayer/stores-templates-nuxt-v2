@@ -55,7 +55,7 @@
 </template>
 <script>
 export default {
-  name: 'CategorySlideWa-3',
+  name: 'CategorySlideWa3',
   props: {
     dataStore: Object,
     settingByTemplate: Object,

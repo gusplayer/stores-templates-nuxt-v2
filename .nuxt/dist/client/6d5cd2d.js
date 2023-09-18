@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[142],{469:function(e,t,n){"use strict";n.r(t);n(4),n(5),n(6),n(7);var d={props:{dataStore:{type:Object,required:!0},settingByTemplate12:{type:Object,required:!0}}},r=n(8),component=Object(r.a)(d,undefined,undefined,!1,null,null,null);t.default=component.exports}}]);

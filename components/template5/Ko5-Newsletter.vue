@@ -52,15 +52,17 @@
 import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko5-Newsletter',
-  props: {
-    dataStore: Object,
-  },
+  name: 'Ko5Newsletter',
   components: {
     ValidationObserver,
     ValidationProvider,
   },
-  mounted() {},
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       errorsCheckbox: 'El campo checkbox y email son obligatorios',
@@ -70,14 +72,15 @@ export default {
       stateChehed: false,
     }
   },
-  destroyed() {
-    this.email = ''
-  },
   computed: {
     facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
   },
+  destroyed() {
+    this.email = ''
+  },
+
   methods: {
     submitNewsletter() {
       if (this.checked == true) {
@@ -121,7 +124,6 @@ export default {
       }
     },
   },
-  watch: {},
 }
 </script>
 

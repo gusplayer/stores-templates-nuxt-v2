@@ -1,14 +1,14 @@
-exports.ids = [161];
+exports.ids = [332];
 exports.modules = {
 
-/***/ 1022:
+/***/ 1120:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/index.vue?vue&type=template&id=093cd69f&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/index.vue?vue&type=template&id=698d5d81&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,27 +18,28 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/index.vue?vue&type=template&id=093cd69f&
+// CONCATENATED MODULE: ./pages/index.vue?vue&type=template&id=698d5d81&
 
 // EXTERNAL MODULE: external "vuex"
-var external_vuex_ = __webpack_require__(7);
+var external_vuex_ = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/index.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var lib_vue_loader_options_pagesvue_type_script_lang_js_ = ({
+  name: 'PageIndex',
   components: {
-    KoTemplate5: () => __webpack_require__.e(/* import() */ 35).then(__webpack_require__.bind(null, 1015)),
-    KoTemplate7: () => __webpack_require__.e(/* import() */ 36).then(__webpack_require__.bind(null, 1017)),
-    KoTemplate8: () => __webpack_require__.e(/* import() */ 37).then(__webpack_require__.bind(null, 1018)),
-    KoTemplate9: () => __webpack_require__.e(/* import() */ 38).then(__webpack_require__.bind(null, 1019)),
-    KoTemplate10: () => __webpack_require__.e(/* import() */ 28).then(__webpack_require__.bind(null, 1008)),
-    KoTemplate11: () => __webpack_require__.e(/* import() */ 29).then(__webpack_require__.bind(null, 1009)),
-    KoTemplate12: () => __webpack_require__.e(/* import() */ 30).then(__webpack_require__.bind(null, 1010)),
-    KoTemplate13: () => __webpack_require__.e(/* import() */ 31).then(__webpack_require__.bind(null, 1011)),
-    KoTemplate14: () => __webpack_require__.e(/* import() */ 32).then(__webpack_require__.bind(null, 1012)),
-    KoTemplate15: () => __webpack_require__.e(/* import() */ 33).then(__webpack_require__.bind(null, 1013)),
-    KoTemplate16: () => __webpack_require__.e(/* import() */ 34).then(__webpack_require__.bind(null, 1014)),
-    KoTemplateWhatsApp: () => __webpack_require__.e(/* import() */ 5).then(__webpack_require__.bind(null, 1020))
+    KoTemplate5: () => __webpack_require__.e(/* import() */ 192).then(__webpack_require__.bind(null, 1113)),
+    KoTemplate7: () => __webpack_require__.e(/* import() */ 193).then(__webpack_require__.bind(null, 1115)),
+    KoTemplate8: () => __webpack_require__.e(/* import() */ 194).then(__webpack_require__.bind(null, 1116)),
+    KoTemplate9: () => __webpack_require__.e(/* import() */ 195).then(__webpack_require__.bind(null, 1117)),
+    KoTemplate10: () => __webpack_require__.e(/* import() */ 185).then(__webpack_require__.bind(null, 1106)),
+    KoTemplate11: () => __webpack_require__.e(/* import() */ 186).then(__webpack_require__.bind(null, 1107)),
+    KoTemplate12: () => __webpack_require__.e(/* import() */ 187).then(__webpack_require__.bind(null, 1108)),
+    KoTemplate13: () => __webpack_require__.e(/* import() */ 188).then(__webpack_require__.bind(null, 1109)),
+    KoTemplate14: () => __webpack_require__.e(/* import() */ 189).then(__webpack_require__.bind(null, 1110)),
+    KoTemplate15: () => __webpack_require__.e(/* import() */ 190).then(__webpack_require__.bind(null, 1111)),
+    KoTemplate16: () => __webpack_require__.e(/* import() */ 191).then(__webpack_require__.bind(null, 1112)),
+    KoTemplateWhatsApp: () => __webpack_require__.e(/* import() */ 15).then(__webpack_require__.bind(null, 1118))
   },
   data() {
     return {
@@ -61,6 +62,7 @@ var external_vuex_ = __webpack_require__(7);
     ...Object(external_vuex_["mapState"])(['template']),
     indexTemplate() {
       let productListComponent = '';
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)];
       }

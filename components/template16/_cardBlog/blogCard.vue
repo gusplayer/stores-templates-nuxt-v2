@@ -13,8 +13,8 @@
         <div class="content-imge">
           <img
             v-if="article.imagen_principal_url"
+            v-lazy="idCloudinary(article.imagen_principal_url, 550, 550)"
             class="images"
-            v-lazy="idCloudinary(this.article.imagen_principal_url, 550, 550)"
             alt="right-banner"
           />
           <div v-else class="empty"></div>
@@ -26,7 +26,7 @@
             class="txt-article-tittle"
             :style="`color: ${cardBlog.color_title}; font-weight: ${cardBlog.fontWeighTitle};`"
           >
-            {{ this.article.titulo }}
+            {{ article.titulo }}
           </span>
         </div>
         <div class="mb-15 flex items-center">
@@ -48,19 +48,19 @@
             class="txt-article-day"
             :style="`color: ${cardBlog.color_date}; font-weight: ${cardBlog.fontWeighDate};`"
           >
-            {{ this.dayCreate }}
+            {{ dayCreate }}
           </span>
           <span
             class="txt-article-month"
             :style="`color: ${cardBlog.color_date}; font-weight: ${cardBlog.fontWeighDate};`"
           >
-            {{ this.nameMonth }}
+            {{ nameMonth }}
           </span>
           <span
             class="txt-article-create"
             :style="`color: ${cardBlog.color_date}; font-weight: ${cardBlog.fontWeighDate};`"
           >
-            {{ this.yearCreate }}
+            {{ yearCreate }}
           </span>
         </div>
         <div class="content-abstract-article">
@@ -68,7 +68,7 @@
             class="txt-article-abstract"
             :style="`color: ${cardBlog.color_text}; font-weight: ${cardBlog.fontWeighText};`"
           >
-            {{ this.article.resumen }}
+            {{ article.resumen }}
           </span>
         </div>
 
@@ -85,19 +85,9 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'Ko16BlogCard',
   mixins: [idCloudinary],
-  name: 'Ko16-BlogCard',
   props: { article: Object, cardBlog: Object, settingGeneral: Object },
-  mounted() {
-    if (this.article.created_at) {
-      const [shippingCreated] = this.article.created_at.split(' ')
-      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
-      this.dayCreate = dayCreate
-      this.monthCreate = monthCreate
-      this.yearCreate = yearCreate
-    }
-    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
-  },
   data() {
     return {
       shippingCreated: '',
@@ -120,6 +110,16 @@ export default {
         12: 'Dic',
       },
     }
+  },
+  mounted() {
+    if (this.article.created_at) {
+      const [shippingCreated] = this.article.created_at.split(' ')
+      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
+      this.dayCreate = dayCreate
+      this.monthCreate = monthCreate
+      this.yearCreate = yearCreate
+    }
+    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
   },
 }
 </script>

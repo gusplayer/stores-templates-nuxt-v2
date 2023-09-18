@@ -7,7 +7,7 @@
       settingByTemplate15[0].settingGeneral,
       {
         '--font-style-1':
-          settingByTemplate15[0]?.settingGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate15[0]?.settingGeneral?.font ?? 'Poppins',
       },
     ]"
   >
@@ -24,7 +24,7 @@
             style="max-width: var(--with_logo)"
           >
             <img
-              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+              :src="`${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
               class="w-full object-contain object-left"
               alt="LogoStore"
               @click="clear"
@@ -32,8 +32,8 @@
           </nuxt-link>
         </div>
         <div
-          id="swiper-slide-categories"
           v-if="settingByTemplate15[0]?.pages?.values"
+          id="swiper-slide-categories"
           class="hidden md:flex flex-row justify-start items-center box-border ml-20"
         >
           <div
@@ -66,7 +66,7 @@
         <div class="mr-10" @click="openSearch">
           <search-icon
             class="text-25"
-            :style="`color: ${settingByTemplate15[0].header['--color_icon']} ;`"
+            :style="`color: ${settingByTemplate15[0].header['--color-icon']} ;`"
           />
         </div>
         <div
@@ -80,7 +80,7 @@
               xmlns="http://www.w3.org/2000/svg"
               width="23"
               height="23"
-              :fill="settingByTemplate15[0].header['--color_icon']"
+              :fill="settingByTemplate15[0].header['--color-icon']"
               class="transition-all ease-in duration-0.2 icon-shop"
               viewBox="0 0 16 16"
             >
@@ -104,20 +104,20 @@
         <button class="flex md:hidden ml-10" @click="stateMenu = !stateMenu">
           <menu-icon
             class="text-25"
-            :style="`color: ${settingByTemplate15[0].header['--color_icon']} ;`"
+            :style="`color: ${settingByTemplate15[0].header['--color-icon']} ;`"
           />
         </button>
       </div>
-      <KoOrder :dataStore="dataStore" />
+      <KoOrder :data-store="dataStore" />
       <KoSearch />
       <Ko14MenuLateral
-        :dataStore="dataStore"
-        :settingByTemplate="settingByTemplate15[0].listProductsFilter"
+        :data-store="dataStore"
+        :setting-by-template="settingByTemplate15[0].listProductsFilter"
       />
       <el-drawer
         :visible.sync="stateMenu"
         direction="ttb"
-        :withHeader="false"
+        :with-header="false"
         :modal-append-to-body="false"
         size="25%"
       >
@@ -172,15 +172,21 @@
 
 <script>
 export default {
+  name: 'KoHeader10',
   components: {
     KoOrder: () => import('../_order1/order1'),
     KoSearch: () => import('../_lateralMenu/_lateralMenu/searchDown14'),
     Ko14MenuLateral: () => import('../../template14/_lateral/_lateralMenu.vue'),
   },
-  name: 'Ko-Header-10',
   props: {
-    settingByTemplate15: Array,
-    dataStore: Object,
+    settingByTemplate15: {
+      type: Array,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

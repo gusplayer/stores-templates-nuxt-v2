@@ -7,13 +7,25 @@
     <div
       class="relative max-w-full h-full shadow-sm border rounded-5 container"
     >
-      <nuxt-link :to="{ path: `/productos/` + product.slug }">
-        <img
-          v-lazy="idCloudinary(product.foto_cloudinary, 400, 400)"
-          :class="!soldOut ? '' : 'grayscale'"
-          class="w-full object-cover overflow-hidden rounded-t-5 max-w-[300px] max-h-[350px]"
-          alt="Product Img"
-        />
+      <nuxt-link
+        :to="{ path: `/productos/` + product.slug }"
+        class="w-full h-full"
+      >
+        <client-only>
+          <img
+            v-lazy="
+              product.foto_cloudinary == 'sin_foto.jpeg'
+                ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                : idCloudinary(product.foto_cloudinary, 550, 550)
+            "
+            width="294"
+            height="294"
+            loading="lazy"
+            :class="!soldOut ? '' : 'grayscale'"
+            class="w-full h-full object-cover overflow-hidden rounded-t-5 max-w-[300px] max-h-[350px]"
+            alt="Lazy-loaded Product Img"
+          />
+        </client-only>
       </nuxt-link>
       <p
         v-if="soldOut"
@@ -49,7 +61,7 @@
       </nuxt-link>
       <div class="mt-10">
         <div v-if="estadoCart == true && equalsPrice">
-          <p class="text-price" v-if="minPrice">
+          <p v-if="minPrice" class="text-price">
             {{
               minPrice
                 | currency(
@@ -60,8 +72,8 @@
           </p>
         </div>
         <div
-          class="content-price"
           v-else-if="estadoCart == true && minPrice && maxPrice && !equalsPrice"
+          class="content-price"
         >
           <div class="text-price">
             {{
@@ -84,7 +96,7 @@
           </div>
         </div>
         <div v-else>
-          <p class="text-price" v-if="product.precio > 0 || product.precio">
+          <p v-if="product.precio > 0 || product.precio" class="text-price">
             {{
               product.precio
                 | currency(
@@ -107,14 +119,14 @@
         <eye-outline-icon />
       </nuxt-link>
       <button
-        class="mt-10 px-12 py-8 shadow-lg rounded-full btn"
-        :style="`background-color:${cardProducts.color_btn};color:${cardProducts.color_icon};`"
         v-if="
           !estadoCart &&
           !soldOut &&
           !spent &&
-          (product.tipo_servicio == null || product.tipo_servicio == '0')
+          (product.tipo_servicio === null || product.tipo_servicio === '0')
         "
+        class="mt-10 px-12 py-8 shadow-lg rounded-full btn"
+        :style="`background-color:${cardProducts.color_btn};color:${cardProducts.color_icon};`"
         @click="addShoppingCart"
       >
         <cart-icon />
@@ -131,9 +143,22 @@
 import idCloudinary from '@/mixins/idCloudinary'
 import currency from '@/mixins/formatCurrent'
 export default {
+  name: 'Ko15ProductCard',
   mixins: [idCloudinary, currency],
-  name: 'Ko15-ProductCard',
-  props: { product: Object, cardProducts: Object, settingGeneral: Object },
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+    cardProducts: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       hover: false,
@@ -148,19 +173,6 @@ export default {
       spent: false,
       active: true,
       equalsPrice: false,
-    }
-  },
-  mounted() {
-    this.idSlug = this.product.id
-    this.productPrice()
-    if (
-      this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
-    ) {
-      this.estadoCart = true
-    }
-    if (this.product) {
-      this.getDataProduct()
     }
   },
   computed: {
@@ -218,6 +230,24 @@ export default {
         return !this.product.stock
       }
     },
+  },
+  watch: {
+    productsCarts() {
+      this.getDataProduct()
+    },
+  },
+  mounted() {
+    this.idSlug = this.product.id
+    this.productPrice()
+    if (
+      this.product.con_variante &&
+      this.product.variantes[0].variantes !== '[object Object]'
+    ) {
+      this.estadoCart = true
+    }
+    if (this.product) {
+      this.getDataProduct()
+    }
   },
   methods: {
     getDataProduct() {
@@ -324,11 +354,6 @@ export default {
           }
         }
       }
-    },
-  },
-  watch: {
-    productsCarts(value) {
-      this.getDataProduct()
     },
   },
 }

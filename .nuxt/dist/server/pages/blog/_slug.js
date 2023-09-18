@@ -1,14 +1,14 @@
-exports.ids = [157];
+exports.ids = [328];
 exports.modules = {
 
-/***/ 1023:
+/***/ 1121:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/_slug.vue?vue&type=template&id=252fb3ab&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/_slug.vue?vue&type=template&id=580d59c2&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,23 +18,23 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/blog/_slug.vue?vue&type=template&id=252fb3ab&
+// CONCATENATED MODULE: ./pages/blog/_slug.vue?vue&type=template&id=580d59c2&
 
 // EXTERNAL MODULE: external "vuex"
-var external_vuex_ = __webpack_require__(7);
+var external_vuex_ = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/blog/_slug.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
-  layout: 'default',
   components: {
-    K05Article: () => __webpack_require__.e(/* import() */ 214).then(__webpack_require__.bind(null, 1160)),
-    K07Article: () => __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(null, 1051)),
-    K09Article: () => __webpack_require__.e(/* import() */ 233).then(__webpack_require__.bind(null, 1161)),
-    K10Article: () => __webpack_require__.e(/* import() */ 217).then(__webpack_require__.bind(null, 1162)),
-    K11Article: () => __webpack_require__.e(/* import() */ 219).then(__webpack_require__.bind(null, 1163)),
-    K13Article: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1091))
+    K05Article: () => __webpack_require__.e(/* import() */ 16).then(__webpack_require__.bind(null, 1131)),
+    K07Article: () => __webpack_require__.e(/* import() */ 142).then(__webpack_require__.bind(null, 1298)),
+    K09Article: () => __webpack_require__.e(/* import() */ 157).then(__webpack_require__.bind(null, 1304)),
+    K10Article: () => __webpack_require__.e(/* import() */ 40).then(__webpack_require__.bind(null, 1265)),
+    K11Article: () => __webpack_require__.e(/* import() */ 52).then(__webpack_require__.bind(null, 1269)),
+    K13Article: () => __webpack_require__.e(/* import() */ 73).then(__webpack_require__.bind(null, 1275))
   },
+  layout: 'default',
   data() {
     return {
       componentMapping: {
@@ -48,13 +48,25 @@ var external_vuex_ = __webpack_require__(7);
         13: 'K13Article',
         14: 'K13Article',
         15: 'K13Article'
+      },
+      templateMapping: {
+        9: 'SET_CURRENTSETTING09',
+        7: 'SET_CURRENTSETTING07',
+        11: 'SET_CURRENTSETTING11',
+        10: 'SET_CURRENTSETTING10',
+        13: 'SET_CURRENTSETTING13',
+        14: 'SET_CURRENTSETTING14',
+        15: 'SET_CURRENTSETTING15'
+        // 16: 'SET_CURRENTSETTING15',
       }
     };
   },
+
   computed: {
     ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'template']),
     indexTemplate() {
       let productListComponent = '';
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)];
       }
@@ -72,6 +84,31 @@ var external_vuex_ = __webpack_require__(7);
           setting11General: ((_this$settingByTempla6 = this.settingByTemplate11) === null || _this$settingByTempla6 === void 0 ? void 0 : _this$settingByTempla6.settingGeneral) || null
         }] : null
       };
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenerTemplate);
+  },
+  mounted() {
+    window.parent.postMessage('message', '*');
+    window.addEventListener('message', this.addEventListenerTemplate);
+  },
+  methods: {
+    addEventListenerTemplate(e) {
+      if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
+        if (e && e.data && e.data.component) {
+          const template = e.data.template;
+          // eslint-disable-next-line no-prototype-builtins
+          if (this.templateMapping.hasOwnProperty(template)) {
+            const commitAction = this.templateMapping[template];
+            this.$store.commit(commitAction, e.data);
+          }
+        } else if (e && e.data && e.data.returnHome == true) {
+          this.$router.push({
+            path: '/'
+          });
+        }
+      }
     }
   }
 });

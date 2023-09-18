@@ -14,8 +14,8 @@
           <div class="content-imge">
             <img
               v-if="article.imagen_principal_url"
+              v-lazy="idCloudinary(article.imagen_principal_url, 400, 400)"
               class="images"
-              v-lazy="idCloudinary(this.article.imagen_principal_url, 400, 400)"
               alt="right-banner"
             />
             <div v-else class="empty"></div>
@@ -26,10 +26,10 @@
         <div class="overlay-top">
           <div class="text-tittle">
             <p class="txt-day">
-              {{ this.dayCreate }}
+              {{ dayCreate }}
             </p>
             <p class="txt-month">
-              {{ this.nameMonth }}
+              {{ nameMonth }}
             </p>
           </div>
         </div>
@@ -38,13 +38,13 @@
         <div class="content-tittle-article">
           <div class="contet">
             <p class="txt-article-tittle">
-              {{ this.article.titulo }}
+              {{ article.titulo }}
             </p>
           </div>
         </div>
         <div class="content-abstract-article">
           <p class="txt-article-abstract">
-            {{ this.article.resumen }}
+            {{ article.resumen }}
           </p>
         </div>
       </div>
@@ -54,56 +54,9 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'KoBlogcardWa',
   mixins: [idCloudinary],
-  name: 'Ko-Blogcard',
   props: { article: Object, dataStore: Object },
-  mounted() {
-    if (this.article.created_at) {
-      let domain = this.article.created_at
-      let result = domain.split(' ')
-      this.shippingCreated = result[0]
-      let data = this.shippingCreated.split('-')
-      this.dayCreate = data[2]
-      this.monthCreate = data[1]
-      this.yearCreate = data[0]
-    }
-    if (this.monthCreate == 1) {
-      this.nameMonth = 'Ene'
-    }
-    if (this.monthCreate == 2) {
-      this.nameMonth = 'Feb'
-    }
-    if (this.monthCreate == 3) {
-      this.nameMonth = 'Mar'
-    }
-    if (this.monthCreate == 4) {
-      this.nameMonth = 'Abr'
-    }
-    if (this.monthCreate == 5) {
-      this.nameMonth = 'May'
-    }
-    if (this.monthCreate == 6) {
-      this.nameMonth = 'Jun'
-    }
-    if (this.monthCreate == 7) {
-      this.nameMonth = 'Jul'
-    }
-    if (this.monthCreate == 8) {
-      this.nameMonth = 'Ago'
-    }
-    if (this.monthCreate == 9) {
-      this.nameMonth = 'Sep'
-    }
-    if (this.monthCreate == 10) {
-      this.nameMonth = 'Oct'
-    }
-    if (this.monthCreate == 11) {
-      this.nameMonth = 'Nov'
-    }
-    if (this.monthCreate == 12) {
-      this.nameMonth = 'Dic'
-    }
-  },
   data() {
     return {
       hover: false,
@@ -112,6 +65,36 @@ export default {
       monthCreate: '',
       yearCreate: '',
       nameMonth: '',
+    }
+  },
+  mounted() {
+    if (this.article.created_at) {
+      const creationDateParts = this.article.created_at.split(' ')
+      const dateParts = creationDateParts[0].split('-')
+
+      this.shippingCreated = dateParts[0]
+      this.dayCreate = dateParts[2]
+      this.monthCreate = dateParts[1]
+      this.yearCreate = dateParts[0]
+
+      const monthNames = [
+        'Ene',
+        'Feb',
+        'Mar',
+        'Abr',
+        'May',
+        'Jun',
+        'Jul',
+        'Ago',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dic',
+      ]
+
+      if (this.monthCreate >= 1 && this.monthCreate <= 12) {
+        this.nameMonth = monthNames[this.monthCreate - 1]
+      }
     }
   },
 }

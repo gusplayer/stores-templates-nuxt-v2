@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'StateInformation',
   computed: {
     shippingState() {
       return [

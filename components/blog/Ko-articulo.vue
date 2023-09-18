@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-blog">
-    <div class="container-article" v-if="dataArticle">
+    <div v-if="dataArticle" class="container-article">
       <div class="content-blog">
         <nav class="flex mt-20 mb-5 sm:mb-10" aria-label="Breadcrumb">
           <ol class="flex items-start space-x-4">
@@ -62,12 +62,12 @@
             </div>
             <div class="content-date-items">
               <p>{{ dataArticle.autor }}</p>
-              <p>{{ this.shippingCreated }}</p>
+              <p>{{ shippingCreated }}</p>
             </div>
           </div>
           <div class="flex icons">
             <a
-              :href="this.sharingFacebook"
+              :href="sharingFacebook"
               target="_blank"
               rel="noreferrer noopener"
               style="max-height: 25px"
@@ -75,7 +75,7 @@
               <facebook-icon class="wp-icon" />
             </a>
             <a
-              :href="this.sharingTwitter"
+              :href="sharingTwitter"
               target="_blank"
               rel="noreferrer noopener"
               style="max-height: 25px"
@@ -83,7 +83,7 @@
               <twitter-icon class="wp-icon marginIcon" />
             </a>
             <a
-              :href="this.sharingLinkedin"
+              :href="sharingLinkedin"
               target="_blank"
               rel="noreferrer noopener"
               style="max-height: 25px"
@@ -92,7 +92,7 @@
             </a>
           </div>
         </div>
-        <div class="editor" v-if="dataArticle.contenido">
+        <div v-if="dataArticle.contenido" class="editor">
           <el-tiptap
             v-model="dataArticle.contenido"
             :extensions="extensions"
@@ -115,15 +115,10 @@
 <script>
 import extensions from '../../mixins/elemenTiptap.vue'
 export default {
+  name: 'KoBlogArticle5',
   mixins: [extensions],
-  name: 'Ko-BlogArticle-5',
   props: {
     dataStore: Object,
-  },
-  mounted() {
-    if (this.listArticulos.length) {
-      this.searchIdForSlug()
-    }
   },
   data() {
     return {
@@ -144,6 +139,16 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos
     },
+  },
+  watch: {
+    listArticulos() {
+      this.searchIdForSlug()
+    },
+  },
+  mounted() {
+    if (this.listArticulos.length) {
+      this.searchIdForSlug()
+    }
   },
   methods: {
     async searchIdForSlug() {
@@ -172,11 +177,6 @@ export default {
       this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
       this.sharingTwitter = `https://twitter.com/intent/tweet?text=${this.sharing.quoteTwitter}%0A${this.sharing.url}`
       this.sharingLinkedin = `https://www.linkedin.com/shareArticle?mini=true&url=${this.sharing.url}`
-    },
-  },
-  watch: {
-    listArticulos() {
-      this.searchIdForSlug()
     },
   },
 }

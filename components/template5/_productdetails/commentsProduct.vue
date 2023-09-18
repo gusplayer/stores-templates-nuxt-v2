@@ -12,12 +12,12 @@
           <validation-provider name="comentario" rules="required">
             <template slot-scope="{ errors }">
               <textarea
+                v-model="comment"
                 class="input-text-rectangule"
                 name="comentario"
                 placeholder="Escribe aquí tu mensaje"
-                v-model="comment"
               ></textarea>
-              <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
+              <span v-show="errors[0]" class="text-error">{{ errors[0] }}</span>
             </template>
           </validation-provider>
           <div class="content-input-form">
@@ -26,12 +26,12 @@
               <validation-provider name="cedula" rules="required|numeric">
                 <template slot-scope="{ errors }">
                   <input
+                    id="ContactName"
+                    v-model="cedula"
                     name="cedula"
                     type="text"
-                    v-model="cedula"
                     class="input-text"
                     placeholder="Escribe tu cédula"
-                    id="ContactName"
                   />
                   <span class="text-error" v-show="errors[0]">{{
                     errors[0]
@@ -44,21 +44,21 @@
               <validation-provider name="email" rules="required|email">
                 <template slot-scope="{ errors }">
                   <input
+                    id="ContactEmail"
+                    v-model="email"
                     name="email"
                     type="email"
-                    v-model="email"
                     placeholder="Escribe tu correo"
                     class="input-text"
-                    id="ContactEmail"
                   />
-                  <span class="text-error" v-show="errors[0]">{{
-                    errors[0]
-                  }}</span>
+                  <span v-show="errors[0]" class="text-error">
+                    {{ errors[0] }}
+                  </span>
                 </template>
               </validation-provider>
             </div>
             <div class="content-btn">
-              <button class="btn" v-on:click.prevent="submitComments">
+              <button class="btn" @click.prevent="submitComments">
                 Preguntar
               </button>
             </div>
@@ -66,7 +66,7 @@
         </ValidationObserver>
       </div>
       <div class="wrapper-answers">
-        <div class="content-answers" v-if="!estado">
+        <div v-if="!estado" class="content-answers">
           <p
             class="title-answers"
             style="font-weight: bold; margin-bottom: 10px"
@@ -83,7 +83,7 @@
             </p>
           </div>
         </div>
-        <div class="answers-empty" v-else>
+        <div v-else class="answers-empty">
           <p class="title-answers">
             Nadie hizo preguntas todavía. <strong>¡Sé el primero!</strong>
           </p>
@@ -97,13 +97,16 @@
 // import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko-commentsProduct-5',
-  props: {
-    dataStore: Object,
-  },
+  name: 'Ko5CommentsProduct',
   components: {
     ValidationObserver,
     ValidationProvider,
+  },
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

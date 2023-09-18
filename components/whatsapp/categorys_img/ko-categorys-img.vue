@@ -2,25 +2,25 @@
   <div class="content-slide-categorys">
     <div class="content-categories">
       <div
+        v-if="categorias.length > 5"
         class="btn-scroll mr-10"
         @click="scrollLeft(1)"
-        v-if="this.categorias.length > 5"
       >
         <FlechaLeft-icon class="btn-scroll-icon" />
       </div>
-      <div class="itens-slide-categories" id="swiper-slide-categories">
+      <div id="swiper-slide-categories" class="itens-slide-categories">
         <div class="wrapper-img-text" @click="clear">
           <img
+            v-if="dataStore.tienda.id_tienda == 12664"
             src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649430112/Xiaomi_logo__2021_ejxsbk.png"
             class="product-image"
             alt="icon all"
-            v-if="dataStore.tienda.id_tienda == 12664"
           />
           <img
+            v-else
             src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649430214/2549900_umsosz.png"
             class="product-image"
             alt="icon all"
-            v-else
           />
           <div class="tag">
             <p
@@ -40,9 +40,9 @@
           </div>
         </div>
         <div
-          class="wrapper-img-text"
           v-for="categoria in categorias"
           :key="categoria.id"
+          class="wrapper-img-text"
           @click="sendCategory(categoria, categoria.id, (ref = false))"
         >
           <img
@@ -77,25 +77,25 @@
         </div>
       </div>
       <div
+        v-if="categorias.length > 5"
         class="btn-scroll ml-10"
         @click="scrollRight(1)"
-        v-if="this.categorias.length > 5"
       >
         <FlechaRight-icon class="btn-scroll-icon" />
       </div>
     </div>
     <div
-      class="content-categories"
       v-if="
         settingByTemplate.state_subcategorias == 1 &&
         selectedSubcategories.length > 0
       "
+      class="content-categories"
     >
       <div class="itens-slide-categories">
         <div
-          class="wrapper-img-text"
           v-for="(subcategorys, index) in selectedSubcategories"
           :key="index"
+          class="wrapper-img-text"
           @click="SendSubCategory(subcategorys.id)"
         >
           <img
@@ -137,7 +137,7 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  name: 'CategorySlideWa-4',
+  name: 'CategorySlideWa',
   mixins: [idCloudinary],
   props: {
     dataStore: Object,
@@ -170,67 +170,65 @@ export default {
   },
   methods: {
     SendSubCategory(value) {
-      this.idSubCategory = value
+      this.updateRouteAndFilters(value, 'subcategory')
+    },
+    sendCategory(value, categoria, ref) {
+      this.updateRouteAndFilters(
+        value.nombre_categoria_producto,
+        'category',
+        categoria
+      )
+    },
+    clear() {
+      this.resetRouteAndFilters()
+      this.$emit('clear')
+    },
+    scrollLeft(value) {
+      this.scrollSwiperSlide(value, -300)
+    },
+    scrollRight(value) {
+      this.scrollSwiperSlide(value, 300)
+    },
+    updateRouteAndFilters(value, filterType, categoryId = null) {
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
         this.$router.push(`/`)
       }
       this.$store.commit('SET_STATE_BANNER', false)
-      this.selectSubcategory = value
-      let filtradoSubCategory = this.subcategories.find(
-        (element) => element.id == value
-      )
-      let filtradoCategories = this.categorias.find(
-        (element) => element.id == filtradoSubCategory.categoria
-      )
-      this.$store.commit(
-        'SET_CATEGORY_PRODUCTO',
-        filtradoCategories.nombre_categoria_producto
-      )
-      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
-      this.$router.push({
-        path: '',
-        query: {
-          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
-        },
-      })
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
+
+      if (filterType === 'subcategory') {
+        this.idSubCategory = value
+        const subCategory = this.subcategories.find(
+          (element) => element.id === value
+        )
+        const category = this.categorias.find(
+          (element) => element.id === subCategory.categoria
+        )
+        this.$store.commit(
+          'SET_CATEGORY_PRODUCTO',
+          category.nombre_categoria_producto
+        )
+        this.nameSubCategory = subCategory.nombre_subcategoria
+        this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
+      } else if (filterType === 'category') {
+        this.idCategory = categoryId
+        this.nameCategory = value
+        this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
+        this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
+        this.selectedSubcategories = this.subcategories.filter(
+          (subcategory) => subcategory.categoria === categoryId
+        )
+      }
+
+      this.updateRouteQuery(filterType, value)
       this.$store.commit('products/FILTER_BY', {
-        type: ['subcategory'],
+        type: [filterType],
         data: value,
       })
       this.$store.commit('SET_PREVIOUS_PAGE', 1)
     },
-    sendCategory(value, categoria, ref) {
-      this.idCategory = categoria
-      if (this.stateWapiME) {
-        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
-      } else {
-        this.$router.push(`/`)
-      }
-      this.$store.commit('SET_STATE_BANNER', false)
-      this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$router.push({
-        path: '',
-        query: { category: this.nameCategory },
-      })
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategory) => {
-        if (subcategory.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategory)
-        }
-      })
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: value.nombre_categoria_producto,
-      })
-      this.$store.commit('SET_PREVIOUS_PAGE', 1)
-    },
-    clear() {
+    resetRouteAndFilters() {
       this.idCategory = ''
       this.idSubCategory = ''
       this.selectedSubcategories = ''
@@ -248,21 +246,20 @@ export default {
         type: ['all'],
         data: '',
       })
-      this.$emit('clear')
     },
-    scrollLeft(value) {
-      if (value == 1) {
-        document.getElementById('swiper-slide-categories').scrollLeft -= 300
-      } else if (value == 2) {
-        document.getElementById('swiper-slide-subcategories').scrollLeft -= 300
-      }
+    scrollSwiperSlide(value, scrollAmount) {
+      const elementId =
+        value === 1 ? 'swiper-slide-categories' : 'swiper-slide-subcategories'
+      document.getElementById(elementId).scrollLeft += scrollAmount
     },
-    scrollRight(value) {
-      if (value == 1) {
-        document.getElementById('swiper-slide-categories').scrollLeft += 300
-      } else if (value == 2) {
-        document.getElementById('swiper-slide-subcategories').scrollLeft += 300
+    updateRouteQuery(filterType, value) {
+      const query = {}
+      if (filterType === 'subcategory') {
+        query.subcategory = `${this.nameSubCategory}^${value}`
+      } else if (filterType === 'category') {
+        query.category = this.nameCategory
       }
+      this.$router.push({ query })
     },
   },
 }

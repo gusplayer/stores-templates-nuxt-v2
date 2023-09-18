@@ -2,13 +2,14 @@
   <div class="wrapper-dropdown">
     <el-dropdown>
       <span class="el-dropdown-link" aria-haspopup="list">
-        {{ select.label }}<Flechadown-icon class="icon-dropdown" />
+        {{ select.label }}
+        <Flechadown-icon class="icon-dropdown" />
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item
           v-for="(option, index) in options"
-          :key="index"
           v-show="select.lng != option.lng"
+          :key="index"
           @click.native="chooseLanguage(option)"
         >
           {{ option.label }}
@@ -21,29 +22,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'k-select-language',
-  mounted() {
-    if (this.dataStore && this.dataStore.tienda) {
-      switch (this.dataStore.tienda.lenguaje.toLowerCase()) {
-        case 'es':
-          this.select.label = 'Spanish (es)'
-          this.select.lng = 'es'
-          break
-        case 'en':
-          this.select.label = 'English (en)'
-          this.select.lng = 'en'
-          break
-        case 'pt':
-          this.select.label = 'Portuguese (pt)'
-          this.select.lng = 'pt'
-          break
-        case 'fr':
-          this.select.label = 'Francés (fr)'
-          this.select.lng = 'fr'
-          break
-      }
-    }
-  },
+  name: 'KoSelectLanguage',
   data() {
     return {
       select: {
@@ -74,6 +53,29 @@ export default {
   computed: {
     ...mapState(['dataStore']),
   },
+  mounted() {
+    if (this.dataStore && this.dataStore.tienda) {
+      switch (this.dataStore.tienda.lenguaje.toLowerCase()) {
+        case 'es':
+          this.select.label = 'Spanish (es)'
+          this.select.lng = 'es'
+          break
+        case 'en':
+          this.select.label = 'English (en)'
+          this.select.lng = 'en'
+          break
+        case 'pt':
+          this.select.label = 'Portuguese (pt)'
+          this.select.lng = 'pt'
+          break
+        case 'fr':
+          this.select.label = 'Francés (fr)'
+          this.select.lng = 'fr'
+          break
+      }
+    }
+  },
+
   methods: {
     chooseLanguage(option) {
       this.select = option

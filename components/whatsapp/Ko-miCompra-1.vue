@@ -5,7 +5,7 @@
         <div class="w-full flex flex-row justify-center items-center">
           <nuxt-link
             :to="{
-              path: this.stateWapiME
+              path: stateWapiME
                 ? `/wa/${dataStore.tienda.id_tienda}/blog`
                 : `/`,
             }"
@@ -29,17 +29,17 @@
                 <template slot-scope="{ errors }">
                   <input
                     id="numOrden"
-                    :placeholder="$t('mcompra_inputtitleMsg')"
                     v-model="numOrden"
+                    :placeholder="$t('mcompra_inputtitleMsg')"
                     class="input-text"
                   />
-                  <span class="text-error" v-show="errors[0]">
+                  <span v-show="errors[0]" class="text-error">
                     {{ errors[0] }}
                   </span>
                 </template>
               </validation-provider>
             </div>
-            <div class="content-input" v-if="!stateId">
+            <div v-if="!stateId" class="content-input">
               <label for="numId" class="input-label">
                 {{ $t('mcompra_inputId') }}
               </label>
@@ -421,63 +421,23 @@ import currency from '../../mixins/formatCurrent'
 import states from '../../mixins/states'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  mixins: [idCloudinary, currency, states],
-  name: 'Ko-miCompra-Wa',
-  props: {
-    dataStore: Object,
-    orden: Object,
-  },
+  name: 'KoMiCompraWa',
   components: {
     ValidationObserver,
     ValidationProvider,
   },
-  mounted() {
-    if (this.$route.name == 'wa-slug-micompra') {
-      this.cedula = '1003915188'
-      this.stateId = true
-    } else {
-      this.stateId = false
-    }
-    if (this.$route.query.orden) {
-      this.numOrden = this.$route.query.orden
-    }
-    if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-      this.$fb.setPixelId(this.facebookPixel.pixel_facebook)
-      this.$fb.track('PageView')
-      this.$fb.enable()
-    }
-    this.routePrev()
-    this.setCity()
-    this.clearCart()
-    if (this.orden && this.orden.message) {
-      this.errorMessage()
-    }
-    if (this.orden && this.orden.venta && this.orden.venta.usuario) {
-      this.numOrden = this.orden.venta.id
-      this.cedula = this.orden.venta.usuario.identificacion
-      if (this.dataHoko && this.orden.productos.length == 0) {
-        this.getproductHoko()
-        this.stateHoko = true
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
       }
-    }
-    // else {
-    //   this.numOrden = ''
-    //   this.cedula = ''
-    // }
-    if (this.orden && this.orden.venta) {
-      this.eventFacebookPixel()
-      if (this.orden.venta.created_at) {
-        this.shippingAddress()
-        let result = this.orden.venta.created_at.split(' ')
-        this.fechaState = result[0]
-        this.horaState = result[1]
-      }
-      this.setUser()
-      this.setTransportadora()
-    }
+    },
   },
-  destroyed() {
-    this.city = {}
+  mixins: [idCloudinary, currency, states],
+  props: {
+    dataStore: Object,
+    orden: Object,
   },
   data() {
     return {
@@ -525,23 +485,108 @@ export default {
       return this.$store.state.analytics_tagmanager
     },
   },
+  watch: {
+    '$route.path'(value) {
+      if (value == '/') {
+        this.toggleArrow = false
+      } else {
+        this.toggleArrow = true
+      }
+    },
+    cities() {
+      this.setCity()
+      this.shippingAddress()
+    },
+    orden() {
+      if (this.orden.venta) {
+        if (this.orden.venta.created_at) {
+          this.eventFacebookPixel()
+          this.shippingAddress()
+          this.setTransportadora()
+          this.setUser()
+          let result = this.orden.venta.created_at.split(' ')
+          this.fechaState = result[0]
+          this.horaState = result[1]
+        }
+      }
+    },
+  },
+  destroyed() {
+    this.city = {}
+  },
+  mounted() {
+    this.configureInitial()
+    this.checkRouteAndQueryParameters()
+    this.configureFacebookPixel()
+    this.performOtherTasks()
+  },
   methods: {
+    configureInitial() {
+      if (this.$route.name === 'wa-slug-micompra') {
+        this.cedula = '1003915188'
+        this.stateId = true
+      } else {
+        this.stateId = false
+      }
+    },
+    checkRouteAndQueryParameters() {
+      if (this.$route.query.orden) {
+        this.numOrden = this.$route.query.orden
+      }
+    },
+    configureFacebookPixel() {
+      if (this.facebookPixel && this.facebookPixel.pixel_facebook) {
+        this.$fb.setPixelId(this.facebookPixel.pixel_facebook)
+        this.$fb.track('PageView')
+        this.$fb.enable()
+      }
+    },
+    performOtherTasks() {
+      this.routePrev()
+      this.setCity()
+      this.clearCart()
+      if (this.orden && this.orden.message) {
+        this.errorMessage()
+      }
+      if (this.orden && this.orden.venta && this.orden.venta.usuario) {
+        this.numOrden = this.orden.venta.id
+        this.cedula = this.orden.venta.usuario.identificacion
+        if (this.dataHoko && this.orden.productos.length === 0) {
+          this.getProductHoko()
+          this.stateHoko = true
+        }
+      }
+
+      if (this.orden && this.orden.venta) {
+        this.eventFacebookPixel()
+        if (this.orden.venta.created_at) {
+          this.shippingAddress()
+          const result = this.orden.venta.created_at.split(' ')
+          this.fechaState = result[0]
+          this.horaState = result[1]
+        }
+        this.setUser()
+        this.setTransportadora()
+      }
+    },
     setUser() {
-      if (this.orden.usuario == 30866) {
+      if (this.orden.usuario === 30866) {
         if (this.orden.mensajes && this.orden.mensajes.length > 0) {
           this.tempData.dataCustomer = JSON.parse(this.orden.venta.comentario)
-          if (
-            this.tempData.dataCustomer.nombre &&
-            this.tempData.dataCustomer.phone &&
-            this.tempData.dataCustomer.identificacion &&
-            this.tempData.dataCustomer.direccion &&
-            this.tempData.dataCustomer.barrio &&
-            this.tempData.dataCustomer.ciudad
-          ) {
-            this.tempData.state = true
-          } else {
-            this.tempData.state = false
-          }
+          const customerData = this.tempData.dataCustomer
+
+          const requiredFields = [
+            'nombre',
+            'phone',
+            'identificacion',
+            'direccion',
+            'barrio',
+            'ciudad',
+          ]
+
+          this.tempData.state = requiredFields.every(
+            (field) => customerData[field]
+          )
         } else {
           this.tempData.dataCustomer = null
           this.tempData.state = false
@@ -549,11 +594,11 @@ export default {
       }
     },
     setTransportadora() {
-      if (this.orden.venta.transportadora !== null) {
+      if (this.orden.venta.transportadora) {
         this.dataTransporter = JSON.parse(this.orden.venta.transportadora)
       }
     },
-    getproductHoko() {
+    getProductHoko() {
       let id = parseInt(this.orden.mensajes[0].mensaje)
       let config = {
         headers: {
@@ -683,40 +728,6 @@ export default {
           '<strong>Esta orden no existe</strong><p>El número de la orden o la cédula son incorrectos</p>',
         duration: 4000,
       })
-    },
-  },
-  watch: {
-    '$route.path'(value) {
-      if (value == '/') {
-        this.toggleArrow = false
-      } else {
-        this.toggleArrow = true
-      }
-    },
-    cities() {
-      this.setCity()
-      this.shippingAddress()
-    },
-    orden() {
-      if (this.orden.venta) {
-        if (this.orden.venta.created_at) {
-          this.eventFacebookPixel()
-          this.shippingAddress()
-          this.setTransportadora()
-          this.setUser()
-          let result = this.orden.venta.created_at.split(' ')
-          this.fechaState = result[0]
-          this.horaState = result[1]
-        }
-      }
-    },
-  },
-  filters: {
-    capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
-      }
     },
   },
 }

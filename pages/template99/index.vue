@@ -1,26 +1,25 @@
 <template>
   <div class="w-full flex flex-col justify-center bg-slate-100 items-center">
     <div
-      class="w-full max-w-[900px] shadow-md bg-white-white container-home"
       v-loading="loading"
+      class="w-full max-w-[900px] shadow-md bg-white-white container-home"
     >
-      <!-- Header Dinámico (Tema) 1 - 2 - 3 -->
-      <component :is="indexTema" v-bind="componentsProps" id="KHeaderX" />
+      <component :is="indexTema" id="KHeaderX" v-bind="componentsProps" />
       <component
-        v-if="categorias.length > 0"
         :is="indexCategory"
-        v-bind="componentsProps"
+        v-if="categorias?.length > 0"
         id="KHeaderX"
+        v-bind="componentsProps"
       />
       <KProductFavoritos
-        v-if="this.stateBanner"
+        v-if="stateBanner"
         v-bind="componentsProps"
         style="margin-bottom: 10px"
       />
-      <component :is="indexList" v-bind="componentsProps" id="KListX" />
-      <KFooterWaLogo v-bind="componentsProps" id="KfooterX" />
-      <KFooterWa v-bind="componentsProps" id="KfooterX" />
-      <WCountry :dataStore="dataStore" />
+      <component :is="indexList" id="KListX" v-bind="componentsProps" />
+      <KFooterWaLogo id="KfooterX" v-bind="componentsProps" />
+      <KFooterWa id="KfooterX" v-bind="componentsProps" />
+      <WCountry :data-store="dataStore" />
     </div>
   </div>
 </template>
@@ -28,8 +27,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'wa',
-  name: 'templateWhatsApp',
+  name: 'TemplateWhatsApp',
   components: {
     KoHeaderWp1: () =>
       import('@/components/headers/header_wp/Ko-Header-wa-1.vue'),
@@ -37,7 +35,6 @@ export default {
       import('@/components/headers/header_wp/Ko-Header-wa-2.vue'),
     KoHeaderWp3: () =>
       import('@/components/headers/header_wp/Ko-Header-wa-3.vue'),
-
     KCategory01: () =>
       import('@/components/whatsapp/template1/Ko-Categories-wa.vue'),
     KCategory02: () =>
@@ -46,29 +43,22 @@ export default {
       import('@/components/whatsapp/template3/ko-slide-categorys.vue'),
     KCategory04: () =>
       import('@/components/whatsapp/categorys_img/ko-categorys-img.vue'),
-
     KProductFavoritos: () =>
       import('@/components/whatsapp/template1/Ko-ProductFavoritos-1.vue'),
-
     KProductList: () =>
       import('@/components/whatsapp/template1/Ko-ProductList-wa.vue'),
     KProductList2: () =>
       import('@/components/whatsapp/template2/ko-productList.vue'),
     KProductList3: () =>
       import('@/components/whatsapp/template3/ko-productList.vue'),
-
     KFooterWaLogo: () =>
       import('@/components/footers/footerWa/footerWa1/ko-Footer-wa-logo'),
     KFooterWa: () =>
       import('@/components/footers/footerWa/footerWa2/ko-Footer-wa.vue'),
-
     WCountry: () =>
       import('@/components/footers/footer1/Ko-Footer-Country.vue'),
   },
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
-  },
+  layout: 'wa',
   computed: {
     ...mapState([
       'dataStore',
@@ -167,6 +157,10 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
     addEventListenerTemplate(e) {

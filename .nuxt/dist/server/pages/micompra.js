@@ -1,13 +1,132 @@
-exports.ids = [162];
+exports.ids = [333,224];
 exports.modules = {
 
-/***/ 262:
+/***/ 1103:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/micompra.vue?vue&type=template&id=18ad5d40&
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _vm.orden ? _c('KoMiCompra', {
+    attrs: {
+      "data-store": _vm.dataStore,
+      "orden": _vm.orden
+    },
+    on: {
+      "update": _vm.setDataOrder
+    }
+  }) : _vm._e();
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./pages/micompra.vue?vue&type=template&id=18ad5d40&
+
+// EXTERNAL MODULE: external "axios"
+var external_axios_ = __webpack_require__(2);
+var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
+
+// EXTERNAL MODULE: external "vuex"
+var external_vuex_ = __webpack_require__(9);
+
+// EXTERNAL MODULE: ./components/miCompra/Ko-miCompra-1.vue + 4 modules
+var Ko_miCompra_1 = __webpack_require__(630);
+
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/micompra.vue?vue&type=script&lang=js&
+
+
+
+/* harmony default export */ var micompravue_type_script_lang_js_ = ({
+  name: 'KoIndexMiCompra',
+  components: {
+    KoMiCompra: Ko_miCompra_1["default"]
+  },
+  asyncData({
+    route,
+    store
+  }) {
+    if (route.query.orden) {
+      return external_axios_default.a.get(`${store.state.urlKomercia}/api/orden/${store.state.tienda.id_tienda}/${route.query.orden}`, {
+        headers: {
+          'content-type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      }).then(response => {
+        if (route.query.orden == response.data.data.venta.id && route.query.usuario == response.data.data.venta.usuario.identificacion) {
+          const orden = response.data.data;
+          return {
+            orden
+          };
+        } else {
+          const orden = {};
+          orden.message = 'No existe esta orden';
+          return {
+            orden
+          };
+        }
+      }).catch(() => {
+        const orden = {};
+        orden.message = 'No existe esta orden';
+        return {
+          orden
+        };
+      });
+    } else {
+      const orden = {};
+      return {
+        orden
+      };
+    }
+  },
+  computed: {
+    ...Object(external_vuex_["mapState"])(['template', 'dataStore'])
+  },
+  methods: {
+    setDataOrder(value) {
+      this.orden = value;
+    }
+  }
+});
+// CONCATENATED MODULE: ./pages/micompra.vue?vue&type=script&lang=js&
+ /* harmony default export */ var pages_micompravue_type_script_lang_js_ = (micompravue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./pages/micompra.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  pages_micompravue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  "9468c61a"
+  
+)
+
+/* harmony default export */ var micompra = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ 137:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./mixins/states.vue?vue&type=script&lang=js&
 /* harmony default export */ var statesvue_type_script_lang_js_ = ({
+  name: 'StateInformation',
   computed: {
     shippingState() {
       return [{
@@ -257,41 +376,41 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 263:
+/***/ 141:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(518);
+var content = __webpack_require__(276);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-var add = __webpack_require__(6).default
+var add = __webpack_require__(7).default
 module.exports.__inject__ = function (context) {
   add("296e952d", content, true, context)
 };
 
 /***/ }),
 
-/***/ 517:
+/***/ 275:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(263);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(141);
 /* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 518:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.i, ".tag-state[data-v-194b78bb]{color:#fff;margin-left:10px}.table-striped[data-v-194b78bb]{display:grid;width:100%}.table-striped .thead[data-v-194b78bb]{width:100%}.table-striped .thead ul[data-v-194b78bb]{width:100%}.table-striped .tbody ul[data-v-194b78bb],.table-striped .thead ul[data-v-194b78bb]{display:grid;grid-auto-flow:column;grid-template-columns:repeat(7,1fr);list-style:none;padding:10px 0}.table-striped .tbody ul[data-v-194b78bb]:nth-of-type(odd){background-color:#f9f9f9;border-bottom:1px solid #ddd;border-top:1px solid #ddd}.photo img[data-v-194b78bb]{height:70px;-o-object-fit:cover;object-fit:cover;width:70px}td[data-v-194b78bb]{vertical-align:middle!important}td.variants[data-v-194b78bb]{display:flex}td.variants p~p[data-v-194b78bb]{margin-left:10px}table[data-v-194b78bb]{border-collapse:collapse;border-spacing:0}.thead ul li[data-v-194b78bb]{color:gray}.text-table[data-v-194b78bb]{color:var(--purple);font-size:14px}.text-bold-table[data-v-194b78bb],.text-normal-table[data-v-194b78bb],.text-variant[data-v-194b78bb]{color:#000;font-size:14px}.text-bold-table[data-v-194b78bb]{font-weight:700;padding-right:15px;text-align:right}.wrapper_micompra[data-v-194b78bb]{background-color:#efefef;box-sizing:border-box;height:100%;justify-content:center;min-height:calc(100vh - 282px)}.contenedor[data-v-194b78bb],.wrapper_micompra[data-v-194b78bb]{align-items:center;display:flex;width:100%}.contenedor[data-v-194b78bb]{flex-direction:column;justify-content:flex-start;max-width:1300px;padding:20px}.wrapper-form[data-v-194b78bb]{background:#fff;border-radius:30px;margin-bottom:10px;padding:20px 54px 10px;width:100%}.content-form[data-v-194b78bb]{display:flex;flex-direction:row;width:100%}.title-form[data-v-194b78bb]{color:#000;font-size:24px;font-stretch:normal;font-style:normal;font-weight:600;letter-spacing:-.24px;line-height:1.2;margin-bottom:25px;text-align:center}.form[data-v-194b78bb]{align-items:center;flex:2;flex-direction:row;justify-content:center}.content-input[data-v-194b78bb],.form[data-v-194b78bb]{display:flex;width:100%}.content-input[data-v-194b78bb]{align-items:flex-start;flex-direction:column;height:90px;justify-content:flex-start;margin-right:30px}.content-btn[data-v-194b78bb]{flex:1}.btn-submitOrden[data-v-194b78bb],.content-btn[data-v-194b78bb]{align-items:center;display:flex;justify-content:center}.btn-submitOrden[data-v-194b78bb]{background-color:#000;border:2px solid #000;border-radius:5px;color:#fff;cursor:pointer;flex-direction:row;font-size:16px;font-weight:700;max-height:40px;min-height:40px;padding:8px 14px;transition:all .2s ease-in;width:100%}.btn-submitOrden[data-v-194b78bb]:hover{background-color:var(--btnhover);border:2px solid var(--btnhover);color:#fff}.icon-seach[data-v-194b78bb]{bottom:2px;font-size:18px;margin-right:5px}.input-text[data-v-194b78bb]{background-color:transparent;border:2px solid #ccc9c9;border-radius:5px;color:rgba(21,20,57,.541);font-size:14px;height:40px;padding:8px 14px;width:100%}.input-text[data-v-194b78bb]::-moz-placeholder{color:rgba(21,20,57,.541);opacity:.7}.input-text[data-v-194b78bb]::placeholder{color:rgba(21,20,57,.541);opacity:.7}.input-text[data-v-194b78bb]:-internal-autofill-selected{background-color:transparent!important;background-image:none!important;color:-internal-light-dark-color(#000,#fff)!important}.input-text[data-v-194b78bb]:-internal-autofill-selected{-webkit-appearance:menulist-button}.input-text[data-v-194b78bb]:active,.input-text[data-v-194b78bb]:focus{border:2px solid rgba(60,60,63,.774);outline:0}.input-label[data-v-194b78bb]{height:25px}.content-btn .el-button--primary[data-v-194b78bb]{background-color:#000;border-color:#000;border-radius:5px;color:#fff;height:40px;max-height:40px;width:100%}.content-btn .el-button--primary[data-v-194b78bb]:hover{background-color:var(--btnhover);border-color:var(--btnhover)}.text-error[data-v-194b78bb]{color:#cb2027;font-size:12px;margin-left:10px;width:100%}.bar-body[data-v-194b78bb]{align-items:center;background-color:#fff;border-radius:30px;padding:40px 54px 15px}.bar-body[data-v-194b78bb],.content-title[data-v-194b78bb]{display:flex;flex-direction:column;justify-content:center;width:100%}.content-title[data-v-194b78bb]{align-items:flex-start;border-bottom:1px solid #eee;margin-bottom:10px}.content-title>p[data-v-194b78bb]:first-child{color:#383838;font-size:18px;font-weight:700;line-height:1.3}.content-title>p[data-v-194b78bb]:nth-child(2){color:#383838;font-size:14px;font-weight:400;line-height:1.3;margin-bottom:10px}.content-card[data-v-194b78bb]{grid-column-gap:60px;flex-wrap:wrap;margin-bottom:20px;width:100%}.card[data-v-194b78bb],.content-card[data-v-194b78bb]{align-items:center;display:flex}.img-product[data-v-194b78bb]{height:83px;-o-object-fit:cover;object-fit:cover;vertical-align:top;width:83px}.info[data-v-194b78bb]{padding-left:15px}.name-product[data-v-194b78bb]{font-size:16px;font-weight:700;line-height:1.63}.name-product[data-v-194b78bb],.quantity-product[data-v-194b78bb]{color:#383838;font-stretch:normal;font-style:normal;letter-spacing:normal;text-align:left}.quantity-product[data-v-194b78bb]{font-size:13px;font-weight:400;line-height:1.3}.price-product[data-v-194b78bb]{color:#000;font-size:17px;font-stretch:normal;font-style:normal;font-weight:700;letter-spacing:normal;line-height:1.3;text-align:left}.info[data-v-194b78bb] .el-tag{background-color:#e8e8f3;border:1px solid #777780;border-radius:5px;box-sizing:border-box;color:#000;display:inline-block;font-size:13px;height:28px;margin-left:2px;padding:0 6px;text-align:center;white-space:nowrap}.content-info-orden[data-v-194b78bb]{justify-content:space-between;margin-bottom:10px}.content-info-orden[data-v-194b78bb],.info-left[data-v-194b78bb]{display:flex;flex-direction:column;width:100%}.title-info-orden[data-v-194b78bb]{font-size:16px;font-weight:700;line-height:1.73}.title-info-orden[data-v-194b78bb],.value-info-orden[data-v-194b78bb]{color:#000;font-stretch:normal;font-style:normal;letter-spacing:normal;text-align:left}.value-info-orden[data-v-194b78bb]{font-size:15px;font-weight:400;line-height:1.63}.content-state-top[data-v-194b78bb]{justify-content:space-between;margin-top:15px;width:100%}.content-item-state[data-v-194b78bb],.content-state-top[data-v-194b78bb]{align-items:center;display:flex;flex-direction:row}.content-sections[data-v-194b78bb]{display:flex;flex-direction:column;width:100%}.content-sections[data-v-194b78bb] .el-collapse-item__header{color:#000;font-size:16px;font-stretch:normal;font-style:normal;font-weight:700;letter-spacing:normal}.content-sections[data-v-194b78bb] .el-icon-arrow-right{color:#000}.content-info-buyer[data-v-194b78bb]{grid-column-gap:40px;grid-row-gap:5px;display:flex;flex-wrap:wrap;justify-content:space-between;width:100%}.address[data-v-194b78bb],.city[data-v-194b78bb],.email-address[data-v-194b78bb],.messege[data-v-194b78bb],.name[data-v-194b78bb],.owner[data-v-194b78bb],.telephone[data-v-194b78bb]{color:#000;font-size:15px;font-stretch:normal;font-style:normal;font-weight:700;letter-spacing:normal;text-align:left}.messege[data-v-194b78bb]{width:100%}.value-data[data-v-194b78bb]{font-weight:400}.btn_url[data-v-194b78bb]{background:var(--purple);border:1px solid var(--purple);border-radius:3px;color:#fff;padding:4px 10px}.btn_url[data-v-194b78bb]:hover{background:var(--green);border:1px solid var(--green);color:var(--purple)}.wrapper-hoko[data-v-194b78bb]{align-items:flex-start;display:flex;justify-content:space-between;width:100%}@media (max-width:863px){.form[data-v-194b78bb]{align-items:center;flex:1;justify-content:center}.content-form[data-v-194b78bb],.form[data-v-194b78bb]{flex-direction:column}.content-input[data-v-194b78bb]{margin-right:0}}@media (max-width:768px){.bar-top[data-v-194b78bb]{padding:15px 27px}.bar-body[data-v-194b78bb]{padding:17px 17px 25px}.contenedor[data-v-194b78bb]{padding:60px 0}.wrapper-form[data-v-194b78bb]{padding:20px 17px 10px}}@media (max-width:600px){.content-input[data-v-194b78bb],.content-state-top[data-v-194b78bb]{align-items:flex-start;flex-direction:column}.title-info-orden[data-v-194b78bb]{margin-top:10px}}@media (max-width:500px){.form .el-input[data-v-194b78bb]{max-width:none}.contenedor[data-v-194b78bb]{padding:8px 5px 10px}}", ""]);
@@ -302,7 +421,63 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 61:
+/***/ 47:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+  methods: {
+    // Imágenes de producto
+    idCloudinary(url, width, height) {
+      let fitImage = url.split('/upload/');
+      let fitImage2 = url.split('/');
+      if (fitImage2[2] == 'res.cloudinary.com') {
+        return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/dpr_auto,f_auto,fl_lossy,q_auto/c_crop,g_custom/h_${height},w_${width},b_auto,c_pad/${fitImage[1]}`;
+      } else {
+        return url;
+      }
+    },
+    idCloudinaryQuality(url, width, height) {
+      let fitImage = url.split('/upload/');
+      let fitImage2 = url.split('/');
+      if (fitImage2[2] == 'res.cloudinary.com') {
+        return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/dpr_auto,f_auto,fl_lossy,q_90/c_crop,g_custom/h_${height},w_${width},b_auto,c_pad/${fitImage[1]}`;
+      } else {
+        return url;
+      }
+    },
+    idCloudinarys(url, width, height) {
+      let fitImage = url.split('/upload/');
+      let fitImage2 = url.split('/');
+      if (fitImage2[2] == 'res.cloudinary.com') {
+        return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/dpr_auto,q_auto:best,c_crop,g_custom/c_scale,h_${height},w_${width}/${fitImage[1]}`;
+      } else {
+        return url;
+      }
+    },
+    idCloudinaryBanner(url, type, width) {
+      let fitImage = url.split('/upload/');
+      let fitImage2 = url.split('/');
+      let fitImage3;
+      if (fitImage && fitImage.length > 1) {
+        fitImage3 = fitImage[1].split('.');
+      }
+      if (fitImage2[2] == 'res.cloudinary.com') {
+        if (type == 'banner') {
+          return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/dpr_auto,q_auto:best,c_crop,g_custom/${fitImage3[0]}.webp`;
+        } else if (type == 'bannerRes') {
+          return `https://res.cloudinary.com/${fitImage2[3]}/image/upload/dpr_auto,q_auto:best,c_crop,g_custom/c_scale,w_${width}/${fitImage3[0]}.webp`;
+        }
+      } else {
+        return url;
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ 48:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -344,40 +519,15 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 982:
+/***/ 630:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/micompra.vue?vue&type=template&id=5214ed48&
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _vm.orden ? _c('KoMicompra', {
-    attrs: {
-      "dataStore": _vm.dataStore,
-      "orden": _vm.orden
-    },
-    on: {
-      "update": _vm.setDataOrder
-    }
-  }) : _vm._e();
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./pages/micompra.vue?vue&type=template&id=5214ed48&
-
-// EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(2);
-var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
-
-// EXTERNAL MODULE: external "vuex"
-var external_vuex_ = __webpack_require__(7);
-
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/miCompra/Ko-miCompra-1.vue?vue&type=template&id=194b78bb&scoped=true&
-var Ko_miCompra_1vue_type_template_id_194b78bb_scoped_true_render = function render() {
+var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -718,21 +868,25 @@ var Ko_miCompra_1vue_type_template_id_194b78bb_scoped_true_render = function ren
     }
   }, [_vm._v("\n                    " + _vm._s(_vm.dataTransporter.link) + "\n                  ")])]) : _vm._e()])]) : _vm._e()], 1)], 1)], 1)], 2) : _vm._e()], 2)]);
 };
-var Ko_miCompra_1vue_type_template_id_194b78bb_scoped_true_staticRenderFns = [];
+var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/miCompra/Ko-miCompra-1.vue?vue&type=template&id=194b78bb&scoped=true&
 
+// EXTERNAL MODULE: external "axios"
+var external_axios_ = __webpack_require__(2);
+var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
+
 // EXTERNAL MODULE: ./mixins/idCloudinary.js
-var idCloudinary = __webpack_require__(14);
+var idCloudinary = __webpack_require__(47);
 
 // EXTERNAL MODULE: ./mixins/formatCurrent.js
-var formatCurrent = __webpack_require__(61);
+var formatCurrent = __webpack_require__(48);
 
 // EXTERNAL MODULE: ./mixins/states.vue + 2 modules
-var states = __webpack_require__(262);
+var states = __webpack_require__(137);
 
 // EXTERNAL MODULE: external "vee-validate"
-var external_vee_validate_ = __webpack_require__(9);
+var external_vee_validate_ = __webpack_require__(8);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/miCompra/Ko-miCompra-1.vue?vue&type=script&lang=js&
 
@@ -1015,7 +1169,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(517)
+  var style0 = __webpack_require__(275)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1024,8 +1178,8 @@ if (style0.__inject__) style0.__inject__(context)
 
 var component = Object(componentNormalizer["a" /* default */])(
   miCompra_Ko_miCompra_1vue_type_script_lang_js_,
-  Ko_miCompra_1vue_type_template_id_194b78bb_scoped_true_render,
-  Ko_miCompra_1vue_type_template_id_194b78bb_scoped_true_staticRenderFns,
+  render,
+  staticRenderFns,
   false,
   injectStyles,
   "194b78bb",
@@ -1033,84 +1187,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   
 )
 
-/* harmony default export */ var Ko_miCompra_1 = (component.exports);
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/micompra.vue?vue&type=script&lang=js&
-
-
-
-/* harmony default export */ var micompravue_type_script_lang_js_ = ({
-  name: 'K0-indexMiCompraG',
-  components: {
-    KoMicompra: Ko_miCompra_1
-  },
-  asyncData({
-    route,
-    store
-  }) {
-    if (route.query.orden) {
-      return external_axios_default.a.get(`${store.state.urlKomercia}/api/orden/${store.state.tienda.id_tienda}/${route.query.orden}`, {
-        headers: {
-          'content-type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
-      }).then(response => {
-        if (route.query.orden == response.data.data.venta.id && route.query.usuario == response.data.data.venta.usuario.identificacion) {
-          const orden = response.data.data;
-          return {
-            orden
-          };
-        } else {
-          const orden = {};
-          orden.message = 'No existe esta orden';
-          return {
-            orden
-          };
-        }
-      }).catch(() => {
-        const orden = {};
-        orden.message = 'No existe esta orden';
-        return {
-          orden
-        };
-      });
-    } else {
-      const orden = {};
-      return {
-        orden
-      };
-    }
-  },
-  computed: {
-    ...Object(external_vuex_["mapState"])(['template', 'dataStore'])
-  },
-  methods: {
-    setDataOrder(value) {
-      this.orden = value;
-    }
-  }
-});
-// CONCATENATED MODULE: ./pages/micompra.vue?vue&type=script&lang=js&
- /* harmony default export */ var pages_micompravue_type_script_lang_js_ = (micompravue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./pages/micompra.vue
-
-
-
-
-
-/* normalize component */
-
-var micompra_component = Object(componentNormalizer["a" /* default */])(
-  pages_micompravue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  "9468c61a"
-  
-)
-
-/* harmony default export */ var micompra = __webpack_exports__["default"] = (micompra_component.exports);
+/* harmony default export */ var Ko_miCompra_1 = __webpack_exports__["default"] = (component.exports);
 
 /***/ })
 

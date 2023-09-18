@@ -6,7 +6,7 @@
       <nuxt-link to="/" class="text-14">
         {{ $t('header_inicio') }}
       </nuxt-link>
-      <p class="px-10 text-14 font-bold">></p>
+      <p class="px-10 text-14 font-bold">&gt;</p>
       <p class="text-14 font-bold">
         {{ $t('footer_politicasyterminos') }}
       </p>
@@ -18,57 +18,65 @@
         {{ $t('footer_condicionesLegales') }}
       </h1>
       <div
-        v-if="this.dataStore.politicas.datos"
+        v-if="dataStore?.politicas?.datos"
         class="w-full max-w-[900px] mb-15 px-20 md:px-30"
       >
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaTratamientos') }}
         </p>
-        <div v-html="this.dataStore.politicas.datos" />
+        <div>{{ dataStore?.politicas?.datos }}</div>
       </div>
 
       <div
-        v-if="this.dataStore.politicas.garantia"
+        v-if="dataStore?.politicas?.garantia"
         class="w-full max-w-[900px] mb-15 px-20 md:px-30"
       >
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaGarantia') }}
         </p>
-        <div v-html="this.dataStore.politicas.garantia" />
+        <div>{{ dataStore?.politicas?.garantia }}</div>
       </div>
 
       <div
-        v-if="this.dataStore.politicas.devolucion"
+        v-if="dataStore?.politicas?.devolucion"
         class="w-full max-w-[900px] mb-15 px-20 md:px-30"
       >
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaDevoluciones') }}
         </p>
-        <div v-html="this.dataStore.politicas.devolucion" />
+        <div>{{ dataStore?.politicas?.devolucion }}</div>
       </div>
 
       <div
-        v-if="this.dataStore.politicas.cambio"
+        v-if="dataStore?.politicas?.cambio"
         class="w-full max-w-[900px] mb-15 px-20 md:px-30"
       >
-        <p class="text-17 font-bold mb-10">{{ $t('footer_politicaCambio') }}</p>
-        <div v-html="this.dataStore.politicas.cambio" />
+        <p class="text-17 font-bold mb-10">
+          {{ $t('footer_politicaCambio') }}
+        </p>
+        <div>{{ dataStore?.politicas?.cambio }}</div>
       </div>
 
       <div
-        v-if="this.dataStore.politicas.envios"
+        v-if="dataStore?.politicas?.envios"
         class="w-full max-w-[900px] mb-15 px-30"
       >
-        <p class="text-17 font-bold mb-10">{{ $t('footer_politicaEnvios') }}</p>
-        <div v-html="this.dataStore.politicas.envios" />
+        <p class="text-17 font-bold mb-10">
+          {{ $t('footer_politicaEnvios') }}
+        </p>
+        <div>{{ dataStore?.politicas?.envios }}</div>
       </div>
 
       <div
-        v-if="this.dataStore.politicas.pagos"
+        v-if="dataStore?.politicas?.pagos"
         class="w-full max-w-[900px] mb-15 px-30"
       >
-        <p class="text-16 font-bold mb-10">{{ $t('footer_politicaPagos') }}</p>
-        <div v-html="this.dataStore.politicas.pagos" class="text-justify" />
+        <p class="text-16 font-bold mb-10">
+          {{ $t('footer_politicaPagos') }}
+        </p>
+        <div class="text-justify">
+          {{ dataStore?.politicas?.pagos }}
+        </div>
       </div>
     </div>
   </div>
@@ -76,6 +84,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  name: 'TermsAndConditions',
   layout: 'default',
   computed: {
     ...mapState(['dataStore']),

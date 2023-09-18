@@ -2,9 +2,9 @@
   <div class="wrapper_Category">
     <div class="content_Category">
       <div
+        v-if="categorias.length > 8"
         class="btn-scroll"
         @click="scrollLeft(1)"
-        v-if="this.categorias.length > 8"
       >
         <FlechaLeft-icon class="btn-scroll-icon" />
       </div>
@@ -31,21 +31,21 @@
         </div>
       </div>
       <div
+        v-if="categorias.length > 8"
         class="btn-scroll"
         @click="scrollRight(1)"
-        v-if="this.categorias.length > 8"
       >
         <FlechaRight-icon class="btn-scroll-icon" />
       </div>
     </div>
     <div
-      class="content_Category"
       v-if="settingByTemplate.state_subcategorias == 1"
+      class="content_Category"
     >
       <div
+        v-if="selectedSubcategories.length > 8"
         class="btn-scroll"
         @click="scrollLeft(2)"
-        v-if="this.selectedSubcategories.length > 8"
       >
         <FlechaLeft-icon class="btn-scroll-icon" />
       </div>
@@ -69,9 +69,9 @@
         </div>
       </div>
       <div
+        v-if="selectedSubcategories.length > 8"
         class="btn-scroll"
         @click="scrollRight(2)"
-        v-if="this.selectedSubcategories.length > 8"
       >
         <FlechaRight-icon class="btn-scroll-icon" />
       </div>
@@ -83,7 +83,7 @@
 // import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   // mixins: [idCloudinary],
-  name: 'Ko-Categories-wa-1',
+  name: 'KoCategoriesWa1',
   props: {
     dataStore: Object,
     settingByTemplate: Object,
@@ -212,7 +212,6 @@ export default {
       }
     },
   },
-  watch: {},
 }
 </script>
 

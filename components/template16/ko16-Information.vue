@@ -66,12 +66,21 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko16-information',
+  name: 'Ko16Information',
   mixins: [idCloudinary],
   props: {
-    information: Object,
-    settingGeneral: Object,
-    dataStore: Object,
+    information: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

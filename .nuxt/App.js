@@ -9,10 +9,11 @@ import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
 
 import '..\\assets\\css\\tailwind.css'
 
-import _6f6c098b from '..\\layouts\\default.vue'
-import _6c337540 from '..\\layouts\\wa.vue'
+const _6f6c098b = () => import('..\\layouts\\default.vue'  /* webpackChunkName: "layouts/default" */).then(m => sanitizeComponent(m.default || m))
+const _6c337540 = () => import('..\\layouts\\wa.vue'  /* webpackChunkName: "layouts/wa" */).then(m => sanitizeComponent(m.default || m))
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b),"_wa": sanitizeComponent(_6c337540) }
+let resolvedLayouts = {}
+const layouts = { "_default": _6f6c098b,"_wa": _6c337540 }
 
 export default {
   render (h, props) {
@@ -166,7 +167,7 @@ export default {
       }
       this.$loading.finish()
     },
-    errorChanged () {
+    async errorChanged () {
       if (this.nuxt.err) {
         if (this.$loading) {
           if (this.$loading.fail) {
@@ -183,23 +184,39 @@ export default {
           errorLayout = errorLayout(this.context)
         }
 
+        await this.loadLayout(errorLayout)
+
         this.setLayout(errorLayout)
       }
     },
 
     setLayout (layout) {
-      if (!layout || !layouts['_' + layout]) {
+      if (!layout || !resolvedLayouts['_' + layout]) {
         layout = 'default'
       }
       this.layoutName = layout
-      this.layout = layouts['_' + layout]
+      let _layout = '_' + layout
+      this.layout = resolvedLayouts[_layout]
       return this.layout
     },
     loadLayout (layout) {
-      if (!layout || !layouts['_' + layout]) {
-        layout = 'default'
+      const undef = !layout
+      const nonexistent = !(layouts['_' + layout] || resolvedLayouts['_' + layout])
+      let _layout = '_' + ((undef || nonexistent) ? 'default' : layout)
+      if (resolvedLayouts[_layout]) {
+        return Promise.resolve(resolvedLayouts[_layout])
       }
-      return Promise.resolve(layouts['_' + layout])
+      return layouts[_layout]()
+        .then((Component) => {
+          resolvedLayouts[_layout] = Component
+          delete layouts[_layout]
+          return resolvedLayouts[_layout]
+        })
+        .catch((e) => {
+          if (this.$nuxt) {
+            return this.$nuxt.error({ statusCode: 500, message: e.message })
+          }
+        })
     },
   },
 

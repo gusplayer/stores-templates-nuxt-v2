@@ -1,23 +1,26 @@
 <template>
-  <div class="wrapper-ProductFavoritos" v-if="category.length">
+  <div v-if="category.length" class="wrapper-ProductFavoritos">
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">
         {{ $t('home_destacadosMsg') }}
       </p>
     </div>
-    <KoSwipper :products="category"></KoSwipper>
+    <KoSwipper :products="category" />
   </div>
 </template>
 
 <script>
 import KoSwipper from '../_productofavorito/productSlide'
 export default {
-  name: 'suggestionsProducto',
-  props: {
-    category: {},
-  },
+  name: 'Ko5SuggestionsProduct',
   components: {
     KoSwipper,
+  },
+  props: {
+    category: {
+      type: Array,
+      required: true,
+    },
   },
 }
 </script>

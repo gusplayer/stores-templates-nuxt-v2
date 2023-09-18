@@ -9,14 +9,14 @@
             {{ $t('home_catalogo') }}
           </p>
           <p
+            v-if="nameCategoryHeader"
             class="text-categorias-select"
-            v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
           >
-            > {{ this.nameCategoryHeader }}
+            > {{ nameCategoryHeader }}
           </p>
-          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            > {{ this.nameSubCategoryHeader }}
+          <p v-if="nameSubCategoryHeader" class="text-categorias-select">
+            > {{ nameSubCategoryHeader }}
           </p>
         </div>
       </div>
@@ -28,17 +28,14 @@
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard1 :product="product"></KoProductCard1>
+              <KoProductCard1 :product="product" />
             </div>
           </div>
-          <div
-            v-if="this.fullProducts.length == 0"
-            class="content-products-empty"
-          >
+          <div v-if="fullProducts.length == 0" class="content-products-empty">
             <p>{{ $t('home_msgCatalogo') }}</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="fullProducts.length > 16">
+            <div v-if="fullProducts.length > 16" class="product_pagination">
               <el-pagination
                 background
                 layout="prev, pager, next"
@@ -46,11 +43,11 @@
                 :page-size="16"
                 :current-page.sync="currentPage"
                 class="pagination"
-              ></el-pagination>
+              />
             </div>
           </div>
           <div class="pagination-small">
-            <div class="product_pagination" v-if="fullProducts.length > 16">
+            <div v-if="fullProducts.length > 16" class="product_pagination">
               <el-pagination
                 background
                 small
@@ -59,7 +56,7 @@
                 :page-size="16"
                 :current-page.sync="currentPage"
                 class="pagination"
-              ></el-pagination>
+              />
             </div>
           </div>
         </div>
@@ -72,41 +69,20 @@
 import KoProductCard1 from './_productcard/Ko-ProductCard-1'
 import filterProducts from '../../mixins/filterProducts'
 export default {
-  name: 'Ko5-ProductListHome',
+  name: 'Ko5ProductListHome',
   components: {
     KoProductCard1,
   },
-  props: {
-    dataStore: Object,
-    fullProducts: {},
-  },
   mixins: [filterProducts],
-  mounted() {
-    if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrlMix(this.$route.query.category)
-    } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendSubCategoryUrlMix(
-        this.$route.query.subcategory,
-        this.categorias,
-        this.subcategories
-      )
-    } else if (
-      this.$route.query &&
-      this.$route.query.tagId &&
-      this.$route.query.tagName
-    ) {
-      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-    } else if (this.$route.fullPath == '/') {
-      this.allCategories()
-    }
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
-    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('SET_STATE_BANNER', false)
-    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      this.$store.commit('SET_STATE_BANNER', false)
-    }
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -162,6 +138,77 @@ export default {
     previousPage() {
       return this.$store.state.previousPage
     },
+  },
+  watch: {
+    searchValue(value) {
+      this.SearchProduct2(value)
+    },
+    currentPage() {
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+      let timerTimeout = null
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null
+        window.scrollBy(0, -1500)
+      }, 250)
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage
+      }
+    },
+    nameCategoryHeader(value) {
+      return value
+    },
+    nameSubCategoryHeader(value) {
+      return value
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      if (this.$route.query && this.$route.query.category) {
+        this.sendCategoryUrlMix(this.$route.query.category)
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.SendSubCategoryUrlMix(
+          this.$route.query.subcategory,
+          this.categorias,
+          this.subcategories
+        )
+      } else if (
+        this.$route.query &&
+        this.$route.query.tagId &&
+        this.$route.query.tagName
+      ) {
+        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
+      } else if (this.$route.fullPath == '/') {
+        this.allCategories()
+      }
+    },
+  },
+  mounted() {
+    if (this.$route.query && this.$route.query.category) {
+      this.sendCategoryUrlMix(this.$route.query.category)
+    } else if (this.$route.query && this.$route.query.subcategory) {
+      this.SendSubCategoryUrlMix(
+        this.$route.query.subcategory,
+        this.categorias,
+        this.subcategories
+      )
+    } else if (
+      this.$route.query &&
+      this.$route.query.tagId &&
+      this.$route.query.tagName
+    ) {
+      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
+    } else if (this.$route.fullPath == '/') {
+      this.allCategories()
+    }
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
+    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
+      this.$store.commit('SET_STATE_BANNER', false)
+    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
+      this.$store.commit('SET_STATE_BANNER', false)
+    }
   },
   methods: {
     SendSubCategory(value) {
@@ -237,50 +284,6 @@ export default {
         })
       }
       this.currentPage = 1
-    },
-  },
-  watch: {
-    searchValue(value) {
-      this.SearchProduct2(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollBy(0, -1500)
-      }, 250)
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrlMix(this.$route.query.category)
-      } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendSubCategoryUrlMix(
-          this.$route.query.subcategory,
-          this.categorias,
-          this.subcategories
-        )
-      } else if (
-        this.$route.query &&
-        this.$route.query.tagId &&
-        this.$route.query.tagName
-      ) {
-        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-      } else if (this.$route.fullPath == '/') {
-        this.allCategories()
-      }
     },
   },
 }

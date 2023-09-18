@@ -4,14 +4,16 @@
       <div class="content-items-categorias-text">
         <p class="text-categorias" @click="clear">Catálogo</p>
         <p
+          v-if="nameCategoryHeader"
           class="text-categorias-select"
-          v-if="this.nameCategoryHeader"
           @click="breadcrumbsSendCategory(nameCategoryHeader)"
         >
-          > {{ this.nameCategoryHeader }}
+          >
+          {{ nameCategoryHeader }}
         </p>
-        <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-          > {{ this.nameSubCategoryHeader }}
+        <p v-if="nameSubCategoryHeader" class="text-categorias-select">
+          >
+          {{ nameSubCategoryHeader }}
         </p>
       </div>
       <div class="content-item">
@@ -26,6 +28,9 @@
                 <template v-slot:categorias>
                   <li
                     class="text-categoria"
+                    :class="
+                      categoria.id == indexSelect ? 'text-categoria-active' : ''
+                    "
                     @click="
                       sendCategory(
                         categoria,
@@ -34,31 +39,28 @@
                         (ref = false)
                       )
                     "
-                    :class="
-                      categoria.id == indexSelect ? 'text-categoria-active' : ''
-                    "
                   >
                     {{ categoria.nombre_categoria_producto }}
                   </li>
                 </template>
-                <template v-slot:subcategorias
-                  ><template>
+                <template v-slot:subcategorias>
+                  <template>
                     <div v-for="(subcategory, key) in subcategories" :key="key">
                       <li
                         v-if="subcategory.categoria == categoria.id"
-                        @click="SendSubCategory(subcategory.id)"
                         class="text-subcategoria"
                         :class="
                           subcategory.id == indexSelect2
                             ? 'text-subcategoria-active'
                             : ''
                         "
+                        @click="SendSubCategory(subcategory.id)"
                       >
                         {{ subcategory.nombre_subcategoria }}
                       </li>
                     </div>
-                  </template></template
-                >
+                  </template>
+                </template>
               </BaseAccordian>
             </div>
           </div>
@@ -70,17 +72,14 @@
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard1 :product="product"></KoProductCard1>
+              <KoProductCard1 :product="product" />
             </div>
           </div>
-          <div
-            v-if="this.fullProducts.length == 0"
-            class="content-products-empty"
-          >
+          <div v-if="fullProducts.length == 0" class="content-products-empty">
             <p>No se encontraron productos relacionados.</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="fullProducts.length > 24">
+            <div v-if="fullProducts.length > 24" class="product_pagination">
               <el-pagination
                 background
                 layout="prev, pager, next"
@@ -88,7 +87,7 @@
                 :page-size="24"
                 :current-page.sync="currentPage"
                 class="pagination"
-              ></el-pagination>
+              />
             </div>
           </div>
         </div>
@@ -102,56 +101,21 @@ import KoProductCard1 from '../template5/_productcard/Ko-ProductCard-1'
 import BaseAccordian from '../headers/_order1/_AccordionList'
 import filterProducts from '../../mixins/filterProducts'
 export default {
+  name: 'Ko5ProductList',
   components: {
     KoProductCard1,
     BaseAccordian,
   },
-  props: {
-    dataStore: Object,
-    fullProducts: {},
-  },
   mixins: [filterProducts],
-  name: 'Ko6-ProductList-1',
-  mounted() {
-    if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrlMix(this.$route.query.category)
-    } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendSubCategoryUrlMix(
-        this.$route.query.subcategory,
-        this.categorias,
-        this.subcategories
-      )
-    } else if (
-      this.$route.query &&
-      this.$route.query.tagId &&
-      this.$route.query.tagName
-    ) {
-      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-    } else if (this.$route.fullPath == '/') {
-      this.allCategories()
-    }
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
-    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: this.nameCategoryHeader,
-      })
-    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      let filtradoSubCategory = this.subcategories.find(
-        (element) => element.nombre_subcategoria == this.nameSubCategoryHeader
-      )
-      if (filtradoSubCategory) {
-        this.categorias.find(
-          (element) => element.id == filtradoSubCategory.categoria
-        )
-        this.$store.commit('products/FILTER_BY', {
-          type: ['subcategory'],
-          data: filtradoSubCategory.id,
-        })
-      }
-    }
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -199,6 +163,90 @@ export default {
     previousPage() {
       return this.$store.state.previousPage
     },
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct2(value)
+    },
+    currentPage() {
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+      window.scrollBy(0, -3300)
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage
+      }
+    },
+    nameCategoryHeader(value) {
+      return value
+    },
+    nameSubCategoryHeader(value) {
+      return value
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      if (this.$route.query && this.$route.query.category) {
+        this.sendCategoryUrlMix(this.$route.query.category)
+      } else if (this.$route.query && this.$route.query.subcategory) {
+        this.SendSubCategoryUrlMix(
+          this.$route.query.subcategory,
+          this.categorias,
+          this.subcategories
+        )
+      } else if (
+        this.$route.query &&
+        this.$route.query.tagId &&
+        this.$route.query.tagName
+      ) {
+        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
+      } else if (this.$route.fullPath == '/') {
+        this.allCategories()
+      }
+    },
+    searchValue(value) {
+      this.SearchProduct2(value)
+    },
+  },
+  mounted() {
+    if (this.$route.query && this.$route.query.category) {
+      this.sendCategoryUrlMix(this.$route.query.category)
+    } else if (this.$route.query && this.$route.query.subcategory) {
+      this.SendSubCategoryUrlMix(
+        this.$route.query.subcategory,
+        this.categorias,
+        this.subcategories
+      )
+    } else if (
+      this.$route.query &&
+      this.$route.query.tagId &&
+      this.$route.query.tagName
+    ) {
+      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
+    } else if (this.$route.fullPath == '/') {
+      this.allCategories()
+    }
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
+    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
+      this.$store.commit('products/FILTER_BY', {
+        type: ['category'],
+        data: this.nameCategoryHeader,
+      })
+    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
+      let filtradoSubCategory = this.subcategories.find(
+        (element) => element.nombre_subcategoria == this.nameSubCategoryHeader
+      )
+      if (filtradoSubCategory) {
+        this.categorias.find(
+          (element) => element.id == filtradoSubCategory.categoria
+        )
+        this.$store.commit('products/FILTER_BY', {
+          type: ['subcategory'],
+          data: filtradoSubCategory.id,
+        })
+      }
+    }
   },
   methods: {
     SearchProduct2(search) {
@@ -278,49 +326,6 @@ export default {
       })
       this.$emit('clear')
       this.nameCategory = ''
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct2(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
-      window.scrollBy(0, -3300)
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrlMix(this.$route.query.category)
-      } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendSubCategoryUrlMix(
-          this.$route.query.subcategory,
-          this.categorias,
-          this.subcategories
-        )
-      } else if (
-        this.$route.query &&
-        this.$route.query.tagId &&
-        this.$route.query.tagName
-      ) {
-        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-      } else if (this.$route.fullPath == '/') {
-        this.allCategories()
-      }
-    },
-    searchValue(value) {
-      this.SearchProduct2(value)
     },
   },
 }

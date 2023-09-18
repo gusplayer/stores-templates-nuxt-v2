@@ -1,92 +1,70 @@
 <template>
   <div v-if="settingByTemplate11">
     <client-only>
-      <Ko11-carousel
+      <K011-carousel
+        v-if="settingByTemplate11?.banner?.visible"
         id="kCarouselX"
-        v-bind="componentsProps"
         :key="bannerRendering"
-        v-if="
-          settingByTemplate11 &&
-          settingByTemplate11.banner &&
-          settingByTemplate11.banner.visible
-        "
+        v-bind="componentsProps"
       />
     </client-only>
-    <Ko11-section
+    <K011-section
+      v-if="settingByTemplate11?.section?.visible"
       id="kSectionX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate11 &&
-        settingByTemplate11.section &&
-        settingByTemplate11.section.visible
-      "
     />
-    <Ko11-trendingProductHoko
+    <K011-trendingProductHoko
+      v-if="settingByTemplate11?.trending?.visible && dataHoko?.statehoko == 1"
       id="kTredingX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate11 &&
-        settingByTemplate11.trending &&
-        settingByTemplate11.trending.visible == true &&
-        dataHoko &&
-        dataHoko.statehoko == 1
-      "
     />
-    <Ko11-trendingProduct
+    <K011-trendingProduct
+      v-if="settingByTemplate11?.trending?.visible && fullProducts?.length > 0"
       id="kTredingX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate11 &&
-        settingByTemplate11.trending &&
-        settingByTemplate11.trending.visible == true &&
-        this.fullProducts.length > 0
-      "
     />
     <client-only>
-      <Ko11-parallax
+      <K011-parallax
+        v-if="settingByTemplate11?.parallax?.visible"
         id="kParallaxX"
         v-bind="componentsProps"
-        v-if="
-          settingByTemplate11 &&
-          settingByTemplate11.parallax &&
-          settingByTemplate11.parallax.visible
-        "
       />
     </client-only>
-    <Ko11-listTrending
+    <K011-listTrending
+      v-if="dataHoko?.length == 0 || dataHoko?.statehoko == 0"
       v-bind="componentsProps"
-      v-if="dataHoko.length == 0 || dataHoko.statehoko == 0"
     />
-    <Ko11-information
+    <K011-information
+      v-if="settingByTemplate11?.information?.visible"
       id="kInformationX"
       v-bind="componentsProps"
-      v-if="
-        settingByTemplate11 &&
-        settingByTemplate11.information &&
-        settingByTemplate11.information.visible
-      "
     />
-    <Ko11-blog
+    <K011-blog
+      v-if="settingByTemplate11?.blog?.visible && listArticulos?.length > 0"
       id="kBlogX"
       v-bind="componentsProps"
-      v-show="listArticulos.length > 0"
-      v-if="
-        settingByTemplate11 &&
-        settingByTemplate11.blog &&
-        settingByTemplate11.blog.visible
-      "
     />
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
-  name: 'Ko-template11',
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+  name: 'KoTemplate11',
+  components: {
+    K011Carousel: () => import('@/components/template11/Ko11-carousel.vue'),
+    K011Section: () => import('@/components/template11/Ko11-section.vue'),
+    K011TrendingProduct: () =>
+      import('@/components/template11/Ko11-trendingProduct.vue'),
+    K011TrendingProductHoko: () =>
+      import('@/components/template11/Ko11-trendingProductHoko.vue'),
+    K011Parallax: () => import('@/components/template11/Ko11-parallax.vue'),
+    K011ListTrending: () =>
+      import('@/components/template11/Ko11-listTrending.vue'),
+    K011Information: () =>
+      import('@/components/template11/Ko11-information.vue'),
+    K011Blog: () => import('@/components/template11/Ko11-blog.vue'),
   },
+  layout: 'default',
   data() {
     return {
       bannerRendering: 0,
@@ -125,6 +103,10 @@ export default {
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
   methods: {
     addEventListenerTemplate(e) {
       if (
@@ -152,7 +134,7 @@ export default {
             case 'footer':
               this.moverseA('kBlogX')
               break
-            case 'newsLetter':
+            case 'newsletter':
               this.moverseA('kBlogX')
               break
             case 'banner':
@@ -161,10 +143,10 @@ export default {
             case 'section':
               this.moverseA('kSectionX')
               break
-            case 'treding':
+            case 'trending':
               this.moverseA('kTredingX')
               break
-            case 'card':
+            case 'cardProduct':
               this.moverseA('kTredingX')
               break
             case 'parallax':
@@ -183,7 +165,7 @@ export default {
                 })
               }
               break
-            case 'productListFilter':
+            case 'productList':
               this.$router.push({
                 path: '/productos',
               })

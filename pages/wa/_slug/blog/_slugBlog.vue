@@ -1,14 +1,16 @@
 <template>
-  <div class="w-full flex flex-col justify-center items-center" id="width">
+  <div id="width" class="w-full flex flex-col justify-center items-center">
     <KArticleWapi />
   </div>
 </template>
 
 <script>
-import KArticleWapi from '../../../../components/whatsapp/blog_page/Ko-articulo.vue'
 export default {
+  components: {
+    KArticleWapi: () =>
+      import('@/components/whatsapp/blog_page/Ko-articulo.vue'),
+  },
   layout: 'wa',
-  components: { KArticleWapi },
   mounted() {
     this.onResize()
     window.addEventListener('resize', this.onResize)

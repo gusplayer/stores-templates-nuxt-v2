@@ -4,60 +4,60 @@
     :style="[
       {
         '--font-style-1':
-          settingByTemplate15?.settingGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate15?.settingGeneral?.font ?? 'Poppins',
       },
     ]"
   >
-    <ko15-Banner
-      id="kBannerX"
-      v-bind="componentsProps"
-      :key="bannerRendering"
+    <K015-banner
       v-if="settingByTemplate15?.banner?.visible"
+      id="kBannerX"
+      :key="bannerRendering"
+      v-bind="componentsProps"
     />
-    <ko15-Categories
+    <K015-categories
+      v-if="settingByTemplate15?.categories?.visible"
       id="kCategoriesX"
       v-bind="componentsProps"
-      v-if="settingByTemplate15?.categories?.visible"
     />
-    <ko15-Content
+    <K015-content
+      v-if="settingByTemplate15?.content?.visible"
       id="kContentX"
       v-bind="componentsProps"
-      v-if="settingByTemplate15?.content?.visible"
     />
-    <ko15-productListHome
+    <K015-productListHome
+      v-if="settingByTemplate15?.listProductsHome?.visible"
       id="kListProductsHomeX"
       v-bind="componentsProps"
-      v-if="settingByTemplate15?.listProductsHome?.visible"
     />
-    <ko15-information
+    <K015-information
+      v-if="settingByTemplate15?.information?.visible"
       id="kInformationX"
       v-bind="componentsProps"
-      v-if="settingByTemplate15?.information?.visible"
     />
-    <ko15-informationLogos
+    <K015-informationLogos
+      v-if="settingByTemplate15?.informationLogos?.visible"
       id="kInformationLogosX"
       v-bind="componentsProps"
-      v-if="settingByTemplate15?.informationLogos?.visible"
     />
-    <ko15-information2
+    <K015-information2
+      v-if="settingByTemplate15?.information2?.visible"
       id="kInformation2X"
       v-bind="componentsProps"
-      v-if="settingByTemplate15?.information2?.visible"
     />
-    <ko15-listProductsOffers
+    <K015-listProductsOffers
+      v-if="settingByTemplate15?.listProductsOffers?.visible"
       id="kListProductsOffersX"
       v-bind="componentsProps"
-      v-if="settingByTemplate15?.listProductsOffers?.visible"
     />
-    <ko15-Banner2
+    <K015-banner2
+      v-if="settingByTemplate15?.banner2?.visible"
       id="kBanner2X"
       v-bind="componentsProps"
-      v-if="settingByTemplate15?.banner2?.visible"
     />
-    <Ko15-logos
+    <K015-logos
+      v-if="settingByTemplate15?.logos?.visible"
       id="kLogosX"
       v-bind="componentsProps"
-      v-if="settingByTemplate15?.logos?.visible"
     />
   </div>
 </template>
@@ -65,12 +65,25 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
-  name: 'Ko-template15',
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+  name: 'KoTemplate15',
+  components: {
+    K015Banner: () => import('@/components/template15/ko15-Banner.vue'),
+    K015Categories: () => import('@/components/template15/ko15-Categories.vue'),
+    K015Content: () => import('@/components/template15/ko15-Content.vue'),
+    K015ProductListHome: () =>
+      import('@/components/template15/ko15-productListHome.vue'),
+    K015Information: () =>
+      import('@/components/template15/ko15-information.vue'),
+    K015InformationLogos: () =>
+      import('@/components/template15/ko15-informationLogos.vue'),
+    K015Information2: () =>
+      import('@/components/template15/ko15-information2.vue'),
+    K015ListProductsOffers: () =>
+      import('@/components/template15/ko15-listProductsOffers.vue'),
+    K015Banner2: () => import('@/components/template15/ko15-Banner2.vue'),
+    K015Logos: () => import('@/components/template15/ko15-logos.vue'),
   },
+  layout: 'default',
   data() {
     return {
       bannerRendering: 0,
@@ -112,6 +125,10 @@ export default {
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
   methods: {
     addEventListenerTemplate(e) {
       if (
@@ -119,7 +136,6 @@ export default {
         e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 15) {
-          console.log(e.data.component)
           this.$store.commit('SET_CURRENTSETTING15', e.data)
           if (e.data.component == 'banner') {
             this.bannerRendering += 1
@@ -183,7 +199,7 @@ export default {
                 })
               }
               break
-            case 'productListFilter':
+            case 'listProductsFilter':
               this.$router.push({
                 path: '/productos',
               })

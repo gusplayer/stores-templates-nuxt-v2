@@ -2,14 +2,14 @@
   <figure
     class="zoom"
     :style="setBackground(idCloudinaryQuality(photo, 850, 850))"
-    v-on:mousemove="zoom"
+    @mousemove="zoom"
   >
     <img
       loading="lazy"
-      class="photo_main"
-      v-on:mouseover="activeZoom = !activeZoom"
       :src="idCloudinaryQuality(photo, 850, 850)"
+      class="photo_main"
       alt="Product Img"
+      @mouseover="activeZoom = !activeZoom"
     />
   </figure>
 </template>
@@ -17,8 +17,8 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'Ko5ZoomImgDetails',
   mixins: [idCloudinary],
-  name: 'zoomImg-details',
   props: ['photo'],
   data() {
     return {

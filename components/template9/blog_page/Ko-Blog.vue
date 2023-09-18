@@ -129,9 +129,9 @@
   </div>
 </template>
 <script>
-import KoblogCard from '../../../components/template9/_blog/blogcard'
+import KoblogCard from '../_blog/blogcard.vue'
 export default {
-  name: 'Ko-Blog',
+  name: 'Ko9Blog',
   components: {
     KoblogCard,
   },

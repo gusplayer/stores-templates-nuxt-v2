@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'productSlide-details',
+  ame: 'Ko5ProductSlideDetailsHoko',
   props: ['photos'],
   data() {
     return {

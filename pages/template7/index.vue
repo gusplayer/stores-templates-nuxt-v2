@@ -4,63 +4,62 @@
     :style="[
       {
         '--font-style-1':
-          this.settingByTemplate7?.settingGeneral?.fount_1 ?? 'David Libre',
+          settingByTemplate7?.settingGeneral?.fount_1 ?? 'David Libre',
       },
       {
         '--font-style-2':
-          this.settingByTemplate7?.settingGeneral?.fount_2 ?? 'Great Vibes',
+          settingByTemplate7?.settingGeneral?.fount_2 ?? 'Great Vibes',
       },
       {
-        '--font-style-3':
-          this.settingByTemplate7?.settingGeneral?.fount_3 ?? 'Lora',
+        '--font-style-3': settingByTemplate7?.settingGeneral?.fount_3 ?? 'Lora',
       },
     ]"
   >
-    <Ko7-ko-carousel
+    <K07-carousel
+      v-if="settingByTemplate7?.banner?.visible"
       id="kBannerX"
-      v-bind="componentsProps"
-      v-if="settingByTemplate7.banner.visible"
       :key="bannerRendering"
+      v-bind="componentsProps"
     />
-    <Ko7-Banner-Promo
+    <K07-bannerPromo
+      v-if="settingByTemplate7?.content?.visible"
       id="KOffersX"
       v-bind="componentsProps"
-      v-if="settingByTemplate7.content.visible"
     />
-    <Ko7-ProductList
+    <K07-productList
+      v-if="settingByTemplate7?.productList?.visible"
       id="KProductListX"
       v-bind="componentsProps"
-      v-if="settingByTemplate7.productList.visible"
     />
-    <Ko7-advertising
+    <K07-advertising
+      v-if="settingByTemplate7?.advertising?.visible"
       id="KAdvertisingX"
       v-bind="componentsProps"
-      v-if="settingByTemplate7.advertising.visible"
     />
-    <Ko7-gify
+    <K07-gify
+      v-if="settingByTemplate7?.ProductFavorite?.visible"
       id="KGifyX"
       v-bind="componentsProps"
-      v-if="settingByTemplate7.ProductFavorite.visible"
     />
-    <Ko7-howWeWork
+    <K07-howWeWork
+      v-if="settingByTemplate7?.howWork?.visible"
       id="KHowWork"
       v-bind="componentsProps"
-      v-if="settingByTemplate7.howWork.visible"
     />
-    <Ko7-blog
+    <K07-blog
+      v-if="listArticulos?.length > 0 && settingByTemplate7?.blog?.visible"
       id="KBlogX"
       v-bind="componentsProps"
-      v-show="listArticulos.length > 0 && settingByTemplate7.blog.visible"
     />
-    <Ko7-Newsletter
+    <K07-newsletter
+      v-if="settingByTemplate7?.newsletter?.visible"
       id="KNewsX"
       v-bind="componentsProps"
-      v-if="settingByTemplate7.newsletter.visible"
     />
-    <Ko7-wrapper
+    <K07-wrapper
+      v-if="settingByTemplate7?.contentImg?.visible"
       id="KWrapperX"
       v-bind="componentsProps"
-      v-if="settingByTemplate7.contentImg.visible"
     />
   </div>
 </template>
@@ -68,12 +67,21 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
-  name: 'Ko-template7',
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+  name: 'KoTemplate7',
+  components: {
+    K07Carousel: () =>
+      import('@/components/template7/_carouselBanner/K07-BannerCarousel.vue'),
+    K07BannerPromo: () => import('@/components/template7/K07-BannerPromo.vue'),
+    K07ProductList: () =>
+      import('@/components/template7/K07-ProductListHome.vue'),
+    K07Advertising: () => import('@/components/template7/K07-Advertising.vue'),
+    K07Gify: () => import('@/components/template7/K07-Gify.vue'),
+    K07HowWeWork: () => import('@/components/template7/K07-HowWeWork.vue'),
+    K07Blog: () => import('@/components/template7/K07-Newsletter.vue'),
+    K07Newsletter: () => import('@/components/template7/K07-Blog.vue'),
+    K07Wrapper: () => import('@/components/template7/K07-Wrapper.vue'),
   },
+  layout: 'default',
   data() {
     return {
       bannerRendering: 0,
@@ -104,6 +112,10 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
     addEventListenerTemplate(e) {
@@ -138,7 +150,7 @@ export default {
             case 'content':
               this.moverseA('KOffersX')
               break
-            case 'productlist':
+            case 'productList':
               this.moverseA('KProductListX')
               break
             case 'card':
@@ -150,7 +162,7 @@ export default {
             case 'ProductFavorite':
               this.moverseA('KGifyX')
               break
-            case 'howwork':
+            case 'howWork':
               this.moverseA('KHowWork')
               break
             case 'blog':

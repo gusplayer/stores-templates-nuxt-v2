@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-full flex justify-center items-center bg-no-repeat bg-bottom box-content bg-cover my-25 lg:my-40"
+    class="w-full h-full flex justify-center items-center bg-no-repeat bg-bottom box-content bg-cover"
     :style="`background-color: ${
       information2['--background_color_1']
     }; background-image: url(${idCloudinaryBanner(

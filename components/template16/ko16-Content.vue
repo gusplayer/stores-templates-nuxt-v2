@@ -120,13 +120,22 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko16-content',
-  props: {
-    content: Object,
-    settingGeneral: Object,
-    dataStore: Object,
-  },
+  name: 'Ko16Content',
   mixins: [idCloudinary],
+  props: {
+    content: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 <style scoped>

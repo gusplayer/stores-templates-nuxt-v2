@@ -1,4 +1,4 @@
-// paáina de los iconos https://materialdesignicons.com/
+// pagina de los iconos https://materialdesignicons.com/
 
 import Vue from 'vue'
 import 'vue-material-design-icons/styles.css'

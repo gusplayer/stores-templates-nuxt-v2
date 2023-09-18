@@ -12,8 +12,8 @@
     >
       <div class="z-auto swiper-wrapper">
         <a
-          :id="`slide${index + 1}`"
           v-for="(item, index) in banner.values"
+          :id="`slide${index + 1}`"
           :key="index"
           :href="item.url_redirect"
           class="swiper-slide w-full flex justify-center items-center z-10"
@@ -71,12 +71,18 @@
 <script>
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko16-Banner',
-  props: {
-    banner: Object,
-    settingGeneral: Object,
-  },
+  name: 'Ko16Banner',
   mixins: [idCloudinaryBanner],
+  props: {
+    banner: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       swiperOption: {

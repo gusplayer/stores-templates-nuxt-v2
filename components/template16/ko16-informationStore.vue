@@ -34,8 +34,8 @@
         </div>
       </div>
       <div
-        v-swiper:mySwiper="swiperOption"
         ref="mySwiper"
+        v-swiper:mySwiper="swiperOption"
         class="max-w-[350px] flex lg:hidden items-center justify-start"
       >
         <div class="swiper-wrapper">
@@ -75,12 +75,21 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko16-informationStore',
+  name: 'Ko16InformationStore',
   mixins: [idCloudinary],
   props: {
-    informationStore: Object,
-    settingGeneral: Object,
-    dataStore: Object,
+    informationStore: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

@@ -7,13 +7,13 @@
             <p class="txt-catalogo" @click="clear">
               {{ $t('home_catalogo') }}
             </p>
-            <p class="txt-category mx-2" v-if="this.nameCategoryHeader">/</p>
-            <p class="txt-category" v-if="this.nameCategoryHeader">
-              {{ this.nameCategoryHeader }}
+            <p v-if="nameCategoryHeader" class="txt-category mx-2">/</p>
+            <p v-if="nameCategoryHeader" class="txt-category">
+              {{ nameCategoryHeader }}
             </p>
-            <p class="txt-category mx-2" v-if="this.nameSubCategoryHeader">/</p>
-            <p class="txt-category" v-if="this.nameSubCategoryHeader">
-              {{ this.nameSubCategoryHeader }}
+            <p v-if="nameSubCategoryHeader" class="txt-category mx-2">/</p>
+            <p v-if="nameSubCategoryHeader" class="txt-category">
+              {{ nameSubCategoryHeader }}
             </p>
           </div>
           <div>
@@ -24,24 +24,21 @@
             />
           </div>
         </div>
-        <KoSearch :settingByTemplate="settingByTemplate" />
+        <KoSearch :setting-by-template="settingByTemplate" />
         <div class="content-grid-product">
           <div
-            class="card-product"
             v-for="product in filterProduct"
             :key="product.id"
+            class="card-product"
           >
-            <ProductCard :product="product" :dataStore="dataStore" />
+            <ProductCard :product="product" :data-store="dataStore" />
           </div>
         </div>
-        <div
-          v-if="this.fullProducts.length == 0"
-          class="content-products-empty"
-        >
+        <div v-if="fullProducts.length == 0" class="content-products-empty">
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
         <br />
-        <div class="wrapper-pagination" v-if="fullProducts.length > 16">
+        <div v-if="fullProducts.length > 16" class="wrapper-pagination">
           <div class="pagination-medium">
             <el-pagination
               background
@@ -61,21 +58,16 @@
 import ProductCard from '../template3/productCard/ko-productCard'
 import KoSearch from '../searchWa.vue'
 import filterProducts from '../../../mixins/filterProducts'
-import KoMenu from '../../headers/_lateralMenu/_lateralMenu/openMenuLeftWapi.vue'
+// import KoMenu from '../../headers/_lateralMenu/_lateralMenu/openMenuLeftWapi.vue'
 export default {
-  name: 'ProductListWa-3',
+  name: 'ProductListWa3',
+  components: { ProductCard, KoSearch },
+  mixins: [filterProducts],
   props: {
     dataStore: Object,
     fullProducts: {},
   },
-  mixins: [filterProducts],
-  components: { ProductCard, KoSearch, KoMenu },
-  mounted() {
-    this.getQuery()
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
-  },
+
   data() {
     return {
       search: '',
@@ -125,6 +117,43 @@ export default {
     settingByTemplate() {
       return this.$store.state.settingByTemplate
     },
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct2(value)
+    },
+    currentPage() {
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+      let timerTimeout = null
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null
+        window.scrollTo(0, 0)
+      }, 250)
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage
+      }
+    },
+    nameCategoryHeader(value) {
+      return value
+    },
+    nameSubCategoryHeader(value) {
+      return value
+    },
+    searchValue(value) {
+      this.SearchProduct2(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.getQuery()
+    },
+  },
+  mounted() {
+    this.getQuery()
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
   },
   methods: {
     openMenuLateral() {
@@ -241,37 +270,6 @@ export default {
           data: '',
         })
       }
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct2(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollTo(0, 0)
-      }, 250)
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    searchValue(value) {
-      this.SearchProduct2(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.getQuery()
     },
   },
 }
