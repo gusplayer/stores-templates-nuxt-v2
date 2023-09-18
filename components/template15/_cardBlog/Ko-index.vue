@@ -7,7 +7,7 @@
       settingByTemplate15[0].settingGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate15[0]?.settingGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate15[0]?.settingGeneral?.font ?? 'Poppins',
       },
     ]"
   >
@@ -20,10 +20,10 @@
           {{ settingByTemplate15[0].listBlogHome.title }}
         </p>
         <input
+          v-model="search"
           type="text"
           class="input-search"
           placeholder="Buscar artículos..."
-          v-model="search"
         />
       </div>
       <div class="w-full flex flex-col justify-center items-center mt-30">
@@ -37,8 +37,8 @@
           >
             <KoBlogCard
               :article="article"
-              :cardBlog="settingByTemplate15[0].cardBlog"
-              :settingGeneral="settingByTemplate15[0].settingGeneral"
+              :card-blog="settingByTemplate15[0].cardBlog"
+              :setting-general="settingByTemplate15[0].settingGeneral"
               class="giftLoad w-full h-full"
             />
           </div>
@@ -50,7 +50,7 @@
           <nuxt-link to="/" class="wrapper-logo">
             <img
               v-lazy="
-                `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+                `${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
               "
               width="150"
               class="max-w-[150px] max-h-[150px]"
@@ -61,7 +61,7 @@
             No se encontraron artículos relacionados
           </p>
         </div>
-        <div class="mt-10 product_pagination" v-if="filteredList.length > 12">
+        <div v-if="filteredList.length > 12" class="mt-10 product_pagination">
           <el-pagination
             background
             layout="prev, pager, next"
@@ -77,7 +77,7 @@
 </template>
 <script>
 export default {
-  name: 'Ko15-Blog',
+  name: 'Ko15Blog',
   components: {
     KoBlogCard: () => import('./blogCard'),
   },

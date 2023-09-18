@@ -4,7 +4,6 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
   components: {
     K05Blog: () => import('../../components/blog/Ko-Blog'),
     K07Blog: () => import('../../components/template7/blog_page/Ko-Blog'),
@@ -15,6 +14,7 @@ export default {
     K14Blog: () => import('../../components/template14/_cardBlog/Ko-index.vue'),
     K15Blog: () => import('../../components/template15/_cardBlog/Ko-index.vue'),
   },
+  layout: 'default',
   data() {
     return {
       componentMapping: {
@@ -28,6 +28,16 @@ export default {
         13: 'K13Blog',
         14: 'K14Blog',
         15: 'K15Blog',
+      },
+      templateMapping: {
+        9: 'SET_CURRENTSETTING09',
+        7: 'SET_CURRENTSETTING07',
+        11: 'SET_CURRENTSETTING11',
+        10: 'SET_CURRENTSETTING10',
+        13: 'SET_CURRENTSETTING13',
+        14: 'SET_CURRENTSETTING14',
+        15: 'SET_CURRENTSETTING15',
+        // 16: 'SET_CURRENTSETTING15',
       },
     }
   },
@@ -47,6 +57,7 @@ export default {
     ]),
     indexTemplate() {
       let productListComponent = ''
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)]
       }
@@ -109,6 +120,34 @@ export default {
               },
             ]
           : null,
+      }
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenerTemplate)
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
+  methods: {
+    addEventListenerTemplate(e) {
+      if (
+        e.origin.includes('https://panel.komercia.co') ||
+        e.origin.includes('http://localhost:8080')
+      ) {
+        if (e && e.data && e.data.component) {
+          const template = e.data.template
+          // eslint-disable-next-line no-prototype-builtins
+          if (this.templateMapping.hasOwnProperty(template)) {
+            const commitAction = this.templateMapping[template]
+            this.$store.commit(commitAction, e.data)
+          }
+        } else if (e && e.data && e.data.returnHome == true) {
+          this.$router.push({
+            path: '/',
+          })
+        }
       }
     },
   },

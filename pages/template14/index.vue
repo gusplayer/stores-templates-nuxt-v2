@@ -8,47 +8,46 @@
       },
     ]"
   >
-    <Ko14-information
-      id="kInformationX"
+    <K014-information
       v-if="settingByTemplate14?.information?.visible"
+      id="kInformationX"
       v-bind="componentsProps"
     />
-    <Ko14-Banner
-      id="kBannerX"
+    <K014-banner
       v-if="settingByTemplate14?.banner?.visible"
-      v-bind="componentsProps"
+      id="kBannerX"
       :key="bannerRendering"
+      v-bind="componentsProps"
     />
-    <Ko14-offers
-      id="kOffersX"
+    <K014-offers
       v-if="settingByTemplate14?.offers?.visible"
+      id="kOffersX"
       v-bind="componentsProps"
     />
-    <Ko14-productListHome
-      id="kListProductX"
+    <K014-productListHome
       v-if="settingByTemplate14?.listProductsHome?.visible"
+      id="kListProductX"
       v-bind="componentsProps"
     />
-    <Ko14-offersProduct
-      id="kOffersProductX"
+    <K014-offersProduct
       v-if="settingByTemplate14?.offersProduct?.visible"
+      id="kOffersProductX"
       v-bind="componentsProps"
     />
-    <Ko14-listBlogHome
-      id="kListBlogX"
+    <K014-listBlogHome
       v-if="settingByTemplate14?.listBlogHome?.visible"
+      id="kListBlogX"
       v-bind="componentsProps"
     />
-    <Ko14-Newsletter
-      id="kNewsletterX"
+    <K014-newsletter
       v-if="settingByTemplate14?.newsletter?.visible"
+      id="kNewsletterX"
       v-bind="componentsProps"
     />
-    <Ko14-logos
-      id="kLogosX"
+    <K014-logos
       v-if="settingByTemplate14?.logos?.visible"
+      id="kLogosX"
       v-bind="componentsProps"
-      :key="LogosRendering"
     />
   </div>
 </template>
@@ -56,16 +55,26 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
-  name: 'Ko-template14',
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+  name: 'KoTemplate14',
+  components: {
+    K014Information: () =>
+      import('@/components/template14/ko14-information.vue'),
+    K014Banner: () => import('@/components/template14/ko14-Banner.vue'),
+    K014Offers: () => import('@/components/template14/ko14-offers.vue'),
+    K014ProductListHome: () =>
+      import('@/components/template14/ko14-productListHome.vue'),
+    K014OffersProduct: () =>
+      import('@/components/template14/ko14-offersProduct.vue'),
+    K014ListBlogHome: () =>
+      import('@/components/template14/ko14-Newsletter.vue'),
+    K014Newsletter: () =>
+      import('@/components/template14/ko14-listBlogHome.vue'),
+    K014Logos: () => import('@/components/template14/ko14-logos.vue'),
   },
+  layout: 'default',
   data() {
     return {
       bannerRendering: 0,
-      LogosRendering: 0,
     }
   },
   computed: {
@@ -99,6 +108,10 @@ export default {
       return this.$store.state.dataHoko
     },
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
@@ -113,7 +126,7 @@ export default {
           if (e.data.component == 'banner') {
             this.bannerRendering += 1
           } else if (e.data.component == 'logos') {
-            this.LogosRendering += 1
+            this.bannerRendering += 1
           }
         } else if (
           e &&
@@ -143,9 +156,6 @@ export default {
             case 'newsletter':
               this.moverseA('kNewsletterX')
               break
-            case 'newsletter':
-              this.moverseA('kNewsletterX')
-              break
             case 'listBlogHome':
               this.moverseA('kListBlogX')
               break
@@ -171,7 +181,7 @@ export default {
                 })
               }
               break
-            case 'productListFilter':
+            case 'listProductsFilter':
               this.$router.push({
                 path: '/productos',
               })

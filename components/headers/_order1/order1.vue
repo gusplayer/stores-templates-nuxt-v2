@@ -58,7 +58,7 @@
                           >
                             <button
                               class="bg-transparent quantity_remove"
-                              v-on:click="removeQuantity(product)"
+                              @click="removeQuantity(product)"
                             >
                               <menos-icon class="icon-quantity" />
                             </button>
@@ -69,7 +69,7 @@
                             </p>
                             <button
                               class="bg-transparent quantity_add"
-                              v-on:click="addQuantity(product)"
+                              @click="addQuantity(product)"
                             >
                               <mas-icon class="icon-quantity" />
                             </button>
@@ -126,7 +126,7 @@
                     <div v-else class="price" />
                     <boteBasura-icon
                       class="icon-delete"
-                      v-on:click="deleteItemCart(index)"
+                      @click="deleteItemCart(index)"
                     />
                   </li>
                 </ul>
@@ -775,7 +775,7 @@
               : '#25D366'
           };          
           `"
-          v-on:click.prevent="setOrderWa()"
+          @click.prevent="setOrderWa()"
           style="margin-top: 15px"
         >
           <whatsapp-icon class="wp-icon" /> {{ $t('footer_finalizarCompra') }}

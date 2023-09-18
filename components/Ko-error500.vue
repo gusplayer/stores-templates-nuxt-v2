@@ -660,7 +660,7 @@
           </p>
         </div>
         <div>
-          <button @click="redirectWhatsapp()" class="btn-error">
+          <button class="btn-error" @click="redirectWhatsapp()">
             <koWhatsApp class="icon-whatsapp" />Contactar a Komercia
           </button>
         </div>
@@ -670,7 +670,7 @@
 </template>
 <script>
 export default {
-  name: 'error-500',
+  name: 'ErrorKo500',
   components: {
     koWhatsApp: () => import('../components/whatsapp/Ko-whatsApp.vue'),
   },

@@ -496,7 +496,7 @@ function normalizeComponents (to, ___) {
   })
 }
 
-function setLayoutForNextPage (to) {
+async function setLayoutForNextPage (to) {
   // Set layout
   let hasError = Boolean(this.$options.nuxt.err)
   if (this._hadError && this._dateLastError === this.$options.nuxt.dateErr) {
@@ -509,6 +509,8 @@ function setLayoutForNextPage (to) {
   if (typeof layout === 'function') {
     layout = layout(app.context)
   }
+
+  await this.loadLayout(layout)
 
   this.setLayout(layout)
 }

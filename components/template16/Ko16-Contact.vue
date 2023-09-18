@@ -330,7 +330,7 @@
                       :style="`color: ${settingByTemplate16[0].contact.color_text_input}; background-color:${settingByTemplate16[0].contact.color_input}; border-color:${settingByTemplate16[0].contact.color_text};`"
                       :placeholder="$t('contact_emailPlacer')"
                     />
-                    <span class="text-12 text-red-500 ml-5" v-show="errors[0]">
+                    <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
                       {{ errors[0] }}
                     </span>
                   </template>
@@ -353,7 +353,7 @@
                     :style="`color: ${settingByTemplate16[0].contact.color_text_input}; background-color:${settingByTemplate16[0].contact.color_input}; border-color:${settingByTemplate16[0].contact.color_text};`"
                     :placeholder="$t('contact_mensalePlacer')"
                   ></textarea>
-                  <span class="text-12 text-red-500 ml-5" v-show="errors[0]">
+                  <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
                     {{ errors[0] }}
                   </span>
                 </template>
@@ -378,7 +378,7 @@
                       :style="`color: ${settingByTemplate16[0].contact.color_text_input}; background-color:${settingByTemplate16[0].contact.color_input}; border-color:${settingByTemplate16[0].contact.color_text};`"
                       :placeholder="$t('contact_telefonoPlacer')"
                     />
-                    <span class="text-12 text-red-500 ml-5" v-show="errors[0]">
+                    <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
                       {{ errors[0] }}
                     </span>
                   </template>
@@ -408,16 +408,22 @@ import axios from 'axios'
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko16-Contact-1',
-  props: {
-    dataStore: Object,
-    settingByTemplate16: Array,
-  },
+  name: 'Ko16Contact',
   components: {
     ValidationObserver,
     ValidationProvider,
   },
   mixins: [idCloudinaryBanner],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate16: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       nombre: '',
@@ -482,12 +488,6 @@ export default {
       },
     }
   },
-  destroyed() {
-    this.nombre = ''
-    this.email = ''
-    this.numberphone = ''
-    this.comment = ''
-  },
   computed: {
     facebookPixel() {
       return this.$store.state.analytics_tagmanager
@@ -495,6 +495,24 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore?.tienda.red_facebook
+      this.links[1].link = this.dataStore?.tienda.red_twitter
+      this.links[2].link = this.dataStore?.tienda.red_instagram
+      this.links[3].link = this.dataStore?.tienda.red_youtube
+      this.links[4].link = this.dataStore?.tienda.red_tiktok
+      this.dataContact[0].dato = this.dataStore?.tienda.telefono
+      this.dataContact[1].dato = this.dataStore?.tienda.whatsapp
+      this.dataContact[2].dato = this.dataStore?.tienda.email_tienda
+    },
+  },
+  destroyed() {
+    this.nombre = ''
+    this.email = ''
+    this.numberphone = ''
+    this.comment = ''
   },
   methods: {
     submitContact() {
@@ -554,18 +572,6 @@ export default {
       this.email = ''
       this.numberphone = ''
       this.comment = ''
-    },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore?.tienda.red_facebook
-      this.links[1].link = this.dataStore?.tienda.red_twitter
-      this.links[2].link = this.dataStore?.tienda.red_instagram
-      this.links[3].link = this.dataStore?.tienda.red_youtube
-      this.links[4].link = this.dataStore?.tienda.red_tiktok
-      this.dataContact[0].dato = this.dataStore?.tienda.telefono
-      this.dataContact[1].dato = this.dataStore?.tienda.whatsapp
-      this.dataContact[2].dato = this.dataStore?.tienda.email_tienda
     },
   },
 }

@@ -1,14 +1,14 @@
-exports.ids = [160];
+exports.ids = [331];
 exports.modules = {
 
-/***/ 1005:
+/***/ 1102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=template&id=20776fb0&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=template&id=685770a6&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,30 +18,27 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/contacto.vue?vue&type=template&id=20776fb0&
+// CONCATENATED MODULE: ./pages/contacto.vue?vue&type=template&id=685770a6&
 
 // EXTERNAL MODULE: external "vuex"
-var external_vuex_ = __webpack_require__(7);
+var external_vuex_ = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var contactovue_type_script_lang_js_ = ({
-  layout: 'default',
+  name: 'KoContact',
   components: {
-    K05Contact: () => __webpack_require__.e(/* import() */ 25).then(__webpack_require__.bind(null, 1034)),
-    K07Contact: () => __webpack_require__.e(/* import() */ 14).then(__webpack_require__.bind(null, 1041)),
-    K09Contact: () => __webpack_require__.e(/* import() */ 268).then(__webpack_require__.bind(null, 1142)),
-    K10Contact: () => __webpack_require__.e(/* import() */ 243).then(__webpack_require__.bind(null, 1143)),
-    K11Contact: () => __webpack_require__.e(/* import() */ 247).then(__webpack_require__.bind(null, 1144)),
-    K13Contact: () => __webpack_require__.e(/* import() */ 15).then(__webpack_require__.bind(null, 1084)),
-    K14Contact: () => __webpack_require__.e(/* import() */ 251).then(__webpack_require__.bind(null, 1145)),
-    K15Contact: () => __webpack_require__.e(/* import() */ 22).then(__webpack_require__.bind(null, 1107)),
-    K16Contact: () => __webpack_require__.e(/* import() */ 24).then(__webpack_require__.bind(null, 1116))
+    K05Contact: () => __webpack_require__.e(/* import() */ 136).then(__webpack_require__.bind(null, 1211)),
+    K07Contact: () => __webpack_require__.e(/* import() */ 153).then(__webpack_require__.bind(null, 1227)),
+    K09Contact: () => __webpack_require__.e(/* import() */ 161).then(__webpack_require__.bind(null, 1232)),
+    K10Contact: () => __webpack_require__.e(/* import() */ 42).then(__webpack_require__.bind(null, 1134)),
+    K11Contact: () => __webpack_require__.e(/* import() */ 54).then(__webpack_require__.bind(null, 1144)),
+    K13Contact: () => __webpack_require__.e(/* import() */ 75).then(__webpack_require__.bind(null, 1162)),
+    K14Contact: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 1171)),
+    K15Contact: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 1186)),
+    K16Contact: () => __webpack_require__.e(/* import() */ 119).then(__webpack_require__.bind(null, 1197))
   },
-  mounted() {
-    window.parent.postMessage('message', '*');
-    window.addEventListener('message', this.addEventListenerTemplate);
-  },
+  layout: 'default',
   data() {
     return {
       componentMapping: {
@@ -73,6 +70,7 @@ var external_vuex_ = __webpack_require__(7);
     ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'settingByTemplate13', 'settingByTemplate14', 'settingByTemplate15', 'settingByTemplate16', 'template']),
     indexTemplate() {
       let productListComponent = '';
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)];
       }
@@ -94,6 +92,10 @@ var external_vuex_ = __webpack_require__(7);
       };
     }
   },
+  mounted() {
+    window.parent.postMessage('message', '*');
+    window.addEventListener('message', this.addEventListenerTemplate);
+  },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate);
   },
@@ -112,6 +114,7 @@ var external_vuex_ = __webpack_require__(7);
       if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
         if (e && e.data && e.data.component) {
           const template = e.data.template;
+          // eslint-disable-next-line no-prototype-builtins
           if (this.templateMapping.hasOwnProperty(template)) {
             const commitAction = this.templateMapping[template];
             this.$store.commit(commitAction, e.data);

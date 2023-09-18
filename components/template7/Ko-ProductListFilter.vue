@@ -12,17 +12,15 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate7[0]?.settingGeneral?.fount_1 ??
-            'David Libre',
+            settingByTemplate7[0]?.settingGeneral?.fount_1 ?? 'David Libre',
         },
         {
           '--font-style-2':
-            this.settingByTemplate7[0]?.settingGeneral?.fount_2 ??
-            'Great Vibes',
+            settingByTemplate7[0]?.settingGeneral?.fount_2 ?? 'Great Vibes',
         },
         {
           '--font-style-3':
-            this.settingByTemplate7[0]?.settingGeneral?.fount_3 ?? 'Lora',
+            settingByTemplate7[0]?.settingGeneral?.fount_3 ?? 'Lora',
         },
       ]"
     >
@@ -33,10 +31,7 @@
       </div>
     </div>
     <div class="content-shop-items">
-      <div
-        class="content-left"
-        v-if="this.categorias && this.categorias.length > 0"
-      >
+      <div class="content-left" v-if="categorias && categorias.length > 0">
         <div class="content-category-left">
           <button class="item-tittle">
             <p class="txt-tittles">
@@ -61,7 +56,7 @@
           <div
             class="btn-scroll"
             @click="scrollCategories(1)"
-            v-if="this.categorias.length > 7"
+            v-if="categorias.length > 7"
           >
             <FlechaUp-icon class="btn-scroll-icon" />
           </div>
@@ -89,7 +84,7 @@
           <div
             class="btn-scroll"
             @click="scrollCategories(2)"
-            v-if="this.categorias.length > 7"
+            v-if="categorias.length > 7"
           >
             <Flechadown-icon class="btn-scroll-icon" />
           </div>
@@ -104,7 +99,7 @@
           <div
             class="btn-scroll"
             @click="scrollSubCategories(1)"
-            v-if="this.selectedSubcategories.length > 7"
+            v-if="selectedSubcategories.length > 7"
           >
             <FlechaUp-icon class="btn-scroll-icon" />
           </div>
@@ -134,7 +129,7 @@
           <div
             class="btn-scroll"
             @click="scrollSubCategories(2)"
-            v-if="this.selectedSubcategories.length > 7"
+            v-if="selectedSubcategories.length > 7"
           >
             <Flechadown-icon class="btn-scroll-icon" />
           </div>
@@ -235,67 +230,59 @@
                 <div
                   class="flex flex-row justify-center"
                   v-if="
-                    this.etiqueta1 &&
-                    this.nameCategoryHeader == '' &&
-                    this.nameSubCategoryHeader == ''
+                    etiqueta1 &&
+                    nameCategoryHeader == '' &&
+                    nameSubCategoryHeader == ''
                   "
                 >
-                  <span v-if="this.etiqueta1" class="separator-breadCrumbs"
-                    >/
-                  </span>
+                  <span v-if="etiqueta1" class="separator-breadCrumbs">/ </span>
                   <p
                     class="text-categorias-select"
-                    v-if="this.etiqueta1"
+                    v-if="etiqueta1"
                     id="stateCate07"
                   >
-                    {{ this.etiqueta1 }}
+                    {{ etiqueta1 }}
                   </p>
                 </div>
                 <div v-else class="flex flex-row justify-center">
-                  <span
-                    v-if="this.nameCategoryHeader"
-                    class="separator-breadCrumbs"
+                  <span v-if="nameCategoryHeader" class="separator-breadCrumbs"
                     >/
                   </span>
                   <p
                     class="text-categorias-select"
-                    v-if="this.nameCategoryHeader"
+                    v-if="nameCategoryHeader"
                     @click="breadcrumbsSendCategory(nameCategoryHeader)"
                     id="stateCate07"
                   >
-                    {{ this.nameCategoryHeader }}
+                    {{ nameCategoryHeader }}
                   </p>
                   <span
-                    v-if="this.nameSubCategoryHeader"
+                    v-if="nameSubCategoryHeader"
                     class="separator-breadCrumbs"
                     >/
                   </span>
                   <p
                     class="text-categorias-select"
-                    v-if="this.nameSubCategoryHeader"
+                    v-if="nameSubCategoryHeader"
                     id="stateSubCate"
                   >
-                    {{ this.nameSubCategoryHeader }}
+                    {{ nameSubCategoryHeader }}
                   </p>
-                  <span v-if="this.etiqueta1" class="separator-breadCrumbs"
-                    >/
-                  </span>
+                  <span v-if="etiqueta1" class="separator-breadCrumbs">/ </span>
                   <p
                     class="text-categorias-select"
-                    v-if="this.etiqueta1"
+                    v-if="etiqueta1"
                     id="stateSubCate"
                   >
-                    {{ this.etiqueta1 }}
+                    {{ etiqueta1 }}
                   </p>
-                  <span v-if="this.etiqueta2" class="separator-breadCrumbs"
-                    >/
-                  </span>
+                  <span v-if="etiqueta2" class="separator-breadCrumbs">/ </span>
                   <p
                     class="text-categorias-select"
-                    v-if="this.etiqueta2"
+                    v-if="etiqueta2"
                     id="stateSubCate"
                   >
-                    {{ this.etiqueta2 }}
+                    {{ etiqueta2 }}
                   </p>
                 </div>
               </div>
@@ -425,8 +412,8 @@
                     class="content-products"
                   >
                     <KoProductCardFilter
-                      :product="product"
                       v-if="!showInList"
+                      :product="product"
                       class="product-nolist"
                       :settingGeneral="settingByTemplate7[0].settingGeneral"
                       :settingKProdutCard="
@@ -434,13 +421,13 @@
                       "
                     />
                     <KoProductCardFilerList
-                      :product="product"
                       v-if="showInList"
+                      :product="product"
                     />
                   </div>
                 </div>
                 <div
-                  v-if="this.fullProducts.length == 0"
+                  v-if="fullProducts.length == 0"
                   class="content-products-empty"
                 >
                   <div class="header-content-logo">
@@ -484,6 +471,7 @@ import KoProductCardFilter from './_productcard/ProductCard'
 import KoProductCardFilerList from './_productcard/ProductCardFilterList'
 import filterProducts from '../../mixins/filterProducts'
 export default {
+  name: 'K07ProductListFilter',
   components: {
     KoProductCardFilter,
     KoProductCardFilerList,
@@ -495,7 +483,6 @@ export default {
     allTags: Array,
   },
   mixins: [filterProducts],
-  name: 'Ko7-ProductList-Filter',
   mounted() {
     this.setOptionShipping()
     if (

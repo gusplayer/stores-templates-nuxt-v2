@@ -1,16 +1,16 @@
 <template>
-  <div class="wrapper-ProductFavoritos" v-if="dataProductFavorite.length">
+  <div v-if="dataProductFavorite.length" class="wrapper-ProductFavoritos">
     <div class="content-title-ProductFavoritos">
       <p class="title-ProductFavoritos">{{ $t('home_destacados') }}</p>
     </div>
-    <KoSwipper :products="dataProductFavorite"></KoSwipper>
+    <KoSwipper :products="dataProductFavorite" />
   </div>
 </template>
 
 <script>
 import KoSwipper from './_productofavorito/productSlide'
 export default {
-  name: 'Ko5-ProductFavoritos',
+  name: 'Ko5ProductFavoritos',
   components: {
     KoSwipper,
   },

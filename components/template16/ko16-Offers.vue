@@ -84,13 +84,22 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko16-Offers',
-  props: {
-    offers: Object,
-    settingGeneral: Object,
-    dataStore: Object,
-  },
+  name: 'Ko16Offers',
   mixins: [idCloudinary],
+  props: {
+    offers: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       countdown: {
@@ -114,6 +123,12 @@ export default {
     },
     seconds() {
       return this.countdown.seconds
+    },
+  },
+  watch: {
+    'offers.values'() {
+      this.calculateCountdown()
+      setInterval(this.calculateCountdown, 1000)
     },
   },
   mounted() {
@@ -141,12 +156,6 @@ export default {
           (timeRemaining % (1000 * 60)) / 1000
         )
       }
-    },
-  },
-  watch: {
-    'offers.values'() {
-      this.calculateCountdown()
-      setInterval(this.calculateCountdown, 1000)
     },
   },
 }

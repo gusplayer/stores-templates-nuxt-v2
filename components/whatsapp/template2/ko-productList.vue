@@ -65,12 +65,13 @@ import filterProducts from '../../../mixins/filterProducts'
 import KoMenu from '../../headers/_lateralMenu/_lateralMenu/openMenuLeftWapi.vue'
 export default {
   name: 'ProductGridWa-2',
+  components: { ProductCard, KoSearch, KoMenu },
+  mixins: [filterProducts],
   props: {
     dataStore: Object,
     fullProducts: {},
   },
-  mixins: [filterProducts],
-  components: { ProductCard, KoSearch, KoMenu },
+
   mounted() {
     this.getQuery()
     if (this.previousPage) {

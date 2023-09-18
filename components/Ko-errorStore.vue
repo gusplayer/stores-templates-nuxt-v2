@@ -691,7 +691,7 @@
 </template>
 <script>
 export default {
-  name: 'error-noStoreFound',
+  name: 'NoStoreFound',
   components: {
     koWhatsApp: () => import('../components/whatsapp/Ko-whatsApp.vue'),
   },

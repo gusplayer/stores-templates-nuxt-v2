@@ -14,10 +14,8 @@
               <figure class="content-imge">
                 <img
                   v-if="article.imagen_principal_url"
+                  v-lazy="idCloudinary(article.imagen_principal_url, 550, 550)"
                   class="images"
-                  v-lazy="
-                    idCloudinary(this.article.imagen_principal_url, 550, 550)
-                  "
                   alt="right-banner"
                 />
                 <div v-else class="empty"></div>
@@ -34,13 +32,13 @@
             <div class="overlay-top">
               <div class="text-tittle">
                 <p class="txt-day">
-                  {{ this.dayCreate }}
+                  {{ dayCreate }}
                 </p>
                 <p class="txt-month">
-                  {{ this.nameMonth }}
+                  {{ nameMonth }}
                 </p>
                 <p class="txt-month">
-                  {{ this.yearUpdate }}
+                  {{ yearUpdate }}
                 </p>
               </div>
             </div>
@@ -53,10 +51,10 @@
                 path: `/blog/` + article.slug,
                 query: { idBlog: article.id },
               }"
+              v-if="article.titulo && article.titulo.length > 63"
               class="txt-tituloart"
-              v-if="this.article.titulo && this.article.titulo.length > 63"
             >
-              {{ `${this.article.titulo.slice(0, 63)}...` }}</nuxt-link
+              {{ `${article.titulo.slice(0, 63)}...` }}</nuxt-link
             >
             <nuxt-link
               :to="{
@@ -66,31 +64,31 @@
               class="txt-tituloart"
               v-else
             >
-              {{ `${this.article.titulo.slice(0, 63)}` }}</nuxt-link
+              {{ `${article.titulo.slice(0, 63)}` }}</nuxt-link
             >
           </div>
 
           <div class="summary-article">
             <p
-              v-if="this.article.resumen && this.article.resumen.length > 175"
+              v-if="article.resumen && article.resumen.length > 175"
               class="subtext"
             >
-              {{ `${this.article.resumen.slice(0, 175)}...` }}
+              {{ `${article.resumen.slice(0, 175)}...` }}
             </p>
             <p v-else class="subtext">
-              {{ `${this.article.resumen.slice(0, 175)}` }}
+              {{ `${article.resumen.slice(0, 175)}` }}
             </p>
           </div>
           <div class="content-autor">
             <p class="text-autor">
               <span class="flex-shrink-0 mx-1">
                 <img
-                  class="h-30 w-30 rounded-full mr-4"
                   v-lazy="`${this.$store.state.urlKomercia}/users/user.jpg`"
+                  class="h-30 w-30 rounded-full mr-4"
                   alt=""
                 />
               </span>
-              {{ this.article.autor }}
+              {{ article.autor }}
             </p>
           </div>
         </div>
@@ -102,56 +100,9 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'KoProductCard5',
   mixins: [idCloudinary],
-  name: 'Ko-ProductCard-5',
   props: { article: Object },
-  mounted() {
-    if (this.article.updated_at) {
-      let domain = this.article.updated_at
-      let result = domain.split(' ')
-      this.shippingCreated = result[0]
-      let data = this.shippingCreated.split('-')
-      this.yearUpdate = data[0]
-      this.dayCreate = data[2]
-      this.monthCreate = data[1]
-    }
-    if (this.monthCreate == 1) {
-      this.nameMonth = 'Ene'
-    }
-    if (this.monthCreate == 2) {
-      this.nameMonth = 'Feb'
-    }
-    if (this.monthCreate == 3) {
-      this.nameMonth = 'Mar'
-    }
-    if (this.monthCreate == 4) {
-      this.nameMonth = 'Abr'
-    }
-    if (this.monthCreate == 5) {
-      this.nameMonth = 'May'
-    }
-    if (this.monthCreate == 6) {
-      this.nameMonth = 'Jun'
-    }
-    if (this.monthCreate == 7) {
-      this.nameMonth = 'Jul'
-    }
-    if (this.monthCreate == 8) {
-      this.nameMonth = 'Ago'
-    }
-    if (this.monthCreate == 9) {
-      this.nameMonth = 'Sep'
-    }
-    if (this.monthCreate == 10) {
-      this.nameMonth = 'Oct'
-    }
-    if (this.monthCreate == 11) {
-      this.nameMonth = 'Nov'
-    }
-    if (this.monthCreate == 12) {
-      this.nameMonth = 'Dic'
-    }
-  },
   data() {
     return {
       hover: false,
@@ -167,6 +118,31 @@ export default {
     tamaño() {
       return this.article.resumen.length
     },
+  },
+  mounted() {
+    if (this.article.updated_at) {
+      const months = [
+        'Ene',
+        'Feb',
+        'Mar',
+        'Abr',
+        'May',
+        'Jun',
+        'Jul',
+        'Ago',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dic',
+      ]
+
+      const dateParts = this.article.updated_at.split(' ')[0].split('-')
+      this.yearUpdate = dateParts[0]
+      this.monthCreate = parseInt(dateParts[1])
+      this.dayCreate = dateParts[2]
+
+      this.nameMonth = months[this.monthCreate - 1]
+    }
   },
 }
 </script>

@@ -1,14 +1,14 @@
-exports.ids = [165];
+exports.ids = [336];
 exports.modules = {
 
-/***/ 1025:
+/***/ 1123:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/_slug.vue?vue&type=template&id=458ada3c&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/_slug.vue?vue&type=template&id=320527c4&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,23 +18,19 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/productosHoko/_slug.vue?vue&type=template&id=458ada3c&
+// CONCATENATED MODULE: ./pages/productosHoko/_slug.vue?vue&type=template&id=320527c4&
 
 // EXTERNAL MODULE: external "vuex"
-var external_vuex_ = __webpack_require__(7);
+var external_vuex_ = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/_slug.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   components: {
-    Ko5ProductDetailHoko: () => __webpack_require__.e(/* import() */ 18).then(__webpack_require__.bind(null, 1029)),
-    Ko9ProductDetailHoko: () => __webpack_require__.e(/* import() */ 17).then(__webpack_require__.bind(null, 1054)),
-    Ko11ProductDetailHoko: () => __webpack_require__.e(/* import() */ 192).then(__webpack_require__.bind(null, 981)),
-    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 41).then(__webpack_require__.bind(null, 976))
-  },
-  mounted() {
-    window.parent.postMessage('message', '*');
-    window.addEventListener('message', this.addEventListenerTemplate);
+    Ko5ProductDetailHoko: () => __webpack_require__.e(/* import() */ 132).then(__webpack_require__.bind(null, 1207)),
+    Ko9ProductDetailHoko: () => __webpack_require__.e(/* import() */ 165).then(__webpack_require__.bind(null, 1236)),
+    Ko11ProductDetailHoko: () => __webpack_require__.e(/* import() */ 56).then(__webpack_require__.bind(null, 1146)),
+    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1099))
   },
   data() {
     return {
@@ -55,6 +51,7 @@ var external_vuex_ = __webpack_require__(7);
     ...Object(external_vuex_["mapState"])(['dataStore', 'settingBase', 'settingByTemplate', 'settingByTemplate7', 'settingByTemplate9', 'settingByTemplate10', 'settingByTemplate11', 'template', 'dataHoko']),
     indexTemplate() {
       let productListComponent = '';
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)];
       }
@@ -92,6 +89,10 @@ var external_vuex_ = __webpack_require__(7);
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate);
+  },
+  mounted() {
+    window.parent.postMessage('message', '*');
+    window.addEventListener('message', this.addEventListenerTemplate);
   },
   methods: {
     createSettingByTemplate(settingByTemplate, property1, property2, defaultValue) {

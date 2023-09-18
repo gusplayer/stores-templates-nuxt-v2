@@ -2,17 +2,17 @@
   <div>
     <div v-if="dataStore">
       <div v-if="stateModalPwd">
-        <component v-bind="componentsProps" :is="headerTemplate" />
+        <component :is="headerTemplate" v-bind="componentsProps" />
         <nuxt />
-        <component v-bind="componentsProps" :is="footerTemplate" />
+        <component :is="footerTemplate" v-bind="componentsProps" />
         <KoFooterCountry
           v-if="dataStore.tienda.template != 99"
-          :dataStore="dataStore"
-          :valueWa="false"
+          :data-store="dataStore"
+          :value-wa="false"
         />
         <div
-          class="wrapper-whatsapp"
           v-if="dataStore.tienda.whatsapp"
+          class="wrapper-whatsapp"
           @click="redirectWhatsApp()"
         >
           <koWhatsApp class="button-whatsapp" />
@@ -25,11 +25,11 @@
           </span>
         </div>
         <div
-          id="modalNotificacion"
           v-if="
             dataStore.tienda.estado == 0 ||
             !expiredDate(dataStore.tienda.fecha_expiracion)
           "
+          id="modalNotificacion"
           class="w-full h-screen fixed top-0 flex justify-center items-center z-100"
         >
           <div
@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <koModalSecurity :dataStore="dataStore" v-else />
+      <koModalSecurity v-else :data-store="dataStore" />
     </div>
     <div v-else>
       <koTiendaError />
@@ -75,78 +75,76 @@
 import { mapState } from 'vuex'
 import expiredDate from '@/mixins/expiredDate'
 export default {
-  name: 'default',
+  name: 'LayoutDefault',
   components: {
     // HEADER
-    KoHeader1: () => import('../components/headers/header1/Ko-Header-1'),
-    KoHeader2: () => import('../components/headers/header2/Ko-Header-2'),
-    KoHeader3: () => import('../components/headers/header3/Ko-Header-3'),
-    KoHeader4: () => import('../components/headers/header4/Ko-Header-4'),
-    KoHeader5: () => import('../components/headers/header5/Ko-Header-5'),
-    KoHeader6: () => import('../components/headers/header6/Ko-Header-6'),
-    KoHeader7: () => import('../components/headers/header7/Ko-Header-7'),
-    KoHeader8: () => import('../components/headers/header8/Ko-Header-8'),
-    KoHeader9: () => import('../components/headers/header9/Ko-Header-9'),
-    KoHeader10: () => import('../components/headers/Ko15_header/Ko-Header-10'),
-    KoHeader11: () => import('../components/headers/Ko16_header/Ko-Header-11'),
+    KoHeader1: () => import('../components/headers/header1/Ko-Header-1.vue'),
+    KoHeader2: () => import('../components/headers/header2/Ko-Header-2.vue'),
+    KoHeader3: () => import('../components/headers/header3/Ko-Header-3.vue'),
+    KoHeader4: () => import('../components/headers/header4/Ko-Header-4.vue'),
+    KoHeader5: () => import('../components/headers/header5/Ko-Header-5.vue'),
+    KoHeader6: () => import('../components/headers/header6/Ko-Header-6.vue'),
+    KoHeader7: () => import('../components/headers/header7/Ko-Header-7.vue'),
+    KoHeader8: () => import('../components/headers/header8/Ko-Header-8.vue'),
+    KoHeader9: () => import('../components/headers/header9/Ko-Header-9.vue'),
+    KoHeader10: () =>
+      import('../components/headers/Ko15_header/Ko-Header-10.vue'),
+    KoHeader11: () =>
+      import('../components/headers/Ko16_header/Ko-Header-11.vue'),
     // FOOTER
-    KoFooter1: () => import('../components/footers/footer1/Ko-Footer-1'),
-    KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2'),
-    KoFooter4: () => import('../components/footers/footer4/Ko-Footer-4'),
-    KoFooter5: () => import('../components/footers/footer5/Ko-Footer-5'),
-    KoFooter6: () => import('../components/footers/footer6/Ko-Footer-6'),
-    KoFooter7: () => import('../components/footers/footer7/Ko-Footer-7'),
-    KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8'),
-    KoFooter9: () => import('../components/footers/K14_footer9/Ko-Footer-9'),
-    KoFooter10: () => import('../components/footers/K15_footer10/Ko-Footer-10'),
+    KoFooter1: () => import('../components/footers/footer1/Ko-Footer-1.vue'),
+    KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2.vue'),
+    KoFooter4: () => import('../components/footers/footer4/Ko-Footer-4.vue'),
+    KoFooter5: () => import('../components/footers/footer5/Ko-Footer-5.vue'),
+    KoFooter6: () => import('../components/footers/footer6/Ko-Footer-6.vue'),
+    KoFooter7: () => import('../components/footers/footer7/Ko-Footer-7.vue'),
+    KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8.vue'),
+    KoFooter9: () =>
+      import('../components/footers/K14_footer9/Ko-Footer-9.vue'),
+    KoFooter10: () =>
+      import('../components/footers/K15_footer10/Ko-Footer-10.vue'),
+    KoFooter11: () =>
+      import('../components/footers/K16_footer11/Ko-Footer-11.vue'),
     // OTROS
     KoFooterCountry: () =>
-      import('../components/footers/footer1/Ko-Footer-Country'),
-    koTiendaCerrada: () => import('../assets/img/tiendaCerrada'),
-    koTiendaError: () => import('../components/Ko-errorStore'),
+      import('../components/footers/footer1/Ko-Footer-Country.vue'),
+    koTiendaCerrada: () => import('../assets/img/tiendaCerrada.vue'),
+    koTiendaError: () => import('../components/Ko-errorStore.vue'),
     koModalSecurity: () => import('../components/modal/Ko-modal-security.vue'),
     koWhatsApp: () => import('../components/whatsapp/Ko-whatsApp.vue'),
   },
   mixins: [expiredDate],
-  beforeMount() {
-    if (this.dataStore.tienda.dominio) {
-      caches.keys().then(function (names) {
-        for (let name of names) caches.delete(name)
-      })
+  data() {
+    return {
+      headerComponentMap: {
+        3: 'KoHeader1',
+        5: 'KoHeader1',
+        6: 'KoHeader2',
+        7: 'KoHeader4',
+        8: 'KoHeader3',
+        9: 'KoHeader5',
+        10: 'KoHeader6',
+        11: 'KoHeader7',
+        13: 'KoHeader8',
+        14: 'KoHeader9',
+        15: 'KoHeader10',
+        16: 'KoHeader11',
+      },
+      footerComponentMap: {
+        3: 'KoFooter1',
+        5: 'KoFooter1',
+        6: 'KoFooter2',
+        7: 'KoFooter4',
+        8: 'KoFooter1',
+        9: 'KoFooter5',
+        10: 'KoFooter6',
+        11: 'KoFooter7',
+        13: 'KoFooter8',
+        14: 'KoFooter9',
+        15: 'KoFooter10',
+        16: 'KoFooter11',
+      },
     }
-  },
-  async mounted() {
-    // Configura y habilita el seguimiento de Facebook Pixel si está disponible
-    if (this.analytics_tagmanager?.pixel_facebook != null) {
-      this.$fb.setPixelId(this.analytics_tagmanager.pixel_facebook)
-      this.$fb.track('PageView')
-      this.$fb.enable()
-    }
-
-    // Ejecuta las tres dispatches de manera concurrente
-    await Promise.all([
-      this.$store.dispatch('GET_COOKIES'),
-      this.$store.dispatch('GET_COOKIES_PWD'),
-      this.$store.dispatch('GET_SHOPPING_CART'),
-    ])
-
-    // Borra todos los elementos del carrito y actualiza el contenido si la query 'clearCart' es 'true'
-    if (this.$route.query?.clearCart === 'true') {
-      this.$store.commit('DELETE_ALL_ITEMS_CART')
-      this.$store.commit('UPDATE_CONTENT_CART')
-    }
-
-    // Establece 'SET_OPEN_ORDER' en true si la query 'openCart' es 'true'
-    if (this.$route.query?.openCart === 'true') {
-      this.$store.commit('SET_OPEN_ORDER', true)
-    }
-
-    // Agrega un listener de mensajes
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
-  },
-  beforeDestroy() {
-    window.removeEventListener('message', this.addEventListenerTemplate)
   },
   head() {
     let tienda = this.$store.state?.dataStore?.tienda ?? ''
@@ -176,7 +174,7 @@ export default {
       12: this.settingByTemplate12?.fontFamily ?? 'Poppins',
       13: this.settingByTemplate13?.settingGeneral?.fount_1 ?? 'Roboto',
       14: this.settingByTemplate14?.settingsGeneral?.fount_1 ?? 'Poppins',
-      15: this.settingByTemplate15?.settingGeneral?.fount_1 ?? 'Poppins',
+      15: this.settingByTemplate15?.settingGeneral?.font ?? 'Poppins',
       16: this.settingByTemplate16?.settingsGeneral?.fount_1 ?? 'Poppins',
     }
 
@@ -364,37 +362,6 @@ export default {
       ],
     }
   },
-  data() {
-    return {
-      headerComponentMap: {
-        3: 'KoHeader1',
-        5: 'KoHeader1',
-        6: 'KoHeader2',
-        7: 'KoHeader4',
-        8: 'KoHeader3',
-        9: 'KoHeader5',
-        10: 'KoHeader6',
-        11: 'KoHeader7',
-        13: 'KoHeader8',
-        14: 'KoHeader9',
-        15: 'KoHeader10',
-        16: 'KoHeader11',
-      },
-      footerComponentMap: {
-        3: 'KoFooter1',
-        5: 'KoFooter1',
-        6: 'KoFooter2',
-        7: 'KoFooter4',
-        8: 'KoFooter1',
-        9: 'KoFooter5',
-        10: 'KoFooter6',
-        11: 'KoFooter7',
-        13: 'KoFooter8',
-        14: 'KoFooter9',
-        15: 'KoFooter10',
-      },
-    }
-  },
   computed: {
     ...mapState([
       'template',
@@ -532,6 +499,46 @@ export default {
       },
     },
   },
+  beforeMount() {
+    if (this.dataStore.tienda.dominio) {
+      caches.keys().then(function (names) {
+        for (let name of names) caches.delete(name)
+      })
+    }
+  },
+  async mounted() {
+    // Configura y habilita el seguimiento de Facebook Pixel si está disponible
+    if (this.analytics_tagmanager?.pixel_facebook != null) {
+      this.$fb.setPixelId(this.analytics_tagmanager.pixel_facebook)
+      this.$fb.track('PageView')
+      this.$fb.enable()
+    }
+
+    // Ejecuta las tres dispatches de manera concurrente
+    await Promise.all([
+      this.$store.dispatch('GET_COOKIES'),
+      this.$store.dispatch('GET_COOKIES_PWD'),
+      this.$store.dispatch('GET_SHOPPING_CART'),
+    ])
+
+    // Borra todos los elementos del carrito y actualiza el contenido si la query 'clearCart' es 'true'
+    if (this.$route.query?.clearCart === 'true') {
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
+      this.$store.commit('UPDATE_CONTENT_CART')
+    }
+
+    // Establece 'SET_OPEN_ORDER' en true si la query 'openCart' es 'true'
+    if (this.$route.query?.openCart === 'true') {
+      this.$store.commit('SET_OPEN_ORDER', true)
+    }
+
+    // Agrega un listener de mensajes
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenerTemplate)
+  },
   methods: {
     mobileCheck() {
       window.mobilecheck = function () {
@@ -555,7 +562,10 @@ export default {
       let phone_number_whatsapp = this.dataStore.tienda.whatsapp
       if (phone_number_whatsapp.charAt(0) === '+') {
         phone_number_whatsapp = phone_number_whatsapp.slice(1)
+      } else {
+        phone_number_whatsapp = `57${phone_number_whatsapp}`
       }
+
       const baseUrl = 'https://wa.me/'
       const text = this.constructMessageText()
 

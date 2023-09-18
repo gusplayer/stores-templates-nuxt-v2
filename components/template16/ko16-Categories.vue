@@ -13,11 +13,11 @@
         {{ categories.title }}
       </p>
 
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full">
+      <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="w-full">
         <div class="swiper-wrapper w-full">
           <a
-            :id="`slide${index + 1}`"
             v-for="(item, index) in categories.values"
+            :id="`slide${index + 1}`"
             :key="index"
             :href="item.url_redirect"
             class="swiper-slide w-full"
@@ -53,7 +53,7 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko16-categories',
+  name: 'Ko16Categories',
   mixins: [idCloudinary],
   props: {
     categories: {

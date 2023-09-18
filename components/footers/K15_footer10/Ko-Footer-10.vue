@@ -5,7 +5,7 @@
       settingByTemplate15[0].settingGeneral,
       {
         '--font-style-1':
-          settingByTemplate15[0].settingGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate15[0].settingGeneral?.font ?? 'Poppins',
       },
       {
         'background-color': settingByTemplate15[0]?.footer?.visibleImg
@@ -15,12 +15,16 @@
     ]"
   >
     <div
-      class="w-full h-full flex justify-center items-center bg-no-repeat bg-cover bg-bottom box-content"
-      :style="`background-image: url(${idCloudinaryBanner(
-        settingByTemplate15[0].footer.imgBg,
-        'banner'
-      )});`"
       ref="background"
+      class="w-full h-full flex justify-center items-center bg-no-repeat bg-cover bg-bottom box-content"
+      :style="`${
+        settingByTemplate15[0]?.footer?.visibleImg
+          ? `background-image: url(${idCloudinaryBanner(
+              settingByTemplate15[0].footer.imgBg,
+              'banner'
+            )});`
+          : `background-color: ${settingByTemplate15[0].footer['--background_color_1']}`
+      }`"
     >
       <div class="w-full flex flex-col justify-center items-center">
         <KoNewsLetter :settingByTemplate15="settingByTemplate15" />

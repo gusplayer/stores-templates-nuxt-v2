@@ -5,16 +5,16 @@
   >
     <div
       class="container"
-      @mouseover="hover = true"
-      @mouseleave="hover = false"
       :style="[
         {
-          '--font-style-1': this.settingGeneral?.fount_1 ?? 'Poppins',
+          '--font-style-1': settingGeneral?.fount_1 ?? 'Poppins',
         },
         {
-          '--font-style-1': this.currentsettingGeneral?.fount_1 ?? 'Poppins',
+          '--font-style-1': currentsettingGeneral?.fount_1 ?? 'Poppins',
         },
       ]"
+      @mouseover="hover = true"
+      @mouseleave="hover = false"
     >
       <nuxt-link
         :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
@@ -24,8 +24,8 @@
           <figure class="content-imge">
             <img
               v-if="article.imagen_principal_url"
+              v-lazy="idCloudinary(article.imagen_principal_url, 550, 550)"
               class="images"
-              v-lazy="idCloudinary(this.article.imagen_principal_url, 550, 550)"
               alt="right-banner"
             />
 
@@ -40,10 +40,10 @@
         <div class="overlay-top">
           <div class="text-tittle">
             <p class="txt-day">
-              {{ this.dayCreate }}
+              {{ dayCreate }}
             </p>
             <p class="txt-month">
-              {{ this.nameMonth }}
+              {{ nameMonth }}
             </p>
           </div>
         </div>
@@ -56,7 +56,7 @@
           <div class="content-bottom-titulo">
             <div class="text-cart">
               <p class="w-full txt-tituloart">
-                {{ this.article.titulo }}
+                {{ article.titulo }}
               </p>
             </div>
           </div>
@@ -76,8 +76,8 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'Ko7BlogCard',
   mixins: [idCloudinary],
-  name: 'Ko-Blogcard',
   props: {
     article: Object,
     blog: Object,
@@ -85,16 +85,7 @@ export default {
     currentblog: Object,
     currentsettingGeneral: Object,
   },
-  mounted() {
-    if (this.article.created_at) {
-      const [shippingCreated] = this.article.created_at.split(' ')
-      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
-      this.dayCreate = dayCreate
-      this.monthCreate = monthCreate
-      this.yearCreate = yearCreate
-    }
-    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
-  },
+
   data() {
     return {
       shippingCreated: '',
@@ -117,6 +108,16 @@ export default {
         12: 'Dic',
       },
     }
+  },
+  mounted() {
+    if (this.article.created_at) {
+      const [shippingCreated] = this.article.created_at.split(' ')
+      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
+      this.dayCreate = dayCreate
+      this.monthCreate = monthCreate
+      this.yearCreate = yearCreate
+    }
+    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
   },
 }
 </script>

@@ -6,17 +6,12 @@ import { mapState } from 'vuex'
 export default {
   components: {
     Ko5ProductDetailHoko: () =>
-      import('../../components/template5/Ko-ProductDetailHoko-1.vue'),
+      import('@/components/template5/Ko-ProductDetailHoko-1.vue'),
     Ko9ProductDetailHoko: () =>
-      import('../../components/template9/Ko-ProductDetailHoko.vue'),
+      import('@/components/template9/k09-ProductDetailHoko.vue'),
     Ko11ProductDetailHoko: () =>
-      import('../../components/template11/ko-ProductDetailHoko'),
-    KoNoDisponibleHoko: () =>
-      import('../../components/Hoko/Ko-nodisponible.vue'),
-  },
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+      import('@/components/template11/ko-ProductDetailHoko'),
+    KoNoDisponibleHoko: () => import('@/components/Hoko/Ko-nodisponible.vue'),
   },
   data() {
     return {
@@ -47,6 +42,7 @@ export default {
     ]),
     indexTemplate() {
       let productListComponent = ''
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)]
       }
@@ -105,6 +101,10 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
     createSettingByTemplate(

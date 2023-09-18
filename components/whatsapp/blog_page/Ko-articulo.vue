@@ -4,9 +4,7 @@
       <div class="crumb">
         <nuxt-link
           :to="{
-            path: this.stateWapiME
-              ? `/wa/${dataStore.tienda.id_tienda}/blog`
-              : `/`,
+            path: stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/blog` : `/`,
           }"
         >
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -17,7 +15,7 @@
         </p>
       </div>
     </div>
-    <div class="content-item-article" v-if="dataArticle">
+    <div v-if="dataArticle" class="content-item-article">
       <p class="tittle-blog">{{ dataArticle.titulo }}</p>
       <br />
       <div class="content-data-article">
@@ -36,7 +34,7 @@
         </svg>
         <p class="txt-created">{{ shippingCreated }}</p>
       </div>
-      <div class="editor" v-if="dataArticle.contenido">
+      <div v-if="dataArticle.contenido" class="editor">
         <el-tiptap
           v-model="dataArticle.contenido"
           :extensions="extensions"
@@ -60,13 +58,9 @@ import { mapState } from 'vuex'
 import extensions from '../../../mixins/elemenTiptap.vue'
 // import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'KoArticleWa',
   mixins: [extensions],
-  name: 'Ko-articulo-wa',
-  mounted() {
-    if (this.listArticulos.length) {
-      this.searchIdForSlug()
-    }
-  },
+
   data() {
     return {
       dataArticle: {},
@@ -77,30 +71,47 @@ export default {
   computed: {
     ...mapState(['dataStore', 'stateWapiME', 'listArticulos']),
   },
-  methods: {
-    async searchIdForSlug() {
-      let idBlog = this.$route.query.idBlog
-      const { data } = await this.$store.dispatch('GET_DATA_ARTICLE', {
-        idBlog: idBlog,
-        idStore: this.dataStore.tienda.id_tienda,
-      })
-      if (data) {
-        this.dataArticle = data.data
-        // this.getDataArticle()
-        if (this.dataArticle && this.dataArticle.created_at) {
-          let dateCreated = this.dataArticle.created_at
-          let resultCreated = dateCreated.split(' ')
-          this.shippingCreated = resultCreated[0]
-          let dateUpdate = this.dataArticle.updated_at
-          let resultUpdate = dateUpdate.split(' ')
-          this.shippingUpdated = resultUpdate[0]
-        }
-      }
-    },
-  },
   watch: {
     listArticulos() {
       this.searchIdForSlug()
+    },
+  },
+  mounted() {
+    if (this.listArticulos.length) {
+      this.searchIdForSlug()
+    }
+  },
+  methods: {
+    async searchIdForSlug() {
+      const idBlog = this.$route.query.idBlog
+      const idStore = this.dataStore.tienda.id_tienda
+
+      try {
+        const { data } = await this.$store.dispatch('GET_DATA_ARTICLE', {
+          idBlog: idBlog,
+          idStore: idStore,
+        })
+
+        if (data) {
+          this.dataArticle = data.data
+          this.updateShippingDates()
+        }
+      } catch (error) {
+        console.error('Error fetching article data:', error)
+      }
+    },
+    updateShippingDates() {
+      if (this.dataArticle && this.dataArticle.created_at) {
+        this.shippingCreated = this.extractDate(this.dataArticle.created_at)
+      }
+
+      if (this.dataArticle && this.dataArticle.updated_at) {
+        this.shippingUpdated = this.extractDate(this.dataArticle.updated_at)
+      }
+    },
+    extractDate(dateString) {
+      const parts = dateString.split(' ')
+      return parts[0]
     },
   },
 }

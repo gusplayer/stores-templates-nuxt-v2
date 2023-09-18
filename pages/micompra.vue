@@ -1,7 +1,7 @@
 <template>
-  <KoMicompra
+  <KoMiCompra
     v-if="orden"
-    :dataStore="dataStore"
+    :data-store="dataStore"
     :orden="orden"
     @update="setDataOrder"
   />
@@ -10,12 +10,12 @@
 <script>
 import axios from 'axios'
 import { mapState } from 'vuex'
-import KoMicompra from '../components/miCompra/Ko-miCompra-1'
+import KoMiCompra from '../components/miCompra/Ko-miCompra-1'
 
 export default {
-  name: 'K0-indexMiCompraG',
+  name: 'KoIndexMiCompra',
   components: {
-    KoMicompra,
+    KoMiCompra,
   },
   asyncData({ route, store }) {
     if (route.query.orden) {

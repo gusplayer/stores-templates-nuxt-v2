@@ -115,439 +115,27 @@ export const mutations = {
       state.settingByTemplate = value.data
     }
   },
-  SET_CURRENTSETTING09(state, value) {
-    if (value) {
-      if (value.component) {
-        switch (value.component) {
-          case 'settingGeneral':
-            state.settingByTemplate9.settingGeneral = value
-            break
-          case 'header':
-            state.settingByTemplate9.header = value
-            break
-          case 'banner':
-            state.settingByTemplate9.banner = value
-            break
-          case 'koffers':
-            state.settingByTemplate9.koffers = value
-            break
-          case 'productList':
-            state.settingByTemplate9.productList = value
-            break
-          case 'blog':
-            state.settingByTemplate9.blog = value
-            break
-          case 'wrapper':
-            state.settingByTemplate9.wrapper = value
-            break
-          case 'newsletter':
-            state.settingByTemplate9.newsletter = value
-            break
-          case 'productListFilter':
-            state.settingByTemplate9.productListFilter = value
-            break
-          case 'contact':
-            state.settingByTemplate9.contact = value
-            break
-          case 'detailsProduct':
-            state.settingByTemplate9.detailsProduct = value
-            break
-          case 'footer':
-            state.settingByTemplate9.footer = value
-            break
-          case 'cardProduct':
-            state.settingByTemplate9.cardProduct = value
-            break
-        }
-      }
-    }
-  },
-  SET_CURRENTSETTING07(state, value) {
-    if (value && value.component) {
-      switch (value.component) {
-        case 'settingGeneral':
-          state.settingByTemplate7.settingGeneral = value.setting
-          break
-        case 'header':
-          state.settingByTemplate7.header = value.setting
-          break
-        case 'banner':
-          state.settingByTemplate7.banner = value.setting
-          break
-        case 'content':
-          state.settingByTemplate7.content = value.setting
-          break
-        case 'productlist':
-          state.settingByTemplate7.productList = value.setting
-          break
-        case 'advertising':
-          state.settingByTemplate7.advertising = value.setting
-          break
-        case 'ProductFavorite':
-          state.settingByTemplate7.ProductFavorite = value.setting
-          break
-        case 'howwork':
-          state.settingByTemplate7.howWork = value.setting
-          break
-        case 'blog':
-          state.settingByTemplate7.blog = value.setting
-          break
-        case 'newsletter':
-          state.settingByTemplate7.newsletter = value.setting
-          break
-        case 'contentImg':
-          state.settingByTemplate7.contentImg = value.setting
-          break
-        case 'footer':
-          state.settingByTemplate7.footer = value.setting
-          break
-        case 'contact':
-          state.settingByTemplate7.contact = value.setting
-          break
-        case 'productListFilter':
-          state.settingByTemplate7.productListFilter = value.setting
-          break
-        case 'card':
-          state.settingByTemplate7.card = value.setting
-          break
-        case 'detailsProduct':
-          state.settingByTemplate7.detailsProduct = value.setting
-          break
-      }
-    }
-  },
-  SET_CURRENTSETTING11(state, value) {
-    if (value && value.component) {
-      switch (value.component) {
-        case 'pages':
-          state.settingByTemplate11.pages = value.setting
-          break
-        case 'settingGeneral':
-          state.settingByTemplate11.settingGeneral = value.setting
-          break
-        case 'header':
-          state.settingByTemplate11.header = value.setting
-          break
-        case 'banner':
-          state.settingByTemplate11.banner = value.setting
-          break
-        case 'section':
-          state.settingByTemplate11.section = value.setting
-          break
-        case 'treding':
-          state.settingByTemplate11.trending = value.setting
-          break
-        case 'parallax':
-          state.settingByTemplate11.parallax = value.setting
-          break
-        case 'information':
-          state.settingByTemplate11.information = value.setting
-          break
-        case 'blog':
-          state.settingByTemplate11.blog = value.setting
-          break
-        case 'newsLetter':
-          state.settingByTemplate11.newsletter = value.setting
-          break
-        case 'footer':
-          state.settingByTemplate11.footer = value.setting
-          break
-        case 'contact':
-          state.settingByTemplate11.contact = value.setting
-          break
-        case 'card':
-          state.settingByTemplate11.cardProduct = value.setting
-          break
-        case 'productListFilter':
-          state.settingByTemplate11.productList = value.setting
-          break
-        case 'detailsProduct':
-          state.settingByTemplate11.detailsProduct = value.setting
-          break
-      }
-    }
-  },
-  SET_CURRENTSETTING10(state, value) {
-    if (value && value.component) {
-      switch (value.component) {
-        case 'banner':
-          state.settingByTemplate10.banner = value.setting
-          break
-        case 'pages':
-          state.settingByTemplate10.pages = value.setting
-          break
-        case 'settingGeneral':
-          state.settingByTemplate10.settingGeneral = value.setting
-          break
-        case 'header':
-          state.settingByTemplate10.header = value.setting
-          break
-        case 'section':
-          state.settingByTemplate10.section = value.setting
-          break
-        case 'treding':
-          state.settingByTemplate10.trending = value.setting
-          break
-        case 'offers':
-          state.settingByTemplate10.offers = value.setting
-          break
-        case 'productDestacados':
-          state.settingByTemplate10.productList = value.setting
-          break
-        case 'blog':
-          state.settingByTemplate10.blog = value.setting
-          break
-        case 'footer':
-          state.settingByTemplate10.footer = value.setting
-          break
-        case 'contact':
-          state.settingByTemplate10.contact = value.setting
-          break
-        case 'productListFilter':
-          state.settingByTemplate10.productListFilter = value.setting
-          break
-        case 'card':
-          state.settingByTemplate10.cardProduct = value.setting
-          break
-        case 'detailsProduct':
-          state.settingByTemplate10.detailsProduct = value.setting
-          break
-      }
-    }
-  },
+  SET_CURRENTSETTING07: (state, value) =>
+    setCurrentSetting(state, { ...value, template: '7' }),
+  SET_CURRENTSETTING09: (state, value) =>
+    setCurrentSetting(state, { ...value, template: '9' }),
+  SET_CURRENTSETTING10: (state, value) =>
+    setCurrentSetting(state, { ...value, template: '10' }),
+  SET_CURRENTSETTING11: (state, value) =>
+    setCurrentSetting(state, { ...value, template: '11' }),
   SET_CURRENTSETTING12(state, value) {
     if (value && value.data) {
       state.settingByTemplate12 = value.data
     }
   },
-  SET_CURRENTSETTING13(state, value) {
-    if (value && value.component) {
-      switch (value.component) {
-        case 'banner':
-          state.settingByTemplate13.banner = value.setting
-          break
-        case 'cardProduct':
-          state.settingByTemplate13.cardProduct = value.setting
-          break
-        case 'contact':
-          state.settingByTemplate13.contact = value.setting
-          break
-        case 'detailsProduct':
-          state.settingByTemplate13.detailsProduct = value.setting
-          break
-        case 'footer':
-          state.settingByTemplate13.footer = value.setting
-          break
-        case 'header':
-          state.settingByTemplate13.header = value.setting
-          break
-        case 'information':
-          state.settingByTemplate13.information = value.setting
-          break
-        case 'infoText':
-          state.settingByTemplate13.infoText = value.setting
-          break
-        case 'newsLetter':
-          state.settingByTemplate13.newsletter = value.setting
-          break
-        case 'pages':
-          state.settingByTemplate13.pages = value.setting
-          break
-        case 'productList':
-          state.settingByTemplate13.productList = value.setting
-          break
-        case 'productListFilter':
-          state.settingByTemplate13.productListFilter = value.setting
-          break
-        case 'settingGeneral':
-          state.settingByTemplate13.settingGeneral = value.setting
-          break
-      }
-    }
-  },
-  SET_CURRENTSETTING14(state, value) {
-    if (value && value.component) {
-      switch (value.component) {
-        case 'banner':
-          state.settingByTemplate14.banner = value.setting
-          break
-        case 'cardBlog':
-          state.settingByTemplate14.cardBlog = value.setting
-          break
-        case 'cardProducts':
-          state.settingByTemplate14.cardProducts = value.setting
-          break
-        case 'contact':
-          state.settingByTemplate14.contact = value.setting
-          break
-        case 'detailsProducts':
-          state.settingByTemplate14.detailsProducts = value.setting
-          break
-        case 'footer':
-          state.settingByTemplate14.footer = value.setting
-          break
-        case 'header':
-          state.settingByTemplate14.header = value.setting
-          break
-        case 'information':
-          state.settingByTemplate14.information = value.setting
-          break
-        case 'listBlogHome':
-          state.settingByTemplate14.listBlogHome = value.setting
-          break
-        case 'productListFilter':
-          state.settingByTemplate14.listProductsFilter = value.setting
-          break
-        case 'listProductsHome':
-          state.settingByTemplate14.listProductsHome = value.setting
-          break
-        case 'logos':
-          state.settingByTemplate14.logos = value.setting
-          break
-        case 'newsletter':
-          state.settingByTemplate14.newsletter = value.setting
-          break
-        case 'offers':
-          state.settingByTemplate14.offers = value.setting
-          break
-        case 'offersProduct':
-          state.settingByTemplate14.offersProduct = value.setting
-          break
-        case 'pages':
-          state.settingByTemplate14.pages = value.setting
-          break
-        case 'settingsGeneral':
-          state.settingByTemplate14.settingsGeneral = value.setting
-          break
-      }
-    }
-  },
-  SET_CURRENTSETTING15(state, value) {
-    if (value && value.component) {
-      switch (value.component) {
-        case 'banner':
-          state.settingByTemplate15.banner = value.setting
-          break
-        case 'banner2':
-          state.settingByTemplate15.banner2 = value.setting
-          break
-        case 'categories':
-          state.settingByTemplate15.categories = value.setting
-          break
-        case 'content':
-          state.settingByTemplate15.content = value.setting
-          break
-        case 'cardBlog':
-          state.settingByTemplate15.cardBlogs = value.setting
-          break
-        case 'cardProducts':
-          state.settingByTemplate15.cardProducts = value.setting
-          break
-        case 'contact':
-          state.settingByTemplate15.contact = value.setting
-          break
-        case 'detailsProducts':
-          state.settingByTemplate15.detailsProducts = value.setting
-          break
-        case 'footer':
-          state.settingByTemplate15.footer = value.setting
-          break
-        case 'header':
-          state.settingByTemplate15.header = value.setting
-          break
-        case 'information':
-          state.settingByTemplate15.information = value.setting
-          break
-        case 'information2':
-          state.settingByTemplate15.information2 = value.setting
-          break
-        case 'informationLogos':
-          state.settingByTemplate15.informationLogos = value.setting
-          break
-        case 'listBlogHome':
-          state.settingByTemplate15.listBlogHome = value.setting
-          break
-        case 'productListFilter':
-          state.settingByTemplate15.listProductsFilter = value.setting
-          break
-        case 'listProductsHome':
-          state.settingByTemplate15.listProductsHome = value.setting
-          break
-        case 'listProductsOffers':
-          state.settingByTemplate15.listProductsOffers = value.setting
-          break
-        case 'logos':
-          state.settingByTemplate15.logos = value.setting
-          break
-        case 'newsLetter':
-          state.settingByTemplate15.newsLetter = value.setting
-          break
-        case 'pages':
-          state.settingByTemplate15.pageHeader = value.setting
-          break
-        case 'settingGeneral':
-          state.settingByTemplate15.settingGeneral = value.setting
-          break
-      }
-    }
-  },
-  SET_CURRENTSETTING16(state, value) {
-    // if (value && value.component) {
-    //   switch (value.component) {
-    //     case 'banner':
-    //       state.settingByTemplate14.banner = value.setting
-    //       break
-    //     case 'cardBlog':
-    //       state.settingByTemplate14.cardBlog = value.setting
-    //       break
-    //     case 'cardProducts':
-    //       state.settingByTemplate14.cardProducts = value.setting
-    //       break
-    //     case 'contact':
-    //       state.settingByTemplate14.contact = value.setting
-    //       break
-    //     case 'detailsProducts':
-    //       state.settingByTemplate14.detailsProducts = value.setting
-    //       break
-    //     case 'footer':
-    //       state.settingByTemplate14.footer = value.setting
-    //       break
-    //     case 'header':
-    //       state.settingByTemplate14.header = value.setting
-    //       break
-    //     case 'information':
-    //       state.settingByTemplate14.information = value.setting
-    //       break
-    //     case 'listBlogHome':
-    //       state.settingByTemplate14.listBlogHome = value.setting
-    //       break
-    //     case 'productListFilter':
-    //       state.settingByTemplate14.listProductsFilter = value.setting
-    //       break
-    //     case 'listProductsHome':
-    //       state.settingByTemplate14.listProductsHome = value.setting
-    //       break
-    //     case 'logos':
-    //       state.settingByTemplate14.logos = value.setting
-    //       break
-    //     case 'newsletter':
-    //       state.settingByTemplate14.newsletter = value.setting
-    //       break
-    //     case 'offers':
-    //       state.settingByTemplate14.offers = value.setting
-    //       break
-    //     case 'offersProduct':
-    //       state.settingByTemplate14.offersProduct = value.setting
-    //       break
-    //     case 'pages':
-    //       state.settingByTemplate14.pages = value.setting
-    //       break
-    //     case 'settingsGeneral':
-    //       state.settingByTemplate14.settingsGeneral = value.setting
-    //       break
-    //   }
-    // }
-  },
+  SET_CURRENTSETTING13: (state, value) =>
+    setCurrentSetting(state, { ...value, template: '13' }),
+  SET_CURRENTSETTING14: (state, value) =>
+    setCurrentSetting(state, { ...value, template: '14' }),
+  SET_CURRENTSETTING15: (state, value) =>
+    setCurrentSetting(state, { ...value, template: '15' }),
+  SET_CURRENTSETTING16: (state, value) =>
+    setCurrentSetting(state, { ...value, template: '16' }),
   SET_CURRENT_SETTING_MODAL(state, value) {
     if (value && value.data) {
       state.dataStore.modal = value.data
@@ -817,44 +405,8 @@ export const actions = {
       }
     }
   },
-  async nuxtServerInit({ commit, dispatch, state }, { req, route }) {
-    let full = req.headers.host
-    let parts = full.split('.')
-    let partsID = full.split(':')
-    let subdomain = parts[0]
-    let id = 0
-    let idWapi = 0
-    if (
-      parts[0] == 'localhost:3000' ||
-      parts[0] == 'wapi' ||
-      parts[0] == 'valienta' ||
-      partsID[1] == '3333'
-    ) {
-      let partsWapi = req.url.split('/')
-      idWapi = partsWapi[2]
-    } else if (
-      parts[1] == 'sweetlips' ||
-      parts[1] == 'komercia' ||
-      parts[1] == 'kom' ||
-      parts[1] == 'keepbuy' ||
-      parts[1] == 'localhost:3000' ||
-      parts[1] == 'unicentrovillavicencio'
-    ) {
-      id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
-        name: `${subdomain}.komercia.co/`,
-      })
-    } else {
-      let getDomain = full.split('/?')
-      if (getDomain.length > 1) {
-        id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
-          name: `https://${getDomain[0]}`,
-        })
-      } else {
-        id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
-          name: `https://${getDomain}`,
-        })
-      }
-    }
+  async nuxtServerInit({ commit, dispatch, state }, { req }) {
+    const { subdomain, id, template, idWapi } = await getIdData(state, req)
     // let idWapi = ''
     // let id = {
     //   data: {
@@ -864,78 +416,23 @@ export const actions = {
     //     },
     //   },
     // }
+
     if (idWapi) {
-      commit('SET_TEMPLATE_STORE', 99)
-      await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
-      await dispatch('GET_ALL_PRODUCTS', idWapi)
-      await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
-      await commit('SET_STATE_WAPIME', true)
+      await handleWapi(commit, dispatch, idWapi)
     } else {
-      if (id && id.data.data && id.data.data.id) {
-        commit('SET_TEMPLATE_STORE', id.data.data.template)
-        await dispatch('GET_ALL_PRODUCTS', id.data.data.id)
-        await dispatch('GET_DATA_TIENDA_BY_ID', id.data.data.id)
-        if (
-          state.dataStore &&
-          state.dataStore.tienda &&
-          state.dataStore.tienda.id_tienda
-        ) {
-          await dispatch('GET_DATA_HOKO', state.dataStore.tienda.id_tienda)
-        }
-        if (
-          id.data.data.template == 7 ||
-          id.data.data.template == 9 ||
-          id.data.data.template == 10 ||
-          id.data.data.template == 11 ||
-          id.data.data.template == 12 ||
-          id.data.data.template == 13 ||
-          id.data.data.template == 14 ||
-          id.data.data.template == 16
-        ) {
-          if (state.dataStore && state.dataStore.tienda) {
-            await dispatch(
-              'GET_SETTINGS_BY_TEMPLATE_NODE',
-              state.dataStore.tienda
-            )
-          }
-        } else if (id.data.data.template == 15) {
-          if (state.dataStore && state.dataStore.tienda) {
-            await dispatch(
-              'GET_SETTINGS_BY_TEMPLATE_AWS',
-              state.dataStore.tienda
-            )
-          }
-        } else if (
-          id.data.data.template == 5 ||
-          id.data.data.template == 6 ||
-          id.data.data.template == 99
-        ) {
-          if (state.dataStore && state.dataStore.tienda) {
-            await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
-            await commit('SET_STATE_WAPIME', false)
-          }
-        }
-      }
+      await handleKomercia(id, template, commit, dispatch, state)
     }
-    if (state.dataStore) {
-      // await dispatch('GET_DATAVALIENTA')
-      await dispatch('GET_SERVER_PATH', full)
-      if (state.dataStore.modal && state.dataStore.modal.stateModal === 1) {
-        await commit('SET_STATE_MODAL_PWD', false)
-      }
-    }
-    let param = {
-      url: full,
-      parts: parts,
-      subdomain: subdomain,
-      id: id && id.data.data ? id.data.data : null,
+
+    await handleDataStore(state, commit)
+
+    const param = {
+      url: req.headers.host,
+      parts: req.headers.host.split('.'),
+      subdomain,
+      id,
       dataStore: state.dataStore ? state.dataStore : null,
     }
     commit('SET_INFO', param)
-    // const idSlug = route.path.split('-')
-    // const producto = await axios.get(
-    //   `https://templates.komercia.co/api/producto/${idSlug.pop()}`
-    // )
   },
   GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
@@ -1155,7 +652,7 @@ export const actions = {
       console.log('Data hoko', err.response)
     }
   },
-  async GET_PRODUCTSHOKO({ state, commit }, id) {
+  async GET_PRODUCTSHOKO({ state }, id) {
     if (state.dataHoko && state.dataHoko.token) {
       try {
         const { data } = await axios({
@@ -1601,4 +1098,109 @@ export const getters = {
   //     return 'Objecto invalido'
   //   }
   // },
+}
+
+function setCurrentSetting(state, { component, setting, template }) {
+  if (component && setting) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (state[`settingByTemplate${template}`].hasOwnProperty(component)) {
+      state[`settingByTemplate${template}`][component] = setting
+    }
+  }
+}
+
+async function getIdData(state, req) {
+  let full = req.headers.host
+  let parts = full.split('.')
+  let partsID = full.split(':')
+  let subdomain = parts[0]
+  let id = 0
+  let template = 0
+  let idWapi = null
+
+  if (
+    parts[0] == 'localhost:3000' ||
+    parts[0] == 'wapi' ||
+    parts[0] == 'valienta' ||
+    partsID[1] == '3333'
+  ) {
+    let partsWapi = req.url.split('/')
+    idWapi = partsWapi[2]
+  } else if (
+    parts[1] == 'sweetlips' ||
+    parts[1] == 'komercia' ||
+    parts[1] == 'kom' ||
+    parts[1] == 'keepbuy' ||
+    parts[1] == 'localhost:3000' ||
+    parts[1] == 'unicentrovillavicencio'
+  ) {
+    id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
+      name: `${subdomain}.komercia.co/`,
+    })
+    template = id.data.data.template
+    id = id.data.data.id
+  } else {
+    let getDomain = full.split('/?')
+    let domain =
+      getDomain.length > 1 ? `https://${getDomain[0]}` : `https://${getDomain}`
+    id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
+      name: domain,
+    })
+    template = id.data.data.template
+    id = id.data.data.id
+  }
+
+  return { subdomain, id, template, idWapi }
+}
+
+async function handleWapi(commit, dispatch, idWapi) {
+  commit('SET_TEMPLATE_STORE', 99)
+
+  await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
+  await dispatch('GET_ALL_PRODUCTS', idWapi)
+  await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
+
+  commit('SET_STATE_WAPIME', true)
+}
+
+async function handleKomercia(id, template, commit, dispatch, state) {
+  if (id) {
+    commit('SET_TEMPLATE_STORE', template)
+
+    await dispatch('GET_ALL_PRODUCTS', id)
+    await dispatch('GET_DATA_TIENDA_BY_ID', id)
+    await dispatch('GET_DATA_HOKO', id)
+
+    if (
+      template == 7 ||
+      template == 9 ||
+      template == 10 ||
+      template == 11 ||
+      template == 12 ||
+      template == 13 ||
+      template == 14 ||
+      template == 16
+    ) {
+      if (state?.dataStore?.tienda) {
+        await dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', state.dataStore.tienda)
+      }
+    } else if (template == 15) {
+      if (state?.dataStore?.tienda) {
+        await dispatch('GET_SETTINGS_BY_TEMPLATE_AWS', state.dataStore.tienda)
+      }
+    } else if (template == 5 || template == 6 || template == 99) {
+      if (state?.dataStore?.tienda) {
+        await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
+        await commit('SET_STATE_WAPIME', false)
+      }
+    }
+  }
+}
+
+async function handleDataStore(state, commit) {
+  if (state.dataStore) {
+    if (state.dataStore.modal && state.dataStore.modal.stateModal === 1) {
+      await commit('SET_STATE_MODAL_PWD', false)
+    }
+  }
 }

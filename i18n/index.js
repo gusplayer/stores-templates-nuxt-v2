@@ -13,7 +13,6 @@ export default {
     header_blog: 'Blog',
     header_menu: 'Menú',
     header_buscar_producto: 'Buscar producto',
-    header_buscar_producto: 'Buscar producto',
     header_buscar_limpiar: 'Limpiar Filtros',
     //footer
     footer_inicio: 'Inicio',

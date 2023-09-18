@@ -47,8 +47,8 @@
           </p>
         </div>
         <div
-          v-swiper:mySwiper="swiperOption"
           ref="mySwiper"
+          v-swiper:mySwiper="swiperOption"
           class="max-w-[350px] flex lg:hidden items-center justify-start"
         >
           <div class="swiper-wrapper">
@@ -66,14 +66,14 @@
                 :alt="`imgInfo${index}`"
               />
               <p
-                class="mt-20 mb-5 text-24"
-                :style="`color: ${items.color_title}; font-weight: ${items.fontWeighTitle};`"
+                class="text-center mt-20 mb-5 text-24"
+                :style="`color: ${items.color_title}; font-weight: ${items.fontWeightTitle};`"
               >
                 {{ items.title }}
               </p>
               <p
                 class="text-center text-15"
-                :style="`color: ${items.color_text}; font-weight: ${items.fontWeighText};`"
+                :style="`color: ${items.color_text}; font-weight: ${items.fontWeightText};`"
               >
                 {{ items.text }}
               </p>
@@ -88,7 +88,7 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko15-informationLogos',
+  name: 'Ko15InformationLogos',
   mixins: [idCloudinary],
   props: {
     informationLogos: Object,

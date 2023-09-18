@@ -171,14 +171,20 @@
 import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko5-Contact',
-  props: {
-    dataStore: Object,
-    settingK05Contact: Object,
-  },
+  name: 'Ko5Contact',
   components: {
     ValidationObserver,
     ValidationProvider,
+  },
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingK05Contact: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -235,16 +241,28 @@ export default {
       stateBtn: true,
     }
   },
+  computed: {
+    facebookPixel() {
+      return this.$store.state.analytics_tagmanager
+    },
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
+      this.dataContact[0].dato = this.dataStore.tienda.telefono
+      this.dataContact[1].dato = this.dataStore.tienda.whatsapp
+      this.dataContact[2].dato = this.dataStore.tienda.email_tienda
+    },
+  },
   destroyed() {
     this.nombre = ''
     this.email = ''
     this.numberphone = ''
     this.comment = ''
-  },
-  computed: {
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
   },
   methods: {
     submitContact() {
@@ -304,18 +322,6 @@ export default {
       this.email = ''
       this.numberphone = ''
       this.comment = ''
-    },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
-      this.dataContact[0].dato = this.dataStore.tienda.telefono
-      this.dataContact[1].dato = this.dataStore.tienda.whatsapp
-      this.dataContact[2].dato = this.dataStore.tienda.email_tienda
     },
   },
 }

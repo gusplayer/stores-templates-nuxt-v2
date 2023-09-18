@@ -1,70 +1,71 @@
-exports.ids = [29];
+exports.ids = [186];
 exports.modules = {
 
-/***/ 1009:
+/***/ 1107:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=template&id=9c8c4d5c&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=template&id=d0959476&
 var render = function render() {
+  var _vm$settingByTemplate, _vm$settingByTemplate2, _vm$settingByTemplate3, _vm$settingByTemplate4, _vm$settingByTemplate5, _vm$settingByTemplate6, _vm$dataHoko, _vm$settingByTemplate7, _vm$settingByTemplate8, _vm$fullProducts, _vm$settingByTemplate9, _vm$settingByTemplate10, _vm$dataHoko2, _vm$dataHoko3, _vm$settingByTemplate11, _vm$settingByTemplate12, _vm$settingByTemplate13, _vm$settingByTemplate14, _vm$listArticulos;
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.settingByTemplate11 ? _c('div', [_c('client-only', [_vm.settingByTemplate11 && _vm.settingByTemplate11.banner && _vm.settingByTemplate11.banner.visible ? _c('Ko11-carousel', _vm._b({
+  return _vm.settingByTemplate11 ? _c('div', [_c('client-only', [(_vm$settingByTemplate = _vm.settingByTemplate11) !== null && _vm$settingByTemplate !== void 0 && (_vm$settingByTemplate2 = _vm$settingByTemplate.banner) !== null && _vm$settingByTemplate2 !== void 0 && _vm$settingByTemplate2.visible ? _c('K011-carousel', _vm._b({
     key: _vm.bannerRendering,
     attrs: {
       "id": "kCarouselX"
     }
-  }, 'Ko11-carousel', _vm.componentsProps, false)) : _vm._e()], 1), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.section && _vm.settingByTemplate11.section.visible ? _c('Ko11-section', _vm._b({
+  }, 'K011-carousel', _vm.componentsProps, false)) : _vm._e()], 1), _vm._ssrNode(" "), (_vm$settingByTemplate3 = _vm.settingByTemplate11) !== null && _vm$settingByTemplate3 !== void 0 && (_vm$settingByTemplate4 = _vm$settingByTemplate3.section) !== null && _vm$settingByTemplate4 !== void 0 && _vm$settingByTemplate4.visible ? _c('K011-section', _vm._b({
     attrs: {
       "id": "kSectionX"
     }
-  }, 'Ko11-section', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.trending && _vm.settingByTemplate11.trending.visible == true && _vm.dataHoko && _vm.dataHoko.statehoko == 1 ? _c('Ko11-trendingProductHoko', _vm._b({
+  }, 'K011-section', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), (_vm$settingByTemplate5 = _vm.settingByTemplate11) !== null && _vm$settingByTemplate5 !== void 0 && (_vm$settingByTemplate6 = _vm$settingByTemplate5.trending) !== null && _vm$settingByTemplate6 !== void 0 && _vm$settingByTemplate6.visible && ((_vm$dataHoko = _vm.dataHoko) === null || _vm$dataHoko === void 0 ? void 0 : _vm$dataHoko.statehoko) == 1 ? _c('K011-trendingProductHoko', _vm._b({
     attrs: {
       "id": "kTredingX"
     }
-  }, 'Ko11-trendingProductHoko', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.trending && _vm.settingByTemplate11.trending.visible == true && this.fullProducts.length > 0 ? _c('Ko11-trendingProduct', _vm._b({
+  }, 'K011-trendingProductHoko', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), (_vm$settingByTemplate7 = _vm.settingByTemplate11) !== null && _vm$settingByTemplate7 !== void 0 && (_vm$settingByTemplate8 = _vm$settingByTemplate7.trending) !== null && _vm$settingByTemplate8 !== void 0 && _vm$settingByTemplate8.visible && ((_vm$fullProducts = _vm.fullProducts) === null || _vm$fullProducts === void 0 ? void 0 : _vm$fullProducts.length) > 0 ? _c('K011-trendingProduct', _vm._b({
     attrs: {
       "id": "kTredingX"
     }
-  }, 'Ko11-trendingProduct', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('client-only', [_vm.settingByTemplate11 && _vm.settingByTemplate11.parallax && _vm.settingByTemplate11.parallax.visible ? _c('Ko11-parallax', _vm._b({
+  }, 'K011-trendingProduct', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _c('client-only', [(_vm$settingByTemplate9 = _vm.settingByTemplate11) !== null && _vm$settingByTemplate9 !== void 0 && (_vm$settingByTemplate10 = _vm$settingByTemplate9.parallax) !== null && _vm$settingByTemplate10 !== void 0 && _vm$settingByTemplate10.visible ? _c('K011-parallax', _vm._b({
     attrs: {
       "id": "kParallaxX"
     }
-  }, 'Ko11-parallax', _vm.componentsProps, false)) : _vm._e()], 1), _vm._ssrNode(" "), _vm.dataHoko.length == 0 || _vm.dataHoko.statehoko == 0 ? _c('Ko11-listTrending', _vm._b({}, 'Ko11-listTrending', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.information && _vm.settingByTemplate11.information.visible ? _c('Ko11-information', _vm._b({
+  }, 'K011-parallax', _vm.componentsProps, false)) : _vm._e()], 1), _vm._ssrNode(" "), ((_vm$dataHoko2 = _vm.dataHoko) === null || _vm$dataHoko2 === void 0 ? void 0 : _vm$dataHoko2.length) == 0 || ((_vm$dataHoko3 = _vm.dataHoko) === null || _vm$dataHoko3 === void 0 ? void 0 : _vm$dataHoko3.statehoko) == 0 ? _c('K011-listTrending', _vm._b({}, 'K011-listTrending', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), (_vm$settingByTemplate11 = _vm.settingByTemplate11) !== null && _vm$settingByTemplate11 !== void 0 && (_vm$settingByTemplate12 = _vm$settingByTemplate11.information) !== null && _vm$settingByTemplate12 !== void 0 && _vm$settingByTemplate12.visible ? _c('K011-information', _vm._b({
     attrs: {
       "id": "kInformationX"
     }
-  }, 'Ko11-information', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), _vm.settingByTemplate11 && _vm.settingByTemplate11.blog && _vm.settingByTemplate11.blog.visible ? _c('Ko11-blog', _vm._b({
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: _vm.listArticulos.length > 0,
-      expression: "listArticulos.length > 0"
-    }],
+  }, 'K011-information', _vm.componentsProps, false)) : _vm._e(), _vm._ssrNode(" "), (_vm$settingByTemplate13 = _vm.settingByTemplate11) !== null && _vm$settingByTemplate13 !== void 0 && (_vm$settingByTemplate14 = _vm$settingByTemplate13.blog) !== null && _vm$settingByTemplate14 !== void 0 && _vm$settingByTemplate14.visible && ((_vm$listArticulos = _vm.listArticulos) === null || _vm$listArticulos === void 0 ? void 0 : _vm$listArticulos.length) > 0 ? _c('K011-blog', _vm._b({
     attrs: {
       "id": "kBlogX"
     }
-  }, 'Ko11-blog', _vm.componentsProps, false)) : _vm._e()], 2) : _vm._e();
+  }, 'K011-blog', _vm.componentsProps, false)) : _vm._e()], 2) : _vm._e();
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template11/index.vue?vue&type=template&id=9c8c4d5c&
+// CONCATENATED MODULE: ./pages/template11/index.vue?vue&type=template&id=d0959476&
 
 // EXTERNAL MODULE: external "vuex"
-var external_vuex_ = __webpack_require__(7);
+var external_vuex_ = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var template11vue_type_script_lang_js_ = ({
-  layout: 'default',
-  name: 'Ko-template11',
-  mounted() {
-    window.parent.postMessage('message', '*');
-    window.addEventListener('message', this.addEventListenerTemplate);
+  name: 'KoTemplate11',
+  components: {
+    K011Carousel: () => __webpack_require__.e(/* import() */ 60).then(__webpack_require__.bind(null, 1150)),
+    K011Section: () => __webpack_require__.e(/* import() */ 64).then(__webpack_require__.bind(null, 1154)),
+    K011TrendingProduct: () => __webpack_require__.e(/* import() */ 65).then(__webpack_require__.bind(null, 1155)),
+    K011TrendingProductHoko: () => __webpack_require__.e(/* import() */ 66).then(__webpack_require__.bind(null, 1156)),
+    K011Parallax: () => __webpack_require__.e(/* import() */ 63).then(__webpack_require__.bind(null, 1153)),
+    K011ListTrending: () => __webpack_require__.e(/* import() */ 62).then(__webpack_require__.bind(null, 1152)),
+    K011Information: () => __webpack_require__.e(/* import() */ 61).then(__webpack_require__.bind(null, 1151)),
+    K011Blog: () => __webpack_require__.e(/* import() */ 59).then(__webpack_require__.bind(null, 1149))
   },
+  layout: 'default',
   data() {
     return {
       bannerRendering: 0
@@ -99,6 +100,10 @@ var external_vuex_ = __webpack_require__(7);
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate);
   },
+  mounted() {
+    window.parent.postMessage('message', '*');
+    window.addEventListener('message', this.addEventListenerTemplate);
+  },
   methods: {
     addEventListenerTemplate(e) {
       if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
@@ -118,7 +123,7 @@ var external_vuex_ = __webpack_require__(7);
             case 'footer':
               this.moverseA('kBlogX');
               break;
-            case 'newsLetter':
+            case 'newsletter':
               this.moverseA('kBlogX');
               break;
             case 'banner':
@@ -127,10 +132,10 @@ var external_vuex_ = __webpack_require__(7);
             case 'section':
               this.moverseA('kSectionX');
               break;
-            case 'treding':
+            case 'trending':
               this.moverseA('kTredingX');
               break;
-            case 'card':
+            case 'cardProduct':
               this.moverseA('kTredingX');
               break;
             case 'parallax':
@@ -149,7 +154,7 @@ var external_vuex_ = __webpack_require__(7);
                 });
               }
               break;
-            case 'productListFilter':
+            case 'productList':
               this.$router.push({
                 path: '/productos'
               });

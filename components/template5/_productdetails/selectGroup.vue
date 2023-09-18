@@ -1,14 +1,18 @@
 <template>
   <div class="wrapper-select">
-    <h4 class="title-input" lang="es">{{ label }}</h4>
+    <h4 class="title-input" lang="es">
+      {{ label }}
+    </h4>
     <div class="select">
       <select
-        name="format"
         ref="format"
-        @change="updateValue()"
+        name="format"
         :style="value == -1 || !value ? 'color: rgba(21, 20, 57, 0.4);' : ''"
+        @change="updateValue()"
       >
-        <option disabled>{{ $t('productdetail_seleccionarOpcion') }}</option>
+        <option disabled>
+          {{ $t('productdetail_seleccionarOpcion') }}
+        </option>
         <slot></slot>
       </select>
     </div>
@@ -17,13 +21,13 @@
 
 <script>
 export default {
-  name: 'selectGroup-details',
+  name: 'Ko5SelectGroupDetails',
   props: ['options', 'label', 'value', 'index', 'variantes'],
-  mounted() {
-    this.saveOption()
-  },
   data() {
     return {}
+  },
+  mounted() {
+    this.saveOption()
   },
   methods: {
     updateValue() {

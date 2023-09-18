@@ -5,8 +5,8 @@
       settingByTemplate,
       {
         '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
+          settingByTemplate && settingByTemplate.tipo_letra
+            ? settingByTemplate.tipo_letra
             : 'Roboto',
       },
     ]"
@@ -22,30 +22,30 @@
         </div>
       </div>
       <div class="content-item">
-        <div class="content-item-productos" v-if="producthoko">
+        <div v-if="producthoko" class="content-item-productos">
           <div class="grid-products">
             <div
               v-for="product in producthoko.data"
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard1 :product="product"></KoProductCard1>
+              <KoProductCard1 :product="product" />
             </div>
           </div>
           <div v-if="producthoko.total == 0" class="content-products-empty">
             <p>{{ $t('home_msgCatalogo') }}</p>
           </div>
           <div class="pagination-medium">
-            <div class="product_pagination" v-if="producthoko.total > 10">
+            <div v-if="producthoko.total > 10" class="product_pagination">
               <el-pagination
                 background
                 layout="prev, pager, next"
                 :hide-on-single-page="true"
                 :page-count="producthoko.last_page"
-                @current-change="currentChange"
                 :current-page="currentPage"
                 class="pagination"
-              ></el-pagination>
+                @current-change="currentChange"
+              />
             </div>
           </div>
         </div>
@@ -60,20 +60,21 @@
 <script>
 import KoProductCard1 from './_productcard/Ko-ProductCardHoko-1.vue'
 export default {
-  name: 'Ko5-ProductListHomeHoko',
+  name: 'Ko5ProductListHomeHoko',
   components: {
     KoProductCard1,
   },
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
-  mounted() {
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
-    this.currentChange(1)
-  },
+
   data() {
     return {
       search: '',
@@ -86,12 +87,6 @@ export default {
     },
     producthoko() {
       return this.$store.state.producthoko
-    },
-  },
-  methods: {
-    currentChange(page) {
-      this.$store.dispatch('GET_PRODUCTSHOKO', page)
-      this.currentPage = page
     },
   },
   watch: {
@@ -107,6 +102,18 @@ export default {
       if (this.previousPage) {
         this.currentPage = this.previousPage
       }
+    },
+  },
+  mounted() {
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
+    this.currentChange(1)
+  },
+  methods: {
+    currentChange(page) {
+      this.$store.dispatch('GET_PRODUCTSHOKO', page)
+      this.currentPage = page
     },
   },
 }

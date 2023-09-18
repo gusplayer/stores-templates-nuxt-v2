@@ -5,8 +5,8 @@
       :style="[
         {
           '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
+            settingGeneral && settingGeneral.fount_2
+              ? settingGeneral.fount_2
               : 'Roboto',
         },
       ]"
@@ -19,13 +19,13 @@
           <client-only>
             <img
               v-if="!soldOut"
-              v-lazy="idCloudinary(this.product.foto_cloudinary, 550, 550)"
+              v-lazy="idCloudinary(product.foto_cloudinary, 550, 550)"
               class="product-image"
               alt="Product Img"
             />
             <img
               v-if="soldOut"
-              v-lazy="idCloudinary(this.product.foto_cloudinary, 550, 550)"
+              v-lazy="idCloudinary(product.foto_cloudinary, 550, 550)"
               class="product-image-soldOut"
               alt="Product Img"
             />
@@ -117,8 +117,8 @@
         </div>
         <div
           class="overlay-bottom"
-          v-on:click="addShoppingCart"
-          v-if="!this.estadoCart && !soldOut && !spent"
+          @click="addShoppingCart"
+          v-if="!estadoCart && !soldOut && !spent"
         >
           <div class="cart-shop-mobile">
             <div class="icon-cart">
@@ -164,29 +164,29 @@
         </div>
       </div>
       <div class="datos-producto">
-        <div class="categoria" v-if="this.product.categoria">
-          {{ this.product.categoria }}
+        <div class="categoria" v-if="product.categoria">
+          {{ product.categoria }}
         </div>
         <div class="tittle">
-          <p class="card-title" v-if="this.product.nombre.length >= 54">
-            {{ `${this.product.nombre.slice(0, 54)}...` }}
+          <p class="card-title" v-if="product.nombre.length >= 54">
+            {{ `${product.nombre.slice(0, 54)}...` }}
           </p>
           <p class="card-title" v-else>
-            {{ `${this.product.nombre.slice(0, 54)}` }}
+            {{ `${product.nombre.slice(0, 54)}` }}
           </p>
         </div>
         <div class="precio hid">
-          <div class="content-text-price" v-if="this.product.precio">
+          <div class="content-text-price" v-if="product.precio">
             <div
               class="content-price"
-              v-if="this.estadoCart == true && this.minPrice != this.maxPrice"
+              v-if="estadoCart == true && minPrice != maxPrice"
             >
               <div
                 class="text-price"
-                v-if="this.product.precio > 0 || this.product.precio"
+                v-if="product.precio > 0 || product.precio"
               >
                 {{
-                  this.minPrice
+                  minPrice
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -196,10 +196,10 @@
               <p class="separator-price mx-4">-</p>
               <div
                 class="text-price"
-                v-if="this.product.precio > 0 || this.product.precio"
+                v-if="product.precio > 0 || product.precio"
               >
                 {{
-                  this.maxPrice
+                  maxPrice
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -208,12 +208,9 @@
               </div>
             </div>
             <div v-else>
-              <p
-                class="text-price"
-                v-if="this.product.precio > 0 || this.product.precio"
-              >
+              <p class="text-price" v-if="product.precio > 0 || product.precio">
                 {{
-                  this.product.precio
+                  product.precio
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -348,8 +345,8 @@
           <button
             ref="colorBtn"
             class="btn"
-            v-if="!this.estadoCart && !soldOut && !spent"
-            v-on:click="addShoppingCart"
+            v-if="!estadoCart && !soldOut && !spent"
+            @click="addShoppingCart"
             id="AddToCartTag"
           >
             <svg
@@ -371,11 +368,11 @@
       </div>
       <div class="datos-producto-right">
         <div class="precio">
-          <div class="content-text-price" v-if="this.product.precio">
-            <div v-if="this.estadoCart == true && this.equalsPrice">
-              <p class="text-price" v-if="this.minPrice">
+          <div class="content-text-price" v-if="product.precio">
+            <div v-if="estadoCart == true && equalsPrice">
+              <p class="text-price" v-if="minPrice">
                 {{
-                  this.minPrice
+                  minPrice
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -386,17 +383,15 @@
             <div
               class="content-price"
               v-else-if="
-                this.estadoCart == true &&
-                this.minPrice != this.maxPrice &&
-                !this.equalsPrice
+                estadoCart == true && minPrice != maxPrice && !equalsPrice
               "
             >
               <div
                 class="text-price"
-                v-if="this.product.precio > 0 || this.product.precio"
+                v-if="product.precio > 0 || product.precio"
               >
                 {{
-                  this.minPrice
+                  minPrice
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -406,10 +401,10 @@
               <p class="separator-price mx-4">-</p>
               <div
                 class="text-price"
-                v-if="this.product.precio > 0 || this.product.precio"
+                v-if="product.precio > 0 || product.precio"
               >
                 {{
-                  this.maxPrice
+                  maxPrice
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -418,12 +413,9 @@
               </div>
             </div>
             <div v-else>
-              <p
-                class="text-price"
-                v-if="this.product.precio > 0 || this.product.precio"
-              >
+              <p class="text-price" v-if="product.precio > 0 || product.precio">
                 {{
-                  this.product.precio
+                  product.precio
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -448,8 +440,8 @@
           <button
             ref="colorBtn"
             class="btn"
-            v-if="!this.estadoCart && !soldOut && !spent"
-            v-on:click="addShoppingCart"
+            v-if="!estadoCart && !soldOut && !spent"
+            @click="addShoppingCart"
             id="AddToCartTag"
           >
             <svg
@@ -477,8 +469,8 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 import currency from '../../../mixins/formatCurrent'
 export default {
+  name: 'Ko9ProductCardFilterList',
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductCard-9-2',
   props: { product: Object, settingGeneral: Object, productListCard: Object },
   data() {
     return {

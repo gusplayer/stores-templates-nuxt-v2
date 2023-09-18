@@ -2,11 +2,11 @@
   <figure
     class="zoom"
     :style="setBackground(idCloudinary(photo, 850, 850))"
-    v-on:mousemove="zoom"
+    @mousemove="zoom"
   >
     <img
       class="photo_main"
-      v-on:mouseover="activeZoom = !activeZoom"
+      @mouseover="activeZoom = !activeZoom"
       v-lazy="idCloudinary(photo, 850, 850)"
       alt="Product Img"
     />

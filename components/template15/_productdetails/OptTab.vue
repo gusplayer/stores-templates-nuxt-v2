@@ -6,7 +6,7 @@
       settingByTemplate15[0].detailsProducts,
       {
         '--font-style-1':
-          this.settingByTemplate15[0]?.settingGeneral?.fount_1 ?? 'Poppins',
+          this.settingByTemplate15[0]?.settingGeneral?.font ?? 'Poppins',
       },
     ]"
   >

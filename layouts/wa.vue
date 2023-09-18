@@ -1,21 +1,23 @@
 <template>
   <div>
     <div
-      class="w-full flex justify-center items-center bg-slate-100"
       v-if="dataStore"
+      class="w-full flex justify-center items-center bg-slate-100"
     >
       <div v-if="stateModalPwd">
         <nuxt />
       </div>
-      <koModalSecurity :dataStore="dataStore" v-else />
+      <koModalSecurity v-else :data-store="dataStore" />
       <div
-        class="wrapper-whatsapp"
         v-if="dataStore.tienda.whatsapp && dataStore.tienda.id_tienda != 16436"
+        class="wrapper-whatsapp"
         @click="redirectWhatsApp()"
       >
         <koWhatsApp class="button-whatsapp" />
         <span>
-          WhatsApp<br /><small>
+          WhatsApp
+          <br />
+          <small>
             {{ dataStore.tienda.whatsapp }}
           </small>
         </span>
@@ -32,43 +34,11 @@ import koTiendaError from '../components/Ko-errorStore'
 import koModalSecurity from '../components/modal/Ko-modal-security.vue'
 import { mapState } from 'vuex'
 export default {
-  name: 'defaultWa',
+  name: 'LayoutsWhatsApp',
   components: {
     koTiendaError,
     koModalSecurity,
     koWhatsApp: () => import('../components/whatsapp/Ko-whatsApp.vue'),
-  },
-  beforeMount() {
-    if (this.dataStore.tienda.dominio) {
-      caches.keys().then(function (names) {
-        for (let name of names) caches.delete(name)
-      })
-    }
-  },
-  async mounted() {
-    // Configura y habilita el seguimiento de Facebook Pixel si está disponible
-    if (this.analytics_tagmanager?.pixel_facebook != null) {
-      this.$fb.setPixelId(this.analytics_tagmanager.pixel_facebook)
-      this.$fb.track('PageView')
-      this.$fb.enable()
-    }
-
-    // Ejecuta las acciones de forma concurrente usando Promise.all
-    await Promise.all([
-      this.$store.dispatch('GET_COOKIES_PWD'),
-      this.$store.dispatch('GET_SHOPPING_CART'),
-    ])
-
-    // Borra todos los elementos del carrito y actualiza el contenido si la query 'clearCart' es 'true'
-    if (this.$route.query?.clearCart === 'true') {
-      this.$store.commit('DELETE_ALL_ITEMS_CART')
-      this.$store.commit('UPDATE_CONTENT_CART')
-    }
-
-    // Establece 'SET_OPEN_ORDER' en true si la query 'openCart' es 'true'
-    if (this.$route.query?.openCart === 'true') {
-      this.$store.commit('SET_OPEN_ORDER', true)
-    }
   },
   head() {
     let tienda = this.$store.state?.dataStore?.tienda ?? ''
@@ -227,6 +197,38 @@ export default {
   computed: {
     ...mapState(['dataStore', 'stateModalPwd', 'analytics_tagmanager']),
   },
+  beforeMount() {
+    if (this.dataStore.tienda.dominio) {
+      caches.keys().then(function (names) {
+        for (let name of names) caches.delete(name)
+      })
+    }
+  },
+  async mounted() {
+    // Configura y habilita el seguimiento de Facebook Pixel si está disponible
+    if (this.analytics_tagmanager?.pixel_facebook != null) {
+      this.$fb.setPixelId(this.analytics_tagmanager.pixel_facebook)
+      this.$fb.track('PageView')
+      this.$fb.enable()
+    }
+
+    // Ejecuta las acciones de forma concurrente usando Promise.all
+    await Promise.all([
+      this.$store.dispatch('GET_COOKIES_PWD'),
+      this.$store.dispatch('GET_SHOPPING_CART'),
+    ])
+
+    // Borra todos los elementos del carrito y actualiza el contenido si la query 'clearCart' es 'true'
+    if (this.$route.query?.clearCart === 'true') {
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
+      this.$store.commit('UPDATE_CONTENT_CART')
+    }
+
+    // Establece 'SET_OPEN_ORDER' en true si la query 'openCart' es 'true'
+    if (this.$route.query?.openCart === 'true') {
+      this.$store.commit('SET_OPEN_ORDER', true)
+    }
+  },
   methods: {
     mobileCheck() {
       window.mobilecheck = function () {
@@ -250,6 +252,8 @@ export default {
       let phone_number_whatsapp = this.dataStore.tienda.whatsapp
       if (phone_number_whatsapp.charAt(0) === '+') {
         phone_number_whatsapp = phone_number_whatsapp.slice(1)
+      } else {
+        phone_number_whatsapp = `57${phone_number_whatsapp}`
       }
 
       const baseUrl = 'https://wa.me/'
@@ -283,5 +287,49 @@ export default {
 <style scoped>
 * {
   font-family: 'Poppins', sans-serif !important;
+}
+.wrapper-whatsapp {
+  position: fixed;
+  transform: translate(108px, 0px);
+  top: 50%;
+  right: 0px;
+  width: 155px;
+  color: white;
+  overflow: hidden;
+  background-color: #25d366;
+  border-radius: 10px 0 0 10px;
+  z-index: 50;
+  transition: all 0.5s ease-in-out;
+  vertical-align: middle;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  max-height: 51px;
+}
+.wrapper-whatsapp:hover {
+  transform: translate(0px, 0px);
+}
+.wrapper-whatsapp span {
+  font-size: 15px;
+  padding-top: 8px;
+  padding-bottom: 10px;
+  position: relative;
+  line-height: 16px;
+  font-weight: bolder;
+  margin-left: 5px;
+  color: white;
+}
+.button-whatsapp {
+  width: 50px;
+  fill: white;
+  line-height: 30px;
+  padding: 8px;
+  font-weight: bold;
+  transform: rotate(0deg);
+  transition: all 0.5s ease-in-out;
+  text-align: center;
+}
+.button-whatsapp:hover {
+  transform: rotate(360deg);
 }
 </style>

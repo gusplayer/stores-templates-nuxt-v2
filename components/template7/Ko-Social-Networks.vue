@@ -2,11 +2,11 @@
   <div class="content-SocialNet">
     <div class="icon-social">
       <div
-        class="icons-networks"
         v-if="
           dataStore.tienda.red_facebook != null &&
           dataStore.tienda.red_facebook != ''
         "
+        class="icons-networks"
       >
         <a
           target="_blank"
@@ -73,11 +73,11 @@
         </a>
       </div>
       <div
-        class="icons-networks"
         v-if="
           dataStore.tienda.red_twitter != null &&
           dataStore.tienda.red_twitter != ''
         "
+        class="icons-networks"
       >
         <a
           target="_blank"
@@ -413,7 +413,7 @@
 </template>
 <script>
 export default {
-  name: 'Ko-Social-Networks-7',
+  name: 'Ko7SocialNetworks',
   props: {
     dataStore: Object,
     settingByTemplate: Object,

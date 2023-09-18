@@ -666,7 +666,7 @@
 </template>
 <script>
 export default {
-  name: 'error-404',
+  name: 'ErrorKo404',
 }
 </script>
 <style scoped>

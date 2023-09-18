@@ -3,18 +3,18 @@
     v-if="settingByTemplate12"
     :style="[
       {
-        '--font-style-1': this.settingByTemplate12?.fontFamily ?? 'Poppins',
+        '--font-style-1': settingByTemplate12?.fontFamily ?? 'Poppins',
       },
     ]"
   >
     <div class="main-wrapper overflow-hidden">
-      <Ko12-IHeader v-bind="componentsProps" id="KHeaderX" />
-      <Ko12-IHeroImage v-bind="componentsProps" />
+      <K012-iHeader id="KHeaderX" v-bind="componentsProps" />
+      <K012-i-hero-image v-bind="componentsProps" />
       <div class="main-section_container">
-        <Ko12-IMainSection v-bind="componentsProps" id="KProductX" />
+        <K012-i-main-section id="KProductX" v-bind="componentsProps" />
       </div>
-      <Ko12-IFooter v-bind="componentsProps" id="KFooterX" />
-      <Ko10-buttonCar />
+      <K012-i-footer id="KFooterX" v-bind="componentsProps" />
+      <K010-button-car />
     </div>
   </div>
 </template>
@@ -22,12 +22,16 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
-  name: 'Ko-template12',
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+  name: 'KoTemplate12',
+  components: {
+    K012IHeader: () => import('@/components/template12/Ko12-IHeader.vue'),
+    K012IHeroImage: () => import('@/components/template12/Ko12-IHeroImage.vue'),
+    K012IMainSection: () =>
+      import('@/components/template12/Ko12-IMainSection.vue'),
+    K012IFooter: () => import('@/components/template12/Ko12-IFooter.vue'),
+    K010ButtonCar: () => import('@/components/template10/Ko10-buttonCar.vue'),
   },
+  layout: 'default',
   computed: {
     ...mapState(['dataStore', 'settingByTemplate12']),
     componentsProps() {
@@ -38,6 +42,10 @@ export default {
           : null,
       }
     },
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)

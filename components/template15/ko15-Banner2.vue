@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex justify-center items-center py-25 lg:py-40"
+    class="w-full flex justify-center items-center"
     :style="`background-color: ${banner2['--background_color_1']}`"
   >
     <!-- <img

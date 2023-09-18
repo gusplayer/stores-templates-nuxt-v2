@@ -4,7 +4,7 @@
       <div class="crumb">
         <nuxt-link
           :to="{
-            path: this.stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`,
+            path: stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`,
           }"
         >
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -35,7 +35,7 @@
                 </div>
               </div>
               <div class="pagination-medium">
-                <div class="product_pagination" v-if="filteredList.length > 12">
+                <div v-if="filteredList.length > 12" class="product_pagination">
                   <el-pagination
                     background
                     layout="prev, pager, next"
@@ -57,7 +57,7 @@
 import { mapState } from 'vuex'
 import KoBlogCard from './Ko-blog-card.vue'
 export default {
-  name: 'Ko-Blog',
+  name: 'KoBlogWa',
   components: {
     KoBlogCard,
   },

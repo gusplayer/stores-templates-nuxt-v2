@@ -4,61 +4,34 @@
     :style="[
       {
         '--font-style-1':
-          this.settingByTemplate13?.settingGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate13?.settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
-    <Ko13-Banner
+    <K013-banner
+      v-if="settingByTemplate13?.banner?.visible"
       id="kBannerX"
-      v-if="
-        settingByTemplate13 &&
-        settingByTemplate13.banner &&
-        settingByTemplate13.banner.visible
-      "
-      v-bind="componentsProps"
       :key="bannerRendering"
+      v-bind="componentsProps"
     />
-    <!-- <KProductFavoritos v-if="this.stateBanner" /> -->
-    <!-- <KProductListHoko
-      :dataStore="dataStore"
-      :fullProducts="fullProducts"
-      id="KProductX"
-      v-if="dataHoko && dataHoko.statehoko == 1 && this.stateBanner"
-    /> -->
-    <Ko13-ProductList
+    <K013-productList
+      v-if="settingByTemplate13?.productList?.visible"
       id="kListX"
-      v-if="
-        settingByTemplate13 &&
-        settingByTemplate13.productList &&
-        settingByTemplate13.productList.visible
-      "
       v-bind="componentsProps"
     />
-    <Ko13-infoText
+    <K013-infoText
+      v-if="settingByTemplate13?.infoText?.visible"
       id="kInfoTextX"
-      v-if="
-        settingByTemplate13 &&
-        settingByTemplate13.infoText &&
-        settingByTemplate13.infoText.visible
-      "
       v-bind="componentsProps"
     />
-    <Ko13-information
+    <K013-information
+      v-if="settingByTemplate13?.information?.visible"
       id="kInformationX"
-      v-if="
-        settingByTemplate13 &&
-        settingByTemplate13.information &&
-        settingByTemplate13.information.visible
-      "
       v-bind="componentsProps"
     />
-    <Ko13-Newsletter
+    <K013-newsletter
+      v-if="settingByTemplate13?.newsletter?.visible"
       id="kNewsLetterX"
-      v-if="
-        settingByTemplate13 &&
-        settingByTemplate13.newsletter &&
-        settingByTemplate13.newsletter.visible
-      "
       v-bind="componentsProps"
     />
   </div>
@@ -67,12 +40,16 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
-  name: 'Ko-template13',
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+  name: 'KoTemplate13',
+  components: {
+    K013Banner: () => import('@/components/template13/Ko13-Banner.vue'),
+    K013ProductList: () =>
+      import('@/components/template13/Ko13-ProductList.vue'),
+    K013InfoText: () => import('@/components/template13/Ko13-information.vue'),
+    K013Information: () => import('@/components/template13/Ko13-infoText.vue'),
+    K013Newsletter: () => import('@/components/template13/Ko13-Newsletter.vue'),
   },
+  layout: 'default',
   data() {
     return {
       bannerRendering: 0,
@@ -107,6 +84,10 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
     addEventListenerTemplate(e) {
@@ -153,9 +134,6 @@ export default {
               break
             case 'productList':
               this.moverseA('kListX')
-              break
-            case 'banner':
-              this.moverseA('kBannerX')
               break
             case 'detailsProduct':
               if (this.fullProducts) {

@@ -7,14 +7,14 @@
             {{ $t('home_catalogo') }}
           </p>
           <p
+            v-if="nameCategoryHeader"
             class="text-categorias-select"
-            v-if="this.nameCategoryHeader"
             @click="breadcrumbsSendCategory(nameCategoryHeader)"
           >
-            > {{ this.nameCategoryHeader }}
+            > {{ nameCategoryHeader }}
           </p>
-          <p class="text-categorias-select" v-if="this.nameSubCategoryHeader">
-            > {{ this.nameSubCategoryHeader }}
+          <p v-if="nameSubCategoryHeader" class="text-categorias-select">
+            > {{ nameSubCategoryHeader }}
           </p>
         </div>
       </div>
@@ -26,16 +26,10 @@
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard1
-                :product="product"
-                :dataStore="dataStore"
-              ></KoProductCard1>
+              <KoProductCard1 :product="product" :dataStore="dataStore" />
             </div>
           </div>
-          <div
-            v-if="this.fullProducts.length == 0"
-            class="content-products-empty"
-          >
+          <div v-if="fullProducts.length == 0" class="content-products-empty">
             <p>{{ $t('home_msgCatalogo') }}</p>
           </div>
           <br />
@@ -47,12 +41,12 @@
                 :total="fullProducts.length"
                 :page-size="16"
                 :current-page.sync="currentPage"
-              ></el-pagination>
+              />
             </div>
           </div>
           <div
-            class="wrapper-pagination-responsive"
             v-if="fullProducts.length > 16"
+            class="wrapper-pagination-responsive"
           >
             <div class="pagination-medium">
               <el-pagination
@@ -62,7 +56,7 @@
                 :total="fullProducts.length"
                 :page-size="16"
                 :current-page.sync="currentPage"
-              ></el-pagination>
+              />
             </div>
           </div>
         </div>
@@ -75,37 +69,15 @@
 import KoProductCard1 from './_productcard/Ko-ProductCard-1'
 import filterProducts from '../../../mixins/filterProducts'
 export default {
+  name: 'ProductGridWa1',
   components: {
     KoProductCard1,
   },
+  mixins: [filterProducts],
   props: {
     dataStore: Object,
     fullProducts: {},
     settingByTemplate: Object,
-  },
-  mixins: [filterProducts],
-  name: 'ProductGridWa-1',
-  mounted() {
-    if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrlMix(this.$route.query.category)
-    } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendSubCategoryUrlMix(
-        this.$route.query.subcategory,
-        this.categorias,
-        this.subcategories
-      )
-    } else if (
-      this.$route.query &&
-      this.$route.query.tagId &&
-      this.$route.query.tagName
-    ) {
-      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-    } else if (this.$route.fullPath == '/') {
-      this.allCategories()
-    }
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
   },
   data() {
     return {
@@ -154,43 +126,6 @@ export default {
       return this.$store.state.previousPage
     },
   },
-  methods: {
-    SearchProduct2(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['search'],
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['all'],
-          data: '',
-        })
-      }
-      this.currentPage = 1
-    },
-    breadcrumbsSendCategory(value) {
-      let filtradoCategories = this.categorias.find((element) => {
-        if (element.nombre_categoria_producto == value) {
-          return element
-        }
-      })
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: filtradoCategories.nombre_categoria_producto,
-      })
-    },
-    clear() {
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
-      this.$emit('clear')
-    },
-  },
   watch: {
     search(value) {
       this.SearchProduct2(value)
@@ -236,6 +171,65 @@ export default {
       } else if (this.$route.fullPath == '/') {
         this.allCategories()
       }
+    },
+  },
+  mounted() {
+    if (this.$route.query && this.$route.query.category) {
+      this.sendCategoryUrlMix(this.$route.query.category)
+    } else if (this.$route.query && this.$route.query.subcategory) {
+      this.SendSubCategoryUrlMix(
+        this.$route.query.subcategory,
+        this.categorias,
+        this.subcategories
+      )
+    } else if (
+      this.$route.query &&
+      this.$route.query.tagId &&
+      this.$route.query.tagName
+    ) {
+      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
+    } else if (this.$route.fullPath == '/') {
+      this.allCategories()
+    }
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
+  },
+  methods: {
+    SearchProduct2(search) {
+      if (search.length) {
+        this.$store.commit('products/FILTER_BY', {
+          type: ['search'],
+          data: search,
+        })
+      } else {
+        this.$store.commit('products/FILTER_BY', {
+          type: ['all'],
+          data: '',
+        })
+      }
+      this.currentPage = 1
+    },
+    breadcrumbsSendCategory(value) {
+      let filtradoCategories = this.categorias.find((element) => {
+        if (element.nombre_categoria_producto == value) {
+          return element
+        }
+      })
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
+      this.$store.commit('products/FILTER_BY', {
+        type: ['category'],
+        data: filtradoCategories.nombre_categoria_producto,
+      })
+    },
+    clear() {
+      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
+      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
+      this.$store.commit('products/FILTER_BY', {
+        type: ['all'],
+        data: '',
+      })
+      this.$emit('clear')
     },
   },
 }

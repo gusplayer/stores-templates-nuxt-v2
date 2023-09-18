@@ -6,9 +6,9 @@
       settingByTemplate10[0].setting10General,
       {
         '--font-style-1':
-          this.settingByTemplate10[0].setting10General &&
-          this.settingByTemplate10[0].setting10General.fount_1
-            ? this.settingByTemplate10[0].setting10General.fount_1
+          settingByTemplate10[0].setting10General &&
+          settingByTemplate10[0].setting10General.fount_1
+            ? settingByTemplate10[0].setting10General.fount_1
             : 'Roboto',
       },
     ]"
@@ -16,18 +16,18 @@
     <div class="content-form-contact">
       <div class="banner-mapa">
         <el-carousel
+          v-if="
+            dataStore &&
+            dataStore.geolocalizacion &&
+            dataStore.geolocalizacion.length
+          "
           :interval="5000"
           arrow="always"
           height="250px"
           style="width: 100%"
           class="wrapperCarousel"
-          @change="changeLocation"
           :setActiveItem="positionLocation"
-          v-if="
-            this.dataStore &&
-            this.dataStore.geolocalizacion &&
-            this.dataStore.geolocalizacion.length
-          "
+          @change="changeLocation"
         >
           <el-carousel-item
             v-for="(item, inggeo) in dataStore.geolocalizacion"
@@ -52,8 +52,8 @@
               <p class="txt-info">Información</p>
             </div>
             <div
+              v-if="dataStore.geolocalizacion.length"
               class="content-locatioin"
-              v-if="this.dataStore.geolocalizacion.length"
             >
               <svg
                 class="icon-left"
@@ -68,11 +68,8 @@
                 />
               </svg>
               <p class="txt-left">
-                Sede {{ this.positionLocation + 1 }}:
-                {{
-                  this.dataStore.geolocalizacion[this.positionLocation]
-                    .direccion
-                }}
+                Sede {{ positionLocation + 1 }}:
+                {{ dataStore.geolocalizacion[positionLocation].direccion }}
               </p>
             </div>
             <div class="empty"></div>
@@ -92,7 +89,7 @@
               <div class="email">
                 <p class="txt-left">Envíenos un correo electrónico</p>
                 <p class="txt-left">
-                  {{ this.dataStore.tienda.email_tienda }}
+                  {{ dataStore.tienda.email_tienda }}
                 </p>
               </div>
             </div>
@@ -228,14 +225,20 @@
 import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko-Contact',
-  props: {
-    dataStore: Object,
-    settingByTemplate10: Array,
-  },
+  name: 'Ko10Contact',
   components: {
     ValidationObserver,
     ValidationProvider,
+  },
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate10: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -290,7 +293,25 @@ export default {
         },
       ],
       positionLocation: 0,
+      stateBtn: false,
     }
+  },
+  computed: {
+    facebookPixel() {
+      return this.$store.state.analytics_tagmanager
+    },
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
+      this.dataContact[0].dato = this.dataStore.tienda.telefono
+      this.dataContact[1].dato = this.dataStore.tienda.whatsapp
+      this.dataContact[2].dato = this.dataStore.tienda.email_tienda
+    },
   },
   destroyed() {
     this.nombre = ''
@@ -298,11 +319,7 @@ export default {
     this.numberphone = ''
     this.comment = ''
   },
-  computed: {
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
-  },
+
   methods: {
     changeLocation(value) {
       this.positionLocation = value
@@ -364,18 +381,6 @@ export default {
       this.email = ''
       this.numberphone = ''
       this.comment = ''
-    },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
-      this.dataContact[0].dato = this.dataStore.tienda.telefono
-      this.dataContact[1].dato = this.dataStore.tienda.whatsapp
-      this.dataContact[2].dato = this.dataStore.tienda.email_tienda
     },
   },
 }

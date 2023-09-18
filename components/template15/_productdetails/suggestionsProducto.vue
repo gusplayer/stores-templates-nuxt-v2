@@ -11,23 +11,35 @@
     </p>
     <KoSwiper
       :products="category"
-      :cardProducts="cardProducts"
-      :settingsGeneral="settingsGeneral"
+      :card-products="cardProducts"
+      :setting-general="settingGeneral"
     />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'suggestionsProducto15',
-  props: {
-    category: {},
-    settingsGeneral: Object,
-    cardProducts: Object,
-    detailsProducts: Object,
-  },
+  name: 'SuggestionsProducto15',
   components: {
     KoSwiper: () => import('../_productofavorito/productSlide.vue'),
+  },
+  props: {
+    category: {
+      type: Array,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    cardProducts: {
+      type: Object,
+      required: true,
+    },
+    detailsProducts: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

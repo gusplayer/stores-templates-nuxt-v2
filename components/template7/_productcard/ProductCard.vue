@@ -167,7 +167,7 @@
       </div>
       <div
         class="overlay-bottom"
-        v-on:click="addShoppingCart"
+        @click="addShoppingCart"
         v-if="
           !this.estadoCart &&
           !soldOut &&
@@ -323,7 +323,7 @@ import idCloudinary from '../../../mixins/idCloudinary'
 import currency from '../../../mixins/formatCurrent'
 export default {
   mixins: [idCloudinary, currency],
-  name: 'Ko7-ProductCard-2',
+  name: 'K07-ProductCard-2',
   props: {
     product: Object,
     settingKProdutCard: Object,

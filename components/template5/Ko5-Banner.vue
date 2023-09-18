@@ -25,8 +25,8 @@
 <script>
 import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
+  name: 'Ko5Banner',
   mixins: [idCloudinaryBanner],
-  name: 'Ko5-Banner',
   computed: {
     banner() {
       return this.$store.state.settingByTemplate

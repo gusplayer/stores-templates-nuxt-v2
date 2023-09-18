@@ -1,16 +1,18 @@
 <template>
-  <div class="producto" :style="[productListCard, settingGeneral]">
-    <div
-      class="container"
-      :style="[
-        {
-          '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
-              : 'Roboto',
-        },
-      ]"
-    >
+  <div
+    class="producto"
+    :style="[
+      productListCard,
+      settingGeneral,
+      {
+        '--font-style-2':
+          settingGeneral && settingGeneral.fount_2
+            ? settingGeneral.fount_2
+            : 'Roboto',
+      },
+    ]"
+  >
+    <div class="container">
       <nuxt-link
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
@@ -18,13 +20,13 @@
         <client-only>
           <img
             v-if="!soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 550, 550)"
+            v-lazy="idCloudinary(product.foto_cloudinary, 550, 550)"
             class="product-image"
             alt="Product Img"
           />
           <img
             v-if="soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 550, 550)"
+            v-lazy="idCloudinary(product.foto_cloudinary, 550, 550)"
             class="product-image-soldOut"
             alt="Product Img"
           />
@@ -35,8 +37,8 @@
         <div class="icons-hover">
           <div class="transport-icon">
             <svg
-              class="transporte-icon"
               v-if="!getFreeShipping && !soldOut"
+              class="transporte-icon"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               version="1.1"
@@ -152,14 +154,12 @@
       </div>
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
         <div
+          v-if="product.tag_promocion == 1 && product.promocion_valor"
           class="overlay-bottom-promo"
-          v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
         >
           <div class="cart-Shop">
             <div class="text-cart">
-              <p class="w-full txt-add">
-                {{ this.product.promocion_valor }}% OFF
-              </p>
+              <p class="w-full txt-add">{{ product.promocion_valor }}% OFF</p>
             </div>
           </div>
         </div>
@@ -174,52 +174,42 @@
         </div>
       </nuxt-link>
     </div>
-    <div
-      class="datos-producto"
-      :style="[
-        {
-          '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
-              : 'Roboto',
-        },
-      ]"
-    >
-      <div class="categoria" v-if="this.product.categoria">
-        {{ this.product.categoria }}
+    <div class="datos-producto">
+      <div class="categoria" v-if="product.categoria">
+        {{ product.categoria }}
       </div>
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
         <div class="tittle tittle-xml">
-          <p class="card-title" v-if="this.product.nombre.length >= 90">
-            {{ `${this.product.nombre.slice(0, 90)}...` }}
+          <p class="card-title" v-if="product.nombre.length >= 90">
+            {{ `${product.nombre.slice(0, 90)}...` }}
           </p>
           <p class="card-title" v-else>
-            {{ `${this.product.nombre.slice(0, 90)}` }}
+            {{ `${product.nombre.slice(0, 90)}` }}
           </p>
         </div>
         <div class="tittle tittle-lg">
-          <p class="card-title" v-if="this.product.nombre.length >= 54">
-            {{ `${this.product.nombre.slice(0, 54)}...` }}
+          <p class="card-title" v-if="product.nombre.length >= 54">
+            {{ `${product.nombre.slice(0, 54)}...` }}
           </p>
           <p class="card-title" v-else>
-            {{ `${this.product.nombre.slice(0, 54)}` }}
+            {{ `${product.nombre.slice(0, 54)}` }}
           </p>
         </div>
         <div class="tittle tittle-sm">
-          <p class="card-title" v-if="this.product.nombre.length >= 30">
-            {{ `${this.product.nombre.slice(0, 30)}...` }}
+          <p class="card-title" v-if="product.nombre.length >= 30">
+            {{ `${product.nombre.slice(0, 30)}...` }}
           </p>
           <p class="card-title" v-else>
-            {{ `${this.product.nombre.slice(0, 30)}` }}
+            {{ `${product.nombre.slice(0, 30)}` }}
           </p>
         </div>
       </nuxt-link>
       <div class="precio">
-        <div class="content-text-price" v-if="this.product.precio">
-          <div v-if="this.estadoCart == true && this.equalsPrice">
-            <p class="text-price" v-if="this.minPrice">
+        <div class="content-text-price" v-if="product.precio">
+          <div v-if="estadoCart == true && equalsPrice">
+            <p class="text-price" v-if="minPrice">
               {{
-                this.minPrice
+                minPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -228,19 +218,14 @@
             </p>
           </div>
           <div
-            class="content-price"
             v-else-if="
-              this.estadoCart == true &&
-              this.minPrice != this.maxPrice &&
-              !this.equalsPrice
+              estadoCart == true && minPrice != maxPrice && !equalsPrice
             "
+            class="content-price"
           >
-            <div
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <div v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.minPrice
+                minPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -248,12 +233,9 @@
               }}
             </div>
             <p class="separator-price">-</p>
-            <div
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <div v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.maxPrice
+                maxPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -262,12 +244,9 @@
             </div>
           </div>
           <div v-else>
-            <p
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <p v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.product.precio
+                product.precio
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -286,10 +265,9 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 import currency from '../../../mixins/formatCurrent'
 export default {
+  name: 'Ko9ProductCard',
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductCard-9',
   props: { product: Object, settingGeneral: Object, productListCard: Object },
-
   data() {
     return {
       hover: false,
@@ -304,19 +282,6 @@ export default {
       spent: false,
       active: true,
       equalsPrice: false,
-    }
-  },
-  mounted() {
-    this.idSlug = this.product.id
-    this.productPrice()
-    if (
-      this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
-    ) {
-      this.estadoCart = true
-    }
-    if (this.product) {
-      this.getDataProduct()
     }
   },
   computed: {
@@ -336,6 +301,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },
@@ -374,6 +340,24 @@ export default {
         return !this.product.stock
       }
     },
+  },
+  watch: {
+    productsCarts() {
+      this.getDataProduct()
+    },
+  },
+  mounted() {
+    this.idSlug = this.product.id
+    this.productPrice()
+    if (
+      this.product.con_variante &&
+      this.product.variantes[0].variantes !== '[object Object]'
+    ) {
+      this.estadoCart = true
+    }
+    if (this.product) {
+      this.getDataProduct()
+    }
   },
   methods: {
     getDataProduct() {
@@ -480,11 +464,6 @@ export default {
           }
         }
       }
-    },
-  },
-  watch: {
-    productsCarts(value) {
-      this.getDataProduct()
     },
   },
 }

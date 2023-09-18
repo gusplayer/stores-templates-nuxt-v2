@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import KoProductCard1 from '../../../components/template9/_productcard/ProductCard'
+import KoProductCard1 from '../_productcard/ProductCard'
 
 export default {
   name: 'productSlide-productFavorito',

@@ -1,7 +1,3 @@
-/* eslint-disable no-undef */
-// const isProd = process.env.NODE_ENV === 'production'
-import componentConfig from './utils/componentConfig'
-
 export default {
   head: {
     title: process.env.npm_package_name || '',
@@ -54,12 +50,10 @@ export default {
     ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
   ],
   components: true,
-  buildModules: ['@nuxt/components'],
-  components: componentConfig,
   facebook: {
-    /* module options */
     pixelId: '671820736795254',
     autoPageView: true,
+    debug: true,
   },
   sitemap: {
     gzip: true,
@@ -95,6 +89,11 @@ export default {
           autoprefixer: {},
         },
       },
+    },
+    splitChunks: {
+      layouts: true,
+      pages: true,
+      commons: true,
     },
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],

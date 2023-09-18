@@ -4,13 +4,12 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
   components: {
     K05Article: () => import('../../components/blog/Ko-articulo'),
     K07Article: () =>
       import('../../components/template7/blog_page/Ko-articulo'),
     K09Article: () =>
-      import('../../components/template9/blog_page/Ko-articulo'),
+      import('../../components/template9/blog_page/Ko-articulo.vue'),
     K10Article: () =>
       import('../../components/template10/blog_page/Ko-articulo'),
     K11Article: () =>
@@ -18,6 +17,7 @@ export default {
     K13Article: () =>
       import('../../components/template13/_blog/Ko-articulo.vue'),
   },
+  layout: 'default',
   data() {
     return {
       componentMapping: {
@@ -31,6 +31,16 @@ export default {
         13: 'K13Article',
         14: 'K13Article',
         15: 'K13Article',
+      },
+      templateMapping: {
+        9: 'SET_CURRENTSETTING09',
+        7: 'SET_CURRENTSETTING07',
+        11: 'SET_CURRENTSETTING11',
+        10: 'SET_CURRENTSETTING10',
+        13: 'SET_CURRENTSETTING13',
+        14: 'SET_CURRENTSETTING14',
+        15: 'SET_CURRENTSETTING15',
+        // 16: 'SET_CURRENTSETTING15',
       },
     }
   },
@@ -48,6 +58,7 @@ export default {
     ]),
     indexTemplate() {
       let productListComponent = ''
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)]
       }
@@ -69,6 +80,34 @@ export default {
               },
             ]
           : null,
+      }
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener('message', this.addEventListenerTemplate)
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
+  methods: {
+    addEventListenerTemplate(e) {
+      if (
+        e.origin.includes('https://panel.komercia.co') ||
+        e.origin.includes('http://localhost:8080')
+      ) {
+        if (e && e.data && e.data.component) {
+          const template = e.data.template
+          // eslint-disable-next-line no-prototype-builtins
+          if (this.templateMapping.hasOwnProperty(template)) {
+            const commitAction = this.templateMapping[template]
+            this.$store.commit(commitAction, e.data)
+          }
+        } else if (e && e.data && e.data.returnHome == true) {
+          this.$router.push({
+            path: '/',
+          })
+        }
       }
     },
   },

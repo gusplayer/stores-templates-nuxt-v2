@@ -128,7 +128,7 @@
                             `https://img.youtube.com/vi/${idYoutube}/0.jpg`
                           "
                           class="w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top"
-                          v-on:mouseover="existYoutube = true"
+                          @mouseover="existYoutube = true"
                           alt="Product video"
                         />
                       </div>

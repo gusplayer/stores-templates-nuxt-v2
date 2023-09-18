@@ -1,16 +1,16 @@
 <template>
-  <div class="w-full flex flex-col justify-center items-center" id="width">
+  <div id="width" class="w-full flex flex-col justify-center items-center">
     <KBlogWapi />
   </div>
 </template>
 
 <script>
-import KBlogWapi from '../../../../components/whatsapp/blog_page/Ko-Blog.vue'
 export default {
-  layout: 'wa',
+  name: 'IndexBlogWa',
   components: {
-    KBlogWapi,
+    KBlogWapi: () => import('@/components/whatsapp/blog_page/Ko-Blog.vue'),
   },
+  layout: 'wa',
   mounted() {
     this.onResize()
     window.addEventListener('resize', this.onResize)

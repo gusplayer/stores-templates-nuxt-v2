@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-card">
-    <div class="container-card" id="product-card">
+    <div id="product-card" class="container-card">
       <div class="wrapper">
         <nuxt-link
           :to="{ path: `/productos/` + product.slug }"
@@ -8,36 +8,36 @@
         >
           <client-only>
             <img
+              v-if="!soldOut"
+              v-lazy="
+                product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                  : idCloudinary(product.foto_cloudinary, 550, 550)
+              "
               width="294"
               height="294"
               loading="lazy"
-              v-if="!soldOut"
-              v-lazy="
-                this.product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                  : idCloudinary(this.product.foto_cloudinary, 550, 550)
-              "
               class="product-image"
               :class="
-                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                product.foto_cloudinary == 'sin_foto.jpeg'
                   ? 'notproduct-image'
                   : ''
               "
               alt="Product Img"
             />
             <img
+              v-if="soldOut"
+              v-lazy="
+                product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                  : idCloudinary(product.foto_cloudinary, 550, 550)
+              "
               width="294"
               height="294"
               loading="lazy"
-              v-if="soldOut"
-              v-lazy="
-                this.product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                  : idCloudinary(this.product.foto_cloudinary, 550, 550)
-              "
               class="product-image-soldOut"
               :class="
-                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                product.foto_cloudinary == 'sin_foto.jpeg'
                   ? 'notproduct-image'
                   : ''
               "
@@ -46,12 +46,10 @@
           </client-only>
           <div class="image_overlay"></div>
         </nuxt-link>
-        <div
-          v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
-        >
+        <div v-if="product.tag_promocion == 1 && product.promocion_valor">
           <div class="overlay-top">
             <div>
-              <p>{{ this.product.promocion_valor }}% OFF</p>
+              <p>{{ product.promocion_valor }}% OFF</p>
             </div>
           </div>
           <div class="overlay-free">
@@ -71,25 +69,25 @@
         <div class="separador-stats"></div>
         <div class="stats">
           <div class="stats-container">
-            <p class="card-info-1" v-if="soldOut">
+            <p v-if="soldOut" class="card-info-1">
               {{ $t('home_cardAgotado') }}
             </p>
-            <p class="card-info-2" v-if="!getFreeShipping">
+            <p v-if="!getFreeShipping" class="card-info-2">
               {{ $t('home_cardGratis') }}
             </p>
             <div class="content-name-product">
-              <p class="card-title" v-if="this.product.nombre.length >= 54">
-                {{ `${this.product.nombre.slice(0, 54)}...` }}
+              <p v-if="product.nombre.length >= 54" class="card-title">
+                {{ `${product.nombre.slice(0, 54)}...` }}
               </p>
-              <p class="card-title" v-else>
-                {{ `${this.product.nombre.slice(0, 54)}` }}
+              <p v-else class="card-title">
+                {{ `${product.nombre.slice(0, 54)}` }}
               </p>
             </div>
-            <div class="content-text-price" v-if="this.product.precio">
-              <div v-if="this.estadoCart == true && this.equalsPrice">
-                <p class="text-price" v-if="this.minPrice">
+            <div v-if="product.precio" class="content-text-price">
+              <div v-if="estadoCart == true && equalsPrice">
+                <p v-if="minPrice" class="text-price">
                   {{
-                    this.minPrice
+                    minPrice
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -98,19 +96,17 @@
                 </p>
               </div>
               <div
-                class="content-price"
                 v-else-if="
-                  this.estadoCart == true &&
-                  this.minPrice != this.maxPrice &&
-                  !this.equalsPrice
+                  estadoCart == true && minPrice != maxPrice && !equalsPrice
                 "
+                class="content-price"
               >
                 <div
+                  v-if="product.precio > 0 || product.precio"
                   class="text-price"
-                  v-if="this.product.precio > 0 || this.product.precio"
                 >
                   {{
-                    this.minPrice
+                    minPrice
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -119,11 +115,11 @@
                 </div>
                 <p class="separator-price">-</p>
                 <div
+                  v-if="product.precio > 0 || product.precio"
                   class="text-price"
-                  v-if="this.product.precio > 0 || this.product.precio"
                 >
                   {{
-                    this.maxPrice
+                    maxPrice
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -133,11 +129,11 @@
               </div>
               <div v-else>
                 <p
+                  v-if="product.precio > 0 || product.precio"
                   class="text-price"
-                  v-if="this.product.precio > 0 || this.product.precio"
                 >
                   {{
-                    this.product.precio
+                    product.precio
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -146,7 +142,7 @@
                 </p>
               </div>
             </div>
-            <div class="content-price-empty" v-else></div>
+            <div v-else class="content-price-empty"></div>
             <div class="wrapper-btn-icon">
               <nuxt-link
                 class="view_details"
@@ -156,15 +152,15 @@
               </nuxt-link>
               <div class="separador-btn"></div>
               <div
-                id="add_cart"
-                v-on:click="addShoppingCart"
                 v-if="
-                  !this.estadoCart &&
+                  !estadoCart &&
                   !soldOut &&
                   !spent &&
-                  (this.product.tipo_servicio == null ||
-                    this.product.tipo_servicio == '0')
+                  (product.tipo_servicio == null ||
+                    product.tipo_servicio == '0')
                 "
+                id="add_cart"
+                @click="addShoppingCart"
               >
                 <p style="height: 23px">
                   <cartArrowDown /> {{ $t('home_cardAgregar') }}
@@ -181,17 +177,17 @@
         >
           <client-only>
             <img
+              v-if="!soldOut"
+              v-lazy="
+                product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                  : idCloudinary(product.foto_cloudinary, 400, 400)
+              "
               width="294"
               height="294"
               loading="lazy"
-              v-if="!soldOut"
-              v-lazy="
-                this.product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                  : idCloudinary(this.product.foto_cloudinary, 400, 400)
-              "
               :class="
-                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                product.foto_cloudinary == 'sin_foto.jpeg'
                   ? 'notproduct-image-res'
                   : ''
               "
@@ -199,17 +195,17 @@
               alt="Product Img"
             />
             <img
+              v-if="soldOut"
+              v-lazy="
+                product.foto_cloudinary == 'sin_foto.jpeg'
+                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                  : idCloudinary(product.foto_cloudinary, 400, 400)
+              "
               width="294"
               height="294"
               loading="lazy"
-              v-if="soldOut"
-              v-lazy="
-                this.product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                  : idCloudinary(this.product.foto_cloudinary, 400, 400)
-              "
               :class="
-                this.product.foto_cloudinary == 'sin_foto.jpeg'
+                product.foto_cloudinary == 'sin_foto.jpeg'
                   ? 'notproduct-image-res'
                   : ''
               "
@@ -219,27 +215,27 @@
           </client-only>
         </nuxt-link>
         <div class="content-card-items">
-          <p class="card-info-1" v-if="soldOut">{{ $t('home_cardAgotado') }}</p>
-          <p class="card-info-2" v-if="!getFreeShipping">
+          <p v-if="soldOut" class="card-info-1">{{ $t('home_cardAgotado') }}</p>
+          <p v-if="!getFreeShipping" class="card-info-2">
             {{ $t('home_cardGratis') }}
           </p>
           <nuxt-link
             :to="{ path: `/productos/` + product.slug }"
             class="content-name-product"
           >
-            <p class="card-title" v-if="this.product.nombre.length >= 25">
-              {{ `${this.product.nombre.slice(0, 25)}..` }}
+            <p v-if="product.nombre.length >= 25" class="card-title">
+              {{ `${product.nombre.slice(0, 25)}..` }}
             </p>
-            <p class="card-title" v-else>
-              {{ `${this.product.nombre.slice(0, 30)}` }}
+            <p v-else class="card-title">
+              {{ `${product.nombre.slice(0, 30)}` }}
             </p>
           </nuxt-link>
-          <div class="content-text-price" v-if="this.product.precio">
+          <div v-if="product.precio" class="content-text-price">
             <nuxt-link :to="{ path: `/productos/` + product.slug }">
-              <div v-if="this.estadoCart == true && this.equalsPrice">
-                <p class="text-price" v-if="this.minPrice">
+              <div v-if="estadoCart == true && equalsPrice">
+                <p v-if="minPrice" class="text-price">
                   {{
-                    this.minPrice
+                    minPrice
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -248,19 +244,15 @@
                 </p>
               </div>
               <div
+                v-else-if="estadoCart && minPrice != maxPrice && !equalsPrice"
                 class="content-price"
-                v-else-if="
-                  estadoCart &&
-                  this.minPrice != this.maxPrice &&
-                  !this.equalsPrice
-                "
               >
                 <div
+                  v-if="product.precio > 0 || product.precio"
                   class="text-price"
-                  v-if="this.product.precio > 0 || this.product.precio"
                 >
                   {{
-                    this.minPrice
+                    minPrice
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -269,11 +261,11 @@
                 </div>
                 <p class="separator-price">-</p>
                 <div
+                  v-if="product.precio > 0 || product.precio"
                   class="text-price"
-                  v-if="this.product.precio > 0 || this.product.precio"
                 >
                   {{
-                    this.maxPrice
+                    maxPrice
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -283,11 +275,11 @@
               </div>
               <div v-else>
                 <p
+                  v-if="product.precio > 0 || product.precio"
                   class="text-price"
-                  v-if="this.product.precio > 0 || this.product.precio"
                 >
                   {{
-                    this.product.precio
+                    product.precio
                       | currency(
                         dataStore.tienda.codigo_pais,
                         dataStore.tienda.moneda
@@ -298,27 +290,25 @@
             </nuxt-link>
             <div
               v-if="
-                !this.estadoCart &&
+                !estadoCart &&
                 !soldOut &&
                 !spent &&
-                (this.product.tipo_servicio == null ||
-                  this.product.tipo_servicio == '0')
+                (product.tipo_servicio == null || product.tipo_servicio == '0')
               "
             >
-              <cartArrowDown class="icon-cart" v-on:click="addShoppingCart" />
+              <cartArrowDown class="icon-cart" @click="addShoppingCart" />
             </div>
           </div>
-          <div class="separator-movil" v-else>
+          <div v-else class="separator-movil">
             <div
               v-if="
-                !this.estadoCart &&
+                !estadoCart &&
                 !soldOut &&
                 !spent &&
-                (this.product.tipo_servicio == null ||
-                  this.product.tipo_servicio == '0')
+                (product.tipo_servicio == null || product.tipo_servicio == '0')
               "
             >
-              <cartArrowDown v-on:click="addShoppingCart" />
+              <cartArrowDown @click="addShoppingCart" />
             </div>
           </div>
         </div>
@@ -332,21 +322,13 @@ import idCloudinary from '../../../mixins/idCloudinary'
 import currency from '../../../mixins/formatCurrent'
 
 export default {
+  name: 'Ko5ProductCard',
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductCard-5',
-  props: { product: Object },
-  mounted() {
-    this.idSlug = this.product.id
-    this.productPrice()
-    if (
-      this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
-    ) {
-      this.estadoCart = true
-    }
-    if (this.product) {
-      this.getDataProduct()
-    }
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -419,6 +401,24 @@ export default {
         return !this.product.stock
       }
     },
+  },
+  watch: {
+    productsCarts() {
+      this.getDataProduct()
+    },
+  },
+  mounted() {
+    this.idSlug = this.product.id
+    this.productPrice()
+    if (
+      this.product.con_variante &&
+      this.product.variantes[0].variantes !== '[object Object]'
+    ) {
+      this.estadoCart = true
+    }
+    if (this.product) {
+      this.getDataProduct()
+    }
   },
   methods: {
     getDataProduct() {
@@ -525,11 +525,6 @@ export default {
           }
         }
       }
-    },
-  },
-  watch: {
-    productsCarts(value) {
-      this.getDataProduct()
     },
   },
 }

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import KoProductCard1 from '../../../components/template9/_productcard/ProductCardHoko.vue'
+import KoProductCard1 from '../_productcard/ProductCardHoko.vue'
 export default {
   name: 'productSlide-productFavorito-hoko',
   components: {

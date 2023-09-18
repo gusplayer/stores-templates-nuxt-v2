@@ -1,19 +1,19 @@
 <template>
-  <div class="wrapper-footer" ref="background" :style="settingByTemplate">
+  <div ref="background" class="wrapper-footer" :style="settingByTemplate">
     <div class="contenedor">
       <div class="content-items-iconos">
         <div
           v-for="(item, index) in links"
-          :key="`${index}${item.icon}`"
           v-show="item.link"
+          :key="`${index}${item.icon}`"
         >
           <a
             v-if="item.link"
             :href="item.link"
             target="_blank "
             rel="noreferrer noopener"
-            ><div class="icon" :is="item.icon"
-          /></a>
+            ><div :is="item.icon" class="icon" />
+          </a>
         </div>
       </div>
       <div class="footer-item-secciones">
@@ -25,32 +25,32 @@
       </div>
     </div>
     <div class="under-footer">
-      <div class="contenedor-term-con" v-if="dataStore.politicas">
+      <div v-if="dataStore.politicas" class="contenedor-term-con">
         <label for="modal-toggle"> {{ $t('footer_politicasyterminos') }}</label>
       </div>
       <div class="separator"></div>
       <p>{{ $t('footer_desarrollado') }}</p>
       <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
         <img
+          v-if="logo"
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
           "
-          v-if="logo"
           class="logo2"
           alt="Logo Img"
         />
         <img
+          v-else
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
           "
-          v-else
           class="logo2"
           alt="Logo Img"
         />
       </a>
     </div>
-    <div class="modal-container" v-if="dataStore.politicas">
-      <input type="checkbox" id="modal-toggle" />
+    <div v-if="dataStore.politicas" class="modal-container">
+      <input id="modal-toggle" type="checkbox" />
       <label class="modal-backdrop" for="modal-toggle"></label>
       <div class="modal-content">
         <div class="header-modal">
@@ -60,48 +60,48 @@
           </label>
         </div>
         <div class="tabs">
-          <div class="tab" v-if="this.dataStore.politicas.cambio">
+          <div v-if="dataStore.politicas.cambio" class="tab">
             <input id="tab-one" type="checkbox" name="tabs" />
             <label for="tab-one">{{ $t('footer_politicaCambio') }}</label>
             <div class="tab-content">
-              <div v-html="this.dataStore.politicas.cambio"></div>
+              <div v-html="dataStore.politicas.cambio"></div>
             </div>
           </div>
-          <div class="tab" v-if="this.dataStore.politicas.datos">
+          <div v-if="dataStore.politicas.datos" class="tab">
             <input id="tab-two" type="checkbox" name="tabs" />
             <label for="tab-two">{{ $t('footer_politicaTratamientos') }}</label>
             <div class="tab-content">
-              <div v-html="this.dataStore.politicas.datos"></div>
+              <div v-html="dataStore.politicas.datos"></div>
             </div>
           </div>
-          <div class="tab" v-if="this.dataStore.politicas.devolucion">
+          <div v-if="dataStore.politicas.devolucion" class="tab">
             <input id="tab-three" type="checkbox" name="tabs" />
             <label for="tab-three">{{
               $t('footer_politicaDevoluciones')
             }}</label>
             <div class="tab-content">
-              <div v-html="this.dataStore.politicas.devolucion"></div>
+              <div v-html="dataStore.politicas.devolucion"></div>
             </div>
           </div>
-          <div class="tab" v-if="this.dataStore.politicas.garantia">
+          <div v-if="dataStore.politicas.garantia" class="tab">
             <input id="tab-four" type="checkbox" name="tabs" />
             <label for="tab-four">{{ $t('footer_politicaGarantia') }}</label>
             <div class="tab-content">
-              <div v-html="this.dataStore.politicas.garantia"></div>
+              <div v-html="dataStore.politicas.garantia"></div>
             </div>
           </div>
-          <div class="tab" v-if="this.dataStore.politicas.envios">
+          <div v-if="dataStore.politicas.envios" class="tab">
             <input id="tab-five" type="checkbox" name="tabs" />
             <label for="tab-five">{{ $t('footer_politicaEnvios') }}</label>
             <div class="tab-content">
-              <div v-html="this.dataStore.politicas.envios"></div>
+              <div v-html="dataStore.politicas.envios"></div>
             </div>
           </div>
-          <div class="tab" v-if="this.dataStore.politicas.pagos">
+          <div v-if="dataStore.politicas.pagos" class="tab">
             <input id="tab-six" type="checkbox" name="tabs" />
             <label for="tab-six">{{ $t('footer_politicaPagos') }}</label>
             <div class="tab-content">
-              <div v-html="this.dataStore.politicas.pagos"></div>
+              <div v-html="dataStore.politicas.pagos"></div>
             </div>
           </div>
         </div>

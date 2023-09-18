@@ -1,12 +1,12 @@
 <template>
-  <div class="wrapper_content360" v-if="this.iframe">
-    <div class="contenedor" v-if="this.iframe.iframe">
+  <div v-if="iframe" class="wrapper_content360">
+    <div v-if="iframe?.iframe" class="contenedor">
       <iframe
+        :src="iframe.iframe"
         width="100%"
         height="100%"
         frameborder="0"
         allowfullscreen="true"
-        :src="this.iframe.iframe"
       >
       </iframe>
     </div>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'Ko5-Component360',
+  name: 'Ko5Component360',
   computed: {
     iframe() {
       return this.$store.state.settingByTemplate

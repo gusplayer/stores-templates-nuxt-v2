@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="fullProducts.length > 0"
-    class="w-full flex justify-center items-center py-25 lg:py-40 px-10"
+    class="w-full flex justify-center items-center py-30 lg:py-50 px-10"
     :style="`background-color: ${listProductsOffers['--background_color_1']}`"
   >
     <div

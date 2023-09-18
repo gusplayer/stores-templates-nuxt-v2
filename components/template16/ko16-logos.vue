@@ -6,11 +6,11 @@
     <div
       class="w-full max-w-[1200px] h-auto flex flex-col items-center justify-center overflow-hidden"
     >
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full">
+      <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="w-full">
         <div class="swiper-wrapper w-full">
           <a
-            :id="`slide${index + 1}`"
             v-for="(item, index) in logos.values"
+            :id="`slide${index + 1}`"
             :key="index"
             :href="item.url_redirect"
             class="swiper-slide w-full"
@@ -32,11 +32,17 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
+  name: 'Ko16Logos',
   mixins: [idCloudinary],
-  name: 'Ko16-Logos',
   props: {
-    logos: Object,
-    dataStore: Object,
+    logos: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

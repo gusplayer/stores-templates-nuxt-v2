@@ -1,19 +1,23 @@
 <template>
-  <div class="wrapper-footer" ref="background" :style="settingByTemplate">
-    <div
-      :style="{
+  <div
+    ref="background"
+    class="wrapper-footer"
+    :style="[
+      settingByTemplate,
+      {
         '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
+          settingByTemplate && settingByTemplate.tipo_letra
+            ? settingByTemplate.tipo_letra
             : 'Roboto',
-      }"
-      class="contenedor"
-    >
+      },
+    ]"
+  >
+    <div class="contenedor">
       <div class="content-items-iconos">
         <div
           v-for="(item, index) in links"
-          :key="`${index}${item.icon}`"
           v-show="item.link"
+          :key="`${index}${item.icon}`"
         >
           <a
             v-if="item.link"
@@ -21,7 +25,7 @@
             target="_blank "
             rel="noreferrer noopener"
           >
-            <div class="icon" :is="item.icon" />
+            <div :is="item.icon" class="icon" />
           </a>
         </div>
       </div>
@@ -40,76 +44,60 @@
         </div>
       </div>
     </div>
-    <div
-      :style="{
-        '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
-            : 'Roboto',
-      }"
-      class="under-footer"
-    >
+    <div class="under-footer">
       <button
-        class="contenedor-term-con"
         v-if="dataStore.politicas"
+        class="contenedor-term-con"
         @click="OpenModalPolitics"
       >
         <p>{{ $t('footer_politicasyterminos') }}</p>
       </button>
       <div class="separator"></div>
-      <p v-if="this.showLogo">
+      <p v-if="showLogo">
         {{ $t('footer_desarrollado') }}
       </p>
       <a
-        v-if="this.showLogo"
+        v-if="showLogo"
         href="https://komercia.co/"
         target="_blank"
         rel="noreferrer noopener"
       >
         <img
-          width="120"
-          loading="lazy"
+          v-if="logo"
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
           "
-          v-if="logo"
+          width="120"
+          loading="lazy"
           class="logo2"
           alt="Logo Img"
         />
         <img
-          width="120"
-          loading="lazy"
+          v-else
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
           "
-          v-else
+          width="120"
+          loading="lazy"
           class="logo2"
           alt="Logo Img"
         />
       </a>
-      <nuxt-link to="/" class="wrapper-logo-tablada" v-if="!this.showLogo">
+      <nuxt-link to="/" v-if="!showLogo" class="wrapper-logo-tablada">
         <img
-          width="120"
-          loading="lazy"
           v-lazy="
             `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
           "
+          width="120"
+          loading="lazy"
           class="logo-tablada"
           alt="Logo Img"
         />
       </nuxt-link>
     </div>
-    <div
-      :style="{
-        '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
-            : 'Roboto',
-      }"
-      v-if="showModal"
-    >
-      <div class="modal" v-if="dataStore.politicas">
-        <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
+    <div v-if="showModal">
+      <div v-if="dataStore.politicas" class="modal">
+        <KoTermsConditions :data-store="dataStore" />
       </div>
     </div>
   </div>
@@ -118,29 +106,21 @@
 <script>
 import KoTermsConditions from '../ko-TermsAndConditions'
 export default {
-  name: 'Ko-Footer-1',
+  name: 'Ko5Footer',
   components: {
     KoTermsConditions,
   },
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
-  mounted() {
-    if (
-      this.settingByTemplate &&
-      this.settingByTemplate['--background_color_1']
-    ) {
-      this.setLogo()
-    }
-    if (
-      this.dataStore.tienda.id_tienda == 5574 ||
-      this.dataStore.tienda.id_tienda == 5347 ||
-      this.dataStore.tienda.id_tienda == 6369
-    ) {
-      this.showLogo = false
-    }
-  },
+
   data() {
     return {
       showLogo: true,
@@ -204,23 +184,6 @@ export default {
       return this.$store.state.modalpolitics05
     },
   },
-  methods: {
-    OpenModalPolitics() {
-      this.$store.state.modalpolitics05 = true
-    },
-    setLogo() {
-      let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
-      )
-      let colorArray = color.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
-      }
-    },
-  },
   watch: {
     'dataStore.tienda'() {
       this.links[0].link = this.dataStore.tienda.red_facebook
@@ -239,6 +202,38 @@ export default {
         } else {
           this.logo = false
         }
+      }
+    },
+  },
+  mounted() {
+    if (
+      this.settingByTemplate &&
+      this.settingByTemplate['--background_color_1']
+    ) {
+      this.setLogo()
+    }
+    if (
+      this.dataStore.tienda.id_tienda == 5574 ||
+      this.dataStore.tienda.id_tienda == 5347 ||
+      this.dataStore.tienda.id_tienda == 6369
+    ) {
+      this.showLogo = false
+    }
+  },
+  methods: {
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
+    },
+    setLogo() {
+      let color = getComputedStyle(this.$refs.background).getPropertyValue(
+        '--background_color_1'
+      )
+      let colorArray = color.split(',')
+      let colorInt = parseInt(colorArray[2])
+      if (colorInt > 50) {
+        this.logo = true
+      } else {
+        this.logo = false
       }
     },
   },

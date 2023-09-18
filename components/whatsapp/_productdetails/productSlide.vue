@@ -36,8 +36,8 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'ProductSlideDetails',
   mixins: [idCloudinary],
-  name: 'productSlide-details',
   props: ['photos', 'photo', 'idYoutube'],
   methods: {
     setPhoto(photo) {

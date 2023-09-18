@@ -1,13 +1,13 @@
 <template>
   <div class="wrapper-productDetail" :style="settingByTemplate">
-    <div class="container-productDetail-loading" v-if="loading"></div>
+    <div v-if="loading" class="container-productDetail-loading" />
     <div
-      class="container-productDetail"
       v-else
+      class="container-productDetail"
       :style="{
         '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
+          settingByTemplate && settingByTemplate.tipo_letra
+            ? settingByTemplate.tipo_letra
             : 'Roboto',
       }"
     >
@@ -66,11 +66,11 @@
             <div>
               <div class="quantity">
                 <p class="text-quantity">{{ $t('cart_cantidad') }}</p>
-                <button class="quantity_remove" v-on:click="removeQuantity()">
+                <button class="quantity_remove" @click="removeQuantity()">
                   <menos-icon class="icon" />
                 </button>
                 <p class="quantity_value">{{ quantityValue }}</p>
-                <button class="quantity_add" v-on:click="addQuantity()">
+                <button class="quantity_add" @click="addQuantity()">
                   <mas-icon class="icon" />
                 </button>
 
@@ -98,7 +98,7 @@
                     ref="colorBtn"
                     class="btn"
                     v-if="!spent"
-                    v-on:click="GoPayments"
+                    @click="GoPayments"
                     id="AddToCartTag"
                   >
                     {{ $t('home_comprarAhora') }}
@@ -140,11 +140,11 @@
       <div class="responsive-purchase">
         <div class="ko-input">
           <div class="quantity-resposive">
-            <button class="quantity_remove" v-on:click="removeQuantity()">
+            <button class="quantity_remove" @click="removeQuantity()">
               <menos-icon class="icon" />
             </button>
             <p class="quantity_value">{{ quantityValue }}</p>
-            <button class="quantity_add" v-on:click="addQuantity()">
+            <button class="quantity_add" @click="addQuantity()">
               <mas-icon class="icon" />
             </button>
             <transition name="slide-fade">
@@ -161,7 +161,7 @@
               class="btn-responsive"
               ref="color2"
               v-if="!spent"
-              v-on:click="GoPayments"
+              @click="GoPayments"
               id="AddToCartTag"
             >
               <cartArrowDown class="card-icon-cart" />
@@ -182,21 +182,44 @@ import axios from 'axios'
 import productSlide from './_productdetails/productSlideHoko.vue'
 import koDescription from './_productdetails/descriptionProduct-hoko.vue'
 export default {
-  name: 'Ko5-ProductDetail',
-  props: {
-    dataStore: Object,
-    // productsData: Array,
-    whatsapp: String,
-    // envios: Object,
-    facebookPixel: Object,
-    settingByTemplate: Object,
-  },
+  name: 'Ko5ProductDetailHoko',
   components: {
     productSlide,
     koDescription,
   },
-  mounted() {
-    this.asyncauthToken()
+  filters: {
+    currency(value) {
+      if (value) {
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+      }
+      return ''
+    },
+    toLowerCase(value) {
+      if (value) {
+        return value.toLowerCase()
+      }
+      return ''
+    },
+  },
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    // productsData: Array,
+    whatsapp: {
+      type: String,
+      required: true,
+    },
+    // envios: Object,
+    facebookPixel: {
+      type: Object,
+      default: null,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -234,6 +257,16 @@ export default {
     dataHoko() {
       return this.$store.state.dataHoko
     },
+  },
+  watch: {
+    quantityValue(value) {
+      if (value > this.maxQuantityValue) {
+        this.quantityValue = this.maxQuantityValue
+      }
+    },
+  },
+  mounted() {
+    this.asyncauthToken()
   },
   methods: {
     mobileCheck() {
@@ -343,27 +376,6 @@ export default {
     },
     selectedPhoto(photo) {
       this.selectPhotoUrl = photo
-    },
-  },
-  watch: {
-    quantityValue(value) {
-      if (value > this.maxQuantityValue) {
-        this.quantityValue = this.maxQuantityValue
-      }
-    },
-  },
-  filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-      return ''
-    },
-    toLowerCase(value) {
-      if (value) {
-        return value.toLowerCase()
-      }
-      return ''
     },
   },
 }

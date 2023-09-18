@@ -1,7 +1,7 @@
 <template>
   <div
-    v-swiper:mySwiper="swiperOption"
     ref="mySwiper"
+    v-swiper:mySwiper="swiperOption"
     class="wrapper-slider max-h-[375px]"
   >
     <div class="swiper-wrapper">
@@ -12,14 +12,14 @@
           alt="Product img"
         />
       </div>
-      <div class="swiper-slide" v-for="photo in photos" :key="photo.id">
+      <div v-for="photo in photos" :key="photo.id" class="swiper-slide">
         <img
           v-lazy="idCloudinary(photo.foto_cloudinary, 550, 550)"
           class="photo"
           alt="Product img"
         />
       </div>
-      <div class="swiper-slide" v-if="idYoutube && idYoutube !== ''">
+      <div v-if="idYoutube && idYoutube !== ''" class="swiper-slide">
         <div class="youtube">
           <button class="youtube__action_back" @click="changeSlide()">
             <i class="material-icons"></i>
@@ -42,8 +42,8 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'ProductSlideDetails16',
   mixins: [idCloudinary],
-  name: 'productSlide-details15',
   props: ['photos', 'photo', 'idYoutube'],
   data() {
     return {

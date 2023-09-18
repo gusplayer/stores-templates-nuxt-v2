@@ -239,10 +239,10 @@
                   <p class="txt-quantity">{{ quantityValue }}</p>
                 </div>
                 <div class="box-quantity-btns">
-                  <div class="btn-quantity btn1" v-on:click="addQuantity()">
+                  <div class="btn-quantity btn1" @click="addQuantity()">
                     <FlechaUp-icon class="text-icon" />
                   </div>
-                  <div class="btn-quantity btn2" v-on:click="removeQuantity()">
+                  <div class="btn-quantity btn2" @click="removeQuantity()">
                     <Flechadown-icon class="text-icon" />
                   </div>
                 </div>
@@ -257,7 +257,7 @@
                     (data.info.tipo_servicio == null ||
                       data.info.tipo_servicio == '0')
                   "
-                  v-on:click="addShoppingCart"
+                  @click="addShoppingCart"
                   id="AddToCartTag"
                 >
                   <svg
@@ -289,7 +289,7 @@
                   ref="colorBtn"
                   class="btn"
                   v-else-if="!spent && data.info.tipo_servicio == '1'"
-                  v-on:click="GoPayments"
+                  @click="GoPayments"
                   id="AddToCartTag"
                 >
                   <svg

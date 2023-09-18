@@ -117,10 +117,10 @@
                   <p class="txt-quantity">{{ quantityValue }}</p>
                 </div>
                 <div class="box-quantity-btns">
-                  <div class="btn-quantity btn1" v-on:click="addQuantity()">
+                  <div class="btn-quantity btn1" @click="addQuantity()">
                     <FlechaUp-icon class="text-icon" />
                   </div>
-                  <div class="btn-quantity btn2" v-on:click="removeQuantity()">
+                  <div class="btn-quantity btn2" @click="removeQuantity()">
                     <Flechadown-icon class="text-icon" />
                   </div>
                 </div>
@@ -129,7 +129,7 @@
                 <button
                   ref="colorBtn"
                   class="btn"
-                  v-on:click="GoPayments"
+                  @click="GoPayments"
                   id="AddToCartTag"
                   v-if="!spent"
                 >

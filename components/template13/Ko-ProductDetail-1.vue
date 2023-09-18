@@ -6,7 +6,7 @@
       settingByTemplate13[0].settingGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate13[0]?.settingGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate13[0]?.settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -52,7 +52,7 @@
                         v-if="idYoutube"
                         v-lazy="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
                         v-show="idYoutube"
-                        v-on:mouseover="existYoutube = true"
+                        @mouseover="existYoutube = true"
                         class="video"
                         alt="Product Img"
                       />
@@ -70,7 +70,7 @@
             <div class="wrapper-photo_main">
               <div
                 v-if="this.activeZoom"
-                v-on:mouseover="activeZoom = !activeZoom"
+                @mouseover="activeZoom = !activeZoom"
                 v-show="!existYoutube"
                 class="photo_main"
               >
@@ -82,7 +82,7 @@
               </div>
               <div
                 v-if="!this.activeZoom"
-                v-on:mouseleave="activeZoom = !activeZoom"
+                @mouseleave="activeZoom = !activeZoom"
                 v-show="!existYoutube"
                 class="photo_main"
               >
@@ -226,7 +226,7 @@
               >
                 <button
                   class="quantity_items quantity_remove"
-                  v-on:click="removeQuantity()"
+                  @click="removeQuantity()"
                 >
                   <menos-icon class="icon" />
                 </button>
@@ -241,7 +241,7 @@
                 />
                 <button
                   class="quantity_items quantity_add"
-                  v-on:click="addQuantity()"
+                  @click="addQuantity()"
                 >
                   <mas-icon class="icon" />
                 </button>
@@ -263,7 +263,7 @@
                     (data.info.tipo_servicio == null ||
                       data.info.tipo_servicio == '0')
                   "
-                  v-on:click="addShoppingCart"
+                  @click="addShoppingCart"
                   id="AddToCartTag"
                 >
                   <svg
@@ -295,7 +295,7 @@
                   ref="colorBtn"
                   class="btn"
                   v-else-if="!spent && data.info.tipo_servicio == '1'"
-                  v-on:click="GoPayments"
+                  @click="GoPayments"
                   id="AddToCartTag"
                 >
                   <svg

@@ -32,8 +32,8 @@
           >
             <KoBlogCard
               :article="article"
-              :settingGeneral="settingGeneral"
-              :cardBlog="cardBlog"
+              :setting-general="settingGeneral"
+              :card-blog="cardBlog"
               class="giftLoad w-full h-full"
             />
           </div>
@@ -45,15 +45,27 @@
 
 <script>
 export default {
-  name: 'Ko16-listBlogHome',
-  props: {
-    listBlogHome: Object,
-    settingGeneral: Object,
-    dataStore: Object,
-    cardBlog: Object,
-  },
+  name: 'Ko16ListBlogHome',
   components: {
     KoBlogCard: () => import('./_cardBlog/blogCard'),
+  },
+  props: {
+    listBlogHome: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    cardBlog: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

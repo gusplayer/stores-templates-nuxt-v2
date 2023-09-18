@@ -8,52 +8,50 @@
       },
     ]"
   >
-    <Ko16-Banner
-      id="kBannerX"
+    <K016Banner
       v-if="settingByTemplate16?.banner?.visible"
-      :key="bannerRendering"
+      id="K16_banner"
+      :key="Ko16BannerRendering"
       v-bind="componentsProps"
     />
-    <Ko16-content
-      id="kContentX"
+    <K016content
       v-if="settingByTemplate16?.content?.visible"
+      id="K16_content"
       v-bind="componentsProps"
     />
-    <Ko16-Offers
-      id="kOffersX"
+    <K016Offers
       v-if="settingByTemplate16?.offers?.visible"
+      id="K16_offers"
       v-bind="componentsProps"
     />
-    <Ko16-productListHome
-      id="kListProductsHomeX"
+    <K016productListHome
       v-if="settingByTemplate16?.listProductsHome?.visible"
+      id="K16_listProductsHome"
       v-bind="componentsProps"
     />
-    <Ko16-information
-      id="kInformationX"
+    <K016information
       v-if="settingByTemplate16?.information?.visible"
+      id="K16_information"
       v-bind="componentsProps"
     />
-    <Ko16-listBlogHome
-      id="kListBlogHomeX"
+    <K016listBlogHome
       v-if="settingByTemplate16?.listBlogHome?.visible"
+      id="kListBlogHomeX"
       v-bind="componentsProps"
     />
-    <Ko16-Logos
-      id="kLogosX"
+    <K016Logos
       v-if="settingByTemplate16?.logos?.visible"
-      :key="logosRendering"
+      id="K16_logos"
       v-bind="componentsProps"
     />
-    <Ko16-categories
-      id="kCategoriesX"
+    <K016categories
       v-if="settingByTemplate16?.categories?.visible"
-      :key="categoriesRendering"
+      id="K16_categories"
       v-bind="componentsProps"
     />
-    <Ko16-informationStore
-      id="kInformationStoreX"
+    <K016informationStore
       v-if="settingByTemplate16?.informationStore?.visible"
+      id="K16_informationStore"
       v-bind="componentsProps"
     />
   </div>
@@ -62,17 +60,26 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  layout: 'default',
-  name: 'Ko-template16',
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+  name: 'KoTemplate16',
+  components: {
+    K016Banner: () => import('@/components/template16/ko16-Banner.vue'),
+    K016content: () => import('@/components/template16/ko16-Content.vue'),
+    K016Offers: () => import('@/components/template16/ko16-Offers.vue'),
+    K016productListHome: () =>
+      import('@/components/template16/ko16-productListHome.vue'),
+    K016information: () =>
+      import('@/components/template16/ko16-Information.vue'),
+    K016listBlogHome: () =>
+      import('@/components/template16/ko16-listBlogHome.vue'),
+    K016Logos: () => import('@/components/template16/ko16-logos.vue'),
+    K016categories: () => import('@/components/template16/ko16-Categories.vue'),
+    K016informationStore: () =>
+      import('@/components/template16/ko16-informationStore.vue'),
   },
+  layout: 'default',
   data() {
     return {
-      bannerRendering: 0,
-      logosRendering: 0,
-      categoriesRendering: 0,
+      Ko16BannerRendering: 0,
     }
   },
   computed: {
@@ -110,6 +117,10 @@ export default {
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
   methods: {
     addEventListenerTemplate(e) {
       if (
@@ -120,11 +131,11 @@ export default {
           console.log(e.data.component)
           this.$store.commit('SET_CURRENTSETTING16', e.data)
           if (e.data.component == 'banner') {
-            this.bannerRendering += 1
+            this.Ko16BannerRendering += 1
           } else if (e.data.component == 'logos') {
-            this.logosRendering += 1
+            this.Ko16BannerRendering += 1
           } else if (e.data.component == 'categories') {
-            this.categoriesRendering += 1
+            this.Ko16BannerRendering += 1
           }
         } else if (
           e &&
@@ -134,49 +145,43 @@ export default {
         ) {
           switch (e.data.componentToEdit) {
             case 'banner':
-              this.moverseA('kBannerX')
+              this.moverseA('K16_banner')
               break
             case 'categories':
-              this.moverseA('kCategoriesX')
+              this.moverseA('K16_categories')
               break
             case 'content':
-              this.moverseA('kContentX')
-              break
-            case 'listProductsHome':
-              this.moverseA('kListProductsHomeX')
+              this.moverseA('K16_content')
               break
             case 'information':
-              this.moverseA('kInformationX')
+              this.moverseA('K16_information')
               break
-            case 'informationLogos':
-              this.moverseA('kInformationLogosX')
+            case 'informationStore':
+              this.moverseA('K16_informationStore')
               break
-            case 'information2':
-              this.moverseA('kInformation2X')
+            case 'listProductsHome':
+              this.moverseA('K16_listProductsHome')
               break
-            case 'listProductsOffers':
-              this.moverseA('kListProductsOffersX')
-              break
-            case 'banner2':
-              this.moverseA('kBanner2X')
+            case 'offers':
+              this.moverseA('K16_offers')
               break
             case 'logos':
-              this.moverseA('kLogosX')
+              this.moverseA('K16_logos')
               break
             case 'cardProducts':
-              this.moverseA('kListProductsHomeX')
+              this.moverseA('K16_listProductsHome')
               break
             case 'settingsGeneral':
-              this.moverseA('kInformationX')
+              this.moverseA('K16_banner')
               break
             case 'header':
-              this.moverseA('kBannerX')
+              this.moverseA('K16_banner')
               break
             case 'footer':
-              this.moverseA('kLogosX')
+              this.moverseA('K16_informationStore')
               break
-            case 'newsLetter':
-              this.moverseA('kLogosX')
+            case 'newsletter':
+              this.moverseA('K16_informationStore')
               break
             case 'detailsProducts':
               if (this.fullProducts) {
@@ -185,7 +190,7 @@ export default {
                 })
               }
               break
-            case 'productListFilter':
+            case 'listProductsFilter':
               this.$router.push({
                 path: '/productos',
               })

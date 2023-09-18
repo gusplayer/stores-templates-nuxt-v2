@@ -20,13 +20,10 @@
 
 <script>
 export default {
-  name: 'selectGroup-details15',
+  name: 'SelectGroupDetails16',
   props: ['options', 'label', 'value', 'index', 'variantes', 'detailsProducts'],
   mounted() {
     this.saveOption()
-  },
-  data() {
-    return {}
   },
   methods: {
     updateValue() {

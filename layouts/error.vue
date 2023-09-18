@@ -8,16 +8,16 @@ import error404 from '../components/Ko-error404'
 import error500 from '../components/Ko-error500'
 
 export default {
-  name: 'nuxt-error',
+  name: 'NuxtError',
+  components: {
+    error404,
+  },
   layout: 'default',
   props: {
     error: {
       type: Object,
       default: () => {},
     },
-  },
-  components: {
-    error404,
   },
   computed: {
     errorPage() {

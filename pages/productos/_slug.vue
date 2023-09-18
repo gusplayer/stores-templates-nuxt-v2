@@ -6,28 +6,25 @@ import { mapState } from 'vuex'
 export default {
   components: {
     Ko5ProductDetail: () =>
-      import('../../components/template5/Ko-ProductDetail-1'),
+      import('@/components/template5/Ko5-ProductDetail.vue'),
     Ko7ProductDetail: () =>
-      import('../../components/template7/Ko-ProductDetail'),
+      import('@/components/template7/Ko-ProductDetail.vue'),
     Ko9ProductDetail: () =>
-      import('../../components/template9/Ko-ProductDetail'),
+      import('@/components/template9/k09-ProductDetail.vue'),
     Ko10ProductDetail: () =>
-      import('../../components/template10/Ko-ProductDetail'),
+      import('@/components/template10/Ko-ProductDetail.vue'),
     Ko11ProductDetail: () =>
-      import('../../components/template11/ko-ProductDetail'),
+      import('@/components/template11/ko-ProductDetail.vue'),
     Ko13ProductDetail: () =>
-      import('../../components/template13/Ko-ProductDetail-1.vue'),
+      import('@/components/template13/Ko-ProductDetail-1.vue'),
     Ko14ProductDetail: () =>
-      import('../../components/template14/Ko-ProductDetail-1.vue'),
+      import('@/components/template14/Ko-ProductDetail-1.vue'),
     Ko15ProductDetail: () =>
-      import('../../components/template15/Ko-ProductDetail-1.vue'),
-    // Ko16ProductDetail: () =>
-    // import('../../components/template16/Ko-ProductDetail-1.vue'),
+      import('@/components/template15/Ko-ProductDetail-1.vue'),
+    Ko16ProductDetail: () =>
+      import('@/components/template16/Ko16-ProductDetail.vue'),
   },
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
-  },
+
   data() {
     return {
       componentMapping: {
@@ -41,7 +38,7 @@ export default {
         13: 'Ko13ProductDetail',
         14: 'Ko14ProductDetail',
         15: 'Ko15ProductDetail',
-        // 16: 'Ko16ProductDetail',
+        16: 'Ko16ProductDetail',
       },
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
@@ -75,6 +72,7 @@ export default {
     },
     indexTemplate() {
       let productListComponent = ''
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)]
       }
@@ -115,7 +113,7 @@ export default {
         ),
         settingByTemplate13: this.createNestedSetting(
           this.settingByTemplate13,
-          ['detailsProduct', 'cardProduct', 'settingsGeneral'],
+          ['detailsProduct', 'cardProduct', 'settingGeneral'],
           null
         ),
         settingByTemplate14: this.createNestedSetting(
@@ -139,6 +137,10 @@ export default {
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
+  },
   methods: {
     createSettingByTemplate(
       settingByTemplate,
@@ -155,6 +157,7 @@ export default {
       }
       return defaultValue
     },
+    // eslint-disable-next-line no-unused-vars
     createNestedSetting(setting, properties, defaultValue) {
       if (setting) {
         const nestedSetting = {}
@@ -173,6 +176,7 @@ export default {
       ) {
         if (e && e.data && e.data.component) {
           const template = e.data.template
+          // eslint-disable-next-line no-prototype-builtins
           if (this.templateMapping.hasOwnProperty(template)) {
             const commitAction = this.templateMapping[template]
             this.$store.commit(commitAction, e.data)
@@ -187,5 +191,3 @@ export default {
   },
 }
 </script>
-
-<style></style>

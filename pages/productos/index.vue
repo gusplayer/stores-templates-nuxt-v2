@@ -4,27 +4,27 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  name: 'ProductIndex',
   components: {
-    K05ProductList: () => import('@/components/template5/Ko5-ProductList'),
-    K07ProductList: () => import('@/components/template7/Ko-ProductListFilter'),
-    K09ProductList: () => import('@/components/template9/Ko-ProductListFilter'),
+    K05ProductList: () => import('@/components/template5/Ko5-ProductList.vue'),
+    K07ProductList: () =>
+      import('@/components/template7/Ko-ProductListFilter.vue'),
+    K09ProductList: () =>
+      import('@/components/template9/k09-ProductListFilter.vue'),
     K10ProductList: () =>
-      import('@/components/template10/Ko-ProductListFilter'),
+      import('@/components/template10/Ko-ProductListFilter.vue'),
     K11ProductList: () =>
-      import('@/components/template11/ko-ProductListFilter'),
+      import('@/components/template11/ko-ProductListFilter.vue'),
     K13ProductList: () =>
-      import('@/components/template13/Ko-ProductListFilter'),
+      import('@/components/template13/Ko-ProductListFilter.vue'),
     K14ProductList: () =>
-      import('@/components/template14/Ko-ProductListFilter'),
+      import('@/components/template14/Ko-ProductListFilter.vue'),
     K15ProductList: () =>
-      import('@/components/template15/Ko15-ProductListFilter'),
-    // K16ProductList: () =>
-    // import('@/components/template16/Ko16-ProductListFilter'),
+      import('@/components/template15/Ko15-ProductListFilter.vue'),
+    K16ProductList: () =>
+      import('@/components/template16/Ko16-ProductListFilter.vue'),
   },
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
-  },
+
   data() {
     return {
       componentMapping: {
@@ -38,7 +38,7 @@ export default {
         13: 'K13ProductList',
         14: 'K14ProductList',
         15: 'K15ProductList',
-        // 16: 'K16ProductList',
+        16: 'K16ProductList',
       },
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
@@ -48,7 +48,7 @@ export default {
         13: 'SET_CURRENTSETTING13',
         14: 'SET_CURRENTSETTING14',
         15: 'SET_CURRENTSETTING15',
-        15: 'SET_CURRENTSETTING15',
+        16: 'SET_CURRENTSETTING16',
       },
     }
   },
@@ -75,6 +75,7 @@ export default {
     },
     indexTemplate() {
       let productListComponent = ''
+      // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
         productListComponent = this.componentMapping[parseInt(this.template)]
       }
@@ -127,7 +128,7 @@ export default {
           null
         ),
         settingByTemplate16: this.createNestedSetting(
-          this.settingByTemplate15,
+          this.settingByTemplate16,
           ['listProductsFilter', 'cardProducts', 'settingsGeneral'],
           null
         ),
@@ -136,6 +137,10 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
     createSettingByTemplate(
@@ -153,6 +158,7 @@ export default {
       }
       return defaultValue
     },
+    // eslint-disable-next-line no-unused-vars
     createNestedSetting(setting, properties, defaultValue) {
       if (setting) {
         const nestedSetting = {}
@@ -171,6 +177,7 @@ export default {
       ) {
         if (e && e.data && e.data.component) {
           const template = e.data.template
+          // eslint-disable-next-line no-prototype-builtins
           if (this.templateMapping.hasOwnProperty(template)) {
             const commitAction = this.templateMapping[template]
             this.$store.commit(commitAction, e.data)

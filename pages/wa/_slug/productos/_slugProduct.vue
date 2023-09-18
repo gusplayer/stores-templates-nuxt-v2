@@ -1,28 +1,20 @@
 <template>
-  <div class="Wrapper-KoProductDetail-Slug-wapi" id="width">
+  <div id="width" class="w-full">
     <KoProductDetail />
     <KFooterWaLogo v-bind="componentsProps" />
   </div>
 </template>
 
 <script>
-import KoProductDetail from '../../../../components/whatsapp/Ko-ProductDetail-wa'
-import KFooterWaLogo from '../../../../components/footers/footerWa/footerWa1/ko-Footer-wa-logo.vue'
-
 export default {
-  layout: 'wa',
   name: 'WapiMEDetail',
   components: {
-    KoProductDetail,
-    KFooterWaLogo,
+    KoProductDetail: () =>
+      import('@/components/whatsapp/Ko-ProductDetail-wa.vue'),
+    KFooterWaLogo: () =>
+      import('@/components/footers/footerWa/footerWa1/ko-Footer-wa-logo.vue'),
   },
-  mounted() {
-    this.onResize()
-    window.addEventListener('resize', this.onResize)
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.onResize)
-  },
+  layout: 'wa',
   computed: {
     dataStore() {
       return this.$store.state.dataStore
@@ -42,6 +34,13 @@ export default {
       }
     },
   },
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize)
+  },
   methods: {
     onResize() {
       const widthOutput = document.querySelector('#width')
@@ -51,9 +50,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.Wrapper-KoProductDetail-Slug-wapi {
-  width: 100%;
-}
-</style>
