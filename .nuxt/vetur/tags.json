@@ -440,17 +440,17 @@
   "HeadersHeader1Search": {
     "description": "Auto imported from components/headers/header1/search.vue"
   },
-  "HeadersHeader3KoHeader3": {
-    "description": "Auto imported from components/headers/header3/Ko-Header-3.vue"
-  },
   "HeadersHeader2KoHeader2": {
     "description": "Auto imported from components/headers/header2/Ko-Header-2.vue"
   },
-  "HeadersHeader5KoHeader5": {
-    "description": "Auto imported from components/headers/header5/Ko-Header-5.vue"
+  "HeadersHeader3KoHeader3": {
+    "description": "Auto imported from components/headers/header3/Ko-Header-3.vue"
   },
   "HeadersHeader4KoHeader4": {
     "description": "Auto imported from components/headers/header4/Ko-Header-4.vue"
+  },
+  "HeadersHeader5KoHeader5": {
+    "description": "Auto imported from components/headers/header5/Ko-Header-5.vue"
   },
   "HeadersHeader6KoHeader6": {
     "description": "Auto imported from components/headers/header6/Ko-Header-6.vue"
