@@ -27,7 +27,7 @@
       }`"
     >
       <div class="w-full flex flex-col justify-center items-center">
-        <KoNewsLetter :settingByTemplate15="settingByTemplate15" />
+        <KoNewsLetter :setting-by-template15="settingByTemplate15" />
         <div
           class="w-full max-w-9/5 md:max-w-8/5 flex flex-col justify-center items-center pt-40 pb-10 md:pb-49"
         >
@@ -78,8 +78,8 @@
               <div class="info-networks mb-20">
                 <p class="btn">Síguenos</p>
                 <KoSocialNet
-                  :footerIcon="settingByTemplate15[0].footer"
-                  :dataStore="dataStore"
+                  :footer-icon="settingByTemplate15[0].footer"
+                  :data-store="dataStore"
                 />
               </div>
               <div class="info-legal-sm">
@@ -173,8 +173,8 @@
               </div>
               <div class="info-networkss">
                 <KoSocialNet
-                  :footerIcon="settingByTemplate15[0].footer"
-                  :dataStore="dataStore"
+                  :footer-icon="settingByTemplate15[0].footer"
+                  :data-store="dataStore"
                 />
               </div>
             </div>
@@ -209,10 +209,10 @@
             </div>
           </div>
         </div>
-        <div class="empty" v-if="settingByTemplate15[0].footer.watermark" />
+        <div v-if="settingByTemplate15[0].footer.watermark" class="empty"></div>
         <div
-          class="madebyKomercia"
           v-if="settingByTemplate15[0].footer.watermark"
+          class="madebyKomercia"
         >
           <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
           <a
@@ -230,8 +230,8 @@
           </a>
         </div>
         <div v-if="showModal">
-          <div class="modal" v-if="dataStore.politicas">
-            <KoTermsConditions :dataStore="dataStore" />
+          <div v-if="dataStore.politicas" class="modal">
+            <KoTermsConditions :data-store="dataStore" />
           </div>
         </div>
       </div>
@@ -239,39 +239,25 @@
   </div>
 </template>
 <script>
-import KoNewsLetter from '@/components/template15/Ko15-Newsletter.vue'
-import KoSocialNet from '@/components/template11/ko-socialnet'
-import KoTermsConditions from '@/components/footers/ko-TermsAndConditions'
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko-Footer-10',
+  name: 'KoFooter10',
   components: {
-    KoNewsLetter,
-    KoSocialNet,
-    KoTermsConditions,
+    KoNewsLetter: () => import('@/components/template15/Ko15-Newsletter.vue'),
+    KoSocialNet: () => import('@/components/template11/ko-socialnet.vue'),
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
   mixins: [idCloudinaryBanner],
   props: {
-    dataStore: Object,
-    settingByTemplate15: Array,
-  },
-  mounted() {
-    if (this.settingByTemplate15 && this.settingByTemplate15[0].footer) {
-      this.setLogo()
-    }
-    var acc = document.getElementsByClassName('accordion')
-    var i
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function () {
-        this.classList.toggle('active')
-        var panel = this.nextElementSibling
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 10 + 'px'
-        }
-      })
-    }
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate15: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -308,6 +294,38 @@ export default {
       return this.$store.state.modalpolitics05
     },
   },
+  watch: {
+    settingByTemplate15() {
+      if (this.settingByTemplate15 && this.settingByTemplate15[0].footer) {
+        let color = this.settingByTemplate15[0].footer['--background_color_1']
+        let colorArray = color.split(',')
+        let colorInt = parseInt(colorArray[2])
+        if (colorInt > 50) {
+          this.logo = true
+        } else {
+          this.logo = false
+        }
+      }
+    },
+  },
+  mounted() {
+    if (this.settingByTemplate15 && this.settingByTemplate15[0].footer) {
+      this.setLogo()
+    }
+    var acc = document.getElementsByClassName('accordion')
+    var i
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function () {
+        this.classList.toggle('active')
+        var panel = this.nextElementSibling
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 10 + 'px'
+        }
+      })
+    }
+  },
   methods: {
     OpenModalPolitics() {
       this.$store.state.modalpolitics05 = true
@@ -322,20 +340,6 @@ export default {
         this.logo = true
       } else {
         this.logo = false
-      }
-    },
-  },
-  watch: {
-    settingByTemplate15() {
-      if (this.settingByTemplate15 && this.settingByTemplate15[0].footer) {
-        let color = this.settingByTemplate15[0].footer['--background_color_1']
-        let colorArray = color.split(',')
-        let colorInt = parseInt(colorArray[2])
-        if (colorInt > 50) {
-          this.logo = true
-        } else {
-          this.logo = false
-        }
       }
     },
   },

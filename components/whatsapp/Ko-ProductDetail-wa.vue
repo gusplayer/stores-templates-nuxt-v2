@@ -143,16 +143,16 @@
           class="wrapper-description"
         >
           <h3 class="text-variant">{{ $t('productdetail_description') }}</h3>
-          <div v-if="data.info.descripcion" class="editor content-text-desc">
+          <div class="editor content-text-desc">
             <el-tiptap
               v-model="data.info.descripcion"
               :extensions="extensions"
               :spellcheck="false"
               :readonly="true"
-              :charCounterCount="false"
               :tooltip="false"
-              :showMenubar="false"
               :bubble="false"
+              :showMenubar="false"
+              :charCounterCount="false"
             />
           </div>
         </div>
@@ -325,9 +325,9 @@
       </div>
     </div>
     <KoOrderWa
-      :dataStore="dataStore"
-      :stateOrderWapi="true"
-      :quickSale="quickSale"
+      :data-store="dataStore"
+      :state-order-wapi="true"
+      :quick-sale="quickSale"
     />
   </div>
 </template>
@@ -338,8 +338,8 @@ import axios from 'axios'
 import productSlide from './_productdetails/productSlide.vue'
 import selectGroup from './_productdetails/selectGroup'
 // import idCloudinary from '../../mixins/idCloudinary'
-import currency from '../../mixins/formatCurrent'
-import extensions from '../../mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
 import KoOrderWa from '../headers/_order1/order1.vue'
 export default {
   name: 'KoProductDetailWa',

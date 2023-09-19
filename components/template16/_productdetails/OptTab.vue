@@ -12,20 +12,21 @@
   >
     <el-collapse v-model="activeNames">
       <el-collapse-item
+        v-if="contentDescription"
         :title="$t('productdetail_description')"
         name="1"
         :style="`color: ${settingByTemplate16[0].detailsProducts.color_text}; border-color:${settingByTemplate16[0].detailsProducts.color_border}`"
       >
-        <div v-if="data.info.descripcion" class="editor">
+        <div class="editor">
           <el-tiptap
-            v-model="data.info.descripcion"
+            v-model="contentDescription"
             :extensions="extensions"
             :spellcheck="false"
             :readonly="true"
-            :charCounterCount="false"
             :tooltip="false"
-            :showMenubar="false"
             :bubble="false"
+            :showMenubar="false"
+            :charCounterCount="false"
           />
         </div>
       </el-collapse-item>
@@ -326,12 +327,13 @@
         </div>
       </el-collapse-item>
       <el-collapse-item
+        v-if="envios.envio_metodo"
         :title="$t('productdetail_opinionesEnvio')"
         name="3"
         :style="`color: ${settingByTemplate16[0].detailsProducts.color_text}; border-color:${settingByTemplate16[0].detailsProducts.color_border}`"
       >
         <div class="item-content opcenvio">
-          <div v-if="envios.envio_metodo" class="deliverys section">
+          <div class="deliverys section">
             <div class="content">
               <h3
                 class="title-section"
@@ -460,6 +462,7 @@ export default {
   data() {
     return {
       activeNames: ['1'],
+      contentDescription: this.data?.info?.descripcion,
     }
   },
   computed: {
@@ -477,10 +480,15 @@ export default {
       }
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },
+  },
+  mounted() {
+    this.contentDescription
+      ? (this.activeNames = ['1'])
+      : (this.activeNames = ['2'])
   },
 }
 </script>

@@ -1,7 +1,7 @@
-exports.ids = [193];
+exports.ids = [206];
 exports.modules = {
 
-/***/ 1115:
+/***/ 1097:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72,15 +72,15 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template7vue_type_script_lang_js_ = ({
   name: 'KoTemplate7',
   components: {
-    K07Carousel: () => __webpack_require__.e(/* import() */ 144).then(__webpack_require__.bind(null, 1300)),
-    K07BannerPromo: () => __webpack_require__.e(/* import() */ 146).then(__webpack_require__.bind(null, 1219)),
-    K07ProductList: () => __webpack_require__.e(/* import() */ 151).then(__webpack_require__.bind(null, 1224)),
-    K07Advertising: () => __webpack_require__.e(/* import() */ 145).then(__webpack_require__.bind(null, 1218)),
-    K07Gify: () => __webpack_require__.e(/* import() */ 148).then(__webpack_require__.bind(null, 1221)),
-    K07HowWeWork: () => __webpack_require__.e(/* import() */ 149).then(__webpack_require__.bind(null, 1222)),
-    K07Blog: () => __webpack_require__.e(/* import() */ 150).then(__webpack_require__.bind(null, 1223)),
-    K07Newsletter: () => __webpack_require__.e(/* import() */ 147).then(__webpack_require__.bind(null, 1220)),
-    K07Wrapper: () => __webpack_require__.e(/* import() */ 152).then(__webpack_require__.bind(null, 1225))
+    K07Carousel: () => __webpack_require__.e(/* import() */ 156).then(__webpack_require__.bind(null, 1295)),
+    K07BannerPromo: () => __webpack_require__.e(/* import() */ 158).then(__webpack_require__.bind(null, 1208)),
+    K07ProductList: () => __webpack_require__.e(/* import() */ 163).then(__webpack_require__.bind(null, 1213)),
+    K07Advertising: () => __webpack_require__.e(/* import() */ 157).then(__webpack_require__.bind(null, 1207)),
+    K07Gify: () => __webpack_require__.e(/* import() */ 160).then(__webpack_require__.bind(null, 1210)),
+    K07HowWeWork: () => __webpack_require__.e(/* import() */ 161).then(__webpack_require__.bind(null, 1211)),
+    K07Blog: () => __webpack_require__.e(/* import() */ 162).then(__webpack_require__.bind(null, 1212)),
+    K07Newsletter: () => __webpack_require__.e(/* import() */ 159).then(__webpack_require__.bind(null, 1209)),
+    K07Wrapper: () => __webpack_require__.e(/* import() */ 164).then(__webpack_require__.bind(null, 1214))
   },
   layout: 'default',
   data() {

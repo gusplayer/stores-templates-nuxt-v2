@@ -1,24 +1,21 @@
 <template>
   <div class="description">
-    <div v-if="!activeClass" class="left">
+    <div v-if="!activeClass && contentDescription" class="left">
       <h3 class="text-desc">
         {{ $t('productdetail_description') }}
       </h3>
-      <div v-if="data.info.descripcion" class="editor">
+      <div class="editor">
         <el-tiptap
+          v-model="contentDescription"
           :readonly="true"
-          v-model="data.info.descripcion"
           :extensions="extensions"
           :spellcheck="false"
-          :charCounterCount="false"
           :tooltip="true"
-          :showMenubar="false"
           :bubble="false"
+          :showMenubar="false"
+          :charCounterCount="false"
         />
       </div>
-      <!-- <div class="wrapper-comments">
-        <KoComments :dataStore="dataStore" />
-      </div> -->
     </div>
     <div v-else class="left-empty"></div>
     <div class="right">
@@ -299,8 +296,8 @@
 </template>
 
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 export default {
   name: 'Ko5DescriptionProduct',
   filters: {
@@ -330,6 +327,7 @@ export default {
     return {
       medioEnvio: '',
       envioproducto: '',
+      contentDescription: this.data?.info?.descripcion,
     }
   },
   computed: {

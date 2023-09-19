@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper-blog" :style="[settingK07Blog, settingGeneral]">
-    <div class="banner-blog" id="BgBannerBlogAr">
+    <div id="BgBannerBlogAr" class="banner-blog">
       <div class="tittle-banner-blog">
         <p class="txt-banner">{{ dataStore.tienda.nombre }}</p>
-        <p class="txt-banner" id="separator">{{ $t('header_blog') }}</p>
+        <p id="separator" class="txt-banner">{{ $t('header_blog') }}</p>
         <div class="icon-blog">
           <svg
             class="svg-icon-blog"
@@ -58,7 +58,7 @@
         </div>
       </div>
     </div>
-    <div class="container-article" v-if="dataArticle">
+    <div v-if="dataArticle" class="container-article">
       <div class="content-blog">
         <nav class="flex mt-20 mb-5 sm:mb-10" aria-label="Breadcrumb">
           <ol class="flex items-start space-x-4">
@@ -112,20 +112,20 @@
             <div class="flex-shrink-0">
               <a href="#">
                 <img
-                  class="h-40 w-40 rounded-full"
                   v-lazy="`${this.$store.state.urlKomercia}/users/user.jpg`"
+                  class="h-40 w-40 rounded-full"
                   alt=""
                 />
               </a>
             </div>
             <div class="content-date-items">
               <p>{{ dataArticle.autor }}</p>
-              <p>{{ this.shippingCreated }}</p>
+              <p>{{ shippingCreated }}</p>
             </div>
           </div>
           <div class="flex icons">
             <a
-              :href="this.sharingFacebook"
+              :href="sharingFacebook"
               target="_blank"
               rel="noreferrer noopener"
               style="max-height: 25px"
@@ -133,7 +133,7 @@
               <facebook-icon class="wp-icon" />
             </a>
             <a
-              :href="this.sharingTwitter"
+              :href="sharingTwitter"
               target="_blank"
               rel="noreferrer noopener"
               style="max-height: 25px"
@@ -141,7 +141,7 @@
               <twitter-icon class="wp-icon marginIcon" />
             </a>
             <a
-              :href="this.sharingLinkedin"
+              :href="sharingLinkedin"
               target="_blank"
               rel="noreferrer noopener"
               style="max-height: 25px"
@@ -150,16 +150,16 @@
             </a>
           </div>
         </div>
-        <div class="editor" v-if="dataArticle.contenido">
+        <div v-if="dataArticle.contenido" class="editor">
           <el-tiptap
             v-model="dataArticle.contenido"
             :extensions="extensions"
             :spellcheck="false"
             :readonly="true"
-            :charCounterCount="false"
             :tooltip="false"
-            :showMenubar="false"
             :bubble="false"
+            :showMenubar="false"
+            :charCounterCount="false"
           />
         </div>
       </div>
@@ -171,28 +171,24 @@
   </div>
 </template>
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
+import extensions from '@/mixins/elemenTiptap.vue'
 export default {
   mixins: [extensions],
-  name: 'Ko-Blog',
   props: {
-    dataStore: Object,
-    settingGeneral: Object,
-    settingK07Blog: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    settingK07Blog: {
+      type: Object,
+      required: true,
+    },
   },
-  mounted() {
-    if (this.listArticulos.length) {
-      this.searchIdForSlug()
-    }
-    if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
-      this.setBg()
-    }
-  },
-  beforeDestroy() {
-    if (this.editor) {
-      this.editor.destroy()
-    }
-  },
+
   data() {
     return {
       dataArticle: {},
@@ -212,6 +208,29 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos
     },
+  },
+  watch: {
+    listArticulos() {
+      this.searchIdForSlug()
+    },
+    settingK07Blog() {
+      if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
+        this.setBg()
+      }
+    },
+  },
+  mounted() {
+    if (this.listArticulos.length) {
+      this.searchIdForSlug()
+    }
+    if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
+      this.setBg()
+    }
+  },
+  beforeDestroy() {
+    if (this.editor) {
+      this.editor.destroy()
+    }
   },
   methods: {
     async searchIdForSlug() {
@@ -264,16 +283,6 @@ export default {
         return check
       }
       return window.mobilecheck()
-    },
-  },
-  watch: {
-    listArticulos() {
-      this.searchIdForSlug()
-    },
-    settingK07Blog() {
-      if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
-        this.setBg()
-      }
     },
   },
 }

@@ -2,36 +2,35 @@
   <div class="content-tab">
     <div class="head-content">
       <div
+        v-if="contentDescription"
         class="tab"
-        @click="selectTag1"
         :class="selecttag == 1 ? 'show-select-active' : ''"
+        @click="selectTag1"
       >
         <p class="tittle">{{ $t('productdetail_description') }}</p>
       </div>
       <div
         class="tab"
-        @click="selectTag2"
         :class="selecttag == 2 ? 'show-select-active' : ''"
+        @click="selectTag2"
       >
         <p class="tittle">{{ $t('productdetail_opcionesPago') }}</p>
       </div>
     </div>
     <div class="content-tab">
-      <div class="editor" v-if="focusbtn1">
-        <div v-if="data.description">
-          <el-tiptap
-            v-model="data.description"
-            :extensions="extensions"
-            :spellcheck="false"
-            :readonly="true"
-            :charCounterCount="false"
-            :tooltip="false"
-            :showMenubar="false"
-            :bubble="false"
-          />
-        </div>
+      <div v-if="focusbtn1 && contentDescription" class="editor">
+        <el-tiptap
+          v-model="contentDescription"
+          :extensions="extensions"
+          :spellcheck="false"
+          :readonly="true"
+          :charCounterCount="false"
+          :tooltip="false"
+          :showMenubar="false"
+          :bubble="false"
+        />
       </div>
-      <div class="item-content opcpago" v-if="focusbtn2">
+      <div v-if="focusbtn2" class="item-content opcpago">
         <ul>
           <li v-if="mediospago.consignacion == 1">
             <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
@@ -233,17 +232,33 @@
   </div>
 </template>
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 
 export default {
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      }
+    },
+  },
   mixins: [extensions, currency],
   props: {
-    dataStore: Object,
-    data: {},
-    envio: {},
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    data: {
+      type: Object,
+      required: true,
+    },
+    envio: {
+      type: Object,
+      required: true,
+    },
   },
-  mounted() {},
   data() {
     return {
       medioEnvio: '',
@@ -252,6 +267,7 @@ export default {
       focusbtn1: true,
       focusbtn2: false,
       focusbtn3: false,
+      contentDescription: this.data?.descripcion,
     }
   },
   computed: {
@@ -266,18 +282,13 @@ export default {
       }
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },
   },
-  filters: {
-    capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
-      }
-    },
+  mounted() {
+    this.contentDescription ? this.selectTag1() : this.selectTag2()
   },
   methods: {
     selectTag1() {

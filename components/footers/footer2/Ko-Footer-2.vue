@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-footer" ref="background" :style="settingByTemplate">
+  <div ref="background" class="wrapper-footer" :style="settingByTemplate">
     <div class="contenedor">
       <div class="top-footer">
         <div class="wrapper-logo">
@@ -45,8 +45,9 @@
               :href="item.link"
               target="_blank"
               rel="noreferrer noopener"
-              >{{ item.nombre }}</a
             >
+              {{ item.nombre }}
+            </a>
           </div>
         </div>
         <div>
@@ -64,13 +65,13 @@
             >
               <template slot-scope="{ errors }">
                 <input
+                  id="InputEmailOne"
+                  v-model="email"
                   name="email"
                   class="input-text"
                   type="email"
                   :placeholder="$t('footer_email')"
-                  v-model="email"
                   @keyup.enter="toSubscribe"
-                  id="InputEmailOne"
                 />
                 <span
                   v-show="errors[0] || register"
@@ -85,7 +86,7 @@
             </button>
           </div>
           <div class="content-checkbox">
-            <input type="checkbox" id="checkbox" v-model="checked" />
+            <input id="checkbox" type="checkbox" v-model="checked" />
             <p class="text-checkbox">
               {{ $t('footer_checkbox') }}
             </p>
@@ -101,18 +102,19 @@
               alt="Logo Img"
             />
             <div
-              class="items-iconos"
               v-for="(item, index) in links"
-              :key="`${index}${item.icon}`"
               v-show="item.link"
+              :key="`${index}${item.icon}`"
+              class="items-iconos"
             >
               <a
                 v-if="item.link"
                 :href="item.link"
                 target="_blank"
                 rel="noreferrer noopener"
-                ><div class="icon" :is="item.icon"
-              /></a>
+              >
+                <div :is="item.icon" class="icon" />
+              </a>
             </div>
           </div>
           <br />
@@ -145,20 +147,21 @@
             >
               <template slot-scope="{ errors }">
                 <input
+                  id="InputEmailTwo"
+                  v-model="email"
                   name="email"
                   class="input-text"
                   type="email"
                   :placeholder="$t('footer_email')"
-                  v-model="email"
                   @keyup.enter="toSubscribe"
-                  id="InputEmailTwo"
                 />
                 <span
                   v-show="errors[0] || register"
                   class="text-error"
                   :style="register ? 'color:green' : ''"
-                  >{{ errors[0] || register }}</span
                 >
+                  {{ errors[0] || register }}
+                </span>
               </template>
             </ValidationProvider>
             <button class="btn" @click="toSubscribe">
@@ -177,31 +180,31 @@
       </div>
     </div>
     <div class="under-footer">
-      <div class="contenedor-term-con" v-if="dataStore.politicas">
+      <div v-if="dataStore.politicas" class="contenedor-term-con">
         <label for="modal-toggle">{{ $t('footer_politicasyterminos') }}</label>
       </div>
       <div class="separator"></div>
       <p>{{ $t('footer_desarrollado') }}</p>
       <a href="https://komercia.co/" target="_blank" rel="noreferrer noopener">
         <img
+          v-if="logo"
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
           "
-          v-if="logo"
           class="logo2"
           alt="Logo Img"
         />
         <img
+          v-else
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
           "
-          v-else
           class="logo2"
           alt="Logo Img"
         />
       </a>
     </div>
-    <div class="modal-container" v-if="dataStore.politicas">
+    <div v-if="dataStore.politicas" class="modal-container">
       <input type="checkbox" id="modal-toggle" />
       <label class="modal-backdrop" for="modal-toggle"></label>
       <div class="modal-content">

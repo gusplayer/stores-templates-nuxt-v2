@@ -1,7 +1,9 @@
 <template>
   <div class="content-article">
-    <div class="content-item-article" v-if="dataArticle">
-      <p class="tittle-blog">{{ dataArticle.titulo }}</p>
+    <div v-if="dataArticle" class="content-item-article">
+      <p class="tittle-blog">
+        {{ dataArticle.titulo }}
+      </p>
       <div class="content-data-article">
         <svg
           fill="#3a3a3a"
@@ -18,16 +20,16 @@
         </svg>
         <p class="txt-created">{{ shippingCreated }}</p>
       </div>
-      <div class="editor" v-if="dataArticle.contenido">
+      <div v-if="dataArticle.contenido" class="editor">
         <el-tiptap
           v-model="dataArticle.contenido"
           :extensions="extensions"
           :spellcheck="false"
           :readonly="true"
-          :charCounterCount="false"
           :tooltip="false"
-          :showMenubar="false"
           :bubble="false"
+          :showMenubar="false"
+          :charCounterCount="false"
         />
       </div>
     </div>
@@ -38,17 +40,14 @@
   </div>
 </template>
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
+import extensions from '@/mixins/elemenTiptap.vue'
 export default {
   mixins: [extensions],
-  name: 'Ko15-ArticleBlog',
   props: {
-    dataStore: Object,
-  },
-  mounted() {
-    if (this.listArticulos.length) {
-      this.searchIdForSlug()
-    }
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -61,6 +60,16 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos
     },
+  },
+  watch: {
+    listArticulos() {
+      this.searchIdForSlug()
+    },
+  },
+  mounted() {
+    if (this.listArticulos.length) {
+      this.searchIdForSlug()
+    }
   },
   methods: {
     async searchIdForSlug() {
@@ -81,11 +90,6 @@ export default {
           this.shippingUpdated = resultUpdate[0]
         }
       }
-    },
-  },
-  watch: {
-    listArticulos() {
-      this.searchIdForSlug()
     },
   },
 }

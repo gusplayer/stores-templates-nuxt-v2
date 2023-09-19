@@ -4,8 +4,8 @@
       <div class="content-items-iconos">
         <div
           v-for="(item, index) in links"
-          :key="`${index}${item.icon}`"
           v-show="item.link"
+          :key="`${index}${item.icon}`"
         >
           <a
             v-if="item.link"
@@ -45,25 +45,23 @@
         </div>
       </div>
       <button
+        v-if="dataStore.politicas"
         class="text-politics"
         @click="OpenModalPolitics"
-        v-if="dataStore.politicas"
       >
         {{ $t('footer_politicasyterminos') }}
       </button>
 
-      <div v-if="showModal">
-        <div class="modal" v-if="dataStore.politicas">
-          <KoTermsConditions :dataStore="dataStore" />
-        </div>
+      <div v-if="showModal && dataStore.politicas" class="modal">
+        <KoTermsConditions :data-store="dataStore" />
       </div>
       <div
-        class="under-footer"
         v-if="
           dataStore.entidades.length &&
           dataStore.entidades[0].id == 17 &&
           settingByTemplate.watermark == 0
         "
+        class="under-footer"
       >
         <p>{{ $t('footer_desarrollado') }}</p>
         <a
@@ -81,7 +79,7 @@
         </a>
       </div>
       <div v-else>
-        <div class="under-footer" v-if="settingByTemplate.watermark == 0">
+        <div v-if="settingByTemplate.watermark == 0" class="under-footer">
           <p>{{ $t('footer_desarrollado') }}</p>
           <a
             href="https://komercia.co/"
@@ -103,16 +101,21 @@
 </template>
 
 <script>
-import KoTermsConditions from '../../ko-TermsAndConditions'
-
 export default {
-  name: 'Ko1-Footer-Wa',
+  name: 'KoFooterWhatsAppLogo',
   components: {
-    KoTermsConditions,
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

@@ -1,7 +1,7 @@
-exports.ids = [342];
+exports.ids = [341];
 exports.modules = {
 
-/***/ 1124:
+/***/ 1106:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35,8 +35,8 @@ var expiredDate = __webpack_require__(54);
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   name: 'WapiME',
   components: {
-    waTemplate: () => __webpack_require__.e(/* import() */ 15).then(__webpack_require__.bind(null, 1118)),
-    koTiendaCerrada: () => __webpack_require__.e(/* import() */ 196).then(__webpack_require__.bind(null, 1326))
+    waTemplate: () => __webpack_require__.e(/* import() */ 17).then(__webpack_require__.bind(null, 1100)),
+    koTiendaCerrada: () => __webpack_require__.e(/* import() */ 209).then(__webpack_require__.bind(null, 1322))
   },
   mixins: [expiredDate["a" /* default */]],
   layout: 'wa',

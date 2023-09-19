@@ -1,23 +1,21 @@
 <template>
   <div class="content-tab" :style="settingByGeneral">
     <el-tabs class="w-full">
-      <el-tab-pane :label="$t('productdetail_description')">
+      <el-tab-pane
+        v-if="contentDescription"
+        :label="$t('productdetail_description')"
+      >
         <div class="editor">
-          <div v-if="data.info.descripcion">
-            <el-tiptap
-              v-model="data.info.descripcion"
-              :extensions="extensions"
-              :spellcheck="false"
-              :readonly="true"
-              :charCounterCount="false"
-              :tooltip="false"
-              :showMenubar="false"
-              :bubble="false"
-            />
-          </div>
-          <div v-else>
-            <p>{{ $t('productdetail_notdescription') }}</p>
-          </div>
+          <el-tiptap
+            v-model="contentDescription"
+            :extensions="extensions"
+            :spellcheck="false"
+            :readonly="true"
+            :tooltip="false"
+            :bubble="false"
+            :showMenubar="false"
+            :charCounterCount="false"
+          />
         </div>
       </el-tab-pane>
       <el-tab-pane :label="$t('productdetail_opcionesPago')">
@@ -220,31 +218,31 @@
           </ul>
         </div>
       </el-tab-pane>
-      <el-tab-pane :label="$t('productdetail_opinionesEnvio')">
+      <el-tab-pane
+        v-if="envios.envio_metodo"
+        :label="$t('productdetail_opinionesEnvio')"
+      >
         <div class="item-content">
-          <div v-if="this.envios.envio_metodo">
+          <div>
             <div class="content">
               <h3 class="title-section">
                 {{ $t('productdetail_opinionesEnvio') }}
               </h3>
             </div>
             <div
-              v-if="this.envio.titulo == 'Tarifa por ciudad'"
+              v-if="envio.titulo == 'Tarifa por ciudad'"
               class="wrapper-method"
             >
               <h4 class="capitalize">
-                • {{ this.envios.envio_metodo.replace('_', ' por ') }}
+                • {{ envios.envio_metodo.replace('_', ' por ') }}
               </h4>
               <p class="description-method">
                 {{ $t('productdetail_opinionesEnvioMsg1') }}
               </p>
             </div>
-            <div
-              v-if="this.envio.titulo == 'Tarifa plana'"
-              class="wrapper-method"
-            >
+            <div v-if="envio.titulo == 'Tarifa plana'" class="wrapper-method">
               <h4 class="capitalize">
-                {{ this.envios.envio_metodo.replace('_', ' ') }}
+                {{ envios.envio_metodo.replace('_', ' ') }}
               </h4>
               <p class="description-method">
                 {{ $t('productdetail_opinionesEnvioMsg2') }}
@@ -252,7 +250,7 @@
               <p class="price">
                 {{ $t('cart_precio') }}
                 {{
-                  this.envios.valor
+                  envios.valor
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -261,7 +259,7 @@
               </p>
             </div>
             <div
-              v-if="this.envio.titulo == 'Tarifa por precio'"
+              v-if="envio.titulo == 'Tarifa por precio'"
               class="wrapper-method"
             >
               <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
@@ -269,18 +267,12 @@
                 {{ $t('productdetail_precioTotalCompraMsg') }}
               </p>
             </div>
-            <div
-              v-if="this.envio.titulo == 'Envío gratis'"
-              class="wrapper-method"
-            >
+            <div v-if="envio.titulo == 'Envío gratis'" class="wrapper-method">
               <h4>{{ $t('productdetail_gratis') }}</h4>
               <p class="description-method">
                 {{ $t('productdetail_gratisMsg') }}
               </p>
             </div>
-          </div>
-          <div v-else>
-            <p>{{ $t('productdetail_notShipping') }}</p>
           </div>
         </div>
       </el-tab-pane>
@@ -288,33 +280,47 @@
   </div>
 </template>
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 
 export default {
-  mixins: [extensions, currency],
-  props: {
-    dataStore: Object,
-    data: {},
-    envio: {},
-    settingByGeneral: { type: Object, default: null },
-  },
-  computed: {
-    mediospago() {
-      return this.dataStore.medios_pago
-    },
-    envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
-      return this.data.medioEnvio
-    },
-  },
   filters: {
     capitalize(value) {
       if (value) {
         value = value.toLowerCase()
         return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
       }
+    },
+  },
+  mixins: [extensions, currency],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    data: {
+      type: Object,
+      required: true,
+    },
+    envio: {
+      type: Object,
+      required: true,
+    },
+    settingByGeneral: { type: Object, default: null },
+  },
+  data() {
+    return {
+      contentDescription: this.data?.descripcion,
+    }
+  },
+  computed: {
+    mediospago() {
+      return this.dataStore.medios_pago
+    },
+    envios() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
+      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
+      return this.data.medioEnvio
     },
   },
 }

@@ -52,7 +52,7 @@
 import settingsProps from './mixins/ComponentProps'
 
 export default {
-  name: 'Ko12-IHeader',
+  name: 'Ko12IHeader',
   components: {
     KoOrder: () => import('../headers/_order1/order1.vue'),
     KoSearch: () => import('../headers/header1/search.vue'),

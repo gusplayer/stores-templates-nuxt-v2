@@ -14,10 +14,10 @@
       </div>
     </div>
 
-    <div class="container-article" v-if="dataArticle">
+    <div v-if="dataArticle" class="container-article">
       <div class="content-blog">
         <nuxt-link to="/blog" class="content-back">
-          <arrow-left-icon class="arrow-left"> </arrow-left-icon>
+          <arrow-left-icon class="arrow-left" />
           <p>Regresar</p>
         </nuxt-link>
         <p class="title-blog">{{ dataArticle.titulo }}</p>
@@ -32,19 +32,19 @@
           </div>
           <div class="content-date-items">
             <p>{{ dataArticle.autor }}</p>
-            <p>{{ this.shippingCreated }}</p>
+            <p>{{ shippingCreated }}</p>
           </div>
         </div>
-        <div class="editor" v-if="dataArticle.contenido">
+        <div v-if="dataArticle.contenido" class="editor">
           <el-tiptap
             v-model="dataArticle.contenido"
             :extensions="extensions"
             :spellcheck="false"
             :readonly="true"
-            :charCounterCount="false"
             :tooltip="false"
-            :showMenubar="false"
             :bubble="false"
+            :showMenubar="false"
+            :charCounterCount="false"
           />
         </div>
       </div>
@@ -57,18 +57,16 @@
 </template>
 
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
+import extensions from '@/mixins/elemenTiptap.vue'
 export default {
   mixins: [extensions],
-  name: 'Ko-Blog',
   props: {
-    dataStore: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
-  mounted() {
-    if (this.listArticulos.length) {
-      this.searchIdForSlug()
-    }
-  },
+
   data() {
     return {
       dataArticle: {},
@@ -80,6 +78,16 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos
     },
+  },
+  watch: {
+    listArticulos() {
+      this.searchIdForSlug()
+    },
+  },
+  mounted() {
+    if (this.listArticulos.length) {
+      this.searchIdForSlug()
+    }
   },
   methods: {
     async searchIdForSlug() {
@@ -97,11 +105,6 @@ export default {
           this.shippingUpdated = dateUpdate.split(' ')[0]
         }
       }
-    },
-  },
-  watch: {
-    listArticulos() {
-      this.searchIdForSlug()
     },
   },
 }

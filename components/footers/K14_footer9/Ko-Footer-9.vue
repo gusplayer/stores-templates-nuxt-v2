@@ -1,13 +1,13 @@
 <template>
   <div
-    class="wrapper-footer w-full flex justify-center items-center"
     ref="background"
+    class="wrapper-footer w-full flex justify-center items-center"
     :style="[
       settingByTemplate14[0].setting14Footer,
       settingByTemplate14[0].setting14General,
       {
         '--font-style-1':
-          this.settingByTemplate14[0].setting14General?.fount_1 ?? 'Poppins',
+          settingByTemplate14[0].setting14General?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -67,8 +67,8 @@
             <div class="info-networks mb-20">
               <p class="btn">Síguenos</p>
               <KoSocialNet
-                :footerIcon="settingByTemplate14[0].setting14Footer"
-                :dataStore="dataStore"
+                :footer-icon="settingByTemplate14[0].setting14Footer"
+                :data-store="dataStore"
               />
             </div>
             <div class="info-legal-sm">
@@ -109,8 +109,8 @@
             </div>
             <div class="info-networkss">
               <KoSocialNet
-                :footerIcon="settingByTemplate14[0].setting14Footer"
-                :dataStore="dataStore"
+                :footer-icon="settingByTemplate14[0].setting14Footer"
+                :data-store="dataStore"
               />
             </div>
           </div>
@@ -145,12 +145,12 @@
         </div>
       </div>
       <div
-        class="empty"
         v-if="settingByTemplate14[0].setting14Footer.watermark"
+        class="empty"
       />
       <div
-        class="madebyKomercia"
         v-if="settingByTemplate14[0].setting14Footer.watermark"
+        class="madebyKomercia"
       >
         <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
         <a
@@ -168,47 +168,32 @@
         </a>
       </div>
       <div v-if="showModal">
-        <div class="modal" v-if="dataStore.politicas">
-          <KoTermsConditions :dataStore="dataStore" />
+        <div v-if="dataStore.politicas" class="modal">
+          <KoTermsConditions :data-store="dataStore" />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import KoSocialNet from '../../../components/template11/ko-socialnet'
-import KoTermsConditions from '../../../components/footers/ko-TermsAndConditions'
 export default {
+  name: 'KoFooter9',
   components: {
-    KoSocialNet,
-    KoTermsConditions,
+    KoSocialNet: () => import('@/components/template11/ko-socialnet.vue'),
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
-  name: 'Ko-Footer-9',
   props: {
-    dataStore: Object,
-    settingByTemplate14: Array,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate14: {
+      type: Array,
+      required: true,
+    },
   },
-  mounted() {
-    if (
-      this.settingByTemplate14 &&
-      this.settingByTemplate14[0].setting14Footer
-    ) {
-      this.setLogo()
-    }
-    var acc = document.getElementsByClassName('accordion')
-    var i
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function () {
-        this.classList.toggle('active')
-        var panel = this.nextElementSibling
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 10 + 'px'
-        }
-      })
-    }
-  },
+
   data() {
     return {
       secciones: [
@@ -244,23 +229,6 @@ export default {
       return this.$store.state.modalpolitics05
     },
   },
-  methods: {
-    OpenModalPolitics() {
-      this.$store.state.modalpolitics05 = true
-    },
-    setLogo() {
-      let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
-      )
-      let colorArray = color.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
-      }
-    },
-  },
   watch: {
     settingByTemplate14() {
       if (
@@ -276,6 +244,44 @@ export default {
         } else {
           this.logo = false
         }
+      }
+    },
+  },
+  mounted() {
+    if (
+      this.settingByTemplate14 &&
+      this.settingByTemplate14[0].setting14Footer
+    ) {
+      this.setLogo()
+    }
+    var acc = document.getElementsByClassName('accordion')
+    var i
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function () {
+        this.classList.toggle('active')
+        var panel = this.nextElementSibling
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 10 + 'px'
+        }
+      })
+    }
+  },
+  methods: {
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
+    },
+    setLogo() {
+      let color = getComputedStyle(this.$refs.background).getPropertyValue(
+        '--background_color_1'
+      )
+      let colorArray = color.split(',')
+      let colorInt = parseInt(colorArray[2])
+      if (colorInt > 50) {
+        this.logo = true
+      } else {
+        this.logo = false
       }
     },
   },

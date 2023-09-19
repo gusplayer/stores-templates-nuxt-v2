@@ -235,15 +235,13 @@
   </div>
 </template>
 <script>
-import KoNewsLetter from '@/components/template16/Ko16-Newsletter.vue'
-import KoSocialNet from '@/components/template11/ko-socialnet.vue'
-import KoTermsConditions from '@/components/footers/ko-TermsAndConditions.vue'
 export default {
-  name: 'KoFooter10',
+  name: 'KoFooter11',
   components: {
-    KoNewsLetter,
-    KoSocialNet,
-    KoTermsConditions,
+    KoNewsLetter: () => import('@/components/template16/Ko16-Newsletter.vue'),
+    KoSocialNet: () => import('@/components/template11/ko-socialnet.vue'),
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
   props: {
     dataStore: {

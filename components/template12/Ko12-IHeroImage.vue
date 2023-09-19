@@ -33,7 +33,7 @@
 import idCloudinary from '../../mixins/idCloudinary'
 import settingsProps from './mixins/ComponentProps'
 export default {
-  name: 'Ko12-IHeroImage',
+  name: 'Ko12IHeroImage',
   mixins: [settingsProps, idCloudinary],
   data: () => ({
     shouldChangeOpacity: false,

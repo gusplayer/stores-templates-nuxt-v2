@@ -1,7 +1,7 @@
-exports.ids = [185];
+exports.ids = [198];
 exports.modules = {
 
-/***/ 1106:
+/***/ 1088:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56,13 +56,13 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template10vue_type_script_lang_js_ = ({
   name: 'KoTemplate10',
   components: {
-    K010ButtonCar: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 1138)),
-    K010Carousel: () => __webpack_require__.e(/* import() */ 46).then(__webpack_require__.bind(null, 1139)),
-    K010Section: () => __webpack_require__.e(/* import() */ 49).then(__webpack_require__.bind(null, 1142)),
-    K010Trending: () => __webpack_require__.e(/* import() */ 50).then(__webpack_require__.bind(null, 1143)),
-    K010Deals: () => __webpack_require__.e(/* import() */ 47).then(__webpack_require__.bind(null, 1140)),
-    K010FeaturedProducts: () => __webpack_require__.e(/* import() */ 48).then(__webpack_require__.bind(null, 1141)),
-    K010Blog: () => __webpack_require__.e(/* import() */ 45).then(__webpack_require__.bind(null, 1137))
+    K010ButtonCar: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 1121)),
+    K010Carousel: () => __webpack_require__.e(/* import() */ 46).then(__webpack_require__.bind(null, 1122)),
+    K010Section: () => __webpack_require__.e(/* import() */ 49).then(__webpack_require__.bind(null, 1125)),
+    K010Trending: () => __webpack_require__.e(/* import() */ 50).then(__webpack_require__.bind(null, 1126)),
+    K010Deals: () => __webpack_require__.e(/* import() */ 47).then(__webpack_require__.bind(null, 1123)),
+    K010FeaturedProducts: () => __webpack_require__.e(/* import() */ 48).then(__webpack_require__.bind(null, 1124)),
+    K010Blog: () => __webpack_require__.e(/* import() */ 45).then(__webpack_require__.bind(null, 1120))
   },
   layout: 'default',
   data() {

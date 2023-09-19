@@ -1,7 +1,7 @@
-exports.ids = [340];
+exports.ids = [339];
 exports.modules = {
 
-/***/ 1127:
+/***/ 1109:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26,7 +26,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/wa/_slug/blog/_slugBlog.vue?vue&type=script&lang=js&
 /* harmony default export */ var _slugBlogvue_type_script_lang_js_ = ({
   components: {
-    KArticleWapi: () => __webpack_require__.e(/* import() */ 173).then(__webpack_require__.bind(null, 1310))
+    KArticleWapi: () => __webpack_require__.e(/* import() */ 186).then(__webpack_require__.bind(null, 1305))
   },
   layout: 'wa',
   mounted() {

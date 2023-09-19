@@ -6,54 +6,50 @@
       settingByTemplate11[0].settingGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate11[0]?.settingGeneral?.fount_1 ?? 'Roboto',
+          settingByTemplate11[0]?.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
-    <div class="container-productDetail-loading" v-if="loading"></div>
-    <div class="container-productDetail" v-else>
+    <div v-if="loading" class="container-productDetail-loading"></div>
+    <div v-else class="container-productDetail">
       <div class="banner-detail">
         <div class="crumb">
           <nuxt-link to="/productosHoko">
             <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
           </nuxt-link>
           <p class="separatorCrumb">/</p>
-          <p class="txt-crumb s2" v-if="data.name">{{ data.name }}</p>
+          <p v-if="data.name" class="txt-crumb s2">
+            {{ data.name }}
+          </p>
         </div>
       </div>
       <div class="empty"></div>
       <div class="product-content">
         <div class="left">
           <div class="wrapper-left">
-            <template>
-              <div
-                v-swiper:mySwiper="swiperOption"
-                ref="mySwiper"
-                class="photos"
-              >
-                <div class="swiper-wrapper" v-if="data.images">
-                  <div
-                    class="swiper-slide photos_selected"
-                    v-for="(foto, itemsfoto) in data.images"
-                    :key="itemsfoto"
-                    @click="selectedPhoto(foto)"
-                  >
-                    <img class="img-list" v-lazy="foto" alt="Product Img" />
-                  </div>
+            <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="photos">
+              <div v-if="data.images" class="swiper-wrapper">
+                <div
+                  v-for="(foto, itemsfoto) in data.images"
+                  :key="itemsfoto"
+                  class="swiper-slide photos_selected"
+                  @click="selectedPhoto(foto)"
+                >
+                  <img class="img-list" v-lazy="foto" alt="Product Img" />
                 </div>
-                <!-- <div class="swiper-prev" v-if="data.images.length > 3">
+              </div>
+              <!-- <div class="swiper-prev" v-if="data.images.length > 3">
                   <FlechaUp-icon class="icon-swiper" />
                 </div>
                 <div class="swiper-next" v-if="data.images.length > 3">
                   <Flechadown-icon class="icon-swiper" />
                 </div> -->
-              </div>
-            </template>
+            </div>
             <div class="wrapper-photo_main">
               <div class="photo_main">
                 <img
+                  v-lazy="selectPhotoUrl"
                   class="photo_main"
-                  v-lazy="this.selectPhotoUrl"
                   alt="Product Zoom"
                 />
               </div>
@@ -65,22 +61,22 @@
         </div>
         <div
           class="right"
-          :style="`margin-top:${this.settingByTemplate11[0].detailsProduct['--marginTopTitle']};`"
+          :style="`margin-top:${settingByTemplate11[0].detailsProduct['--marginTopTitle']};`"
         >
           <div class="content-items-right">
             <div class="content-name">
               <p
                 class="text-name"
-                :style="`font-size:${this.settingByTemplate11[0].detailsProduct['--fontSizeTitle']}; font-weight:${this.settingByTemplate11[0].detailsProduct['--fontWeighTitle']};`"
+                :style="`font-size:${settingByTemplate11[0].detailsProduct['--fontSizeTitle']}; font-weight:${settingByTemplate11[0].detailsProduct['--fontWeighTitle']};`"
               >
                 {{ data.name }}
               </p>
             </div>
             <div class="content-price">
               <p
-                class="text-price"
-                :style="`font-size:${this.settingByTemplate11[0].detailsProduct['--fontSizePrice']}; font-weight:${this.settingByTemplate11[0].detailsProduct['--fontWeighPrice']};`"
                 v-show="data.price"
+                class="text-price"
+                :style="`font-size:${settingByTemplate11[0].detailsProduct['--fontSizePrice']}; font-weight:${settingByTemplate11[0].detailsProduct['--fontWeighPrice']};`"
               >
                 {{ data.price | currency }}
               </p>
@@ -88,10 +84,12 @@
             <div class="empty"></div>
             <div class="content-stock">
               <p class="stock-text-1">{{ $t('productdetail_stock') }}:</p>
-              <p class="stock-text-2" v-if="!spent">
+              <p v-if="!spent" class="stock-text-2">
                 {{ data.stock.amount }} Unidades
               </p>
-              <p class="stock-text-2" v-else>{{ $t('home_cardAgotado') }}</p>
+              <p v-else class="stock-text-2">
+                {{ $t('home_cardAgotado') }}
+              </p>
             </div>
             <div class="empty"></div>
 
@@ -100,7 +98,7 @@
                 {{ $t('productdetail_compartir') }}
               </p>
               <a
-                :href="this.sharingFacebook"
+                :href="sharingFacebook"
                 target="_blank"
                 rel="noreferrer noopener"
                 class="btn-facebook"
@@ -114,7 +112,9 @@
             <div class="content-direction-btns mt-10">
               <div class="content-quantity-boxes">
                 <div class="box-quantity">
-                  <p class="txt-quantity">{{ quantityValue }}</p>
+                  <p class="txt-quantity">
+                    {{ quantityValue }}
+                  </p>
                 </div>
                 <div class="box-quantity-btns">
                   <div class="btn-quantity btn1" @click="addQuantity()">
@@ -127,11 +127,11 @@
               </div>
               <div class="content-addCart">
                 <button
+                  v-if="!spent"
+                  id="AddToCartTag"
                   ref="colorBtn"
                   class="btn"
                   @click="GoPayments"
-                  id="AddToCartTag"
-                  v-if="!spent"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +149,7 @@
                     {{ $t('home_comprarAhora') }}
                   </p>
                 </button>
-                <button disabled class="btn-disabled" v-else-if="spent">
+                <button v-else-if="spent" disabled class="btn-disabled">
                   <p class="text-addCart">
                     {{ $t('home_cardAgotado') }}
                   </p>
@@ -159,39 +159,54 @@
           </div>
         </div>
       </div>
-      <div class="tab">
-        <OptionTab
-          :dataStore="dataStore"
-          :data="data.stock.product"
-        ></OptionTab>
+      <div class="tab mb-20">
+        <K011-optTabHoko :data-store="dataStore" :data="data.stock.product" />
       </div>
-      <div class="mb-20"></div>
     </div>
   </div>
 </template>
 <script>
 import axios from 'axios'
-import OptionTab from './_productdetails/OptTab-hoko'
-import idCloudinary from '../../mixins/idCloudinary'
-import ProductSlide from './_productdetails/productSlideHoko.vue'
+import idCloudinary from '@/mixins/idCloudinary'
 
 export default {
-  mixins: [idCloudinary],
-  name: 'Ko-ProductDetail',
-  props: {
-    dataStore: Object,
-    // productsData: Array,
-    whatsapp: String,
-    // envios: Object,
-    facebookPixel: Object,
-    settingByTemplate11: Array,
-  },
+  name: 'Ko11ProductDetailHoko',
   components: {
-    OptionTab,
-    ProductSlide,
+    K011OptTabHoko: () => import('./_productdetails/K011-OptTabHoko.vue'),
+    ProductSlide: () => import('./_productdetails/productSlideHoko.vue'),
   },
-  mounted() {
-    this.asyncauthToken()
+  filters: {
+    currency(value) {
+      if (value) {
+        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+      }
+      return ''
+    },
+    toLowerCase(value) {
+      if (value) {
+        return value.toLowerCase()
+      }
+      return ''
+    },
+  },
+  mixins: [idCloudinary],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    whatsapp: {
+      type: String,
+      required: true,
+    },
+    facebookPixel: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate11: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -229,6 +244,16 @@ export default {
     dataHoko() {
       return this.$store.state.dataHoko
     },
+  },
+  watch: {
+    quantityValue(value) {
+      if (value > this.maxQuantityValue) {
+        this.quantityValue = this.maxQuantityValue
+      }
+    },
+  },
+  mounted() {
+    this.asyncauthToken()
   },
   methods: {
     mobileCheck() {
@@ -338,27 +363,6 @@ export default {
     },
     selectedPhoto(photo) {
       this.selectPhotoUrl = photo
-    },
-  },
-  watch: {
-    quantityValue(value) {
-      if (value > this.maxQuantityValue) {
-        this.quantityValue = this.maxQuantityValue
-      }
-    },
-  },
-  filters: {
-    currency(value) {
-      if (value) {
-        return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
-      return ''
-    },
-    toLowerCase(value) {
-      if (value) {
-        return value.toLowerCase()
-      }
-      return ''
     },
   },
 }

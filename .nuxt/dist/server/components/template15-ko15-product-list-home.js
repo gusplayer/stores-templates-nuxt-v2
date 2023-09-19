@@ -1,7 +1,7 @@
-exports.ids = [113];
+exports.ids = [121];
 exports.modules = {
 
-/***/ 1194:
+/***/ 1182:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56,7 +56,7 @@ var staticRenderFns = [];
     }
   },
   components: {
-    KoProductCard: () => __webpack_require__.e(/* import() */ 4).then(__webpack_require__.bind(null, 1086))
+    KoProductCard: () => __webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(null, 1068))
   }
 });
 // CONCATENATED MODULE: ./components/template15/ko15-productListHome.vue?vue&type=script&lang=js&

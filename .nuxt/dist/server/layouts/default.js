@@ -1,14 +1,14 @@
-exports.ids = [326];
+exports.ids = [325];
 exports.modules = {
 
-/***/ 1129:
+/***/ 1111:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./layouts/default.vue?vue&type=template&id=1b9dadfa&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./layouts/default.vue?vue&type=template&id=f7e98002&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -31,7 +31,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./layouts/default.vue?vue&type=template&id=1b9dadfa&
+// CONCATENATED MODULE: ./layouts/default.vue?vue&type=template&id=f7e98002&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(9);
@@ -46,34 +46,34 @@ var expiredDate = __webpack_require__(54);
   name: 'LayoutDefault',
   components: {
     // HEADER
-    KoHeader1: () => __webpack_require__.e(/* import() */ 349).then(__webpack_require__.bind(null, 1064)),
-    KoHeader2: () => __webpack_require__.e(/* import() */ 352).then(__webpack_require__.bind(null, 1065)),
-    KoHeader3: () => __webpack_require__.e(/* import() */ 348).then(__webpack_require__.bind(null, 1066)),
-    KoHeader4: () => __webpack_require__.e(/* import() */ 345).then(__webpack_require__.bind(null, 1067)),
-    KoHeader5: () => __webpack_require__.e(/* import() */ 347).then(__webpack_require__.bind(null, 1068)),
-    KoHeader6: () => __webpack_require__.e(/* import() */ 350).then(__webpack_require__.bind(null, 1069)),
-    KoHeader7: () => __webpack_require__.e(/* import() */ 351).then(__webpack_require__.bind(null, 1070)),
-    KoHeader8: () => __webpack_require__.e(/* import() */ 346).then(__webpack_require__.bind(null, 1071)),
-    KoHeader9: () => __webpack_require__.e(/* import() */ 35).then(__webpack_require__.bind(null, 1247)),
-    KoHeader10: () => __webpack_require__.e(/* import() */ 36).then(__webpack_require__.bind(null, 1251)),
-    KoHeader11: () => __webpack_require__.e(/* import() */ 37).then(__webpack_require__.bind(null, 1252)),
+    KoHeader1: () => __webpack_require__.e(/* import() */ 348).then(__webpack_require__.bind(null, 1047)),
+    // KoHeader2: () => import('../components/headers/header2/Ko-Header-2.vue'),
+    KoHeader3: () => __webpack_require__.e(/* import() */ 347).then(__webpack_require__.bind(null, 1048)),
+    KoHeader4: () => __webpack_require__.e(/* import() */ 344).then(__webpack_require__.bind(null, 1050)),
+    KoHeader5: () => __webpack_require__.e(/* import() */ 346).then(__webpack_require__.bind(null, 1049)),
+    KoHeader6: () => __webpack_require__.e(/* import() */ 349).then(__webpack_require__.bind(null, 1051)),
+    KoHeader7: () => __webpack_require__.e(/* import() */ 350).then(__webpack_require__.bind(null, 1052)),
+    KoHeader8: () => __webpack_require__.e(/* import() */ 345).then(__webpack_require__.bind(null, 1053)),
+    KoHeader9: () => __webpack_require__.e(/* import() */ 33).then(__webpack_require__.bind(null, 1249)),
+    KoHeader10: () => __webpack_require__.e(/* import() */ 34).then(__webpack_require__.bind(null, 1253)),
+    KoHeader11: () => __webpack_require__.e(/* import() */ 35).then(__webpack_require__.bind(null, 1254)),
     // FOOTER
-    KoFooter1: () => __webpack_require__.e(/* import() */ 20).then(__webpack_require__.bind(null, 1253)),
-    KoFooter2: () => __webpack_require__.e(/* import() */ 21).then(__webpack_require__.bind(null, 1256)),
-    KoFooter4: () => __webpack_require__.e(/* import() */ 22).then(__webpack_require__.bind(null, 1257)),
-    KoFooter5: () => __webpack_require__.e(/* import() */ 23).then(__webpack_require__.bind(null, 1258)),
-    KoFooter6: () => __webpack_require__.e(/* import() */ 24).then(__webpack_require__.bind(null, 1259)),
-    KoFooter7: () => __webpack_require__.e(/* import() */ 25).then(__webpack_require__.bind(null, 1260)),
-    KoFooter8: () => __webpack_require__.e(/* import() */ 26).then(__webpack_require__.bind(null, 1261)),
-    KoFooter9: () => __webpack_require__.e(/* import() */ 27).then(__webpack_require__.bind(null, 1262)),
-    KoFooter10: () => __webpack_require__.e(/* import() */ 28).then(__webpack_require__.bind(null, 1263)),
-    KoFooter11: () => __webpack_require__.e(/* import() */ 29).then(__webpack_require__.bind(null, 1264)),
+    KoFooter1: () => __webpack_require__.e(/* import() */ 20).then(__webpack_require__.bind(null, 1235)),
+    // KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2.vue'),
+    KoFooter4: () => __webpack_require__.e(/* import() */ 21).then(__webpack_require__.bind(null, 1238)),
+    KoFooter5: () => __webpack_require__.e(/* import() */ 22).then(__webpack_require__.bind(null, 1239)),
+    KoFooter6: () => __webpack_require__.e(/* import() */ 23).then(__webpack_require__.bind(null, 1240)),
+    KoFooter7: () => __webpack_require__.e(/* import() */ 24).then(__webpack_require__.bind(null, 1241)),
+    KoFooter8: () => __webpack_require__.e(/* import() */ 25).then(__webpack_require__.bind(null, 1242)),
+    KoFooter9: () => __webpack_require__.e(/* import() */ 26).then(__webpack_require__.bind(null, 1243)),
+    KoFooter10: () => __webpack_require__.e(/* import() */ 27).then(__webpack_require__.bind(null, 1244)),
+    KoFooter11: () => __webpack_require__.e(/* import() */ 28).then(__webpack_require__.bind(null, 1245)),
     // OTROS
-    KoFooterCountry: () => __webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(null, 1254)),
-    koTiendaCerrada: () => __webpack_require__.e(/* import() */ 196).then(__webpack_require__.bind(null, 1326)),
-    koTiendaError: () => __webpack_require__.e(/* import() */ 38).then(__webpack_require__.bind(null, 632)),
-    koModalSecurity: () => __webpack_require__.e(/* import() */ 39).then(__webpack_require__.bind(null, 633)),
-    koWhatsApp: () => __webpack_require__.e(/* import() */ 1).then(__webpack_require__.bind(null, 1325))
+    KoFooterCountry: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1236)),
+    koTiendaCerrada: () => __webpack_require__.e(/* import() */ 209).then(__webpack_require__.bind(null, 1322)),
+    koTiendaError: () => __webpack_require__.e(/* import() */ 36).then(__webpack_require__.bind(null, 598)),
+    koModalSecurity: () => __webpack_require__.e(/* import() */ 37).then(__webpack_require__.bind(null, 599)),
+    koWhatsApp: () => __webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(null, 1321))
   },
   mixins: [expiredDate["a" /* default */]],
   data() {
@@ -81,7 +81,7 @@ var expiredDate = __webpack_require__(54);
       headerComponentMap: {
         3: 'KoHeader1',
         5: 'KoHeader1',
-        6: 'KoHeader2',
+        // 6: 'KoHeader2',
         7: 'KoHeader4',
         8: 'KoHeader3',
         9: 'KoHeader5',
@@ -95,7 +95,7 @@ var expiredDate = __webpack_require__(54);
       footerComponentMap: {
         3: 'KoFooter1',
         5: 'KoFooter1',
-        6: 'KoFooter2',
+        // 6: 'KoFooter2',
         7: 'KoFooter4',
         8: 'KoFooter1',
         9: 'KoFooter5',
@@ -476,7 +476,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(689)
+  var style0 = __webpack_require__(644)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -498,20 +498,20 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 443:
+/***/ 395:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(690);
+var content = __webpack_require__(645);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(7).default
 module.exports.__inject__ = function (context) {
-  add("24a6e444", content, true, context)
+  add("4dddb41f", content, true, context)
 };
 
 /***/ }),
@@ -553,19 +553,19 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 689:
+/***/ 644:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_default_vue_vue_type_style_index_0_id_1b9dadfa_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(443);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_default_vue_vue_type_style_index_0_id_1b9dadfa_prod_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_default_vue_vue_type_style_index_0_id_1b9dadfa_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_default_vue_vue_type_style_index_0_id_1b9dadfa_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_default_vue_vue_type_style_index_0_id_1b9dadfa_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_default_vue_vue_type_style_index_0_id_f7e98002_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(395);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_default_vue_vue_type_style_index_0_id_f7e98002_prod_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_default_vue_vue_type_style_index_0_id_f7e98002_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_default_vue_vue_type_style_index_0_id_f7e98002_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_default_vue_vue_type_style_index_0_id_f7e98002_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 690:
+/***/ 645:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

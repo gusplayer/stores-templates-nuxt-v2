@@ -1,12 +1,14 @@
 <template>
   <div class="content-article">
-    <div class="content-item-article" v-if="dataArticle">
-      <p class="tittle-blog">{{ dataArticle.titulo }}</p>
+    <div v-if="dataArticle" class="content-item-article">
+      <p class="tittle-blog">
+        {{ dataArticle.titulo }}
+      </p>
       <div class="content-img">
         <img
           v-if="dataArticle && dataArticle.imagen_principal_url"
-          class="img-article"
           v-lazy="idCloudinary(dataArticle.imagen_principal_url, 400, 400)"
+          class="img-article"
           alt="Image-Article"
         />
       </div>
@@ -24,18 +26,20 @@
             d="M9,10V12H7V10H9M13,10V12H11V10H13M17,10V12H15V10H17M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5A2,2 0 0,1 5,3H6V1H8V3H16V1H18V3H19M19,19V8H5V19H19M9,14V16H7V14H9M13,14V16H11V14H13M17,14V16H15V14H17Z"
           />
         </svg>
-        <p class="txt-created">{{ shippingCreated }}</p>
+        <p class="txt-created">
+          {{ shippingCreated }}
+        </p>
       </div>
-      <div class="editor" v-if="dataArticle.contenido">
+      <div v-if="dataArticle.contenido" class="editor">
         <el-tiptap
           v-model="dataArticle.contenido"
           :extensions="extensions"
           :spellcheck="false"
           :readonly="true"
-          :charCounterCount="false"
           :tooltip="false"
-          :showMenubar="false"
           :bubble="false"
+          :showMenubar="false"
+          :charCounterCount="false"
         />
       </div>
     </div>
@@ -50,14 +54,11 @@ import idCloudinary from '@/mixins/idCloudinary'
 import extensions from '@/mixins/elemenTiptap.vue'
 export default {
   mixins: [extensions, idCloudinary],
-  name: 'Ko-Blog',
   props: {
-    dataStore: Object,
-  },
-  mounted() {
-    if (this.listArticulos.length) {
-      this.searchIdForSlug()
-    }
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -70,6 +71,16 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos
     },
+  },
+  watch: {
+    listArticulos() {
+      this.searchIdForSlug()
+    },
+  },
+  mounted() {
+    if (this.listArticulos.length) {
+      this.searchIdForSlug()
+    }
   },
   methods: {
     async searchIdForSlug() {
@@ -87,11 +98,6 @@ export default {
           this.shippingUpdated = dateUpdate.split(' ')[0]
         }
       }
-    },
-  },
-  watch: {
-    listArticulos() {
-      this.searchIdForSlug()
     },
   },
 }
