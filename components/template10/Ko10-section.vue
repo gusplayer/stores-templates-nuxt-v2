@@ -6,8 +6,8 @@
       settingGeneral,
       {
         '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
+          settingGeneral && settingGeneral.fount_1
+            ? settingGeneral.fount_1
             : 'Roboto',
       },
     ]"
@@ -15,114 +15,99 @@
     <div class="content-wrapper">
       <a
         :href="
-          this.section.values[0].url_redirect
-            ? this.section.values[0].url_redirect
-            : ''
+          section.values[0].url_redirect ? section.values[0].url_redirect : ''
         "
         rel="noreferrer noopener"
       >
         <div class="wrapper-left">
           <img
-            class="img-left"
             v-lazy="
-              idCloudinaryBanner(
-                this.section.values[0].url_img_background,
-                'banner'
-              )
+              idCloudinaryBanner(section.values[0].url_img_background, 'banner')
             "
+            class="img-left"
             alt="banner-1"
           />
           <div
             class="txt-content"
-            :style="`justify-content: ${this.section.values[0].justingText}; align-items: ${this.section.values[0].alingText};`"
+            :style="`justify-content: ${section.values[0].justingText}; align-items: ${section.values[0].alingText};`"
           >
             <p
               class="txt-tittle"
-              :style="`color: ${this.section.values[0].colorPretitle}; margin-bottom:${this.section.values[0].marginbottomPretitle};`"
+              :style="`color: ${section.values[0].colorPretitle}; margin-bottom:${section.values[0].marginbottomPretitle};`"
             >
-              {{ this.section.values[0].pretitle }}
+              {{ section.values[0].pretitle }}
             </p>
             <p
               class="txt-subtittle"
-              :style="`color: ${this.section.values[0].colorTitle}; margin-bottom:${this.section.values[0].marginbottomTitle};`"
+              :style="`color: ${section.values[0].colorTitle}; margin-bottom:${section.values[0].marginbottomTitle};`"
             >
-              {{ this.section.values[0].title }}
+              {{ section.values[0].title }}
             </p>
           </div>
         </div>
       </a>
       <a
         :href="
-          this.section.values[1].url_redirect
-            ? this.section.values[1].url_redirect
-            : ''
+          section.values[1].url_redirect ? section.values[1].url_redirect : ''
         "
         rel="noreferrer noopener"
       >
         <div class="wrapper-center">
           <img
-            class="img-center"
             v-lazy="
-              idCloudinaryBanner(
-                this.section.values[1].url_img_background,
-                'banner'
-              )
+              idCloudinaryBanner(section.values[1].url_img_background, 'banner')
             "
+            class="img-center"
             alt="banner-2"
           />
           <div
             class="txt-content"
-            :style="`justify-content: ${this.section.values[1].justingText}; align-items: ${this.section.values[1].alingText};`"
+            :style="`justify-content: ${section.values[1].justingText}; align-items: ${section.values[1].alingText};`"
           >
             <p
               class="txt-tittle"
-              :style="`color: ${this.section.values[1].colorPretitle}; margin-bottom:${this.section.values[1].marginbottomPretitle};`"
+              :style="`color: ${section.values[1].colorPretitle}; margin-bottom:${section.values[1].marginbottomPretitle};`"
             >
-              {{ this.section.values[1].pretitle }}
+              {{ section.values[1].pretitle }}
             </p>
             <p
               class="txt-subtittle"
-              :style="`color: ${this.section.values[1].colorTitle}; margin-bottom:${this.section.values[1].marginbottomTitle};`"
+              :style="`color: ${section.values[1].colorTitle}; margin-bottom:${section.values[1].marginbottomTitle};`"
             >
-              {{ this.section.values[1].title }}
+              {{ section.values[1].title }}
             </p>
           </div>
         </div>
       </a>
       <a
         :href="
-          this.section.values[2].url_redirect
-            ? this.section.values[2].url_redirect
-            : ''
+          section.values[2].url_redirect ? section.values[2].url_redirect : ''
         "
         rel="noreferrer noopener"
       >
         <div class="wrapper-right">
           <img
-            class="img-right"
             v-lazy="
-              idCloudinaryBanner(
-                this.section.values[2].url_img_background,
-                'banner'
-              )
+              idCloudinaryBanner(section.values[2].url_img_background, 'banner')
             "
+            class="img-right"
             alt="banner-3"
           />
           <div
             class="txt-content"
-            :style="`justify-content: ${this.section.values[2].justingText}; align-items: ${this.section.values[2].alingText};`"
+            :style="`justify-content: ${section.values[2].justingText}; align-items: ${section.values[2].alingText};`"
           >
             <p
               class="txt-tittle"
-              :style="`color: ${this.section.values[2].colorPretitle}; margin-bottom:${this.section.values[2].marginbottomPretitle};`"
+              :style="`color: ${section.values[2].colorPretitle}; margin-bottom:${section.values[2].marginbottomPretitle};`"
             >
-              {{ this.section.values[2].pretitle }}
+              {{ section.values[2].pretitle }}
             </p>
             <p
               class="txt-subtittle"
-              :style="`color: ${this.section.values[2].colorTitle}; margin-bottom:${this.section.values[2].marginbottomTitle};`"
+              :style="`color: ${section.values[2].colorTitle}; margin-bottom:${section.values[2].marginbottomTitle};`"
             >
-              {{ this.section.values[2].title }}
+              {{ section.values[2].title }}
             </p>
           </div>
         </div>
@@ -133,12 +118,12 @@
 <script>
 import idCloudinary from '../../mixins/idCloudinary'
 export default {
-  name: 'Ko10-section',
+  name: 'Ko10Section',
+  mixins: [idCloudinary],
   props: {
     section: Object,
     settingGeneral: Object,
   },
-  mixins: [idCloudinary],
 }
 </script>
 <style scoped>

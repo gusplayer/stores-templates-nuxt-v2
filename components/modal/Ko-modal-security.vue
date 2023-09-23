@@ -1,12 +1,12 @@
 <template>
   <div
+    v-if="dataStore.modal && dataStore.modal.stateModal === 1 && !stateModalPwd"
     class="wrapper-security-modal"
     :style="`background: ${
       dataStore.modal && dataStore.modal.colorBg_1
         ? dataStore.modal.colorBg_1
         : 'rgba(5, 5, 5, 0.897)'
     };`"
-    v-if="dataStore.modal && dataStore.modal.stateModal == 1 && !stateModalPwd"
   >
     <div
       class="content-security-modal"
@@ -84,9 +84,10 @@
       </p>
       <div class="inputBox">
         <input
+          id="password"
+          v-model="pwd"
           name="password"
           type="password"
-          v-model="pwd"
           class="input-text"
           :style="`color: ${
             dataStore.modal && dataStore.modal.colorBorder
@@ -98,7 +99,6 @@
               : 'Black'
           };`"
           placeholder="Ingresar contraseña"
-          id="password"
         />
         <div id="toggle" @click="switchVisibility()">
           <i class="el-icon-view" />
@@ -128,16 +128,14 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 import idCloudinary from '../../mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   props: {
-    dataStore: Object,
-  },
-  mounted() {
-    window.parent.postMessage('message', '*')
-    window.addEventListener('message', this.addEventListenerTemplate)
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -152,6 +150,10 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
+  },
+  mounted() {
+    window.parent.postMessage('message', '*')
+    window.addEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
     async closedModal() {
@@ -182,7 +184,7 @@ export default {
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
       ) {
-        if (e && e.data && e.data.modalSecurity === true) {
+        if (e && e.data && e.data.modalSecurity) {
           this.$store.commit('SET_STATE_MODAL_PWD', true)
         }
       }

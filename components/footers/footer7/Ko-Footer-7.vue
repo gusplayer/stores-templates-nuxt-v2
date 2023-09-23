@@ -1,7 +1,8 @@
 <template>
   <div
-    class="wrapper-footer"
+    v-if="settingByTemplate11"
     ref="background"
+    class="wrapper-footer"
     :style="[
       settingByTemplate11[0].setting11Footer,
       settingByTemplate11[0].setting11General,
@@ -11,20 +12,17 @@
       class="content-footer"
       :style="[
         {
-          '--font-style-1':
-            this.settingByTemplate11 &&
-            this.settingByTemplate11[0].setting11General &&
-            this.settingByTemplate11[0].setting11General.fount_1
-              ? this.settingByTemplate11[0].setting11General.fount_1
-              : 'Roboto',
+          '--font-style-1': settingByTemplate11[0]?.setting11General?.fount_1
+            ? settingByTemplate11[0].setting11General.fount_1
+            : 'Roboto',
         },
       ]"
     >
       <KoNewsLetter
         v-if="settingByTemplate11[0].newsletter.visible"
         :newsletter="settingByTemplate11[0].newsletter"
-        :setting11General="settingByTemplate11[0].setting11General"
-        :dataStore="dataStore"
+        :setting11-general="settingByTemplate11[0].setting11General"
+        :data-store="dataStore"
       />
       <div class="content-footer-items">
         <div class="content-items-sm">
@@ -34,26 +32,20 @@
               <div class="footer-content-tienda panel">
                 <div class="content-direction">
                   <p
+                    v-if="dataStore.geolocalizacion.length"
                     class="txt-direction txt"
-                    v-if="this.dataStore.geolocalizacion.length"
                   >
-                    {{ this.dataStore.geolocalizacion[0].direccion }}
+                    {{ dataStore.geolocalizacion[0].direccion }}
                   </p>
                 </div>
                 <div class="content-number">
-                  <p
-                    class="txt-number txt"
-                    v-if="this.dataStore.tienda.telefono"
-                  >
-                    {{ this.dataStore.tienda.telefono }}
+                  <p v-if="dataStore.tienda.telefono" class="txt-number txt">
+                    {{ dataStore.tienda.telefono }}
                   </p>
                 </div>
                 <div class="content-email">
-                  <p
-                    class="txt-email txt"
-                    v-if="this.dataStore.tienda.email_tienda"
-                  >
-                    {{ this.dataStore.tienda.email_tienda }}
+                  <p v-if="dataStore.tienda.email_tienda" class="txt-email txt">
+                    {{ dataStore.tienda.email_tienda }}
                   </p>
                 </div>
               </div>
@@ -61,15 +53,15 @@
             <div class="info-networks">
               <button class="accordion btn">Síguenos</button>
               <KoSocialNet
-                :footerIcon="this.settingByTemplate11[0].setting11Footer"
-                :dataStore="dataStore"
+                :footer-icon="settingByTemplate11[0].setting11Footer"
+                :data-store="dataStore"
                 class="panel"
-              ></KoSocialNet>
+              />
             </div>
             <div class="info-legal-sm">
               <button
-                class="btn-legal btn"
                 v-if="dataStore.politicas"
+                class="btn-legal btn"
                 @click="OpenModalPolitics"
               >
                 {{ $t('footer_politicasyterminos') }}
@@ -81,35 +73,32 @@
           <div class="info-btn-footer gap-2">
             <img
               class="img-logo"
-              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+              :src="`${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
               alt="Logo"
             />
             <div class="content-direction">
               <p
+                v-if="dataStore.geolocalizacion.length"
                 class="txt-direction txt"
-                v-if="this.dataStore.geolocalizacion.length"
               >
-                {{ this.dataStore.geolocalizacion[0].direccion }}
+                {{ dataStore.geolocalizacion[0].direccion }}
               </p>
             </div>
             <div class="content-number">
-              <p class="txt-number txt" v-if="this.dataStore.tienda.telefono">
-                {{ this.dataStore.tienda.telefono }}
+              <p v-if="dataStore.tienda.telefono" class="txt-number txt">
+                {{ dataStore.tienda.telefono }}
               </p>
             </div>
             <div class="content-email">
-              <p
-                class="txt-email txt"
-                v-if="this.dataStore.tienda.email_tienda"
-              >
-                {{ this.dataStore.tienda.email_tienda }}
+              <p v-if="dataStore.tienda.email_tienda" class="txt-email txt">
+                {{ dataStore.tienda.email_tienda }}
               </p>
             </div>
             <div class="info-networkss">
               <KoSocialNet
-                :footerIcon="this.settingByTemplate11[0].setting11Footer"
-                :dataStore="dataStore"
-              ></KoSocialNet>
+                :footer-icon="settingByTemplate11[0].setting11Footer"
+                :data-store="dataStore"
+              />
             </div>
           </div>
           <div class="info-btn-footer">
@@ -118,12 +107,12 @@
               v-for="(item, index) in secciones"
               :key="`${index}${item.name}`"
             >
-              <nuxt-link :to="item.path" v-if="item.path" class="btns">
+              <nuxt-link v-if="item.path" :to="item.path" class="btns">
                 {{ $t(`${item.name}`) }}
               </nuxt-link>
               <nuxt-link
-                :to="item.href"
                 v-else-if="item.href && listArticulos > 0"
+                :to="item.href"
                 class="btns"
               >
                 {{ $t(`${item.name}`) }}
@@ -133,8 +122,8 @@
           <div class="info-btn-footer">
             <p class="btn">Nuestra empresa</p>
             <button
-              class="btn-legal btns"
               v-if="dataStore.politicas"
+              class="btn-legal btns"
               @click="OpenModalPolitics"
             >
               {{ $t('footer_politicasyterminos') }}
@@ -143,12 +132,12 @@
         </div>
       </div>
       <div
+        v-if="settingByTemplate11[0].setting11Footer.watermark"
         class="empty"
-        v-if="this.settingByTemplate11[0].setting11Footer.watermark"
-      />
+      ></div>
       <div
+        v-if="settingByTemplate11[0].setting11Footer.watermark"
         class="madebyKomercia"
-        v-if="this.settingByTemplate11[0].setting11Footer.watermark"
       >
         <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
         <a
@@ -165,49 +154,30 @@
           />
         </a>
       </div>
-      <div v-if="showModal">
-        <div class="modal" v-if="dataStore.politicas">
-          <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
-        </div>
+      <div v-if="showModal && dataStore.politicas" class="modal">
+        <KoTermsConditions :data-store="dataStore" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import KoNewsLetter from '../../../components/template11/ko-newsletter'
-import KoSocialNet from '../../../components/template11/ko-socialnet'
-import KoTermsConditions from '../../../components/footers/ko-TermsAndConditions'
 export default {
+  name: 'Ko7Footer',
   components: {
-    KoNewsLetter,
-    KoSocialNet,
-    KoTermsConditions,
+    KoNewsLetter: () => import('@/components/template11/ko-newsletter.vue'),
+    KoSocialNet: () => import('@/components/template11/ko-socialnet.vue'),
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
-  name: 'Ko-Footer-7',
   props: {
-    dataStore: Object,
-    settingByTemplate11: Array,
-  },
-  mounted() {
-    if (
-      this.settingByTemplate11 &&
-      this.settingByTemplate11[0].setting11Footer
-    ) {
-      this.setLogo()
-    }
-    var acc = document.getElementsByClassName('accordion')
-    var i
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function () {
-        this.classList.toggle('active')
-        var panel = this.nextElementSibling
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 10 + 'px'
-        }
-      })
-    }
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate11: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -244,23 +214,6 @@ export default {
       return this.$store.state.modalpolitics05
     },
   },
-  methods: {
-    OpenModalPolitics() {
-      this.$store.state.modalpolitics05 = true
-    },
-    setLogo() {
-      let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
-      )
-      let colorArray = color.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
-      }
-    },
-  },
   watch: {
     settingByTemplate11() {
       if (
@@ -276,6 +229,44 @@ export default {
         } else {
           this.logo = false
         }
+      }
+    },
+  },
+  mounted() {
+    if (
+      this.settingByTemplate11 &&
+      this.settingByTemplate11[0].setting11Footer
+    ) {
+      this.setLogo()
+    }
+    var acc = document.getElementsByClassName('accordion')
+    var i
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function () {
+        this.classList.toggle('active')
+        var panel = this.nextElementSibling
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 10 + 'px'
+        }
+      })
+    }
+  },
+  methods: {
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
+    },
+    setLogo() {
+      let color = getComputedStyle(this.$refs.background).getPropertyValue(
+        '--background_color_1'
+      )
+      let colorArray = color.split(',')
+      let colorInt = parseInt(colorArray[2])
+      if (colorInt > 50) {
+        this.logo = true
+      } else {
+        this.logo = false
       }
     },
   },

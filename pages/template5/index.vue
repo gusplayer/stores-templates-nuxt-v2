@@ -70,7 +70,6 @@ export default {
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
       ) {
-        console.log(e.data)
         if (e && e.data && e.data.componentToEdit) {
           this.$store.commit('SET_CURRENTSETTING5', e.data)
           switch (e.data.componentToEdit) {

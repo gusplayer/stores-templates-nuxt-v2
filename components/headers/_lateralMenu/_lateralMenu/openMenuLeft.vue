@@ -58,8 +58,9 @@
                   :to="item.href"
                   v-else-if="item.href && listArticulos > 0 && item.state"
                   class="btn"
-                  >{{ $t(`${item.name}`) }}</nuxt-link
                 >
+                  {{ $t(`${item.name}`) }}
+                </nuxt-link>
               </div>
             </div>
           </div>

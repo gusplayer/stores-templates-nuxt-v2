@@ -466,7 +466,6 @@ export default {
   },
   methods: {
     changeLocation(value) {
-      console.log(value)
       this.positionLocationStore = value
     },
     submitContact() {

@@ -1,17 +1,19 @@
 <template>
   <div class="content-acordion">
-    <button class="accordion">{{ $t('productdetail_description') }}</button>
+    <button v-if="contentDescription" class="accordion">
+      {{ $t('productdetail_description') }}
+    </button>
     <div class="panel">
-      <div class="editor" v-if="data.info.descripcion">
+      <div v-if="contentDescription" class="editor">
         <el-tiptap
-          v-model="data.info.descripcion"
+          v-model="contentDescription"
           :extensions="extensions"
           :spellcheck="false"
           :readonly="true"
-          :charCounterCount="false"
           :tooltip="false"
-          :showMenubar="false"
           :bubble="false"
+          :showMenubar="false"
+          :charCounterCount="false"
         />
       </div>
     </div>
@@ -41,7 +43,7 @@
             rel="noreferrer noopener"
             class="cursor_point"
           >
-            <img class="logo-pasarela" v-lazy="img1" alt="logo Credibanco" />
+            <img v-lazy="img1" class="logo-pasarela" alt="logo Credibanco" />
           </a>
         </li>
         <li v-if="mediospago.daviplata == 1">
@@ -50,8 +52,8 @@
             {{ $t('productdetail_ConsignaciondaviplataMsg') }}
           </p>
           <img
-            class="logo-pasarela-daviplata"
             v-lazy="img2"
+            class="logo-pasarela-daviplata"
             alt="logo daviPlata"
           />
         </li>
@@ -64,7 +66,7 @@
             rel="noreferrer noopener"
             class="cursor_point"
           >
-            <img class="logo-pasarela-efecty" v-lazy="img3" alt="logo efecty" />
+            <img v-lazy="img3" class="logo-pasarela-efecty" alt="logo efecty" />
           </a>
         </li>
         <li v-if="mediospago.mercado_pago == 1">
@@ -79,8 +81,8 @@
             class="cursor_point"
           >
             <img
-              class="logo-pasarela-daviplata"
               v-lazy="img4"
+              class="logo-pasarela-daviplata"
               alt="logo mercadopago"
             />
           </a>
@@ -97,8 +99,8 @@
             class="cursor_point"
           >
             <img
-              class="logo-pasarela-daviplata"
               v-lazy="img5"
+              class="logo-pasarela-daviplata"
               alt="logo nequi"
             />
           </a>
@@ -109,8 +111,8 @@
             {{ $t('productdetail_PasarelaEpaycoMsg') }}
           </p>
           <img
-            class="logo-pasarela-payco"
             v-lazy="img6"
+            class="logo-pasarela-payco"
             alt="Pasarela de pagos epayco"
           />
         </li>
@@ -125,8 +127,8 @@
             rel="noreferrer noopener"
           >
             <img
-              class="logo-pasarela-payu"
               v-lazy="img7"
+              class="logo-pasarela-payu"
               alt="PayU"
               border="0"
             />
@@ -139,8 +141,8 @@
           </p>
           <a href="https://wompi.co/" target="_blank" rel="noreferrer noopener">
             <img
-              class="logo-pasarela-wompi"
               v-lazy="img8"
+              class="logo-pasarela-wompi"
               alt="wompi"
               border="0"
             />
@@ -149,30 +151,29 @@
       </ul>
     </div>
 
-    <button class="accordion">{{ $t('productdetail_opinionesEnvio') }}</button>
-    <div class="deliverys section panel" v-if="this.envios.envio_metodo">
+    <button v-if="envios.envio_metodo" class="accordion">
+      {{ $t('productdetail_opinionesEnvio') }}
+    </button>
+    <div v-if="envios.envio_metodo" class="deliverys section panel">
       <div class="content">
         <h3 class="title-section">
           {{ $t('productdetail_opinionesEnvio') }}
         </h3>
       </div>
       <div
-        v-if="this.envios.envio_metodo === 'precio_ciudad'"
+        v-if="envios.envio_metodo === 'precio_ciudad'"
         class="wrapper-method"
       >
         <h4 class="capitalize">
-          • {{ this.envios.envio_metodo.replace('_', ' por ') }}
+          • {{ envios.envio_metodo.replace('_', ' por ') }}
         </h4>
         <p class="description-method">
           {{ $t('productdetail_opinionesEnvioMsg1') }}
         </p>
       </div>
-      <div
-        v-if="this.envios.envio_metodo === 'tarifa_plana'"
-        class="wrapper-method"
-      >
+      <div v-if="envios.envio_metodo === 'tarifa_plana'" class="wrapper-method">
         <h4 class="capitalize">
-          {{ this.envios.envio_metodo.replace('_', ' ') }}
+          {{ envios.envio_metodo.replace('_', ' ') }}
         </h4>
         <p class="description-method">
           {{ $t('productdetail_opinionesEnvioMsg2') }}
@@ -180,59 +181,58 @@
         <p class="price">
           {{ $t('cart_precio') }}
           {{
-            this.envios.valor
+            envios.valor
               | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
           }}
         </p>
       </div>
-      <div v-if="this.envios.envio_metodo === 'precio'" class="wrapper-method">
+      <div v-if="envios.envio_metodo === 'precio'" class="wrapper-method">
         <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
         <p class="description-method">
           {{ $t('productdetail_precioTotalCompraMsg') }}
         </p>
       </div>
-      <div v-if="this.envios.envio_metodo === 'gratis'" class="wrapper-method">
+      <div v-if="envios.envio_metodo === 'gratis'" class="wrapper-method">
         <h4>{{ $t('productdetail_gratis') }}</h4>
         <p class="description-method">{{ $t('productdetail_gratisMsg') }}</p>
       </div>
-      <div
-        v-if="this.envios.envio_metodo === 'sinEnvio'"
-        class="wrapper-method"
-      >
+      <div v-if="envios.envio_metodo === 'sinEnvio'" class="wrapper-method">
         <p class="description-method">Pasas a recoger tu compra</p>
       </div>
     </div>
   </div>
 </template>
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 
 export default {
-  mixins: [extensions, currency],
-
-  props: {
-    dataStore: Object,
-    data: {},
-    envio: {},
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      }
+    },
   },
-  mounted() {
-    var acc = document.getElementsByClassName('accordion')
-    var i
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function () {
-        this.classList.toggle('active')
-        var panel = this.nextElementSibling
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 'px'
-        }
-      })
-    }
+  mixins: [extensions, currency],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    data: {
+      type: Object,
+      required: true,
+    },
+    envio: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
+      contentDescription: this.data?.info?.descripcion,
       medioEnvio: '',
       envioproducto: '',
       img1: 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png',
@@ -260,18 +260,25 @@ export default {
       }
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },
   },
-  filters: {
-    capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
-      }
-    },
+  mounted() {
+    var acc = document.getElementsByClassName('accordion')
+    var i
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function () {
+        this.classList.toggle('active')
+        var panel = this.nextElementSibling
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 'px'
+        }
+      })
+    }
   },
 }
 </script>

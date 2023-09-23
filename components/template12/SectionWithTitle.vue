@@ -12,9 +12,7 @@
           {{ title }}
         </h2>
       </header>
-      <div style="margin-top: -1.2rem">
-        <slot />
-      </div>
+      <div style="margin-top: -1.2rem"><slot /></div>
     </div>
     <hr class="h-20 bg-transparent border-transparent" />
     <hr class="border-transparent divider border-0" />

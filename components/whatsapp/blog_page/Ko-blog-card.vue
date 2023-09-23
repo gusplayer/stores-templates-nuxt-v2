@@ -56,7 +56,16 @@ import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   name: 'KoBlogcardWa',
   mixins: [idCloudinary],
-  props: { article: Object, dataStore: Object },
+  props: {
+    article: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       hover: false,

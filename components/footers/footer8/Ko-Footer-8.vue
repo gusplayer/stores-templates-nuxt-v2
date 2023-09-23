@@ -1,35 +1,33 @@
 <template>
   <div
-    class="wrapper-footer"
+    v-if="settingByTemplate13"
     ref="background"
+    class="wrapper-footer"
     :style="[
       settingByTemplate13[0].setting13Footer,
       settingByTemplate13[0].setting13General,
       {
-        '--font-style-1':
-          this.settingByTemplate13 &&
-          this.settingByTemplate13[0].setting13General &&
-          this.settingByTemplate13[0].setting13General.fount_1
-            ? this.settingByTemplate13[0].setting13General.fount_1
-            : 'Poppins',
+        '--font-style-1': settingByTemplate13[0]?.setting13General?.fount_1
+          ? settingByTemplate13[0].setting13General.fount_1
+          : 'Poppins',
       },
     ]"
-    v-if="settingByTemplate13"
   >
     <div class="contenedor">
       <div class="content-items-iconos">
         <div
           v-for="(item, index) in links"
-          :key="`${index}${item.icon}`"
           v-show="item.link"
+          :key="`${index}${item.icon}`"
         >
           <a
             v-if="item.link"
             :href="item.link"
             target="_blank "
             rel="noreferrer noopener"
-            ><div class="icon" :is="item.icon"
-          /></a>
+          >
+            <div :is="item.icon" class="icon" />
+          </a>
         </div>
       </div>
       <div class="footer-item-secciones">
@@ -49,19 +47,19 @@
     </div>
     <div class="under-footer">
       <button
-        class="contenedor-term-con"
         v-if="dataStore.politicas"
+        class="contenedor-term-con"
         @click="OpenModalPolitics"
       >
         <p>{{ $t('footer_politicasyterminos') }}</p>
       </button>
       <div
-        class="separator"
         v-if="
           settingByTemplate13 &&
           settingByTemplate13[0].setting13Footer.watermark
         "
-      />
+        class="separator"
+      ></div>
       <p
         v-if="
           settingByTemplate13 &&
@@ -80,51 +78,47 @@
         rel="noreferrer noopener"
       >
         <img
+          v-if="logo"
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
           "
-          v-if="logo"
           class="logo2"
           alt="Logo Img"
         />
         <img
+          v-else
           v-lazy="
             `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
           "
-          v-else
           class="logo2"
           alt="Logo Img"
         />
       </a>
     </div>
-    <div v-if="showModal">
-      <div class="modal" v-if="dataStore.politicas">
-        <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
-      </div>
+    <div v-if="showModal && dataStore.politicas" class="modal">
+      <KoTermsConditions :data-store="dataStore" />
     </div>
   </div>
 </template>
 
 <script>
-import KoTermsConditions from '../ko-TermsAndConditions'
-
 export default {
-  name: 'Ko-Footer-8',
+  name: 'Ko8Footer',
   components: {
-    KoTermsConditions,
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
   props: {
-    dataStore: Object,
-    settingByTemplate13: Array,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate13: {
+      type: Array,
+      required: true,
+    },
   },
-  mounted() {
-    if (
-      this.settingByTemplate13 &&
-      this.settingByTemplate13[0].setting13Footer
-    ) {
-      this.setLogo()
-    }
-  },
+
   data() {
     return {
       logo: true,
@@ -187,23 +181,6 @@ export default {
       return this.$store.state.modalpolitics05
     },
   },
-  methods: {
-    OpenModalPolitics() {
-      this.$store.state.modalpolitics05 = true
-    },
-    setLogo() {
-      let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
-      )
-      let colorArray = color.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
-      }
-    },
-  },
   watch: {
     'dataStore.tienda'() {
       this.links[0].link = this.dataStore.tienda.red_facebook
@@ -226,6 +203,31 @@ export default {
         } else {
           this.logo = false
         }
+      }
+    },
+  },
+  mounted() {
+    if (
+      this.settingByTemplate13 &&
+      this.settingByTemplate13[0].setting13Footer
+    ) {
+      this.setLogo()
+    }
+  },
+  methods: {
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
+    },
+    setLogo() {
+      let color = getComputedStyle(this.$refs.background).getPropertyValue(
+        '--background_color_1'
+      )
+      let colorArray = color.split(',')
+      let colorInt = parseInt(colorArray[2])
+      if (colorInt > 50) {
+        this.logo = true
+      } else {
+        this.logo = false
       }
     },
   },

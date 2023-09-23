@@ -2,7 +2,7 @@
   <div>
     <header
       class="wrapper-header"
-      :class="isVariantLogo == true ? 'bg-white-white shadow' : ''"
+      :class="isVariantLogo ? 'bg-white-white shadow' : ''"
     >
       <div class="header-content-logo">
         <nuxt-link
@@ -23,7 +23,7 @@
           @click="openSearch"
           id="OpenCartTag"
           class="btn-cart content_car"
-          :class="isVariantLogo == true ? 'text-1' : 'text-2'"
+          :class="isVariantLogo ? 'text-1' : 'text-2'"
         >
           <search-icon class="icon" />
           <p style="font-size: 18px; margin-left: 2px">
@@ -34,7 +34,7 @@
           @click="openOrder"
           id="OpenCartTag"
           class="btn-cart content_car"
-          :class="isVariantLogo == true ? 'text-1' : 'text-2'"
+          :class="isVariantLogo ? 'text-1' : 'text-2'"
         >
           <cart-icon class="icon" />
           <p style="font-size: 18px; margin-left: 2px">
@@ -52,7 +52,7 @@
 import settingsProps from './mixins/ComponentProps'
 
 export default {
-  name: 'Ko12-IHeader',
+  name: 'Ko12IHeader',
   components: {
     KoOrder: () => import('../headers/_order1/order1.vue'),
     KoSearch: () => import('../headers/header1/search.vue'),

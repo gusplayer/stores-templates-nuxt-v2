@@ -187,14 +187,14 @@
               </div>
             </div>
             <div class="info-btn-footer">
-              <p class="btn mb-25">
+              <p class="btn mb-10">
                 {{ settingByTemplate16[0].newsletter.title }}
               </p>
               <KoNewsLetter
                 :setting-by-template16="settingByTemplate16"
                 :data-store="dataStore"
               />
-              <p class="btn">Nuestra empresa</p>
+              <p class="btn mt-25">Nuestra empresa</p>
               <button
                 v-if="dataStore.politicas"
                 class="btn-legal btns"
@@ -235,15 +235,13 @@
   </div>
 </template>
 <script>
-import KoNewsLetter from '@/components/template16/Ko16-Newsletter.vue'
-import KoSocialNet from '@/components/template11/ko-socialnet.vue'
-import KoTermsConditions from '@/components/footers/ko-TermsAndConditions.vue'
 export default {
-  name: 'KoFooter10',
+  name: 'KoFooter11',
   components: {
-    KoNewsLetter,
-    KoSocialNet,
-    KoTermsConditions,
+    KoNewsLetter: () => import('@/components/template16/Ko16-Newsletter.vue'),
+    KoSocialNet: () => import('@/components/template11/ko-socialnet.vue'),
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
   props: {
     dataStore: {

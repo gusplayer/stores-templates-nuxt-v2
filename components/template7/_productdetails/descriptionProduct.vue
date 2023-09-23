@@ -2,24 +2,21 @@
   <div class="description">
     <div class="left">
       <!-- Descriptioin product -->
-      <div class="content-tittle-description">
+      <div v-if="contentDescription" class="content-tittle-description">
         <span class="tittle-description">
           {{ $t('productdetail_description') }}
         </span>
       </div>
-      <div
-        class="editor content_product_description"
-        v-if="data.info.descripcion"
-      >
+      <div v-if="contentDescription" class="editor content_product_description">
         <el-tiptap
-          v-model="data.info.descripcion"
+          v-model="contentDescription"
           :extensions="extensions"
           :spellcheck="false"
           :readonly="true"
-          :charCounterCount="false"
           :tooltip="false"
-          :showMenubar="false"
           :bubble="false"
+          :showMenubar="false"
+          :charCounterCount="false"
         />
       </div>
     </div>
@@ -174,29 +171,29 @@
           </li>
         </ul>
       </div>
-      <div class="deliverys section" v-if="this.envios.envio_metodo">
+      <div v-if="envios.envio_metodo" class="deliverys section">
         <div class="content">
           <h3 class="title-section">
             {{ $t('productdetail_opinionesEnvio') }}
           </h3>
         </div>
         <div
-          v-if="this.envios.envio_metodo === 'precio_ciudad'"
+          v-if="envios.envio_metodo === 'precio_ciudad'"
           class="wrapper-method"
         >
           <h4 class="capitalize">
-            • {{ this.envios.envio_metodo.replace('_', ' por ') }}
+            • {{ envios.envio_metodo.replace('_', ' por ') }}
           </h4>
           <p class="description-method">
             {{ $t('productdetail_opinionesEnvioMsg1') }}
           </p>
         </div>
         <div
-          v-if="this.envios.envio_metodo === 'tarifa_plana'"
+          v-if="envios.envio_metodo === 'tarifa_plana'"
           class="wrapper-method"
         >
           <h4 class="capitalize">
-            {{ this.envios.envio_metodo.replace('_', ' ') }}
+            {{ envios.envio_metodo.replace('_', ' ') }}
           </h4>
           <p class="description-method">
             {{ $t('productdetail_opinionesEnvioMsg2') }}
@@ -204,7 +201,7 @@
           <p class="price">
             {{ $t('cart_precio') }}
             {{
-              this.envios.valor
+              envios.valor
                 | currency(
                   dataStore.tienda.codigo_pais,
                   dataStore.tienda.moneda
@@ -212,26 +209,17 @@
             }}
           </p>
         </div>
-        <div
-          v-if="this.envios.envio_metodo === 'precio'"
-          class="wrapper-method"
-        >
+        <div v-if="envios.envio_metodo === 'precio'" class="wrapper-method">
           <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
           <p class="description-method">
             {{ $t('productdetail_precioTotalCompraMsg') }}
           </p>
         </div>
-        <div
-          v-if="this.envios.envio_metodo === 'gratis'"
-          class="wrapper-method"
-        >
+        <div v-if="envios.envio_metodo === 'gratis'" class="wrapper-method">
           <h4>{{ $t('productdetail_gratis') }}</h4>
           <p class="description-method">{{ $t('productdetail_gratisMsg') }}</p>
         </div>
-        <div
-          v-if="this.envios.envio_metodo === 'sinEnvio'"
-          class="wrapper-method"
-        >
+        <div v-if="envios.envio_metodo === 'sinEnvio'" class="wrapper-method">
           <p class="description-method">Pasas a recoger tu compra</p>
         </div>
       </div>
@@ -239,19 +227,29 @@
   </div>
 </template>
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 export default {
   mixins: [extensions, currency],
   props: {
-    dataStore: Object,
-    data: {},
-    envio: {},
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    data: {
+      type: Object,
+      required: true,
+    },
+    envio: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       medioEnvio: '',
       envioproducto: '',
+      contentDescription: this.data?.info?.descripcion,
     }
   },
   computed: {

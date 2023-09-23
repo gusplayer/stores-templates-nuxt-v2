@@ -34,7 +34,7 @@
           </div>
           <br />
           <div class="wrapper-pagination-web">
-            <div class="pagination-medium" v-if="fullProducts.length > 16">
+            <div v-if="fullProducts.length > 16" class="pagination-medium">
               <el-pagination
                 background
                 layout="prev, pager, next"
@@ -75,9 +75,18 @@ export default {
   },
   mixins: [filterProducts],
   props: {
-    dataStore: Object,
-    fullProducts: {},
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

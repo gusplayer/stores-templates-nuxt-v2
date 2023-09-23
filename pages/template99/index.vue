@@ -19,7 +19,7 @@
       <component :is="indexList" id="KListX" v-bind="componentsProps" />
       <KFooterWaLogo id="KfooterX" v-bind="componentsProps" />
       <KFooterWa id="KfooterX" v-bind="componentsProps" />
-      <WCountry :data-store="dataStore" />
+      <WCountry :data-store="dataStore" :value-wa="true" />
     </div>
   </div>
 </template>

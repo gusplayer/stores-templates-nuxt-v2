@@ -177,7 +177,16 @@ import currency from '../../../../mixins/formatCurrent'
 export default {
   name: 'KoWaProductCard1',
   mixins: [idCloudinary, currency],
-  props: { product: Object, dataStore: Object },
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       estadoCart: false,
@@ -366,7 +375,7 @@ export default {
           ) {
             let arrPrice = []
             this.product.combinaciones.find((products) => {
-              if (products.precio && products.estado == true) {
+              if (products.precio && products.estado) {
                 arrPrice.push(products.precio)
               }
             })

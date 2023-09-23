@@ -4,15 +4,16 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  name: 'BlogPageIndex',
   components: {
-    K05Blog: () => import('../../components/blog/Ko-Blog'),
-    K07Blog: () => import('../../components/template7/blog_page/Ko-Blog'),
-    K09Blog: () => import('../../components/template9/blog_page/Ko-Blog'),
-    K10Blog: () => import('../../components/template10/blog_page/Ko-Blog'),
-    K11Blog: () => import('../../components/template11/blog_page/Ko-Blog'),
-    K13Blog: () => import('../../components/template13/_blog/Ko-Blog'),
-    K14Blog: () => import('../../components/template14/_cardBlog/Ko-index.vue'),
-    K15Blog: () => import('../../components/template15/_cardBlog/Ko-index.vue'),
+    K05Blog: () => import('@/components/template5/blog/Ko-Blog.vue'),
+    K07Blog: () => import('@/components/template7/blog_page/Ko-Blog.vue'),
+    K09Blog: () => import('@/components/template9/blog_page/Ko-Blog.vue'),
+    K10Blog: () => import('@/components/template10/blog_page/Ko-Blog.vue'),
+    K11Blog: () => import('@/components/template11/blog_page/Ko-Blog.vue'),
+    K13Blog: () => import('@/components/template13/_blog/Ko-Blog.vue'),
+    K14Blog: () => import('@/components/template14/_cardBlog/Ko-index.vue'),
+    K15Blog: () => import('@/components/template15/_cardBlog/Ko-index.vue'),
   },
   layout: 'default',
   data() {
@@ -143,7 +144,7 @@ export default {
             const commitAction = this.templateMapping[template]
             this.$store.commit(commitAction, e.data)
           }
-        } else if (e && e.data && e.data.returnHome == true) {
+        } else if (e && e.data && e.data.returnHome) {
           this.$router.push({
             path: '/',
           })

@@ -33,7 +33,7 @@
               };`"
               :class="idCategory == '' ? 'active-tag ' : 'disable-tag'"
               class="txt-category"
-              @click="sendCategory('', '', (ref = false))"
+              @click="sendCategory('', '')"
             >
               {{ $t('home_todo') }}
             </p>
@@ -43,7 +43,7 @@
           v-for="categoria in categorias"
           :key="categoria.id"
           class="wrapper-img-text"
-          @click="sendCategory(categoria, categoria.id, (ref = false))"
+          @click="sendCategory(categoria, categoria.id)"
         >
           <img
             v-lazy="
@@ -140,8 +140,14 @@ export default {
   name: 'CategorySlideWa',
   mixins: [idCloudinary],
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -172,7 +178,7 @@ export default {
     SendSubCategory(value) {
       this.updateRouteAndFilters(value, 'subcategory')
     },
-    sendCategory(value, categoria, ref) {
+    sendCategory(value, categoria) {
       this.updateRouteAndFilters(
         value.nombre_categoria_producto,
         'category',
@@ -196,7 +202,6 @@ export default {
         this.$router.push(`/`)
       }
       this.$store.commit('SET_STATE_BANNER', false)
-
       if (filterType === 'subcategory') {
         this.idSubCategory = value
         const subCategory = this.subcategories.find(
@@ -220,7 +225,6 @@ export default {
           (subcategory) => subcategory.categoria === categoryId
         )
       }
-
       this.updateRouteQuery(filterType, value)
       this.$store.commit('products/FILTER_BY', {
         type: [filterType],

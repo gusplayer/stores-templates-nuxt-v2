@@ -1,21 +1,22 @@
 <template>
   <div class="content-accordion" :style="settingByGeneral">
     <el-collapse v-model="activeNames" class="w-full">
-      <el-collapse-item :title="$t('productdetail_description')" name="1">
-        <div class="editor" v-if="data.info.descripcion">
+      <el-collapse-item
+        v-if="contentDescription"
+        :title="$t('productdetail_description')"
+        name="1"
+      >
+        <div class="editor">
           <el-tiptap
-            v-model="data.info.descripcion"
+            v-model="contentDescription"
             :extensions="extensions"
             :spellcheck="false"
             :readonly="true"
-            :charCounterCount="false"
             :tooltip="false"
-            :showMenubar="false"
             :bubble="false"
+            :showMenubar="false"
+            :charCounterCount="false"
           />
-        </div>
-        <div v-else>
-          <p>{{ $t('productdetail_notdescription') }}</p>
         </div>
       </el-collapse-item>
       <el-collapse-item :title="$t('productdetail_opcionesPago')" name="2">
@@ -216,101 +217,69 @@
           </li>
         </ul>
       </el-collapse-item>
-      <el-collapse-item :title="$t('productdetail_opinionesEnvio')" name="3">
-        <div v-if="this.envios.envio_metodo">
-          <div class="content">
-            <h3 class="title-section">
-              {{ $t('productdetail_opinionesEnvio') }}
-            </h3>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'precio_ciudad'"
-            class="wrapper-method"
-          >
-            <h4>• {{ this.envios.envio_metodo.replace('_', ' por ') }}</h4>
-            <p class="description-method">
-              {{ $t('productdetail_opinionesEnvioMsg1') }}
-            </p>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'tarifa_plana'"
-            class="wrapper-method"
-          >
-            <h4>
-              {{ this.envios.envio_metodo.replace('_', ' ') }}
-            </h4>
-            <p class="description-method">
-              {{ $t('productdetail_opinionesEnvioMsg2') }}
-            </p>
-            <p class="price">
-              {{ $t('cart_precio') }}
-              {{
-                this.envios.valor
-                  | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
-                  )
-              }}
-            </p>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'precio'"
-            class="wrapper-method"
-          >
-            <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
-            <p class="description-method">
-              {{ $t('productdetail_precioTotalCompraMsg') }}
-            </p>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'gratis'"
-            class="wrapper-method"
-          >
-            <h4>{{ $t('productdetail_gratis') }}</h4>
-            <p class="description-method">
-              {{ $t('productdetail_gratisMsg') }}
-            </p>
-          </div>
-          <div
-            v-if="this.envios.envio_metodo === 'SinEnvio'"
-            class="wrapper-method"
-          >
-            <p class="description-method">Pasas a recoger tu compra</p>
-          </div>
+      <el-collapse-item
+        v-if="envios.envio_metodo"
+        :title="$t('productdetail_opinionesEnvio')"
+        name="3"
+      >
+        <div class="content">
+          <h3 class="title-section">
+            {{ $t('productdetail_opinionesEnvio') }}
+          </h3>
         </div>
-        <div v-else>
-          <p>{{ $t('productdetail_notShipping') }}</p>
+        <div
+          v-if="envios.envio_metodo === 'precio_ciudad'"
+          class="wrapper-method"
+        >
+          <h4>• {{ envios.envio_metodo.replace('_', ' por ') }}</h4>
+          <p class="description-method">
+            {{ $t('productdetail_opinionesEnvioMsg1') }}
+          </p>
+        </div>
+        <div
+          v-if="envios.envio_metodo === 'tarifa_plana'"
+          class="wrapper-method"
+        >
+          <h4>
+            {{ envios.envio_metodo.replace('_', ' ') }}
+          </h4>
+          <p class="description-method">
+            {{ $t('productdetail_opinionesEnvioMsg2') }}
+          </p>
+          <p class="price">
+            {{ $t('cart_precio') }}
+            {{
+              envios.valor
+                | currency(
+                  dataStore.tienda.codigo_pais,
+                  dataStore.tienda.moneda
+                )
+            }}
+          </p>
+        </div>
+        <div v-if="envios.envio_metodo === 'precio'" class="wrapper-method">
+          <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
+          <p class="description-method">
+            {{ $t('productdetail_precioTotalCompraMsg') }}
+          </p>
+        </div>
+        <div v-if="envios.envio_metodo === 'gratis'" class="wrapper-method">
+          <h4>{{ $t('productdetail_gratis') }}</h4>
+          <p class="description-method">
+            {{ $t('productdetail_gratisMsg') }}
+          </p>
+        </div>
+        <div v-if="envios.envio_metodo === 'SinEnvio'" class="wrapper-method">
+          <p class="description-method">Pasas a recoger tu compra</p>
         </div>
       </el-collapse-item>
     </el-collapse>
   </div>
 </template>
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 export default {
-  mixins: [extensions, currency],
-  props: {
-    dataStore: Object,
-    data: {},
-    envio: {},
-    settingByGeneral: { type: Object, default: null },
-  },
-  data() {
-    return {
-      activeNames: ['1'],
-    }
-  },
-  computed: {
-    mediospago() {
-      return this.dataStore.medios_pago
-    },
-    envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
-      return this.data.medioEnvio
-    },
-  },
   filters: {
     capitalize(value) {
       if (value) {
@@ -318,6 +287,43 @@ export default {
         return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
       }
     },
+  },
+  mixins: [extensions, currency],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    data: {
+      type: Object,
+      required: true,
+    },
+    envio: {
+      type: Object,
+      required: true,
+    },
+    settingByGeneral: { type: Object, default: null },
+  },
+  data() {
+    return {
+      activeNames: ['1'],
+      contentDescription: this.data?.info?.descripcion,
+    }
+  },
+  computed: {
+    mediospago() {
+      return this.dataStore.medios_pago
+    },
+    envios() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
+      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
+      return this.data.medioEnvio
+    },
+  },
+  mounted() {
+    this.contentDescription
+      ? (this.activeNames = ['1'])
+      : (this.activeNames = ['2'])
   },
 }
 </script>

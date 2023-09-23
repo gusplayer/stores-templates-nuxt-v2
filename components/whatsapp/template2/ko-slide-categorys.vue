@@ -7,7 +7,7 @@
           :class="idCategory == '' ? 'active-tag' : 'disable-tag'"
           @click="clear"
         >
-          <p class="txt-category" @click="sendCategory('', '', (ref = false))">
+          <p class="txt-category" @click="sendCategory('', '')">
             {{ $t('home_todo') }}
           </p>
         </div>
@@ -16,7 +16,7 @@
           :key="categoria.id"
           class="tag"
           :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
-          @click="sendCategory(categoria, categoria.id, (ref = false))"
+          @click="sendCategory(categoria, categoria.id)"
         >
           <p class="txt-category">
             {{ categoria.nombre_categoria_producto }}
@@ -40,7 +40,7 @@
             subcategorys.id == idSubCategory ? 'active-tag' : 'disable-tag'
           "
         >
-          <p class="txt-category" @click="SendSubCategory(subcategorys.id)">
+          <p class="txt-category" @click="sendSubCategory(subcategorys.id)">
             {{ subcategorys.nombre_subcategoria }}
           </p>
         </div>
@@ -50,10 +50,16 @@
 </template>
 <script>
 export default {
-  name: 'CategorySlideWa-2',
+  name: 'CategorySlideWa2',
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -80,19 +86,24 @@ export default {
     },
   },
   methods: {
-    SendSubCategory(value) {
-      this.idSubCategory = value
+    navigateToRoute(route) {
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
-        this.$router.push(`/`)
+        this.$router.push(route)
       }
+    },
+    sendSubCategory(value) {
+      this.idSubCategory = value
+      this.navigateToRoute(`/`)
       this.$store.commit('SET_STATE_BANNER', false)
-      let filtradoSubCategory = this.subcategories.find(
+
+      const filtradoSubCategory = this.subcategories.find(
         (element) => element.id == value
       )
+
       if (filtradoSubCategory && filtradoSubCategory.categoria) {
-        let filtradoCategories = this.categorias.find(
+        const filtradoCategories = this.categorias.find(
           (element) => element.id == filtradoSubCategory.categoria
         )
         this.$store.commit(
@@ -114,13 +125,9 @@ export default {
         this.$store.commit('SET_PREVIOUS_PAGE', 1)
       }
     },
-    sendCategory(value, categoria, ref) {
+    sendCategory(value, categoria) {
       this.idCategory = categoria
-      if (this.stateWapiME) {
-        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
-      } else {
-        this.$router.push(`/`)
-      }
+      this.navigateToRoute(`/`)
       this.$store.commit('SET_STATE_BANNER', false)
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
@@ -129,13 +136,15 @@ export default {
         path: '',
         query: { category: this.nameCategory },
       })
+
       this.selectedSubcategories = []
-      this.subcategories.find((subcategory) => {
+      this.subcategories.forEach((subcategory) => {
         if (subcategory.categoria === categoria) {
           this.toggleCategories = false
           this.selectedSubcategories.push(subcategory)
         }
       })
+
       this.$store.commit('products/FILTER_BY', {
         type: ['category'],
         data: value.nombre_categoria_producto,
@@ -149,15 +158,7 @@ export default {
       this.$store.commit('SET_STATE_BANNER', true)
       this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$router.push({
-        path: '',
-        query: {},
-      })
-      if (this.stateWapiME) {
-        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
-      } else {
-        this.$router.push(`/`)
-      }
+      this.navigateToRoute('/')
       this.$store.commit('products/FILTER_BY', {
         type: ['all'],
         data: '',

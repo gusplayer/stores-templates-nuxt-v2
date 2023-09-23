@@ -79,7 +79,7 @@ export default {
   components: {
     // HEADER
     KoHeader1: () => import('../components/headers/header1/Ko-Header-1.vue'),
-    KoHeader2: () => import('../components/headers/header2/Ko-Header-2.vue'),
+    // KoHeader2: () => import('../components/headers/header2/Ko-Header-2.vue'),
     KoHeader3: () => import('../components/headers/header3/Ko-Header-3.vue'),
     KoHeader4: () => import('../components/headers/header4/Ko-Header-4.vue'),
     KoHeader5: () => import('../components/headers/header5/Ko-Header-5.vue'),
@@ -93,7 +93,7 @@ export default {
       import('../components/headers/Ko16_header/Ko-Header-11.vue'),
     // FOOTER
     KoFooter1: () => import('../components/footers/footer1/Ko-Footer-1.vue'),
-    KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2.vue'),
+    // KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2.vue'),
     KoFooter4: () => import('../components/footers/footer4/Ko-Footer-4.vue'),
     KoFooter5: () => import('../components/footers/footer5/Ko-Footer-5.vue'),
     KoFooter6: () => import('../components/footers/footer6/Ko-Footer-6.vue'),
@@ -119,7 +119,7 @@ export default {
       headerComponentMap: {
         3: 'KoHeader1',
         5: 'KoHeader1',
-        6: 'KoHeader2',
+        // 6: 'KoHeader2',
         7: 'KoHeader4',
         8: 'KoHeader3',
         9: 'KoHeader5',
@@ -133,7 +133,7 @@ export default {
       footerComponentMap: {
         3: 'KoFooter1',
         5: 'KoFooter1',
-        6: 'KoFooter2',
+        // 6: 'KoFooter2',
         7: 'KoFooter4',
         8: 'KoFooter1',
         9: 'KoFooter5',

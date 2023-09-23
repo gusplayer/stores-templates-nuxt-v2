@@ -1,7 +1,7 @@
-exports.ids = [224];
+exports.ids = [238];
 exports.modules = {
 
-/***/ 137:
+/***/ 128:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -258,44 +258,44 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 141:
+/***/ 132:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(276);
+var content = __webpack_require__(252);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(7).default
 module.exports.__inject__ = function (context) {
-  add("296e952d", content, true, context)
+  add("db7851d4", content, true, context)
 };
 
 /***/ }),
 
-/***/ 275:
+/***/ 251:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(141);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_194b78bb_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_55e54c6e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(132);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_55e54c6e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_55e54c6e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_55e54c6e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ko_miCompra_1_vue_vue_type_style_index_0_id_55e54c6e_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 276:
+/***/ 252:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".tag-state[data-v-194b78bb]{color:#fff;margin-left:10px}.table-striped[data-v-194b78bb]{display:grid;width:100%}.table-striped .thead[data-v-194b78bb]{width:100%}.table-striped .thead ul[data-v-194b78bb]{width:100%}.table-striped .tbody ul[data-v-194b78bb],.table-striped .thead ul[data-v-194b78bb]{display:grid;grid-auto-flow:column;grid-template-columns:repeat(7,1fr);list-style:none;padding:10px 0}.table-striped .tbody ul[data-v-194b78bb]:nth-of-type(odd){background-color:#f9f9f9;border-bottom:1px solid #ddd;border-top:1px solid #ddd}.photo img[data-v-194b78bb]{height:70px;-o-object-fit:cover;object-fit:cover;width:70px}td[data-v-194b78bb]{vertical-align:middle!important}td.variants[data-v-194b78bb]{display:flex}td.variants p~p[data-v-194b78bb]{margin-left:10px}table[data-v-194b78bb]{border-collapse:collapse;border-spacing:0}.thead ul li[data-v-194b78bb]{color:gray}.text-table[data-v-194b78bb]{color:var(--purple);font-size:14px}.text-bold-table[data-v-194b78bb],.text-normal-table[data-v-194b78bb],.text-variant[data-v-194b78bb]{color:#000;font-size:14px}.text-bold-table[data-v-194b78bb]{font-weight:700;padding-right:15px;text-align:right}.wrapper_micompra[data-v-194b78bb]{background-color:#efefef;box-sizing:border-box;height:100%;justify-content:center;min-height:calc(100vh - 282px)}.contenedor[data-v-194b78bb],.wrapper_micompra[data-v-194b78bb]{align-items:center;display:flex;width:100%}.contenedor[data-v-194b78bb]{flex-direction:column;justify-content:flex-start;max-width:1300px;padding:20px}.wrapper-form[data-v-194b78bb]{background:#fff;border-radius:30px;margin-bottom:10px;padding:20px 54px 10px;width:100%}.content-form[data-v-194b78bb]{display:flex;flex-direction:row;width:100%}.title-form[data-v-194b78bb]{color:#000;font-size:24px;font-stretch:normal;font-style:normal;font-weight:600;letter-spacing:-.24px;line-height:1.2;margin-bottom:25px;text-align:center}.form[data-v-194b78bb]{align-items:center;flex:2;flex-direction:row;justify-content:center}.content-input[data-v-194b78bb],.form[data-v-194b78bb]{display:flex;width:100%}.content-input[data-v-194b78bb]{align-items:flex-start;flex-direction:column;height:90px;justify-content:flex-start;margin-right:30px}.content-btn[data-v-194b78bb]{flex:1}.btn-submitOrden[data-v-194b78bb],.content-btn[data-v-194b78bb]{align-items:center;display:flex;justify-content:center}.btn-submitOrden[data-v-194b78bb]{background-color:#000;border:2px solid #000;border-radius:5px;color:#fff;cursor:pointer;flex-direction:row;font-size:16px;font-weight:700;max-height:40px;min-height:40px;padding:8px 14px;transition:all .2s ease-in;width:100%}.btn-submitOrden[data-v-194b78bb]:hover{background-color:var(--btnhover);border:2px solid var(--btnhover);color:#fff}.icon-seach[data-v-194b78bb]{bottom:2px;font-size:18px;margin-right:5px}.input-text[data-v-194b78bb]{background-color:transparent;border:2px solid #ccc9c9;border-radius:5px;color:rgba(21,20,57,.541);font-size:14px;height:40px;padding:8px 14px;width:100%}.input-text[data-v-194b78bb]::-moz-placeholder{color:rgba(21,20,57,.541);opacity:.7}.input-text[data-v-194b78bb]::placeholder{color:rgba(21,20,57,.541);opacity:.7}.input-text[data-v-194b78bb]:-internal-autofill-selected{background-color:transparent!important;background-image:none!important;color:-internal-light-dark-color(#000,#fff)!important}.input-text[data-v-194b78bb]:-internal-autofill-selected{-webkit-appearance:menulist-button}.input-text[data-v-194b78bb]:active,.input-text[data-v-194b78bb]:focus{border:2px solid rgba(60,60,63,.774);outline:0}.input-label[data-v-194b78bb]{height:25px}.content-btn .el-button--primary[data-v-194b78bb]{background-color:#000;border-color:#000;border-radius:5px;color:#fff;height:40px;max-height:40px;width:100%}.content-btn .el-button--primary[data-v-194b78bb]:hover{background-color:var(--btnhover);border-color:var(--btnhover)}.text-error[data-v-194b78bb]{color:#cb2027;font-size:12px;margin-left:10px;width:100%}.bar-body[data-v-194b78bb]{align-items:center;background-color:#fff;border-radius:30px;padding:40px 54px 15px}.bar-body[data-v-194b78bb],.content-title[data-v-194b78bb]{display:flex;flex-direction:column;justify-content:center;width:100%}.content-title[data-v-194b78bb]{align-items:flex-start;border-bottom:1px solid #eee;margin-bottom:10px}.content-title>p[data-v-194b78bb]:first-child{color:#383838;font-size:18px;font-weight:700;line-height:1.3}.content-title>p[data-v-194b78bb]:nth-child(2){color:#383838;font-size:14px;font-weight:400;line-height:1.3;margin-bottom:10px}.content-card[data-v-194b78bb]{grid-column-gap:60px;flex-wrap:wrap;margin-bottom:20px;width:100%}.card[data-v-194b78bb],.content-card[data-v-194b78bb]{align-items:center;display:flex}.img-product[data-v-194b78bb]{height:83px;-o-object-fit:cover;object-fit:cover;vertical-align:top;width:83px}.info[data-v-194b78bb]{padding-left:15px}.name-product[data-v-194b78bb]{font-size:16px;font-weight:700;line-height:1.63}.name-product[data-v-194b78bb],.quantity-product[data-v-194b78bb]{color:#383838;font-stretch:normal;font-style:normal;letter-spacing:normal;text-align:left}.quantity-product[data-v-194b78bb]{font-size:13px;font-weight:400;line-height:1.3}.price-product[data-v-194b78bb]{color:#000;font-size:17px;font-stretch:normal;font-style:normal;font-weight:700;letter-spacing:normal;line-height:1.3;text-align:left}.info[data-v-194b78bb] .el-tag{background-color:#e8e8f3;border:1px solid #777780;border-radius:5px;box-sizing:border-box;color:#000;display:inline-block;font-size:13px;height:28px;margin-left:2px;padding:0 6px;text-align:center;white-space:nowrap}.content-info-orden[data-v-194b78bb]{justify-content:space-between;margin-bottom:10px}.content-info-orden[data-v-194b78bb],.info-left[data-v-194b78bb]{display:flex;flex-direction:column;width:100%}.title-info-orden[data-v-194b78bb]{font-size:16px;font-weight:700;line-height:1.73}.title-info-orden[data-v-194b78bb],.value-info-orden[data-v-194b78bb]{color:#000;font-stretch:normal;font-style:normal;letter-spacing:normal;text-align:left}.value-info-orden[data-v-194b78bb]{font-size:15px;font-weight:400;line-height:1.63}.content-state-top[data-v-194b78bb]{justify-content:space-between;margin-top:15px;width:100%}.content-item-state[data-v-194b78bb],.content-state-top[data-v-194b78bb]{align-items:center;display:flex;flex-direction:row}.content-sections[data-v-194b78bb]{display:flex;flex-direction:column;width:100%}.content-sections[data-v-194b78bb] .el-collapse-item__header{color:#000;font-size:16px;font-stretch:normal;font-style:normal;font-weight:700;letter-spacing:normal}.content-sections[data-v-194b78bb] .el-icon-arrow-right{color:#000}.content-info-buyer[data-v-194b78bb]{grid-column-gap:40px;grid-row-gap:5px;display:flex;flex-wrap:wrap;justify-content:space-between;width:100%}.address[data-v-194b78bb],.city[data-v-194b78bb],.email-address[data-v-194b78bb],.messege[data-v-194b78bb],.name[data-v-194b78bb],.owner[data-v-194b78bb],.telephone[data-v-194b78bb]{color:#000;font-size:15px;font-stretch:normal;font-style:normal;font-weight:700;letter-spacing:normal;text-align:left}.messege[data-v-194b78bb]{width:100%}.value-data[data-v-194b78bb]{font-weight:400}.btn_url[data-v-194b78bb]{background:var(--purple);border:1px solid var(--purple);border-radius:3px;color:#fff;padding:4px 10px}.btn_url[data-v-194b78bb]:hover{background:var(--green);border:1px solid var(--green);color:var(--purple)}.wrapper-hoko[data-v-194b78bb]{align-items:flex-start;display:flex;justify-content:space-between;width:100%}@media (max-width:863px){.form[data-v-194b78bb]{align-items:center;flex:1;justify-content:center}.content-form[data-v-194b78bb],.form[data-v-194b78bb]{flex-direction:column}.content-input[data-v-194b78bb]{margin-right:0}}@media (max-width:768px){.bar-top[data-v-194b78bb]{padding:15px 27px}.bar-body[data-v-194b78bb]{padding:17px 17px 25px}.contenedor[data-v-194b78bb]{padding:60px 0}.wrapper-form[data-v-194b78bb]{padding:20px 17px 10px}}@media (max-width:600px){.content-input[data-v-194b78bb],.content-state-top[data-v-194b78bb]{align-items:flex-start;flex-direction:column}.title-info-orden[data-v-194b78bb]{margin-top:10px}}@media (max-width:500px){.form .el-input[data-v-194b78bb]{max-width:none}.contenedor[data-v-194b78bb]{padding:8px 5px 10px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".tag-state[data-v-55e54c6e]{color:#fff;margin-left:10px}.table-striped[data-v-55e54c6e]{display:grid;width:100%}.table-striped .thead[data-v-55e54c6e]{width:100%}.table-striped .thead ul[data-v-55e54c6e]{width:100%}.table-striped .tbody ul[data-v-55e54c6e],.table-striped .thead ul[data-v-55e54c6e]{display:grid;grid-auto-flow:column;grid-template-columns:repeat(7,1fr);list-style:none;padding:10px 0}.table-striped .tbody ul[data-v-55e54c6e]:nth-of-type(odd){background-color:#f9f9f9;border-bottom:1px solid #ddd;border-top:1px solid #ddd}.photo img[data-v-55e54c6e]{height:70px;-o-object-fit:cover;object-fit:cover;width:70px}td[data-v-55e54c6e]{vertical-align:middle!important}td.variants[data-v-55e54c6e]{display:flex}td.variants p~p[data-v-55e54c6e]{margin-left:10px}table[data-v-55e54c6e]{border-collapse:collapse;border-spacing:0}.thead ul li[data-v-55e54c6e]{color:gray}.text-table[data-v-55e54c6e]{color:var(--purple);font-size:14px}.text-bold-table[data-v-55e54c6e],.text-normal-table[data-v-55e54c6e],.text-variant[data-v-55e54c6e]{color:#000;font-size:14px}.text-bold-table[data-v-55e54c6e]{font-weight:700;padding-right:15px;text-align:right}.wrapper_micompra[data-v-55e54c6e]{background-color:#efefef;box-sizing:border-box;height:100%;justify-content:center;min-height:calc(100vh - 282px)}.contenedor[data-v-55e54c6e],.wrapper_micompra[data-v-55e54c6e]{align-items:center;display:flex;width:100%}.contenedor[data-v-55e54c6e]{flex-direction:column;justify-content:flex-start;max-width:1300px;padding:20px}.wrapper-form[data-v-55e54c6e]{background:#fff;border-radius:30px;margin-bottom:10px;padding:20px 54px 10px;width:100%}.content-form[data-v-55e54c6e]{display:flex;flex-direction:row;width:100%}.title-form[data-v-55e54c6e]{color:#000;font-size:24px;font-stretch:normal;font-style:normal;font-weight:600;letter-spacing:-.24px;line-height:1.2;margin-bottom:25px;text-align:center}.form[data-v-55e54c6e]{align-items:center;flex:2;flex-direction:row;justify-content:center}.content-input[data-v-55e54c6e],.form[data-v-55e54c6e]{display:flex;width:100%}.content-input[data-v-55e54c6e]{align-items:flex-start;flex-direction:column;height:90px;justify-content:flex-start;margin-right:30px}.content-btn[data-v-55e54c6e]{flex:1}.btn-submitOrden[data-v-55e54c6e],.content-btn[data-v-55e54c6e]{align-items:center;display:flex;justify-content:center}.btn-submitOrden[data-v-55e54c6e]{background-color:#000;border:2px solid #000;border-radius:5px;color:#fff;cursor:pointer;flex-direction:row;font-size:16px;font-weight:700;max-height:40px;min-height:40px;padding:8px 14px;transition:all .2s ease-in;width:100%}.btn-submitOrden[data-v-55e54c6e]:hover{background-color:var(--btnhover);border:2px solid var(--btnhover);color:#fff}.icon-seach[data-v-55e54c6e]{bottom:2px;font-size:18px;margin-right:5px}.input-text[data-v-55e54c6e]{background-color:transparent;border:2px solid #ccc9c9;border-radius:5px;color:rgba(21,20,57,.541);font-size:14px;height:40px;padding:8px 14px;width:100%}.input-text[data-v-55e54c6e]::-moz-placeholder{color:rgba(21,20,57,.541);opacity:.7}.input-text[data-v-55e54c6e]::placeholder{color:rgba(21,20,57,.541);opacity:.7}.input-text[data-v-55e54c6e]:-internal-autofill-selected{background-color:transparent!important;background-image:none!important;color:-internal-light-dark-color(#000,#fff)!important}.input-text[data-v-55e54c6e]:-internal-autofill-selected{-webkit-appearance:menulist-button}.input-text[data-v-55e54c6e]:active,.input-text[data-v-55e54c6e]:focus{border:2px solid rgba(60,60,63,.774);outline:0}.input-label[data-v-55e54c6e]{height:25px}.content-btn .el-button--primary[data-v-55e54c6e]{background-color:#000;border-color:#000;border-radius:5px;color:#fff;height:40px;max-height:40px;width:100%}.content-btn .el-button--primary[data-v-55e54c6e]:hover{background-color:var(--btnhover);border-color:var(--btnhover)}.text-error[data-v-55e54c6e]{color:#cb2027;font-size:12px;margin-left:10px;width:100%}.bar-body[data-v-55e54c6e]{align-items:center;background-color:#fff;border-radius:30px;padding:40px 54px 15px}.bar-body[data-v-55e54c6e],.content-title[data-v-55e54c6e]{display:flex;flex-direction:column;justify-content:center;width:100%}.content-title[data-v-55e54c6e]{align-items:flex-start;border-bottom:1px solid #eee;margin-bottom:10px}.content-title>p[data-v-55e54c6e]:first-child{color:#383838;font-size:18px;font-weight:700;line-height:1.3}.content-title>p[data-v-55e54c6e]:nth-child(2){color:#383838;font-size:14px;font-weight:400;line-height:1.3;margin-bottom:10px}.content-card[data-v-55e54c6e]{grid-column-gap:60px;flex-wrap:wrap;margin-bottom:20px;width:100%}.card[data-v-55e54c6e],.content-card[data-v-55e54c6e]{align-items:center;display:flex}.img-product[data-v-55e54c6e]{height:83px;-o-object-fit:cover;object-fit:cover;vertical-align:top;width:83px}.info[data-v-55e54c6e]{padding-left:15px}.name-product[data-v-55e54c6e]{font-size:16px;font-weight:700;line-height:1.63}.name-product[data-v-55e54c6e],.quantity-product[data-v-55e54c6e]{color:#383838;font-stretch:normal;font-style:normal;letter-spacing:normal;text-align:left}.quantity-product[data-v-55e54c6e]{font-size:13px;font-weight:400;line-height:1.3}.price-product[data-v-55e54c6e]{color:#000;font-size:17px;font-stretch:normal;font-style:normal;font-weight:700;letter-spacing:normal;line-height:1.3;text-align:left}.info[data-v-55e54c6e] .el-tag{background-color:#e8e8f3;border:1px solid #777780;border-radius:5px;box-sizing:border-box;color:#000;display:inline-block;font-size:13px;height:28px;margin-left:2px;padding:0 6px;text-align:center;white-space:nowrap}.content-info-orden[data-v-55e54c6e]{justify-content:space-between;margin-bottom:10px}.content-info-orden[data-v-55e54c6e],.info-left[data-v-55e54c6e]{display:flex;flex-direction:column;width:100%}.title-info-orden[data-v-55e54c6e]{font-size:16px;font-weight:700;line-height:1.73}.title-info-orden[data-v-55e54c6e],.value-info-orden[data-v-55e54c6e]{color:#000;font-stretch:normal;font-style:normal;letter-spacing:normal;text-align:left}.value-info-orden[data-v-55e54c6e]{font-size:15px;font-weight:400;line-height:1.63}.content-state-top[data-v-55e54c6e]{justify-content:space-between;margin-top:15px;width:100%}.content-item-state[data-v-55e54c6e],.content-state-top[data-v-55e54c6e]{align-items:center;display:flex;flex-direction:row}.content-sections[data-v-55e54c6e]{display:flex;flex-direction:column;width:100%}.content-sections[data-v-55e54c6e] .el-collapse-item__header{color:#000;font-size:16px;font-stretch:normal;font-style:normal;font-weight:700;letter-spacing:normal}.content-sections[data-v-55e54c6e] .el-icon-arrow-right{color:#000}.content-info-buyer[data-v-55e54c6e]{grid-column-gap:40px;grid-row-gap:5px;display:flex;flex-wrap:wrap;justify-content:space-between;width:100%}.address[data-v-55e54c6e],.city[data-v-55e54c6e],.email-address[data-v-55e54c6e],.messege[data-v-55e54c6e],.name[data-v-55e54c6e],.owner[data-v-55e54c6e],.telephone[data-v-55e54c6e]{color:#000;font-size:15px;font-stretch:normal;font-style:normal;font-weight:700;letter-spacing:normal;text-align:left}.messege[data-v-55e54c6e]{width:100%}.value-data[data-v-55e54c6e]{font-weight:400}.btn_url[data-v-55e54c6e]{background:var(--purple);border:1px solid var(--purple);border-radius:3px;color:#fff;padding:4px 10px}.btn_url[data-v-55e54c6e]:hover{background:var(--green);border:1px solid var(--green);color:var(--purple)}.wrapper-hoko[data-v-55e54c6e]{align-items:flex-start;display:flex;justify-content:space-between;width:100%}@media (max-width:863px){.form[data-v-55e54c6e]{align-items:center;flex:1;justify-content:center}.content-form[data-v-55e54c6e],.form[data-v-55e54c6e]{flex-direction:column}.content-input[data-v-55e54c6e]{margin-right:0}}@media (max-width:768px){.bar-top[data-v-55e54c6e]{padding:15px 27px}.bar-body[data-v-55e54c6e]{padding:17px 17px 25px}.contenedor[data-v-55e54c6e]{padding:60px 0}.wrapper-form[data-v-55e54c6e]{padding:20px 17px 10px}}@media (max-width:600px){.content-input[data-v-55e54c6e],.content-state-top[data-v-55e54c6e]{align-items:flex-start;flex-direction:column}.title-info-orden[data-v-55e54c6e]{margin-top:10px}}@media (max-width:500px){.form .el-input[data-v-55e54c6e]{max-width:none}.contenedor[data-v-55e54c6e]{padding:8px 5px 10px}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -401,20 +401,20 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 630:
+/***/ 597:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/miCompra/Ko-miCompra-1.vue?vue&type=template&id=194b78bb&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/miCompra/Ko-miCompra-1.vue?vue&type=template&id=55e54c6e&scoped=true&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
     staticClass: "wrapper_micompra"
-  }, [_vm._ssrNode("<div class=\"contenedor\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<div class=\"wrapper-form\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<h1 class=\"title-form\" data-v-194b78bb>" + _vm._ssrEscape(_vm._s(_vm.$t('mcompra_title'))) + "</h1> "), _vm._ssrNode("<div class=\"content-form\" data-v-194b78bb>", "</div>", [_c('ValidationObserver', {
+  }, [_vm._ssrNode("<div class=\"contenedor\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<div class=\"wrapper-form\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<h1 class=\"title-form\" data-v-55e54c6e>" + _vm._ssrEscape(_vm._s(_vm.$t('mcompra_title'))) + "</h1> "), _vm._ssrNode("<div class=\"content-form\" data-v-55e54c6e>", "</div>", [_c('ValidationObserver', {
     ref: "observer",
     staticClass: "form",
     attrs: {
@@ -524,9 +524,9 @@ var render = function render() {
         }, [_vm._v("\n                  " + _vm._s(errors[0]) + "\n                ")])];
       }
     }])
-  })], 1)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-btn\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<button class=\"btn-submitOrden\" data-v-194b78bb>", "</button>", [_c('search-icon', {
+  })], 1)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-btn\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<button class=\"btn-submitOrden\" data-v-55e54c6e>", "</button>", [_c('search-icon', {
     staticClass: "icon-seach"
-  }), _vm._ssrNode(_vm._ssrEscape(" " + _vm._s(_vm.$t('mcompra_inputBtn')) + "\n          "))], 2)])], 2)], 2), _vm._ssrNode(" "), _vm.orden && _vm.orden.venta ? _vm._ssrNode("<div class=\"bar-body\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<div class=\"content-title\" data-v-194b78bb><p data-v-194b78bb>" + _vm._ssrEscape(_vm._s(_vm.$t('mcompra_title2'))) + "</p> " + (_vm.orden.venta.id ? "<p data-v-194b78bb>" + _vm._ssrEscape("No. " + _vm._s(_vm.orden.venta.id)) + "</p>" : "<!---->") + "</div> "), _vm.orden.productos && _vm.orden.productos.length > 0 ? _vm._ssrNode("<div class=\"content-card\" data-v-194b78bb>", "</div>", [_c('client-only', [_c('table', {
+  }), _vm._ssrNode(_vm._ssrEscape(" " + _vm._s(_vm.$t('mcompra_inputBtn')) + "\n          "))], 2)])], 2)], 2), _vm._ssrNode(" "), _vm.orden && _vm.orden.venta ? _vm._ssrNode("<div class=\"bar-body\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<div class=\"content-title\" data-v-55e54c6e><p data-v-55e54c6e>" + _vm._ssrEscape(_vm._s(_vm.$t('mcompra_title2'))) + "</p> " + (_vm.orden.venta.id ? "<p data-v-55e54c6e>" + _vm._ssrEscape("No. " + _vm._s(_vm.orden.venta.id)) + "</p>" : "<!---->") + "</div> "), _vm.orden.productos && _vm.orden.productos.length > 0 ? _vm._ssrNode("<div class=\"content-card\" data-v-55e54c6e>", "</div>", [_c('client-only', [_c('table', {
     staticClass: "table table-striped"
   }, [_c('div', {
     staticClass: "thead"
@@ -563,7 +563,7 @@ var render = function render() {
     }, [_vm._v("\n                    " + _vm._s(_vm._f("currency")(item.precio_producto)) + "\n                  ")])]), _vm._v(" "), _c('li', [_c('p', {
       staticClass: "text-table"
     }, [_vm._v("\n                    " + _vm._s(_vm._f("currency")(item.unidades * item.precio_producto)) + "\n                  ")])])]);
-  }), 0)])]), _vm._ssrNode(" <div class=\"w-full flex h-1 bg-gray-900\" data-v-194b78bb></div>")], 2) : _vm._ssrNode("<div class=\"content-info-orden\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<div class=\"info-left\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<p class=\"title-info-orden\" data-v-194b78bb>\n            Compra dropshipping (Hoko)\n            <i class=\"el-icon-refresh\" data-v-194b78bb></i></p> "), _vm.productDataHoko ? _vm._ssrNode("<div class=\"wrapper-hoko\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<div data-v-194b78bb>", "</div>", [_vm.productDataHoko.delivery_state ? _vm._ssrNode("<div class=\"mt-4 flex flex-row items-center\" data-v-194b78bb>", "</div>", [_vm._ssrNode((_vm.productDataHoko.delivery_state ? "<p class=\"title-info-orden\" data-v-194b78bb>\n                  Estado del proceso con Hoko:\n                </p>" : "<!---->") + " "), _c('el-tag', {
+  }), 0)])]), _vm._ssrNode(" <div class=\"w-full flex h-1 bg-gray-900\" data-v-55e54c6e></div>")], 2) : _vm._ssrNode("<div class=\"content-info-orden\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<div class=\"info-left\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<p class=\"title-info-orden\" data-v-55e54c6e>\n            Compra dropshipping (Hoko)\n            <i class=\"el-icon-refresh\" data-v-55e54c6e></i></p> "), _vm.productDataHoko ? _vm._ssrNode("<div class=\"wrapper-hoko\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<div data-v-55e54c6e>", "</div>", [_vm.productDataHoko.delivery_state ? _vm._ssrNode("<div class=\"mt-4 flex flex-row items-center\" data-v-55e54c6e>", "</div>", [_vm._ssrNode((_vm.productDataHoko.delivery_state ? "<p class=\"title-info-orden\" data-v-55e54c6e>\n                  Estado del proceso con Hoko:\n                </p>" : "<!---->") + " "), _c('el-tag', {
     staticStyle: {
       "margin-left": "10px"
     },
@@ -572,14 +572,14 @@ var render = function render() {
       "color": _vm.saleStateHoko[_vm.productDataHoko.delivery_state.valueOf(_vm.str) - 1].color,
       "effect": "dark"
     }
-  }, [_vm._v("\n                  " + _vm._s(_vm.$t(_vm.saleStateHoko[_vm.productDataHoko.delivery_state.valueOf(_vm.str) - 1].state)) + "\n                ")])], 2) : _vm._e(), _vm._ssrNode(" <div class=\"mt-4 flex flex-row items-center\" data-v-194b78bb><p class=\"title-info-orden\" data-v-194b78bb>Estado del proceso con Hoko:</p> <div class=\"ml-2\" data-v-194b78bb>" + (_vm.productDataHoko.courier_id == 21 ? "<span class=\"value-info-orden\" data-v-194b78bb>\n                    Mensajería MEDELLIN RR\n                  </span>" : _vm.productDataHoko.courier_id == 44 ? "<span class=\"value-info-orden\" data-v-194b78bb>\n                    Envía E-commerce CR\n                  </span>" : _vm.productDataHoko.courier_id == 45 ? "<span class=\"value-info-orden\" data-v-194b78bb>\n                    Envía E-commerce CR\n                  </span>" : "<!---->") + "</div></div>")], 2), _vm._ssrNode(" " + (this.orden && this.orden.mensajes ? "<div class=\"mt-4\" data-v-194b78bb><a" + _vm._ssrAttr("href", `https://hoko.com.co/admin/resources/orders/${parseInt(this.orden.mensajes[0].mensaje)}`) + " target=\"_blank\" class=\"btn_url\" data-v-194b78bb>\n                Ver detalle de la orden Hoko\n              </a></div>" : "<!---->"))], 2) : _vm._e()], 2)]), _vm._ssrNode(" "), _vm.orden.venta ? _vm._ssrNode("<div class=\"content-info-orden\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<div class=\"info-left\" data-v-194b78bb>", "</div>", [_vm._ssrNode((_vm.orden.venta.cupon && _vm.orden.venta.cupon !== 'null' ? "<p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_cupon')) + "\n            ") + "<span class=\"value-info-orden\" data-v-194b78bb>" + _vm._ssrEscape(_vm._s(_vm.orden.venta.cupon)) + "</span></p>" : "<!---->") + " " + (_vm.orden.venta.descuento && _vm.orden.venta.descuento !== 'null' ? "<p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('footer_descuento')) + "\n            ") + "<span class=\"value-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n              - " + _vm._s(_vm._f("currency")(_vm.orden.venta.descuento)) + "\n            ") + "</span></p>" : "<!---->") + " " + (_vm.orden.venta.costo_envio && !_vm.stateHoko ? "<p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_valorEnvio')) + "\n            ") + "<span class=\"value-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n              " + _vm._s(_vm._f("currency")(_vm.orden.venta.costo_envio)) + "\n            ") + "</span></p>" : "<p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_valorEnvio')) + "\n            ") + "<span class=\"value-info-orden\" data-v-194b78bb>\n              Envío por Hoko (Pago contraentrega)\n            </span></p>") + " " + (_vm.orden.venta.total ? "<p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_totalOrden')) + "\n            ") + "<span class=\"value-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n              " + _vm._s(_vm._f("currency")(_vm.orden.venta.total)) + "\n            ") + "</span></p>" : "<!---->") + " " + (_vm.choicePayment ? "<p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_metodoPago')) + "\n            ") + "<span class=\"value-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t(`${_vm.choicePayment.title}`)) + "\n            ") + "</span></p>" : "<!---->") + " " + (_vm.fechaState ? "<p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_fechaCompra')) + "\n            ") + "<span class=\"value-info-orden\" data-v-194b78bb>" + _vm._ssrEscape(_vm._s(this.fechaState)) + "</span></p>" : "<!---->") + " " + (_vm.horaState ? "<p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_horaCompra')) + "\n            ") + "<span class=\"value-info-orden\" data-v-194b78bb>" + _vm._ssrEscape(_vm._s(this.horaState)) + "</span></p>" : "<!---->") + " <p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_pcanaldeVenta')) + "\n            ") + "<span" + _vm._ssrStyle(null, `color: ${_vm.channelBuy[parseInt(_vm.orden.venta.canal) - 1].color};`, null) + " data-v-194b78bb>" + _vm._ssrEscape("\n              " + _vm._s(_vm.channelBuy[parseInt(_vm.orden.venta.canal) - 1].name) + "\n            ") + "</span></p> "), _vm.orden.venta.delivery_status_id !== null ? _vm._ssrNode("<div class=\"mt-4 flex flex-row items-center\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('mcompra_pcCanalEnvio')) + "\n            ") + "</p> "), _c('el-tag', {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t(_vm.saleStateHoko[_vm.productDataHoko.delivery_state.valueOf(_vm.str) - 1].state)) + "\n                ")])], 2) : _vm._e(), _vm._ssrNode(" <div class=\"mt-4 flex flex-row items-center\" data-v-55e54c6e><p class=\"title-info-orden\" data-v-55e54c6e>Estado del proceso con Hoko:</p> <div class=\"ml-2\" data-v-55e54c6e>" + (_vm.productDataHoko.courier_id == 21 ? "<span class=\"value-info-orden\" data-v-55e54c6e>\n                    Mensajería MEDELLIN RR\n                  </span>" : _vm.productDataHoko.courier_id == 44 ? "<span class=\"value-info-orden\" data-v-55e54c6e>\n                    Envía E-commerce CR\n                  </span>" : _vm.productDataHoko.courier_id == 45 ? "<span class=\"value-info-orden\" data-v-55e54c6e>\n                    Envía E-commerce CR\n                  </span>" : "<!---->") + "</div></div>")], 2), _vm._ssrNode(" " + (_vm.orden && _vm.orden.mensajes ? "<div class=\"mt-4\" data-v-55e54c6e><a" + _vm._ssrAttr("href", `https://hoko.com.co/admin/resources/orders/${parseInt(_vm.orden.mensajes[0].mensaje)}`) + " target=\"_blank\" class=\"btn_url\" data-v-55e54c6e>\n                Ver detalle de la orden Hoko\n              </a></div>" : "<!---->"))], 2) : _vm._e()], 2)]), _vm._ssrNode(" "), _vm.orden.venta ? _vm._ssrNode("<div class=\"content-info-orden\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<div class=\"info-left\" data-v-55e54c6e>", "</div>", [_vm._ssrNode((_vm.orden.venta.cupon && _vm.orden.venta.cupon !== 'null' ? "<p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_cupon')) + "\n            ") + "<span class=\"value-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape(_vm._s(_vm.orden.venta.cupon)) + "</span></p>" : "<!---->") + " " + (_vm.orden.venta.descuento && _vm.orden.venta.descuento !== 'null' ? "<p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('footer_descuento')) + "\n            ") + "<span class=\"value-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n              - " + _vm._s(_vm._f("currency")(_vm.orden.venta.descuento)) + "\n            ") + "</span></p>" : "<!---->") + " " + (_vm.orden.venta.costo_envio && !_vm.stateHoko ? "<p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_valorEnvio')) + "\n            ") + "<span class=\"value-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n              " + _vm._s(_vm._f("currency")(_vm.orden.venta.costo_envio)) + "\n            ") + "</span></p>" : "<p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_valorEnvio')) + "\n            ") + "<span class=\"value-info-orden\" data-v-55e54c6e>\n              Envío por Hoko (Pago contraentrega)\n            </span></p>") + " " + (_vm.orden.venta.total ? "<p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_totalOrden')) + "\n            ") + "<span class=\"value-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n              " + _vm._s(_vm._f("currency")(_vm.orden.venta.total)) + "\n            ") + "</span></p>" : "<!---->") + " " + (_vm.choicePayment ? "<p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_metodoPago')) + "\n            ") + "<span class=\"value-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t(`${_vm.choicePayment.title}`)) + "\n            ") + "</span></p>" : "<!---->") + " " + (_vm.fechaState ? "<p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_fechaCompra')) + "\n            ") + "<span class=\"value-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape(_vm._s(_vm.fechaState)) + "</span></p>" : "<!---->") + " " + (_vm.horaState ? "<p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_horaCompra')) + "\n            ") + "<span class=\"value-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape(_vm._s(_vm.horaState)) + "</span></p>" : "<!---->") + " <p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_pcanaldeVenta')) + "\n            ") + "<span" + _vm._ssrStyle(null, `color: ${_vm.channelBuy[parseInt(_vm.orden.venta.canal) - 1].color};`, null) + " data-v-55e54c6e>" + _vm._ssrEscape("\n              " + _vm._s(_vm.channelBuy[parseInt(_vm.orden.venta.canal) - 1].name) + "\n            ") + "</span></p> "), _vm.orden.venta.delivery_status_id !== null ? _vm._ssrNode("<div class=\"mt-4 flex flex-row items-center\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('mcompra_pcCanalEnvio')) + "\n            ") + "</p> "), _c('el-tag', {
     staticClass: "tag-state",
     attrs: {
       "size": "medium",
       "effect": "dark",
       "color": _vm.shippingState[_vm.orden.venta.delivery_status_id - 1].color
     }
-  }, [_vm._v("\n              " + _vm._s(_vm.$t(_vm.shippingState[_vm.orden.venta.delivery_status_id - 1].state)) + "\n            ")])], 2) : _vm._e()], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-state-top\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<div class=\"content-item-state\" data-v-194b78bb>", "</div>", [_vm._ssrNode("<p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('mcompra_estadoCompra')) + "\n            ") + "</p> "), _c('el-tag', {
+  }, [_vm._v("\n              " + _vm._s(_vm.$t(_vm.shippingState[_vm.orden.venta.delivery_status_id - 1].state)) + "\n            ")])], 2) : _vm._e()], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-state-top\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<div class=\"content-item-state\" data-v-55e54c6e>", "</div>", [_vm._ssrNode("<p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n              " + _vm._s(_vm.$t('mcompra_estadoCompra')) + "\n            ") + "</p> "), _c('el-tag', {
     staticStyle: {
       "margin-left": "10px"
     },
@@ -587,7 +587,7 @@ var render = function render() {
       "color": _vm.choiceState.color,
       "effect": "dark"
     }
-  }, [_vm._v("\n              " + _vm._s(_vm.$t(`${_vm.choiceState.title}`)) + "\n            ")])], 2), _vm._ssrNode(" <p class=\"title-info-orden\" data-v-194b78bb>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_ultimaActualizacion')) + "\n            ") + "<span class=\"value-info-orden\" data-v-194b78bb>" + _vm._ssrEscape(_vm._s(_vm.orden.venta.fecha)) + "</span></p>")], 2)], 2) : _vm._e(), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-sections\" data-v-194b78bb>", "</div>", [_c('client-only', [_c('el-collapse', [_c('el-collapse-item', {
+  }, [_vm._v("\n              " + _vm._s(_vm.$t(`${_vm.choiceState.title}`)) + "\n            ")])], 2), _vm._ssrNode(" <p class=\"title-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('mcompra_ultimaActualizacion')) + "\n            ") + "<span class=\"value-info-orden\" data-v-55e54c6e>" + _vm._ssrEscape(_vm._s(_vm.orden.venta.fecha)) + "</span></p>")], 2)], 2) : _vm._e(), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"content-sections\" data-v-55e54c6e>", "</div>", [_c('client-only', [_c('el-collapse', [_c('el-collapse-item', {
     attrs: {
       "title": _vm.$t('mcompra_infoComprador'),
       "name": "1"
@@ -652,23 +652,23 @@ var render = function render() {
     staticClass: "name"
   }, [_vm._v("\n                  " + _vm._s(_vm.$t('mcompra_nombre')) + "\n                  "), _c('span', {
     staticClass: "value-data"
-  }, [_vm._v("\n                    " + _vm._s(_vm.orden.venta.usuario.nombre) + "\n                  ")])]), _vm._v(" "), this.cityComprador && this.cityComprador.departamento ? _c('p', {
+  }, [_vm._v("\n                    " + _vm._s(_vm.orden.venta.usuario.nombre) + "\n                  ")])]), _vm._v(" "), _vm.cityComprador && _vm.cityComprador.departamento ? _c('p', {
     staticClass: "name"
   }, [_vm._v("\n                  " + _vm._s(_vm.$t('mcompra_departamento')) + "\n                  "), _c('span', {
     staticClass: "value-data"
-  }, [_vm._v("\n                    " + _vm._s(this.cityComprador.departamento.nombre_dep) + "\n                  ")])]) : _vm._e(), _vm._v(" "), this.cityComprador && this.cityComprador.nombre_ciu ? _c('p', {
+  }, [_vm._v("\n                    " + _vm._s(_vm.cityComprador.departamento.nombre_dep) + "\n                  ")])]) : _vm._e(), _vm._v(" "), _vm.cityComprador && _vm.cityComprador.nombre_ciu ? _c('p', {
     staticClass: "name"
   }, [_vm._v("\n                  " + _vm._s(_vm.$t('mcompra_ciudad')) + "\n                  "), _c('span', {
     staticClass: "value-data"
-  }, [_vm._v("\n                    " + _vm._s(this.cityComprador.nombre_ciu) + "\n                  ")])]) : _vm._e(), _vm._v(" "), this.direccion_entrega && this.direccion_entrega.value && this.direccion_entrega.value.barrio ? _c('p', {
+  }, [_vm._v("\n                    " + _vm._s(_vm.cityComprador.nombre_ciu) + "\n                  ")])]) : _vm._e(), _vm._v(" "), _vm.direccion_entrega && _vm.direccion_entrega.value && _vm.direccion_entrega.value.barrio ? _c('p', {
     staticClass: "name"
   }, [_vm._v("\n                  " + _vm._s(_vm.$t('mcompra_barrio')) + "\n                  "), _c('span', {
     staticClass: "value-data"
-  }, [_vm._v("\n                    " + _vm._s(this.direccion_entrega.value.barrio) + "\n                  ")])]) : _vm._e(), _vm._v(" "), _c('p', {
+  }, [_vm._v("\n                    " + _vm._s(_vm.direccion_entrega.value.barrio) + "\n                  ")])]) : _vm._e(), _vm._v(" "), _c('p', {
     staticClass: "address"
-  }, [_vm._v("\n                  " + _vm._s(_vm.$t('mcompra_direccion')) + "\n                  "), this.direccion_entrega && this.direccion_entrega.value && this.direccion_entrega.value.direccion ? _c('span', {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t('mcompra_direccion')) + "\n                  "), _vm.direccion_entrega && _vm.direccion_entrega.value && _vm.direccion_entrega.value.direccion ? _c('span', {
     staticClass: "value-data"
-  }, [_vm._v("\n                    " + _vm._s(this.direccion_entrega.value.direccion) + "\n                  ")]) : _vm.orden && _vm.orden.venta.usuario.user_info[0].direccion ? _c('span', {
+  }, [_vm._v("\n                    " + _vm._s(_vm.direccion_entrega.value.direccion) + "\n                  ")]) : _vm.orden && _vm.orden.venta.usuario.user_info[0].direccion ? _c('span', {
     staticClass: "value-data"
   }, [_vm._v("\n                    " + _vm._s(_vm.orden.venta.usuario.user_info[0].direccion) + "\n                  ")]) : _c('span', {
     staticClass: "value-data"
@@ -752,7 +752,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/miCompra/Ko-miCompra-1.vue?vue&type=template&id=194b78bb&scoped=true&
+// CONCATENATED MODULE: ./components/miCompra/Ko-miCompra-1.vue?vue&type=template&id=55e54c6e&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
 var external_axios_ = __webpack_require__(2);
@@ -765,7 +765,7 @@ var idCloudinary = __webpack_require__(47);
 var formatCurrent = __webpack_require__(48);
 
 // EXTERNAL MODULE: ./mixins/states.vue + 2 modules
-var states = __webpack_require__(137);
+var states = __webpack_require__(128);
 
 // EXTERNAL MODULE: external "vee-validate"
 var external_vee_validate_ = __webpack_require__(8);
@@ -777,15 +777,92 @@ var external_vee_validate_ = __webpack_require__(8);
 
 
 /* harmony default export */ var Ko_miCompra_1vue_type_script_lang_js_ = ({
-  mixins: [idCloudinary["a" /* default */], formatCurrent["a" /* default */], states["a" /* default */]],
-  name: 'Ko-miCompra-G',
-  props: {
-    dataStore: Object,
-    orden: Object
-  },
+  name: 'KomiCompraG',
   components: {
     ValidationObserver: external_vee_validate_["ValidationObserver"],
     ValidationProvider: external_vee_validate_["ValidationProvider"]
+  },
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase();
+        return value.replace(/^\w|\s\w/g, l => l.toUpperCase());
+      }
+    }
+  },
+  mixins: [idCloudinary["a" /* default */], formatCurrent["a" /* default */], states["a" /* default */]],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true
+    },
+    orden: {
+      type: Object,
+      required: true
+    }
+  },
+  data() {
+    return {
+      dataTransporter: '',
+      mensajeWa: '',
+      fechaState: '',
+      horaState: '',
+      toggleArrow: false,
+      numOrden: '',
+      cedula: '',
+      city: {},
+      cityComprador: {},
+      productDataHoko: {},
+      stateHoko: false,
+      direccion_entrega: {},
+      tempData: {
+        state: false,
+        dataCustomer: {}
+      }
+    };
+  },
+  computed: {
+    dataHoko() {
+      return this.$store.state.dataHoko;
+    },
+    choicePayment() {
+      return this.payments.find(payment => payment.id === this.orden.venta.metodo_pago);
+    },
+    choiceState() {
+      return this.statusUpdate.find(payment => payment.id === this.orden.venta.estado);
+    },
+    cities() {
+      return this.$store.state.cities;
+    },
+    facebookPixel() {
+      return this.$store.state.analytics_tagmanager;
+    }
+  },
+  watch: {
+    '$route.path'(value) {
+      if (value == '/') {
+        this.toggleArrow = false;
+      } else {
+        this.toggleArrow = true;
+      }
+    },
+    cities() {
+      this.setCity();
+      this.shippingAddress();
+    },
+    orden() {
+      if (this.orden.venta) {
+        if (this.orden.venta.created_at) {
+          this.eventFacebookPixel();
+          this.shippingAddress();
+          this.setTransportadora();
+          this.setUser();
+          let result = this.orden.venta.created_at.split(' ');
+          this.fechaState = result[0];
+          this.horaState = result[1];
+        }
+      }
+    }
   },
   async mounted() {
     if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
@@ -834,43 +911,6 @@ var external_vee_validate_ = __webpack_require__(8);
   },
   destroyed() {
     this.city = {};
-  },
-  data() {
-    return {
-      dataTransporter: '',
-      mensajeWa: '',
-      fechaState: '',
-      horaState: '',
-      toggleArrow: false,
-      numOrden: '',
-      cedula: '',
-      city: {},
-      cityComprador: {},
-      productDataHoko: {},
-      stateHoko: false,
-      direccion_entrega: {},
-      tempData: {
-        state: false,
-        dataCustomer: {}
-      }
-    };
-  },
-  computed: {
-    dataHoko() {
-      return this.$store.state.dataHoko;
-    },
-    choicePayment() {
-      return this.payments.find(payment => payment.id === this.orden.venta.metodo_pago);
-    },
-    choiceState() {
-      return this.statusUpdate.find(payment => payment.id === this.orden.venta.estado);
-    },
-    cities() {
-      return this.$store.state.cities;
-    },
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager;
-    }
   },
   methods: {
     setUser() {
@@ -1004,40 +1044,6 @@ var external_vee_validate_ = __webpack_require__(8);
         duration: 4000
       });
     }
-  },
-  watch: {
-    '$route.path'(value) {
-      if (value == '/') {
-        this.toggleArrow = false;
-      } else {
-        this.toggleArrow = true;
-      }
-    },
-    cities() {
-      this.setCity();
-      this.shippingAddress();
-    },
-    orden() {
-      if (this.orden.venta) {
-        if (this.orden.venta.created_at) {
-          this.eventFacebookPixel();
-          this.shippingAddress();
-          this.setTransportadora();
-          this.setUser();
-          let result = this.orden.venta.created_at.split(' ');
-          this.fechaState = result[0];
-          this.horaState = result[1];
-        }
-      }
-    }
-  },
-  filters: {
-    capitalize(value) {
-      if (value) {
-        value = value.toLowerCase();
-        return value.replace(/^\w|\s\w/g, l => l.toUpperCase());
-      }
-    }
   }
 });
 // CONCATENATED MODULE: ./components/miCompra/Ko-miCompra-1.vue?vue&type=script&lang=js&
@@ -1051,7 +1057,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(275)
+  var style0 = __webpack_require__(251)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1064,7 +1070,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "194b78bb",
+  "55e54c6e",
   "00a870fa"
   
 )

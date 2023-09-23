@@ -70,7 +70,7 @@
             {{ $t('header_buscar_limpiar') }}
           </p>
         </nuxt-link>
-        <el-collapse v-model="activeNames" @change="handleChange">
+        <el-collapse v-model="activeNames">
           <el-collapse-item :title="$t('header_buscar_producto')" name="1">
             <input
               class="input-slide"
@@ -645,7 +645,7 @@ export default {
     breadcrumbsSendCategory(value) {
       this.stateSub = true
       var catalogo = document.getElementById('homeCate')
-      if (this.stateSub == true) {
+      if (this.stateSub) {
         catalogo.style.color = '#8e8e8e'
         catalogo.style.fontWeight = '100'
       }
@@ -682,9 +682,6 @@ export default {
       this.nameCategory = ''
       this.showSubCategory = false
       this.selectedSubcategories = []
-    },
-    handleChange(val) {
-      // console.log(val);
     },
   },
   watch: {

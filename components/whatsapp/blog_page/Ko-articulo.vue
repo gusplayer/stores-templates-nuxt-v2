@@ -16,7 +16,9 @@
       </div>
     </div>
     <div v-if="dataArticle" class="content-item-article">
-      <p class="tittle-blog">{{ dataArticle.titulo }}</p>
+      <p class="tittle-blog">
+        {{ dataArticle.titulo }}
+      </p>
       <br />
       <div class="content-data-article">
         <svg
@@ -40,10 +42,10 @@
           :extensions="extensions"
           :spellcheck="false"
           :readonly="true"
-          :charCounterCount="false"
           :tooltip="false"
-          :showMenubar="false"
           :bubble="false"
+          :showMenubar="false"
+          :charCounterCount="false"
         />
       </div>
     </div>
@@ -55,7 +57,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import extensions from '../../../mixins/elemenTiptap.vue'
+import extensions from '@/mixins/elemenTiptap.vue'
 // import idCloudinary from '../../../mixins/idCloudinary'
 export default {
   name: 'KoArticleWa',

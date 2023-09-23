@@ -13,6 +13,7 @@ export default {
     sendCategoryUrlMix(value) {
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
       let urlFiltrada = decodeURIComponent(value)
+      console.log(urlFiltrada)
       this.$store.commit('products/FILTER_BY', {
         type: ['category'],
         data: urlFiltrada,
@@ -27,11 +28,10 @@ export default {
     SendSubCategoryUrlMix(value, categories, subcategories) {
       let urlFiltradaTemp = decodeURIComponent(value)
       let resTemp = urlFiltradaTemp.split('^')
-      let urlFiltrada = decodeURIComponent(resTemp[0])
       let filtradoSubCategories = subcategories.find((element) => {
         if (
           element.categoria == parseInt(resTemp[1]) &&
-          element.nombre_subcategoria == urlFiltrada
+          element.nombre_subcategoria == resTemp[0]
         ) {
           return element
         }
@@ -60,7 +60,7 @@ export default {
       } else {
         this.$store.commit('products/FILTER_BY', {
           type: ['subcategory'],
-          data: '',
+          data: parseInt(resTemp[1]),
         })
       }
     },
@@ -125,7 +125,7 @@ export default {
         this.setURlTag(tag_id, tag_Name)
       }
       this.currentPage = 1
-      if (Lateral === true) {
+      if (Lateral) {
         this.$router.push({
           path: '/productos',
         })

@@ -6,9 +6,9 @@
     >
       <div v-if="dataStore.categorias.length > 0">
         <div
-          class="pt-4 pb-4"
           v-for="category in dataStore.categorias"
           :key="category.id"
+          class="pt-4 pb-4"
         >
           <header class="text-center">
             <h2
@@ -20,16 +20,16 @@
           </header>
           <div v-if="dataStore.subcategorias.length > 0">
             <div
-              class="products-wrapper"
               v-for="(subcategory, key) in dataStore.subcategorias"
-              :key="key"
               v-show="subcategory.categoria == category.id"
+              :key="key"
+              class="products-wrapper"
             >
               <div class="subcategori-Content">
                 <p
+                  v-if="subcategory.categoria == category.id"
                   class="text-subtitle"
                   :style="`color:${settingByTemplate12.titleColor};`"
-                  v-if="subcategory.categoria == category.id"
                 >
                   {{ subcategory.nombre_subcategoria }}
                 </p>
@@ -37,12 +37,12 @@
               <div class="products-content">
                 <div
                   v-for="product in fullProducts"
-                  :key="product.id"
-                  @click="OpenModalProductDetails(product)"
                   v-show="
                     product.categoria == category.nombre_categoria_producto &&
                     product.subcategoria == subcategory.id
                   "
+                  :key="product.id"
+                  @click="OpenModalProductDetails(product)"
                 >
                   <ProductCard
                     :product="
@@ -51,19 +51,19 @@
                         ? product
                         : {}
                     "
-                    :dataStore="dataStore"
-                    :settingByTemplate12="settingByTemplate12"
+                    :data-store="dataStore"
+                    :setting-by-template12="settingByTemplate12"
                   />
                 </div>
               </div>
             </div>
           </div>
-          <div class="products-content" v-else>
+          <div v-else class="products-content">
             <div
               v-for="product in fullProducts"
+              v-show="product.categoria == category.nombre_categoria_producto"
               :key="product.id"
               @click="OpenModalProductDetails(product)"
-              v-show="product.categoria == category.nombre_categoria_producto"
             >
               <ProductCard
                 :product="
@@ -71,8 +71,8 @@
                     ? product
                     : {}
                 "
-                :dataStore="dataStore"
-                :settingByTemplate12="settingByTemplate12"
+                :data-store="dataStore"
+                :setting-by-template12="settingByTemplate12"
               />
             </div>
           </div>
@@ -95,17 +95,17 @@
           >
             <ProductCard
               :product="product"
-              :dataStore="dataStore"
-              :settingByTemplate12="settingByTemplate12"
+              :data-store="dataStore"
+              :setting-by-template12="settingByTemplate12"
             />
           </div>
         </div>
       </div>
-      <div class="modal" v-if="showModal">
-        <ProductDetail
-          :dataStore="dataStore"
-          :tempData="tempData"
-          :settingByTemplate12="settingByTemplate12"
+      <div v-if="showModal" class="modal">
+        <K012-productDetail
+          :data-store="dataStore"
+          :temp-data="tempData"
+          :setting-by-template12="settingByTemplate12"
         />
       </div>
       <hr class="h-20 bg-transparent border-transparent" />
@@ -115,17 +115,15 @@
 </template>
 
 <script>
-import ProductCard from './ProductCard'
 import settingsProps from './mixins/ComponentProps'
-import ProductDetail from './productDetail.vue'
 
 export default {
-  name: 'Ko12-IMainSection',
-  mixins: [settingsProps],
+  name: 'Ko12IMainSection',
   components: {
-    ProductCard,
-    ProductDetail,
+    ProductCard: () => import('./ProductCard'),
+    K012ProductDetail: () => import('./K012-ProductDetail.vue'),
   },
+  mixins: [settingsProps],
   data() {
     return {
       section: {
@@ -146,6 +144,11 @@ export default {
       return this.$store.state.modalproductDetails
     },
   },
+  watch: {
+    searchValue(value) {
+      this.SearchProduct(value)
+    },
+  },
   methods: {
     OpenModalProductDetails(value) {
       this.tempData = value
@@ -163,11 +166,6 @@ export default {
           data: '',
         })
       }
-    },
-  },
-  watch: {
-    searchValue(value) {
-      this.SearchProduct(value)
     },
   },
 }

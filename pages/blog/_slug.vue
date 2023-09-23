@@ -5,17 +5,16 @@
 import { mapState } from 'vuex'
 export default {
   components: {
-    K05Article: () => import('../../components/blog/Ko-articulo'),
+    K05Article: () => import('@/components/template5/blog/Ko-articulo.vue'),
     K07Article: () =>
-      import('../../components/template7/blog_page/Ko-articulo'),
+      import('@/components/template7/blog_page/Ko-articulo.vue'),
     K09Article: () =>
-      import('../../components/template9/blog_page/Ko-articulo.vue'),
+      import('@/components/template9/blog_page/Ko-articulo.vue'),
     K10Article: () =>
-      import('../../components/template10/blog_page/Ko-articulo'),
+      import('@/components/template10/blog_page/Ko-articulo.vue'),
     K11Article: () =>
-      import('../../components/template11/blog_page/Ko-articulo'),
-    K13Article: () =>
-      import('../../components/template13/_blog/Ko-articulo.vue'),
+      import('@/components/template11/blog_page/Ko-articulo.vue'),
+    K13Article: () => import('@/components/template13/_blog/Ko-articulo.vue'),
   },
   layout: 'default',
   data() {
@@ -103,7 +102,7 @@ export default {
             const commitAction = this.templateMapping[template]
             this.$store.commit(commitAction, e.data)
           }
-        } else if (e && e.data && e.data.returnHome == true) {
+        } else if (e && e.data && e.data.returnHome) {
           this.$router.push({
             path: '/',
           })

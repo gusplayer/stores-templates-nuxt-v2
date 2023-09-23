@@ -66,9 +66,8 @@ export default {
     K014OffersProduct: () =>
       import('@/components/template14/ko14-offersProduct.vue'),
     K014ListBlogHome: () =>
-      import('@/components/template14/ko14-Newsletter.vue'),
-    K014Newsletter: () =>
       import('@/components/template14/ko14-listBlogHome.vue'),
+    K014Newsletter: () => import('@/components/template14/ko14-Newsletter.vue'),
     K014Logos: () => import('@/components/template14/ko14-logos.vue'),
   },
   layout: 'default',
@@ -193,7 +192,7 @@ export default {
               break
           }
         } else {
-          if (e && e.data && e.data.returnHome == true) {
+          if (e && e.data && e.data.returnHome) {
             this.$router.push({
               path: '/',
             })

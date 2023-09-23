@@ -147,7 +147,7 @@ export default {
             const commitAction = this.templateMapping[template]
             this.$store.commit(commitAction, e.data)
           }
-        } else if (e && e.data && e.data.returnHome == true) {
+        } else if (e && e.data && e.data.returnHome) {
           this.$router.push({
             path: '/',
           })

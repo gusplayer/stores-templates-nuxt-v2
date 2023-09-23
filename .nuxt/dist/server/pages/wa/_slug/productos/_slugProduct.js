@@ -1,7 +1,7 @@
 exports.ids = [344];
 exports.modules = {
 
-/***/ 1128:
+/***/ 1113:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27,8 +27,8 @@ var staticRenderFns = [];
 /* harmony default export */ var _slugProductvue_type_script_lang_js_ = ({
   name: 'WapiMEDetail',
   components: {
-    KoProductDetail: () => __webpack_require__.e(/* import() */ 176).then(__webpack_require__.bind(null, 1244)),
-    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 5).then(__webpack_require__.bind(null, 1323))
+    KoProductDetail: () => __webpack_require__.e(/* import() */ 191).then(__webpack_require__.bind(null, 1237)),
+    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1320))
   },
   layout: 'wa',
   computed: {

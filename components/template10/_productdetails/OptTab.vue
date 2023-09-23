@@ -8,6 +8,7 @@
   >
     <div class="head-content">
       <div
+        v-if="contentDescription"
         class="tab"
         :class="selecttag == 1 ? 'show-select-active' : ''"
         @click="selectTag1"
@@ -31,12 +32,18 @@
     </div>
 
     <div class="content-tab">
-      <div
-        v-if="focusbtn1"
-        v-html="data.info.descripcion"
-        class="item-content descripcion"
-        style="color: #777"
-      ></div>
+      <div v-if="focusbtn1 && contentDescription" class="editor">
+        <el-tiptap
+          v-model="contentDescription"
+          :extensions="extensions"
+          :spellcheck="false"
+          :readonly="true"
+          :tooltip="false"
+          :bubble="false"
+          :showMenubar="false"
+          :charCounterCount="false"
+        />
+      </div>
       <div class="item-content opcpago" v-if="focusbtn2">
         <ul>
           <li v-if="mediospago.consignacion == 1">
@@ -181,30 +188,33 @@
           </li>
         </ul>
       </div>
-      <div class="item-content opcenvio" v-if="focusbtn3">
-        <div class="deliverys section" v-if="this.envios.envio_metodo">
+      <div
+        class="item-content opcenvio"
+        v-if="focusbtn3 && envios.envio_metodo"
+      >
+        <div class="deliverys section">
           <div class="content">
             <h3 class="title-section">
               {{ $t('productdetail_opinionesEnvio') }}
             </h3>
           </div>
           <div
-            v-if="this.envios.envio_metodo === 'precio_ciudad'"
+            v-if="envios.envio_metodo === 'precio_ciudad'"
             class="wrapper-method"
           >
             <h4 class="capitalize">
-              • {{ this.envios.envio_metodo.replace('_', ' por ') }}
+              • {{ envios.envio_metodo.replace('_', ' por ') }}
             </h4>
             <p class="description-method">
               {{ $t('productdetail_opinionesEnvioMsg1') }}
             </p>
           </div>
           <div
-            v-if="this.envios.envio_metodo === 'tarifa_plana'"
+            v-if="envios.envio_metodo === 'tarifa_plana'"
             class="wrapper-method"
           >
             <h4 class="capitalize">
-              {{ this.envios.envio_metodo.replace('_', ' ') }}
+              {{ envios.envio_metodo.replace('_', ' ') }}
             </h4>
             <p class="description-method">
               {{ $t('productdetail_opinionesEnvioMsg2') }}
@@ -212,7 +222,7 @@
             <p class="price">
               {{ $t('cart_precio') }}
               {{
-                this.envios.valor
+                envios.valor
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -220,28 +230,19 @@
               }}
             </p>
           </div>
-          <div
-            v-if="this.envios.envio_metodo === 'precio'"
-            class="wrapper-method"
-          >
+          <div v-if="envios.envio_metodo === 'precio'" class="wrapper-method">
             <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
             <p class="description-method">
               {{ $t('productdetail_precioTotalCompraMsg') }}
             </p>
           </div>
-          <div
-            v-if="this.envios.envio_metodo === 'gratis'"
-            class="wrapper-method"
-          >
+          <div v-if="envios.envio_metodo === 'gratis'" class="wrapper-method">
             <h4>{{ $t('productdetail_gratis') }}</h4>
             <p class="description-method">
               {{ $t('productdetail_gratisMsg') }}
             </p>
           </div>
-          <div
-            v-if="this.envios.envio_metodo === 'sinEnvio'"
-            class="wrapper-method"
-          >
+          <div v-if="envios.envio_metodo === 'sinEnvio'" class="wrapper-method">
             <p class="description-method">Pasas a recoger tu compra</p>
           </div>
         </div>
@@ -250,18 +251,36 @@
   </div>
 </template>
 <script>
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 export default {
-  mixins: [currency],
-
-  components: {},
-  props: {
-    dataStore: Object,
-    data: {},
-    envio: {},
-    settingByTemplate10: Array,
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      }
+    },
   },
-  mounted() {},
+  mixins: [currency, extensions],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    data: {
+      type: Object,
+      required: true,
+    },
+    envio: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate10: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       medioEnvio: '',
@@ -270,6 +289,7 @@ export default {
       focusbtn1: true,
       focusbtn2: false,
       focusbtn3: false,
+      contentDescription: this.data?.info?.descripcion,
     }
   },
   computed: {
@@ -287,18 +307,13 @@ export default {
       }
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },
   },
-  filters: {
-    capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
-      }
-    },
+  mounted() {
+    this.contentDescription ? this.selectTag1() : this.selectTag2()
   },
   methods: {
     selectTag1() {

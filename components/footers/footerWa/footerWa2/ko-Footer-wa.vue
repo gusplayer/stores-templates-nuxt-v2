@@ -4,7 +4,7 @@
       :class="cantidadProductos > 0 ? 'content-footer' : 'content-footer-none'"
     >
       <footer class="content-items-footer">
-        <div class="item-footer" v-if="cantidadProductos > 0">
+        <div v-if="cantidadProductos > 0" class="item-footer">
           <p class="text-items-cart">
             {{ $t('footer_title') }}
             <span class="text-items-cart ml-2">({{ cantidadProductos }})</span>
@@ -12,7 +12,6 @@
         </div>
         <button
           v-if="cantidadProductos > 0"
-          @click="openOrder"
           :style="`background: ${
             settingByTemplate && settingByTemplate.color_primario
               ? settingByTemplate.color_primario
@@ -23,6 +22,7 @@
               : '#FFFFFF'
           };`"
           class="button-footer"
+          @click="openOrder"
         >
           <p class="text-items-button">{{ $t('footer_title2') }}</p>
         </button>
@@ -31,10 +31,10 @@
           {{ $t('footer_carritoVacio2') }}
         </p>
 
-        <div class="item-footer" v-if="cantidadProductos > 0">
+        <div v-if="cantidadProductos > 0" class="item-footer">
           <p class="text-items-cart">
             {{
-              this.totalCart
+              totalCart
                 | currency(
                   dataStore.tienda.codigo_pais,
                   dataStore.tienda.moneda
@@ -49,11 +49,17 @@
 <script>
 import currency from '../../../../mixins/formatCurrent'
 export default {
-  name: 'Ko2-Footer-Wa',
+  name: 'KoFooterWhatsApp',
   mixins: [currency],
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
     cantidadProductos() {

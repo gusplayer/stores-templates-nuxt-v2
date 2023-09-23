@@ -4,194 +4,223 @@
     "path": "/blog",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\index.vue",
     "chunkName": "pages/blog/index",
-    "url": "/blog"
+    "url": "/blog",
+    "_name": "_794f6fae"
   },
   {
     "name": "cart",
     "path": "/cart",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\cart.vue",
     "chunkName": "pages/cart",
-    "url": "/cart"
+    "url": "/cart",
+    "_name": "_39b826b7"
   },
   {
     "name": "contacto",
     "path": "/contacto",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\contacto.vue",
     "chunkName": "pages/contacto",
-    "url": "/contacto"
+    "url": "/contacto",
+    "_name": "_534f7634"
   },
   {
     "name": "micompra",
     "path": "/micompra",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\micompra.vue",
     "chunkName": "pages/micompra",
-    "url": "/micompra"
+    "url": "/micompra",
+    "_name": "_6902b59e"
   },
   {
     "name": "productos",
     "path": "/productos",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\index.vue",
     "chunkName": "pages/productos/index",
-    "url": "/productos"
+    "url": "/productos",
+    "_name": "_50291476"
   },
   {
     "name": "productosHoko",
     "path": "/productosHoko",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productosHoko\\\\index.vue",
     "chunkName": "pages/productosHoko/index",
-    "url": "/productosHoko"
+    "url": "/productosHoko",
+    "_name": "_0f3a28cb"
   },
   {
     "name": "template10",
     "path": "/template10",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template10\\\\index.vue",
     "chunkName": "pages/template10/index",
-    "url": "/template10"
+    "url": "/template10",
+    "_name": "_182942dc"
   },
   {
     "name": "template11",
     "path": "/template11",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template11\\\\index.vue",
     "chunkName": "pages/template11/index",
-    "url": "/template11"
+    "url": "/template11",
+    "_name": "_08c5f81e"
   },
   {
     "name": "template12",
     "path": "/template12",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template12\\\\index.vue",
     "chunkName": "pages/template12/index",
-    "url": "/template12"
+    "url": "/template12",
+    "_name": "_034ea950"
   },
   {
     "name": "template13",
     "path": "/template13",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template13\\\\index.vue",
     "chunkName": "pages/template13/index",
-    "url": "/template13"
+    "url": "/template13",
+    "_name": "_0b004eaf"
   },
   {
     "name": "template14",
     "path": "/template14",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template14\\\\index.vue",
     "chunkName": "pages/template14/index",
-    "url": "/template14"
+    "url": "/template14",
+    "_name": "_12b1f40e"
   },
   {
     "name": "template15",
     "path": "/template15",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template15\\\\index.vue",
     "chunkName": "pages/template15/index",
-    "url": "/template15"
+    "url": "/template15",
+    "_name": "_1a63996d"
   },
   {
     "name": "template16",
     "path": "/template16",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template16\\\\index.vue",
     "chunkName": "pages/template16/index",
-    "url": "/template16"
+    "url": "/template16",
+    "_name": "_22153ecc"
   },
   {
     "name": "template5",
     "path": "/template5",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template5\\\\index.vue",
     "chunkName": "pages/template5/index",
-    "url": "/template5"
+    "url": "/template5",
+    "_name": "_283fa8e4"
   },
   {
     "name": "template6",
     "path": "/template6",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template6\\\\index.vue",
     "chunkName": "pages/template6/index",
-    "url": "/template6"
+    "url": "/template6",
+    "_name": "_18dc5e26"
   },
   {
     "name": "template7",
     "path": "/template7",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template7\\\\index.vue",
     "chunkName": "pages/template7/index",
-    "url": "/template7"
+    "url": "/template7",
+    "_name": "_09791368"
   },
   {
     "name": "template8",
     "path": "/template8",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template8\\\\index.vue",
     "chunkName": "pages/template8/index",
-    "url": "/template8"
+    "url": "/template8",
+    "_name": "_02f51bab"
   },
   {
     "name": "template9",
     "path": "/template9",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template9\\\\index.vue",
     "chunkName": "pages/template9/index",
-    "url": "/template9"
+    "url": "/template9",
+    "_name": "_0aa6c10a"
   },
   {
     "name": "template99",
     "path": "/template99",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\template99\\\\index.vue",
     "chunkName": "pages/template99/index",
-    "url": "/template99"
+    "url": "/template99",
+    "_name": "_a57b3a1e"
   },
   {
     "name": "termsandconditions",
     "path": "/termsandconditions",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\termsandconditions.vue",
     "chunkName": "pages/termsandconditions",
-    "url": "/termsandconditions"
+    "url": "/termsandconditions",
+    "_name": "_2da39202"
   },
   {
     "name": "index",
     "path": "/",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "url": "/"
+    "url": "/",
+    "_name": "_79ce8d6a"
   },
   {
     "name": "blog-slug",
     "path": "/blog/:slug",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\blog\\\\_slug.vue",
-    "chunkName": "pages/blog/_slug"
+    "chunkName": "pages/blog/_slug",
+    "_name": "_7cbcb23e"
   },
   {
     "name": "productos-slug",
     "path": "/productos/:slug",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productos\\\\_slug.vue",
-    "chunkName": "pages/productos/_slug"
+    "chunkName": "pages/productos/_slug",
+    "_name": "_4e72732e"
   },
   {
     "name": "productosHoko-slug",
     "path": "/productosHoko/:slug",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\productosHoko\\\\_slug.vue",
-    "chunkName": "pages/productosHoko/_slug"
+    "chunkName": "pages/productosHoko/_slug",
+    "_name": "_0d838783"
   },
   {
     "name": "wa-slug",
     "path": "/wa/:slug",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\index.vue",
-    "chunkName": "pages/wa/_slug/index"
+    "chunkName": "pages/wa/_slug/index",
+    "_name": "_48206769"
   },
   {
     "name": "wa-slug-blog",
     "path": "/wa/:slug?/blog",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\blog\\\\index.vue",
-    "chunkName": "pages/wa/_slug/blog/index"
+    "chunkName": "pages/wa/_slug/blog/index",
+    "_name": "_533f3072"
   },
   {
     "name": "wa-slug-micompra",
     "path": "/wa/:slug?/micompra",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\micompra.vue",
-    "chunkName": "pages/wa/_slug/micompra"
+    "chunkName": "pages/wa/_slug/micompra",
+    "_name": "_b7844b5a"
   },
   {
     "name": "wa-slug-blog-slugBlog",
     "path": "/wa/:slug?/blog/:slugBlog",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\blog\\\\_slugBlog.vue",
-    "chunkName": "pages/wa/_slug/blog/_slugBlog"
+    "chunkName": "pages/wa/_slug/blog/_slugBlog",
+    "_name": "_47e36dc1"
   },
   {
     "name": "wa-slug-productos-slugProduct",
     "path": "/wa/:slug?/productos/:slugProduct?",
     "component": "F:\\\\Documentos\\\\Komercia\\\\template-nuxt-dokku\\\\pages\\\\wa\\\\_slug\\\\productos\\\\_slugProduct.vue",
-    "chunkName": "pages/wa/_slug/productos/_slugProduct"
+    "chunkName": "pages/wa/_slug/productos/_slugProduct",
+    "_name": "_ee0775a2"
   }
 ]

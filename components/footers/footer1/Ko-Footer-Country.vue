@@ -38,7 +38,7 @@
           <p class="textId ml-5">
             <strong>Hoko</strong>: {{ dataHoko.statehoko == 0 ? 'NO' : 'SI' }}
           </p>
-          <p class="textId ml-5"><strong>V</strong>: 7/13/2023</p>
+          <p class="textId ml-5"><strong>V</strong>: 09/18/2023</p>
         </div>
       </div>
       <KoLanguage />
@@ -55,8 +55,14 @@ export default {
     KoLanguage,
   },
   props: {
-    dataStore: Object,
-    valueWa: Boolean,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    valueWa: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {

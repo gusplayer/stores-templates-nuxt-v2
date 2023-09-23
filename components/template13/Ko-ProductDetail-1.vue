@@ -259,7 +259,7 @@
                   class="btn"
                   v-if="
                     !spent &&
-                    this.salesData.estado == true &&
+                    this.salesData.estado &&
                     (data.info.tipo_servicio == null ||
                       data.info.tipo_servicio == '0')
                   "
@@ -722,7 +722,7 @@ export default {
       json = JSON.stringify(json)
       if (json) {
         this.$store.dispatch('SEND_ADD_TO_CART', 2)
-        if (this.layourUnicentro == true) {
+        if (this.layourUnicentro) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`

@@ -45,8 +45,9 @@ export default {
     K013Banner: () => import('@/components/template13/Ko13-Banner.vue'),
     K013ProductList: () =>
       import('@/components/template13/Ko13-ProductList.vue'),
-    K013InfoText: () => import('@/components/template13/Ko13-information.vue'),
-    K013Information: () => import('@/components/template13/Ko13-infoText.vue'),
+    K013InfoText: () => import('@/components/template13/Ko13-infoText.vue'),
+    K013Information: () =>
+      import('@/components/template13/Ko13-information.vue'),
     K013Newsletter: () => import('@/components/template13/Ko13-Newsletter.vue'),
   },
   layout: 'default',
@@ -154,7 +155,7 @@ export default {
               break
           }
         } else {
-          if (e && e.data && e.data.returnHome == true) {
+          if (e && e.data && e.data.returnHome) {
             this.$router.push({
               path: '/',
             })

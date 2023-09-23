@@ -292,7 +292,7 @@ export default {
       }
       json = JSON.stringify(json)
       if (json) {
-        if (this.layourUnicentro == true) {
+        if (this.layourUnicentro) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
           // if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
           //   window.fbq('track', 'InitiateCheckout')

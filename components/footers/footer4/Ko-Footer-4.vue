@@ -1,38 +1,36 @@
 <template>
   <div
+    v-if="settingByTemplate7 && settingByTemplate7[0].setting7Footer"
     :style="[
       settingByTemplate7[0].setting7Footer,
       settingByTemplate7[0].setting7General,
+      {
+        '--font-style-1':
+          settingByTemplate7 &&
+          settingByTemplate7[0].setting7General &&
+          settingByTemplate7[0].setting7General.fount_1
+            ? settingByTemplate7[0].setting7General.fount_1
+            : 'David libre',
+      },
     ]"
-    v-if="settingByTemplate7 && settingByTemplate7[0].setting7Footer"
   >
     <div
-      class="footer-container"
       ref="background"
+      class="footer-container"
       :style="
-        this.settingByTemplate7[0].setting7Footer.img_background
-          ? `background-image: url(${this.settingByTemplate7[0].setting7Footer['--url_img']})`
+        settingByTemplate7[0].setting7Footer.img_background
+          ? `background-image: url(${settingByTemplate7[0].setting7Footer['--url_img']})`
           : 'background-image: none;'
       "
     >
-      <div
-        class="footer-content"
-        :style="{
-          '--font-style-1':
-            this.settingByTemplate7 &&
-            this.settingByTemplate7[0].setting7General &&
-            this.settingByTemplate7[0].setting7General.fount_1
-              ? this.settingByTemplate7[0].setting7General.fount_1
-              : 'David libre',
-        }"
-      >
+      <div class="footer-content">
         <div class="footer-content-items">
           <div class="footer-content-logo">
             <img
-              class="footer-logo"
               v-lazy="
-                `${this.$store.state.urlKomercia}/logos/${this.dataStore.tienda.logo}`
+                `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
               "
+              class="footer-logo"
               alt="logo_tienda"
             />
           </div>
@@ -41,24 +39,25 @@
               v-for="(item, index) in secciones"
               :key="`${index}${item.name}`"
             >
-              <nuxt-link :to="item.path" v-if="item.path" class="btn">
+              <nuxt-link v-if="item.path" :to="item.path" class="btn">
                 {{ $t(`${item.name}`) }}
               </nuxt-link>
               <nuxt-link
-                :to="item.href"
                 v-else-if="item.href && listArticulos > 0"
+                :to="item.href"
                 class="btn"
-                >{{ $t(`${item.name}`) }}</nuxt-link
               >
+                {{ $t(`${item.name}`) }}
+              </nuxt-link>
             </div>
           </div>
-          <KoSocialNet :dataStore="dataStore"></KoSocialNet>
+          <KoSocialNet :data-store="dataStore" />
         </div>
         <div class="content-Pliticas-Terminos">
           <button
+            v-if="dataStore.politicas"
             class="btn"
             @click="OpenModalPolitics"
-            v-if="dataStore.politicas"
           >
             {{ $t('footer_politicasyterminos') }}
           </button>
@@ -72,55 +71,48 @@
             rel="noreferrer noopener"
           >
             <img
+              v-if="logo"
               v-lazy="
                 `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
               "
-              v-if="logo"
               class="logo2"
               alt="Logo Img"
             />
             <img
+              v-else
               v-lazy="
                 `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
               "
-              v-else
               class="logo2"
               alt="Logo Img"
             />
           </a>
         </div>
       </div>
-      <div v-if="showModal">
-        <div class="modal" v-if="dataStore.politicas">
-          <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
-        </div>
+      <div v-if="showModal && dataStore.politicas" class="modal">
+        <KoTermsConditions :data-store="dataStore" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import KoSocialNet from '../../../components/template7/Ko-Social-Networks'
-import KoTermsConditions from '../../../components/footers/ko-TermsAndConditions'
-
 export default {
+  name: 'Ko4Footer',
   components: {
-    KoSocialNet,
-    KoTermsConditions,
+    KoSocialNet: () => import('@/components/template7/Ko-Social-Networks.vue'),
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
-  name: 'Ko-Footer-4',
   props: {
-    dataStore: Object,
-    settingByTemplate7: Array,
-  },
-  mounted() {
-    if (
-      this.settingByTemplate7 &&
-      this.settingByTemplate7[0].setting7Footer &&
-      !this.settingByTemplate7[0].setting7Footer.img_background
-    ) {
-      this.setLogo()
-    }
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate7: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -157,23 +149,6 @@ export default {
       return this.$store.state.modalpolitics05
     },
   },
-  methods: {
-    OpenModalPolitics() {
-      this.$store.state.modalpolitics05 = true
-    },
-    setLogo() {
-      let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
-      )
-      let colorArray = color.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
-      }
-    },
-  },
   watch: {
     settingByTemplate7f() {
       if (
@@ -191,6 +166,32 @@ export default {
         } else {
           this.logo = false
         }
+      }
+    },
+  },
+  mounted() {
+    if (
+      this.settingByTemplate7 &&
+      this.settingByTemplate7[0].setting7Footer &&
+      !this.settingByTemplate7[0].setting7Footer.img_background
+    ) {
+      this.setLogo()
+    }
+  },
+  methods: {
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
+    },
+    setLogo() {
+      let color = getComputedStyle(this.$refs.background).getPropertyValue(
+        '--background_color_1'
+      )
+      let colorArray = color.split(',')
+      let colorInt = parseInt(colorArray[2])
+      if (colorInt > 50) {
+        this.logo = true
+      } else {
+        this.logo = false
       }
     },
   },

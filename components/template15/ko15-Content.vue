@@ -14,7 +14,7 @@
         <div class="wrapper-left">
           <img
             v-lazy="idCloudinaryBanner(content.values[0].img, 'banner')"
-            class="img-left max-w-[560px] max-h-[387px]"
+            class="img-left"
             :style="`border-radius: ${settingGeneral?.radius};`"
             alt="imagen-1"
           />
@@ -51,7 +51,7 @@
         <div class="wrapper-left">
           <img
             v-lazy="idCloudinaryBanner(content.values[1].img, 'banner')"
-            class="img-left max-w-[560px] max-h-[387px]"
+            class="img-left"
             :style="`border-radius: ${settingGeneral?.radius};`"
             alt="imagen-1"
           />
@@ -88,7 +88,7 @@
         <div class="wrapper-left">
           <img
             v-lazy="idCloudinaryBanner(content.values[2].img, 'banner')"
-            class="img-left max-w-[560px] max-h-[387px]"
+            class="img-left"
             :style="`border-radius: ${settingGeneral?.radius};`"
             alt="imagen-1"
           />

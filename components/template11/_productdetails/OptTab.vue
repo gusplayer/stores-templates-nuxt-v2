@@ -2,44 +2,44 @@
   <div class="content-opt-tab">
     <div class="head-content">
       <div
+        v-if="contentDescription"
         class="tab"
-        @click="selectTag1"
         :class="selecttag == 1 ? 'show-select-active' : ''"
+        @click="selectTag1"
       >
         <p class="tittle">{{ $t('productdetail_description') }}</p>
       </div>
       <div
         class="tab"
-        @click="selectTag2"
         :class="selecttag == 2 ? 'show-select-active' : ''"
+        @click="selectTag2"
       >
         <p class="tittle">{{ $t('productdetail_opcionesPago') }}</p>
       </div>
       <div
+        v-if="envios.envio_metodo"
         class="tab"
-        @click="selectTag3"
         :class="selecttag == 3 ? 'show-select-active' : ''"
+        @click="selectTag3"
       >
         <p class="tittle">{{ $t('productdetail_opinionesEnvio') }}</p>
       </div>
     </div>
 
     <div class="content-tab">
-      <div class="editor" v-if="focusbtn1">
-        <div v-if="data.info.descripcion">
-          <el-tiptap
-            v-model="data.info.descripcion"
-            :extensions="extensions"
-            :spellcheck="false"
-            :readonly="true"
-            :charCounterCount="false"
-            :tooltip="false"
-            :showMenubar="false"
-            :bubble="false"
-          />
-        </div>
+      <div v-if="focusbtn1 && contentDescription" class="editor">
+        <el-tiptap
+          v-model="contentDescription"
+          :extensions="extensions"
+          :spellcheck="false"
+          :readonly="true"
+          :tooltip="false"
+          :bubble="false"
+          :showMenubar="false"
+          :charCounterCount="false"
+        />
       </div>
-      <div class="item-content opcpago" v-if="focusbtn2">
+      <div v-if="focusbtn2" class="item-content opcpago">
         <ul>
           <li v-if="mediospago.consignacion == 1">
             <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
@@ -237,30 +237,33 @@
           </li>
         </ul>
       </div>
-      <div class="item-content opcenvio" v-if="focusbtn3">
-        <div class="deliverys section" v-if="this.envios.envio_metodo">
+      <div
+        v-if="focusbtn3 && envios.envio_metodo"
+        class="item-content opcenvio"
+      >
+        <div class="deliverys section">
           <div class="content">
             <h3 class="title-section">
               {{ $t('productdetail_opinionesEnvio') }}
             </h3>
           </div>
           <div
-            v-if="this.envios.envio_metodo === 'precio_ciudad'"
+            v-if="envios.envio_metodo === 'precio_ciudad'"
             class="wrapper-method"
           >
             <h4 class="capitalize">
-              • {{ this.envios.envio_metodo.replace('_', ' por ') }}
+              • {{ envios.envio_metodo.replace('_', ' por ') }}
             </h4>
             <p class="description-method">
               {{ $t('productdetail_opinionesEnvioMsg1') }}
             </p>
           </div>
           <div
-            v-if="this.envios.envio_metodo === 'tarifa_plana'"
+            v-if="envios.envio_metodo === 'tarifa_plana'"
             class="wrapper-method"
           >
             <h4 class="capitalize">
-              {{ this.envios.envio_metodo.replace('_', ' ') }}
+              {{ envios.envio_metodo.replace('_', ' ') }}
             </h4>
             <p class="description-method">
               {{ $t('productdetail_opinionesEnvioMsg2') }}
@@ -268,7 +271,7 @@
             <p class="price">
               {{ $t('cart_precio') }}
               {{
-                this.envios.valor
+                envios.valor
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -276,28 +279,19 @@
               }}
             </p>
           </div>
-          <div
-            v-if="this.envios.envio_metodo === 'precio'"
-            class="wrapper-method"
-          >
+          <div v-if="envios.envio_metodo === 'precio'" class="wrapper-method">
             <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
             <p class="description-method">
               {{ $t('productdetail_precioTotalCompraMsg') }}
             </p>
           </div>
-          <div
-            v-if="this.envios.envio_metodo === 'gratis'"
-            class="wrapper-method"
-          >
+          <div v-if="envios.envio_metodo === 'gratis'" class="wrapper-method">
             <h4>{{ $t('productdetail_gratis') }}</h4>
             <p class="description-method">
               {{ $t('productdetail_gratisMsg') }}
             </p>
           </div>
-          <div
-            v-if="this.envios.envio_metodo === 'sinEnvio'"
-            class="wrapper-method"
-          >
+          <div v-if="envios.envio_metodo === 'sinEnvio'" class="wrapper-method">
             <p class="description-method">Pasas a recoger tu compra</p>
           </div>
         </div>
@@ -306,18 +300,35 @@
   </div>
 </template>
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 export default {
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      }
+    },
+  },
   mixins: [currency, extensions],
   props: {
-    dataStore: Object,
-    data: {},
-    envio: {},
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    data: {
+      type: Object,
+      required: true,
+    },
+    envio: {
+      type: Object,
+      required: true,
+    },
   },
-  mounted() {},
   data() {
     return {
+      contentDescription: this.data?.info?.descripcion,
       medioEnvio: '',
       envioproducto: '',
       selecttag: 1,
@@ -326,6 +337,7 @@ export default {
       focusbtn3: false,
     }
   },
+
   computed: {
     mediospago() {
       return this.dataStore.medios_pago
@@ -341,18 +353,13 @@ export default {
       }
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },
   },
-  filters: {
-    capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
-      }
-    },
+  mounted() {
+    this.contentDescription ? this.selectTag1() : this.selectTag2()
   },
   methods: {
     selectTag1() {

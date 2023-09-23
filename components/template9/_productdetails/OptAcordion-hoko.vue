@@ -1,17 +1,19 @@
 <template>
   <div class="content-acordion">
-    <button class="accordion">{{ $t('productdetail_description') }}</button>
-    <div class="panel">
-      <div class="editor" v-if="data.description">
+    <button v-if="contentDescription" class="accordion">
+      {{ $t('productdetail_description') }}
+    </button>
+    <div v-if="contentDescription" class="panel">
+      <div class="editor">
         <el-tiptap
-          v-model="data.description"
+          v-model="contentDescription"
           :extensions="extensions"
           :spellcheck="false"
           :readonly="true"
-          :charCounterCount="false"
           :tooltip="false"
-          :showMenubar="false"
           :bubble="false"
+          :charCounterCount="false"
+          :showMenubar="false"
         />
       </div>
     </div>
@@ -173,7 +175,7 @@
           </a>
         </li>
         <li v-if="mediospago.tu_compra == 1">
-          <h4>Tucompra</h4>
+          <h4>TuCompra</h4>
           <p>
             {{ $t('text_pago_Tucompra') }}
           </p>
@@ -191,7 +193,7 @@
           </a>
         </li>
         <li v-if="mediospago.flow == 1">
-          <h4>Tucompra</h4>
+          <h4>TuCompra</h4>
           <p>
             {{ $t('text_pago_flowInfo') }}
           </p>
@@ -213,14 +215,56 @@
   </div>
 </template>
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 export default {
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      }
+    },
+  },
   mixins: [extensions, currency],
   props: {
-    dataStore: Object,
-    data: {},
-    envio: {},
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    data: {
+      type: Object,
+      required: true,
+    },
+    envio: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  data() {
+    return {
+      medioEnvio: '',
+      envioproducto: '',
+      contentDescription: this.data?.descripcion,
+    }
+  },
+  computed: {
+    mediospago() {
+      return this.dataStore.medios_pago
+    },
+    activeClass() {
+      if (this.data.description == '' || this.data.description == null) {
+        return true
+      } else {
+        return false
+      }
+    },
+    envios() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
+      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
+      return this.data.medioEnvio
+    },
   },
   mounted() {
     var acc = document.getElementsByClassName('accordion')
@@ -236,37 +280,6 @@ export default {
         }
       })
     }
-  },
-  data() {
-    return {
-      medioEnvio: '',
-      envioproducto: '',
-    }
-  },
-  computed: {
-    mediospago() {
-      return this.dataStore.medios_pago
-    },
-    activeClass() {
-      if (this.data.description == '' || this.data.description == null) {
-        return true
-      } else {
-        return false
-      }
-    },
-    envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
-      return this.data.medioEnvio
-    },
-  },
-  filters: {
-    capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
-      }
-    },
   },
 }
 </script>

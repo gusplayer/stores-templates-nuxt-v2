@@ -8,48 +8,48 @@
       },
     ]"
   >
-    <K016Banner
+    <K016-banner
       v-if="settingByTemplate16?.banner?.visible"
       id="K16_banner"
       :key="Ko16BannerRendering"
       v-bind="componentsProps"
     />
-    <K016content
+    <K016-content
       v-if="settingByTemplate16?.content?.visible"
       id="K16_content"
       v-bind="componentsProps"
     />
-    <K016Offers
+    <K016-offers
       v-if="settingByTemplate16?.offers?.visible"
       id="K16_offers"
       v-bind="componentsProps"
     />
-    <K016productListHome
+    <K016-productListHome
       v-if="settingByTemplate16?.listProductsHome?.visible"
       id="K16_listProductsHome"
       v-bind="componentsProps"
     />
-    <K016information
+    <K016-information
       v-if="settingByTemplate16?.information?.visible"
       id="K16_information"
       v-bind="componentsProps"
     />
-    <K016listBlogHome
+    <K016-listBlogHome
       v-if="settingByTemplate16?.listBlogHome?.visible"
       id="kListBlogHomeX"
       v-bind="componentsProps"
     />
-    <K016Logos
+    <K016-logos
       v-if="settingByTemplate16?.logos?.visible"
       id="K16_logos"
       v-bind="componentsProps"
     />
-    <K016categories
+    <K016-categories
       v-if="settingByTemplate16?.categories?.visible"
       id="K16_categories"
       v-bind="componentsProps"
     />
-    <K016informationStore
+    <K016-informationStore
       v-if="settingByTemplate16?.informationStore?.visible"
       id="K16_informationStore"
       v-bind="componentsProps"
@@ -63,17 +63,17 @@ export default {
   name: 'KoTemplate16',
   components: {
     K016Banner: () => import('@/components/template16/ko16-Banner.vue'),
-    K016content: () => import('@/components/template16/ko16-Content.vue'),
+    K016Content: () => import('@/components/template16/ko16-Content.vue'),
     K016Offers: () => import('@/components/template16/ko16-Offers.vue'),
-    K016productListHome: () =>
+    K016ProductListHome: () =>
       import('@/components/template16/ko16-productListHome.vue'),
-    K016information: () =>
+    K016Information: () =>
       import('@/components/template16/ko16-Information.vue'),
-    K016listBlogHome: () =>
+    K016ListBlogHome: () =>
       import('@/components/template16/ko16-listBlogHome.vue'),
     K016Logos: () => import('@/components/template16/ko16-logos.vue'),
-    K016categories: () => import('@/components/template16/ko16-Categories.vue'),
-    K016informationStore: () =>
+    K016Categories: () => import('@/components/template16/ko16-Categories.vue'),
+    K016InformationStore: () =>
       import('@/components/template16/ko16-informationStore.vue'),
   },
   layout: 'default',
@@ -128,7 +128,6 @@ export default {
         e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 16) {
-          console.log(e.data.component)
           this.$store.commit('SET_CURRENTSETTING16', e.data)
           if (e.data.component == 'banner') {
             this.Ko16BannerRendering += 1
@@ -183,6 +182,12 @@ export default {
             case 'newsletter':
               this.moverseA('K16_informationStore')
               break
+            case 'listBlogHome':
+              this.moverseA('kListBlogHomeX')
+              break
+            case 'cardBlog':
+              this.moverseA('kListBlogHomeX')
+              break
             case 'detailsProducts':
               if (this.fullProducts) {
                 this.$router.push({
@@ -200,19 +205,9 @@ export default {
                 path: '/contacto',
               })
               break
-            case 'listBlogHome':
-              this.$router.push({
-                path: '/blog',
-              })
-              break
-            case 'cardBlog':
-              this.$router.push({
-                path: '/blog',
-              })
-              break
           }
         } else {
-          if (e && e.data && e.data.returnHome == true) {
+          if (e && e.data && e.data.returnHome) {
             this.$router.push({
               path: '/',
             })

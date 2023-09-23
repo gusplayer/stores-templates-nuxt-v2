@@ -1,14 +1,14 @@
 exports.ids = [337];
 exports.modules = {
 
-/***/ 1105:
+/***/ 1090:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/index.vue?vue&type=template&id=63160886&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/index.vue?vue&type=template&id=e9dbbc62&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,7 +18,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/productosHoko/index.vue?vue&type=template&id=63160886&
+// CONCATENATED MODULE: ./pages/productosHoko/index.vue?vue&type=template&id=e9dbbc62&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(9);
@@ -28,10 +28,10 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var productosHokovue_type_script_lang_js_ = ({
   name: 'ProductHokoIndex',
   components: {
-    K05ProductListHoko: () => __webpack_require__.e(/* import() */ 14).then(__webpack_require__.bind(null, 1217)),
-    K09ProductListHoko: () => __webpack_require__.e(/* import() */ 168).then(__webpack_require__.bind(null, 1239)),
-    K11ProductListHoko: () => __webpack_require__.e(/* import() */ 58).then(__webpack_require__.bind(null, 1148)),
-    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1099))
+    K05ProductListHoko: () => __webpack_require__.e(/* import() */ 16).then(__webpack_require__.bind(null, 1209)),
+    K09ProductListHoko: () => __webpack_require__.e(/* import() */ 183).then(__webpack_require__.bind(null, 1232)),
+    K11ProductListHoko: () => __webpack_require__.e(/* import() */ 61).then(__webpack_require__.bind(null, 1135)),
+    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 1084))
   },
   data() {
     return {
@@ -110,7 +110,7 @@ var external_vuex_ = __webpack_require__(9);
           } else if (e.data.template == 10) {
             this.$store.commit('SET_CURRENTSETTING10', e.data);
           }
-        } else if (e && e.data && e.data.returnHome == true) {
+        } else if (e && e.data && e.data.returnHome) {
           this.$router.push({
             path: '/'
           });

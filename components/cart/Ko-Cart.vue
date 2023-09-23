@@ -498,7 +498,10 @@ export default {
   },
   mixins: [idCloudinary, currency, expiredDate],
   props: {
-    dataStore: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
 
   data() {

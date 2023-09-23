@@ -23,8 +23,9 @@
                 :to="item.path"
                 v-if="item.path"
                 class="header-text-center"
-                >{{ $t(`${item.name}`) }}</nuxt-link
               >
+                {{ $t(`${item.name}`) }}
+              </nuxt-link>
               <div v-else>
                 <div
                   v-if="dataStore.categorias.length > 0"

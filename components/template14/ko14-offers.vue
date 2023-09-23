@@ -13,8 +13,8 @@
       >
         <div class="wrapper-left">
           <img
-            class="img-left max-w-[416px] max-h-[238px]"
             v-lazy="idCloudinaryBanner(offers.values[0].img, 'banner')"
+            class="img-left"
             alt="imagen-1"
           />
           <div
@@ -33,15 +33,15 @@
             <div
               class="border h-2 mt-5 md:mt-10 border-hover"
               :style="`border-color: ${offers.values[0].color_border};`"
-            />
+            ></div>
           </div>
         </div>
       </a>
       <a :href="offers.values[1]?.url_redirect ?? ''" rel="noreferrer noopener">
         <div class="wrapper-center">
           <img
-            class="img-center max-w-[416px] max-h-[238px]"
             v-lazy="idCloudinaryBanner(offers.values[1].img, 'banner')"
+            class="img-center"
             alt="imagen-2"
           />
           <div
@@ -60,15 +60,15 @@
             <div
               class="border h-2 mt-5 md:mt-10 border-hover"
               :style="`border-color: ${offers.values[1].color_border};`"
-            />
+            ></div>
           </div>
         </div>
       </a>
       <a :href="offers.values[2]?.url_redirect ?? ''" rel="noreferrer noopener">
         <div class="wrapper-right">
           <img
-            class="img-right max-w-[416px] max-h-[238px]"
             v-lazy="idCloudinaryBanner(offers.values[2].img, 'banner')"
+            class="img-right"
             alt="imagen-3"
           />
           <div
@@ -87,7 +87,7 @@
             <div
               class="border h-2 mt-5 md:mt-10 border-hover"
               :style="`border-color: ${offers.values[2].color_border};`"
-            />
+            ></div>
           </div>
         </div>
       </a>
@@ -97,13 +97,22 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko15-Offers',
-  props: {
-    offers: Object,
-    settingGeneral: Object,
-    dataStore: Object,
-  },
+  name: 'Ko15Offers',
   mixins: [idCloudinary],
+  props: {
+    offers: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 <style scoped>

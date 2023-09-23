@@ -130,7 +130,7 @@ export default {
   },
   methods: {
     submitNewsletter() {
-      if (this.checked == true) {
+      if (this.checked) {
         this.$refs.validate
           .validate()
           .then((response) => {
@@ -171,7 +171,6 @@ export default {
       }
     },
   },
-  watch: {},
 }
 </script>
 

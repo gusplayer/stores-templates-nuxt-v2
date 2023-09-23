@@ -1,14 +1,14 @@
-exports.ids = [195];
+exports.ids = [210];
 exports.modules = {
 
-/***/ 1117:
+/***/ 1102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template9/index.vue?vue&type=template&id=7b257c6c&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template9/index.vue?vue&type=template&id=530c746b&
 var render = function render() {
   var _vm$settingByTemplate, _vm$settingByTemplate2, _vm$settingByTemplate3, _vm$settingByTemplate4, _vm$settingByTemplate5, _vm$settingByTemplate6, _vm$settingByTemplate7, _vm$settingByTemplate8, _vm$settingByTemplate9, _vm$settingByTemplate10, _vm$settingByTemplate11, _vm$settingByTemplate12, _vm$dataHoko, _vm$settingByTemplate13, _vm$settingByTemplate14, _vm$fullProducts, _vm$listArticulos, _vm$settingByTemplate15, _vm$settingByTemplate16, _vm$settingByTemplate17, _vm$settingByTemplate18, _vm$settingByTemplate19, _vm$settingByTemplate20;
   var _vm = this,
@@ -52,7 +52,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template9/index.vue?vue&type=template&id=7b257c6c&
+// CONCATENATED MODULE: ./pages/template9/index.vue?vue&type=template&id=530c746b&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(9);
@@ -62,13 +62,13 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template9vue_type_script_lang_js_ = ({
   name: 'KoTemplate9',
   components: {
-    K09Banner: () => __webpack_require__.e(/* import() */ 159).then(__webpack_require__.bind(null, 1230)),
-    K09Offers: () => __webpack_require__.e(/* import() */ 163).then(__webpack_require__.bind(null, 1234)),
-    K09SliderHoko: () => __webpack_require__.e(/* import() */ 169).then(__webpack_require__.bind(null, 1241)),
-    K09ProductList: () => __webpack_require__.e(/* import() */ 166).then(__webpack_require__.bind(null, 1237)),
-    K09Blog: () => __webpack_require__.e(/* import() */ 160).then(__webpack_require__.bind(null, 1231)),
-    K09Wrapper: () => __webpack_require__.e(/* import() */ 171).then(__webpack_require__.bind(null, 1243)),
-    K09Newsletter: () => __webpack_require__.e(/* import() */ 162).then(__webpack_require__.bind(null, 1233))
+    K09Banner: () => __webpack_require__.e(/* import() */ 174).then(__webpack_require__.bind(null, 1223)),
+    K09Offers: () => __webpack_require__.e(/* import() */ 178).then(__webpack_require__.bind(null, 1227)),
+    K09SliderHoko: () => __webpack_require__.e(/* import() */ 184).then(__webpack_require__.bind(null, 1234)),
+    K09ProductList: () => __webpack_require__.e(/* import() */ 181).then(__webpack_require__.bind(null, 1230)),
+    K09Blog: () => __webpack_require__.e(/* import() */ 175).then(__webpack_require__.bind(null, 1224)),
+    K09Wrapper: () => __webpack_require__.e(/* import() */ 186).then(__webpack_require__.bind(null, 1236)),
+    K09Newsletter: () => __webpack_require__.e(/* import() */ 177).then(__webpack_require__.bind(null, 1226))
   },
   layout: 'default',
   data() {
@@ -107,7 +107,6 @@ var external_vuex_ = __webpack_require__(9);
   methods: {
     addEventListenerTemplate09(e) {
       if (e.origin.includes('https://panel.komercia.co') || e.origin.includes('http://localhost:8080')) {
-        console.log(e.data);
         if (e && e.data && e.data.component && e.data.template == 9) {
           this.$store.commit('SET_CURRENTSETTING09', e.data);
           if (e.data.component == 'banner') {
@@ -158,7 +157,7 @@ var external_vuex_ = __webpack_require__(9);
               break;
           }
         } else {
-          if (e && e.data && e.data.returnHome == true) {
+          if (e && e.data && e.data.returnHome) {
             this.$router.push({
               path: '/'
             });

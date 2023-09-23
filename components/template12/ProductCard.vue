@@ -1,16 +1,14 @@
 <template>
   <div
+    v-if="product"
     class="wrapper_card product_container"
     @mouseenter="() => (isHover = true)"
     @mouseleave="() => (isHover = false)"
-    v-if="product"
   >
     <div
       class="content-img-prodcut"
       :class="
-        settingByTemplate12.responsiveImages == true
-          ? 'img_visileRes'
-          : 'img_normal'
+        settingByTemplate12.responsiveImages ? 'img_visileRes' : 'img_normal'
       "
     >
       <img
@@ -20,9 +18,7 @@
         class="product-image"
         alt="Product Img"
         :class="
-          settingByTemplate12.roundedImages == true
-            ? 'img_rounded'
-            : 'img_normal'
+          settingByTemplate12.roundedImages ? 'img_rounded' : 'img_normal'
         "
       />
       <img
@@ -32,9 +28,7 @@
         class="product-image product-image-soldOut"
         alt="Product Img soldOut"
         :class="
-          settingByTemplate12.roundedImages == true
-            ? 'img_rounded'
-            : 'img_normal'
+          settingByTemplate12.roundedImages ? 'img_rounded' : 'img_normal'
         "
       />
     </div>
@@ -86,16 +80,19 @@ import currency from '../../mixins/formatCurrent'
 export default {
   name: 'ProductCard',
   mixins: [idCloudinary, currency],
-  props: { product: Object, dataStore: Object, settingByTemplate12: Object },
-  mounted() {
-    this.idSlug = this.product.id
-    this.productPrice()
-    if (
-      this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
-    ) {
-      this.estadoCart = true
-    }
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate12: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -171,6 +168,21 @@ export default {
         return !this.product.stock
       }
     },
+  },
+  watch: {
+    productsCarts() {
+      this.getDataProduct()
+    },
+  },
+  mounted() {
+    this.idSlug = this.product.id
+    this.productPrice()
+    if (
+      this.product.con_variante &&
+      this.product.variantes[0].variantes !== '[object Object]'
+    ) {
+      this.estadoCart = true
+    }
   },
   methods: {
     getDataProduct() {
@@ -264,7 +276,7 @@ export default {
           ) {
             let arrPrice = []
             this.product.combinaciones.find((products) => {
-              if (products.precio && products.estado == true) {
+              if (products.precio && products.estado) {
                 arrPrice.push(products.precio)
               }
             })
@@ -280,11 +292,6 @@ export default {
           }
         }
       }
-    },
-  },
-  watch: {
-    productsCarts() {
-      this.getDataProduct()
     },
   },
 }

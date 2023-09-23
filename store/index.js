@@ -420,7 +420,7 @@ export const actions = {
     if (idWapi) {
       await handleWapi(commit, dispatch, idWapi)
     } else {
-      await handleKomercia(id, template, commit, dispatch, state)
+      await handleKomercia(id, template, subdomain, commit, dispatch, state)
     }
 
     await handleDataStore(state, commit)
@@ -679,7 +679,7 @@ export const actions = {
         url: `${state.urlKomercia}/api/access-code/${params.id_tienda}?code=${params.pwd}`,
         headers: state.configAxios,
       })
-      if (data && data.code === true && data.estado === 200) {
+      if (data && data.code && data.estado === 200) {
         commit('SET_STATE_MODAL_PWD', true)
         return { success: true, data: data }
       } else {
@@ -1134,6 +1134,7 @@ async function getIdData(state, req) {
     parts[1] == 'localhost:3000' ||
     parts[1] == 'unicentrovillavicencio'
   ) {
+    // Nueva ruta de Daniel para traer informacion de la tienda, creados con misSitios (Template 15) no funciona
     id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
       name: `${subdomain}.komercia.co/`,
     })
@@ -1141,10 +1142,10 @@ async function getIdData(state, req) {
     id = id.data.data.id
   } else {
     let getDomain = full.split('/?')
-    let domain =
+    let domainURL =
       getDomain.length > 1 ? `https://${getDomain[0]}` : `https://${getDomain}`
     id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
-      name: domain,
+      name: domainURL,
     })
     template = id.data.data.template
     id = id.data.data.id
@@ -1163,7 +1164,14 @@ async function handleWapi(commit, dispatch, idWapi) {
   commit('SET_STATE_WAPIME', true)
 }
 
-async function handleKomercia(id, template, commit, dispatch, state) {
+async function handleKomercia(
+  id,
+  template,
+  subdomain,
+  commit,
+  dispatch,
+  state
+) {
   if (id) {
     commit('SET_TEMPLATE_STORE', template)
 
@@ -1181,14 +1189,19 @@ async function handleKomercia(id, template, commit, dispatch, state) {
       template == 14 ||
       template == 16
     ) {
+      // Andres
       if (state?.dataStore?.tienda) {
         await dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', state.dataStore.tienda)
       }
-    } else if (template == 15) {
+    }
+    // Daniel
+    else if (template == 15) {
       if (state?.dataStore?.tienda) {
         await dispatch('GET_SETTINGS_BY_TEMPLATE_AWS', state.dataStore.tienda)
       }
-    } else if (template == 5 || template == 6 || template == 99) {
+    }
+    //Cristiano
+    else if (template == 5 || template == 6 || template == 99) {
       if (state?.dataStore?.tienda) {
         await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
         await commit('SET_STATE_WAPIME', false)

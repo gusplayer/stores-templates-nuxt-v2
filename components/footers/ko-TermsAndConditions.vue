@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div class="modal-content">
     <div class="modal-header">
@@ -7,72 +8,74 @@
       <span class="close" @click="closeModalPolitics">&times;</span>
     </div>
     <div class="content-items-modal">
-      <button
-        class="content-modal accordion"
-        v-if="this.dataStore.politicas.datos"
-      >
+      <button v-if="dataStore.politicas.datos" class="content-modal accordion">
         {{ $t('footer_politicaTratamientos') }}
       </button>
       <div
+        v-if="
+          dataStore.politicas.datos && isSafeHTML(dataStore.politicas.datos)
+        "
         class="panel"
-        v-html="this.dataStore.politicas.datos"
-        v-if="this.dataStore.politicas.datos"
+        v-html="dataStore.politicas.datos"
       ></div>
       <button
+        v-if="dataStore.politicas.garantia"
         class="content-modal accordion"
-        v-if="this.dataStore.politicas.garantia"
       >
         {{ $t('footer_politicaGarantia') }}
       </button>
+
       <div
+        v-if="
+          dataStore.politicas.garantia &&
+          isSafeHTML(dataStore.politicas.garantia)
+        "
         class="panel"
-        v-html="this.dataStore.politicas.garantia"
-        v-if="this.dataStore.politicas.garantia"
+        v-html="dataStore.politicas.garantia"
       ></div>
       <button
+        v-if="dataStore.politicas.devolucion"
         class="content-modal accordion"
-        v-if="this.dataStore.politicas.devolucion"
       >
         {{ $t('footer_politicaDevoluciones') }}
       </button>
       <div
+        v-if="
+          dataStore.politicas.devolucion &&
+          isSafeHTML(dataStore.politicas.devolucion)
+        "
         class="panel"
-        v-html="this.dataStore.politicas.devolucion"
-        v-if="this.dataStore.politicas.devolucion"
+        v-html="dataStore.politicas.devolucion"
       ></div>
-      <button
-        class="content-modal accordion"
-        v-if="this.dataStore.politicas.cambio"
-      >
+      <button v-if="dataStore.politicas.cambio" class="content-modal accordion">
         {{ $t('footer_politicaCambio') }}
       </button>
       <div
+        v-if="
+          dataStore.politicas.cambio && isSafeHTML(dataStore.politicas.cambio)
+        "
         class="panel"
-        v-html="this.dataStore.politicas.cambio"
-        v-if="this.dataStore.politicas.cambio"
+        v-html="dataStore.politicas.cambio"
       ></div>
-      <button
-        class="content-modal accordion"
-        v-if="this.dataStore.politicas.envios"
-      >
+      <button v-if="dataStore.politicas.envios" class="content-modal accordion">
         {{ $t('footer_politicaEnvios') }}
       </button>
       <div
+        v-if="
+          dataStore.politicas.envios && isSafeHTML(dataStore.politicas.envios)
+        "
         class="panel"
-        v-html="this.dataStore.politicas.envios"
-        v-if="this.dataStore.politicas.envios"
+        v-html="dataStore.politicas.envios"
       ></div>
-
-      <button
-        class="content-modal accordion"
-        v-if="this.dataStore.politicas.pagos"
-      >
+      <button v-if="dataStore.politicas.pagos" class="content-modal accordion">
         {{ $t('footer_politicaPagos') }}
       </button>
       <div
+        v-if="
+          dataStore.politicas.pagos && isSafeHTML(dataStore.politicas.pagos)
+        "
         class="panel"
-        v-html="this.dataStore.politicas.pagos"
-        v-if="this.dataStore.politicas.pagos"
+        v-html="dataStore.politicas.pagos"
       ></div>
     </div>
     <div class="px-10 py-4" style="background-color: #222">
@@ -84,9 +87,12 @@
 </template>
 <script>
 export default {
-  name: 'Terms-and-Conditions',
+  name: 'KoTermsAndConditions',
   props: {
-    dataStore: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   mounted() {
     var acc = document.getElementsByClassName('accordion')
@@ -108,6 +114,22 @@ export default {
     }
   },
   methods: {
+    isSafeHTML(htmlContent) {
+      // Lista de etiquetas y atributos potencialmente peligrosos
+      const unsafeTags = ['script', 'iframe']
+      const unsafeAttributes = ['onclick', 'onload', 'onerror', 'src']
+
+      // Verificar si el contenido HTML contiene etiquetas o atributos peligrosos
+      const containsUnsafeTags = unsafeTags.some((tag) =>
+        htmlContent.includes(`<${tag}`)
+      )
+      const containsUnsafeAttributes = unsafeAttributes.some((attr) =>
+        htmlContent.includes(` ${attr}=`)
+      )
+
+      // Si se encuentra contenido peligroso, considerarlo inseguro
+      return !(containsUnsafeTags || containsUnsafeAttributes)
+    },
     closeModalPolitics() {
       this.$store.state.modalpolitics05 = false
     },

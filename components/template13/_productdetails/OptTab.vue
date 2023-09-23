@@ -6,29 +6,29 @@
       settingByTemplate13[0].detailsProduct,
       settingByTemplate13[0].setting13General,
       {
-        '--font-style-1':
-          this.settingByTemplate13[0].setting13General &&
-          this.settingByTemplate13[0].setting13General.fount_1
-            ? this.settingByTemplate13[0].setting13General.fount_1
-            : 'Poppins',
+        '--font-style-1': settingByTemplate13[0]?.setting13General?.fount_1
+          ? settingByTemplate13[0].setting13General.fount_1
+          : 'Poppins',
       },
     ]"
   >
-    <el-collapse v-model="activeNames" @change="handleChange">
-      <el-collapse-item :title="$t('productdetail_description')" name="1">
+    <el-collapse v-model="activeNames">
+      <el-collapse-item
+        v-if="contentDescription"
+        :title="$t('productdetail_description')"
+        name="1"
+      >
         <div class="editor">
-          <div v-if="data.info.descripcion">
-            <el-tiptap
-              v-model="data.info.descripcion"
-              :extensions="extensions"
-              :spellcheck="false"
-              :readonly="true"
-              :charCounterCount="false"
-              :tooltip="false"
-              :showMenubar="false"
-              :bubble="false"
-            />
-          </div>
+          <el-tiptap
+            v-model="contentDescription"
+            :extensions="extensions"
+            :spellcheck="false"
+            :readonly="true"
+            :tooltip="false"
+            :bubble="false"
+            :showMenubar="false"
+            :charCounterCount="false"
+          />
         </div>
       </el-collapse-item>
       <el-collapse-item :title="$t('productdetail_opcionesPago')" name="2">
@@ -231,31 +231,35 @@
           </ul>
         </div>
       </el-collapse-item>
-      <el-collapse-item :title="$t('productdetail_opinionesEnvio')" name="3">
+      <el-collapse-item
+        v-if="envios.envio_metodo"
+        :title="$t('productdetail_opinionesEnvio')"
+        name="3"
+      >
         <div class="item-content opcenvio">
-          <div class="deliverys section" v-if="this.envios.envio_metodo">
+          <div class="deliverys section">
             <div class="content">
               <h3 class="title-section">
                 {{ $t('productdetail_opinionesEnvio') }}
               </h3>
             </div>
             <div
-              v-if="this.envios.envio_metodo === 'precio_ciudad'"
+              v-if="envios.envio_metodo === 'precio_ciudad'"
               class="wrapper-method"
             >
               <h4 class="capitalize">
-                • {{ this.envios.envio_metodo.replace('_', ' por ') }}
+                • {{ envios.envio_metodo.replace('_', ' por ') }}
               </h4>
               <p class="description-method">
                 {{ $t('productdetail_opinionesEnvioMsg1') }}
               </p>
             </div>
             <div
-              v-if="this.envios.envio_metodo === 'tarifa_plana'"
+              v-if="envios.envio_metodo === 'tarifa_plana'"
               class="wrapper-method"
             >
               <h4 class="capitalize">
-                {{ this.envios.envio_metodo.replace('_', ' ') }}
+                {{ envios.envio_metodo.replace('_', ' ') }}
               </h4>
               <p class="description-method">
                 {{ $t('productdetail_opinionesEnvioMsg2') }}
@@ -263,7 +267,7 @@
               <p class="price">
                 {{ $t('cart_precio') }}
                 {{
-                  this.envios.valor
+                  envios.valor
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -271,26 +275,20 @@
                 }}
               </p>
             </div>
-            <div
-              v-if="this.envios.envio_metodo === 'precio'"
-              class="wrapper-method"
-            >
+            <div v-if="envios.envio_metodo === 'precio'" class="wrapper-method">
               <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
               <p class="description-method">
                 {{ $t('productdetail_precioTotalCompraMsg') }}
               </p>
             </div>
-            <div
-              v-if="this.envios.envio_metodo === 'gratis'"
-              class="wrapper-method"
-            >
+            <div v-if="envios.envio_metodo === 'gratis'" class="wrapper-method">
               <h4>{{ $t('productdetail_gratis') }}</h4>
               <p class="description-method">
                 {{ $t('productdetail_gratisMsg') }}
               </p>
             </div>
             <div
-              v-if="this.envios.envio_metodo === 'sinEnvio'"
+              v-if="envios.envio_metodo === 'sinEnvio'"
               class="wrapper-method"
             >
               <p class="description-method">Pasas a recoger tu compra</p>
@@ -302,19 +300,41 @@
   </div>
 </template>
 <script>
-import extensions from '../../../mixins/elemenTiptap.vue'
-import currency from '../../../mixins/formatCurrent'
+import extensions from '@/mixins/elemenTiptap.vue'
+import currency from '@/mixins/formatCurrent'
 export default {
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      }
+    },
+  },
   mixins: [currency, extensions],
   props: {
-    dataStore: Object,
-    data: {},
-    envio: {},
-    settingByTemplate13: Array,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    data: {
+      type: Object,
+      required: true,
+    },
+    envio: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate13: {
+      type: Array,
+      required: true,
+    },
   },
+
   data() {
     return {
       activeNames: ['1'],
+      contentDescription: this.data?.info?.descripcion,
     }
   },
   computed: {
@@ -332,23 +352,15 @@ export default {
       }
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
       return this.data.medioEnvio
     },
   },
-  methods: {
-    handleChange(val) {
-      // console.log(val);
-    },
-  },
-  filters: {
-    capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
-      }
-    },
+  mounted() {
+    this.contentDescription
+      ? (this.activeNames = ['1'])
+      : (this.activeNames = ['2'])
   },
 }
 </script>

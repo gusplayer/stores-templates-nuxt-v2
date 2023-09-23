@@ -83,7 +83,7 @@
           alt="Logo Img"
         />
       </a>
-      <nuxt-link to="/" v-if="!showLogo" class="wrapper-logo-tablada">
+      <nuxt-link v-if="!showLogo" to="/" class="wrapper-logo-tablada">
         <img
           v-lazy="
             `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
@@ -95,20 +95,18 @@
         />
       </nuxt-link>
     </div>
-    <div v-if="showModal">
-      <div v-if="dataStore.politicas" class="modal">
-        <KoTermsConditions :data-store="dataStore" />
-      </div>
+    <div v-if="showModal && dataStore.politicas" class="modal">
+      <KoTermsConditions :data-store="dataStore" />
     </div>
   </div>
 </template>
 
 <script>
-import KoTermsConditions from '../ko-TermsAndConditions'
 export default {
   name: 'Ko5Footer',
   components: {
-    KoTermsConditions,
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
   props: {
     dataStore: {

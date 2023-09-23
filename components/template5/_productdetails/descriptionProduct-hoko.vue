@@ -1,19 +1,19 @@
 <template>
   <div class="description">
-    <div v-if="!activeClass" class="left">
+    <div v-if="!activeClass && contentDescription" class="left">
       <h3 class="text-desc">
         {{ $t('productdetail_description') }}
       </h3>
-      <div v-if="data.description" class="editor">
+      <div class="editor">
         <el-tiptap
+          v-model="contentDescription"
           :readonly="true"
-          v-model="data.description"
           :extensions="extensions"
           :spellcheck="false"
-          :charCounterCount="false"
           :tooltip="true"
-          :showMenubar="false"
           :bubble="false"
+          :charCounterCount="false"
+          :showMenubar="false"
         />
       </div>
       <!-- <div class="wrapper-comments">
@@ -264,6 +264,11 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      contentDescription: this.data?.description,
+    }
   },
   computed: {
     mediospago() {

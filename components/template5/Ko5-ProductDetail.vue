@@ -1,63 +1,62 @@
 <template>
   <div class="wrapper-productDetail" :style="settingByTemplate">
-    <div class="container-productDetail-loading" v-if="loading"></div>
+    <div v-if="loading" class="container-productDetail-loading"></div>
     <div
-      class="container-productDetail"
       v-else
+      class="container-productDetail"
       :style="{
         '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
+          settingByTemplate && settingByTemplate.tipo_letra
+            ? settingByTemplate.tipo_letra
             : 'Roboto',
       }"
     >
       <div class="section">
         <div class="wrapper-left">
-          <template>
-            <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="photos">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide photos_selected">
-                  <img
-                    loading="lazy"
-                    @click="selectedPhoto(data.detalle.foto_cloudinary)"
-                    class="img-list"
-                    :src="idCloudinary(data.detalle.foto_cloudinary, 150, 150)"
-                    alt="Product Img"
-                  />
-                </div>
-                <div
-                  class="swiper-slide photos_selected"
-                  v-for="(foto, itemsfoto) in data.fotos"
-                  :key="itemsfoto"
-                >
-                  <img
-                    loading="lazy"
-                    @click="selectedPhoto(foto.foto_cloudinary)"
-                    class="img-list"
-                    :src="idCloudinary(foto.foto_cloudinary, 150, 150)"
-                    alt="Product Img"
-                  />
-                </div>
-                <div class="swiper-slide photos_selected">
-                  <img
-                    loading="lazy"
-                    v-if="idYoutube"
-                    :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
-                    v-show="idYoutube"
-                    @mouseover="existYoutube = true"
-                    class="video"
-                    alt="Product Img"
-                  />
-                </div>
+          <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="photos">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide photos_selected">
+                <img
+                  :src="idCloudinary(data.detalle.foto_cloudinary, 150, 150)"
+                  loading="lazy"
+                  class="img-list"
+                  alt="Product Img"
+                  @click="selectedPhoto(data.detalle.foto_cloudinary)"
+                />
               </div>
-              <div class="swiper-prev" v-if="data.fotos.length > 3">
-                <FlechaUp-icon class="icon-swiper" />
+              <div
+                v-for="(foto, itemsfoto) in data.fotos"
+                :key="itemsfoto"
+                class="swiper-slide photos_selected"
+              >
+                <img
+                  :src="idCloudinary(foto.foto_cloudinary, 150, 150)"
+                  loading="lazy"
+                  class="img-list"
+                  alt="Product Img"
+                  @click="selectedPhoto(foto.foto_cloudinary)"
+                />
               </div>
-              <div class="swiper-next" v-if="data.fotos.length > 3">
-                <Flechadown-icon class="icon-swiper" />
+              <div class="swiper-slide photos_selected">
+                <img
+                  v-if="idYoutube"
+                  v-show="idYoutube"
+                  loading="lazy"
+                  :src="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
+                  class="video"
+                  alt="Product Img"
+                  @mouseover="existYoutube = true"
+                />
               </div>
             </div>
-          </template>
+            <div v-if="data.fotos.length > 3" class="swiper-prev">
+              <FlechaUp-icon class="icon-swiper" />
+            </div>
+            <div v-if="data.fotos.length > 3" class="swiper-next">
+              <Flechadown-icon class="icon-swiper" />
+            </div>
+          </div>
+
           <div class="wrapper-photo_main">
             <div
               v-if="this.activeZoom"
@@ -103,12 +102,12 @@
               <strong>{{ data.info.marca }}</strong>
             </p>
             <p
-              class="text-promocion"
               v-show="
                 data.info.tag_promocion == 1 &&
                 data.info.promocion_valor &&
                 salesData.precio
               "
+              class="text-promocion"
             >
               {{
                 (data.info.tag_promocion == 1 && data.info.promocion_valor
@@ -126,7 +125,7 @@
               class="wrapper-price"
               :class="data.info.tag_promocion == 1 ? '' : 'wrapper-price_space'"
             >
-              <p class="text-precio" v-show="salesData.precio">
+              <p v-show="salesData.precio" class="text-precio">
                 {{
                   salesData.precio
                     | currency(
@@ -136,12 +135,12 @@
                 }}
               </p>
               <p
-                class="card-descuento"
                 v-show="
                   data.info.tag_promocion == 1 &&
                   data.info.promocion_valor &&
                   salesData.precio
                 "
+                class="card-descuento"
               >
                 {{ data.info.promocion_valor }}% OFF
               </p>
@@ -170,7 +169,7 @@
                 </p>
               </div>
               <div class="content_card-info">
-                <p class="card-info-1" v-if="spent">
+                <p v-if="spent" class="card-info-1">
                   {{ $t('home_cardAgotado') }}
                 </p>
               </div>
@@ -180,7 +179,7 @@
                 <strong>{{ data.info.descripcion_corta }}</strong>
               </p>
             </div>
-            <div v-if="this.data.detalle.con_variante > 0">
+            <div v-if="data.detalle.con_variante > 0">
               <div v-for="(variant, index) in data.variantes" :key="index">
                 <label lang="es" for="variant name" class="text-variant">
                   {{ variant.nombre }}:
@@ -208,8 +207,8 @@
                     <mas-icon class="icon" />
                   </button>
                   <div
+                    v-if="maxQuantityValue == quantityValue"
                     class="container-alerta"
-                    v-if="this.maxQuantityValue == this.quantityValue"
                   >
                     <span class="alerta"> {{ $t('cart_ultimaUnidad') }}</span>
                   </div>
@@ -227,42 +226,42 @@
                   </div>-->
                   <div class="content-button">
                     <button
-                      ref="colorBtn"
-                      class="btn"
                       v-if="
                         !spent &&
-                        this.salesData.estado &&
+                        salesData.estado &&
                         (data.info.tipo_servicio == null ||
                           data.info.tipo_servicio == '0')
                       "
-                      @click="addShoppingCart"
                       id="AddToCartTag"
+                      ref="colorBtn"
+                      class="btn"
+                      @click="addShoppingCart"
                     >
                       {{ $t('productdetail_btnAgregar') }}
                     </button>
                     <button
+                      v-else-if="!salesData.estado"
                       disabled
                       class="btn-disabled"
-                      v-else-if="!this.salesData.estado"
                     >
                       {{ $t('productdetail_btnANodisponible') }}
                     </button>
                     <button
+                      v-else-if="!spent && data.info.tipo_servicio == '1'"
+                      id="AddToCartTag"
                       ref="colorBtn"
                       class="btn"
-                      v-else-if="!spent && data.info.tipo_servicio == '1'"
                       @click="GoPayments"
-                      id="AddToCartTag"
                     >
                       {{ $t('productdetail_btnComprar') }}
                     </button>
-                    <button disabled class="btn-disabled" v-else-if="spent">
+                    <button v-else-if="spent" disabled class="btn-disabled">
                       {{ $t('home_cardAgotado') }}
                     </button>
                   </div>
                   <div
-                    class="w-full flex flex-row items-center my-10"
                     v-if="userDropshipping.userName"
+                    class="w-full flex flex-row items-center my-10"
                   >
                     <p class="text-variant" style="margin-right: 10px">
                       {{ $t('productdetail_dropshipping') }}
@@ -276,7 +275,7 @@
                       {{ $t('productdetail_compartir') }}
                     </p>
                     <a
-                      :href="this.sharingFacebook"
+                      :href="sharingFacebook"
                       target="_blank"
                       rel="noreferrer noopener"
                       class="btn-facebook"
@@ -299,7 +298,7 @@
         </div>
       </div>
       <div class="section-suggesProduct">
-        <koSuggesProduct :category="this.category.slice(0, 8)" />
+        <koSuggesProduct :category="category.slice(0, 8)" />
       </div>
       <div class="responsive-purchase">
         <div class="ko-input">
@@ -313,8 +312,8 @@
             </button>
             <transition name="slide-fade">
               <div
-                class="container-alert"
                 v-show="quantityValue == maxQuantityValue"
+                class="container-alert"
               >
                 <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
               </div>
@@ -322,33 +321,33 @@
           </div>
           <div style="width: 100%; margin-left: 10px">
             <button
-              class="btn-responsive"
-              ref="color2"
               v-if="
                 !spent &&
-                this.salesData.estado &&
+                salesData.estado &&
                 (data.info.tipo_servicio == null ||
                   data.info.tipo_servicio == '0')
               "
-              @click="addShoppingCart"
               id="AddToCartTag"
+              ref="color2"
+              class="btn-responsive"
+              @click="addShoppingCart"
             >
               <cartArrowDown class="card-icon-cart" />{{
                 $t('productdetail_btnAgregar')
               }}
             </button>
-            <button disabled class="btn-disabled" v-if="!this.salesData.estado">
+            <button v-if="!salesData.estado" disabled class="btn-disabled">
               {{ $t('productdetail_btnANodisponible') }}
             </button>
             <button
-              class="btn-responsive"
-              ref="color2"
               v-else-if="!spent && data.info.tipo_servicio == '1'"
+              ref="color2"
+              class="btn-responsive"
               @click="GoPayments"
             >
               {{ $t('productdetail_btnComprar') }}
             </button>
-            <div class="content_buy_action-responsive" v-else-if="spent">
+            <div v-else-if="spent" class="content_buy_action-responsive">
               <p class="card-info-1-res">{{ $t('home_cardAgotado') }}</p>
             </div>
           </div>
@@ -952,7 +951,7 @@ export default {
       json = JSON.stringify(json)
       if (json) {
         this.$store.dispatch('SEND_ADD_TO_CART', 2)
-        if (this.layourUnicentro == true) {
+        if (this.layourUnicentro) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`

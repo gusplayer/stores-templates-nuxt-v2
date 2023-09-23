@@ -1,17 +1,14 @@
 <template>
   <div
-    class="footer-container"
     ref="background"
+    class="footer-container"
     :style="[
       settingByTemplate10[0].setting10Footer,
       settingByTemplate10[0].setting10General,
       {
-        '--font-style-1':
-          this.settingByTemplate10 &&
-          this.settingByTemplate10[0].setting10General &&
-          this.settingByTemplate10[0].setting10General.fount_1
-            ? this.settingByTemplate10[0].setting10General.fount_1
-            : 'Roboto',
+        '--font-style-1': settingByTemplate10[0]?.setting10General?.fount_1
+          ? settingByTemplate10[0].setting10General.fount_1
+          : 'Roboto',
       },
     ]"
   >
@@ -26,31 +23,27 @@
             />
           </div>
           <div
+            v-if="dataStore?.geolocalizacion?.length"
             class="content-direction"
-            v-if="
-              this.dataStore &&
-              this.dataStore.geolocalizacion &&
-              this.dataStore.geolocalizacion.length
-            "
           >
             <p class="txt-direction">
-              {{ this.dataStore.geolocalizacion[0].direccion }}
+              {{ dataStore.geolocalizacion[0].direccion }}
             </p>
           </div>
           <div class="content-number">
             <p class="txt-number">
-              {{ this.dataStore.tienda.telefono }}
+              {{ dataStore.tienda.telefono }}
             </p>
           </div>
           <div class="content-email">
             <p class="txt-email">
-              {{ this.dataStore.tienda.email_tienda }}
+              {{ dataStore.tienda.email_tienda }}
             </p>
           </div>
           <div class="content-Pliticas-Terminos">
             <button
-              class="txt-pol-term"
               v-if="dataStore.politicas"
+              class="txt-pol-term"
               @click="OpenModalPolitics"
             >
               {{ $t('footer_politicasyterminos') }}
@@ -70,11 +63,9 @@
             <div class="container-opt">
               <div class="footer-socialNetworks">
                 <KoSocialNet
-                  :dataStore="dataStore"
-                  :setting10Footer="this.settingByTemplate10[0].setting10Footer"
-                  :setting10General="
-                    this.settingByTemplate10[0].setting10General
-                  "
+                  :data-store="dataStore"
+                  :setting10-footer="settingByTemplate10[0].setting10Footer"
+                  :setting10-general="settingByTemplate10[0].setting10General"
                 />
               </div>
               <div class="footer-content-button">
@@ -82,14 +73,14 @@
                   v-for="(item, index) in secciones"
                   :key="`${index}${item.name}`"
                 >
-                  <nuxt-link :to="item.path" v-if="item.path" class="btn">
+                  <nuxt-link v-if="item.path" :to="item.path" class="btn">
                     <p class="txt-btns">
                       {{ $t(`${item.name}`) }}
                     </p>
                   </nuxt-link>
                   <nuxt-link
-                    :to="item.href"
                     v-else-if="item.href && listArticulos > 0"
+                    :to="item.href"
                     class="btn"
                   >
                     <p class="txt-btns">
@@ -108,11 +99,9 @@
               <label class="tab-label" for="chck1">Nuestras redes</label>
               <div class="tab-content">
                 <KoSocialNet
-                  :dataStore="dataStore"
-                  :setting10Footer="this.settingByTemplate10[0].setting10Footer"
-                  :setting10General="
-                    this.settingByTemplate10[0].setting10General
-                  "
+                  :data-store="dataStore"
+                  :setting10-footer="settingByTemplate10[0].setting10Footer"
+                  :setting10-general="settingByTemplate10[0].setting10General"
                 />
               </div>
             </div>
@@ -124,14 +113,14 @@
                   v-for="(item, index) in secciones"
                   :key="`${index}${item.name}`"
                 >
-                  <nuxt-link :to="item.path" v-if="item.path" class="btn pb-5">
+                  <nuxt-link v-if="item.path" :to="item.path" class="btn pb-5">
                     <p class="txt-btns">
                       {{ $t(`${item.name}`) }}
                     </p>
                   </nuxt-link>
                   <nuxt-link
-                    :to="item.href"
                     v-else-if="item.href && listArticulos > 0"
+                    :to="item.href"
                     class="btn pb-5"
                   >
                     <p class="txt-btns">
@@ -145,20 +134,20 @@
         </div>
         <div class="footer-content-newsLetters">
           <KoNewsLetter
-            :settingByTemplate10="this.settingByTemplate10"
-            :dataStore="dataStore"
+            :setting-by-template10="settingByTemplate10"
+            :data-store="dataStore"
           />
         </div>
       </div>
       <div class="footer-content-newsLetters-hid">
         <KoNewsLetter
-          :settingByTemplate10="this.settingByTemplate10"
-          :dataStore="dataStore"
+          :setting-by-template10="settingByTemplate10"
+          :data-store="dataStore"
         />
       </div>
       <div
-        class="madebyKomercia"
         v-if="settingByTemplate10[0].setting10Footer.watermark"
+        class="madebyKomercia"
       >
         <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
         <a
@@ -167,57 +156,51 @@
           rel="noreferrer noopener"
         >
           <img
+            v-if="logo"
             v-lazy="
               `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
             "
-            v-if="logo"
             class="logo2"
             alt="Logo Img"
           />
           <img
+            v-else
             v-lazy="
               `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
             "
-            v-else
             class="logo2"
             alt="Logo Img"
           />
         </a>
       </div>
     </div>
-    <div v-if="showModal">
-      <div class="modal" v-if="dataStore.politicas">
-        <KoTermsConditions :dataStore="dataStore"></KoTermsConditions>
-      </div>
+    <div v-if="showModal && dataStore.politicas" class="modal">
+      <KoTermsConditions :data-store="dataStore" />
     </div>
     <!-- <KoTermsConditions class="modal" id="myModal"></KoTermsConditions> -->
   </div>
 </template>
 
 <script>
-import KoNewsLetter from '../../../components/template10/Ko-Newsletter'
-import KoSocialNet from '../../../components/template10/Ko-Social-Networks'
-import KoTermsConditions from '../../../components/footers/ko-TermsAndConditions'
-
 export default {
+  name: 'Ko6Footer',
   components: {
-    KoNewsLetter,
-    KoSocialNet,
-    KoTermsConditions,
+    KoNewsLetter: () => import('@/components/template10/Ko-Newsletter.vue'),
+    KoSocialNet: () => import('@/components/template10/Ko-Social-Networks.vue'),
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
-  name: 'Ko-Footer-6',
   props: {
-    dataStore: Object,
-    settingByTemplate10: Array,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate10: {
+      type: Array,
+      required: true,
+    },
   },
-  mounted() {
-    if (
-      this.settingByTemplate10 &&
-      this.settingByTemplate10[0].setting10Footer
-    ) {
-      this.setLogo()
-    }
-  },
+
   data() {
     return {
       secciones: [
@@ -253,23 +236,6 @@ export default {
       return this.$store.state.modalpolitics05
     },
   },
-  methods: {
-    OpenModalPolitics() {
-      this.$store.state.modalpolitics05 = true
-    },
-    setLogo() {
-      let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
-      )
-      let colorArray = color.split(',')
-      let colorInt = parseInt(colorArray[2])
-      if (colorInt > 50) {
-        this.logo = true
-      } else {
-        this.logo = false
-      }
-    },
-  },
   watch: {
     settingByTemplate10() {
       if (
@@ -285,6 +251,31 @@ export default {
         } else {
           this.logo = false
         }
+      }
+    },
+  },
+  mounted() {
+    if (
+      this.settingByTemplate10 &&
+      this.settingByTemplate10[0].setting10Footer
+    ) {
+      this.setLogo()
+    }
+  },
+  methods: {
+    OpenModalPolitics() {
+      this.$store.state.modalpolitics05 = true
+    },
+    setLogo() {
+      let color = getComputedStyle(this.$refs.background).getPropertyValue(
+        '--background_color_1'
+      )
+      let colorArray = color.split(',')
+      let colorInt = parseInt(colorArray[2])
+      if (colorInt > 50) {
+        this.logo = true
+      } else {
+        this.logo = false
       }
     },
   },

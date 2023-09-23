@@ -64,8 +64,14 @@ export default {
   components: { ProductCard, KoSearch },
   mixins: [filterProducts],
   props: {
-    dataStore: Object,
-    fullProducts: {},
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
   },
 
   data() {

@@ -112,7 +112,6 @@ export default {
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
       ) {
-        console.log(e.data)
         if (e && e.data && e.data.component && e.data.template == 9) {
           this.$store.commit('SET_CURRENTSETTING09', e.data)
           if (e.data.component == 'banner') {
@@ -168,7 +167,7 @@ export default {
               break
           }
         } else {
-          if (e && e.data && e.data.returnHome == true) {
+          if (e && e.data && e.data.returnHome) {
             this.$router.push({
               path: '/',
             })
