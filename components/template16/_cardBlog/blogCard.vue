@@ -5,7 +5,7 @@
   >
     <nuxt-link
       :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
-      class="container"
+      class="container relative max-w-full h-full"
       @mouseover="hover = true"
       @mouseleave="hover = false"
     >
@@ -20,7 +20,7 @@
           <div v-else class="empty"></div>
         </div>
       </div>
-      <div class="content-txt-article">
+      <div class="w-full h-full flex-col justify-between items-start">
         <div class="content-tittle-article">
           <span
             class="txt-article-tittle"
@@ -71,7 +71,6 @@
             {{ article.resumen }}
           </span>
         </div>
-
         <button
           class="w-auto flex flex-col text-center text-14 leading-24 font-semibold py-10 px-10 border cursor-pointer transition-all ease-in duration-0.2"
           :style="`color: ${cardBlog.color_text_btn}; background-color: ${cardBlog.color_bg_btn}; border-color: ${cardBlog.color_text_btn}; border-radius: ${settingGeneral?.radius};`"
@@ -125,10 +124,7 @@ export default {
 </script>
 <style scoped>
 .producto {
-  @apply w-full flex flex-col justify-center items-center;
-}
-.container {
-  @apply relative;
+  @apply w-full h-full flex flex-col justify-center items-center;
 }
 .content-imge {
   @apply w-full h-auto relative flex justify-start cursor-pointer overflow-hidden transition-all ease-in duration-0.2;
@@ -152,9 +148,6 @@ export default {
   @apply w-full flex flex-col justify-start items-start;
 }
 @screen sm {
-  .container {
-    @apply max-w-full;
-  }
   .images {
     height: 167px;
   }

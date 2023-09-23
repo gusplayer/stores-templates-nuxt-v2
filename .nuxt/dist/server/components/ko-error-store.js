@@ -46,7 +46,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 598:
+/***/ 599:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -73,7 +73,7 @@ var staticRenderFns = [];
 /* harmony default export */ var Ko_errorStorevue_type_script_lang_js_ = ({
   name: 'NoStoreFound',
   components: {
-    koWhatsApp: () => __webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(null, 1321))
+    koWhatsApp: () => __webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(null, 1325))
   },
   data() {
     return {

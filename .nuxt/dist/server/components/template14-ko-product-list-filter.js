@@ -1,7 +1,7 @@
-exports.ids = [94];
+exports.ids = [95];
 exports.modules = {
 
-/***/ 1160:
+/***/ 1163:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -285,7 +285,7 @@ var idCloudinary = __webpack_require__(47);
   name: 'Ko15-ProductList-Filter',
   mixins: [filterProducts["a" /* default */], idCloudinary["a" /* default */]],
   components: {
-    Ko14ProductCard: () => __webpack_require__.e(/* import() */ 359).then(__webpack_require__.bind(null, 1065))
+    Ko14ProductCard: () => __webpack_require__.e(/* import() */ 360).then(__webpack_require__.bind(null, 1068))
   },
   props: {
     dataStore: Object,
@@ -504,7 +504,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(742)
+  var style0 = __webpack_require__(743)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -532,7 +532,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(743);
+var content = __webpack_require__(744);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -619,6 +619,7 @@ module.exports.__inject__ = function (context) {
     sendCategoryUrlMix(value) {
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '');
       let urlFiltrada = decodeURIComponent(value);
+      console.log(urlFiltrada);
       this.$store.commit('products/FILTER_BY', {
         type: ['category'],
         data: urlFiltrada
@@ -633,9 +634,8 @@ module.exports.__inject__ = function (context) {
     SendSubCategoryUrlMix(value, categories, subcategories) {
       let urlFiltradaTemp = decodeURIComponent(value);
       let resTemp = urlFiltradaTemp.split('^');
-      let urlFiltrada = decodeURIComponent(resTemp[0]);
       let filtradoSubCategories = subcategories.find(element => {
-        if (element.categoria == parseInt(resTemp[1]) && element.nombre_subcategoria == urlFiltrada) {
+        if (element.categoria == parseInt(resTemp[1]) && element.nombre_subcategoria == resTemp[0]) {
           return element;
         }
       });
@@ -655,7 +655,7 @@ module.exports.__inject__ = function (context) {
       } else {
         this.$store.commit('products/FILTER_BY', {
           type: ['subcategory'],
-          data: ''
+          data: parseInt(resTemp[1])
         });
       }
     },
@@ -700,7 +700,7 @@ module.exports.__inject__ = function (context) {
         this.setURlTag(tag_id, tag_Name);
       }
       this.currentPage = 1;
-      if (Lateral === true) {
+      if (Lateral) {
         this.$router.push({
           path: '/productos'
         });
@@ -755,7 +755,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 742:
+/***/ 743:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -767,7 +767,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 743:
+/***/ 744:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

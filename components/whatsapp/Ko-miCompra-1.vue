@@ -51,8 +51,8 @@
                 <template slot-scope="{ errors }">
                   <input
                     id="numId"
-                    :placeholder="$t('mcompra_inputIdMsg')"
                     v-model="cedula"
+                    :placeholder="$t('mcompra_inputIdMsg')"
                     class="input-text"
                   />
                   <span class="text-error" v-show="errors[0]">
@@ -69,14 +69,14 @@
           </div>
         </div>
       </div>
-      <div class="bar-body" v-if="orden && orden.venta">
+      <div v-if="orden && orden.venta" class="bar-body" >
         <div class="content-title">
           <p>{{ $t('mcompra_title2') }}</p>
           <p>No. {{ orden.venta.id }}</p>
         </div>
         <div
+        v-if="orden.productos && orden.productos.length > 0"
           class="content-card"
-          v-if="orden.productos && orden.productos.length > 0"
         >
           <client-only>
             <table class="table table-striped">
@@ -93,10 +93,10 @@
                 <ul v-for="(item, index) in orden.productos" :key="index.item">
                   <li class="photo">
                     <img
-                      class="img-product"
                       v-lazy="
                         idCloudinary(item.producto.foto_cloudinary, 150, 150)
                       "
+                      class="img-product"
                       alt="Imagen del producto"
                     />
                   </li>
@@ -105,7 +105,7 @@
                       {{ item.producto.nombre }}
                     </p>
                   </li>
-                  <li class="variants" v-if="item.variantes">
+                  <li v-if="item.variantes" class="variants" >
                     <el-tag
                       v-for="(productCombinacion, index2) in JSON.parse(
                         item.variantes
@@ -136,18 +136,18 @@
           </client-only>
           <div class="w-full flex h-1 bg-gray-900"></div>
         </div>
-        <div class="content-info-orden" v-if="orden.venta">
+        <div v-if="orden.venta" class="content-info-orden" >
           <div class="info-left">
             <p
+            v-if="orden.venta.cupon && orden.venta.cupon !== 'null'"
               class="title-info-orden"
-              v-if="orden.venta.cupon && orden.venta.cupon !== 'null'"
             >
               {{ $t('mcompra_cupon') }}
               <span class="value-info-orden">{{ orden.venta.cupon }} </span>
             </p>
             <p
+            v-if="orden.venta.descuento && orden.venta.descuento !== 'null'"
               class="title-info-orden"
-              v-if="orden.venta.descuento && orden.venta.descuento !== 'null'"
             >
               {{ $t('footer_descuento') }}
               <span class="value-info-orden"
@@ -158,13 +158,13 @@
               {{ $t('mcompra_pcanaldeVenta') }}
               <span class="value-info-orden">WhatsApp</span>
             </p> -->
-            <p class="title-info-orden" v-if="orden.venta.costo_envio">
+            <p v-if="orden.venta.costo_envio" class="title-info-orden" >
               {{ $t('mcompra_valorEnvio') }}
               <span class="value-info-orden">
                 {{ orden.venta.costo_envio | currency }}
               </span>
             </p>
-            <p class="title-info-orden" v-if="orden.venta.total">
+            <p v-if="orden.venta.total" class="title-info-orden" >
               {{ $t('mcompra_totalOrden') }}
               <span class="value-info-orden">
                 {{ orden.venta.total | currency }}
@@ -176,13 +176,13 @@
                 {{ $t(`${choicePayment.title}`) }}
               </span>
             </p>
-            <p class="title-info-orden" v-if="fechaState">
+            <p v-if="fechaState" class="title-info-orden" >
               {{ $t('mcompra_fechaCompra') }}
-              <span class="value-info-orden">{{ this.fechaState }}</span>
+              <span class="value-info-orden">{{ fechaState }}</span>
             </p>
-            <p class="title-info-orden" v-if="horaState">
+            <p v-if="horaState" class="title-info-orden" >
               {{ $t('mcompra_horaCompra') }}
-              <span class="value-info-orden">{{ this.horaState }}</span>
+              <span class="value-info-orden">{{ horaState }}</span>
             </p>
             <p class="title-info-orden">
               {{ $t('mcompra_pcanaldeVenta') }}
@@ -195,8 +195,8 @@
               </span>
             </p>
             <div
+            v-if="orden.venta.delivery_status_id !== null"
               class="mt-4 flex flex-row items-center"
-              v-if="orden.venta.delivery_status_id !== null"
             >
               <p class="title-info-orden">
                 {{ $t('mcompra_pcCanalEnvio') }}
@@ -236,80 +236,80 @@
           <client-only>
             <el-collapse>
               <el-collapse-item :title="$t('mcompra_infoComprador')" name="1">
-                <div class="content-info-buyer" v-if="orden.usuario == 30866">
+                <div v-if="orden.usuario == 30866" class="content-info-buyer" >
                   <div
+                  v-if="tempData && tempData.state"
                     class="content-info-buyer"
-                    v-if="tempData && tempData.state"
                   >
                     <p
+                    v-if="tempData && tempData.dataCustomer.nombre"
                       class="name"
-                      v-if="tempData && tempData.dataCustomer.nombre"
                     >
                       {{ $t('mcompra_nombre') }}
                       <span class="value-data">
                         {{ tempData.dataCustomer.nombre }}
                       </span>
                     </p>
-                    <span class="value-data" v-else>N/A</span>
+                    <span v-else class="value-data" >N/A</span>
                     <p
+                    v-if="tempData && tempData.dataCustomer.phone"
                       class="name"
-                      v-if="tempData && tempData.dataCustomer.phone"
                     >
                       {{ $t('footer_formIdenti') }}
                       <span class="value-data">
                         {{ tempData.dataCustomer.phone }}
                       </span>
                     </p>
-                    <span class="value-data" v-else>N/A</span>
+                    <span v-else class="value-data" >N/A</span>
                     <p
+                    v-if="tempData && tempData.dataCustomer.correo"
                       class="name"
-                      v-if="tempData && tempData.dataCustomer.correo"
                     >
                       {{ $t('footer_formCorreo') }}
                       <span class="value-data">
                         {{ tempData.dataCustomer.correo }}
                       </span>
                     </p>
-                    <span class="value-data" v-else>N/A</span>
+                    <span v-else class="value-data" >N/A</span>
                     <p
+                    v-if="tempData && tempData.dataCustomer.identificacion"
                       class="name"
-                      v-if="tempData && tempData.dataCustomer.identificacion"
                     >
                       {{ $t('footer_formPhone') }}
                       <span class="value-data">
                         {{ tempData.dataCustomer.identificacion }}
                       </span>
                     </p>
-                    <span class="value-data" v-else>N/A</span>
+                    <span v-else class="value-data" >N/A</span>
                     <p
+                    v-if="tempData && tempData.dataCustomer.ciudad"
                       class="name"
-                      v-if="tempData && tempData.dataCustomer.ciudad"
                     >
                       {{ $t('footer_formDepartamento') }}
                       <span class="value-data">
                         {{ tempData.dataCustomer.ciudad }}
                       </span>
                     </p>
-                    <span class="value-data" v-else>N/A</span>
+                     <span v-else class="value-data" >N/A</span>
                     <p
+                    v-if="tempData && tempData.dataCustomer.barrio"
                       class="name"
-                      v-if="tempData && tempData.dataCustomer.barrio"
                     >
                       {{ $t('footer_formBarrio') }}
                       <span class="value-data">
                         {{ tempData.dataCustomer.barrio }}
                       </span>
                     </p>
-                    <span class="value-data" v-else>N/A</span>
+                     <span v-else class="value-data" >N/A</span>
                     <p class="address">
                       {{ $t('mcompra_direccion') }}
                       <span
+                      v-if="tempData && tempData.dataCustomer.direccion"
                         class="value-data"
-                        v-if="tempData && tempData.dataCustomer.direccion"
                       >
                         {{ tempData.dataCustomer.direccion }}
                       </span>
-                      <span class="value-data" v-else>N/A</span>
+                       <span v-else class="value-data" >N/A</span>
                     </p>
                   </div>
                   <div
@@ -317,7 +317,7 @@
                     v-else
                     :key="index"
                   >
-                    <p class="name" v-if="items.textInput && items.value">
+                    <p v-if="items.textInput && items.value" class="name" >
                       {{ items.textInput }}
                       <span class="value-data">{{ items.value }}</span>
                     </p>
@@ -327,10 +327,10 @@
               <el-collapse-item :title="$t('mcompra_infoVendedor')" name="2">
                 <div class="content-info-buyer">
                   <p
-                    class="city"
                     v-if="
                       city && city.departamento && city.departamento.nombre_dep
                     "
+                    class="city"
                   >
                     {{ $t('mcompra_departamento') }}
                     <span class="value-data">
@@ -339,10 +339,10 @@
                   </p>
                   <p class="city">
                     {{ $t('mcompra_ciudad') }}
-                    <span class="value-data" v-if="city && city.nombre_ciu">
+                    <span v-if="city && city.nombre_ciu class="value-data" ">
                       {{ city.nombre_ciu }}
                     </span>
-                    <span class="value-data" v-else>N/A</span>
+                     <span v-else class="value-data" >N/A</span>
                   </p>
                   <p class="address">
                     {{ $t('mcompra_direccion') }}
@@ -352,21 +352,21 @@
                     >
                       {{ dataStore.geolocalizacion[0].direccion }}
                     </span>
-                    <span class="value-data" v-else>N/A</span>
+                     <span v-else class="value-data" >N/A</span>
                   </p>
                   <p class="telephone">
                     {{ $t('mcompra_telefono') }}
-                    <span class="value-data" v-if="dataStore.tienda.telefono">
+                    <span v-if="dataStore.tienda.telefono" class="value-data" >
                       {{ dataStore.tienda.telefono }}
                     </span>
-                    <span class="value-data" v-else>N/A</span>
+                     <span v-else class="value-data" >N/A</span>
                   </p>
                   <p class="owner">
                     {{ $t('mcompra_nombreTienda') }}
-                    <span class="value-data" v-if="dataStore.tienda.nombre">
+                    <span v-if="dataStore.tienda.nombre" class="value-data" >
                       {{ dataStore.tienda.nombre }}
                     </span>
-                    <span class="value-data" v-else>N/A</span>
+                     <span v-else class="value-data" >N/A</span>
                   </p>
                 </div>
               </el-collapse-item>
@@ -377,22 +377,22 @@
               >
                 <div class="content-info-buyer">
                   <p
+                  v-if="dataTransporter && dataTransporter.name"
                     class="city"
-                    v-if="dataTransporter && dataTransporter.name"
                   >
                     {{ $t('mcompra_nombre') }}
                     <span class="value-data">{{ dataTransporter.name }}</span>
                   </p>
                   <p
+                  v-if="dataTransporter && dataTransporter.guide"
                     class="city"
-                    v-if="dataTransporter && dataTransporter.guide"
                   >
                     {{ $t('mcompra_numeroGuia') }}
                     <span class="value-data">{{ dataTransporter.guide }}</span>
                   </p>
                   <p
+                  v-if="dataTransporter && dataTransporter.link"
                     class="city"
-                    v-if="dataTransporter && dataTransporter.link"
                   >
                     {{ $t('mcompra_linkGuia') }}
                     <a
@@ -436,8 +436,14 @@ export default {
   },
   mixins: [idCloudinary, currency, states],
   props: {
-    dataStore: Object,
-    orden: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    orden: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

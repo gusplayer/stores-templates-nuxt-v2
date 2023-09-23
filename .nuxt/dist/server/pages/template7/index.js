@@ -1,14 +1,14 @@
-exports.ids = [206];
+exports.ids = [208];
 exports.modules = {
 
-/***/ 1097:
+/***/ 1100:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template7/index.vue?vue&type=template&id=277f7480&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template7/index.vue?vue&type=template&id=59328eee&
 var render = function render() {
   var _vm$settingByTemplate, _vm$settingByTemplate2, _vm$settingByTemplate3, _vm$settingByTemplate4, _vm$settingByTemplate5, _vm$settingByTemplate6, _vm$settingByTemplate7, _vm$settingByTemplate8, _vm$settingByTemplate9, _vm$settingByTemplate10, _vm$settingByTemplate11, _vm$settingByTemplate12, _vm$settingByTemplate13, _vm$settingByTemplate14, _vm$settingByTemplate15, _vm$settingByTemplate16, _vm$settingByTemplate17, _vm$settingByTemplate18, _vm$settingByTemplate19, _vm$settingByTemplate20, _vm$settingByTemplate21, _vm$listArticulos, _vm$settingByTemplate22, _vm$settingByTemplate23, _vm$settingByTemplate24, _vm$settingByTemplate25, _vm$settingByTemplate26, _vm$settingByTemplate27;
   var _vm = this,
@@ -62,7 +62,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template7/index.vue?vue&type=template&id=277f7480&
+// CONCATENATED MODULE: ./pages/template7/index.vue?vue&type=template&id=59328eee&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(9);
@@ -72,15 +72,15 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template7vue_type_script_lang_js_ = ({
   name: 'KoTemplate7',
   components: {
-    K07Carousel: () => __webpack_require__.e(/* import() */ 156).then(__webpack_require__.bind(null, 1295)),
-    K07BannerPromo: () => __webpack_require__.e(/* import() */ 158).then(__webpack_require__.bind(null, 1208)),
-    K07ProductList: () => __webpack_require__.e(/* import() */ 163).then(__webpack_require__.bind(null, 1213)),
-    K07Advertising: () => __webpack_require__.e(/* import() */ 157).then(__webpack_require__.bind(null, 1207)),
-    K07Gify: () => __webpack_require__.e(/* import() */ 160).then(__webpack_require__.bind(null, 1210)),
-    K07HowWeWork: () => __webpack_require__.e(/* import() */ 161).then(__webpack_require__.bind(null, 1211)),
-    K07Blog: () => __webpack_require__.e(/* import() */ 159).then(__webpack_require__.bind(null, 1209)),
-    K07Newsletter: () => __webpack_require__.e(/* import() */ 162).then(__webpack_require__.bind(null, 1212)),
-    K07Wrapper: () => __webpack_require__.e(/* import() */ 164).then(__webpack_require__.bind(null, 1214))
+    K07Carousel: () => __webpack_require__.e(/* import() */ 158).then(__webpack_require__.bind(null, 1299)),
+    K07BannerPromo: () => __webpack_require__.e(/* import() */ 160).then(__webpack_require__.bind(null, 1211)),
+    K07ProductList: () => __webpack_require__.e(/* import() */ 165).then(__webpack_require__.bind(null, 1216)),
+    K07Advertising: () => __webpack_require__.e(/* import() */ 159).then(__webpack_require__.bind(null, 1210)),
+    K07Gify: () => __webpack_require__.e(/* import() */ 162).then(__webpack_require__.bind(null, 1213)),
+    K07HowWeWork: () => __webpack_require__.e(/* import() */ 163).then(__webpack_require__.bind(null, 1214)),
+    K07Blog: () => __webpack_require__.e(/* import() */ 161).then(__webpack_require__.bind(null, 1212)),
+    K07Newsletter: () => __webpack_require__.e(/* import() */ 164).then(__webpack_require__.bind(null, 1215)),
+    K07Wrapper: () => __webpack_require__.e(/* import() */ 166).then(__webpack_require__.bind(null, 1217))
   },
   layout: 'default',
   data() {
@@ -187,7 +187,7 @@ var external_vuex_ = __webpack_require__(9);
               break;
           }
         } else {
-          if (e && e.data && e.data.returnHome == true) {
+          if (e && e.data && e.data.returnHome) {
             this.$router.push({
               path: '/'
             });

@@ -148,7 +148,7 @@ export default {
           } else if (e.data.template == 10) {
             this.$store.commit('SET_CURRENTSETTING10', e.data)
           }
-        } else if (e && e.data && e.data.returnHome == true) {
+        } else if (e && e.data && e.data.returnHome) {
           this.$router.push({
             path: '/',
           })

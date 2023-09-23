@@ -238,8 +238,8 @@
                     <!-- <div
                       v-else-if="
                         shipping &&
-                        getFreeShipping == false &&
-                        FreeShippingCart == false
+                        !getFreeShipping  &&
+                        !FreeShippingCart 
                       "
                     >
                       <p>

@@ -29,7 +29,7 @@
               {{ $t('header_buscar_limpiar') }}
             </p>
           </nuxt-link>
-          <el-collapse v-model="activeNames" @change="handleChange">
+          <el-collapse v-model="activeNames">
             <el-collapse-item :title="$t('header_buscar_producto')" name="1">
               <input
                 v-model="search"
@@ -546,7 +546,7 @@ export default {
             this.settingByTemplate10 &&
             this.settingByTemplate10[0] &&
             this.settingByTemplate10[0].productListFilter &&
-            this.settingByTemplate10[0].productListFilter.visible_bg == true
+            this.settingByTemplate10[0].productListFilter.visible_bg
           ) {
             if (this.settingByTemplate10[0].productListFilter.url_img_bg) {
               imagen.style.backgroundImage = `url(${this.settingByTemplate10[0].productListFilter.url_img_bg})`
@@ -684,9 +684,6 @@ export default {
       this.showSubCategory = false
       this.selectedSubcategories = []
       this.nameCategory = ''
-    },
-    handleChange(val) {
-      // console.log(val);
     },
   },
 }

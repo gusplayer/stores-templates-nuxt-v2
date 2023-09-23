@@ -46,7 +46,7 @@
         </div>
       </nuxt-link>
       <div class="mt-10">
-        <div v-if="estadoCart == true && equalsPrice">
+        <div v-if="estadoCart && equalsPrice">
           <p class="text-price" v-if="minPrice">
             {{
               minPrice
@@ -59,7 +59,7 @@
         </div>
         <div
           class="content-price"
-          v-else-if="estadoCart == true && minPrice && maxPrice && !equalsPrice"
+          v-else-if="estadoCart && minPrice && maxPrice && !equalsPrice"
         >
           <div class="text-price">
             {{
@@ -129,9 +129,22 @@
 import idCloudinary from '@/mixins/idCloudinary'
 import currency from '@/mixins/formatCurrent'
 export default {
+  name: 'Ko15ProductCard',
   mixins: [idCloudinary, currency],
-  name: 'Ko15-ProductCard',
-  props: { product: Object, cardProducts: Object, settingGeneral: Object },
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+    cardProducts: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       hover: false,
@@ -148,19 +161,7 @@ export default {
       equalsPrice: false,
     }
   },
-  mounted() {
-    this.idSlug = this.product.id
-    this.productPrice()
-    if (
-      this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
-    ) {
-      this.estadoCart = true
-    }
-    if (this.product) {
-      this.getDataProduct()
-    }
-  },
+
   computed: {
     dataStore() {
       return this.$store.state.dataStore
@@ -216,6 +217,24 @@ export default {
         return !this.product.stock
       }
     },
+  },
+  watch: {
+    productsCarts() {
+      this.getDataProduct()
+    },
+  },
+  mounted() {
+    this.idSlug = this.product.id
+    this.productPrice()
+    if (
+      this.product.con_variante &&
+      this.product.variantes[0].variantes !== '[object Object]'
+    ) {
+      this.estadoCart = true
+    }
+    if (this.product) {
+      this.getDataProduct()
+    }
   },
   methods: {
     getDataProduct() {
@@ -302,7 +321,7 @@ export default {
           ) {
             let arrPrice = []
             this.product.combinaciones.find((products) => {
-              if (products.precio && products.estado == true) {
+              if (products.precio && products.estado) {
                 arrPrice.push(products.precio)
               }
             })
@@ -323,11 +342,6 @@ export default {
           }
         }
       }
-    },
-  },
-  watch: {
-    productsCarts(value) {
-      this.getDataProduct()
     },
   },
 }

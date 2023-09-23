@@ -1,14 +1,14 @@
-exports.ids = [199];
+exports.ids = [201];
 exports.modules = {
 
-/***/ 1089:
+/***/ 1092:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=template&id=d0959476&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/template11/index.vue?vue&type=template&id=4e33581a&
 var render = function render() {
   var _vm$settingByTemplate, _vm$settingByTemplate2, _vm$settingByTemplate3, _vm$settingByTemplate4, _vm$settingByTemplate5, _vm$settingByTemplate6, _vm$dataHoko, _vm$settingByTemplate7, _vm$settingByTemplate8, _vm$fullProducts, _vm$settingByTemplate9, _vm$settingByTemplate10, _vm$dataHoko2, _vm$dataHoko3, _vm$settingByTemplate11, _vm$settingByTemplate12, _vm$settingByTemplate13, _vm$settingByTemplate14, _vm$listArticulos;
   var _vm = this,
@@ -46,7 +46,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/template11/index.vue?vue&type=template&id=d0959476&
+// CONCATENATED MODULE: ./pages/template11/index.vue?vue&type=template&id=4e33581a&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(9);
@@ -56,14 +56,14 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template11vue_type_script_lang_js_ = ({
   name: 'KoTemplate11',
   components: {
-    K011Carousel: () => __webpack_require__.e(/* import() */ 63).then(__webpack_require__.bind(null, 1135)),
-    K011Section: () => __webpack_require__.e(/* import() */ 67).then(__webpack_require__.bind(null, 1139)),
-    K011TrendingProduct: () => __webpack_require__.e(/* import() */ 68).then(__webpack_require__.bind(null, 1140)),
-    K011TrendingProductHoko: () => __webpack_require__.e(/* import() */ 69).then(__webpack_require__.bind(null, 1141)),
-    K011Parallax: () => __webpack_require__.e(/* import() */ 66).then(__webpack_require__.bind(null, 1138)),
-    K011ListTrending: () => __webpack_require__.e(/* import() */ 65).then(__webpack_require__.bind(null, 1137)),
-    K011Information: () => __webpack_require__.e(/* import() */ 64).then(__webpack_require__.bind(null, 1136)),
-    K011Blog: () => __webpack_require__.e(/* import() */ 62).then(__webpack_require__.bind(null, 1134))
+    K011Carousel: () => __webpack_require__.e(/* import() */ 63).then(__webpack_require__.bind(null, 1138)),
+    K011Section: () => __webpack_require__.e(/* import() */ 67).then(__webpack_require__.bind(null, 1142)),
+    K011TrendingProduct: () => __webpack_require__.e(/* import() */ 68).then(__webpack_require__.bind(null, 1143)),
+    K011TrendingProductHoko: () => __webpack_require__.e(/* import() */ 69).then(__webpack_require__.bind(null, 1144)),
+    K011Parallax: () => __webpack_require__.e(/* import() */ 66).then(__webpack_require__.bind(null, 1141)),
+    K011ListTrending: () => __webpack_require__.e(/* import() */ 65).then(__webpack_require__.bind(null, 1140)),
+    K011Information: () => __webpack_require__.e(/* import() */ 64).then(__webpack_require__.bind(null, 1139)),
+    K011Blog: () => __webpack_require__.e(/* import() */ 62).then(__webpack_require__.bind(null, 1137))
   },
   layout: 'default',
   data() {
@@ -166,7 +166,7 @@ var external_vuex_ = __webpack_require__(9);
               break;
           }
         } else {
-          if (e && e.data && e.data.returnHome == true) {
+          if (e && e.data && e.data.returnHome) {
             this.$router.push({
               path: '/'
             });

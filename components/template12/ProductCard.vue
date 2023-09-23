@@ -8,9 +8,7 @@
     <div
       class="content-img-prodcut"
       :class="
-        settingByTemplate12.responsiveImages == true
-          ? 'img_visileRes'
-          : 'img_normal'
+        settingByTemplate12.responsiveImages ? 'img_visileRes' : 'img_normal'
       "
     >
       <img
@@ -20,9 +18,7 @@
         class="product-image"
         alt="Product Img"
         :class="
-          settingByTemplate12.roundedImages == true
-            ? 'img_rounded'
-            : 'img_normal'
+          settingByTemplate12.roundedImages ? 'img_rounded' : 'img_normal'
         "
       />
       <img
@@ -32,9 +28,7 @@
         class="product-image product-image-soldOut"
         alt="Product Img soldOut"
         :class="
-          settingByTemplate12.roundedImages == true
-            ? 'img_rounded'
-            : 'img_normal'
+          settingByTemplate12.roundedImages ? 'img_rounded' : 'img_normal'
         "
       />
     </div>
@@ -282,7 +276,7 @@ export default {
           ) {
             let arrPrice = []
             this.product.combinaciones.find((products) => {
-              if (products.precio && products.estado == true) {
+              if (products.precio && products.estado) {
                 arrPrice.push(products.precio)
               }
             })

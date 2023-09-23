@@ -1,4 +1,4 @@
-exports.ids = [78,257];
+exports.ids = [78,259];
 exports.modules = {
 
 /***/ 101:
@@ -49,7 +49,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 1146:
+/***/ 1149:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -114,8 +114,8 @@ var ComponentProps = __webpack_require__(101);
 /* harmony default export */ var Ko12_IMainSectionvue_type_script_lang_js_ = ({
   name: 'Ko12IMainSection',
   components: {
-    ProductCard: () => __webpack_require__.e(/* import() */ 79).then(__webpack_require__.bind(null, 1147)),
-    K012ProductDetail: () => __webpack_require__.e(/* import() */ 74).then(__webpack_require__.bind(null, 1142))
+    ProductCard: () => __webpack_require__.e(/* import() */ 79).then(__webpack_require__.bind(null, 1150)),
+    K012ProductDetail: () => __webpack_require__.e(/* import() */ 74).then(__webpack_require__.bind(null, 1145))
   },
   mixins: [ComponentProps["default"]],
   data() {
@@ -174,7 +174,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(714)
+  var style0 = __webpack_require__(715)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -209,7 +209,7 @@ module.exports = __webpack_require__.p + "img/gradient-line.6fc51f5.png";
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(715);
+var content = __webpack_require__(716);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -221,7 +221,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 714:
+/***/ 715:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -233,7 +233,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 715:
+/***/ 716:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

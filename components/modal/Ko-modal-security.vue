@@ -184,7 +184,7 @@ export default {
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
       ) {
-        if (e && e.data && e.data.modalSecurity === true) {
+        if (e && e.data && e.data.modalSecurity) {
           this.$store.commit('SET_STATE_MODAL_PWD', true)
         }
       }

@@ -1,7 +1,7 @@
-exports.ids = [45,237];
+exports.ids = [45,239];
 exports.modules = {
 
-/***/ 1120:
+/***/ 1123:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -41,7 +41,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/template10/Ko10-blog.vue?vue&type=template&id=f1097e30&scoped=true&
 
 // EXTERNAL MODULE: ./components/template10/_blog/blogcard.vue + 4 modules
-var blogcard = __webpack_require__(601);
+var blogcard = __webpack_require__(602);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/template10/Ko10-blog.vue?vue&type=script&lang=js&
 
@@ -119,7 +119,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(662)
+  var style0 = __webpack_require__(663)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -192,7 +192,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(663);
+var content = __webpack_require__(664);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -260,7 +260,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 601:
+/***/ 602:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -430,7 +430,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 662:
+/***/ 663:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -442,7 +442,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 663:
+/***/ 664:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

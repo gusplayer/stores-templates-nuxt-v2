@@ -1,7 +1,7 @@
-exports.ids = [332,236];
+exports.ids = [333,238];
 exports.modules = {
 
-/***/ 1085:
+/***/ 1088:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34,7 +34,7 @@ var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_)
 var external_vuex_ = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./components/miCompra/Ko-miCompra-1.vue + 4 modules
-var Ko_miCompra_1 = __webpack_require__(596);
+var Ko_miCompra_1 = __webpack_require__(597);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/micompra.vue?vue&type=script&lang=js&
 
@@ -519,7 +519,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 596:
+/***/ 597:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

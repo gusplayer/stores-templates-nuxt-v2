@@ -17,8 +17,8 @@
           <span class="tittle">{{ productList.title }}</span>
         </div>
       </div>
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-        <div class="swiper-wrapper pb-10" v-if="this.fullProducts.length > 0">
+      <div ref="mySwiper" v-swiper:mySwiper="swiperOption">
+        <div v-if="fullProducts.length > 0" class="swiper-wrapper pb-10">
           <div
             v-for="product in fullProducts.slice(0, 12)"
             :key="product.id"
@@ -26,8 +26,8 @@
           >
             <KoProductCard
               :product="product"
-              :cardProduct="cardProduct"
-              :settingGeneral="settingGeneral"
+              :card-product="cardProduct"
+              :setting-general="settingGeneral"
               class="giftLoad"
             />
           </div>
@@ -36,7 +36,7 @@
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
-      <div class="btn-products" v-if="productList.visibleBtn">
+      <div v-if="productList.visibleBtn" class="btn-products">
         <a
           :href="productList.url_redirect ? productList.url_redirect : ''"
           rel="noreferrer noopener"
@@ -49,19 +49,33 @@
 </template>
 
 <script>
-import KoProductCard from './_productcard/Ko-ProductCard-1.vue'
 export default {
+  name: 'Ko13ProductList',
   components: {
-    KoProductCard,
+    KoProductCard: () => import('./_productcard/Ko-ProductCard-1.vue'),
   },
   props: {
-    productList: Object,
-    settingGeneral: Object,
-    cardProduct: Object,
-    dataStore: Object,
-    fullProducts: {},
+    productList: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    cardProduct: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
   },
-  name: 'Ko13-ProductList-1',
   data() {
     return {
       swiperOption: {

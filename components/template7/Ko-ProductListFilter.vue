@@ -488,7 +488,7 @@ export default {
     if (
       this.settingByTemplate7[0] &&
       this.settingByTemplate7[0].productListFilter &&
-      this.settingByTemplate7[0].productListFilter.img_background == true
+      this.settingByTemplate7[0].productListFilter.img_background
     ) {
       this.setBg(1)
     } else {
@@ -720,7 +720,7 @@ export default {
         catalogo.style.color = '#8e8e8e'
         catalogo.style.fontWeight = '100'
       }
-      if (this.stateSub == true && stateCategory) {
+      if (this.stateSub && stateCategory) {
         stateCategory.style.color = '#333333'
         stateCategory.style.fontWeight = '600'
       }
@@ -749,7 +749,7 @@ export default {
       this.stateSub = true
       var stateCategory = document.getElementById('stateCate07')
       var catalogo = document.getElementById('homeCate07')
-      if (this.stateSub == true && stateCategory) {
+      if (this.stateSub && stateCategory) {
         catalogo.style.color = '#8e8e8e'
         catalogo.style.fontWeight = '100'
         stateCategory.style.color = '#333333'
@@ -843,7 +843,7 @@ export default {
       if (
         this.settingByTemplate7[0] &&
         this.settingByTemplate7[0].productListFilter &&
-        this.settingByTemplate7[0].productListFilter.img_background == true
+        this.settingByTemplate7[0].productListFilter.img_background
       ) {
         this.setBg(1)
       } else {

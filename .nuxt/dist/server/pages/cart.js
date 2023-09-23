@@ -1,7 +1,7 @@
-exports.ids = [329];
+exports.ids = [330];
 exports.modules = {
 
-/***/ 1083:
+/***/ 1086:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26,7 +26,7 @@ var staticRenderFns = [];
 /* harmony default export */ var cartvue_type_script_lang_js_ = ({
   name: 'ContentCart',
   components: {
-    KCart: () => __webpack_require__.e(/* import() */ 18).then(__webpack_require__.bind(null, 1113))
+    KCart: () => __webpack_require__.e(/* import() */ 18).then(__webpack_require__.bind(null, 1116))
   },
   layout: 'default',
   computed: {

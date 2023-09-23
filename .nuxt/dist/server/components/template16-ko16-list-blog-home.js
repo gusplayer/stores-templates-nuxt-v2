@@ -1,7 +1,7 @@
-exports.ids = [131];
+exports.ids = [132];
 exports.modules = {
 
-/***/ 1189:
+/***/ 1192:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44,7 +44,7 @@ var staticRenderFns = [];
 /* harmony default export */ var ko16_listBlogHomevue_type_script_lang_js_ = ({
   name: 'Ko16ListBlogHome',
   components: {
-    KoBlogCard: () => __webpack_require__.e(/* import() */ 14).then(__webpack_require__.bind(null, 1283))
+    KoBlogCard: () => __webpack_require__.e(/* import() */ 15).then(__webpack_require__.bind(null, 1286))
   },
   props: {
     listBlogHome: {

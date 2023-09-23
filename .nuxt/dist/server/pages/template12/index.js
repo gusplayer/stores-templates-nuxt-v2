@@ -1,7 +1,7 @@
-exports.ids = [200];
+exports.ids = [202];
 exports.modules = {
 
-/***/ 1090:
+/***/ 1093:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43,11 +43,11 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template12vue_type_script_lang_js_ = ({
   name: 'KoTemplate12',
   components: {
-    K012IHeader: () => __webpack_require__.e(/* import() */ 76).then(__webpack_require__.bind(null, 1144)),
-    K012IHeroImage: () => __webpack_require__.e(/* import() */ 77).then(__webpack_require__.bind(null, 1145)),
-    K012IMainSection: () => __webpack_require__.e(/* import() */ 78).then(__webpack_require__.bind(null, 1146)),
-    K012IFooter: () => __webpack_require__.e(/* import() */ 75).then(__webpack_require__.bind(null, 1143)),
-    K010ButtonCar: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 1121))
+    K012IHeader: () => __webpack_require__.e(/* import() */ 76).then(__webpack_require__.bind(null, 1147)),
+    K012IHeroImage: () => __webpack_require__.e(/* import() */ 77).then(__webpack_require__.bind(null, 1148)),
+    K012IMainSection: () => __webpack_require__.e(/* import() */ 78).then(__webpack_require__.bind(null, 1149)),
+    K012IFooter: () => __webpack_require__.e(/* import() */ 75).then(__webpack_require__.bind(null, 1146)),
+    K010ButtonCar: () => __webpack_require__.e(/* import() */ 12).then(__webpack_require__.bind(null, 1124))
   },
   layout: 'default',
   computed: {
@@ -101,7 +101,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(630)
+  var style0 = __webpack_require__(631)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -129,7 +129,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(631);
+var content = __webpack_require__(632);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -141,7 +141,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 630:
+/***/ 631:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -153,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 631:
+/***/ 632:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

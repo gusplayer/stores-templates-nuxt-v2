@@ -12,14 +12,14 @@
         class="hidden w-full h-full lg:flex flex-row items-center justify-start"
       >
         <img
-          v-lazy="idCloudinary(items.icono, 150, 150)"
+          v-lazy="items.icono"
           width="40"
           height="40"
           class="object-contain object-center max-w-[40px] max-h-[40px]"
           :class="`contentImg${index}`"
           :alt="`imgInfo${index}`"
         />
-        <div class="w-full">
+        <div class="w-full ml-10">
           <p
             class="mb-5"
             :style="`color: ${items.color_title}; font-size: ${items.fontSizeTitle}; font-weight: ${items.fontWeighTitle};`"
@@ -52,7 +52,7 @@
               :class="`contentImg${index}`"
               :alt="`imgInfo${index}`"
             />
-            <div class="w-full">
+            <div class="w-full ml-10">
               <p
                 class="mb-5"
                 :style="`color: ${items.color_title}; font-size: ${items.fontSizeTitle}; font-weight: ${items.fontWeighTitle};`"

@@ -209,7 +209,7 @@
             v-else-if="
               !spent &&
               salesData.precio > 0 &&
-              salesData.estado == true &&
+              salesData.estado &&
               (data.info.dealer_whatsapp === '0' ||
                 data.info.dealer_whatsapp === null ||
                 data.info.dealer_whatsapp === '')

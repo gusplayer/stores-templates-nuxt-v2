@@ -1,7 +1,7 @@
-exports.ids = [97];
+exports.ids = [98];
 exports.modules = {
 
-/***/ 1163:
+/***/ 1166:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60,7 +60,7 @@ var staticRenderFns = [];
     cardBlog: Object
   },
   components: {
-    KoBlogCard: () => __webpack_require__.e(/* import() */ 12).then(__webpack_require__.bind(null, 1271))
+    KoBlogCard: () => __webpack_require__.e(/* import() */ 13).then(__webpack_require__.bind(null, 1274))
   },
   data() {
     return {

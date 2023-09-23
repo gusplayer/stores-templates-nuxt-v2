@@ -214,7 +214,7 @@ export default {
       this.searchIdForSlug()
     },
     settingK07Blog() {
-      if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
+      if (this.settingK07Blog && this.settingK07Blog.img_background) {
         this.setBg()
       }
     },
@@ -223,7 +223,7 @@ export default {
     if (this.listArticulos.length) {
       this.searchIdForSlug()
     }
-    if (this.settingK07Blog && this.settingK07Blog.img_background == true) {
+    if (this.settingK07Blog && this.settingK07Blog.img_background) {
       this.setBg()
     }
   },

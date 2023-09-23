@@ -1,22 +1,22 @@
 <template>
   <div class="content-slide-categorys">
     <div class="content-categories">
-      <div class="itens-slide-categories" id="swiper-slide-categories">
+      <div id="swiper-slide-categories" class="itens-slide-categories">
         <div
           class="tags"
           :class="idCategory == '' ? 'active-tag' : 'disable-tag'"
           @click="clear"
         >
-          <p class="txt-category" @click="sendCategory('', '', (ref = false))">
+          <p class="txt-category" @click="sendCategory('', '')">
             {{ $t('home_todo') }}
           </p>
         </div>
         <div
-          class="tags"
-          :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
           v-for="categoria in categorias"
           :key="categoria.id"
-          @click="sendCategory(categoria, categoria.id, (ref = false))"
+          class="tags"
+          :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
+          @click="sendCategory(categoria, categoria.id)"
         >
           <div>
             <p class="txt-category">
@@ -27,21 +27,21 @@
       </div>
     </div>
     <div
-      class="content-categories"
       v-if="
         settingByTemplate.state_subcategorias == 1 &&
         selectedSubcategories.length > 0
       "
+      class="content-categories"
     >
-      <div class="itens-slide-categories" id="swiper-slide-categories">
+      <div id="swiper-slide-categories" class="itens-slide-categories">
         <div
+          v-for="(subcategorys, index) in selectedSubcategories"
+          :key="index"
           class="tags"
           :class="
             subcategorys.id == idSubCategory ? 'active-tag' : 'disable-tag'
           "
-          v-for="(subcategorys, index) in selectedSubcategories"
-          :key="index"
-          @click="SendSubCategory(subcategorys.id)"
+          @click="sendSubCategory(subcategorys.id)"
         >
           <div>
             <p class="txt-category">
@@ -57,8 +57,14 @@
 export default {
   name: 'CategorySlideWa3',
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -86,88 +92,96 @@ export default {
     },
   },
   methods: {
-    SendSubCategory(value) {
-      this.idSubCategory = value
+    navigateToRoute(path) {
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
       } else {
-        this.$router.push(`/`)
+        this.$router.push(path)
       }
+    },
+    sendSubCategory(value) {
+      this.idSubCategory = value
+      this.navigateToRoute('/')
       this.$store.commit('SET_STATE_BANNER', false)
-      let filtradoSubCategory = this.subcategories.find(
-        (element) => element.id == value
+
+      const filtradoSubCategory = this.subcategories.find(
+        (element) => element.id === value
       )
+
       if (filtradoSubCategory && filtradoSubCategory.categoria) {
-        let filtradoCategories = this.categorias.find(
-          (element) => element.id == filtradoSubCategory.categoria
+        const filtradoCategories = this.categorias.find(
+          (element) => element.id === filtradoSubCategory.categoria
         )
         this.$store.commit(
           'SET_CATEGORY_PRODUCTO',
           filtradoCategories.nombre_categoria_producto
         )
         this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
+
         this.$router.push({
           path: '',
           query: {
             subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
           },
         })
+
         this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
         this.$store.commit('products/FILTER_BY', {
           type: ['subcategory'],
           data: value,
         })
+
         this.$store.commit('SET_PREVIOUS_PAGE', 1)
       }
     },
-    sendCategory(value, categoria, ref) {
+    sendCategory(value, categoria) {
       this.idCategory = categoria
-      if (this.stateWapiME) {
-        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
-      } else {
-        this.$router.push(`/`)
-      }
+      this.navigateToRoute('/')
       this.$store.commit('SET_STATE_BANNER', false)
       this.nameCategory = value.nombre_categoria_producto
       this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
+
       this.$router.push({
         path: '',
         query: { category: this.nameCategory },
       })
+
       this.selectedSubcategories = []
-      this.subcategories.find((subcategory) => {
+      this.subcategories.forEach((subcategory) => {
         if (subcategory.categoria === categoria) {
           this.toggleCategories = false
           this.selectedSubcategories.push(subcategory)
         }
       })
+
       this.$store.commit('products/FILTER_BY', {
         type: ['category'],
         data: value.nombre_categoria_producto,
       })
+
       this.$store.commit('SET_PREVIOUS_PAGE', 1)
     },
     clear() {
       this.idCategory = ''
       this.idSubCategory = ''
-      this.selectedSubcategories = ''
+      this.selectedSubcategories = []
       this.$store.commit('SET_STATE_BANNER', true)
       this.$store.commit('SET_CATEGORY_PRODUCTO', '')
       this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
+
       this.$router.push({
         path: '',
         query: {},
       })
-      if (this.stateWapiME) {
-        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
-      } else {
-        this.$router.push(`/`)
-      }
+
+      this.navigateToRoute('/')
+
       this.$store.commit('products/FILTER_BY', {
         type: ['all'],
         data: '',
       })
+
       this.$emit('clear')
     },
   },

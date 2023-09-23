@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     submitNewsletter() {
-      if (this.checked == true) {
+      if (this.checked) {
         this.stateChehed = false
         this.$refs.validate
           .validate()

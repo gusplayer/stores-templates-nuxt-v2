@@ -7,13 +7,13 @@
             <p class="txt-catalogo" @click="clear">
               {{ $t('home_catalogo') }}
             </p>
-            <p class="txt-category mx-2" v-if="this.nameCategoryHeader">/</p>
-            <p class="txt-category" v-if="this.nameCategoryHeader">
-              {{ this.nameCategoryHeader }}
+            <p v-if="nameCategoryHeader" class="txt-category mx-2">/</p>
+            <p v-if="nameCategoryHeader" class="txt-category">
+              {{ nameCategoryHeader }}
             </p>
-            <p class="txt-category mx-2" v-if="this.nameSubCategoryHeader">/</p>
-            <p class="txt-category" v-if="this.nameSubCategoryHeader">
-              {{ this.nameSubCategoryHeader }}
+            <p v-if="nameSubCategoryHeader" class="txt-category mx-2">/</p>
+            <p v-if="nameSubCategoryHeader" class="txt-category">
+              {{ nameSubCategoryHeader }}
             </p>
           </div>
           <div>
@@ -24,25 +24,25 @@
             />
           </div>
         </div>
-        <KoSearch :settingByTemplate="settingByTemplate" />
-        <KoMenu :dataStore="dataStore" :settingByTemplate="settingByTemplate" />
+        <KoSearch :setting-by-template="settingByTemplate" />
+        <KoMenu
+          :data-store="dataStore"
+          :setting-by-template="settingByTemplate"
+        />
         <div class="content-grid-product">
           <div
-            class="card-product"
             v-for="product in filterProduct"
             :key="product.id"
+            class="card-product"
           >
-            <ProductCard :product="product" :dataStore="dataStore" />
+            <ProductCard :product="product" :data-store="dataStore" />
           </div>
         </div>
-        <div
-          v-if="this.fullProducts.length == 0"
-          class="content-products-empty"
-        >
+        <div v-if="fullProducts.length == 0" class="content-products-empty">
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
         <br />
-        <div class="wrapper-pagination" v-if="fullProducts.length > 18">
+        <div v-if="fullProducts.length > 18" class="wrapper-pagination">
           <div class="pagination-medium">
             <el-pagination
               background
@@ -64,19 +64,18 @@ import ProductCard from '../template2/productCard/ko-productCard'
 import filterProducts from '../../../mixins/filterProducts'
 import KoMenu from '../../headers/_lateralMenu/_lateralMenu/openMenuLeftWapi.vue'
 export default {
-  name: 'ProductGridWa-2',
+  name: 'ProductGridWa2',
   components: { ProductCard, KoSearch, KoMenu },
   mixins: [filterProducts],
   props: {
-    dataStore: Object,
-    fullProducts: {},
-  },
-
-  mounted() {
-    this.getQuery()
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -127,6 +126,37 @@ export default {
     settingByTemplate() {
       return this.$store.state.settingByTemplate
     },
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct2(value)
+    },
+    currentPage() {
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+      let timerTimeout = null
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null
+        window.scrollTo(0, 0)
+      }, 250)
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage
+      }
+    },
+    searchValue(value) {
+      this.SearchProduct2(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.getQuery()
+    },
+  },
+  mounted() {
+    this.getQuery()
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
   },
   methods: {
     getQuery() {
@@ -191,31 +221,6 @@ export default {
         data: '',
       })
       this.$emit('clear')
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct2(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollTo(0, 0)
-      }, 250)
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    searchValue(value) {
-      this.SearchProduct2(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.getQuery()
     },
   },
 }

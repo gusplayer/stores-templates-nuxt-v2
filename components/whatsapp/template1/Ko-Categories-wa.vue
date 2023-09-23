@@ -20,7 +20,7 @@
           class="tags"
           :class="categoria.id == idCategory ? 'tags-active-wapi' : ''"
         >
-          <div @click="sendCategory(categoria, categoria.id, (ref = false))">
+          <div @click="sendCategory(categoria, categoria.id)">
             <p
               class="name-category"
               :class="categoria.id == idCategory ? 'name-category-active' : ''"
@@ -49,14 +49,14 @@
       >
         <FlechaLeft-icon class="btn-scroll-icon" />
       </div>
-      <div class="content-item-category" id="swiper-slide-subcategories">
+      <div id="swiper-slide-subcategories" class="content-item-category">
         <div
           v-for="(subcategorys, index) in selectedSubcategories"
           :key="index"
           class="tags"
           :class="subcategorys.id == idSubCategory ? 'tags-active-wapi' : ''"
         >
-          <div @click="SendSubCategory(subcategorys.id)">
+          <div @click="sendSubCategory(subcategorys.id)">
             <p
               class="name-category"
               :class="
@@ -80,13 +80,17 @@
 </template>
 
 <script>
-// import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  // mixins: [idCloudinary],
   name: 'KoCategoriesWa1',
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -114,7 +118,7 @@ export default {
     },
   },
   methods: {
-    SendSubCategory(value) {
+    sendSubCategory(value) {
       this.idSubCategory = value
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
@@ -147,7 +151,7 @@ export default {
       })
       this.$store.commit('SET_PREVIOUS_PAGE', 1)
     },
-    sendCategory(value, categoria, ref) {
+    sendCategory(value, categoria) {
       this.idCategory = categoria
       if (this.stateWapiME) {
         this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)

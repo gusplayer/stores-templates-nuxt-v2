@@ -1,7 +1,7 @@
-exports.ids = [325];
+exports.ids = [326];
 exports.modules = {
 
-/***/ 1111:
+/***/ 1114:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46,34 +46,34 @@ var expiredDate = __webpack_require__(54);
   name: 'LayoutDefault',
   components: {
     // HEADER
-    KoHeader1: () => __webpack_require__.e(/* import() */ 348).then(__webpack_require__.bind(null, 1047)),
+    KoHeader1: () => __webpack_require__.e(/* import() */ 349).then(__webpack_require__.bind(null, 1050)),
     // KoHeader2: () => import('../components/headers/header2/Ko-Header-2.vue'),
-    KoHeader3: () => __webpack_require__.e(/* import() */ 347).then(__webpack_require__.bind(null, 1048)),
-    KoHeader4: () => __webpack_require__.e(/* import() */ 344).then(__webpack_require__.bind(null, 1049)),
-    KoHeader5: () => __webpack_require__.e(/* import() */ 346).then(__webpack_require__.bind(null, 1050)),
-    KoHeader6: () => __webpack_require__.e(/* import() */ 349).then(__webpack_require__.bind(null, 1051)),
-    KoHeader7: () => __webpack_require__.e(/* import() */ 350).then(__webpack_require__.bind(null, 1052)),
-    KoHeader8: () => __webpack_require__.e(/* import() */ 345).then(__webpack_require__.bind(null, 1053)),
-    KoHeader9: () => __webpack_require__.e(/* import() */ 33).then(__webpack_require__.bind(null, 1249)),
-    KoHeader10: () => __webpack_require__.e(/* import() */ 34).then(__webpack_require__.bind(null, 1253)),
-    KoHeader11: () => __webpack_require__.e(/* import() */ 35).then(__webpack_require__.bind(null, 1254)),
+    KoHeader3: () => __webpack_require__.e(/* import() */ 348).then(__webpack_require__.bind(null, 1051)),
+    KoHeader4: () => __webpack_require__.e(/* import() */ 345).then(__webpack_require__.bind(null, 1052)),
+    KoHeader5: () => __webpack_require__.e(/* import() */ 347).then(__webpack_require__.bind(null, 1053)),
+    KoHeader6: () => __webpack_require__.e(/* import() */ 350).then(__webpack_require__.bind(null, 1054)),
+    KoHeader7: () => __webpack_require__.e(/* import() */ 351).then(__webpack_require__.bind(null, 1055)),
+    KoHeader8: () => __webpack_require__.e(/* import() */ 346).then(__webpack_require__.bind(null, 1056)),
+    KoHeader9: () => __webpack_require__.e(/* import() */ 33).then(__webpack_require__.bind(null, 1252)),
+    KoHeader10: () => __webpack_require__.e(/* import() */ 34).then(__webpack_require__.bind(null, 1256)),
+    KoHeader11: () => __webpack_require__.e(/* import() */ 35).then(__webpack_require__.bind(null, 1257)),
     // FOOTER
-    KoFooter1: () => __webpack_require__.e(/* import() */ 20).then(__webpack_require__.bind(null, 1235)),
+    KoFooter1: () => __webpack_require__.e(/* import() */ 20).then(__webpack_require__.bind(null, 1238)),
     // KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2.vue'),
-    KoFooter4: () => __webpack_require__.e(/* import() */ 21).then(__webpack_require__.bind(null, 1238)),
-    KoFooter5: () => __webpack_require__.e(/* import() */ 22).then(__webpack_require__.bind(null, 1239)),
-    KoFooter6: () => __webpack_require__.e(/* import() */ 23).then(__webpack_require__.bind(null, 1240)),
-    KoFooter7: () => __webpack_require__.e(/* import() */ 24).then(__webpack_require__.bind(null, 1241)),
-    KoFooter8: () => __webpack_require__.e(/* import() */ 25).then(__webpack_require__.bind(null, 1242)),
-    KoFooter9: () => __webpack_require__.e(/* import() */ 26).then(__webpack_require__.bind(null, 1243)),
-    KoFooter10: () => __webpack_require__.e(/* import() */ 27).then(__webpack_require__.bind(null, 1244)),
-    KoFooter11: () => __webpack_require__.e(/* import() */ 28).then(__webpack_require__.bind(null, 1245)),
+    KoFooter4: () => __webpack_require__.e(/* import() */ 21).then(__webpack_require__.bind(null, 1241)),
+    KoFooter5: () => __webpack_require__.e(/* import() */ 22).then(__webpack_require__.bind(null, 1242)),
+    KoFooter6: () => __webpack_require__.e(/* import() */ 23).then(__webpack_require__.bind(null, 1243)),
+    KoFooter7: () => __webpack_require__.e(/* import() */ 24).then(__webpack_require__.bind(null, 1244)),
+    KoFooter8: () => __webpack_require__.e(/* import() */ 25).then(__webpack_require__.bind(null, 1245)),
+    KoFooter9: () => __webpack_require__.e(/* import() */ 26).then(__webpack_require__.bind(null, 1246)),
+    KoFooter10: () => __webpack_require__.e(/* import() */ 27).then(__webpack_require__.bind(null, 1247)),
+    KoFooter11: () => __webpack_require__.e(/* import() */ 28).then(__webpack_require__.bind(null, 1248)),
     // OTROS
-    KoFooterCountry: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1236)),
-    koTiendaCerrada: () => __webpack_require__.e(/* import() */ 209).then(__webpack_require__.bind(null, 1322)),
-    koTiendaError: () => __webpack_require__.e(/* import() */ 36).then(__webpack_require__.bind(null, 598)),
-    koModalSecurity: () => __webpack_require__.e(/* import() */ 37).then(__webpack_require__.bind(null, 599)),
-    koWhatsApp: () => __webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(null, 1321))
+    KoFooterCountry: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 1239)),
+    koTiendaCerrada: () => __webpack_require__.e(/* import() */ 211).then(__webpack_require__.bind(null, 1326)),
+    koTiendaError: () => __webpack_require__.e(/* import() */ 36).then(__webpack_require__.bind(null, 599)),
+    koModalSecurity: () => __webpack_require__.e(/* import() */ 37).then(__webpack_require__.bind(null, 600)),
+    koWhatsApp: () => __webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(null, 1325))
   },
   mixins: [expiredDate["a" /* default */]],
   data() {
@@ -476,7 +476,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(644)
+  var style0 = __webpack_require__(645)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -504,7 +504,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(645);
+var content = __webpack_require__(646);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -553,7 +553,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 644:
+/***/ 645:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -565,7 +565,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 645:
+/***/ 646:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

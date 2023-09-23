@@ -1,8 +1,7 @@
 {
   "entry": "server.js",
   "files": {
-    "209.js": "209.js",
-    "344.js": "344.js",
+    "211.js": "211.js",
     "345.js": "345.js",
     "346.js": "346.js",
     "347.js": "347.js",
@@ -36,6 +35,7 @@
     "375.js": "375.js",
     "376.js": "376.js",
     "377.js": "377.js",
+    "378.js": "378.js",
     "components/cart-ko-cart.js": "components/cart-ko-cart.js",
     "components/footers-footer-wa-footer-wa1-ko-footer-wa-logo.js": "components/footers-footer-wa-footer-wa1-ko-footer-wa-logo.js",
     "components/footers-footer-wa-footer-wa2-ko-footer-wa.js": "components/footers-footer-wa-footer-wa2-ko-footer-wa.js",
@@ -235,6 +235,7 @@
     "components/template16-ko16-product-list-filter.js": "components/template16-ko16-product-list-filter.js",
     "components/template16-ko16-product-list-home.js": "components/template16-ko16-product-list-home.js",
     "components/template16-lateral-menu.js": "components/template16-lateral-menu.js",
+    "components/template16-offers-countdown.js": "components/template16-offers-countdown.js",
     "components/template16-productdetails-opt-tab.js": "components/template16-productdetails-opt-tab.js",
     "components/template16-productdetails-product-slide.js": "components/template16-productdetails-product-slide.js",
     "components/template16-productdetails-select-group.js": "components/template16-productdetails-select-group.js",
@@ -381,8 +382,7 @@
     "server.js": "server.js"
   },
   "maps": {
-    "209.js": "209.js.map",
-    "344.js": "344.js.map",
+    "211.js": "211.js.map",
     "345.js": "345.js.map",
     "346.js": "346.js.map",
     "347.js": "347.js.map",
@@ -416,6 +416,7 @@
     "375.js": "375.js.map",
     "376.js": "376.js.map",
     "377.js": "377.js.map",
+    "378.js": "378.js.map",
     "components/cart-ko-cart.js": "components/cart-ko-cart.js.map",
     "components/footers-footer-wa-footer-wa1-ko-footer-wa-logo.js": "components/footers-footer-wa-footer-wa1-ko-footer-wa-logo.js.map",
     "components/footers-footer-wa-footer-wa2-ko-footer-wa.js": "components/footers-footer-wa-footer-wa2-ko-footer-wa.js.map",
@@ -615,6 +616,7 @@
     "components/template16-ko16-product-list-filter.js": "components/template16-ko16-product-list-filter.js.map",
     "components/template16-ko16-product-list-home.js": "components/template16-ko16-product-list-home.js.map",
     "components/template16-lateral-menu.js": "components/template16-lateral-menu.js.map",
+    "components/template16-offers-countdown.js": "components/template16-offers-countdown.js.map",
     "components/template16-productdetails-opt-tab.js": "components/template16-productdetails-opt-tab.js.map",
     "components/template16-productdetails-product-slide.js": "components/template16-productdetails-product-slide.js.map",
     "components/template16-productdetails-select-group.js": "components/template16-productdetails-select-group.js.map",

@@ -203,7 +203,7 @@
         <div class="content-text-price" v-if="this.product.precio">
           <div
             class="wrapper-price"
-            v-if="this.estadoCart == true && this.minPrice != this.maxPrice"
+            v-if="this.estadoCart && this.minPrice != this.maxPrice"
           >
             <div class="content-price">
               <div
@@ -308,7 +308,7 @@
         <div class="content-text-price" v-if="this.product.precio">
           <div
             class="content-price"
-            v-if="this.estadoCart == true && this.minPrice != this.maxPrice"
+            v-if="this.estadoCart && this.minPrice != this.maxPrice"
           >
             <div
               class="text-price"
@@ -538,7 +538,7 @@ export default {
           ) {
             let arrPrice = []
             this.product.combinaciones.find((products) => {
-              if (products.precio && products.estado == true) {
+              if (products.precio && products.estado) {
                 arrPrice.push(products.precio)
               }
             })

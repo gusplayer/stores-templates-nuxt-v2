@@ -1,7 +1,7 @@
 exports.ids = [17];
 exports.modules = {
 
-/***/ 1100:
+/***/ 1103:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69,20 +69,20 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template99vue_type_script_lang_js_ = ({
   name: 'TemplateWhatsApp',
   components: {
-    KoHeaderWp1: () => __webpack_require__.e(/* import() */ 29).then(__webpack_require__.bind(null, 1250)),
-    KoHeaderWp2: () => __webpack_require__.e(/* import() */ 30).then(__webpack_require__.bind(null, 1251)),
-    KoHeaderWp3: () => __webpack_require__.e(/* import() */ 31).then(__webpack_require__.bind(null, 1252)),
-    KCategory01: () => __webpack_require__.e(/* import() */ 191).then(__webpack_require__.bind(null, 1308)),
-    KCategory02: () => __webpack_require__.e(/* import() */ 195).then(__webpack_require__.bind(null, 1312)),
-    KCategory03: () => __webpack_require__.e(/* import() */ 197).then(__webpack_require__.bind(null, 1314)),
-    KCategory04: () => __webpack_require__.e(/* import() */ 188).then(__webpack_require__.bind(null, 1307)),
-    KProductFavoritos: () => __webpack_require__.e(/* import() */ 192).then(__webpack_require__.bind(null, 1309)),
-    KProductList: () => __webpack_require__.e(/* import() */ 193).then(__webpack_require__.bind(null, 1310)),
-    KProductList2: () => __webpack_require__.e(/* import() */ 194).then(__webpack_require__.bind(null, 1311)),
-    KProductList3: () => __webpack_require__.e(/* import() */ 196).then(__webpack_require__.bind(null, 1313)),
-    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(null, 1316)),
-    KFooterWa: () => __webpack_require__.e(/* import() */ 19).then(__webpack_require__.bind(null, 1317)),
-    WCountry: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1236))
+    KoHeaderWp1: () => __webpack_require__.e(/* import() */ 29).then(__webpack_require__.bind(null, 1253)),
+    KoHeaderWp2: () => __webpack_require__.e(/* import() */ 30).then(__webpack_require__.bind(null, 1254)),
+    KoHeaderWp3: () => __webpack_require__.e(/* import() */ 31).then(__webpack_require__.bind(null, 1255)),
+    KCategory01: () => __webpack_require__.e(/* import() */ 193).then(__webpack_require__.bind(null, 1312)),
+    KCategory02: () => __webpack_require__.e(/* import() */ 197).then(__webpack_require__.bind(null, 1316)),
+    KCategory03: () => __webpack_require__.e(/* import() */ 199).then(__webpack_require__.bind(null, 1318)),
+    KCategory04: () => __webpack_require__.e(/* import() */ 190).then(__webpack_require__.bind(null, 1311)),
+    KProductFavoritos: () => __webpack_require__.e(/* import() */ 194).then(__webpack_require__.bind(null, 1313)),
+    KProductList: () => __webpack_require__.e(/* import() */ 195).then(__webpack_require__.bind(null, 1314)),
+    KProductList2: () => __webpack_require__.e(/* import() */ 196).then(__webpack_require__.bind(null, 1315)),
+    KProductList3: () => __webpack_require__.e(/* import() */ 198).then(__webpack_require__.bind(null, 1317)),
+    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1320)),
+    KFooterWa: () => __webpack_require__.e(/* import() */ 19).then(__webpack_require__.bind(null, 1321)),
+    WCountry: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 1239))
   },
   layout: 'wa',
   computed: {
@@ -264,7 +264,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(642)
+  var style0 = __webpack_require__(643)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -292,7 +292,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(643);
+var content = __webpack_require__(644);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -304,7 +304,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 642:
+/***/ 643:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -316,7 +316,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 643:
+/***/ 644:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

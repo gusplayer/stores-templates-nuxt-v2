@@ -187,14 +187,14 @@
               </div>
             </div>
             <div class="info-btn-footer">
-              <p class="btn mb-25">
+              <p class="btn mb-10">
                 {{ settingByTemplate16[0].newsletter.title }}
               </p>
               <KoNewsLetter
                 :setting-by-template16="settingByTemplate16"
                 :data-store="dataStore"
               />
-              <p class="btn">Nuestra empresa</p>
+              <p class="btn mt-25">Nuestra empresa</p>
               <button
                 v-if="dataStore.politicas"
                 class="btn-legal btns"

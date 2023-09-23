@@ -1,7 +1,7 @@
-exports.ids = [63,245];
+exports.ids = [63,247];
 exports.modules = {
 
-/***/ 1135:
+/***/ 1138:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51,7 +51,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/template11/Ko11-carousel.vue?vue&type=template&id=e695a5e4&scoped=true&
 
 // EXTERNAL MODULE: ./components/template11/_carouselBanner/banner-carousel.vue + 4 modules
-var banner_carousel = __webpack_require__(604);
+var banner_carousel = __webpack_require__(605);
 
 // EXTERNAL MODULE: ./mixins/idCloudinary.js
 var idCloudinary = __webpack_require__(47);
@@ -125,7 +125,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(692)
+  var style0 = __webpack_require__(693)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -198,7 +198,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(693);
+var content = __webpack_require__(694);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -266,7 +266,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 604:
+/***/ 605:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -328,7 +328,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 692:
+/***/ 693:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -340,7 +340,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 693:
+/***/ 694:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

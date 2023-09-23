@@ -51,7 +51,7 @@
               {{ $t('header_buscar_limpiar') }}
             </p>
           </nuxt-link>
-          <el-collapse v-model="activeNames" @change="handleChange">
+          <el-collapse v-model="activeNames">
             <el-collapse-item :title="$t('header_buscar_producto')" name="1">
               <input
                 v-model="search"
@@ -555,9 +555,6 @@ export default {
       this.showSubCategory = false
       this.selectedSubcategories = []
     },
-    handleChange(val) {
-      // console.log(val);
-    },
   },
 }
 </script>
@@ -597,7 +594,7 @@ export default {
 .content-left >>> .el-collapse-item__header {
   font-size: 15px;
   font-family: var(--font-style-1) !important;
-  color: var(--color_text);
+  color: var(--color_subCategories);
   background-color: transparent;
   border-bottom: 1px solid var(--color_border);
   @apply font-semibold;
@@ -611,7 +608,7 @@ export default {
 }
 .input-slide {
   font-size: 15px;
-  color: var(--color_subtext);
+  color: var(--color_categories);
   font-family: var(--font-style-1) !important;
   background: transparent;
   @apply w-full h-30 cursor-pointer border-none;
@@ -702,7 +699,7 @@ export default {
   @apply w-full flex flex-col justify-start items-center;
 }
 .txt-Filter {
-  color: var(--color_subtext);
+  color: var(--color_categories);
   font-size: 15px;
   line-height: 1.3;
   font-family: var(--font-style-1) !important;
@@ -712,7 +709,7 @@ export default {
   color: #eb7025;
 }
 .txt-categorys {
-  color: var(--color_subtext);
+  color: var(--color_categories);
   font-size: 15px;
   line-height: 1.3;
   font-family: var(--font-style-1) !important;
@@ -751,11 +748,11 @@ export default {
   @apply w-full cursor-pointer mt-4;
 }
 .show-icon {
-  fill: var(--color_text);
+  fill: var(--color_icon);
   @apply p-3;
 }
 .show-icon-active {
-  fill: var(--color_subtext);
+  fill: var(--color_icon);
   background-color: transparent;
 }
 .show-icon:hover {
@@ -772,7 +769,7 @@ export default {
   @apply w-full flex flex-col justify-start items-start;
 }
 .btn-tittle-shop {
-  color: var(--color_text);
+  color: var(--color_subCategories);
   font-family: var(--font-style-1) !important;
   @apply font-semibold uppercase justify-start items-start;
 }
@@ -828,22 +825,22 @@ export default {
   background-color: transparent;
 }
 .product_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: var(--pagination_color);
+  color: var(--color_pagination);
 }
 .product_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: var(--pagination_color);
+  color: var(--color_pagination);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled):hover {
-  color: var(--pagination_color);
+  color: var(--color_pagination);
 }
 .product_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled).active {
-  background-color: var(--pagination_color);
+  background-color: var(--color_pagination);
   color: #fff;
 }
 .product-stock {
@@ -893,7 +890,7 @@ export default {
   }
   .txt-content-home {
     font-family: var(--font-style-1) !important;
-    color: var(--color_text);
+    color: var(--color_subCategories);
     font-size: 16px;
     line-height: 1.1;
     @apply w-auto py-20 uppercase font-semibold cursor-pointer;

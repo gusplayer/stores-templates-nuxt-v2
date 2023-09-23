@@ -32,7 +32,7 @@
               {{ $t('header_buscar_limpiar') }}
             </p>
           </nuxt-link>
-          <el-collapse v-model="activeNames" @change="handleChange">
+          <el-collapse v-model="activeNames">
             <el-collapse-item :title="$t('header_buscar_producto')" name="1">
               <input
                 class="input-slide"
@@ -580,9 +580,6 @@ export default {
       this.nameCategory = ''
       this.showSubCategory = false
       this.selectedSubcategories = []
-    },
-    handleChange(val) {
-      // console.log(val);
     },
   },
   watch: {

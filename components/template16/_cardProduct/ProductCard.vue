@@ -51,7 +51,7 @@
         </div>
       </nuxt-link>
       <div class="mt-10">
-        <div v-if="estadoCart == true && equalsPrice">
+        <div v-if="estadoCart && equalsPrice">
           <p v-if="minPrice" class="text-price">
             {{
               minPrice
@@ -63,7 +63,7 @@
           </p>
         </div>
         <div
-          v-else-if="estadoCart == true && minPrice && maxPrice && !equalsPrice"
+          v-else-if="estadoCart && minPrice && maxPrice && !equalsPrice"
           class="content-price"
         >
           <div class="text-price">
@@ -324,7 +324,7 @@ export default {
           ) {
             let arrPrice = []
             this.product.combinaciones.find((products) => {
-              if (products.precio && products.estado == true) {
+              if (products.precio && products.estado) {
                 arrPrice.push(products.precio)
               }
             })

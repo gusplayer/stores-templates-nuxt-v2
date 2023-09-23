@@ -1,7 +1,7 @@
-exports.ids = [117];
+exports.ids = [118];
 exports.modules = {
 
-/***/ 1178:
+/***/ 1181:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65,7 +65,7 @@ var staticRenderFns = [];
     }
   },
   components: {
-    KoProductCard: () => __webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(null, 1068))
+    KoProductCard: () => __webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(null, 1073))
   },
   data() {
     return {
@@ -134,7 +134,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(770)
+  var style0 = __webpack_require__(771)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -162,7 +162,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(771);
+var content = __webpack_require__(772);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -174,7 +174,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 770:
+/***/ 771:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -186,7 +186,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 771:
+/***/ 772:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

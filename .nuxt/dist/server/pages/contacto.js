@@ -1,14 +1,14 @@
-exports.ids = [330];
+exports.ids = [331];
 exports.modules = {
 
-/***/ 1084:
+/***/ 1087:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=template&id=685770a6&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/contacto.vue?vue&type=template&id=f6974482&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,7 +18,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/contacto.vue?vue&type=template&id=685770a6&
+// CONCATENATED MODULE: ./pages/contacto.vue?vue&type=template&id=f6974482&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(9);
@@ -28,15 +28,15 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var contactovue_type_script_lang_js_ = ({
   name: 'KoContact',
   components: {
-    K05Contact: () => __webpack_require__.e(/* import() */ 148).then(__webpack_require__.bind(null, 1200)),
-    K07Contact: () => __webpack_require__.e(/* import() */ 165).then(__webpack_require__.bind(null, 1216)),
-    K09Contact: () => __webpack_require__.e(/* import() */ 174).then(__webpack_require__.bind(null, 1222)),
-    K10Contact: () => __webpack_require__.e(/* import() */ 40).then(__webpack_require__.bind(null, 1115)),
-    K11Contact: () => __webpack_require__.e(/* import() */ 56).then(__webpack_require__.bind(null, 1127)),
-    K13Contact: () => __webpack_require__.e(/* import() */ 82).then(__webpack_require__.bind(null, 1149)),
-    K14Contact: () => __webpack_require__.e(/* import() */ 92).then(__webpack_require__.bind(null, 1158)),
-    K15Contact: () => __webpack_require__.e(/* import() */ 112).then(__webpack_require__.bind(null, 1173)),
-    K16Contact: () => __webpack_require__.e(/* import() */ 127).then(__webpack_require__.bind(null, 1185))
+    K05Contact: () => __webpack_require__.e(/* import() */ 150).then(__webpack_require__.bind(null, 1203)),
+    K07Contact: () => __webpack_require__.e(/* import() */ 167).then(__webpack_require__.bind(null, 1219)),
+    K09Contact: () => __webpack_require__.e(/* import() */ 176).then(__webpack_require__.bind(null, 1225)),
+    K10Contact: () => __webpack_require__.e(/* import() */ 40).then(__webpack_require__.bind(null, 1118)),
+    K11Contact: () => __webpack_require__.e(/* import() */ 56).then(__webpack_require__.bind(null, 1130)),
+    K13Contact: () => __webpack_require__.e(/* import() */ 82).then(__webpack_require__.bind(null, 1152)),
+    K14Contact: () => __webpack_require__.e(/* import() */ 93).then(__webpack_require__.bind(null, 1161)),
+    K15Contact: () => __webpack_require__.e(/* import() */ 113).then(__webpack_require__.bind(null, 1176)),
+    K16Contact: () => __webpack_require__.e(/* import() */ 128).then(__webpack_require__.bind(null, 1188))
   },
   layout: 'default',
   data() {
@@ -119,7 +119,7 @@ var external_vuex_ = __webpack_require__(9);
             const commitAction = this.templateMapping[template];
             this.$store.commit(commitAction, e.data);
           }
-        } else if (e && e.data && e.data.returnHome == true) {
+        } else if (e && e.data && e.data.returnHome) {
           this.$router.push({
             path: '/'
           });

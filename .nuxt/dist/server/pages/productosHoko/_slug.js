@@ -1,14 +1,14 @@
-exports.ids = [335];
+exports.ids = [336];
 exports.modules = {
 
-/***/ 1105:
+/***/ 1108:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/_slug.vue?vue&type=template&id=320527c4&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/productosHoko/_slug.vue?vue&type=template&id=429d8330&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,7 +18,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/productosHoko/_slug.vue?vue&type=template&id=320527c4&
+// CONCATENATED MODULE: ./pages/productosHoko/_slug.vue?vue&type=template&id=429d8330&
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(9);
@@ -27,10 +27,10 @@ var external_vuex_ = __webpack_require__(9);
 
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   components: {
-    Ko5ProductDetailHoko: () => __webpack_require__.e(/* import() */ 144).then(__webpack_require__.bind(null, 1196)),
-    Ko9ProductDetailHoko: () => __webpack_require__.e(/* import() */ 178).then(__webpack_require__.bind(null, 1226)),
-    Ko11ProductDetailHoko: () => __webpack_require__.e(/* import() */ 59).then(__webpack_require__.bind(null, 1130)),
-    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(null, 1081))
+    Ko5ProductDetailHoko: () => __webpack_require__.e(/* import() */ 146).then(__webpack_require__.bind(null, 1199)),
+    Ko9ProductDetailHoko: () => __webpack_require__.e(/* import() */ 180).then(__webpack_require__.bind(null, 1229)),
+    Ko11ProductDetailHoko: () => __webpack_require__.e(/* import() */ 59).then(__webpack_require__.bind(null, 1133)),
+    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 1084))
   },
   data() {
     return {
@@ -123,7 +123,7 @@ var external_vuex_ = __webpack_require__(9);
           } else if (e.data.template == 10) {
             this.$store.commit('SET_CURRENTSETTING10', e.data);
           }
-        } else if (e && e.data && e.data.returnHome == true) {
+        } else if (e && e.data && e.data.returnHome) {
           this.$router.push({
             path: '/'
           });

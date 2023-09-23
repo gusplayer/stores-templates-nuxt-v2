@@ -128,7 +128,6 @@ export default {
         e.origin.includes('http://localhost:8080')
       ) {
         if (e && e.data && e.data.component && e.data.template == 16) {
-          console.log(e.data.component)
           this.$store.commit('SET_CURRENTSETTING16', e.data)
           if (e.data.component == 'banner') {
             this.Ko16BannerRendering += 1
@@ -183,6 +182,12 @@ export default {
             case 'newsletter':
               this.moverseA('K16_informationStore')
               break
+            case 'listBlogHome':
+              this.moverseA('kListBlogHomeX')
+              break
+            case 'cardBlog':
+              this.moverseA('kListBlogHomeX')
+              break
             case 'detailsProducts':
               if (this.fullProducts) {
                 this.$router.push({
@@ -200,19 +205,9 @@ export default {
                 path: '/contacto',
               })
               break
-            case 'listBlogHome':
-              this.$router.push({
-                path: '/blog',
-              })
-              break
-            case 'cardBlog':
-              this.$router.push({
-                path: '/blog',
-              })
-              break
           }
         } else {
-          if (e && e.data && e.data.returnHome == true) {
+          if (e && e.data && e.data.returnHome) {
             this.$router.push({
               path: '/',
             })
