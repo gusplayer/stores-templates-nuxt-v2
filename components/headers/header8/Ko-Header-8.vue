@@ -1,24 +1,21 @@
 <template>
   <div
-    id="navbar"
     v-if="settingByTemplate13"
+    id="navbar"
     class="header-container"
     :style="[
       settingByTemplate13[0].setting13Header,
       settingByTemplate13[0].setting13General,
       {
-        '--font-style-1':
-          this.settingByTemplate13 &&
-          this.settingByTemplate13[0].setting13General &&
-          this.settingByTemplate13[0].setting13General.fount_1
-            ? this.settingByTemplate13[0].setting13General.fount_1
-            : 'Poppins',
+        '--font-style-1': settingByTemplate13?.setting13General?.fount_1
+          ? settingByTemplate13[0].setting13General.fount_1
+          : 'Poppins',
       },
     ]"
   >
-    <div class="wrapper-header" id="headbg">
-      <div class="header" id="headerid">
-        <KoOrder :dataStore="dataStore" />
+    <div id="headbg" class="wrapper-header">
+      <div id="headerid" class="header">
+        <KoOrder :data-store="dataStore" />
 
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
@@ -37,41 +34,40 @@
             </button>
             <div class="flex flex-row mr-20">
               <div
+                v-if="settingByTemplate13[0].pages.values.length > 6"
                 class="btn-scroll"
                 @click="scrollLeft()"
-                v-if="this.settingByTemplate13[0].pages.values.length > 6"
               >
                 <FlechaLeft-icon class="btn-scroll-icon" />
               </div>
               <div
-                class="header-content-buttons"
+                v-if="settingByTemplate13[0].pages.values"
                 id="swiper-slide-categories"
-                v-if="this.settingByTemplate13[0].pages.values"
+                class="header-content-buttons"
               >
                 <div
-                  v-for="(item, index) in this.settingByTemplate13[0].pages
-                    .values"
+                  v-for="(item, index) in settingByTemplate13[0].pages.values"
                   :key="`${index}${item.displayName}`"
                 >
                   <nuxt-link
-                    :to="item.url"
                     v-if="!item.isExternalLink"
+                    :to="item.url"
                     class="content-button"
                   >
                     <p
                       class="btn"
-                      @click="btnActivate(item.url)"
                       :class="btnSelect == item.url ? 'btn-active' : ''"
+                      @click="btnActivate(item.url)"
                     >
                       {{ item.displayName }}
                     </p>
                   </nuxt-link>
                   <a
+                    v-else
                     :href="item.url"
                     target="_blank"
                     rel="noreferrer noopener"
                     class="content-button"
-                    v-else
                   >
                     <p class="btn">
                       {{ item.displayName }}
@@ -80,16 +76,16 @@
                 </div>
               </div>
               <div
+                v-if="settingByTemplate13[0].pages.values.length > 6"
                 class="btn-scroll"
                 @click="scrollRight()"
-                v-if="this.settingByTemplate13[0].pages.values.length > 6"
               >
                 <FlechaRight-icon class="btn-scroll-icon" />
               </div>
             </div>
             <div class="header-content-items">
               <div>
-                <div class="search" v-if="searchSelect">
+                <div v-if="searchSelect" class="search">
                   <i class="header-search-icon" @click="openSearch">
                     <svg
                       class="search-header"
@@ -116,7 +112,7 @@
                     </svg>
                   </i>
                 </div>
-                <div class="search" v-if="!searchSelect">
+                <div v-if="!searchSelect" class="search">
                   <i class="header-search-icon" @click="closedSearch">
                     <svg
                       class="search-header"
@@ -137,7 +133,7 @@
                   </i>
                 </div>
               </div>
-              <div class="empty" v-if="showSearch"></div>
+              <div v-if="showSearch" class="empty"></div>
               <div class="header-content-icon" @click="openOrder">
                 <i class="header-content-cart">
                   <svg
@@ -161,10 +157,10 @@
             </div>
           </div>
         </div>
-        <KoSearch :dataStore="dataStore" />
+        <KoSearch :data-store="dataStore" />
         <KoMenu
-          :dataStore="dataStore"
-          :settingByTemplate="settingByTemplate13"
+          :data-store="dataStore"
+          :setting-by-template="settingByTemplate13"
         />
       </div>
     </div>
@@ -172,36 +168,22 @@
 </template>
 
 <script>
-import KoOrder from '../_order1/order1'
-import KoMenu from '../_lateralMenu/_lateralMenu11/openMenuLeft.vue'
-import KoSearch from '../_lateralMenu/_lateralMenu10/searchDown.vue'
 export default {
+  name: 'KoHeader8',
   components: {
-    KoOrder,
-    KoMenu,
-    KoSearch,
+    KoOrder: () => import('../_order1/order1'),
+    KoMenu: () => import('../_lateralMenu/_lateralMenu11/openMenuLeft.vue'),
+    KoSearch: () => import('../_lateralMenu/_lateralMenu10/searchDown.vue'),
   },
-  name: 'Ko-Header-8',
   props: {
-    dataStore: Object,
-    settingByTemplate13: Array,
-  },
-  mounted() {
-    this.initHeader()
-    if (this.$route.path) {
-      let item = this.settingByTemplate13[0].pages.values.find(
-        (item) => item.url == this.$route.path
-      )
-      this.btnSelect = item && item.url ? item.url : ''
-    }
-    window.addEventListener('scroll', function () {
-      var navbar = document.getElementById('navbar')
-      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
-        navbar.style.position = 'fixed'
-      } else {
-        navbar.style.position = 'static'
-      }
-    })
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate13: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -221,6 +203,32 @@ export default {
     // listArticulos() {
     //   return this.$store.state.listArticulos.length
     // },
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.initHeader()
+    },
+  },
+  mounted() {
+    this.initHeader()
+    if (this.$route.path) {
+      let item = this.settingByTemplate13[0].pages.values.find(
+        (item) => item.url == this.$route.path
+      )
+      this.btnSelect = item && item.url ? item.url : ''
+    }
+    window.addEventListener('scroll', function () {
+      var navbar = document.getElementById('navbar')
+      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
+        navbar.style.position = 'fixed'
+      } else {
+        navbar.style.position = 'static'
+      }
+    })
   },
   methods: {
     initHeader() {
@@ -291,15 +299,6 @@ export default {
     },
     scrollRight() {
       document.getElementById('swiper-slide-categories').scrollLeft += 300
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.initHeader()
     },
   },
 }

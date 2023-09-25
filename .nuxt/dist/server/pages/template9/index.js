@@ -1,7 +1,7 @@
-exports.ids = [210];
+exports.ids = [220];
 exports.modules = {
 
-/***/ 1102:
+/***/ 1092:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62,13 +62,13 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template9vue_type_script_lang_js_ = ({
   name: 'KoTemplate9',
   components: {
-    K09Banner: () => __webpack_require__.e(/* import() */ 174).then(__webpack_require__.bind(null, 1223)),
-    K09Offers: () => __webpack_require__.e(/* import() */ 178).then(__webpack_require__.bind(null, 1227)),
-    K09SliderHoko: () => __webpack_require__.e(/* import() */ 184).then(__webpack_require__.bind(null, 1234)),
-    K09ProductList: () => __webpack_require__.e(/* import() */ 181).then(__webpack_require__.bind(null, 1230)),
-    K09Blog: () => __webpack_require__.e(/* import() */ 175).then(__webpack_require__.bind(null, 1224)),
-    K09Wrapper: () => __webpack_require__.e(/* import() */ 186).then(__webpack_require__.bind(null, 1236)),
-    K09Newsletter: () => __webpack_require__.e(/* import() */ 177).then(__webpack_require__.bind(null, 1226))
+    K09Banner: () => __webpack_require__.e(/* import() */ 184).then(__webpack_require__.bind(null, 1213)),
+    K09Offers: () => __webpack_require__.e(/* import() */ 188).then(__webpack_require__.bind(null, 1217)),
+    K09SliderHoko: () => __webpack_require__.e(/* import() */ 194).then(__webpack_require__.bind(null, 1224)),
+    K09ProductList: () => __webpack_require__.e(/* import() */ 191).then(__webpack_require__.bind(null, 1220)),
+    K09Blog: () => __webpack_require__.e(/* import() */ 185).then(__webpack_require__.bind(null, 1214)),
+    K09Wrapper: () => __webpack_require__.e(/* import() */ 196).then(__webpack_require__.bind(null, 1226)),
+    K09Newsletter: () => __webpack_require__.e(/* import() */ 187).then(__webpack_require__.bind(null, 1216))
   },
   layout: 'default',
   data() {

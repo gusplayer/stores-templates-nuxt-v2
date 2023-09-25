@@ -590,11 +590,11 @@
   "Template11ProductofavoritoProductSlide": {
     "description": "Auto imported from components/template11/_productofavorito/productSlide.vue"
   },
-  "Template12ItemsProductSlide": {
-    "description": "Auto imported from components/template12/_items/productSlide.vue"
-  },
   "Template12MixinsComponentProps": {
     "description": "Auto imported from components/template12/mixins/ComponentProps.vue"
+  },
+  "Template12ItemsProductSlide": {
+    "description": "Auto imported from components/template12/_items/productSlide.vue"
   },
   "Template13BlogBlogcard": {
     "description": "Auto imported from components/template13/_blog/blogcard.vue"
@@ -662,6 +662,9 @@
   "Template15CardBlogKoIndex": {
     "description": "Auto imported from components/template15/_cardBlog/Ko-index.vue"
   },
+  "Template15CardProductCard": {
+    "description": "Auto imported from components/template15/_cardProduct/ProductCard.vue"
+  },
   "Template15ProductdetailsOptTab": {
     "description": "Auto imported from components/template15/_productdetails/OptTab.vue"
   },
@@ -673,9 +676,6 @@
   },
   "Template15ProductdetailsSuggestionsProducto": {
     "description": "Auto imported from components/template15/_productdetails/suggestionsProducto.vue"
-  },
-  "Template15CardProductCard": {
-    "description": "Auto imported from components/template15/_cardProduct/ProductCard.vue"
   },
   "Template15ProductofavoritoProductSlide": {
     "description": "Auto imported from components/template15/_productofavorito/productSlide.vue"

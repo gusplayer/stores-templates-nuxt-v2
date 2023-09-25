@@ -54,10 +54,10 @@
               :href="item.url"
               rel="noreferrer noopener"
               target="_blank"
+              class="mr-20 px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3 btn"
+              :class="btnSelect == item.url ? 'btn-active' : ''"
             >
-              <p class="btn">
-                {{ item.displayName }}
-              </p>
+              {{ item.displayName }}
             </a>
           </div>
         </div>

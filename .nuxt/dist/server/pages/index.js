@@ -1,7 +1,7 @@
 exports.ids = [332];
 exports.modules = {
 
-/***/ 1105:
+/***/ 1095:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28,18 +28,18 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var lib_vue_loader_options_pagesvue_type_script_lang_js_ = ({
   name: 'PageIndex',
   components: {
-    KoTemplate5: () => __webpack_require__.e(/* import() */ 207).then(__webpack_require__.bind(null, 1098)),
-    KoTemplate7: () => __webpack_require__.e(/* import() */ 208).then(__webpack_require__.bind(null, 1100)),
-    KoTemplate8: () => __webpack_require__.e(/* import() */ 209).then(__webpack_require__.bind(null, 1101)),
-    KoTemplate9: () => __webpack_require__.e(/* import() */ 210).then(__webpack_require__.bind(null, 1102)),
-    KoTemplate10: () => __webpack_require__.e(/* import() */ 200).then(__webpack_require__.bind(null, 1091)),
-    KoTemplate11: () => __webpack_require__.e(/* import() */ 201).then(__webpack_require__.bind(null, 1092)),
-    KoTemplate12: () => __webpack_require__.e(/* import() */ 202).then(__webpack_require__.bind(null, 1093)),
-    KoTemplate13: () => __webpack_require__.e(/* import() */ 203).then(__webpack_require__.bind(null, 1094)),
-    KoTemplate14: () => __webpack_require__.e(/* import() */ 204).then(__webpack_require__.bind(null, 1095)),
-    KoTemplate15: () => __webpack_require__.e(/* import() */ 205).then(__webpack_require__.bind(null, 1096)),
-    KoTemplate16: () => __webpack_require__.e(/* import() */ 206).then(__webpack_require__.bind(null, 1097)),
-    KoTemplateWhatsApp: () => __webpack_require__.e(/* import() */ 17).then(__webpack_require__.bind(null, 1103))
+    KoTemplate5: () => __webpack_require__.e(/* import() */ 217).then(__webpack_require__.bind(null, 1088)),
+    KoTemplate7: () => __webpack_require__.e(/* import() */ 218).then(__webpack_require__.bind(null, 1090)),
+    KoTemplate8: () => __webpack_require__.e(/* import() */ 219).then(__webpack_require__.bind(null, 1091)),
+    KoTemplate9: () => __webpack_require__.e(/* import() */ 220).then(__webpack_require__.bind(null, 1092)),
+    KoTemplate10: () => __webpack_require__.e(/* import() */ 210).then(__webpack_require__.bind(null, 1081)),
+    KoTemplate11: () => __webpack_require__.e(/* import() */ 211).then(__webpack_require__.bind(null, 1082)),
+    KoTemplate12: () => __webpack_require__.e(/* import() */ 212).then(__webpack_require__.bind(null, 1083)),
+    KoTemplate13: () => __webpack_require__.e(/* import() */ 213).then(__webpack_require__.bind(null, 1084)),
+    KoTemplate14: () => __webpack_require__.e(/* import() */ 214).then(__webpack_require__.bind(null, 1085)),
+    KoTemplate15: () => __webpack_require__.e(/* import() */ 215).then(__webpack_require__.bind(null, 1086)),
+    KoTemplate16: () => __webpack_require__.e(/* import() */ 216).then(__webpack_require__.bind(null, 1087)),
+    KoTemplateWhatsApp: () => __webpack_require__.e(/* import() */ 20).then(__webpack_require__.bind(null, 1093))
   },
   data() {
     return {

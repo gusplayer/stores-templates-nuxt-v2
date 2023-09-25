@@ -1,7 +1,7 @@
 exports.ids = [341];
 exports.modules = {
 
-/***/ 1110:
+/***/ 1100:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27,7 +27,7 @@ var staticRenderFns = [];
 /* harmony default export */ var blogvue_type_script_lang_js_ = ({
   name: 'IndexBlogWa',
   components: {
-    KBlogWapi: () => __webpack_require__.e(/* import() */ 189).then(__webpack_require__.bind(null, 1310))
+    KBlogWapi: () => __webpack_require__.e(/* import() */ 199).then(__webpack_require__.bind(null, 1306))
   },
   layout: 'wa',
   mounted() {

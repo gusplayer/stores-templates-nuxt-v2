@@ -1,7 +1,7 @@
 exports.ids = [334];
 exports.modules = {
 
-/***/ 1107:
+/***/ 1097:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27,15 +27,15 @@ var external_vuex_ = __webpack_require__(9);
 
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   components: {
-    Ko5ProductDetail: () => __webpack_require__.e(/* import() */ 152).then(__webpack_require__.bind(null, 1205)),
-    Ko7ProductDetail: () => __webpack_require__.e(/* import() */ 168).then(__webpack_require__.bind(null, 1220)),
-    Ko9ProductDetail: () => __webpack_require__.e(/* import() */ 179).then(__webpack_require__.bind(null, 1228)),
-    Ko10ProductDetail: () => __webpack_require__.e(/* import() */ 42).then(__webpack_require__.bind(null, 1120)),
-    Ko11ProductDetail: () => __webpack_require__.e(/* import() */ 58).then(__webpack_require__.bind(null, 1132)),
-    Ko13ProductDetail: () => __webpack_require__.e(/* import() */ 83).then(__webpack_require__.bind(null, 1153)),
-    Ko14ProductDetail: () => __webpack_require__.e(/* import() */ 94).then(__webpack_require__.bind(null, 1162)),
-    Ko15ProductDetail: () => __webpack_require__.e(/* import() */ 109).then(__webpack_require__.bind(null, 1172)),
-    Ko16ProductDetail: () => __webpack_require__.e(/* import() */ 136).then(__webpack_require__.bind(null, 1196))
+    Ko5ProductDetail: () => __webpack_require__.e(/* import() */ 162).then(__webpack_require__.bind(null, 1195)),
+    Ko7ProductDetail: () => __webpack_require__.e(/* import() */ 178).then(__webpack_require__.bind(null, 1210)),
+    Ko9ProductDetail: () => __webpack_require__.e(/* import() */ 189).then(__webpack_require__.bind(null, 1218)),
+    Ko10ProductDetail: () => __webpack_require__.e(/* import() */ 52).then(__webpack_require__.bind(null, 1110)),
+    Ko11ProductDetail: () => __webpack_require__.e(/* import() */ 68).then(__webpack_require__.bind(null, 1122)),
+    Ko13ProductDetail: () => __webpack_require__.e(/* import() */ 93).then(__webpack_require__.bind(null, 1143)),
+    Ko14ProductDetail: () => __webpack_require__.e(/* import() */ 104).then(__webpack_require__.bind(null, 1152)),
+    Ko15ProductDetail: () => __webpack_require__.e(/* import() */ 119).then(__webpack_require__.bind(null, 1162)),
+    Ko16ProductDetail: () => __webpack_require__.e(/* import() */ 146).then(__webpack_require__.bind(null, 1186))
   },
   data() {
     return {

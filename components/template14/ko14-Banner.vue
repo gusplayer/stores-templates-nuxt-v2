@@ -12,8 +12,8 @@
     >
       <div class="z-auto swiper-wrapper">
         <a
-          :id="`slide${index + 1}`"
           v-for="(item, index) in banner.values"
+          :id="`slide${index + 1}`"
           :key="index"
           :href="item.url_redirect"
           class="swiper-slide w-full flex justify-center items-center z-10"
@@ -54,7 +54,7 @@
             <div
               class="border h-2 w-50 my-18 md:my-25"
               :style="`border-color: ${item.color_border};`"
-            />
+            ></div>
             <p
               v-if="item?.text"
               class="mb-15 md:mb-20 max-w-xs md:max-w-md"
@@ -71,19 +71,25 @@
           </div>
         </a>
       </div>
-      <div class="swiper-pagination" />
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </template>
 <script>
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko15-Banner',
-  props: {
-    banner: Object,
-    settingGeneral: Object,
-  },
+  name: 'Ko14Banner',
   mixins: [idCloudinaryBanner],
+  props: {
+    banner: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       checkMobile: false,

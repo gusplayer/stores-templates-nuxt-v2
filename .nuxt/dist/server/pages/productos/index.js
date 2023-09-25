@@ -1,7 +1,7 @@
 exports.ids = [335];
 exports.modules = {
 
-/***/ 1089:
+/***/ 1079:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28,15 +28,15 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var productosvue_type_script_lang_js_ = ({
   name: 'ProductIndex',
   components: {
-    K05ProductList: () => __webpack_require__.e(/* import() */ 154).then(__webpack_require__.bind(null, 1207)),
-    K07ProductList: () => __webpack_require__.e(/* import() */ 169).then(__webpack_require__.bind(null, 1221)),
-    K09ProductList: () => __webpack_require__.e(/* import() */ 182).then(__webpack_require__.bind(null, 1231)),
-    K10ProductList: () => __webpack_require__.e(/* import() */ 43).then(__webpack_require__.bind(null, 1121)),
-    K11ProductList: () => __webpack_require__.e(/* import() */ 60).then(__webpack_require__.bind(null, 1134)),
-    K13ProductList: () => __webpack_require__.e(/* import() */ 84).then(__webpack_require__.bind(null, 1155)),
-    K14ProductList: () => __webpack_require__.e(/* import() */ 95).then(__webpack_require__.bind(null, 1163)),
-    K15ProductList: () => __webpack_require__.e(/* import() */ 121).then(__webpack_require__.bind(null, 1184)),
-    K16ProductList: () => __webpack_require__.e(/* import() */ 137).then(__webpack_require__.bind(null, 1197))
+    K05ProductList: () => __webpack_require__.e(/* import() */ 164).then(__webpack_require__.bind(null, 1197)),
+    K07ProductList: () => __webpack_require__.e(/* import() */ 179).then(__webpack_require__.bind(null, 1211)),
+    K09ProductList: () => __webpack_require__.e(/* import() */ 192).then(__webpack_require__.bind(null, 1221)),
+    K10ProductList: () => __webpack_require__.e(/* import() */ 53).then(__webpack_require__.bind(null, 1111)),
+    K11ProductList: () => __webpack_require__.e(/* import() */ 70).then(__webpack_require__.bind(null, 1124)),
+    K13ProductList: () => __webpack_require__.e(/* import() */ 94).then(__webpack_require__.bind(null, 1145)),
+    K14ProductList: () => __webpack_require__.e(/* import() */ 105).then(__webpack_require__.bind(null, 1153)),
+    K15ProductList: () => __webpack_require__.e(/* import() */ 131).then(__webpack_require__.bind(null, 1174)),
+    K16ProductList: () => __webpack_require__.e(/* import() */ 147).then(__webpack_require__.bind(null, 1187))
   },
   data() {
     return {

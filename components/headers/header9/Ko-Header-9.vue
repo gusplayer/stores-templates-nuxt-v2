@@ -1,7 +1,7 @@
 <template>
   <div
-    id="navbar"
     v-if="settingByTemplate14"
+    id="navbar"
     class="w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center sticky top-0 px-10 wrapper-header"
     :style="[
       settingByTemplate14[0].setting14Header,
@@ -28,8 +28,8 @@
         </nuxt-link>
       </div>
       <div
-        id="swiper-slide-categories"
         v-if="settingByTemplate14[0].pages.values"
+        id="swiper-slide-categories"
         class="hidden md:flex flex-row justify-start items-center box-border"
       >
         <div
@@ -45,10 +45,15 @@
               {{ item.displayName }}
             </p>
           </nuxt-link>
-          <a v-else :href="item.url" rel="noreferrer noopener" target="_blank">
-            <p class="btn">
-              {{ item.displayName }}
-            </p>
+          <a
+            v-else
+            :href="item.url"
+            rel="noreferrer noopener"
+            target="_blank"
+            class="mr-20 px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3 btn"
+            :class="btnSelect == item.url ? 'btn-active' : ''"
+          >
+            {{ item.displayName }}
           </a>
         </div>
       </div>
@@ -98,16 +103,16 @@
           />
         </button>
       </div>
-      <KoOrder :dataStore="dataStore" />
+      <KoOrder :data-store="dataStore" />
       <KoSearch />
       <Ko14MenuLateral
-        :dataStore="dataStore"
-        :settingByTemplate="settingByTemplate14[0].listProductsFilter"
+        :data-store="dataStore"
+        :setting-by-template="settingByTemplate14[0].listProductsFilter"
       />
       <el-drawer
         :visible.sync="stateMenu"
         direction="ttb"
-        :withHeader="false"
+        :with-header="false"
         :modal-append-to-body="false"
         size="25%"
       >
@@ -162,15 +167,21 @@
 
 <script>
 export default {
+  name: 'KoHeader9',
   components: {
     KoOrder: () => import('../_order1/order1'),
     KoSearch: () => import('../_lateralMenu/_lateralMenu/searchDown14'),
     Ko14MenuLateral: () => import('../../template14/_lateral/_lateralMenu.vue'),
   },
-  name: 'Ko-Header-9',
   props: {
-    settingByTemplate14: Array,
-    dataStore: Object,
+    settingByTemplate14: {
+      type: Array,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

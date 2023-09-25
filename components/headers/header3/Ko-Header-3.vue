@@ -2,7 +2,7 @@
   <div class="header-container" :style="settingByTemplate">
     <div class="wrapper-header">
       <div class="header">
-        <KoOrder :dataStore="dataStore" />
+        <KoOrder :data-store="dataStore" />
         <div class="header-items-icon-menu" @click="openMenuLateralLeft">
           <menu-icon class="header-icon-menu nav-bar" />
         </div>
@@ -24,19 +24,19 @@
               target="_blank"
               rel="noreferrer noopener"
             >
-              <div class="header-icon" :is="item.icon"
-            /></a>
+              <div :is="item.icon" class="header-icon" />
+            </a>
           </div>
         </div>
-        <div class="search" v-if="showSearch">
+        <div v-if="showSearch" class="search">
           <form id="demo-2" style="position: relative">
             <search-icon class="icon-s" @click="focusInput" />
             <input
+              id="SearchHeader"
+              v-model="search"
               type="search"
               :placeholder="$t('header_search')"
-              v-model="search"
               @keyup.enter="getSearch(search)"
-              id="SearchHeader"
             />
           </form>
         </div>
@@ -52,8 +52,8 @@
         <KoMenuRight class="responsive" :dataStore="dataStore" />
         <KoMenuLeft
           class="responsiveLeft"
-          :dataStore="dataStore"
-          :showMenu="showSearch"
+          :data-store="dataStore"
+          :show-menu="showSearch"
         />
       </div>
     </div>
@@ -66,19 +66,21 @@ import KoMenuRight from '../_order1/openMenuRight'
 import KoMenuLeft from '../_order1/openMenuLeft'
 
 export default {
+  name: 'KoHeader3',
   components: {
     KoOrder,
     KoMenuRight,
     KoMenuLeft,
   },
-  name: 'Ko-Header-3',
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
-  },
-  mounted() {
-    this.toggle = true
-    this.initHeader()
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -144,6 +146,26 @@ export default {
       return this.$store.state.analytics_tagmanager
     },
   },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
+    },
+    search(value) {
+      this.SearchProduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.initHeader()
+    },
+  },
+  mounted() {
+    this.toggle = true
+    this.initHeader()
+  },
   methods: {
     initHeader() {
       if (this.$route.fullPath == '/') {
@@ -203,22 +225,6 @@ export default {
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()
-    },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
-    },
-    search(value) {
-      this.SearchProduct(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.initHeader()
     },
   },
 }

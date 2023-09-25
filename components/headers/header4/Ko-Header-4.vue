@@ -1,32 +1,26 @@
 <template>
   <div
-    id="navbar"
     v-if="settingByTemplate7 && settingByTemplate7[0].setting7Header"
+    id="navbar"
     class="header-container"
     :style="[
       settingByTemplate7[0].setting7Header,
       settingByTemplate7[0].setting7General,
       {
-        '--font-style-1':
-          this.settingByTemplate7 &&
-          this.settingByTemplate7[0].setting7General &&
-          this.settingByTemplate7[0].setting7General.fount_1
-            ? this.settingByTemplate7[0].setting7General.fount_1
-            : 'David libre',
+        '--font-style-1': settingByTemplate7?.setting7General?.fount_1
+          ? settingByTemplate7[0].setting7General.fount_1
+          : 'David libre',
       },
       {
-        '--font-style-3':
-          this.settingByTemplate7 &&
-          this.settingByTemplate7[0].setting7General &&
-          this.settingByTemplate7[0].setting7General.fount_3
-            ? this.settingByTemplate7[0].setting7General.fount_3
-            : 'Lora',
+        '--font-style-3': settingByTemplate7?.setting7General?.fount_3
+          ? settingByTemplate7[0].setting7General.fount_3
+          : 'Lora',
       },
     ]"
   >
     <div class="wrapper-header" id="headbg">
       <div class="header" id="headerid">
-        <KoOrder :dataStore="dataStore" />
+        <KoOrder :data-store="dataStore" />
         <div class="header-item-menu" @click="openMenuLateral">
           <menu-icon class="header-icon-menu nav-bar" />
           <span class="header-text-menu">{{ $t('header_menu') }}</span>
@@ -43,15 +37,16 @@
         </div>
         <div class="header-content-buttons">
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
-            <nuxt-link :to="item.path" v-if="item.path" class="btn"
-              >{{ $t(`${item.name}`) }}
+            <nuxt-link v-if="item.path" :to="item.path" class="btn">
+              {{ $t(`${item.name}`) }}
             </nuxt-link>
             <nuxt-link
-              :to="item.href"
               v-else-if="item.href && listArticulos > 0"
+              :to="item.href"
               class="btn"
-              >{{ $t(`${item.name}`) }}</nuxt-link
             >
+              {{ $t(`${item.name}`) }}
+            </nuxt-link>
           </div>
         </div>
         <div class="header-content-items">
@@ -75,7 +70,7 @@
               </form>
             </div>
           </div>
-          <div class="empty" v-if="showSearch"></div>
+          <div v-if="showSearch" class="empty"></div>
           <div class="header-content-icon">
             <div class="header-content-cart" @click="openOrder">
               <svg
@@ -99,31 +94,86 @@
           </div>
         </div>
         <KoSearch
-          :dataStore="dataStore"
-          :settingKProdutCard="this.settingByTemplate7[0].settingKProdutCard"
-          :settingGeneral="this.settingByTemplate7[0].setting7General"
+          :data-store="dataStore"
+          :settingKProdutCard="settingByTemplate7[0].settingKProdutCard"
+          :setting-general="settingByTemplate7[0].setting7General"
         />
-        <KoMenu :dataStore="dataStore" class="responsive" />
+        <KoMenu :data-store="dataStore" class="responsive" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import KoOrder from '../_order1/order1'
-import KoMenu from '../_lateralMenu/_lateralMenu07/openMenuLeft.vue'
-import KoSearch from '../_lateralMenu/_lateralMenu07/searchUp.vue'
-
 export default {
+  name: 'KoHeader4',
   components: {
-    KoOrder,
-    KoMenu,
-    KoSearch,
+    KoOrder: () => import('../_order1/order1'),
+    KoMenu: () => import('../_lateralMenu/_lateralMenu07/openMenuLeft.vue'),
+    KoSearch: () => import('../_lateralMenu/_lateralMenu07/searchUp.vue'),
   },
-  name: 'Ko-Header-4',
   props: {
-    dataStore: Object,
-    settingByTemplate7: Array,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate7: {
+      type: Array,
+      required: true,
+    },
+  },
+
+  data() {
+    return {
+      resizehead: false,
+      search: '',
+      showSearch: false,
+      secciones: [
+        {
+          name: 'header_inicio',
+          path: '/',
+        },
+        {
+          name: 'header_productos',
+          path: '/productos',
+        },
+        {
+          name: 'header_contacto',
+          path: '/contacto',
+        },
+        {
+          name: 'header_blog',
+          href: '/blog',
+        },
+      ],
+    }
+  },
+  computed: {
+    productsCart() {
+      return this.$store.state.productsCart.length
+    },
+    facebookPixel() {
+      return this.$store.state.analytics_tagmanager
+    },
+    listArticulos() {
+      return this.$store.state.listArticulos.length
+    },
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      if (this.$route.fullPath == '/') {
+        this.showSearch = true
+      } else if (this.$route.query && this.$route.query.search) {
+        this.showSearch = true
+        this.setSearch(this.$route.query.search)
+      } else {
+        this.showSearch = false
+      }
+    },
   },
   mounted() {
     let colorBg = ''
@@ -216,42 +266,6 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      resizehead: false,
-      search: '',
-      showSearch: false,
-      secciones: [
-        {
-          name: 'header_inicio',
-          path: '/',
-        },
-        {
-          name: 'header_productos',
-          path: '/productos',
-        },
-        {
-          name: 'header_contacto',
-          path: '/contacto',
-        },
-        {
-          name: 'header_blog',
-          href: '/blog',
-        },
-      ],
-    }
-  },
-  computed: {
-    productsCart() {
-      return this.$store.state.productsCart.length
-    },
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
-    listArticulos() {
-      return this.$store.state.listArticulos.length
-    },
-  },
   methods: {
     openSearch() {
       this.$store.commit('SET_OPEN_SEARCH', true)
@@ -293,22 +307,6 @@ export default {
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      if (this.$route.fullPath == '/') {
-        this.showSearch = true
-      } else if (this.$route.query && this.$route.query.search) {
-        this.showSearch = true
-        this.setSearch(this.$route.query.search)
-      } else {
-        this.showSearch = false
-      }
     },
   },
 }

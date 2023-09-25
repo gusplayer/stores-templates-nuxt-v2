@@ -6,12 +6,9 @@
       settingByTemplate11[0].setting11Header,
       settingByTemplate11[0].setting11General,
       {
-        '--font-style-1':
-          this.settingByTemplate11 &&
-          this.settingByTemplate11[0].setting11General &&
-          this.settingByTemplate11[0].setting11General.fount_1
-            ? this.settingByTemplate11[0].setting11General.fount_1
-            : 'Roboto',
+        '--font-style-1': settingByTemplate11?.setting11General?.fount_1
+          ? settingByTemplate11[0].setting11General.fount_1
+          : 'Roboto',
       },
     ]"
   >
@@ -48,33 +45,32 @@
               </svg>
             </div>
             <div
+              v-if="settingByTemplate11[0].pages.values.length > 6"
               class="btn-scroll"
               @click="scrollLeft()"
-              v-if="this.settingByTemplate11[0].pages.values.length > 6"
             >
               <FlechaLeft-icon class="btn-scroll-icon" />
             </div>
             <div
-              class="item-btns"
+              v-if="settingByTemplate11[0].pages.values"
               id="swiper-slide-categories"
-              v-if="this.settingByTemplate11[0].pages.values"
+              class="item-btns"
             >
               <div
-                class="content-btns"
-                v-for="(item, index) in this.settingByTemplate11[0].pages
-                  .values"
+                v-for="(item, index) in settingByTemplate11[0].pages.values"
                 :key="`${index}${item.displayName}`"
+                class="content-btns"
               >
-                <nuxt-link :to="item.url" v-if="!item.isExternalLink">
+                <nuxt-link v-if="!item.isExternalLink" :to="item.url">
                   <button class="btn">
                     {{ item.displayName }}
                   </button>
                 </nuxt-link>
                 <a
+                  v-else
                   :href="item.url"
                   target="_blank"
                   rel="noreferrer noopener"
-                  v-else
                 >
                   <p class="btn">
                     {{ item.displayName }}
@@ -84,9 +80,9 @@
               </div>
             </div>
             <div
+              v-if="settingByTemplate11[0].pages.values.length > 6"
               class="btn-scroll"
               @click="scrollRight()"
-              v-if="this.settingByTemplate11[0].pages.values.length > 6"
             >
               <FlechaRight-icon class="btn-scroll-icon" />
             </div>
@@ -103,8 +99,8 @@
             <div class="item-header">
               <div class="input-animated">
                 <input
-                  type="text"
                   v-model="search"
+                  type="text"
                   class="input-text"
                   placeholder="¿Que deseas buscar?"
                 />
@@ -123,12 +119,12 @@
               </div>
               <div class="icon-shop">
                 <svg
-                  @click="openOrder"
                   class="svg-shop"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                   width="25px"
                   height="25px"
+                  @click="openOrder"
                 >
                   <path
                     fill="none"
@@ -147,28 +143,31 @@
           </div>
         </div>
       </div>
-      <KoOrder :dataStore="dataStore"></KoOrder>
+      <KoOrder :data-store="dataStore" />
       <KoMenu
-        :dataStore="dataStore"
-        :settingByTemplate="settingByTemplate11"
+        :data-store="dataStore"
+        :setting-by-template="settingByTemplate11"
         class="responsive"
       />
     </div>
   </div>
 </template>
 <script>
-import KoOrder from '../_order1/order1'
-import KoMenu from '../_lateralMenu/_lateralMenu11/openMenuLeft.vue'
-
 export default {
-  name: 'Ko-Header-7',
-  props: { dataStore: Object, settingByTemplate11: Array },
+  name: 'KoHeader7',
   components: {
-    KoOrder,
-    KoMenu,
+    KoOrder: () => import('../_order1/order1'),
+    KoMenu: () => import('../_lateralMenu/_lateralMenu11/openMenuLeft.vue'),
   },
-  mounted() {
-    this.initHeader()
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate11: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -187,6 +186,18 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos.length
     },
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.initHeader()
+    },
+  },
+  mounted() {
+    this.initHeader()
   },
   methods: {
     initHeader() {
@@ -251,15 +262,6 @@ export default {
     },
     scrollRight() {
       document.getElementById('swiper-slide-categories').scrollLeft += 300
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.initHeader()
     },
   },
 }

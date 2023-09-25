@@ -1,7 +1,7 @@
 exports.ids = [337];
 exports.modules = {
 
-/***/ 1090:
+/***/ 1080:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28,10 +28,10 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var productosHokovue_type_script_lang_js_ = ({
   name: 'ProductHokoIndex',
   components: {
-    K05ProductListHoko: () => __webpack_require__.e(/* import() */ 16).then(__webpack_require__.bind(null, 1209)),
-    K09ProductListHoko: () => __webpack_require__.e(/* import() */ 183).then(__webpack_require__.bind(null, 1232)),
-    K11ProductListHoko: () => __webpack_require__.e(/* import() */ 61).then(__webpack_require__.bind(null, 1135)),
-    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 1084))
+    K05ProductListHoko: () => __webpack_require__.e(/* import() */ 19).then(__webpack_require__.bind(null, 1199)),
+    K09ProductListHoko: () => __webpack_require__.e(/* import() */ 193).then(__webpack_require__.bind(null, 1222)),
+    K11ProductListHoko: () => __webpack_require__.e(/* import() */ 71).then(__webpack_require__.bind(null, 1125)),
+    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 14).then(__webpack_require__.bind(null, 1074))
   },
   data() {
     return {

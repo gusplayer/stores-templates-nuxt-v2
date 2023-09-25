@@ -38,7 +38,6 @@
           <p class="textId ml-5">
             <strong>Hoko</strong>: {{ dataHoko.statehoko == 0 ? 'NO' : 'SI' }}
           </p>
-          <p class="textId ml-5"><strong>V</strong>: 09/18/2023</p>
         </div>
       </div>
       <KoLanguage />

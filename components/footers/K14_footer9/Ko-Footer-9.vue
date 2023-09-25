@@ -147,7 +147,7 @@
       <div
         v-if="settingByTemplate14[0].setting14Footer.watermark"
         class="empty"
-      />
+      ></div>
       <div
         v-if="settingByTemplate14[0].setting14Footer.watermark"
         class="madebyKomercia"

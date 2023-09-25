@@ -1,7 +1,7 @@
-exports.ids = [138];
+exports.ids = [148];
 exports.modules = {
 
-/***/ 1198:
+/***/ 1188:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34,7 +34,7 @@ var staticRenderFns = [];
 /* harmony default export */ var ko16_productListHomevue_type_script_lang_js_ = ({
   name: 'Ko16ProductListHome',
   components: {
-    KoProductCard: () => __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(null, 606))
+    KoProductCard: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 580))
   },
   props: {
     listProductsHome: {
