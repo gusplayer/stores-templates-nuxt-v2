@@ -12,9 +12,8 @@
       class="content-footer"
       :style="[
         {
-          '--font-style-1': settingByTemplate11[0]?.setting11General?.fount_1
-            ? settingByTemplate11[0].setting11General.fount_1
-            : 'Roboto',
+          '--font-style-1':
+            settingByTemplate11[0]?.setting11General?.fount_1 ?? 'Roboto',
         },
       ]"
     >

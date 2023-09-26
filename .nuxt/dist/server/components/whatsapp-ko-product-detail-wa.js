@@ -166,7 +166,7 @@ var staticRenderFns = [];
 var external_vuex_ = __webpack_require__(9);
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(2);
+var external_axios_ = __webpack_require__(3);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: ./components/whatsapp/_productdetails/productSlide.vue + 4 modules
@@ -2226,7 +2226,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/headers/_order1/order1.vue?vue&type=template&id=43350ff8&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(2);
+var external_axios_ = __webpack_require__(3);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: ./mixins/idCloudinary.js

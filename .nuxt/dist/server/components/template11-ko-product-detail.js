@@ -167,7 +167,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/template11/ko-ProductDetail.vue?vue&type=template&id=a37680e2&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(2);
+var external_axios_ = __webpack_require__(3);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: ./mixins/idCloudinary.js

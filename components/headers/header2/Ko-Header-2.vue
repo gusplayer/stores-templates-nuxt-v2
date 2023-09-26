@@ -2,10 +2,7 @@
   <div class="header-container" :style="settingByTemplate">
     <div
       :style="{
-        '--font-style':
-          settingByTemplate && settingByTemplate.tipo_letra
-            ? settingByTemplate.tipo_letra
-            : 'Roboto',
+        '--font-style': settingByTemplate?.tipo_letra ?? 'Roboto',
       }"
     >
       <div class="wrapper-header" @click="closeMenuCategory">

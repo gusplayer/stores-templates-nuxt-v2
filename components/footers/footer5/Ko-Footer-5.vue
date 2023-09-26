@@ -8,9 +8,7 @@
       settingByTemplate9[0].setting9General,
       {
         '--font-style-1':
-          settingByTemplate9 && settingByTemplate9[0]?.setting9General?.fount_1
-            ? settingByTemplate9[0].setting9General.fount_1
-            : 'Poppins',
+          settingByTemplate9[0]?.setting9General?.fount_1 ?? 'Poppins',
       },
     ]"
   >

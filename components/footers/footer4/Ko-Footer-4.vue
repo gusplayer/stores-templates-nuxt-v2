@@ -6,11 +6,7 @@
       settingByTemplate7[0].setting7General,
       {
         '--font-style-1':
-          settingByTemplate7 &&
-          settingByTemplate7[0].setting7General &&
-          settingByTemplate7[0].setting7General.fount_1
-            ? settingByTemplate7[0].setting7General.fount_1
-            : 'David libre',
+          settingByTemplate7[0]?.setting7General?.fount_1 ?? 'David libre',
       },
     ]"
   >

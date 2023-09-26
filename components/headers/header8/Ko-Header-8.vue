@@ -7,9 +7,8 @@
       settingByTemplate13[0].setting13Header,
       settingByTemplate13[0].setting13General,
       {
-        '--font-style-1': settingByTemplate13?.setting13General?.fount_1
-          ? settingByTemplate13[0].setting13General.fount_1
-          : 'Poppins',
+        '--font-style-1':
+          settingByTemplate13[0]?.setting13General?.fount_1 ?? 'Poppins',
       },
     ]"
   >

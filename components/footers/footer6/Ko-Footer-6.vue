@@ -6,9 +6,8 @@
       settingByTemplate10[0].setting10Footer,
       settingByTemplate10[0].setting10General,
       {
-        '--font-style-1': settingByTemplate10[0]?.setting10General?.fount_1
-          ? settingByTemplate10[0].setting10General.fount_1
-          : 'Roboto',
+        '--font-style-1':
+          settingByTemplate10[0]?.setting10General?.fount_1 ?? 'Roboto',
       },
     ]"
   >

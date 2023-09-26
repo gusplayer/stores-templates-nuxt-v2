@@ -509,14 +509,14 @@
   "Template10BlogPageKoBlog": {
     "description": "Auto imported from components/template10/blog_page/Ko-Blog.vue"
   },
-  "Template10BlogBlogcard": {
-    "description": "Auto imported from components/template10/_blog/blogcard.vue"
-  },
   "Template10ProductcardProductCard": {
     "description": "Auto imported from components/template10/_productcard/ProductCard.vue"
   },
   "Template10ProductcardProductCardFilterList": {
     "description": "Auto imported from components/template10/_productcard/ProductCardFilterList.vue"
+  },
+  "Template10BlogBlogcard": {
+    "description": "Auto imported from components/template10/_blog/blogcard.vue"
   },
   "Template10ProductdetailsCommentsProduct": {
     "description": "Auto imported from components/template10/_productdetails/commentsProduct.vue"

@@ -67,7 +67,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/template9/k09-ProductDetailHoko.vue?vue&type=template&id=82d311f0&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(2);
+var external_axios_ = __webpack_require__(3);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: ./components/template9/_productdetails/OptAcordion-hoko.vue + 4 modules

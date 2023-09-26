@@ -235,35 +235,13 @@ export const mutations = {
   SET_CITIES: (state, payload) => {
     state.cities = payload
   },
-  SET_SETTINGS_BY_TEMPLATE: (state, value) => {
-    state.settingByTemplate = value
-  },
-  SET_SETTINGS_BY_TEMPLATE_7: (state, value) => {
-    state.settingByTemplate7 = value
-  },
-  SET_SETTINGS_BY_TEMPLATE_9: (state, value) => {
-    state.settingByTemplate9 = value
-  },
-  SET_SETTINGS_BY_TEMPLATE_10: (state, value) => {
-    state.settingByTemplate10 = value
-  },
-  SET_SETTINGS_BY_TEMPLATE_11: (state, value) => {
-    state.settingByTemplate11 = value
-  },
-  SET_SETTINGS_BY_TEMPLATE_12: (state, value) => {
-    state.settingByTemplate12 = value
-  },
-  SET_SETTINGS_BY_TEMPLATE_13: (state, value) => {
-    state.settingByTemplate13 = value
-  },
-  SET_SETTINGS_BY_TEMPLATE_14: (state, value) => {
-    state.settingByTemplate14 = value
-  },
-  SET_SETTINGS_BY_TEMPLATE_15: (state, value) => {
-    state.settingByTemplate15 = value
-  },
-  SET_SETTINGS_BY_TEMPLATE_16: (state, value) => {
-    state.settingByTemplate16 = value
+  SET_SETTINGS_BY_TEMPLATE: (state, { templateNumber, value }) => {
+    if (templateNumber === 5 || templateNumber === 99) {
+      state.settingByTemplate = value
+    } else {
+      const statePropertyName = `settingByTemplate${templateNumber}`
+      state[statePropertyName] = value
+    }
   },
   SET_STATE_WAPIME: (state, value) => {
     state.stateWapiME = value
@@ -406,7 +384,11 @@ export const actions = {
     }
   },
   async nuxtServerInit({ commit, dispatch, state }, { req }) {
-    const { subdomain, id, template, idWapi } = await getIdData(state, req)
+    const { subdomain, id, template, idWapi } = await getIdData(
+      state,
+      req,
+      commit
+    )
     // let idWapi = ''
     // let id = {
     //   data: {
@@ -420,7 +402,7 @@ export const actions = {
     if (idWapi) {
       await handleWapi(commit, dispatch, idWapi)
     } else {
-      await handleKomercia(id, template, subdomain, commit, dispatch, state)
+      await handleKomercia(id, template, commit, dispatch)
     }
 
     await handleDataStore(state, commit)
@@ -522,49 +504,60 @@ export const actions = {
       console.log('All products store', err.response)
     }
   },
-  async GET_SETTINGS_BY_TEMPLATE({ commit, state }, store) {
-    let template = store.template
+  async GET_SETTINGS_BY_TEMPLATE(
+    { commit, state },
+    { idStore, templateStore }
+  ) {
     try {
       const { data } = await axios({
         method: 'GET',
-        url: `${state.urlKomercia}/api/template/${template}/settings/${store.id_tienda}`,
+        url: `${state.urlKomercia}/api/template/${templateStore}/settings/${idStore}`,
       })
       if (data) {
-        commit('SET_SETTINGS_BY_TEMPLATE', data.data)
+        commit(`SET_SETTINGS_BY_TEMPLATE`, {
+          templateNumber: templateStore,
+          value: data.data,
+        })
       }
     } catch (err) {
       console.log('Data setting Laravel', err.response)
     }
   },
-  async GET_SETTINGS_BY_TEMPLATE_NODE({ commit, state }, store) {
+  async GET_SETTINGS_BY_TEMPLATE_NODE(
+    { commit, state },
+    { idStore, templateStore }
+  ) {
     try {
       const { data } = await axios({
         method: 'GET',
-        url: `${state.urlNodeSettings}/template${store.template}?id=${store.id_tienda}`,
+        url: `${state.urlNodeSettings}/template${templateStore}?id=${idStore}`,
       })
       if (data) {
-        commit(`SET_SETTINGS_BY_TEMPLATE_${store.template}`, data.body)
+        commit(`SET_SETTINGS_BY_TEMPLATE`, {
+          templateNumber: templateStore,
+          value: data.body,
+        })
       }
     } catch (err) {
       console.log('Data setting NODE', err.response)
     }
   },
-  async GET_SETTINGS_BY_TEMPLATE_AWS({ commit, state }, store) {
-    try {
-      const { data } = await axios({
-        method: 'GET',
-        url: `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${store.subdominio}`,
-      })
-      if (data) {
-        commit(
-          `SET_SETTINGS_BY_TEMPLATE_${store.template}`,
-          data.data.webSiteTemplate
-        )
-      }
-    } catch (err) {
-      console.log('Data setting NODE', err.response)
-    }
-  },
+  // async GET_SETTINGS_BY_TEMPLATE_AWS({ commit, state }, store) {
+  //   try {
+  //     const { data } = await axios({
+  //       method: 'GET',
+  //       url: `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${store.subdominio}`,
+  //     })
+  //     if (data) {
+  //       commit(`SET_SETTINGS_BY_TEMPLATE`, {
+  //         templateNumber: store.template,
+  //         value: data.data.webSiteTemplate,
+  //       })
+  //     }
+  //   } catch (err) {
+  //     console.log('Data setting NODE', err.response)
+  //   }
+  // },
   async GET_SETTINGS_BY_TEMPLATE_WAPI({ commit, state }, idWapi) {
     let template = state.template ? state.template : 99
     try {
@@ -573,7 +566,10 @@ export const actions = {
         url: `${state.urlKomercia}/api/template/${template}/settings/${idWapi}`,
       })
       if (data) {
-        commit('SET_SETTINGS_BY_TEMPLATE', data.data)
+        commit(`SET_SETTINGS_BY_TEMPLATE`, {
+          templateNumber: template,
+          value: data.data,
+        })
       }
     } catch (err) {
       console.log('Data setting wapi', err.response)
@@ -1109,7 +1105,7 @@ function setCurrentSetting(state, { component, setting, template }) {
   }
 }
 
-async function getIdData(state, req) {
+async function getIdData(state, req, commit) {
   let full = req.headers.host
   let parts = full.split('.')
   let partsID = full.split(':')
@@ -1121,35 +1117,47 @@ async function getIdData(state, req) {
   if (
     parts[0] == 'localhost:3000' ||
     parts[0] == 'wapi' ||
-    parts[0] == 'valienta' ||
     partsID[1] == '3333'
   ) {
     let partsWapi = req.url.split('/')
     idWapi = partsWapi[2]
-  } else if (
-    parts[1] == 'sweetlips' ||
-    parts[1] == 'komercia' ||
-    parts[1] == 'kom' ||
-    parts[1] == 'keepbuy' ||
-    parts[1] == 'localhost:3000' ||
-    parts[1] == 'unicentrovillavicencio'
-  ) {
-    // Nueva ruta de Daniel para traer informacion de la tienda, creados con misSitios (Template 15) no funciona
-    id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
-      name: `${subdomain}.komercia.co/`,
-    })
-    template = id.data.data.template
-    id = id.data.data.id
+  } else if (parts[1] === 'komercia' || parts[1] === 'localhost:3000') {
+    const response = await axios.get(
+      `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${subdomain}`
+    )
+    id = response.data.data.id || response.data.data.storeId
+    template = response.data.data.templateNumber || response.data.data.template
+    if (template === 15) {
+      commit(`SET_SETTINGS_BY_TEMPLATE`, {
+        templateNumber: template,
+        value: response.data.data.webSiteTemplate,
+      })
+    }
   } else {
-    let getDomain = full.split('/?')
-    let domainURL =
-      getDomain.length > 1 ? `https://${getDomain[0]}` : `https://${getDomain}`
-    id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
-      name: domainURL,
-    })
-    template = id.data.data.template
-    id = id.data.data.id
+    const response = await axios.get(
+      `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${parts[1]}`
+    )
+    id = response.data.data.id || response.data.data.storeId
+    template = response.data.data.templateNumber || response.data.data.template
+    if (template === 15) {
+      commit(`SET_SETTINGS_BY_TEMPLATE`, {
+        templateNumber: template,
+        value: response.data.data.webSiteTemplate,
+      })
+    }
   }
+  // else if (parts[1] == 'komercia' || parts[1] == 'localhost:3000') {
+  //   id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
+  //     name: `${subdomain}.komercia.co/`,
+  //   })
+  // } else {
+  //   let getDomain = full.split('/?')
+  //   let domainURL =
+  //     getDomain.length > 1 ? `https://${getDomain[0]}` : `https://${getDomain}`
+  //   id = await axios.post(`${state.urlKomercia}/api/tienda/info/by/url`, {
+  //     name: domainURL,
+  //   })
+  // }
 
   return { subdomain, id, template, idWapi }
 }
@@ -1164,17 +1172,9 @@ async function handleWapi(commit, dispatch, idWapi) {
   commit('SET_STATE_WAPIME', true)
 }
 
-async function handleKomercia(
-  id,
-  template,
-  subdomain,
-  commit,
-  dispatch,
-  state
-) {
+async function handleKomercia(id, template, commit, dispatch) {
   if (id) {
     commit('SET_TEMPLATE_STORE', template)
-
     await dispatch('GET_ALL_PRODUCTS', id)
     await dispatch('GET_DATA_TIENDA_BY_ID', id)
     await dispatch('GET_DATA_HOKO', id)
@@ -1189,21 +1189,18 @@ async function handleKomercia(
       template == 14 ||
       template == 16
     ) {
-      // Andres
-      if (state?.dataStore?.tienda) {
-        await dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', state.dataStore.tienda)
+      if (id && template) {
+        await dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', {
+          templateStore: template,
+          idStore: id,
+        })
       }
-    }
-    // Daniel
-    else if (template == 15) {
-      if (state?.dataStore?.tienda) {
-        await dispatch('GET_SETTINGS_BY_TEMPLATE_AWS', state.dataStore.tienda)
-      }
-    }
-    //Cristiano
-    else if (template == 5 || template == 6 || template == 99) {
-      if (state?.dataStore?.tienda) {
-        await dispatch('GET_SETTINGS_BY_TEMPLATE', state.dataStore.tienda)
+    } else if (template == 5 || template == 99) {
+      if (id && template) {
+        await dispatch('GET_SETTINGS_BY_TEMPLATE', {
+          templateStore: template,
+          idStore: id,
+        })
         await commit('SET_STATE_WAPIME', false)
       }
     }

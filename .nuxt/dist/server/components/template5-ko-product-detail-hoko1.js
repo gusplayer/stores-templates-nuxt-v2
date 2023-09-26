@@ -104,7 +104,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/template5/Ko-ProductDetailHoko-1.vue?vue&type=template&id=0a7d6c7c&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(2);
+var external_axios_ = __webpack_require__(3);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: ./components/template5/_productdetails/productSlideHoko.vue + 4 modules

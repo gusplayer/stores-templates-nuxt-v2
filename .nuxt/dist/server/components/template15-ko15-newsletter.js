@@ -68,7 +68,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/template15/Ko15-Newsletter.vue?vue&type=template&id=7e22a1c0&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(2);
+var external_axios_ = __webpack_require__(3);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: external "vee-validate"
