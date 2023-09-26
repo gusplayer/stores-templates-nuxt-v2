@@ -1,24 +1,20 @@
 <template>
   <div
-    id="navbar"
     v-if="settingByTemplate10"
+    id="navbar"
     class="header-container"
     :style="[
       settingByTemplate10[0].setting10Header,
       settingByTemplate10[0].setting10General,
       {
         '--font-style-1':
-          this.settingByTemplate10 &&
-          this.settingByTemplate10[0].setting10General &&
-          this.settingByTemplate10[0].setting10General.fount_1
-            ? this.settingByTemplate10[0].setting10General.fount_1
-            : 'Roboto',
+          settingByTemplate10[0]?.setting10General?.fount_1 ?? 'Roboto',
       },
     ]"
   >
-    <div class="wrapper-header" id="headbg">
-      <div class="header" id="headerid">
-        <KoOrder :dataStore="dataStore" />
+    <div id="headbg" class="wrapper-header">
+      <div id="headerid" class="header">
+        <KoOrder :data-store="dataStore" />
 
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
@@ -37,41 +33,40 @@
           <div class="flex flex-row justify-between w-full">
             <div class="flex flex-row mr-20">
               <div
+                v-if="settingByTemplate10[0].pages.values.length > 6"
                 class="btn-scroll"
                 @click="scrollLeft()"
-                v-if="this.settingByTemplate10[0].pages.values.length > 6"
               >
                 <FlechaLeft-icon class="btn-scroll-icon" />
               </div>
               <div
+                v-if="settingByTemplate10[0].pages.values"
                 class="header-content-buttons"
                 id="swiper-slide-categories"
-                v-if="this.settingByTemplate10[0].pages.values"
               >
                 <div
-                  v-for="(item, index) in this.settingByTemplate10[0].pages
-                    .values"
+                  v-for="(item, index) in settingByTemplate10[0].pages.values"
                   :key="`${index}${item.displayName}`"
                 >
                   <nuxt-link
-                    :to="item.url"
                     v-if="!item.isExternalLink"
+                    :to="item.url"
                     class="content-button"
                   >
                     <p
                       class="btn"
-                      @click="btnActivate(item.url)"
                       :class="btnSelect == item.url ? 'btn-active' : ''"
+                      @click="btnActivate(item.url)"
                     >
                       {{ item.displayName }}
                     </p>
                   </nuxt-link>
                   <a
+                    v-else
                     :href="item.url"
                     target="_blank"
                     rel="noreferrer noopener"
                     class="content-button"
-                    v-else
                   >
                     <p class="btn">
                       {{ item.displayName }}
@@ -80,16 +75,16 @@
                 </div>
               </div>
               <div
+                v-if="settingByTemplate10[0].pages.values.length > 6"
                 class="btn-scroll"
                 @click="scrollRight()"
-                v-if="this.settingByTemplate10[0].pages.values.length > 6"
               >
                 <FlechaRight-icon class="btn-scroll-icon" />
               </div>
             </div>
             <div class="header-content-items">
               <div>
-                <div class="search" v-if="searchSelect">
+                <div v-if="searchSelect" class="search">
                   <i class="header-search-icon" @click="openSearch">
                     <svg
                       class="search-header"
@@ -117,7 +112,7 @@
                   </i>
                 </div>
               </div>
-              <div class="empty" v-if="showSearch"></div>
+              <div v-if="showSearch" class="empty"></div>
               <div class="header-content-icon" @click="openOrder">
                 <i class="header-content-cart">
                   <svg
@@ -143,9 +138,9 @@
         </div>
         <!-- <KoSearch :dataStore="dataStore" /> -->
         <KoMenu
-          :dataStore="dataStore"
+          :data-store="dataStore"
           class="responsive"
-          :settingByTemplate="settingByTemplate10"
+          :setting-by-template="settingByTemplate10"
         />
       </div>
     </div>
@@ -153,37 +148,23 @@
 </template>
 
 <script>
-import KoOrder from '../_order1/order1'
-import KoMenu from '../_lateralMenu/_lateralMenu11/openMenuLeft.vue'
-// import KoSearch from '../_lateralMenu/_lateralMenu10/searchDown.vue'
 export default {
+  name: 'KoHeader6',
   components: {
-    KoOrder,
-    KoMenu,
-    // KoSearch,
+    KoOrder: () => import('../_order1/order1'),
+    KoMenu: () => import('../_lateralMenu/_lateralMenu11/openMenuLeft.vue'),
   },
-  name: 'Ko-Header-6',
   props: {
-    dataStore: Object,
-    settingByTemplate10: Array,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate10: {
+      type: Array,
+      required: true,
+    },
   },
-  mounted() {
-    if (this.$route.path) {
-      let item = this.settingByTemplate10[0].pages.values.find(
-        (item) => item.url == this.$route.path
-      )
-      this.btnSelect = item && item.url ? item.url : ''
-    }
-    this.initHeader()
-    window.addEventListener('scroll', function () {
-      var navbar = document.getElementById('navbar')
-      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
-        navbar.style.position = 'fixed'
-      } else {
-        navbar.style.position = 'static'
-      }
-    })
-  },
+
   data() {
     return {
       searchSelect: true,
@@ -202,6 +183,32 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos.length
     },
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.initHeader()
+    },
+  },
+  mounted() {
+    if (this.$route.path) {
+      let item = this.settingByTemplate10[0].pages.values.find(
+        (item) => item.url == this.$route.path
+      )
+      this.btnSelect = item && item.url ? item.url : ''
+    }
+    this.initHeader()
+    window.addEventListener('scroll', function () {
+      var navbar = document.getElementById('navbar')
+      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
+        navbar.style.position = 'fixed'
+      } else {
+        navbar.style.position = 'static'
+      }
+    })
   },
   methods: {
     initHeader() {
@@ -266,15 +273,6 @@ export default {
     },
     scrollRight() {
       document.getElementById('swiper-slide-categories').scrollLeft += 300
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.initHeader()
     },
   },
 }

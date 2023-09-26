@@ -2,10 +2,7 @@
   <div class="header-container" :style="settingByTemplate">
     <div
       :style="{
-        '--font-style':
-          this.settingByTemplate && this.settingByTemplate.tipo_letra
-            ? this.settingByTemplate.tipo_letra
-            : 'Roboto',
+        '--font-style': settingByTemplate?.tipo_letra ?? 'Roboto',
       }"
     >
       <div class="wrapper-header" @click="closeMenuCategory">
@@ -16,8 +13,8 @@
               <img
                 :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
                 class="header-logo"
-                @click="clear"
                 alt="Logo Img"
+                @click="clear"
               />
             </nuxt-link>
           </div>
@@ -29,17 +26,19 @@
             >
               <div @click="openMenu(item.name)">
                 <nuxt-link
-                  :to="item.path"
                   v-if="item.path"
+                  :to="item.path"
                   class="header-text-center"
-                  >{{ $t(`${item.name}`) }}</nuxt-link
                 >
+                  {{ $t(`${item.name}`) }}
+                </nuxt-link>
                 <nuxt-link
-                  :to="item.href"
                   v-else-if="item.href && listArticulos > 0"
+                  :to="item.href"
                   class="header-text-center"
-                  >{{ $t(`${item.name}`) }}</nuxt-link
                 >
+                  {{ $t(`${item.name}`) }}
+                </nuxt-link>
                 <div v-else>
                   <div
                     v-if="dataStore.categorias.length > 0 && item.ref"
@@ -53,14 +52,14 @@
                       {{ $t(`${item.name}`) }}
                     </p>
                     <div
-                      class="header-text-center-icon"
-                      v-if="!showMenu"
                       :is="item.iconOpen"
+                      v-if="!showMenu"
+                      class="header-text-center-icon"
                     />
                     <div
-                      class="header-text-center-icon"
-                      v-if="showMenu"
                       :is="item.iconClose"
+                      v-if="showMenu"
+                      class="header-text-center-icon"
                     />
                   </div>
                 </div>
@@ -75,19 +74,19 @@
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                <div class="header-icon" :is="item.icon"
-              /></a>
+                <div :is="item.icon" class="header-icon" />
+              </a>
             </div>
           </div>
-          <div class="search" v-if="showSearch">
+          <div v-if="showSearch" class="search">
             <form id="demo-2" style="position: relative">
               <search-icon class="icon-s" @click="focusInput" />
               <input
+                id="SearchHeader"
+                v-model="search"
                 type="search"
                 :placeholder="$t('header_search')"
-                v-model="search"
                 @keyup.enter="getSearch(search)"
-                id="SearchHeader"
               />
             </form>
           </div>
@@ -100,7 +99,7 @@
           <div class="header-item-menu" @click="openMenuLateral">
             <menu-icon class="header-icon-menu nav-bar" />
           </div>
-          <KoMenu :dataStore="dataStore" class="responsive" />
+          <KoMenu :data-store="dataStore" class="responsive" />
         </div>
       </div>
       <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
@@ -136,33 +135,28 @@
                     </p>
                   </li>
                   <ul class="subcategoria">
-                    <template>
-                      <div
-                        v-for="(subcategory, key) in subcategories"
-                        :key="key"
+                    <div v-for="(subcategory, key) in subcategories" :key="key">
+                      <li
+                        v-if="subcategory.categoria == categoria.id"
+                        class="text-subcategoria"
+                        :class="
+                          subcategory.id == indexSelect
+                            ? 'text-subcategoria-active'
+                            : ''
+                        "
+                        @click="SendSubCategory(subcategory.id)"
                       >
-                        <li
-                          v-if="subcategory.categoria == categoria.id"
-                          @click="SendSubCategory(subcategory.id)"
-                          class="text-subcategoria"
-                          :class="
-                            subcategory.id == indexSelect
-                              ? 'text-subcategoria-active'
-                              : ''
-                          "
-                        >
-                          {{ subcategory.nombre_subcategoria }}
-                        </li>
-                      </div>
-                    </template>
+                        {{ subcategory.nombre_subcategoria }}
+                      </li>
+                    </div>
                   </ul>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="product-img-container" v-if="product.length">
+          <div v-if="product.length" class="product-img-container">
             <div class="card-container">
-              <div class="img-logo" v-if="product[0]">
+              <div v-if="product[0]" class="img-logo">
                 <img
                   :src="product[0].foto_cloudinary"
                   class="logo"
@@ -181,22 +175,21 @@
 </template>
 
 <script>
-import KoOrder from '../_order1/order1'
-import KoMenu from '../_order1/openMenuRight'
-
 export default {
+  name: 'KoHeader2',
   components: {
-    KoOrder,
-    KoMenu,
+    KoOrder: () => import('../_order1/order1'),
+    KoMenu: () => import('../_order1/openMenuRight'),
   },
-  name: 'Ko-Header-2',
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
-  },
-  mounted() {
-    this.toggle = true
-    this.initHeader()
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -282,6 +275,27 @@ export default {
     listArticulos() {
       return this.$store.state.listArticulos.length
     },
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
+    },
+
+    search(value) {
+      this.SearchProduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.initHeader()
+    },
+  },
+  mounted() {
+    this.toggle = true
+    this.initHeader()
   },
   methods: {
     initHeader() {
@@ -436,23 +450,6 @@ export default {
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()
-    },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
-    },
-
-    search(value) {
-      this.SearchProduct(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.initHeader()
     },
   },
 }

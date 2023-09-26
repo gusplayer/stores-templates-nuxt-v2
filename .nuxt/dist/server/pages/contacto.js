@@ -1,7 +1,7 @@
 exports.ids = [331];
 exports.modules = {
 
-/***/ 1087:
+/***/ 1077:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28,15 +28,15 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var contactovue_type_script_lang_js_ = ({
   name: 'KoContact',
   components: {
-    K05Contact: () => __webpack_require__.e(/* import() */ 150).then(__webpack_require__.bind(null, 1203)),
-    K07Contact: () => __webpack_require__.e(/* import() */ 167).then(__webpack_require__.bind(null, 1219)),
-    K09Contact: () => __webpack_require__.e(/* import() */ 176).then(__webpack_require__.bind(null, 1225)),
-    K10Contact: () => __webpack_require__.e(/* import() */ 40).then(__webpack_require__.bind(null, 1118)),
-    K11Contact: () => __webpack_require__.e(/* import() */ 56).then(__webpack_require__.bind(null, 1130)),
-    K13Contact: () => __webpack_require__.e(/* import() */ 82).then(__webpack_require__.bind(null, 1152)),
-    K14Contact: () => __webpack_require__.e(/* import() */ 93).then(__webpack_require__.bind(null, 1161)),
-    K15Contact: () => __webpack_require__.e(/* import() */ 113).then(__webpack_require__.bind(null, 1176)),
-    K16Contact: () => __webpack_require__.e(/* import() */ 128).then(__webpack_require__.bind(null, 1188))
+    K05Contact: () => __webpack_require__.e(/* import() */ 160).then(__webpack_require__.bind(null, 1193)),
+    K07Contact: () => __webpack_require__.e(/* import() */ 177).then(__webpack_require__.bind(null, 1209)),
+    K09Contact: () => __webpack_require__.e(/* import() */ 186).then(__webpack_require__.bind(null, 1215)),
+    K10Contact: () => __webpack_require__.e(/* import() */ 50).then(__webpack_require__.bind(null, 1108)),
+    K11Contact: () => __webpack_require__.e(/* import() */ 66).then(__webpack_require__.bind(null, 1120)),
+    K13Contact: () => __webpack_require__.e(/* import() */ 92).then(__webpack_require__.bind(null, 1142)),
+    K14Contact: () => __webpack_require__.e(/* import() */ 103).then(__webpack_require__.bind(null, 1151)),
+    K15Contact: () => __webpack_require__.e(/* import() */ 123).then(__webpack_require__.bind(null, 1166)),
+    K16Contact: () => __webpack_require__.e(/* import() */ 138).then(__webpack_require__.bind(null, 1178))
   },
   layout: 'default',
   data() {

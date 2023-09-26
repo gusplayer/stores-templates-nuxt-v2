@@ -1,7 +1,7 @@
-exports.ids = [201];
+exports.ids = [211];
 exports.modules = {
 
-/***/ 1092:
+/***/ 1082:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56,14 +56,14 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template11vue_type_script_lang_js_ = ({
   name: 'KoTemplate11',
   components: {
-    K011Carousel: () => __webpack_require__.e(/* import() */ 63).then(__webpack_require__.bind(null, 1138)),
-    K011Section: () => __webpack_require__.e(/* import() */ 67).then(__webpack_require__.bind(null, 1142)),
-    K011TrendingProduct: () => __webpack_require__.e(/* import() */ 68).then(__webpack_require__.bind(null, 1143)),
-    K011TrendingProductHoko: () => __webpack_require__.e(/* import() */ 69).then(__webpack_require__.bind(null, 1144)),
-    K011Parallax: () => __webpack_require__.e(/* import() */ 66).then(__webpack_require__.bind(null, 1141)),
-    K011ListTrending: () => __webpack_require__.e(/* import() */ 65).then(__webpack_require__.bind(null, 1140)),
-    K011Information: () => __webpack_require__.e(/* import() */ 64).then(__webpack_require__.bind(null, 1139)),
-    K011Blog: () => __webpack_require__.e(/* import() */ 62).then(__webpack_require__.bind(null, 1137))
+    K011Carousel: () => __webpack_require__.e(/* import() */ 73).then(__webpack_require__.bind(null, 1128)),
+    K011Section: () => __webpack_require__.e(/* import() */ 77).then(__webpack_require__.bind(null, 1132)),
+    K011TrendingProduct: () => __webpack_require__.e(/* import() */ 78).then(__webpack_require__.bind(null, 1133)),
+    K011TrendingProductHoko: () => __webpack_require__.e(/* import() */ 79).then(__webpack_require__.bind(null, 1134)),
+    K011Parallax: () => __webpack_require__.e(/* import() */ 76).then(__webpack_require__.bind(null, 1131)),
+    K011ListTrending: () => __webpack_require__.e(/* import() */ 75).then(__webpack_require__.bind(null, 1130)),
+    K011Information: () => __webpack_require__.e(/* import() */ 74).then(__webpack_require__.bind(null, 1129)),
+    K011Blog: () => __webpack_require__.e(/* import() */ 72).then(__webpack_require__.bind(null, 1127))
   },
   layout: 'default',
   data() {

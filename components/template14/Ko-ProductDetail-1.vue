@@ -7,7 +7,7 @@
       settingByTemplate14[0].settingsGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate14[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate14[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -89,10 +89,10 @@
                         class="w-full h-full flex flex-col justify-stretch max-h-[100px] max-w-[100px]"
                       >
                         <img
-                          class="w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top"
                           v-lazy="
                             idCloudinary(data.detalle.foto_cloudinary, 150, 150)
                           "
+                          class="w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top"
                           width="100"
                           height="100"
                           alt="Product Img"
@@ -101,20 +101,20 @@
                       </div>
                     </div>
                     <div
-                      class="swiper-slide w-full h-full"
                       v-for="(foto, itemsFoto) in data.fotos"
                       :key="itemsFoto"
+                      class="swiper-slide w-full h-full"
                     >
                       <div
                         class="w-full h-full flex flex-col justify-stretch max-h-[100px] max-w-[100px]"
                       >
                         <img
-                          @click="selectedPhoto(foto.foto_cloudinary)"
-                          class="w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top"
                           v-lazy="
                             idCloudinaryQuality(foto.foto_cloudinary, 850, 850)
                           "
+                          class="w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top"
                           alt="Product Img"
+                          @click="selectedPhoto(foto.foto_cloudinary)"
                         />
                       </div>
                     </div>
@@ -128,8 +128,8 @@
                             `https://img.youtube.com/vi/${idYoutube}/0.jpg`
                           "
                           class="w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top"
-                          @mouseover="existYoutube = true"
                           alt="Product video"
+                          @mouseover="existYoutube = true"
                         />
                       </div>
                     </div>
@@ -150,8 +150,8 @@
                   class="w-full h-full max-w-[375px] max-h-[375px] object-contain rounded-10 object-top"
                 >
                   <img
-                    class="w-full h-full max-w-[375px] max-h-[375px] object-contain rounded-10 object-top"
                     v-lazy="idCloudinaryQuality(selectPhotoUrl, 850, 850)"
+                    class="w-full h-full max-w-[375px] max-h-[375px] object-contain rounded-10 object-top"
                     alt="ProductImg grande"
                   />
                 </div>
@@ -401,25 +401,25 @@
                 </div>
                 <!-- Anuncio ult unidad -->
                 <div
-                  v-if="this.maxQuantityValue == this.quantityValue"
+                  v-if="maxQuantityValue == quantityValue"
                   class="absolute py-3 px-5 bg-yellow-300 rounded-4 -bottom-35 w-full max-w-[300px] text-center"
                 >
                   <span class="text-14 text-black">
-                    {{ $t('cart_ultimaUnidad') }}</span
-                  >
+                    {{ $t('cart_ultimaUnidad') }}
+                  </span>
                 </div>
               </div>
               <button
-                id="AddToCartTag"
                 v-if="
                   !spent &&
                   salesData.estado &&
                   (data.info.tipo_servicio == null ||
                     data.info.tipo_servicio == '0')
                 "
+                id="AddToCartTag"
                 ref="colorBtn"
-                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
-                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
+                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5 btnHover"
+                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate14[0].settingsGeneral.radius}`"
                 @click="addShoppingCart"
               >
                 <svg
@@ -437,19 +437,19 @@
                 {{ $t('productdetail_añadiralcarrito') }}
               </button>
               <button
+                v-else-if="!salesData.estado"
                 disabled
-                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
-                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
-                v-else-if="!this.salesData.estado"
+                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5 btnHover"
+                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate14[0].settingsGeneral.radius}`"
               >
                 {{ $t('productdetail_btnANodisponible') }}
               </button>
               <button
-                id="AddToCartTag"
                 v-else-if="!spent && data.info.tipo_servicio == '1'"
+                id="AddToCartTag"
                 ref="colorBtn"
-                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
-                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
+                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5 btnHover"
+                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate14[0].settingsGeneral.radius}`"
                 @click="GoPayments"
               >
                 <svg
@@ -468,8 +468,8 @@
               <button
                 v-else-if="spent"
                 disabled
-                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
-                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn};`"
+                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5 btnHover"
+                :style="`background-color: ${settingByTemplate14[0].detailsProducts.color_btn}; color: ${settingByTemplate14[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate14[0].settingsGeneral.radius}`"
               >
                 {{ $t('home_cardAgotado') }}
               </button>
@@ -1175,6 +1175,10 @@ export default {
 <style scoped>
 * {
   font-family: var(--font-style-1) !important;
+}
+.btnHover:hover {
+  color: var(--hover_text_btn) !important;
+  background-color: var(--hover_Bg_btn) !important;
 }
 .btn-facebook {
   color: #1877f2;

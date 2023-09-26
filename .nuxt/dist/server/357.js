@@ -1,29 +1,48 @@
 exports.ids = [357];
 exports.modules = {
 
-/***/ 1057:
+/***/ 1059:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/template10/_productdetails/OptTab.vue?vue&type=template&id=4d8fc9d6&scoped=true&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/template14/_productdetails/OptTab.vue?vue&type=template&id=3d4fddd8&scoped=true&
 var render = function render() {
+  var _this$settingByTempla, _this$settingByTempla2, _this$settingByTempla3;
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
     staticClass: "content-opt-tab",
-    style: [_vm.settingByTemplate10[0].detailsProduct, _vm.settingByTemplate10[0].setting10General]
-  }, [_vm._ssrNode("<div class=\"head-content\" data-v-4d8fc9d6>" + (_vm.contentDescription ? "<div" + _vm._ssrClass("tab", _vm.selecttag == 1 ? 'show-select-active' : '') + " data-v-4d8fc9d6><p class=\"tittle\" data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_description'))) + "</p></div>" : "<!---->") + " <div" + _vm._ssrClass("tab", _vm.selecttag == 2 ? 'show-select-active' : '') + " data-v-4d8fc9d6><p class=\"tittle\" data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_opcionesPago'))) + "</p></div> <div" + _vm._ssrClass("tab", _vm.selecttag == 3 ? 'show-select-active' : '') + " data-v-4d8fc9d6><p class=\"tittle\" data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_opinionesEnvio'))) + "</p></div></div> "), _vm._ssrNode("<div class=\"content-tab\" data-v-4d8fc9d6>", "</div>", [_vm.focusbtn1 && _vm.contentDescription ? _vm._ssrNode("<div class=\"editor\" data-v-4d8fc9d6>", "</div>", [_c('el-tiptap', {
+    style: [_vm.settingByTemplate14[0].settingsGeneral, _vm.settingByTemplate14[0].detailsProducts, {
+      '--font-style-1': (_this$settingByTempla = (_this$settingByTempla2 = this.settingByTemplate14[0]) === null || _this$settingByTempla2 === void 0 ? void 0 : (_this$settingByTempla3 = _this$settingByTempla2.settingsGeneral) === null || _this$settingByTempla3 === void 0 ? void 0 : _this$settingByTempla3.fount_1) !== null && _this$settingByTempla !== void 0 ? _this$settingByTempla : 'Poppins'
+    }]
+  }, [_c('el-collapse', {
+    model: {
+      value: _vm.activeNames,
+      callback: function ($$v) {
+        _vm.activeNames = $$v;
+      },
+      expression: "activeNames"
+    }
+  }, [_vm.contentDescription ? _c('el-collapse-item', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text}; border-color:${_vm.settingByTemplate14[0].detailsProducts.color_border}`,
+    attrs: {
+      "title": _vm.$t('productdetail_description'),
+      "name": "1"
+    }
+  }, [_c('div', {
+    staticClass: "editor"
+  }, [_c('el-tiptap', {
     attrs: {
       "extensions": _vm.extensions,
       "spellcheck": false,
       "readonly": true,
       "tooltip": false,
       "bubble": false,
-      "showMenubar": false,
-      "charCounterCount": false
+      "charCounterCount": false,
+      "showMenubar": false
     },
     model: {
       value: _vm.contentDescription,
@@ -32,11 +51,257 @@ var render = function render() {
       },
       expression: "contentDescription"
     }
-  })], 1) : _vm._e(), _vm._ssrNode(" " + (_vm.focusbtn2 ? "<div class=\"item-content opcpago\" data-v-4d8fc9d6><ul data-v-4d8fc9d6>" + (_vm.mediospago.consignacion == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_consignacionBancaria'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_consignacionBancariaMsg'))) + "</p></li>" : "<!---->") + " " + (_vm.mediospago.contraentrega == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_PagoContra'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_PagoContraMsg'))) + "</p></li>" : "<!---->") + " " + (_vm.mediospago.convenir == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_pagoConvenir'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_pagoConvenirMsg'))) + "</p></li>" : "<!---->") + " " + (_vm.mediospago.credibanco == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_ConsignacionCredibanco'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_ConsignacionCredibancoMsg')) + "\n          ") + "</p> <a href=\"https://www.credibanco.com/\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"cursor_point\" data-v-4d8fc9d6><img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png\" alt=\"logo Credibanco\" class=\"logo-pasarela\" data-v-4d8fc9d6></a></li>" : "<!---->") + " " + (_vm.mediospago.daviplata == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_Consignaciondaviplata'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_ConsignaciondaviplataMsg')) + "\n          ") + "</p> <img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png\" alt=\"logo daviPlata\" class=\"logo-pasarela-daviplata\" data-v-4d8fc9d6></li>" : "<!---->") + " " + (_vm.mediospago.efecty == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_ConsignacionEfecty'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_ConsignacionEfectyMsg'))) + "</p> <a href=\"https://www.efecty.com.co/web/\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"cursor_point\" data-v-4d8fc9d6><img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png\" alt=\"logo efecty\" class=\"logo-pasarela-efecty\" data-v-4d8fc9d6></a></li>" : "<!---->") + " " + (_vm.mediospago.mercado_pago == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_PasarelaMercado'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_PasarelaMercadoMsg')) + "\n          ") + "</p> <a href=\"https://www.mercadopago.com\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"cursor_point\" data-v-4d8fc9d6><img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png\" alt=\"logo mercadopago\" class=\"logo-pasarela-daviplata\" data-v-4d8fc9d6></a></li>" : "<!---->") + " " + (_vm.mediospago.nequi == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_Consignacionnequi'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_ConsignacionnequiMsg')) + "\n          ") + "</p> <a href=\"https://www.nequi.com.co/\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"cursor_point\" data-v-4d8fc9d6><img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png\" alt=\"logo nequi\" class=\"logo-pasarela-daviplata\" data-v-4d8fc9d6></a></li>" : "<!---->") + " " + (_vm.mediospago.payco == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_PasarelaEpayco'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_PasarelaEpaycoMsg')) + "\n          ") + "</p> <img src=\"https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png\" alt=\"Pasarela de pagos epayco\" class=\"logo-pasarela-payco\" data-v-4d8fc9d6></li>" : "<!---->") + " " + (_vm.mediospago.payu == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_PasarelaPayu'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_PasarelaPayuMsg')) + "\n          ") + "</p> <a href=\"https://www.payulatam.com/co/\" target=\"_blank\" rel=\"noreferrer noopener\" data-v-4d8fc9d6><img src=\"https://ecommerce.payulatam.com/logos/PayU_CO.png\" alt=\"PayU\" border=\"0\" class=\"logo-pasarela-payu\" data-v-4d8fc9d6></a></li>" : "<!---->") + " " + (_vm.mediospago.wompi == 1 ? "<li data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_Consignacionwompi'))) + "</h4> <p data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_PasarelaPayuMsg')) + "\n          ") + "</p> <a href=\"https://wompi.co/\" target=\"_blank\" rel=\"noreferrer noopener\" data-v-4d8fc9d6><img src=\"https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png\" alt=\"wompi\" border=\"0\" class=\"logo-pasarela-wompi\" data-v-4d8fc9d6></a></li>" : "<!---->") + "</ul></div>" : "<!---->") + " " + (_vm.focusbtn3 && _vm.envios.envio_metodo ? "<div class=\"item-content opcenvio\" data-v-4d8fc9d6><div class=\"deliverys section\" data-v-4d8fc9d6><div class=\"content\" data-v-4d8fc9d6><h3 class=\"title-section\" data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_opinionesEnvio')) + "\n          ") + "</h3></div> " + (_vm.envios.envio_metodo === 'precio_ciudad' ? "<div class=\"wrapper-method\" data-v-4d8fc9d6><h4 class=\"capitalize\" data-v-4d8fc9d6>" + _vm._ssrEscape("\n            • " + _vm._s(_vm.envios.envio_metodo.replace('_', ' por ')) + "\n          ") + "</h4> <p class=\"description-method\" data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_opinionesEnvioMsg1')) + "\n          ") + "</p></div>" : "<!---->") + " " + (_vm.envios.envio_metodo === 'tarifa_plana' ? "<div class=\"wrapper-method\" data-v-4d8fc9d6><h4 class=\"capitalize\" data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.envios.envio_metodo.replace('_', ' ')) + "\n          ") + "</h4> <p class=\"description-method\" data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_opinionesEnvioMsg2')) + "\n          ") + "</p> <p class=\"price\" data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('cart_precio')) + "\n            " + _vm._s(_vm._f("currency")(_vm.envios.valor, _vm.dataStore.tienda.codigo_pais, _vm.dataStore.tienda.moneda)) + "\n          ") + "</p></div>" : "<!---->") + " " + (_vm.envios.envio_metodo === 'precio' ? "<div class=\"wrapper-method\" data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_precioTotalCompra'))) + "</h4> <p class=\"description-method\" data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_precioTotalCompraMsg')) + "\n          ") + "</p></div>" : "<!---->") + " " + (_vm.envios.envio_metodo === 'gratis' ? "<div class=\"wrapper-method\" data-v-4d8fc9d6><h4 data-v-4d8fc9d6>" + _vm._ssrEscape(_vm._s(_vm.$t('productdetail_gratis'))) + "</h4> <p class=\"description-method\" data-v-4d8fc9d6>" + _vm._ssrEscape("\n            " + _vm._s(_vm.$t('productdetail_gratisMsg')) + "\n          ") + "</p></div>" : "<!---->") + " " + (_vm.envios.envio_metodo === 'sinEnvio' ? "<div class=\"wrapper-method\" data-v-4d8fc9d6><p class=\"description-method\" data-v-4d8fc9d6>Pasas a recoger tu compra</p></div>" : "<!---->") + "</div></div>" : "<!---->"))], 2)], 2);
+  })], 1)]) : _vm._e(), _vm._v(" "), _c('el-collapse-item', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text}; border-color:${_vm.settingByTemplate14[0].detailsProducts.color_border}`,
+    attrs: {
+      "title": _vm.$t('productdetail_opcionesPago'),
+      "name": "2"
+    }
+  }, [_c('div', {
+    staticClass: "item-content opcpago"
+  }, [_c('ul', [_vm.mediospago.consignacion == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_consignacionBancaria')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_consignacionBancariaMsg')) + "\n            ")])]) : _vm._e(), _vm._v(" "), _vm.mediospago.contraentrega == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_PagoContra')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_PagoContraMsg')) + "\n            ")])]) : _vm._e(), _vm._v(" "), _vm.mediospago.convenir == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_pagoConvenir')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_pagoConvenirMsg')) + "\n            ")])]) : _vm._e(), _vm._v(" "), _vm.mediospago.credibanco == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_ConsignacionCredibanco')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_ConsignacionCredibancoMsg')) + "\n            ")]), _vm._v(" "), _c('a', {
+    staticClass: "cursor_point",
+    attrs: {
+      "href": "https://www.credibanco.com/",
+      "target": "_blank",
+      "rel": "noreferrer noopener"
+    }
+  }, [_c('img', {
+    staticClass: "logo-pasarela",
+    attrs: {
+      "src": "https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png",
+      "alt": "logo Credibanco"
+    }
+  })])]) : _vm._e(), _vm._v(" "), _vm.mediospago.daviplata == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_Consignaciondaviplata')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_ConsignaciondaviplataMsg')) + "\n            ")]), _vm._v(" "), _c('img', {
+    staticClass: "logo-pasarela-daviplata",
+    attrs: {
+      "src": "https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png",
+      "alt": "logo daviPlata"
+    }
+  })]) : _vm._e(), _vm._v(" "), _vm.mediospago.efecty == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_ConsignacionEfecty')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_ConsignacionEfectyMsg')) + "\n            ")]), _vm._v(" "), _c('a', {
+    staticClass: "cursor_point",
+    attrs: {
+      "href": "https://www.efecty.com.co/web/",
+      "target": "_blank",
+      "rel": "noreferrer noopener"
+    }
+  }, [_c('img', {
+    staticClass: "logo-pasarela-efecty",
+    attrs: {
+      "src": "https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png",
+      "alt": "logo efecty"
+    }
+  })])]) : _vm._e(), _vm._v(" "), _vm.mediospago.mercado_pago == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_PasarelaMercado')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_PasarelaMercadoMsg')) + "\n            ")]), _vm._v(" "), _c('a', {
+    staticClass: "cursor_point",
+    attrs: {
+      "href": "https://www.mercadopago.com",
+      "target": "_blank",
+      "rel": "noreferrer noopener"
+    }
+  }, [_c('img', {
+    staticClass: "logo-pasarela-daviplata",
+    attrs: {
+      "src": "https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png",
+      "alt": "logo mercadopago"
+    }
+  })])]) : _vm._e(), _vm._v(" "), _vm.mediospago.nequi == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_Consignacionnequi')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_ConsignacionnequiMsg')) + "\n            ")]), _vm._v(" "), _c('a', {
+    staticClass: "cursor_point",
+    attrs: {
+      "href": "https://www.nequi.com.co/",
+      "target": "_blank",
+      "rel": "noreferrer noopener"
+    }
+  }, [_c('img', {
+    staticClass: "logo-pasarela-daviplata",
+    attrs: {
+      "src": "https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png",
+      "alt": "logo nequi"
+    }
+  })])]) : _vm._e(), _vm._v(" "), _vm.mediospago.payco == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_PasarelaEpayco')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_PasarelaEpaycoMsg')) + "\n            ")]), _vm._v(" "), _c('img', {
+    staticClass: "logo-pasarela-payco",
+    attrs: {
+      "src": "https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png",
+      "alt": "Pasarela de pagos epayco"
+    }
+  })]) : _vm._e(), _vm._v(" "), _vm.mediospago.payu == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_PasarelaPayu')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_PasarelaPayuMsg')) + "\n            ")]), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": "https://www.payulatam.com/co/",
+      "target": "_blank",
+      "rel": "noreferrer noopener"
+    }
+  }, [_c('img', {
+    staticClass: "logo-pasarela-payu",
+    attrs: {
+      "src": "https://ecommerce.payulatam.com/logos/PayU_CO.png",
+      "alt": "PayU",
+      "border": "0"
+    }
+  })])]) : _vm._e(), _vm._v(" "), _vm.mediospago.wompi == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_Consignacionwompi')) + "\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_PasarelaPayuMsg')) + "\n            ")]), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": "https://wompi.co/",
+      "target": "_blank",
+      "rel": "noreferrer noopener"
+    }
+  }, [_c('img', {
+    staticClass: "logo-pasarela-wompi",
+    attrs: {
+      "src": "https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png",
+      "alt": "wompi",
+      "border": "0"
+    }
+  })])]) : _vm._e(), _vm._v(" "), _vm.mediospago.wepay4u == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              WePay4U\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('text_pago_WePay4U')) + "\n            ")]), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": "https://wepay4u.com/",
+      "target": "_blank",
+      "rel": "noreferrer noopener"
+    }
+  }, [_c('img', {
+    staticClass: "logo-pasarela-wompi",
+    attrs: {
+      "src": "https://res.cloudinary.com/komerciaacademico/image/upload/v1639078440/wePay4u/powered_by_z7sgqp.png",
+      "alt": "wePay4u",
+      "border": "0"
+    }
+  })])]) : _vm._e(), _vm._v(" "), _vm.mediospago.tu_compra == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              Tucompra\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('text_pago_Tucompra')) + "\n            ")]), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": "https://tucompra.com.co/",
+      "target": "_blank",
+      "rel": "noreferrer noopener"
+    }
+  }, [_c('img', {
+    staticClass: "logo-pasarela-wompi",
+    attrs: {
+      "src": "https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/tucompra_ss0oys.png",
+      "alt": "tu_compra",
+      "border": "0"
+    }
+  })])]) : _vm._e(), _vm._v(" "), _vm.mediospago.flow == 1 ? _c('li', [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              Tucompra\n            ")]), _vm._v(" "), _c('p', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('text_pago_flowInfo')) + "\n            ")]), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": "https://www.flow.cl/",
+      "target": "_blank",
+      "rel": "noreferrer noopener"
+    }
+  }, [_c('img', {
+    staticClass: "logo-pasarela-wompi",
+    attrs: {
+      "src": "https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/flow_jevnwy.png",
+      "alt": "flow",
+      "border": "0"
+    }
+  })])]) : _vm._e()])])]), _vm._v(" "), _vm.envios.envio_metodo ? _c('el-collapse-item', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text}; border-color:${_vm.settingByTemplate14[0].detailsProducts.color_border}`,
+    attrs: {
+      "title": _vm.$t('productdetail_opinionesEnvio'),
+      "name": "3"
+    }
+  }, [_c('div', {
+    staticClass: "item-content opcenvio"
+  }, [_c('div', {
+    staticClass: "deliverys section"
+  }, [_c('div', {
+    staticClass: "content"
+  }, [_c('h3', {
+    staticClass: "title-section",
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_opinionesEnvio')) + "\n            ")])]), _vm._v(" "), _vm.envios.envio_metodo === 'precio_ciudad' ? _c('div', {
+    staticClass: "wrapper-method"
+  }, [_c('h4', {
+    staticClass: "capitalize",
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              • " + _vm._s(_vm.envios.envio_metodo.replace('_', ' por ')) + "\n            ")]), _vm._v(" "), _c('p', {
+    staticClass: "description-method",
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_opinionesEnvioMsg1')) + "\n            ")])]) : _vm._e(), _vm._v(" "), _vm.envios.envio_metodo === 'tarifa_plana' ? _c('div', {
+    staticClass: "wrapper-method"
+  }, [_c('h4', {
+    staticClass: "capitalize",
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.envios.envio_metodo.replace('_', ' ')) + "\n            ")]), _vm._v(" "), _c('p', {
+    staticClass: "description-method",
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_opinionesEnvioMsg2')) + "\n            ")]), _vm._v(" "), _c('p', {
+    staticClass: "price",
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('cart_precio')) + "\n              " + _vm._s(_vm._f("currency")(_vm.envios.valor, _vm.dataStore.tienda.codigo_pais, _vm.dataStore.tienda.moneda)) + "\n            ")])]) : _vm._e(), _vm._v(" "), _vm.envios.envio_metodo === 'precio' ? _c('div', {
+    staticClass: "wrapper-method"
+  }, [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_precioTotalCompra')) + "\n            ")]), _vm._v(" "), _c('p', {
+    staticClass: "description-method",
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_precioTotalCompraMsg')) + "\n            ")])]) : _vm._e(), _vm._v(" "), _vm.envios.envio_metodo === 'gratis' ? _c('div', {
+    staticClass: "wrapper-method"
+  }, [_c('h4', {
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_gratis')) + "\n            ")]), _vm._v(" "), _c('p', {
+    staticClass: "description-method",
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_subtext};`
+  }, [_vm._v("\n              " + _vm._s(_vm.$t('productdetail_gratisMsg')) + "\n            ")])]) : _vm._e(), _vm._v(" "), _vm.envios.envio_metodo === 'sinEnvio' ? _c('div', {
+    staticClass: "wrapper-method",
+    style: `color: ${_vm.settingByTemplate14[0].detailsProducts.color_text};`
+  }, [_c('p', {
+    staticClass: "description-method"
+  }, [_vm._v("Pasas a recoger tu compra")])]) : _vm._e()])])]) : _vm._e()], 1)], 1);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/template10/_productdetails/OptTab.vue?vue&type=template&id=4d8fc9d6&scoped=true&
+// CONCATENATED MODULE: ./components/template14/_productdetails/OptTab.vue?vue&type=template&id=3d4fddd8&scoped=true&
 
 // EXTERNAL MODULE: ./mixins/elemenTiptap.vue + 2 modules
 var elemenTiptap = __webpack_require__(49);
@@ -44,7 +309,7 @@ var elemenTiptap = __webpack_require__(49);
 // EXTERNAL MODULE: ./mixins/formatCurrent.js
 var formatCurrent = __webpack_require__(48);
 
-// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/template10/_productdetails/OptTab.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/template14/_productdetails/OptTab.vue?vue&type=script&lang=js&
 
 
 /* harmony default export */ var OptTabvue_type_script_lang_js_ = ({
@@ -70,7 +335,7 @@ var formatCurrent = __webpack_require__(48);
       type: Object,
       required: true
     },
-    settingByTemplate10: {
+    settingByTemplate14: {
       type: Array,
       required: true
     }
@@ -78,12 +343,7 @@ var formatCurrent = __webpack_require__(48);
   data() {
     var _this$data, _this$data$info;
     return {
-      medioEnvio: '',
-      envioproducto: '',
-      selecttag: 1,
-      focusbtn1: true,
-      focusbtn2: false,
-      focusbtn3: false,
+      activeNames: ['1'],
       contentDescription: (_this$data = this.data) === null || _this$data === void 0 ? void 0 : (_this$data$info = _this$data.info) === null || _this$data$info === void 0 ? void 0 : _this$data$info.descripcion
     };
   },
@@ -99,47 +359,27 @@ var formatCurrent = __webpack_require__(48);
       }
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores);
       return this.data.medioEnvio;
     }
   },
   mounted() {
-    this.contentDescription ? this.selectTag1() : this.selectTag2();
-  },
-  methods: {
-    selectTag1() {
-      this.selecttag = 1;
-      this.focusbtn1 = true;
-      this.focusbtn2 = false;
-      this.focusbtn3 = false;
-    },
-    selectTag2() {
-      this.selecttag = 2;
-      this.focusbtn1 = false;
-      this.focusbtn2 = true;
-      this.focusbtn3 = false;
-    },
-    selectTag3() {
-      this.selecttag = 3;
-      this.focusbtn1 = false;
-      this.focusbtn2 = false;
-      this.focusbtn3 = true;
-    }
+    this.contentDescription ? this.activeNames = ['1'] : this.activeNames = ['2'];
   }
 });
-// CONCATENATED MODULE: ./components/template10/_productdetails/OptTab.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./components/template14/_productdetails/OptTab.vue?vue&type=script&lang=js&
  /* harmony default export */ var _productdetails_OptTabvue_type_script_lang_js_ = (OptTabvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(1);
 
-// CONCATENATED MODULE: ./components/template10/_productdetails/OptTab.vue
+// CONCATENATED MODULE: ./components/template14/_productdetails/OptTab.vue
 
 
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(322)
+  var style0 = __webpack_require__(312)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -152,8 +392,8 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "4d8fc9d6",
-  "04ea422c"
+  "3d4fddd8",
+  "7e620734"
   
 )
 
@@ -161,44 +401,44 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 191:
+/***/ 183:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(323);
+var content = __webpack_require__(313);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(7).default
 module.exports.__inject__ = function (context) {
-  add("1c310fc2", content, true, context)
+  add("6d1db9cc", content, true, context)
 };
 
 /***/ }),
 
-/***/ 322:
+/***/ 312:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OptTab_vue_vue_type_style_index_0_id_4d8fc9d6_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(191);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OptTab_vue_vue_type_style_index_0_id_4d8fc9d6_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OptTab_vue_vue_type_style_index_0_id_4d8fc9d6_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OptTab_vue_vue_type_style_index_0_id_4d8fc9d6_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OptTab_vue_vue_type_style_index_0_id_4d8fc9d6_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OptTab_vue_vue_type_style_index_0_id_3d4fddd8_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(183);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OptTab_vue_vue_type_style_index_0_id_3d4fddd8_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OptTab_vue_vue_type_style_index_0_id_3d4fddd8_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OptTab_vue_vue_type_style_index_0_id_3d4fddd8_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OptTab_vue_vue_type_style_index_0_id_3d4fddd8_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 323:
+/***/ 313:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".editor[data-v-4d8fc9d6]{width:100%}.editor[data-v-4d8fc9d6] .el-tiptap-editor>.el-tiptap-editor__content{background-color:transparent;border:none;padding:0 5px}.editor[data-v-4d8fc9d6] .el-tiptap-editor__menu-bubble{display:none}.editor[data-v-4d8fc9d6] .el-tiptap-editor__content h1{font-family:var(--font-style-1);font-size:2em}.editor[data-v-4d8fc9d6] .el-tiptap-editor__content h2{font-family:var(--font-style-1);font-size:1.5em}.editor[data-v-4d8fc9d6] .el-tiptap-editor__content h3{font-family:var(--font-style-1);font-size:1.17em}.editor[data-v-4d8fc9d6] .el-tiptap-editor__content h4{font-family:var(--font-style-1);font-size:1.12em}.editor[data-v-4d8fc9d6] .el-tiptap-editor__content h5{font-family:var(--font-style-1);font-size:.83em}.editor[data-v-4d8fc9d6] .el-tiptap-editor__content blockquote,.editor[data-v-4d8fc9d6] .el-tiptap-editor__content code,.editor[data-v-4d8fc9d6] .el-tiptap-editor__content em,.editor[data-v-4d8fc9d6] .el-tiptap-editor__content li,.editor[data-v-4d8fc9d6] .el-tiptap-editor__content ol,.editor[data-v-4d8fc9d6] .el-tiptap-editor__content p,.editor[data-v-4d8fc9d6] .el-tiptap-editor__content pre,.editor[data-v-4d8fc9d6] .el-tiptap-editor__content s,.editor[data-v-4d8fc9d6] .el-tiptap-editor__content span,.editor[data-v-4d8fc9d6] .el-tiptap-editor__content strong,.editor[data-v-4d8fc9d6] .el-tiptap-editor__content ul{font-family:var(--font-style-1)}.editor[data-v-4d8fc9d6] .el-tiptap-editor__content .image-view__body__image{cursor:none;pointer-events:none}.editor[data-v-4d8fc9d6] .el-popper.el-tiptap-image-popper{display:none}.tab[data-v-4d8fc9d6]{align-items:center;cursor:pointer;justify-content:center;padding-left:4px;padding-right:4px;width:auto}.item-content[data-v-4d8fc9d6],.tab[data-v-4d8fc9d6]{display:flex;flex-direction:column}.item-content[data-v-4d8fc9d6]{align-items:flex-start;justify-content:flex-start;padding-bottom:4px;width:100%}.content_product_description[data-v-4d8fc9d6]{align-items:flex-start;color:var(--color_subtext);display:flex;flex-direction:column;font-size:14px;font-weight:400;justify-content:center;line-height:1.42857143;width:100%}.content_product_description[data-v-4d8fc9d6],h3[data-v-4d8fc9d6]{font-family:var(--font-style-1)!important}h3[data-v-4d8fc9d6]{align-self:flex-start;color:var(--color_subtext);font-size:15px;font-weight:600;text-transform:uppercase}h4[data-v-4d8fc9d6]{align-items:flex-start;color:var(--color_subtext);display:flex;flex-direction:column;font-size:15px;font-weight:600;justify-content:center;line-height:1.42857143;margin-bottom:5px;width:100%}h4[data-v-4d8fc9d6],li p[data-v-4d8fc9d6]{font-family:var(--font-style-1)!important}li p[data-v-4d8fc9d6]{color:var(--color_subtext);font-size:14px;font-weight:400;line-height:1.4;margin-bottom:15px}.description-method[data-v-4d8fc9d6],.price[data-v-4d8fc9d6]{color:var(--color_subtext);font-family:var(--font-style-1)!important;font-size:14px;font-weight:400;line-height:1.4;margin-bottom:15px}img[data-v-4d8fc9d6]{margin-top:15px;max-width:300px;width:30%}@media (min-width:300px){.content-opt-tab[data-v-4d8fc9d6],.content-tab[data-v-4d8fc9d6]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}.content-tab[data-v-4d8fc9d6]{border-color:var(--border);margin-top:6px}.head-content[data-v-4d8fc9d6]{grid-gap:.5rem;align-items:center;display:grid;gap:.5rem;grid-template-columns:repeat(1,minmax(0,1fr));justify-content:center;margin-bottom:40px;width:100%}.tittle[data-v-4d8fc9d6]{align-items:center;background-color:transparent;color:var(--color_subtext);display:flex;font-family:var(--font-style-1)!important;font-size:14px;font-weight:600;height:40px;justify-content:center;text-transform:uppercase;transition-duration:.15s;transition-duration:.2s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1);width:100%}.show-select-active[data-v-4d8fc9d6]{background-color:var(--color_gb_tabs)}.show-select-active .tittle[data-v-4d8fc9d6]{color:var(--color_text_tabs)}}@media (min-width:425px){.head-content[data-v-4d8fc9d6]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:40px}.tittle[data-v-4d8fc9d6]{font-size:12px;text-align:center}}@media (min-width:768px){.content-opt-tab[data-v-4d8fc9d6]{border-width:1px;margin-top:0}.content-opt-tab[data-v-4d8fc9d6],.head-content[data-v-4d8fc9d6]{align-items:flex-start;display:flex;flex-direction:row;justify-content:flex-start}.head-content[data-v-4d8fc9d6]{border-bottom:1px solid transparent;flex-direction:column;gap:0;margin-bottom:0;width:60%}.tab[data-v-4d8fc9d6]{display:flex}.tab[data-v-4d8fc9d6],.tittle[data-v-4d8fc9d6]{align-items:center;justify-content:flex-start;width:100%}.tittle[data-v-4d8fc9d6]{font-size:14px;height:50px;padding-left:20px;text-align:center}.content-tab[data-v-4d8fc9d6]{align-items:flex-start;border-color:var(--border);border-width:1px;display:flex;flex-direction:row;justify-content:flex-start;margin-top:0;transition-duration:.15s;transition-duration:.2s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,1,1);width:100%}.show-select-active[data-v-4d8fc9d6]{background-color:var(--color_gb_tabs);border-left-width:4px;width:100%}.show-select-active .tittle[data-v-4d8fc9d6]{color:var(--color_text_tabs)}.content-tab[data-v-4d8fc9d6]{padding:40px}}@media (min-width:1024px){.head-content[data-v-4d8fc9d6]{width:400px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".editor[data-v-3d4fddd8]{color:transparent;width:100%}.editor[data-v-3d4fddd8] .el-tiptap-editor>.el-tiptap-editor__content{background-color:transparent;border:none;padding:0 5px}.editor[data-v-3d4fddd8] .el-tiptap-editor__menu-bubble{display:none}.editor[data-v-3d4fddd8] .el-tiptap-editor__content h1{font-family:var(--font-style-1);font-size:2em}.editor[data-v-3d4fddd8] .el-tiptap-editor__content h2{font-family:var(--font-style-1);font-size:1.5em}.editor[data-v-3d4fddd8] .el-tiptap-editor__content h3{font-family:var(--font-style-1);font-size:1.17em}.editor[data-v-3d4fddd8] .el-tiptap-editor__content h4{font-family:var(--font-style-1);font-size:1.12em}.editor[data-v-3d4fddd8] .el-tiptap-editor__content h5{font-family:var(--font-style-1);font-size:.83em}.editor[data-v-3d4fddd8] .el-tiptap-editor__content blockquote,.editor[data-v-3d4fddd8] .el-tiptap-editor__content code,.editor[data-v-3d4fddd8] .el-tiptap-editor__content em,.editor[data-v-3d4fddd8] .el-tiptap-editor__content li,.editor[data-v-3d4fddd8] .el-tiptap-editor__content ol,.editor[data-v-3d4fddd8] .el-tiptap-editor__content p,.editor[data-v-3d4fddd8] .el-tiptap-editor__content pre,.editor[data-v-3d4fddd8] .el-tiptap-editor__content s,.editor[data-v-3d4fddd8] .el-tiptap-editor__content span,.editor[data-v-3d4fddd8] .el-tiptap-editor__content strong,.editor[data-v-3d4fddd8] .el-tiptap-editor__content ul{font-family:var(--font-style-1)}.editor[data-v-3d4fddd8] .el-tiptap-editor__content .image-view__body__image{cursor:none;pointer-events:none}.editor[data-v-3d4fddd8] .el-popper.el-tiptap-image-popper{display:none}.item-content[data-v-3d4fddd8]{align-items:flex-start;display:flex;flex-direction:column;justify-content:flex-start;padding-bottom:4px;width:100%}.content-opt-tab[data-v-3d4fddd8] .el-collapse{border-bottom:transparent;border-top:transparent;width:100%}.content-opt-tab[data-v-3d4fddd8] .el-collapse-item__wrap{background-color:transparent;border-bottom:transparent;will-change:height}.content-opt-tab[data-v-3d4fddd8] .el-collapse-item__header{background-color:transparent;border-bottom:transparent;color:currentColor;font-family:var(--font-style-1)!important;font-size:16px;font-weight:600}.content-opt-tab[data-v-3d4fddd8] .el-collapse-item__header.is-active{border-bottom:none}.content-opt-tab[data-v-3d4fddd8] .el-collapse-item__arrow{color:currentColor}h3[data-v-3d4fddd8]{align-self:flex-start;color:currentColor;font-size:15px;font-weight:600;text-transform:uppercase}h3[data-v-3d4fddd8],h4[data-v-3d4fddd8]{font-family:var(--font-style-1)!important}h4[data-v-3d4fddd8]{align-items:flex-start;color:currentColor;display:flex;flex-direction:column;font-size:15px;font-weight:600;justify-content:center;line-height:1.42857143;margin-bottom:5px;width:100%}li p[data-v-3d4fddd8]{color:currentColor;font-size:14px;font-weight:400;line-height:1.4;margin-bottom:15px}.description-method[data-v-3d4fddd8],.price[data-v-3d4fddd8],li p[data-v-3d4fddd8]{font-family:var(--font-style-1)!important}.description-method[data-v-3d4fddd8],.price[data-v-3d4fddd8]{color:currentColor;font-size:14px;font-weight:400;line-height:1.4;margin-bottom:15px}img[data-v-3d4fddd8]{margin-top:15px;max-width:300px;width:30%}@media (min-width:300px){.content-opt-tab[data-v-3d4fddd8]{align-items:center;display:flex;flex-direction:column;justify-content:center;width:100%}}@media (min-width:425px){.head-content[data-v-3d4fddd8]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:40px}}@media (min-width:768px){.content-opt-tab[data-v-3d4fddd8]{align-items:flex-start;display:flex;flex-direction:column;justify-content:flex-start;margin-top:0}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;

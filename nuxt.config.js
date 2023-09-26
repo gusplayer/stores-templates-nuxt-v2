@@ -53,7 +53,7 @@ export default {
   facebook: {
     pixelId: '671820736795254',
     autoPageView: true,
-    debug: true,
+    // debug: true,
   },
   sitemap: {
     gzip: true,

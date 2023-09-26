@@ -8,30 +8,26 @@
       settingByTemplate9[0].setting9General,
       {
         '--font-style-1':
-          this.settingByTemplate9 &&
-          this.settingByTemplate9[0].setting9General &&
-          this.settingByTemplate9[0].setting9General.fount_1
-            ? this.settingByTemplate9[0].setting9General.fount_1
-            : 'Poppins',
+          settingByTemplate9[0]?.setting9General?.fount_1 ?? 'Poppins',
       },
     ]"
   >
     <div class="wrapper-header">
       <div class="header">
-        <KoOrder :dataStore="dataStore" />
+        <KoOrder :data-store="dataStore" />
         <div class="header-item-menu">
           <menu-icon
             class="header-icon-menu nav-bar"
             @click="openMenuLateral"
           />
           <svg
-            @click="openSearch"
             class="search-header-left"
             data-name="search-icon-small 1"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 15 15"
             width="15"
             height="15"
+            @click="openSearch"
           >
             <rect
               x="11.73223"
@@ -50,17 +46,18 @@
             <button
               v-if="item.path && item.state"
               class="btn"
-              @click="btnActivate(item.path)"
               :class="btnSelect == item.path ? 'btn-active' : ''"
+              @click="btnActivate(item.path)"
             >
               {{ $t(`${item.name}`) }}
             </button>
             <nuxt-link
-              :to="item.href"
               v-else-if="item.href && listArticulos > 0 && item.state"
+              :to="item.href"
               class="btn"
-              >{{ $t(`${item.name}`) }}</nuxt-link
             >
+              {{ $t(`${item.name}`) }}
+            </nuxt-link>
           </div>
         </div>
         <div class="header-content-logo">
@@ -73,7 +70,6 @@
             />
           </nuxt-link>
         </div>
-
         <div class="header-content-items">
           <div v-if="showSearch">
             <div class="search" @click="openSearch">
@@ -100,7 +96,7 @@
               </form>
             </div>
           </div>
-          <div class="empty" v-if="showSearch"></div>
+          <div v-if="showSearch" class="empty"></div>
           <div class="header-content-icon" @click="openOrder">
             <div class="header-content-cart">
               <svg
@@ -127,10 +123,10 @@
           </div>
         </div>
         <KoSearch
-          :dataStore="dataStore"
-          :settingByTemplate9="settingByTemplate9"
+          :data-store="dataStore"
+          :setting-by-template9="settingByTemplate9"
         />
-        <KoMenu :dataStore="dataStore" class="responsive" />
+        <KoMenu :data-store="dataStore" class="responsive" />
       </div>
     </div>
   </div>
@@ -142,36 +138,23 @@ import KoMenu from '../_lateralMenu/_lateralMenu/openMenuLeft.vue'
 import KoSearch from '../_lateralMenu/_lateralMenu/searchDown09.vue'
 
 export default {
+  name: 'KoHeader5',
   components: {
     KoOrder,
     KoMenu,
     KoSearch,
   },
-  name: 'Ko-Header-5',
   props: {
-    dataStore: Object,
-    settingByTemplate9: Array,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate9: {
+      type: Array,
+      required: true,
+    },
   },
-  mounted() {
-    this.setHoko()
-    this.initHeader()
-    if (this.$route.path) {
-      let item = this.secciones.find((item) => {
-        if (item && item.path) {
-          return item.path === this.$route.path
-        }
-      })
-      this.btnSelect = item && item.path ? item.path : ''
-    }
-    window.addEventListener('scroll', function () {
-      var navbar = document.getElementById('navbar')
-      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
-        navbar.style.position = 'fixed'
-      } else {
-        navbar.style.position = 'static'
-      }
-    })
-  },
+
   data() {
     return {
       btnSelect: '',
@@ -219,6 +202,38 @@ export default {
     dataHoko() {
       return this.$store.state.dataHoko
     },
+  },
+  watch: {
+    dataHoko() {
+      this.setHoko()
+    },
+    search(value) {
+      this.SearchProduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.initHeader()
+    },
+  },
+  mounted() {
+    this.setHoko()
+    this.initHeader()
+    if (this.$route.path) {
+      let item = this.secciones.find((item) => {
+        if (item && item.path) {
+          return item.path === this.$route.path
+        }
+      })
+      this.btnSelect = item && item.path ? item.path : ''
+    }
+    window.addEventListener('scroll', function () {
+      var navbar = document.getElementById('navbar')
+      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
+        navbar.style.position = 'fixed'
+      } else {
+        navbar.style.position = 'static'
+      }
+    })
   },
   methods: {
     initHeader() {
@@ -286,18 +301,6 @@ export default {
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()
-    },
-  },
-  watch: {
-    dataHoko() {
-      this.setHoko()
-    },
-    search(value) {
-      this.SearchProduct(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.initHeader()
     },
   },
 }

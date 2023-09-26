@@ -1,7 +1,7 @@
-exports.ids = [17];
+exports.ids = [20];
 exports.modules = {
 
-/***/ 1103:
+/***/ 1093:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69,20 +69,20 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template99vue_type_script_lang_js_ = ({
   name: 'TemplateWhatsApp',
   components: {
-    KoHeaderWp1: () => __webpack_require__.e(/* import() */ 29).then(__webpack_require__.bind(null, 1253)),
-    KoHeaderWp2: () => __webpack_require__.e(/* import() */ 30).then(__webpack_require__.bind(null, 1254)),
-    KoHeaderWp3: () => __webpack_require__.e(/* import() */ 31).then(__webpack_require__.bind(null, 1255)),
-    KCategory01: () => __webpack_require__.e(/* import() */ 193).then(__webpack_require__.bind(null, 1312)),
-    KCategory02: () => __webpack_require__.e(/* import() */ 197).then(__webpack_require__.bind(null, 1316)),
-    KCategory03: () => __webpack_require__.e(/* import() */ 199).then(__webpack_require__.bind(null, 1318)),
-    KCategory04: () => __webpack_require__.e(/* import() */ 190).then(__webpack_require__.bind(null, 1311)),
-    KProductFavoritos: () => __webpack_require__.e(/* import() */ 194).then(__webpack_require__.bind(null, 1313)),
-    KProductList: () => __webpack_require__.e(/* import() */ 195).then(__webpack_require__.bind(null, 1314)),
-    KProductList2: () => __webpack_require__.e(/* import() */ 196).then(__webpack_require__.bind(null, 1315)),
-    KProductList3: () => __webpack_require__.e(/* import() */ 198).then(__webpack_require__.bind(null, 1317)),
-    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1320)),
-    KFooterWa: () => __webpack_require__.e(/* import() */ 19).then(__webpack_require__.bind(null, 1321)),
-    WCountry: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 1239))
+    KoHeaderWp1: () => __webpack_require__.e(/* import() */ 32).then(__webpack_require__.bind(null, 1249)),
+    KoHeaderWp2: () => __webpack_require__.e(/* import() */ 33).then(__webpack_require__.bind(null, 1250)),
+    KoHeaderWp3: () => __webpack_require__.e(/* import() */ 34).then(__webpack_require__.bind(null, 1251)),
+    KCategory01: () => __webpack_require__.e(/* import() */ 203).then(__webpack_require__.bind(null, 1308)),
+    KCategory02: () => __webpack_require__.e(/* import() */ 207).then(__webpack_require__.bind(null, 1312)),
+    KCategory03: () => __webpack_require__.e(/* import() */ 209).then(__webpack_require__.bind(null, 1314)),
+    KCategory04: () => __webpack_require__.e(/* import() */ 200).then(__webpack_require__.bind(null, 1307)),
+    KProductFavoritos: () => __webpack_require__.e(/* import() */ 204).then(__webpack_require__.bind(null, 1309)),
+    KProductList: () => __webpack_require__.e(/* import() */ 205).then(__webpack_require__.bind(null, 1310)),
+    KProductList2: () => __webpack_require__.e(/* import() */ 206).then(__webpack_require__.bind(null, 1311)),
+    KProductList3: () => __webpack_require__.e(/* import() */ 208).then(__webpack_require__.bind(null, 1313)),
+    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 1316)),
+    KFooterWa: () => __webpack_require__.e(/* import() */ 22).then(__webpack_require__.bind(null, 1317)),
+    WCountry: () => __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(null, 1229))
   },
   layout: 'wa',
   computed: {
@@ -264,7 +264,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(643)
+  var style0 = __webpack_require__(618)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -286,13 +286,13 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 394:
+/***/ 358:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(644);
+var content = __webpack_require__(619);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -304,19 +304,19 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 643:
+/***/ 618:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5db5bd76_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(394);
+/* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5db5bd76_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(358);
 /* harmony import */ var _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5db5bd76_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5db5bd76_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5db5bd76_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_thread_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_1_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_3_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5db5bd76_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 644:
+/***/ 619:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports

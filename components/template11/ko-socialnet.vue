@@ -1,11 +1,11 @@
 <template>
   <div class="content-networks" :style="footerIcon">
     <a
+      v-if="dataStore.tienda.red_facebook != null"
+      :href="dataStore.tienda.red_facebook"
       class="social-networks"
       target="_blank"
       rel="noreferrer noopener"
-      :href="dataStore.tienda.red_facebook"
-      v-if="dataStore.tienda.red_facebook != null"
     >
       <i>
         <svg
@@ -23,18 +23,18 @@
       </i>
     </a>
     <a
+      v-if="dataStore.tienda.red_twitter != null"
+      :href="dataStore.tienda.red_twitter"
       class="social-networks"
       target="_blank"
       rel="noreferrer noopener"
-      :href="dataStore.tienda.red_twitter"
-      v-if="dataStore.tienda.red_twitter != null"
     >
       <svg
+        id="Capa_1"
         class="icon"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         version="1.1"
-        id="Capa_1"
         x="0px"
         y="0px"
         fill="currentColor"
@@ -54,11 +54,11 @@
       </svg>
     </a>
     <a
+      v-if="dataStore.tienda.red_instagram != null"
+      :href="dataStore.tienda.red_instagram"
       class="social-networks"
       target="_blank"
       rel="noreferrer noopener"
-      :href="dataStore.tienda.red_instagram"
-      v-if="dataStore.tienda.red_instagram != null"
     >
       <svg
         class="icon"
@@ -80,11 +80,11 @@
       </svg>
     </a>
     <a
+      v-if="dataStore.tienda.red_youtube != null"
+      :href="dataStore.tienda.red_youtube"
       class="social-networks"
       target="_blank"
       rel="noreferrer noopener"
-      :href="dataStore.tienda.red_youtube"
-      v-if="dataStore.tienda.red_youtube != null"
     >
       <svg
         class="icon"
@@ -100,15 +100,15 @@
       </svg>
     </a>
     <a
+      v-if="dataStore.tienda.red_tiktok != null"
+      :href="dataStore.tienda.red_tiktok"
       class="social-networks"
       target="_blank"
       rel="noreferrer noopener"
-      :href="dataStore.tienda.red_youtube"
-      v-if="dataStore.tienda.red_youtube != null"
     >
       <svg
-        class="icon"
         id="Capa_1"
+        class="icon"
         viewBox="0 0 512 512"
         height="18px"
         width="18px"
@@ -128,7 +128,7 @@
 </template>
 <script>
 export default {
-  name: 'Ko-Social-Networks',
+  name: 'KoSocialNetworks',
   props: {
     dataStore: Object,
     footerIcon: Object,

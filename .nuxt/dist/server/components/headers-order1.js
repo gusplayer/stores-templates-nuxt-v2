@@ -1,4 +1,4 @@
-exports.ids = [1];
+exports.ids = [1,352];
 exports.modules = {
 
 /***/ 47:
@@ -105,7 +105,7 @@ exports.modules = {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(56);
+var content = __webpack_require__(57);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -117,14 +117,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 53:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "img/icono_cesta.60de836.png";
-
-/***/ }),
-
-/***/ 54:
+/***/ 52:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -161,7 +154,14 @@ module.exports = __webpack_require__.p + "img/icono_cesta.60de836.png";
 
 /***/ }),
 
-/***/ 55:
+/***/ 54:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "img/icono_cesta.60de836.png";
+
+/***/ }),
+
+/***/ 56:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -173,7 +173,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 56:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -188,7 +188,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 57:
+/***/ 61:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -453,7 +453,7 @@ var render = function render() {
       "width": "220px"
     },
     attrs: {
-      "src": __webpack_require__(53),
+      "src": __webpack_require__(54),
       "alt": "Product img"
     }
   }), _vm._v(" "), _c('p', {
@@ -980,7 +980,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/headers/_order1/order1.vue?vue&type=template&id=43350ff8&scoped=true&
 
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(2);
+var external_axios_ = __webpack_require__(3);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: ./mixins/idCloudinary.js
@@ -990,7 +990,7 @@ var idCloudinary = __webpack_require__(47);
 var formatCurrent = __webpack_require__(48);
 
 // EXTERNAL MODULE: ./mixins/expiredDate.js
-var expiredDate = __webpack_require__(54);
+var expiredDate = __webpack_require__(52);
 
 // EXTERNAL MODULE: external "vee-validate"
 var external_vee_validate_ = __webpack_require__(8);
@@ -1751,7 +1751,7 @@ var componentNormalizer = __webpack_require__(1);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(55)
+  var style0 = __webpack_require__(56)
 if (style0.__inject__) style0.__inject__(context)
 
 }

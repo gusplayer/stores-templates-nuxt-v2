@@ -69,13 +69,13 @@
           </div>
         </div>
       </div>
-      <div v-if="orden && orden.venta" class="bar-body" >
+      <div v-if="orden && orden.venta" class="bar-body">
         <div class="content-title">
           <p>{{ $t('mcompra_title2') }}</p>
           <p>No. {{ orden.venta.id }}</p>
         </div>
         <div
-        v-if="orden.productos && orden.productos.length > 0"
+          v-if="orden.productos && orden.productos.length > 0"
           class="content-card"
         >
           <client-only>
@@ -105,7 +105,7 @@
                       {{ item.producto.nombre }}
                     </p>
                   </li>
-                  <li v-if="item.variantes" class="variants" >
+                  <li v-if="item.variantes" class="variants">
                     <el-tag
                       v-for="(productCombinacion, index2) in JSON.parse(
                         item.variantes
@@ -136,17 +136,17 @@
           </client-only>
           <div class="w-full flex h-1 bg-gray-900"></div>
         </div>
-        <div v-if="orden.venta" class="content-info-orden" >
+        <div v-if="orden.venta" class="content-info-orden">
           <div class="info-left">
             <p
-            v-if="orden.venta.cupon && orden.venta.cupon !== 'null'"
+              v-if="orden.venta.cupon && orden.venta.cupon !== 'null'"
               class="title-info-orden"
             >
               {{ $t('mcompra_cupon') }}
               <span class="value-info-orden">{{ orden.venta.cupon }} </span>
             </p>
             <p
-            v-if="orden.venta.descuento && orden.venta.descuento !== 'null'"
+              v-if="orden.venta.descuento && orden.venta.descuento !== 'null'"
               class="title-info-orden"
             >
               {{ $t('footer_descuento') }}
@@ -158,13 +158,13 @@
               {{ $t('mcompra_pcanaldeVenta') }}
               <span class="value-info-orden">WhatsApp</span>
             </p> -->
-            <p v-if="orden.venta.costo_envio" class="title-info-orden" >
+            <p v-if="orden.venta.costo_envio" class="title-info-orden">
               {{ $t('mcompra_valorEnvio') }}
               <span class="value-info-orden">
                 {{ orden.venta.costo_envio | currency }}
               </span>
             </p>
-            <p v-if="orden.venta.total" class="title-info-orden" >
+            <p v-if="orden.venta.total" class="title-info-orden">
               {{ $t('mcompra_totalOrden') }}
               <span class="value-info-orden">
                 {{ orden.venta.total | currency }}
@@ -176,11 +176,11 @@
                 {{ $t(`${choicePayment.title}`) }}
               </span>
             </p>
-            <p v-if="fechaState" class="title-info-orden" >
+            <p v-if="fechaState" class="title-info-orden">
               {{ $t('mcompra_fechaCompra') }}
               <span class="value-info-orden">{{ fechaState }}</span>
             </p>
-            <p v-if="horaState" class="title-info-orden" >
+            <p v-if="horaState" class="title-info-orden">
               {{ $t('mcompra_horaCompra') }}
               <span class="value-info-orden">{{ horaState }}</span>
             </p>
@@ -195,7 +195,7 @@
               </span>
             </p>
             <div
-            v-if="orden.venta.delivery_status_id !== null"
+              v-if="orden.venta.delivery_status_id !== null"
               class="mt-4 flex flex-row items-center"
             >
               <p class="title-info-orden">
@@ -236,13 +236,13 @@
           <client-only>
             <el-collapse>
               <el-collapse-item :title="$t('mcompra_infoComprador')" name="1">
-                <div v-if="orden.usuario == 30866" class="content-info-buyer" >
+                <div v-if="orden.usuario == 30866" class="content-info-buyer">
                   <div
-                  v-if="tempData && tempData.state"
+                    v-if="tempData && tempData.state"
                     class="content-info-buyer"
                   >
                     <p
-                    v-if="tempData && tempData.dataCustomer.nombre"
+                      v-if="tempData && tempData.dataCustomer.nombre"
                       class="name"
                     >
                       {{ $t('mcompra_nombre') }}
@@ -250,9 +250,9 @@
                         {{ tempData.dataCustomer.nombre }}
                       </span>
                     </p>
-                    <span v-else class="value-data" >N/A</span>
+                    <span v-else class="value-data">N/A</span>
                     <p
-                    v-if="tempData && tempData.dataCustomer.phone"
+                      v-if="tempData && tempData.dataCustomer.phone"
                       class="name"
                     >
                       {{ $t('footer_formIdenti') }}
@@ -260,9 +260,9 @@
                         {{ tempData.dataCustomer.phone }}
                       </span>
                     </p>
-                    <span v-else class="value-data" >N/A</span>
+                    <span v-else class="value-data">N/A</span>
                     <p
-                    v-if="tempData && tempData.dataCustomer.correo"
+                      v-if="tempData && tempData.dataCustomer.correo"
                       class="name"
                     >
                       {{ $t('footer_formCorreo') }}
@@ -270,9 +270,9 @@
                         {{ tempData.dataCustomer.correo }}
                       </span>
                     </p>
-                    <span v-else class="value-data" >N/A</span>
+                    <span v-else class="value-data">N/A</span>
                     <p
-                    v-if="tempData && tempData.dataCustomer.identificacion"
+                      v-if="tempData && tempData.dataCustomer.identificacion"
                       class="name"
                     >
                       {{ $t('footer_formPhone') }}
@@ -280,9 +280,9 @@
                         {{ tempData.dataCustomer.identificacion }}
                       </span>
                     </p>
-                    <span v-else class="value-data" >N/A</span>
+                    <span v-else class="value-data">N/A</span>
                     <p
-                    v-if="tempData && tempData.dataCustomer.ciudad"
+                      v-if="tempData && tempData.dataCustomer.ciudad"
                       class="name"
                     >
                       {{ $t('footer_formDepartamento') }}
@@ -290,9 +290,9 @@
                         {{ tempData.dataCustomer.ciudad }}
                       </span>
                     </p>
-                     <span v-else class="value-data" >N/A</span>
+                    <span v-else class="value-data">N/A</span>
                     <p
-                    v-if="tempData && tempData.dataCustomer.barrio"
+                      v-if="tempData && tempData.dataCustomer.barrio"
                       class="name"
                     >
                       {{ $t('footer_formBarrio') }}
@@ -300,16 +300,16 @@
                         {{ tempData.dataCustomer.barrio }}
                       </span>
                     </p>
-                     <span v-else class="value-data" >N/A</span>
+                    <span v-else class="value-data">N/A</span>
                     <p class="address">
                       {{ $t('mcompra_direccion') }}
                       <span
-                      v-if="tempData && tempData.dataCustomer.direccion"
+                        v-if="tempData && tempData.dataCustomer.direccion"
                         class="value-data"
                       >
                         {{ tempData.dataCustomer.direccion }}
                       </span>
-                       <span v-else class="value-data" >N/A</span>
+                      <span v-else class="value-data">N/A</span>
                     </p>
                   </div>
                   <div
@@ -317,7 +317,7 @@
                     v-else
                     :key="index"
                   >
-                    <p v-if="items.textInput && items.value" class="name" >
+                    <p v-if="items.textInput && items.value" class="name">
                       {{ items.textInput }}
                       <span class="value-data">{{ items.value }}</span>
                     </p>
@@ -339,10 +339,10 @@
                   </p>
                   <p class="city">
                     {{ $t('mcompra_ciudad') }}
-                    <span v-if="city && city.nombre_ciu class="value-data" ">
+                    <span v-if="city && city.nombre_ciu" class="value-data">
                       {{ city.nombre_ciu }}
                     </span>
-                     <span v-else class="value-data" >N/A</span>
+                    <span v-else class="value-data">N/A</span>
                   </p>
                   <p class="address">
                     {{ $t('mcompra_direccion') }}
@@ -352,21 +352,21 @@
                     >
                       {{ dataStore.geolocalizacion[0].direccion }}
                     </span>
-                     <span v-else class="value-data" >N/A</span>
+                    <span v-else class="value-data">N/A</span>
                   </p>
                   <p class="telephone">
                     {{ $t('mcompra_telefono') }}
-                    <span v-if="dataStore.tienda.telefono" class="value-data" >
+                    <span v-if="dataStore.tienda.telefono" class="value-data">
                       {{ dataStore.tienda.telefono }}
                     </span>
-                     <span v-else class="value-data" >N/A</span>
+                    <span v-else class="value-data">N/A</span>
                   </p>
                   <p class="owner">
                     {{ $t('mcompra_nombreTienda') }}
-                    <span v-if="dataStore.tienda.nombre" class="value-data" >
+                    <span v-if="dataStore.tienda.nombre" class="value-data">
                       {{ dataStore.tienda.nombre }}
                     </span>
-                     <span v-else class="value-data" >N/A</span>
+                    <span v-else class="value-data">N/A</span>
                   </p>
                 </div>
               </el-collapse-item>
@@ -377,21 +377,21 @@
               >
                 <div class="content-info-buyer">
                   <p
-                  v-if="dataTransporter && dataTransporter.name"
+                    v-if="dataTransporter && dataTransporter.name"
                     class="city"
                   >
                     {{ $t('mcompra_nombre') }}
                     <span class="value-data">{{ dataTransporter.name }}</span>
                   </p>
                   <p
-                  v-if="dataTransporter && dataTransporter.guide"
+                    v-if="dataTransporter && dataTransporter.guide"
                     class="city"
                   >
                     {{ $t('mcompra_numeroGuia') }}
                     <span class="value-data">{{ dataTransporter.guide }}</span>
                   </p>
                   <p
-                  v-if="dataTransporter && dataTransporter.link"
+                    v-if="dataTransporter && dataTransporter.link"
                     class="city"
                   >
                     {{ $t('mcompra_linkGuia') }}

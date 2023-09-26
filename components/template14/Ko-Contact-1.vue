@@ -2,9 +2,10 @@
   <div
     class="w-full flex justify-center items-center"
     :style="[
+      settingByTemplate14[0].settingsGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate14[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate14[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -38,7 +39,7 @@
             />
           </picture>
         </div>
-        <div v-else class="w-full h-[240px]" />
+        <div v-else class="w-full h-[240px]"></div>
         <div
           class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex flex-col items-center"
         >
@@ -69,7 +70,7 @@
             :interval="5000"
             arrow="always"
             height="600px"
-            :setActiveItem="positionLocationStore"
+            :set-active-item="positionLocationStore"
             @change="changeLocation"
           >
             <el-carousel-item
@@ -109,7 +110,7 @@
           </p>
           <div class="pl-10">
             <div
-              v-if="this.dataStore.geolocalizacion.length"
+              v-if="dataStore.geolocalizacion.length"
               class="mb-15 flex flex-row gap-2 items-center"
             >
               <div class="w-full max-w-[50px]">
@@ -162,12 +163,12 @@
               <div class="w-full">
                 <p class="text-14 font-bold">{{ $t('mcompra_telefono') }}</p>
                 <p class="text-14">
-                  {{ this.dataStore.tienda.telefono }}
+                  {{ dataStore.tienda.telefono }}
                 </p>
               </div>
             </div>
             <div
-              v-if="this.dataStore.tienda.whatsapp"
+              v-if="dataStore.tienda.whatsapp"
               class="mb-15 flex flex-row gap-2 items-center"
             >
               <div class="w-full max-w-[50px]">
@@ -208,12 +209,12 @@
               <div class="w-full">
                 <p class="text-14 font-bold">WhatsApp</p>
                 <p class="text-14">
-                  {{ this.dataStore.tienda.whatsapp }}
+                  {{ dataStore.tienda.whatsapp }}
                 </p>
               </div>
             </div>
             <div
-              v-if="this.dataStore.tienda.email_tienda"
+              v-if="dataStore.tienda.email_tienda"
               class="mb-15 flex flex-row gap-2 items-center"
             >
               <div class="w-full max-w-[50px]">
@@ -233,7 +234,7 @@
               <div class="w-full">
                 <p class="text-14 font-bold">Email</p>
                 <p class="text-14">
-                  {{ this.dataStore.tienda.email_tienda }}
+                  {{ dataStore.tienda.email_tienda }}
                 </p>
               </div>
             </div>
@@ -302,11 +303,9 @@
                       :style="`color: ${settingByTemplate14[0].contact.color_title_form}; border-color:${settingByTemplate14[0].contact.color_border_input};`"
                       :placeholder="$t('contact_emailPlacer')"
                     />
-                    <span
-                      class="text-12 text-red-500 ml-5"
-                      v-show="errors[0]"
-                      >{{ errors[0] }}</span
-                    >
+                    <span class="text-12 text-red-500 ml-5" v-show="errors[0]">
+                      {{ errors[0] }}
+                    </span>
                   </template>
                 </validation-provider>
               </div>
@@ -327,9 +326,9 @@
                     :style="`color: ${settingByTemplate14[0].contact.color_title_form}; border-color:${settingByTemplate14[0].contact.color_border_input};`"
                     :placeholder="$t('contact_mensalePlacer')"
                   ></textarea>
-                  <span class="text-12 text-red-500 ml-5" v-show="errors[0]">{{
-                    errors[0]
-                  }}</span>
+                  <span class="text-12 text-red-500 ml-5" v-show="errors[0]">
+                    {{ errors[0] }}
+                  </span>
                 </template>
               </validation-provider>
             </div>
@@ -352,18 +351,16 @@
                       :style="`color: ${settingByTemplate14[0].contact.color_title_form}; border-color:${settingByTemplate14[0].contact.color_border_input};`"
                       :placeholder="$t('contact_telefonoPlacer')"
                     />
-                    <span
-                      class="text-12 text-red-500 ml-5"
-                      v-show="errors[0]"
-                      >{{ errors[0] }}</span
-                    >
+                    <span class="text-12 text-red-500 ml-5" v-show="errors[0]">
+                      {{ errors[0] }}
+                    </span>
                   </template>
                 </validation-provider>
               </div>
               <div class="w-full flex items-center justify-center mt-20">
                 <button
-                  class="px-20 py-10"
-                  :style="`color: ${settingByTemplate14[0].contact.color_text_btn_form}; background-color: ${settingByTemplate14[0].contact.color_btn_form};`"
+                  class="px-20 py-10 btn"
+                  :style="`color: ${settingByTemplate14[0].contact.color_text_btn_form}; background-color: ${settingByTemplate14[0].contact.color_btn_form}; border-radius: ${settingByTemplate14[0].settingsGeneral.radius}`"
                   :class="!stateBtn ? ' cursor-not-allowed' : 'cursor-pointer'"
                   :disabled="stateBtn ? false : true"
                   @click="submitContact"
@@ -542,6 +539,10 @@ export default {
 <style scoped>
 * {
   font-family: var(--font-style-1) !important;
+}
+.btn:hover {
+  color: var(--hover_text_btn) !important;
+  background-color: var(--hover_Bg_btn) !important;
 }
 .input-text {
   font-family: var(--font-style-1) !important ;

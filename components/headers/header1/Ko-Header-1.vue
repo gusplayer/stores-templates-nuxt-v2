@@ -10,7 +10,7 @@
   >
     <div class="wrapper-header" @click="closeMenuCategory">
       <div class="header">
-        <KoOrder :dataStore="dataStore" />
+        <KoOrder :data-store="dataStore" />
         <KoSearch />
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
@@ -32,17 +32,19 @@
           >
             <div @click="openMenu(item.name)">
               <nuxt-link
-                :to="item.path"
                 v-if="item.path && item.state"
+                :to="item.path"
                 class="header-text-center"
-                >{{ $t(`${item.name}`) }}</nuxt-link
               >
+                {{ $t(`${item.name}`) }}
+              </nuxt-link>
               <nuxt-link
-                :to="item.href"
                 v-else-if="item.href && listArticulos > 0 && item.state"
+                :to="item.href"
                 class="header-text-center"
-                >{{ $t(`${item.name}`) }}</nuxt-link
               >
+                {{ $t(`${item.name}`) }}
+              </nuxt-link>
               <div v-else>
                 <div
                   v-if="dataStore.categorias.length > 0 && item.ref"
@@ -52,39 +54,39 @@
                     {{ $t(`${item.name}`) }}
                   </p>
                   <div
-                    class="header-text-center-icon"
-                    v-if="!showMenu"
                     :is="item.iconOpen"
+                    v-if="!showMenu"
+                    class="header-text-center-icon"
                   />
                   <div
-                    class="header-text-center-icon"
-                    v-if="showMenu"
                     :is="item.iconClose"
+                    v-if="showMenu"
+                    class="header-text-center-icon"
                   />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="search" v-if="showSearch && product.length > 0">
+        <div v-if="showSearch && product.length > 0" class="search">
           <form id="demo-2" style="position: relative">
             <search-icon class="icon-s" @click="focusInput" />
             <input
+              id="SearchHeader"
+              v-model="search"
               type="search"
               :placeholder="$t('header_search')"
-              v-model="search"
               @keyup.enter="getSearch(search)"
-              id="SearchHeader"
             />
           </form>
         </div>
-        <div class="search_res" v-if="product.length > 0">
-          <div class="header-content-cart" @click="openSearch" id="OpenCartTag">
+        <div v-if="product.length > 0" class="search_res">
+          <div id="OpenCartTag" class="header-content-cart" @click="openSearch">
             <search-icon class="header-icon-cart" />
           </div>
         </div>
-        <div class="header-content-icon" v-if="product.length > 0">
-          <div class="header-content-cart" @click="openOrder" id="OpenCartTag">
+        <div v-if="product.length > 0" class="header-content-icon">
+          <div id="OpenCartTag" class="header-content-cart" @click="openOrder">
             <cart-icon class="header-icon-cart" />
             <span class="num-items">{{ productsCart }}</span>
           </div>
@@ -92,7 +94,7 @@
         <div class="header-item-menu" @click="openMenuLateral">
           <menu-icon class="header-icon-menu nav-bar" />
         </div>
-        <KoMenu :dataStore="dataStore" class="responsive" />
+        <KoMenu :data-store="dataStore" class="responsive" />
       </div>
     </div>
     <div class="menu-container" :class="showMenu ? 'animated' : 'hidden'">
@@ -126,30 +128,28 @@
                   </p>
                 </li>
                 <ul class="subcategoria">
-                  <template>
-                    <div v-for="(subcategory, key) in subcategories" :key="key">
-                      <li
-                        v-if="subcategory.categoria == categoria.id"
-                        @click="SendSubCategory(subcategory.id)"
-                        class="text-subcategoria"
-                        :class="
-                          subcategory.id == indexSelect
-                            ? 'text-subcategoria-active'
-                            : ''
-                        "
-                      >
-                        {{ subcategory.nombre_subcategoria }}
-                      </li>
-                    </div>
-                  </template>
+                  <div v-for="(subcategory, key) in subcategories" :key="key">
+                    <li
+                      v-if="subcategory.categoria == categoria.id"
+                      class="text-subcategoria"
+                      :class="
+                        subcategory.id == indexSelect
+                          ? 'text-subcategoria-active'
+                          : ''
+                      "
+                      @click="SendSubCategory(subcategory.id)"
+                    >
+                      {{ subcategory.nombre_subcategoria }}
+                    </li>
+                  </div>
                 </ul>
               </ul>
             </div>
           </div>
         </div>
-        <div class="product-img-container" v-if="product.length">
+        <div v-if="product.length" class="product-img-container">
           <div class="card-container">
-            <div class="img-logo" v-if="product[0]">
+            <div v-if="product[0]" class="img-logo">
               <img
                 v-lazy="idCloudinary(product[0].foto_cloudinary, 400, 400)"
                 class="logo"
@@ -167,26 +167,24 @@
 </template>
 
 <script>
-import KoOrder from '../_order1/order1'
-import KoMenu from '../_order1/openMenuRight'
-import KoSearch from './search.vue'
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary],
+  name: 'KoHeader1',
   components: {
-    KoOrder,
-    KoMenu,
-    KoSearch,
+    KoOrder: () => import('../_order1/order1'),
+    KoMenu: () => import('../_order1/openMenuRight'),
+    KoSearch: () => import('./search.vue'),
   },
-  name: 'Ko-Header-1',
+  mixins: [idCloudinary],
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
-  },
-  mounted() {
-    this.setHoko()
-    this.toggle = true
-    this.initHeader()
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -284,6 +282,30 @@ export default {
     dataHoko() {
       return this.$store.state.dataHoko
     },
+  },
+  watch: {
+    dataHoko() {
+      this.setHoko()
+    },
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[4].link = this.dataStore.tienda.red_tiktok
+    },
+    search(value) {
+      this.SearchProduct(value)
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.initHeader()
+    },
+  },
+  mounted() {
+    this.setHoko()
+    this.toggle = true
+    this.initHeader()
   },
   methods: {
     initHeader() {
@@ -463,25 +485,6 @@ export default {
     },
     focusInput() {
       document.getElementById('SearchHeader').focus()
-    },
-  },
-  watch: {
-    dataHoko() {
-      this.setHoko()
-    },
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
-    },
-    search(value) {
-      this.SearchProduct(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.initHeader()
     },
   },
 }

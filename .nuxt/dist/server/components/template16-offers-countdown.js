@@ -1,7 +1,7 @@
-exports.ids = [139];
+exports.ids = [149];
 exports.modules = {
 
-/***/ 1290:
+/***/ 1286:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33,7 +33,7 @@ var staticRenderFns = [];
 /* harmony default export */ var countdownvue_type_script_lang_js_ = ({
   name: 'K0CountDown',
   components: {
-    KoProductCard: () => __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(null, 606))
+    KoProductCard: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 580))
   },
   props: {
     information: {

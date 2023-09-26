@@ -128,12 +128,11 @@
                   v-else
                   :href="item.url"
                   rel="noreferrer noopener"
-                  class="my-5 block"
+                  class="w-full px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
+                  :class="btnSelect == item.url ? 'btn-active' : ''"
                   target="_blank"
                 >
-                  <p class="btn">
-                    {{ item.displayName }}
-                  </p>
+                  {{ item.displayName }}
                 </a>
               </div>
             </div>

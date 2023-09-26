@@ -6,14 +6,14 @@
       :style="[
         {
           '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
+            settingGeneral && settingGeneral.fount_2
+              ? settingGeneral.fount_2
               : 'Great Vibes',
         },
         {
           '--font-style-3':
-            this.settingGeneral && this.settingGeneral.fount_3
-              ? this.settingGeneral.fount_3
+            settingGeneral && settingGeneral.fount_3
+              ? settingGeneral.fount_3
               : 'Lora',
         },
       ]"

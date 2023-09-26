@@ -1,7 +1,7 @@
 exports.ids = [342];
 exports.modules = {
 
-/***/ 1109:
+/***/ 1099:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27,7 +27,7 @@ var staticRenderFns = [];
 var external_vuex_ = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./mixins/expiredDate.js
-var expiredDate = __webpack_require__(54);
+var expiredDate = __webpack_require__(52);
 
 // CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js??ref--2-0!./node_modules/babel-loader/lib??ref--2-1!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/wa/_slug/index.vue?vue&type=script&lang=js&
 
@@ -35,8 +35,8 @@ var expiredDate = __webpack_require__(54);
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   name: 'WapiME',
   components: {
-    waTemplate: () => __webpack_require__.e(/* import() */ 17).then(__webpack_require__.bind(null, 1103)),
-    koTiendaCerrada: () => __webpack_require__.e(/* import() */ 211).then(__webpack_require__.bind(null, 1326))
+    waTemplate: () => __webpack_require__.e(/* import() */ 20).then(__webpack_require__.bind(null, 1093)),
+    koTiendaCerrada: () => __webpack_require__.e(/* import() */ 221).then(__webpack_require__.bind(null, 1326))
   },
   mixins: [expiredDate["a" /* default */]],
   layout: 'wa',
@@ -93,7 +93,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 54:
+/***/ 52:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

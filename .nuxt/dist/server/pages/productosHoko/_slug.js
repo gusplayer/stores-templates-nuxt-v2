@@ -1,7 +1,7 @@
 exports.ids = [336];
 exports.modules = {
 
-/***/ 1108:
+/***/ 1098:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27,10 +27,10 @@ var external_vuex_ = __webpack_require__(9);
 
 /* harmony default export */ var _slugvue_type_script_lang_js_ = ({
   components: {
-    Ko5ProductDetailHoko: () => __webpack_require__.e(/* import() */ 146).then(__webpack_require__.bind(null, 1199)),
-    Ko9ProductDetailHoko: () => __webpack_require__.e(/* import() */ 180).then(__webpack_require__.bind(null, 1229)),
-    Ko11ProductDetailHoko: () => __webpack_require__.e(/* import() */ 59).then(__webpack_require__.bind(null, 1133)),
-    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 1084))
+    Ko5ProductDetailHoko: () => __webpack_require__.e(/* import() */ 156).then(__webpack_require__.bind(null, 1189)),
+    Ko9ProductDetailHoko: () => __webpack_require__.e(/* import() */ 190).then(__webpack_require__.bind(null, 1219)),
+    Ko11ProductDetailHoko: () => __webpack_require__.e(/* import() */ 69).then(__webpack_require__.bind(null, 1123)),
+    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 14).then(__webpack_require__.bind(null, 1074))
   },
   data() {
     return {
