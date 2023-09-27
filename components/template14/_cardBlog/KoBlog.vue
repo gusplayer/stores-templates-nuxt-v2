@@ -72,7 +72,7 @@
 export default {
   name: 'Ko14Blog',
   components: {
-    KoBlogCard: () => import('./blogCard.vue'),
+    KoBlogCard: () => import('./Ko_BlogCard.vue'),
   },
   props: {
     dataStore: {

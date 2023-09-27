@@ -55,7 +55,7 @@
 export default {
   name: 'Ko14listBlogHome',
   components: {
-    KoBlogCard: () => import('./_cardBlog/blogCard.vue'),
+    KoBlogCard: () => import('./_cardBlog/Ko_BlogCard.vue'),
   },
   props: {
     listBlogHome: {
