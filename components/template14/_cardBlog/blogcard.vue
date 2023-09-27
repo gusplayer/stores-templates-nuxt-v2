@@ -7,22 +7,22 @@
     <div class="relative rounded-5 wrapper-img">
       <img
         v-if="article.imagen_principal_url"
+        v-lazy="idCloudinary(article.imagen_principal_url, 400, 400)"
         class="rounded-5 w-full effect-img max-h-[250px] max-w-[400px]"
         width="400"
         height="250"
-        v-lazy="idCloudinary(this.article.imagen_principal_url, 400, 400)"
         alt="right-banner"
       />
-      <div v-else class="w-full h-full bg-slate-200" />
+      <div v-else class="w-full h-full bg-slate-200"></div>
       <div
         class="absolute bottom-10 left-10 p-10 flex flex-col justify-center items-center rounded-5"
         :style="`background-color: ${cardBlog.color_bg_date}`"
       >
         <p class="text-15" :style="`color: ${cardBlog.color_date};`">
-          {{ this.dayCreate }}
+          {{ dayCreate }}
         </p>
         <p class="text-15 font-bold" :style="`color: ${cardBlog.color_date};`">
-          {{ this.nameMonth }}
+          {{ nameMonth }}
         </p>
       </div>
     </div>
@@ -30,12 +30,12 @@
       class="justify-start mb-10 mt-20"
       :style="`color: ${cardBlog.color_text}; font-size: ${cardBlog.fontSizeText}; font-weight: ${cardBlog.fontWeighText};`"
     >
-      Autor: {{ this.article.autor }}
+      Autor: {{ article.autor }}
     </p>
     <p
       :style="`color: ${cardBlog.color_title}; font-size: ${cardBlog.fontSizeTitle}; font-weight: ${cardBlog.fontWeighTitle};`"
     >
-      {{ this.article.titulo }}
+      {{ article.titulo }}
     </p>
     <!-- <p
       class="text-justify"
@@ -46,20 +46,23 @@
   </nuxt-link>
 </template>
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
+  name: 'Ko14BlogCard',
   mixins: [idCloudinary],
-  name: 'Ko15-BlogCard',
-  props: { article: Object, cardBlog: Object, settingGeneral: Object },
-  mounted() {
-    if (this.article.created_at) {
-      const [shippingCreated] = this.article.created_at.split(' ')
-      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
-      this.dayCreate = dayCreate
-      this.monthCreate = monthCreate
-      this.yearCreate = yearCreate
-    }
-    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
+  props: {
+    article: {
+      type: Object,
+      required: true,
+    },
+    cardBlog: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -83,6 +86,16 @@ export default {
         12: 'Dic',
       },
     }
+  },
+  mounted() {
+    if (this.article.created_at) {
+      const [shippingCreated] = this.article.created_at.split(' ')
+      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
+      this.dayCreate = dayCreate
+      this.monthCreate = monthCreate
+      this.yearCreate = yearCreate
+    }
+    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
   },
 }
 </script>

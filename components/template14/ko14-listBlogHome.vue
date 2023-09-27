@@ -40,8 +40,8 @@
           >
             <KoBlogCard
               :article="article"
-              :settingGeneral="settingGeneral"
-              :cardBlog="cardBlog"
+              :setting-general="settingGeneral"
+              :card-blog="cardBlog"
               class="giftLoad w-full h-full"
             />
           </div>
@@ -53,16 +53,29 @@
 
 <script>
 export default {
-  name: 'Ko15-listBlogHome',
-  props: {
-    listBlogHome: Object,
-    settingGeneral: Object,
-    dataStore: Object,
-    cardBlog: Object,
-  },
+  name: 'Ko14listBlogHome',
   components: {
-    KoBlogCard: () => import('./_cardBlog/blogCard'),
+    KoBlogCard: () => import('./_cardBlog/blogCard.vue'),
   },
+  props: {
+    listBlogHome: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    cardBlog: {
+      type: Object,
+      required: true,
+    },
+  },
+
   data() {
     return {
       swiperOption: {
