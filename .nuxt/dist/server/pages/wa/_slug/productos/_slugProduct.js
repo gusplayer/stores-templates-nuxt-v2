@@ -28,7 +28,7 @@ var staticRenderFns = [];
   name: 'WapiMEDetail',
   components: {
     KoProductDetail: () => __webpack_require__.e(/* import() */ 201).then(__webpack_require__.bind(null, 1227)),
-    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1322))
+    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1316))
   },
   layout: 'wa',
   computed: {

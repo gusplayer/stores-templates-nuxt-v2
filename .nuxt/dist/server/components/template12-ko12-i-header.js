@@ -47,7 +47,7 @@ var ComponentProps = __webpack_require__(92);
   name: 'Ko12IHeader',
   components: {
     KoOrder: () => __webpack_require__.e(/* import() */ 1).then(__webpack_require__.bind(null, 61)),
-    KoSearch: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 1230))
+    KoSearch: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 1241))
   },
   mixins: [ComponentProps["default"]],
   data() {
