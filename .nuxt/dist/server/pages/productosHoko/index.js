@@ -31,7 +31,7 @@ var external_vuex_ = __webpack_require__(9);
     K05ProductListHoko: () => __webpack_require__.e(/* import() */ 19).then(__webpack_require__.bind(null, 1199)),
     K09ProductListHoko: () => __webpack_require__.e(/* import() */ 193).then(__webpack_require__.bind(null, 1222)),
     K11ProductListHoko: () => __webpack_require__.e(/* import() */ 71).then(__webpack_require__.bind(null, 1125)),
-    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 14).then(__webpack_require__.bind(null, 1074))
+    KoNoDisponibleHoko: () => __webpack_require__.e(/* import() */ 13).then(__webpack_require__.bind(null, 1074))
   },
   data() {
     return {

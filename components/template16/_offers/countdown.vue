@@ -45,7 +45,7 @@
     >
       <p>Oferta finalizada</p>
     </div>
-    <div class="mt-40">
+    <div v-if="product && product[0]" class="mt-40">
       <KoProductCard
         :product="product[0]"
         :card-products="cardProducts"
@@ -61,7 +61,7 @@
 export default {
   name: 'K0CountDown',
   components: {
-    KoProductCard: () => import('../_cardProduct/ProductCard.vue'),
+    // KoProductCard: () => import('../_cardProduct/ProductCard.vue'),
   },
   props: {
     information: {

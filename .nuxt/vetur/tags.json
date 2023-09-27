@@ -398,39 +398,6 @@
   "WhatsappSearchWa": {
     "description": "Auto imported from components/whatsapp/searchWa.vue"
   },
-  "FootersFooter1KoFooter1": {
-    "description": "Auto imported from components/footers/footer1/Ko-Footer-1.vue"
-  },
-  "FootersFooter1KoFooterCountry": {
-    "description": "Auto imported from components/footers/footer1/Ko-Footer-Country.vue"
-  },
-  "FootersFooter2KoFooter2": {
-    "description": "Auto imported from components/footers/footer2/Ko-Footer-2.vue"
-  },
-  "FootersFooter4KoFooter4": {
-    "description": "Auto imported from components/footers/footer4/Ko-Footer-4.vue"
-  },
-  "FootersFooter5KoFooter5": {
-    "description": "Auto imported from components/footers/footer5/Ko-Footer-5.vue"
-  },
-  "FootersFooter6KoFooter6": {
-    "description": "Auto imported from components/footers/footer6/Ko-Footer-6.vue"
-  },
-  "FootersFooter7KoFooter7": {
-    "description": "Auto imported from components/footers/footer7/Ko-Footer-7.vue"
-  },
-  "FootersFooter8KoFooter8": {
-    "description": "Auto imported from components/footers/footer8/Ko-Footer-8.vue"
-  },
-  "FootersK14Footer9KoFooter9": {
-    "description": "Auto imported from components/footers/K14_footer9/Ko-Footer-9.vue"
-  },
-  "FootersK15Footer10KoFooter10": {
-    "description": "Auto imported from components/footers/K15_footer10/Ko-Footer-10.vue"
-  },
-  "FootersK16Footer11KoFooter11": {
-    "description": "Auto imported from components/footers/K16_footer11/Ko-Footer-11.vue"
-  },
   "HeadersHeader1KoHeader1": {
     "description": "Auto imported from components/headers/header1/Ko-Header-1.vue"
   },
@@ -502,6 +469,39 @@
   },
   "HeadersBaseAccordion1": {
     "description": "Auto imported from components/headers/_order1/_BaseAccordion1.vue"
+  },
+  "FootersFooter1KoFooter1": {
+    "description": "Auto imported from components/footers/footer1/Ko-Footer-1.vue"
+  },
+  "FootersFooter1KoFooterCountry": {
+    "description": "Auto imported from components/footers/footer1/Ko-Footer-Country.vue"
+  },
+  "FootersFooter2KoFooter2": {
+    "description": "Auto imported from components/footers/footer2/Ko-Footer-2.vue"
+  },
+  "FootersFooter4KoFooter4": {
+    "description": "Auto imported from components/footers/footer4/Ko-Footer-4.vue"
+  },
+  "FootersFooter5KoFooter5": {
+    "description": "Auto imported from components/footers/footer5/Ko-Footer-5.vue"
+  },
+  "FootersFooter6KoFooter6": {
+    "description": "Auto imported from components/footers/footer6/Ko-Footer-6.vue"
+  },
+  "FootersFooter7KoFooter7": {
+    "description": "Auto imported from components/footers/footer7/Ko-Footer-7.vue"
+  },
+  "FootersFooter8KoFooter8": {
+    "description": "Auto imported from components/footers/footer8/Ko-Footer-8.vue"
+  },
+  "FootersK14Footer9KoFooter9": {
+    "description": "Auto imported from components/footers/K14_footer9/Ko-Footer-9.vue"
+  },
+  "FootersK15Footer10KoFooter10": {
+    "description": "Auto imported from components/footers/K15_footer10/Ko-Footer-10.vue"
+  },
+  "FootersK16Footer11KoFooter11": {
+    "description": "Auto imported from components/footers/K16_footer11/Ko-Footer-11.vue"
   },
   "Template10BlogPageKoArticulo": {
     "description": "Auto imported from components/template10/blog_page/Ko-articulo.vue"
@@ -725,9 +725,6 @@
   "Template5ProductcardKoProductCardHoko1": {
     "description": "Auto imported from components/template5/_productcard/Ko-ProductCardHoko-1.vue"
   },
-  "Template5ProductofavoritoProductSlide": {
-    "description": "Auto imported from components/template5/_productofavorito/productSlide.vue"
-  },
   "Template5ProductdetailsCommentsProduct": {
     "description": "Auto imported from components/template5/_productdetails/commentsProduct.vue"
   },
@@ -751,6 +748,9 @@
   },
   "Template5ProductdetailsZoomImg": {
     "description": "Auto imported from components/template5/_productdetails/zoomImg.vue"
+  },
+  "Template5ProductofavoritoProductSlide": {
+    "description": "Auto imported from components/template5/_productofavorito/productSlide.vue"
   },
   "Template7BlogPageKoArticulo": {
     "description": "Auto imported from components/template7/blog_page/Ko-articulo.vue"
@@ -890,12 +890,6 @@
   "WhatsappProductdetailsZoomImg": {
     "description": "Auto imported from components/whatsapp/_productdetails/zoomImg.vue"
   },
-  "FootersFooterWaFooterWa1KoFooterWaLogo": {
-    "description": "Auto imported from components/footers/footerWa/footerWa1/ko-Footer-wa-logo.vue"
-  },
-  "FootersFooterWaFooterWa2KoFooterWa": {
-    "description": "Auto imported from components/footers/footerWa/footerWa2/ko-Footer-wa.vue"
-  },
   "HeadersHeaderWpOrderWa": {
     "description": "Auto imported from components/headers/header_wp/_order1/orderWa.vue"
   },
@@ -922,6 +916,12 @@
   },
   "HeadersLateralMenuLateralMenu11OpenMenuLeft": {
     "description": "Auto imported from components/headers/_lateralMenu/_lateralMenu11/openMenuLeft.vue"
+  },
+  "FootersFooterWaFooterWa1KoFooterWaLogo": {
+    "description": "Auto imported from components/footers/footerWa/footerWa1/ko-Footer-wa-logo.vue"
+  },
+  "FootersFooterWaFooterWa2KoFooterWa": {
+    "description": "Auto imported from components/footers/footerWa/footerWa2/ko-Footer-wa.vue"
   },
   "Template10BlogPageBlogcardKoBlogcard": {
     "description": "Auto imported from components/template10/blog_page/_blogcard/ko-blogcard.vue"

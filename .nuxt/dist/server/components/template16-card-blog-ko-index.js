@@ -71,7 +71,7 @@ var staticRenderFns = [];
 /* harmony default export */ var Ko_indexvue_type_script_lang_js_ = ({
   name: 'Ko15-Blog',
   components: {
-    KoBlogCard: () => __webpack_require__.e(/* import() */ 18).then(__webpack_require__.bind(null, 1282))
+    KoBlogCard: () => __webpack_require__.e(/* import() */ 17).then(__webpack_require__.bind(null, 1282))
   },
   props: {
     dataStore: Object,

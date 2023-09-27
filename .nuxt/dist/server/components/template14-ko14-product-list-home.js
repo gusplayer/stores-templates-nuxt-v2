@@ -76,7 +76,7 @@ var staticRenderFns = [];
     }
   },
   components: {
-    KoProductCard: () => __webpack_require__.e(/* import() */ 17).then(__webpack_require__.bind(null, 1058))
+    KoProductCard: () => __webpack_require__.e(/* import() */ 16).then(__webpack_require__.bind(null, 1058))
   },
   data() {
     return {

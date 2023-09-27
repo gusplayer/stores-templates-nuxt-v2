@@ -45,7 +45,7 @@ var staticRenderFns = [];
 /* harmony default export */ var productSlidevue_type_script_lang_js_ = ({
   name: 'ProductSlide16',
   components: {
-    KoProductCard: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 580))
+    KoProductCard: () => __webpack_require__.e(/* import() */ 18).then(__webpack_require__.bind(null, 580))
   },
   props: {
     products: {

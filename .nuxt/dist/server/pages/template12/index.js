@@ -47,7 +47,7 @@ var external_vuex_ = __webpack_require__(9);
     K012IHeroImage: () => __webpack_require__.e(/* import() */ 87).then(__webpack_require__.bind(null, 1138)),
     K012IMainSection: () => __webpack_require__.e(/* import() */ 88).then(__webpack_require__.bind(null, 1139)),
     K012IFooter: () => __webpack_require__.e(/* import() */ 85).then(__webpack_require__.bind(null, 1136)),
-    K010ButtonCar: () => __webpack_require__.e(/* import() */ 15).then(__webpack_require__.bind(null, 1114))
+    K010ButtonCar: () => __webpack_require__.e(/* import() */ 14).then(__webpack_require__.bind(null, 1114))
   },
   layout: 'default',
   computed: {

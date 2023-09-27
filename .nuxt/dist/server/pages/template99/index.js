@@ -69,9 +69,9 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template99vue_type_script_lang_js_ = ({
   name: 'TemplateWhatsApp',
   components: {
-    KoHeaderWp1: () => __webpack_require__.e(/* import() */ 32).then(__webpack_require__.bind(null, 1249)),
-    KoHeaderWp2: () => __webpack_require__.e(/* import() */ 33).then(__webpack_require__.bind(null, 1250)),
-    KoHeaderWp3: () => __webpack_require__.e(/* import() */ 34).then(__webpack_require__.bind(null, 1251)),
+    KoHeaderWp1: () => __webpack_require__.e(/* import() */ 32).then(__webpack_require__.bind(null, 1238)),
+    KoHeaderWp2: () => __webpack_require__.e(/* import() */ 33).then(__webpack_require__.bind(null, 1239)),
+    KoHeaderWp3: () => __webpack_require__.e(/* import() */ 34).then(__webpack_require__.bind(null, 1240)),
     KCategory01: () => __webpack_require__.e(/* import() */ 203).then(__webpack_require__.bind(null, 1308)),
     KCategory02: () => __webpack_require__.e(/* import() */ 207).then(__webpack_require__.bind(null, 1312)),
     KCategory03: () => __webpack_require__.e(/* import() */ 209).then(__webpack_require__.bind(null, 1314)),
@@ -80,9 +80,9 @@ var external_vuex_ = __webpack_require__(9);
     KProductList: () => __webpack_require__.e(/* import() */ 205).then(__webpack_require__.bind(null, 1310)),
     KProductList2: () => __webpack_require__.e(/* import() */ 206).then(__webpack_require__.bind(null, 1311)),
     KProductList3: () => __webpack_require__.e(/* import() */ 208).then(__webpack_require__.bind(null, 1313)),
-    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 1316)),
-    KFooterWa: () => __webpack_require__.e(/* import() */ 22).then(__webpack_require__.bind(null, 1317)),
-    WCountry: () => __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(null, 1229))
+    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1322)),
+    KFooterWa: () => __webpack_require__.e(/* import() */ 22).then(__webpack_require__.bind(null, 1323)),
+    WCountry: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 1244))
   },
   layout: 'wa',
   computed: {

@@ -54,7 +54,7 @@ var staticRenderFns = [];
 /* harmony default export */ var ko14_listBlogHomevue_type_script_lang_js_ = ({
   name: 'Ko14listBlogHome',
   components: {
-    KoBlogCard: () => __webpack_require__.e(/* import() */ 16).then(__webpack_require__.bind(null, 1270))
+    KoBlogCard: () => __webpack_require__.e(/* import() */ 15).then(__webpack_require__.bind(null, 1270))
   },
   props: {
     listBlogHome: {
