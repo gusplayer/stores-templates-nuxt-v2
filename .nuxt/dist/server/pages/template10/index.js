@@ -56,7 +56,7 @@ var external_vuex_ = __webpack_require__(9);
 /* harmony default export */ var template10vue_type_script_lang_js_ = ({
   name: 'KoTemplate10',
   components: {
-    K010ButtonCar: () => __webpack_require__.e(/* import() */ 14).then(__webpack_require__.bind(null, 1114)),
+    K010ButtonCar: () => __webpack_require__.e(/* import() */ 15).then(__webpack_require__.bind(null, 1114)),
     K010Carousel: () => __webpack_require__.e(/* import() */ 56).then(__webpack_require__.bind(null, 1115)),
     K010Section: () => __webpack_require__.e(/* import() */ 59).then(__webpack_require__.bind(null, 1118)),
     K010Trending: () => __webpack_require__.e(/* import() */ 60).then(__webpack_require__.bind(null, 1119)),

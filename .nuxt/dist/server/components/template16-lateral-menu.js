@@ -213,7 +213,7 @@ var filterProducts = __webpack_require__(50);
     settingByTemplate: Object
   },
   components: {
-    BaseAccordion: () => __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(null, 72))
+    BaseAccordion: () => __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(null, 72))
   },
   data() {
     return {

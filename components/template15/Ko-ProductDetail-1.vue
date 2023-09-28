@@ -11,7 +11,7 @@
       },
     ]"
   >
-    <div v-if="loading" />
+    <div v-if="loading"></div>
     <div
       class="w-full box-content flex items-center justify-center"
       style="background-color: var(--background_color_2)"
@@ -235,7 +235,7 @@
             </div>
             <div
               v-if="userDropshipping.userName"
-              class="w-full flex flex-row items-center mb-30"
+              class="w-full flex flex-row items-center mb-10 md:mb-30"
             >
               <p
                 class="text-16 font-bold mr-10"
@@ -250,7 +250,9 @@
                 {{ userDropshipping.userName }}
               </p>
             </div>
-            <div class="w-full flex flex-row justify-start items-center mb-20">
+            <div
+              class="fixed md:sticky w-full flex flex-row justify-start items-center mb-0 md:mb-20 left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 bg-gray-100 md:bg-transparent border-t md:border-t-0 z-100 md:z-0"
+            >
               <div
                 class="flex flex-row justify-center items-center mr-20 border-2"
                 :class="{ disabled: !salesData.estado }"

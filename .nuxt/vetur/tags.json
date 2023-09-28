@@ -428,9 +428,6 @@
   "FootersK15Footer10KoFooter10": {
     "description": "Auto imported from components/footers/K15_footer10/Ko-Footer-10.vue"
   },
-  "FootersK16Footer11KoFooter11": {
-    "description": "Auto imported from components/footers/K16_footer11/Ko-Footer-11.vue"
-  },
   "HeadersHeader1KoHeader1": {
     "description": "Auto imported from components/headers/header1/Ko-Header-1.vue"
   },
@@ -439,6 +436,9 @@
   },
   "HeadersHeader1Search": {
     "description": "Auto imported from components/headers/header1/search.vue"
+  },
+  "FootersK16Footer11KoFooter11": {
+    "description": "Auto imported from components/footers/K16_footer11/Ko-Footer-11.vue"
   },
   "HeadersHeader2KoHeader2": {
     "description": "Auto imported from components/headers/header2/Ko-Header-2.vue"
@@ -725,6 +725,9 @@
   "Template5ProductcardKoProductCardHoko1": {
     "description": "Auto imported from components/template5/_productcard/Ko-ProductCardHoko-1.vue"
   },
+  "Template5ProductofavoritoProductSlide": {
+    "description": "Auto imported from components/template5/_productofavorito/productSlide.vue"
+  },
   "Template5ProductdetailsCommentsProduct": {
     "description": "Auto imported from components/template5/_productdetails/commentsProduct.vue"
   },
@@ -748,9 +751,6 @@
   },
   "Template5ProductdetailsZoomImg": {
     "description": "Auto imported from components/template5/_productdetails/zoomImg.vue"
-  },
-  "Template5ProductofavoritoProductSlide": {
-    "description": "Auto imported from components/template5/_productofavorito/productSlide.vue"
   },
   "Template7BlogPageKoArticulo": {
     "description": "Auto imported from components/template7/blog_page/Ko-articulo.vue"
@@ -932,13 +932,13 @@
   "Template7BlogPageBlogcardKoCardblog": {
     "description": "Auto imported from components/template7/blog_page/_blogcard/Ko-cardblog.vue"
   },
-  "WhatsappTemplate1ProductcardKoProductCard1": {
-    "description": "Auto imported from components/whatsapp/template1/_productcard/Ko-ProductCard-1.vue"
-  },
   "WhatsappTemplate2ProductCardKoProductCard": {
     "description": "Auto imported from components/whatsapp/template2/productCard/ko-productCard.vue"
   },
   "WhatsappTemplate3ProductCardKoProductCard": {
     "description": "Auto imported from components/whatsapp/template3/productCard/ko-productCard.vue"
+  },
+  "WhatsappTemplate1ProductcardKoProductCard1": {
+    "description": "Auto imported from components/whatsapp/template1/_productcard/Ko-ProductCard-1.vue"
   }
 }

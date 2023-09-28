@@ -80,9 +80,9 @@ var external_vuex_ = __webpack_require__(9);
     KProductList: () => __webpack_require__.e(/* import() */ 205).then(__webpack_require__.bind(null, 1310)),
     KProductList2: () => __webpack_require__.e(/* import() */ 206).then(__webpack_require__.bind(null, 1311)),
     KProductList3: () => __webpack_require__.e(/* import() */ 208).then(__webpack_require__.bind(null, 1313)),
-    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(null, 1316)),
+    KFooterWaLogo: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 1316)),
     KFooterWa: () => __webpack_require__.e(/* import() */ 22).then(__webpack_require__.bind(null, 1317)),
-    WCountry: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 1229))
+    WCountry: () => __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(null, 1229))
   },
   layout: 'wa',
   computed: {

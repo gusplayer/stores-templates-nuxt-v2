@@ -5,11 +5,11 @@
   >
     <picture>
       <source
-        media="(max-width: 799px)"
-        :srcset="idCloudinaryBanner(offers.img, 'bannerRes', 800)"
+        media="(max-width: 1024px)"
+        :srcset="idCloudinaryBanner(offers.img_res, 'bannerRes', 800)"
       />
       <source
-        media="(min-width: 800px)"
+        media="(min-width: 1025px)"
         :srcset="idCloudinaryBanner(offers.img, 'banner')"
       />
       <img

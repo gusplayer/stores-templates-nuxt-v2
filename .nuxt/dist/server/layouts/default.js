@@ -46,7 +46,7 @@ var expiredDate = __webpack_require__(52);
   name: 'LayoutDefault',
   components: {
     // HEADER
-    KoHeader1: () => __webpack_require__.e(/* import() */ 35).then(__webpack_require__.bind(null, 1239)),
+    KoHeader1: () => __webpack_require__.e(/* import() */ 35).then(__webpack_require__.bind(null, 1238)),
     // KoHeader2: () => import('../components/headers/header2/Ko-Header-2.vue'),
     KoHeader3: () => __webpack_require__.e(/* import() */ 346).then(__webpack_require__.bind(null, 1045)),
     KoHeader4: () => __webpack_require__.e(/* import() */ 36).then(__webpack_require__.bind(null, 1243)),
@@ -67,9 +67,9 @@ var expiredDate = __webpack_require__(52);
     KoFooter8: () => __webpack_require__.e(/* import() */ 28).then(__webpack_require__.bind(null, 1235)),
     KoFooter9: () => __webpack_require__.e(/* import() */ 29).then(__webpack_require__.bind(null, 1236)),
     KoFooter10: () => __webpack_require__.e(/* import() */ 30).then(__webpack_require__.bind(null, 1237)),
-    KoFooter11: () => __webpack_require__.e(/* import() */ 31).then(__webpack_require__.bind(null, 1238)),
+    KoFooter11: () => __webpack_require__.e(/* import() */ 31).then(__webpack_require__.bind(null, 1241)),
     // OTROS
-    KoFooterCountry: () => __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(null, 1229)),
+    KoFooterCountry: () => __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(null, 1229)),
     koTiendaCerrada: () => __webpack_require__.e(/* import() */ 221).then(__webpack_require__.bind(null, 1326)),
     koTiendaError: () => __webpack_require__.e(/* import() */ 46).then(__webpack_require__.bind(null, 573)),
     koModalSecurity: () => __webpack_require__.e(/* import() */ 47).then(__webpack_require__.bind(null, 574)),

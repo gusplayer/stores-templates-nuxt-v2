@@ -43,8 +43,14 @@
             </div>
           </a>
         </div>
-        <div class="swiper-button-prev" v-if="categories.values.length > 1" />
-        <div class="swiper-button-next" v-if="categories.values.length > 1" />
+        <div
+          v-if="categories.values.length > 1"
+          class="swiper-button-prev"
+        ></div>
+        <div
+          v-if="categories.values.length > 1"
+          class="swiper-button-next"
+        ></div>
       </div>
     </div>
   </div>

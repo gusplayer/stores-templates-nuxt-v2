@@ -96,7 +96,7 @@ var staticRenderFns = [];
   name: 'KoHeader2',
   components: {
     KoOrder: () => __webpack_require__.e(/* import() */ 1).then(__webpack_require__.bind(null, 61)),
-    KoMenu: () => __webpack_require__.e(/* import() */ 12).then(__webpack_require__.bind(null, 214))
+    KoMenu: () => __webpack_require__.e(/* import() */ 13).then(__webpack_require__.bind(null, 214))
   },
   props: {
     dataStore: {

@@ -1,23 +1,23 @@
 <template>
-  <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full relative">
+  <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="w-full relative">
     <div class="swiper-wrapper w-full">
       <div
-        class="swiper-slide w-full"
-        v-for="(product, index) in this.products"
+        v-for="(product, index) in products"
         :key="index"
+        class="swiper-slide w-full"
       >
         <KoProductCard
           :product="product"
-          :cardProducts="cardProducts"
-          :settingsGeneral="settingsGeneral"
+          :card-products="cardProducts"
+          :setting-general="settingsGeneral"
           class="w-full"
         />
       </div>
     </div>
-    <div class="prev btnPrev" v-if="this.products.length > 1">
+    <div v-if="products.length > 1" class="prev btnPrev">
       <FlechaLeft-icon class="btn-icon" />
     </div>
-    <div class="next btnNext" v-if="this.products.length > 1">
+    <div v-if="products.length > 1" class="next btnNext">
       <FlechaRight-icon class="btn-icon" />
     </div>
   </div>
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: 'productSlide15',
+  name: 'ProductSlide14',
   components: {
     KoProductCard: () => import('../_cardProduct/ProductCard'),
   },

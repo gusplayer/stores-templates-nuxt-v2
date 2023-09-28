@@ -114,6 +114,3 @@ export default {
     base: '/',
   },
 }
-// Reducir tamaño de las respuestas
-// npm install compression --save
-// serverMiddleware: ['compression'],
