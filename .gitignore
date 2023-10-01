@@ -82,7 +82,7 @@ sw.*
 package-lock.json
 
 # nuxt.js build output
-# .nuxt
+.nuxt
 
 # Nuxt generate
 # dist
