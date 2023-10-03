@@ -90,11 +90,11 @@ export default {
         },
       },
     },
-    // splitChunks: {
-    //   layouts: true,
-    //   pages: true,
-    //   commons: true,
-    // },
+    splitChunks: {
+      layouts: true,
+      pages: true,
+      commons: true,
+    },
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
     },
@@ -105,9 +105,9 @@ export default {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
-      // if (ctx.isDev && ctx.isClient) {
-      //   config.optimization.minimize = true
-      // }
+      if (ctx.isDev && ctx.isClient) {
+        config.optimization.minimize = true
+      }
     },
   },
   router: {
