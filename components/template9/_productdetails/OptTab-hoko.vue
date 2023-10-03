@@ -267,7 +267,7 @@ export default {
       focusbtn1: true,
       focusbtn2: false,
       focusbtn3: false,
-      contentDescription: this.data?.descripcion,
+      contentDescription: this.data?.info?.descripcion,
     }
   },
   computed: {

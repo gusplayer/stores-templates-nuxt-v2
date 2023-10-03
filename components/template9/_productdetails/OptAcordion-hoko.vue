@@ -246,7 +246,7 @@ export default {
     return {
       medioEnvio: '',
       envioproducto: '',
-      contentDescription: this.data?.descripcion,
+      contentDescription: this.data?.info?.descripcion,
     }
   },
   computed: {
