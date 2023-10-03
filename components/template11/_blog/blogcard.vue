@@ -13,8 +13,8 @@
           <div class="content-imge">
             <img
               v-if="article.imagen_principal_url"
+              v-lazy="idCloudinary(article.imagen_principal_url, 400, 400)"
               class="images"
-              v-lazy="idCloudinary(this.article.imagen_principal_url, 400, 400)"
               alt="right-banner"
             />
             <div v-else class="empty"></div>
@@ -28,10 +28,10 @@
         <div class="overlay-top">
           <div class="text-tittle">
             <p class="txt-day">
-              {{ this.dayCreate }}
+              {{ dayCreate }}
             </p>
             <p class="txt-month">
-              {{ this.nameMonth }}
+              {{ nameMonth }}
             </p>
           </div>
         </div>
@@ -47,13 +47,13 @@
             class="contet"
           >
             <p class="txt-article-tittle">
-              {{ this.article.titulo }}
+              {{ article.titulo }}
             </p>
           </nuxt-link>
         </div>
         <div class="content-abstract-article">
           <p class="txt-article-abstract">
-            {{ this.article.resumen }}
+            {{ article.resumen }}
           </p>
         </div>
       </div>
@@ -63,19 +63,9 @@
 <script>
 import idCloudinary from '../../../mixins/idCloudinary'
 export default {
+  name: 'Ko10Blogcard',
   mixins: [idCloudinary],
-  name: 'Ko-Blogcard',
   props: { article: Object, settingKblog: Object },
-  mounted() {
-    if (this.article.created_at) {
-      const [shippingCreated] = this.article.created_at.split(' ')
-      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
-      this.dayCreate = dayCreate
-      this.monthCreate = monthCreate
-      this.yearCreate = yearCreate
-    }
-    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
-  },
   data() {
     return {
       shippingCreated: '',
@@ -98,6 +88,16 @@ export default {
         12: 'Dic',
       },
     }
+  },
+  mounted() {
+    if (this.article.created_at) {
+      const [shippingCreated] = this.article.created_at.split(' ')
+      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
+      this.dayCreate = dayCreate
+      this.monthCreate = monthCreate
+      this.yearCreate = yearCreate
+    }
+    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
   },
 }
 </script>
