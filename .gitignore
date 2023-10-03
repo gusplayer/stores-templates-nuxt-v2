@@ -81,18 +81,8 @@ sw.*
 *.swp
 package-lock.json
 
-# Prueba
-# .nuxt/App.js
-# .nuxt/index.js
-# .nuxt/router.js
-# .nuxt/routes.json
-# .nuxt/store.js
-# .nuxt/workbox.js
-# .nuxt/components/nuxt.js
-
-
 # nuxt.js build output
-# .nuxt
+.nuxt
 
 # Nuxt generate
 # dist

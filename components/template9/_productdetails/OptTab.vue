@@ -310,7 +310,7 @@ export default {
   },
   data() {
     return {
-      contentDescription: this.data?.descripcion,
+      contentDescription: this.data?.info?.descripcion,
     }
   },
   computed: {

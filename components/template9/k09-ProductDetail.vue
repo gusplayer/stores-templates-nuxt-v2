@@ -278,16 +278,16 @@
                     <p class="card-info-1-res">{{ $t('home_cardAgotado') }}</p>
                   </div>
                   <button
+                    v-if="!spent && salesData.estado"
                     class="btn-responsive"
-                    v-if="!spent && this.salesData.estado"
                     @click="addShoppingCart"
                   >
                     <cartArrowDown class="card-icon-cart" />
                     {{ $t('home_cardAgregar') }}
                   </button>
                   <div
+                    v-if="!salesData.estado"
                     class="content_buy_action-responsive"
-                    v-if="!this.salesData.estado"
                   >
                     <p class="card-info-1-res">
                       {{ $t('productdetail_btnANodisponible') }}
@@ -301,7 +301,7 @@
                 :dataStore="dataStore"
                 :data="data"
                 :envio="envio"
-                :settingByGeneral="this.settingByTemplate9[0].setting9General"
+                :settingByGeneral="settingByTemplate9[0].setting9General"
               />
             </div>
             <div class="tab">
@@ -309,12 +309,12 @@
                 :dataStore="dataStore"
                 :data="data"
                 :envio="envio"
-                :settingByGeneral="this.settingByTemplate9[0].setting9General"
+                :settingByGeneral="settingByTemplate9[0].setting9General"
               />
             </div>
             <div
-              class="content-free-shipping"
               v-if="envio && envio.titulo == 'Gratis'"
+              class="content-free-shipping"
             >
               <svg
                 class="transporte-icon mr-2"
@@ -338,8 +338,8 @@
       <!-- Productos relacionados  -->
       <div class="section-suggesProduct">
         <KoSuggesProduct
-          :category="this.category.slice(0, 8)"
-          :cardProduct="this.settingByTemplate9[0].cardProduct"
+          :category="category.slice(0, 8)"
+          :card-product="settingByTemplate9[0].cardProduct"
         />
       </div>
     </div>
@@ -351,6 +351,12 @@ import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
   name: 'Ko9ProductDetail',
+  components: {
+    OptionAcordion: () => import('./_productdetails/OptAcordion'),
+    OptionTab: () => import('./_productdetails/OptTab'),
+    SelectGroup: () => import('./_productdetails/selectGroup'),
+    KoSuggesProduct: () => import('./_productdetails/suggestionsProducto'),
+  },
   mixins: [idCloudinary, currency],
   props: {
     dataStore: Object,
@@ -359,12 +365,6 @@ export default {
     envios: Object,
     facebookPixel: Object,
     settingByTemplate9: Array,
-  },
-  components: {
-    OptionAcordion: () => import('./_productdetails/OptAcordion'),
-    OptionTab: () => import('./_productdetails/OptTab'),
-    SelectGroup: () => import('./_productdetails/selectGroup'),
-    KoSuggesProduct: () => import('./_productdetails/suggestionsProducto'),
   },
   mounted() {
     this.$store.state.beforeCombination = []

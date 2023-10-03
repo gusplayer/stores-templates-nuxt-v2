@@ -4,10 +4,7 @@
       v-if="koffers"
       :style="[
         {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Poppins',
+          '--font-style-1': settingGeneral?.fount_1 ?? 'Poppins',
         },
       ]"
       class="wrapper-items"
@@ -20,17 +17,17 @@
         >
           <img
             v-if="koffers.values[0].url_img_background"
-            class="image-left"
             :src="
               idCloudinaryBanner(koffers.values[0].url_img_background, 'banner')
             "
+            class="image-left"
             alt="image-left"
           />
           <div class="content-txt-left">
             <div class="left">
               <p
-                class="txt-left"
                 v-if="koffers.values[0].title"
+                class="txt-left"
                 :style="`color: ${koffers.values[0]['--color_title']};`"
               >
                 {{ koffers.values[0].title }}
@@ -43,10 +40,8 @@
               >
                 {{ koffers.values[0].description }}
               </p>
-              <div class="btns-center" v-if="koffers.values[0].url_redirect">
-                <a
-                  :href="`${koffers.values[0].url_redirect}`"
-                  rel="noreferrer noopener"
+              <div v-if="koffers.values[0].url_redirect" class="btns-center">
+                <div
                   class="btn-left"
                   :style="`background: ${koffers.values[0]['--color_background_btn']};`"
                 >
@@ -56,7 +51,7 @@
                   >
                     {{ $t('home_comprarAhora') }}
                   </span>
-                </a>
+                </div>
               </div>
             </div>
           </div>
@@ -66,8 +61,9 @@
           rel="noreferrer noopener"
           @click="sendUrl(koffers.values[1].url_redirect)"
         >
-          <div class="image-static" v-if="!hover">
+          <div v-if="!hover" class="image-static">
             <img
+              v-if="koffers.values[1].url_img_background"
               class="image"
               :src="
                 idCloudinaryBanner(
@@ -75,14 +71,13 @@
                   'banner'
                 )
               "
-              v-if="koffers.values[1].url_img_background"
               alt="imagen center static"
             />
           </div>
-          <div class="image-gif" v-if="hover">
+          <div v-if="hover" class="image-gif">
             <img
-              class="image"
               v-if="koffers.values[1].url_gift_background"
+              class="image"
               :src="
                 idCloudinaryBanner(
                   koffers.values[1].url_gift_background,
@@ -99,16 +94,16 @@
             <div class="right">
               <div class="container">
                 <p
-                  class="txt-right"
                   v-if="koffers.values[2].title"
+                  class="txt-right"
                   :style="`color: ${koffers.values[2]['--color_title']};`"
                 >
                   Collares
                 </p>
                 <div class="overlay-1">
                   <p
-                    class="txt-right"
                     v-if="koffers.values[2].title"
+                    class="txt-right"
                     :style="`color: ${koffers.values[2]['--color_title']};`"
                   >
                     Collares
@@ -117,16 +112,16 @@
               </div>
               <div class="container">
                 <p
-                  class="txt-right"
                   v-if="koffers.values[2].description"
+                  class="txt-right"
                   :style="`color: ${koffers.values[0]['--color_title']};`"
                 >
                   {{ koffers.values[0].description }}
                 </p>
                 <div class="overlay-2">
                   <p
-                    class="txt-right"
                     v-if="koffers.values[2].description"
+                    class="txt-right"
                     :style="`color: ${koffers.values[2]['--color_title']};`"
                   >
                     {{ koffers.values[0].description }}
@@ -168,16 +163,16 @@
             <div class="right">
               <div class="container">
                 <p
-                  class="txt-right"
                   v-if="koffers.values[2].title"
+                  class="txt-right"
                   :style="`color: ${koffers.values[2]['--color_title']};`"
                 >
                   {{ koffers.values[2].title }}
                 </p>
                 <div class="overlay-1">
                   <p
-                    class="txt-right"
                     v-if="koffers.values[2].title"
+                    class="txt-right"
                     :style="`color: ${koffers.values[2]['--color_title']};`"
                   >
                     {{ koffers.values[2].title }}
@@ -186,16 +181,16 @@
               </div>
               <div class="container">
                 <p
-                  class="txt-right"
                   v-if="koffers.values[2].description"
+                  class="txt-right"
                   :style="`color: ${koffers.values[2]['--color_title']};`"
                 >
                   {{ koffers.values[2].description }}
                 </p>
                 <div class="overlay-2">
                   <p
-                    class="txt-right"
                     v-if="koffers.values[2].description"
+                    class="txt-right"
                     :style="`color: ${koffers.values[2]['--color_title']};`"
                   >
                     {{ koffers.values[2].description }}
@@ -203,12 +198,10 @@
                 </div>
               </div>
               <div
-                class="item-button-right"
                 v-if="koffers.values[2].url_redirect"
+                class="item-button-right"
               >
-                <a
-                  :href="`${koffers.values[2].url_redirect}`"
-                  rel="noreferrer noopener"
+                <button
                   class="btn-right"
                   :style="`background: ${koffers.values[2]['--color_background_btn']};`"
                 >
@@ -218,7 +211,7 @@
                   >
                     {{ $t('home_comprarAhora') }}
                   </span>
-                </a>
+                </button>
               </div>
             </div>
           </div>

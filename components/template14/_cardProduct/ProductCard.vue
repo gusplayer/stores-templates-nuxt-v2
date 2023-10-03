@@ -46,8 +46,8 @@
         </div>
       </nuxt-link>
       <div class="mt-10">
-        <div v-if="estadoCart && equalsPrice">
-          <p class="text-price" v-if="minPrice">
+        <div v-if="estadoCart && equalsPrice && minPrice">
+          <p class="text-price">
             {{
               minPrice
                 | currency(
@@ -58,8 +58,8 @@
           </p>
         </div>
         <div
-          class="content-price"
           v-else-if="estadoCart && minPrice && maxPrice && !equalsPrice"
+          class="content-price"
         >
           <div class="text-price">
             {{
@@ -82,7 +82,7 @@
           </div>
         </div>
         <div v-else>
-          <p class="text-price" v-if="product.precio > 0 || product.precio">
+          <p v-if="product.precio > 0 || product.precio" class="text-price">
             {{
               product.precio
                 | currency(
@@ -104,14 +104,14 @@
           <eye-outline-icon />
         </nuxt-link>
         <button
-          class="ml-10 px-12 py-8 shadow-lg rounded-full btn"
-          :style="`background-color:${cardProducts.color_btn};color:${cardProducts.color_icon};`"
           v-if="
             !estadoCart &&
             !soldOut &&
             !spent &&
             (product.tipo_servicio == null || product.tipo_servicio == '0')
           "
+          class="ml-10 px-12 py-8 shadow-lg rounded-full btn"
+          :style="`background-color:${cardProducts.color_btn};color:${cardProducts.color_icon};`"
           @click="addShoppingCart"
         >
           <cart-icon />
@@ -179,6 +179,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },

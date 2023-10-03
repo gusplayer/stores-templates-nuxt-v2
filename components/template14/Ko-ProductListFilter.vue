@@ -81,7 +81,7 @@
                   {{ nameCategoryHeader }}
                 </p>
                 <div class="flex flex-row">
-                  <p class="text-12 mr-4" v-if="nameSubCategoryHeader">
+                  <p v-if="nameSubCategoryHeader" class="text-12 mr-4">
                     {{ nameSubCategoryHeader }}
                   </p>
                   <p
@@ -97,12 +97,12 @@
                 </div>
               </div>
               <div
-                class="flex flex-col justify-start"
                 v-if="
                   etiqueta1 &&
                   nameCategoryHeader == '' &&
                   nameSubCategoryHeader == ''
                 "
+                class="flex flex-col justify-start"
               >
                 <p class="text-12">
                   {{ etiqueta1 }}
@@ -126,8 +126,8 @@
                 <Ko14ProductCard
                   class="w-full"
                   :product="product"
-                  :cardProducts="settingByTemplate14[0].cardProducts"
-                  :settingsGeneral="settingByTemplate14[0].settingsGeneral"
+                  :card-products="settingByTemplate14[0].cardProducts"
+                  :setting-general="settingByTemplate14[0].settingsGeneral"
                 />
               </div>
             </div>
@@ -180,16 +180,16 @@
           <el-collapse v-model="activeNames">
             <el-collapse-item :title="$t('header_buscar_producto')" name="1">
               <input
+                v-model="search"
                 class="input-slide"
                 type="search"
-                v-model="search"
                 :placeholder="$t('header_search')"
               />
             </el-collapse-item>
             <el-collapse-item
+              v-show="categorias.length > 0"
               :title="$t('productdetail_categoria')"
               name="2"
-              v-show="categorias.length > 0"
             >
               <div class="categorys-list">
                 <div
@@ -217,13 +217,13 @@
               </div>
             </el-collapse-item>
             <el-collapse-item
+              v-show="showSubCategory && selectedSubcategories.length"
               :title="$t('home_subcategory')"
               name="3"
-              v-show="showSubCategory && selectedSubcategories.length"
             >
               <div
-                class="subcategory-list"
                 v-show="showSubCategory && selectedSubcategories.length"
+                class="subcategory-list"
               >
                 <div
                   v-for="(subcategorys, index) in selectedSubcategories"
@@ -246,24 +246,31 @@
             </el-collapse-item>
             <div
               v-for="(itemsTags, index) in allTags"
-              :key="index"
               v-show="allTags && allTags.length > 0"
+              :key="index"
             >
               <el-collapse-item
-                :title="itemsTags.name"
-                :name="6 + index"
                 v-if="
                   itemsTags &&
                   itemsTags.status === 1 &&
                   itemsTags.properties.length > 0
                 "
+                :title="itemsTags.name"
+                :name="6 + index"
               >
                 <div class="categorys-list">
                   <button
-                    class="txt-Filter"
                     v-for="itemsProperties in itemsTags.properties"
-                    :key="itemsProperties.id"
                     v-show="itemsProperties.status === 1"
+                    :key="itemsProperties.id"
+                    class="txt-Filter"
+                    :class="
+                      itemsProperties.name == etiqueta1
+                        ? 'txt-categorys-active'
+                        : '' || itemsProperties.name == etiqueta2
+                        ? 'txt-categorys-active'
+                        : ''
+                    "
                     @click="
                       getProductsFilter(
                         'tag',
@@ -272,13 +279,6 @@
                         false
                       )
                     "
-                    :class="
-                      itemsProperties.name == etiqueta1
-                        ? 'txt-categorys-active'
-                        : '' || itemsProperties.name == etiqueta2
-                        ? 'txt-categorys-active'
-                        : ''
-                    "
                   >
                     {{ itemsProperties.name }}
                   </button>
@@ -286,9 +286,9 @@
               </el-collapse-item>
             </div>
             <el-collapse-item
+              v-show="!stateShipping"
               :title="$t('home_fenvio')"
               name="4"
-              v-show="!stateShipping"
             >
               <div class="categorys-list">
                 <button
@@ -332,22 +332,16 @@ import { mapState } from 'vuex'
 import filterProducts from '@/mixins/filterProducts'
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko15-ProductList-Filter',
-  mixins: [filterProducts, idCloudinaryBanner],
+  name: 'Ko14ProductListFilter',
   components: {
     Ko14ProductCard: () => import('./_cardProduct/ProductCard.vue'),
   },
+  mixins: [filterProducts, idCloudinaryBanner],
   props: {
     dataStore: Object,
     settingByTemplate14: Array,
     fullProducts: Array,
     allTags: Array,
-  },
-  mounted() {
-    this.getQuery()
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
   },
   data() {
     return {
@@ -403,6 +397,43 @@ export default {
     etiqueta2() {
       return this.$store.state.products.payloadTag2Name
     },
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct(value)
+    },
+    currentPage() {
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+      let timerTimeout = null
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null
+        window.scrollBy(0, -1500)
+      }, 250)
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage
+      }
+    },
+    nameCategoryHeader(value) {
+      return value
+    },
+    nameSubCategoryHeader(value) {
+      return value
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.getQuery()
+    },
+    searchValue(value) {
+      this.SearchProduct(value)
+    },
+  },
+  mounted() {
+    this.getQuery()
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
   },
   methods: {
     openMenuLateral() {
@@ -524,37 +555,6 @@ export default {
       this.nameCategory = ''
       this.showSubCategory = false
       this.selectedSubcategories = []
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollBy(0, -1500)
-      }, 250)
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.getQuery()
-    },
-    searchValue(value) {
-      this.SearchProduct(value)
     },
   },
 }

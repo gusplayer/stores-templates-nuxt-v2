@@ -11,7 +11,7 @@
       },
     ]"
   >
-    <div v-if="loading" />
+    <div v-if="loading"></div>
     <div class="w-full relative box-content hidden md:flex">
       <div v-if="settingByTemplate14[0].detailsProducts.visible_img">
         <picture>
@@ -41,7 +41,7 @@
           />
         </picture>
       </div>
-      <div v-else class="w-full h-[240px]" />
+      <div v-else class="w-full h-[240px]"></div>
       <div
         class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/2 flex flex-col items-center"
       >
@@ -82,7 +82,7 @@
               <div
                 class="hidden md:flex w-full h-full relative overflow-hidden mr-30 max-w-[110px] max-h-[442px] min-h-[442px]"
               >
-                <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+                <div ref="mySwiper" v-swiper:mySwiper="swiperOption">
                   <div class="swiper-wrapper w-full h-full">
                     <div class="swiper-slide w-full h-full">
                       <div
@@ -134,10 +134,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="swiper-prev" v-if="data.fotos.length > 3">
+                  <div v-if="data.fotos.length > 3" class="swiper-prev">
                     <FlechaUp-icon class="icon-swiper" />
                   </div>
-                  <div class="swiper-next" v-if="data.fotos.length > 3">
+                  <div v-if="data.fotos.length > 3" class="swiper-next">
                     <Flechadown-icon class="icon-swiper" />
                   </div>
                 </div>
@@ -146,7 +146,7 @@
                 class="relative hidden md:flex w-full h-full max-w-[375px] max-h-[375px] mr-10"
               >
                 <div
-                  v-if="this.activeZoom && !existYoutube"
+                  v-if="activeZoom && !existYoutube"
                   class="w-full h-full max-w-[375px] max-h-[375px] object-contain rounded-10 object-top"
                 >
                   <img
@@ -300,11 +300,11 @@
                 </p>
               </div>
             </div>
-            <div v-if="this.data.detalle.con_variante > 0" class="w-full mb-15">
+            <div v-if="data.detalle.con_variante > 0" class="w-full mb-15">
               <div
-                class="flex flex-col justify-center items-start"
                 v-for="(variant, index) in data.variantes"
                 :key="index"
+                class="flex flex-col justify-center items-start"
               >
                 <label
                   for="variant name"
@@ -316,7 +316,7 @@
                 <SelectGroup
                   :index="index"
                   :variantes="data.variantes"
-                  :detailsProducts="settingByTemplate14[0].detailsProducts"
+                  :details-products="settingByTemplate14[0].detailsProducts"
                 >
                   <option
                     v-for="item in variant.valores"
@@ -334,8 +334,8 @@
               </div>
             </div>
             <div
-              class="w-full flex flex-row items-center mb-15"
               v-if="userDropshipping.userName"
+              class="w-full flex flex-row items-center mb-15"
             >
               <p
                 class="text-16 font-bold mr-10"
@@ -352,7 +352,7 @@
             </div>
             <div
               v-if="data.info.descripcion_corta"
-              class="w-full mb-30 border-t pt-15"
+              class="w-full mb-0 md:mb-30 border-t pt-15"
               :style="`border-color: ${settingByTemplate14[0].detailsProducts.color_border};`"
             >
               <p
@@ -362,7 +362,10 @@
                 {{ data.info.descripcion_corta }}
               </p>
             </div>
-            <div class="w-full flex flex-row justify-start items-center">
+            <div
+              class="fixed md:sticky w-full flex flex-row justify-start items-center left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 bg-gray-100 md:bg-transparent border-t md:border-t-0 z-100 md:z-0"
+              :style="`border-color:${settingByTemplate14[0].detailsProducts.color_border};`"
+            >
               <div
                 class="flex flex-row justify-center items-center mr-20"
                 :class="{ disabled: !salesData.estado }"
@@ -474,7 +477,7 @@
                 {{ $t('home_cardAgotado') }}
               </button>
             </div>
-            <div class="w-full flex flex-row items-center mt-30">
+            <div class="w-full flex flex-row items-center mt-10 md:mt-30">
               <p
                 class="text-16 font-bold mr-10"
                 :style="`color:${settingByTemplate14[0].detailsProducts.color_text};`"
@@ -482,7 +485,7 @@
                 {{ $t('productdetail_compartir') }}
               </p>
               <a
-                :href="this.sharingFacebook"
+                :href="sharingFacebook"
                 target="_blank"
                 rel="noreferrer noopener"
                 class="btn-facebook"
@@ -497,17 +500,17 @@
         </div>
         <OptionTab
           class="w-full"
-          :dataStore="dataStore"
+          :data-store="dataStore"
           :data="data"
           :envio="envio"
-          :settingByTemplate14="settingByTemplate14"
+          :setting-by-template14="settingByTemplate14"
         />
         <KoSuggestProduct
           class="w-full py-40"
-          :category="this.category.slice(0, 12)"
-          :cardProducts="settingByTemplate14[0].cardProducts"
-          :detailsProducts="settingByTemplate14[0].detailsProducts"
-          :settingsGeneral="settingByTemplate14[0].settingsGeneral"
+          :category="category.slice(0, 12)"
+          :card-products="settingByTemplate14[0].cardProducts"
+          :details-products="settingByTemplate14[0].detailsProducts"
+          :settings-general="settingByTemplate14[0].settingsGeneral"
         />
       </div>
     </div>
@@ -518,40 +521,47 @@ import axios from 'axios'
 import idCloudinary from '@/mixins/idCloudinary'
 import currency from '@/mixins/formatCurrent'
 export default {
-  mixins: [idCloudinary, currency],
-  name: 'Ko15-ProductDetail',
-  props: {
-    dataStore: Object,
-    productsData: Array,
-    whatsapp: String,
-    envios: Object,
-    facebookPixel: Object,
-    settingByTemplate14: Array,
-  },
+  name: 'Ko14ProductDetail',
   components: {
     OptionTab: () => import('./_productdetails/OptTab'),
     SelectGroup: () => import('./_productdetails/selectGroup'),
     KoSuggestProduct: () => import('./_productdetails/suggestionsProducto'),
     ProductSlide: () => import('./_productdetails/productSlide'),
   },
-  mounted() {
-    this.$store.state.beforeCombination = []
-    if (
-      this.productsData &&
-      this.productsData.length &&
-      this.productsData.length > 0
-    ) {
-      this.getDataProduct()
-    } else {
-      this.getDataProductPrev()
-    }
-    if (Object.keys(this.dataStore.medios_envio).length) {
-      this.setOptionShipping()
-    }
-    if (this.$route.query.userId && this.$route.query.userName) {
-      this.userDropshipping.userId = this.$route.query.userId
-      this.userDropshipping.userName = this.$route.query.userName
-    }
+  filters: {
+    toLowerCase(value) {
+      if (value) {
+        return value.toLowerCase()
+      }
+      return ''
+    },
+  },
+  mixins: [idCloudinary, currency],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    productsData: {
+      type: Array,
+      required: true,
+    },
+    whatsapp: {
+      type: String,
+      required: true,
+    },
+    envios: {
+      type: Object,
+      required: true,
+    },
+    facebookPixel: {
+      type: Object,
+      default: null,
+    },
+    settingByTemplate14: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -595,6 +605,117 @@ export default {
       },
     }
   },
+  head() {
+    return {
+      title: `Vista del producto ${
+        this.data && this.data.detalle ? this.data.detalle.nombre : ''
+      }`,
+      meta: [
+        {
+          hid: 'product:catalog_id',
+          property: 'product:catalog_id',
+          content: this.data && this.data.detalle ? this.data.detalle.id : '',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            this.data && this.data.detalle ? this.data.detalle.nombre : '',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: this.sharing && this.sharing.url ? this.sharing.url : '',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            this.data && this.data.info ? this.data.info.descripcion_corta : '',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content:
+            this.data && this.data.detalle
+              ? this.data.detalle.foto_cloudinary
+              : '',
+        },
+        {
+          hid: 'og:price:amount',
+          property: 'og:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+        },
+        {
+          hid: 'og:price:currency',
+          property: 'og:price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+        {
+          hid: 'product:brand',
+          property: 'product:brand',
+          content:
+            this.data && this.data.info && this.data.info.marca
+              ? this.data.info.marca
+              : '',
+        },
+        {
+          hid: 'product:availability',
+          property: 'product:availability',
+          content:
+            this.salesData && this.salesData.unidades > 0
+              ? 'in stock'
+              : 'out of stock',
+        },
+        {
+          hid: 'product:condition',
+          property: 'product:condition',
+          content: 'new',
+        },
+        {
+          hid: 'product:price:amount',
+          property: 'product:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+        },
+        {
+          hid: 'product:price:currency',
+          property: 'product:price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+        {
+          hid: 'product:sale_price:amount',
+          property: 'product:sale_price:amount',
+          content:
+            this.data &&
+            this.data.info &&
+            this.data.info.tag_promocion == 1 &&
+            this.data.info.promocion_valor
+              ? Math.trunc(
+                  this.salesData.precio /
+                    (1 - this.data.info.promocion_valor / 100)
+                )
+              : '',
+        },
+        {
+          hid: 'product:sale_price:currency',
+          property: 'product:sale_price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+      ],
+    }
+  },
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
@@ -631,6 +752,92 @@ export default {
           product.id !== this.data.detalle.id
       )
     },
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+    },
+    productsData() {
+      this.getDataProduct()
+    },
+    envios() {
+      this.setOptionShipping()
+    },
+    quantityValue(value) {
+      if (value > this.maxQuantityValue) {
+        this.quantityValue = this.maxQuantityValue
+      }
+    },
+    beforeCombination(value) {
+      const combinationSelected = JSON.stringify(value)
+      if (this.data.combinaciones) {
+        if (
+          this.data.combinaciones.combinaciones !== '[object Object]' &&
+          this.data.detalle.con_variante > 0
+        ) {
+          const combinaciones = JSON.parse(
+            this.data.combinaciones.combinaciones
+          )
+          const result = combinaciones.find(
+            (combinacion) =>
+              JSON.stringify(combinacion.combinacion) == combinationSelected
+          )
+          this.productCart = []
+          this.productIndexCart = null
+          for (const [
+            index,
+            productCart,
+          ] of this.$store.state.productsCart.entries()) {
+            if (
+              this.data.detalle.id == productCart.id &&
+              JSON.stringify(productCart.combinacion) ==
+                JSON.stringify(result.combinacion)
+            ) {
+              this.productIndexCart = index
+              this.productCart = productCart
+            }
+          }
+          if (result) {
+            this.spent = false
+            this.maxQuantityValue = result.unidades
+            if (result.unidades == 0) {
+              this.spent = true
+            }
+            if (this.productCart.cantidad) {
+              this.maxQuantityValue =
+                parseInt(result.unidades) - this.productCart.cantidad
+              if (this.maxQuantityValue <= 0) {
+                this.spent = true
+              }
+            }
+            this.salesData = result
+            this.quantityValue = 1
+          }
+        }
+      }
+    },
+  },
+  mounted() {
+    this.$store.state.beforeCombination = []
+    if (
+      this.productsData &&
+      this.productsData.length &&
+      this.productsData.length > 0
+    ) {
+      this.getDataProduct()
+    } else {
+      this.getDataProductPrev()
+    }
+    if (Object.keys(this.dataStore.medios_envio).length) {
+      this.setOptionShipping()
+    }
+    if (this.$route.query.userId && this.$route.query.userName) {
+      this.userDropshipping.userId = this.$route.query.userId
+      this.userDropshipping.userName = this.$route.query.userName
+    }
   },
   methods: {
     searchIdForSlug() {
@@ -924,192 +1131,7 @@ export default {
       }
     },
   },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-    },
-    productsData() {
-      this.getDataProduct()
-    },
-    envios() {
-      this.setOptionShipping()
-    },
-    quantityValue(value) {
-      if (value > this.maxQuantityValue) {
-        this.quantityValue = this.maxQuantityValue
-      }
-    },
-    beforeCombination(value) {
-      const combinationSelected = JSON.stringify(value)
-      if (this.data.combinaciones) {
-        if (
-          this.data.combinaciones.combinaciones !== '[object Object]' &&
-          this.data.detalle.con_variante > 0
-        ) {
-          const combinaciones = JSON.parse(
-            this.data.combinaciones.combinaciones
-          )
-          const result = combinaciones.find(
-            (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
-          )
-          this.productCart = []
-          this.productIndexCart = null
-          for (const [
-            index,
-            productCart,
-          ] of this.$store.state.productsCart.entries()) {
-            if (
-              this.data.detalle.id == productCart.id &&
-              JSON.stringify(productCart.combinacion) ==
-                JSON.stringify(result.combinacion)
-            ) {
-              this.productIndexCart = index
-              this.productCart = productCart
-            }
-          }
-          if (result) {
-            this.spent = false
-            this.maxQuantityValue = result.unidades
-            if (result.unidades == 0) {
-              this.spent = true
-            }
-            if (this.productCart.cantidad) {
-              this.maxQuantityValue =
-                parseInt(result.unidades) - this.productCart.cantidad
-              if (this.maxQuantityValue <= 0) {
-                this.spent = true
-              }
-            }
-            this.salesData = result
-            this.quantityValue = 1
-          }
-        }
-      }
-    },
-  },
-  filters: {
-    toLowerCase(value) {
-      if (value) {
-        return value.toLowerCase()
-      }
-      return ''
-    },
-  },
-  head() {
-    return {
-      title: `Vista del producto ${
-        this.data && this.data.detalle ? this.data.detalle.nombre : ''
-      }`,
-      meta: [
-        {
-          hid: 'product:catalog_id',
-          property: 'product:catalog_id',
-          content: this.data && this.data.detalle ? this.data.detalle.id : '',
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content:
-            this.data && this.data.detalle ? this.data.detalle.nombre : '',
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.sharing && this.sharing.url ? this.sharing.url : '',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content:
-            this.data && this.data.info ? this.data.info.descripcion_corta : '',
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content:
-            this.data && this.data.detalle
-              ? this.data.detalle.foto_cloudinary
-              : '',
-        },
-        {
-          hid: 'og:price:amount',
-          property: 'og:price:amount',
-          content:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : '',
-        },
-        {
-          hid: 'og:price:currency',
-          property: 'og:price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-        {
-          hid: 'product:brand',
-          property: 'product:brand',
-          content:
-            this.data && this.data.info && this.data.info.marca
-              ? this.data.info.marca
-              : '',
-        },
-        {
-          hid: 'product:availability',
-          property: 'product:availability',
-          content:
-            this.salesData && this.salesData.unidades > 0
-              ? 'in stock'
-              : 'out of stock',
-        },
-        {
-          hid: 'product:condition',
-          property: 'product:condition',
-          content: 'new',
-        },
-        {
-          hid: 'product:price:amount',
-          property: 'product:price:amount',
-          content:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : '',
-        },
-        {
-          hid: 'product:price:currency',
-          property: 'product:price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-        {
-          hid: 'product:sale_price:amount',
-          property: 'product:sale_price:amount',
-          content:
-            this.data &&
-            this.data.info &&
-            this.data.info.tag_promocion == 1 &&
-            this.data.info.promocion_valor
-              ? Math.trunc(
-                  this.salesData.precio /
-                    (1 - this.data.info.promocion_valor / 100)
-                )
-              : '',
-        },
-        {
-          hid: 'product:sale_price:currency',
-          property: 'product:sale_price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-      ],
-    }
-  },
+
   jsonld() {
     return {
       '@context': 'https://schema.org',

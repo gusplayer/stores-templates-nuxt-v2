@@ -12,7 +12,7 @@ export default {
     K10Blog: () => import('@/components/template10/blog_page/Ko-Blog.vue'),
     K11Blog: () => import('@/components/template11/blog_page/Ko-Blog.vue'),
     K13Blog: () => import('@/components/template13/_blog/Ko-Blog.vue'),
-    K14Blog: () => import('@/components/template14/_cardBlog/Ko-index.vue'),
+    K14Blog: () => import('@/components/template14/_cardBlog/KoBlog.vue'),
     K15Blog: () => import('@/components/template15/_cardBlog/Ko-index.vue'),
   },
   layout: 'default',
@@ -106,7 +106,7 @@ export default {
           ? [
               {
                 settingGeneral:
-                  this.settingByTemplate14?.settingGeneral ?? null,
+                  this.settingByTemplate14?.settingsGeneral ?? null,
                 cardBlog: this.settingByTemplate14?.cardBlog ?? null,
               },
             ]

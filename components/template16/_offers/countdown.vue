@@ -3,7 +3,7 @@
     <div v-if="!isFinished" class="mt-30 grid grid-flow-col gap-x-4">
       <div
         class="py-8 px-3 text-center w-[60px]"
-        :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg_discount}; border-color: ${information.color_bg}; border-radius: ${settingGeneral?.radius};`"
+        :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg}; border-color: ${information.color_bg_discount}; border-radius: ${settingGeneral?.radius};`"
       >
         <p class="text-18 font-bold">
           {{ days }}
@@ -12,7 +12,7 @@
       </div>
       <div
         class="py-8 px-3 text-center w-[60px]"
-        :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg_discount}; border-color: ${information.color_bg}; border-radius: ${settingGeneral?.radius};`"
+        :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg}; border-color: ${information.color_bg_discount}; border-radius: ${settingGeneral?.radius};`"
       >
         <p class="text-18 font-bold">
           {{ hours }}
@@ -21,7 +21,7 @@
       </div>
       <div
         class="py-8 px-3 text-center w-[60px]"
-        :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg_discount}; border-color: ${information.color_bg}; border-radius: ${settingGeneral?.radius};`"
+        :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg}; border-color: ${information.color_bg_discount}; border-radius: ${settingGeneral?.radius};`"
       >
         <p class="text-18 font-bold">
           {{ minutes }}
@@ -30,7 +30,7 @@
       </div>
       <div
         class="py-8 px-3 text-center w-[60px]"
-        :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg_discount}; border-color: ${information.color_bg}; border-radius: ${settingGeneral?.radius};`"
+        :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg}; border-color: ${information.color_bg_discount}; border-radius: ${settingGeneral?.radius};`"
       >
         <p class="text-18 font-bold">
           {{ seconds }}
@@ -45,7 +45,7 @@
     >
       <p>Oferta finalizada</p>
     </div>
-    <div class="mt-40">
+    <div v-if="product && product[0]" class="mt-40">
       <KoProductCard
         :product="product[0]"
         :card-products="cardProducts"

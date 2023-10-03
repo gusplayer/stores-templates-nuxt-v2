@@ -28,20 +28,20 @@
         </nuxt-link>
       </div>
       <div
-        v-swiper:mySwiper="swiperOption"
         ref="mySwiper"
+        v-swiper:mySwiper="swiperOption"
         class="w-full relative"
       >
         <div class="swiper-wrapper w-full">
           <div
-            class="swiper-slide w-full"
             v-for="product in fullProducts.slice(0, 12)"
             :key="product.id"
+            class="swiper-slide w-full"
           >
             <KoProductCard
               :product="product"
-              :cardProducts="cardProducts"
-              :settingGeneral="settingGeneral"
+              :card-products="cardProducts"
+              :setting-general="settingGeneral"
               class="w-full"
             />
           </div>
@@ -53,7 +53,10 @@
 
 <script>
 export default {
-  name: 'Ko15-productListHome',
+  name: 'Ko14ProductListHome',
+  components: {
+    KoProductCard: () => import('./_cardProduct/ProductCard'),
+  },
   props: {
     listProductsHome: {
       type: Object,
@@ -75,9 +78,6 @@ export default {
       type: Array,
       required: true,
     },
-  },
-  components: {
-    KoProductCard: () => import('./_cardProduct/ProductCard'),
   },
   data() {
     return {
