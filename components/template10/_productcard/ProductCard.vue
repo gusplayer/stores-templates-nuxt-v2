@@ -5,10 +5,7 @@
       cardProduct,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -17,28 +14,21 @@
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
       >
-        <client-only>
-          <img
-            v-if="!soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 400, 400)"
-            class="product-image"
-            alt="Product Img"
-          />
-          <img
-            v-if="soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 400, 400)"
-            class="product-image-soldOut"
-            alt="Product Img"
-          />
-        </client-only>
+        <img
+          v-lazy="idCloudinary(product.foto_cloudinary, 400, 400)"
+          class="product-image"
+          :class="{ 'product-image-soldOut': soldOut }"
+          alt="Product Img"
+        />
+
         <div class="image_overlay"></div>
       </nuxt-link>
-      <div class="overlay-top" v-if="!getFreeShipping && !soldOut">
+      <div v-if="!getFreeShipping && !soldOut" class="overlay-top">
         <div class="icons-hover">
           <div class="transport-icon">
             <svg
-              class="transporte-icon"
               v-if="!getFreeShipping && !soldOut"
+              class="transporte-icon"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               version="1.1"
@@ -54,17 +44,17 @@
           </div>
         </div>
       </div>
-      <div class="overlay-free" v-if="!getFreeShipping && !soldOut">
+      <div v-if="!getFreeShipping && !soldOut" class="overlay-free">
         <div class="text-free">
           <p class="txt-free">{{ $t('home_cardGratis') }}</p>
         </div>
       </div>
       <div
         class="cart-Shop-pro"
-        v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
+        v-if="product.tag_promocion == 1 && product.promocion_valor"
       >
         <div class="text-cart">
-          <p>{{ this.product.promocion_valor }}% OFF</p>
+          <p>{{ product.promocion_valor }}% OFF</p>
         </div>
       </div>
       <div class="overlay-polygon" v-if="!getFreeShipping && !soldOut">
@@ -164,20 +154,20 @@
     <div class="datos-producto">
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
         <div class="tittle">
-          <p class="card-title" v-if="this.product.nombre.length >= 54">
-            {{ `${this.product.nombre.slice(0, 54)}...` }}
-          </p>
-          <p class="card-title" v-else>
-            {{ `${this.product.nombre.slice(0, 54)}` }}
+          <p class="card-title">
+            {{
+              product.nombre.slice(0, 54) +
+              (product.nombre.length >= 54 ? '...' : '')
+            }}
           </p>
         </div>
       </nuxt-link>
       <div class="precio">
         <div class="content-text-price">
-          <div v-if="this.estadoCart && this.equalsPrice">
-            <p class="text-price" v-if="this.minPrice">
+          <div v-if="estadoCart && equalsPrice">
+            <p v-if="minPrice" class="text-price">
               {{
-                this.minPrice
+                minPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -186,17 +176,12 @@
             </p>
           </div>
           <div
+            v-else-if="estadoCart && minPrice && maxPrice && !equalsPrice"
             class="content-price"
-            v-else-if="
-              this.estadoCart &&
-              this.minPrice &&
-              this.maxPrice &&
-              !this.equalsPrice
-            "
           >
             <div class="text-price">
               {{
-                this.minPrice
+                minPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -206,7 +191,7 @@
             <p class="separator-price">-</p>
             <div class="text-price">
               {{
-                this.maxPrice
+                maxPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -215,12 +200,9 @@
             </div>
           </div>
           <div v-else>
-            <p
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <p v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.product.precio
+                product.precio
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -233,14 +215,13 @@
       </div>
       <div class="content-btn">
         <button
-          class="btn"
           v-if="
-            !this.estadoCart &&
+            !estadoCart &&
             !soldOut &&
             !spent &&
-            (this.product.tipo_servicio == null ||
-              this.product.tipo_servicio == '0')
+            (product.tipo_servicio == null || product.tipo_servicio == '0')
           "
+          class="btn"
           @click="addShoppingCart"
         >
           <div class="btn-content">
@@ -295,9 +276,22 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 import currency from '../../../mixins/formatCurrent'
 export default {
+  name: 'Ko10ProductCard',
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductCard-10',
-  props: { product: Object, cardProduct: Object, settingGeneral: Object },
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+    cardProduct: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       hover: false,
@@ -314,19 +308,7 @@ export default {
       equalsPrice: false,
     }
   },
-  mounted() {
-    this.idSlug = this.product.id
-    this.productPrice()
-    if (
-      this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
-    ) {
-      this.estadoCart = true
-    }
-    if (this.product) {
-      this.getDataProduct()
-    }
-  },
+
   computed: {
     dataStore() {
       return this.$store.state.dataStore
@@ -382,6 +364,24 @@ export default {
         return !this.product.stock
       }
     },
+  },
+  watch: {
+    productsCarts() {
+      this.getDataProduct()
+    },
+  },
+  mounted() {
+    this.idSlug = this.product.id
+    this.productPrice()
+    if (
+      this.product.con_variante &&
+      this.product.variantes[0].variantes !== '[object Object]'
+    ) {
+      this.estadoCart = true
+    }
+    if (this.product) {
+      this.getDataProduct()
+    }
   },
   methods: {
     getDataProduct() {
@@ -488,11 +488,6 @@ export default {
           }
         }
       }
-    },
-  },
-  watch: {
-    productsCarts(value) {
-      this.getDataProduct()
     },
   },
 }

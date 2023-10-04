@@ -49,15 +49,13 @@
             path: `/wa/${dataStore.tienda.id_tienda}/productos/` + product.slug,
           }"
         >
-          <p
-            v-if="product.nombre.length >= 42"
-            class="txt-name-product pb-auto"
-          >
-            {{ `${product.nombre.slice(0, 42)}..` }}
+          <p class="txt-name-product pb-auto">
+            {{
+              product.nombre.slice(0, 42) +
+              (product.nombre.length >= 42 ? '..' : '')
+            }}
           </p>
-          <p v-else class="txt-name-product pb-auto">
-            {{ `${product.nombre.slice(0, 42)}` }}
-          </p>
+
           <div class="content-price-product">
             <div
               v-if="product.tag_promocion == 1 && product.promocion_valor"

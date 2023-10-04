@@ -33,7 +33,7 @@
         </client-only>
         <div class="image_overlay"></div>
       </nuxt-link>
-      <div class="overlay-top" v-if="!getFreeShipping && !soldOut">
+      <div v-if="!getFreeShipping && !soldOut" class="overlay-top">
         <div class="icons-hover">
           <div class="transport-icon">
             <svg
@@ -54,12 +54,12 @@
           </div>
         </div>
       </div>
-      <div class="overlay-free" v-if="!getFreeShipping && !soldOut">
+      <div v-if="!getFreeShipping && !soldOut" class="overlay-free">
         <div class="text-free">
           <p class="txt-free">{{ $t('home_cardGratis') }}</p>
         </div>
       </div>
-      <div class="overlay-polygon" v-if="!getFreeShipping && !soldOut">
+      <div v-if="!getFreeShipping && !soldOut" class="overlay-polygon">
         <svg
           class="icon-overlay-free"
           width="12px"
@@ -69,12 +69,12 @@
           <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
         </svg>
       </div>
-      <div class="overlay-sould" v-if="soldOut">
+      <div v-if="soldOut" class="overlay-sould">
         <div class="text-sould">
           <svg
+            id="Layer_1"
             class="svg-sould-out"
             xmlns="http://www.w3.org/2000/svg"
-            id="Layer_1"
             enable-background="new 0 0 512 512"
             viewBox="0 0 512 512"
           >
@@ -179,35 +179,25 @@
         {{ product.categoria }}
       </div>
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
-        <div class="tittle tittle-xml">
-          <p class="card-title" v-if="product.nombre.length >= 90">
-            {{ `${product.nombre.slice(0, 90)}...` }}
-          </p>
-          <p class="card-title" v-else>
-            {{ `${product.nombre.slice(0, 90)}` }}
-          </p>
-        </div>
-        <div class="tittle tittle-lg">
-          <p class="card-title" v-if="product.nombre.length >= 54">
-            {{ `${product.nombre.slice(0, 54)}...` }}
-          </p>
-          <p class="card-title" v-else>
-            {{ `${product.nombre.slice(0, 54)}` }}
-          </p>
-        </div>
-        <div class="tittle tittle-sm">
-          <p class="card-title" v-if="product.nombre.length >= 30">
-            {{ `${product.nombre.slice(0, 30)}...` }}
-          </p>
-          <p class="card-title" v-else>
-            {{ `${product.nombre.slice(0, 30)}` }}
+        <div class="tittle tittle-xml tittle-lg tittle-sm">
+          <p class="card-title">
+            {{
+              product.nombre.length >= 90
+                ? `${product.nombre.slice(0, 90)}...`
+                : product.nombre.length >= 54
+                ? `${product.nombre.slice(0, 54)}...`
+                : product.nombre.length >= 30
+                ? `${product.nombre.slice(0, 30)}...`
+                : `${product.nombre.slice(0, 30)}`
+            }}
           </p>
         </div>
       </nuxt-link>
+
       <div class="precio">
-        <div class="content-text-price" v-if="product.precio">
+        <div v-if="product.precio" class="content-text-price">
           <div v-if="estadoCart && equalsPrice">
-            <p class="text-price" v-if="minPrice">
+            <p v-if="minPrice" class="text-price">
               {{
                 minPrice
                   | currency(
@@ -265,7 +255,20 @@ import currency from '../../../mixins/formatCurrent'
 export default {
   name: 'Ko9ProductCard',
   mixins: [idCloudinary, currency],
-  props: { product: Object, settingGeneral: Object, productListCard: Object },
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    productListCard: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       hover: false,

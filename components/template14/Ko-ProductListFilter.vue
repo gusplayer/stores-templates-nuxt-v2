@@ -37,7 +37,7 @@
             />
           </picture>
         </div>
-        <div v-else class="w-full h-[240px]" />
+        <div v-else class="w-full h-[240px]"></div>
         <div
           class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex flex-col items-center"
         >
@@ -109,10 +109,9 @@
                 </p>
               </div>
             </div>
-            <filterOutLine-icon
-              class="flex md:hidden text-25"
-              @click="openMenuLateral"
-            />
+            <div class="flex md:hidden">
+              <filterOutLine-icon class="text-25" @click="openMenuLateral" />
+            </div>
           </div>
           <div class="w-full h-full flex flex-col justify-center items-center">
             <div
@@ -197,11 +196,7 @@
                   :key="index"
                   @click="showSubCategory = true"
                 >
-                  <div
-                    @click="
-                      sendCategory(categorys, categorys.id, (ref = false))
-                    "
-                  >
+                  <div @click="sendCategory(categorys, categorys.id)">
                     <p
                       class="txt-categorys"
                       :class="
@@ -338,10 +333,22 @@ export default {
   },
   mixins: [filterProducts, idCloudinaryBanner],
   props: {
-    dataStore: Object,
-    settingByTemplate14: Array,
-    fullProducts: Array,
-    allTags: Array,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate14: {
+      type: Array,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
+    allTags: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -405,6 +412,7 @@ export default {
     currentPage() {
       this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
       let timerTimeout = null
+      // eslint-disable-next-line no-unused-vars
       timerTimeout = setTimeout(() => {
         timerTimeout = null
         window.scrollBy(0, -1500)
@@ -514,7 +522,7 @@ export default {
         data: value,
       })
     },
-    sendCategory(value, categoria, index, ref) {
+    sendCategory(value, categoria) {
       this.indexSelect = categoria
       this.currentPage = 1
       this.nameCategory = value.nombre_categoria_producto

@@ -34,12 +34,13 @@
             }"
             class="content-name-product-movil"
           >
-            <p v-if="product.nombre.length >= 42" class="card-text-movil-title">
-              {{ `${product.nombre.slice(0, 42)}..` }}
+            <p class="card-text-movil-title">
+              {{
+                product.nombre.slice(0, 42) +
+                (product.nombre.length >= 42 ? '..' : '')
+              }}
             </p>
-            <p v-else class="card-text-movil-title">
-              {{ `${product.nombre.slice(0, 42)}` }}
-            </p>
+
             <p v-if="product.marca" class="card-text-movil">
               {{ product.marca }}
             </p>
@@ -215,6 +216,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },

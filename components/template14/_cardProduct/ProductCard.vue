@@ -38,7 +38,7 @@
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
         <div class="w-full flex justify-center items-center">
           <p
-            class="h-full pt-10 transition-all ease-out duration-0.2 text-center min-h-[58px] max-h-[58px] card-title"
+            class="h-full pt-10 transition-all ease-out duration-0.2 text-center card-title"
           >
             {{ product.nombre.slice(0, 54) }}
             {{ product.nombre.length >= 54 ? '...' : '' }}

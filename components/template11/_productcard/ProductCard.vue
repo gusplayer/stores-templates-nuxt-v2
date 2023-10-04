@@ -5,7 +5,7 @@
       settingKcardProduct,
       settingGeneral,
       {
-        '--font-style-1': this.settingGeneral?.fount_1 ?? 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -14,28 +14,21 @@
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
       >
-        <client-only>
-          <img
-            v-if="!soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 550, 550)"
-            class="product-image"
-            alt="Product Img"
-          />
-          <img
-            v-if="soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 550, 550)"
-            class="product-image-soldOut"
-            alt="Product Img"
-          />
-        </client-only>
+        <img
+          v-lazy="idCloudinary(product.foto_cloudinary, 400, 400)"
+          class="product-image"
+          :class="{ 'product-image-soldOut': soldOut }"
+          alt="Product Img"
+        />
+
         <div class="image_overlay"></div>
       </nuxt-link>
-      <div class="overlay-top" v-if="!getFreeShipping && !soldOut">
+      <div v-if="!getFreeShipping && !soldOut" class="overlay-top">
         <div class="icons-hover">
           <div class="transport-icon">
             <svg
-              class="transporte-icon"
               v-if="!getFreeShipping && !soldOut"
+              class="transporte-icon"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               version="1.1"
@@ -51,20 +44,20 @@
           </div>
         </div>
       </div>
-      <div class="overlay-free" v-if="!getFreeShipping && !soldOut">
+      <div v-if="!getFreeShipping && !soldOut" class="overlay-free">
         <div class="text-free">
           <p class="txt-free">{{ $t('home_cardGratis') }}</p>
         </div>
       </div>
       <div
+        v-if="product.tag_promocion == 1 && product.promocion_valor"
         class="cart-Shop-pro"
-        v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
       >
         <div class="text-cart">
-          <p class="w-full txt-add">{{ this.product.promocion_valor }}% OFF</p>
+          <p class="w-full txt-add">{{ product.promocion_valor }}% OFF</p>
         </div>
       </div>
-      <div class="overlay-polygon" v-if="!getFreeShipping && !soldOut">
+      <div v-if="!getFreeShipping && !soldOut" class="overlay-polygon">
         <svg
           class="icon-overlay-free"
           width="12px"
@@ -74,12 +67,12 @@
           <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
         </svg>
       </div>
-      <div class="overlay-sould" v-if="soldOut">
+      <div v-if="soldOut" class="overlay-sould">
         <div class="text-sould">
           <svg
+            id="Layer_1"
             class="svg-sould-out"
             xmlns="http://www.w3.org/2000/svg"
-            id="Layer_1"
             enable-background="new 0 0 512 512"
             viewBox="0 0 512 512"
           >
@@ -171,51 +164,33 @@
     </div>
     <div class="datos-producto">
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
-        <div class="tittle tittle-xml">
-          <p class="card-title" v-if="this.product.nombre.length >= 90">
-            {{ `${this.product.nombre.slice(0, 90)}...` }}
+        <div class="tittle tittle-xml tittle-lg tittle-sm">
+          <p v-if="product.nombre.length >= 90" class="card-title">
+            {{ `${product.nombre.slice(0, 90)}...` }}
           </p>
-          <p class="card-title" v-else>
-            {{ `${this.product.nombre.slice(0, 90)}` }}
+          <p v-else-if="product.nombre.length >= 54" class="card-title">
+            {{ `${product.nombre.slice(0, 54)}...` }}
           </p>
-        </div>
-        <div class="tittle tittle-lg">
-          <p class="card-title" v-if="this.product.nombre.length >= 54">
-            {{ `${this.product.nombre.slice(0, 54)}...` }}
-          </p>
-          <p class="card-title" v-else>
-            {{ `${this.product.nombre.slice(0, 54)}` }}
-          </p>
-        </div>
-        <div class="tittle tittle-sm">
-          <p class="card-title" v-if="this.product.nombre.length >= 30">
-            {{ `${this.product.nombre.slice(0, 30)}...` }}
-          </p>
-          <p class="card-title" v-else>
-            {{ `${this.product.nombre.slice(0, 30)}` }}
+          <p class="card-title">
+            {{ `${product.nombre.slice(0, 30)}...` }}
           </p>
         </div>
       </nuxt-link>
+
       <div
+        v-if="product.tag_promocion == 1 && product.promocion_valor"
         class="precio"
-        v-if="this.product.tag_promocion == 1 && this.product.promocion_valor"
       >
-        <div class="content-text-price" v-if="this.product.precio">
-          <div
-            class="wrapper-price"
-            v-if="this.estadoCart && this.minPrice != this.maxPrice"
-          >
+        <div v-if="product.precio" class="content-text-price">
+          <div v-if="estadoCart && minPrice != maxPrice" class="wrapper-price">
             <div class="content-price">
               <div
+                v-if="product.precio > 0 || product.precio"
                 class="text-price-promo"
-                v-if="this.product.precio > 0 || this.product.precio"
               >
                 {{
-                  (this.product.tag_promocion == 1 &&
-                  this.product.promocion_valor
-                    ? Math.trunc(
-                        this.minPrice / (1 - this.product.promocion_valor / 100)
-                      )
+                  (product.tag_promocion == 1 && product.promocion_valor
+                    ? Math.trunc(minPrice / (1 - product.promocion_valor / 100))
                     : 0)
                     | currency(
                       dataStore.tienda.codigo_pais,
@@ -225,15 +200,12 @@
               </div>
               <p class="separator-price">-</p>
               <div
+                v-if="product.precio > 0 || product.precio"
                 class="text-price-promo"
-                v-if="this.product.precio > 0 || this.product.precio"
               >
                 {{
-                  (this.product.tag_promocion == 1 &&
-                  this.product.promocion_valor
-                    ? Math.trunc(
-                        this.maxPrice / (1 - this.product.promocion_valor / 100)
-                      )
+                  (product.tag_promocion == 1 && product.promocion_valor
+                    ? Math.trunc(maxPrice / (1 - product.promocion_valor / 100))
                     : 0)
                     | currency(
                       dataStore.tienda.codigo_pais,
@@ -244,11 +216,11 @@
             </div>
             <div class="content-price">
               <div
+                v-if="product.precio > 0 || product.precio"
                 class="text-price"
-                v-if="this.product.precio > 0 || this.product.precio"
               >
                 {{
-                  this.minPrice
+                  minPrice
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -257,11 +229,11 @@
               </div>
               <p class="separator-price">-</p>
               <div
+                v-if="product.precio > 0 || product.precio"
                 class="text-price"
-                v-if="this.product.precio > 0 || this.product.precio"
               >
                 {{
-                  this.maxPrice
+                  maxPrice
                     | currency(
                       dataStore.tienda.codigo_pais,
                       dataStore.tienda.moneda
@@ -272,14 +244,13 @@
           </div>
           <div v-else class="text-center">
             <p
+              v-if="product.precio > 0 || product.precio"
               class="text-price-promo"
-              v-if="this.product.precio > 0 || this.product.precio"
             >
               {{
-                (this.product.tag_promocion == 1 && this.product.promocion_valor
+                (product.tag_promocion == 1 && product.promocion_valor
                   ? Math.trunc(
-                      this.product.precio /
-                        (1 - this.product.promocion_valor / 100)
+                      product.precio / (1 - product.promocion_valor / 100)
                     )
                   : 0)
                   | currency(
@@ -288,12 +259,9 @@
                   )
               }}
             </p>
-            <p
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <p v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.product.precio
+                product.precio
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -304,18 +272,12 @@
         </div>
         <div v-else class="h-27"></div>
       </div>
-      <div class="precio" v-else>
-        <div class="content-text-price" v-if="this.product.precio">
-          <div
-            class="content-price"
-            v-if="this.estadoCart && this.minPrice != this.maxPrice"
-          >
-            <div
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+      <div v-else class="precio">
+        <div v-if="product.precio" class="content-text-price">
+          <div v-if="estadoCart && minPrice != maxPrice" class="content-price">
+            <div v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.minPrice
+                minPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -323,12 +285,9 @@
               }}
             </div>
             <p class="separator-price">-</p>
-            <div
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <div v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.maxPrice
+                maxPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -337,12 +296,9 @@
             </div>
           </div>
           <div v-else>
-            <p
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <p v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.product.precio
+                product.precio
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -361,12 +317,21 @@
 import idCloudinary from '../../../mixins/idCloudinary'
 import currency from '../../../mixins/formatCurrent'
 export default {
+  name: 'Ko11ProductCard',
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductCard-11',
   props: {
-    product: Object,
-    settingGeneral: Object,
-    settingKcardProduct: Object,
+    product: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    settingKcardProduct: {
+      type: Object,
+      required: true,
+    },
   },
 
   data() {
@@ -382,19 +347,6 @@ export default {
       salesData: null,
       spent: false,
       active: true,
-    }
-  },
-  mounted() {
-    this.idSlug = this.product.id
-    this.productPrice()
-    if (
-      this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
-    ) {
-      this.estadoCart = true
-    }
-    if (this.product) {
-      this.getDataProduct()
     }
   },
   computed: {
@@ -453,6 +405,24 @@ export default {
         return !this.product.stock
       }
     },
+  },
+  watch: {
+    productsCarts() {
+      this.getDataProduct()
+    },
+  },
+  mounted() {
+    this.idSlug = this.product.id
+    this.productPrice()
+    if (
+      this.product.con_variante &&
+      this.product.variantes[0].variantes !== '[object Object]'
+    ) {
+      this.estadoCart = true
+    }
+    if (this.product) {
+      this.getDataProduct()
+    }
   },
   methods: {
     getDataProduct() {
@@ -554,11 +524,6 @@ export default {
           }
         }
       }
-    },
-  },
-  watch: {
-    productsCarts(value) {
-      this.getDataProduct()
     },
   },
 }
