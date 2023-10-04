@@ -1,20 +1,17 @@
 <template>
   <div
+    v-if="listProduct.length > 0"
     class="product-content"
     :style="[
       settingKtrending,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
-    v-if="listProduct.length > 0"
   >
     <div class="producto-items-content">
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+      <div ref="mySwiper" v-swiper:mySwiper="swiperOption">
         <div class="swiper-wrapper pb-10">
           <div
             v-for="product in listProduct"
@@ -25,9 +22,9 @@
             <KoproductCard
               :product="product"
               :settingKcardProduct="settingKcardProduct"
-              :settingGeneral="settingGeneral"
+              :setting-general="settingGeneral"
               class="gifyload"
-            ></KoproductCard>
+            />
           </div>
         </div>
         <div class="btn-products">
@@ -43,7 +40,7 @@
 <script>
 import KoproductCard from './_productcard/ProductCard'
 export default {
-  name: 'Ko11-listTrending',
+  name: 'Ko11ListTrending',
   components: {
     KoproductCard,
   },
@@ -77,6 +74,10 @@ export default {
             spaceBetween: 10,
           },
           425: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          0: {
             slidesPerView: 2,
             spaceBetween: 10,
           },

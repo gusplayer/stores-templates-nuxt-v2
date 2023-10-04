@@ -34,9 +34,9 @@
             >
               <KoProductCard
                 :product="product"
-                :productListCard="productListCard"
-                :settingGeneral="settingGeneral"
-              ></KoProductCard>
+                :product-list-card="productListCard"
+                :setting-general="settingGeneral"
+              />
             </div>
           </div>
           <nuxt-link to="/productos" class="cont-product">
@@ -54,6 +54,7 @@
 import KoProductCard from '../template9/_productcard/ProductCard'
 
 export default {
+  name: 'Ko09ProductList',
   components: {
     KoProductCard,
   },
@@ -64,16 +65,22 @@ export default {
     settingGeneral: Object,
     productListCard: Object,
   },
-  name: 'Ko-ProductList',
-  mounted() {
-    this.clear()
-    var el = document.querySelector('.tittle')
-    el.innerHTML = el.innerHTML.replace(/&nbsp;/g, ' ')
-  },
+
   computed: {
     listProducts() {
       return this.fullProducts.slice(0, 8)
     },
+  },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.clear()
+    },
+  },
+  mounted() {
+    this.clear()
+    var el = document.querySelector('.tittle')
+    el.innerHTML = el.innerHTML.replace(/&nbsp;/g, ' ')
   },
   methods: {
     clear() {
@@ -83,12 +90,6 @@ export default {
         type: ['all'],
         data: '',
       })
-    },
-  },
-  watch: {
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.clear()
     },
   },
 }
