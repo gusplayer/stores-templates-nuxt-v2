@@ -29,14 +29,14 @@
       </div>
       <div
         ref="mySwiper"
-        v-swiper:mySwiper="swiperOption"
+        v-swiper:mySwiper="swiperOptions"
         class="w-full h-full"
       >
         <div class="swiper-wrapper w-full h-full">
           <div
             v-for="article in listArticulos"
             :key="article.id"
-            class="swiper-slide w-full h-full"
+            class="swiper-slide w-full"
           >
             <KoBlogCard
               :article="article"
@@ -78,23 +78,15 @@ export default {
 
   data() {
     return {
-      swiperOption: {
+      swiperOptions: {
         slidesPerView: 3,
         spaceBetween: 30,
-        // autoplay: {
-        //   delay: 7000,
-        //   disableOnInteraction: false,
-        // },
         breakpoints: {
-          10000: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          1023: {
+          1024: {
             slidesPerView: 2,
             spaceBetween: 30,
           },
-          580: {
+          0: {
             slidesPerView: 1,
             spaceBetween: 10,
           },
@@ -112,3 +104,10 @@ export default {
   },
 }
 </script>
+<style scoped>
+.giftLoad,
+.swiper-slide {
+  height: 100%;
+  max-width: 400px;
+}
+</style>

@@ -1,15 +1,15 @@
 <template>
   <nuxt-link
     :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
-    class="w-full h-full flex flex-col justify-center items-start wrapper_border"
+    class="w-full h-full flex flex-col justify-between items-start wrapper_border"
     :style="`background-color: ${cardBlog['--background_color_1']}`"
   >
     <div class="relative rounded-5 wrapper-img">
       <img
         v-if="article.imagen_principal_url"
         v-lazy="idCloudinary(article.imagen_principal_url, 400, 400)"
-        class="rounded-5 w-full effect-img max-h-[250px] max-w-[400px]"
-        width="400"
+        class="rounded-5 w-full effect-img max-h-[250px]"
+        width="406"
         height="250"
         alt="right-banner"
       />
@@ -27,12 +27,13 @@
       </div>
     </div>
     <p
-      class="justify-start mb-10 mt-20"
+      class="flex h-full justify-start mb-10 mt-20 px-10"
       :style="`color: ${cardBlog.color_text}; font-size: ${cardBlog.fontSizeText}; font-weight: ${cardBlog.fontWeighText};`"
     >
       Autor: {{ article.autor }}
     </p>
     <p
+      class="px-10 mb-10 h-full min-h-[72px]"
       :style="`color: ${cardBlog.color_title}; font-size: ${cardBlog.fontSizeTitle}; font-weight: ${cardBlog.fontWeighTitle};`"
     >
       {{ article.titulo }}

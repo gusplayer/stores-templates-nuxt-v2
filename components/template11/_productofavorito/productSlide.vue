@@ -1,14 +1,18 @@
 <template>
-  <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+  <div ref="mySwiper" v-swiper:mySwiper="swiperOption">
     <div class="swiper-wrapper">
       <div
-        class="swiper-slide"
-        v-for="(product, index) in this.products"
+        v-for="(product, index) in products"
         :key="index"
+        class="swiper-slide"
         style="margin-right: 40px; height: auto"
       >
         <client-only>
-          <KoProductCard1 :product="product"></KoProductCard1>
+          <KoProductCard1
+            :product="product"
+            :settingKcardProduct="settingCardProduct"
+            :setting-general="settingGeneral"
+          />
         </client-only>
       </div>
     </div>
@@ -16,15 +20,24 @@
 </template>
 
 <script>
-import KoProductCard1 from '../_productcard/ProductCard.vue'
-
 export default {
-  name: 'productSlide-productFavorito',
+  name: 'ProductSlideproductFavorito11',
   components: {
-    KoProductCard1,
+    KoProductCard1: () => import('../_productcard/ProductCard.vue'),
   },
   props: {
-    products: {},
+    products: {
+      type: Array,
+      required: true,
+    },
+    settingCardProduct: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
