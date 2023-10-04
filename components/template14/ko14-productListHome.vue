@@ -29,7 +29,7 @@
       </div>
       <div
         ref="mySwiper"
-        v-swiper:mySwiper="swiperOption"
+        v-swiper:mySwiper="swiperOptions"
         class="w-full relative"
       >
         <div class="swiper-wrapper w-full">
@@ -81,7 +81,7 @@ export default {
   },
   data() {
     return {
-      swiperOption: {
+      swiperOptions: {
         direction: 'horizontal',
         setWrapperSize: true,
         paginationClickable: true,

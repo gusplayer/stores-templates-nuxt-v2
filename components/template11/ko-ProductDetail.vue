@@ -324,7 +324,11 @@
         <OptionTab :dataStore="dataStore" :data="data" :envio="envio" />
       </div>
       <div class="section-suggesProduct">
-        <KoSuggesProduct :category="this.category.slice(0, 8)" />
+        <KoSuggesProduct
+          :category="category.slice(0, 8)"
+          :setting-card-product="settingByTemplate11[0].cardProduct"
+          :setting-general="settingByTemplate11[0].settingGeneral"
+        />
       </div>
     </div>
   </div>
@@ -334,16 +338,7 @@ import axios from 'axios'
 import idCloudinary from '../../mixins/idCloudinary'
 import currency from '../../mixins/formatCurrent'
 export default {
-  mixins: [idCloudinary, currency],
-  name: 'Ko-ProductDetail',
-  props: {
-    dataStore: Object,
-    productsData: Array,
-    whatsapp: String,
-    envios: Object,
-    facebookPixel: Object,
-    settingByTemplate11: Array,
-  },
+  name: 'Ko11ProductDetail',
   components: {
     OptionTab: () => import('./_productdetails/OptTab'),
     SelectGroup: () => import('./_productdetails/selectGroup'),
@@ -351,28 +346,22 @@ export default {
     ProductSlide: () => import('./_productdetails/productSlide'),
     Zoom: () => import('./_productdetails/zoomImg'),
   },
-  mounted() {
-    this.$store.state.beforeCombination = []
-    if (
-      this.productsData &&
-      this.productsData.length &&
-      this.productsData.length > 0
-    ) {
-      this.getDataProduct()
-    } else {
-      this.getDataProductPrev()
-    }
-    if (Object.keys(this.dataStore.medios_envio).length) {
-      this.setOptionEnvio()
-    }
-    if (
-      this.$route.query &&
-      this.$route.query.userId &&
-      this.$route.query.userName
-    ) {
-      this.userDropshipping.userId = this.$route.query.userId
-      this.userDropshipping.userName = this.$route.query.userName
-    }
+  filters: {
+    toLowerCase(value) {
+      if (value) {
+        return value.toLowerCase()
+      }
+      return ''
+    },
+  },
+  mixins: [idCloudinary, currency],
+  props: {
+    dataStore: Object,
+    productsData: Array,
+    whatsapp: String,
+    envios: Object,
+    facebookPixel: Object,
+    settingByTemplate11: Array,
   },
   data() {
     return {
@@ -420,6 +409,118 @@ export default {
       },
     }
   },
+  head() {
+    return {
+      title: `Vista del producto ${
+        this.data && this.data.detalle ? this.data.detalle.nombre : ''
+      }`,
+      meta: [
+        {
+          hid: 'product:catalog_id',
+          property: 'product:catalog_id',
+          content: this.data && this.data.detalle ? this.data.detalle.id : '',
+        },
+
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            this.data && this.data.detalle ? this.data.detalle.nombre : '',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: this.sharing && this.sharing.url ? this.sharing.url : '',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            this.data && this.data.info ? this.data.info.descripcion_corta : '',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content:
+            this.data && this.data.detalle
+              ? this.data.detalle.foto_cloudinary
+              : '',
+        },
+        {
+          hid: 'og:price:amount',
+          property: 'og:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+        },
+        {
+          hid: 'og:price:currency',
+          property: 'og:price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+        {
+          hid: 'product:brand',
+          property: 'product:brand',
+          content:
+            this.data && this.data.info && this.data.info.marca
+              ? this.data.info.marca
+              : '',
+        },
+        {
+          hid: 'product:availability',
+          property: 'product:availability',
+          content:
+            this.salesData && this.salesData.unidades > 0
+              ? 'in stock'
+              : 'out of stock',
+        },
+        {
+          hid: 'product:condition',
+          property: 'product:condition',
+          content: 'new',
+        },
+        {
+          hid: 'product:price:amount',
+          property: 'product:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+        },
+        {
+          hid: 'product:price:currency',
+          property: 'product:price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+        {
+          hid: 'product:sale_price:amount',
+          property: 'product:sale_price:amount',
+          content:
+            this.data &&
+            this.data.info &&
+            this.data.info.tag_promocion == 1 &&
+            this.data.info.promocion_valor
+              ? Math.trunc(
+                  this.salesData.precio /
+                    (1 - this.data.info.promocion_valor / 100)
+                )
+              : '',
+        },
+        {
+          hid: 'product:sale_price:currency',
+          property: 'product:sale_price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+      ],
+    }
+  },
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
@@ -456,6 +557,96 @@ export default {
           product.id !== this.data.detalle.id
       )
     },
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.tienda.red_facebook
+      this.links[1].link = this.dataStore.tienda.red_twitter
+      this.links[2].link = this.dataStore.tienda.red_instagram
+      this.links[3].link = this.dataStore.tienda.red_youtube
+    },
+    productsData() {
+      this.getDataProduct()
+    },
+    envios() {
+      this.setOptionEnvio()
+    },
+    quantityValue(value) {
+      if (value > this.maxQuantityValue) {
+        this.quantityValue = this.maxQuantityValue
+      }
+    },
+    beforeCombination(value) {
+      const combinationSelected = JSON.stringify(value)
+      if (this.data.combinaciones) {
+        if (
+          this.data.combinaciones.combinaciones !== '[object Object]' &&
+          this.data.detalle.con_variante > 0
+        ) {
+          const combinaciones = JSON.parse(
+            this.data.combinaciones.combinaciones
+          )
+          const result = combinaciones.find(
+            (combinacion) =>
+              JSON.stringify(combinacion.combinacion) == combinationSelected
+          )
+          this.productCart = []
+          this.productIndexCart = null
+          for (const [
+            index,
+            productCart,
+          ] of this.$store.state.productsCart.entries()) {
+            if (
+              this.data.detalle.id == productCart.id &&
+              JSON.stringify(productCart.combinacion) ==
+                JSON.stringify(result.combinacion)
+            ) {
+              this.productIndexCart = index
+              this.productCart = productCart
+            }
+          }
+          if (result) {
+            this.spent = false
+            this.maxQuantityValue = result.unidades
+            if (result.unidades == 0) {
+              this.spent = true
+            }
+            if (this.productCart.cantidad) {
+              this.maxQuantityValue =
+                parseInt(result.unidades) - this.productCart.cantidad
+              if (this.maxQuantityValue <= 0) {
+                this.spent = true
+              }
+            }
+            this.salesData = result
+            this.quantityValue = 1
+          }
+        }
+      }
+    },
+  },
+  mounted() {
+    this.$store.state.beforeCombination = []
+    if (
+      this.productsData &&
+      this.productsData.length &&
+      this.productsData.length > 0
+    ) {
+      this.getDataProduct()
+    } else {
+      this.getDataProductPrev()
+    }
+    if (Object.keys(this.dataStore.medios_envio).length) {
+      this.setOptionEnvio()
+    }
+    if (
+      this.$route.query &&
+      this.$route.query.userId &&
+      this.$route.query.userName
+    ) {
+      this.userDropshipping.userId = this.$route.query.userId
+      this.userDropshipping.userName = this.$route.query.userName
+    }
   },
   methods: {
     changeSlide() {
@@ -751,193 +942,6 @@ export default {
         window.open(`${baseUrlPc}text=${text}`, '_blank')
       }
     },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-    },
-    productsData() {
-      this.getDataProduct()
-    },
-    envios() {
-      this.setOptionEnvio()
-    },
-    quantityValue(value) {
-      if (value > this.maxQuantityValue) {
-        this.quantityValue = this.maxQuantityValue
-      }
-    },
-    beforeCombination(value) {
-      const combinationSelected = JSON.stringify(value)
-      if (this.data.combinaciones) {
-        if (
-          this.data.combinaciones.combinaciones !== '[object Object]' &&
-          this.data.detalle.con_variante > 0
-        ) {
-          const combinaciones = JSON.parse(
-            this.data.combinaciones.combinaciones
-          )
-          const result = combinaciones.find(
-            (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
-          )
-          this.productCart = []
-          this.productIndexCart = null
-          for (const [
-            index,
-            productCart,
-          ] of this.$store.state.productsCart.entries()) {
-            if (
-              this.data.detalle.id == productCart.id &&
-              JSON.stringify(productCart.combinacion) ==
-                JSON.stringify(result.combinacion)
-            ) {
-              this.productIndexCart = index
-              this.productCart = productCart
-            }
-          }
-          if (result) {
-            this.spent = false
-            this.maxQuantityValue = result.unidades
-            if (result.unidades == 0) {
-              this.spent = true
-            }
-            if (this.productCart.cantidad) {
-              this.maxQuantityValue =
-                parseInt(result.unidades) - this.productCart.cantidad
-              if (this.maxQuantityValue <= 0) {
-                this.spent = true
-              }
-            }
-            this.salesData = result
-            this.quantityValue = 1
-          }
-        }
-      }
-    },
-  },
-  filters: {
-    toLowerCase(value) {
-      if (value) {
-        return value.toLowerCase()
-      }
-      return ''
-    },
-  },
-  head() {
-    return {
-      title: `Vista del producto ${
-        this.data && this.data.detalle ? this.data.detalle.nombre : ''
-      }`,
-      meta: [
-        {
-          hid: 'product:catalog_id',
-          property: 'product:catalog_id',
-          content: this.data && this.data.detalle ? this.data.detalle.id : '',
-        },
-
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content:
-            this.data && this.data.detalle ? this.data.detalle.nombre : '',
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.sharing && this.sharing.url ? this.sharing.url : '',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content:
-            this.data && this.data.info ? this.data.info.descripcion_corta : '',
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content:
-            this.data && this.data.detalle
-              ? this.data.detalle.foto_cloudinary
-              : '',
-        },
-        {
-          hid: 'og:price:amount',
-          property: 'og:price:amount',
-          content:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : '',
-        },
-        {
-          hid: 'og:price:currency',
-          property: 'og:price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-        {
-          hid: 'product:brand',
-          property: 'product:brand',
-          content:
-            this.data && this.data.info && this.data.info.marca
-              ? this.data.info.marca
-              : '',
-        },
-        {
-          hid: 'product:availability',
-          property: 'product:availability',
-          content:
-            this.salesData && this.salesData.unidades > 0
-              ? 'in stock'
-              : 'out of stock',
-        },
-        {
-          hid: 'product:condition',
-          property: 'product:condition',
-          content: 'new',
-        },
-        {
-          hid: 'product:price:amount',
-          property: 'product:price:amount',
-          content:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : '',
-        },
-        {
-          hid: 'product:price:currency',
-          property: 'product:price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-        {
-          hid: 'product:sale_price:amount',
-          property: 'product:sale_price:amount',
-          content:
-            this.data &&
-            this.data.info &&
-            this.data.info.tag_promocion == 1 &&
-            this.data.info.promocion_valor
-              ? Math.trunc(
-                  this.salesData.precio /
-                    (1 - this.data.info.promocion_valor / 100)
-                )
-              : '',
-        },
-        {
-          hid: 'product:sale_price:currency',
-          property: 'product:sale_price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-      ],
-    }
   },
   jsonld() {
     return {

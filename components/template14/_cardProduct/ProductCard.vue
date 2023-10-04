@@ -1,7 +1,7 @@
 <template>
   <div
     id="product-card"
-    class="h-full w-full flex flex-col justify-start items-center shadow-md border rounded-5 cursor-pointer relative wrapper_container"
+    class="h-full w-full flex flex-col justify-between items-center shadow-md border rounded-5 cursor-pointer relative wrapper_container"
     :style="[settingGeneral, cardProducts]"
   >
     <div class="relative max-w-full h-full container">
@@ -35,15 +35,14 @@
     <div
       class="w-full h-full flex flex-col justify-between items-center my-6 mx-10 cursor-default relative box-border"
     >
-      <nuxt-link :to="{ path: `/productos/` + product.slug }">
-        <div class="w-full flex justify-center items-center">
-          <p
-            class="h-full pt-10 transition-all ease-out duration-0.2 text-center card-title"
-          >
-            {{ product.nombre.slice(0, 54) }}
-            {{ product.nombre.length >= 54 ? '...' : '' }}
-          </p>
-        </div>
+      <nuxt-link
+        :to="{ path: `/productos/` + product.slug }"
+        class="w-full h-full text-center pt-10 transition-all ease-out duration-0.2 min-h-[91px] md:min-h-[64px] card-title"
+      >
+        {{
+          product.nombre.slice(0, 54) +
+          (product.nombre.length >= 54 ? '...' : '')
+        }}
       </nuxt-link>
       <div class="mt-10">
         <div v-if="estadoCart && equalsPrice && minPrice">

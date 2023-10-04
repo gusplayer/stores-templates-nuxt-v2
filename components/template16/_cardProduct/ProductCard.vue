@@ -45,8 +45,10 @@
           <p
             class="h-full pt-10 transition-all ease-out duration-0.2 text-center min-h-[58px] max-h-[58px] card-title"
           >
-            {{ product.nombre.slice(0, 54) }}
-            {{ product.nombre.length >= 54 ? '...' : '' }}
+            {{
+              product.nombre.slice(0, 54) +
+              (product.nombre.length >= 54 ? '...' : '')
+            }}
           </p>
         </div>
       </nuxt-link>
