@@ -109,10 +109,9 @@
                 </p>
               </div>
             </div>
-            <filterOutLine-icon
-              class="flex md:hidden text-25"
-              @click="openMenuLateral"
-            />
+            <div class="flex md:hidden">
+              <filterOutLine-icon class="text-25" @click="openMenuLateral" />
+            </div>
           </div>
           <div class="w-full h-full flex flex-col justify-center items-center">
             <div

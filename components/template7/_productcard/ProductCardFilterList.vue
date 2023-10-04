@@ -5,28 +5,20 @@
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
       >
-        <client-only>
-          <img
-            v-if="!soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 550, 550)"
-            class="product-image"
-            alt="Product Img"
-          />
-          <img
-            v-if="soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 550, 550)"
-            class="product-image-soldOut"
-            alt="Product Img"
-          />
-        </client-only>
+        <img
+          v-lazy="idCloudinary(product.foto_cloudinary, 550, 550)"
+          class="product-image"
+          :class="{ 'product-image-soldOut': soldOut }"
+          alt="Product Img"
+        />
         <div class="image_overlay"></div>
       </nuxt-link>
-      <div class="overlay-sould" v-if="soldOut">
+      <div v-if="soldOut" class="overlay-sould">
         <div class="text-sould">
           <svg
+            id="Layer_1"
             class="svg-sould-out"
             xmlns="http://www.w3.org/2000/svg"
-            id="Layer_1"
             enable-background="new 0 0 512 512"
             viewBox="0 0 512 512"
           >
@@ -105,15 +97,14 @@
         </div>
       </div>
       <div
-        class="overlay-bottom"
-        @click="addShoppingCart"
         v-if="
-          !this.estadoCart &&
+          !estadoCart &&
           !soldOut &&
           !spent &&
-          (this.product.tipo_servicio == null ||
-            this.product.tipo_servicio == '0')
+          (product.tipo_servicio == null || product.tipo_servicio == '0')
         "
+        class="overlay-bottom"
+        @click="addShoppingCart"
       >
         <div class="cart-shop-mobile">
           <div class="icon-cart">
@@ -125,15 +116,15 @@
           @mouseover="hover = true"
           @mouseleave="hover = false"
         >
-          <div class="text-cart" v-if="!hover">
+          <div v-if="!hover" class="text-cart">
             <p class="w-full">{{ $t('productdetail_añadiralcarrito') }}</p>
           </div>
-          <div class="icon-cart" v-if="hover">
+          <div v-if="hover" class="icon-cart">
             <cart-icon class="icon" />
           </div>
         </div>
       </div>
-      <div class="overlay-bottom" v-else>
+      <div v-else class="overlay-bottom">
         <div class="cart-shop-mobile">
           <svg
             class="icon-show-mobile"
@@ -160,22 +151,22 @@
     </div>
     <div class="datos-producto">
       <div class="tittle">
-        <p class="card-title" v-if="this.product.nombre.length >= 54">
-          {{ `${this.product.nombre.slice(0, 54)}...` }}
-        </p>
-        <p class="card-title" v-else>
-          {{ `${this.product.nombre.slice(0, 54)}` }}
+        <p class="card-title">
+          {{
+            product.nombre.slice(0, 54) +
+            (product.nombre.length >= 54 ? '...' : '')
+          }}
         </p>
       </div>
-      <div class="categoria" v-if="this.product.categoria">
-        {{ this.product.categoria }}
+      <div v-if="product.categoria" class="categoria">
+        {{ product.categoria }}
       </div>
       <div class="precio">
-        <div class="content-text-price" v-if="this.product.precio">
-          <div v-if="this.estadoCart && this.equalsPrice">
-            <p class="text-price" v-if="this.minPrice">
+        <div v-if="product.precio" class="content-text-price">
+          <div v-if="estadoCart && equalsPrice">
+            <p v-if="minPrice" class="text-price">
               {{
-                this.minPrice
+                minPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -184,19 +175,12 @@
             </p>
           </div>
           <div
+            v-else-if="estadoCart && minPrice != maxPrice && !equalsPrice"
             class="content-price flex flex-row"
-            v-else-if="
-              this.estadoCart &&
-              this.minPrice != this.maxPrice &&
-              !this.equalsPrice
-            "
           >
-            <div
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <div v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.minPrice
+                minPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -204,12 +188,9 @@
               }}
             </div>
             <p class="separator-price mx-4">-</p>
-            <div
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <div v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.maxPrice
+                maxPrice
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -218,12 +199,9 @@
             </div>
           </div>
           <div v-else>
-            <p
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <p v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.product.precio
+                product.precio
                   | currency(
                     dataStore.tienda.codigo_pais,
                     dataStore.tienda.moneda
@@ -256,7 +234,7 @@
           </div>
         </div>
         <!-- Producto agotado -->
-        <div class="content_card-info" v-if="soldOut">
+        <div v-if="soldOut" class="content_card-info">
           <div class="icon-card-info-sould">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -347,23 +325,22 @@
       <!-- Btn comprar -->
       <div class="content-button">
         <button
-          ref="colorBtn"
-          class="btn"
           v-if="
-            !this.estadoCart &&
+            !estadoCart &&
             !soldOut &&
             !spent &&
-            (this.product.tipo_servicio == null ||
-              this.product.tipo_servicio == '0')
+            (product.tipo_servicio == null || product.tipo_servicio == '0')
           "
-          @click="addShoppingCart"
           id="AddToCartTag"
+          ref="colorBtn"
+          class="btn"
+          @click="addShoppingCart"
         >
           <p class="txt-btn-product">
             {{ $t('productdetail_añadiralcarrito') }}
           </p>
         </button>
-        <button disabled class="btn-disabled" v-else-if="soldOut">
+        <button v-else-if="soldOut" disabled class="btn-disabled">
           <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
         </button>
         <nuxt-link
@@ -384,10 +361,14 @@ import idCloudinary from '../../../mixins/idCloudinary'
 import currency from '../../../mixins/formatCurrent'
 
 export default {
+  name: 'K07ProductCardList',
   mixins: [idCloudinary, currency],
-  name: 'K07-ProductCard-1',
-  props: { product: Object },
-
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       hover: false,
@@ -402,19 +383,6 @@ export default {
       spent: false,
       active: true,
       equalsPrice: false,
-    }
-  },
-  mounted() {
-    this.idSlug = this.product.id
-    this.productPrice()
-    if (
-      this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
-    ) {
-      this.estadoCart = true
-    }
-    if (this.product) {
-      this.getDataProduct()
     }
   },
   computed: {
@@ -434,6 +402,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },
@@ -472,6 +441,24 @@ export default {
         return !this.product.stock
       }
     },
+  },
+  watch: {
+    productsCarts() {
+      this.getDataProduct()
+    },
+  },
+  mounted() {
+    this.idSlug = this.product.id
+    this.productPrice()
+    if (
+      this.product.con_variante &&
+      this.product.variantes[0].variantes !== '[object Object]'
+    ) {
+      this.estadoCart = true
+    }
+    if (this.product) {
+      this.getDataProduct()
+    }
   },
   methods: {
     getDataProduct() {
@@ -578,11 +565,6 @@ export default {
           }
         }
       }
-    },
-  },
-  watch: {
-    productsCarts(value) {
-      this.getDataProduct()
     },
   },
 }

@@ -13,8 +13,8 @@
         :srcset="idCloudinaryBanner(banner.banner_footer, 'banner')"
       />
       <img
-        loading="lazy"
         v-lazy="idCloudinaryBanner(banner.banner_footer, 'banner')"
+        loading="lazy"
         class="w-full h-full object-cover object-center"
         alt="Banner_tienda_template5"
       />

@@ -6,44 +6,24 @@
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
-          <client-only>
-            <img
-              v-if="!soldOut"
-              v-lazy="
-                product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                  : idCloudinary(product.foto_cloudinary, 550, 550)
-              "
-              width="294"
-              height="294"
-              loading="lazy"
-              class="product-image"
-              :class="
-                product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'notproduct-image'
-                  : ''
-              "
-              alt="Product Img"
-            />
-            <img
-              v-if="soldOut"
-              v-lazy="
-                product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                  : idCloudinary(product.foto_cloudinary, 550, 550)
-              "
-              width="294"
-              height="294"
-              loading="lazy"
-              class="product-image-soldOut"
-              :class="
-                product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'notproduct-image'
-                  : ''
-              "
-              alt="Product Img"
-            />
-          </client-only>
+          <img
+            v-lazy="
+              product.foto_cloudinary === 'sin_foto.jpeg'
+                ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                : idCloudinary(product.foto_cloudinary, 550, 550)
+            "
+            width="294"
+            height="294"
+            loading="lazy"
+            :class="[
+              'product-image',
+              soldOut ? 'product-image-soldOut' : '',
+              product.foto_cloudinary === 'sin_foto.jpeg'
+                ? 'notproduct-image'
+                : '',
+            ]"
+            alt="Product Img"
+          />
           <div class="image_overlay"></div>
         </nuxt-link>
         <div v-if="product.tag_promocion == 1 && product.promocion_valor">
@@ -76,11 +56,11 @@
               {{ $t('home_cardGratis') }}
             </p>
             <div class="content-name-product">
-              <p v-if="product.nombre.length >= 54" class="card-title">
-                {{ `${product.nombre.slice(0, 54)}...` }}
-              </p>
-              <p v-else class="card-title">
-                {{ `${product.nombre.slice(0, 54)}` }}
+              <p class="card-title">
+                {{
+                  product.nombre.slice(0, 54) +
+                  (product.nombre.length >= 54 ? '...' : '')
+                }}
               </p>
             </div>
             <div v-if="product.precio" class="content-text-price">
@@ -173,44 +153,23 @@
           :to="{ path: `/productos/` + product.slug }"
           class="wrapper-image"
         >
-          <client-only>
-            <img
-              v-if="!soldOut"
-              v-lazy="
-                product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                  : idCloudinary(product.foto_cloudinary, 400, 400)
-              "
-              width="294"
-              height="294"
-              loading="lazy"
-              :class="
-                product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'notproduct-image-res'
-                  : ''
-              "
-              class="product-image"
-              alt="Product Img"
-            />
-            <img
-              v-if="soldOut"
-              v-lazy="
-                product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                  : idCloudinary(product.foto_cloudinary, 400, 400)
-              "
-              width="294"
-              height="294"
-              loading="lazy"
-              :class="
-                product.foto_cloudinary == 'sin_foto.jpeg'
-                  ? 'notproduct-image-res'
-                  : ''
-              "
-              class="product-image-soldOut"
-              alt="Product Img"
-            />
-          </client-only>
+          <img
+            v-lazy="
+              product.foto_cloudinary === 'sin_foto.jpeg'
+                ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                : idCloudinary(product.foto_cloudinary, 400, 400)
+            "
+            width="294"
+            height="294"
+            loading="lazy"
+            :class="[
+              !soldOut ? 'product-image' : 'product-image-soldOut',
+              product.foto_cloudinary === 'sin_foto.jpeg'
+                ? 'notproduct-image-res'
+                : '',
+            ]"
+            alt="Product Img"
+          />
         </nuxt-link>
         <div class="content-card-items">
           <p v-if="soldOut" class="card-info-1">{{ $t('home_cardAgotado') }}</p>
@@ -221,11 +180,11 @@
             :to="{ path: `/productos/` + product.slug }"
             class="content-name-product"
           >
-            <p v-if="product.nombre.length >= 25" class="card-title">
-              {{ `${product.nombre.slice(0, 25)}..` }}
-            </p>
-            <p v-else class="card-title">
-              {{ `${product.nombre.slice(0, 30)}` }}
+            <p class="card-title">
+              {{
+                product.nombre.slice(0, 54) +
+                (product.nombre.length >= 54 ? '...' : '')
+              }}
             </p>
           </nuxt-link>
           <div v-if="product.precio" class="content-text-price">
