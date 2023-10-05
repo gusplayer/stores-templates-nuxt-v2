@@ -542,15 +542,20 @@ export const actions = {
       console.log('Data setting NODE', err.response)
     }
   },
-  // async GET_SETTINGS_BY_TEMPLATE_AWS({ commit, state }, store) {
+  // async GET_SETTINGS_BY_TEMPLATE_AWS(
+  //   { commit, state },
+  //   { templateStore, subdominio }
+  // ) {
+
   //   try {
   //     const { data } = await axios({
   //       method: 'GET',
-  //       url: `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${store.subdominio}`,
+  //       url: `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${subdominio}`,
   //     })
+  //     console.log(data)
   //     if (data) {
   //       commit(`SET_SETTINGS_BY_TEMPLATE`, {
-  //         templateNumber: store.template,
+  //         templateNumber: templateStore,
   //         value: data.data.webSiteTemplate,
   //       })
   //     }
@@ -1112,6 +1117,7 @@ async function getIdData(state, req, commit) {
   let subdomain = parts[0]
   let id = 0
   let template = 0
+  // let webSite = false
   let idWapi = null
 
   if (
@@ -1127,6 +1133,7 @@ async function getIdData(state, req, commit) {
     )
     id = response.data.data.id || response.data.data.storeId
     template = response.data.data.templateNumber || response.data.data.template
+    // webSite = response.data?.data?.templateNumber ?? null
     if (template === 15) {
       commit(`SET_SETTINGS_BY_TEMPLATE`, {
         templateNumber: template,
@@ -1139,6 +1146,7 @@ async function getIdData(state, req, commit) {
     )
     id = response.data.data.id || response.data.data.storeId
     template = response.data.data.templateNumber || response.data.data.template
+    // webSite = response.data?.data?.templateNumber ?? null
     if (template === 15) {
       commit(`SET_SETTINGS_BY_TEMPLATE`, {
         templateNumber: template,
@@ -1158,7 +1166,6 @@ async function getIdData(state, req, commit) {
   //     name: domainURL,
   //   })
   // }
-
   return { subdomain, id, template, idWapi }
 }
 
@@ -1180,14 +1187,14 @@ async function handleKomercia(id, template, commit, dispatch) {
     await dispatch('GET_DATA_HOKO', id)
 
     if (
-      template == 7 ||
-      template == 9 ||
-      template == 10 ||
-      template == 11 ||
-      template == 12 ||
-      template == 13 ||
-      template == 14 ||
-      template == 16
+      template === 7 ||
+      template === 9 ||
+      template === 10 ||
+      template === 11 ||
+      template === 12 ||
+      template === 13 ||
+      template === 14 ||
+      template === 16
     ) {
       if (id && template) {
         await dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', {
@@ -1195,7 +1202,16 @@ async function handleKomercia(id, template, commit, dispatch) {
           idStore: id,
         })
       }
-    } else if (template == 5 || template == 99) {
+    }
+    // else if (template === 15 && webSite === null) {
+    //   if (id && template) {
+    //     await dispatch('GET_SETTINGS_BY_TEMPLATE_AWS', {
+    //       templateStore: template,
+    //       subdominio: state.dataStore.tienda.subdominio,
+    //     })
+    //   }
+    // }
+    else if (template === 5 || template === 99) {
       if (id && template) {
         await dispatch('GET_SETTINGS_BY_TEMPLATE', {
           templateStore: template,

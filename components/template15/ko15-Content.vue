@@ -123,13 +123,13 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko15-content',
+  name: 'Ko15Content',
+  mixins: [idCloudinary],
   props: {
     content: Object,
     settingGeneral: Object,
     dataStore: Object,
   },
-  mixins: [idCloudinary],
 }
 </script>
 <style scoped>

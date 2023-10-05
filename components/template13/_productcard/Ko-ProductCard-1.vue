@@ -669,7 +669,7 @@ export default {
   width: 130px;
   opacity: 0;
   height: 41px;
-  color: var(--color_text_btn);
+  color: var(--color_text_card);
   border-radius: var(--radius_btn);
   border: solid 2px var(--color_border_btn);
   background-color: var(--color_background_btn);

@@ -1,23 +1,17 @@
 <template>
   <div
+    v-if="listProducts.length > 0"
     class="product-content"
     :style="[productList, settingGeneral]"
-    v-if="this.listProducts.length > 0"
   >
     <div
       class="producto-items-content"
       :style="[
         {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Poppins',
+          '--font-style-1': settingGeneral.fount_1 ?? 'Poppins',
         },
         {
-          '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
-              : 'Roboto',
+          '--font-style-2': settingGeneral.fount_2 ?? 'Roboto',
         },
       ]"
     >

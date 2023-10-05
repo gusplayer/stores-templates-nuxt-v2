@@ -139,6 +139,9 @@ export default {
             case 'productList':
               this.moverseA('KProductListX')
               break
+            case 'cardProduct':
+              this.moverseA('KProductListX')
+              break
             case 'blog':
               this.moverseA('KBlogX')
               break
