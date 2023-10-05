@@ -1,18 +1,18 @@
 <template>
   <div
+    v-if="settingByTemplate13"
     class="product-content"
     :style="[
       settingByTemplate13[0].settingGeneral,
       settingByTemplate13[0].productListFilter,
     ]"
-    v-if="settingByTemplate13"
   >
     <div
       class="container-product-max-w"
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate13[0]?.settingGeneral?.fount_1 ?? 'Poppins',
+            settingByTemplate13[0]?.settingGeneral?.fount_1 ?? 'Poppins',
         },
       ]"
     >
@@ -26,16 +26,16 @@
           <el-collapse v-model="activeNames">
             <el-collapse-item :title="$t('header_buscar_producto')" name="1">
               <input
+                v-model="search"
                 class="input-slide"
                 type="search"
-                v-model="search"
                 :placeholder="$t('header_search')"
               />
             </el-collapse-item>
             <el-collapse-item
+              v-show="categorias.length > 0"
               :title="$t('productdetail_categoria')"
               name="2"
-              v-show="categorias.length > 0"
             >
               <div class="categorys-list">
                 <div
@@ -63,13 +63,13 @@
               </div>
             </el-collapse-item>
             <el-collapse-item
+              v-show="showSubCategory && selectedSubcategories.length"
               :title="$t('home_subcategory')"
               name="3"
-              v-show="showSubCategory && selectedSubcategories.length"
             >
               <div
-                class="subcategory-list"
                 v-show="showSubCategory && selectedSubcategories.length"
+                class="subcategory-list"
               >
                 <div
                   v-for="(subcategorys, index) in selectedSubcategories"
@@ -92,24 +92,31 @@
             </el-collapse-item>
             <div
               v-for="(itemsTags, index) in allTags"
-              :key="index"
               v-show="allTags && allTags.length > 0"
+              :key="index"
             >
               <el-collapse-item
-                :title="itemsTags.name"
-                :name="6 + index"
                 v-if="
                   itemsTags &&
                   itemsTags.status === 1 &&
                   itemsTags.properties.length > 0
                 "
+                :title="itemsTags.name"
+                :name="6 + index"
               >
                 <div class="categorys-list">
                   <button
-                    class="txt-Filter"
                     v-for="itemsProperties in itemsTags.properties"
-                    :key="itemsProperties.id"
                     v-show="itemsProperties.status === 1"
+                    :key="itemsProperties.id"
+                    class="txt-Filter"
+                    :class="
+                      itemsProperties.name == etiqueta1
+                        ? 'txt-categorys-active'
+                        : '' || itemsProperties.name == etiqueta2
+                        ? 'txt-categorys-active'
+                        : ''
+                    "
                     @click="
                       getProductsFilter(
                         'tag',
@@ -118,13 +125,6 @@
                         false
                       )
                     "
-                    :class="
-                      itemsProperties.name == etiqueta1
-                        ? 'txt-categorys-active'
-                        : '' || itemsProperties.name == etiqueta2
-                        ? 'txt-categorys-active'
-                        : ''
-                    "
                   >
                     {{ itemsProperties.name }}
                   </button>
@@ -132,9 +132,9 @@
               </el-collapse-item>
             </div>
             <el-collapse-item
+              v-show="!stateShipping"
               :title="$t('home_fenvio')"
               name="4"
-              v-show="!stateShipping"
             >
               <div class="categorys-list">
                 <button
@@ -178,42 +178,40 @@
           <div class="empty hidd"></div>
           <div class="content-banner-shop-r">
             <div class="tittle-banner-shop">
-              <p class="btn-tittle-shop" v-if="!this.nameCategoryHeader">
+              <p v-if="!nameCategoryHeader" class="btn-tittle-shop">
                 {{ $t('header_productos') }}
               </p>
-              <div class="flex flex-col justify-start" v-else>
+              <div v-else class="flex flex-col justify-start">
                 <p class="btn-tittle-shop">
-                  {{ this.nameCategoryHeader }}
+                  {{ nameCategoryHeader }}
                 </p>
                 <!-- v-if="selectSubcategory" -->
                 <div class="flex flex-row">
-                  <p class="text-12 mr-4" v-if="this.nameSubCategoryHeader">
-                    {{ this.nameSubCategoryHeader }}
+                  <p v-if="nameSubCategoryHeader" class="text-12 mr-4">
+                    {{ nameSubCategoryHeader }}
                   </p>
                   <p
+                    v-if="nameSubCategoryHeader && etiqueta1"
                     class="text-12 mr-4"
-                    v-if="this.nameSubCategoryHeader && this.etiqueta1"
                   >
                     /
                   </p>
-                  <p class="text-12" v-if="this.etiqueta1">
-                    {{ this.etiqueta1 }}
+                  <p v-if="etiqueta1" class="text-12">
+                    {{ etiqueta1 }}
                   </p>
-                  <p class="ml-4 text-12" v-if="this.etiqueta2">
-                    / {{ this.etiqueta2 }}
-                  </p>
+                  <p v-if="etiqueta2" class="ml-4 text-12">/ {{ etiqueta2 }}</p>
                 </div>
               </div>
               <div
-                class="flex flex-col justify-start"
                 v-if="
-                  this.etiqueta1 &&
-                  this.nameCategoryHeader == '' &&
-                  this.nameSubCategoryHeader == ''
+                  etiqueta1 &&
+                  nameCategoryHeader == '' &&
+                  nameSubCategoryHeader == ''
                 "
+                class="flex flex-col justify-start"
               >
-                <p class="text-12" v-if="this.etiqueta1">
-                  {{ this.etiqueta1 }}
+                <p v-if="etiqueta1" class="text-12">
+                  {{ etiqueta1 }}
                 </p>
               </div>
             </div>
@@ -230,13 +228,13 @@
                     <KoProductCardFilter
                       :product="product"
                       class="product-list"
-                      :cardProduct="settingByTemplate13[0].cardProduct"
-                      :settingGeneral="settingByTemplate13[0].settingGeneral"
-                    ></KoProductCardFilter>
+                      :card-product="settingByTemplate13[0].cardProduct"
+                      :setting-general="settingByTemplate13[0].settingGeneral"
+                    />
                   </div>
                 </div>
                 <div
-                  v-if="this.fullProducts.length == 0"
+                  v-if="fullProducts.length == 0"
                   class="content-products-empty"
                 >
                   <div class="header-content-logo">
@@ -255,17 +253,17 @@
                 </div>
                 <div class="pagination-medium">
                   <div
+                    v-if="fullProducts.length > numVistas"
                     class="product_pagination"
-                    v-if="fullProducts.length > this.numVistas"
                   >
                     <el-pagination
                       background
                       layout="prev, pager, next"
                       :total="fullProducts.length"
-                      :page-size="this.numVistas"
+                      :page-size="numVistas"
                       :current-page.sync="currentPage"
                       class="pagination"
-                    ></el-pagination>
+                    />
                   </div>
                 </div>
               </div>
@@ -281,22 +279,16 @@
 import KoProductCardFilter from './_productcard/Ko-ProductCard-1.vue'
 import filterProducts from '../../mixins/filterProducts'
 export default {
+  name: 'Ko13ProductListFilter',
   components: {
     KoProductCardFilter,
   },
+  mixins: [filterProducts],
   props: {
     settingByTemplate13: Array,
     dataStore: Object,
     fullProducts: {},
     allTags: Array,
-  },
-  mixins: [filterProducts],
-  name: 'Ko13-ProductList-Filter',
-  mounted() {
-    this.getQuery()
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
   },
   data() {
     return {
@@ -357,6 +349,44 @@ export default {
     etiqueta2() {
       return this.$store.state.products.payloadTag2Name
     },
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct(value)
+    },
+    currentPage() {
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+      let timerTimeout = null
+      // eslint-disable-next-line no-unused-vars
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null
+        window.scrollBy(0, -1500)
+      }, 250)
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage
+      }
+    },
+    nameCategoryHeader(value) {
+      return value
+    },
+    nameSubCategoryHeader(value) {
+      return value
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.getQuery()
+    },
+    searchValue(value) {
+      this.SearchProduct(value)
+    },
+  },
+  mounted() {
+    this.getQuery()
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
   },
   methods: {
     getQuery() {
@@ -475,37 +505,6 @@ export default {
       this.nameCategory = ''
       this.showSubCategory = false
       this.selectedSubcategories = []
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollBy(0, -1500)
-      }, 250)
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.getQuery()
-    },
-    searchValue(value) {
-      this.SearchProduct(value)
     },
   },
 }

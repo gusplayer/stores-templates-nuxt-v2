@@ -52,30 +52,31 @@
                     </svg>
                   </div>
                   <input
+                    id="CorreoElectronicoNewslletter"
+                    v-model="email"
                     name="email"
                     class="input-text"
                     type="email"
                     :placeholder="$t('newsletter_email')"
-                    v-model="email"
-                    id="CorreoElectronicoNewslletter"
                   />
                 </div>
                 <span
                   v-show="errors[0] || register"
                   class="text-error"
                   :style="register ? 'color:green' : ''"
-                  >{{ errorsCheckbox || register }}</span
                 >
+                  {{ errorsCheckbox || register }}
+                </span>
               </template>
             </ValidationProvider>
           </div>
           <div class="content-checkbox">
-            <input type="checkbox" id="checkbox" v-model="checked" />
+            <input id="checkbox" v-model="checked" type="checkbox" />
             <p class="text-checkbox">
               {{ $t('newsletter_msg') }}
             </p>
           </div>
-          <p class="text-error" v-if="stateChehed">
+          <p v-if="stateChehed" class="text-error">
             Marcar checkbox para poder suscribirse al boletín informativo
           </p>
         </div>
@@ -83,12 +84,10 @@
         <div class="content-button">
           <button
             ref="colorBtn"
-            @click="submitNewsletter"
             class="content-bttns-shop"
+            @click="submitNewsletter"
           >
-            <span class="content-textbutton-shop">
-              {{ $t('newsletter_btn') }}
-            </span>
+            {{ $t('newsletter_btn') }}
           </button>
         </div>
       </div>
@@ -100,17 +99,16 @@
 import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko-Newsletter-1',
+  name: 'Ko9Newsletter1',
+  components: {
+    ValidationObserver,
+    ValidationProvider,
+  },
   props: {
     dataStore: Object,
     newsletter: Object,
     settingGeneral: Object,
   },
-  components: {
-    ValidationObserver,
-    ValidationProvider,
-  },
-  mounted() {},
   data() {
     return {
       errorsCheckbox: 'El campo checkbox y email son obligatorios',
@@ -120,13 +118,13 @@ export default {
       stateChehed: false,
     }
   },
-  destroyed() {
-    this.email = ''
-  },
   computed: {
     facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
+  },
+  destroyed() {
+    this.email = ''
   },
   methods: {
     submitNewsletter() {
@@ -183,31 +181,25 @@ export default {
   @apply flex flex-col justify-center items-center;
 }
 .content-bttns-shop {
+  font-family: var(--font-style-2);
+  color: var(--color_text_btn);
   background-color: var(--color_background_btn);
   width: 100%;
-  @apply mr-2 shadow-md justify-center items-center flex;
   padding: 12px 20px;
   transition: all 0.2s ease-out;
-}
-.content-bttns-shop:hover {
-  background-color: #fff;
-  transition: all 0.2s ease-out;
-}
-.content-textbutton-shop {
-  color: var(--color_text_btn);
-  @apply text-white-white;
   font-size: 16px;
   letter-spacing: 1px;
   font-weight: 800;
   white-space: nowrap;
   line-height: 18px;
-  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-2);
+  @apply mr-2 shadow-md justify-center items-center flex;
 }
-.content-bttns-shop:hover .content-textbutton-shop {
-  color: #2c2930;
+.content-bttns-shop:hover {
+  color: var(--hover_border);
+  background-color: var(--hover_bg);
   transition: all 0.2s ease-out;
 }
+
 .wrapper-items {
   @apply flex flex-col justify-center;
 }

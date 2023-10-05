@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex justify-center items-center mb-30 md:mb-50"
+    class="w-full flex justify-center items-center"
     :style="[
       {
         '--font-style-1':
