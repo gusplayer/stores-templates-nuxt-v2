@@ -93,7 +93,7 @@
         </div>
         <KoSearch
           :data-store="dataStore"
-          :settingKProdutCard="settingByTemplate7[0].settingKProdutCard"
+          :settingKProductCard="settingByTemplate7[0].settingKProdutCard"
           :setting-general="settingByTemplate7[0].setting7General"
         />
         <KoMenu :data-store="dataStore" class="responsive" />

@@ -1,13 +1,13 @@
 <template>
   <transition name="fade">
-    <div class="order" v-show="openSearch">
+    <div v-show="openSearch" class="order">
       <div class="order_content">
         <div class="search-input-content">
           <form onsubmit="return false">
             <input
+              v-model="search"
               type="search"
               :placeholder="$t('header_buscar_producto')"
-              v-model="search"
               class="input-search"
               @keyup.enter="closedSearch()"
             />
@@ -19,11 +19,11 @@
         </div>
         <div class="products-search">
           <KProducts
-            :dataStore="dataStore"
-            :fullProducts="fullProducts"
-            :settingKProdutCard="settingKProdutCard"
-            :settingGeneral="settingGeneral"
-          ></KProducts>
+            :data-store="dataStore"
+            :full-products="fullProducts"
+            :settingKProductCard="settingKProductCard"
+            :setting-general="settingGeneral"
+          />
         </div>
       </div>
     </div>
@@ -33,15 +33,15 @@
 <script>
 import KProducts from '../../../template7/Ko-ProductListSearchUp.vue'
 export default {
-  name: 'Ko-Search-7',
+  name: 'KoSearch7',
+  components: {
+    KProducts,
+  },
   props: {
     dataStore: Object,
     showMenu: Boolean,
     settingGeneral: Object,
-    settingKProdutCard: Object,
-  },
-  components: {
-    KProducts,
+    settingKProductCard: Object,
   },
   data() {
     return {
@@ -60,6 +60,11 @@ export default {
     },
     searchValue() {
       return this.$store.state.searchValue
+    },
+  },
+  watch: {
+    search(value) {
+      this.SearchProduct(value)
     },
   },
   methods: {
@@ -95,11 +100,6 @@ export default {
         })
       }
       this.currentPage = 1
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
     },
   },
 }

@@ -1,7 +1,7 @@
 <template>
   <div
-    class="wrapper-ProductFavoritos"
     v-if="category.length"
+    class="wrapper-ProductFavoritos"
     :style="cardProduct"
   >
     <div class="content-title-ProductFavoritos">
@@ -9,20 +9,33 @@
         {{ $t('home_destacadosMsg') }}
       </p>
     </div>
-    <KoSwipper :products="category"></KoSwipper>
+    <KoSwiper
+      :products="category"
+      :card-product="cardProduct"
+      :setting-general="settingGeneral"
+    />
   </div>
 </template>
 
 <script>
-import KoSwipper from '../_productofavorito/productSlide'
 export default {
-  name: 'suggestionsProducto',
-  props: {
-    category: {},
-    cardProduct: {},
-  },
+  name: 'Ko09SuggestionsProducto',
   components: {
-    KoSwipper,
+    KoSwiper: () => import('../_productofavorito/productSlide.vue'),
+  },
+  props: {
+    category: {
+      type: Array,
+      required: true,
+    },
+    cardProduct: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

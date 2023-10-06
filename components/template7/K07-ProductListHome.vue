@@ -49,7 +49,7 @@
             >
               <KoProductCard
                 :product="product"
-                :settingKProdutCard="settingKProdutCard"
+                :settingKProductCard="settingKProductCard"
                 :settingGeneral="settingGeneral"
               />
             </div>
@@ -89,7 +89,7 @@ export default {
     fullProducts: {},
     settingKProductList: Object,
     settingGeneral: Object,
-    settingKProdutCard: Object,
+    settingKProductCard: Object,
     settingKCarousel: Object,
   },
   computed: {

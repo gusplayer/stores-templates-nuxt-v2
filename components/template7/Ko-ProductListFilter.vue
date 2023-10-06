@@ -4,26 +4,21 @@
     :style="[
       settingByTemplate7[0].productListFilter,
       settingByTemplate7[0].settingGeneral,
+      {
+        '--font-style-1':
+          settingByTemplate7[0]?.settingGeneral?.fount_1 ?? 'David Libre',
+      },
+      {
+        '--font-style-2':
+          settingByTemplate7[0]?.settingGeneral?.fount_2 ?? 'Great Vibes',
+      },
+      {
+        '--font-style-3':
+          settingByTemplate7[0]?.settingGeneral?.fount_3 ?? 'Lora',
+      },
     ]"
   >
-    <div
-      class="content-banner-shop"
-      id="BgProductlistF"
-      :style="[
-        {
-          '--font-style-1':
-            settingByTemplate7[0]?.settingGeneral?.fount_1 ?? 'David Libre',
-        },
-        {
-          '--font-style-2':
-            settingByTemplate7[0]?.settingGeneral?.fount_2 ?? 'Great Vibes',
-        },
-        {
-          '--font-style-3':
-            settingByTemplate7[0]?.settingGeneral?.fount_3 ?? 'Lora',
-        },
-      ]"
-    >
+    <div id="BgProductlistF" class="content-banner-shop">
       <div class="tittle-banner-shop">
         <p class="btn-tittle-shop">
           {{ settingByTemplate7[0].productListFilter.title }}
@@ -31,7 +26,7 @@
       </div>
     </div>
     <div class="content-shop-items">
-      <div class="content-left" v-if="categorias && categorias.length > 0">
+      <div v-if="categorias && categorias.length > 0" class="content-left">
         <div class="content-category-left">
           <button class="item-tittle">
             <p class="txt-tittles">
@@ -40,9 +35,9 @@
           </button>
           <div class="itemLeft-range-slide">
             <input
+              v-model="search"
               class="input-slide"
               type="search"
-              v-model="search"
               :placeholder="$t('header_search')"
             />
           </div>
@@ -54,9 +49,9 @@
             </p>
           </div>
           <div
+            v-if="categorias.length > 7"
             class="btn-scroll"
             @click="scrollCategories(1)"
-            v-if="categorias.length > 7"
           >
             <FlechaUp-icon class="btn-scroll-icon" />
           </div>
@@ -83,30 +78,30 @@
           </div>
           <div
             class="btn-scroll"
-            @click="scrollCategories(2)"
             v-if="categorias.length > 7"
+            @click="scrollCategories(2)"
           >
             <Flechadown-icon class="btn-scroll-icon" />
           </div>
           <div
-            class="item-tittle"
             v-if="showSubCategory && selectedSubcategories.length"
+            class="item-tittle"
           >
             <p class="txt-tittles">
               {{ $t('home_subcategory') }}
             </p>
           </div>
           <div
+            v-if="selectedSubcategories.length > 7"
             class="btn-scroll"
             @click="scrollSubCategories(1)"
-            v-if="selectedSubcategories.length > 7"
           >
             <FlechaUp-icon class="btn-scroll-icon" />
           </div>
           <div
-            class="subcategory-list"
-            id="swiper-slide-Subcategories"
             v-if="showSubCategory && selectedSubcategories.length"
+            id="swiper-slide-Subcategories"
+            class="subcategory-list"
           >
             <div
               v-for="(subcategorys, index) in selectedSubcategories"
@@ -127,17 +122,17 @@
             </div>
           </div>
           <div
+            v-if="selectedSubcategories.length > 7"
             class="btn-scroll"
             @click="scrollSubCategories(2)"
-            v-if="selectedSubcategories.length > 7"
           >
             <Flechadown-icon class="btn-scroll-icon" />
           </div>
         </div>
         <div
           v-for="(itemsTags, index) in allTags"
-          :key="index"
           v-show="allTags && allTags.length > 0"
+          :key="index"
         >
           <div
             v-if="
@@ -151,10 +146,17 @@
             </div>
             <div class="categorys-list">
               <button
-                class="txt-categorys"
                 v-for="itemsProperties in itemsTags.properties"
-                :key="itemsProperties.id"
                 v-show="itemsProperties.status === 1"
+                :key="itemsProperties.id"
+                class="txt-categorys"
+                :class="
+                  itemsProperties.name == etiqueta1
+                    ? 'txt-categorys-active'
+                    : '' || itemsProperties.name == etiqueta2
+                    ? 'txt-categorys-active'
+                    : ''
+                "
                 @click="
                   getProductsFilter(
                     'tag',
@@ -163,20 +165,13 @@
                     false
                   )
                 "
-                :class="
-                  itemsProperties.name == etiqueta1
-                    ? 'txt-categorys-active'
-                    : '' || itemsProperties.name == etiqueta2
-                    ? 'txt-categorys-active'
-                    : ''
-                "
               >
                 {{ itemsProperties.name }}
               </button>
             </div>
           </div>
         </div>
-        <div class="content-category-left" v-if="!stateShipping">
+        <div v-if="!stateShipping" class="content-category-left">
           <button class="item-tittle">
             <p class="txt-tittles">
               {{ $t('home_fenvio') }}
@@ -228,18 +223,18 @@
                   {{ $t('home_catalogo') }}
                 </p>
                 <div
-                  class="flex flex-row justify-center"
                   v-if="
                     etiqueta1 &&
                     nameCategoryHeader == '' &&
                     nameSubCategoryHeader == ''
                   "
+                  class="flex flex-row justify-center"
                 >
                   <span v-if="etiqueta1" class="separator-breadCrumbs">/ </span>
                   <p
-                    class="text-categorias-select"
                     v-if="etiqueta1"
                     id="stateCate07"
+                    class="text-categorias-select"
                   >
                     {{ etiqueta1 }}
                   </p>
@@ -249,10 +244,10 @@
                     >/
                   </span>
                   <p
-                    class="text-categorias-select"
                     v-if="nameCategoryHeader"
-                    @click="breadcrumbsSendCategory(nameCategoryHeader)"
                     id="stateCate07"
+                    class="text-categorias-select"
+                    @click="breadcrumbsSendCategory(nameCategoryHeader)"
                   >
                     {{ nameCategoryHeader }}
                   </p>
@@ -262,25 +257,25 @@
                     >/
                   </span>
                   <p
-                    class="text-categorias-select"
                     v-if="nameSubCategoryHeader"
                     id="stateSubCate"
+                    class="text-categorias-select"
                   >
                     {{ nameSubCategoryHeader }}
                   </p>
                   <span v-if="etiqueta1" class="separator-breadCrumbs">/ </span>
                   <p
-                    class="text-categorias-select"
                     v-if="etiqueta1"
                     id="stateSubCate"
+                    class="text-categorias-select"
                   >
                     {{ etiqueta1 }}
                   </p>
                   <span v-if="etiqueta2" class="separator-breadCrumbs">/ </span>
                   <p
-                    class="text-categorias-select"
                     v-if="etiqueta2"
                     id="stateSubCate"
+                    class="text-categorias-select"
                   >
                     {{ etiqueta2 }}
                   </p>
@@ -290,11 +285,10 @@
                 <div class="show-view-per-list">
                   <button class="show">
                     <svg
-                      @click="showList"
+                      id="list-view"
                       class="show-icon"
                       :class="indexShowList == 1 ? 'show-icon-active' : ''"
                       version="1.1"
-                      id="list-view"
                       xmlns="http://www.w3.org/2000/svg"
                       xmlns:xlink="http://www.w3.org/1999/xlink"
                       x="0px"
@@ -304,6 +298,7 @@
                       viewBox="0 0 18 18"
                       enable-background="new 0 0 18 18"
                       xml:space="preserve"
+                      @click="showList"
                     >
                       <rect width="18" height="2"></rect>
                       <rect y="16" width="18" height="2"></rect>
@@ -312,11 +307,10 @@
                   </button>
                   <button class="show">
                     <svg
-                      @click="showGrid2"
+                      id="Layer_1"
                       class="show-icon"
                       :class="indexShowList == 2 ? 'show-icon-active' : ''"
                       version="1.1"
-                      id="Layer_1"
                       xmlns="http://www.w3.org/2000/svg"
                       xmlns:xlink="http://www.w3.org/1999/xlink"
                       x="0px"
@@ -326,6 +320,7 @@
                       viewBox="0 0 19 19"
                       enable-background="new 0 0 19 19"
                       xml:space="preserve"
+                      @click="showGrid2"
                     >
                       <path d="M7,2v5H2V2H7 M9,0H0v9h9V0L9,0z"></path>
                       <path d="M17,2v5h-5V2H17 M19,0h-9v9h9V0L19,0z"></path>
@@ -337,11 +332,10 @@
                   </button>
                   <button class="show">
                     <svg
-                      @click="showGrid3"
+                      id="Layer_2"
                       :class="indexShowList == 3 ? 'show-icon-active' : ''"
                       class="show-icon"
                       version="1.1"
-                      id="Layer_2"
                       xmlns="http://www.w3.org/2000/svg"
                       xmlns:xlink="http://www.w3.org/1999/xlink"
                       x="0px"
@@ -351,6 +345,7 @@
                       viewBox="0 0 19 19"
                       enable-background="new 0 0 19 19"
                       xml:space="preserve"
+                      @click="showGrid3"
                     >
                       <rect width="5" height="5"></rect>
                       <rect x="7" width="5" height="5"></rect>
@@ -365,11 +360,10 @@
                   </button>
                   <button class="show">
                     <svg
-                      @click="showGrid4"
+                      id="Layer_3"
                       :class="indexShowList == 4 ? 'show-icon-active' : ''"
                       class="show-icon"
                       version="1.1"
-                      id="Layer_3"
                       xmlns="http://www.w3.org/2000/svg"
                       xmlns:xlink="http://www.w3.org/1999/xlink"
                       x="0px"
@@ -379,6 +373,7 @@
                       viewBox="0 0 19 19"
                       enable-background="new 0 0 19 19"
                       xml:space="preserve"
+                      @click="showGrid4"
                     >
                       <rect width="4" height="4"></rect>
                       <rect x="5" width="4" height="4"></rect>
@@ -415,10 +410,8 @@
                       v-if="!showInList"
                       :product="product"
                       class="product-nolist"
-                      :settingGeneral="settingByTemplate7[0].settingGeneral"
-                      :settingKProdutCard="
-                        settingByTemplate7[0].settingKProdutCard
-                      "
+                      :setting-general="settingByTemplate7[0].settingGeneral"
+                      :settingKProductCard="settingByTemplate7[0].card"
                     />
                     <KoProductCardFilerList
                       v-if="showInList"
@@ -445,16 +438,16 @@
                 <div class="pagination-medium">
                   <div
                     class="product_pagination"
-                    v-if="fullProducts.length > this.numVistas"
+                    v-if="fullProducts.length > numVistas"
                   >
                     <el-pagination
                       background
                       layout="prev, pager, next"
                       :total="fullProducts.length"
-                      :page-size="this.numVistas"
+                      :page-size="numVistas"
                       :current-page.sync="currentPage"
                       class="pagination"
-                    ></el-pagination>
+                    />
                   </div>
                 </div>
               </div>
@@ -476,28 +469,12 @@ export default {
     KoProductCardFilter,
     KoProductCardFilerList,
   },
+  mixins: [filterProducts],
   props: {
     dataStore: Object,
     fullProducts: {},
     settingByTemplate7: Array,
     allTags: Array,
-  },
-  mixins: [filterProducts],
-  mounted() {
-    this.setOptionShipping()
-    if (
-      this.settingByTemplate7[0] &&
-      this.settingByTemplate7[0].productListFilter &&
-      this.settingByTemplate7[0].productListFilter.img_background
-    ) {
-      this.setBg(1)
-    } else {
-      this.setBg(2)
-    }
-    this.getQuery()
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
   },
   data() {
     return {
@@ -562,6 +539,64 @@ export default {
     etiqueta2() {
       return this.$store.state.products.payloadTag2Name
     },
+  },
+  watch: {
+    settingByTemplate7() {
+      if (
+        this.settingByTemplate7[0] &&
+        this.settingByTemplate7[0].productListFilter &&
+        this.settingByTemplate7[0].productListFilter.img_background
+      ) {
+        this.setBg(1)
+      } else {
+        this.setBg(2)
+      }
+    },
+    search(value) {
+      this.SearchProduct2(value)
+    },
+    currentPage() {
+      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+      let timerTimeout = null
+      timerTimeout = setTimeout(() => {
+        timerTimeout = null
+        window.scrollBy(0, -2500)
+      }, 250)
+    },
+    previousPage() {
+      if (this.previousPage) {
+        this.currentPage = this.previousPage
+      }
+    },
+    nameCategoryHeader(value) {
+      return value
+    },
+    nameSubCategoryHeader(value) {
+      return value
+    },
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.getQuery()
+    },
+    searchValue(value) {
+      this.SearchProduct2(value)
+    },
+  },
+  mounted() {
+    this.setOptionShipping()
+    if (
+      this.settingByTemplate7[0] &&
+      this.settingByTemplate7[0].productListFilter &&
+      this.settingByTemplate7[0].productListFilter.img_background
+    ) {
+      this.setBg(1)
+    } else {
+      this.setBg(2)
+    }
+    this.getQuery()
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
   },
   methods: {
     getQuery() {
@@ -836,48 +871,6 @@ export default {
       } else if (value == 2) {
         document.getElementById('swiper-slide-Subcategories').scrollTop += 300
       }
-    },
-  },
-  watch: {
-    settingByTemplate7() {
-      if (
-        this.settingByTemplate7[0] &&
-        this.settingByTemplate7[0].productListFilter &&
-        this.settingByTemplate7[0].productListFilter.img_background
-      ) {
-        this.setBg(1)
-      } else {
-        this.setBg(2)
-      }
-    },
-    search(value) {
-      this.SearchProduct2(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollBy(0, -2500)
-      }, 250)
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.getQuery()
-    },
-    searchValue(value) {
-      this.SearchProduct2(value)
     },
   },
 }

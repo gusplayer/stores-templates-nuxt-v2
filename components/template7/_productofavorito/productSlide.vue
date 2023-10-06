@@ -2,24 +2,23 @@
   <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
     <div class="swiper-wrapper">
       <div
-        class="swiper-slide"
-        v-for="(product, index) in this.products"
+        v-for="(product, index) in products"
         :key="index"
+        class="swiper-slide"
       >
         <client-only>
-          <KoProductCard1 :product="product"></KoProductCard1>
+          <KoProductCard1
+            :product="product"
+            :setting-general="settingGeneral"
+            :settingKProductCard="settingKProductCard"
+          />
         </client-only>
       </div>
     </div>
-    <!-- <div
-      class="swiper-pagination"
-      slot="pagination"
-      v-if="this.products.length > 1"
-    ></div> -->
-    <div class="prev btnPrev" v-if="this.products.length > 1">
+    <div v-if="products.length > 1" class="prev btnPrev">
       <FlechaLeft-icon class="btn-icon" />
     </div>
-    <div class="next btnNext" v-if="this.products.length > 1">
+    <div v-if="products.length > 1" class="next btnNext">
       <FlechaRight-icon class="btn-icon" />
     </div>
   </div>
@@ -29,12 +28,23 @@
 import KoProductCard1 from '../../../components/template7/_productcard/ProductCard'
 
 export default {
-  name: 'K07-productSlide-productFavorito',
+  name: 'K07ProductSlideProductFavorito',
   components: {
     KoProductCard1,
   },
   props: {
-    products: {},
+    products: {
+      type: Array,
+      required: true,
+    },
+    settingKProductCard: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

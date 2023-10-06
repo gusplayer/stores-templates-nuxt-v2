@@ -578,7 +578,7 @@ export default {
   background-color: #3d3d3d;
 }
 .txt-add {
-  color: var(--color_text_card);
+  color: var(--color_text_btn);
   font-size: 15px;
   letter-spacing: 1px;
   /* text-transform: capitalize; */

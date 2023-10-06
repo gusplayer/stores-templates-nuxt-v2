@@ -100,7 +100,7 @@ export default {
         settingKCarousel: this.settingByTemplate7?.banner ?? null,
         settingKPromo: this.settingByTemplate7?.content ?? null,
         settingKProductList: this.settingByTemplate7?.productList ?? null,
-        settingKProdutCard: this.settingByTemplate7?.card ?? null,
+        settingKProductCard: this.settingByTemplate7?.card ?? null,
         settingKGify: this.settingByTemplate7?.ProductFavorite ?? null,
         settingKHowwork: this.settingByTemplate7?.howWork ?? null,
         settingKNews: this.settingByTemplate7?.newsletter ?? null,

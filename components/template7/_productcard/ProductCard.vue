@@ -2,7 +2,7 @@
   <div
     class="producto-productCard"
     :style="[
-      settingKProdutCard,
+      settingKProductCard,
       settingGeneral,
       {
         '--font-style-1': settingGeneral?.fount_1 ?? 'David Libre',
@@ -276,7 +276,7 @@ export default {
       type: Object,
       required: true,
     },
-    settingKProdutCard: {
+    settingKProductCard: {
       type: Object,
       required: true,
     },
@@ -318,6 +318,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },

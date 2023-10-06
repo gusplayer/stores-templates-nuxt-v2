@@ -447,7 +447,11 @@
       </div>
       <!-- Productos relacionados -->
       <div class="section-suggesProduct">
-        <KoSuggesProduct :category="category.slice(0, 8)" />
+        <KoSuggestProduct
+          :category="category.slice(0, 8)"
+          :setting-general="settingByTemplate7[0].settingGeneral"
+          :settingKProductCard="settingByTemplate7[0].card"
+        />
       </div>
     </div>
   </div>
@@ -461,7 +465,7 @@ export default {
   components: {
     SelectGroup: () => import('./_productdetails/selectGroup'),
     KoDescription: () => import('./_productdetails/descriptionProduct'),
-    KoSuggesProduct: () => import('./_productdetails/suggestionsProducto'),
+    KoSuggestProduct: () => import('./_productdetails/suggestionsProducto'),
     ProductSlide: () => import('./_productdetails/productSlide'),
     Zoom: () => import('./_productdetails/zoomImg'),
   },
