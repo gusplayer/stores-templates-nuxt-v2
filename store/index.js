@@ -1142,7 +1142,7 @@ async function getIdData(state, req, commit) {
     }
   } else {
     const response = await axios.get(
-      `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${parts[1]}`
+      `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${parts[1]}&isDomain=1`
     )
     id = response.data.data.id || response.data.data.storeId
     template = response.data.data.templateNumber || response.data.data.template
