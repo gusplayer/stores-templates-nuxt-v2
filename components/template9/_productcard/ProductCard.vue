@@ -163,7 +163,7 @@
             </div>
           </div>
         </div>
-        <div class="overlay-bottom" v-else>
+        <div v-else class="overlay-bottom">
           <div class="cart-Shop">
             <div class="text-cart">
               <p class="w-full txt-add">
@@ -175,25 +175,18 @@
       </nuxt-link>
     </div>
     <div class="datos-producto">
-      <div class="categoria" v-if="product.categoria">
+      <div v-if="product.categoria" class="categoria">
         {{ product.categoria }}
       </div>
-      <nuxt-link :to="{ path: `/productos/` + product.slug }">
-        <div class="tittle tittle-xml tittle-lg tittle-sm">
-          <p class="card-title">
-            {{
-              product.nombre.length >= 90
-                ? `${product.nombre.slice(0, 90)}...`
-                : product.nombre.length >= 54
-                ? `${product.nombre.slice(0, 54)}...`
-                : product.nombre.length >= 30
-                ? `${product.nombre.slice(0, 30)}...`
-                : `${product.nombre.slice(0, 30)}`
-            }}
-          </p>
-        </div>
+      <nuxt-link
+        :to="{ path: `/productos/` + product.slug }"
+        class="w-full h-full card-title mb-5"
+      >
+        {{
+          product.nombre.slice(0, 54) +
+          (product.nombre.length >= 54 ? '...' : '')
+        }}
       </nuxt-link>
-
       <div class="precio">
         <div v-if="product.precio" class="content-text-price">
           <div v-if="estadoCart && equalsPrice">
@@ -492,9 +485,6 @@ export default {
 .container {
   @apply relative max-w-full;
 }
-.image {
-  @apply w-full h-auto;
-}
 .cart-Shop {
   font: inherit;
   font-size: 100%;
@@ -517,26 +507,6 @@ export default {
   text-align: center;
   @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
 }
-.icon-show-mobile {
-  fill: white;
-}
-.tittle {
-  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-2);
-  font: inherit;
-  font-size: 100%;
-  min-height: 49px;
-  max-height: 49px;
-}
-.tittle-xml {
-  display: initial;
-}
-.tittle-lg {
-  display: none;
-}
-.tittle-sm {
-  display: none;
-}
 .categoria {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-2) !important;
@@ -553,7 +523,7 @@ export default {
   text-align: left;
 }
 .producto:hover .text-price {
-  color: #333333;
+  color: var(--hover_text);
 }
 .separator-price {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
@@ -830,28 +800,6 @@ export default {
   .container:hover .overlay-top {
     width: 40px;
     left: 89%;
-  }
-}
-@media (max-width: 1125px) {
-  .tittle-xml {
-    display: none;
-  }
-  .tittle-lg {
-    display: initial;
-  }
-  .tittle-sm {
-    display: none;
-  }
-}
-@media (max-width: 400px) {
-  .tittle-xml {
-    display: none;
-  }
-  .tittle-lg {
-    display: none;
-  }
-  .tittle-sm {
-    display: initial;
   }
 }
 </style>
