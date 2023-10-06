@@ -2,12 +2,16 @@
   <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
     <div class="swiper-wrapper">
       <div
-        class="swiper-slide"
-        v-for="(product, index) in this.products"
+        v-for="(product, index) in products"
         :key="index"
+        class="swiper-slide"
       >
         <client-only>
-          <KoProductCard1 :product="product"></KoProductCard1>
+          <KoProductCard1
+            :product="product"
+            :product-list-card="cardProduct"
+            :setting-general="settingGeneral"
+          />
         </client-only>
       </div>
     </div>
@@ -18,12 +22,23 @@
 import KoProductCard1 from '../_productcard/ProductCard'
 
 export default {
-  name: 'productSlide-productFavorito',
+  name: 'ProductSlideProductFavorito09',
   components: {
     KoProductCard1,
   },
   props: {
-    products: {},
+    products: {
+      type: Array,
+      required: true,
+    },
+    cardProduct: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

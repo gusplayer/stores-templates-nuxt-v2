@@ -49,7 +49,7 @@
             <KoProductGifyCard
               :product="product"
               class="gifyload"
-              :settingKProdutCard="settingKProdutCard"
+              :settingKProductCard="settingKProductCard"
               :settingGeneral="settingGeneral"
             />
           </div>
@@ -73,7 +73,7 @@ export default {
     dataStore: Object,
     fullProducts: {},
     settingGeneral: Object,
-    settingKProdutCard: Object,
+    settingKProductCard: Object,
     settingKGify: Object,
     settingKCarousel: Object,
   },

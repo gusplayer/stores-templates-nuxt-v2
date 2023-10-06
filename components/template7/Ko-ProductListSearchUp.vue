@@ -11,7 +11,7 @@
             >
               <KoProductCard
                 :product="product"
-                :settingKProdutCard="settingKProdutCard"
+                :settingKProductCard="settingKProductCard"
                 :settingGeneral="settingGeneral"
               />
             </div>
@@ -55,13 +55,13 @@ export default {
   components: {
     KoProductCard,
   },
+  mixins: [filterProducts],
   props: {
     dataStore: Object,
     fullProducts: {},
     settingGeneral: Object,
-    settingKProdutCard: Object,
+    settingKProductCard: Object,
   },
-  mixins: [filterProducts],
   data() {
     return {
       search: '',

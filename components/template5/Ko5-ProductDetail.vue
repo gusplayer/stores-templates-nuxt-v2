@@ -59,23 +59,23 @@
 
           <div class="wrapper-photo_main">
             <div
-              v-if="this.activeZoom"
-              @mouseover="activeZoom = !activeZoom"
+              v-if="activeZoom"
               v-show="!existYoutube"
               class="photo_main"
+              @mouseover="activeZoom = !activeZoom"
             >
               <img
+                v-lazy="idCloudinaryQuality(selectPhotoUrl, 850, 850)"
                 loading="lazy"
                 class="photo_main"
-                v-lazy="idCloudinaryQuality(selectPhotoUrl, 850, 850)"
                 alt="Product Zoom"
               />
             </div>
             <div
-              @mouseleave="activeZoom = !activeZoom"
-              v-if="!this.activeZoom"
+              v-if="!activeZoom"
               v-show="!existYoutube"
               class="photo_main"
+              @mouseleave="activeZoom = !activeZoom"
             >
               <zoom :photo="selectPhotoUrl" />
             </div>

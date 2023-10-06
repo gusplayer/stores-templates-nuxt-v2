@@ -29,21 +29,21 @@
           <div class="content-images">
             <div class="main-images">
               <img
-                class="img-list"
                 v-lazy="
                   idCloudinaryQuality(data.detalle.foto_cloudinary, 850, 850)
                 "
+                class="img-list"
                 alt="Product Img"
               />
             </div>
             <div
-              class="aditional-images"
               v-for="(foto, itemsfoto) in data.fotos"
               :key="itemsfoto"
+              class="aditional-images"
             >
               <img
-                class="img-list"
                 v-lazy="idCloudinaryQuality(foto.foto_cloudinary, 850, 850)"
+                class="img-list"
                 alt="Product Img"
               />
             </div>
@@ -70,12 +70,12 @@
             </div>
             <div class="content-price">
               <p
-                class="text-price-promo"
                 v-show="
                   data.info.tag_promocion == 1 &&
                   data.info.promocion_valor &&
                   salesData.precio
                 "
+                class="text-price-promo"
               >
                 {{
                   (data.info.tag_promocion == 1 && data.info.promocion_valor
@@ -90,16 +90,16 @@
                 }}
               </p>
               <p
-                class="text-numero-promo"
                 v-show="
                   data.info.tag_promocion == 1 &&
                   data.info.promocion_valor &&
                   salesData.precio
                 "
+                class="text-numero-promo"
               >
                 {{ data.info.promocion_valor }}% OFF
               </p>
-              <p class="text-price" v-show="salesData.precio">
+              <p v-show="salesData.precio" class="text-price">
                 {{
                   salesData.precio
                     | currency(
@@ -108,21 +108,21 @@
                     )
                 }}
               </p>
-              <p class="text-stock" v-if="salesData.unidades > 0">
+              <p v-if="salesData.unidades > 0" class="text-stock">
                 {{ $t('productdetail_stock') }}
               </p>
             </div>
             <div
-              class="flex flex-col mb-10 items-start"
               v-if="data.info.descripcion_corta"
+              class="flex flex-col mb-10 items-start"
             >
               <p class="text-variant">{{ $t('productdetail_informacion') }}</p>
               <p class="text-option2">{{ data.info.descripcion_corta }}</p>
             </div>
             <!-- Variantes de prodcuto -->
             <div
-              class="content-variant"
               v-if="this.data.detalle.con_variante > 0"
+              class="content-variant"
             >
               <div v-for="(variant, index) in data.variantes" :key="index">
                 <label for="variant name" class="text-variant">
@@ -142,8 +142,8 @@
               </div>
             </div>
             <div
-              class="w-full flex flex-row items-center my-8"
               v-if="userDropshipping.userName"
+              class="w-full flex flex-row items-center my-8"
             >
               <p class="text-variant" style="margin-right: 10px">
                 {{ $t('productdetail_dropshipping') }}
@@ -157,7 +157,7 @@
                 {{ $t('productdetail_compartir') }}
               </p>
               <a
-                :href="this.sharingFacebook"
+                :href="sharingFacebook"
                 target="_blank"
                 rel="noreferrer noopener"
                 class="btn-facebook"
@@ -190,16 +190,16 @@
               </div>
               <div class="content-addCart">
                 <button
-                  ref="colorBtn"
-                  class="btn"
                   v-if="
                     !spent &&
-                    this.salesData.estado &&
+                    salesData.estado &&
                     (data.info.tipo_servicio == null ||
                       data.info.tipo_servicio == '0')
                   "
-                  @click="addShoppingCart"
                   id="AddToCartTag"
+                  ref="colorBtn"
+                  class="btn"
+                  @click="addShoppingCart"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -217,20 +217,20 @@
                   </p>
                 </button>
                 <button
+                  v-else-if="!salesData.estado"
                   disabled
                   class="btn-disabled"
-                  v-else-if="!this.salesData.estado"
                 >
                   <p class="text-addCart">
                     {{ $t('productdetail_btnANodisponible') }}
                   </p>
                 </button>
                 <button
+                  v-else-if="!spent && data.info.tipo_servicio == '1'"
+                  id="AddToCartTag"
                   ref="colorBtn"
                   class="btn"
-                  v-else-if="!spent && data.info.tipo_servicio == '1'"
                   @click="GoPayments"
-                  id="AddToCartTag"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -247,7 +247,7 @@
                     {{ $t('productdetail_btnComprar') }}
                   </p>
                 </button>
-                <button disabled class="btn-disabled" v-else-if="spent">
+                <button v-else-if="spent" disabled class="btn-disabled">
                   <p class="text-addCart">
                     {{ $t('home_cardAgotado') }}
                   </p>
@@ -266,15 +266,15 @@
                   </button>
                   <transition name="slide-fade">
                     <div
-                      class="container-alert"
                       v-show="quantityValue == maxQuantityValue"
+                      class="container-alert"
                     >
                       <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
                     </div>
                   </transition>
                 </div>
                 <div style="width: 100%; margin-left: 10px">
-                  <div class="content_buy_action-responsive" v-if="spent">
+                  <div v-if="spent" class="content_buy_action-responsive">
                     <p class="card-info-1-res">{{ $t('home_cardAgotado') }}</p>
                   </div>
                   <button
@@ -337,9 +337,10 @@
       </div>
       <!-- Productos relacionados  -->
       <div class="section-suggesProduct">
-        <KoSuggesProduct
+        <KoSuggestProduct
           :category="category.slice(0, 8)"
           :card-product="settingByTemplate9[0].cardProduct"
+          :setting-general="settingByTemplate9[0].settingGeneral"
         />
       </div>
     </div>
@@ -355,7 +356,15 @@ export default {
     OptionAcordion: () => import('./_productdetails/OptAcordion'),
     OptionTab: () => import('./_productdetails/OptTab'),
     SelectGroup: () => import('./_productdetails/selectGroup'),
-    KoSuggesProduct: () => import('./_productdetails/suggestionsProducto'),
+    KoSuggestProduct: () => import('./_productdetails/suggestionsProducto'),
+  },
+  filters: {
+    toLowerCase(value) {
+      if (value) {
+        return value.toLowerCase()
+      }
+      return ''
+    },
   },
   mixins: [idCloudinary, currency],
   props: {
@@ -365,29 +374,6 @@ export default {
     envios: Object,
     facebookPixel: Object,
     settingByTemplate9: Array,
-  },
-  mounted() {
-    this.$store.state.beforeCombination = []
-    if (
-      this.productsData &&
-      this.productsData.length &&
-      this.productsData.length > 0
-    ) {
-      this.getDataProduct()
-    } else {
-      this.getDataProductPrev()
-    }
-    if (Object.keys(this.dataStore.medios_envio).length) {
-      this.setOptionEnvio()
-    }
-    if (
-      this.$route.query &&
-      this.$route.query.userId &&
-      this.$route.query.userName
-    ) {
-      this.userDropshipping.userId = this.$route.query.userId
-      this.userDropshipping.userName = this.$route.query.userName
-    }
   },
   data() {
     return {
@@ -435,6 +421,118 @@ export default {
       },
     }
   },
+  head() {
+    return {
+      title: `Vista del producto ${
+        this.data && this.data.detalle ? this.data.detalle.nombre : ''
+      }`,
+      meta: [
+        {
+          hid: 'product:catalog_id',
+          property: 'product:catalog_id',
+          content: this.data && this.data.detalle ? this.data.detalle.id : '',
+        },
+
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            this.data && this.data.detalle ? this.data.detalle.nombre : '',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: this.sharing && this.sharing.url ? this.sharing.url : '',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            this.data && this.data.info ? this.data.info.descripcion_corta : '',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content:
+            this.data && this.data.detalle
+              ? this.data.detalle.foto_cloudinary
+              : '',
+        },
+        {
+          hid: 'og:price:amount',
+          property: 'og:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+        },
+        {
+          hid: 'og:price:currency',
+          property: 'og:price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+        {
+          hid: 'product:brand',
+          property: 'product:brand',
+          content:
+            this.data && this.data.info && this.data.info.marca
+              ? this.data.info.marca
+              : '',
+        },
+        {
+          hid: 'product:availability',
+          property: 'product:availability',
+          content:
+            this.salesData && this.salesData.unidades > 0
+              ? 'in stock'
+              : 'out of stock',
+        },
+        {
+          hid: 'product:condition',
+          property: 'product:condition',
+          content: 'new',
+        },
+        {
+          hid: 'product:price:amount',
+          property: 'product:price:amount',
+          content:
+            this.salesData && this.salesData.precio
+              ? this.salesData.precio
+              : '',
+        },
+        {
+          hid: 'product:price:currency',
+          property: 'product:price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+        {
+          hid: 'product:sale_price:amount',
+          property: 'product:sale_price:amount',
+          content:
+            this.data &&
+            this.data.info &&
+            this.data.info.tag_promocion == 1 &&
+            this.data.info.promocion_valor
+              ? Math.trunc(
+                  this.salesData.precio /
+                    (1 - this.data.info.promocion_valor / 100)
+                )
+              : '',
+        },
+        {
+          hid: 'product:sale_price:currency',
+          property: 'product:sale_price:currency',
+          content: this.dataStore.tienda.moneda
+            ? this.dataStore.tienda.moneda
+            : '',
+        },
+      ],
+    }
+  },
   computed: {
     existPayments() {
       const mediospago = this.dataStore.medios_pago
@@ -468,6 +566,90 @@ export default {
           product.id !== this.data.detalle.id
       )
     },
+  },
+  watch: {
+    productsData() {
+      this.getDataProduct()
+    },
+    envios() {
+      this.setOptionEnvio()
+    },
+    quantityValue(value) {
+      if (value > this.maxQuantityValue) {
+        this.quantityValue = this.maxQuantityValue
+      }
+    },
+    beforeCombination(value) {
+      const combinationSelected = JSON.stringify(value)
+      if (this.data.combinaciones) {
+        if (
+          this.data.combinaciones.combinaciones !== '[object Object]' &&
+          this.data.detalle.con_variante > 0
+        ) {
+          const combinaciones = JSON.parse(
+            this.data.combinaciones.combinaciones
+          )
+          const result = combinaciones.find(
+            (combinacion) =>
+              JSON.stringify(combinacion.combinacion) == combinationSelected
+          )
+          this.productCart = []
+          this.productIndexCart = null
+          for (const [
+            index,
+            productCart,
+          ] of this.$store.state.productsCart.entries()) {
+            if (
+              this.data.detalle.id == productCart.id &&
+              JSON.stringify(productCart.combinacion) ==
+                JSON.stringify(result.combinacion)
+            ) {
+              this.productIndexCart = index
+              this.productCart = productCart
+            }
+          }
+          if (result) {
+            this.spent = false
+            this.maxQuantityValue = result.unidades
+            if (result.unidades == 0) {
+              this.spent = true
+            }
+            if (this.productCart.cantidad) {
+              this.maxQuantityValue =
+                parseInt(result.unidades) - this.productCart.cantidad
+              if (this.maxQuantityValue <= 0) {
+                this.spent = true
+              }
+            }
+            this.salesData = result
+            this.quantityValue = 1
+          }
+        }
+      }
+    },
+  },
+  mounted() {
+    this.$store.state.beforeCombination = []
+    if (
+      this.productsData &&
+      this.productsData.length &&
+      this.productsData.length > 0
+    ) {
+      this.getDataProduct()
+    } else {
+      this.getDataProductPrev()
+    }
+    if (Object.keys(this.dataStore.medios_envio).length) {
+      this.setOptionEnvio()
+    }
+    if (
+      this.$route.query &&
+      this.$route.query.userId &&
+      this.$route.query.userName
+    ) {
+      this.userDropshipping.userId = this.$route.query.userId
+      this.userDropshipping.userName = this.$route.query.userName
+    }
   },
   methods: {
     searchIdForSlug() {
@@ -761,187 +943,6 @@ export default {
         window.open(`${baseUrlPc}text=${text}`, '_blank')
       }
     },
-  },
-  watch: {
-    productsData(value) {
-      this.getDataProduct()
-    },
-    envios(value) {
-      this.setOptionEnvio()
-    },
-    quantityValue(value) {
-      if (value > this.maxQuantityValue) {
-        this.quantityValue = this.maxQuantityValue
-      }
-    },
-    beforeCombination(value) {
-      const combinationSelected = JSON.stringify(value)
-      if (this.data.combinaciones) {
-        if (
-          this.data.combinaciones.combinaciones !== '[object Object]' &&
-          this.data.detalle.con_variante > 0
-        ) {
-          const combinaciones = JSON.parse(
-            this.data.combinaciones.combinaciones
-          )
-          const result = combinaciones.find(
-            (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
-          )
-          this.productCart = []
-          this.productIndexCart = null
-          for (const [
-            index,
-            productCart,
-          ] of this.$store.state.productsCart.entries()) {
-            if (
-              this.data.detalle.id == productCart.id &&
-              JSON.stringify(productCart.combinacion) ==
-                JSON.stringify(result.combinacion)
-            ) {
-              this.productIndexCart = index
-              this.productCart = productCart
-            }
-          }
-          if (result) {
-            this.spent = false
-            this.maxQuantityValue = result.unidades
-            if (result.unidades == 0) {
-              this.spent = true
-            }
-            if (this.productCart.cantidad) {
-              this.maxQuantityValue =
-                parseInt(result.unidades) - this.productCart.cantidad
-              if (this.maxQuantityValue <= 0) {
-                this.spent = true
-              }
-            }
-            this.salesData = result
-            this.quantityValue = 1
-          }
-        }
-      }
-    },
-  },
-  filters: {
-    toLowerCase(value) {
-      if (value) {
-        return value.toLowerCase()
-      }
-      return ''
-    },
-  },
-  head() {
-    return {
-      title: `Vista del producto ${
-        this.data && this.data.detalle ? this.data.detalle.nombre : ''
-      }`,
-      meta: [
-        {
-          hid: 'product:catalog_id',
-          property: 'product:catalog_id',
-          content: this.data && this.data.detalle ? this.data.detalle.id : '',
-        },
-
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content:
-            this.data && this.data.detalle ? this.data.detalle.nombre : '',
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.sharing && this.sharing.url ? this.sharing.url : '',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content:
-            this.data && this.data.info ? this.data.info.descripcion_corta : '',
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content:
-            this.data && this.data.detalle
-              ? this.data.detalle.foto_cloudinary
-              : '',
-        },
-        {
-          hid: 'og:price:amount',
-          property: 'og:price:amount',
-          content:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : '',
-        },
-        {
-          hid: 'og:price:currency',
-          property: 'og:price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-        {
-          hid: 'product:brand',
-          property: 'product:brand',
-          content:
-            this.data && this.data.info && this.data.info.marca
-              ? this.data.info.marca
-              : '',
-        },
-        {
-          hid: 'product:availability',
-          property: 'product:availability',
-          content:
-            this.salesData && this.salesData.unidades > 0
-              ? 'in stock'
-              : 'out of stock',
-        },
-        {
-          hid: 'product:condition',
-          property: 'product:condition',
-          content: 'new',
-        },
-        {
-          hid: 'product:price:amount',
-          property: 'product:price:amount',
-          content:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : '',
-        },
-        {
-          hid: 'product:price:currency',
-          property: 'product:price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-        {
-          hid: 'product:sale_price:amount',
-          property: 'product:sale_price:amount',
-          content:
-            this.data &&
-            this.data.info &&
-            this.data.info.tag_promocion == 1 &&
-            this.data.info.promocion_valor
-              ? Math.trunc(
-                  this.salesData.precio /
-                    (1 - this.data.info.promocion_valor / 100)
-                )
-              : '',
-        },
-        {
-          hid: 'product:sale_price:currency',
-          property: 'product:sale_price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-      ],
-    }
   },
   jsonld() {
     return {
