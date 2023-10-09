@@ -52,7 +52,7 @@
               :srcset="idCloudinaryBanner(offersProduct.img, 'banner')"
             />
             <img
-              v-lazy="offersProduct.img"
+              v-lazy="idCloudinaryBanner(offersProduct.img, 'banner')"
               alt="offersProduct template14"
               class="w-full effect-img"
             />

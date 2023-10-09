@@ -612,10 +612,10 @@ export default {
     },
   },
   watch: {
-    productsData(value) {
+    productsData() {
       this.getDataProduct()
     },
-    envios(value) {
+    envios() {
       this.setOptionEnvio()
     },
     quantityValue(value) {

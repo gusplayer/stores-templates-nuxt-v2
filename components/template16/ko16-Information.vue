@@ -15,14 +15,14 @@
         <picture>
           <source
             media="(max-width: 799px)"
-            :srcset="idCloudinaryBanner(item.img, 'bannerRes', 800)"
+            :srcset="idCloudinaryBanner(item.img_res, 'bannerRes', 800)"
           />
           <source
             media="(min-width: 800px)"
             :srcset="idCloudinaryBanner(item.img, 'banner')"
           />
           <img
-            v-lazy="item.img"
+            v-lazy="idCloudinaryBanner(item.img, 'banner')"
             alt="banner template16"
             class="w-full object-cover"
           />

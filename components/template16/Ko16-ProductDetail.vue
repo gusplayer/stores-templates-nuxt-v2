@@ -11,7 +11,7 @@
       },
     ]"
   >
-    <div v-if="loading" />
+    <div v-if="loading"></div>
     <div
       class="w-full box-content flex items-center justify-center"
       style="background-color: var(--background_color_2)"
