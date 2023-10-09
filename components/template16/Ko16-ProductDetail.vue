@@ -191,6 +191,76 @@
                 </p>
               </div>
             </div>
+            <div class="w-full flex flex-col mb-10">
+              <div
+                v-if="
+                  data.detalle?.categoria_producto?.nombre_categoria_producto
+                "
+                class="flex flex-row justify-start items-center mb-10"
+              >
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${settingByTemplate16[0].detailsProducts.color_text};`"
+                >
+                  {{ $t('productdetail_categoria') }}:
+                </p>
+                <p
+                  class="text-14"
+                  :style="`color:${settingByTemplate16[0].detailsProducts.color_subtext};`"
+                >
+                  {{
+                    data.detalle.categoria_producto.nombre_categoria_producto
+                  }}
+                </p>
+              </div>
+              <div
+                v-if="data.detalle?.subcategoria_producto?.nombre_subcategoria"
+                class="flex flex-row justify-start items-center mb-10"
+              >
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${settingByTemplate16[0].detailsProducts.color_text};`"
+                >
+                  {{ $t('home_subcategory') }}:
+                </p>
+                <p
+                  class="text-14"
+                  :style="`color:${settingByTemplate16[0].detailsProducts.color_subtext};`"
+                >
+                  {{ data.detalle.subcategoria_producto.nombre_subcategoria }}
+                </p>
+              </div>
+              <div
+                v-if="salesData.unidades > 0"
+                class="flex flex-row justify-start items-center mb-10"
+              >
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${settingByTemplate16[0].detailsProducts.color_text};`"
+                >
+                  {{ $t('productdetail_stock') }}:
+                </p>
+                <p
+                  class="text-14"
+                  :class="`${
+                    salesData.unidades > 0 ? 'text-green-500' : 'text-red-500'
+                  }`"
+                >
+                  {{ salesData.unidades > 0 ? 'In stock' : 'Out of stock' }}
+                </p>
+              </div>
+              <div
+                v-if="data.detalle?.subcategoria_producto?.nombre_subcategoria"
+                class="flex flex-row justify-start items-center mb-10"
+              >
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${settingByTemplate16[0].detailsProducts.color_text};`"
+                >
+                  {{ $t('home_cardGratis') }}
+                </p>
+              </div>
+            </div>
             <div v-if="data.info.descripcion_corta" class="w-full mb-25 pt-10">
               <p
                 class="text-14"
@@ -301,7 +371,7 @@
                 id="AddToCartTag"
                 ref="colorBtn"
                 class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
-                :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
+                :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_bg_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
                 @click="addShoppingCart"
               >
                 <svg
@@ -309,7 +379,7 @@
                   class="mx-5"
                   width="18"
                   height="18"
-                  :fill="settingByTemplate16[0].detailsProducts.color_icon"
+                  :fill="settingByTemplate16[0].detailsProducts.color_text_btn"
                   viewBox="0 0 16 16"
                 >
                   <path
@@ -322,7 +392,7 @@
                 v-else-if="!salesData.estado"
                 disabled
                 class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
-                :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
+                :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_bg_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
               >
                 {{ $t('productdetail_btnANodisponible') }}
               </button>
@@ -331,14 +401,14 @@
                 id="AddToCartTag"
                 ref="colorBtn"
                 class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
-                :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
+                :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_bg_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
                 @click="GoPayments"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
                   height="18"
-                  :fill="settingByTemplate16[0].detailsProducts.color_icon"
+                  :fill="settingByTemplate16[0].detailsProducts.color_text_btn"
                   viewBox="0 0 16 16"
                 >
                   <path
@@ -351,80 +421,10 @@
                 v-else-if="spent"
                 disabled
                 class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
-                :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
+                :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_bg_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
               >
                 {{ $t('home_cardAgotado') }}
               </button>
-            </div>
-            <div class="w-full flex flex-col mb-10">
-              <div
-                v-if="salesData.unidades > 0"
-                class="flex flex-row justify-start items-center mb-10"
-              >
-                <p
-                  class="text-16 font-bold mr-10"
-                  :style="`color:${settingByTemplate16[0].detailsProducts.color_text};`"
-                >
-                  {{ $t('productdetail_stock') }}:
-                </p>
-                <p
-                  class="text-14"
-                  :class="`${
-                    salesData.unidades > 0 ? 'text-green-500' : 'text-red-500'
-                  }`"
-                >
-                  {{ salesData.unidades > 0 ? 'In stock' : 'Out of stock' }}
-                </p>
-              </div>
-              <div
-                v-if="
-                  data.detalle?.categoria_producto?.nombre_categoria_producto
-                "
-                class="flex flex-row justify-start items-center mb-10"
-              >
-                <p
-                  class="text-16 font-bold mr-10"
-                  :style="`color:${settingByTemplate16[0].detailsProducts.color_text};`"
-                >
-                  {{ $t('productdetail_categoria') }}:
-                </p>
-                <p
-                  class="text-14"
-                  :style="`color:${settingByTemplate16[0].detailsProducts.color_subtext};`"
-                >
-                  {{
-                    data.detalle.categoria_producto.nombre_categoria_producto
-                  }}
-                </p>
-              </div>
-              <div
-                v-if="data.detalle?.subcategoria_producto?.nombre_subcategoria"
-                class="flex flex-row justify-start items-center mb-10"
-              >
-                <p
-                  class="text-16 font-bold mr-10"
-                  :style="`color:${settingByTemplate16[0].detailsProducts.color_text};`"
-                >
-                  {{ $t('home_subcategory') }}:
-                </p>
-                <p
-                  class="text-14"
-                  :style="`color:${settingByTemplate16[0].detailsProducts.color_subtext};`"
-                >
-                  {{ data.detalle.subcategoria_producto.nombre_subcategoria }}
-                </p>
-              </div>
-              <div
-                v-if="data.detalle?.subcategoria_producto?.nombre_subcategoria"
-                class="flex flex-row justify-start items-center mb-10"
-              >
-                <p
-                  class="text-16 font-bold mr-10"
-                  :style="`color:${settingByTemplate16[0].detailsProducts.color_text};`"
-                >
-                  {{ $t('home_cardGratis') }}
-                </p>
-              </div>
             </div>
             <div class="w-full flex flex-row items-center mb-10">
               <p
