@@ -31,7 +31,12 @@
               "
             />
             <img
-              v-lazy="settingByTemplate14[0].listProductsFilter.img"
+              v-lazy="
+                idCloudinaryBanner(
+                  settingByTemplate14[0].listProductsFilter.img,
+                  'banner'
+                )
+              "
               alt="banner template14"
               class="object-cover h-full"
             />

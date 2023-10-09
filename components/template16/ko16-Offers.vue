@@ -13,7 +13,7 @@
         :srcset="idCloudinaryBanner(offers.img, 'banner')"
       />
       <img
-        v-lazy="offers.img"
+        v-lazy="idCloudinaryBanner(offers.img, 'banner')"
         alt="banner template16"
         class="w-full object-cover"
       />

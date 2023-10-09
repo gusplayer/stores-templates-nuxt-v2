@@ -33,7 +33,9 @@
               "
             />
             <img
-              v-lazy="settingByTemplate14[0].contact.img"
+              v-lazy="
+                idCloudinaryBanner(settingByTemplate14[0].contact.img, 'banner')
+              "
               alt="banner template14"
               class="object-cover h-full"
             />

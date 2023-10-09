@@ -1,17 +1,14 @@
 <template>
   <div
+    v-if="information"
     class="content-section"
     :style="[information, settingGeneral]"
-    v-if="information"
   >
     <div
       class="content-wrapper"
       :style="[
         {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Roboto',
+          '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
         },
       ]"
     >
@@ -34,12 +31,12 @@
           {{ information.values[0].description }}
         </p>
         <a
+          v-if="information.values[0].visbleBtn"
           :href="
             information.values[0].url_redirect
               ? information.values[0].url_redirect
               : ''
           "
-          v-if="information.values[0].visbleBtn"
           class="btn"
           :style="`color: ${information.values[0].colorBtn};`"
           rel="noreferrer noopener"
@@ -66,12 +63,12 @@
           {{ information.values[1].description }}
         </p>
         <a
+          v-if="information.values[1].visbleBtn"
           :href="
             information.values[1].url_redirect
               ? information.values[1].url_redirect
               : ''
           "
-          v-if="information.values[1].visbleBtn"
           class="btn"
           :style="`color: ${information.values[1].colorBtn};`"
           rel="noreferrer noopener"
@@ -117,8 +114,8 @@
 <script>
 import idCloudinary from '../../mixins/idCloudinary'
 export default {
+  name: 'Ko13-Information',
   mixins: [idCloudinary],
-  name: 'Ko13-information',
   props: {
     information: Object,
     settingGeneral: Object,
