@@ -33,14 +33,14 @@
           <div class="flex-1 flex flex-col justify-center items-start">
             <p
               v-if="item?.title"
-              class="mb-10 max-w-sm text-15 md:text-25 lg:text-40 xl:text-45 leading-tight"
+              class="mb-10 max-w-sm text-22 md:text-30 leading-tight"
               :style="`color: ${item.color_title}; font-weight: ${item.fontWeighTitle}; font-size: ${item.fontSizeTitle};`"
             >
               {{ item.title }}
             </p>
             <p
               v-if="item?.text"
-              class="max-w-sm text-14 md:text-18 xl:text-28"
+              class="max-w-sm text-18 md:text-22"
               :style="`color: ${item.color_text}; font-weight: ${item.fontWeighText}; font-size: ${item.fontSizeText};`"
             >
               {{ item.text }}

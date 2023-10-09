@@ -47,20 +47,8 @@ export default {
           disableOnInteraction: false,
         },
         breakpoints: {
-          1250: {
-            slidesPerView: 3,
-            spaceBetween: 35,
-          },
-          1060: {
-            slidesPerView: 3,
-            spaceBetween: 50,
-          },
-          1000: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
           990: {
-            slidesPerView: 2,
+            slidesPerView: 4,
             spaceBetween: 20,
           },
           790: {
