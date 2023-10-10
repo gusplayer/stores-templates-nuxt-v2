@@ -165,14 +165,8 @@
     <div class="datos-producto">
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
         <div class="tittle tittle-xml tittle-lg tittle-sm">
-          <p v-if="product.nombre.length >= 90" class="card-title">
-            {{ `${product.nombre.slice(0, 90)}...` }}
-          </p>
-          <p v-else-if="product.nombre.length >= 54" class="card-title">
-            {{ `${product.nombre.slice(0, 54)}...` }}
-          </p>
           <p class="card-title">
-            {{ `${product.nombre.slice(0, 30)}...` }}
+            {{ product.nombre }}
           </p>
         </div>
       </nuxt-link>
@@ -607,6 +601,10 @@ export default {
   font-weight: var(--fontWeighTitle);
   text-align: left;
   font-size: var(--fontSizeTitle);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .producto:hover .text-price {
   color: #333333;

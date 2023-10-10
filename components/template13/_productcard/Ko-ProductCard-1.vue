@@ -65,10 +65,7 @@
             </p>
             <div class="content-name-product">
               <p class="card-title">
-                {{
-                  product.nombre.slice(0, 54) +
-                  (product.nombre.length >= 54 ? '...' : '')
-                }}
+                {{ product.nombre }}
               </p>
             </div>
             <div v-if="product.precio" class="content-text-price">
@@ -189,10 +186,7 @@
             class="content-name-product"
           >
             <p class="card-title">
-              {{
-                product.nombre.slice(0, 54) +
-                (product.nombre.length >= 54 ? '...' : '')
-              }}
+              {{ product.nombre }}
             </p>
           </nuxt-link>
           <div v-if="product.precio" class="content-text-price">
@@ -616,6 +610,10 @@ export default {
   font-size: var(--fontSizeTitle);
   font-weight: var(--fontWeighTitle);
   color: var(--color_title);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .content-text-price {
   width: 100%;

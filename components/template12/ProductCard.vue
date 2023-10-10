@@ -355,6 +355,12 @@ export default {
 .img_visileRes {
   display: flex;
 }
+.product_name {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
 @media (max-width: 768px) {
   .wrapper_card {
     @apply justify-start;

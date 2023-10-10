@@ -182,10 +182,7 @@
         :to="{ path: `/productos/` + product.slug }"
         class="w-full h-full card-title mb-5"
       >
-        {{
-          product.nombre.slice(0, 54) +
-          (product.nombre.length >= 54 ? '...' : '')
-        }}
+        {{ product.nombre }}
       </nuxt-link>
       <div class="precio">
         <div v-if="product.precio" class="content-text-price">
@@ -521,6 +518,10 @@ export default {
   font: inherit;
   font-weight: 800;
   text-align: left;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .producto:hover .text-price {
   color: var(--hover_text);
