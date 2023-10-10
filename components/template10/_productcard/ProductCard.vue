@@ -50,14 +50,14 @@
         </div>
       </div>
       <div
-        class="cart-Shop-pro"
         v-if="product.tag_promocion == 1 && product.promocion_valor"
+        class="cart-Shop-pro"
       >
         <div class="text-cart">
           <p>{{ product.promocion_valor }}% OFF</p>
         </div>
       </div>
-      <div class="overlay-polygon" v-if="!getFreeShipping && !soldOut">
+      <div v-if="!getFreeShipping && !soldOut" class="overlay-polygon">
         <svg
           class="icon-overlay-free"
           width="12px"
@@ -67,12 +67,12 @@
           <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
         </svg>
       </div>
-      <div class="overlay-sould" v-if="soldOut">
+      <div v-if="soldOut" class="overlay-sould">
         <div class="text-sould">
           <svg
+            id="Layer_1"
             class="svg-sould-out"
             xmlns="http://www.w3.org/2000/svg"
-            id="Layer_1"
             enable-background="new 0 0 512 512"
             viewBox="0 0 512 512"
           >
@@ -155,10 +155,7 @@
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
         <div class="tittle">
           <p class="card-title">
-            {{
-              product.nombre.slice(0, 54) +
-              (product.nombre.length >= 54 ? '...' : '')
-            }}
+            {{ product.nombre }}
           </p>
         </div>
       </nuxt-link>
@@ -326,6 +323,7 @@ export default {
       return free
     },
     rangosByCiudad() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
       return this.rangosByCiudades
     },
@@ -546,6 +544,10 @@ export default {
   /* font: inherit; */
   min-height: 58px;
   max-height: 58px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   @apply h-full pt-10 transition-all ease-out duration-0.2 text-center;
 }
 .card-title:hover {

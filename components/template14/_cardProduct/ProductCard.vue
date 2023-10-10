@@ -39,10 +39,7 @@
         :to="{ path: `/productos/` + product.slug }"
         class="w-full h-full text-center pt-10 transition-all ease-out duration-0.2 min-h-[91px] md:min-h-[64px] card-title"
       >
-        {{
-          product.nombre.slice(0, 54) +
-          (product.nombre.length >= 54 ? '...' : '')
-        }}
+        {{ product.nombre }}
       </nuxt-link>
       <div class="mt-10">
         <div v-if="estadoCart && equalsPrice && minPrice">
@@ -355,6 +352,10 @@ export default {
   color: var(--color_title);
   font-size: var(--fontSizeTitle);
   font-weight: var(--fontWeighTitle);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .card-title:hover {
   color: var(--hover_text);

@@ -45,10 +45,7 @@
           <p
             class="h-full pt-10 transition-all ease-out duration-0.2 text-center min-h-[58px] max-h-[58px] card-title"
           >
-            {{
-              product.nombre.slice(0, 54) +
-              (product.nombre.length >= 54 ? '...' : '')
-            }}
+            {{ product.nombre }}
           </p>
         </div>
       </nuxt-link>
@@ -361,6 +358,10 @@ export default {
   color: var(--color_title);
   font-size: 16px;
   font-weight: var(--fontWeighTitle);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .card-title:hover {
   color: var(--hover_text);
