@@ -12,9 +12,7 @@
         {{ $t('footer_politicaTratamientos') }}
       </button>
       <div
-        v-if="
-          dataStore.politicas.datos && isSafeHTML(dataStore.politicas.datos)
-        "
+        v-if="dataStore.politicas.datos"
         class="panel"
         v-html="dataStore.politicas.datos"
       ></div>
@@ -26,10 +24,7 @@
       </button>
 
       <div
-        v-if="
-          dataStore.politicas.garantia &&
-          isSafeHTML(dataStore.politicas.garantia)
-        "
+        v-if="dataStore.politicas.garantia"
         class="panel"
         v-html="dataStore.politicas.garantia"
       ></div>
@@ -40,10 +35,7 @@
         {{ $t('footer_politicaDevoluciones') }}
       </button>
       <div
-        v-if="
-          dataStore.politicas.devolucion &&
-          isSafeHTML(dataStore.politicas.devolucion)
-        "
+        v-if="dataStore.politicas.devolucion"
         class="panel"
         v-html="dataStore.politicas.devolucion"
       ></div>
@@ -51,9 +43,7 @@
         {{ $t('footer_politicaCambio') }}
       </button>
       <div
-        v-if="
-          dataStore.politicas.cambio && isSafeHTML(dataStore.politicas.cambio)
-        "
+        v-if="dataStore.politicas.cambio"
         class="panel"
         v-html="dataStore.politicas.cambio"
       ></div>
@@ -61,9 +51,7 @@
         {{ $t('footer_politicaEnvios') }}
       </button>
       <div
-        v-if="
-          dataStore.politicas.envios && isSafeHTML(dataStore.politicas.envios)
-        "
+        v-if="dataStore.politicas.envios"
         class="panel"
         v-html="dataStore.politicas.envios"
       ></div>
@@ -71,9 +59,7 @@
         {{ $t('footer_politicaPagos') }}
       </button>
       <div
-        v-if="
-          dataStore.politicas.pagos && isSafeHTML(dataStore.politicas.pagos)
-        "
+        v-if="dataStore.politicas.pagos"
         class="panel"
         v-html="dataStore.politicas.pagos"
       ></div>
@@ -114,22 +100,6 @@ export default {
     }
   },
   methods: {
-    isSafeHTML(htmlContent) {
-      // Lista de etiquetas y atributos potencialmente peligrosos
-      const unsafeTags = ['script', 'iframe']
-      const unsafeAttributes = ['onclick', 'onload', 'onerror', 'src']
-
-      // Verificar si el contenido HTML contiene etiquetas o atributos peligrosos
-      const containsUnsafeTags = unsafeTags.some((tag) =>
-        htmlContent.includes(`<${tag}`)
-      )
-      const containsUnsafeAttributes = unsafeAttributes.some((attr) =>
-        htmlContent.includes(` ${attr}=`)
-      )
-
-      // Si se encuentra contenido peligroso, considerarlo inseguro
-      return !(containsUnsafeTags || containsUnsafeAttributes)
-    },
     closeModalPolitics() {
       this.$store.state.modalpolitics05 = false
     },
