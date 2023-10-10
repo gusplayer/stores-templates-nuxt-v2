@@ -164,11 +164,9 @@
     </div>
     <div class="datos-producto">
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
-        <div class="tittle tittle-xml tittle-lg tittle-sm">
-          <p class="card-title">
-            {{ product.nombre }}
-          </p>
-        </div>
+        <p class="card-title">
+          {{ product.nombre }}
+        </p>
       </nuxt-link>
 
       <div
@@ -541,9 +539,6 @@ export default {
 .container {
   @apply relative max-w-full;
 }
-.image {
-  @apply w-full h-auto;
-}
 .cart-Shop {
   font: inherit;
   font-size: 100%;
@@ -566,33 +561,7 @@ export default {
   text-align: center;
   @apply absolute text-center transition-all ease-in duration-300 grid grid-cols-1 gap-0;
 }
-.icon-show-mobile {
-  fill: white;
-}
-.tittle {
-  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-1) !important;
-  font: inherit;
-  font-size: 100%;
-  min-height: 49px;
-  max-height: 49px;
-}
-.tittle-xml {
-  display: initial;
-}
-.tittle-lg {
-  display: none;
-}
-.tittle-sm {
-  display: none;
-}
-.categoria {
-  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
-  font-family: var(--font-style-1) !important;
-  color: var(--color_title);
-  font: inherit;
-  font-weight: var(--fontWeighTitle);
-}
+
 .card-title {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-1) !important;
@@ -700,10 +669,6 @@ export default {
   right: auto;
 }
 @screen sm {
-  .categoria {
-    @apply mb-3;
-    font-size: 13px;
-  }
   .card-title {
     font-size: 16px;
   }
