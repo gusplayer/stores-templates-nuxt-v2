@@ -531,13 +531,13 @@ export default {
 }
 .producto {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center cursor-pointer;
+  @apply w-full h-full flex flex-col justify-center items-center cursor-pointer;
 }
 .datos-producto {
   @apply w-full flex flex-col justify-center items-center my-24 cursor-default;
 }
 .container {
-  @apply relative max-w-full;
+  @apply relative max-w-full h-full;
 }
 .cart-Shop {
   font: inherit;

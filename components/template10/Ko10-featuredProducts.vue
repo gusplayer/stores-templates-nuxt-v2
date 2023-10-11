@@ -5,9 +5,7 @@
       settingGeneral,
       productList,
       {
-        '--font-style-1': settingGeneral.fount_1
-          ? settingGeneral.fount_1
-          : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -25,17 +23,17 @@
         </div>
       </div>
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-        <div class="swiper-wrapper pb-10">
+        <div class="swiper-wrapper">
           <div
             v-for="product in fullProducts"
             :key="product.id"
-            class="swiper-slide"
+            class="swiper-slide h-full"
           >
-            <KoproductCard
+            <KoProductCard
               :product="product"
-              :settingGeneral="settingGeneral"
-              :cardProduct="cardProduct"
-              class="gifyload"
+              :setting-general="settingGeneral"
+              :card-product="cardProduct"
+              class="gifyload h-full"
             />
           </div>
         </div>
@@ -48,11 +46,10 @@
 </template>
 
 <script>
-import KoproductCard from './_productcard/ProductCard'
 export default {
   name: 'KKo10FeaturedProducts',
   components: {
-    KoproductCard,
+    KoProductCard: () => import('./_productcard/ProductCard'),
   },
   props: {
     productList: {
@@ -79,30 +76,34 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: 4,
-        slidesPerColumn: 2,
-        spaceBetween: 20,
-        // autoplay: {
-        //   delay: 6000,
-        //   disableOnInteraction: false,
-        // },
+        slidesPerView: '',
+        spaceBetween: '',
+        direction: 'horizontal',
+        setWrapperSize: true,
+        paginationClickable: true,
+        grabCursor: true,
         breakpoints: {
-          10000: {
+          1024: {
             slidesPerView: 4,
             spaceBetween: 40,
           },
-
-          1024: {
+          768: {
             slidesPerView: 3,
+            slidesPerGroup: 3,
             spaceBetween: 30,
           },
           640: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            slidesPerGroup: 2,
+            spaceBetween: 10,
           },
           425: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          320: {
             slidesPerView: 1,
-            spaceBetween: 20,
+            spaceBetween: 10,
           },
         },
       },

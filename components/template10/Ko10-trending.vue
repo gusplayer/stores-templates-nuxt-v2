@@ -18,20 +18,12 @@
           <span class="subtittle">{{ trending.description }}</span>
         </div>
       </div>
-      <div v-if="fullProducts.length == 0" class="content-products-empty">
-        <p>{{ $t('home_msgCatalogo') }}</p>
-      </div>
-      <div
-        v-else
-        v-swiper:mySwiper="swiperOption"
-        ref="mySwiper"
-        class="w-full"
-      >
-        <div class="swiper-wrapper w-full">
+      <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+        <div class="swiper-wrapper pb-10">
           <div
             v-for="product in fullProducts.slice(0, 11)"
             :key="product.id"
-            class="swiper-slide w-full h-full"
+            class="swiper-slide h-full"
           >
             <KoProductCard
               :product="product"
@@ -40,6 +32,9 @@
               class="gifyload h-full"
             />
           </div>
+        </div>
+        <div v-if="fullProducts.length == 0" class="content-products-empty">
+          <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
       <div v-if="trending.visibleBtn" class="btn-products">
@@ -52,11 +47,10 @@
 </template>
 
 <script>
-import KoProductCard from './_productcard/ProductCard'
 export default {
   name: 'Ko10Trending',
   components: {
-    KoProductCard,
+    KoProductCard: () => import('./_productcard/ProductCard'),
   },
   props: {
     trending: {
@@ -83,22 +77,17 @@ export default {
   data() {
     return {
       swiperOption: {
+        slidesPerView: '',
+        spaceBetween: '',
         direction: 'horizontal',
-        slidesPerView: 4,
-        spaceBetween: 40,
-        grabCursor: true,
         setWrapperSize: true,
         paginationClickable: true,
-        // autoplay: {
-        //   delay: 6000,
-        //   disableOnInteraction: false,
-        // },
+        grabCursor: true,
         breakpoints: {
-          10000: {
+          1024: {
             slidesPerView: 4,
             spaceBetween: 40,
           },
-
           768: {
             slidesPerView: 3,
             slidesPerGroup: 3,
@@ -107,6 +96,10 @@ export default {
           640: {
             slidesPerView: 2,
             slidesPerGroup: 2,
+            spaceBetween: 10,
+          },
+          425: {
+            slidesPerView: 2,
             spaceBetween: 10,
           },
           320: {
@@ -126,10 +119,6 @@ export default {
 </script>
 
 <style scoped>
-.giftLoad,
-.swiper-slide {
-  max-width: 315px;
-}
 .gifyload:hover {
   @apply shadow-lg;
 }

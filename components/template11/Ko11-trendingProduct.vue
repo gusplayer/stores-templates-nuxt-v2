@@ -5,10 +5,7 @@
       settingKtrending,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -26,18 +23,15 @@
             class="swiper-slide"
             style="margin-right: 40px; height: auto"
           >
-            <KoproductCard
+            <KoProductCard
               :product="product"
               :settingKcardProduct="settingKcardProduct"
-              :settingGeneral="settingGeneral"
+              :setting-general="settingGeneral"
               class="gifyload"
-            ></KoproductCard>
+            />
           </div>
         </div>
-        <div
-          v-if="this.fullProducts.length == 0"
-          class="content-products-empty"
-        >
+        <div v-if="fullProducts.length == 0" class="content-products-empty">
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
         <div class="btn-products">
@@ -51,18 +45,32 @@
 </template>
 
 <script>
-import KoproductCard from './_productcard/ProductCard'
 export default {
-  name: 'Ko11-trendingProduct',
+  name: 'Ko11TrendingProduct',
   components: {
-    KoproductCard,
+    KoProductCard: () => import('./_productcard/ProductCard'),
   },
   props: {
-    dataStore: Object,
-    fullProducts: {},
-    settingKtrending: Object,
-    settingGeneral: Object,
-    settingKcardProduct: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
+    settingKtrending: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    settingKcardProduct: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
