@@ -68,18 +68,13 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: '',
-        spaceBetween: '',
-        // autoplay: {
-        //   delay: 6000,
-        //   disableOnInteraction: false,
-        // },
+        slidesPerView: 4,
+        spaceBetween: 40,
         breakpoints: {
           10000: {
             slidesPerView: 4,
             spaceBetween: 40,
           },
-
           768: {
             slidesPerView: 3,
             slidesPerGroup: 3,
@@ -94,7 +89,7 @@ export default {
             slidesPerView: 1,
             spaceBetween: 10,
           },
-          0: {
+          320: {
             slidesPerView: 1,
             spaceBetween: 10,
           },
