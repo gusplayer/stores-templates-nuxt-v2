@@ -16,8 +16,8 @@
         <div class="product-tittle">
           <p class="tittle">{{ productList.title }}</p>
           <a
-            :href="productList.url_redirect ? productList.url_redirect : ''"
             v-if="productList.visibleBtn"
+            :href="productList.url_redirect ? productList.url_redirect : ''"
             rel="noreferrer noopener"
           >
             <p class="txt-newProducts">{{ productList.displayName }}</p>
@@ -39,10 +39,7 @@
             />
           </div>
         </div>
-        <div
-          v-if="this.fullProducts.length == 0"
-          class="content-products-empty"
-        >
+        <div v-if="fullProducts.length == 0" class="content-products-empty">
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
@@ -53,16 +50,31 @@
 <script>
 import KoproductCard from './_productcard/ProductCard'
 export default {
-  name: 'KKo10-featuredProducts',
+  name: 'KKo10FeaturedProducts',
   components: {
     KoproductCard,
   },
   props: {
-    productList: Object,
-    settingGeneral: Object,
-    cardProduct: Object,
-    dataStore: Object,
-    fullProducts: {},
+    productList: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    cardProduct: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {

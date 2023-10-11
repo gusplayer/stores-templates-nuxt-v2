@@ -5,9 +5,7 @@
       settingGeneral,
       trending,
       {
-        '--font-style-1': settingGeneral.fount_1
-          ? settingGeneral.fount_1
-          : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -20,29 +18,26 @@
           <span class="subtittle">{{ trending.description }}</span>
         </div>
       </div>
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+      <div ref="mySwiper" v-swiper:mySwiper="swiperOption">
         <div class="swiper-wrapper pb-10">
           <div
             v-for="product in fullProducts.slice(0, 11)"
             :key="product.id"
             class="swiper-slide h-full"
           >
-            <KoproductCard
+            <KoProductCard
               :product="product"
-              :cardProduct="cardProduct"
-              :settingGeneral="settingGeneral"
+              :card-product="cardProduct"
+              :setting-general="settingGeneral"
               class="gifyload h-full"
             />
           </div>
         </div>
-        <div
-          v-if="this.fullProducts.length == 0"
-          class="content-products-empty"
-        >
+        <div v-if="fullProducts.length == 0" class="content-products-empty">
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
-      <div class="btn-products" v-if="trending.visibleBtn">
+      <div v-if="trending.visibleBtn" class="btn-products">
         <nuxt-link to="/productos">
           <button class="btn">{{ trending.displayName }}</button>
         </nuxt-link>
@@ -52,29 +47,49 @@
 </template>
 
 <script>
-import KoproductCard from './_productcard/ProductCard'
+import KoProductCard from './_productcard/ProductCard'
 export default {
-  name: 'Ko10-trending',
+  name: 'Ko10Trending',
   components: {
-    KoproductCard,
+    KoProductCard,
   },
   props: {
-    trending: Object,
-    settingGeneral: Object,
-    cardProduct: Object,
-    dataStore: Object,
-    fullProducts: {},
+    trending: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    cardProduct: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    fullProducts: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
       swiperOption: {
-        slidesPerView: 4,
-        spaceBetween: 40,
+        slidesPerView: '',
+        spaceBetween: '',
+        // autoplay: {
+        //   delay: 6000,
+        //   disableOnInteraction: false,
+        // },
         breakpoints: {
           10000: {
             slidesPerView: 4,
             spaceBetween: 40,
           },
+
           768: {
             slidesPerView: 3,
             slidesPerGroup: 3,
@@ -83,10 +98,6 @@ export default {
           640: {
             slidesPerView: 2,
             slidesPerGroup: 2,
-            spaceBetween: 10,
-          },
-          425: {
-            slidesPerView: 1,
             spaceBetween: 10,
           },
           320: {
