@@ -20,11 +20,11 @@
       </div>
       <div class="content-item">
         <div class="content-item-productos">
-          <div class="product-conten-items">
+          <div class="product-content-items">
             <div
               v-for="product in listProducts"
               :key="product.id"
-              class="content-products"
+              class="h-full"
             >
               <KoProductCard
                 :product="product"
@@ -97,8 +97,8 @@ export default {
 .producto-items-content {
   @apply w-full flex flex-col justify-center items-center text-center;
 }
-.product-conten-items {
-  @apply flex flex-col justify-start items-start;
+.product-content-items {
+  @apply h-full flex flex-col justify-start items-start;
 }
 .product-text {
   max-width: 470px;
@@ -146,7 +146,7 @@ export default {
   transition: all 150ms ease-in;
 }
 @screen sm {
-  .product-conten-items {
+  .product-content-items {
     @apply grid grid-cols-2 gap-4;
     width: 95%;
   }
@@ -156,22 +156,22 @@ export default {
   }
 }
 @media (min-width: 500px) {
-  .product-conten-items {
+  .product-content-items {
     @apply w-9/0 grid grid-cols-2;
   }
 }
 @screen lg {
-  .product-conten-items {
+  .product-content-items {
     @apply grid grid-cols-3;
   }
 }
 @media (min-width: 1000px) {
-  .product-conten-items {
+  .product-content-items {
     width: 95%;
   }
 }
 @media (min-width: 1160px) {
-  .product-conten-items {
+  .product-content-items {
     width: 95vw;
     @apply grid grid-cols-4;
   }
@@ -183,7 +183,7 @@ export default {
   }
 }
 @screen xxl {
-  .product-conten-items {
+  .product-content-items {
     @apply gap-10;
   }
 }
