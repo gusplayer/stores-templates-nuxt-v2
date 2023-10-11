@@ -98,7 +98,7 @@ export default {
             slidesPerView: 2,
             spaceBetween: 5,
           },
-          0: {
+          320: {
             slidesPerView: 2,
             spaceBetween: 5,
           },
