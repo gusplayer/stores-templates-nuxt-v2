@@ -64,7 +64,7 @@
           </div>
         </a>
       </div>
-      <div class="swiper-pagination" />
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </template>

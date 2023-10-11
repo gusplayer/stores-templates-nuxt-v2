@@ -5,10 +5,7 @@
       offers,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -17,8 +14,8 @@
         <div class="bg-left"></div>
         <div class="content-image-left">
           <img
-            class="img-left"
             v-lazy="idCloudinaryBanner(offers.url_img_right, 'banner')"
+            class="img-left"
             alt="img-left"
           />
         </div>
@@ -43,7 +40,7 @@
             <span class="txt-price-2">{{ offers.Offerts }}</span>
           </p>
         </div>
-        <div class="grid-item-button" v-if="offers.visibleBtn">
+        <div v-if="offers.visibleBtn" class="grid-item-button">
           <a
             class="btn"
             :href="offers.url_redirect ? offers.url_redirect : ''"
@@ -59,12 +56,18 @@
 <script>
 import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
-  name: 'Ko10-deals',
-  props: {
-    offers: Object,
-    settingGeneral: Object,
-  },
+  name: 'Ko10Deals',
   mixins: [idCloudinaryBanner],
+  props: {
+    offers: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 <style scoped>

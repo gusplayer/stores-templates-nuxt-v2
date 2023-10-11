@@ -5,10 +5,7 @@
       section,
       settingGeneral,
       {
-        '--font-style-1':
-          settingGeneral && settingGeneral.fount_1
-            ? settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -121,8 +118,14 @@ export default {
   name: 'Ko10Section',
   mixins: [idCloudinary],
   props: {
-    section: Object,
-    settingGeneral: Object,
+    section: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

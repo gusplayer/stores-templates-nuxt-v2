@@ -1,11 +1,11 @@
 <template>
   <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-    <div class="swiper-wrapper" v-if="banner.values">
+    <div v-if="banner.values" class="swiper-wrapper">
       <a
-        class="swiper-slide w-full flex justify-center items-center"
         v-for="(item, index) in banner.values"
-        :key="index"
         :id="`slide${index + 1}`"
+        :key="index"
+        class="swiper-slide w-full flex justify-center items-center"
         :href="`${item.visbleBtn ? '' : item.url_redirect}`"
         :class="item.visbleBtn ? 'pointer-events-none' : 'cursor-pointer'"
         rel="noreferrer noopener"
@@ -22,8 +22,8 @@
             :srcset="idCloudinaryBanner(item.url_img_background, 'banner')"
           />
           <img
-            loading="lazy"
             v-lazy="idCloudinaryBanner(item.url_img_background, 'banner')"
+            loading="lazy"
             class="w-full h-full object-cover object-center"
             alt="Banner_tienda_template10"
           />
@@ -33,7 +33,7 @@
             <div
               class="empty-border-left fadeInLeft"
               :style="`background-color: ${item.color_border};`"
-            />
+            ></div>
             <div class="content-text-top">
               <div class="txt-banner-top">
                 <p
@@ -74,8 +74,8 @@
             </div>
           </div>
           <a
-            :href="item.url_redirect ? item.url_redirect : ''"
             v-if="item.visbleBtn"
+            :href="item.url_redirect ? item.url_redirect : ''"
             class="cursor-pointer"
             rel="noreferrer noopener"
           >
@@ -89,20 +89,23 @@
         </div>
       </a>
     </div>
-    <div class="swiper-pagination" v-if="banner.visible_pagination" />
+    <div v-if="banner.visible_pagination" class="swiper-pagination"></div>
   </div>
 </template>
 <script>
 import idCloudinaryBanner from '../../mixins/idCloudinary'
 export default {
-  name: 'Ko10-carousel',
-  props: {
-    banner: Object,
-    settingGeneral: Object,
-  },
+  name: 'Ko10Carousel',
   mixins: [idCloudinaryBanner],
-  mounted() {
-    this.autoplayBanner()
+  props: {
+    banner: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -131,6 +134,14 @@ export default {
       return this.$refs.mySwiper.swiper
     },
   },
+  watch: {
+    'settingKCarousel.values'() {
+      this.autoplayBanner()
+    },
+  },
+  mounted() {
+    this.autoplayBanner()
+  },
   methods: {
     autoplayBanner() {
       if (this.settingKCarousel && this.settingKCarousel.values.length == 1) {
@@ -138,11 +149,6 @@ export default {
       } else {
         this.swiperOption.autoplay.delay = 6000
       }
-    },
-  },
-  watch: {
-    'settingKCarousel.values'() {
-      this.autoplayBanner()
     },
   },
 }
